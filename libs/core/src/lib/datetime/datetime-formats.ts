@@ -7,18 +7,18 @@ import { InjectionToken } from '@angular/core';
  */
 export interface DateTimeFormats {
     parse: {
-        dateInput: any;
-        timeInput: any;
-        dateTimeInput: any;
+        dateInput: unknown;
+        timeInput: unknown;
+        dateTimeInput: unknown;
     };
     display: {
-        dateInput: any;
-        timeInput: any;
-        dateTimeInput: any;
+        dateInput: unknown;
+        timeInput: unknown;
+        dateTimeInput: unknown;
 
-        dateA11yLabel: any;
-        monthA11yLabel: any;
-        yearA11yLabel: any;
+        dateA11yLabel: unknown;
+        monthA11yLabel: unknown;
+        yearA11yLabel: unknown;
     };
     rangeDelimiter: string;
 }

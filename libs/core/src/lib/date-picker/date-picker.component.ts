@@ -262,6 +262,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAc
     /** @hidden */
     constructor(
         private _changeDetectionRef: ChangeDetectorRef,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {

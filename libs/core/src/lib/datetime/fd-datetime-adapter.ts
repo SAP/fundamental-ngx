@@ -185,6 +185,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     today(): FdDate {
+        return FdDate.getNow().setTime(0, 0, 0);
+    }
+
+    now(): FdDate {
         return FdDate.getNow();
     }
 
@@ -203,7 +207,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return Number.isNaN(date.valueOf()) ? null : this._creteFdDateFromDateInstance(date);
     }
 
-    format(date: FdDate, displayFormat: Object): string {
+    format(date: FdDate, displayFormat: Intl.DateTimeFormatOptions): string {
         if (!this.isValid(date)) {
             throw Error('FdDateAdapter: Cannot format invalid date.');
         }
@@ -302,7 +306,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return toIso8601(fdDate);
     }
 
-    isTimeFormatIncludesDayPeriod(displayFormat: any): boolean {
+    isTimeFormatIncludesDayPeriod(displayFormat: Intl.DateTimeFormatOptions): boolean {
         if (typeof displayFormat?.hour12 === 'boolean') {
             return displayFormat.hour12;
         }
@@ -311,15 +315,15 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return formattedDateWithPeriodOption === formattedDateNoPeriodOption;
     }
 
-    isTimeFormatIncludesHours(displayFormat: any): boolean {
+    isTimeFormatIncludesHours(displayFormat: Intl.DateTimeFormatOptions): boolean {
         return typeof displayFormat?.hour === 'string';
     }
 
-    isTimeFormatIncludesMinutes(displayFormat: any): boolean {
+    isTimeFormatIncludesMinutes(displayFormat: Intl.DateTimeFormatOptions): boolean {
         return typeof displayFormat?.minute === 'string';
     }
 
-    isTimeFormatIncludesSeconds(displayFormat: any): boolean {
+    isTimeFormatIncludesSeconds(displayFormat: Intl.DateTimeFormatOptions): boolean {
         return typeof displayFormat?.second === 'string';
     }
 

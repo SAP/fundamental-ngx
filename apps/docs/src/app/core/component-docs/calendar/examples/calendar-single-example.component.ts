@@ -24,7 +24,7 @@ export class CalendarSingleExampleComponent {
 
     myDisableFunction = (date: FdDate): boolean => {
         const day = this.datetimeAdapter.getDayOfWeek(date);
-        return day === 6 || day === 7;
+        return day === 1 || day === 7;
     };
 
     disableWednesday = (): void => {

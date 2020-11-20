@@ -194,7 +194,7 @@ export abstract class DatetimeAdapter<D> {
      *     (type is implementation-dependent).
      * @returns The parsed date.
      */
-    abstract parse(value: any, parseFormat: any): D | null;
+    abstract parse(value: unknown, parseFormat: unknown): D | null;
 
     /**
      * Formats a date as a string according to the given format.
@@ -202,7 +202,7 @@ export abstract class DatetimeAdapter<D> {
      * @param displayFormat The format to use to display the date as a string.
      * @returns The formatted date string.
      */
-    abstract format(date: D, displayFormat: any): string;
+    abstract format(date: D, displayFormat: unknown): string;
 
     /**
      * Creates a date with the given year, month, and date.
@@ -214,10 +214,16 @@ export abstract class DatetimeAdapter<D> {
     abstract createDate(year: number, month: number, date: number): D;
 
     /**
-     * Gets today's date.
+     * Gets today's date where time value is set to 0
      * @returns Today's date.
      */
     abstract today(): D;
+
+    /**
+     * Gets date and time at this moment.
+     * @returns date and time at this moment.
+     */
+    abstract now(): D;
 
     /**
      * Adds the given number of years to the date. Years are counted as if flipping 12 pages on the
@@ -310,28 +316,28 @@ export abstract class DatetimeAdapter<D> {
      * @param displayFormat The format to use to display the date as a string.
      * @returns If time format includes period info.
      */
-    abstract isTimeFormatIncludesDayPeriod(displayFormat: any): boolean;
+    abstract isTimeFormatIncludesDayPeriod(displayFormat: unknown): boolean;
 
     /**
      * Format option includes hours info.
      * @param displayFormat The format to use to display the date as a string.
      * @returns If time format includes minutes info.
      */
-    abstract isTimeFormatIncludesHours(displayFormat: any): boolean;
+    abstract isTimeFormatIncludesHours(displayFormat: unknown): boolean;
 
     /**
      * Format option includes minutes info.
      * @param displayFormat The format to use to display the date as a string.
      * @returns If time format includes minutes info.
      */
-    abstract isTimeFormatIncludesMinutes(displayFormat: any): boolean;
+    abstract isTimeFormatIncludesMinutes(displayFormat: unknown): boolean;
 
     /**
      * Format option includes seconds info.
      * @param displayFormat The format to use to display the date as a string.
      * @returns If time format includes seconds info.
      */
-    abstract isTimeFormatIncludesSeconds(displayFormat: any): boolean;
+    abstract isTimeFormatIncludesSeconds(displayFormat: unknown): boolean;
 
     /**
      * Compares two dates.

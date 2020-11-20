@@ -24,7 +24,7 @@ export class CalendarService {
     leftArrowId: string;
 
     /** Function that is called when the focus would escape the element. */
-    focusEscapeFunction: Function;
+    focusEscapeFunction: () => void;
 
     constructor(@Optional() private _rtlService: RtlService) {}
 
@@ -95,7 +95,7 @@ export class CalendarService {
             }
             case 'Tab': {
                 if (!event.shiftKey) {
-                    if (this.focusEscapeFunction) {
+                    if (typeof this.focusEscapeFunction === 'function') {
                         this.focusEscapeFunction();
                     } else {
                         const element: HTMLElement = document.getElementById(this.leftArrowId);

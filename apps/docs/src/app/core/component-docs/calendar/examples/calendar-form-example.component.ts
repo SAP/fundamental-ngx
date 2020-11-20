@@ -20,13 +20,13 @@ export class CalendarFormExamplesComponent {
     });
 
     setInvalid(): void {
-        this.customForm.controls['date'].setValue(new FdDate(null, null, null));
+        this.customForm.get('date').setValue(null);
     }
 
     setInvalidRange(): void {
-        this.customForm.controls['dateRange'].setValue({
-            start: new FdDate(null, null, null),
-            end: new FdDate(null, null, null)
+        this.customForm.get('dateRange').setValue({
+            start: null,
+            end: null
         });
     }
 }

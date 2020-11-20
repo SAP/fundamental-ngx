@@ -63,7 +63,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
 
     /** Function that is called when the focus would escape the element. */
     @Input()
-    focusEscapeFunction: Function;
+    focusEscapeFunction: () => void;
 
     /** Parameter holding the year that is currently selected. */
     @Input()
@@ -84,6 +84,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {

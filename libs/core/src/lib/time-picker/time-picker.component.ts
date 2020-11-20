@@ -207,6 +207,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {

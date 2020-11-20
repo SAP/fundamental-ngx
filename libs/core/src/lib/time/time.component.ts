@@ -171,6 +171,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _timeI18nLabels: TimeI18n,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
     ) {
         if (!_dateTimeAdapter) {
@@ -178,7 +179,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         }
 
         // Set default time 00:00:00
-        this.time = _dateTimeAdapter.createDate(_dateTimeAdapter.getYear(_dateTimeAdapter.today()), 1, 1);
+        this.time = _dateTimeAdapter.today();
     }
 
     /** @hidden */

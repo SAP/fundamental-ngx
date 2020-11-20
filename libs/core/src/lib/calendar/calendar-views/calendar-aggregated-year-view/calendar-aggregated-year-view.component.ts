@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
@@ -26,7 +27,8 @@ import { CalendarYearGrid } from '../../models/calendar-year-grid';
     selector: 'fd-calendar-aggregated-year-view',
     templateUrl: './calendar-aggregated-year-view.component.html',
     styleUrls: ['./calendar-aggregated-year-view.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges {
     /** @hidden
@@ -53,7 +55,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
 
     /** Function that is called when the focus would escape the element. */
     @Input()
-    focusEscapeFunction: Function;
+    focusEscapeFunction: () => void;
 
     /** Parameter holding the year that is currently selected. */
     @Input()
@@ -92,6 +94,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {

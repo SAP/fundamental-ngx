@@ -31,6 +31,6 @@ export class CalendarRangeExampleComponent {
     };
 
     myDisableEndFunction = (date: FdDate): boolean => {
-        return this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 10)) < 0;
+        return this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 20)) < 0;
     };
 }

@@ -5,14 +5,16 @@ import {
     EventEmitter,
     Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
+    SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { merge, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { FdCalendarView } from '../calendar.component';
@@ -36,7 +38,7 @@ import { createMissingDateImplementationError } from '../calendar-errors';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarHeaderComponent<D> implements OnDestroy, OnInit {
+export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges {
     /** Currently active view. Needed for a11y labels. */
     @Input()
     activeView: FdCalendarView;
@@ -49,7 +51,10 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit {
      * Object to customize year grid
      */
     @Input()
-    calendarYearGrid: CalendarYearGrid;
+    set calendarYearGrid(yearGrid: CalendarYearGrid) {
+        this._amountOfYearsPerPeriod = yearGrid.cols * yearGrid.rows - 1;
+        this._calculateSelectAggregatedYearLabel();
+    }
 
     /** Id */
     @Input()
@@ -79,90 +84,29 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit {
     @Output()
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    /** Aria label for the previous button. Depends on the active view. */
+    previousAriaLabel: string;
 
-    constructor(
-        public _calendarI18nLabels: CalendarI18nLabels,
-        private _changeDetRef: ChangeDetectorRef,
-        private _calendarService: CalendarService,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
-    ) {
-        if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!this._dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-    }
+    /** Aria label for the next button. Depends on the active view. */
+    nextAriaLabel: string;
 
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
-    }
+    /** Button aria label to open month selection view. */
+    selectMonthAriaLabel: string;
 
-    /** @hidden */
-    ngOnInit(): void {
-        this._calendarService.leftArrowId = this.id + '-left-arrow';
+    /** Button aria label to open year selection view. */
+    selectYearAriaLabel: string;
 
-        merge(this._calendarI18nLabels.labelsChange, this._dateTimeAdapter.localeChanges)
-            .pipe(takeUntil(this.onDestroy$))
-            .subscribe(() => {
-                this._changeDetRef.markForCheck();
-            });
-    }
+    /** Button aria label to open aggregated years selection view. */
+    selectAggregatedYearAriaLabel: string;
 
-    /** Get the aria label for the previous button. Depends on the active view. */
-    get previousAriaLabel(): string {
-        return this.isOnDayView
-            ? this._calendarI18nLabels.previousMonthLabel
-            : this._calendarI18nLabels.previousYearLabel;
-    }
+    /** Button label to open month selection view. */
+    selectMonthLabel: string;
 
-    /** Get the aria label for the next button. Depends on the active view. */
-    get nextAriaLabel(): string {
-        return this.isOnDayView ? this._calendarI18nLabels.nextMonthLabel : this._calendarI18nLabels.nextYearLabel;
-    }
+    /** Button label to open year selection view. */
+    selectYearLabel: string;
 
-    /** Get selection month button label. */
-    get selectMonthLabel(): string {
-        const monthNames = this._dateTimeAdapter.getMonthNames('long');
-        return monthNames[this.currentlyDisplayed.month - 1];
-    }
-
-    /** Get selection month button aria label. */
-    get selectMonthAriaLabel(): string {
-        return this.isOnMonthView
-            ? this._calendarI18nLabels.dateSelectionLabel
-            : this._calendarI18nLabels.monthSelectionLabel;
-    }
-
-    /** Get selection year button label. */
-    get selectYearLabel(): string {
-        return this._getYearName(this.currentlyDisplayed.year);
-    }
-
-    /** Get selection year button aria label. */
-    get selectYearAriaLabel(): string {
-        return this._calendarI18nLabels.yearSelectionLabel;
-    }
-
-    /** Get selection aggregated year button label. */
-    get selectAggregatedYearLabel(): string {
-        return `
-        ${this._getYearName(this.currentlyDisplayed.year)} 
-        - 
-        ${this._getYearName(this.currentlyDisplayed.year + this.amountOfYearsPerPeriod())}`;
-    }
-
-    /** Get selection aggregated year button aria label. */
-    get selectAggregatedYearAriaLabel(): string {
-        return this.isOnAggregatedYearsView
-            ? this._calendarI18nLabels.dateSelectionLabel
-            : this._calendarI18nLabels.yearSelectionLabel;
-    }
+    /** Button label to open aggregated years selection view. */
+    selectAggregatedYearLabel: string;
 
     /** Get information is calendar is on aggregated years view */
     get isOnAggregatedYearsView(): boolean {
@@ -184,25 +128,157 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit {
         return this.activeView === 'day';
     }
 
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly onDestroy$: Subject<void> = new Subject<void>();
+
+    /** Month names */
+    private _monthNames: string[] = [];
+
     /** Get information about amount of years displayed at once on year view  */
-    amountOfYearsPerPeriod(): number {
-        return this.calendarYearGrid.cols * this.calendarYearGrid.rows;
+    private _amountOfYearsPerPeriod: number;
+
+    constructor(
+        public _calendarI18nLabels: CalendarI18nLabels,
+        private _changeDetRef: ChangeDetectorRef,
+        private _calendarService: CalendarService,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
+    ) {
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.onDestroy$.next();
+        this.onDestroy$.complete();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (['activeView', 'currentlyDisplayed'].some((inputName) => inputName in changes)) {
+            this._calculateLabels();
+        }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._calendarService.leftArrowId = this.id + '-left-arrow';
+
+        this._calculateMonthNames();
+
+        this._calculateLabels();
+
+        this._calculateAriaLabels();
+
+        this._listenToLocaleChanges();
+
+        this._listenToCalendarLabelsChanges();
     }
 
     processViewChange(type: FdCalendarView, event?: MouseEvent): void {
-        if (type === this.activeView) {
-            this.activeView = 'day';
-        } else {
-            this.activeView = type;
-        }
         if (event) {
             event.stopPropagation();
         }
+
+        this.activeView = type === this.activeView ? 'day' : type;
+
         this.activeViewChange.emit(this.activeView);
     }
 
     emitClose(): void {
         this.closeClicked.emit();
+    }
+
+    /** @hidden */
+    private _listenToLocaleChanges(): void {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+            this._calculateMonthNames();
+            this._calculateLabels();
+            this._changeDetRef.markForCheck();
+        });
+    }
+
+    /** @hidden */
+    private _listenToCalendarLabelsChanges(): void {
+        this._calendarI18nLabels.labelsChange.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+            this._calculateAriaLabels();
+            this._changeDetRef.markForCheck();
+        });
+    }
+
+    /** @hidden */
+    private _calculateAriaLabels(): void {
+        this._calculatePreviousAriaLabel();
+        this._calculateNextAriaLabel();
+        this._calculateSelectMonthAriaLabel();
+        this._calculateSelectYearAriaLabel();
+        this._calculateSelectAggregatedYearAriaLabel();
+    }
+
+    /** @hidden */
+    private _calculateLabels(): void {
+        this._calculateSelectMonthLabel();
+        this._calculateSelectYearLabel();
+        this._calculateSelectAggregatedYearLabel();
+    }
+
+    /** @hidden */
+    private _calculatePreviousAriaLabel(): void {
+        this.previousAriaLabel = this.isOnDayView
+            ? this._calendarI18nLabels.previousMonthLabel
+            : this._calendarI18nLabels.previousYearLabel;
+    }
+
+    /** @hidden */
+    private _calculateNextAriaLabel(): void {
+        this.nextAriaLabel = this.isOnDayView
+            ? this._calendarI18nLabels.nextMonthLabel
+            : this._calendarI18nLabels.nextYearLabel;
+    }
+    /** @hidden */
+    private _calculateSelectMonthAriaLabel(): void {
+        this.selectMonthAriaLabel = this.isOnMonthView
+            ? this._calendarI18nLabels.dateSelectionLabel
+            : this._calendarI18nLabels.monthSelectionLabel;
+    }
+
+    /** @hidden */
+    private _calculateSelectYearAriaLabel(): void {
+        this.selectYearAriaLabel = this._calendarI18nLabels.yearSelectionLabel;
+    }
+
+    /** @hidden */
+    private _calculateSelectAggregatedYearAriaLabel(): void {
+        this.selectAggregatedYearAriaLabel = this.isOnAggregatedYearsView
+            ? this._calendarI18nLabels.dateSelectionLabel
+            : this._calendarI18nLabels.yearSelectionLabel;
+    }
+
+    /** @hidden */
+    private _calculateSelectMonthLabel(): void {
+        this.selectMonthLabel = this._monthNames[this.currentlyDisplayed.month - 1];
+    }
+
+    /** @hidden */
+    private _calculateSelectYearLabel(): void {
+        this.selectYearLabel = this._getYearName(this.currentlyDisplayed.year);
+    }
+
+    /** @hidden */
+    private _calculateSelectAggregatedYearLabel(): void {
+        this.selectAggregatedYearLabel = `${this._getYearName(this.currentlyDisplayed.year)}-${this._getYearName(
+            this.currentlyDisplayed.year + this._amountOfYearsPerPeriod
+        )}`;
+    }
+
+    private _calculateMonthNames(): void {
+        this._monthNames = this._dateTimeAdapter.getMonthNames('long');
     }
 
     /** @hidden */

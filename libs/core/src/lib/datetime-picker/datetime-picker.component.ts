@@ -304,6 +304,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     constructor(
         private _elRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
@@ -315,7 +316,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         }
 
         // default model value
-        this.date = _dateTimeAdapter.today();
+        this.date = _dateTimeAdapter.now();
     }
 
     /** @hidden */
@@ -530,7 +531,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
         if (!inputStr && this.allowNull) {
             this.isInvalidDateInput = false;
-            this.date = this._dateTimeAdapter.today();
+            this.date = this._dateTimeAdapter.now();
             this._setTempDateTime();
             this._refreshCurrentlyDisplayedCalendarDate(this.date);
             this.onChange(null);

@@ -3,8 +3,8 @@ export function range<T>(length: number, mapFn: (index: number) => T): T[] {
 }
 
 /** Adds 0 if number is less then 10 */
-export function _2digit(value: number): string {
-    return ('00' + value).slice(-2);
+export function _leftPad(n: number): string {
+    return n === n % 10 ? `0${n}` : `${n}`;
 }
 
 export function toIso8601(fdDate: {
@@ -16,8 +16,8 @@ export function toIso8601(fdDate: {
     second: number;
 }): string {
     return [
-        [fdDate.year, _2digit(fdDate.month), _2digit(fdDate.day)].join('-'),
+        [fdDate.year, _leftPad(fdDate.month), _leftPad(fdDate.day)].join('-'),
         'T',
-        [_2digit(fdDate.hour), _2digit(fdDate.minute), _2digit(fdDate.second)].join(':')
+        [_leftPad(fdDate.hour), _leftPad(fdDate.minute), _leftPad(fdDate.second)].join(':')
     ].join('');
 }

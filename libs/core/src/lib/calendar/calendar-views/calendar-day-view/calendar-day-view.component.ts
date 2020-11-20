@@ -148,7 +148,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /** Function that allows to specify which function would be called, when focus wants to escape */
     @Input()
-    focusEscapeFunction: Function;
+    focusEscapeFunction: () => void;
 
     /**
      * Special days mark, it can be used by passing array of object with

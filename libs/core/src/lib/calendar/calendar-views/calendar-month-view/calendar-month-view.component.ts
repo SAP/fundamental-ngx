@@ -59,7 +59,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
     /** A function that handles escape focus */
     @Input()
-    focusEscapeFunction: Function;
+    focusEscapeFunction: () => void;
 
     /** A year the month view is referring to */
     @Input()
@@ -73,6 +73,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
     ) {

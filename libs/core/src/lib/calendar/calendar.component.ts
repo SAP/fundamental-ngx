@@ -253,6 +253,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
     ) {
         if (!this._dateTimeAdapter) {
@@ -274,30 +275,30 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     writeValue(selected: DateRange<D> | D): void {
         let valid = true;
-        if (selected) {
-            if (this.calType === 'single') {
-                selected = <D>selected;
 
-                valid = this._dateTimeAdapter.isValid(selected);
+        if (this.calType === 'single') {
+            selected = <D>selected;
 
-                this.selectedDate = selected;
-            }
-            if (this.calType === 'range') {
-                selected = <DateRange<D>>selected;
+            valid = this._dateTimeAdapter.isValid(selected);
 
-                if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
-                    valid = false;
-                }
+            this.selectedDate = selected;
+        }
 
-                this.selectedRangeDate = {
-                    start: selected.start,
-                    end: selected.end
-                };
+        if (this.calType === 'range' && selected) {
+            selected = <DateRange<D>>selected;
+
+            if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
+                valid = false;
             }
 
-            if (valid) {
-                this._prepareDisplayedView();
-            }
+            this.selectedRangeDate = {
+                start: selected.start,
+                end: selected.end
+            };
+        }
+
+        if (valid) {
+            this._prepareDisplayedView();
         }
 
         this._changeDetectorRef.detectChanges();
@@ -506,6 +507,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                 this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
             );
         }
+        return false;
     }
 
     /**
