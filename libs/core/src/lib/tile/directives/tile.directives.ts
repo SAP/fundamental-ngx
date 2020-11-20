@@ -318,9 +318,7 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     private _addCloseIcon(): void {
-        const element = document.createElement('i');
-        element.setAttribute('role', 'presentation');
-        element.classList.add('sap-icon--decline');
+        const element = generateIcon('decline');
         this._elementRef.nativeElement.appendChild(element);
     }
 }
@@ -362,9 +360,7 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
 
     /** @hidden */
     private _addIndicatorIcon(): void {
-        const element = document.createElement('i');
-        element.setAttribute('role', 'presentation');
-        element.classList.add('sap-icon--overflow');
+        const element = generateIcon('overflow');
         this._elementRef.nativeElement.appendChild(element);
     }
 }
@@ -376,4 +372,11 @@ export class TileActionContainerDirective {
     /** @hidden */
     @HostBinding('class.fd-tile__action-container')
     baseClass = true;
+}
+
+function generateIcon(iconName: string): HTMLElement {
+    const element = document.createElement('i');
+    element.setAttribute('role', 'presentation');
+    element.classList.add(`sap-icon--${iconName}`);
+    return element;
 }
