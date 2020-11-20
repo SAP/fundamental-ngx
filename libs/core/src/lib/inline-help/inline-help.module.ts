@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { InlineHelpComponent } from './inline-help.component';
 import { PopoverModule } from '../popover/public_api';
 
+/**
+ * @deprecated
+ */
 @NgModule({
     imports: [CommonModule, PopoverModule],
     exports: [InlineHelpComponent],
