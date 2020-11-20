@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 /**
  *
  * ```html
- * <div fd-form-header>Form Header</div>
+ * <h4 fd-form-header>Form Header</h4>
  * ```
  */
 @Component({
