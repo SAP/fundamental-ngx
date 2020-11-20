@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    OnInit,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -13,9 +14,9 @@ import { MessageBoxConfig } from '../utils/message-box-config.class';
 @Component({
     selector: 'fd-message-box-default',
     templateUrl: './message-box-default.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MessageBoxDefaultComponent implements AfterViewInit {
+export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     @ViewChild('textContent')
@@ -28,7 +29,14 @@ export class MessageBoxDefaultComponent implements AfterViewInit {
     _messageBoxContent: MessageBoxContent;
 
     /** @hidden */
+    _footerVisible: boolean;
+
+    /** @hidden */
     constructor(public _messageBoxConfig: MessageBoxConfig, private _changeDetectorRef: ChangeDetectorRef) { }
+
+    ngOnInit(): void {
+        this._footerVisible = !!(this._messageBoxContent.cancelButton || this._messageBoxContent.approveButton);
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
