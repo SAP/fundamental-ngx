@@ -28,7 +28,7 @@ import { RtlService } from '../utils/services/rtl.service';
 import { Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { KeyUtil } from '../utils/functions';
-import { A, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { A, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -267,6 +267,19 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             element.setAttribute('tabindex', '-1');
             element.removeEventListener('keydown', handleFunctionReference);
         });
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDown(keyboardEvent: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(keyboardEvent, DELETE) &&
+            document.activeElement !== this.input.elementRef().nativeElement) {
+            const selectedElements = this.tokenList.filter(item =>
+                item.selected ||
+                item.tokenWrapperElement.nativeElement === document.activeElement
+            );
+            selectedElements.forEach(element => element.onCloseClick.emit());
+        }
     }
 
     /** @hidden */
