@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.13...v0.24.1-rc.14) (2020-11-20)
+
+
+### Bug Fixes
+
+* (Core) adapt the Breaking Changes from fundamental-styles v.0.13.0 ([#3895](https://github.com/SAP/fundamental-ngx/issues/3895)) ([4fdf211](https://github.com/SAP/fundamental-ngx/commit/4fdf211532b1be366235dec5b3294c96b610afba))
+
 ### [0.24.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.12...v0.24.1-rc.13) (2020-11-20)
 
 
