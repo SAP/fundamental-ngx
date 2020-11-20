@@ -93,7 +93,7 @@ export class MessageBoxContainerComponent extends DynamicComponentContainer<Mess
     private _createFromDefaultMessageBox(content: MessageBoxContent): void {
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(MessageBoxDefaultComponent);
-        this._componentRef = this.containerRef.createComponent(componentFactory);
-        this._componentRef.instance.messageBoxContent = content;
+        this._componentRef = this.containerRef.createComponent<MessageBoxDefaultComponent>(componentFactory);
+        this._componentRef.instance._messageBoxContent = content;
     }
 }
