@@ -6,5 +6,5 @@ import { FdDate } from '@fundamental-ngx/core';
     template: `<fd-calendar calType="single" [(ngModel)]="date" [startingDayOfWeek]="2"></fd-calendar>`
 })
 export class CalendarMondayStartExampleComponent {
-    date = new FdDate(2020, 10, 25);
+    date: FdDate = new FdDate(2020, 10, 25);
 }

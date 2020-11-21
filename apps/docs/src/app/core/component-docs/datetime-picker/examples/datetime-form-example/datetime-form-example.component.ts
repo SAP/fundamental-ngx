@@ -19,6 +19,6 @@ export class DatetimeFormExampleComponent {
     }
 
     disableFunction = (fdDate: FdDate): boolean => {
-        return this.datetimeAdapter.compareDate(FdDate.getNow().setTime(0, 0, 0), fdDate) > 0;
+        return this.datetimeAdapter.compareDate(FdDate.getToday(), fdDate) > 0;
     };
 }

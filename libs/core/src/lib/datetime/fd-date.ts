@@ -33,7 +33,39 @@ export class FdDate {
     second: number;
 
     /**
-     *
+     * Create FdDate instance of the current moment
+     */
+    static getNow(): FdDate {
+        return this.getFdDateByDate(new Date());
+    }
+
+    /**
+     * Gets today's FdDate where hour, minute and second is set to 0
+     */
+    static getToday(): FdDate {
+        return this.getNow().setTime(0, 0, 0);
+    }
+
+    /**
+     *  Convert js date object to FdDate model
+     */
+    static getFdDateByDate(date: Date): FdDate {
+        return new FdDate(
+            date.getFullYear(),
+            date.getMonth() + 1,
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()
+        );
+    }
+
+    /**
+     * Create FdDate instance of the current moment
+     */
+    constructor();
+    /**
+     * Create FdDate
      * @param year e.g. 2020
      * @param month 1 = January, 12 = December
      * @param day 1 - 31
@@ -41,16 +73,22 @@ export class FdDate {
      * @param minute 0 - 59
      * @param second 0 - 59
      */
-    constructor(year?: number, month = 1, day = 1, hour = 0, minute = 0, second = 0) {
-        if (year == null) {
-            const now = FdDate.getNow();
-            year = now.year;
-            month = now.month;
-            day = now.day;
-            hour = now.hour;
-            minute = now.minute;
-            second = now.second;
+    // tslint:disable-next-line: unified-signatures
+    constructor(year: number, month?: number, day?: number, hour?: number, minute?: number, second?: number);
+
+    constructor(...args: any[]) {
+        if (args.length === 0) {
+            return FdDate.getNow();
         }
+
+        let [year, month = 1, day = 1, hour = 0, minute = 0, second = 0] = args;
+
+        year = Number.parseInt(year, 10);
+        month = Number.parseInt(month, 10);
+        day = Number.parseInt(day, 10);
+        hour = Number.parseInt(hour, 10);
+        minute = Number.parseInt(minute, 10);
+        second = Number.parseInt(second, 10);
 
         if (month < 1 || month > 12) {
             throw Error('FdDate month must be between 1 and 12');
@@ -58,9 +96,11 @@ export class FdDate {
         if (day < 1) {
             throw Error('FdDate day must be greater then 0');
         }
-        const date = new Date(year, month - 1, day);
-        if (date.getMonth() + 1 !== month) {
-            throw Error(`Invalid day "${day}" for month "${month}".`);
+        if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+            const date = new Date(year, month - 1, day);
+            if (date.getMonth() + 1 !== month) {
+                throw Error(`Invalid day "${day}" for month "${month}" and year "${year}".`);
+            }
         }
 
         this.year = year;
@@ -72,18 +112,12 @@ export class FdDate {
         return this;
     }
 
-    static getNow(): FdDate {
-        const today = new Date();
-        return new FdDate(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            today.getDate(),
-            today.getHours(),
-            today.getMinutes(),
-            today.getSeconds()
-        );
-    }
-
+    /**
+     * Set hour, minute and second data
+     * @param hour
+     * @param minute
+     * @param second
+     */
     setTime(hour: number, minute: number, second: number): FdDate {
         if (hour < 0 || hour > 23) {
             throw Error(`FdDate hour must be between 0 and 23 but got "${hour}"`);
@@ -102,6 +136,37 @@ export class FdDate {
         return this;
     }
 
+    /**
+     * Get amount of milliseconds from 01.01.1970
+     */
+    getTimeStamp(): number {
+        return this.toDate().getTime();
+    }
+
+    /**
+     * Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.
+     */
+    getDayOfWeek(): number {
+        return this.toDate().getDay() + 1;
+    }
+
+    /**
+     * Get native date object from FdDate.
+     */
+    toDate(): Date {
+        return new Date(this.year, this.month - 1, this.day, this.hour, this.minute, this.second);
+    }
+
+    /**
+     * Method that checks validity of current FdDate instance.
+     */
+    isDateValid(): boolean {
+        return this instanceof FdDate && !isNaN(this.getTimeStamp());
+    }
+
+    /**
+     * Get string representation in yyyy-mm-ddThh:mm:ss format
+     */
     toString(): string {
         if (!this.year || !this.month || !this.day) {
             return '';
@@ -110,6 +175,9 @@ export class FdDate {
         return toIso8601(this);
     }
 
+    /**
+     * Get date string in yyyy-mm-dd format
+     */
     toDateString(): string {
         if (!this.year || !this.month || !this.day) {
             return '';
@@ -118,6 +186,9 @@ export class FdDate {
         return toIso8601(this).split('T')[0];
     }
 
+    /**
+     * Get time string in hh:mm:ss format
+     */
     toTimeString(): string {
         if (!this.year || !this.month || !this.day) {
             return '';

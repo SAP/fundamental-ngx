@@ -135,7 +135,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     private _monthNames: string[] = [];
 
     /** Get information about amount of years displayed at once on year view  */
-    private _amountOfYearsPerPeriod: number;
+    private _amountOfYearsPerPeriod = 1;
 
     constructor(
         public _calendarI18nLabels: CalendarI18nLabels,

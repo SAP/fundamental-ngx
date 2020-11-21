@@ -18,7 +18,7 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
     ]
 })
 export class CalendarProgrammaticallyChangeExampleComponent {
-    date = this.datetimeAdapter.today();
+    date: FdDate = this.datetimeAdapter.today();
 
     constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 

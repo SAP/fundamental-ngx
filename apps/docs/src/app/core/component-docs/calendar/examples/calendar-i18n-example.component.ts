@@ -40,5 +40,5 @@ export class CalendarI18nChineseLabels extends CalendarI18nLabels {
     ]
 })
 export class CalendarI18nExampleComponent {
-    date = new FdDate(2020, 10, 25);
+    date: FdDate = new FdDate(2020, 10, 25);
 }

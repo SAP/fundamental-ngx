@@ -185,7 +185,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     today(): FdDate {
-        return FdDate.getNow().setTime(0, 0, 0);
+        return FdDate.getToday();
     }
 
     now(): FdDate {
@@ -268,12 +268,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (!(date instanceof FdDate)) {
             return false;
         }
-        const nativeDate = this._creteDateInstanceByFdDate(date);
-        return (
-            nativeDate.getFullYear() === date.year &&
-            nativeDate.getMonth() + 1 === date.month &&
-            nativeDate.getDate() === date.day
-        );
+        return date.isDateValid();
     }
 
     isBetween(dateToCheck: FdDate, startDate: FdDate, endDate: FdDate): boolean {

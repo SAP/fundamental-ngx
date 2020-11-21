@@ -225,8 +225,7 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         component.type = 'range';
-        component.disableRangeEndFunction = (fdDate: FdDate) =>
-            adapter.compareDate(fdDate, new FdDate().setTime(0, 0, 0)) > 0;
+        component.disableRangeEndFunction = (fdDate: FdDate) => adapter.compareDate(fdDate, FdDate.getToday()) > 0;
 
         const date1 = new FdDate(2010, 10, 10);
         const date2 = adapter.addCalendarDays(new FdDate(), 1);

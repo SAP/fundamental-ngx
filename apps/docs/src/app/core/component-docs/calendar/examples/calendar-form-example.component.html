@@ -12,7 +12,7 @@
         Dirty: {{ customForm.controls.date.dirty }}<br />
         Valid: {{ customForm.controls.date.valid }}<br />
         Selected Date:
-        {{ customForm.controls.date.value || 'null' }}
+        {{ customForm.controls.date.value?.toDateString() || 'null' }}
         <br />
         <button
             fd-button

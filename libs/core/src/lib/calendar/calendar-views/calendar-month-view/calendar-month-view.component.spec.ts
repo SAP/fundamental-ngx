@@ -24,6 +24,7 @@ describe('CalendarMonthViewComponent', () => {
         fixture = TestBed.createComponent<CalendarMonthViewComponent<FdDate>>(CalendarMonthViewComponent);
         component = fixture.componentInstance;
         component.id = 'test';
+        component.year = 2020;
         component.ngOnInit();
         fixture.detectChanges();
     });

@@ -291,10 +291,7 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it(`should get today's date`, () => {
-        expect(adapter.datesEqual(adapter.today(), FdDate.getNow().setTime(0, 0, 0))).toBe(
-            true,
-            `should be equal to today's date`
-        );
+        expect(adapter.datesEqual(adapter.today(), FdDate.getToday())).toBe(true, `should be equal to today's date`);
     });
 
     it(`should get now date`, () => {

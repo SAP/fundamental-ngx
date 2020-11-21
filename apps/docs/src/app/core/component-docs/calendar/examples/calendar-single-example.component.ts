@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-single-example',
@@ -18,18 +18,16 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
     ]
 })
 export class CalendarSingleExampleComponent {
-    date = this.datetimeAdapter.today();
-
-    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+    date: FdDate = FdDate.getToday();
 
     myDisableFunction = (date: FdDate): boolean => {
-        const day = this.datetimeAdapter.getDayOfWeek(date);
+        const day = date.getDayOfWeek();
         return day === 1 || day === 7;
     };
 
     disableWednesday = (): void => {
         this.myDisableFunction = (date: FdDate): boolean => {
-            const day = this.datetimeAdapter.getDayOfWeek(date);
+            const day = date.getDayOfWeek();
             return day === 4;
         };
     };
