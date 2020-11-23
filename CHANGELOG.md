@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.22...v0.24.1-rc.23) (2020-11-23)
+
+
+### Bug Fixes
+
+* (Core) Add icons to Action Tile buttons ([#3899](https://github.com/SAP/fundamental-ngx/issues/3899)) ([d0a1a94](https://github.com/SAP/fundamental-ngx/commit/d0a1a944f37285e4057a1158482431e154e6f3fc))
+
 ### [0.24.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.21...v0.24.1-rc.22) (2020-11-23)
 
 
