@@ -227,7 +227,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.visited = true;
                 if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
-                } else {
+                } else if (this.appendToWizard) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
             }
@@ -240,18 +240,20 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _scrollToCurrentStep(): void {
-        _fromScrollToCurrentStep = true;
-        let child: HTMLElement;
-        this.steps.forEach((step, index) => {
-            if (step.status === CURRENT_STEP_STATUS) {
-                child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
-                this.wrapperContainer.nativeElement.scrollTo({
-                    top: child.offsetTop - HEADER_HEIGHT,
-                    behavior: 'smooth'
-                });
-            }
-        });
-        this._setUpScrollListener();
+        if (this.appendToWizard) {
+            _fromScrollToCurrentStep = true;
+            let child: HTMLElement;
+            this.steps.forEach((step, index) => {
+                if (step.status === CURRENT_STEP_STATUS) {
+                    child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
+                    this.wrapperContainer.nativeElement.scrollTo({
+                        top: child.offsetTop - HEADER_HEIGHT,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            this._setUpScrollListener();
+        }
     }
 
     /** @hidden */
