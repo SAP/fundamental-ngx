@@ -9,7 +9,6 @@ import {
     OnDestroy,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
-    Optional,
     Inject,
     OnChanges,
     SimpleChanges
@@ -18,7 +17,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../../../datetime';
-import { createMissingDateImplementationError } from '../../calendar-errors';
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
 
@@ -73,17 +71,9 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
-        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
-    ) {
-        if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!this._dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-    }
+        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        private _dateTimeAdapter: DatetimeAdapter<D>
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

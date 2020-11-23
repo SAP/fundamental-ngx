@@ -10,7 +10,10 @@ const AM_DAY_PERIOD_DEFAULT = 'AM';
 const PM_DAY_PERIOD_DEFAULT = 'PM';
 
 /**
- * FdDatetimeAdapter implementation
+ * FdDatetimeAdapter implementation.
+ *
+ * This uses FdDate as a date model and relies on Intl.DateTimeFormat
+ * for formatting and translation purposes.
  *
  */
 

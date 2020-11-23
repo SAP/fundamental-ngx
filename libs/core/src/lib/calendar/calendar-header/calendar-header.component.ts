@@ -8,7 +8,6 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional,
     Output,
     SimpleChanges,
     ViewEncapsulation
@@ -22,7 +21,6 @@ import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../../datetime';
-import { createMissingDateImplementationError } from '../calendar-errors';
 
 /**
  * Internal use only.
@@ -141,17 +139,9 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         public _calendarI18nLabels: CalendarI18nLabels,
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
-        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
-    ) {
-        if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!this._dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-    }
+        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        private _dateTimeAdapter: DatetimeAdapter<D>
+    ) {}
 
     /** @hidden */
     ngOnDestroy(): void {

@@ -12,7 +12,6 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    Optional,
     Inject
 } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -28,7 +27,6 @@ import { SpecialDayRule } from '../../models/special-day-rule';
 import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarService } from '../../calendar.service';
 import { compareObjects } from '../../../utils/public_api';
-import { createMissingDateImplementationError } from '../../calendar-errors';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -216,16 +214,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         private eRef: ElementRef,
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        @Optional() public _dateTimeAdapter: DatetimeAdapter<D>
-    ) {
-        if (!_dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!_dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-    }
+        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        public _dateTimeAdapter: DatetimeAdapter<D>
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

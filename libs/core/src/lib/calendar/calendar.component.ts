@@ -5,6 +5,7 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
+    Inject,
     Input,
     OnInit,
     Optional,
@@ -14,7 +15,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
-import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../datetime';
 
 // import { FdDate } from './models/fd-date';
 import { DateRange } from './models/date-range';
@@ -28,7 +29,7 @@ import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import {
     CalendarAggregatedYearViewComponent
-    //
+    // Comment to fix max-line-length error
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 
 let calendarUniqueId = 0;
@@ -254,10 +255,14 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
         if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateAdapter');
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
 
         // set default value

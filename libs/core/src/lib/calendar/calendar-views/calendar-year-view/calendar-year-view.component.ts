@@ -9,7 +9,6 @@ import {
     OnDestroy,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Optional,
     OnChanges,
     SimpleChanges,
     Inject
@@ -18,7 +17,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../../../datetime';
-import { createMissingDateImplementationError } from '../../calendar-errors';
 import { CalendarService } from '../../calendar.service';
 import { CalendarYearGrid, CalendarYear } from '../../models/calendar-year-grid';
 
@@ -84,17 +82,9 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
-        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+        private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
-        if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!this._dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-
         // default values
         this.currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
         this.firstYearInList = this.currentYear;

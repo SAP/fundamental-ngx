@@ -510,7 +510,7 @@ describe('FdDatetimeAdapter', () => {
     });
 });
 
-describe('NativeDateAdapter with LOCALE_ID override', () => {
+describe('FdDatetimeAdapter with LOCALE_ID override', () => {
     let adapter: FdDatetimeAdapter;
 
     beforeEach(
