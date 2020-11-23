@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { toIso8601 } from './fd-date.utils';
 
 export class FdDate {
@@ -36,14 +35,14 @@ export class FdDate {
      * Create FdDate instance of the current moment
      */
     static getNow(): FdDate {
-        return this.getFdDateByDate(new Date());
+        return FdDate.getFdDateByDate(new Date());
     }
 
     /**
      * Gets today's FdDate where hour, minute and second is set to 0
      */
     static getToday(): FdDate {
-        return this.getNow().setTime(0, 0, 0);
+        return FdDate.getNow().setTime(0, 0, 0);
     }
 
     /**

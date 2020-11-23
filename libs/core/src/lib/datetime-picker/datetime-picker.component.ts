@@ -146,9 +146,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     allowNull = true;
 
     /**
-     * @Input when set to true, time inputs won't allow to have 1 digit
-     * for example 9 will become 09
+     * @Input when set to true time component will use 2 digits for each number.
+     * For example 9 will become 09
      * but 12 will be kept as 12.
+     * Only uses by time component and does not change input format
      */
     @Input() keepTwoDigitsTime = false;
 
@@ -382,7 +383,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     /**
      * Method that handle calendar active view change and throws event.
      */
-    public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
+    handleCalendarActiveViewChange(activeView: FdCalendarView): void {
         this.activeViewChange.emit(activeView);
     }
 
@@ -406,8 +407,8 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     }
 
     /** @hidden */
-    isInvalidDateInputHandler(e): void {
-        this.isInvalidDateInput = e;
+    isInvalidDateInputHandler(isInvalid: boolean): void {
+        this.isInvalidDateInput = isInvalid;
     }
 
     /** @hidden */
