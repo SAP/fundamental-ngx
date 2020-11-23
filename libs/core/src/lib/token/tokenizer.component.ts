@@ -157,7 +157,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListChangesSubscription.unsubscribe();
         }
         this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
-            this.cdRef.detectChanges();
+            this._cdRef.detectChanges();
             this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
@@ -192,7 +192,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     constructor(private _elementRef: ElementRef,
-        private cdRef: ChangeDetectorRef,
+        private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2) {
         this._renderer.listen('window', 'click', (e: Event) => {
@@ -273,12 +273,13 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     keyDown(keyboardEvent: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) && !this._isInputFocused()) {
             const selectedElements = this._getActiveTokens();
+            const focusedTokenIndex = this._getFocusedTokenIndex();
             selectedElements.forEach(element => element.onCloseClick.emit());
             if (selectedElements.length > 0) {
                 if (KeyUtil.isKeyCode(keyboardEvent, DELETE)) {
                     this._focusInput();
                 } else {
-                    this.focusTokenElement(this.tokenList.length - 2);
+                    this.focusTokenElement(focusedTokenIndex - 1);
                 }
             }
         }
@@ -384,7 +385,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             // and then hide any tokens from the right that no longer fit
             this._collapseTokens('right');
 
-            this.cdRef.detectChanges();
+            this._cdRef.detectChanges();
         }
     }
 
@@ -398,7 +399,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             // and then hide any tokens from the left that no longer fit
             this._collapseTokens('left');
 
-            this.cdRef.detectChanges();
+            this._cdRef.detectChanges();
         }
     }
 
@@ -429,7 +430,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
                 elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
                 combinedTokenWidth = this.getCombinedTokenWidth();
                 side === 'right' ? i-- : i++;
-                this.cdRef.markForCheck();
+                this._cdRef.markForCheck();
             }
         } else {
             this._getHiddenCozyTokenCount();
@@ -474,7 +475,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
                     breakLoop = true;
                 }
                 i--;
-                this.cdRef.markForCheck();
+                this._cdRef.markForCheck();
             }
         } else {
             this._getHiddenCozyTokenCount();
@@ -491,7 +492,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
         });
 
-        this.cdRef.detectChanges();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -620,10 +621,17 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Get selected and focused tokens */
     private _getActiveTokens(): TokenComponent[] {
-        return this.tokenList.filter(item =>
-            item.selected ||
-            item.tokenWrapperElement.nativeElement === document.activeElement
-        );
+        return this.tokenList.filter(item => item.selected || this._isTokenFocused(item));
+    }
+
+    /** @hidden */
+    private _getFocusedTokenIndex(): number {
+        return this.tokenList.toArray().findIndex(token => this._isTokenFocused(token));
+    }
+
+    /** @hidden */
+    private _isTokenFocused(token: TokenComponent): boolean {
+        return token.tokenWrapperElement.nativeElement === document.activeElement;
     }
 
     /** @hidden */
