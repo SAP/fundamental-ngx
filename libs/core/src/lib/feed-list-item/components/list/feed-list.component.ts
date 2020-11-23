@@ -106,6 +106,7 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
     return this._elementRef;
   }
 
+  /** @hidden */
   private _listenOnFeedItems(): void {
     this.$feedItemChanges = this.feedItems.changes.subscribe(() => this._refreshItems());
   }
