@@ -15,12 +15,11 @@ export class PlatformDatetimePickerReactiveExampleComponent {
     requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     onSubmit(): void {
-        this.datetimePickerForm.get('storedDate').setValue(new FdDate(null));
-        /* if (this.datetimePickerForm.valid) {
+        if (this.datetimePickerForm.valid) {
             alert('Form Value: ' + this.datetimePickerForm.value);
         } else {
             alert('Form invalid');
-        } */
+        }
     }
 }
 

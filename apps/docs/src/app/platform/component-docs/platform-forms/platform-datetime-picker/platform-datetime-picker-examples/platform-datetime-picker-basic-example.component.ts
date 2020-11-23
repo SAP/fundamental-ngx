@@ -11,10 +11,6 @@ export class PlatformDatetimePickerBasicExampleComponent {
 
     date2: FdDate = FdDate.getToday();
 
-    save(value: any): void {
-        alert('Form Value: ' + value);
-    }
-
     changeDay(): void {
         this.date1 = new FdDate(2018, 10, 10, 21, 35);
     }
