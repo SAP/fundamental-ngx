@@ -43,6 +43,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     @Input()
     class: string;
 
+    /** Disables possibility to remove tokens by keyboard */
+    @Input()
+    disableKeyboardDeletion = false;
+
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
     tokenList: QueryList<TokenComponent>;
@@ -271,7 +275,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDown(keyboardEvent: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) && !this._isInputFocused()) {
+        if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
+            !this._isInputFocused() &&
+            !this.disableKeyboardDeletion) {
             const selectedElements = this._getActiveTokens();
             const focusedTokenIndex = this._getFocusedTokenIndex();
             selectedElements.forEach(element => element.onCloseClick.emit());
@@ -286,7 +292,8 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
         if (KeyUtil.isKeyCode(keyboardEvent, BACKSPACE) &&
             this._isInputFocused() &&
-            !this._getInputValue()) {
+            !this._getInputValue() &&
+            !this.disableKeyboardDeletion) {
             this.focusTokenElement(this.tokenList.length - 1);
         }
     }
