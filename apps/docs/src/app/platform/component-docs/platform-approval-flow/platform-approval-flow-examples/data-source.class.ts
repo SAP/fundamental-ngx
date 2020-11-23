@@ -86,6 +86,61 @@ const simplestGraph: ApprovalProcess = {
     ]
 };
 
+const twoNodesGraph: ApprovalProcess = {
+    watchers: [
+        {
+            id: 'string',
+            name: 'Luis Franklin',
+            description: 'Legal team',
+            imgUrl: 'https://randomuser.me/api/portraits/men/91.jpg'
+        },
+        {
+            id: 'string',
+            name: 'Renee Miles',
+            description: 'Legal team',
+            imgUrl: 'https://randomuser.me/api/portraits/women/11.jpg'
+        },
+        {
+            id: 'string',
+            name: 'Renee Miles',
+            description: 'Legal team',
+            imgUrl: ''
+        }
+    ],
+    nodes: [
+        {
+            id: 'ID1',
+            name: 'node name',
+            description: 'node description',
+            approvers: [{
+                id: 'string',
+                name: 'Emma Cole',
+                description: 'Marketing team',
+                imgUrl: 'https://randomuser.me/api/portraits/women/91.jpg'
+            }],
+            status: 'approved',
+            targets: ['ID2'],
+            dueDate: new Date(),
+            createDate: new Date()
+        },
+        {
+            id: 'ID2',
+            name: 'node name',
+            description: 'node description',
+            approvers: [{
+                id: 'string',
+                name: 'Daniel Sullivan',
+                description: 'Marketing team',
+                imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg'
+            }],
+            status: 'in progress',
+            targets: [],
+            dueDate: new Date(),
+            createDate: new Date()
+        }
+    ]
+};
+
 const mediumComplexityGraph: ApprovalProcess = {
     watchers: [
         {
@@ -369,9 +424,10 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
      * Fetch of approval process data.
      */
     fetch(): Observable<ApprovalProcess> {
+        // return of(twoNodesGraph);
         // return of(simplestGraph);
-        // return of(mediumComplexityGraph);
-        return of(complexGraph);
+        return of(mediumComplexityGraph);
+        // return of(complexGraph);
     }
 
     /**

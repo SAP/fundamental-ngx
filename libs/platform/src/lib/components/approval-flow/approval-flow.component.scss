@@ -2,8 +2,65 @@
     margin-bottom: 1rem;
 }
 
-.approval-flow-tree {
+.approval-flow-container {
+    position: relative;
+    padding: 0 2rem;
+}
+
+.approval-flow-graph-container {
+    position: relative;
+    overflow: hidden;
+    padding-left: 2rem;
+}
+
+.approval-flow-carousel-controls {
+    position: absolute;
     display: flex;
+    align-items: center;
+    width: calc(100% + 0rem);
+    height: 94px;
+    left: 0;
+
+    button {
+        border: none;
+        background: transparent;
+        color: #6A6D70;
+        display: flex;
+        justify-content: space-between;
+        width: 20px;
+        align-items: center;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+
+        fd-icon {
+            font-size: 14px;
+            color: #0854A0;
+            position: relative;
+            top: 1px;
+        }
+    }
+}
+
+.approval-flow-controls {
+    &-next-slide {
+        position: absolute;
+        right: 0;
+    }
+
+    &-prev-slide {
+        position: absolute;
+        left: 0;
+    }
+}
+
+.approval-flow-graph {
+    display: flex;
+    position: relative;
+    left: 0;
+    transition: left 0.3s;
 
     .approval-flow-column:not(:last-child) {
         margin-right: 4rem;
@@ -27,6 +84,6 @@
     }
 
     fdp-approval-flow-node + fdp-approval-flow-node:not(:last-child) {
-        margin-bottom: 0.75rem;
+        margin-bottom: 1rem;
     }
 }

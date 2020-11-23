@@ -2,7 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AvatarModule, ButtonModule, DialogModule, MessageToastModule, ToolbarModule } from '@fundamental-ngx/core';
+import {
+    AvatarModule,
+    ButtonModule,
+    DialogModule,
+    IconModule,
+    MessageToastModule,
+    ToolbarModule
+} from '@fundamental-ngx/core';
 
 import { ApprovalFlowComponent } from './approval-flow.component';
 import { PlatformObjectStatusModule } from '../object-status/public_api';
@@ -18,6 +25,7 @@ import { PlatformListModule, StandardListItemModule } from '../list/public_api';
         FormsModule,
         AvatarModule,
         ButtonModule,
+        IconModule,
         ToolbarModule,
         DialogModule,
         MessageToastModule,

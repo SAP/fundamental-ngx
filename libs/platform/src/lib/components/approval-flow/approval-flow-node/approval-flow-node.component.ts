@@ -1,6 +1,7 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { ApprovalNode, ApprovalStatus } from '@fundamental-ngx/platform';
-import { DialogService, MessageToastService, ObjectStatus } from '@fundamental-ngx/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { ObjectStatus } from '@fundamental-ngx/core';
+
+import { ApprovalNode, ApprovalStatus } from '../interfaces';
 
 const NODE_STATUS_CLASS_MAP = {
     'approved': 'positive',
@@ -19,14 +20,21 @@ export class ApprovalFlowNodeComponent implements OnInit {
 
     @Input() renderArrow = false;
 
+    @Input() renderCarouselStartMarker = false;
+
+    @Input() renderCarouselEndMarker = false;
+
+    @Input()
     @HostBinding('class.blank')
-    @Input() blank: boolean;
+    blank: boolean;
 
+    @Input()
     @HostBinding('class.line-before')
-    _renderLineBefore = false;
+    renderLineBefore = false;
 
+    @Input()
     @HostBinding('class.line-after')
-    _renderLineAfter = true;
+    renderLineAfter = true;
 
     @HostBinding('class.approved-node')
     _isApproved = false;
@@ -38,8 +46,6 @@ export class ApprovalFlowNodeComponent implements OnInit {
 
     _status: ObjectStatus;
 
-    constructor() {}
-
     ngOnInit(): void {
         this._status = getNodeStatusClass(this.node.status);
         const hasParent = Boolean(this.node['parent']);
@@ -47,8 +53,6 @@ export class ApprovalFlowNodeComponent implements OnInit {
             this._isParentApproved = this.node['parent'].status === 'approved';
         }
         this._isApproved = this.node.status === 'approved';
-        this._renderLineBefore = hasParent;
-        // this._renderLineAfter = !this.blank;
     }
 
     openDialog(): void {

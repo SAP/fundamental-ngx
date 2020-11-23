@@ -1,5 +1,7 @@
 <ng-container *ngIf="node && !blank">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
+    <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
+    <div *ngIf="renderCarouselEndMarker" class="approval-flow-node__carousel-end-marker"></div>
     <span style="position: absolute; font-size: 12px; right: 0; top: 0; ">{{ node.id }} </span>
     <span *ngIf="node['parent']"
           style="position: absolute; font-size: 12px; left: 0; top: 0; ">Parent - {{ node['parent']?.id }} </span>
