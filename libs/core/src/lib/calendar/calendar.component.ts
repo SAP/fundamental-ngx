@@ -15,9 +15,9 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../datetime';
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
 
-// import { FdDate } from './models/fd-date';
 import { DateRange } from './models/date-range';
 import { CalendarCurrent } from './models/calendar-current';
 import { SpecialDayRule } from './models/special-day-rule';
@@ -98,7 +98,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** Currently displayed days depending on month and year */
     currentlyDisplayed: CalendarCurrent;
 
-    /** The currently selected FdDate model in single mode. */
+    /** The currently selected date model in single mode. */
     @Input()
     selectedDate: D;
 
@@ -153,8 +153,8 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * Special days mark, it can be used by passing array of object with
      * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
      * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
-     * Rule accepts method with FdDate object as a parameter. ex:
-     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     * Rule accepts method with D object as a parameter. ex:
+     * `rule: (fdDate: D) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
     @Input()
     specialDaysRules: SpecialDayRule<D>[] = [];

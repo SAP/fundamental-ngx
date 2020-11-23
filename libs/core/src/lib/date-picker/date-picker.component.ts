@@ -25,7 +25,8 @@ import { SpecialDayRule } from '../calendar/models/special-day-rule';
 import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
 import { CalendarYearGrid } from '../calendar/models/calendar-year-grid';
 import { DateRange } from '../calendar/models/date-range';
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../datetime';
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
 import { createMissingDateImplementationError } from './errors';
 
 /**

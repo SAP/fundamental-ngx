@@ -28,7 +28,7 @@ import { Placement } from 'popper.js';
 
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
-import { FormFieldControl, Status } from '../public_api';
+import { FormFieldControl, Status } from '../form-control';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({

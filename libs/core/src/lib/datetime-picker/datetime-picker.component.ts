@@ -28,7 +28,8 @@ import { PopoverComponent } from '../popover/popover.component';
 import { PopoverBodyComponent } from '../popover/popover-body/popover-body.component';
 import { FormStates } from '../form/form-control/form-states';
 
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../datetime';
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
 import { createMissingDateImplementationError } from './errors';
 
 /**

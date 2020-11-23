@@ -16,7 +16,8 @@ import {
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../../../datetime';
+import { DatetimeAdapter } from '../../../datetime/datetime-adapter';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../../../datetime/datetime-formats';
 import { CalendarService } from '../../calendar.service';
 import { CalendarYearGrid, CalendarYear } from '../../models/calendar-year-grid';
 

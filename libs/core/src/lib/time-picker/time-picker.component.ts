@@ -19,10 +19,11 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { delay, first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Placement } from 'popper.js';
 
-import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '../datetime';
+import { DATE_TIME_FORMATS, DateTimeFormats } from '../datetime/datetime-formats';
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
 import { createMissingDateImplementationError } from './errors';
 
 import { TimeComponent } from '../time/time.component';

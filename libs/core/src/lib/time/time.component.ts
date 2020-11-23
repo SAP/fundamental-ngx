@@ -19,7 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { DatetimeAdapter } from '../datetime';
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
 import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';

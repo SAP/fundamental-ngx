@@ -20,7 +20,8 @@ import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '../../datetime';
+import { DatetimeAdapter } from '../../datetime/datetime-adapter';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../../datetime/datetime-formats';
 
 /**
  * Internal use only.
