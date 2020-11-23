@@ -1,4 +1,3 @@
-/*
 export class Wdio {
 
     get phoneNumberInput(): WebdriverIO.Element {
@@ -31,4 +30,4 @@ export class Wdio {
 }
 
 export const webDriver = new Wdio();
-*/
+

@@ -1,3 +1,6 @@
+/*require('ts-node').register({ transpileOnly: true });
+module.exports = require('./wdio.conf.ts');*/
+require('ts-node').register({ transpileOnly: true });
 exports.config = {
     //
     // ====================
@@ -50,13 +53,13 @@ exports.config = {
     //
     capabilities: [
         {
-            browserName: 'MicrosoftEdge',
-            browserVersion: '14.14393',
+            browserName: 'internet explorer',
+            browserVersion: 'latest',
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
-            RequireWindowFocus: 'True',
             "sauce:options": {
                 name: 'e2e-win-internet-explorer',
+                requireWindowFocus: true,
                 //tags: [ "process.env.TRAVIS_BUILD_ID"],
             }
         },
@@ -216,7 +219,6 @@ exports.config = {
         defaultTimeoutInterval: 700000,
         grep: null,
         invertGrep: null,
-        requires: ['ts-node/register'],
     },
 
 
@@ -271,13 +273,11 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-/*
     before: function () {
         require('ts-node').register({
-            project: 'e2e/tsconfig.json',
-            files: true
+            project: 'e2e/tsconfig.json'
         });
-    },*/
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
