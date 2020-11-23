@@ -90,7 +90,7 @@ exports.config = {
     onPrepare: async () => {
         jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: 'true' } }));
         require('ts-node').register({
-            project: 'e2e/tsconfig.e2e.json'
+            project: 'e2e/tsconfig.json'
         });
         // Set some config data
         const processedConfig = await browser.getProcessedConfig();
