@@ -10,16 +10,6 @@ export default {
         'Attention Button',
         'Transparent Button'
     ],
-    // removed during FF browser rework
-    // cozyAndCompactBtnColorArr:  [
-    //     'rgba(8, 84, 160, 1)',
-    //     'rgba(255, 255, 255, 1)',
-    //     'rgba(8, 84, 160, 1)',
-    //     'rgba(16, 126, 62, 1)',
-    //     'rgba(187, 0, 0, 1)',
-    //     'rgba(233, 115, 12, 1)',
-    //     'rgba(8, 84, 160, 1)'
-    // ],
     btnColorArr: [
         '8, 84, 160',
         '255, 255, 255',

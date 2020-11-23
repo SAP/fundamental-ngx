@@ -140,7 +140,7 @@ describe('Verify Textarea component', function() {
             });
 
             expect(borderColor).toBe('rgb(187, 0, 0)');
-            expect(errorText).toBe('Value is required');
+            expect(errorText.trim()).toBe('Value is required');
         });
 
         it('should display the counter of characters allowed to input ', async () => {
@@ -173,7 +173,7 @@ describe('Verify Textarea component', function() {
                 return await textareaPage.detailedTextAreaErrorMessage.getText();
             });
 
-            expect(errorText).toBe('Please get your character count under limit.');
+            expect(errorText).toContain('Please get your character count under limit.');
         });
 
         it('should have compact smaller than basic', async () => {
@@ -245,7 +245,7 @@ describe('Verify Textarea component', function() {
                 await hoverMouse(await textareaPage.basicTextAreaPopoverIcon).then(async () => {
                     await waitForVisible(await textareaPage.basicTextAreaPopoverBody);
                     const popoverText = await textareaPage.basicTextAreaPopoverBody.getText();
-                    expect(popoverText).toBe(textAreaPageContent.basic_text_area_popover);
+                    expect(popoverText).toContain(textAreaPageContent.basic_text_area_popover);
                 });
             });
         });

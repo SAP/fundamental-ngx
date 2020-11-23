@@ -19,7 +19,7 @@ describe('Menu button test suite', function() {
         it('should check that the arrow icon is present', async () => {
             const dropDownArrowArr = await menuBtnPage.btnArrowIconsArr;
 
-            dropDownArrowArr.forEach(async element => {
+            await dropDownArrowArr.forEach(async element => {
                 await expect(await element.isDisplayed()).toBe(true);
             });
         });
@@ -27,7 +27,7 @@ describe('Menu button test suite', function() {
         it('should check selected menu option and close menu', async () => {
             const cozyBtnArr = await menuBtnPage.cozyBtnArr;
 
-            await cozyBtnArr[0].click().then( async() => {
+            cozyBtnArr[0].click().then( async() => {
                 const menuItemsArr = await menuBtnPage.menuItemArr;
 
                 await menuItemsArr[0].click();
@@ -67,10 +67,10 @@ describe('Menu button test suite', function() {
             const cozyAndCompactBtnAttrArr = await cozyBtnAttributeArr.concat(compactBtnAttributeArr);
             const cozyAndCompactBtnIconArr = await (await menuBtnPage.btnWorldIconArr).slice(0, 14);
 
-            cozyAndCompactBtnAttrArr.forEach(async element => {
-                await expect(await getValueOfAttribute(element, MenuBtnData.disabledState)).toBe('false');
+            await cozyAndCompactBtnAttrArr.forEach(async element => {
+                await expect(await getValueOfAttribute(element, 'ng-reflect-disabled')).toBe('false');
             });
-            cozyAndCompactBtnIconArr.forEach((async element => {
+            await cozyAndCompactBtnIconArr.forEach((async element => {
                 await expect(await element.isDisplayed()).toBe(true);
             }));
         });
@@ -79,14 +79,14 @@ describe('Menu button test suite', function() {
             const cozyBtnTextArr = await menuBtnPage.cozyBtnAttrArr;
             const cozyBtnArr = await menuBtnPage.cozyBtnArr;
 
-            cozyBtnTextArr.forEach(async (element, index) => {
+            await cozyBtnTextArr.forEach(async (element, index) => {
                 await expect(element.getText()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[index]);
             });
-            cozyBtnArr.forEach(async (element, index) => {
+            await cozyBtnArr.forEach(async (element, index) => {
                 await expect(await element.getCssValue(MenuBtnData.textColorAttr))
                     .toContain(MenuBtnData.btnColorArr[index]);
             });
-            cozyBtnArr.forEach(async element => {
+            await cozyBtnArr.forEach(async element => {
                 await expect(await element.getCssValue(MenuBtnData.textAlignmentAttr)).toEqual(MenuBtnData.alignmentCenter);
             });
         });
@@ -145,7 +145,7 @@ describe('Menu button test suite', function() {
             await expect(await getValueOfAttribute(menuBtnArr[2], MenuBtnData.iconAttr)).toBe(MenuBtnData.icon);
             await expect(await menuBtnArr[2].getText()).toBe('');
 
-            menuBtnArr.forEach(async element => {
+            await menuBtnArr.forEach(async element => {
                 await expect(await getValueOfAttribute(element, MenuBtnData.compactAttr)).toBe('true');
             });
         });
@@ -153,7 +153,7 @@ describe('Menu button test suite', function() {
         it('should check long text menu btn with and without icon', async () => {
             const menuBtnArr = await (await menuBtnPage.menuTypeBtnArr).slice(12, 14);
 
-            await expect(await getValueOfAttribute(menuBtnArr[0], MenuBtnData.iconAttr)).toBe(MenuBtnData.icon);
+            await expect(await getValueOfAttribute(menuBtnArr[0], MenuBtnData.iconAttr)).toContain(MenuBtnData.icon);
             await expect(await menuBtnArr[0].getText()).toEqual(MenuBtnData.truncatedBtnText);
             await expect(await getValueOfAttribute(menuBtnArr[0], MenuBtnData.tooltipAttr)).toBe(MenuBtnData.truncatedBtnTooltipText);
             await expect(await getValueOfAttribute(menuBtnArr[1], MenuBtnData.iconAttr)).toBe(null);

@@ -12,7 +12,7 @@ import {
 describe('Menu component test suite', function() {
     const menuPage = new MenuPo();
 
-    async function checkMenuItemText(element): Promise<void> {
+    async function checkMenuItemText(element): Promise<any> {
         const menuItemTextArr = await element;
 
         await menuItemTextArr.forEach(async item => {

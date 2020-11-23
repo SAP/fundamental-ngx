@@ -1,7 +1,8 @@
 import { InfoLabelPO } from '../pages/info-label.po';
 import InfoLabelData, { semanticColorsArr } from '../fixtures/appData/info-label-page-contents';
 import { browser } from 'protractor';
-import { getText, getValueOfAttribute, waitForVisible } from '../helper/helper';
+import { getText, getValueOfAttribute, waitForVisible } from '../../helper/helper';
+import { config } from '../../../protractor-ci.conf';
 
 describe('Info Label component test suite', () => {
     const infoLabelPage = new InfoLabelPO();
@@ -15,7 +16,11 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check default label info', async () => {
-        await expect(await getText(infoLabelPage.defaultLabel)).toEqual(InfoLabelData.defaultLabelText);
+        if (config.browserName === 'safari') {
+            await expect(await getText(infoLabelPage.defaultLabel)).toEqual(InfoLabelData.safariDefaultLabelText);
+        } else {
+            await expect(await getText(infoLabelPage.defaultLabel)).toEqual(InfoLabelData.defaultLabelText);
+        }
         await expect(await infoLabelPage.defaultLabel.getCssValue(InfoLabelData.cssAlignmentAttribute))
             .toEqual(InfoLabelData.labelContentAlignment);
     });
@@ -23,12 +28,18 @@ describe('Info Label component test suite', () => {
     it('should check info label with text', async () => {
         const labelsArr = await infoLabelPage.labelsWithTextArr;
 
-        await labelsArr.forEach(async element => {
-            await expect(await getText(element)).toEqual(InfoLabelData.infoLabelText);
-        });
+        // if (config.browserName === 'safari') {
+        //     await labelsArr.forEach(async element => {
+        //         await expect(await getText(element)).toEqual(InfoLabelData.safariInfoLabelText);
+        //     });
+        // } else {
+            await labelsArr.forEach(async element => {
+                await expect(await getText(element)).toEqual(InfoLabelData.infoLabelText);
+            });
+       // }
 
         await labelsArr.forEach(async (element, index) => {
-            await expect(await element.getCssValue('background-color')).toEqual(semanticColorsArr[index].value);
+            await expect(await element.getCssValue(InfoLabelData.backgroundColor)).toContain(semanticColorsArr[index].value);
         });
 
         await labelsArr.forEach(async element => {
@@ -45,7 +56,7 @@ describe('Info Label component test suite', () => {
         });
 
         await labelsWithIconsArr.forEach(async (element, index) => {
-            await expect(await element.getCssValue(InfoLabelData.backgroundColor)).toEqual(semanticColorsArr[index].value);
+            await expect(await element.getCssValue(InfoLabelData.backgroundColor)).toContain(semanticColorsArr[index].value);
         });
 
         await labelsWithIconsArr.forEach(async element => {
@@ -58,30 +69,36 @@ describe('Info Label component test suite', () => {
         });
 
         await labelIconsArr.forEach(async element => {
-            await waitForVisible(element);
+            await expect(waitForVisible(element)).toBe(true);
         });
     });
 
     it('should check info label with a number or an icon', async () => {
         const labelsWithNumbersArr = await infoLabelPage.labelsWithNumberOrIconArr;
 
-        expect(await getText(labelsWithNumbersArr[0])).toEqual(InfoLabelData.numberLabel);
-        expect(await getText(labelsWithNumbersArr[1])).toEqual(InfoLabelData.largeNumberLabel);
-        expect(await getText(labelsWithNumbersArr[2])).toEqual(InfoLabelData.decimalLabel);
-        expect(await getValueOfAttribute(labelsWithNumbersArr[3], InfoLabelData.labelIconAttribute))
+        if (config.browserName === 'safari') {
+            await expect(await getText(labelsWithNumbersArr[1])).toEqual(InfoLabelData.safariLargeNumberLabel);
+        } else {
+            await expect(await getText(labelsWithNumbersArr[1])).toEqual(InfoLabelData.largeNumberLabel);
+        }
+
+        await expect(await getText(labelsWithNumbersArr[0])).toEqual(InfoLabelData.numberLabel);
+        await expect(await getText(labelsWithNumbersArr[2])).toEqual(InfoLabelData.decimalLabel);
+        await expect(await getValueOfAttribute(labelsWithNumbersArr[3], InfoLabelData.labelIconAttribute))
             .toEqual(InfoLabelData.labelIconAttributeValue);
     });
 
     it('should check info label with aria label for accessibility', async () => {
         const ariaLabelsArr = await infoLabelPage.accessibilityLabelsArr;
+        const ariaAttrArr = await infoLabelPage.accessibilityAttrArr;
 
-        expect(await getValueOfAttribute(ariaLabelsArr[0], InfoLabelData.ariaLabelAttribute)).not.toBe(null);
-        expect(await getValueOfAttribute(ariaLabelsArr[1], InfoLabelData.ariaLabelledByAttribute)).not.toBe(null);
-        expect(await getText(ariaLabelsArr[0])).toEqual(InfoLabelData.ariaLabelExample);
-        expect(await getText(ariaLabelsArr[1])).toEqual(InfoLabelData.ariaSuccessLabel);
+        await expect(await getValueOfAttribute(ariaLabelsArr[0], InfoLabelData.ariaLabelAttribute)).not.toBe(null);
+        await expect(await getValueOfAttribute(ariaLabelsArr[1], InfoLabelData.ariaLabelledByAttribute)).not.toBe(null);
+        await expect(await getText(ariaLabelsArr[0])).toEqual(InfoLabelData.ariaLabelExample);
+        await expect(await getText(ariaLabelsArr[1])).toEqual(InfoLabelData.ariaSuccessLabel);
 
-        await ariaLabelsArr.forEach(async element => {
-           await expect(await element.getCssValue(InfoLabelData.backgroundColor)).toEqual(semanticColorsArr[1].value)
+        await ariaAttrArr.forEach(async element => {
+           await expect(await element.getCssValue(InfoLabelData.backgroundColor)).toContain(semanticColorsArr[1].value)
         });
     });
 

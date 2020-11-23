@@ -1,6 +1,6 @@
 import { clickByMouseMove, getValueOfAttribute, hoverMouse } from './helper';
 import { browser, ElementFinder } from 'protractor';
-import { checkboxErrorState, checkboxFocusStyle, checkboxHoverState } from '../fixtures/appData/checkbox-page-contents';
+import checkboxGPData from '../platform/fixtures/appData/checkbox-page-contents';
 
 export async function checkIfDisabled(element: ElementFinder, attribute: string, value: string): Promise<void> {
     expect(await getValueOfAttribute(element, attribute)).toEqual(value);
@@ -72,14 +72,14 @@ export async function checkHoverState(element): Promise<void> {
     const checkboxHover = await hoverMouse(await element).then( () => {
         return element.getCssValue('border-color');
     });
-    expect(checkboxHover).toContain(checkboxHoverState);
+    expect(checkboxHover).toContain(checkboxGPData.checkboxHoverState);
 }
 
-export async function checkFocusState(element): Promise<void> {
-    const checkboxHover = await clickByMouseMove(await element).then( () => {
+export async function checkFocusState(element): Promise<any> {
+    const checkboxFocus = await clickByMouseMove(element).then( () => {
         return element.getCssValue('outline-style');
     });
-    expect(checkboxHover).toContain(checkboxFocusStyle);
+    expect(checkboxFocus).toContain(checkboxGPData.checkboxFocusStyle);
 }
 
 export async function checkErrorHoverState(element): Promise<void> {
@@ -89,12 +89,12 @@ export async function checkErrorHoverState(element): Promise<void> {
     const checkboxHover = await hoverMouse(await element).then( () => {
         return element.getCssValue('border-color');
     });
-    expect(checkboxHover).toContain(checkboxErrorState);
+    expect(checkboxHover).toContain(checkboxGPData.checkboxErrorState);
 }
 
 export async function checkErrorTooltip(element, tooltipElement): Promise<string> {
     await hoverMouse(element);
-    return getValueOfAttribute(tooltipElement, 'innerHTML'); // todo: Anton, please take a look.
+    return getValueOfAttribute(await tooltipElement, 'innerHTML'); // todo: Anton, please take a look.
 }
 
 export async function checkLabels(array, expectation): Promise<void> {

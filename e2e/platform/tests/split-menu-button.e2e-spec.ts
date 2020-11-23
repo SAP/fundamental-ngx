@@ -76,7 +76,7 @@ describe('Split menu button test suite', function() {
 
         await checkBtnSelectionChange(iconArrowBtnArr, spMenuBtnPage.iconExSelectionBtnArr, SMBData.iconBtnTextArr);
         iconBtnArr.forEach(async element => {
-            await expect(await getValueOfAttribute(element, SMBData.iconAttr)).toEqual(SMBData.iconLabel);
+            await expect(await getValueOfAttribute(element, SMBData.iconAttr)).toContain(SMBData.iconLabel);
         })
     });
 
@@ -116,7 +116,7 @@ describe('Split menu button test suite', function() {
             await browser.actions().mouseDown(element).perform().then( async () => {
                 await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.defaultBtnColor);
                 await browser.actions().mouseUp(element).perform();
-                await element.click();
+                 await element.click();
             });
         });
     });
@@ -172,7 +172,7 @@ describe('Split menu button test suite', function() {
        const menuBtnArr = await spMenuBtnPage.mainBtnArr;
 
        menuBtnArr.forEach(async element => {
-          await expect(await element.hasAttribute(SMBData.tooltipAttr)).not.toEqual(null);
+          await expect(await getValueOfAttribute(element, SMBData.tooltipAttr)).not.toEqual(null);
        });
     });
 
@@ -200,7 +200,7 @@ describe('Split menu button test suite', function() {
                 const menuItemsArr = await spMenuBtnPage.menuItemArr;
                 await menuItemsArr[1].click().then(async () => {
                     const behaviorMainBtnArr = await btnArray;
-                    await expect(await getText(behaviorMainBtnArr[index])).toEqual(expectation[index]);
+                    await expect(await getText(behaviorMainBtnArr[index])).toContain(expectation[index]);
                 });
             });
         });
