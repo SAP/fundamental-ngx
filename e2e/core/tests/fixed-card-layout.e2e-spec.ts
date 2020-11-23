@@ -1,7 +1,8 @@
 import { FixedCardLayoutPo } from '../pages/fixed-card-layout.po';
 import { browser } from 'protractor';
 import fxdCardLytData from '../fixtures/appData/fixed-card-layout-content';
-import { waitForInvisible } from '../../helper/helper';
+import { waitForInvisible, waitForVisible } from '../../helper/helper';
+// import { config } from '../../../protractor-ci.conf';
 
 describe('fixed card layout test suite', function () {
     const fxdCardLayoutPg = new FixedCardLayoutPo();
@@ -185,6 +186,64 @@ describe('fixed card layout test suite', function () {
     });
 
     async function checkDragAndDrop(clickElement, startElementLocation, endElementLocation, originalText): Promise<any> {
+
+        // if (config.browserName === 'firefox' || 'safari' ) {
+        //     const ffClickElement = clickElement.getLocation();
+        //     const ffStartElementLocation = startElementLocation.getLocation();
+        //     const ffEndElementLocation = endElementLocation.getLocation();
+        //
+        //     await driver.actions().mouseDown(clickElement).perform().then( async () => {
+        //         await driver.sleep(300).then( async () => {
+        //             await driver.actions().mouseMove(endElementLocation).perform();
+        //         });
+        //     });
+
+
+            // await driver.actions().mouseDown(clickElement);
+            // await browser.actions().mouseDown(clickElement);
+            // await driver.actions().mouseDown(ffClickElement);
+
+            // await driver.actions().mouseMove(clickElement.location).mouseDown(clickElement).perform().then( async () => {
+            //     await waitForVisible(fxdCardLayoutPg.placeholderCard);
+            //         await driver.actions().mouseMove(ffStartElementLocation, {x: 100, y: 100})
+            //             .mouseMove(ffEndElementLocation, {x: 300, y: 300}).perform().then(async () => {
+            //                 await driver.actions().mouseUp().perform().then(async () => {
+            //                     const newCardsArr = await fxdCardLayoutPg.cardDivArr;
+            //                     const newFirstCardText = await newCardsArr[0].getText();
+            //
+            //                     await expect(newFirstCardText).not.toEqual(originalText);
+            //                 });
+            //             });
+            //
+            // });
+
+            // await driver.actions().mouseMove(ffClickElement).mouseDown().perform().then(async () => {
+            //     await driver.sleep(300);
+            //     await driver.actions().mouseMove(ffStartElementLocation)
+            //         .mouseMove(ffEndElementLocation).mouseUp().perform().then( async () => {
+            //         await driver.actions().mouseUp().perform().then(async () => {
+            //             const newCardsArr = await fxdCardLayoutPg.cardDivArr;
+            //             const newFirstCardText = await newCardsArr[0].getText();
+            //
+            //             await expect(newFirstCardText).not.toEqual(originalText);
+            //         });
+            //     })
+            // })
+
+            // await driver.actions().mouseDown(clickElement).perform().then( async () => {
+            //     await driver.sleep(1000);
+            //     await driver.actions().mouseMove(ffStartElementLocation)  // issue: not dragging the card
+            //         .mouseMove(ffEndElementLocation).perform().then(async () => {
+            //         await driver.actions().mouseUp().perform().then(async () => {
+            //             const newCardsArr = await fxdCardLayoutPg.cardDivArr;
+            //             const newFirstCardText = await newCardsArr[0].getText();
+            //
+            //             await expect(newFirstCardText).not.toEqual(originalText);
+            //         });
+            //     });
+            // });
+
+       // } else {
             await driver.actions().mouseDown(clickElement).perform().then(async () => {
                 await driver.sleep(300);
                 await driver.actions().mouseMove(startElementLocation)
@@ -197,5 +256,6 @@ describe('fixed card layout test suite', function () {
                         });
                     });
             });
+     //   }
     }
 });

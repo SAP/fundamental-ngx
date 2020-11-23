@@ -26,7 +26,7 @@ export class CheckboxGroupPO extends BaseComponentPo {
     formValidationcheckboxGroupLabelsArr = $$('fdp-platform-checkbox-group-examples label span');
     formValidationcheckboxGroupsArr = $$('fdp-platform-checkbox-group-examples fd-form-group');
     errorTooltip = $('span.fd-form-message span');
-    sectiontitle = $('fdp-platform-checkbox-group-examples h3');
+    sectiontitle = $$('fdp-platform-checkbox-group-examples h3');
 
     exampleAreaContainersArr = $$('.fd-doc-component');
     rtlSwitcherArr = $$('rtl-switch .fd-switch__handle');

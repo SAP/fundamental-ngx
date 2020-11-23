@@ -48,7 +48,8 @@ exports.config = {
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
             screenResolution: '1920x1080',
-            '-enablePassThrough': 'false' // [WIP] should fix mouse actions
+            directConnect: false,
+          //  FirefoxOptions: {'-enablePassThrough': false} // [WIP] should fix mouse actions
 
          },
          {
@@ -68,6 +69,7 @@ exports.config = {
             acceptInsecureCerts: true,
             tags: [ process.env.TRAVIS_BUILD_ID],
             screenResolution: '1920x1440',
+            directConnect: false,
         },
         {
             browserName: 'MicrosoftEdge',

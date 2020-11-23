@@ -1,5 +1,5 @@
 import { CheckboxPO } from '../pages/checkbox.po';
-import { clickByMouseMove, getValueOfAttribute } from '../helper/helper';
+import { clickByMouseMove, getValueOfAttribute } from '../../helper/helper';
 import {
     checkErrorHoverState,
     checkErrorTooltip,
@@ -9,14 +9,8 @@ import {
     checkMarkingCheckbox,
     checkTristateCheckboxMarking,
     checkTriStateTwoStateCheckboxMarking
-} from '../helper/assertion-helper';
-import {
-    a11yCheckboxAriaLabelledBy,
-    a11yCheckboxAriaLabel,
-    disabledCheckboxTitle,
-    checkboxErrorTooltip,
-    markingDisplayStyle
-} from '../fixtures/appData/checkbox-page-contents';
+} from '../../helper/assertion-helper';
+import checkboxData from '../fixtures/appData/checkbox-page-contents';
 import { browser } from 'protractor';
 
 describe('Checkbox test suite', () => {
@@ -178,7 +172,7 @@ describe('Checkbox test suite', () => {
         });
         it('should check checkbox markings are centered', async () => {
             const checkboxMarkDisplayStyle = await browser.executeScript(`return (window.getComputedStyle(document.querySelector(await '${checkboxPage.tristateCheckboxParis.locator().value}'), ":before").display)`);
-            await expect(checkboxMarkDisplayStyle).toContain(markingDisplayStyle);
+            await expect(checkboxMarkDisplayStyle).toContain(checkboxData.markingDisplayStyle);
         });
     });
 
@@ -194,7 +188,8 @@ describe('Checkbox test suite', () => {
             await clickByMouseMove(checkboxPage.errorExampleTitle);
             // needed for getting error tooltip in next line
             // todo: Anton, please take a look
-            await expect(checkErrorTooltip(await checkboxPage.presenceCheckbox, await checkboxPage.errorTooltip)).toEqual(checkboxErrorTooltip);
+            await expect(checkErrorTooltip(await checkboxPage.presenceCheckbox, await checkboxPage.errorTooltip))
+                .toEqual(checkboxData.checkboxErrorTooltip);
             await checkHoverState(errorCheckboxes[1]);
             await checkFocusState(errorCheckboxes[1]);
         });
@@ -227,12 +222,12 @@ describe('Checkbox test suite', () => {
             await checkMarkingCheckbox(a11yCheckboxWithAriaLabelledBy);
 
             await a11yCheckboxWithAriaLabel.forEach( async element => {
-                await expect(await getValueOfAttribute(await element, 'aria-label')).toEqual(a11yCheckboxAriaLabel);
+                await expect(await getValueOfAttribute(await element, 'aria-label')).toEqual(checkboxData.a11yCheckboxAriaLabel);
                 await expect(await getValueOfAttribute(await element, 'aria-disabled')).toBe('false');
             });
 
             await a11yCheckboxWithAriaLabelledBy.forEach( async element => {
-                await expect(await getValueOfAttribute(await element, 'aria-labelledby')).toEqual(a11yCheckboxAriaLabelledBy);
+                await expect(await getValueOfAttribute(await element, 'aria-labelledby')).toEqual(checkboxData.a11yCheckboxAriaLabelledBy);
                 await expect(await getValueOfAttribute(await element, 'aria-disabled')).toBe('false');
             });
         });
@@ -241,7 +236,7 @@ describe('Checkbox test suite', () => {
             await checkIfDisabled(checkboxPage.disabledAccessibilityCheckbox, 'ng-reflect-is-disabled', 'true');
             await expect(await getValueOfAttribute(checkboxPage.disabledAccessibilityCheckbox, 'aria-disabled')).toBe('true');
             await expect(await getValueOfAttribute(checkboxPage.disabledAccessibilityCheckboxLabel, 'title'))
-                .toEqual(disabledCheckboxTitle);
+                .toEqual(checkboxData.disabledCheckboxTitle);
         });
     });
 

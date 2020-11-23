@@ -10,7 +10,7 @@ export class TextareaPo extends BaseComponentPo {
     basicTextArea = $('#basicTextarea');
     basicTextAreaLabel = $('[for="basicTextarea"] > span');
     basicTextAreaPopoverIcon = $('[for="basicTextarea"] fd-popover-control span');
-    basicTextAreaPopoverBody = $('[for="basicTextarea"] fd-popover-body');
+    basicTextAreaPopoverBody = $('fd-popover-body');
 
     readOnlyTextArea = $('#readonlyDescription');
     readOnlyTextAreaLabel = $('[for="readonlyDescription"] > span');

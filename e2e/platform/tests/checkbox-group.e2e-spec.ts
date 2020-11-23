@@ -328,23 +328,25 @@ describe('Checkbox group test suite', () => {
         it('should check Checkbox group created from passed checkboxes and value is required', async () => {
             const checkboxes = await (await checkboxGroupPage.formValidationCheckboxesArr).slice(0, 3);
             const checkboxLabels = await (await checkboxGroupPage.formValidationCheckboxLabelArr).slice(0, 3);
+            const sectionTitlesArr = await checkboxGroupPage.sectiontitle;
 
             await clickByMouseMove(checkboxes[1]);
             await checkBorderColor(await checkboxes, checkboxGPData.errorBorderStyle);
 
-            await clickByMouseMove(await checkboxGroupPage.sectiontitle); // needed for getting the tooltip in next line
+            await clickByMouseMove(await sectionTitlesArr[2]);
             await expect(await checkErrorTooltip(await checkboxes[0],
                 await checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
-            await checkLabels(checkboxLabels, checkboxGPData.threeFruitsArr);
-            await checkFocusState(checkboxes[0]);
-            await checkHoverState(checkboxes[0]);
-            await checkMarkingCheckbox(await checkboxes);
+             await checkLabels(checkboxLabels, checkboxGPData.threeFruitsArr);
+             await checkFocusState(checkboxes[0]);
+             await checkHoverState(checkboxes[0]);
+             await checkMarkingCheckbox(await checkboxes);
         });
 
         it('should check Checkbox group created from list of values and value is required', async () => {
             const checkboxes = await (await checkboxGroupPage.formValidationCheckboxesArr).slice(3, 6);
             const checkboxLabels = await (await checkboxGroupPage.formValidationCheckboxLabelArr).slice(3, 6);
+            const sectionTitlesArr = await checkboxGroupPage.sectiontitle;
 
             // get checkbox error color and tooltip
             await clickByMouseMove(checkboxes[1]);
@@ -354,19 +356,20 @@ describe('Checkbox group test suite', () => {
                 await expect(await element.getCssValue('border-color')).toEqual(checkboxGPData.errorBorderStyle);
             });
             // needed for getting the tooltip in next line
-            await clickByMouseMove(await checkboxGroupPage.sectiontitle);
+            await clickByMouseMove(await sectionTitlesArr[1]);
             await expect(checkErrorTooltip(await checkboxes[0],
                 await checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
-            await checkLabels(checkboxLabels, checkboxGPData.threeFruitsArr);
-            await checkFocusState(checkboxes[0]);
-            await checkHoverState(checkboxes[0]);
-            await checkMarkingCheckbox(await checkboxes);
+           await checkLabels(checkboxLabels, checkboxGPData.threeFruitsArr);
+           await checkFocusState(checkboxes[1]);
+           await checkHoverState(checkboxes[0]);
+           await checkMarkingCheckbox(await checkboxes);
         });
 
         it('should check Checkbox group created from list of values and value is required', async () => {
             const checkboxes = await (await checkboxGroupPage.formValidationCheckboxesArr).slice(6, 10);
             const checkboxLabels = await (await checkboxGroupPage.formValidationCheckboxLabelArr).slice(6, 10);
+            const sectionTitlesArr = await checkboxGroupPage.sectiontitle;
 
             // get checkbox error color and tooltip
             await clickByMouseMove(checkboxes[0]);
@@ -376,7 +379,7 @@ describe('Checkbox group test suite', () => {
                 await expect(await element.getCssValue('border-color')).toEqual(checkboxGPData.errorBorderStyle);
             });
             // needed for getting the tooltip in next line
-            await clickByMouseMove(await checkboxGroupPage.sectiontitle);
+            await clickByMouseMove(await sectionTitlesArr[1]);
             await expect(checkErrorTooltip(await checkboxes[0],
                 await checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
