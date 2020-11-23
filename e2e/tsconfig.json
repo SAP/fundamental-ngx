@@ -1,10 +1,17 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "commonjs",
-    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "target": "es2016",
     "types": [
       "node",
       "@wdio/sync",
@@ -12,6 +19,10 @@
     ]
   },
   "includes": [
-    "wdio/**/*.ts"
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
+
 }
