@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.26...v0.24.1-rc.27) (2020-11-24)
+
+
+### Bug Fixes
+
+* (Core) Toolbar label and button additional styles ([#3921](https://github.com/SAP/fundamental-ngx/issues/3921)) ([1f3790a](https://github.com/SAP/fundamental-ngx/commit/1f3790aac3a70c1aba7434471166749c07bd62b6))
+
 ### [0.24.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.25...v0.24.1-rc.26) (2020-11-24)
 
 
