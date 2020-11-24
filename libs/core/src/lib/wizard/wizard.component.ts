@@ -138,20 +138,46 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * navigation and the wizard footer, and calculating the height based on their presence.
      */
     private _calculateContentHeight(): number {
-        let shellbarHeight = 0,
-            wizardNavHeight = 0,
-            wizardFooterHeight = 0;
-        if (document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS)) {
-            shellbarHeight = document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS).clientHeight;
-        }
-        const wizard = this._elRef.nativeElement.querySelector('.' + WIZARD_CLASS);
-        if (wizard.querySelector('.' + WIZARD_NAVIGATION_CLASS)) {
-            wizardNavHeight = wizard.querySelector('.' + WIZARD_NAVIGATION_CLASS).clientHeight;
-        }
-        if (wizard.querySelector('.' + BAR_FOOTER_CLASS)) {
-            wizardFooterHeight = wizard.querySelector('.' + BAR_FOOTER_CLASS).clientHeight;
-        }
+        let shellbarHeight, wizardNavHeight, wizardFooterHeight;
+        shellbarHeight = this._getShellbarHeight();
+        wizardNavHeight = this._getWizardNavHeight();
+        wizardFooterHeight = this._getWizardFooterHeight();
         return shellbarHeight + wizardNavHeight + wizardFooterHeight;
+    }
+
+    /** @hidden */
+    private _getShellbarHeight(): number {
+        let retVal;
+        if (document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS)) {
+            retVal = document.querySelector<HTMLElement>('.' + SHELLBAR_CLASS).clientHeight;
+        } else {
+            retVal = 0;
+        }
+        return retVal;
+    }
+
+    /** @hidden */
+    private _getWizardNavHeight(): number {
+        const wizard = this._elRef.nativeElement;
+        let retVal;
+        if (wizard.querySelector('.' + WIZARD_NAVIGATION_CLASS)) {
+            retVal = wizard.querySelector('.' + WIZARD_NAVIGATION_CLASS).clientHeight;
+        } else {
+            retVal = 0;
+        }
+        return retVal;
+    }
+
+    /** @hidden */
+    private _getWizardFooterHeight(): number {
+        const wizard = this._elRef.nativeElement;
+        let retVal;
+        if (wizard.querySelector('.' + BAR_FOOTER_CLASS)) {
+            retVal = wizard.querySelector('.' + BAR_FOOTER_CLASS).clientHeight;
+        } else {
+            retVal = 0;
+        }
+        return retVal;
     }
 
     /** @hidden */
@@ -214,7 +240,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             step._stepId = _stepId;
             _stepId++;
             step.finalStep = false;
-            if (step.completed) {
+            if (step.completed && this.appendToWizard) {
                 step.content.nextStep._getElRef().nativeElement.style.display = 'none';
             }
             if (
@@ -242,12 +268,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _scrollToCurrentStep(): void {
         if (this.appendToWizard) {
             _fromScrollToCurrentStep = true;
-            let child: HTMLElement;
             this.steps.forEach((step, index) => {
                 if (step.status === CURRENT_STEP_STATUS) {
-                    child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
+                    const child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
                     this.wrapperContainer.nativeElement.scrollTo({
-                        top: child.offsetTop - HEADER_HEIGHT,
+                        top: child.offsetTop - this._elRef.nativeElement.querySelector('.' + WIZARD_NAVIGATION_CLASS).clientHeight,
                         behavior: 'smooth'
                     });
                 }
@@ -346,12 +371,12 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    scrollSpyChange($event: string): void {
+    scrollSpyChange($event: HTMLElement): void {
         if (!_fromScrollToCurrentStep) {
             this.steps.forEach((step) => {
-                if (step._stepId.toString() === $event) {
+                if (step._stepId.toString() === $event.children[0].id) {
                     step.status = CURRENT_STEP_STATUS;
-                } else if (step._stepId < parseInt($event, 10)) {
+                } else if (step._stepId < parseInt($event.children[0].id, 10)) {
                     step.status = COMPLETED_STEP_STATUS;
                 } else {
                     step.status = UPCOMING_STEP_STATUS;

@@ -29,7 +29,6 @@ import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../wizard.component'
         '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardStepComponent implements OnChanges {

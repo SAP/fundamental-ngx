@@ -5,7 +5,7 @@
         #wrapperContainer
         fdScrollSpy
         [trackedTags]="['div']"
-        (spyChange)="scrollSpyChange($event.children[0].id)"
+        (spyChange)="scrollSpyChange($event)"
     >
         <div *ngFor="let contentTemplate of contentTemplates">
             <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
