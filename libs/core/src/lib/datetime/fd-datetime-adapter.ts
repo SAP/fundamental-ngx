@@ -64,14 +64,11 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
 
         // January 4 is always in week 1.
-        const dateInFirstWeek = this._creteDateInstanceByFdDate(new FdDate(fdDate.year, 1, 4));
+        const firstWeek = new Date(date.getFullYear(), 0, 4);
 
         // Adjust to Thursday in week 1 and count number of weeks from date to week1.
         return (
-            1 +
-            Math.round(
-                ((date.getTime() - dateInFirstWeek.getTime()) / 86400000 - 3 + ((dateInFirstWeek.getDay() + 6) % 7)) / 7
-            )
+            1 + Math.round(((date.getTime() - firstWeek.getTime()) / 86400000 - 3 + ((firstWeek.getDay() + 6) % 7)) / 7)
         );
     }
 
@@ -341,15 +338,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @param date FdDate instance
      * @returns date Native date instance
      */
-    private _creteDateInstanceByFdDate({ year, month, day: dayOfMonth, hour, minute, second }: FdDate): Date {
-        const date = new Date(2020);
-        date.setFullYear(year);
-        date.setMonth(month - 1);
-        date.setDate(dayOfMonth);
-        date.setHours(hour);
-        date.setMinutes(minute);
-        date.setSeconds(second);
-        date.setMilliseconds(0);
+    private _creteDateInstanceByFdDate({ year, month, day, hour, minute, second }: FdDate): Date {
+        const date = new Date();
+        date.setFullYear(year, month - 1, day);
+        date.setHours(hour, minute, second, 0);
         return date;
     }
 
@@ -357,7 +349,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * Create native Date instance in UTC
      * @param year The year
      * @param month The month as a number between 0 and 11
-     * @param date The date as a number between 1 and 31.
+     * @param day The date as a number between 1 and 31.
      * @param hours The hours as a number between 0 - 24
      * @param minutes The minutes as a number between 0 - 59
      * @param seconds The seconds as a number between 0 - 59
@@ -366,20 +358,15 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     private _creteUTCDateInstance(
         year: number,
         month: number,
-        date: number,
+        day: number,
         hours = 0,
         minutes = 0,
         seconds = 0,
         milliseconds = 0
     ): Date {
-        const utcDate = new Date(2020);
-        utcDate.setUTCFullYear(year);
-        utcDate.setUTCMonth(month);
-        utcDate.setUTCDate(date);
-        utcDate.setUTCHours(hours);
-        utcDate.setUTCMinutes(minutes);
-        utcDate.setUTCSeconds(seconds);
-        utcDate.setUTCMilliseconds(milliseconds);
+        const utcDate = new Date();
+        utcDate.setUTCFullYear(year, month, day);
+        utcDate.setUTCHours(hours, minutes, seconds, milliseconds);
         return utcDate;
     }
 
