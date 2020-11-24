@@ -1,5 +1,5 @@
 <section class="fd-dynamic-page" [attr.aria-label]="ariaLabel">
-    <header class="fd-dynamic-page__header-fixed" [class]="{'fd-dynamic-page__header--not-collapsible': !headerCollapsible}" #header>
+    <header class="fd-dynamic-page__header-fixed" [class.fd-dynamic-page__header--not-collapsible]="!headerCollapsible" #header>
         <div>
             <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
                 <ng-content select="fdp-dynamic-page-title"></ng-content>
