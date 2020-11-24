@@ -1,16 +1,31 @@
-import { Component, Inject, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Inject,
+    Input,
+    OnInit,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
-import { ApprovalNode, User } from '../public_api';
-import { DataProvider, ListDataSource } from '../../../domain';
+
 import { Observable, of } from 'rxjs';
+
+import { ApprovalDataSource, ApprovalNode, User } from '../public_api';
+import { DataProvider, ListDataSource } from '../../../domain';
 
 @Component({
     selector: 'fdp-approval-flow-user-details',
     templateUrl: './approval-flow-user-details.component.html',
-    styleUrls: ['./approval-flow-user-details.component.scss']
+    styleUrls: ['./approval-flow-user-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class ApprovalFlowUserDetailsComponent implements OnInit {
     @Input() node: ApprovalNode;
+
+    @Input() approvalFlowDataSource: ApprovalDataSource;
 
     @Output() onSendReminder = new EventEmitter<void>();
 
@@ -29,6 +44,10 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
         if (this._isMultipleMode) {
             this._dataSource = new ListDataSource<User>(new ListDataProvider(this.dialogRef.data.node?.approvers));
         }
+    }
+
+    onUserClick(): void {
+        console.log('open details');
     }
 
 }

@@ -1,0 +1,22 @@
+fd-avatar {
+    margin-right: 10px;
+}
+
+.approval-flow-user-details__user-info {
+    display: flex;
+    align-items: center;
+}
+
+.approval-flow-user-details__name {
+    font-size: 1rem;
+}
+
+.approval-flow-user-details__description {
+    color: #6a6d70;
+}
+
+::ng-deep {
+    a {
+        color: #0A6ED1;
+    }
+}

@@ -18,6 +18,8 @@ const NODE_STATUS_CLASS_MAP = {
 export class ApprovalFlowNodeComponent implements OnInit {
     @Input() node: ApprovalNode;
 
+    @Input() debug = false;
+
     @Input() renderArrow = false;
 
     @Input() renderCarouselStartMarker = false;

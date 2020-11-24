@@ -6,35 +6,47 @@
     <fd-dialog-body>
         <ng-container *ngIf="!_isMultipleMode">
             <ng-container *ngIf="dialogRef.data.node?.approvers?.length === 1 || dialogRef.data.watcher">
-                <fd-avatar [image]="dialogRef.data.node?.approvers[0].imgUrl || dialogRef.data.watcher.imgUrl"
-                           size="s"></fd-avatar>
-                <span>{{ dialogRef.data.node?.approvers[0].name || dialogRef.data.watcher.name }}</span>
+                <div class="approval-flow-user-details__user-info">
+                    <fd-avatar
+                        [image]="dialogRef.data.node?.approvers[0].imgUrl || dialogRef.data.watcher.imgUrl"
+                        size="s">
+                    </fd-avatar>
+                    <div>
+                        <div
+                            class="approval-flow-user-details__name">{{ dialogRef.data.node?.approvers[0].name || dialogRef.data.watcher.name }}</div>
+                        <div
+                            class="approval-flow-user-details__description">{{ dialogRef.data.node?.approvers[0].description || dialogRef.data.watcher.description }}</div>
+                    </div>
+                </div>
             </ng-container>
             <ng-container *ngIf="dialogRef.data.node?.approvers?.length > 1">
                 <fd-avatar [label]="dialogRef.data.node.description" size="s"></fd-avatar>
                 <span>{{ dialogRef.data.node.approvers.length }} members</span>
             </ng-container>
 
-            <p>Contact info</p>
+            <ng-container
+                *ngIf="dialogRef.data.userDetailsTemplate"
+                [ngTemplateOutlet]="dialogRef.data.userDetailsTemplate"
+                [ngTemplateOutletContext]="{ data: dialogRef.data.userData | async }">
+            </ng-container>
 
-            <div>Mobile <br> +001 123 4567 890</div>
-            <div>Phone <br> +001 123 4567 890</div>
-            <div>E-mail <br> sarah.smith@abccompany.com</div>
-
-            <p>Company</p>
-
-            <div>Name <br> Company A</div>
-            <div>Address <br> 481 West Street, Anytown OH, 83749, USA</div>
         </ng-container>
         <ng-container *ngIf="_isMultipleMode">
-            <fdp-list [selection]="true" [dataSource]="_dataSource" selectionMode="multi"
-                      [(ngModel)]="_selectedItems"
-                      (selectedItemChange)="_selectedItems = $event.selectedItems"
-                      [hasByLine]="true">
-                <fdp-standard-list-item *fdpItemDef="let user" [avatarSrc]="user.imgUrl"
-                                        [avatarTitle]="user.name"
-                                        [description]="user.description"
-                                        [title]="user.name">
+            <fdp-list
+                selectionMode="multi"
+                [selection]="true"
+                [hasByLine]="true"
+                [dataSource]="_dataSource"
+                [(ngModel)]="_selectedItems"
+                (selectedItemChange)="_selectedItems = $event.selectedItems">
+                <fdp-standard-list-item
+                    *fdpItemDef="let user"
+                    [avatarSrc]="user.imgUrl"
+                    [avatarTitle]="user.name"
+                    [description]="user.description"
+                    [title]="user.name"
+                    (click)="onUserClick()"
+                >
                 </fdp-standard-list-item>
             </fdp-list>
         </ng-container>

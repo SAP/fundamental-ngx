@@ -27,13 +27,14 @@
             >
                 <ng-container *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last">
                     <fdp-approval-flow-node
+                        [debug]="false"
                         [node]="node"
+                        [blank]="node.blank"
+                        [renderArrow]="columnIndex > 0"
                         [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!node.parent && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                         [renderCarouselStartMarker]="(_isCarousel && firstColumn && firstNode)"
                         [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
-                        [renderArrow]="columnIndex > 0"
-                        [blank]="node.blank"
                         (onNodeClick)="onNodeClick(node)"></fdp-approval-flow-node>
                 </ng-container>
             </div>

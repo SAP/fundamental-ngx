@@ -4,7 +4,7 @@ import {
     Component,
     ElementRef,
     Input,
-    OnInit,
+    OnInit, TemplateRef,
     ViewChild
 } from '@angular/core';
 
@@ -28,11 +28,13 @@ export class ApprovalFlowComponent implements OnInit {
     /** Data source for the Approval Flow component. */
     @Input() dataSource: ApprovalDataSource;
 
-    /** Data source used for selecting approvers, and getting user details. */
-    @Input() approverDataSource: UserDataSource;
-
-    /** Data source used for selecting watchers and getting user details. */
-    @Input() watcherDataSource: UserDataSource;
+    /** A reference to the user details template */
+    @Input() userDetailsTemplate: TemplateRef<any>;
+    // /** Data source used for selecting approvers, and getting user details. */
+    // @Input() approverDataSource: UserDataSource;
+    //
+    // /** Data source used for selecting watchers and getting user details. */
+    // @Input() watcherDataSource: UserDataSource;
 
     _approvalProcess: ApprovalProcess;
     _graph: ApprovalFlowGraph;
@@ -74,7 +76,9 @@ export class ApprovalFlowComponent implements OnInit {
         console.log('open dialog', node);
         const dialogRef = this._dialogService.open(ApprovalFlowUserDetailsComponent, {
             data: {
-                node: node
+                node: node,
+                userData: this.dataSource.fetchUser(node.approvers[0].id),
+                userDetailsTemplate: this.userDetailsTemplate
             },
             responsivePadding: true
         });
@@ -90,7 +94,9 @@ export class ApprovalFlowComponent implements OnInit {
         console.log('open dialog', watcher);
         this._dialogService.open(ApprovalFlowUserDetailsComponent, {
             data: {
-                watcher: watcher
+                watcher: watcher,
+                userData: this.dataSource.fetchUser(watcher.id),
+                userDetailsTemplate: this.userDetailsTemplate
             },
             responsivePadding: true
         });
