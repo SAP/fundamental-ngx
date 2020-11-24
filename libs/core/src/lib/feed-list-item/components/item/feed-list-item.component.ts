@@ -24,52 +24,62 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   /** User's custom classes */
   @Input()
   class: string;
+
   /**
    * Author of feed
    */
   @Input()
   authorTitle: string;
+
   /**
    * Link to Author of feed
    */
   @Input()
   authorLink: string;
+
   /**
    * Feed text
    */
   @Input()
   text: string;
+
   /**
    * Max preview rows of Feed text. If you have more than max rows text, you can toggle preview/full text with more/less button.
    */
   @Input()
   maxRows = 2;
+
   /**
    * Sets the `aria-label` attribute to the element.
   */
   @Input()
   ariaLabel = '';
+
   /**
    * aria-labelledby for element describing.
    */
   @Input()
   ariaLabelledby: string;
+
   /**
    * Text for more button
   */
   @Input()
-  moreLabel = 'More'
+  moreLabel = 'More';
+
   /**
    * Text for less button
   */
   @Input()
-  lessLabel = 'Less'
+  lessLabel = 'Less';
+
   /**
    * Apply rich feed text, please note - we use a formatted text component with this option, it has a list of controlled tags and attibutes.
    * This feature should be handled with care as it allows for countless custom layouts.
   */
   @Input()
   isRichText = false;
+
   /**
    * Apply mobile view
   */
@@ -80,6 +90,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
    * Shows toggle state of feed text - more or less
    */
   isCollapsed = true;
+
   /**
    * Shows have you more line than max lines
   */
@@ -95,6 +106,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   ngOnInit(): void {
     this.buildComponentCssClass();
   }
+
   /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
     if ('class' in changes || 'isRichText' in changes) {

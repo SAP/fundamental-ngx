@@ -24,24 +24,29 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
    */
   @Input()
   fdLineClampTargetText: string;
+
   /**
    * Event with target instance for clamping
    */
   @Output() update = new EventEmitter<LineClampTargetDirective>();
+
   /** @hidden */
   constructor(private readonly _elementRef: ElementRef) {}
+
   /**
    * Native element of clamping target
    */
   get targetElement(): HTMLElement {
     return this._elementRef.nativeElement;
   }
+
   /** @hidden */
   ngOnChanges(): void {
     if (typeof this.targetElement.style.webkitLineClamp === 'undefined') {
       this.update.emit(this);
     }
   }
+
   /** @hidden */
   ngAfterViewInit(): void {
     this.update.emit(this);
@@ -61,11 +66,13 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
   set fdLineClampLines(value: number) {
     this._lineCount = coerceNumberProperty(value);
   }
+
   /**
    * Clamping state
    */
   @Input()
   fdLineclampState = false;
+
   /**
    * Event return count of lines from the target
    */
@@ -93,6 +100,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
   get rootElement(): HTMLElement {
     return this._elementRef.nativeElement;
   }
+
   /** @hidden */
   ngAfterViewInit(): void {
     this._isNativeSupport = typeof this.rootElement.style.webkitLineClamp !== 'undefined';
@@ -108,12 +116,14 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
       });
     }
   }
+
   /** @hidden */
   ngOnDestroy(): void {
     if (this.windowResize$) {
       this.windowResize$.unsubscribe();
     }
   }
+
   /** @hidden */
   ngOnChanges(): void {
     this.reset();
