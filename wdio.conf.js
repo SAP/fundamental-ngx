@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*e2e-spec.ts'
+        './e2e/wdio/**/textarea.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -52,7 +52,7 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-        {
+/*        {
             browserName: 'internet explorer',
             browserVersion: 'latest',
             platformName: 'Windows 10',
@@ -62,7 +62,7 @@ exports.config = {
                 requireWindowFocus: true,
                 //tags: [ "process.env.TRAVIS_BUILD_ID"],
             }
-        },
+        },*/
         {
             browserName: 'MicrosoftEdge',
             browserVersion: 'latest',
@@ -83,17 +83,17 @@ exports.config = {
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-        {
+/*        {
             browserName: 'chrome',
             browserVersion: 'latest',
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
             "sauce:options": {
-                name: 'e2e-win-chrome',
+                //name: 'e2e-win-chrome',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },
-        {
+        },*/
+/*        {
             browserName: 'chrome',
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
@@ -122,7 +122,7 @@ exports.config = {
                 name: 'e2e-MAC-Edge',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },
+        },*/
 /*        {
             browserName: 'safari',
             platformName: 'macOS 10.14',
@@ -165,7 +165,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://anton.local:4200/fundamental-ngx#',
+    baseUrl: 'https://anton.local:4200',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -364,4 +364,4 @@ exports.config = {
     */
     //onReload: function(oldSessionId, newSessionId) {
     //}
-}
+};

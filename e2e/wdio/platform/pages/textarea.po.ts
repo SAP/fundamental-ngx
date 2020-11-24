@@ -1,5 +1,4 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForVisible } from '../../helper/helper';
 import { webDriver } from '../../driver/wdio';
 
 export class TextareaPo extends BaseComponentPo {

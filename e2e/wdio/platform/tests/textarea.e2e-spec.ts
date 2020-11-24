@@ -1,4 +1,3 @@
-import { browser, Key } from 'protractor';
 import { TextareaPo } from '../pages/textarea.po';
 import textAreaPageContent from '../fixtures/appData/textarea-page-content';
 import testData from '../fixtures/testData/textarea';
@@ -35,12 +34,11 @@ describe('Verify Textarea component', function() {
             expect(disabledTextareaLabel).toBe(textAreaPageContent.disabled_text_area_label);
             expect(compactTextareaLabel).toBe(textAreaPageContent.compact_text_area_label);
             expect(noPlatformsFormTextAreaLabel).toBe(textAreaPageContent.no_platforms_form_text_area_label);
-
         });
         // No example or no restriction
         /*        xit('should be able enter maximum characters (50)', async () => {
 
-                });*/
+         });*/
 
         it('should not be able enter text in the disabled textarea', () => {
             // Is not fully valid
@@ -49,18 +47,18 @@ describe('Verify Textarea component', function() {
 
         // No example
         /*        xit('should indicate entered invalid character with red border', async () => {
-                });*/
+        });*/
 
         it('should be able to copy paste the content into textarea', () => {
             webDriver.setValue(textareaPage.basicTextArea, testData.fifty_character_string);
             // await textareaPage.basicTextArea.sendKeys(testData.fifty_character_string);
             webDriver.waitTextToBePresentInValue(textareaPage.basicTextArea, testData.fifty_character_string);
-            webDriver.sendKeys([Key[copyPasteBtn], 'a']);
-            webDriver.sendKeys([Key[copyPasteBtn], 'c']);
-            webDriver.sendKeys(Key.DELETE);
+            webDriver.sendKeys([copyPasteBtn, 'a']);
+            webDriver.sendKeys([copyPasteBtn, 'c']);
+            webDriver.sendKeys('DELETE');
             webDriver.waitTextToBePresentInValue(textareaPage.basicTextArea);
             const textareaTextBefore = webDriver.getValue(textareaPage.basicTextArea);
-            webDriver.sendKeys([Key[copyPasteBtn], 'v']);
+            webDriver.sendKeys([copyPasteBtn, 'v']);
             const textareaText = webDriver.getValue(textareaPage.basicTextArea);
 
             expect(textareaTextBefore).toBe('');
@@ -89,11 +87,11 @@ describe('Verify Textarea component', function() {
         describe('if textarea is enabled', function() {
             it('should be able to perform cut', () => {
                 webDriver.setValue(textareaPage.basicTextArea, testData.fifty_character_string);
-                webDriver.sendKeys([Key[copyPasteBtn], 'a']);
-                webDriver.sendKeys([Key[copyPasteBtn], 'x']);
+                webDriver.sendKeys([copyPasteBtn, 'a']);
+                webDriver.sendKeys([copyPasteBtn, 'x']);
 
                 const textareaTextBefore = webDriver.getValue(textareaPage.basicTextArea);
-                webDriver.sendKeys([Key[copyPasteBtn], 'v']);
+                webDriver.sendKeys([copyPasteBtn, 'v']);
                 const textareaText = webDriver.getValue(textareaPage.basicTextArea);
 
                 expect(textareaTextBefore).toBe('');

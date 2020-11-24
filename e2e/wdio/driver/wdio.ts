@@ -1,5 +1,3 @@
-import { browser } from 'protractor';
-
 export class Wdio {
 
     get defaultWaitTime(): number {
@@ -89,7 +87,7 @@ export class Wdio {
 
     clearValue(selector: string, waitTime = this.defaultWaitTime): void {
         $(selector).waitForDisplayed({ timeout: waitTime });
-        $(selector).clearValue()
+        $(selector).clearValue();
     }
 
     getElementSize(selector: string, prop?: 'width' | 'height'): number | WebdriverIO.SizeReturn {
