@@ -25,16 +25,17 @@
     display: block;
 }
 
-.fd-multi-input-popover-custom {
-    display: block;
-    width: 100%;
+.fd-multi-input-popover-custom.fd-popover-custom {
+	max-width: 100%;
+	display: block;
+
     .fd-tokenizer {
         height: 100%;
     }
 }
 
 .fd-multi-input-menu-overflow {
-    max-width: 100%;
+    max-width: 37.5rem;
     overflow: auto;
 
     // TODO: Remove after adjusting in styles

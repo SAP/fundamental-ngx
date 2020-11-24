@@ -70,6 +70,9 @@ export class OptionComponent implements OnInit, OnDestroy {
     /** @hidden */
     selectionEvent = new EventEmitter<KeyboardEvent>()
 
+    /** @hidden Whether option contains more than basic text. */
+    _extendedTemplate = false;
+
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
@@ -133,6 +136,14 @@ export class OptionComponent implements OnInit, OnDestroy {
     /** Returns HTMLElement representation of the component. */
     getHtmlElement(): HTMLElement {
         return this._elementRef.nativeElement as HTMLElement;
+    }
+
+    /** Change extended template property */
+    setExtendedTemplate(extendedTemplate: boolean): void {
+        if (this._extendedTemplate !== extendedTemplate) {
+            this._extendedTemplate = extendedTemplate;
+            this._changeDetRef.detectChanges();
+        }
     }
 
     /** @hidden */

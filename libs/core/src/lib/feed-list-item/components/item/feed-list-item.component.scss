@@ -1,19 +1,10 @@
 $block: fd-feed-list;
 
 .#{$block} {
-    &__item {
-        display: flex;
-        width: 100%;
-    }
-
     &__item--collapsible {
         .lineclamp {
             display: block;
         }
-    }
-
-    &__body {
-        width: 100%;
     }
     &__name a {
         max-width: 75%;
@@ -36,10 +27,6 @@ $block: fd-feed-list;
             height: 100%;
             object-fit: contain;
         }
-    }
-    &__content {
-        width: 100%;
-        flex: 1 1 auto;
     }
 
     &__link--more {

@@ -14,7 +14,7 @@ import { BaseComponent } from '../base';
 import { ListConfig } from './list.config';
 import { ActionListItemComponent } from './action-list-item/action-list-item.component';
 
-const isActive = 'is-active';
+export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
 export type StatusType = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -172,7 +172,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * seprate PR for custom event
     */
     @Output()
-    itemSelected = new EventEmitter<KeyboardEvent | MouseEvent | TouchEvent>();
+    itemSelected = new EventEmitter<ModifyItemEvent>();
 
     /** Event sent when delete, details or any other action buttons are clicked */
     @Output()
@@ -214,11 +214,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** @hidden */
     _contentDensity: ContentDensity = this._listConfig.contentDensity;
-
-    /**@hidden
-   * list of values, it can be of type Item or String.
-   */
-    _item: any;
 
     /**
      * @hidden
@@ -276,10 +271,12 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * @hidden
      * On item click event will be emitted */
     @HostListener('click')
-    _onItemClick(event: KeyboardEvent | MouseEvent | TouchEvent): void {
+    _onItemClick(): void {
         if (this.selectRow && this.selectionMode === 'multi') {
             this._selected = !this._selected;
         }
+        const event = new ModifyItemEvent();
+        event.source = this;
         this.itemSelected.emit(event);
         this._changeDetectorRef.markForCheck();
 
@@ -298,7 +295,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             if (this.selectRow) {
                 this._selected = !this._selected;
             }
-            this.itemSelected.emit(event);
+            const $event = new ModifyItemEvent();
+            $event.source = this;
+            this.itemSelected.emit($event);
             this._changeDetectorRef.markForCheck();
         }
     }
@@ -314,7 +313,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             this.radioButtonComponent.valueChange(event);
         }
         this._changeDetectorRef.markForCheck();
-        this.itemSelected.emit(event);
+        const $event = new ModifyItemEvent();
+        $event.source = this;
+        this.itemSelected.emit($event);
     }
 
     /** @hidden */
@@ -322,7 +323,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     _onKeyDown(event: KeyboardEvent): void {
         if (this.anchor !== undefined &&
             (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
-            this.anchor.nativeElement.classList.add(isActive);
+            this.anchor.nativeElement.classList.add(IS_ACTIVE_CLASS);
         }
     }
 
@@ -331,7 +332,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     _onKeyUp(event: KeyboardEvent): void {
         if (this.anchor !== undefined &&
             (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
-            this.anchor.nativeElement.classList.remove(isActive);
+            this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
         }
     }
 
@@ -339,7 +340,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      *  @hidden
      *  Handles action button click
      */
-    _onActionButtonClick($event: KeyboardEvent | MouseEvent | TouchEvent, action: 'delete' | 'edit'): void {
+    _onActionButtonClick(action: 'delete' | 'edit'): void {
         const event = new ModifyItemEvent();
         event.source = this;
         event.action = action;
@@ -352,7 +353,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     */
     _onKeyButtonClick(event: KeyboardEvent, action: 'delete' | 'edit'): void {
         if ((KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
-            this._onActionButtonClick(event, action);
+            this._onActionButtonClick(action);
         }
     }
 
@@ -365,7 +366,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             this.radioButtonComponent.valueChange(event);
         }
         this._changeDetectorRef.markForCheck();
-        this.itemSelected.emit(event);
+        const $event = new ModifyItemEvent();
+        $event.source = this;
+        this.itemSelected.emit($event);
     }
 
 }

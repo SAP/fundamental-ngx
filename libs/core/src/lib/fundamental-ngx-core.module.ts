@@ -51,8 +51,6 @@ import { TimePickerModule } from './time-picker/time-picker.module';
 import { SegmentedButtonModule } from './segmented-button/public_api';
 import { SwitchModule } from './switch/switch.module';
 import { TokenModule } from './token/token.module';
-import { LocalizationEditorModule } from './localizator-editor/localization-editor.module';
-import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
 import { DragAndDropModule } from './utils/drag-and-drop/drag-and-drop.module';
 import { ProductSwitchModule } from './product-switch/product-switch.module';
@@ -75,6 +73,7 @@ import { ObjectMarkerModule } from './object-marker/object-marker.module';
 import { MessageToastModule } from './message-toast/message-toast.module';
 import { MessageToastService } from './message-toast/message-toast-service/message-toast.service';
 import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
+import { ThemesService } from './utils/services/themes.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -113,9 +112,7 @@ import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-co
         LayoutPanelModule,
         LinkModule,
         ListModule,
-        LocalizationEditorModule,
         MenuModule,
-        MegaMenuModule,
         DialogModule,
         MessageStripModule,
         MultiInputModule,
@@ -150,6 +147,6 @@ import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-co
         MessageToastModule,
         DynamicSideContentModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService]
+    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })
 export class FundamentalNgxCoreModule { }

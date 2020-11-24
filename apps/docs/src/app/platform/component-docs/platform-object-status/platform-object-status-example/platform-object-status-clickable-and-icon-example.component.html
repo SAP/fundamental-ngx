@@ -1,20 +1,44 @@
-<fdp-object-status status="negative" glyph="status-negative" clickable="true" (click)="showObjectStatus()"
-    >Negative</fdp-object-status
->
-<fdp-object-status status="critical" glyph="status-critical" clickable="true" (click)="showObjectStatus()"
-    >Critical</fdp-object-status
->
-<fdp-object-status status="positive" glyph="status-positive" clickable="true" (click)="showObjectStatus()"
-    >Positive</fdp-object-status
->
-<fdp-object-status status="informative" glyph="hint" clickable="true" (click)="showObjectStatus()"
-    >Informative</fdp-object-status
->
-<fdp-object-status glyph="to-be-reviewed" clickable="true" (click)="showObjectStatus()">Default</fdp-object-status>
+<fdp-object-status
+    status="negative"
+    glyph="status-negative"
+    clickable="true"
+    (click)="showObjectStatus()"
+    label="Negative"
+></fdp-object-status>
+<fdp-object-status
+    status="critical"
+    glyph="status-critical"
+    clickable="true"
+    (click)="showObjectStatus()"
+    label="Critical"
+></fdp-object-status>
+<fdp-object-status
+    status="positive"
+    glyph="status-positive"
+    clickable="true"
+    (click)="showObjectStatus()"
+    label="Positive"
+></fdp-object-status>
+<fdp-object-status
+    status="informative"
+    glyph="hint"
+    clickable="true"
+    (click)="showObjectStatus()"
+    label="Informative"
+></fdp-object-status>
+<fdp-object-status
+    glyph="to-be-reviewed"
+    clickable="true"
+    (click)="showObjectStatus()"
+    label="Default"
+></fdp-object-status>
 <br />
 <br />
 <ng-container *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]">
-    <fdp-object-status indicationColor="{{ item }}" clickable="true" (click)="showAlert(item)"
-        >Indication Color {{ item }}</fdp-object-status
-    >
+    <fdp-object-status
+        indicationColor="{{ item }}"
+        clickable="true"
+        (click)="showAlert(item)"
+        label="Indication Color {{ item }}"
+    ></fdp-object-status>
 </ng-container>

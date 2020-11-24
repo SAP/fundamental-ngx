@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'fdp-platform-info-label-example',
-  templateUrl: './platform-info-label-example.component.html'
+    selector: 'fdp-platform-info-label-example',
+    templateUrl: './platform-info-label-example.component.html'
 })
 export class PlatformInfoLabelExampleComponent {}
 
@@ -23,7 +23,6 @@ export class PlatformInfoLableTextIconExampleComponent {}
     templateUrl: './platform-info-label-numeric-example.component.html'
 })
 export class PlatformInfoLableNumericIconExampleComponent {}
-
 
 @Component({
     selector: 'fdp-platform-info-label-aria-label-example',

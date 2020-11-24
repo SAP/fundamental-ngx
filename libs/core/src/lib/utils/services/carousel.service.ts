@@ -102,6 +102,10 @@ export class CarouselService implements OnDestroy {
 
     setItems(items: QueryList<CarouselItemInterface>): void {
         this.items = items;
+        const carouselArray: CarouselItemInterface[] = this.items.toArray();
+        if (!this.active) {
+            this.active = carouselArray[0];
+        }
     }
 
     /** Change active element */
@@ -180,7 +184,7 @@ export class CarouselService implements OnDestroy {
             this._elementRef.nativeElement.style.transitionDuration = '0s';
         }
 
-        if (languageDirection === 'ltr') {
+        if (languageDirection === 'ltr' || (this.config.vertical && languageDirection === 'rtl')) {
             transitionPx = -transitionPx;
         }
         this._transitionCarousel(transitionPx);

@@ -25,7 +25,13 @@ export const DefaultPositions: ConnectedPosition[] = [
     { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' }
 ];
 
-export type PopoverFillMode = 'at-least' | 'equal';
+/**
+ * Preset options for the popover body width.
+ * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+ * * `equal` will apply a width to the body equivalent to the width of the control.
+ * * 'fit-content' will apply width needed to properly display items inside, independent of control.
+ */
+export type PopoverFillMode = 'at-least' | 'equal' | 'fit-content';
 
 const ARROW_SIZE  = '0.5rem';
 

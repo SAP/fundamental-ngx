@@ -203,18 +203,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListDocsModule)
             },
             {
-                path: 'localizationEditor',
-                loadChildren: () =>
-                    import('./component-docs/localization-editor/localization-editor-docs.module').then(
-                        (m) => m.LocalizationEditorDocsModule
-                    )
-            },
-            {
-                path: 'mega-menu',
-                loadChildren: () =>
-                    import('./component-docs/mega-menu/mega-menu-docs.module').then((m) => m.MegaMenuDocsModule)
-            },
-            {
                 path: 'menu',
                 loadChildren: () => import('./component-docs/menu/menu-docs.module').then((m) => m.MenuDocsModule)
             },
@@ -347,6 +335,13 @@ export const ROUTES: Routes = [
                 path: 'textarea',
                 loadChildren: () =>
                     import('./component-docs/textarea/textarea-docs.module').then((m) => m.TextareaDocsModule)
+            },
+            {
+                path: 'theme-switcher',
+                loadChildren: () =>
+                    import('./component-docs/theme-switcher/theme-switcher-docs.module').then(
+                        (m) => m.ThemeSwitcherDocsModule
+                    )
             },
             {
                 path: 'tile',

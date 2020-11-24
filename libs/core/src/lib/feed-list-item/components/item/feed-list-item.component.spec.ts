@@ -2,8 +2,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedListItemComponent } from './feed-list-item.component';
-import { LineClampDirective, LineClampTargetDirective } from '../../directives/line-clamp.directive';
-import { PipeModule } from '../../../utils/public_api';
+import { PipeModule, LineClampModule } from '../../../utils/public_api';
+import { LinkModule } from '../../../link/public_api';
 
 const componentClassPrefix = 'fd-feed-list__item';
 
@@ -22,8 +22,8 @@ describe('FeedListItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FeedListItemComponent, LineClampDirective, LineClampTargetDirective, FormattedTextTestComponent],
-      imports: [PipeModule]
+      declarations: [FeedListItemComponent, FormattedTextTestComponent],
+      imports: [PipeModule, LineClampModule, LinkModule]
     }).overrideComponent(FeedListItemComponent, {
       set: { changeDetection: ChangeDetectionStrategy.Default }
     }).compileComponents();
@@ -53,7 +53,7 @@ describe('FeedListItemComponent', () => {
     component.authorTitle = 'John Doe';
     component.authorLink = null;
     fixture.detectChanges();
-    expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a').getAttribute('href')).toBeNull();
+    expect(component.elementRef().nativeElement.querySelector('.fd-feed-list__name a')).toBeNull();
   });
 
   it('should render only formatted text', () => {

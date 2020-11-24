@@ -35,7 +35,7 @@
       <a target="_blank"
         fd-link
         [attr.title]="authorTitle"
-        [href]="authorLink | safe : 'url'"
+        [attr.href]="authorLink | safe : 'url'"
         [emphasized]="true"
       >
         <ng-container *ngTemplateOutlet="authorTitleTemplate"></ng-container>
