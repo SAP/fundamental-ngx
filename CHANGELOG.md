@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.25...v0.24.1-rc.26) (2020-11-24)
+
+
+### Bug Fixes
+
+* (Core) add delete button support in tokenizer ([#3907](https://github.com/SAP/fundamental-ngx/issues/3907)) ([4d8f299](https://github.com/SAP/fundamental-ngx/commit/4d8f299417d7b6e6469ed7ebc3c0d8280402fef9))
+
 ### [0.24.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.24...v0.24.1-rc.25) (2020-11-23)
 
 ### [0.24.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.23...v0.24.1-rc.24) (2020-11-23)
