@@ -37,7 +37,7 @@ export const inputGroupAddonChildProvider: Provider = {
  * ```
  * Button component:
  * ```
- * <fdp-input-group-addon><fdp-button>Action</fdp-button></fdp-input-group-addon>
+ * <fdp-input-group-addon><fdp-button label="Action"></fdp-button></fdp-input-group-addon>
  * ```
  *
  */

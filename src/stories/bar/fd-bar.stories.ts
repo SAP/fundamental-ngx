@@ -39,7 +39,7 @@ export const Bar = () => ({
     <div style="padding:20px;">
         <div fd-bar
             [barDesign]="barDesignVar"
-            [cosy]="cosy"
+            [cozy]="cozy"
             [inHomePage]="inHomePage"
             [inPage]="inPage"
             [size]="size">
@@ -82,7 +82,7 @@ export const Bar = () => ({
     </div>
   `,
     props: {
-        cosy: boolean('cosy', false),
+        cozy: boolean('cozy', false),
         showLeft: boolean('Show Left Section', true),
         showRight: boolean('Show Right Section', true),
         showMiddle: boolean('Show Middle Section', true),

@@ -9,7 +9,9 @@ import { DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
             [(ngModel)]="selectedDay"
             [state]="isValid() ? 'error' : 'success'"
         ></fd-datetime-picker>
-        <span style="padding-left: 20px;">Selected Date: {{ selectedDay?.toLocaleDateString() }}</span>
+        <br/>
+        <br/>
+        <span>Selected Date: {{ selectedDay?.toLocaleDateString() }}</span>
     `
 })
 export class DatetimePickerAllowNullExampleComponent {

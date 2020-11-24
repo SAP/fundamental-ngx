@@ -4,7 +4,7 @@
         [closeOnEscapeKey]="closeOnEscapeKey"
         [closeOnOutsideClick]="closeOnOutsideClick"
         [(isOpen)]="isOpen"
-        (isOpenChange)="openChanged($event)"
+        (isOpenChange)="isOpenChange.emit($event)"
         [disabled]="disabled"
         [triggers]="triggers"
         [focusTrapped]="false"

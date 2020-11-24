@@ -1,5 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { KeyUtil } from '../utils/public_api';
+import { KeyUtil } from '../utils/functions';
+import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -39,19 +40,19 @@ export class AutoCompleteDirective {
     @Output()
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
-    private readonly _completeKeys: string[] = [
-        'Enter'
+    private readonly _completeKeys: number[] = [
+        ENTER
     ];
 
-    private readonly _fillKeys: string[] = [
-        'ArrowLeft',
-        'ArrowRight'
+    private readonly _fillKeys: number[] = [
+        LEFT_ARROW,
+        RIGHT_ARROW
     ];
 
-    private readonly _stopKeys: string[] = [
-        'Backspace',
-        'Delete',
-        'Escape'
+    private readonly _stopKeys: number[] = [
+        BACKSPACE,
+        DELETE,
+        ESCAPE
     ];
 
     private oldValue: string;
@@ -65,11 +66,12 @@ export class AutoCompleteDirective {
     @HostListener('keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.enable) {
-            if (KeyUtil.isKey(event, this._stopKeys)) {
+            if (KeyUtil.isKeyCode(event, this._stopKeys)) {
                 this._elementRef.nativeElement.value = this.inputText;
-            } else if (KeyUtil.isKey(event, this._completeKeys)) {
+            } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
                 this._sendCompleteEvent(true);
-            } else if (KeyUtil.isKey(event, this._fillKeys)) {
+                this._moveIndicatorToLastCharacter();
+            } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
                 this._sendCompleteEvent(false);
             } else if (!this._isControlKey(event) && this.inputText) {
 
@@ -99,7 +101,7 @@ export class AutoCompleteDirective {
     }
 
     private _isControlKey(event: KeyboardEvent): boolean {
-        return KeyUtil.isKey(event, 'Ctrl') || event.ctrlKey;
+        return KeyUtil.isKeyCode(event, CONTROL) || event.ctrlKey;
     }
 
     private _defaultDisplay(value: any): string {
@@ -108,7 +110,7 @@ export class AutoCompleteDirective {
 
     private _triggerTypeAhead(): boolean {
         if (this.lastKeyUpEvent &&
-            KeyUtil.isKey(this.lastKeyUpEvent, 'Ctrl') &&
+            KeyUtil.isKeyCode(this.lastKeyUpEvent, CONTROL) &&
             this.inputText === this.oldValue) {
             return false;
         } else {
@@ -121,5 +123,10 @@ export class AutoCompleteDirective {
             term: this._elementRef.nativeElement.value,
             forceClose: forceClose
         });
+    }
+
+    /** @hidden */
+    private _moveIndicatorToLastCharacter(): void {
+        this._elementRef.nativeElement.setSelectionRange(this.inputText.length, this.inputText.length);
     }
 }

@@ -1,5 +1,13 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { ModifyItemEvent } from '@fundamental-ngx/platform';
 
+export interface Name {
+    title: string;
+}
+export interface Counter {
+    title: string;
+    counter: string;
+}
 @Component({
     selector: 'fdp-list-example',
     templateUrl: './platform-list-example.component.html'
@@ -31,7 +39,7 @@ export class PlatformListWithNoSeperatorExampleComponent { }
 })
 export class PlatformListWithFooterExampleComponent {
 
-    items: any[] = [
+    items: Name[] = [
         { 'title': 'Item1' },
         { 'title': 'Item2' },
         { 'title': 'Item3' }];
@@ -43,7 +51,7 @@ export class PlatformListWithFooterExampleComponent {
 })
 export class PlatformListWithItemCounterExampleComponent {
 
-    items: any[] = [
+    items: Counter[] = [
         { 'title': 'Item1', 'counter': '2134' },
         { 'title': 'Item2', 'counter': '34562' },
         { 'title': 'Item3', 'counter': '739' }];
@@ -54,7 +62,7 @@ export class PlatformListWithItemCounterExampleComponent {
     templateUrl: './platform-list-with-navigation-example.component.html'
 })
 export class PlatformListWithNavigationExampleComponent {
-    items: any[] = [
+    items: Name[] = [
         { 'title': 'Item1' },
         { 'title': 'Item2' },
         { 'title': 'Item3' }];
@@ -66,19 +74,12 @@ export class PlatformListWithNavigationExampleComponent {
 })
 export class PlatformListWithButtonsExampleComponent {
 
-    // Handle deletion of item via  mouseclick
-    @HostListener('click', ['$event'])
-    _accept(event: any): void {
-        if (event.target.tagName.toLowerCase() === 'button') {
-            const message = event.target.classList.contains('sap-icon--edit') ? 'Requested for Edit' : 'Accepted';
-            alert(message);
-        }
-    }
-    // Handle deletion of item via keyboard 'Enter' or mouseclick
-    @HostListener('keyup', ['$event'])
-    _onKeydown(event: any): void {
-        if (event && event.key === 'Enter') {
-            this._accept(event);
+    _modifyRow(event: ModifyItemEvent): void {
+        const id = event.source.id;
+        if (event.action === 'edit') {
+            alert('Edit row --- ' + id);
+        } else if (event.action === 'delete') {
+            alert('Delete row ' + id);
         }
     }
 }

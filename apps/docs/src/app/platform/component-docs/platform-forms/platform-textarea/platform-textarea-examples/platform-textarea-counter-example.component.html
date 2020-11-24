@@ -3,44 +3,38 @@
         <fdp-form-group #fg2 [multiLayout]="true" [formGroup]="form">
             <fdp-form-field
                 #ff2
-                [id]="'detailedDescription'"
+                id="detailedDescription"
                 label="Detailed description"
-                [placeholder]="'Start entering detailed description'"
-                hint="This is tooltip help"
+                placeholder="Start entering detailed description"
                 zone="zLeft"
                 rank="10"
-                hintPlacement="'left'"
                 [required]="true"
                 [validators]="textareaValidator"
             >
                 <fdp-textarea
                     [formControl]="ff2.formControl"
-                    [name]="'detailedDescription'"
+                    name="detailedDescription"
                     [maxLength]="10"
-                    [stateType]="'error'"
+                    stateType="error"
                     [showExceededText]="true"
-                    value="Lorem ipsum, dolor sit amet"
+                    [value]="value"
                 >
                 </fdp-textarea>
             </fdp-form-field>
 
             <fdp-form-field
                 #ff3
-                [id]="'noCounterMessageInteraction'"
+                id="noCounterMessageInteraction"
                 label="When showExceededText is false and value is set"
-                [placeholder]="
-                    'Start entering. Counter message will not be shown, but if an initial value is set whose length > maxLength, excess text is removed on Backpress'
-                "
-                hint="This is tooltip help"
+                placeholder="Start entering. Counter message will not be shown, but if an initial value is set whose length > maxLength, excess text is removed on Backpress"
                 zone="zLeft"
                 rank="10"
-                hintPlacement="'left'"
                 [required]="true"
                 [validators]="textareaNoCounterMessageValidator"
             >
                 <fdp-textarea
                     [formControl]="ff3.formControl"
-                    [name]="'noCounterMessageInteraction'"
+                    name="noCounterMessageInteraction"
                     [maxLength]="10"
                     [showExceededText]="false"
                     value="Some value that crosses max length"
@@ -48,14 +42,12 @@
                 </fdp-textarea>
             </fdp-form-field>
 
-            <fdp-form-field [id]="'submit-button'" rank="20" zone="zLeft">
-                <fdp-button [type]="'submit'" (click)="onSubmit()">Submit</fdp-button>
+            <fdp-form-field id="submit-button" rank="20" zone="zLeft">
+                <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>
             </fdp-form-field>
 
             <ng-template #i18n let-errros>
-                <span *ngIf="errros.required">
-                    Value is required
-                </span>
+                <span *ngIf="errros.required"> Value is required </span>
                 <span role="alert" aria-atomic="true" *ngIf="errros.maxlength">
                     Please get your character count under limit.
                 </span>

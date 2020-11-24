@@ -23,8 +23,7 @@ import { PopoverContainer } from './popover-container';
 import Popper, { Placement, PopperOptions } from 'popper.js';
 import { startWith } from 'rxjs/operators';
 import { RtlService } from '../../utils/services/rtl.service';
-
-export type PopoverFillMode = 'at-least' | 'equal';
+import { PopoverFillMode } from '../popover-position/popover-position';
 
 /**
  * Directive which manages the popper and popover components of the library.

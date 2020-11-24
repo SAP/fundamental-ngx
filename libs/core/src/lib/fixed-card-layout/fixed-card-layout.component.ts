@@ -1,4 +1,3 @@
-import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
     AfterContentInit,
     AfterViewChecked,
@@ -20,12 +19,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subject, Subscription } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RtlService } from '../utils/services/rtl.service';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
+const DRAG_START_DELAY = 200;
 
 @Directive({ selector: '[fdCardDef]' })
 export class CardDefinitionDirective {
@@ -61,6 +62,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** Drag drop behavior can be disabled */
     @Input()
     disableDragDrop: boolean;
+
+    /** Drag start delay in milliseconds */
+    @Input()
+    dragStartDelay = DRAG_START_DELAY;
 
     /** Event to emit, when layout changes */
     @Output()

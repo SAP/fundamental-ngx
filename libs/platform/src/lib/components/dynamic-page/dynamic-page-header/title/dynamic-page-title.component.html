@@ -1,0 +1,16 @@
+<div class="fd-dynamic-page__main-container">
+    <div class="fd-dynamic-page__breadcrumb-title-container" #breadcrumbTitleContainer>
+        <nav aria-label="Breadcrumbs"><ng-content select="fd-breadcrumb"></ng-content></nav>
+        <div class="fd-dynamic-page__title-container">
+            <div class="fd-dynamic-page__title" #titleRef>{{ title }}</div>
+            <ng-content select="fdp-dynamic-page-key-info"></ng-content>
+        </div>
+    </div>
+    <div class="fd-dynamic-page__actions-container" #actionsContainer>
+        <div class="fd-dynamic-page__toolbar-container">
+            <ng-content select="fdp-dynamic-page-global-actions"></ng-content>
+            <ng-content select="fdp-dynamic-page-layout-actions"></ng-content>
+        </div>
+    </div>
+</div>
+<div class="fd-dynamic-page__subtitle" *ngIf="subtitle">{{ subtitle }}</div>

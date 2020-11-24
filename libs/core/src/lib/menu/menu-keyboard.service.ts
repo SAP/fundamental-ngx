@@ -2,7 +2,8 @@ import { Subject } from 'rxjs';
 import { Injectable, Output } from '@angular/core';
 import { DefaultMenuItem } from './default-menu-item.class';
 import { ListItemComponent } from '../list/list-item/list-item.component';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
+import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Injectable()
 export class MenuKeyboardService {
@@ -31,7 +32,7 @@ export class MenuKeyboardService {
             return;
         }
 
-        if (KeyUtil.isKey(event, 'ArrowDown')) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             if (menuItems.length > index + 1) {
                 menuItems[index + 1].focus();
             } else {
@@ -42,7 +43,7 @@ export class MenuKeyboardService {
                 }
             }
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             if (index > 0) {
                 menuItems[index - 1].focus();
             } else {
@@ -53,7 +54,7 @@ export class MenuKeyboardService {
                 }
             }
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+        } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             if (menuItems[index]) {
                 menuItems[index].click();
                 event.preventDefault();

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild, ContentChildren, forwardRef, QueryList } from '@angular/core';
-import { RtlService, TokenizerInputDirective } from '@fundamental-ngx/core';
+import { Component, ViewChild, ContentChildren, QueryList } from '@angular/core';
+import { RtlService } from '../utils/services/rtl.service';
+import { TokenizerInputDirective } from './token-input.directive';
 
 import { whenStable } from '../utils/tests/when-stable';
 import { FormControlComponent } from '../form/form-control/form-control.component';

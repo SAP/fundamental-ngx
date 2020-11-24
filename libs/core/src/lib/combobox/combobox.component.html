@@ -2,14 +2,15 @@
 
 <ng-template #desktopTemplate>
     <fd-popover
+        additionalBodyClass="fd-popover-custom-list"
         [isOpen]="open && displayedValues && displayedValues.length"
         (isOpenChange)="isOpenChangeHandle($event)"
-        [fillControlMode]="'at-least'"
+        [fillControlMode]="fillControlMode"
+        [focusTrapped]="true"
         [triggers]="triggers"
+        [maxWidth]="600"
         [disabled]="disabled || readOnly"
-        [closeOnOutsideClick]="closeOnOutsideClick"
-        class="fd-combobox-popover-custom"
-    >
+        [closeOnOutsideClick]="closeOnOutsideClick">
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
         </fd-popover-control>
@@ -22,6 +23,7 @@
 
 <ng-template let-term="term" #itemSource>
     <span
+        fd-list-title
         *ngIf="!itemTemplate"
         [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText:highlighting && filterHighlight"
     >
@@ -79,6 +81,7 @@
         fd-list
         class="fd-combobox-custom-list fd-combobox-input-menu-overflow"
         [dropdownMode]="true"
+        [compact]="compact"
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"
         (focusEscapeList)="handleListFocusEscape($event)"

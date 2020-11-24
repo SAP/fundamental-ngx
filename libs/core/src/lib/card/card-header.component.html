@@ -20,7 +20,10 @@
     </div>
 
     <!-- Subtitle -->
-    <div class="fd-card__subtitle-area">
+    <div
+        class="fd-card__subtitle-area"
+        *ngIf="_subtitle"
+    >
         <ng-content select="[fd-card-subtitle]"></ng-content>
     </div>
 

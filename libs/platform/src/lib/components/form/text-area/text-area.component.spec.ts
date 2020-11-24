@@ -250,7 +250,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.ngAfterViewInit();
         textareaComponent.handleBackPress(new KeyboardEvent('keyup', { key: '\n' }));
 
-        expect(textareaComponent.textareaElement.nativeElement.style.height).toBe('60px');
+        expect(textareaComponent.textareaElement.nativeElement.style.height).toBe('57px');
     });
 
     it('should handle grow indefinitely if max height is not specified', async () => {

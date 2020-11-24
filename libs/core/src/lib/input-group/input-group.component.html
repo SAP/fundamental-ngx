@@ -24,16 +24,17 @@
             <button
                 fd-button
                 class="fd-input-group__button"
+                type="button"
+                fdType="transparent"
                 [compact]="compact"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
-                fdType="transparent"
                 [glyph]="glyph"
                 [class.fd-shellbar__button]="inShellbar"
                 [class.is-expanded]="isExpanded"
-                (click)="buttonClicked($event)"
-                type="button"
                 [attr.aria-expanded]="isExpanded"
                 [attr.aria-controls]="input"
+                (mousedown)="preventFocus($event)"
+                (click)="buttonClicked($event)"
             >
                 <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
             </button>

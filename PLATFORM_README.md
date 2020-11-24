@@ -177,9 +177,9 @@ For an existing Angular CLI application,
     ```html
     <fdp-button
         i18n="emphasized button|An example for button with emphasized property@@buttonEmphasizedBtn"
-        [buttonType]="'emphasized'"
-        >Emphasized Button</fdp-button
-    >
+        buttonType="emphasized"
+        label="Emphasized Button"
+    ></fdp-button>
     ```
 
     It is recommended to give ID to the marker like `@@buttonEmphasizedBtn` in the format `@@<Module>.<Component>.<UniqueId>` for easier tracking in the extracted `messages.xlf` file. A meaningful description such as `An example for button with emphasized property` and a context like `emphasized button` for easier understanding for translators can also be given.

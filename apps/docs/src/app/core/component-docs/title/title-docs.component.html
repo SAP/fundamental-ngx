@@ -1,0 +1,35 @@
+<h2>Semantic Level</h2>
+<description>
+    There are 6 semantic levels of a heading element. There should only be one H1 on a page, and headings should only
+    appear in ascending order without skipping a level; i.e. even if there are only 3 levels on a page, the order must
+    be H1-H2-H3, and no other levels used.
+</description>
+<component-example>
+    <fd-title-semantic-example></fd-title-semantic-example>
+</component-example>
+<code-example [exampleFiles]="titleSemanticExample"></code-example>
+
+<h2>Visual</h2>
+<description>
+    If a design requires it, the visual level can be set to something different than the semantic level. This allows the
+    sequential order to be maintained while providing flexibility in appearance. In order to do this, use the optional
+    <code>[headerSize]</code> input.
+</description>
+<component-example>
+    <fd-title-visual-example></fd-title-visual-example>
+</component-example>
+<code-example [exampleFiles]="titleVisualExample"></code-example>
+
+<h2>Elision</h2>
+<description> By default the Title text overflow will be elided when longer than its container. </description>
+<component-example>
+    <fd-title-elision-example></fd-title-elision-example>
+</component-example>
+<code-example [exampleFiles]="titleElisionExample"></code-example>
+
+<h2>Wrapping</h2>
+<description> Add the <code>[wrap]</code> input to cause the overflow text to wrap instead. </description>
+<component-example>
+    <fd-title-wrapping-example></fd-title-wrapping-example>
+</component-example>
+<code-example [exampleFiles]="titleWrappingExample"></code-example>

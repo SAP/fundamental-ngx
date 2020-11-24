@@ -2,7 +2,7 @@
 <fd-docs-toolbar (btnClicked)="handleMenuCollapseClick()"></fd-docs-toolbar>
 <div class="fd-flex-row fd-sidebar-container">
     <sections-toolbar [sections]="sections" [sideCollapsed]="sideCollapsed"></sections-toolbar>
-    <div tabindex="0" class="content" #content id="page-content">
+    <div tabindex="0" class="content" #content id="page-content" cdk-scrollable>
         <div class="content-margin">
             <router-outlet (activate)="onActivate()"></router-outlet>
         </div>

@@ -53,10 +53,13 @@ export class TableToolbarExampleComponent implements OnInit {
     }
 
     searchInputChanged(event: string): void {
+        const filterRows = (row): boolean => {
+            const keys = Object.keys(row);
+            return !!keys.find(key => row[key].toLowerCase().includes(event.toLowerCase()))
+        }
+
         if (event) {
-            this.displayedRows = this.tableRows.filter(row => {
-                return JSON.stringify(row).toLowerCase().indexOf(event.toLowerCase()) !== -1;
-            });
+            this.displayedRows = this.tableRows.filter(row => filterRows(row));
         } else {
             this.displayedRows = this.tableRows;
         }

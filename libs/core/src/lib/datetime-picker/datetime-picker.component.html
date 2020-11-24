@@ -2,13 +2,14 @@
     <fd-popover
         [(isOpen)]="isOpen"
         [focusTrapped]="true"
+        [focusAutoCapture]="true"
         [triggers]="[]"
         [disabled]="disabled"
         [placement]="placement"
         [appendTo]="appendTo"
     >
         <fd-popover-control>
-            <fd-input-group [compact]="compact" [state]="state">
+            <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled">
                 <input
                     type="text"
                     class="fd-input"
@@ -72,7 +73,7 @@
                 ></fd-time>
             </div>
             <div fd-popover-body-footer *ngIf="showFooter">
-                <div fd-bar barDesign="footer" [cosy]="!compact">
+                <div fd-bar barDesign="footer" [cozy]="!compact">
                     <div fd-bar-right>
                         <fd-bar-element>
                             <button fd-button fdType="emphasized" label="Submit" [compact]="compact" (click)="submit()"></button>

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-uploader-drag-disabled-example',
     templateUrl: './file-uploader-drag-disabled-example.component.html',
-    styleUrls: ['./file-uploader-drag-disabled-example.component.scss']
+    styleUrls: ['./file-uploader-drag-disabled-example.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploaderDragDisabledExampleComponent {
 

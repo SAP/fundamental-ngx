@@ -2,14 +2,16 @@
 
 <ng-template #selectDesktopTemplate>
     <fd-popover
-        style="display: block"
+        additionalBodyClass="fd-popover-custom-list"
         [isOpen]="isOpen"
         [triggers]="[]"
+        [focusTrapped]="true"
         [disabled]="disabled"
         [appendTo]="appendTo"
         [options]="popperOptions"
         [closeOnEscapeKey]="false"
-        [fillControlMode]="fillControlMode"
+        [fillControlMode]="'at-least'"
+        [maxWidth]="600"
         [closeOnOutsideClick]="closeOnOutsideClick"
         (isOpenChange)="popoverOpenChangeHandle($event)">
 
@@ -50,17 +52,16 @@
              [attr.aria-label]="ariaLabel"
              [attr.aria-labelledby]="ariaLabelledBy"
              [attr.aria-activedescendant]="selected?.id || null">
+            <ng-container
+                [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
+                [ngTemplateOutletContext]="{$implicit: selectViewValue, selected: selected}">
+            </ng-container>
 
-            <div class="fd-select__content">
-                <ng-container
-                    [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                    [ngTemplateOutletContext]="{$implicit: selectViewValue, selected: selected}">
-                </ng-container>
-
-                <ng-template #defaultSelectContent>
+            <ng-template #defaultSelectContent>
+                <span class="fd-select__text-content">
                     {{ selectViewValue }}
-                </ng-template>
-            </div>
+                </span>
+            </ng-template>
 
             <button fd-button
                     tabindex="-1"
@@ -76,8 +77,10 @@
 <ng-template #selectOptionsListTemplate>
     <ul fd-list
         role="listbox"
+        tabindex="-1"
         [compact]="compact"
         [dropdownMode]="true"
+        [keyboardSupport]="false"
         [hasMessage]="!!stateMessage"
         [attr.id]="controlId + '-list-box'"
         [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">

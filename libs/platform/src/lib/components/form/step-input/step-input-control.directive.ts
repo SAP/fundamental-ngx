@@ -3,6 +3,7 @@ import { Directive, HostListener, SkipSelf } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/core';
 
 import { StepInputComponent } from './base.step-input';
+import { DOWN_ARROW, PAGE_DOWN, PAGE_UP, UP_ARROW } from '@angular/cdk/keycodes';
 
 /**
  * This directive is intendant to be a bridge between input control and BaseStepInput Component.
@@ -66,19 +67,19 @@ export class StepInputControlDirective {
         if (!this.stepInput.canChangeValue) {
             return;
         }
-        if (KeyUtil.isKey(event, 'ArrowUp')) {
+        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             this.stepInput.increase();
             this._muteEvent(event);
         }
-        if (KeyUtil.isKey(event, 'ArrowDown')) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             this.stepInput.decrease();
             this._muteEvent(event);
         }
-        if (KeyUtil.isKey(event, 'PageUp')) {
+        if (KeyUtil.isKeyCode(event, PAGE_UP)) {
             this.stepInput.largeStepIncrease();
             this._muteEvent(event);
         }
-        if (KeyUtil.isKey(event, 'PageDown')) {
+        if (KeyUtil.isKeyCode(event, PAGE_DOWN)) {
             this.stepInput.largeStepDecrease();
             this._muteEvent(event);
         }

@@ -20,6 +20,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/button', name: 'Button' },
             { url: 'platform/checkbox', name: 'Checkbox' },
             { url: 'platform/checkbox-group', name: 'Checkbox Group' },
+            { url: 'platform/datetime-picker', name: 'Datetime Picker' },
             { url: 'platform/info-label', name: 'Info Label' },
             { url: 'platform/input', name: 'Input' },
             { url: 'platform/input-group', name: 'Input Group' },
@@ -29,9 +30,11 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/panel', name: 'Panel' },
             { url: 'platform/object-marker', name: 'Object Marker' },
             { url: 'platform/object-status', name: 'Object Status' },
+            { url: 'platform/object-attribute', name: 'Object Attribute' },
             { url: 'platform/radio-group', name: 'Radio Button Group' },
             { url: 'platform/search-field', name: 'Search Field' },
             { url: 'platform/split-menu-button', name: 'Split Menu Button' },
+            { url: 'platform/table', name: 'Table' },
             { url: 'platform/textarea', name: 'Textarea' },
             { url: 'platform/thumbnail', name: 'Thumbnail' },
             { url: 'platform/switch', name: 'Switch' },
@@ -41,12 +44,15 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                 name: 'List And Items',
                 subItems: [
                     { url: 'platform/list', name: 'List' },
-                    { url: 'platform/standard-list-item', name: 'Standard List Item' }
+                    { url: 'platform/standard-list-item', name: 'Standard List Item' },
+                    { url: 'platform/action-list-item', name: 'Action List Item' },
+                    { url: 'platform/display-list-item', name: 'Display List Item' },
+                    { url: 'platform/object-list-item', name: 'Object List Item' }
                 ]
             }
         ];
 
-        this.layouts = [];
+        this.layouts = [{ url: 'platform/dynamic-page', name: 'Dynamic Page' }];
 
         this.utilities = [];
 
@@ -60,7 +66,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                 content: this.components
             },
             {
-                header: 'layouts',
+                header: 'Layouts',
                 content: this.layouts
             },
             {

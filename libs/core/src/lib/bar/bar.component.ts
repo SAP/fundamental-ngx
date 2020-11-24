@@ -15,7 +15,7 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
 /**
  * The Bar component is a container that holds titles, buttons and input controls.
  * Its content is distributed in three areas - left, middle and right.
- * The Bar has 2 modes - Desktop (default) and Tablet/Mobile (cosy).
+ * The Bar has 2 modes - Desktop (default) and Tablet/Mobile (cozy).
  */
 @Component({
     // tslint:disable-next-line:component-selector
@@ -50,9 +50,9 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     size: SizeType = '';
 
-    /** Whether to apply cosy mode to the Bar. */
+    /** Whether to apply cozy mode to the Bar. */
     @Input()
-    cosy: boolean;
+    cozy: boolean;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
@@ -75,7 +75,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
     buildComponentCssClass(): string[] {
         return [
             'fd-bar',
-            this.cosy ? 'fd-bar--cozy' : '',
+            this.cozy ? 'fd-bar--cozy' : '',
             this.barDesign ? `fd-bar--${this.barDesign}` : '',
             this.inPage && !this.size ? 'fd-bar--page' : '',
             this.inPage && this.size ? `fd-bar--page-${this.size}` : '',

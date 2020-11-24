@@ -15,7 +15,7 @@ jobs:
   - stage: "Lint and Test"
     if: type = pull_request
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
-    script: npm run lint && npm run test && npm run test:coveralls && npm run build-pack-library
+    script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
   - stage: "Pre-release"
     if: branch = master AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'

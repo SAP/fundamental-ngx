@@ -19,16 +19,18 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
-import { PopoverFillMode } from '../popover/popover-directive/popover.directive';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { FormStates } from '../form/form-control/form-states';
-import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection, KeyUtil } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection } from '../utils/public_api';
+import { KeyUtil } from '../utils/functions';
+import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 import { ListComponent } from '../list/list.component';
+import { BACKSPACE, DELETE, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -93,7 +95,7 @@ export class MultiInputComponent implements
 
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
-    searchTerm: string;
+    searchTerm = '';
 
     /** Whether the search term should be highlighted in results. */
     @Input()
@@ -131,10 +133,10 @@ export class MultiInputComponent implements
     multiInputBodyLabel = 'Multi input body';
 
     /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
      * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
@@ -208,7 +210,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     @ViewChild(TokenizerComponent)
-    tokenizer;
+    tokenizer: TokenizerComponent;
 
     /** @hidden */
     displayedValues: any[] = [];
@@ -321,11 +323,16 @@ export class MultiInputComponent implements
         if (this.disabled) {
             return ;
         }
+
+        if (!open && this.open && !this.mobile) {
+            this.searchInputElement.nativeElement.focus();
+        }
+
         if (this.open !== open) {
             this.openChange.emit(open);
         }
-
         this.open = open;
+
         if (!this.mobile) {
             this._popoverOpenHandle(open);
         }
@@ -355,7 +362,7 @@ export class MultiInputComponent implements
 
         // Handle popover placement update
         if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
-            this.popoverRef.updatePopover();
+            this.popoverRef.refreshPosition();
         }
 
         // On Mobile mode changes are propagated only on approve.
@@ -363,23 +370,8 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    removeSelectedTokens(event: KeyboardEvent): void {
-        let allSelected = true;
-        if (KeyUtil.isKey(event, ['Delete', 'Backspace']) && !this.searchTerm) {
-            this.tokenizer.tokenList.forEach(token => {
-                if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
-                    this.handleSelect(false, token.elementRef.nativeElement.innerText);
-                } else {
-                    allSelected = false;
-                }
-            });
-            this.tokenizer.input.elementRef().nativeElement.focus();
-        }
-    }
-
-    /** @hidden */
     handleInputKeydown(event: KeyboardEvent): void {
-        if (KeyUtil.isKey(event, 'ArrowDown') && !this.mobile) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
                 this.openChangeHandle(true);
             }
@@ -389,7 +381,7 @@ export class MultiInputComponent implements
             }
         }
 
-        if (KeyUtil.isKey(event, 'Tab') && this.open) {
+        if (KeyUtil.isKeyCode(event, TAB) && this.open) {
             if (this.listComponent) {
                 this.listComponent.setItemActive(0);
                 event.preventDefault();
@@ -398,21 +390,20 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSearchTermChange(): void {
-        if (!this.open) {
-            this.openChangeHandle(true);
+    handleSearchTermChange(searchTerm: string): void {
+        if (this.searchTerm !== searchTerm) {
+            this._applySearchTermChange(searchTerm);
+            if (!this.open) {
+                this.openChangeHandle(true);
+            }
         }
-        this.searchTermChange.emit(this.searchTerm);
-        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
     showAllClicked(event: MouseEvent): void {
         event.preventDefault();
         event.stopPropagation();
-        this.searchTerm = '';
-        this.handleSearchTermChange();
+        this._applySearchTermChange('');
     }
 
     /** @hidden */
@@ -421,8 +412,7 @@ export class MultiInputComponent implements
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
             this.handleSelect(true, newToken);
-            this.searchTerm = '';
-            this.handleSearchTermChange();
+            this._applySearchTermChange('');
             this.open = false;
         }
     }
@@ -460,13 +450,18 @@ export class MultiInputComponent implements
 
     /** @hidden */
     addOnButtonClicked(): void {
-        if (!this.open) {
-            this.handleSearchTermChange();
-        } else {
-            this.openChangeHandle(false);
-        }
+        this.openChangeHandle(!this.open);
     }
 
+    /** @hidden */
+    private _applySearchTermChange(searchTerm: string): void {
+        this.searchTerm = searchTerm;
+        this.searchTermChange.emit(this.searchTerm);
+        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+        this._changeDetRef.detectChanges();
+    }
+
+    /** @hidden */
     private defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {

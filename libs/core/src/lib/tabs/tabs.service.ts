@@ -1,7 +1,8 @@
 import { Injectable, Optional } from '@angular/core';
 import { Subject } from 'rxjs';
 import { RtlService } from '../utils/services/rtl.service';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 /**
  * Service that is responsible for providing keyboard actions support
@@ -20,19 +21,19 @@ export class TabsService {
     tabHeaderKeyHandler(index: number, event: any, elements: HTMLElement[]): void {
         const rtlDirection: boolean = this._rtlService && this._rtlService.rtl.getValue();
 
-        if (KeyUtil.isKey(event, 'ArrowLeft')) {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             if (!rtlDirection) {
                 this._focusPrevious(index, elements);
             } else {
                 this._focusNext(index, elements);
             }
-        } else if (KeyUtil.isKey(event, 'ArrowRight')) {
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             if (!rtlDirection) {
                 this._focusNext(index, elements);
             } else {
                 this._focusPrevious(index, elements);
             }
-        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+        } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
             this.tabSelected.next(index);
         }

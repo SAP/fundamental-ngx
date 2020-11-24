@@ -3,9 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormModule, ToolbarModule, ListModule, BusyIndicatorModule, InfiniteScrollModule } from '@fundamental-ngx/core';
 import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
+import { ListItemDef } from './base-list-item';
 
 @NgModule({
-    declarations: [ListComponent, ListFooter, ListGroupHeader],
+    declarations: [ListComponent, ListFooter, ListGroupHeader, ListItemDef],
     imports: [
         CommonModule,
         FormsModule,
@@ -16,6 +17,6 @@ import { ListComponent, ListFooter, ListGroupHeader } from './list.component';
         InfiniteScrollModule
 
     ],
-    exports: [ListComponent, ListFooter, ListGroupHeader]
+    exports: [ListComponent, ListFooter, ListGroupHeader, ListItemDef]
 })
 export class PlatformListModule { }

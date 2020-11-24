@@ -3,7 +3,8 @@ import { QueryList } from '@angular/core';
 import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 import { merge, Subject } from 'rxjs';
 import { filter, startWith, takeUntil, tap } from 'rxjs/operators';
-import { KeyUtil } from '../../functions/key-util';
+import { KeyUtil } from '../../functions';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 export type FocusEscapeDirection = 'up' | 'down';
 
@@ -50,11 +51,11 @@ export class KeyboardSupportService<T> {
     private _refreshEscapeLogic(queryList: QueryList<KeyboardSupportItemInterface & T>): void {
 
         const createEscapeListener = (
-            listItem: KeyboardSupportItemInterface & T, onKey: string, escapeDirection: FocusEscapeDirection
+            listItem: KeyboardSupportItemInterface & T, onKeyCode: number, escapeDirection: FocusEscapeDirection
         ): void => {
             listItem.keyDown.pipe(
                 takeUntil(unsubscribe$),
-                filter(event => KeyUtil.isKey(event, onKey)),
+                filter(event => KeyUtil.isKeyCode(event, onKeyCode)),
                 tap(event => event.preventDefault())
             ).subscribe(() => this.focusEscapeList.next(escapeDirection));
         };
@@ -65,8 +66,8 @@ export class KeyboardSupportService<T> {
         const unsubscribe$ = merge(this._onRefresh$, this._onDestroy$);
 
         if (queryList.length) {
-            createEscapeListener(queryList.last, 'ArrowDown', 'down');
-            createEscapeListener(queryList.first, 'ArrowUp', 'up');
+            createEscapeListener(queryList.last, DOWN_ARROW, 'down');
+            createEscapeListener(queryList.first, UP_ARROW, 'up');
         }
     }
 }

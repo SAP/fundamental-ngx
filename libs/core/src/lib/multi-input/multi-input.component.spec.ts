@@ -64,7 +64,6 @@ describe('MultiInputComponent', () => {
     it('should handle search term change', async () => {
         await fixture.whenStable();
         spyOn(component.searchTermChange, 'emit');
-        spyOn(component.popoverRef, 'updatePopover');
         spyOn(component, 'filterFn');
         spyOn(component, 'openChangeHandle');
         component.ngOnInit();
@@ -203,12 +202,12 @@ describe('MultiInputComponent', () => {
         component.dropdownValues = ['term1', 'term2', 'value'];
         spyOn(event, 'preventDefault');
         spyOn(event, 'stopPropagation');
-        spyOn(component, 'handleSearchTermChange').and.callThrough();
+        spyOn(<any>component, '_applySearchTermChange').and.callThrough();
         component.showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');
         expect(component.displayedValues.length).toEqual(component.dropdownValues.length);
-        expect(component.handleSearchTermChange).toHaveBeenCalled();
+        expect((<any>component)._applySearchTermChange).toHaveBeenCalled();
     });
 });

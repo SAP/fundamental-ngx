@@ -1,19 +1,48 @@
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    ViewChild,
-    ViewEncapsulation,
-    ContentChild,
+    AfterViewInit,
     ChangeDetectionStrategy,
-    HostBinding
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Optional,
+    Renderer2,
+    SimpleChanges,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation
 } from '@angular/core';
-import { Placement, PopperOptions } from 'popper.js';
-import { PopoverDirective, PopoverFillMode } from './popover-directive/popover.directive';
-import { PopoverDropdownComponent } from './popover-dropdown/popover-dropdown.component';
 
-let popoverUniqueId = 0;
+import {
+    CdkOverlayOrigin,
+    ConnectedPosition,
+    FlexibleConnectedPositionStrategy,
+    Overlay,
+    OverlayConfig,
+    OverlayRef,
+    ViewportRuler
+} from '@angular/cdk/overlay';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
+
+
+import { merge, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
+
+import { RtlService } from '../utils/services/rtl.service';
+import { BasePopoverClass } from './base/base-popover.class';
+import { ArrowPosition, DefaultPositions, PopoverPosition } from './popover-position/popover-position';
+import { KeyUtil } from '../utils/functions/key-util';
+
+let cdkPopoverUniqueId = 0;
+
+const MAX_BODY_SIZE = 99999999;
 
 /**
  * The popover is a wrapping component that accepts a *control* as well as a *body*.
@@ -24,104 +53,141 @@ let popoverUniqueId = 0;
 @Component({
     selector: 'fd-popover',
     templateUrl: './popover.component.html',
-    styleUrls: ['./popover.component.scss'],
     host: {
         '[class.fd-popover-custom]': 'true',
         '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./popover.component.scss']
 })
-export class PopoverComponent {
-    /** @hidden */
-    @ViewChild(PopoverDirective)
-    directiveRef: PopoverDirective;
+export class PopoverComponent extends BasePopoverClass
+    implements AfterViewInit, OnInit, OnDestroy, OnChanges {
 
-    /** @hidden */
-    @ContentChild(PopoverDropdownComponent) dropdownComponent: PopoverDropdownComponent;
-
-    /** Whether the popover should have an arrow. */
+    /** Reference to popover trigger element */
     @Input()
-    noArrow = true;
+    trigger: ElementRef;
 
-    /** Whether the popover container needs an extra class for styling. */
+    /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()
-    addContainerClass: string;
+    fixedPosition = false;
 
     /** Whether the popover is disabled. */
     @Input()
     @HostBinding('class.fd-popover-custom--disabled')
     disabled = false;
 
-    /** The element to which the popover should be appended. */
-    @Input()
-    appendTo: HTMLElement | 'body';
-
-    /** The trigger events that will open/close the popover.
-     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
-    @Input()
-    triggers: string[] = ['click'];
-
-    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
-     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
-    @Input()
-    placement: Placement = 'bottom-start';
-
-    /** Whether the popover is open. Can be used through two-way binding. */
-    @Input()
-    isOpen = false;
-
-    /** List of additional classes that will be added to popover container element */
-    @Input()
-    additionalClasses: string[] = [];
-
-    /** The Popper.js options to attach to this popover.
-     * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
-    @Input()
-    options: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: true,
-                escapeWithReference: true,
-                boundariesElement: 'scrollParent'
-            }
-        }
-    };
-
-    /** Whether the popover should be focusTrapped. */
-    @Input()
-    focusTrapped = false;
-
-    /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
-     * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
-     */
-    @Input()
-    fillControlMode: PopoverFillMode;
-
-    /** Whether the popover should close when a click is made outside its boundaries. */
-    @Input()
-    closeOnOutsideClick = true;
-
-    /** Whether the popover should close when the escape key is pressed. */
-    @Input()
-    closeOnEscapeKey = true;
-
-    /** Event emitted when the state of the isOpen property changes. */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
     /** Id of the popover. If none is provided, one will be generated. */
     @Input()
-    id: string = 'fd-popover-' + popoverUniqueId++;
+    id: string = 'fd-popover-' + cdkPopoverUniqueId++;
 
-    /**
-     * Toggles the popover open state.
-     */
-    public toggle(): void {
+    /** Maximum width of popover body in px, prevents from overextending body by `fillControlMode`  */
+    @Input()
+    maxWidth: number;
+
+    /** @hidden */
+    @ViewChild('templateRef', { read: TemplateRef })
+    templateRef: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('container', { read: ViewContainerRef })
+    container: ViewContainerRef;
+
+    /** @hidden */
+    @ViewChild(CdkOverlayOrigin)
+    triggerOrigin: CdkOverlayOrigin;
+
+    /** position of arrow, passed to arrow element */
+    arrowPosition: ArrowPosition = null;
+
+    /** Additional style to put margin into body component, to give a place for arrow */
+    marginStyle: string = null;
+
+    /** @hidden Properties bind to popover's body */
+    _popoverBodyWidth: number;
+    _popoverBodyMinWidth: number;
+
+    /** @hidden */
+    directiveRef: any;
+
+    /** @hidden */
+    private _initialised = false;
+
+    /** @hidden */
+    private _refresh$: Observable<void>;
+
+    /** @hidden */
+    private readonly _placementRefresh$ = new Subject<void>();
+
+    /** @hidden */
+    private _eventRef: Function[] = [];
+
+    /** @hidden */
+    private _overlayRef: OverlayRef;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    constructor(
+        private _renderer: Renderer2,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _overlay: Overlay,
+        private _viewportRuler: ViewportRuler,
+        @Optional() private _rtlService: RtlService
+    ) {
+        super();
+
+        /** Merge observables - close or destroy */
+        this._refresh$ = merge(this.isOpenChange, this._onDestroy$);
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (!this.scrollStrategy) {
+            this.scrollStrategy = this._overlay.scrollStrategies.reposition();
+        }
+
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._initialised = true;
+        this._refreshTriggerListeners();
+        if (this.isOpen) {
+            this.open();
+        }
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!this._initialised) {
+            return;
+        }
+
+        if (changes['isOpen']) {
+            if (changes['isOpen'].currentValue) {
+                this.open();
+            } else {
+                this.close();
+            }
+        }
+
+        if (changes['triggers']) {
+            this._refreshTriggerListeners();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+        if (this._overlayRef) {
+            this._overlayRef.detach();
+        }
+    }
+
+    /** Toggles the popover open state */
+    toggle(): void {
         if (this.isOpen) {
             this.close();
         } else {
@@ -129,54 +195,241 @@ export class PopoverComponent {
         }
     }
 
-    /**
-     * Closes the popover.
-     */
-    public close(): void {
-        if (this.isOpen) {
+    /** Closes the popover. */
+    close(): void {
+        if (this._overlayRef) {
+            this._removeArrowStyles();
+            this._overlayRef.dispose();
+            this._changeDetectorRef.detectChanges();
+            if (this.isOpen) {
+                this.isOpenChange.emit(false);
+            }
             this.isOpen = false;
-            this.isOpenChange.emit(this.isOpen);
         }
     }
 
-    /**
-     * Opens the popover.
-     */
-    public open(): void {
-        if (!this.isOpen) {
+    /** Opens the popover. */
+    open(): void {
+        if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled) {
+            this._overlayRef = this._overlay.create(this._getOverlayConfig());
+            this._overlayRef.attach(new TemplatePortal(this.templateRef, this.container));
+
+            this._changeDetectorRef.detectChanges();
+
+            if (!this.isOpen) {
+                this.isOpenChange.emit(true);
+            }
             this.isOpen = true;
-            this.isOpenChange.emit(this.isOpen);
+
+            if (this.fillControlMode) {
+                this._listenOnResize();
+            }
+
+            this._listenOnClose();
+            this._listenOnOutClicks();
         }
     }
 
     /**
-     * Forces an update of the popover's positioning calculation.
+     * Method called to change position of popover,
+     * recommended to be used only when popover is opened, otherwise change position or cdkPlacement
      */
-    public updatePopover(): void {
-        this.directiveRef.updatePopper();
+    applyNewPosition(positions: ConnectedPosition[]): void {
+        const refPosition = this._getPositionStrategy(positions);
+        this._listenForPositionChange(refPosition.positionChanges);
+        this._overlayRef.updatePositionStrategy(refPosition);
     }
 
-    /**
-     * Function is called every time popover changes open attribute
+    /** @deprecated
+     * Left for backward compatibility
      */
-    public openChanged(isOpen: boolean): void {
-        this.isOpenChange.emit(isOpen);
-        this.updateDropdownIsOpen(isOpen);
+    updatePopover(): void {
+        this.refreshPosition();
     }
 
-    /** Method that is called, when there is keydown event dispatched */
-    public handleKeydown(event: KeyboardEvent): void {
-        if (event.key === 'ArrowDown' && event.altKey) {
+    /** Method called to refresh position of opened popover */
+    refreshPosition(): void {
+        if (this._overlayRef) {
+            this._overlayRef.updatePosition();
+        }
+    }
+
+    /** Handler for alt + arrow down keydown */
+    triggerKeyDownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.isOpen) {
             this.open();
         }
     }
 
-    /** @hidden
-     *  Function that allows us to control aria-expanded on dropdown child
-     * */
-    private updateDropdownIsOpen(isOpen: boolean): void {
-        if (this.dropdownComponent) {
-            this.dropdownComponent.isOpen = isOpen;
+    /** Handler escape keydown */
+    bodyKeydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ESCAPE) && this.isOpen && this.closeOnEscapeKey) {
+            this.close();
         }
+    }
+
+    private get _triggerElement(): ElementRef<any> {
+        return this.trigger || this.triggerOrigin.elementRef;
+    }
+
+    /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
+    private _listenOnClose(): void {
+        this._overlayRef.detachments()
+            .pipe(takeUntil(this._refresh$))
+            .subscribe(() => this.close())
+        ;
+    }
+
+    /** Listener for click events */
+    private _listenOnOutClicks(): void {
+        const closeEvents$ = merge( this._overlayRef.backdropClick(), this._overlayRef._outsidePointerEvents)
+
+        closeEvents$.pipe(
+            filter(event => this._shouldClose(event)),
+            takeUntil(this._refresh$)
+        ).subscribe(() => this.close());
+    }
+
+    /** Refresh listeners on trigger element events */
+    private _refreshTriggerListeners(): void {
+        this._removeTriggerListeners();
+        if (this.triggers?.length) {
+            this.triggers.forEach(trigger => {
+                this._eventRef.push(this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
+                    this.toggle();
+                }));
+            });
+        }
+    }
+
+    /** remove listeners from trigger element events */
+    private _removeTriggerListeners(): void {
+        this._eventRef.forEach(event => event());
+        this._eventRef = [];
+    }
+
+    /** @hidden */
+    private _triggerContainsTarget(event: Event): boolean {
+        const triggerElement = this._triggerElement.nativeElement;
+        return triggerElement.contains(this._getEventTarget(event));
+    }
+
+    /** @hidden */
+    private _getEventTarget(event: Event): EventTarget {
+        return event.composedPath
+            ? event.composedPath()[0]
+            : event.target;
+    }
+
+    /** @hidden */
+    private _shouldClose(event: MouseEvent): boolean {
+        return (
+            this.isOpen &&
+            this.closeOnOutsideClick &&
+            !this._triggerContainsTarget(event)
+        );
+    }
+
+    /** @hidden */
+    private _getDirection(): 'rtl' | 'ltr' {
+        if (!this._rtlService) {
+            return 'ltr';
+        }
+
+        return this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
+    }
+
+    /** @hidden */
+    private _getOverlayConfig(): OverlayConfig {
+        const direction = this._getDirection();
+        const position = this._getPositionStrategy();
+        this._listenForPositionChange(position.positionChanges);
+
+        return new OverlayConfig({
+            direction: direction,
+            positionStrategy: position,
+            scrollStrategy: this.scrollStrategy
+        });
+    }
+
+    /** @hidden */
+    private _listenForPositionChange(positionChange: Observable<ConnectedOverlayPositionChange>): void {
+        this._placementRefresh$.next();
+        positionChange
+            .pipe(
+                takeUntil(this._placementRefresh$),
+                filter(() => !this.noArrow),
+                distinctUntilChanged(
+                    (previous, current) =>
+                        previous.connectionPair === current.connectionPair
+                ))
+            .subscribe(event => this._setArrowStyles(event.connectionPair))
+        ;
+    }
+
+    /** @hidden */
+    private _setArrowStyles(position: ConnectionPositionPair): void {
+        this.arrowPosition = PopoverPosition.getArrowPosition(position, this._getDirection() === 'rtl');
+        this.marginStyle = PopoverPosition.getMarginStyle(this.arrowPosition);
+        this._changeDetectorRef.detectChanges();
+    }
+
+    private _listenOnResize(): void {
+        this._viewportRuler.change(15).pipe(
+            takeUntil(this._refresh$),
+            startWith(1)
+        ).subscribe(() => this._applyWidthOverlay());
+    }
+
+    /** @hidden */
+    private _applyWidthOverlay(): void {
+        const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
+        const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
+        if (this.fillControlMode === 'at-least') {
+            this._popoverBodyMinWidth = width;
+        } else if (this.fillControlMode === 'equal') {
+            this._popoverBodyWidth = width;
+        }
+        this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _getTriggerWidth(): number {
+        return this._triggerElement.nativeElement.offsetWidth;
+    }
+
+    /** @hidden */
+    private _removeArrowStyles(): void {
+        this.arrowPosition = null;
+        this.marginStyle = null;
+    }
+
+    /** @hidden */
+    private _getPositionStrategy(positions?: ConnectedPosition[]): FlexibleConnectedPositionStrategy {
+
+        let resultPosition = positions ? positions : this._getPositions();
+
+        if (!this.fixedPosition) {
+            resultPosition = resultPosition.concat(DefaultPositions);
+        }
+
+        return this._overlay
+            .position()
+            .flexibleConnectedTo(this.appendTo || this._triggerElement)
+            .withPositions(resultPosition)
+            .withPush(false);
+    }
+
+    /** @hidden */
+    private _getPositions(): ConnectedPosition[] {
+        if (this.cdkPositions) {
+            return this.cdkPositions;
+        }
+
+        if (this.placement) {
+            return [PopoverPosition.getCdkPlacement(this.placement)];
+        }
+
+        return [];
     }
 }

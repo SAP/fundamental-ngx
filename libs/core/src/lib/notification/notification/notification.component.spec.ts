@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationComponent } from './notification.component';
 import { NotificationService } from '../notification-service/notification.service';
-import { ButtonModule, NotificationDefault } from '@fundamental-ngx/core';
+import { ButtonModule } from '../../button/button.module';
+import { NotificationDefault } from '../notification-utils/notification-default';
 import { NotificationModule } from '../notification.module';
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationModule } from '@fundamental-ngx/core';
+import { NotificationModule } from '../notification.module';
 
 @Component({
     template: ` <span #directiveElement fd-notification-description>Notification Test</span> `

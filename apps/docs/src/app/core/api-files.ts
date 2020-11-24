@@ -14,6 +14,12 @@ export const API_FILES = {
         'ActionBarHeaderDirective',
         'ActionBarMobileDirective'
     ],
+    actionSheet: [
+        'ActionSheetComponent',
+        'ActionSheetControlComponent',
+        'ActionSheetItemComponent',
+        'ActionSheetBodyComponent'
+    ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
@@ -34,6 +40,7 @@ export const API_FILES = {
         'CardKpiAnalyticsLabelDirective',
         'CardKpiAnalyticsContentDirective'
     ],
+    dynamicSideContent: ['DynamicSideContentComponent', 'DynamicSideContentSideComponent', 'DynamicSideContentMainComponent'],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],
@@ -51,6 +58,7 @@ export const API_FILES = {
         'DateFormatParserDefault',
         'FdDate'
     ],
+    carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
@@ -81,7 +89,7 @@ export const API_FILES = {
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpComponent'],
     inputGroup: ['InputGroupComponent'],
-    layoutGrid: ['LayoutGridComponent', 'LayoutGridSpanDirective'],
+    layoutGrid: ['LayoutGridComponent', 'LayoutGridColDirective', 'LayoutGridRowDirective'],
     layoutPanel: [
         'LayoutPanelComponent',
         'LayoutPanelActionsComponent',
@@ -104,23 +112,6 @@ export const API_FILES = {
         'ListIconDirective',
         'ListFooterDirective',
         'ListMessageDirective'
-    ],
-    localizationEditor: [
-        'LocalizationEditorComponent',
-        'LocalizationEditorItemComponent',
-        'LocalizationEditorMainComponent',
-        'LocalizationEditorInputDirective',
-        'LocalizationEditorTextareaDirective',
-        'LocalizationEditorLabel'
-    ],
-    megaMenu: [
-        'MegaMenuComponent',
-        'MegaMenuGroupComponent',
-        'MegaMenuItemComponent',
-        'MegaMenuLinkDirective',
-        'MegaMenuTitleDirective',
-        'MegaMenuSubitemDirective',
-        'MegaMenuSublinkDirective'
     ],
     menu: [
         'MenuAddonDirective',
@@ -282,6 +273,7 @@ export const API_FILES = {
         'TimeColumnComponent'
     ],
     timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
+    title: ['TitleComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
@@ -289,7 +281,8 @@ export const API_FILES = {
         'ToolbarComponent',
         'ToolbarContentComponent',
         'ToolbarOverflowContentComponent',
-        'ToolbarSpacerComponent'
+        'ToolbarSpacerComponent',
+        'ThemesService'
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
     wizard: ['WizardComponent']

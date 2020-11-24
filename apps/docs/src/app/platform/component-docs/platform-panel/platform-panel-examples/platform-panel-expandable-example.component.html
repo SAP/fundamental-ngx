@@ -1,4 +1,4 @@
-<fdp-button (click)="expanded = !expanded">Toggle Expand</fdp-button>
+<fdp-button (click)="expanded = !expanded" [attr.aria-pressed]="expanded" label="Toggle Expand"></fdp-button>
 <br />
 <br />
 Expanded value is: {{ expanded }}

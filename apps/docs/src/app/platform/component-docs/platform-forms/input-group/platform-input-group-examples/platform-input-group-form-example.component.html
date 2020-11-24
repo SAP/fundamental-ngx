@@ -1,6 +1,9 @@
 <main class="fd-page">
     <div class="fd-page__content">
-        <fdp-form-group #fg [multiLayout]="true">
+        <fdp-form-group
+            #fg
+            [multiLayout]="true"
+        >
             <fdp-form-field
                 #ff
                 id="qty"
@@ -11,17 +14,23 @@
                 rank="1"
                 [required]="true"
             >
-                <fdp-input-group name="qty" [formControl]="ff.formControl">
+                <fdp-input-group
+                    name="qty"
+                    [formControl]="ff.formControl"
+                >
                     <fdp-input-group-addon>$</fdp-input-group-addon>
                     <fdp-input-group-input type="number"></fdp-input-group-input>
                     <fdp-input-group-addon>0.00</fdp-input-group-addon>
                     <fdp-input-group-addon>
-                        <fdp-button>Submit</fdp-button>
+                        <fdp-button label="Submit"></fdp-button>
                     </fdp-input-group-addon>
                 </fdp-input-group>
             </fdp-form-field>
 
-            <ng-template #i18n let-errors>
+            <ng-template
+                #i18n
+                let-errors
+            >
                 <span *ngIf="errors.required"> Value is required </span>
             </ng-template>
         </fdp-form-group>

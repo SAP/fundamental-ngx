@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { PlatformButtonModule } from '../../button/button.module';
 import { PlatformInputModule } from '../input/fdp-input.module';
 
 import { InputGroupComponent } from './input-group.component';
@@ -20,7 +19,6 @@ import { InputGroupInputComponent } from './input.component';
     imports: [CommonModule, FormsModule, PlatformInputModule],
     exports: [
         PlatformInputModule,
-        PlatformButtonModule,
         InputGroupComponent,
         InputGroupAddonComponent,
         InputGroupInputComponent

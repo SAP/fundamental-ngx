@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-file-uploader-max-example',
     templateUrl: './file-uploader-max-example.component.html',
-    styleUrls: ['./file-uploader-max-example.component.scss']
+    styleUrls: ['./file-uploader-max-example.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploaderMaxExampleComponent {
     files: File[];

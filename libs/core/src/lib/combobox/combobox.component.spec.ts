@@ -30,18 +30,6 @@ describe('ComboboxComponent', () => {
         component.searchFn = () => {
         };
         fixture.detectChanges();
-
-        /** That's focus trap testing workaround */
-        component.focusTrap = {
-            activate: () => {
-            },
-            deactivate: () => {
-            },
-            pause: () => {
-            },
-            unpause: () => {
-            }
-        };
     });
 
     it('should create', () => {
@@ -133,12 +121,10 @@ describe('ComboboxComponent', () => {
         component.dropdownValues = ['value 1', 'value 2'];
         component.inputText = 'input text';
         spyOn(component, 'filterFn');
-        spyOn(component.popoverComponent, 'updatePopover');
 
         component.handleSearchTermChange();
 
         expect(component.filterFn).toHaveBeenCalledWith(component.dropdownValues, component.inputText);
-        expect(component.popoverComponent.updatePopover).toHaveBeenCalled();
     });
 
     it('should handle primaryButtonClick', () => {
@@ -148,18 +134,6 @@ describe('ComboboxComponent', () => {
         component.onPrimaryButtonClick();
         expect(component.searchFn).toHaveBeenCalled();
         expect(component.isOpenChangeHandle).toHaveBeenCalledWith(true);
-    });
-
-    it('should handle isOpenChangeHandle', () => {
-        component.open = false;
-        spyOn(component.openChange, 'emit');
-        spyOn(component, 'onTouched');
-        component.displayedValues = ['value1', 'value2'];
-        spyOn(component.focusTrap, 'activate');
-        component.isOpenChangeHandle(true);
-        expect(component.openChange.emit).toHaveBeenCalledWith(true);
-        expect(component.onTouched).toHaveBeenCalled();
-        expect(component.focusTrap.activate).toHaveBeenCalled();
     });
 
     it('should choose previous element', () => {

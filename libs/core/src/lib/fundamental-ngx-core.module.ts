@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ActionBarModule } from './action-bar/action-bar.module';
+import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
@@ -49,8 +50,6 @@ import { TimePickerModule } from './time-picker/time-picker.module';
 import { SegmentedButtonModule } from './segmented-button/public_api';
 import { SwitchModule } from './switch/switch.module';
 import { TokenModule } from './token/token.module';
-import { LocalizationEditorModule } from './localizator-editor/localization-editor.module';
-import { MegaMenuModule } from './mega-menu/mega-menu.module';
 import { LayoutGridModule } from './layout-grid/layout-grid.module';
 import { DragAndDropModule } from './utils/drag-and-drop/drag-and-drop.module';
 import { ProductSwitchModule } from './product-switch/product-switch.module';
@@ -64,6 +63,7 @@ import { ObjectStatusModule } from './object-status/object-status.module';
 import { MultiInputMobileModule } from './multi-input/multi-input-mobile/multi-input-mobile.module';
 import { StepInputModule } from './step-input/step-input.module';
 import { ComboboxMobileModule } from './combobox/combobox-mobile/combobox-mobile.module';
+import { ActionSheetMobileModule } from './action-sheet/action-sheet-mobile/action-sheet-mobile.module';
 import { CarouselModule } from './utils/directives/carousel/carousel.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { CardModule } from './card/card.module';
@@ -71,11 +71,15 @@ import { ObjectIdentifierModule } from './object-identifier/object-identifier.mo
 import { ObjectMarkerModule } from './object-marker/object-marker.module';
 import { MessageToastModule } from './message-toast/message-toast.module';
 import { MessageToastService } from './message-toast/message-toast-service/message-toast.service';
+import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
+import { ThemesService } from './utils/services/themes.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
     exports: [
         ActionBarModule,
+        ActionSheetModule,
+        ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
         BadgeModule,
@@ -106,9 +110,7 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
         LayoutPanelModule,
         LinkModule,
         ListModule,
-        LocalizationEditorModule,
         MenuModule,
-        MegaMenuModule,
         DialogModule,
         MessageStripModule,
         MultiInputModule,
@@ -140,8 +142,9 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
         TokenModule,
         TreeModule,
         CardModule,
-        MessageToastModule
+        MessageToastModule,
+        DynamicSideContentModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService]
+    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })
-export class FundamentalNgxCoreModule {}
+export class FundamentalNgxCoreModule { }

@@ -44,6 +44,18 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     @Input()
     label: string;
 
+    /** Define the tooltip content of the info label */
+    @Input()
+    title: string;
+
+    /** Define the ariaLabel content of the info label */
+    @Input()
+    ariaLabel: string;
+
+    /** Define the labelled by content of the info label */
+    @Input()
+    ariaLabelledBy: string;
+
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 

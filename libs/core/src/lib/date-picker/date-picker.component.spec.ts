@@ -7,7 +7,7 @@ import { FdDate } from '../calendar/models/fd-date';
 import { CalendarModule } from '../calendar/calendar.module';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
-import { FdRangeDate } from '@fundamental-ngx/core';
+import { FdRangeDate } from '../calendar/models/fd-range-date';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent;

@@ -17,6 +17,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
 
         this.components = [
             { url: 'core/action-bar', name: 'Action Bar' },
+            { url: 'core/action-sheet', name: 'Action Sheet' },
             { url: 'core/alert', name: 'Alert' },
             { url: 'core/avatar', name: 'Avatar' },
             { url: 'core/bar', name: 'Bar' },
@@ -25,6 +26,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/button', name: 'Button' },
             { url: 'core/card', name: 'Card' },
             { url: 'core/segmentedButton', name: 'Segmented Button' },
+            { url: 'core/carousel', name: 'Carousel' },
             { url: 'core/checkbox', name: 'Checkbox' },
             { url: 'core/splitButton', name: 'Split Button' },
             { url: 'core/calendar', name: 'Calendar' },
@@ -41,9 +43,13 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/input', name: 'Input' },
             { url: 'core/inputGroup', name: 'Input Group' },
             { url: 'core/link', name: 'Link' },
-            { url: 'core/list', name: 'List' },
-            { url: 'core/localizationEditor', name: 'Localization Editor' },
-            { url: 'core/mega-menu', name: 'Mega Menu' },
+            {
+                name: 'List',
+                subItems: [
+                    { url: 'core/list', name: 'Standard List' },
+                    { url: 'core/list-byline', name: 'List with Byline' }
+                ]
+            },
             { url: 'core/menu', name: 'Menu' },
             { url: 'core/message-strip', name: 'Message Strip' },
             { url: 'core/message-toast', name: 'Message Toast' },
@@ -67,6 +73,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/tile', name: 'Tile' },
             { url: 'core/time', name: 'Time' },
             { url: 'core/timePicker', name: 'Time Picker' },
+            { url: 'core/title', name: 'Title' },
             { url: 'core/switch', name: 'Switch' },
             { url: 'core/token', name: 'Token' },
             { url: 'core/toolbar', name: 'Toolbar' },
@@ -75,6 +82,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
+            { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/layoutPanel', name: 'Layout Panel' },
             { url: 'core/layoutGrid', name: 'Layout Grid' }
@@ -85,7 +93,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/global-config', name: 'Global Configuration' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
             { url: 'core/popover-directive', name: 'Popover Helper' },
-            { url: 'core/scroll-spy', name: 'Scroll Spy' }
+            { url: 'core/scroll-spy', name: 'Scroll Spy' },
+            { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];
 
         this.sections = [

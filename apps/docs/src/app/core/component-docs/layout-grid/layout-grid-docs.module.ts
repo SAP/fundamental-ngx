@@ -3,16 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { LayoutGridDocsComponent } from './layout-grid-docs.component';
-import {
-    LayoutColumnsExampleComponent,
-    LayoutGridColumnSpanExampleComponent,
-    LayoutGridExampleComponent,
-    LayoutGridGapSizeExample,
-    LayoutGridNoGapExampleComponent
-} from './examples/layout-grid-examples.component';
 import { LayoutGridDocsHeaderComponent } from './layout-grid-docs-header/layout-grid-docs-header.component';
-import { LayoutGridModule, LayoutPanelModule } from '@fundamental-ngx/core';
+import { LayoutGridModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { examples } from './examples';
 
 const routes: Routes = [
     {
@@ -26,16 +20,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutGridModule, LayoutPanelModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutGridModule],
     exports: [RouterModule],
-    declarations: [
-        LayoutGridDocsComponent,
-        LayoutGridGapSizeExample,
-        LayoutGridExampleComponent,
-        LayoutGridDocsHeaderComponent,
-        LayoutColumnsExampleComponent,
-        LayoutGridNoGapExampleComponent,
-        LayoutGridColumnSpanExampleComponent
-    ]
+    declarations: [examples, LayoutGridDocsComponent, LayoutGridDocsHeaderComponent]
 })
 export class LayoutGridDocsModule {}

@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     HostBinding,
     HostListener,
     Input,
@@ -12,8 +13,9 @@ import {
 } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { KeyUtil } from '../../utils/functions/key-util';
+import { KeyUtil } from '../../utils/functions';
 import { SelectProxy } from '../select-proxy.service';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 let optionUniqueId = 0;
 
@@ -66,21 +68,29 @@ export class OptionComponent implements OnInit, OnDestroy {
     selected = false;
 
     /** @hidden */
+    selectionEvent = new EventEmitter<KeyboardEvent>()
+
+    /** @hidden Whether option contains more than basic text. */
+    _extendedTemplate = false;
+
+    /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
     @HostListener('click')
     @HostListener('keydown', ['$event'])
     selectionHandler(event?: KeyboardEvent): void {
-        if (!event || event && KeyUtil.isKey(event, [' ', 'Enter'])) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+        if (!event || (event && KeyUtil.isKeyCode(event, [SPACE, ENTER]))) {
             if (!this.disabled) {
                 this.setSelected(true, true);
             }
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
         }
+        this.selectionEvent.emit(event);
     }
 
     /** @hidden */
@@ -126,6 +136,14 @@ export class OptionComponent implements OnInit, OnDestroy {
     /** Returns HTMLElement representation of the component. */
     getHtmlElement(): HTMLElement {
         return this._elementRef.nativeElement as HTMLElement;
+    }
+
+    /** Change extended template property */
+    setExtendedTemplate(extendedTemplate: boolean): void {
+        if (this._extendedTemplate !== extendedTemplate) {
+            this._extendedTemplate = extendedTemplate;
+            this._changeDetRef.detectChanges();
+        }
     }
 
     /** @hidden */

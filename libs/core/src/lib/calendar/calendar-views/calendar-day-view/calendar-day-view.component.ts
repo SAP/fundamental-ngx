@@ -709,10 +709,10 @@ export class CalendarDayViewComponent implements OnInit, OnChanges, OnDestroy {
             }
 
             /** Verify if start day and end day is valid, otherwise don't put range selection */
-            if (endDay && endDay.selected && startDay && startDay.selected) {
+            if (dates.start && dates.end) {
                 /** Mark all days, which are between start and end date */
                 calendarList
-                    .filter((_day) => (_day.selectedRange = CalendarService.isBetween(_day.date, dates)))
+                    .filter((_day) => (CalendarService.isBetween(_day.date, dates)))
                     .forEach((_day) => (_day.selectedRange = true));
             }
         }

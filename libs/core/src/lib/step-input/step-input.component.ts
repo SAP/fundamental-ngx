@@ -18,10 +18,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormStates } from '../form/form-control/form-states';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 let stepInputUniqueId = 0;
 
@@ -322,10 +323,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
             return
         }
 
-        if (KeyUtil.isKey(event, 'ArrowUp')) {
+        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             this.increment();
             muteEvent(event);
-        } else if (KeyUtil.isKey(event, 'ArrowDown')) {
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             this.decrement();
             muteEvent(event);
         }

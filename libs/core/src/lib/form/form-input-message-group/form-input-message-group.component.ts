@@ -6,7 +6,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { PopoverFillMode } from '../../popover/popover-directive/popover.directive';
+import { PopoverFillMode } from '../../popover/popover-position/popover-position';
 import { Placement } from 'popper.js';
 
 @Component({

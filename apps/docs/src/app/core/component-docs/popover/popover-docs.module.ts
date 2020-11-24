@@ -19,9 +19,19 @@ import {
     SideNavigationModule,
     BarModule,
     AvatarModule,
-    ListModule
+    ListModule,
+    SegmentedButtonModule,
+    FormModule,
+    CheckboxModule
 } from '@fundamental-ngx/core';
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
+import {
+    PopoverContainerExampleComponent
+} from './examples/popover-container-example/popover-container-example.component';
+import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
+import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
+import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
+import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 
 const routes: Routes = [
     {
@@ -44,7 +54,10 @@ const routes: Routes = [
         DialogModule,
         ListModule,
         AvatarModule,
-        BarModule
+        BarModule,
+        SegmentedButtonModule,
+        FormModule,
+        CheckboxModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -57,7 +70,12 @@ const routes: Routes = [
         PopoverDropdownExampleComponent,
         PopoverPlacementExampleComponent,
         PopoverProgrammaticOpenExampleComponent,
-        PopoverComplexExampleComponent
+        PopoverComplexExampleComponent,
+        PopoverContainerExampleComponent,
+        PopoverScrollExampleComponent,
+        PopoverCdkPlacementExampleComponent,
+        PopoverFocusExampleComponent,
+        PopoverTriggerExampleComponent
     ]
 })
 export class PopoverDocsModule {}

@@ -1,9 +1,13 @@
-<i *ngIf="glyph"
-   class="fd-info-label__icon"
-   [ngClass]="glyph ? 'sap-icon--' + glyph : ''">
-</i>
+<i *ngIf="glyph" class="fd-info-label__icon" [ngClass]="glyph ? 'sap-icon--' + glyph : ''"> </i>
 
-<span *ngIf="label" class="fd-info-label__text">{{ label }}</span>
+<span
+    *ngIf="label"
+    class="fd-info-label__text"
+    [attr.title]="title"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
+    >{{ label }}</span
+>
 
 <!-- TODO @salarenko: DEPRECATED - Remove in v0.23.0 -->
 <ng-content></ng-content>

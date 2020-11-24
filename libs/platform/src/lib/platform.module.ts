@@ -24,6 +24,9 @@ import { PlatformComboboxMobileModule } from './components/form/combobox/combobo
 import { PlatformComboboxModule } from './components/form/combobox';
 import { PlatformThumbnailModule } from './components/thumbnail/public_api';
 import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
+import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
+import { PlatformTableModule } from './components/table/table.module';
+import { PlatformDatetimePickerModule } from './components/form/datetime-picker/datetime-picker.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -53,7 +56,10 @@ import { PlatformObjectMarkerModule } from './components/object-marker/object-ma
         PlatformComboboxModule,
         PlatformComboboxMobileModule,
         PlatformThumbnailModule,
-        PlatformObjectMarkerModule
+        PlatformObjectMarkerModule,
+        PlatformObjectAttributeModule,
+        PlatformTableModule,
+        PlatformDatetimePickerModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

@@ -48,7 +48,7 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
     onSearchChange(): void {
         this.options = this.filter(this.inputText);
         this.open = (this.options.length > 0);
-        this.typeahead.updatePopover();
+        this.typeahead.refreshPosition();
     }
 
     onItemClick(clickedValue): void {

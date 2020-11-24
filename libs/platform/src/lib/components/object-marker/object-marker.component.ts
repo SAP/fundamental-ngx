@@ -29,4 +29,8 @@ export class PlatformObjectMarkerComponent {
 
     /** tab index value to be passed for the tabbing */
     tabIndex: string;
+
+    /** Sets control aria-title to a string attribute value */
+    @Input()
+    title: string;
 }

@@ -12,8 +12,8 @@
         </fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'button-1'" [rank]="20" zone="zRight">
-        <fdp-button [buttonType]="'emphasized'" (click)="onSubmit()">Submit</fdp-button>
+    <fdp-form-field id="button-1" [rank]="20" zone="zRight">
+        <fdp-button buttonType="emphasized" (click)="onSubmit()" label="Submit"></fdp-button>
     </fdp-form-field>
 
     <ng-template #i18n let-errors>

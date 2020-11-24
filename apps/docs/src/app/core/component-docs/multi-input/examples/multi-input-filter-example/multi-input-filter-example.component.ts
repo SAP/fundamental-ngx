@@ -8,6 +8,9 @@ export class MultiInputFilterExampleComponent {
     selected = [];
 
     customFilter(content: any[], searchTerm: string): any[] {
+        if (!searchTerm) {
+            return content;
+        }
         const search = searchTerm.toLocaleLowerCase();
         return content.filter((item) => item.toLocaleLowerCase().startsWith(search));
     }

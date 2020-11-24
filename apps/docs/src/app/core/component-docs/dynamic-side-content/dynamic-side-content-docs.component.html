@@ -1,0 +1,54 @@
+<fd-docs-section-title
+    id="basic"
+    componentName="dynamicSideContent"
+>
+    Basic usage
+</fd-docs-section-title>
+<description>
+    Use <code>fd-dynamic-side-content</code> component with <code>fd-dynamic-side-content-side</code> for additional
+    content and
+    <code>fd-dynamic-side-content-main</code> to hold the main content. By default <code>[position]</code> property is
+    not defined (<code>'none'</code>) and in this case the side content will be rendered accordingly to the order that
+    it's projected.
+</description>
+<component-example>
+    <fd-dynamic-side-content-basic-example></fd-dynamic-side-content-basic-example>
+</component-example>
+<code-example [exampleFiles]="basic"></code-example>
+
+<separator></separator>
+<fd-docs-section-title
+    id="positioning"
+    componentName="dynamicSideContent"
+>
+    Positioning
+</fd-docs-section-title>
+<description>
+    Use <code>[position]</code> option to define the position mode for side content. Allowed values are
+    <code>'left' | 'right' | 'bottom' | 'equalSplit' | 'none'</code>.<br />
+    Position defined as <code>'left'</code>, <code>'right'</code> or <code>'bottom'</code> takes precedence over content
+    projection order.<br />
+    <code>[position]="equalSplit"</code> enables equal split mode which provides users with a 50:50 view of the main
+    content and side content.
+</description>
+<component-example>
+    <fd-dynamic-side-content-positioning-example></fd-dynamic-side-content-positioning-example>
+</component-example>
+<code-example [exampleFiles]="positioning"></code-example>
+
+<separator></separator>
+<fd-docs-section-title
+    id="size"
+    componentName="dynamicSideContent"
+>
+    Responsiveness
+</fd-docs-section-title>
+<description>
+    Use <code>[size]</code> option to display the dynamic side content on specific screen sizes. Allowed values are
+    <code>'sm' | 'md' | 'lg' | 'xl'</code>.<br />
+    Note that according to the design the component looks the same on medium and large screens.
+</description>
+<component-example>
+    <fd-dynamic-side-content-size-example></fd-dynamic-side-content-size-example>
+</component-example>
+<code-example [exampleFiles]="size"></code-example>

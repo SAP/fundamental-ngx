@@ -1,9 +1,10 @@
 import { Injectable, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
-import { KeyUtil } from '../../utils/functions/key-util';
+import { KeyUtil } from '../../utils/functions';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 interface MenuNode {
     item: MenuItemComponent;
@@ -215,33 +216,33 @@ export class MenuService {
         const focusRight = (node) => setTimeout(() => this.setFocused(node.children[0].item));
         let matched = true;
 
-        if (KeyUtil.isKey(event, 'ArrowRight')) {
+        if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             if (this.focusedNode.children.length) {
                 this.setActive(true, this.focusedNode.item);
                 focusRight(this.focusedNode);
             }
-        } else if (KeyUtil.isKey(event, 'ArrowLeft')) {
+        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             if (this.focusedNode.parent.item) {
                 this.setActive(false, this.focusedNode.parent.item);
                 this.setFocused(this.focusedNode.parent.item);
             }
-        } else if (KeyUtil.isKey(event, 'ArrowDown')) {
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             const closest = this._closestEnabled(this.focusedNode, 'down');
             if (closest) {
                 this.setFocused(closest.item);
             }
-        } else if (KeyUtil.isKey(event, 'ArrowUp')) {
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW)) {
             const closest = this._closestEnabled(this.focusedNode, 'up');
             if (closest) {
                 this.setFocused(closest.item);
             }
-        } else if (KeyUtil.isKey(event, [' ', 'Enter'])) {
+        } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             this.setActive(true, this.focusedNode.item);
             this.focusedNode.item.click();
             if (this.focusedNode.children.length) {
                 focusRight(this.focusedNode);
             }
-        } else if (KeyUtil.isKey(event, 'Escape') && this.menu.closeOnEscapeKey) {
+        } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menu.closeOnEscapeKey) {
             this.menu.close();
         } else {
             matched = false;

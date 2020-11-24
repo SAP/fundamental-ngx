@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LayoutGridComponent } from './layout-grid.component';
-import { LayoutGridSpanDirective } from './layout-grid-span.directive';
+import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
+import { LayoutGridColDirective } from './directives/layout-grid-col.directive';
 
 @NgModule({
-    declarations: [LayoutGridComponent, LayoutGridSpanDirective],
+    declarations: [LayoutGridComponent, LayoutGridColDirective, LayoutGridRowDirective],
     imports: [CommonModule],
-    exports: [LayoutGridComponent, LayoutGridSpanDirective]
+    exports: [LayoutGridComponent, LayoutGridColDirective, LayoutGridRowDirective]
 })
 export class LayoutGridModule {}

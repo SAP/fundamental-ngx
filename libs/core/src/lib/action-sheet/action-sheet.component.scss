@@ -1,0 +1,12 @@
+@import "~fundamental-styles/dist/action-sheet";
+
+fd-action-sheet-body {
+    width: 100%;
+}
+.fd-action-sheet {
+    list-style-type: none;
+}
+.fd-action-sheet__wrapper--active {
+    position: fixed;
+    z-index: 5;
+}

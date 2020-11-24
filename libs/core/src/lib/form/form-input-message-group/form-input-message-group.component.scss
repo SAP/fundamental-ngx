@@ -10,7 +10,7 @@
   // fd-popover-custom (the order of included css files)
   // and has to be overwritten
   &.fd-popover-custom {
-    display: flex;
+    display: block;
   }
 
   .fd-input {
@@ -21,4 +21,8 @@
 .fd-popover__popper.fd-popover__popper--input-message-group {
     margin-top: 0 !important;
     z-index: 999;
+
+	.fd-form-message {
+		display: block;
+	}
 }

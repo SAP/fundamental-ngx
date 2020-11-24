@@ -7,7 +7,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '../utils/functions';
+import { TAB } from '@angular/cdk/keycodes';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
 
@@ -57,7 +58,7 @@ export class BusyIndicatorComponent {
     /** @hidden If focus escapes busy container focus element after wrapped content */
     @HostListener('keydown', ['$event'])
     hostFocusChangeHandler(event: KeyboardEvent): void {
-        if (this.loading && KeyUtil.isKey(event, 'Tab') && !event.shiftKey) {
+        if (this.loading && KeyUtil.isKeyCode(event, TAB) && !event.shiftKey) {
             this.fakeFocusElement.nativeElement.focus();
         }
     }

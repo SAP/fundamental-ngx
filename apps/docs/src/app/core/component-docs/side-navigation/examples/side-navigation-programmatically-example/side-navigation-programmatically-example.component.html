@@ -65,5 +65,5 @@
     </div>
 </fd-side-nav>
 
-<button fd-button [label]="'Selected Child ' + selected" (click)="selected = !selected"></button>
-<button fd-button [label]="'Open' + open " (click)="open = !open"></button>
+<button fd-button [label]="selected ? 'Unselect Child' : 'Select Child'" (click)="selected = !selected"></button>
+<button fd-button [label]="open ? 'Close' : 'Open' " (click)="open = !open"></button>

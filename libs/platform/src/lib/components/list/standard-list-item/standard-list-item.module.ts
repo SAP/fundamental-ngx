@@ -8,11 +8,10 @@ import {
 } from '@fundamental-ngx/core';
 import { PlatformLinkModule } from '../../link/link.module';
 import { PlatformObjectStatusModule } from '../../object-status/object-status.module';
-import { ListItemDef } from '../base-list-item';
 import { StandardListItemComponent } from './standard-list-item.component';
 
 @NgModule({
-    declarations: [StandardListItemComponent, ListItemDef],
+    declarations: [StandardListItemComponent],
     imports: [
         CommonModule,
         IconModule,
@@ -28,6 +27,6 @@ import { StandardListItemComponent } from './standard-list-item.component';
         PlatformObjectStatusModule
 
     ],
-    exports: [StandardListItemComponent, ListItemDef]
+    exports: [StandardListItemComponent]
 })
 export class StandardListItemModule { }

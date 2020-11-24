@@ -1,0 +1,14 @@
+<fd-action-sheet>
+    <fd-action-sheet-control>
+        <button fd-button glyph="settings"></button>
+    </fd-action-sheet-control>
+
+    <fd-action-sheet-body>
+        <li fd-action-sheet-item label="Search" glyph="search" (click)="actionPicked('search')"></li>
+        <li fd-action-sheet-item label="Download" glyph="download" (click)="actionPicked('download')"></li>
+        <li fd-action-sheet-item label="Accept" glyph="accept" (click)="actionPicked('accept')"></li>
+        <li fd-action-sheet-item label="Reject" glyph="cancel" (click)="actionPicked('cancel')"></li>
+        <li fd-action-sheet-item label="Cancel" [negative]="true"  [isCloseButton]="true"></li>
+    </fd-action-sheet-body>
+</fd-action-sheet>
+

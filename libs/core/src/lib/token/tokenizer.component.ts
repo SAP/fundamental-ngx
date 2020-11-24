@@ -7,14 +7,16 @@ import {
     Component,
     ContentChild,
     ContentChildren,
-    ElementRef, EventEmitter,
+    ElementRef,
+    EventEmitter,
     forwardRef,
     HostListener,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Optional, Output,
+    Optional,
+    Output,
     QueryList,
     Renderer2,
     ViewChild,
@@ -24,7 +26,9 @@ import { FormControlComponent } from '../form/form-control/form-control.componen
 import { TokenComponent } from './token.component';
 import { RtlService } from '../utils/services/rtl.service';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, KeyUtil } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { KeyUtil } from '../utils/functions';
+import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -38,6 +42,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** user's custom classes */
     @Input()
     class: string;
+
+    /** Disables possibility to remove tokens by keyboard */
+    @Input()
+    disableKeyboardDeletion = false;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
@@ -153,7 +161,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListChangesSubscription.unsubscribe();
         }
         this.tokenListChangesSubscription = this.tokenList.changes.subscribe(() => {
-            this.cdRef.detectChanges();
+            this._cdRef.detectChanges();
             this.previousTokenCount > this.tokenList.length ? this._expandTokens() : this._collapseTokens();
             this.previousTokenCount = this.tokenList.length;
             this.handleTokenClickSubscriptions();
@@ -188,7 +196,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     constructor(private _elementRef: ElementRef,
-        private cdRef: ChangeDetectorRef,
+        private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2) {
         this._renderer.listen('window', 'click', (e: Event) => {
@@ -222,9 +230,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
                 event.stopPropagation();
                 this.focusTokenElement(index);
-                if (event.ctrlKey || event.metaKey) {
+                if (this._isControlKey(event)) {
                     this._ctrlSelected(token, index);
-                } else if (!event.ctrlKey && !event.metaKey && !event.shiftKey || this._ctrlPrevious) {
+                } else if (!event.shiftKey || this._ctrlPrevious) {
                     this._basicSelected(token, index);
                 } else if (event.shiftKey) {
                     this.resetFirstAndLastElement();
@@ -237,10 +245,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     focusTokenElement(newIndex: number): HTMLElement {
         let elementToFocus: HTMLElement;
-        if (newIndex >= 0 && newIndex < this.tokenList.length) {
-            elementToFocus = this.tokenList
-                .find((element, index) => index === newIndex)
-                .elementRef.nativeElement.querySelector('.fd-token');
+        const tokenListArray: TokenComponent[] = this.tokenList.toArray();
+        if (tokenListArray[newIndex]) {
+            elementToFocus = tokenListArray[newIndex].tokenWrapperElement.nativeElement;
             // element needs tabindex in order to be focused
             elementToFocus.setAttribute('tabindex', '0');
             elementToFocus.focus();
@@ -266,6 +273,32 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDown(keyboardEvent: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
+            !this._isInputFocused() &&
+            !this.disableKeyboardDeletion) {
+            const selectedElements = this._getActiveTokens();
+            const focusedTokenIndex = this._getFocusedTokenIndex();
+            selectedElements.forEach(element => element.onCloseClick.emit());
+            if (selectedElements.length > 0) {
+                if (KeyUtil.isKeyCode(keyboardEvent, DELETE)) {
+                    this._focusInput();
+                } else {
+                    this.focusTokenElement(focusedTokenIndex - 1);
+                }
+            }
+        }
+
+        if (KeyUtil.isKeyCode(keyboardEvent, BACKSPACE) &&
+            this._isInputFocused() &&
+            !this._getInputValue() &&
+            !this.disableKeyboardDeletion) {
+            this.focusTokenElement(this.tokenList.length - 1);
+        }
+    }
+
+    /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
         if (this._elementRef) {
@@ -285,7 +318,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
-        if (KeyUtil.isKey(event, ' ') && document.activeElement !== this.input.elementRef().nativeElement) {
+        if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
             const token = this.tokenList.find((element, index) => index === fromIndex);
             this.tokenList.forEach(shadowedToken => {
                 if (shadowedToken !== token) {
@@ -294,32 +327,26 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             });
             token.selected = !token.selected;
             event.preventDefault();
-        } else if (KeyUtil.isKey(event, 'Enter')) {
-            this.input.elementRef().nativeElement.focus();
-        } else if ((KeyUtil.isKey(event, 'ArrowLeft') && !rtl) || (KeyUtil.isKey(event, 'ArrowRight') && rtl)) {
+        } else if (KeyUtil.isKeyCode(event, ENTER)) {
+            this._focusInput();
+
+        } else if ((KeyUtil.isKeyCode(event, LEFT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, RIGHT_ARROW) && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
-        } else if ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl)) {
+
+        } else if ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl)) {
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
-        } else if (KeyUtil.isKey(event, 'KeyA') && this.input.elementRef().nativeElement.value === '') {
-            if (event.ctrlKey || event.metaKey) {
-                if (!this.input.elementRef().nativeElement.value) {
-                    event.preventDefault();
-                }
-                this.tokenList.forEach(token => {
-                    token.selected = true;
-                });
-            }
+
+        } else if (KeyUtil.isKeyCode(event, A) && !this._getInputValue() && this._isControlKey(event)) {
+            event.preventDefault();
+            this.tokenList.forEach(token => token.selected = true);
         }
         if (newIndex === this.tokenList.length &&
-            ((KeyUtil.isKey(event, 'ArrowRight') && !rtl) || (KeyUtil.isKey(event, 'ArrowLeft') && rtl))
+            ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl))
         ) {
-            this.input.elementRef().nativeElement.focus();
-        } else if (
-            newIndex > this.tokenList.length - this.moreTokensRight.length &&
-            document.activeElement === this.input.elementRef().nativeElement
-        ) {
+            this._focusInput();
+        } else if (newIndex > this.tokenList.length - this.moreTokensRight.length && this._isInputFocused()) {
             this.focusTokenElement(newIndex - this.moreTokensRight.length);
         } else if (newIndex || newIndex === 0) {
             this.focusTokenElement(newIndex);
@@ -365,7 +392,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             // and then hide any tokens from the right that no longer fit
             this._collapseTokens('right');
 
-            this.cdRef.detectChanges();
+            this._cdRef.detectChanges();
         }
     }
 
@@ -379,7 +406,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             // and then hide any tokens from the left that no longer fit
             this._collapseTokens('left');
 
-            this.cdRef.detectChanges();
+            this._cdRef.detectChanges();
         }
     }
 
@@ -410,7 +437,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
                 elementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
                 combinedTokenWidth = this.getCombinedTokenWidth();
                 side === 'right' ? i-- : i++;
-                this.cdRef.markForCheck();
+                this._cdRef.markForCheck();
             }
         } else {
             this._getHiddenCozyTokenCount();
@@ -455,7 +482,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
                     breakLoop = true;
                 }
                 i--;
-                this.cdRef.markForCheck();
+                this._cdRef.markForCheck();
             }
         } else {
             this._getHiddenCozyTokenCount();
@@ -472,7 +499,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
         });
 
-        this.cdRef.detectChanges();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -597,5 +624,40 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
         }
         this._ctrlPrevious = true;
+    }
+
+    /** Get selected and focused tokens */
+    private _getActiveTokens(): TokenComponent[] {
+        return this.tokenList.filter(item => item.selected || this._isTokenFocused(item));
+    }
+
+    /** @hidden */
+    private _getFocusedTokenIndex(): number {
+        return this.tokenList.toArray().findIndex(token => this._isTokenFocused(token));
+    }
+
+    /** @hidden */
+    private _isTokenFocused(token: TokenComponent): boolean {
+        return token.tokenWrapperElement.nativeElement === document.activeElement;
+    }
+
+    /** @hidden */
+    private _isInputFocused(): boolean {
+        return document.activeElement === this.input.elementRef().nativeElement;
+    }
+
+    /** @hidden */
+    private _getInputValue(): string {
+        return this.input.elementRef().nativeElement.value;
+    }
+
+    /** @hidden */
+    private _focusInput(): void {
+        this.input.elementRef().nativeElement.focus();
+    }
+
+    /** @hidden */
+    private _isControlKey(keyboardEvent: KeyboardEvent): boolean {
+        return keyboardEvent.ctrlKey || keyboardEvent.metaKey;
     }
 }

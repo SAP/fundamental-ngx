@@ -21,7 +21,7 @@
                             </li>
                             <li fd-list-item>
                                 <i fd-list-icon [glyph]="'filter'"></i>
-                                <div fd-form-item [horizontal]="true">
+                                <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
                                     <label fd-form-label for="input-1">Filter</label>
                                     <input fd-form-control [compact]="true" id="input-1" (keyup)="inputKeyup($event)"
                                            [(ngModel)]="filterVal" style="min-width: 164px;">

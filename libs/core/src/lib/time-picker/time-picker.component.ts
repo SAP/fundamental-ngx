@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -17,10 +16,8 @@ import { TimeComponent } from '../time/time.component';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { TimeFormatParser } from './format/time-parser';
 import { FormStates } from '../form/form-control/form-states';
-import { PopoverComponent } from '../popover/popover.component';
 import { Placement } from 'popper.js';
 import { Subject } from 'rxjs';
-import { delay, first, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-time-picker',
@@ -145,10 +142,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     @ViewChild(TimeComponent)
     child: TimeComponent;
 
-    /** @hidden */
-    @ViewChild(PopoverComponent)
-    popover: PopoverComponent;
-
     /** @hidden Whether the input time is valid(success). Internal use. */
     isInvalidTimeInput = false;
 
@@ -214,17 +207,6 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
         this.isOpenChange.emit(this.isOpen);
-        if (isOpen) {
-            this.popover.directiveRef.loaded
-                .pipe(
-                    first(),
-                    takeUntil(this._onDestroy$),
-                    delay(0)
-                )
-                .subscribe(() => {
-                    this.child.refreshTime();
-                });
-        }
     }
 
     /** @hidden */

@@ -13,7 +13,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import focusTrap, { FocusTrap } from 'focus-trap';
+import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { dialogFadeNgIf } from './dialog-utils/dialog.animations';
 import { DIALOG_CONFIG, DialogConfig } from './dialog-utils/dialog-config.class';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
@@ -189,7 +189,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy, CssCla
     private _trapFocus(): void {
         if (this.dialogConfig.focusTrapped) {
             try {
-                this._focusTrap = focusTrap(this._elementRef.nativeElement, {
+                this._focusTrap = createFocusTrap(this._elementRef.nativeElement, {
                     clickOutsideDeactivates: this.dialogConfig.backdropClickCloseable && this.dialogConfig.hasBackdrop,
                     escapeDeactivates: false,
                     allowOutsideClick: (event: MouseEvent) => true

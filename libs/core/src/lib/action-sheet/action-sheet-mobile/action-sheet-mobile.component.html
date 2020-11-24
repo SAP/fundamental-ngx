@@ -1,0 +1,3 @@
+<div *ngIf="open" class="fd-action-sheet__wrapper fd-action-sheet__wrapper--active" (click)="toggleOpenState(false)">
+    <ng-container *ngTemplateOutlet="childContent?.actionSheetBodyTemplate"></ng-container>
+</div>

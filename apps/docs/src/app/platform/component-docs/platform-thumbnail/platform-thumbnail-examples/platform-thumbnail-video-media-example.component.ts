@@ -8,38 +8,38 @@ import { Media } from '@fundamental-ngx/platform';
 export class PlatformThumbnailVideoMediaExampleComponent {
 
     data: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature/3',
+        thumbnailUrl: 'http://picsum.photos/id/1008/400',
         mediaType: 'video',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature/3',
+        alt: 'Failed to load http://picsum.photos/id/1008/400',
         label: 'nature'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/400/animals/5',
+        thumbnailUrl: 'http://picsum.photos/id/1004/400',
         mediaType: 'video',
         mediaUrl: 'https://cdn.bitdegree.org/learn/Pexels%20Videos%203373.mp4?raw=true',
-        alt: 'Failed to load http://lorempixel.com/400/400/animals/5',
+        alt: 'Failed to load http://picsum.photos/id/1004/400',
         label: 'animal'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/g/400/200/animals/7',
+        thumbnailUrl: 'http://picsum.photos/id/1001/400',
         mediaType: 'video',
         mediaUrl: 'https://cdn.bitdegree.org/learn/Pexels%20Videos%203373.mp4?raw=true',
-        alt: 'Failed to load http://lorempixel.com/g/400/200/animals/7',
+        alt: 'Failed to load http://picsum.photos/id/1001/400',
         label: 'culture'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/200/sports/5',
+        thumbnailUrl: 'http://picsum.photos/id/1002/400',
         mediaType: 'video',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/200/sports/5',
+        alt: 'Failed to load http://picsum.photos/id/1002/400',
         label: 'dance'
     },
     {
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature/7',
+        thumbnailUrl: 'http://picsum.photos/id/1019/400',
         mediaType: 'video',
         mediaUrl: 'https://cdn.bitdegree.org/learn/Pexels%20Videos%203373.mp4?raw=true',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature/7',
+        alt: 'Failed to load http://picsum.photos/id/1019/400',
         label: 'nature'
     }
     ];

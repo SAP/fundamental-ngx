@@ -1,8 +1,8 @@
 <div style="text-align: right;">
-    <fdp-button [fdpMenuTriggerFor]="basicMenu">Button</fdp-button>
-    <fdp-button [buttonType]="'menu'" [fdpMenuTriggerFor]="basicMenu">Menu Button</fdp-button>
-    <fdp-button [glyph]="'menu'" [fdpMenuTriggerFor]="basicMenu"></fdp-button>
-    <fd-avatar style="margin-right: 10px;" size="m" image="http://lorempixel.com/400/400/nature"
+    <fdp-button [fdpMenuTriggerFor]="basicMenu" label="Button"></fdp-button>
+    <fdp-button buttonType="menu" [fdpMenuTriggerFor]="basicMenu" label="Menu Button"></fdp-button>
+    <fdp-button glyph="menu" [fdpMenuTriggerFor]="basicMenu"></fdp-button>
+    <fd-avatar style="margin-right: 10px;" size="m" image="http://picsum.photos/id/1018/400"
         [fdpMenuTriggerFor]="basicMenu"></fd-avatar>
     <div style="margin-top: 1rem;"><label>Item Selected:</label> {{ item }}</div>
 

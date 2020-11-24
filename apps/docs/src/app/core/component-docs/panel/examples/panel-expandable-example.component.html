@@ -1,4 +1,5 @@
-<button class="docs-button" fd-button label="Toggle Expand" (click)="expanded = !expanded"></button>
+<button class="docs-button" fd-button label="Toggle Expand" [attr.aria-pressed]="expanded"
+        (click)="expanded = !expanded"></button>
 <br><br>
 Expanded value is: {{expanded}}
 <br><br><br>
