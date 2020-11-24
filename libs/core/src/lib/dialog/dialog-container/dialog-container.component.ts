@@ -92,6 +92,6 @@ export class DialogContainerComponent extends DynamicComponentContainer<DialogCo
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DialogDefaultComponent);
         this._componentRef = this.containerRef.createComponent(componentFactory);
-        this._componentRef.instance.defaultDialogConfig = config;
+        this._componentRef.instance._defaultDialogConfig = config;
     }
 }
