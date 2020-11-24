@@ -370,21 +370,6 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    removeSelectedTokens(event: KeyboardEvent): void {
-        let allSelected = true;
-        if (KeyUtil.isKeyCode(event, [DELETE, BACKSPACE]) && !this.searchTerm) {
-            this.tokenizer.tokenList.forEach(token => {
-                if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
-                    this.handleSelect(false, token.elementRef.nativeElement.innerText);
-                } else {
-                    allSelected = false;
-                }
-            });
-            this.tokenizer.input.elementRef().nativeElement.focus();
-        }
-    }
-
-    /** @hidden */
     handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
