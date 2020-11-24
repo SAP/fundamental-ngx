@@ -2,7 +2,7 @@
   "name": "@fundamental-ngx/app-shell",
   "version": "0.2.35",
   "schematics": "./schematics/collection.json",
-  "description": "Fundamentals App Shell for microfrontend",
+  "description": "Fundamentals App Shell for microfrontend.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
