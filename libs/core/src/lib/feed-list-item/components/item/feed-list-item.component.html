@@ -31,12 +31,20 @@
 
 <ng-template #author>
   <span class="fd-feed-list__name">
-    <a target="_blank"
-      [attr.title]="authorTitle"
-      [attr.href]="authorLink ? (authorLink | safe : 'url') : null"
-      [attr.fd-link]="!!authorLink"
-      [emphasized]="true">{{ authorTitle }}</a>:
+    <ng-container *ngIf="authorLink; else authorTitleTemplate">
+      <a target="_blank"
+        fd-link
+        [attr.title]="authorTitle"
+        [href]="authorLink | safe : 'url'"
+        [emphasized]="true"
+      >
+        <ng-container *ngTemplateOutlet="authorTitleTemplate"></ng-container>
+      </a>
+    </ng-container>:
   </span>
+</ng-template>
+<ng-template #authorTitleTemplate>
+  {{ authorTitle }}
 </ng-template>
 
 <ng-template #feedContent let-param>

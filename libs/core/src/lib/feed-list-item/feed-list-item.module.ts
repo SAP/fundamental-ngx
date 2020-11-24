@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PipeModule } from '../utils/public_api';
 import { LinkModule } from '../link/public_api';
-import { FormattedTextModule } from '../formatted-text/formatted-text.module';
+import { FormattedTextModule } from '../formatted-text/public_api';
 import { FeedListItemComponent } from './components/item/feed-list-item.component';
 import { FeedListComponent } from './components/list/feed-list.component';
 import { LineClampDirective, LineClampTargetDirective } from './directives/line-clamp.directive';
