@@ -13,7 +13,7 @@ export interface ApprovalDataSource {
     /**
      * Fetch of user data.
      */
-    fetchUser(id: string): Observable<User>;
+    fetchUser(id: string): Observable<any>;
 
     /**
      * Update watcher list. Called whenever there is a change

@@ -1,5 +1,5 @@
 import {
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     EventEmitter,
     Inject,
@@ -19,8 +19,8 @@ import { DataProvider, ListDataSource } from '../../../domain';
     selector: 'fdp-approval-flow-user-details',
     templateUrl: './approval-flow-user-details.component.html',
     styleUrls: ['./approval-flow-user-details.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush
+    // encapsulation: ViewEncapsulation.None
 })
 export class ApprovalFlowUserDetailsComponent implements OnInit {
     @Input() node: ApprovalNode;
@@ -29,31 +29,45 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
 
     @Output() onSendReminder = new EventEmitter<void>();
 
-    _isMultipleMode = false;
+    _isListMode = false;
 
     _dataSource: ListDataSource<User>;
     _selectedItems: any[] = [];
+    _userToShowDetails: User;
+    _userToShowDetailsData$: Observable<any>;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {
         console.log('ApprovalFlowUserDetailsComponent init', this);
-        this._isMultipleMode = this.dialogRef.data.node?.approvers.length > 1;
-        console.log('_isMultipleMode', this._isMultipleMode);
-        if (this._isMultipleMode) {
+        this._isListMode = this.dialogRef.data.node?.approvers.length > 1;
+        if (this._isListMode) {
             this._dataSource = new ListDataSource<User>(new ListDataProvider(this.dialogRef.data.node?.approvers));
+        } else {
+            this.setUserToShowDetails(this.dialogRef.data.node?.approvers[0] || this.dialogRef.data.watcher);
         }
     }
 
-    onUserClick(): void {
-        console.log('open details');
+    onUserClick(user: User): void {
+        this.setUserToShowDetails(user);
+    }
+
+    backToListFromDetails(): void {
+        this._userToShowDetails = undefined;
+    }
+
+    setUserToShowDetails(user: User): void {
+        this._userToShowDetails = user;
+        this._userToShowDetailsData$ = this.dialogRef.data?.approvalFlowDataSource.fetchUser(user.id);
+        // this._cdr.detectChanges();
     }
 
 }
 
 export class ListDataProvider extends DataProvider<User> {
     data: User[];
+
     constructor(data: User[]) {
         super();
         this.data = data;

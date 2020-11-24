@@ -77,7 +77,7 @@ export class ApprovalFlowComponent implements OnInit {
         const dialogRef = this._dialogService.open(ApprovalFlowUserDetailsComponent, {
             data: {
                 node: node,
-                userData: this.dataSource.fetchUser(node.approvers[0].id),
+                approvalFlowDataSource: this.dataSource,
                 userDetailsTemplate: this.userDetailsTemplate
             },
             responsivePadding: true
@@ -95,7 +95,7 @@ export class ApprovalFlowComponent implements OnInit {
         this._dialogService.open(ApprovalFlowUserDetailsComponent, {
             data: {
                 watcher: watcher,
-                userData: this.dataSource.fetchUser(watcher.id),
+                approvalFlowDataSource: this.dataSource,
                 userDetailsTemplate: this.userDetailsTemplate
             },
             responsivePadding: true

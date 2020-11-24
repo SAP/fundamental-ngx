@@ -1,6 +1,6 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 
-import { ApprovalFlowExampleDataSource } from './data-source.class';
+import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-source.class';
 
 @Component({
     selector: 'fdp-approval-flow-example',
@@ -11,14 +11,12 @@ import { ApprovalFlowExampleDataSource } from './data-source.class';
             [userDetailsTemplate]="userDetailsTemplate">
         </fdp-approval-flow>
         <ng-template #userDetailsTemplate let-data="data">
-            <b>user details template</b> <br> {{ data | json }}
-            <p>Contact info</p>
+            <div style="margin-bottom: 4px;"><b>Contact info</b></div>
+            
+            <div>Mobile <br> <a href="javascript:void(0)">{{ data?.phone }}</a></div>
+            <div>E-mail <br> <a href="javascript:void(0)">{{ data?.email }}</a></div>
 
-            <div>Mobile <br> <a href="#">+001 123 4567 890</a></div>
-            <div>Phone <br> <a href="#">+001 123 4567 890</a></div>
-            <div>E-mail <br> <a href="#">sarah.smith@abccompany.com</a></div>
-
-            <p>Company</p>
+            <div style="margin-top: 1rem;margin-bottom: 4px;"><b>Company</b></div>
 
             <div>Name <br> Company A</div>
             <div>Address <br> 481 West Street, Anytown OH, 83749, USA</div>

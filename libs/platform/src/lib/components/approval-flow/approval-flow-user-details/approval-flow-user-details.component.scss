@@ -1,10 +1,11 @@
-fd-avatar {
-    margin-right: 10px;
-}
-
 .approval-flow-user-details__user-info {
     display: flex;
     align-items: center;
+    margin-bottom: 1rem;
+
+    fd-avatar {
+        margin-right: 10px;
+    }
 }
 
 .approval-flow-user-details__name {
@@ -15,8 +16,12 @@ fd-avatar {
     color: #6a6d70;
 }
 
-::ng-deep {
+:host ::ng-deep {
     a {
         color: #0A6ED1;
+    }
+
+    .fd-list--byline .fd-list__byline-left {
+        width: 100%;
     }
 }

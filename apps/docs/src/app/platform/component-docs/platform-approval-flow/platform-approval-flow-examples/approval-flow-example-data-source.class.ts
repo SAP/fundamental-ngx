@@ -9,7 +9,7 @@ const users: User[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/91.jpg'
     },
     {
-        id: 'uid381341',
+        id: 'uid37866',
         name: 'Daniel Sullivan',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg'
@@ -320,7 +320,7 @@ const complexGraph: ApprovalProcess = {
 
 
 function getRandomUser(): User {
-    return users[Math.floor(Math.random() * users.length)]
+    return users[Math.floor(Math.random() * users.length)];
 }
 
 export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
@@ -334,10 +334,15 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         // return of(complexGraph);
     }
 
-    fetchUser(id: string): Observable<User> {
+    fetchUser(id: string): Observable<any> {
         console.log('fetching user data');
         console.log('passed userId', id);
-        return of(users.find(user => user.id === id));
+        const user = users.find(u => u.id === id);
+
+        return of({
+            phone: Math.random().toFixed(13).toString().replace('0.', ''),
+            email: `${user.name.toLowerCase().split(' ').join('.')}@company.com`
+        });
     }
 
     /**

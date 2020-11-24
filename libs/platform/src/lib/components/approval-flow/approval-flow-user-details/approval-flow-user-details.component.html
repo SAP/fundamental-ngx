@@ -1,37 +1,38 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1 fd-dialog-title>Details</h1>
+        <h1 fd-dialog-title>
+            <fd-icon
+                *ngIf="_userToShowDetails && _isListMode"
+                [glyph]="'navigation-left-arrow'"
+                (click)="backToListFromDetails()"
+            ></fd-icon>
+            Details
+        </h1>
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <ng-container *ngIf="!_isMultipleMode">
-            <ng-container *ngIf="dialogRef.data.node?.approvers?.length === 1 || dialogRef.data.watcher">
-                <div class="approval-flow-user-details__user-info">
-                    <fd-avatar
-                        [image]="dialogRef.data.node?.approvers[0].imgUrl || dialogRef.data.watcher.imgUrl"
-                        size="s">
-                    </fd-avatar>
-                    <div>
-                        <div
-                            class="approval-flow-user-details__name">{{ dialogRef.data.node?.approvers[0].name || dialogRef.data.watcher.name }}</div>
-                        <div
-                            class="approval-flow-user-details__description">{{ dialogRef.data.node?.approvers[0].description || dialogRef.data.watcher.description }}</div>
-                    </div>
+        <ng-container *ngIf="_userToShowDetails">
+            <div class="approval-flow-user-details__user-info">
+                <fd-avatar
+                    [image]="_userToShowDetails.imgUrl"
+                    size="s">
+                </fd-avatar>
+                <div>
+                    <div
+                        class="approval-flow-user-details__name">{{ _userToShowDetails.name }}</div>
+                    <div
+                        class="approval-flow-user-details__description">{{ _userToShowDetails.description }}</div>
                 </div>
-            </ng-container>
-            <ng-container *ngIf="dialogRef.data.node?.approvers?.length > 1">
-                <fd-avatar [label]="dialogRef.data.node.description" size="s"></fd-avatar>
-                <span>{{ dialogRef.data.node.approvers.length }} members</span>
-            </ng-container>
+            </div>
 
             <ng-container
                 *ngIf="dialogRef.data.userDetailsTemplate"
                 [ngTemplateOutlet]="dialogRef.data.userDetailsTemplate"
-                [ngTemplateOutletContext]="{ data: dialogRef.data.userData | async }">
+                [ngTemplateOutletContext]="{ data: _userToShowDetailsData$ | async }">
             </ng-container>
 
         </ng-container>
-        <ng-container *ngIf="_isMultipleMode">
+        <ng-container *ngIf="_isListMode && !_userToShowDetails">
             <fdp-list
                 selectionMode="multi"
                 [selection]="true"
@@ -45,7 +46,7 @@
                     [avatarTitle]="user.name"
                     [description]="user.description"
                     [title]="user.name"
-                    (click)="onUserClick()"
+                    (click)="onUserClick(user)"
                 >
                 </fdp-standard-list-item>
             </fdp-list>
@@ -53,14 +54,14 @@
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-dialog-footer-button *ngIf="dialogRef.data.node">
+        <fd-dialog-footer-button *ngIf="dialogRef.data.node && !(_userToShowDetails && _isListMode)">
             <button
                 fd-button
                 fd-dialog-decisive-button
                 fdType="emphasized"
-                [label]="'Send reminder' + (dialogRef.data.node.approvers?.length > 1 ? 's' : '')"
+                label="Send reminder"
                 [compact]="true"
-                (click)="dialogRef.close(_isMultipleMode ? _selectedItems : dialogRef.data.node.approvers)">
+                (click)="dialogRef.close(_isListMode ? _selectedItems : dialogRef.data.node.approvers)">
             </button>
         </fd-dialog-footer-button>
 
