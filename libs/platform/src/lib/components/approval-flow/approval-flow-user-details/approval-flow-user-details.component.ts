@@ -27,14 +27,13 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
 
     @Input() approvalFlowDataSource: ApprovalDataSource;
 
-    @Output() onSendReminder = new EventEmitter<void>();
-
     _isListMode = false;
 
     _dataSource: ListDataSource<User>;
     _selectedItems: any[] = [];
     _userToShowDetails: User;
     _userToShowDetailsData$: Observable<any>;
+    _listItemIdPrefix = 'fdp-afud-';
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
     }
@@ -63,6 +62,20 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
         // this._cdr.detectChanges();
     }
 
+    itemSelected(event: any): void {
+        console.log('(iteSelected)', event);
+    }
+
+    sendReminder(): void {
+        const reminderTargets = this._isListMode ? this.getUsersFromSelectedItems() : this.dialogRef.data.node.approvers;
+        this.dialogRef.close(reminderTargets);
+    }
+
+    getUsersFromSelectedItems(): User[] {
+        return this._selectedItems.map(item => {
+            return this.dialogRef.data.node?.approvers.find(user => user.imgUrl === item.avatarSrc);
+        });
+    }
 }
 
 export class ListDataProvider extends DataProvider<User> {

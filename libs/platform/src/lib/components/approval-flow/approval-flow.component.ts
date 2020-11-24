@@ -83,7 +83,7 @@ export class ApprovalFlowComponent implements OnInit {
             responsivePadding: true
         });
         dialogRef.afterClosed.subscribe((reminderTargets) => {
-            console.log(reminderTargets);
+            console.log('send reminder to', reminderTargets);
             if (Array.isArray(reminderTargets)) {
                 this.sendReminders(reminderTargets, node);
             }

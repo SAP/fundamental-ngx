@@ -61,7 +61,7 @@
                 fdType="emphasized"
                 label="Send reminder"
                 [compact]="true"
-                (click)="dialogRef.close(_isListMode ? _selectedItems : dialogRef.data.node.approvers)">
+                (click)="sendReminder()">
             </button>
         </fd-dialog-footer-button>
 
