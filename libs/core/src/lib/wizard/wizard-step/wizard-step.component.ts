@@ -57,6 +57,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @Input()
     label: string;
 
+    /** @hidden */
+    glyph: string;
+
     /**
      * The smaller text for labeling the step as optional.
      */
@@ -118,7 +121,10 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
             this.stepIndicator.stepIndicatorItemClicked.subscribe(step => {
                 this.stepIndicatorItemClicked.emit(step);
             })
-        )
+        );
+        if (this.stepIndicator.glyph) {
+            this.glyph = this.stepIndicator.glyph;
+        }
     }
 
     /** @hidden */

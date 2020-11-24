@@ -9,6 +9,7 @@ import { WizardContentComponent } from './wizard-content/wizard-content.componen
 import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.component';
 import { IconModule } from '../icon/icon.module';
 import { PopoverModule } from '../popover/popover.module';
+import { ActionSheetModule } from '../action-sheet/action-sheet.module';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,7 @@ import { PopoverModule } from '../popover/popover.module';
         WizardContentComponent,
         WizardNextStepComponent
     ],
-    imports: [CommonModule, IconModule, PopoverModule],
+    imports: [CommonModule, IconModule, PopoverModule, ActionSheetModule],
     exports: [
         WizardComponent,
         WizardNavigationComponent,

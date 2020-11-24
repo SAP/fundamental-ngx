@@ -17,6 +17,12 @@ export class WizardStepIndicatorComponent {
     stackedItems: WizardStepComponent[];
 
     /**
+     * Whether or not the step indicator (specifically, the action sheet) is compact.
+     */
+    @Input()
+    compact = false;
+
+    /**
      * Event emitted when this step indicator is clicked.
      */
     @Output()

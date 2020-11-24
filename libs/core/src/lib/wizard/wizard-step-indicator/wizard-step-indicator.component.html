@@ -1,21 +1,14 @@
 <ng-container *ngIf="stackedItems && stackedItems.length >= 1">
-    <!-- TODO: replace popover with action sheet -->
-    <fd-popover [noArrow]="false" *ngIf="stackedItems" (click)="popoverStepIndicatorClicked($event)">
-        <fd-popover-control>
+    <fd-action-sheet [compact]="compact">
+        <fd-action-sheet-control>
             <span class="fd-wizard__step-indicator" [ngClass]="glyph ? 'sap-icon--' + glyph : ''">
                 <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
             </span>
-        </fd-popover-control>
-        <fd-popover-body>
-            <ul fd-list class="fd-wizard-step-indicator-list">
-                <li fd-list-item *ngFor="let step of stackedItems">
-                    <a fd-list-link (click)="stepItemClicked(step, $event)">
-                        <span fd-list-title>{{step.label}}</span>
-                    </a>
-                </li>
-            </ul>
-        </fd-popover-body>
-    </fd-popover>
+        </fd-action-sheet-control>
+        <fd-action-sheet-body>
+            <li fd-action-sheet-item *ngFor="let step of stackedItems" [label]="step.label" [glyph]="step.glyph" (click)="stepItemClicked(step, $event)"></li>
+        </fd-action-sheet-body>
+    </fd-action-sheet>
 </ng-container>
 
 <ng-container *ngIf="!stackedItems || stackedItems.length < 1">
