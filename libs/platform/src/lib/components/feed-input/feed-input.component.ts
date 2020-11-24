@@ -1,6 +1,5 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
     Input,
     Output,
@@ -8,7 +7,8 @@ import {
     ViewEncapsulation,
     ChangeDetectionStrategy,
     AfterViewInit,
-    Renderer2
+    Renderer2,
+    ElementRef
 } from '@angular/core';
 
 @Component({
