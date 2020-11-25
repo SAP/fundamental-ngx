@@ -1,4 +1,4 @@
-<fd-wizard>
+<fd-wizard [appendToWizard]="false">
     <fd-wizard-navigation>
         <ul fd-wizard-progress-bar size="sm">
             <li fd-wizard-step [status]="step1status" (statusChange)="step1status = $event" label="Step 1: One Line">
@@ -36,9 +36,7 @@
                 optionalText="(Optional)"
             >
                 <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
-                <fd-wizard-content size="md">
-                    Wizard Content for step 3
-                </fd-wizard-content>
+                <fd-wizard-content size="md"> Wizard Content for step 3 </fd-wizard-content>
             </li>
         </ul>
     </fd-wizard-navigation>

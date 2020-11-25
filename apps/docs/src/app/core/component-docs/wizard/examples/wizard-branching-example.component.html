@@ -6,15 +6,15 @@
                 <fd-wizard-content>
                     <div fd-form-item>
                         <label fd-form-label for="address-1">Address Line 1</label>
-                        <input fd-form-control type="text" id="address-1"/>
+                        <input fd-form-control type="text" id="address-1" />
                     </div>
                     <div fd-form-item>
                         <label fd-form-label for="address-2">Address Line 2</label>
-                        <input fd-form-control type="text" id="address-2"/>
+                        <input fd-form-control type="text" id="address-2" />
                     </div>
                     <div fd-form-item>
                         <label fd-form-label for="address-3">City, State, and Zip</label>
-                        <input fd-form-control type="text" id="address-3"/>
+                        <input fd-form-control type="text" id="address-3" />
                     </div>
                     <fd-wizard-next-step>
                         <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(2)">
@@ -40,6 +40,7 @@
                                 id="radio-1"
                                 name="radio-name-1"
                                 [(ngModel)]="paymentSelection"
+                                [disabled]="step2status === 'completed'"
                             >
                                 Bank Transfer
                             </fd-radio-button>
@@ -50,35 +51,37 @@
                                 id="radio-2"
                                 name="radio-name-2"
                                 [(ngModel)]="paymentSelection"
+                                [disabled]="step2status === 'completed'"
                             >
                                 Credit Card
                             </fd-radio-button>
                         </div>
                     </fd-form-group>
                     <fd-wizard-next-step>
-                        <button [disabled]="!paymentSelection" fd-button [compact]="true" fdType="emphasized" (click)="goToStep(3)">
+                        <button
+                            [disabled]="!paymentSelection"
+                            fd-button
+                            [compact]="true"
+                            fdType="emphasized"
+                            (click)="goToStep(3)"
+                        >
                             Go to Payment Details Page
                         </button>
                     </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
-            <li
-                fd-wizard-step
-                [status]="step3status"
-                (statusChange)="step3status = $event"
-                [label]="step3label"
-            >
+            <li fd-wizard-step [status]="step3status" (statusChange)="step3status = $event" [label]="step3label">
                 <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                 <fd-wizard-content *ngIf="paymentSelection === 'bank'">
                     <div fd-form-item>
                         <label fd-form-label for="bank-acct">Enter your bank details:</label>
-                        <input fd-form-control type="text" id="bank-acct"/>
+                        <input fd-form-control type="text" id="bank-acct" />
                     </div>
                 </fd-wizard-content>
                 <fd-wizard-content *ngIf="paymentSelection === 'credit'">
                     <div fd-form-item>
                         <label fd-form-label for="credit-acct">Enter your credit card details:</label>
-                        <input fd-form-control type="text" id="credit-acct"/>
+                        <input fd-form-control type="text" id="credit-acct" />
                     </div>
                 </fd-wizard-content>
             </li>

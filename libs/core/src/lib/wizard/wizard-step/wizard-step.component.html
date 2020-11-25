@@ -5,6 +5,8 @@
         tabindex="0"
         (click)="stepContainerKeypress()"
         (keypress)="stepContainerKeypress($event)"
+        [style.cursor]="visited ? 'pointer' : 'auto'"
+        [style.pointer-events]="visited ? 'auto' : 'none'"
     >
         <ng-content select="fd-wizard-step-indicator"></ng-content>
         <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
