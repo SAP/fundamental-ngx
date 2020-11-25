@@ -71,5 +71,6 @@ export const API_FILES = {
         'ListConfig'
     ],
     multiInput: ['PlatformMultiInputComponent'],
-    feedInput: ['FeedInputComponent']
+    feedInput: ['FeedInputComponent'],
+    fileUploader: ['PlatformFileUploaderComponent']
 };

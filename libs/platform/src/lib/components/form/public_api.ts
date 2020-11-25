@@ -31,3 +31,5 @@ export * from './input-group/public_api';
 export * from './combobox';
 export * from './multi-input/multi-input.module';
 export * from './multi-input/multi-input.component';
+export * from './platform-file-uploader/platform-file-uploader.module';
+export * from './platform-file-uploader/platform-file-uploader.component';

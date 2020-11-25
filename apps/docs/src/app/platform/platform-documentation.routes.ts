@@ -221,8 +221,9 @@ export const ROUTES: Routes = [
             {
                 path: 'object-list-item',
                 loadChildren: () =>
-                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then((m) =>
-                        m.PlatformObjectListItemDocsModule)
+                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then(
+                        (m) => m.PlatformObjectListItemDocsModule
+                    )
             },
             {
                 path: 'multi-input',
@@ -234,10 +235,17 @@ export const ROUTES: Routes = [
             {
                 path: 'feed-input',
                 loadChildren: () =>
-                    import('./component-docs/platform-feed-input/platform-feed-input.module').then((m) =>
-                        m.PlatformFeedInputDocsModule)
-
+                    import('./component-docs/platform-feed-input/platform-feed-input.module').then(
+                        (m) => m.PlatformFeedInputDocsModule
+                    )
             },
+            {
+                path: 'file-uploader',
+                loadChildren: () =>
+                    import('./component-docs/platform-file-uploader/platform-file-uploader-docs.module').then(
+                        (m) => m.PlatformFileUploaderDocsModule
+                    )
+            }
         ]
     }
 ];

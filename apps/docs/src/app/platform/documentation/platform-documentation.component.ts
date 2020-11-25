@@ -21,6 +21,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/checkbox', name: 'Checkbox' },
             { url: 'platform/checkbox-group', name: 'Checkbox Group' },
             { url: 'platform/datetime-picker', name: 'Datetime Picker' },
+            { url: 'platform/file-uploader', name: 'File Uploader' },
             { url: 'platform/info-label', name: 'Info Label' },
             { url: 'platform/input', name: 'Input' },
             { url: 'platform/input-group', name: 'Input Group' },
