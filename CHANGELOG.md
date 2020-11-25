@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.0...v0.24.3-rc.1) (2020-11-25)
+
+
+### Features
+
+* (Core) introduce new Form Header component ([#3861](https://github.com/SAP/fundamental-ngx/issues/3861)) ([9db06cd](https://github.com/SAP/fundamental-ngx/commit/9db06cdf4a1b0f3861f1205a14ce3b840cc88cf1))
+
 ### [0.24.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.2...v0.24.3-rc.0) (2020-11-25)
 
 
