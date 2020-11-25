@@ -409,5 +409,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 }
             });
         }
+        this._shrinkWhileAnyStepIsTooNarrow();
     }
 }
