@@ -7,15 +7,16 @@ import {
     ButtonModule,
     DialogModule,
     IconModule,
-    MessageToastModule,
+    MessageToastModule, RtlService,
     ToolbarModule
 } from '@fundamental-ngx/core';
 
 import { ApprovalFlowComponent } from './approval-flow.component';
 import { PlatformObjectStatusModule } from '../object-status/public_api';
+import { PlatformSearchFieldModule } from '../search-field/public_api';
+import { PlatformListModule, StandardListItemModule } from '../list/public_api';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
-import { PlatformListModule, StandardListItemModule } from '../list/public_api';
 
 
 @NgModule({
@@ -31,11 +32,13 @@ import { PlatformListModule, StandardListItemModule } from '../list/public_api';
         MessageToastModule,
         PlatformObjectStatusModule,
         PlatformListModule,
-        StandardListItemModule
+        StandardListItemModule,
+        PlatformSearchFieldModule
     ],
     exports: [
         ApprovalFlowComponent
-    ]
+    ],
+    providers: [RtlService]
 })
 export class PlatformApprovalFlowModule {
 }

@@ -33,7 +33,6 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     _selectedItems: any[] = [];
     _userToShowDetails: User;
     _userToShowDetailsData$: Observable<any>;
-    _listItemIdPrefix = 'fdp-afud-';
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
     }
@@ -42,10 +41,19 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
         console.log('ApprovalFlowUserDetailsComponent init', this);
         this._isListMode = this.dialogRef.data.node?.approvers.length > 1;
         if (this._isListMode) {
-            this._dataSource = new ListDataSource<User>(new ListDataProvider(this.dialogRef.data.node?.approvers));
+            this.setListItems(this.dialogRef.data.node?.approvers);
         } else {
             this.setUserToShowDetails(this.dialogRef.data.node?.approvers[0] || this.dialogRef.data.watcher);
         }
+    }
+
+    setListItems(users: User[]): void {
+        console.log('setListItems to', users);
+        // if (this._dataSource) {
+        //     this._dataSource = null;
+        // }
+        this._dataSource = new ListDataSource<User>(new ListDataProvider(users));
+        this._cdr.detectChanges();
     }
 
     onUserClick(user: User): void {
@@ -75,6 +83,18 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
         return this._selectedItems.map(item => {
             return this.dialogRef.data.node?.approvers.find(user => user.imgUrl === item.avatarSrc);
         });
+    }
+
+    onSearchStringChange(searchString: string): void {
+        this._selectedItems = [];
+        if (!searchString) {
+            this.setListItems(this.dialogRef.data.node?.approvers);
+            return;
+        }
+
+        const result = this.dialogRef.data.node?.approvers.filter(user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1);
+        console.log('search', searchString, 'result', result);
+        this.setListItems(result);
     }
 }
 

@@ -1,16 +1,28 @@
 <fd-dialog>
-    <fd-dialog-header>
-        <h1 fd-dialog-title>
-            <fd-icon
-                *ngIf="_userToShowDetails && _isListMode"
-                [glyph]="'navigation-left-arrow'"
-                (click)="backToListFromDetails()"
-            ></fd-icon>
-            Details
-        </h1>
+    <fd-dialog-header [class.show-search]="!_userToShowDetails && _isListMode">
+        <ng-template fdTemplate="header">
+            <p>
+                <fd-icon
+                    *ngIf="_userToShowDetails && _isListMode"
+                    [glyph]="'navigation-left-arrow'"
+                    (click)="backToListFromDetails()"
+                ></fd-icon>
+                {{ _isListMode && !_userToShowDetails ? dialogRef.data.node.description + ' (' + dialogRef.data.node.approvers.length + ')' : 'Detail' }}
+            </p>
+            <fdp-search-field
+                *ngIf="!_userToShowDetails && _isListMode"
+                placeholder="Search"
+                contentDensity="compact"
+                [suggestions]="[]"
+                (inputChange)="onSearchStringChange($event.text)"
+            ></fdp-search-field>
+        </ng-template>
+<!--        <div fd-dialog-title>-->
+<!--            -->
+<!--        </div>-->
     </fd-dialog-header>
 
-    <fd-dialog-body>
+    <fd-dialog-body [class.no-top-padding]="!_userToShowDetails && _isListMode">
         <ng-container *ngIf="_userToShowDetails">
             <div class="approval-flow-user-details__user-info">
                 <fd-avatar
@@ -33,6 +45,10 @@
 
         </ng-container>
         <ng-container *ngIf="_isListMode && !_userToShowDetails">
+            <div class="approval-flow-user-details__selected-count"
+                 *ngIf="_selectedItems.length">{{ _selectedItems.length }}
+                item{{ _selectedItems.length > 1 ? 's' : '' }} selected
+            </div>
             <fdp-list
                 selectionMode="multi"
                 [selection]="true"
@@ -61,6 +77,7 @@
                 fdType="emphasized"
                 label="Send reminder"
                 [compact]="true"
+                [disabled]="_isListMode && !_userToShowDetails && !_selectedItems.length"
                 (click)="sendReminder()">
             </button>
         </fd-dialog-footer-button>

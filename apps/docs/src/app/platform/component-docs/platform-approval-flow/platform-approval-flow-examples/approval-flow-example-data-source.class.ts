@@ -91,8 +91,36 @@ const users: User[] = [
         name: 'Logan Herrera',
         description: 'Sales team',
         imgUrl: 'https://randomuser.me/api/portraits/men/53.jpg'
+    },
+    {
+        id: 'uid66141',
+        name: 'Melissa Martin',
+        description: 'Accounting team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/87.jpg'
+    },
+    {
+        id: 'uid66151',
+        name: 'Sofia Hanson',
+        description: 'Accounting team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/24.jpg'
+    },
+    {
+        id: 'uid66161',
+        name: 'Jill Fuller',
+        description: 'Accounting team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/64.jpg'
+    },
+    {
+        id: 'uid66171',
+        name: 'Ella Franklin',
+        description: 'Accounting team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
+
+function getRandomUser(): User {
+    return users[Math.floor(Math.random() * users.length)];
+}
 
 const simplestGraph: ApprovalProcess = {
     watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
@@ -202,7 +230,7 @@ const mediumComplexityGraph: ApprovalProcess = {
         {
             id: 'ID222',
             name: 'node name',
-            description: 'Marketing',
+            description: 'Marketing team',
             approvers: [getRandomUser(), getRandomUser()],
             status: 'in progress',
             targets: [],
@@ -268,7 +296,7 @@ const complexGraph: ApprovalProcess = {
         {
             id: 'ID222',
             name: 'node name',
-            description: 'Marketing',
+            description: 'Marketing team',
             approvers: [getRandomUser(), getRandomUser()],
             status: 'in progress',
             targets: ['ID222-dep'],
@@ -317,11 +345,6 @@ const complexGraph: ApprovalProcess = {
         }
     ]
 };
-
-
-function getRandomUser(): User {
-    return users[Math.floor(Math.random() * users.length)];
-}
 
 export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
     /**
