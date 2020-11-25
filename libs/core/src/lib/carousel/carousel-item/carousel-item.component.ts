@@ -39,6 +39,12 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @HostBinding('attr.aria-describedby')
     ariaDescribedBy: string;
 
+    /**
+     * Loading indicator when item is not yet loaded
+     */
+    @Input()
+    loading = false;
+
     /** Sets tooltip for carousel item */
     @Input()
     @HostBinding('attr.title')
@@ -56,18 +62,20 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @Input()
     value: any;
 
+    /** @hidden */
     @HostBinding('class.fd-carousel__item')
-    carouselItem = 'fd-carousel__item';
+    carouselItem = true;
 
+    /** @hidden */
     @HostBinding('class.fd-carousel__item--active')
     carouselItemActive = true;
 
-    /** Hide/show slide, useful for managing tab order */
+    /** @hidden Hide/show slide, useful for managing tab order */
     @HostBinding('style.visibility')
-    visibility = 'hidden';
+    visibility = 'visible';
 
     /**
-     * Handling width height in IE versions.
+     * @hidden Handling width height in IE versions.
      */
     @HostBinding('class.fd-carousel--ie-handling')
     ieAutoWidth = true;

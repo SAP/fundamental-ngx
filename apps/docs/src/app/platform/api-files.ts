@@ -70,5 +70,6 @@ export const API_FILES = {
         'ListHeader',
         'ListConfig'
     ],
+    multiInput: ['PlatformMultiInputComponent'],
     feedInput: ['FeedInputComponent']
 };

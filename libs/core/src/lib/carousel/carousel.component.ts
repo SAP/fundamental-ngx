@@ -34,7 +34,7 @@ import { RtlService } from '../utils/services/rtl.service';
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
 
-export type CarouselIndicatorsOrientation = 'bottom' | 'top';
+export type PageIndicatorsOrientation = 'bottom' | 'top';
 
 export enum SlideDirection {
     None,
@@ -76,7 +76,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Sets position of page indicator container. Default position is bottom. */
     @Input()
-    carouselIndicatorsOrientation: CarouselIndicatorsOrientation = 'bottom';
+    pageIndicatorsOrientation: PageIndicatorsOrientation = 'bottom';
 
     /** Height for carousel container */
     @Input()
@@ -155,13 +155,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
     /**
-     * Returns the `role` attribute of the carousel.
+     * @hidden Returns the `role` attribute of the carousel.
      */
     @HostBinding('attr.role')
     role = 'region';
 
     /**
-     * Returns the `tabIndex` of the carousel component.
+     * @hidden Returns the `tabIndex` of the carousel component.
      */
     @HostBinding('attr.tabindex')
     get tabIndex(): number {
@@ -169,7 +169,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * Sets the overflow to auto value.
+     * @hidden Sets the overflow to auto value.
      */
     @HostBinding('style.overflow')
     overflow = 'auto';
@@ -178,6 +178,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @ContentChildren(CarouselItemComponent, { descendants: true })
     slides: QueryList<CarouselItemComponent>;
 
+    /** @hidden */
     @ViewChild('slideContainer')
     slideContainer: ElementRef;
 
@@ -241,6 +242,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._carouselService.dragStateChange.subscribe((event) => this._onSlideDrag(event));
 
         this._slidesCopy = this.slides.toArray().slice();
+
+        // Disable swipe when there is no carousel item
+        if (this.slides.length === 0) {
+            this.swipeEnabled = false;
+            this.navigation = false;
+        }
+
         this._changeDetectorRef.markForCheck();
     }
 
@@ -362,8 +370,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             // Need to disable navigation button if either direction limit has reached.
             if (this.currentActiveSlidesStartIndex === 0) {
                 this.leftButtonDisabled = true;
+                this.rightButtonDisabled = false;
             } else if (this.slides.length - 1 === this.currentActiveSlidesStartIndex) {
                 this.rightButtonDisabled = true;
+                this.leftButtonDisabled = false;
             } else if (
                 this.visibleSlidesCount > 1 &&
                 this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length
@@ -394,13 +404,16 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
         }
 
-        for (
-            let index = this.currentActiveSlidesStartIndex;
-            index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount;
-            index++
-        ) {
-            this.slides.toArray()[index].visibility = 'visible';
-        }
+        this.slides.forEach((_slide, index) => {
+            if (
+                index >= this.currentActiveSlidesStartIndex &&
+                index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount
+            ) {
+                _slide.visibility = 'visible';
+            } else {
+                _slide.visibility = 'hidden';
+            }
+        });
     }
 
     /** @hidden Initialize config for Carousel service */
@@ -524,7 +537,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this._changeDetectorRef.markForCheck();
         } else {
             // After slide limit reached, if dragging starts then revert visibility
-            if (!this._slideSwiped) {
+            if (!this._slideSwiped && !this.loop) {
                 this._manageSlideVisibility(this.currentActiveSlidesStartIndex);
             }
         }

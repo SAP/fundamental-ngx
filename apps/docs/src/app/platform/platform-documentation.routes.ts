@@ -225,11 +225,19 @@ export const ROUTES: Routes = [
                         m.PlatformObjectListItemDocsModule)
             },
             {
+                path: 'multi-input',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/multi-input/platform-multi-input-docs.module').then(
+                        (m) => m.PlatformMultiInputDocsModule
+                    )
+            },
+            {
                 path: 'feed-input',
                 loadChildren: () =>
                     import('./component-docs/platform-feed-input/platform-feed-input.module').then((m) =>
                         m.PlatformFeedInputDocsModule)
-            }
+
+            },
         ]
     }
 ];

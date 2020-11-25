@@ -16,6 +16,8 @@ const LIST_ELEMENTS: Product[] = [
         image: 'http://picsum.photos/id/1018/400',
         gylp1: 'add-favorite',
         gylp2: 'flag',
+        tip1: 'favorite',
+        tip2: 'flag',
         attribute2: '',
         attribute1: '125 g',
         attribute3: '145 x 140 x 360 cm',
@@ -38,6 +40,8 @@ const LIST_ELEMENTS: Product[] = [
         image: 'http://picsum.photos/id/1018/400',
         gylp1: 'request',
         gylp2: 'flag',
+        tip1: 'request',
+        tip2: 'flag',
         attribute1: '155 x 240 x 160 cm',
         attribute2: '125.50 kg',
         attribute3: '145 x 140 x 360 cm',
@@ -60,6 +64,8 @@ const LIST_ELEMENTS: Product[] = [
         image: 'http://picsum.photos/id/1018/400',
         gylp1: 'add-favorite',
         gylp2: 'user-edit',
+        tip1: 'favorite',
+        tip2: 'edit',
         attribute1: 'Fixed rate',
         attribute2: '125 g',
         attribute3: '145 x 140 x 360 cm',
@@ -69,7 +75,7 @@ const LIST_ELEMENTS: Product[] = [
         inverted1: false,
         status2: 'negative',
         statusgyph2: 'status-negative',
-        statuslabel2: '',
+        statuslabel2: 'Negative',
         inverted2: true,
         link: '/platform/list',
         decimal: 2
@@ -82,6 +88,8 @@ const LIST_ELEMENTS: Product[] = [
         image: 'http://picsum.photos/id/1018/400',
         gylp1: '',
         gylp2: 'private',
+        tip1: '',
+        tip2: 'private',
         attribute1: '12g',
         attribute2: 'Not for resale',
         attribute3: '145 x 140 x 360 cm',
@@ -117,6 +125,8 @@ export interface Product {
     statuslabel2: string;
     inverted2: boolean;
     link: string;
+    tip1: string;
+    tip2: string;
     decimal: number;
 }
 
