@@ -23,12 +23,12 @@ export class ActionSheetControlComponent {
 
     /** Emitted event when control button is clicked **/
     @Output()
-    clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+    clicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        this.clicked.emit(true);
+        this.clicked.emit();
     }
 
 }

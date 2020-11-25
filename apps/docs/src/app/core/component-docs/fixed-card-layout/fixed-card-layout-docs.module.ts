@@ -9,7 +9,6 @@ import {
     TableModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
-import { AngularResizedEventModule } from 'angular-resize-event';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -36,7 +35,6 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        AngularResizedEventModule,
         CardModule,
         DialogModule,
         FixedCardLayoutModule,

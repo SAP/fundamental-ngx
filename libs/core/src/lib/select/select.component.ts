@@ -54,6 +54,10 @@ export interface OptionStatusChange {
     styleUrls: ['./select.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[class.fd-select-custom-class]': 'true',
+        '[class.fd-select-custom-class--mobile]': 'mobile',
+    },
     providers: [
         SelectProxy,
         {
@@ -107,6 +111,10 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     @Input()
     compact = false;
 
+    /** Whether option components contain more than basic text. */
+    @Input()
+    extendedBodyTemplate = false;
+
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
     maxHeight: string;
@@ -133,10 +141,10 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     };
 
     /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
      * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
@@ -281,6 +289,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     ngAfterViewInit(): void {
         this._listenOnControlTouched();
         this._setOptionsArray();
+        this._setOptionsProperties();
         this._setupMobileMode();
     }
 
@@ -374,6 +383,7 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
             this.options.changes
                 .subscribe(_ => {
                     this._setOptionsArray();
+                    this._setOptionsProperties();
                     this._setSelectedOption();
                     this._listenOnOptionKeydown();
                     setTimeout(() => {
@@ -541,6 +551,11 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
     /** @hidden */
     private _setOptionsArray(): void {
         this._options = this.options.toArray();
+    }
+
+    /** @hidden */
+    private _setOptionsProperties(): void {
+        this._options.forEach(option => option.setExtendedTemplate(this.extendedBodyTemplate));
     }
 
     /** @hidden */

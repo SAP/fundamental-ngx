@@ -19,6 +19,12 @@ export class LayoutGridNoGapExampleComponent {}
 export class LayoutGridOffsetExampleComponent {}
 
 @Component({
+    selector: 'fd-layout-grid-growing-example',
+    templateUrl: './layout-grid-growing-example.component.html'
+})
+export class LayoutGridGrowingExampleComponent {}
+
+@Component({
     selector: 'fd-layout-grid-responsive-example',
     templateUrl: './layout-grid-responsive-example.component.html'
 })

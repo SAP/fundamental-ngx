@@ -122,9 +122,7 @@ describe('PopoverComponent', () => {
 
         (<any>component)._applyWidthOverlay()
 
-        expect((<any>component)._overlayRef.updateSize).toHaveBeenCalledWith(
-            { minWidth: component.triggerOrigin.elementRef.nativeElement.offsetWidth }
-        );
+        expect(component._popoverBodyMinWidth).toBe(component.triggerOrigin.elementRef.nativeElement.offsetWidth);
     });
 
     it('should resize overlay body equal, on refresh position', () => {
@@ -132,13 +130,9 @@ describe('PopoverComponent', () => {
         component.open();
         fixture.detectChanges();
 
-        spyOn((<any>component)._overlayRef, 'updateSize');
-
         (<any>component)._applyWidthOverlay()
 
-        expect((<any>component)._overlayRef.updateSize).toHaveBeenCalledWith(
-            { width: component.triggerOrigin.elementRef.nativeElement.offsetWidth }
-        );
+        expect(component._popoverBodyWidth).toBe(component.triggerOrigin.elementRef.nativeElement.offsetWidth);
     });
 
     it('should apply correct arrow and margin styles and change', () => {

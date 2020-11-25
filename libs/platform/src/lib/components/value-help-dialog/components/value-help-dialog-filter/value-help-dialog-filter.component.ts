@@ -17,6 +17,8 @@ export class PlatformVhdFilterComponent implements VhdFilter {
   @Input()
   key: string;
   @Input()
+  mobileTableHeader: boolean;
+  @Input()
   label: string;
   @Input()
   advanced = true;

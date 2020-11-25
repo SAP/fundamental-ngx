@@ -8,13 +8,12 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { KeyUtil } from '@fundamental-ngx/core';
 
 import { ListConfig } from '../list.config';
-import { BaseListItem } from '../base-list-item';
+import { BaseListItem, IS_ACTIVE_CLASS } from '../base-list-item';
 
 export class ActionChangeEvent {
     source: ActionListItemComponent;
 }
 
-const activeAction = 'is-active';
 @Component({
     selector: 'fdp-action-list-item',
     templateUrl: './action-list-item.component.html',
@@ -55,7 +54,7 @@ export class ActionListItemComponent extends BaseListItem {
     /**on keydown append active styles on actionable item */
     _onKeyDown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
-            this.button.nativeElement.classList.add(activeAction);
+            this.button.nativeElement.classList.add(IS_ACTIVE_CLASS);
         }
     }
 
@@ -63,7 +62,7 @@ export class ActionListItemComponent extends BaseListItem {
     /**on keyup remove active styles from actionable item*/
     _onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
-            this.button.nativeElement.classList.remove(activeAction);
+            this.button.nativeElement.classList.remove(IS_ACTIVE_CLASS);
             this._onActionClick(event);
 
         }

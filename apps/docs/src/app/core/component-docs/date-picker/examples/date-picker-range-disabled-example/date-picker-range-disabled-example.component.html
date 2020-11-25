@@ -2,6 +2,7 @@
     <form [formGroup]="customForm">
         <fd-date-picker
             type="range"
+            style="width: 300px"
             formControlName="dates"
             [state]="isValid() ? 'success' : 'error'"
             [disableRangeEndFunction]="disabledEndFunction"

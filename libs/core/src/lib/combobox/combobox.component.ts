@@ -35,7 +35,8 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { ListComponent } from '../list/list.component';
-import { FocusEscapeDirection } from '../..';
+import { FocusEscapeDirection } from '../utils/services/keyboard-support/keyboard-support.service';
+import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import {
     CONTROL,
     DOWN_ARROW,
@@ -75,7 +76,8 @@ import {
     ],
     host: {
         '[class.fd-combobox-custom-class]': 'true',
-        '[class.fd-combobox-input]': 'true'
+        '[class.fd-combobox-input]': 'true',
+        '[class.fd-combobox-custom-class--mobile]': 'mobile',
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -170,6 +172,15 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
     autoComplete = true;
+
+    /**
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
 
     /** Defines if combobox should behave same as dropdown. When it's enabled writing inside text input won't
      * trigger onChange function, until it matches one of displayed dropdown values. Also communicating with combobox

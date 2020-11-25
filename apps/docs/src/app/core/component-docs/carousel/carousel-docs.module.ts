@@ -14,6 +14,7 @@ import { CarouselHiddenNavigationComponent } from './examples/carousel-hidden-na
 import { CarouselContentNavigationComponent } from './examples/carousel-content-navigation.component';
 import { CarouselLoopedNavigationComponent } from './examples/carousel-looped-navigation.component';
 import { CarouselErrorMessageComponent } from './examples/carousel-error-message.component';
+import { CarouselLoadingContentExampleComponent } from './examples/carousel-loading-content-example.component';
 
 const routes: Routes = [
     {
@@ -46,7 +47,8 @@ const routes: Routes = [
         CarouselHiddenNavigationComponent,
         CarouselContentNavigationComponent,
         CarouselLoopedNavigationComponent,
-        CarouselErrorMessageComponent
+        CarouselErrorMessageComponent,
+        CarouselLoadingContentExampleComponent
     ]
 })
 export class CarouselDocsModule {}

@@ -1,17 +1,13 @@
-import {
-    Component,
-    Input,
-    TemplateRef
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 
 @Component({
     selector: 'fd-action-sheet-mobile',
-    templateUrl: './action-sheet-mobile.component.html'
+    templateUrl: './action-sheet-mobile.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetMobileComponent {
 
     /** Whenever links should be visible **/
-    @Input()
     open = false;
 
     /** @hidden */
@@ -19,8 +15,12 @@ export class ActionSheetMobileComponent {
         actionSheetBodyTemplate: TemplateRef<any>,
     } = null;
 
-    /** @hidden */
-    close(): void {
-        this.open = false;
+    constructor(
+        private _changeDetectionRef: ChangeDetectorRef
+    ) {}
+
+    toggleOpenState(isOpen: boolean): void {
+        this.open = isOpen;
+        this._changeDetectionRef.detectChanges();
     }
 }

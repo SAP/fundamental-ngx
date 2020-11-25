@@ -2,6 +2,10 @@
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/fundamental-ngx)](https://api.reuse.software/info/github.com/SAP/fundamental-ngx)
 
+<a href="https://www.netlify.com">
+  <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
+</a>
+
 ## Content
 * [1. Description](#1)
 * [2. Requirements](#2)

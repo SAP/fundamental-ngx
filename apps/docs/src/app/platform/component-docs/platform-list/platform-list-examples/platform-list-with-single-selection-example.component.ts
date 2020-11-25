@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
+
+import { ListDataSource, DataProvider, SelectionChangeEvent } from '@fundamental-ngx/platform';
 
 
 const LIST_ELEMENTS: Address[] = [
@@ -32,11 +33,11 @@ export class ListDataProvider extends DataProvider<Address> {
 })
 export class PlatformListWithSingleSelectionExampleComponent {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
-    _selectedItems: any[] = [];
+    _selectedItem: string;
 
-    _showItemInfo(event: any): void {
+    _showItemInfo(event: SelectionChangeEvent): void {
         if (event.selectedItems[0] !== undefined) {
-            this._selectedItems = event.selectedItems[0].id;
+            this._selectedItem = event.selectedItems[0].id;
         }
     }
 

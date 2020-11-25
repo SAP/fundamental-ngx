@@ -83,7 +83,7 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
      * Preset options for the popover body width.
      * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
      * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';

@@ -6,6 +6,7 @@ export const CSS_CLASS_NAME = {
     layoutGridNoGap: 'fd-container--no-gap',
 
     col: 'fd-col',
+    colGrow: 'fd-col--full',
 
     colSizePrefix: 'fd-col--',
     mdColSizePrefix: 'fd-col-md--',

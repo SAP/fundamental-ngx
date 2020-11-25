@@ -9,6 +9,7 @@
         "focus-trap",
         "popper.js",
         "fundamental-styles",
-        "@sap-theming/theming-base-content"
+        "@sap-theming/theming-base-content",
+        "hammerjs"
     ]
 }

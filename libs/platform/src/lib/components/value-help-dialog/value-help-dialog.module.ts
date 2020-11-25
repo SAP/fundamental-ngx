@@ -14,16 +14,22 @@ import {
   TableModule,
   PipeModule,
   IconModule,
-  ListModule
+  ListModule,
+  LinkModule,
+  BarModule
 } from '@fundamental-ngx/core';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { PlatformVhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
+import { SelectTabSettingsComponent } from './components/select-tab-settings/select-tab-settings.component';
+import { DefineTabSettingsComponent } from './components/define-tab-settings/define-tab-settings.component';
 
 @NgModule({
   declarations: [
     PlatformValueHelpDialogComponent,
     PlatformVhdFilterComponent,
+    SelectTabSettingsComponent,
+    DefineTabSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -40,11 +46,15 @@ import { PlatformVhdFilterComponent } from './components/value-help-dialog-filte
     CheckboxModule,
     PipeModule,
     IconModule,
-    ListModule
+    ListModule,
+    BarModule,
+    LinkModule
   ],
   exports: [
     PlatformValueHelpDialogComponent,
-    PlatformVhdFilterComponent
+    PlatformVhdFilterComponent,
+    SelectTabSettingsComponent,
+    DefineTabSettingsComponent,
   ]
 })
 export class PlatformValueHelpDialogModule { }

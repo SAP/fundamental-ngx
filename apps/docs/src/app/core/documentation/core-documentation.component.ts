@@ -50,8 +50,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
                     { url: 'core/list-byline', name: 'List with Byline' }
                 ]
             },
-            { url: 'core/localizationEditor', name: 'Localization Editor' },
-            { url: 'core/mega-menu', name: 'Mega Menu' },
             { url: 'core/menu', name: 'Menu' },
             { url: 'core/message-strip', name: 'Message Strip' },
             { url: 'core/message-toast', name: 'Message Toast' },
@@ -95,7 +93,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/global-config', name: 'Global Configuration' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
             { url: 'core/popover-directive', name: 'Popover Helper' },
-            { url: 'core/scroll-spy', name: 'Scroll Spy' }
+            { url: 'core/scroll-spy', name: 'Scroll Spy' },
+            { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];
 
         this.sections = [

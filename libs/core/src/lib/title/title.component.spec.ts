@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TitleComponent } from './title.component';
-import { TitleModule } from '@fundamental-ngx/core';
+import { TitleModule } from './title.module';
 
 describe('TitleComponent', () => {
     let component: TitleComponent;

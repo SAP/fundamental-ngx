@@ -5,7 +5,7 @@ import { DataProvider, DataSource } from '../../../domain';
 import { BaseDataProvider } from '../../../domain/base-data-provider';
 
 export class ValueHelpDialogDataSource<T> implements DataSource<T> {
-    protected dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
     constructor(public dataProvider: DataProvider<any>) { }
     // filter
     match(predicate?: string | Map<string, string>): void {

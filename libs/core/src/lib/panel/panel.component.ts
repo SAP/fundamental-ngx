@@ -10,9 +10,13 @@ import {
     OnInit,
     ViewEncapsulation,
     Output,
-    ContentChild
+    ContentChild,
+    Optional,
+    OnDestroy
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { Subscription } from 'rxjs';
+
+import { applyCssClass, CssClassBuilder, RtlService } from '../utils/public_api';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 
 let panelUniqueId = 0;
@@ -31,7 +35,7 @@ let panelExpandUniqueId = 0;
     styleUrls: ['./panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
+export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDestroy {
     /** User's custom classes */
     @Input()
     class: string;
@@ -74,16 +78,29 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
     panelContent: PanelContentDirective;
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef, private _elementRef: ElementRef) {}
+    _rtl = false;
+
+    /** @hidden */
+    _subscription = new Subscription();
+
+    /** @hidden */
+    constructor(private _cdRef: ChangeDetectorRef,
+                private _elementRef: ElementRef,
+                @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     ngOnInit(): void {
+        this._listenRtl();
         this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
+    }
+
+    ngOnDestroy(): void {
+        this._subscription.unsubscribe();
     }
 
     @applyCssClass
@@ -104,5 +121,26 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit {
     toggleExpand(): void {
         this.expanded = !this.expanded;
         this.expandedChange.emit(this.expanded);
+    }
+
+    /** @hidden */
+    _getButtonIcon(): string {
+        return this.expanded
+            ? 'slim-arrow-down'
+            : this._rtl
+                ? 'slim-arrow-left'
+                : 'slim-arrow-right'
+    }
+
+    /** @hidden */
+    private _listenRtl(): void {
+        if (this._rtlService) {
+            this._subscription.add(
+                this._rtlService.rtl.subscribe(rtl => {
+                    this._rtl = rtl;
+                    this._cdRef.markForCheck();
+                })
+            );
+        }
     }
 }

@@ -95,7 +95,7 @@ export class MultiInputComponent implements
 
     /** Search term, or more specifically the value of the inner input field. */
     @Input()
-    searchTerm: string;
+    searchTerm = '';
 
     /** Whether the search term should be highlighted in results. */
     @Input()
@@ -133,10 +133,10 @@ export class MultiInputComponent implements
     multiInputBodyLabel = 'Multi input body';
 
     /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
      * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * Leave blank for no effect.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
      */
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
@@ -210,7 +210,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     @ViewChild(TokenizerComponent)
-    tokenizer;
+    tokenizer: TokenizerComponent;
 
     /** @hidden */
     displayedValues: any[] = [];
@@ -323,17 +323,18 @@ export class MultiInputComponent implements
         if (this.disabled) {
             return ;
         }
+
+        if (!open && this.open && !this.mobile) {
+            this.searchInputElement.nativeElement.focus();
+        }
+
         if (this.open !== open) {
             this.openChange.emit(open);
         }
-
         this.open = open;
+
         if (!this.mobile) {
             this._popoverOpenHandle(open);
-        }
-
-        if (!this.open) {
-            this.searchInputElement.nativeElement.focus();
         }
         this._changeDetRef.detectChanges();
     }
@@ -369,21 +370,6 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    removeSelectedTokens(event: KeyboardEvent): void {
-        let allSelected = true;
-        if (KeyUtil.isKeyCode(event, [DELETE, BACKSPACE]) && !this.searchTerm) {
-            this.tokenizer.tokenList.forEach(token => {
-                if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
-                    this.handleSelect(false, token.elementRef.nativeElement.innerText);
-                } else {
-                    allSelected = false;
-                }
-            });
-            this.tokenizer.input.elementRef().nativeElement.focus();
-        }
-    }
-
-    /** @hidden */
     handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
@@ -404,21 +390,20 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSearchTermChange(): void {
-        if (!this.open) {
-            this.openChangeHandle(true);
+    handleSearchTermChange(searchTerm: string): void {
+        if (this.searchTerm !== searchTerm) {
+            this._applySearchTermChange(searchTerm);
+            if (!this.open) {
+                this.openChangeHandle(true);
+            }
         }
-        this.searchTermChange.emit(this.searchTerm);
-        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
-        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
     showAllClicked(event: MouseEvent): void {
         event.preventDefault();
         event.stopPropagation();
-        this.searchTerm = '';
-        this.handleSearchTermChange();
+        this._applySearchTermChange('');
     }
 
     /** @hidden */
@@ -427,8 +412,7 @@ export class MultiInputComponent implements
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
             this.handleSelect(true, newToken);
-            this.searchTerm = '';
-            this.handleSearchTermChange();
+            this._applySearchTermChange('');
             this.open = false;
         }
     }
@@ -466,13 +450,18 @@ export class MultiInputComponent implements
 
     /** @hidden */
     addOnButtonClicked(): void {
-        if (!this.open) {
-            this.handleSearchTermChange();
-        } else {
-            this.openChangeHandle(false);
-        }
+        this.openChangeHandle(!this.open);
     }
 
+    /** @hidden */
+    private _applySearchTermChange(searchTerm: string): void {
+        this.searchTerm = searchTerm;
+        this.searchTermChange.emit(this.searchTerm);
+        this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+        this._changeDetRef.detectChanges();
+    }
+
+    /** @hidden */
     private defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {

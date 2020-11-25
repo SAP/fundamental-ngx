@@ -1,15 +1,28 @@
 <button fd-button (click)="vhd.open()">Open value help dialog</button>
+<pre *ngIf="selectedValue">{{ selectedValue | json }}</pre>
 <fdp-value-help-dialog #vhd
     dialogTitle="Simple value help dialog"
     [dataSource]="dataSource"
-    [multiSelection]="true"
+    [mobile]="false"
+    (valueChange)="valueChange($event)"
 >
     <fdp-value-help-dialog-filter
-        *ngFor="let filter of filters"
+        *ngFor="let filter of filters; index as i"
+        [mobileTableHeader]="i < 2"
         [key]="filter.key"
         [label]="filter.label"
         [advanced]="filter.advanced || hasAdvanced"
         [include]="filter.include"
         [exclude]="filter.exclude"
     ></fdp-value-help-dialog-filter>
+
+    <fdp-select-tab-settings
+        title="Select from list"
+        [once]="true"
+        [multi]="true"
+        [advanced]="true">
+    </fdp-select-tab-settings>
+    <fdp-define-tab-settings
+        title="Define conditions">
+    </fdp-define-tab-settings>
 </fdp-value-help-dialog>

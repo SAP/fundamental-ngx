@@ -8,7 +8,6 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
-    Injector,
     Input,
     OnDestroy,
     Optional,
@@ -17,7 +16,8 @@ import {
     TemplateRef,
     ComponentRef,
     QueryList,
-    ContentChildren
+    ContentChildren,
+    ChangeDetectorRef
 } from '@angular/core';
 import { PopoverComponent } from '../popover/popover.component';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
@@ -27,11 +27,10 @@ import {
     FocusEscapeDirection,
     KeyboardSupportService
 } from '../utils/services/keyboard-support/keyboard-support.service';
-import { ActionSheetItemComponent } from './action-sheet-item/action-sheet-item.component';
+import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { Subject} from 'rxjs';
+import { Subject, merge } from 'rxjs';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
-import {ACTION_SHEET_COMPONENT, ActionSheetInterface} from './action-sheet.interface';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -43,11 +42,16 @@ import {ACTION_SHEET_COMPONENT, ActionSheetInterface} from './action-sheet.inter
         KeyboardSupportService
     ]
 })
-export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy, ActionSheetInterface {
+export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
     /** Whether should be displayed in compact mode **/
     @Input()
-    compact = false;
+    set compact(compact: boolean) {
+        this._compact = compact;
+        this._initializeChildrenState();
+        this._setItemsProperties();
+    }
+    private _compact = false;
 
     /** Whether should be displayed in mobile mode **/
     @Input()
@@ -55,7 +59,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** Whenever links should be visible **/
     @Input()
-    open = false;
+    isOpen = false;
 
     /** Whether internal keyboard support should be enabled. It's enabled by default */
     @Input()
@@ -73,7 +77,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** Event thrown, when the action sheet is opened or closed */
     @Output()
-    readonly openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
     @ContentChild(ActionSheetBodyComponent)
@@ -107,6 +111,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     constructor(
         private _elementRef: ElementRef,
         private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
+        private _changeDetectionRef: ChangeDetectorRef,
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
 
@@ -117,20 +122,12 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._keyboardSupportService.setKeyboardService(this.actionSheetItems, false);
         this._listenOnItemsChange();
         this._actionControlHandle();
-        this._actionItemsHandle();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.mobile) {
             this._setUpMobileMode();
-        }
-        if (this.popoverComponent && this.popoverComponent) {
-            this.popoverComponent.directiveRef.loaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
-                setTimeout(() => {
-                    this.setItemActive(0);
-                });
-            });
         }
     }
 
@@ -141,42 +138,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     }
 
     /** @hidden */
-    private _initializeChildrenState(): void {
-        this.actionSheetBody.mobile = this.mobile;
-        this.actionSheetBody.compact = this.compact;
-        this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this.compact);
-    }
-
-    /** @hidden */
-    private _actionControlHandle(): void {
-        this.actionSheetControl.clicked
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((isOpen) => this.isOpenChangeHandle(isOpen));
-    }
-
-    /** @hidden */
-    private _actionItemsHandle(): void {
-        this.actionSheetItems.forEach(item => item.clicked
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((isOpen) => this.isOpenChangeHandle(isOpen))
-        );
-    }
-
-    /** @hidden */
-    isOpenChangeHandle(isOpen: boolean): void {
-        this.open = isOpen;
-        if (this.mobile) {
-            this.actionSheetMobileDynamic.instance.open = this.open;
-        } else {
-            if (this.open) {
-                this.popoverComponent.open()
-            } else {
-                this.popoverComponent.directiveRef.close()
-            }
-        }
-    }
-
-    /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this.keyboardSupport) {
@@ -184,24 +145,88 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         }
     }
 
-    /** Set fake focus on element with passed index */
-    setItemActive(index: number): void {
-        this._keyboardSupportService.keyManager.setActiveItem(index);
+    /** Method that opens action sheet */
+    open(): void {
+        this.isOpenChangeHandle(true);
+    }
+
+    /** Method that closes action sheet */
+    close(): void {
+        this.isOpenChangeHandle(false);
+    }
+
+    /** @hidden */
+    isOpenChangeHandle(isOpen: boolean): void {
+        this.isOpen = isOpen;
+        if (this.mobile && this.actionSheetMobileDynamic) {
+            this.actionSheetMobileDynamic.instance.toggleOpenState(this.isOpen);
+        }
+        this.isOpenChange.emit(isOpen);
+
+        if (isOpen && !this.mobile) {
+            this._setItemActive(0);
+        }
+        this._changeDetectionRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _initializeChildrenState(): void {
+        if (this.actionSheetBody) {
+            this.actionSheetBody.mobile = this.mobile;
+            this.actionSheetBody.compact = this._compact;
+        }
+    }
+
+    /** @hidden */
+    private _actionControlHandle(): void {
+        this.actionSheetControl.clicked
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this.open());
     }
 
     /** @hidden */
     private _listenOnItemsChange(): void {
         this.actionSheetItems.changes
             .pipe(
-                startWith(0),
+                startWith(1),
                 takeUntil(this._onDestroy$)
             )
-            .subscribe(() => this._listenOnItemsClick());
-
+            .subscribe(() => {
+                this._listenOnItemsClick();
+                this._setItemsProperties();
+            });
     }
 
+    /** @hidden */
     private _listenOnItemsClick(): void {
+        /** Finish all of the streams, from before */
         this._onRefresh$.next();
+        /** Merge refresh/destroy observables */
+        const refresh$ = merge(this._onRefresh$, this._onDestroy$)
+
+        this.actionSheetItems.forEach((item, index) => item.clicked
+            .pipe(takeUntil(refresh$))
+            .subscribe((event: ActionSheetClickEvent) => {
+                this._setItemActive(index);
+                if (event.shouldClose) {
+                    this.close();
+                }
+            })
+        );
+    }
+
+    /** Set fake focus on element with passed index */
+    private _setItemActive(index: number): void {
+        if (this._keyboardSupportService.keyManager) {
+            this._keyboardSupportService.keyManager.setActiveItem(index);
+        }
+    }
+
+    /** @hidden */
+    private _setItemsProperties(): void {
+        if (this.actionSheetItems) {
+            this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this._compact);
+        }
     }
 
     /** @hidden */
@@ -209,8 +234,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this.actionSheetMobileDynamic = this._dynamicComponentService.createDynamicComponent(
             { actionSheetBodyTemplate: this.actionSheetBodyTemplate },
             ActionSheetMobileComponent,
-            { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: ACTION_SHEET_COMPONENT, useValue: this }] }) }
+            { container: this._elementRef.nativeElement }
         );
     }
 }

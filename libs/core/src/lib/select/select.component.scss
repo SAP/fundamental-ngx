@@ -1,22 +1,17 @@
 @import "~fundamental-styles/dist/select";
 
-// To be removed when proper strategy for controls inside popover is picked
-fd-select {
-    & > fd-popover {
-        width: 100%;
-
-        &.fd-popover__body--dropdown {
-            width: auto;
-            display: block;
-        }
-    }
-
-    & ul[fd-list] {
-        max-width: 100%;
-        overflow: auto;
-    }
+.fd-popover__body > :first-child {
+	border-radius: 0;
 }
 
-.fd-popover__body > :first-child {
-    border-radius: 0;
+// TODO: Remove after issue on styles addressed.
+.fd-select__text-content {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 1rem;
+	display: block;
+}
+
+.fd-select-custom-class {
+	display: inline-block;
 }

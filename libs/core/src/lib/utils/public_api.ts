@@ -37,6 +37,7 @@ export * from './dynamic-component/dynamic-component.service';
 
 export * from './datatypes/hash.datatype';
 export * from './services/rtl.service';
+export * from './services/themes.service';
 export * from './services/carousel.service';
 export * from './services/keyboard-support/keyboard-support.service';
 

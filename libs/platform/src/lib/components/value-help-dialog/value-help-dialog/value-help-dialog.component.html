@@ -2,81 +2,36 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <ng-template fdTemplate="header">
-                <ng-container *ngTemplateOutlet="mobile ? dialogMobileHeader : dialogDesktopHeader"></ng-container>
-                <div
-                    class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search"
-                    aria-label ="Selectid filters"
-                    [id]="'advanced-search-' + id"
-                    *ngIf="isSelectionTab"
-                >
-                    <fd-layout-grid>
-                        <div [fdLayoutGridCol]="mobile ? 12 : 6">
-                            <div fd-form-item>
-                                <input fd-form-control type="text" name="value-help-dialog-search" id="value-help-dialog-search" placeholder="Search" />
-                            </div>
-                        </div>
-                        <div [fdLayoutGridCol]="mobile ? 12 : 6" *ngIf="hasAdvanced">
-                            <div class="fdp-value-help-dialog__advanced-actions">
-                                <button
-                                    fd-button
-                                    fdType="transparent"
-                                    [label]="(isOpenAdvanced ? 'Hide' : 'Show') + ' Advanced search'"
-                                    [compact]="true"
-                                    (click)="toggleAdvancedSearch()"
-                                ></button>
-                                <button
-                                    fd-button
-                                    label="Go"
-                                    fdType="emphasized"
-                                    (click)="onSearch()"
-                                    [compact]="true"
-                                ></button>
-                            </div>
-                        </div>
-                    </fd-layout-grid>
-                    <div
-                        ariaLabel="Selected Panel Content"
-                        [id]="'advanced-search-content-' + id"
-                        *ngIf="isOpenAdvanced && hasAdvanced"
-                    >
-                        <fd-layout-grid>
-                            <ng-container *ngFor="let filter of displayedFilters">
-                                <ng-container *ngIf="filter.advanced">
-                                    <div [fdLayoutGridCol]="mobile ? 12 : 6">
-                                        <fd-layout-grid [noGap]="true">
-                                            <div fdLayoutGridCol="12" colMd="4" colLg="4" colXl="4">
-                                                <label fd-form-label [for]="'input' + filter.key">{{ filter.label }}:</label>
-                                            </div>
-                                            <div fdLayoutGridCol="12" colLg="8" colMd="8" colXl="8">
-                                                <input [(ngModel)]="filter.value" fd-form-control type="text" [name]="'search-by-' + filter.label" [id]="'input' + filter.key" />
-                                            </div>
-                                        </fd-layout-grid>
-                                    </div>
-                                </ng-container>
-                            </ng-container>
-                        </fd-layout-grid>
-                    </div>
-                </div>
+                <ng-container *ngTemplateOutlet="mobile ? mobileDialogTitle : desktopDialogTitle"></ng-container>
+                <ng-container *ngIf="!mobile">
+                    <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
+                </ng-container>
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body>
-            <div class="fdp-value-help-dialog__row fdp-value-help-dialog__table-holder">
-                <ng-container *ngIf="selectedTab === 0">
-                    <ng-container *ngTemplateOutlet="tableContent"></ng-container>
+            <ng-container *ngIf="mobile && isSelectionTab">
+                <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
+            </ng-container>
+            <div class="fdp-value-help-dialog__table-holder" [class.fdp-value-help-dialog__row]="!mobile">
+                <ng-container *ngIf="selectedTab === tabTypes.selectFromList">
+                    <ng-container *ngTemplateOutlet="selectionContent"></ng-container>
                 </ng-container>
-                <ng-container *ngIf="selectedTab === 1">
-                    <ng-container *ngTemplateOutlet="defineContent"></ng-container>
+                <ng-container *ngIf="selectedTab === tabTypes.defineConditions">
+                    <ng-container *ngTemplateOutlet="defineConditionsContent"></ng-container>
                 </ng-container>
             </div>
         </fd-dialog-body>
         <fd-dialog-footer>
             <ng-template fdTemplate="footer">
-                <div class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row" aria-label="Selected and excluded items">
+                <div class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row" aria-label="Selected and excluded items" *ngIf="hasSelectedTab">
                     <fd-toolbar fdType="transparent" [clearBorder]="true" (click)="toggleSelectedPanel()">
-                        <button fd-button aria-label="Toggle Selected and excluded items" fdType="transparent" [glyph]="selectedExpandState ? 'navigation-down-arrow' : 'navigation-right-arrow'"></button>
-                        <!-- <fd-icon [glyph]="selectedExpandState ? 'navigation-down-arrow' : 'navigation-right-arrow'"></fd-icon> -->
+                        <button
+                            fd-button
+                            aria-label="Toggle Selected and excluded items"
+                            fdType="transparent"
+                            [glyph]="selectedExpandState ? 'navigation-down-arrow' : 'navigation-right-arrow'"></button>
                         <!-- Selected title -->
-                        <ng-container *ngIf="excludedItems.length || selectedItems.length; else noSelectedPanelTitle">
+                        <ng-container *ngIf="excludedItems.length || selectedItems.length; else noItemsPanelTitle">
                             <ng-container *ngIf="selectedItems.length">
                                 <ng-container *ngTemplateOutlet="selectedPanelTitle"></ng-container>
                             </ng-container>
@@ -146,8 +101,27 @@
                     </div>
                 </div>
                 <div class="fdp-value-help-dialog__actions-row">
-                    <button fd-button label="OK" fdType="emphasized" [compact]="true" (click)="_closeDialog()"></button>
-                    <button fd-button label="Cancel" fdType="transparent" [compact]="true" (click)="_dismissDialog()"></button>
+                    <button
+                        fd-button
+                        label="Go"
+                        fdType="emphasized"
+                        *ngIf="mobile && isOpenAdvanced"
+                        [compact]="true"
+                        (click)="onSearch()"
+                    ></button>
+                    <button
+                        fd-button
+                        label="OK"
+                        fdType="emphasized"
+                        *ngIf="selectedTab !== tabTypes.advancedSearch"
+                        [compact]="true"
+                        (click)="_success()"></button>
+                    <button
+                        fd-button
+                        label="Cancel"
+                        fdType="transparent"
+                        [compact]="true"
+                        (click)="_dismiss()"></button>
                 </div>
             </ng-template>
         </fd-dialog-footer>
@@ -160,18 +134,82 @@
 <ng-template #excludedPanelTitle>
     Excluded items ({{ excludedItems.length }})
 </ng-template>
-<ng-template #noSelectedPanelTitle>
+<ng-template #noItemsPanelTitle>
     No items selected
 </ng-template>
 
+<ng-template #advancedSearchContent>
+    <div
+        class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search"
+        aria-label ="Selectid filters"
+        [id]="'advanced-search-' + id"
+    >
+        <fd-layout-grid>
+            <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12: 6" [colXl]="mobile ? 12: 6">
+                <div fd-form-item>
+                    <input
+                        fd-form-control
+                        type="search"
+                        name="value-help-dialog-search"
+                        id="value-help-dialog-search"
+                        placeholder="Search" />
+                </div>
+            </div>
 
-<ng-template #tableContent>
+            <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12: 6" [colXl]="mobile ? 12: 6" *ngIf="hasAdvanced">
+                <div class="fdp-value-help-dialog__advanced-actions">
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        [label]="mobile ? selectionTab.advancedSearchLabel : (isOpenAdvanced ? selectionTab.hideAdvancedSearchLabel : selectionTab.showAdvancedSearchLabel)"
+                        [compact]="true"
+                        (click)="toggleAdvancedSearch()"
+                    ></button>
+                    <button
+                        fd-button
+                        label="Go"
+                        fdType="emphasized"
+                        *ngIf="!mobile"
+                        (click)="onSearch()"
+                        [compact]="true"
+                    ></button>
+                </div>
+            </div>
+        </fd-layout-grid>
+        <div
+            ariaLabel="Selected Panel Content"
+            [id]="'advanced-search-content-' + id"
+            *ngIf="isOpenAdvanced && hasAdvanced"
+        >
+            <fd-layout-grid class="fdp-value-help-dialog__advanced-filters">
+                <ng-container *ngFor="let filter of displayedFilters; trackBy: _trackByFilterFn">
+                    <ng-container *ngIf="filter.advanced">
+                        <div fdLayoutGridCol="12" colMd="12" colLg="6" colXl="6">
+                            <fd-layout-grid [noGap]="true">
+                                <div fdLayoutGridCol="12" colMd="12" colLg="4" colXl="4">
+                                    <label fd-form-label [for]="'input' + filter.key">{{ filter.label }}:</label>
+                                </div>
+                                <div fdLayoutGridCol="12" colMd="12" colLg="8" colXl="8">
+                                    <input [(ngModel)]="filter.value" fd-form-control type="text" [name]="'search-by-' + filter.label" [id]="'input' + filter.key" />
+                                </div>
+                            </fd-layout-grid>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </fd-layout-grid>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #selectionContent>
+    <h4>Items({{ displayedData.length }})</h4>
     <table fd-table [compact]="true" [popIn]="mobile" [noBorderX]="mobile" [noBorderY]="mobile">
         <thead fd-table-header>
             <tr fd-table-row>
                 <th fd-table-cell>
                     <fd-checkbox
                         role="checkbox"
+                        *ngIf="selectionTab?.multi"
                         [name]="id + '-row-all'"
                         [compact]="true"
                         [tristate]="true"
@@ -180,24 +218,44 @@
                         (ngModelChange)="toggleAllRows()"
                     ></fd-checkbox>
                 </th>
-                <th fd-table-cell *ngFor="let filter of displayedFilters">{{ filter.label }}</th>
+                <th fd-table-cell *ngFor="let filter of tableFilters.header; trackBy: _trackByFilterFn">{{ filter.label }}</th>
             </tr>
         </thead>
         <tbody fd-table-body>
-            <tr *ngFor="let row of displayedData; trackBy:_trackByTableRowFn; index as i" fd-table-row [hoverable]="true">
-                <td fd-table-cell>
-                    <fd-checkbox
-                        role="checkbox"
-                        [name]="id + '-row-' + i"
-                        [compact]="true"
-                        [ngModel]="row.selected"
-                        (ngModelChange)="toggleSelectRow(row)"
-                    ></fd-checkbox>
-                </td>
-                <td fd-table-cell *ngFor="let filter of displayedFilters">{{ row[filter.key] }}</td>
-            </tr>
+            <ng-container *ngFor="let row of displayedData | slice:0:_shownCount; trackBy:_trackByTableRowFn; index as i">
+                <tr
+                    fd-table-row
+                    [hoverable]="!mobile"
+                    [main]="mobile"
+                    [attr.aria-selected]="row.selected"
+                    [activable]="!selectionTab?.multi"
+                    (click)="!selectionTab?.multi && toggleSelectRow(row)"
+                >
+                    <td fd-table-cell>
+                        <fd-checkbox
+                            role="checkbox"
+                            *ngIf="selectionTab?.multi"
+                            [name]="id + '-row-' + i"
+                            [compact]="true"
+                            [ngModel]="row.selected"
+                            (ngModelChange)="toggleSelectRow(row)"
+                        ></fd-checkbox>
+                    </td>
+                    <td fd-table-cell *ngFor="let filter of tableFilters.bodyHead" [fitContent]="mobile">{{ row[filter.key] }}</td>
+                </tr>
+                <tr fd-table-row *ngIf="mobile" [secondary]="mobile" [attr.aria-selected]="row.selected">
+                    <td fd-table-cell></td>
+                    <td fd-table-cell colspan="100%" [noPadding]="true">
+                        <p fd-table-text *ngFor="let filter of tableFilters.bodyCell">
+                            <label>{{ filter.label }}:</label>
+                            {{ row[filter.key] }}
+                        </p>
+                    </td>
+                </tr>
+            </ng-container>
+
             <tr fd-table-row *ngIf="!displayedData.length">
-                <td [attr.colspan]="displayedFilters.length + 1">
+                <td colspan="100%" [noPadding]="true">
                     <div class="fdp-value-help-dialog__empty-message">
                         {{ emptyTableMessage }}
                     </div>
@@ -205,9 +263,17 @@
             </tr>
         </tbody>
     </table>
+    {{ _shownCount }} {{ displayedData.length }}
+    <div fd-bar barDesign="header-with-subheader" *ngIf="_shownCount && _shownCount !== displayedData.length">
+        <div fd-bar-middle>
+            <fd-bar-element>
+                <button fd-button fdType="transparent" label="More" (click)="showMoreElements()"></button>
+            </fd-bar-element>
+        </div>
+    </div>
 </ng-template>
 
-<ng-template #defineContent>
+<ng-template #defineConditionsContent>
     Define conditions
 </ng-template>
 
@@ -215,48 +281,80 @@
     <ng-container>{{ dialogTitle || 'Value Help Dialog'}}</ng-container>
 </ng-template>
 
-<ng-template #tabLink let-title="title" let-index="index">
-    <a fd-list-link (click)="toggleTab(index)">
-        <i *ngIf="selectedTab === index" fd-list-icon glyph="navigation-left-arrow"></i>
-        <span fd-list-title>
-            {{ title }}
-        </span>
-        <i *ngIf="selectedTab !== index" fd-list-icon glyph="navigation-right-arrow"></i>
-    </a>
+<ng-template #tabLink let-title="title" let-type="type">
+    <ng-container *ngIf="selectedTab === type">
+        <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleTab(type)"></button>
+        <h4 fd-title>{{ title }}</h4>
+    </ng-container>
+    <ng-container *ngIf="selectedTab !== type">
+        <a fd-list-link (click)="toggleTab(type)">
+            <span fd-list-title>{{ title }}</span>
+            <i fd-list-icon glyph="navigation-right-arrow"></i>
+        </a>
+    </ng-container>
 </ng-template>
 
-<ng-template #dialogDesktopHeader>
+<ng-template #advancedHeader>
+    <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleAdvancedSearch()"></button>
+    <h4 fd-title>Advanced search</h4>
+</ng-template>
+
+<ng-template #desktopDialogTitle>
     <div fd-dialog-title>
         <ng-container *ngTemplateOutlet="dialogTitleText"></ng-container>
     </div>
-    <fd-tab-list class="fdp-value-help-dialog__tabs" [(selectedIndex)]="selectedTab">
-        <fd-tab title="SELECT FROM LIST"></fd-tab>
-        <fd-tab title="Define Conditions"></fd-tab>
-    </fd-tab-list>
+    <ng-container *ngTemplateOutlet="desktopTabs"></ng-container>
 </ng-template>
-<ng-template #dialogMobileHeader>
+<ng-template #mobileDialogTitle>
     <div fd-dialog-title>
         <ng-container *ngIf="hasSelectedTab; else dialogTitleText">
-            <ng-container *ngTemplateOutlet="selectedTabLink"></ng-container>
+            <ng-container *ngTemplateOutlet="selectedTabHeader"></ng-container>
         </ng-container>
     </div>
+    <ng-container *ngTemplateOutlet="mobileTabs"></ng-container>
+</ng-template>
+<ng-template #desktopTabs>
+    <fd-tab-list class="fdp-value-help-dialog__tabs" [(selectedIndex)]="selectedTab" *ngIf="selectionTab && defineTab">
+        <fd-tab [title]="selectionTab.title">
+            <!-- <div class="fdp-value-help-dialog__table-holder" [class.fdp-value-help-dialog__row]="!mobile">
+                <ng-container *ngIf="!mobile">
+                    <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
+                    <ng-container *ngTemplateOutlet="selectionContent"></ng-container>
+                </ng-container>
+                <ng-container *ngIf="mobile && selectedTab === tabTypes.selectFromList">
+                    <ng-container *ngTemplateOutlet="selectionContent"></ng-container>
+                </ng-container>
+            </div> -->
+        </fd-tab>
+        <fd-tab [title]="defineTab.title">
+            <!-- <ng-container *ngTemplateOutlet="defineConditionsContent"></ng-container> -->
+        </fd-tab>
+    </fd-tab-list>
+</ng-template>
+<ng-template #mobileTabs>
     <ul *ngIf="!hasSelectedTab" fd-list [compact]="true" size="s" [byline]="true">
         <li fd-list-item>
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'SELECT FROM LIST', index: 0}"></ng-container>
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: selectionTab.title, type: tabTypes.selectFromList}"></ng-container>
         </li>
         <li fd-list-item>
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'Define Conditions', index: 1}"></ng-container>
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTab?.title, type: tabTypes.defineConditions}"></ng-container>
         </li>
     </ul>
 </ng-template>
 
-<ng-template #selectedTabLink>
+
+
+<ng-template #selectedTabHeader>
     <ng-container [ngSwitch]="selectedTab">
-        <ng-container *ngSwitchCase="0">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'SELECT FROM LIST', index: 0}"></ng-container>
+        <ng-container *ngSwitchCase="tabTypes.selectFromList">
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'Select from list', type: selectedTab}"></ng-container>
         </ng-container>
-        <ng-container *ngSwitchCase="1">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'Define Conditions', index: 1}"></ng-container>
+        <ng-container *ngSwitchCase="tabTypes.advancedSearch">
+            <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleAdvancedSearch()"></button>
+            <h4 fd-title>{{ selectionTab.advancedSearchLabel }}</h4>
+        </ng-container>
+        <ng-container *ngSwitchCase="tabTypes.defineConditions">
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTab?.title, type: selectedTab}"></ng-container>
         </ng-container>
     </ng-container>
 </ng-template>

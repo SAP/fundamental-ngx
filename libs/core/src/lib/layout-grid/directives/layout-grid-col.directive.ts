@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
@@ -11,6 +12,17 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     /** Defines the width of the element on the layout grid. */
     @Input()
     fdLayoutGridCol: number;
+
+    /** Weather the column should take all available width */
+    @Input()
+    set colGrow(value: boolean) {
+        this._colGrow = coerceBooleanProperty(value);
+    };
+
+    /** @hidden */
+    get colGrow(): boolean {
+        return this._colGrow;
+    }
 
     /** Defines the width of the element on the layout grid for middle-size screen devices. */
     @Input()
@@ -45,6 +57,9 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     class: string;
 
     /** @hidden */
+    private _colGrow: boolean;
+
+    /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
@@ -67,6 +82,7 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     buildComponentCssClass(): string[] {
         return [
             CSS_CLASS_NAME.col,
+            this.colGrow ? CSS_CLASS_NAME.colGrow : '',
             this.getCssClassWithColWidth(CSS_CLASS_NAME.colSizePrefix, this.fdLayoutGridCol),
             this.getCssClassWithColWidth(CSS_CLASS_NAME.mdColSizePrefix, this.colMd),
             this.getCssClassWithColWidth(CSS_CLASS_NAME.lgColSizePrefix, this.colLg),

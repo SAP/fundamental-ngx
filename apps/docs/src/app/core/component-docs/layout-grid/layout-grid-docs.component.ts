@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import * as layoutGridBasicSrc from '!raw-loader!./examples/layout-grid-basic-example.component.html';
+import * as growingGridBasicSrc from '!raw-loader!./examples/layout-grid-growing-example.component.html';
 import * as layoutGridOffsetSrc from '!raw-loader!./examples/layout-grid-offset-example.component.html';
 import * as layoutGridResponsiveSrc from '!raw-loader!./examples/layout-grid-responsive-example.component.html';
 import * as layoutGridResponsiveOffsetSrc from '!raw-loader!./examples/layout-grid-responsive-offset-example.component.html';
@@ -25,6 +26,14 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridBasicSrc,
             fileName: 'layout-grid-basic-example'
+        }
+    ];
+
+    growingLayoutGrid: ExampleFile[] = [
+        {
+            language: 'html',
+            code: growingGridBasicSrc,
+            fileName: 'layout-grid-growing-example'
         }
     ];
 

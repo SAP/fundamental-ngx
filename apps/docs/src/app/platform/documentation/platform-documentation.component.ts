@@ -20,12 +20,14 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/button', name: 'Button' },
             { url: 'platform/checkbox', name: 'Checkbox' },
             { url: 'platform/checkbox-group', name: 'Checkbox Group' },
+            { url: 'platform/datetime-picker', name: 'Datetime Picker' },
             { url: 'platform/info-label', name: 'Info Label' },
             { url: 'platform/input', name: 'Input' },
             { url: 'platform/input-group', name: 'Input Group' },
             { url: 'platform/link', name: 'Link' },
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },
+            { url: 'platform/multi-input', name: 'Multi Input' },
             { url: 'platform/panel', name: 'Panel' },
             { url: 'platform/object-marker', name: 'Object Marker' },
             { url: 'platform/object-status', name: 'Object Status' },
@@ -41,11 +43,13 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/combobox', name: 'Combobox' },
             {
                 name: 'List And Items',
-                subItems: [{ url: 'platform/list', name: 'List' },
-                { url: 'platform/standard-list-item', name: 'Standard List Item' },
-                { url: 'platform/action-list-item', name: 'Action List Item' },
-                { url: 'platform/display-list-item', name: 'Display List Item' },
-                { url: 'platform/object-list-item', name: 'Object List Item' }]
+                subItems: [
+                    { url: 'platform/list', name: 'List' },
+                    { url: 'platform/standard-list-item', name: 'Standard List Item' },
+                    { url: 'platform/action-list-item', name: 'Action List Item' },
+                    { url: 'platform/display-list-item', name: 'Display List Item' },
+                    { url: 'platform/object-list-item', name: 'Object List Item' }
+                ]
             },
             { url: 'platform/value-help-dialog', name: 'Value Help Dialog' }
         ];
@@ -64,7 +68,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                 content: this.components
             },
             {
-                header: 'layouts',
+                header: 'Layouts',
                 content: this.layouts
             },
             {

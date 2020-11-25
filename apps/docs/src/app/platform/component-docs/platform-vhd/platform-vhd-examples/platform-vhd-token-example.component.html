@@ -11,7 +11,8 @@
     [tokenizerFn]="tokenizerFn"
 >
     <fdp-value-help-dialog-filter
-        *ngFor="let filter of filters"
+        *ngFor="let filter of filters; index as i"
+        [mobileTableHeader]="i < 2"
         [key]="filter.key"
         [label]="filter.label"
         [advanced]="filter.advanced || hasAdvanced"

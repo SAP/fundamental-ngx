@@ -37,7 +37,15 @@ class VhdDataProvider extends DataProvider<any> {
     }
     fetch(params: Map<string, string>): Observable<any> {
         console.log('fetch params: ', params);
-        const data = this.values;
+
+        let data = this.values;
+        const arrayParams = Array.from(params);
+        const filterFn = (row: any) => {
+            return arrayParams.every(([key, value]) => String(row[key]).toLowerCase().includes(value.toLowerCase()))
+        };
+        if (params.size) {
+            data = this.values.filter(filterFn);
+        }
 
         return of(data);
     }
@@ -52,6 +60,8 @@ export class PlatformVhdBasicExampleComponent implements OnInit {
     dataSource: ValueHelpDialogDataSource<any>;
     hasAdvanced = false;
 
+    selectedValue = null;
+
     ngOnInit(): void {
         const data = exampleDataSource();
         this.filters = data.filters;
@@ -60,5 +70,9 @@ export class PlatformVhdBasicExampleComponent implements OnInit {
 
     tokenizerFn = (row: { name: string; id: string | number; }) => {
         return `${row.name} (${row.id})`;
+    }
+
+    valueChange($event: {selected: any}): void {
+        this.selectedValue = $event;
     }
 }
