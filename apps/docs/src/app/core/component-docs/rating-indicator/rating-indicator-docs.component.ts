@@ -38,11 +38,15 @@ export class RatingIndicatorDocsComponent {
     ratingIndicatorRatings: ExampleFile[] = [
         {
             language: 'html',
-            code: ratingsObjectHtml,
             fileName: 'rating-indicator-ratings',
-            typescriptFileCode: ratingsObjectTs,
-            component: 'RatingIndicatorRatingsExampleComponent',
+            code: ratingsObjectHtml,
             scssFileCode: ratingExampleScs
+        },
+        {
+            language: 'typescript',
+            component: 'RatingIndicatorRatingsExampleComponent',
+            fileName: 'rating-indicator-ratings',
+            code: ratingsObjectTs
         }
     ];
 
