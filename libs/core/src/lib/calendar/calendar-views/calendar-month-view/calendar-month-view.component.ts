@@ -78,9 +78,9 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
     /** @hidden */
     ngOnInit(): void {
-        this._constructMonthGrid();
-        this._setupKeyboardService();
         this._initiated = true;
+        this._setupKeyboardService();
+        this._constructMonthGrid();
 
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._constructMonthGrid();
@@ -203,10 +203,6 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         this._calendarService.onKeySelect
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((index) => this.selectMonth(this._getMonthList()[index]));
-
-        this._dateTimeAdapter.localeChanges
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._constructMonthGrid());
     }
 
     /** Returns transformed 1d array from 2d month grid. */
