@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/textarea.e2e-spec.ts'
+        './e2e/wdio/**/switch.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -62,7 +62,7 @@ exports.config = {
                 requireWindowFocus: true,
                 //tags: [ "process.env.TRAVIS_BUILD_ID"],
             }
-        },*/
+        },
         {
             browserName: 'MicrosoftEdge',
             browserVersion: 'latest',
@@ -80,19 +80,21 @@ exports.config = {
             acceptInsecureCerts: true,
             "sauce:options": {
                 name: 'e2e-win-firefox',
+                screenResolution: '1920x1080',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },
-/*        {
+        },*/
+        {
             browserName: 'chrome',
             browserVersion: 'latest',
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
             "sauce:options": {
+                screenResolution: '1920x1080',
                 //name: 'e2e-win-chrome',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },*/
+        },
 /*        {
             browserName: 'chrome',
             platformName: 'macOS 10.15',

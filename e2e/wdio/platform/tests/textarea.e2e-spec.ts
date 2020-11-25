@@ -6,7 +6,7 @@ import { webDriver } from '../../driver/wdio';
 
 describe('Verify Textarea component', function() {
     const textareaPage = new TextareaPo();
-    const copyPasteBtn = process.platform === 'darwin' ? 'COMMAND' : 'CONTROL';
+    const copyPasteBtn = webDriver.currentPlatformName === 'Mac OS X' ? 'COMMAND' : 'CONTROL';
     beforeAll(() => {
         textareaPage.open();
     });
@@ -105,8 +105,8 @@ describe('Verify Textarea component', function() {
 
         it('should have focused state', () => {
             webDriver.mouseHoverElement(textareaPage.basicTextArea);
-            const borderColorOnHover = webDriver.getCSSPropertyByName(textareaPage.basicTextArea, 'border-color');
-            expect(borderColorOnHover.value).toBe('rgb(8, 84, 160)'); // TODO: Replace with hex
+            const borderColorOnHover = webDriver.getCSSPropertyByName(textareaPage.basicTextArea, 'border-bottom-color');
+            expect(borderColorOnHover.value).toBe('rgb(8,84,160)'); // TODO: Replace with hex
         });
 
         it('should have hover state', () => {
@@ -124,11 +124,11 @@ describe('Verify Textarea component', function() {
 
         it('should see an error if trying to submit empty mandatory textarea', () => {
             webDriver.clearValue(textareaPage.detailedTextArea);
-            const borderColor = webDriver.getCSSPropertyByName(textareaPage.detailedTextArea, 'border-color');
+            const borderColor = webDriver.getCSSPropertyByName(textareaPage.detailedTextArea, 'border-bottom-color');
             webDriver.mouseHoverElement(textareaPage.detailedTextArea);
             const errorText = webDriver.getText(textareaPage.detailedTextAreaErrorMessage);
 
-            expect(borderColor.value).toBe('rgb(187, 0, 0)');  // TODO: Replace with hex
+            expect(borderColor.value).toBe('rgb(187,0,0)');  // TODO: Replace with hex
             expect(errorText.trim()).toBe('Value is required');
         });
 
@@ -136,20 +136,20 @@ describe('Verify Textarea component', function() {
             // need to sendKeys because of the issue with characters counter
             webDriver.addValue(textareaPage.detailedTextArea, 'test');
             const charCounterText1 = webDriver.getText(textareaPage.detailedTextAreaCharacterCounter);
-            const borderColorBefore = webDriver.getCSSPropertyByName(textareaPage.detailedTextArea, 'border-color');
+            const borderColorBefore = webDriver.getCSSPropertyByName(textareaPage.detailedTextArea, 'border-bottom-color');
 
             webDriver.addValue(textareaPage.detailedTextArea, 'test');
             const charCounterText2 = webDriver.getText(textareaPage.detailedTextAreaCharacterCounter);
             webDriver.setValue(textareaPage.detailedTextArea, 'test');
             webDriver.mouseHoverElement(textareaPage.detailedTextArea);
-            const borderColorAfter = webDriver.getCSSPropertyByName(textareaPage.detailedTextArea, 'border-color');
+            const borderColorAfter = webDriver.getCSSPropertyByName(textareaPage.detailedTextArea, 'border-bottom-color');
             const charCounterText3 = webDriver.getText(textareaPage.detailedTextAreaCharacterCounter);
 
             expect(charCounterText1).toBe('21 characters over the limit');
             expect(charCounterText2).toBe('25 characters over the limit');
-            expect(borderColorBefore.value).toBe('rgb(187, 0, 0)');
+            expect(borderColorBefore.value).toBe('rgb(187,0,0)');
             expect(charCounterText3).toBe('6 characters remaining');
-            expect(borderColorAfter.value).toBe('rgb(8, 84, 160)');
+            expect(borderColorAfter.value).toBe('rgb(8,84,160)');
         });
 
         it('should show error if more than permitted characters were added', () => {
