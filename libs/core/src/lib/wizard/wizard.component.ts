@@ -21,7 +21,6 @@ export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
 export const STEP_STACKED_CLASS = 'fd-wizard__step--stacked';
 export const STEP_NO_LABEL_CLASS = 'fd-wizard__step--no-label';
 
-export const WIZARD_CLASS = 'fd-wizard';
 export const WIZARD_NAVIGATION_CLASS = 'fd-wizard__navigation';
 export const WIZARD_CONTENT_CLASS = 'fd-wizard__content';
 export const WIZARD_CONTAINER_WRAPPER_CLASS = 'fd-wizard-container-wrapper';
@@ -33,8 +32,6 @@ export const ACTIVE_STEP_STATUS = 'active';
 export const CURRENT_STEP_STATUS = 'current';
 export const UPCOMING_STEP_STATUS = 'upcoming';
 export const COMPLETED_STEP_STATUS = 'completed';
-
-export const HEADER_HEIGHT = 64;
 
 export let _fromScrollToCurrentStep;
 export let timer = null;
@@ -188,7 +185,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _setContainerAndTallContentHeight(): void {
-        const wizard = this._elRef.nativeElement.querySelector('.' + WIZARD_CLASS);
+        const wizard = this._elRef.nativeElement;
         const combinedHeight = this.contentHeight ? this.contentHeight : this._calculateContentHeight();
         if (wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS)) {
             wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height =
