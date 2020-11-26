@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.4...v0.24.3-rc.5) (2020-11-26)
+
+
+### Features
+
+* (Core) introduce Feed Input component ([#3725](https://github.com/SAP/fundamental-ngx/issues/3725)) ([77ca12d](https://github.com/SAP/fundamental-ngx/commit/77ca12d2736de9a74f525ab1506adb57e484e7e0))
+* (Platform) introduce Feed Input component ([#3851](https://github.com/SAP/fundamental-ngx/issues/3851)) ([e55df40](https://github.com/SAP/fundamental-ngx/commit/e55df40c13c4abc5152771b6be0bb0a45b4ae230))
+
 ### [0.24.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.3...v0.24.3-rc.4) (2020-11-26)
 
 ### [0.24.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.2...v0.24.3-rc.3) (2020-11-26)
