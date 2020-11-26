@@ -123,6 +123,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'flexible-column-layout',
+                loadChildren: () =>
+                    import('./component-docs/flexible-column-layout/flexible-column-layout-docs.module').then(
+                        (m) => m.FlexibleColumnLayoutDocsModule
+                    )
+            },
+            {
                 path: 'form-message',
                 loadChildren: () =>
                     import('./component-docs/form-message/form-message-docs.module').then(

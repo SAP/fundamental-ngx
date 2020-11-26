@@ -71,6 +71,7 @@ export const API_FILES = {
         'FileUploaderService'
     ],
     fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective'],
+    flexibleColumnLayout: ['FlexibleColumnLayoutComponent'],
     form: [
         'FormControlComponent',
         'FormGroupComponent',

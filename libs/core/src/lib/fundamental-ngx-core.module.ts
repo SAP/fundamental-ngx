@@ -20,6 +20,7 @@ import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FixedCardLayoutModule } from './fixed-card-layout/fixed-card-layout.module';
+import { FlexibleColumnLayoutModule } from './flexible-column-layout/flexible-column-layout.module';
 import { FormattedTextModule } from './formatted-text/formatted-text.module';
 import { FormModule } from './form/form.module';
 import { IconModule } from './icon/icon.module';
@@ -99,6 +100,7 @@ import { ThemesService } from './utils/services/themes.service';
         FileInputModule,
         FileUploaderModule,
         FixedCardLayoutModule,
+        FlexibleColumnLayoutModule,
         FormModule,
         FormattedTextModule,
         IconModule,

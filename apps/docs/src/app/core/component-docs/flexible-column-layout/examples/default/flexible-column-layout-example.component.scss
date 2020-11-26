@@ -1,0 +1,37 @@
+.docs-fcl-example-overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+}
+
+.docs-fcl-example-overlay-content {
+    position: relative;
+    width: 100%;
+}
+
+.docs-fcl-example-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem 2rem;
+    background: #394a5d;
+}
+
+.docs-fcl-example-section {
+    height: 100vh;
+
+    h2 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    div {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px;
+    }
+}
