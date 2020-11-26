@@ -9,6 +9,7 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    SimpleChanges,
     TemplateRef
    } from '@angular/core';
    import { fromEvent, Subscription } from 'rxjs';
@@ -66,7 +67,7 @@ import {
     /**
      * the background design of the component
      * Options include: 'solid' | 'translucent' | 'transparent'
-     * The default one is 'solid'
+     * The default is set to 'solid'
      */
     @Input()
     backgroundDesign: 'solid' | 'translucent' | 'transparent' = 'solid';
@@ -165,7 +166,15 @@ import {
      * between the first (start), the middle and the last(end) column
      */
     _columnLayout: { start: number; mid: number; end: number; } = this._layouts[this.layout];
-  
+
+    /** 
+     * @hidden 
+     * set to 'true' if the layout is changed to fullscreen on window resize
+     * this will allow the layout to switch to previous mode on SM->MD transition
+     * if a layout is set by the user to fullscreen, it should persist on window resize
+     */
+    private _responsiveFullscreenLayout = false;
+
     /**
      * function that handles the click events on the left separator
      * and updates the layout
@@ -210,28 +219,19 @@ import {
         return SM_SCREEN_SIZE;
       }
     }
-  
-    /** 
-     * @hidden
-     * record the previous layout on reaching a breakpoint
-     * triggers update of the new layout
-     */
-    private _changeLayoutOnResize(newLayout: Layout): void {
-      this._previousLayout = this.layout;
-      this._updateCurrentLayout(newLayout);
-    }
-  
+
     /** 
      * @hidden 
      * handles the change of the layouts on reaching a break point
      */
-    private _onResizeHandler(): void {
+    private _responsiveLayoutChangeHandler(): void {
         this._screenSize = this._getScreenSize(window.innerWidth);
-  
+
         switch (this.layout) {
             case ONE_COLUMN_MID_FULL_SCREEN :
             case ONE_COLUMN_END_FULL_SCREEN : {
-            if (this._screenSize !== SM_SCREEN_SIZE && this.layout !== this._previousLayout) {
+            if (this._screenSize !== SM_SCREEN_SIZE && this.layout !== this._previousLayout && this._responsiveFullscreenLayout ) {
+                this._responsiveFullscreenLayout = false;
                 this._updateCurrentLayout(this._previousLayout);
             }
             break;
@@ -240,62 +240,68 @@ import {
             case TWO_COLUMNS_START_EXPANDED :
             case TWO_COLUMNS_MID_EXPANDED : {
             if (this._screenSize === SM_SCREEN_SIZE) {
-                this._changeLayoutOnResize(ONE_COLUMN_MID_FULL_SCREEN);
+                this._responsiveFullscreenLayout = true;
+                this._updateCurrentLayout(ONE_COLUMN_MID_FULL_SCREEN);
             }
             break;
             }
 
             case TWO_COLUMNS_END_EXPANDED : {
             if (this._screenSize === SM_SCREEN_SIZE) {
-                this._changeLayoutOnResize(ONE_COLUMN_END_FULL_SCREEN);
+                this._responsiveFullscreenLayout = true;
+                this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
             }
 
             if (this._screenSize === LG_SCREEN_SIZE || this._screenSize === XL_SCREEN_SIZE) {
-                this._changeLayoutOnResize(THREE_COLUMNS_END_EXPANDED);
+                this._updateCurrentLayout(THREE_COLUMNS_END_EXPANDED);
             }
             break;
             }
 
             case THREE_COLUMNS_START_MINIMIZED : {
             if (this._screenSize === SM_SCREEN_SIZE) {
-                this._changeLayoutOnResize(ONE_COLUMN_END_FULL_SCREEN);
+                this._responsiveFullscreenLayout = true;
+                this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
             }
 
             if (this._screenSize === LG_SCREEN_SIZE || this._screenSize === XL_SCREEN_SIZE) {
-                this._changeLayoutOnResize(THREE_COLUMNS_MID_EXPANDED);
+                this._updateCurrentLayout(THREE_COLUMNS_MID_EXPANDED);
             }
             break;
             }
 
             case THREE_COLUMNS_END_MINIMIZED : {
             if (this._screenSize === SM_SCREEN_SIZE) {
-                this._changeLayoutOnResize(ONE_COLUMN_END_FULL_SCREEN);
+                this._responsiveFullscreenLayout = true;
+                this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
             }
 
             if (this._screenSize === LG_SCREEN_SIZE || this._screenSize === XL_SCREEN_SIZE) {
-                this._changeLayoutOnResize(THREE_COLUMNS_END_MINIMIZED);
+                this._updateCurrentLayout(THREE_COLUMNS_END_MINIMIZED);
             }
             break;
             }
 
             case THREE_COLUMNS_MID_EXPANDED : {
             if (this._screenSize === SM_SCREEN_SIZE) {
-                this._changeLayoutOnResize(ONE_COLUMN_END_FULL_SCREEN);
+                this._responsiveFullscreenLayout = true;
+                this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
             }
 
             if (this._screenSize === MD_SCREEN_SIZE) {
-                this._changeLayoutOnResize(THREE_COLUMNS_START_MINIMIZED);
+                this._updateCurrentLayout(THREE_COLUMNS_START_MINIMIZED);
             }
             break;
             }
 
             case THREE_COLUMNS_END_EXPANDED : {
             if (this._screenSize === SM_SCREEN_SIZE) {
-                this._changeLayoutOnResize(ONE_COLUMN_END_FULL_SCREEN);
+                this._responsiveFullscreenLayout = true;
+                this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
             }
 
             if (this._screenSize === MD_SCREEN_SIZE) {
-                this._changeLayoutOnResize(TWO_COLUMNS_END_EXPANDED);
+                this._updateCurrentLayout(TWO_COLUMNS_END_EXPANDED);
             }
             break;
             }
@@ -314,7 +320,7 @@ import {
             this._subscriptions.add(
                 fromEvent(window, 'resize')
                     .pipe(debounceTime(100))
-                    .subscribe(() => this._onResizeHandler())
+                    .subscribe(() => this._responsiveLayoutChangeHandler())
             );
           }
     }
@@ -379,8 +385,12 @@ import {
      */
     private _updateCurrentLayout(newLayout: Layout): void {
       this.layout = newLayout;
-      this.layoutChange.emit(this.layout);
       this._updateColumnLayoutParameters();
+      
+      // setTimeout fixes "ExpressionChangedAfterItHasBeenCheckedError"
+      setTimeout(() => {
+        this.layoutChange.emit(this.layout);
+      });
     }
   
     /** @hidden */
@@ -396,8 +406,16 @@ import {
     }
   
     /** @hidden */
-    ngOnChanges(): void {
+    ngOnChanges(changes: SimpleChanges): void {
       this._updateColumnLayoutParameters();
+      
+      if (changes && changes.layout.previousValue) {
+        this._previousLayout = changes.layout.previousValue;
+      }
+
+      if (changes && changes.layout)  {
+        this._responsiveLayoutChangeHandler();
+      } 
     }
 
     /** @hidden */

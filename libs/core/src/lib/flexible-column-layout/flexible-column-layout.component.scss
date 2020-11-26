@@ -187,3 +187,7 @@
     background-color: transparent;
     background-color: var(--fdFlexibleColumnBackgroundTransparent, transparent);
 }
+
+.fd-flexible-column-layout__column {
+    transition: width 560ms cubic-bezier(0.1, 0, 0.05, 1), visibility 560ms ease-in;
+}

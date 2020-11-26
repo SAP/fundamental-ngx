@@ -5,10 +5,8 @@
 <import module="FlexibleColumnLayoutModule"></import>
 
 <description>
-    Depending on the current layout and display size, the flexible column layout consists of one, two, or three horizontally-aligned columns. Each column contains content that is not provided by the flexible column layout itself. This content is passed to the component through <code>ng-template</code> and using the template references <code>#startColumn</code>, <code>#midColumn</code> and <code>#endColumn</code>.
-    <br>
+    <p>Depending on the current layout and display size, the flexible column layout consists of one, two, or three horizontally-aligned columns. Each column contains content that is not provided by the flexible column layout itself. This content is passed to the component through <code>ng-template</code> and using the template references <code>#startColumn</code>, <code>#midColumn</code> and <code>#endColumn</code>.</p>
     <h2>Possible Layouts</h2>
-
     <ul>
         <li>
             <b>full screen layouts</b>
@@ -36,30 +34,46 @@
             </ul>
         </li>
     </ul>
+
+    <h4>Size LG and XL (Desktop)</h4>
+    <p><b style="color: green;">All variations are possible</b> - 'OneColumnStartFullScreen', 'OneColumnMidFullScreen', 'OneColumnEndFullScreen', 'TwoColumnsStartExpanded', 'TwoColumnsMidExpanded', 'TwoColumnsEndExpanded', 'ThreeColumnsMidExpanded', 'ThreeColumnsEndExpanded', 'ThreeColumnsStartMinimized' and 'ThreeColumnsEndMinimized'.</p>
+
+    <h4>Size MD (Tablet)</h4>
+    <p>There is no 3-column layout due to the limited width. However, you can still load 3 pages in size MD. Instead of showing them all side-by-side, the user can switch between columns 1/2 and 2/3 using 'ThreeColumnsStartMinimized' and 'ThreeColumnsEndMinimized'. </p>
+    <p><b style="color: green;">Possible variations</b> - 'OneColumnStartFullScreen', 'OneColumnMidFullScreen', 'OneColumnEndFullScreen', 'TwoColumnsStartExpanded', 'TwoColumnsMidExpanded', 'TwoColumnsEndExpanded', 'ThreeColumnsStartMinimized' and 'ThreeColumnsEndMinimized'.</p>
+
+    <h4>Size SM (Phone)</h4>
+    <p>Because of the limited width, there is no multi-column layout for size SM. Instead, the rightmost column is shown in full screen mode.</p>
+    <p><b style="color: green;">Possible variations</b> - 'OneColumnStartFullScreen', 'OneColumnMidFullScreen' and 'OneColumnEndFullScreen'.</p>
+
+    <p><b style="color: red;">Note:</b> The column separators cannot be used to expand a column to full screen mode. The layout arrow is located next to the divider and points in the direction in which a column can be expanded. If a column cannot be expanded any further, the action is hidden.</p>
+    <p><b>The user cannot change the size of a column freely (for example, (start: 15%, mid: 85%, end: 0)).</b></p>
+
+
+
     For more information about Layouts visit the <a target="_blank" href="https://experience.sap.com/fiori-design-web/flexible-column-layout/#possible-layouts">Fiori Design Guidelines.</a>
 
-    <br><br><br>
-    The navigation through the flexible column layout (forward and backwards), as well as the actions for entering and exiting full screen mode and closing columns are not provided automatically by the flexible column layout control, and need to be implemented manually. This can be done by reacting to events, such as button click, and updating the <code>[layout]</code> property of the <code>fd-flexible-column-layout</code> with the desired value. The same <code>[layout]</code> property is used to specify the inital layout of the component. <br>
-    For example, setting <code>[layout]="'TwoColumnsMidExpanded'"</code> will render a 2-column layout with middle column expanded.
-
-    <br><br>
-    For available navigation and close sequences visit the <a target="_blank" href="https://experience.sap.com/fiori-design-web/flexible-column-layout/#components">Fiori Design Guidelines.</a>
+    <p>
+    The navigation through the flexible column layout (forward and backwards), as well as the actions for entering and exiting full screen mode and closing columns are not provided automatically by the flexible column layout control, and need to be implemented manually. This can be done by reacting to events, such as button click, and updating the <code>[layout]</code> property of the <code>fd-flexible-column-layout</code> with the desired value. The same <code>[layout]</code> property is used to specify the inital layout of the component. </p>
+    <p>For example, setting <code>[layout]="'TwoColumnsMidExpanded'"</code> will render a 2-column layout with middle column expanded.
+    </p>
+    <p>
+    For available navigation and close sequences visit the <a target="_blank" href="https://experience.sap.com/fiori-design-web/flexible-column-layout/#components">Fiori Design Guidelines.</a></p>
 
     <h2>Responsiveness</h2>
-    The flexible column layout changes its behavior for sizes XL, L, M and S in real time whenever the user resizes the screen. For more information visit the <a target="_blank" href="https://experience.sap.com/fiori-design-web/flexible-column-layout/#responsiveness">Responsiveness</a> section of Fiori Design Guidelines.
-    <br>
-    By default, the Flexible Column Layout applies the Fiori 3 break points:  
+    <p>The flexible column layout changes its behavior for sizes XL, L, M and S in real time whenever the user resizes the screen. For more information visit the <a target="_blank" href="https://experience.sap.com/fiori-design-web/flexible-column-layout/#responsiveness">Responsiveness</a> section of Fiori Design Guidelines.
+    </p>
+    <p>By default, the Flexible Column Layout applies the Fiori 3 break points: </p> 
     <ul>
         <li>Size S: max-width: 599px</li>
         <li>Size M: min-width: 600px and max-width: 1023px</li>
         <li>Size L: min-width: 1024px and max-width: 1439px</li>
         <li>Size XL: min-width: 1440px</li>
     </ul>
-    The component also provides a default behaviour for managing the screen resizing. <br>
-    To overwrite the default breakpoints use the <code>mdBreakPoint</code>, <code>lgBreakPoint</code> and <code>xlBreakPoint</code> properties. It's also possible to provide a custom function that will handle the resizing of the screen. Use the <code>customOnResizeFunction</code> property to overwrite the default behaviour. 
+    <p>The component also provides a default behaviour for managing the screen resizing. <br>
+    To overwrite the default breakpoints use the <code>mdBreakPoint</code>, <code>lgBreakPoint</code> and <code>xlBreakPoint</code> properties. It's also possible to provide a custom function that will handle the resizing of the screen. Use the <code>customOnResizeFunction</code> property to overwrite the default behaviour. </p>
 
-    <br><br>
-    The <code>backgroundDesign</code> property specifies the background design of the column layout. The default is set to "solid". The other two options include "translucent" and "transparent".
+    <p>The <code>backgroundDesign</code> property specifies the background design of the column layout. The default is set to "solid". The other two options include "translucent" and "transparent".</p>
     
 </description>
 <fd-header-tabs></fd-header-tabs>
