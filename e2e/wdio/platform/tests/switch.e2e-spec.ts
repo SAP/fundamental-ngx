@@ -140,13 +140,13 @@ describe('Verify Switch component', function() {
 
     fit('should have RTL orientation', () => {
        const arrL = webDriver.getElementArrayLength(switchPage.exampleAreaContainersArr);
-         //for (let i = 0; arrL > i; i++) {
+         for (let i = 0; arrL > i; i++) {
             expect(webDriver.getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction', 0).value).toBe('ltr', '1css prop direction ' + 0);
             expect(webDriver.getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', 0)).toBe('', '1 dir');
             webDriver.click(switchPage.rtlSwitcherArr, 0);
             expect(webDriver.getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction' , 0).value).toBe('rtl', '2 rtl ');
             expect(webDriver.getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', 0)).toBe('rtl', '2 dir ');
-        //}
+        }
     });
 
     describe('has semantic switch and', function() {

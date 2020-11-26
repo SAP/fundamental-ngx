@@ -1,9 +1,10 @@
 import { clickByMouseMove, getValueOfAttribute, hoverMouse } from './helper';
-import { browser, ElementFinder } from 'protractor';
+import { browser } from 'protractor';
 import checkboxGPData from '../platform/fixtures/appData/checkbox-page-contents';
+import { webDriver } from '../driver/wdio';
 
-export async function checkIfDisabled(element: ElementFinder, attribute: string, value: string): Promise<void> {
-    expect(await getValueOfAttribute(element, attribute)).toEqual(value);
+export function checkIfDisabled(element, attribute: string, value: string): void {
+    expect(webDriver.getAttributeByName(element, attribute)).toBe(value);
 }
 
 export async function getMapAttributes(array): Promise<string> {
@@ -68,15 +69,15 @@ export async function checkTriStateTwoStateCheckboxMarking (checkboxArray): Prom
     expect(Promise.all(fourthState)).toEqual(Promise.all(secondState));
 }
 
-export async function checkHoverState(element): Promise<void> {
-    const checkboxHover = await hoverMouse(await element).then( () => {
+export function checkHoverState(element): void {
+    const checkboxHover = hoverMouse(element).then( () => {
         return element.getCssValue('border-color');
     });
     expect(checkboxHover).toContain(checkboxGPData.checkboxHoverState);
 }
 
-export async function checkFocusState(element): Promise<any> {
-    const checkboxFocus = await clickByMouseMove(element).then( () => {
+export function checkFocusState(element): any {
+    const checkboxFocus = clickByMouseMove(element).then( () => {
         return element.getCssValue('outline-style');
     });
     expect(checkboxFocus).toContain(checkboxGPData.checkboxFocusStyle);
