@@ -43,13 +43,25 @@ export class Wdio {
         return $(selector).getValue();
     };
 
-    getText(selector: string, waitTime = this.defaultWaitTime): string {
-        $(selector).waitForDisplayed({ timeout: waitTime });
-        return $(selector).getText();
+    getText(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+        return $$(selector)[index].getText();
     }
 
     waitForDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
         return $(selector).waitForDisplayed({ timeout: waitTime });
+    };
+
+    waitForNotDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
+        return $(selector).waitForDisplayed({timeout: waitTime, reverse: true});
+    };
+
+    waitForClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+        return $$(selector)[index].waitForClickable({ timeout: waitTime });
+    };
+
+    waitForPresent(selector: string, waitTime = this.defaultWaitTime): boolean {
+        return $(selector).waitForExist({ timeout: waitTime });
     };
 
     isEnabled(selector: string, waitTime = this.defaultWaitTime): boolean {
@@ -70,13 +82,13 @@ export class Wdio {
         browser.keys(keys);
     };
 
-    getAttributeByName(selector: string, attrName: string): string {
-        return $(selector).getAttribute(attrName);
+    getAttributeByName(selector: string, attrName: string, index: number = 0): string {
+        return $$(selector)[index].getAttribute(attrName);
     }
 
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string): { value: string } {
-        return $(selector).getCSSProperty(propertyName);
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string } {
+        return $$(selector)[index].getCSSProperty(propertyName);
     }
 
     mouseHoverElement(selector: string, waitTime = this.defaultWaitTime): void {
