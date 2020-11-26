@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.24.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.1...v0.24.3-rc.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* (Platform) accessibility fixes for dynamic page layout ([#3925](https://github.com/SAP/fundamental-ngx/issues/3925)) ([c5a4845](https://github.com/SAP/fundamental-ngx/commit/c5a4845d7b4010cdd9347029f302c6e5e2d7f7b5))
+
 ### [0.24.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.0...v0.24.3-rc.1) (2020-11-25)
 
 
