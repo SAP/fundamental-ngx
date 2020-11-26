@@ -36,6 +36,7 @@ import { createMissingDateImplementationError } from './errors';
  * ```html
  * <fd-date-picker [(ngModel)]="date"></fd-date-picker>
  * ```
+ *
  */
 @Component({
     selector: 'fd-date-picker',
