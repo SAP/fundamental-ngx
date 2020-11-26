@@ -6,7 +6,8 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnChanges, OnDestroy,
+    OnChanges,
+    OnDestroy,
     Output,
     SimpleChanges,
     ViewChild
@@ -132,7 +133,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     ngAfterViewInit(): void {
         this._subscriptions.add(
-            this.stepIndicator.stepIndicatorItemClicked.subscribe(step => {
+            this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
                 this.stepIndicatorItemClicked.emit(step);
             })
         );
@@ -151,7 +152,11 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         if (event) {
             event.preventDefault();
         }
-        if (this.visited && ((!event || KeyUtil.isKeyCode(event, [SPACE, ENTER])) && !this.stepIndicator.stackedItems.length)) {
+        if (
+            this.visited &&
+            (!event || KeyUtil.isKeyCode(event, [SPACE, ENTER])) &&
+            (!this.stepIndicator.stackedItems || !this.stepIndicator.stackedItems.length)
+        ) {
             this.stepClicked.emit(this);
         }
     }

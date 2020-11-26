@@ -213,8 +213,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             })
         );
         this._subscriptions.add(
-            step.stepIndicatorItemClicked.subscribe(event => {
-                this._stepClicked(event, true);
+            step.stepIndicatorItemClicked.subscribe((event) => {
+                this._stepClicked(event);
             })
         );
         // need to call wizardShrinking for each step < 168px on first load
@@ -280,7 +280,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 if (step.status === CURRENT_STEP_STATUS) {
                     const child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
                     this.wrapperContainer.nativeElement.scrollTo({
-                        top: child.offsetTop - this._elRef.nativeElement.querySelector('.' + WIZARD_NAVIGATION_CLASS).clientHeight,
+                        top:
+                            child.offsetTop -
+                            this._elRef.nativeElement.querySelector('.' + WIZARD_NAVIGATION_CLASS).clientHeight,
                         behavior: 'smooth'
                     });
                 }
@@ -315,7 +317,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             if (stepsArray.indexOf(stepToHide) < currentStepIndex) {
                 this.stackedStepsLeft.push(stepToHide);
             } else if (stepsArray.indexOf(stepToHide) > currentStepIndex) {
-                this.stackedStepsRight.push(stepToHide);
+                this.stackedStepsRight.unshift(stepToHide);
             }
             this._setStackedTop(currentStep);
         }
@@ -334,6 +336,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.stepIndicator.stackedItems = [];
             }
         });
+
+        this.steps.last.stepIndicator.setStackedItems(this.stackedStepsRight);
     }
 
     /** @hidden */
@@ -373,7 +377,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _stepClicked(clickedStep: WizardStepComponent): void {
-            if (!clickedStep) {
+        if (!clickedStep) {
             clickedStep = this.steps.first;
         }
         const clickedStepIndex = this.steps.toArray().indexOf(clickedStep);
@@ -390,6 +394,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                     step.statusChange.emit(UPCOMING_STEP_STATUS);
                 }
             }
+        });
+        setTimeout(() => {
+            (document.activeElement as HTMLElement).blur(); // this function can focus step indicators undesirably
         });
     }
 

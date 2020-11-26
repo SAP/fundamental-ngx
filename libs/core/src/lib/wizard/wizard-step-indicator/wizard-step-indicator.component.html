@@ -1,23 +1,30 @@
-<ng-container *ngIf="stackedItems && stackedItems.length >= 1">
+<ng-container *ngIf="stackedItems && stackedItems.length > 1">
     <fd-action-sheet [compact]="compact">
         <fd-action-sheet-control>
-            <span class="fd-wizard__step-indicator" [ngClass]="glyph ? 'sap-icon--' + glyph : ''">
+            <span class="fd-wizard__step-indicator">
                 <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
             </span>
         </fd-action-sheet-control>
         <fd-action-sheet-body>
-            <li fd-action-sheet-item *ngFor="let step of stackedItems" [label]="step.label" [glyph]="step.glyph" (click)="stepItemClicked(step, $event)"></li>
+            <li
+                fd-action-sheet-item
+                [disabled]="!step.visited"
+                *ngFor="let step of stackedItems"
+                [label]="step.label"
+                [glyph]="step.glyph"
+                (click)="stepItemClicked(step, $event)"
+            ></li>
         </fd-action-sheet-body>
     </fd-action-sheet>
 </ng-container>
 
-<ng-container *ngIf="!stackedItems || stackedItems.length < 1">
-    <span class="fd-wizard__step-indicator" [ngClass]="glyph ? 'sap-icon--' + glyph : ''"
-          (click)="stepItemClicked(stackedItems ? stackedItems[0] : null, $event)">
+<ng-container *ngIf="!stackedItems || stackedItems.length <= 1">
+    <span class="fd-wizard__step-indicator" (click)="stepItemClicked(stackedItems ? stackedItems[0] : null, $event)">
         <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
     </span>
 </ng-container>
 
 <ng-template #stepIndicatorContent>
+    <fd-icon *ngIf="glyph" [glyph]="glyph" class="fd-wizard__icon"></fd-icon>
     <ng-content></ng-content>
 </ng-template>

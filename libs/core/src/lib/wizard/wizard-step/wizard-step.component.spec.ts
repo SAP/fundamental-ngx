@@ -25,6 +25,7 @@ describe('WizardStepComponent', () => {
     it('should handle key press (or mouse click if no event is passed)', () => {
         component.visited = true;
         spyOn(component.stepClicked, 'emit');
+        spyOnProperty(component.stepIndicator, 'stackedItems').and.returnValue([]);
         component.stepContainerKeypress();
         expect(component.stepClicked.emit).toHaveBeenCalled();
     });

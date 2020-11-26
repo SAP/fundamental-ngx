@@ -1,5 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { WizardStepComponent } from '../wizard-step/wizard-step.component';
+import { ActionSheetComponent } from '../../action-sheet/action-sheet.component';
 
 @Component({
     selector: 'fd-wizard-step-indicator',
@@ -13,9 +22,6 @@ export class WizardStepIndicatorComponent {
     @Input()
     glyph: string;
 
-    /** @hidden */
-    stackedItems: WizardStepComponent[];
-
     /**
      * Whether or not the step indicator (specifically, the action sheet) is compact.
      */
@@ -28,17 +34,19 @@ export class WizardStepIndicatorComponent {
     @Output()
     stepIndicatorItemClicked = new EventEmitter<WizardStepComponent>();
 
+    @ViewChild(ActionSheetComponent)
+    actionSheet: ActionSheetComponent;
+
+    /** @hidden */
+    stackedItems: WizardStepComponent[];
+
     constructor(private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
-    popoverStepIndicatorClicked(event: MouseEvent): void {
-        if (this.stackedItems && this.stackedItems.length) {
-            event.preventDefault();
-        }
-    }
-
-    /** @hidden */
     stepItemClicked(step?: WizardStepComponent, event?: MouseEvent): void {
+        if (this.actionSheet) {
+            this.actionSheet.close();
+        }
         event.preventDefault();
         this.stepIndicatorItemClicked.emit(step);
     }
