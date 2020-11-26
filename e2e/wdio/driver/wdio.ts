@@ -106,6 +106,18 @@ export class Wdio {
     getElementArrayLength(selector: string): number {
         return $$(selector).length;
     }
+
+    waitElementToBePresentInDOM (selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+        return  $$(selector)[index].waitForExist({ timeout: waitTime });
+    }
+
+    scrollIntoView(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): void {
+        $$(selector)[index].scrollIntoView();
+    }
+
+    isElementClickeble(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+       return  $$(selector)[index].isClickable();
+    }
 }
 
 export const webDriver = new Wdio();
