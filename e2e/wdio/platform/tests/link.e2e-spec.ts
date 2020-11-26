@@ -19,15 +19,15 @@ describe('Link component test suite', function() {
         webDriver.refreshPage();
     });
 
-    it('should check icon link',  () => {
+    it('should check icon link', () => {
          const iconLinkAltText = webDriver.getAttributeByName(linkPage.iconLink, 'aria-label');
          webDriver.mouseHoverElement(linkPage.iconLink);
          const iconLinkHoverState = webDriver.getCSSPropertyByName(linkPage.iconLink, 'text-decoration');
 
-        checkLinkData(linkPage.iconLink);
-        checkLinkHover(iconLinkHoverState);
-        expect(iconLinkAltText).toBe(defaultLink_alt_text);
-        expect(webDriver.isElementClickeble(linkPage.iconLink)).toBe(true);
+         checkLinkData(linkPage.iconLink);
+         checkLinkHover(iconLinkHoverState);
+         expect(iconLinkAltText).toBe(defaultLink_alt_text);
+         expect(webDriver.isElementClickeble(linkPage.iconLink)).toBe(true);
     });
 
     it('should check standard links', () => {
@@ -107,8 +107,6 @@ describe('Link component test suite', function() {
     });
 
     it('should check LTR is default orientation', () => {
-    //    const areaContainersArray = webDriver.elementArray(linkPage.exampleAreaContainersArr);
-
         const arrL = webDriver.getElementArrayLength(linkPage.exampleAreaContainersArr);
         for (let i = 0; arrL > i; i++) {
             expect(webDriver.getCSSPropertyByName(linkPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ');
@@ -140,7 +138,7 @@ function checkLinkData(element, index: number = 0): void {
     expect(webDriver.getAttributeByName(element, 'title', index)).not.toBe(null);
     expect(webDriver.getAttributeByName(element, 'href', index)).not.toBe(null);
 }
-
+// TODO: fails in IE, Safari
 function checkLinkHover(element): void {
     expect(element.value).toContain(linkFocusState);
 }

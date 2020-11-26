@@ -56,6 +56,10 @@ export class Wdio {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     };
 
+    waitForInvisibilityOf(selector: string, index: number = 0): boolean {
+        return $$(selector)[index].waitForDisplayed({ reverse: true })
+    }
+
     isEnabled(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].isEnabled();
