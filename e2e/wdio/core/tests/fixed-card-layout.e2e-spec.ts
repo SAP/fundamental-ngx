@@ -191,18 +191,29 @@ describe('fixed card layout test suite', function () {
     });
 
     // TODO
-    checkDragAndDrop(clickElement, startElementLocation, endElementLocation, originalText) {
-            driver.actions().mouseDown(clickElement).perform().then(async () => {
-                driver.sleep(300);
-                driver.actions().mouseMove(startElementLocation)
-                    .mouseMove(endElementLocation).perform().then(() => {
-                        driver.actions().mouseUp().perform().then(() => {
-                            const newCardsArr = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
-                            const newFirstCardText = newCardsArr[0].getText();
+    // checkDragAndDrop(clickElement, startElementLocation, endElementLocation, originalText) {
+    //         driver.actions().mouseDown(clickElement).perform().then(async () => {
+    //             driver.sleep(300);
+    //             driver.actions().mouseMove(startElementLocation)
+    //                 .mouseMove(endElementLocation).perform().then(() => {
+    //                     driver.actions().mouseUp().perform().then(() => {
+    //                         const newCardsArr = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
+    //                         const newFirstCardText = newCardsArr[0].getText();
+    //
+    //                         expect(newFirstCardText).not.toEqual(originalText);
+    //                     });
+    //                 });
+    //         });
+    // }
 
-                            expect(newFirstCardText).not.toEqual(originalText);
-                        });
-                    });
-            });
+    function checkDragAndDrop(clickElement, startElementLocation, endElementLocation, originalText): any {
+        webDriver.mouseHoverElement(clickElement);
+        webDriver.mouseButtonDown(clickElement);
+        browser.pause(300);
+
+
     }
+
+
+
 });

@@ -56,7 +56,6 @@ exports.config = {
             browserName: 'internet explorer',
             browserVersion: 'latest',
             platformName: 'Windows 10',
-           // acceptInsecureCerts: true,
             "sauce:options": {
                 name: 'e2e-win-internet-explorer',
                 screenResolution: '1920x1080',
@@ -64,27 +63,28 @@ exports.config = {
                 //tags: [ "process.env.TRAVIS_BUILD_ID"],
             }
         },
-        // {
-        //     browserName: 'MicrosoftEdge',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     "sauce:options": {
-        //         name: 'e2e-win-edge',
-        //         //tags: [ process.env.TRAVIS_BUILD_ID],
-        //     }
-        // },
-        // {
-        //     browserName: 'firefox',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     "sauce:options": {
-        //         name: 'e2e-win-firefox',
-        //         screenResolution: '1920x1080',
-        //         //tags: [ process.env.TRAVIS_BUILD_ID],
-        //     }
-        // },
+        {
+            browserName: 'MicrosoftEdge',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            "sauce:options": {
+                name: 'e2e-win-edge',
+                screenResolution: '1920x1080',
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
+        {
+            browserName: 'firefox',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            "sauce:options": {
+                name: 'e2e-win-firefox',
+                screenResolution: '1920x1080',
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
         {
             browserName: 'chrome',
             browserVersion: 'latest',
@@ -96,13 +96,14 @@ exports.config = {
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-/*        {
+        {
             browserName: 'chrome',
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
             "sauce:options": {
                 name: 'e2e-MAC-chrome',
+                screenResolution: '1920x1440',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
@@ -113,6 +114,7 @@ exports.config = {
             acceptInsecureCerts: true,
             "sauce:options": {
                 name: 'e2e-MAC-firefox',
+                screenResolution: '1920x1440',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
@@ -122,11 +124,11 @@ exports.config = {
             browserVersion: 'latest',
             acceptInsecureCerts: true,
             "sauce:options": {
+                screenResolution: '1920x1440',
                 name: 'e2e-MAC-Edge',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },*/
-
+        },
         {
             browserName: 'safari',
             browserVersion: '13.1',
@@ -247,6 +249,9 @@ exports.config = {
      */
      // onPrepare: function () {
      //    browser.resetUrl = 'about:blank';
+     //    browser.driver.manage.window.maximize();
+     //    browser.maximize();
+     //    browser.window.maximize();
      // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -278,11 +283,28 @@ exports.config = {
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });
+
         browser.resetUrl = 'about:blank';
 
-        browser.maximize();
+        browser.maximizeWindow();
 
+       // browser.setWindowSize(1080, 1920);
+
+        // if (capabilities.browserName === 'internet explorer' || 'firefox') {
+        //     browser.driver.manage().window().setSize(1080, 1920);
+        // } else {
+        //     // works for all except IE, FF
+        //     driver.manage.window.maximize();
+        // }
     },
+
+
+//     const processedConfig = await browser.getProcessedConfig();
+//
+// // Resize the screens if it is a VM
+// if (!('platformName' in processedConfig.capabilities)) {
+//     await browser.driver.manage().window().setSize(1366, 768);
+// }
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

@@ -15,4 +15,4 @@ export const standardLinksAltTextArray: Array <string> = [
     ];
 
 export const googleLink = 'www.google.com';
-export const linkFocusState = 'underline solid';
+export const linkFocusState = 'underline';

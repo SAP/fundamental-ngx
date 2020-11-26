@@ -123,6 +123,25 @@ export class Wdio {
     // TODO: add wait 300ms
     }
 
+    scrollIntoView(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): void {
+        $$(selector)[index].scrollIntoView();
+    }
+
+    mouseButtonDown(button: 0 | 1 | 2  = 0): void {
+        browser.buttonDown(button)
+    }
+
+    mouseButtonUp(button: 0 | 1 | 2  = 0): void {
+        browser.buttonUp(button)
+    }
+
+    isElementClickeble(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+        return  $$(selector)[index].isClickable();
+    }
+
+    getUrl(): string {
+        return browser.getUrl();
+    }
 
 
     // waitForUrl(url: string): void {
