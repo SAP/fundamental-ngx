@@ -1,21 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FdDatetimeModule, FdDate } from '../datetime';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
-import { FdDate } from './models/fd-date';
 
 describe('CalendarComponent', () => {
-    let component: CalendarComponent;
-    let fixture: ComponentFixture<CalendarComponent>;
+    let component: CalendarComponent<FdDate>;
+    let fixture: ComponentFixture<CalendarComponent<FdDate>>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            imports: [CalendarModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdDatetimeModule, CalendarModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CalendarComponent);
+        fixture = TestBed.createComponent<CalendarComponent<FdDate>>(CalendarComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -70,7 +73,7 @@ describe('CalendarComponent', () => {
 
     it('Should handle write value for single mode when not correct', () => {
         spyOn(component.isValidDateChange, 'emit');
-        const invalidDate = new FdDate(2000, 50, 50);
+        const invalidDate = {} as any;
         component.writeValue(invalidDate);
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
         expect(component.isModelValid()).toBe(false);
@@ -92,17 +95,17 @@ describe('CalendarComponent', () => {
     it('Should handle write value for range mode when start date not correct', () => {
         spyOn(component.isValidDateChange, 'emit');
         const validDate = new FdDate(2000, 10, 10);
-        const invalidDate = new FdDate(2000, 50, 50);
+        const invalidDate = {} as any;
         component.calType = 'range';
         component.writeValue({ start: invalidDate, end: validDate });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
-        expect(component.selectedDate).not.toBe(invalidDate);
+        expect(component.selectedRangeDate.start).toBe(invalidDate);
     });
 
     it('Should handle write value for range mode when end date not correct', () => {
         spyOn(component.isValidDateChange, 'emit');
         const validDate = new FdDate(2000, 10, 10);
-        const invalidDate = new FdDate(2000, 50, 50);
+        const invalidDate = {} as any;
         component.calType = 'range';
         component.writeValue({ start: validDate, end: invalidDate });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);
@@ -111,8 +114,8 @@ describe('CalendarComponent', () => {
 
     it('Should handle write value for range mode when both dates not correct', () => {
         spyOn(component.isValidDateChange, 'emit');
-        const invalidDate = new FdDate(2000, 50, 50);
-        const invalidDate2 = new FdDate(2000, 50, 50);
+        const invalidDate: any = {};
+        const invalidDate2: any = {};
         component.calType = 'range';
         component.writeValue({ start: invalidDate, end: invalidDate2 });
         expect(component.isValidDateChange.emit).toHaveBeenCalledWith(false);

@@ -1,11 +1,13 @@
-<fd-popover [(isOpen)]="isOpen"
-            (isOpenChange)="isOpenChange.emit($event)"
-            [triggers]="[]"
-            [disabled]="disabled"
-            [placement]="placement"
-            [closeOnEscapeKey]="true"
-            [focusAutoCapture]="true"
-            [focusTrapped]="true">
+<fd-popover
+    [(isOpen)]="isOpen"
+    (isOpenChange)="isOpenChange.emit($event)"
+    [triggers]="[]"
+    [disabled]="disabled"
+    [placement]="placement"
+    [closeOnEscapeKey]="true"
+    [focusAutoCapture]="true"
+    [focusTrapped]="true"
+>
     <fd-popover-control>
         <fd-input-group
             [compact]="compact"
@@ -25,26 +27,26 @@
                 [compact]="compact"
                 (focusout)="timeInputChanged(inputElement.value)"
                 [disabled]="disabled"
-                [placeholder]="placeholder"
+                [placeholder]="_placeholder"
                 [attr.aria-label]="timePickerInputLabel"
                 (keyup.enter)="timeInputChanged($event.currentTarget.value)"
             />
         </fd-input-group>
     </fd-popover-control>
-    <fd-popover-body *ngIf="displaySeconds || displayMinutes || displayHours">
+    <fd-popover-body>
         <ng-content></ng-content>
         <fd-time
             *ngIf="isOpen"
             [tablet]="tablet"
             [compact]="compact"
             [disabled]="disabled"
-            [meridian]="meridian"
             [(ngModel)]="time"
             [keepTwoDigits]="keepTwoDigitsTime"
             (ngModelChange)="timeFromTimeComponentChanged($event)"
-            [displayMinutes]="displayMinutes"
-            [displaySeconds]="displaySeconds"
-            [displayHours]="displayHours"
+            [meridian]="_meridian"
+            [displayHours]="_displayHours"
+            [displayMinutes]="_displayMinutes"
+            [displaySeconds]="_displaySeconds"
             [spinnerButtons]="spinnerButtons"
         ></fd-time>
     </fd-popover-body>

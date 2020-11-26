@@ -8,6 +8,7 @@ export * from './lib/bar/public_api';
 export * from './lib/breadcrumb/public_api';
 export * from './lib/busy-indicator/public_api';
 export * from './lib/button/public_api';
+export * from './lib/datetime/public_api';
 export * from './lib/calendar/public_api';
 export * from './lib/checkbox/public_api';
 export * from './lib/combobox/public_api';

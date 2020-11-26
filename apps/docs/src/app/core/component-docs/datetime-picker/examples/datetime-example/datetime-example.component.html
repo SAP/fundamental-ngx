@@ -1,8 +1,8 @@
 <!-- Just needs a date object in the ts file! -->
-<fd-datetime-picker [(ngModel)]="this.date"></fd-datetime-picker>
+<fd-datetime-picker [(ngModel)]="date"></fd-datetime-picker>
 
-<br/>
-<br/>
+<br />
+<br />
 <span>
-    Selected: {{ date?.toLocaleDateString() ? date?.toLocaleDateString() : 'null' }}
+    Selected: {{ date || 'null' }}
 </span>

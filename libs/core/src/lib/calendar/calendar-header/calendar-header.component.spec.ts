@@ -1,23 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarHeaderComponent } from './calendar-header.component';
+import { FdDate, FdDatetimeModule } from '../../datetime';
 import { ButtonModule } from '../../button/button.module';
 import { CalendarService } from '../calendar.service';
+import { CalendarHeaderComponent } from './calendar-header.component';
 
 describe('Calendar2HeaderComponent', () => {
-    let component: CalendarHeaderComponent;
-    let fixture: ComponentFixture<CalendarHeaderComponent>;
+    let component: CalendarHeaderComponent<FdDate>;
+    let fixture: ComponentFixture<CalendarHeaderComponent<FdDate>>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [CalendarHeaderComponent],
-            imports: [ButtonModule],
-            providers: [CalendarService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [CalendarHeaderComponent],
+                imports: [ButtonModule, FdDatetimeModule],
+                providers: [CalendarService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CalendarHeaderComponent);
+        fixture = TestBed.createComponent<CalendarHeaderComponent<FdDate>>(CalendarHeaderComponent);
         component = fixture.componentInstance;
         component.currentlyDisplayed = { month: 10, year: 2018 };
         fixture.detectChanges();
@@ -29,7 +32,7 @@ describe('Calendar2HeaderComponent', () => {
         component.processViewChange('year');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('year');
         expect(component.activeView).toBe('year');
-        expect(component.isOnYearView()).toBeTruthy();
+        expect(component.isOnYearView).toBeTruthy();
     });
 
     it('Should switch to day view, when changed to year and on year view', () => {
@@ -46,6 +49,6 @@ describe('Calendar2HeaderComponent', () => {
         component.processViewChange('month');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('month');
         expect(component.activeView).toBe('month');
-        expect(component.isOnMonthView()).toBeTruthy();
+        expect(component.isOnMonthView).toBeTruthy();
     });
 });

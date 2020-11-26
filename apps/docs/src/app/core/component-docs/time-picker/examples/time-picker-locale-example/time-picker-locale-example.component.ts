@@ -1,32 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import moment from 'moment';
-import {formatCurrency} from '@angular/common';
-import {Placeholder} from '@angular/compiler/src/i18n/i18n_ast';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-time-picker-locale-example',
     templateUrl: './time-picker-locale-example.component.html',
-    styleUrls: ['./time-picker-locale-example.component.scss']
+    styleUrls: ['./time-picker-locale-example.component.scss'],
+    providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        }
+    ]
 })
-
 export class TimePickerLocaleExampleComponent implements OnInit {
+    time = new FdDate().setTime(15, 30, 0);
+    locales = ['en-US', 'fr', 'bg', 'zh-CH', 'bn', 'ar-EG'];
+    locale = 'en-US';
 
-  timeMeridianObject = { hour: 12, minute: 0, second: 0 };
-  locale = 'en';
-  meridian = false;
-  placeholder: string;
-  ngOnInit(): void  {
-    this.onOptionChange('en');
-  }
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 
-  onOptionChange(event): void {
-    moment.locale(event);
-    if (moment().format('LT').includes('AM') || moment().format('LT').includes('PM')) {
-      this.placeholder = 'hh:mm:ss am';
-      this.meridian = true;
-    } else {
-      this.placeholder = 'hh:mm:ss';
-      this.meridian = false;
+    ngOnInit(): void {
+        this.setLocale(this.locale);
     }
-  }
+
+    setLocale(locale: string): void {
+        this.datetimeAdapter.setLocale(locale);
+    }
 }

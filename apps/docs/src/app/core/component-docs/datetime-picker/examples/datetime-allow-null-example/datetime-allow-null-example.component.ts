@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
+import { DatetimePickerComponent, FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-time-picker-allow-null-example',
@@ -7,19 +7,19 @@ import { DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
         <fd-datetime-picker
             [allowNull]="false"
             [(ngModel)]="selectedDay"
-            [state]="isValid() ? 'error' : 'success'"
+            [state]="isInvalid() ? 'error' : 'success'"
         ></fd-datetime-picker>
-        <br/>
-        <br/>
-        <span>Selected Date: {{ selectedDay?.toLocaleDateString() }}</span>
+        <br />
+        <br />
+        <span>Selected Date: {{ selectedDay }}</span>
     `
 })
 export class DatetimePickerAllowNullExampleComponent {
-    @ViewChild(DatetimePickerComponent) datePicker: DatetimePickerComponent;
+    @ViewChild(DatetimePickerComponent) datePicker: DatetimePickerComponent<FdDate>;
 
-    selectedDay: FdDatetime = FdDatetime.getToday();
+    selectedDay: FdDate = FdDate.getNow();
 
-    isValid(): boolean {
-        return this.datePicker && this.datePicker.isInvalidDateInput;
+    isInvalid(): boolean {
+        return this.datePicker?.isInvalidDateInput;
     }
 }
