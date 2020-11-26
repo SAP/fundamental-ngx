@@ -3,7 +3,6 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    Inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -21,7 +20,6 @@ import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
 import { DatetimeAdapter } from '../../datetime/datetime-adapter';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '../../datetime/datetime-formats';
 
 /**
  * Internal use only.
@@ -128,7 +126,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** Month names */
     private _monthNames: string[] = [];
@@ -140,14 +138,13 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         public _calendarI18nLabels: CalendarI18nLabels,
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
-        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -188,7 +185,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
     /** @hidden */
     private _listenToLocaleChanges(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._calculateMonthNames();
             this._calculateLabels();
             this._changeDetRef.markForCheck();
@@ -197,7 +194,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
     /** @hidden */
     private _listenToCalendarLabelsChanges(): void {
-        this._calendarI18nLabels.labelsChange.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+        this._calendarI18nLabels.labelsChange.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._calculateAriaLabels();
             this._changeDetRef.markForCheck();
         });

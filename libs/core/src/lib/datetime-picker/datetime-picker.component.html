@@ -18,11 +18,11 @@
                     type="text"
                     class="fd-input"
                     fd-input-group-input
-                    [(ngModel)]="inputFieldDate"
+                    [(ngModel)]="_inputFieldDate"
                     [attr.aria-label]="datetimeInputLabel"
                     [placeholder]="placeholder"
                     [compact]="compact"
-                    [ngClass]="{ 'is-error': isInvalidDateInput && useValidation }"
+                    [ngClass]="{ 'is-error': _isInvalidDateInput && useValidation }"
                     [disabled]="disabled"
                     (ngModelChange)="handleInputChange($event)"
                 />
@@ -57,7 +57,7 @@
                     calType="single"
                     [activeView]="activeView"
                     [disableFunction]="disableFunction ? disableFunction : null"
-                    [selectedDate]="tempDate"
+                    [selectedDate]="_tempDate"
                     [escapeFocusFunction]="null"
                     [compact]="compact"
                     [markWeekends]="markWeekends"
@@ -68,14 +68,14 @@
                     [startingDayOfWeek]="startingDayOfWeek"
                     (activeViewChange)="handleCalendarActiveViewChange($event)"
                     (selectedDateChange)="handleDateChange($event)"
-                    (isValidDateChange)="isInvalidDateInputHandler($event)"
+                    (isValidDateChange)="setInvalidDateInputHandler($event)"
                 ></fd-calendar>
                 <div class="fd-datetime__separator"></div>
                 <fd-time
                     *ngIf="isOpen"
                     [disabled]="disabled"
                     [keepTwoDigits]="keepTwoDigitsTime"
-                    [ngModel]="tempTime"
+                    [ngModel]="_tempTime"
                     [compact]="compact"
                     [spinnerButtons]="spinnerButtons"
                     [meridian]="_meridian"

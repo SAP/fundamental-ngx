@@ -12,7 +12,6 @@ import {
     OnInit,
     Optional,
     Output,
-    SimpleChange,
     SimpleChanges,
     ViewChild,
     ViewEncapsulation
@@ -393,7 +392,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
     /** @hidden */
     writeValue(time: D): void {
         if (!time) {
-            this.time = null; // TODO: not sure if it's possible to keep null as an object
+            this.time = null;
             if (!this.allowNull) {
                 this.isInvalidTimeInput = true;
             }

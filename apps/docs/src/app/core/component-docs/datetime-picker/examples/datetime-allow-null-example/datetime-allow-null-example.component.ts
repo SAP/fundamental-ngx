@@ -7,7 +7,7 @@ import { DatetimePickerComponent, FdDate } from '@fundamental-ngx/core';
         <fd-datetime-picker
             [allowNull]="false"
             [(ngModel)]="selectedDay"
-            [state]="isValid() ? 'error' : 'success'"
+            [state]="isInvalid() ? 'error' : 'success'"
         ></fd-datetime-picker>
         <br />
         <br />
@@ -19,7 +19,7 @@ export class DatetimePickerAllowNullExampleComponent {
 
     selectedDay: FdDate = FdDate.getNow();
 
-    isValid(): boolean {
-        return this.datePicker && this.datePicker.isInvalidDateInput;
+    isInvalid(): boolean {
+        return this.datePicker?.isInvalidDateInput;
     }
 }

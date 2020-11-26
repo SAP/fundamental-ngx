@@ -1,5 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
+
 import { LETTERS_UNICODE_RANGE } from '../utils/consts/unicode-letters.regex';
 
 import { DatetimeAdapter } from './datetime-adapter';
@@ -43,7 +44,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     getDayOfWeek(date: FdDate): number {
-        return this._creteDateInstanceByFdDate(date).getDay() + 1;
+        return this._createDateInstanceByFdDate(date).getDay() + 1;
     }
 
     getHours(date: FdDate): number {
@@ -59,7 +60,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     getWeekNumber(fdDate: FdDate): number {
-        const date = this._creteDateInstanceByFdDate(fdDate);
+        const date = this._createDateInstanceByFdDate(fdDate);
 
         date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
 
@@ -95,7 +96,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     getYearName(date: FdDate): string {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { year: 'numeric', timeZone: 'utc' });
-        const dateInstance = this._creteDateInstanceByFdDate(date);
+        const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(dateTimeFormat, dateInstance));
     }
 
@@ -151,21 +152,21 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     setHours(date: FdDate, hours: number): FdDate {
-        const dateInstance = this._creteDateInstanceByFdDate(date);
+        const dateInstance = this._createDateInstanceByFdDate(date);
         dateInstance.setHours(hours);
-        return this._creteFdDateFromDateInstance(dateInstance);
+        return this._createFdDateFromDateInstance(dateInstance);
     }
 
     setMinutes(date: FdDate, hours: number): FdDate {
-        const dateInstance = this._creteDateInstanceByFdDate(date);
+        const dateInstance = this._createDateInstanceByFdDate(date);
         dateInstance.setMinutes(hours);
-        return this._creteFdDateFromDateInstance(dateInstance);
+        return this._createFdDateFromDateInstance(dateInstance);
     }
 
     setSeconds(date: FdDate, hours: number): FdDate {
-        const dateInstance = this._creteDateInstanceByFdDate(date);
+        const dateInstance = this._createDateInstanceByFdDate(date);
         dateInstance.setSeconds(hours);
-        return this._creteFdDateFromDateInstance(dateInstance);
+        return this._createFdDateFromDateInstance(dateInstance);
     }
 
     getFirstDayOfWeek(): number {
@@ -174,7 +175,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     getNumDaysInMonth(fdDate: FdDate): number {
-        const date = this._creteDateInstanceByFdDate(fdDate);
+        const date = this._createDateInstanceByFdDate(fdDate);
         date.setMonth(date.getMonth() + 1);
         date.setDate(0);
         return date.getDate();
@@ -204,7 +205,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (typeof value === 'number') {
             date = new Date(value);
         }
-        return Number.isNaN(date.valueOf()) ? null : this._creteFdDateFromDateInstance(date);
+        return Number.isNaN(date.valueOf()) ? null : this._createFdDateFromDateInstance(date);
     }
 
     format(date: FdDate, displayFormat: Intl.DateTimeFormatOptions): string {
@@ -222,7 +223,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         displayFormat = { ...displayFormat, timeZone: 'utc' };
 
         const dateTimeFormatter = new Intl.DateTimeFormat(this.locale, displayFormat);
-        const dateInstance = this._creteDateInstanceByFdDate(date);
+        const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(dateTimeFormatter, dateInstance));
     }
 
@@ -231,7 +232,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     addCalendarMonths(fdDate: FdDate, months: number): FdDate {
-        const date = this._creteDateInstanceByFdDate(fdDate);
+        const date = this._createDateInstanceByFdDate(fdDate);
 
         date.setMonth(date.getMonth() + months);
 
@@ -241,13 +242,13 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             date.setDate(0);
         }
 
-        return this._creteFdDateFromDateInstance(date);
+        return this._createFdDateFromDateInstance(date);
     }
 
     addCalendarDays(fdDate: FdDate, days: number): FdDate {
-        const date = this._creteDateInstanceByFdDate(fdDate);
+        const date = this._createDateInstanceByFdDate(fdDate);
         date.setDate(date.getDate() + days);
-        return this._creteFdDateFromDateInstance(date);
+        return this._createFdDateFromDateInstance(date);
     }
 
     getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
@@ -272,9 +273,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     isBetween(dateToCheck: FdDate, startDate: FdDate, endDate: FdDate): boolean {
-        const date = this._creteDateInstanceByFdDate(dateToCheck);
-        const start = this._creteDateInstanceByFdDate(startDate);
-        const end = this._creteDateInstanceByFdDate(endDate);
+        const date = this._createDateInstanceByFdDate(dateToCheck);
+        const start = this._createDateInstanceByFdDate(startDate);
+        const end = this._createDateInstanceByFdDate(endDate);
         return date.getTime() > start.getTime() && date.getTime() < end.getTime();
     }
 
@@ -282,7 +283,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (!date1 || !date2) {
             return false;
         }
-        // reset time value
+        // skip time value
         const date1Str = this.toIso8601(date1).split('T')[0];
         const date2Str = this.toIso8601(date2).split('T')[0];
         return date1Str === date2Str;
@@ -292,9 +293,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (!date1 || !date2) {
             return false;
         }
-        const date1Str = this.toIso8601(date1).split('T');
-        const date2Str = this.toIso8601(date2).split('T');
-        return date1Str === date2Str;
+        return this.toIso8601(date1) === this.toIso8601(date2);
     }
 
     toIso8601(fdDate: FdDate): string {
@@ -323,6 +322,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /**
+     * @hidden
      * Strip out unicode LTR and RTL characters. Edge and IE insert these into formatted dates while
      * other browsers do not. We remove them to make output consistent and because they interfere with
      * date parsing.
@@ -333,12 +333,27 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return str.replace(/[\u200e\u200f]/g, '');
     }
 
+    /** @hidden */
+    private _format(formatter: Intl.DateTimeFormat, date: Date): string {
+        date = this._createUTCDateInstance(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds(),
+            date.getMilliseconds()
+        );
+        return formatter.format(date);
+    }
+
     /**
+     * @hidden
      * Create native Date instance from FdDate
      * @param date FdDate instance
      * @returns date Native date instance
      */
-    private _creteDateInstanceByFdDate({ year, month, day, hour, minute, second }: FdDate): Date {
+    private _createDateInstanceByFdDate({ year, month, day, hour, minute, second }: FdDate): Date {
         const date = new Date();
         date.setFullYear(year, month - 1, day);
         date.setHours(hour, minute, second, 0);
@@ -346,6 +361,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     }
 
     /**
+     * @hidden
      * Create native Date instance in UTC
      * @param year The year
      * @param month The month as a number between 0 and 11
@@ -355,7 +371,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @param seconds The seconds as a number between 0 - 59
      * @param milliseconds The milliseconds as a number between 0 - 59
      */
-    private _creteUTCDateInstance(
+    private _createUTCDateInstance(
         year: number,
         month: number,
         day: number,
@@ -370,20 +386,8 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return utcDate;
     }
 
-    private _format(formatter: Intl.DateTimeFormat, date: Date): string {
-        date = this._creteUTCDateInstance(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds(),
-            date.getMilliseconds()
-        );
-        return formatter.format(date);
-    }
-
-    private _creteFdDateFromDateInstance(date: Date): FdDate {
+    /** @hidden */
+    private _createFdDateFromDateInstance(date: Date): FdDate {
         return new FdDate(
             date.getFullYear(),
             date.getMonth() + 1,

@@ -54,7 +54,7 @@ describe('DatetimePickerComponent', () => {
 
     it('should open the popover', () => {
         component.isOpen = false;
-        component.isInvalidDateInput = false;
+        component.setInvalidDateInputHandler(false);
         component.openPopover();
         expect(component.isOpen).toBe(true);
     });
@@ -62,16 +62,16 @@ describe('DatetimePickerComponent', () => {
     it('should not open the popover if the component is disabled', () => {
         component.isOpen = false;
         component.disabled = true;
-        component.isInvalidDateInput = false;
+        component.setInvalidDateInputHandler(false);
         component.openPopover();
         expect(component.isOpen).toBe(false);
     });
 
     it('should close the calendar', () => {
         component.isOpen = true;
-        component.isInvalidDateInput = true;
+        component.setInvalidDateInputHandler(true);
         component.closePopover();
-        expect(component.inputFieldDate).toBeNull();
+        expect(component._inputFieldDate).toBeNull();
         expect(component.isOpen).toBe(false);
     });
 
@@ -93,7 +93,7 @@ describe('DatetimePickerComponent', () => {
     it('should update input from calendar', () => {
         spyOn(component, 'onChange');
         const tempTime = new FdDate();
-        component.tempTime = tempTime;
+        component._tempTime = tempTime;
         const date = new FdDate(2018, 10, 10);
         component.handleDateChange(date);
         component.submit();
@@ -108,12 +108,12 @@ describe('DatetimePickerComponent', () => {
         component.writeValue(dateTime);
 
         expect(component.date).toEqual(dateTime);
-        expect(component.calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
+        expect(component._calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
     });
 
     it('should reset input if time format is invalid', () => {
         component.writeValue('hello' as any);
-        expect(component.inputFieldDate).toBe('');
+        expect(component._inputFieldDate).toBe('');
     });
 
     it('should use displayFormat and set to true _displayHours, _displayMinutes, _meridian', () => {

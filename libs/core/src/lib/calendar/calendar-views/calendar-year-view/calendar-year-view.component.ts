@@ -33,29 +33,6 @@ import { CalendarYearGrid, CalendarYear } from '../../models/calendar-year-grid'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestroy {
-    /** @hidden
-     *  This variable is used to define which year from calendarYearList should be focusable by tab key
-     */
-    activeYear: number;
-
-    /** Parameter that stores the dozen of years that are currently being displayed. */
-    calendarYearListGrid: CalendarYear[][];
-
-    /** Parameter storing the year of the present day. */
-    currentYear: number;
-
-    /** Parameter storing first shown year on list */
-    firstYearInList: number;
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private _newFocusedYearId: string;
-
-    /** @hidden */
-    private _initiated = false;
-
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
     @Input()
     id: string;
@@ -77,6 +54,30 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     /** Event fired when a year is selected. */
     @Output()
     readonly yearClicked: EventEmitter<number> = new EventEmitter<number>();
+
+    /**
+     * @hidden
+     * This variable is used to define which year from calendarYearList should be focusable by tab key
+     */
+    activeYear: number;
+
+    /** Parameter that stores the dozen of years that are currently being displayed. */
+    calendarYearListGrid: CalendarYear[][];
+
+    /** Parameter storing the year of the present day. */
+    currentYear: number;
+
+    /** Parameter storing first shown year on list */
+    firstYearInList: number;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    private _newFocusedYearId: string;
+
+    /** @hidden */
+    private _initiated = false;
 
     /** @hidden */
     constructor(

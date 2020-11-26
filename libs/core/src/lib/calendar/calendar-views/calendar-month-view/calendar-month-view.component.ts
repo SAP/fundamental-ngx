@@ -33,21 +33,6 @@ import { CalendarMonth } from '../../models/calendar-month';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChanges {
-    /** A number offset used to achieve the 1-12 representation of the calendar */
-    private readonly _monthOffset: number = 1;
-
-    private readonly _amountOfColPerRow: number = 3;
-    private readonly _amountOfRows: number = 4;
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private _initiated = false;
-
-    /** Month grid table */
-    calendarMonthListGrid: CalendarMonth[][];
-
     /** The id of the calendar passed from the parent component */
     @Input()
     id: string;
@@ -67,6 +52,21 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     /** An event fired when a new month is selected */
     @Output()
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
+
+    /** Month grid table */
+    calendarMonthListGrid: CalendarMonth[][];
+
+    /** A number offset used to achieve the 1-12 representation of the calendar */
+    private readonly _monthOffset: number = 1;
+
+    private readonly _amountOfColPerRow: number = 3;
+    private readonly _amountOfRows: number = 4;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    private _initiated = false;
 
     constructor(
         private _eRef: ElementRef,

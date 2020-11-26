@@ -283,14 +283,14 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput {
             if (this.dateTimePickerComponent.isInvalidDateInput) {
                 this.state = 'error';
             } else {
-                if (!this.dateTimePickerComponent.inputFieldDate && !this.allowNull) {
+                if (!this.dateTimePickerComponent._inputFieldDate && !this.allowNull) {
                     this.state = 'error'; // null value in not allowNull should throw error
                 } else {
                     this.state = undefined; // resetting to default state
                 }
             }
             // only set the value if it is a valid datetime object
-            if (this.dateTimePickerComponent.inputFieldDate) {
+            if (this.dateTimePickerComponent._inputFieldDate) {
                 this.value = datetime;
             }
 

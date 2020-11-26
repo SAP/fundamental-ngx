@@ -17,19 +17,16 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { delay, first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Placement } from 'popper.js';
-
-import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
-import { CalendarYearGrid } from '../calendar/models/calendar-year-grid';
-import { SpecialDayRule } from '../calendar/models/special-day-rule';
-import { TimeComponent } from '../time/time.component';
-import { PopoverComponent } from '../popover/popover.component';
-import { PopoverBodyComponent } from '../popover/popover-body/popover-body.component';
-import { FormStates } from '../form/form-control/form-states';
 
 import { DatetimeAdapter } from '../datetime/datetime-adapter';
 import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
+import { CalendarComponent, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
+import { CalendarYearGrid } from '../calendar/models/calendar-year-grid';
+import { SpecialDayRule } from '../calendar/models/special-day-rule';
+import { FormStates } from '../form/form-control/form-states';
+
 import { createMissingDateImplementationError } from './errors';
 
 /**
@@ -241,36 +238,30 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     @Output()
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
-    /** @hidden Reference to the inner time component. */
-    @ViewChild(TimeComponent)
-    timeComponent: TimeComponent<D>;
+    /** Indicates when datetime input is in invalid state. */
+    get isInvalidDateInput(): boolean {
+        return this._isInvalidDateInput;
+    }
 
     /** @hidden Reference to the inner calendar component. */
     @ViewChild(CalendarComponent)
-    calendarComponent: CalendarComponent<D>;
-
-    /** @hidden */
-    @ViewChild(PopoverComponent)
-    popover: PopoverComponent;
-
-    /** @hidden */
-    @ViewChild(PopoverBodyComponent)
-    popoverBodyComponent: PopoverBodyComponent;
+    _calendarComponent: CalendarComponent<D>;
 
     /**
-     * @hidden Date of the input field. Internal use.
+     * @hidden
+     * Date of the input field. Internal use.
      * For programmatic selection, use two-way binding on the date input.
      */
-    inputFieldDate: string = null;
+    _inputFieldDate: string = null;
 
-    /** @hidden The Time object which interacts with the inner Time component. Internal use. */
-    isInvalidDateInput = false;
+    /** @hidden */
+    _isInvalidDateInput = false;
 
     /** @hidden The temporary Time object for use before 'Submit' is pressed. Internal use. */
-    tempTime: D;
+    _tempTime: D;
 
     /** @hidden The temporary CalendarDay object for use before 'Submit' is pressed. Internal use. */
-    tempDate: D;
+    _tempDate: D;
 
     /** @hidden */
     _meridian: boolean;
@@ -362,7 +353,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     ): {
         [key: string]: any;
     } {
-        return this.isCurrentModelValid() && !this.isInvalidDateInput
+        return this.isCurrentModelValid() && !this._isInvalidDateInput
             ? null
             : {
                   dateValidation: {
@@ -400,7 +391,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     /** Closes the popover and refresh model */
     closePopover(): void {
         if (this.isOpen) {
-            this.handleInputChange(this.inputFieldDate);
+            this.handleInputChange(this._inputFieldDate);
             this.onClose.emit();
             this.isOpen = false;
             this.isOpenChange.emit(this.isOpen);
@@ -408,8 +399,8 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     }
 
     /** @hidden */
-    isInvalidDateInputHandler(isInvalid: boolean): void {
-        this.isInvalidDateInput = isInvalid;
+    setInvalidDateInputHandler(isInvalid: boolean): void {
+        this._isInvalidDateInput = isInvalid;
     }
 
     /** @hidden */
@@ -434,7 +425,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      */
     writeValue(selected: D): void {
         if (!this._dateTimeAdapter.isValid(selected)) {
-            this.inputFieldDate = '';
+            this._inputFieldDate = '';
             this._changeDetRef.detectChanges();
             return;
         }
@@ -453,7 +444,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      * If invalid time model is detected, it takes time model data from TimeComponent.
      */
     handleDateChange(date: D): void {
-        this.tempDate = date;
+        this._tempDate = date;
         if (!this.showFooter) {
             this.submit();
         }
@@ -464,7 +455,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      * Method that is triggered by events from time component, when there is selected time changed
      */
     handleTimeChange(time: D): void {
-        this.tempTime = time;
+        this._tempTime = time;
         if (!this.showFooter) {
             this.submit();
         }
@@ -475,8 +466,8 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      * Method that is triggered when 'Submit' button is pressed.
      */
     submit(): void {
-        const currentDate = this.tempDate;
-        const currentTime = this.tempTime;
+        const currentDate = this._tempDate;
+        const currentTime = this._tempTime;
 
         this.date = this._dateTimeAdapter.setTime(
             currentDate,
@@ -485,7 +476,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
             this._dateTimeAdapter.getSeconds(currentTime)
         );
 
-        this.isInvalidDateInput = !this.isCurrentModelValid();
+        this._isInvalidDateInput = !this.isCurrentModelValid();
 
         this._setInput(this.date);
 
@@ -501,15 +492,15 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      * Function that is called when 'Cancel' button is pressed.
      */
     cancel(): void {
-        this.tempDate = this.date;
-        this.tempTime = this.date;
+        this._tempDate = this.date;
+        this._tempTime = this.date;
         this.closePopover();
     }
 
     /** @hidden */
     focusArrowLeft(): void {
-        if (this._elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow')) {
-            this._elRef.nativeElement.querySelector('#' + this.calendarComponent.id + '-left-arrow').focus();
+        if (this._elRef.nativeElement.querySelector('#' + this._calendarComponent.id + '-left-arrow')) {
+            this._elRef.nativeElement.querySelector('#' + this._calendarComponent.id + '-left-arrow').focus();
         }
     }
 
@@ -520,9 +511,9 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      */
     handleInputChange(inputStr: string): void {
         const date = this._dateTimeAdapter.parse(inputStr, this._dateTimeFormats.parse.dateTimeInput);
-        this.isInvalidDateInput = !this._isModelValid(date);
+        this._isInvalidDateInput = !this._isModelValid(date);
 
-        if (!this.isInvalidDateInput) {
+        if (!this._isInvalidDateInput) {
             this.date = date;
             this._setTempDateTime();
             this.onChange(date);
@@ -532,13 +523,13 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         }
 
         if (!inputStr && this.allowNull) {
-            this.isInvalidDateInput = false;
+            this._isInvalidDateInput = false;
             this.date = this._dateTimeAdapter.now();
             this._setTempDateTime();
             this._refreshCurrentlyDisplayedCalendarDate(this.date);
             this.onChange(null);
         } else if (!inputStr && !this.allowNull) {
-            this.isInvalidDateInput = true;
+            this._isInvalidDateInput = true;
         }
     }
 
@@ -553,14 +544,14 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     }
 
     private _setInput(dateTime: D): void {
-        this.inputFieldDate = this._formatDateTime(dateTime);
+        this._inputFieldDate = this._formatDateTime(dateTime);
         this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
     private _refreshCurrentlyDisplayedCalendarDate(date: D): void {
-        if (this.calendarComponent) {
-            this.calendarComponent.setCurrentlyDisplayed(date);
+        if (this._calendarComponent) {
+            this._calendarComponent.setCurrentlyDisplayed(date);
         }
     }
 
@@ -578,8 +569,8 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /** @hidden */
     private _setTempDateTime(): void {
-        this.tempDate = this.date;
-        this.tempTime = this.date;
+        this._tempDate = this.date;
+        this._tempTime = this.date;
     }
 
     /** @hidden */

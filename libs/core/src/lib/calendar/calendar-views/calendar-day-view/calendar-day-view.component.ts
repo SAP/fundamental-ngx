@@ -176,7 +176,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
      * Variable that contains short weekday names.
@@ -228,7 +228,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         this._refreshShortWeekDays();
         this._buildDayViewGrid();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._refreshShortWeekDays();
             this._buildDayViewGrid();
             this.changeDetRef.markForCheck();
@@ -245,8 +245,8 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -690,23 +690,23 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     private _setupKeyboardService(): void {
         this.calendarService.colAmount = this._amountOfCols;
 
-        this.calendarService.onFocusIdChange.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+        this.calendarService.onFocusIdChange.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
             this.newFocusedDayIndex = index;
             this.focusActiveElement();
         });
         this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this.calendarService.onKeySelect.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+        this.calendarService.onKeySelect.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
             this.newFocusedDayIndex = index;
             this.selectDate(this.calendarDayList[index]);
         });
 
-        this.calendarService.onListStartApproach.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+        this.calendarService.onListStartApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
             this.newFocusedDayIndex = index;
             this._selectPreviousMonth();
         });
 
-        this.calendarService.onListEndApproach.pipe(takeUntil(this.onDestroy$)).subscribe((index) => {
+        this.calendarService.onListEndApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
             this.newFocusedDayIndex = index;
             this._selectNextMonth();
         });

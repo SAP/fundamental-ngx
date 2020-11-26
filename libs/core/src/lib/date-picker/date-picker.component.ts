@@ -15,7 +15,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -57,8 +56,7 @@ import { createMissingDateImplementationError } from './errors';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => DatePickerComponent),
             multi: true
-        },
-        DatePipe
+        }
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -205,28 +203,22 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAc
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
-    isOpenChange = new EventEmitter<boolean>();
+    readonly isOpenChange = new EventEmitter<boolean>();
 
     /** Fired when a new date is selected. */
     @Output()
-    public readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
+    readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    public readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /** Event thrown every time calendar active view is changed */
     @Output()
-    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
+    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    onChange: any = (_: any) => {};
-
-    /** @hidden */
-    onTouched: any = () => {};
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -254,6 +246,12 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, ControlValueAc
     disableRangeEndFunction = function (_: D): boolean {
         return false;
     };
+
+    /** @hidden */
+    onChange: any = (_: any) => {};
+
+    /** @hidden */
+    onTouched: any = () => {};
 
     /** @hidden */
     get rangeDelimiter(): string {
