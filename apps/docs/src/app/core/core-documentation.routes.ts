@@ -104,6 +104,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'feed-input',
+                loadChildren: () =>
+                    import('./component-docs/feed-input/feed-input-docs.module').then(
+                        (m) => m.FeedInputDocsModule
+                    )
+            },
+            {
                 path: 'file-input',
                 loadChildren: () =>
                     import('./component-docs/file-input/file-input-docs.module').then((m) => m.FileInputDocsModule)
