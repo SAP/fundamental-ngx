@@ -13,6 +13,8 @@ export class PlatformDynamicPageTabbedExampleComponent {
 
     fullscreen = false;
 
+    pageTitle = 'Balenciaga Tripple S Trainers';
+
     onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
         console.log('collapse changed');
     }
