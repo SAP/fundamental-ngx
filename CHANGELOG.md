@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.6...v0.25.0-rc.0) (2020-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove TimeObject in favor of FdDate
+remove TimeFormatParser in favor of DatetimeAdapter & DateTimeFormats
+remove TimeI18n.meridianAm and TimeI18n.meridianPm in favor of DatetimeAdapter.getDayPeriodNames
+remove FdDatetime in favor of FdDate
+remove FdRangeDate in favor of generic DateRange
+remove fdDatetimePicker.format in favor of DateTimeFormats option
+remove fdDatetimePicker.locale in favor of using LOCAL_ID
+remove fdpDatetimePicker.format in favor of DateTimeFormats option
+remove fdpDatetimePicker.locale in favor of using LOCAL_ID
+remove DateFormatParser (core date picker) in favor of DatetimeAdapter & DateTimeFormats
+remove DateTimeFormatParser (core datetime picker) in favor of DatetimeAdapter & DateTimeFormats
+remove CalendarService.getDaysInMonth, this is moved to the DatetimeAdapter
+remove CalendarService.datesEqual, this is moved to the DatetimeAdapter
+remove CalendarService.rangeDatesEqual
+remove CalendarService.isBetween in favor of DatetimeAdapter.compareDate
+remove CalendarI18n service in favor of DatetimeAdapter
+remove FdDate.GetAmountOfWeeks in favor of DatetimeAdapter.getAmountOfWeeks
+rename FdDate.getModelFromDate in favor of FdDate.getFdDateByDate
+remove FdDate.getDay
+remove FdDate.nextDay
+remove FdDate.previousDay
+remove FdDate.getWeekNumber in favor of DatetimeAdapter.getWeekNumber
+
+### Features
+
+* (Core) Introduce datetime adaptor ([#3920](https://github.com/SAP/fundamental-ngx/issues/3920)) ([16d5e13](https://github.com/SAP/fundamental-ngx/commit/16d5e135f282ab4c44b5cd429ef37c8836a6f0ff))
+
 ### [0.24.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.5...v0.24.3-rc.6) (2020-11-26)
 
 ### [0.24.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.4...v0.24.3-rc.5) (2020-11-26)
