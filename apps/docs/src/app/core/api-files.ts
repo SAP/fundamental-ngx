@@ -197,6 +197,18 @@ export const API_FILES = {
     popoverDirective: ['PopoverDirective'],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
+    quickView: [
+        'QuickViewComponent',
+        'QuickViewTitleComponent',
+        'QuickViewSubheaderComponent',
+        'QuickViewSubheaderTitleComponent',
+        'QuickViewSubheaderSubtitleComponent',
+        'QuickViewGroupComponent',
+        'QuickViewGroupTitleComponent',
+        'QuickViewGroupItemComponent',
+        'QuickViewGroupItemLabelComponent',
+        'QuickViewGroupItemContentComponent'
+    ],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],
     shellbar: [

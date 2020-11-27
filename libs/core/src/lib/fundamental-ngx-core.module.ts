@@ -75,6 +75,7 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
 import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
 import { MessageBoxModule } from './message-box/message-box.module';
 import { ThemesService } from './utils/services/themes.service';
+import { QuickViewModule } from './quick-view/quick-view.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -126,6 +127,7 @@ import { ThemesService } from './utils/services/themes.service';
         PanelModule,
         ProductSwitchModule,
         PopoverModule,
+        QuickViewModule,
         RatingIndicatorModule,
         RadioModule,
         ScrollSpyModule,
@@ -151,4 +153,4 @@ import { ThemesService } from './utils/services/themes.service';
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })
-export class FundamentalNgxCoreModule { }
+export class FundamentalNgxCoreModule {}
