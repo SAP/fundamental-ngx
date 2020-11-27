@@ -2,13 +2,11 @@
 
 set -u -e
 
-source .ci-env/github.sh
-
 PACKAGES=(core platform)
 CURRENT_BRANCH=master
 
-git config --global user.email $github_email
-git config --global user.name $github_name
+git config --global user.email $GH_EMAIL
+git config --global user.name $GH_NAME
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"
