@@ -1,0 +1,203 @@
+@mixin fd-reset {
+    font-size: var(--sapFontSize);
+    line-height: var(--sapContent_LineHeight);
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+
+    &::before,
+    &::after {
+        box-sizing: inherit;
+        font-size: inherit;
+    }
+}
+
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+.fdp-upload-collection {
+    $fd-pagination-padding-x: 0.5rem;
+
+    &__fd-icon {
+        color: var(--sapHighlightColor) !important;
+        margin-right: 0.625rem !important;
+        font-size: 1rem !important;
+    }
+
+    fd-message-strip {
+        margin-bottom: 0.625rem;
+    }
+
+    &__toolbar {
+        .fd-toolbar {
+            margin-bottom: 0.625rem;
+            border: 0;
+
+            fd-input-group {
+                .sap-icon--search {
+                    color: var(--sapHighlightColor);
+                }
+            }
+        }
+    }
+
+    &__no-data {
+        text-align: center;
+        min-height: 230px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        fd-icon {
+            font-size: 3rem;
+            line-height: 3rem;
+            margin: 0;
+            color: var(--sapContent_LabelColor);
+        }
+
+        h3 {
+            font-size: var(--sapFontHeader4Size);
+            line-height: 1rem;
+            margin: 8px 0;
+        }
+
+        p {
+            font-size: var(--sapFontSize);
+            line-height: 1rem;
+            color: var(--sapContent_LabelColor);
+            margin: 0;
+        }
+
+        &.invisible {
+            opacity: 0;
+        }
+    }
+
+    &__table {
+        position: relative;
+    }
+
+    &__table-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.625rem;
+
+        .fdp-upload-collection__results--title,
+        .fdp-upload-collection__pagination--total {
+            @include fd-reset();
+
+            font-size: var(--sapFontSize);
+            color: var(--sapContent_LabelColor);
+            margin-right: $fd-pagination-padding-x;
+
+            @include fd-rtl() {
+                margin-right: 0;
+                margin-left: $fd-pagination-padding-x;
+            }
+        }
+    }
+
+    &__hidden {
+        display: none;
+    }
+
+    &__vertical-align-center {
+        display: flex;
+        align-items: center;
+    }
+
+    &__cursor {
+        cursor: pointer;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__dragdrop-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        background: rgba(255, 255, 255, 0.5);
+        outline: 2px dashed var(--sapField_BorderColor);
+        outline-offset: -4px;
+        box-sizing: border-box;
+
+        fd-icon {
+            font-size: 3rem;
+            line-height: 3rem;
+            margin-bottom: 1rem;
+            color: var(--sapContent_LabelColor);
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.125rem;
+            color: var(--sapContent_LabelColor);
+        }
+
+        &.active {
+            outline-color: var(--sapContent_DragAndDropActiveColor);
+            background: rgba(8, 84, 160, 0.08);
+
+            fd-icon {
+                color: var(--sapContent_DragAndDropActiveColor);
+            }
+
+            p {
+                color: var(--sapContent_DragAndDropActiveColor);
+            }
+        }
+    }
+
+    .fd-form-item {
+        align-items: center;
+        flex-direction: row;
+    }
+}
+
+.fdp-upload-collection-dialig-no-bg {
+    background-color: transparent;
+}
+
+[dir='rtl'] {
+    .fdp-upload-collection {
+        fd-icon {
+            margin-right: 0;
+            margin-left: 0.625rem;
+        }
+    }
+}
+
+.fd-menu__list {
+    .disabled {
+        background-color: var(--sapList_Background) !important;
+        cursor: not-allowed;
+
+        .fd-menu__title {
+            color: var(--sapList_TextColor) !important;
+        }
+    }
+}

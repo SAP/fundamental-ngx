@@ -1,0 +1,89 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h1 *ngIf="!_currentFolder" fd-dialog-title i18n="@@platformUploadCollection.MoveTo.Title">
+                        Move to
+                    </h1>
+                    <ng-container *ngIf="_currentFolder">
+                        <button
+                            fd-button
+                            compact="true"
+                            fdType="transparent"
+                            glyph="navigation-left-arrow"
+                            (click)="goToParentFolder()"
+                        ></button>
+                        <h1 fd-dialog-title>
+                            <span i18n="@@platformUploadCollection.MoveTo.TitleFolder">Folder</span>
+                            {{ _currentFolder.name }}
+                        </h1>
+                    </ng-container>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <button
+                        fd-button
+                        fdType="add-document"
+                        compact="true"
+                        label="New Folder"
+                        (click)="newFolder()"
+                    ></button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body class="fd-dialog__body--no-horizontal-padding">
+        <ul fd-list compact="true">
+            <li *ngIf="!_currentFolder" fd-list-item class="fd-list__item--title-background">
+                <span fd-list-title i18n="@@platformUploadCollection.MoveTo.AllFile.Label">All files</span>
+            </li>
+            <li
+                fd-list-item
+                *ngFor="let folder of _foldersList"
+                [selected]="selectedFolder?.documentId === folder.documentId"
+            >
+                <a fd-list-link (click)="hasFolders(folder.files) ? openFolder(folder) : selectFolder(folder)">
+                    <span fd-list-title [innerText]="folder.name"></span>
+                    <i *ngIf="hasFolders(folder.files)" fd-list-icon glyph="slim-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                compact="true"
+                (click)="confirm()"
+                type="submit"
+                [disabled]="
+                    !(
+                        (selectedFolder && _originalFolder?.documentId !== selectedFolder.documentId) ||
+                        (!selectedFolder && _originalFolder?.documentId !== _currentFolder?.documentId)
+                    )
+                "
+                i18n="@@platformUploadCollection.MoveTo.Btn.Confirm"
+            >
+                Move
+            </button>
+        </fd-dialog-footer-button>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                compact="true"
+                (click)="close()"
+                i18n="@@platformUploadCollection.MoveTo.Btn.Close"
+            >
+                Cancel
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>
