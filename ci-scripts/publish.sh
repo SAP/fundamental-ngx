@@ -2,11 +2,13 @@
 
 set -u -e
 
-git config --global user.email "fundamental@sap.com"
-git config --global user.name "fundamental-bot"
+source ./ci-env/github
 
 PACKAGES=(core platform)
 CURRENT_BRANCH=master
+
+git config --global user.email $github_email
+git config --global user.name $github_name
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"

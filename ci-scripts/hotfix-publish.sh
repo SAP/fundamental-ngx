@@ -2,12 +2,14 @@
 
 set -u -e
 
-git config --global user.email "fundamental@sap.com"
-git config --global user.name "fundamental-bot"
+source ./ci-env/github
+source .ci-env/flags.sh
 
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
 OLD_TAG=$(git descripe)
-source .ci-env/flags.sh
+
+git config --global user.email $github_email
+git config --global user.name $github_name
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
   echo "################ Running Hot Fix deploy tasks ################"
