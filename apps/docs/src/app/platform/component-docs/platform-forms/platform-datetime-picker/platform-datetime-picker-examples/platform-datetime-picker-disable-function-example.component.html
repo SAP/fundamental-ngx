@@ -8,7 +8,12 @@
         [validators]="requiredDateValidator"
         label="Date:"
     >
-        <fdp-datetime-picker name="simple" [formControl]="ffl1.formControl" [disableFunction]="disableFunction">
+        <fdp-datetime-picker
+            name="simple"
+            [formControl]="ffl1.formControl"
+            [disableFunction]="disableFunction"
+            placeholder="MM/dd/YYYY, hh:mm"
+        >
         </fdp-datetime-picker>
     </fdp-form-field>
 

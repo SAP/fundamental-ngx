@@ -1,6 +1,6 @@
 <label for="simple">Simple datetime picker:</label>
 <br />
-<fdp-datetime-picker name="simple"></fdp-datetime-picker>
+<fdp-datetime-picker name="simple" placeholder="MM/dd/YYYY, hh:mm"></fdp-datetime-picker>
 <br />
 <label for="withAllowNull">With allowNull not enabled to disallow input from taking null value:</label>
 <br />
@@ -26,9 +26,6 @@
 <br />
 <label for="placementDatetime">Placement for datetime picker:</label>
 <br />
-<fdp-datetime-picker name="placementDatetime" placement="bottom-end" [value]="date2"> </fdp-datetime-picker>
-<br />
-<label for="defaultFormatDatetime">Default format in placeholder:</label>
-<br />
-<fdp-datetime-picker name="defaultFormatDatetime"> </fdp-datetime-picker>
+<fdp-datetime-picker name="placementDatetime" placement="bottom-end" [value]="date2" placeholder="MM/dd/YYYY, hh:mm">
+</fdp-datetime-picker>
 <br />
