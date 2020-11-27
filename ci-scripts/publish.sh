@@ -2,7 +2,7 @@
 
 set -u -e
 
-source ./ci-env/github
+source .ci-env/github
 
 PACKAGES=(core platform)
 CURRENT_BRANCH=master
