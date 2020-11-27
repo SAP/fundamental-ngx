@@ -2,7 +2,7 @@
 
 set -u -e
 
-source .ci-env/github
+source .ci-env/github.sh
 source .ci-env/flags.sh
 
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
