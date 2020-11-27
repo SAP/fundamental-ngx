@@ -1,22 +1,23 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { DatetimePickerComponent, TimeObject } from '@fundamental-ngx/core';
 import {
     ButtonModule,
     CalendarModule,
     DatetimePickerModule,
     FdDate,
-    FdDatetime,
     FormModule,
     IconModule,
     InputGroupModule,
-    PopoverModule
+    PopoverModule,
+    DatetimePickerComponent,
+    FdDatetimeModule
 } from '@fundamental-ngx/core';
 import { FormFieldComponent, FdpFormGroupModule } from '@fundamental-ngx/platform';
 
 import { PlatformDatetimePickerComponent } from './datetime-picker.component';
+
 @Component({
     selector: 'fdp-test-datetime-picker',
     template: `
@@ -48,24 +49,24 @@ import { PlatformDatetimePickerComponent } from './datetime-picker.component';
 })
 class TestDatetimePickerComponent {
     @ViewChild(PlatformDatetimePickerComponent)
-    datetimePickerComponent: PlatformDatetimePickerComponent;
+    datetimePickerComponent: PlatformDatetimePickerComponent<FdDate>;
 
     @ViewChild('ffl1') datetimePickerFormField: FormFieldComponent;
     @ViewChild('submitButton') submitButton: ElementRef<HTMLElement>;
 
-    datetimePicker: FdDatetime = new FdDatetime(new FdDate(2008, 2, 11), new TimeObject());
+    datetimePicker: FdDate = new FdDate(2008, 2, 11, 13, 15);
+
+    datetimePickerFormData = { datetimePicker: this.datetimePicker };
 
     datetimePickerForm: FormGroup;
 
-    datetimePickerFormData = { datetimePicker: this.datetimePicker };
+    result: any = null;
+
     constructor() {
-        this.datetimePicker = new FdDatetime(new FdDate(2008, 2, 11), this.datetimePicker.time);
         this.datetimePickerForm = new FormGroup({
             datetimePicker: new FormControl(this.datetimePicker)
         });
     }
-
-    result: any = null;
 
     onSubmit(): void {
         this.result = this.datetimePickerForm.value;
@@ -76,23 +77,26 @@ describe('PlatformDatetimePickerComponent', () => {
     let host: TestDatetimePickerComponent;
     let fixture: ComponentFixture<TestDatetimePickerComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [PlatformDatetimePickerComponent, TestDatetimePickerComponent, DatetimePickerComponent],
-            imports: [
-                CalendarModule,
-                DatetimePickerModule,
-                PopoverModule,
-                FdpFormGroupModule,
-                FormsModule,
-                FormModule,
-                IconModule,
-                InputGroupModule,
-                ButtonModule,
-                ReactiveFormsModule
-            ]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [PlatformDatetimePickerComponent, TestDatetimePickerComponent, DatetimePickerComponent],
+                imports: [
+                    FdDatetimeModule,
+                    CalendarModule,
+                    DatetimePickerModule,
+                    PopoverModule,
+                    FdpFormGroupModule,
+                    FormsModule,
+                    FormModule,
+                    IconModule,
+                    InputGroupModule,
+                    ButtonModule,
+                    ReactiveFormsModule
+                ]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestDatetimePickerComponent);
@@ -137,11 +141,12 @@ describe('PlatformDatetimePickerComponent', () => {
 
     it('should call handleDatetime method', async () => {
         const datetimePicker = host.datetimePickerComponent;
-        spyOn(datetimePicker, '_handleDatetimeChange');
-        datetimePicker.value = '11/26/2020, 18:32:01';
+        spyOn(datetimePicker, 'writeValue');
+
+        datetimePicker.value = new FdDate();
         await wait(fixture);
 
-        expect(datetimePicker._handleDatetimeChange).toHaveBeenCalled();
+        expect(datetimePicker.writeValue).toHaveBeenCalled();
     });
 
     it('should call disabled state method', async () => {
@@ -156,16 +161,16 @@ describe('PlatformDatetimePickerComponent', () => {
     it('should be in an error state if value is empty and touched', async () => {
         const datetimePicker = host.datetimePickerComponent;
         datetimePicker.allowNull = false;
-        const formControl = host.datetimePickerForm.get('datetimePicker');
-        const inputEl = fixture.debugElement.query(By.css('input'));
 
-        expect(inputEl.nativeElement.classList.contains('is-error')).not.toBeTrue();
+        const inputGroupEl = fixture.debugElement.query(By.css('.fd-input-group'));
 
-        formControl.markAsTouched();
+        expect(inputGroupEl.nativeElement.classList.contains('is-error')).not.toBeTrue();
+
+        const invalidDate = new FdDate(null);
+        datetimePicker.value = invalidDate;
+        datetimePicker.handleDatetimeInputChange(invalidDate);
         await wait(fixture);
-        datetimePicker.value = '';
-        await wait(fixture);
 
-        expect(formControl.value).toBe('');
+        expect(inputGroupEl.nativeElement.classList.contains('is-error')).toBeTrue();
     });
 });

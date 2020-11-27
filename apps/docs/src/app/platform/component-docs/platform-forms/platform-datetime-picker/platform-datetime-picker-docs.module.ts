@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core';
 import { FdpFormGroupModule, PlatformDatetimePickerModule } from '@fundamental-ngx/platform';
+
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../../api-files';
@@ -26,6 +28,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
+        FdDatetimeModule,
         PlatformDatetimePickerModule,
         FdpFormGroupModule
     ],

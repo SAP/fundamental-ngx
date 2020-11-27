@@ -22,7 +22,7 @@ import { FdDate } from '@fundamental-ngx/core';
                 Dirty: {{ customForm.controls.date.dirty }}<br />
                 Valid: {{ customForm.controls.date.valid }}<br />
                 Selected Date:
-                {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
+                {{ customForm.controls.date.value?.toDateString() || 'null' }}
             </div>
             <br />
             <br />
@@ -40,15 +40,15 @@ import { FdDate } from '@fundamental-ngx/core';
                 Valid: {{ customForm.controls.disabledDate.valid }}<br />
                 Disabled: {{ customForm.controls.disabledDate.disabled }} <br />
                 Selected Date:
-                {{ customForm.controls.disabledDate.value ? customForm.controls.date.value.toDateString() : 'null' }}
+                {{ customForm.controls.disabledDate.value?.toDateString() || 'null' }}
             </div>
         </form>
     `
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
-        date: new FormControl(FdDate.getToday()),
-        disabledDate: new FormControl({ value: FdDate.getToday(), disabled: true })
+        date: new FormControl(FdDate.getNow()),
+        disabledDate: new FormControl({ value: FdDate.getNow(), disabled: true })
     });
 
     isValid(): boolean {

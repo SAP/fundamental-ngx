@@ -1,65 +1,52 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { DatetimePickerComponent } from './datetime-picker.component';
-import { CommonModule } from '@angular/common';
 import { IconModule } from '../icon/icon.module';
 import { PopoverModule } from '../popover/popover.module';
 import { CalendarModule } from '../calendar/calendar.module';
-import { FormsModule } from '@angular/forms';
 import { TimeModule } from '../time/time.module';
-import { FdDatetime } from './models/fd-datetime';
-import { FdDate } from '../calendar/models/fd-date';
+import { FdDate, FdDatetimeModule } from '../datetime';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
 
 describe('DatetimePickerComponent', () => {
-    let component: DatetimePickerComponent;
-    let fixture: ComponentFixture<DatetimePickerComponent>;
+    let component: DatetimePickerComponent<FdDate>;
+    let fixture: ComponentFixture<DatetimePickerComponent<FdDate>>;
+    let datetimeFormats: DateTimeFormats;
 
-    const takeAtLeastTwoDigits = (digit: number): string => {
-        return digit < 10 ? '0' + digit : String(digit);
-    };
-
-    const internalParser = (date: FdDatetime): string => {
-        return (
-            takeAtLeastTwoDigits(date.month) +
-            '/' +
-            takeAtLeastTwoDigits(date.day) +
-            '/' +
-            date.year +
-            ', ' +
-            takeAtLeastTwoDigits(date.hour) +
-            ':' +
-            takeAtLeastTwoDigits(date.minute) +
-            ':' +
-            takeAtLeastTwoDigits(date.second)
-        );
-    };
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [DatetimePickerComponent],
-            imports: [
-                CommonModule,
-                IconModule,
-                PopoverModule,
-                CalendarModule,
-                FormsModule,
-                TimeModule,
-                InputGroupModule,
-                ButtonModule
-            ]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [DatetimePickerComponent],
+                imports: [
+                    CommonModule,
+                    IconModule,
+                    PopoverModule,
+                    FdDatetimeModule,
+                    CalendarModule,
+                    FormsModule,
+                    TimeModule,
+                    InputGroupModule,
+                    ButtonModule
+                ]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(DatetimePickerComponent);
+        fixture = TestBed.createComponent<DatetimePickerComponent<FdDate>>(DatetimePickerComponent);
         component = fixture.componentInstance;
         component.ngOnInit();
-        component.date = new FdDatetime(FdDate.getToday().nextDay(), FdDatetime.getToday().time);
-        component.selectedDate = FdDate.getToday().nextDay();
+        component.date = new FdDate();
         fixture.detectChanges();
     });
+
+    beforeEach(inject([DATE_TIME_FORMATS], (formats: DateTimeFormats) => {
+        datetimeFormats = formats;
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();
@@ -67,7 +54,7 @@ describe('DatetimePickerComponent', () => {
 
     it('should open the popover', () => {
         component.isOpen = false;
-        component.isInvalidDateInput = false;
+        component.setInvalidDateInputHandler(false);
         component.openPopover();
         expect(component.isOpen).toBe(true);
     });
@@ -75,137 +62,80 @@ describe('DatetimePickerComponent', () => {
     it('should not open the popover if the component is disabled', () => {
         component.isOpen = false;
         component.disabled = true;
-        component.isInvalidDateInput = false;
+        component.setInvalidDateInputHandler(false);
         component.openPopover();
         expect(component.isOpen).toBe(false);
     });
 
     it('should close the calendar', () => {
         component.isOpen = true;
-        component.isInvalidDateInput = true;
+        component.setInvalidDateInputHandler(true);
         component.closePopover();
-        expect(component.inputFieldDate).toBeNull();
+        expect(component._inputFieldDate).toBeNull();
         expect(component.isOpen).toBe(false);
-    });
-
-    it('should update from input', () => {
-        spyOn(component, 'onChange');
-        component.date = FdDatetime.getToday();
-
-        const dateStr = internalParser(component.date);
-
-        component.handleInputChange(dateStr);
-
-        expect(component.calendarComponent.currentlyDisplayed.month).toBe(component.date.month);
-        expect(component.calendarComponent.currentlyDisplayed.year).toBe(component.date.year);
-        expect(component.onChange).toHaveBeenCalledWith(component.date);
     });
 
     it('should update from input for null value', () => {
         spyOn(component, 'onChange');
         component.allowNull = true;
         component.handleInputChange('');
-        const today = FdDatetime.getToday();
+        const today = new FdDate();
         expect(component.onChange).toHaveBeenCalledWith(null);
         expect(component.date).toEqual(today);
     });
 
-    it('should update input from time but no date', () => {
-        spyOn(component, 'onChange');
-        component.tempDate = FdDate.getToday();
-        const timeModel = { hour: 12, minute: 30, second: 45 };
-        const dateTime = new FdDatetime(component.tempDate, timeModel);
-        component.handleTimeChange(timeModel);
-        component.submit();
-
-        expect(component.onChange).toHaveBeenCalledWith(dateTime);
-        expect(component.inputFieldDate).toEqual(
-            (<any>component)._formatDateTime(new FdDatetime(component.tempDate, timeModel))
-        );
-    });
-
     it('should not update input with invalid time', () => {
-        spyOn(component, 'onChange');
-        const timeModel = { hour: 30, minute: 30, second: 45 };
-        const dateTime = new FdDatetime(component.date.date, timeModel);
-        const dateStr = internalParser(dateTime);
-        component.handleInputChange(dateStr);
-        expect(component.isInvalidDateInput).toEqual(true);
-    });
-
-    it('should not update input with invalid date', () => {
-        spyOn(component, 'onChange');
-        const date = new FdDate(2018, 45, 10);
-        const dateTime = new FdDatetime(date, component.date.time);
-        const dateStr = internalParser(dateTime);
-        component.handleInputChange(dateStr);
+        component.allowNull = false;
+        component.handleInputChange('hello');
         expect(component.isInvalidDateInput).toEqual(true);
     });
 
     it('should update input from calendar', () => {
         spyOn(component, 'onChange');
-        component.tempTime = FdDatetime.getToday().time;
+        const tempTime = new FdDate();
+        component._tempTime = tempTime;
         const date = new FdDate(2018, 10, 10);
-        const dateTime = new FdDatetime(date, component.tempTime);
         component.handleDateChange(date);
         component.submit();
 
-        expect(component.onChange).toHaveBeenCalledWith(dateTime);
-        expect(component.inputFieldDate).toEqual(
-            (<any>component)._formatDateTime(new FdDatetime(date, component.tempTime))
-        );
+        expect(component.date.year).toEqual(date.year);
+        expect(component.date.hour).toEqual(tempTime.hour);
+        expect(component.date.minute).toEqual(tempTime.minute);
     });
 
     it('should handle correct write value function', () => {
-        const dateTime = FdDatetime.getToday();
+        const dateTime = new FdDate();
         component.writeValue(dateTime);
-        expect(component.selectedDate).toEqual(dateTime.date);
-        expect(component.time).toEqual(dateTime.time);
+
         expect(component.date).toEqual(dateTime);
-        expect(component.calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
+        expect(component._calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
     });
 
-    it('should handle invalid date picked on time change and show it on input', () => {
-        const dateTime = FdDatetime.getToday();
-        component.writeValue(dateTime);
-        const invalidDate = new FdDatetime(new FdDate(2010, 40, 30), dateTime.time);
-
-        const invalidDateStr = internalParser(invalidDate);
-        component.inputFieldDate = invalidDateStr;
-        component.handleInputChange(invalidDateStr);
-        expect(component.inputFieldDate).toEqual(invalidDateStr);
-        expect(component.isInvalidDateInput).toBeTruthy();
+    it('should reset input if time format is invalid', () => {
+        component.writeValue('hello' as any);
+        expect(component._inputFieldDate).toBe('');
     });
 
-    it('should stick to last valid, on invalid string.', () => {
-        component.meridian = false;
-        const dateTime = new FdDatetime(FdDate.getToday(), { hour: 12, minute: 11, second: 10 });
-        component.writeValue(dateTime);
-        const invalidTime = { hour: 50, minute: 30, second: 20 };
-        const invalidDate = new FdDatetime(dateTime.date, invalidTime);
-        fixture.detectChanges();
-        component.handleInputChange(internalParser(invalidDate));
-        expect(component.inputFieldDate).toEqual(internalParser(dateTime));
-        expect(component.isInvalidDateInput).toBeTruthy();
+    it('should use displayFormat and set to true _displayHours, _displayMinutes, _meridian', () => {
+        datetimeFormats.display.dateTimeInput = { hour: 'numeric', minute: 'numeric', hour12: true };
+        (<any>component)._calculateTimeOptions();
+        expect(component._displayHours).toBe(true);
+        expect(component._displayMinutes).toBe(true);
+        expect(component._displaySeconds).toBe(false);
+        expect(component._meridian).toBe(true);
     });
 
-    it('should cancel', () => {
-        component.selectedDate = FdDate.getToday();
-        component.tempDate = null;
-        component.time = {hour: 1, minute: 1, second: 1};
-        component.tempTime = null;
-        spyOn(component, 'closePopover');
-
-        component.cancel();
-
-        expect(component.tempDate).toEqual(component.selectedDate);
-        expect(component.tempTime).toEqual(component.time);
-        expect(component.closePopover).toHaveBeenCalled();
-    });
-
-    it('should handle other types than FdTimeDate', () => {
-        const dateTimeString: any = 'asdsad';
-        component.writeValue(dateTimeString);
-        expect(component.inputFieldDate).not.toBe(dateTimeString);
+    it('should use displayFormat and set to true _displayHours, _displayMinutes, _displaySeconds', () => {
+        datetimeFormats.display.dateTimeInput = {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: false
+        };
+        (<any>component)._calculateTimeOptions();
+        expect(component._displayHours).toBe(true);
+        expect(component._displayMinutes).toBe(true);
+        expect(component._displaySeconds).toBe(true);
+        expect(component._meridian).toBe(false);
     });
 });

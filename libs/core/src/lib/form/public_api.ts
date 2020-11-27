@@ -15,3 +15,5 @@ export * from './fieldset/fieldset.component';
 export * from './fieldset/fieldset.module';
 export * from './form-input-message-group/form-input-message-group.component';
 export * from './form-input-message-group/form-input-message-group.module';
+export * from './form-header/form-header.component';
+export * from './form-header/form-header.module';

@@ -1,24 +1,30 @@
-import { Component, Injectable } from '@angular/core';
-import { DateFormatParser, FdDate, FdRangeDate } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import {
+    DateRange,
+    DatetimeAdapter,
+    DateTimeFormats,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core';
 
-@Injectable()
-export class DateFormatDashes extends DateFormatParser {
-    rangeDelimiter = ' to ';
+/**
+ * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,
+ * see the doc https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+ */
 
-    public parse(value: string): FdDate {
-        const values: number[] = value.split('-').map(Number);
-
-        // If date is 0, set the date to invalid by setting month to 14
-        if (values[2] === 0) {
-            values[1] = 14;
+export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
+    ...FD_DATETIME_FORMATS,
+    display: {
+        ...FD_DATETIME_FORMATS.display,
+        dateInput: {
+            year: '2-digit',
+            month: '2-digit',
+            day: '2-digit'
         }
-        return new FdDate(values[2], values[1], values[0]);
-    }
-
-    public format(date: FdDate): string {
-        return date.day + '-' + (date.month < 10 ? '0' : '') + date.month + '-' + date.year;
-    }
-}
+    },
+    rangeDelimiter: ' to '
+};
 
 @Component({
     selector: 'fd-date-picker-format-example',
@@ -27,27 +33,25 @@ export class DateFormatDashes extends DateFormatParser {
         <br />
         <div>Selected Date: {{ date?.toDateString() }}</div>
         <br />
-        <fd-date-picker
-            placeholder="dd-mm-yyyy to dd-mm-yyyy"
-            [type]="'range'"
-            [(ngModel)]="selectedRange"
-        ></fd-date-picker>
+        <fd-date-picker placeholder="mm/dd/yy to mm/dd/yy" type="range" [(ngModel)]="selectedRange"></fd-date-picker>
         <br />
         <div>Selected First Date: {{ selectedRange?.start?.toDateString() }}</div>
         <div>Selected Last Date: {{ selectedRange?.end?.toDateString() }}</div>
     `,
     providers: [
         {
-            provide: DateFormatParser,
-            useClass: DateFormatDashes
+            provide: DATE_TIME_FORMATS,
+            useValue: CUSTOM_FD_DATETIME_FORMATS
         }
     ]
 })
 export class DatePickerFormatExampleComponent {
-    date = FdDate.getToday();
+    date: FdDate;
+    selectedRange: DateRange<FdDate>;
 
-    selectedRange: FdRangeDate = {
-        start: FdDate.getToday(),
-        end: FdDate.getToday().nextDay()
-    };
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
+        const today = this.datetimeAdapter.today();
+        this.date = today;
+        this.selectedRange = new DateRange(today, this.datetimeAdapter.addCalendarDays(today, 1));
+    }
 }

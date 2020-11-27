@@ -1,108 +1,45 @@
-import { Component, Injectable, ViewChild } from '@angular/core';
-import { CalendarI18n, DatetimePickerComponent, FdDatetime } from '@fundamental-ngx/core';
-
-import moment from 'moment';
-import 'moment/locale/es';
-import 'moment/locale/en-gb';
-import 'moment/locale/de';
-import 'moment/locale/fr';
-import 'moment/locale/bg';
-import 'moment/locale/pl';
-import { registerLocaleData } from '@angular/common';
-import localeFrench from '@angular/common/locales/fr';
-import localePolish from '@angular/common/locales/pl';
-import localeBulgarian from '@angular/common/locales/bg';
-import localeCa from '@angular/common/locales/en-CA';
-import localeDe from '@angular/common/locales/de';
+import { Component, LOCALE_ID, ViewChild } from '@angular/core';
+import { DatetimePickerComponent, FdDate, DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core';
 
 const placeholders = new Map([
-  ['en-ca', 'mm/dd/yyyy, hh:mm a'],
-  ['fr', 'dd/mm/yyyy  hh:mm'],
-  ['bg', 'дд/мм/гг чч:мм'],
-  ['de', 'dd.mm.yy, hh:mm'],
-  ['pl', 'dd.mm.yyyy, hh:mm'],
+    ['en-ca', 'mm/dd/yyyy, hh:mm a'],
+    ['fr', 'dd/mm/yyyy  hh:mm'],
+    ['bg', 'дд.мм.гг чч:мм'],
+    ['de', 'dd.mm.yy, hh:mm'],
+    ['pl', 'dd.mm.yyyy, hh:mm']
 ]);
-
-@Injectable()
-export class CustomI18nMomentCalendar extends CalendarI18n {
-    getDayAriaLabel(date: Date): string {
-        return date.getDate() + ' ' + moment.months()[date.getMonth()] + ' ' + date.getFullYear();
-    }
-
-    getAllFullMonthNames(): string[] {
-        return moment.months();
-    }
-
-    getAllShortMonthNames(): string[] {
-        return moment.monthsShort();
-    }
-
-    getAllShortWeekdays(): string[] {
-        return moment.weekdaysShort();
-    }
-}
 
 @Component({
     selector: 'fd-datetime-picker-complex-i18n-example',
     templateUrl: './datetime-picker-complex-i18n-example.component.html',
     styleUrls: ['./datetime-picker-complex-i18n-example.component.scss'],
     providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
         {
-            provide: CalendarI18n,
-            useClass: CustomI18nMomentCalendar
+            provide: LOCALE_ID,
+            useValue: 'en-ca'
+        },
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
         }
     ]
 })
 export class DatetimePickerComplexI18nExampleComponent {
-    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent;
+    locale = 'en-ca';
 
-    constructor(private calendarI18nService: CalendarI18n) {
-        registerLocaleData(localeFrench, 'fr');
-        registerLocaleData(localePolish, 'pl');
-        registerLocaleData(localeBulgarian, 'bg');
-        registerLocaleData(localeCa, 'en-ca');
-        registerLocaleData(localeDe, 'de');
-        moment.locale('en-ca');
-    }
+    date = FdDate.getNow();
 
-    meridian = true;
+    placeholder = placeholders.get(this.locale);
 
-    actualLocale = '';
+    @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent<FdDate>;
 
-    selectedLocale = 'en-ca';
-
-    actualFormat = 'MM/dd/yyyy, h:mm a';
-
-    actualMomentJsLang = '';
-
-    placeholder = 'mm/dd/yyyy, hh:mm am'
-
-    public date: FdDatetime = FdDatetime.getToday();
-
-    public refresh(): void {
-        this.datetimePickerComponent.locale = this.actualLocale;
-        this.datetimePickerComponent.format = this.actualFormat;
-        this.placeholder = placeholders.get(this.actualLocale);
-
-        this.datetimePickerComponent.submit();
-        this.calendarI18nService.i18nChange.next();
-    }
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 
     public setLocale(locale: string): void {
-      this.actualMomentJsLang = locale;
-      this.actualLocale = locale;
-      moment.locale(locale);
-      if (moment().format('LT').includes('AM') || moment().format('LT').includes('PM')) {
-        this.actualFormat = 'MM/dd/yyyy, h:mm a';
-        this.meridian = true;
-      } else {
-        this.actualFormat = 'MM/dd/yyyy, H:mm';
-        this.meridian = false;
-      }
-      this.refresh();
-    }
-
-    public isSelected(momentJsLang: string): string {
-        return this.actualMomentJsLang === momentJsLang ? 'selected' : '';
+        this.locale = locale;
+        this.datetimeAdapter.setLocale(locale);
+        this.placeholder = placeholders.get(this.locale);
     }
 }

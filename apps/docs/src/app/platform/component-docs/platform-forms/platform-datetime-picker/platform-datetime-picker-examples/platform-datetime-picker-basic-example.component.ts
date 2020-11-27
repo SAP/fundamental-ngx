@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { FdDate, FdDatetime } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-datetime-picker-basic-example',
@@ -8,30 +7,11 @@ import { FdDate, FdDatetime } from '@fundamental-ngx/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDatetimePickerBasicExampleComponent {
-    storedDate: FdDatetime = FdDatetime.getToday();
+    date1: FdDate = new FdDate(2020, 11, 27, 14, 30);
 
-    datetimePickerForm = new FormGroup({});
-
-    requiredDateValidator: ValidatorFn[] = [Validators.required];
-
-    date = FdDatetime.getToday();
-
-    data: StoredDatetimeObject;
-
-    constructor() {
-        this.storedDate = new FdDatetime(new FdDate(2008, 2, 11), this.storedDate.time);
-        this.data = new StoredDatetimeObject(this.storedDate);
-    }
-
-    save(value: any): void {
-        alert('Form Value: ' + value);
-    }
+    date2: FdDate = FdDate.getToday();
 
     changeDay(): void {
-        this.date = new FdDatetime(new FdDate(2018, 10, 10), this.date.time);
+        this.date1 = new FdDate(2018, 10, 10, 21, 35);
     }
-}
-
-class StoredDatetimeObject {
-    constructor(public storedDate: FdDatetime) {}
 }

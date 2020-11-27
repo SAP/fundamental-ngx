@@ -2,6 +2,104 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.2...v0.25.0-rc.3) (2020-11-27)
+
+## [0.25.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.0...v0.25.0-rc.2) (2020-11-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* - Removed fd-dialog-title, fd-title should be used instead.
+
+### Features
+
+* (Core) Introduce Message Box component ([#3902](https://github.com/SAP/fundamental-ngx/issues/3902)) ([fb1bd78](https://github.com/SAP/fundamental-ngx/commit/fb1bd78d84b58be7677617167729a89bdca4eac7))
+* (Core) introduce Rating Indicator component  ([#3699](https://github.com/SAP/fundamental-ngx/issues/3699)) ([b989dba](https://github.com/SAP/fundamental-ngx/commit/b989dba47d72066957a7c766ced48eaa4cc16231))
+
+
+### Bug Fixes
+
+* (Platform) show default format for placeholder in DatetimePicker docs ([#3931](https://github.com/SAP/fundamental-ngx/issues/3931)) ([4f1bcb5](https://github.com/SAP/fundamental-ngx/commit/4f1bcb59553cb87a524a01c3aab7f8df8b491b20))
+
+## [0.25.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.0...v0.25.0-rc.1) (2020-11-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* - Removed fd-dialog-title, fd-title should be used instead.
+
+### Features
+
+* (Core) Introduce Message Box component ([#3902](https://github.com/SAP/fundamental-ngx/issues/3902)) ([fb1bd78](https://github.com/SAP/fundamental-ngx/commit/fb1bd78d84b58be7677617167729a89bdca4eac7))
+* (Core) introduce Rating Indicator component  ([#3699](https://github.com/SAP/fundamental-ngx/issues/3699)) ([b989dba](https://github.com/SAP/fundamental-ngx/commit/b989dba47d72066957a7c766ced48eaa4cc16231))
+
+## [0.25.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.6...v0.25.0-rc.0) (2020-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove TimeObject in favor of FdDate
+remove TimeFormatParser in favor of DatetimeAdapter & DateTimeFormats
+remove TimeI18n.meridianAm and TimeI18n.meridianPm in favor of DatetimeAdapter.getDayPeriodNames
+remove FdDatetime in favor of FdDate
+remove FdRangeDate in favor of generic DateRange
+remove fdDatetimePicker.format in favor of DateTimeFormats option
+remove fdDatetimePicker.locale in favor of using LOCAL_ID
+remove fdpDatetimePicker.format in favor of DateTimeFormats option
+remove fdpDatetimePicker.locale in favor of using LOCAL_ID
+remove DateFormatParser (core date picker) in favor of DatetimeAdapter & DateTimeFormats
+remove DateTimeFormatParser (core datetime picker) in favor of DatetimeAdapter & DateTimeFormats
+remove CalendarService.getDaysInMonth, this is moved to the DatetimeAdapter
+remove CalendarService.datesEqual, this is moved to the DatetimeAdapter
+remove CalendarService.rangeDatesEqual
+remove CalendarService.isBetween in favor of DatetimeAdapter.compareDate
+remove CalendarI18n service in favor of DatetimeAdapter
+remove FdDate.GetAmountOfWeeks in favor of DatetimeAdapter.getAmountOfWeeks
+rename FdDate.getModelFromDate in favor of FdDate.getFdDateByDate
+remove FdDate.getDay
+remove FdDate.nextDay
+remove FdDate.previousDay
+remove FdDate.getWeekNumber in favor of DatetimeAdapter.getWeekNumber
+
+### Features
+
+* (Core) Introduce datetime adaptor ([#3920](https://github.com/SAP/fundamental-ngx/issues/3920)) ([16d5e13](https://github.com/SAP/fundamental-ngx/commit/16d5e135f282ab4c44b5cd429ef37c8836a6f0ff))
+
+### [0.24.3-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.5...v0.24.3-rc.6) (2020-11-26)
+
+### [0.24.3-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.4...v0.24.3-rc.5) (2020-11-26)
+
+
+### Features
+
+* (Core) introduce Feed Input component ([#3725](https://github.com/SAP/fundamental-ngx/issues/3725)) ([77ca12d](https://github.com/SAP/fundamental-ngx/commit/77ca12d2736de9a74f525ab1506adb57e484e7e0))
+* (Platform) introduce Feed Input component ([#3851](https://github.com/SAP/fundamental-ngx/issues/3851)) ([e55df40](https://github.com/SAP/fundamental-ngx/commit/e55df40c13c4abc5152771b6be0bb0a45b4ae230))
+
+### [0.24.3-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.3...v0.24.3-rc.4) (2020-11-26)
+
+### [0.24.3-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.2...v0.24.3-rc.3) (2020-11-26)
+
+### [0.24.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.1...v0.24.3-rc.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* (Platform) accessibility fixes for dynamic page layout ([#3925](https://github.com/SAP/fundamental-ngx/issues/3925)) ([c5a4845](https://github.com/SAP/fundamental-ngx/commit/c5a4845d7b4010cdd9347029f302c6e5e2d7f7b5))
+
+### [0.24.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.0...v0.24.3-rc.1) (2020-11-25)
+
+
+### Features
+
+* (Core) introduce new Form Header component ([#3861](https://github.com/SAP/fundamental-ngx/issues/3861)) ([9db06cd](https://github.com/SAP/fundamental-ngx/commit/9db06cdf4a1b0f3861f1205a14ce3b840cc88cf1))
+
+### [0.24.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.2...v0.24.3-rc.0) (2020-11-25)
+
+
+### Features
+
+* (Platform) introducing new component Multi Input and documentation ([#3649](https://github.com/SAP/fundamental-ngx/issues/3649)) ([51470da](https://github.com/SAP/fundamental-ngx/commit/51470da556048530e4a9f70f507eade01933bc2e))
+
 ### [0.24.2](https://github.com/SAP/fundamental-ngx/compare/v0.24.2-rc.0...v0.24.2) (2020-11-24)
 
 ### [0.24.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.1-rc.27...v0.24.2-rc.0) (2020-11-24)
