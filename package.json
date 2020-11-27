@@ -32,6 +32,7 @@
     "ng": "ng",
     "release": "./scripts/publish-release.sh",
     "hotfix-release": "./scripts/hotfix-publish-release.sh",
+    "hotfix-release-latest": "./scripts/hotfix-publish-release.sh latest",
     "release:create": "create-release",
     "start": "ng serve",
     "test": "ng test core --watch false --code-coverage true --browsers=ChromeHeadless",

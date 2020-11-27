@@ -1,5 +1,14 @@
 #! /bin/bash
 
+# This can be triggered by 2 instructions
+# - npm run hotfix-release
+# - npm run hotfix-release-latest
+# `-latest` indicates if the new tag should be treated as a latest one in npm, which is going to trigger
+# - npm publish with `latest` tag, which will become new default version
+# - master version incrementation
+
+
+
 NOCOLOR='\033[0m'
 ERROR='\033[31m'
 
