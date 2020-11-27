@@ -25,13 +25,28 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, skip } from 'rxjs/operators';
 
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core';
-import { TableService } from './table.service';
-import { TableColumnComponent, TableToolbarComponent } from './components';
-import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
+import {
+    applyCssClass,
+    CssClassBuilder,
+    DialogConfig,
+    DialogService,
+    KeyUtil,
+    RtlService
+} from '@fundamental-ngx/core';
+
 import { isDataSource } from '../../domain';
-import { TableDataSource } from './domain';
-import { CollectionFilter, CollectionStringFilter, SelectableRow, TableState } from './interfaces';
+
+import { TableService } from './table.service';
+import {
+    FilterByStepComponent,
+    GroupingComponent,
+    SortingComponent,
+    TableColumnComponent,
+    TableToolbarComponent,
+    TableViewSettingsFilterComponent
+} from './components';
+
+import { CollectionFilter, SelectableRow, TableState } from './interfaces';
 import {
     TableColumnFreezeEvent,
     TableFilterChangeEvent,
@@ -39,15 +54,21 @@ import {
     TableRowSelectionChangeEvent,
     TableSortChangeEvent
 } from './models';
-import {
-    DEFAULT_COLUMN_WIDTH,
-    DEFAULT_TABLE_STATE,
-    ROW_HEIGHT,
-    SELECTION_COLUMN_WIDTH
-} from './constants';
+import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
+import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
+import { TableDataSource } from './domain/table-data-source';
+
 import { getNestedValue } from '../../utils/object';
+import { SearchInput } from '../search-field/public_api';
 
 export type FdpTableDataSource<T> = TableDataSource<T>; // | T[] | Observable<T>;
+
+const dialogConfig: DialogConfig = {
+    responsivePadding: true,
+    verticalPadding: false,
+    minWidth: '30%',
+    minHeight: '50%'
+};
 
 /**
  * The component that represents a table.
@@ -85,18 +106,18 @@ export type FdpTableDataSource<T> = TableDataSource<T>; // | T[] | Observable<T>
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ TableService ]
+    providers: [TableService]
 })
-export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy, CssClassBuilder {
+export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit, OnDestroy, CssClassBuilder {
     /** Data source for table data. */
     @Input()
-    set dataSource(value: FdpTableDataSource<any>) {
+    set dataSource(value: FdpTableDataSource<T>) {
         if (value) {
             this._resetChecks();
             this._initializeDS(value);
         }
     }
-    get dataSource(): FdpTableDataSource<any> {
+    get dataSource(): FdpTableDataSource<T> {
         return this._dataSource;
     }
 
@@ -155,7 +176,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** Event fired when table selection has changed. */
     @Output()
-    rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<any>> = new EventEmitter<TableRowSelectionChangeEvent<any>>();
+    rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
+        TableRowSelectionChangeEvent<T>
+    >();
 
     /** Event fired when table sort order has changed. */
     @Output()
@@ -185,6 +208,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     @ContentChild(TableToolbarComponent)
     tableToolbarComponent: TableToolbarComponent;
 
+    /** View Settings filters list */
+    viewSettingsFilters: QueryList<TableViewSettingsFilterComponent>;
+
     /** @hidden */
     class: string;
 
@@ -207,8 +233,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     _popoverOpen = false;
+
     /** @hidden */
-    _popoverColumnKey = '';
+    _popoverColumnKey: string;
 
     /** @hidden */
     _sortField: string;
@@ -217,6 +244,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     _filterType: FilterValueType = FilterValueType.STRING;
+
     /** @hidden */
     _filterValue: CollectionFilter;
 
@@ -256,7 +284,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     private _unchecked = [];
 
     /** @hidden */
-    private _dataSource: FdpTableDataSource<any>;
+    private _dataSource: FdpTableDataSource<T>;
 
     /** @hidden for data source handling */
     private _dsSubscription: Subscription | null;
@@ -272,6 +300,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         private readonly _tableService: TableService,
         private readonly _cd: ChangeDetectorRef,
         private readonly _el: ElementRef,
+        private readonly _dialogService: DialogService,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -283,12 +312,10 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        this._onStateChanges();
 
-        this._subscriptions.add(this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe(rtl => {
-            this._rtl = rtl;
-            this._cd.markForCheck();
-        }));
+        this._listenToTableStateChanges();
+
+        this._listenToRtlChanges();
     }
 
     /** @hidden */
@@ -296,10 +323,13 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         // this._tableService.columns = this.columns;
 
         this._setInitialState();
+
         this._checkColumnsAbilities();
+
         this._setFreezableInfo();
-        this._onSearchSubmit();
+
         this.buildComponentCssClass();
+
         this._cd.detectChanges();
     }
 
@@ -315,7 +345,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             this.contentDensity === ContentDensity.COMPACT ? 'fd-table--compact' : '',
             this.contentDensity === ContentDensity.CONDENSED ? 'fd-table--condensed' : '',
             this.noHorizontalBorders || this.noBorders ? 'fd-table--no-horizontal-borders ' : '',
-            this.noVerticalBorders || this.noBorders ? 'fd-table--no-vertical-borders ' : '',
+            this.noVerticalBorders || this.noBorders ? 'fd-table--no-vertical-borders ' : ''
         ];
     }
 
@@ -330,7 +360,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef<HTMLElement> {
         return this.tableContainer;
     }
 
@@ -350,7 +380,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         }
 
         this._reset();
-        const alreadySelected = this._rows.find(r => r.checked === true);
+
+        const alreadySelected = this._rows.find((r) => r.checked === true);
+
         if (alreadySelected) {
             alreadySelected.checked = false;
         }
@@ -367,7 +399,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         this._emitSelectionChange(index);
     }
 
-    /** @hidden Select/unselect all rows in 'multiple' mode. */
+    /** @hidden Select/Unselect all rows in 'multiple' mode. */
     selectAll(checked: boolean): void {
         this._reset();
         this._checkedAll = checked;
@@ -388,9 +420,9 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         // TODO: since the table should be able the focusable cells, needs to implement arrow buttons navigation in next phases
 
         event.stopPropagation();
-        const click = new MouseEvent('click');
 
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            const click = new MouseEvent('click');
             event.target.dispatchEvent(click);
             event.preventDefault();
         }
@@ -434,21 +466,95 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         this._setFreezableInfo();
     }
 
-    /*doesColumnHasPopover(column: TableColumnComponent): boolean {
-        if (!column) {
-            return false;
-        }
-        return column.sortable || column.filterable || column.groupable || this._isFreezable;
-    }*/
+    /** Search */
+    search(searchInput: SearchInput): void {
+        this._tableService.search(searchInput);
+    }
 
     /** @hidden */
-    _getFixedTableStyles(): { [klass: string]: any; } {
+    openSortingDialog(): void {
+        const state = this.getTableState();
+        const columns = state.columns;
+
+        const dialogRef = this._dialogService.open(SortingComponent, {
+            ...dialogConfig,
+            data: {
+                columns: columns.filter((c) => c.sortable),
+                sortDirection: state && state.sortBy && state.sortBy[0] && state.sortBy[0].direction,
+                sortField: state && state.sortBy && state.sortBy[0] && state.sortBy[0].field
+            }
+        });
+
+        this._subscriptions.add(
+            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe(({ action, value }) => {
+                if (!action && !value) {
+                    return;
+                }
+
+                this._tableService.sort(value.field, value.direction);
+            })
+        );
+    }
+
+    /** @hidden */
+    openFilteringDialog(): void {
+        const state = this._tableService.tableState$.getValue();
+
+        const dialogRef = this._dialogService.open(FilterByStepComponent, {
+            responsivePadding: false,
+            verticalPadding: false,
+            minWidth: '30%',
+            minHeight: '50%',
+            data: {
+                filters: this.viewSettingsFilters,
+                filterBy: state?.filterBy
+            }
+        } as DialogConfig);
+
+        this._subscriptions.add(
+            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe(({ action, value }) => {
+                if (!action && !value) {
+                    return;
+                }
+
+                this._tableService.filter(value);
+            })
+        );
+    }
+
+    /** @hidden */
+    openGroupingDialog(): void {
+        const state = this._tableService.tableState$.getValue();
+        const columns = state.columns;
+
+        const dialogRef = this._dialogService.open(GroupingComponent, {
+            ...dialogConfig,
+            data: {
+                columns: columns.filter((c) => c.groupable),
+                groupOrder: state && state.groupBy && state.groupBy[0] && state.groupBy[0].direction,
+                groupField: state && state.groupBy && state.groupBy[0] && state.groupBy[0].field
+            }
+        });
+
+        this._subscriptions.add(
+            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe(({ action, value }) => {
+                if (!action && !value) {
+                    return;
+                }
+
+                this._tableService.group(value.field, value.direction);
+            })
+        );
+    }
+
+    /** @hidden */
+    _getFixedTableStyles(): { [klass: string]: any } {
         const key = this._rtl ? 'padding-right.px' : 'padding-left.px';
         return { [key]: this._tablePadding };
     }
 
     /** @hidden */
-    _getFreezableCellStyles(colIdx: number): { [klass: string]: any; } {
+    _getFreezableCellStyles(colIdx: number): { [klass: string]: any } {
         const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
         return { [key]: this._selectionColumnsSize + colIdx * this._columnsSize };
     }
@@ -470,10 +576,23 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
         const bNumber = parseFloat(b.key);
 
         if (!isNaN(aNumber) && !isNaN(bNumber)) {
-            return (aNumber > bNumber ? 1 : -1) * ascModifier
+            return (aNumber > bNumber ? 1 : -1) * ascModifier;
         }
 
         return (a.key > b.key ? 1 : -1) * ascModifier;
+    }
+
+    /** @hidden */
+    _isColumnPopoverOpened(key: string): boolean {
+        return this._popoverOpen && this._popoverColumnKey === key;
+    }
+
+    /**
+     * @hidden
+     * set view settings filters list
+     */
+    _setViewSettingsFilters(filters: QueryList<TableViewSettingsFilterComponent>): void {
+        this.viewSettingsFilters = filters;
     }
 
     /** @hidden */
@@ -486,6 +605,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden */
     private _getFreezableColumn(): string[] {
         const columns = [];
+
         if (!this.columns || !this.columns.length) {
             return columns;
         }
@@ -509,72 +629,74 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             ...prevState,
             freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
             columns: this.columns
-        })
+        });
     }
 
     /** @hidden */
-    private _onStateChanges(): void {
+    private _listenToTableStateChanges(): void {
         this._subscriptions.add(
             this._tableService.tableState$
                 .pipe(
-                    filter(state => !!state),
+                    filter((state) => !!state),
                     skip(2), // skipping setting default and initial state with columns
                     distinctUntilChanged()
-                ).subscribe(state => {
-                this.dataSource.fetch(state);
+                )
+                .subscribe((state) => {
+                    this.dataSource.fetch(state);
 
-                // SORTING
-                if (state.sortBy?.length) {
-                    this._sortDirection = state.sortBy[0].direction || null;
-                    this._sortField = state.sortBy[0].field || null;
-                }
+                    // SORTING
+                    if (state.sortBy?.length) {
+                        this._sortDirection = state.sortBy[0].direction || null;
+                        this._sortField = state.sortBy[0].field || null;
+                    }
 
-                // FILTERING
-                const filterBy = state.filterBy;
-                if (filterBy?.length) {
-                    this._filterValue = filterBy[0] || null;
-                }
+                    // FILTERING
+                    const filterBy = state.filterBy;
+                    if (filterBy?.length) {
+                        this._filterValue = filterBy[0] || null;
+                    }
 
-                // GROUPING
-                if (state.groupBy?.length) {
-                    this._groupOrder = state.groupBy[0].direction || null;
-                    this._groupField = state.groupBy[0].field || null;
-                }
-            })
+                    // GROUPING
+                    if (state.groupBy?.length) {
+                        this._groupOrder = state.groupBy[0].direction || null;
+                        this._groupField = state.groupBy[0].field || null;
+                    }
+                })
         );
 
         this._subscriptions.add(
-            this._tableService.sortChange.subscribe(event => {
+            this._tableService.sortChange.subscribe((event) => {
                 this.sortChange.emit(new TableSortChangeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.filterChange.subscribe(event => {
+            this._tableService.filterChange.subscribe((event) => {
                 this.filterChange.emit(new TableFilterChangeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.freezeChange.subscribe(event => {
+            this._tableService.freezeChange.subscribe((event) => {
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.groupChange.subscribe(event => {
+            this._tableService.groupChange.subscribe((event) => {
                 this._groupRows();
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
             })
         );
     }
 
-    private _onSearchSubmit(): void {
-        if (this.tableToolbarComponent) {
-            this._subscriptions.add(
-                this.tableToolbarComponent.searchSubmit.subscribe(input => this._tableService.search(input))
-            );
-        }
+    private _listenToRtlChanges(): void {
+        this._subscriptions.add(
+            this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe((rtl) => {
+                this._rtl = rtl;
+                this._cd.markForCheck();
+            })
+        );
     }
 
     private _groupRows(): void {
@@ -603,14 +725,14 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
             return;
         }
 
-        this._isSortable = this.columns.some(c => c.sortable);
-        this._isFilterable = this.columns.some(c => c.filterable);
-        this._isGroupable = this.columns.some(c => c.groupable);
+        this._isSortable = this.columns.some((c) => c.sortable);
+        this._isFilterable = this.columns.some((c) => c.filterable);
+        this._isGroupable = this.columns.some((c) => c.groupable);
     }
 
     /** @hidden */
     private _checkAll(): void {
-        this._rows.forEach(r => {
+        this._rows.forEach((r) => {
             if (!r.checked) {
                 this._checked.push(r.value);
             }
@@ -621,7 +743,7 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
 
     /** @hidden */
     private _uncheckAll(): void {
-        this._rows.forEach(r => {
+        this._rows.forEach((r) => {
             if (r.checked) {
                 this._unchecked.push(r.value);
             }
@@ -639,69 +761,80 @@ export class TableComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
     /** @hidden */
     private _resetChecks(): void {
         this._checkedAll = false;
-        this._rows.forEach(r => r.checked = false);
+        this._rows.forEach((r) => (r.checked = false));
         this._reset();
     }
 
     /** @hidden */
     private _emitSelectionChange(index?: number): void {
-        const selected = this._rows.filter(r => r.checked).map(r => r.value);
+        const selected = this._rows.filter((r) => r.checked).map((r) => r.value);
         this.rowSelectionChange.emit({
             source: this,
             selection: selected,
             added: this._checked,
             removed: this._unchecked,
-            index: index ? [index] : this._rows.reduce((indexes, row, idx) => {
-                if (this._checked.includes(row.value) || this._unchecked.includes(row.value)) {
-                    indexes.push(idx);
-                }
+            index: index
+                ? [index]
+                : this._rows.reduce((indexes, row, idx) => {
+                      if (this._checked.includes(row.value) || this._unchecked.includes(row.value)) {
+                          indexes.push(idx);
+                      }
 
-                return indexes;
-            }, [])
-        })
+                      return indexes;
+                  }, [])
+        });
     }
 
     /** @hidden */
-    private _initializeDS(ds: FdpTableDataSource<any>): void {
-        this._rows = [];
+    private _initializeDS(ds: FdpTableDataSource<T>): void {
         if (isDataSource(this.dataSource)) {
-            this.dataSource.close();
-            if (this._dsSubscription) {
-                this._dsSubscription.unsubscribe();
-                this._dsSubscription = null;
-            }
+            this._closeDataSource(this.dataSource);
         }
 
         this._dataSource = this._openDataStream(ds);
     }
 
     /** @hidden */
-    private _openDataStream(ds: FdpTableDataSource<any>): TableDataSource<any> {
+    private _closeDataSource(dataSource: FdpTableDataSource<T>): void {
+        dataSource.close();
+
+        this._subscriptions.remove(this._dsSubscription);
+
+        if (this._dsSubscription) {
+            this._dsSubscription = null;
+        }
+    }
+
+    /** @hidden */
+    private _openDataStream(ds: FdpTableDataSource<T>): TableDataSource<T> {
         const initDataSource = this._toDataStream(ds);
+
         if (initDataSource === undefined) {
             throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
         }
         /**
-         * This is single point of data entry to the component. We dont want to set data on different
+         * This is single point of data entry to the component. We don't want to set data on different
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource.open().subscribe(rows => {
+        this._dsSubscription = initDataSource.open().subscribe((rows) => {
             this._rows = rows.map((row, index) => ({ checked: false, index: index, value: row })) || [];
             this._rowsStateChanges.next(this._rows);
             this._cd.markForCheck();
         });
 
         this._subscriptions.add(this._dsSubscription);
+
         // initial data fetch
         initDataSource.fetch(this.getTableState());
+
         return initDataSource;
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpTableDataSource<any>): TableDataSource<any> {
+    private _toDataStream(ds: FdpTableDataSource<T>): TableDataSource<T> {
         if (isDataSource(ds)) {
-            return ds as TableDataSource<any>;
+            return ds as TableDataSource<T>;
         }
 
         return undefined;

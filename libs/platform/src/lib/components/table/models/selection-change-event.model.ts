@@ -8,5 +8,5 @@ class SelectionChangeEvent<T> {
 }
 
 export class TableRowSelectionChangeEvent<T> extends SelectionChangeEvent<T> {
-    source: TableComponent;
+    source: TableComponent<T>;
 }

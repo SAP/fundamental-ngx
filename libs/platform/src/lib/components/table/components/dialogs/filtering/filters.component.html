@@ -28,86 +28,35 @@
         </ng-template>
     </fd-dialog-header>
 
-    <fd-dialog-body style="padding-left: 0; padding-right: 0;">
+    <fd-dialog-body>
+
         <ng-container [ngSwitch]="filter.type">
-            <ng-container *ngSwitchCase="filtersTypes.SINGLE">
-                <ng-container [ngTemplateOutlet]="singleSelectFilters" [ngTemplateOutletContext]="{values: filter.values}"></ng-container>
+            <ng-container *ngSwitchCase="FILTER_TYPE.SINGLE">
+                <ng-container
+                    [ngTemplateOutlet]="singleSelectFilters"
+                    [ngTemplateOutletContext]="{values: filter.values}"
+                ></ng-container>
             </ng-container>
-            <ng-container *ngSwitchCase="filtersTypes.MULTI">
-                <ng-container [ngTemplateOutlet]="multiSelectFilters" [ngTemplateOutletContext]="{values: filter.values}"></ng-container>
+
+            <ng-container *ngSwitchCase="FILTER_TYPE.MULTI">
+                <ng-container
+                    [ngTemplateOutlet]="multiSelectFilters"
+                    [ngTemplateOutletContext]="{values: filter.values}"
+                ></ng-container>
             </ng-container>
-            <ng-container *ngSwitchCase="filtersTypes.CATEGORY">
+
+            <ng-container *ngSwitchCase="FILTER_TYPE.CUSTOM">
+                <ng-container
+                    [ngTemplateOutlet]="customFilters"
+                    [ngTemplateOutletContext]="{filter: filter}"
+                ></ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="FILTER_TYPE.CATEGORY">
                 <ng-container [ngTemplateOutlet]="categoryFilters"></ng-container>
-            </ng-container>
-            <ng-container *ngSwitchCase="filtersTypes.CUSTOM">
-                <ng-container [ngTemplateOutlet]="customFilters" [ngTemplateOutletContext]="{filter: filter}"></ng-container>
             </ng-container>
         </ng-container>
 
-
-
-        <!--<ul fd-list [compact]="true">
-            <li fd-list-item *ngFor="let filter of filters">
-                <ng-container *ngIf="filter.column === selectedColumn.key">
-                    <ng-container [ngTemplateOutlet]="filter.contentTemplateRef"></ng-container>
-                </ng-container>
-            </li>
-        </ul>-->
-
-<!--        <ng-container *ngIf="viewSettings">-->
-<!--            <ng-container [ngTemplateOutlet]="viewSettings.contentTemplateRef" [ngTemplateOutletContext]="{ column: selectedColumn }"></ng-container>-->
-<!--        </ng-container>-->
-
-        <!--<ul fd-list selection="true" compact="true">
-            <li fd-list-group-header>Sort Order</li>
-
-            <li fd-list-item [selected]="sortDirection === _sortDirections.ASC">
-                <fd-radio-button
-                    name="sort-order"
-                    value="asc"
-                    state="default"
-                    compact="true"
-                    [(ngModel)]="sortDirection"
-                ></fd-radio-button>
-                <span fd-list-title>Ascending</span>
-            </li>
-            <li fd-list-item [selected]="sortDirection === _sortDirections.DESC">
-                <fd-radio-button
-                    name="sort-order"
-                    value="desc"
-                    state="default"
-                    compact="true"
-                    [(ngModel)]="sortDirection"
-                ></fd-radio-button>
-                <span fd-list-title>Descending</span>
-            </li>
-        </ul>
-
-        <ul fd-list selection="true" compact="true">
-            <li fd-list-group-header>Sorted By</li>
-
-
-            <li fd-list-item [selected]="!sortField">
-                <fd-radio-button
-                    name="sort-by"
-                    [value]="null"
-                    state="default"
-                    compact="true"
-                    [(ngModel)]="sortField"
-                ></fd-radio-button>
-                <span fd-list-title>(Not Sorted)</span>
-            </li>
-            <li fd-list-item *ngFor="let column of columns" [selected]="column.key === sortField">
-                <fd-radio-button
-                    name="sort-by"
-                    [value]="column.key"
-                    state="default"
-                    compact="true"
-                    [(ngModel)]="sortField"
-                ></fd-radio-button>
-                <span fd-list-title [innerText]="column.label"></span>
-            </li>
-        </ul>-->
     </fd-dialog-body>
 
     <fd-dialog-footer>
@@ -118,7 +67,8 @@
                 fd-dialog-decisive-button
                 label="OK"
                 [compact]="true"
-                (click)="confirm()">
+                (click)="confirm()"
+            >
             </button>
         </fd-dialog-footer-button>
 
@@ -130,35 +80,80 @@
                 fd-initial-focus
                 label="Cancel"
                 [compact]="true"
-                (click)="cancel()">
+                (click)="cancel()"
+            >
             </button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>
 
 
-<ng-template #singleSelectFilters let-values="values">
-    <ul fd-list compact="true" selection="true">
-        <li fd-list-item *ngFor="let filter of values" [selected]="filter.selected">
-            <fd-radio-button [(ngModel)]="filter.selected" compact="true" [name]="filter.label" [value]="filter.value"></fd-radio-button>
-            <span fd-list-title [innerText]="filter.label"></span>
+<!-- Single select filter template -->
+<ng-template
+    #singleSelectFilters
+    let-values="values"
+>
+    <fd-form-group>
+        <ul
+            fd-list
+            compact="true"
+            selection="true"
+        >
+            <li
+                fd-list-item
+                *ngFor="let filter of values"
+                [selected]="filter.selected"
+            >
+                <fd-radio-button
+                    [(ngModel)]="filter.selected"
+                    compact="true"
+                    [name]="id"
+                    [value]="filter.value"
+                ></fd-radio-button>
+                <span
+                    fd-list-title
+                    [innerText]="filter.label"
+                ></span>
+            </li>
+        </ul>
+    </fd-form-group>
+</ng-template>
+
+<!-- Multiple select filter template -->
+<ng-template
+    #multiSelectFilters
+    let-values="values"
+>
+    <ul
+        fd-list
+        compact="true"
+        selection="true"
+    >
+        <li
+            fd-list-item
+            *ngFor="let filter of values"
+            [selected]="filter.selected"
+        >
+            <fd-checkbox
+                [(ngModel)]="filter.selected"
+                compact="true"
+            ></fd-checkbox>
+            <span
+                fd-list-title
+                [innerText]="filter.label"
+            ></span>
         </li>
     </ul>
 </ng-template>
 
-<ng-template #multiSelectFilters let-values="values">
-    <ul fd-list compact="true" selection="true">
-        <li fd-list-item *ngFor="let filter of values" [selected]="filter.selected">
-            <fd-checkbox [(ngModel)]="filter.selected" compact="true"></fd-checkbox>
-            <span fd-list-title [innerText]="filter.label"></span>
-        </li>
-    </ul>
-</ng-template>
-
-<ng-template #categoryFilters>
-</ng-template>
-
-<ng-template #customFilters let-filter="filter">
+<!-- Custom filter template -->
+<ng-template
+    #customFilters
+    let-filter="filter"
+>
     <ng-container [ngTemplateOutlet]="filter.contentTemplateRef"></ng-container>
 </ng-template>
 
+<!-- Category filter template -->
+<ng-template #categoryFilters>
+</ng-template>

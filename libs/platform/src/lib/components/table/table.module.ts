@@ -94,8 +94,8 @@ import { FiltersComponent } from './components/dialogs/filtering/filters.compone
         TableViewSettingsFilterComponent,
         TableSortByPipe,
         TableFilterPipe,
-        CellValueByPipe,
+        CellValueByPipe
     ],
-    providers: [ TableService, TableSortByPipe ]
+    providers: [TableService, TableSortByPipe]
 })
 export class PlatformTableModule {}

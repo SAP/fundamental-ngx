@@ -16,9 +16,7 @@ export class TableDataSource<T> implements DataSource<T> {
         this.dataProvider
             .fetch(tableState)
             .pipe(take(1))
-            .subscribe((result: T[]) => {
-                this.dataChanges.next(result);
-            });
+            .subscribe(this.dataChanges);
     }
 
     open(): Observable<T[]> {

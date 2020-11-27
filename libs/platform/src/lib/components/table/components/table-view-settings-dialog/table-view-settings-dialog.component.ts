@@ -13,7 +13,6 @@ import {
 
 import { TableComponent } from '../../table.component';
 import { TableViewSettingsFilterComponent } from '../table-view-settings-filter/table-view-settings-filter.component';
-import { TableService } from '../../table.service';
 
 /**
  * View settings dialog component.
@@ -62,10 +61,12 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     filters: QueryList<TableViewSettingsFilterComponent>;
 
     /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef,
-                private readonly _tableService: TableService) {}
+    constructor(private readonly _cd: ChangeDetectorRef) {}
 
     ngAfterViewInit(): void {
-        this._tableService.filters = this.filters;
+        if (!this.table) {
+            return;
+        }
+        this.table._setViewSettingsFilters(this.filters);
     }
 }

@@ -1,27 +1,31 @@
 import { Component, Inject } from '@angular/core';
 
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
-import { TableService } from '../../../table.service';
-import { TableViewSettingsFilterComponent } from '@fundamental-ngx/platform';
+
 import { FilterType } from '../../../enums';
+
+let id = 0;
 
 @Component({
     templateUrl: './filters.component.html',
-    styles: [`.no-backdrop { background-color: transparent; }`]
+    styles: [
+        `
+            .no-backdrop {
+                background-color: transparent;
+            }
+        `
+    ]
 })
 export class FiltersComponent {
+    readonly FILTER_TYPE = FilterType;
+
     initialFilterBy = this.dialogRef.data.filterBy || [];
     filterBy = this.initialFilterBy;
     filter = this.dialogRef.data.filter;
 
-    readonly filtersTypes = FilterType;
-    readonly filters = this.dialogRef.data.filters;
+    readonly id = `table-view-settings-filter-id-${id++}`;
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {}
-
-    _isFiltersChanged(): boolean {
-        return false;
-    }
 
     reset(): void {
         this.filterBy = this.initialFilterBy;
@@ -43,9 +47,11 @@ export class FiltersComponent {
     confirm(): void {
         this.dialogRef.close({
             action: 'Confirm',
-            value: {
-
-            }
+            value: {}
         });
+    }
+
+    _isFiltersChanged(): boolean {
+        return false;
     }
 }

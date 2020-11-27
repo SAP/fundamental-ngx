@@ -1,15 +1,24 @@
-<fdp-table #filterableTbl
-       [dataSource]="source"
-       (filterChange)="logFilterChange($event)"
-       contentDensity="compact"
-       emptyTableMessage="No data found">
+<fdp-table
+    #filterableTbl
+    [dataSource]="source"
+    (filterChange)="logFilterChange($event)"
+    contentDensity="compact"
+    emptyTableMessage="No data found"
+>
 
     <fdp-table-toolbar
         title="Order Line Items"
-        [hideItemCount]="false">
+        [hideItemCount]="false"
+    >
         <fdp-table-toolbar-actions>
-            <fdp-button label="Action One" contentDensity="compact"></fdp-button>
-            <fdp-button label="Action Two" contentDensity="compact"></fdp-button>
+            <fdp-button
+                label="Action One"
+                contentDensity="compact"
+            ></fdp-button>
+            <fdp-button
+                label="Action Two"
+                contentDensity="compact"
+            ></fdp-button>
         </fdp-table-toolbar-actions>
     </fdp-table-toolbar>
 
@@ -18,13 +27,15 @@
         key="name"
         label="Name"
         align="start"
-        [filterable]="true">
+        [filterable]="true"
+    >
     </fdp-column>
 
     <fdp-column
         name="description"
         key="description"
-        label="Description">
+        label="Description"
+    >
     </fdp-column>
 
     <fdp-column
@@ -32,7 +43,8 @@
         key="price.value"
         label="Price"
         align="end"
-        [filterable]="true">
+        [filterable]="true"
+    >
     </fdp-column>
 
     <fdp-column
@@ -40,35 +52,57 @@
         key="status"
         label="Status"
         align="center"
-        [filterable]="true">
+        [filterable]="true"
+    >
     </fdp-column>
 </fdp-table>
 
 <!-- View Settings Dialog-->
 <fdp-table-view-settings-dialog [table]="filterableTbl">
     <fdp-table-view-settings-filter
-        [column]="'name'"
-        [label]="'Name'"
-        [type]="'custom'">
-        <label>Enter name:</label><fdp-input type="text" name="name"></fdp-input>
+        column="name"
+        label="Name"
+        type="custom"
+        [dialogResponsivePadding]="true"
+    >
+        <label>Enter name:</label>
+        <fdp-input
+            type="text"
+            name="name"
+        ></fdp-input>
     </fdp-table-view-settings-filter>
+
     <fdp-table-view-settings-filter
-        [column]="'price'"
-        [label]="'Price'"
-        [type]="'custom'">
-        <label>Minimum Price:</label><fdp-input type="number" name="minimumPrice"></fdp-input>
-        <label>Maximum Price:</label><fdp-input type="number" name="maximumPrice"></fdp-input>
+        column="price"
+        label="Price"
+        type="custom"
+        [dialogResponsivePadding]="true"
+    >
+        <label>Minimum Price:</label>
+        <fdp-input
+            type="number"
+            name="minimumPrice"
+        ></fdp-input>
+        <label>Maximum Price:</label>
+        <fdp-input
+            type="number"
+            name="maximumPrice"
+        ></fdp-input>
     </fdp-table-view-settings-filter>
+
     <fdp-table-view-settings-filter
-        [column]="'status'"
-        [label]="'Status'"
-        [type]="'single-select'"
-        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]">
+        column="status"
+        label="Status"
+        type="single-select"
+        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]"
+    >
     </fdp-table-view-settings-filter>
+
     <fdp-table-view-settings-filter
-        [column]="'status'"
-        [label]="'Status 2'"
-        [type]="'multi-select'"
-        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]">
+        column="status"
+        label="Status 2"
+        type="multi-select"
+        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]"
+    >
     </fdp-table-view-settings-filter>
 </fdp-table-view-settings-dialog>

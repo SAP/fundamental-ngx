@@ -14,15 +14,20 @@
         </ng-container>
 
         <div style="position: relative">
-            <div class="fd-table--fixed" [ngStyle]="_getFixedTableStyles()">
+            <div
+                class="fd-table--fixed"
+                [ngStyle]="_getFixedTableStyles()"
+            >
                 <table fd-table>
                     <thead fd-table-header>
                         <tr fd-table-row>
-                            <th fd-table-cell
+                            <th
+                                fd-table-cell
                                 class="fd-table__cell--fixed"
                                 [class.fd-table__cell--checkbox]="selectionMode === _selectionModeOptions.MULTIPLE"
                                 [ngStyle]="_getFreezableSelectionCellStyles()"
-                                *ngIf="selectionMode === _selectionModeOptions.SINGLE || selectionMode === _selectionModeOptions.MULTIPLE">
+                                *ngIf="selectionMode === _selectionModeOptions.SINGLE || selectionMode === _selectionModeOptions.MULTIPLE"
+                            >
                                 <fd-checkbox
                                     [compact]="contentDensity !== _contentDensityOptions.COZY"
                                     *ngIf="selectionMode === _selectionModeOptions.MULTIPLE"
@@ -33,78 +38,138 @@
                             </th>
 
                             <ng-container *ngFor="let column of columns; let colIdx = index">
-                                <th fd-table-cell
+                                <th
+                                    fd-table-cell
                                     scope="col"
                                     [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.key)"
                                     [ngStyle]="_freezableColumns?.includes(column.key) ? _getFreezableCellStyles(colIdx) : null"
-                                    [style.textAlign]="column.align">
+                                    [style.textAlign]="column.align"
+                                >
 
-                                    <fd-popover [(isOpen)]="_popoverOpen && _popoverColumnKey === column.key"
-                                                style="width: 100%"
-                                                fd-table-popover
-                                                [noArrow]="true">
-                                        <fd-popover-control fd-table-inner (click)="_popoverColumnKey = column.key">
-                                            <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
+                                    <fd-popover
+                                        [isOpen]="_isColumnPopoverOpened(column.key)"
+                                        style="width: 100%"
+                                        fd-table-popover
+                                        [noArrow]="true"
+                                    >
+                                        <fd-popover-control
+                                            fd-table-inner
+                                            (click)="_popoverColumnKey = column.key"
+                                        >
+                                            <ng-container
+                                                *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate"
+                                            >
                                                 <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
                                                 </ng-container>
                                             </ng-container>
 
-                                            <fd-icon *ngIf="column.sortable && column.key === _sortField"
-                                                     fd-table-icon
-                                                     [glyph]="_sortDirection === _sortDirections.ASC ? 'sort-ascending' : _sortDirection === _sortDirections.DESC ? 'sort-descending' : ''"></fd-icon>
+                                            <fd-icon
+                                                *ngIf="column.sortable && column.key === _sortField"
+                                                fd-table-icon
+                                                [glyph]="_sortDirection === _sortDirections.ASC ? 'sort-ascending' : _sortDirection === _sortDirections.DESC ? 'sort-descending' : ''"
+                                            ></fd-icon>
                                         </fd-popover-control>
 
                                         <fd-popover-body>
-                                            <ul fd-list [noBorder]="true" [compact]="true">
-                                                <li *ngIf="column.sortable"
+                                            <ul
+                                                fd-list
+                                                [noBorder]="true"
+                                                [compact]="true"
+                                            >
+                                                <li
+                                                    *ngIf="column.sortable"
                                                     fd-list-item
                                                     (click)="sort(column.key, _sortDirections.ASC)"
-                                                    (keyup.enter)="sort(column.key, _sortDirections.ASC)">
-                                                    <span fd-list-icon glyph="sort-ascending"></span>
-                                                    <span fd-list-title i18n="@@platformTableHeaderMenuSortAsc">Sort Ascending</span>
+                                                    (keyup.enter)="sort(column.key, _sortDirections.ASC)"
+                                                >
+                                                    <span
+                                                        fd-list-icon
+                                                        glyph="sort-ascending"
+                                                    ></span>
+                                                    <span
+                                                        fd-list-title
+                                                        i18n="@@platformTableHeaderMenuSortAsc"
+                                                    >Sort Ascending</span>
                                                 </li>
 
-                                                <li *ngIf="column.sortable"
+                                                <li
+                                                    *ngIf="column.sortable"
                                                     fd-list-item
                                                     (click)="sort(column.key, _sortDirections.DESC)"
-                                                    (keyup.enter)="sort(column.key, _sortDirections.DESC)">
-                                                    <span fd-list-icon glyph="sort-descending"></span>
-                                                    <span fd-list-title i18n="@@platformTableHeaderMenuSortDesc">Sort Descending</span>
+                                                    (keyup.enter)="sort(column.key, _sortDirections.DESC)"
+                                                >
+                                                    <span
+                                                        fd-list-icon
+                                                        glyph="sort-descending"
+                                                    ></span>
+                                                    <span
+                                                        fd-list-title
+                                                        i18n="@@platformTableHeaderMenuSortDesc"
+                                                    >Sort Descending</span>
                                                 </li>
 
-                                                <li *ngIf="column.groupable"
+                                                <li
+                                                    *ngIf="column.groupable"
                                                     fd-list-item
                                                     (click)="group(column.key)"
-                                                    (keyup.enter)="group(column.key)">
+                                                    (keyup.enter)="group(column.key)"
+                                                >
                                                     <span fd-list-icon></span>
-                                                    <span fd-list-title i18n="@@platformTableHeaderMenuGroup">Group</span>
+                                                    <span
+                                                        fd-list-title
+                                                        i18n="@@platformTableHeaderMenuGroup"
+                                                    >Group</span>
                                                 </li>
 
-                                                <li fd-list-item
+                                                <li
+                                                    fd-list-item
                                                     *ngIf="!_freezableColumns?.includes(column.key)"
                                                     (click)="freezeTo(column.key)"
                                                     (keyup.enter)="freezeTo(column.key)"
                                                 >
                                                     <span></span>
-                                                    <span fd-list-title i18n="@@platformTableHeaderMenuFreeze">Freeze</span>
+                                                    <span
+                                                        fd-list-title
+                                                        i18n="@@platformTableHeaderMenuFreeze"
+                                                    >Freeze</span>
                                                 </li>
-                                                <li fd-list-item
+                                                <li
+                                                    fd-list-item
                                                     *ngIf="_freezableColumns?.includes(column.key)"
                                                     (click)="unfreeze(column.key)"
                                                     (keyup.enter)="unfreeze(column.key)"
                                                 >
                                                     <span></span>
-                                                    <span fd-list-title i18n="@@platformTableHeaderMenuUnfreeze">Unfreeze</span>
+                                                    <span
+                                                        fd-list-title
+                                                        i18n="@@platformTableHeaderMenuUnfreeze"
+                                                    >Unfreeze</span>
                                                 </li>
 
-                                                <li fd-list-item *ngIf="column.filterable">
-                                                    <i fd-list-icon glyph="filter"></i>
-                                                    <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-                                                        <label fd-form-label [for]="column.name + colIdx" i18n="@@platformTableHeaderMenuFilter">Filter</label>
-                                                        <input fd-form-control
-                                                               [compact]="true"
-                                                               [id]="column.name + colIdx"
-                                                               (keyup.enter)="filter(column.key, $event.target.value)">
+                                                <li
+                                                    fd-list-item
+                                                    *ngIf="column.filterable"
+                                                >
+                                                    <i
+                                                        fd-list-icon
+                                                        glyph="filter"
+                                                    ></i>
+                                                    <div
+                                                        fd-form-item
+                                                        [horizontal]="true"
+                                                        (click)="$event.stopPropagation()"
+                                                    >
+                                                        <label
+                                                            fd-form-label
+                                                            [for]="column.name + colIdx"
+                                                            i18n="@@platformTableHeaderMenuFilter"
+                                                        >Filter</label>
+                                                        <input
+                                                            fd-form-control
+                                                            [compact]="true"
+                                                            [id]="column.name + colIdx"
+                                                            (keyup.enter)="filter(column.key, $event.target.value)"
+                                                        >
                                                     </div>
                                                 </li>
                                             </ul>
@@ -131,47 +196,73 @@
     </ng-container>
 </div>
 
+<!-- Not Grouped Template -->
 <ng-template #notGroupedTemplate>
-    <tbody fd-table-body
-           [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
-           [class.fd-table__body--no-vertical-borders]="noBodyBorders">
-        <ng-container [ngTemplateOutlet]="rowsTemplate" [ngTemplateOutletContext]="{ rows: _rows }"></ng-container>
+    <tbody
+        fd-table-body
+        [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
+        [class.fd-table__body--no-vertical-borders]="noBodyBorders"
+    >
+        <ng-container
+            [ngTemplateOutlet]="rowsTemplate"
+            [ngTemplateOutletContext]="{ rows: _rows }"
+        ></ng-container>
     </tbody>
 </ng-template>
 
+<!-- Grouped Template -->
 <ng-template #groupedTemplate>
-    <tbody *ngFor="let group of _groupedRows | keyvalue: _keyDescOrder.bind(this); let groupIdx = index"
-           fd-table-body
-           [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
-           [class.fd-table__body--no-vertical-borders]="noBodyBorders">
+    <tbody
+        *ngFor="let group of _groupedRows | keyvalue: _keyDescOrder.bind(this); let groupIdx = index"
+        fd-table-body
+        [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
+        [class.fd-table__body--no-vertical-borders]="noBodyBorders"
+    >
 
-    <tr fd-table-row scope="row" class="fd-table__row--group">
-        <td fd-table-cell
-            class="fd-table__cell--fixed fd-table__cell--focusable fd-table__cell--group"
-            tabindex="0"
-            role="cell"
-            [colSpan]="columns.length + (selectionMode === _selectionModeOptions.NONE ? 0 : 1)"
-            (click)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
-            (keydown.enter)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
+        <tr
+            fd-table-row
+            scope="row"
+            class="fd-table__row--group"
         >
-            <fd-icon [glyph]="_groupsMeta[group.key].expanded ? 'navigation-down-arrow' : _rtl ? 'navigation-left-arrow' : 'navigation-right-arrow'"></fd-icon>
-            {{ group.key }} - {{ group.value.length }}
-        </td>
-    </tr>
-    <tr [style.height.px]="_getGroupRowHeight()"></tr>
+            <td
+                fd-table-cell
+                class="fd-table__cell--fixed fd-table__cell--focusable fd-table__cell--group"
+                tabindex="0"
+                role="cell"
+                [colSpan]="columns.length + (selectionMode === _selectionModeOptions.NONE ? 0 : 1)"
+                (click)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
+                (keydown.enter)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
+            >
+                <fd-icon
+                    [glyph]="_groupsMeta[group.key].expanded ? 'navigation-down-arrow' : _rtl ? 'navigation-left-arrow' : 'navigation-right-arrow'"
+                ></fd-icon>
+                {{ group.key }} - {{ group.value.length }}
+            </td>
+        </tr>
+        <tr [style.height.px]="_getGroupRowHeight()"></tr>
 
-    <ng-container *ngIf="_groupsMeta[group.key].expanded">
-        <ng-container [ngTemplateOutlet]="rowsTemplate" [ngTemplateOutletContext]="{ rows: group.value }"></ng-container>
-    </ng-container>
+        <ng-container *ngIf="_groupsMeta[group.key].expanded">
+            <ng-container
+                [ngTemplateOutlet]="rowsTemplate"
+                [ngTemplateOutletContext]="{ rows: group.value }"
+            ></ng-container>
+        </ng-container>
     </tbody>
 </ng-template>
 
-<ng-template #rowsTemplate let-rows="rows">
-    <tr fd-table-row
+<!-- Rows Template -->
+<ng-template
+    #rowsTemplate
+    let-rows="rows"
+>
+    <tr
+        fd-table-row
         scope="row"
-        *ngFor="let row of rows | sortBy: _sortDirection : _sortField | filter: _filterType : _filterValue; let rowIdx = index"
-        [attr.aria-selected]="row.checked">
-        <td fd-table-cell
+        *ngFor="let row of rows; let rowIdx = index"
+        [attr.aria-selected]="row.checked"
+    >
+        <td
+            fd-table-cell
             class="fd-table__cell--fixed"
             [class.fd-table__cell--checkbox]="selectionMode === _selectionModeOptions.MULTIPLE"
             [class.fd-table__cell--focusable]="selectionMode === _selectionModeOptions.SINGLE"
@@ -190,7 +281,8 @@
                 (keydown)="onKeydown($event)"
             ></fd-checkbox>
         </td>
-        <td fd-table-cell
+        <td
+            fd-table-cell
             [style.textAlign]="column.align"
             *ngFor="let column of columns; let colIdx = index"
             [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.key)"
@@ -207,5 +299,8 @@
 </ng-template>
 
 <ng-template #emptyTableTemplate>
-    <div i18n="@@platformTableEmptyMessage" [innerText]="emptyTableMessage"></div>
+    <div
+        i18n="@@platformTableEmptyMessage"
+        [innerText]="emptyTableMessage"
+    ></div>
 </ng-template>

@@ -1,32 +1,20 @@
-import { EventEmitter, QueryList } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { SearchInput } from '../search-field/search-field.component';
-import { TableViewSettingsFilterComponent } from './components/table-view-settings-filter/table-view-settings-filter.component';
-import {
-    CollectionFilter,
-    CollectionGroup,
-    CollectionSort,
-    TableState
-} from './interfaces';
+import { CollectionFilter, CollectionGroup, CollectionSort, TableState } from './interfaces';
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
 import { FilterChange, FreezeChange, GroupChange, SortChange } from './models';
-import { TableColumnComponent } from '@fundamental-ngx/platform';
 
+@Injectable()
 export class TableService {
-    prevTableState: TableState;
-    tableState$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
-
-    columns: QueryList<TableColumnComponent>;
-    filters: QueryList<TableViewSettingsFilterComponent>;
+    readonly tableState$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
 
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();
     readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
     readonly groupChange: EventEmitter<GroupChange> = new EventEmitter<GroupChange>();
     readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
-
-    constructor() {}
 
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
@@ -35,19 +23,18 @@ export class TableService {
 
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
-        this.prevTableState = this.getTableState();
         this.tableState$.next(state);
     }
 
     sort(field: string, direction: SortDirection): void {
         const prevState = this.getTableState();
-        const prevSortBy = prevState && prevState.sortBy || [];
+        const prevSortBy = (prevState && prevState.sortBy) || [];
 
         if (prevSortBy.length && prevSortBy[0].field === field && prevSortBy[0].direction === direction) {
             return;
         }
 
-        const newSortBy: CollectionSort[] = [{field: field, direction: direction}];
+        const newSortBy: CollectionSort[] = [{ field: field, direction: direction }];
         const state: TableState = { ...prevState, sortBy: newSortBy };
 
         this.setTableState(state);
@@ -56,7 +43,7 @@ export class TableService {
 
     filter(filter: any /* CollectionFilter */): void {
         const prevState = this.getTableState();
-        const prevFilterBy: any = prevState && prevState.filterBy || [];
+        const prevFilterBy: any = (prevState && prevState.filterBy) || [];
 
         if (!this._isFilterChanged(filter, prevFilterBy)) {
             return;
@@ -71,13 +58,13 @@ export class TableService {
 
     group(field: string, direction: SortDirection): void {
         const prevState = this.getTableState();
-        const prevGroupBy = prevState && prevState.groupBy || [];
+        const prevGroupBy = (prevState && prevState.groupBy) || [];
 
         if (prevGroupBy.length && prevGroupBy[0].field === field && prevGroupBy[0].direction === direction) {
             return;
         }
 
-        const newGroupBy: CollectionGroup[] = [{field: field, direction: direction}];
+        const newGroupBy: CollectionGroup[] = [{ field: field, direction: direction }];
         const state: TableState = { ...prevState, groupBy: newGroupBy };
 
         this.setTableState(state);
@@ -100,12 +87,10 @@ export class TableService {
         return !(
             prevFilterBy.length &&
             prevFilterBy[0].field === filter.field &&
-            (
-                (prevFilterBy[0].value !== undefined && prevFilterBy[0].value === filter.value) ||
+            ((prevFilterBy[0].value !== undefined && prevFilterBy[0].value === filter.value) ||
                 (prevFilterBy[0].value2 !== undefined && prevFilterBy[0].value2 === filter.value2) ||
                 (prevFilterBy[0].values !== undefined && prevFilterBy[0].values === filter.values) ||
-                (prevFilterBy[0].valueMap !== undefined && prevFilterBy[0].valueMap === filter.valueMap)
-            )
+                (prevFilterBy[0].valueMap !== undefined && prevFilterBy[0].valueMap === filter.valueMap))
         );
     }
 }

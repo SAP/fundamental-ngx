@@ -1,10 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    Input,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewChild } from '@angular/core';
 
 import { SelectionValue } from '../../interfaces';
 import { FilterType } from '../../enums';
@@ -48,6 +42,14 @@ export class TableViewSettingsFilterComponent {
     /** Selection values for 'single-select' or 'multi-select' filter interface. */
     @Input()
     values: SelectionValue[];
+
+    /** Responsive padding for dialog */
+    @Input()
+    dialogResponsivePadding = false;
+
+    /** Vertical padding for dialog */
+    @Input()
+    dialogVerticalPadding = true;
 
     /** @hidden */
     @ViewChild(TemplateRef)

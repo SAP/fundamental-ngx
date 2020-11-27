@@ -1,4 +1,7 @@
-<fd-docs-section-title id="default-table" componentName="Table">
+<!-- <fd-docs-section-title
+    id="default-table"
+    componentName="Table"
+>
     Default Table
 </fd-docs-section-title>
 <description>This example shows table default implementation </description>
@@ -9,7 +12,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="custom-columns-table" componentName="Table">
+<fd-docs-section-title
+    id="custom-columns-table"
+    componentName="Table"
+>
     Custom Column
 </fd-docs-section-title>
 <description>This example shows custom column definition implementation </description>
@@ -20,7 +26,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="single-row-selection" componentName="Table">
+<fd-docs-section-title
+    id="single-row-selection"
+    componentName="Table"
+>
     Single Row Selection
 </fd-docs-section-title>
 <description>This example shows single row selection </description>
@@ -31,7 +40,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="multiple-row-selection" componentName="Table">
+<fd-docs-section-title
+    id="multiple-row-selection"
+    componentName="Table"
+>
     Multiple Row Selection
 </fd-docs-section-title>
 <description>This example shows multiple row selection </description>
@@ -42,7 +54,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="sortable-table" componentName="Table">
+<fd-docs-section-title
+    id="sortable-table"
+    componentName="Table"
+>
     Column Sorting
 </fd-docs-section-title>
 <description>In this example, Name, Description and Price columns can be sorted.</description>
@@ -51,9 +66,12 @@
 </component-example>
 <code-example [exampleFiles]="sortableTable"></code-example>
 
-<separator></separator>
+<separator></separator> -->
 
-<fd-docs-section-title id="filterable-table" componentName="Table">
+<fd-docs-section-title
+    id="filterable-table"
+    componentName="Table"
+>
     Column Filtering
 </fd-docs-section-title>
 <description>Example showing the different facets of filtering within a table.</description>
@@ -64,7 +82,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="groupable-table" componentName="Table">
+<fd-docs-section-title
+    id="groupable-table"
+    componentName="Table"
+>
     Column Grouping
 </fd-docs-section-title>
 <component-example>
@@ -74,7 +95,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="freezable-table" componentName="Table">
+<fd-docs-section-title
+    id="freezable-table"
+    componentName="Table"
+>
     Column Freeze
 </fd-docs-section-title>
 <description>Example which shows table freeze with fixed columns.</description>
@@ -85,7 +109,11 @@
 
 <separator></separator>
 
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+<playground
+    [schema]="schema"
+    [schemaInitialValues]="data"
+    (onFormChanges)="onSchemaValues($event)"
+>
     <div style="max-width: 700px">
         <fdp-table
             [dataSource]="dataSource"
@@ -105,7 +133,8 @@
         >
             <fdp-table-toolbar
                 [title]="data['table-toolbar'].title"
-                [hideItemCount]="data['table-toolbar'].hideItemCount">
+                [hideItemCount]="data['table-toolbar'].hideItemCount"
+            >
                 <fdp-table-toolbar-actions>
                     <fdp-button label="Action One"></fdp-button>
                     <fdp-button label="Action Two"></fdp-button>
@@ -126,21 +155,24 @@
             <fdp-column
                 name="description"
                 key="description"
-                label="Description">
+                label="Description"
+            >
             </fdp-column>
 
             <fdp-column
                 name="price"
                 key="price.value"
                 label="Price"
-                align="end">
+                align="end"
+            >
             </fdp-column>
 
             <fdp-column
                 name="status"
                 key="status"
                 label="Status"
-                align="center">
+                align="center"
+            >
             </fdp-column>
         </fdp-table>
     </div>
