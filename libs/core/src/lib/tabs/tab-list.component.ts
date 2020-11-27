@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -11,6 +12,7 @@ import {
     Output,
     QueryList,
     SimpleChanges,
+    ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
@@ -19,6 +21,7 @@ import { merge, Subject, timer } from 'rxjs';
 import { TabsService } from './tabs.service';
 import { filter, takeUntil } from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
+import { TabItemDirective } from './tab-item/tab-item.directive';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -46,6 +49,14 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** @hidden */
     @ViewChildren(TabLinkDirective)
     tabLinks: QueryList<TabLinkDirective>;
+
+    /** @hidden */
+    @ViewChildren(TabItemDirective)
+    tabItem: QueryList<TabItemDirective>;
+
+    /** @hidden */
+    @ViewChild('tabsItemContainer')
+    tabsItemContainer: ElementRef;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -75,8 +86,14 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
 
+
     /** @hidden */
     ngAfterViewInit(): void {
+
+        this.tabItem.forEach(tab => console.log(tab.elementRef().nativeElement.offsetWidth));
+        console.log(`In total: ${this.tabsItemContainer.nativeElement.offsetWidth}`);
+        console.log(`Capacity: ${this._getContainerContainerCapacity()}`);
+
         this.selectTab(this.selectedIndex);
         this._listenOnTabSelect();
         this._listenOnContentQueryListChange();
@@ -191,5 +208,16 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     private _canBeSelected(index: number): boolean {
         return this._isIndexInRange(index) && !this._isDisabled(index);
+    }
+
+    private _collapseItems(): void {
+        this.panelTabs.forEach(tab => console.log(tab.elementRef.nativeElement.offsetWidth));
+    }
+
+    private _getContainerContainerCapacity(): number {
+        const pixelToNumber = (pixels: string) => Number(pixels.replace('px', ''));
+        const computedStyle = window.getComputedStyle(this.tabsItemContainer.nativeElement);
+
+        return pixelToNumber(computedStyle.width) - pixelToNumber(computedStyle.paddingLeft) - pixelToNumber(computedStyle.paddingRight);
     }
 }
