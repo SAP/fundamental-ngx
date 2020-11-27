@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.0...v0.25.0-rc.1) (2020-11-27)
+
+
+### Features
+
+* (Core) introduce Rating Indicator component  ([#3699](https://github.com/SAP/fundamental-ngx/issues/3699)) ([b989dba](https://github.com/SAP/fundamental-ngx/commit/b989dba47d72066957a7c766ced48eaa4cc16231))
+
 ## [0.25.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.24.3-rc.6...v0.25.0-rc.0) (2020-11-26)
 
 
