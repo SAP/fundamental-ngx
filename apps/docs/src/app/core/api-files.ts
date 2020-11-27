@@ -284,5 +284,6 @@ export const API_FILES = {
         'ThemesService'
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
+    ratingIndicator: ['RatingIndicatorComponent'],
     wizard: ['WizardComponent']
 };

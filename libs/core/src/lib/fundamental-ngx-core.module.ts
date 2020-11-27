@@ -36,6 +36,7 @@ import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
 import { PopoverModule } from './popover/popover.module';
+import { RatingIndicatorModule } from './rating-indicator/rating-indicator.module';
 import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 import { ShellbarModule } from './shellbar/shellbar.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
@@ -124,6 +125,7 @@ import { ThemesService } from './utils/services/themes.service';
         PanelModule,
         ProductSwitchModule,
         PopoverModule,
+        RatingIndicatorModule,
         RadioModule,
         ScrollSpyModule,
         SegmentedButtonModule,
