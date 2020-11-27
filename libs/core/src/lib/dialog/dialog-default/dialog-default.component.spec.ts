@@ -1,23 +1,23 @@
-import { DefaultDialogComponent } from './default-dialog.component';
+import { DialogDefaultComponent } from './dialog-default.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonModule } from '../../button/button.module';
-import { DialogCloseButtonDirective, DialogDecisiveButtonDirective, DialogTitleDirective } from '../dialog-utils/dialog-directives';
-import { DefaultDialogObject } from './default-dialog-object';
+import { DialogDecisiveButtonDirective } from '../directives/dialog-decisive-button.directive';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
+import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 
 describe('DefaultDialogComponent', () => {
-    let component: DefaultDialogComponent;
-    let fixture: ComponentFixture<DefaultDialogComponent>;
-    let object: DefaultDialogObject;
+    let component: DialogDefaultComponent;
+    let fixture: ComponentFixture<DialogDefaultComponent>;
+    let object: DialogDefaultContent;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule],
             declarations: [
-                DefaultDialogComponent,
-                DialogTitleDirective,
-                DialogCloseButtonDirective,
+                DialogDefaultComponent,
+                DialogCloseButtonComponent,
                 DialogDecisiveButtonDirective,
                 DialogHeaderComponent
             ],
@@ -36,42 +36,42 @@ describe('DefaultDialogComponent', () => {
             closeButtonCallback: () => {
             }
         };
-        fixture = TestBed.createComponent(DefaultDialogComponent);
+        fixture = TestBed.createComponent(DialogDefaultComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should create', () => {
-        component.defaultDialogConfig = object;
+        component._defaultDialogConfig = object;
         expect(component).toBeTruthy();
     });
 
     it('should have footer', () => {
-        component.defaultDialogConfig = object;
+        component._defaultDialogConfig = object;
         fixture.detectChanges();
-        expect(component.showFooter()).toBeTruthy();
+        expect(component._showFooter()).toBeTruthy();
     });
 
     it('should not have footer', () => {
-        component.defaultDialogConfig = { ...object, cancelButton: null, approveButton: null };
+        component._defaultDialogConfig = { ...object, cancelButton: null, approveButton: null };
         fixture.detectChanges();
-        expect(component.showFooter()).toBeFalsy();
+        expect(component._showFooter()).toBeFalsy();
     });
 
     it('should handle callback', () => {
         let cancelClicked = false;
         let approveClicked = false;
         let closeClicked = false;
-        component.defaultDialogConfig = {
-            ...component.defaultDialogConfig,
+        component._defaultDialogConfig = {
+            ...component._defaultDialogConfig,
             closeButtonCallback: () => closeClicked = true,
             cancelButtonCallback: () => cancelClicked = true,
             approveButtonCallback: () => approveClicked = true
         };
 
-        component.approveButtonClicked();
-        component.cancelButtonClicked();
-        component.closeButtonClicked();
+        component._approveButtonClicked();
+        component._cancelButtonClicked();
+        component._closeButtonClicked();
 
         expect(cancelClicked).toBeTruthy();
         expect(closeClicked).toBeTruthy();

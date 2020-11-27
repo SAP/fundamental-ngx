@@ -1,16 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { Component } from '@angular/core';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
-import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
-import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { Component } from '@angular/core';
+
+import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
+import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
+import { whenStable } from '../../utils/tests';
+
+const TEXT_CONTENT = 'Hello there';
 
 @Component({
     selector: 'fd-content-test-component',
-    template: 'Hello there'
+    template: TEXT_CONTENT
 })
-class ContentTestComponent {}
+class ContentTestComponent { }
 
 describe('DialogContainerComponent', () => {
     let component: DialogContainerComponent;
@@ -35,11 +39,6 @@ describe('DialogContainerComponent', () => {
         component.childContent = ContentTestComponent;
     });
 
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
-
     it('should create', () => {
         fixture.detectChanges();
 
@@ -47,22 +46,19 @@ describe('DialogContainerComponent', () => {
     });
 
     it('should create embedded content', async () => {
-        await wait(fixture);
+        await whenStable(fixture);
 
         const childComponentEl = fixture.nativeElement.querySelector('fd-content-test-component');
         expect(childComponentEl).toBeTruthy();
-        expect(childComponentEl.textContent).toContain('Hello there');
+        expect(childComponentEl.textContent).toContain(TEXT_CONTENT);
     });
 
     it('should create component from object', async () => {
-        fixture.componentInstance.childContent = { title: 'Title', approveButton: 'Approve' };
+        component.childContent = { title: TEXT_CONTENT } as DialogDefaultContent;
+        const embedContentSpy = spyOn(<any>component, '_createFromDefaultDialog');
 
-        const componentInstance = <any>fixture.componentInstance;
+        await whenStable(fixture);
 
-        spyOn(componentInstance, '_createFromDefaultConfiguration');
-
-        await wait(fixture);
-
-        expect(componentInstance._createFromDefaultConfiguration).toHaveBeenCalled();
+        expect(embedContentSpy).toHaveBeenCalled();
     });
 });

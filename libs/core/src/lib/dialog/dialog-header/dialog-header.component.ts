@@ -1,13 +1,13 @@
-import { AfterContentInit, Component, ContentChildren, Inject, Optional, QueryList, TemplateRef } from '@angular/core';
-import { TemplateDirective } from '../../utils/directives/template/template.directive';
-import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { AfterContentInit, ChangeDetectorRef, Component, Inject, Optional } from '@angular/core';
+import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { DialogHeaderBase } from '../base/dialog-header-base.class';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog header.
  *
  * ```html
  * <fd-dialog-header>
- *     <h1 fd-dialog-title>Title</h1>
+ *     <h1 fd-title>Title</h1>
  *     <button fd-dialog-close-button></button>
  * </fd-dialog-header>
  * ```
@@ -16,36 +16,19 @@ import { DIALOG_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class
     selector: 'fd-dialog-header',
     templateUrl: './dialog-header.component.html'
 })
-export class DialogHeaderComponent implements AfterContentInit {
-    /** @hidden */
-    headerTemplate: TemplateRef<any>;
+export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
 
     /** @hidden */
-    subHeaderTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    @ContentChildren(TemplateDirective) customTemplates: QueryList<TemplateDirective>;
-
-    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {
+    constructor(
+        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        changeDetectorRef: ChangeDetectorRef
+    ) {
+        super(changeDetectorRef);
         this.dialogConfig = this.dialogConfig || {};
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._assignCustomTemplates();
-    }
-
-    /** @hidden Assign custom templates */
-    private _assignCustomTemplates(): void {
-        this.customTemplates.forEach((template) => {
-            switch (template.getName()) {
-                case 'header':
-                    this.headerTemplate = template.templateRef;
-                    break;
-                case 'subheader':
-                    this.subHeaderTemplate = template.templateRef;
-                    break;
-            }
-        });
+        super.ngAfterContentInit();
     }
 }

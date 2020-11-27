@@ -1,0 +1,39 @@
+<fd-message-box>
+    <fd-message-box-header>
+        <h1 fd-title>{{ _messageBoxContent.title }}</h1>
+        <fd-message-box-close-icon
+            *ngIf="_messageBoxContent.closeButtonCallback"
+            (click)="_onCloseButton()">
+        </fd-message-box-close-icon>
+    </fd-message-box-header>
+    <fd-message-box-body>
+        <ng-container *ngTemplateOutlet="_contentTemplate"></ng-container>
+    </fd-message-box-body>
+    <fd-message-box-footer *ngIf="_footerVisible">
+        <fd-message-box-footer-button *ngIf="_messageBoxContent.approveButton">
+            <button
+                fd-button
+                fd-initial-focus
+                fdType="emphasized"
+                fd-message-box-decisive-button
+                [label]="_messageBoxContent.approveButton"
+                [compact]="!_messageBoxConfig.mobile"
+                (click)="_onApproveButton()">
+            </button>
+        </fd-message-box-footer-button>
+        <fd-message-box-footer-button *ngIf="_messageBoxContent.cancelButton">
+            <button
+                fd-button
+                fdType="transparent"
+                fd-message-box-decisive-button
+                [label]="_messageBoxContent.cancelButton"
+                [compact]="!_messageBoxConfig.mobile"
+                (click)="_onCancelButton()">
+            </button>
+        </fd-message-box-footer-button>
+    </fd-message-box-footer>
+</fd-message-box>
+
+<ng-template #textContent>
+    {{ _messageBoxContent.content }}
+</ng-template>

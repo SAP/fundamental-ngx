@@ -1,15 +1,9 @@
 /* tslint:disable:no-inferrable-types */
-/**
- * Configuration for opening a dialog with the DialogService.
- */
-import { DialogPosition } from './dialog-position.class';
+
 import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
-import { InjectionToken } from '@angular/core';
+import { DialogPosition } from '../utils/dialog-position.class';
 
-export const DIALOG_CONFIG = new InjectionToken<string[]>('DialogConfig');
-export const DIALOG_DEFAULT_CONFIG = new InjectionToken<string[]>('DialogConfig');
-
-export class DialogConfig implements DynamicComponentConfig {
+export class DialogConfigBase<T> implements DynamicComponentConfig {
     /** Id for the dialog component. If omitted, a unique one is generated. */
     id?: string;
 
@@ -68,22 +62,13 @@ export class DialogConfig implements DynamicComponentConfig {
     container?: HTMLElement | 'body' = 'body';
 
     /** Data to pass along to the content through the DialogRef. */
-    data?: any;
-
-    /** Whether the dialog should be displayed in full screen mode. */
-    fullScreen?: boolean;
+    data?: T;
 
     /** Whether the dialog should be displayed in mobile mode. */
     mobile?: boolean;
 
     /** Whether the dialog in mobile mode should have outer space. */
     mobileOuterSpacing?: boolean;
-
-    /** Whether the dialog should be draggable. */
-    draggable?: boolean;
-
-    /** Whether the dialog should be resizable. */
-    resizable?: boolean;
 
     /** Whether the dialog should have vertical padding. */
     verticalPadding?: boolean = true;

@@ -145,6 +145,21 @@ export const API_FILES = {
         'DialogRef'
     ],
     multiInput: ['MultiInputComponent'],
+    messageBox: [
+        'MessageBoxRef',
+        'MessageBoxConfig',
+        'MessageBoxContent',
+        'MessageBoxService',
+        'MessageBoxComponent',
+        'MessageBoxBodyComponent',
+        'MessageBoxDecisiveButton',
+        'MessageBoxHeaderComponent',
+        'MessageBoxFooterComponent',
+        'MessageBoxDefaultComponent',
+        'MessageBoxCloseIconComponent',
+        'MessageBoxContainerComponent',
+        'MessageBoxFooterButtonComponent',
+    ],
     notification: [
         'NotificationComponent',
         'NotificationHeaderComponent',

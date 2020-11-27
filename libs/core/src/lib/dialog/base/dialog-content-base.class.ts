@@ -1,15 +1,10 @@
-import { TemplateRef } from '@angular/core';
-
-export interface DefaultDialogObject {
+export class DialogContentBase {
 
     /** Dialog Title */
     title?: string;
 
     /** Dialog Body */
-    content?: TemplateRef<any>;
-
-    /** Subheader Body */
-    subHeader?: TemplateRef<any>;
+    content?: unknown;
 
     /** Approve Button Label */
     approveButton?: string;
@@ -23,6 +18,6 @@ export interface DefaultDialogObject {
     /** Cancel Button Click Callback */
     cancelButtonCallback?: Function;
 
-    /** Close Button Callback. If left unprovided, the close button won't show */
+    /** Close Button Callback */
     closeButtonCallback?: Function;
 }

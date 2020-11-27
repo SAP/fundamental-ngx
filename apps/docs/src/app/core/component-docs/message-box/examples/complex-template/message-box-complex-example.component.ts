@@ -1,0 +1,49 @@
+import { Component } from '@angular/core';
+import { MessageBoxRef } from '@fundamental-ngx/core';
+
+@Component({
+    template: `
+        <fd-message-box>
+            <fd-message-box-header>
+                <ng-template fdTemplate="header">
+                    <div fd-bar-left>
+                        <fd-bar-element>
+                            <h1 fd-title>Fruit facts</h1>
+                        </fd-bar-element>
+                    </div>
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <small>Fact 1 of 12</small>
+                        </fd-bar-element>
+                    </div>
+                </ng-template>
+            </fd-message-box-header>
+
+            <fd-message-box-body>
+                The jackfruit has been determined to be the largest tree fruit in the world. The jackfruit can weigh as
+                much as 100 pounds. There have been jackfruit that has grown as tall as 4 feet in height!
+            </fd-message-box-body>
+
+            <fd-message-box-footer>
+                <ng-template fdTemplate="footer">
+                    <div fd-bar-middle>
+                        <fd-bar-element>
+                            <button
+                                fd-button
+                                fd-initial-focus
+                                fd-message-box-decisive-button
+                                fdType="emphasized"
+                                label="Ok"
+                                [compact]="true"
+                                (click)="messageBoxRef.close('Ok')">
+                            </button>
+                        </fd-bar-element>
+                    </div>
+                </ng-template>
+            </fd-message-box-footer>
+        </fd-message-box>
+    `
+})
+export class MessageBoxComplexExampleComponent {
+    constructor(public messageBoxRef: MessageBoxRef) {}
+}
