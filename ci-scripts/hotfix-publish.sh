@@ -34,7 +34,7 @@ else
    exit 1
 fi
 
-git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" release_tag > /dev/null;
+git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $release_tag > /dev/null;
 npm run build-deploy-library
 
 cd dist/libs
