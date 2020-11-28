@@ -7,10 +7,11 @@ const { constants } = require('karma');
 module.exports = () => {
   return {
     basePath: '',
-    frameworks: ['parallel', 'jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['parallel', 'jasmine', '@angular-devkit/build-angular', 'viewport'],
     plugins: [
       require('karma-parallel'),
       require('karma-jasmine'),
+      require('karma-viewport'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
