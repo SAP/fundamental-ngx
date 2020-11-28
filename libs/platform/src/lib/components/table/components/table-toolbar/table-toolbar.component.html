@@ -20,6 +20,7 @@
             *ngIf="!hideSearchInput"
             i18n-placeholder="@@platformTableToolbarSearchPlaceholder"
             placeholder="Search"
+            [contentDensity]="size"
             [suggestions]="searchSuggestions"
             (searchSubmit)="submitSearch($event)"
         ></fdp-search-field>

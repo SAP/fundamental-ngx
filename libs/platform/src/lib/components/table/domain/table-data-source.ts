@@ -5,6 +5,7 @@ import { DataSource } from '../../../domain';
 import { TableDataProvider } from './table-data-provider';
 import { TableState } from '../interfaces';
 
+
 export class TableDataSource<T> implements DataSource<T> {
     readonly MAX_LIMIT = Number.MAX_SAFE_INTEGER;
 
