@@ -52,7 +52,7 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-/*        {
+        {
             browserName: 'internet explorer',
             browserVersion: 'latest',
             platformName: 'Windows 10',
@@ -63,7 +63,7 @@ exports.config = {
                 requireWindowFocus: true,
                 //tags: [ "process.env.TRAVIS_BUILD_ID"],
             }
-        },*/
+        },
         {
             browserName: 'MicrosoftEdge',
             browserVersion: 'latest',
@@ -97,18 +97,18 @@ exports.config = {
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-        /*         {
-                   browserName: 'chrome',
-                    platformName: 'macOS 10.15',
-                    browserVersion: 'latest',
-                    acceptInsecureCerts: true,
-                    "sauce:options": {
-                        screenResolution: '1920x1440',
-                        name: 'e2e-MAC-chrome',
-                        //tags: [ process.env.TRAVIS_BUILD_ID],
-                    }
-                },*/
-/*        {
+        {
+            browserName: 'chrome',
+            platformName: 'macOS 10.15',
+            browserVersion: 'latest',
+            acceptInsecureCerts: true,
+            'sauce:options': {
+                screenResolution: '1920x1440',
+                name: 'e2e-MAC-chrome'
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
+        {
             browserName: 'firefox',
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
@@ -118,8 +118,8 @@ exports.config = {
                 name: 'e2e-MAC-firefox',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },*/
-/*        {
+        },
+        {
             browserName: 'MicrosoftEdge',
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
@@ -129,17 +129,17 @@ exports.config = {
                 name: 'e2e-MAC-Edge',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },*/
-/*        {
+        },
+        {
             browserName: 'safari',
-            platformName: 'macOS 10.14',
+            platformName: 'macOS 10.15',
             browserVersion: '13.1',
             // acceptInsecureCerts: true,
             "sauce:options": {
                 name: 'e2e-MAC-safari',
                 // tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },*/
+        },
     ],
     //
     // ===================
@@ -192,9 +192,6 @@ exports.config = {
     services: [
         ['sauce', {
             sauceConnect: true,
-            sauceConnectOpts: {
-                noSslBumpDomains: 'all',
-            }
         }]
     ],
     
@@ -284,6 +281,12 @@ exports.config = {
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });
+
+        browser.addCommand('focus', function () {
+            browser.execute(function (domElement) {
+                domElement.focus();
+            }, this);
+        }, true);
     },
     /**
      * Runs before a WebdriverIO command gets executed.

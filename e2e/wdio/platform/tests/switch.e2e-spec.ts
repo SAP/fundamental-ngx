@@ -77,13 +77,13 @@ describe('Verify Switch component', function() {
     describe('has disabled and disabled-form switch and ', function() {
         it('should not be able to interact with disabled switch', async () => {
             webDriver.scrollIntoView(switchPage.disabledSwitch);
-            const isClickable = webDriver.isElementClickeble(switchPage.disabledSwitch);
+            const isClickable = webDriver.isElementClickable(switchPage.disabledSwitch);
             expect(isClickable).toBe(false);
         });
 
         it('should not be able to interact with disabled form switch', () => {
             webDriver.scrollIntoView(switchPage.formDisabledSwitch);
-            const isClickable = webDriver.isElementClickeble(switchPage.formDisabledSwitch);
+            const isClickable = webDriver.isElementClickable(switchPage.formDisabledSwitch);
             expect(isClickable).toBe(false);
         });
 

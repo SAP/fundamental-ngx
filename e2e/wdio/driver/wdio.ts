@@ -96,7 +96,6 @@ export class Wdio {
 
     getElementSize(selector: string, prop?: 'width' | 'height', index: number = 0): number | WebdriverIO.SizeReturn {
         return prop ? $$(selector)[index].getSize() : $$(selector)[index].getSize(prop);
-
     }
 
     executeScript(callback): string {
@@ -115,8 +114,32 @@ export class Wdio {
         $$(selector)[index].scrollIntoView();
     }
 
-    isElementClickeble(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+    isElementClickable(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
        return  $$(selector)[index].isClickable();
+    }
+
+    dragAndDrop(elementToDragSelector: string, index: number = 0, targetElementSelector: string, targetIndex: number = 0): void {
+        $$(elementToDragSelector)[index].scrollIntoView();
+        $$(elementToDragSelector)[index].dragAndDrop($$(targetElementSelector)[targetIndex]);
+    }
+
+    isElementDisplayed(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
+        $$(selector)[index].scrollIntoView();
+        return $(selector)[index].isDisplayed();
+    }
+
+    focusElement(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
+        $$(selector)[index].scrollIntoView();
+        // @ts-ignore
+        $$(selector)[index].focus();
+    }
+
+    mouseButtonDown(button: 0 | 1 | 2  = 0): void {
+        browser.buttonDown(button)
+    }
+
+    mouseButtonUp(button: 0 | 1 | 2  = 0): void {
+        browser.buttonUp(button)
     }
 }
 
