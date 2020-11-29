@@ -11,11 +11,11 @@ import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'fd-carousel-multiple-active-item',
-    templateUrl: './carousel-multiple-active-item.component.html',
+    selector: 'fd-carousel-multiple-active-item-example',
+    templateUrl: './carousel-multiple-active-item-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarouselMultipleActiveItemComponent implements OnInit, AfterViewInit {
+export class CarouselMultipleActiveItemExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel')
     elementRef: ElementRef;
 
@@ -24,6 +24,9 @@ export class CarouselMultipleActiveItemComponent implements OnInit, AfterViewIni
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    card1Visibility = true;
+    card2Visibility = true;
+    card3Visibility = true;
 
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 

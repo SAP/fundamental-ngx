@@ -16,6 +16,7 @@ import {
     Optional,
     Output,
     QueryList,
+    Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -212,6 +213,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     constructor(
         private readonly _elementRef: ElementRef,
+        private _renderer: Renderer2,
         private _changeDetectorRef: ChangeDetectorRef,
         private _carouselService: CarouselService,
         @Optional() private readonly _rtlService: RtlService
@@ -249,6 +251,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.navigation = false;
         }
 
+        this.slides.changes.subscribe(() => this._onSlideUpdates());
         this._changeDetectorRef.markForCheck();
     }
 
@@ -332,9 +335,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** @hidden
-    * Prevent native focus flow related to button, if button will be disable on focus state.
-    * It works only if carousel is not in circular loop.
-    */
+     * Prevent native focus flow related to button, if button will be disable on focus state.
+     * It works only if carousel is not in circular loop.
+     */
     private preventDefaultBtnFocus(): void {
         if (this.loop) {
             return;
@@ -389,6 +392,19 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                 this.rightButtonDisabled = true;
             }
         }
+    }
+
+    private _onSlideUpdates(): void {
+        this.currentActiveSlidesStartIndex = 0;
+        this._carouselService.initialise(this._config, this.slides, this.slideContainer);
+        this._carouselService.active = null;
+        if (this.vertical) {
+            this._renderer.setStyle(this.slideContainer?.nativeElement, 'transform', 'translateY(0px)');
+        } else {
+            this._renderer.setStyle(this.slideContainer?.nativeElement, 'transform', 'translateX(0px)');
+        }
+        this._initializeCarousel();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden Initialize carousel with visible items */
@@ -505,7 +521,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
                 this._carouselService.goToItem(this._carouselService.active, false, this.dir);
             }
             this._changeDetectorRef.detectChanges();
-        }
+        };
         refreshDirection();
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe(() => refreshDirection());
     }
