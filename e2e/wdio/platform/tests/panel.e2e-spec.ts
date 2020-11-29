@@ -1,88 +1,62 @@
 import { PanelPo } from '../pages/panel.po';
 import panelPageContent from '../fixtures/appData/panel-page-content';
-import { isClickable } from '../../helper/helper';
 import { webDriver } from '../../driver/wdio';
 
-describe('Verify Panel', function() {
+describe('Verify Panel', () => {
     const panelPage = new PanelPo();
-    beforeAll(() => {
+
+    beforeEach(() => {
         panelPage.open();
     });
 
-    afterEach(() => {
-        webDriver.refreshPage();
-    });
-
-    it('should have fixed header', async () => {
+    it('should have fixed header', () => {
         // Checks that fixed panel has no expand button
-        expect(await panelPage.fixedPanelBtn.isPresent()).toBe(false);
+        expect(webDriver.waitForPresent(panelPage.fixedPanelDescription)).toBe(true);
     });
 
-    it('should be expandable', async () => {
-        const isVisibleContentBefore = await panelPage.expandablePanelContent.isDisplayed();
-        await panelPage.expandablePanelBtn.click();
-        const isVisibleContentAfter = await panelPage.expandablePanelContent.isPresent();
+    it('should be expandable', () => {
+        const isVisibleContentBefore = webDriver.waitForDisplayed(panelPage.expandablePanelContent);
+        webDriver.click(panelPage.expandablePanelBtn);
+        const isInvisibleVisibleContentAfter = webDriver.waitForNotDisplayed(panelPage.expandablePanelContent);
 
         expect(isVisibleContentBefore).toBe(true);
-        expect(isVisibleContentAfter).toBe(false);
-        expect(await panelPage.expandablePanelTitle.getText()).toBe(panelPageContent.expandable_panel_header);
+        expect(isInvisibleVisibleContentAfter).toBe(true);
+        expect(webDriver.getText(panelPage.expandablePanelTitle)).toBe(panelPageContent.expandable_panel_header);
     });
 
-    it('should compact be smaller than basic', async () => {
-        const expandableBtnSize = await panelPage.expandablePanelBtn.getSize();
-        const compactBtnSize = await panelPage.compactPanelBtn.getSize();
+    it('should compact be smaller than basic', () => {
+        const expandableBtnSize = webDriver.getElementSize(panelPage.expandablePanelBtn) as WebdriverIO.SizeReturn;
+        const compactBtnSize = webDriver.getElementSize(panelPage.compactPanelBtn) as WebdriverIO.SizeReturn;
 
         expect(expandableBtnSize.width).toBeGreaterThan(compactBtnSize.width);
         expect(expandableBtnSize.height).toBeGreaterThan(compactBtnSize.height);
     });
 
-    // Example is missing
-    xit('should have info bar with extra information', async () => {
-
-    });
-
-    // TODO:  Postponed.
-    describe('and arrow icon', function() {
-        it('should have pointed right', async () => {
-
-        });
-
-        it('should rotate 90 degrees when expanded', async () => {
-
-        });
-    });
-
     it('should scroll content if height is fixed', async () => {
-        const contentRegionHeight = await panelPage.fixedHeightPanelContentRegion.getCssValue('height');
-        const contentActualHeight = await panelPage.fixedHeightPanelContent.getCssValue('height');
-
+        const contentRegionHeight = webDriver.getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value;
+        const contentActualHeight = webDriver.getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value;
         expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
     });
 
-    // Fixed after https://github.com/SAP/fundamental-ngx/issues/3679 release.
-    xit('should action panel have clickable buttons example ', async () => {
-        expect(await panelPage.actionPanelEditBtn.getCssValue('innerText')).toBe(panelPageContent.action_panel_edit_button);
-        expect(await isClickable(await panelPage.actionPanelEditBtn)).toBe(true);
-        expect(await panelPage.actionPanelDeleteBtn.getCssValue('innerText')).toBe(panelPageContent.action_panel_delete_button);
-        expect(await isClickable(await panelPage.actionPanelDeleteBtn)).toBe(true);
+    it('should action panel have clickable buttons example ', () => {
+        expect(webDriver.getText(panelPage.actionPanelBtn, 0))
+            .toBe(panelPageContent.action_panel_edit_button);
+        expect(webDriver.waitForClickable(panelPage.actionPanelBtn, 0)).toBe(true);
+        expect(webDriver.getText(panelPage.actionPanelBtn, 1))
+            .toBe(panelPageContent.action_panel_delete_button);
+        expect(webDriver.waitForClickable(panelPage.actionPanelBtn, 1)).toBe(true);
     });
 
-    // No example.
-    xit('should have adjusted height when set to auto', async () => {
-
+    it('should be able to switch to rtl', () => {
+        const areas = browser.$$(panelPage.exampleAreaContainersArr);
+        const switchers = browser.$$(panelPage.rtlSwitcherArr);
+        for (let i = 0; i < areas.length; i++) {
+            switchers[i].click();
+            expect(webDriver.getAttributeByName(panelPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+            expect(webDriver.getCSSPropertyByName(panelPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+            switchers[i].click();
+            expect(webDriver.getAttributeByName(panelPage.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
+            expect(webDriver.getCSSPropertyByName(panelPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
+        }
     });
-
-    describe('has rtl and ltr options', function() {
-        it('should be able to switch to rtl', async () => {
-            await panelPage.exampleAreaContainersArr.each(async (area, index) => {
-                expect(await area.getCssValue('direction')).toBe('ltr', 'css prop direction ' + index);
-                expect(await area.getAttribute('dir')).toBe('', 'dir attr ' + index);
-                await panelPage.rtlSwitcherArr.get(index).click();
-                expect(await area.getCssValue('direction')).toBe('rtl');
-                expect(await area.getAttribute('dir')).toBe('rtl');
-            });
-
-        });
-    });
-
 });
