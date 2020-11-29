@@ -59,7 +59,6 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-internet-explorer',
-                screenResolution: '1920x1080',
                 requireWindowFocus: true,
                 //tags: [ "process.env.TRAVIS_BUILD_ID"],
             }
@@ -72,7 +71,6 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
-                screenResolution: '1920x1080',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
@@ -284,6 +282,12 @@ exports.config = {
             project: 'e2e/tsconfig.json'
         });
 
+        browser.addCommand('focus', function () {
+            browser.execute(function (domElement) {
+                domElement.focus();
+            }, this);
+        }, true);
+      
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
     },

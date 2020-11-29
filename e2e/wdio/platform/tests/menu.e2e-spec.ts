@@ -1,29 +1,20 @@
 import { MenuPo } from '../pages/menu.po';
-import { browser, protractor } from 'protractor';
 import MenuData from '../fixtures/appData/menu-contents';
-import { clickTwice, getValueOfAttribute, hoverMouse } from '../../helper/helper';
-import {
-    check2ndLvlMenuItemsHvrState,
-    check3rdLvlMenuItemsHvrState,
-    checkMenuItemsActiveState,
-    checkMenuItemsHoverState
-} from '../../helper/assertion-helper';
 import { webDriver } from '../../driver/wdio';
 
 describe('Menu component test suite', function() {
     const menuPage = new MenuPo();
 
-    async function checkMenuItemText(element): Promise<any> {
-        const menuItemTextArr = await element;
+    function checkMenuItemText(elementSelector: string): void {
+        const elementArrayLength = webDriver.getElementArrayLength(elementSelector);
 
-        await menuItemTextArr.forEach(async item => {
-            await expect(await item.getText()).not.toBe(null);
-        });
+        for (let i = 0; elementArrayLength > i; i++) {
+            expect(webDriver.getText(elementSelector, 5000, i)).not.toBe(null);
+        }
     }
 
-    async function checkMenuItemFocus(element, property, expectation): Promise<any> {
-        const menuItemTextArr = await element;
-        await expect(await menuItemTextArr[0].getCssValue(property)).toEqual(expectation);
+    function checkMenuItemFocus(elementSelector: string, property: string, expectation: string): void {
+        expect(webDriver.getCSSPropertyByName(elementSelector, property).value).toEqual(expectation);
     }
 
     beforeAll(() => {
@@ -34,117 +25,163 @@ describe('Menu component test suite', function() {
         webDriver.refreshPage();
     });
 
-    it('should check menu btn styles', async () => {
-        const basicMenuBtnArr = await menuPage.menuBtnArr;
+    it('should check menu btn styles', () => {
+        const basicMenuBtnArrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
 
-        basicMenuBtnArr.forEach(async element => {
-            await expect(await element.getCssValue(MenuData.borderColorAttribute)).toEqual(MenuData.menuBtnBorderColor);
-        });
+        for (let i = 0; basicMenuBtnArrLength > i; i++) {
+            expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.borderColorAttribute, i).value)
+                .toEqual(MenuData.menuBtnBorderColor);
+            webDriver.mouseHoverElement(menuPage.menuBtnArr, 5000, i);
+            expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
+                .toEqual(MenuData.menuBtnHoverColor);
+        }
+        webDriver.focusElement(menuPage.firstMenuBtn);
+        webDriver.sendKeys('Tab');
 
-        basicMenuBtnArr.forEach(async element => {
-            await hoverMouse(element).then(async () => {
-                await expect(await element.getCssValue(MenuData.bgColorAttribute)).toEqual(MenuData.menuBtnHoverColor);
-            });
-        });
+        const menuBtnBorderStyle = webDriver.executeScript(`return (window.getComputedStyle(document.querySelector(await '${menuPage.secondMenuBtn}'), ":after").border)`);
+        expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
 
-        await menuPage.firstMenuBtn.sendKeys(protractor.Key.TAB).then(async () => {
-            const menuBtnBorderStyle = await browser.executeScript(`return (window.getComputedStyle(document.querySelector(await '${menuPage.secondMenuBtn.locator().value}'), ":after").border)`);
-            await expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
-        });
     });
 
-    it('should check avatar menu btn styles', async () => {
+    it('should check avatar menu btn styles', () => {
+        webDriver.doubleClick(menuPage.menuAvatarBtn);
 
-        await clickTwice(menuPage.menuAvatarBtn);
-        await expect(await menuPage.menuAvatarBtn.getCssValue(MenuData.menuAvatarFocusAttr)).toEqual(MenuData.menuAvatarFocusColor);
-        await expect(await getValueOfAttribute(menuPage.menuAvatarBtn, 'image')).not.toBe(null);
+        expect(webDriver.getCSSPropertyByName(menuPage.menuAvatarBtn, MenuData.menuAvatarFocusAttr).value)
+            .toEqual(MenuData.menuAvatarFocusColor);
+        expect(webDriver.getAttributeByName(menuPage.menuAvatarBtn, 'image')).not.toBe(null);
 
         // checks horizontal example.
-        await clickTwice(menuPage.menuHorizontalAvatarBtn);
+        webDriver.doubleClick(menuPage.menuHorizontalAvatarBtn);
         // todo: fails because of issue #3734
-        // await expect(await menuPage.menuHorizontalAvatarBtn.getCssValue(MenuData.menuAvatarFocusAttr)).toEqual(MenuData.menuAvatarFocusColor);
-        await expect(await getValueOfAttribute(menuPage.menuHorizontalAvatarBtn, 'image')).not.toBe(null);
+        // await expect(await menuPage.menuHorizontalAvatarBtn.getCssValue(MenuData.menuAvatarFocusAttr))
+        // .toEqual(MenuData.menuAvatarFocusColor);
+        expect(webDriver.getAttributeByName(menuPage.menuHorizontalAvatarBtn, 'image')).not.toBe(null);
 
     });
 
     it('should check menu btn content', async () => {
-        const iconMenuBtnIconsArr = await menuPage.iconMenuIconArr;
-        const basicMenuBtnTextArr = await menuPage.menuBtnTextArr;
+        const iconMenuBtnIconsArr = webDriver.getElementArrayLength(menuPage.iconMenuIconArr);
+        const basicMenuBtnTextArr = webDriver.getElementArrayLength(menuPage.menuBtnTextArr);
 
-        basicMenuBtnTextArr.forEach(async element => {
-            await expect(await element.getText()).not.toBe(null);
-        });
+        for (let i = 0; iconMenuBtnIconsArr > i; i++) {
+            expect(webDriver.getText(menuPage.iconMenuIconArr, 5000, i)).not.toBe(null);
+        }
 
-        iconMenuBtnIconsArr.forEach(async element => {
-            await expect(await element.isDisplayed()).toBe(true);
-        });
+        for (let i = 0; basicMenuBtnTextArr > i; i++) {
+            expect(webDriver.isElementDisplayed(menuPage.iconMenuIconArr, 5000, i)).toBe(true);
+        }
     });
 
     it('should check menu btn active state', async () => {
-        const basicMenuBtnArr = await menuPage.menuBtnArr;
+        const arrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
 
-        await basicMenuBtnArr.forEach(async element => {
-            await browser.actions().mouseDown(element).perform().then(async () => {
-                await expect(await element.getCssValue(MenuData.bgColorAttribute)).toEqual(MenuData.menuBtnActiveColor);
-                await browser.actions().mouseUp(element).perform();
-            });
-        });
+        for (let i = 0; arrLength > i; i++) {
+            webDriver.mouseHoverElement(menuPage.menuBtnArr, 5000, i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
+                .toEqual(MenuData.menuBtnActiveColor);
+            webDriver.mouseButtonUp();
+        }
     });
 
     it('should check menu item styles', async () => {
-        const basicMenuBtnArr = await menuPage.menuBtnArr;
+        webDriver.click(menuPage.menuBtnArr);
 
-        await basicMenuBtnArr[0].click();
-        await checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
-        await checkMenuItemText(menuPage.menuItemTextArr);
+        checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        checkMenuItemText(menuPage.menuItemTextArr);
     });
 
     it('should check menu items active state', async () => {
-        const basicMenuBtnArr = await menuPage.menuBtnArr;
-
-        await basicMenuBtnArr[0].click();
-        await checkMenuItemsActiveState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuBtnActiveColor);
+        webDriver.click(menuPage.menuBtnArr);
+        checkMenuItemsActiveState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuBtnActiveColor);
     });
 
-    it('should check menu item focus', async () => {
-        const basicMenuBtnArr = await menuPage.menuBtnArr;
-
-        await basicMenuBtnArr[0].click();
-        await checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
+    it('should check menu item focus', () => {
+        webDriver.click(menuPage.menuBtnArr);
+        checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
     });
 
-    it('should check cascading menu', async () => {
-        await menuPage.cascadingMenuBtn.click();
-        await checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
-        await check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
+    it('should check cascading menu', () => {
+        webDriver.click(menuPage.cascadingMenuBtn);
+        checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
             MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
-        await clickTwice(menuPage.cascadingMenuBtn);
-        await check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
+        webDriver.doubleClick(menuPage.cascadingMenuBtn);
+        check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
             menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
     });
 
-    it('should check collapsed and expanded states', async () => {
-        await menuPage.firstMenuBtn.click();
-        await expect(await menuPage.menuItemOverlay.isDisplayed()).toBe(true);
-        await menuPage.firstMenuBtn.click();
-        await expect(await menuPage.menuItemOverlay.isDisplayed()).toBe(false);
+    it('should check collapsed and expanded states', () => {
+        webDriver.click(menuPage.firstMenuBtn);
+        expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
+        webDriver.click(menuPage.firstMenuBtn);
+        expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(false);
     });
 
-    it('should check LTR orientation', async () => {
-        const areaContainersArray = await menuPage.exampleAreaContainersArr;
+    it('should check LTR orientation', () => {
+        const areaContainersArrayLength = webDriver.getElementArrayLength(menuPage.exampleAreaContainersArr);
 
-        areaContainersArray.forEach(element => {
-            expect(element.getCssValue('direction')).toBe('ltr', 'css prop direction ');
-        });
+        for (let i = 0; areaContainersArrayLength > i; i++) {
+            expect(webDriver.getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value)
+                .toBe('ltr', 'css prop direction ');
+        }
     });
 
-    it('should check RTL orientation', async () => {
-        await menuPage.exampleAreaContainersArr.each(async (area, index) => {
-            expect(await area.getCssValue('direction')).toBe('ltr', 'css prop direction ' + index);
-            expect(await area.getAttribute('dir')).toBe('', 'dir attr ' + index);
-            await menuPage.rtlSwitcherArr.get(index).click();
-            expect(await area.getCssValue('direction')).toBe('rtl');
-            expect(await area.getAttribute('dir')).toBe('rtl');
-        });
+    it('should check RTL orientation', () => {
+        const arrL = webDriver.getElementArrayLength(menuPage.exampleAreaContainersArr);
+
+        for (let i = 0; arrL > i; i++) {
+            webDriver.scrollIntoView(menuPage.exampleAreaContainersArr, 5000, i);
+            expect(webDriver.getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+            const dirValueBefore = webDriver.getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i);
+            expect([null, '']).toContain(dirValueBefore);
+            webDriver.click(menuPage.rtlSwitcherArr, 5000, i);
+            expect(webDriver.getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+            expect(webDriver.getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+        }
     });
 });
+
+
+function checkMenuItemsHoverState(itemsArrSelector, attribute, expectation): void {
+    const menuItemsArrLength = webDriver.getElementArrayLength(itemsArrSelector);
+
+    for (let i = 0; menuItemsArrLength > i; i++) {
+        webDriver.mouseHoverElement(itemsArrSelector, 5000, i);
+        expect(webDriver.getCSSPropertyByName(itemsArrSelector, attribute, i).value).toEqual(expectation);
+    }
+}
+
+function checkMenuItemsActiveState(itemsArrSelector: string, attribute: string, expectation: string): void {
+    const menuItemsArrLength = webDriver.getElementArrayLength(itemsArrSelector);
+
+    for (let i = 0; menuItemsArrLength > i; i++) {
+        webDriver.mouseHoverElement(itemsArrSelector, 5000, i);
+        webDriver.mouseButtonDown();
+        expect(webDriver.getCSSPropertyByName(itemsArrSelector, attribute, i).value).toEqual(expectation);
+        webDriver.mouseButtonUp();
+    }
+}
+
+
+function check2ndLvlMenuItemsHvrState(itemsArr, itemsArr2, attribute, expectation): void {
+    webDriver.mouseHoverElement(itemsArr, 5000, 1);
+    const arrLength = webDriver.getElementArrayLength(itemsArr2);
+
+    for (let i = 0; arrLength > i; i++) {
+        webDriver.mouseHoverElement(itemsArr2, 5000, i);
+        expect(webDriver.getCSSPropertyByName(itemsArr2, attribute, i).value).toEqual(expectation);
+    }
+}
+
+function check3rdLvlMenuItemsHvrState(itemsArr, itemsArr2, itemsArr3, attribute, expectation): void {
+    webDriver.mouseHoverElement(itemsArr, 5000, 1);
+    webDriver.mouseHoverElement(itemsArr2, 5000, 1);
+
+    const arrLength = webDriver.getElementArrayLength(itemsArr3);
+
+    for (let i = 0; arrLength > i; i++) {
+        webDriver.mouseHoverElement(itemsArr3, 5000, i);
+        expect(webDriver.getCSSPropertyByName(itemsArr3, attribute).value).toEqual(expectation);
+    }
+}
