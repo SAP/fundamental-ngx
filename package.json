@@ -138,7 +138,7 @@
     "@types/jasminewd2": "2.0.8",
     "angular-cli-ghpages": "0.6.2",
     "autoprefixer": "9.8.6",
-    "babel-loader": "8.1.0",
+    "babel-loader": "8.2.2",
     "codelyzer": "6.0.1",
     "coveralls": "3.1.0",
     "fs-extra": "9.0.1",
