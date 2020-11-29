@@ -57,6 +57,7 @@ exports.config = {
             browserVersion: 'latest',
             platformName: 'Windows 10',
             "sauce:options": {
+                screenResolution: '1920x1080',
                 name: 'e2e-win-internet-explorer',
                 screenResolution: '1920x1080',
                 requireWindowFocus: true,
@@ -69,6 +70,7 @@ exports.config = {
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
             "sauce:options": {
+                screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
                 screenResolution: '1920x1080',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
@@ -113,8 +115,8 @@ exports.config = {
             browserVersion: 'latest',
             acceptInsecureCerts: true,
             "sauce:options": {
-                name: 'e2e-MAC-firefox',
                 screenResolution: '1920x1440',
+                name: 'e2e-MAC-firefox',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
@@ -170,7 +172,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://sean.local:4200/',
+    baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -222,9 +224,7 @@ exports.config = {
         grep: null,
         invertGrep: null,
     },
-
-
-    
+  
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -285,17 +285,7 @@ exports.config = {
         });
 
         browser.resetUrl = 'about:blank';
-
         browser.maximizeWindow();
-
-       // browser.setWindowSize(1080, 1920);
-
-        // if (capabilities.browserName === 'internet explorer' || 'firefox') {
-        //     browser.driver.manage().window().setSize(1080, 1920);
-        // } else {
-        //     // works for all except IE, FF
-        //     driver.manage.window.maximize();
-        // }
     },
 
 

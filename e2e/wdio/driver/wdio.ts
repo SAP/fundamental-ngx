@@ -47,7 +47,7 @@ export class Wdio {
         return $$(selector)[index].getValue();
     };
 
-    getText(selector: string, waitTime = this.defaultWaitTime, index: number = 0): string {
+    getText(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].getText();
     }
@@ -55,10 +55,23 @@ export class Wdio {
     waitForDisplayed(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     };
-
+  
     waitForInvisibilityOf(selector: string, index: number = 0): boolean {
         return $$(selector)[index].waitForDisplayed({ reverse: true })
     }
+
+    waitForNotDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
+        return $(selector).waitForDisplayed({timeout: waitTime, reverse: true});
+    };
+
+    waitForClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+        return $$(selector)[index].waitForClickable({ timeout: waitTime });
+    };
+
+    waitForPresent(selector: string, waitTime = this.defaultWaitTime): boolean {
+        return $(selector).waitForExist({ timeout: waitTime });
+    };
+
 
     isEnabled(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
@@ -70,7 +83,6 @@ export class Wdio {
         return $$(selector)[index].waitUntil(function(): boolean {
             return this.getValue() === text;
         }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
-
     };
 
     // Sends to the active element
@@ -90,7 +102,6 @@ export class Wdio {
     mouseHoverElement(selector: string, waitTime = this.defaultWaitTime, index: number = 0): any {
         $$(selector)[index].waitForExist({ timeout: waitTime });
         $$(selector)[index].moveTo();
-
     }
 
     clearValue(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
@@ -123,8 +134,11 @@ export class Wdio {
         $$(selector)[index].waitForDisplayed({timeout: waitTime});
         $$(selector)[index].moveTo();
         return browser.buttonDown();
-
+    }
     // TODO: add wait 300ms
+
+    waitElementToBePresentInDOM (selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+        return $$(selector)[index].waitForExist({ timeout: waitTime });
     }
 
     scrollIntoView(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): void {
@@ -140,24 +154,12 @@ export class Wdio {
     }
 
     isElementClickeble(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
-        return  $$(selector)[index].isClickable();
+        return $$(selector)[index].isClickable();
     }
 
     getUrl(): string {
         return browser.getUrl();
     }
-
-
-    // waitForUrl(url: string): void {
-    //     browser.waitUntil.urlContains(url);
-    // }
-
-    // click(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
-    //     // $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    //     return $$(selector)[index].click();
-    // }
-
-
 }
 
 export const webDriver = new Wdio();
