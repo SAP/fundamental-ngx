@@ -6,7 +6,6 @@ export class LinkPo extends BaseComponentPo {
     readonly root = '#page-content';
     readonly iconLink = 'fdp-platform-link-icon-example a';
     readonly standardLinks = 'fdp-platform-link-standard-example a';
-    readonly standardImgLink = 'fdp-platform-link-standard-example #img-link';
     readonly emphasizedLink = 'fdp-platform-link-emphasized-example a';
     readonly disabledLink = 'fdp-platform-link-disabled-example a';
     readonly emphasizedDisabledLink = 'fdp-platform-link-disabled-emphasized-example a';
