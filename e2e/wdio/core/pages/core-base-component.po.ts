@@ -1,10 +1,12 @@
-import { $, browser } from 'protractor';
+import { webDriver } from '../../driver/wdio';
+import { baseUrl } from '../../../../wdio.conf.js'
 
 export class CoreBaseComponentPo {
 
-    title = $('header .header');
-    async open (url: string): Promise<void> {
-        await browser.get(browser.baseUrl + '/core' + url);
+    title = 'header .header';
+
+     open (url: string): void {
+         webDriver.open('fundamental-ngx#/core' + url);
     };
 
 }

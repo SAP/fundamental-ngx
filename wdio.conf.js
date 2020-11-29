@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/switch.e2e-spec.ts'
+        './e2e/wdio/**/fixed-card-layout.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -56,7 +56,6 @@ exports.config = {
             browserName: 'internet explorer',
             browserVersion: 'latest',
             platformName: 'Windows 10',
-            acceptInsecureCerts: true,
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-internet-explorer',
@@ -86,7 +85,7 @@ exports.config = {
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-       {
+        {
             browserName: 'chrome',
             browserVersion: 'latest',
             platformName: 'Windows 10',
@@ -102,9 +101,9 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            'sauce:options': {
+            "sauce:options": {
+                name: 'e2e-MAC-chrome',
                 screenResolution: '1920x1440',
-                name: 'e2e-MAC-chrome'
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
@@ -132,12 +131,11 @@ exports.config = {
         },
         {
             browserName: 'safari',
-            platformName: 'macOS 10.15',
             browserVersion: '13.1',
-            // acceptInsecureCerts: true,
+            platformName: 'macOS 10.15',
             "sauce:options": {
+                screenResolution: '1920x1440',
                 name: 'e2e-MAC-safari',
-                // tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
     ],
@@ -172,7 +170,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://anton.local:4200',
+    baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -224,9 +222,7 @@ exports.config = {
         grep: null,
         invertGrep: null,
     },
-
-
-    
+  
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -249,8 +245,12 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+     // onPrepare: function () {
+     //    browser.resetUrl = 'about:blank';
+     //    browser.driver.manage.window.maximize();
+     //    browser.maximize();
+     //    browser.window.maximize();
+     // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -287,7 +287,18 @@ exports.config = {
                 domElement.focus();
             }, this);
         }, true);
+      
+        browser.resetUrl = 'about:blank';
+        browser.maximizeWindow();
     },
+
+
+//     const processedConfig = await browser.getProcessedConfig();
+//
+// // Resize the screens if it is a VM
+// if (!('platformName' in processedConfig.capabilities)) {
+//     await browser.driver.manage().window().setSize(1366, 768);
+// }
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

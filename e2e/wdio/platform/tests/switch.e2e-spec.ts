@@ -132,6 +132,7 @@ describe('Verify Switch component', function() {
         expect(testResult.violations.length).toBe(0);
     });*/
 
+
     it('should have RTL orientation', () => {
         const arrL = webDriver.getElementArrayLength(switchPage.exampleAreaContainersArr);
         for (let i = 0; arrL > i; i++) {
