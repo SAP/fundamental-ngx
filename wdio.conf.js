@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/textarea.e2e-spec.ts'
+        './e2e/wdio/**/switch.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -58,6 +58,7 @@ exports.config = {
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
             "sauce:options": {
+                screenResolution: '1920x1080',
                 name: 'e2e-win-internet-explorer',
                 requireWindowFocus: true,
                 //tags: [ "process.env.TRAVIS_BUILD_ID"],
@@ -69,6 +70,7 @@ exports.config = {
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
             "sauce:options": {
+                screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
@@ -80,45 +82,50 @@ exports.config = {
             acceptInsecureCerts: true,
             "sauce:options": {
                 name: 'e2e-win-firefox',
+                screenResolution: '1920x1080',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-/*        {
+       {
             browserName: 'chrome',
             browserVersion: 'latest',
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
             "sauce:options": {
-                //name: 'e2e-win-chrome',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
-            }
-        },*/
-/*        {
-            browserName: 'chrome',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            "sauce:options": {
-                name: 'e2e-MAC-chrome',
+                screenResolution: '1920x1080',
+                name: 'e2e-win-chrome',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-        {
+        /*         {
+                   browserName: 'chrome',
+                    platformName: 'macOS 10.15',
+                    browserVersion: 'latest',
+                    acceptInsecureCerts: true,
+                    "sauce:options": {
+                        screenResolution: '1920x1440',
+                        name: 'e2e-MAC-chrome',
+                        //tags: [ process.env.TRAVIS_BUILD_ID],
+                    }
+                },*/
+/*        {
             browserName: 'firefox',
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
             "sauce:options": {
+                screenResolution: '1920x1440',
                 name: 'e2e-MAC-firefox',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
-        },
-        {
+        },*/
+/*        {
             browserName: 'MicrosoftEdge',
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
             "sauce:options": {
+                screenResolution: '1920x1440',
                 name: 'e2e-MAC-Edge',
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
