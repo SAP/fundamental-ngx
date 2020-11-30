@@ -1,4 +1,5 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -17,11 +18,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from './tab/tab-panel.component';
-import { merge, Subject, timer } from 'rxjs';
+import { fromEvent, merge, Subject, timer } from 'rxjs';
 import { TabsService } from './tabs.service';
-import { filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, startWith, takeUntil } from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
+import { fitElements } from '../utils/functions';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -41,25 +43,7 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TabsService]
 })
-export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
-    /** @hidden */
-    @ContentChildren(TabPanelComponent)
-    panelTabs: QueryList<TabPanelComponent>;
-
-    /** @hidden */
-    @ViewChildren(TabLinkDirective)
-    tabLinks: QueryList<TabLinkDirective>;
-
-    /** @hidden */
-    @ViewChildren(TabItemDirective)
-    tabItem: QueryList<TabItemDirective>;
-
-    /** @hidden */
-    @ViewChild('tabsItemContainer')
-    tabsItemContainer: ElementRef;
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+export class TabListComponent implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
 
     /** Index of the selected tab panel. */
     @Input()
@@ -84,16 +68,47 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
-    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
-
+    /** @hidden */
+    @ContentChildren(TabPanelComponent)
+    panelTabs: QueryList<TabPanelComponent>;
 
     /** @hidden */
+    @ViewChildren(TabLinkDirective)
+    tabLinks: QueryList<TabLinkDirective>;
+
+    /** @hidden */
+    @ViewChildren(TabItemDirective)
+    tabItem: QueryList<TabItemDirective>;
+
+    /** @hidden */
+    @ViewChild('tabsItemContainer', { read: ElementRef })
+    tabsItemContainer: ElementRef;
+
+    /** @hidden */
+    @ViewChild('collapsedTabsTrigger', { read: ElementRef })
+    collapsedTabsTrigger: ElementRef;
+
+    /** @hidden TODO */
+    _overflowingTabs: TabPanelComponent[] = [];
+
+    /** @hidden TODO */
+    _visibleTabs: TabPanelComponent[] = [];
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    private _tabItems: TabItemDirective[];
+
+    constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this._visibleTabs = this.panelTabs.toArray();
+    }
+
     ngAfterViewInit(): void {
-
-        this.tabItem.forEach(tab => console.log(tab.elementRef().nativeElement.offsetWidth));
-        console.log(`In total: ${this.tabsItemContainer.nativeElement.offsetWidth}`);
-        console.log(`Capacity: ${this._getContainerContainerCapacity()}`);
-
+        this._tabItems = this.tabItem.toArray();
+        this._collapseTabItems();
         this.selectTab(this.selectedIndex);
         this._listenOnTabSelect();
         this._listenOnContentQueryListChange();
@@ -211,13 +226,32 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private _collapseItems(): void {
-        this.panelTabs.forEach(tab => console.log(tab.elementRef.nativeElement.offsetWidth));
-    }
+        const tabItemDirectiveAccessor = (tabItem: TabItemDirective) => tabItem.elementRef().nativeElement;
+        const [visible] = fitElements<ElementRef, TabItemDirective>(
+            this.tabsItemContainer,
+            this._tabItems,
+            {
+                elementHTMLAccessor: tabItemDirectiveAccessor,
+                reservedWidthIfCollapsed: this.collapsedTabsTrigger.nativeElement.width
+            }
+        );
 
-    private _getContainerContainerCapacity(): number {
-        const pixelToNumber = (pixels: string) => Number(pixels.replace('px', ''));
-        const computedStyle = window.getComputedStyle(this.tabsItemContainer.nativeElement);
+        const panelTabs = this.panelTabs.toArray();
 
-        return pixelToNumber(computedStyle.width) - pixelToNumber(computedStyle.paddingLeft) - pixelToNumber(computedStyle.paddingRight);
+        this._visibleTabs = panelTabs.splice(0, visible.length - 1);
+        this._overflowingTabs = panelTabs;
+    };
+
+    private _collapseTabItems(): void {
+        const source$ = merge(fromEvent(window, 'resize'), this.panelTabs.changes);
+
+        source$.pipe(
+            startWith(0),
+            debounceTime(100),
+            takeUntil(this._onDestroy$),
+        ).subscribe(_ => {
+            this._collapseItems();
+            this._changeRef.detectChanges();
+        })
     }
 }

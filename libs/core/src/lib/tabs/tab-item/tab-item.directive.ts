@@ -45,6 +45,10 @@ export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     @Input()
     fdTabItemClass = true;
 
+    /** @ */
+    @Input()
+    tabId: string;
+
     /** @hidden */
     @ContentChild(TabLinkDirective)
     linkItem: TabLinkDirective;

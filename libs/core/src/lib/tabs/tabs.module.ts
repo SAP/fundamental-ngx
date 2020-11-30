@@ -21,6 +21,10 @@ import { TabNavComponent } from './tab-nav/tab-nav.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { IconModule } from '../icon/icon.module';
+import { ButtonModule } from '../button/button.module';
+import { ListModule } from '../list/list.module';
+import { PopoverModule } from '../popover/popover.module';
+import { MenuModule } from '../menu/menu.module';
 
 @NgModule({
     declarations: [
@@ -41,7 +45,7 @@ import { IconModule } from '../icon/icon.module';
         TabProcessIconDirective,
         TabSeparatorDirective
     ],
-    imports: [CommonModule, IconModule],
+    imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule],
     exports: [
         TabListComponent,
         TabPanelComponent,
@@ -61,4 +65,5 @@ import { IconModule } from '../icon/icon.module';
         TabSeparatorDirective
     ]
 })
-export class TabsModule {}
+export class TabsModule {
+}
