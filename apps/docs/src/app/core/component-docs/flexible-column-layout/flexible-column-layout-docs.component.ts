@@ -3,7 +3,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 import * as defaultFlexibleColumnLayoutHtml from '!raw-loader!./examples/default/flexible-column-layout-example.component.html';
 import * as defaultFlexibleColumnLayoutTs from '!raw-loader!./examples/default/flexible-column-layout-example.component.ts';
-
+import * as defaultFlexibleColumnLayoutScss from '!raw-loader!./examples/default/flexible-column-layout-example.component.scss';
 
 @Component({
     selector: 'fd-flexible-column-layout-docs',
@@ -14,13 +14,14 @@ export class FlexibleColumnLayoutDocsComponent {
         {
             language: 'html',
             code: defaultFlexibleColumnLayoutHtml,
-            fileName: 'flexible-column-layout-default-examples'
+            fileName: 'flexible-column-layout-example',
+            scssFileCode: defaultFlexibleColumnLayoutScss
         },
         {
             language: 'typescript',
-            component: 'FixedCardLayoutMobileExampleComponent',
+            component: 'FlexibleColumnLayoutExampleComponent',
             code: defaultFlexibleColumnLayoutTs,
-            fileName: 'flexible-column-layout-default-examples'
+            fileName: 'flexible-column-layout-example'
         }
     ];
 }
