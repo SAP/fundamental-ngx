@@ -143,7 +143,8 @@ describe('WizardComponent', () => {
     it('should handleScrollSpyChange', async () => {
         component.ngAfterViewInit();
         await wait(fixture);
-        component.scrollSpyChange(step3.nativeElement as HTMLElement);
+        spyOnProperty(step3.nativeElement.children[0], 'id').and.returnValue('2');
+        component.scrollSpyChange(step3.nativeElement);
         expect(component.steps.first.status).toBe('completed');
         expect(component.steps.last.status).toBe('upcoming');
     });
