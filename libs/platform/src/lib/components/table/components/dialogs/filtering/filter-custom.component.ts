@@ -44,10 +44,7 @@ export class FilterCustomComponent implements DoCheck {
 
             this._valueLastEmitted = { ...this._value };
 
-            // To fix "Expression has changed after it was checked"
-            Promise.resolve().then(() => {
-                this.valueChange.emit(this._value);
-            });
+            this.valueChange.emit(this._value);
         } catch (e) {}
     }
 }

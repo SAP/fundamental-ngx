@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    forwardRef,
+    Input,
+    Output,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
+
+import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step';
 
 export interface SelectableFilter {
     label: string;
@@ -7,14 +18,19 @@ export interface SelectableFilter {
 @Component({
     selector: 'fdp-filters-list-step',
     templateUrl: './filters-list-step.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FiltersListStepComponent) }]
 })
-export class FiltersListStepComponent {
-    @Input() filters: SelectableFilter[] = [];
+export class FiltersListStepComponent implements FiltersViewStep {
+    @Input()
+    filters: SelectableFilter[] = [];
 
-    @Output() selectFilter: EventEmitter<SelectableFilter> = new EventEmitter<SelectableFilter>();
+    @Output()
+    selectFilter: EventEmitter<SelectableFilter> = new EventEmitter<SelectableFilter>();
 
-    @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
+    @ViewChild('titleTemplate')
+    titleTemplateRef: TemplateRef<any>;
 
-    @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
+    @ViewChild('bodyTemplate')
+    bodyTemplateRef: TemplateRef<any>;
 }

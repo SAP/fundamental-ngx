@@ -1,10 +1,21 @@
-import { Component, forwardRef, Inject } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    Inject,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 
 import { CollectionFilter } from '../../../interfaces';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
 import { Resettable, RESETTABLE_TOKEN } from '../reset-button/filters-reset-button.component';
+import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 
 export interface FiltersDialogData {
     filterBy: CollectionFilter[];
@@ -22,9 +33,10 @@ export enum ACTIVE_STEP {
 
 @Component({
     templateUrl: './filters.component.html',
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => FiltersComponent) }]
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => FiltersComponent) }],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FiltersComponent implements Resettable {
+export class FiltersComponent implements Resettable, AfterViewInit {
     initialFilterBy: CollectionFilter[];
 
     filterBy: CollectionFilter[];
@@ -41,16 +53,29 @@ export class FiltersComponent implements Resettable {
 
     readonly ACTIVE_STEP = ACTIVE_STEP;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+    @ViewChild(FILTERS_VIEW_STEP_TOKEN as any)
+    set setActiveFilterStepView(view: FiltersViewStep) {
+        this.activeFilterStepView = view;
+        this._cd.detectChanges();
+    }
+
+    activeFilterStepView: FiltersViewStep;
+
+    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, private _cd: ChangeDetectorRef) {
         const dialogData: FiltersDialogData = this.dialogRef.data;
         this.initialFilterBy = [...dialogData.filterBy];
         this.filterBy = [...dialogData.filterBy];
         this.viewSettingsFilters = dialogData.viewSettingsFilters;
     }
 
+    ngAfterViewInit(): void {
+        this._cd.detectChanges();
+    }
+
     selectFilter(filter: TableViewSettingsFilterComponent): void {
         this.activeStep = ACTIVE_STEP.FILTER;
         this.activeFilter = filter;
+        this._cd.detectChanges();
     }
 
     goToFilters(): void {
@@ -65,12 +90,16 @@ export class FiltersComponent implements Resettable {
             this.filterBy.push(filter);
 
             this._isResetAvailableSubject$.next(true);
+
+            // To fix "Expression has changed after it was checked"
+            this._cd.detectChanges();
         }
     }
 
     reset(): void {
         this.filterBy = [...this.initialFilterBy];
         this._isResetAvailableSubject$.next(false);
+        this._cd.detectChanges();
     }
 
     cancel(): void {

@@ -1,14 +1,27 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    forwardRef,
+    Input,
+    Output,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
 
 import { FilterType } from '../../../enums';
 import { CollectionFilter } from '../../../interfaces';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
+import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step';
 
 @Component({
     selector: 'fdp-filter-step',
-    templateUrl: './filter-step.component.html'
+    templateUrl: './filter-step.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FilterStepComponent) }]
 })
-export class FilterStepComponent {
+export class FilterStepComponent implements FiltersViewStep {
     @Input()
     filter: TableViewSettingsFilterComponent;
 
@@ -19,16 +32,16 @@ export class FilterStepComponent {
     }
 
     @Output()
-    confirm: EventEmitter<CollectionFilter> = new EventEmitter<CollectionFilter>();
-
-    @Output()
-    cancel: EventEmitter<void> = new EventEmitter<void>();
-
-    @Output()
     back: EventEmitter<void> = new EventEmitter<void>();
 
     @Output()
     valueChange: EventEmitter<CollectionFilter> = new EventEmitter<CollectionFilter>();
+
+    @ViewChild('titleTemplate')
+    titleTemplateRef: TemplateRef<any>;
+
+    @ViewChild('bodyTemplate')
+    bodyTemplateRef: TemplateRef<any>;
 
     /** @hidden */
     readonly FILTER_TYPE = FilterType;
