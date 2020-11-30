@@ -1,0 +1,20 @@
+<ul
+    fd-list
+    compact="true"
+    selection="true"
+>
+    <li
+        fd-list-item
+        *ngFor="let option of options"
+        [selected]="option.value == _value"
+    >
+        <fd-radio-button
+            [ngModel]="_value"
+            (ngModelChange)="_onValueChange($event)"
+            [value]="option.value"
+            compact="true"
+            name="filtering-settings-single-select"
+        ></fd-radio-button>
+        <span fd-list-title>{{ option.label }}</span>
+    </li>
+</ul>

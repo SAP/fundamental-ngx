@@ -1,5 +1,5 @@
 export interface SelectionValue {
-    value: string;
+    value: any;
     label: string;
     children?: SelectionValue[];
 }

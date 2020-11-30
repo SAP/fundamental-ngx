@@ -41,15 +41,11 @@ export class TableService {
         this.sortChange.emit({ current: state.sortBy, previous: prevSortBy });
     }
 
-    filter(filter: any /* CollectionFilter */): void {
+    filter(filters: CollectionFilter[]): void {
         const prevState = this.getTableState();
         const prevFilterBy: any = (prevState && prevState.filterBy) || [];
 
-        if (!this._isFilterChanged(filter, prevFilterBy)) {
-            return;
-        }
-
-        const newFilterBy: CollectionFilter[] = [filter];
+        const newFilterBy: CollectionFilter[] = [...filters];
         const state: TableState = { ...prevState, filterBy: newFilterBy };
 
         this.setTableState(state);
@@ -81,16 +77,5 @@ export class TableService {
     search(input: SearchInput): void {
         const prevState = this.getTableState();
         this.setTableState({ ...prevState, searchInput: input });
-    }
-
-    private _isFilterChanged(filter: any, prevFilterBy: any): boolean {
-        return !(
-            prevFilterBy.length &&
-            prevFilterBy[0].field === filter.field &&
-            ((prevFilterBy[0].value !== undefined && prevFilterBy[0].value === filter.value) ||
-                (prevFilterBy[0].value2 !== undefined && prevFilterBy[0].value2 === filter.value2) ||
-                (prevFilterBy[0].values !== undefined && prevFilterBy[0].values === filter.values) ||
-                (prevFilterBy[0].valueMap !== undefined && prevFilterBy[0].valueMap === filter.valueMap))
-        );
     }
 }

@@ -6,5 +6,10 @@ export * from './table-view-settings-filter/table-view-settings-filter.component
 
 export * from './dialogs/sorting/sorting.component';
 export * from './dialogs/grouping/grouping.component';
-export * from './dialogs/filtering/filter-by-step.component';
 export * from './dialogs/filtering/filters.component';
+export * from './dialogs/filtering/filters-list-step.component';
+export * from './dialogs/filtering/filter-step.component';
+export * from './dialogs/filtering/filter-single-select.component';
+export * from './dialogs/filtering/filter-multi-select.component';
+export * from './dialogs/filtering/filter-custom.component';
+export * from './dialogs/reset-button/filters-reset-button.component';

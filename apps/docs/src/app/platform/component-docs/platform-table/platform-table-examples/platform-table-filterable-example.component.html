@@ -65,11 +65,14 @@
         type="custom"
         [dialogResponsivePadding]="true"
     >
-        <label>Enter name:</label>
-        <fdp-input
-            type="text"
-            name="name"
-        ></fdp-input>
+        <ng-container *fdpViewSettingsFilterCustomDef="let model">
+            <label>Enter name:</label>
+            <fdp-input
+                type="text"
+                name="name"
+                [(ngModel)]="model.name"
+            ></fdp-input>
+        </ng-container>
     </fdp-table-view-settings-filter>
 
     <fdp-table-view-settings-filter
@@ -78,23 +81,27 @@
         type="custom"
         [dialogResponsivePadding]="true"
     >
-        <label>Minimum Price:</label>
-        <fdp-input
-            type="number"
-            name="minimumPrice"
-        ></fdp-input>
-        <label>Maximum Price:</label>
-        <fdp-input
-            type="number"
-            name="maximumPrice"
-        ></fdp-input>
+        <ng-container *fdpViewSettingsFilterCustomDef="let model">
+            <label>Minimum Price:</label>
+            <fdp-input
+                type="number"
+                name="minimumPrice"
+                [(ngModel)]="model.min"
+            ></fdp-input>
+            <label>Maximum Price:</label>
+            <fdp-input
+                type="number"
+                name="maximumPrice"
+                [(ngModel)]="model.max"
+            ></fdp-input>
+        </ng-container>
     </fdp-table-view-settings-filter>
 
     <fdp-table-view-settings-filter
         column="status"
         label="Status"
         type="single-select"
-        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]"
+        [values]="statusSingleSelectValues"
     >
     </fdp-table-view-settings-filter>
 
@@ -102,7 +109,7 @@
         column="status"
         label="Status 2"
         type="multi-select"
-        [values]="[{value: 'OUT_OF_STOCK', label: 'out of stock'}, { value: 'AVAILABLE', label: 'available'}]"
+        [values]="statusMultiSelectValues"
     >
     </fdp-table-view-settings-filter>
 </fdp-table-view-settings-dialog>

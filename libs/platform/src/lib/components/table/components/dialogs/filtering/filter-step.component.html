@@ -1,0 +1,84 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <button
+                        fd-button
+                        compact="true"
+                        fdType="transparent"
+                        glyph="navigation-left-arrow"
+                        (click)="back.emit()"
+                    ></button>
+                    <h5 fd-title>Filter by: {{ filter.label }}</h5>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fdp-filters-reset-button></fdp-filters-reset-button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+
+        <ng-container [ngSwitch]="filter.type">
+            <ng-container *ngSwitchCase="FILTER_TYPE.SINGLE">
+                <fdp-filter-single-select
+                    [options]="filter.values"
+                    [filterBy]="_filterBy"
+                    (valueChange)="_onFilterValueChange($event)"
+                ></fdp-filter-single-select>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="FILTER_TYPE.MULTI">
+                <fdp-filter-multi-select
+                    [options]="filter.values"
+                    [filterBy]="_filterBy"
+                    (valueChange)="_onFilterValueChange($event)"
+                ></fdp-filter-multi-select>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="FILTER_TYPE.CUSTOM">
+                <fdp-filter-custom
+                    [filter]="filter"
+                    [filterBy]="_filterBy"
+                    (valueChange)="_onFilterValueChange($event)"
+                ></fdp-filter-custom>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="FILTER_TYPE.CATEGORY">
+                Categories list is not implemented
+            </ng-container>
+        </ng-container>
+
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                label="OK"
+                [compact]="true"
+                (click)="confirm.emit()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                fd-initial-focus
+                label="Cancel"
+                [compact]="true"
+                (click)="cancel.emit()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

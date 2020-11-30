@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core';
 
 import { SelectionValue } from '../../interfaces';
 import { FilterType } from '../../enums';
+import { FdpViewSettingsFilterCustomDef } from '../../directives';
 
 /**
  * View settings dialog component.
@@ -23,7 +24,7 @@ import { FilterType } from '../../enums';
  * */
 @Component({
     selector: 'fdp-table-view-settings-filter',
-    template: '<ng-template><ng-content></ng-content></ng-template>',
+    template: '',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableViewSettingsFilterComponent {
@@ -54,4 +55,7 @@ export class TableViewSettingsFilterComponent {
     /** @hidden */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
+
+    @ContentChild(FdpViewSettingsFilterCustomDef)
+    filterCustomDef: FdpViewSettingsFilterCustomDef;
 }

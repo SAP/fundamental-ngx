@@ -1,8 +1,4 @@
-import {
-    CollectionDateFilterStrategy,
-    CollectionNumberFilterStrategy,
-    CollectionStringFilterStrategy
-} from '../enums';
+import { CollectionDateFilterStrategy, CollectionNumberFilterStrategy, CollectionStringFilterStrategy } from '../enums';
 
 export interface CollectionStringFilter {
     field: string;
@@ -32,15 +28,16 @@ export interface CollectionBooleanFilter {
 
 export interface CollectionSelectFilter {
     field: string;
-    values: string[] | number[];
+    value: any[];
 }
 
 export interface CollectionCustomFilter {
     field: string;
-    valueMap: Map<string, any>;
+    value: Map<string, any>;
 }
 
-export type CollectionFilter = CollectionStringFilter
+export type CollectionFilter =
+    | CollectionStringFilter
     | CollectionNumberFilter
     | CollectionDateFilter
     | CollectionSelectFilter

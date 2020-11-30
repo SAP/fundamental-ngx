@@ -3,25 +3,18 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1 fd-title>Filter</h1>
+                    <h5 fd-title>Filter</h5>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        [compact]="true"
-                        label="Reset"
-                        (click)="reset()"
-                        [disabled]="true"
-                    ></button>
+                    <fdp-filters-reset-button></fdp-filters-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
     </fd-dialog-header>
 
-    <fd-dialog-body class="no-paddings">
+    <fd-dialog-body>
         <ul
             fd-list
             compact="true"
@@ -35,12 +28,9 @@
             >
                 <a
                     fd-list-link
-                    (click)="nextStep(filter)"
+                    (click)="selectFilter.emit(filter)"
                 >
-                    <span
-                        fd-list-title
-                        [innerText]="filter.label"
-                    ></span>
+                    <span fd-list-title>{{filter.label}}</span>
                 </a>
             </li>
         </ul>
@@ -54,7 +44,7 @@
                 fd-dialog-decisive-button
                 label="OK"
                 [compact]="true"
-                (click)="confirm()"
+                (click)="confirm.emit()"
             >
             </button>
         </fd-dialog-footer-button>
@@ -67,7 +57,7 @@
                 fd-initial-focus
                 label="Cancel"
                 [compact]="true"
-                (click)="cancel()"
+                (click)="cancel.emit()"
             >
             </button>
         </fd-dialog-footer-button>

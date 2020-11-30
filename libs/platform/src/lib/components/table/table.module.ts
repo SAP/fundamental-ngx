@@ -20,21 +20,31 @@ import { PlatformInputModule } from '../form/input/fdp-input.module';
 import { PlatformButtonModule } from '../button/button.module';
 import { PlatformSearchFieldModule } from '../search-field/search-field.module';
 
-import { TableService } from './table.service';
 import { TableComponent } from './table.component';
 import {
     GroupingComponent,
     SortingComponent,
+    FiltersComponent,
+    FiltersListStepComponent,
+    FilterStepComponent,
+    FilterSingleSelectComponent,
+    FilterMultiSelectComponent,
+    FilterCustomComponent,
+    FiltersResetButtonComponent,
     TableColumnComponent,
     TableToolbarActionsComponent,
     TableToolbarComponent,
     TableViewSettingsDialogComponent,
     TableViewSettingsFilterComponent
 } from './components';
-import { FdpCellDef, FdpHeaderCellDef, FdpTableCell, FdpTableHeader } from './directives';
+import {
+    FdpCellDef,
+    FdpHeaderCellDef,
+    FdpTableCell,
+    FdpTableHeader,
+    FdpViewSettingsFilterCustomDef
+} from './directives';
 import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
-import { FilterByStepComponent } from './components/dialogs/filtering/filter-by-step.component';
-import { FiltersComponent } from './components/dialogs/filtering/filters.component';
 
 @NgModule({
     imports: [
@@ -72,14 +82,20 @@ import { FiltersComponent } from './components/dialogs/filtering/filters.compone
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
+        FdpViewSettingsFilterCustomDef,
         TableSortByPipe,
         TableFilterPipe,
         CellValueByPipe,
 
         SortingComponent,
         GroupingComponent,
-        FilterByStepComponent,
-        FiltersComponent
+        FiltersComponent,
+        FiltersListStepComponent,
+        FilterStepComponent,
+        FilterSingleSelectComponent,
+        FilterMultiSelectComponent,
+        FilterCustomComponent,
+        FiltersResetButtonComponent
     ],
     exports: [
         TableComponent,
@@ -94,8 +110,8 @@ import { FiltersComponent } from './components/dialogs/filtering/filters.compone
         TableViewSettingsFilterComponent,
         TableSortByPipe,
         TableFilterPipe,
-        CellValueByPipe
-    ],
-    providers: [TableService, TableSortByPipe]
+        CellValueByPipe,
+        FdpViewSettingsFilterCustomDef
+    ]
 })
 export class PlatformTableModule {}

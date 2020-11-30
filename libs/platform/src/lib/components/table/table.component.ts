@@ -35,10 +35,13 @@ import {
 } from '@fundamental-ngx/core';
 
 import { isDataSource } from '../../domain';
+import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
 import {
-    FilterByStepComponent,
+    FiltersComponent,
+    FiltersDialogData,
+    FiltersDialogResultData,
     GroupingComponent,
     SortingComponent,
     TableColumnComponent,
@@ -58,7 +61,6 @@ import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, Select
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 
-import { getNestedValue } from '../../utils/object';
 import { SearchInput } from '../search-field/public_api';
 
 export type FdpTableDataSource<T> = TableDataSource<T>; // | T[] | Observable<T>;
@@ -436,11 +438,14 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
 
     /** @hidden */
     filter(field: string, value: string): void {
-        this._tableService.filter({
-            field: field,
-            value: value,
-            strategy: CollectionStringFilterStrategy.CONTAINS
-        } as CollectionFilter);
+        this._tableService.filter([
+            {
+                field: field,
+                value: value,
+                strategy: CollectionStringFilterStrategy.CONTAINS
+            } as CollectionFilter
+        ]);
+
         this._popoverOpen = false;
     }
 
@@ -499,25 +504,25 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     openFilteringDialog(): void {
         const state = this._tableService.tableState$.getValue();
+        const data: FiltersDialogData = {
+            viewSettingsFilters: this.viewSettingsFilters.toArray(),
+            filterBy: state?.filterBy
+        };
 
-        const dialogRef = this._dialogService.open(FilterByStepComponent, {
+        const dialogRef = this._dialogService.open(FiltersComponent, {
             responsivePadding: false,
             verticalPadding: false,
             minWidth: '30%',
             minHeight: '50%',
-            data: {
-                filters: this.viewSettingsFilters,
-                filterBy: state?.filterBy
-            }
+            data: data
         } as DialogConfig);
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe(({ action, value }) => {
-                if (!action && !value) {
+            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: FiltersDialogResultData) => {
+                if (!Array.isArray(result?.filterBy)) {
                     return;
                 }
-
-                this._tableService.filter(value);
+                this._tableService.filter(result.filterBy);
             })
         );
     }

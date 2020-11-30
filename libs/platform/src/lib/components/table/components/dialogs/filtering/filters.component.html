@@ -1,159 +1,20 @@
-<fd-dialog>
-    <fd-dialog-header>
-        <ng-template fdTemplate="header">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    <button
-                        fd-button
-                        compact="true"
-                        fdType="transparent"
-                        glyph="navigation-left-arrow"
-                        (click)="back()"
-                    ></button>
-                    <h1 fd-title>Filter by: {{ filter.label }}</h1>
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        compact="true"
-                        label="Reset"
-                        (click)="reset()"
-                        [disabled]="!_isFiltersChanged()"
-                    ></button>
-                </fd-bar-element>
-            </div>
-        </ng-template>
-    </fd-dialog-header>
-
-    <fd-dialog-body>
-
-        <ng-container [ngSwitch]="filter.type">
-            <ng-container *ngSwitchCase="FILTER_TYPE.SINGLE">
-                <ng-container
-                    [ngTemplateOutlet]="singleSelectFilters"
-                    [ngTemplateOutletContext]="{values: filter.values}"
-                ></ng-container>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="FILTER_TYPE.MULTI">
-                <ng-container
-                    [ngTemplateOutlet]="multiSelectFilters"
-                    [ngTemplateOutletContext]="{values: filter.values}"
-                ></ng-container>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="FILTER_TYPE.CUSTOM">
-                <ng-container
-                    [ngTemplateOutlet]="customFilters"
-                    [ngTemplateOutletContext]="{filter: filter}"
-                ></ng-container>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="FILTER_TYPE.CATEGORY">
-                <ng-container [ngTemplateOutlet]="categoryFilters"></ng-container>
-            </ng-container>
-        </ng-container>
-
-    </fd-dialog-body>
-
-    <fd-dialog-footer>
-        <fd-dialog-footer-button>
-            <button
-                fd-button
-                fdType="emphasized"
-                fd-dialog-decisive-button
-                label="OK"
-                [compact]="true"
-                (click)="confirm()"
-            >
-            </button>
-        </fd-dialog-footer-button>
-
-        <fd-dialog-footer-button>
-            <button
-                fd-button
-                fdType="transparent"
-                fd-dialog-decisive-button
-                fd-initial-focus
-                label="Cancel"
-                [compact]="true"
-                (click)="cancel()"
-            >
-            </button>
-        </fd-dialog-footer-button>
-    </fd-dialog-footer>
-</fd-dialog>
-
-
-<!-- Single select filter template -->
-<ng-template
-    #singleSelectFilters
-    let-values="values"
->
-    <fd-form-group>
-        <ul
-            fd-list
-            compact="true"
-            selection="true"
-        >
-            <li
-                fd-list-item
-                *ngFor="let filter of values"
-                [selected]="filter.selected"
-            >
-                <fd-radio-button
-                    [(ngModel)]="filter.selected"
-                    compact="true"
-                    [name]="id"
-                    [value]="filter.value"
-                ></fd-radio-button>
-                <span
-                    fd-list-title
-                    [innerText]="filter.label"
-                ></span>
-            </li>
-        </ul>
-    </fd-form-group>
-</ng-template>
-
-<!-- Multiple select filter template -->
-<ng-template
-    #multiSelectFilters
-    let-values="values"
->
-    <ul
-        fd-list
-        compact="true"
-        selection="true"
-    >
-        <li
-            fd-list-item
-            *ngFor="let filter of values"
-            [selected]="filter.selected"
-        >
-            <fd-checkbox
-                [(ngModel)]="filter.selected"
-                compact="true"
-            ></fd-checkbox>
-            <span
-                fd-list-title
-                [innerText]="filter.label"
-            ></span>
-        </li>
-    </ul>
-</ng-template>
-
-<!-- Custom filter template -->
-<ng-template
-    #customFilters
-    let-filter="filter"
->
-    <ng-container [ngTemplateOutlet]="filter.contentTemplateRef"></ng-container>
-</ng-template>
-
-<!-- Category filter template -->
-<ng-template #categoryFilters>
-</ng-template>
+<ng-container [ngSwitch]="activeStep">
+    <ng-container *ngSwitchCase="ACTIVE_STEP.SELECT_FILTER">
+        <fdp-filters-list-step
+            [filters]="viewSettingsFilters"
+            (selectFilter)="selectFilter($event)"
+            (confirm)="confirm()"
+            (cancel)="cancel()"
+        ></fdp-filters-list-step>
+    </ng-container>
+    <ng-container *ngSwitchCase="ACTIVE_STEP.FILTER">
+        <fdp-filter-step
+            [filter]="activeFilter"
+            [filterBy]="filterBy"
+            (back)="goToFilters()"
+            (valueChange)="applyFilter($event)"
+            (confirm)="confirm()"
+            (cancel)="cancel()"
+        ></fdp-filter-step>
+    </ng-container>
+</ng-container>

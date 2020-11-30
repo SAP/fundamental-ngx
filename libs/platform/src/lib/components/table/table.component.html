@@ -51,6 +51,7 @@
                                         style="width: 100%"
                                         fd-table-popover
                                         [noArrow]="true"
+                                        [disabled]="!(column.sortable || column.groupable || column.freezable || column.filterable)"
                                     >
                                         <fd-popover-control
                                             fd-table-inner
@@ -76,38 +77,39 @@
                                                 [noBorder]="true"
                                                 [compact]="true"
                                             >
-                                                <li
-                                                    *ngIf="column.sortable"
-                                                    fd-list-item
-                                                    (click)="sort(column.key, _sortDirections.ASC)"
-                                                    (keyup.enter)="sort(column.key, _sortDirections.ASC)"
-                                                >
-                                                    <span
-                                                        fd-list-icon
-                                                        glyph="sort-ascending"
-                                                    ></span>
-                                                    <span
-                                                        fd-list-title
-                                                        i18n="@@platformTableHeaderMenuSortAsc"
-                                                    >Sort Ascending</span>
-                                                </li>
+                                                <!-- Sorting -->
+                                                <ng-container *ngIf="column.sortable">
+                                                    <li
+                                                        fd-list-item
+                                                        (click)="sort(column.key, _sortDirections.ASC)"
+                                                        (keyup.enter)="sort(column.key, _sortDirections.ASC)"
+                                                    >
+                                                        <span
+                                                            fd-list-icon
+                                                            glyph="sort-ascending"
+                                                        ></span>
+                                                        <span
+                                                            fd-list-title
+                                                            i18n="@@platformTableHeaderMenuSortAsc"
+                                                        >Sort Ascending</span>
+                                                    </li>
+                                                    <li
+                                                        fd-list-item
+                                                        (click)="sort(column.key, _sortDirections.DESC)"
+                                                        (keyup.enter)="sort(column.key, _sortDirections.DESC)"
+                                                    >
+                                                        <span
+                                                            fd-list-icon
+                                                            glyph="sort-descending"
+                                                        ></span>
+                                                        <span
+                                                            fd-list-title
+                                                            i18n="@@platformTableHeaderMenuSortDesc"
+                                                        >Sort Descending</span>
+                                                    </li>
+                                                </ng-container>
 
-                                                <li
-                                                    *ngIf="column.sortable"
-                                                    fd-list-item
-                                                    (click)="sort(column.key, _sortDirections.DESC)"
-                                                    (keyup.enter)="sort(column.key, _sortDirections.DESC)"
-                                                >
-                                                    <span
-                                                        fd-list-icon
-                                                        glyph="sort-descending"
-                                                    ></span>
-                                                    <span
-                                                        fd-list-title
-                                                        i18n="@@platformTableHeaderMenuSortDesc"
-                                                    >Sort Descending</span>
-                                                </li>
-
+                                                <!-- Grouping -->
                                                 <li
                                                     *ngIf="column.groupable"
                                                     fd-list-item
@@ -121,67 +123,64 @@
                                                     >Group</span>
                                                 </li>
 
-                                                <li
-                                                    fd-list-item
-                                                    *ngIf="!_freezableColumns?.includes(column.key)"
-                                                    (click)="freezeTo(column.key)"
-                                                    (keyup.enter)="freezeTo(column.key)"
-                                                >
-                                                    <span></span>
-                                                    <span
-                                                        fd-list-title
-                                                        i18n="@@platformTableHeaderMenuFreeze"
-                                                    >Freeze</span>
-                                                </li>
-                                                <li
-                                                    fd-list-item
-                                                    *ngIf="_freezableColumns?.includes(column.key)"
-                                                    (click)="unfreeze(column.key)"
-                                                    (keyup.enter)="unfreeze(column.key)"
-                                                >
-                                                    <span></span>
-                                                    <span
-                                                        fd-list-title
-                                                        i18n="@@platformTableHeaderMenuUnfreeze"
-                                                    >Unfreeze</span>
-                                                </li>
-
-                                                <li
-                                                    fd-list-item
-                                                    *ngIf="column.filterable"
-                                                >
-                                                    <i
-                                                        fd-list-icon
-                                                        glyph="filter"
-                                                    ></i>
-                                                    <div
-                                                        fd-form-item
-                                                        [horizontal]="true"
-                                                        (click)="$event.stopPropagation()"
+                                                <!-- Freeze -->
+                                                <ng-container *ngIf="column.freezable">
+                                                    <li
+                                                        fd-list-item
+                                                        *ngIf="!_freezableColumns?.includes(column.key)"
+                                                        (click)="freezeTo(column.key)"
+                                                        (keyup.enter)="freezeTo(column.key)"
                                                     >
-                                                        <label
-                                                            fd-form-label
-                                                            [for]="column.name + colIdx"
-                                                            i18n="@@platformTableHeaderMenuFilter"
-                                                        >Filter</label>
-                                                        <input
-                                                            fd-form-control
-                                                            [compact]="true"
-                                                            [id]="column.name + colIdx"
-                                                            (keyup.enter)="filter(column.key, $event.target.value)"
+                                                        <span></span>
+                                                        <span
+                                                            fd-list-title
+                                                            i18n="@@platformTableHeaderMenuFreeze"
+                                                        >Freeze</span>
+                                                    </li>
+                                                    <li
+                                                        fd-list-item
+                                                        *ngIf="_freezableColumns?.includes(column.key)"
+                                                        (click)="unfreeze(column.key)"
+                                                        (keyup.enter)="unfreeze(column.key)"
+                                                    >
+                                                        <span></span>
+                                                        <span
+                                                            fd-list-title
+                                                            i18n="@@platformTableHeaderMenuUnfreeze"
+                                                        >Unfreeze</span>
+                                                    </li>
+                                                </ng-container>
+
+                                                <!-- Filtering -->
+                                                <ng-container *ngIf="column.filterable">
+                                                    <li fd-list-item>
+                                                        <i
+                                                            fd-list-icon
+                                                            glyph="filter"
+                                                        ></i>
+                                                        <div
+                                                            fd-form-item
+                                                            [horizontal]="true"
+                                                            (click)="$event.stopPropagation()"
                                                         >
-                                                    </div>
-                                                </li>
+                                                            <label
+                                                                fd-form-label
+                                                                [for]="column.name + colIdx"
+                                                                i18n="@@platformTableHeaderMenuFilter"
+                                                            >Filter</label>
+                                                            <input
+                                                                fd-form-control
+                                                                [compact]="true"
+                                                                [id]="column.name + colIdx"
+                                                                (keyup.enter)="filter(column.key, $event.target.value)"
+                                                            >
+                                                        </div>
+                                                    </li>
+                                                </ng-container>
+
                                             </ul>
                                         </fd-popover-body>
                                     </fd-popover>
-
-                                    <!--<ng-container *ngIf="!doesColumnHasPopover(column)">
-                                        <ng-container *ngIf="column?.fdpHeaderCellDef?.templateRef; else defaultTableHeaderCellTemplate">
-                                            <ng-container *ngTemplateOutlet="column.fdpHeaderCellDef.templateRef">
-                                            </ng-container>
-                                        </ng-container>
-                                    </ng-container>-->
                                 </th>
 
                                 <ng-template #defaultTableHeaderCellTemplate>{{ column.label }}</ng-template>
