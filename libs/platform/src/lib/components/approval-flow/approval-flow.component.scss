@@ -11,14 +11,16 @@
     position: relative;
     overflow: hidden;
     padding-left: 2rem;
+    padding-top: 0.5rem;
 }
 
 .approval-flow-carousel-controls {
     position: absolute;
     display: flex;
     align-items: center;
-    width: calc(100% + 0rem);
+    width: 100%;
     height: 94px;
+    padding-top: 0.5rem;
     left: 0;
 
     button {
@@ -71,15 +73,24 @@
             position: absolute;
             top: 48px;
             height: calc(100% - 111px);
-            border-right: 1px solid grey;
         }
 
-        &.vertical-line-before:before {
-            left: -2rem;
+        &.vertical-line-before {
+            &:before {
+                border-right: 1px solid #89919A;
+                left: -2rem;
+            }
         }
 
-        &.vertical-line-after:after {
-            right: -2rem;
+        &.vertical-line-after {
+            &:after {
+                border-right: 2px dashed #89919A;
+                right: -2rem;
+            }
+
+            &--solid:after {
+                border-right: 1px solid #89919A;
+            }
         }
     }
 

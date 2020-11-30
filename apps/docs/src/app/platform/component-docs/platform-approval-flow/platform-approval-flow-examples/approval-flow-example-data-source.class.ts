@@ -231,7 +231,7 @@ const mediumComplexityGraph: ApprovalProcess = {
             id: 'ID222',
             name: 'node name',
             description: 'Marketing team',
-            approvers: [getRandomUser(), getRandomUser()],
+            approvers: [getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser()],
             status: 'in progress',
             targets: [],
             dueDate: new Date(),
@@ -308,7 +308,7 @@ const complexGraph: ApprovalProcess = {
             name: 'node name',
             description: 'node description',
             approvers: [getRandomUser()],
-            status: 'approved',
+            status: 'in progress',
             targets: [],
             dueDate: new Date(),
             createDate: new Date()
@@ -353,8 +353,8 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
     fetch(): Observable<ApprovalProcess> {
         // return of(twoNodesGraph);
         // return of(simplestGraph);
-        return of(mediumComplexityGraph);
-        // return of(complexGraph);
+        // return of(mediumComplexityGraph);
+        return of(complexGraph);
     }
 
     fetchUser(id: string): Observable<any> {

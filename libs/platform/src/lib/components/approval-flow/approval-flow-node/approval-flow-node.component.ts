@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core';
 
 import { ApprovalNode, ApprovalStatus } from '../interfaces';
@@ -44,9 +44,11 @@ export class ApprovalFlowNodeComponent implements OnInit {
     @HostBinding('class.parent-approved-node')
     _isParentApproved = false;
 
+    _status: ObjectStatus;
+
     @Output() onNodeClick = new EventEmitter<void>();
 
-    _status: ObjectStatus;
+    constructor(private elRef: ElementRef) {}
 
     ngOnInit(): void {
         this._status = getNodeStatusClass(this.node.status);
@@ -59,6 +61,14 @@ export class ApprovalFlowNodeComponent implements OnInit {
 
     openDialog(): void {
         this.onNodeClick.emit();
+    }
+
+    focus(): void {
+        this.nativeElement.focus({ preventScroll: true });
+    }
+
+    get nativeElement(): HTMLElement {
+        return this.elRef.nativeElement;
     }
 
 }
