@@ -10,6 +10,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { API_FILES } from '../../api-files';
 import { PlatformDynamicPageDocsComponent } from './platform-dynamic-page-docs.component';
 import { PlatformDynamicPageExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-example.component';
+import { PlatformDynamicPageNonCollapsibleExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component';
 import { PlatformDynamicPageResponsivePaddingExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component';
 import { PlatformDynamicPageSnapScrollExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component';
 import { PlatformDynamicPageTabbedExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-tabbed-example.component';
@@ -44,7 +45,8 @@ const routes: Routes = [
         PlatformDynamicPageExampleComponent,
         PlatformDynamicPageSnapScrollExampleComponent,
         PlatformDynamicPageTabbedExampleComponent,
-        PlatformDynamicPageResponsivePaddingExampleComponent
+        PlatformDynamicPageResponsivePaddingExampleComponent,
+        PlatformDynamicPageNonCollapsibleExampleComponent,
     ]
 })
-export class PlatformDynamicPageDocsModule {}
+export class PlatformDynamicPageDocsModule { }
