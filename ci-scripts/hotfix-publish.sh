@@ -4,6 +4,7 @@ set -u -e
 
 source .ci-env/flags.sh
 
+PACKAGES=(core platform)
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
 OLD_TAG=$(git describe --tags --abbrev=0)
 
