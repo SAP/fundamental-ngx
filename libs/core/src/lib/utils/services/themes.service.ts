@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
+
 export interface ThemeServiceOutput {
     themeUrl: SafeResourceUrl;
     customThemeUrl: SafeResourceUrl;
@@ -63,7 +65,12 @@ export class ThemesService {
      * By default it's `theme`.
      **/
     setThemeByRoute(themeParamName?: string): void {
-        const paramName = themeParamName || 'theme'
+        const paramName = themeParamName || 'theme';
+
+        if (!this._activatedRoute) {
+            throw new Error(THEME_SWITCHER_ROUTER_MISSING_ERROR);
+        }
+
         this._activatedRoute.queryParams
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(param => this.onThemeQueryParamChange.next({
