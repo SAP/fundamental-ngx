@@ -5,7 +5,7 @@ set -u -e
 source .ci-env/flags.sh
 
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
-OLD_TAG=$(git describe)
+OLD_TAG=$(git describe --tags --abbrev=0)
 
 git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
@@ -34,7 +34,7 @@ else
    exit 1
 fi
 
-git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" release_tag > /dev/null;
+git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $release_tag > /dev/null;
 npm run build-deploy-library
 
 cd dist/libs
