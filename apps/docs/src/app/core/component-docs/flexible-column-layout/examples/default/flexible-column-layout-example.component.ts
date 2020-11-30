@@ -19,8 +19,6 @@ export class FlexibleColumnLayoutExampleComponent {
      */
     fullscreen = false;
 
-    constructor() {}
-
     /**
      * documentation related property
      * sets the initial layout of the component to 'OneColumnStartFullScreen'
@@ -40,7 +38,6 @@ export class FlexibleColumnLayoutExampleComponent {
     changeLayout(newValue: string): void {
         this.localLayout = newValue;
     }
-
 
     /**
      * documentation related function

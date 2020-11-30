@@ -28,9 +28,9 @@ import {
   SM_SCREEN_SIZE,
   MD_SCREEN_SIZE,
   LG_SCREEN_SIZE,
-  XL_SCREEN_SIZE,
   ScreenSize,
-  Layout,
+  FlexibleColumnLayout,
+  FlexibleColumnSettings,
   ColumnSeparatorValue
 } from './constants';
   
@@ -76,34 +76,27 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
    * 'ThreeColumnsStartMinimized' | 'ThreeColumnsEndMinimized'
    */
   @Input()
-  layout: Layout = ONE_COLUMN_START_FULL_SCREEN;
+  layout: FlexibleColumnLayout = ONE_COLUMN_START_FULL_SCREEN;
 
   /**
    * the event emitted on layout value cchange
    */
   @Output()
-  layoutChange: EventEmitter<Layout> = new EventEmitter<Layout>();
+  layoutChange: EventEmitter<FlexibleColumnLayout> = new EventEmitter<FlexibleColumnLayout>();
 
   /**
-   * user defined break point for MD screens
-   * the default (Fiori 3) value is 599
+   * user defined break point for SM screens
+   * the default (Fiori 3) value is 960
    */
   @Input()
-  mdBreakPoint = 599;
+  smBreakPoint = 960;
 
   /**
    * user defined break point for LG screens
-   * the default (Fiori 3) value is 1023
+   * the default (Fiori 3) value is 1280
    */
   @Input()
-  lgBreakPoint = 1023;
-
-  /**
-   * user defined break point for XL screens
-   * the default (Fiori 3) value is 1439
-   */
-  @Input()
-  xlBreakPoint = 1439;
+  lgBreakPoint = 1280;
 
   /**
    * user defined onResize function
@@ -132,7 +125,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
    * allows to keep track of the previos layout 
    * so we can go back to it on window resize
    */
-  private _previousLayout: Layout = this.layout;
+  private _previousLayout: FlexibleColumnLayout = this.layout;
 
   /** @hidden */
   private _screenSize: ScreenSize = LG_SCREEN_SIZE;
@@ -144,7 +137,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
    * @hidden 
    * mappting of the layout name and the column layout in %
    */
-  private _layouts = {
+  private _layouts: {[key: string]: FlexibleColumnSettings} = {
     OneColumnStartFullScreen: { start: 100, mid: 0, end: 0 },
     OneColumnMidFullScreen: { start: 0, mid: 100, end: 0 },
     OneColumnEndFullScreen: { start: 0, mid: 0, end: 100 },
@@ -205,11 +198,9 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
    * format depending on the window size in px
    */
   private _getScreenSize(size: number): ScreenSize {
-    if (size > this.xlBreakPoint) {
-      return XL_SCREEN_SIZE;
-    } else if (size > this.lgBreakPoint && size <= this.xlBreakPoint) {
+    if (size > this.lgBreakPoint) {
       return LG_SCREEN_SIZE;
-    } else if (size > this.mdBreakPoint && size <= this.lgBreakPoint) {
+    } else if (size > this.smBreakPoint && size <= this.lgBreakPoint) {
       return MD_SCREEN_SIZE;
     } else {
       return SM_SCREEN_SIZE;
@@ -248,7 +239,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
           this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
       }
 
-      if (this._screenSize === LG_SCREEN_SIZE || this._screenSize === XL_SCREEN_SIZE) {
+      if (this._screenSize === LG_SCREEN_SIZE) {
           this._updateCurrentLayout(THREE_COLUMNS_END_EXPANDED);
       }
       break;
@@ -260,7 +251,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
           this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
       }
 
-      if (this._screenSize === LG_SCREEN_SIZE || this._screenSize === XL_SCREEN_SIZE) {
+      if (this._screenSize === LG_SCREEN_SIZE) {
           this._updateCurrentLayout(THREE_COLUMNS_MID_EXPANDED);
       }
       break;
@@ -272,7 +263,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
           this._updateCurrentLayout(ONE_COLUMN_END_FULL_SCREEN);
       }
 
-      if (this._screenSize === LG_SCREEN_SIZE || this._screenSize === XL_SCREEN_SIZE) {
+      if (this._screenSize === LG_SCREEN_SIZE) {
           this._updateCurrentLayout(THREE_COLUMNS_END_MINIMIZED);
       }
       break;
@@ -328,16 +319,12 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
    */
   private _getLeftColumnSeparatorValue(): ColumnSeparatorValue {
     switch (this.layout) {
-      case ONE_COLUMN_START_FULL_SCREEN : return null;
-      case ONE_COLUMN_MID_FULL_SCREEN : return null;
-      case ONE_COLUMN_END_FULL_SCREEN : return null;
       case TWO_COLUMNS_START_EXPANDED : return 'left';
-      case TWO_COLUMNS_MID_EXPANDED : return 'right';
-      case TWO_COLUMNS_END_EXPANDED : return null;
-      case THREE_COLUMNS_MID_EXPANDED : return 'right';
-      case THREE_COLUMNS_END_EXPANDED : return null;
-      case THREE_COLUMNS_END_MINIMIZED : return 'right';
+      case TWO_COLUMNS_MID_EXPANDED :
+      case THREE_COLUMNS_MID_EXPANDED :
+      case THREE_COLUMNS_END_MINIMIZED :
       case THREE_COLUMNS_START_MINIMIZED : return 'right';
+      default: return null;
     }
   }
 
@@ -348,16 +335,12 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
    */
   private _getRightColumnSeparatorValue(): ColumnSeparatorValue {
     switch (this.layout) {
-      case ONE_COLUMN_START_FULL_SCREEN : return null;
-      case ONE_COLUMN_MID_FULL_SCREEN : return null;
-      case ONE_COLUMN_END_FULL_SCREEN : return null;
-      case TWO_COLUMNS_START_EXPANDED : return null;
-      case TWO_COLUMNS_MID_EXPANDED : return null;
-      case TWO_COLUMNS_END_EXPANDED : return 'right';
-      case THREE_COLUMNS_MID_EXPANDED : return 'left';
+      case TWO_COLUMNS_END_EXPANDED :
       case THREE_COLUMNS_END_EXPANDED : return 'right';
-      case THREE_COLUMNS_END_MINIMIZED : return 'left';
+      case THREE_COLUMNS_MID_EXPANDED :
+      case THREE_COLUMNS_END_MINIMIZED :
       case THREE_COLUMNS_START_MINIMIZED : return 'left';
+      default: return null;
     }
   }
 
@@ -379,7 +362,7 @@ export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, 
    * emits an event
    * makes a call to the helper function that will update the column layout and the separators
    */
-  private _updateCurrentLayout(newLayout: Layout): void {
+  private _updateCurrentLayout(newLayout: FlexibleColumnLayout): void {
     this.layout = newLayout;
     this._updateColumnLayoutParameters();
     

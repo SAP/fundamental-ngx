@@ -13,11 +13,12 @@ export const THREE_COLUMNS_END_MINIMIZED = 'ThreeColumnsEndMinimized';
 export const SM_SCREEN_SIZE = 'sm';
 export const MD_SCREEN_SIZE = 'md';
 export const LG_SCREEN_SIZE = 'lg';
-export const XL_SCREEN_SIZE = 'xl';
 
-export type ScreenSize = 'sm' | 'md' | 'lg' | 'xl';
+export type ScreenSize = 'sm' | 'md' | 'lg';
 
-export type Layout = 'OneColumnStartFullScreen' | 
+export type FlexibleColumnLayout = 'OneColumnStartFullScreen' | 
 'OneColumnMidFullScreen' | 'OneColumnEndFullScreen' | 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' | 'TwoColumnsEndExpanded' | 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' | 'ThreeColumnsEndMinimized';
 
 export type ColumnSeparatorValue = 'right' | 'left' | null;
+
+export interface FlexibleColumnSettings { start: number; mid: number; end: number; }

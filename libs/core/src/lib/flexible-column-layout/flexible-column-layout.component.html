@@ -1,9 +1,8 @@
 <div 
     class="fd-flexible-column-layout"
-    [ngClass]="{
-        'fd-flexible-column-layout--translucent': backgroundDesign==='translucent', 
-        'fd-flexible-column-layout--transparent': backgroundDesign==='transparent'
-    }">
+    [class.fd-flexible-column-layout--translucent]="backgroundDesign==='translucent'"
+    [class.fd-flexible-column-layout--transparent]="backgroundDesign==='transparent'"
+>
     <!-- Start/Left/First Column -->
     <div 
         *ngIf="_columnLayout.start !== 0"
