@@ -51,11 +51,10 @@ do
     if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
       echo publishing "${P}"
       if [[ $latest == "true" ]]; then
-        echo LATEST
+        $NPM_BIN  publish --access public
       else
-        echo NON-LATEST
+        $NPM_BIN  publish --tag archive --access public
       fi
-#      $NPM_BIN  publish --tag archive --access public
     fi
     cd ..
 done
@@ -63,6 +62,5 @@ done
 cd ../../
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
-    echo Release tag: "{$release_tag}" Old Tag: "{$OLD_TAG}"
-#    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $OLD_TAG
+    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $OLD_TAG
 fi
