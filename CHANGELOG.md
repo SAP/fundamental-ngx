@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.8...v0.25.0-rc.9) (2020-11-30)
+
+
+### Bug Fixes
+
+* (Platform) fix non-collapsible Dynamic Page header ([#3810](https://github.com/SAP/fundamental-ngx/issues/3810)) ([e487705](https://github.com/SAP/fundamental-ngx/commit/e4877055180456079f86f9ef70245351bcef1868))
+
 ## [0.25.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.7...v0.25.0-rc.8) (2020-11-30)
 
 ## [0.25.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.6...v0.25.0-rc.7) (2020-11-30)
