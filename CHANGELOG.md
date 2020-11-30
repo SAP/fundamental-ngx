@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.9...v0.25.0-rc.10) (2020-11-30)
+
+
+### Features
+
+* (Core) introduce Wizard scroll ([#3897](https://github.com/SAP/fundamental-ngx/issues/3897)) ([df20652](https://github.com/SAP/fundamental-ngx/commit/df206525998de08ed6903fc5ada75e77c1ebd487))
+
 ## [0.25.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.8...v0.25.0-rc.9) (2020-11-30)
 
 
