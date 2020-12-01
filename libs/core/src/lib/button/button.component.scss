@@ -9,3 +9,14 @@
         line-height: 1rem;
     }
 }
+
+
+.fd-button * + * {
+  margin-left: .375rem !important;
+}
+
+.fd-button * + [dir=rtl],
+[dir=rtl] .fd-button * + * {
+  margin-left: 0;
+  margin-right: .375rem
+}
