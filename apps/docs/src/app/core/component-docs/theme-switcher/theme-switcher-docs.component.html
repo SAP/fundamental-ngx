@@ -16,8 +16,10 @@
     Setting theme via url
 </fd-docs-section-title>
 <description>
-    Theme can be set by adding property in URL providing name of the theme like in the following example. Parameter is configurable, it can be set by calling <code>setThemeByRoute</code>.
-    See example by adding <code>?customQueryParam=sap_fiori_3_dark</code> to URL.
+    Theme can be set by adding property in URL providing name of the theme like in the following example.
+    Parameter is configurable, it can be set by calling <code>setThemeByRoute</code>.
+    See example by adding <code>?customQueryParam=sap_fiori_3_dark</code> to URL. To make it work properly,
+    you need to have imported <code>RouterModule</code> into the project.
 </description>
 <component-example>
     <fd-theme-url-example (themeChanged)="handleThemeChanged($event)"></fd-theme-url-example>
