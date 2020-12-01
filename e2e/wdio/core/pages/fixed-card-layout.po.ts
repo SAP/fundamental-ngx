@@ -6,7 +6,7 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     root = '#page-content';
 
     hideCardBtnArr = 'fd-fixed-card-layout-examples button';
-    cardDivArr = ' .fd-fixed-card-group--card.ng-star-inserted';
+    cardDivArr = 'div.cdk-drag.fd-fixed-card-group--card.ng-star-inserted';
     cardHeaderArr = 'fd-card fd-card-header';
     cardContentArr = 'fd-card fd-card-content';
     cardColumnArr = 'div.cdk-drop-list';

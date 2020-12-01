@@ -56,72 +56,92 @@ describe('fixed card layout test suite', function() {
         });
 
         it('should drag a card from the header', () => {
-            const cardHeader = webDriver.elementArray(fxdCardLayoutPg.cardHeaderArr);
-            const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-            const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
+            // skip Safari for now due to issue where mouse position resets to 0,0
+            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
+            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
+                console.log('skip');
+            } else {
+                const cardHeader = webDriver.elementArray(fxdCardLayoutPg.cardHeaderArr);
+                const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
+                const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
 
                 webDriver.scrollIntoView(fxdCardLayoutPg.cardHeaderArr, 5000, 0);
                 checkDragAndDrop(cardHeader[0], cardContent[0], cardContent[4]);
                 const newText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 expect(newText).not.toBe(originalFirstCardText);
+            }
         });
 
-        it('should drag a card from the content area', () => {
-            const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
-            const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-            const cardDivArr = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
+        fit('should drag a card from the content area', () => {
+            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
+            if (browser.capabilities.browserName === 'internet explorer') {
+                console.log('skip');
+            } else {
+                const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
+                const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
+                const cardDivArr = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
 
-            webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 5000, 0);
-            checkDragAndDrop(cardContent[0], cardDivArr[0], cardContent[4]);
-            const newText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-            expect(newText).not.toBe(originalFirstCardText);
+                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 5000, 0);
+                checkDragAndDrop(cardContent[0], cardDivArr[0], cardContent[4]);
+                const newText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
+                expect(newText).not.toBe(originalFirstCardText);
+            }
         });
 
         it('should check drag and drop cards swap locations', () => {
-            const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
-            const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
-            const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 0);
-            const originalSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
+            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
+            if (browser.capabilities.browserName === 'internet explorer') {
+                console.log('skip');
+            } else {
+                const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
+                const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
+                const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 0);
+                const originalSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
 
-            webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 5000, 0);
-            checkDragAndDrop(cardContent[0], cards[0], cardContent[4]);
-            const newFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-            const newSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
-            expect(newFirstCardText).not.toBe(originalFirstCardText);
-            expect(newSwapCardText).not.toBe(originalSwapCardText);
-
+                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 5000, 0);
+                checkDragAndDrop(cardContent[0], cards[0], cardContent[4]);
+                const newFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
+                const newSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
+                expect(newFirstCardText).not.toBe(originalFirstCardText);
+                expect(newSwapCardText).not.toBe(originalSwapCardText);
+            }
         });
 
         it('should check placeholder exists on drag', () => {
-            const clickElement = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
-            const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
-            const startLocation = cards[0];
-            const endElementLocation = cards[1];
+            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
+            if (browser.capabilities.browserName === 'internet explorer') {
+                console.log('skip');
+            } else {
+                const clickElement = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
+                const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
+                const startLocation = cards[0];
+                const endElementLocation = cards[1];
 
-            // tslint:disable:radix
-            const clickXLocation = parseInt(clickElement[0].getLocation('x'));
-            const clickYLocation = parseInt(clickElement[0].getLocation('y'));
-            const startXLocation = parseInt(startLocation.getLocation('x'));
-            const startYLocation = parseInt(startLocation.getLocation('y'));
-            const endXLocation = parseInt(endElementLocation.getLocation('x'));
-            const endYLocation = parseInt(endElementLocation.getLocation('y'));
+                // tslint:disable:radix
+                const clickXLocation = parseInt(clickElement[0].getLocation('x'));
+                const clickYLocation = parseInt(clickElement[0].getLocation('y'));
+                const startXLocation = parseInt(startLocation.getLocation('x'));
+                const startYLocation = parseInt(startLocation.getLocation('y'));
+                const endXLocation = parseInt(endElementLocation.getLocation('x'));
+                const endYLocation = parseInt(endElementLocation.getLocation('y'));
 
-            browser.performActions([{
-                'type': 'pointer',
-                'id': 'pointer1',
-                'parameters': { 'pointerType': 'mouse' },
-                'actions': [
-                    { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
-                    { 'type': 'pointerDown', 'button': 0 },
-                    { 'type': 'pause', 'duration': 600 },
-                    { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
-                    { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation, 'y': endYLocation }
-                ]
-            }]);
+                browser.performActions([{
+                    'type': 'pointer',
+                    'id': 'pointer1',
+                    'parameters': { 'pointerType': 'mouse' },
+                    'actions': [
+                        { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
+                        { 'type': 'pointerDown', 'button': 0 },
+                        { 'type': 'pause', 'duration': 600 },
+                        { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
+                        { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation, 'y': endYLocation }
+                    ]
+                }]);
 
-            expect(webDriver.elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
-            expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
-                .toEqual(fxdCardLytData.placeholderBorderStyle);
+                expect(webDriver.elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
+                expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
+                    .toEqual(fxdCardLytData.placeholderBorderStyle);
+            }
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
@@ -198,8 +218,8 @@ describe('fixed card layout test suite', function() {
                 { 'type': 'pointerMove', 'duration': 200, 'x': clickXLocation, 'y': clickYLocation },
                 { 'type': 'pointerDown', 'button': 0 },
                 { 'type': 'pause', 'duration': 600 },
-                { 'type': 'pointerMove', 'duration': 100, 'x': startXLocation, 'y': startYLocation },
-                { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation, 'y': endYLocation },
+                { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
+                { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 5, 'y': endYLocation + 5 },
                 { 'type': 'pointerUp', 'button': 0 }
             ]
         }]);
