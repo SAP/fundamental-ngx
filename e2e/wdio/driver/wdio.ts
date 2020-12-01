@@ -21,7 +21,7 @@ export class Wdio {
     }
 
     click(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
-        // $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].click();
     }
 
@@ -179,13 +179,6 @@ export class Wdio {
         $$(selector)[index].focus();
     }
 
-    mouseButtonDown(button: 0 | 1 | 2  = 0): void {
-        browser.buttonDown(button)
-    }
-
-    mouseButtonUp(button: 0 | 1 | 2  = 0): void {
-        browser.buttonUp(button)
-    }
 }
 
 export const webDriver = new Wdio();
