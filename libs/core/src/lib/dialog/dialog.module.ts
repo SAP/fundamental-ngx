@@ -10,11 +10,6 @@ import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 
 import { DialogService } from './dialog-service/dialog.service';
 import { DialogContainerComponent } from './dialog-container/dialog-container.component';
-import {
-    DialogCloseButtonDirective,
-    DialogDecisiveButtonDirective,
-    DialogTitleDirective
-} from './dialog-utils/dialog-directives';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { BarModule } from '../bar/bar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -22,49 +17,46 @@ import { ResizeModule } from '../utils/directives/resize/resize.module';
 import { TemplateModule } from '../utils/directives/template/template.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
 import { DialogFooterButtonComponent } from './dialog-footer-button/dialog-footer-button.component';
-import { DefaultDialogComponent } from './default-dialog/default-dialog.component';
-import { InitialFocusDirective } from '../utils/directives/initial-focus/initial-focus.directive';
+import { InitialFocusModule } from '../utils/directives/initial-focus/initial-focus.module';
+import { DialogDefaultComponent } from './dialog-default/dialog-default.component';
+import { DialogCloseButtonComponent } from './dialog-close-button/dialog-close-button.component';
+import { DialogDecisiveButtonDirective } from './directives/dialog-decisive-button.directive';
+import { TitleModule } from '../title/title.module';
+
+const declarations = [
+    DialogComponent,
+    DialogBodyComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogDefaultComponent,
+    DialogContainerComponent,
+    DialogCloseButtonComponent,
+    DialogFooterButtonComponent,
+    DialogDecisiveButtonDirective
+];
 
 @NgModule({
-    declarations: [
-        DialogComponent,
-        DialogBodyComponent,
-        DialogTitleDirective,
-        DialogFooterComponent,
-        DialogHeaderComponent,
-        DialogContainerComponent,
-        DialogCloseButtonDirective,
-        DialogFooterButtonComponent,
-        DialogDecisiveButtonDirective,
-        DefaultDialogComponent,
-        InitialFocusDirective
-    ],
+    declarations: [declarations],
     imports: [
         BarModule,
         IconModule,
+        TitleModule,
         CommonModule,
         ButtonModule,
         ResizeModule,
         TemplateModule,
         DragDropModule,
+        InitialFocusModule,
         BusyIndicatorModule
     ],
     exports: [
+        declarations,
         BarModule,
+        TitleModule,
         TemplateModule,
-        DefaultDialogComponent,
-        DialogComponent,
-        DialogBodyComponent,
-        DialogTitleDirective,
-        DialogFooterComponent,
-        DialogHeaderComponent,
-        DialogContainerComponent,
-        DialogCloseButtonDirective,
-        DialogFooterButtonComponent,
-        DialogDecisiveButtonDirective,
-        InitialFocusDirective
+        InitialFocusModule
     ],
-    entryComponents: [DialogComponent, DialogContainerComponent, DefaultDialogComponent],
+    entryComponents: [DialogContainerComponent, DialogDefaultComponent],
     providers: [DialogService, DynamicComponentService]
 })
-export class DialogModule {}
+export class DialogModule { }

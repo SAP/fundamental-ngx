@@ -1,93 +1,44 @@
-import { AfterViewInit, Component, Injectable } from '@angular/core';
-import { CalendarI18n, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core';
+import { Component, Injectable, LOCALE_ID } from '@angular/core';
+import { DatetimeAdapter, FdDatetimeAdapter, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core';
 
-const localized_values = {
-    fr: {
-        weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        months: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'],
-        fullMonths: [
-            'Janvier',
-            'Février',
-            'Mars',
-            'Avril',
-            'Mai',
-            'Juin',
-            'Juillet',
-            'Aout',
-            'Septembre',
-            'Octobre',
-            'Novembre',
-            'Décembre'
-        ]
-    }
-};
-
+// i18n aria labels service provider
 @Injectable()
-export class CustomCalendarI18n extends CalendarI18n {
-    // You could also define a custom service and inject it here
-    language = 'fr';
+export class CalendarI18nChineseLabels extends CalendarI18nLabels {
+    yearSelectionLabel = `選擇年份`;
 
-    getDayAriaLabel(date: Date): string {
-        return (
-            date.getDate() +
-            ' ' +
-            localized_values[this.language].fullMonths[date.getMonth()] +
-            ' ' +
-            date.getFullYear()
-        );
-    }
-    getAllFullMonthNames(): string[] {
-        return localized_values[this.language].fullMonths;
-    }
+    previousYearLabel = '前一年';
 
-    getAllShortMonthNames(): string[] {
-        return localized_values[this.language].months;
-    }
+    nextYearLabel = '明年';
 
-    getAllShortWeekdays(): string[] {
-        return localized_values[this.language].weekdays;
-    }
-}
+    monthSelectionLabel = '選擇一個月';
 
-// Aria labels i18n
-@Injectable()
-export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel = 'Sélection de l\'année';
+    previousMonthLabel = '前一個月';
 
-    previousYearLabel = 'Année précédente';
+    nextMonthLabel = '下個月';
 
-    nextYearLabel = 'Année suivante';
-
-    monthSelectionLabel = 'Sélection du mois';
-
-    previousMonthLabel = 'Mois précédent';
-
-    nextMonthLabel = 'Mois suivant';
+    dateSelectionLabel = '選擇日期';
 }
 
 @Component({
     selector: 'fd-calendar-i18n-example',
     template: ` <fd-calendar [(ngModel)]="date"></fd-calendar>`,
-
-    // Note that this can be provided in the root of your application.
     providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
         {
-            provide: CalendarI18n,
-            useClass: CustomCalendarI18n
+            provide: LOCALE_ID,
+            useValue: 'zh'
+        },
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
         },
         {
             provide: CalendarI18nLabels,
-            useClass: CustomI18nLabels
+            useClass: CalendarI18nChineseLabels
         }
     ]
 })
-export class CalendarI18nExampleComponent implements AfterViewInit {
-    date = FdDate.getToday();
-
-    constructor(private calendarI18n: CalendarI18n, private calendarI18nLabels: CalendarI18nLabels) {}
-
-    ngAfterViewInit(): void {
-        this.calendarI18n.i18nChange.next();
-        this.calendarI18nLabels.labelsChange.next();
-    }
+export class CalendarI18nExampleComponent {
+    date: FdDate = new FdDate(2020, 10, 25);
 }

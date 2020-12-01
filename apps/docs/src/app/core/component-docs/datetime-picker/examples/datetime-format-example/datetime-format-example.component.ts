@@ -1,49 +1,36 @@
-import { Component, Injectable } from '@angular/core';
-import { DateTimeFormatParser, FdDate, FdDatetime } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import { FdDate, DateTimeFormats, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
-@Injectable()
-export class DateTimeFormatExample extends DateTimeFormatParser {
-    public parse(value: string): FdDatetime {
-        value = value.replace(/[\/hms ]/g, '-');
-        const values: number[] = value.split('-').map(Number);
-        return new FdDatetime(new FdDate(values[0], values[1], values[2]), {
-            hour: values[3],
-            minute: values[4],
-            second: values[5]
-        });
-    }
+/**
+ * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,
+ * see the doc https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+ */
 
-    public format(date: FdDatetime): string {
-        const getAtLeastTwoDigits = function (num: number): string {
-            return num < 10 ? '0' + num : String(num);
-        };
-        return (
-            date.year +
-            '-' +
-            getAtLeastTwoDigits(date.month) +
-            '-' +
-            getAtLeastTwoDigits(date.day) +
-            ' ' +
-            getAtLeastTwoDigits(date.hour) +
-            'h' +
-            getAtLeastTwoDigits(date.minute) +
-            'm' +
-            getAtLeastTwoDigits(date.second) +
-            's'
-        );
+export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
+    ...FD_DATETIME_FORMATS,
+    display: {
+        ...FD_DATETIME_FORMATS.display,
+        dateTimeInput: {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }
     }
-}
+};
 
 @Component({
     selector: 'fd-datetime-format-example',
     templateUrl: './datetime-format-example.component.html',
     providers: [
         {
-            provide: DateTimeFormatParser,
-            useClass: DateTimeFormatExample
+            provide: DATE_TIME_FORMATS,
+            useValue: CUSTOM_FD_DATETIME_FORMATS
         }
     ]
 })
 export class DatetimeFormatExampleComponent {
-    date = FdDatetime.getToday();
+    date = FdDate.getNow();
 }

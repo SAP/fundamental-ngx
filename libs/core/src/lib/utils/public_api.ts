@@ -11,6 +11,7 @@ export * from '../carousel/carousel.component';
 export * from '../carousel/carousel-item/carousel-item.component';
 export * from './directives/initial-focus/initial-focus.directive';
 export * from './directives/line-clamp/line-clamp.module';
+export * from './directives/initial-focus/initial-focus.module';
 
 export * from './pipes/pipe.module';
 export * from './pipes/displayFn.pipe';

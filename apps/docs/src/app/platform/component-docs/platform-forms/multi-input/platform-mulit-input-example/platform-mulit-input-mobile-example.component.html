@@ -1,0 +1,23 @@
+<fdp-form-group #fg>
+    <fdp-form-field
+        #ffl1
+        id="mobile"
+        label="Mobile Mode Multi Input"
+        zone="zLeft"
+        rank="1"
+        placeholder="Field placeholder text"
+    >
+        <fdp-multi-input
+            [formControl]="ffl1.formControl"
+            placeholder="Field placeholder text"
+            type="text"
+            id="fdp-id"
+            name="input1"
+            [dataSource]="_datasource"
+            displayKey="firstName"
+            mobile="true"
+            [mobileConfig]="mobileConfig"
+        >
+        </fdp-multi-input>
+    </fdp-form-field>
+</fdp-form-group>

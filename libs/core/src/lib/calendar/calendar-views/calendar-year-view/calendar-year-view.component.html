@@ -1,22 +1,36 @@
 <div class="fd-calendar__years">
-    <table class="fd-calendar__table" role="grid">
-        <tbody class="fd-calendar__group" role="rowgroup">
-            <tr class="fd-calendar__row" role="row" *ngFor="let colYears of calendarYearListGrid; let rowIndex = index">
+    <table
+        class="fd-calendar__table"
+        role="grid"
+    >
+        <tbody
+            class="fd-calendar__group"
+            role="rowgroup"
+        >
+            <tr
+                class="fd-calendar__row"
+                role="row"
+                *ngFor="let colYears of calendarYearListGrid; let rowIndex = index"
+            >
                 <td
                     class="fd-calendar__item"
-                    *ngFor="let year of colYears; let colIndex = index"
-                    [ngClass]="{
-                        'fd-calendar__item--current': year == currentYear,
-                        'is-active': year == yearSelected
-                    }"
                     role="gridcell"
-                    [attr.id]="getId(getIndex(rowIndex, colIndex))"
-                    [attr.tabindex]="year === activeYear ? 0 : -1"
-                    (keydown)="onKeydownYearHandler($event, getIndex(rowIndex, colIndex))"
-                    (click)="selectYear(year, $event)"
+                    *ngFor="let yearCell of colYears; let colIndex = index"
+                    [ngClass]="{
+                        'fd-calendar__item--current': yearCell.current,
+                        'is-active': yearCell.selected
+                    }"
+                    [attr.id]="yearCell.id"
+                    [attr.tabindex]="yearCell.tabIndex"
+                    (keydown)="onKeydownYearHandler($event, yearCell.index)"
+                    (click)="selectYear(yearCell, $event)"
                 >
-                    <span role="button" class="fd-calendar__text">
-                        {{ yearViewGrid.yearMapping(year) }}
+                    <span
+                        class="fd-calendar__text"
+                        role="button"
+                        [attr.aria-label]="yearCell.ariaLabel"
+                    >
+                        {{ yearCell.label }}
                     </span>
                 </td>
             </tr>

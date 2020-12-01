@@ -109,6 +109,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'feed-input',
+                loadChildren: () =>
+                    import('./component-docs/feed-input/feed-input-docs.module').then(
+                        (m) => m.FeedInputDocsModule
+                    )
+            },
+            {
                 path: 'file-input',
                 loadChildren: () =>
                     import('./component-docs/file-input/file-input-docs.module').then((m) => m.FileInputDocsModule)
@@ -214,6 +221,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'message-box',
+                loadChildren: () =>
+                    import('./component-docs/message-box/message-box-docs.module').then(
+                        (m) => m.MessageBoxDocsModule
+                    )
+            },
+            {
                 path: 'message-toast',
                 loadChildren: () =>
                     import('./component-docs/message-toast/message-toast-docs.module').then(
@@ -284,6 +298,13 @@ export const ROUTES: Routes = [
             {
                 path: 'radio',
                 loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
+            },
+            {
+                path: 'rating-indicator',
+                loadChildren: () =>
+                    import('./component-docs/rating-indicator/rating-indicator-docs.module').then(
+                        (m) => m.RatingIndicatorDocsModule
+                    )
             },
             {
                 path: 'scroll-spy',

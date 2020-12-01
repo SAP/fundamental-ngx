@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { FdDate, FdDatetime } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-datetime-picker-reactive-example',
@@ -8,18 +8,11 @@ import { FdDate, FdDatetime } from '@fundamental-ngx/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformDatetimePickerReactiveExampleComponent {
-    storedDate: FdDatetime = FdDatetime.getToday();
-    date = FdDatetime.getToday();
-
     datetimePickerForm = new FormGroup({});
+
+    formData = new StoredDatetimeObject(new FdDate(2008, 2, 11, 21, 15));
+
     requiredDateValidator: ValidatorFn[] = [Validators.required];
-
-    data: StoredDatetimeObject;
-
-    constructor() {
-        this.storedDate = new FdDatetime(new FdDate(2008, 2, 11), this.storedDate.time);
-        this.data = new StoredDatetimeObject(this.storedDate);
-    }
 
     onSubmit(): void {
         if (this.datetimePickerForm.valid) {
@@ -28,19 +21,8 @@ export class PlatformDatetimePickerReactiveExampleComponent {
             alert('Form invalid');
         }
     }
-    changeDay(): void {
-        this.date = new FdDatetime(new FdDate(2018, 10, 10), this.date.time);
-    }
-
-    onDateChange(datetime: FdDatetime): void {
-        console.log('value changed to ' + datetime?.toLocaleDateString());
-    }
-
-    onOpenChanged(opened: boolean): void {
-        console.log('the popover is opened?: ' + opened);
-    }
 }
 
 class StoredDatetimeObject {
-    constructor(public storedDate: FdDatetime) {}
+    constructor(public storedDate: FdDate) {}
 }

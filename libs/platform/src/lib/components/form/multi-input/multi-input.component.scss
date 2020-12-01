@@ -1,0 +1,27 @@
+.fd-popover-multi-input-custom {
+    width: 60.5%;
+    position: fixed;
+    box-shadow: var(
+        --sapContent_Shadow2,
+        0 0 0 0.0625rem rgba(0, 0, 0, 0.42),
+        0 0.625rem 1.875rem 0 rgba(0, 0, 0, 0.3)
+    );
+}
+.fd-input {
+    &.fd-multi-input-tokenizer-input {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+        background-color: transparent;
+    }
+}
+.fd-multi-input-tokenizer-custom {
+    width: calc(100% - 2.25rem);
+    &--compact {
+        width: calc(100% - 2rem);
+    }
+}
+
+.tokernizer-width {
+    width: 100%;
+}
