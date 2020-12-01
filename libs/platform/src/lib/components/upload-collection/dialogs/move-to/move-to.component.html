@@ -3,7 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1 *ngIf="!_currentFolder" fd-dialog-title i18n="@@platformUploadCollection.MoveTo.Title">
+                    <h1 *ngIf="!_currentFolder" fd-title i18n="@@platformUploadCollection.MoveTo.Title">
                         Move to
                     </h1>
                     <ng-container *ngIf="_currentFolder">
@@ -14,7 +14,7 @@
                             glyph="navigation-left-arrow"
                             (click)="goToParentFolder()"
                         ></button>
-                        <h1 fd-dialog-title>
+                        <h1 fd-title>
                             <span i18n="@@platformUploadCollection.MoveTo.TitleFolder">Folder</span>
                             {{ _currentFolder.name }}
                         </h1>
