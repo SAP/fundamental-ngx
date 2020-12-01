@@ -65,7 +65,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Sets aria-label attribute for carousel */
     @Input()
-    ariaLabel = 'carousel';
+    ariaLabel = null;
 
     /** Sets aria-labelledby attribute for carousel */
     @Input()
@@ -208,6 +208,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     private _slideSwiped = false;
 
+    private _prevBtnClickedAtStart = true;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -240,8 +242,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.leftButtonDisabled = true;
             this.rightButtonDisabled = true;
         }
-        this._carouselService.activeChange.subscribe((event) => this._onSlideSwipe(event));
-        this._carouselService.dragStateChange.subscribe((event) => this._onSlideDrag(event));
+        this._carouselService.activeChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => this._onSlideSwipe(event));
+        this._carouselService.dragStateChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => this._onSlideDrag(event));
 
         this._slidesCopy = this.slides.toArray().slice();
 
@@ -251,7 +257,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.navigation = false;
         }
 
-        this.slides.changes.subscribe(() => this._onSlideUpdates());
+        // Subscribe to dynamic update of slides
+        this.slides.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._onSlideUpdates());
         this._changeDetectorRef.markForCheck();
     }
 
@@ -324,7 +331,17 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
         this._preventDefaultBtnFocus();
         this._carouselService.pickPrevious(this.dir);
-        this._notifySlideChange(SlideDirection.PREVIOUS);
+
+        /** Handle looped carousel, first click on prev button. */
+        if (this.loop && this._prevBtnClickedAtStart) {
+            this._carouselService.goToItem(this.slides.toArray()[2], true, this.dir);
+            this.slides.toArray()[2].visibility = 'visible';
+            this.slideChange.emit(new CarouselActiveSlides([this.slides.toArray()[2]], 'Previous'));
+        } else {
+            /** Have to refactor the _notifySlideChange to get rid of else condition */
+            this._notifySlideChange(SlideDirection.PREVIOUS);
+        }
+        this._prevBtnClickedAtStart = false;
         this._changeDetectorRef.detectChanges();
     }
 
@@ -333,6 +350,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
             return;
         }
+        // Handles looped carousel, first navigation is prev button.
+        this._prevBtnClickedAtStart = false;
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
@@ -402,7 +421,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
+    /** @hidden Handle when slide is added or removed */
     private _onSlideUpdates(): void {
+        this._slidesCopy = this.slides.toArray().slice();
         this.currentActiveSlidesStartIndex = 0;
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
         this._carouselService.active = null;
