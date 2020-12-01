@@ -10,9 +10,9 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     // runner: 'local',
-    // user: process.env.SAUCE_USERNAME,
-    // key: process.env.SAUCE_ACCESS_KEY,
-    // region: 'eu',
+    user: process.env.SAUCE_USERNAME,
+    key: process.env.SAUCE_ACCESS_KEY,
+    region: 'eu',
     //
     // ==================
     // Specify Test Files
@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/split-menu-button.e2e-spec.ts'
+        './e2e/wdio/**/fixed-card-layout.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -52,50 +52,50 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-        // {
-        //     browserName: 'internet explorer',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     "sauce:options": {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-internet-explorer',
-        //         requireWindowFocus: true,
-        //         //tags: [ "process.env.TRAVIS_BUILD_ID"],
-        //     }
-        // },
-        // {
-        //     browserName: 'MicrosoftEdge',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     "sauce:options": {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-edge',
-        //         //tags: [ process.env.TRAVIS_BUILD_ID],
-        //     }
-        // },
-        // {
-        //     browserName: 'firefox',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     "sauce:options": {
-        //         name: 'e2e-win-firefox',
-        //         screenResolution: '1920x1080',
-        //         //tags: [ process.env.TRAVIS_BUILD_ID],
-        //     }
-        // },
-        // {
-        //     browserName: 'chrome',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     "sauce:options": {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-chrome',
-        //         //tags: [ process.env.TRAVIS_BUILD_ID],
-        //     }
-        // },
+        {
+            browserName: 'internet explorer',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            "sauce:options": {
+                screenResolution: '1920x1080',
+                name: 'e2e-win-internet-explorer',
+                requireWindowFocus: true,
+                //tags: [ "process.env.TRAVIS_BUILD_ID"],
+            }
+        },
+        {
+            browserName: 'MicrosoftEdge',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            "sauce:options": {
+                screenResolution: '1920x1080',
+                name: 'e2e-win-edge',
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
+        {
+            browserName: 'firefox',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            "sauce:options": {
+                name: 'e2e-win-firefox',
+                screenResolution: '1920x1080',
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
+        {
+            browserName: 'chrome',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            "sauce:options": {
+                screenResolution: '1920x1080',
+                name: 'e2e-win-chrome',
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
         {
             browserName: 'chrome',
             platformName: 'macOS 10.15',
@@ -107,37 +107,37 @@ exports.config = {
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-        // {
-        //     browserName: 'firefox',
-        //     platformName: 'macOS 10.15',
-        //     browserVersion: 'latest',
-        //     acceptInsecureCerts: true,
-        //     "sauce:options": {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-firefox',
-        //         //tags: [ process.env.TRAVIS_BUILD_ID],
-        //     }
-        // },
-        // {
-        //     browserName: 'MicrosoftEdge',
-        //     platformName: 'macOS 10.15',
-        //     browserVersion: 'latest',
-        //     acceptInsecureCerts: true,
-        //     "sauce:options": {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-Edge',
-        //         //tags: [ process.env.TRAVIS_BUILD_ID],
-        //     }
-        // },
-        // {
-        //     browserName: 'safari',
-        //     browserVersion: '13.1',
-        //     platformName: 'macOS 10.15',
-        //     "sauce:options": {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-safari',
-        //     }
-        // },
+        {
+            browserName: 'firefox',
+            platformName: 'macOS 10.15',
+            browserVersion: 'latest',
+            acceptInsecureCerts: true,
+            "sauce:options": {
+                screenResolution: '1920x1440',
+                name: 'e2e-MAC-firefox',
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
+        {
+            browserName: 'MicrosoftEdge',
+            platformName: 'macOS 10.15',
+            browserVersion: 'latest',
+            acceptInsecureCerts: true,
+            "sauce:options": {
+                screenResolution: '1920x1440',
+                name: 'e2e-MAC-Edge',
+                //tags: [ process.env.TRAVIS_BUILD_ID],
+            }
+        },
+        {
+            browserName: 'safari',
+            browserVersion: '13.1',
+            platformName: 'macOS 10.15',
+            "sauce:options": {
+                screenResolution: '1920x1440',
+                name: 'e2e-MAC-safari',
+            }
+        },
     ],
     //
     // ===================
@@ -170,7 +170,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'localhost:4200/',
+    baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -187,11 +187,11 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     // services: ['chromedriver'],
-    // services: [
-    //     ['sauce', {
-    //         sauceConnect: true,
-    //     }]
-    // ],
+    services: [
+        ['sauce', {
+            sauceConnect: true,
+        }]
+    ],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -245,12 +245,12 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-     // onPrepare: function () {
-     //    browser.resetUrl = 'about:blank';
-     //    browser.driver.manage.window.maximize();
-     //    browser.maximize();
-     //    browser.window.maximize();
-     // },
+    // onPrepare: function () {
+    //    browser.resetUrl = 'about:blank';
+    //    browser.driver.manage.window.maximize();
+    //    browser.maximize();
+    //    browser.window.maximize();
+    // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -379,10 +379,10 @@ exports.config = {
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
     /**
-    * Gets executed when a refresh happens.
-    * @param {String} oldSessionId session ID of the old session
-    * @param {String} newSessionId session ID of the new session
-    */
+     * Gets executed when a refresh happens.
+     * @param {String} oldSessionId session ID of the old session
+     * @param {String} newSessionId session ID of the new session
+     */
     //onReload: function(oldSessionId, newSessionId) {
     //}
 };
