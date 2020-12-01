@@ -6,13 +6,14 @@
     padding: 1rem;
     background: #fff;
     border-radius: 4px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
     width: 278px;
     height: 94px;
 
     &.blank {
         background: transparent;
         box-shadow: none;
+        pointer-events: none;
 
         &:before {
             content: '';
@@ -33,7 +34,6 @@
         display: block;
         position: absolute;
         border-top: 2px dashed #89919A;
-        //top: calc(50% - 1px)
         top: 0;
         bottom: 0;
         margin: auto;
@@ -47,31 +47,25 @@
         right: -2rem;
     }
 
-    &.approved-node {
+    &.approved {
         &.line-before:before, &.line-after:after {
             border-top-style: solid;
             border-top-width: 1px;
-            //top: 50%;
         }
     }
 
-    &.parent-approved-node {
+    &.parent-approved {
         &.line-before:before {
             border-top-style: solid;
             border-top-width: 1px;
-            //top: 50%;
         }
-    }
-
-    &.carousel-start {
-
     }
 }
 
 .approval-flow-node__inner {
     padding-left: 2.3rem;
     position: relative;
-    top: -0.3rem;
+    top: -.3rem;
 }
 
 .approval-flow-node__description {
@@ -80,7 +74,7 @@
 }
 
 .approval-flow-node__name {
-    padding-left: 0.3rem;
+    padding-left: .3rem;
 }
 
 .approval-flow-node__arrow {
@@ -91,7 +85,6 @@
     border-color: transparent transparent transparent #89919A;
     position: absolute;
     left: -8px;
-    //top: calc(50% - 4px);
     top: 0;
     bottom: 0;
     margin: auto;

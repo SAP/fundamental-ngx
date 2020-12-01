@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApprovalFlowNodeComponent } from './approval-flow-node.component';
 
-describe('ApprovalFlowNodeComponent', () => {
+fdescribe('ApprovalFlowNodeComponent', () => {
   let component: ApprovalFlowNodeComponent;
   let fixture: ComponentFixture<ApprovalFlowNodeComponent>;
 

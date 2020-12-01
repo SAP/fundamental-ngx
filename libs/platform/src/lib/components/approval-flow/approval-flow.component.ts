@@ -18,7 +18,7 @@ import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User } from './inter
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 
-type ApprovalGraphNode = ApprovalNode & { parent?: ApprovalNode, blank?: true };
+export type ApprovalGraphNode = ApprovalNode & { parent?: ApprovalNode, blank?: true };
 
 interface ApprovalGraphColumn {
     nodes: ApprovalGraphNode[];
@@ -66,11 +66,8 @@ export class ApprovalFlowComponent implements OnInit {
     ngOnInit(): void {
         this.dataSource.fetch().subscribe(approvalProcess => {
             this._approvalProcess = approvalProcess;
-            const { nodes } = approvalProcess;
-            nodes.forEach(node => this._nodesMap[node.id] = node);
-            console.log('nodesMap', this._nodesMap);
-            this._graph = buildNodeTree(nodes);
-            console.log('tree', this._graph);
+            approvalProcess.nodes.forEach(node => this._nodesMap[node.id] = node);
+            this._graph = buildNodeTree(approvalProcess.nodes);
             this._cdr.detectChanges();
             this.checkCarouselStatus();
         });
@@ -182,11 +179,8 @@ export class ApprovalFlowComponent implements OnInit {
         const getNextVerticalNode = (_ni, _ci, direction: 'up' | 'down', count = 1) => {
             const indexDiff = (direction === 'down' ? 1 : -1);
             const _column = this._graph[_ci];
-            if (!_column) {
-                return { nextNode: undefined, count: count };
-            }
-
-            const _nextNode = _column.nodes[_ni + indexDiff];
+            const _nextColumn = this._graph[_ci + 1];
+            const _nextNode = _column.nodes[_ni + indexDiff] || _nextColumn?.nodes[_ni + 1];
             if (_nextNode && _nextNode.blank) {
                 console.log('next node is blank');
                 return getNextVerticalNode(_ni, _ci + indexDiff, direction, count + 1);
@@ -197,34 +191,37 @@ export class ApprovalFlowComponent implements OnInit {
 
         event.preventDefault();
         let nextNode: ApprovalGraphNode;
-        // let step = 1;
-        let res;
+        let nextFocusTarget;
 
-        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-            res = getNextVerticalNode(nodeIndex, columnIndex, 'up');
+        if (KeyUtil.isKeyCode(event, UP_ARROW) && nodeIndex > 0) {
+            nextFocusTarget = getNextVerticalNode(nodeIndex, columnIndex, 'up');
         }
 
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            res = getNextVerticalNode(nodeIndex, columnIndex, 'down');
+            nextFocusTarget = getNextVerticalNode(nodeIndex, columnIndex, 'down');
         }
 
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            res = getNextHorizontalNode(nodeIndex, columnIndex, 'left');
+            nextFocusTarget = getNextHorizontalNode(nodeIndex, columnIndex, 'left');
         }
 
         if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-            res = getNextHorizontalNode(nodeIndex, columnIndex, 'right');
+            nextFocusTarget = getNextHorizontalNode(nodeIndex, columnIndex, 'right');
         }
 
-        nextNode = res.nextNode;
-        // step = res.count;
-        if (nextNode) {
-            this.focusNode(nextNode, { skipSlideChange: KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW]), step: res.count });
+        if (nextFocusTarget?.nextNode) {
+            this.focusNode(
+                nextFocusTarget.nextNode,
+                {
+                    skipSlideChange: KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW]),
+                    step: nextFocusTarget.count
+                }
+            );
         }
     }
 
     focusNode(node: ApprovalGraphNode, options: { skipSlideChange: boolean; step: number }): void {
-        const nodeToFocus = this.nodeComponents.find(component => component.node === node);
+        const nodeToFocus = this.nodeComponents.find(comp => comp.node === node);
         if (!nodeToFocus) {
             return;
         }
@@ -300,10 +297,9 @@ function buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
 
         const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length && nodesWithoutTarget.length !== dependentNodes.length;
         if (isMixed && graph[index - 1].nodes.length > 1) {
-            // console.log('found mixed column', dependentNodes);
             const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
             nodesWithBlankSpaces.forEach((node, i) => {
-                if (nodesWithTarget.includes(node as ApprovalNode)) {
+                if (nodesWithTarget.includes(node)) {
                     nodesWithBlankSpaces[i] = {
                         id: '',
                         name: '',
@@ -314,11 +310,11 @@ function buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
                     };
                 }
             });
-            graph[index] = { nodes: nodesWithBlankSpaces as ApprovalNode[], isPartial: true };
-            graph[index + 1] = { nodes: nodesWithTarget as ApprovalNode[] };
+            graph[index] = { nodes: nodesWithBlankSpaces, isPartial: true };
+            graph[index + 1] = { nodes: nodesWithTarget };
             index += 2;
         } else {
-            graph[index] = { nodes: dependentNodes as ApprovalNode[] };
+            graph[index] = { nodes: dependentNodes };
             index++;
         }
     } while (!foundLastStep);
