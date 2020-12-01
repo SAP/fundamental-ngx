@@ -1,14 +1,12 @@
 import { SplitMenuButtonPo } from '../pages/split-menu-button.po';
-import { browser } from 'protractor';
 import SMBData from '../fixtures/appData/split-menu-button-page-contents';
-import { getText, getValueOfAttribute, hoverMouse } from '../../helper/helper';
 import { webDriver } from '../../driver/wdio';
 
-describe('Split menu button test suite', function() {
+describe('Split menu button test suite', () => {
     const spMenuBtnPage = new SplitMenuButtonPo();
 
-    beforeAll(async () => {
-        await spMenuBtnPage.open();
+    beforeAll(() => {
+        spMenuBtnPage.open();
     });
 
     afterEach(() => {
@@ -16,198 +14,175 @@ describe('Split menu button test suite', function() {
     });
 
     it('should check drop-down arrow menu functionality', async () => {
-        const dropdownArrowBtnArr = await spMenuBtnPage.arrowBtnArr;
+        const dropdownArrowBtnArr = browser.$$(spMenuBtnPage.arrowBtnArr);
 
-        dropdownArrowBtnArr.forEach(async element => {
-            await element.click().then(async () => {
-                await expect(await spMenuBtnPage.menuOverlay.isDisplayed()).toBe(true);
-            });
-            await element.click();
-        });
+        for (let i = 0; i < dropdownArrowBtnArr.length; i++) {
+            dropdownArrowBtnArr[i].click();
+            expect(webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay));
+            dropdownArrowBtnArr[i].click();
+        }
+
     });
 
     it('should check each split btn has main and arrow btns', async () => {
-        const dropdownArrowBtnCount = await spMenuBtnPage.arrowBtnArr.count();
-        const mainBtnCount = await spMenuBtnPage.mainBtnArr.count();
+        const dropdownArrowBtnCount = $$(spMenuBtnPage.arrowBtnArr).length;
+        const mainBtnCount = $$(spMenuBtnPage.mainBtnArr).length;
 
         await expect(dropdownArrowBtnCount).toEqual(mainBtnCount);
     });
 
-    it('should check that menu closed after making one selection', async () => {
-        const behaviorArrowBtnArr = await spMenuBtnPage.behaviorsExArrowBtnArr;
+    it('should check that menu closed after making one selection', () => {
+        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
 
-        await behaviorArrowBtnArr[0].click().then(async () => {
-            const menuItemsArr = await spMenuBtnPage.menuItemArr;
-            await expect(await spMenuBtnPage.menuOverlay.isDisplayed()).toBe(true);
-            await menuItemsArr[1].click().then(async () => {
-                await expect(await spMenuBtnPage.menuOverlay.isDisplayed()).toBe(false);
-            });
-        });
+        behaviorArrowBtnArr[0].click();
+        webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay);
+        const menuItemsArr = browser.$$(spMenuBtnPage.menuItemArr);
+        console.log(menuItemsArr.length);
+        menuItemsArr[0].click();
+        webDriver.waitForNotDisplayed(spMenuBtnPage.menuOverlay);
     });
 
-    it('should check split menu button behaviors examples', async () => {
-        const behaviorArrowBtnArr = await spMenuBtnPage.behaviorsExArrowBtnArr;
-
-        await checkBtnSelectionChange(behaviorArrowBtnArr, spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.behaviorBtnTextArr);
+    it('should check split menu button behaviors examples', () => {
+        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
+        spMenuBtnPage.checkBtnSelectionChange(behaviorArrowBtnArr, spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.behaviorBtnTextArr);
     });
 
-    it('should check split menu button type examples', async () => {
-        const typesArrowBtnArr = await spMenuBtnPage.typesExArrowBtnArr;
+    it('should check split menu button type examples', () => {
+        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
 
-        await checkBtnSelectionChange(typesArrowBtnArr, spMenuBtnPage.typesExSelectionBtnArr, SMBData.typesBtnTextArr);
+        spMenuBtnPage.checkBtnSelectionChange(typesArrowBtnArr, spMenuBtnPage.typesExSelectionBtnArr, SMBData.typesBtnTextArr);
     });
 
-    it('should check btn selections', async () => {
-        const typesBtnArr = await spMenuBtnPage.typesExSelectionBtnArr;
-        const typesArrowBtnArr = await spMenuBtnPage.typesExArrowBtnArr;
+    it('should check btn selections', () => {
+        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
 
-        await typesBtnArr[0].click();
-        await checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText);
+        typesBtnArr[0].click();
+        spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText);
 
-        await typesArrowBtnArr[0].click().then(async () => {
-            const menuItemsArr = await spMenuBtnPage.menuItemArr;
-            await menuItemsArr[1].click();
-        });
-        await checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText2);
+        typesArrowBtnArr[0].click();
+        const menuItemsArr = $$(spMenuBtnPage.menuItemArr);
+        menuItemsArr[1].click();
+        spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText2);
     });
 
-    it('should check split menu buttons with icon examples', async () => {
-        const iconArrowBtnArr = await spMenuBtnPage.iconExArrowBtnArr;
-        const iconBtnArr = await spMenuBtnPage.iconBtnAttrArr;
+    it('should check split menu buttons with icon examples', () => {
+        const iconArrowBtnArr = $$(spMenuBtnPage.iconExArrowBtnArr);
+        const iconBtnArr = $$(spMenuBtnPage.iconBtnAttrArr);
 
-        await checkBtnSelectionChange(iconArrowBtnArr, spMenuBtnPage.iconExSelectionBtnArr, SMBData.iconBtnTextArr);
-        iconBtnArr.forEach(async element => {
-            await expect(await getValueOfAttribute(element, SMBData.iconAttr)).toContain(SMBData.iconLabel);
-        });
+        spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, spMenuBtnPage.iconExSelectionBtnArr, SMBData.iconBtnTextArr);
+        for (let i = 0; i < iconBtnArr.length; i++) {
+            expect(webDriver.getAttributeByName(spMenuBtnPage.iconBtnAttrArr, SMBData.iconAttr, i)).toContain(SMBData.iconLabel);
+        }
     });
 
-    it('should check compact btn styles', async () => {
-        const iconBtnArr = await spMenuBtnPage.iconBtnAttrArr;
-
-        await expect(await getValueOfAttribute(iconBtnArr[1], SMBData.compactAttr)).toContain(SMBData.compactValue);
+    it('should check compact btn styles', () => {
+        expect(webDriver.getAttributeByName(spMenuBtnPage.iconBtnAttrArr, SMBData.compactAttr, 1)).toContain(SMBData.compactValue);
     });
 
-    it('should check default hover state', async () => {
-        const behaviorBtnArr = await spMenuBtnPage.behaviorsExSelectionBtnArr;
-        const behaviorArrowBtnArr = await spMenuBtnPage.behaviorsExArrowBtnArr;
+    it('should check default hover state', () => {
+        const behaviorBtnArr = $$(spMenuBtnPage.behaviorsExSelectionBtnArr);
+        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
 
-        behaviorBtnArr.forEach(async element => {
-            await hoverMouse(element).then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.defaultHvrColor);
-            });
-        });
-        behaviorArrowBtnArr.forEach(async element => {
-            await hoverMouse(element).then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.defaultHvrColor);
-            });
-        });
+        for (let i = 0; i < behaviorBtnArr.length; i++) {
+            webDriver.click(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.defaultHvrColor);
+        }
+
+        for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
+            webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.defaultHvrColor);
+        }
     });
 
-    it('should check default active state', async () => {
-        const behaviorBtnArr = await spMenuBtnPage.behaviorsExSelectionBtnArr;
-        const behaviorArrowBtnArr = await spMenuBtnPage.behaviorsExArrowBtnArr;
+    it('should check default active state', () => {
+        const behaviorBtnArr = $$(spMenuBtnPage.behaviorsExSelectionBtnArr);
+        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
 
-        behaviorBtnArr.forEach(async element => {
-            await browser.actions().mouseDown(element).perform().then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.defaultBtnColor);
-                await browser.actions().mouseUp(element).perform();
-            });
-        });
-        behaviorArrowBtnArr.forEach(async element => {
-            await browser.actions().mouseDown(element).perform().then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.defaultBtnColor);
-                await browser.actions().mouseUp(element).perform();
-                await element.click();
-            });
-        });
+        for (let i = 0; i < behaviorBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.defaultBtnColor);
+            webDriver.mouseButtonUp();
+        }
+
+        for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.defaultBtnColor);
+            webDriver.mouseButtonUp();
+        }
     });
 
-    it('should check split btn types example colors', async () => {
-        const typesBtnArr = await spMenuBtnPage.typesExSelectionBtnArr;
-        const typesArrowBtnArr = await spMenuBtnPage.typesExArrowBtnArr;
+    it('should check split btn types example colors', () => {
+        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
 
-        typesBtnArr.forEach(async (element, index) => {
-            await expect(await element.getCssValue(SMBData.textColorAttr)).toContain(SMBData.typesBtnColorArr[index]);
-        });
-        typesArrowBtnArr.forEach(async (element, index) => {
-            await expect(await element.getCssValue(SMBData.textColorAttr)).toContain(SMBData.typesBtnColorArr[index]);
-        });
+        for (let i = 0; i < typesBtnArr.length; i++) {
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.textColorAttr, i).value)
+                .toContain(SMBData.typesBtnColorArr[i]);
+        }
+
+        for (let i = 0; i < typesArrowBtnArr.length; i++) {
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.textColorAttr, i).value)
+                .toContain(SMBData.typesBtnColorArr[i]);
+        }
     });
 
     it('should check split btn type examples hover colors', async () => {
-        const typesBtnArr = await spMenuBtnPage.typesExSelectionBtnArr;
-        const typesArrowBtnArr = await spMenuBtnPage.typesExArrowBtnArr;
+        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
 
-        typesBtnArr.forEach(async (element, index) => {
-            await hoverMouse(element).then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.typesBtnHvrColorArr[index]);
-            });
-        });
-        typesArrowBtnArr.forEach(async (element, index) => {
-            await hoverMouse(element).then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.typesBtnHvrColorArr[index]);
-            });
-        });
+        for (let i = 0; i < typesBtnArr.length; i++) {
+            webDriver.click(spMenuBtnPage.typesExSelectionBtnArr,  i);
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.typesBtnHvrColorArr[i]);
+        }
+
+        for (let i = 0; i < typesArrowBtnArr.length; i++) {
+            webDriver.click(spMenuBtnPage.typesExArrowBtnArr,  i);
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.typesBtnHvrColorArr[i]);
+        }
     });
 
     it('should check split btn type examples active state', async () => {
-        const typesBtnArr = await spMenuBtnPage.typesExSelectionBtnArr;
-        const typesArrowBtnArr = await spMenuBtnPage.typesExArrowBtnArr;
+        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
 
-        typesBtnArr.forEach(async (element, index) => {
-            await browser.actions().mouseDown(element).perform().then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.typesBtnActiveColorArr[index]);
-                await browser.actions().mouseUp(element).perform();
-            });
-        });
-        typesArrowBtnArr.forEach(async (element, index) => {
-            await browser.actions().mouseDown(element).perform().then(async () => {
-                await expect(element.getCssValue(SMBData.bgColorAttr)).toContain(SMBData.typesBtnActiveColorArr[index]);
-                await browser.actions().mouseUp(element).perform();
-                await element.click();
-            });
-        });
+        for (let i = 0; i < typesBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.typesBtnActiveColorArr[i]);
+            webDriver.mouseButtonUp();
+        }
+
+        for (let i = 0; i < typesArrowBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.typesBtnActiveColorArr[i]);
+            webDriver.mouseButtonUp();
+        }
+
     });
 
     it('should check tooltips', async () => {
-        const menuBtnArr = await spMenuBtnPage.mainBtnArr;
+        const menuBtnArr = $$(spMenuBtnPage.mainBtnArr);
 
-        menuBtnArr.forEach(async element => {
-            await expect(await getValueOfAttribute(element, SMBData.tooltipAttr)).not.toEqual(null);
-        });
-    });
-
-    it('should check LTR orientation', async () => {
-        const areaContainersArray = await spMenuBtnPage.exampleAreaContainersArr;
-
-        areaContainersArray.forEach(async element => {
-            expect(element.getCssValue('direction')).toBe('ltr', 'css prop direction ');
-        });
+        for (let i = 0; i < menuBtnArr.length; i++) {
+            expect(webDriver.getAttributeByName(spMenuBtnPage.mainBtnArr, SMBData.tooltipAttr, i))
+                .not.toEqual(null);
+        }
     });
 
     it('should check RTL orientation', async () => {
-        await spMenuBtnPage.exampleAreaContainersArr.each(async (area, index) => {
-            expect(await area.getCssValue('direction')).toBe('ltr', 'css prop direction ' + index);
-            expect(await area.getAttribute('dir')).toBe('', 'dir attr ' + index);
-            await spMenuBtnPage.rtlSwitcherArr.get(index).click();
-            expect(await area.getCssValue('direction')).toBe('rtl');
-            expect(await area.getAttribute('dir')).toBe('rtl');
-        });
+        spMenuBtnPage.checkRtlSwitch(spMenuBtnPage.rtlSwitcherArr, spMenuBtnPage.exampleAreaContainersArr);
     });
-
-    async function checkBtnSelectionChange(array, btnArray, expectation): Promise<any> {
-        array.forEach(async (element, index) => {
-            await element.click().then(async () => {
-                const menuItemsArr = await spMenuBtnPage.menuItemArr;
-                await menuItemsArr[1].click().then(async () => {
-                    const behaviorMainBtnArr = await btnArray;
-                    await expect(await getText(behaviorMainBtnArr[index])).toContain(expectation[index]);
-                });
-            });
-        });
-    }
-
-    async function checkSelectionOutput(outputSelector, expectation): Promise<any> {
-        await expect(await getText(outputSelector)).toEqual(SMBData.outputLabel + expectation);
-    }
 });
+

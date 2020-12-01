@@ -20,29 +20,29 @@ export class Wdio {
         browser.refresh();
     }
 
-    click(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
-        // $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+    click(selector: string, index: number = 0, waitTime: number = this.defaultWaitTime): void {
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].click();
     }
 
-    doubleClick(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
+    doubleClick(selector: string, index: number = 0, waitTime: number = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].doubleClick();
     }
 
     // Clear value before set new
-    setValue(selector: string, value: string, waitTime = this.defaultWaitTime, index: number = 0): void {
+    setValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].setValue(value);
     };
 
     // add value to existing one
-    addValue(selector: string, value: string, waitTime = this.defaultWaitTime, index: number = 0): void {
+    addValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].addValue(value);
     };
 
-    getValue(selector: string, waitTime = this.defaultWaitTime, index: number = 0): string {
+    getValue(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].getValue();
     };
@@ -52,10 +52,10 @@ export class Wdio {
         return $$(selector)[index].getText();
     }
 
-    waitForDisplayed(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
+    waitForDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     };
-  
+
     waitForInvisibilityOf(selector: string, index: number = 0): boolean {
         return $$(selector)[index].waitForDisplayed({ reverse: true })
     }
@@ -68,18 +68,17 @@ export class Wdio {
         return $$(selector)[index].waitForClickable({ timeout: waitTime });
     };
 
-    waitForPresent(selector: string, waitTime = this.defaultWaitTime): boolean {
-        return $(selector).waitForExist({ timeout: waitTime });
+    waitForPresent(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+        return $$(selector)[index].waitForExist({ timeout: waitTime});
     };
 
-
-    isEnabled(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
+    isEnabled(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].isEnabled();
     };
 
     // Waits to be empty if text is not passed
-    waitTextToBePresentInValue(selector: string, text: string = '', waitTime = this.defaultWaitTime, index: number = 0): boolean {
+    waitTextToBePresentInValue(selector: string, text: string = '',  index: number = 0,  waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitUntil(function(): boolean {
             return this.getValue() === text;
         }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
@@ -99,12 +98,12 @@ export class Wdio {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 
-    mouseHoverElement(selector: string, waitTime = this.defaultWaitTime, index: number = 0): any {
+    mouseHoverElement(selector: string, index: number = 0, waitTime = this.defaultWaitTime): any {
         $$(selector)[index].waitForExist({ timeout: waitTime });
         $$(selector)[index].moveTo();
     }
 
-    clearValue(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
+    clearValue(selector: string,  index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].clearValue();
     }
@@ -129,33 +128,26 @@ export class Wdio {
         return $(selector).isDisplayed();
     }
 
-    clickAndHold(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
+    clickAndHold(selector: string,  index: number = 0, waitTime: number = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({timeout: waitTime});
         $$(selector)[index].moveTo();
         return browser.buttonDown();
     }
     // TODO: add wait 300ms
 
-    waitElementToBePresentInDOM (selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+    waitElementToBePresentInDOM (selector: string,  index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime });
     }
 
-    scrollIntoView(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): void {
+    scrollIntoView(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].scrollIntoView();
     }
 
-    isElementClickable(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
+    isElementClickable(selector: string,  index: number = 0, waitTime = this.defaultWaitTime): boolean {
        return  $$(selector)[index].isClickable();
     }
-    mouseButtonDown(button: 0 | 1 | 2  = 0): void {
-        browser.buttonDown(button)
-    }
 
-    mouseButtonUp(button: 0 | 1 | 2  = 0): void {
-        browser.buttonUp(button)
-    }
-
-    isElementClickeble(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+    isElementClickeble(selector: string, index: number = 0,  waitTime = this.defaultWaitTime,  ): boolean {
         return $$(selector)[index].isClickable();
     }
 
@@ -168,12 +160,12 @@ export class Wdio {
         $$(elementToDragSelector)[index].dragAndDrop($$(targetElementSelector)[targetIndex]);
     }
 
-    isElementDisplayed(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
+    isElementDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         $$(selector)[index].scrollIntoView();
         return $(selector)[index].isDisplayed();
     }
 
-    focusElement(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
+    focusElement(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): void {
         $$(selector)[index].scrollIntoView();
         // @ts-ignore
         $$(selector)[index].focus();
