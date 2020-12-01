@@ -4,4 +4,8 @@ import { Component } from '@angular/core';
     selector: 'fd-fli-action-example',
     templateUrl: './fli-action-example.component.html'
 })
-export class FliActionExampleComponent {}
+export class FliActionExampleComponent {
+    onClick(): void {
+        alert('You custom action');
+    }
+}

@@ -1,6 +1,15 @@
 <fd-docs-section-title id="feed-list-item-simple" componentName="feed-list-item">
     Sample example
 </fd-docs-section-title>
+<description>
+    <div>
+        Main fields for component are:
+        <ul>
+            <li><code>[authorTitle]</code> is author title for feed list item</li>
+            <li><code>[text]</code> is text for feed list item</li>
+        </ul>
+    </div>
+</description>
 <component-example>
     <fd-fli-simple-example></fd-fli-simple-example>
 </component-example>
@@ -10,6 +19,10 @@
 <fd-docs-section-title id="feed-list-item-avatar" componentName="feed-list-item">
     Avatar examples
 </fd-docs-section-title>
+<description>
+    <p>You can use <a routerLink="/core/avatar">avatar</a> component for this or you can append your custom, for example, svg code or any structure with styles.</p>
+    <p><i>Note: we defined place for avatar with dimensions 3rem width and 3rem height.</i></p>
+</description>
 <component-example>
     <fd-fli-avatar-example></fd-fli-avatar-example>
 </component-example>
@@ -18,6 +31,7 @@
 <fd-docs-section-title id="feed-list-item-action" componentName="feed-list-item">
     Actions examples
 </fd-docs-section-title>
+<description>For actions (top right side) you can use <a routerLink="/core/button">button</a> or <a routerLink="/core/menu">menu</a> components.</description>
 <component-example>
     <fd-fli-action-example></fd-fli-action-example>
 </component-example>
@@ -27,6 +41,12 @@
 <fd-docs-section-title id="feed-list-item-footer" componentName="feed-list-item">
     Footer examples
 </fd-docs-section-title>
+<description>
+    <p>In footer you can use any DOM structure.</p>
+    <p>You can use <code>fd-item-footer-byline</code> directive.
+        This directive has predefined font-size, color and also it'll add dot between each directives.
+        Please see first example.</p>
+</description>
 <component-example>
     <fd-fli-footer-example></fd-fli-footer-example>
 </component-example>
@@ -36,6 +56,12 @@
 <fd-docs-section-title id="feed-list-item-mobile" componentName="feed-list-item">
     Mobile example with actionsheet control (also mobile)
 </fd-docs-section-title>
+<description>
+    Mobile view for feed list item
+    <ul>
+        <li>Set <code>[mobile]</code> property to true</li>
+    </ul>
+</description>
 <component-example>
     <fd-fli-mobile-example></fd-fli-mobile-example>
 </component-example>

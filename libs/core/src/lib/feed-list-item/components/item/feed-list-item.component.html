@@ -1,22 +1,20 @@
-<div class="fd-feed-list__body">
-  <ng-container *ngIf="mobile; then headerTmpl; else avatarContent"></ng-container>
-  <div class="fd-feed-list__content">
-    <ng-container *ngIf="!mobile">
-      <ng-container *ngTemplateOutlet="actionContent"></ng-container>
+<ng-container *ngIf="mobile; then headerTmpl; else avatarContent"></ng-container>
+<div class="fd-feed-list__content">
+  <ng-container *ngIf="!mobile">
+    <ng-container *ngTemplateOutlet="actionContent"></ng-container>
+  </ng-container>
+  <p class="fd-feed-list__text">
+    <ng-container *ngIf="!isRichText">
+      <ng-container *ngTemplateOutlet="feedContent, context: {$implicit: author}"></ng-container>
     </ng-container>
-    <p class="fd-feed-list__text">
-      <ng-container *ngIf="!isRichText">
-        <ng-container *ngTemplateOutlet="feedContent, context: {$implicit: author}"></ng-container>
-      </ng-container>
-      <ng-container *ngIf="isRichText">
-        <ng-container *ngTemplateOutlet="author"></ng-container>
-        <fd-formatted-text [htmlText]="text"></fd-formatted-text>
-      </ng-container>
-    </p>
-    <ng-container *ngIf="!mobile">
-      <ng-container *ngTemplateOutlet="footerContent"></ng-container>
+    <ng-container *ngIf="isRichText">
+      <ng-container *ngTemplateOutlet="author"></ng-container>
+      <fd-formatted-text [htmlText]="text"></fd-formatted-text>
     </ng-container>
-  </div>
+  </p>
+  <ng-container *ngIf="!mobile">
+    <ng-container *ngTemplateOutlet="footerContent"></ng-container>
+  </ng-container>
 </div>
 
 <ng-template #avatarContent>

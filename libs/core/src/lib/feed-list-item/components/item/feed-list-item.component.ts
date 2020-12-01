@@ -1,3 +1,4 @@
+import { HostBinding } from '@angular/core';
 import {
   Component,
   ViewEncapsulation,
@@ -85,6 +86,12 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
   */
   @Input()
   mobile = false;
+
+  /**
+   * Apply body class by default
+  */
+  @HostBinding('class.fd-feed-list__body')
+  isFeedListItemBody = true;
 
   /**
    * Shows toggle state of feed text - more or less

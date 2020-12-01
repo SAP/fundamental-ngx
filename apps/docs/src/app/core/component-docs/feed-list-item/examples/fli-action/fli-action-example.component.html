@@ -1,16 +1,17 @@
+<p>Action with <a routerLink="/core/button">button</a> and user's callback on click event.</p>
 <fd-feed-list aria-label="Feed List Item with user link example">
     <fd-feed-list-item
         authorTitle="John Doe"
         authorLink="http://example.com/"
-        text="<h4>Long text, you can toggle</h4> view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
         ariaLabel="Feed list item example">
         <fd-feed-list-action>
-            <button aria-label="action" fd-button fdType="transparent" [compact]="true" glyph="overflow"></button>
+            <button aria-label="action" fd-button fdType="transparent" [compact]="true" glyph="action-settings" (click)="onClick()"></button>
         </fd-feed-list-action>
     </fd-feed-list-item>
 </fd-feed-list>
-
+<p>Action with <a routerLink="/core/menu">menu</a> component</p>
 <fd-feed-list aria-label="Feed List Item with user link example">
     <fd-feed-list-item
         authorTitle="Author with very looong tiiiiiitttttttttttttttleeeeeeeeeeeeeeeeeeeeee"

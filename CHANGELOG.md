@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.11...v0.25.0-rc.12) (2020-12-01)
+
+## [0.25.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.10...v0.25.0-rc.11) (2020-12-01)
+
+## [0.25.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.9...v0.25.0-rc.10) (2020-11-30)
+
+
+### Features
+
+* (Core) introduce Wizard scroll ([#3897](https://github.com/SAP/fundamental-ngx/issues/3897)) ([df20652](https://github.com/SAP/fundamental-ngx/commit/df206525998de08ed6903fc5ada75e77c1ebd487))
+
+## [0.25.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.8...v0.25.0-rc.9) (2020-11-30)
+
+
+### Bug Fixes
+
+* (Platform) fix non-collapsible Dynamic Page header ([#3810](https://github.com/SAP/fundamental-ngx/issues/3810)) ([e487705](https://github.com/SAP/fundamental-ngx/commit/e4877055180456079f86f9ef70245351bcef1868))
+
+## [0.25.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.7...v0.25.0-rc.8) (2020-11-30)
+
+## [0.25.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.6...v0.25.0-rc.7) (2020-11-30)
+
+## [0.25.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.5...v0.25.0-rc.6) (2020-11-29)
+
+## [0.25.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.4...v0.25.0-rc.5) (2020-11-29)
+
+## [0.25.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.3...v0.25.0-rc.4) (2020-11-27)
+
 ## [0.25.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.2...v0.25.0-rc.3) (2020-11-27)
 
 ## [0.25.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.0...v0.25.0-rc.2) (2020-11-27)

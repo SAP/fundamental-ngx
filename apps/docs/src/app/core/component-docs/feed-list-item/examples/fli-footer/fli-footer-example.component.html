@@ -5,40 +5,16 @@
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
         ariaLabel="Feed list item example">
-        <fd-feed-list-action>
-            <button
-                aria-label="action"
-                fd-button fdType="transparent"
-                [compact]="true"
-                [fdMenuTrigger]="menu"
-                glyph="menu"></button>
-            <fd-menu #menu>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 1</span>
-                    </a>
-                </li>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 2</span>
-                    </a>
-                </li>
-                <li fd-menu-item>
-                    <a href="#" fd-menu-interactive>
-                        <span fd-menu-title>Option 3</span>
-                    </a>
-                </li>
-            </fd-menu>
-        </fd-feed-list-action>
         <fd-feed-list-footer>
             <small fd-item-footer-byline>Aug 20, 2020</small>
             <small fd-item-footer-byline>
-                <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
+                Click on <a target="_blank" href="http://example.com/branch" class="fd-link">Reply link</a>
             </small>
         </fd-feed-list-footer>
     </fd-feed-list-item>
 </fd-feed-list>
-
+<br/>
+<p>One more example with <a routerLink="/core/toolbar">toolbar</a> component</p>
 <fd-feed-list aria-label="Feed List Item with footer only">
     <fd-feed-list-item
         authorTitle="Author without link"
@@ -46,12 +22,16 @@
         maxRows="2"
         ariaLabel="Feed list item example">
         <fd-feed-list-footer>
-            <small fd-item-footer-byline>Aug 20, 2020</small>
-            <small fd-item-footer-byline>Reply</small>
+            <fd-toolbar>
+                <label fd-toolbar-label>Feed list item</label>
+                <fd-toolbar-separator></fd-toolbar-separator>
+                <label fd-toolbar-label>toolbar in footer</label>
+            </fd-toolbar>
         </fd-feed-list-footer>
     </fd-feed-list-item>
 </fd-feed-list>
-
+<br/>
+<p>Custom structure in footer without any components or directives</p>
 <fd-feed-list aria-label="Feed List Item with footer only">
     <fd-feed-list-item
         authorTitle="Author without link"

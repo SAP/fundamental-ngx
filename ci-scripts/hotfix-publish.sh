@@ -4,8 +4,10 @@ set -u -e
 
 source .ci-env/flags.sh
 
+PACKAGES=(core platform)
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
-OLD_TAG=$(git descripe)
+MASTER_BRANCH=master
+OLD_TAG=$(git describe --tags --abbrev=0)
 
 git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
@@ -34,7 +36,7 @@ else
    exit 1
 fi
 
-git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" release_tag > /dev/null;
+git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $release_tag > /dev/null;
 npm run build-deploy-library
 
 cd dist/libs
@@ -50,11 +52,10 @@ do
     if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
       echo publishing "${P}"
       if [[ $latest == "true" ]]; then
-        echo LATEST
+        $NPM_BIN  publish --access public
       else
-        echo NON-LATEST
+        $NPM_BIN  publish --tag archive --access public
       fi
-#      $NPM_BIN  publish --tag archive --access public
     fi
     cd ..
 done
@@ -62,6 +63,13 @@ done
 cd ../../
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
-    echo Release tag: "{$release_tag}" Old Tag: "{$OLD_TAG}"
-#    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $OLD_TAG
+    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch $OLD_TAG
+fi
+
+
+# Increment version on master
+if [[ $latest == "true" ]]; then
+  git checkout $MASTER_BRANCH
+  npm run std-version
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $MASTER_BRANCH > /dev/null;
 fi

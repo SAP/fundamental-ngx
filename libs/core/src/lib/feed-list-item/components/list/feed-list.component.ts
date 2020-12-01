@@ -45,6 +45,11 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
   @Input()
   mobile = false;
   /**
+   * Feed list items will be display in a group.
+  */
+  @Input()
+  isGroup = true;
+  /**
    * It removes border if items are displaying in a group.
   */
   @Input()
@@ -97,6 +102,7 @@ export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy
     return [CSS_CLASS_NAME.list,
       this.class,
       this.borderLess ? `${CSS_CLASS_NAME.list}--no-border` : '',
+      this.isGroup ? `${CSS_CLASS_NAME.list}--group` : '',
       this.mobile ? `${CSS_CLASS_NAME.list}--s` : '',
     ];
   }

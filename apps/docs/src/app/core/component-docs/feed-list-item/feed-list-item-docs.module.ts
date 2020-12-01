@@ -9,7 +9,7 @@ import { FeedListItemDocsComponent } from './feed-list-item-docs.component';
 
 import { examples } from './examples';
 
-import { FeedListItemModule, MenuModule, ActionSheetModule, AvatarModule } from '@fundamental-ngx/core';
+import { FeedListItemModule, MenuModule, ActionSheetModule, AvatarModule, ToolbarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -28,7 +28,8 @@ const routes: Routes = [
         FeedListItemModule,
         MenuModule,
         ActionSheetModule,
-        AvatarModule
+        AvatarModule,
+        ToolbarModule
     ],
     exports: [RouterModule],
     declarations: [
