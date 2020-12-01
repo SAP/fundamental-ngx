@@ -9,18 +9,18 @@ export interface Resettable {
 export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
 
 @Component({
-    selector: `fdp-filters-reset-button`,
+    selector: `fdp-view-settings-reset-button`,
     template: `<button
         fd-button
         fdType="transparent"
         compact="true"
         label="Reset"
-        i18n-label="@@platformTableViewSettingsResetButtonLabel"
+        i18n-label="@@platformTableDialogButtonReset"
         (click)="resettable.reset()"
         [disabled]="!(resettable.isResetAvailable$ | async)"
     ></button>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FiltersResetButtonComponent {
+export class ViewSettingsResetButtonComponent {
     constructor(@Inject(RESETTABLE_TOKEN) public resettable: Resettable) {}
 }

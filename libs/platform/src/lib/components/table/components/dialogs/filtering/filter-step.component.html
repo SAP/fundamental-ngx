@@ -6,7 +6,10 @@
         glyph="navigation-left-arrow"
         (click)="back.emit()"
     ></button>
-    <h5 fd-title>Filter by: {{ filter.label }}</h5>
+    <h5
+        fd-title
+        i18n-label="@@platformTableViewSettingsFilterByLabel"
+    >Filter by: {{ filter.label }}</h5>
 </ng-template>
 
 <ng-template #bodyTemplate>

@@ -30,7 +30,7 @@ import {
     FilterSingleSelectComponent,
     FilterMultiSelectComponent,
     FilterCustomComponent,
-    FiltersResetButtonComponent,
+    ViewSettingsResetButtonComponent,
     TableColumnComponent,
     TableToolbarActionsComponent,
     TableToolbarComponent,
@@ -95,7 +95,7 @@ import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
         FilterSingleSelectComponent,
         FilterMultiSelectComponent,
         FilterCustomComponent,
-        FiltersResetButtonComponent
+        ViewSettingsResetButtonComponent
     ],
     exports: [
         TableComponent,

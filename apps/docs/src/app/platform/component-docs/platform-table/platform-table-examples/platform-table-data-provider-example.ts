@@ -83,8 +83,6 @@ const sort = (a, b, key?: string) => {
 function getNestedValue(key: string, object: any): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
-
-// Example items
 export interface ExampleItem {
     name: string;
     description: string;
@@ -96,6 +94,7 @@ export interface ExampleItem {
     statusColor?: string;
 }
 
+// Example items
 export const ITEMS: ExampleItem[] = [
     {
         name: '10 Portable DVD player',

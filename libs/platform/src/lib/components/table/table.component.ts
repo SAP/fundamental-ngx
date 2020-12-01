@@ -66,7 +66,7 @@ import { SearchInput } from '../search-field/public_api';
 export type FdpTableDataSource<T> = TableDataSource<T>; // | T[] | Observable<T>;
 
 const dialogConfig: DialogConfig = {
-    responsivePadding: true,
+    responsivePadding: false,
     verticalPadding: false,
     minWidth: '30%',
     minHeight: '50%'
@@ -216,6 +216,12 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     class: string;
 
+    /** @hidden */
+    readonly SORT_DIRECTION = SortDirection;
+
+    /** @hidden */
+    readonly SELECTION_MODE = SelectionMode;
+
     /** @hidden Formatted rows data. */
     _rows: SelectableRow[] = [];
 
@@ -226,12 +232,6 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
 
     /** @hidden */
     _contentDensityOptions = ContentDensity;
-
-    /** @hidden */
-    _selectionModeOptions = SelectionMode;
-
-    /** @hidden */
-    _sortDirections = SortDirection;
 
     /** @hidden */
     _popoverOpen = false;
@@ -295,7 +295,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private readonly _rowsStateChanges: Subject<any> = new Subject<any>();
+    private readonly _rowsStateChanges: Subject<SelectableRow[]> = new Subject<SelectableRow[]>();
 
     /** @hidden */
     constructor(
@@ -480,13 +480,15 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     openSortingDialog(): void {
         const state = this.getTableState();
         const columns = state.columns;
+        const sortBy = state.sortBy?.[0];
 
         const dialogRef = this._dialogService.open(SortingComponent, {
             ...dialogConfig,
+
             data: {
                 columns: columns.filter((c) => c.sortable),
-                sortDirection: state && state.sortBy && state.sortBy[0] && state.sortBy[0].direction,
-                sortField: state && state.sortBy && state.sortBy[0] && state.sortBy[0].field
+                sortDirection: sortBy?.direction,
+                sortField: sortBy?.field
             }
         });
 
@@ -843,5 +845,10 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         }
 
         return undefined;
+    }
+
+    /** @hidden */
+    _setPopoverColumnKey(columnKey: string): void {
+        this._popoverColumnKey = columnKey
     }
 }

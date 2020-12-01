@@ -1,5 +1,8 @@
 <ng-template #titleTemplate>
-    <h5 fd-title>Filter</h5>
+    <h5
+        fd-title
+        i18n-label="@@platformTableViewSettingsFilterTitle"
+    >Filter</h5>
 </ng-template>
 
 <ng-template #bodyTemplate>
@@ -8,7 +11,10 @@
         compact="true"
         navigationIndicator="true"
     >
-        <li fd-list-group-header>Filter By</li>
+        <li
+            fd-list-group-header
+            i18n-label="@@platformTableViewSettingsFilterBy"
+        >Filter By</li>
 
         <li
             fd-list-item

@@ -8,7 +8,7 @@
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-filters-reset-button></fdp-filters-reset-button>
+                    <fdp-view-settings-reset-button></fdp-view-settings-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -24,6 +24,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
+                i18n-label="@@platformTableDialogButtonOK"
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
@@ -37,6 +38,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
+                i18n-label="@@platformTableDialogButtonCancel"
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"

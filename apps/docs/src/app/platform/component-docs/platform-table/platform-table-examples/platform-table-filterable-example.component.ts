@@ -10,12 +10,12 @@ import { TableDataProviderExample } from './platform-table-data-provider-example
 export class PlatformTableFilterableExampleComponent {
     source = new TableDataSource(new TableDataProviderExample());
 
-    statusSingleSelectValues = [
-        { value: 'OUT_OF_STOCK', label: 'out of stock' },
-        { value: 'AVAILABLE', label: 'available' }
+    priceCurrencyFilteringValues = [
+        { value: 'USA', label: '$ USA' },
+        { value: 'EUR', label: '€ EURO' }
     ];
 
-    statusMultiSelectValues = [
+    statusFilteringValues = [
         { value: 'OUT_OF_STOCK', label: 'out of stock' },
         { value: 'AVAILABLE', label: 'available' }
     ];

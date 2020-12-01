@@ -5,16 +5,15 @@ import {
     Component,
     forwardRef,
     Inject,
-    QueryList,
-    ViewChild,
-    ViewChildren
+    ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 
 import { CollectionFilter } from '../../../interfaces';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
-import { Resettable, RESETTABLE_TOKEN } from '../reset-button/filters-reset-button.component';
+import { Resettable, RESETTABLE_TOKEN } from '../reset-button/reset-button.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 
 export interface FiltersDialogData {
@@ -43,9 +42,8 @@ export class FiltersComponent implements Resettable, AfterViewInit {
 
     viewSettingsFilters: TableViewSettingsFilterComponent[];
 
-    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-    isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
     activeStep: ACTIVE_STEP = ACTIVE_STEP.SELECT_FILTER;
 

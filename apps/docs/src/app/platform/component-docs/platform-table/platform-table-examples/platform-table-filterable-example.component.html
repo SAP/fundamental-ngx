@@ -99,17 +99,17 @@
 
     <fdp-table-view-settings-filter
         column="status"
-        label="Status"
         type="single-select"
-        [values]="statusSingleSelectValues"
+        label="Currency"
+        [values]="priceCurrencyFilteringValues"
     >
     </fdp-table-view-settings-filter>
 
     <fdp-table-view-settings-filter
         column="status"
-        label="Status 2"
         type="multi-select"
-        [values]="statusMultiSelectValues"
+        label="Status"
+        [values]="statusFilteringValues"
     >
     </fdp-table-view-settings-filter>
 </fdp-table-view-settings-dialog>

@@ -12,4 +12,4 @@ export * from './dialogs/filtering/filter-step.component';
 export * from './dialogs/filtering/filter-single-select.component';
 export * from './dialogs/filtering/filter-multi-select.component';
 export * from './dialogs/filtering/filter-custom.component';
-export * from './dialogs/reset-button/filters-reset-button.component';
+export * from './dialogs/reset-button/reset-button.component';

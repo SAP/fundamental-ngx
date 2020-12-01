@@ -1,26 +1,63 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+
 import { SortDirection } from '../../../enums';
+import { Resettable, RESETTABLE_TOKEN } from '../reset-button/reset-button.component';
+
+export interface GroupDialogColumn {
+    label: string;
+    key: string;
+}
+
+export interface GroupDialogData {
+    direction: SortDirection;
+    field: string;
+    columns: GroupDialogColumn[];
+}
+
+export interface GroupDialogResultData {
+    field: string;
+    direction: SortDirection;
+}
 
 @Component({
-    templateUrl: './grouping.component.html'
+    templateUrl: './grouping.component.html',
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => GroupingComponent) }],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GroupingComponent {
-    initialOrder = this.dialogRef.data.groupOrder || 'asc';
-    initialField = this.dialogRef.data.groupField || null;
+export class GroupingComponent implements Resettable {
+    initialDirection: SortDirection = SortDirection.ASC;
 
-    groupOrder = this.initialOrder;
-    groupField = this.initialField;
+    initialField: string = null;
 
-    readonly _sortDirections = SortDirection;
-    readonly columns = this.dialogRef.data.columns;
+    direction: SortDirection;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {}
+    field: string;
+
+    readonly SORT_DIRECTION = SortDirection;
+
+    readonly columns: GroupDialogColumn[] = [];
+
+    readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+
+    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+        const data: GroupDialogData = this.dialogRef.data;
+
+        this.initialDirection = data.direction || this.initialDirection;
+        this.initialField = data.field || this.initialField;
+        this.columns = data.columns || [];
+
+        this.direction = this.initialDirection;
+        this.field = this.initialField;
+    }
 
     reset(): void {
-        this.groupOrder = this.initialOrder;
-        this.groupField = this.initialField;
+        this.direction = this.initialDirection;
+        this.field = this.initialField;
+        this._isResetAvailableSubject$.next(false);
     }
 
     cancel(): void {
@@ -31,9 +68,25 @@ export class GroupingComponent {
         this.dialogRef.close({
             action: 'Confirm',
             value: {
-                field: this.groupField,
-                direction: this.groupOrder
+                field: this.field,
+                direction: this.direction
             }
         });
+    }
+
+    _groupOrderChange(direction: SortDirection): void {
+        this.direction = direction;
+        this._omModelChange();
+    }
+
+    _groupFieldChange(field: string): void {
+        this.field = field;
+        this._omModelChange();
+    }
+
+    _omModelChange(): void {
+        // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
+        const isInitialDiffers = this.initialDirection !== this.direction || this.initialField !== this.field;
+        this._isResetAvailableSubject$.next(isInitialDiffers);
     }
 }

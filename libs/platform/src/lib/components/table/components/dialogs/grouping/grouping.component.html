@@ -3,72 +3,107 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1 fd-title i18n="@@platformTableGroupDialogHeader">Group</h1>
+                    <h1
+                        fd-title
+                        i18n="@@platformTableGroupDialogHeader"
+                    >Group</h1>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <button fd-button
-                            fdType="transparent"
-                            [compact]="true"
-                            i18n-label="@@platformTableDialogButtonReset"
-                            label="Reset"
-                            (click)="reset()"
-                            [disabled]="groupField === initialField && groupOrder === initialOrder"></button>
+                    <fdp-view-settings-reset-button></fdp-view-settings-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
     </fd-dialog-header>
 
-    <fd-dialog-body style="padding-left: 0; padding-right: 0;">
-        <ul fd-list selection="true" compact="true">
-            <li fd-list-group-header i18n="@@platformTableGroupDialogGroupOrderHeader">Group Order</li>
+    <fd-dialog-body>
+        <ul
+            fd-list
+            selection="true"
+            compact="true"
+        >
+            <li
+                fd-list-group-header
+                i18n="@@platformTableGroupDialogGroupOrderHeader"
+            >Group Order</li>
 
-            <li fd-list-item [selected]="groupOrder === _sortDirections.ASC">
+            <li
+                fd-list-item
+                [selected]="direction === SORT_DIRECTION.ASC"
+            >
                 <fd-radio-button
                     name="sort-order"
                     value="asc"
                     state="default"
                     compact="true"
-                    [(ngModel)]="groupOrder"
+                    [ngModel]="direction"
+                    (ngModelChange)="_groupOrderChange($event)"
                 ></fd-radio-button>
-                <span fd-list-title i18n="@@platformTableGroupDialogGroupOrderAsc">Ascending</span>
+                <span
+                    fd-list-title
+                    i18n="@@platformTableGroupDialogGroupOrderAsc"
+                >Ascending</span>
             </li>
-            <li fd-list-item [selected]="groupOrder === _sortDirections.DESC">
+            <li
+                fd-list-item
+                [selected]="direction === SORT_DIRECTION.DESC"
+            >
                 <fd-radio-button
                     name="sort-order"
                     value="desc"
                     state="default"
                     compact="true"
-                    [(ngModel)]="groupOrder"
+                    [ngModel]="direction"
+                    (ngModelChange)="_groupOrderChange($event)"
                 ></fd-radio-button>
-                <span fd-list-title i18n="@@platformTableGroupDialogGroupOrderDesc">Descending</span>
+                <span
+                    fd-list-title
+                    i18n="@@platformTableGroupDialogGroupOrderDesc"
+                >Descending</span>
             </li>
         </ul>
 
-        <ul fd-list selection="true" compact="true">
-            <li fd-list-group-header i18n="@@platformTableGroupDialogGroupByHeader">Group By</li>
-
-
-            <li fd-list-item [selected]="!groupField">
+        <ul
+            fd-list
+            selection="true"
+            compact="true"
+        >
+            <li
+                fd-list-group-header
+                i18n="@@platformTableGroupDialogGroupByHeader"
+            >Group By</li>
+            <li
+                fd-list-item
+                [selected]="!field"
+            >
                 <fd-radio-button
                     name="sort-by"
                     [value]="null"
                     state="default"
                     compact="true"
-                    [(ngModel)]="groupField"
+                    [ngModel]="field"
+                    (ngModelChange)="_groupFieldChange($event)"
                 ></fd-radio-button>
-                <span fd-list-title i18n="@@platformTableGroupDialogNotGroupedValue">(Not Grouped)</span>
+                <span
+                    fd-list-title
+                    i18n="@@platformTableGroupDialogNotGroupedValue"
+                >(Not Grouped)</span>
             </li>
-            <li fd-list-item *ngFor="let column of columns" [selected]="column.key === groupField">
+            <li
+                fd-list-item
+                *ngFor="let column of columns"
+                [selected]="column.key === field"
+            >
                 <fd-radio-button
                     name="sort-by"
                     [value]="column.key"
                     state="default"
                     compact="true"
-                    [(ngModel)]="groupField"
+                    [ngModel]="field"
+                    (ngModelChange)="_groupFieldChange($event)"
                 ></fd-radio-button>
-                <span fd-list-title [innerText]="column.label"></span>
+                <span fd-list-title>{{column.label}}</span>
             </li>
         </ul>
     </fd-dialog-body>
@@ -82,7 +117,8 @@
                 i18n-label="@@platformTableDialogButtonOK"
                 label="OK"
                 [compact]="true"
-                (click)="confirm()">
+                (click)="confirm()"
+            >
             </button>
         </fd-dialog-footer-button>
 
@@ -95,7 +131,8 @@
                 i18n-label="@@platformTableDialogButtonCancel"
                 label="Cancel"
                 [compact]="true"
-                (click)="cancel()">
+                (click)="cancel()"
+            >
             </button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>

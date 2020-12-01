@@ -6,7 +6,7 @@ import { TableViewSettingsFilterComponent } from '../../table-view-settings-filt
 @Component({
     selector: 'fdp-filter-custom',
     templateUrl: './filter-custom.component.html',
-    // Keep it Default intentionally to run ngDoCheck when child template emits changes
+    // Keep it "Default" intentionally to run ngDoCheck when child template emits changes
     changeDetection: ChangeDetectionStrategy.Default
 })
 export class FilterCustomComponent implements DoCheck {
