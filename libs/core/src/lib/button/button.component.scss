@@ -10,13 +10,12 @@
     }
 }
 
-
 .fd-button * + * {
-  margin-left: .375rem !important;
+    margin-left: 0.375rem !important;
 }
 
-.fd-button * + [dir=rtl],
-[dir=rtl] .fd-button * + * {
-  margin-left: 0;
-  margin-right: .375rem
+.fd-button * + [dir='rtl'],
+[dir='rtl'] .fd-button * + * {
+    margin-left: 0 !important;
+    margin-right: 0.375rem !important;
 }
