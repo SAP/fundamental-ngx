@@ -41,11 +41,11 @@ export class PlatformFileUploaderComponent extends BaseInput {
     /** @hidden state of checkbox, coming from CBG */
     private _state: stateType;
 
-    /** button value */
+    /** Button value */
     @Input()
     buttonLabel: string;
 
-    /** value for input element. */
+    /** Value for input element. */
     @Input()
     buttonAriaLabel: string;
 
@@ -69,15 +69,15 @@ export class PlatformFileUploaderComponent extends BaseInput {
     @Input()
     accept: string;
 
-    /** content Density of element. cozy | compact */
+    /** Content Density of element. cozy | compact */
     @Input()
     contentDensity: ContentDensity = 'cozy';
 
-    /** specifies number of files to allow to select */
+    /** Specifies number of files to allow to select */
     @Input()
     fileLimit: number;
 
-    /** set state of individual component.Used by CBG to set checkbox states */
+    /** Set state of individual component.Used by CBG to set checkbox states */
     @Input()
     get stateType(): stateType {
         if (this._state) {
@@ -97,7 +97,7 @@ export class PlatformFileUploaderComponent extends BaseInput {
     @Output()
     invalidFileChange: EventEmitter<FileUploaderInvalidChangeEvent> = new EventEmitter<FileUploaderInvalidChangeEvent>();
 
-    /** files upladed hidden field to store file data */
+    /** Files upladed hidden field to store file data */
     files: File[];
 
     /**
@@ -109,12 +109,12 @@ export class PlatformFileUploaderComponent extends BaseInput {
         }
     }
 
-    /**sets value file data*/
+    /** Sets value file data*/
     @Input()
-    get value(): any {
+    get value(): File {
         return super.getValue();
     }
-    set value(value: any) {
+    set value(value: File) {
         super.setValue(value);
     }
 
@@ -128,12 +128,14 @@ export class PlatformFileUploaderComponent extends BaseInput {
         super(_cd, ngControl, ngForm, formField, formControl);
     }
 
+    /** Handle valid file changes event handler */
     handleFileChange(fileArray: File[]): void {
         this.files = fileArray;
         const event = new FileUploaderSelectionChangeEvent(this, this.files);
         this.selectionChange.emit(event);
     }
 
+    /** Handle invalid file changes event handler */
     handleInvalidFiles(fileArray: File[]): void {
         this.files = fileArray;
         const event = new FileUploaderInvalidChangeEvent(this, this.files);

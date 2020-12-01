@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 
 import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform';
 
@@ -12,13 +12,8 @@ import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from
 export class PlatformFileUploaderReactiveExampleComponent {
     files: File[];
     invalidFiles: File[];
-    customForm: FormGroup;
-    requiredDateValidator: ValidatorFn[];
-
-    constructor() {
-        this.customForm = new FormGroup({});
-        this.requiredDateValidator = [Validators.required];
-    }
+    customForm: FormGroup = new FormGroup({});
+    requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     handleFileSelection(files: FileUploaderSelectionChangeEvent): void {
         this.files = files.payload;

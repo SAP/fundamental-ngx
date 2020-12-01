@@ -8,7 +8,7 @@
             zone="zLeft"
             rank="1"
             required="true"
-            placeholder="Choose file to upload to the server"
+            placeholder="Choose file to upload"
         >
             <fdp-file-uploader
                 id="input1"
@@ -16,7 +16,7 @@
                 [formControl]="ffl1.formControl"
                 ariaLabel="Choose file"
                 ariaLabelledBy="input1"
-                placeholder="Choose file to upload to the server"
+                placeholder="Choose file to upload"
                 buttonLabel="Browse"
                 buttonAriaLabel="browse file"
                 accept=".png,.jpg"
@@ -27,7 +27,7 @@
             ></fdp-file-uploader>
         </fdp-form-field>
         <ng-template #i18n let-errors>
-            <span *ngIf="errors.required"> Mandatory field please upload file.</span>
+            <span *ngIf="errors.required">File required</span>
         </ng-template>
     </fdp-form-group>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem" label="Submit"></fdp-button>
