@@ -20,7 +20,7 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check info label with text',  () => {
-        const labelsArr = browser.$$(infoLabelPage.labelsWithTextArr);
+        const labelsArr = webDriver.elementArray(infoLabelPage.labelsWithTextArr);
         // if (config.browserName === 'safari') {
         //     await labelsArr.forEach(async element => {
         //         await expect(await getText(element)).toEqual(InfoLabelData.safariInfoLabelText);
@@ -36,8 +36,8 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check info label with text and icon',  () => {
-        const labelsWithIconsArr = browser.$$(infoLabelPage.labelsWithTextAndIconArr);
-        const labelIconsArr = browser.$$(infoLabelPage.labelsIconArr);
+        const labelsWithIconsArr = webDriver.elementArray(infoLabelPage.labelsWithTextAndIconArr);
+        const labelIconsArr = webDriver.elementArray(infoLabelPage.labelsIconArr);
 
         for (let i = 0; i < labelsWithIconsArr.length; i++) {
             expect(webDriver.getText(infoLabelPage.labelsWithTextAndIconArr, i)).toEqual(InfoLabelData.infoLabelText)
@@ -67,7 +67,7 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check info label with aria label for accessibility', () => {
-        const ariaAttrArr = browser.$$(infoLabelPage.accessibilityAttrArr);
+        const ariaAttrArr = webDriver.elementArray(infoLabelPage.accessibilityAttrArr);
 
         expect(webDriver.getAttributeByName(infoLabelPage.accessibilityLabelsArr, InfoLabelData.ariaLabelAttribute, 0))
             .not.toBe(null);
@@ -83,25 +83,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    it('should check LTR orientation', () => {
-        const areaContainersArray = browser.$$(infoLabelPage.exampleAreaContainersArr);
-
-        for (let i = 0; i < areaContainersArray.length; i++) {
-            expect(webDriver.getCSSPropertyByName(infoLabelPage.exampleAreaContainersArr, 'direction', i).value)
-                .toBe('ltr', 'css prop direction ');
-        }
-    });
-
-    it('should check RTL orientation', () => {
-        const areas = browser.$$(infoLabelPage.exampleAreaContainersArr);
-        const switchers = browser.$$(infoLabelPage.rtlSwitcherArr);
-        for (let i = 0; i < areas.length; i++) {
-            switchers[i].click();
-            expect(webDriver.getAttributeByName(infoLabelPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            expect(webDriver.getCSSPropertyByName(infoLabelPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-            switchers[i].click();
-            expect(webDriver.getAttributeByName(infoLabelPage.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
-            expect(webDriver.getCSSPropertyByName(infoLabelPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
-        }
+    it('should check LTR and RTL orientation', () => {
+        infoLabelPage.checkRtlSwitch(infoLabelPage.rtlSwitcherArr, infoLabelPage.exampleAreaContainersArr);
     });
 });

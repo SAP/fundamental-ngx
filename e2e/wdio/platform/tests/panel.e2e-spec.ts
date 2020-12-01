@@ -48,15 +48,6 @@ describe('Verify Panel', () => {
     });
 
     it('should be able to switch to rtl', () => {
-        const areas = browser.$$(panelPage.exampleAreaContainersArr);
-        const switchers = browser.$$(panelPage.rtlSwitcherArr);
-        for (let i = 0; i < areas.length; i++) {
-            switchers[i].click();
-            expect(webDriver.getAttributeByName(panelPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            expect(webDriver.getCSSPropertyByName(panelPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-            switchers[i].click();
-            expect(webDriver.getAttributeByName(panelPage.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
-            expect(webDriver.getCSSPropertyByName(panelPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
-        }
+        panelPage.checkRtlSwitch(panelPage.rtlSwitcherArr, panelPage.exampleAreaContainersArr)
     });
 });

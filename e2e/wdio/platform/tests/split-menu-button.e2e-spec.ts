@@ -14,7 +14,7 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check drop-down arrow menu functionality', async () => {
-        const dropdownArrowBtnArr = browser.$$(spMenuBtnPage.arrowBtnArr);
+        const dropdownArrowBtnArr = webDriver.elementArray(spMenuBtnPage.arrowBtnArr);
 
         for (let i = 0; i < dropdownArrowBtnArr.length; i++) {
             dropdownArrowBtnArr[i].click();
@@ -25,50 +25,49 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check each split btn has main and arrow btns', async () => {
-        const dropdownArrowBtnCount = $$(spMenuBtnPage.arrowBtnArr).length;
-        const mainBtnCount = $$(spMenuBtnPage.mainBtnArr).length;
+        const dropdownArrowBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.arrowBtnArr);
+        const mainBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.mainBtnArr);
 
         await expect(dropdownArrowBtnCount).toEqual(mainBtnCount);
     });
 
     it('should check that menu closed after making one selection', () => {
-        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
+        const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
 
         behaviorArrowBtnArr[0].click();
         webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay);
-        const menuItemsArr = browser.$$(spMenuBtnPage.menuItemArr);
-        console.log(menuItemsArr.length);
+        const menuItemsArr = webDriver.elementArray(spMenuBtnPage.menuItemArr);
         menuItemsArr[0].click();
         webDriver.waitForNotDisplayed(spMenuBtnPage.menuOverlay);
     });
 
     it('should check split menu button behaviors examples', () => {
-        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
+        const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
         spMenuBtnPage.checkBtnSelectionChange(behaviorArrowBtnArr, spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.behaviorBtnTextArr);
     });
 
     it('should check split menu button type examples', () => {
-        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
+        const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
         spMenuBtnPage.checkBtnSelectionChange(typesArrowBtnArr, spMenuBtnPage.typesExSelectionBtnArr, SMBData.typesBtnTextArr);
     });
 
     it('should check btn selections', () => {
-        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
-        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
+        const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
         typesBtnArr[0].click();
         spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText);
 
         typesArrowBtnArr[0].click();
-        const menuItemsArr = $$(spMenuBtnPage.menuItemArr);
+        const menuItemsArr = webDriver.elementArray(spMenuBtnPage.menuItemArr);
         menuItemsArr[1].click();
         spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText2);
     });
 
     it('should check split menu buttons with icon examples', () => {
-        const iconArrowBtnArr = $$(spMenuBtnPage.iconExArrowBtnArr);
-        const iconBtnArr = $$(spMenuBtnPage.iconBtnAttrArr);
+        const iconArrowBtnArr = webDriver.elementArray(spMenuBtnPage.iconExArrowBtnArr);
+        const iconBtnArr = webDriver.elementArray(spMenuBtnPage.iconBtnAttrArr);
 
         spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, spMenuBtnPage.iconExSelectionBtnArr, SMBData.iconBtnTextArr);
         for (let i = 0; i < iconBtnArr.length; i++) {
@@ -81,8 +80,8 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check default hover state', () => {
-        const behaviorBtnArr = $$(spMenuBtnPage.behaviorsExSelectionBtnArr);
-        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
+        const behaviorBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
+        const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
 
         for (let i = 0; i < behaviorBtnArr.length; i++) {
             webDriver.click(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
@@ -98,8 +97,8 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check default active state', () => {
-        const behaviorBtnArr = $$(spMenuBtnPage.behaviorsExSelectionBtnArr);
-        const behaviorArrowBtnArr = $$(spMenuBtnPage.behaviorsExArrowBtnArr);
+        const behaviorBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
+        const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
 
         for (let i = 0; i < behaviorBtnArr.length; i++) {
             webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
@@ -119,8 +118,8 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check split btn types example colors', () => {
-        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
-        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
+        const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.textColorAttr, i).value)
@@ -134,8 +133,8 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check split btn type examples hover colors', async () => {
-        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
-        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
+        const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
             webDriver.click(spMenuBtnPage.typesExSelectionBtnArr,  i);
@@ -151,8 +150,8 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check split btn type examples active state', async () => {
-        const typesBtnArr = $$(spMenuBtnPage.typesExSelectionBtnArr);
-        const typesArrowBtnArr = $$(spMenuBtnPage.typesExArrowBtnArr);
+        const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
             webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
@@ -173,7 +172,7 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check tooltips', async () => {
-        const menuBtnArr = $$(spMenuBtnPage.mainBtnArr);
+        const menuBtnArr = webDriver.elementArray(spMenuBtnPage.mainBtnArr);
 
         for (let i = 0; i < menuBtnArr.length; i++) {
             expect(webDriver.getAttributeByName(spMenuBtnPage.mainBtnArr, SMBData.tooltipAttr, i))
