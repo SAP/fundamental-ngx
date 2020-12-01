@@ -1,7 +1,11 @@
 $block: fdp-value-help-dialog;
 
 .#{$block} {
-
+    .fd-dialog__body {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
     .fd-toolbar {
         background: none;
         border: none;
@@ -70,15 +74,39 @@ $block: fdp-value-help-dialog;
             padding-top: 0;
         }
     }
+    &__content-holder {
+        padding: 0 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+
+        fdp-select-tab-settings {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .table-header {
+            flex: 0 0 auto;
+        }
+        .table-content {
+            flex: 1 1 auto;
+            overflow: auto;
+        }
+    }
+    &__table-holder {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    &__more-items {
+        background: none;
+    }
     &__row {
         padding: 1rem 2rem;
         &.#{$block}__selection-row {
             background-color: #efefef;
             padding: .5rem 2rem .5rem 1rem;
-        }
-        &.#{$block}__table-holder {
-            padding-top: 0;
-            padding-bottom: 0;
         }
     }
     &__tokens {
@@ -100,6 +128,7 @@ $block: fdp-value-help-dialog;
             height: auto;
             min-width: 2rem;
             padding: .125rem 0;
+            justify-content: center;
         }
     }
     &__actions-row {
@@ -115,11 +144,7 @@ $block: fdp-value-help-dialog;
     &__empty-message {
         padding: 1rem 2rem;
     }
-
-}
-.fd-toolbar__overflow__body {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 100%;
+    &__selection-token {
+        margin-bottom: 0.25rem;
+    }
 }

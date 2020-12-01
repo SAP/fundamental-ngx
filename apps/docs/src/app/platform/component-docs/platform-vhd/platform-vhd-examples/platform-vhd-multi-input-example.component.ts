@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
 
 import { VhdDataProvider, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
 
@@ -8,15 +7,21 @@ interface ExampleTestModel {
   name: string;
   code: string;
   city: string;
+  zipcode: string;
+  address: string;
+  nickname: string;
 }
 
 const exampleDataSource = () => {
-  const dataSource = Array(100).fill(null).map((_value, index) => {
+  const dataSource = Array(137).fill(null).map((_value, index) => {
     return {
       id: index + 1,
-      name: `Name ${index}`,
-      code: Math.floor(Math.random() * 99999),
-      city: `City ${Math.floor(Math.random() * index)}`
+      name: `Name ${index + 1}`,
+      code: `${Math.floor(Math.random() * 99999)}`,
+      city: `City ${Math.floor(Math.random() * index)}`,
+      zipcode: `zipcode ${Math.floor(Math.random() * index)}`,
+      address: `Address ${Math.floor(Math.random() * index)}`,
+      nickname: `Nickname ${Math.floor(Math.random() * index)}`
     }
   })
   return {
@@ -24,6 +29,7 @@ const exampleDataSource = () => {
     filters: Object.keys(dataSource[0]).map((value, index) => {
       return {
         key: value,
+        name: `${value}`,
         label: `Product ${value}`,
         advanced: index > 0,
         include: index >= 0,
@@ -34,14 +40,13 @@ const exampleDataSource = () => {
 }
 
 @Component({
-  selector: 'fdp-vhd-display-token-example',
-  templateUrl: './platform-vhd-token-example.component.html'
+  selector: 'fdp-vhd-multi-input-example',
+  templateUrl: './platform-vhd-multi-input-example.component.html'
 })
-export class PlatformVhdTokenExampleComponent implements OnInit {
+export class PlatformVhdMultiInputExampleComponent implements OnInit {
   filters: any;
   originSource: Array<ExampleTestModel>;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
-  hasAdvanced = false;
 
   selectedValue = [];
   currentValue: VhdValueChangeEvent = {};
@@ -49,11 +54,8 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
   ngOnInit(): void {
     const data = exampleDataSource();
     this.filters = data.filters;
-    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
-  }
-
-  tokenizerFn = (row: ExampleTestModel) => {
-    return `${row.name} (${row.id})`;
+    this.originSource = data.dataSource as ExampleTestModel[];
+    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(this.originSource));
   }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
@@ -61,4 +63,9 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
     this.currentValue = $event;
     this.selectedValue = [...($event.selected || [])];
   }
+
+  displayFunc(obj: any): string {
+    return obj.name.toLocaleUpperCase();
+  }
+
 }

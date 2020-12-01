@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ButtonModule } from '@fundamental-ngx/core';
+import { ButtonModule, MultiInputModule, InputGroupModule  } from '@fundamental-ngx/core';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform';
 
 import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
@@ -13,7 +13,11 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 
 import {
     PlatformVhdBasicExampleComponent,
-    PlatformVhdTokenExampleComponent
+    PlatformVhdTokenExampleComponent,
+    PlatformVhdFiltersExampleComponent,
+    PlatformVhdMultiInputExampleComponent,
+    PlatformVhdInputExampleComponent,
+    PlatformVhdMobileExampleComponent
 } from './platform-vhd-examples'
 
 const routes: Routes = [
@@ -33,14 +37,21 @@ const routes: Routes = [
         CommonModule,
         SharedDocumentationPageModule,
         ButtonModule,
+        InputGroupModule,
+        MultiInputModule,
         PlatformValueHelpDialogModule
     ],
     exports: [RouterModule],
     declarations: [
         PlatformVhdDocsComponent,
         PlatformVhdHeaderComponent,
+
         PlatformVhdBasicExampleComponent,
-        PlatformVhdTokenExampleComponent
+        PlatformVhdTokenExampleComponent,
+        PlatformVhdFiltersExampleComponent,
+        PlatformVhdMultiInputExampleComponent,
+        PlatformVhdInputExampleComponent,
+        PlatformVhdMobileExampleComponent
     ]
 
 })

@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectTabSettingsComponent } from './select-tab-settings.component';
 
 describe('SelectTabSettingsComponent', () => {
-  let component: SelectTabSettingsComponent;
-  let fixture: ComponentFixture<SelectTabSettingsComponent>;
+  let component: SelectTabSettingsComponent<any>;
+  let fixture: ComponentFixture<SelectTabSettingsComponent<any>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

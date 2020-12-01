@@ -1,12 +1,20 @@
-<button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
+<div>
+    <fd-input-group>
+        <input [value]="selectedValue?.name || ''" fd-input-group-input fd-form-control/>
+        <span fd-input-group-addon button="true">
+            <button fd-button glyph="value-help" fdType="transparent" (click)="vhd.open()"></button>
+        </span>
+    </fd-input-group>
+</div>
 <p>SelectedValue:</p>
-<pre *ngIf="selectedValue.length">{{ selectedValue | json }}</pre>
+<pre *ngIf="selectedValue">{{ selectedValue | json }}</pre>
 
 <fdp-value-help-dialog #vhd
-    dialogTitle="Custom token function"
+    dialogTitle="Mobile value help dialog"
     uniqueKey="id"
+    [mobile]="true"
     [dataSource]="dataSource"
-    [tokenizerFn]="tokenizerFn"
+    [value]="currentValue"
     (valueChange)="valueChange($event)"
 >
     <fdp-value-help-dialog-search
@@ -17,13 +25,13 @@
         [main]="i < 2"
         [key]="filter.key"
         [label]="filter.label"
-        [advanced]="filter.advanced || hasAdvanced"
+        [advanced]="filter.advanced"
         [include]="filter.include"
         [exclude]="filter.exclude"
     ></fdp-value-help-dialog-filter>
     <fdp-select-tab-settings
         title="Select from list"
-        selection="multi"
+        selection="once"
         [pageSize]="20">
     </fdp-select-tab-settings>
 </fdp-value-help-dialog>

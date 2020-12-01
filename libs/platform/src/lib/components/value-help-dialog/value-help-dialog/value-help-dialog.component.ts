@@ -1,8 +1,6 @@
 import {
   Component,
   ContentChildren,
-  AfterContentInit,
-  ElementRef,
   Input,
   QueryList,
   TemplateRef,
@@ -11,39 +9,33 @@ import {
   ChangeDetectionStrategy,
   OnChanges,
   ChangeDetectorRef,
-  OnInit,
   OnDestroy,
+  AfterContentInit,
   Output,
   EventEmitter,
   SimpleChanges,
   ContentChild
 } from '@angular/core';
-import { isObservable, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DialogService, DialogConfig, DialogRef } from '@fundamental-ngx/core';
-
-import { ContentDensity } from '../../table/enums';
 import { isDataSource } from '../../../domain/data-source';
-import {
-  ValueHelpDialogDataSource,
-  ArrayValueHelpDialogDataSource,
-  ObservableValueHelpDialogDataSource
-} from '../models';
-import { VhdFilter, PlatformVhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
+import { ValueHelpDialogTabs, VhdValueChangeEvent, VhdFilter } from '../models';
+
 import {
   ValueHelpDialogService,
-  ValueHelpDialogTabs,
-  VhdValueChangeEvent,
   FdpValueHelpDialogDataSource
-} from '../state.service';
-import { SelectTabSettingsComponent } from '../components/select-tab-settings/select-tab-settings.component';
-import { DefineTabSettingsComponent } from '../components/define-tab-settings/define-tab-settings.component';
+} from '../value-help-dialog.service';
+import {
+  VhdFilterComponent,
+  SelectTabSettingsComponent,
+  TableRow,
+  DefineTabSettingsComponent,
+  VhdSearchComponent
+} from '../components';
 
 let vhiUniqueId = 0;
-interface TableRow {
-  selected: boolean;
-}
 
 @Component({
   selector: 'fdp-value-help-dialog',
@@ -55,18 +47,20 @@ interface TableRow {
     ValueHelpDialogService
   ]
 })
-export class PlatformValueHelpDialogComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy {
-  /** Id of the popover. If none is provided, one will be generated. */
-  @Input()
-  id: string = 'fdp-vhd-' + vhiUniqueId++;
+export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy, AfterContentInit {
   constructor(
-    private readonly _stateService: ValueHelpDialogService,
+    private readonly _stateService: ValueHelpDialogService<unknown>,
     private readonly _changeDetectorRef: ChangeDetectorRef,
     private readonly _dialogService: DialogService
   ) { }
+
+  /** Id of the popover */
+  @Input()
+  id: string = 'fdp-vhd-' + vhiUniqueId++;
+
   /** Reference to popover trigger element */
   @Input()
-  triggerElement: ElementRef;
+  value: VhdValueChangeEvent<T[]>;
 
   /** Dialog title */
   @Input()
@@ -74,21 +68,7 @@ export class PlatformValueHelpDialogComponent implements AfterContentInit, OnCha
 
   /** Select from list tab activation */
   @Input()
-  selection = true;
-
-  /** Define conditions tab activation */
-  @Input()
-  define = false;
-
-  /** @hidden
-  * The content density for which to render table. 'cozy' | 'compact' | 'condensed'
-  */
-  @Input()
-  contentTableDensity: ContentDensity = ContentDensity.COMPACT;
-
-  /** Text displayed when table has no items. */
-  @Input()
-  emptyTableMessage = 'Use the search to get results';
+  initialTab = ValueHelpDialogTabs.selectFromList;
 
   /** Initial expand state for advanced search panel */
   @Input()
@@ -109,6 +89,10 @@ export class PlatformValueHelpDialogComponent implements AfterContentInit, OnCha
   @Input()
   dialogConfig: DialogConfig = {};
 
+  /** Unique key from the source field names */
+  @Input()
+  uniqueKey = 'id';
+
   /** Field name for default render from data */
   @Input()
   tokenViewField = 'name';
@@ -117,125 +101,116 @@ export class PlatformValueHelpDialogComponent implements AfterContentInit, OnCha
   @Input()
   tokenizerFn: Function;
 
-  /** Uniq field from data source for track */
-  @Input()
-  uniqField = 'id';
-
   /** Whether the value help dialog should be view in mobile mode */
   @Input()
   mobile = false;
-
-  /** Items per page, it's equal to data source length for desktop mode */
-  @Input()
-  itemPerPage = 20;
-
-  /** Event emitted when show more items fired. */
-  @Output()
-  showMore = new EventEmitter<{ shownCount: number}>();
 
   /** Event emitted when filters/tokens were changed. */
   @Output()
   valueChange = new EventEmitter<VhdValueChangeEvent>();
 
-  /** Fitlers for  */
-  @ContentChildren(PlatformVhdFilterComponent)
-  filters: QueryList<PlatformVhdFilterComponent>;
+  /** @hidden Search control component  */
+  @ContentChild(VhdSearchComponent)
+  searchField: VhdSearchComponent;
 
+  /** @hidden Fitlers for search table and defince conditions */
+  @ContentChildren(VhdFilterComponent)
+  filters: QueryList<VhdFilterComponent>;
+
+  /** @hidden Select from list tab settings */
   @ContentChild(SelectTabSettingsComponent)
-  selectionTab: SelectTabSettingsComponent;
+  selectionTab: SelectTabSettingsComponent<unknown>;
 
+  /** @hidden Define conditions tab settings */
   @ContentChild(DefineTabSettingsComponent)
   defineTab: DefineTabSettingsComponent;
 
-  /** @hidden
-   * Internal container for dialog
-  */
+  /** @hidden Internal container for dialog */
   @ViewChild('container', { read: TemplateRef })
-  container: TemplateRef<any>;
+  private dialogContainer: TemplateRef<any>;
 
-
-  hasAdvanced = true;
-  hasInclude = true;
-  hasExclude = true;
-  selectedExpandState = true;
-
-  selectedTab: ValueHelpDialogTabs;
-  displayedFilters: VhdFilter[] = [];
-  displayedData: TableRow[] = [];
-  selectedAll = false;
-  indeterminateData = false;
+  /** @hidden */
   activeDialog: DialogRef;
-
-
-  private _shownCount = 0;
-  /** Whether the value help dialog should be view in mobile mode */
-  private _mobileTableHeaders: string[];
-  private _tableFilters: {
-    header: VhdFilter[],
-    bodyHead: VhdFilter[],
-    bodyCell: VhdFilter[]
-  } = {
-      header: [],
-      bodyHead: [],
-      bodyCell: []
-    };
+  /** @hidden */
+  _tabTypes = ValueHelpDialogTabs;
+  /** @hidden */
+  _hasAdvanced = true;
+  /** @hidden */
+  _hasInclude = true;
+  /** @hidden */
+  _hasExclude = true;
+  /** @hidden */
+  _selectedExpandState = true;
+  /** @hidden */
+  _displayedFilters: VhdFilter[] = [];
+  /** @hidden */
+  _displayedData: TableRow[] = [];
+  /** @hidden */
+  _mainSearch = '';
   /** @hidden */
   private _destroyed = new Subject<void>();
   /** @hidden */
   protected _dataSource: FdpValueHelpDialogDataSource<any>;
-  /** @hidden */
-  protected _originalDataSource: FdpValueHelpDialogDataSource<any>;
-  /** @hidden */
-  private _originalData = [];
   /** @hidden for data source handling */
-  private _dsSubscription: Subscription
-  private _currentValue: VhdValueChangeEvent = {
-    selected: [],
-    excluded: []
-  };;
-
-  get tabTypes() {
-    return ValueHelpDialogTabs;
-  }
-
+  private _dsSubscription: Subscription;
+  /** @hidden */
+  get _originalData(): any {
+    return this._stateService.originalData;
+  };
+  /** @hidden */
+  get selectedTab(): ValueHelpDialogTabs {
+    return this._stateService.selectedTab$.getValue();
+  };
+  /** @hidden */
+  set selectedTab(type: ValueHelpDialogTabs | undefined) {
+    this._stateService.selectedTab$.next(type);
+  };
+  /** @hidden */
   get isMobileAdvancedSearchActive(): boolean {
     if (this.mobile) {
       return this.isOpenAdvanced;
     }
     return false;
   }
-  get tableFilters() {
-    return this._tableFilters;
-  }
-
+  /** @hidden */
   get hasSelectedTab(): boolean {
-    return typeof this.selectedTab !== 'undefined';
+    return this.selectedTab in ValueHelpDialogTabs;
   }
-
+  /** @hidden */
+  get hasSelectionTab(): boolean {
+    return !!this.selectionTab;
+  }
+  /** @hidden */
+  get hasDefineTab(): boolean {
+    // return false;
+    return !!this.defineTab;
+  }
+  /** @hidden */
   get isSelectionTab(): boolean {
     return this.selectedTab === ValueHelpDialogTabs.selectFromList || this.selectedTab === ValueHelpDialogTabs.advancedSearch;
   }
-
+  /** @hidden */
   get selectedItems(): any {
-    return this._currentValue.selected;
+    return this._stateService.selectedItems$.getValue() || [];
   }
-
+  /** @hidden */
   get excludedItems(): any {
-    return this._currentValue.excluded;
+    return this._stateService.excludedItems$.getValue() || [];
   }
-
-  get selectionTableMode(): string {
-    return this.selectionTab.multi ? 'multi' : 'single';
-  }
-
+  /** @hidden */
   get isOpen(): boolean {
-    return !!this.activeDialog
+    return !!this.activeDialog;
   }
 
   open(): void {
-    this._initializeDS(this.dataSource);
+    /** Avoid to open duplicate */
+    if (this.activeDialog) {
+      return;
+    }
+    this._updateFilters();
+    this._initializeDS();
     this._initializeTab();
-    this.activeDialog = this._dialogService.open(this.container, {
+    this.activeDialog = this._dialogService.open(this.dialogContainer, {
       backdropClickCloseable: false,
       hasBackdrop: true,
       verticalPadding: false,
@@ -244,223 +219,208 @@ export class PlatformValueHelpDialogComponent implements AfterContentInit, OnCha
       ...this.dialogConfig,
 
       fullScreen: this.mobile,
-      maxWidth: this.mobile ? null : '75%',
-      maxHeight: this.mobile ? null : '730px',
-      width: this.mobile ? null : '1230px',
-      height: null
+      maxWidth: this.mobile ? null : '92%',
+      width: this.mobile ? null : '1080px',
+      height: this.mobile ? null : '98%',
     });
     this._listenDialogEvents();
   }
+
   /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.isOpen && 'dataSource' in changes) {
-      this.updateOriginalSource();
+    if (this.isOpen) {
+      if ('dataSource' in changes) {
+        this.updateOriginalSource();
+      }
+      if ('value' in changes) {
+        this._stateService.refreshState(this.value);
+      }
     }
   }
+
   /** @hidden */
   ngAfterContentInit(): void {
-    this.checkFilters();
-  }
-  /** @hidden */
-  ngOnInit(): void {
-
+    if (this.isOpen) {
+      this._stateService.refreshState(this.value);
+    }
+    if (this.selectionTab) {
+      this.selectionTab.uniqueKey = this.uniqueKey;
+    }
   }
   /** @hidden */
   ngOnDestroy(): void {
     this._resetState();
   }
 
+  /**
+   * Toggle panel with selected and excluded items
+   */
   toggleSelectedPanel(): void {
-    const selectedCount = this._currentValue.selected.length !== 0;
-    const excludedCount = this._currentValue.excluded.length !== 0;
+    const selectedCount = this.selectedItems.length !== 0;
+    const excludedCount = this.excludedItems && this.excludedItems.length !== 0;
 
     if (selectedCount || excludedCount) {
-      this.selectedExpandState = !this.selectedExpandState;
+      this._selectedExpandState = !this._selectedExpandState;
     }
   }
 
+  /**
+   * Toggle advanced search panel
+   */
   toggleAdvancedSearch(state?: boolean): void {
     if (typeof state !== 'undefined') {
       this.isOpenAdvanced = state;
     } else {
       this.isOpenAdvanced = !this.isOpenAdvanced;
     }
+
+    if (this.mobile) {
+      this.selectedTab = this.isOpenAdvanced ? ValueHelpDialogTabs.advancedSearch : ValueHelpDialogTabs.selectFromList;
+    }
   }
 
+  /**
+   * Clear all selected items
+   */
   clearSelectedItems(): void {
-    if (this._currentValue.selected.length) {
-      this._currentValue.selected = [];
-      this.displayedData = this.displayedData.map(row => {
+    if (this.selectedItems.length) {
+      this._stateService.selectedItems$.next([]);
+      this._displayedData = this._displayedData.map(row => {
         row.selected = false;
 
         return row;
       });
-      this.selectedAll = false;
+      this._stateService.displayedData$.next(this._displayedData);
       this._changeDetectorRef.markForCheck();
     }
   }
 
+  /**
+   * Clear all excluded items
+   */
   clearExcludedItems(): void {
-    this._currentValue.excluded = [];
+    if (this.excludedItems && this.excludedItems.length) {
+      this._stateService.excludedItems$.next([]);
+      this._changeDetectorRef.markForCheck();
+    }
+  }
+
+  /**
+   * Bacis search by all filled filters
+   */
+  onSearch(): void {
+    const nonEmptyFilters = new Map();
+    this._displayedFilters.filter(({ value }) => !!value).forEach(filter => {
+      nonEmptyFilters.set(filter.key, filter.value);
+    });
+
+    if (this._mainSearch.length) {
+      nonEmptyFilters.set('*', this._mainSearch);
+    }
+    this._stateService.dataSource.match(nonEmptyFilters);
+  }
+
+  /**
+   * Apply search from advanced filters view, using when mobile view is active
+   */
+  onSearchAdvanced(): void {
+    this.onSearch();
+    this.selectedTab = ValueHelpDialogTabs.selectFromList;
+    this.isOpenAdvanced = false;
+  }
+
+  /**
+   * Remove excluded items
+   * NOT IMPLEMENTED YET
+   */
+  removeExcluded(index: number): void {
+    this._stateService.excludedItems$.next(this.excludedItems.filter((_, i: number) => i !== index));
     this._changeDetectorRef.markForCheck();
   }
 
-  onSearch(): void {
-    const nonEmptyFilters = this.displayedFilters.filter(({ value }) => !!value).reduce((acc, filter) => {
-      acc.set(filter.key, filter.value);
+  /**
+   * Switch tab by type
+   */
+  switchTab(type?: ValueHelpDialogTabs): void {
+    this.selectedTab = type;
+  }
 
-      return acc;
-    }, new Map());
-    this.dataSource.match(nonEmptyFilters);
-    this.toggleAdvancedSearch(this.mobile ? false : undefined);
-    if (this.mobile) {
-      if (this.isOpenAdvanced) {
-        this.selectedTab = ValueHelpDialogTabs.advancedSearch;
-      } else {
-        this.selectedTab = ValueHelpDialogTabs.selectFromList;
+  /**
+   * Close dialog with value;
+   */
+  success(): void {
+    const value: VhdValueChangeEvent = {};
+    if (this.selectedItems.length) {
+      value.selected = this.selectedItems;
+    }
+    if (this.activeDialog) {
+      this.activeDialog.close(value);
+    }
+  }
+
+  /**
+   * Hide advanced search on mobile view and if it's opened
+   * Close dialog with null value;
+   */
+  dismiss(): void {
+    if (this.mobile && this.isOpenAdvanced) {
+      this.isOpenAdvanced = false;
+    } else {
+      if (this.activeDialog) {
+        this.activeDialog.close();
       }
     }
   }
 
-  refreshDisplayedData(): void {
-    const original = JSON.parse(JSON.stringify(this._originalData)) as TableRow[];
-    this.displayedData = original.map(row => {
-      row.selected = this._currentValue.selected.some(({ key }) => key === row[this.uniqField]);
-
-      return row;
-    });
-
-    this.showMoreElements();
-  }
-
-  toggleAllRows(): void {
-    if (this._currentValue.selected.length === this._originalData.length) {
-      this.selectedAll = false;
-    } else {
-      this.selectedAll = true;
-    }
-
-    this.displayedData = this.displayedData.map(row => {
-      row.selected = this.selectedAll;
-
-      return row;
-    });
-    this._currentValue.selected = this._getSelectedFromOriginal();
+  /** Remove item from selected array */
+  removeSelected(item: T): void {
+    this._stateService.selectedItems$.next(this.selectedItems.filter((s: T) => s[this.uniqueKey] !== item[this.uniqueKey]));
     this._changeDetectorRef.markForCheck();
-  }
-
-  toggleSelectRow(item: TableRow): void {
-    if (!this.selectionTab?.multi) {
-      this.clearSelectedItems();
-    }
-    item.selected = !item.selected;
-    this._currentValue.selected = this._getSelectedFromOriginal();
-
-    if (this.selectionTab?.once && !this.selectionTab?.multi) {
-      this._success();
-    } else {
-      this._refreshTristate();
-    }
-    this._changeDetectorRef.markForCheck();
-  }
-
-  removeSelected(item: TableRow): void {
-    item.selected = false;
-    this._currentValue.selected = this._getSelectedFromOriginal();
-    this._refreshTristate();
-    this._changeDetectorRef.markForCheck();
-  }
-
-  removeExcluded(index: number): void {
-    this._currentValue.excluded.splice(index, 1);
-    this._changeDetectorRef.markForCheck();
-  }
-
-  toggleTab(type: ValueHelpDialogTabs): void {
-    if (this.selectedTab === type) {
-      this.selectedTab = undefined;
-    } else {
-      this.selectedTab = type;
-    }
-  }
-
-  showMoreElements(): void {
-    if (this.itemPerPage && this._shownCount !== this.displayedData.length) {
-      this._shownCount += this.itemPerPage;
-      this._shownCount = Math.min(this._shownCount, this.displayedData.length);
-      this.showMore.emit({ shownCount: this._shownCount });
-    }
-  }
-
-  _success(): void {
-    this.activeDialog.close(this._currentValue);
-  }
-
-  _dismiss(): void {
-    if (this.mobile && this.isOpenAdvanced) {
-      this.isOpenAdvanced = false;
-    } else {
-      this.activeDialog.close(null);
-    }
   }
 
   /** @hidden */
-  _trackByTableRowFn(_index: number, item: TableRow & { id: number | string }): number | string | undefined {
-    return item && item[this.uniqField] ? item[this.uniqField] : undefined;
-  }
   _trackByFilterFn(_index: number, item: VhdFilter): number | string | undefined {
     return item && item.key ? item.key : undefined;
   }
 
-  private _getSelectedFromOriginal() {
-    return this._originalData.filter(original => {
-      return this.displayedData.some(row => row[this.uniqField] === original[this.uniqField] && row.selected)
-    })
-  }
-
-  private _initializeFilters(): void {
-    if (this.mobile) {
-      const hastMobileTableHeaders = !!this._mobileTableHeaders.length;
-      this._tableFilters = {
-        header: this.displayedFilters.filter(filter => hastMobileTableHeaders ? this._mobileTableHeaders.some((key) => key === filter.key) : true),
-        bodyHead: this.displayedFilters.filter(filter => hastMobileTableHeaders ? this._mobileTableHeaders.some((key) => key === filter.key) : false),
-        bodyCell: this.displayedFilters.filter(filter => hastMobileTableHeaders ? this._mobileTableHeaders.some((key) => key !== filter.key) : true)
-      }
-    } else {
-      this._tableFilters = {
-        header: this.displayedFilters,
-        bodyHead: this.displayedFilters,
-        bodyCell: this.displayedFilters
-      }
-    }
+  /** @hidden */
+  _initializeDS(ds: FdpValueHelpDialogDataSource<any> = this.dataSource): void {
+    this._resetSourceStream();
+    this._dsSubscription = this._stateService.initializeDS(ds)
+      .pipe(takeUntil(this._destroyed))
+      .subscribe(() => {
+        this._refreshDisplayedData();
+      });
   }
 
   /** @hidden */
-  private _refreshTristate(): void {
-    if (this._currentValue.selected.length === 0) {
-      this.selectedAll = false;
-    } else if (this._currentValue.selected.length === this._originalData.length) {
-      this.selectedAll = true;
-    } else {
-      this.selectedAll = null;
-    }
-    console.log(this.selectedAll);
+  private _refreshDisplayedData(): void {
+    const original = JSON.parse(JSON.stringify(this._originalData));
+    this._displayedData = original.map((row: T & TableRow) => {
+      row.selected = this.selectedItems.some((item: T) => item[this.uniqueKey] === row[this.uniqueKey]);
+
+      return row;
+    });
+    this._stateService.displayedData$.next(this._displayedData);
+    this._changeDetectorRef.markForCheck();
   }
 
   /** @hidden */
   private _initializeTab(): void {
     if (this.mobile) {
-      this.selectedTab = undefined;
+      this.switchTab();
       this.isOpenAdvanced = false;
-      this._shownCount = 0;
     } else {
-      this.itemPerPage = this.displayedData.length;
-      this.selectedTab = this.selectedTab || ValueHelpDialogTabs.selectFromList;
+      this.switchTab(this.selectionTab ? ValueHelpDialogTabs.selectFromList : ValueHelpDialogTabs.defineConditions);
     }
 
-    this.showMoreElements();
+    if (this.selectionTab) {
+      this.selectionTab.mobile = this.mobile;
+      this.selectionTab.listenSearchTableEvents();
+    }
   }
 
+  /** @hidden */
   private _listenDialogEvents(): void {
     if (!this.activeDialog) {
       return;
@@ -469,83 +429,69 @@ export class PlatformValueHelpDialogComponent implements AfterContentInit, OnCha
       .pipe(takeUntil(this._destroyed))
       .subscribe(value => {
         if (value) {
-          console.log('Close with value: ', value);
-          this.valueChange.emit(JSON.parse(JSON.stringify(value)));
-        } else {
-          console.log(value);
+          this.value = value;
+          this.valueChange.emit(this.value);
         }
 
         this._resetState();
       });
+    if (this.selectionTab) {
+      this.selectionTab.selectOnce
+        .pipe(takeUntil(this._destroyed))
+        .subscribe(() => {
+          this.success();
+        })
+    }
+    this.filters.changes
+      .pipe(takeUntil(this._destroyed))
+      .subscribe(() => {
+        this._updateFilters();
+      })
   }
 
   /** @hidden */
   private _resetState(): void {
-    this.selectedTab = undefined;
-    this._resetSelected()
-    this._resetSourceStream();
-  }
+    this._destroyed.next();
+    this._destroyed.complete();
 
-  /** @hidden */
-  private _initializeDS(ds: FdpValueHelpDialogDataSource<any>): void {
-    this._originalData = [];
+    if (this.selectionTab) {
+      this.selectionTab.resetState();
+      this.selectedTab = undefined;
+    }
     this._resetSourceStream();
-    this._dsSubscription = this._stateService.initializeDS(ds)
-      .pipe(takeUntil(this._destroyed))
-      .subscribe(data => {
-        this._originalData = JSON.parse(JSON.stringify(data)) || [];
-        this.refreshDisplayedData();
-      });
 
+    this.activeDialog = undefined;
   }
 
   /** @hidden */
   private updateOriginalSource(): void {
-    this._initializeDS(this.dataSource);
+    this._initializeDS();
   }
 
   /** @hidden */
-  private checkFilters(filters?: PlatformVhdFilterComponent[]): void {
-    this._mobileTableHeaders = this._mobileTableHeaders || [];
-    this.displayedFilters = (filters || (this.filters ? this.filters.toArray() : [])).map(filter => {
-      if (filter.mobileTableHeader) {
-        this._mobileTableHeaders.push(filter.key);
-      }
-      return {
-        key: filter.key,
-        label: filter.label || filter.key,
-        value: filter.value || '',
-        advanced: filter.advanced,
-        include: filter.include,
-        exclude: filter.exclude
-      };
-    });
-    this.hasAdvanced = this.displayedFilters.some((filter: PlatformVhdFilterComponent) => {
+  private _updateFilters(filters?: VhdFilter[]): void {
+    const _filters = filters || (this.filters ? this.filters.toArray() : []);
+
+    this._displayedFilters = _filters.map(filter => ({
+      ...filter,
+      label: filter.label || filter.key,
+      value: filter.value || ''
+    }));
+    this._stateService.displayedFilters$.next(this._displayedFilters)
+
+    this._hasAdvanced = this._displayedFilters.some((filter: VhdFilter) => {
       return !!filter.advanced;
     });
-    this.hasInclude = this.displayedFilters.some((filter: PlatformVhdFilterComponent) => {
-      return !!filter.include;
-    });
-    this.hasExclude = this.displayedFilters.some((filter: PlatformVhdFilterComponent) => {
-      return !!filter.exclude;
-    });
-    this._initializeFilters();
   }
 
   /** @hidden */
   private _resetSourceStream(): void {
-    if (isDataSource(this.dataSource)) {
-      this.dataSource.close();
+    if (isDataSource(this._stateService.dataSource)) {
+      this._stateService.dataSource.close();
     }
     if (this._dsSubscription) {
       this._dsSubscription.unsubscribe();
       this._dsSubscription = null;
     }
-  }
-
-  /** @hidden */
-  private _resetSelected(): void {
-    this.clearSelectedItems();
-    this.clearExcludedItems();
   }
 }

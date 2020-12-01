@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VhdFilterComponent } from './value-help-dialog-filter.component';
+import { VhdSearchComponent } from './value-help-dialog-search.component';
 
-describe('VhdFilterComponent', () => {
-  let component: VhdFilterComponent;
-  let fixture: ComponentFixture<VhdFilterComponent>;
+describe('VhdSearchComponent', () => {
+  let component: VhdSearchComponent;
+  let fixture: ComponentFixture<VhdSearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VhdFilterComponent ]
+      declarations: [ VhdSearchComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VhdFilterComponent);
+    fixture = TestBed.createComponent(VhdSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

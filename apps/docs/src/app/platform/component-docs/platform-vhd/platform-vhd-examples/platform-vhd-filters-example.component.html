@@ -3,10 +3,9 @@
 <pre *ngIf="selectedValue.length">{{ selectedValue | json }}</pre>
 
 <fdp-value-help-dialog #vhd
-    dialogTitle="Custom token function"
+    dialogTitle="Different Filters"
     uniqueKey="id"
     [dataSource]="dataSource"
-    [tokenizerFn]="tokenizerFn"
     (valueChange)="valueChange($event)"
 >
     <fdp-value-help-dialog-search

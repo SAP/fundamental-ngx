@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
 
 import { VhdDataProvider, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
 
@@ -21,25 +20,32 @@ const exampleDataSource = () => {
   })
   return {
     dataSource: dataSource,
-    filters: Object.keys(dataSource[0]).map((value, index) => {
-      return {
-        key: value,
-        label: `Product ${value}`,
-        advanced: index > 0,
-        include: index >= 0,
-        exclude: index >= 0
-      }
-    })
+    filters: [{
+      key: 'id',
+      label: `Product ID`,
+      advanced: false
+    }, {
+      key: 'name',
+      label: `Name`,
+      advanced: true
+    }, {
+      key: 'code',
+      label: `Product Code`,
+      advanced: true
+    }, {
+      key: 'city',
+      label: `City`,
+      advanced: true
+    }]
   }
 }
 
 @Component({
-  selector: 'fdp-vhd-display-token-example',
-  templateUrl: './platform-vhd-token-example.component.html'
+  selector: 'fdp-vhd-display-filters-example',
+  templateUrl: './platform-vhd-filters-example.component.html'
 })
-export class PlatformVhdTokenExampleComponent implements OnInit {
+export class PlatformVhdFiltersExampleComponent implements OnInit {
   filters: any;
-  originSource: Array<ExampleTestModel>;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
   hasAdvanced = false;
 

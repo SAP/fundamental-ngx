@@ -1,22 +1,109 @@
 <fd-docs-section-title id="vhd-basic" componentName="value-help-dialog">
-    Basic Value HelpDialog.
+    Basic Value Help Dialog.
 </fd-docs-section-title>
 <description>
-    Example to demonstrate the basic call value help dialog.
+    <p>Example to demonstrate the basic call Value Help Dialog.</p>
+    <p>Very simple setup</p>
+    <strong>fdp-value-help-dialog</strong>
+    <ul>
+        <li>Set <code>[dialogTitle]</code> property to your dialog title (string)</li>
+        <li>Set <code>[uniqueKey]</code> property to value, it should be uniq field from data source</li>
+        <li>Set <code>[dataSource]</code> property to your data source</li>
+    </ul>
+    <strong>fdp-value-help-dialog-filter</strong>
+    <ul>
+        <li>Set <code>[key]</code> property to string, should be equal to field from data source</li>
+        <li>Set <code>[label]</code> property to string, it will show as header in search table</li>
+    </ul>
 </description>
 <component-example>
     <fdp-vhd-basic-example></fdp-vhd-basic-example>
 </component-example>
 <code-example [exampleFiles]="basicValueHelpDialog"></code-example>
+
 <separator></separator>
 
-<!-- <fd-docs-section-title id="vhd-selection-token" componentName="value-help-dialog">
-    Token display function for the Value HelpDialog.
+<fd-docs-section-title id="vhd-selection-token" componentName="value-help-dialog">
+    Token display function for the Value Help Dialog.
 </fd-docs-section-title>
 <description>
-    Example to demonstrate the token display function for selections view
+    <ul>
+        <li>Set <code>[tokenViewField]</code> property to name from data source fields. It'll use for render custom token in selection panel.</li>
+        <li>Set <code>[tokenizerFn]</code> property to your function. It'll use for render custom token in selection panel.</li>
+    </ul>
+    <p><code>[tokenizerFn]</code> has higher priority than <code>[tokenViewField]</code></p>
+    <p>Example to demonstrate the token display function for selected items panel in the footer of the Value Help Dialog.</p>
 </description>
 <component-example>
     <fdp-vhd-display-token-example></fdp-vhd-display-token-example>
 </component-example>
-<code-example [exampleFiles]="basicValueHelpDialog"></code-example> -->
+<code-example [exampleFiles]="basicValueHelpDialog"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="vhd-selection-filters" componentName="value-help-dialog">
+    Filters combinations
+</fd-docs-section-title>
+<description>
+    <p>All filters will appear in advanced, includes and excludes sections by default.</p>
+    <p>You can control appearing with options</p>
+    <ul>
+        <li>Set <code>[advanced]</code> property to false, if you want to hide filter from advanced search panel</li>
+        <li>Set <code>[includes]</code> property to false, if you want to hide filter from includes panel in Dedine Conditions Tab</li>
+        <li>Set <code>[excludes]</code> property to false, if you want to hide filter from excludes panel in Dedine Conditions Tab</li>
+    </ul>
+    <p>Example to demonstrate combinations with filters</p>
+</description>
+<component-example>
+    <fdp-vhd-display-filters-example></fdp-vhd-display-filters-example>
+</component-example>
+<code-example [exampleFiles]="filtersValueHelpDialog"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="vhd-selection-token" componentName="value-help-dialog">
+    Input field with Value Help Dialog.
+</fd-docs-section-title>
+<description>
+    <p><code>fdp-select-tab-settings</code> has <strong>selection</strong> field, you can choose behaviour for select from search table</p>
+    <ul>
+        <li>Set <code>[selection]</code> property to <strong>multi</strong>, if you want to select multiple rows from search table</li>
+        <li>Set <code>[selection]</code> property to <strong>single</strong>, if you want to select single row from search table without close dialog</li>
+        <li>Set <code>[selection]</code> property to <strong>once</strong>, if you want to select single row from search table and success dialog with this value</li>
+    </ul>
+    <p>Example to demonstrate using Value Help Dialog with input field.</p>
+</description>
+<component-example>
+    <fdp-vhd-input-example></fdp-vhd-input-example>
+</component-example>
+<code-example [exampleFiles]="inputValueHelpDialog"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="vhd-selection-token" componentName="value-help-dialog">
+    Multi Input field with Value Help Dialog.
+</fd-docs-section-title>
+<description>
+    <p>Example to demonstrate using Value Help Dialog with multi input field.</p>
+</description>
+<component-example>
+    <fdp-vhd-multi-input-example></fdp-vhd-multi-input-example>
+</component-example>
+<code-example [exampleFiles]="multiInputValueHelpDialog"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="vhd-selection-mobile" componentName="value-help-dialog">
+    Mobile verstion
+</fd-docs-section-title>
+<description>
+    <p>Example to demonstrate mobile view for Value Help Dialog.</p>
+    <ul>
+        <li>Set <code>[mobile]</code> property to <strong>true</strong> on <strong>fdp-value-help-dialog</strong></li>
+    </ul>
+    <p></p>
+</description>
+<component-example>
+    <fdp-vhd-mobile-example></fdp-vhd-mobile-example>
+</component-example>
+<code-example [exampleFiles]="multiInputValueHelpDialog"></code-example>

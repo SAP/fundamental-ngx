@@ -1,47 +1,35 @@
 import { Injectable } from '@angular/core';
-import { isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, isObservable, Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import {
   ValueHelpDialogDataSource,
   ArrayValueHelpDialogDataSource,
-  ObservableValueHelpDialogDataSource
+  ObservableValueHelpDialogDataSource,
+  ValueHelpDialogTabs,
+  VhdFilter,
+  VhdValueChangeEvent,
+  VhdDefineIncludeEntityRule,
+  VhdDefineExcludeEntityRule
 } from './models';
 import { isDataSource } from '../../domain/data-source';
-import { takeUntil, tap } from 'rxjs/operators';
 
-export interface VhdFilterChangeEvent {
-  filters?: {
-    key: string;
-    value: string;
-  }[];
-  tokens?: any
-}
-
-export enum ValueHelpDialogTabs {
-  selectFromList,
-  advancedSearch,
-  defineConditions
-}
-
-export interface VhdValueChangeEvent {
-  selected: any;
-  excluded: any;
-}
-export type FdpValueHelpDialogDataSource<T> = ValueHelpDialogDataSource<T>;
+export type FdpValueHelpDialogDataSource<T> = ValueHelpDialogDataSource<T>
+  | ArrayValueHelpDialogDataSource<T>
+  | ObservableValueHelpDialogDataSource<T>;
 
 @Injectable()
-export class ValueHelpDialogService {
-  selected: any = [];
-  excluded: any = [];
-
-  isAdvancedOpen = false;
-
-  selectedTab: ValueHelpDialogTabs;
-  selectedTab$ = new Subject();
+export class ValueHelpDialogService<T> {
+  selectedTab$: BehaviorSubject<ValueHelpDialogTabs> = new BehaviorSubject(null);
+  displayedData$: BehaviorSubject<T[]> = new BehaviorSubject([]);
+  displayedFilters$: BehaviorSubject<VhdFilter[]> = new BehaviorSubject([]);
+  selectedItems$: BehaviorSubject<T[]> = new BehaviorSubject([]);
+  includedItems$: BehaviorSubject<VhdDefineIncludeEntityRule[]> = new BehaviorSubject([]);
+  excludedItems$: BehaviorSubject<VhdDefineExcludeEntityRule[]> = new BehaviorSubject([]);
 
   private _originalData: any;
   private _dataSource: FdpValueHelpDialogDataSource<any>;
-  private _dsSubscription: Subscription
+  private _dsSubscription: Subscription;
 
   get dataSource(): FdpValueHelpDialogDataSource<any> {
     return this._dataSource;
@@ -50,13 +38,18 @@ export class ValueHelpDialogService {
     return this._originalData;
   }
 
-
-  updateSelection(selected: any): void {
-    this.selected = selected;
-  }
-
-  updateExcluded(excluded: any): void {
-    this.excluded = excluded;
+  refreshState(value?: VhdValueChangeEvent<T[]>): void {
+    if (value) {
+      if (value.selected) {
+        this.selectedItems$.next(value.selected);
+      }
+      if (value.included) {
+        this.includedItems$.next(value.included);
+      }
+      if (value.excluded) {
+        this.excludedItems$.next(value.excluded);
+      }
+    }
   }
 
   initializeDS(ds: FdpValueHelpDialogDataSource<any>): Observable<any> {

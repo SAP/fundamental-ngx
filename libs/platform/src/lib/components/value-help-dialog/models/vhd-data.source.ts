@@ -7,13 +7,12 @@ import { BaseDataProvider } from '../../../domain/base-data-provider';
 export class ValueHelpDialogDataSource<T> implements DataSource<T> {
     dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
     constructor(public dataProvider: DataProvider<any>) { }
-    // filter
     match(predicate?: string | Map<string, string>): void {
-        const searchParam = new Map();
+        let searchParam = new Map();
         if (typeof predicate === 'string') {
             searchParam.set('query', predicate);
         } else if (predicate instanceof Map) {
-            predicate.forEach((v, k) => searchParam.set(k, v));
+            searchParam = predicate;
         }
 
         this.dataProvider.fetch(searchParam).pipe(
@@ -39,5 +38,33 @@ export class ArrayValueHelpDialogDataSource<T> extends ValueHelpDialogDataSource
 export class ObservableValueHelpDialogDataSource<T> extends ValueHelpDialogDataSource<T> {
     constructor(data: Observable<T[]>) {
         super(new BaseDataProvider(data));
+    }
+}
+
+export class VhdDataProvider extends DataProvider<any> {
+    constructor(public values: any) {
+        super()
+    }
+    fetch(params: Map<string, string>): Observable<any> {
+        let data = this.values;
+        const arrayParams = Array.from(params);
+        const filterFn = (row: any) => {
+            const rowEntries = Object.entries(row) as string[][];
+
+            return arrayParams.some(([key, value]) => {
+                if (key === '*') {
+                    return rowEntries.some(([_rowEntryKey, rowEntryValue]) => {
+                        return String(rowEntryValue).toLowerCase().includes(value.toLowerCase())
+                    });
+                } else {
+                    return String(row[key]).toLowerCase().includes(value.toLowerCase())
+                }
+            });
+        };
+        if (params.size) {
+            data = this.values.filter(filterFn);
+        }
+
+        return of(data);
     }
 }

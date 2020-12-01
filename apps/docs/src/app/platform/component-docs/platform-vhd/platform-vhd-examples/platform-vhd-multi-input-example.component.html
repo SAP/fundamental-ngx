@@ -1,12 +1,20 @@
-<button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
+<div>
+    <fd-multi-input
+        [dropdownValues]="originSource"
+        placeholder="Search here..."
+        [displayFn]="displayFunc"
+        [(ngModel)]="selectedValue"
+    ></fd-multi-input>
+    <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
+</div>
 <p>SelectedValue:</p>
 <pre *ngIf="selectedValue.length">{{ selectedValue | json }}</pre>
 
 <fdp-value-help-dialog #vhd
-    dialogTitle="Custom token function"
+    dialogTitle="Multiple selection"
     uniqueKey="id"
     [dataSource]="dataSource"
-    [tokenizerFn]="tokenizerFn"
+    [value]="currentValue"
     (valueChange)="valueChange($event)"
 >
     <fdp-value-help-dialog-search
@@ -17,7 +25,7 @@
         [main]="i < 2"
         [key]="filter.key"
         [label]="filter.label"
-        [advanced]="filter.advanced || hasAdvanced"
+        [advanced]="filter.advanced"
         [include]="filter.include"
         [exclude]="filter.exclude"
     ></fdp-value-help-dialog-filter>

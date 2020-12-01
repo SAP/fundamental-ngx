@@ -1,12 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { ValueHelpDialogTabs } from '../../state.service';
+import { ValueHelpDialogTabs } from '../../models';
 
 @Component({
   selector: 'fdp-define-tab-settings',
   template: '',
-  // templateUrl: './define-tab-settings.component.html',
-  styleUrls: ['./define-tab-settings.component.scss']
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefineTabSettingsComponent {
   @Input()
