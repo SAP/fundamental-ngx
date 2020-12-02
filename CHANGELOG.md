@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.14...v0.25.0-rc.15) (2020-12-02)
+
+
+### Bug Fixes
+
+* (Core) add fix for Button text not being centered ([#3995](https://github.com/SAP/fundamental-ngx/issues/3995)) ([6d13d42](https://github.com/SAP/fundamental-ngx/commit/6d13d42201332e2533f1f6a0a647209d1019c6ee))
+
 ## [0.25.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.13...v0.25.0-rc.14) (2020-12-02)
 
 
