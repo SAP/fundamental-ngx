@@ -95,7 +95,7 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check info label with aria label for accessibility', () => {
-        const ariaAttrArr = browser.$$(infoLabelPage.accessibilityAttrArr);
+        const ariaAttrArr = webDriver.elementArray(infoLabelPage.accessibilityAttrArr);
 
         if (browser.capabilities.browserName === 'Safari') {
             expect(webDriver.getAttributeByName(infoLabelPage.accessibilityLabelsArr, InfoLabelData.ariaLabelAttribute, 0))
@@ -127,7 +127,7 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check LTR orientation', () => {
-        const areaContainersArray = browser.$$(infoLabelPage.exampleAreaContainersArr);
+        const areaContainersArray = webDriver.elementArray(infoLabelPage.exampleAreaContainersArr);
 
         for (let i = 0; i < areaContainersArray.length; i++) {
             expect(webDriver.getCSSPropertyByName(infoLabelPage.exampleAreaContainersArr, 'direction', i).value)
@@ -136,8 +136,8 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check RTL orientation', () => {
-        const areas = browser.$$(infoLabelPage.exampleAreaContainersArr);
-        const switchers = browser.$$(infoLabelPage.rtlSwitcherArr);
+        const areas = webDriver.elementArray(infoLabelPage.exampleAreaContainersArr);
+        const switchers = webDriver.elementArray(infoLabelPage.rtlSwitcherArr);
         for (let i = 0; i < areas.length; i++) {
             switchers[i].click();
             expect(webDriver.getAttributeByName(infoLabelPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
