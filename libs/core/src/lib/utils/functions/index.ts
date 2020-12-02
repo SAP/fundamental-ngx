@@ -1,5 +1,5 @@
 export * from './key-util';
-export * from './fit-elements';
+export * from './element-size';
 export * from './closest-element';
 export * from './compare-objects';
 export * from './uuidv4-generator';
