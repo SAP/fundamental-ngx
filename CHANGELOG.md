@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.17...v0.25.0-rc.18) (2020-12-02)
+
+
+### Bug Fixes
+
+* (Core) add fix for missing space between text and icon in Menu Button ([#3986](https://github.com/SAP/fundamental-ngx/issues/3986)) ([4f432f9](https://github.com/SAP/fundamental-ngx/commit/4f432f9ce97ffa8d519389556883bdc9876ee537))
+
 ## [0.25.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.16...v0.25.0-rc.17) (2020-12-02)
 
 
