@@ -23,7 +23,7 @@ import { TabsService } from './tabs.service';
 import { debounceTime, filter, startWith, takeUntil } from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
-import { fitElements } from '../utils/functions';
+import { getElementCapacity, getElementWidth } from '../utils/functions';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -78,36 +78,40 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
 
     /** @hidden */
     @ViewChildren(TabItemDirective)
-    tabItem: QueryList<TabItemDirective>;
+    tabItems: QueryList<TabItemDirective>;
 
     /** @hidden */
     @ViewChild('tabsItemContainer', { read: ElementRef })
     tabsItemContainer: ElementRef;
 
     /** @hidden */
-    @ViewChild('collapsedTabsTrigger', { read: ElementRef })
-    collapsedTabsTrigger: ElementRef;
+    @ViewChild('expandTabsTrigger', { read: ElementRef })
+    expandTabsTrigger: ElementRef;
 
     /** @hidden TODO */
-    _overflowingTabs: TabPanelComponent[] = [];
+    _tabs: {[key: string]: TabPanelComponent[]} = { visible: [], collapsed: [] };
 
     /** @hidden TODO */
-    _visibleTabs: TabPanelComponent[] = [];
+    _tabsWidth: [TabItemDirective, number][];
+
+    /** @hidden TODO */
+    _triggerWidth: number;
+
+    /** @hidden TODO */
+    _isCollapsed = true;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    private _tabItems: TabItemDirective[];
 
     constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._visibleTabs = this.panelTabs.toArray();
+        this._tabs.visible = this.panelTabs.toArray();
     }
 
     ngAfterViewInit(): void {
-        this._tabItems = this.tabItem.toArray();
+        this._cacheTabItemsDimensions(this.tabItems.toArray());
         this._collapseTabItems();
         this.selectTab(this.selectedIndex);
         this._listenOnTabSelect();
@@ -226,20 +230,28 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     }
 
     private _collapseItems(): void {
-        const tabItemDirectiveAccessor = (tabItem: TabItemDirective) => tabItem.elementRef().nativeElement;
-        const [visible] = fitElements<ElementRef, TabItemDirective>(
-            this.tabsItemContainer,
-            this._tabItems,
-            {
-                elementHTMLAccessor: tabItemDirectiveAccessor,
-                reservedWidthIfCollapsed: this.collapsedTabsTrigger.nativeElement.width
-            }
-        );
+        const capacity = getElementCapacity(this.tabsItemContainer);
+        const totalRequiredWidth = this._tabsWidth.reduce((total, [_, width]) => total + width, 0);
 
+        this._isCollapsed = totalRequiredWidth > capacity;
+        const requiredFreeSpace = this._isCollapsed ? this._triggerWidth : 0;
+        const visibleElements = [];
+        let capacityLeft = capacity;
+
+        for (let i = 0; capacityLeft > requiredFreeSpace && this._tabsWidth.length > i; i++) {
+            const [element, width] = this._tabsWidth[i];
+
+            if (capacityLeft - width > requiredFreeSpace) {
+                visibleElements.push(element);
+            }
+            capacityLeft -= width;
+        }
         const panelTabs = this.panelTabs.toArray();
 
-        this._visibleTabs = panelTabs.splice(0, visible.length - 1);
-        this._overflowingTabs = panelTabs;
+        this._tabs = {
+            visible: panelTabs.splice(0, visibleElements.length),
+            collapsed: panelTabs
+        }
     };
 
     private _collapseTabItems(): void {
@@ -248,10 +260,18 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
         source$.pipe(
             startWith(0),
             debounceTime(100),
-            takeUntil(this._onDestroy$),
+            takeUntil(this._onDestroy$)
         ).subscribe(_ => {
             this._collapseItems();
             this._changeRef.detectChanges();
         })
+    }
+
+    private _cacheTabItemsDimensions(tabItems: TabItemDirective[]): void {
+        this._triggerWidth = Math.ceil(getElementWidth(this.expandTabsTrigger, true));
+
+        this._tabsWidth = tabItems
+            .filter(item => item.elementRef().nativeElement.id !== 'expand-tabs-trigger')
+            .map(item => [item, Math.ceil(getElementWidth(item.elementRef(), true))]);
     }
 }

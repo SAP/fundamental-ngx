@@ -9,6 +9,17 @@
     opacity: 0.4;
 }
 
+.fd-tabs__item--expand-trigger {
+    fd-icon {
+        margin-left: 0.5rem;
+
+        &[dir="rtl"] {
+            margin-left: 0;
+            margin-right: 0.25rem;
+        }
+    }
+}
+
 // Temporary solution until the next styles release
 .fd-tabs__item--success .fd-tabs__link .fd-tabs__tag {
     color: #107e3e;

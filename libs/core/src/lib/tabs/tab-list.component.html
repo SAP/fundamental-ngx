@@ -4,8 +4,8 @@
     [ngClass]="(compact ? 'fd-tabs--compact ' : '') + (mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
     role="tablist"
 >
-    <ng-container *ngFor="let tab of _visibleTabs; let i = index">
-        <li fd-tab-item [header]="tab.header" [tabItemState]="tab.tabState" [attr.aria-selected]="tab.active">
+    <ng-container *ngFor="let tab of _tabs.visible; let i = index">
+        <li fd-tab-item [header]="tab.header" [tabItemState]="tab.tabState">
             <a
                 fd-tab-link
                 [active]="tab.expanded"
@@ -61,22 +61,21 @@
         <div *ngIf="tab.header" fd-tab-separator></div>
     </ng-container>
 
-    <li fd-tab-item #collapsedTabsTrigger>
+    <li *ngIf="_isCollapsed" fd-tab-item class="fd-tabs__item--expand-trigger" id="expand-tabs-trigger" #expandTabsTrigger>
         <a fd-tab-link
            [fdMenuTrigger]="menu"
            [active]="menu.isOpen"
            [attr.tabindex]="0">
-            More
+            More <fd-icon glyph="slim-arrow-down"></fd-icon>
         </a>
     </li>
 </ul>
-<ng-content select="fd-tab"></ng-content>
 <ng-content></ng-content>
 
 <fd-menu #menu>
     <li fd-menu-item
-        *ngFor="let tab of _overflowingTabs; let i = index"
-        (onSelect)="tabHeaderClickHandler(_visibleTabs.length + i)">
+        *ngFor="let tab of _tabs.collapsed; let i = index"
+        (onSelect)="tabHeaderClickHandler(_tabs.visible.length + i)">
         <div fd-menu-interactive>
             <ng-container *ngTemplateOutlet="tab.titleTemplate || textTitle; context: { $implicit: tab.title }"></ng-container>
         </div>
