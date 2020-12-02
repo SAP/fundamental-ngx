@@ -1,5 +1,9 @@
 @import '~fundamental-styles/dist/tokenizer';
 
+.fd-tokenizer .fd-token {
+    max-width: inherit;
+}
+
 input {
     &.fd-input {
         &.fd-tokenizer__input {
