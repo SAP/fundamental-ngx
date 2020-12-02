@@ -39,7 +39,7 @@
         <ng-container></ng-container>
         <input
             #searchInputElement
-            fdp-auto-complete
+            [attr.fdp-auto-complete]="!mobile"
             [options]="_suggestions"
             [inputText]="inputText"
             type="text"
