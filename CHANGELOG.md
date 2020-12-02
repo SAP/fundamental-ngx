@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.16...v0.25.0-rc.17) (2020-12-02)
+
+
+### Features
+
+* (Core) introduce Flexible Column Layout component ([#3934](https://github.com/SAP/fundamental-ngx/issues/3934)) ([fe7ac54](https://github.com/SAP/fundamental-ngx/commit/fe7ac54d9f4a33584cc638f0c9e344f37781a9b5))
+
 ## [0.25.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.15...v0.25.0-rc.16) (2020-12-02)
 
 
