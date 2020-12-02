@@ -1,3 +1,5 @@
+
+
 export class Wdio {
 
     get defaultWaitTime(): number {
@@ -12,12 +14,23 @@ export class Wdio {
         browser.url(path);
     }
 
+    pause(waitTime: number = this.defaultWaitTime): void {
+        browser.pause(waitTime);
+    }
     goBack(): void {
         browser.back();
     }
 
     refreshPage(): void {
         browser.refresh();
+    }
+
+    getAlertText(): string {
+        return browser.getAlertText();
+    }
+
+    acceptAlert(): void {
+        browser.acceptAlert();
     }
 
     click(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
@@ -52,16 +65,20 @@ export class Wdio {
         return $$(selector)[index].getText();
     }
 
+    getTextArr(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
+        return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getText());
+    }
+
     waitForDisplayed(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     };
-  
+
     waitForInvisibilityOf(selector: string, index: number = 0): boolean {
-        return $$(selector)[index].waitForDisplayed({ reverse: true })
+        return $$(selector)[index].waitForDisplayed({ reverse: true });
     }
 
     waitForNotDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
-        return $(selector).waitForDisplayed({timeout: waitTime, reverse: true});
+        return $(selector).waitForDisplayed({ timeout: waitTime, reverse: true });
     };
 
     waitForClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
@@ -94,14 +111,18 @@ export class Wdio {
         return $$(selector)[index].getAttribute(attrName);
     }
 
+    getAttributeByNameArr(selector: string, attrName: string, sliceStart?: number, sliceEnd?: number): string[] {
+        return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getAttribute(attrName));
+    }
+
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0 ): { value: string } {
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string } {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 
     mouseHoverElement(selector: string, waitTime = this.defaultWaitTime, index: number = 0): any {
-        $$(selector)[index].waitForExist({ timeout: waitTime });
-        $$(selector)[index].moveTo();
+            $$(selector)[index].waitForExist({ timeout: waitTime });
+            $$(selector)[index].moveTo();
     }
 
     clearValue(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
@@ -117,6 +138,32 @@ export class Wdio {
         return browser.execute(callback());
     }
 
+    executeScript2(selector): string {
+        const attrName = browser.capabilities.browserName === 'firefox' ? 'border-left-style' : 'border';
+        return browser.execute(function(selector, attrName) {
+            return window.getComputedStyle(
+                document.querySelector(selector), ':after')[attrName];
+        }, selector, attrName);
+    }
+
+    executeScript3(selector, attrName): string {
+        return browser.execute(function(selector, attrName) {
+            return (window.getComputedStyle(document.querySelector(selector), ':before')[attrName]);
+        }, selector, attrName);
+    }
+
+    executeScript4(selector, attrName): string {
+        return browser.execute(function(selector, attrName) {
+            return (window.getComputedStyle(document.querySelector(selector), ':before')[attrName]);
+        }, selector, attrName);
+    }
+
+    executeScript5(selector, attrName): string {
+        return browser.execute(function(selector, attrName) {
+            return (window.getComputedStyle(document.querySelector(selector), ':after')[attrName]);
+        }, selector, attrName);
+    }
+
     getElementArrayLength(selector: string): number {
         return $$(selector).length;
     }
@@ -130,34 +177,25 @@ export class Wdio {
     }
 
     clickAndHold(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
-        $$(selector)[index].waitForDisplayed({timeout: waitTime});
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].moveTo();
         return browser.buttonDown();
     }
+
     // TODO: add wait 300ms
 
-    waitElementToBePresentInDOM (selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
+    waitElementToBePresentInDOM(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime });
     }
 
-    scrollIntoView(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): void {
+    scrollIntoView(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
         $$(selector)[index].scrollIntoView();
     }
 
     isElementClickable(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
-       return  $$(selector)[index].isClickable();
-    }
-    mouseButtonDown(button: 0 | 1 | 2  = 0): void {
-        browser.buttonDown(button)
-    }
-
-    mouseButtonUp(button: 0 | 1 | 2  = 0): void {
-        browser.buttonUp(button)
-    }
-
-    isElementClickeble(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
         return $$(selector)[index].isClickable();
     }
+
 
     getUrl(): string {
         return browser.getUrl();
@@ -170,7 +208,7 @@ export class Wdio {
 
     isElementDisplayed(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
         $$(selector)[index].scrollIntoView();
-        return $(selector)[index].isDisplayed();
+        return $$(selector)[index].isDisplayed();
     }
 
     focusElement(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
@@ -179,13 +217,40 @@ export class Wdio {
         $$(selector)[index].focus();
     }
 
-    mouseButtonDown(button: 0 | 1 | 2  = 0): void {
-        browser.buttonDown(button)
+    mouseButtonDown(button: 0 | 1 | 2 = 0): void {
+        browser.buttonDown(button);
     }
 
-    mouseButtonUp(button: 0 | 1 | 2  = 0): void {
-        browser.buttonUp(button)
+    mouseButtonUp(button: 0 | 1 | 2 = 0): void {
+        browser.buttonUp(button);
     }
+
+    clickNextElement(selector: string, index: number = 0): void {
+        $$(selector)[index].nextElement().click();
+    }
+
+    // hoverForSafari(selector: string , index: number = 0 ): void {
+    //     const { x, y } = $$(selector)[index].getLocation();
+    //     browser.performActions([
+    //         {
+    //             type: 'pointer',
+    //             id: 'finger1121',
+    //             parameters: {
+    //                 pointerType: 'mouse'
+    //             },
+    //             actions: [
+    //                 {
+    //                     type: 'pointerMove',
+    //                     duration: 500,
+    //                     x: x + 1,
+    //                     y: y + 1
+    //                 }
+    //             ]
+    //         }
+    //     ]);
+    //     browser.releaseActions();
+    // }
+
 }
 
 export const webDriver = new Wdio();
