@@ -5,6 +5,7 @@ import { SearchFieldComponent, SuggestionMatchesPipe, SearchFieldSuggestionDirec
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PlatformMenuModule } from '../menu/public_api';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { PlatformMenuModule } from '../menu/public_api';
         PopoverModule,
         MenuModule,
         PipeModule,
-        PlatformMenuModule
+        PlatformMenuModule,
+        ScrollingModule
     ],
     exports: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe],
     declarations: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe]
