@@ -386,10 +386,10 @@ export class SelectComponent implements ControlValueAccessor, SelectInterface, O
                     this._setOptionsProperties();
                     this._setSelectedOption();
                     this._listenOnOptionKeydown();
+                    this._setSelectViewValue();
                     setTimeout(() => {
                         if (this.selected === undefined && this.unselectMissingOption) {
                             this._updateValue(undefined);
-                            this._setSelectViewValue();
                             this._changeDetectorRef.markForCheck();
                         }
                     });
