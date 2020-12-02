@@ -54,7 +54,13 @@ export type Placement = 'auto-start'
 
 export type XPositions = 'start' | 'center' | 'end';
 export type YPositions = 'top' | 'center' | 'bottom';
-export type ArrowPosition = 'top' | 'bottom' | 'start' | 'end';
+export type ArrowPosition = 'top' | 'bottom' | 'start' | 'end' | 'center';
+
+export const PopoverFlippedDirection: {[key: string]: ArrowPosition} = {
+    'start': 'end',
+    'end': 'start',
+    'center': 'center'
+};
 
 export class PopoverPosition {
 
@@ -82,11 +88,7 @@ export class PopoverPosition {
             _position = position.overlayX;
 
             if (rtl) {
-                if (_position === 'start') {
-                    _position = 'end';
-                } else if (_position === 'end') {
-                    _position = 'start';
-                }
+                _position = PopoverFlippedDirection[_position];
             }
         }
 
