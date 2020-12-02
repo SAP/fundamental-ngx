@@ -15,6 +15,13 @@ export class PlatformDatetimePickerReactiveExampleComponent {
     requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     onSubmit(): void {
+        Object.keys(this.datetimePickerForm.controls).forEach((field) => {
+            const control = this.datetimePickerForm.get(field);
+            control.markAsTouched({ onlySelf: true });
+        });
+        if (!this.datetimePickerForm.get('withAllowNull').value) {
+            this.datetimePickerForm.get('withAllowNull').setErrors({ required: true });
+        }
         if (this.datetimePickerForm.valid) {
             alert('Form Value: ' + this.datetimePickerForm.value);
         } else {
