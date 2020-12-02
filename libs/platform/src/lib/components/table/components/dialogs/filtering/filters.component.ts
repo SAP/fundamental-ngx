@@ -47,7 +47,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
 
     activeStep: ACTIVE_STEP = ACTIVE_STEP.SELECT_FILTER;
 
-    activeFilter: TableViewSettingsFilterComponent;
+    activeFilter: TableViewSettingsFilterComponent | null;
 
     readonly ACTIVE_STEP = ACTIVE_STEP;
 

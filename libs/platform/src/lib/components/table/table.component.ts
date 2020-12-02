@@ -23,7 +23,7 @@ import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, skip } from 'rxjs/operators';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 
 import {
     applyCssClass,
@@ -43,7 +43,11 @@ import {
     FiltersDialogData,
     FiltersDialogResultData,
     GroupingComponent,
+    GroupDialogData,
+    GroupDialogResultData,
     SortingComponent,
+    SortDialogData,
+    SortDialogResultData,
     TableColumnComponent,
     TableToolbarComponent,
     TableViewSettingsFilterComponent
@@ -211,7 +215,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     tableToolbarComponent: TableToolbarComponent;
 
     /** View Settings filters list */
-    viewSettingsFilters: QueryList<TableViewSettingsFilterComponent>;
+    viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
 
     /** @hidden */
     class: string;
@@ -314,17 +318,15 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-
-        this._listenToTableStateChanges();
-
-        this._listenToRtlChanges();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        // this._tableService.columns = this.columns;
-
         this._setInitialState();
+
+        this._listenToTableStateChanges();
+
+        this._listenToRtlChanges();
 
         this._checkColumnsAbilities();
 
@@ -479,35 +481,34 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     openSortingDialog(): void {
         const state = this.getTableState();
-        const columns = state.columns;
+        const columns = this._getTableColumnsAsArray();
         const sortBy = state.sortBy?.[0];
+        const dialogData: SortDialogData = {
+            columns: columns.filter(({ sortable }) => sortable),
+            direction: sortBy?.direction,
+            field: sortBy?.field
+        };
 
         const dialogRef = this._dialogService.open(SortingComponent, {
             ...dialogConfig,
-
-            data: {
-                columns: columns.filter((c) => c.sortable),
-                sortDirection: sortBy?.direction,
-                sortField: sortBy?.field
-            }
+            data: dialogData
         });
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe(({ action, value }) => {
-                if (!action && !value) {
+            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: SortDialogResultData | null) => {
+                if (!result) {
                     return;
                 }
-
-                this._tableService.sort(value.field, value.direction);
+                this._tableService.sort(result.field, result.direction);
             })
         );
     }
 
     /** @hidden */
     openFilteringDialog(): void {
-        const state = this._tableService.tableState$.getValue();
-        const data: FiltersDialogData = {
-            viewSettingsFilters: this.viewSettingsFilters.toArray(),
+        const state = this.getTableState();
+        const dialogData: FiltersDialogData = {
+            viewSettingsFilters: this.viewSettingsFilters,
             filterBy: state?.filterBy
         };
 
@@ -516,12 +517,12 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
             verticalPadding: false,
             minWidth: '30%',
             minHeight: '50%',
-            data: data
+            data: dialogData
         } as DialogConfig);
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: FiltersDialogResultData) => {
-                if (!Array.isArray(result?.filterBy)) {
+            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: FiltersDialogResultData | null) => {
+                if (!result || !result.filterBy) {
                     return;
                 }
                 this._tableService.filter(result.filterBy);
@@ -531,27 +532,32 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
 
     /** @hidden */
     openGroupingDialog(): void {
-        const state = this._tableService.tableState$.getValue();
-        const columns = state.columns;
+        const state = this.getTableState();
+        const columns = this._getTableColumnsAsArray();
+        const dialogData: GroupDialogData = {
+            columns: columns.filter(({ groupable }) => groupable),
+            direction: state.groupBy?.[0]?.direction,
+            field: state.groupBy?.[0]?.field
+        };
 
         const dialogRef = this._dialogService.open(GroupingComponent, {
             ...dialogConfig,
-            data: {
-                columns: columns.filter((c) => c.groupable),
-                groupOrder: state && state.groupBy && state.groupBy[0] && state.groupBy[0].direction,
-                groupField: state && state.groupBy && state.groupBy[0] && state.groupBy[0].field
-            }
+            data: dialogData
         });
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe(({ action, value }) => {
-                if (!action && !value) {
+            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: GroupDialogResultData | null) => {
+                if (!result) {
                     return;
                 }
-
-                this._tableService.group(value.field, value.direction);
+                this._tableService.group(result.field, result.direction);
             })
         );
+    }
+
+    /** @hidden */
+    getTableColumnByName(name: string): TableColumnComponent {
+        return this.columns.find((column) => column.name === name);
     }
 
     /** @hidden */
@@ -598,8 +604,13 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
      * @hidden
      * set view settings filters list
      */
-    _setViewSettingsFilters(filters: QueryList<TableViewSettingsFilterComponent>): void {
+    _setViewSettingsFilters(filters: TableViewSettingsFilterComponent[]): void {
         this.viewSettingsFilters = filters;
+    }
+
+    /** @hidden */
+    private _getTableColumnsAsArray(): TableColumnComponent[] {
+        return this.columns?.toArray() || [];
     }
 
     /** @hidden */
@@ -635,7 +646,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         this.setTableState({
             ...prevState,
             freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
-            columns: this.columns
+            columns: this.columns.toArray().map((column) => column.key)
         });
     }
 
@@ -645,7 +656,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
             this._tableService.tableState$
                 .pipe(
                     filter((state) => !!state),
-                    skip(2), // skipping setting default and initial state with columns
+                    // skip(2), // skipping setting default and initial state with columns
                     distinctUntilChanged()
                 )
                 .subscribe((state) => {
@@ -849,6 +860,6 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
 
     /** @hidden */
     _setPopoverColumnKey(columnKey: string): void {
-        this._popoverColumnKey = columnKey
+        this._popoverColumnKey = columnKey;
     }
 }

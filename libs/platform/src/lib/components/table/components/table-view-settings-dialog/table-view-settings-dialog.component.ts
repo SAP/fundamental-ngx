@@ -1,7 +1,6 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
     forwardRef,
@@ -60,13 +59,15 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     @ContentChildren(forwardRef(() => TableViewSettingsFilterComponent))
     filters: QueryList<TableViewSettingsFilterComponent>;
 
-    /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef) {}
-
     ngAfterViewInit(): void {
         if (!this.table) {
             return;
         }
-        this.table._setViewSettingsFilters(this.filters);
+
+        this.filters.changes.subscribe(() => {
+            this.table._setViewSettingsFilters(this.filters.toArray());
+        });
+
+        this.table._setViewSettingsFilters(this.filters.toArray());
     }
 }

@@ -9,7 +9,7 @@ export const DEFAULT_TABLE_STATE: TableState = {
         startIndex: null
     },
     pageSize: null,
-    columns: null,
+    columns: [],
     freezeToColumn: null,
     searchInput: {
         text: '',

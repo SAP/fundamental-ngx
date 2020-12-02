@@ -33,7 +33,7 @@ export interface CollectionSelectFilter {
 
 export interface CollectionCustomFilter {
     field: string;
-    value: Map<string, any>;
+    value: { [key: string]: any };
 }
 
 export type CollectionFilter =

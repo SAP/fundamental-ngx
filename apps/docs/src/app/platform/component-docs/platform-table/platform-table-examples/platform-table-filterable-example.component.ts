@@ -20,6 +20,12 @@ export class PlatformTableFilterableExampleComponent {
         { value: 'AVAILABLE', label: 'available' }
     ];
 
+    statusColorFilteringValues = [
+        { value: 'positive', label: 'Positive' },
+        { value: 'negative', label: 'Negative' },
+        { value: 'critical', label: 'Critical' }
+    ];
+
     logFilterChange(event: TableFilterChangeEvent): void {
         console.log('TableFilterChangeEvent -> ', event);
     }

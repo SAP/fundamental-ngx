@@ -1,70 +1,111 @@
 import { Observable, of } from 'rxjs';
 
-import {
-    CollectionFilter,
-    CollectionGroup,
-    CollectionSort,
-    SortDirection,
-    TableDataProvider,
-    TableState
-} from '@fundamental-ngx/platform';
+import { SortDirection, TableDataProvider, TableState } from '@fundamental-ngx/platform';
 
 export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [];
     totalItems = 0;
 
     fetch(tableState: TableState): Observable<ExampleItem[]> {
-        console.log('TableDataProviderExample – fetch()');
-        const {
-            sortBy,
-            filterBy,
-            groupBy,
-            currentPage: { pageSize, startIndex }
-        } = tableState;
-
         this.items = [...ITEMS];
 
+        // apply searching
+        if (tableState.searchInput) {
+            this.items = this.search(tableState);
+        }
+        // apply filtering
+        if (tableState.filterBy) {
+            this.items = this.filter(tableState);
+        }
         // apply sorting
-        if (sortBy?.length) {
-            this._sort(sortBy);
+        if (tableState.sortBy) {
+            this.items = this.sort(tableState);
         }
         // apply  grouping
-        if (groupBy?.length) {
-            this._group(groupBy);
-        }
-        // apply paging
-        if (startIndex * pageSize) {
-            this._group(groupBy);
+        if (tableState.groupBy) {
+            this.items = this.group(tableState);
         }
 
         return of(this.items);
     }
 
-    private _sort(sortBy: CollectionSort[]): void {
-        console.log('TableDataProviderExample – _sort()');
+    private sort({ sortBy }: TableState): ExampleItem[] {
+        const items = this.items;
         const sortCriteria = sortBy[0];
 
-        if (!sortCriteria.field) {
-            return;
+        if (!sortCriteria?.field) {
+            return items;
         }
 
         const ascModifier: number = sortCriteria.direction === SortDirection.ASC ? 1 : -1;
-        this.items.sort((a, b) => sort(a, b, sortCriteria.field) * ascModifier);
+
+        return items.slice().sort((a, b) => sort(a, b, sortCriteria.field) * ascModifier);
     }
 
-    private _group(groupBy: CollectionGroup[]): void {
-        console.log('TableDataProviderExample – _group()');
+    private filter({ filterBy }: TableState): ExampleItem[] {
+        let items = this.items;
+
+        filterBy
+            .filter(({ field }) => !!field)
+            .forEach(({ field, value }) => {
+                items = items.filter((item) => {
+                    const itemValue = getNestedValue(field, item);
+
+                    switch (field) {
+                        case 'name':
+                            value = value as { [k: string]: string };
+                            return itemValue?.includes(value.name);
+                        case 'price.value':
+                            value = value as { [k: string]: number };
+                            return itemValue >= value.min && itemValue <= value.max;
+                        case 'status':
+                        case 'statusColor':
+                            value = value as string[];
+                            return value.includes(itemValue);
+                        default:
+                            return itemValue === value;
+                    }
+                });
+            });
+
+        return items;
+    }
+
+    private group(groupBy: TableState): ExampleItem[] {
+        const items = this.items;
         const groupCriteria = groupBy[0];
 
-        if (!groupCriteria.field) {
-            return;
+        if (!groupCriteria?.field) {
+            return items;
         }
 
         const ascModifier: number = groupCriteria.direction === SortDirection.ASC ? 1 : -1;
-        this.items.sort(
-            (a, b) =>
-                (getNestedValue(groupCriteria.field, a) > getNestedValue(groupCriteria.field, b) ? 1 : -1) * ascModifier
-        );
+
+        items
+            .slice()
+            .sort(
+                (a, b) =>
+                    (getNestedValue(groupCriteria.field, a) > getNestedValue(groupCriteria.field, b) ? 1 : -1) *
+                    ascModifier
+            );
+    }
+
+    private search({ searchInput, columns }: TableState): ExampleItem[] {
+        const items = this.items;
+        const searchText = searchInput?.text || '';
+        const keysToSearchBy = columns;
+
+        if (searchText.trim() === '' || keysToSearchBy.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+            const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
+            return valuesForSearch
+                .filter((value) => value)
+                .map((value): string => value.toString())
+                .some((value) => value.includes(searchText));
+        });
     }
 }
 
@@ -83,6 +124,7 @@ const sort = (a, b, key?: string) => {
 function getNestedValue(key: string, object: any): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
+
 export interface ExampleItem {
     name: string;
     description: string;

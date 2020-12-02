@@ -26,8 +26,8 @@ export class FilterStepComponent implements FiltersViewStep {
 
     @Input()
     set filterBy(filterByList: CollectionFilter[]) {
-        const field = this.filter?.column;
-        this._filterBy = filterByList.find((filterBy) => filterBy.field === field);
+        const columnName = this.filter.column;
+        this._filterBy = filterByList.find((filterBy) => filterBy.field === columnName);
     }
 
     @Output()

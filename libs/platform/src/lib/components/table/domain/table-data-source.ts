@@ -5,19 +5,25 @@ import { DataSource } from '../../../domain';
 import { TableDataProvider } from './table-data-provider';
 import { TableState } from '../interfaces';
 
-
 export class TableDataSource<T> implements DataSource<T> {
     readonly MAX_LIMIT = Number.MAX_SAFE_INTEGER;
 
     protected dataChanges = new BehaviorSubject<T[]>([]);
 
-    constructor(public readonly dataProvider: TableDataProvider<T>) {}
+    constructor(readonly dataProvider: TableDataProvider<T>) {}
 
     fetch(tableState: TableState): void {
         this.dataProvider
             .fetch(tableState)
             .pipe(take(1))
-            .subscribe(this.dataChanges);
+            .subscribe({
+                next: (data) => {
+                    this.dataChanges.next(data);
+                },
+                error: (error) => {
+                    this.dataChanges.error(error);
+                }
+            });
     }
 
     open(): Observable<T[]> {

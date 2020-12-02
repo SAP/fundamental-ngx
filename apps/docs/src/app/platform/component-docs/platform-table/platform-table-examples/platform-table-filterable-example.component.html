@@ -53,6 +53,13 @@
         label="Status"
         align="center"
         [filterable]="true"
+    ></fdp-column>
+
+    <fdp-column
+        name="statusColor"
+        key="statusColor"
+        label="Status Color"
+        align="center"
     >
     </fdp-column>
 </fdp-table>
@@ -85,13 +92,13 @@
             <label>Minimum Price:</label>
             <fdp-input
                 type="number"
-                name="minimumPrice"
+                name="min"
                 [(ngModel)]="model.min"
             ></fdp-input>
             <label>Maximum Price:</label>
             <fdp-input
                 type="number"
-                name="maximumPrice"
+                name="max"
                 [(ngModel)]="model.max"
             ></fdp-input>
         </ng-container>
@@ -99,17 +106,17 @@
 
     <fdp-table-view-settings-filter
         column="status"
-        type="single-select"
-        label="Currency"
-        [values]="priceCurrencyFilteringValues"
+        type="multi-select"
+        label="Status Text"
+        [values]="statusFilteringValues"
     >
     </fdp-table-view-settings-filter>
 
     <fdp-table-view-settings-filter
-        column="status"
-        type="multi-select"
-        label="Status"
-        [values]="statusFilteringValues"
+        column="statusColor"
+        type="single-select"
+        label="Status Color"
+        [values]="statusColorFilteringValues"
     >
     </fdp-table-view-settings-filter>
 </fdp-table-view-settings-dialog>
