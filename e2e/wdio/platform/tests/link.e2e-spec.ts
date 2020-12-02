@@ -93,7 +93,7 @@ describe('Link component test suite', function() {
         expect(webDriver.isElementClickeble(linkPage.invertedLink)).toBe(true);
     });
 
-    fit('should check truncated link', () => {
+    it('should check truncated link', () => {
         const truncatedLinkAltText = webDriver.getAttributeByName(linkPage.truncatedLink, 'aria-label');
         webDriver.scrollIntoView(linkPage.truncatedLink);
         webDriver.mouseHoverElement(linkPage.truncatedLink);
