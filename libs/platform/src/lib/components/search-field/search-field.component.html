@@ -23,21 +23,27 @@
             [ngClass]="{ 'fd-input-group__addon--compact': contentDensity === 'compact' }"
             *ngIf="inputText && inputText.length > 0">
             <button
-                class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent sap-icon--decline"
-                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="clearTextInput()"></button>
+                class="fdp-search-field__clear fd-input-group__button fd-button fd-button--icon fd-button--transparent"
+                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="clearTextInput()">
+                <i class="sap-icon--decline"></i>
+            </button>
         </span>
         <span class="fd-input-group__addon fd-input-group__addon--button"
             [ngClass]="{ 'fd-input-group__addon--compact': contentDensity === 'compact' }" *ngIf="!isLoading">
             <button
-                class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent sap-icon--search"
+                class="fdp-search-field__submit fd-input-group__button fd-button fd-button--icon fd-button--transparent"
                 [attr.id]="submitId" [attr.disabled]="disabled ? '' : null"
-                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="onSearchSubmit()"></button>
+                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="onSearchSubmit()">
+                <i class="sap-icon--search"></i>
+            </button>
         </span>
         <span class="fd-input-group__addon fd-input-group__addon--button"
             [ngClass]="{ 'fd-input-group__addon--compact': contentDensity === 'compact' }" *ngIf="isLoading">
             <button
-                class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent sap-icon--synchronize"
-                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="onSearchSubmit()"></button>
+                class="fdp-search-field__loading fd-input-group__button fd-button fd-button--icon fd-button--transparent"
+                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="onSearchSubmit()">
+                <i class="sap-icon--synchronize"></i>
+            </button>
         </span>
     </div>
 </div>

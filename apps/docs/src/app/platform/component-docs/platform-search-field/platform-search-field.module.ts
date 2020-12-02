@@ -10,6 +10,7 @@ import { PlatformSearchFieldBasicExampleComponent } from './platform-search-fiel
 import { PlatformSearchFieldCategoriesExampleComponent } from './platform-search-field-examples/platform-search-field-categories-example.component';
 import { PlatformSearchFieldDataSourceExampleComponent } from './platform-search-field-examples/platform-search-field-data-source-example.component';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const routes: Routes = [
     {
@@ -23,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformSearchFieldModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformSearchFieldModule, ScrollingModule],
     exports: [RouterModule],
     declarations: [
         PlatformSearchFieldDocsComponent,
