@@ -100,7 +100,7 @@ export class PopoverComponent extends BasePopoverClass
     /** Direction of arrow */
     _arrowDirection: ArrowPosition = null;
 
-    /** Classes added to arrow element,  */
+    /** Classes added to arrow element */
     _arrowClasses: string[] = [];
 
     /** Additional style to put margin into body component, to give a place for arrow */
@@ -127,8 +127,6 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _overlayRef: OverlayRef;
-
-    private _arrowElement: HTMLElement = null;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
