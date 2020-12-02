@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.13...v0.25.0-rc.14) (2020-12-02)
+
+
+### Bug Fixes
+
+* (Core) add title to close button in Message Strip component ([#3963](https://github.com/SAP/fundamental-ngx/issues/3963)) ([bf9f294](https://github.com/SAP/fundamental-ngx/commit/bf9f294b12069c574fca1e92765f5a05ae998b25))
+
 ## [0.25.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.12...v0.25.0-rc.13) (2020-12-01)
 
 
