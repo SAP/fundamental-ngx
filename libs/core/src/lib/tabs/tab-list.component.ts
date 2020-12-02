@@ -24,6 +24,8 @@ import { debounceTime, filter, startWith, takeUntil } from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { getElementCapacity, getElementWidth } from '../utils/functions';
+import { mkdir } from 'fs';
+import { isNotNullOrUndefined } from 'codelyzer/util/isNotNullOrUndefined';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -63,6 +65,10 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
      */
     @Input()
     mode: TabModes;
+
+    /** Maximum number of tabs visible in the tab bar. Other tabs will be moved to the collapsed tabs dropdown */
+    @Input()
+    maxVisibleTabs: number = null;
 
     /** Event emitted when the selected panel changes. */
     @Output()
@@ -231,14 +237,16 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
 
     private _collapseItems(): void {
         const capacity = getElementCapacity(this.tabsItemContainer);
+        const tabsLimit = this.maxVisibleTabs || Number.MAX_SAFE_INTEGER;
         const totalRequiredWidth = this._tabsWidth.reduce((total, [_, width]) => total + width, 0);
 
-        this._isCollapsed = totalRequiredWidth > capacity;
+        this._isCollapsed = totalRequiredWidth > capacity || tabsLimit < this._tabsWidth.length;
+
         const requiredFreeSpace = this._isCollapsed ? this._triggerWidth : 0;
         const visibleElements = [];
         let capacityLeft = capacity;
 
-        for (let i = 0; capacityLeft > requiredFreeSpace && this._tabsWidth.length > i; i++) {
+        for (let i = 0; capacityLeft > requiredFreeSpace && this._tabsWidth.length > i && tabsLimit > i; i++) {
             const [element, width] = this._tabsWidth[i];
 
             if (capacityLeft - width > requiredFreeSpace) {
