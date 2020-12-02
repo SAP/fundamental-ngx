@@ -2,6 +2,16 @@ import { clickByMouseMove, getValueOfAttribute, hoverMouse } from './helper';
 import checkboxGPData from '../platform/fixtures/appData/checkbox-page-contents';
 import { webDriver } from '../driver/wdio';
 
+export function checkRtlOrientation(element: string, index: number): void {
+    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('rtl');
+    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('rtl');
+}
+
+export function checkLtrOrientation(element: string, index: number): void {
+    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('ltr');
+    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('ltr');
+}
+
 export function checkIfDisabled(element, attribute: string, value: string): void {
     expect(webDriver.getAttributeByName(element, attribute)).toBe(value);
 }

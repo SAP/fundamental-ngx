@@ -17,9 +17,9 @@ describe('Split menu button test suite', () => {
         const dropdownArrowBtnArr = webDriver.elementArray(spMenuBtnPage.arrowBtnArr);
 
         for (let i = 0; i < dropdownArrowBtnArr.length; i++) {
-            dropdownArrowBtnArr[i].click();
+            webDriver.click(spMenuBtnPage.arrowBtnArr, i);
             expect(webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay));
-            dropdownArrowBtnArr[i].click();
+            webDriver.click(spMenuBtnPage.arrowBtnArr, i);
         }
 
     });
@@ -32,12 +32,10 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check that menu closed after making one selection', () => {
-        const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
-
-        behaviorArrowBtnArr[0].click();
+        webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr);
         webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay);
-        const menuItemsArr = webDriver.elementArray(spMenuBtnPage.menuItemArr);
-        menuItemsArr[0].click();
+
+        webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr);
         webDriver.waitForNotDisplayed(spMenuBtnPage.menuOverlay);
     });
 
@@ -53,15 +51,11 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check btn selections', () => {
-        const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-        const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
-
-        typesBtnArr[0].click();
+        webDriver.click(spMenuBtnPage.typesExSelectionBtnArr);
         spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText);
 
-        typesArrowBtnArr[0].click();
-        const menuItemsArr = webDriver.elementArray(spMenuBtnPage.menuItemArr);
-        menuItemsArr[1].click();
+        webDriver.click(spMenuBtnPage.typesExArrowBtnArr);
+        webDriver.click(spMenuBtnPage.menuItemArr, 1);
         spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText2);
     });
 
@@ -84,15 +78,15 @@ describe('Split menu button test suite', () => {
         const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
 
         for (let i = 0; i < behaviorBtnArr.length; i++) {
-            webDriver.scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            webDriver.click(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
+            webDriver.scrollIntoView(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.defaultHvrColor);
         }
 
         for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.defaultHvrColor);
         }
@@ -139,15 +133,15 @@ describe('Split menu button test suite', () => {
         const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
-            webDriver.scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            webDriver.click(spMenuBtnPage.typesExSelectionBtnArr,  i);
+            webDriver.scrollIntoView(spMenuBtnPage.typesExSelectionBtnArr, i);
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.typesBtnHvrColorArr[i]);
         }
 
         for (let i = 0; i < typesArrowBtnArr.length; i++) {
-            webDriver.scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            webDriver.click(spMenuBtnPage.typesExArrowBtnArr,  i);
+            webDriver.scrollIntoView(spMenuBtnPage.typesExArrowBtnArr, i);
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.typesBtnHvrColorArr[i]);
         }
