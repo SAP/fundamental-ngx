@@ -147,13 +147,6 @@ export class Wdio {
     isElementClickable(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
        return  $$(selector)[index].isClickable();
     }
-    mouseButtonDown(button: 0 | 1 | 2  = 0): void {
-        browser.buttonDown(button)
-    }
-
-    mouseButtonUp(button: 0 | 1 | 2  = 0): void {
-        browser.buttonUp(button)
-    }
 
     isElementClickeble(selector: string, waitTime = this.defaultWaitTime,  index: number = 0): boolean {
         return $$(selector)[index].isClickable();
