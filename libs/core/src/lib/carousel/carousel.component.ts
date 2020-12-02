@@ -277,55 +277,63 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** @hidden */
-    public get getPageIndicatorLabel(): string {
+    get getPageIndicatorLabel(): string {
         return `${this.currentActiveSlidesStartIndex + 1} ${this.resourceStrings.fd_carousel_of} ${
             this.pageIndicatorsCountArray.length
         }`;
     }
 
     /** @hidden */
-    public get screenReaderLabel(): string {
+    get screenReaderLabel(): string {
         return `${this.resourceStrings.fd_carousel_reader} ${this.currentActiveSlidesStartIndex + 1} ${
             this.resourceStrings.fd_carousel_of
         } ${this.pageIndicatorsCountArray.length}`;
     }
 
     /** @hidden */
+    _focus(): void {
+        const el = this._elementRef.nativeElement;
+        if (el !== document.activeElement) {
+            el.focus({ preventScroll: true });
+        }
+    }
+
+    /** @hidden */
     @HostListener('keydown.arrowright', ['$event'])
-    public onKeydownArrowRight(event: KeyboardEvent): void {
+    onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
         this.next();
     }
 
     /** @hidden */
     @HostListener('keydown.arrowleft', ['$event'])
-    public onKeydownArrowLeft(event: KeyboardEvent): void {
+    onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
         this.previous();
     }
 
     /** Transitions to the previous slide in the carousel. */
-    public previous(): void {
+    previous(): void {
         if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
             return;
         }
         this.rightButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
-        this.preventDefaultBtnFocus();
+        this._preventDefaultBtnFocus();
         this._carouselService.pickPrevious(this.dir);
         this._notifySlideChange(SlideDirection.PREVIOUS);
         this._changeDetectorRef.detectChanges();
     }
 
     /** Transitions to the next slide in the carousel. */
-    public next(): void {
+    next(): void {
         if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
             return;
         }
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
-        this.preventDefaultBtnFocus();
+        this._preventDefaultBtnFocus();
         this._carouselService.pickNext(this.dir);
         this._notifySlideChange(SlideDirection.NEXT);
         this._changeDetectorRef.detectChanges();
@@ -335,7 +343,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     * Prevent native focus flow related to button, if button will be disable on focus state.
     * It works only if carousel is not in circular loop.
     */
-    private preventDefaultBtnFocus(): void {
+    private _preventDefaultBtnFocus(): void {
         if (this.loop) {
             return;
         }
