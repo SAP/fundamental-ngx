@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.15...v0.25.0-rc.16) (2020-12-02)
+
+
+### Features
+
+* (Platform) introduce File Uploader component ([#3932](https://github.com/SAP/fundamental-ngx/issues/3932)) ([c2d6f8c](https://github.com/SAP/fundamental-ngx/commit/c2d6f8c54529972c26a2a34a155b089100bc88d3))
+
 ## [0.25.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.14...v0.25.0-rc.15) (2020-12-02)
 
 
