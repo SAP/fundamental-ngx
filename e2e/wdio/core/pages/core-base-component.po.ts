@@ -1,5 +1,4 @@
 import { webDriver } from '../../driver/wdio';
-import { baseUrl } from '../../../../wdio.conf.js'
 
 export class CoreBaseComponentPo {
 

@@ -255,10 +255,6 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      */
      // onPrepare: function () {
-     //    browser.resetUrl = 'about:blank';
-     //    browser.driver.manage.window.maximize();
-     //    browser.maximize();
-     //    browser.window.maximize();
      // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service

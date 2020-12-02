@@ -34,7 +34,7 @@ export class Wdio {
     }
 
     click(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {
-        // $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].click();
     }
 
@@ -216,41 +216,6 @@ export class Wdio {
         // @ts-ignore
         $$(selector)[index].focus();
     }
-
-    mouseButtonDown(button: 0 | 1 | 2 = 0): void {
-        browser.buttonDown(button);
-    }
-
-    mouseButtonUp(button: 0 | 1 | 2 = 0): void {
-        browser.buttonUp(button);
-    }
-
-    clickNextElement(selector: string, index: number = 0): void {
-        $$(selector)[index].nextElement().click();
-    }
-
-    // hoverForSafari(selector: string , index: number = 0 ): void {
-    //     const { x, y } = $$(selector)[index].getLocation();
-    //     browser.performActions([
-    //         {
-    //             type: 'pointer',
-    //             id: 'finger1121',
-    //             parameters: {
-    //                 pointerType: 'mouse'
-    //             },
-    //             actions: [
-    //                 {
-    //                     type: 'pointerMove',
-    //                     duration: 500,
-    //                     x: x + 1,
-    //                     y: y + 1
-    //                 }
-    //             ]
-    //         }
-    //     ]);
-    //     browser.releaseActions();
-    // }
-
 }
 
 export const webDriver = new Wdio();
