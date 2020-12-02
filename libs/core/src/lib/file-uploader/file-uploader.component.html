@@ -14,6 +14,7 @@
     <input
         #textInput
         readonly
+        [ngClass]="state ? ' is-' + state : ''"
         class="fd-input fd-file-uploader__input"
         aria-live="polite"
         autocomplete="off"
@@ -35,8 +36,8 @@
         class="file-uploader__button"
         (click)="open()"
         [label]="buttonLabel"
-        [compact]="compact">
-    </button>
+        [compact]="compact"
+    ></button>
     <ng-content select="[fd-form-control]"></ng-content>
 </div>
 <input
