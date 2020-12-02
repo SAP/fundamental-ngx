@@ -1,4 +1,8 @@
-<fd-time [(ngModel)]="timeObject"></fd-time>
-Selected Time: {{ timeObject.hour }}h {{ timeObject.minute }}m {{ timeObject.second }}s
+<fd-time [(ngModel)]="time"></fd-time>
+Selected Time: {{ time.hour }}h {{ time.minute }}m {{ time.second }}s
 
-<button fd-button label="Change" (click)="change()"></button>
+<button
+    fd-button
+    label="Set hours to 11"
+    (click)="change()"
+></button>

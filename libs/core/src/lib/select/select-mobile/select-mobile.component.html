@@ -2,7 +2,7 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
 
         <fd-dialog-header>
-            <h1 *ngIf="mobileConfig.title" fd-dialog-title>{{mobileConfig.title}}</h1>
+            <h1 *ngIf="mobileConfig.title" fd-title>{{mobileConfig.title}}</h1>
             <button *ngIf="mobileConfig.hasCloseButton"
                     fd-dialog-close-button
                     [mobile]="true"

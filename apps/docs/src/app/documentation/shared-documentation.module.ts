@@ -22,13 +22,7 @@ import { FilterPipe } from './core-helpers/pipes/filter.pipe';
 /** PROVIDES DEPENDENCIES REQUIRED TO BUILD DOCUMENTATION SHELL */
 
 @NgModule({
-    declarations: [
-        SearchPipe,
-        ToolbarDocsComponent,
-        SectionsToolbarComponent,
-        SortByPipe,
-        FilterPipe
-    ],
+    declarations: [SearchPipe, ToolbarDocsComponent, SectionsToolbarComponent, SortByPipe, FilterPipe],
     imports: [
         MenuModule,
         FormsModule,
@@ -51,5 +45,4 @@ import { FilterPipe } from './core-helpers/pipes/filter.pipe';
         FilterPipe
     ]
 })
-export class SharedDocumentationModule {
-}
+export class SharedDocumentationModule {}

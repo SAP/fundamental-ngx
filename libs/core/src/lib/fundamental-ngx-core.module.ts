@@ -36,6 +36,7 @@ import { MultiInputModule } from './multi-input/multi-input.module';
 import { PaginationModule } from './pagination/pagination.module';
 import { PanelModule } from './panel/panel.module';
 import { PopoverModule } from './popover/popover.module';
+import { RatingIndicatorModule } from './rating-indicator/rating-indicator.module';
 import { ScrollSpyModule } from './scroll-spy/scroll-spy.module';
 import { ShellbarModule } from './shellbar/shellbar.module';
 import { SideNavigationModule } from './side-navigation/side-navigation.module';
@@ -72,6 +73,7 @@ import { ObjectMarkerModule } from './object-marker/object-marker.module';
 import { MessageToastModule } from './message-toast/message-toast.module';
 import { MessageToastService } from './message-toast/message-toast-service/message-toast.service';
 import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
+import { MessageBoxModule } from './message-box/message-box.module';
 import { ThemesService } from './utils/services/themes.service';
 
 @NgModule({
@@ -124,6 +126,7 @@ import { ThemesService } from './utils/services/themes.service';
         PanelModule,
         ProductSwitchModule,
         PopoverModule,
+        RatingIndicatorModule,
         RadioModule,
         ScrollSpyModule,
         SegmentedButtonModule,
@@ -142,9 +145,10 @@ import { ThemesService } from './utils/services/themes.service';
         TokenModule,
         TreeModule,
         CardModule,
+        MessageBoxModule,
         MessageToastModule,
         DynamicSideContentModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
+    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })
 export class FundamentalNgxCoreModule { }

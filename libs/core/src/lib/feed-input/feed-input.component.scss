@@ -1,0 +1,15 @@
+@import '~fundamental-styles/dist/feed-input';
+
+.fd-feed-input {
+    &.is-disabled {
+        pointer-events: initial;
+        opacity: initial;
+    }
+
+    .fd-button {
+        [dir="rtl"] &,
+        &[dir="rtl"] {
+            transform: rotate(180deg);
+        }
+    }
+}

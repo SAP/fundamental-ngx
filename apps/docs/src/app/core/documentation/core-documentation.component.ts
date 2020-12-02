@@ -35,6 +35,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/datetime-picker', name: 'Datetime Picker' },
             { url: 'core/dialog', name: 'Dialog' },
             { url: 'core/icon', name: 'Icon' },
+            { url: 'core/feed-input', name: 'Feed Input' },
             { url: 'core/file-uploader', name: 'File Uploader' },
             { url: 'core/form-message', name: 'Form Message' },
             { url: 'core/formatted-text', name: 'Formatted Text' },
@@ -51,6 +52,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
                 ]
             },
             { url: 'core/menu', name: 'Menu' },
+            { url: 'core/message-box', name: 'Message Box' },
             { url: 'core/message-strip', name: 'Message Strip' },
             { url: 'core/message-toast', name: 'Message Toast' },
             { url: 'core/multi-input', name: 'Multi Input' },
@@ -63,6 +65,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/popover', name: 'Popover' },
             { url: 'core/product-switch', name: 'Product Switch' },
             { url: 'core/radio', name: 'Radio Button' },
+            { url: 'core/rating-indicator', name: 'Rating Indicator' },
             { url: 'core/select', name: 'Select' },
             { url: 'core/shellbar', name: 'Shellbar' },
             { url: 'core/sideNavigation', name: 'Side Navigation' },

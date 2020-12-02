@@ -1,4 +1,7 @@
-<fd-docs-section-title [id]="'datetime-picker-simple'" [componentName]="'datetime-picker'">
+<fd-docs-section-title
+    [id]="'datetime-picker-simple'"
+    [componentName]="'datetime-picker'"
+>
     Simple Datetime Picker
 </fd-docs-section-title>
 <description>
@@ -9,6 +12,20 @@
 <description>
     The value for the input only changes the model on blur or an enter/return keystroke.
 </description>
+<description>
+    Some default options that belong to the <code>time</code> component such as <code>[displaySeconds]</code>,
+    <code>[displayMinutes]</code>,
+    <code>[displayHours]</code> and <code>[meridian]</code> are based on the
+    <code>DateTimeFormats.display.dateTimeInput</code> options.
+    <br />
+    For example if Datetime picker display format option contains hours, minutes and day period info then default
+    options will be the next:
+    <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="true"</code>, <code>[displayHours]="true"</code> and
+    <code>[meridian]="true"</code>.
+    The listed above options are applied to the <code>time</code> component only (used internally) and can be defined
+    explicitly
+    if needed.
+</description>
 <component-example>
     <fd-datetime-example></fd-datetime-example>
 </component-example>
@@ -16,21 +33,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'datetime-picker-NonMeridian'" [componentName]="'datetime-picker'">
-    Non-Meridian Datetime Picker
-</fd-docs-section-title>
-<description>
-    Removing the am/pm from the time component. The string representation may or may not conserve it depending on
-    locality.
-</description>
-<component-example>
-    <fd-datetime-non-meridian-example></fd-datetime-non-meridian-example>
-</component-example>
-<code-example [exampleFiles]="datetimeNonMer"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'datetime-picker-progChange'" [componentName]="'datetime-picker'">
+<fd-docs-section-title
+    [id]="'datetime-picker-progChange'"
+    [componentName]="'datetime-picker'"
+>
     Programmatic Change
 </fd-docs-section-title>
 <description>
@@ -43,7 +49,10 @@
 <code-example [exampleFiles]="datetimeProgram"></code-example>
 
 <separator></separator>
-<fd-docs-section-title [id]="'datetime-picker-null'" [componentName]="'datetime-picker'">
+<fd-docs-section-title
+    [id]="'datetime-picker-null'"
+    [componentName]="'datetime-picker'"
+>
     Null Validity
 </fd-docs-section-title>
 <description>
@@ -55,12 +64,16 @@
 <code-example [exampleFiles]="datetimePickerAllowNull"></code-example>
 
 <separator></separator>
-<fd-docs-section-title [id]="'datetime-picker-formatting'" [componentName]="'datetime-picker'">
+<fd-docs-section-title
+    [id]="'datetime-picker-formatting'"
+    [componentName]="'datetime-picker'"
+>
     Formatting
 </fd-docs-section-title>
 <description>
-    Providing a custom format for the dates is possible through providing a service. Note that when providing a custom
-    format, the <code>[placeholder]</code> input should be set to match the new format as well.
+    Providing a custom format for the dates is possible through providing <code>DATE_TIME_FORMATS</code> config. Note
+    that when providing a custom format, the <code>[placeholder]</code> input should be set to match the new format as
+    well.
 </description>
 <component-example>
     <fd-datetime-format-example></fd-datetime-format-example>
@@ -69,7 +82,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'datetime-picker-disabled'" [componentName]="'datetime-picker'">
+<fd-docs-section-title
+    [id]="'datetime-picker-disabled'"
+    [componentName]="'datetime-picker'"
+>
     Disabled State
 </fd-docs-section-title>
 <component-example>
@@ -79,11 +95,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'datetime-picker-inReactiveForm'" [componentName]="'datetime-picker'">
+<fd-docs-section-title
+    [id]="'datetime-picker-inReactiveForm'"
+    [componentName]="'datetime-picker'"
+>
     Date Time Picker in Reactive Form
 </fd-docs-section-title>
-<description
-    >The date-time-picker component may also be used within Angular Reactive Forms. DateTime Picker follows Date Picker
+<description>The date-time-picker component may also be used within Angular Reactive Forms. DateTime Picker follows Date
+    Picker
     with <code>[disableFunction]</code>
 </description>
 <component-example>
@@ -93,13 +112,15 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'datetime-picker-complexI18n'" [componentName]="'datetime-picker'">
-    Complex i18n.
+<fd-docs-section-title
+    [id]="'datetime-picker-complexI18n'"
+    [componentName]="'datetime-picker'"
+>
+    i18n example.
 </fd-docs-section-title>
 <description>
-    To change format or locale options in <code>DatePicker</code> component, it is needed to pass some variables to
-    <code>[format]</code> or <code>[locale]</code>. By default FdDate model is formatted by angular built-in
-    <code>datePipe</code>.
+    To change a locale option in <code>DatePicker</code> component, it is needed to set a locale via
+    <code>DatetimeAdapter.setLocale</code> method.
 </description>
 <component-example>
     <fd-datetime-picker-complex-i18n-example></fd-datetime-picker-complex-i18n-example>

@@ -2,6 +2,7 @@
     #dialogWindow
     role="dialog"
     tabindex="-1"
+    aria-modal="true"
     fdResize
     fdResizeBoundary=".fd-dialog"
     cdkDrag
@@ -9,9 +10,9 @@
     [class]="dialogConfig.dialogPanelClass"
     [ngClass]="{
         'fd-dialog__content': true,
-        'fd-dialog__content--s': dialogPaddingSize === 's',
-        'fd-dialog__content--m': dialogPaddingSize === 'm',
-        'fd-dialog__content--l': dialogPaddingSize === 'l',
+        'fd-dialog__content--s': dialogPaddingSize === 'sm',
+        'fd-dialog__content--m': dialogPaddingSize === 'md',
+        'fd-dialog__content--l': dialogPaddingSize === 'lg',
         'fd-dialog__content--xl': dialogPaddingSize === 'xl',
         'fd-dialog__content--mobile': dialogConfig.mobile,
         'fd-dialog__content--full-screen': dialogConfig.fullScreen,
@@ -24,7 +25,6 @@
     [fdResizeDisabled]="!dialogConfig.resizable"
     [@dialog-fade]
     [attr.id]="dialogConfig.id"
-    [attr.aria-modal]="true"
     [attr.aria-label]="dialogConfig.ariaLabel"
     [attr.aria-labelledby]="dialogConfig.ariaLabelledBy"
     [attr.aria-describedby]="dialogConfig.ariaDescribedBy"

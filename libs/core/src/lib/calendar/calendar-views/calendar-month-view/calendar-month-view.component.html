@@ -1,22 +1,36 @@
 <div class="fd-calendar__months">
-    <table class="fd-calendar__table" role="grid">
-        <tbody class="fd-calendar__group" role="rowgroup">
-            <tr class="fd-calendar__row" role="row" *ngFor="let colMonths of monthNames; let rowIndex = index">
+    <table
+        class="fd-calendar__table"
+        role="grid"
+    >
+        <tbody
+            class="fd-calendar__group"
+            role="rowgroup"
+        >
+            <tr
+                class="fd-calendar__row"
+                role="row"
+                *ngFor="let colMonths of calendarMonthListGrid; let rowIndex = index"
+            >
                 <td
                     class="fd-calendar__item"
                     role="gridcell"
-                    *ngFor="let month of colMonths; let colIndex = index"
+                    *ngFor="let monthCell of colMonths; let colIndex = index"
                     [ngClass]="{
-                        'fd-calendar__item--current': isCurrent(getIndex(rowIndex, colIndex)),
-                        'is-active': isSelected(getIndex(rowIndex, colIndex))
+                        'fd-calendar__item--current': monthCell.current,
+                        'is-active': monthCell.selected
                     }"
-                    [attr.tabIndex]="isSelected(getIndex(rowIndex, colIndex)) ? 0 : -1"
-                    [attr.id]="getId(getIndex(rowIndex, colIndex))"
-                    (keydown)="onKeydownMonthHandler($event, getIndex(rowIndex, colIndex))"
-                    (click)="selectMonth(getIndex(rowIndex, colIndex), $event)"
+                    [attr.tabIndex]="monthCell.tabIndex"
+                    [attr.id]="monthCell.id"
+                    (keydown)="onKeydownMonthHandler($event, monthCell.index)"
+                    (click)="selectMonth(monthCell, $event)"
                 >
-                    <span role="button" class="fd-calendar__text" [attr.aria-label]="month">
-                        {{ month }}
+                    <span
+                        role="button"
+                        class="fd-calendar__text"
+                        [attr.aria-label]="monthCell.ariaLabel"
+                    >
+                        {{ monthCell.label }}
                     </span>
                 </td>
             </tr>

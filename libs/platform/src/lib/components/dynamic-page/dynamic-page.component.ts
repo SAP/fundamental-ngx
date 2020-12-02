@@ -122,6 +122,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     private _scrollSubscription: Subscription = new Subscription();
 
     /** @hidden */
+    public headerCollapsible = true;
+
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         private _elementRef: ElementRef<HTMLElement>,
@@ -154,6 +157,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
             this.headerComponent.size = this.size;
             this.contentComponent.size = this.size;
         }
+        this.headerCollapsible = this.headerComponent.collapsible;
     }
 
     /**@hidden */
@@ -207,7 +211,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * toggle the visibility of the header on click of title area.
      */
     toggleCollapse(): void {
-        this._dynamicPageService.toggleHeader();
+        if (this.headerCollapsible) {
+            this._dynamicPageService.toggleHeader();
+        }
     }
 
     /**

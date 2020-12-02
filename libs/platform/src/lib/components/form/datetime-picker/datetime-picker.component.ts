@@ -5,9 +5,8 @@ import {
     ElementRef,
     EventEmitter,
     Host,
+    Inject,
     Input,
-    OnDestroy,
-    OnInit,
     Optional,
     Output,
     Self,
@@ -17,17 +16,20 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 import {
     CalendarYearGrid,
+    DatetimeAdapter,
+    DateTimeFormats,
     DatetimePickerComponent,
+    DATE_TIME_FORMATS,
     DaysOfWeek,
     FdCalendarView,
-    FdDate,
-    FdDatetime,
     SpecialDayRule
 } from '@fundamental-ngx/core';
 import { Placement } from 'popper.js';
+
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
-import { FormFieldControl, Status } from '../public_api';
+import { FormFieldControl, Status } from '../form-control';
+import { createMissingDateImplementationError } from './errors';
 
 @Component({
     selector: 'fdp-datetime-picker',
@@ -35,21 +37,17 @@ import { FormFieldControl, Status } from '../public_api';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatetimePickerComponent, multi: true }]
 })
-export class PlatformDatetimePickerComponent extends BaseInput implements OnInit, OnDestroy {
+export class PlatformDatetimePickerComponent<D> extends BaseInput {
     /**
      * value for datetime
      */
     @Input()
-    get value(): FdDatetime {
+    get value(): D {
         return super.getValue();
     }
-    set value(value: FdDatetime) {
+    set value(value: D) {
         super.setValue(value);
     }
-
-    /** value for the meridian property. */
-    @Input()
-    meridian: boolean;
 
     /** Whether the component should be in compact mode. */
     @Input()
@@ -66,33 +64,37 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     @Input()
     appendTo: ElementRef;
 
-    /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
+    /**
+     * Whether the time component should be meridian (am/pm).
+     * Default value is based on the current locale format option
+     * */
     @Input()
-    format = 'MM/dd/yyyy, HH:mm:ss';
+    meridian: boolean;
 
-    /** Locale for date pipe. See more https://angular.io/guide/i18n */
+    /**
+     * Whether the time component shows seconds.
+     * Default value is based on the current locale format option
+     * */
     @Input()
-    locale: string;
+    displaySeconds: boolean;
 
-    /** Whether the time component shows seconds. */
+    /**
+     * Whether the time component shows minutes.
+     * Default value is based on the current locale format option
+     * */
     @Input()
-    displaySeconds = true;
+    displayMinutes: boolean;
 
-    /** Whether the time component shows minutes. */
+    /**
+     * Whether the time component shows hours.
+     * Default value is based on the current locale format option
+     * */
     @Input()
-    displayMinutes = true;
-
-    /** Whether the time component shows hours. */
-    @Input()
-    displayHours = true;
+    displayHours: boolean;
 
     /** Whether to perform visual validation on the picker input. */
     @Input()
     useValidation = true;
-
-    /** Current selected date. Two-way binding is supported. */
-    @Input()
-    date: FdDatetime = FdDatetime.getToday();
 
     /** Whether the popover is open. Two-way binding is supported. */
     @Input()
@@ -119,9 +121,10 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     allowNull = true;
 
     /**
-     * @Input when set to true, time inputs won't allow to have 1 digit
-     * for example 9 will become 09
+     * @Input when set to true time component will use 2 digits for each number.
+     * For example 9 will become 09
      * but 12 will be kept as 12.
+     * Only uses by time component and does not change input format
      */
     @Input() keepTwoDigitsTime = false;
 
@@ -131,7 +134,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     }
 
     get state(): Status {
-        if (this.dateTimePickerComponent && this.dateTimePickerComponent.isInvalidDateInput) {
+        if (this.dateTimePickerComponent?.isInvalidDateInput) {
             // if any other error from core dtp
             return 'error';
         }
@@ -152,7 +155,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
      * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
     @Input()
-    specialDaysRules: SpecialDayRule[] = [];
+    specialDaysRules: SpecialDayRule<D>[] = [];
 
     /**
      * Object to customize year grid,
@@ -161,8 +164,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     @Input()
     yearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 5,
-        yearMapping: (num: number) => num.toString()
+        cols: 5
     };
 
     /**
@@ -172,8 +174,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     @Input()
     aggregatedYearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 3,
-        yearMapping: (num: number) => num.toString()
+        cols: 3
     };
 
     /**
@@ -206,14 +207,14 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
 
     /** Event emitted when the date changes. This can be a time or day change. */
     @Output()
-    readonly datetimeChange: EventEmitter<FdDatetime> = new EventEmitter<FdDatetime>();
+    readonly datetimeChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** Event emitted when popover closes. */
     @Output()
     readonly onClose: EventEmitter<void> = new EventEmitter<void>();
 
     @ViewChild(DatetimePickerComponent)
-    dateTimePickerComponent: DatetimePickerComponent;
+    dateTimePickerComponent: DatetimePickerComponent<D>;
 
     /**
      *  The state of the form control - applies css classes.
@@ -229,7 +230,7 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = (fdDate: FdDate): boolean => {
+    disableFunction = (_: D): boolean => {
         return false;
     };
 
@@ -239,31 +240,28 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        // Use here @Optional to avoid angular injection error message and throw our own which is more precise one
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
         super(_cd, ngControl, ngForm, formField, formControl);
-    }
-    /** @hidden */
-    ngOnInit(): void {
-        super.ngOnInit();
-        // set default placeholder value
-        if (!this.placeholder) {
-            this.placeholder = this.format;
+
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
         }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+
+        // default model value
+        this.value = _dateTimeAdapter.now();
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-        this.dateTimePickerComponent?.ngOnDestroy();
-    }
-    /** @hidden */
-    writeValue(value: FdDatetime): void {
+    writeValue(value: D): void {
         super.writeValue(value);
-        // emit events
-        if (value) {
-            this._handleDatetimeChange(value);
-        }
+        this._cd.markForCheck();
     }
 
     /**
@@ -278,26 +276,29 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     /**
      * @hidden
      * logic to handle validation from both platform forms and core datetiimepicker
-     * @param value inputted
+     * @param datetime inputted
      */
-    handleDatetimeInputChange(value: FdDatetime): void {
+    handleDatetimeInputChange(datetime: D): void {
         if (this.dateTimePickerComponent) {
             if (this.dateTimePickerComponent.isInvalidDateInput) {
                 this.state = 'error';
             } else {
-                if (!this.dateTimePickerComponent.inputFieldDate && !this.allowNull) {
+                if (!this.dateTimePickerComponent._inputFieldDate && !this.allowNull) {
                     this.state = 'error'; // null value in not allowNull should throw error
                 } else {
                     this.state = undefined; // resetting to default state
                 }
             }
             // only set the value if it is a valid datetime object
-            if (this.dateTimePickerComponent.inputFieldDate) {
-                this.value = value;
+            if (this.dateTimePickerComponent._inputFieldDate) {
+                this.value = datetime;
             }
 
             this.stateChanges.next('datetime picker: handleDatetimeInputChange');
         }
+
+        this.datetimeChange.emit(datetime);
+
         this.onTouched();
     }
 
@@ -313,15 +314,4 @@ export class PlatformDatetimePickerComponent extends BaseInput implements OnInit
     handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
     };
-
-    /**
-     * @hidden
-     * internal method that calls date/time change events
-     */
-    _handleDatetimeChange(value: FdDatetime): void {
-        this.dateTimePickerComponent?.handleDateChange(value.date);
-        this.dateTimePickerComponent?.handleTimeChange(value.time);
-
-        this.datetimeChange.emit(value);
-    }
 }

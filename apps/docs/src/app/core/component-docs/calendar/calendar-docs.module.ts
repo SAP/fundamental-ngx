@@ -14,6 +14,7 @@ import { CalendarI18nMomentExampleComponent } from './examples/calendar--i18n-mo
 import {
     SegmentedButtonModule,
     CalendarModule,
+    FdDatetimeModule,
     DialogModule,
     FormModule,
     CheckboxModule
@@ -41,10 +42,11 @@ const routes: Routes = [
         FormModule,
         DialogModule,
         CheckboxModule,
+        FdDatetimeModule,
         CalendarModule,
         SegmentedButtonModule,
         SharedDocumentationPageModule,
-        RouterModule.forChild(routes),
+        RouterModule.forChild(routes)
     ],
     exports: [RouterModule],
     declarations: [
