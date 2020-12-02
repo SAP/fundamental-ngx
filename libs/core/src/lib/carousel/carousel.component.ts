@@ -241,21 +241,15 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         } else {
             this.leftButtonDisabled = true;
             this.rightButtonDisabled = true;
-        }
-        this._carouselService.activeChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((event) => this._onSlideSwipe(event));
-        this._carouselService.dragStateChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe((event) => this._onSlideDrag(event));
 
-        this._slidesCopy = this.slides.toArray().slice();
-
-        // Disable swipe when there is no carousel item
-        if (this.slides.length === 0) {
+            // Disable swipe when there is no carousel item
             this.swipeEnabled = false;
             this.navigation = false;
         }
+
+        this._slidesCopy = this.slides.toArray().slice();
+
+        this._subscribeServiceEvents();
 
         // Subscribe to dynamic update of slides
         this.slides.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._onSlideUpdates());
@@ -334,8 +328,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
         /** Handle looped carousel, first click on prev button. */
         if (this.loop && this._prevBtnClickedAtStart) {
-            this._carouselService.goToItem(this.slides.toArray()[2], true, this.dir);
-            this.slides.toArray()[2].visibility = 'visible';
+            this._carouselService.goToItem(this.slides.toArray()[Math.ceil(this.slides.length / 2) - 1], true, this.dir);
+            this.slides.toArray()[Math.ceil(this.slides.length / 2) - 1].visibility = 'visible';
             this.slideChange.emit(new CarouselActiveSlides([this.slides.toArray()[2]], 'Previous'));
         } else {
             /** Have to refactor the _notifySlideChange to get rid of else condition */
@@ -361,10 +355,20 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden
-    * Prevent native focus flow related to button, if button will be disable on focus state.
-    * It works only if carousel is not in circular loop.
-    */
+    /** @hidden Subscribe to carousel service events */
+    private _subscribeServiceEvents(): void {
+        this._carouselService.activeChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => this._onSlideSwipe(event));
+        this._carouselService.dragStateChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => this._onSlideDrag(event));
+    }
+
+    /**
+     * @hidden Prevent native focus flow related to button, if button will be disable on focus state.
+     * It works only if carousel is not in circular loop.
+     */
     private _preventDefaultBtnFocus(): void {
         if (this.loop) {
             return;
@@ -394,7 +398,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** Handles navigation button visibility */
+    /** @hidden Handles navigation button visibility */
     private _buttonVisibility(): void {
         if (!this.loop) {
             // Need to disable navigation button if either direction limit has reached.
@@ -472,7 +476,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * Returns the slide swapping steps
+     * @hidden Returns the slide swapping steps
      */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
@@ -555,7 +559,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe(() => refreshDirection());
     }
 
-    /** On Swiping of slide, manage page indicator */
+    /** @hidden On Swiping of slide, manage page indicator */
     private _onSlideSwipe(event: PanEndOutput): void {
         this._slideSwiped = true;
         const firstActiveSlide = event.item;
