@@ -21,6 +21,7 @@ import { PlatformFormContainerPossibleExampleComponent } from './platform-form-c
 import { PlatformFormContainerNotRecommendedExampleComponent } from './platform-form-container-examples/platform-form-container-not-recommended-example.component';
 import { PlatformFormContainerComplexExampleComponent } from './platform-form-container-examples/platform-form-container-complex-example.component';
 import { PlatformFormContainerHeaderComponent } from './platform-form-container-header/platform-form-container-header.component';
+import { PlatformFormBasicExampleComponent } from './platform-form-container-examples/platform-form-basic/platform-form-basic-example.component';
 
 const routes: Routes = [
     {
@@ -54,7 +55,9 @@ const routes: Routes = [
         PlatformFormContainerRecommendedExampleComponent,
         PlatformFormContainerPossibleExampleComponent,
         PlatformFormContainerNotRecommendedExampleComponent,
-        PlatformFormContainerComplexExampleComponent
+        PlatformFormContainerComplexExampleComponent,
+
+        PlatformFormBasicExampleComponent
     ]
 })
 export class PlatformFormContainerDocsModule {}
