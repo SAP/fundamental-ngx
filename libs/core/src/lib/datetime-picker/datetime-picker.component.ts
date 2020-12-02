@@ -210,7 +210,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     @Input()
     showWeekNumbers = true;
 
-    /** Whether or not to show the datetime picker footer with submit/cancel buttons. */
+    /** Whether or not to show the datetime picker footer with OK/cancel buttons. */
     @Input()
     showFooter = true;
 
@@ -257,10 +257,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     /** @hidden */
     _isInvalidDateInput = false;
 
-    /** @hidden The temporary Time object for use before 'Submit' is pressed. Internal use. */
+    /** @hidden The temporary Time object for use before 'OK' is pressed. Internal use. */
     _tempTime: D;
 
-    /** @hidden The temporary CalendarDay object for use before 'Submit' is pressed. Internal use. */
+    /** @hidden The temporary CalendarDay object for use before 'OK' is pressed. Internal use. */
     _tempDate: D;
 
     /** @hidden */
@@ -463,7 +463,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /**
      * @hidden
-     * Method that is triggered when 'Submit' button is pressed.
+     * Method that is triggered when 'OK' button is pressed.
      */
     submit(): void {
         const currentDate = this._tempDate;
