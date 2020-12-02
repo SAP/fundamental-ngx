@@ -4,3 +4,13 @@
 .fd-button {
 	justify-content: center;
 }
+
+.fd-button * + * {
+    margin-left: 0.375rem !important;
+}
+
+.fd-button * + [dir='rtl'],
+[dir='rtl'] .fd-button * + * {
+    margin-left: 0 !important;
+    margin-right: 0.375rem !important;
+}
