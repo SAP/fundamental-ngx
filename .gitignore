@@ -44,6 +44,8 @@ report.*.json
 
 # e2e
 /e2e/*.map
+allure-report
+allure-results
 
 # System Files
 .DS_Store
