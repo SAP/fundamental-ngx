@@ -10,14 +10,9 @@ import { TableDataProviderExample } from './platform-table-data-provider-example
 export class PlatformTableFilterableExampleComponent {
     source = new TableDataSource(new TableDataProviderExample());
 
-    priceCurrencyFilteringValues = [
-        { value: 'USA', label: '$ USA' },
-        { value: 'EUR', label: '€ EURO' }
-    ];
-
     statusFilteringValues = [
-        { value: 'OUT_OF_STOCK', label: 'out of stock' },
-        { value: 'AVAILABLE', label: 'available' }
+        { value: 'Out of stock', label: 'Out of stock' },
+        { value: 'Stocked on demand', label: 'Stocked on demand' }
     ];
 
     statusColorFilteringValues = [

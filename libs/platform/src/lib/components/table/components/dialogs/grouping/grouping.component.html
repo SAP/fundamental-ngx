@@ -75,11 +75,11 @@
             >Group By</li>
             <li
                 fd-list-item
-                [selected]="!field"
+                [selected]="NOT_GROUPED_OPTION_VALUE === null"
             >
                 <fd-radio-button
                     name="sort-by"
-                    [value]="null"
+                    [value]="NOT_GROUPED_OPTION_VALUE"
                     state="default"
                     compact="true"
                     [ngModel]="field"
@@ -87,7 +87,7 @@
                 ></fd-radio-button>
                 <span
                     fd-list-title
-                    i18n="@@platformTableGroupDialogNotGroupedValue"
+                    i18n="@@platformTableGroupDialogNotGroupedLabel"
                 >(Not Grouped)</span>
             </li>
             <li

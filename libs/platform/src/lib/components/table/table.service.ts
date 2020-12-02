@@ -1,15 +1,19 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { SearchInput } from '../search-field/search-field.component';
 import { CollectionFilter, CollectionGroup, CollectionSort, TableState } from './interfaces';
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
 import { FilterChange, FreezeChange, GroupChange, SortChange } from './models';
+import { skip } from 'rxjs/operators';
 
 @Injectable()
 export class TableService {
-    readonly tableState$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
+    private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
+
+    readonly tableState$: Observable<TableState> = this._tableStateSubject$.asObservable();
+    readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
 
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();
     readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
@@ -18,12 +22,12 @@ export class TableService {
 
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
-        return this.tableState$.getValue();
+        return this._tableStateSubject$.getValue();
     }
 
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
-        this.tableState$.next(state);
+        this._tableStateSubject$.next(state);
     }
 
     sort(field: string, direction: SortDirection): void {
@@ -38,6 +42,7 @@ export class TableService {
         const state: TableState = { ...prevState, sortBy: newSortBy };
 
         this.setTableState(state);
+
         this.sortChange.emit({ current: state.sortBy, previous: prevSortBy });
     }
 
@@ -49,6 +54,7 @@ export class TableService {
         const state: TableState = { ...prevState, filterBy: newFilterBy };
 
         this.setTableState(state);
+
         this.filterChange.emit({ current: state.filterBy, previous: prevFilterBy });
     }
 
@@ -64,6 +70,7 @@ export class TableService {
         const state: TableState = { ...prevState, groupBy: newGroupBy };
 
         this.setTableState(state);
+
         this.groupChange.emit({ current: state.groupBy, previous: prevGroupBy });
     }
 
@@ -71,6 +78,7 @@ export class TableService {
         const prevState = this.getTableState();
 
         this.setTableState({ ...prevState, freezeToColumn: columnName });
+
         this.freezeChange.emit({ current: columnName, previous: prevState.freezeToColumn });
     }
 

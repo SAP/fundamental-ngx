@@ -12,12 +12,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 
 import { CollectionFilter } from '../../../interfaces';
+import { TableColumnComponent } from '../../table-column/table-column.component';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
 import { Resettable, RESETTABLE_TOKEN } from '../reset-button/reset-button.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 
 export interface FiltersDialogData {
     filterBy: CollectionFilter[];
+    columns: TableColumnComponent[];
     viewSettingsFilters: TableViewSettingsFilterComponent[];
 }
 
@@ -36,20 +38,24 @@ export enum ACTIVE_STEP {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FiltersComponent implements Resettable, AfterViewInit {
+    readonly ACTIVE_STEP = ACTIVE_STEP;
+
     initialFilterBy: CollectionFilter[];
 
     filterBy: CollectionFilter[];
 
-    viewSettingsFilters: TableViewSettingsFilterComponent[];
+    columns: TableColumnComponent[];
 
-    readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+    viewSettingsFilters: TableViewSettingsFilterComponent[];
 
     activeStep: ACTIVE_STEP = ACTIVE_STEP.SELECT_FILTER;
 
-    activeFilter: TableViewSettingsFilterComponent | null;
+    activeFilter: TableViewSettingsFilterComponent | null = null;
 
-    readonly ACTIVE_STEP = ACTIVE_STEP;
+    activeFilterColumnKey: string | null = null;
+
+    readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
     @ViewChild(FILTERS_VIEW_STEP_TOKEN as any)
     set setActiveFilterStepView(view: FiltersViewStep) {
@@ -64,6 +70,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
         this.initialFilterBy = [...dialogData.filterBy];
         this.filterBy = [...dialogData.filterBy];
         this.viewSettingsFilters = dialogData.viewSettingsFilters;
+        this.columns = dialogData.columns;
     }
 
     ngAfterViewInit(): void {
@@ -73,6 +80,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     selectFilter(filter: TableViewSettingsFilterComponent): void {
         this.activeStep = ACTIVE_STEP.FILTER;
         this.activeFilter = filter;
+        this.activeFilterColumnKey = this.columns.find(({ name }) => name === filter.column)?.key;
         this._cd.detectChanges();
     }
 

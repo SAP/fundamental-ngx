@@ -67,7 +67,7 @@ import { TableDataSource } from './domain/table-data-source';
 
 import { SearchInput } from '../search-field/public_api';
 
-export type FdpTableDataSource<T> = TableDataSource<T>; // | T[] | Observable<T>;
+export type FdpTableDataSource<T> = TableDataSource<T>;
 
 const dialogConfig: DialogConfig = {
     responsivePadding: false,
@@ -226,6 +226,9 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
 
+    /** @hidden */
+    readonly CONTENT_DENSITY = ContentDensity;
+
     /** @hidden Formatted rows data. */
     _rows: SelectableRow[] = [];
 
@@ -233,9 +236,6 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     _groupedRows: { [key: string]: SelectableRow[] };
     /** @hidden */
     _groupsMeta: { [key: string]: any };
-
-    /** @hidden */
-    _contentDensityOptions = ContentDensity;
 
     /** @hidden */
     _popoverOpen = false;
@@ -301,6 +301,8 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     private readonly _rowsStateChanges: Subject<SelectableRow[]> = new Subject<SelectableRow[]>();
 
+    private _tableInitiated = false;
+
     /** @hidden */
     constructor(
         private readonly _tableService: TableService,
@@ -322,6 +324,8 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._tableInitiated = true;
+
         this._setInitialState();
 
         this._listenToTableStateChanges();
@@ -495,10 +499,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         });
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: SortDialogResultData | null) => {
-                if (!result) {
-                    return;
-                }
+            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: SortDialogResultData) => {
                 this._tableService.sort(result.field, result.direction);
             })
         );
@@ -507,7 +508,9 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     openFilteringDialog(): void {
         const state = this.getTableState();
+        const columns = this._getTableColumnsAsArray();
         const dialogData: FiltersDialogData = {
+            columns: columns,
             viewSettingsFilters: this.viewSettingsFilters,
             filterBy: state?.filterBy
         };
@@ -521,8 +524,8 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         } as DialogConfig);
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: FiltersDialogResultData | null) => {
-                if (!result || !result.filterBy) {
+            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: FiltersDialogResultData) => {
+                if (!result.filterBy) {
                     return;
                 }
                 this._tableService.filter(result.filterBy);
@@ -546,28 +549,20 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         });
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((e) => !!e)).subscribe((result: GroupDialogResultData | null) => {
-                if (!result) {
-                    return;
-                }
+            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: GroupDialogResultData) => {
                 this._tableService.group(result.field, result.direction);
             })
         );
     }
 
     /** @hidden */
-    getTableColumnByName(name: string): TableColumnComponent {
-        return this.columns.find((column) => column.name === name);
-    }
-
-    /** @hidden */
-    _getFixedTableStyles(): { [klass: string]: any } {
+    _getFixedTableStyles(): { [klass: string]: number } {
         const key = this._rtl ? 'padding-right.px' : 'padding-left.px';
         return { [key]: this._tablePadding };
     }
 
     /** @hidden */
-    _getFreezableCellStyles(colIdx: number): { [klass: string]: any } {
+    _getFreezableCellStyles(colIdx: number): { [klass: string]: number } {
         const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
         return { [key]: this._selectionColumnsSize + colIdx * this._columnsSize };
     }
@@ -653,10 +648,9 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     private _listenToTableStateChanges(): void {
         this._subscriptions.add(
-            this._tableService.tableState$
+            this._tableService.tableStateChanges$
                 .pipe(
                     filter((state) => !!state),
-                    // skip(2), // skipping setting default and initial state with columns
                     distinctUntilChanged()
                 )
                 .subscribe((state) => {

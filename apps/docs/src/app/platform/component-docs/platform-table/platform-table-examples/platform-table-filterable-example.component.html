@@ -67,22 +67,6 @@
 <!-- View Settings Dialog-->
 <fdp-table-view-settings-dialog [table]="filterableTbl">
     <fdp-table-view-settings-filter
-        column="name"
-        label="Name"
-        type="custom"
-        [dialogResponsivePadding]="true"
-    >
-        <ng-container *fdpViewSettingsFilterCustomDef="let model">
-            <label>Enter name:</label>
-            <fdp-input
-                type="text"
-                name="name"
-                [(ngModel)]="model.name"
-            ></fdp-input>
-        </ng-container>
-    </fdp-table-view-settings-filter>
-
-    <fdp-table-view-settings-filter
         column="price"
         label="Price"
         type="custom"
@@ -107,7 +91,7 @@
     <fdp-table-view-settings-filter
         column="status"
         type="multi-select"
-        label="Status Text"
+        label="Status"
         [values]="statusFilteringValues"
     >
     </fdp-table-view-settings-filter>

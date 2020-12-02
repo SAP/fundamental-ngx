@@ -76,11 +76,11 @@
 
             <li
                 fd-list-item
-                [selected]="!field"
+                [selected]="field === NOT_SORTED_OPTION_VALUE"
             >
                 <fd-radio-button
                     name="sort-by"
-                    [value]="null"
+                    [value]="NOT_SORTED_OPTION_VALUE"
                     state="default"
                     compact="true"
                     [ngModel]="field"
@@ -88,7 +88,7 @@
                 ></fd-radio-button>
                 <span
                     fd-list-title
-                    i18n="@@platformTableSortDialogNotSortedValue"
+                    i18n="@@platformTableSortDialogNotSortedLabel"
                 >(Not Sorted)</span>
             </li>
             <li

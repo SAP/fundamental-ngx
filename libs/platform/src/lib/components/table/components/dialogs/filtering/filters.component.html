@@ -58,6 +58,7 @@
     </ng-container>
     <ng-container *ngSwitchCase="ACTIVE_STEP.FILTER">
         <fdp-filter-step
+            [columnKey]="activeFilterColumnKey"
             [filter]="activeFilter"
             [filterBy]="filterBy"
             (back)="goToFilters()"

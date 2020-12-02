@@ -29,7 +29,7 @@
                             *ngIf="selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
                         >
                             <fd-checkbox
-                                [compact]="contentDensity !== _contentDensityOptions.COZY"
+                                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                                 [ngModel]="_checkedAll"
                                 (ngModelChange)="selectAll($event)"
@@ -276,7 +276,7 @@
             (keydown)="onKeydown($event)"
         >
             <fd-checkbox
-                [compact]="contentDensity !== _contentDensityOptions.COZY"
+                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 [(ngModel)]="row.checked"
                 (ngModelChange)="select(row.index, row, $event)"

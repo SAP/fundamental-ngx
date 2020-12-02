@@ -38,6 +38,8 @@ export class GroupingComponent implements Resettable {
 
     readonly SORT_DIRECTION = SortDirection;
 
+    readonly NOT_GROUPED_OPTION_VALUE = null;
+
     readonly columns: GroupDialogColumn[] = [];
 
     readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -61,17 +63,12 @@ export class GroupingComponent implements Resettable {
     }
 
     cancel(): void {
-        this.dialogRef.close();
+        this.dialogRef.close(null);
     }
 
     confirm(): void {
-        this.dialogRef.close({
-            action: 'Confirm',
-            value: {
-                field: this.field,
-                direction: this.direction
-            }
-        });
+        const result: GroupDialogResultData = { field: this.field, direction: this.direction };
+        this.dialogRef.close(result);
     }
 
     _groupOrderChange(direction: SortDirection): void {

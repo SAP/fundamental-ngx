@@ -38,6 +38,8 @@ export class SortingComponent implements Resettable {
 
     readonly SORT_DIRECTION = SortDirection;
 
+    readonly NOT_SORTED_OPTION_VALUE = null;
+
     readonly columns: SortDialogColumn[] = [];
 
     readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

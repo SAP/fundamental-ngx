@@ -25,9 +25,11 @@ export class FilterStepComponent implements FiltersViewStep {
     filter: TableViewSettingsFilterComponent;
 
     @Input()
+    columnKey: string;
+
+    @Input()
     set filterBy(filterByList: CollectionFilter[]) {
-        const columnName = this.filter.column;
-        this._filterBy = filterByList.find((filterBy) => filterBy.field === columnName);
+        this._filterBy = filterByList.find(({ field }) => field === this.columnKey);
     }
 
     @Output()
@@ -50,7 +52,7 @@ export class FilterStepComponent implements FiltersViewStep {
 
     /** @hidden */
     _onFilterValueChange(filterValue: any): void {
-        const filterBy = this._filterBy || { field: this.filter.column };
+        const filterBy: CollectionFilter = this._filterBy || { field: this.columnKey, value: null, strategy: null };
 
         const newFilterBy = { ...filterBy, value: filterValue };
 

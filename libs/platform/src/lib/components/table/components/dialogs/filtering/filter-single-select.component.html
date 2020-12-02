@@ -5,6 +5,23 @@
 >
     <li
         fd-list-item
+        [selected]="_value === NOT_FILTERED_OPTION_VALUE"
+    >
+        <fd-radio-button
+            name="sort-by"
+            [value]="NOT_FILTERED_OPTION_VALUE"
+            state="default"
+            compact="true"
+            [ngModel]="_value"
+            (ngModelChange)="_onValueChange($event)"
+        ></fd-radio-button>
+        <span
+            fd-list-title
+            i18n="@@platformTableGroupDialogNotFilteredLabel"
+        >(Not Filtered)</span>
+    </li>
+    <li
+        fd-list-item
         *ngFor="let option of options"
         [selected]="option.value == _value"
     >

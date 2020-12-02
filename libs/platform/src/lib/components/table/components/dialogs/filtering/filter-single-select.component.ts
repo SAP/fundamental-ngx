@@ -13,11 +13,14 @@ export class FilterSingleSelectComponent {
 
     @Input()
     set filterBy(filterBy: CollectionSelectFilter) {
-        this._value = filterBy?.value?.[0];
+        const value = filterBy?.value?.[0];
+        this._value = value === undefined ? this.NOT_FILTERED_OPTION_VALUE : value;
     }
 
     @Output()
-    valueChange: EventEmitter<[unknown]> = new EventEmitter<[unknown]>();
+    valueChange: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
+
+    readonly NOT_FILTERED_OPTION_VALUE = null;
 
     /** @hidden */
     _value: unknown;
@@ -27,8 +30,13 @@ export class FilterSingleSelectComponent {
         if (value === this._value) {
             return;
         }
+
         this._value = value;
 
-        this.valueChange.emit([value]);
+        if (value === this.NOT_FILTERED_OPTION_VALUE) {
+            this.valueChange.emit([]);
+        } else {
+            this.valueChange.emit([value]);
+        }
     }
 }

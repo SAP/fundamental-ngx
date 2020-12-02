@@ -7,6 +7,8 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     totalItems = 0;
 
     fetch(tableState: TableState): Observable<ExampleItem[]> {
+        console.log('TableDataProviderExample.fetch', tableState);
+
         this.items = [...ITEMS];
 
         // apply searching
@@ -49,26 +51,42 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
             .filter(({ field }) => !!field)
             .forEach(({ field, value }) => {
                 items = items.filter((item) => {
-                    const itemValue = getNestedValue(field, item);
-
                     switch (field) {
                         case 'name':
-                            value = value as { [k: string]: string };
-                            return itemValue?.includes(value.name);
+                            return this.filterByName(item, value as string);
                         case 'price.value':
-                            value = value as { [k: string]: number };
-                            return itemValue >= value.min && itemValue <= value.max;
+                            return this.filterByPriceRange(item, value as any);
                         case 'status':
+                            return this.filterByStatus(item, value as string[]);
                         case 'statusColor':
-                            value = value as string[];
-                            return value.includes(itemValue);
+                            return this.filterByStatusColor(item, value as string[]);
                         default:
-                            return itemValue === value;
+                            const arbitraryValue = getNestedValue(field, item);
+                            return arbitraryValue === value;
                     }
                 });
             });
 
         return items;
+    }
+
+    private filterByName(item: ExampleItem, filterName: string): boolean {
+        return filterName ? item.name?.includes(filterName) : true;
+    }
+
+    private filterByPriceRange(item: ExampleItem, filterModel: { min: number; max: number }): boolean {
+        const price = item.price.value;
+        const min = Number.parseFloat(filterModel?.min as any);
+        const max = Number.parseFloat(filterModel?.max as any);
+        return Number.isNaN(min) || (price >= min && Number.isNaN(max)) || price <= max;
+    }
+
+    private filterByStatus(item: ExampleItem, selected: string[]): boolean {
+        return selected?.length ? selected.includes(item.status) : true;
+    }
+
+    private filterByStatusColor(item: ExampleItem, selected: string[]): boolean {
+        return selected?.length ? selected.includes(item.statusColor) : true;
     }
 
     private group(groupBy: TableState): ExampleItem[] {
