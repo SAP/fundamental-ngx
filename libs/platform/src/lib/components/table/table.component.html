@@ -215,7 +215,7 @@
 <!-- Grouped table body -->
 <ng-template #groupedTemplate>
     <tbody
-        *ngFor="let group of _groupedRows | keyvalue: _keyDescOrder.bind(this); let groupIdx = index"
+        *ngFor="let group of _groupedRows | keyvalue: _keyDescOrder; let groupIdx = index"
         fd-table-body
         [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
         [class.fd-table__body--no-vertical-borders]="noBodyBorders"
@@ -300,6 +300,7 @@
     </tr>
 </ng-template>
 
+<!-- Empty Table Message -->
 <ng-template #emptyTableRowTemplate>
     <tbody
         fd-table-body

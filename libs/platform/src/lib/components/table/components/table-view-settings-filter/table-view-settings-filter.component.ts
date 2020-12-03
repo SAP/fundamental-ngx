@@ -44,14 +44,6 @@ export class TableViewSettingsFilterComponent {
     @Input()
     values: SelectionValue[];
 
-    /** Responsive padding for dialog */
-    @Input()
-    dialogResponsivePadding = false;
-
-    /** Vertical padding for dialog */
-    @Input()
-    dialogVerticalPadding = true;
-
     /** @hidden */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;

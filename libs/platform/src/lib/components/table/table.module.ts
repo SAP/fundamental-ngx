@@ -15,6 +15,7 @@ import {
     TableModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
+
 import { FdpFormGroupModule } from '../form/form-group/fdp-form.module';
 import { PlatformInputModule } from '../form/input/fdp-input.module';
 import { PlatformButtonModule } from '../button/button.module';
@@ -44,7 +45,7 @@ import {
     FdpTableHeader,
     FdpViewSettingsFilterCustomDef
 } from './directives';
-import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
+import { CellValueByPipe } from './pipes';
 
 @NgModule({
     imports: [
@@ -83,10 +84,7 @@ import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
         FdpViewSettingsFilterCustomDef,
-        TableSortByPipe,
-        TableFilterPipe,
         CellValueByPipe,
-
         SortingComponent,
         GroupingComponent,
         FiltersComponent,
@@ -108,9 +106,6 @@ import { CellValueByPipe, TableFilterPipe, TableSortByPipe } from './pipes';
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
-        TableSortByPipe,
-        TableFilterPipe,
-        CellValueByPipe,
         FdpViewSettingsFilterCustomDef
     ]
 })

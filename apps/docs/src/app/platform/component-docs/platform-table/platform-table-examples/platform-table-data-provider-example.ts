@@ -7,8 +7,6 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     totalItems = 0;
 
     fetch(tableState: TableState): Observable<ExampleItem[]> {
-        console.log('TableDataProviderExample.fetch', tableState);
-
         this.items = [...ITEMS];
 
         // apply searching
@@ -27,6 +25,8 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         if (tableState.groupBy) {
             this.items = this.group(tableState);
         }
+
+        this.totalItems = this.items.length;
 
         return of(this.items);
     }
@@ -78,7 +78,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         const price = item.price.value;
         const min = Number.parseFloat(filterModel?.min as any);
         const max = Number.parseFloat(filterModel?.max as any);
-        return Number.isNaN(min) || (price >= min && Number.isNaN(max)) || price <= max;
+        return (Number.isNaN(min) || price >= min) && (Number.isNaN(max) || price <= max);
     }
 
     private filterByStatus(item: ExampleItem, selected: string[]): boolean {

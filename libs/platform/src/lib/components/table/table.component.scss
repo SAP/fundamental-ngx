@@ -21,13 +21,14 @@
     &:first-child {
         padding-left: 0;
         padding-right: 0;
+        border-right: none;
     }
 
     fd-icon {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: .75rem;
+        font-size: 0.75rem;
         color: #0854a0;
         height: 100%;
         width: 100%;

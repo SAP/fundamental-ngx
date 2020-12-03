@@ -578,7 +578,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     }
 
     /** @hidden */
-    _keyDescOrder(a: KeyValue<string, SelectableRow[]>, b: KeyValue<string, SelectableRow[]>): number {
+    _keyDescOrder = (a: KeyValue<string, SelectableRow[]>, b: KeyValue<string, SelectableRow[]>): number => {
         const ascModifier: number = this._groupOrder === SortDirection.ASC ? 1 : -1;
         const aNumber = parseFloat(a.key);
         const bNumber = parseFloat(b.key);
@@ -588,7 +588,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         }
 
         return (a.key > b.key ? 1 : -1) * ascModifier;
-    }
+    };
 
     /** @hidden */
     _isColumnPopoverOpened(key: string): boolean {

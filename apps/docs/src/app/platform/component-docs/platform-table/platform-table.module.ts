@@ -5,7 +5,7 @@ import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-import { ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
+import { ObjectStatusModule, TableModule, LayoutPanelModule } from '@fundamental-ngx/core';
 import {
     PlatformButtonModule,
     PlatformInputModule,
@@ -44,6 +44,7 @@ const routes: Routes = [
         PlatformTableModule,
         PlatformButtonModule,
         ObjectStatusModule,
+        LayoutPanelModule,
         PlatformInputModule,
         PlatformSearchFieldModule
     ],
