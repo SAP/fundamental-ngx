@@ -1,5 +1,5 @@
 <ul
-    #tabsItemContainer
+    #headerContainer
     class="fd-tabs"
     [class.fd-tabs--compact]="compact"
     [ngClass]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
@@ -56,13 +56,13 @@
                     </ng-container>
                 </ng-container>
             </a>
-            <div fd-tab-process-icon *ngIf="mode === 'process' && i !== panelTabs.length - 1"></div>
+            <div fd-tab-process-icon *ngIf="mode === 'process' && i !== _panelTabsArray.length - 1"></div>
         </li>
 
         <div *ngIf="tab.header" fd-tab-separator></div>
     </ng-container>
 
-    <button #expandTabsTrigger
+    <button #overflowTrigger
             *ngIf="_isCollapsed"
             [fdMenuTrigger]="menu"
             fd-button
@@ -72,7 +72,7 @@
             aria-label="See More">
     </button>
 </ul>
-<div class="">
+<div #contentContainer class="fd-tabs__content" style="max-height: 250px">
     <ng-content></ng-content>
 </div>
 

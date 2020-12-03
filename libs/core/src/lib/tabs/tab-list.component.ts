@@ -20,7 +20,7 @@ import {
 import { TabPanelComponent } from './tab/tab-panel.component';
 import { fromEvent, merge, Subject, timer } from 'rxjs';
 import { TabsService } from './tabs.service';
-import { debounceTime, filter, startWith, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, takeUntil } from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { getElementCapacity, getElementWidth } from '../utils/functions';
@@ -77,13 +77,20 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     @Input()
     stackContent = false;
 
+    /** Maximum height of the content */
+    @Input()
+    maxContentHeight;
+
     /** Event emitted when the selected panel changes. */
     @Output()
     selectedIndexChange = new EventEmitter<number>();
 
     /** @hidden */
     @ContentChildren(TabPanelComponent)
-    panelTabs: QueryList<TabPanelComponent>;
+    set setPanelTabs(value: QueryList<TabPanelComponent>) {
+        this._panelTabs = value;
+        this._panelTabsArray = value.toArray();
+    };
 
     /** @hidden */
     @ViewChildren(TabLinkDirective)
@@ -94,33 +101,43 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     tabItems: QueryList<TabItemDirective>;
 
     /** @hidden */
-    @ViewChild('tabsItemContainer', { read: ElementRef })
-    tabsItemContainer: ElementRef;
+    @ViewChild('headerContainer', { read: ElementRef })
+    headerContainer: ElementRef;
 
     /** @hidden */
-    @ViewChild('expandTabsTrigger', { read: ElementRef })
-    expandTabsTrigger: ElementRef;
+    @ViewChild('contentContainer', { read: ElementRef })
+    contentContainer: ElementRef;
 
-    /** @hidden TODO */
-    _tabs: { [key: string]: TabPanelComponent[] } = { visible: [], collapsed: [] };
+    /** @hidden */
+    @ViewChild('overflowTrigger', { read: ElementRef })
+    overflowTrigger: ElementRef;
 
-    /** @hidden TODO */
+    /** @hidden Tabs divided into tabs visible in the tab-bar and collapsed */
+    _tabs: { [key: string]: TabPanelComponent[] } = { visible: [], overflowing: [] };
+
+    /** @hidden  */
     _tabsWidth: [TabItemDirective, number][];
 
     /** @hidden TODO */
-    _triggerWidth: number;
+    _overflowTriggerWidth: number;
 
     /** @hidden TODO */
     _isCollapsed = true;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /** @hidden */
+    _panelTabsArray: TabPanelComponent[];
+
+    /** @hidden */
+    private _panelTabs: QueryList<TabPanelComponent>;
+
+    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(private _tabsService: TabsService, private _changeRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._tabs.visible = this.panelTabs.toArray();
+        this._tabs.visible = this._panelTabsArray;
     }
 
     ngAfterViewInit(): void {
@@ -196,7 +213,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
      * reference to keydown subscriptions handler is renewed
      */
     private _listenOnContentQueryListChange(): void {
-        this.panelTabs.changes
+        this._panelTabs.changes
             .pipe(
                 takeUntil(this._onDestroy$),
                 filter(() => !this._isIndexInRange(this.selectedIndex) || this._isAnyTabExpanded())
@@ -206,19 +223,19 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
 
     /** @hidden */
     private _listenOnPropertiesChange(): void {
-        merge(this._tabsService.tabPanelPropertyChanged, this.panelTabs.changes)
+        merge(this._tabsService.tabPanelPropertyChanged, this._panelTabs.changes)
             .pipe(takeUntil(this._onDestroy$))
             .subscribe(() => this._detectChanges());
     }
 
     /** @hidden */
     private _isIndexInRange(index: number): boolean {
-        return this.panelTabs && this.panelTabs.length > 0 && index < this.panelTabs.length;
+        return this._panelTabs && this._panelTabs.length > 0 && index < this._panelTabs.length;
     }
 
     /** @hidden */
     private _isAnyTabExpanded(): boolean {
-        return !this.panelTabs.some((tab) => tab.expanded);
+        return !this._panelTabs.some((tab) => tab.expanded);
     }
 
     /** @hidden */
@@ -226,28 +243,32 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
         this.selectTab(0, true);
     }
 
+    /** @hidden */
     private _detectChanges(): void {
         if (this._changeRef && !this._changeRef['destroyed']) {
             this._changeRef.detectChanges();
         }
     }
 
+    /** @hidden */
     private _isDisabled(index: number): boolean {
-        return this.panelTabs.toArray()[index].disabled;
+        return this._panelTabsArray[index].disabled;
     }
 
+    /** @hidden */
     private _canBeSelected(index: number): boolean {
         return this._isIndexInRange(index) && !this._isDisabled(index);
     }
 
-    private _collapseItems(): void {
-        const capacity = getElementCapacity(this.tabsItemContainer);
+    /** @hidden Divides tabs into visible in the header and moved to the dropdown */
+    private _hideOverflowingItems(): void {
+        const capacity = getElementCapacity(this.headerContainer);
         const tabsLimit = this.maxVisibleTabs || Number.MAX_SAFE_INTEGER;
         const totalRequiredWidth = this._tabsWidth.reduce((total, [_, width]) => total + width, 0);
 
         this._isCollapsed = totalRequiredWidth > capacity || tabsLimit < this._tabsWidth.length;
 
-        const requiredFreeSpace = this._isCollapsed ? this._triggerWidth : 0;
+        const requiredFreeSpace = this._isCollapsed ? this._overflowTriggerWidth : 0;
         const visibleElements = [];
         let capacityLeft = capacity;
 
@@ -259,52 +280,67 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
             }
             capacityLeft -= width;
         }
-        const panelTabs = this.panelTabs.toArray();
+        const panelTabs = [...this._panelTabsArray];
 
         this._tabs = {
             visible: panelTabs.splice(0, visibleElements.length),
-            collapsed: panelTabs
+            overflowing: panelTabs
         }
     };
 
-    private _collapseOverflowingTabs(): void {
-        const source$ = merge(fromEvent(window, 'resize'), this.panelTabs.changes);
-
-        source$.pipe(
-            startWith(0),
+    /** @hidden */
+    private _listenOnResizeAndHideItems(): void {
+        fromEvent(window, 'resize').pipe(
             debounceTime(100),
             takeUntil(this._onDestroy$)
         ).subscribe(_ => {
-            this._collapseItems();
+            this._hideOverflowingItems();
             this._changeRef.detectChanges();
         })
     }
 
+    /** @hidden Caches the width of the tabs and overflow trigger
+     * @param tabItems - collection of tab instances */
     private _cacheTabsDimensions(tabItems: TabItemDirective[]): void {
-        this._triggerWidth = Math.ceil(getElementWidth(this.expandTabsTrigger));
+        this._overflowTriggerWidth = Math.ceil(getElementWidth(this.overflowTrigger));
         this._tabsWidth = tabItems.map(item => [item, Math.ceil(getElementWidth(item.elementRef(), true))]);
     }
 
+    /** @hidden Setup mechanisms required for handling the overflowing tabs behavior */
     private _setupCollapsingOverflowedTabs(): void {
         if (this.collapseOverflow) {
             this._cacheTabsDimensions(this.tabItems.toArray());
-            this._collapseOverflowingTabs();
+            this._listenOnResizeAndHideItems();
+            this._hideOverflowingItems();
         } else {
             this._isCollapsed = false;
         }
     }
 
+    /** @hidden Open tab
+     * @param index - Tab index */
     private _openTab(index: number): void {
         if (this.stackContent) {
-            this.panelTabs.toArray()[index]?.elementRef.nativeElement.scrollIntoView(true);
+            this._scrollToPanel(index);
+            this._panelTabsArray[index]?.elementRef.nativeElement.scrollIntoView(true);
         } else {
-            this.panelTabs.forEach((tab, i) => tab.triggerExpandedPanel(i === index));
+            this._panelTabs.forEach((tab, i) => tab.triggerExpandedPanel(i === index));
         }
     }
 
+    /** @hidden Setup mechanisms required for handling the stacked content behavior */
     private _setupStackedContent(): void {
         if (this.stackContent) {
-            this.panelTabs.forEach(tab => tab.triggerExpandedPanel(true));
+            this._panelTabs.forEach(tab => tab.triggerExpandedPanel(true));
         }
+    }
+
+    /** @hidden Open tab
+     * @param index - Panel index */
+    private _scrollToPanel(index: number): void {
+        const containerElement = this.contentContainer.nativeElement;
+        const panelElement = this._panelTabsArray[index].elementRef.nativeElement;
+        console.log(panelElement.offsetTop - containerElement.clientHeight, containerElement);
+        containerElement.scrollTo({ top: panelElement.offsetTop - containerElement.clientHeight, behavior: 'smooth' });
     }
 }

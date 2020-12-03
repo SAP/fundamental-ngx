@@ -9,15 +9,8 @@
     opacity: 0.4;
 }
 
-.fd-tabs__item--expand-trigger {
-    fd-icon {
-        margin-left: 0.5rem;
-
-        &[dir="rtl"] {
-            margin-left: 0;
-            margin-right: 0.25rem;
-        }
-    }
+.fd-tabs__content {
+    overflow-y: auto;
 }
 
 // Temporary solution until the next styles release
