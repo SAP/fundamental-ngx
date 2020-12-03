@@ -1,0 +1,9 @@
+<fd-toolbar fdType="solid">
+    <label fd-toolbar-label>
+        {{ title }} <span *ngIf="_showTotalCount" [innerText]="'(' + totalCount + ')'"></span>
+    </label>
+
+    <fd-toolbar-spacer></fd-toolbar-spacer>
+
+    <ng-content></ng-content>
+</fd-toolbar>
