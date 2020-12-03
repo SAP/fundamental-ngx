@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.20...v0.25.0-rc.21) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Core) attach arrow to container on Popover ([#3998](https://github.com/SAP/fundamental-ngx/issues/3998)) ([1b02165](https://github.com/SAP/fundamental-ngx/commit/1b0216564e0c3ff409a65bc31e00734ed3ec8dd9))
+
 ## [0.25.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.19...v0.25.0-rc.20) (2020-12-03)
 
 
