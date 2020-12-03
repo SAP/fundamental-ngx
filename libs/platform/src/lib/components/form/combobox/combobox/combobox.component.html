@@ -39,9 +39,10 @@
         <ng-container></ng-container>
         <input
             #searchInputElement
-            [attr.fdp-auto-complete]="!mobile"
+            fdp-auto-complete
             [options]="_suggestions"
             [inputText]="inputText"
+            [mobile]="mobile"
             type="text"
             fd-input-group-input
             tabindex="0"
