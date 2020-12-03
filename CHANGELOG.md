@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.19...v0.25.0-rc.20) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Core) replace datetime picker button label from 'Submit' to 'OK' ([#3991](https://github.com/SAP/fundamental-ngx/issues/3991)) ([b81251c](https://github.com/SAP/fundamental-ngx/commit/b81251cdd2a89c37cec14f2df493b49ca3dae6c3))
+
 ## [0.25.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.18...v0.25.0-rc.19) (2020-12-03)
 
 ## [0.25.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.17...v0.25.0-rc.18) (2020-12-02)
