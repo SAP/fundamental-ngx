@@ -16,12 +16,14 @@ import { UploadCollectionItem } from '../models/upload-collection.models';
 import { UploadCollectionDataProvider } from './upload-collection-data-provider';
 
 export class UploadCollectionDataSource implements DataSource<UploadCollectionItem> {
+    /** Max items for response */
     static readonly MaxLimit = Number.MAX_SAFE_INTEGER;
 
     protected dataChanges = new BehaviorSubject<UploadCollectionItem[]>([]);
 
     constructor(public readonly dataProvider: UploadCollectionDataProvider) {}
 
+    /** Filtering data */
     match(searchParam: Map<string, string | number>): void {
         if (!(searchParam instanceof Map)) {
             throw new Error('DataSource.match() predicate can only accepts string and Map');

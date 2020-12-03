@@ -1,5 +1,3 @@
-import { from } from 'rxjs';
-
 export * from './observable-data-source';
 export * from './data-source';
 export * from './data-model';

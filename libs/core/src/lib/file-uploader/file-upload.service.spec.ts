@@ -66,43 +66,4 @@ describe('FileUploadService', () => {
         expect(files.validFiles.length).toBe(6);
         expect(files.invalidFiles.length).toBe(4);
     });
-
-    it('should verify diffrent valid file size of parsing', () => {
-        let size;
-        size = FileUploaderService._parseFileSize('2byte');
-        expect(size === 2);
-        size = FileUploaderService._parseFileSize('2KB');
-        expect(size === 2048);
-        size = FileUploaderService._parseFileSize('5kb');
-        expect(size === 5120);
-        size = FileUploaderService._parseFileSize('12Mb ');
-        expect(size === 12582912);
-        size = FileUploaderService._parseFileSize('2 gb');
-        expect(size === 2147483648);
-        size = FileUploaderService._parseFileSize('2 k b');
-        expect(size === 2048);
-        size = FileUploaderService._parseFileSize('120');
-        expect(size === 120);
-    });
-
-
-    it('should verify diffrent invalid file size of parsing', () => {
-
-        expect(function (): void {
-            FileUploaderService._parseFileSize('KB')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            FileUploaderService._parseFileSize('hb')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            FileUploaderService._parseFileSize('2vf')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            FileUploaderService._parseFileSize('gb3')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-    });
 });

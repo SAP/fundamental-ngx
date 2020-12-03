@@ -104,7 +104,7 @@ export class UploadCollectionDragnDropDirective {
 
     /** @hidden */
     @HostListener('window:dragleave', ['$event'])
-    onDragleave(event: DragEvent): void {
+    onDragLeave(event: DragEvent): void {
         if (!this.dragndrop || this.disabled) {
             return;
         }
@@ -118,6 +118,7 @@ export class UploadCollectionDragnDropDirective {
         }
     }
 
+    /** @hidden */
     @HostListener('window:drop', ['$event'])
     onDrop(event: DragEvent): void {
         if (!this.dragndrop || this.disabled) {

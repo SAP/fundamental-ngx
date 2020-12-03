@@ -7,10 +7,16 @@ import { UploadCollectionFolder } from '../../models/upload-collection.models';
     templateUrl: './new-folder.component.html'
 })
 export class NewFolderComponent implements AfterViewInit {
+    /** 
+     * @hidden
+     * The current folder in what need to create a new one
+     */
     currentFolder?: UploadCollectionFolder = this.dialogRef.data.currentFolder;
 
-    newFolderName = 'New Folder';
+    /** @hidden */
+    _newFolderName = 'New Folder';
 
+    /** @hidden */
     @ViewChild(FormControlComponent)
     private readonly formControl: FormControlComponent;
 
@@ -20,10 +26,11 @@ export class NewFolderComponent implements AfterViewInit {
         const el = this.formControl.elementRef().nativeElement as HTMLInputElement;
         if (el) {
             el.focus();
-            this._setSelectionRange(el, 0, this.newFolderName.length);
+            this._setSelectionRange(el, 0, this._newFolderName.length);
         }
     }
 
+    /** @hidden */
     private _setSelectionRange(el: HTMLInputElement, selectionStart: number, selectionEnd: number): void {
         const direction = el.selectionDirection;
 

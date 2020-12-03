@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { FileUploaderService } from '@fundamental-ngx/core';
+import { parserFileSize } from '@fundamental-ngx/core';
 
 export interface FilesValidatorOutput {
     validFiles?: File[];
@@ -42,7 +42,7 @@ export class FilesValidatorService {
             }
 
             if (maxFileSize) {
-                const maxSize = FileUploaderService._parseFileSize(maxFileSize);
+                const maxSize = parserFileSize(maxFileSize);
                 if (file.size > maxSize) {
                     if (!res.fileSizeExceed) {
                         res.fileSizeExceed = [];

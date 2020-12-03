@@ -22,16 +22,15 @@ import { PlatformTableModule } from '../table/public_api';
 import { PlatformMenuModule } from '../menu/public_api';
 import { PlatformButtonModule } from '../button/public_api';
 import { NewFolderComponent, MoveToComponent } from './dialogs';
-import { ConvertBytesPipe } from './pipes';
 import { UploadCollectionComponent } from './upload-collection';
 import { UploadCollectionDragnDropDirective } from './directives';
+import { PlatformPipeModule } from '../../utils/pipes/pipe.module';
 
 @NgModule({
     declarations: [
         UploadCollectionComponent,
         NewFolderComponent,
         MoveToComponent,
-        ConvertBytesPipe,
         UploadCollectionDragnDropDirective
     ],
     imports: [
@@ -53,8 +52,9 @@ import { UploadCollectionDragnDropDirective } from './directives';
         PlatformButtonModule,
         MessageStripModule,
         FileUploaderModule,
-        ListModule
+        ListModule,
+        PlatformPipeModule
     ],
-    exports: [UploadCollectionComponent, ConvertBytesPipe]
+    exports: [UploadCollectionComponent]
 })
 export class PlatformUploadCollectionModule {}

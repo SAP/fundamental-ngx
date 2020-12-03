@@ -17,7 +17,7 @@
                 #formControl
                 type="text"
                 id="name"
-                [(ngModel)]="newFolderName"
+                [(ngModel)]="_newFolderName"
                 i18n-placeholder
                 placeholder="Type here..."
             />
@@ -33,7 +33,7 @@
                 i18n-label
                 label="Create"
                 [compact]="true"
-                (click)="dialogRef.close(newFolderName)"
+                (click)="dialogRef.close(_newFolderName)"
             ></button>
         </fd-dialog-footer-button>
 

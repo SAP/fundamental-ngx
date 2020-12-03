@@ -1,21 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
 
 import { DIALOG_REF, DialogRef, DialogService, DialogConfig } from '@fundamental-ngx/core';
-import { take } from 'rxjs/operators';
+import { isObject } from '../../../../utils/lang';
 
 import { UploadCollectionItem, UploadCollectionFolder } from '../../models/upload-collection.models';
 import { NewFolderComponent } from '../new-folder';
-
-function isObject<T>(item: T): boolean {
-    return typeof item === 'object' && !Array.isArray(item) && item !== null;
-}
 
 @Component({
     templateUrl: './move-to.component.html',
     styles: [
         `
             .fd-list__item--title-background {
-                background: #f2f2f2;
+                background: var(--sapList_HeaderBackground);
             }
 
             .fd-dialog__body--no-horizontal-padding {
@@ -26,11 +23,22 @@ function isObject<T>(item: T): boolean {
     ]
 })
 export class MoveToComponent implements OnInit {
-    readonly _items: UploadCollectionItem[] = this.dialogRef.data.items;
-    _foldersList: UploadCollectionFolder[] = [];
-    _originalFolder?: UploadCollectionFolder = this.dialogRef.data.currentFolder;
-    _currentFolder?: UploadCollectionFolder = this._originalFolder ? { ...this._originalFolder } : null;
+    /** 
+     * List of upload collection items
+     */
+    readonly items: UploadCollectionItem[] = this.dialogRef.data.items;
+    /** 
+     * The current folder in what need to create a new one
+     */
+    originalFolder?: UploadCollectionFolder = this.dialogRef.data.currentFolder;
+
+    /** @hidden */
+    _currentFolder?: UploadCollectionFolder = this.originalFolder ? { ...this.originalFolder } : null;
+    /** @hidden */
     selectedFolder?: UploadCollectionFolder;
+
+    /** @hidden */
+    _foldersList: UploadCollectionFolder[] = [];
 
     constructor(
         @Inject(DIALOG_REF) private readonly dialogRef: DialogRef,
@@ -38,40 +46,47 @@ export class MoveToComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this._init(this._currentFolder ? this._currentFolder.files : this._items);
+        this._init(this._currentFolder ? this._currentFolder.files : this.items);
     }
 
-    goToParentFolder(): void {
+    /** @hidden */
+    _goToParentFolder(): void {
         this.selectedFolder = null;
         this._currentFolder = this._getParentFolderByCurrentFolderId(this._currentFolder.documentId);
-        this._init(this._currentFolder ? this._currentFolder.files : this._items);
+        this._init(this._currentFolder ? this._currentFolder.files : this.items);
     }
 
-    close(): void {
+    /** @hidden */
+    _close(): void {
         this.dialogRef.dismiss();
     }
 
-    confirm(): void {
+    /** @hidden */
+    _confirm(): void {
         this.dialogRef.close({
             selectedFolder: this.selectedFolder || this._currentFolder
         });
     }
 
-    openFolder(folder: UploadCollectionFolder): void {
+    /** @hidden */
+    _openFolder(folder: UploadCollectionFolder): void {
         this.selectedFolder = null;
         this._currentFolder = folder;
         this._init(folder.files);
     }
 
-    selectFolder(folder: UploadCollectionFolder): void {
+    /** @hidden */
+    _selectFolder(folder: UploadCollectionFolder): void {
         this.selectedFolder = folder;
     }
 
-    hasFolders(items: UploadCollectionItem[]): boolean {
+    /** @hidden */
+    _hasFolders(items: UploadCollectionItem[]): boolean {
         return items.some((item) => item.type === 'folder');
     }
 
-    newFolder(): void {
+    /** @hidden */
+    _newFolder(): void {
         const dialogRef = this._dialogService.open(NewFolderComponent, {
             responsivePadding: true,
             backdropClickCloseable: false,
@@ -101,14 +116,16 @@ export class MoveToComponent implements OnInit {
         });
     }
 
+    /** @hidden */
     private _init(items: UploadCollectionItem[]): void {
         this._foldersList = items.filter((item) => item.type === 'folder') as UploadCollectionFolder[];
     }
 
+    /** @hidden */
     private _getParentFolderByCurrentFolderId(documentId: string | number): UploadCollectionFolder | undefined {
         let foundObj: UploadCollectionFolder;
 
-        JSON.stringify(this._items, (_, nestedValue) => {
+        JSON.stringify(this.items, (_, nestedValue) => {
             if (!isObject(nestedValue) || nestedValue.type === 'file' || !nestedValue.files) {
                 return nestedValue;
             }
