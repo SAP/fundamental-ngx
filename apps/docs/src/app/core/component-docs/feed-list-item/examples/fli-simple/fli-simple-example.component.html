@@ -1,4 +1,3 @@
-<p>Simplest example of Feed List Item with <code>[authorTitle]</code> and <code>[text]</code> only</p>
 <fd-feed-list aria-label="Simplest example of Feed List Item">
     <fd-feed-list-item
         authorTitle="Author without link"
@@ -14,7 +13,7 @@
     </fd-feed-list-item>
 </fd-feed-list>
 
-<p>Example shows rich text (formatted text) in action. As you can see if you enable formatted text, more/less button has disappeared.</p>
+<p>Example shows usage rich text (formatted text)</p>
 <p>
     <label for="toggle-text-righ1">Toggle rich text (formatted text): <input type="checkbox" [(ngModel)]="hasFormattedText" id="toggle-text-righ1" /></label>
 </p>
@@ -29,7 +28,7 @@
     </fd-feed-list-item>
 </fd-feed-list>
 
-<p>You can set up custom text for more/less button's. Use <code>[moreLabel]</code> and <code>[lessLabel]</code> for this.</p>
+<p>Example shows usage more/less label</p>
 <fd-feed-list aria-label="Feed List Item with Custom more/less button's text">
     <fd-feed-list-item
         authorTitle="Author with very looong tiiitttleee"
@@ -41,8 +40,7 @@
         ariaLabel="Feed list item example">
     </fd-feed-list-item>
 </fd-feed-list>
-
-<p>By default all items in list will display as group in one column and have border-top as a separator</p>
+<p>Example shows feed-list with border</p>
 <fd-feed-list aria-label="Feed List Item with custom more/less button's text, group with borderless">
     <fd-feed-list-item
         authorTitle="Author 1"
@@ -63,7 +61,7 @@
         ariaLabel="Feed list item example">
     </fd-feed-list-item>
 </fd-feed-list>
-<p>and you can hide border-top. Set <code>[borderLess]</code> property to true</p>
+<p>Example shows feed-list without border</p>
 <fd-feed-list [borderLess]="true" aria-label="Feed List Item with custom more/less button's text, group with borderless">
     <fd-feed-list-item
         authorTitle="Author 1"
