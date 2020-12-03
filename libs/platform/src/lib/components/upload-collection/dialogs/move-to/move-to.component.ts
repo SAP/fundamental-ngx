@@ -12,7 +12,8 @@ import { NewFolderComponent } from '../new-folder';
     styles: [
         `
             .fd-list__item--title-background {
-                background: var(--sapList_HeaderBackground);
+                background-color: #f2f2f2;
+                background-color: var(--sapList_HeaderBackground);
             }
 
             .fd-dialog__body--no-horizontal-padding {
