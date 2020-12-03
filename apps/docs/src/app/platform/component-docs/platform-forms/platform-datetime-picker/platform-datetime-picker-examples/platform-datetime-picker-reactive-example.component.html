@@ -1,0 +1,78 @@
+<fdp-form-group
+    #ffg
+    [formGroup]="datetimePickerForm"
+    [object]="formData"
+    (onSubmit)="onSubmit()"
+    [multiLayout]="true"
+>
+    <fdp-form-field
+        #ffl1
+        id="simple"
+        zone="zLeft"
+        rank="1"
+        required="true"
+        [validators]="requiredDateValidator"
+        placeholder="MM/dd/YYYY, hh:mm"
+        label="Date:"
+    >
+        <fdp-datetime-picker
+            name="simple"
+            [formControl]="ffl1.formControl"
+        ></fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl3
+        id="withAllowNull"
+        zone="zLeft"
+        rank="3"
+        label="With allowNull not enabled to disallow input from taking null value:"
+    >
+        <fdp-datetime-picker
+            name="withAllowNull"
+            [allowNull]="false"
+            placeholder="Enter a date mandatorily"
+            [formControl]="ffl3.formControl"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #ffl6
+        id="storedDate"
+        zone="zLeft"
+        rank="7"
+        required="true"
+        label="Passing datetime through form object:"
+    >
+        <fdp-datetime-picker
+            name="storedDate"
+            placeholder="Pre-filled datetime"
+            [formControl]="ffl6.formControl"
+        >
+        </fdp-datetime-picker>
+    </fdp-form-field>
+
+    <fdp-form-field
+        id="submitBtn"
+        rank="8"
+        zone="zLeft"
+    >
+        <button
+            fd-button
+            name="submitBtn"
+            (click)="onSubmit()"
+        >Submit</button>
+    </fdp-form-field>
+
+    <ng-template
+        #i18n
+        let-errors
+    >
+        <span *ngIf="errors.required">
+            Value is required
+        </span>
+    </ng-template>
+</fdp-form-group>
+
+<div>form valid: {{ datetimePickerForm?.valid }}</div>

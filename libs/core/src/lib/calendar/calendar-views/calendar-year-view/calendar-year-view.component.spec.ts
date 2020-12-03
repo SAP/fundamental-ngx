@@ -1,20 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CalendarYearViewComponent } from './calendar-year-view.component';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FdDate, FdDatetimeModule } from '../../../datetime';
 import { CalendarService } from '../../calendar.service';
+import { CalendarYearViewComponent } from './calendar-year-view.component';
 
 describe('CalendarYearViewComponent', () => {
-    let component: CalendarYearViewComponent;
-    let fixture: ComponentFixture<CalendarYearViewComponent>;
+    let component: CalendarYearViewComponent<FdDate>;
+    let fixture: ComponentFixture<CalendarYearViewComponent<FdDate>>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [CalendarYearViewComponent],
-            providers: [CalendarService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdDatetimeModule],
+                declarations: [CalendarYearViewComponent],
+                providers: [CalendarService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CalendarYearViewComponent);
+        fixture = TestBed.createComponent<CalendarYearViewComponent<FdDate>>(CalendarYearViewComponent);
         component = fixture.componentInstance;
         component.yearSelected = 2019;
         component.yearViewGrid = { cols: 4, rows: 4, yearMapping: (year) => year.toString() };
@@ -66,7 +71,8 @@ describe('CalendarYearViewComponent', () => {
         component.yearViewGrid = { cols: 3, rows: 3, yearMapping: (year) => year.toString() };
         component.yearSelected = 2000;
         component.ngOnInit();
-        expect(component.calendarYearListGrid).toEqual([
+        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ year }) => year));
+        expect(yearsGrid).toEqual([
             [2000, 2001, 2002],
             [2003, 2004, 2005],
             [2006, 2007, 2008]
@@ -77,24 +83,16 @@ describe('CalendarYearViewComponent', () => {
         component.yearViewGrid = { cols: 9, rows: 1, yearMapping: (year) => year.toString() };
         component.yearSelected = 2000;
         component.ngOnInit();
-        expect(component.calendarYearListGrid).toEqual([[2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008]]);
+        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ year }) => year));
+        expect(yearsGrid).toEqual([[2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008]]);
     });
 
     it('Should generate proper grid', () => {
         component.yearViewGrid = { cols: 1, rows: 9, yearMapping: (year) => year.toString() };
         component.yearSelected = 2000;
         component.ngOnInit();
-        expect(component.calendarYearListGrid).toEqual([
-            [2000],
-            [2001],
-            [2002],
-            [2003],
-            [2004],
-            [2005],
-            [2006],
-            [2007],
-            [2008]
-        ]);
+        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ year }) => year));
+        expect(yearsGrid).toEqual([[2000], [2001], [2002], [2003], [2004], [2005], [2006], [2007], [2008]]);
     });
 
     it('Should detect active year as current one', () => {
@@ -132,6 +130,6 @@ describe('CalendarYearViewComponent', () => {
 
         component.ngOnInit();
 
-        expect(component.activeYear).toBe(component.calendarYearListGrid[0][0]);
+        expect(component.activeYear).toBe(component.calendarYearListGrid[0][0].year);
     });
 });

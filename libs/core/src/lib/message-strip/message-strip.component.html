@@ -2,12 +2,13 @@
     class="fd-message-strip__close"
     fd-button
     glyph="decline"
+    fdType="transparent"
     [compact]="true"
-    [fdType]="'transparent'"
     *ngIf="dismissible"
     (click)="dismiss()"
     [attr.aria-controls]="id"
     [attr.aria-label]="dismissLabel"
+    [attr.title]="dismissLabel"
 ></button>
 <p class="fd-message-strip__text">
     <ng-content></ng-content>

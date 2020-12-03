@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-time-two-digits-example',
     templateUrl: './time-two-digits-example.component.html'
 })
 export class TimeTwoDigitsExampleComponent {
-    time = { hour: 9, minute: 0, second: 0 };
+    time = new FdDate().setTime(9, 0, 0);
 }

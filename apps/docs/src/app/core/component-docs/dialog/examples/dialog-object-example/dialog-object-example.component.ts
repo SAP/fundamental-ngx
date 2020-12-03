@@ -1,5 +1,5 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { DialogRef, DialogService, DefaultDialogObject } from '@fundamental-ngx/core';
+import { DialogRef, DialogService, DialogDefaultContent } from '@fundamental-ngx/core';
 
 @Component({
   selector: 'fd-dialog-object-example',
@@ -20,7 +20,7 @@ export class DialogObjectExampleComponent {
     private _dialogReference: DialogRef;
 
     openDialog(): void {
-        const object: DefaultDialogObject = {
+        const object: DialogDefaultContent = {
             title: 'Dialog Title',
             content: this.dialogContent,
             subHeader: this.dialogSubHeader,

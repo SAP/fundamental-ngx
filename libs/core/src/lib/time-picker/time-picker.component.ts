@@ -5,19 +5,28 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
+    Inject,
     Input,
+    OnChanges,
     OnDestroy,
+    OnInit,
+    Optional,
     Output,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { TimeObject } from '../time/time-object';
-import { TimeComponent } from '../time/time.component';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { TimeFormatParser } from './format/time-parser';
-import { FormStates } from '../form/form-control/form-states';
-import { Placement } from 'popper.js';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Placement } from 'popper.js';
+
+import { DATE_TIME_FORMATS, DateTimeFormats } from '../datetime/datetime-formats';
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { createMissingDateImplementationError } from './errors';
+
+import { TimeComponent } from '../time/time.component';
+import { FormStates } from '../form/form-control/form-states';
 
 @Component({
     selector: 'fd-time-picker',
@@ -42,27 +51,16 @@ import { Subject } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Validator {
-
+export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnChanges, OnDestroy, Validator {
     /**
-     * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
-     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
-     *
-     * ```json
-     * { hour: 12, minute: 0, second: 0 }
-     * ```
+     * @Input date time object representation
      */
     @Input()
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+    time: D;
 
     /** @Input Uses compact time picker. */
     @Input()
     compact = false;
-
-    /** @Input When set to true, uses the 24 hour clock (hours ranging from 0 to 23)
-     * and does not display a period control. */
-    @Input()
-    meridian = false;
 
     /** @Input Disables the component. */
     @Input()
@@ -72,23 +70,39 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     @Input()
     spinnerButtons = true;
 
-    /** @Input When set to false, hides the input for seconds. */
+    /**
+     * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23).
+     * Default value based on the current locale format option
+     */
     @Input()
-    displaySeconds = true;
+    meridian: boolean;
 
-    /** @Input When set to false, hides the input for minutes. */
+    /**
+     * @Input When set to false, hides the input for seconds.
+     * Default value based on the current locale format option
+     * */
     @Input()
-    displayMinutes = true;
+    displaySeconds: boolean;
 
-    /** @Input When set to false, hides the input for hours. */
+    /**
+     * @Input When set to false, hides the input for minutes.
+     * Default value based on the current locale format option
+     * */
     @Input()
-    displayHours = true;
+    displayMinutes: boolean;
+
+    /**
+     * @Input When set to false, hides the input for hours.
+     * Default value based on the current locale format option
+     * */
+    @Input()
+    displayHours: boolean;
 
     /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds.
      * Otherwise It can be set to a default value
      */
     @Input()
-    placeholder: string = this.getPlaceholder();
+    placeholder: string;
 
     /** Aria label for the time picker input. */
     @Input()
@@ -130,6 +144,20 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     @Input()
     keepTwoDigitsTime = false;
 
+    /**
+     * Display format option to customize time format in input control.
+     * Must be a format option that is understandable by DatetimeAdapter.
+     */
+    @Input()
+    displayFormat: unknown;
+
+    /**
+     * Parse format option to customize time format in input control.
+     * Must be a format option that is understandable by DatetimeAdapter.
+     */
+    @Input()
+    parseFormat: unknown;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange = new EventEmitter<boolean>();
@@ -140,7 +168,7 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
 
     /** @hidden */
     @ViewChild(TimeComponent)
-    child: TimeComponent;
+    child: TimeComponent<D>;
 
     /** @hidden Whether the input time is valid(success). Internal use. */
     isInvalidTimeInput = false;
@@ -152,15 +180,63 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     isOpen: boolean;
 
     /** @hidden */
+    _meridian: boolean;
+
+    /** @hidden */
+    _displaySeconds: boolean;
+
+    /** @hidden */
+    _displayMinutes: boolean;
+
+    /** @hidden */
+    _displayHours: boolean;
+
+    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (_: D) => void = () => {};
     /** @hidden */
     onTouched: Function = () => {};
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, private _timeAdapter: TimeFormatParser) {}
+    get _placeholder(): string {
+        return this.placeholder || this.getPlaceholder();
+    }
+
+    /** @hidden */
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+    }
+
+    ngOnInit(): void {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._calculateTimeOptions();
+            this._changeDetectorRef.detectChanges();
+        });
+
+        this._calculateTimeOptions();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (
+            ['displayHours', 'displayMinutes', 'displaySeconds', 'meridian', 'displayFormat'].some(
+                (input) => input in changes
+            )
+        ) {
+            this._calculateTimeOptions();
+        }
+    }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -172,32 +248,50 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(control: AbstractControl): {
+    validate(
+        control: AbstractControl
+    ): {
         [key: string]: any;
     } {
-        return this.isInvalidTimeInput ? {
-            timeValidation: {
-                valid: false
-            }
-        } : null;
+        return this.isInvalidTimeInput
+            ? {
+                  timeValidation: {
+                      valid: false
+                  }
+              }
+            : null;
     }
 
     /**
      * Returns the current value of the time input.
      */
-    getTime(): TimeObject {
+    getTime(): D {
         return this.time;
+    }
+
+    /**
+     * Returns format options to be used during time formatting.
+     */
+    getDisplayFormat(): unknown {
+        return this.displayFormat || this._dateTimeFormats.display.timeInput;
+    }
+
+    /**
+     * Returns format options to be used during time parsing.
+     */
+    getParseFormat(): unknown {
+        return this.parseFormat || this._dateTimeFormats.parse.timeInput;
     }
 
     /** @hidden */
     getFormattedTime(): string {
-        const formattedTime = this._timeAdapter.format(
-            this.time,
-            this.displaySeconds,
-            this.displayMinutes,
-            this.meridian
-        );
-        return formattedTime !== undefined ? formattedTime : '';
+        let formattedTime = '';
+
+        try {
+            formattedTime = this._dateTimeAdapter.format(this.time, this.getDisplayFormat());
+        } catch (e) {}
+
+        return formattedTime;
     }
 
     /**
@@ -211,24 +305,24 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
 
     /** @hidden */
     timeInputChanged(timeFromInput: string): void {
-        const time = this._timeAdapter.parse(timeFromInput, this.displaySeconds, this.displayMinutes, this.meridian);
-        if (time) {
+        // parse
+        const time = this._dateTimeAdapter.parse(timeFromInput, this.getParseFormat());
+
+        if (this._dateTimeAdapter.isValid(time)) {
             this.isInvalidTimeInput = false;
             this.time = time;
             this.onChange(time);
         } else {
             if (this.allowNull && timeFromInput === '') {
                 this.isInvalidTimeInput = false;
-                this.onChange({ hour: null, minutes: null, seconds: null });
-                if (this.child) {
-                    this.child.setDisplayedHour();
-                }
+                this.onChange(time);
             } else {
                 this.isInvalidTimeInput = true;
                 this.onChange(time);
             }
         }
-        this._cd.detectChanges();
+
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
@@ -254,16 +348,17 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     /** @hidden */
     getPlaceholder(): string {
         let retVal = '';
-        if (this.displayHours) {
+
+        if (this._displayHours) {
             retVal = retVal + 'hh';
         }
-        if (this.displayMinutes) {
+        if (this._displayMinutes) {
             retVal = retVal + ':mm';
         }
-        if (this.displaySeconds) {
+        if (this._displaySeconds) {
             retVal = retVal + ':ss';
         }
-        if (this.meridian) {
+        if (this._meridian) {
             retVal = retVal + ' am/pm';
         }
 
@@ -271,16 +366,15 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     }
 
     /** @hidden */
-    timeFromTimeComponentChanged(time: TimeObject): void {
-        Object.keys(time).forEach(key => time[key] = time[key] ? time[key] : 0);
+    timeFromTimeComponentChanged(time: D): void {
         this.time = time;
         this.onChange(time);
         this.isInvalidTimeInput = false;
-        this._cd.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
-    registerOnChange(fn: (time: TimeObject) => void): void {
+    registerOnChange(fn: (time: D) => void): void {
         this.onChange = fn;
     }
 
@@ -292,13 +386,13 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this._cd.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
-    writeValue(time: TimeObject): void {
+    writeValue(time: D): void {
         if (!time) {
-            this.time = { hour: null, minute: null, second: null };
+            this.time = null;
             if (!this.allowNull) {
                 this.isInvalidTimeInput = true;
             }
@@ -306,6 +400,31 @@ export class TimePickerComponent implements ControlValueAccessor, OnDestroy, Val
             this.isInvalidTimeInput = false;
             this.time = time;
         }
-        this._cd.markForCheck();
+        this._changeDetectorRef.markForCheck();
+    }
+
+    /** @hidden */
+    private _calculateTimeOptions(): void {
+        const format = this.getDisplayFormat();
+
+        // default meridian option based on format option
+        this._meridian =
+            this.meridian != null ? this.meridian : this._dateTimeAdapter.isTimeFormatIncludesDayPeriod(format);
+
+        // default seconds option based on format option
+        this._displaySeconds =
+            this.displaySeconds != null
+                ? this.displaySeconds
+                : this._dateTimeAdapter.isTimeFormatIncludesSeconds(format);
+
+        // default minutes option based on format option
+        this._displayMinutes =
+            this.displayMinutes != null
+                ? this.displayMinutes
+                : this._dateTimeAdapter.isTimeFormatIncludesMinutes(format);
+
+        // default hours option based on format option
+        this._displayHours =
+            this.displayHours != null ? this.displayHours : this._dateTimeAdapter.isTimeFormatIncludesHours(format);
     }
 }

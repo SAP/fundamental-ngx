@@ -41,6 +41,13 @@ export const ROUTES: Routes = [
                     ).then((m) => m.PlatformCheckboxGroupDocsModule)
             },
             {
+                path: 'datetime-picker',
+                loadChildren: () =>
+                    import(
+                        './component-docs/platform-forms/platform-datetime-picker/platform-datetime-picker-docs.module'
+                    ).then((m) => m.PlatformDatetimePickerDocsModule)
+            },
+            {
                 path: 'dynamic-page',
                 loadChildren: () =>
                     import('./component-docs/platform-dynamic-page/platform-dynamic-page.module').then(
@@ -158,8 +165,9 @@ export const ROUTES: Routes = [
             {
                 path: 'object-attribute',
                 loadChildren: () =>
-                    import('./component-docs/platform-object-attribute/platform-object-attribute-docs.module').then((m) =>
-                        m.PlatformObjectAttributeDocsModule)
+                    import('./component-docs/platform-object-attribute/platform-object-attribute-docs.module').then(
+                        (m) => m.PlatformObjectAttributeDocsModule
+                    )
             },
             {
                 path: 'input-group',
@@ -199,20 +207,44 @@ export const ROUTES: Routes = [
             {
                 path: 'action-list-item',
                 loadChildren: () =>
-                    import('./component-docs/platform-action-list-item/platform-action-list-item-docs.module').then((m) =>
-                        m.PlatformActionListItemDocsModule)
+                    import('./component-docs/platform-action-list-item/platform-action-list-item-docs.module').then(
+                        (m) => m.PlatformActionListItemDocsModule
+                    )
             },
             {
                 path: 'display-list-item',
                 loadChildren: () =>
-                    import('./component-docs/platform-display-list-item/platform-display-list-item-docs.module').then((m) =>
-                        m.PlatformDisplayListItemDocsModule)
+                    import('./component-docs/platform-display-list-item/platform-display-list-item-docs.module').then(
+                        (m) => m.PlatformDisplayListItemDocsModule
+                    )
             },
             {
                 path: 'object-list-item',
                 loadChildren: () =>
-                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then((m) =>
-                        m.PlatformObjectListItemDocsModule)
+                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then(
+                        (m) => m.PlatformObjectListItemDocsModule
+                    )
+            },
+            {
+                path: 'multi-input',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/multi-input/platform-multi-input-docs.module').then(
+                        (m) => m.PlatformMultiInputDocsModule
+                    )
+            },
+            {
+                path: 'feed-input',
+                loadChildren: () =>
+                    import('./component-docs/platform-feed-input/platform-feed-input.module').then(
+                        (m) => m.PlatformFeedInputDocsModule
+                    )
+            },
+            {
+                path: 'file-uploader',
+                loadChildren: () =>
+                    import('./component-docs/platform-file-uploader/platform-file-uploader-docs.module').then(
+                        (m) => m.PlatformFileUploaderDocsModule
+                    )
             }
         ]
     }

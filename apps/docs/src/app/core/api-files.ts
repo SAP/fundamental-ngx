@@ -40,7 +40,11 @@ export const API_FILES = {
         'CardKpiAnalyticsLabelDirective',
         'CardKpiAnalyticsContentDirective'
     ],
-    dynamicSideContent: ['DynamicSideContentComponent', 'DynamicSideContentSideComponent', 'DynamicSideContentMainComponent'],
+    dynamicSideContent: [
+        'DynamicSideContentComponent',
+        'DynamicSideContentSideComponent',
+        'DynamicSideContentMainComponent'
+    ],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
     busyIndicator: ['BusyIndicatorComponent'],
     button: ['ButtonComponent'],
@@ -51,18 +55,19 @@ export const API_FILES = {
         'CalendarMonthViewComponent',
         'CalendarYearViewComponent',
         'CalendarHeaderViewComponent',
-        'CalendarI18n',
-        'CalendarI18nDefault',
-        'CalendarI18nLabels',
-        'DateFormatParser',
-        'DateFormatParserDefault',
-        'FdDate'
+        'CalendarI18nLabels'
     ],
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
-    datePicker: ['DatePickerComponent', 'DateFormatParser', 'DateFormatParserDefault', 'FdDate'],
-    datetimePicker: ['DatetimePickerComponent', 'FdDateTime', 'DateTimeFormatParser', 'DateTimeFormatParserDefault'],
+    datePicker: ['DatePickerComponent'],
+    datetimePicker: ['DatetimePickerComponent'],
+    feedInput: [
+        'FeedInputComponent',
+        'FeedInputTextareaDirective',
+        'FeedInputButtonDirective',
+        'FeedInputAvatarDirective'
+    ],
     fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
     fileUploader: [
         'FileUploaderComponent',
@@ -71,11 +76,13 @@ export const API_FILES = {
         'FileUploaderService'
     ],
     fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective'],
+    flexibleColumnLayout: ['FlexibleColumnLayoutComponent'],
     form: [
         'FormControlComponent',
         'FormGroupComponent',
         'FormItemComponent',
         'FormLabelComponent',
+        'FormHeaderComponent',
         'FormLegendDirective',
         'FormMessageComponent',
         'FormSetDirective',
@@ -139,6 +146,21 @@ export const API_FILES = {
         'DialogRef'
     ],
     multiInput: ['MultiInputComponent'],
+    messageBox: [
+        'MessageBoxRef',
+        'MessageBoxConfig',
+        'MessageBoxContent',
+        'MessageBoxService',
+        'MessageBoxComponent',
+        'MessageBoxBodyComponent',
+        'MessageBoxDecisiveButton',
+        'MessageBoxHeaderComponent',
+        'MessageBoxFooterComponent',
+        'MessageBoxDefaultComponent',
+        'MessageBoxCloseIconComponent',
+        'MessageBoxContainerComponent',
+        'MessageBoxFooterButtonComponent',
+    ],
     notification: [
         'NotificationComponent',
         'NotificationHeaderComponent',
@@ -264,15 +286,8 @@ export const API_FILES = {
         'NumericContentScaleDirective',
         'NumericContentScaleTextDirective'
     ],
-    time: [
-        'TimeComponent',
-        'TimeI18nLabels',
-        'TimeFormatParser',
-        'TimeFormatParserDefault',
-        'TimeObject',
-        'TimeColumnComponent'
-    ],
-    timePicker: ['TimePickerComponent', 'TimeFormatParser', 'TimeFormatParserDefault', 'TimeObject'],
+    time: ['TimeComponent', 'TimeI18n', 'TimeColumnComponent'],
+    timePicker: ['TimePickerComponent'],
     title: ['TitleComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
@@ -281,8 +296,10 @@ export const API_FILES = {
         'ToolbarComponent',
         'ToolbarContentComponent',
         'ToolbarOverflowContentComponent',
-        'ToolbarSpacerComponent'
+        'ToolbarSpacerComponent',
+        'ThemesService'
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
+    ratingIndicator: ['RatingIndicatorComponent'],
     wizard: ['WizardComponent']
 };

@@ -1,28 +1,32 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeColumnComponent } from './time-column.component';
-import { TwoDigitsPipe } from '../../utils/pipes/two-digits.pipe';
 import { CarouselModule } from '../../utils/directives/carousel/carousel.module';
+import { SelectableViewItem } from '../models';
 
 describe('TimeColumnComponent', () => {
-    let component: TimeColumnComponent;
-    let fixture: ComponentFixture<TimeColumnComponent>;
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            imports: [CarouselModule],
-            declarations: [TimeColumnComponent, TwoDigitsPipe]
-        })
-            .compileComponents();
+    let component: TimeColumnComponent<number>;
+    let fixture: ComponentFixture<TimeColumnComponent<number>>;
+    const rows: SelectableViewItem<number>[] = Array.from(new Array(10)).map((_, index) => ({
+        value: index + 1,
+        label: (index + 1).toLocaleString()
     }));
+
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CarouselModule],
+                declarations: [TimeColumnComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TimeColumnComponent);
         component = fixture.componentInstance;
 
-        component.rows = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-        ];
+        component.rows = rows;
+
         fixture.detectChanges();
     });
 
@@ -35,59 +39,49 @@ describe('TimeColumnComponent', () => {
 
         (<any>component)._initialised = true;
 
-        component.activeValue = 3;
+        component.activeValue = rows[2];
         fixture.detectChanges();
 
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[2], true);
-
     });
 
     it('should call pick time method with scrollUp', () => {
-
-        component.activeValue = 3;
+        component.activeValue = rows[2];
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollUp();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[1], true, true, false);
-
     });
 
     it('should call pick time method with scrollUp, when beginning is approached', () => {
-
-        component.activeValue = 1;
+        component.activeValue = rows[0];
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollUp();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[9], true, true, false);
-
     });
 
     it('should call pick time method with scrollDown', () => {
-
-        component.activeValue = 3;
+        component.activeValue = rows[2];
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollDown();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[3], true, true, true);
-
     });
 
     it('should call pick time method with scrollDown, when end is approached', () => {
-
-        component.activeValue = 10;
+        component.activeValue = rows[9];
 
         spyOn(<any>component, '_pickTime');
 
         component.scrollDown();
         expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[0], true, true, true);
-
     });
 
     it('should handle change from carousel, change values and emit event', () => {
-
         const item = component.items.toArray()[3];
         const offsetItem = component.items.toArray()[3 + component.offset];
 
@@ -104,11 +98,9 @@ describe('TimeColumnComponent', () => {
             value: offsetItem.value,
             after: false
         });
-
     });
 
     it('should handle change from carousel, change values and emit event on meridian, without offset', () => {
-
         component.meridian = true;
         component.offset = 0;
 
@@ -127,6 +119,5 @@ describe('TimeColumnComponent', () => {
             value: item.value,
             after: false
         });
-
     });
 });

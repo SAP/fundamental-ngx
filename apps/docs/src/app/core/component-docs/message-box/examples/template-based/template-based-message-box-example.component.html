@@ -1,0 +1,38 @@
+<ng-template let-messageBox let-messageBoxConfig="messageBoxConfig" #messageBoxTemplate>
+    <fd-message-box [messageBoxConfig]="messageBoxConfig" [messageBoxRef]="messageBox">
+        <fd-message-box-header>
+            <h1 fd-title>Fruit facts</h1>
+            <fd-message-box-close-icon (click)="messageBox.dismiss('Close button')"></fd-message-box-close-icon>
+        </fd-message-box-header>
+        <fd-message-box-body>
+            The World's Most Popular Fruit is the tomato.
+        </fd-message-box-body>
+        <fd-message-box-footer>
+            <fd-message-box-footer-button>
+                <button
+                    fd-button
+                    fd-initial-focus
+                    fd-message-box-decisive-button
+                    fdType="emphasized"
+                    label="Ok"
+                    [compact]="true"
+                    (click)="messageBox.close('Ok')">
+                </button>
+            </fd-message-box-footer-button>
+
+            <fd-message-box-footer-button>
+                <button
+                    fd-button
+                    fd-message-box-decisive-button
+                    fdType="transparent"
+                    label="Cancel"
+                    [compact]="true"
+                    (click)="messageBox.dismiss('Cancel')">
+                </button>
+            </fd-message-box-footer-button>
+        </fd-message-box-footer>
+    </fd-message-box>
+</ng-template>
+
+<button fd-button label="Open from Template" (click)="open(messageBoxTemplate)"></button>
+<p>{{ confirmationReason }}</p>

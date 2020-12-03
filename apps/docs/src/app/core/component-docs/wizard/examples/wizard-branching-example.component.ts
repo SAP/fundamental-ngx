@@ -5,13 +5,6 @@ import { WizardStepStatus } from '@fundamental-ngx/core';
     selector: 'fd-wizard-branching-example',
     templateUrl: './wizard-branching-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    styles: [
-        `
-            .fd-wizard-example .fd-wizard__content {
-                min-height: 300px;
-            }
-        `
-    ],
     host: {
         class: 'fd-wizard-example'
     }
