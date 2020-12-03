@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.25...v0.25.0-rc.26) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Platform) fix icons of Search Field component ([ca4b83d](https://github.com/SAP/fundamental-ngx/commit/ca4b83d1cf073093ec57299d0303b0bd1aa526ed))
+
 ## [0.25.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.24...v0.25.0-rc.25) (2020-12-03)
 
 
