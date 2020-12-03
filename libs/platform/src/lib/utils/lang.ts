@@ -45,3 +45,7 @@ export function isType(obj: any): boolean {
 export function isStringMap(obj: any): obj is Object {
     return typeof obj === 'object' && obj !== null;
 }
+
+export function isObject<T>(item: T): boolean {
+    return typeof item === 'object' && !Array.isArray(item) && item !== null;
+}
