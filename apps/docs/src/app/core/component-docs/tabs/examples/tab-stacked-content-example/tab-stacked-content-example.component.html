@@ -1,0 +1,7 @@
+<fd-tab-list class="sticky-tab-bar" [stackContent]="true">
+    <fd-tab *ngFor="let tab of tabs" [title]="tab.title">
+        <div class="content-container">
+            {{tab.content}}
+        </div>
+    </fd-tab>
+</fd-tab-list>

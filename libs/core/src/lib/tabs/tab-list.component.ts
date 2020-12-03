@@ -24,8 +24,6 @@ import { debounceTime, filter, startWith, takeUntil } from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { getElementCapacity, getElementWidth } from '../utils/functions';
-import { mkdir } from 'fs';
-import { isNotNullOrUndefined } from 'codelyzer/util/isNotNullOrUndefined';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -66,9 +64,18 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     @Input()
     mode: TabModes;
 
-    /** Maximum number of tabs visible in the tab bar. Other tabs will be moved to the collapsed tabs dropdown */
+    /** Whether to move overflowing tabs to the dropdown */
+    @Input()
+    collapseOverflow = false;
+
+    /** Limits the maximum number of tabs visible in the tab bar in collapseOverflow mode.
+     * Other tabs will be moved to the collapsed tabs dropdown */
     @Input()
     maxVisibleTabs: number = null;
+
+    /** Whether to open tab content one under another without collapsing */
+    @Input()
+    stackContent = false;
 
     /** Event emitted when the selected panel changes. */
     @Output()
@@ -95,7 +102,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     expandTabsTrigger: ElementRef;
 
     /** @hidden TODO */
-    _tabs: {[key: string]: TabPanelComponent[]} = { visible: [], collapsed: [] };
+    _tabs: { [key: string]: TabPanelComponent[] } = { visible: [], collapsed: [] };
 
     /** @hidden TODO */
     _tabsWidth: [TabItemDirective, number][];
@@ -117,8 +124,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     }
 
     ngAfterViewInit(): void {
-        this._cacheTabItemsDimensions(this.tabItems.toArray());
-        this._collapseTabItems();
+        this._setupCollapsingOverflowedTabs();
+        this._setupStackedContent();
         this.selectTab(this.selectedIndex);
         this._listenOnTabSelect();
         this._listenOnContentQueryListChange();
@@ -147,9 +154,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
             timer(10)
                 .pipe(takeUntil(this._onDestroy$))
                 .subscribe(() => {
-                    this.panelTabs.forEach((tab, index) => {
-                        tab.triggerExpandedPanel(index === tabIndex);
-                    });
+                    this._openTab(tabIndex);
                     this.selectedIndex = tabIndex;
                     if (emitEvent) {
                         this.selectedIndexChange.emit(tabIndex);
@@ -262,7 +267,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
         }
     };
 
-    private _collapseTabItems(): void {
+    private _collapseOverflowingTabs(): void {
         const source$ = merge(fromEvent(window, 'resize'), this.panelTabs.changes);
 
         source$.pipe(
@@ -275,11 +280,31 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
         })
     }
 
-    private _cacheTabItemsDimensions(tabItems: TabItemDirective[]): void {
-        this._triggerWidth = Math.ceil(getElementWidth(this.expandTabsTrigger, true));
+    private _cacheTabsDimensions(tabItems: TabItemDirective[]): void {
+        this._triggerWidth = Math.ceil(getElementWidth(this.expandTabsTrigger));
+        this._tabsWidth = tabItems.map(item => [item, Math.ceil(getElementWidth(item.elementRef(), true))]);
+    }
 
-        this._tabsWidth = tabItems
-            .filter(item => item.elementRef().nativeElement.id !== 'expand-tabs-trigger')
-            .map(item => [item, Math.ceil(getElementWidth(item.elementRef(), true))]);
+    private _setupCollapsingOverflowedTabs(): void {
+        if (this.collapseOverflow) {
+            this._cacheTabsDimensions(this.tabItems.toArray());
+            this._collapseOverflowingTabs();
+        } else {
+            this._isCollapsed = false;
+        }
+    }
+
+    private _openTab(index: number): void {
+        if (this.stackContent) {
+            this.panelTabs.toArray()[index]?.elementRef.nativeElement.scrollIntoView(true);
+        } else {
+            this.panelTabs.forEach((tab, i) => tab.triggerExpandedPanel(i === index));
+        }
+    }
+
+    private _setupStackedContent(): void {
+        if (this.stackContent) {
+            this.panelTabs.forEach(tab => tab.triggerExpandedPanel(true));
+        }
     }
 }
