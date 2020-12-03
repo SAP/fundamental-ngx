@@ -211,7 +211,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     columns: QueryList<TableColumnComponent>;
 
     /** @hidden */
-    @ContentChild(TableToolbarComponent)
+    @ContentChild(forwardRef(() => TableToolbarComponent))
     tableToolbarComponent: TableToolbarComponent;
 
     /** View Settings filters list */
@@ -301,8 +301,6 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     /** @hidden */
     private readonly _rowsStateChanges: Subject<SelectableRow[]> = new Subject<SelectableRow[]>();
 
-    private _tableInitiated = false;
-
     /** @hidden */
     constructor(
         private readonly _tableService: TableService,
@@ -324,8 +322,6 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._tableInitiated = true;
-
         this._setInitialState();
 
         this._listenToTableStateChanges();

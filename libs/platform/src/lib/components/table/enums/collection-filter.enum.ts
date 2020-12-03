@@ -7,15 +7,23 @@ enum BaseCollectionFilterStrategy {
     LTE = 'less than or equal to'
 }
 
-/** String filter */
 enum SpecificCollectionStringFilterStrategy {
     CONTAINS = 'contains',
     BEGINS_WITH = 'begins with',
-    ENDS_WITH = 'ends with'
+    ENDS_WITH = 'ends with',
+    BETWEEN = 'between',
+    EQ = 'equal to',
+    GT = 'greater than',
+    GTE = 'greater than or equal to',
+    LT = 'less than',
+    LTE = 'less than or equal to'
 }
 
-export type CollectionStringFilterStrategy = BaseCollectionFilterStrategy & SpecificCollectionStringFilterStrategy;
-export const CollectionStringFilterStrategy = { ...BaseCollectionFilterStrategy, ...SpecificCollectionStringFilterStrategy };
+export type CollectionStringFilterStrategy = SpecificCollectionStringFilterStrategy;
+export const CollectionStringFilterStrategy = {
+    ...BaseCollectionFilterStrategy,
+    ...SpecificCollectionStringFilterStrategy
+};
 
 /** Number filter */
 export type CollectionNumberFilterStrategy = BaseCollectionFilterStrategy;

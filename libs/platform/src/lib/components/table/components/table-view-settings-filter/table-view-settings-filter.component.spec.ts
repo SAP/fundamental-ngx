@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 
@@ -6,12 +6,13 @@ describe('TableViewSettingsFilterComponent', () => {
     let component: TableViewSettingsFilterComponent;
     let fixture: ComponentFixture<TableViewSettingsFilterComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [TableViewSettingsFilterComponent]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TableViewSettingsFilterComponent]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableViewSettingsFilterComponent);

@@ -1,12 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { skip } from 'rxjs/operators';
 
 import { SearchInput } from '../search-field/search-field.component';
 import { CollectionFilter, CollectionGroup, CollectionSort, TableState } from './interfaces';
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { FilterChange, FreezeChange, GroupChange, SortChange } from './models';
-import { skip } from 'rxjs/operators';
+import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange } from './models';
 
 @Injectable()
 export class TableService {
@@ -19,6 +19,7 @@ export class TableService {
     readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
     readonly groupChange: EventEmitter<GroupChange> = new EventEmitter<GroupChange>();
     readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
+    readonly searchChange: EventEmitter<SearchChange> = new EventEmitter<SearchChange>();
 
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
@@ -48,7 +49,7 @@ export class TableService {
 
     filter(filters: CollectionFilter[]): void {
         const prevState = this.getTableState();
-        const prevFilterBy: any = (prevState && prevState.filterBy) || [];
+        const prevFilterBy = (prevState && prevState.filterBy) || [];
 
         const newFilterBy: CollectionFilter[] = [...filters];
         const state: TableState = { ...prevState, filterBy: newFilterBy };
@@ -82,8 +83,11 @@ export class TableService {
         this.freezeChange.emit({ current: columnName, previous: prevState.freezeToColumn });
     }
 
-    search(input: SearchInput): void {
+    search(searchInput: SearchInput): void {
         const prevState = this.getTableState();
-        this.setTableState({ ...prevState, searchInput: input });
+
+        this.setTableState({ ...prevState, searchInput: searchInput });
+
+        this.searchChange.emit({ current: searchInput, previous: prevState.searchInput });
     }
 }

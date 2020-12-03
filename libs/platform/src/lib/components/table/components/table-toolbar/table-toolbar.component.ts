@@ -4,9 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    EventEmitter,
     Input,
-    Output,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -83,5 +81,7 @@ export class TableToolbarComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    openColumns(): void {}
+    openColumns(): void {
+        // TODO
+    }
 }

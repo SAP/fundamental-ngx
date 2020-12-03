@@ -1,95 +1,105 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/core';
+import { DialogModule, RtlService } from '@fundamental-ngx/core';
 import { TableComponent } from './table.component';
 import { CollectionStringFilterStrategy, SelectionMode, SortDirection } from './enums';
 import { TableDataProvider, TableDataSource } from './domain';
-import { TableFilterPipe, TableSortByPipe } from './pipes';
 import { TableState } from './interfaces';
 import { TableService } from './table.service';
 
-const ITEMS = [{
-    'name': 'implementation',
-    'description': 'sit amet consectetuer adipiscing elit',
-    'price': {
-        'value': 2.06,
-        'currency': 'IDR'
+const ITEMS = [
+    {
+        name: 'implementation',
+        description: 'sit amet consectetuer adipiscing elit',
+        price: {
+            value: 2.06,
+            currency: 'IDR'
+        },
+        status: 'valid'
     },
-    'status': 'valid'
-}, {
-    'name': 'moderator',
-    'description': 'luctus et ultrices posuere cubilia curae donec',
-    'price': {
-        'value': 33.34,
-        'currency': 'MZN'
+    {
+        name: 'moderator',
+        description: 'luctus et ultrices posuere cubilia curae donec',
+        price: {
+            value: 33.34,
+            currency: 'MZN'
+        },
+        status: 'warning'
     },
-    'status': 'warning'
-}, {
-    'name': 'focus group',
-    'description': 'at velit vivamus vel nulla eget eros',
-    'price': {
-        'value': 72.12,
-        'currency': 'CNY'
+    {
+        name: 'focus group',
+        description: 'at velit vivamus vel nulla eget eros',
+        price: {
+            value: 72.12,
+            currency: 'CNY'
+        },
+        status: 'error'
     },
-    'status': 'error'
-}, {
-    'name': 'contingency',
-    'description': 'posuere nonummy integer',
-    'price': {
-        'value': 6.25,
-        'currency': 'CNY'
+    {
+        name: 'contingency',
+        description: 'posuere nonummy integer',
+        price: {
+            value: 6.25,
+            currency: 'CNY'
+        },
+        status: 'information'
     },
-    'status': 'information'
-}, {
-    'name': 'matrix',
-    'description': 'congue etiam justo etiam pretium iaculis',
-    'price': {
-        'value': 54.29,
-        'currency': 'NZD'
+    {
+        name: 'matrix',
+        description: 'congue etiam justo etiam pretium iaculis',
+        price: {
+            value: 54.29,
+            currency: 'NZD'
+        },
+        status: 'warning'
     },
-    'status': 'warning'
-}, {
-    'name': 'Persistent',
-    'description': 'ipsum praesent blandit',
-    'price': {
-        'value': 14.59,
-        'currency': 'UGX'
+    {
+        name: 'Persistent',
+        description: 'ipsum praesent blandit',
+        price: {
+            value: 14.59,
+            currency: 'UGX'
+        },
+        status: 'information'
     },
-    'status': 'information'
-}, {
-    'name': 'paradigm',
-    'description': 'nec condimentum neque',
-    'price': {
-        'value': 9.37,
-        'currency': 'IDR'
+    {
+        name: 'paradigm',
+        description: 'nec condimentum neque',
+        price: {
+            value: 9.37,
+            currency: 'IDR'
+        },
+        status: 'warning'
     },
-    'status': 'warning'
-}, {
-    'name': 'content-based',
-    'description': 'non mauris morbi non lectus aliquam',
-    'price': {
-        'value': 10.17,
-        'currency': 'EGP'
+    {
+        name: 'content-based',
+        description: 'non mauris morbi non lectus aliquam',
+        price: {
+            value: 10.17,
+            currency: 'EGP'
+        },
+        status: 'error'
     },
-    'status': 'error'
-}, {
-    'name': 'multimedia',
-    'description': 'pede morbi porttitor lorem id ligula',
-    'price': {
-        'value': 8.06,
-        'currency': 'IDR'
+    {
+        name: 'multimedia',
+        description: 'pede morbi porttitor lorem id ligula',
+        price: {
+            value: 8.06,
+            currency: 'IDR'
+        },
+        status: 'information'
     },
-    'status': 'information'
-}, {
-    'name': 'high-level',
-    'description': 'ligula nec sem',
-    'price': {
-        'value': 27.13,
-        'currency': 'EUR'
-    },
-    'status': 'valid'
-}];
+    {
+        name: 'high-level',
+        description: 'ligula nec sem',
+        price: {
+            value: 27.13,
+            currency: 'EUR'
+        },
+        status: 'valid'
+    }
+];
 
 class TableDataProviderMock<T> extends TableDataProvider<T> {
     items = ITEMS as any[];
@@ -105,13 +115,14 @@ describe('TableComponent', () => {
     let fixture: ComponentFixture<TableComponent>;
     let tableService: TableService;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [TableComponent, TableSortByPipe, TableFilterPipe],
-            providers: [RtlService]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [DialogModule, TableComponent],
+                providers: [RtlService]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableComponent);
@@ -146,7 +157,7 @@ describe('TableComponent', () => {
         expect(emitChangeSpy).toHaveBeenCalledWith(1);
         expect(component._checkedAll).toBeFalse();
         expect((<any>component)._checked.length).toEqual(1);
-        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(2);
+        expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(2);
     });
 
     it('should select single row', () => {
@@ -161,14 +172,14 @@ describe('TableComponent', () => {
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect((<any>component)._checked.length).toEqual(1);
-        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(1);
+        expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(1);
 
         component.selectSingle(1, (<any>component)._rows[1]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(1);
         expect((<any>component)._checked.length).toEqual(1);
-        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(1);
+        expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(1);
     });
 
     it('should unselect row on the second selection call', () => {
@@ -183,7 +194,7 @@ describe('TableComponent', () => {
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect((<any>component)._checked.length).toEqual(1);
-        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(1);
+        expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(1);
 
         component.selectSingle(0, (<any>component)._rows[0]);
 
@@ -191,7 +202,7 @@ describe('TableComponent', () => {
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect((<any>component)._checked.length).toEqual(0);
         expect((<any>component)._unchecked.length).toEqual(1);
-        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(0);
+        expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(0);
     });
 
     it('should select all rows and unselect on the second call', () => {
@@ -210,7 +221,7 @@ describe('TableComponent', () => {
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._checkedAll).toBeTrue();
         expect((<any>component)._checked.length).toEqual((<any>component)._rows.length);
-        expect((<any>component)._rows.filter(r => r.checked).length).toEqual((<any>component)._rows.length);
+        expect((<any>component)._rows.filter((r) => r.checked).length).toEqual((<any>component)._rows.length);
 
         component.selectAll(false);
 
@@ -219,7 +230,7 @@ describe('TableComponent', () => {
         expect(emitChangeSpy).toHaveBeenCalled();
         expect(component._checkedAll).toBeFalse();
         expect((<any>component)._unchecked.length).toEqual((<any>component)._rows.length);
-        expect((<any>component)._rows.filter(r => r.checked).length).toEqual(0);
+        expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(0);
     });
 
     it('sort method should call TableService.sort with a proper params', () => {

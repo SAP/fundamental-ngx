@@ -1,5 +1,5 @@
-export interface SelectableRow {
+export interface SelectableRow<T = any> {
     checked: boolean;
     index: number;
-    value: any;
+    value: T;
 }

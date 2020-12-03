@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableViewSettingsDialogComponent } from './table-view-settings-dialog.component';
 
@@ -6,12 +6,13 @@ describe('TableViewSettingsDialogComponent', () => {
     let component: TableViewSettingsDialogComponent;
     let fixture: ComponentFixture<TableViewSettingsDialogComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [TableViewSettingsDialogComponent]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TableViewSettingsDialogComponent]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableViewSettingsDialogComponent);

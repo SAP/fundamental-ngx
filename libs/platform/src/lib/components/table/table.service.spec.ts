@@ -3,6 +3,10 @@ import { SortDirection } from '@fundamental-ngx/platform';
 
 import { TableService } from './table.service';
 import { DEFAULT_TABLE_STATE } from './constants';
+import { CollectionStringFilter, TableState } from './interfaces';
+import { GroupChange, SortChange, FilterChange, FreezeChange, SearchChange } from './models';
+import { CollectionStringFilterStrategy } from './enums';
+import { SearchInput } from '../search-field/public_api';
 
 describe('TableServiceService', () => {
     let service: TableService;
@@ -18,41 +22,92 @@ describe('TableServiceService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should return value from tableState$', () => {
-        const getValueSpy = spyOn(service.tableState$, 'getValue').and.callThrough();
+    it('should return table state by getTableState', () => {
+        const getValueSpy = spyOn(service, 'getTableState').and.callThrough();
 
         expect(service.getTableState()).toEqual(DEFAULT_TABLE_STATE);
         expect(getValueSpy).toHaveBeenCalled();
     });
 
-    it('should set new state', () => {
+    it('should set table state', () => {
         const newState = { ...DEFAULT_TABLE_STATE, groupBy: [{ field: 'name', direction: SortDirection.ASC }] };
         const getTableStateSpy = spyOn(service, 'getTableState').and.callThrough();
-        const stateNextSpy = spyOn(service.tableState$, 'next').and.callThrough();
 
         service.setTableState(newState);
 
         expect(getTableStateSpy).toHaveBeenCalled();
-        expect(service.getTableState()).toEqual(DEFAULT_TABLE_STATE);
-        expect(stateNextSpy).toHaveBeenCalledWith(newState);
+        expect(service.getTableState()).toEqual(newState);
     });
 
     it('should set new sortBy state', () => {
-        const getTableStateSpy = spyOn(service, 'getTableState').and.callThrough();
         const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const sortChangeSpy = spyOn(service.sortChange, 'emit').and.callThrough();
         const field = 'name';
         const direction = SortDirection.ASC;
         const newSortBy = [{ field: field, direction: direction }];
-        const newState = { ...DEFAULT_TABLE_STATE, sortBy: newSortBy };
-        const emitValue = { current: newSortBy, previous: DEFAULT_TABLE_STATE.sortBy };
-        const sortChangeSpy = spyOn(service.sortChange, 'emit').and.callThrough();
+        const newState: TableState = { ...DEFAULT_TABLE_STATE, sortBy: newSortBy };
+        const event: SortChange = { current: newSortBy, previous: DEFAULT_TABLE_STATE.sortBy };
 
         service.sort(field, direction);
 
-        expect(getTableStateSpy).toHaveBeenCalled();
-        expect(sortChangeSpy).toHaveBeenCalledWith(emitValue);
+        expect(sortChangeSpy).toHaveBeenCalledWith(event);
         expect(setTableStateSpy).toHaveBeenCalledWith(newState);
     });
 
-    // TODO: add tests for filter, group, freezeTo, search
+    it('should set new groupBy state', () => {
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const groupChangeSpy = spyOn(service.groupChange, 'emit').and.callThrough();
+        const field = 'name';
+        const direction = SortDirection.ASC;
+        const newGroupBy = [{ field: field, direction: direction }];
+        const newState: TableState = { ...DEFAULT_TABLE_STATE, groupBy: newGroupBy };
+        const event: GroupChange = { current: newGroupBy, previous: DEFAULT_TABLE_STATE.groupBy };
+
+        service.group(field, direction);
+
+        expect(groupChangeSpy).toHaveBeenCalledWith(event);
+        expect(setTableStateSpy).toHaveBeenCalledWith(newState);
+    });
+
+    it('should set new filterBy state', () => {
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const filterChangeSpy = spyOn(service.filterChange, 'emit').and.callThrough();
+        const field = 'name';
+        const newFilterBy: CollectionStringFilter[] = [
+            { field: field, value: 'Product name', strategy: CollectionStringFilterStrategy.CONTAINS }
+        ];
+        const newState: TableState = { ...DEFAULT_TABLE_STATE, filterBy: newFilterBy };
+        const event: FilterChange = { current: newFilterBy, previous: DEFAULT_TABLE_STATE.filterBy };
+
+        service.filter(newFilterBy);
+
+        expect(filterChangeSpy).toHaveBeenCalledWith(event);
+        expect(setTableStateSpy).toHaveBeenCalledWith(newState);
+    });
+
+    it('should set new freezeToColumn state', () => {
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const freezeChangeSpy = spyOn(service.freezeChange, 'emit').and.callThrough();
+        const field = 'name';
+        const newState: TableState = { ...DEFAULT_TABLE_STATE, freezeToColumn: field };
+        const event: FreezeChange = { current: field, previous: DEFAULT_TABLE_STATE.freezeToColumn };
+
+        service.freezeTo(field);
+
+        expect(freezeChangeSpy).toHaveBeenCalledWith(event);
+        expect(setTableStateSpy).toHaveBeenCalledWith(newState);
+    });
+
+    it('should set new search state', () => {
+        const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
+        const searchChangeSpy = spyOn(service.searchChange, 'emit').and.callThrough();
+        const newSearchInput: SearchInput = { text: 'Search query', category: null };
+        const newState: TableState = { ...DEFAULT_TABLE_STATE, searchInput: newSearchInput };
+        const event: SearchChange = { current: newSearchInput, previous: DEFAULT_TABLE_STATE.searchInput };
+
+        service.search(newSearchInput);
+
+        expect(searchChangeSpy).toHaveBeenCalledWith(event);
+        expect(setTableStateSpy).toHaveBeenCalledWith(newState);
+    });
 });
