@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.23...v0.25.0-rc.24) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Platform) add cdk styles to menu component ([#3985](https://github.com/SAP/fundamental-ngx/issues/3985)) ([20c2643](https://github.com/SAP/fundamental-ngx/commit/20c26432c84c8fd3d9faee51df827ed1a0415500))
+
 ## [0.25.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.22...v0.25.0-rc.23) (2020-12-03)
 
 
