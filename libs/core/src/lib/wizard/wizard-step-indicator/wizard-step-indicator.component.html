@@ -8,7 +8,6 @@
         <fd-action-sheet-body>
             <li
                 fd-action-sheet-item
-                [disabled]="!step.visited"
                 *ngFor="let step of stackedItems"
                 [label]="step.label"
                 [glyph]="step.glyph"
