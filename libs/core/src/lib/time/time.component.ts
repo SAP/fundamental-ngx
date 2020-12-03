@@ -5,22 +5,34 @@ import {
     forwardRef,
     Input,
     QueryList,
-    OnChanges,
     OnInit,
-    SimpleChanges,
     ViewChildren,
     ViewEncapsulation,
-    AfterViewInit
+    AfterViewInit,
+    Optional,
+    OnDestroy,
+    OnChanges,
+    SimpleChanges
 } from '@angular/core';
-import { TimeObject } from './time-object';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TimeI18n } from './i18n/time-i18n';
-import { TimeColumnConfig } from './time-column/time-column-config';
-import { TimeColumnComponent, TimeColumnItemOutput } from './time-column/time-column.component';
-import { KeyUtil } from '../utils/functions';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { Meridian, SelectableViewItem } from './models';
+import { createMissingDateImplementationError } from './errors';
+import { TimeI18n } from './i18n/time-i18n';
+import { TimeColumnConfig } from './time-column/time-column-config';
+import { TimeColumnComponent } from './time-column/time-column.component';
+import { KeyUtil } from '../utils/functions';
+
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
+
+type HourViewItem = SelectableViewItem<number>;
+type MinuteViewItem = SelectableViewItem<number>;
+type SecondViewItem = SelectableViewItem<number>;
+type MeridianViewItem = SelectableViewItem<Meridian>;
 
 @Component({
     selector: 'fd-time',
@@ -39,7 +51,7 @@ export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
+export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {
     /**
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control.
@@ -83,24 +95,19 @@ export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlV
     @Input()
     displayHours = true;
 
-    /** Defines if time component should be used with compact mode */
+    /** @Input Defines if time component should be used in compact mode */
     @Input()
     compact = false;
 
-    /** Defines if time component should be used with tablet mode */
+    /** @Input Defines if time component should be used in tablet mode */
     @Input()
     tablet = false;
 
     /**
-     * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
-     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
-     *
-     * ```json
-     * { hour: 12, minute: 0, second: 0 }
-     * ```
+     * @Input An object that contains datetime representation
      */
     @Input()
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+    time: D;
 
     /** @Input Whether to show spinner buttons */
     @Input()
@@ -108,41 +115,111 @@ export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlV
 
     /** @hidden */
     @ViewChildren(TimeColumnComponent)
-    columns: QueryList<TimeColumnComponent>;
+    columns: QueryList<TimeColumnComponent<unknown, SelectableViewItem<unknown>>>;
 
-    /** @hidden
-     * Used only in meridian mode. Stores information the current am/pm state.
-     */
-    period: string;
-
-    /** @hidden container for [1 - 12/24] values */
-    hours: number[];
-
-    /** @hidden container for [1 - 60] values */
-    minutes: number[];
-
-    /** @hidden container for [am, pm] values */
-    meridians: string[];
-
+    /** Active column view to iterate with */
     activeView: FdTimeActiveView = 'hour';
 
-    /** @hidden
-     * Variable that is displayed as an hour.
-     * For meridian mode ranging from 0 to 12,
-     * For non-meridian mode ranging from 0 to 23, and reflects the hour value
+    /**
+     * @hidden
+     * container for [0 - 23] hours
      */
-    displayedHour = 0;
+    hourViewItems: HourViewItem[] = [];
+    /**
+     * @hidden
+     * reference to currently selected hourViewItems element
+     */
+    activeHourViewItem: HourViewItem;
+
+    /**
+     * @hidden
+     * container for [0 - 59] minutes
+     */
+    minuteViewItems: MinuteViewItem[] = [];
+    /**
+     * @hidden
+     * reference to currently selected minuteViewItems element
+     */
+    activeMinuteViewItem: MinuteViewItem;
+
+    /**
+     * @hidden
+     * container for [0 - 59] seconds
+     */
+    secondViewItems: SecondViewItem[] = [];
+    /**
+     * @hidden
+     * reference to currently selected secondViewItems element
+     */
+    activeSecondViewItem: SecondViewItem;
+
+    /**
+     * @hidden
+     * container for [am, pm] meridian values
+     */
+    meridianViewItems: MeridianViewItem[] = [];
+    /**
+     * @hidden
+     * reference to currently selected meridianViewItems element
+     */
+    activeMeridianViewItem: MeridianViewItem;
 
     /** @hidden */
-    onChange = (time: TimeObject) => {
-    };
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onTouched = () => {
-    };
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _timeI18nLabels: TimeI18n,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
+    ) {
+        if (!_dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+
+        // Set default time 00:00:00
+        this.time = _dateTimeAdapter.today();
+    }
 
     /** @hidden */
-    registerOnChange(fn: (time: TimeObject) => void): void {
+    ngOnInit(): void {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._setUpViewGrid();
+            this._changeDetectorRef.detectChanges();
+        });
+
+        this._setUpViewGrid();
+    }
+
+    /** @hidden
+     * Reacts only when there is meridian or time input change
+     */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.meridian || changes.time) {
+            this._setUpViewGrid();
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.refreshColumns();
+    }
+
+    /** @hidden */
+    onChange = (time: D) => {};
+
+    /** @hidden */
+    onTouched = () => {};
+
+    /** @hidden */
+    registerOnChange(fn: (time: D) => void): void {
         this.onChange = fn;
     }
 
@@ -154,40 +231,53 @@ export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlV
     /** @hidden */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this._changeDetRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
-    constructor(
-        private _timeI18nLabels: TimeI18n,
-        private _changeDetRef: ChangeDetectorRef
-    ) {
+    refreshColumns(): void {
+        this.columns.forEach((column) => column.setValueOfActive());
     }
 
-    /** @hidden */
-    ngOnInit(): void {
-        this._setUpTimeGrid();
-    }
+    /**
+     * @hidden
+     * Handles meridian change.
+     * This implicitly changes hours by +/- 12
+     */
+    handleMeridianChange(meridian: Meridian): void {
+        const hourOffset: number = meridian === Meridian.AM ? -12 : 12;
+        const currentHour = this._getModelHour();
+        const newHour = Math.max(0, Math.min(23, currentHour + hourOffset));
 
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this.refreshTime();
-    }
-
-    /** @hidden */
-    refreshTime(): void {
-        this.columns.forEach(column => column.setValueOfActive());
+        this.handleHourChange(newHour);
     }
 
     /** @hidden */
     handleSecondChange(second: number): void {
-        this.time.second = second;
+        this.time = this._dateTimeAdapter.setSeconds(this.time, second);
+        this._calculateActiveSecondViewItem();
         this.onChange(this.time);
     }
 
     /** @hidden */
     handleMinuteChange(minute: number): void {
-        this.time.minute = minute;
+        this.time = this._dateTimeAdapter.setMinutes(this.time, minute);
+        this._calculateActiveMinuteViewItem();
+        this.onChange(this.time);
+    }
+
+    /**
+     * @hidden
+     * Handles changes of displayed hour value from template.
+     */
+    handleHourChange(hour: number): void {
+        this.time = this._dateTimeAdapter.setHours(this.time, hour);
+        this._calculateActiveHourViewItem();
+
+        if (this.meridian) {
+            this._calculateActiveMeridianViewItem();
+        }
+
         this.onChange(this.time);
     }
 
@@ -243,103 +333,26 @@ export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlV
     }
 
     /** @hidden */
-    writeValue(time: TimeObject): void {
+    writeValue(time: D): void {
         if (!time) {
             return;
         }
-        this.time = Object.assign({}, time);
-        this.setDisplayedHour();
-        this._changeDetRef.detectChanges();
-    }
+        this.time = time;
 
-    /** @hidden
-     * Reacts only when there is meridian or time input change
-     */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.meridian || changes.time) {
-            this.setDisplayedHour();
-            this._setUpTimeGrid();
-        }
-    }
+        this._setUpActiveViewItems();
 
-    /** @hidden
-     * Changes displayed hour value, used mostly when the model hour is changed
-     */
-    setDisplayedHour(): void {
-        if (!this.meridian) {
-            this.displayedHour = this.time.hour;
-        } else if (this.time.hour === 0) {
-            this.displayedHour = 12;
-            this.period = this._timeI18nLabels.meridianAm;
-        } else if (this.time.hour > 12) {
-            this.displayedHour = this.time.hour - 12;
-            this.period = this._timeI18nLabels.meridianPm;
-        } else if (this.time.hour === 12) {
-            this.displayedHour = 12;
-            this.period = this._timeI18nLabels.meridianPm;
-        } else {
-            this.displayedHour = this.time.hour;
-            this.period = this._timeI18nLabels.meridianAm;
-        }
-
-        if (this.time) {
-            this.time = { ...this.time };
-        }
-    }
-
-    /** @hidden
-     * Handles changes of displayed hour value from template.
-     */
-    displayedHourChanged(changedHourOutput: TimeColumnItemOutput): void {
-        if (!this.meridian) {
-            this.time.hour = changedHourOutput.value;
-            this.displayedHour = changedHourOutput.value
-        } else {
-            this._periodByHoursChange(changedHourOutput.value, changedHourOutput.after);
-            this.displayedHour = changedHourOutput.value;
-            if (this._isAm(this.period)) {
-                if (this.displayedHour === 12) {
-                    this.time.hour = 0;
-                } else {
-                    this.time.hour = this.displayedHour;
-                }
-            } else if (this._isPm(this.period)) {
-                if (this.displayedHour === 12) {
-                    this.time.hour = this.displayedHour;
-                } else {
-                    this.time.hour = this.displayedHour + 12;
-                }
-            }
-        }
-        this.onChange(this.time);
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
     changeActive(view: FdTimeActiveView): void {
         this.activeView = view;
-        this._changeDetRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
     isActive(view: FdTimeActiveView): boolean {
         return this.activeView === view;
-    }
-
-    /** @hidden
-     * Handles period model change. depending on current hour and new period changes hours by +/- 12
-     */
-    periodModelChange(): void {
-        if (this.time && !this.time.hour) {
-            this.time.hour = 0;
-        }
-        if (this.time.hour < 24 && this.time.hour >= 0) {
-            if (this._isPm(this.period) && this.time.hour < 12) {
-                this.time.hour = this.time.hour + 12;
-            } else if (this.time.hour >= 12 && this._isAm(this.period)) {
-                this.time.hour = this.time.hour - 12;
-            }
-            this.onChange(this.time);
-        }
     }
 
     /** Configuration for hours column */
@@ -378,54 +391,127 @@ export class TimeComponent implements OnInit, OnChanges, AfterViewInit, ControlV
         };
     }
 
-    /**
-     * @hidden
-     * Defines if period is PM, Considers the fact that period should be case sensitive
-     */
-    private _isPm(period: string): boolean {
-        const pmMeridian = this._timeI18nLabels.meridianPm.toLocaleUpperCase();
-        period = period.toLocaleUpperCase();
-        return period === pmMeridian;
-    }
-
-    /**
-     * @hidden
-     * Defines if period is AM, Considers the fact that period should be case sensitive
-     */
-    private _isAm(period: string): boolean {
-        const amMeridian = this._timeI18nLabels.meridianAm.toLocaleUpperCase();
-        period = period.toLocaleUpperCase();
-        return period === amMeridian;
+    /** @hidden */
+    private _setUpViewGrid(): void {
+        this._constructHourViewItems();
+        this._constructMinuteViewItems();
+        this._constructSecondViewItems();
+        this._constructMeridianViewItems();
+        // update reference to active view items
+        this._setUpActiveViewItems();
     }
 
     /** @hidden */
-    private _setUpTimeGrid(): void {
-        this.hours = [];
-        this.minutes = [];
-        this.period = this._timeI18nLabels.meridianAm;
-
-        const hoursAmount = this.meridian ? 12 : 24;
-        const hourColumnMultiply = this.meridian ? 4 : 2;
-
-        for (let j = 0; j < hourColumnMultiply; j++) {
-            for (let i = 0; i < hoursAmount; i++) {
-                this.hours.push(i + (this.meridian ? 1 : 0));
-            }
-        }
-
-        const minutesAmount = 60;
-        for (let i = 0; i < minutesAmount; i++) {
-            this.minutes.push(i);
-        }
-
-        this.meridians = [this._timeI18nLabels.meridianAm, this._timeI18nLabels.meridianPm];
+    private _setUpActiveViewItems(): void {
+        this._calculateActiveHourViewItem();
+        this._calculateActiveMinuteViewItem();
+        this._calculateActiveSecondViewItem();
+        this._calculateActiveMeridianViewItem();
     }
 
     /** @hidden */
-    private _periodByHoursChange(newHour: number, after: boolean): void {
-        const shouldChange: boolean = (after ? (newHour < this.displayedHour) : (newHour > this.displayedHour));
-        if (shouldChange) {
-            this.period = this._isAm(this.period) ? this._timeI18nLabels.meridianPm : this._timeI18nLabels.meridianAm;
-        }
+    private _constructHourViewItems(): void {
+        this.hourViewItems = this._dateTimeAdapter
+            .getHourNames({ meridian: this.meridian, twoDigit: this.keepTwoDigits })
+            .map((name, hour) => {
+                return {
+                    value: hour,
+                    label: name
+                };
+            });
+    }
+
+    /** @hidden */
+    private _constructMinuteViewItems(): void {
+        this.minuteViewItems = this._dateTimeAdapter
+            .getMinuteNames({ twoDigit: this.keepTwoDigits })
+            .map((name, minute) => {
+                return {
+                    value: minute,
+                    label: name
+                };
+            });
+    }
+
+    /** @hidden */
+    private _constructSecondViewItems(): void {
+        this.secondViewItems = this._dateTimeAdapter
+            .getSecondNames({ twoDigit: this.keepTwoDigits })
+            .map((name, second) => {
+                return {
+                    value: second,
+                    label: name
+                };
+            });
+    }
+
+    /** @hidden */
+    private _constructMeridianViewItems(): void {
+        const [amLabel, pmLabel] = this._dateTimeAdapter.getDayPeriodNames();
+        this.meridianViewItems = [
+            { value: Meridian.AM, label: amLabel },
+            { value: Meridian.PM, label: pmLabel }
+        ];
+    }
+
+    /** @hidden */
+    private _calculateActiveHourViewItem(): void {
+        const hour = this._getModelHour();
+        this.activeHourViewItem = this.hourViewItems.find(({ value }) => value === hour);
+    }
+
+    /** @hidden */
+    private _calculateActiveMinuteViewItem(): void {
+        const minute = this._getModelMinute();
+        this.activeMinuteViewItem = this.minuteViewItems.find(({ value }) => value === minute);
+    }
+
+    /** @hidden */
+    private _calculateActiveSecondViewItem(): void {
+        const second = this._getModelSecond();
+        this.activeSecondViewItem = this.secondViewItems.find(({ value }) => value === second);
+    }
+
+    /** @hidden */
+    private _calculateActiveMeridianViewItem(): void {
+        const meridian = this._getDayPeriodByHour();
+        this.activeMeridianViewItem = this.meridianViewItems.find(({ value }) => value === meridian);
+    }
+
+    /**
+     * @hidden
+     * Model hours (0 - 23)
+     */
+    private _getModelHour(): number {
+        return this._dateTimeAdapter.getHours(this.time);
+    }
+
+    /**
+     * @hidden
+     * Model minutes (0 - 59)
+     */
+    private _getModelMinute(): number {
+        return this._dateTimeAdapter.getMinutes(this.time);
+    }
+
+    /**
+     * @hidden
+     * Model seconds (0 - 59)
+     */
+    private _getModelSecond(): number {
+        return this._dateTimeAdapter.getSeconds(this.time);
+    }
+
+    /**
+     * @hidden
+     * Get meridian period based on a given hours
+     */
+    private _getDayPeriodByHour(hour = this._getModelHour()): Meridian {
+        return this._isPm(hour) ? Meridian.PM : Meridian.AM;
+    }
+
+    /** @hidden */
+    private _isPm(hours: number = this._getModelHour()): boolean {
+        return hours >= 12;
     }
 }

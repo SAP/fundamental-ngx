@@ -1,7 +1,6 @@
 import { Subject } from 'rxjs';
 import { Injectable, Optional } from '@angular/core';
-import { FdDate } from './models/fd-date';
-import { FdRangeDate } from './models/fd-range-date';
+
 import { RtlService } from '../utils/services/rtl.service';
 
 @Injectable()
@@ -25,68 +24,7 @@ export class CalendarService {
     leftArrowId: string;
 
     /** Function that is called when the focus would escape the element. */
-    focusEscapeFunction: Function;
-
-    /**
-     * Method that provides, amount of day depending on month and year passed
-     * @param month which is number 1-12
-     * @param year which is number
-     */
-    static getDaysInMonth(month: number, year: number): number {
-        const isLeapYear = (_year: number): boolean => {
-            if (_year % 4 !== 0) {
-                return false;
-            } else if (_year % 400 === 0) {
-                return true;
-            } else {
-                return _year % 100 !== 0;
-            }
-        };
-
-        if (month === 2) {
-            return isLeapYear(year) ? 29 : 28;
-        } else if ((month % 2 === 0 && month < 8) || (month % 2 === 1 && month > 8)) {
-            return 30;
-        } else {
-            return 31;
-        }
-    }
-
-    /**
-     * Method that check equality of 2 dates.
-     */
-    static datesEqual(date1: FdDate, date2: FdDate): boolean {
-        if (!date1 || !date2) {
-            return false;
-        } else if (!date1.toDateString() && !date2.toDateString()) {
-            return false;
-        } else {
-            return date1.toDateString() === date2.toDateString();
-        }
-    }
-
-    /**
-     * Method that check equality of 2 range dates.
-     */
-    static rangeDatesEqual(dateRange1: FdRangeDate, dateRange2: FdRangeDate): boolean {
-        if (!dateRange1 || !dateRange2) {
-            return false;
-        }
-
-        return this.datesEqual(dateRange1.start, dateRange2.start) && this.datesEqual(dateRange1.end, dateRange2.end);
-    }
-
-    /**
-     * Method to check if date is betweeen 2 dates
-     */
-    static isBetween(dateToCheck: FdDate, dateRange: FdRangeDate): boolean {
-        return (
-            dateRange.start &&
-            dateRange.start.getTimeStamp() < dateToCheck.getTimeStamp() &&
-            dateRange.end &&
-            dateRange.end.getTimeStamp() > dateToCheck.getTimeStamp()
-        );
-    }
+    focusEscapeFunction: () => void;
 
     constructor(@Optional() private _rtlService: RtlService) {}
 
@@ -157,7 +95,7 @@ export class CalendarService {
             }
             case 'Tab': {
                 if (!event.shiftKey) {
-                    if (this.focusEscapeFunction) {
+                    if (typeof this.focusEscapeFunction === 'function') {
                         this.focusEscapeFunction();
                     } else {
                         const element: HTMLElement = document.getElementById(this.leftArrowId);

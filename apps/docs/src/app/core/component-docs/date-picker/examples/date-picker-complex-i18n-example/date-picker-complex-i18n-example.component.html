@@ -1,32 +1,39 @@
 <label fd-form-label>Languages</label>
-<fd-segmented-button id="language" style="margin-bottom: 20px;">
-    <button fd-button label="English" (click)="setLocale('en-gb')" [class]="isSelected('en-gb')"></button>
-    <button fd-button label="French" (click)="setLocale('fr')" [class]="isSelected('fr')"></button>
-    <button fd-button label="German" (click)="setLocale('de')" [class]="isSelected('de')"></button>
-    <button fd-button label="Bulgarian" (click)="setLocale('bg')" [class]="isSelected('bg')"></button>
-    <button fd-button label="Polish" (click)="setLocale('pl')" [class]="isSelected('pl')"></button>
+<fd-segmented-button
+    id="language"
+    style="margin-bottom: 20px;"
+>
+    <button
+        fd-button
+        label="English"
+        (click)="setLocale('en-gb')"
+        [class]="isSelected('en-gb')"
+    ></button>
+    <button
+        fd-button
+        label="French"
+        (click)="setLocale('fr')"
+        [class]="isSelected('fr')"
+    ></button>
+    <button
+        fd-button
+        label="German"
+        (click)="setLocale('de')"
+        [class]="isSelected('de')"
+    ></button>
+    <button
+        fd-button
+        label="Bulgarian"
+        (click)="setLocale('bg')"
+        [class]="isSelected('bg')"
+    ></button>
+    <button
+        fd-button
+        label="Polish"
+        (click)="setLocale('pl')"
+        [class]="isSelected('pl')"
+    ></button>
 </fd-segmented-button>
 
 <br />
-<fieldset fd-fieldset>
-    <div fd-form-item>
-        <label fd-form-label for="docs-date-picker-format">Date Format</label>
-        <fd-input-group
-            id="docs-date-picker-format"
-            [placeholder]="'Date Format'"
-            [(ngModel)]="actualFormat"
-            class="docs-example-fd-form-group"
-            [button]="true"
-            (addOnButtonClicked)="refresh()"
-            [addOnText]="'Refresh'"
-        >
-        </fd-input-group>
-        <fd-form-message type="help">
-            The full list of formats can be found at
-            <a href="https://angular.io/api/common/DatePipe" target="_blank">
-                Official Angular Documentation
-            </a>
-        </fd-form-message>
-    </div>
-</fieldset>
-<fd-date-picker [format]="actualFormat" [locale]="actualLocale" [(ngModel)]="date"></fd-date-picker>
+<fd-date-picker [(ngModel)]="date"></fd-date-picker>

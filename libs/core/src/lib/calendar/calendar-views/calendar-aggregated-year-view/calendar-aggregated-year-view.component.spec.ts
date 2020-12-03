@@ -1,26 +1,31 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CalendarAggregatedYearViewComponent } from './calendar-aggregated-year-view.component';
-import { CalendarService } from '../../calendar.service';
-import { AggregatedYear } from '../../models/aggregated-year';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from '../../../button/button.module';
+
 import { IconModule } from '../../../icon/icon.module';
+import { ButtonModule } from '../../../button/button.module';
+import { FdDate, FdDatetimeModule } from '../../../datetime';
+import { CalendarService } from '../../calendar.service';
+import { CalendarAggregatedYear } from '../../models/aggregated-year';
+import { CalendarAggregatedYearViewComponent } from './calendar-aggregated-year-view.component';
 
 describe('CalendarAggregatedYearViewComponent', () => {
-    let component: CalendarAggregatedYearViewComponent;
-    let fixture: ComponentFixture<CalendarAggregatedYearViewComponent>;
+    let component: CalendarAggregatedYearViewComponent<FdDate>;
+    let fixture: ComponentFixture<CalendarAggregatedYearViewComponent<FdDate>>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, IconModule, ButtonModule],
-            declarations: [CalendarAggregatedYearViewComponent],
-            providers: [CalendarService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, IconModule, ButtonModule, FdDatetimeModule],
+                declarations: [CalendarAggregatedYearViewComponent],
+                providers: [CalendarService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CalendarAggregatedYearViewComponent);
+        fixture = TestBed.createComponent<CalendarAggregatedYearViewComponent<FdDate>>(
+            CalendarAggregatedYearViewComponent
+        );
         component = fixture.componentInstance;
         component.yearSelected = 2019;
         component.yearViewGrid = { cols: 4, rows: 4, yearMapping: (year) => year.toString() };
@@ -39,8 +44,8 @@ describe('CalendarAggregatedYearViewComponent', () => {
             preventDefault: () => {}
         };
         component.onKeydownYearHandler(event, 6);
-        const aggregatedYear: AggregatedYear = (<any>component)._getYearsList()[6];
-        expect(component.yearsSelected).toEqual(aggregatedYear);
+        const aggregatedYear: CalendarAggregatedYear = (<any>component)._getYearsList()[6];
+        expect(component.yearsSelected).toEqual(aggregatedYear.years);
     });
 
     it('Should generate proper grid of aggregated years', () => {
@@ -49,7 +54,8 @@ describe('CalendarAggregatedYearViewComponent', () => {
         component.aggregatedYearsViewGrid = { cols: 2, rows: 6, yearMapping: (year) => year.toString() };
         component.ngOnInit();
 
-        expect(component.calendarYearListGrid).toEqual([
+        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ years }) => years));
+        expect(yearsGrid).toEqual([
             [
                 { startYear: 1984, endYear: 1999 },
                 { startYear: 2000, endYear: 2015 }

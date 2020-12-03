@@ -1,4 +1,4 @@
-<div class="fd-multi-input fd-multi-input-custom" (keydown)="removeSelectedTokens($event)">
+<div class="fd-multi-input fd-multi-input-custom">
     <div class="fd-multi-input-field">
         <ng-container [ngTemplateOutlet]="control" *ngIf="mobile && !open"></ng-container>
         <fd-popover
@@ -40,7 +40,9 @@
         [isControl]="true"
         [glyph]="displayAddonButton ? glyph : ''"
         (addOnButtonClicked)="addOnButtonClicked()">
-        <fd-tokenizer [compactCollapse]="compactCollapse" [compact]="compact" [open]="open"
+        <fd-tokenizer [compactCollapse]="compactCollapse"
+                      [compact]="compact"
+                      [open]="open"
                       (moreClickedEvent)="moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"

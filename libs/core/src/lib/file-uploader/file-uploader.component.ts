@@ -12,6 +12,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { stateType } from '../radio/radio-button/radio-button.component';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { applyCssClass } from '../utils/public_api';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 
 let fileUploaderInputUniqueId = 0;
@@ -102,6 +105,13 @@ export class FileUploaderComponent implements ControlValueAccessor {
     @Input()
     compact: boolean;
 
+    /** The field to set state of radio button using:
+     * 'success' | 'error' | 'warning' | 'default' | 'information'
+     * by default value is set to 'default'
+     */
+    @Input()
+    state: stateType = 'default';
+
     /** specifies number of files to allow to select */
     @Input()
     fileLimit: number;
@@ -128,17 +138,13 @@ export class FileUploaderComponent implements ControlValueAccessor {
     @Output()
     readonly onDragLeave = new EventEmitter<void>();
 
-    constructor(
-        private _fileUploadService: FileUploaderService,
-        private _changeDetRef: ChangeDetectorRef
-    ) {}
+    constructor(private _fileUploadService: FileUploaderService, private _changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
     onChange: Function = () => {};
 
     /** @hidden */
     onTouched: Function = () => {};
-
 
     /** @hidden */
     registerOnChange(fn: any): void {
@@ -180,8 +186,11 @@ export class FileUploaderComponent implements ControlValueAccessor {
         }
 
         const fileOutput: FileUploadOutput = this._fileUploadService.validateFiles(
-            event, this.minFileSize, this.maxFileSize, this.accept
-        )
+            event,
+            this.minFileSize,
+            this.maxFileSize,
+            this.accept
+        );
 
         this.validFiles = fileOutput.validFiles;
         this.invalidFiles = fileOutput.invalidFiles;
@@ -189,7 +198,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     setInputValue(selectedFiles: File[]): void {
         let fileName = '';
-        selectedFiles.forEach(file => fileName = fileName.concat(' ' + file.name));
+        selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName;
     }

@@ -40,10 +40,4 @@ export class TimeI18n {
 
     /** Aria label for the 'decrease period' button */
     decreasePeriodLabel = 'Decrease period';
-
-    /** Ante Meridian value, which will be displayed on period column */
-    meridianAm = 'am';
-
-    /** Post Meridian value, which will be displayed on period column */
-    meridianPm = 'pm';
 }

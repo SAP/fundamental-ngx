@@ -45,4 +45,23 @@ export function isSelectItem(item: SelectItem): item is SelectItem {
     return item && item.label !== undefined && item.value !== undefined;
 }
 
+export interface MultiInputOption {
+    /** Item text */
+    label: string;
+
+    /**
+     * References to the object instance
+     */
+    value: any;
+
+    /**
+     * Item Avatar
+     */
+    avatarSrc?: string;
+
+    isGroup?: boolean;
+    description?: string;
+    children?: MultiInputOption[];
+}
+
 export const isOptionItem = isSelectItem;

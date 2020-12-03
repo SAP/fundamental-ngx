@@ -1,35 +1,43 @@
 import { Component } from '@angular/core';
-import { FdDate, SpecialDayRule } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate, SpecialDayRule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-special-day-example',
     templateUrl: './calendar-special-day-example.component.html'
 })
 export class CalendarSpecialDayExampleComponent {
-    specialDays: SpecialDayRule[] = [];
+    specialDays: SpecialDayRule<FdDate>[] = [];
 
     markWeekends = false;
     markNextWeek = false;
     markAllMondays = false;
     markPastDays = false;
 
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+
     refreshRules(): void {
         this.specialDays = [];
         if (this.markWeekends) {
             this.specialDays.push({
-                rule: (fdDate) => fdDate.getDay() === 1 || fdDate.getDay() === 7,
+                rule: (fdDate) => {
+                    const day = this.datetimeAdapter.getDayOfWeek(fdDate);
+                    return day === 1 || day === 7;
+                },
                 specialDayNumber: 5
             });
         }
         if (this.markAllMondays) {
-            this.specialDays.push({ rule: (fdDate) => fdDate.getDay() === 2, specialDayNumber: 15 });
+            this.specialDays.push({
+                rule: (fdDate) => this.datetimeAdapter.getDayOfWeek(fdDate) === 2,
+                specialDayNumber: 15
+            });
         }
         if (this.markNextWeek) {
             this.specialDays.push({
                 rule: (fdDate) => {
                     return (
-                        fdDate.getTimeStamp() > FdDate.getToday().getTimeStamp() &&
-                        fdDate.getTimeStamp() <= this._getFutureDate(FdDate.getToday()).getTimeStamp()
+                        this.datetimeAdapter.compareDate(fdDate, this.datetimeAdapter.today()) > 0 &&
+                        this.datetimeAdapter.compareDate(fdDate, this._getFutureDate(this.datetimeAdapter.today())) <= 0
                     );
                 },
                 specialDayNumber: 10
@@ -37,7 +45,7 @@ export class CalendarSpecialDayExampleComponent {
         }
         if (this.markPastDays) {
             this.specialDays.push({
-                rule: (fdDate) => FdDate.getToday().getTimeStamp() > fdDate.getTimeStamp(),
+                rule: (fdDate) => this.datetimeAdapter.compareDate(fdDate, this.datetimeAdapter.today()) < 0,
                 specialDayNumber: 13
             });
         }
@@ -47,7 +55,7 @@ export class CalendarSpecialDayExampleComponent {
     private _getFutureDate(fdDate: FdDate): FdDate {
         const amountOfDaysInFuture = 7;
         for (let i = 0; i < amountOfDaysInFuture; i++) {
-            fdDate = fdDate.nextDay();
+            fdDate = this.datetimeAdapter.addCalendarDays(fdDate, 1);
         }
         return fdDate;
     }

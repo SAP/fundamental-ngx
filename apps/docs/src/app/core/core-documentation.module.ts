@@ -16,18 +16,19 @@ import {
     SELECT_MOBILE_CONFIG
 } from '../documentation/utilities/consts';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { DocsThemeService } from '../documentation/services/docs-theme.service';
 
 @NgModule({
     declarations: [HomeDocsComponent, NewComponentComponent, CoreDocumentationComponent],
     imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES), ScrollingModule],
     providers: [
         StackblitzService,
-        {provide: 'CURRENT_LIB', useValue: 'core'},
-        {provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true},
-        {provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true},
-        {provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true},
-        {provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true}
+        DocsThemeService,
+        { provide: 'CURRENT_LIB', useValue: 'core' },
+        { provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true },
+        { provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true },
+        { provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true },
+        { provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true }
     ]
 })
-export class CoreDocumentationModule {
-}
+export class CoreDocumentationModule {}

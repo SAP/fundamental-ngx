@@ -1,33 +1,20 @@
-import { Component } from '@angular/core';
-import { FdDate, FdRangeDate } from '@fundamental-ngx/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FdDate, DateRange, DatetimeAdapter } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-picker-range-example',
-    template: ` <fd-date-picker [type]="'range'" [(ngModel)]="selectedRange"> </fd-date-picker>
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: ` <fd-date-picker type="range" [(ngModel)]="selectedRange"> </fd-date-picker>
         <br />
-        <div>Selected First Date: {{ getSelectedFirstDate() }}</div>
+        <div>Selected First Date: {{ this.selectedRange?.start?.toDateString() || 'null' }}</div>
         <br />
-        <div>Selected Last Date: {{ getSelectedLastDate() }}</div>`
+        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>`
 })
 export class DatePickerRangeExampleComponent {
-    selectedRange: FdRangeDate = {
-        start: FdDate.getToday(),
-        end: FdDate.getToday().nextDay()
-    };
+    selectedRange: DateRange<FdDate>;
 
-    getSelectedFirstDate(): string {
-        let retVal = 'null';
-        if (this.selectedRange.start) {
-            retVal = this.selectedRange.start.toDateString();
-        }
-        return retVal;
-    }
-
-    getSelectedLastDate(): string {
-        let retVal = 'null';
-        if (this.selectedRange.end) {
-            retVal = this.selectedRange.end.toDateString();
-        }
-        return retVal;
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {
+        const today = this.datetimeAdapter.today();
+        this.selectedRange = new DateRange(today, this.datetimeAdapter.addCalendarDays(today, 1));
     }
 }

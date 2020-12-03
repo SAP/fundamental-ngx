@@ -1,3 +1,7 @@
-<fd-time [compact]="true" [meridian]="true" [(ngModel)]="timeMeridianObject"></fd-time>
+<fd-time
+    [compact]="true"
+    [meridian]="true"
+    [(ngModel)]="timeMeridian"
+></fd-time>
 <br />
-Selected Time: {{ timeMeridianObject.hour }}h {{ timeMeridianObject.minute }}m {{ timeMeridianObject.second }}s
+Selected Time: {{ timeMeridian.hour }}h {{ timeMeridian.minute }}m {{ timeMeridian.second }}s

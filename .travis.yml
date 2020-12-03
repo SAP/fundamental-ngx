@@ -57,18 +57,6 @@ jobs:
     - provider: script
       script: bash ./ci-scripts/publish.sh
       skip_cleanup: true
-  - stage: "Archive-pre-release"
-    if: branch = archive-ngx-core-ng*
-    before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
-    before_deploy:
-    - git checkout archive-ngx-core-ng7
-    - bash ./ci-scripts/setup-npm.sh
-    deploy:
-    - provider: script
-      script: bash ./ci-scripts/publish.sh
-      skip_cleanup: true
-      on:
-        all_branches: true
   - stage: "Release"
     if: branch = tmp_branch_for_automated_release_do_not_use
     before_script: export NODE_OPTIONS='-–-max_old_space_size=4096'
@@ -83,17 +71,17 @@ jobs:
       skip_cleanup: true
       on:
         all_branches: true
-  - stage: "Archive-release"
-    if: branch = archive_tmp_branch_for_automated_release_do_not_use
+  - stage: "Hotfix-release"
+    if: branch = hotfix_tmp_branch_for_automated_release_do_not_use
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
     - git fetch
-    - git checkout archive-ngx-core-ng7
+    - git checkout hotfix_tmp_branch_for_automated_release_do_not_use
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
-      script: bash ./ci-scripts/publish.sh
+      script: bash ./ci-scripts/hotfix-publish.sh
       skip_cleanup: true
       on:
         all_branches: true

@@ -9,7 +9,8 @@ import {
     SelectModule,
     CheckboxModule,
     FormModule,
-    DatetimePickerModule
+    DatetimePickerModule,
+    FdDatetimeModule
 } from '@fundamental-ngx/core';
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -63,6 +64,7 @@ const routes: Routes = [
         SelectModule,
         CheckboxModule,
         FormModule,
+        FdDatetimeModule,
         DatetimePickerModule
     ],
     exports: [RouterModule],

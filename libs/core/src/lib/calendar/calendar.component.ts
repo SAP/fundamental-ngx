@@ -5,25 +5,31 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
+    Inject,
     Input,
     OnInit,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CalendarI18n } from './i18n/calendar-i18n';
-import { FdDate } from './models/fd-date';
-import { CalendarCurrent } from './models/calendar-current';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
-import { FdRangeDate } from './models/fd-range-date';
-import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
+
+import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
+
+import { DateRange } from './models/date-range';
+import { CalendarCurrent } from './models/calendar-current';
 import { SpecialDayRule } from './models/special-day-rule';
-import { CalendarService } from './calendar.service';
 import { CalendarYearGrid } from './models/calendar-year-grid';
 import { AggregatedYear } from './models/aggregated-year';
+import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
+import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
+import { CalendarService } from './calendar.service';
+import { createMissingDateImplementationError } from './calendar-errors';
 import {
     CalendarAggregatedYearViewComponent
+    // Comment to fix max-line-length error
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 
 let calendarUniqueId = 0;
@@ -46,6 +52,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
  * ```html
  * <fd-calendar></fd-calendar>
  * ```
+ *
  */
 @Component({
     selector: 'fd-calendar',
@@ -71,15 +78,15 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent implements OnInit, ControlValueAccessor, Validator {
+export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator {
     /** @hidden */
-    @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent;
+    @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent<D>;
 
     /** @hidden */
-    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent;
+    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent<D>;
 
     /** @hidden */
-    @ViewChild(CalendarAggregatedYearViewComponent) aggregatedYearViewComponent: CalendarAggregatedYearViewComponent;
+    @ViewChild(CalendarAggregatedYearViewComponent) aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
 
     /** @hidden */
     @HostBinding('class.fd-calendar')
@@ -92,9 +99,9 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /** Currently displayed days depending on month and year */
     currentlyDisplayed: CalendarCurrent;
 
-    /** The currently selected FdDate model in single mode. */
+    /** The currently selected date model in single mode. */
     @Input()
-    selectedDate: FdDate = FdDate.getToday();
+    selectedDate: D;
 
     /** Whether compact mode should be included into calendar */
     @Input()
@@ -125,7 +132,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    selectedRangeDate: FdRangeDate;
+    selectedRangeDate: DateRange<D>;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' */
     @Input()
@@ -147,11 +154,11 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * Special days mark, it can be used by passing array of object with
      * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
      * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
-     * Rule accepts method with FdDate object as a parameter. ex:
-     * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
+     * Rule accepts method with D object as a parameter. ex:
+     * `rule: (fdDate: D) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
     @Input()
-    specialDaysRules: SpecialDayRule[] = [];
+    specialDaysRules: SpecialDayRule<D>[] = [];
 
     /**
      * Object to customize year grid,
@@ -160,8 +167,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     @Input()
     yearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 5,
-        yearMapping: (num: number) => num.toString()
+        cols: 5
     };
 
     /**
@@ -171,8 +177,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     @Input()
     aggregatedYearGrid: CalendarYearGrid = {
         rows: 4,
-        cols: 3,
-        yearMapping: (num: number) => num.toString()
+        cols: 3
     };
 
     /**
@@ -188,11 +193,11 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
 
     /** Event thrown every time selected date in single mode is changed */
     @Output()
-    readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
+    readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    readonly selectedRangeDateChange: EventEmitter<FdRangeDate> = new EventEmitter<FdRangeDate>();
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /** Event thrown every time when value is overwritten from outside and throw back isValid */
     @Output()
@@ -207,35 +212,35 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    onChange: Function = () => {};
+    onChange: (_: D | DateRange<D>) => void = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: () => void = () => {};
 
     /**
      * Function used to disable certain dates in the calendar.
-     * @param fdDate FdDate
+     * @param date date
      */
     @Input()
-    disableFunction = function (fdDate: FdDate): boolean {
+    disableFunction = function (date: D): boolean {
         return false;
     };
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
+     * @param date date
      */
     @Input()
-    disableRangeStartFunction = function (fdDate: FdDate): boolean {
+    disableRangeStartFunction = function (date: D): boolean {
         return false;
     };
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
+     * @param date date
      */
     @Input()
-    disableRangeEndFunction = function (fdDate: FdDate): boolean {
+    disableRangeEndFunction = function (date: D): boolean {
         return false;
     };
 
@@ -248,7 +253,22 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     };
 
     /** @hidden */
-    constructor(calendarI18n: CalendarI18n, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+
+        // set default value
+        this.selectedDate = this._dateTimeAdapter.today();
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -259,37 +279,36 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @hidden
      * Function that provides support for ControlValueAccessor that allows to use [(ngModel)] or forms.
      */
-    writeValue(selected: FdRangeDate | FdDate): void {
+    writeValue(selected: DateRange<D> | D): void {
         let valid = true;
-        if (selected) {
-            if (this.calType === 'single') {
-                selected = <FdDate>selected;
 
-                valid = selected.isDateValid();
-                this.selectedDate = selected;
+        if (this.calType === 'single') {
+            selected = <D>selected;
 
-                if (selected.isDateValid()) {
-                    this._prepareDisplayedView();
-                }
-            } else if (this.calType === 'range') {
-                selected = <FdRangeDate>selected;
+            valid = this._dateTimeAdapter.isValid(selected);
 
-                if (!selected.start || !selected.end) {
-                    valid = false;
-                }
-                if (selected.start && !selected.start.isDateValid()) {
-                    valid = false;
-                }
-                if (selected.end && !selected.end.isDateValid()) {
-                    valid = false;
-                }
-                this.selectedRangeDate = { start: selected.start, end: selected.end };
-                if (valid) {
-                    this._prepareDisplayedView();
-                }
-            }
+            this.selectedDate = selected;
         }
+
+        if (this.calType === 'range' && selected) {
+            selected = <DateRange<D>>selected;
+
+            if (!this._dateTimeAdapter.isValid(selected.start) || !this._dateTimeAdapter.isValid(selected.end)) {
+                valid = false;
+            }
+
+            this.selectedRangeDate = {
+                start: selected.start,
+                end: selected.end
+            };
+        }
+
+        if (valid) {
+            this._prepareDisplayedView();
+        }
+
         this._changeDetectorRef.detectChanges();
+
         this.isValidDateChange.emit(valid);
     }
 
@@ -338,7 +357,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @hidden
      * Method that is triggered by events from day view component, when there is selected single date changed
      */
-    selectedDateChanged(date: FdDate): void {
+    selectedDateChanged(date: D): void {
         this.selectedDate = date;
         this.onChange(date);
         this.onTouched();
@@ -350,7 +369,7 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * @hidden
      * Method that is triggered by events from day view component, when there is selected range date changed
      */
-    selectedRangeDateChanged(dates: FdRangeDate): void {
+    selectedRangeDateChanged(dates: DateRange<D>): void {
         if (dates) {
             this.selectedRangeDate = { start: dates.start, end: dates.end ? dates.end : dates.start };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
@@ -446,11 +465,15 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
         this.aggregatedYearViewComponent.loadPreviousYearsList();
     }
 
-    /** Function that allows to change currently displayed month/year configuration,
+    /**
+     * Function that allows to change currently displayed month/year configuration,
      * which are connected to days displayed
      */
-    setCurrentlyDisplayed(fdDate: FdDate): void {
-        this.currentlyDisplayed = { month: fdDate.month, year: fdDate.year };
+    setCurrentlyDisplayed(date: D): void {
+        this.currentlyDisplayed = {
+            month: this._dateTimeAdapter.getMonth(date),
+            year: this._dateTimeAdapter.getYear(date)
+        };
     }
 
     /**
@@ -481,18 +504,16 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
     /** Method that provides information if model selected date/dates have properly types and are valid */
     isModelValid(): boolean {
         if (this.calType === 'single') {
-            return this.selectedDate && this.selectedDate instanceof FdDate && this.selectedDate.isDateValid();
-        } else {
+            return this._dateTimeAdapter.isValid(this.selectedDate);
+        }
+        if (this.calType === 'range') {
             return (
                 this.selectedRangeDate &&
-                this.selectedRangeDate.start &&
-                this.selectedRangeDate.start instanceof FdDate &&
-                this.selectedRangeDate.start.isDateValid() &&
-                this.selectedRangeDate.end &&
-                this.selectedRangeDate.end instanceof FdDate &&
-                this.selectedRangeDate.start.isDateValid()
+                this._dateTimeAdapter.isValid(this.selectedRangeDate.start) &&
+                this._dateTimeAdapter.isValid(this.selectedRangeDate.end)
             );
         }
+        return false;
     }
 
     /**
@@ -501,21 +522,27 @@ export class CalendarComponent implements OnInit, ControlValueAccessor, Validato
      * Day grid is based on currently displayed month and year
      */
     private _prepareDisplayedView(): void {
-        if (this.calType === 'single' && this.selectedDate && this.selectedDate.month && this.selectedDate.year) {
-            this.currentlyDisplayed = { month: this.selectedDate.month, year: this.selectedDate.year };
+        if (this.calType === 'single' && this._dateTimeAdapter.isValid(this.selectedDate)) {
+            this.currentlyDisplayed = {
+                year: this._dateTimeAdapter.getYear(this.selectedDate),
+                month: this._dateTimeAdapter.getMonth(this.selectedDate)
+            };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
             this.currentlyDisplayed = {
-                month: this.selectedRangeDate.start.month,
-                year: this.selectedRangeDate.start.year
+                year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),
+                month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.start)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
             this.currentlyDisplayed = {
-                month: this.selectedRangeDate.end.month,
-                year: this.selectedRangeDate.end.year
+                year: this._dateTimeAdapter.getYear(this.selectedRangeDate.end),
+                month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.end)
             };
         } else {
-            const tempDate = FdDate.getToday();
-            this.currentlyDisplayed = { month: tempDate.month, year: tempDate.year };
+            const today = this._dateTimeAdapter.today();
+            this.currentlyDisplayed = {
+                year: this._dateTimeAdapter.getYear(today),
+                month: this._dateTimeAdapter.getMonth(today)
+            };
         }
     }
 }

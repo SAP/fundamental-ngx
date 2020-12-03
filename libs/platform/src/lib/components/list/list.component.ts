@@ -20,7 +20,7 @@ import { CollectionBaseInput } from '../form/collection-base.input';
 
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
-import { KeyUtil } from '@fundamental-ngx/core';
+import { KeyUtil, closestElement } from '@fundamental-ngx/core';
 
 
 
@@ -33,6 +33,7 @@ export class SelectionChangeEvent {
     selectedItems: BaseListItem[];
     index: number;
 }
+
 
 /**
  * The List component represents a container for list item types.
@@ -226,6 +227,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @ContentChild(ListItemDef)
     listItemDef: ListItemDef;
 
+    @ContentChild('#listItem', { read: ElementRef })
+    li: ElementRef;
+
     /**
     * Child items of the List.
     */
@@ -404,7 +408,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             item._noSeperator = this.noSeperator;
             this.stateChanges.next(item);
         });
-
     }
 
 
@@ -528,15 +531,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             });
     }
 
+
     /**@hidden
     *  used in tempate to get Selected items from a list
     * event:any to avoid code duplication**/
-    _onSelectionChanged(event: any): void {
-        if (event.target.checked) {
-            this._selectionModel.select(event.target.parentNode.parentNode.parentNode);
-        } else {
-            this._selectionModel.deselect(event.target.parentNode.parentNode.parentNode);
-        }
+    _onSelectionChanged(event: Event): void {
+        this._updateNavigation(event);
     }
 
     /** @hidden */
@@ -544,24 +544,37 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      * event:any to avoid code duplication
      * seprate PR for custom event**/
     @HostListener('click', ['$event'])
-    _updateNavigation(event: any): void {
+    _updateNavigation(event: Event): void {
+        let selectedItemId = '0';
+        const el = event.target as HTMLElement;
+        const parent = closestElement('.fd-list__item', event.target);
+        if (parent !== null && parent !== undefined) {
+            selectedItemId = parent.getAttribute('id');
+        }
+
         this.listItems.forEach((item) => {
             if (item.anchor !== undefined) {
                 item.anchor.nativeElement.classList.remove('is-navigated');
             }
         });
-        if (event.target !== null && event.target.tagName.toLowerCase() === 'a') {
-            event.target.classList.add('is-navigated');
-        } else if (event.target !== null &&
-            event.target.tagName.toLowerCase() === 'li' &&
-            event.target.querySelector('a') !== undefined &&
-            event.target.querySelector('a') !== null) {
-            event.target.querySelector('a').classList.add('is-navigated');
+        if (el !== null && el.tagName.toLowerCase() === 'a') {
+            el.classList.add('is-navigated');
+        } else if (el !== null &&
+            el.tagName.toLowerCase() === 'li' &&
+            el.querySelector('a') !== undefined &&
+            el.querySelector('a') !== null) {
+            el.querySelector('a').classList.add('is-navigated');
         }
-        this._handleSingleSelect(event);
-        this._handleMultiSelect(event);
-        this._handleRowSelect(event);
 
+        if (el !== null && el !== undefined) {
+            if (this.selectRow) {
+                this._handleRowSelect(selectedItemId);
+            } else if (this.selectionMode === 'single') {
+                this._handleSingleSelect(event, selectedItemId);
+            } else if (this.selectionMode === 'multi') {
+                this._handleMultiSelect(selectedItemId);
+            }
+        }
     }
 
     /** @hidden */
@@ -622,66 +635,37 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /**List item with radio button styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
-    private _handleSingleSelect(event: any): void {
-        // clean up single selection items
-        if (event.target !== null &&
-            event.target !== undefined &&
-            this.selectionMode === 'single' &&
-            !this.selectRow) {
-            this.listItems.forEach((item) => {
-                if (item.radioButtonComponent !== undefined) {
-                    item.listItem.nativeElement.classList.remove('is-selected');
-                }
-            });
-            this._selectionModel.clear();
+    private _handleSingleSelect(event: Event, selectedItemId: string): void {
+        const parent = closestElement('.fd-list__item', event.target);
+        const radio = parent ? parent.querySelector('input') : null;
+        this._selectedvalue = radio ? radio.getAttribute('ng-reflect-value') : null;
 
-            // get the selected item
-            if (event.target.tagName.toLowerCase() === 'li' &&
-                event.target.querySelector('fd-radio-button') !== undefined) {
-                const radio1 = event.target.querySelector('fd-radio-button');
-                this._selectedvalue = radio1.getAttribute('ng-reflect-value');
-                radio1.parentNode.parentNode.classList.add('is-selected');
-                this._selectionModel.select(radio1.parentNode.parentNode);
-            } else if (event.target.tagName.toLowerCase() === 'span' &&
-                event.target.parentNode.querySelector('fd-radio-button') !== undefined) {
-                const radio2 = event.target.parentNode.querySelector('fd-radio-button');
-                this._selectedvalue = radio2.getAttribute('ng-reflect-value');
-                radio2.parentNode.parentNode.classList.add('is-selected');
-                this._selectionModel.select(radio2.parentNode.parentNode);
-            } else if ((event.target.tagName.toLowerCase() === 'label'
-                || event.target.tagName.toLowerCase() === 'input') &&
-                event.target.type === 'radio') {
-                const radio3 = event.target.parentNode;
-                this._selectedvalue = radio3.getAttribute('ng-reflect-value');
-                radio3.parentNode.parentNode.classList.add('is-selected');
-                this._selectionModel.select(radio3.parentNode.parentNode);
-            } else if (event.target.querySelector('fd-radio-button') !== undefined &&
-                event.target.querySelector('fd-radio-button') !== null) {
-                const target1 = event.target;
-                this._selectedvalue = target1.getAttribute('ng-reflect-value');
-                target1.parentNode.parentNode.classList.add('is-selected');
-                this._selectionModel.select(target1.parentNode.parentNode);
-            } else if ((event.target.tagName.toLowerCase() === 'div')) {
-                const divPart = event.target.parentNode.parentNode;
-                divPart.classList.add('is-selected');
-                this._selectionModel.select(divPart);
-            }
-        }
-        // selecteditem changes inform parent
+
         this.listItems.forEach((item) => {
             if (item.radioButtonComponent !== undefined) {
-                item.selectionValue = this._selectedvalue;
+                item._selected = false;
+                item.listItem.nativeElement.setAttribute('aria-checked', false);
+            }
+            this.stateChanges.next(item);
+        });
+        this._selectionModel.clear();
+        this.listItems.forEach((item) => {
+            item.selectionValue = this._selectedvalue;
+            if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
+                item.listItem.nativeElement.setAttribute('_selected', true);
+                item.listItem.nativeElement.setAttribute('aria-checked', true);
+                this._selectionModel.select(item);
                 this.stateChanges.next(item);
             }
         });
+
     }
 
 
 
-    private _handleRowSelect(event): void {
-
+    private _handleRowSelect(selectedItemId: string): void {
         // handles mutli select on row level without checkbox
-        if (this.selectionMode === 'multi' && this.selectRow) {
+        if (this.selectionMode === 'multi') {
             this.listItems.forEach((item) => {
                 if (item._selected) {
                     this._selectionModel.select(item);
@@ -692,8 +676,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             });
         }
         // handles single select on row level without radiobutton
-        if (this.selectionMode === 'single' && this.selectRow) {
-            let selectedItemId = 0;
+        if (this.selectionMode === 'single') {
             this.listItems.forEach((item) => {
                 if (item.anchor !== undefined) {
                     item.listItem.nativeElement.setAttribute('_selected', false);
@@ -704,24 +687,17 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 }
             });
             this._selectionModel.clear();
-
-            if (event.target !== null && event.target !== undefined) {
-                if (event.target.tagName.toLowerCase() === 'a') {
-                    selectedItemId = event.target.parentNode.getAttribute('id');
-                }
-                if (event.target.tagName.toLowerCase() === 'li') {
-                    selectedItemId = event.target.getAttribute('id');
-                }
-            }
             this.listItems.forEach((item) => {
                 if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
                     item.listItem.nativeElement.setAttribute('_selected', true);
-                    item.anchor.nativeElement.classList.add('is-selected');
+                    if (item.anchor !== undefined) {
+                        item.anchor.nativeElement.classList.add('is-selected');
+                    }
                     this._selectionModel.select(item);
                     this.stateChanges.next(item);
                 }
             });
-            selectedItemId = 0;
+            selectedItemId = '0';
 
         }
     }
@@ -731,58 +707,21 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /**List item with checkbox styles,check,uncheckupdates
      * event:any to avoid code duplication
      */
-    private _handleMultiSelect(event: any): void {
-        if (event.target !== null &&
-            event.target !== undefined &&
-            this.selectionMode === 'multi' && !this.selectRow) {
-            if (event.target.tagName.toLowerCase() === 'li' &&
-                event.target.querySelector('fd-checkbox') !== undefined) {
-                const checkbox1 = event.target.querySelector('fd-checkbox');
-                if (checkbox1.childNodes[0].checked) {
-                    this._selectionModel.select(checkbox1.parentNode.parentNode);
+    private _handleMultiSelect(selectedItemId: string): void {
+        this.listItems.forEach((item) => {
+            if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
+                const select = item.listItem.nativeElement.getAttribute('_selected');
+                item.listItem.nativeElement.setAttribute('_selected', !select);
+                if (item._selected) {
+                    item.listItem.nativeElement.setAttribute('aria-selected', true);
+                    this._selectionModel.select(item);
                 } else {
-                    this._selectionModel.deselect(checkbox1.parentNode.parentNode);
+                    item.listItem.nativeElement.setAttribute('aria-selected', false);
+                    this._selectionModel.deselect(item);
                 }
-            } else if (event.target.tagName.toLowerCase() === 'span' &&
-                event.target.parentNode.querySelector('fd-checkbox') !== undefined) {
-                const checkbox2 = event.target.parentNode.querySelector('fd-checkbox');
-                if (checkbox2.childNodes[0].checked) {
-                    this._selectionModel.select(checkbox2.parentNode.parentNode);
-                } else {
-                    this._selectionModel.deselect(checkbox2.parentNode.parentNode);
-                }
-            } else if ((event.target.tagName.toLowerCase() === 'label'
-                || event.target.tagName.toLowerCase() === 'input')
-                && event.target.type === 'checkbox') {
-                const checkbox3 = event.target;
-                if (checkbox3.checked) {
-                    this._selectionModel.select(
-                        checkbox3.parentNode.parentNode.parentNode);
-                } else {
-                    this._selectionModel.deselect(
-                        checkbox3.parentNode.parentNode.parentNode);
-                }
-            } else if ((event.target.tagName.toLowerCase() === 'label'
-                || event.target.tagName.toLowerCase() === 'input') &&
-                event.target.type === 'checkbox') {
-                if (event.target.checked) {
-                    this._selectionModel.select(
-                        event.target.parentNode.parentNode.parentNode);
-                } else {
-                    this._selectionModel.deselect(
-                        event.target.parentNode.parentNode.parentNode);
-                }
-            } else if ((event.target.tagName.toLowerCase() === 'div')) {
-                const divPart = event.target.parentNode.parentNode;
-                const checkbox = divPart.querySelector('input');
-                if (checkbox.checked) {
-                    this._selectionModel.select(divPart);
-                } else {
-                    this._selectionModel.deselect(divPart);
-                }
+                this.stateChanges.next(item);
             }
-        }
-
+        });
     }
 }
 

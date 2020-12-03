@@ -1,5 +1,5 @@
 @import '~fundamental-styles/dist/popover';
-
+@import "~@angular/cdk/overlay-prebuilt";
 
 $fd-popover-arrow-top-back: -0.5rem !default;
 $fd-popover-arrow-top-front: calc(-0.5rem + 1px) !default;
@@ -7,101 +7,133 @@ $fd-popover-arrow-top-front: calc(-0.5rem + 1px) !default;
 $fd-popover-arrow-width: 1rem !default;
 $fd-popover-arrow-height: 0.5rem !default;
 $fd-popover-arrow-width-half: $fd-popover-arrow-width/2 !default;
-$fd-popover-arrow-offset: 0.5rem !default;
-$fd-popover-arrow-color: var(--sapContent_ForegroundBorderColor, #89919a) !default;
-$fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
+$fd-popover-arrow-offset: 0.25rem !default;
+$fd-popover-arrow-color-variable: var(--sapContent_ForegroundBorderColor, #89919a) !default;
+$fd-popover-arrow-color: #89919a;
+$fd-popover-background-color-variable: var(--sapGroup_ContentBackground, #fff) !default;
+$fd-popover-background-color: #fff;
+.fd-popover__popper {
+	.fd-popover__arrow {
+		box-sizing: border-box;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-color: transparent;
+		z-index: 1000000;
 
-.fd-popover__arrow {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-color: transparent;
-    z-index: 1000000;
+		&::after {
+			position: absolute;
+			content: "";
+			border-style: solid;
+			border-color: transparent;
+		}
 
-    &::after {
-        position: absolute;
-        content: "";
-        border-style: solid;
-        border-color: transparent;
-    }
+		&--bottom,
+		&--top {
+			&::after {
+				margin: 0 (-$fd-popover-arrow-width-half);
+			}
+		}
 
-    &--bottom,
-    &--top {
-        left: 50%;
-        transform: translateX(-50%);
+		&--start,
+		&--end {
+			&::after {
+				margin: (-$fd-popover-arrow-width-half) 0;
+			}
+		}
 
-        &::after {
-            margin: 0 (-$fd-popover-arrow-width-half);
-        }
-    }
+		&--bottom {
+			bottom: -$fd-popover-arrow-height;
+			border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
+			border-top-color: $fd-popover-arrow-color;
+			border-top-color: $fd-popover-arrow-color-variable;
 
-    &--bottom {
-        top: -$fd-popover-arrow-height;
-        border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
-        border-top-color: $fd-popover-arrow-color;
+			&::after {
+				bottom: 1px;
+				border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
+				border-top-color: $fd-popover-background-color;
+				border-top-color: $fd-popover-background-color-variable;
+			}
+		}
 
-        &::after {
-            bottom: 1px;
-            border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
-            border-top-color: $fd-popover-background-color;
-        }
-    }
+		&--top {
+			top: -$fd-popover-arrow-height;
+			border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
+			border-bottom-color: $fd-popover-arrow-color;
+			border-bottom-color: $fd-popover-arrow-color-variable;
 
-    &--top {
-        bottom: -$fd-popover-arrow-height;
-        border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
-        border-bottom-color: $fd-popover-arrow-color;
+			&::after {
+				top: 1px;
+				border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
+				border-bottom-color: $fd-popover-background-color;
+				border-bottom-color: $fd-popover-background-color-variable;
+			}
+		}
 
-        &::after {
-            top: 1px;
-            border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
-            border-bottom-color: $fd-popover-background-color;
-        }
-    }
+		&--end {
+			right: -$fd-popover-arrow-height;
+			border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
+			border-left-color: $fd-popover-arrow-color;
+			border-left-color: $fd-popover-arrow-color-variable;
 
-    &--end,
-    &--start {
-        top: 50%;
-        transform: translateY(-50%);
+			&::after {
+				right: 1px;
+				border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
+				border-left-color: $fd-popover-background-color;
+				border-left-color: $fd-popover-background-color-variable;
+			}
+		}
 
-        &::after {
-            margin: -$fd-popover-arrow-width-half 0;
-        }
-    }
+		&--start {
+			left: -$fd-popover-arrow-height;
+			border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
+			border-right-color: $fd-popover-arrow-color;
+			border-right-color: $fd-popover-arrow-color-variable;
 
-    &--end {
-        left: -$fd-popover-arrow-height;
-        border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
-        border-left-color: $fd-popover-arrow-color;
+			&::after {
+				left: 1px;
+				border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
+				border-right-color: $fd-popover-background-color;
+				border-right-color: $fd-popover-background-color-variable;
+			}
+		}
 
-        &::after {
-            right: 1px;
-            border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
-            border-left-color: $fd-popover-background-color;
-        }
-    }
+		&-x--start {
+			left: $fd-popover-arrow-offset;
+		}
 
-    &--start {
-        right: -$fd-popover-arrow-height;
-        border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
-        border-right-color: $fd-popover-arrow-color;
+		&-x--center {
+			left: 50%;
+			transform: translateX(-50%);
+		}
 
-        &::after {
-            left: 1px;
-            border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
-            border-right-color: $fd-popover-background-color;
-        }
-    }
+		&-x--end {
+			right: $fd-popover-arrow-offset;
+		}
+
+		&-y--top {
+			top: $fd-popover-arrow-offset;
+		}
+
+		&-y--center {
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
+		&-y--bottom {
+			bottom: $fd-popover-arrow-offset;
+		}
+	}
 }
 
+
 .fd-popover__popper.fd-popover__popper--cdk-custom {
-    position: relative;
-    width: 100%;
+	position: relative;
+	width: 100%;
 
 	.fd-list {
 		border-radius: 0.25rem;
@@ -121,26 +153,26 @@ $fd-popover-background-color: var(--sapGroup_ContentBackground, #fff) !default;
 }
 
 .fd-popover-custom {
-    display: inline-block;
+	display: inline-block;
 	max-width: 100%;
 }
 
 .fd-popover-custom-list {
-    .fd-list {
+	.fd-list {
 		overflow: auto;
-    }
+	}
 }
 
 .cdk-overlay-container {
-    z-index: 1002;
+	z-index: 1002;
 }
 
 .fd-popover-custom--disabled {
-    .fd-popover__control {
-        cursor: auto;
-    }
+	.fd-popover__control {
+		cursor: auto;
+	}
 }
 
-.cdk-overlay-connected-position-bounding-box {
-	height: auto !important;
+.cdk-overlay-pane {
+	max-height: initial;
 }

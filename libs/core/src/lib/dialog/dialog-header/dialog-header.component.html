@@ -1,7 +1,7 @@
 <header
     fd-bar
+    class="fd-dialog__header"
     [cozy]="dialogConfig.mobile"
-    [class]="'fd-dialog__header'"
     [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
 >
     <ng-container *ngTemplateOutlet="headerTemplate ? headerTemplate : defaultTemplate"></ng-container>
@@ -9,7 +9,7 @@
     <ng-template #defaultTemplate>
         <div fd-bar-left>
             <fd-bar-element [fullWidth]="true">
-                <ng-content select="[fd-dialog-title]"></ng-content>
+                <ng-content select="[fd-title]"></ng-content>
             </fd-bar-element>
         </div>
         <div fd-bar-right>
