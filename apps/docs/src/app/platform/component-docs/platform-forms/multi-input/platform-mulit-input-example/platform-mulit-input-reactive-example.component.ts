@@ -1,11 +1,13 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NgForm, RequiredValidator, ValidatorFn, Validators } from '@angular/forms';
+import { MultiInputSelectionChangeEvent, Status } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-multi-input-example',
-    templateUrl: './platform-mulit-input-example.component.html',
+    selector: 'fdp-platform-multi-input-reactive-example',
+    templateUrl: './platform-mulit-input-reactive-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformMulitInputExampleComponent {
+export class PlatformMulitInputReactiveExampleComponent implements OnInit {
     _datasource = [
         { firstName: 'Alabama', lastName: 'Montgomery' },
         { firstName: 'Alaska', lastName: 'Juneau' },
@@ -59,4 +61,31 @@ export class PlatformMulitInputExampleComponent {
         { firstName: 'Wisconsin', lastName: 'Madison' },
         { firstName: 'Wyoming', lastName: 'Cheyenne' }
     ];
+
+    customForm: FormGroup;
+    submitted = false;
+    reactiveForm = new FormControl();
+
+    ngOnInit(): void {
+        this.customForm = new FormGroup({});
+    }
+
+    hasError(): boolean {
+        return this.hasValue() && this.reactiveForm.touched;
+    }
+
+    hasValue(): boolean {
+        if (this.reactiveForm.value && this.reactiveForm.value.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    onSubmit(): void {
+        if (!this.hasError()) {
+            return;
+        }
+        alert('form file Uploaded successfully');
+    }
 }

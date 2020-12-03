@@ -1,5 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
-import { BACKSPACE, DELETE, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { BACKSPACE, DELETE, DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     ChangeDetectionStrategy,
@@ -23,7 +23,6 @@ import {
     TemplateRef
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-
 import {
     TokenizerComponent,
     KeyUtil,
@@ -32,20 +31,20 @@ import {
     DynamicComponentService,
     RtlService
 } from '@fundamental-ngx/core';
+
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DATA_PROVIDERS, DataProvider, ListDataSource } from '../../../domain';
 import { MultiInputOption } from '../../../domain/data-model';
 import { ListComponent, SelectionType } from '../../list/list.component';
 import { ListConfig } from '../../list/public_api';
-
-import { FormFieldControl } from '../form-control';
+import { FormFieldControl, Status } from '../form-control';
 import { FormField } from '../form-field';
+import { InputGroupAddonComponent } from '../input-group/public_api';
 import { InputType } from '../input/input.component';
-import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-input';
+import { BaseMultiInput } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
-
 @Component({
     selector: 'fdp-multi-input',
     templateUrl: './multi-input.component.html',
@@ -61,11 +60,13 @@ import { MULTIINPUT_COMPONENT } from './multi-input.interface';
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
+    private _state: Status;
+
     /** type Represent the type of input used for the multi Input */
     @Input()
     type: InputType;
 
-    @ViewChild('listTemplateDD')
+    @ViewChild(ListComponent)
     listTemplateDD: ListComponent;
 
     /** Selected values from the list items. */
@@ -77,6 +78,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
      */
     @Input()
     selectionMode: SelectionType = 'none';
+
+    @Input()
+    hasByLine = false;
 
     /** @hidden */
     selectedValue?: MultiInputOption;
@@ -96,21 +100,20 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         this._disabled = value;
     }
 
-    /** Represents the  value injected from the selected list value*/
     @Input()
-    set selectedListVariable(selectedValue) {
-        this._selectedListVariable = selectedValue;
-        if (this._selectedListVariable) {
-            this.addToArray(this._selectedListVariable);
-        }
+    get status(): Status {
+        return this._state;
     }
-    get selectedListVariable(): any {
-        return this._selectedListVariable;
+    set status(value: Status) {
+        this._state = value;
     }
 
     /** @hidden */
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
+
+    @ViewChild(InputGroupAddonComponent)
+    inputGroupAddOn: InputGroupAddonComponent;
 
     /** @hidden */
     @ViewChild('controlTemplate')
@@ -124,22 +127,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @ViewChild(CdkConnectedOverlay)
     _connectedOverlay: CdkConnectedOverlay;
 
-    /** @hidden Emits event when the menu is opened/closed */
-    @Output()
-    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
     public updateSelectedListVariables = [];
     private _dataSourceSubscription = Subscription.EMPTY;
 
-    /**
-     * Whether the popover is opened.
-     */
-    isOpen = false;
-
     /** @hidden */
     private _direction: Direction = 'ltr';
-
-    private _selectedListVariable: any;
 
     constructor(
         readonly cd: ChangeDetectorRef,
@@ -179,50 +171,62 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
                 .pipe(takeUntil(this._destroyed))
                 .subscribe(() => this._connectedOverlay.overlayRef.setDirection(this._direction));
         }
-
         if (this.mobile) {
             this._setUpMobileMode();
         }
     }
 
     addToArray($select: any): void {
-        this.selected.push($select);
-        this.popoverOpenChangeHandle(this.isOpen);
+        const index = this.selected.findIndex((selectvalue) => selectvalue.label === $select.label);
+        if (index === -1) {
+            this.selected.push($select);
+            this.close();
+        }
+        this._updateModel(this.selected);
+        this._cd.detectChanges();
+    }
+
+    /**
+     * Control Value Accessor
+     */
+    writeValue(value: any[]): void {
+        if (value) {
+            super.writeValue(value);
+        }
+        this._cd.markForCheck();
+    }
+
+    /** @hidden */
+    moreClicked(): void {
+        this.open();
+        this._suggestions = this.selected;
+        this.selectionMode = 'delete';
+        this._cd.markForCheck();
+    }
+    deleteToken(selectedValue): void {
+        console.log('value', selectedValue);
+        if (this.tokenizer.tokenList.length > 0) {
+            this.tokenizer.tokenList.forEach((token) => {
+                if (token.tokenWrapperElement.nativeElement.innerText === selectedValue.label) {
+                    console.log('token value', token.tokenWrapperElement.nativeElement.innerText);
+                    this.selected.splice(this.selected.indexOf(selectedValue), 1);
+                }
+            });
+        }
+        this.close();
+        if (this.selected.length < 10) {
+            this.selectionMode = 'none';
+        }
+        this._cd.markForCheck();
     }
 
     removeToken(token): void {
         this.selected.splice(this.selected.indexOf(token), 1);
+        this._updateModel(this.selected);
     }
 
-    /** @hidden */
-    popoverOpenChangeHandle(isOpen: boolean): void {
-        this.isOpen ? this.open() : this.close();
-    }
-
-    /** Opens the select popover body. */
-    open(): void {
-        this.isOpen = false;
-        this.isOpenChange.emit(this.isOpen);
-        this._cd.markForCheck();
-    }
-    /** Closes the select popover body. */
-    close(): void {
-        this.isOpen = true;
-        this.isOpenChange.emit(this.isOpen);
-        this._cd.markForCheck();
-    }
     /** @hidden */
     removeSelectedTokens(event: KeyboardEvent): void {
-        let allSelected = true;
-        if (KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
-            this.tokenizer.tokenList.forEach((token) => {
-                if (token.selected || token.tokenWrapperElement.nativeElement === document.activeElement) {
-                    this.removeToken(token.elementRef.nativeElement.innerText);
-                } else {
-                    allSelected = false;
-                }
-            });
-        }
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             this.listTemplateDD.listItems.first.focus();
         }
@@ -230,15 +234,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this.tokenizer.focusTokenElement(this.tokenizer.tokenList.length - 1);
         }
     }
-    /** @hidden
-     * Method to emit change event
-     */
-    emitChangeEvent<T>(modelValue: T): void {
-        const event = new MultiInputSelectionChangeEvent(this, modelValue);
-
-        this.selectionChange.emit(event);
-    }
-
     /** @hidden
      * Define is selected item selected
      */
@@ -318,8 +313,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     private _updateModel(value: any): void {
         // setting value, it will call setValue()
         this.value = value;
-
-        this.emitChangeEvent(value ? value : null);
     }
 
     /** @hidden */
@@ -336,7 +329,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (this.selectedValue && term !== this.selectedValue.label) {
             this.selectedValue = this._getSelectedOptionItem(term);
         }
-
+        this.selected = [];
         this.inputText = term;
         this.showList(false);
     }

@@ -26,7 +26,8 @@ import {
     PlatformStepInputModule,
     PlatformInputGroupModule,
     PlatformMultiInputModule,
-    PlatformFileUploaderModule
+    PlatformFileUploaderModule,
+    PlatformAutoCompleteModule
 } from './components/form/public_api';
 import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
 import { PlatformComboboxModule } from './components/form/combobox';
@@ -74,7 +75,8 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
         PlatformMultiInputModule,
         PlatformMultiInputMobileModule,
         PlatformFeedInputModule,
-        PlatformFileUploaderModule
+        PlatformFileUploaderModule,
+        PlatformAutoCompleteModule
     ]
 })
 export class FundamentalNgxPlatformModule {}
