@@ -1,10 +1,12 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     HostBinding,
     Input,
+    OnChanges,
     OnInit,
     Output
 } from '@angular/core';
@@ -29,10 +31,10 @@ const NODE_STATUS_CLASS_MAP = {
         class: 'fdp-approval-flow-node'
     }
 })
-export class ApprovalFlowNodeComponent implements OnInit {
+export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @Input() node: ApprovalGraphNode;
 
-    @Input() debug = false;
+    @Input() parent: ApprovalNode;
 
     @Input() renderArrow = false;
 
@@ -53,28 +55,40 @@ export class ApprovalFlowNodeComponent implements OnInit {
     renderLineAfter = true;
 
     @HostBinding('class.approved')
-    _isApproved = false;
+    get _isApproved(): boolean {
+        return this.node && isNodeApproved(this.node);
+    }
 
     @HostBinding('class.parent-approved')
-    _isParentApproved = false;
+    get _isParentApproved(): boolean {
+        return this.parent && isNodeApproved(this.parent);
+    }
 
-    _status: ObjectStatus;
+    _objectStatus: ObjectStatus;
 
     @Output() onNodeClick = new EventEmitter<void>();
 
-    constructor(private elRef: ElementRef) {}
+    constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {}
 
     get nativeElement(): HTMLElement {
         return this.elRef.nativeElement;
     }
 
     ngOnInit(): void {
-        this._status = getNodeStatusClass(this.node.status);
-        const hasParent = Boolean(this.node.parent);
-        if (hasParent) {
-            this._isParentApproved = this.node.parent.status === 'approved';
+        this.checkNodeStatus();
+    }
+
+    ngOnChanges(): void {
+        this.checkNodeStatus();
+    }
+
+    checkNodeStatus(): void {
+        if (!this.node) {
+            return;
         }
-        this._isApproved = this.node.status === 'approved';
+
+        this._objectStatus = getNodeStatusClass(this.node.status);
+        this.cd.detectChanges();
     }
 
     focus(): void {
@@ -85,6 +99,10 @@ export class ApprovalFlowNodeComponent implements OnInit {
         this.onNodeClick.emit();
     }
 
+}
+
+function isNodeApproved(node: ApprovalNode): boolean {
+    return node.status === 'approved'
 }
 
 function getNodeStatusClass(status: ApprovalStatus): ObjectStatus {

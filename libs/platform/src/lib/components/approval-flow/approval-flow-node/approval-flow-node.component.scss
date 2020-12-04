@@ -29,7 +29,7 @@
 
     &.line-before:before, &.line-after:after {
         content: '';
-        width: 1.8rem;
+        width: 1.9rem;
         height: 0;
         display: block;
         position: absolute;
@@ -44,11 +44,11 @@
     }
 
     &.line-after:after {
-        right: -2rem;
+        right: -1.9rem;
     }
 
     &.approved {
-        &.line-before:before, &.line-after:after {
+        &.line-after:after {
             border-top-style: solid;
             border-top-width: 1px;
         }
@@ -58,6 +58,7 @@
         &.line-before:before {
             border-top-style: solid;
             border-top-width: 1px;
+            left: -2.2rem;
         }
     }
 }

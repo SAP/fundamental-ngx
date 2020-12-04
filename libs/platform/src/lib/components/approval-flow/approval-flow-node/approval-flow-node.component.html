@@ -1,10 +1,7 @@
-<ng-container *ngIf="node && !blank">
+<ng-container *ngIf="!blank">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
     <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
     <div *ngIf="renderCarouselEndMarker" class="approval-flow-node__carousel-end-marker"></div>
-    <span *ngIf="debug" style="position: absolute; font-size: 12px; right: 0; top: 0; ">{{ node.id }} </span>
-    <span *ngIf="node['parent'] && debug"
-          style="position: absolute; font-size: 12px; left: 0; top: 0; ">Parent - {{ node['parent']?.id }} </span>
     <ng-container *ngIf="node.approvers.length === 1">
         <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
         <span class="approval-flow-node__name" (click)="openDialog()">{{ node.approvers[0].name }}</span>
@@ -18,8 +15,7 @@
         <div
             class="approval-flow-node__description">{{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
         </div>
-        <fdp-object-status [status]="_status"
+        <fdp-object-status [status]="_objectStatus"
                            inverted="true">{{ node.status }}</fdp-object-status>
     </div>
-    <span *ngIf="node.targets.length && debug" style="position: absolute; font-size: 12px; right: 0; bottom: 0; color: orange">Targets - {{ node.targets }}</span>
 </ng-container>

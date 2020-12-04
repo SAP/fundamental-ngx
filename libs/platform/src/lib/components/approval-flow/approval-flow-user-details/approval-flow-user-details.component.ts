@@ -1,13 +1,4 @@
-import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Inject,
-    Input,
-    OnInit,
-    Output,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 
 import { Observable, of } from 'rxjs';
@@ -20,7 +11,6 @@ import { DataProvider, ListDataSource } from '../../../domain';
     templateUrl: './approval-flow-user-details.component.html',
     styleUrls: ['./approval-flow-user-details.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
-    // encapsulation: ViewEncapsulation.None
 })
 export class ApprovalFlowUserDetailsComponent implements OnInit {
     @Input() node: ApprovalNode;
@@ -38,7 +28,6 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log('ApprovalFlowUserDetailsComponent init', this);
         this._isListMode = this.dialogRef.data.node?.approvers.length > 1;
         if (this._isListMode) {
             this.setListItems(this.dialogRef.data.node?.approvers);
@@ -48,10 +37,6 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     }
 
     setListItems(users: User[]): void {
-        console.log('setListItems to', users);
-        // if (this._dataSource) {
-        //     this._dataSource = null;
-        // }
         this._dataSource = new ListDataSource<User>(new ListDataProvider(users));
         this._cdr.detectChanges();
     }
@@ -67,12 +52,9 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     setUserToShowDetails(user: User): void {
         this._userToShowDetails = user;
         this._userToShowDetailsData$ = this.dialogRef.data?.approvalFlowDataSource.fetchUser(user.id);
-        // this._cdr.detectChanges();
     }
 
-    itemSelected(event: any): void {
-        console.log('(iteSelected)', event);
-    }
+    itemSelected(event: any): void {}
 
     sendReminder(): void {
         const reminderTargets = this._isListMode ? this.getUsersFromSelectedItems() : this.dialogRef.data.node.approvers;
@@ -93,7 +75,6 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
         }
 
         const result = this.dialogRef.data.node?.approvers.filter(user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1);
-        console.log('search', searchString, 'result', result);
         this.setListItems(result);
     }
 }

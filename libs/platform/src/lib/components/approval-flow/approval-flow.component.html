@@ -5,8 +5,8 @@
 <div class="approval-flow-watchers">
     <p class="approval-flow-watchers__title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
     <fd-avatar
-        tabindex="0"
         *ngFor="let watcher of _approvalProcess?.watchers"
+        tabindex="0"
         size="xs"
         [image]="watcher.imgUrl"
         [label]="watcher.name"
@@ -17,11 +17,16 @@
 
 <div class="approval-flow-container">
     <div class="approval-flow-carousel-controls" *ngIf="_isCarousel">
-        <button class="approval-flow-controls-prev-slide" (click)="previousSlide()" *ngIf="_carouselStep > 0">
+        <button class="approval-flow-controls-prev-slide"
+                *ngIf="_carouselStep > 0"
+                (click)="previousSlide()">
             <fd-icon [glyph]="'navigation-left-arrow'"></fd-icon>
-            {{ _carouselStep }}</button>
-        <button class="approval-flow-controls-next-slide" (click)="nextSlide()"
-                *ngIf="(_maxCarouselStep - _carouselStep) > 0">{{ _maxCarouselStep - _carouselStep }}
+            {{ _carouselStep }}
+        </button>
+        <button class="approval-flow-controls-next-slide"
+                *ngIf="(_maxCarouselStep - _carouselStep) > 0"
+                (click)="nextSlide()">
+            {{ _maxCarouselStep - _carouselStep }}
             <fd-icon [glyph]="'navigation-right-arrow'"></fd-icon>
         </button>
     </div>
@@ -36,12 +41,12 @@
                 <ng-container
                     *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last">
                     <fdp-approval-flow-node
-                        [attr.tabindex]="node.blank ? -1 : 0"
-                        [debug]="false"
                         [node]="node"
                         [blank]="node.blank"
+                        [attr.tabindex]="node.blank ? -1 : 0"
+                        [parent]="_nodeParentsMap[node.id]"
                         [renderArrow]="columnIndex > 0"
-                        [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!node.parent && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
+                        [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                         [renderCarouselStartMarker]="(_isCarousel && firstColumn && firstNode)"
                         [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"

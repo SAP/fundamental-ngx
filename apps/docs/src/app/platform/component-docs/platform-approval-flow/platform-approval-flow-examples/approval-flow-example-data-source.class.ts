@@ -118,11 +118,7 @@ const users: User[] = [
     }
 ];
 
-function getRandomUser(): User {
-    return users[Math.floor(Math.random() * users.length)];
-}
-
-const simplestGraph: ApprovalProcess = {
+const simpleGraph: ApprovalProcess = {
     watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
     nodes: [
         {
@@ -168,33 +164,7 @@ const simplestGraph: ApprovalProcess = {
     ]
 };
 
-const twoNodesGraph: ApprovalProcess = {
-    watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
-    nodes: [
-        {
-            id: 'ID1',
-            name: 'node name',
-            description: 'node description',
-            approvers: [getRandomUser()],
-            status: 'approved',
-            targets: ['ID2'],
-            dueDate: new Date(),
-            createDate: new Date()
-        },
-        {
-            id: 'ID2',
-            name: 'node name',
-            description: 'node description',
-            approvers: [getRandomUser()],
-            status: 'in progress',
-            targets: [],
-            dueDate: new Date(),
-            createDate: new Date()
-        }
-    ]
-};
-
-const mediumComplexityGraph: ApprovalProcess = {
+const mediumGraph: ApprovalProcess = {
     watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
     nodes: [
         {
@@ -346,20 +316,27 @@ const complexGraph: ApprovalProcess = {
     ]
 };
 
+const graphs = {
+    simple: simpleGraph,
+    medium: mediumGraph,
+    complex: complexGraph
+};
+
+function getRandomUser(): User {
+    return users[Math.floor(Math.random() * users.length)];
+}
+
 export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
+    selectedGraph: 'simple'|'medium'|'complex' = 'complex';
+
     /**
      * Fetch of approval process data.
      */
     fetch(): Observable<ApprovalProcess> {
-        // return of(twoNodesGraph);
-        // return of(simplestGraph);
-        // return of(mediumComplexityGraph);
-        return of(complexGraph);
+        return of(graphs[this.selectedGraph]);
     }
 
     fetchUser(id: string): Observable<any> {
-        console.log('fetching user data');
-        console.log('passed userId', id);
         const user = users.find(u => u.id === id);
 
         return of({
