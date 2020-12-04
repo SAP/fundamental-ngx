@@ -155,7 +155,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(1);
     });
 
-    it('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
+    fit('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
         whenStable(fixture);
         viewport.set(1023, 900);
 
