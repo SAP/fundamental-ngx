@@ -42,3 +42,12 @@
         }
     }
 }
+
+.fd-card__numeric-content.fd-numeric-content {
+    width: auto;
+    flex-shrink: 0;
+}
+
+.fd-numeric-content__scale-container {
+    flex: auto;
+}
