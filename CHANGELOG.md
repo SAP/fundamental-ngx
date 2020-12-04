@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.33...v0.25.0-rc.34) (2020-12-04)
+
+
+### Bug Fixes
+
+* (Core) adding and setting new options dynamically in 'Select'  ([#4006](https://github.com/SAP/fundamental-ngx/issues/4006)) ([b4e8485](https://github.com/SAP/fundamental-ngx/commit/b4e84852de7b619e1c0371eef6956caa5c652794))
+
 ## [0.25.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.32...v0.25.0-rc.33) (2020-12-04)
 
 
