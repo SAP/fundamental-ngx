@@ -2,7 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
+    Component, ContentChild,
     ContentChildren,
     ElementRef,
     HostListener,
@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { Subscription } from 'rxjs';
+import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -69,6 +70,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     @ContentChildren(WizardStepComponent, { descendants: true })
     steps: QueryList<WizardStepComponent>;
+
+    /** @hidden */
+    @ContentChild(WizardProgressBarDirective)
+    progressBar: WizardProgressBarDirective;
 
     /** @hidden */
     @ViewChild('wrapperContainer')
@@ -226,7 +231,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _wizardShrinking(): void {
         this.steps.forEach((step) => {
-            if (step.status === ACTIVE_STEP_STATUS || step.status === CURRENT_STEP_STATUS) {
+            if (!step.isSummary && (step.status === ACTIVE_STEP_STATUS || step.status === CURRENT_STEP_STATUS)) {
                 const currentStep = step;
                 if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
                     this._hideSomeStep(currentStep);
@@ -259,7 +264,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                     step.content.tallContent = true;
                 }
                 step.visited = true;
-                if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
+                if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) || step.isSummary) {
                     this.contentTemplates = [step.content.contentTemplate];
                 } else if (this.appendToWizard) {
                     this.contentTemplates.push(step.content.contentTemplate);
@@ -352,10 +357,27 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
         this._setContentTemplates();
-        this._shrinkWhileAnyStepIsTooNarrow();
+        if (this._isCurrentStepSummary()) {
+            this.progressBar.setCssDisplay(false);
+        } else {
+            this.progressBar.setCssDisplay(true);
+            this._shrinkWhileAnyStepIsTooNarrow();
+        }
         this._cdRef.detectChanges();
         this._setContainerAndTallContentHeight();
         this._scrollToCurrentStep();
+    }
+
+    /** @hidden */
+    private _isCurrentStepSummary(): boolean {
+        let retVal = false;
+        this.steps.forEach(step => {
+            if (step.status === CURRENT_STEP_STATUS && step.isSummary) {
+                retVal = true;
+            }
+        });
+
+        return retVal;
     }
 
     /** @hidden */

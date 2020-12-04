@@ -6,7 +6,15 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { WizardDocsComponent } from './wizard-docs.component';
 import { WizardExampleComponent } from './examples/wizard-example.component';
 import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
-import { BarModule, FormGroupModule, FormModule, RadioModule, TitleModule, WizardModule } from '@fundamental-ngx/core';
+import {
+    BarModule,
+    FormGroupModule,
+    FormModule,
+    LayoutGridModule,
+    RadioModule,
+    TitleModule,
+    WizardModule
+} from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { WizardCustomizableExampleComponent } from './examples/wizard-customizable-example.component';
 import { WizardMobileExampleComponent } from './examples/wizard-mobile-example.component';
@@ -33,7 +41,8 @@ const routes: Routes = [
         RadioModule,
         FormGroupModule,
         FormModule,
-        TitleModule
+        TitleModule,
+        LayoutGridModule
     ],
     exports: [RouterModule],
     declarations: [

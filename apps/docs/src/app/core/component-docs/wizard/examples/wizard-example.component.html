@@ -137,8 +137,78 @@
                         varius quam. Aliquam erat volutpat
                     </p>
                     <fd-wizard-next-step>
-                        <button fd-button [compact]="true" fdType="emphasized">Submit</button>
+                        <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(5)">Submit</button>
                     </fd-wizard-next-step>
+                </fd-wizard-content>
+            </li>
+            <li fd-wizard-step [status]="summaryStatus" [isSummary]="true">
+                <fd-wizard-content>
+                    <h4 class="fd-title fd-title--h4">1. Product Type</h4>
+                    <fd-layout-grid style="margin-bottom: 2rem;">
+                        <div fdLayoutGridCol="12" colMd="2" colLg="2" colXl="2">
+                            <label fd-form-label style="float: right;">Type:</label>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <label fd-form-label style="color: black;">Mobile</label>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <a [routerLink]="['./']" fd-link (click)="goToStep(1)">Edit</a>
+                        </div>
+                    </fd-layout-grid>
+                    <h4 class="fd-title fd-title--h4">2. Customer Information</h4>
+                    <fd-layout-grid>
+                        <div fdLayoutGridCol="12" colMd="2" colLg="2" colXl="2">
+                            <label fd-form-label style="float: right;">Full Name:</label><br/>
+                            <label fd-form-label style="float: right;">Address:</label><br/>
+                            <label fd-form-label style="float: right;">Zip Code:</label><br/>
+                            <label fd-form-label style="float: right;">Phone Number:</label>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <label fd-form-label style="color: black;">John Doe</label><br/>
+                            <label fd-form-label style="color: black;">Planet Earth</label><br/>
+                            <label fd-form-label style="color: black;">12345</label><br/>
+                            <label fd-form-label style="color: black;">555-5555</label>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <a [routerLink]="['./']" fd-link (click)="goToStep(2)">Edit</a>
+                        </div>
+                    </fd-layout-grid>
+                    <h4 class="fd-title fd-title--h4">3. Additional Information</h4>
+                    <fd-layout-grid>
+                        <div fdLayoutGridCol="12" colMd="2" colLg="2" colXl="2">
+                            <label fd-form-label style="float: right;">Name:</label><br/>
+                            <label fd-form-label style="float: right;">Weight:</label><br/>
+                            <label fd-form-label style="float: right;">Delicious:</label><br/>
+                            <label fd-form-label style="float: right;">Description:</label>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <label fd-form-label style="color: black;">Pineapple</label><br/>
+                            <label fd-form-label style="color: black;">1kg</label><br/>
+                            <label fd-form-label style="color: black;">Yes</label><br/>
+                            <label fd-form-label style="color: black;">n/a</label>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <a [routerLink]="['./']" fd-link (click)="goToStep(3)">Edit</a>
+                        </div>
+                    </fd-layout-grid>
+                    <h4 class="fd-title fd-title--h4">4. Payment Information</h4>
+                    <fd-layout-grid>
+                        <div fdLayoutGridCol="12" colMd="2" colLg="2" colXl="2">
+                            <label fd-form-label style="float: right;">Payment Type:</label><br/>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <label fd-form-label style="color: black;"></label><br/>
+                        </div>
+                        <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
+                            <a [routerLink]="['./']" fd-link (click)="goToStep(4)">Edit</a>
+                        </div>
+                    </fd-layout-grid>
                 </fd-wizard-content>
             </li>
         </ul>

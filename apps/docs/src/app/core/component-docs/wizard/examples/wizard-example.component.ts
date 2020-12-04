@@ -14,6 +14,7 @@ export class WizardExampleComponent {
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
     step4status: WizardStepStatus = 'upcoming';
+    summaryStatus: WizardStepStatus = 'upcoming';
 
     name = '';
     addressLine1 = '';
@@ -25,6 +26,7 @@ export class WizardExampleComponent {
                 this.step2status = 'current';
                 this.step3status = 'upcoming';
                 this.step4status = 'upcoming';
+                this.summaryStatus = 'upcoming';
                 break;
             }
             case 3: {
@@ -32,6 +34,7 @@ export class WizardExampleComponent {
                 this.step2status = 'completed';
                 this.step3status = 'current';
                 this.step4status = 'upcoming';
+                this.summaryStatus = 'upcoming';
                 break;
             }
             case 4: {
@@ -39,6 +42,15 @@ export class WizardExampleComponent {
                 this.step2status = 'completed';
                 this.step3status = 'completed';
                 this.step4status = 'current';
+                this.summaryStatus = 'upcoming';
+                break;
+            }
+            case 5: {
+                this.step1status = 'completed';
+                this.step2status = 'completed';
+                this.step3status = 'completed';
+                this.step4status = 'completed';
+                this.summaryStatus = 'current';
                 break;
             }
         }

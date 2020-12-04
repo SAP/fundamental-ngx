@@ -70,6 +70,12 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     optionalText: string;
 
     /**
+     * Whether or not this step is the summary page.
+     */
+    @Input()
+    isSummary = false;
+
+    /**
      * Event emitted when the wizard step's status changes.
      */
     @Output()
@@ -132,7 +138,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.stepIndicator) {
+        if (this.isSummary) {
+            this._elRef.nativeElement.style.display = 'none';
+        } else if (this.stepIndicator) {
             this._subscriptions.add(
                 this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
                     this.stepIndicatorItemClicked.emit(step);
