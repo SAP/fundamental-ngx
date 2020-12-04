@@ -284,10 +284,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this.steps.forEach((step, index) => {
                 if (step.status === CURRENT_STEP_STATUS) {
                     const child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
+                    const wizardNavigationHeight = this._elRef.nativeElement.querySelector(
+                        '.' + WIZARD_NAVIGATION_CLASS
+                    ).clientHeight;
                     this.wrapperContainer.nativeElement.scrollTo({
-                        top:
-                            child.offsetTop -
-                            this._elRef.nativeElement.querySelector('.' + WIZARD_NAVIGATION_CLASS).clientHeight,
+                        top: child.offsetTop - wizardNavigationHeight,
                         behavior: 'smooth'
                     });
                 }
@@ -437,5 +438,4 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
         this._shrinkWhileAnyStepIsTooNarrow();
     }
-
 }
