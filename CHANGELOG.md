@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.29...v0.25.0-rc.30) (2020-12-04)
+
+
+### Bug Fixes
+
+* (Core) added title to Product Switch button ([#3989](https://github.com/SAP/fundamental-ngx/issues/3989)) ([fd6ba52](https://github.com/SAP/fundamental-ngx/commit/fd6ba52f5838c330efd5baa8d14697dd85a53e95))
+
 ## [0.25.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.28...v0.25.0-rc.29) (2020-12-04)
 
 ## [0.25.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.27...v0.25.0-rc.28) (2020-12-04)
