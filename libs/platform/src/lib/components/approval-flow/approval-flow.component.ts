@@ -45,16 +45,34 @@ export class ApprovalFlowComponent implements OnInit {
     /** A reference to the user details template */
     @Input() userDetailsTemplate: TemplateRef<any>;
 
+    /** @hidden */
     _approvalProcess: ApprovalProcess;
+
+    /** @hidden */
     _graph: ApprovalFlowGraph;
+
+    /** @hidden */
     _isCarousel = false;
+
+    /** @hidden */
     _carouselScrollX = 0;
+
+    /** @hidden */
     _carouselStep = 0;
+
+    /** @hidden */
     _maxCarouselStep = 0;
+
+    /** @hidden */
     _nodesMap: { [key: string]: ApprovalGraphNode } = {};
+
+    /** @hidden */
     _nodeParentsMap: { [key: string]: ApprovalGraphNode } = {};
 
+    /** @hidden */
     @ViewChild('graphEl') graphEl: ElementRef;
+
+    /** @hidden */
     @ViewChildren(ApprovalFlowNodeComponent) nodeComponents: QueryList<ApprovalFlowNodeComponent>;
 
     constructor(
@@ -72,68 +90,6 @@ export class ApprovalFlowComponent implements OnInit {
             this._cdr.detectChanges();
             this.checkCarouselStatus();
         });
-    }
-
-    buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
-        const graph: ApprovalFlowGraph = [];
-        const rootNode = findRootNode(nodes);
-        if (!rootNode) {
-            return graph;
-        }
-
-        graph[0] = { nodes: [rootNode] };
-        let index = 1;
-        let foundLastStep = false;
-        do {
-            const dependentNodes: ApprovalNode[] = [];
-            graph[index - 1].nodes.forEach(node => {
-                const _dependentNodes = findDependentNodes([node], nodes);
-                _dependentNodes.forEach(dependentNode => this._nodeParentsMap[dependentNode.id] = node);
-                dependentNodes.push(..._dependentNodes);
-            });
-            foundLastStep = dependentNodes.length === 0;
-            if (foundLastStep) {
-                break;
-            }
-
-            const nodesWithoutTarget = dependentNodes.filter(node => !node.targets.length);
-            const nodesWithTarget = dependentNodes.filter(node => node.targets.length);
-
-            const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length && nodesWithoutTarget.length !== dependentNodes.length;
-            if (isMixed && graph[index - 1].nodes.length > 1) {
-                const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
-                nodesWithBlankSpaces.forEach((node, i) => {
-                    if (nodesWithTarget.includes(node)) {
-                        nodesWithBlankSpaces[i] = {
-                            id: '',
-                            name: '',
-                            targets: [],
-                            approvers: [],
-                            status: 'not started',
-                            blank: true
-                        };
-                    }
-                });
-                graph[index] = { nodes: nodesWithBlankSpaces, isPartial: true };
-                graph[index + 1] = { nodes: nodesWithTarget };
-                index += 2;
-            } else {
-                graph[index] = { nodes: dependentNodes };
-                index++;
-            }
-        } while (!foundLastStep);
-
-        graph.forEach(column => {
-            column.allNodesApproved = column.nodes.every(node => node.status === 'approved');
-        });
-
-        return graph;
-    }
-
-    checkCarouselStatus(): void {
-        this._isCarousel = this.graphEl.nativeElement.scrollWidth > this.graphEl.nativeElement.clientWidth;
-        this._maxCarouselStep = Math.ceil(this.scrollDiff / this.carouselStepSize);
-        this._cdr.detectChanges();
     }
 
     onNodeClick(node: ApprovalNode): void {
@@ -243,7 +199,63 @@ export class ApprovalFlowComponent implements OnInit {
         }
     }
 
-    focusNode(node: ApprovalGraphNode, options: { skipSlideChange: boolean; step: number }): void {
+    private buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
+        const graph: ApprovalFlowGraph = [];
+        const rootNode = findRootNode(nodes);
+        if (!rootNode) {
+            return graph;
+        }
+
+        graph[0] = { nodes: [rootNode] };
+        let index = 1;
+        let foundLastStep = false;
+        do {
+            const dependentNodes: ApprovalNode[] = [];
+            graph[index - 1].nodes.forEach(node => {
+                const _dependentNodes = findDependentNodes([node], nodes);
+                _dependentNodes.forEach(dependentNode => this._nodeParentsMap[dependentNode.id] = node);
+                dependentNodes.push(..._dependentNodes);
+            });
+            foundLastStep = dependentNodes.length === 0;
+            if (foundLastStep) {
+                break;
+            }
+
+            const nodesWithoutTarget = dependentNodes.filter(node => !node.targets.length);
+            const nodesWithTarget = dependentNodes.filter(node => node.targets.length);
+
+            const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length && nodesWithoutTarget.length !== dependentNodes.length;
+            if (isMixed && graph[index - 1].nodes.length > 1) {
+                const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
+                nodesWithBlankSpaces.forEach((node, i) => {
+                    if (nodesWithTarget.includes(node)) {
+                        nodesWithBlankSpaces[i] = {
+                            id: '',
+                            name: '',
+                            targets: [],
+                            approvers: [],
+                            status: 'not started',
+                            blank: true
+                        };
+                    }
+                });
+                graph[index] = { nodes: nodesWithBlankSpaces, isPartial: true };
+                graph[index + 1] = { nodes: nodesWithTarget };
+                index += 2;
+            } else {
+                graph[index] = { nodes: dependentNodes };
+                index++;
+            }
+        } while (!foundLastStep);
+
+        graph.forEach(column => {
+            column.allNodesApproved = column.nodes.every(node => node.status === 'approved');
+        });
+
+        return graph;
+    }
+
+    private focusNode(node: ApprovalGraphNode, options: { skipSlideChange: boolean; step: number }): void {
         const nodeToFocus = this.nodeComponents.find(comp => comp.node === node);
         if (!nodeToFocus) {
             return;
@@ -269,7 +281,13 @@ export class ApprovalFlowComponent implements OnInit {
         }
     }
 
-    getNextHorizontalNode = (_ni, _ci, direction: 'left' | 'right', stepSize = 1) => {
+    private checkCarouselStatus(): void {
+        this._isCarousel = this.graphEl.nativeElement.scrollWidth > this.graphEl.nativeElement.clientWidth;
+        this._maxCarouselStep = Math.ceil(this.scrollDiff / this.carouselStepSize);
+        this._cdr.detectChanges();
+    }
+
+    private getNextHorizontalNode = (_ni, _ci, direction: 'left' | 'right', stepSize = 1) => {
         const indexDiff = (direction === 'right' ? 1 : -1);
         const _column = this._graph[_ci + indexDiff];
         if (!_column) {
@@ -284,7 +302,7 @@ export class ApprovalFlowComponent implements OnInit {
         return { nextNode: _nextNode, stepSize: stepSize };
     };
 
-    getNextVerticalNode = (_ni, _ci, direction: 'up' | 'down', stepSize = 1) => {
+    private getNextVerticalNode = (_ni, _ci, direction: 'up' | 'down', stepSize = 1) => {
         const indexDiff = (direction === 'down' ? 1 : -1);
         const _column = this._graph[_ci];
         const _nextColumn = this._graph[_ci + 1];
@@ -296,11 +314,11 @@ export class ApprovalFlowComponent implements OnInit {
         return { nextNode: _nextNode, stepSize: stepSize };
     };
 
-    get carouselStepSize(): number {
+    private get carouselStepSize(): number {
         return this.graphEl.nativeElement.scrollWidth / this.graphEl.nativeElement.children.length;
     }
 
-    get scrollDiff(): number {
+    private get scrollDiff(): number {
         return this.graphEl.nativeElement.scrollWidth - this.graphEl.nativeElement.clientWidth;
     }
 }

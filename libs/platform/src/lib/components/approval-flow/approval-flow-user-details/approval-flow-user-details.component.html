@@ -4,7 +4,7 @@
             <p>
                 <fd-icon
                     *ngIf="_userToShowDetails && _isListMode"
-                    [glyph]="'navigation-left-arrow'"
+                    glyph="navigation-left-arrow"
                     (click)="backToListFromDetails()"
                 ></fd-icon>
                 {{ _isListMode && !_userToShowDetails ? dialogRef.data.node.description + ' (' + dialogRef.data.node.approvers.length + ')' : 'Detail' }}
@@ -17,9 +17,6 @@
                 (inputChange)="onSearchStringChange($event.text)"
             ></fdp-search-field>
         </ng-template>
-<!--        <div fd-dialog-title>-->
-<!--            -->
-<!--        </div>-->
     </fd-dialog-header>
 
     <fd-dialog-body [class.no-top-padding]="!_userToShowDetails && _isListMode">

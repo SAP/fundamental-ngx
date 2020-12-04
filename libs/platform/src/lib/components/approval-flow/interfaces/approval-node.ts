@@ -7,7 +7,7 @@ export interface ApprovalNode {
     description?: string;
     approvers: User[];
     status: ApprovalStatus;
-    targets: string[];     // IDs of dependent ApprovalNodes
+    targets: string[];
     dueDate?: Date;
     createDate?: Date;
 }
