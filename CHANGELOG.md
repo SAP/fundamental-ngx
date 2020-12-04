@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.30...v0.25.0-rc.31) (2020-12-04)
+
+
+### Bug Fixes
+
+* (Core) added notification counter to action in Shellbar`s collapsible menu ([#3990](https://github.com/SAP/fundamental-ngx/issues/3990)) ([ba2f048](https://github.com/SAP/fundamental-ngx/commit/ba2f04825d4bfcf6829606eac9b8d92ff931e03d))
+
 ## [0.25.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.29...v0.25.0-rc.30) (2020-12-04)
 
 
