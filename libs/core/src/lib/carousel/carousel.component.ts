@@ -249,7 +249,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
         // Keep copy of original slide array, for indicator purpose.
         // In case of looped carousel, original slides array changes.
-        this._slidesCopy = this.slides.toArray().slice();
+        this._slidesCopy = this.slides.toArray();
 
         this._subscribeServiceEvents();
 
@@ -430,7 +430,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Handle when slide is added or removed */
     private _onSlideUpdates(): void {
-        this._slidesCopy = this.slides.toArray().slice();
+        this._slidesCopy = this.slides.toArray();
         this.currentActiveSlidesStartIndex = 0;
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
         this._carouselService.active = null;
