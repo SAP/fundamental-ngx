@@ -8,7 +8,7 @@ import {
     OnChanges,
     Output,
     SimpleChanges,
-    ViewChild,
+    ViewChild
 } from '@angular/core';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 import { KeyUtil } from '../../utils/functions';
@@ -16,14 +16,16 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
+import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../wizard.component';
+
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-wizard-step]',
     host: {
         class: 'fd-wizard__step',
-        '[class.fd-wizard__step--completed]': 'status === "completed"',
+        '[class.fd-wizard__step--completed]': 'status === "completed" || completed',
         '[class.fd-wizard__step--current]': 'status === "current"',
-        '[class.fd-wizard__step--upcoming]': 'status === "upcoming"',
+        '[class.fd-wizard__step--upcoming]': 'status === "upcoming" && !completed',
         '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
@@ -87,11 +89,23 @@ export class WizardStepComponent implements OnChanges {
     visited = false;
 
     /** @hidden */
+    completed = false;
+
+    /** @hidden */
+    _stepId: number;
+
+    /** @hidden */
     constructor(private _elRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes && changes.status) {
+            if (
+                changes.status.previousValue === CURRENT_STEP_STATUS &&
+                changes.status.currentValue === COMPLETED_STEP_STATUS
+            ) {
+                this.completed = true;
+            }
             this.statusChange.emit(this.status);
         }
     }

@@ -1,83 +1,60 @@
-import { ComponentRef, Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
+import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
-import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { DIALOG_REF, DialogRef } from '../dialog-utils/dialog-ref.class';
-import { DefaultDialogObject } from '../default-dialog/default-dialog-object';
+import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
+import { DialogBaseService } from '../base/dialog-base.service';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
-/** Service used to dynamically generate a dialog. */
+export type DialogContentType = TemplateRef<any> | Type<any> | DialogDefaultContent;
+
+/** Service used to create a dialog. */
 @Injectable()
-export class DialogService {
-    /** @hidden Collection of existing dialog references */
-    private _dialogs: ComponentRef<DialogContainerComponent>[] = [];
+export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
+    /** @hidden */
     constructor(
-        @Inject(DynamicComponentService) private _dynamicComponentService: DynamicComponentService,
+        @Inject(DynamicComponentService) dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig
-    ) {}
-
-    /**
-     * Status of the dialog service.
-     * Returns true if there are open dialogs, false otherwise.
-     */
-    public hasOpenDialogs(): boolean {
-        return this._dialogs && this._dialogs.length > 0;
-    }
-
-    /** Dismisses all currently open dialogs. */
-    public dismissAll(): void {
-        this._dialogs.forEach((item) => this._destroyDialogComponent(item));
+    ) {
+        super(dynamicComponentService)
     }
 
     /**
-     * Opens a dialog component with a content of type TemplateRef or a component type.
-     * @param contentType Content of the dialog component.
+     * Opens a dialog component with with provided content.
+     * @param content Content of the dialog component.
      * @param dialogConfig Configuration of the dialog component.
      */
-    public open(contentType: Type<any> | TemplateRef<any> | DefaultDialogObject, dialogConfig?: DialogConfig): DialogRef {
-        const dialogRef: DialogRef = new DialogRef();
+    public open<T = any>(content: DialogContentType, dialogConfig?: DialogConfig<T>): DialogRef<T> {
+        const dialogRef = new DialogRef();
 
         dialogConfig = this._applyDefaultConfig(dialogConfig, this._defaultConfig || new DialogConfig());
         dialogRef.data = dialogConfig.data;
 
-        const dialogInjector = Injector.create({
+        const injector = Injector.create({
             providers: [
                 { provide: DIALOG_CONFIG, useValue: dialogConfig },
                 { provide: DIALOG_REF, useValue: dialogRef }
             ]
         });
 
-        const component: ComponentRef<DialogContainerComponent> = this._dynamicComponentService.createDynamicComponent<
-            DialogContainerComponent
-        >(contentType, DialogContainerComponent, dialogConfig, {
-            injector: dialogInjector
-        });
+        const component = this._dynamicComponentService.createDynamicComponent<DialogContainerComponent>
+        (
+            content,
+            DialogContainerComponent,
+            dialogConfig,
+            { injector: injector }
+        );
 
         this._dialogs.push(component);
 
         const defaultBehaviourOnClose = () => {
-            this._destroyDialogComponent(component);
+            this._destroyDialog(component);
             refSub.unsubscribe();
         };
 
         const refSub = dialogRef.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
 
         return dialogRef;
-    }
-
-    /** @hidden Destroy existing Dialog */
-    private _destroyDialogComponent(dialog: ComponentRef<DialogContainerComponent>): void {
-        const arrayRef = this._dialogs.find((item) => item === dialog);
-        const indexOf = this._dialogs.indexOf(arrayRef);
-        this._dynamicComponentService.destroyComponent(arrayRef);
-        arrayRef.destroy();
-
-        this._dialogs[indexOf] = null;
-        this._dialogs = this._dialogs.filter((item) => item !== null && item !== undefined);
-    }
-
-    /** @hidden Extends dialog config using default values*/
-    private _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
-        return { ...defaultConfig, ...config };
     }
 }

@@ -5,13 +5,6 @@ import { WizardStepStatus } from '@fundamental-ngx/core';
     selector: 'fd-wizard-example',
     templateUrl: './wizard-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    styles: [
-        `
-            .fd-wizard-example .fd-wizard__content {
-                min-height: 300px;
-            }
-        `
-    ],
     host: {
         class: 'fd-wizard-example'
     }
@@ -21,6 +14,9 @@ export class WizardExampleComponent {
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
     step4status: WizardStepStatus = 'upcoming';
+
+    name = '';
+    addressLine1 = '';
 
     goToStep(step: number): void {
         switch (step) {

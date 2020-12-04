@@ -1,24 +1,35 @@
 <div class="fd-calendar__years">
-    <table class="fd-calendar__table" role="grid">
-        <tbody class="fd-calendar__group" role="rowgroup">
-            <tr class="fd-calendar__row" *ngFor="let colYears of calendarYearListGrid; let rowIndex = index">
+    <table
+        class="fd-calendar__table"
+        role="grid"
+    >
+        <tbody
+            class="fd-calendar__group"
+            role="rowgroup"
+        >
+            <tr
+                class="fd-calendar__row"
+                *ngFor="let colYears of calendarYearListGrid; let rowIndex = index"
+            >
                 <td
                     class="fd-calendar__item"
                     role="gridcell"
-                    *ngFor="let year of colYears; let colIndex = index"
+                    *ngFor="let cell of colYears; let colIndex = index"
                     [ngClass]="{
-                        'fd-calendar__item--current': isBetween(year, currentYear),
-                        'is-active': isBetween(year, yearSelected)
+                        'fd-calendar__item--current': cell.current,
+                        'is-active': cell.selected
                     }"
-                    [attr.id]="getId(getIndex(rowIndex, colIndex))"
-                    [attr.tabindex]="year === activeYear ? 0 : -1"
-                    (keydown)="onKeydownYearHandler($event, getIndex(rowIndex, colIndex))"
-                    (click)="selectYear(year, $event)"
+                    [attr.id]="cell.id"
+                    [attr.tabindex]="cell.tabIndex"
+                    (keydown)="onKeydownYearHandler($event, cell.index)"
+                    (click)="selectYear(cell, $event)"
                 >
-                    <span role="button" class="fd-calendar__text">
-                        {{ aggregatedYearsViewGrid.yearMapping(year.startYear) }}
-                        -
-                        {{ aggregatedYearsViewGrid.yearMapping(year.endYear) }}
+                    <span
+                        role="button"
+                        class="fd-calendar__text"
+                        [attr.aria-label]="cell.ariaLabel"
+                    >
+                        {{ cell.label }}
                     </span>
                 </td>
             </tr>

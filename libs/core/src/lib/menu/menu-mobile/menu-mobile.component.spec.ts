@@ -7,7 +7,7 @@ import { MenuInteractiveDirective } from '../directives/menu-interactive.directi
 import { MenuItemComponent, SubmenuComponent } from '../menu-item/menu-item.component';
 import { PopoverModule } from '../../popover/popover.module';
 import { CommonModule } from '@angular/common';
-import { DIALOG_CONFIG, DialogConfig } from '../../dialog/dialog-utils/dialog-config.class';
+import { DIALOG_CONFIG, DialogConfig } from '../../dialog/utils/dialog-config.class';
 import { MenuMobileModule } from './menu-mobile.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuTitleDirective } from '../directives/menu-title.directive';

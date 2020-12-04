@@ -24,7 +24,7 @@
                     [attr.aria-expanded]="!collapsed"
                     aria-haspopup="true"
                     [attr.aria-controls]="id"
-                    *ngIf="collapsible && !_pinned"
+                    *ngIf="collapsible"
                     (click)="toggleCollapse()"
                 >
                     <i *ngIf="!collapsed" class="sap-icon--slim-arrow-up"></i>
@@ -36,7 +36,7 @@
                     [attr.title]="_pinUnpinAriaLabel"
                     [attr.aria-selected]="_pinned"
                     (click)="_onPinned()"
-                    *ngIf="pinnable"
+                    *ngIf="pinnable && !collapsed"
                 >
                     <i class="sap-icon--pushpin-off"></i>
                 </button>

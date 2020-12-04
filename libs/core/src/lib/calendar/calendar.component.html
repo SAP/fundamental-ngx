@@ -43,6 +43,7 @@
         <fd-calendar-month-view
             *ngSwitchCase="'month'"
             [monthSelected]="currentlyDisplayed?.month"
+            [year]="currentlyDisplayed.year"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
             (monthClicked)="handleMonthViewChange($event)"

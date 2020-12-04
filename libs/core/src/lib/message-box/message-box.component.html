@@ -1,0 +1,25 @@
+<div
+    #dialogWindow
+    role="dialog"
+    tabindex="-1"
+    aria-modal="true"
+    [class]="_messageBoxConfig.dialogPanelClass"
+    [ngClass]="{
+        'fd-message-box__content': true,
+        'fd-message-box__content--s': dialogPaddingSize === 'sm',
+        'fd-message-box__content--m': dialogPaddingSize === 'md',
+        'fd-message-box__content--l': dialogPaddingSize === 'lg',
+        'fd-message-box__content--xl': dialogPaddingSize === 'xl',
+        'fd-message-box__content--mobile': _messageBoxConfig.mobile,
+        'fd-message-box__content--no-mobile-stretch': _messageBoxConfig.mobileOuterSpacing
+    }"
+    [@dialog-fade]
+    [attr.id]="_messageBoxConfig.id"
+    [attr.aria-label]="_messageBoxConfig.ariaLabel"
+    [attr.aria-labelledby]="_messageBoxConfig.ariaLabelledBy"
+    [attr.aria-describedby]="_messageBoxConfig.ariaDescribedBy"
+>
+    <ng-content select="fd-message-box-header"></ng-content>
+    <ng-content select="fd-message-box-body"></ng-content>
+    <ng-content select="fd-message-box-footer"></ng-content>
+</div>

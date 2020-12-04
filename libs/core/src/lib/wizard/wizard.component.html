@@ -1,5 +1,15 @@
 <section class="fd-wizard">
     <ng-content select="fd-wizard-navigation"></ng-content>
-    <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    <div
+        class="fd-wizard-container-wrapper"
+        #wrapperContainer
+        fdScrollSpy
+        [trackedTags]="['div']"
+        (spyChange)="scrollSpyChange($event)"
+    >
+        <div *ngFor="let contentTemplate of contentTemplates">
+            <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        </div>
+    </div>
     <ng-content></ng-content>
 </section>

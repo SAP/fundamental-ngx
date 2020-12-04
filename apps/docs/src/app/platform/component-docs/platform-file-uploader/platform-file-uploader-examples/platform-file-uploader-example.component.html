@@ -1,0 +1,33 @@
+<fdp-form-group #fg>
+    <fdp-form-field
+        #ffl1
+        label="File Uploader Example"
+        id="input1"
+        name="defaultFileUploaderSample"
+        zone="zLeft"
+        rank="1"
+        placeholder="Choose file to upload to the server"
+    >
+        <fdp-file-uploader
+            ariaLabel="Choose file"
+            ariaLabelledBy="input1"
+            id="input1"
+            name="defaultFileUploaderSample"
+            placeholder="Choose file to upload to the server"
+            buttonLabel="Browse"
+            buttonAriaLabel="browse file"
+            accept=".png,.jpg"
+            [(ngModel)]="files"
+            multiple="true"
+            (selectionChange)="handleFileSelection($event)"
+        ></fdp-file-uploader>
+    </fdp-form-field>
+</fdp-form-group>
+
+<br /><br />
+
+Files Selected:
+<br />
+<span *ngFor="let file of this.files">
+    <span class="green">{{ file.name }} </span><br
+/></span>

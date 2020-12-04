@@ -239,3 +239,58 @@ describe('DynamicPageComponent tabbed values', () => {
         expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsMedium)).toBeTruthy();
     });
 });
+
+@Component({
+    template: `<fdp-dynamic-page [size]="size" [background]="background">
+        <fdp-dynamic-page-title></fdp-dynamic-page-title>
+        <fdp-dynamic-page-header
+            [collapsible]="false"
+            [pinnable]="false"></fdp-dynamic-page-header>
+        <fdp-dynamic-page-content>DynamicPage Content</fdp-dynamic-page-content>
+    </fdp-dynamic-page>`
+})
+class TestNonCollapsibleComponent {
+    size = 'medium';
+    background = '';
+    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
+}
+describe('DynamicPageComponent with collapsible set to false', () => {
+    let component: TestNonCollapsibleComponent;
+    let fixture: ComponentFixture<TestNonCollapsibleComponent>;
+    let dynamicPage: DynamicPageComponent;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, PlatformDynamicPageModule, TabsModule, ScrollingModule],
+            declarations: [TestNonCollapsibleComponent],
+            providers: [{ provide: DynamicPageService }]
+        }).compileComponents();
+    }));
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestNonCollapsibleComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        dynamicPage = component.dynamicPage;
+    });
+
+    it('should not show the collapse button', () => {
+        const collapseButton = fixture.debugElement.queryAll(By.css('.fd-dynamic-page__collapse-button'));
+        expect(collapseButton.length).toBe(0);
+    });
+
+    it('should not show the pin button', () => {
+        const collapseButton = fixture.debugElement.queryAll(By.css('.fd-dynamic-page__pin-button'));
+        expect(collapseButton.length).toBe(0);
+    });
+
+    it('should not collapse the header on click of title area', () => {
+        const dynamicPageTitle = fixture.debugElement.query(By.css('.fd-dynamic-page__title-container'));
+        dynamicPageTitle.nativeElement.click();
+        fixture.detectChanges();
+
+        const contentEl: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'))
+            .nativeElement;
+        expect(contentEl.getAttribute('aria-hidden')).toBe('false');
+    });
+
+});

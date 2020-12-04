@@ -231,6 +231,27 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-forms/multi-input/platform-multi-input-docs.module').then(
                         (m) => m.PlatformMultiInputDocsModule
                     )
+            },
+            {
+                path: 'feed-input',
+                loadChildren: () =>
+                    import('./component-docs/platform-feed-input/platform-feed-input.module').then(
+                        (m) => m.PlatformFeedInputDocsModule
+                    )
+            },
+            {
+                path: 'file-uploader',
+                loadChildren: () =>
+                    import('./component-docs/platform-file-uploader/platform-file-uploader-docs.module').then(
+                        (m) => m.PlatformFileUploaderDocsModule
+                    )
+            },
+            {
+                path: 'upload-collection',
+                loadChildren: () =>
+                    import('./component-docs/platform-upload-collection/platform-upload-collection-docs.module').then(
+                        (m) => m.PlatformUploadCollectionDocsModule
+                    )
             }
         ]
     }

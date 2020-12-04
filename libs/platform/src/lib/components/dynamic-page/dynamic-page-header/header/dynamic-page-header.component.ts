@@ -263,14 +263,12 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         }
     }
 
-    /** 
+    /**
      * toggles the state of the header and
-     * handles expanded/collapsed event 
+     * handles expanded/collapsed event
      */
     toggleCollapse(): void {
-        if (this._isPinned()) {
-            return;
-        }
+        this._pinned = false;
 
         this.collapsed = !this._dynamicPageService.getIsCollapsed();
         this._expandCollapseActions();

@@ -1,0 +1,25 @@
+<header
+    fd-bar
+    class="fd-message-box__header"
+    [cozy]="messageBoxConfig.mobile"
+    [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
+>
+    <ng-container *ngTemplateOutlet="headerTemplate ? headerTemplate : defaultTemplate"></ng-container>
+
+    <ng-template #defaultTemplate>
+        <div fd-bar-left>
+            <fd-bar-element [fullWidth]="true">
+                <ng-content select="[fd-title]"></ng-content>
+            </fd-bar-element>
+        </div>
+        <div fd-bar-right>
+            <fd-bar-element>
+                <ng-content select="fd-message-box-close-icon"></ng-content>
+            </fd-bar-element>
+        </div>
+    </ng-template>
+</header>
+
+<div fd-bar *ngIf="subHeaderTemplate" class="fd-message-box__subheader" barDesign="subheader" [cozy]="messageBoxConfig.mobile">
+    <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>
+</div>

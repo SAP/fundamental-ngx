@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PlatformDatetimePickerComponent } from './datetime-picker.component';
 import { DatetimePickerModule } from '@fundamental-ngx/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { PlatformDatetimePickerComponent } from './datetime-picker.component';
 
 @NgModule({
     declarations: [PlatformDatetimePickerComponent],

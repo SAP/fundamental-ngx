@@ -67,7 +67,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         ).subscribe(theme => {
             this.cssUrl = theme.themeUrl;
             this.customCssUrl = theme.customThemeUrl;
-        })
+        });
     }
 
     ngOnInit(): void {
@@ -86,6 +86,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         ];
 
         this.versions.unshift(this.version);
+
+        if (!(this.cssUrl && this.customCssUrl)) {
+            this.selectTheme(this.themes[0].id);
+        }
     }
 
     ngOnDestroy(): void {
