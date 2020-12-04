@@ -247,6 +247,8 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.navigation = false;
         }
 
+        // Keep copy of original slide array, for indicator purpose.
+        // In case of looped carousel, original slides array changes.
         this._slidesCopy = this.slides.toArray().slice();
 
         this._subscribeServiceEvents();
@@ -328,9 +330,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
         /** Handle looped carousel, first click on prev button. */
         if (this.loop && this._prevBtnClickedAtStart) {
-            this._carouselService.goToItem(this.slides.toArray()[Math.ceil(this.slides.length / 2) - 1], true, this.dir);
-            this.slides.toArray()[Math.ceil(this.slides.length / 2) - 1].visibility = 'visible';
-            this.slideChange.emit(new CarouselActiveSlides([this.slides.toArray()[2]], 'Previous'));
+            const slidesArray = this.slides.toArray();
+            this._carouselService.goToItem(slidesArray[Math.ceil(this.slides.length / 2) - 1], true, this.dir);
+            slidesArray[Math.ceil(this.slides.length / 2) - 1].visibility = 'visible';
+            this.slideChange.emit(new CarouselActiveSlides([slidesArray[Math.ceil(this.slides.length / 2) - 1]], 'Previous'));
         } else {
             /** Have to refactor the _notifySlideChange to get rid of else condition */
             this._notifySlideChange(SlideDirection.PREVIOUS);
