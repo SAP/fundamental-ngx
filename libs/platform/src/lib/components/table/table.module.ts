@@ -16,7 +16,6 @@ import {
     ToolbarModule
 } from '@fundamental-ngx/core';
 
-import { FdpFormGroupModule } from '../form/form-group/fdp-form.module';
 import { PlatformInputModule } from '../form/input/fdp-input.module';
 import { PlatformButtonModule } from '../button/button.module';
 import { PlatformSearchFieldModule } from '../search-field/search-field.module';
@@ -45,31 +44,27 @@ import {
     FdpTableHeader,
     FdpViewSettingsFilterCustomDef
 } from './directives';
-import { CellValueByPipe } from './pipes';
+import { ValueByPathPipe } from './pipes';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        FormModule,
+
         TableModule,
         ToolbarModule,
         CheckboxModule,
+        RadioModule,
+        InputGroupModule,
         PopoverModule,
         ListModule,
         PlatformButtonModule,
         ButtonModule,
-        ListModule,
-        FormModule,
-        FdpFormGroupModule,
         PlatformInputModule,
-        PopoverModule,
         DialogModule,
-        RadioModule,
         PlatformSearchFieldModule,
-
-        InputGroupModule,
-        RadioModule,
         IconModule
     ],
     declarations: [
@@ -84,7 +79,7 @@ import { CellValueByPipe } from './pipes';
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
         FdpViewSettingsFilterCustomDef,
-        CellValueByPipe,
+        ValueByPathPipe,
         SortingComponent,
         GroupingComponent,
         FiltersComponent,

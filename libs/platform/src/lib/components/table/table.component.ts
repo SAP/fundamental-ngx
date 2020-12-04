@@ -9,13 +9,10 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    OnChanges,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     QueryList,
-    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -112,9 +109,16 @@ const dialogConfig: DialogConfig = {
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TableService]
+    providers: [TableService],
+    host: {
+        '[class.fd-table]': 'true',
+        '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
+        '[class.fd-table--condensed]': 'contentDensity === CONTENT_DENSITY.CONDENSED',
+        '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
+        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
+    }
 })
-export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit, OnDestroy, CssClassBuilder {
+export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
     /** Data source for table data. */
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
@@ -214,7 +218,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     @ContentChild(forwardRef(() => TableToolbarComponent))
     tableToolbarComponent: TableToolbarComponent;
 
-    /** View Settings filters list */
+    /** @hidden */
     viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
 
     /** @hidden */
@@ -311,16 +315,6 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
     ) {}
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
     ngAfterViewInit(): void {
         this._setInitialState();
 
@@ -332,25 +326,12 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
 
         this._setFreezableInfo();
 
-        this.buildComponentCssClass();
-
         this._cd.detectChanges();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-table',
-            this.contentDensity === ContentDensity.COMPACT ? 'fd-table--compact' : '',
-            this.contentDensity === ContentDensity.CONDENSED ? 'fd-table--condensed' : '',
-            this.noHorizontalBorders || this.noBorders ? 'fd-table--no-horizontal-borders ' : '',
-            this.noVerticalBorders || this.noBorders ? 'fd-table--no-vertical-borders ' : ''
-        ];
     }
 
     /** Get current state/settings of the Table. */
@@ -478,7 +459,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         this._tableService.search(searchInput);
     }
 
-    /** @hidden */
+    /** Open Sort Dialog */
     openSortingDialog(): void {
         const state = this.getTableState();
         const columns = this._getTableColumnsAsArray();
@@ -501,7 +482,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         );
     }
 
-    /** @hidden */
+    /** Open Filtering Dialog */
     openFilteringDialog(): void {
         const state = this.getTableState();
         const columns = this._getTableColumnsAsArray();
@@ -529,7 +510,7 @@ export class TableComponent<T = any> implements OnChanges, OnInit, AfterViewInit
         );
     }
 
-    /** @hidden */
+    /** Open Grouping Dialog */
     openGroupingDialog(): void {
         const state = this.getTableState();
         const columns = this._getTableColumnsAsArray();

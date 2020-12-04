@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { CollectionSelectFilter, SelectionValue } from '../../../interfaces';
+import { CollectionSelectFilter, TableFilterSelectOption } from '../../../interfaces';
 
 @Component({
     selector: 'fdp-filter-single-select',
@@ -9,7 +9,7 @@ import { CollectionSelectFilter, SelectionValue } from '../../../interfaces';
 })
 export class FilterSingleSelectComponent {
     @Input()
-    options: SelectionValue[] = [];
+    options: TableFilterSelectOption[] = [];
 
     @Input()
     set filterBy(filterBy: CollectionSelectFilter) {

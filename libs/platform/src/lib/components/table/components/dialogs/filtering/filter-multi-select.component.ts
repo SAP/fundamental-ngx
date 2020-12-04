@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { CollectionSelectFilter, SelectionValue } from '../../../interfaces';
+import { CollectionSelectFilter, TableFilterSelectOption } from '../../../interfaces';
 
-type SelectableOption = SelectionValue & { selected: boolean };
+type SelectableOption = TableFilterSelectOption & { selected: boolean };
 
 @Component({
     selector: 'fdp-filter-multi-select',
@@ -11,7 +11,7 @@ type SelectableOption = SelectionValue & { selected: boolean };
 })
 export class FilterMultiSelectComponent {
     @Input()
-    options: SelectionValue[] = [];
+    options: TableFilterSelectOption[] = [];
 
     @Input()
     set filterBy(filterBy: CollectionSelectFilter) {

@@ -2,8 +2,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { DataSource } from '../../../domain';
-import { TableDataProvider } from './table-data-provider';
+
 import { TableState } from '../interfaces';
+import { TableDataProvider } from './table-data-provider';
 
 export class TableDataSource<T> implements DataSource<T> {
     readonly MAX_LIMIT = Number.MAX_SAFE_INTEGER;

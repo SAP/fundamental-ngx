@@ -7,6 +7,7 @@ import { CollectionStringFilter, TableState } from './interfaces';
 import { GroupChange, SortChange, FilterChange, FreezeChange, SearchChange } from './models';
 import { CollectionStringFilterStrategy } from './enums';
 import { SearchInput } from '../search-field/public_api';
+import { Observer } from 'rxjs';
 
 describe('TableServiceService', () => {
     let service: TableService;
@@ -30,12 +31,13 @@ describe('TableServiceService', () => {
     });
 
     it('should set table state', () => {
-        const newState = { ...DEFAULT_TABLE_STATE, groupBy: [{ field: 'name', direction: SortDirection.ASC }] };
-        const getTableStateSpy = spyOn(service, 'getTableState').and.callThrough();
+        const newState: TableState = {
+            ...DEFAULT_TABLE_STATE,
+            groupBy: [{ field: 'name', direction: SortDirection.ASC }]
+        };
 
         service.setTableState(newState);
 
-        expect(getTableStateSpy).toHaveBeenCalled();
         expect(service.getTableState()).toEqual(newState);
     });
 
@@ -109,5 +111,36 @@ describe('TableServiceService', () => {
 
         expect(searchChangeSpy).toHaveBeenCalledWith(event);
         expect(setTableStateSpy).toHaveBeenCalledWith(newState);
+    });
+
+    it('should expose table state through tableState$ observable', () => {
+        const subscriber: Observer<any> = { next: () => {}, error: () => {}, complete: () => {} };
+        const subscriberNextSpy = spyOn(subscriber, 'next').and.callThrough();
+
+        service.tableState$.subscribe(subscriber);
+
+        // Emit state once it's subscribed to it
+        expect(subscriberNextSpy).toHaveBeenCalledTimes(1);
+        expect(subscriberNextSpy).toHaveBeenCalledWith(service.getTableState());
+
+        const newState: TableState = { ...DEFAULT_TABLE_STATE, sortBy: [] };
+        service.setTableState(newState);
+        expect(subscriberNextSpy).toHaveBeenCalledTimes(2);
+        expect(subscriberNextSpy).toHaveBeenCalledWith(newState);
+    });
+
+    it('should emit changes by tableStateChanges$ observable', () => {
+        const subscriber: Observer<any> = { next: () => {}, error: () => {}, complete: () => {} };
+        const subscriberNextSpy = spyOn(subscriber, 'next').and.callThrough();
+
+        service.tableStateChanges$.subscribe(subscriber);
+
+        // Not emit state once it's subscribed to it
+        expect(subscriberNextSpy).not.toHaveBeenCalled();
+
+        const newState: TableState = { ...DEFAULT_TABLE_STATE, sortBy: [] };
+        service.setTableState(newState);
+        expect(subscriberNextSpy).toHaveBeenCalledTimes(1);
+        expect(subscriberNextSpy).toHaveBeenCalledWith(newState);
     });
 });

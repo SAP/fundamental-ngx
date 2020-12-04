@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject, Optional } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
@@ -28,22 +28,31 @@ export interface SortDialogResultData {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SortingComponent implements Resettable {
+    /** Initially active direction */
     initialDirection: SortDirection = SortDirection.ASC;
 
+    /** Initially active field */
     initialField: string = null;
 
+    /** Current selected direction */
     direction: SortDirection;
 
+    /** Current selected field */
     field: string;
 
-    readonly SORT_DIRECTION = SortDirection;
-
-    readonly NOT_SORTED_OPTION_VALUE = null;
-
+    /** Table columns */
     readonly columns: SortDialogColumn[] = [];
 
+    /** @hidden */
     readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    /** Indicates if reset command is active */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+
+    /** @hidden */
+    readonly SORT_DIRECTION = SortDirection;
+
+    /** @hidden */
+    readonly NOT_SORTED_OPTION_VALUE = null;
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
         const data: SortDialogData = this.dialogRef.data;
@@ -71,16 +80,19 @@ export class SortingComponent implements Resettable {
         this.dialogRef.close(result);
     }
 
+    /** @hidden */
     _sortDirectionChange(direction: SortDirection): void {
         this.direction = direction;
         this._omModelChange();
     }
 
+    /** @hidden */
     _sortFieldChange(field: string): void {
         this.field = field;
         this._omModelChange();
     }
 
+    /** @hidden */
     _omModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
         const isInitialDiffers = this.initialDirection !== this.direction || this.initialField !== this.field;

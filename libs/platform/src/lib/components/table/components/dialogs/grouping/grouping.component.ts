@@ -28,22 +28,32 @@ export interface GroupDialogResultData {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupingComponent implements Resettable {
+    /** Initially active direction */
     initialDirection: SortDirection = SortDirection.ASC;
 
+    /** Initially active field */
     initialField: string = null;
 
+    /** Current selected direction */
     direction: SortDirection;
 
+    /** Current selected field */
     field: string;
 
-    readonly SORT_DIRECTION = SortDirection;
-
-    readonly NOT_GROUPED_OPTION_VALUE = null;
-
+    /** Table columns */
     readonly columns: GroupDialogColumn[] = [];
 
-    readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    /** @hidden */
+    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+    /** Indicates if reset command is active */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
+
+    /** @hidden */
+    readonly SORT_DIRECTION = SortDirection;
+
+    /** @hidden */
+    readonly NOT_GROUPED_OPTION_VALUE = null;
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
         const data: GroupDialogData = this.dialogRef.data;
@@ -71,16 +81,19 @@ export class GroupingComponent implements Resettable {
         this.dialogRef.close(result);
     }
 
+    /** @hidden */
     _groupOrderChange(direction: SortDirection): void {
         this.direction = direction;
         this._omModelChange();
     }
 
+    /** @hidden */
     _groupFieldChange(field: string): void {
         this.field = field;
         this._omModelChange();
     }
 
+    /** @hidden */
     _omModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
         const isInitialDiffers = this.initialDirection !== this.direction || this.initialField !== this.field;

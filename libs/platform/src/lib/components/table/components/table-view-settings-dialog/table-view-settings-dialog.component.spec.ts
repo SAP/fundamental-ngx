@@ -1,4 +1,7 @@
+import { QueryList } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TableComponent } from '../../table.component';
+import { TableViewSettingsFilterComponent } from '../table-view-settings-filter/table-view-settings-filter.component';
 
 import { TableViewSettingsDialogComponent } from './table-view-settings-dialog.component';
 
@@ -22,5 +25,29 @@ describe('TableViewSettingsDialogComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should add filters to table and keep it up to date', () => {
+        const mockFilterComponent = {} as TableViewSettingsFilterComponent;
+        const queryList = new QueryList<TableViewSettingsFilterComponent>();
+        const mockTable: Partial<TableComponent<any>> = { _setViewSettingsFilters: () => {} };
+        const setViewSettingsFiltersSpy = spyOn(mockTable, '_setViewSettingsFilters').and.stub();
+
+        queryList.reset([mockFilterComponent]);
+
+        component.table = mockTable as TableComponent;
+        component.filters = queryList;
+
+        fixture.detectChanges();
+
+        component._addFiltersToTable();
+
+        expect(setViewSettingsFiltersSpy).toHaveBeenCalledTimes(1);
+        expect(setViewSettingsFiltersSpy).toHaveBeenCalledWith(queryList.toArray());
+
+        component.filters.notifyOnChanges();
+
+        expect(setViewSettingsFiltersSpy).toHaveBeenCalledTimes(2);
+        expect(setViewSettingsFiltersSpy).toHaveBeenCalledWith(queryList.toArray());
     });
 });

@@ -30,15 +30,18 @@ export const API_FILES = {
     splitMenuButton: ['SplitMenuButtonComponent'],
     table: [
         'TableComponent',
+        'TableColumnComponent',
         'TableToolbarComponent',
         'TableToolbarActionsComponent',
-        'TableColumnComponent',
-        'FdpTableHeader',
-        'FdpHeaderCellDef',
         'FdpTableCell',
         'FdpCellDef',
+        'FdpTableHeader',
+        'FdpHeaderCellDef',
+        'TableViewSettingsDialogComponent',
+        'TableViewSettingsFilterComponent',
+        'FdpViewSettingsFilterCustomDef',
         'TableDataSource',
-        'TableDataProvider',
+        'TableDataProvider'
     ],
     textarea: ['TextAreaComponent'],
     panel: [

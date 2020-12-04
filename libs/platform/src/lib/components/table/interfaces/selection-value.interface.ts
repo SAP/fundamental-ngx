@@ -1,5 +1,5 @@
-export interface SelectionValue {
+export interface TableFilterSelectOption {
     value: any;
     label: string;
-    children?: SelectionValue[];
+    children?: TableFilterSelectOption[];
 }

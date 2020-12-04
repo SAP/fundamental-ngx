@@ -15,28 +15,18 @@ import { TableViewSettingsFilterComponent } from '../table-view-settings-filter/
 
 /**
  * View settings dialog component.
+ *
+ * Used to link view settings filters options to the grid table.
+ *
  * ```html
  * <fdp-table #myTable></fdp-table>
  * ...
  * <fdp-table-view-settings-dialog [table]="myTable">
  *     <fdp-table-view-settings-filter
- *         [column]="'name'"
- *         [label]="'Name'"
- *         [type]="'custom'">
- *            <label>Enter name:</label><fdp-input type="text" name="name"></fdp-input>
- *     </fdp-table-view-settings-filter>
- *     <fdp-table-view-settings-filter
- *         [column]="'price'"
- *         [label]="'Price'"
- *         [type]="'custom'">
- *             <label>Minimum Price:</label><fdp-input type="number" name="minimumPrice"></fdp-input>
- *             <label>Maximum Price:</label><fdp-input type="number" name="maximumPrice"></fdp-input>
- *     </fdp-table-view-settings-filter>
- *     <fdp-table-view-settings-filter
- *         [column]="'status'"
- *         [label]="'Status'"
- *         [type]="'single-select'"
- *         [values]="[{key: 'OUT_OF_STOCK', label: {'out of stock'}}, { key: 'AVAILABLE', label: 'available'}]">
+ *         column="status"
+ *         label="Status"
+ *         type="single-select"
+ *         values="[{value: 'filterValue', label: 'Filter label'}]">
  *     </fdp-table-view-settings-filter>
  * </fdp-table-view-settings-dialog>
  * ```
@@ -52,14 +42,16 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
     table: TableComponent;
 
     /** @hidden */
-    @ViewChild(TemplateRef)
-    contentTemplateRef: TemplateRef<any>;
-
-    /** @hidden */
     @ContentChildren(forwardRef(() => TableViewSettingsFilterComponent))
     filters: QueryList<TableViewSettingsFilterComponent>;
 
+    /** @hidden */
     ngAfterViewInit(): void {
+        this._addFiltersToTable();
+    }
+
+    /** @hidden */
+    _addFiltersToTable(): void {
         if (!this.table) {
             return;
         }

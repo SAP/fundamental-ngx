@@ -1,26 +1,33 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core';
 
-import { SelectionValue } from '../../interfaces';
+import { TableFilterSelectOption } from '../../interfaces';
 import { FilterType } from '../../enums';
 import { FdpViewSettingsFilterCustomDef } from '../../directives';
 
 /**
- * View settings dialog component.
+ * View settings dialog filter component.
+ *
  * ```html
+ * // With custom form
  * <fdp-table-view-settings-filter
  *     column="name"
  *     label="Name"
  *     type="custom">
- *        <label>Enter name:</label><fdp-input type="text" name="name"></fdp-input>
+ *         <ng-container *fdpViewSettingsFilterCustomDef="let model">
+ *             <label>Enter name:</label>
+ *             <fdp-input type="text" name="name" [(ngModel)]="model.name"></fdp-input>
+ *         </ng-container>
  * </fdp-table-view-settings-filter>
  *
+ * // Single select
  * <fdp-table-view-settings-filter
- *     [column]="'status'"
- *     [label]="'Status'"
- *     [type]="'single-select'"
- *     [values]="[{key: 'OUT_OF_STOCK', label: {'out of stock'}}, { key: 'AVAILABLE', label: 'available'}]">
+ *     column="status"
+ *     label="Status"
+ *     type="single-select"
+ *     values="[{value: 'OUT_OF_STOCK', label: 'Out of stock'}, { value: 'AVAILABLE', label: 'Available'}]">
  * </fdp-table-view-settings-filter>
  * ```
+ *
  * */
 @Component({
     selector: 'fdp-table-view-settings-filter',
@@ -28,7 +35,7 @@ import { FdpViewSettingsFilterCustomDef } from '../../directives';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableViewSettingsFilterComponent {
-    /** Column data on which to filter. */
+    /** Table column name on which to filter. */
     @Input()
     column: string;
 
@@ -36,18 +43,18 @@ export class TableViewSettingsFilterComponent {
     @Input()
     label: string;
 
-    /** Type of filter interface. */
+    /**
+     * Type of filter interface.
+     * @type {'single-select' | 'multi-select' | 'custom' 'category'}
+     * */
     @Input()
     type: FilterType;
 
-    /** Selection values for 'single-select' or 'multi-select' filter interface. */
+    /** Selection values for 'single-select' or 'multi-select' filter types. */
     @Input()
-    values: SelectionValue[];
+    values: TableFilterSelectOption[];
 
     /** @hidden */
-    @ViewChild(TemplateRef)
-    contentTemplateRef: TemplateRef<any>;
-
     @ContentChild(FdpViewSettingsFilterCustomDef)
     filterCustomDef: FdpViewSettingsFilterCustomDef;
 }

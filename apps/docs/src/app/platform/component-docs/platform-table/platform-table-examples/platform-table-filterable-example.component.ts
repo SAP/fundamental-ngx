@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { TableDataSource, TableFilterChangeEvent, TableFilterSelectOption } from '@fundamental-ngx/platform';
 
-import { TableDataSource, TableFilterChangeEvent } from '@fundamental-ngx/platform';
 import { TableDataProviderExample } from './platform-table-data-provider-example';
 
 @Component({
@@ -10,12 +10,12 @@ import { TableDataProviderExample } from './platform-table-data-provider-example
 export class PlatformTableFilterableExampleComponent {
     source = new TableDataSource(new TableDataProviderExample());
 
-    statusFilteringValues = [
+    statusFilteringValues: TableFilterSelectOption[] = [
         { value: 'Out of stock', label: 'Out of stock' },
         { value: 'Stocked on demand', label: 'Stocked on demand' }
     ];
 
-    statusColorFilteringValues = [
+    statusColorFilteringValues: TableFilterSelectOption[] = [
         { value: 'positive', label: 'Positive' },
         { value: 'negative', label: 'Negative' },
         { value: 'critical', label: 'Critical' }

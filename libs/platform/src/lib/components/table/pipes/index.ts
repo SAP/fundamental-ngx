@@ -1,1 +1,1 @@
-export * from './cell-value.pipe';
+export * from './value-by-path.pipe';

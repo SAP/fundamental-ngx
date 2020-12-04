@@ -295,7 +295,7 @@
                 </ng-container>
             </ng-container>
 
-            <ng-template #defaultTableCellTemplate>{{ row | cellValueBy: column.key }}</ng-template>
+            <ng-template #defaultTableCellTemplate>{{ row.value | valueByPath: column.key }}</ng-template>
         </td>
     </tr>
 </ng-template>

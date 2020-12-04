@@ -14,8 +14,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import { PlatformTableDefaultExampleComponent } from './platform-table-examples/platform-table-default-example.component';
-
 import * as platformTableDefaultSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.html';
 import * as platformTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.ts';
 import * as platformTableCustomColumnSrc from '!raw-loader!./platform-table-examples/platform-table-custom-column-example.component.html';
@@ -32,8 +30,9 @@ import * as platformTableFilterableSrc from '!raw-loader!./platform-table-exampl
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
+import * as platformTableDataProviderTs from '!raw-loader!./platform-table-examples/platform-table-data-provider-example';
+import * as platformTableDataItemsTs from '!raw-loader!./platform-table-examples/platform-table-data-items-example';
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
-
 
 @Component({
     selector: 'fdp-table-docs',
@@ -69,7 +68,7 @@ export class PlatformTableDocsComponent {
                     },
                     noBodyBorders: {
                         type: 'boolean'
-                    },
+                    }
                 }
             },
             'table-toolbar': {
@@ -133,13 +132,25 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableDefaultSrc,
-            fileName: 'platform-table-default-example'
+            fileName: 'platform-table-default-example',
+            component: 'PlatformTableDefaultExampleComponent',
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableDefaultTsSrc,
             fileName: 'platform-table-default-example',
-            component: 'PlatformTableDefaultExampleComponent'
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -147,13 +158,24 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableCustomColumnSrc,
-            fileName: 'platform-table-custom-column-example'
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableCustomColumnTsSrc,
             fileName: 'platform-table-custom-column-example',
-            component: 'PlatformTableCustomColumnExampleComponent'
+            component: 'PlatformTableCustomColumnExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -161,13 +183,24 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableSingleRowSelectionSrc,
-            fileName: 'platform-table-single-row-selection-example'
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableSingleRowSelectionTsSrc,
             fileName: 'platform-table-single-row-selection-example',
-            component: 'PlatformTableSingleRowSelectionExampleComponent'
+            component: 'PlatformTableSingleRowSelectionExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -175,13 +208,24 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableMultipleRowSelectionSrc,
-            fileName: 'platform-table-multiple-row-selection-example'
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableMultipleRowSelectionTsSrc,
             fileName: 'platform-table-multiple-row-selection-example',
-            component: 'PlatformTableMultipleRowSelectionExampleComponent'
+            component: 'PlatformTableMultipleRowSelectionExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -189,13 +233,24 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableSortableSrc,
-            fileName: 'platform-table-sortable-example'
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableSortableTsSrc,
             fileName: 'platform-table-sortable-example',
-            component: 'PlatformTableSortableExampleComponent'
+            component: 'PlatformTableSortableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -203,13 +258,24 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableFilterableSrc,
-            fileName: 'platform-table-filterable-example'
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableFilterableTsSrc,
             fileName: 'platform-table-filterable-example',
-            component: 'PlatformTableFilterableExampleComponent'
+            component: 'PlatformTableFilterableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -217,13 +283,24 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableGroupableSrc,
-            fileName: 'platform-table-groupable-example'
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableGroupableTsSrc,
             fileName: 'platform-table-groupable-example',
-            component: 'PlatformTableGroupableExampleComponent'
+            component: 'PlatformTableGroupableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -231,13 +308,24 @@ export class PlatformTableDocsComponent {
         {
             language: 'html',
             code: platformTableFreezableSrc,
-            fileName: 'platform-table-freezable-example'
+            name: 'platform-table-example.component.html'
         },
         {
             language: 'typescript',
             code: platformTableFreezableTsSrc,
             fileName: 'platform-table-freezable-example',
-            component: 'PlatformTableFreezableExampleComponent'
+            component: 'PlatformTableFreezableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
         }
     ];
 
@@ -272,5 +360,3 @@ export class PlatformTableDocsComponent {
         console.log(ev);
     }
 }
-
-

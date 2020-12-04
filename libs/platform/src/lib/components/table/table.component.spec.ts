@@ -1,111 +1,52 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DialogModule, RtlService } from '@fundamental-ngx/core';
+import {
+    DialogModule,
+    ListModule,
+    PopoverModule,
+    RtlService,
+    TableModule,
+    CheckboxModule
+} from '@fundamental-ngx/core';
+
 import { TableComponent } from './table.component';
 import { CollectionStringFilterStrategy, SelectionMode, SortDirection } from './enums';
 import { TableDataProvider, TableDataSource } from './domain';
 import { TableState } from './interfaces';
 import { TableService } from './table.service';
 
-const ITEMS = [
-    {
-        name: 'implementation',
-        description: 'sit amet consectetuer adipiscing elit',
-        price: {
-            value: 2.06,
-            currency: 'IDR'
-        },
-        status: 'valid'
-    },
-    {
-        name: 'moderator',
-        description: 'luctus et ultrices posuere cubilia curae donec',
-        price: {
-            value: 33.34,
-            currency: 'MZN'
-        },
-        status: 'warning'
-    },
-    {
-        name: 'focus group',
-        description: 'at velit vivamus vel nulla eget eros',
-        price: {
-            value: 72.12,
-            currency: 'CNY'
-        },
-        status: 'error'
-    },
-    {
-        name: 'contingency',
-        description: 'posuere nonummy integer',
-        price: {
-            value: 6.25,
-            currency: 'CNY'
-        },
-        status: 'information'
-    },
-    {
-        name: 'matrix',
-        description: 'congue etiam justo etiam pretium iaculis',
-        price: {
-            value: 54.29,
-            currency: 'NZD'
-        },
-        status: 'warning'
-    },
-    {
-        name: 'Persistent',
-        description: 'ipsum praesent blandit',
-        price: {
-            value: 14.59,
-            currency: 'UGX'
-        },
-        status: 'information'
-    },
-    {
-        name: 'paradigm',
-        description: 'nec condimentum neque',
-        price: {
-            value: 9.37,
-            currency: 'IDR'
-        },
-        status: 'warning'
-    },
-    {
-        name: 'content-based',
-        description: 'non mauris morbi non lectus aliquam',
-        price: {
-            value: 10.17,
-            currency: 'EGP'
-        },
-        status: 'error'
-    },
-    {
-        name: 'multimedia',
-        description: 'pede morbi porttitor lorem id ligula',
-        price: {
-            value: 8.06,
-            currency: 'IDR'
-        },
-        status: 'information'
-    },
-    {
-        name: 'high-level',
-        description: 'ligula nec sem',
-        price: {
-            value: 27.13,
-            currency: 'EUR'
-        },
-        status: 'valid'
-    }
-];
+interface SourceItem {
+    id: string;
+    name: string;
+    description: string;
+    status: string;
+    price: {
+        value: number;
+        currency: string;
+    };
+}
 
-class TableDataProviderMock<T> extends TableDataProvider<T> {
-    items = ITEMS as any[];
-    totalItems = ITEMS.length;
+const generateItems = (length = 50): SourceItem[] =>
+    Array.from(Array(length)).map(
+        (_, index): SourceItem => ({
+            id: `${index}`,
+            name: `Product ${index}`,
+            description: `Description ${index}`,
+            price: {
+                value: Math.random() * (400 - 5) + 5,
+                currency: 'USD'
+            },
+            status: 'valid'
+        })
+    );
 
-    fetch(tableState: TableState): Observable<T[]> {
+class TableDataProviderMock extends TableDataProvider<SourceItem> {
+    items = generateItems(50);
+    totalItems = 50;
+
+    fetch(tableState: TableState): Observable<SourceItem[]> {
         return of(this.items);
     }
 }
@@ -118,7 +59,16 @@ describe('TableComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [DialogModule, TableComponent],
+                imports: [
+                    FormsModule,
+                    ReactiveFormsModule,
+                    TableModule,
+                    CheckboxModule,
+                    PopoverModule,
+                    ListModule,
+                    DialogModule
+                ],
+                declarations: [TableComponent],
                 providers: [RtlService]
             }).compileComponents();
         })
@@ -251,11 +201,13 @@ describe('TableComponent', () => {
 
         component.filter(field, value);
 
-        expect(serviceFilterSpy).toHaveBeenCalledWith({
-            field: field,
-            value: value,
-            strategy: CollectionStringFilterStrategy.CONTAINS
-        });
+        expect(serviceFilterSpy).toHaveBeenCalledWith([
+            {
+                field: field,
+                value: value,
+                strategy: CollectionStringFilterStrategy.CONTAINS
+            }
+        ]);
         expect(component._popoverOpen).toBeFalse();
     });
 
