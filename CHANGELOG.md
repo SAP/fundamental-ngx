@@ -2,6 +2,73 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.26...v0.25.0-rc.27) (2020-12-03)
+
+
+### Features
+
+* (Platform) Introduce Upload Collection ([#3888](https://github.com/SAP/fundamental-ngx/issues/3888)) ([bafdc5e](https://github.com/SAP/fundamental-ngx/commit/bafdc5e6f5ade362b44e9a0bc456a78c262a5c7c))
+
+## [0.25.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.25...v0.25.0-rc.26) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Platform) fix icons of Search Field component ([ca4b83d](https://github.com/SAP/fundamental-ngx/commit/ca4b83d1cf073093ec57299d0303b0bd1aa526ed))
+
+## [0.25.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.24...v0.25.0-rc.25) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Core) add Carousel focus ([#4000](https://github.com/SAP/fundamental-ngx/issues/4000)) ([101c616](https://github.com/SAP/fundamental-ngx/commit/101c61632759cc213e3ce82c68511215515818c9))
+
+## [0.25.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.23...v0.25.0-rc.24) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Platform) add cdk styles to menu component ([#3985](https://github.com/SAP/fundamental-ngx/issues/3985)) ([20c2643](https://github.com/SAP/fundamental-ngx/commit/20c26432c84c8fd3d9faee51df827ed1a0415500))
+
+## [0.25.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.22...v0.25.0-rc.23) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Core) Combobox without expand button ([5b60c96](https://github.com/SAP/fundamental-ngx/commit/5b60c966ef457128727a66ea7829642536cfd9cd))
+
+## [0.25.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.21...v0.25.0-rc.22) (2020-12-03)
+
+## [0.25.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.20...v0.25.0-rc.21) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Core) attach arrow to container on Popover ([#3998](https://github.com/SAP/fundamental-ngx/issues/3998)) ([1b02165](https://github.com/SAP/fundamental-ngx/commit/1b0216564e0c3ff409a65bc31e00734ed3ec8dd9))
+
+## [0.25.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.19...v0.25.0-rc.20) (2020-12-03)
+
+
+### Bug Fixes
+
+* (Core) replace datetime picker button label from 'Submit' to 'OK' ([#3991](https://github.com/SAP/fundamental-ngx/issues/3991)) ([b81251c](https://github.com/SAP/fundamental-ngx/commit/b81251cdd2a89c37cec14f2df493b49ca3dae6c3))
+
+## [0.25.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.18...v0.25.0-rc.19) (2020-12-03)
+
+## [0.25.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.17...v0.25.0-rc.18) (2020-12-02)
+
+
+### Bug Fixes
+
+* (Core) add fix for missing space between text and icon in Menu Button ([#3986](https://github.com/SAP/fundamental-ngx/issues/3986)) ([4f432f9](https://github.com/SAP/fundamental-ngx/commit/4f432f9ce97ffa8d519389556883bdc9876ee537))
+
+## [0.25.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.16...v0.25.0-rc.17) (2020-12-02)
+
+
+### Features
+
+* (Core) introduce Flexible Column Layout component ([#3934](https://github.com/SAP/fundamental-ngx/issues/3934)) ([fe7ac54](https://github.com/SAP/fundamental-ngx/commit/fe7ac54d9f4a33584cc638f0c9e344f37781a9b5))
+
 ## [0.25.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.15...v0.25.0-rc.16) (2020-12-02)
 
 

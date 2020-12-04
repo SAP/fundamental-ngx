@@ -43,6 +43,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
             { url: 'platform/combobox', name: 'Combobox' },
+            { url: 'platform/upload-collection', name: 'Upload Collection' },
             {
                 name: 'List And Items',
                 subItems: [

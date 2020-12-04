@@ -1,4 +1,6 @@
 @import '~fundamental-styles/dist/menu';
-.fd-popover__body {
+@import '~@angular/cdk/overlay-prebuilt';
+
+.fd-menu-popover__body--static {
     position: static;
 }

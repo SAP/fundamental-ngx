@@ -1,5 +1,9 @@
 @import '~fundamental-styles/dist/carousel';
 
+fd-carousel:focus {
+ outline: 1px dotted;
+}
+
 .fd-carousel-items-horizontal {
     display: flex;
     align-items: center;

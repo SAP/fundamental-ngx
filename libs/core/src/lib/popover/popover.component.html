@@ -4,7 +4,6 @@
      class="fd-popover__control"
      (keydown)="triggerKeyDownHandler($event)"
      [ngClass]="additionalTriggerClass">
-    <span class="fd-popover__arrow" [ngClass]="'fd-popover__arrow--' + arrowPosition" *ngIf="!noArrow"></span>
     <ng-content select="fd-popover-control"></ng-content>
 </div>
 
@@ -14,13 +13,14 @@
          [ngClass]="additionalBodyClass"
          [cdkTrapFocus]="focusTrapped"
          [cdkTrapFocusAutoCapture]="focusAutoCapture"
-         [style]="marginStyle"
+         [style]="_marginStyle"
          [style.max-width.px]="maxWidth"
          [style.min-width.px]="_popoverBodyMinWidth"
          [style.width.px]="_popoverBodyWidth"
          (keydown)="bodyKeydownHandler($event)">
         <ng-content select="fd-popover-body"></ng-content>
         <ng-content></ng-content>
+        <span class="fd-popover__arrow" [ngClass]="_arrowClasses" *ngIf="!noArrow"></span>
     </div>
 </ng-template>
 

@@ -1,43 +1,48 @@
-<div class="search-field" [ngClass]="{
-        'with-categories': showCategoryDropdown,
-        'is-loading': isLoading,
-        'hide-category-label': hideCategoryLabel
-    }">
+<div class="search-field" 
+    [class.with-categories]="showCategoryDropdown"
+    [class.is-loading]="isLoading"
+    [class.hide-category-label]="hideCategoryLabel">
     <div #inputGroup class="fdp-search-field__input-group fd-input-group" [attr.aria-controls]="menuId"
         [attr.aria-expanded]="showDropdown ? 'true' : 'false'" aria-haspopup="true">
         <span class="fd-input-group__addon fd-input-group__addon--button"
-            [ngClass]="{ 'fd-input-group__addon--compact': contentDensity === 'compact' }" *ngIf="showCategoryDropdown">
+            [class.fd-input-group__addon--compact]="contentDensity === 'compact'" *ngIf="showCategoryDropdown">
             <button class="fdp-search-field__category-button fd-input-group__button fd-button fd-button--menu"
-                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" [fdpMenuTriggerFor]="categoryMenu">
-                <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">{{
-                    currentCategory ? currentCategory.label : categoryLabel
-                }}</span>
+                [class.fd-button--compact]="contentDensity === 'compact'" [fdpMenuTriggerFor]="categoryMenu">
+                <span class="fdp-search-field__category-label" *ngIf="!hideCategoryLabel">
+                    {{ currentCategory ? currentCategory.label : categoryLabel }}
+                </span>
             </button>
         </span>
         <input #inputField type="search" [attr.placeholder]="placeholder"
             class="fdp-search-field__input fd-input fd-input-group__input" [attr.id]="inputId"
-            [attr.disabled]="disabled ? '' : null" [ngClass]="{ 'fd-input--compact': contentDensity === 'compact' }"
+            [attr.disabled]="disabled ? '' : null" [class.fd-input--compact]="contentDensity === 'compact'"
             (keydown)="onKeydown($event)" (keydown.enter)="onSearchSubmit()" [(ngModel)]="inputText"
             (ngModelChange)="onValueChange($event)" />
         <span class="fd-input-group__addon fd-input-group__addon--button"
-            [ngClass]="{ 'fd-input-group__addon--compact': contentDensity === 'compact' }"
+            [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
             *ngIf="inputText && inputText.length > 0">
             <button
-                class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent sap-icon--decline"
-                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="clearTextInput()"></button>
+                class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent"
+                [class.fd-button--compact]="contentDensity === 'compact' " (click)="clearTextInput()">
+                <fd-icon glyph="decline"></fd-icon>
+            </button>
         </span>
         <span class="fd-input-group__addon fd-input-group__addon--button"
-            [ngClass]="{ 'fd-input-group__addon--compact': contentDensity === 'compact' }" *ngIf="!isLoading">
+            [class.fd-input-group__addon--compact]="contentDensity === 'compact'" *ngIf="!isLoading">
             <button
-                class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent sap-icon--search"
+                class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent"
                 [attr.id]="submitId" [attr.disabled]="disabled ? '' : null"
-                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="onSearchSubmit()"></button>
+                [class.fd-button--compact]="contentDensity === 'compact' " (click)="onSearchSubmit()">
+                <fd-icon glyph="search"></fd-icon>
+            </button>
         </span>
         <span class="fd-input-group__addon fd-input-group__addon--button"
-            [ngClass]="{ 'fd-input-group__addon--compact': contentDensity === 'compact' }" *ngIf="isLoading">
+            [class.fd-input-group__addon--compact]="contentDensity === 'compact'" *ngIf="isLoading">
             <button
-                class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent sap-icon--synchronize"
-                [ngClass]="{ 'fd-button--compact': contentDensity === 'compact' }" (click)="onSearchSubmit()"></button>
+                class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent"
+                [class.fd-button--compact]="contentDensity === 'compact' " (click)="onSearchSubmit()">
+                <fd-icon glyph="synchronize"></fd-icon>
+            </button>
         </span>
     </div>
 </div>
