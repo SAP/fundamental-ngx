@@ -231,7 +231,7 @@
                 class="fd-table__cell--fixed fd-table__cell--focusable fd-table__cell--group"
                 tabindex="0"
                 role="cell"
-                [colSpan]="columns.length + (selectionMode === SELECTION_MODE.NONE ? 0 : 1)"
+                [colSpan]="_tableColumnsLength"
                 (click)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
                 (keydown.enter)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
             >
@@ -313,7 +313,7 @@
         >
             <td
                 fd-table-cell
-                [attr.colspan]="columns.length"
+                [attr.colspan]="_tableColumnsLength"
             >
                 <div class="fd-table__empty-table-message">
                     <div

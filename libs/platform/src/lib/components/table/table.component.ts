@@ -20,11 +20,9 @@ import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter } from 'rxjs/operators';
+import { distinctUntilChanged, filter, startWith } from 'rxjs/operators';
 
 import {
-    applyCssClass,
-    CssClassBuilder,
     DialogConfig,
     DialogService,
     KeyUtil,
@@ -221,8 +219,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
     /** @hidden */
     viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
 
-    /** @hidden */
-    class: string;
+
 
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
@@ -285,6 +282,9 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
     _isGroupable = false;
 
     /** @hidden */
+    _tableColumnsLength = 0;
+
+    /** @hidden */
     _rtl = false;
 
     /** @hidden */
@@ -309,7 +309,6 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
     constructor(
         private readonly _tableService: TableService,
         private readonly _cd: ChangeDetectorRef,
-        private readonly _el: ElementRef,
         private readonly _dialogService: DialogService,
         @Optional() private readonly _rtlService: RtlService
     ) {}
@@ -325,6 +324,8 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
         this._checkColumnsAbilities();
 
         this._setFreezableInfo();
+
+        this._listenToTableColumnsLength();
 
         this._cd.detectChanges();
     }
@@ -686,6 +687,15 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
                 this._cd.markForCheck();
             })
         );
+    }
+
+    private _listenToTableColumnsLength(): void {
+        this._subscriptions.add(
+            this.columns.changes.pipe(startWith(null)).subscribe(() => {
+                const columnsLen = this.columns.length;
+                this._tableColumnsLength = this.selectionMode !== SelectionMode.NONE ? columnsLen + 1 : columnsLen;
+            })
+        )
     }
 
     private _groupRows(): void {
