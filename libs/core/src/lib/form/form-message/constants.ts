@@ -1,4 +1,4 @@
-import { MessageStates } from '@fundamental-ngx/core';
+import { MessageStates } from './form-message.component';
 
 export const CSS_CLASS_NAME = {
     message: 'fd-form-message',
