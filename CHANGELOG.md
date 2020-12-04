@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.32...v0.25.0-rc.33) (2020-12-04)
+
+
+### Bug Fixes
+
+* (Core) add fix for numeric content IE11 overflow issues in Cards ([#4013](https://github.com/SAP/fundamental-ngx/issues/4013)) ([b948b7c](https://github.com/SAP/fundamental-ngx/commit/b948b7c33793bce1ada696d005d80f04c0c06c64))
+
 ## [0.25.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.31...v0.25.0-rc.32) (2020-12-04)
 
 
