@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.34...v0.25.0-rc.35) (2020-12-05)
+
+
+### Bug Fixes
+
+* (Core) add enhancement for dynamic Carousel items and example file rename ([#3957](https://github.com/SAP/fundamental-ngx/issues/3957)) ([7b0379b](https://github.com/SAP/fundamental-ngx/commit/7b0379b61354549ddc04ae0d72f38d0ac28ff4e0))
+
 ## [0.25.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.33...v0.25.0-rc.34) (2020-12-04)
 
 
