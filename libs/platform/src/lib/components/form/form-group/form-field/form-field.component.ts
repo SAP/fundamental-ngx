@@ -21,7 +21,6 @@ import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coerci
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
-import { InlineHelpComponent } from '@fundamental-ngx/core';
 
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
@@ -143,8 +142,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @ViewChild('renderer', { static: true })
     renderer: TemplateRef<any>;
 
-    @ContentChild(InlineHelpComponent, { static: false })
-    _hintChild: InlineHelpComponent;
+    _hintChild;
 
     /**
      * Child FormFieldControl

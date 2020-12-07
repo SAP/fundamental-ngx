@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-inline-help-example',
-    templateUrl: './inline-help-example.component.html'
+    templateUrl: './inline-help-example.component.html',
+    styles: [
+        `.fd-custom-inline-help-body { background: yellow; }`
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class InlineHelpExampleComponent {}
 

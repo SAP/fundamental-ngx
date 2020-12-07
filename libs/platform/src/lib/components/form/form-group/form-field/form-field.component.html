@@ -8,9 +8,9 @@
             <span *ngIf="!noLabelLayout">{{ label }}</span>
 
             <!-- We can support placement on FormGroup Level to be applied to all the form fields     -->
-            <fd-inline-help *ngIf="hint" [placement]="hintPlacement" [attr.aria-label]="hint">
-                {{ hint }}
-            </fd-inline-help>
+<!--            <fd-inline-help *ngIf="hint" [placement]="hintPlacement">-->
+<!--                {{ hint }}-->
+<!--            </fd-inline-help>-->
         </label>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
     </div>

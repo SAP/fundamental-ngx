@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InlineHelpComponent } from './inline-help.component';
+import { InlineHelpDirective } from './inline-help.directive';
 import { InlineHelpModule } from './inline-help.module';
 
 describe('InlineHelpComponent', () => {
-    let component: InlineHelpComponent;
-    let fixture: ComponentFixture<InlineHelpComponent>;
+    let component: InlineHelpDirective;
+    let fixture: ComponentFixture<InlineHelpDirective>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('InlineHelpComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(InlineHelpComponent);
+        fixture = TestBed.createComponent(InlineHelpDirective);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

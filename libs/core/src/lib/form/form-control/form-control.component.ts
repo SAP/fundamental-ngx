@@ -1,6 +1,17 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormStates } from './form-states';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { PopoverComponent } from '../../popover/popover.component';
 
 /**
  * Directive intended for use on form controls.
@@ -12,12 +23,19 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-form-control]',
-    template: `<ng-content></ng-content>`,
+    template: `<ng-content></ng-content>
+
+        <fd-popover #popover>
+            <div style="padding: 12px;">
+                This popover is connected to trigger element
+            </div>
+        </fd-popover>
+    `,
     styleUrls: ['./form-control.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges {
+export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, AfterViewInit {
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -37,6 +55,9 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
     /** user's custom classes */
     @Input()
     class: string;
+
+    @ViewChild(PopoverComponent)
+    popoverComponent: PopoverComponent;
 
     @applyCssClass
     /** CssClassBuilder interface implementation
@@ -72,6 +93,11 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this.popoverComponent.trigger = this._elementRef;
     }
 
     /** @hidden */

@@ -20,6 +20,10 @@
          (keydown)="bodyKeydownHandler($event)">
         <ng-content select="fd-popover-body"></ng-content>
         <ng-content></ng-content>
+        <div *ngIf="childContent" class="fd-inline-help__content">
+            {{ childContent?.stringContent }}
+            <ng-container *ngTemplateOutlet="childContent?.templateContent"></ng-container>
+        </div>
         <span class="fd-popover__arrow" [ngClass]="_arrowClasses" *ngIf="!noArrow"></span>
     </div>
 </ng-template>

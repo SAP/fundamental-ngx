@@ -1,9 +1,6 @@
 <div fd-form-item>
     <label fd-form-label for="input-41" [inlineHelp]="true">
         Input with inline help
-        <fd-inline-help [placement]="'right'">
-            Lorem ipsum dolor sit amet, consectetur adipiscing.
-        </fd-inline-help>
     </label>
-    <input fd-form-control placeholder="Field placeholder text" type="text" id="input-41" />
+    <input fd-form-control fd-inline-help="Inline Help" placeholder="Field placeholder text" type="text" id="input-41" />
 </div>

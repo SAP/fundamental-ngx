@@ -176,3 +176,10 @@ $fd-popover-background-color: #fff;
 .cdk-overlay-pane {
 	max-height: initial;
 }
+
+.fd-inline-help__content {
+	padding: .75rem;
+	min-width: 21.875rem;
+	font-size: .75rem;
+	font-size: var(--sapFontSmallSize,.75rem);
+}

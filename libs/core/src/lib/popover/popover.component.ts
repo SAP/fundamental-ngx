@@ -37,7 +37,7 @@ import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operato
 
 import { RtlService } from '../utils/services/rtl.service';
 import { BasePopoverClass } from './base/base-popover.class';
-import { ArrowPosition, DefaultPositions, PopoverFlippedDirection, PopoverPosition } from './popover-position/popover-position';
+import { ArrowPosition, DefaultPositions, Placement, PopoverFlippedDirection, PopoverPosition } from './popover-position/popover-position';
 import { KeyUtil } from '../utils/functions/key-util';
 
 let cdkPopoverUniqueId = 0;
@@ -114,6 +114,14 @@ export class PopoverComponent extends BasePopoverClass
     directiveRef: any;
 
     /** @hidden */
+    childContent: {
+        basePopoverSettings: BasePopoverClass,
+        triggerElement: ElementRef,
+        stringContent: string,
+        templateContent: TemplateRef<any>
+    } = null;
+
+    /** @hidden */
     private _initialised = false;
 
     /** @hidden */
@@ -150,6 +158,13 @@ export class PopoverComponent extends BasePopoverClass
             this.scrollStrategy = this._overlay.scrollStrategies.reposition();
         }
 
+
+        if (this.childContent) {
+            Object.keys(this.childContent.basePopoverSettings)
+                .forEach(key => this[key] = this.childContent.basePopoverSettings[key]
+            );
+            this.trigger = this.childContent.triggerElement;
+        }
     }
 
     /** @hidden */
