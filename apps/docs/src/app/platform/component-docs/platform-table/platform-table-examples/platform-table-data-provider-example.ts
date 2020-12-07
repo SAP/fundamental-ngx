@@ -55,7 +55,8 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
                 items = items.filter((item) => {
                     switch (field) {
                         case 'name':
-                            return this.filterByName(item, value as string);
+                        case 'description':
+                            return this.filterByTextField(item, field, value as string);
                         case 'price.value':
                             return this.filterByPriceRange(item, value as any);
                         case 'status':
@@ -72,8 +73,9 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return items;
     }
 
-    private filterByName(item: ExampleItem, filterName: string): boolean {
-        return filterName ? item.name?.includes(filterName) : true;
+    private filterByTextField(item: ExampleItem, itemKey: keyof ExampleItem, filterText: string): boolean {
+        const itemValue: string = getNestedValue(itemKey, item);
+        return filterText ? itemValue?.includes(filterText) : true;
     }
 
     private filterByPriceRange(item: ExampleItem, filterModel: { min: number; max: number }): boolean {
@@ -130,6 +132,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 }
 
 /* UTILS */
+
 const sort = <T extends object>(a: T, b: T, key?: string) => {
     if (key) {
         const aValue = getNestedValue(key, a);
@@ -141,7 +144,7 @@ const sort = <T extends object>(a: T, b: T, key?: string) => {
     }
 };
 
-function getNestedValue(key: string, object: object): any {
+function getNestedValue<T extends {}>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
 
