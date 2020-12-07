@@ -10,7 +10,6 @@ import {
     TabHeaderDirective,
     TabIconComponent,
     TabLabelDirective,
-    TabLoadTitleDirective,
     TabProcessDirective,
     TabProcessIconDirective,
     TabSeparatorDirective,
@@ -25,13 +24,13 @@ import { ButtonModule } from '../button/button.module';
 import { ListModule } from '../list/list.module';
 import { PopoverModule } from '../popover/popover.module';
 import { MenuModule } from '../menu/menu.module';
+import { ScrollSpyModule } from '../scroll-spy/scroll-spy.module';
 
 @NgModule({
     declarations: [
         TabListComponent,
         TabPanelComponent,
         TabTitleDirective,
-        TabLoadTitleDirective,
         TabNavComponent,
         TabLinkDirective,
         TabItemDirective,
@@ -45,12 +44,11 @@ import { MenuModule } from '../menu/menu.module';
         TabProcessIconDirective,
         TabSeparatorDirective
     ],
-    imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule],
+    imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule, ScrollSpyModule],
     exports: [
         TabListComponent,
         TabPanelComponent,
         TabTitleDirective,
-        TabLoadTitleDirective,
         TabNavComponent,
         TabItemDirective,
         TabLinkDirective,
