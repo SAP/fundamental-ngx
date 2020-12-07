@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { WizardStepStatus } from '@fundamental-ngx/core';
 
 @Component({
@@ -14,8 +14,7 @@ export class WizardBranchingExampleComponent {
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
 
-    step3label = 'Step 3: Payment Details';
-
+    @Input()
     paymentSelection: any;
 
     goToStep(step: number): void {
@@ -30,11 +29,6 @@ export class WizardBranchingExampleComponent {
                 this.step1status = 'completed';
                 this.step2status = 'completed';
                 this.step3status = 'current';
-                if (this.paymentSelection === 'credit') {
-                    this.step3label = 'Step 3: Credit Card Details';
-                } else {
-                    this.step3label = 'Step 3: Bank Details';
-                }
                 break;
             }
         }
