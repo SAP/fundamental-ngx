@@ -27,7 +27,7 @@ describe('Link component test suite', function() {
          checkLinkData(linkPage.iconLink);
        //  checkLinkHover(iconLinkHoverState);
          expect(iconLinkAltText).toBe(defaultLink_alt_text);
-         expect(webDriver.isElementClickeble(linkPage.iconLink)).toBe(true);
+         expect(webDriver.isElementClickable(linkPage.iconLink)).toBe(true);
     });
 
     it('should check standard links', () => {
@@ -43,7 +43,7 @@ describe('Link component test suite', function() {
                 if (i !== 8) {
                     expect(webDriver.getAttributeByName(linkPage.standardLinks, 'aria-label', i)).toBe(standardLinksAltTextArray[i]);
                     checkLinkData(linkPage.standardLinks, i);
-                    expect(webDriver.isElementClickeble(linkPage.standardLinks, 5000, i)).toBe(true);
+                    expect(webDriver.isElementClickable(linkPage.standardLinks, 5000, i)).toBe(true);
             }
         }
     });
@@ -58,7 +58,7 @@ describe('Link component test suite', function() {
        checkLinkData(linkPage.emphasizedLink);
      //  checkLinkHover(emphasizedLinkHoverState);
        expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
-       expect(webDriver.isElementClickeble(linkPage.emphasizedLink)).toBe(true);
+       expect(webDriver.isElementClickable(linkPage.emphasizedLink)).toBe(true);
     });
 
     it('should check disabled link', () => {
@@ -67,7 +67,7 @@ describe('Link component test suite', function() {
         expect(webDriver.getAttributeByName(linkPage.disabledLink, 'class')).toContain('disabled');
       //  checkLinkData(linkPage.disabledLink);
         expect(disabledLinkAltText).toBe(defaultLink_alt_text);
-        expect(webDriver.isElementClickeble(linkPage.disabledLink)).toBe(false);
+        expect(webDriver.isElementClickable(linkPage.disabledLink)).toBe(false);
     });
 
     it('should check disabled emphasized link', () => {
@@ -77,7 +77,7 @@ describe('Link component test suite', function() {
             .toContain('disabled', 'emphasized');
      //   checkLinkData(linkPage.emphasizedDisabledLink);
         expect(disabledEmphasizedLinkAltText).toBe(defaultLink_alt_text);
-        expect(webDriver.isElementClickeble(linkPage.emphasizedDisabledLink)).toBe(false);
+        expect(webDriver.isElementClickable(linkPage.emphasizedDisabledLink)).toBe(false);
     });
 
     it('should check inverted link', () => {
@@ -90,7 +90,7 @@ describe('Link component test suite', function() {
         checkLinkData(linkPage.invertedLink);
     //    checkLinkHover(invertedLinkHoverState);
         expect(invertedLinkAltText).toBe(defaultLink_alt_text);
-        expect(webDriver.isElementClickeble(linkPage.invertedLink)).toBe(true);
+        expect(webDriver.isElementClickable(linkPage.invertedLink)).toBe(true);
     });
 
     it('should check truncated link', () => {
@@ -103,7 +103,7 @@ describe('Link component test suite', function() {
         checkLinkData(linkPage.truncatedLink);
      //   checkLinkHover(truncatedLinkHoverState);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
-        expect(webDriver.isElementClickeble(linkPage.truncatedLink)).toBe(true);
+        expect(webDriver.isElementClickable(linkPage.truncatedLink)).toBe(true);
     });
 
     it('should check LTR is default orientation', () => {

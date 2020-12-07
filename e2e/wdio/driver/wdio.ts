@@ -172,8 +172,8 @@ export class Wdio {
         return $$(selector);
     }
 
-    elementDisplayed(selector: string): boolean {
-        return $(selector).isDisplayed();
+    elementDisplayed(selector: string, index: number = 0): boolean {
+        return $$(selector)[index].isDisplayed();
     }
 
     clickAndHold(selector: string, waitTime: number = this.defaultWaitTime, index: number = 0): void {

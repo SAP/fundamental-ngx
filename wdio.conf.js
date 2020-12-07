@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/switch.e2e-spec.ts'
+        './e2e/wdio/**/standard-list-item.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -52,17 +52,17 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-        // {
-        //     browserName: 'internet explorer',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     "sauce:options": {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-internet-explorer',
-        //         requireWindowFocus: true,
-        //         //tags: [ "process.env.TRAVIS_BUILD_ID"],
-        //     }
-        // },
+        {
+            browserName: 'internet explorer',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            "sauce:options": {
+                screenResolution: '1920x1080',
+                name: 'e2e-win-internet-explorer',
+                requireWindowFocus: true,
+                //tags: [ "process.env.TRAVIS_BUILD_ID"],
+            }
+        },
         {
             browserName: 'MicrosoftEdge',
             browserVersion: 'latest',
@@ -129,15 +129,15 @@ exports.config = {
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-        // {
-        //     browserName: 'safari',
-        //     browserVersion: '13.1',
-        //     platformName: 'macOS 10.15',
-        //     "sauce:options": {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-safari',
-        //     }
-        // },
+        {
+            browserName: 'safari',
+            browserVersion: '13.1',
+            platformName: 'macOS 10.15',
+            "sauce:options": {
+                screenResolution: '1920x1440',
+                name: 'e2e-MAC-safari',
+            }
+        },
     ],
     //
     // ===================
@@ -171,9 +171,7 @@ exports.config = {
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
 
-    //baseUrl: 'https://sap.dev:4200/',
-    baseUrl: 'https://anton.local:4200/',
-    //baseUrl: 'https://sap.github.io/',
+    baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,

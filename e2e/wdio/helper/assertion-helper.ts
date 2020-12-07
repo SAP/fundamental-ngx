@@ -37,5 +37,30 @@ export function checkBorderColor(array, expectedColor): void {
     });
 }
 
+export function checkElementDisplayed(element: string): any {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.elementDisplayed(element, i)).toBe(true);
+    }
+}
 
+export function checkElementText(element: string): any {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.getText(element, i)).not.toBe(null, '');
+    }
+}
 
+export function checkAttributeValueTrue(element: string, attribute: string): any {
+    const elCount = webDriver.getElementArrayLength(element);
+    for (let i = 0; elCount > i; i++) {
+        expect(webDriver.getAttributeByName(element, attribute, i)).toBe('true');
+    }
+}
+
+export function checkElArrIsClickable(element: string): any {
+    const elCount = webDriver.getElementArrayLength(element);
+    for (let i = 0; elCount > i; i++) {
+        expect(webDriver.isElementClickable(element, i)).toBe(true);
+    }
+}
