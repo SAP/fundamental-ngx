@@ -21,9 +21,7 @@ export class ThumbnailImageComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         // Select first image by default, if none has been selected
         if (changes.mediaList && Array.isArray(this.mediaList)) {
-            const alreadySelected: boolean = this.mediaList.reduce((selected, image) => {
-              return  selected || image.selected;
-            }, false);
+            const alreadySelected: boolean = this.mediaList.some(image => image.selected);
             if (!alreadySelected) {
                 this.mediaList[0].selected = true;
             }
