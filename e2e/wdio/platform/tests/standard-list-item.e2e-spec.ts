@@ -114,8 +114,6 @@ describe('Standard List Item test suite:', function() {
             const elCount = webDriver.getElementArrayLength(standardListPg.sSecTypeListItem);
             for (let i = 0; elCount > i; i++) {
                 expect(webDriver.getAttributeByName(standardListPg.sSecTypeListItem, StandardLinkData.secondaryAttr, i))
-                    .not.toBe(null, '');
-                expect(webDriver.getAttributeByName(standardListPg.sSecTypeListItem, StandardLinkData.secondaryAttr, i))
                     .toBe(StandardLinkData.secondaryTypes[i]);
             }
         });

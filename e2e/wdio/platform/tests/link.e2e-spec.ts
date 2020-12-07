@@ -43,7 +43,7 @@ describe('Link component test suite', function() {
                 if (i !== 8) {
                     expect(webDriver.getAttributeByName(linkPage.standardLinks, 'aria-label', i)).toBe(standardLinksAltTextArray[i]);
                     checkLinkData(linkPage.standardLinks, i);
-                    expect(webDriver.isElementClickable(linkPage.standardLinks, 5000, i)).toBe(true);
+                    expect(webDriver.isElementClickable(linkPage.standardLinks, i)).toBe(true);
             }
         }
     });

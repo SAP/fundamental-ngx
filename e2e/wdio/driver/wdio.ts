@@ -192,7 +192,7 @@ export class Wdio {
         $$(selector)[index].scrollIntoView();
     }
 
-    isElementClickable(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
+    isElementClickable(selector: string, index: number = 0): boolean {
         return $$(selector)[index].isClickable();
     }
 
