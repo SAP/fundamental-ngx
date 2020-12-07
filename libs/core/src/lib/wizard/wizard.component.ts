@@ -2,7 +2,8 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ContentChild,
+    Component,
+    ContentChild,
     ContentChildren,
     ElementRef,
     HostListener,
@@ -263,18 +264,25 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 if (step.status === CURRENT_STEP_STATUS && !step.completed) {
                     step.content.tallContent = true;
                 }
-                step.visited = true;
-                if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) || step.isSummary) {
+                if (
+                    !templatesLength ||
+                    (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) ||
+                    (step.isSummary && !step.visited)
+                ) {
                     this.contentTemplates = [step.content.contentTemplate];
-                } else if (this.appendToWizard) {
+                } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
+                step.visited = true;
             }
         });
-        if (this.steps.last.content) {
+        if (this.steps.last.isSummary && this.steps.toArray()[this.steps.length - 2]) {
+            this.steps.toArray()[this.steps.length - 2].content.tallContent = true;
+            this.steps.toArray()[this.steps.length - 2].finalStep = true;
+        } else if (this.steps.last.content) {
             this.steps.last.content.tallContent = true;
+            this.steps.last.finalStep = true;
         }
-        this.steps.last.finalStep = true;
     }
 
     /** @hidden */
@@ -282,7 +290,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         if (this.appendToWizard) {
             _fromScrollToCurrentStep = true;
             this.steps.forEach((step, index) => {
-                if (step.status === CURRENT_STEP_STATUS) {
+                if (step.status === CURRENT_STEP_STATUS && !step.isSummary) {
                     const child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
                     const wizardNavigationHeight = this._elRef.nativeElement.querySelector(
                         '.' + WIZARD_NAVIGATION_CLASS
@@ -332,19 +340,26 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setStackedTop(currentStep: WizardStepComponent): void {
         this.steps.forEach((step, index) => {
-            step.getClassList().remove(STEP_STACKED_TOP_CLASS);
-            if (this.steps.toArray()[index + 1] === currentStep) {
-                if (this.steps.length > 1) {
-                    step.getClassList().add(STEP_STACKED_TOP_CLASS);
+            if (step.stepIndicator) {
+                step.getClassList().remove(STEP_STACKED_TOP_CLASS);
+                if (this.steps.toArray()[index + 1] === currentStep) {
+                    if (this.steps.length > 1) {
+                        step.getClassList().add(STEP_STACKED_TOP_CLASS);
+                    }
+                    step.stepIndicator.setStackedItems(this.stackedStepsLeft);
+                } else {
+                    step.stepIndicator.stackedItems = [];
                 }
-                step.stepIndicator.setStackedItems(this.stackedStepsLeft);
-            } else {
-                step.stepIndicator.stackedItems = [];
             }
         });
 
-        this.steps.last.stepIndicator.setStackedItems(this.stackedStepsRight);
+        if (this.steps.last.isSummary) {
+            this.steps.toArray()[this.steps.length - 2].stepIndicator.setStackedItems(this.stackedStepsRight);
+        } else {
+            this.steps.last.stepIndicator.setStackedItems(this.stackedStepsRight);
+        }
     }
+
 
     /** @hidden */
     private _resetStepClasses(): void {
@@ -372,7 +387,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _isCurrentStepSummary(): boolean {
         let retVal = false;
-        this.steps.forEach(step => {
+        this.steps.forEach((step) => {
             if (step.status === CURRENT_STEP_STATUS && step.isSummary) {
                 retVal = true;
             }

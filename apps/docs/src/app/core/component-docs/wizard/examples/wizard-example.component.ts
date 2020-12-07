@@ -16,8 +16,9 @@ export class WizardExampleComponent {
     step4status: WizardStepStatus = 'upcoming';
     summaryStatus: WizardStepStatus = 'upcoming';
 
-    name = '';
+    fullName = '';
     addressLine1 = '';
+    addressLine2 = '';
 
     goToStep(step: number): void {
         switch (step) {

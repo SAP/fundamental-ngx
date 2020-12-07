@@ -60,7 +60,7 @@
                             id="input-1"
                             placeholder="Name"
                             aria-required="true"
-                            [(ngModel)]="name"
+                            [(ngModel)]="fullName"
                             autocomplete="off"
                         />
                     </div>
@@ -70,7 +70,7 @@
                             fd-form-control
                             type="text"
                             id="input-2"
-                            placeholder="Name"
+                            placeholder="Address Line 1"
                             aria-required="true"
                             [(ngModel)]="addressLine1"
                             autocomplete="off"
@@ -78,12 +78,20 @@
                     </div>
                     <div fd-form-item>
                         <label fd-form-label for="input-3">Address Line 2:</label>
-                        <input fd-form-control type="text" id="input-3" placeholder="Name" autocomplete="off" />
+                        <input
+                            fd-form-control
+                            type="text"
+                            id="input-3"
+                            placeholder="Address Line 2"
+                            aria-required="true"
+                            [(ngModel)]="addressLine2"
+                            autocomplete="off"
+                        />
                     </div>
                     <fd-wizard-next-step>
                         <button
                             fd-button
-                            [disabled]="name === '' || addressLine1 === ''"
+                            [disabled]="fullName === '' || addressLine1 === ''"
                             [compact]="true"
                             fdType="emphasized"
                             (click)="goToStep(3)"
@@ -159,15 +167,13 @@
                     <fd-layout-grid>
                         <div fdLayoutGridCol="12" colMd="2" colLg="2" colXl="2">
                             <label fd-form-label style="float: right;">Full Name:</label><br/>
-                            <label fd-form-label style="float: right;">Address:</label><br/>
-                            <label fd-form-label style="float: right;">Zip Code:</label><br/>
-                            <label fd-form-label style="float: right;">Phone Number:</label>
+                            <label fd-form-label style="float: right;">Address Line 1:</label><br/>
+                            <label fd-form-label style="float: right;">Address Line 2:</label><br/>
                         </div>
                         <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
-                            <label fd-form-label style="color: black;">John Doe</label><br/>
-                            <label fd-form-label style="color: black;">Planet Earth</label><br/>
-                            <label fd-form-label style="color: black;">12345</label><br/>
-                            <label fd-form-label style="color: black;">555-5555</label>
+                            <label fd-form-label style="color: black;">{{fullName}}</label><br/>
+                            <label fd-form-label style="color: black;">{{addressLine1}}</label><br/>
+                            <label fd-form-label style="color: black;">{{addressLine2}}</label><br/>
                         </div>
                         <div fdLayoutGridCol="12" colMd="5" colLg="5" colXl="5">
                             <br/>
