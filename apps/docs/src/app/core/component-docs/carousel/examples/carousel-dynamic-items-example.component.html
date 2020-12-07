@@ -1,6 +1,18 @@
+<fd-segmented-button style="margin-bottom: 1rem;">
+    <button fd-button (click)="showHideCard('card1')">
+        {{ card1Visibility ? 'Hide Card1' : 'Show Card1' }}
+    </button>
+    <button fd-button (click)="showHideCard('card2')">
+        {{ card2Visibility ? 'Hide Card2' : 'Show Card2' }}
+    </button>
+    <button fd-button (click)="showHideCard('card3')">
+        {{ card3Visibility ? 'Hide Card3' : 'Show Card3' }}
+    </button>
+</fd-segmented-button>
+
 <div #carousel style="display: flex; justify-content: center;">
     <fd-carousel [visibleSlidesCount]="visibleSlidesCount" [width]="width">
-        <fd-carousel-item>
+        <fd-carousel-item *ngIf="card1Visibility">
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
@@ -37,7 +49,7 @@
             </div>
         </fd-carousel-item>
 
-        <fd-carousel-item>
+        <fd-carousel-item *ngIf="card2Visibility">
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
@@ -74,7 +86,7 @@
             </div>
         </fd-carousel-item>
 
-        <fd-carousel-item>
+        <fd-carousel-item *ngIf="card3Visibility">
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
