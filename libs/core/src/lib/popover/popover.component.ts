@@ -37,7 +37,7 @@ import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operato
 
 import { RtlService } from '../utils/services/rtl.service';
 import { BasePopoverClass } from './base/base-popover.class';
-import { ArrowPosition, DefaultPositions, PopoverPosition } from './popover-position/popover-position';
+import { ArrowPosition, DefaultPositions, PopoverFlippedDirection, PopoverPosition } from './popover-position/popover-position';
 import { KeyUtil } from '../utils/functions/key-util';
 
 let cdkPopoverUniqueId = 0;
@@ -97,11 +97,14 @@ export class PopoverComponent extends BasePopoverClass
     @ViewChild(CdkOverlayOrigin)
     triggerOrigin: CdkOverlayOrigin;
 
-    /** position of arrow, passed to arrow element */
-    arrowPosition: ArrowPosition = null;
+    /** Direction of arrow */
+    _arrowDirection: ArrowPosition = null;
+
+    /** Classes added to arrow element */
+    _arrowClasses: string[] = [];
 
     /** Additional style to put margin into body component, to give a place for arrow */
-    marginStyle: string = null;
+    _marginStyle: string = null;
 
     /** @hidden Properties bind to popover's body */
     _popoverBodyWidth: number;
@@ -369,8 +372,24 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _setArrowStyles(position: ConnectionPositionPair): void {
-        this.arrowPosition = PopoverPosition.getArrowPosition(position, this._getDirection() === 'rtl');
-        this.marginStyle = PopoverPosition.getMarginStyle(this.arrowPosition);
+
+        this._arrowClasses = [];
+
+        this._arrowDirection = PopoverPosition.getArrowPosition(position, this._getDirection() === 'rtl');
+        this._arrowClasses.push(`fd-popover__arrow--${this._arrowDirection}`);
+
+        if (this._arrowDirection === 'top' || this._arrowDirection === 'bottom') {
+            let _position: string = position.overlayX;
+            if (this._getDirection() === 'rtl') {
+                _position = PopoverFlippedDirection[_position];
+            }
+            this._arrowClasses.push(`fd-popover__arrow-x--${_position}`)
+        } else if (this._arrowDirection === 'start' || this._arrowDirection === 'end') {
+            this._arrowClasses.push(`fd-popover__arrow-y--${position.overlayY}`)
+        }
+
+        this._marginStyle = PopoverPosition.getMarginStyle(this._arrowDirection);
+
         this._changeDetectorRef.detectChanges();
     }
 
@@ -400,8 +419,9 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     private _removeArrowStyles(): void {
-        this.arrowPosition = null;
-        this.marginStyle = null;
+        this._arrowDirection = null;
+        this._arrowClasses = [];
+        this._marginStyle = null;
     }
 
     /** @hidden */

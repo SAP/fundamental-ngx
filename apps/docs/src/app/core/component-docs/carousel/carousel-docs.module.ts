@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CarouselModule, CardModule, ListModule, TableModule } from '@fundamental-ngx/core';
+import { CarouselModule, CardModule, ListModule, TableModule, SegmentedButtonModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { CarouselHeaderComponent } from './carousel-header/carousel-header.component';
 import { CarouselDocsComponent } from './carousel-docs.component';
-import { CarouselOneActiveItemComponent } from './examples/carousel-one-active-item.component';
-import { CarouselVerticalDirectionComponent } from './examples/carousel-vertical-direction.component';
-import { CarouselNoPageIndicatorComponent } from './examples/carousel-no-page-indicator.component';
-import { CarouselMultipleActiveItemComponent } from './examples/carousel-multiple-active-item.component';
-import { CarouselHiddenNavigationComponent } from './examples/carousel-hidden-navigation.component';
-import { CarouselContentNavigationComponent } from './examples/carousel-content-navigation.component';
-import { CarouselLoopedNavigationComponent } from './examples/carousel-looped-navigation.component';
-import { CarouselErrorMessageComponent } from './examples/carousel-error-message.component';
+import { CarouselOneActiveItemExampleComponent } from './examples/carousel-one-active-item-example.component';
+import { CarouselDynamicItemsExampleComponent } from './examples/carousel-dynamic-items-example.component';
+import { CarouselVerticalDirectionExampleComponent } from './examples/carousel-vertical-direction-example.component';
+import { CarouselNoPageIndicatorExampleComponent } from './examples/carousel-no-page-indicator-example.component';
+import { CarouselMultipleActiveItemExampleComponent } from './examples/carousel-multiple-active-item-example.component';
+import { CarouselHiddenNavigationExampleComponent } from './examples/carousel-hidden-navigation-example.component';
+import { CarouselContentNavigationExampleComponent } from './examples/carousel-content-navigation-example.component';
+import { CarouselLoopedNavigationExampleComponent } from './examples/carousel-looped-navigation-example.component';
+import { CarouselErrorMessageExampleComponent } from './examples/carousel-error-message-example.component';
 import { CarouselLoadingContentExampleComponent } from './examples/carousel-loading-content-example.component';
 
 const routes: Routes = [
@@ -34,20 +35,22 @@ const routes: Routes = [
         CarouselModule,
         CardModule,
         ListModule,
+        SegmentedButtonModule,
         TableModule
     ],
     exports: [RouterModule],
     declarations: [
         CarouselDocsComponent,
         CarouselHeaderComponent,
-        CarouselOneActiveItemComponent,
-        CarouselVerticalDirectionComponent,
-        CarouselMultipleActiveItemComponent,
-        CarouselNoPageIndicatorComponent,
-        CarouselHiddenNavigationComponent,
-        CarouselContentNavigationComponent,
-        CarouselLoopedNavigationComponent,
-        CarouselErrorMessageComponent,
+        CarouselOneActiveItemExampleComponent,
+        CarouselDynamicItemsExampleComponent,
+        CarouselVerticalDirectionExampleComponent,
+        CarouselMultipleActiveItemExampleComponent,
+        CarouselNoPageIndicatorExampleComponent,
+        CarouselHiddenNavigationExampleComponent,
+        CarouselContentNavigationExampleComponent,
+        CarouselLoopedNavigationExampleComponent,
+        CarouselErrorMessageExampleComponent,
         CarouselLoadingContentExampleComponent
     ]
 })
