@@ -9,10 +9,12 @@ import {
     EventEmitter,
     forwardRef,
     Input,
+    OnChanges,
     OnDestroy,
     Optional,
     Output,
     QueryList,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -116,7 +118,7 @@ const dialogConfig: DialogConfig = {
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
     }
 })
-export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
+export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChanges {
     /** Data source for table data. */
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
@@ -220,7 +222,6 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
     viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
 
 
-
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
 
@@ -306,12 +307,25 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
     private readonly _rowsStateChanges: Subject<SelectableRow[]> = new Subject<SelectableRow[]>();
 
     /** @hidden */
+    private _viewInitiated = false;
+
+    /** @hidden */
     constructor(
         private readonly _tableService: TableService,
         private readonly _cd: ChangeDetectorRef,
         private readonly _dialogService: DialogService,
         @Optional() private readonly _rtlService: RtlService
     ) {}
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!this._viewInitiated) {
+            return;
+        }
+        if ('selectionMode' in changes || 'freezeColumnsTo' in changes) {
+            this._setFreezableInfo();
+        }
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -328,6 +342,8 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
         this._listenToTableColumnsLength();
 
         this._cd.detectChanges();
+
+        this._viewInitiated = true;
     }
 
     /** @hidden */
@@ -610,6 +626,8 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy {
 
             columns.push(column.key);
         }
+
+        return [];
     }
 
     /** @hidden */

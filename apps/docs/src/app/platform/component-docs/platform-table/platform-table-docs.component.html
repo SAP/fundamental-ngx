@@ -60,7 +60,10 @@
 >
     Column Sorting
 </fd-docs-section-title>
-<description>In this example, Name, Description and Price columns can be sorted.</description>
+<description>
+    Use <code>[sortable]="true"</code> to mark a column as an sortable one.<br/>
+    In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.
+</description>
 <component-example>
     <fdp-table-sortable-example></fdp-table-sortable-example>
 </component-example>
@@ -74,7 +77,17 @@
 >
     Column Filtering
 </fd-docs-section-title>
-<description>Example showing the different facets of filtering within a table.</description>
+<description>
+    There are two ways to add filtering.
+    The first one is to use the column option <code>[filterable]="true"</code>. This will add filter input field in the column header menu.
+    <br/>
+    The second one is to use <code>fdp-table-view-settings-filter</code> withing <code>fdp-table-view-settings-dialog</code>. It gives ability to define filtering type. For now it supports the next types: 
+    <ul>
+        <li>single-select</li>
+        <li>multi-select</li>
+        <li>custom</li>
+    </ul>
+</description>
 <component-example>
     <fdp-table-filterable-example></fdp-table-filterable-example>
 </component-example>
@@ -88,6 +101,13 @@
 >
     Column Grouping
 </fd-docs-section-title>
+<description>
+    Use <code>[groupable]="true"</code> to mark a column as one that can be used to group by.
+    <br/>
+    Once there is at least one a groupable column the Group dialog option appears in the table toolbar. To enable grouping by some column you can use the column header menu or the Group dialog. In order to ungroup you should use only the Group dialog.
+    <br/>  
+    In this example <code>Name</code> and <code>Status</code> columns can be used to group by.
+</description>
 <component-example>
     <fdp-table-groupable-example></fdp-table-groupable-example>
 </component-example>
@@ -99,9 +119,11 @@
     id="freezable-table"
     componentName="Table"
 >
-    Column Freeze
+    Column Freezing
 </fd-docs-section-title>
-<description>Example which shows table freeze with fixed columns.</description>
+<description>
+    Use <code>[freezeColumnsTo]="columnKey"</code> to freeze columns up to and including.
+</description>
 <component-example>
     <fdp-table-freezable-example></fdp-table-freezable-example>
 </component-example>
@@ -136,8 +158,8 @@
                 [hideItemCount]="data['table-toolbar'].hideItemCount"
             >
                 <fdp-table-toolbar-actions>
-                    <fdp-button label="Action One"></fdp-button>
-                    <fdp-button label="Action Two"></fdp-button>
+                    <fdp-button label="Action One" [contentDensity]="data.table.contentDensity"></fdp-button>
+                    <fdp-button label="Action Two" [contentDensity]="data.table.contentDensity"></fdp-button>
                 </fdp-table-toolbar-actions>
             </fdp-table-toolbar>
 
