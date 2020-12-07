@@ -9,6 +9,7 @@ import { BasePopoverClass } from '../popover/base/base-popover.class';
  */
 @Directive({
     selector: '[fd-inline-help], [fd-inline-help-template]',
+    providers: [PopoverService]
 })
 export class InlineHelpDirective extends BasePopoverClass implements OnInit {
     /** The trigger events that will open/close the inline help component.
@@ -30,12 +31,12 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit {
     }
 
     ngOnInit(): void {
-        this._popoverService.basePopoverSettings = new BasePopoverClass();
-        Object.keys(new BasePopoverClass()).forEach(key => this._popoverService.basePopoverSettings[key] = this[key])
+        // this._popoverService.basePopoverSettings = new BasePopoverClass();
+        // Object.keys(new BasePopoverClass()).forEach(key => this._popoverService.basePopoverSettings[key] = this[key])
         this._popoverService.containerElement = this._elementRef;
         this._popoverService.triggerElement = this._elementRef;
         this._popoverService.stringContent = this.inlineHelpTitle;
         this._popoverService.templateContent = this.inlineHelpTemplate;
-        this._popoverService.setUpPopover();
+        this._popoverService.setUpListeners(this.triggers);
     }
 }

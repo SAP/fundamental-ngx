@@ -8,7 +8,6 @@ import { PopoverService } from '../popover/popover.service';
 @NgModule({
     imports: [CommonModule, PopoverModule],
     exports: [InlineHelpDirective],
-    declarations: [InlineHelpDirective],
-    providers: [PopoverService]
+    declarations: [InlineHelpDirective]
 })
 export class InlineHelpModule {}
