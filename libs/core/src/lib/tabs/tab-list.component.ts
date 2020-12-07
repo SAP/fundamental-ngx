@@ -20,7 +20,7 @@ import {
 import { TabPanelComponent } from './tab/tab-panel.component';
 import { fromEvent, merge, Subject, timer } from 'rxjs';
 import { TabsService } from './tabs.service';
-import { debounceTime, filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, first, takeUntil } from 'rxjs/operators';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { getElementCapacity, getElementWidth } from '../utils/functions';
@@ -79,7 +79,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
 
     /** Maximum height of the content */
     @Input()
-    maxContentHeight;
+    maxContentHeight = '100%';
 
     /** Event emitted when the selected panel changes. */
     @Output()
@@ -115,17 +115,20 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     /** @hidden Tabs divided into tabs visible in the tab-bar and collapsed */
     _tabs: { [key: string]: TabPanelComponent[] } = { visible: [], overflowing: [] };
 
-    /** @hidden  */
+    /** @hidden  Cashed tab header items width */
     _tabsWidth: [TabItemDirective, number][];
 
-    /** @hidden TODO */
+    /** @hidden Width of the expand overflowing tabs trigger */
     _overflowTriggerWidth: number;
 
-    /** @hidden TODO */
+    /** @hidden Whether the tabs header is collapsed */
     _isCollapsed = true;
 
     /** @hidden */
     _panelTabsArray: TabPanelComponent[];
+
+    /** @hidden Whether to disable scroll spy */
+    _disableScrollSpy = true;
 
     /** @hidden */
     private _panelTabs: QueryList<TabPanelComponent>;
@@ -195,6 +198,12 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
             event,
             this.tabLinks.map(tab => tab.elementRef.nativeElement)
         );
+    }
+
+    _highlightActiveTab({ id }: HTMLElement): void {
+        const index = this._panelTabsArray.findIndex(panel => panel.id === id);
+        this.selectedIndex = index;
+        this.selectedIndexChange.emit(index);
     }
 
     /** @hidden */
@@ -299,13 +308,6 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
         })
     }
 
-    /** @hidden Caches the width of the tabs and overflow trigger
-     * @param tabItems - collection of tab instances */
-    private _cacheTabsDimensions(tabItems: TabItemDirective[]): void {
-        this._overflowTriggerWidth = Math.ceil(getElementWidth(this.overflowTrigger));
-        this._tabsWidth = tabItems.map(item => [item, Math.ceil(getElementWidth(item.elementRef(), true))]);
-    }
-
     /** @hidden Setup mechanisms required for handling the overflowing tabs behavior */
     private _setupCollapsingOverflowedTabs(): void {
         if (this.collapseOverflow) {
@@ -317,12 +319,18 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
         }
     }
 
+    /** @hidden Caches the width of the tabs and overflow trigger
+     * @param tabItems - collection of tab instances */
+    private _cacheTabsDimensions(tabItems: TabItemDirective[]): void {
+        this._overflowTriggerWidth = Math.ceil(getElementWidth(this.overflowTrigger));
+        this._tabsWidth = tabItems.map(item => [item, Math.ceil(getElementWidth(item.elementRef(), true))]);
+    }
+
     /** @hidden Open tab
      * @param index - Tab index */
     private _openTab(index: number): void {
         if (this.stackContent) {
             this._scrollToPanel(index);
-            this._panelTabsArray[index]?.elementRef.nativeElement.scrollIntoView(true);
         } else {
             this._panelTabs.forEach((tab, i) => tab.triggerExpandedPanel(i === index));
         }
@@ -340,7 +348,20 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnChan
     private _scrollToPanel(index: number): void {
         const containerElement = this.contentContainer.nativeElement;
         const panelElement = this._panelTabsArray[index].elementRef.nativeElement;
-        console.log(panelElement.offsetTop - containerElement.clientHeight, containerElement);
-        containerElement.scrollTo({ top: panelElement.offsetTop - containerElement.clientHeight, behavior: 'smooth' });
+        const distanceToScroll = panelElement.offsetTop - containerElement.offsetTop;
+        const maximumScrollTop = containerElement.scrollHeight - containerElement.clientHeight;
+        const currentScrollPosition = Math.ceil(containerElement.scrollTop);
+
+        if (!(currentScrollPosition === maximumScrollTop && distanceToScroll > maximumScrollTop)) {
+            this._disableScrollSpy = true;
+            fromEvent(containerElement, 'scroll')
+                .pipe(
+                    takeUntil(this._onDestroy$),
+                    debounceTime(100),
+                    first()
+                ).subscribe(() => this._disableScrollSpy = false);
+
+            containerElement.scrollTo({ top: distanceToScroll, behavior: 'smooth' });
+        }
     }
 }

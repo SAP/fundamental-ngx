@@ -1,5 +1,5 @@
-<fd-tab-list [stackContent]="true">
-    <fd-tab *ngFor="let tab of tabs" [title]="tab.title">
+<fd-tab-list [stackContent]="true" maxContentHeight="250px">
+    <fd-tab *ngFor="let tab of tabs" [title]="tab.title" tabState="neutral">
         <div class="content-container">
             {{tab.content}}
         </div>

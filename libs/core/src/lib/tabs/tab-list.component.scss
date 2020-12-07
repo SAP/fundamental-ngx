@@ -1,7 +1,8 @@
 @import '~fundamental-styles/dist/tabs';
 
 .fd-tabs-custom {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 .is-disabled {
@@ -9,6 +10,11 @@
     opacity: 0.4;
 }
 
-.fd-tabs__content {
-    overflow-y: auto;
+.fd-tabs {
+    flex-grow: 0;
+
+    &__content {
+        overflow-y: auto;
+        flex-grow: 1;
+    }
 }

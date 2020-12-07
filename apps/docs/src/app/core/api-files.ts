@@ -237,7 +237,6 @@ export const API_FILES = {
         'TabListComponent',
         'TabPanelComponent',
         'TabTitleDirective',
-        'TabLoadTitleDirective',
         'TabNavComponent',
         'TabLinkDirective',
         'TabItemDirective',
