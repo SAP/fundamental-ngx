@@ -19,7 +19,6 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { WizardCustomizableExampleComponent } from './examples/wizard-customizable-example.component';
 import { WizardMobileExampleComponent } from './examples/wizard-mobile-example.component';
 import { WizardBranchingExampleComponent } from './examples/wizard-branching-example.component';
-import { CdkScrollableModule } from '@angular/cdk/scrolling';
 
 const routes: Routes = [
     {
@@ -43,8 +42,7 @@ const routes: Routes = [
         FormGroupModule,
         FormModule,
         TitleModule,
-        LayoutGridModule,
-        CdkScrollableModule
+        LayoutGridModule
     ],
     exports: [RouterModule],
     declarations: [
