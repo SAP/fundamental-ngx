@@ -1,4 +1,21 @@
-<ng-content select="[fd-popover-body-header]"></ng-content>
-<ng-content select="[fd-popover-body-subheader]"></ng-content>
-<ng-content></ng-content>
-<ng-content select="[fd-popover-body-footer]"></ng-content>
+
+
+<div class="fd-popover__popper fd-popover__popper--cdk-custom"
+     [class.fd-popover__popper--no-arrow]="_noArrow"
+     [ngClass]="_additionalBodyClass"
+     [cdkTrapFocus]="_focusTrapped"
+     [cdkTrapFocusAutoCapture]="_focusAutoCapture"
+     [style]="_marginStyle"
+     [style.max-width.px]="_maxWidth"
+     [style.min-width.px]="_popoverBodyMinWidth"
+     [style.width.px]="_popoverBodyWidth"
+     (keydown)="bodyKeydownHandler($event)"
+>
+    <ng-content select="[fd-popover-body-header]"></ng-content>
+    <ng-content select="[fd-popover-body-subheader]"></ng-content>
+    <ng-content></ng-content>
+    {{text}}
+    <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
+    <ng-content select="[fd-popover-body-footer]"></ng-content>
+    <span class="fd-popover__arrow" [ngClass]="_arrowClasses" *ngIf="!_noArrow"></span>
+</div>

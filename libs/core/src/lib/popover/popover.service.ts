@@ -1,10 +1,11 @@
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     ElementRef,
     Injectable,
     Injector,
-    Input,
+    Input, OnInit,
     Optional,
     Renderer2,
     TemplateRef,
@@ -19,23 +20,32 @@ import {
     FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayConfig,
-    OverlayRef,
+    OverlayRef, ViewportRuler
 } from '@angular/cdk/overlay';
 import { RtlService } from '../utils/services/rtl.service';
 import { merge, Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 import { ScrollStrategy } from '@angular/cdk/overlay/scroll/scroll-strategy';
-import { InlineHelpComponent } from '../inline-help/inline-help.component';
+import { PopoverBodyComponent } from './popover-body/popover-body.component';
+import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/connected-position';
+
+const MAX_BODY_SIZE = 99999999;
+
+export interface PopoverTemplate {
+    container: ViewContainerRef;
+    popoverBody: PopoverBodyComponent;
+    template: TemplateRef<any>
+}
 
 @Injectable()
 export class PopoverService extends BasePopoverClass {
 
     constructor(
-        private _dynamicComponentService: DynamicComponentService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _overlay: Overlay,
-        @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2,
+        private _viewportRuler: ViewportRuler,
+        @Optional() private _rtlService: RtlService,
     ) {
         super();
 
@@ -43,22 +53,16 @@ export class PopoverService extends BasePopoverClass {
         this._refresh$ = merge(this.isOpenChange, this._onDestroy$);
     }
 
-    basePopoverSettings: BasePopoverClass;
     triggerElement: ElementRef;
-    containerElement: ElementRef;
+
     stringContent: string;
     templateContent: TemplateRef<any>;
-    scrollStrategy: ScrollStrategy;
 
-    templateRef: TemplateRef<any>;
+    popoverBody: PopoverBodyComponent;
 
-    container: ViewContainerRef;
+    templateData: PopoverTemplate
 
-    isOpen = false;
-
-    closeOnOutsideClick = true;
-
-    placement: Placement;
+    private _initialised = false;
 
     /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()
@@ -79,28 +83,72 @@ export class PopoverService extends BasePopoverClass {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    initialise(triggerElement: ElementRef, config?: BasePopoverClass, templateData?: PopoverTemplate): void {
+        this.templateData = templateData;
+        this.triggerElement = triggerElement;
+        if (config) {
+            Object.keys(new BasePopoverClass()).forEach(key => this[key] = config[key])
+        }
+
+        if (!this.scrollStrategy) {
+            this.scrollStrategy = this._overlay.scrollStrategies.reposition();
+        }
+
+        if (!this.scrollStrategy) {
+            this.scrollStrategy = this._overlay.scrollStrategies.reposition();
+        }
+
+        this._initialised = true;
+        this._refreshTriggerListeners();
+        if (this.isOpen) {
+            this.open();
+        }
+    }
 
     /** Closes the popover. */
     close(): void {
         if (this._overlayRef) {
             this._overlayRef.dispose();
             this._changeDetectorRef.detectChanges();
+
+            if (this.isOpen) {
+                this.isOpenChange.emit(false);
+            }
             this.isOpen = false;
         }
     }
 
     /** Opens the popover. */
     open(): void {
-        if ((!this._overlayRef || !this._overlayRef.hasAttached())) {
-            this._overlayRef = this._overlay.create(this._getOverlayConfig());
-            const component = new ComponentPortal(InlineHelpComponent);
-            this._overlayRef.attach(component);
-            console.log('opened');
+        if ((!this._overlayRef || !this._overlayRef.hasAttached()) || !this.disabled) {
+            const position = this._getPositionStrategy();
+            this._overlayRef = this._overlay.create(this._getOverlayConfig(position));
+
+            if (!this.templateData) {
+                const overlay = this._overlayRef.attach(new ComponentPortal(PopoverBodyComponent));
+                this.popoverBody = overlay.instance;
+            } else {
+                this._overlayRef.attach(new TemplatePortal(this.templateData.template, this.templateData.container));
+            }
+
+            this._listenForPositionChange(position.positionChanges);
+
+            this._passVariablesToBody();
+
+            if (this.fillControlMode) {
+                this._listenOnResize();
+            }
 
             this._changeDetectorRef.detectChanges();
+
+            if (!this.isOpen) {
+                this.isOpenChange.emit(true);
+            }
+
             this.isOpen = true;
+
             this._listenOnClose();
-            this._listenOnOutClicks();
+            this._listenOnOutClicks()
         }
     }
 
@@ -113,35 +161,44 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
-    setUpListeners(triggers: string[]): void {
+    refreshListeners(triggers: string[]): void {
         this.triggers = triggers;
         this._refreshTriggerListeners();
     }
 
+    /**
+     * Method called to change position of popover,
+     * recommended to be used only when popover is opened, otherwise change position or cdkPlacement
+     */
+    applyNewPosition(positions: ConnectedPosition[]): void {
+        const refPosition = this._getPositionStrategy(positions);
+        this._listenForPositionChange(refPosition.positionChanges);
+        this._overlayRef.updatePositionStrategy(refPosition);
+    }
 
-    // public setUpPopover(): void {
-    //     this._dynamicComponentService.createDynamicComponent(
-    //         {
-    //             basePopoverSettings: this.basePopoverSettings,
-    //             triggerElement: this.triggerElement,
-    //             stringContent: this.stringContent,
-    //             templateContent: this.templateContent
-    //         },
-    //         PopoverComponent,
-    //         { container: this.containerElement.nativeElement }
-    //     )
-    // }
+    /** Method called to refresh position of opened popover */
+    refreshPosition(): void {
+        if (this._overlayRef) {
+            this._overlayRef.updatePosition();
+        }
+    }
 
     /** @hidden */
-    private _getOverlayConfig(): OverlayConfig {
+    private _getOverlayConfig(position: FlexibleConnectedPositionStrategy): OverlayConfig {
         const direction = this._getDirection();
-        const position = this._getPositionStrategy();
 
         return new OverlayConfig({
             direction: direction,
             positionStrategy: position,
             scrollStrategy: this.scrollStrategy
         });
+    }
+
+    private _listenOnResize(): void {
+        this._viewportRuler.change(15).pipe(
+            takeUntil(this._refresh$),
+            startWith(1)
+        ).subscribe(() => this._applyWidthOverlay());
     }
 
     /** @hidden */
@@ -185,6 +242,21 @@ export class PopoverService extends BasePopoverClass {
                 }));
             });
         }
+    }
+
+    /** @hidden */
+    private _listenForPositionChange(positionChange: Observable<ConnectedOverlayPositionChange>): void {
+        this._placementRefresh$.next();
+        positionChange
+            .pipe(
+                takeUntil(this._placementRefresh$),
+                filter(() => !this.noArrow && !!this.popoverBody),
+                distinctUntilChanged(
+                    (previous, current) =>
+                        previous.connectionPair === current.connectionPair
+                ))
+            .subscribe(event => this.popoverBody._setArrowStyles(event.connectionPair, this._getDirection()))
+        ;
     }
 
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
@@ -234,15 +306,45 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _getPositions(): ConnectedPosition[] {
-        // if (this.cdkPositions) {
-        //     return this.cdkPositions;
-        // }
+        if (this.cdkPositions) {
+            return this.cdkPositions;
+        }
 
         if (this.placement) {
             return [PopoverPosition.getCdkPlacement(this.placement)];
         }
 
         return [];
+    }
+
+    /** @hidden */
+    private _applyWidthOverlay(): void {
+        const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
+        const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
+        if (this.fillControlMode === 'at-least') {
+            this.popoverBody._popoverBodyMinWidth = width;
+        } else if (this.fillControlMode === 'equal') {
+            this.popoverBody._popoverBodyWidth = width;
+        }
+        this._changeDetectorRef.detectChanges();
+    }
+
+    private _passVariablesToBody(): void {
+        this._popoverBody.text = this.stringContent;
+        this._popoverBody._additionalBodyClass = this.additionalBodyClass;
+        this._popoverBody._focusTrapped = this.focusTrapped;
+        this._popoverBody._maxWidth = this.maxWidth;
+        this._popoverBody._focusAutoCapture = this.focusAutoCapture;
+        this._popoverBody._templateToDisplay = this.templateContent;
+    }
+
+    /** @hidden */
+    private _getTriggerWidth(): number {
+        return this._triggerElement.nativeElement.offsetWidth;
+    }
+
+    private get _popoverBody(): PopoverBodyComponent {
+        return this.templateData?.popoverBody || this.popoverBody;
     }
 
 }

@@ -31,12 +31,8 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit {
     }
 
     ngOnInit(): void {
-        // this._popoverService.basePopoverSettings = new BasePopoverClass();
-        // Object.keys(new BasePopoverClass()).forEach(key => this._popoverService.basePopoverSettings[key] = this[key])
-        this._popoverService.containerElement = this._elementRef;
-        this._popoverService.triggerElement = this._elementRef;
         this._popoverService.stringContent = this.inlineHelpTitle;
         this._popoverService.templateContent = this.inlineHelpTemplate;
-        this._popoverService.setUpListeners(this.triggers);
+        this._popoverService.initialise(this._elementRef, this);
     }
 }
