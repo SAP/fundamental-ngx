@@ -4,7 +4,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    HostBinding,
+    HostBinding, HostListener,
     Input,
     OnChanges,
     OnInit,
@@ -49,27 +49,27 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     /** Whether node is blank */
     @Input()
-    @HostBinding('class.blank')
+    @HostBinding('class.approval-flow-node--blank')
     blank: boolean;
 
     /** Whether node element has connection line before the node element */
     @Input()
-    @HostBinding('class.line-before')
+    @HostBinding('class.approval-flow-node--line-before')
     renderLineBefore = false;
 
     /** Whether node element has connection line after the node element */
     @Input()
-    @HostBinding('class.line-after')
+    @HostBinding('class.approval-flow-node--line-after')
     renderLineAfter = true;
 
     /** @hidden */
-    @HostBinding('class.approved')
+    @HostBinding('class.approval-flow-node--approved')
     get _isApproved(): boolean {
         return this.node && isNodeApproved(this.node);
     }
 
     /** @hidden */
-    @HostBinding('class.parent-approved')
+    @HostBinding('class.approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
         return this.parent && isNodeApproved(this.parent);
     }
@@ -79,16 +79,19 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     @Output() onNodeClick = new EventEmitter<void>();
 
+    /** @hidden */
     constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {}
 
     get nativeElement(): HTMLElement {
         return this.elRef.nativeElement;
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.checkNodeStatus();
     }
 
+    /** @hidden */
     ngOnChanges(): void {
         this.checkNodeStatus();
     }
@@ -97,10 +100,16 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
         this.nativeElement.focus({ preventScroll: true });
     }
 
-    openDialog(): void {
+    /** @hidden */
+    @HostListener('click')
+    onClick(): void {
+        if (this.node.blank) {
+            return;
+        }
         this.onNodeClick.emit();
     }
 
+    /** @hidden */
     private checkNodeStatus(): void {
         if (!this.node) {
             return;
@@ -113,7 +122,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 }
 
 function isNodeApproved(node: ApprovalNode): boolean {
-    return node.status === 'approved'
+    return node.status === 'approved';
 }
 
 function getNodeStatusClass(status: ApprovalStatus): ObjectStatus {

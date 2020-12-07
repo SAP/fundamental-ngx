@@ -259,7 +259,7 @@ const complexGraph: ApprovalProcess = {
             description: 'node description',
             approvers: [getRandomUser()],
             status: 'approved',
-            targets: ['ID22-dep'],
+            targets: ['ID220'],
             dueDate: new Date(),
             createDate: new Date()
         },
@@ -269,12 +269,12 @@ const complexGraph: ApprovalProcess = {
             description: 'Marketing team',
             approvers: [getRandomUser(), getRandomUser()],
             status: 'in progress',
-            targets: ['ID222-dep'],
+            targets: ['ID2220'],
             dueDate: new Date(),
             createDate: new Date()
         },
         {
-            id: 'ID22-dep',
+            id: 'ID220',
             name: 'node name',
             description: 'node description',
             approvers: [getRandomUser()],
@@ -284,7 +284,7 @@ const complexGraph: ApprovalProcess = {
             createDate: new Date()
         },
         {
-            id: 'ID222-dep',
+            id: 'ID2220',
             name: 'node name',
             description: 'Marketing',
             approvers: [getRandomUser()],
@@ -327,11 +327,12 @@ function getRandomUser(): User {
 }
 
 export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
-    selectedGraph: 'simple'|'medium'|'complex' = 'complex';
+    selectedGraph: 'simple' | 'medium' | 'complex';
 
-    /**
-     * Fetch of approval process data.
-     */
+    constructor(selectedGraph: 'simple' | 'medium' | 'complex' = 'complex') {
+        this.selectedGraph = selectedGraph;
+    }
+
     fetch(): Observable<ApprovalProcess> {
         return of(graphs[this.selectedGraph]);
     }
@@ -345,36 +346,13 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         });
     }
 
-    /**
-     * Update watcher list. Called whenever there is a change
-     * to the watcher list.
-     */
-    updateWatchers(watchers: User[]): void {
+    updateWatchers(watchers: User[]): void {}
 
-    }
+    updateApproval(approval: ApprovalNode): void {}
 
-    /**
-     * Update approval details. Called whenever there is a
-     * change to the approval detail: change name, change
-     * description,, change approvers.
-     */
-    updateApproval(approval: ApprovalNode): void {
+    updateApprovals(approvals: ApprovalNode[]): void {}
 
-    }
-
-    /**
-     * Update approvals. Called whenever there is a change to
-     * the approval node graph structure: add node, delete node
-     * move node.
-     */
-    updateApprovals(approvals: ApprovalNode[]): void {
-
-    }
-
-    /**
-     * Send reminders for an approval.
-     */
     sendReminders(members: User[], approval: ApprovalNode): void {
-
+        console.log('call "sendReminders" method from ApprovalDataSource implementation class');
     }
 }

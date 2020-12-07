@@ -1,19 +1,23 @@
+$block: approval-flow-node;
+
 :host {
     box-sizing: border-box;
     display: block;
     position: relative;
     margin-bottom: 1rem;
     padding: 1rem;
-    background: #fff;
+    background: var(--sapBaseColor);
     border-radius: 4px;
     box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
     width: 278px;
     height: 94px;
+    cursor: pointer;
 
-    &.blank {
+    &.#{$block}--blank {
         background: transparent;
         box-shadow: none;
         pointer-events: none;
+        cursor: default;
 
         &:before {
             content: '';
@@ -22,39 +26,39 @@
             display: block;
             position: absolute;
             left: -4rem;
-            border-top: 2px dashed #89919A;
+            border-top: 2px dashed var(--sapField_BorderColor);
             top: calc(50% - 1px);
         }
     }
 
-    &.line-before:before, &.line-after:after {
+    &.#{$block}--line-before:before, &.#{$block}--line-after:after {
         content: '';
         width: 1.9rem;
         height: 0;
         display: block;
         position: absolute;
-        border-top: 2px dashed #89919A;
+        border-top: 2px dashed var(--sapField_BorderColor);
         top: 0;
         bottom: 0;
         margin: auto;
     }
 
-    &.line-before:before {
+    &.#{$block}--line-before:before {
         left: -2rem;
     }
 
-    &.line-after:after {
+    &.#{$block}--line-after:after {
         right: -1.9rem;
     }
 
-    &.approved {
+    &.#{$block}--approved {
         &.line-after:after {
             border-top-style: solid;
             border-top-width: 1px;
         }
     }
 
-    &.parent-approved {
+    &.#{$block}--parent-approved {
         &.line-before:before {
             border-top-style: solid;
             border-top-width: 1px;
@@ -63,27 +67,33 @@
     }
 }
 
-.approval-flow-node__inner {
-    padding-left: 2.3rem;
-    position: relative;
-    top: -.3rem;
+.#{$block}__inner {
+    display: flex;
 }
 
-.approval-flow-node__description {
-    font-size: 14px;
-    color: #6A6D70;
+.#{$block}__avatar {
+    margin-right: 0.5rem;
 }
 
-.approval-flow-node__name {
-    padding-left: .3rem;
+.#{$block}__name {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-bottom: 0.1rem;
 }
 
-.approval-flow-node__arrow {
+.#{$block}__description {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    color: var(--sapContent_LabelColor);
+    margin-bottom: 0.4rem;
+}
+
+.#{$block}__arrow {
     width: 0;
     height: 0;
     border-style: solid;
     border-width: 4px 0 4px 8px;
-    border-color: transparent transparent transparent #89919A;
+    border-color: transparent transparent transparent var(--sapField_BorderColor);
     position: absolute;
     left: -8px;
     top: 0;
@@ -91,9 +101,9 @@
     margin: auto;
 }
 
-.approval-flow-node__carousel-start-marker, .approval-flow-node__carousel-end-marker {
+.#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
     z-index: 1;
-    background: #89919A;
+    background: var(--sapField_BorderColor);
     display: block;
     position: absolute;
     width: 4px;
@@ -101,11 +111,11 @@
     top: 42px;
 }
 
-.approval-flow-node__carousel-start-marker {
+.#{$block}__carousel-start-marker {
     left: -2rem;
 }
 
-.approval-flow-node__carousel-end-marker {
+.#{$block}__carousel-end-marker {
     right: -2rem;
 }
 

@@ -1,9 +1,9 @@
 <fd-toolbar [hasTitle]="true">
-    <h3 class="approval-flow-title">{{ title }}</h3>
+    <h3 class="approval-flow__title">{{ title }}</h3>
 </fd-toolbar>
 
-<div class="approval-flow-watchers">
-    <p class="approval-flow-watchers__title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
+<div class="approval-flow__watchers">
+    <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
     <fd-avatar
         *ngFor="let watcher of _approvalProcess?.watchers"
         tabindex="0"
@@ -15,28 +15,28 @@
         (click)="onWatcherClick(watcher)"></fd-avatar>
 </div>
 
-<div class="approval-flow-container">
-    <div class="approval-flow-carousel-controls" *ngIf="_isCarousel">
-        <button class="approval-flow-controls-prev-slide"
+<div class="approval-flow__container">
+    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel">
+        <button class="approval-flow__control--prev-slide"
                 *ngIf="_carouselStep > 0"
                 (click)="previousSlide()">
-            <fd-icon [glyph]="'navigation-left-arrow'"></fd-icon>
+            <fd-icon glyph="navigation-left-arrow"></fd-icon>
             {{ _carouselStep }}
         </button>
-        <button class="approval-flow-controls-next-slide"
+        <button class="approval-flow__control--next-slide"
                 *ngIf="(_maxCarouselStep - _carouselStep) > 0"
                 (click)="nextSlide()">
             {{ _maxCarouselStep - _carouselStep }}
-            <fd-icon [glyph]="'navigation-right-arrow'"></fd-icon>
+            <fd-icon glyph="navigation-right-arrow"></fd-icon>
         </button>
     </div>
-    <div class="approval-flow-graph-container">
-        <div class="approval-flow-graph" #graphEl [style.left.px]="_carouselScrollX">
-            <div class="approval-flow-column"
+    <div class="approval-flow__graph-container">
+        <div class="approval-flow__graph" #graphEl [style.left.px]="_carouselScrollX">
+            <div class="approval-flow__column"
                  *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last"
-                 [class.vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
-                 [class.vertical-line-after]="column.isPartial || (column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
-                 [class.vertical-line-after--solid]="column.allNodesApproved"
+                 [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
+                 [class.approval-flow__column--vertical-line-after]="column.isPartial || (column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
+                 [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
             >
                 <ng-container
                     *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last">

@@ -4,15 +4,16 @@ import {
     Component,
     ElementRef,
     Input,
-    OnInit,
+    OnInit, Output,
     QueryList,
     TemplateRef,
     ViewChild,
-    ViewChildren
+    ViewChildren,
+    EventEmitter
 } from '@angular/core';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { DialogService, KeyUtil, MessageToastService } from '@fundamental-ngx/core';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
@@ -45,6 +46,9 @@ export class ApprovalFlowComponent implements OnInit {
     /** A reference to the user details template */
     @Input() userDetailsTemplate: TemplateRef<any>;
 
+    /** Event emitted on approval flow node click. */
+    @Output() nodeClick = new EventEmitter<ApprovalNode>();
+
     /** @hidden */
     _approvalProcess: ApprovalProcess;
 
@@ -75,6 +79,7 @@ export class ApprovalFlowComponent implements OnInit {
     /** @hidden */
     @ViewChildren(ApprovalFlowNodeComponent) nodeComponents: QueryList<ApprovalFlowNodeComponent>;
 
+    /** @hidden */
     constructor(
         private _dialogService: DialogService,
         private _messageToastService: MessageToastService,
@@ -82,6 +87,7 @@ export class ApprovalFlowComponent implements OnInit {
     ) {
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.dataSource.fetch().subscribe(approvalProcess => {
             this._approvalProcess = approvalProcess;
@@ -98,14 +104,15 @@ export class ApprovalFlowComponent implements OnInit {
                 node: node,
                 approvalFlowDataSource: this.dataSource,
                 userDetailsTemplate: this.userDetailsTemplate
-            },
-            responsivePadding: true
+            }
         });
-        dialogRef.afterClosed.subscribe((reminderTargets) => {
+        const sub = dialogRef.afterClosed.subscribe((reminderTargets) => {
+            sub.unsubscribe();
             if (Array.isArray(reminderTargets)) {
                 this.sendReminders(reminderTargets, node);
             }
         });
+        this.nodeClick.emit(node);
     }
 
     onWatcherClick(watcher: User): void {
@@ -114,8 +121,7 @@ export class ApprovalFlowComponent implements OnInit {
                 watcher: watcher,
                 approvalFlowDataSource: this.dataSource,
                 userDetailsTemplate: this.userDetailsTemplate
-            },
-            responsivePadding: true
+            }
         });
 
 
@@ -123,8 +129,8 @@ export class ApprovalFlowComponent implements OnInit {
 
     sendReminders(targets: User[], node: ApprovalNode): void {
         this.dataSource.sendReminders(targets, node);
-        const content = `Reminder has been sent to ${targets.length === 1 ? targets[0].name : (targets.length + ' members of ' + node.description)}`;
-        this._messageToastService.open(content, {
+        const reminderMessage = `Reminder has been sent to ${targets.length === 1 ? targets[0].name : (targets.length + ' members of ' + node.description)}`;
+        this._messageToastService.open(reminderMessage, {
             duration: 5000
         });
     }
@@ -136,8 +142,8 @@ export class ApprovalFlowComponent implements OnInit {
         }
 
         const newOffset = this._carouselScrollX - this.carouselStepSize * stepSize;
-        this._carouselScrollX = (Math.abs(newOffset) > this.scrollDiff) ? -this.scrollDiff : newOffset;
         const newCarouselStep = this._carouselStep + stepSize;
+        this._carouselScrollX = (Math.abs(newOffset) > this.scrollDiff) ? -this.scrollDiff : newOffset;
         this._carouselStep = newCarouselStep <= this._maxCarouselStep ? newCarouselStep : this._maxCarouselStep;
         this._cdr.detectChanges();
     }
@@ -199,6 +205,7 @@ export class ApprovalFlowComponent implements OnInit {
         }
     }
 
+    /** @hidden */
     private buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
         const rootNode = findRootNode(nodes);
@@ -255,6 +262,7 @@ export class ApprovalFlowComponent implements OnInit {
         return graph;
     }
 
+    /** @hidden */
     private focusNode(node: ApprovalGraphNode, options: { skipSlideChange: boolean; step: number }): void {
         const nodeToFocus = this.nodeComponents.find(comp => comp.node === node);
         if (!nodeToFocus) {
@@ -281,12 +289,14 @@ export class ApprovalFlowComponent implements OnInit {
         }
     }
 
+    /** @hidden */
     private checkCarouselStatus(): void {
         this._isCarousel = this.graphEl.nativeElement.scrollWidth > this.graphEl.nativeElement.clientWidth;
         this._maxCarouselStep = Math.ceil(this.scrollDiff / this.carouselStepSize);
         this._cdr.detectChanges();
     }
 
+    /** @hidden */
     private getNextHorizontalNode = (_ni, _ci, direction: 'left' | 'right', stepSize = 1) => {
         const indexDiff = (direction === 'right' ? 1 : -1);
         const _column = this._graph[_ci + indexDiff];
@@ -302,6 +312,7 @@ export class ApprovalFlowComponent implements OnInit {
         return { nextNode: _nextNode, stepSize: stepSize };
     };
 
+    /** @hidden */
     private getNextVerticalNode = (_ni, _ci, direction: 'up' | 'down', stepSize = 1) => {
         const indexDiff = (direction === 'down' ? 1 : -1);
         const _column = this._graph[_ci];
@@ -314,10 +325,12 @@ export class ApprovalFlowComponent implements OnInit {
         return { nextNode: _nextNode, stepSize: stepSize };
     };
 
+    /** @hidden */
     private get carouselStepSize(): number {
         return this.graphEl.nativeElement.scrollWidth / this.graphEl.nativeElement.children.length;
     }
 
+    /** @hidden */
     private get scrollDiff(): number {
         return this.graphEl.nativeElement.scrollWidth - this.graphEl.nativeElement.clientWidth;
     }
@@ -330,6 +343,5 @@ function findRootNode(nodes: ApprovalNode[]): ApprovalNode {
 function findDependentNodes(rootNodes: ApprovalGraphNode[], nodes: ApprovalNode[]): ApprovalNode[] {
     const rootNodeTargetIds: string[] = [];
     rootNodes.forEach(node => rootNodeTargetIds.push(...node.targets));
-
     return nodes.filter(node => rootNodeTargetIds.includes(node.id));
 }

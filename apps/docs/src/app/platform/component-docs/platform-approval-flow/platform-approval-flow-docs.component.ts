@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import * as approvalFlowTs from '!raw-loader!./platform-approval-flow-examples/platform-approval-flow-example.component.ts';
+import * as approvalFlowDataSource from '!raw-loader!./platform-approval-flow-examples/approval-flow-example-data-source.class.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -8,13 +9,16 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './platform-approval-flow-docs.component.html'
 })
 export class PlatformApprovalFlowDocsComponent {
-
-    approvalFlowTs = approvalFlowTs;
     basic: ExampleFile[] = [
         {
-            language: 'ts',
+            language: 'typescript',
             code: approvalFlowTs,
             fileName: 'platform-approval-flow-example',
+        },
+        {
+            language: 'typescript',
+            code: approvalFlowDataSource,
+            fileName: 'platform-approval-flow-data-source',
         }
     ];
 

@@ -1,15 +1,11 @@
-.approval-flow-title {
+$block: approval-flow;
+
+.#{$block}__title {
     font-size: 1.125rem;
     font-weight: 400;
 }
 
-.approval-flow-watchers__title {
-    font-size: .875em;
-    color: #6A6D70;
-    margin: 1rem 0 .5rem 0;
-}
-
-.approval-flow-watchers {
+.#{$block}__watchers {
     margin-bottom: .5rem;
     padding-left: 1rem;
 
@@ -19,19 +15,26 @@
     }
 }
 
-.approval-flow-container {
+.#{$block}__watchers-title {
+    font-size: .875em;
+    color: var(--sapContent_LabelColor);
+    margin: 1rem 0 .5rem 0;
+}
+
+
+.#{$block}__container {
     position: relative;
     padding: 0 2rem;
 }
 
-.approval-flow-graph-container {
+.#{$block}__graph-container {
     position: relative;
     overflow: hidden;
     padding-left: 2rem;
     padding-top: .5rem;
 }
 
-.approval-flow-carousel-controls {
+.#{$block}__carousel-controls {
     position: absolute;
     display: flex;
     align-items: center;
@@ -43,7 +46,7 @@
     button {
         border: none;
         background: transparent;
-        color: #6A6D70;
+        color: var(--sapContent_LabelColor);
         display: flex;
         justify-content: space-between;
         width: 20px;
@@ -56,57 +59,57 @@
 
         fd-icon {
             font-size: 14px;
-            color: #0854A0;
+            color: var(--sapButton_IconColor);
             position: relative;
             top: 1px;
         }
     }
 }
 
-.approval-flow-controls {
-    &-next-slide {
+.#{$block}__control {
+    &--next-slide {
         position: absolute;
         right: 0;
     }
 
-    &-prev-slide {
+    &--prev-slide {
         position: absolute;
         left: 0;
     }
 }
 
-.approval-flow-graph {
+.#{$block}__graph {
     display: flex;
     position: relative;
     left: 0;
     transition: left .3s;
 
-    .approval-flow-column:not(:last-child) {
+    .#{$block}__column:not(:last-child) {
         margin-right: 4rem;
         position: relative;
 
-        &.vertical-line-before:before, &.vertical-line-after:after {
+        &.#{$block}__column--vertical-line-before:before, &.#{$block}__column--vertical-line-after:after {
             content: '';
             position: absolute;
             top: 48px;
             height: calc(100% - 111px);
         }
 
-        &.vertical-line-before {
+        &.#{$block}__column--vertical-line-before {
             &:before {
-                border-right: 1px solid #89919A;
+                border-right: 1px solid var(--sapField_BorderColor);
                 left: -2.2rem;
             }
         }
 
-        &.vertical-line-after {
+        &.#{$block}__column--vertical-line-after {
             &:after {
-                border-right: 2px dashed #89919A;
+                border-right: 2px dashed var(--sapField_BorderColor);
                 right: -2rem;
             }
 
-            &--solid:after {
-                border-right: 1px solid #89919A;
+            &-solid:after {
+                border-right: 1px solid var(--sapField_BorderColor);
             }
         }
     }

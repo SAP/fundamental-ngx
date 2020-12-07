@@ -1,18 +1,22 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { ApprovalNode } from '@fundamental-ngx/platform';
 
 import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-source.class';
 
 @Component({
     selector: 'fdp-approval-flow-example',
     template: `
-        <fdp-approval-flow 
+        <fdp-approval-flow
             title="Basic Approval Flow Demo"
-            [dataSource]="dataSource" 
-            [userDetailsTemplate]="userDetailsTemplate">
+            [dataSource]="dataSource"
+            [userDetailsTemplate]="userDetailsTemplate"
+            (nodeClick)="nodeClick($event)"
+        >
         </fdp-approval-flow>
         <ng-template #userDetailsTemplate let-data="data">
             <div style="margin-bottom: 4px;"><b>Contact info</b></div>
-            
+
             <div>Mobile <br> <a href="javascript:void(0)">{{ data?.phone }}</a></div>
             <div>E-mail <br> <a href="javascript:void(0)">{{ data?.email }}</a></div>
 
@@ -24,6 +28,10 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
     `
 })
 export class PlatformApprovalFlowExampleComponent {
-    @ViewChild('userDetailsTemplate') userDetailsTemplate: TemplateRef<any>;
-    dataSource = new ApprovalFlowExampleDataSource();
+    dataSource = new ApprovalFlowExampleDataSource('complex');
+
+    nodeClick(node: ApprovalNode): void {
+        console.log('Node click handler');
+        console.log(node);
+    }
 }

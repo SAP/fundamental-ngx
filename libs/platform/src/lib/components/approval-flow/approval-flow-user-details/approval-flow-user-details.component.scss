@@ -1,4 +1,6 @@
-.approval-flow-user-details__user-info {
+$block: approval-flow-user-details;
+
+.#{$block}__user-info {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
@@ -8,24 +10,24 @@
     }
 }
 
-.approval-flow-user-details__name {
+.#{$block}__name {
     font-size: 1rem;
 }
 
-.approval-flow-user-details__description {
-    color: #6a6d70;
+.#{$block}__description {
+    color: var(--sapContent_LabelColor);
 }
 
-.approval-flow-user-details__selected-count {
+.#{$block}__selected-count {
     line-height: 2rem;
     margin: 0 -1rem;
     padding: 0 1rem;
-    background: #F2F2F2;
+    background: var(--sapList_HeaderBackground);
 }
 
 :host ::ng-deep {
     a {
-        color: #0A6ED1;
+        color: var(--sapLinkColor);
     }
 
     .fd-list--byline .fd-list__byline-left {
@@ -42,8 +44,8 @@
             }
 
             fd-icon {
-                font-size: 14px;
-                color: #0854A0;
+                font-size: .875rem;
+                color: var(--sapButton_IconColor);
                 position: relative;
                 top: 1px;
                 cursor: pointer;
@@ -51,7 +53,8 @@
             }
 
             p {
-                margin: .75rem 0;
+                font-size: 1rem;
+                margin: .65rem 0;
             }
 
             &.show-search {
@@ -65,6 +68,8 @@
         }
 
         fd-dialog-body {
+            padding: 1rem;
+
             &.no-top-padding {
                 padding-top: 0;
             }

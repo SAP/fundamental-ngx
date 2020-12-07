@@ -30,9 +30,9 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     ngOnInit(): void {
         this._isListMode = this.dialogRef.data.node?.approvers.length > 1;
         if (this._isListMode) {
-            this.setListItems(this.dialogRef.data.node?.approvers);
+            this.setListItems(this.dialogRef.data.node.approvers);
         } else {
-            this.setUserToShowDetails(this.dialogRef.data.node?.approvers[0] || this.dialogRef.data.watcher);
+            this.setUserToShowDetails(this.dialogRef.data.watcher || this.dialogRef.data.node?.approvers[0]);
         }
     }
 
@@ -51,10 +51,8 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
 
     setUserToShowDetails(user: User): void {
         this._userToShowDetails = user;
-        this._userToShowDetailsData$ = this.dialogRef.data?.approvalFlowDataSource.fetchUser(user.id);
+        this._userToShowDetailsData$ = this.dialogRef.data.approvalFlowDataSource.fetchUser(user.id);
     }
-
-    itemSelected(event: any): void {}
 
     sendReminder(): void {
         const reminderTargets = this._isListMode ? this.getUsersFromSelectedItems() : this.dialogRef.data.node.approvers;
@@ -63,18 +61,20 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
 
     getUsersFromSelectedItems(): User[] {
         return this._selectedItems.map(item => {
-            return this.dialogRef.data.node?.approvers.find(user => user.imgUrl === item.avatarSrc);
+            return this.dialogRef.data.node.approvers.find(user => user.imgUrl === item.avatarSrc);
         });
     }
 
     onSearchStringChange(searchString: string): void {
         this._selectedItems = [];
         if (!searchString) {
-            this.setListItems(this.dialogRef.data.node?.approvers);
+            this.setListItems(this.dialogRef.data.node.approvers);
             return;
         }
 
-        const result = this.dialogRef.data.node?.approvers.filter(user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1);
+        const result = this.dialogRef.data.node.approvers.filter(
+            user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1
+        );
         this.setListItems(result);
     }
 }
