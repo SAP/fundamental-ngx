@@ -9,6 +9,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    Inject,
     Injector,
     Input,
     OnDestroy,
@@ -28,10 +29,10 @@ import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { Subscription } from 'rxjs';
 import { DialogConfig } from '../dialog/utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
-import { PopoverFillMode } from '../popover/popover-position/popover-position';
-import { Placement, PopperOptions } from 'popper.js';
 import { RtlService } from '../utils/services/rtl.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
+import { BasePopoverClass } from '../popover/base/base-popover.class';
+import { PopoverService } from '../popover/popover-service/popover.service';
 
 let menuUniqueId = 0;
 
@@ -44,9 +45,12 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MenuService],
+    providers: [
+        MenuService,
+        PopoverService
+    ],
 })
-export class MenuComponent implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy {
+export class MenuComponent extends BasePopoverClass implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy {
 
     /** Set menu in mobile mode */
     @Input('mobile')
@@ -55,58 +59,24 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         this._menuService.setMenuMode(this.mobile);
     }
 
-    /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
-     *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
-    @Input()
-    placement: Placement = 'bottom-start';
-
-    /** Whether or not to display the popover arrow. */
-    @Input()
-    noArrow = true;
-
-    /** The Popper.js options to attach to this popover.
-     * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
-    @Input()
-    options: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: true,
-                escapeWithReference: true,
-                boundariesElement: 'scrollParent'
-            }
-        }
-    };
-
-    /**
-     * Preset options for the popover body width.
-     * * `at-least` will apply a minimum width to the body equivalent to the width of the control.
-     * * `equal` will apply a width to the body equivalent to the width of the control.
-     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
-     */
-    @Input()
-    fillControlMode: PopoverFillMode = 'at-least';
-
-    /** The trigger events that will open/close the popover.
-     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
-    @Input()
-    triggers: string[] = ['click'];
-
-    /** Whether the popover should close when a click is made outside its boundaries. */
-    @Input()
-    closeOnOutsideClick = true;
-
     /** Whether the popover is disabled. */
     @Input()
     disabled = false;
 
-    /** Whether the popover should close when the escape key is pressed. */
-    @Input()
-    closeOnEscapeKey = true;
-
     /** Display menu in compact mode */
     @Input()
     compact = false;
+
+    /** Whether the popover should be focusTrapped. */
+    @Input()
+    focusTrapped = true;
+
+    /**
+     * Whether the popover should automatically move focus into the trapped region upon
+     * initialization and return focus to the previous activeElement upon destruction.
+     */
+    @Input()
+    focusAutoCapture = true;
 
     /** Open submenu on hover after given milliseconds */
     @Input()
@@ -140,9 +110,9 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     @ViewChild('menuRootTemplate')
     menuRootTemplate: TemplateRef<any>;
 
-    /** @hidden Reference to the menu with popover template */
-    @ViewChild('menuWithPopover')
-    menuWithPopover: TemplateRef<any>;
+    /** @hidden Reference to the menu root template */
+    @ViewChild('menuRootTemplate', { read: ElementRef })
+    menuList: ElementRef;
 
     /** @hidden Reference  the container where component views are instantiated */
     @ViewChild('viewContainer', {read: ViewContainerRef})
@@ -158,9 +128,6 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** @hidden Whether Popover with the menu is opened */
     isOpen = false;
 
-    /** @hidden */
-    private _eventRef: Function[] = [];
-
     /** @hidden Reference to external menu trigger */
     private _externalTrigger: ElementRef;
 
@@ -170,14 +137,18 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** @hidden */
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
+    /** @hidden */
+    private _listeners: Function;
+
     constructor(public elementRef: ElementRef,
                 @Optional() public dialogConfig: DialogConfig,
                 private _rendered: Renderer2,
                 private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
-                private _componentFactoryResolver: ComponentFactoryResolver,
+                private _popoverService: PopoverService,
                 @Optional() private _rtlService: RtlService,
                 @Optional() private _dynamicComponentService: DynamicComponentService) {
+        super();
     }
 
     /** @hidden */
@@ -188,15 +159,15 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._listenOnMenuMode();
-        this._menuService.setMenuMode(this.mobile);
+        this._menuService.setMenuMode(this.mobile)
+        this._setupView();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._destroyMobileComponent();
-        this._destroyEventListeners();
         this._menuService.onDestroy();
+        this._destroyEventListeners();
         this._subscriptions.unsubscribe();
     }
 
@@ -206,13 +177,12 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
 
     set trigger(trigger: ElementRef) {
         this._externalTrigger = trigger;
-        this._destroyEventListeners();
-        this.listenOnTriggerEvents();
     }
 
     /** Opens the menu */
     open(): void {
         this.isOpen = true;
+        this._popoverService.open();
         this.isOpenChange.emit(this.isOpen);
         this._changeDetectorRef.markForCheck();
     }
@@ -220,16 +190,10 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
     /** Closes the menu */
     close(): void {
         this.isOpen = false;
+        this._popoverService.close();
         this._menuService.resetMenuState();
         this.isOpenChange.emit(this.isOpen);
         this._changeDetectorRef.markForCheck();
-    }
-
-    /** Focuses first menu item */
-    focusFirst(): void {
-        if (this.menuItems.first) {
-            this._menuService.setFocused(this.menuItems.first);
-        }
     }
 
     /** Toggles menu open/close state */
@@ -237,45 +201,29 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         this.isOpen ? this.close() : this.open();
     }
 
-    /** @hidden Toggles menu open/close state */
-    handlePopoverOpenChange(isOpen: boolean): void {
-        isOpen ? this.open() : this.close();
-    }
-
-    /** @hidden Sets listeners based on triggers array */
-    listenOnTriggerEvents(): void {
-        if (Array.isArray(this.triggers)) {
-            this.triggers.forEach(trigger => {
-                this._eventRef.push(this._rendered.listen(this.trigger.nativeElement, trigger, () => {
-                    this.toggle();
-                }));
-            });
-        }
-    }
-
     /** @hidden Select and instantiate menu view mode */
     private _setupView(): void {
         if (this.mobile) {
             this._setupMobileMode();
         } else {
-            this._loadView(this.menuWithPopover);
+            this._setupPopoverService();
         }
         this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
-    private _manageKeyboardSupport(shouldHaveKeyboardSupport?: boolean): void {
-        if (shouldHaveKeyboardSupport) {
-            this._menuService.addKeyboardSupport();
-        } else {
-            this._menuService.removeKeyboardSupport();
-        }
+    private _setupPopoverService(): void {
+        this._popoverService._onLoad.subscribe(elementRef =>
+            this._manageKeyboardSupport(elementRef)
+        )
+
+        this._popoverService.templateContent = this.menuRootTemplate;
+        this._popoverService.initialise(this._externalTrigger, this);
     }
 
-    /** @hidden Embed given template in view container */
-    private _loadView(template: TemplateRef<any>): void {
-        this.viewContainer.clear();
-        this.viewContainer.createEmbeddedView(template);
+    /** @hidden */
+    private _manageKeyboardSupport(elementRef: ElementRef): void {
+        this._menuService.addKeyboardSupport(elementRef)
     }
 
     /** @hidden Open Menu in mobile mode */
@@ -289,6 +237,9 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
                     injector: Injector.create({providers: [{ provide: MENU_COMPONENT, useValue: this }]}),
                     services: [this._menuService, this._rtlService] }
             )
+        ;
+
+        this._listenOnTriggerRefClicks();
     }
 
     /** @hidden Listen on menu items change and rebuild menu */
@@ -298,30 +249,30 @@ export class MenuComponent implements MenuInterface, AfterContentInit, AfterView
         );
     }
 
-    /** @hidden Listen on menu mode */
-    private _listenOnMenuMode(): void {
-        this._subscriptions.add(
-            this._menuService.isMobileMode.subscribe(isMobile => {
-                if (this.isOpen) {
-                    this.close();
-                }
-                this.viewContainer.clear();
-                this._destroyMobileComponent();
-                this._setupView();
-                this._manageKeyboardSupport(!isMobile);
-            })
-        )
-    }
-
-    private _destroyMobileComponent(): void {
-        if (this._mobileModeComponentRef) {
-            this._mobileModeComponentRef.destroy();
+    /**
+     * @hidden
+     * This is going to be removed in feature, on dialog and dynamic service component refactor
+     */
+    private _listenOnTriggerRefClicks(): void {
+        if (this.trigger) {
+            this._listeners = this._rendered.listen(this.trigger.nativeElement, 'click', () => this.toggle());
         }
     }
 
+    /**
+     * @hidden
+     * This is going to be removed in feature, on dialog and dynamic service component refactor
+     */
     private _destroyEventListeners(): void {
-        if (Array.isArray(this._eventRef)) {
-            this._eventRef.forEach(ref => ref());
+        if (this._listeners) {
+            this._listeners();
+        }
+    }
+
+    /** @hidden */
+    private _destroyMobileComponent(): void {
+        if (this._mobileModeComponentRef) {
+            this._mobileModeComponentRef.destroy();
         }
     }
 }

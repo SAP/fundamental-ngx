@@ -15,22 +15,3 @@
         </ul>
     </nav>
 </ng-template>
-
-<ng-template #menuWithPopover>
-    <div #popoverContainer
-         [triggers]="[]"
-         [isOpen]="isOpen"
-         [options]="options"
-         [disabled]="disabled"
-         [placement]="placement"
-         [popoverTrigger]="trigger"
-         [appendTo]="popoverContainer"
-         [fdPopover]="menuRootTemplate"
-         [noArrow]="noArrow"
-         [fillControlMode]="fillControlMode"
-         [closeOnEscapeKey]="closeOnEscapeKey"
-         [closeOnOutsideClick]="closeOnOutsideClick"
-         (loaded)="focusFirst()"
-         (isOpenChange)="handlePopoverOpenChange($event)">
-    </div>
-</ng-template>
