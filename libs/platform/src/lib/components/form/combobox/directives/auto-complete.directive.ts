@@ -1,10 +1,8 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core';
 import { OptionItem } from '../../../../domain/data-model';
-import { fromEvent, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -15,7 +13,7 @@ export interface AutoCompleteEvent {
     // tslint:disable-next-line:directive-selector
     selector: '[fdp-auto-complete]'
 })
-export class AutoCompleteDirective implements OnDestroy {
+export class AutoCompleteDirective {
     /** Values that will fill missing text in the input. */
     @Input()
     options: OptionItem[];
@@ -26,6 +24,10 @@ export class AutoCompleteDirective implements OnDestroy {
      */
     @Input()
     inputText: string;
+
+    /** Check is directive use in mobile view to prevent additional blur events */
+    @Input()
+    mobile: boolean;
 
     /** Event thrown, when the auto ahead text is accepted */
     @Output()
@@ -46,24 +48,18 @@ export class AutoCompleteDirective implements OnDestroy {
         ESCAPE
     ];
 
-    private readonly _fromEventSub: Subscription;
-
     private _oldValue: string;
     private _lastKeyUpEvent: KeyboardEvent;
 
-    constructor(private readonly _elementRef: ElementRef) {
-        this._fromEventSub = fromEvent(this._elementRef.nativeElement, 'blur')
-            .pipe(filter(() => !!this.inputText))
-            .subscribe(() => {
-                const inputTextLength = this.inputText.length;
-                this._elementRef.nativeElement.value = this.inputText;
-                this._setSelectionRange(inputTextLength, inputTextLength);
-            });
-    }
+    constructor(private readonly _elementRef: ElementRef) { }
 
-    ngOnDestroy(): void {
-        if (this._fromEventSub) {
-            this._fromEventSub.unsubscribe();
+    /** @hidden */
+    @HostListener('blur')
+    handleBlur(): void {
+        if (Boolean(this.inputText) && !this.mobile) {
+            const inputTextLength = this.inputText.length;
+            this._elementRef.nativeElement.value = this.inputText;
+            this._setSelectionRange(inputTextLength, inputTextLength);
         }
     }
 

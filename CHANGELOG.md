@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.40...v0.25.0-rc.41) (2020-12-07)
+
+
+### Bug Fixes
+
+* (Platform) fix a Range Error (Maximum calls) on Mobile View Combobox Safari ([#4002](https://github.com/SAP/fundamental-ngx/issues/4002)) ([ed250b4](https://github.com/SAP/fundamental-ngx/commit/ed250b4bbcad3f4b10189de0c9c02abbc88edcee))
+
+## [0.25.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.39...v0.25.0-rc.40) (2020-12-07)
+
+
+### Features
+
+* add action sheet to wizard ([#4007](https://github.com/SAP/fundamental-ngx/issues/4007)) ([713ad9b](https://github.com/SAP/fundamental-ngx/commit/713ad9b3c0a5afb309a42ccfc8eae33188d81f6a))
+
 ## [0.25.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.38...v0.25.0-rc.39) (2020-12-07)
 
 ## [0.25.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.37...v0.25.0-rc.38) (2020-12-07)
