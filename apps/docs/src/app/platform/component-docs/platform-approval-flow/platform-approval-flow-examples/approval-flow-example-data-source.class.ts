@@ -1,5 +1,5 @@
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User } from '@fundamental-ngx/platform';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 const users: User[] = [
     {
@@ -147,16 +147,6 @@ const simpleGraph: ApprovalProcess = {
             description: 'node description',
             approvers: [getRandomUser()],
             status: 'in progress',
-            targets: ['ID4'],
-            dueDate: new Date(),
-            createDate: new Date()
-        },
-        {
-            id: 'ID4',
-            name: 'node name',
-            description: 'node description',
-            approvers: [getRandomUser()],
-            status: 'not started',
             targets: [],
             dueDate: new Date(),
             createDate: new Date()
@@ -326,15 +316,25 @@ function getRandomUser(): User {
     return users[Math.floor(Math.random() * users.length)];
 }
 
-export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
-    selectedGraph: 'simple' | 'medium' | 'complex';
+type GraphTypes = 'simple' | 'medium' | 'complex';
 
-    constructor(selectedGraph: 'simple' | 'medium' | 'complex' = 'complex') {
-        this.selectedGraph = selectedGraph;
+export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
+    selectedGraph: GraphTypes;
+
+    readonly state: BehaviorSubject<ApprovalProcess>;
+
+    constructor(selectedGraph: string = 'complex') {
+        this.selectedGraph = selectedGraph as GraphTypes;
+        this.state = new BehaviorSubject<ApprovalProcess>(graphs[this.selectedGraph]);
+    }
+
+    selectGraph(selectedGraph: string = 'complex'): void {
+        this.selectedGraph = selectedGraph as GraphTypes;
+        this.state.next(graphs[this.selectedGraph]);
     }
 
     fetch(): Observable<ApprovalProcess> {
-        return of(graphs[this.selectedGraph]);
+        return this.state;
     }
 
     fetchUser(id: string): Observable<any> {

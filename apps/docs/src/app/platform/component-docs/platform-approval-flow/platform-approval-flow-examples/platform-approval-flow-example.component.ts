@@ -25,10 +25,19 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
             <div>Name <br> Company A</div>
             <div>Address <br> 481 West Street, Anytown OH, 83749, USA</div>
         </ng-template>
+
+        <p>
+            Selected example:
+            <select [(ngModel)]="selectedExample" (ngModelChange)="dataSource.selectGraph(selectedExample)">
+                <option *ngFor="let example of examples" [value]="example">{{ example | titlecase }}</option>
+            </select>
+        </p>
     `
 })
 export class PlatformApprovalFlowExampleComponent {
     dataSource = new ApprovalFlowExampleDataSource('complex');
+    examples = ['simple', 'medium', 'complex'];
+    selectedExample = 'complex';
 
     nodeClick(node: ApprovalNode): void {
         console.log('Node click handler');

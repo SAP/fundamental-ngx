@@ -4,12 +4,14 @@ import {
     Component,
     ElementRef,
     Input,
-    OnInit, Output,
+    OnInit,
+    Output,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    EventEmitter
+    EventEmitter,
+    OnDestroy
 } from '@angular/core';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
@@ -18,6 +20,7 @@ import { DialogService, KeyUtil, MessageToastService } from '@fundamental-ngx/co
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
+import { Subscription } from 'rxjs';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: true };
 
@@ -36,7 +39,7 @@ type ApprovalFlowGraph = ApprovalGraphColumn[];
     styleUrls: ['./approval-flow.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ApprovalFlowComponent implements OnInit {
+export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
     @Input() title = 'Approval  process';
 
@@ -48,6 +51,12 @@ export class ApprovalFlowComponent implements OnInit {
 
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
+
+    /** @hidden */
+    @ViewChild('graphEl') graphEl: ElementRef;
+
+    /** @hidden */
+    @ViewChildren(ApprovalFlowNodeComponent) nodeComponents: QueryList<ApprovalFlowNodeComponent>;
 
     /** @hidden */
     _approvalProcess: ApprovalProcess;
@@ -68,16 +77,9 @@ export class ApprovalFlowComponent implements OnInit {
     _maxCarouselStep = 0;
 
     /** @hidden */
-    _nodesMap: { [key: string]: ApprovalGraphNode } = {};
-
-    /** @hidden */
     _nodeParentsMap: { [key: string]: ApprovalGraphNode } = {};
 
-    /** @hidden */
-    @ViewChild('graphEl') graphEl: ElementRef;
-
-    /** @hidden */
-    @ViewChildren(ApprovalFlowNodeComponent) nodeComponents: QueryList<ApprovalFlowNodeComponent>;
+    private dataSourceSub: Subscription;
 
     /** @hidden */
     constructor(
@@ -89,11 +91,11 @@ export class ApprovalFlowComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this.dataSource.fetch().subscribe(approvalProcess => {
+        this.dataSourceSub = this.dataSource.fetch().subscribe(approvalProcess => {
             this._approvalProcess = approvalProcess;
-            approvalProcess.nodes.forEach(node => this._nodesMap[node.id] = node);
             this._graph = this.buildNodeTree(approvalProcess.nodes);
             this._cdr.detectChanges();
+            this.resetCarousel();
             this.checkCarouselStatus();
         });
     }
@@ -290,10 +292,23 @@ export class ApprovalFlowComponent implements OnInit {
     }
 
     /** @hidden */
+    ngOnDestroy(): void {
+        if (this.dataSourceSub) {
+            this.dataSourceSub.unsubscribe();
+        }
+    }
+
+    /** @hidden */
     private checkCarouselStatus(): void {
         this._isCarousel = this.graphEl.nativeElement.scrollWidth > this.graphEl.nativeElement.clientWidth;
         this._maxCarouselStep = Math.ceil(this.scrollDiff / this.carouselStepSize);
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    private resetCarousel(): void {
+        this._carouselStep = 0;
+        this._carouselScrollX = 0;
     }
 
     /** @hidden */
