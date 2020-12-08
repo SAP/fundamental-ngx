@@ -125,4 +125,12 @@ describe('TabListComponent', () => {
         expect(component.selectTab).toHaveBeenCalledWith(2, true);
         expect(component.selectedIndex).toBe(2);
     }));
+
+    it('should cache tabs width', fakeAsync(() => {
+        component.ngAfterViewInit();
+
+        tick(10);
+        fixture.detectChanges();
+
+    }));
 });
