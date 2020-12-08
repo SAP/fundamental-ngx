@@ -6,9 +6,6 @@ export class PanelPo extends BaseComponentPo {
     url = '/panel';
     root = '#page-content';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     expandablePanelRoot = '#panel-id';
     expandablePanelBtn = this.expandablePanelRoot + ' button';
     expandablePanelTitle = this.expandablePanelRoot + ' h5';

@@ -48,6 +48,6 @@ describe('Verify Panel', () => {
     });
 
     it('should be able to switch to rtl', () => {
-        panelPage.checkRtlSwitch(panelPage.rtlSwitcherArr, panelPage.exampleAreaContainersArr)
+        panelPage.checkRtlSwitch();
     });
 });

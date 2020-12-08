@@ -84,6 +84,6 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check LTR and RTL orientation', () => {
-        infoLabelPage.checkRtlSwitch(infoLabelPage.rtlSwitcherArr, infoLabelPage.exampleAreaContainersArr);
+        infoLabelPage.checkRtlSwitch();
     });
 });

@@ -5,13 +5,16 @@ export class BaseComponentPo {
 
     title = 'header .header';
 
-    checkRtlSwitch(switchers: string, areas: string): void {
-        const areasArray = webDriver.elementArray(areas);
+    exampleAreaContainersArr = '.fd-doc-component';
+    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
+
+    checkRtlSwitch(): void {
+        const areasArray = webDriver.elementArray(this.exampleAreaContainersArr);
         for (let i = 0; i < areasArray.length; i++) {
-            webDriver.click(switchers, i);
-            checkRtlOrientation(areas, i);
-            webDriver.click(switchers, i);
-            checkLtrOrientation(areas, i);
+            webDriver.click(this.rtlSwitcherArr, i);
+            checkRtlOrientation(this.exampleAreaContainersArr, i);
+            webDriver.click(this.rtlSwitcherArr, i);
+            checkLtrOrientation(this.exampleAreaContainersArr, i);
         }
     }
 

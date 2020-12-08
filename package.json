@@ -75,7 +75,8 @@
     "build-storybook": "build-storybook",
     "nx": "nx",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test"
+    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test",
+    "e2e:wdio:saucelabs": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -96,6 +97,11 @@
     "@stackblitz/sdk": "1.5.1",
     "@types/google.visualization": "0.0.56",
     "@types/node": "14.11.7",
+    "@wdio/cli": "6.10.5",
+    "@wdio/jasmine-framework": "6.10.4",
+    "@wdio/local-runner": "6.10.5",
+    "@wdio/spec-reporter": "6.8.1",
+    "@wdio/sync": "6.10.4",
     "classlist.js": "1.1.20150312",
     "core-js": "3.7.0",
     "flexboxgrid": "6.3.1",
@@ -113,6 +119,7 @@
     "raw-loader": "4.0.2",
     "rxjs": "6.6.3",
     "tslib": "2.0.3",
+    "wdio-local-runner": "5.0.0-alpha.7",
     "web-animations-js": "2.3.2",
     "zone.js": "0.11.2"
   },
