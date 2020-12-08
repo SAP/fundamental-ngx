@@ -144,7 +144,7 @@ describe('PopoverComponent', () => {
         fixture.detectChanges();
         const arrowPosition = PopoverPosition.getArrowPosition(firstPosition);
         expect(component._arrowDirection).toBe(arrowPosition);
-        expect(component._marginStyle).toBe(PopoverPosition.getMarginStyle(arrowPosition));
+        expect(component._marginStyle).toBe(PopoverPosition.getMarginDirection(arrowPosition));
 
         component.close();
         fixture.detectChanges();
@@ -157,7 +157,7 @@ describe('PopoverComponent', () => {
 
         const arrowSecondPosition = PopoverPosition.getArrowPosition(secondPosition);
         expect(component._arrowDirection).toBe(arrowSecondPosition);
-        expect(component._marginStyle).toBe(PopoverPosition.getMarginStyle(arrowSecondPosition));
+        expect(component._marginStyle).toBe(PopoverPosition.getMarginDirection(arrowSecondPosition));
     });
 
     it('should toggle open state on trigger event', () => {

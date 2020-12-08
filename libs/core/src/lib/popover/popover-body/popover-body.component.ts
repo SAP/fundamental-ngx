@@ -1,7 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    Renderer2,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
-import { ArrowPosition, KeyUtil, PopoverFlippedDirection, PopoverPosition } from '../../..';
+import { ARROW_SIZE, ArrowPosition } from '../popover-position/popover-position';
+import { PopoverFlippedDirection } from '../popover-position/popover-position';
+import { KeyUtil } from '../../utils/functions/key-util';
+import { PopoverPosition } from '../popover-position/popover-position';
 import { ESCAPE } from '@angular/cdk/keycodes';
+import { Subject } from 'rxjs';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -43,9 +55,7 @@ export class PopoverBodyComponent {
     _popoverBodyMinWidth: number;
     _templateToDisplay: TemplateRef<any>
     _maxWidth;
-
-    /** Direction of arrow */
-    _arrowDirection: ArrowPosition = null;
+    _closeOnEscapeKey = false;
 
     /** Classes added to arrow element */
     _arrowClasses: string[] = [];
@@ -55,8 +65,12 @@ export class PopoverBodyComponent {
 
     text: string = null;
 
+    onClose = new Subject<void>();
+
     constructor(
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _renderer2: Renderer2,
+        private readonly _elementRef: ElementRef
     ) {}
 
     /** @hidden */
@@ -64,36 +78,49 @@ export class PopoverBodyComponent {
 
         this._arrowClasses = [];
 
-        this._arrowDirection = PopoverPosition.getArrowPosition(position, rtl === 'rtl');
-        this._arrowClasses.push(`fd-popover__arrow--${this._arrowDirection}`);
+        const arrowDirection = PopoverPosition.getArrowPosition(position, rtl === 'rtl');
+        this._arrowClasses.push(`fd-popover__arrow--${arrowDirection}`);
 
-        if (this._arrowDirection === 'top' || this._arrowDirection === 'bottom') {
+        if (arrowDirection === 'top' || arrowDirection === 'bottom') {
             let _position: string = position.overlayX;
             if (rtl === 'rtl') {
                 _position = PopoverFlippedDirection[_position];
             }
             this._arrowClasses.push(`fd-popover__arrow-x--${_position}`)
-        } else if (this._arrowDirection === 'start' || this._arrowDirection === 'end') {
+        } else if (arrowDirection === 'start' || arrowDirection === 'end') {
             this._arrowClasses.push(`fd-popover__arrow-y--${position.overlayY}`)
         }
 
-        this._marginStyle = PopoverPosition.getMarginStyle(this._arrowDirection);
+        this._removeOldMarginsStyle();
+        this._addMarginStyle(arrowDirection);
 
         this._changeDetectorRef.detectChanges();
     }
 
-    /** @hidden */
-     _removeArrowStyles(): void {
-        this._arrowDirection = null;
-        this._arrowClasses = [];
-        this._marginStyle = null;
-    }
-
     /** Handler escape keydown */
     bodyKeydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, ESCAPE)) {
-            // this.close();
+        if (KeyUtil.isKeyCode(event, ESCAPE) && this._closeOnEscapeKey) {
+            this.onClose.next();
         }
+    }
+
+    detectChanges(): void {
+        this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _addMarginStyle(arrowDirection: ArrowPosition): void {
+        this._renderer2.setStyle(
+            this._elementRef.nativeElement,
+            PopoverPosition.getMarginDirection(arrowDirection),
+            ARROW_SIZE
+        );
+    }
+
+    /** @hidden */
+    private _removeOldMarginsStyle(): void {
+        const margins = ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'];
+        margins.forEach(margin => this._renderer2.removeStyle(this._elementRef.nativeElement, margin));
     }
 
 }

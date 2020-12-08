@@ -17,6 +17,10 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit {
     @Input()
     triggers: string[] = ['mouseenter', 'mouseleave'];
 
+    /** Whether the popover should have an arrow. */
+    @Input()
+    noArrow = false;
+
     @Input('fd-inline-help')
     inlineHelpTitle: string = null;
 

@@ -12,7 +12,7 @@ export class BasePopoverClass {
 
     /** Maximum width of popover body in px, prevents from overextending body by `fillControlMode`  */
     @Input()
-    maxWidth: number;
+    maxWidth: number = null;
 
     /** Whether the popover should have an arrow. */
     @Input()
@@ -20,11 +20,11 @@ export class BasePopoverClass {
 
     /** Whether the popover container needs an extra class for styling. */
     @Input()
-    additionalBodyClass: string;
+    additionalBodyClass: string = null;
 
     /** Whether the popover container needs an extra class for styling. */
     @Input()
-    additionalTriggerClass: string;
+    additionalTriggerClass: string = null;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
@@ -37,7 +37,7 @@ export class BasePopoverClass {
      * right, right-start, right-end, left, left-start, left-end.
      */
     @Input()
-    placement: Placement;
+    placement: Placement = null;
 
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
@@ -94,6 +94,10 @@ export class BasePopoverClass {
     /** The element to which  the overlay is attached. By default it is body */
     @Input()
     appendTo: ElementRef = null;
+
+    /** Whether position shouldn't change, when popover approach the corner of page */
+    @Input()
+    fixedPosition = false;
 
     /** @deprecated */
     @Input()

@@ -25,7 +25,6 @@ import {
 import { RtlService } from '../utils/services/rtl.service';
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
-import { ScrollStrategy } from '@angular/cdk/overlay/scroll/scroll-strategy';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/connected-position';
 
@@ -40,33 +39,15 @@ export interface PopoverTemplate {
 @Injectable()
 export class PopoverService extends BasePopoverClass {
 
-    constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _overlay: Overlay,
-        private _renderer: Renderer2,
-        private _viewportRuler: ViewportRuler,
-        @Optional() private _rtlService: RtlService,
-    ) {
-        super();
-
-        /** Merge observables - close or destroy */
-        this._refresh$ = merge(this.isOpenChange, this._onDestroy$);
-    }
-
     triggerElement: ElementRef;
 
     stringContent: string;
+
     templateContent: TemplateRef<any>;
 
     popoverBody: PopoverBodyComponent;
 
-    templateData: PopoverTemplate
-
-    private _initialised = false;
-
-    /** Whether position shouldn't change, when popover approach the corner of page */
-    @Input()
-    fixedPosition = false;
+    templateData: PopoverTemplate;
 
     /** @hidden */
     private _eventRef: Function[] = [];
@@ -83,22 +64,28 @@ export class PopoverService extends BasePopoverClass {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _overlay: Overlay,
+        private _renderer: Renderer2,
+        private _viewportRuler: ViewportRuler,
+        private _injector: Injector,
+        @Optional() private _rtlService: RtlService
+    ) {
+        super();
+
+        /** Merge observables - close or destroy */
+        this._refresh$ = merge(this.isOpenChange, this._onDestroy$);
+    }
+
+    /** TODO */
     initialise(triggerElement: ElementRef, config?: BasePopoverClass, templateData?: PopoverTemplate): void {
         this.templateData = templateData;
         this.triggerElement = triggerElement;
         if (config) {
-            Object.keys(new BasePopoverClass()).forEach(key => this[key] = config[key])
+            Object.keys(new BasePopoverClass()).forEach(key => this[key] = config[key]);
         }
 
-        if (!this.scrollStrategy) {
-            this.scrollStrategy = this._overlay.scrollStrategies.reposition();
-        }
-
-        if (!this.scrollStrategy) {
-            this.scrollStrategy = this._overlay.scrollStrategies.reposition();
-        }
-
-        this._initialised = true;
         this._refreshTriggerListeners();
         if (this.isOpen) {
             this.open();
@@ -120,35 +107,34 @@ export class PopoverService extends BasePopoverClass {
 
     /** Opens the popover. */
     open(): void {
-        if ((!this._overlayRef || !this._overlayRef.hasAttached()) || !this.disabled) {
+        if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled && this._triggerElement) {
             const position = this._getPositionStrategy();
             this._overlayRef = this._overlay.create(this._getOverlayConfig(position));
 
             if (!this.templateData) {
-                const overlay = this._overlayRef.attach(new ComponentPortal(PopoverBodyComponent));
+                const overlay = this._overlayRef.attach(new ComponentPortal(PopoverBodyComponent, null, this._injector));
                 this.popoverBody = overlay.instance;
+                this._passVariablesToBody();
             } else {
+                this._passVariablesToBody();
                 this._overlayRef.attach(new TemplatePortal(this.templateData.template, this.templateData.container));
             }
 
             this._listenForPositionChange(position.positionChanges);
 
-            this._passVariablesToBody();
-
             if (this.fillControlMode) {
                 this._listenOnResize();
             }
 
-            this._changeDetectorRef.detectChanges();
-
             if (!this.isOpen) {
                 this.isOpenChange.emit(true);
             }
-
             this.isOpen = true;
 
+            this._detectChanges();
+
             this._listenOnClose();
-            this._listenOnOutClicks()
+            this._listenOnOutClicks();
         }
     }
 
@@ -183,6 +169,14 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    onDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+        if (this._overlayRef) {
+            this._overlayRef.detach();
+        }
+    }
+
     /** @hidden */
     private _getOverlayConfig(position: FlexibleConnectedPositionStrategy): OverlayConfig {
         const direction = this._getDirection();
@@ -190,7 +184,7 @@ export class PopoverService extends BasePopoverClass {
         return new OverlayConfig({
             direction: direction,
             positionStrategy: position,
-            scrollStrategy: this.scrollStrategy
+            scrollStrategy: this.scrollStrategy || this._overlay.scrollStrategies.reposition()
         });
     }
 
@@ -211,9 +205,9 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** @hidden */
-    private _getPositionStrategy(positions?: ConnectedPosition[]): FlexibleConnectedPositionStrategy {
+    private _getPositionStrategy(forcedPositions?: ConnectedPosition[]): FlexibleConnectedPositionStrategy {
 
-        let resultPosition = positions ? positions : this._getPositions();
+        let resultPosition = forcedPositions ? forcedPositions : this._getPositions();
 
         if (!this.fixedPosition) {
             resultPosition = resultPosition.concat(DefaultPositions);
@@ -221,7 +215,7 @@ export class PopoverService extends BasePopoverClass {
 
         return this._overlay
             .position()
-            .flexibleConnectedTo(this._triggerElement)
+            .flexibleConnectedTo(this.appendTo || this._triggerElement)
             .withPositions(resultPosition)
             .withPush(false);
     }
@@ -234,6 +228,10 @@ export class PopoverService extends BasePopoverClass {
 
     /** Refresh listeners on trigger element events */
     private _refreshTriggerListeners(): void {
+        if (!this._triggerElement) {
+            return;
+        }
+
         this._removeTriggerListeners();
         if (this.triggers?.length) {
             this.triggers.forEach(trigger => {
@@ -250,27 +248,27 @@ export class PopoverService extends BasePopoverClass {
         positionChange
             .pipe(
                 takeUntil(this._placementRefresh$),
-                filter(() => !this.noArrow && !!this.popoverBody),
+                filter(() => !this.noArrow && !!this._popoverBody),
                 distinctUntilChanged(
                     (previous, current) =>
                         previous.connectionPair === current.connectionPair
                 ))
-            .subscribe(event => this.popoverBody._setArrowStyles(event.connectionPair, this._getDirection()))
+            .subscribe(event => this._popoverBody._setArrowStyles(event.connectionPair, this._getDirection()))
         ;
     }
 
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
     private _listenOnClose(): void {
-        console.log(this._overlayRef);
-        this._overlayRef.detachments()
-            .pipe(takeUntil(this._refresh$))
+        const closeEvents$ = merge(this._overlayRef.detachments(), this.popoverBody.onClose);
+
+        closeEvents$.pipe(takeUntil(this._refresh$))
             .subscribe(() => this.close())
         ;
     }
 
     /** Listener for click events */
     private _listenOnOutClicks(): void {
-        const closeEvents$ = merge( this._overlayRef.backdropClick(), this._overlayRef._outsidePointerEvents)
+        const closeEvents$ = merge(this._overlayRef.backdropClick(), this._overlayRef._outsidePointerEvents);
 
         closeEvents$.pipe(
             filter(event => this._shouldClose(event)),
@@ -322,25 +320,35 @@ export class PopoverService extends BasePopoverClass {
         const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
         const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         if (this.fillControlMode === 'at-least') {
-            this.popoverBody._popoverBodyMinWidth = width;
+            this._popoverBody._popoverBodyMinWidth = width;
         } else if (this.fillControlMode === 'equal') {
-            this.popoverBody._popoverBodyWidth = width;
+            this._popoverBody._popoverBodyWidth = width;
         }
-        this._changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
+    /** @hidden */
     private _passVariablesToBody(): void {
         this._popoverBody.text = this.stringContent;
         this._popoverBody._additionalBodyClass = this.additionalBodyClass;
         this._popoverBody._focusTrapped = this.focusTrapped;
         this._popoverBody._maxWidth = this.maxWidth;
+        this._popoverBody._noArrow = this.noArrow;
         this._popoverBody._focusAutoCapture = this.focusAutoCapture;
         this._popoverBody._templateToDisplay = this.templateContent;
+        this._popoverBody._closeOnEscapeKey = this.closeOnEscapeKey;
+        this._detectChanges();
     }
 
     /** @hidden */
     private _getTriggerWidth(): number {
         return this._triggerElement.nativeElement.offsetWidth;
+    }
+
+    private _detectChanges(): void {
+        if (this._popoverBody) {
+            this._popoverBody.detectChanges();
+        }
     }
 
     private get _popoverBody(): PopoverBodyComponent {

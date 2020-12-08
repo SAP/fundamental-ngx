@@ -27,17 +27,10 @@ import {
     OverlayRef,
     ViewportRuler
 } from '@angular/cdk/overlay';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
-import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
-
-import { merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
-
-import { RtlService } from '../utils/services/rtl.service';
+import { Subject } from 'rxjs';
 import { BasePopoverClass } from './base/base-popover.class';
-import { ArrowPosition, DefaultPositions, Placement, PopoverFlippedDirection, PopoverPosition } from './popover-position/popover-position';
 import { KeyUtil } from '../utils/functions/key-util';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover.service';
@@ -95,15 +88,6 @@ export class PopoverComponent extends BasePopoverClass
     /** @hidden */
     directiveRef: any;
 
-    /** @hidden */
-    private _initialised = false;
-
-    /** @hidden */
-    private _overlayRef: OverlayRef;
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
     constructor(
         private _popoverService: PopoverService
     ) {
@@ -112,22 +96,22 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     ngAfterViewInit(): void {
+        if (!this.popoverBody) {
+            this._popoverService.templateContent = this.templateRef;
+        }
         this._popoverService.initialise(
             this._triggerElement,
             this,
-            {
+            this.popoverBody ? {
             template: this.templateRef,
             container: this.container,
             popoverBody: this.popoverBody,
-        });
+        } : null);
+
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (!this._initialised) {
-            return;
-        }
-
         if (changes['isOpen']) {
             if (changes['isOpen'].currentValue) {
                 this.open();
@@ -143,11 +127,7 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-        if (this._overlayRef) {
-            this._overlayRef.detach();
-        }
+        this._popoverService.onDestroy();
     }
 
     /** Closes the popover. */
@@ -182,12 +162,12 @@ export class PopoverComponent extends BasePopoverClass
 
     /** Handler for alt + arrow down keydown */
     triggerKeyDownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.isOpen) {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
             this.open();
         }
     }
 
-    private get _triggerElement(): ElementRef<any> {
+    private get _triggerElement(): ElementRef {
         return this.trigger || this.triggerOrigin.elementRef;
     }
 }
