@@ -1,5 +1,3 @@
-
-
 export class Wdio {
 
     get defaultWaitTime(): number {
@@ -216,6 +214,11 @@ export class Wdio {
         // @ts-ignore
         $$(selector)[index].focus();
     }
+
+    getCurrentUrl(): string {
+        return browser.getUrl();
+    }
+
 }
 
 export const webDriver = new Wdio();
