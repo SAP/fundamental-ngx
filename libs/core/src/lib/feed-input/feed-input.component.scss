@@ -4,6 +4,28 @@
     &.is-disabled {
         pointer-events: initial;
         opacity: initial;
+
+        textarea {
+            &::placeholder {
+                color: var(--sapTextColor, #32363a);
+            }
+            &::-webkit-input-placeholder {
+                color: var(--sapTextColor, #32363a);
+            }
+            &::-moz-placeholder {
+                color: var(--sapTextColor, #32363a);
+            }
+            &:-ms-input-placeholder {
+                color: var(--sapTextColor, #32363a);
+            }
+            &:-moz-placeholder {
+                color: var(--sapTextColor, #32363a);
+            }
+        }
+    }
+
+    fdp-button {
+        height: 100%;
     }
 
     .fd-button {
