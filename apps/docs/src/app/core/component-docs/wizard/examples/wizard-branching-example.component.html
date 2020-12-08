@@ -68,7 +68,7 @@
                     </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
-            <li
+            <li *ngIf="step2status === 'completed'"
                 fd-wizard-step
                 [status]="step3status"
                 (statusChange)="step3status = $event"
