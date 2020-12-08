@@ -254,7 +254,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             step._stepId = _stepId;
             _stepId++;
             step.finalStep = false;
-            if (step.completed && this.appendToWizard) {
+            /*
+             If the step is completed and appendToWizard is true, hide the nextStep button, unless it's the last step,
+             or if there's a summary and it is the second to last step
+             */
+            if (
+                step.completed &&
+                this.appendToWizard &&
+                (this.steps.last.isSummary ? step !== this.steps.toArray()[this.steps.length - 2] : step !== this.steps.last)
+            ) {
                 step.content.nextStep._getElRef().nativeElement.style.display = 'none';
             }
             if (
@@ -359,7 +367,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this.steps.last.stepIndicator.setStackedItems(this.stackedStepsRight);
         }
     }
-
 
     /** @hidden */
     private _resetStepClasses(): void {
