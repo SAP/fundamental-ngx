@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 import { CollectionSelectFilter, TableFilterSelectOption } from '../../../interfaces';
 
+/**
+ * Multi Select filter type.
+ *
+ */
+
 type SelectableOption = TableFilterSelectOption & { selected: boolean };
 
 @Component({
@@ -10,9 +15,11 @@ type SelectableOption = TableFilterSelectOption & { selected: boolean };
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilterMultiSelectComponent {
+    /** Selectable filter options */
     @Input()
     options: TableFilterSelectOption[] = [];
 
+    /** The filter model */
     @Input()
     set filterBy(filterBy: CollectionSelectFilter) {
         const filterByValue = filterBy?.value || [];
@@ -25,10 +32,11 @@ export class FilterMultiSelectComponent {
         this._updateValueBasedOnOptions();
     }
 
+    /** Filter model change event */
     @Output()
     valueChange: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
 
-    /** @hidden */
+    /** Currently selected values */
     _value: unknown[];
 
     /** @hidden */

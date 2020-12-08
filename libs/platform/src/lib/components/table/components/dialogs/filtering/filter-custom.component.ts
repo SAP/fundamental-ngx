@@ -3,6 +3,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, DoChec
 import { CollectionSelectFilter } from '../../../interfaces';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
 
+/**
+ * Custom Select filter type.
+ *
+ * Used to render user's custom filter template
+ * 
+ */
+
 @Component({
     selector: 'fdp-filter-custom',
     templateUrl: './filter-custom.component.html',
@@ -10,9 +17,11 @@ import { TableViewSettingsFilterComponent } from '../../table-view-settings-filt
     changeDetection: ChangeDetectionStrategy.Default
 })
 export class FilterCustomComponent implements DoCheck {
+     /** ViewSettingsFilter options the filter is created from */
     @Input()
     filter: TableViewSettingsFilterComponent;
 
+    /** The filter model */
     @Input()
     set filterBy(filterBy: CollectionSelectFilter) {
         if (!filterBy?.value || Object.prototype.toString.call(filterBy?.value) !== '[object Object]') {
@@ -25,13 +34,14 @@ export class FilterCustomComponent implements DoCheck {
         this._valueLastEmitted = { ...this._value };
     }
 
+    /** Filter model change event */
     @Output()
     valueChange: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-    /** @hidden */
+    /** Currently selected value */
     _value: object;
 
-    /** @hidden */
+    /** Last emitted value */
     _valueLastEmitted: object;
 
     /** @hidden */

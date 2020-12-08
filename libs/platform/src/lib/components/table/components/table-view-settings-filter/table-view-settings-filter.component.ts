@@ -45,8 +45,8 @@ export class TableViewSettingsFilterComponent {
 
     /**
      * Type of filter interface.
-     * @type {'single-select' | 'multi-select' | 'custom' 'category'}
-     * */
+     * @type {'single-select' | 'multi-select' | 'custom' 'category'} 
+     */
     @Input()
     type: FilterType;
 
@@ -54,7 +54,7 @@ export class TableViewSettingsFilterComponent {
     @Input()
     values: TableFilterSelectOption[];
 
-    /** @hidden */
+    /** Custom filter template directive reference */
     @ContentChild(FdpViewSettingsFilterCustomDef)
     filterCustomDef: FdpViewSettingsFilterCustomDef;
 }

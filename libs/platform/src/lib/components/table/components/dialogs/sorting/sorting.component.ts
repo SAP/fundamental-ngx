@@ -22,6 +22,8 @@ export interface SortDialogResultData {
     direction: SortDirection;
 }
 
+const NOT_SORTED_OPTION_VALUE = null;
+
 @Component({
     templateUrl: './sorting.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SortingComponent) }],
@@ -31,8 +33,8 @@ export class SortingComponent implements Resettable {
     /** Initially active direction */
     initialDirection: SortDirection = SortDirection.ASC;
 
-    /** Initially active field */
-    initialField: string = null;
+    /** Initially active field. Used for restoring */
+    initialField: string = NOT_SORTED_OPTION_VALUE;
 
     /** Current selected direction */
     direction: SortDirection;
@@ -45,14 +47,14 @@ export class SortingComponent implements Resettable {
 
     /** @hidden */
     readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    /** Indicates if reset command is active */
+    /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
 
     /** @hidden */
-    readonly NOT_SORTED_OPTION_VALUE = null;
+    readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
         const data: SortDialogData = this.dialogRef.data;
@@ -65,16 +67,19 @@ export class SortingComponent implements Resettable {
         this.field = this.initialField;
     }
 
+    /** Reset changes to the initial state */
     reset(): void {
         this.direction = this.initialDirection;
         this.field = this.initialField;
         this._isResetAvailableSubject$.next(false);
     }
 
+    /** Close dialog */
     cancel(): void {
         this.dialogRef.close(null);
     }
 
+    /** Confirm changes and close dialog */
     confirm(): void {
         const result: SortDialogResultData = { direction: this.direction, field: this.field };
         this.dialogRef.close(result);

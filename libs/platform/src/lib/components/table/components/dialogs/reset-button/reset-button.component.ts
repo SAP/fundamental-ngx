@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, Inject, InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
+/**
+ * Reset button.
+ * 
+ * Used to reset resettable state by click.
+ * 
+ */
+
 export interface Resettable {
     reset: () => void;
     isResetAvailable$: Observable<boolean>;

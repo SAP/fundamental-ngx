@@ -22,6 +22,8 @@ export interface GroupDialogResultData {
     direction: SortDirection;
 }
 
+const NOT_GROUPED_OPTION_VALUE = null;
+
 @Component({
     templateUrl: './grouping.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => GroupingComponent) }],
@@ -52,8 +54,8 @@ export class GroupingComponent implements Resettable {
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
 
-    /** @hidden */
-    readonly NOT_GROUPED_OPTION_VALUE = null;
+    /** Not Grouped Option model value */
+    readonly NOT_GROUPED_OPTION_VALUE = NOT_GROUPED_OPTION_VALUE;
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
         const data: GroupDialogData = this.dialogRef.data;
@@ -66,16 +68,19 @@ export class GroupingComponent implements Resettable {
         this.field = this.initialField;
     }
 
+    /** Reset changes to the initial state */
     reset(): void {
         this.direction = this.initialDirection;
         this.field = this.initialField;
         this._isResetAvailableSubject$.next(false);
     }
 
+    /** Close dialog */
     cancel(): void {
         this.dialogRef.close(null);
     }
 
+    /** Confirm changes and close dialog */
     confirm(): void {
         const result: GroupDialogResultData = { field: this.field, direction: this.direction };
         this.dialogRef.close(result);
