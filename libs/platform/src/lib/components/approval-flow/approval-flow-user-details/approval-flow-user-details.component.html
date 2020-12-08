@@ -50,11 +50,10 @@
                 selectionMode="multi"
                 [selection]="true"
                 [hasByLine]="true"
-                [dataSource]="_dataSource"
                 [(ngModel)]="_selectedItems"
                 (selectedItemChange)="_selectedItems = $event.selectedItems">
                 <fdp-standard-list-item
-                    *fdpItemDef="let user"
+                    *ngFor="let user of _listItems"
                     [avatarSrc]="user.imgUrl"
                     [avatarTitle]="user.name"
                     [description]="user.description"
