@@ -1,43 +1,45 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { TabListComponent } from './tab-list.component';
 import { TabsModule } from './tabs.module';
+import { whenStable } from '../utils/tests';
 
 @Component({
     selector: 'fd-test-tabs',
-    template: `<fd-tab-list>
-        <fd-tab [title]="'Link'" id="tab1">
-            Content Link
-        </fd-tab>
-        <fd-tab [title]="'Selected'" id="tab2">
-            Content Selected
-        </fd-tab>
-        <fd-tab [title]="'Link'" id="tab3">
-            Content Link Two
-        </fd-tab>
-        <fd-tab [title]="'Disabled'" id="tab4" *ngIf="showDisabled">
-            Disabled
-        </fd-tab>
-    </fd-tab-list>`
+    template: `
+        <fd-tab-list>
+            <fd-tab title="Link" id="tab1">
+                Content Link
+            </fd-tab>
+            <fd-tab title="Selected" id="tab2">
+                Content Selected
+            </fd-tab>
+            <fd-tab title="Link" id="tab3">
+                Content Link Two
+            </fd-tab>
+            <fd-tab title="Disabled" id="tab4" *ngIf="showDisabled">
+                Disabled
+            </fd-tab>
+        </fd-tab-list>`
 })
-class TestWrapperComponent {
+class TestTabsComponent {
     showDisabled = true;
 }
 
 describe('TabListComponent', () => {
     let component: TabListComponent;
-    let fixture: ComponentFixture<TestWrapperComponent>;
+    let fixture: ComponentFixture<TestTabsComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
+            declarations: [TestTabsComponent],
             imports: [TabsModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestWrapperComponent);
+        fixture = TestBed.createComponent(TestTabsComponent);
         component = fixture.debugElement.children[0].componentInstance;
         fixture.detectChanges();
     });
@@ -125,12 +127,83 @@ describe('TabListComponent', () => {
         expect(component.selectTab).toHaveBeenCalledWith(2, true);
         expect(component.selectedIndex).toBe(2);
     }));
+});
 
-    it('should cache tabs width', fakeAsync(() => {
-        component.ngAfterViewInit();
+const NUMBER_OF_TABS = 10;
 
-        tick(10);
+@Component({
+    selector: 'fd-test-tabs',
+    template: `
+        <div style="width: 400px">
+            <fd-tab-list [collapseOverflow]="collapseOverflow" [maxVisibleTabs]="maxVisibleTabs">
+                <fd-tab *ngFor="let title of tabs" [title]="title">{{title}} content</fd-tab>
+            </fd-tab-list>
+        </div>
+    `
+})
+class TestCollapsibleTabsComponent {
+    @ViewChild(TabListComponent)
+    tabListComponent;
+
+    maxVisibleTabs = 10;
+    collapseOverflow = false;
+    tabs = [];
+
+    constructor() {
+        for (let i = 0; i < NUMBER_OF_TABS; i++) {
+            this.tabs.push();
+        }
+    }
+}
+
+describe('TabListComponent', () => {
+    let component: TabListComponent;
+    let testComponent: TestCollapsibleTabsComponent;
+    let fixture: ComponentFixture<TestCollapsibleTabsComponent>;
+    const getGroupedTabs = tabsComponent => [tabsComponent['_tabs'].visible, tabsComponent['_tabs'].overflowing];
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestCollapsibleTabsComponent],
+            imports: [TabsModule]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestCollapsibleTabsComponent);
+        testComponent = fixture.componentInstance;
+        component = fixture.componentInstance.tabListComponent;
         fixture.detectChanges();
+    });
 
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should collapse tabs', (async () => {
+        await whenStable(fixture);
+        const [visibleTabs, overflowingTabs] = getGroupedTabs(component);
+
+        expect(visibleTabs.length + overflowingTabs.length === NUMBER_OF_TABS).toBeTrue();
+        expect(overflowingTabs.length > 0).toBeTrue();
+    }));
+
+    it('should cache tabs width', (async () => {
+        await whenStable(fixture);
+        expect(component['_tabsWidth'].length === NUMBER_OF_TABS).toBeTrue();
+    }));
+
+    it('should respect maximum number of visible tabs', (async () => {
+        await whenStable(fixture);
+
+        testComponent.maxVisibleTabs = 1;
+
+        fixture.detectChanges();
+        await whenStable(fixture);
+
+        const [visibleTabs, overflowingTabs] = getGroupedTabs(component);
+
+        expect(visibleTabs.length).toEqual(1);
+        expect(overflowingTabs.length).toEqual(9);
     }));
 });

@@ -111,7 +111,7 @@
 <component-example>
     <fd-collapsible-example></fd-collapsible-example>
 </component-example>
-<code-example [exampleFiles]="addingTab"></code-example>
+<code-example [exampleFiles]="collapsibleTab"></code-example>
 
 <separator></separator>
 
@@ -120,12 +120,12 @@
 </fd-docs-section-title>
 <description>
     In stacked content mode, all of the tabs will be initially expanded and the navigation between the tabs will be
-    handled using with scroll. To enable stacked content use `[stackContent]`.
+    handled using with scroll. To enable stacked content set `[stackContent]="true"`.
 </description>
 <component-example>
     <fd-stacked-content-example></fd-stacked-content-example>
 </component-example>
-<code-example [exampleFiles]="addingTab"></code-example>
+<code-example [exampleFiles]="stackedTab"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-tab-list [mode]="data.properties.items.mode" [compact]="data.properties.items.compact">

@@ -1,22 +1,62 @@
-import { ElementRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { getElementCapacity, getElementWidth } from './element-size';
 
-const pxToNum = (pixels: string): number => Number(pixels.replace('px', '')) || 0;
+const ELEMENT_DIMENSIONS = { width: 100, margin: 2, padding: 5 };
 
-const toNativeElement = (element: HTMLElement | ElementRef): HTMLElement =>
-    element instanceof ElementRef ? element.nativeElement : element;
-
-export function getElementCapacity(element: HTMLElement | ElementRef): number {
-    const _element = toNativeElement(element);
-    const computedStyle = window.getComputedStyle(_element);
-
-    return pxToNum(computedStyle.width) - pxToNum(computedStyle.paddingLeft) - pxToNum(computedStyle.paddingRight);
+@Component({
+    template: '',
+    host: {
+        '[style.display]': '"block"',
+        '[style.box-sizing]': '"border-box"',
+        '[style.width]': 'elementDimensions.width',
+        '[style.margin]': 'elementDimensions.width',
+        '[style.padding]': 'elementDimensions.width',
+    }
+})
+class TestComponent {
+    elementDimensions = ELEMENT_DIMENSIONS;
+    constructor(public elementRef: ElementRef) {}
 }
 
-export function getElementWidth(element: HTMLElement | ElementRef, withMargin?: boolean): number {
-    const _element = toNativeElement(element);
+describe('Element size utils', () => {
+    let elementRef: ElementRef;
+    let fixture: ComponentFixture<TestComponent>;
 
-    const computedStyle = getComputedStyle(_element);
-    return withMargin
-        ? pxToNum(computedStyle.width) + pxToNum(computedStyle.marginLeft) + pxToNum(computedStyle.marginRight)
-        : pxToNum(computedStyle.width);
-}
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestComponent);
+        elementRef = fixture.componentInstance.elementRef;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(elementRef).toBeTruthy();
+    });
+
+    it('should return proper capacity', () => {
+        const capacity = ELEMENT_DIMENSIONS.width - ELEMENT_DIMENSIONS.padding * 2;
+
+        expect(getElementCapacity(elementRef)).toEqual(capacity);
+    });
+
+    it('should return proper element width', () => {
+        const width = ELEMENT_DIMENSIONS.width;
+        const widthWithMargin = ELEMENT_DIMENSIONS.width + ELEMENT_DIMENSIONS.margin * 2;
+
+        expect(getElementWidth(elementRef)).toEqual(width);
+        expect(getElementWidth(elementRef, true)).toEqual(widthWithMargin);
+    });
+
+    it('should accept both ElementRef and HTMLElement', () => {
+        expect(getElementWidth(elementRef)).not.toThrow();
+        expect(getElementWidth(elementRef.nativeElement)).not.toThrow();
+        expect(getElementCapacity(elementRef)).not.toThrow();
+        expect(getElementCapacity(elementRef.nativeElement)).not.toThrow();
+    });
+});

@@ -13,6 +13,10 @@ import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
+import * as collapsibleTabT from '!raw-loader!./examples/tab-collapsible-example/tab-collapsible-example.component.ts';
+import * as collapsibleTabH from '!raw-loader!./examples/tab-collapsible-example/tab-collapsible-example.component.html';
+import * as stackedTabT from '!raw-loader!./examples/tab-stacked-content-example/tab-stacked-content-example.component.ts';
+import * as stackedTabH from '!raw-loader!./examples/tab-stacked-content-example/tab-stacked-content-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
@@ -179,6 +183,35 @@ export class TabsDocsComponent {
             code: tabAddT,
             fileName: 'adding-tab-example',
             component: 'AddingTabExampleComponent'
+        }
+    ];
+
+    collapsibleTab: ExampleFile[] = [
+        {
+            language: 'html',
+            code: collapsibleTabH,
+            fileName: 'tab-collapsible-example',
+            scssFileCode: tabAddS
+        },
+        {
+            language: 'typescript',
+            code: collapsibleTabT,
+            fileName: 'tab-collapsible-example',
+            component: 'TabCollapsibleExampleComponent'
+        }
+    ];
+
+    stackedTab: ExampleFile[] = [
+        {
+            language: 'html',
+            code: stackedTabH,
+            fileName: 'tab-stacked-content-example',
+        },
+        {
+            language: 'typescript',
+            code: stackedTabT,
+            fileName: 'tab-stacked-content-example',
+            component: 'TabStackedContentExampleComponent'
         }
     ];
 
