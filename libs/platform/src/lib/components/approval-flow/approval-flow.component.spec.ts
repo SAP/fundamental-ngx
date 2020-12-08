@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { Observable, of } from 'rxjs';
 
+import { Observable, of } from 'rxjs';
 import {
     ApprovalDataSource,
     ApprovalNode,
@@ -207,23 +208,18 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
 })
 class TestPlatformApprovalFlowComponent {
     @ViewChild(ApprovalFlowComponent, { static: true }) component: ApprovalFlowComponent;
-
     title = TEST_APPROVAL_FLOW_TITLE;
-
     dataSource = new TestApprovalFlowDataSource();
-
-    constructor() {
-    }
 }
 
-fdescribe('ApprovalFlowComponent', () => {
+describe('ApprovalFlowComponent', () => {
     let fixture: ComponentFixture<TestPlatformApprovalFlowComponent>;
     let component: ApprovalFlowComponent;
     let host: TestPlatformApprovalFlowComponent;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformApprovalFlowModule],
+            imports: [PlatformApprovalFlowModule, NoopAnimationsModule],
             declarations: [ApprovalFlowComponent, TestPlatformApprovalFlowComponent]
         }).compileComponents();
     });
@@ -240,7 +236,7 @@ fdescribe('ApprovalFlowComponent', () => {
     });
 
     it('should render approval flow title', () => {
-        const titleEl = fixture.nativeElement.querySelector('.approval-flow-title');
+        const titleEl = fixture.nativeElement.querySelector('.approval-flow__title');
         expect(titleEl).toBeTruthy();
         expect(titleEl.textContent).toEqual(TEST_APPROVAL_FLOW_TITLE);
         const newTitle = `${TEST_APPROVAL_FLOW_TITLE}-changed`;
@@ -250,14 +246,14 @@ fdescribe('ApprovalFlowComponent', () => {
     });
 
     it('should render watchers list', () => {
-        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow-watchers');
+        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow__watchers');
         expect(watchersContainer).toBeTruthy();
         expect(watchersContainer.querySelectorAll('fd-avatar').length).toEqual(simpleGraph.watchers.length);
     });
 
     it('should call watcher click handler on watcher click', () => {
-        spyOn(component, 'onWatcherClick');
-        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow-watchers');
+        spyOn(component, 'onWatcherClick').and.callThrough();
+        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow__watchers');
         const watcher = watchersContainer.querySelector('fd-avatar');
         expect(watcher).toBeTruthy();
         watcher.click();
@@ -265,13 +261,13 @@ fdescribe('ApprovalFlowComponent', () => {
     });
 
     it('should render nodes', () => {
-        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow-graph');
+        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
         expect(nodesContainer).toBeTruthy();
         expect(nodesContainer.querySelectorAll('fdp-approval-flow-node').length).toEqual(simpleGraph.nodes.length);
     });
 
     it('should call node click handler on node click', () => {
-        spyOn(component, 'onNodeClick');
+        spyOn(component, 'onNodeClick').and.callThrough();
         component.nodeComponents.first.onNodeClick.emit();
         expect(component.onNodeClick).toHaveBeenCalled();
     });
@@ -283,15 +279,29 @@ fdescribe('ApprovalFlowComponent', () => {
     });
 
     it('should call keydown handler if arrow key was pressed', () => {
-        spyOn(component, 'onNodeKeyDown');
-        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow-graph');
+        spyOn(component, 'onNodeKeyDown').and.callThrough();
+        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
         expect(nodesContainer).toBeTruthy();
         const nodes = nodesContainer.querySelectorAll('fdp-approval-flow-node');
         const firstNode = nodes[0];
         firstNode.focus();
-        expect(document.activeElement).toBe(firstNode);
         const keyboardEvent = createKeyboardEvent('keydown', RIGHT_ARROW, 'ArrowRight');
         firstNode.dispatchEvent(keyboardEvent);
         expect(component.onNodeKeyDown).toHaveBeenCalled();
+    });
+
+    it('should increment step count after nextSlide call', () => {
+        spyOn(component, 'nextSlide').and.callThrough();
+        const prevCount = component._carouselStep;
+        component.nextSlide();
+        expect(prevCount < component._carouselStep).toBeTruthy();
+    });
+
+    it('should decrement step count after previousSlide call', () => {
+        spyOn(component, 'previousSlide').and.callThrough();
+        component._carouselStep = 1;
+        const prevCount = component._carouselStep;
+        component.previousSlide();
+        expect(prevCount > component._carouselStep).toBeTruthy();
     });
 });

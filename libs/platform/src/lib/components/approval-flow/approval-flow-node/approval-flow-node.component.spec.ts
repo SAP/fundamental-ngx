@@ -20,7 +20,7 @@ const node: ApprovalNode = {
     createDate: new Date()
 };
 
-fdescribe('ApprovalFlowNodeComponent', () => {
+describe('ApprovalFlowNodeComponent', () => {
     let component: ApprovalFlowNodeComponent;
     let fixture: ComponentFixture<ApprovalFlowNodeComponent>;
     let changeDetectorRef: ChangeDetectorRef;
@@ -29,11 +29,7 @@ fdescribe('ApprovalFlowNodeComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [ApprovalFlowNodeComponent],
             imports: [PlatformApprovalFlowModule]
-        })
-            // .overrideComponent(ApprovalFlowNodeComponent, {
-            //     set: { changeDetection: ChangeDetectionStrategy.Default }
-            // })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -56,19 +52,19 @@ fdescribe('ApprovalFlowNodeComponent', () => {
     it('should add blank class', () => {
         component.blank = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement).toHaveClass('blank');
+        expect(fixture.nativeElement).toHaveClass('approval-flow-node--blank');
     });
 
     it('should add line-before class', () => {
         component.renderLineBefore = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement).toHaveClass('line-before');
+        expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-before');
     });
 
     it('should add line-after class', () => {
         component.renderLineAfter = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement).toHaveClass('line-after');
+        expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-after');
     });
 
     it('should render arrow when arrow option set to true',   () => {
@@ -82,15 +78,14 @@ fdescribe('ApprovalFlowNodeComponent', () => {
         component.node.status = 'approved';
         component.ngOnInit();
         fixture.detectChanges();
-        expect(fixture.nativeElement).toHaveClass('approved');
+        expect(fixture.nativeElement).toHaveClass('approval-flow-node--approved');
     });
 
     it('should add parent-approved class if parent node is approved', () => {
-        // component.node = { ...node };
         component.parent = Object.assign({ status: 'approved' }, node);
         component.ngOnInit();
         fixture.detectChanges();
-        expect(fixture.nativeElement).toHaveClass('parent-approved');
+        expect(fixture.nativeElement).toHaveClass('approval-flow-node--parent-approved');
     });
 
     it('should have positive object status when node is approved', () => {
@@ -106,11 +101,4 @@ fdescribe('ApprovalFlowNodeComponent', () => {
         fixture.detectChanges();
         expect(component._objectStatus).toEqual('negative');
     });
-
-    // it('should be focusable',  () => {
-    //     // component.ngOnInit();
-    //     // fixture.detectChanges();
-    //     component.focus();
-    //     expect(document.activeElement).toBe(component.nativeElement);
-    // });
 });

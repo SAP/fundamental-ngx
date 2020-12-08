@@ -52,14 +52,14 @@ $block: approval-flow-node;
     }
 
     &.#{$block}--approved {
-        &.line-after:after {
+        &.#{$block}--line-after:after {
             border-top-style: solid;
             border-top-width: 1px;
         }
     }
 
     &.#{$block}--parent-approved {
-        &.line-before:before {
+        &.#{$block}--line-before:before {
             border-top-style: solid;
             border-top-width: 1px;
             left: -2.2rem;

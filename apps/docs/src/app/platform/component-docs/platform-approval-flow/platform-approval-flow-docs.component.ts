@@ -14,11 +14,13 @@ export class PlatformApprovalFlowDocsComponent {
             language: 'typescript',
             code: approvalFlowTs,
             fileName: 'platform-approval-flow-example',
+            name: 'approval-flow-example.component.ts'
         },
         {
             language: 'typescript',
             code: approvalFlowDataSource,
             fileName: 'platform-approval-flow-data-source',
+            name: 'approval-flow-example-data-source.class.ts'
         }
     ];
 
