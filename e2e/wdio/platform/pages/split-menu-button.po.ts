@@ -19,9 +19,6 @@ export class SplitMenuButtonPo extends BaseComponentPo {
     iconExArrowBtnArr = 'fdp-platform-split-button-icons-example button:nth-of-type(2)';
     iconBtnAttrArr = 'fdp-platform-split-button-icons-example fdp-split-menu-button';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     checkBtnSelectionChange(array, btnArray, expectation): void {
         for (let i = 0; i < array.length; i++) {
             array[i].click();
