@@ -7,18 +7,23 @@
 
         textarea {
             &::placeholder {
+                color: #32363a;
                 color: var(--sapTextColor, #32363a);
             }
             &::-webkit-input-placeholder {
+                color: #32363a;
                 color: var(--sapTextColor, #32363a);
             }
             &::-moz-placeholder {
+                color: #32363a;
                 color: var(--sapTextColor, #32363a);
             }
             &:-ms-input-placeholder {
+                color: #32363a;
                 color: var(--sapTextColor, #32363a);
             }
             &:-moz-placeholder {
+                color: #32363a;
                 color: var(--sapTextColor, #32363a);
             }
         }
