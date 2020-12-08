@@ -13,7 +13,7 @@ describe('Verify Switch component', function() {
     });
 
     describe('has default and compact switch and', function() {
-        it('should default change something to active or inactive', async () => {
+        it('should default change something to active or inactive', () => {
             // capture before state
             webDriver.waitElementToBePresentInDOM(switchPage.defaultSwitch);
             const isCheckedBefore = webDriver.getAttributeByName(switchPage.defaultSwitch, 'aria-checked');
@@ -29,7 +29,7 @@ describe('Verify Switch component', function() {
             expect(handelColorAfter.value).toContain('8,84,160');
         });
 
-        it('should compact change something to active or inactive', async () => {
+        it('should compact change something to active or inactive', () => {
             // capture before state
             const isCheckedBefore = webDriver.getAttributeByName(switchPage.defaultCompactSwitch, 'aria-checked');
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
@@ -44,7 +44,7 @@ describe('Verify Switch component', function() {
             expect(handelColorAfter.value).toContain('8,84,160');
         });
 
-        it('should default change state on hover', async () => {
+        it('should default change state on hover', () => {
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             webDriver.mouseHoverElement(switchPage.defaultSwitchHandel);
@@ -54,7 +54,7 @@ describe('Verify Switch component', function() {
             expect(handelColorAfter.value).toContain('235,245,254');
         });
 
-        it('should compact default change state on hover', async () => {
+        it('should compact default change state on hover', () => {
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             webDriver.mouseHoverElement(switchPage.defaultCompactSwitchHandel);
@@ -65,7 +65,7 @@ describe('Verify Switch component', function() {
             expect(handelColorAfter.value).toContain('235,245,254');
         });
 
-        it('compact switch should be smaller than default', async () => {
+        it('compact switch should be smaller than default', () => {
             const defaultSwitchSize = webDriver.getElementSize(switchPage.defaultSwitchSize) as WebdriverIO.SizeReturn;
             const defaultCompactSwitchSize = webDriver.getElementSize(switchPage.defaultCompactSwitchSize) as WebdriverIO.SizeReturn;
 
@@ -75,7 +75,7 @@ describe('Verify Switch component', function() {
     });
 
     describe('has disabled and disabled-form switch and ', function() {
-        it('should not be able to interact with disabled switch', async () => {
+        it('should not be able to interact with disabled switch', () => {
             webDriver.scrollIntoView(switchPage.disabledSwitch);
             const isClickable = webDriver.isElementClickable(switchPage.disabledSwitch);
             expect(isClickable).toBe(false);
@@ -110,7 +110,7 @@ describe('Verify Switch component', function() {
     });
 
 
-    it('should have alternative title or aria-label for all switches', async () => {
+    it('should have alternative title or aria-label for all switches', () => {
         const alternativeTextDefaultSwitch = webDriver.getAttributeByName(switchPage.defaultSwitch, 'aria-label');
         const alternativeTextDefaultCompactSwitch = webDriver.getAttributeByName(switchPage.defaultCompactSwitch, 'aria-label');
         const alternativeTextDisabledSwitch = webDriver.getAttributeByName(switchPage.disabledSwitch, 'aria-label');
@@ -136,11 +136,11 @@ describe('Verify Switch component', function() {
     it('should have RTL orientation', () => {
         const arrL = webDriver.getElementArrayLength(switchPage.exampleAreaContainersArr);
         for (let i = 0; arrL > i; i++) {
-            webDriver.scrollIntoView(switchPage.exampleAreaContainersArr, 5000, i);
+            webDriver.scrollIntoView(switchPage.exampleAreaContainersArr,  i);
             expect(webDriver.getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
             const dirValueBefore = webDriver.getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', i);
             expect([null, '']).toContain(dirValueBefore);
-            webDriver.click(switchPage.rtlSwitcherArr, 5000, i);
+            webDriver.click(switchPage.rtlSwitcherArr,  i);
             expect(webDriver.getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
             expect(webDriver.getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
         }
@@ -185,7 +185,7 @@ describe('Verify Switch component', function() {
             expect(offIconStateAfter.value).toBe('visible');
         });
 
-        it('should semantic change state on hover', async () => {
+        it('should semantic change state on hover', () => {
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.semanticSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             webDriver.scrollIntoView(switchPage.semanticSwitchHandel);

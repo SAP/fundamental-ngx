@@ -19,8 +19,8 @@ describe('Menu component test suite', function() {
         for (let i = 0; basicMenuBtnArrLength > i; i++) {
             expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.borderColorAttribute, i).value)
                 .toContain(MenuData.menuBtnBorderColor);
-            webDriver.scrollIntoView(menuPage.menuBtnArr, 5000, i);
-            webDriver.mouseHoverElement(menuPage.menuBtnArr, 5000, i);
+            webDriver.scrollIntoView(menuPage.menuBtnArr, i);
+            webDriver.mouseHoverElement(menuPage.menuBtnArr, i);
             expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
                 .toContain(MenuData.menuBtnHoverColor);
         }
@@ -54,11 +54,11 @@ describe('Menu component test suite', function() {
         const basicMenuBtnTextArr = webDriver.getElementArrayLength(menuPage.menuBtnTextArr);
 
         for (let i = 0; iconMenuBtnIconsArr > i; i++) {
-            expect(webDriver.getText(menuPage.iconMenuIconArr, i, 5000)).not.toBe(null);
+            expect(webDriver.getText(menuPage.iconMenuIconArr, i)).not.toBe(null);
         }
 
-        for (let j = 0; basicMenuBtnTextArr > j; j++) {
-            expect(webDriver.isElementDisplayed(menuPage.menuBtnTextArr, 5000, j)).toBe(true);
+        for (let i = 0; basicMenuBtnTextArr > i; i++) {
+            expect(webDriver.isElementDisplayed(menuPage.menuBtnTextArr, i)).toBe(true);
         }
     });
 
@@ -66,7 +66,7 @@ describe('Menu component test suite', function() {
         // const arrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
         //
         // for (let i = 0; arrLength > i; i++) {
-        //     webDriver.mouseHoverElement(menuPage.menuBtnArr, 5000, i);
+        //     webDriver.mouseHoverElement(menuPage.menuBtnArr, i);
         //     webDriver.mouseButtonDown();
         //     expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
         //         .toContain(MenuData.menuBtnActiveColor);
@@ -123,11 +123,11 @@ describe('Menu component test suite', function() {
         const arrL = webDriver.getElementArrayLength(menuPage.exampleAreaContainersArr);
 
         for (let i = 0; arrL > i; i++) {
-            webDriver.scrollIntoView(menuPage.exampleAreaContainersArr, 5000, i);
+            webDriver.scrollIntoView(menuPage.exampleAreaContainersArr,  i);
             expect(webDriver.getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
             const dirValueBefore = webDriver.getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i);
             expect([null, '']).toContain(dirValueBefore);
-            webDriver.click(menuPage.rtlSwitcherArr, 5000, i);
+            webDriver.click(menuPage.rtlSwitcherArr, i);
             expect(webDriver.getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
             expect(webDriver.getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
         }
@@ -139,7 +139,7 @@ function checkMenuItemsHoverState(itemsArrSelector, attribute, expectation): voi
     const menuItemsArrLength = webDriver.getElementArrayLength(itemsArrSelector);
 
     for (let i = 0; menuItemsArrLength > i; i++) {
-        webDriver.mouseHoverElement(itemsArrSelector, 5000, i);
+        webDriver.mouseHoverElement(itemsArrSelector,  i);
         expect(webDriver.getCSSPropertyByName(itemsArrSelector, attribute, i).value).toContain(expectation);
     }
 }
@@ -148,7 +148,7 @@ function checkMenuItemsActiveState(itemsArrSelector: string, attribute: string, 
     const menuItemsArrLength = webDriver.getElementArrayLength(itemsArrSelector);
 
     for (let i = 0; menuItemsArrLength > i; i++) {
-        webDriver.mouseHoverElement(itemsArrSelector, 5000, i);
+        webDriver.mouseHoverElement(itemsArrSelector, i);
         // webDriver.mouseButtonDown();
         browser.performActions([ {
             type: 'pointer',
@@ -175,23 +175,23 @@ function checkMenuItemsActiveState(itemsArrSelector: string, attribute: string, 
 
 
 function check2ndLvlMenuItemsHvrState(itemsArr, itemsArr2, attribute, expectation): void {
-    webDriver.mouseHoverElement(itemsArr, 5000, 1);
+    webDriver.mouseHoverElement(itemsArr, 1);
     const arrLength = webDriver.getElementArrayLength(itemsArr2);
 
     for (let i = 0; arrLength > i; i++) {
-        webDriver.mouseHoverElement(itemsArr2, 5000, i);
+        webDriver.mouseHoverElement(itemsArr2,  i);
         expect(webDriver.getCSSPropertyByName(itemsArr2, attribute, i).value).toContain(expectation);
     }
 }
 
 function check3rdLvlMenuItemsHvrState(itemsArr, itemsArr2, itemsArr3, attribute, expectation): void {
-    webDriver.mouseHoverElement(itemsArr, 5000, 1);
-    webDriver.mouseHoverElement(itemsArr2, 5000, 1);
+    webDriver.mouseHoverElement(itemsArr, 1);
+    webDriver.mouseHoverElement(itemsArr2, 1);
 
     const arrLength = webDriver.getElementArrayLength(itemsArr3);
 
     for (let i = 0; arrLength > i; i++) {
-        webDriver.mouseHoverElement(itemsArr3, 5000, i);
+        webDriver.mouseHoverElement(itemsArr3,  i);
         expect(webDriver.getCSSPropertyByName(itemsArr3, attribute, i).value).toContain(expectation);
     }
 }

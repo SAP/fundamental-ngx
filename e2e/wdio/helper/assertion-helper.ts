@@ -28,6 +28,15 @@ export function checkLabels(arraySelector: string, expectation: string[], sliceS
     expect(webDriver.getTextArr(arraySelector, sliceStart, sliceEnd)).toEqual(expectation);
 }
 
+export function checkRtlOrientation(element: string, index: number): void {
+    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('rtl');
+    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('rtl');
+}
+
+export function checkLtrOrientation(element: string, index: number): void {
+    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('ltr');
+    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('ltr');
+}
 
 
 

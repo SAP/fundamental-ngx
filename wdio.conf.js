@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/textarea.e2e-spec.ts'
+        './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -45,7 +45,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 6,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -71,7 +71,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ 'process.env.TRAVIS_BUILD_ID'],
             }
         },
         {
@@ -170,10 +170,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-
-    //baseUrl: 'https://sap.dev:4200/',
     baseUrl: 'https://anton.local:4200/',
-    //baseUrl: 'https://sap.github.io/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -195,7 +192,7 @@ exports.config = {
             sauceConnect: true,
         }]
     ],
-    
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html
