@@ -1,5 +1,3 @@
-
-
 export class Wdio {
 
     get defaultWaitTime(): number {
@@ -121,8 +119,8 @@ export class Wdio {
     }
 
     mouseHoverElement(selector: string, waitTime = this.defaultWaitTime, index: number = 0): any {
-            $$(selector)[index].waitForExist({ timeout: waitTime });
-            $$(selector)[index].moveTo();
+        $$(selector)[index].waitForExist({ timeout: waitTime });
+        $$(selector)[index].moveTo();
     }
 
     clearValue(selector: string, waitTime = this.defaultWaitTime, index: number = 0): void {
@@ -215,6 +213,14 @@ export class Wdio {
         $$(selector)[index].scrollIntoView();
         // @ts-ignore
         $$(selector)[index].focus();
+    }
+
+    clickNextElement(selector: string, index: number = 0): void {
+        $$(selector)[index].nextElement().click();
+    }
+
+    isElementClickeble(selector: string, waitTime = this.defaultWaitTime, index: number = 0): boolean {
+        return $$(selector)[index].isClickable();
     }
 }
 

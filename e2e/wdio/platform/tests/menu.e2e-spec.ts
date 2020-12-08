@@ -63,15 +63,15 @@ describe('Menu component test suite', function() {
     });
 
     xit('should check menu btn active state', () => {
-        const arrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
-
-        for (let i = 0; arrLength > i; i++) {
-            webDriver.mouseHoverElement(menuPage.menuBtnArr, 5000, i);
-            webDriver.mouseButtonDown();
-            expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
-                .toContain(MenuData.menuBtnActiveColor);
-            webDriver.mouseButtonUp();
-        }
+        // const arrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
+        //
+        // for (let i = 0; arrLength > i; i++) {
+        //     webDriver.mouseHoverElement(menuPage.menuBtnArr, 5000, i);
+        //     webDriver.mouseButtonDown();
+        //     expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
+        //         .toContain(MenuData.menuBtnActiveColor);
+        //     webDriver.mouseButtonUp();
+        // }
     });
 
     it('should check menu item styles', () => {
