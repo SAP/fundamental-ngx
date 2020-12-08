@@ -518,12 +518,9 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         } as DialogConfig);
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: FiltersDialogResultData) => {
-                if (!result.filterBy) {
-                    return;
-                }
-                this._tableService.filter(result.filterBy);
-            })
+            dialogRef.afterClosed.pipe(filter(result => !!result?.filterBy).subscribe((result: FiltersDialogResultData) => 
+                this._tableService.filter(result.filterBy)
+            )
         );
     }
 
