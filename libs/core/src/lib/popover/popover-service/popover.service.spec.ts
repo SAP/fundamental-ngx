@@ -4,8 +4,6 @@ import { Component, ElementRef, Injector, Renderer2, TemplateRef, ViewChild, Vie
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { BasePopoverClass } from '../base/base-popover.class';
 import { PopoverModule } from '../popover.module';
-import { Overlay, ViewportRuler } from '@angular/cdk/overlay';
-import { RtlService } from '../../utils/services/rtl.service';
 
 
 @Component({
@@ -147,7 +145,7 @@ describe('PopoverService', () => {
 
         componentInstance.isOpen = true;
 
-        service.refreshPassedValues(componentInstance);
+        service.refreshConfiguration(componentInstance);
 
         fixture.detectChanges();
 
@@ -157,7 +155,7 @@ describe('PopoverService', () => {
 
         componentInstance.isOpen = false;
 
-        service.refreshPassedValues(componentInstance);
+        service.refreshConfiguration(componentInstance);
 
         fixture.detectChanges();
 
@@ -165,14 +163,14 @@ describe('PopoverService', () => {
         expect(service.close).toHaveBeenCalled();
     });
 
-    fit('it should change values, when refreshPassedValues method is used', () => {
+    fit('it should change values, when refreshConfiguration method is used', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
         componentInstance.fillControlMode = 'at-least';
         componentInstance.noArrow = false;
         componentInstance.maxWidth = 120;
 
-        service.refreshPassedValues(componentInstance);
+        service.refreshConfiguration(componentInstance);
 
         expect(service.fillControlMode).toBe('at-least')
         expect(service.noArrow).toBe(false)
@@ -218,7 +216,10 @@ describe('PopoverService', () => {
     it('should change trigger events on input change', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
-        service.refreshListeners(['keydown', 'mouseleave', 'mouseenter']);
+        componentInstance.triggers = ['keydown', 'mouseleave', 'mouseenter'];
+
+        service.refreshConfiguration(componentInstance);
+
         fixture.detectChanges();
         expect(service['_eventRef'].length).toBe(3);
     });

@@ -30,11 +30,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     @Input()
     closeOnOutsideClick = false;
 
-    /** TODO */
+    /** Inline help text to display inside generated popover */
     @Input('fd-inline-help')
-    inlineHelpTitle: string = null;
+    inlineHelpText: string = null;
 
-    /** TODO */
+    /** Inline help template to display inside generated popover */
     @Input('fd-inline-help-template')
     inlineHelpTemplate: TemplateRef<any> = null;
 
@@ -51,14 +51,14 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             this._applyAdditionalInlineHelpClass();
         }
 
-        if ('inlineHelpTitle' in changes || 'inlineHelpTemplate' in changes) {
+        if ('inlineHelpText' in changes || 'inlineHelpTemplate' in changes) {
             this._popoverService.updateContent(
-                changes['inlineHelpTitle']?.currentValue,
+                changes['inlineHelpText']?.currentValue,
                 changes['inlineHelpTemplate']?.currentValue
             )
         }
 
-        this._popoverService.refreshPassedValues(this);
+        this._popoverService.refreshConfiguration(this);
     }
 
     /** @hidden */

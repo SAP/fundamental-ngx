@@ -21,6 +21,12 @@
         Input with inline help
         Input with inline help
     </label>
-    <fd-icon glyph="question-mark" [fd-inline-help]="text" placement="left" style="position: absolute; top: 0; right: 0;"></fd-icon>
+    <fd-icon glyph="question-mark" [fd-inline-help-template]="templateRef" placement="left" style="position: absolute; top: 0; right: 0;"></fd-icon>
     <input fd-form-control fd-inline-help="Inline Help" placement="right" [(ngModel)]="text" placeholder="Field placeholder text" type="text" id="input-41" />
+    <ng-template #templateRef>
+        <ul>
+            <li>Template Inline Help</li>
+            <li>There can be anything</li>
+        </ul>
+    </ng-template>
 </div>

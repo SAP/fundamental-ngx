@@ -51,7 +51,7 @@ export class PopoverService extends BasePopoverClass {
     private readonly _placementRefresh$ = new Subject<void>();
 
     /** @hidden */
-    private popoverBody: PopoverBodyComponent;
+    private _popoverBody: PopoverBodyComponent;
 
     /** @hidden */
     private _triggerElement: ElementRef;
@@ -75,12 +75,20 @@ export class PopoverService extends BasePopoverClass {
         this._refresh$ = merge(this.isOpenChange, this._onDestroy$);
     }
 
-    /** TODO */
+    /**
+     * Method initialising the popover service - should be called, after view is initialised, params:
+     * - triggerElement - element, which is equivalent for cdkOverlayOrigin, or fd-popover-control,
+     *   by default to this element the popover body will lbe appended and events on this element will trigger
+     *   popover's  toggle
+     * - config - configuration object - in this case the intention is to use inheritance of BasePopoverClass in component
+     * - templateData - in case of having already PopoverBodyComponent, there is way to pass container, template containing
+     *   PopoverComponent and PopoverComponent instance
+     */
     initialise(triggerElement: ElementRef, config?: BasePopoverClass, templateData?: PopoverTemplate): void {
         this._templateData = templateData;
         this._triggerElement = triggerElement;
         if (config) {
-            this.refreshPassedValues(config);
+            this.refreshConfiguration(config);
         }
 
         this._refreshTriggerListeners();
@@ -132,11 +140,11 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
-    /**  */
+    /** method updating template or text inside rendered PopoverBody */
     updateContent(stringContent: string, templateContent: TemplateRef<any>): void {
         this.stringContent = stringContent;
         this.templateContent = templateContent;
-        if (this._popoverBody) {
+        if (this._getPopoverBody()) {
             this._passVariablesToBody();
         }
     }
@@ -148,12 +156,6 @@ export class PopoverService extends BasePopoverClass {
         } else {
             this.open();
         }
-    }
-
-    /** TODO */
-    refreshListeners(triggers: string[]): void {
-        this.triggers = triggers;
-        this._refreshTriggerListeners();
     }
 
     /**
@@ -173,6 +175,7 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** Equivalent for ngOnDestroy method, whether component is destroyed, this method should be called */
     onDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
@@ -181,8 +184,10 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
-    /** TODO */
-    refreshPassedValues(config: BasePopoverClass): void {
+    /**
+     * Method that sets configuration/options, it detects if there is something changed and overwrites them
+     */
+    refreshConfiguration(config: BasePopoverClass): void {
         const onlyChanged = Object.keys(new BasePopoverClass()).filter(key => this[key] !== config[key]);
 
         if (onlyChanged.some(key => key === 'isOpen')) {
@@ -193,11 +198,11 @@ export class PopoverService extends BasePopoverClass {
             }
         }
 
-        if (onlyChanged.some(key => key === 'triggers')) {
-            this.refreshListeners(config['triggers']);
-        }
-
         onlyChanged.forEach(key => this[key] = config[key]);
+
+        if (onlyChanged.some(key => key === 'triggers')) {
+            this._refreshTriggerListeners();
+        }
     }
 
     /** @hidden */
@@ -266,15 +271,16 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
-    /** TODO */
+    /** Attach template containing popover body to overlay */
     private _attachTemplate(): void {
         this._passVariablesToBody();
         this._overlayRef.attach(new TemplatePortal(this._templateData.template, this._templateData.container));
     }
 
+    /** Create PopoverBodyComponent and attach it into overlay */
     private _attachBodyComponent(): void {
         const overlay = this._overlayRef.attach(new ComponentPortal(PopoverBodyComponent, null, this._injector));
-        this.popoverBody = overlay.instance;
+        this._popoverBody = overlay.instance;
         this._passVariablesToBody();
     }
 
@@ -284,18 +290,18 @@ export class PopoverService extends BasePopoverClass {
         positionChange
             .pipe(
                 takeUntil(this._placementRefresh$),
-                filter(() => !this.noArrow && !!this._popoverBody),
+                filter(() => !this.noArrow && !!this._getPopoverBody()),
                 distinctUntilChanged(
                     (previous, current) =>
                         previous.connectionPair === current.connectionPair
                 ))
-            .subscribe(event => this._popoverBody._setArrowStyles(event.connectionPair, this._getDirection()))
+            .subscribe(event => this._getPopoverBody()._setArrowStyles(event.connectionPair, this._getDirection()))
         ;
     }
 
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
     private _listenOnClose(): void {
-        const closeEvents$ = merge(this._overlayRef.detachments(), this._popoverBody.onClose);
+        const closeEvents$ = merge(this._overlayRef.detachments(), this._getPopoverBody().onClose);
 
         closeEvents$.pipe(takeUntil(this._refresh$))
             .subscribe(() => this.close())
@@ -352,23 +358,23 @@ export class PopoverService extends BasePopoverClass {
         const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
         const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         if (this.fillControlMode === 'at-least') {
-            this._popoverBody._popoverBodyMinWidth = width;
+            this._getPopoverBody()._popoverBodyMinWidth = width;
         } else if (this.fillControlMode === 'equal') {
-            this._popoverBody._popoverBodyWidth = width;
+            this._getPopoverBody()._popoverBodyWidth = width;
         }
         this._detectChanges();
     }
 
     /** @hidden */
     private _passVariablesToBody(): void {
-        this._popoverBody.text = this.stringContent;
-        this._popoverBody._additionalBodyClass = this.additionalBodyClass;
-        this._popoverBody._focusTrapped = this.focusTrapped;
-        this._popoverBody._maxWidth = this.maxWidth;
-        this._popoverBody._noArrow = this.noArrow;
-        this._popoverBody._focusAutoCapture = this.focusAutoCapture;
-        this._popoverBody._templateToDisplay = this.templateContent;
-        this._popoverBody._closeOnEscapeKey = this.closeOnEscapeKey;
+        this._getPopoverBody().text = this.stringContent;
+        this._getPopoverBody()._additionalBodyClass = this.additionalBodyClass;
+        this._getPopoverBody()._focusTrapped = this.focusTrapped;
+        this._getPopoverBody()._maxWidth = this.maxWidth;
+        this._getPopoverBody()._noArrow = this.noArrow;
+        this._getPopoverBody()._focusAutoCapture = this.focusAutoCapture;
+        this._getPopoverBody()._templateToDisplay = this.templateContent;
+        this._getPopoverBody()._closeOnEscapeKey = this.closeOnEscapeKey;
         this._detectChanges();
     }
 
@@ -377,14 +383,16 @@ export class PopoverService extends BasePopoverClass {
         return this._triggerElement.nativeElement.offsetWidth;
     }
 
-    private _detectChanges(): void {
-        if (this._popoverBody) {
-            this._popoverBody.detectChanges();
-        }
+    /** @hidden */
+    private _getPopoverBody(): PopoverBodyComponent {
+        return this._templateData?.popoverBody || this._popoverBody;
     }
 
-    private get _popoverBody(): PopoverBodyComponent {
-        return this._templateData?.popoverBody || this.popoverBody;
+    /** @hidden */
+    private _detectChanges(): void {
+        if (this._getPopoverBody()) {
+            this._getPopoverBody().detectChanges();
+        }
     }
 
 }

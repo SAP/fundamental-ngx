@@ -112,7 +112,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        this._popoverService.refreshPassedValues(this);
+        this._popoverService.refreshConfiguration(this);
     }
 
     /** @hidden */
