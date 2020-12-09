@@ -51,6 +51,21 @@ function generateFiles(number: number): UploadCollectionFile[] {
         const fileSize = getRandomInt(1, maxSize);
         const extension = extensions[Math.floor(Math.random() * extensions.length)];
 
+        let url: string;
+
+        switch (extension) {
+            case '.jpg':
+            case '.png':
+                url = 'https://picsum.photos/200';
+                break;
+            case '.pdf':
+                url = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+                break;
+            case '.xls':
+                url = 'https://file-examples-com.github.io/uploads/2017/02/file_example_XLS_10.xls';
+                break;
+        }
+
         files.push({
             documentId: uuidv4(),
             type: 'file',
@@ -59,6 +74,7 @@ function generateFiles(number: number): UploadCollectionFile[] {
                 id: uuidv4(),
                 name: `${firstName} ${generateRandomLetter()}.`
             },
+            url: url,
             uploadedOn: randomDate(new Date(2018, 0, 1), new Date()),
             fileSize: fileSize,
             version: Math.floor(Math.random() * 10) || 1

@@ -30,6 +30,7 @@ export interface UploadCollectionFile {
     uploadedOn: Date;
     fileSize: number;
     version: number;
+    url: string;
     status?: UploadCollectionItemStatus;
     file?: File;
 }

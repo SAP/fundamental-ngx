@@ -38,6 +38,7 @@ const dataSource: UploadCollectionItem[] = [
                     id: uuidv4(),
                     name: 'Oliver T.'
                 },
+                url: '',
                 uploadedOn: new Date(2018, 0, 1),
                 fileSize: 1024,
                 version: 2
@@ -52,6 +53,7 @@ const dataSource: UploadCollectionItem[] = [
             id: uuidv4(),
             name: 'William G.'
         },
+        url: '',
         uploadedOn: new Date(2010, 9, 4),
         fileSize: 2048,
         version: 1
