@@ -5,7 +5,7 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { DefaultPositions, PopoverPosition } from '@fundamental-ngx/core';
 
-fdescribe('PopoverBodyComponent', () => {
+describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
     let fixture: ComponentFixture<PopoverBodyComponent>;
 

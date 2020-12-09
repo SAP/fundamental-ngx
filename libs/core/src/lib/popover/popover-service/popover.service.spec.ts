@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverService, PopoverTemplate } from './popover.service';
 import { Component, ElementRef, Injector, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { PopoverBodyComponent } from './popover-body/popover-body.component';
-import { BasePopoverClass } from './base/base-popover.class';
-import { PopoverModule } from './popover.module';
+import { PopoverBodyComponent } from '../popover-body/popover-body.component';
+import { BasePopoverClass } from '../base/base-popover.class';
+import { PopoverModule } from '../popover.module';
 import { Overlay, ViewportRuler } from '@angular/cdk/overlay';
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '../../utils/services/rtl.service';
 
 
 @Component({
@@ -39,7 +39,7 @@ class PopoverTestComponent extends BasePopoverClass {
     }
 }
 
-fdescribe('PopoverService', () => {
+describe('PopoverService', () => {
     let service: PopoverService;
     let componentInstance: PopoverTestComponent;
     let fixture: ComponentFixture<PopoverTestComponent>;
@@ -137,6 +137,46 @@ fdescribe('PopoverService', () => {
         expect(service.isOpen).toBeTrue();
         expect(service.isOpenChange.emit).toHaveBeenCalledWith(true);
         expect(service['_overlayRef'].hasAttached()).toBeTrue();
+    });
+
+    fit('should open and close on refresh passed values', () => {
+        service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
+
+        spyOn(service, 'open').and.callThrough();
+        spyOn(service, 'close').and.callThrough();
+
+        componentInstance.isOpen = true;
+
+        service.refreshPassedValues(componentInstance);
+
+        fixture.detectChanges();
+
+        expect(service['_overlayRef']).toBeTruthy();
+        expect(service.isOpen).toBeTrue();
+        expect(service.open).toHaveBeenCalled();
+
+        componentInstance.isOpen = false;
+
+        service.refreshPassedValues(componentInstance);
+
+        fixture.detectChanges();
+
+        expect(service.isOpen).toBeFalse();
+        expect(service.close).toHaveBeenCalled();
+    });
+
+    fit('it should change values, when refreshPassedValues method is used', () => {
+        service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
+
+        componentInstance.fillControlMode = 'at-least';
+        componentInstance.noArrow = false;
+        componentInstance.maxWidth = 120;
+
+        service.refreshPassedValues(componentInstance);
+
+        expect(service.fillControlMode).toBe('at-least')
+        expect(service.noArrow).toBe(false)
+        expect(service.maxWidth).toBe(120)
     });
 
     it('should close', () => {

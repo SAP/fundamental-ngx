@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
-import { PopoverService } from '../popover/popover.service';
+import { PopoverService } from '../popover/popover-service/popover.service';
 import { BasePopoverClass } from '../popover/base/base-popover.class';
 
 const INLINE_HELP_CLASS = 'fd-inline-help__content';
@@ -7,8 +7,6 @@ const INLINE_HELP_CLASS = 'fd-inline-help__content';
 /**
  * The component that represents an inline-help.
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
- *
- * ```
  */
 @Directive({
     selector: '[fd-inline-help], [fd-inline-help-template]',
@@ -24,9 +22,19 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     @Input()
     noArrow = false;
 
+    /** Whether the popover should close when the escape key is pressed. */
+    @Input()
+    closeOnEscapeKey = false;
+
+    /** Whether the popover should close when a click is made outside its boundaries. */
+    @Input()
+    closeOnOutsideClick = false;
+
+    /** TODO */
     @Input('fd-inline-help')
     inlineHelpTitle: string = null;
 
+    /** TODO */
     @Input('fd-inline-help-template')
     inlineHelpTemplate: TemplateRef<any> = null;
 
@@ -42,6 +50,14 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
         if ('additionalBodyClass' in changes) {
             this._applyAdditionalInlineHelpClass();
         }
+
+        if ('inlineHelpTitle' in changes || 'inlineHelpTemplate' in changes) {
+            this._popoverService.updateContent(
+                changes['inlineHelpTitle']?.currentValue,
+                changes['inlineHelpTemplate']?.currentValue
+            )
+        }
+
         this._popoverService.refreshPassedValues(this);
     }
 

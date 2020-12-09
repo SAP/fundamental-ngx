@@ -1,7 +1,4 @@
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import {
-    AfterViewInit,
-    ChangeDetectorRef,
     ElementRef,
     Injectable,
     Injector,
@@ -10,8 +7,8 @@ import {
     TemplateRef,
     ViewContainerRef
 } from '@angular/core';
-import { DefaultPositions, PopoverPosition } from './popover-position/popover-position';
-import { BasePopoverClass } from './base/base-popover.class';
+import { DefaultPositions, PopoverPosition } from '../popover-position/popover-position';
+import { BasePopoverClass } from '../base/base-popover.class';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
     ConnectedPosition,
@@ -20,10 +17,10 @@ import {
     OverlayConfig,
     OverlayRef, ViewportRuler
 } from '@angular/cdk/overlay';
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '../../utils/services/rtl.service';
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
-import { PopoverBodyComponent } from './popover-body/popover-body.component';
+import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/connected-position';
 
 const MAX_BODY_SIZE = 99999999;
@@ -135,6 +132,15 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /**  */
+    updateContent(stringContent: string, templateContent: TemplateRef<any>): void {
+        this.stringContent = stringContent;
+        this.templateContent = templateContent;
+        if (this._popoverBody) {
+            this._passVariablesToBody();
+        }
+    }
+
     /** Toggles the popover open state */
     toggle(): void {
         if (this.isOpen) {
@@ -177,7 +183,21 @@ export class PopoverService extends BasePopoverClass {
 
     /** TODO */
     refreshPassedValues(config: BasePopoverClass): void {
-        Object.keys(new BasePopoverClass()).forEach(key => this[key] = config[key]);
+        const onlyChanged = Object.keys(new BasePopoverClass()).filter(key => this[key] !== config[key]);
+
+        if (onlyChanged.some(key => key === 'isOpen')) {
+            if (config['isOpen']) {
+                this.open();
+            } else {
+                this.close();
+            }
+        }
+
+        if (onlyChanged.some(key => key === 'triggers')) {
+            this.refreshListeners(config['triggers']);
+        }
+
+        onlyChanged.forEach(key => this[key] = config[key]);
     }
 
     /** @hidden */

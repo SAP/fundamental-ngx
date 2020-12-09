@@ -33,7 +33,7 @@ import { Subject } from 'rxjs';
 import { BasePopoverClass } from './base/base-popover.class';
 import { KeyUtil } from '../utils/functions/key-util';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
-import { PopoverService } from './popover.service';
+import { PopoverService } from './popover-service/popover.service';
 
 let cdkPopoverUniqueId = 0;
 
@@ -41,7 +41,6 @@ let cdkPopoverUniqueId = 0;
  * The popover is a wrapping component that accepts a *control* as well as a *body*.
  * The control is what will trigger the opening of the actual popover, which is called the body.
  * By default, popovers are triggered by click. This can be customized through the *triggers* input.
- * PopoverComponent is an abstraction of PopoverDirective.
  */
 @Component({
     selector: 'fd-popover',
@@ -55,8 +54,7 @@ let cdkPopoverUniqueId = 0;
     styleUrls: ['./popover.component.scss'],
     providers: [PopoverService]
 })
-export class PopoverComponent extends BasePopoverClass
-    implements AfterViewInit, OnDestroy, OnChanges {
+export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
 
     /** Reference to popover trigger element */
     @Input()
@@ -85,7 +83,9 @@ export class PopoverComponent extends BasePopoverClass
     @ContentChild(PopoverBodyComponent)
     popoverBody: PopoverBodyComponent
 
-    /** @hidden */
+    /** @deprecated
+     * Left for backward compatibility
+     */
     directiveRef: any;
 
     constructor(
@@ -100,7 +100,7 @@ export class PopoverComponent extends BasePopoverClass
             this._popoverService.templateContent = this.templateRef;
         }
         this._popoverService.initialise(
-            this._triggerElement,
+            this.trigger || this.triggerOrigin.elementRef,
             this,
             this.popoverBody ? {
             template: this.templateRef,
@@ -112,17 +112,7 @@ export class PopoverComponent extends BasePopoverClass
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes['isOpen']) {
-            if (changes['isOpen'].currentValue) {
-                this.open();
-            } else {
-                this.close();
-            }
-        }
-
-        if (changes['triggers']) {
-            this._popoverService.refreshListeners(changes['triggers'].currentValue)
-        }
+        this._popoverService.refreshPassedValues(this);
     }
 
     /** @hidden */
@@ -165,9 +155,5 @@ export class PopoverComponent extends BasePopoverClass
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
             this.open();
         }
-    }
-
-    private get _triggerElement(): ElementRef {
-        return this.trigger || this.triggerOrigin.elementRef;
     }
 }
