@@ -91,7 +91,6 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        console.log('change selected index', changes)
         if (changes.selectedIndex) {
             this.selectTab(changes.selectedIndex.currentValue);
         }
@@ -110,9 +109,6 @@ export class TabListComponent implements AfterViewInit, OnChanges, OnDestroy {
                         tab.triggerExpandedPanel(index === tabIndex);
                     });
                     this.selectedIndex = tabIndex;
-
-                    console.log('selectedIndex', this.selectedIndex);
-
                     if (emitEvent) {
                         this.selectedIndexChange.emit(tabIndex);
                     }
