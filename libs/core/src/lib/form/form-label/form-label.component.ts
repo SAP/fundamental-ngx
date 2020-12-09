@@ -39,6 +39,6 @@ export class FormLabelComponent {
 
     /** Whether label is for inline-help */
     @Input()
-    @HostBinding('class.fd-form-label--inline-help')
+    @HostBinding('class.fd-form-label--custom-inline-help')
     inlineHelp = false;
 }

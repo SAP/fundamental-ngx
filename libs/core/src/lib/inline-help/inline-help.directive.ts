@@ -1,6 +1,9 @@
-import { Directive, ElementRef, Input, OnInit, TemplateRef } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
 import { PopoverService } from '../popover/popover.service';
 import { BasePopoverClass } from '../popover/base/base-popover.class';
+
+const INLINE_HELP_CLASS = 'fd-inline-help__content';
+
 /**
  * The component that represents an inline-help.
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
@@ -11,7 +14,7 @@ import { BasePopoverClass } from '../popover/base/base-popover.class';
     selector: '[fd-inline-help], [fd-inline-help-template]',
     providers: [PopoverService]
 })
-export class InlineHelpDirective extends BasePopoverClass implements OnInit {
+export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges {
     /** The trigger events that will open/close the inline help component.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
@@ -34,9 +37,18 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit {
         super();
     }
 
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+    }
+
     ngOnInit(): void {
+        this._applyAdditionalInlineHelpClass();
         this._popoverService.stringContent = this.inlineHelpTitle;
         this._popoverService.templateContent = this.inlineHelpTemplate;
         this._popoverService.initialise(this._elementRef, this);
+    }
+
+    private _applyAdditionalInlineHelpClass(): void {
+        this.additionalBodyClass = INLINE_HELP_CLASS + ' ' + this.additionalBodyClass;
     }
 }

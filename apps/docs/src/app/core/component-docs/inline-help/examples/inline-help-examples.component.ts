@@ -4,7 +4,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     selector: 'fd-inline-help-example',
     templateUrl: './inline-help-example.component.html',
     styles: [
-        `.fd-custom-inline-help-body { background: yellow; }`
+        `.fd-custom-inline-help-body { padding: 0.5rem !important; text-align: center; }`
     ],
     encapsulation: ViewEncapsulation.None
 })

@@ -1,5 +1,5 @@
 @import '~fundamental-styles/dist/form-label';
 
-.fd-form-label {
-    overflow: visible;
+.fd-form-label--custom-inline-help {
+	max-width: calc(100% - 1.5rem);
 }
