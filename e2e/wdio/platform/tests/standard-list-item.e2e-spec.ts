@@ -137,9 +137,8 @@ describe('Standard List Item test suite:', function() {
         });
 
         it('should check selected item count is displayed in the toolbar', () => {
-            webDriver.scrollIntoView(standardListPg.sMultiCheckbox);
             expect(webDriver.getText(standardListPg.sMultiToolbar)).toContain('0 : Items selected');
-            webDriver.click(standardListPg.sMultiCheckbox);
+            webDriver.click(standardListPg.sMultiCheckbox, 0);
             expect(webDriver.getAttributeByName(standardListPg.sMultiCheckbox, 'aria-checked')).toBe('true');
             expect(webDriver.getText(standardListPg.sMultiToolbar)).toContain('1 : Items selected');
         });
@@ -147,9 +146,13 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Inverted Secondary text types examples:', function() {
         it('should check border and styles', () => {
-            checkAttributeValueTrue(standardListPg.sInvtAttr, StandardLinkData.byLineAltAttr);
-            expect(webDriver.getCSSPropertyByName(standardListPg.sInvtList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.solidStyle);
+            if (browser.capabilities.browserName === 'internet explorer') {
+                console.log('skip');
+            } else {
+                checkAttributeValueTrue(standardListPg.sInvtAttr, StandardLinkData.byLineAltAttr);
+                expect(webDriver.getCSSPropertyByName(standardListPg.sInvtList, StandardLinkData.borderAttr).value)
+                    .toBe(StandardLinkData.solidStyle);
+            }
         });
 
         it('should check content and interactions', () => {
@@ -172,16 +175,7 @@ describe('Standard List Item test suite:', function() {
 
     describe('Check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            const areas = webDriver.elementArray(standardListPg.exampleAreaContainersArr);
-            const switchers = webDriver.elementArray(standardListPg.rtlSwitcherArr);
-            for (let i = 0; i < areas.length; i++) {
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(standardListPg.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-                expect(webDriver.getCSSPropertyByName(standardListPg.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(standardListPg.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
-                expect(webDriver.getCSSPropertyByName(standardListPg.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
-            }
+            standardListPg.checkRtlSwitch(standardListPg.rtlSwitcherArr, standardListPg.exampleAreaContainersArr);
         });
     });
 });
