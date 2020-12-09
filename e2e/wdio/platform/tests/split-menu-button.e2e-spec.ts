@@ -79,14 +79,14 @@ describe('Split menu button test suite', () => {
 
         for (let i = 0; i < behaviorBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.defaultHvrColor);
         }
 
         for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr, i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.defaultHvrColor);
         }
@@ -134,14 +134,14 @@ describe('Split menu button test suite', () => {
 
         for (let i = 0; i < typesBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.typesExSelectionBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr, i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.typesBtnHvrColorArr[i]);
         }
 
         for (let i = 0; i < typesArrowBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.typesExArrowBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr, i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.typesBtnHvrColorArr[i]);
         }

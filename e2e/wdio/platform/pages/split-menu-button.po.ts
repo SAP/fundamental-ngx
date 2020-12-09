@@ -23,7 +23,7 @@ export class SplitMenuButtonPo extends BaseComponentPo {
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
     checkBtnSelectionChange(array, btnArray, expectation): void {
-        for (let i = 0; i < array.length; i ++) {
+        for (let i = 0; i < array.length; i++) {
             array[i].click();
             const menuItemsArr = browser.$$(this.menuItemArr);
             menuItemsArr[1].click();

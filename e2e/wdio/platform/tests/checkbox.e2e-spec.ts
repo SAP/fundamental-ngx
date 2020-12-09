@@ -82,7 +82,7 @@ describe('Checkbox test suite', () => {
 
         it('should check disabled checkbox', () => {
             // TODO: Fix for Safari
-            if (browser.capabilities.browserName === 'Safari' ) {
+            if (browser.capabilities.browserName === 'Safari') {
                 console.log('skip');
             } else {
                 webDriver.waitElementToBePresentInDOM(checkboxPage.disabledCheckboxWithoutForm);

@@ -38,7 +38,7 @@ describe('Menu component test suite', function() {
     // Real issue for FF
     xit('should check avatar menu btn styles', () => {
         if (browser.capabilities.browserName === 'firefox') {
-            console.log('Skip due #3734')
+            console.log('Skip due #3734');
         } else {
             webDriver.doubleClick(menuPage.menuAvatarBtn);
 
@@ -144,7 +144,7 @@ describe('Menu component test suite', function() {
         const arrL = webDriver.getElementArrayLength(menuPage.exampleAreaContainersArr);
 
         for (let i = 0; arrL > i; i++) {
-            webDriver.scrollIntoView(menuPage.exampleAreaContainersArr,  i);
+            webDriver.scrollIntoView(menuPage.exampleAreaContainersArr, i);
             expect(webDriver.getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
             const dirValueBefore = webDriver.getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i);
             expect([null, '']).toContain(dirValueBefore);
@@ -171,12 +171,12 @@ function checkMenuItemsActiveState(itemsArrSelector: string, attribute: string, 
     for (let i = 0; menuItemsArrLength > i; i++) {
         webDriver.mouseHoverElement(itemsArrSelector, i);
         // webDriver.mouseButtonDown();
-        browser.performActions([ {
+        browser.performActions([{
             type: 'pointer',
             id: 'mouseDown1212',
             actions: [
                 { duration: 0, x: 385, type: 'pointerMove', y: 660 },
-                { type: 'pointerDown', button: 0, duration: 500000 },
+                { type: 'pointerDown', button: 0, duration: 500000 }
             ]
         }]);
         browser.releaseActions();
@@ -200,7 +200,7 @@ function check2ndLvlMenuItemsHvrState(itemsArr, itemsArr2, attribute, expectatio
     const arrLength = webDriver.getElementArrayLength(itemsArr2);
 
     for (let i = 0; arrLength > i; i++) {
-        webDriver.mouseHoverElement(itemsArr2,  i);
+        webDriver.mouseHoverElement(itemsArr2, i);
         expect(webDriver.getCSSPropertyByName(itemsArr2, attribute, i).value).toContain(expectation);
     }
 }
@@ -212,7 +212,7 @@ function check3rdLvlMenuItemsHvrState(itemsArr, itemsArr2, itemsArr3, attribute,
     const arrLength = webDriver.getElementArrayLength(itemsArr3);
 
     for (let i = 0; arrLength > i; i++) {
-        webDriver.mouseHoverElement(itemsArr3,  i);
+        webDriver.mouseHoverElement(itemsArr3, i);
         expect(webDriver.getCSSPropertyByName(itemsArr3, attribute, i).value).toContain(expectation);
     }
 }

@@ -77,15 +77,15 @@ describe('Menu button test suite', function() {
             const compactBtnAttributeArrLength = webDriver.getElementArrayLength(menuBtnPage.compactBtnAttrArr);
 
             for (let i = 0; cozyBtnAttributeArrLength > i; i++) {
-                expect(webDriver.getAttributeByName(menuBtnPage.cozyBtnAttrArr, 'ng-reflect-disabled', i)).toBe('false')
+                expect(webDriver.getAttributeByName(menuBtnPage.cozyBtnAttrArr, 'ng-reflect-disabled', i)).toBe('false');
             }
 
             for (let j = 0; compactBtnAttributeArrLength > j; j++) {
-                expect(webDriver.getAttributeByName(menuBtnPage.compactBtnAttrArr, 'ng-reflect-disabled', j)).toBe('false')
+                expect(webDriver.getAttributeByName(menuBtnPage.compactBtnAttrArr, 'ng-reflect-disabled', j)).toBe('false');
             }
 
             for (let k = 0; 13 > k; k++) {
-                expect(webDriver.isElementDisplayed(menuBtnPage.btnWorldIconArr, k)).toBe(true)
+                expect(webDriver.isElementDisplayed(menuBtnPage.btnWorldIconArr, k)).toBe(true);
             }
         });
 
@@ -94,7 +94,7 @@ describe('Menu button test suite', function() {
             const cozyBtnArrLength = webDriver.getElementArrayLength(menuBtnPage.cozyBtnArr);
 
             for (let i = 0; cozyBtnTextArrLength > i; i++) {
-                expect(webDriver.getText(menuBtnPage.cozyBtnAttrArr, i).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[i])
+                expect(webDriver.getText(menuBtnPage.cozyBtnAttrArr, i).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[i]);
             }
 
             for (let j = 0; cozyBtnArrLength > j; j++) {
@@ -119,7 +119,7 @@ describe('Menu button test suite', function() {
                     .toContain(MenuBtnData.btnColorArr[j]);
                 expect(webDriver.getCSSPropertyByName(menuBtnPage.compactBtnArr, MenuBtnData.textAlignmentAttr, j).value)
                     .toEqual(MenuBtnData.alignmentCenter);
-                expect(webDriver.getAttributeByName(menuBtnPage.compactBtnArr, MenuBtnData.compactAttr)).toEqual('true')
+                expect(webDriver.getAttributeByName(menuBtnPage.compactBtnArr, MenuBtnData.compactAttr)).toEqual('true');
             }
         });
     });

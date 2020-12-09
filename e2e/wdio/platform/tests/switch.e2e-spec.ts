@@ -161,11 +161,11 @@ describe('Verify Switch component', function() {
     it('should have RTL orientation', () => {
         const arrL = webDriver.getElementArrayLength(switchPage.exampleAreaContainersArr);
         for (let i = 0; arrL > i; i++) {
-            webDriver.scrollIntoView(switchPage.exampleAreaContainersArr,  i);
+            webDriver.scrollIntoView(switchPage.exampleAreaContainersArr, i);
             expect(webDriver.getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
             const dirValueBefore = webDriver.getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', i);
             expect([null, '']).toContain(dirValueBefore);
-            webDriver.click(switchPage.rtlSwitcherArr,  i);
+            webDriver.click(switchPage.rtlSwitcherArr, i);
             expect(webDriver.getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
             expect(webDriver.getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
         }

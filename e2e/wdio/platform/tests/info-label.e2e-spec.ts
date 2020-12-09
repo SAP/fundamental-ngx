@@ -9,7 +9,7 @@ describe('Info Label component test suite', () => {
         infoLabelPage.open();
     });
 
-    it('should check default label info',  () => {
+    it('should check default label info', () => {
         if (browser.capabilities.browserName === 'Safari') {
             expect(webDriver.getText(infoLabelPage.defaultLabel)).toEqual(InfoLabelData.safariDefaultLabelText);
             expect(webDriver.getCSSPropertyByName(infoLabelPage.defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
@@ -21,7 +21,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    it('should check info label with text',  () => {
+    it('should check info label with text', () => {
         const labelsArr = webDriver.elementArray(infoLabelPage.labelsWithTextArr);
         if (browser.capabilities.browserName === 'Safari') {
             for (let i = 0; i < labelsArr.length; i++) {
@@ -42,7 +42,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    it('should check info label with text and icon',  () => {
+    it('should check info label with text and icon', () => {
         const labelsWithIconsArr = webDriver.elementArray(infoLabelPage.labelsWithTextAndIconArr);
         const labelIconsArr = webDriver.elementArray(infoLabelPage.labelsIconArr);
 
@@ -58,7 +58,7 @@ describe('Info Label component test suite', () => {
 
             }
             for (let i = 0; i < labelIconsArr.length; i++) {
-                expect(webDriver.waitForDisplayed(infoLabelPage.labelsWithTextAndIconArr, i)).toBe(true)
+                expect(webDriver.waitForDisplayed(infoLabelPage.labelsWithTextAndIconArr, i)).toBe(true);
             }
         } else {
             for (let i = 0; i < labelsWithIconsArr.length; i++) {
@@ -72,12 +72,12 @@ describe('Info Label component test suite', () => {
 
             }
             for (let i = 0; i < labelIconsArr.length; i++) {
-                expect(webDriver.waitForDisplayed(infoLabelPage.labelsWithTextAndIconArr, i)).toBe(true)
+                expect(webDriver.waitForDisplayed(infoLabelPage.labelsWithTextAndIconArr, i)).toBe(true);
             }
         }
     });
 
-    it('should check info label with a number or an icon',  () => {
+    it('should check info label with a number or an icon', () => {
         if (browser.capabilities.browserName === 'Safari') {
 
             expect(webDriver.getText(infoLabelPage.labelsWithNumberOrIconArr, 1)).toEqual(InfoLabelData.safariLargeNumberLabel);

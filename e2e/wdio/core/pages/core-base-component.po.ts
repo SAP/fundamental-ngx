@@ -4,8 +4,8 @@ export class CoreBaseComponentPo {
 
     title = 'header .header';
 
-     open (url: string): void {
-         webDriver.open('fundamental-ngx#/core' + url);
+    open(url: string): void {
+        webDriver.open('fundamental-ngx#/core' + url);
     };
 
 }
