@@ -194,11 +194,6 @@ export class Wdio {
         return $$(selector)[index].isClickable();
     }
 
-
-    getUrl(): string {
-        return browser.getUrl();
-    }
-
     dragAndDrop(elementToDragSelector: string, index: number = 0, targetElementSelector: string, targetIndex: number = 0): void {
         $$(elementToDragSelector)[index].scrollIntoView();
         $$(elementToDragSelector)[index].dragAndDrop($$(targetElementSelector)[targetIndex]);
