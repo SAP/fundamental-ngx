@@ -6,9 +6,8 @@ import {
     forwardRef,
     Input,
     QueryList,
-    TemplateRef,
-    ViewChild
 } from '@angular/core';
+import { startWith } from 'rxjs/operators';
 
 import { TableComponent } from '../../table.component';
 import { TableViewSettingsFilterComponent } from '../table-view-settings-filter/table-view-settings-filter.component';
@@ -56,10 +55,8 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
             return;
         }
 
-        this.filters.changes.subscribe(() => {
+        this.filters.changes.pipe(startWith(null)).subscribe(() => {
             this.table._setViewSettingsFilters(this.filters.toArray());
         });
-
-        this.table._setViewSettingsFilters(this.filters.toArray());
     }
 }

@@ -21,15 +21,10 @@ import {
 import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { Subject, Subscription } from 'rxjs';
+import { isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, startWith } from 'rxjs/operators';
 
-import {
-    DialogConfig,
-    DialogService,
-    KeyUtil,
-    RtlService
-} from '@fundamental-ngx/core';
+import { DialogConfig, DialogService, KeyUtil, RtlService } from '@fundamental-ngx/core';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
@@ -61,10 +56,12 @@ import {
 import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
+import { ArrayTableDataSource } from './domain/array-data-source';
+import { ObservableTableDataSource } from './domain/observable-data-source';
 
 import { SearchInput } from '../search-field/public_api';
 
-export type FdpTableDataSource<T> = TableDataSource<T>;
+export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
 const dialogConfig: DialogConfig = {
     responsivePadding: false,
@@ -128,7 +125,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         }
     }
     get dataSource(): FdpTableDataSource<T> {
-        return this._dataSource;
+        return this._ds;
     }
 
     /** Initial state of table. */
@@ -221,7 +218,6 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** @hidden */
     viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
 
-
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
 
@@ -287,6 +283,9 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
 
     /** @hidden */
     _rtl = false;
+    
+    /** @hidden */
+    _totalItems = 0;
 
     /** @hidden */
     private _checked = [];
@@ -295,7 +294,10 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     private _unchecked = [];
 
     /** @hidden */
-    private _dataSource: FdpTableDataSource<T>;
+    private _ds: FdpTableDataSource<T>;
+    
+    /** @hidden */
+    private _tableDataSource: TableDataSource<T>;
 
     /** @hidden for data source handling */
     private _dsSubscription: Subscription | null;
@@ -518,9 +520,9 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         } as DialogConfig);
 
         this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter(result => !!result?.filterBy).subscribe((result: FiltersDialogResultData) => 
-                this._tableService.filter(result.filterBy)
-            )
+            dialogRef.afterClosed
+                .pipe(filter((result) => !!result?.filterBy))
+                .subscribe((result: FiltersDialogResultData) => this._tableService.filter(result.filterBy))
         );
     }
 
@@ -610,11 +612,14 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     private _getFreezableColumn(): string[] {
         const columns = [];
 
-        if (!this.columns || !this.columns.length) {
+        if (!this.columns?.length || !this.freezeColumnsTo) {
             return columns;
         }
 
         for (const column of this.columns.toArray()) {
+            if (!column.key) {
+                continue;
+            }
             if (column.key === this.freezeColumnsTo) {
                 columns.push(column.key);
 
@@ -647,7 +652,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
                     distinctUntilChanged()
                 )
                 .subscribe((state) => {
-                    this.dataSource.fetch(state);
+                    this._tableDataSource?.fetch(state);
 
                     // SORTING
                     if (state.sortBy?.length) {
@@ -710,7 +715,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
                 const columnsLen = this.columns.length;
                 this._tableColumnsLength = this.selectionMode !== SelectionMode.NONE ? columnsLen + 1 : columnsLen;
             })
-        )
+        );
     }
 
     private _groupRows(): void {
@@ -800,16 +805,18 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     }
 
     /** @hidden */
-    private _initializeDS(ds: FdpTableDataSource<T>): void {
+    private _initializeDS(dataSource: FdpTableDataSource<T>): void {
         if (isDataSource(this.dataSource)) {
             this._closeDataSource(this.dataSource);
         }
 
-        this._dataSource = this._openDataStream(ds);
+        this._ds = dataSource;
+
+        this._tableDataSource = this._openDataStream(dataSource);
     }
 
     /** @hidden */
-    private _closeDataSource(dataSource: FdpTableDataSource<T>): void {
+    private _closeDataSource(dataSource: TableDataSource<T>): void {
         dataSource.close();
 
         this._subscriptions.remove(this._dsSubscription);
@@ -824,7 +831,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         const initDataSource = this._toDataStream(ds);
 
         if (initDataSource === undefined) {
-            throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
+            throw new Error(`[TableDataSource] source did not match an Array, Observable, nor DataSource`);
         }
         /**
          * This is single point of data entry to the component. We don't want to set data on different
@@ -834,6 +841,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         this._dsSubscription = initDataSource.open().subscribe((rows) => {
             this._rows = rows.map((row, index) => ({ checked: false, index: index, value: row })) || [];
             this._rowsStateChanges.next(this._rows);
+            this._totalItems = initDataSource.dataProvider.totalItems;
             this._cd.markForCheck();
         });
 
@@ -846,9 +854,15 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpTableDataSource<T>): TableDataSource<T> {
-        if (isDataSource(ds)) {
-            return ds as TableDataSource<T>;
+    private _toDataStream(source: FdpTableDataSource<T>): TableDataSource<T> {
+        if (isDataSource(source)) {
+            return source as TableDataSource<T>;
+        }
+        if (Array.isArray(source)) {
+            return new ArrayTableDataSource(source);
+        }
+        if (isObservable(source)) {
+            return new ObservableTableDataSource(source);
         }
 
         return undefined;

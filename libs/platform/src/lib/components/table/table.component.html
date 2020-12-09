@@ -4,7 +4,7 @@
         <ng-container
             [ngTemplateOutlet]="tableToolbarComponent.contentTemplateRef"
             [ngTemplateOutletContext]="{
-                    counter: dataSource.dataProvider.totalItems,
+                    counter: _totalItems,
                     size: contentDensity,
                     isSortable: _isSortable,
                     isFilterable: _isFilterable,
