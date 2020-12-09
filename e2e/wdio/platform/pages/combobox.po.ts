@@ -1,5 +1,7 @@
 import { BaseComponentPo } from './base-component.po';
 import { webDriver } from '../../driver/wdio';
+import { AssertionHelper } from '../../helper/assertion-helper';
+const assertionHelper = new AssertionHelper();
 
 export class ComboBoxPo extends BaseComponentPo {
     private url = '/combobox';
@@ -141,17 +143,21 @@ export class ComboBoxPo extends BaseComponentPo {
         this.selectOption('columns', 'Banana');
     }
 
-    verifyNavigationByArrowButtons(activeTypes: string[], options: string[]): void {
-        for (let i = 0; i < 2; i++) {
+    verifyNavigationByArrowButtons(activeTypes: string[]): void {
+        for (let i = 0; i < activeTypes.length; i++) {
             this.expandDropdown(activeTypes[i]);
+            const firstOptionText = webDriver.getText(this.optionsArray, 0);
+            const secondOptionText = webDriver.getText(this.optionsArray, 1);
             driver.keys(['ArrowDown']);
             driver.keys(['Enter']);
-            webDriver.waitForDisplayed(this.filledComboBoxInputs(activeTypes[i], options[i]))
+            let inputText = webDriver.getText(this.comboBoxInput , i)
+            assertionHelper.compareDropDownOptions(firstOptionText, inputText)
             this.expandDropdown(activeTypes[i]);
             driver.keys(['ArrowDown']);
             driver.keys(['ArrowDown']);
             driver.keys(['Enter']);
-            webDriver.waitForDisplayed(this.filledComboBoxInputs(activeTypes[i], options[i]));
+            inputText = webDriver.getText(this.comboBoxInput , i)
+            assertionHelper.compareDropDownOptions(secondOptionText, inputText)
         }
     }
 

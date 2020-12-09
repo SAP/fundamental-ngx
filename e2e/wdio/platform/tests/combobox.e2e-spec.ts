@@ -25,7 +25,7 @@ describe('Split menu button test suite', () => {
         comboBoxPage.verifyInputWhileTyping(ComboboxData.appleOption, ComboboxData.activeTypeNames);
     });
 
-    fit('Verify dropdown collapsed after selecting an option', () => {
+    it('Verify dropdown collapsed after selecting an option', () => {
         comboBoxPage.verifyDropdownCollapsedAfterSelectingOption(ComboboxData.appleOption, ComboboxData.activeTypeNames);
     });
 
@@ -45,11 +45,11 @@ describe('Split menu button test suite', () => {
         comboBoxPage.verifyGroupHeadersAreNotInteractive();
     })
 
-    xit('Verify navigation by arrow buttons', () => {
+    fit('Verify navigation by arrow buttons', () => {
         comboBoxPage.verifyNavigationByArrowButtons(ComboboxData.activeTypeNames);
     })
 
-    xit('Verify combobox with two columns while typing', () => {
+    it('Verify combobox with two columns while typing', () => {
         comboBoxPage.verifyComboboxWithTwoColumnsWhileTyping();
     })
 
