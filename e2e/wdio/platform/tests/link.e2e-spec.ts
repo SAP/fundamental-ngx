@@ -43,7 +43,7 @@ describe('Link component test suite', function() {
                 if (i !== 8) {
                     expect(webDriver.getAttributeByName(linkPage.standardLinks, 'aria-label', i)).toBe(standardLinksAltTextArray[i]);
                     checkLinkData(linkPage.standardLinks, i);
-                    expect(webDriver.isElementClickable(linkPage.standardLinks, i)).toBe(true);
+                    expect(webDriver.isElementClickable(linkPage.standardLinks,  i)).toBe(true);
             }
         }
     });
@@ -116,11 +116,11 @@ describe('Link component test suite', function() {
     it('should have RTL orientation', () => {
         const arrL = webDriver.getElementArrayLength(linkPage.exampleAreaContainersArr);
         for (let i = 0; arrL > i; i++) {
-            webDriver.scrollIntoView(linkPage.exampleAreaContainersArr, 5000, i);
+            webDriver.scrollIntoView(linkPage.exampleAreaContainersArr,  i);
             expect(webDriver.getCSSPropertyByName(linkPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
             const dirValueBefore = webDriver.getAttributeByName(linkPage.exampleAreaContainersArr, 'dir', i);
             expect([null, '']).toContain(dirValueBefore);
-            webDriver.click(linkPage.rtlSwitcherArr, 5000, i);
+            webDriver.click(linkPage.rtlSwitcherArr,  i);
             expect(webDriver.getCSSPropertyByName(linkPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
             expect(webDriver.getAttributeByName(linkPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
         }

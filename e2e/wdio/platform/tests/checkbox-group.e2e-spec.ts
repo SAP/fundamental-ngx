@@ -28,7 +28,7 @@ xdescribe('Checkbox group test suite', () => {
         });
 
         it('should check checkbox markings are centered', () => {
-            const checkboxMarkDisplayStyle = webDriver.executeScript3(checkboxGroupPage.winterCheckbox, 'display');
+            const checkboxMarkDisplayStyle = webDriver.executeScriptBeforeTagAttr(checkboxGroupPage.winterCheckbox, 'display');
             expect(checkboxMarkDisplayStyle).toContain(checkboxGPData.markingsStyle);
         });
 
@@ -280,7 +280,7 @@ xdescribe('Checkbox group test suite', () => {
                     .toContain(checkboxGPData.errorBorderStyle);
             }
             // needed for getting the tooltip in next line
-            webDriver.click(checkboxGroupPage.sectiontitle, 5000, 1);
+            webDriver.click(checkboxGroupPage.sectiontitle, 1);
             webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 3);
             expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
@@ -300,7 +300,7 @@ xdescribe('Checkbox group test suite', () => {
                 expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
                     .toContain(checkboxGPData.errorBorderStyle);
             }
-            webDriver.click(checkboxGroupPage.sectiontitle, 5000, 1 );
+            webDriver.click(checkboxGroupPage.sectiontitle, 1 );
             webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
             expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
@@ -328,11 +328,11 @@ xdescribe('Checkbox group test suite', () => {
             const arrL = webDriver.getElementArrayLength(checkboxGroupPage.exampleAreaContainersArr);
 
             for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(checkboxGroupPage.exampleAreaContainersArr, 5000, i);
+                webDriver.scrollIntoView(checkboxGroupPage.exampleAreaContainersArr, i);
                 expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
                 const dirValueBefore = webDriver.getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i);
                 expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(checkboxGroupPage.rtlSwitcherArr, 5000, i);
+                webDriver.click(checkboxGroupPage.rtlSwitcherArr, i);
                 expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
                 expect(webDriver.getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
             }
@@ -340,22 +340,19 @@ xdescribe('Checkbox group test suite', () => {
     });
 });
 
-
 function checkHoverState(elementSelector, index: number = 0): boolean {
-    webDriver.scrollIntoView(elementSelector, 5000, index);
-    webDriver.mouseHoverElement(elementSelector, 5000, index);
+    webDriver.scrollIntoView(elementSelector, index);
+    webDriver.mouseHoverElement(elementSelector, index);
     return expect(webDriver.getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value)
         .toContain(checkboxGPData2.checkboxHoverState);
 }
 
 function checkFocusState(elementSelector, index: number = 0): boolean {
     // webDriver.clickNextElement(elementSelector, index);
-    webDriver.focusElement(elementSelector, 5000, index);
+    webDriver.focusElement(elementSelector, index);
     return expect(webDriver.getCSSPropertyByName(elementSelector, 'outline-style', index).value)
         .toContain(checkboxGPData2.checkboxFocusStyle);
 }
-
-
 
 function checkOutputLabel(array, label, selections): void {
     const arrL = webDriver.getElementArrayLength(array);
@@ -363,4 +360,3 @@ function checkOutputLabel(array, label, selections): void {
         expect(webDriver.getText(array, i)).toEqual(label + selections);
     }
 }
-

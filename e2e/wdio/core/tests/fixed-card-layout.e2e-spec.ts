@@ -65,7 +65,7 @@ describe('fixed card layout test suite', function() {
                 const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
 
-                webDriver.scrollIntoView(fxdCardLayoutPg.cardHeaderArr, 5000, 0);
+                webDriver.scrollIntoView(fxdCardLayoutPg.cardHeaderArr, 0);
                 checkDragAndDrop(cardHeader[0], cardContent[0], cardContent[4]);
                 const newText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 expect(newText).not.toBe(originalFirstCardText);
@@ -81,7 +81,7 @@ describe('fixed card layout test suite', function() {
                 const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 const cardDivArr = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
 
-                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 5000, 0);
+                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
                 checkDragAndDrop(cardContent[0], cardDivArr[0], cardContent[4]);
                 const newText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 expect(newText).not.toBe(originalFirstCardText);
@@ -98,7 +98,7 @@ describe('fixed card layout test suite', function() {
                 const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 0);
                 const originalSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
 
-                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 5000, 0);
+                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
                 checkDragAndDrop(cardContent[0], cards[0], cardContent[4]);
                 const newFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 const newSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
@@ -158,7 +158,7 @@ describe('fixed card layout test suite', function() {
         xit('should check cards are reactive to columns', () => {
             const originalLastCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 8);
 
-            webDriver.click(fxdCardLayoutPg.navigationMenuBtn, 5000, 0);
+            webDriver.click(fxdCardLayoutPg.navigationMenuBtn, 0);
             webDriver.waitForInvisibilityOf(fxdCardLayoutPg.pageSidebar);
             const newLastCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 8);
             expect(originalLastCardText).not.toEqual(newLastCardText);
@@ -189,12 +189,12 @@ describe('fixed card layout test suite', function() {
         it('should check RTL orientation', () => {
             const arrL = webDriver.getElementArrayLength(fxdCardLayoutPg.exampleAreaContainersArr);
             for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(fxdCardLayoutPg.exampleAreaContainersArr, 5000, i);
+                webDriver.scrollIntoView(fxdCardLayoutPg.exampleAreaContainersArr, i);
                 expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.exampleAreaContainersArr, 'direction', i).value)
                     .toBe('ltr', 'css prop direction ' + i);
                 const dirValueBefore = webDriver.getAttributeByName(fxdCardLayoutPg.exampleAreaContainersArr, 'dir', i);
                 expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(fxdCardLayoutPg.rtlSwitcherArr, 5000, i);
+                webDriver.click(fxdCardLayoutPg.rtlSwitcherArr, i);
                 expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
                 expect(webDriver.getAttributeByName(fxdCardLayoutPg.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
             }
