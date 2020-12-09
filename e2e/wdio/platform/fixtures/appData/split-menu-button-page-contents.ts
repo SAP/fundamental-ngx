@@ -25,24 +25,24 @@ export default {
     defaultBtnColor: '8, 84, 160',
     textColorAttr: 'color',
     typesBtnColorArr: [
-        '8, 84, 160',
-        '16, 126, 62',
-        '187, 0, 0',
-        '8, 84, 160',
-        '8, 84, 160',
-        '255, 255, 255'
+        '8,84,160',
+        '16,126,62',
+        '187,0,0',
+        '8,84,160',
+        '8,84,160',
+        '255,255,255'
     ],
     compactAttr: 'contentdensity',
     compactValue: 'compact',
-    defaultHvrColor: '235, 245, 254',
+    defaultHvrColor: '235,245,254',
     bgColorAttr: 'background-color',
     typesBtnHvrColorArr: [
-        '235, 245, 254',
-        '241, 253, 246',
-        '255, 235, 235',
-        '235, 245, 254',
-        '235, 245, 254',
-        '8, 92, 175'
+        '235,245,254',
+        '241,253,246',
+        '255,235,235',
+        '235,245,254',
+        '235,245,254',
+        '8,92,175'
     ],
     tooltipAttr: 'title',
     typesBtnActiveColorArr: [

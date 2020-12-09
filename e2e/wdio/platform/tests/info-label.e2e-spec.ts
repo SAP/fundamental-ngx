@@ -126,25 +126,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    it('should check LTR orientation', () => {
-        const areaContainersArray = webDriver.elementArray(infoLabelPage.exampleAreaContainersArr);
-
-        for (let i = 0; i < areaContainersArray.length; i++) {
-            expect(webDriver.getCSSPropertyByName(infoLabelPage.exampleAreaContainersArr, 'direction', i).value)
-                .toBe('ltr', 'css prop direction ');
-        }
-    });
-
-    it('should check RTL orientation', () => {
-        const areas = webDriver.elementArray(infoLabelPage.exampleAreaContainersArr);
-        const switchers = webDriver.elementArray(infoLabelPage.rtlSwitcherArr);
-        for (let i = 0; i < areas.length; i++) {
-            switchers[i].click();
-            expect(webDriver.getAttributeByName(infoLabelPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            expect(webDriver.getCSSPropertyByName(infoLabelPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-            switchers[i].click();
-            expect(webDriver.getAttributeByName(infoLabelPage.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
-            expect(webDriver.getCSSPropertyByName(infoLabelPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
-        }
+    it('should check LTR and RTL orientation', () => {
+        infoLabelPage.checkRtlSwitch(infoLabelPage.rtlSwitcherArr, infoLabelPage.exampleAreaContainersArr);
     });
 });

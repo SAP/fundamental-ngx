@@ -16,13 +16,13 @@ describe('Menu button test suite', function() {
             const arrayLength = webDriver.getElementArrayLength(menuBtnPage.btnArrowIconsArr);
 
             for (let i = 0; arrayLength > i; i++) {
-                expect(webDriver.isElementDisplayed(menuBtnPage.btnArrowIconsArr, 5000, i)).toBe(true);
+                expect(webDriver.isElementDisplayed(menuBtnPage.btnArrowIconsArr, i)).toBe(true);
             }
         });
 
         it('should check selected menu option and close menu', () => {
-            webDriver.click(menuBtnPage.cozyBtnArr, 5000, 0);
-            webDriver.click(menuBtnPage.menuItemArr, 5000, 0);
+            webDriver.click(menuBtnPage.cozyBtnArr, 0);
+            webDriver.click(menuBtnPage.menuItemArr, 0);
 
             expect(webDriver.getText(menuBtnPage.cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
             expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
@@ -62,7 +62,7 @@ describe('Menu button test suite', function() {
             }
 
             for (let k = 0; 13 > k; k++) {
-                expect(webDriver.isElementDisplayed(menuBtnPage.btnWorldIconArr, 5000, k)).toBe(true)
+                expect(webDriver.isElementDisplayed(menuBtnPage.btnWorldIconArr, k)).toBe(true)
             }
         });
 
@@ -158,11 +158,11 @@ describe('Menu button test suite', function() {
             const arrL = webDriver.getElementArrayLength(menuBtnPage.exampleAreaContainersArr);
 
             for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(menuBtnPage.exampleAreaContainersArr, 5000, i);
+                webDriver.scrollIntoView(menuBtnPage.exampleAreaContainersArr, i);
                 expect(webDriver.getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
                 const dirValueBefore = webDriver.getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i);
                 expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(menuBtnPage.rtlSwitcherArr, 5000, i);
+                webDriver.click(menuBtnPage.rtlSwitcherArr, i);
                 expect(webDriver.getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
                 expect(webDriver.getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
             }

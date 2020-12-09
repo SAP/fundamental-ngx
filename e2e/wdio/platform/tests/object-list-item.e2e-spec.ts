@@ -51,7 +51,7 @@ describe('Object list item suite:', function() {
         });
         it('should check selection', () => {
             expect(webDriver.getText(objListPg.objSelToolbar)).toBe('0 : Items selected');
-            webDriver.click(objListPg.objListSelItem, 5000, 0);
+            webDriver.click(objListPg.objListSelItem, 0);
             expect(webDriver.getText(objListPg.objSelToolbar)).toBe('1 : Items selected');
         });
     });
@@ -86,7 +86,7 @@ describe('Object list item suite:', function() {
 
         it('should check selection', () => {
             expect(webDriver.getText(objListPg.objRowNavToolbar)).toContain(': is selected');
-            webDriver.click(objListPg.objRowNavList, 5000, 0);
+            webDriver.click(objListPg.objRowNavList, 0);
             expect(webDriver.getText(objListPg.objRowNavToolbar)).toContain('fdp-list-item');
         });
     });

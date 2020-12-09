@@ -144,7 +144,7 @@ describe('Checkbox test suite', () => {
         });
 
         it('should check checkbox markings are centered', () => {
-            const checkboxMarkDisplayStyle = webDriver.executeScript3(checkboxPage.tristateCheckboxParis, 'display');
+            const checkboxMarkDisplayStyle = webDriver.executeScriptBeforeTagAttr(checkboxPage.tristateCheckboxParis, 'display');
             expect(checkboxMarkDisplayStyle).toContain(checkboxData.markingDisplayStyle);
         });
     });
@@ -217,11 +217,11 @@ describe('Checkbox test suite', () => {
             const arrL = webDriver.getElementArrayLength(checkboxPage.exampleAreaContainersArr);
 
             for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(checkboxPage.exampleAreaContainersArr, 5000, i);
+                webDriver.scrollIntoView(checkboxPage.exampleAreaContainersArr, i);
                 expect(webDriver.getCSSPropertyByName(checkboxPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
                 const dirValueBefore = webDriver.getAttributeByName(checkboxPage.exampleAreaContainersArr, 'dir', i);
                 expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(checkboxPage.rtlSwitcherArr, 5000, i);
+                webDriver.click(checkboxPage.rtlSwitcherArr, i);
                 expect(webDriver.getCSSPropertyByName(checkboxPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
                 expect(webDriver.getAttributeByName(checkboxPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
             }
@@ -230,14 +230,14 @@ describe('Checkbox test suite', () => {
 });
 
 function checkHoverState(elementSelector, index: number = 0): boolean {
-    webDriver.scrollIntoView(elementSelector, 5000, index);
-    webDriver.mouseHoverElement(elementSelector, 5000, index);
+    webDriver.scrollIntoView(elementSelector, index);
+    webDriver.mouseHoverElement(elementSelector, index);
     return expect(webDriver.getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value).toContain(checkboxGPData.checkboxHoverState);
 }
 
 function checkFocusState(elementSelector, index: number = 0): boolean {
     // webDriver.clickNextElement(elementSelector, index);
-    webDriver.focusElement(elementSelector, 5000, index);
+    webDriver.focusElement(elementSelector, index);
     return expect(webDriver.getCSSPropertyByName(elementSelector, 'outline-style', index).value).toContain(checkboxGPData.checkboxFocusStyle);
 }
 
