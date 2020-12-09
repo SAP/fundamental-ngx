@@ -147,9 +147,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * navigation and the wizard footer, and calculating the height based on their presence.
      */
     private _calculateContentHeight(): number {
-        let shellbarHeight, wizardNavHeight, wizardFooterHeight;
+        let shellbarHeight, wizardNavHeight = 0, wizardFooterHeight;
         shellbarHeight = this._getShellbarHeight();
-        wizardNavHeight = this._getWizardNavHeight();
+        if (!this._isCurrentStepSummary()) {
+            wizardNavHeight = this._getWizardNavHeight();
+        }
         wizardFooterHeight = this._getWizardFooterHeight();
         return shellbarHeight + wizardNavHeight + wizardFooterHeight;
     }
@@ -274,8 +276,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 }
                 if (
                     !templatesLength ||
-                    (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) ||
-                    (step.isSummary && !step.visited)
+                    (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)
                 ) {
                     this.contentTemplates = [step.content.contentTemplate];
                 } else if (this.appendToWizard && !step.isSummary) {
@@ -291,6 +292,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this.steps.last.content.tallContent = true;
             this.steps.last.finalStep = true;
         }
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -379,16 +381,27 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
-        this._setContentTemplates();
         if (this._isCurrentStepSummary()) {
             this.progressBar.setCssDisplay(false);
+            this._showSummary();
         } else {
             this.progressBar.setCssDisplay(true);
+            this._setContentTemplates();
             this._shrinkWhileAnyStepIsTooNarrow();
         }
         this._cdRef.detectChanges();
         this._setContainerAndTallContentHeight();
-        this._scrollToCurrentStep();
+        if (!this._isCurrentStepSummary()) {
+            this._scrollToCurrentStep();
+        }
+    }
+
+    /** @hidden */
+    private _showSummary(): void {
+        const summary = this.steps.filter(step => {
+            return step.isSummary;
+        });
+        this.contentTemplates = [summary[0].content.contentTemplate];
     }
 
     /** @hidden */
