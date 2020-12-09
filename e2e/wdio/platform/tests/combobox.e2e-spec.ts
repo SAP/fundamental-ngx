@@ -45,7 +45,7 @@ describe('Split menu button test suite', () => {
         comboBoxPage.verifyGroupHeadersAreNotInteractive();
     })
 
-    fit('Verify navigation by arrow buttons', () => {
+    it('Verify navigation by arrow buttons', () => {
         comboBoxPage.verifyNavigationByArrowButtons(ComboboxData.activeTypeNames);
     })
 
