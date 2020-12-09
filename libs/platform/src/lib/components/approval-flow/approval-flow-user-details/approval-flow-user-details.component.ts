@@ -31,6 +31,9 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     /** @hidden */
     _userToShowDetailsData$: Observable<any>;
 
+    /** @hidden */
+    _listItemIdPrefix = 'approval-node-user-';
+
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
     }
 
@@ -75,7 +78,7 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     /** @hidden */
     getUsersFromSelectedItems(): User[] {
         return this._selectedItems.map(item => {
-            return this.dialogRef.data.node.approvers.find(user => user.imgUrl === item.avatarSrc && user.name === item.title);
+            return this.dialogRef.data.node.approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id);
         });
     }
 

@@ -54,6 +54,7 @@
                 (selectedItemChange)="_selectedItems = $event.selectedItems">
                 <fdp-standard-list-item
                     *ngFor="let user of _listItems"
+                    [attr.id]="_listItemIdPrefix + user.id"
                     [avatarSrc]="user.imgUrl"
                     [avatarTitle]="user.name"
                     [description]="user.description"

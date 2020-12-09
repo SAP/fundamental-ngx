@@ -16,11 +16,11 @@ import {
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { DialogService, KeyUtil, MessageToastService } from '@fundamental-ngx/core';
+import { Subscription } from 'rxjs';
 
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
-import { Subscription } from 'rxjs';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: true };
 
@@ -265,7 +265,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private focusNode(node: ApprovalGraphNode, options: { skipSlideChange: boolean; step: number }): void {
+    private focusNode(node: ApprovalGraphNode, { skipSlideChange, step }: { skipSlideChange: boolean, step: number }): void {
         const nodeToFocus = this.nodeComponents.find(comp => comp.node === node);
         if (!nodeToFocus) {
             return;
@@ -277,12 +277,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const diff = Math.abs(totalOffset - graphRect.right);
 
         nodeToFocus.focus();
-        if (options.skipSlideChange) {
+        if (skipSlideChange) {
             return;
         }
 
         if (((nodeRect.left - graphRect.left) + nodeRect.width) > (graphRect.width + Math.abs(this._carouselScrollX))) {
-            this.nextSlide(options.step);
+            this.nextSlide(step);
             return;
         }
 
