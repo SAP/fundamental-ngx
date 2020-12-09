@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/switch.e2e-spec.ts'
+        './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -45,24 +45,24 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 6,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-        {
-            browserName: 'internet explorer',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            "sauce:options": {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-internet-explorer',
-                requireWindowFocus: true,
-                //tags: [ "process.env.TRAVIS_BUILD_ID"],
-            }
-        },
+        // {
+        //     browserName: 'internet explorer',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     "sauce:options": {
+        //         screenResolution: '1920x1080',
+        //         name: 'e2e-win-internet-explorer',
+        //         requireWindowFocus: true,
+        //         //tags: [ "process.env.TRAVIS_BUILD_ID"],
+        //     }
+        // },
         {
             browserName: 'MicrosoftEdge',
             browserVersion: 'latest',
@@ -71,7 +71,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ 'process.env.TRAVIS_BUILD_ID'],
             }
         },
         {
@@ -129,15 +129,15 @@ exports.config = {
                 //tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
-        {
-            browserName: 'safari',
-            browserVersion: '13.1',
-            platformName: 'macOS 10.15',
-            "sauce:options": {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-safari',
-            }
-        },
+        // {
+        //     browserName: 'safari',
+        //     browserVersion: '13.1',
+        //     platformName: 'macOS 10.15',
+        //     "sauce:options": {
+        //         screenResolution: '1920x1440',
+        //         name: 'e2e-MAC-safari',
+        //     }
+        // },
     ],
     //
     // ===================
@@ -170,7 +170,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://sap.dev:4200/',
+    baseUrl: 'https://anton.local:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -192,7 +192,7 @@ exports.config = {
             sauceConnect: true,
         }]
     ],
-    
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html
@@ -213,7 +213,13 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
-    reporters: ['spec'],
+    // reporters: ['spec' , []],
+
+    reporters: ['spec',['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
 
     jasmineNodeOpts: {
         isVerbose: true,
@@ -246,10 +252,6 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      */
      // onPrepare: function () {
-     //    browser.resetUrl = 'about:blank';
-     //    browser.driver.manage.window.maximize();
-     //    browser.maximize();
-     //    browser.window.maximize();
      // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -278,6 +280,9 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: function () {
+
+
+        console.log(browser.capabilities.browserName);
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });

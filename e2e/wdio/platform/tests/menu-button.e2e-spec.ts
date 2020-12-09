@@ -1,184 +1,171 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
-import { clickTwice, getValueOfAttribute } from '../../helper/helper';
 import MenuBtnData from '../fixtures/appData/menu-button-contents';
 import { webDriver } from '../../driver/wdio';
 
 describe('Menu button test suite', function() {
     const menuBtnPage = new MenuButtonPo();
 
-    beforeAll(() => {
+    beforeEach(() => {
         menuBtnPage.open();
-    });
-
-    afterEach(() => {
         webDriver.refreshPage();
         webDriver.waitForDisplayed(menuBtnPage.root);
     });
 
     describe('Check general menu button states', function() {
-        it('should check that the arrow icon is present', async () => {
-            const dropDownArrowArr = await menuBtnPage.btnArrowIconsArr;
+        it('should check that the arrow icon is present', () => {
+            const arrayLength = webDriver.getElementArrayLength(menuBtnPage.btnArrowIconsArr);
 
-            await dropDownArrowArr.forEach(async element => {
-                await expect(await element.isDisplayed()).toBe(true);
-            });
+            for (let i = 0; arrayLength > i; i++) {
+                expect(webDriver.isElementDisplayed(menuBtnPage.btnArrowIconsArr, i)).toBe(true);
+            }
         });
 
-        it('should check selected menu option and close menu', async () => {
-            const cozyBtnArr = await menuBtnPage.cozyBtnArr;
+        it('should check selected menu option and close menu', () => {
+            webDriver.click(menuBtnPage.cozyBtnArr, 0);
+            webDriver.click(menuBtnPage.menuItemArr, 0);
 
-            cozyBtnArr[0].click().then(async () => {
-                const menuItemsArr = await menuBtnPage.menuItemArr;
-
-                await menuItemsArr[0].click();
-            });
-            await expect(await menuBtnPage.cozySelectedItemLabel.getText()).toEqual(MenuBtnData.selectedItem);
-            await expect(await menuBtnPage.menuItemOverlay.isDisplayed()).toBe(false);
+            expect(webDriver.getText(menuBtnPage.cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
+            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
         });
 
         it('should check menu items visible', async () => {
-            const cozyBtnArr = await menuBtnPage.cozyBtnArr;
+            webDriver.click(menuBtnPage.cozyBtnArr);
 
-            await cozyBtnArr[0].click();
-            await expect(await menuBtnPage.menuItemOverlay.isDisplayed()).toBe(true);
+            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
         });
 
         it('should check close menu by clicking menu btn', async () => {
-            const cozyBtnArr = await menuBtnPage.cozyBtnArr;
-
-            await clickTwice(cozyBtnArr[0]);
-            await expect(await menuBtnPage.menuItemOverlay.isDisplayed()).toBe(false);
+            webDriver.doubleClick(menuBtnPage.cozyBtnArr);
+            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
         });
 
-        it('should check closing menu when clicking outside of menu', async () => {
-            const cozyBtnArr = await menuBtnPage.cozyBtnArr;
-
-            await cozyBtnArr[0].click();
-            await expect(await menuBtnPage.menuItemOverlay.isDisplayed()).toBe(true);
-            await menuBtnPage.sectionTitle.click();
-            await expect(await menuBtnPage.menuItemOverlay.isDisplayed()).toBe(false);
+        it('should check closing menu when clicking outside of menu', () => {
+            webDriver.click(menuBtnPage.cozyBtnArr);
+            webDriver.waitForDisplayed(menuBtnPage.menuItemOverlay);
+            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
+            webDriver.click(menuBtnPage.sectionTitle);
+            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
         });
     });
 
     describe('Check cozy and compact menu button states', function() {
-        it('should check btn states', async () => {
-            const cozyBtnAttributeArr = await menuBtnPage.cozyBtnAttrArr;
-            const compactBtnAttributeArr = await menuBtnPage.compactBtnAttrArr;
-            const cozyAndCompactBtnAttrArr = await cozyBtnAttributeArr.concat(compactBtnAttributeArr);
-            const cozyAndCompactBtnIconArr = await (await menuBtnPage.btnWorldIconArr).slice(0, 14);
+        it('should check btn states', () => {
+            const cozyBtnAttributeArrLength = webDriver.getElementArrayLength(menuBtnPage.cozyBtnAttrArr);
+            const compactBtnAttributeArrLength = webDriver.getElementArrayLength(menuBtnPage.compactBtnAttrArr);
 
-            await cozyAndCompactBtnAttrArr.forEach(async element => {
-                await expect(await getValueOfAttribute(element, 'ng-reflect-disabled')).toBe('false');
-            });
-            await cozyAndCompactBtnIconArr.forEach((async element => {
-                await expect(await element.isDisplayed()).toBe(true);
-            }));
+            for (let i = 0; cozyBtnAttributeArrLength > i; i++) {
+                expect(webDriver.getAttributeByName(menuBtnPage.cozyBtnAttrArr, 'ng-reflect-disabled', i)).toBe('false')
+            }
+
+            for (let j = 0; compactBtnAttributeArrLength > j; j++) {
+                expect(webDriver.getAttributeByName(menuBtnPage.compactBtnAttrArr, 'ng-reflect-disabled', j)).toBe('false')
+            }
+
+            for (let k = 0; 13 > k; k++) {
+                expect(webDriver.isElementDisplayed(menuBtnPage.btnWorldIconArr, k)).toBe(true)
+            }
         });
 
-        it('should check cozy btn text and colors', async () => {
-            const cozyBtnTextArr = await menuBtnPage.cozyBtnAttrArr;
-            const cozyBtnArr = await menuBtnPage.cozyBtnArr;
+        it('should check cozy btn text and colors', () => {
+            const cozyBtnTextArrLength = webDriver.getElementArrayLength(menuBtnPage.cozyBtnAttrArr);
+            const cozyBtnArrLength = webDriver.getElementArrayLength(menuBtnPage.cozyBtnArr);
 
-            await cozyBtnTextArr.forEach(async (element, index) => {
-                await expect(element.getText()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[index]);
-            });
-            await cozyBtnArr.forEach(async (element, index) => {
-                await expect(await element.getCssValue(MenuBtnData.textColorAttr))
-                    .toContain(MenuBtnData.btnColorArr[index]);
-            });
-            await cozyBtnArr.forEach(async element => {
-                await expect(await element.getCssValue(MenuBtnData.textAlignmentAttr)).toEqual(MenuBtnData.alignmentCenter);
-            });
+            for (let i = 0; cozyBtnTextArrLength > i; i++) {
+                expect(webDriver.getText(menuBtnPage.cozyBtnAttrArr, i).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[i])
+            }
+
+            for (let j = 0; cozyBtnArrLength > j; j++) {
+                expect(webDriver.getCSSPropertyByName(menuBtnPage.cozyBtnArr, MenuBtnData.textColorAttr, j).value)
+                    .toContain(MenuBtnData.btnColorArr[j]);
+                expect(webDriver.getCSSPropertyByName(menuBtnPage.cozyBtnArr, MenuBtnData.textAlignmentAttr, j).value)
+                    .toEqual(MenuBtnData.alignmentCenter);
+            }
         });
 
-        it('should check compact btn text and colors', async () => {
-            const compactBtnTextArr = await menuBtnPage.compactBtnAttrArr;
-            const compactBtnArr = await menuBtnPage.compactBtnArr;
+        it('should check compact btn text and colors', () => {
+            const compactBtnTextArrLength = webDriver.getElementArrayLength(menuBtnPage.compactBtnAttrArr);
+            const compactBtnArrLength = webDriver.getElementArrayLength(menuBtnPage.compactBtnArr);
 
-            compactBtnTextArr.forEach(async (element, index) => {
-                await expect(element.getText()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[index]);
-            });
-            compactBtnArr.forEach(async (element, index) => {
-                await expect(await element.getCssValue(MenuBtnData.textColorAttr))
-                    .toContain(MenuBtnData.btnColorArr[index]);
-            });
-            compactBtnArr.forEach(async element => {
-                await expect(await element.getCssValue(MenuBtnData.textAlignmentAttr)).toEqual(MenuBtnData.alignmentCenter);
-            });
-            compactBtnArr.forEach(async element => {
-                await expect(await getValueOfAttribute(element, MenuBtnData.compactAttr)).toEqual('true');
-            });
+            for (let i = 0; compactBtnTextArrLength > i; i++) {
+                expect(webDriver.getText(menuBtnPage.compactBtnAttrArr, i).trim())
+                    .toEqual(MenuBtnData.cozyAndCompactBtnTextArr[i]);
+            }
+
+            for (let j = 0; compactBtnArrLength > j; j++) {
+                expect(webDriver.getCSSPropertyByName(menuBtnPage.compactBtnArr, MenuBtnData.textColorAttr, j).value)
+                    .toContain(MenuBtnData.btnColorArr[j]);
+                expect(webDriver.getCSSPropertyByName(menuBtnPage.compactBtnArr, MenuBtnData.textAlignmentAttr, j).value)
+                    .toEqual(MenuBtnData.alignmentCenter);
+                expect(webDriver.getAttributeByName(menuBtnPage.compactBtnArr, MenuBtnData.compactAttr)).toEqual('true')
+            }
         });
     });
 
     describe('Check types of menu buttons', function() {
 
-        it('should check disabled buttons', async () => {
-            const disabledBtnArr = await (await menuBtnPage.menuTypeBtnAttrArr).slice(0, 6);
-
-            disabledBtnArr.forEach(async (element, index) => {
-                // https://github.com/SAP/fundamental-ngx/issues/3757 first btn is enabled, remove if statement after fix
-                if (index !== 0) {
-                    await expect(await getValueOfAttribute(element, MenuBtnData.disabledState)).toEqual('true');
-                }
-            });
+        it('should check disabled buttons', () => {
+            // https://github.com/SAP/fundamental-ngx/issues/3757 first btn is enabled, start from 0 after fix
+            for (let i = 1; 6 > i; i++) {
+                expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnAttrArr, MenuBtnData.disabledState, i)).toEqual('true');
+            }
         });
 
-        it('should check btn with and without icon', async () => {
-            const menuBtnArr = await (await menuBtnPage.menuTypeBtnArr).slice(6, 9);
-
-            await expect(await getValueOfAttribute(menuBtnArr[0], MenuBtnData.iconAttr)).toBe(MenuBtnData.icon);
-            await expect(await menuBtnArr[0].getText()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            await expect(await getValueOfAttribute(menuBtnArr[1], MenuBtnData.iconAttr)).toBe(null);
-            await expect(await menuBtnArr[1].getText()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            await expect(await getValueOfAttribute(menuBtnArr[2], MenuBtnData.iconAttr)).toBe(MenuBtnData.icon);
-            await expect(await menuBtnArr[2].getText()).toBe('');
+        it('should check btn with and without icon', () => {
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 6)).toBe(MenuBtnData.icon);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 6).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 7)).toBe(null);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 7).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 8)).toBe(MenuBtnData.icon);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 8).trim()).toBe('');
         });
 
-        it('should check compact btn with and without icon', async () => {
-            const menuBtnArr = await (await menuBtnPage.menuTypeBtnArr).slice(9, 12);
+        it('should check compact btn with and without icon', () => {
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 9)).toBe(MenuBtnData.icon);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 9).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 10)).toBe(null);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 10).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 11)).toBe(MenuBtnData.icon);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 11).trim()).toBe('');
 
-            await expect(await getValueOfAttribute(menuBtnArr[0], MenuBtnData.iconAttr)).toBe(MenuBtnData.icon);
-            await expect(await menuBtnArr[0].getText()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            await expect(await getValueOfAttribute(menuBtnArr[1], MenuBtnData.iconAttr)).toBe(null);
-            await expect(await menuBtnArr[1].getText()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            await expect(await getValueOfAttribute(menuBtnArr[2], MenuBtnData.iconAttr)).toBe(MenuBtnData.icon);
-            await expect(await menuBtnArr[2].getText()).toBe('');
-
-            await menuBtnArr.forEach(async element => {
-                await expect(await getValueOfAttribute(element, MenuBtnData.compactAttr)).toBe('true');
-            });
+            for (let i = 9; 12 > i; i++) {
+                expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.compactAttr, i)).toBe('true');
+            }
         });
 
-        it('should check long text menu btn with and without icon', async () => {
-            const menuBtnArr = await (await menuBtnPage.menuTypeBtnArr).slice(12, 14);
-
-            await expect(await getValueOfAttribute(menuBtnArr[0], MenuBtnData.iconAttr)).toContain(MenuBtnData.icon);
-            await expect(await menuBtnArr[0].getText()).toEqual(MenuBtnData.truncatedBtnText);
-            await expect(await getValueOfAttribute(menuBtnArr[0], MenuBtnData.tooltipAttr)).toBe(MenuBtnData.truncatedBtnTooltipText);
-            await expect(await getValueOfAttribute(menuBtnArr[1], MenuBtnData.iconAttr)).toBe(null);
-            await expect(await menuBtnArr[1].getText()).toEqual(MenuBtnData.truncatedBtnText);
-            await expect(await getValueOfAttribute(menuBtnArr[1], MenuBtnData.tooltipAttr)).toBe(MenuBtnData.truncatedBtnNoIconTooltipText);
+        it('should check long text menu btn with and without icon', () => {
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 12)).toContain(MenuBtnData.icon);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 12).trim()).toEqual(MenuBtnData.truncatedBtnText);
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.tooltipAttr, 12))
+                .toContain(MenuBtnData.truncatedBtnTooltipText);
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 13)).toBe(null);
+            expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 13).trim()).toEqual(MenuBtnData.truncatedBtnText);
+            expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.tooltipAttr, 13))
+                .toBe(MenuBtnData.truncatedBtnNoIconTooltipText);
         });
     });
 
     describe('Check orientations', function() {
-        it('should check LTR orientation', async () => {
-            const areaContainersArray = await menuBtnPage.exampleAreaContainersArr;
+        it('should check LTR orientation', () => {
+            const areaContainersArrayLength = webDriver.getElementArrayLength(menuBtnPage.exampleAreaContainersArr);
 
-            areaContainersArray.forEach(async element => {
-                expect(element.getCssValue('direction')).toBe('ltr', 'css prop direction ');
-            });
+            for (let i = 0; areaContainersArrayLength > i; i++) {
+                expect(webDriver.getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value)
+                    .toBe('ltr', 'css prop direction ');
+            }
         });
 
-        it('should check RTL orientation', async () => {
-            await menuBtnPage.exampleAreaContainersArr.each(async (area, index) => {
-                expect(await area.getCssValue('direction')).toBe('ltr', 'css prop direction ' + index);
-                expect(await area.getAttribute('dir')).toBe('', 'dir attr ' + index);
-                await menuBtnPage.rtlSwitcherArr.get(index).click();
-                expect(await area.getCssValue('direction')).toBe('rtl');
-                expect(await area.getAttribute('dir')).toBe('rtl');
-            });
+        it('should check RTL orientation', () => {
+            const arrL = webDriver.getElementArrayLength(menuBtnPage.exampleAreaContainersArr);
+
+            for (let i = 0; arrL > i; i++) {
+                webDriver.scrollIntoView(menuBtnPage.exampleAreaContainersArr, i);
+                expect(webDriver.getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+                const dirValueBefore = webDriver.getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i);
+                expect([null, '']).toContain(dirValueBefore);
+                webDriver.click(menuBtnPage.rtlSwitcherArr, i);
+                expect(webDriver.getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+                expect(webDriver.getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+            }
         });
     });
 });

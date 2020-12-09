@@ -4,6 +4,7 @@ export class CheckboxPO extends BaseComponentPo {
     url = '/checkbox';
 
     binaryTempCheckbox = 'fdp-platform-binary-checkbox input';
+    binaryTempCheckboxLable = 'fdp-platform-binary-checkbox label.fd-checkbox__label';
     disabledBinaryCheckbox = 'fdp-platform-binary-checkbox input#disabled';
     checkboxWithoutForm = 'fdp-platform-binary-checkbox-no-form input';
     disabledCheckboxWithoutForm = 'fdp-platform-binary-checkbox-no-form fdp-checkbox:nth-of-type(5) input';

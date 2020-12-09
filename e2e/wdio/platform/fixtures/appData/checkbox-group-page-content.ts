@@ -11,7 +11,7 @@ europeanCountriesArr: ['Italy', 'France', 'Switzerland', 'Austria'],
 subjectsArr: ['Math', 'Chemistry', 'Physics', 'Biology'],
 reptilesArr: ['Snakes', 'Crocodiles', 'Lizards', 'Elephants'],
 threeFruitsArr: ['Apple', 'Banana', 'Grapes'],
-errorBorderStyle: 'rgb(187, 0, 0)',
+errorBorderStyle: '187,0,0',
 errorTooltipMessage: 'Value is required.',
 markingsStyle: 'flex',
 seasonsOutputLabel: 'Seasons: '
