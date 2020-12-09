@@ -104,6 +104,7 @@ export class PopoverBodyComponent {
         }
     }
 
+    /** @hidden */
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
     }

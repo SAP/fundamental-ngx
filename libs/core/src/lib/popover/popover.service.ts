@@ -53,17 +53,19 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private readonly _placementRefresh$ = new Subject<void>();
 
+    /** @hidden */
     private popoverBody: PopoverBodyComponent;
 
+    /** @hidden */
     private _triggerElement: ElementRef;
 
+    /** @hidden */
     private _templateData: PopoverTemplate;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
         private _overlay: Overlay,
         private _renderer: Renderer2,
         private _viewportRuler: ViewportRuler,
@@ -81,7 +83,7 @@ export class PopoverService extends BasePopoverClass {
         this._templateData = templateData;
         this._triggerElement = triggerElement;
         if (config) {
-            Object.keys(new BasePopoverClass()).forEach(key => this[key] = config[key]);
+            this.refreshPassedValues(config);
         }
 
         this._refreshTriggerListeners();
@@ -94,7 +96,6 @@ export class PopoverService extends BasePopoverClass {
     close(): void {
         if (this._overlayRef) {
             this._overlayRef.dispose();
-            this._changeDetectorRef.detectChanges();
 
             if (this.isOpen) {
                 this.isOpenChange.emit(false);
@@ -143,6 +144,7 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** TODO */
     refreshListeners(triggers: string[]): void {
         this.triggers = triggers;
         this._refreshTriggerListeners();
@@ -173,6 +175,11 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** TODO */
+    refreshPassedValues(config: BasePopoverClass): void {
+        Object.keys(new BasePopoverClass()).forEach(key => this[key] = config[key]);
+    }
+
     /** @hidden */
     private _getOverlayConfig(position: FlexibleConnectedPositionStrategy): OverlayConfig {
         const direction = this._getDirection();
@@ -184,6 +191,7 @@ export class PopoverService extends BasePopoverClass {
         });
     }
 
+    /** @hidden */
     private _listenOnResize(): void {
         this._viewportRuler.change(15).pipe(
             takeUntil(this._refresh$),
@@ -341,7 +349,6 @@ export class PopoverService extends BasePopoverClass {
         this._popoverBody._focusAutoCapture = this.focusAutoCapture;
         this._popoverBody._templateToDisplay = this.templateContent;
         this._popoverBody._closeOnEscapeKey = this.closeOnEscapeKey;
-        console.log(this.additionalBodyClass);
         this._detectChanges();
     }
 
