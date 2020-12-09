@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { InlineHelpDirective } from './inline-help.directive';
 import { InlineHelpModule } from './inline-help.module';
 
-describe('InlineHelpComponent', () => {
+describe('InlineHelpDirective', () => {
     let component: InlineHelpDirective;
     let fixture: ComponentFixture<InlineHelpDirective>;
 

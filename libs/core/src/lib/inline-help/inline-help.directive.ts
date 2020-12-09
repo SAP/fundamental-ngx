@@ -9,6 +9,7 @@ const INLINE_HELP_CLASS = 'fd-inline-help__content';
  * Inline help is used to display help text in a popover, often inline with headers, body text and form labels.
  */
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: '[fd-inline-help], [fd-inline-help-template]',
     providers: [PopoverService]
 })
@@ -64,7 +65,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** @hidden */
     ngOnInit(): void {
         this._applyAdditionalInlineHelpClass();
-        this._popoverService.stringContent = this.inlineHelpTitle;
+        this._popoverService.stringContent = this.inlineHelpText;
         this._popoverService.templateContent = this.inlineHelpTemplate;
         this._popoverService.initialise(this._elementRef, this);
     }

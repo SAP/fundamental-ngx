@@ -7,8 +7,7 @@ import {
     TemplateRef,
     ViewContainerRef
 } from '@angular/core';
-import { DefaultPositions, PopoverPosition } from '../popover-position/popover-position';
-import { BasePopoverClass } from '../base/base-popover.class';
+
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
     ConnectedPosition,
@@ -17,11 +16,15 @@ import {
     OverlayConfig,
     OverlayRef, ViewportRuler
 } from '@angular/cdk/overlay';
-import { RtlService } from '../../utils/services/rtl.service';
+import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/connected-position';
+
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
+
+import { DefaultPositions, PopoverPosition } from '../popover-position/popover-position';
+import { BasePopoverClass } from '../base/base-popover.class';
+import { RtlService } from '../../utils/services/rtl.service';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/connected-position';
 
 const MAX_BODY_SIZE = 99999999;
 

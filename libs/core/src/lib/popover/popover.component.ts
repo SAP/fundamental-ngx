@@ -1,16 +1,12 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component, ContentChild, ContentChildren,
+    Component,
+    ContentChild,
     ElementRef,
-    HostBinding,
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
-    Optional,
-    Renderer2,
     SimpleChanges,
     TemplateRef,
     ViewChild,
@@ -21,15 +17,9 @@ import {
 import {
     CdkOverlayOrigin,
     ConnectedPosition,
-    FlexibleConnectedPositionStrategy,
-    Overlay,
-    OverlayConfig,
-    OverlayRef,
-    ViewportRuler
 } from '@angular/cdk/overlay';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
-import { Subject } from 'rxjs';
 import { BasePopoverClass } from './base/base-popover.class';
 import { KeyUtil } from '../utils/functions/key-util';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';

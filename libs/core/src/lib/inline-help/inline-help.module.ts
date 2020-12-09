@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InlineHelpDirective } from './inline-help.directive';
-import { PopoverModule } from '../popover/public_api';
-import { PopoverService } from '../popover/popover-service/popover.service';
+import { PopoverModule } from '../popover/popover.module';
 
 @NgModule({
     imports: [CommonModule, PopoverModule],

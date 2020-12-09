@@ -7,13 +7,16 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+
 import { ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
+import { ESCAPE } from '@angular/cdk/keycodes';
+
+import { Subject } from 'rxjs';
+
 import { ARROW_SIZE, ArrowPosition } from '../popover-position/popover-position';
 import { PopoverFlippedDirection } from '../popover-position/popover-position';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { PopoverPosition } from '../popover-position/popover-position';
-import { ESCAPE } from '@angular/cdk/keycodes';
-import { Subject } from 'rxjs';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -33,7 +36,6 @@ import { Subject } from 'rxjs';
 })
 export class PopoverBodyComponent {
 
-
     /** Whether the popover should have an arrow. */
     _noArrow = true;
 
@@ -52,9 +54,17 @@ export class PopoverBodyComponent {
 
     /** @hidden Properties bind to popover's body */
     _popoverBodyWidth: number;
+
+    /** @hidden Properties bind to popover's body */
     _popoverBodyMinWidth: number;
+
+    /** @hidden Properties bind to popover's body */
     _templateToDisplay: TemplateRef<any>
+
+    /** @hidden Properties bind to popover's body */
     _maxWidth;
+
+    /** @hidden Properties bind to popover's body */
     _closeOnEscapeKey = false;
 
     /** Classes added to arrow element */
@@ -94,7 +104,7 @@ export class PopoverBodyComponent {
         this._removeOldMarginsStyle();
         this._addMarginStyle(arrowDirection);
 
-        this._changeDetectorRef.detectChanges();
+        this.detectChanges();
     }
 
     /** Handler escape keydown */
