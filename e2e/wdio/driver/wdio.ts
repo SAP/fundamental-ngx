@@ -185,6 +185,7 @@ export class Wdio {
 
     isElementClickable(selector: string,  index: number = 0): boolean {
        return $$(selector)[index].isClickable();
+
     }
 
     getUrl(): string {
