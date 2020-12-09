@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.42...v0.25.0-rc.43) (2020-12-09)
+
+
+### Bug Fixes
+
+* (Platform|Core) Feed Input placeholder color and button alignment ([#4047](https://github.com/SAP/fundamental-ngx/issues/4047)) ([1a3aa0d](https://github.com/SAP/fundamental-ngx/commit/1a3aa0d903cda4695f5f6c12bacfc6d3df539919))
+
+## [0.25.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.41...v0.25.0-rc.42) (2020-12-08)
+
+
+### Features
+
+* (Core) introduce Feed List Item component ([#3768](https://github.com/SAP/fundamental-ngx/issues/3768)) ([1210ce9](https://github.com/SAP/fundamental-ngx/commit/1210ce9b5a59a125305b0d35f4a6593b3741fefc))
+
 ## [0.25.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.40...v0.25.0-rc.41) (2020-12-07)
 
 

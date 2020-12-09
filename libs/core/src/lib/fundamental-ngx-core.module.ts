@@ -17,6 +17,7 @@ import { ComboboxModule } from './combobox/combobox.module';
 import { CheckboxModule } from './checkbox/checkbox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
+import { FeedListItemModule } from './feed-list-item/public_api';
 import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FixedCardLayoutModule } from './fixed-card-layout/fixed-card-layout.module';
@@ -99,6 +100,7 @@ import { ThemesService } from './utils/services/themes.service';
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
+        FeedListItemModule,
         FileInputModule,
         FileUploaderModule,
         FixedCardLayoutModule,
