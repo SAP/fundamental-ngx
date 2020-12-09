@@ -51,7 +51,7 @@ describe('TabListComponent', () => {
     it('should handle ngAfterContentInit', () => {
         component.ngAfterViewInit();
         expect(component.selectedIndex).toBe(0);
-        expect(component.tabLinks.length).toBe(4);
+        expect(component.tabHeaderLinks.length).toBe(4);
     });
 
     it('should select tab', fakeAsync(() => {
@@ -190,7 +190,7 @@ describe('TabListComponent', () => {
 
     it('should cache tabs width', (async () => {
         await whenStable(fixture);
-        expect(component['_tabsWidth'].length === NUMBER_OF_TABS).toBeTrue();
+        expect(component['_tabHeadersWidth'].length === NUMBER_OF_TABS).toBeTrue();
     }));
 
     it('should respect maximum number of visible tabs', (async () => {
