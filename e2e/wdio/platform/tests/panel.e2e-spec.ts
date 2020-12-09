@@ -40,10 +40,10 @@ describe('Verify Panel', () => {
     });
 
     it('should action panel have clickable buttons example ', () => {
-        expect(webDriver.getText(panelPage.actionPanelBtn, 0))
+        expect(webDriver.getText(panelPage.actionPanelBtn, 0).trim())
             .toBe(panelPageContent.action_panel_edit_button);
         expect(webDriver.waitForClickable(panelPage.actionPanelBtn, 0)).toBe(true);
-        expect(webDriver.getText(panelPage.actionPanelBtn, 1))
+        expect(webDriver.getText(panelPage.actionPanelBtn, 1).trim())
             .toBe(panelPageContent.action_panel_delete_button);
         expect(webDriver.waitForClickable(panelPage.actionPanelBtn, 1)).toBe(true);
     });

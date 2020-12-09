@@ -2,7 +2,7 @@ import { FixedCardLayoutPo } from '../pages/fixed-card-layout.po';
 import fxdCardLytData from '../fixtures/appData/fixed-card-layout-content';
 import { webDriver } from '../../driver/wdio';
 
-describe('fixed card layout test suite', function() {
+describe('Fixed card layout test suite', function() {
     const fxdCardLayoutPg = new FixedCardLayoutPo();
 
     beforeAll(() => {
@@ -10,7 +10,7 @@ describe('fixed card layout test suite', function() {
     });
 
     afterEach(() => {
-        browser.refresh();
+        webDriver.refreshPage();
     });
 
     describe('main checks', function() {
@@ -72,9 +72,9 @@ describe('fixed card layout test suite', function() {
             }
         });
 
-        fit('should drag a card from the content area', () => {
+        it('should drag a card from the content area', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (browser.capabilities.browserName === 'internet explorer') {
+            if (browser.capabilities.browserName === 'internet explorer' || 'firefox') {
                 console.log('skip');
             } else {
                 const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
@@ -90,7 +90,7 @@ describe('fixed card layout test suite', function() {
 
         it('should check drag and drop cards swap locations', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (browser.capabilities.browserName === 'internet explorer') {
+            if (browser.capabilities.browserName === 'internet explorer' || 'firefox') {
                 console.log('skip');
             } else {
                 const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);

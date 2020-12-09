@@ -14,21 +14,25 @@ describe('Menu component test suite', function() {
     });
 
     it('should check menu btn styles', () => {
-        const basicMenuBtnArrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
+        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
+            console.log('skip');
+        } else {
+            const basicMenuBtnArrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
 
-        for (let i = 0; basicMenuBtnArrLength > i; i++) {
-            expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.borderColorAttribute, i).value)
-                .toContain(MenuData.menuBtnBorderColor);
-            webDriver.scrollIntoView(menuPage.menuBtnArr, i);
-            webDriver.mouseHoverElement(menuPage.menuBtnArr, i);
-            expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
-                .toContain(MenuData.menuBtnHoverColor);
+            for (let i = 0; basicMenuBtnArrLength > i; i++) {
+                expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.borderColorAttribute, i).value)
+                    .toContain(MenuData.menuBtnBorderColor);
+                webDriver.scrollIntoView(menuPage.menuBtnArr, i);
+                webDriver.mouseHoverElement(menuPage.menuBtnArr, i);
+                expect(webDriver.getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
+                    .toContain(MenuData.menuBtnHoverColor);
+            }
+            webDriver.focusElement(menuPage.firstMenuBtn);
+            webDriver.sendKeys('Tab');
+
+            const menuBtnBorderStyle = webDriver.executeScript2(menuPage.secondMenuBtn);
+            expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
         }
-        webDriver.focusElement(menuPage.firstMenuBtn);
-        webDriver.sendKeys('Tab');
-
-        const menuBtnBorderStyle = webDriver.executeScript2(menuPage.secondMenuBtn);
-        expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
 
     });
     // Real issue for FF
@@ -75,10 +79,15 @@ describe('Menu component test suite', function() {
     });
 
     it('should check menu item styles', () => {
-        webDriver.click(menuPage.menuBtnArr);
+        // Hover doesn't work correctly in Safari
+        if (browser.capabilities.browserName === 'Safari') {
+            console.log('skip');
+        } else {
+            webDriver.click(menuPage.menuBtnArr);
 
-        checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
-        checkMenuItemText(menuPage.menuItemTextArr);
+            checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+            checkMenuItemText(menuPage.menuItemTextArr);
+        }
     });
 
     xit('should check menu items active state', () => {
@@ -88,26 +97,38 @@ describe('Menu component test suite', function() {
     });
 
     it('should check menu item focus', () => {
-        webDriver.click(menuPage.menuBtnArr);
-        checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
+        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
+            console.log('skip');
+        } else {
+            webDriver.click(menuPage.menuBtnArr);
+            checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
+        }
     });
 
     it('should check cascading menu', () => {
-        webDriver.click(menuPage.cascadingMenuBtn);
-        webDriver.waitForDisplayed(menuPage.cascadingMenuItemsArr);
-        checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
-        check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-            MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
-        webDriver.doubleClick(menuPage.cascadingMenuBtn);
-        check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-            menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
+            console.log('skip');
+        } else {
+            webDriver.click(menuPage.cascadingMenuBtn);
+            webDriver.waitForDisplayed(menuPage.cascadingMenuItemsArr);
+            checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+            check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
+                MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+            webDriver.doubleClick(menuPage.cascadingMenuBtn);
+            check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
+                menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        }
     });
 
     it('should check collapsed and expanded states', () => {
-        webDriver.click(menuPage.firstMenuBtn);
-        expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
-        webDriver.click(menuPage.firstMenuBtn);
-        expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(false);
+        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
+            console.log('skip');
+        } else {
+            webDriver.click(menuPage.firstMenuBtn);
+            expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
+            webDriver.click(menuPage.firstMenuBtn);
+            expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(false);
+        }
     });
 
     it('should check LTR orientation', () => {
@@ -139,7 +160,7 @@ function checkMenuItemsHoverState(itemsArrSelector, attribute, expectation): voi
     const menuItemsArrLength = webDriver.getElementArrayLength(itemsArrSelector);
 
     for (let i = 0; menuItemsArrLength > i; i++) {
-        webDriver.mouseHoverElement(itemsArrSelector,  i);
+        webDriver.mouseHoverElement(itemsArrSelector, i);
         expect(webDriver.getCSSPropertyByName(itemsArrSelector, attribute, i).value).toContain(expectation);
     }
 }

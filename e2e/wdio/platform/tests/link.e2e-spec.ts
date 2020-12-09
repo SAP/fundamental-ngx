@@ -1,7 +1,6 @@
 import { LinkPo } from '../pages/link.po';
 import {
     defaultLink_alt_text,
-    linkFocusState,
     googleLink,
     standardLinksAltTextArray,
     truncatedLink_alt_text

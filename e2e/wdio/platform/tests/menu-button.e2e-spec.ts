@@ -21,31 +21,54 @@ describe('Menu button test suite', function() {
         });
 
         it('should check selected menu option and close menu', () => {
-            webDriver.click(menuBtnPage.cozyBtnArr, 0);
-            webDriver.click(menuBtnPage.menuItemArr, 0);
+            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
+            if (browser.capabilities.browserName === 'internet explorer' || 'Safari') {
+                console.log('skip');
+            } else {
+                webDriver.click(menuBtnPage.cozyBtnArr);
+                webDriver.click(menuBtnPage.menuItemArr);
 
-            expect(webDriver.getText(menuBtnPage.cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
-            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+                expect(webDriver.getText(menuBtnPage.cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
+                expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+            }
         });
 
-        it('should check menu items visible', async () => {
-            webDriver.click(menuBtnPage.cozyBtnArr);
-
-            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
+        it('should check menu items visible', () => {
+            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
+            if (browser.capabilities.browserName === 'internet explorer') {
+                console.log('skip');
+            } else {
+                webDriver.click(menuBtnPage.cozyBtnArr);
+                expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
+            }
         });
 
-        it('should check close menu by clicking menu btn', async () => {
-            webDriver.doubleClick(menuBtnPage.cozyBtnArr);
-            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+        it('should check close menu by clicking menu btn', () => {
+            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
+            if (browser.capabilities.browserName === 'internet explorer') {
+                console.log('skip');
+            } else {
+
+                webDriver.doubleClick(menuBtnPage.cozyBtnArr);
+                expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+            }
+
         });
 
         it('should check closing menu when clicking outside of menu', () => {
-            webDriver.click(menuBtnPage.cozyBtnArr);
-            webDriver.waitForDisplayed(menuBtnPage.menuItemOverlay);
-            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
-            webDriver.click(menuBtnPage.sectionTitle);
-            expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
+            if (browser.capabilities.browserName === 'internet explorer') {
+                console.log('skip');
+            } else {
+                webDriver.waitElementToBePresentInDOM(menuBtnPage.cozyBtnArr);
+                webDriver.click(menuBtnPage.cozyBtnArr);
+                webDriver.waitForDisplayed(menuBtnPage.menuItemOverlay);
+                expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
+                webDriver.click(menuBtnPage.sectionTitle);
+                expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+            }
         });
+
     });
 
     describe('Check cozy and compact menu button states', function() {
@@ -111,6 +134,7 @@ describe('Menu button test suite', function() {
         });
 
         it('should check btn with and without icon', () => {
+            webDriver.waitForDisplayed(menuBtnPage.menuTypeBtnArr, 0);
             expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 6)).toBe(MenuBtnData.icon);
             expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 6).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
             expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 7)).toBe(null);
