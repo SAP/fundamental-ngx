@@ -9,4 +9,8 @@ import { TableDataProviderExample } from './platform-table-data-provider-example
 })
 export class PlatformTableDefaultExampleComponent {
     source = new TableDataSource(new TableDataProviderExample());
+
+    alert(message: string): void {
+        alert(message);
+    }
 }

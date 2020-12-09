@@ -1,16 +1,14 @@
 <fdp-table
-       [dataSource]="source"
-       (sortChange)="logSortChange($event)"
-       contentDensity="compact"
-       emptyTableMessage="No data found">
+    [dataSource]="source"
+    (sortChange)="logSortChange($event)"
+    contentDensity="compact"
+    emptyTableMessage="No data found"
+>
 
     <fdp-table-toolbar
         title="Order Line Items"
-        [hideItemCount]="false">
-        <fdp-table-toolbar-actions>
-            <fdp-button label="Action One" contentDensity="compact"></fdp-button>
-            <fdp-button label="Action Two" contentDensity="compact"></fdp-button>
-        </fdp-table-toolbar-actions>
+        [hideItemCount]="false"
+    >
     </fdp-table-toolbar>
 
     <fdp-column
@@ -18,14 +16,16 @@
         key="name"
         label="Name"
         align="start"
-        [sortable]="true">
+        [sortable]="true"
+    >
     </fdp-column>
 
     <fdp-column
         name="description"
         key="description"
         label="Description"
-        [sortable]="true">
+        [sortable]="true"
+    >
     </fdp-column>
 
     <fdp-column
@@ -33,13 +33,15 @@
         key="price.value"
         label="Price"
         align="end"
-        [sortable]="true">
+        [sortable]="true"
+    >
     </fdp-column>
 
     <fdp-column
         name="status"
         key="status"
         label="Status"
-        align="center">
+        align="center"
+    >
     </fdp-column>
 </fdp-table>

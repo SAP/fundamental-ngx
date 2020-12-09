@@ -10,6 +10,9 @@ import {
 } from '@angular/core';
 
 import { SearchInput, SuggestionItem } from '../../../search-field/search-field.component';
+import { ContentDensity as CompactCozyContentDensity } from '../../../form/form-control';
+
+import { ContentDensity } from '../../enums';
 import { TableComponent } from '../../table.component';
 import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-toolbar-actions.component';
 
@@ -83,5 +86,10 @@ export class TableToolbarComponent implements AfterViewInit {
     /** @hidden */
     openColumns(): void {
         // TODO
+    }
+
+    /** @hidden */
+    _getCozyCompactSize(size: ContentDensity): CompactCozyContentDensity {
+        return size !== 'cozy' ? 'compact' : 'cozy'
     }
 }

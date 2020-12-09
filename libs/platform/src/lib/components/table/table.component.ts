@@ -547,7 +547,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** Set view settings filters list */
     setViewSettingsFilters(filters: TableViewSettingsFilterComponent[]): void {
         this.viewSettingsFilters = filters;
-        this._cd.markForCheck();
+        this._cd.detectChanges();
     }
 
     /** @hidden */

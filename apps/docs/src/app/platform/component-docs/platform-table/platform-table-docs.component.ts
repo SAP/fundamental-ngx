@@ -55,7 +55,7 @@ export class PlatformTableDocsComponent {
                     },
                     freezeColumnsTo: {
                         type: 'string',
-                        enum: ['name', 'description', 'price.value', 'status']
+                        enum: ['none', 'name', 'description', 'price.value']
                     },
                     noHorizontalBorders: {
                         type: 'boolean'

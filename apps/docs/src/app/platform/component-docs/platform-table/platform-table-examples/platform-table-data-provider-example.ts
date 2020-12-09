@@ -75,7 +75,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
     private filterByTextField(item: ExampleItem, itemKey: keyof ExampleItem, filterText: string): boolean {
         const itemValue: string = getNestedValue(itemKey, item);
-        return filterText ? itemValue?.includes(filterText) : true;
+        return filterText && itemValue ? itemValue.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()) : true;
     }
 
     private filterByPriceRange(item: ExampleItem, filterModel: { min: number; max: number }): boolean {
@@ -124,9 +124,9 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         return items.filter((item) => {
             const valuesForSearch = keysToSearchBy.map((key) => getNestedValue(key, item));
             return valuesForSearch
-                .filter((value) => value)
+                .filter((value) => !!value)
                 .map((value): string => value.toString())
-                .some((value) => value.includes(searchText));
+                .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
         });
     }
 }

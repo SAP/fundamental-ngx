@@ -1,39 +1,40 @@
 <fdp-table
-       [dataSource]="source"
-       (rowSelectionChange)="logSelectionChange($event)"
-       (groupChange)="logGroupChange($event)"
-       contentDensity="compact"
-       selectionMode="multiple"
-       emptyTableMessage="No data found">
+    [dataSource]="source"
+    (rowSelectionChange)="logSelectionChange($event)"
+    (groupChange)="logGroupChange($event)"
+    contentDensity="compact"
+    selectionMode="multiple"
+    emptyTableMessage="No data found"
+>
 
     <fdp-table-toolbar
         title="Order Line Items"
-        [hideItemCount]="false">
-        <fdp-table-toolbar-actions>
-            <fdp-button label="Action One" contentDensity="compact"></fdp-button>
-            <fdp-button label="Action Two" contentDensity="compact"></fdp-button>
-        </fdp-table-toolbar-actions>
+        [hideItemCount]="false"
+    >
     </fdp-table-toolbar>
 
     <fdp-column
         name="name"
         key="name"
         label="Name"
-        align="start" 
-        [groupable]="true">
+        align="start"
+        [groupable]="true"
+    >
     </fdp-column>
 
     <fdp-column
         name="description"
         key="description"
-        label="Description">
+        label="Description"
+    >
     </fdp-column>
 
     <fdp-column
         name="price"
         key="price.value"
         label="Price"
-        align="end">
+        align="end"
+    >
     </fdp-column>
 
     <fdp-column
@@ -41,6 +42,7 @@
         key="status"
         label="Status"
         align="center"
-        [groupable]="true">
+        [groupable]="true"
+    >
     </fdp-column>
 </fdp-table>
