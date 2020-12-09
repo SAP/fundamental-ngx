@@ -88,17 +88,17 @@ export class SortingComponent implements Resettable {
     /** @hidden */
     _sortDirectionChange(direction: SortDirection): void {
         this.direction = direction;
-        this._omModelChange();
+        this._onModelChange();
     }
 
     /** @hidden */
     _sortFieldChange(field: string): void {
         this.field = field;
-        this._omModelChange();
+        this._onModelChange();
     }
 
     /** @hidden */
-    _omModelChange(): void {
+    _onModelChange(): void {
         // Use this coercion cause fd-radio-button triggers extra ngModelChange events on initial phase
         const isInitialDiffers = this.initialDirection !== this.direction || this.initialField !== this.field;
         this._isResetAvailableSubject$.next(isInitialDiffers);

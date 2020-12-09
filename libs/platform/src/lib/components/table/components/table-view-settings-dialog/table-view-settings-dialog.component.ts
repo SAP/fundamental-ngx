@@ -56,7 +56,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit {
         }
 
         this.filters.changes.pipe(startWith(null)).subscribe(() => {
-            this.table._setViewSettingsFilters(this.filters.toArray());
+            this.table.setViewSettingsFilters(this.filters.toArray());
         });
     }
 }

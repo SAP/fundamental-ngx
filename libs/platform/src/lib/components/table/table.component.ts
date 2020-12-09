@@ -131,11 +131,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** Initial state of table. */
     @Input()
     set state(value: TableState) {
-        if (!value) {
-            this.setTableState(DEFAULT_TABLE_STATE);
-        } else {
-            this.setTableState(value);
-        }
+        this.setTableState(value || DEFAULT_TABLE_STATE);
     }
     get state(): TableState {
         return this.getTableState();
@@ -548,6 +544,12 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         );
     }
 
+    /** Set view settings filters list */
+    setViewSettingsFilters(filters: TableViewSettingsFilterComponent[]): void {
+        this.viewSettingsFilters = filters;
+        this._cd.markForCheck();
+    }
+
     /** @hidden */
     _getFixedTableStyles(): { [klass: string]: number } {
         const key = this._rtl ? 'padding-right.px' : 'padding-left.px';
@@ -586,14 +588,6 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** @hidden */
     _isColumnPopoverOpened(key: string): boolean {
         return this._popoverOpen && this._popoverColumnKey === key;
-    }
-
-    /**
-     * @hidden
-     * set view settings filters list
-     */
-    _setViewSettingsFilters(filters: TableViewSettingsFilterComponent[]): void {
-        this.viewSettingsFilters = filters;
     }
 
     /** @hidden */

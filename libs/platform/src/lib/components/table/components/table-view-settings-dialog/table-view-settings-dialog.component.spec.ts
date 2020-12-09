@@ -30,8 +30,8 @@ describe('TableViewSettingsDialogComponent', () => {
     it('should add filters to table and keep it up to date', () => {
         const mockFilterComponent = {} as TableViewSettingsFilterComponent;
         const queryList = new QueryList<TableViewSettingsFilterComponent>();
-        const mockTable: Partial<TableComponent<any>> = { _setViewSettingsFilters: () => {} };
-        const setViewSettingsFiltersSpy = spyOn(mockTable, '_setViewSettingsFilters').and.stub();
+        const mockTable: Partial<TableComponent<any>> = { setViewSettingsFilters: () => {} };
+        const setViewSettingsFiltersSpy = spyOn(mockTable, 'setViewSettingsFilters').and.stub();
 
         queryList.reset([mockFilterComponent]);
 
