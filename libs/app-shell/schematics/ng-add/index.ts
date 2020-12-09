@@ -45,7 +45,7 @@ const CONFIG_FILE_NAME = 'angular.json';
 let projectSettings: Partial<ProjectSettings>;
 
 
-export default function(options: Schema): Rule {
+export default function (options: Schema): Rule {
     return (host: Tree, context: SchematicContext) => {
         setupOptions(host, options, context);
 
@@ -69,7 +69,6 @@ function addDependencies(): Rule {
 
     return (host: Tree, context: SchematicContext) => {
         const coreDeps: NodeDependency[] = [
-            { type: NodeDependencyType.Default, version: '^VERSION_PLACEHOLDER', name: '@fundamental-ngx/core' },
             { type: NodeDependencyType.Default, version: 'SHELL_VER_PLACEHOLDER', name: '@fundamental-ngx/app-shell' },
             { type: NodeDependencyType.Default, version: 'CDK_VER_PLACEHOLDER', name: '@angular/cdk' },
             { type: NodeDependencyType.Default, version: '3.0.0', name: '@pscoped/ngx-pub-sub' }
@@ -125,10 +124,10 @@ function copyThemesToAssets(): Rule {
                 move(movePath)
             ]);
             return chain([
-                    branchAndMerge(chain([
-                        mergeWith(templateSource)
-                    ]))
-                ]
+                branchAndMerge(chain([
+                    mergeWith(templateSource)
+                ]))
+            ]
             );
         } catch (e) {
             context.logger.log('warn',
