@@ -62,7 +62,7 @@ exports.config = {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-internet-explorer',
                 requireWindowFocus: true,
-                //tags: [ "process.env.TRAVIS_BUILD_ID"],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -73,7 +73,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
-                tags: [ 'process.env.TRAVIS_BUILD_ID'],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -84,7 +84,7 @@ exports.config = {
             "sauce:options": {
                 name: 'e2e-win-firefox',
                 screenResolution: '1920x1080',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -95,7 +95,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-chrome',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -106,7 +106,7 @@ exports.config = {
             "sauce:options": {
                 name: 'e2e-MAC-chrome',
                 screenResolution: '1920x1440',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -117,7 +117,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1440',
                 name: 'e2e-MAC-firefox',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -128,7 +128,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1440',
                 name: 'e2e-MAC-Edge',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -138,6 +138,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1440',
                 name: 'e2e-MAC-safari',
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
     ],
@@ -148,7 +149,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'silent',
     //
     // Set specific log levels per logger
     // loggers:
