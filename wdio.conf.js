@@ -47,7 +47,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 25,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -149,7 +149,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'silent',
+    logLevel: 'error',
     //
     // Set specific log levels per logger
     // loggers:
@@ -254,8 +254,29 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-     // onPrepare: function () {
-     // },
+     onPrepare: function () {
+        if (processedConfig.sauceUser && processedConfig.sauceKey) {
+            jasmine.getEnv().addReporter({
+                suiteStarted: async (result) => {
+                    await browser.executeScript('sauce:job-name=' + result.fullName);
+                },
+                specStarted: async (result) => {
+                    await browser.executeScript('sauce:context=' + result.fullName);
+                },
+                specDone: async (result) => {
+                    // If there are errors please update the error to Sauce Labs
+                    if (result.failedExpectations.length > 0) {
+                        const promisses = result.failedExpectations.map(async error => {
+                            const errorUpdate = await browser.executeScript('sauce:context=' + error.stack);
+
+                            return errorUpdate;
+                        });
+                        await Promise.all(promisses);
+                    }
+                },
+            });
+        }
+     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.

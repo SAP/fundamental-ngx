@@ -28,7 +28,7 @@ describe('Split menu button test suite', () => {
         const dropdownArrowBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.arrowBtnArr);
         const mainBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.mainBtnArr);
 
-        await expect(dropdownArrowBtnCount).toEqual(mainBtnCount);
+        expect(dropdownArrowBtnCount).toEqual(mainBtnCount);
     });
 
     it('should check that menu closed after making one selection', () => {
