@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.44...v0.25.0-rc.45) (2020-12-10)
+
+
+### Bug Fixes
+
+* (Platform) First avatar in Thumbnail needs highlight on default load ([#4001](https://github.com/SAP/fundamental-ngx/issues/4001)) ([3e63a22](https://github.com/SAP/fundamental-ngx/commit/3e63a22e49d0a8b6b7acbcc829351eec151fcd3b))
+
 ## [0.25.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.43...v0.25.0-rc.44) (2020-12-09)
 
 ## [0.25.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.42...v0.25.0-rc.43) (2020-12-09)
