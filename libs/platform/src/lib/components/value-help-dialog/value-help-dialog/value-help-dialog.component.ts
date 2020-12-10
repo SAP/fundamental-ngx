@@ -21,7 +21,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { DialogService, DialogConfig, DialogRef } from '@fundamental-ngx/core';
 import { isDataSource } from '../../../domain/data-source';
-import { ValueHelpDialogTabs, VhdValueChangeEvent, VhdFilter } from '../models';
+import { ValueHelpDialogTabs, VhdValueChangeEvent, VhdFilter, IncludedEntity, ExcludedEntity, VhdDefineStrategy } from '../models';
 
 import {
   ValueHelpDialogService,
@@ -36,7 +36,6 @@ import {
 } from '../components';
 
 let vhiUniqueId = 0;
-
 @Component({
   selector: 'fdp-value-help-dialog',
   templateUrl: './value-help-dialog.component.html',
@@ -52,7 +51,9 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     private readonly _stateService: ValueHelpDialogService<unknown>,
     private readonly _changeDetectorRef: ChangeDetectorRef,
     private readonly _dialogService: DialogService
-  ) { }
+  ) {
+    this._stateService.setUid();
+  }
 
   /** Id of the popover */
   @Input()
@@ -101,6 +102,44 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   @Input()
   tokenizerFn: Function;
 
+  /** Tokenizer function for include/exclude token render */
+  @Input()
+  conditionDisplayFn = (item: IncludedEntity | ExcludedEntity, filters: VhdFilter[]) => {
+    const filter = filters.find(f => f.key === item.key);
+    let value = (() => {
+      switch (item.strategy) {
+        case VhdDefineStrategy.empty:
+          return null;
+        case VhdDefineStrategy.between:
+          return `${item.value}...${item.valueTo}`;
+        case VhdDefineStrategy.contains:
+          return `*${item.value}*`;
+        case VhdDefineStrategy.equalTo:
+          return `=${item.value}`;
+        case VhdDefineStrategy.startsWith:
+          return `${item.value}*`;
+        case VhdDefineStrategy.endsWith:
+          return `*${item.value}`;
+        case VhdDefineStrategy.greaterThan:
+          return `>${item.value}`;
+        case VhdDefineStrategy.greaterThanEqual:
+          return `>=${item.value}`;
+        case VhdDefineStrategy.lessThan:
+          return `<${item.value}`;
+        case VhdDefineStrategy.lessThanEqual:
+          return `<=${item.value}`;
+      }
+    })();
+    if (value && item.type === 'exclude') {
+      value = `!(${value})`;
+    }
+    if (filter) {
+      return `${filter.label}: ${value}`;
+    }
+
+    return value;
+  }
+
   /** Whether the value help dialog should be view in mobile mode */
   @Input()
   mobile = false;
@@ -123,7 +162,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden Define conditions tab settings */
   @ContentChild(DefineTabSettingsComponent)
-  defineTab: DefineTabSettingsComponent;
+  defineTab: DefineTabSettingsComponent<unknown>;
 
   /** @hidden Internal container for dialog */
   @ViewChild('container', { read: TemplateRef })
@@ -136,9 +175,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden */
   _hasAdvanced = true;
   /** @hidden */
-  _hasInclude = true;
-  /** @hidden */
-  _hasExclude = true;
+  _hasDefineFilters = true;
   /** @hidden */
   _selectedExpandState = true;
   /** @hidden */
@@ -182,8 +219,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
   /** @hidden */
   get hasDefineTab(): boolean {
-    // return false;
-    return !!this.defineTab;
+    return !!this.defineTab && this._hasDefineFilters;
   }
   /** @hidden */
   get isSelectionTab(): boolean {
@@ -192,6 +228,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden */
   get selectedItems(): any {
     return this._stateService.selectedItems$.getValue() || [];
+  }
+  /** @hidden */
+  get includedItems(): any {
+    return this._stateService.includedItems$.getValue() || [];
   }
   /** @hidden */
   get excludedItems(): any {
@@ -330,8 +370,15 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /**
+   * Remove included items
+   */
+  removeIncluded(index: number): void {
+    this._stateService.includedItems$.next(this.includedItems.filter((_, i: number) => i !== index));
+    this._changeDetectorRef.markForCheck();
+  }
+
+  /**
    * Remove excluded items
-   * NOT IMPLEMENTED YET
    */
   removeExcluded(index: number): void {
     this._stateService.excludedItems$.next(this.excludedItems.filter((_, i: number) => i !== index));
@@ -352,6 +399,12 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     const value: VhdValueChangeEvent = {};
     if (this.selectedItems.length) {
       value.selected = this.selectedItems;
+    }
+    if (this.includedItems.length) {
+      value.included = this.includedItems;
+    }
+    if (this.excludedItems.length) {
+      value.excluded = this.excludedItems;
     }
     if (this.activeDialog) {
       this.activeDialog.close(value);
@@ -382,6 +435,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   _trackByFilterFn(_index: number, item: VhdFilter): number | string | undefined {
     return item && item.key ? item.key : undefined;
   }
+  /** @hidden */
+  _trackByConditionFn(_index: number, item: IncludedEntity | ExcludedEntity): number | string | undefined {
+    return item ? item.value + item.valueTo + item.strategy + item.key : undefined;
+  }
 
   /** @hidden */
   _initializeDS(ds: FdpValueHelpDialogDataSource<any> = this.dataSource): void {
@@ -395,8 +452,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   private _refreshDisplayedData(): void {
-    const original = JSON.parse(JSON.stringify(this._originalData));
-    this._displayedData = original.map((row: T & TableRow) => {
+    this._displayedData = this._originalData.map((row: T & TableRow) => {
       row.selected = this.selectedItems.some((item: T) => item[this.uniqueKey] === row[this.uniqueKey]);
 
       return row;
@@ -414,9 +470,14 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       this.switchTab(this.selectionTab ? ValueHelpDialogTabs.selectFromList : ValueHelpDialogTabs.defineConditions);
     }
 
-    if (this.selectionTab) {
+    if (this.hasSelectionTab) {
       this.selectionTab.mobile = this.mobile;
-      this.selectionTab.listenSearchTableEvents();
+      this.selectionTab.listenEvents();
+    }
+
+    if (this.hasDefineTab) {
+      this.defineTab.mobile = this.mobile;
+      this.defineTab.listenEvents();
     }
   }
 
@@ -471,7 +532,6 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden */
   private _updateFilters(filters?: VhdFilter[]): void {
     const _filters = filters || (this.filters ? this.filters.toArray() : []);
-
     this._displayedFilters = _filters.map(filter => ({
       ...filter,
       label: filter.label || filter.key,
@@ -481,6 +541,9 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
     this._hasAdvanced = this._displayedFilters.some((filter: VhdFilter) => {
       return !!filter.advanced;
+    });
+    this._hasDefineFilters = this._displayedFilters.some((filter: VhdFilter) => {
+      return !!filter.include || !!filter.exclude;
     });
   }
 

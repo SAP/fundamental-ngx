@@ -17,7 +17,11 @@ import {
   ListModule,
   LinkModule,
   BarModule,
-  PaginationModule
+  PaginationModule,
+  SelectModule,
+  PanelModule,
+  InputGroupModule,
+  PopoverModule
 } from '@fundamental-ngx/core';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
@@ -25,7 +29,6 @@ import { VhdFilterComponent } from './components/value-help-dialog-filter/value-
 import { SelectTabSettingsComponent } from './components/select-tab-settings/select-tab-settings.component';
 import { DefineTabSettingsComponent } from './components/define-tab-settings/define-tab-settings.component';
 import { VhdSearchComponent } from './components/value-help-dialog-search/value-help-dialog-search.component';
-
 @NgModule({
   declarations: [
     PlatformValueHelpDialogComponent,
@@ -52,7 +55,11 @@ import { VhdSearchComponent } from './components/value-help-dialog-search/value-
     ListModule,
     BarModule,
     LinkModule,
-    PaginationModule
+    PaginationModule,
+    SelectModule,
+    PanelModule,
+    InputGroupModule,
+    PopoverModule
   ],
   exports: [
     PlatformValueHelpDialogComponent,

@@ -11,7 +11,8 @@ export class VhdFilterComponent implements VhdFilter {
   @Input()
   key: string;
 
-  /** Allow to control which of filters should show as main in mobile view */
+  /** Allow to control which of filters should show as main in mobile view.
+   * Apply for search table only */
   @Input()
   main = false;
 
@@ -19,7 +20,7 @@ export class VhdFilterComponent implements VhdFilter {
   @Input()
   label: string;
 
-  /** Initial filter's value */
+  /** Initial filter's value for search section in `select from list tab` only */
   @Input()
   value = '';
 
@@ -27,11 +28,11 @@ export class VhdFilterComponent implements VhdFilter {
   @Input()
   advanced = true;
 
-  /** Allow to use filter for including in define conditions tab */
+  /** Allow to use filter for including in `define conditions tab` */
   @Input()
   include = true;
 
-  /** Allow to use filter for excluding in define conditions tab */
+  /** Allow to use filter for excluding in `define conditions tab` */
   @Input()
   exclude = true;
 }

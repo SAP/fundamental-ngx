@@ -5,15 +5,14 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  OnDestroy,
-  HostBinding
+  OnDestroy
 } from '@angular/core';
 
 import { ContentDensity } from '../../../table/enums';
 import {
   ValueHelpDialogService
 } from '../../value-help-dialog.service';
-import { ValueHelpDialogTabs, VhdFilter, VdhTableSelection } from '../../models';
+import { ValueHelDialogBaseTab, ValueHelpDialogTabs, VhdFilter, VdhTableSelection } from '../../models';
 import { Subscription } from 'rxjs';
 
 export interface TableRow {
@@ -25,31 +24,24 @@ export interface TableRow {
   templateUrl: './select-tab-settings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectTabSettingsComponent<T> implements OnDestroy {
-  @Input()
-  title: string;
-
+export class SelectTabSettingsComponent<T> extends ValueHelDialogBaseTab implements OnDestroy {
   /** Close dialog immediately after select any row from search table. It'll be skipped if multi option is true */
   @Input()
   selection: VdhTableSelection = 'single';
-
-  /** Mobile view for search table */
-  @Input()
-  mobile = false;
 
   /** Text displayed when table has no items. */
   @Input()
   emptyTableMessage = 'Use the search to get results';
 
-  /** Uniq field from data source for track in table view */
+  /** Uniq field from data source */
   @Input()
   uniqueKey = 'id';
 
-  /** Items per page */
+  /** Items per page for pagination below search table */
   @Input()
   pageSize = 20;
 
-  /** Count of default mobile header from data source */
+  /** Count of default mobile header from search table */
   @Input()
   defaultMobileHeaders = 2;
 
@@ -63,19 +55,19 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
 
   /** @hidden */
   _contentDensityOptions = ContentDensity;
+
   /** @hidden Displayed data for search table */
   _displayedData: TableRow[] = [];
 
   /** @hidden indeterminate flag for `select all` checkbox */
   _selectedAll = false;
 
-  /** @hidden */
-  private _selectedMap: Map<string, boolean> = new Map();
-
   /** @hidden Shown items count in mobile view */
   _shownFrom = 0;
+
   /** @hidden Shown items count in mobile view */
   _shownCount = 0;
+
   /** @hidden Current page in desktop view */
   _currentPage = 0;
 
@@ -88,13 +80,14 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
     secondary: []
   };
 
-  /** @hidden All tab's subscriptions */
-  private _subscriptions: Subscription;
+  /** @hidden */
+  private _selectedMap: Map<string, boolean> = new Map();
 
   /** @hidden Selected items */
   private get _selectedItems(): any {
     return this._stateService.selectedItems$.getValue() || [];
   }
+
   private set _selectedItems(values) {
     this._stateService.selectedItems$.next(values);
   }
@@ -118,18 +111,13 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
   /** @hidden Selection tab filters */
   private _displayedFilters: VhdFilter[] = [];
 
-  constructor(
-    private readonly _stateService: ValueHelpDialogService<unknown>,
-    private readonly _changeDetectorRef: ChangeDetectorRef
-  ) { }
-
   /** @hidden  */
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
   }
 
   /** @hidden Track function for main data */
-  _trackByTableRowFn(_index: number, item: TableRow & { id: number | string }): number | string | undefined {
+  _trackByTableRowFn(_index: number, item: T): number | string | undefined {
     if (item) {
       return item[this.uniqueKey];
     }
@@ -176,12 +164,12 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
 
     } else {
       const selected = this._selectedItems;
-      selected.push(this._getSelectedFromOriginal(item));
+      selected.push(this._getSelected(item));
       this._selectedItems = selected;
     }
 
     if (this.isOnceSelection && !this.isMultiSelection) {
-      this.selectOnce.emit({ selected: this._getSelectedFromOriginal(item) as T[] });
+      this.selectOnce.emit({ selected: this._getSelected(item) as T[] });
     }
   }
 
@@ -198,7 +186,7 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
     this._subscriptions.unsubscribe();
   }
 
-  listenSearchTableEvents(): void {
+  listenEvents(): void {
     this._subscriptions = new Subscription();
     this._subscriptions.add(this._stateService.displayedData$.asObservable().subscribe((data: T[]) => {
       this._refreshDisplayedData(data);
@@ -241,8 +229,8 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
     }
   }
 
-  /** @hidden Get selected items from original data */
-  private _getSelectedFromOriginal(item?: TableRow): T | T[] {
+  /** @hidden Get selected items */
+  private _getSelected(item?: TableRow): T | T[] {
     if (item) {
       return this._stateService.originalData.find((original: T) => original[this.uniqueKey] === item[this.uniqueKey]);
     }
@@ -264,7 +252,7 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
     }
   }
 
-  /** @hidden */
+  /** @hidden Set up filters */
   private _initializeFilters(): void {
     if (this.mobile) {
       let _mobileTableHeaders = this._displayedFilters.filter(f => f.main).map(f => f.key);
@@ -284,6 +272,7 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
 
   }
 
+  /** @hidden Refresh display data */
   private _refreshDisplayedData(data: T[]): void {
     this._displayedData = data.map((row: T&TableRow) => {
       row.selected = this._selectedMap.has(row[this.uniqueKey]);
@@ -291,6 +280,7 @@ export class SelectTabSettingsComponent<T> implements OnDestroy {
     });
   }
 
+  /** @hidden Refresh selected map for display data */
   private refreshSelectedMap(): void {
     this._selectedMap = new Map();
     for (const s of this._selectedItems) {

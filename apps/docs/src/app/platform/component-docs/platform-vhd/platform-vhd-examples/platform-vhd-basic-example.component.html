@@ -1,6 +1,6 @@
 <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
 <p>SelectedValue:</p>
-<pre *ngIf="selectedValue.length">{{ selectedValue | json }}</pre>
+<pre *ngIf="actualValue">{{ actualValue | json }}</pre>
 
 <fdp-value-help-dialog #vhd
     dialogTitle="Simple value help dialog"
@@ -21,8 +21,9 @@
         [exclude]="filter.exclude"
     ></fdp-value-help-dialog-filter>
     <fdp-select-tab-settings
-        title="Select from list"
+        tabTitle="Select from list"
         selection="multi"
         [pageSize]="20">
     </fdp-select-tab-settings>
+    <fdp-define-tab-settings tabTitle="Define Conditions"></fdp-define-tab-settings>
 </fdp-value-help-dialog>

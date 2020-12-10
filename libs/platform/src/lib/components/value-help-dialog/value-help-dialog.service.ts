@@ -9,10 +9,12 @@ import {
   ValueHelpDialogTabs,
   VhdFilter,
   VhdValueChangeEvent,
-  VhdDefineIncludeEntityRule,
-  VhdDefineExcludeEntityRule
+  IncludedEntity,
+  ExcludedEntity
 } from './models';
 import { isDataSource } from '../../domain/data-source';
+
+let vhiUniqueId = 0;
 
 export type FdpValueHelpDialogDataSource<T> = ValueHelpDialogDataSource<T>
   | ArrayValueHelpDialogDataSource<T>
@@ -24,18 +26,31 @@ export class ValueHelpDialogService<T> {
   displayedData$: BehaviorSubject<T[]> = new BehaviorSubject([]);
   displayedFilters$: BehaviorSubject<VhdFilter[]> = new BehaviorSubject([]);
   selectedItems$: BehaviorSubject<T[]> = new BehaviorSubject([]);
-  includedItems$: BehaviorSubject<VhdDefineIncludeEntityRule[]> = new BehaviorSubject([]);
-  excludedItems$: BehaviorSubject<VhdDefineExcludeEntityRule[]> = new BehaviorSubject([]);
+  includedItems$: BehaviorSubject<IncludedEntity[]> = new BehaviorSubject([]);
+  excludedItems$: BehaviorSubject<ExcludedEntity[]> = new BehaviorSubject([]);
+
+  _uid: string;
 
   private _originalData: any;
   private _dataSource: FdpValueHelpDialogDataSource<any>;
   private _dsSubscription: Subscription;
+
+  constructor() {
+  }
+
+  get uid(): string {
+    return this._uid;
+  }
 
   get dataSource(): FdpValueHelpDialogDataSource<any> {
     return this._dataSource;
   }
   get originalData(): any {
     return this._originalData;
+  }
+
+  setUid() {
+    this._uid = 'fdp-vhd-' + vhiUniqueId++;
   }
 
   refreshState(value?: VhdValueChangeEvent<T[]>): void {
@@ -67,7 +82,7 @@ export class ValueHelpDialogService<T> {
 
       return initDataSource.open().pipe(
         tap(data => {
-          this._originalData = JSON.parse(JSON.stringify(data));
+          this._originalData = data;
         })
       );
     }

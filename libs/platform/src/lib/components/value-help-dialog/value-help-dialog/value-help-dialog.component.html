@@ -51,8 +51,9 @@
                         </ng-container>
                     </fd-toolbar>
                     <div *ngIf="_selectedExpandState">
-                        <div class="fdp-value-help-dialog__tokens" *ngIf="selectedItems.length">
+                        <div class="fdp-value-help-dialog__tokens" *ngIf="selectedItems.length || includedItems.length">
                             <fd-toolbar [shouldOverflow]="true">
+                                <!-- Selected items -->
                                 <fd-token
                                     fd-toolbar-item
                                     fdOverflowPriority="high"
@@ -61,6 +62,17 @@
                                     (onCloseClick)="removeSelected(item)"
                                     *ngFor="let item of selectedItems"
                                 >{{ !!tokenizerFn ? (item | displayFnPipe: tokenizerFn) : item[tokenViewField] }}
+                                </fd-token>
+                                <!-- Include conditions -->
+                                <fd-token
+                                    fd-toolbar-item
+                                    fdOverflowPriority="high"
+                                    class="fdp-value-help-dialog__selection-token"
+                                    [compact]="true"
+                                    (onCloseClick)="removeIncluded(item)"
+                                    *ngFor="let item of includedItems; trackBy:_trackByConditionFn"
+                                >
+                                    <ng-container [ngTemplateOutlet]="conditionValue" [ngTemplateOutletContext]="{ item: item }"></ng-container>
                                 </fd-token>
                             </fd-toolbar>
                             <button
@@ -78,23 +90,16 @@
                             </ng-container>
                             <div class="fdp-value-help-dialog__tokens">
                                 <fd-toolbar [shouldOverflow]="true">
-                                    <button
-                                        fd-button
-                                        fd-toolbar-item
-                                        fdOverflowPriority="high"
-                                        [compact]="true"
-                                        *ngFor="let item of excludedItems"
-                                    >{{ !!tokenizerFn ? (item | displayFnPipe: tokenizerFn) : item[tokenViewField] }}</button>
-                                </fd-toolbar>
-                                <fd-toolbar [shouldOverflow]="true">
+                                    <!-- Exclude conditions -->
                                     <fd-token
                                         fd-toolbar-item
                                         fdOverflowPriority="high"
                                         class="fdp-value-help-dialog__selection-token"
                                         [compact]="true"
                                         (onCloseClick)="removeExcluded(item)"
-                                        *ngFor="let item of excludedItems"
-                                    >{{ !!tokenizerFn ? (item | displayFnPipe: tokenizerFn) : item[tokenViewField] }}
+                                        *ngFor="let item of excludedItems; trackBy:_trackByConditionFn"
+                                    >
+                                        <ng-container [ngTemplateOutlet]="conditionValue" [ngTemplateOutletContext]="{ item: item }"></ng-container>
                                     </fd-token>
                                 </fd-toolbar>
                                 <button
@@ -141,13 +146,13 @@
 </ng-template>
 
 <ng-template #selectedPanelTitle>
-    <span i18n="@@platformI18nValueHelpDialogSelectedItemsLabel">Selected items</span> ({{ selectedItems.length }})
+    <ng-container i18n="@@platformI18nValueHelpDialogSelectedItemsLabel">Selected items</ng-container> ({{ selectedItems.length }})
 </ng-template>
 <ng-template #excludedPanelTitle>
-    <span i18n="@@platformI18nValueHelpDialogExcludedItemsLabel">Excluded items</span> ({{ excludedItems.length }})
+    <ng-container i18n="@@platformI18nValueHelpDialogExcludedItemsLabel">Excluded items</ng-container> ({{ excludedItems.length }})
 </ng-template>
 <ng-template #noItemsPanelTitle>
-    <span i18n="@@platformI18nValueHelpDialogEmptySelectedLabel">No items selected</span>
+    <ng-container i18n="@@platformI18nValueHelpDialogEmptySelectedLabel">No items selected</ng-container>
 </ng-template>
 
 <ng-template #advancedSearchContent>
@@ -217,14 +222,18 @@
 
 <ng-template #selectionContent>
     <div class="table-header">
-        <h4><span i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</span> ({{ _displayedData.length }})</h4>
+        <h4><ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{ _displayedData.length }})</h4>
     </div>
     <ng-container *ngIf="_displayedFilters.length; else emptyFilters">
         <ng-content select="fdp-select-tab-settings"></ng-content>
     </ng-container>
 </ng-template>
 
-<ng-template #defineConditionsContent></ng-template>
+<ng-template #defineConditionsContent>
+    <ng-container *ngIf="_displayedFilters.length; else emptyFilters">
+        <ng-content select="fdp-define-tab-settings"></ng-content>
+    </ng-container>
+</ng-template>
 
 <ng-template #dialogTitleText>
     <ng-container>{{ dialogTitle }}</ng-container>
@@ -266,18 +275,18 @@
 
 <ng-template #desktopTabs>
     <fd-tab-list class="fdp-value-help-dialog__tabs" [(selectedIndex)]="selectedTab">
-        <fd-tab [title]="selectionTab.title" tabState="information" *ngIf="hasSelectionTab"></fd-tab>
-        <fd-tab [title]="defineTab.title" tabState="information" *ngIf="hasDefineTab"></fd-tab>
+        <fd-tab [title]="selectionTab.tabTitle" tabState="information" *ngIf="hasSelectionTab"></fd-tab>
+        <fd-tab [title]="defineTab.tabTitle" tabState="information" *ngIf="hasDefineTab"></fd-tab>
     </fd-tab-list>
 </ng-template>
 
 <ng-template #mobileTabs>
     <ul fd-list [compact]="true" size="s" [byline]="true" *ngIf="!hasSelectedTab">
         <li fd-list-item *ngIf="hasSelectionTab">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: selectionTab.title, type: _tabTypes.selectFromList}"></ng-container>
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: selectionTab.tabTitle, type: _tabTypes.selectFromList}"></ng-container>
         </li>
         <li fd-list-item *ngIf="hasDefineTab">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTab.title, type: _tabTypes.defineConditions}"></ng-container>
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTab.tabTitle, type: _tabTypes.defineConditions}"></ng-container>
         </li>
     </ul>
 </ng-template>
@@ -291,7 +300,14 @@
             <ng-container *ngTemplateOutlet="advancedHeader"></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.defineConditions">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTab.title, type: selectedTab}"></ng-container>
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTab.tabTitle, type: selectedTab}"></ng-container>
         </ng-container>
     </ng-container>
+</ng-template>
+
+<ng-template #conditionValue let-item="item">
+    <span *ngIf="item.strategy !== 'empty'; else emptyCondition">{{ item | displayFnPipe: conditionDisplayFn : _displayedFilters }}</span>
+</ng-template>
+<ng-template #emptyCondition>
+    &lt;<ng-container i18n="@@platformI18nValueHelpDialogEmptyCondition">Empty</ng-container>&gt;
 </ng-template>

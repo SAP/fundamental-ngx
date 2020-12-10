@@ -32,8 +32,8 @@ const exampleDataSource = () => {
         name: `${value}`,
         label: `Product ${value}`,
         advanced: index > 0,
-        include: index >= 0,
-        exclude: index >= 0
+        include: true,
+        exclude: true
       }
     })
   }
@@ -48,7 +48,7 @@ export class PlatformVhdBasicExampleComponent implements OnInit {
   originSource: Array<ExampleTestModel>;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
 
-  selectedValue = [];
+  actualValue: VhdValueChangeEvent = {};
   currentValue: VhdValueChangeEvent = {};
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class PlatformVhdBasicExampleComponent implements OnInit {
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
     console.log($event);
     this.currentValue = $event;
-    this.selectedValue = [...($event.selected || [])];
+    this.actualValue = {...$event };
   }
 
 }
