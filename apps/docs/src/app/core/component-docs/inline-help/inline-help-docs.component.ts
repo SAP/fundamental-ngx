@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+import * as inlineHelpTs from '!raw-loader!./examples/inline-help-example.component.ts';
 import * as inlineHelpSrc from '!raw-loader!./examples/inline-help-example.component.html';
 import * as inlineHelpTriggerHtml from '!raw-loader!./examples/inline-help-trigger-example.component.html';
-import * as inlineHelpScssCode from '!raw-loader!./examples/inline-help-example.component.scss';
+import * as inlineHelpStylesTs from '!raw-loader!./examples/inline-help-styled-example.component.ts';
 import * as inlineHelpStylesHtml from '!raw-loader!./examples/inline-help-styled-example.component.html';
+import * as inlineHelpTemplateHtml from '!raw-loader!./examples/inline-help-template-example/inline-help-template-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -17,7 +18,12 @@ export class InlineHelpDocsComponent {
             language: 'html',
             code: inlineHelpSrc,
             fileName: 'inline-help-example',
-            scssFileCode: inlineHelpScssCode
+        },
+        {
+            language: 'typescript',
+            code: inlineHelpTs,
+            fileName: 'inline-help-example',
+            component: 'InlineHelpExampleComponent'
         }
     ];
 
@@ -29,11 +35,25 @@ export class InlineHelpDocsComponent {
         }
     ];
 
+    inlineHelpTemplate: ExampleFile[] = [
+        {
+            language: 'html',
+            code: inlineHelpTemplateHtml,
+            fileName: 'inline-help-template-example'
+        }
+    ];
+
     inlineHelpStyles: ExampleFile[] = [
         {
             language: 'html',
             code: inlineHelpStylesHtml,
             fileName: 'inline-help-styled-example'
+        },
+        {
+            language: 'typescript',
+            code: inlineHelpStylesTs,
+            fileName: 'inline-help-styled-example',
+            component: 'InlineHelpStyledExampleComponent'
         }
     ];
 }

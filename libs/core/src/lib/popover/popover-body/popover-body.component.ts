@@ -51,20 +51,16 @@ export class PopoverBodyComponent {
      */
     _focusAutoCapture = false;
 
-
-    /** @hidden Properties bind to popover's body */
+    /** @hidden Property bind to popover's body */
     _popoverBodyWidth: number;
 
-    /** @hidden Properties bind to popover's body */
+    /** @hidden Property bind to popover's body */
     _popoverBodyMinWidth: number;
 
-    /** @hidden Properties bind to popover's body */
-    _templateToDisplay: TemplateRef<any>
+    /** @hidden Property bind to popover's body */
+    _maxWidth: number;
 
-    /** @hidden Properties bind to popover's body */
-    _maxWidth;
-
-    /** @hidden Properties bind to popover's body */
+    /** @hidden Property bind to popover's body */
     _closeOnEscapeKey = false;
 
     /** Classes added to arrow element */
@@ -73,8 +69,13 @@ export class PopoverBodyComponent {
     /** Additional style to put margin into body component, to give a place for arrow */
     _marginStyle: string = null;
 
+    /** @hidden text rendered inside popover's body */
     text: string = null;
 
+    /** @hidden template rendered inside popover's body */
+    _templateToDisplay: TemplateRef<any>
+
+    /** Close event from popover body */
     onClose = new Subject<void>();
 
     constructor(
