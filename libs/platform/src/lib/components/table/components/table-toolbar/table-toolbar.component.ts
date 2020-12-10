@@ -9,12 +9,13 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { SearchInput, SuggestionItem } from '../../../search-field/search-field.component';
+import { SearchInput, SuggestionItem } from '../../interfaces/search-field.interface';
 import { ContentDensity as CompactCozyContentDensity } from '../../../form/form-control';
 
 import { ContentDensity } from '../../enums';
 import { TableComponent } from '../../table.component';
 import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-toolbar-actions.component';
+import { TableToolbarWithTemplate, TABLE_TOOLBAR } from './table-toolbar';
 
 /**
  * The component that represents a table toolbar.
@@ -25,12 +26,14 @@ import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-too
  * </fdp-table-toolbar>
  * ```
  * */
+
 @Component({
     selector: 'fdp-table-toolbar',
     templateUrl: './table-toolbar.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }]
 })
-export class TableToolbarComponent implements AfterViewInit {
+export class TableToolbarComponent implements TableToolbarWithTemplate, AfterViewInit {
     /** Table title. */
     @Input()
     title: string;
@@ -90,6 +93,6 @@ export class TableToolbarComponent implements AfterViewInit {
 
     /** @hidden */
     _getCozyCompactSize(size: ContentDensity): CompactCozyContentDensity {
-        return size !== 'cozy' ? 'compact' : 'cozy'
+        return size !== 'cozy' ? 'compact' : 'cozy';
     }
 }

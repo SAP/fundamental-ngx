@@ -30,22 +30,9 @@ import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
-import {
-    FiltersComponent,
-    FiltersDialogData,
-    FiltersDialogResultData,
-    GroupingComponent,
-    GroupDialogData,
-    GroupDialogResultData,
-    SortingComponent,
-    SortDialogData,
-    SortDialogResultData,
-    TableColumnComponent,
-    TableToolbarComponent,
-    TableViewSettingsFilterComponent
-} from './components';
 
 import { CollectionFilter, SelectableRow, TableState } from './interfaces';
+import { SearchInput } from './interfaces/search-field.interface';
 import {
     TableColumnFreezeEvent,
     TableFilterChangeEvent,
@@ -59,7 +46,20 @@ import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
 
-import { SearchInput } from '../search-field/public_api';
+import { TableColumnComponent } from './components/table-column/table-column.component';
+import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
+import { TableViewSettingsFilterComponent } from './components/table-view-settings-filter/table-view-settings-filter.component';
+import { SortDialogData, SortDialogResultData, SortingComponent } from './components/dialogs/sorting/sorting.component';
+import {
+    FiltersComponent,
+    FiltersDialogData,
+    FiltersDialogResultData
+} from './components/dialogs/filtering/filters.component';
+import {
+    GroupDialogData,
+    GroupDialogResultData,
+    GroupingComponent
+} from './components/dialogs/grouping/grouping.component';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -208,8 +208,8 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     columns: QueryList<TableColumnComponent>;
 
     /** @hidden */
-    @ContentChild(forwardRef(() => TableToolbarComponent))
-    tableToolbarComponent: TableToolbarComponent;
+    @ContentChild(TABLE_TOOLBAR)
+    tableToolbar: TableToolbarWithTemplate;
 
     /** @hidden */
     viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
@@ -279,7 +279,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
 
     /** @hidden */
     _rtl = false;
-    
+
     /** @hidden */
     _totalItems = 0;
 
@@ -291,7 +291,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
 
     /** @hidden */
     private _ds: FdpTableDataSource<T>;
-    
+
     /** @hidden */
     private _tableDataSource: TableDataSource<T>;
 

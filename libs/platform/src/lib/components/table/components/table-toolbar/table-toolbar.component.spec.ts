@@ -1,5 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SearchInput } from '../../../search-field/public_api';
+
+import { SearchInput } from '../../interfaces/search-field.interface';
 
 import { TableComponent } from '../../table.component';
 

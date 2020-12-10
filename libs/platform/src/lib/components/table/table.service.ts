@@ -2,8 +2,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
-import { SearchInput } from '../search-field/search-field.component';
 import { CollectionFilter, CollectionGroup, CollectionSort, TableState } from './interfaces';
+import { SearchInput } from './interfaces/search-field.interface';
 import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
 import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange } from './models';

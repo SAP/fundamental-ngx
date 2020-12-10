@@ -1,4 +1,4 @@
-import { SearchInput } from '@fundamental-ngx/platform';
+import { SearchInput } from '../interfaces/search-field.interface';
 
 import { CollectionSort } from './collection-sort.interface';
 import { CollectionFilter } from './collection-filter.interface';

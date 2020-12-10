@@ -1,8 +1,8 @@
 <div #tableContainer>
     <!-- Toolbar -->
-    <ng-container *ngIf="tableToolbarComponent">
+    <ng-container *ngIf="tableToolbar">
         <ng-container
-            [ngTemplateOutlet]="tableToolbarComponent.contentTemplateRef"
+            [ngTemplateOutlet]="tableToolbar.contentTemplateRef"
             [ngTemplateOutletContext]="{
                     counter: _totalItems,
                     size: contentDensity,
