@@ -12,9 +12,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
-import { ColumnAlign } from '../enums';
-import { FdpCellDef } from '../directives/table-cell.directive';
-import { FdpHeaderCellDef } from '../directives/table-header.directive';
+import { ColumnAlign } from '../../enums';
+import { FdpCellDef, FdpHeaderCellDef } from '../../directives';
 
 enum ColumnAlignEnum {
     Start = 'left',
@@ -84,6 +83,22 @@ export class TableColumnComponent implements OnInit, OnDestroy {
         return this._align;
     }
 
+    /** Toggles sort feature for the column. */
+    @Input()
+    sortable = false;
+
+    /** Toggles filter feature for the column. */
+    @Input()
+    filterable = false;
+
+    /** Toggles grouping feature for the column. */
+    @Input()
+    groupable = false;
+
+    /** Toggles freeze feature for the column. */
+    @Input()
+    freezable = false;
+
     @ContentChild(FdpCellDef)
     fdpCellDef: FdpCellDef;
 
@@ -100,8 +115,7 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     private _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private readonly _rtlService: RtlService,
-        private readonly _cd: ChangeDetectorRef) { }
+    constructor(private readonly _rtlService: RtlService, private readonly _cd: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {

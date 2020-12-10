@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/core';
@@ -8,13 +8,14 @@ describe('TableColumnComponent - non RTL', () => {
     let component: TableColumnComponent;
     let fixture: ComponentFixture<TableColumnComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [TableColumnComponent],
-            providers: [RtlService]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TableColumnComponent],
+                providers: [RtlService]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableColumnComponent);
@@ -56,18 +57,19 @@ describe('TableColumnComponent - RTL', () => {
         rtl: of(true)
     };
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [TableColumnComponent],
-            providers: [
-                {
-                    provide: RtlService,
-                    useFactory: () => dirProvider
-                }
-            ]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TableColumnComponent],
+                providers: [
+                    {
+                        provide: RtlService,
+                        useFactory: () => dirProvider
+                    }
+                ]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TableColumnComponent);
