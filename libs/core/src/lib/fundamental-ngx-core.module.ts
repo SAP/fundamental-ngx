@@ -7,7 +7,6 @@ import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
-import { BadgeModule } from './badge/badge.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -86,7 +85,6 @@ import { ThemesService } from './utils/services/themes.service';
         ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
-        BadgeModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,
