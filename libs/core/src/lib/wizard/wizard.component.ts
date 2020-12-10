@@ -147,7 +147,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * navigation and the wizard footer, and calculating the height based on their presence.
      */
     private _calculateContentHeight(): number {
-        let shellbarHeight, wizardNavHeight = 0, wizardFooterHeight;
+        let shellbarHeight,
+            wizardNavHeight = 0,
+            wizardFooterHeight;
         shellbarHeight = this._getShellbarHeight();
         if (!this._isCurrentStepSummary()) {
             wizardNavHeight = this._getWizardNavHeight();
@@ -261,10 +263,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
              or if there's a summary and it is the second to last step
              */
             if (
-                step.completed &&
-                this.appendToWizard &&
-                (this.steps.last.isSummary ? step !== this.steps.toArray()[this.steps.length - 2] : step !== this.steps.last)
+                (step.completed &&
+                    this.appendToWizard &&
+                    (this.steps.last.isSummary
+                        ? step !== this.steps.toArray()[this.steps.length - 2]
+                        : step !== this.steps.last)) ||
+                (step.visited && step.branching && step.status === CURRENT_STEP_STATUS)
             ) {
+                step.content.nextStep._getElRef().nativeElement.style.display = 'inherit';
+            } else if (step.completed && this.appendToWizard) {
                 step.content.nextStep._getElRef().nativeElement.style.display = 'none';
             }
             if (
@@ -274,10 +281,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 if (step.status === CURRENT_STEP_STATUS && !step.completed) {
                     step.content.tallContent = true;
                 }
-                if (
-                    !templatesLength ||
-                    (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)
-                ) {
+                if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
                 } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
@@ -398,7 +402,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _showSummary(): void {
-        const summary = this.steps.filter(step => {
+        const summary = this.steps.filter((step) => {
             return step.isSummary;
         });
         this.contentTemplates = [summary[0].content.contentTemplate];

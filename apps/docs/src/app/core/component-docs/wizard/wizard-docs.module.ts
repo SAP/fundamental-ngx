@@ -8,9 +8,10 @@ import { WizardExampleComponent } from './examples/wizard-example.component';
 import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
 import {
     BarModule,
+    LayoutGridModule,
+    DialogModule,
     FormGroupModule,
     FormModule,
-    LayoutGridModule,
     RadioModule,
     TitleModule,
     WizardModule
@@ -42,7 +43,8 @@ const routes: Routes = [
         FormGroupModule,
         FormModule,
         TitleModule,
-        LayoutGridModule
+        LayoutGridModule,
+        DialogModule
     ],
     exports: [RouterModule],
     declarations: [
