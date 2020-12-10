@@ -97,10 +97,22 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
+              path: 'feed-list-item',
+                loadChildren: () =>
+                    import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
+            },
+            {
                 path: 'dynamic-side-content',
                 loadChildren: () =>
                     import('./component-docs/dynamic-side-content/dynamic-side-content-docs.module').then(
                         (m) => m.DynamicSideContentDocsModule
+                    )
+            },
+            {
+                path: 'feed-input',
+                loadChildren: () =>
+                    import('./component-docs/feed-input/feed-input-docs.module').then(
+                        (m) => m.FeedInputDocsModule
                     )
             },
             {
@@ -120,6 +132,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/fixed-card-layout/fixed-card-layout-docs.module').then(
                         (m) => m.FixedCardLayoutDocsModule
+                    )
+            },
+            {
+                path: 'flexible-column-layout',
+                loadChildren: () =>
+                    import('./component-docs/flexible-column-layout/flexible-column-layout-docs.module').then(
+                        (m) => m.FlexibleColumnLayoutDocsModule
                     )
             },
             {
@@ -209,6 +228,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'message-box',
+                loadChildren: () =>
+                    import('./component-docs/message-box/message-box-docs.module').then(
+                        (m) => m.MessageBoxDocsModule
+                    )
+            },
+            {
                 path: 'message-toast',
                 loadChildren: () =>
                     import('./component-docs/message-toast/message-toast-docs.module').then(
@@ -281,6 +307,13 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
             },
             {
+                path: 'rating-indicator',
+                loadChildren: () =>
+                    import('./component-docs/rating-indicator/rating-indicator-docs.module').then(
+                        (m) => m.RatingIndicatorDocsModule
+                    )
+            },
+            {
                 path: 'scroll-spy',
                 loadChildren: () =>
                     import('./component-docs/scroll-spy/scroll-spy-docs.module').then((m) => m.ScrollSpyDocsModules)
@@ -330,6 +363,13 @@ export const ROUTES: Routes = [
                 path: 'textarea',
                 loadChildren: () =>
                     import('./component-docs/textarea/textarea-docs.module').then((m) => m.TextareaDocsModule)
+            },
+            {
+                path: 'theme-switcher',
+                loadChildren: () =>
+                    import('./component-docs/theme-switcher/theme-switcher-docs.module').then(
+                        (m) => m.ThemeSwitcherDocsModule
+                    )
             },
             {
                 path: 'tile',

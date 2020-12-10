@@ -1,4 +1,7 @@
-<form [formGroup]="customForm" class="flex-form">
+<form
+    [formGroup]="customForm"
+    class="flex-form"
+>
     <div>
         <div fd-form-item>
             <label fd-form-label>Date Picker</label>
@@ -8,13 +11,19 @@
                 formControlName="date"
             >
             </fd-date-picker>
-            <fd-form-message *ngIf="isValid()" [type]="'success'">This is valid(success) DatePicker</fd-form-message>
-            <fd-form-message *ngIf="!isValid()" [type]="'error'">This is invalid(error) DatePicker</fd-form-message>
+            <fd-form-message
+                *ngIf="isValid()"
+                [type]="'success'"
+            >This is valid(success) DatePicker</fd-form-message>
+            <fd-form-message
+                *ngIf="!isValid()"
+                [type]="'error'"
+            >This is invalid(error) DatePicker</fd-form-message>
         </div>
         <br />
         Touched: {{ customForm.controls.date.touched }}<br />
         Dirty: {{ customForm.controls.date.dirty }}<br />
         Valid: {{ customForm.controls.date.valid }}<br />
-        Selected Date: {{ customForm.controls.date.value ? customForm.controls.date.value.toDateString() : 'null' }}
+        Selected Date: {{ customForm.controls.date.value?.toDateString() || 'null' }}
     </div>
 </form>

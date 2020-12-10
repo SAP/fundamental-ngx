@@ -42,8 +42,8 @@ describe('PopoverComponent', () => {
         component.noArrow = false;
         component.open();
 
-        component.arrowPosition = 'top';
-        component.marginStyle = 'margin-top: 0.5rem;';
+        component._arrowDirection = 'top';
+        component._marginStyle = 'margin-top: 0.5rem;';
 
         fixture.detectChanges();
 
@@ -56,8 +56,8 @@ describe('PopoverComponent', () => {
 
         expect(component['_overlayRef'].hasAttached()).toBeFalse();
         expect(component.isOpen).toBeFalse();
-        expect(component.arrowPosition).toBeFalsy();
-        expect(component.marginStyle).toBeFalsy();
+        expect(component._arrowDirection).toBeFalsy();
+        expect(component._marginStyle).toBeFalsy();
     });
 
     it('should call close on open input change', () => {
@@ -143,8 +143,8 @@ describe('PopoverComponent', () => {
         component.open();
         fixture.detectChanges();
         const arrowPosition = PopoverPosition.getArrowPosition(firstPosition);
-        expect(component.arrowPosition).toBe(arrowPosition);
-        expect(component.marginStyle).toBe(PopoverPosition.getMarginStyle(arrowPosition));
+        expect(component._arrowDirection).toBe(arrowPosition);
+        expect(component._marginStyle).toBe(PopoverPosition.getMarginStyle(arrowPosition));
 
         component.close();
         fixture.detectChanges();
@@ -156,8 +156,8 @@ describe('PopoverComponent', () => {
         fixture.detectChanges();
 
         const arrowSecondPosition = PopoverPosition.getArrowPosition(secondPosition);
-        expect(component.arrowPosition).toBe(arrowSecondPosition);
-        expect(component.marginStyle).toBe(PopoverPosition.getMarginStyle(arrowSecondPosition));
+        expect(component._arrowDirection).toBe(arrowSecondPosition);
+        expect(component._marginStyle).toBe(PopoverPosition.getMarginStyle(arrowSecondPosition));
     });
 
     it('should toggle open state on trigger event', () => {

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    DoCheck,
+    ElementRef,
+    Input,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 
 export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -6,7 +14,7 @@ export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
     // tslint:disable-next-line
     selector: 'h1[fd-title], h2[fd-title], h3[fd-title], h4[fd-title], h5[fd-title], h6[fd-title]',
     exportAs: 'fd-title',
-    template: `<ng-content></ng-content>`,
+    template: '<ng-content></ng-content>',
     host: {
         class: 'fd-title',
         '[class.fd-title--wrap]': 'wrap'
@@ -15,7 +23,7 @@ export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TitleComponent implements OnInit {
+export class TitleComponent implements OnInit, DoCheck {
     /** The size of the header */
     @Input()
     headerSize: HeaderSizes = null;
@@ -24,16 +32,34 @@ export class TitleComponent implements OnInit {
     @Input()
     wrap = false;
 
-    constructor(private _elRef: ElementRef) {}
+    /** @hidden */
+    private _appliedHeaderSize: number;
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
+        this._setHeaderSize();
+    }
+
+    /** @hidden */
+    ngDoCheck(): void {
+        if (this.headerSize && this._appliedHeaderSize !== this.headerSize) {
+            this._setHeaderSize();
+        }
+    }
+
+    /** @hidden */
+    private _setHeaderSize(): void {
         let headerSize;
         if (this.headerSize) {
             headerSize = this.headerSize;
         } else {
-            headerSize = this._elRef.nativeElement.tagName.charAt(1);
+            headerSize = this._elementRef.nativeElement.tagName.charAt(1);
         }
-        this._elRef.nativeElement.classList.add('fd-title--h' + headerSize);
+        this._elementRef.nativeElement.classList.add(`fd-title--h${headerSize}`);
+        this._elementRef.nativeElement.classList.remove(`fd-title--h${this._appliedHeaderSize}`);
+        this._appliedHeaderSize = headerSize;
     }
 }

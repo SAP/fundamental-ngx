@@ -4,6 +4,7 @@ export interface Movie {
     title: string;
     secondary: string;
     navigationIndicator: boolean;
+    link: string;
 }
 
 @Component({
@@ -12,10 +13,10 @@ export interface Movie {
 })
 export class PlatformDisplayListItemBorderLessExampleComponent {
     items: Movie[] = [
-        { title: 'Star War', secondary: 'Next session', navigationIndicator: true },
-        { title: 'Spide Man', secondary: 'No latest release', navigationIndicator: false },
-        { title: 'Iron Man', secondary: 'No latest release', navigationIndicator: false },
-        { title: 'Wonder Women', secondary: 'Next session', navigationIndicator: true }];
+        { title: 'Star War', secondary: 'Next session', navigationIndicator: true, link: '/platform/home' },
+        { title: 'Spide Man', secondary: 'No latest release', navigationIndicator: false, link: '' },
+        { title: 'Iron Man', secondary: 'No latest release', navigationIndicator: false, link: '' },
+        { title: 'Wonder Women', secondary: 'Next session', navigationIndicator: true, link: '' }];
 
 }
 

@@ -16,6 +16,7 @@ import {
     Optional,
     Output,
     QueryList,
+    Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -34,7 +35,7 @@ import { RtlService } from '../utils/services/rtl.service';
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
 
-export type CarouselIndicatorsOrientation = 'bottom' | 'top';
+export type PageIndicatorsOrientation = 'bottom' | 'top';
 
 export enum SlideDirection {
     None,
@@ -64,7 +65,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Sets aria-label attribute for carousel */
     @Input()
-    ariaLabel = 'carousel';
+    ariaLabel = null;
 
     /** Sets aria-labelledby attribute for carousel */
     @Input()
@@ -76,7 +77,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** Sets position of page indicator container. Default position is bottom. */
     @Input()
-    carouselIndicatorsOrientation: CarouselIndicatorsOrientation = 'bottom';
+    pageIndicatorsOrientation: PageIndicatorsOrientation = 'bottom';
 
     /** Height for carousel container */
     @Input()
@@ -155,13 +156,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
     /**
-     * Returns the `role` attribute of the carousel.
+     * @hidden Returns the `role` attribute of the carousel.
      */
     @HostBinding('attr.role')
     role = 'region';
 
     /**
-     * Returns the `tabIndex` of the carousel component.
+     * @hidden Returns the `tabIndex` of the carousel component.
      */
     @HostBinding('attr.tabindex')
     get tabIndex(): number {
@@ -169,7 +170,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * Sets the overflow to auto value.
+     * @hidden Sets the overflow to auto value.
      */
     @HostBinding('style.overflow')
     overflow = 'auto';
@@ -178,6 +179,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @ContentChildren(CarouselItemComponent, { descendants: true })
     slides: QueryList<CarouselItemComponent>;
 
+    /** @hidden */
     @ViewChild('slideContainer')
     slideContainer: ElementRef;
 
@@ -185,7 +187,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     currentActiveSlidesStartIndex = 0;
 
     /** @hidden handles rtl service */
-    dir: string;
+    dir = 'ltr';
 
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
@@ -206,10 +208,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     private _slideSwiped = false;
 
+    private _prevBtnClickedAtStart = true;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
+        private readonly _elementRef: ElementRef,
+        private _renderer: Renderer2,
         private _changeDetectorRef: ChangeDetectorRef,
         private _carouselService: CarouselService,
         @Optional() private readonly _rtlService: RtlService
@@ -235,11 +241,20 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         } else {
             this.leftButtonDisabled = true;
             this.rightButtonDisabled = true;
-        }
-        this._carouselService.activeChange.subscribe((event) => this._onSlideSwipe(event));
-        this._carouselService.dragStateChange.subscribe((event) => this._onSlideDrag(event));
 
-        this._slidesCopy = this.slides.toArray().slice();
+            // Disable swipe when there is no carousel item
+            this.swipeEnabled = false;
+            this.navigation = false;
+        }
+
+        // Keep copy of original slide array, for indicator purpose.
+        // In case of looped carousel, original slides array changes.
+        this._slidesCopy = this.slides.toArray();
+
+        this._subscribeServiceEvents();
+
+        // Subscribe to dynamic update of slides
+        this.slides.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._onSlideUpdates());
         this._changeDetectorRef.markForCheck();
     }
 
@@ -268,58 +283,104 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** @hidden */
-    public get getPageIndicatorLabel(): string {
+    get getPageIndicatorLabel(): string {
         return `${this.currentActiveSlidesStartIndex + 1} ${this.resourceStrings.fd_carousel_of} ${
             this.pageIndicatorsCountArray.length
         }`;
     }
 
     /** @hidden */
-    public get screenReaderLabel(): string {
+    get screenReaderLabel(): string {
         return `${this.resourceStrings.fd_carousel_reader} ${this.currentActiveSlidesStartIndex + 1} ${
             this.resourceStrings.fd_carousel_of
         } ${this.pageIndicatorsCountArray.length}`;
     }
 
     /** @hidden */
-    @HostListener('keydown.arrowright', ['$event'])
-    public onKeydownArrowRight(event): void {
-        event.preventDefault();
-        if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
-            return;
-        } else {
-            this.next();
+    _focus(): void {
+        const el = this._elementRef.nativeElement;
+        if (el !== document.activeElement) {
+            el.focus({ preventScroll: true });
         }
     }
 
     /** @hidden */
-    @HostListener('keydown.arrowleft', ['$event'])
-    public onKeydownArrowLeft(event): void {
+    @HostListener('keydown.arrowright', ['$event'])
+    onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
-        if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
-            return;
-        } else {
-            this.previous();
-        }
+        this.next();
+    }
+
+    /** @hidden */
+    @HostListener('keydown.arrowleft', ['$event'])
+    onKeydownArrowLeft(event: KeyboardEvent): void {
+        event.preventDefault();
+        this.previous();
     }
 
     /** Transitions to the previous slide in the carousel. */
-    public previous(): void {
+    previous(): void {
+        if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
+            return;
+        }
         this.rightButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
+        this._preventDefaultBtnFocus();
         this._carouselService.pickPrevious(this.dir);
-        this._notifySlideChange(SlideDirection.PREVIOUS);
+
+        /** Handle looped carousel, first click on prev button. */
+        if (this.loop && this._prevBtnClickedAtStart) {
+            const slidesArray = this.slides.toArray();
+            this._carouselService.goToItem(slidesArray[Math.ceil(this.slides.length / 2) - 1], true, this.dir);
+            slidesArray[Math.ceil(this.slides.length / 2) - 1].visibility = 'visible';
+            this.slideChange.emit(new CarouselActiveSlides([slidesArray[Math.ceil(this.slides.length / 2) - 1]], 'Previous'));
+        } else {
+            /** Have to refactor the _notifySlideChange to get rid of else condition */
+            this._notifySlideChange(SlideDirection.PREVIOUS);
+        }
+        this._prevBtnClickedAtStart = false;
         this._changeDetectorRef.detectChanges();
     }
 
     /** Transitions to the next slide in the carousel. */
-    public next(): void {
+    next(): void {
+        if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
+            return;
+        }
+        // Handles looped carousel, first navigation is prev button.
+        this._prevBtnClickedAtStart = false;
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
+        this._preventDefaultBtnFocus();
         this._carouselService.pickNext(this.dir);
         this._notifySlideChange(SlideDirection.NEXT);
         this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden Subscribe to carousel service events */
+    private _subscribeServiceEvents(): void {
+        this._carouselService.activeChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => this._onSlideSwipe(event));
+        this._carouselService.dragStateChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => this._onSlideDrag(event));
+    }
+
+    /**
+     * @hidden Prevent native focus flow related to button, if button will be disable on focus state.
+     * It works only if carousel is not in circular loop.
+     */
+    private _preventDefaultBtnFocus(): void {
+        if (this.loop) {
+            return;
+        }
+        const isFirst = this.currentActiveSlidesStartIndex === 0;
+        const isLast = this.currentActiveSlidesStartIndex === this.pageIndicatorsCountArray.length - 1;
+        if (isFirst || isLast) {
+            this._elementRef.nativeElement.focus({ preventScroll: true });
+        }
     }
 
     /** @hidden Adjust position of active item, based on slide direction */
@@ -340,14 +401,16 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** Handles navigation button visibility */
+    /** @hidden Handles navigation button visibility */
     private _buttonVisibility(): void {
         if (!this.loop) {
             // Need to disable navigation button if either direction limit has reached.
             if (this.currentActiveSlidesStartIndex === 0) {
                 this.leftButtonDisabled = true;
+                this.rightButtonDisabled = false;
             } else if (this.slides.length - 1 === this.currentActiveSlidesStartIndex) {
                 this.rightButtonDisabled = true;
+                this.leftButtonDisabled = false;
             } else if (
                 this.visibleSlidesCount > 1 &&
                 this.currentActiveSlidesStartIndex + this.visibleSlidesCount >= this.slides.length
@@ -365,6 +428,21 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
+    /** @hidden Handle when slide is added or removed */
+    private _onSlideUpdates(): void {
+        this._slidesCopy = this.slides.toArray();
+        this.currentActiveSlidesStartIndex = 0;
+        this._carouselService.initialise(this._config, this.slides, this.slideContainer);
+        this._carouselService.active = null;
+        if (this.vertical) {
+            this._renderer.setStyle(this.slideContainer?.nativeElement, 'transform', 'translateY(0px)');
+        } else {
+            this._renderer.setStyle(this.slideContainer?.nativeElement, 'transform', 'translateX(0px)');
+        }
+        this._initializeCarousel();
+        this._changeDetectorRef.detectChanges();
+    }
+
     /** @hidden Initialize carousel with visible items */
     private _initializeCarousel(): void {
         // Handles navigator button enabled/disabled state
@@ -378,13 +456,16 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this.pageIndicatorsCountArray = new Array(this.slides.length - this.visibleSlidesCount + 1);
         }
 
-        for (
-            let index = this.currentActiveSlidesStartIndex;
-            index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount;
-            index++
-        ) {
-            this.slides.toArray()[index].visibility = 'visible';
-        }
+        this.slides.forEach((_slide, index) => {
+            if (
+                index >= this.currentActiveSlidesStartIndex &&
+                index < this.currentActiveSlidesStartIndex + this.visibleSlidesCount
+            ) {
+                _slide.visibility = 'visible';
+            } else {
+                _slide.visibility = 'hidden';
+            }
+        });
     }
 
     /** @hidden Initialize config for Carousel service */
@@ -398,7 +479,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /**
-     * Returns the slide swapping steps
+     * @hidden Returns the slide swapping steps
      */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
@@ -470,13 +551,18 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
+        const refreshDirection = () => {
+            this.dir = this._rtlService?.rtl.getValue() ? 'rtl' : 'ltr';
+            if (this._carouselService.items) {
+                this._carouselService.goToItem(this._carouselService.active, false, this.dir);
+            }
             this._changeDetectorRef.detectChanges();
-        });
+        };
+        refreshDirection();
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe(() => refreshDirection());
     }
 
-    /** On Swiping of slide, manage page indicator */
+    /** @hidden On Swiping of slide, manage page indicator */
     private _onSlideSwipe(event: PanEndOutput): void {
         this._slideSwiped = true;
         const firstActiveSlide = event.item;
@@ -503,7 +589,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             this._changeDetectorRef.markForCheck();
         } else {
             // After slide limit reached, if dragging starts then revert visibility
-            if (!this._slideSwiped) {
+            if (!this._slideSwiped && !this.loop) {
                 this._manageSlideVisibility(this.currentActiveSlidesStartIndex);
             }
         }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';
 import { Media } from '../thumbnail.component';
 
 @Component({
@@ -7,7 +7,7 @@ import { Media } from '../thumbnail.component';
     styleUrls: ['./thumbnail-image.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ThumbnailImageComponent {
+export class ThumbnailImageComponent implements OnChanges {
 
     @Input()
     mediaList: Media[];
@@ -18,8 +18,20 @@ export class ThumbnailImageComponent {
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
+    ngOnChanges(changes: SimpleChanges): void {
+        // Select first image by default, if none has been selected
+        if (changes.mediaList && Array.isArray(this.mediaList)) {
+            const alreadySelected: boolean = this.mediaList.some(image => image.selected);
+            if (!alreadySelected) {
+                this.mediaList[0].selected = true;
+            }
+        }
+    }
+
     /** @hidden */
     thumbnailClick(selectedMedia: Media): void {
+        this.mediaList.forEach(item => item.selected = false);
+        selectedMedia.selected = true;
         this.thumbnailClicked.emit(selectedMedia);
     }
 

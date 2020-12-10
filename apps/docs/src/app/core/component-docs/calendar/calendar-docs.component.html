@@ -1,4 +1,7 @@
-<fd-docs-section-title [id]="'calendar-standard'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-standard"
+    componentName="calendar"
+>
     Standard Calendar
 </fd-docs-section-title>
 <description>
@@ -20,13 +23,19 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-mobile'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-mobile"
+    componentName="calendar"
+>
     Mobile Calendar
 </fd-docs-section-title>
 <description>
     Calendar component has a dedicated mode for mobile devices. When used in mobile mode, the calendar should be wrapped
     inside a dialog component. Examples of various dialog usages can be found
-    <a fd-link [routerLink]="'/core/dialog'">here</a>. The mobile calendar can be used in landscape or portrait mode.
+    <a
+        fd-link
+        [routerLink]="'/core/dialog'"
+    >here</a>. The mobile calendar can be used in landscape or portrait mode.
 </description>
 <component-example>
     <fd-calendar-mobile-example></fd-calendar-mobile-example>
@@ -35,7 +44,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-options'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-options"
+    componentName="calendar"
+>
     Calendar Options
 </fd-docs-section-title>
 <description>
@@ -49,7 +61,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-range-hover'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-range-hover"
+    componentName="calendar"
+>
     Mark Range Days on Hover
 </fd-docs-section-title>
 <description>
@@ -63,13 +78,19 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-special'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-special"
+    componentName="calendar"
+>
     Calendar with Special Days
 </fd-docs-section-title>
 <description>
     Special coloring classes can be applied to grid days by passing an object to <code>[specialDaysRules]</code>. A list
     of special day numbers can be found
-    <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html"> here </a>. Similar to the block
+    <a
+        fd-link
+        href="https://sap.github.io/fundamental-styles/components/calendar.html"
+    > here </a>. Similar to the block
     function, <code>[specialDaysRules]</code> takes an FdDate object as a parameter and returns true/false.
 </description>
 <component-example>
@@ -79,7 +100,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-grid'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-grid"
+    componentName="calendar"
+>
     Calendar Years Grid
 </fd-docs-section-title>
 <description>
@@ -94,7 +118,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-range'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-range"
+    componentName="calendar"
+>
     Range Selection Calendar
 </fd-docs-section-title>
 <description>
@@ -111,7 +138,10 @@
 <code-example [exampleFiles]="calendarRangeSource"></code-example>
 
 <separator></separator>
-<fd-docs-section-title [id]="'calendar-prog-dateChange'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-prog-dateChange"
+    componentName="calendar"
+>
     Programmatic Date Change
 </fd-docs-section-title>
 <description>
@@ -125,7 +155,10 @@
 <code-example [exampleFiles]="calendarProgrammaticallySource"></code-example>
 
 <separator></separator>
-<fd-docs-section-title [id]="'calendar-mondayStart'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-mondayStart"
+    componentName="calendar"
+>
     Monday Start Calendar
 </fd-docs-section-title>
 <description>
@@ -139,14 +172,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-internationalization'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-internationalization"
+    componentName="calendar"
+>
     Internationalization
 </fd-docs-section-title>
 <description>
-    The calendar uses a custom service called CalendarI18n to populate the month names, week days, etc. It also uses a
-    separate service called CalendarI18nLabels to populate aria labels in the component itself. After changing the
-    language, to detect changes, it is mandatory to call <code>calendarI18nLabels.labelsChange.next()</code> and
-    <code>calendarI18n.i18nChange.next()</code>, which will trigger change detection on calendar's components.
+    The calendar relies on a DatetimeAdapter to retrieve any date info including data to populate the month names, week
+    days, etc. It also uses a
+    separate service called CalendarI18nLabels to populate specific aria labels in the component itself.
 </description>
 <component-example>
     <fd-calendar-i18n-example></fd-calendar-i18n-example>
@@ -155,7 +190,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'calendar-internationalization-momentJs'" [componentName]="'calendar'">
+<!-- Moment i18n example is commented here cause there is no DatetimeAdapter<Moment> yet -->
+<!-- <fd-docs-section-title
+    id="calendar-internationalization-momentJs"
+    componentName="calendar"
+>
     Internationalization With Moment.js
 </fd-docs-section-title>
 <description>
@@ -169,9 +208,12 @@
 </component-example>
 <code-example [exampleFiles]="calendari18nMoment"></code-example>
 
-<separator></separator>
+<separator></separator> -->
 
-<fd-docs-section-title [id]="'calendar-reactiveForm'" [componentName]="'calendar'">
+<fd-docs-section-title
+    id="calendar-reactiveForm"
+    componentName="calendar"
+>
     Calendar in Reactive Form
 </fd-docs-section-title>
 <description>The Calendar component may also be used within Angular Reactive Forms.</description>

@@ -1,21 +1,19 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, Input, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {Placement} from 'popper.js';
 import { BasePopoverClass } from '../../popover/base/base-popover.class';
 
 @Component({
     selector: 'fd-product-switch',
     templateUrl: './product-switch.component.html',
-    styleUrls: ['./product-switch.component.scss'],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductSwitchComponent extends BasePopoverClass {
     @Input ()
-    placement: Placement = 'bottom-end'
+    placement: Placement = 'bottom-end';
 
-    /**Input to set the aria label */
+    /** Input to set the aria label */
     @Input ()
-    ariaLabel = 'popover-button';
+    ariaLabel = 'Product Switch';
 
     /** Whether the product switch is disabled. */
     @Input()

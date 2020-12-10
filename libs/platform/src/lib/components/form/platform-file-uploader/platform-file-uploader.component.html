@@ -1,0 +1,17 @@
+<fd-file-uploader
+    [ariaLabel]="ariaLabel"
+    [ariaLabelledBy]="ariaLabelledBy"
+    [placeholder]="placeholder"
+    [buttonLabel]="buttonLabel"
+    [buttonAriaLabel]="buttonAriaLabel"
+    [disabled]="disabled"
+    [accept]="accept"
+    [multiple]="multiple"
+    [compact]="contentDensity == 'compact'"
+    [maxFileSize]="maxFileSize"
+    [minFileSize]="minFileSize"
+    [state]="stateType"
+    [(ngModel)]="value"
+    (selectedInvalidFiles)="handleInvalidFiles($event)"
+    (selectedFilesChanged)="handleFileChange($event)"
+></fd-file-uploader>

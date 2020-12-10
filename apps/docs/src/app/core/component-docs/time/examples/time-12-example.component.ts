@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-time-12-example',
     templateUrl: './time-12-example.component.html'
 })
 export class Time12ExampleComponent {
-    timeMeridianObject = { hour: 9, minute: 0, second: 0 };
+    timeMeridian = new FdDate().setTime(9, 0, 0);
 }

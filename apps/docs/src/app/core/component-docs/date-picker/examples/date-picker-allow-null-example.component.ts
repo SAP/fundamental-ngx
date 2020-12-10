@@ -10,12 +10,12 @@ import { DatePickerComponent, FdDate } from '@fundamental-ngx/core';
             [state]="isInvalid() ? 'error' : 'success'"
         ></fd-date-picker>
         <br />
-        <div>Selected Date: {{ date ? date.toDateString() : 'null' }}</div>`
+        <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>`
 })
 export class DatePickerAllowNullExampleComponent {
-    @ViewChild(DatePickerComponent) datePicker: DatePickerComponent;
+    @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
 
-    date = FdDate.getToday();
+    date = FdDate.getNow();
 
     isInvalid(): boolean {
         return !this.datePicker || !this.datePicker.isModelValid();

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+
 import { FdpFormGroupModule } from './components/form/form-group/fdp-form.module';
 import { PlatformButtonModule } from './components/button/button.module';
 import { PlatformSearchFieldModule } from './components/search-field/search-field.module';
@@ -19,13 +21,22 @@ import { PlatformCheckboxGroupModule } from './components/form/checkbox-group/ch
 import { PlatformPanelModule } from './components/panel/panel.module';
 import { PlatformSwitchModule } from './components/form/switch/switch.module';
 import { PlatformObjectStatusModule } from './components/object-status/object-status.module';
-import { PlatformInputModule, PlatformStepInputModule, PlatformInputGroupModule } from './components/form/public_api';
+import {
+    PlatformInputModule,
+    PlatformStepInputModule,
+    PlatformInputGroupModule,
+    PlatformMultiInputModule,
+    PlatformFileUploaderModule
+} from './components/form/public_api';
 import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
 import { PlatformComboboxModule } from './components/form/combobox';
 import { PlatformThumbnailModule } from './components/thumbnail/public_api';
 import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
 import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 import { PlatformTableModule } from './components/table/table.module';
+import { PlatformDatetimePickerModule } from './components/form/datetime-picker/datetime-picker.module';
+import { PlatformMultiInputMobileModule } from './components/form/multi-input/multi-input-mobile/multi-input-mobile.module';
+import { PlatformFeedInputModule } from './components/feed-input/feed-input.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -57,7 +68,13 @@ import { PlatformTableModule } from './components/table/table.module';
         PlatformThumbnailModule,
         PlatformObjectMarkerModule,
         PlatformObjectAttributeModule,
-        PlatformTableModule
+        PlatformTableModule,
+        PlatformDatetimePickerModule,
+        PlatformMultiInputModule,
+        PlatformMultiInputModule,
+        PlatformMultiInputMobileModule,
+        PlatformFeedInputModule,
+        PlatformFileUploaderModule
     ]
 })
-export class FundamentalNgxPlatformModule { }
+export class FundamentalNgxPlatformModule {}

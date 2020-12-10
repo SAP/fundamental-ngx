@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-time-only-hours-example',
     templateUrl: './time-only-hours-example.component.html'
 })
 export class TimeOnlyHoursExampleComponent {
-    onlyHoursTime = { hour: 12, minute: null, second: null };
+    onlyHoursTime = new FdDate().setTime(12, null, null);
 }

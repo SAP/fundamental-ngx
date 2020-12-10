@@ -1,0 +1,128 @@
+<fd-docs-section-title id="object-based" componentName="message-box">
+    Object based message box
+</fd-docs-section-title>
+<description>
+    The easiest and fastest way to create a simple message box is to use object based approach. Message box content can
+    be declared as a <code>MessageBoxContent</code> and passed as an argument to <code>MessageBoxService</code>.
+    To create a message box with more complex content use template reference as <code>MessageBoxContent.content</code>.
+</description>
+<component-example>
+    <fd-object-based-message-box-example></fd-object-based-message-box-example>
+</component-example>
+<code-example [exampleFiles]="objectBased"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="template-based" componentName="message-box">
+    Template based message box
+</fd-docs-section-title>
+<description>
+    The message box can be declared inside the <code>ng-template</code> and opened with <code>MessageBoxService</code>
+    using the template reference. Each template based message box can use the following context values:
+    <ul>
+        <li>MessageBoxRef - <code>implicit</code></li>
+        <li>MessageBoxConfig - <code>messageBoxConfig</code></li>
+    </ul>
+    The MessageBoxRef and MessageBoxConfig references need to be passed to the message box component when using
+    template based message box. To receive message box dismiss/close reasons subscribe to the <code>afterClosed</code>
+    observable.
+    <ul>
+        <li>Use <code>fd-message-box-footer-button</code> to wrap footer buttons and create space between them.</li>
+        <li>
+            Add <code>fd-message-box-decisive-button</code> to key buttons like "Save" or "Cancel" to add proper
+            styles.
+        </li>
+        <li>
+            By default after opening the message box first focusable element will be focused. To focus specific
+            element after opening the message box, use <code>fd-initial-focus</code> directive.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fd-message-box-open-template-example></fd-message-box-open-template-example>
+</component-example>
+<code-example [exampleFiles]="templateBased"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="component-based" componentName="message-box">
+    Component based message box
+</fd-docs-section-title>
+<description>
+    To open a component based message box provide the component class to the <code>MessageBoxService</code> open method.
+    Inject the <code>MessageBoxRef</code> dependency inside the component to access message box methods and data. Data
+    available in <code>MessageBoxRef</code> can be provided in the <code>MessageBoxRef</code> object and passed as an
+    argument to the <code>MessageBoxService.open()</code> method.
+</description>
+<component-example>
+    <fd-component-based-message-box-example></fd-component-based-message-box-example>
+</component-example>
+<code-example [exampleFiles]="componentBased"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="semantic-types" componentName="message-box">
+    Semantic types
+</fd-docs-section-title>
+<description>
+    Message box supports various semantic types to visually highlight the type of the message. Use <code>MessageBoxConfig.type</code>
+    to create various types of message box.
+</description>
+<component-example>
+    <fd-semantic-types-example></fd-semantic-types-example>
+</component-example>
+<code-example [exampleFiles]="semanticTypes"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-position" componentName="message-box">
+    Message box positioning
+</fd-docs-section-title>
+<description>
+    The placement of the Message box on the screen can be customized through the <code>MessageBoxConfig.position</code>
+    property.
+    <br/><br/>
+    Message Box can be configured <strong>globally</strong> by providing <code>MESSAGE_BOX_DEFAULT_CONFIG</code> token.
+    Check <a [routerLink]="['/core/global-config']" fragment="message-box-config">Global Configuration page</a> for more
+    information.
+</description>
+<component-example>
+    <fd-message-box-position-example></fd-message-box-position-example>
+</component-example>
+<code-example [exampleFiles]="customPosition"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="mobile-mode" componentName="message-box">
+    Message box on mobile devices
+</fd-docs-section-title>
+<description>
+    To display the Message box component in mobile mode, use the <code>MessageBoxConfig.mobile</code> property. Message
+    box on mobile devices uses the full viewport and adjusts other elements for smaller screens. To create additional
+    spacing around the Message box in mobile mode, use the <code>MessageBoxConfig.mobileOuterSpacing</code> property.
+</description>
+<component-example>
+    <fd-message-box-mobile-example></fd-message-box-mobile-example>
+</component-example>
+<code-example [exampleFiles]="mobileMode"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="complex-template" componentName="message-box">
+    Complex template
+</fd-docs-section-title>
+<description>
+    To create more complex message box it is possible to provide custom header, subheader and footer templates.
+    To provide these custom templates, create an element with one of the following directives:
+    <ul>
+        <li>Header - <code>fdTemplate="header"</code></li>
+        <li>Subheader - <code>fdTemplate="subheader"</code></li>
+        <li>Footer - <code>fdTemplate="footer"</code></li>
+    </ul>
+    Custom templates are embedded views for the Bar Component so it is possible to use Bar Component features inside
+    them. For complex templates you may use the <code>fd-bar-element</code> as an equivalent of the <code>fd-message-box-footer-button</code>.
+</description>
+<component-example>
+    <fd-complex-template-example></fd-complex-template-example>
+</component-example>
+<code-example [exampleFiles]="complexTemplate"></code-example>

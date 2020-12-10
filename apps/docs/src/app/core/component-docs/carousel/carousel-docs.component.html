@@ -4,9 +4,19 @@
 <description>
     By default fd-carousel displays one active item and others remains hidden. Pagination container appears on bottom
     with dot indicators with active dot to show active item.
+    <br />
+    <br />
+    <b>Notes:</b><br />
+    By Default images used as carousel item will drag on non-touch devices, instead of swiping. To achieve swiping
+    behavior for these images,
+    below solutions can be applied.
+    <ul>
+        <li>use css solution. <code> pointer-events: none</code> </li>
+        <li>use javascript solution. <code> draggable="false" ondragstart="return false;"</code></li>
+    </ul>
 </description>
 <component-example>
-    <fd-carousel-one-active-item></fd-carousel-one-active-item>
+    <fd-carousel-one-active-item-example></fd-carousel-one-active-item-example>
 </component-example>
 <code-example [exampleFiles]="carouselSingle"></code-example>
 
@@ -17,7 +27,7 @@
     carousel movement is possible in vertical direction as well.
 </description>
 <component-example>
-    <fd-carousel-vertical-direction></fd-carousel-vertical-direction>
+    <fd-carousel-vertical-direction-example></fd-carousel-vertical-direction-example>
 </component-example>
 <code-example [exampleFiles]="carouselVertical"></code-example>
 
@@ -31,7 +41,19 @@
     <code>visibleSlidesCount=3</code>.
 </description>
 <component-example>
-    <fd-carousel-multiple-active-item></fd-carousel-multiple-active-item>
+    <fd-carousel-multiple-active-item-example></fd-carousel-multiple-active-item-example>
+</component-example>
+<code-example [exampleFiles]="carouselMultiItem"></code-example>
+
+<fd-docs-section-title id="carousel-multi-item-active" componentName="carousel">
+    Carousel with dynamic items
+</fd-docs-section-title>
+<description>
+    Carousel items can change dynamically, eg: when used inside search page. Carousel will reset when new items are
+    added on Carousel.
+</description>
+<component-example>
+    <fd-carousel-dynamic-items-example></fd-carousel-dynamic-items-example>
 </component-example>
 <code-example [exampleFiles]="carouselMultiItem"></code-example>
 
@@ -43,7 +65,7 @@
     <code>pageIndicator=false</code>.
 </description>
 <component-example>
-    <fd-carousel-no-page-indicator></fd-carousel-no-page-indicator>
+    <fd-carousel-no-page-indicator-example></fd-carousel-no-page-indicator-example>
 </component-example>
 <code-example [exampleFiles]="carouselNoIndicator"></code-example>
 
@@ -55,7 +77,7 @@
     item, either left side or right side.
 </description>
 <component-example>
-    <fd-carousel-hidden-navigation></fd-carousel-hidden-navigation>
+    <fd-carousel-hidden-navigation-example></fd-carousel-hidden-navigation-example>
 </component-example>
 <code-example [exampleFiles]="carouselHiddenNavigation"></code-example>
 
@@ -68,7 +90,7 @@
     inside content area use <code>navigatorInPageIndicator=false</code>.
 </description>
 <component-example>
-    <fd-carousel-content-navigation></fd-carousel-content-navigation>
+    <fd-carousel-content-navigation-example></fd-carousel-content-navigation-example>
 </component-example>
 <code-example [exampleFiles]="carouselContentNavigator"></code-example>
 
@@ -80,7 +102,7 @@
     is false and looping is not enabled on carousel.
 </description>
 <component-example>
-    <fd-carousel-looped-navigation></fd-carousel-looped-navigation>
+    <fd-carousel-looped-navigation-example></fd-carousel-looped-navigation-example>
 </component-example>
 <code-example [exampleFiles]="carouselLoopedNavigation"></code-example>
 
@@ -91,6 +113,17 @@
     Error message can be displayed as carousel content when loading item is not successful.
 </description>
 <component-example>
-    <fd-carousel-error-message></fd-carousel-error-message>
+    <fd-carousel-error-message-example></fd-carousel-error-message-example>
 </component-example>
 <code-example [exampleFiles]="carouselErrorMessage"></code-example>
+
+<fd-docs-section-title id="carousel-loading-content" componentName="carousel">
+    Carousel item loading indicator
+</fd-docs-section-title>
+<description>
+    When loading of Carousel content takes time, then for better user experience, busy indicator can be shown.
+</description>
+<component-example>
+    <fd-carousel-loading-content-example></fd-carousel-loading-content-example>
+</component-example>
+<code-example [exampleFiles]="carouselLoadingContent"></code-example>

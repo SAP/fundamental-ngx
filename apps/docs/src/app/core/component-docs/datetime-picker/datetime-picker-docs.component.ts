@@ -3,9 +3,6 @@ import { Component } from '@angular/core';
 import * as dateTimeSimpleHtml from '!raw-loader!./examples/datetime-example/datetime-example.component.html';
 import * as dateTimeSimpleTs from '!raw-loader!./examples/datetime-example/datetime-example.component.ts';
 
-import * as dateTimeNonMeridianHtml from '!raw-loader!./examples/datetime-non-meridian-example/datetime-non-meridian-example.component.html';
-import * as dateTimeNonMeridianTs from '!raw-loader!./examples/datetime-non-meridian-example/datetime-non-meridian-example.component.ts';
-
 import * as dateTimeProgHtml from '!raw-loader!./examples/datetime-program-example/datetime-program-example.component.html';
 import * as dateTimeProgTs from '!raw-loader!./examples/datetime-program-example/datetime-program-example.component.ts';
 
@@ -40,20 +37,6 @@ export class DatetimePickerDocsComponent {
             code: dateTimeSimpleTs,
             fileName: 'datetime-example',
             component: 'DatetimeExampleComponent'
-        }
-    ];
-
-    datetimeNonMer: ExampleFile[] = [
-        {
-            language: 'html',
-            code: dateTimeNonMeridianHtml,
-            fileName: 'datetime-non-meridian-example'
-        },
-        {
-            language: 'typescript',
-            code: dateTimeNonMeridianTs,
-            fileName: 'datetime-non-meridian-example',
-            component: 'DatetimeNonMeridianExampleComponent'
         }
     ];
 

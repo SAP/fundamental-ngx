@@ -1,85 +1,42 @@
-import { Component, Injectable, ViewChild } from '@angular/core';
-import { CalendarI18n, DatePickerComponent, FdDate } from '@fundamental-ngx/core';
+import { Component, LOCALE_ID, ViewChild } from '@angular/core';
+import { DatePickerComponent, FdDate, DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core';
 
 import moment from 'moment';
+// Moment locale data required for this example
 import 'moment/locale/es';
 import 'moment/locale/en-gb';
 import 'moment/locale/de';
 import 'moment/locale/fr';
 import 'moment/locale/bg';
 import 'moment/locale/pl';
-import { registerLocaleData } from '@angular/common';
-import localeFrench from '@angular/common/locales/fr';
-import localePolish from '@angular/common/locales/pl';
-import localeBulgarian from '@angular/common/locales/bg';
-import localeGb from '@angular/common/locales/en-GB';
-import localeDe from '@angular/common/locales/de';
-
-@Injectable()
-export class CustomI18nMomentCalendar extends CalendarI18n {
-    getDayAriaLabel(date: Date): string {
-        return date.getDate() + ' ' + moment.months()[date.getMonth()] + ' ' + date.getFullYear();
-    }
-
-    getAllFullMonthNames(): string[] {
-        return moment.months();
-    }
-
-    getAllShortMonthNames(): string[] {
-        return moment.monthsShort();
-    }
-
-    getAllShortWeekdays(): string[] {
-        return moment.weekdaysShort();
-    }
-}
 
 @Component({
     selector: 'fd-date-picker-complex-i18n-example',
     templateUrl: './date-picker-complex-i18n-example.component.html',
     styleUrls: ['./date-picker-complex-i18n-example.component.scss'],
     providers: [
+        { provide: LOCALE_ID, useValue: 'fr' },
         {
-            provide: CalendarI18n,
-            useClass: CustomI18nMomentCalendar
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
         }
     ]
 })
 export class DatePickerComplexI18nExampleComponent {
-    @ViewChild(DatePickerComponent) datePicker: DatePickerComponent;
+    @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;
 
-    constructor(private calendarI18nService: CalendarI18n) {
-        registerLocaleData(localeFrench, 'fr');
-        registerLocaleData(localePolish, 'pl');
-        registerLocaleData(localeBulgarian, 'bg');
-        registerLocaleData(localeGb, 'en-gb');
-        registerLocaleData(localeDe, 'de');
-        moment.locale('en-gb');
-    }
+    actualLocale = 'fr';
 
-    actualLocale = '';
+    date: FdDate = FdDate.getNow();
 
-    actualFormat = 'shortDate';
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 
-    actualMomentJsLang = '';
-
-    public date: FdDate = FdDate.getToday();
-
-    public refresh(): void {
-        this.datePicker.locale = this.actualLocale;
-        this.datePicker.format = this.actualFormat;
-        this.datePicker.handleSingleDateChange(this.date);
-        this.calendarI18nService.i18nChange.next();
-    }
-
-    public setLocale(locale: string): void {
-        this.actualMomentJsLang = locale;
+    setLocale(locale: string): void {
         this.actualLocale = locale;
-        moment.locale(locale);
-        this.refresh();
+        this.datetimeAdapter.setLocale(locale);
     }
 
-    public isSelected(momentJsLang: string): string {
-        return this.actualMomentJsLang === momentJsLang ? 'is-selected' : '';
+    isSelected(locale: string): string {
+        return this.actualLocale === locale ? 'is-selected' : '';
     }
 }

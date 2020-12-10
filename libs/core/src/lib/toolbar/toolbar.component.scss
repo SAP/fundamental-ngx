@@ -2,6 +2,10 @@
 
 .fd-toolbar {
 	position: relative;
+
+	.fd-form-label {
+		align-self: auto;
+	}
 }
 
 .fd-toolbar > * {
@@ -21,7 +25,6 @@
 }
 
 // TODO: Remove after merging https://github.com/SAP/fundamental-styles/pull/1851
-
 $fd-namespace: fd;
 $block: fd-toolbar;
 
@@ -82,5 +85,15 @@ $block: fd-toolbar;
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+	}
+}
+
+
+.#{$block}__overflow__body {
+	.fd-button--menu {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-width: 100%;
 	}
 }

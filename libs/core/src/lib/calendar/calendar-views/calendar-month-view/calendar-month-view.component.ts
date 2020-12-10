@@ -8,13 +8,18 @@ import {
     OnInit,
     OnDestroy,
     ChangeDetectorRef,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    Inject,
+    OnChanges,
+    SimpleChanges
 } from '@angular/core';
-import { FdDate } from '../../models/fd-date';
-import { CalendarI18n } from '../../i18n/calendar-i18n';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { DatetimeAdapter } from '../../../datetime/datetime-adapter';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '../../../datetime/datetime-formats';
 import { CalendarService } from '../../calendar.service';
+import { CalendarMonth } from '../../models/calendar-month';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -27,18 +32,7 @@ import { CalendarService } from '../../calendar.service';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarMonthViewComponent implements OnInit, OnDestroy {
-    /** A number offset used to achieve the 1-12 representation of the calendar */
-    private readonly _monthOffset: number = 1;
-
-    private readonly _amountOfColPerRow: number = 3;
-    private readonly _amountOfRows: number = 4;
-
-    private _monthNames: string[][];
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
+export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChanges {
     /** The id of the calendar passed from the parent component */
     @Input()
     id: string;
@@ -49,23 +43,56 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** A function that handles escape focus */
     @Input()
-    focusEscapeFunction: Function;
+    focusEscapeFunction: () => void;
+
+    /** A year the month view is referring to */
+    @Input()
+    year: number;
 
     /** An event fired when a new month is selected */
     @Output()
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
 
+    /** Month grid table */
+    calendarMonthListGrid: CalendarMonth[][];
+
+    /** A number offset used to achieve the 1-12 representation of the calendar */
+    private readonly _monthOffset: number = 1;
+
+    private readonly _amountOfColPerRow: number = 3;
+    private readonly _amountOfRows: number = 4;
+
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    private _initiated = false;
+
     constructor(
         private _eRef: ElementRef,
-        private _cdRef: ChangeDetectorRef,
-        private _calendarI18n: CalendarI18n,
-        private _calendarService: CalendarService
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _calendarService: CalendarService,
+        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._refreshMonthNames();
+        this._initiated = true;
         this._setupKeyboardService();
+        this._constructMonthGrid();
+
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._constructMonthGrid();
+            this._changeDetectorRef.markForCheck();
+        });
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this._initiated && ('monthSelected' in changes || 'year' in changes || 'id' in changes)) {
+            this._constructMonthGrid();
+        }
     }
 
     /** @hidden */
@@ -76,7 +103,7 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
     /** Get a number (1-12) representing the current month  */
     get currentMonth(): number {
-        return FdDate.getToday().month;
+        return this._dateTimeAdapter.getMonth(this._dateTimeAdapter.today());
     }
 
     /**  Getter for the private class member _monthOffset */
@@ -85,11 +112,11 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
     }
 
     /** Method for handling the mouse click event when a month is selected  */
-    selectMonth(selectedMonth: number, event?: MouseEvent): void {
+    selectMonth(monthCell: CalendarMonth, event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }
-        this.monthSelected = selectedMonth + this.monthOffset;
+        this.monthSelected = monthCell.month;
         this.monthClicked.emit(this.monthSelected);
     }
 
@@ -126,21 +153,41 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
         return id + this._monthOffset === this.monthSelected;
     }
 
-    /** Method that returns grid of short month names from currently provided calendarI18n service */
-    get monthNames(): string[][] {
-        return this._monthNames;
-    }
+    /** Method that create month grid with required meta data */
+    private _constructMonthGrid(): void {
+        const monthNames: string[] = this._dateTimeAdapter.getMonthNames('short');
 
-    /** Method that rewrite short month names, used mostly in case of i18n service language change */
-    private _refreshMonthNames(): void {
-        const monthNames: string[] = [...this._calendarI18n.getAllFullMonthNames()];
-        const twoDimensionMonthNames: string[][] = [];
+        const monthList: CalendarMonth[] = monthNames.map(
+            (monthName, index): CalendarMonth => {
+                const month = index + this.monthOffset;
+                return {
+                    month: month,
+                    label: monthName,
+                    ariaLabel: this._dateTimeAdapter.format(
+                        this._dateTimeAdapter.createDate(this.year, month, 1),
+                        this._dateTimeFormats.display.monthA11yLabel
+                    ),
+                    index: index,
+                    selected: month === this.monthSelected,
+                    current: month === this.currentMonth,
+                    tabIndex: month === this.monthSelected ? 0 : -1
+                };
+            }
+        );
+
+        this.calendarMonthListGrid = [];
         /** Creating 2d grid */
-        while (monthNames.length) {
-            twoDimensionMonthNames.push(monthNames.splice(0, this._amountOfColPerRow));
+        while (monthList.length) {
+            this.calendarMonthListGrid.push(monthList.splice(0, this._amountOfColPerRow));
         }
-        this._monthNames = twoDimensionMonthNames;
-        this._cdRef.markForCheck();
+
+        this.calendarMonthListGrid.forEach((row, rowIndex) => {
+            row.forEach((monthCell, colIndex) => {
+                monthCell.id = this.getId(this.getIndex(rowIndex, colIndex));
+            });
+        });
+
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Method to put configuration and listeners on calendar keyboard service */
@@ -155,8 +202,11 @@ export class CalendarMonthViewComponent implements OnInit, OnDestroy {
 
         this._calendarService.onKeySelect
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe((index) => this.selectMonth(index));
+            .subscribe((index) => this.selectMonth(this._getMonthList()[index]));
+    }
 
-        this._calendarI18n.i18nChange.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._refreshMonthNames());
+    /** Returns transformed 1d array from 2d month grid. */
+    private _getMonthList(): CalendarMonth[] {
+        return [].concat.apply([], this.calendarMonthListGrid);
     }
 }

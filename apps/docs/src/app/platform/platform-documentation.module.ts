@@ -11,7 +11,7 @@ import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AvatarModule } from '@fundamental-ngx/core';
-
+import { DocsThemeService } from '../documentation/services/docs-theme.service';
 
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
@@ -25,7 +25,8 @@ import { AvatarModule } from '@fundamental-ngx/core';
     ],
     providers: [
         { provide: 'CURRENT_LIB', useValue: 'platform' },
-        StackblitzService
+        StackblitzService,
+        DocsThemeService
     ]
 })
 export class PlatformDocumentationModule { }

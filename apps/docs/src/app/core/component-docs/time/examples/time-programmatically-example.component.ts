@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-time-programmatically-example',
     templateUrl: './time-programmatically-example.component.html'
 })
 export class TimeProgrammaticallyExampleComponent {
-    timeObject = { hour: 12, minute: 0, second: 0 };
+    time = new FdDate().setTime(12, 0, 0);
+
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
 
     change(): void {
-        this.timeObject.hour = 11;
-        this.timeObject = {...this.timeObject};
+        this.time = this.datetimeAdapter.setHours(this.time, 11);
     }
 }

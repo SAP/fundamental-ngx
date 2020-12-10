@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FdDate, FdRangeDate } from '@fundamental-ngx/core';
+import { DateRange, DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-range-example',
@@ -12,30 +12,25 @@ import { FdDate, FdRangeDate } from '@fundamental-ngx/core';
         >
         </fd-calendar>
         <br />
-        <div>Selected First Date: {{ selected.start.toDateString() }}</div>
+        <div>Selected First Date: {{ selected.start }}</div>
         <br />
-        <div>Selected Last Date: {{ selected.end.toDateString() }}</div>`
+        <div>Selected Last Date: {{ selected.end }}</div>`
 })
 export class CalendarRangeExampleComponent {
-    selected: FdRangeDate = {
-        start: new FdDate(2019, 10, 11),
-        end: new FdDate(2019, 10, 19)
-    };
+    selected: DateRange<FdDate> = new DateRange(new FdDate(2019, 10, 11), new FdDate(2019, 10, 19));
 
-    myDisableFunction2 = function (d: FdDate): boolean {
-        const day = d.getDay();
+    constructor(private datetimeAdapter: DatetimeAdapter<FdDate>) {}
+
+    myDisableFunction2 = (date: FdDate): boolean => {
+        const day = this.datetimeAdapter.getDayOfWeek(date);
         return day === 1;
     };
 
-    myDisableStartFunction = function (d: FdDate): boolean {
-        const time = d.getTimeStamp();
-        const currentTime = new FdDate(2019, 10, 10).getTimeStamp();
-        return time > currentTime;
+    myDisableStartFunction = (date: FdDate): boolean => {
+        return this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 10)) > 0;
     };
 
-    myDisableEndFunction = function (d: FdDate): boolean {
-        const time = d.getTimeStamp();
-        const currentTime = new FdDate(2019, 10, 20).getTimeStamp();
-        return time < currentTime;
+    myDisableEndFunction = (date: FdDate): boolean => {
+        return this.datetimeAdapter.compareDate(date, new FdDate(2019, 10, 20)) < 0;
     };
 }

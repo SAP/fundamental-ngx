@@ -39,10 +39,16 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @HostBinding('attr.aria-describedby')
     ariaDescribedBy: string;
 
+    /**
+     * Loading indicator when item is not yet loaded
+     */
+    @Input()
+    loading = false;
+
     /** Sets tooltip for carousel item */
     @Input()
     @HostBinding('attr.title')
-    title = 'carousel item';
+    title = null;
 
     /** Initial height value, needed when carousel is inside popover */
     @Input()
@@ -56,21 +62,32 @@ export class CarouselItemComponent implements CarouselItemInterface {
     @Input()
     value: any;
 
+    /** @hidden */
     @HostBinding('class.fd-carousel__item')
-    carouselItem = 'fd-carousel__item';
+    carouselItem = true;
 
+    /** @hidden */
     @HostBinding('class.fd-carousel__item--active')
     carouselItemActive = true;
 
-    /** Hide/show slide, useful for managing tab order */
-    @HostBinding('style.visibility')
-    visibility = 'hidden';
-
     /**
-     * Handling width height in IE versions.
+     * @hidden Handling width height in IE versions.
      */
     @HostBinding('class.fd-carousel--ie-handling')
     ieAutoWidth = true;
+
+    /** @hidden Hide/show slide, useful for managing tab order */
+    _visibility: 'visible' | 'hidden' = 'visible';
+
+    /** @hidden */
+    set visibility(visibility: 'visible' | 'hidden') {
+        this._visibility = visibility;
+        this._changeDetectorRef.detectChanges();
+    }
+
+    get visibility(): 'visible' | 'hidden' {
+        return this._visibility;
+    }
 
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
 
