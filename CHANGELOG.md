@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.46...v0.25.0-rc.47) (2020-12-10)
+
+
+### Bug Fixes
+
+* (Platform) accessibility fixes for Textarea ([#4057](https://github.com/SAP/fundamental-ngx/issues/4057)) ([f73410e](https://github.com/SAP/fundamental-ngx/commit/f73410e01f037956dcae4623796912f6d621fd90))
+
 ## [0.25.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.45...v0.25.0-rc.46) (2020-12-10)
 
 ## [0.25.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.44...v0.25.0-rc.45) (2020-12-10)
