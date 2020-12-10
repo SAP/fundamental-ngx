@@ -10,9 +10,7 @@ export class InputExampleComponent {}
     selector: 'fd-input-inline-help-example',
     templateUrl: './input-inline-help-example.component.html'
 })
-export class InputInlineHelpExampleComponent {
-    text = ''
-}
+export class InputInlineHelpExampleComponent {}
 
 @Component({
     selector: 'fd-input-state-example',

@@ -8,9 +8,8 @@
             <span *ngIf="!noLabelLayout">{{ label }}</span>
 
             <!-- We can support placement on FormGroup Level to be applied to all the form fields     -->
-<!--            <fd-inline-help *ngIf="hint" [placement]="hintPlacement">-->
-<!--                {{ hint }}-->
-<!--            </fd-inline-help>-->
+<!--            TODO: To be decided-->
+<!--            <fd-icon *ngIf="hint" glyph="question-mark" [placement]="hintPlacement" [fd-inline-help]="hint"></fd-icon>-->
         </label>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
     </div>
