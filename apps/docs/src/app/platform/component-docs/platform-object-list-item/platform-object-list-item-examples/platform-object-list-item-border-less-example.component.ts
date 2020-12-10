@@ -53,7 +53,12 @@ export class PlatformObjectListItemBorderLessExampleComponent {
             decimal: 2
         },
         {
-            title: 'Gladiator MX',
+            title: 'Apple Macintosh Performa/Power Macintosh 5200' +
+            'Checking looooooooooooooooooooooooooooooooooo' +
+            'ooooooooooooooooooooooooooooooooooo' +
+            'ooooooooooooooooooooooooooooooooooog text' +
+            'Macintosh Performa Power Macintosh 24/5200' +
+            'Macintosh Performa Power Macintosh 24/5200',
             introductionText: 'Gladiator product with discount',
             currency: 'Euro',
             amount: 27.50,
