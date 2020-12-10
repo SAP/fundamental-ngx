@@ -10,6 +10,7 @@ import {
 } from './interfaces';
 import { CollectionDateFilterStrategy, CollectionNumberFilterStrategy, CollectionStringFilterStrategy } from './enums';
 
+
 export const filterByString = (rows: SelectableRow[], filter: CollectionStringFilter): SelectableRow[] => {
     const filterValue = filter.value && filter.value.toLocaleLowerCase();
     const filterValue2 = (filter.value2 && filter.value2.toLocaleLowerCase()) || '';
