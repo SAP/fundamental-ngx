@@ -49,7 +49,7 @@ export class ValueHelpDialogService<T> {
     return this._originalData;
   }
 
-  setUid() {
+  setUid(): void {
     this._uid = 'fdp-vhd-' + vhiUniqueId++;
   }
 

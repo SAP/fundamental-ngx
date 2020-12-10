@@ -1,11 +1,16 @@
 @import '~fundamental-styles/dist/button';
 
-// TODO: Remove after adding flex to buttons on fundamental-styles library
-.fd-button--menu {
-    display: inline-flex;
-    align-items: center;
+// Remove after 0.13.1/0.14 is introduced into NGX
+.fd-button {
+	justify-content: center;
+}
 
-    .fd-button__text {
-        line-height: 1rem;
-    }
+.fd-button * + * {
+    margin-left: 0.375rem !important;
+}
+
+.fd-button * + [dir='rtl'],
+[dir='rtl'] .fd-button * + * {
+    margin-left: 0 !important;
+    margin-right: 0.375rem !important;
 }

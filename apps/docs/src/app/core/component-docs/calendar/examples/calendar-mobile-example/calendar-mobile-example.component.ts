@@ -7,7 +7,7 @@ import { DialogConfig, DialogService, FdDate } from '@fundamental-ngx/core';
     encapsulation: ViewEncapsulation.None
 })
 export class CalendarMobileExampleComponent {
-    datePicked: FdDate = FdDate.getToday();
+    datePicked: FdDate = FdDate.getNow();
 
     constructor(private _dialogService: DialogService) {}
 

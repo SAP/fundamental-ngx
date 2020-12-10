@@ -1,52 +1,61 @@
-<fd-docs-section-title [id]="'24HourClock'" [componentName]="'timePicker'">
-    24-Hour Time Picker
+<fd-docs-section-title
+    id="defaultTimePicker"
+    componentName="time"
+>
+    Default Time Picker
 </fd-docs-section-title>
-<description>This is the default time picker setting.</description>
+<description>
+    Some default settings such as <code>[displaySeconds]</code>, <code>[displayMinutes]</code>,
+    <code>[displayHours]</code> and <code>[meridian]</code> are based on the
+    <code>DateTimeFormats.display.timeInput</code> options.
+    <br />
+    For example if time picker format option contains hours, minutes and day period info then default options will be
+    the next:
+    <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="true"</code>, <code>[displayHours]="true"</code> and
+    <code>[meridian]="true"</code>.
+    The listed above options are applied to the Time component only and can be defined explicitly
+    if needed.
+</description>
 <component-example>
     <fd-time-picker-example></fd-time-picker-example>
 </component-example>
-<code-example [exampleFiles]="timePicker"></code-example>
+<code-example [exampleFiles]="defaultTimePicker"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'12HourTimePicker'" [componentName]="'time'">
-    12-Hour Time Picker
+<fd-docs-section-title
+    id="12HourTimePicker"
+    componentName="time"
+>
+    Time parsing/formatting
 </fd-docs-section-title>
-<description>Set <code>[meridian]="true"</code> to use a 12-hour clock.</description>
-<component-example>
-    <fd-time-picker-12-example></fd-time-picker-12-example>
-</component-example>
-<code-example [exampleFiles]="meridianTimePicker"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'timePickerWithoutSpinners'" [componentName]="'time'">
-    Time Picker Without Seconds
-</fd-docs-section-title>
-<description>Use <code>[displaySeconds]=false</code> to turn off seconds for the time picker.</description>
-<component-example>
-    <fd-time-picker-no-seconds-example></fd-time-picker-no-seconds-example>
-</component-example>
-<code-example [exampleFiles]="timePickerNoSeconds"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'timePickerWithoutMinutesSeconds'" [componentName]="'time'">
-    Time Picker Without Minutes and Seconds
-</fd-docs-section-title>
-<description
-    >Use <code>[displaySeconds]="false"</code>, <code>[displayMinutes]="false"</code> or
-    <code>[displayHours]="false"</code>
-    to turn off seconds, minutes or hours for the time picker. At least one of them should be enabled.
+<description>
+    There are several ways to define your specific options to format and parse time.
+    <ol>
+        <li>
+            Provide your own <code>DATE_TIME_FORMATS</code> and define
+            <code>display/parse timeInput</code>
+            option there.
+        </li>
+        <li>
+            Use time picker <code>[parseFormat]</code> and <code>[displayFormat]</code> options.
+            Please note that you must provided these options in a format that is understandable by DateAdapter that is
+            currently
+            used in your app.
+        </li>
+    </ol>
 </description>
 <component-example>
-    <fd-time-picker-only-hours-example></fd-time-picker-only-hours-example>
+    <fd-time-picker-format-example></fd-time-picker-format-example>
 </component-example>
-<code-example [exampleFiles]="timePickerOnlyHours"></code-example>
+<code-example [exampleFiles]="formatTimePicker"></code-example>
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'disabled'" [componentName]="'time'">
+<fd-docs-section-title
+    id="disabled"
+    componentName="time"
+>
     Disabled Time Picker
 </fd-docs-section-title>
 <description>Set <code>[disabled]="true"</code> to disable the time picker.</description>
@@ -57,7 +66,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'compact'" [componentName]="'time'">
+<fd-docs-section-title
+    id="compact"
+    componentName="time"
+>
     Compact Time Picker
 </fd-docs-section-title>
 <description>Set <code>[compact]="true"</code> to use compact time-picker.</description>
@@ -68,11 +80,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'null'" [componentName]="'time'">
+<fd-docs-section-title
+    id="null"
+    componentName="time"
+>
     Null Validity
 </fd-docs-section-title>
-<description
-    >Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.
+<description>Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them
+    invalid.
 </description>
 <component-example>
     <fd-time-picker-allow-null-example></fd-time-picker-allow-null-example>
@@ -81,18 +96,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'formatting'" [componentName]="'time'">
-    Formatting
-</fd-docs-section-title>
-<description>Providing a custom format for time is possible through providing service</description>
-<component-example>
-    <fd-time-picker-other-delimiter-example></fd-time-picker-other-delimiter-example>
-</component-example>
-<code-example [exampleFiles]="otherFormatTimePicker"></code-example>
-
-<separator></separator>
-
-<fd-docs-section-title [id]="'inForm'" [componentName]="'time'">
+<fd-docs-section-title
+    id="inForm"
+    componentName="time"
+>
     Time Picker in Form
 </fd-docs-section-title>
 <description>The time-picker component may also be used together with Angular reactive forms.</description>
@@ -103,10 +110,15 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'inForm'" [componentName]="'time'">
-    Time Picker with Locale
+<fd-docs-section-title
+    id="locale"
+    componentName="time"
+>
+    Time Picker Locale
 </fd-docs-section-title>
-<description>The time-picker component may also be used together with moment js to use the locale to determine the format.</description>
+<description>
+    The time-picker component is listening to the DateTimeAdapter locale, this locale can be changed dynamically.
+</description>
 <component-example>
     <fd-time-picker-locale-example></fd-time-picker-locale-example>
 </component-example>

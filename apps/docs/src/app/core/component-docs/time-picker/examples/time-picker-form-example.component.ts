@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TimePickerComponent } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-time-picker-form-example',
@@ -8,10 +8,9 @@ import { TimePickerComponent } from '@fundamental-ngx/core';
     styleUrls: ['time-picker-form-example.component.scss']
 })
 export class TimePickerFormExampleComponent {
-
     customForm = new FormGroup({
-        time: new FormControl(''),
-        disabledTime: new FormControl({ value: { hour: 12, minute: 34, second: 10 }, disabled: true })
+        time: new FormControl(),
+        disabledTime: new FormControl({ value: new FdDate().setTime(12, 34, 10), disabled: true })
     });
 
     isValid(): boolean {

@@ -1,3 +1,6 @@
-<fd-time [displaySeconds]="false" [(ngModel)]="timeNoSecondsObject"></fd-time>
+<fd-time
+    [displaySeconds]="false"
+    [(ngModel)]="timeNoSeconds"
+></fd-time>
 <br />
-Selected Time: {{ timeNoSecondsObject.hour }}h {{ timeNoSecondsObject.minute }}m
+Selected Time: {{ timeNoSeconds.hour }}h {{ timeNoSeconds.minute }}m

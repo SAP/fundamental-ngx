@@ -136,7 +136,7 @@ export class DefineTabSettingsComponent<T> extends ValueHelDialogBaseTab {
     this._excluded.splice(1, index);
   }
 
-  private getFilledCondition(items: IncludedEntity[]) {
+  private getFilledCondition(items: IncludedEntity[]): IncludedEntity[] {
     return items.filter(filter => {
       if (filter.strategy === VhdDefineStrategy.empty) {
         return true;

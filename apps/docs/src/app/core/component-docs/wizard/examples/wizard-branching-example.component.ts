@@ -1,29 +1,49 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { WizardStepStatus } from '@fundamental-ngx/core';
+import { Component, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { DialogService, WizardStepStatus } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-wizard-branching-example',
     templateUrl: './wizard-branching-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    styles: [
-        `
-            .fd-wizard-example .fd-wizard__content {
-                min-height: 300px;
-            }
-        `
-    ],
     host: {
         class: 'fd-wizard-example'
     }
 })
-export class WizardBranchingExampleComponent {
+export class WizardBranchingExampleComponent implements OnInit {
     step1status: WizardStepStatus = 'current';
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
 
-    step3label = 'Step 3: Payment Details';
+    paymentSelection = '';
 
-    paymentSelection: any;
+    oldPayment = '';
+
+    init = true;
+
+    constructor(private _dialogService: DialogService) {}
+
+    ngOnInit(): void {
+        this.oldPayment = this.paymentSelection;
+    }
+
+    paymentSelectionChanged(dialog: TemplateRef<any>): void {
+        if (this.oldPayment !== this.paymentSelection) {
+            if (!this.init) {
+                const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
+
+                dialogRef.afterClosed.subscribe(
+                    () => {
+                        this.oldPayment = this.paymentSelection;
+                    },
+                    () => {
+                        this.paymentSelection = this.oldPayment;
+                    }
+                );
+            } else {
+                this.init = false;
+            }
+        }
+    }
 
     goToStep(step: number): void {
         switch (step) {
@@ -37,11 +57,6 @@ export class WizardBranchingExampleComponent {
                 this.step1status = 'completed';
                 this.step2status = 'completed';
                 this.step3status = 'current';
-                if (this.paymentSelection === 'credit') {
-                    this.step3label = 'Step 3: Credit Card Details';
-                } else {
-                    this.step3label = 'Step 3: Bank Details';
-                }
                 break;
             }
         }

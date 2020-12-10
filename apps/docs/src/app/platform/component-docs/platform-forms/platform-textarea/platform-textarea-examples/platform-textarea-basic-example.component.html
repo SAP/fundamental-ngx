@@ -3,56 +3,56 @@
         <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" [object]="data">
             <fdp-form-field
                 #ff1
-                [id]="'basicTextarea'"
+                id="basicTextarea"
                 label="Basic Textarea with Platform Forms"
-                [placeholder]="'Start entering detailed description'"
+                placeholder="Start entering detailed description"
                 hint="This is tooltip help"
                 zone="zLeft"
                 rank="10"
-                hintPlacement="'left'"
+                hintPlacement="left"
             >
-                <fdp-textarea [name]="'basicTextarea'" [formControl]="ff1.formControl"></fdp-textarea>
+                <fdp-textarea name="basicTextarea" [formControl]="ff1.formControl"></fdp-textarea>
             </fdp-form-field>
 
             <fdp-form-field
                 #ff2
-                [id]="'readonlyDescription'"
+                id="readonlyDescription"
                 label="Readonly Textarea"
-                [placeholder]="'Start entering detailed description'"
+                placeholder="Start entering detailed description"
                 hint="This is tooltip help"
                 zone="zLeft"
                 rank="10"
-                hintPlacement="'left'"
+                hintPlacement="left"
             >
-                <fdp-textarea [name]="'readonlyDescription'" [formControl]="ff2.formControl" [readonly]="true">
+                <fdp-textarea name="readonlyDescription" [formControl]="ff2.formControl" [readonly]="true">
                 </fdp-textarea>
             </fdp-form-field>
 
             <fdp-form-field
                 #ff3
-                [id]="'disabledDescription'"
+                id="disabledDescription"
                 label="Disabled Textarea"
-                [placeholder]="'Start entering detailed description'"
+                placeholder="Start entering detailed description"
                 hint="This is tooltip help"
                 zone="zLeft"
                 rank="10"
-                hintPlacement="'left'"
+                hintPlacement="left"
             >
-                <fdp-textarea [name]="'disabledDescription'" [disabled]="true" [value]="'this is a disabled textarea'">
+                <fdp-textarea name="disabledDescription" [disabled]="true" value="this is a disabled textarea">
                 </fdp-textarea>
             </fdp-form-field>
 
             <fdp-form-field
                 #ff4
-                [id]="'compactTextarea'"
+                id="compactTextarea"
                 label="Compact Textarea"
-                [placeholder]="'Start entering detailed description'"
+                placeholder="Start entering detailed description"
                 hint="This is tooltip help"
                 zone="zLeft"
                 rank="10"
-                hintPlacement="'left'"
+                hintPlacement="left"
             >
-                <fdp-textarea [name]="'compactTextarea'" [formControl]="ff4.formControl" [contentDensity]="'compact'">
+                <fdp-textarea name="compactTextarea" [formControl]="ff4.formControl" contentDensity="compact">
                 </fdp-textarea>
             </fdp-form-field>
         </fdp-form-group>
@@ -60,6 +60,7 @@
         <div fd-form-item>
             <label fd-form-label for="textarea-1">Textarea without Platform Forms</label>
             <fdp-textarea
+                id="textarea-1"
                 name="textarea-1"
                 placeholder="write something here"
                 [maxLength]="10"
@@ -67,13 +68,15 @@
                 [growing]="true"
                 [growingMaxLines]="5"
                 [cols]="10"
-                [wrapType]="'soft'"
+                wrapType="soft"
                 #textarea
             >
             </fdp-textarea>
             <fd-form-message
                 *ngIf="textarea.value && textarea.value.length > 10"
                 type="warning"
+                aria-live="assertive"
+                aria-atomic="true"
                 >This is an example warning when used without forms.
             </fd-form-message>
         </div>

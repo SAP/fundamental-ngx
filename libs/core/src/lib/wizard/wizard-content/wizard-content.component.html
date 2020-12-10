@@ -1,7 +1,9 @@
 <ng-template #contentTemplate>
     <section
+        [id]="wizardContentId"
         class="fd-wizard__content"
         [ngClass]="
+            (tallContent ? 'fd-wizard-tall-content' : '') +
             (contentBackground ? 'fd-wizard__content--' + contentBackground : '') +
             ' ' +
             (size ? 'fd-wizard__content--' + size : '')

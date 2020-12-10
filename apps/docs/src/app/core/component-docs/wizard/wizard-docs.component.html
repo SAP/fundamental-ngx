@@ -6,7 +6,10 @@
     their input, they will receive a warning that their information will be lost.
     <br /><br />
     The wizard does not have any built-in functionality for moving through each step - the application developer will
-    manage this using the <code>[status]</code> input on each <code>fd-wizard-step</code>
+    manage this using the <code>[status]</code> input on each <code>fd-wizard-step</code> <br /><br />
+    By default, the wizard content's height will be the viewport height, minus the height of the shellbar, wizard header
+    and wizard footer. If the application developer wishes to use a custom height, a CSS value can be passed to the
+    <code>[contentHeight]</code> input.
 </description>
 <component-example>
     <fd-wizard-example></fd-wizard-example>
@@ -16,7 +19,8 @@
 
 <fd-docs-section-title id="Wizard-Customizable" componentName="wizard">Customizable Wizard</fd-docs-section-title>
 <description>
-    The wizard component can be customized with modifier inputs.
+    The wizard component can be customized with modifier inputs. Steps can be placed on separate pages, rather than
+    appended to the wizard, by setting the <code>[appendToWizard]</code> input to false.
 </description>
 <component-example>
     <fd-wizard-customizable-example></fd-wizard-customizable-example>
@@ -26,10 +30,9 @@
 
 <fd-docs-section-title id="Wizard-Mobile" componentName="wizard">Mobile Wizard</fd-docs-section-title>
 <description>
-    For mobile devices, use the <code>fd-bar</code> component with the
-    <code>barDesign="floating-footer"</code> modifier to achieve a floating footer. The Next Step button is placed
-    after the content whenever possible. However, it can be placed above the floating footer by adding the
-    <code>[floating]</code> input to the <code>fd-wizard-next-step</code>
+    For mobile devices, use the <code>fd-bar</code> component with the <code>barDesign="floating-footer"</code> modifier
+    to achieve a floating footer. The Next Step button is placed after the content whenever possible. However, it can be
+    placed above the floating footer by adding the <code>[floating]</code> input to the <code>fd-wizard-next-step</code>
     component.
 </description>
 <component-example>

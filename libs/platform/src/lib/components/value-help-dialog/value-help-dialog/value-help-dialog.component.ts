@@ -47,14 +47,6 @@ let vhiUniqueId = 0;
   ]
 })
 export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy, AfterContentInit {
-  constructor(
-    private readonly _stateService: ValueHelpDialogService<unknown>,
-    private readonly _changeDetectorRef: ChangeDetectorRef,
-    private readonly _dialogService: DialogService
-  ) {
-    this._stateService.setUid();
-  }
-
   /** Id of the popover */
   @Input()
   id: string = 'fdp-vhd-' + vhiUniqueId++;
@@ -102,44 +94,6 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   @Input()
   tokenizerFn: Function;
 
-  /** Tokenizer function for include/exclude token render */
-  @Input()
-  conditionDisplayFn = (item: IncludedEntity | ExcludedEntity, filters: VhdFilter[]) => {
-    const filter = filters.find(f => f.key === item.key);
-    let value = (() => {
-      switch (item.strategy) {
-        case VhdDefineStrategy.empty:
-          return null;
-        case VhdDefineStrategy.between:
-          return `${item.value}...${item.valueTo}`;
-        case VhdDefineStrategy.contains:
-          return `*${item.value}*`;
-        case VhdDefineStrategy.equalTo:
-          return `=${item.value}`;
-        case VhdDefineStrategy.startsWith:
-          return `${item.value}*`;
-        case VhdDefineStrategy.endsWith:
-          return `*${item.value}`;
-        case VhdDefineStrategy.greaterThan:
-          return `>${item.value}`;
-        case VhdDefineStrategy.greaterThanEqual:
-          return `>=${item.value}`;
-        case VhdDefineStrategy.lessThan:
-          return `<${item.value}`;
-        case VhdDefineStrategy.lessThanEqual:
-          return `<=${item.value}`;
-      }
-    })();
-    if (value && item.type === 'exclude') {
-      value = `!(${value})`;
-    }
-    if (filter) {
-      return `${filter.label}: ${value}`;
-    }
-
-    return value;
-  }
-
   /** Whether the value help dialog should be view in mobile mode */
   @Input()
   mobile = false;
@@ -166,42 +120,105 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden Internal container for dialog */
   @ViewChild('container', { read: TemplateRef })
-  private dialogContainer: TemplateRef<any>;
+  dialogContainer: TemplateRef<any>;
+
+  /** Tokenizer function for include/exclude token render */
+  @Input()
+  conditionDisplayFn: Function;
 
   /** @hidden */
   activeDialog: DialogRef;
+
   /** @hidden */
   _tabTypes = ValueHelpDialogTabs;
+
   /** @hidden */
   _hasAdvanced = true;
+
   /** @hidden */
   _hasDefineFilters = true;
+
   /** @hidden */
   _selectedExpandState = true;
+
   /** @hidden */
   _displayedFilters: VhdFilter[] = [];
+
   /** @hidden */
   _displayedData: TableRow[] = [];
+
   /** @hidden */
   _mainSearch = '';
+
   /** @hidden */
   private _destroyed = new Subject<void>();
+
   /** @hidden */
-  protected _dataSource: FdpValueHelpDialogDataSource<any>;
+  private _dataSource: FdpValueHelpDialogDataSource<any>;
+
   /** @hidden for data source handling */
   private _dsSubscription: Subscription;
+
+  constructor(
+    private readonly _stateService: ValueHelpDialogService<unknown>,
+    private readonly _changeDetectorRef: ChangeDetectorRef,
+    private readonly _dialogService: DialogService
+  ) {
+    this._stateService.setUid();
+    if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
+      this.conditionDisplayFn = (item: IncludedEntity | ExcludedEntity, filters: VhdFilter[]) => {
+        const filter = filters.find(f => f.key === item.key);
+        let value = (() => {
+          switch (item.strategy) {
+            case VhdDefineStrategy.empty:
+              return null;
+            case VhdDefineStrategy.between:
+              return `${item.value}...${item.valueTo}`;
+            case VhdDefineStrategy.contains:
+              return `*${item.value}*`;
+            case VhdDefineStrategy.equalTo:
+              return `=${item.value}`;
+            case VhdDefineStrategy.startsWith:
+              return `${item.value}*`;
+            case VhdDefineStrategy.endsWith:
+              return `*${item.value}`;
+            case VhdDefineStrategy.greaterThan:
+              return `>${item.value}`;
+            case VhdDefineStrategy.greaterThanEqual:
+              return `>=${item.value}`;
+            case VhdDefineStrategy.lessThan:
+              return `<${item.value}`;
+            case VhdDefineStrategy.lessThanEqual:
+              return `<=${item.value}`;
+          }
+        })();
+        if (value && item.type === 'exclude') {
+          value = `!(${value})`;
+        }
+        if (filter) {
+          return `${filter.label}: ${value}`;
+        }
+
+        return value;
+      }
+    }
+  }
+
   /** @hidden */
   get _originalData(): any {
     return this._stateService.originalData;
-  };
+  }
+
   /** @hidden */
   get selectedTab(): ValueHelpDialogTabs {
     return this._stateService.selectedTab$.getValue();
-  };
+  }
+
   /** @hidden */
   set selectedTab(type: ValueHelpDialogTabs | undefined) {
     this._stateService.selectedTab$.next(type);
-  };
+  }
+
   /** @hidden */
   get isMobileAdvancedSearchActive(): boolean {
     if (this.mobile) {
@@ -209,34 +226,42 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     }
     return false;
   }
+
   /** @hidden */
   get hasSelectedTab(): boolean {
     return this.selectedTab in ValueHelpDialogTabs;
   }
+
   /** @hidden */
   get hasSelectionTab(): boolean {
     return !!this.selectionTab;
   }
+
   /** @hidden */
   get hasDefineTab(): boolean {
     return !!this.defineTab && this._hasDefineFilters;
   }
+
   /** @hidden */
   get isSelectionTab(): boolean {
     return this.selectedTab === ValueHelpDialogTabs.selectFromList || this.selectedTab === ValueHelpDialogTabs.advancedSearch;
   }
+
   /** @hidden */
   get selectedItems(): any {
     return this._stateService.selectedItems$.getValue() || [];
   }
+
   /** @hidden */
   get includedItems(): any {
     return this._stateService.includedItems$.getValue() || [];
   }
+
   /** @hidden */
   get excludedItems(): any {
     return this._stateService.excludedItems$.getValue() || [];
   }
+
   /** @hidden */
   get isOpen(): boolean {
     return !!this.activeDialog;
