@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/action-list-item.e2e-spec.ts'
+        './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -71,7 +71,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ 'process.env.TRAVIS_BUILD_ID'],
             }
         },
         {
@@ -193,7 +193,7 @@ exports.config = {
             sauceConnect: true,
         }]
     ],
-    
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html

@@ -121,7 +121,7 @@ describe('Verify Textarea component', function() {
         });
 
         it('should have * if textarea is mandatory', () => {
-            const labelAsterisk = webDriver.executeScript5(textareaPage.detailedTextAreaLabel, 'content');
+            const labelAsterisk = webDriver.executeScriptAfterTagAttr(textareaPage.detailedTextAreaLabel, 'content');
             expect(labelAsterisk).toBe('"*"');
         });
 
@@ -223,7 +223,7 @@ describe('Verify Textarea component', function() {
 
         describe('have a visual cue ', function() {
             it('should have ? mark by default', () => {
-                const popoverIconContant = webDriver.executeScript4( textareaPage.basicTextAreaPopoverIcon,'content');
+                const popoverIconContant = webDriver.executeScriptBeforeTagAttr( textareaPage.basicTextAreaPopoverIcon,'content');
                 expect(popoverIconContant).toBe('"?"');
             });
 
