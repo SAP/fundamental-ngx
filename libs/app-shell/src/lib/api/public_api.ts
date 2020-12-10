@@ -3,6 +3,7 @@ export * from './events/default-topics';
 export * from './events/messaging.config';
 export * from './events/messaging.module';
 export * from './events/messaging.service';
+export * from './events/topics.service';
 export * from './plugins/federation-utils';
 export * from './plugins/lookup/lookup.service';
 export * from './plugins/lookup/plugin-descriptor.model';
