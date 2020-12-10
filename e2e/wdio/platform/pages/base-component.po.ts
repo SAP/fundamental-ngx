@@ -1,5 +1,6 @@
 import { webDriver } from '../../driver/wdio';
-import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
+import { AssertionHelper } from '../../helper/assertion-helper';
+const assertionHelper = new AssertionHelper();
 
 export class BaseComponentPo {
 
@@ -12,9 +13,9 @@ export class BaseComponentPo {
         const areasArray = webDriver.elementArray(this.exampleAreaContainersArr);
         for (let i = 0; i < areasArray.length; i++) {
             webDriver.click(this.rtlSwitcherArr, i);
-            checkRtlOrientation(this.exampleAreaContainersArr, i);
+            assertionHelper.checkRtlOrientation(this.exampleAreaContainersArr, i);
             webDriver.click(this.rtlSwitcherArr, i);
-            checkLtrOrientation(this.exampleAreaContainersArr, i);
+            assertionHelper.checkLtrOrientation(this.exampleAreaContainersArr, i);
         }
     }
 

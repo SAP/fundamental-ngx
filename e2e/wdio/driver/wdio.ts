@@ -48,7 +48,7 @@ export class Wdio {
         $$(selector)[index].setValue(value);
     };
 
-    setValueWithDelay(selector: string, value: string, delay: number = 100, index: number = 0, waitTime = this.defaultWaitTime): void {
+    addValueWithDelay(selector: string, value: string, delay: number = 100, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         const valueArray = Array.from(value);
         for (const symbol of valueArray) {
@@ -87,12 +87,14 @@ export class Wdio {
 
     waitForNotDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
         return $(selector).waitForDisplayed({ timeout: waitTime, reverse: true });
-    waitForNotDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
-        return $$(selector)[index].waitForDisplayed({ timeout: waitTime, reverse: true });
-    };
+    }
 
     waitForClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForClickable({ timeout: waitTime });
+    };
+
+    waitForUnclickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+        return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
     };
 
     waitForPresent(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
@@ -170,13 +172,7 @@ export class Wdio {
         $$(selector)[index].scrollIntoView();
     }
 
-    isElementClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
-        return $$(selector)[index].isClickable();
-    }
     isElementClickable(selector: string, index: number = 0): boolean {
-        return $$(selector)[index].isClickable();
-
-    isElementClickeble(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].isClickable();
     }
 
@@ -194,7 +190,6 @@ export class Wdio {
         return $(selector)[index].isDisplayed();
     }
 
-    focusElement(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
     focusElement(selector: string, index: number = 0): void {
         $$(selector)[index].scrollIntoView();
         // @ts-ignore
@@ -207,8 +202,14 @@ export class Wdio {
 
     mouseButtonUp(button: 0 | 1 | 2 = 0): void {
         browser.buttonUp(button);
+    }
+
     clickNextElement(selector: string, index: number = 0): void {
         $$(selector)[index].nextElement().click();
+    }
+
+    getAttributeByNameArr(selector: string, attrName: string, sliceStart?: number, sliceEnd?: number): string[] {
+        return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getAttribute(attrName));
     }
 }
 

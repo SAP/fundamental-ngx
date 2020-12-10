@@ -44,18 +44,14 @@ export class ComboBoxPo extends BaseComponentPo {
     }
 
     getDropdownOptionsText(type: string): string[] {
-        let textArr: string[] = [];
-            this.expandDropdown(type);
-            const optionsLength = webDriver.getElementArrayLength(this.optionsArray);
-            for (let j = 0; j < optionsLength - 1; j++) {
-                textArr.push(webDriver.getText(this.optionsArray, j))
-            }
-        return textArr;
+        this.expandDropdown(type);
+        return webDriver.getTextArr(this.optionsArray, 0, -1);
     }
 
     expandDropdown(type: string): void {
         webDriver.scrollIntoView(this.comboBoxButtons(type));
         webDriver.click(this.comboBoxButtons(type));
+        webDriver.pause(100); // to make more stable
         webDriver.waitForDisplayed(this.comboBoxExpandedButtons(type));
         webDriver.waitForDisplayed(this.comboBoxDropdownExpanded);
     }
@@ -87,7 +83,7 @@ export class ComboBoxPo extends BaseComponentPo {
         for (let i = 0; i < notActiveTypes.length; i++) {
             webDriver.scrollIntoView(this.comboBoxInputs(notActiveTypes[i]));
             webDriver.waitForDisplayed(this.comboBoxInputs(notActiveTypes[i]));
-            webDriver.waitForUnlickable(this.comboBoxInputs(notActiveTypes[i]));
+            webDriver.waitForUnclickable(this.comboBoxInputs(notActiveTypes[i]));
         }
     }
 
@@ -121,7 +117,7 @@ export class ComboBoxPo extends BaseComponentPo {
             this.expandDropdown(activeTypes[i]);
             this.selectOption(activeTypes[i], option);
             webDriver.waitForNotDisplayed(this.comboBoxDropdownExpanded);
-            webDriver.waitForNotFocused(this.comboBoxInput, i)
+            assertionHelper.checkNotFocused(this.comboBoxInput, i);
         }
     }
 
