@@ -12,7 +12,7 @@ export class PanelPo extends BaseComponentPo {
     expandablePanelContent = this.expandablePanelRoot + ' .fd-panel__content';
 
     fixedPanelSection = '[ng-reflect-id="panelFixed"]';
-    fixedPanelDescription = this.fixedPanelSection + ' + description'
+    fixedPanelDescription = this.fixedPanelSection + ' + description';
 
     compactPanelRoot = '#compact-panel-id';
     compactPanelBtn = this.compactPanelRoot + ' button';

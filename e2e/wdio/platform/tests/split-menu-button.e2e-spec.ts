@@ -180,6 +180,8 @@ describe('Split menu button test suite', () => {
 
     it('should check RTL orientation', async () => {
         spMenuBtnPage.checkRtlSwitch();
+    it('should check RTL orientation', () => {
+        spMenuBtnPage.checkRtlSwitch(spMenuBtnPage.rtlSwitcherArr, spMenuBtnPage.exampleAreaContainersArr);
     });
 });
 

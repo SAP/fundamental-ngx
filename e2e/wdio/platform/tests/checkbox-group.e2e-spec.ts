@@ -1,20 +1,10 @@
 import { CheckboxGroupPO } from '../pages/checkbox-group.po';
-import { browser } from 'protractor';
-import {
-    checkBorderColor,
-    checkErrorTooltip,
-    checkFocusState,
-    checkHoverState,
-    checkIfDisabled,
-    checkLabels,
-    checkMarkingCheckbox,
-    checkOutputLabel
-} from '../../helper/assertion-helper';
+import { checkIfDisabled, checkLabels, checkMarkingCheckbox } from '../../helper/assertion-helper';
 import checkboxGPData from '../fixtures/appData/checkbox-group-page-content';
-import { clickByMouseMove } from '../../helper/helper';
+import checkboxGPData2 from '../fixtures/appData/checkbox-page-contents';
 import { webDriver } from '../../driver/wdio';
 
-describe('Checkbox group test suite', () => {
+xdescribe('Checkbox group test suite', () => {
     const checkboxGroupPage = new CheckboxGroupPO();
 
     beforeAll(() => {
@@ -26,391 +16,347 @@ describe('Checkbox group test suite', () => {
     });
 
     describe('Checkbox Group created with List of Values.', () => {
-        it('should check that each group and checkbox have labels', async () => {
-            const checkboxGroupCount = await checkboxGroupPage.stringValuecheckboxGroupsArr.count();
-            const groupLabelsCount = await checkboxGroupPage.stringValuecheckboxGroupLabelsArr.count();
-            const checkboxCount = await checkboxGroupPage.stringValueCheckboxesArr.count();
-            const checkboxLabelCount = await checkboxGroupPage.stringValueCheckboxLabelArr.count();
+        // TODO: Need to revise this one and consider using nexElement method
+        it('should check that each group and checkbox have labels', () => {
+            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValuecheckboxGroupsArr);
+            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValuecheckboxGroupLabelsArr);
+            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValueCheckboxesArr);
+            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValueCheckboxLabelArr);
 
-            await expect(checkboxGroupCount).toEqual(groupLabelsCount);
-            await expect(checkboxCount).toEqual(checkboxLabelCount);
+            expect(checkboxGroupCount).toEqual(groupLabelsCount);
+            expect(checkboxCount).toEqual(checkboxLabelCount);
         });
 
-        it('should check checkbox markings are centered', async () => {
-            const checkboxMarkDisplayStyle = await browser.executeScript(`return (window.getComputedStyle(document.querySelector(await '${checkboxGroupPage.winterCheckbox.locator().value}'), ":before").display)`);
-            await expect(checkboxMarkDisplayStyle).toContain(checkboxGPData.markingsStyle);
+        it('should check checkbox markings are centered', () => {
+            const checkboxMarkDisplayStyle = webDriver.executeScriptBeforeTagAttr(checkboxGroupPage.winterCheckbox, 'display');
+            expect(checkboxMarkDisplayStyle).toContain(checkboxGPData.markingsStyle);
         });
 
-        it('should check outputs', async () => {
-            const inlineCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(0, 4);
-            const outputLabel = await (await checkboxGroupPage.stringValueoutputLabelsArr).slice(0, 1);
+        it('should check outputs1', () => {
+            webDriver.clickNextElement(checkboxGroupPage.stringValueCheckboxesArr, 1);
+            checkOutputLabel(checkboxGroupPage.stringValueoutputLabelsArr, checkboxGPData.seasonsOutputLabel, checkboxGPData.seasonsArr[1]);
 
-            await clickByMouseMove(await inlineCheckboxes[1]);
-            await checkOutputLabel(await outputLabel, checkboxGPData.seasonsOutputLabel, checkboxGPData.seasonsArr[1]);
-
-            await clickByMouseMove(await inlineCheckboxes[0]);
-            await checkOutputLabel(await outputLabel, checkboxGPData.seasonsOutputLabel,
+            webDriver.clickNextElement(checkboxGroupPage.stringValueCheckboxesArr, 0);
+            checkOutputLabel(checkboxGroupPage.stringValueoutputLabelsArr, checkboxGPData.seasonsOutputLabel,
                 checkboxGPData.seasonsArr[1] + ',' + checkboxGPData.seasonsArr[0]);
         });
 
-        it('should check reactive inline checkboxes', async () => {
-            const inlineCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(0, 4);
-            const checkboxLabels = await (await checkboxGroupPage.stringValueCheckboxLabelArr).slice(0, 4);
-
-            await checkLabels(checkboxLabels, checkboxGPData.seasonsArr);
-            await checkFocusState(inlineCheckboxes[0]);
-            await checkHoverState(inlineCheckboxes[0]);
-            await checkMarkingCheckbox(await inlineCheckboxes);
+        it('should check reactive inline checkboxes', () => {
+            checkLabels(checkboxGroupPage.stringValueCheckboxLabelArr, checkboxGPData.seasonsArr, 0, 4);
+            checkFocusState(checkboxGroupPage.stringValueCheckboxesArr, 0);
+            checkHoverState(checkboxGroupPage.stringValueCheckboxesArr, 0);
+            checkMarkingCheckbox(checkboxGroupPage.stringValueCheckboxesArr, 0, 4);
         });
 
-        it('should check reactive pre-selection based on value passed checkboxes', async () => {
-            const preselectionCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(4, 8);
-            const checkboxLabels = await (await checkboxGroupPage.stringValueCheckboxLabelArr).slice(4, 8);
-
-            await checkLabels(checkboxLabels, checkboxGPData.phonesArr);
-            await checkFocusState(preselectionCheckboxes[0]);
-            await checkHoverState(preselectionCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionCheckboxes);
+        it('should check reactive pre-selection based on value passed checkboxes', () => {
+            checkLabels(checkboxGroupPage.stringValueCheckboxLabelArr, checkboxGPData.phonesArr, 4, 8);
+            checkFocusState(checkboxGroupPage.stringValueCheckboxesArr, 4);
+            checkHoverState(checkboxGroupPage.stringValueCheckboxesArr, 4);
+            checkMarkingCheckbox(checkboxGroupPage.stringValueCheckboxesArr, 4, 8);
         });
 
-        it('should check reactive pre-selection based on value passed from formGroup checkboxes', async () => {
-            const preselectionFormGroupCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(8, 12);
-            const checkboxLabels = await (await checkboxGroupPage.stringValueCheckboxLabelArr).slice(8, 12);
-
-            await checkLabels(checkboxLabels, checkboxGPData.sportsArr);
-            await checkFocusState(preselectionFormGroupCheckboxes[0]);
-            await checkHoverState(preselectionFormGroupCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionFormGroupCheckboxes);
+        it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
+            checkLabels(checkboxGroupPage.stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 8, 12);
+            checkFocusState(checkboxGroupPage.stringValueCheckboxesArr, 8);
+            checkHoverState(checkboxGroupPage.stringValueCheckboxesArr, 8);
+            checkMarkingCheckbox(checkboxGroupPage.stringValueCheckboxesArr, 8, 12);
         });
 
-        it('should check reactive disabled checkboxes', async () => {
-            const disabledGroupCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(12, 16);
-            const checkboxLabels = await (await checkboxGroupPage.stringValueCheckboxLabelArr).slice(12, 16);
-
-            await checkLabels(checkboxLabels, checkboxGPData.sportsArr);
-            await disabledGroupCheckboxes.forEach(async element => {
-                await checkIfDisabled(element, 'aria-disabled', 'true');
-            });
+        it('should check reactive disabled checkboxes', () => {
+            checkLabels(checkboxGroupPage.stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 12, 16);
+            for (let i = 12; 16 > i; i++) {
+                checkIfDisabled(checkboxGroupPage.stringValueCheckboxesArr, 'aria-disabled', 'true', i);
+            }
         });
 
-        it('should check template inline checkboxes', async () => {
-            const inlineCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(16, 20);
-            const checkboxLabels = await (await checkboxGroupPage.stringValueCheckboxLabelArr).slice(16, 20);
-
-            await checkLabels(checkboxLabels, checkboxGPData.seasonsArr);
-            await checkFocusState(inlineCheckboxes[0]);
-            await checkHoverState(inlineCheckboxes[0]);
-            await checkMarkingCheckbox(await inlineCheckboxes);
+        it('should check template inline checkboxes', () => {
+            checkLabels(checkboxGroupPage.stringValueCheckboxLabelArr, checkboxGPData.seasonsArr, 16, 20);
+            checkFocusState(checkboxGroupPage.stringValueCheckboxesArr, 16);
+            checkHoverState(checkboxGroupPage.stringValueCheckboxesArr, 16);
+            checkMarkingCheckbox(checkboxGroupPage.stringValueCheckboxesArr, 16, 20);
         });
 
-        it('should check template pre-selection based on value passed checkboxes', async () => {
-            const preselectionCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(20, 24);
-            const checkboxLabels = await (await checkboxGroupPage.stringValueCheckboxLabelArr).slice(20, 24);
-
-            await checkLabels(checkboxLabels, checkboxGPData.sportsArr);
-            await checkFocusState(preselectionCheckboxes[0]);
-            await checkHoverState(preselectionCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionCheckboxes);
+        it('should check template pre-selection based on value passed checkboxes', () => {
+            checkLabels(checkboxGroupPage.stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 20, 24);
+            checkFocusState(checkboxGroupPage.stringValueCheckboxesArr, 20);
+            checkHoverState(checkboxGroupPage.stringValueCheckboxesArr, 20);
+            checkMarkingCheckbox(checkboxGroupPage.stringValueCheckboxesArr, 20, 24);
         });
 
-        it('should check reactive disabled checkboxes', async () => {
-            const disabledGroupCheckboxes = await (await checkboxGroupPage.stringValueCheckboxesArr).slice(24, 28);
-            const checkboxLabels = await (await checkboxGroupPage.stringValueCheckboxLabelArr).slice(24, 28);
-
-            await checkLabels(checkboxLabels, checkboxGPData.sportsArr);
-            await disabledGroupCheckboxes.forEach(async element => {
-                await checkIfDisabled(element, 'aria-disabled', 'true');
-            });
+        it('should check reactive disabled checkboxes', () => {
+            checkLabels(checkboxGroupPage.stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 24, 28);
+            for (let i = 24; 28 > i; i++) {
+                checkIfDisabled(checkboxGroupPage.stringValueCheckboxesArr, 'aria-disabled', 'true', i);
+            }
         });
     });
 
     describe('Checkbox Group created From List of Objects.', () => {
-        it('should check that each group and checkbox have labels', async () => {
-            const checkboxGroupCount = await checkboxGroupPage.objectValuecheckboxGroupsArr.count();
-            const groupLabelsCount = await checkboxGroupPage.objectValuecheckboxGroupLabelsArr.count();
-            const checkboxCount = await checkboxGroupPage.objectValueCheckboxesArr.count();
-            const checkboxLabelCount = await checkboxGroupPage.objectValueCheckboxLabelArr.count();
+        it('should check that each group and checkbox have labels', () => {
+            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValuecheckboxGroupsArr);
+            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValuecheckboxGroupLabelsArr);
+            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValueCheckboxesArr);
+            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValueCheckboxLabelArr);
 
-            await expect(checkboxGroupCount).toEqual(groupLabelsCount);
-            await expect(checkboxCount).toEqual(checkboxLabelCount);
+            expect(checkboxGroupCount).toEqual(groupLabelsCount);
+            expect(checkboxCount).toEqual(checkboxLabelCount);
         });
 
-        it('should check reactive inline checkboxes', async () => {
-            const inlineCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(0, 4);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(0, 4);
-
-            await checkLabels(checkboxLabels, checkboxGPData.programmingLanguagesArr);
-            await checkFocusState(inlineCheckboxes[0]);
-            await checkHoverState(inlineCheckboxes[0]);
-            await checkMarkingCheckbox(await inlineCheckboxes);
-            await checkIfDisabled(inlineCheckboxes[1], 'aria-disabled', 'true');
-            await checkIfDisabled(inlineCheckboxes[3], 'aria-disabled', 'true');
+        it('should check reactive inline checkboxes2', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.programmingLanguagesArr, 0, 4);
+            checkFocusState(checkboxGroupPage.objectValueCheckboxesArr, 0);
+            checkHoverState(checkboxGroupPage.objectValueCheckboxesArr, 0);
+            checkMarkingCheckbox(checkboxGroupPage.objectValueCheckboxesArr, 0, 4);
+            checkIfDisabled(checkboxGroupPage.objectValueCheckboxesArr, 'aria-disabled', 'true', 1);
+            checkIfDisabled(checkboxGroupPage.objectValueCheckboxesArr, 'aria-disabled', 'true', 3);
         });
 
-        it('should check reactive pre-selection based on value passed checkboxes', async () => {
-            const preselectionCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(4, 7);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(4, 7);
-
-            await checkLabels(checkboxLabels, checkboxGPData.countriesArr);
-            await checkFocusState(preselectionCheckboxes[0]);
-            await checkHoverState(preselectionCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionCheckboxes);
+        it('should check reactive pre-selection based on value passed checkboxes', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 4, 7);
+            checkFocusState(checkboxGroupPage.objectValueCheckboxesArr, 4);
+            checkHoverState(checkboxGroupPage.objectValueCheckboxesArr, 4);
+            checkMarkingCheckbox(checkboxGroupPage.objectValueCheckboxesArr, 4, 7);
         });
 
-        it('should check reactive pre-selection based on value passed from formGroup checkboxes', async () => {
-            const preselectionFormGroupCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(7, 10);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(7, 10);
-
-            await checkLabels(checkboxLabels, checkboxGPData.countriesArr);
-            await checkFocusState(preselectionFormGroupCheckboxes[0]);
-            await checkHoverState(preselectionFormGroupCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionFormGroupCheckboxes);
+        it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 7, 10);
+            checkFocusState(checkboxGroupPage.objectValueCheckboxesArr, 7);
+            checkHoverState(checkboxGroupPage.objectValueCheckboxesArr, 7);
+            checkMarkingCheckbox(checkboxGroupPage.objectValueCheckboxesArr, 7, 10);
         });
 
-        it('should check reactive lookup key and display key usages checkboxes', async () => {
-            const itemsCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(10, 13);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(10, 13);
-
-            await checkLabels(checkboxLabels, checkboxGPData.itemsArr);
-            await checkHoverState(itemsCheckboxes[0]);
-            await checkFocusState(itemsCheckboxes[0]);
-            await checkMarkingCheckbox(await itemsCheckboxes);
+        it('should check reactive lookup key and display key usages checkboxes', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.itemsArr, 10, 13);
+            checkFocusState(checkboxGroupPage.objectValueCheckboxesArr, 10);
+            checkHoverState(checkboxGroupPage.objectValueCheckboxesArr, 10);
+            checkMarkingCheckbox(checkboxGroupPage.objectValueCheckboxesArr, 10, 13);
         });
 
-        it('should check reactive disabled checkboxes', async () => {
-            const disabledGroupCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(13, 16);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(13, 16);
-
-            await checkLabels(checkboxLabels, checkboxGPData.countriesArr);
-            await disabledGroupCheckboxes.forEach(async element => {
-                await checkIfDisabled(element, 'aria-disabled', 'true');
-            });
+        it('should check reactive disabled checkboxes', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 13, 16);
+            for (let i = 13; 16 > i; i++) {
+                checkIfDisabled(checkboxGroupPage.objectValueCheckboxesArr, 'aria-disabled', 'true', i);
+            }
         });
 
-        it('should check template inline checkboxes', async () => {
-            const inlineCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(16, 20);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(16, 20);
-
-            await checkLabels(checkboxLabels, checkboxGPData.programmingLanguagesArr);
-            await checkFocusState(inlineCheckboxes[0]);
-            await checkHoverState(inlineCheckboxes[0]);
-            await checkMarkingCheckbox(await inlineCheckboxes);
-            await checkIfDisabled(inlineCheckboxes[1], 'aria-disabled', 'true');
-            await checkIfDisabled(inlineCheckboxes[3], 'aria-disabled', 'true');
+        it('should check template inline checkboxes', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.programmingLanguagesArr, 16, 20);
+            checkFocusState(checkboxGroupPage.objectValueCheckboxesArr, 16);
+            checkHoverState(checkboxGroupPage.objectValueCheckboxesArr, 16);
+            checkMarkingCheckbox(checkboxGroupPage.objectValueCheckboxesArr, 16, 20);
+            checkIfDisabled(checkboxGroupPage.objectValueCheckboxesArr, 'aria-disabled', 'true', 17);
+            checkIfDisabled(checkboxGroupPage.objectValueCheckboxesArr, 'aria-disabled', 'true', 19);
         });
 
-        it('should check template pre-selection based on value passed checkboxes', async () => {
-            const preselectionCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(20, 23);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(20, 23);
+        it('should check template pre-selection based on value passed checkboxes', () => {
+            const preselectionCheckboxes = (checkboxGroupPage.objectValueCheckboxesArr).slice(20, 23);
+            const checkboxLabels = (checkboxGroupPage.objectValueCheckboxLabelArr).slice(20, 23);
 
-            await checkLabels(checkboxLabels, checkboxGPData.countriesArr);
-            await checkFocusState(preselectionCheckboxes[0]);
-            await checkHoverState(preselectionCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionCheckboxes);
+            checkLabels(checkboxLabels, checkboxGPData.countriesArr, 20, 23);
+            checkFocusState(preselectionCheckboxes[0]);
+            checkHoverState(preselectionCheckboxes[0]);
+            checkMarkingCheckbox(preselectionCheckboxes);
         });
 
-        it('should check template lookup key and display key usages checkboxes', async () => {
-            const itemsCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(23, 26);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(23, 26);
-
-            await checkLabels(checkboxLabels, checkboxGPData.itemsArr);
-            await checkHoverState(itemsCheckboxes[0]);
-            await checkFocusState(itemsCheckboxes[0]);
-            await checkMarkingCheckbox(await itemsCheckboxes);
+        it('should check template lookup key and display key usages checkboxes', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.itemsArr, 23, 26);
+            checkFocusState(checkboxGroupPage.objectValueCheckboxesArr, 23);
+            checkHoverState(checkboxGroupPage.objectValueCheckboxesArr, 23);
+            checkMarkingCheckbox(checkboxGroupPage.objectValueCheckboxesArr, 23, 26);
         });
 
-        it('should check reactive disabled checkboxes', async () => {
-            const disabledGroupCheckboxes = await (await checkboxGroupPage.objectValueCheckboxesArr).slice(26, 29);
-            const checkboxLabels = await (await checkboxGroupPage.objectValueCheckboxLabelArr).slice(26, 29);
-
-            await checkLabels(checkboxLabels, checkboxGPData.countriesArr);
-            await disabledGroupCheckboxes.forEach(async element => {
-                await checkIfDisabled(element, 'aria-disabled', 'true');
-            });
+        it('should check reactive disabled checkboxes', () => {
+            checkLabels(checkboxGroupPage.objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 26, 29);
+            for (let i = 26; 29 > i; i++) {
+                checkIfDisabled(checkboxGroupPage.objectValueCheckboxesArr, 'aria-disabled', 'true', i);
+            }
         });
     });
 
     describe('Checkbox Group created From content projected Checkboxes.', () => {
-        it('should check that each group and checkbox have labels', async () => {
-            const checkboxGroupCount = await checkboxGroupPage.projectedValuecheckboxGroupsArr.count();
-            const groupLabelsCount = await checkboxGroupPage.projectedValuecheckboxGroupLabelsArr.count();
-            const checkboxCount = await checkboxGroupPage.projectedValueCheckboxesArr.count();
-            const checkboxLabelCount = await checkboxGroupPage.projectedValueCheckboxLabelArr.count();
+        it('should check that each group and checkbox have labels', () => {
+            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValuecheckboxGroupsArr);
+            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValuecheckboxGroupLabelsArr);
+            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValueCheckboxesArr);
+            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValueCheckboxLabelArr);
 
-            await expect(checkboxGroupCount).toEqual(groupLabelsCount);
-            await expect(checkboxCount).toEqual(checkboxLabelCount);
+            expect(checkboxGroupCount).toEqual(groupLabelsCount);
+            expect(checkboxCount).toEqual(checkboxLabelCount);
         });
 
-        it('should check reactive checkboxes', async () => {
-            const inlineCheckboxes = await (await checkboxGroupPage.projectedValueCheckboxesArr).slice(0, 4);
-            const checkboxLabels = await (await checkboxGroupPage.projectedValueCheckboxLabelArr).slice(0, 4);
-
-            await checkLabels(checkboxLabels, checkboxGPData.fourFruitsArr);
-            await checkFocusState(inlineCheckboxes[1]);
-            await checkHoverState(inlineCheckboxes[1]);
-            await checkMarkingCheckbox(await inlineCheckboxes);
-            await checkIfDisabled(inlineCheckboxes[0], 'aria-disabled', 'true');
-            await checkIfDisabled(inlineCheckboxes[2], 'aria-disabled', 'true');
+        it('should check reactive checkboxes', () => {
+            checkLabels(checkboxGroupPage.projectedValueCheckboxLabelArr, checkboxGPData.fourFruitsArr, 0, 4);
+            checkFocusState(checkboxGroupPage.projectedValueCheckboxesArr, 1);
+            checkHoverState(checkboxGroupPage.projectedValueCheckboxesArr, 1);
+            checkMarkingCheckbox(checkboxGroupPage.projectedValueCheckboxesArr, 0, 4);
+            checkIfDisabled(checkboxGroupPage.projectedValueCheckboxesArr, 'aria-disabled', 'true', 0);
+            checkIfDisabled(checkboxGroupPage.projectedValueCheckboxesArr, 'aria-disabled', 'true', 2);
         });
 
-        it('should check reactive pre-selection based on value passed checkboxes', async () => {
-            const preselectionCheckboxes = await (await checkboxGroupPage.projectedValueCheckboxesArr).slice(4, 8);
-            const checkboxLabels = await (await checkboxGroupPage.projectedValueCheckboxLabelArr).slice(4, 8);
+        it('should check reactive pre-selection based on value passed checkboxes', () => {
+            checkLabels(checkboxGroupPage.projectedValueCheckboxLabelArr, checkboxGPData.hobbiesArr, 4, 8);
+            checkFocusState(checkboxGroupPage.projectedValueCheckboxesArr, 4);
+            checkHoverState(checkboxGroupPage.projectedValueCheckboxesArr, 4);
+            checkMarkingCheckbox(checkboxGroupPage.projectedValueCheckboxesArr, 4, 8);
 
-            await checkLabels(checkboxLabels, checkboxGPData.hobbiesArr);
-            await checkFocusState(preselectionCheckboxes[0]);
-            await checkHoverState(preselectionCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionCheckboxes);
         });
 
-        it('should check reactive pre-selection based on value passed from formGroup checkboxes', async () => {
-            const preselectionFormGroupCheckboxes = await (await checkboxGroupPage.projectedValueCheckboxesArr).slice(8, 12);
-            const checkboxLabels = await (await checkboxGroupPage.projectedValueCheckboxLabelArr).slice(8, 12);
-
-            await checkLabels(checkboxLabels, checkboxGPData.europeanCountriesArr);
-            await checkFocusState(preselectionFormGroupCheckboxes[0]);
-            await checkHoverState(preselectionFormGroupCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionFormGroupCheckboxes);
+        it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
+            checkLabels(checkboxGroupPage.projectedValueCheckboxLabelArr, checkboxGPData.europeanCountriesArr, 8, 12);
+            checkFocusState(checkboxGroupPage.projectedValueCheckboxesArr, 8);
+            checkHoverState(checkboxGroupPage.projectedValueCheckboxesArr, 8);
+            checkMarkingCheckbox(checkboxGroupPage.projectedValueCheckboxesArr, 8, 12);
         });
 
-        it('should check reactive disabled checkboxes', async () => {
-            const disabledGroupCheckboxes = await (await checkboxGroupPage.projectedValueCheckboxesArr).slice(12, 16);
-            const checkboxLabels = await (await checkboxGroupPage.projectedValueCheckboxLabelArr).slice(12, 16);
+        it('should check reactive disabled checkboxes', () => {
+            checkLabels(checkboxGroupPage.projectedValueCheckboxLabelArr, checkboxGPData.europeanCountriesArr, 12, 16);
+            for (let i = 12; 16 > i; i++) {
+                checkIfDisabled(checkboxGroupPage.projectedValueCheckboxesArr, 'aria-disabled', 'true', i);
+            }
+        });
+        // Ask Sean
+        xit('should check template inline checkboxes 555', () => {
+            // checkLabels(checkboxGroupPage.projectedValueCheckboxLabelArr, checkboxGPData.subjectsArr, 16, 20);
+            // checkFocusState(checkboxGroupPage.projectedValueCheckboxesArr, 17);
+            // checkHoverState(checkboxGroupPage.projectedValueCheckboxesArr, 17);
 
-            await checkLabels(checkboxLabels, checkboxGPData.europeanCountriesArr);
-            await disabledGroupCheckboxes.forEach(async element => {
-                await checkIfDisabled(element, 'aria-disabled', 'true');
-            });
+            checkIfDisabled(checkboxGroupPage.projectedValueCheckboxesArr, 'aria-disabled', 'true', 16);
+            checkIfDisabled(checkboxGroupPage.projectedValueCheckboxesArr, 'aria-disabled', 'true', 19);
+            checkMarkingCheckbox(checkboxGroupPage.projectedValueCheckboxesArr, 16, 20);
         });
 
-        it('should check template inline checkboxes', async () => {
-            const inlineCheckboxes = await (await checkboxGroupPage.projectedValueCheckboxesArr).slice(16, 20);
-            const checkboxLabels = await (await checkboxGroupPage.projectedValueCheckboxLabelArr).slice(16, 20);
-
-            await checkLabels(checkboxLabels, checkboxGPData.subjectsArr);
-            await checkFocusState(inlineCheckboxes[1]);
-            await checkHoverState(inlineCheckboxes[1]);
-            await checkMarkingCheckbox(await inlineCheckboxes);
-            await checkIfDisabled(inlineCheckboxes[0], 'aria-disabled', 'true');
-            await checkIfDisabled(inlineCheckboxes[3], 'aria-disabled', 'true');
+        it('should check template pre-selection based on value passed checkboxes', () => {
+            checkLabels(checkboxGroupPage.projectedValueCheckboxLabelArr, checkboxGPData.reptilesArr, 20, 24);
+            checkFocusState(checkboxGroupPage.projectedValueCheckboxesArr, 20);
+            checkHoverState(checkboxGroupPage.projectedValueCheckboxesArr, 20);
+            checkMarkingCheckbox(checkboxGroupPage.projectedValueCheckboxesArr, 20, 24);
         });
 
-        it('should check template pre-selection based on value passed checkboxes', async () => {
-            const preselectionCheckboxes = await (await checkboxGroupPage.projectedValueCheckboxesArr).slice(20, 24);
-            const checkboxLabels = await (await checkboxGroupPage.projectedValueCheckboxLabelArr).slice(20, 24);
-
-            await checkLabels(checkboxLabels, checkboxGPData.reptilesArr);
-            await checkFocusState(preselectionCheckboxes[0]);
-            await checkHoverState(preselectionCheckboxes[0]);
-            await checkMarkingCheckbox(await preselectionCheckboxes);
-        });
-
-        it('should check template disabled checkboxes', async () => {
-            const disabledGroupCheckboxes = await (await checkboxGroupPage.projectedValueCheckboxesArr).slice(24, 28);
-            const checkboxLabels = await (await checkboxGroupPage.projectedValueCheckboxLabelArr).slice(24, 28);
-
-            await checkLabels(checkboxLabels, checkboxGPData.europeanCountriesArr);
-            await disabledGroupCheckboxes.forEach(async element => {
-                await checkIfDisabled(element, 'aria-disabled', 'true');
-            });
+        it('should check template disabled checkboxes', () => {
+            checkLabels(checkboxGroupPage.projectedValueCheckboxLabelArr, checkboxGPData.europeanCountriesArr, 24, 28);
+            for (let i = 24; 28 > i; i++) {
+                checkIfDisabled(checkboxGroupPage.projectedValueCheckboxesArr, 'aria-disabled', 'true', i);
+            }
         });
     });
 
     describe('Checkbox Group handling of Form Validation and Error Message Display.', () => {
-        it('should check that each group and checkbox have labels', async () => {
-            const checkboxGroupCount = await checkboxGroupPage.formValidationcheckboxGroupsArr.count();
-            const groupLabelsCount = await checkboxGroupPage.formValidationcheckboxGroupLabelsArr.count();
-            const checkboxCount = await checkboxGroupPage.formValidationCheckboxesArr.count();
-            const checkboxLabelCount = await checkboxGroupPage.formValidationCheckboxLabelArr.count();
+        it('should check that each group and checkbox have labels', () => {
+            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationcheckboxGroupsArr);
+            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationcheckboxGroupLabelsArr);
+            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationCheckboxesArr);
+            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationCheckboxLabelArr);
 
-            await expect(checkboxGroupCount).toEqual(groupLabelsCount);
-            await expect(checkboxCount).toEqual(checkboxLabelCount);
+            expect(checkboxGroupCount).toEqual(groupLabelsCount);
+            expect(checkboxCount).toEqual(checkboxLabelCount);
         });
 
-        it('should check Checkbox group created from passed checkboxes and value is required', async () => {
-            const checkboxes = await (await checkboxGroupPage.formValidationCheckboxesArr).slice(0, 3);
-            const checkboxLabels = await (await checkboxGroupPage.formValidationCheckboxLabelArr).slice(0, 3);
-            const sectionTitlesArr = await checkboxGroupPage.sectiontitle;
+        it('should check Checkbox group created from passed checkboxes and value is required', () => {
+            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 1);
+            for (let i = 0; 3 > i; i++) {
+                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
+                    .toContain(checkboxGPData.errorBorderStyle);
+            }
 
-            await clickByMouseMove(checkboxes[1]);
-            await checkBorderColor(await checkboxes, checkboxGPData.errorBorderStyle);
+            webDriver.click(checkboxGroupPage.sectiontitle, 2);
 
-            await clickByMouseMove(await sectionTitlesArr[2]);
-            await expect(await checkErrorTooltip(await checkboxes[0],
-                await checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            // webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 2);
+            webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 0);
+            expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
-            await checkLabels(checkboxLabels, checkboxGPData.threeFruitsArr);
-            await checkFocusState(checkboxes[0]);
-            await checkHoverState(checkboxes[0]);
-            await checkMarkingCheckbox(await checkboxes);
+            checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 0, 3);
+            checkFocusState(checkboxGroupPage.formValidationCheckboxesArr, 0);
+            checkHoverState(checkboxGroupPage.formValidationCheckboxesArr, 0);
+            checkMarkingCheckbox(checkboxGroupPage.formValidationCheckboxesArr, 0, 3);
         });
 
-        it('should check Checkbox group created from list of values and value is required', async () => {
-            const checkboxes = await (await checkboxGroupPage.formValidationCheckboxesArr).slice(3, 6);
-            const checkboxLabels = await (await checkboxGroupPage.formValidationCheckboxLabelArr).slice(3, 6);
-            const sectionTitlesArr = await checkboxGroupPage.sectiontitle;
-
+        it('should check Checkbox group created from list of values and value is required', () => {
             // get checkbox error color and tooltip
-            await clickByMouseMove(checkboxes[1]);
+            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 4);
             // click twice to mark and unmark box to get error state
-            await clickByMouseMove(checkboxes[1]);
-            await checkboxes.forEach(async element => {
-                await expect(await element.getCssValue('border-color')).toEqual(checkboxGPData.errorBorderStyle);
-            });
+            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 4);
+            for (let i = 3; 6 > i; i++) {
+                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
+                    .toContain(checkboxGPData.errorBorderStyle);
+            }
             // needed for getting the tooltip in next line
-            await clickByMouseMove(await sectionTitlesArr[1]);
-            await expect(checkErrorTooltip(await checkboxes[0],
-                await checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            webDriver.click(checkboxGroupPage.sectiontitle, 1);
+            webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 3);
+            expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
-            await checkLabels(checkboxLabels, checkboxGPData.threeFruitsArr);
-            await checkFocusState(checkboxes[1]);
-            await checkHoverState(checkboxes[0]);
-            await checkMarkingCheckbox(await checkboxes);
+            checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 3, 6);
+            checkFocusState(checkboxGroupPage.formValidationCheckboxesArr, 4);
+            checkHoverState(checkboxGroupPage.formValidationCheckboxesArr, 3);
+            checkMarkingCheckbox(checkboxGroupPage.formValidationCheckboxesArr, 3, 6);
         });
 
-        it('should check Checkbox group created from list of values and value is required', async () => {
-            const checkboxes = await (await checkboxGroupPage.formValidationCheckboxesArr).slice(6, 10);
-            const checkboxLabels = await (await checkboxGroupPage.formValidationCheckboxLabelArr).slice(6, 10);
-            const sectionTitlesArr = await checkboxGroupPage.sectiontitle;
-
+        it('should check Checkbox group created from list of values and value is required', () => {
             // get checkbox error color and tooltip
-            await clickByMouseMove(checkboxes[0]);
+            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
             // click twice to mark and unmark box to get error state
-            await clickByMouseMove(checkboxes[0]);
-            await checkboxes.forEach(async element => {
-                await expect(await element.getCssValue('border-color')).toEqual(checkboxGPData.errorBorderStyle);
-            });
-            // needed for getting the tooltip in next line
-            await clickByMouseMove(await sectionTitlesArr[1]);
-            await expect(checkErrorTooltip(await checkboxes[0],
-                await checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
 
-            await checkLabels(checkboxLabels, checkboxGPData.programmingLanguagesArr);
-            await checkFocusState(checkboxes[0]);
-            await checkHoverState(checkboxes[0]);
-            await checkMarkingCheckbox(await checkboxes);
-            await checkIfDisabled(checkboxes[1], 'aria-disabled', 'true');
-            await checkIfDisabled(checkboxes[3], 'aria-disabled', 'true');
+            for (let i = 6; 10 > i; i++) {
+                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
+                    .toContain(checkboxGPData.errorBorderStyle);
+            }
+            webDriver.click(checkboxGroupPage.sectiontitle, 1);
+            webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
+            expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+
+            checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 6, 10);
+            checkFocusState(checkboxGroupPage.formValidationCheckboxLabelArr, 6);
+            checkHoverState(checkboxGroupPage.formValidationCheckboxLabelArr, 6);
+            checkMarkingCheckbox(checkboxGroupPage.formValidationCheckboxesArr, 6, 10);
+            checkIfDisabled(checkboxGroupPage.formValidationCheckboxesArr, 'aria-disabled', 'true', 7);
+            checkIfDisabled(checkboxGroupPage.formValidationCheckboxesArr, 'aria-disabled', 'true', 9);
+
         });
     });
 
-    describe('check example orientation', () => {
-        it('should check LTR orientation', async () => {
-            const areaContainersArray = await checkboxGroupPage.exampleAreaContainersArr;
+    xdescribe('check example orientation', () => {
+        it('should check LTR orientation', () => {
+            const areaContainersArrayLength = webDriver.getElementArrayLength(checkboxGroupPage.exampleAreaContainersArr);
 
-            areaContainersArray.forEach(element => {
-                expect(element.getCssValue('direction')).toBe('ltr', 'css prop direction ');
-            });
+            for (let i = 0; areaContainersArrayLength > i; i++) {
+                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value)
+                    .toBe('ltr', 'css prop direction ');
+            }
         });
 
-        it('should check RTL orientation', async () => {
-            await checkboxGroupPage.exampleAreaContainersArr.each(async (area, index) => {
-                expect(await area.getCssValue('direction')).toBe('ltr', 'css prop direction ' + index);
-                expect(await area.getAttribute('dir')).toBe('', 'dir attr ' + index);
-                await checkboxGroupPage.rtlSwitcherArr.get(index).click();
-                expect(await area.getCssValue('direction')).toBe('rtl');
-                expect(await area.getAttribute('dir')).toBe('rtl');
-            });
+        it('should check RTL orientation', () => {
+            const arrL = webDriver.getElementArrayLength(checkboxGroupPage.exampleAreaContainersArr);
+
+            for (let i = 0; arrL > i; i++) {
+                webDriver.scrollIntoView(checkboxGroupPage.exampleAreaContainersArr, i);
+                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+                const dirValueBefore = webDriver.getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i);
+                expect([null, '']).toContain(dirValueBefore);
+                webDriver.click(checkboxGroupPage.rtlSwitcherArr, i);
+                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+                expect(webDriver.getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+            }
         });
     });
 });
+
+function checkHoverState(elementSelector, index: number = 0): boolean {
+    webDriver.scrollIntoView(elementSelector, index);
+    webDriver.mouseHoverElement(elementSelector, index);
+    return expect(webDriver.getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value)
+        .toContain(checkboxGPData2.checkboxHoverState);
+}
+
+function checkFocusState(elementSelector, index: number = 0): boolean {
+    // webDriver.clickNextElement(elementSelector, index);
+    webDriver.focusElement(elementSelector, index);
+    return expect(webDriver.getCSSPropertyByName(elementSelector, 'outline-style', index).value)
+        .toContain(checkboxGPData2.checkboxFocusStyle);
+}
+
+function checkOutputLabel(array, label, selections): void {
+    const arrL = webDriver.getElementArrayLength(array);
+    for (let i = 0; arrL > i; i++) {
+        expect(webDriver.getText(array, i)).toEqual(label + selections);
+    }
+}

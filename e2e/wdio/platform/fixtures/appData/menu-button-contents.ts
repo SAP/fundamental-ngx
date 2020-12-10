@@ -1,5 +1,4 @@
 export default {
-
     disabledState: 'ng-reflect-disabled',
     cozyAndCompactBtnTextArr: [
         'Default Button',
@@ -11,13 +10,13 @@ export default {
         'Transparent Button'
     ],
     btnColorArr: [
-        '8, 84, 160',
-        '255, 255, 255',
-        '8, 84, 160',
-        '16, 126, 62',
-        '187, 0, 0',
-        '233, 115, 12',
-        '8, 84, 160'
+        '8,84,160',
+        '255,255,255',
+        '8,84,160',
+        '16,126,62',
+        '187,0,0',
+        '233,115,12',
+        '8,84,160'
     ],
     textColorAttr: 'color',
     textAlignmentAttr: 'align-items',

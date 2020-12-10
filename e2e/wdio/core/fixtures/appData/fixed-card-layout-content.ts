@@ -3,6 +3,6 @@ export default {
     cardSpacingValue: '16px',
     cardWidthAttr: 'min-width',
     cardMinWidth: '320px',
-    placeholderBorderAttr: 'border-style',
+    placeholderBorderAttr: 'border-bottom-style',
     placeholderBorderStyle: 'dashed'
-}
+};

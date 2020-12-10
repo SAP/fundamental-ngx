@@ -23,7 +23,9 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/fixed-card-layout.e2e-spec.ts'
+       // './e2e/wdio/**/checkbox.e2e-spec.ts',
+       // './e2e/wdio/**/fixed-card-layout.e2e-spec.ts',
+       './e2e/wdio/**/*.e2e-spec.ts',
     ],
     // Patterns to exclude.
     exclude: [
@@ -60,7 +62,7 @@ exports.config = {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-internet-explorer',
                 requireWindowFocus: true,
-                //tags: [ "process.env.TRAVIS_BUILD_ID"],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -71,7 +73,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -82,7 +84,7 @@ exports.config = {
             "sauce:options": {
                 name: 'e2e-win-firefox',
                 screenResolution: '1920x1080',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -93,7 +95,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-chrome',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -104,7 +106,7 @@ exports.config = {
             "sauce:options": {
                 name: 'e2e-MAC-chrome',
                 screenResolution: '1920x1440',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -115,7 +117,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1440',
                 name: 'e2e-MAC-firefox',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -126,7 +128,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1440',
                 name: 'e2e-MAC-Edge',
-                //tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
         {
@@ -136,6 +138,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1440',
                 name: 'e2e-MAC-safari',
+                tags: [ process.env.TRAVIS_BUILD_ID],
             }
         },
     ],
@@ -146,7 +149,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'silent',
     //
     // Set specific log levels per logger
     // loggers:
@@ -213,7 +216,13 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
-    reporters: ['spec'],
+    // reporters: ['spec' , []],
+
+    reporters: ['spec',['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
 
     jasmineNodeOpts: {
         isVerbose: true,
@@ -222,7 +231,7 @@ exports.config = {
         grep: null,
         invertGrep: null,
     },
-
+  
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -245,12 +254,8 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function () {
-    //    browser.resetUrl = 'about:blank';
-    //    browser.driver.manage.window.maximize();
-    //    browser.maximize();
-    //    browser.window.maximize();
-    // },
+     // onPrepare: function () {
+     // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -287,7 +292,7 @@ exports.config = {
                 domElement.focus();
             }, this);
         }, true);
-
+      
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
     },
@@ -379,10 +384,10 @@ exports.config = {
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
     /**
-     * Gets executed when a refresh happens.
-     * @param {String} oldSessionId session ID of the old session
-     * @param {String} newSessionId session ID of the new session
-     */
+    * Gets executed when a refresh happens.
+    * @param {String} oldSessionId session ID of the old session
+    * @param {String} newSessionId session ID of the new session
+    */
     //onReload: function(oldSessionId, newSessionId) {
     //}
 };

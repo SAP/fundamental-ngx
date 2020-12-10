@@ -20,7 +20,7 @@ export class SplitMenuButtonPo extends BaseComponentPo {
     iconBtnAttrArr = 'fdp-platform-split-button-icons-example fdp-split-menu-button';
 
     checkBtnSelectionChange(array, btnArray, expectation): void {
-        for (let i = 0; i < array.length; i ++) {
+        for (let i = 0; i < array.length; i++) {
             array[i].click();
             const menuItemsArr = browser.$$(this.menuItemArr);
             menuItemsArr[1].click();
