@@ -23,13 +23,13 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-       // './e2e/wdio/**/checkbox.e2e-spec.ts',
-       // './e2e/wdio/**/fixed-card-layout.e2e-spec.ts',
-       './e2e/wdio/**/*.e2e-spec.ts',
+        // './e2e/wdio/**/checkbox.e2e-spec.ts',
+        // './e2e/wdio/**/fixed-card-layout.e2e-spec.ts',
+        './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
-        './e2e/wdio/**/checkbox-group.e2e-spec.ts',
+        './e2e/wdio/**/checkbox-group.e2e-spec.ts'
     ],
     //
     // ============
@@ -58,11 +58,11 @@ exports.config = {
             browserName: 'internet explorer',
             browserVersion: 'latest',
             platformName: 'Windows 10',
-            "sauce:options": {
+            'sauce:options': {
                 screenResolution: '1920x1080',
-                name: 'e2e-win-internet-explorer',
+                name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID,
                 requireWindowFocus: true,
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
         },
         {
@@ -70,10 +70,10 @@ exports.config = {
             browserVersion: 'latest',
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
-            "sauce:options": {
+            'sauce:options': {
                 screenResolution: '1920x1080',
-                name: 'e2e-win-edge',
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID,
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
         },
         {
@@ -81,10 +81,10 @@ exports.config = {
             browserVersion: 'latest',
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
-            "sauce:options": {
-                name: 'e2e-win-firefox',
+            'sauce:options': {
+                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID,
                 screenResolution: '1920x1080',
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
         },
         {
@@ -92,10 +92,10 @@ exports.config = {
             browserVersion: 'latest',
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
-            "sauce:options": {
+            'sauce:options': {
                 screenResolution: '1920x1080',
-                name: 'e2e-win-chrome',
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID,
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
         },
         {
@@ -103,10 +103,10 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            "sauce:options": {
-                name: 'e2e-MAC-chrome',
+            'sauce:options': {
+                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID,
                 screenResolution: '1920x1440',
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
         },
         {
@@ -114,10 +114,10 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            "sauce:options": {
+            'sauce:options': {
                 screenResolution: '1920x1440',
-                name: 'e2e-MAC-firefox',
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID,
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
         },
         {
@@ -125,22 +125,22 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            "sauce:options": {
+            'sauce:options': {
                 screenResolution: '1920x1440',
-                name: 'e2e-MAC-Edge',
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID,
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
         },
         {
             browserName: 'safari',
             browserVersion: '13.1',
             platformName: 'macOS 10.15',
-            "sauce:options": {
+            'sauce:options': {
                 screenResolution: '1920x1440',
-                name: 'e2e-MAC-safari',
-                tags: [ process.env.TRAVIS_BUILD_ID],
+                name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
+                tags: [process.env.TRAVIS_BUILD_ID]
             }
-        },
+        }
     ],
     //
     // ===================
@@ -192,7 +192,7 @@ exports.config = {
     // services: ['chromedriver'],
     services: [
         ['sauce', {
-            sauceConnect: true,
+            sauceConnect: true
         }]
     ],
 
@@ -218,10 +218,12 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['spec' , []],
 
-    reporters: ['spec',['allure', {
+    reporters: [['spec', {
+        symbols: { passed: '[PASS]', failed: '[FAIL]' }
+    }], ['allure', {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
+        disableWebdriverScreenshotsReporting: true
     }]],
 
     jasmineNodeOpts: {
@@ -229,9 +231,9 @@ exports.config = {
         showColors: true,
         defaultTimeoutInterval: 700000,
         grep: null,
-        invertGrep: null,
+        invertGrep: null
     },
-  
+
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -254,29 +256,28 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-     onPrepare: function () {
-        if (processedConfig.sauceUser && processedConfig.sauceKey) {
-            jasmine.getEnv().addReporter({
-                suiteStarted: async (result) => {
-                    await browser.executeScript('sauce:job-name=' + result.fullName);
-                },
-                specStarted: async (result) => {
-                    await browser.executeScript('sauce:context=' + result.fullName);
-                },
-                specDone: async (result) => {
-                    // If there are errors please update the error to Sauce Labs
-                    if (result.failedExpectations.length > 0) {
-                        const promisses = result.failedExpectations.map(async error => {
-                            const errorUpdate = await browser.executeScript('sauce:context=' + error.stack);
+    onPrepare: function() {
+        jasmine.getEnv().addReporter({
+            suiteStarted: async (result) => {
+                await browser.executeScript('sauce:job-name=' + result.fullName);
+            },
+            specStarted: async (result) => {
+                await browser.executeScript('sauce:context=' + result.fullName);
+            },
+            specDone: async (result) => {
+                // If there are errors please update the error to Sauce Labs
+                if (result.failedExpectations.length > 0) {
+                    const promisses = result.failedExpectations.map(async error => {
+                        const errorUpdate = await browser.executeScript('sauce:context=' + error.stack);
 
-                            return errorUpdate;
-                        });
-                        await Promise.all(promisses);
-                    }
-                },
-            });
-        }
-     },
+                        return errorUpdate;
+                    });
+                    await Promise.all(promisses);
+                }
+            }
+        });
+
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -303,20 +304,20 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function () {
+    before: function() {
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });
 
-        browser.addCommand('focus', function () {
-            browser.execute(function (domElement) {
+        browser.addCommand('focus', function() {
+            browser.execute(function(domElement) {
                 domElement.focus();
             }, this);
         }, true);
-      
+
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
-    },
+    }
 
 
 //     const processedConfig = await browser.getProcessedConfig();
@@ -405,10 +406,10 @@ exports.config = {
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
     /**
-    * Gets executed when a refresh happens.
-    * @param {String} oldSessionId session ID of the old session
-    * @param {String} newSessionId session ID of the new session
-    */
+     * Gets executed when a refresh happens.
+     * @param {String} oldSessionId session ID of the old session
+     * @param {String} newSessionId session ID of the new session
+     */
     //onReload: function(oldSessionId, newSessionId) {
     //}
 };
