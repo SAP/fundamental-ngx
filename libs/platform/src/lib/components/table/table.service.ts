@@ -8,6 +8,7 @@ import { SortDirection } from './enums';
 import { DEFAULT_TABLE_STATE } from './constants';
 import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange } from './models';
 
+
 @Injectable()
 export class TableService {
     private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
