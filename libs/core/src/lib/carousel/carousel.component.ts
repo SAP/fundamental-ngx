@@ -308,14 +308,14 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     @HostListener('keydown.arrowright', ['$event'])
     onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
-        this.next();
+        this.dir === 'rtl' ? this.previous() : this.next();
     }
 
     /** @hidden */
     @HostListener('keydown.arrowleft', ['$event'])
     onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
-        this.previous();
+        this.dir === 'rtl' ? this.next() : this.previous();
     }
 
     /** Transitions to the previous slide in the carousel. */
