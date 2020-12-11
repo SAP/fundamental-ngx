@@ -130,8 +130,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 this._setupStepEvents(step);
             });
             this._cdRef.detectChanges();
+            this.resizeHandler();
         });
-        this.resizeHandler();
     }
 
     /** @hidden */
@@ -252,7 +252,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         let _stepId = 0;
         this.steps.forEach((step) => {
             if (step.content) {
-                step.content.tallContent = false;
+                if (!step.isSummary) {
+                    step.content.tallContent = false;
+                }
                 step.content.wizardContentId = _stepId.toString();
             }
             step._stepId = _stepId;
@@ -298,7 +300,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this.steps.last.content.tallContent = true;
             this.steps.last.finalStep = true;
         }
-        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -395,11 +396,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this._setContentTemplates();
             this._shrinkWhileAnyStepIsTooNarrow();
         }
-        this._cdRef.detectChanges();
-        this._setContainerAndTallContentHeight();
-        if (!this._isCurrentStepSummary()) {
-            this._scrollToCurrentStep();
-        }
+        setTimeout(() => {
+            this._cdRef.detectChanges();
+            this.resizeHandler();
+            if (!this._isCurrentStepSummary()) {
+                this._scrollToCurrentStep();
+            }
+        });
     }
 
     /** @hidden */
@@ -407,6 +410,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const summary = this.steps.filter((step) => {
             return step.isSummary;
         });
+        summary[0].content.tallContent = true;
         this.contentTemplates = [summary[0].content.contentTemplate];
     }
 

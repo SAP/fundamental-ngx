@@ -140,6 +140,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     ngAfterViewInit(): void {
         if (this.isSummary) {
             this._elRef.nativeElement.style.display = 'none';
+            this.content.tallContent = true;
         } else if (this.stepIndicator) {
             this._subscriptions.add(
                 this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
