@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.50...v0.25.0-rc.51) (2020-12-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed badge as a standalone component
+
+### Bug Fixes
+
+* remove badge as a standalone component [#3350](https://github.com/SAP/fundamental-ngx/issues/3350) ([#4068](https://github.com/SAP/fundamental-ngx/issues/4068)) ([f153433](https://github.com/SAP/fundamental-ngx/commit/f153433e814c3b33f951896a69331b079ce9a281))
+
 ## [0.25.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.49...v0.25.0-rc.50) (2020-12-11)
 
 
