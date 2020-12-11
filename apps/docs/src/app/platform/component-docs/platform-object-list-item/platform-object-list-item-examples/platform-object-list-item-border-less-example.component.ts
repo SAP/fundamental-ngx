@@ -56,7 +56,7 @@ export class PlatformObjectListItemBorderLessExampleComponent {
             title: 'Apple Macintosh Performa/Power Macintosh 5200' +
             'Checking looooooooooooooooooooooooooooooooooo' +
             'ooooooooooooooooooooooooooooooooooo' +
-            'ooooooooooooooooooooooooooooooooooog text' +
+            'ooooooooooooooooooooooooooooooooooong text' +
             'Macintosh Performa Power Macintosh 24/5200' +
             'Macintosh Performa Power Macintosh 24/5200',
             introductionText: 'Gladiator product with discount',
