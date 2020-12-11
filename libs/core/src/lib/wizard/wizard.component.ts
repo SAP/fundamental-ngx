@@ -293,13 +293,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.visited = true;
             }
         });
-        if (this.steps.last.isSummary && this.steps.toArray()[this.steps.length - 2]) {
-            this.steps.toArray()[this.steps.length - 2].content.tallContent = true;
-            this.steps.toArray()[this.steps.length - 2].finalStep = true;
-        } else if (this.steps.last.content) {
-            this.steps.last.content.tallContent = true;
-            this.steps.last.finalStep = true;
-        }
     }
 
     /** @hidden */
@@ -334,6 +327,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         stepsArray = stepsArray.filter((step) => {
             return !step.hasLabel(STEP_NO_LABEL_CLASS);
         });
+        if (this.steps.last.isSummary) {
+            stepsArray.pop();
+        }
         if (stepsArray.length > 1) {
             let currentStepIndex = 0,
                 stepToHide;
@@ -403,6 +399,18 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 this._scrollToCurrentStep();
             }
         });
+        this._setFinalStep();
+    }
+
+    /** @hidden */
+    private _setFinalStep(): void {
+        if (this.steps.last.isSummary && this.steps.toArray()[this.steps.length - 2]) {
+            this.steps.toArray()[this.steps.length - 2].content.tallContent = true;
+            this.steps.toArray()[this.steps.length - 2].finalStep = true;
+        } else if (this.steps.last.content) {
+            this.steps.last.content.tallContent = true;
+            this.steps.last.finalStep = true;
+        }
     }
 
     /** @hidden */
