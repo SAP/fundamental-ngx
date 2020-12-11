@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.49...v0.25.0-rc.50) (2020-12-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed deprecated file-input
+
+### Bug Fixes
+
+* remove deprecated component file-input ([#4067](https://github.com/SAP/fundamental-ngx/issues/4067)) ([4a82777](https://github.com/SAP/fundamental-ngx/commit/4a827775bd7811dd41148ad9f050cb88f1938f2f))
+
 ## [0.25.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.48...v0.25.0-rc.49) (2020-12-10)
 
 
