@@ -30,6 +30,6 @@ export class PlatformDynamicPageTabbedExampleComponent {
     }
 
     onTabChanged(event: DynamicPageTabChangeEvent): void {
-        console.log('tab changedd to ' + event.payload);
+        console.log('tab changed to ' + event.payload);
     }
 }
