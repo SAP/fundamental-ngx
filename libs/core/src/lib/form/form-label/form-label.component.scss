@@ -3,3 +3,18 @@
 .fd-form-label--custom-inline-help {
 	max-width: calc(100% - 1.5rem);
 }
+
+.fd-form__inline-help {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+
+	@at-root {
+		[dir="rtl"] &,
+		&[dir="rtl"] {
+			left: auto;
+			right: 0;
+		}
+	}
+}
