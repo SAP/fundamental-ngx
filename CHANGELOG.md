@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.51...v0.25.0-rc.52) (2020-12-11)
+
+
+### Bug Fixes
+
+* (Platform) Long title example added for object list item ([#4079](https://github.com/SAP/fundamental-ngx/issues/4079)) ([e75d1d2](https://github.com/SAP/fundamental-ngx/commit/e75d1d2d53ed693f2f7ce2dbdf8a52fcd7b31b56))
+
 ## [0.25.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.50...v0.25.0-rc.51) (2020-12-11)
 
 
