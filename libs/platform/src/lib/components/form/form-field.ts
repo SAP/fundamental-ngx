@@ -35,6 +35,9 @@ export abstract class FormField {
      * Indicates in which FormZone a form field should be rendered
      */
     zone: FormZone;
+
+
+    column: number; // temp type
     /**
      * Translations template reference
      */

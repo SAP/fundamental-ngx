@@ -255,6 +255,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
         this.updateFieldByZone();
         this.updateFormFieldsProperties();
+        this.updateFieldByColumn();
         this._cd.markForCheck();
     }
 
@@ -291,6 +292,33 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     trackByFieldName(index: number, zoneField: GroupField): string | undefined {
         return zoneField ? zoneField.name : undefined;
+    }
+
+    private updateFieldByColumn(): void {
+        const xl = this.columnLayoutType.split('-');
+        const xlColumnsNumber = parseInt(xl[0].slice(2, xl.length), 10);
+
+        const mergedFields = [];
+
+        this.formFieldChildren.forEach((item, index) => {
+            if (xlColumnsNumber && item.column) {
+                const field = new GroupField(
+                    item.zone,
+                    'test' + index,
+                    item.column,
+                    item.renderer,
+                    xlColumnsNumber
+                );
+
+                this._setUserSpecifiedLayout(field);
+
+                mergedFields.push(field);
+            }
+        });
+
+
+        console.log('merged new', mergedFields);
+        this.mZone = mergedFields;
     }
 
     /**
@@ -334,6 +362,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
         this.evenFields(zLeft, zRight);
         this.mZone = this.calculateMainZone(zLeft, zRight);
+        console.log(this.mZone);
     }
 
     /** @hidden */
@@ -507,12 +536,13 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
 export class GroupField {
     constructor(
-        public zone: string,
-        public name: string,
-        public rank: number,
+        public zone?: string,
+        public name?: string,
+        public rank?: number,
         public renderer?: TemplateRef<any>,
         public columns: number = 6,
         public isFluid: boolean = false,
-        public styleClass?: string
+        public styleClass?: string,
+        public column?: number
     ) {}
 }

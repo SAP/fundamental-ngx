@@ -88,6 +88,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     placeholder: string;
 
+    /** A column in belongs to */
+    @Input()
+    column: number;
+
     @Input()
     fluid = false;
     /**
