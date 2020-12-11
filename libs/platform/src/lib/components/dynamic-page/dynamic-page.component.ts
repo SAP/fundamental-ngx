@@ -22,7 +22,7 @@ import { startWith } from 'rxjs/operators';
 
 import { BaseComponent } from '../base';
 import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from './constants';
-import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
+import { DynamicPageContentComponent, DynamicPageTabChangeEvent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageService } from './dynamic-page.service';
@@ -385,6 +385,16 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
             default:
                 break;
         }
+    }
+
+
+    /** @hidden
+     * handle tab changes and emit event
+     */
+    _handleTabChange(index: number): void {
+        const event = new DynamicPageTabChangeEvent(this.contentComponent, index);
+        this.contentComponent.tabChange.emit(event);
+        this._cd.detectChanges();
     }
 
     /** @hidden */
