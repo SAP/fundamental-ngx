@@ -69,19 +69,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     noLabelLayout = false;
 
-    /**
-     * By default form field does not render any content as it is wrapped inside ng-template and
-     * controlled by parent. This is for cases where FormField is direct child of the form-group.
-     *
-     * In case we have more nested structure and Form-Field is wrapped with some other element
-     * that controls the rendering we need to let go this rendering and render the content
-     * directly
-     */
-    @Input()
-    forceRender = false;
-
     @Input()
     validators: Array<ValidatorFn> = [Validators.nullValidator];
+
+    /**
+     * There are cases where we need deffer validator initialization due to the
+     * ExpressionChangedAfterItHasBeenCheckedError. Please see registerFormFieldControl method
+     */
+    @Input()
+    ignoreDefaultValidators = false;
 
     @Input()
     rank: number;
@@ -96,6 +92,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      */
     @Input()
     i18Strings: TemplateRef<any>;
+
+    @Input()
+    formGroupParent: FormGroupContainer;
 
     @Input()
     get required(): boolean {
@@ -166,7 +165,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, @Optional() readonly formGroupContainer: FormGroupContainer) {
+    constructor(private _cd: ChangeDetectorRef,
+                @Optional() private formGroupContainer: FormGroupContainer
+    ) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
     }
@@ -175,6 +176,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     ngOnInit(): void {
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
+        }
+
+        if (!this.formGroupContainer) {
+            this.formGroupContainer = this.formGroupParent;
         }
 
         if (this.fluid) {
@@ -192,7 +197,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     ngAfterViewInit(): void {
         this.updateControlProperties();
-        this.validateErrorHandler();
         this._cd.detectChanges();
     }
 
@@ -238,10 +242,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (formFieldControl?.ngControl?.control) {
             const control = formFieldControl.ngControl.control;
 
-            if (this.required && !this.validators.includes(Validators.required)) {
-                this.validators.push(Validators.required);
-            }
-
             // if form control is disabled, in reactive form approach
             if (this.disabled) {
                 control.disable();
@@ -256,10 +256,18 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
              * To fix it we have to postpone adding form-field validators
              *
              */
-            Promise.resolve().then(() => {
-                control.setValidators(Validators.compose(this.validators));
-                control.updateValueAndValidity({ emitEvent: false });
-            });
+            if (!this.ignoreDefaultValidators) {
+                if (this.required && !this.validators.includes(Validators.required)) {
+                    this.validators.push(Validators.required);
+                }
+
+                Promise.resolve().then(() => {
+                    control.setValidators(Validators.compose(this.validators));
+                    control.updateValueAndValidity({ emitEvent: false });
+                });
+
+            }
+
 
             this.addControlToFormGroup(formFieldControl?.ngControl?.control);
         }
@@ -281,8 +289,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this.removeControlFromFormGroup();
     }
 
-    /** @hidden */
-    private validateErrorHandler(): void {
+    /**
+     * Used by Parent container once all is initialized if we have i18n translation. There must be one.
+     */
+    validateErrorHandler(): void {
         if (this._editable && this.control && this.hasValidators() && !this.i18Strings) {
             throw new Error('Validation strings are required for the any provided validations.');
         }

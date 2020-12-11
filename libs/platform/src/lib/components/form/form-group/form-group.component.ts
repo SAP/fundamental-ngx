@@ -248,6 +248,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
         this.updateFieldByZone();
         this.updateFormFieldsProperties();
+        this.validateErrorHandler();
         this._cd.markForCheck();
     }
 
@@ -332,6 +333,13 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     /** @hidden */
     private updateFormFieldsProperties(): void {
         this.formFieldChildren.forEach((formField) => this.updateFormFieldProperties(formField));
+    }
+
+    /** @hidden */
+    private validateErrorHandler(): void {
+        if (this.editable) {
+            this.formFieldChildren.forEach((formField) => formField.validateErrorHandler());
+        }
     }
 
     /**

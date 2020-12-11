@@ -1,7 +1,12 @@
 import { TemplateRef } from '@angular/core';
 
 import { FormFieldControl } from './form-control';
-import { LabelLayout, Column, FormZone, HintPlacement } from './form-options';
+import {
+    Column,
+    FormZone,
+    HintPlacement,
+    LabelLayout
+} from './form-options';
 
 /**
  * FormField base class.
@@ -67,4 +72,6 @@ export abstract class FormField {
      * Unregister underlying form control
      */
     unregisterFormFieldControl: (control: FormFieldControl<any>) => void;
+
+    validateErrorHandler: () => void;
 }

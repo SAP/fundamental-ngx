@@ -5,6 +5,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 import {
     ButtonModule,
+    DynamicComponentService,
     InputGroupModule,
     ListModule,
     TemplateModule
@@ -20,6 +21,8 @@ import { AutoCompleteDirective } from './directives/auto-complete.directive';
         InputGroupModule, ListModule, ButtonModule,
         OverlayModule
     ],
-    exports: [ComboboxComponent, TemplateModule]
+    exports: [ComboboxComponent, TemplateModule],
+    providers: [DynamicComponentService]
 })
-export class PlatformComboboxModule {}
+export class PlatformComboboxModule {
+}
