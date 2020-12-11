@@ -141,6 +141,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         if (this.isSummary) {
             this._elRef.nativeElement.style.display = 'none';
             this.content.tallContent = true;
+            this.removeFromDom();
         } else if (this.stepIndicator) {
             this._subscriptions.add(
                 this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
@@ -151,6 +152,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
                 this.glyph = this.stepIndicator.glyph;
             }
         }
+
     }
 
     /** @hidden */
@@ -191,5 +193,10 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     getStepClientWidth(): number {
         return this._elRef.nativeElement.clientWidth;
+    }
+
+    /** @hidden */
+    removeFromDom(): void {
+        this._elRef.nativeElement.remove();
     }
 }

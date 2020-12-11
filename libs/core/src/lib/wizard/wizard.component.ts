@@ -407,6 +407,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         if (this.steps.last.isSummary && this.steps.toArray()[this.steps.length - 2]) {
             this.steps.toArray()[this.steps.length - 2].content.tallContent = true;
             this.steps.toArray()[this.steps.length - 2].finalStep = true;
+            this.steps.last.removeFromDom();
         } else if (this.steps.last.content) {
             this.steps.last.content.tallContent = true;
             this.steps.last.finalStep = true;
