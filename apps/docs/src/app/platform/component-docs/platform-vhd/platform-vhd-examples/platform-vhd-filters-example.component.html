@@ -1,28 +1,26 @@
 <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
-<p>SelectedValue:</p>
-<pre *ngIf="selectedValue.length">{{ selectedValue | json }}</pre>
+<label>Disable all include filters <input type="checkbox" [(ngModel)]="hasIncluded" /></label>
+<label>Disable all exclude filters <input type="checkbox" [(ngModel)]="hasExcluded" /></label>
 
 <fdp-value-help-dialog #vhd
     dialogTitle="Different Filters"
     uniqueKey="id"
+    selectTabTitle="Select from list"
+    defineTabTitle="Define Conditions"
     [dataSource]="dataSource"
     (valueChange)="valueChange($event)"
 >
     <fdp-value-help-dialog-search
         placeholder="Search..."
     ></fdp-value-help-dialog-search>
+
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"
         [key]="filter.key"
         [label]="filter.label"
         [advanced]="filter.advanced || hasAdvanced"
-        [include]="filter.include"
-        [exclude]="filter.exclude"
+        [include]="filter.include && hasIncluded"
+        [exclude]="filter.exclude && hasExcluded"
     ></fdp-value-help-dialog-filter>
-    <fdp-select-tab-settings
-        tabTitle="Select from list"
-        selection="multi"
-        [pageSize]="20">
-    </fdp-select-tab-settings>
 </fdp-value-help-dialog>

@@ -1,18 +1,26 @@
 <div>
     <fd-multi-input
-        [dropdownValues]="originSource"
-        placeholder="Search here..."
+        [dropdownValues]="originalData"
+        placeholder="Search here"
         [displayFn]="displayFunc"
-        [(ngModel)]="selectedValue"
-    ></fd-multi-input>
+
+        [allowNewTokens]="true"
+        [newTokenParseFn]="parseFunc"
+
+        [(ngModel)]="currentValue.selected"
+        (selectedChange)="multiSelectChange()"
+    >
+        <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
+    </fd-multi-input>
+
     <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
 </div>
-<p>SelectedValue:</p>
-<pre *ngIf="selectedValue.length">{{ selectedValue | json }}</pre>
 
 <fdp-value-help-dialog #vhd
     dialogTitle="Multiple selection"
     uniqueKey="id"
+    selectTabTitle="Select from list"
+    defineTabTitle="Define Conditions"
     [dataSource]="dataSource"
     [value]="currentValue"
     (valueChange)="valueChange($event)"
@@ -29,9 +37,4 @@
         [include]="filter.include"
         [exclude]="filter.exclude"
     ></fdp-value-help-dialog-filter>
-    <fdp-select-tab-settings
-        tabTitle="Select from list"
-        selection="multi"
-        [pageSize]="20">
-    </fdp-select-tab-settings>
 </fdp-value-help-dialog>

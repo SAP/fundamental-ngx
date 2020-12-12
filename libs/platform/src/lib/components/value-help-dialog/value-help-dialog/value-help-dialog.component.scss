@@ -20,21 +20,20 @@ $block: fdp-value-help-dialog;
     }
     .fd-dialog__header {
         box-shadow: none;
-
         .fd-title {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: .25rem 1rem;
             min-height: 2.5rem;
-            border-bottom: 2px solid grey;
-
-            [fd-title] {
-                margin: 0;
-                font-weight: normal;
-                display: inline-flex;
-                width: 100%;
-                justify-content: center;
+            border-bottom: 1px solid #d9d9d9;
+        }
+        .#{$block}__mobile-title {
+            display: flex;
+            border-bottom: 1px solid #d9d9d9;
+            .fd-title {
+                flex: 1 1 auto;
+                border: none;
             }
         }
     }
@@ -50,30 +49,6 @@ $block: fdp-value-help-dialog;
             padding: 0;
         }
     }
-    &__advanced-search,
-    .fd-dialog__body {
-        background-color: #FAFAFA;
-    }
-    &__advanced-search {
-        .fd-form-label {
-            display: flex;
-            justify-content: flex-end;
-            text-align: end;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            padding-right: .25rem;
-            white-space: normal;
-            .#{$block}-mobile & {
-                justify-content: flex-start;
-            }
-        }
-    }
-    &__advanced-filters {
-        .fd-col {
-            padding-top: 0;
-        }
-    }
     &__content-holder {
         padding: 0 2rem 2rem;
         display: flex;
@@ -81,26 +56,6 @@ $block: fdp-value-help-dialog;
         height: 100%;
         width: 100%;
         overflow: hidden;
-
-        fdp-select-tab-settings {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .table-header {
-            flex: 0 0 auto;
-        }
-        .table-content {
-            flex: 1 1 auto;
-            overflow: auto;
-        }
-    }
-    &__table-holder {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-    &__more-items {
-        background: none;
     }
     &__row {
         padding: 1rem 2rem;
@@ -109,11 +64,13 @@ $block: fdp-value-help-dialog;
             padding: .5rem 2rem .5rem 1rem;
         }
     }
+    &__tokens-wrapper {
+        margin: 0 0 0 2.75rem;
+    }
     &__tokens {
         display: flex;
         align-items: center;
         border: 1px solid #89919a;
-        margin: 0 0 0 2.75rem;
         padding-right: 0.5rem;
         border-radius: var(--sapElement_BorderCornerRadius, .25rem);
         background: none;
@@ -140,9 +97,6 @@ $block: fdp-value-help-dialog;
         .fd-button {
             margin-left: .5rem;
         }
-    }
-    &__empty-message {
-        padding: 1rem 2rem;
     }
     &__selection-token {
         margin-bottom: 0.25rem;

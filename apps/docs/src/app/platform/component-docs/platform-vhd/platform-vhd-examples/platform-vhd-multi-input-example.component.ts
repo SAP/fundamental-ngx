@@ -45,27 +45,32 @@ const exampleDataSource = () => {
 })
 export class PlatformVhdMultiInputExampleComponent implements OnInit {
   filters: any;
-  originSource: Array<ExampleTestModel>;
+  originalData: ExampleTestModel[];
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
-
-  selectedValue = [];
   currentValue: VhdValueChangeEvent = {};
 
   ngOnInit(): void {
     const data = exampleDataSource();
     this.filters = data.filters;
-    this.originSource = data.dataSource as ExampleTestModel[];
-    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(this.originSource));
+    this.originalData = data.dataSource;
+    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
   }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
-    console.log($event);
     this.currentValue = $event;
-    this.selectedValue = [...($event.selected || [])];
   }
 
   displayFunc(obj: any): string {
     return obj.name.toLocaleUpperCase();
   }
 
+  multiSelectChange(): void {
+    this.currentValue = {...this.currentValue};
+  }
+
+  parseFunc(value: string): object {
+    if (value && value.length) {
+        return { name: value, id: Date.now() };
+    }
+  }
 }

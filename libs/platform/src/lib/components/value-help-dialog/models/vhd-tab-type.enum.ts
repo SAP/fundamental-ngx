@@ -1,4 +1,4 @@
-export enum ValueHelpDialogTabs {
+export enum VhdTab {
   selectFromList,
   defineConditions,
   advancedSearch,

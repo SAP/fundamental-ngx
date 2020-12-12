@@ -1,123 +1,147 @@
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs';
 
-import {
-  TokenModule,
-  ButtonModule,
-  TabsModule,
-  DialogModule,
-  FormModule,
-  CheckboxModule,
-  LayoutGridModule,
-  ToolbarModule,
-  TableModule,
-  PipeModule,
-  IconModule,
-  ListModule,
-  LinkModule,
-  BarModule,
-  DynamicComponentService
-} from '@fundamental-ngx/core';
-import { ValueHelpDialogDataSource, ValueHelpDialogTabs, VhdDataProvider } from '../models';
-import { ValueHelpDialogService } from '../value-help-dialog.service';
-import {
-  VhdFilterComponent,
-  SelectTabSettingsComponent,
-  DefineTabSettingsComponent,
-  VhdSearchComponent,
-  TableRow
-} from '../components';
 import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
+import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
 
-class MockValueHelpDialogService extends ValueHelpDialogService<any> {
-  selectedItems$: BehaviorSubject<Array<any>> = new BehaviorSubject([]);
-  displayedData$: BehaviorSubject<Array<any>> = new BehaviorSubject([]);
+async function whenStable(fixture: ComponentFixture<any>): Promise<void> {
+  fixture.changeDetectorRef.markForCheck();
+  fixture.detectChanges();
+  await fixture.whenStable();
+}
+@Component({
+  template: `
+    <fdp-value-help-dialog #vhd
+        dialogTitle="Simple value help dialog"
+        uniqueKey="id"
+        selectTabTitle="Select from list"
+        defineTabTitle="Define Conditions"
+        [dataSource]="data"
+    >
+        <fdp-value-help-dialog-search
+            placeholder="Search..."
+        ></fdp-value-help-dialog-search>
+        <fdp-value-help-dialog-filter
+            main="true"
+            key="name"
+            label="Name"
+            [advanced]="true"
+            [include]="true"
+            [exclude]="true"
+        ></fdp-value-help-dialog-filter>
+        <fdp-value-help-dialog-filter
+            key="type"
+            label="Type"
+            [advanced]="true"
+            [include]="true"
+            [exclude]="true"
+        ></fdp-value-help-dialog-filter>
+        <fdp-value-help-dialog-filter
+            key="code"
+            label="Code"
+            [advanced]="true"
+            [include]="true"
+            [exclude]="true"
+        ></fdp-value-help-dialog-filter>
+    </fdp-value-help-dialog>
+  `
+})
+class TestWrapperComponent {
+  data = Array(10).fill(null).map((_, i) => {
+    return { name: `Name ${ i }`, type: `Type ${ i }`, code: `${ i }` };
+  });
+
+  @ViewChild(PlatformValueHelpDialogComponent, {static: true})
+  vhdComponent: PlatformValueHelpDialogComponent<any>;
 }
 
-fdescribe('PlatformValueHelpDialogComponent', () => {
-  const service = new MockValueHelpDialogService();
-  const dataSource = Array(10).fill(null).map((_, i) => {
-    return { name: `Name ${ i }`, type: `Type ${ i }` };
-  });
-  let component: PlatformValueHelpDialogComponent<any>;
-  let fixture: ComponentFixture<PlatformValueHelpDialogComponent<any>>;
+describe('PlatformValueHelpDialogComponent', () => {
+  let testComponent: TestWrapperComponent;
+  let testFixture: ComponentFixture<TestWrapperComponent>;
+
 
   beforeEach(async () => {
-    const module = TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [
-        DialogModule,
-        TabsModule,
-        ButtonModule,
-        TokenModule,
-        FormModule,
-        LayoutGridModule,
-        ToolbarModule,
-        TableModule,
-        CheckboxModule,
-        PipeModule,
-        IconModule,
-        ListModule,
-        BarModule,
-        LinkModule
+        NoopAnimationsModule,
+        PlatformValueHelpDialogModule
       ],
       declarations: [
-        PlatformValueHelpDialogComponent,
-
-        VhdFilterComponent,
-        SelectTabSettingsComponent,
-        DefineTabSettingsComponent,
-        VhdSearchComponent]
-      ,
-      providers: [
-        DynamicComponentService,
-        ValueHelpDialogService
+        TestWrapperComponent
       ]
-    });
-    TestBed.overrideComponent(
+    })
+    .overrideComponent(
       PlatformValueHelpDialogComponent,
       {
         set: {
-          providers: [{
-            provide: ValueHelpDialogService,
-            useExisting: service
-          }]
+          changeDetection: ChangeDetectionStrategy.Default
         }
       }
     );
-    await module.compileComponents();
   });
 
+
+  function setup(): void {
+    TestBed.compileComponents();
+    testFixture = TestBed.createComponent(TestWrapperComponent);
+    testComponent = testFixture.componentInstance;
+    testFixture.detectChanges();
+  }
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlatformValueHelpDialogComponent);
-    component = fixture.componentInstance;
-    component.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(dataSource));
-    fixture.detectChanges();
+    setup();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create', async () => {
+    expect(testComponent).toBeTruthy();
+    await whenStable(testFixture);
+    expect(testComponent.vhdComponent).toBeTruthy();
   });
 
-  it('should has state service', () => {
-    const componentService = fixture.debugElement.injector.get(ValueHelpDialogService);
-    expect(componentService instanceof MockValueHelpDialogService).toBeTruthy();
+  it('should have value help dialog reference', async () => {
+    await whenStable(testFixture);
+    testComponent.vhdComponent.open();
+    expect(!!testComponent.vhdComponent.activeDialog).toBeTrue();
   });
 
-  it('should open', () => {
-    component.open();
-    expect(!!component.activeDialog).toBeTrue();
+  it('should have 3 filters', async () => {
+    await whenStable(testFixture);
+    expect(testComponent.vhdComponent.filters.length).toEqual(3);
   });
 
-  it('should close if we already opened dialog', () => {
-    component.dismiss();
-    fixture.detectChanges();
-    expect(!!component.activeDialog).toBeFalse();
+  it('should have 1 selected items', async () => {
+    await whenStable(testFixture);
+    testComponent.vhdComponent.value = {
+      selected: testComponent.data.slice(0, 3)
+    };
+    await whenStable(testFixture);
+    testComponent.vhdComponent.removeSelected(0);
+    await whenStable(testFixture);
+    expect(testComponent.vhdComponent.selectedItems.length).toEqual(2);
   });
 
-  it('should be closed if selected and excluded are empty', () => {
-    component._selectedExpandState = false;
-    component.toggleSelectedPanel();
-    fixture.detectChanges();
-    expect(component._selectedExpandState).toBeFalse();
+  it('should not emit value on cancel', async () => {
+    await whenStable(testFixture);
+    testComponent.vhdComponent.open();
+    await whenStable(testFixture);
+    spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
+    await whenStable(testFixture);
+    testComponent.vhdComponent.dismiss();
+    await whenStable(testFixture);
+    expect(testComponent.vhdComponent.valueChange.emit).not.toHaveBeenCalled();
+  });
+
+  it('should emit value on success', async () => {
+    await whenStable(testFixture);
+    testComponent.vhdComponent.open();
+    testComponent.vhdComponent.value = {
+      selected: testComponent.data.slice(0, 3)
+    };
+    await whenStable(testFixture);
+    spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
+    await whenStable(testFixture);
+    testComponent.vhdComponent.success();
+    await whenStable(testFixture);
+    expect(testComponent.vhdComponent.valueChange.emit).toHaveBeenCalled();
   });
 });

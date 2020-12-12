@@ -51,6 +51,8 @@ export class PlatformVhdFiltersExampleComponent implements OnInit {
 
   selectedValue = [];
   currentValue: VhdValueChangeEvent = {};
+  hasIncluded = true;
+  hasExcluded = true;
 
   ngOnInit(): void {
     const data = exampleDataSource();

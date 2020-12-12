@@ -1,7 +1,7 @@
-import { IncludedEntity, ExcludedEntity } from './vhd-filter-rule.model';
+import { VhdIncludedEntity, VhdExcludedEntity } from './vhd-filter-rule.model';
 
 export interface VhdValueChangeEvent<S = unknown> {
   selected?: S;
-  included?: IncludedEntity[];
-  excluded?: ExcludedEntity[];
+  included?: VhdIncludedEntity[];
+  excluded?: VhdExcludedEntity[];
 }

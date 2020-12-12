@@ -1,27 +1,16 @@
-export type VhdDefineType = 'include' | 'exclude';
-
-export enum VhdDefineStrategy {
-    contains = 'contains',
-    equalTo = 'equal to',
-    between = 'between',
-    startsWith = 'starts with',
-    endsWith = 'ends with',
-    lessThan = 'less than',
-    lessThanEqual = 'less than or equal to',
-    greaterThan = 'greater than',
-    greaterThanEqual = 'greater than or equal to',
-    empty = 'empty'
-}
+import { VhdDefineStrategy } from './vhd-strategy.enum';
+import { VhdDefineType } from './vhd-type-condition.enum';
 
 class BetweenRule {
     from: string;
     to: string;
 }
-export interface VhdDefineEntityRule<T = string | BetweenRule> {
+export interface VhdDefineEntityRule {
     type: VhdDefineType;
-    value: T;
     key: string;
     strategy: VhdDefineStrategy;
+    value: string;
+    valueTo: string;
 }
 
 class BaseEntity implements VhdDefineEntityRule {
@@ -31,6 +20,7 @@ class BaseEntity implements VhdDefineEntityRule {
     strategy: VhdDefineStrategy;
     value = '';
     valueTo = '';
+    valid: boolean;
 
     constructor(strategy?: VhdDefineStrategy, key?: string) {
         if (key) {
@@ -39,9 +29,9 @@ class BaseEntity implements VhdDefineEntityRule {
         this.strategy = strategy || VhdDefineStrategy.equalTo;
     }
 }
-export class IncludedEntity extends BaseEntity {
-    type: VhdDefineType = 'include';
+export class VhdIncludedEntity extends BaseEntity {
+    type: VhdDefineType = VhdDefineType.include;
 }
-export class ExcludedEntity extends BaseEntity {
-    type: VhdDefineType = 'exclude';
+export class VhdExcludedEntity extends BaseEntity {
+    type: VhdDefineType = VhdDefineType.exclude;
 }

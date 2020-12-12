@@ -39,7 +39,6 @@ const exampleDataSource = () => {
 })
 export class PlatformVhdTokenExampleComponent implements OnInit {
   filters: any;
-  originSource: Array<ExampleTestModel>;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
   hasAdvanced = false;
 
@@ -53,7 +52,7 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
   }
 
   tokenizerFn = (row: ExampleTestModel) => {
-    return `${row.name} (${row.id})`;
+    return `${row.name} (Id: ${row.id})`;
   }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {

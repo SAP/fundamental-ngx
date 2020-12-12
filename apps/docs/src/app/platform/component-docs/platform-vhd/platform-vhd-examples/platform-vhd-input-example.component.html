@@ -1,20 +1,20 @@
-<div>
+<div fd-form-item>
+    <label fd-form-label for="test-selection-type-single">Selection type: single</label>
     <fd-input-group>
-        <input [value]="selectedValue?.name || ''" fd-input-group-input fd-form-control/>
+        <input fd-input-group-input fd-form-control id="test-selection-type-single" readonly [value]="values.single?.name"/>
         <span fd-input-group-addon button="true">
-            <button fd-button glyph="value-help" fdType="transparent" (click)="vhd.open()"></button>
+            <button fd-button glyph="value-help" [compact]="true" fdType="transparent" (click)="vhd1.open()"></button>
         </span>
     </fd-input-group>
 </div>
-<p>SelectedValue:</p>
-<pre *ngIf="selectedValue">{{ selectedValue | json }}</pre>
-
-<fdp-value-help-dialog #vhd
-    dialogTitle="Single select with input field"
+<fdp-value-help-dialog #vhd1
+    dialogTitle="Single select value help dialog"
     uniqueKey="id"
+    selectTabTitle="Select from list"
+    searchSelection="single"
+    tabs="select"
     [dataSource]="dataSource"
-    [value]="currentValue"
-    (valueChange)="valueChange($event)"
+    (valueChange)="values.single = $event.selected[0]"
 >
     <fdp-value-help-dialog-search
         placeholder="Search..."
@@ -24,13 +24,71 @@
         [main]="i < 2"
         [key]="filter.key"
         [label]="filter.label"
-        [advanced]="filter.advanced || hasAdvanced"
-        [include]="filter.include"
-        [exclude]="filter.exclude"
+        [advanced]="filter.advanced"
     ></fdp-value-help-dialog-filter>
-    <fdp-select-tab-settings
-        tabTitle="Select from list"
-        selection="once"
-        [pageSize]="20">
-    </fdp-select-tab-settings>
+</fdp-value-help-dialog>
+
+<div fd-form-item>
+    <label fd-form-label for="test-selection-type-single">Selection type: multi</label>
+    <div style="overflow: auto;">
+        <ng-container *ngIf="values.multi">
+            <fd-token
+                fd-toolbar-item
+                *ngFor="let item of values.multi"
+                [compact]="true"
+                [readOnly]="true"
+            >{{ item.name }}</fd-token>
+        </ng-container>
+        <button fd-toolbar-item fdOverflowPriority="never" [compact]="true" fd-button glyph="value-help" (click)="vhd2.open()"></button>
+    </div>
+</div>
+<fdp-value-help-dialog #vhd2
+    dialogTitle="Multi select value help dialog"
+    uniqueKey="id"
+    selectTabTitle="Select from list"
+    searchSelection="multi"
+    tabs="select"
+    [dataSource]="dataSource"
+    (valueChange)="values.multi = $event.selected"
+>
+    <fdp-value-help-dialog-search
+        placeholder="Search..."
+    ></fdp-value-help-dialog-search>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters; index as i"
+        [main]="i < 2"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced"
+    ></fdp-value-help-dialog-filter>
+</fdp-value-help-dialog>
+
+<div fd-form-item>
+    <label fd-form-label for="test-selection-type-once">Selection type: once</label>
+    <fd-input-group>
+        <input fd-input-group-input fd-form-control id="test-selection-type-once" readonly [value]="values.once?.name"/>
+        <span fd-input-group-addon button="true">
+            <button fd-button glyph="value-help" [compact]="true" fdType="transparent" (click)="vhd3.open()"></button>
+        </span>
+    </fd-input-group>
+</div>
+<fdp-value-help-dialog #vhd3
+    dialogTitle="Once select value help dialog"
+    uniqueKey="id"
+    selectTabTitle="Select from list"
+    searchSelection="multi"
+    tabs="select"
+    [dataSource]="dataSource"
+    (valueChange)="values.once = $event.selected"
+>
+    <fdp-value-help-dialog-search
+        placeholder="Search..."
+    ></fdp-value-help-dialog-search>
+    <fdp-value-help-dialog-filter
+        *ngFor="let filter of filters; index as i"
+        [main]="i < 2"
+        [key]="filter.key"
+        [label]="filter.label"
+        [advanced]="filter.advanced"
+    ></fdp-value-help-dialog-filter>
 </fdp-value-help-dialog>

@@ -26,16 +26,19 @@ import {
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
-import { SelectTabSettingsComponent } from './components/select-tab-settings/select-tab-settings.component';
-import { DefineTabSettingsComponent } from './components/define-tab-settings/define-tab-settings.component';
 import { VhdSearchComponent } from './components/value-help-dialog-search/value-help-dialog-search.component';
+import { SelectTabComponent } from './components/select-tab/select-tab.component';
+import { DefineTabComponent } from './components/define-tab/define-tab.component';
+import { ConditionCountMessageDirective } from './directives/condition-count-message.directive';
 @NgModule({
   declarations: [
     PlatformValueHelpDialogComponent,
     VhdFilterComponent,
-    SelectTabSettingsComponent,
-    DefineTabSettingsComponent,
     VhdSearchComponent,
+
+    SelectTabComponent,
+    DefineTabComponent,
+    ConditionCountMessageDirective,
   ],
   imports: [
     CommonModule,
@@ -64,8 +67,6 @@ import { VhdSearchComponent } from './components/value-help-dialog-search/value-
   exports: [
     PlatformValueHelpDialogComponent,
     VhdFilterComponent,
-    SelectTabSettingsComponent,
-    DefineTabSettingsComponent,
     VhdSearchComponent,
   ]
 })

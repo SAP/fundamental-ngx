@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefineTabSettingsComponent } from './define-tab-settings.component';
+import { SelectTabComponent } from './select-tab.component';
 
-describe('DefineTabSettingsComponent', () => {
-  let component: DefineTabSettingsComponent;
-  let fixture: ComponentFixture<DefineTabSettingsComponent>;
+describe('SelectTabComponent', () => {
+  let component: SelectTabComponent<any>;
+  let fixture: ComponentFixture<SelectTabComponent<any>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DefineTabSettingsComponent ]
+      declarations: [ SelectTabComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefineTabSettingsComponent);
+    fixture = TestBed.createComponent(SelectTabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

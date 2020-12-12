@@ -45,18 +45,20 @@ const exampleDataSource = () => {
 })
 export class PlatformVhdInputExampleComponent implements OnInit {
   filters: any;
-  originSource: Array<ExampleTestModel>;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
-  hasAdvanced = false;
 
+  values = {
+    single: null,
+    multi: null,
+    once: null
+  };
   selectedValue: ExampleTestModel;
   currentValue: VhdValueChangeEvent = {};
 
   ngOnInit(): void {
     const data = exampleDataSource();
     this.filters = data.filters;
-    this.originSource = data.dataSource as ExampleTestModel[];
-    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(this.originSource));
+    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
   }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {

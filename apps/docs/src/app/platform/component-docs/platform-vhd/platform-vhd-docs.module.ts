@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ButtonModule, MultiInputModule, InputGroupModule  } from '@fundamental-ngx/core';
+import { ButtonModule, MultiInputModule, InputGroupModule, TokenModule, ToolbarModule } from '@fundamental-ngx/core';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform';
 
 import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
@@ -33,12 +33,15 @@ const routes: Routes = [
 
 @NgModule({
 
-    imports: [RouterModule.forChild(routes),
+    imports: [
+        RouterModule.forChild(routes),
         CommonModule,
         SharedDocumentationPageModule,
         ButtonModule,
         InputGroupModule,
         MultiInputModule,
+        TokenModule,
+        ToolbarModule,
         PlatformValueHelpDialogModule
     ],
     exports: [RouterModule],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VhdDataProvider, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
+import { VhdDataProvider, VhdValueChangeEvent, ValueHelpDialogDataSource, VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineStrategy } from '@fundamental-ngx/platform';
 
 interface ExampleTestModel {
   id: number;
@@ -45,23 +45,57 @@ const exampleDataSource = () => {
 })
 export class PlatformVhdBasicExampleComponent implements OnInit {
   filters: any;
-  originSource: Array<ExampleTestModel>;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
 
-  actualValue: VhdValueChangeEvent = {};
-  currentValue: VhdValueChangeEvent = {};
+  actualValue: VhdValueChangeEvent<ExampleTestModel[]> = {};
+
+  actualItems = [];
+  formatTokenFn = ((value: VhdValueChangeEvent<ExampleTestModel[]>) => {
+    this.actualItems = [
+      ...(value.selected || []).map(item => item.name),
+      ...(value.included || []).map(item => this.conditionDisplayFn(item)),
+      ...(value.excluded || []).map(item => this.conditionDisplayFn(item))
+    ];
+  }).bind(this);
+  conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity) => {
+    let value = (() => {
+      switch (item.strategy) {
+        case VhdDefineStrategy.empty:
+          return null;
+        case VhdDefineStrategy.between:
+          return `${item.value}...${item.valueTo}`;
+        case VhdDefineStrategy.contains:
+          return `*${item.value}*`;
+        case VhdDefineStrategy.equalTo:
+          return `=${item.value}`;
+        case VhdDefineStrategy.startsWith:
+          return `${item.value}*`;
+        case VhdDefineStrategy.endsWith:
+          return `*${item.value}`;
+        case VhdDefineStrategy.greaterThan:
+          return `>${item.value}`;
+        case VhdDefineStrategy.greaterThanEqual:
+          return `>=${item.value}`;
+        case VhdDefineStrategy.lessThan:
+          return `<${item.value}`;
+        case VhdDefineStrategy.lessThanEqual:
+          return `<=${item.value}`;
+      }
+    })();
+    if (value && item.type === 'exclude') {
+      value = `!(${value})`;
+    }
+
+    return value;
+  };
 
   ngOnInit(): void {
     const data = exampleDataSource();
     this.filters = data.filters;
-    this.originSource = data.dataSource as ExampleTestModel[];
-    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(this.originSource));
+    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
   }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
-    console.log($event);
-    this.currentValue = $event;
-    this.actualValue = {...$event };
+    this.actualValue = {...$event};
   }
-
 }
