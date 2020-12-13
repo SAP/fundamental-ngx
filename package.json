@@ -93,7 +93,7 @@
     "@angular/router": "~10.2.1",
     "@nrwl/angular": "~10.3.3",
     "@sap-theming/theming-base-content": "11.1.22",
-    "@stackblitz/sdk": "1.5.1",
+    "@stackblitz/sdk": "1.5.2",
     "@types/google.visualization": "0.0.56",
     "@types/node": "14.14.10",
     "classlist.js": "1.1.20150312",
