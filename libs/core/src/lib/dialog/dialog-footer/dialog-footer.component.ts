@@ -1,5 +1,5 @@
-import { AfterContentInit, Component, Inject, Optional } from '@angular/core';
-import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { AfterContentInit, Component, Optional } from '@angular/core';
+import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
 
 /**
@@ -21,7 +21,7 @@ import { DialogFooterBase } from '../base/dialog-footer-base.class';
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit {
 
     /** @hidden */
-    constructor(@Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig) {
+    constructor(@Optional() public dialogConfig: DialogConfig) {
         super();
         this.dialogConfig = this.dialogConfig || {};
     }

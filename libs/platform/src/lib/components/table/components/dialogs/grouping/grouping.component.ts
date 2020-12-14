@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { SortDirection } from '../../../enums';
 import { Resettable, RESETTABLE_TOKEN } from '../reset-button/reset-button.component';
@@ -57,7 +57,7 @@ export class GroupingComponent implements Resettable {
     /** Not Grouped Option model value */
     readonly NOT_GROUPED_OPTION_VALUE = NOT_GROUPED_OPTION_VALUE;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+    constructor(public dialogRef: DialogRef) {
         const data: GroupDialogData = this.dialogRef.data;
 
         this.initialDirection = data.direction || this.initialDirection;

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DisplayedColumn } from './table-custom-columns-example.component';
 
@@ -95,7 +95,7 @@ export class TableCustomDialogComponent {
     allSelected = false;
     showError = false;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+    constructor(public dialogRef: DialogRef) {
         this.columns = this.dialogRef.data.columns;
         this.allSelected = this._areAllSelected();
     }
