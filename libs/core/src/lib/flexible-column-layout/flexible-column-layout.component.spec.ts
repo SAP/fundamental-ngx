@@ -155,13 +155,13 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(1);
     });
 
-    fit('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
+    it('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
         whenStable(fixture);
         viewport.set(1023, 900);
 
         testComponent.layout = TWO_COLUMNS_END_EXPANDED;
         fixture.detectChanges();
-        
+
          // checks the columns width
         const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0].nativeElement;
         const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;

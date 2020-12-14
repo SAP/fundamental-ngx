@@ -13,7 +13,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AvatarModule } from '@fundamental-ngx/core';
 import { DocsThemeService } from '../documentation/services/docs-theme.service';
 
-
 @NgModule({
     declarations: [PlatformDocumentationComponent, PlatformHomeComponent, NewComponentComponent],
     imports: [

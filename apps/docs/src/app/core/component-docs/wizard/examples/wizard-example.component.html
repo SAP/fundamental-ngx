@@ -2,7 +2,7 @@
     <fd-wizard-navigation>
         <ul fd-wizard-progress-bar>
             <li fd-wizard-step [status]="step1status" (statusChange)="step1status = $event" label="Product Type">
-                <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
+                <fd-wizard-step-indicator glyph="product"></fd-wizard-step-indicator>
                 <fd-wizard-content>
                     <h3 fd-title>1. Product Type</h3>
                     <fd-message-strip type="information" [dismissible]="false">
@@ -32,7 +32,7 @@
                 (statusChange)="step2status = $event"
                 label="Customer Information"
             >
-                <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                <fd-wizard-step-indicator glyph="user-edit"></fd-wizard-step-indicator>
                 <fd-wizard-content>
                     <h3 fd-title>2. Customer Information</h3>
                     <fd-message-strip type="information" [dismissible]="false">
@@ -100,7 +100,7 @@
                 label="Additional Information"
                 optionalText="(Optional)"
             >
-                <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                <fd-wizard-step-indicator glyph="accelerated"></fd-wizard-step-indicator>
                 <fd-wizard-content>
                     <h3 fd-title>3. Additional Information</h3>
                     <fd-message-strip type="information" [dismissible]="false">
@@ -122,8 +122,8 @@
                     </fd-wizard-next-step>
                 </fd-wizard-content>
             </li>
-            <li fd-wizard-step [status]="step4status" (statusChange)="step4status = $event" label="Pricing">
-                <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
+            <li fd-wizard-step [status]="step4status" (statusChange)="step4status = $event" label="Pricing and Payment">
+                <fd-wizard-step-indicator glyph="paid-leave"></fd-wizard-step-indicator>
                 <fd-wizard-content>
                     <h3 fd-title>4. Payment</h3>
                     <p>
