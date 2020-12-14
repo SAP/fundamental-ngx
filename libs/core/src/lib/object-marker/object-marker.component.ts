@@ -13,11 +13,14 @@ import { CssClassBuilder, applyCssClass } from '../utils/public_api';
     // tslint:disable-next-line:component-selector
     selector: '[fd-object-marker]',
     template: ` <i class="fd-object-marker__icon" [ngClass]="' sap-icon--' + glyph" *ngIf="glyph"></i>
-        <span *ngIf="label" class="fd-object-marker__text" [attr.tabindex]="clickable ? 0 : -1">{{ label }}</span>
+        <span *ngIf="label" class="fd-object-marker__text">{{ label }}</span>
         <ng-content></ng-content>`,
     styleUrls: ['./object-marker.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.tabindex]': 'clickable ? 0 : -1'
+    }
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
