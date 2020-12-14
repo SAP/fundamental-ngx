@@ -16,6 +16,15 @@ export class Wdio {
         browser.pause(waitTime);
     }
 
+    isBrowser(browserName: string): boolean {
+      return browser.capabilities.browserName === browserName;
+    }
+
+    isIEorSafari(): boolean {
+        if (this.isBrowser('Safari')) {return true}
+        if (this.isBrowser('internet explorer')) {return true}
+        return false;
+    }
     goBack(): void {
         browser.back();
     }

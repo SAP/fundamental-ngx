@@ -16,9 +16,7 @@ describe('Verify Textarea component', function() {
         webDriver.refreshPage();
         webDriver.pause(16000);
     });
-    if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-        console.log('skip for ' + browser.capabilities.browserName);
-    } else {
+    if (!webDriver.isIEorSafari()) {
         describe('has Textarea and', function() {
             it('should allow the user to enter multiple lines of text', () => {
                 webDriver.setValue(textareaPage.basicTextArea, testData.multiple_lines_text);

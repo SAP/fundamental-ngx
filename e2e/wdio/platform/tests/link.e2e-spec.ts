@@ -33,7 +33,6 @@ describe('Link component test suite', function() {
         //  const linksArray = webDriver.elementArray(linkPage.standardLinks);
         webDriver.mouseHoverElement(linkPage.standardLinks);
         //  const standardLinkHoverState = webDriver.getCSSPropertyByName(linkPage.standardLinks, 'text-decoration');
-
         //  expect(standardLinkHoverState.value).toContain('underline');
 
         const arrL = webDriver.getElementArrayLength(linkPage.standardLinks);

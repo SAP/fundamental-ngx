@@ -21,7 +21,6 @@ describe('Split menu button test suite', () => {
             expect(webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay));
             webDriver.click(spMenuBtnPage.arrowBtnArr, i);
         }
-
     });
 
     it('should check each split btn has main and arrow btns', () => {

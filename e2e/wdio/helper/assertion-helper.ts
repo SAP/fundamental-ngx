@@ -37,7 +37,3 @@ export function checkLtrOrientation(element: string, index: number): void {
     expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('ltr');
     expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('ltr');
 }
-
-
-
-
