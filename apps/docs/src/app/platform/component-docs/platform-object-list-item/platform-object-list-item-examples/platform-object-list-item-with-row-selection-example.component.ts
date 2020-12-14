@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import {
@@ -142,9 +142,16 @@ export class ListDataProvider extends DataProvider<Product> {
     selector: 'fdp-object-list-item-with-row-selection-example',
     templateUrl: './platform-object-list-item-with-row-selection-example.component.html'
 })
-export class PlatformObjectListItemWithRowSelectionExampleComponent {
+export class PlatformObjectListItemWithRowSelectionExampleComponent implements AfterViewInit {
     _dataSource = new ListDataSource<Product>(new ListDataProvider());
     _selectedItems: BaseListItem[] = [];
+
+    constructor(private _render: Renderer2, private _ele: ElementRef) {}
+
+    ngAfterViewInit(): void {
+        this._render.setAttribute(this._ele.nativeElement.querySelector('fd-toolbar'), 'tabindex', '0' );
+        this._render.setStyle(this._ele.nativeElement.querySelector('fd-toolbar'), 'outline', 'none' );
+    }
 
     _showItemInfo(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;

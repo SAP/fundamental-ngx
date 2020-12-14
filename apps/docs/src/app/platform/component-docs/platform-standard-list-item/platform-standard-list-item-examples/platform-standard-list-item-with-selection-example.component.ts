@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 
@@ -58,9 +58,16 @@ export class ListDataProvider extends DataProvider<Address> {
     selector: 'fdp-standard-list-item-with-selection-example',
     templateUrl: './platform-standard-list-item-with-selection-example.component.html'
 })
-export class PlatformStandardListItemWithSelectionExampleComponent {
+export class PlatformStandardListItemWithSelectionExampleComponent implements AfterViewInit {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
     _selectedItems: any[] = [];
+
+    constructor(private _render: Renderer2, private _ele: ElementRef) {}
+
+    ngAfterViewInit(): void {
+        this._render.setAttribute(this._ele.nativeElement.querySelector('fd-toolbar'), 'tabindex', '0' );
+        this._render.setStyle(this._ele.nativeElement.querySelector('fd-toolbar'), 'outline', 'none' );
+    }
 
     _showItemInfo(event: any): void {
         this._selectedItems = event.selectedItems;

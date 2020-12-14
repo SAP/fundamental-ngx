@@ -236,9 +236,9 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @ContentChildren(BaseListItem, { descendants: true })
     listItems: QueryList<BaseListItem>;
 
-    /** role */
-    @HostBinding('attr.role')
-    role = 'list';
+    // /** role */
+    // @HostBinding('attr.role')
+    // role = 'list';
 
     /**@hidden
      * To display loading symbol */
@@ -735,8 +735,8 @@ export class ListFooter extends BaseComponent { }
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: `<li #listItem fd-list-group-header [attr.id]="id" role="listitem"
-    [attr.aria-label]="grpheaderTitle" [attr.title]="grpheaderTitle">
+    template: `<li #listItem fd-list-group-header class="fd-group-header-no-outline" [attr.id]="id" role="listitem"
+    tabndex="0">
     {{grpheaderTitle}} <ng-content></ng-content>
 </li>`
 })
