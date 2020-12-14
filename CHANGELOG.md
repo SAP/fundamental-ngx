@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.59...v0.25.0-rc.60) (2020-12-14)
+
+
+### Bug Fixes
+
+* **platform:** Adds missing exports ([#4091](https://github.com/SAP/fundamental-ngx/issues/4091)) ([f3024fb](https://github.com/SAP/fundamental-ngx/commit/f3024fba8369ac68598f65ac20e053611df4341f))
+
 ## [0.25.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.58...v0.25.0-rc.59) (2020-12-14)
 
 
