@@ -90,7 +90,7 @@ describe('TestDatePickerComponent', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>) {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }

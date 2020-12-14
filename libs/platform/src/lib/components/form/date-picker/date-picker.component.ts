@@ -1,12 +1,24 @@
 import { NgControl, NgForm } from '@angular/forms';
-import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { Component, EventEmitter, Input, OnInit, Optional, Output, Self } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, SkipSelf, Host, Inject, ElementRef, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Optional, Output, Self } from '@angular/core';
 import { ViewEncapsulation, ViewChild } from '@angular/core';
-import { CalendarType, CalendarYearGrid, DatePickerComponent as CoreDatePickerComponent } from '@fundamental-ngx/core';
-import { DaysOfWeek, FdCalendarView, FdDate, FdRangeDate, SpecialDayRule } from '@fundamental-ngx/core';
+import {
+    CalendarType,
+    CalendarYearGrid,
+    DatetimeAdapter,
+    DateTimeFormats,
+    DATE_TIME_FORMATS,
+    DatePickerComponent as FdDatePickerComponent,
+    DateRange,
+    DaysOfWeek,
+    FdCalendarView,
+    FdDate,
+    SpecialDayRule
+} from '@fundamental-ngx/core';
 import { Placement } from 'popper.js';
 import { FormFieldControl, Status } from '../form-control';
 import { BaseInput } from '../base.input';
+import { FormField } from '../form-field';
 
 /**
  * Date-Picker implementation based on the
@@ -22,24 +34,24 @@ import { BaseInput } from '../base.input';
     templateUrl: './date-picker.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FormFieldControl, useExisting: DatePickerComponent, multi: true }]
+    providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }]
 })
-export class DatePickerComponent extends BaseInput implements OnInit {
+export class PlatformDatePickerComponent<D> extends BaseInput implements OnInit {
     /**
-     * core datepicker as child
+     * @hidden core date-picker as child
      */
-    @ViewChild(CoreDatePickerComponent)
-    coreDatePicker: CoreDatePickerComponent;
+    @ViewChild(FdDatePickerComponent)
+    fdDatePickerComponent: FdDatePickerComponent<D>;
 
     /**
-     * datepicker value set as controler value
+     * date-picker value set as controller value
      */
     @Input()
-    get value(): any {
+    get value(): DateRange<D> | D {
         return super.getValue();
     }
 
-    set value(value: any) {
+    set value(value: DateRange<D> | D) {
         super.setValue(value);
     }
 
@@ -48,30 +60,13 @@ export class DatePickerComponent extends BaseInput implements OnInit {
     @Input()
     type: CalendarType = 'single';
 
-    /** Date Format displayed on input. See more options: https://angular.io/api/common/DatePipe */
-    @Input()
-    format = 'MM/dd/yyyy';
-
-    private _locale: string;
-
-    /** Locale for date pipe. See more https://angular.io/guide/i18n */
-    @Input()
-    get locale(): string {
-        return this._locale;
-    }
-
-    set locale(locale: string) {
-        this._locale = locale;
-        this._cd.detectChanges();
-    }
-
     /** The currently selected CalendarDay model */
     @Input()
-    selectedDate: FdDate;
+    selectedDate: D;
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
-    public selectedRangeDate: FdRangeDate = { start: null, end: null };
+    selectedRangeDate: DateRange<D> = { start: null, end: null };
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
@@ -102,7 +97,7 @@ export class DatePickerComponent extends BaseInput implements OnInit {
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
-    public activeView: FdCalendarView = 'day';
+    activeView: FdCalendarView = 'day';
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -110,6 +105,10 @@ export class DatePickerComponent extends BaseInput implements OnInit {
      */
     @Input()
     placement: Placement = 'bottom-start';
+
+    /** The element to which the popover should be appended. */
+    @Input()
+    appendTo: ElementRef;
 
     /** Defines if date picker should be closed after date choose */
     @Input()
@@ -119,18 +118,18 @@ export class DatePickerComponent extends BaseInput implements OnInit {
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
-    private _stateType: Status;
+    private _state: Status;
 
     @Input()
-    get stateType(): Status {
-        if (this.status) {
-            return this.status;
+    get state(): Status {
+        if (this.fdDatePickerComponent?.isInvalidDateInput) {
+            return 'error';
         }
-        return this._stateType;
+        return this.status || this._state;
     }
 
-    set stateType(state: Status) {
-        this._stateType = state;
+    set state(state: Status) {
+        this._state = state ? state : 'default';
     }
 
     /**
@@ -147,7 +146,7 @@ export class DatePickerComponent extends BaseInput implements OnInit {
      * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
      */
     @Input()
-    specialDaysRules: SpecialDayRule[] = [];
+    specialDaysRules: SpecialDayRule<D>[] = [];
 
     /**
      * Object to customize year grid,
@@ -183,21 +182,29 @@ export class DatePickerComponent extends BaseInput implements OnInit {
     @Input()
     showWeekNumbers = true;
 
+    /** Whether the date picker is open. Can be used through two-way binding. */
+    @Input()
+    isOpen = false;
+
+    /** Event emitted when the state of the isOpen property changes. */
+    @Output()
+    readonly isOpenChange = new EventEmitter<boolean>();
+
     /** Fired when a new date is selected. */
     @Output()
-    public readonly selectedDateChange: EventEmitter<FdDate> = new EventEmitter<FdDate>();
+    readonly selectedDateChange: EventEmitter<D> = new EventEmitter<D>();
 
     /** Event thrown every time selected first or last date in range mode is changed */
     @Output()
-    public readonly selectedRangeDateChange: EventEmitter<FdRangeDate> = new EventEmitter<FdRangeDate>();
+    readonly selectedRangeDateChange: EventEmitter<DateRange<D>> = new EventEmitter<DateRange<D>>();
 
     /** Event thrown every time calendar active view is changed */
     @Output()
-    public readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
+    readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /**
      * Function used to disable certain dates in the calendar.
-     * @param fdDate FdDate
+     * @param _ D
      */
     @Input()
     disableFunction = function (fdDate: FdDate): boolean {
@@ -206,65 +213,103 @@ export class DatePickerComponent extends BaseInput implements OnInit {
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param fdDate FdDate
+     * @param _ D
      */
     @Input()
-    disableRangeStartFunction = function (fdDate: FdDate): boolean {
+    disableRangeStartFunction = function (_: D): boolean {
         return false;
     };
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param fdDate FdDate
+     * @param _ D
      */
     @Input()
-    disableRangeEndFunction = function (fdDate: FdDate): boolean {
+    disableRangeEndFunction = function (_: D): boolean {
         return false;
     };
 
     constructor(
         protected _cd: ChangeDetectorRef,
         @Optional() @Self() public ngControl: NgControl,
-        @Optional() @Self() public ngForm: NgForm
+        @Optional() @Self() public ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
-        super(_cd, ngControl, ngForm);
+        super(_cd, ngControl, ngForm, formField, formControl);
+
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
     }
 
-    writeValue(value: FdDate | FdRangeDate): void {
+    writeValue(value: D | DateRange<D>): void {
         super.writeValue(value);
         this._cd.detectChanges();
     }
 
     ngOnInit(): void {
-        // initialize placeholder
+        super.ngOnInit();
         if (!this.placeholder) {
-            this.placeholder = 'mm/dd/yyyy';
+            this.placeholder = 'MM/dd/YYYY';
         }
     }
 
     /**
      * validates date on date change.
-     * @param value FdDate | FdRangeDate
+     * @param value D | DateRange<D>
      */
-    public handleDateChange(value: FdDate | FdRangeDate): void {
+    public handleDateChange(value: D | DateRange<D>): void {
+        this.value = value;
         this.onTouched();
 
-        let finalValue = value;
-        if (this.coreDatePicker && !this.coreDatePicker.isModelValid()) {
-            finalValue = null;
+        if (this.type === 'single' && !this.value && !this.allowNull) {
+            this.state = 'error'; // null value in not allowNull should throw error
+        } else if (this.type === 'range' && !this.allowNull) {
+            const dateRange = this.value as DateRange<D>;
+            this.state = dateRange.start ? 'default' : 'error';
+        } else {
+            this.state = undefined; // resetting to default state
         }
-        this.value = finalValue;
+
+        this.stateChanges.next('date picker: handleDateInputChange');
+
+        if (this.type === 'single') {
+            this.handleSelectedDateChange(this.selectedDate);
+        } else if (this.type === 'range') {
+            this.handleSelectedRangeDateChange(this.selectedRangeDate);
+        }
     }
 
-    public handleSelectedDateChange = (fdDate: FdDate): void => {
+    /**
+     * Method that handles changes when popover is opened or closed.
+     */
+    handleOpenChange = (open: boolean): void => {
+        this.isOpenChange.emit(open);
+    };
+
+    handleSelectedDateChange = (fdDate: D): void => {
         this.selectedDateChange.emit(fdDate);
     };
 
-    public handleSelectedRangeDateChange = (fdRangeDate: FdRangeDate): void => {
+    handleSelectedRangeDateChange = (fdRangeDate: DateRange<D>): void => {
         this.selectedRangeDateChange.emit(fdRangeDate);
     };
 
-    public handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
+    handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
     };
+}
+
+export function createMissingDateImplementationError(provider: string): Error {
+    return Error(
+        `FdpDatePicker: No provider found for ${provider}. You must import one of the following ` +
+            `modules at your application root: FdDateModule, or provide a ` +
+            `custom implementation.`
+    );
 }

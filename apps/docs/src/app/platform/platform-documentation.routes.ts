@@ -43,7 +43,7 @@ export const ROUTES: Routes = [
             {
                 path: 'date-picker',
                 loadChildren: () =>
-                    import('./component-docs/platform-forms/platform-date-picker/platform-date-picker.module').then(
+                    import('./component-docs/platform-forms/platform-date-picker/platform-date-picker-docs.module').then(
                         (m) => m.PlatformDatePickerDocsModule)
             },
             {

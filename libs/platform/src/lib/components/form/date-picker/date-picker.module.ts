@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePickerModule } from '@fundamental-ngx/core';
-import { DatePickerComponent } from './date-picker.component';
+
+import { PlatformDatePickerComponent } from './date-picker.component';
 
 @NgModule({
-    imports: [CommonModule, DatePickerModule, FormsModule],
-    exports: [DatePickerComponent],
-    declarations: [DatePickerComponent]
+    declarations: [PlatformDatePickerComponent],
+    imports: [CommonModule, DatePickerModule, FormsModule, ReactiveFormsModule],
+    exports: [PlatformDatePickerComponent],
 })
 export class PlatformDatePickerModule {}
