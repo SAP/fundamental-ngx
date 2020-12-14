@@ -118,6 +118,10 @@ export class Wdio {
         browser.keys(keys);
     };
 
+    uploadFile(selector: string, pathToFile: string, index: number = 0): void {
+        $$(selector)[index].setValue(pathToFile);
+    }
+
     getAttributeByName(selector: string, attrName: string, index: number = 0): string {
         return $$(selector)[index].getAttribute(attrName);
     }

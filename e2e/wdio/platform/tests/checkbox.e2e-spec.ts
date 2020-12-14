@@ -224,6 +224,7 @@ describe('Checkbox test suite', () => {
             webDriver.click(checkboxPage.submitBtn);
             expect(webDriver.getAlertText()).toEqual('Status: VALID');
             webDriver.acceptAlert();
+            browser.switchToFrame()
             // checks with required checkbox not marked
 
         });
