@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.58...v0.25.0-rc.59) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) Button emphasized text ([#4092](https://github.com/SAP/fundamental-ngx/issues/4092)) ([daa9cd2](https://github.com/SAP/fundamental-ngx/commit/daa9cd288a5ed79f823884ebd938d205c7452370))
+
 ## [0.25.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.56...v0.25.0-rc.58) (2020-12-14)
 
 
