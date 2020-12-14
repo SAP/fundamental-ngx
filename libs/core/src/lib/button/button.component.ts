@@ -2,28 +2,13 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    HostBinding,
-    Input,
     OnChanges,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { BaseButton } from './base-button';
 
-export type GlyphPosition = 'before' | 'after';
-
-
-export type ButtonType =
-    | ''
-    | 'standard'
-    | 'positive'
-    | 'negative'
-    | 'attention'
-    | 'half'
-    | 'ghost'
-    | 'transparent'
-    | 'emphasized'
-    | 'menu';
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -42,59 +27,19 @@ export type ButtonType =
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.type]': 'type'
+    }
 })
-export class ButtonComponent implements OnChanges, CssClassBuilder, OnInit {
-    /**
-     * Native type of button element
-     */
-    @Input()
-    @HostBinding('attr.type')
-    type = 'button';
-
-    /** The property allows user to pass additional css classes*/
-    @Input()
-    public class = '';
-
-    /** Position of glyph related to text */
-    @Input()
-    public glyphPosition: GlyphPosition = 'before';
-
-    /** The icon to include in the button. See the icon page for the list of icons.
-     * Setter is used to control when css class have to be rebuilded.
-     * Default value is set to ''.
-     */
-    @Input()
-    public glyph = '';
-
-    /** Whether to apply compact mode to the button.
-     * Default value is set to false
-     */
-    @Input()
-    public compact = false;
-
-    /** The type of the button. Types include:
-     * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
-     * Leave empty for default (Standard button).'
-     * Default value is set to 'standard'
-     */
-    @Input()
-    public fdType: ButtonType = 'standard';
-
-    /**
-     * Text rendered inside button component
-     */
-    @Input()
-    label: string;
-
-    /** Whether to apply menu mode to the button.
-     * Default value is set to false
-     */
-    @Input()
-    public fdMenu = false;
+export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit {
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(
+        private _elementRef: ElementRef
+    ) {
+        super()
+    }
 
     /** Function runs when component is initialized
      * function should build component css class
