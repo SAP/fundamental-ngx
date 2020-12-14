@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.56...v0.25.0-rc.58) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) Fix structure on Shellbar ([#4085](https://github.com/SAP/fundamental-ngx/issues/4085)) ([bfe26d8](https://github.com/SAP/fundamental-ngx/commit/bfe26d8df2839865387eaaf8ea45da0f20c50b82))
+* (platform) fix menu ([#4089](https://github.com/SAP/fundamental-ngx/issues/4089)) ([6a16585](https://github.com/SAP/fundamental-ngx/commit/6a16585f0d964b2f0440a6ed5720f3e94f49aa30))
+* (platform) fix upload collection ([#4063](https://github.com/SAP/fundamental-ngx/issues/4063)) ([4927837](https://github.com/SAP/fundamental-ngx/commit/4927837fbcb2be186f45303dbdf781a5f8753b9b))
+
 ## [0.25.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.56...v0.25.0-rc.57) (2020-12-14)
 
 
