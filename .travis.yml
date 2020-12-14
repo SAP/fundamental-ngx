@@ -17,10 +17,10 @@ jobs:
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
   - stage: "Pre-release"
-    if: branch = master AND type = push
+    if: branch = main AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
-    - git checkout master
+    - git checkout main
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
@@ -32,7 +32,7 @@ jobs:
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
     - git fetch
-    - git checkout master
+    - git checkout main
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
