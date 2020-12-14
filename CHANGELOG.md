@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.62...v0.25.0-rc.63) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) address accessibility issues for the Object marker component ([#4081](https://github.com/SAP/fundamental-ngx/issues/4081)) ([a635126](https://github.com/SAP/fundamental-ngx/commit/a635126ce94d1bd09e519b7e6d1b504aa51c597e))
+
 ## [0.25.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.61...v0.25.0-rc.62) (2020-12-14)
 
 
