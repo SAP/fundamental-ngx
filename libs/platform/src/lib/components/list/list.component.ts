@@ -1,6 +1,6 @@
 import {
     ChangeDetectionStrategy, Component, Input, ViewEncapsulation,
-    ContentChildren, QueryList, HostBinding, ViewChild,
+    ContentChildren, QueryList, ViewChild,
     ElementRef, AfterContentInit, Output, EventEmitter,
     HostListener, ChangeDetectorRef, OnInit, AfterViewInit,
     ContentChild, Self, Optional, SkipSelf, Host, OnDestroy
@@ -235,10 +235,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     */
     @ContentChildren(BaseListItem, { descendants: true })
     listItems: QueryList<BaseListItem>;
-
-    // /** role */
-    // @HostBinding('attr.role')
-    // role = 'list';
 
     /**@hidden
      * To display loading symbol */
@@ -735,8 +731,8 @@ export class ListFooter extends BaseComponent { }
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: `<li #listItem fd-list-group-header class="fd-group-header-no-outline" [attr.id]="id" role="listitem"
-    tabndex="0">
+    template: `<li #listItem fd-list-group-header [attr.id]="id" role="listitem"
+    tabindex="0">
     {{grpheaderTitle}} <ng-content></ng-content>
 </li>`
 })
@@ -746,7 +742,7 @@ export class ListGroupHeader extends BaseListItem implements OnInit {
    */
     @Input()
     grpheaderTitle?: string;
-
+    
     /** @hidden */
     /** Instailization of list header*/
     ngOnInit(): void {

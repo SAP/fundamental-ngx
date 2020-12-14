@@ -264,11 +264,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         if (this._noSeperator) {
             currentitem.classList.add('fd-list-item__no-seprator');
         }
-        if (currentitem !== null &&
-        currentitem !== undefined) {
+        if (currentitem) {
         currentitem.removeAttribute('role');
-        if (currentitem.parentNode !== null &&
-            currentitem.parentNode !== undefined) {
+        if (currentitem.parentNode) {
         currentitem.parentNode.removeAttribute('title');
         currentitem.parentNode.removeAttribute('aria-label');
             }

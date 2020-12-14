@@ -32,7 +32,7 @@
 <ng-template #objectTemplate>
     <div class="fd-object-list__container">
         <!--Optional text-->
-        <div class="fd-object-list__intro" *ngIf="introductionText !== undefined || introductionText !== null">{{introductionText}}</div>
+        <div class="fd-object-list__intro" *ngIf="introductionText">{{introductionText}}</div>
         <!--header content-->
         <div class="fd-object-list__header">
             <fd-avatar size="s" [glyph]="glyph" *ngIf="label !== undefined || image !== undefined" [label]="label"
@@ -70,11 +70,11 @@
 <ng-template #actionsTemplate>
     <ng-content selector="#secondaryAction"></ng-content>
     <button fd-button *ngIf="listType === 'detail'" role="button" compact="_isCompact" fdType="transparent" glyph="edit"
-    [attr.title]="'detail'"  [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')" (click)="_onActionButtonClick('edit')"
+    title="detail"  [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')" (click)="_onActionButtonClick('edit')"
         [attr.id]="'detail-' + id">
     </button>
     <button fd-button *ngIf="selectionMode === 'delete'" role="button" compact="_isCompact" [attr.aria-label]="'delete'"
-    [attr.title]="'delete'" fdType="transparent" glyph="decline" (keydown)="_onKeyButtonClick($event,'delete')"
+    title="delete" fdType="transparent" glyph="decline" (keydown)="_onKeyButtonClick($event,'delete')"
         (click)="_onActionButtonClick('delete')" [attr.id]="'delete-' + id">
     </button>
 </ng-template>

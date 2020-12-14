@@ -62,11 +62,12 @@ export class PlatformStandardListItemWithSelectionExampleComponent implements Af
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
     _selectedItems: any[] = [];
 
-    constructor(private _render: Renderer2, private _ele: ElementRef) {}
+    constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
 
     ngAfterViewInit(): void {
-        this._render.setAttribute(this._ele.nativeElement.querySelector('fd-toolbar'), 'tabindex', '0' );
-        this._render.setStyle(this._ele.nativeElement.querySelector('fd-toolbar'), 'outline', 'none' );
+        const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
+        this._render.setAttribute(toolbar, 'tabindex', '0' );
+        this._render.setStyle(toolbar, 'outline', 'none' );
     }
 
     _showItemInfo(event: any): void {

@@ -95,11 +95,11 @@
 <ng-template #actionsTemplate>
     <ng-content selector="#secondaryAction"></ng-content>
     <button fd-button #edit [attr.id]="'detail-' + id" *ngIf="listType === 'detail'" role="button"
-    [attr.title]="'detail'" [compact]="_isCompact" fdType="transparent" glyph="edit" (click)="_onActionButtonClick('edit')"
+    title="detail" [compact]="_isCompact" fdType="transparent" glyph="edit" (click)="_onActionButtonClick('edit')"
         [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')">
     </button>
     <button fd-button #delete [attr.id]="'delete-' + id" *ngIf="selectionMode === 'delete'" role="button"
-    [attr.title]="'delete'" [compact]="_isCompact" [attr.aria-label]="'delete'" fdType="transparent" glyph="decline"
+    title="delete" [compact]="_isCompact" [attr.aria-label]="'delete'" fdType="transparent" glyph="decline"
         (click)="_onActionButtonClick('delete')" (keydown)="_onKeyButtonClick($event,'delete')">
     </button>
 </ng-template>
