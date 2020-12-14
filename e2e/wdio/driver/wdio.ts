@@ -113,7 +113,7 @@ export class Wdio {
     }
 
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string } {
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: any } {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 
@@ -173,8 +173,6 @@ export class Wdio {
         return browser.buttonDown();
     }
 
-    // TODO: add wait 300ms
-
     waitElementToBePresentInDOM (selector: string,  index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime });
     }
@@ -187,9 +185,7 @@ export class Wdio {
         return $$(selector)[index].isClickable();
     }
 
-
-
-    getUrl(): string {
+    getCurrentUrl(): string {
         return browser.getUrl();
     }
 
