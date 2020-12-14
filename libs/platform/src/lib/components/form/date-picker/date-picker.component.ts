@@ -1,5 +1,5 @@
 import { NgControl, NgForm } from '@angular/forms';
-import { ChangeDetectorRef, ChangeDetectionStrategy, SkipSelf, Host, Inject, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, SkipSelf, Host, Inject, ElementRef } from '@angular/core';
 import { Component, EventEmitter, Input, Optional, Output, Self } from '@angular/core';
 import { ViewEncapsulation, ViewChild } from '@angular/core';
 import {
@@ -36,7 +36,7 @@ import { FormField } from '../form-field';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }]
 })
-export class PlatformDatePickerComponent<D> extends BaseInput implements OnInit {
+export class PlatformDatePickerComponent<D> extends BaseInput {
     /**
      * @hidden core date-picker as child
      */
@@ -251,13 +251,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput implements OnInit 
     writeValue(value: D | DateRange<D>): void {
         super.writeValue(value);
         this._cd.detectChanges();
-    }
-
-    ngOnInit(): void {
-        super.ngOnInit();
-        if (!this.placeholder) {
-            this.placeholder = 'MM/dd/YYYY';
-        }
     }
 
     /**

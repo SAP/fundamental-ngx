@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { FdDate } from '@fundamental-ngx/core';
 
 @Component({

@@ -56,7 +56,7 @@
 <!--Template Driven Form-->
 <fdp-form-group [multiLayout]="true">
     <fdp-form-field id="birthday" zone="zLeft" rank="1" required="true" label="Birth Date:">
-        <fdp-date-picker name="birthday" type="single" [allowNull]="false" [(ngModel)]="birthdayPicker">
+        <fdp-date-picker name="birthday" placeholder="mm/dd/yyyy" type="single" [allowNull]="false" [(ngModel)]="birthdayPicker">
         </fdp-date-picker>
     </fdp-form-field>
 
@@ -82,10 +82,10 @@
 
 <!--Date picker use outside form-->
 <h3>Date Picker Use Outside Form.</h3>
-<fdp-date-picker name="dateOutsideForm" type="single" [(ngModel)]="dateOutsideForm">
+<fdp-date-picker name="dateOutsideForm" placeholder="mm/dd/yyyy" type="single" [(ngModel)]="dateOutsideForm">
 </fdp-date-picker>
 
 <h3>Range Date Picker Outside Form.</h3>
-<fdp-date-picker name="rangeDateOutsideForm" type="range" placeholder="dd/MM/yyyy - dd/MM/yyyy"
+<fdp-date-picker name="rangeDateOutsideForm" type="range" placeholder="mm/dd/yyyy - mm/dd/yyyy"
     [(ngModel)]="rangeDateOutsideForm">
 </fdp-date-picker>

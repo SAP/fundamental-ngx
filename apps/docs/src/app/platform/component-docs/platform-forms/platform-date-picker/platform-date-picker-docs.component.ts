@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import * as datepickerHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-example.component.html';
 import * as datepickerts from '!raw-loader!./platform-date-picker-examples/platform-date-picker-example.component.ts';
-// import * as datepickertInts from '!raw-loader!./platform-date-picker-examples/platform-date-picker-international.component.ts';
-// import * as datepickeri18n from '!raw-loader!./platform-date-picker-examples/platform-date-picker-complexi18n.component.ts';
-// import * as datepickerDisabledFn from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disablesfunc.component.ts';
-// import * as datepickerPlacement from '!raw-loader!./platform-date-picker-examples/platform-date-picker-placement.component.ts';
+import * as datepickeri18n from '!raw-loader!./platform-date-picker-examples/platform-date-picker-i18n-example.component.ts';
+import * as datepickerDisabledFnCodeTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disable-func-example.component.ts';
+import * as datepickerDisabledFnHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disable-func-example.component.html';
+import * as datepickerFormatTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-format-example.component.ts';
+import * as datepickerFormatHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-format-example.component.html';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
-    selector: 'app-date-picker',
+    selector: 'app-datepicker',
     templateUrl: './platform-date-picker-docs.component.html'
 })
 export class PlatformDatePickerDocsComponent {
@@ -27,41 +28,43 @@ export class PlatformDatePickerDocsComponent {
         }
     ];
 
-    // datePickerIntExample: ExampleFile[] = [
-    //     {
-    //         language: 'typescript',
-    //         code: datepickertInts,
-    //         fileName: 'platform-date-picker-international',
-    //         component: 'PlatformDatePickerIntExampleComponent'
-    //     }
-    // ];
+    datePickeri18nExample: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: datepickeri18n,
+            fileName: 'platform-date-picker-i18n-example',
+            component: 'PlatformDatePickeri18nExampleComponent'
+        }
+    ];
 
-    // datePickeri18nExample: ExampleFile[] = [
-    //     {
-    //         language: 'typescript',
-    //         code: datepickeri18n,
-    //         fileName: 'platform-date-picker-complexi18n',
-    //         component: 'PlatformDatePickerIntExampleComponent'
-    //     }
-    // ];
+    datePickerDisableFunction: ExampleFile[] = [
+        {
+            language: 'html',
+            code: datepickerDisabledFnHtml,
+            fileName: 'platform-date-picker-disable-func-example'
+        },
+        {
+            language: 'typescript',
+            code: datepickerDisabledFnCodeTs,
+            fileName: 'platform-date-picker-disable-func-example',
+            component: 'DatePickerDisableFuncExampleComponent'
+        }
+    ];
 
-    // datePickerDisableFunction: ExampleFile[] = [
-    //     {
-    //         language: 'typescript',
-    //         code: datepickerDisabledFn,
-    //         fileName: 'platform-date-picker-disablesfunc',
-    //         component: 'PlatformDisabledFuncDatePickerComponent'
-    //     }
-    // ];
-
-    // datePickerPlacement: ExampleFile[] = [
-    //     {
-    //         language: 'typescript',
-    //         code: datepickerPlacement,
-    //         fileName: 'platform-date-picker-placement',
-    //         component: 'PlatformDatePickerPlacementComponent'
-    //     }
-    // ];
+    datePickerFormat: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: datepickerFormatTs,
+            fileName: 'platform-date-picker-format-example',
+            component: 'PlatformDatePickerFormatExampleComponent'
+        },
+        {
+            language: 'html',
+            code: datepickerFormatHtml,
+            fileName: 'platform-date-picker-format-example',
+            component: 'PlatformDatePickerFormatExampleComponent'
+        },
+    ];
 
     constructor() {}
 }

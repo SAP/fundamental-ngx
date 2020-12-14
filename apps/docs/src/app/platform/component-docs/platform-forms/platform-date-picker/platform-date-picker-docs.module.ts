@@ -3,16 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
-import { PlatformButtonModule, PlatformDatePickerModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
-import { FdDatetimeModule } from '@fundamental-ngx/core';
+import { PlatformDatePickerModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
+import { FdDatetimeModule, SegmentedButtonModule } from '@fundamental-ngx/core';
 
 import { PlatformDatePickerDocsComponent } from './platform-date-picker-docs.component';
 import { PlatformDatePickerHeaderComponent } from './platform-date-picker-header/platform-date-picker-header.component';
 import { PlatformDatePickerExampleComponent } from './platform-date-picker-examples/platform-date-picker-example.component';
-// import { PlatformDatePickerI18nExampleComponent } from './platform-date-picker-examples/platform-date-picker-international-example.component';
-// import { PlatformDisabledFuncDatePickerComponent } from './platform-date-picker-examples/platform-date-picker-disablesfunc-example.component';
-// import { PlatformDatePickerPlacementComponent } fro./platform-date-picker-examples/platform-date-picker-placement-example.componentent';
-// import { PlatformDatePickerComplexI18nExampleComponent } from './platform-date-picker-examples/platform-date-picker-complexi18n.component';
+import { PlatformDatePickeri18nExampleComponent } from './platform-date-picker-examples/platform-date-picker-i18n-example.component';
+import { PlatformDatePickerDisableFuncExampleComponent } from './platform-date-picker-examples/platform-date-picker-disable-func-example.component';
+import { PlatformDatePickerFormatExampleComponent } from './platform-date-picker-examples/platform-date-picker-format-example.component';
 
 const routes: Routes = [
     {
@@ -26,23 +25,23 @@ const routes: Routes = [
 ];
 
 @NgModule({
+    declarations: [
+        PlatformDatePickerDocsComponent,
+        PlatformDatePickerExampleComponent,
+        PlatformDatePickerDisableFuncExampleComponent,
+        PlatformDatePickerHeaderComponent,
+        PlatformDatePickeri18nExampleComponent,
+        PlatformDatePickerFormatExampleComponent
+    ],
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
+        SegmentedButtonModule,
         FdDatetimeModule,
         PlatformDatePickerModule,
-        FdpFormGroupModule,
-        PlatformButtonModule
+        FdpFormGroupModule
     ],
-    exports: [RouterModule],
-    declarations: [
-        // PlatformDatePickerComplexI18nExampleComponent,
-        PlatformDatePickerDocsComponent,
-        PlatformDatePickerExampleComponent,
-        // PlatformDisabledFuncDatePickerComponent,
-        PlatformDatePickerHeaderComponent,
-        // PlatformDatePickerI18nExampleComponent,
-        // PlatformDatePickerPlacementComponent
-    ]
+    exports: [RouterModule]
+    
 })
 export class PlatformDatePickerDocsModule {}
