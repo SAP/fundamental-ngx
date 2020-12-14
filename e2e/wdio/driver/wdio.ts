@@ -59,6 +59,10 @@ export class Wdio {
         return $$(selector)[index].getValue();
     };
 
+    getValueArr(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
+        return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getValue());
+    }
+
     getText(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].getText();
@@ -187,6 +191,10 @@ export class Wdio {
     isElementClickable(selector: string, index: number = 0): boolean {
         return $$(selector)[index].isClickable();
 
+    }
+
+    isExists(selector: string): boolean {
+        return $(selector).isExisting();
     }
 
     getUrl(): string {

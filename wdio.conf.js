@@ -173,7 +173,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://sap.dev:4200/',
+    baseUrl: 'https://anton.local:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -256,28 +256,8 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onPrepare: function() {
-        jasmine.getEnv().addReporter({
-            suiteStarted: async (result) => {
-                await browser.executeScript('sauce:job-name=' + result.fullName);
-            },
-            specStarted: async (result) => {
-                await browser.executeScript('sauce:context=' + result.fullName);
-            },
-            specDone: async (result) => {
-                // If there are errors please update the error to Sauce Labs
-                if (result.failedExpectations.length > 0) {
-                    const promisses = result.failedExpectations.map(async error => {
-                        const errorUpdate = await browser.executeScript('sauce:context=' + error.stack);
-
-                        return errorUpdate;
-                    });
-                    await Promise.all(promisses);
-                }
-            }
-        });
-
-    },
+    // onPrepare: function() {
+    // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
