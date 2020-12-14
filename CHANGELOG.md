@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.61...v0.25.0-rc.62) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) add fix for Tabs programmatic selection not being applied properly ([#4055](https://github.com/SAP/fundamental-ngx/issues/4055)) ([ef8555e](https://github.com/SAP/fundamental-ngx/commit/ef8555e887706372ea2dfd98c271a1822e542d60))
+
 ## [0.25.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.60...v0.25.0-rc.61) (2020-12-14)
 
 ## [0.25.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.59...v0.25.0-rc.60) (2020-12-14)
