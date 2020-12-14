@@ -25,10 +25,6 @@ export class BaseButton {
     @Input()
     type = 'button';
 
-    /** The property allows user to pass additional css classes*/
-    @Input()
-    class = '';
-
     /** Position of glyph related to text */
     @Input()
     glyphPosition: GlyphPosition = 'before';
@@ -38,13 +34,13 @@ export class BaseButton {
      * Default value is set to ''.
      */
     @Input()
-    public glyph = '';
+    glyph = '';
 
     /** Whether to apply compact mode to the button.
      * Default value is set to false
      */
     @Input()
-    public compact = false;
+    compact = false;
 
     /** The type of the button. Types include:
      * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
@@ -52,7 +48,7 @@ export class BaseButton {
      * Default value is set to 'standard'
      */
     @Input()
-    public fdType: ButtonType = 'standard';
+    fdType: ButtonType = 'standard';
 
     /**
      * Text rendered inside button component
@@ -64,5 +60,5 @@ export class BaseButton {
      * Default value is set to false
      */
     @Input()
-    public fdMenu = false;
+    fdMenu = false;
 }

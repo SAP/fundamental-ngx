@@ -1,7 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
+    ElementRef, Input,
     OnChanges,
     OnInit,
     ViewEncapsulation
@@ -33,6 +33,10 @@ import { BaseButton } from './base-button';
     }
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit {
+
+    /** The property allows user to pass additional css classes*/
+    @Input()
+    class = '';
 
     /** @hidden */
     constructor(
