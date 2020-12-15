@@ -6,6 +6,14 @@ export default {
         'Button as an addon',
         'Icon as an addon'
     ],
+    standartInputPlaceholders: [
+        'Enter value',
+        'Enter value',
+        'Enter value',
+        'Enter value',
+        'Email'
+    ],
     inputWithFormLabel: 'Quantity',
+    inputWithFormPlaceholder: 'Things quantity',
 
 };

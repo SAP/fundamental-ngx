@@ -6,28 +6,23 @@ export class InputGroupPo extends BaseComponentPo {
     readonly root = '#page-content';
 
     standartInputLabelsArr = 'fdp-input-group-standard-example p';
+    standartInputArr = 'fdp-input-group-standard-example input';
 
-
-    leftAlignedTextInput = 'fdp-input-group-standard-example [name="leftTextAddon"]';
+    leftAlignedTextInput = 'fdp-input-group-standard-example [name="leftTextAddon"] input';
     leftAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="leftTextAddon"] fdp-input-group-addon-body';
 
-
-    rightAlignedTextInput = 'fdp-input-group-standard-example ';
+    rightAlignedTextInput = 'fdp-input-group-standard-example [name="rightTextAddon"] input';
     rightAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="rightTextAddon"] fdp-input-group-addon-body';
 
-    leftAndRightAlignedTextInput = 'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] ';
+    leftAndRightAlignedTextInput = 'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] input';
     rightLeftAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] fdp-input-group-addon-body';
 
     buttonInput = 'fdp-input-group-standard-example [name="donation"] input';
     buttonInputLeftAndRightTextAddon = 'fdp-input-group-standard-example [name="donation"] fdp-input-group-addon-body';
     buttonInputSubmitButton = 'fdp-input-group-standard-example [name="donation"] button';
 
-
-
-    iconInput = 'fdp-input-group-standard-example [name="employee"] ';
+    iconInput = 'fdp-input-group-standard-example [name="employee"] input';
     iconInputEmailIcon = 'fdp-input-group-standard-example [name="employee"] fd-icon[title="Email"]';
-
-
 
     compactGroupInput = 'fdp-input-group-compact-example fdp-input-group input';
     compactGroupButtonAddon = 'fdp-input-group-compact-example [name="example"] button';
@@ -43,6 +38,7 @@ export class InputGroupPo extends BaseComponentPo {
     withFormInputQuestionMark = 'fdp-input-group-form-example label span[role="alert"]';
     withFormInputAsterixMark = 'fdp-input-group-form-example label';
     withFormInputErrorTooltip = '[type="error"] span';
+    withFormInputInfoTooltip = '.fd-inline-help__content';
 
 
     open(): void {
