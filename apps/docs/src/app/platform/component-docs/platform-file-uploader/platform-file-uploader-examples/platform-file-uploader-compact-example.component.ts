@@ -12,6 +12,8 @@ export class PlatformFileUploaderCompactExampleComponent {
 
     handleFileSelection(files: FileUploaderSelectionChangeEvent): void {
         this.files = files.payload;
-        alert('file uploaded' + this.files.length);
+        if (this.files.length > 0) {
+            alert('file uploaded' + this.files.length);
+        }
     }
 }
