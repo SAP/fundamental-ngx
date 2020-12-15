@@ -93,7 +93,7 @@ describe('Verify Switch component', function() {
         it('should not be able to interact with disabled form switch', () => {
             // TODO: Investigate problem with disabled switch in Safari
             if (!webDriver.isIEorSafari()) {
-                webDriver.waitForDisplayed(switchPage.formDisabledSwitch);
+                webDriver.waitElementToBePresentInDOM(switchPage.formDisabledSwitch);
                 webDriver.scrollIntoView(switchPage.formDisabledSwitch);
                 const isClickable = webDriver.isElementClickable(switchPage.formDisabledSwitch);
                 expect(isClickable).toBe(false);
@@ -112,6 +112,7 @@ describe('Verify Switch component', function() {
                 const handelColorAfter = webDriver.getCSSPropertyByName(switchPage.disabledSwitchHandel, 'background-color');
 
                 expect(handelColorBefore.value).toBe(handelColorAfter.value);
+                return;
             }
             console.log('Skip for Safari');
         });

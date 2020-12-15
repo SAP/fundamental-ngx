@@ -7,7 +7,7 @@ import {
 } from '../fixtures/appData/link-page-contents';
 import { webDriver } from '../../driver/wdio';
 
-describe('Link component test suite', function() {
+xdescribe('Link component test suite', function() {
     const linkPage = new LinkPo();
 
     beforeAll(() => {
