@@ -28,7 +28,7 @@ describe('Input should ', function() {
         expect(webDriver.getValue(inputPage.defaultInput)).toBe(inputTestData.text);
     });
 
-    it('have associated label element to describe its purpose ', () => {
+    it('have associated label element to describe its purpose', () => {
         expect(webDriver.getTextArr(inputPage.inputsLabels, 0, -2)).toEqual(inputPContent.labelsArray);
         expect(webDriver.getText(inputPage.inputsLabels, 7)).toContain(inputPContent.favoriteColor);
     });
