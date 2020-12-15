@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-    DialogModule,
     ListModule,
     PopoverModule,
     RtlService,
@@ -66,7 +65,6 @@ describe('TableComponent', () => {
                     CheckboxModule,
                     PopoverModule,
                     ListModule,
-                    DialogModule
                 ],
                 declarations: [TableComponent],
                 providers: [RtlService]
@@ -94,14 +92,14 @@ describe('TableComponent', () => {
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitSelectionChange').and.stub();
 
-        component.select(0, (<any>component)._rows[0], true);
+        component._select(0, (<any>component)._rows[0], true);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect(component._checkedAll).toBeFalse();
         expect((<any>component)._checked.length).toEqual(1);
 
-        component.select(1, (<any>component)._rows[1], true);
+        component._select(1, (<any>component)._rows[1], true);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(1);
@@ -117,14 +115,14 @@ describe('TableComponent', () => {
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitSelectionChange').and.stub();
 
-        component.selectSingle(0, (<any>component)._rows[0]);
+        component._selectSingle(0, (<any>component)._rows[0]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect((<any>component)._checked.length).toEqual(1);
         expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(1);
 
-        component.selectSingle(1, (<any>component)._rows[1]);
+        component._selectSingle(1, (<any>component)._rows[1]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(1);
@@ -139,14 +137,14 @@ describe('TableComponent', () => {
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitSelectionChange').and.stub();
 
-        component.selectSingle(0, (<any>component)._rows[0]);
+        component._selectSingle(0, (<any>component)._rows[0]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect((<any>component)._checked.length).toEqual(1);
         expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(1);
 
-        component.selectSingle(0, (<any>component)._rows[0]);
+        component._selectSingle(0, (<any>component)._rows[0]);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
@@ -164,7 +162,7 @@ describe('TableComponent', () => {
         const uncheckAllSpy = spyOn(<any>component, '_uncheckAll').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitSelectionChange').and.stub();
 
-        component.selectAll(true);
+        component._selectAll(true);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(checkAllSpy).toHaveBeenCalled();
@@ -173,7 +171,7 @@ describe('TableComponent', () => {
         expect((<any>component)._checked.length).toEqual((<any>component)._rows.length);
         expect((<any>component)._rows.filter((r) => r.checked).length).toEqual((<any>component)._rows.length);
 
-        component.selectAll(false);
+        component._selectAll(false);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(uncheckAllSpy).toHaveBeenCalled();
@@ -183,23 +181,23 @@ describe('TableComponent', () => {
         expect((<any>component)._rows.filter((r) => r.checked).length).toEqual(0);
     });
 
-    it('sort method should call TableService.sort with a proper params', () => {
+    it('sort by cell header method should call TableService.setSort with a proper params', () => {
         const field = 'price.value';
         const direction = SortDirection.ASC;
-        const serviceSortSpy = spyOn(tableService, 'sort').and.stub();
+        const serviceSortSpy = spyOn(tableService, 'setSort').and.stub();
 
-        component.sort(field, direction);
+        component._columnHeaderSortBy(field, direction);
 
-        expect(serviceSortSpy).toHaveBeenCalledWith(field, direction);
+        expect(serviceSortSpy).toHaveBeenCalledWith([{ field: field, direction: direction }]);
         expect(component._popoverOpen).toBeFalse();
     });
 
-    it('filter method should call TableService.filter with a proper params', () => {
+    it('filter by cell header method should call TableService.addFilters with a proper params', () => {
         const field = 'status';
         const value = 'valid';
-        const serviceFilterSpy = spyOn(tableService, 'filter').and.stub();
+        const serviceFilterSpy = spyOn(tableService, 'addFilters').and.stub();
 
-        component.filter(field, value);
+        component._columnHeaderFilterBy(field, value);
 
         expect(serviceFilterSpy).toHaveBeenCalledWith([
             {
@@ -211,14 +209,14 @@ describe('TableComponent', () => {
         expect(component._popoverOpen).toBeFalse();
     });
 
-    it('group method should call TableService.group with a proper params', () => {
+    it('group by cell header method should call TableService.setGroups with a proper params', () => {
         const field = 'price.value';
         const direction = SortDirection.ASC;
-        const serviceGroupSpy = spyOn(tableService, 'group').and.stub();
+        const serviceGroupSpy = spyOn(tableService, 'setGroups').and.stub();
 
-        component.group(field);
+        component._columnHeaderGroupBy(field);
 
-        expect(serviceGroupSpy).toHaveBeenCalledWith(field, direction);
+        expect(serviceGroupSpy).toHaveBeenCalledWith([{ field: field, direction: direction }]);
         expect(component._popoverOpen).toBeFalse();
     });
 
@@ -228,7 +226,7 @@ describe('TableComponent', () => {
         const setFreezableInfoSpy = spyOn(<any>component, '_setFreezableInfo').and.callThrough();
         const getFreezableColumnsSpy = spyOn(<any>component, '_getFreezableColumn').and.stub();
 
-        component.freezeTo(columnKey);
+        component.freezeToColumn(columnKey);
 
         expect(serviceFreezeToSpy).toHaveBeenCalledWith(columnKey);
         expect(component.freezeColumnsTo).toEqual(columnKey);
@@ -247,7 +245,7 @@ describe('TableComponent', () => {
         const setFreezableInfoSpy = spyOn(<any>component, '_setFreezableInfo').and.callThrough();
         const getFreezableColumnsSpy = spyOn(<any>component, '_getFreezableColumn').and.stub();
 
-        component.freezeTo(freezeToKey);
+        component.freezeToColumn(freezeToKey);
 
         expect(serviceFreezeToSpy).toHaveBeenCalledWith(freezeToKey);
         expect(component.freezeColumnsTo).toEqual(freezeToKey);

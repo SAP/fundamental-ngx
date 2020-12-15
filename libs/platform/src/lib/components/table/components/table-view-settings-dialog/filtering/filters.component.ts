@@ -12,14 +12,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core';
 
 import { CollectionFilter } from '../../../interfaces';
-import { TableColumnComponent } from '../../table-column/table-column.component';
-import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
-import { Resettable, RESETTABLE_TOKEN } from '../reset-button/reset-button.component';
+import { TableColumn } from '../../table-column/table-column';
+import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
+import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 
 export interface FiltersDialogData {
     filterBy: CollectionFilter[];
-    columns: TableColumnComponent[];
+    columns: TableColumn[];
     viewSettingsFilters: TableViewSettingsFilterComponent[];
 }
 
@@ -48,7 +48,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     filterBy: CollectionFilter[];
 
     /** Table columns. Used to retrieve a column key */
-    columns: TableColumnComponent[];
+    columns: TableColumn[];
 
     /** Declared filters options */
     viewSettingsFilters: TableViewSettingsFilterComponent[];
@@ -134,8 +134,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
 
     /** Close dialog */
     cancel(): void {
-        const result: FiltersDialogResultData = { filterBy: null };
-        this.dialogRef.close(result);
+        this.dialogRef.close(null);
     }
 
     /** Confirm changes and close dialog */

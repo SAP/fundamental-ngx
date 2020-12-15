@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 
 import { CollectionSelectFilter } from '../../../interfaces';
-import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
+import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
 
 /**
  * Custom Select filter type.

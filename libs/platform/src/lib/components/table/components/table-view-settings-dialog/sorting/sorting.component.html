@@ -5,13 +5,13 @@
                 <fd-bar-element>
                     <h1
                         fd-title
-                        i18n="@@platformTableGroupDialogHeader"
-                    >Group</h1>
+                        i18n="@@platformTableSortDialogHeader"
+                    >Sort</h1>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
                 <fd-bar-element>
-                    <fdp-view-settings-reset-button></fdp-view-settings-reset-button>
+                    <fdp-table-reset-button></fdp-table-reset-button>
                 </fd-bar-element>
             </div>
         </ng-template>
@@ -25,8 +25,8 @@
         >
             <li
                 fd-list-group-header
-                i18n="@@platformTableGroupDialogGroupOrderHeader"
-            >Group Order</li>
+                i18n="@@platformTableSortDialogSortOrderHeader"
+            >Sort Order</li>
 
             <li
                 fd-list-item
@@ -38,11 +38,11 @@
                     state="default"
                     compact="true"
                     [ngModel]="direction"
-                    (ngModelChange)="_groupOrderChange($event)"
+                    (ngModelChange)="_sortDirectionChange($event)"
                 ></fd-radio-button>
                 <span
                     fd-list-title
-                    i18n="@@platformTableGroupDialogGroupOrderAsc"
+                    i18n="@@platformTableSortDialogSortOrderAsc"
                 >Ascending</span>
             </li>
             <li
@@ -55,11 +55,11 @@
                     state="default"
                     compact="true"
                     [ngModel]="direction"
-                    (ngModelChange)="_groupOrderChange($event)"
+                    (ngModelChange)="_sortDirectionChange($event)"
                 ></fd-radio-button>
                 <span
                     fd-list-title
-                    i18n="@@platformTableGroupDialogGroupOrderDesc"
+                    i18n="@@platformTableSortDialogSortOrderDesc"
                 >Descending</span>
             </li>
         </ul>
@@ -71,24 +71,25 @@
         >
             <li
                 fd-list-group-header
-                i18n="@@platformTableGroupDialogGroupByHeader"
-            >Group By</li>
+                i18n="@@platformTableSortDialogSortByHeader"
+            >Sorted By</li>
+
             <li
                 fd-list-item
-                [selected]="NOT_GROUPED_OPTION_VALUE === field"
+                [selected]="field === NOT_SORTED_OPTION_VALUE"
             >
                 <fd-radio-button
                     name="sort-by"
-                    [value]="NOT_GROUPED_OPTION_VALUE"
+                    [value]="NOT_SORTED_OPTION_VALUE"
                     state="default"
                     compact="true"
                     [ngModel]="field"
-                    (ngModelChange)="_groupFieldChange($event)"
+                    (ngModelChange)="_sortFieldChange($event)"
                 ></fd-radio-button>
                 <span
                     fd-list-title
-                    i18n="@@platformTableGroupDialogNotGroupedLabel"
-                >(Not Grouped)</span>
+                    i18n="@@platformTableSortDialogNotSortedLabel"
+                >(Not Sorted)</span>
             </li>
             <li
                 fd-list-item
@@ -101,9 +102,12 @@
                     state="default"
                     compact="true"
                     [ngModel]="field"
-                    (ngModelChange)="_groupFieldChange($event)"
+                    (ngModelChange)="_sortFieldChange($event)"
                 ></fd-radio-button>
-                <span fd-list-title>{{column.label}}</span>
+                <span
+                    fd-list-title
+                    [innerText]="column.label"
+                ></span>
             </li>
         </ul>
     </fd-dialog-body>

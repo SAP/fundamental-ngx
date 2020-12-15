@@ -7,7 +7,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Input,
     OnChanges,
     OnDestroy,
@@ -21,17 +20,17 @@ import {
 import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, startWith } from 'rxjs/operators';
 
-import { DialogConfig, DialogService, KeyUtil, RtlService } from '@fundamental-ngx/core';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
 
-import { CollectionFilter, SelectableRow, TableState } from './interfaces';
+import { CollectionFilter, CollectionGroup, CollectionSort, SelectableRow, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
 import {
     TableColumnFreezeEvent,
@@ -46,29 +45,11 @@ import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
 
-import { TableColumnComponent } from './components/table-column/table-column.component';
+import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
-import { TableViewSettingsFilterComponent } from './components/table-view-settings-filter/table-view-settings-filter.component';
-import { SortDialogData, SortDialogResultData, SortingComponent } from './components/dialogs/sorting/sorting.component';
-import {
-    FiltersComponent,
-    FiltersDialogData,
-    FiltersDialogResultData
-} from './components/dialogs/filtering/filters.component';
-import {
-    GroupDialogData,
-    GroupDialogResultData,
-    GroupingComponent
-} from './components/dialogs/grouping/grouping.component';
+import { Table } from './table';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
-
-const dialogConfig: DialogConfig = {
-    responsivePadding: false,
-    verticalPadding: false,
-    minWidth: '30%',
-    minHeight: '50%'
-};
 
 /**
  * The component that represents a table.
@@ -106,7 +87,7 @@ const dialogConfig: DialogConfig = {
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TableService],
+    providers: [TableService, { provide: Table, useExisting: TableComponent }],
     host: {
         '[class.fd-table]': 'true',
         '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
@@ -115,7 +96,7 @@ const dialogConfig: DialogConfig = {
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
     }
 })
-export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChanges {
+export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges {
     /** Data source for table data. */
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
@@ -179,40 +160,40 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
 
     /** Event fired when table selection has changed. */
     @Output()
-    rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
+    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
         TableRowSelectionChangeEvent<T>
     >();
 
     /** Event fired when table sort order has changed. */
     @Output()
-    sortChange: EventEmitter<TableSortChangeEvent> = new EventEmitter<TableSortChangeEvent>();
+    readonly sortChange: EventEmitter<TableSortChangeEvent> = new EventEmitter<TableSortChangeEvent>();
 
     /** Event fired when the table filter has changed. */
     @Output()
-    filterChange: EventEmitter<TableFilterChangeEvent> = new EventEmitter<TableFilterChangeEvent>();
+    readonly filterChange: EventEmitter<TableFilterChangeEvent> = new EventEmitter<TableFilterChangeEvent>();
 
     /** Event fired when table grouping has changed. */
     @Output()
-    groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
+    readonly groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
 
     /** Event fired when there is a change in the frozen column. */
     @Output()
-    columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
+    readonly columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
 
     /** @hidden */
     @ViewChild('tableContainer')
-    tableContainer: ElementRef;
+    readonly tableContainer: ElementRef;
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => TableColumnComponent))
-    columns: QueryList<TableColumnComponent>;
+    @ContentChildren(TableColumn)
+    readonly columns: QueryList<TableColumn>;
+
+    _tableColumnsSubject: BehaviorSubject<TableColumn[]> = new BehaviorSubject([]);
+    readonly tableColumnsStream = this._tableColumnsSubject.asObservable();
 
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
-    tableToolbar: TableToolbarWithTemplate;
-
-    /** @hidden */
-    viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
+    readonly tableToolbar: TableToolbarWithTemplate;
 
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
@@ -266,13 +247,16 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     _checkedAll = false;
 
     /** @hidden */
-    _isSortable = false;
+    _isShownSortSettingsInToolbar = false;
 
     /** @hidden */
-    _isFilterable = false;
+    _isShownFilterSettingsInToolbar = false;
 
     /** @hidden */
-    _isGroupable = false;
+    _isShownGroupSettingsInToolbar = false;
+
+    /** @hidden */
+    _isShownColumnSettingsInToolbar = false;
 
     /** @hidden */
     _tableColumnsLength = 0;
@@ -311,9 +295,10 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     constructor(
         private readonly _tableService: TableService,
         private readonly _cd: ChangeDetectorRef,
-        private readonly _dialogService: DialogService,
         @Optional() private readonly _rtlService: RtlService
-    ) {}
+    ) {
+        super();
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -333,7 +318,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
 
         this._listenToRtlChanges();
 
-        this._checkColumnsAbilities();
+        this._listenToColumns();
 
         this._setFreezableInfo();
 
@@ -359,13 +344,90 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         this._tableService.setTableState(state);
     }
 
-    /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
-        return this.tableContainer;
+    getTableColumns(): TableColumn[] {
+        return this.columns?.toArray() || [];
     }
 
-    /** @hidden Select/unselect one row in 'multiple' mode. */
-    select(index: number, row: SelectableRow, checked: boolean): void {
+    /** Set Sorting rules */
+    sort(sortRules: CollectionSort[]): void {
+        this._tableService.setSort(sortRules);
+    }
+
+    /** Add Sorting rules to the existing ones */
+    addSort(sortRules: CollectionSort[]): void {
+        this._tableService.addSort(sortRules);
+    }
+
+    /** Set Filter rules */
+    filter(filterRules: CollectionFilter[]): void {
+        this._tableService.setFilters(filterRules);
+    }
+
+    /** Add Filter rule */
+    addFilter(filterRules: CollectionFilter[]): void {
+        this._tableService.addFilters(filterRules);
+    }
+
+    /** Set Groups */
+    group(groups: CollectionGroup[]): void {
+        this._tableService.setGroups(groups);
+    }
+
+    /** Add Groups */
+    addGroup(groups: CollectionGroup[]): void {
+        this._tableService.setGroups(groups);
+    }
+
+    /** Freeze table to column */
+    freezeToColumn(columnKey: string): void {
+        this._tableService.freezeTo(columnKey);
+        this.freezeColumnsTo = columnKey;
+        this._setFreezableInfo();
+    }
+
+    /** Unfreeze column */
+    unfreeze(columnKey: string): void {
+        const idx = this._freezableColumns.indexOf(columnKey);
+        const freezeToKey = this._freezableColumns[idx - 1];
+        this._tableService.freezeTo(freezeToKey);
+        this.freezeColumnsTo = freezeToKey;
+        this._setFreezableInfo();
+    }
+
+    /** Search in table */
+    search(searchInput: SearchInput): void {
+        this._tableService.search(searchInput);
+    }
+
+    /** Toolbar Sort Settings button visibility */
+    showSortSettingsInToolbar(showSortSettings: boolean): void {
+        this._isShownSortSettingsInToolbar = showSortSettings;
+        this._cd.detectChanges();
+    }
+
+    /** Toolbar Filter Settings button visibility */
+    showFilterSettingsInToolbar(showFilterSettings: boolean): void {
+        this._isShownFilterSettingsInToolbar = showFilterSettings;
+        this._cd.detectChanges();
+    }
+
+    /** Toolbar Group Settings button visibility */
+    showGroupSettingsInToolbar(showGroupSettings: boolean): void {
+        this._isShownGroupSettingsInToolbar = showGroupSettings;
+        this._cd.detectChanges();
+    }
+
+    /** Toolbar Columns Settings button visibility */
+    showColumnSettingsInToolbar(showColumnSettings: boolean): void {
+        this._isShownColumnSettingsInToolbar = showColumnSettings;
+        this._cd.detectChanges();
+    }
+
+    /**
+     * @hidden
+     * Select/unselect one row in 'multiple' mode.
+     */
+    _select(index: number, row: SelectableRow, checked: boolean): void {
         this._reset();
         row.checked = checked;
         this._checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
@@ -373,8 +435,11 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         this._emitSelectionChange(index);
     }
 
-    /** @hidden Select one row in 'single' mode. */
-    selectSingle(index: number, row: SelectableRow): void {
+    /**
+     * @hidden
+     * Select one row in 'single' mode.
+     */
+    _selectSingle(index: number, row: SelectableRow): void {
         if (this.selectionMode !== SelectionMode.SINGLE) {
             return;
         }
@@ -399,8 +464,11 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         this._emitSelectionChange(index);
     }
 
-    /** @hidden Select/Unselect all rows in 'multiple' mode. */
-    selectAll(checked: boolean): void {
+    /**
+     * @hidden
+     * Select/Unselect all rows in 'multiple' mode.
+     */
+    _selectAll(checked: boolean): void {
         this._reset();
         this._checkedAll = checked;
 
@@ -416,7 +484,7 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     }
 
     /** @hidden */
-    onKeydown(event: KeyboardEvent): void {
+    _onSelectControlKeydown(event: KeyboardEvent): void {
         // TODO: since the table should be able the focusable cells, needs to implement arrow buttons navigation in next phases
 
         event.stopPropagation();
@@ -428,126 +496,31 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         }
     }
 
-    /** @hidden */
-    sort(field: string, direction: SortDirection): void {
-        this._tableService.sort(field, direction);
+    /** Group triggered from column header */
+    _columnHeaderGroupBy(field: string): void {
+        this.group([{ field: field, direction: SortDirection.ASC }]);
+
         this._popoverOpen = false;
     }
 
-    /** @hidden */
-    filter(field: string, value: string): void {
-        this._tableService.filter([
+    /** Filter triggered from column header */
+    _columnHeaderFilterBy(field: string, value: string): void {
+        this.addFilter([
             {
                 field: field,
                 value: value,
                 strategy: CollectionStringFilterStrategy.CONTAINS
-            } as CollectionFilter
+            }
         ]);
 
         this._popoverOpen = false;
     }
 
-    /** @hidden */
-    group(field: string): void {
-        this._tableService.group(field, SortDirection.ASC);
+    /** Sort triggered from column header */
+    _columnHeaderSortBy(field: string, direction: SortDirection): void {
+        this.sort([{ field: field, direction: direction }]);
+
         this._popoverOpen = false;
-    }
-
-    /** @hidden */
-    freezeTo(columnKey: string): void {
-        this._tableService.freezeTo(columnKey);
-        this.freezeColumnsTo = columnKey;
-        this._setFreezableInfo();
-    }
-
-    /** @hidden */
-    unfreeze(columnKey: string): void {
-        const idx = this._freezableColumns.indexOf(columnKey);
-        const freezeToKey = this._freezableColumns[idx - 1];
-        this._tableService.freezeTo(freezeToKey);
-        this.freezeColumnsTo = freezeToKey;
-        this._setFreezableInfo();
-    }
-
-    /** Search */
-    search(searchInput: SearchInput): void {
-        this._tableService.search(searchInput);
-    }
-
-    /** Open Sort Dialog */
-    openSortingDialog(): void {
-        const state = this.getTableState();
-        const columns = this._getTableColumnsAsArray();
-        const sortBy = state.sortBy?.[0];
-        const dialogData: SortDialogData = {
-            columns: columns.filter(({ sortable }) => sortable),
-            direction: sortBy?.direction,
-            field: sortBy?.field
-        };
-
-        const dialogRef = this._dialogService.open(SortingComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
-
-        this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: SortDialogResultData) => {
-                this._tableService.sort(result.field, result.direction);
-            })
-        );
-    }
-
-    /** Open Filtering Dialog */
-    openFilteringDialog(): void {
-        const state = this.getTableState();
-        const columns = this._getTableColumnsAsArray();
-        const dialogData: FiltersDialogData = {
-            columns: columns,
-            viewSettingsFilters: this.viewSettingsFilters,
-            filterBy: state?.filterBy
-        };
-
-        const dialogRef = this._dialogService.open(FiltersComponent, {
-            responsivePadding: false,
-            verticalPadding: false,
-            minWidth: '30%',
-            minHeight: '50%',
-            data: dialogData
-        } as DialogConfig);
-
-        this._subscriptions.add(
-            dialogRef.afterClosed
-                .pipe(filter((result) => !!result?.filterBy))
-                .subscribe((result: FiltersDialogResultData) => this._tableService.filter(result.filterBy))
-        );
-    }
-
-    /** Open Grouping Dialog */
-    openGroupingDialog(): void {
-        const state = this.getTableState();
-        const columns = this._getTableColumnsAsArray();
-        const dialogData: GroupDialogData = {
-            columns: columns.filter(({ groupable }) => groupable),
-            direction: state.groupBy?.[0]?.direction,
-            field: state.groupBy?.[0]?.field
-        };
-
-        const dialogRef = this._dialogService.open(GroupingComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
-
-        this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: GroupDialogResultData) => {
-                this._tableService.group(result.field, result.direction);
-            })
-        );
-    }
-
-    /** Set view settings filters list */
-    setViewSettingsFilters(filters: TableViewSettingsFilterComponent[]): void {
-        this.viewSettingsFilters = filters;
-        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -590,9 +563,10 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         return this._popoverOpen && this._popoverColumnKey === key;
     }
 
-    /** @hidden */
-    private _getTableColumnsAsArray(): TableColumnComponent[] {
-        return this.columns?.toArray() || [];
+    private _listenToColumns(): void {
+        this.columns.changes.pipe(startWith(null)).subscribe(() => {
+            this._tableColumnsSubject.next(this.columns.toArray());
+        })
     }
 
     /** @hidden */
@@ -731,16 +705,6 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         }, {});
 
         this._cd.detectChanges();
-    }
-
-    private _checkColumnsAbilities(): void {
-        if (!this.columns || !this.columns.length) {
-            return;
-        }
-
-        this._isSortable = this.columns.some((c) => c.sortable);
-        this._isFilterable = this.columns.some((c) => c.filterable);
-        this._isGroupable = this.columns.some((c) => c.groupable);
     }
 
     /** @hidden */

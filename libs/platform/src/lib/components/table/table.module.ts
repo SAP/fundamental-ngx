@@ -13,7 +13,8 @@ import {
     PopoverModule,
     RadioModule,
     TableModule,
-    ToolbarModule
+    ToolbarModule,
+    SelectModule
 } from '@fundamental-ngx/core';
 
 import { PlatformInputModule } from '../form/input/fdp-input.module';
@@ -30,7 +31,7 @@ import {
     FilterSingleSelectComponent,
     FilterMultiSelectComponent,
     FilterCustomComponent,
-    ViewSettingsResetButtonComponent,
+    ResetButtonComponent,
     TableColumnComponent,
     TableToolbarActionsComponent,
     TableToolbarComponent,
@@ -65,7 +66,8 @@ import { ValueByPathPipe } from './pipes';
         PlatformInputModule,
         DialogModule,
         PlatformSearchFieldModule,
-        IconModule
+        IconModule,
+        SelectModule
     ],
     declarations: [
         TableComponent,
@@ -88,7 +90,7 @@ import { ValueByPathPipe } from './pipes';
         FilterSingleSelectComponent,
         FilterMultiSelectComponent,
         FilterCustomComponent,
-        ViewSettingsResetButtonComponent
+        ResetButtonComponent
     ],
     exports: [
         TableComponent,

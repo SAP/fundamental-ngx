@@ -93,6 +93,6 @@ describe('TableViewSettingsFilterComponent', () => {
         hostComponent.values = values;
         fixture.detectChanges();
 
-        expect(component.filterCustomDef.templateRef).toBeInstanceOf(TemplateRef);
+        expect(component.customFilterTemplate).toBeInstanceOf(TemplateRef);
     });
 });

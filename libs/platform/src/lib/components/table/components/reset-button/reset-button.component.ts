@@ -16,7 +16,7 @@ export interface Resettable {
 export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
 
 @Component({
-    selector: `fdp-view-settings-reset-button`,
+    selector: `fdp-table-reset-button`,
     template: `<button
         fd-button
         fdType="transparent"
@@ -28,6 +28,6 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
     ></button>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ViewSettingsResetButtonComponent {
+export class ResetButtonComponent {
     constructor(@Inject(RESETTABLE_TOKEN) public resettable: Resettable) {}
 }

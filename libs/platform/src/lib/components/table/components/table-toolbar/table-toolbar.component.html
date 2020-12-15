@@ -1,10 +1,10 @@
 <ng-template
     let-size="size"
     let-counter="counter"
-    let-isSortable="isSortable"
-    let-isFilterable="isFilterable"
-    let-isGroupable="isGroupable"
-    let-isColumnsHiddable="isColumnsHiddable"
+    let-sortable="sortable"
+    let-filterable="filterable"
+    let-groupable="groupable"
+    let-columns="columns"
 >
 
     <fd-toolbar
@@ -30,13 +30,13 @@
             <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
         </ng-container>
 
-        <ng-container *ngIf="isSortable || isFilterable || isGroupable || isColumnsHiddable">
+        <ng-container *ngIf="sortable || filterable || groupable || columns">
             <fd-toolbar-separator
                 fd-toolbar-item
                 *ngIf="tableToolbarActionsComponent"
             ></fd-toolbar-separator>
             <fdp-button
-                *ngIf="isSortable"
+                *ngIf="sortable"
                 glyph="sort"
                 i18n-title="@@platformTableToolbarActionButtonSort"
                 title="sort"
@@ -45,7 +45,7 @@
                 (click)="openSorting()"
             ></fdp-button>
             <fdp-button
-                *ngIf="isFilterable"
+                *ngIf="filterable"
                 glyph="filter"
                 i18n-title="@@platformTableToolbarActionButtonFilter"
                 title="filter"
@@ -54,7 +54,7 @@
                 (click)="openFiltering()"
             ></fdp-button>
             <fdp-button
-                *ngIf="isGroupable"
+                *ngIf="groupable"
                 glyph="group-2"
                 i18n-title="@@platformTableToolbarActionButtonGroup"
                 title="group"
@@ -63,7 +63,7 @@
                 (click)="openGrouping()"
             ></fdp-button>
             <fdp-button
-                *ngIf="isColumnsHiddable"
+                *ngIf="columns"
                 glyph="action-settings"
                 i18n-title="@@platformTableToolbarActionButtonColumns"
                 title="columns"

@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 import { ButtonModule } from '@fundamental-ngx/core';
 
-import { RESETTABLE_TOKEN, Resettable, ViewSettingsResetButtonComponent } from './reset-button.component';
+import { RESETTABLE_TOKEN, Resettable, ResetButtonComponent } from './reset-button.component';
 
 class ResettableMock implements Resettable {
     readonly isResetAvailableSubject$ = new BehaviorSubject<boolean>(false);
@@ -12,15 +12,15 @@ class ResettableMock implements Resettable {
 }
 
 describe('PlatformTableResetButtonComponent', () => {
-    let component: ViewSettingsResetButtonComponent;
-    let fixture: ComponentFixture<ViewSettingsResetButtonComponent>;
+    let component: ResetButtonComponent;
+    let fixture: ComponentFixture<ResetButtonComponent>;
     let resettable: ResettableMock;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [ButtonModule],
-                declarations: [ViewSettingsResetButtonComponent],
+                declarations: [ResetButtonComponent],
                 providers: [
                     {
                         provide: RESETTABLE_TOKEN,
@@ -35,7 +35,7 @@ describe('PlatformTableResetButtonComponent', () => {
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ViewSettingsResetButtonComponent);
+        fixture = TestBed.createComponent(ResetButtonComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

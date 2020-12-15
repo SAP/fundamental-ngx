@@ -5,15 +5,19 @@ import {
     ContentChild,
     Input,
     OnDestroy,
-    OnInit
+    OnInit,
+    TemplateRef
 } from '@angular/core';
 
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
+
 import { ColumnAlign } from '../../enums';
 import { FdpCellDef, FdpHeaderCellDef } from '../../directives';
+
+import { TableColumn } from './table-column';
 
 enum ColumnAlignEnum {
     Start = 'left',
@@ -44,9 +48,10 @@ enum ColumnAlignEnum {
 @Component({
     selector: 'fdp-column',
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: TableColumn, useExisting: TableColumnComponent }]
 })
-export class TableColumnComponent implements OnInit, OnDestroy {
+export class TableColumnComponent extends TableColumn implements OnInit, OnDestroy {
     /** Column unique identifier. */
     @Input()
     name: string;
@@ -99,11 +104,21 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     @Input()
     freezable = false;
 
+    /** Column cell template */
+    columnCellTemplate: TemplateRef<any>;
+
+    /** Column header template */
+    headerCellTemplate: TemplateRef<any>;
+
     @ContentChild(FdpCellDef)
-    fdpCellDef: FdpCellDef;
+    set fdpCellDef(fdpCellDef: FdpCellDef) {
+        this.columnCellTemplate = fdpCellDef?.templateRef;
+    }
 
     @ContentChild(FdpHeaderCellDef)
-    fdpHeaderCellDef: FdpHeaderCellDef;
+    set fdpHeaderCellDef(fdpHeaderCellDef: FdpHeaderCellDef) {
+        this.headerCellTemplate = fdpHeaderCellDef?.templateRef;
+    }
 
     /** @hidden */
     private _align$: BehaviorSubject<ColumnAlignEnum> = new BehaviorSubject<ColumnAlignEnum>(null);
@@ -115,7 +130,9 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     private _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private readonly _rtlService: RtlService, private readonly _cd: ChangeDetectorRef) {}
+    constructor(private readonly _rtlService: RtlService, private readonly _cd: ChangeDetectorRef) {
+        super();
+    }
 
     /** @hidden */
     ngOnInit(): void {

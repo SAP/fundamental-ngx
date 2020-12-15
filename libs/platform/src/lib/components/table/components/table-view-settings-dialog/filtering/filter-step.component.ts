@@ -11,7 +11,7 @@ import {
 
 import { FilterType } from '../../../enums';
 import { CollectionFilter } from '../../../interfaces';
-import { TableViewSettingsFilterComponent } from '../../table-view-settings-filter/table-view-settings-filter.component';
+import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
 import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step';
 
 /**

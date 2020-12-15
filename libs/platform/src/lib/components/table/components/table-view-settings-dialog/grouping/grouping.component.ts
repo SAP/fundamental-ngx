@@ -1,40 +1,40 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Inject, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core';
 
 import { SortDirection } from '../../../enums';
-import { Resettable, RESETTABLE_TOKEN } from '../reset-button/reset-button.component';
+import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
-export interface SortDialogColumn {
+export interface GroupDialogColumn {
     label: string;
     key: string;
 }
 
-export interface SortDialogData {
+export interface GroupDialogData {
     direction: SortDirection;
     field: string;
-    columns: SortDialogColumn[];
+    columns: GroupDialogColumn[];
 }
 
-export interface SortDialogResultData {
+export interface GroupDialogResultData {
     field: string;
     direction: SortDirection;
 }
 
-const NOT_SORTED_OPTION_VALUE = null;
+const NOT_GROUPED_OPTION_VALUE = null;
 
 @Component({
-    templateUrl: './sorting.component.html',
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SortingComponent) }],
+    templateUrl: './grouping.component.html',
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => GroupingComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SortingComponent implements Resettable {
+export class GroupingComponent implements Resettable {
     /** Initially active direction */
     initialDirection: SortDirection = SortDirection.ASC;
 
-    /** Initially active field. Used for restoring */
-    initialField: string = NOT_SORTED_OPTION_VALUE;
+    /** Initially active field */
+    initialField: string = null;
 
     /** Current selected direction */
     direction: SortDirection;
@@ -43,21 +43,22 @@ export class SortingComponent implements Resettable {
     field: string;
 
     /** Table columns */
-    readonly columns: SortDialogColumn[] = [];
+    readonly columns: GroupDialogColumn[] = [];
 
     /** @hidden */
-    readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    /** Indicates when reset command is available */
+    private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+    /** Indicates if reset command is active */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
 
-    /** @hidden */
-    readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
+    /** Not Grouped Option model value */
+    readonly NOT_GROUPED_OPTION_VALUE = NOT_GROUPED_OPTION_VALUE;
 
     constructor(public dialogRef: DialogRef) {
-        const data: SortDialogData = this.dialogRef.data;
+        const data: GroupDialogData = this.dialogRef.data;
 
         this.initialDirection = data.direction || this.initialDirection;
         this.initialField = data.field || this.initialField;
@@ -81,18 +82,18 @@ export class SortingComponent implements Resettable {
 
     /** Confirm changes and close dialog */
     confirm(): void {
-        const result: SortDialogResultData = { direction: this.direction, field: this.field };
+        const result: GroupDialogResultData = { field: this.field, direction: this.direction };
         this.dialogRef.close(result);
     }
 
     /** @hidden */
-    _sortDirectionChange(direction: SortDirection): void {
+    _groupOrderChange(direction: SortDirection): void {
         this.direction = direction;
         this._onModelChange();
     }
 
     /** @hidden */
-    _sortFieldChange(field: string): void {
+    _groupFieldChange(field: string): void {
         this.field = field;
         this._onModelChange();
     }
