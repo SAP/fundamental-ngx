@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, Input, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, Input } from '@angular/core';
 
 let quickViewUniqueId = 0;
 
@@ -12,6 +12,5 @@ let quickViewUniqueId = 0;
 export class QuickViewComponent {
     /** Id of the quick view element. */
     @Input()
-    @HostBinding('attr.id')
     id: string = 'fd-quick-view-' + quickViewUniqueId++;
 }
