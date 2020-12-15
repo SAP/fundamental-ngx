@@ -161,7 +161,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
         testComponent.layout = TWO_COLUMNS_END_EXPANDED;
         fixture.detectChanges();
-        
+
          // checks the columns width
         const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0].nativeElement;
         const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;

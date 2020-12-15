@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { DIALOG_REF, DialogRef, DialogService, DialogConfig } from '@fundamental-ngx/core';
@@ -19,6 +19,10 @@ import { NewFolderComponent } from '../new-folder';
             .fd-dialog__body--no-horizontal-padding {
                 padding-left: 0 !important;
                 padding-right: 0 !important;
+            }
+
+            .fd-title--bold {
+                font-weight: bold;
             }
         `
     ]
@@ -43,7 +47,8 @@ export class MoveToComponent implements OnInit {
 
     constructor(
         @Inject(DIALOG_REF) private readonly dialogRef: DialogRef,
-        private readonly _dialogService: DialogService
+        private readonly _dialogService: DialogService,
+        private readonly _cd: ChangeDetectorRef
     ) {}
 
     ngOnInit(): void {
@@ -55,6 +60,8 @@ export class MoveToComponent implements OnInit {
         this.selectedFolder = null;
         this._currentFolder = this._getParentFolderByCurrentFolderId(this._currentFolder.documentId);
         this._init(this._currentFolder ? this._currentFolder.files : this.items);
+
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -74,6 +81,8 @@ export class MoveToComponent implements OnInit {
         this.selectedFolder = null;
         this._currentFolder = folder;
         this._init(folder.files);
+
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -91,7 +100,7 @@ export class MoveToComponent implements OnInit {
         const dialogRef = this._dialogService.open(NewFolderComponent, {
             responsivePadding: true,
             backdropClickCloseable: false,
-            height: '70%',
+            height: '350px',
             backdropClass: 'fdp-upload-collection-dialig-no-bg',
             data: {
                 currentFolder: this._currentFolder

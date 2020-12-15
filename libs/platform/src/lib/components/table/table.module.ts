@@ -1,23 +1,71 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CheckboxModule, TableModule, ToolbarModule } from '@fundamental-ngx/core';
+import {
+    ButtonModule,
+    CheckboxModule,
+    DialogModule,
+    FormModule,
+    IconModule,
+    InputGroupModule,
+    ListModule,
+    PopoverModule,
+    RadioModule,
+    TableModule,
+    ToolbarModule
+} from '@fundamental-ngx/core';
+
+import { PlatformInputModule } from '../form/input/fdp-input.module';
+import { PlatformButtonModule } from '../button/button.module';
+import { PlatformSearchFieldModule } from '../search-field/search-field.module';
 
 import { TableComponent } from './table.component';
-import { TableColumnComponent } from './table-column/table-column.component';
-import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
-import { TableToolbarActionsComponent } from './table-toolbar-actions/table-toolbar-actions.component';
-import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
-import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
+import {
+    GroupingComponent,
+    SortingComponent,
+    FiltersComponent,
+    FiltersListStepComponent,
+    FilterStepComponent,
+    FilterSingleSelectComponent,
+    FilterMultiSelectComponent,
+    FilterCustomComponent,
+    ViewSettingsResetButtonComponent,
+    TableColumnComponent,
+    TableToolbarActionsComponent,
+    TableToolbarComponent,
+    TableViewSettingsDialogComponent,
+    TableViewSettingsFilterComponent
+} from './components';
+import {
+    FdpCellDef,
+    FdpHeaderCellDef,
+    FdpTableCell,
+    FdpTableHeader,
+    FdpViewSettingsFilterCustomDef
+} from './directives';
+import { ValueByPathPipe } from './pipes';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
+        FormModule,
+
         TableModule,
         ToolbarModule,
-        CheckboxModule
+        CheckboxModule,
+        RadioModule,
+        InputGroupModule,
+        PopoverModule,
+        ListModule,
+        PlatformButtonModule,
+        ButtonModule,
+        PlatformInputModule,
+        DialogModule,
+        PlatformSearchFieldModule,
+        IconModule
     ],
     declarations: [
         TableComponent,
@@ -27,7 +75,20 @@ import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.dire
         FdpTableCell,
         FdpCellDef,
         FdpTableHeader,
-        FdpHeaderCellDef
+        FdpHeaderCellDef,
+        TableViewSettingsDialogComponent,
+        TableViewSettingsFilterComponent,
+        FdpViewSettingsFilterCustomDef,
+        ValueByPathPipe,
+        SortingComponent,
+        GroupingComponent,
+        FiltersComponent,
+        FiltersListStepComponent,
+        FilterStepComponent,
+        FilterSingleSelectComponent,
+        FilterMultiSelectComponent,
+        FilterCustomComponent,
+        ViewSettingsResetButtonComponent
     ],
     exports: [
         TableComponent,
@@ -37,8 +98,10 @@ import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.dire
         FdpTableCell,
         FdpCellDef,
         FdpTableHeader,
-        FdpHeaderCellDef
-    ],
-    providers: []
+        FdpHeaderCellDef,
+        TableViewSettingsDialogComponent,
+        TableViewSettingsFilterComponent,
+        FdpViewSettingsFilterCustomDef
+    ]
 })
 export class PlatformTableModule {}
