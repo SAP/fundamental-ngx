@@ -4,17 +4,24 @@ import {
     Component,
     ContentChild,
     ElementRef,
+    EventEmitter,
     Input,
     OnChanges,
     Optional,
+    Output,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 import { TabTitleDirective } from '../tab-utils/tab-directives';
 import { TabItemState } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
+import { Subject } from 'rxjs';
 
 let tabPanelUniqueId = 0;
+
+export class TabStateChange {
+    constructor(public target: TabPanelComponent, public state: boolean) {}
+}
 
 /**
  * Represents the body of a tab element. It also contains elements pertaining to the associated tab header.
@@ -26,28 +33,17 @@ let tabPanelUniqueId = 0;
         role: 'tabpanel',
         class: 'fd-tabs__panel',
         '[attr.id]': 'id',
-        '[attr.aria-expanded]': 'expanded ? true : null',
-        '[class.is-expanded]': 'expanded'
+        '[class.is-expanded]': 'expanded',
+        '[attr.aria-expanded]': 'expanded ? true : null'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabPanelComponent implements OnChanges {
-    /** @hidden */
-    @ContentChild(TabTitleDirective, { read: TemplateRef })
-    titleTemplate: TemplateRef<any>;
 
     /** Id of the tab. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-tab-panel' + tabPanelUniqueId++;
-
-    /** @hidden
-     * Flag to inform if body for this tab should be displayed
-     */
-    expanded = false;
-
-    /** @hidden */
-    index: number;
 
     /** Aria-label of the tab. Also applied to the tab header. */
     @Input()
@@ -81,6 +77,20 @@ export class TabPanelComponent implements OnChanges {
     @Input()
     tabState: TabItemState;
 
+    /** Event that is emitted when the tab panel . */
+    @Output()
+    expandedChange = new EventEmitter<boolean>();
+
+    /** @hidden */
+    @ContentChild(TabTitleDirective, { read: TemplateRef })
+    titleTemplate: TemplateRef<any>;
+
+    /** @hidden Event that is emitted when the tab panel . */
+    _expandedStateChange = new Subject<TabStateChange>();
+
+    /** @hidden Whether to display tab panel content */
+    private _expanded = false;
+
     /** @hidden */
     constructor(
         public elementRef: ElementRef,
@@ -90,18 +100,29 @@ export class TabPanelComponent implements OnChanges {
 
     /** @hidden
      * Thanks to OnPush change strategy detection on tab-list parent component,
-     * every change of any property should be reported.
-     */
+     * every change of any property should be reported. */
     public ngOnChanges(): void {
         if (this._tabsService) {
             this._tabsService.tabPanelPropertyChanged.next();
         }
     }
 
-    /** @hidden
-     * Method to change the state of expanded flag */
-    triggerExpandedPanel(expanded: boolean): void {
-        this.expanded = expanded;
-        this._changeDetRef.detectChanges();
+    /** Whether tab panel content is expanded */
+    get expanded(): boolean {
+        return this._expanded;
+    }
+
+    /** Whether to expand tab panel content */
+    expand(expand: boolean): void {
+        this._expandedStateChange.next(new TabStateChange(this, expand));
+    }
+
+    /** @hidden Set new expand state */
+    _expand(expanded: boolean): void {
+        if (this._expanded !== expanded) {
+            this._expanded = expanded;
+            this.expandedChange.emit(this._expanded);
+            this._changeDetRef.markForCheck();
+        }
     }
 }

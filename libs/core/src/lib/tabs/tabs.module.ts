@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TabPanelComponent } from './tab/tab-panel.component';
+import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 
 import {
@@ -42,7 +42,7 @@ import { ScrollSpyModule } from '../scroll-spy/scroll-spy.module';
         TabHeaderDirective,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective
+        TabSeparatorDirective,
     ],
     imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule, ScrollSpyModule],
     exports: [

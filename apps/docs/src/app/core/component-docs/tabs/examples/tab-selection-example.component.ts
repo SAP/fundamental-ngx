@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { TabPanelComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-tab-selection-example',
-    templateUrl: './tab-selection-example.component.html',
-    styleUrls: ['tab-selection-example.component.scss']
+    templateUrl: './tab-selection-example.component.html'
 })
 export class TabSelectionExampleComponent {
-    selectedTab = 0;
+
+    @ViewChildren(TabPanelComponent)
+    tabs: QueryList<TabPanelComponent>;
 }

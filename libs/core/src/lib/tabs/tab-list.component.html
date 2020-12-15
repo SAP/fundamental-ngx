@@ -1,32 +1,35 @@
 <ul
     #headerContainer
+    role="tablist"
     class="fd-tabs"
     [class.fd-tabs--compact]="compact"
     [ngClass]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
-    role="tablist"
 >
-    <ng-container *ngFor="let tab of _tabs.visible; let i = index">
-        <li fd-tab-item [header]="tab.header" [tabItemState]="tab.tabState">
+    <ng-container *ngFor="let tab of _tabs.visible; let i = index; let last = last">
+        <li fd-tab-item
+            [header]="tab.isHeader"
+            [tabItemState]="tab.tabState"
+            [attr.aria-selected]="tab.active">
             <a
                 fd-tab-link
-                [active]="selectedIndex === i"
                 [attr.tabindex]="0"
                 [attr.aria-controls]="tab.id"
                 [attr.aria-label]="tab.ariaLabel || null"
                 [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
+                [active]="tab.active"
                 [disabled]="tab.disabled"
-                (keydown)="tabHeaderKeyHandler(i, $event)"
-                (click)="tabHeaderClickHandler(i)"
+                (keydown)="_tabHeaderKeyHandler(i, $event)"
+                (click)="_tabHeaderClickHandler(tab.panel)"
             >
                 <ng-container *ngTemplateOutlet="tab.titleTemplate || null"></ng-container>
 
                 <ng-container *ngIf="!tab.titleTemplate" [ngSwitch]="mode">
                     <ng-container *ngSwitchCase="'filter'">
-                        <span fd-tab-header *ngIf="tab.header">
+                        <span fd-tab-header *ngIf="tab.isHeader">
                             <span fd-tab-counter-header *ngIf="tab.count">{{ tab.count }}</span>
                             <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
                         </span>
-                        <ng-container *ngIf="!tab.header">
+                        <ng-container *ngIf="!tab.isHeader">
                             <span fd-tab-icon [icon]="tab.glyph">
                                 <p fd-tab-count>{{ tab.count }}</p>
                             </span>
@@ -54,10 +57,10 @@
                     </ng-container>
                 </ng-container>
             </a>
-            <div fd-tab-process-icon *ngIf="mode === 'process' && i !== _tabPanelsArray.length - 1"></div>
+            <div fd-tab-process-icon *ngIf="mode === 'process' && !last"></div>
         </li>
 
-        <div *ngIf="tab.header" fd-tab-separator></div>
+        <div *ngIf="tab.isHeader" fd-tab-separator></div>
     </ng-container>
 
     <button #overflowTrigger
@@ -83,9 +86,9 @@
 
 <fd-menu #menu>
     <li fd-menu-item
-        *ngFor="let tab of _tabs.overflowing; let i = index"
-        (onSelect)="tabHeaderClickHandler(_tabs.visible.length + i)">
-        <div fd-menu-interactive [class.is-selected]="selectedIndex === _tabs.visible.length + i">
+        *ngFor="let tab of _tabs.overflowing"
+        (onSelect)="_overflowingTabHeaderClickHandler(tab.panel)">
+        <div fd-menu-interactive [class.is-selected]="tab.active">
             <ng-container
                 *ngTemplateOutlet="tab.titleTemplate || textTitle; context: { $implicit: tab.title }"></ng-container>
         </div>

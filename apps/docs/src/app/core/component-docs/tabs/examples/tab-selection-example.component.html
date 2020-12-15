@@ -1,4 +1,4 @@
-<fd-tab-list [(selectedIndex)]="selectedTab" #tabList>
+<fd-tab-list>
     <fd-tab title="Tab 1">
         Tab 1
     </fd-tab>
@@ -9,10 +9,13 @@
         Tab 3
     </fd-tab>
 </fd-tab-list>
-<br />
 
-<!-- First method, requires maintaining a flag -->
-<button fd-button label="Select Tab 1" (click)="selectedTab = 0"></button>
-
-<!-- Second method, does not require a flag -->
-<button fd-button label="Select Tab 2" (click)="tabList.selectTab(1, true)"></button>
+<label fd-form-label>Activate tab:</label>
+<fd-segmented-button>
+    <button *ngFor="let tab of tabs"
+            fd-button
+            [label]="tab.title"
+            [class.is-selected]="tab.expanded"
+            (click)="tab.expand(true)">
+    </button>
+</fd-segmented-button>

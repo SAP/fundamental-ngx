@@ -11,7 +11,7 @@ import {
     TabNavigationExampleChildSecond,
     TabNavigationExampleChildThird
 } from './examples';
-import { TabsModule, TitleModule } from '@fundamental-ngx/core';
+import { SegmentedButtonModule, TabsModule, TitleModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -33,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TabsModule, TitleModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TabsModule, TitleModule, SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent]
 })

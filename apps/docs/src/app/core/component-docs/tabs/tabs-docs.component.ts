@@ -9,7 +9,6 @@ import * as tabIcon from '!raw-loader!./examples/tab-icon-only-example/tab-icon-
 import * as tabFilter from '!raw-loader!./examples/tab-filter-example/tab-filter-example.component.html';
 import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
 import * as tabSelectionSrcTs from '!raw-loader!./examples/tab-selection-example.component.ts';
-import * as tabSelectionScss from '!raw-loader!./examples/tab-selection-example.component.scss';
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
@@ -222,7 +221,6 @@ export class TabsDocsComponent {
             fileName: 'tab-selection-example',
             typescriptFileCode: tabSelectionSrcTs,
             component: 'TabSelectionExampleComponent',
-            scssFileCode: tabSelectionScss
         }
     ];
 
