@@ -21,12 +21,15 @@ import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
 
 /**
- * Date-Picker implementation based on the
- * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Date-Picker-Component-Technical-Design
- * documents.
+ * The Platform date picker component is a wrapper around fd-date-picker using platform form.
+ * It is able to provide form field functionalities as well along with fd-date-picker functions.
  *
- * Core datePicker is wrapped here to work with platform form. Core datepicker properties
- * and Event has been exposed in the same way.
+ * <fdp-form-group #ffg [formGroup]="datePickerForm">
+ *      <fdp-form-field #ffl1 id="birthday">
+ *          <fdp-date-picker name="birthday" type="single" [formControl]="ffl1.formControl"></fdp-date-picker>
+ *      </fdp-form-field>
+ * </fdp-form-group>
+ *
  */
 
 @Component({
