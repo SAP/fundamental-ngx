@@ -1,4 +1,4 @@
-export interface User {
+export interface ApprovalUser {
     id: string;
     name: string;
     description?: string;

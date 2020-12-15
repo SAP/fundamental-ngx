@@ -7,7 +7,7 @@
                     glyph="navigation-left-arrow"
                     (click)="backToListFromDetails()"
                 ></fd-icon>
-                {{ _isListMode && !_userToShowDetails ? dialogRef.data.node.description + ' (' + dialogRef.data.node.approvers.length + ')' : 'Detail' }}
+                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ data.node.description }} ({{ data.node.approvers.length }})</ng-container>
             </p>
             <fdp-search-field
                 *ngIf="!_userToShowDetails && _isListMode"
@@ -35,16 +35,16 @@
             </div>
 
             <ng-container
-                *ngIf="dialogRef.data.userDetailsTemplate"
-                [ngTemplateOutlet]="dialogRef.data.userDetailsTemplate"
+                *ngIf="data.userDetailsTemplate"
+                [ngTemplateOutlet]="data.userDetailsTemplate"
                 [ngTemplateOutletContext]="{ data: _userToShowDetailsData$ | async }">
             </ng-container>
 
         </ng-container>
         <ng-container *ngIf="_isListMode && !_userToShowDetails">
-            <div class="approval-flow-user-details__selected-count"
+            <div class="approval-flow-user-details__selected-count" i18n="@@platformApprovalFlowSelectedUsers"
                  *ngIf="_selectedItems.length">{{ _selectedItems.length }}
-                item{{ _selectedItems.length > 1 ? 's' : '' }} selected
+                {_selectedItems.length, plural, =1 {item} other {items}} selected
             </div>
             <fdp-list
                 selectionMode="multi"
@@ -67,7 +67,7 @@
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-dialog-footer-button *ngIf="dialogRef.data.node && !(_userToShowDetails && _isListMode)">
+        <fd-dialog-footer-button *ngIf="data.node && !(_userToShowDetails && _isListMode)">
             <button
                 fd-button
                 fd-dialog-decisive-button
@@ -92,3 +92,8 @@
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>
+
+
+<ng-template #defaultHeader>
+    <ng-container i18n="@@platformApprovalFlowUserDetailHeader">Detail</ng-container>
+</ng-template>

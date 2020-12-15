@@ -15,19 +15,22 @@ $block: approval-flow-user-details;
 }
 
 .#{$block}__description {
-    color: var(--sapContent_LabelColor);
+    color: #6A6D70;
+    color: var(--sapContent_LabelColor, #6A6D70);
 }
 
 .#{$block}__selected-count {
     line-height: 2rem;
     margin: 0 -1rem;
     padding: 0 1rem;
-    background: var(--sapList_HeaderBackground);
+    background: #F2F2F2;
+    background: var(--sapList_HeaderBackground, #F2F2F2);
 }
 
 :host ::ng-deep {
     a {
-        color: var(--sapLinkColor);
+        color: #0A6ED1;
+        color: var(--sapLinkColor, #0A6ED1);
     }
 
     .fd-list--byline .fd-list__byline-left {
@@ -45,7 +48,8 @@ $block: approval-flow-user-details;
 
             fd-icon {
                 font-size: .875rem;
-                color: var(--sapButton_IconColor);
+                color: #0854A0;
+                color: var(--sapButton_IconColor, #0854A0);
                 position: relative;
                 top: 1px;
                 cursor: pointer;

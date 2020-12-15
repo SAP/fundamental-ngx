@@ -1,11 +1,11 @@
 import { ApprovalStatus } from './approval-status';
-import { User } from './user';
+import { ApprovalUser } from './approval-user';
 
 export interface ApprovalNode {
     id: string;
     name: string;
     description?: string;
-    approvers: User[];
+    approvers: ApprovalUser[];
     status: ApprovalStatus;
     targets: string[];
     dueDate?: Date;

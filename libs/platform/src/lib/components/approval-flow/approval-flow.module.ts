@@ -7,7 +7,7 @@ import {
     ButtonModule,
     DialogModule,
     IconModule,
-    MessageToastModule, RtlService,
+    MessageToastModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
 
@@ -37,8 +37,7 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
     ],
     exports: [
         ApprovalFlowComponent
-    ],
-    providers: [RtlService]
+    ]
 })
 export class PlatformApprovalFlowModule {
 }

@@ -1,7 +1,7 @@
-import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User } from '@fundamental-ngx/platform';
+import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from '@fundamental-ngx/platform';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
-const users: User[] = [
+const users: ApprovalUser[] = [
     {
         id: 'uid38141',
         name: 'Emma Cole',
@@ -312,7 +312,7 @@ const graphs = {
     complex: complexGraph
 };
 
-function getRandomUser(): User {
+function getRandomUser(): ApprovalUser {
     return users[Math.floor(Math.random() * users.length)];
 }
 
@@ -346,13 +346,14 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         });
     }
 
-    updateWatchers(watchers: User[]): void {}
+    updateWatchers(watchers: ApprovalUser[]): void {}
 
     updateApproval(approval: ApprovalNode): void {}
 
     updateApprovals(approvals: ApprovalNode[]): void {}
 
-    sendReminders(members: User[], approval: ApprovalNode): void {
+    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<boolean> {
         console.log('call "sendReminders" method from ApprovalDataSource implementation class');
+        return of(true);
     }
 }

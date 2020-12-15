@@ -10,11 +10,11 @@ import {
     ApprovalProcess,
     PlatformApprovalFlowModule,
     ApprovalFlowComponent,
-    User
+    ApprovalUser
 } from '@fundamental-ngx/platform';
 import { createKeyboardEvent } from '../../testing/event-objects';
 
-const users: User[] = [
+const users: ApprovalUser[] = [
     {
         id: 'uid38141',
         name: 'Emma Cole',
@@ -177,7 +177,7 @@ const simpleGraph: ApprovalProcess = {
     ]
 };
 
-function getRandomUser(): User {
+function getRandomUser(): ApprovalUser {
     return users[Math.floor(Math.random() * users.length)];
 }
 
@@ -193,10 +193,10 @@ export class TestApprovalFlowDataSource implements ApprovalDataSource {
             email: `${user.name.toLowerCase().split(' ').join('.')}@company.com`
         });
     }
-    updateWatchers(watchers: User[]): void {}
+    updateWatchers(watchers: ApprovalUser[]): void {}
     updateApproval(approval: ApprovalNode): void {}
     updateApprovals(approvals: ApprovalNode[]): void {}
-    sendReminders(members: User[], approval: ApprovalNode): void {}
+    sendReminders(members: ApprovalUser[], approval: ApprovalNode): void {}
 }
 
 const TEST_APPROVAL_FLOW_TITLE = 'Test title';

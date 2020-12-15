@@ -13,14 +13,15 @@ import {
     EventEmitter,
     OnDestroy
 } from '@angular/core';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { DialogService, KeyUtil, MessageToastService } from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
 
-import { ApprovalDataSource, ApprovalNode, ApprovalProcess, User } from './interfaces';
+import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
+import { take } from 'rxjs/operators';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: true };
 
@@ -91,6 +92,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
+        if (!this.dataSource) {
+            return;
+        }
+
         this.dataSourceSub = this.dataSource.fetch().subscribe(approvalProcess => {
             this._approvalProcess = approvalProcess;
             this._graph = this.buildNodeTree(approvalProcess.nodes);
@@ -108,8 +113,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 userDetailsTemplate: this.userDetailsTemplate
             }
         });
-        const sub = dialogRef.afterClosed.subscribe((reminderTargets) => {
-            sub.unsubscribe();
+        dialogRef.afterClosed.subscribe((reminderTargets) => {
             if (Array.isArray(reminderTargets)) {
                 this.sendReminders(reminderTargets, node);
             }
@@ -117,7 +121,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this.nodeClick.emit(node);
     }
 
-    onWatcherClick(watcher: User): void {
+    onWatcherClick(watcher: ApprovalUser): void {
         this._dialogService.open(ApprovalFlowUserDetailsComponent, {
             data: {
                 watcher: watcher,
@@ -129,11 +133,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     }
 
-    sendReminders(targets: User[], node: ApprovalNode): void {
-        this.dataSource.sendReminders(targets, node);
-        const reminderMessage = `Reminder has been sent to ${targets.length === 1 ? targets[0].name : (targets.length + ' members of ' + node.description)}`;
-        this._messageToastService.open(reminderMessage, {
-            duration: 5000
+    sendReminders(targets: ApprovalUser[], node: ApprovalNode): void {
+        this.dataSource.sendReminders(targets, node).pipe(take(1)).subscribe(() => {
+            const reminderMessage = `Reminder has been sent to ${targets.length === 1 ? targets[0].name : (targets.length + ' members of ' + node.description)}`;
+            this._messageToastService.open(reminderMessage, {
+                duration: 5000
+            });
         });
     }
 
@@ -169,12 +174,46 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     onNodeKeyDown(
         event: KeyboardEvent,
         node: ApprovalGraphNode,
-        column: ApprovalGraphColumn,
         nodeIndex: number,
-        columnIndex: number
+        columnIndex: number,
+        firstColumn: boolean,
+        firstNode: boolean,
+        lastColumn: boolean,
+        lastNode: boolean
     ): void {
-        if (!KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW])) {
+        if (!KeyUtil.isKeyCode(event, [TAB, UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW])) {
             return;
+        }
+
+        const isTab = KeyUtil.isKeyCode(event, TAB);
+        const isShift = event.shiftKey;
+
+        if (
+            isTab &&
+            (isShift && firstNode && firstColumn) ||
+            (!isShift && lastColumn && lastNode)
+        ) {
+            return;
+        }
+
+        if (isTab) {
+            const nodesSequence = this._graph.reduce((result: ApprovalGraphNode[], col: ApprovalGraphColumn) => {
+                return result.concat(col.nodes);
+            }, []).filter(n => !n.blank);
+            const currentNodeIndex = nodesSequence.findIndex(n => n === node);
+            const diff = isShift ? -1 : 1;
+            const nextNode = nodesSequence[currentNodeIndex + diff];
+            if (currentNodeIndex > -1 && nextNode) {
+                event.preventDefault();
+                this.focusNode(
+                    nextNode,
+                    {
+                        skipSlideChange: false,
+                        step: 1
+                    }
+                );
+                return;
+            }
         }
 
         event.preventDefault();
@@ -312,7 +351,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private getNextHorizontalNode = (_ni, _ci, direction: 'left' | 'right', stepSize = 1) => {
+    private getNextHorizontalNode = (_ni: number, _ci: number, direction: 'left' | 'right', stepSize: number = 1) => {
         const indexDiff = (direction === 'right' ? 1 : -1);
         const _column = this._graph[_ci + indexDiff];
         if (!_column) {
@@ -328,7 +367,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     };
 
     /** @hidden */
-    private getNextVerticalNode = (_ni, _ci, direction: 'up' | 'down', stepSize = 1) => {
+    private getNextVerticalNode = (_ni: number, _ci: number, direction: 'up' | 'down', stepSize: number = 1) => {
         const indexDiff = (direction === 'down' ? 1 : -1);
         const _column = this._graph[_ci];
         const _nextColumn = this._graph[_ci + 1];
@@ -356,7 +395,6 @@ function findRootNode(nodes: ApprovalNode[]): ApprovalNode {
 }
 
 function findDependentNodes(rootNodes: ApprovalGraphNode[], nodes: ApprovalNode[]): ApprovalNode[] {
-    const rootNodeTargetIds: string[] = [];
-    rootNodes.forEach(node => rootNodeTargetIds.push(...node.targets));
+    const rootNodeTargetIds = rootNodes.reduce((acc: string[], node: ApprovalGraphNode) => acc.concat(node.targets), []);
     return nodes.filter(node => rootNodeTargetIds.includes(node.id));
 }

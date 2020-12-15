@@ -1,9 +1,24 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    Input,
+    OnInit,
+    TemplateRef
+} from '@angular/core';
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
 
 import { Observable } from 'rxjs';
 
-import { ApprovalDataSource, ApprovalNode, User } from '../public_api';
+import { ApprovalDataSource, ApprovalNode, ApprovalUser } from '../public_api';
+
+interface DialogRefData {
+    node?: ApprovalNode;
+    watcher?: ApprovalUser;
+    approvalFlowDataSource: ApprovalDataSource;
+    userDetailsTemplate: TemplateRef<any>;
+}
 
 @Component({
     selector: 'fdp-approval-flow-user-details',
@@ -20,13 +35,13 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     _isListMode = false;
 
     /** @hidden */
-    _listItems: User[] = [];
+    _listItems: ApprovalUser[] = [];
 
     /** @hidden */
     _selectedItems: any[] = [];
 
     /** @hidden */
-    _userToShowDetails: User;
+    _userToShowDetails: ApprovalUser;
 
     /** @hidden */
     _userToShowDetailsData$: Observable<any>;
@@ -39,22 +54,22 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._isListMode = this.dialogRef.data.node?.approvers.length > 1;
+        this._isListMode = this.data.node?.approvers.length > 1;
         if (this._isListMode) {
-            this.setListItems(this.dialogRef.data.node.approvers);
+            this.setListItems(this.data.node.approvers);
         } else {
-            this.setUserToShowDetails(this.dialogRef.data.watcher || this.dialogRef.data.node?.approvers[0]);
+            this.setUserToShowDetails(this.data.watcher || this.data.node?.approvers[0]);
         }
     }
 
     /** @hidden */
-    setListItems(items: User[]): void {
+    setListItems(items: ApprovalUser[]): void {
         this._listItems = [...items];
         this._cdr.detectChanges();
     }
 
     /** @hidden */
-    onUserClick(user: User): void {
+    onUserClick(user: ApprovalUser): void {
         this.setUserToShowDetails(user);
     }
 
@@ -64,21 +79,21 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     }
 
     /** @hidden */
-    setUserToShowDetails(user: User): void {
+    setUserToShowDetails(user: ApprovalUser): void {
         this._userToShowDetails = user;
-        this._userToShowDetailsData$ = this.dialogRef.data.approvalFlowDataSource.fetchUser(user.id);
+        this._userToShowDetailsData$ = this.data.approvalFlowDataSource.fetchUser(user.id);
     }
 
     /** @hidden */
     sendReminder(): void {
-        const reminderTargets = this._isListMode ? this.getUsersFromSelectedItems() : this.dialogRef.data.node.approvers;
+        const reminderTargets = this._isListMode ? this.getUsersFromSelectedItems() : this.data.node.approvers;
         this.dialogRef.close(reminderTargets);
     }
 
     /** @hidden */
-    getUsersFromSelectedItems(): User[] {
+    getUsersFromSelectedItems(): ApprovalUser[] {
         return this._selectedItems.map(item => {
-            return this.dialogRef.data.node.approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id);
+            return this.data.node.approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id);
         });
     }
 
@@ -86,12 +101,17 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     onSearchStringChange(searchString: string): void {
         this._selectedItems = [];
         if (!searchString) {
-            this.setListItems(this.dialogRef.data.node.approvers);
+            this.setListItems(this.data.node.approvers);
             return;
         }
 
-        this.setListItems(this.dialogRef.data.node.approvers.filter(
+        this.setListItems(this.data.node.approvers.filter(
             user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1
         ));
+    }
+
+    /** @hidden */
+    get data(): DialogRefData {
+        return this.dialogRef.data;
     }
 }

@@ -52,7 +52,7 @@
                         [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
                         (onNodeClick)="onNodeClick(node)"
                         (keyup.enter)="onNodeClick(node)"
-                        (keydown)="onNodeKeyDown($event, node, column, nodeIndex, columnIndex)"
+                        (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
                     ></fdp-approval-flow-node>
                 </ng-container>
             </div>

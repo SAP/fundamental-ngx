@@ -1,7 +1,7 @@
-import { User } from './user';
+import { ApprovalUser } from './approval-user';
 import { ApprovalNode } from './approval-node';
 
 export interface ApprovalProcess {
-    watchers: User[];
+    watchers: ApprovalUser[];
     nodes: ApprovalNode[];
 }

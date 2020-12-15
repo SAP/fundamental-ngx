@@ -17,7 +17,8 @@ $block: approval-flow;
 
 .#{$block}__watchers-title {
     font-size: .875em;
-    color: var(--sapContent_LabelColor);
+    color: #6A6D70;
+    color: var(--sapContent_LabelColor, #6A6D70);
     margin: 1rem 0 .5rem 0;
 }
 
@@ -46,7 +47,8 @@ $block: approval-flow;
     button {
         border: none;
         background: transparent;
-        color: var(--sapContent_LabelColor);
+        color: #6A6D70;
+        color: var(--sapContent_LabelColor, #6A6D70);
         display: flex;
         justify-content: space-between;
         width: 20px;
@@ -59,7 +61,8 @@ $block: approval-flow;
 
         fd-icon {
             font-size: 14px;
-            color: var(--sapButton_IconColor);
+            color: #0854A0;
+            color: var(--sapButton_IconColor, #0854A0);
             position: relative;
             top: 1px;
         }
@@ -97,19 +100,22 @@ $block: approval-flow;
 
         &.#{$block}__column--vertical-line-before {
             &:before {
-                border-right: 1px solid var(--sapField_BorderColor);
+                border-right: 1px solid #89919A;
+                border-right: 1px solid var(--sapField_BorderColor, #89919A);
                 left: -2.2rem;
             }
         }
 
         &.#{$block}__column--vertical-line-after {
             &:after {
-                border-right: 2px dashed var(--sapField_BorderColor);
+                border-right: 2px dashed #89919A;
+                border-right: 2px dashed var(--sapField_BorderColor, #89919A);
                 right: -2rem;
             }
 
             &-solid:after {
-                border-right: 1px solid var(--sapField_BorderColor);
+                border-right: 1px solid #89919A;
+                border-right: 1px solid var(--sapField_BorderColor, #89919A);
             }
         }
     }
