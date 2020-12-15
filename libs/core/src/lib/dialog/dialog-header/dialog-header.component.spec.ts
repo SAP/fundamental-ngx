@@ -47,7 +47,7 @@ describe('DialogHeaderComponent', () => {
         TestBed.configureTestingModule({
             declarations: [DialogHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
             imports: [BarModule, TemplateModule],
-            providers: [{ provide: DialogConfig, useClass: DialogConfig }]
+            providers: [DialogConfig]
         });
     }));
 

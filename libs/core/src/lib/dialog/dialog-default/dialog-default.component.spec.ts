@@ -21,7 +21,7 @@ describe('DefaultDialogComponent', () => {
                 DialogDecisiveButtonDirective,
                 DialogHeaderComponent
             ],
-            providers: [{ provide: DialogConfig, useClass: DialogConfig }]
+            providers: [DialogConfig]
         }).compileComponents();
     });
 

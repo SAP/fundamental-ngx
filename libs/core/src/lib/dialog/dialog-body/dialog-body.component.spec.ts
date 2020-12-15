@@ -13,10 +13,7 @@ describe('DialogBodyComponent', () => {
         TestBed.configureTestingModule({
             imports: [BusyIndicatorModule],
             declarations: [DialogBodyComponent],
-            providers: [
-                { provide: DialogConfig, useClass: DialogConfig },
-                { provide: DialogRef, useClass: DialogRef }
-            ]
+            providers: [DialogConfig, DialogRef]
         }).compileComponents();
     }));
 

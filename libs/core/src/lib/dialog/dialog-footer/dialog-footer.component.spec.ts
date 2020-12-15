@@ -37,7 +37,7 @@ describe('DialogFooterComponent', () => {
         TestBed.configureTestingModule({
             declarations: [DialogFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
             imports: [BarModule, TemplateModule],
-            providers: [{ provide: DialogConfig, useClass: DialogConfig }]
+            providers: [DialogConfig]
         });
     }));
 
