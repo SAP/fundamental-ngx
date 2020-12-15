@@ -7,7 +7,6 @@ import {
     Optional
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppShellPageModule } from './components/app-shell-page/app-shell-page.module';
 import { MessagingModule } from './api/events/messaging.module';
 import { PluginLauncherModule } from './components/plugin-launcher/plugin-launcher.module';
 import {
@@ -16,7 +15,6 @@ import {
 } from '@angular/common/http';
 import { PluginManagerService } from './api/plugins/plugin-manager.service';
 import { PluginDescriptor } from './api/plugins/lookup/plugin-descriptor.model';
-import { ShellBarService } from './api/plugins/shell-bar.service';
 import { MessagingService } from './api/events/messaging.service';
 
 import {
@@ -41,31 +39,24 @@ export type Constructor<T> = new (...args: any[]) => T
     imports: [
         CommonModule,
         HttpClientModule,
-        AppShellPageModule,
         MessagingModule,
         PluginLauncherModule
     ],
     exports: [
-        AppShellPageModule,
         PluginLauncherModule
     ]
 })
 export class AppShellModule {
 
     static forRoot(configUrl: string,
-                   isStandalone: boolean = false,
-                   notifiers: Constructor<ErrorFormatter>[] = []): ModuleWithProviders<AppShellModule> {
+        isStandalone: boolean = false,
+        notifiers: Constructor<ErrorFormatter>[] = []): ModuleWithProviders<AppShellModule> {
 
         return {
             ngModule: AppShellModule,
             providers: [
                 { provide: CONFIG_URL, useValue: configUrl },
                 { provide: IS_APPSHELL_STANDALONE, useValue: isStandalone },
-                {
-                    provide: ShellBarService,
-                    useFactory: shellBarSrv,
-                    deps: [IS_APPSHELL_STANDALONE]
-                },
                 {
                     provide: ERROR_NOTIFIERS,
                     useFactory: createNotifiers,
@@ -88,11 +79,7 @@ export class AppShellModule {
     }
 }
 
-export function shellBarSrv(isStandalone: boolean): ShellBarService | null {
-    return isStandalone ? new ShellBarService() : null;
-}
-
-export function loadConfiguration(http: HttpClient, plugins: PluginManagerService, url: string): () => Promise<boolean|void> {
+export function loadConfiguration(http: HttpClient, plugins: PluginManagerService, url: string): () => Promise<boolean | void> {
     if (!url) {
         // todo_valorkin throw new Error('Plugins configuration error, `url` is a mandatory parameter')
         return () => Promise.resolve(true);
