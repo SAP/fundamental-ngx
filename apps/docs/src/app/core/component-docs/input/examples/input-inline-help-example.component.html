@@ -1,7 +1,45 @@
 <div fd-form-item>
-    <label fd-form-label for="input-41" [inlineHelp]="true">
+    <label fd-form-label for="input-41" inlineHelpTitle="Inline Help" inlineHelpPlacement="before">
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
         Input with inline help
     </label>
-    <fd-icon glyph="question-mark" fd-form-help fd-inline-help="Inline Help Tooltip" placement="left"></fd-icon>
     <input fd-form-control placeholder="Field placeholder text" type="text" id="input-41" />
+</div>
+<div fd-form-item>
+    <label fd-form-label for="input-45" inlineHelpTitle="Inline Help" inlineHelpPlacement="after">
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+    </label>
+    <input fd-form-control placeholder="Field placeholder text" type="text" id="input-45" />
+</div>
+<div fd-form-item [horizontal]="true">
+    <label fd-form-label for="input-41" inlineHelpTitle="Inline Help" inlineHelpPlacement="before">
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+    </label>
+    <input fd-form-control placeholder="Field placeholder text" type="text" id="input-41" />
+</div>
+<div fd-form-item [horizontal]="true">
+    <label fd-form-label for="input-45" inlineHelpTitle="Inline Help" inlineHelpPlacement="after">
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+        Input with inline help
+    </label>
+    <input fd-form-control placeholder="Field placeholder text" type="text" id="input-45" />
 </div>

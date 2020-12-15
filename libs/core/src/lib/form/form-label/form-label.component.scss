@@ -1,20 +1,80 @@
 @import '~fundamental-styles/dist/form-label';
 
-.fd-form-label--custom-inline-help {
-	max-width: calc(100% - 1.5rem);
-}
+$form-label-inline-help-placement-space: 1rem;
+$form-label-margin: 0.5rem;
 
-.fd-form__inline-help {
-	position: absolute;
-	top: 0;
-	left: 0;
-
-
+@mixin rtl() {
 	@at-root {
 		[dir="rtl"] &,
 		&[dir="rtl"] {
-			left: auto;
-			right: 0;
+			@content;
+		}
+	}
+}
+
+@mixin left-placed() {
+	left: 0;
+	right: auto;
+}
+
+@mixin right-placed() {
+	right: 0;
+	left: auto;
+}
+
+.fd-form-label {
+	display: block;
+}
+
+.fd-form-label__wrapper {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	margin-right: $form-label-margin;
+
+	@include rtl() {
+		margin-left: $form-label-margin;
+		margin-right: 0;
+	}
+
+	&--inline-help {
+		padding-left: $form-label-inline-help-placement-space;
+
+		@include rtl() {
+			padding-left: 0;
+			padding-right: $form-label-inline-help-placement-space;
+		}
+
+		&--after {
+			padding-left: 0;
+			padding-right: $form-label-inline-help-placement-space;
+
+			@include rtl() {
+				padding-right: 0;
+				padding-left: $form-label-inline-help-placement-space;
+			}
+		}
+	}
+}
+
+.fd-form-label__help {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	align-items: center;
+	display: flex;
+
+	@include left-placed();
+
+	@include rtl() {
+		@include right-placed();
+	}
+
+	&--after {
+		@include right-placed();
+
+		@include rtl() {
+			@include left-placed();
 		}
 	}
 }

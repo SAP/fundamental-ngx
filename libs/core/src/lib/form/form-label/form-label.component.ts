@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { Placement } from '../../popover/popover-position/popover-position';
 
 /**
  * Label to be linked to a form control.
@@ -12,33 +13,60 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     // TODO to be discussed
     // tslint:disable-next-line:component-selector
     selector: '[fd-form-label]',
-    template: `<ng-content></ng-content>`,
+    templateUrl: './form-label.component.html',
     styleUrls: ['./form-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormLabelComponent {
-    /** @hidden */
-    @HostBinding('class.fd-form-label')
-    fdFormLabelClass = true;
+export class FormLabelComponent implements OnChanges {
+    /** Whether form is required */
+    @Input()
+    required = true;
 
     /** Whether form is required */
     @Input()
-    @HostBinding('class.fd-form-label--required')
-    required = false;
+    colon = false;
 
-    /** Whether label is for checkbox */
+    /** @deprecated */
     @Input()
-    @HostBinding('class.fd-form-label--checkbox')
     checkbox = false;
 
-    /** Whether label is for radio */
+    /** @deprecated */
     @Input()
-    @HostBinding('class.fd-form-label--radio')
     radio = false;
 
     /** Whether label is for inline-help */
     @Input()
-    @HostBinding('class.fd-form-label--custom-inline-help')
-    inlineHelp = false;
+    inlineHelpTitle: string = null;
+
+    /** Whether label is for inline-help */
+    @Input()
+    inlineHelpGlyph = 'question-mark';
+
+    /** Whether label is for inline-help */
+    @Input()
+    inlineHelpBodyPlacement: Placement;
+
+    /** Whether label is for inline-help */
+    @Input()
+    inlineHelpPlacement: 'before' | 'after' = 'after';
+
+    /** @hidden */
+    @HostBinding('class.fd-form-label__wrapper')
+    defaultClass = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-form-label__wrapper--inline-help')
+    inlineHelpClass = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-form-label__wrapper--inline-help--after')
+    inlineHelpAfter = true;
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.inlineHelpClass = !!this.inlineHelpTitle;
+        this.inlineHelpAfter = this.inlineHelpTitle && this.inlineHelpPlacement === 'after';
+    }
+
 }
