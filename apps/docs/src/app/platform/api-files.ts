@@ -9,6 +9,7 @@ export const API_FILES = {
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     checkboxGroup: ['CheckboxGroupComponent'],
+    datePicker: ['PlatformDatetimePickerComponent'],
     datetimePicker: ['PlatformDatetimePickerComponent'],
     dynamicPage: [
         'DynamicPageComponent',
@@ -19,7 +20,6 @@ export const API_FILES = {
     ],
     infoLabel: ['InfoLabelComponent'],
     input: ['InputComponent'],
-    datePicker: ['DatePickerComponent'],
     link: ['LinkComponent'],
     menu: ['MenuComponent', 'MenuItemComponent', 'MenuTriggerDirective'],
     menuButton: ['MenuButtonComponent'],
