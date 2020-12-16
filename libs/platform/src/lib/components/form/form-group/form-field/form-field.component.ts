@@ -142,8 +142,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @ViewChild('renderer', { static: true })
     renderer: TemplateRef<any>;
 
-    _hintChild;
-
     /**
      * Child FormFieldControl
      */

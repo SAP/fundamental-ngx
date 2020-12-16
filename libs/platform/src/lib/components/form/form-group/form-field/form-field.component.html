@@ -4,12 +4,12 @@
 
 <ng-template #renderer>
     <div [horizontal]="labelLayout === 'horizontal'" fd-form-item>
-        <label [attr.for]="id" [inlineHelp]="!!hint" [required]="editable && required" fd-form-label>
+        <label [attr.for]="id"
+               [required]="editable && required"
+               fd-form-label
+               [inlineHelpTitle]="hint"
+               [inlineHelpBodyPlacement]="hintPlacement">
             <span *ngIf="!noLabelLayout">{{ label }}</span>
-
-            <!-- We can support placement on FormGroup Level to be applied to all the form fields     -->
-<!--            TODO: To be decided-->
-<!--            <fd-icon *ngIf="hint" glyph="question-mark" [placement]="hintPlacement" [fd-inline-help]="hint"></fd-icon>-->
         </label>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
     </div>
