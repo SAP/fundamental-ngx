@@ -1,10 +1,6 @@
 import { VhdDefineStrategy } from './vhd-strategy.enum';
 import { VhdDefineType } from './vhd-type-condition.enum';
 
-class BetweenRule {
-    from: string;
-    to: string;
-}
 export interface VhdDefineEntityRule {
     type: VhdDefineType;
     key: string;

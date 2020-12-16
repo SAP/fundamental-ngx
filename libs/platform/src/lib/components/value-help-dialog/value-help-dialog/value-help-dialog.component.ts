@@ -24,6 +24,7 @@ import { isDataSource } from '../../../domain/data-source';
 import { ContentDensity } from '../../table/enums';
 import {
   VhdTab,
+  VhdValue,
   VhdValueChangeEvent,
   VhdFilter,
   VhdIncludedEntity,
@@ -36,6 +37,7 @@ import {
 } from '../models';
 
 import { VhdFilterComponent, VhdSearchComponent } from '../components';
+import { defaultConditionDisplayFn } from '../utils';
 
 export type FdpValueHelpDialogDataSource<T> = ValueHelpDialogDataSource<T>
   | ArrayValueHelpDialogDataSource<T>
@@ -56,7 +58,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** Initial state of Value help dialog */
   @Input()
-  value: VhdValueChangeEvent<T[]> = {
+  value: VhdValue<T[]> = {
     selected: [],
     included: [],
     excluded: []
@@ -93,15 +95,17 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   @Input()
   dialogConfig: DialogConfig = {};
 
-  /** Unique key from the source field names */
+  /** Unique key from the source field names. Required field. */
   @Input()
-  uniqueKey = 'id';
+  uniqueKey: string;
 
-  /** Field name for default render from data */
+  /** Field name for default render from data.
+   * Required field if tokenizerFn is not exist. */
   @Input()
-  tokenViewField = 'name';
+  tokenViewField: string;
 
-  /** Tokenizer function for custom token render, it has higher prio that `tokenViewField` */
+  /** Tokenizer function for custom token render, it has higher prio that `tokenViewField`.
+   * Required field if tokenViewField is not exist. */
   @Input()
   tokenizerFn: Function;
 
@@ -115,7 +119,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** Tokenizer function for include/exclude token render */
   @Input()
-  conditionDisplayFn: Function;
+  conditionDisplayFn: Function = defaultConditionDisplayFn;
 
   /**
    * Select from list tab's and Search table settings
@@ -207,41 +211,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   ) {
     /** Default display function for define conditions */
     if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
-      this.conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity, filters?: VhdFilter[]) => {
-        const filter = (filters || []).find(f => f.key === item.key);
-        let value = (() => {
-          switch (item.strategy) {
-            case VhdDefineStrategy.empty:
-              return null;
-            case VhdDefineStrategy.between:
-              return `${item.value}...${item.valueTo}`;
-            case VhdDefineStrategy.contains:
-              return `*${item.value}*`;
-            case VhdDefineStrategy.equalTo:
-              return `=${item.value}`;
-            case VhdDefineStrategy.startsWith:
-              return `${item.value}*`;
-            case VhdDefineStrategy.endsWith:
-              return `*${item.value}`;
-            case VhdDefineStrategy.greaterThan:
-              return `>${item.value}`;
-            case VhdDefineStrategy.greaterThanEqual:
-              return `>=${item.value}`;
-            case VhdDefineStrategy.lessThan:
-              return `<${item.value}`;
-            case VhdDefineStrategy.lessThanEqual:
-              return `<=${item.value}`;
-          }
-        })();
-        if (value && item.type === 'exclude') {
-          value = `!(${value})`;
-        }
-        if (filter) {
-          return `${filter.label}: ${value}`;
-        }
-
-        return value;
-      }
+      this.conditionDisplayFn = defaultConditionDisplayFn;
     }
   }
 
@@ -334,6 +304,9 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** Open dialog */
   open(): void {
+    if (!this.isValidOptions()) {
+      throw new Error('Please check required fields');
+    }
     if (this.isOpen) {
       return;
     }
@@ -451,7 +424,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /**
    * Switch tab by type
    */
-  switchTab(type?: VhdTab): void {
+  switchTab(type: VhdTab = null): void {
     this.selectedTab = type;
   }
 
@@ -460,16 +433,11 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
    */
   success(): void {
     if (this.activeDialog) {
-      const value: VhdValueChangeEvent = {};
-      if (this.selectedItems.length) {
-        value.selected = this.selectedItems;
-      }
-      if (this.validIncludedItems.length) {
-        value.included = this.validIncludedItems;
-      }
-      if (this.validExcludedItems.length) {
-        value.excluded = this.validExcludedItems;
-      }
+      const value: VhdValueChangeEvent = {
+        selected: this.selectedItems,
+        included: this.validIncludedItems,
+        excluded: this.validExcludedItems
+      };
       if (this.formatToken && typeof this.formatToken === 'function') {
         return this.activeDialog.close(this.formatToken(value));
       }
@@ -493,8 +461,8 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /** @hidden */
-  _trackByFilterFn(_index: number, item: VhdFilter): number | string | undefined {
-    return item && item.key ? item.key : undefined;
+  _trackByFilterFn(_index: number, item: VhdFilter): number | string {
+    return item && item.key;
   }
   /** @hidden */
   _trackByConditionFn(_index: number, item: VhdIncludedEntity | VhdExcludedEntity): number | string | undefined {
@@ -536,13 +504,16 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden */
   private _getValidCondition(items: VhdIncludedEntity[] | VhdExcludedEntity[] = []): VhdIncludedEntity[] {
     return items.filter(item => {
-      if (!item.valid) {
-        return false;
-      }
       if (item.strategy === VhdDefineStrategy.empty) {
         return true;
       }
-      return Boolean(item.value && item.value.length);
+      if (!item.valid) {
+        return false;
+      }
+      if (item.strategy === VhdDefineStrategy.between) {
+        return Boolean(item.value.length && item.valueTo.length);
+      }
+      return Boolean(item.value.length);
     });
   }
 
@@ -572,8 +543,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       .pipe(takeUntil(this._destroyed))
       .subscribe(value => {
         if (value) {
-          this.value = value;
-          this.valueChange.emit(this.value);
+          this.valueChange.emit(value);
         }
 
         this._resetState();
@@ -595,8 +565,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   private _updateFilters(): void {
-    const _filters = this.filters.toArray() || [];
-    this._displayedFilters = _filters.map(filter => ({
+    this._displayedFilters = this.filters.map(filter => ({
       ...filter,
       label: filter.label || filter.key
     }));
@@ -609,7 +578,8 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     });
   }
 
-  private openDataStream(ds: FdpValueHelpDialogDataSource<any>): Observable<any> {
+  /** @hidden */
+  private openDataStream(ds: FdpValueHelpDialogDataSource<T>): Observable<T[]> {
     const initDataSource = this.toDataStream(ds);
     if (initDataSource) {
       this._dataSource = initDataSource;
@@ -620,18 +590,20 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
   }
 
-  private toDataStream(ds: FdpValueHelpDialogDataSource<any>): ValueHelpDialogDataSource<any> {
+  /** @hidden */
+  private toDataStream(ds: FdpValueHelpDialogDataSource<T>): FdpValueHelpDialogDataSource<T> {
     if (isDataSource(ds)) {
-      return ds as ValueHelpDialogDataSource<any>;
+      return ds as ValueHelpDialogDataSource<T>;
     } else if (Array.isArray(ds)) {
-      return new ArrayValueHelpDialogDataSource<any>(ds);
+      return new ArrayValueHelpDialogDataSource<T>(ds);
     } else if (isObservable(ds)) {
-      return new ObservableValueHelpDialogDataSource<any>(ds);
+      return new ObservableValueHelpDialogDataSource<T>(ds);
     }
 
     return undefined;
   }
 
+  /** @hidden */
   private _resetSourceStream(): void {
     if (isDataSource(this.dataSource)) {
       this.dataSource.close();
@@ -640,5 +612,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       this._dsSubscription.unsubscribe();
       this._dsSubscription = null;
     }
+  }
+
+  private isValidOptions(): boolean {
+    return typeof this.uniqueKey === 'string' &&
+      (typeof this.tokenViewField === 'string' || typeof this.tokenizerFn === 'function');
   }
 }

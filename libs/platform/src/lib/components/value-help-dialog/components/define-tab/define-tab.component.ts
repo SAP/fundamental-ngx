@@ -6,10 +6,9 @@ import {
   SimpleChanges,
   OnChanges,
   Output,
-  EventEmitter
+  EventEmitter,
+  OnInit
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import {
   VhdIncludedEntity,
@@ -34,7 +33,7 @@ class ExtendedExcludedEntity extends VhdExcludedEntity {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
+export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChanges {
   @Input()
   fullBodyLabel = 'Product';
 
@@ -74,6 +73,13 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
     });
 
   /** @hidden */
+  ngOnInit(): void {
+    this._included = this.included as ExtendedIncludedEntity[] || [];
+    this._excluded = this.excluded as ExtendedExcludedEntity[] || [];
+    this._initializeFilters();
+  }
+
+  /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
     if ('filters' in changes) {
       this._initializeFilters();
@@ -99,7 +105,6 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
   _filterChanged(): void {
     this.includeChange.emit(this._included);
     this.excludeChange.emit(this._excluded);
-
     this._changeDetectorRef.markForCheck();
   }
 
@@ -111,6 +116,7 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
     if (type === VhdDefineType.exclude) {
       this._addEmptyExcluded();
     }
+    this._filterChanged();
   }
 
   /** @hidden */
@@ -144,7 +150,7 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
   private _addEmptyExcluded(): void {
     if (this._excludeFilters.length) {
       const key = this._excluded.length ? this._excluded[this._excluded.length - 1].key : this._excludeFilters[0].key;
-      const strategy = this._included.length ? this._included[this._included.length - 1].strategy : null;
+      const strategy = this._excluded.length ? this._excluded[this._excluded.length - 1].strategy : null;
       const item = new ExtendedExcludedEntity(strategy, key);
       item.id = Date.now() + this._excluded.length;
       this._excluded.push(item);
@@ -162,7 +168,6 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
         this._excludeFilters.push(filter);
       }
     }
-
     this._definePanelState.included = !!this._included.length;
     this._definePanelState.excluded = !!this._excluded.length;
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VhdDataProvider, VhdValueChangeEvent, ValueHelpDialogDataSource, VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineStrategy } from '@fundamental-ngx/platform';
+import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource, VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineStrategy } from '@fundamental-ngx/platform';
 
 interface ExampleTestModel {
   id: number;
@@ -47,10 +47,10 @@ export class PlatformVhdBasicExampleComponent implements OnInit {
   filters: any;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
 
-  actualValue: VhdValueChangeEvent<ExampleTestModel[]> = {};
+  actualValue: VhdValue<ExampleTestModel[]> = {};
 
   actualItems = [];
-  formatTokenFn = ((value: VhdValueChangeEvent<ExampleTestModel[]>) => {
+  formatTokenFn = ((value: VhdValue<ExampleTestModel[]>) => {
     this.actualItems = [
       ...(value.selected || []).map(item => item.name),
       ...(value.included || []).map(item => this.conditionDisplayFn(item)),

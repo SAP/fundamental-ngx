@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VhdDataProvider, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
+import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
 
 interface ExampleTestModel {
   id: number;
   name: string;
-  code: string;
+  code: number;
   city: string;
 }
 
@@ -50,7 +50,7 @@ export class PlatformVhdFiltersExampleComponent implements OnInit {
   hasAdvanced = false;
 
   selectedValue = [];
-  currentValue: VhdValueChangeEvent = {};
+  currentValue: VhdValue = {};
   hasIncluded = true;
   hasExcluded = true;
 

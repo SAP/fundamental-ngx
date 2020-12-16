@@ -6,9 +6,9 @@ import { BaseDataProvider } from '../../../domain/base-data-provider';
 
 export class ValueHelpDialogDataSource<T> implements DataSource<T> {
     dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-    constructor(public dataProvider: DataProvider<any>) { }
+    constructor(public dataProvider: DataProvider<T>) { }
     match(predicate?: string | Map<string, string>): void {
-        let searchParam = new Map();
+        let searchParam = new Map<string, any>();
         if (typeof predicate === 'string') {
             searchParam.set('query', predicate);
         } else if (predicate instanceof Map) {
@@ -41,14 +41,14 @@ export class ObservableValueHelpDialogDataSource<T> extends ValueHelpDialogDataS
     }
 }
 
-export class VhdDataProvider extends DataProvider<any> {
-    constructor(public values: any) {
+export class VhdDataProvider<R> extends DataProvider<R> {
+    constructor(public values: R[]) {
         super()
     }
-    fetch(params: Map<string, string>): Observable<any> {
+    fetch(params: Map<string, string>): Observable<R[]> {
         let data = this.values;
         const arrayParams = Array.from(params);
-        const filterFn = (row: any) => {
+        const filterFn = (row: R) => {
             const rowEntries = Object.entries(row) as string[][];
 
             return arrayParams.some(([key, value]) => {

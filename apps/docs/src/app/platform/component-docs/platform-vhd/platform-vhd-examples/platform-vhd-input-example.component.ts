@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VhdDataProvider, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
+import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
 
 interface ExampleTestModel {
   id: number;
@@ -53,7 +53,7 @@ export class PlatformVhdInputExampleComponent implements OnInit {
     once: null
   };
   selectedValue: ExampleTestModel;
-  currentValue: VhdValueChangeEvent = {};
+  currentValue: VhdValue = {};
 
   ngOnInit(): void {
     const data = exampleDataSource();
