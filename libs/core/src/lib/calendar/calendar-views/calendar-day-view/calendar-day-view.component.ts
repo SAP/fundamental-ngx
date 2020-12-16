@@ -297,6 +297,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         } else {
             this._isOnRangePick = false;
         }
+        this.changeDetRef.markForCheck();
     }
 
     /** @hidden */

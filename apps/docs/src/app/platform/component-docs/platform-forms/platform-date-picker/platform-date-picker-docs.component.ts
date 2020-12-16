@@ -65,6 +65,4 @@ export class PlatformDatePickerDocsComponent {
             component: 'PlatformDatePickerFormatExampleComponent'
         },
     ];
-
-    constructor() {}
 }

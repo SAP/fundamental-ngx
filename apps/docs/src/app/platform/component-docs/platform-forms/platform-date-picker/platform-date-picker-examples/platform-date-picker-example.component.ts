@@ -26,8 +26,6 @@ export class PlatformDatePickerExampleComponent {
     dateOutsideForm = '';
     rangeDateOutsideForm = '';
 
-    constructor() {}
-
     public onSubmit(value: any): void {
         alert('Form Value: ' + value);
     }

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
-import { PlatformDatePickerModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
+import { PlatformDatePickerModule, FdpFormGroupModule, PlatformLinkModule } from '@fundamental-ngx/platform';
 import { FdDatetimeModule, SegmentedButtonModule } from '@fundamental-ngx/core';
 
 import { PlatformDatePickerDocsComponent } from './platform-date-picker-docs.component';
@@ -37,6 +37,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         SegmentedButtonModule,
+        PlatformLinkModule,
         FdDatetimeModule,
         PlatformDatePickerModule,
         FdpFormGroupModule

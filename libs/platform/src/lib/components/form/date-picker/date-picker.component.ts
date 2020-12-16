@@ -233,7 +233,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     };
 
     constructor(
-        protected _cd: ChangeDetectorRef,
+        protected _changeDetectorRef: ChangeDetectorRef,
         @Optional() @Self() public ngControl: NgControl,
         @Optional() @Self() public ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
@@ -241,7 +241,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
-        super(_cd, ngControl, ngForm, formField, formControl);
+        super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
 
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -253,7 +253,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     writeValue(value: D | DateRange<D>): void {
         super.writeValue(value);
-        this._cd.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /**
@@ -280,6 +280,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         } else if (this.type === 'range') {
             this.handleSelectedRangeDateChange(this.selectedRangeDate);
         }
+        this._changeDetectorRef.markForCheck();
     }
 
     /**
