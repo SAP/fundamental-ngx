@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.67...v0.25.0-rc.68) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Platform) add tabChange output event to dynamic page ([#4084](https://github.com/SAP/fundamental-ngx/issues/4084)) ([29cd288](https://github.com/SAP/fundamental-ngx/commit/29cd288e15a5345bde34262ff9aa4a7c580bea35))
+
 ## [0.25.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.66...v0.25.0-rc.67) (2020-12-16)
 
 ## [0.25.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.65...v0.25.0-rc.66) (2020-12-16)
