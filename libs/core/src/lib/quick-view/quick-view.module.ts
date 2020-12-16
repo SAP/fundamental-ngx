@@ -12,10 +12,11 @@ import { QuickViewGroupItemComponent } from './quick-view-group-item/quick-view-
 import { QuickViewGroupItemLabelComponent } from './quick-view-group-item-label/quick-view-group-item-label.component';
 import { QuickViewGroupItemContentComponent } from './quick-view-group-item-content/quick-view-group-item-content.component';
 import { TitleModule } from '../title/title.module';
+import { BarModule } from '../bar/bar.module';
 
 
 @NgModule({
-    imports: [CommonModule, TitleModule],
+    imports: [CommonModule, TitleModule, BarModule],
     declarations: [
         QuickViewComponent,
         QuickViewTitleComponent,

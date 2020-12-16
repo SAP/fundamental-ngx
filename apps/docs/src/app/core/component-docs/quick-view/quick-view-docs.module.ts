@@ -21,7 +21,7 @@ import { QuickViewDialogExampleComponent } from './examples/quick-view-dialog-ex
 const routes: Routes = [
     {
         path: '',
-        component: QuickViewDocsComponent,
+        component: QuickViewDocsHeaderComponent,
         children: [
             { path: '', component: QuickViewDocsComponent },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.quickView } }
