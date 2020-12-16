@@ -3,7 +3,6 @@ import {
     ChangeDetectorRef,
     Component,
     Inject,
-    Input,
     OnInit,
     TemplateRef
 } from '@angular/core';
@@ -18,6 +17,7 @@ interface DialogRefData {
     watcher?: ApprovalUser;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
+    rtl: boolean;
 }
 
 @Component({
@@ -27,10 +27,6 @@ interface DialogRefData {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApprovalFlowUserDetailsComponent implements OnInit {
-    @Input() node: ApprovalNode;
-
-    @Input() approvalFlowDataSource: ApprovalDataSource;
-
     /** @hidden */
     _isListMode = false;
 

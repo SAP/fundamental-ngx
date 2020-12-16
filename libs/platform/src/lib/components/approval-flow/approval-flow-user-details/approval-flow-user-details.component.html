@@ -1,10 +1,10 @@
-<fd-dialog>
+<fd-dialog [attr.dir]="data.rtl ? 'rtl' : 'ltr'">
     <fd-dialog-header [class.show-search]="!_userToShowDetails && _isListMode">
         <ng-template fdTemplate="header">
             <p>
                 <fd-icon
                     *ngIf="_userToShowDetails && _isListMode"
-                    glyph="navigation-left-arrow"
+                    [glyph]="'navigation-' + (data.rtl ? 'right' : 'left') + '-arrow'"
                     (click)="backToListFromDetails()"
                 ></fd-icon>
                 <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ data.node.description }} ({{ data.node.approvers.length }})</ng-container>

@@ -129,7 +129,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             data: {
                 node: node,
                 approvalFlowDataSource: this.dataSource,
-                userDetailsTemplate: this.userDetailsTemplate
+                userDetailsTemplate: this.userDetailsTemplate,
+                rtl: this._isRTL
             }
         });
         dialogRef.afterClosed.subscribe((reminderTargets) => {
@@ -145,7 +146,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             data: {
                 watcher: watcher,
                 approvalFlowDataSource: this.dataSource,
-                userDetailsTemplate: this.userDetailsTemplate
+                userDetailsTemplate: this.userDetailsTemplate,
+                rtl: this._isRTL
             }
         });
 

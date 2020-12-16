@@ -96,3 +96,22 @@ $block: approval-flow-user-details;
         }
     }
 }
+
+[dir='rtl'] {
+    fd-avatar {
+        margin-right: 0;
+        margin-left: .652rem;
+    }
+
+    fd-icon {
+        margin-right: 0;
+        margin-left: .75rem;
+    }
+
+    fdp-standard-list-item::ng-deep {
+        .fd-checkbox__label {
+            left: auto;
+            right: .3125rem;
+        }
+    }
+}
