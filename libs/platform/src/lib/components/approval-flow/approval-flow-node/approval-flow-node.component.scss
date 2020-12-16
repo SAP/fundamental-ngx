@@ -28,7 +28,7 @@ $block: approval-flow-node;
             position: absolute;
             left: -4rem;
             border-top: 2px dashed #89919A;
-            border-top: 2px dashed var(--sapField_BorderColor, #89919A);
+            border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
             top: calc(50% - 1px);
         }
     }
@@ -40,7 +40,7 @@ $block: approval-flow-node;
         display: block;
         position: absolute;
         border-top: 2px dashed #89919A;
-        border-top: 2px dashed var(--sapField_BorderColor, #89919A);
+        border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
         top: 0;
         bottom: 0;
         margin: auto;
@@ -68,6 +68,47 @@ $block: approval-flow-node;
             left: -2.2rem;
         }
     }
+
+    &[dir='rtl'] {
+        .#{$block}__avatar {
+            margin-right: 0;
+            margin-left: .5rem;
+        }
+
+        .#{$block}__arrow {
+            left: auto;
+            right: -8px;
+            border-width: 4px 8px 4px 0;
+            border-color: transparent #89919A transparent transparent;
+            border-color: transparent var(--sapField_ReadOnly_BorderColor, #89919A) transparent transparent;
+        }
+
+        .#{$block}__carousel-start-marker {
+            left: auto;
+            right: -2rem;
+        }
+
+        .#{$block}__carousel-end-marker {
+            right: auto;
+            left: -2rem;
+        }
+
+        &.#{$block}--line-before:before {
+            left: auto;
+            right: -2rem;
+        }
+
+        &.#{$block}--line-after:after {
+            right: auto;
+            left: -2rem;
+            width: 2rem;
+        }
+
+        .#{$block}__name.#{$block}__name--members-count {
+            direction: ltr;
+            text-align: right;
+        }
+    }
 }
 
 .#{$block}__inner {
@@ -75,21 +116,23 @@ $block: approval-flow-node;
 }
 
 .#{$block}__avatar {
-    margin-right: 0.5rem;
+    margin-right: .5rem;
 }
 
 .#{$block}__name {
     font-size: 1rem;
     line-height: 1.25rem;
-    margin-bottom: 0.1rem;
+    margin-bottom: .1rem;
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
 }
 
 .#{$block}__description {
-    font-size: 0.875rem;
+    font-size: .875rem;
     line-height: 1rem;
     color: #6A6D70;
     color: var(--sapContent_LabelColor, #6A6D70);
-    margin-bottom: 0.4rem;
+    margin-bottom: .4rem;
 }
 
 .#{$block}__arrow {
@@ -98,7 +141,7 @@ $block: approval-flow-node;
     border-style: solid;
     border-width: 4px 0 4px 8px;
     border-color: transparent transparent transparent #89919A;
-    border-color: transparent transparent transparent var(--sapField_BorderColor, #89919A);
+    border-color: transparent transparent transparent var(--sapField_ReadOnly_BorderColor, #89919A);
     position: absolute;
     left: -8px;
     top: 0;
@@ -109,7 +152,7 @@ $block: approval-flow-node;
 .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
     z-index: 1;
     background: #89919A;
-    background: var(--sapField_BorderColor, #89919A);
+    background: var(--sapField_ReadOnly_BorderColor, #89919A);
     display: block;
     position: absolute;
     width: 4px;
@@ -124,4 +167,3 @@ $block: approval-flow-node;
 .#{$block}__carousel-end-marker {
     right: -2rem;
 }
-

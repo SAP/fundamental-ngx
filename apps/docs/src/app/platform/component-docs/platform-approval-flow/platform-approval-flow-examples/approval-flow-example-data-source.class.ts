@@ -352,8 +352,8 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
 
     updateApprovals(approvals: ApprovalNode[]): void {}
 
-    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<boolean> {
+    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {
         console.log('call "sendReminders" method from ApprovalDataSource implementation class');
-        return of(true);
+        return of(null);
     }
 }

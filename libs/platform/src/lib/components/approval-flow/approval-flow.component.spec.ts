@@ -4,6 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { Observable, of } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/core';
 import {
     ApprovalDataSource,
     ApprovalNode,
@@ -196,7 +197,9 @@ export class TestApprovalFlowDataSource implements ApprovalDataSource {
     updateWatchers(watchers: ApprovalUser[]): void {}
     updateApproval(approval: ApprovalNode): void {}
     updateApprovals(approvals: ApprovalNode[]): void {}
-    sendReminders(members: ApprovalUser[], approval: ApprovalNode): void {}
+    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {
+        return of(null)
+    }
 }
 
 const TEST_APPROVAL_FLOW_TITLE = 'Test title';
@@ -220,7 +223,8 @@ describe('ApprovalFlowComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [PlatformApprovalFlowModule, NoopAnimationsModule],
-            declarations: [ApprovalFlowComponent, TestPlatformApprovalFlowComponent]
+            declarations: [ApprovalFlowComponent, TestPlatformApprovalFlowComponent],
+            providers: [RtlService]
         }).compileComponents();
     });
 
@@ -273,7 +277,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should send reminders', () => {
-        spyOn(component.dataSource, 'sendReminders');
+        spyOn(component.dataSource, 'sendReminders').and.callThrough();
         component.sendReminders(simpleGraph.nodes[0].approvers, simpleGraph.nodes[0]);
         expect(component.dataSource.sendReminders).toHaveBeenCalled();
     });

@@ -1,8 +1,8 @@
 <fd-toolbar [hasTitle]="true">
-    <h3 class="approval-flow__title">{{ title }}</h3>
+    <h3 class="approval-flow__title" [attr.dir]="_dir">{{ title }}</h3>
 </fd-toolbar>
 
-<div class="approval-flow__watchers">
+<div class="approval-flow__watchers" [attr.dir]="_dir">
     <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
     <fd-avatar
         *ngFor="let watcher of _approvalProcess?.watchers"
@@ -16,22 +16,22 @@
 </div>
 
 <div class="approval-flow__container">
-    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel">
+    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel" [attr.dir]="_dir">
         <button class="approval-flow__control--prev-slide"
                 *ngIf="_carouselStep > 0"
                 (click)="previousSlide()">
-            <fd-icon glyph="navigation-left-arrow"></fd-icon>
+            <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
             {{ _carouselStep }}
         </button>
         <button class="approval-flow__control--next-slide"
                 *ngIf="(_maxCarouselStep - _carouselStep) > 0"
                 (click)="nextSlide()">
             {{ _maxCarouselStep - _carouselStep }}
-            <fd-icon glyph="navigation-right-arrow"></fd-icon>
+            <fd-icon [glyph]="'navigation-' + (_isRTL ? 'left' : 'right') + '-arrow'"></fd-icon>
         </button>
     </div>
-    <div class="approval-flow__graph-container">
-        <div class="approval-flow__graph" #graphEl [style.left.px]="_carouselScrollX">
+    <div class="approval-flow__graph-container" #graphContainerEl>
+        <div class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX" [attr.dir]="_dir">
             <div class="approval-flow__column"
                  *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last"
                  [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
@@ -41,9 +41,10 @@
                 <ng-container
                     *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last">
                     <fdp-approval-flow-node
+                        [attr.dir]="_dir"
+                        [attr.tabindex]="node.blank ? -1 : 0"
                         [node]="node"
                         [blank]="node.blank"
-                        [attr.tabindex]="node.blank ? -1 : 0"
                         [parent]="_nodeParentsMap[node.id]"
                         [renderArrow]="columnIndex > 0"
                         [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
@@ -59,3 +60,15 @@
         </div>
     </div>
 </div>
+
+<ng-template let-messageToast #reminderTemplate>
+    <ng-container i18n="@@platformApprovalFlowReminderMessage"> Reminder has been sent to </ng-container>
+    <ng-container *ngIf="messageToast.data.targets.length === 1">
+        {{ messageToast.data.targets[0].name }}
+    </ng-container>
+    <ng-container *ngIf="messageToast.data.targets.length > 1">
+        {{ messageToast.data.targets.length }}
+        <ng-container i18n="@@platformApprovalFlowReminderMessageTeamMembersPrefix">members of</ng-container>
+        {{ messageToast.data.node.description }}
+    </ng-container>
+</ng-template>

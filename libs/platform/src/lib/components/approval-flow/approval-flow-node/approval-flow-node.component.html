@@ -12,7 +12,7 @@
             </ng-container>
         </div>
         <div class="approval-flow-node__info">
-            <div class="approval-flow-node__name">
+            <div class="approval-flow-node__name" [class.approval-flow-node__name--members-count]="node.approvers.length > 1">
                 <ng-container *ngIf="node.approvers.length === 1">{{ node.approvers[0].name }}</ng-container>
                 <ng-container *ngIf="node.approvers.length > 1">
                     {{ node.approvers.length }} <ng-container i18n="@@platformApprovalFlowNodeMembers">members</ng-container>

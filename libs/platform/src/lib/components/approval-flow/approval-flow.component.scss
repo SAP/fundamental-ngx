@@ -3,6 +3,10 @@ $block: approval-flow;
 .#{$block}__title {
     font-size: 1.125rem;
     font-weight: 400;
+
+    &[dir='rtl'] {
+        padding-right: .5rem;
+    }
 }
 
 .#{$block}__watchers {
@@ -12,6 +16,15 @@ $block: approval-flow;
     fd-avatar {
         margin-right: .5rem;
         cursor: pointer;
+    }
+
+    &[dir='rtl'] {
+        padding-right: 1rem;
+
+        fd-avatar {
+            margin-left: .5rem;
+            margin-right: 0;
+        }
     }
 }
 
@@ -45,6 +58,7 @@ $block: approval-flow;
     left: 0;
 
     button {
+        position: absolute;
         border: none;
         background: transparent;
         color: #6A6D70;
@@ -60,23 +74,33 @@ $block: approval-flow;
         }
 
         fd-icon {
-            font-size: 14px;
+            font-size: .875rem;
             color: #0854A0;
             color: var(--sapButton_IconColor, #0854A0);
             position: relative;
             top: 1px;
         }
     }
+
+    &[dir='rtl'] {
+        .#{$block}__control--next-slide {
+            right: auto;
+            left: 0;
+        }
+
+        .#{$block}__control--prev-slide {
+            left: auto;
+            right: 0;
+        }
+    }
 }
 
 .#{$block}__control {
     &--next-slide {
-        position: absolute;
         right: 0;
     }
 
     &--prev-slide {
-        position: absolute;
         left: 0;
     }
 }
@@ -101,7 +125,7 @@ $block: approval-flow;
         &.#{$block}__column--vertical-line-before {
             &:before {
                 border-right: 1px solid #89919A;
-                border-right: 1px solid var(--sapField_BorderColor, #89919A);
+                border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
                 left: -2.2rem;
             }
         }
@@ -109,13 +133,40 @@ $block: approval-flow;
         &.#{$block}__column--vertical-line-after {
             &:after {
                 border-right: 2px dashed #89919A;
-                border-right: 2px dashed var(--sapField_BorderColor, #89919A);
+                border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
                 right: -2rem;
             }
 
             &-solid:after {
                 border-right: 1px solid #89919A;
-                border-right: 1px solid var(--sapField_BorderColor, #89919A);
+                border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
+            }
+        }
+    }
+
+    &[dir='rtl'] {
+        .#{$block}__column {
+            margin-right: 4rem;
+
+            &:first-child {
+                margin-right: 2rem;
+            }
+
+            &:not(:first-child) {
+            }
+
+            &.#{$block}__column--vertical-line-before {
+                &:before {
+                    left: auto;
+                    right: -2rem;
+                }
+            }
+
+            &.#{$block}__column--vertical-line-after {
+                &:after {
+                    right: auto;
+                    left: -2.2rem;
+                }
             }
         }
     }

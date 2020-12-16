@@ -11,17 +11,17 @@ import {
     ViewChild,
     ViewChildren,
     EventEmitter,
-    OnDestroy
+    OnDestroy, Optional
 } from '@angular/core';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
-import { DialogService, KeyUtil, MessageToastService } from '@fundamental-ngx/core';
+import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
-import { take } from 'rxjs/operators';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: true };
 
@@ -54,7 +54,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
 
     /** @hidden */
+    @ViewChild('graphContainerEl') graphContainerEl: ElementRef;
+
+    /** @hidden */
     @ViewChild('graphEl') graphEl: ElementRef;
+
+    /** @hidden */
+    @ViewChild('reminderTemplate') reminderTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChildren(ApprovalFlowNodeComponent) nodeComponents: QueryList<ApprovalFlowNodeComponent>;
@@ -80,14 +86,23 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     _nodeParentsMap: { [key: string]: ApprovalGraphNode } = {};
 
-    private dataSourceSub: Subscription;
+    /**  @hidden */
+    _dir: string;
+
+    private subscriptions = new Subscription();
 
     /** @hidden */
     constructor(
         private _dialogService: DialogService,
         private _messageToastService: MessageToastService,
-        private _cdr: ChangeDetectorRef
+        private _cdr: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService
     ) {
+    }
+
+    /** @hidden */
+    get _isRTL(): boolean {
+        return this._dir === 'rtl';
     }
 
     /** @hidden */
@@ -96,13 +111,17 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return;
         }
 
-        this.dataSourceSub = this.dataSource.fetch().subscribe(approvalProcess => {
+        this.subscriptions.add(this.dataSource.fetch().subscribe(approvalProcess => {
             this._approvalProcess = approvalProcess;
             this._graph = this.buildNodeTree(approvalProcess.nodes);
             this._cdr.detectChanges();
             this.resetCarousel();
             this.checkCarouselStatus();
-        });
+        }));
+        this.subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
+            this._dir = isRtl ? 'rtl' : 'ltr';
+            this._cdr.detectChanges();
+        }));
     }
 
     onNodeClick(node: ApprovalNode): void {
@@ -135,8 +154,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     sendReminders(targets: ApprovalUser[], node: ApprovalNode): void {
         this.dataSource.sendReminders(targets, node).pipe(take(1)).subscribe(() => {
-            const reminderMessage = `Reminder has been sent to ${targets.length === 1 ? targets[0].name : (targets.length + ' members of ' + node.description)}`;
-            this._messageToastService.open(reminderMessage, {
+            this._messageToastService.open(this.reminderTemplate, {
+                data: {
+                    targets: targets,
+                    node: node
+                },
                 duration: 5000
             });
         });
@@ -190,8 +212,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         if (
             isTab &&
-            (isShift && firstNode && firstColumn) ||
-            (!isShift && lastColumn && lastNode)
+            ((isShift && firstNode && firstColumn) ||
+                (!isShift && lastColumn && lastNode))
         ) {
             return;
         }
@@ -205,13 +227,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const nextNode = nodesSequence[currentNodeIndex + diff];
             if (currentNodeIndex > -1 && nextNode) {
                 event.preventDefault();
-                this.focusNode(
-                    nextNode,
-                    {
-                        skipSlideChange: false,
-                        step: 1
-                    }
-                );
+                this.focusNode(nextNode, 1);
                 return;
             }
         }
@@ -228,22 +244,21 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            nextFocusTarget = this.getNextHorizontalNode(nodeIndex, columnIndex, 'left');
+            nextFocusTarget = this.getNextHorizontalNode(nodeIndex, columnIndex, this._isRTL ? 'right' : 'left');
         }
 
         if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-            nextFocusTarget = this.getNextHorizontalNode(nodeIndex, columnIndex, 'right');
+            nextFocusTarget = this.getNextHorizontalNode(nodeIndex, columnIndex, this._isRTL ? 'left' : 'right');
         }
 
         if (nextFocusTarget?.nextNode) {
-            this.focusNode(
-                nextFocusTarget.nextNode,
-                {
-                    skipSlideChange: KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW]),
-                    step: nextFocusTarget.stepSize
-                }
-            );
+            this.focusNode(nextFocusTarget.nextNode, nextFocusTarget.stepSize);
         }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 
     /** @hidden */
@@ -304,36 +319,28 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private focusNode(node: ApprovalGraphNode, { skipSlideChange, step }: { skipSlideChange: boolean, step: number }): void {
+    private focusNode(node: ApprovalGraphNode, step: number): void {
         const nodeToFocus = this.nodeComponents.find(comp => comp.node === node);
         if (!nodeToFocus) {
             return;
         }
 
         const nodeRect = nodeToFocus.nativeElement.getBoundingClientRect();
-        const graphRect = this.graphEl.nativeElement.getBoundingClientRect();
-        const totalOffset = nodeRect.left + nodeRect.width;
-        const diff = Math.abs(totalOffset - graphRect.right);
+        const graphContainerRect = this.graphContainerEl.nativeElement.getBoundingClientRect();
+        const graphVisibilityThreshold = graphContainerRect.width;
+        const nodeOffsetFromContainerEdge = this._isRTL ?
+            (graphContainerRect.right - nodeRect.right) :
+            (nodeRect.left - graphContainerRect.left);
 
         nodeToFocus.focus();
-        if (skipSlideChange) {
-            return;
-        }
 
-        if (((nodeRect.left - graphRect.left) + nodeRect.width) > (graphRect.width + Math.abs(this._carouselScrollX))) {
+        if ((nodeOffsetFromContainerEdge + nodeRect.width) > graphVisibilityThreshold) {
             this.nextSlide(step);
             return;
         }
 
-        if (totalOffset < graphRect.right) {
-            this.previousSlide((diff < nodeRect.width) ? 1 : 2);
-        }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this.dataSourceSub) {
-            this.dataSourceSub.unsubscribe();
+        if (nodeOffsetFromContainerEdge < 0) {
+            this.previousSlide(step);
         }
     }
 

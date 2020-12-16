@@ -38,6 +38,6 @@ export interface ApprovalDataSource {
     /**
      * Send reminders for an approval.
      */
-    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<boolean>;
+    sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any>;
 
 }

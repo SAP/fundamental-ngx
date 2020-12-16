@@ -6,7 +6,7 @@ $block: approval-flow-user-details;
     margin-bottom: 1rem;
 
     fd-avatar {
-        margin-right: 10px;
+        margin-right: .652rem;
     }
 }
 
@@ -51,9 +51,8 @@ $block: approval-flow-user-details;
                 color: #0854A0;
                 color: var(--sapButton_IconColor, #0854A0);
                 position: relative;
-                top: 1px;
                 cursor: pointer;
-                margin-right: 12px;
+                margin-right: .75rem;
             }
 
             p {
@@ -88,11 +87,11 @@ $block: approval-flow-user-details;
         fdp-standard-list-item {
             .fd-checkbox__label {
                 position: relative;
-                left: 5px;
+                left: .3125rem;
             }
 
             fd-avatar {
-                margin-left: 3px;
+                margin-left: .1875rem;
             }
         }
     }
