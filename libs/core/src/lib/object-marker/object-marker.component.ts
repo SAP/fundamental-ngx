@@ -17,7 +17,10 @@ import { CssClassBuilder, applyCssClass } from '../utils/public_api';
         <ng-content></ng-content>`,
     styleUrls: ['./object-marker.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.tabindex]': 'clickable ? 0 : -1'
+    }
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
