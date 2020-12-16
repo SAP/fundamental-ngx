@@ -3,9 +3,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimeObject } from '@fundamental-ngx/core';
 import { FormFieldComponent, FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/platform';
 import { PlatformTimePickerComponent } from './time-picker.component';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-test-time-picker',
@@ -43,7 +43,7 @@ class TestTimePickerComponent {
     @ViewChild('ffl1') timePickerFormField: FormFieldComponent;
     @ViewChild('submitButton') submitButton: ElementRef<HTMLElement>;
 
-    timeObject: TimeObject = { hour: 12, minute: 0, second: 0 };
+    timeObject: FdDate = new FdDate().setTime( 12, 0, 0);
 
     timePickerForm: FormGroup = new FormGroup({
         timePicker: new FormControl(this.timeObject)
@@ -67,7 +67,8 @@ describe('PlatformTimePickerComponent', () => {
                 PlatformTimePickerModule,
                 FdpFormGroupModule,
                 FormsModule,
-                ReactiveFormsModule
+                ReactiveFormsModule,
+                FdDatetimeModule
             ]
         }).compileComponents();
     });
@@ -90,6 +91,7 @@ describe('PlatformTimePickerComponent', () => {
     it('should have a label, placeholder and default value', async () => {
         await wait(fixture);
         component.timePickerComponent.ngAfterViewInit();
+        const time: FdDate = new FdDate().setTime( 12, 0, 0);
 
         const timePickerLabel = component.timePickerFormField.label;
         expect(timePickerLabel).toBe('Time:');
@@ -101,18 +103,20 @@ describe('PlatformTimePickerComponent', () => {
         expect(timePickerHint).toBe('This is a hint');
 
         const timePickerDefaultValue = component.timePickerForm.get('timePicker').value;
-        expect(timePickerDefaultValue).toEqual({ hour: 12, minute: 0, second: 0 });
+        expect(timePickerDefaultValue).toEqual(time);
     });
 
     it('should submit the value', async () => {
         const submitButton = component.submitButton.nativeElement;
+        const time: FdDate = new FdDate().setTime( 12, 0, 0);
+
         submitButton.click();
 
         await wait(fixture);
 
         console.log(component.result);
 
-        expect(component.result).toEqual({ timePicker: { hour: 12, minute: 0, second: 0 } });
+        expect(component.result).toEqual({ timePicker: time });
     });
 
     it('should call disabled state method', async () => {

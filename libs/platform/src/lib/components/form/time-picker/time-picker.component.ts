@@ -12,7 +12,7 @@ import {
 import { Placement } from 'popper.js';
 
 import { BaseInput } from '../base.input';
-import { TimeObject, TimePickerComponent } from '@fundamental-ngx/core';
+import { FdDate, TimePickerComponent } from '@fundamental-ngx/core';
 import { FormFieldControl, Status } from '../form-control';
 
 @Component({
@@ -24,27 +24,22 @@ import { FormFieldControl, Status } from '../form-control';
 export class PlatformTimePickerComponent extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
 
     /**
-     * value for time in string
+     * @Input date time object representation
      */
     @Input()
-    get value(): TimeObject {
+    get value(): FdDate {
         return super.getValue();
     }
 
-    set value(value: TimeObject) {
+    set value(value: FdDate) {
         super.setValue(value);
     }
 
     /**
-     * @Input An object that contains three integer properties: 'hour' (ranging from 0 to 23),
-     * 'minute' (ranging from 0 to 59), and 'second' (ranging from 0 to 59). This is the model the component consumes. Example:
-     *
-     * ```json
-     * { hour: 12, minute: 0, second: 0 }
-     * ```
+     * @Input date time object representation
      */
     @Input()
-    time: TimeObject = { hour: 0, minute: 0, second: 0 };
+    time: FdDate = new FdDate().setTime( 0, 0, 0);
 
     /** @Input When set to true, uses the 24 hour clock (hours ranging from 0 to 23)
      * and does not display a period control. */
@@ -55,15 +50,24 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
     @Input()
     spinnerButtons = true;
 
-    /** @Input When set to false, hides the input for seconds. */
+    /**
+     * @Input When set to false, hides the input for seconds.
+     * Default value based on the current locale format option
+     * */
     @Input()
     displaySeconds = true;
 
-    /** @Input When set to false, hides the input for minutes. */
+    /**
+     * @Input When set to false, hides the input for minutes.
+     * Default value based on the current locale format option
+     * */
     @Input()
     displayMinutes = true;
 
-    /** @Input When set to false, hides the input for hours. */
+    /**
+     * @Input When set to false, hides the input for hours.
+     * Default value based on the current locale format option
+     * */
     @Input()
     displayHours = true;
 
@@ -71,7 +75,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
      * Otherwise It can be set to a default value
      */
     @Input()
-    placeholder: string = this._getPlaceholder();
+    placeholder: string;
 
     /** Aria label for the time picker input. */
     @Input()
@@ -127,7 +131,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
     readonly isOpenChange = new EventEmitter<boolean>();
 
     @ViewChild(TimePickerComponent)
-    timePickerComponent: TimePickerComponent;
+    timePickerComponent: TimePickerComponent<FdDate>;
 
     /**
      * @hidden
@@ -147,7 +151,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
      * logic to handle validation from both platform forms and core datetiimepicker
      * @param value inputted
      */
-    handleTimeChange(value: TimeObject): void {
+    handleTimeChange(value: FdDate): void {
         if (this.timePickerComponent) {
             if (this.timePickerComponent.isInvalidTimeInput) {
                 this.state = 'error';

@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
+import { FdDate } from '@fundamental-ngx/core';
+
 @Component({
     selector: 'fdp-time-picker-reactive-example',
     templateUrl: './platform-time-picker-reactive-example.component.html',
@@ -11,7 +13,7 @@ export class PlatformTimePickerReactiveExampleComponent {
 
     timePickerForm: FormGroup = new FormGroup({
         disableExample: new FormControl({ value: '', disabled: true }),
-        nullValidity: new FormControl({ hour: 0, minute: 0, second: 0 })
+        nullValidity: new FormControl(new FdDate().setTime(0, 0, 0))
     });
 
     onSubmit(): void {
@@ -28,7 +30,7 @@ export class PlatformTimePickerReactiveExampleComponent {
     }
 
     setValid(): void {
-        this.timePickerForm.get('nullValidity').setValue({ hour: 0, minute: 0, second: 0 });
+        this.timePickerForm.get('nullValidity').setValue(new FdDate().setTime(0, 0, 0));
         this.markControlAsTouched('nullValidity');
     }
 

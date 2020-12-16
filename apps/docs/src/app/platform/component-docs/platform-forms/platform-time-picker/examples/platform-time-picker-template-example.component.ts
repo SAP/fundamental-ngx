@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { TimeObject } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-time-picker-template-example',
@@ -8,18 +8,18 @@ import { TimeObject } from '@fundamental-ngx/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformTimePickerTemplateExampleComponent {
-    time24h: TimeObject = { hour: 18, minute: 0, second: 0 };
-    time12h: TimeObject = { hour: 18, minute: 0, second: 0 };
-    timeWithoutSeconds: TimeObject = { hour: 12, minute: 0, second: 0 };
-    timeCompact: TimeObject = { hour: 12, minute: 0, second: 0 };
-    timeAllowNull: TimeObject = { hour: 12, minute: 0, second: 0 };
-    timeDisabled: TimeObject = { hour: 12, minute: 0, second: 0 };
+    time24h: FdDate = new FdDate().setTime(18, 0, 0)
+    time12h: FdDate = new FdDate().setTime(18, 0, 0)
+    timeWithoutSeconds: FdDate = new FdDate().setTime(12, 0, 0)
+    timeCompact: FdDate = new FdDate().setTime(12, 0, 0)
+    timeAllowNull: FdDate = new FdDate().setTime(12, 0, 0)
+    timeDisabled: FdDate = new FdDate().setTime(12, 0, 0)
 
     setNull(): void {
         this.timeAllowNull = null;
     }
 
     setValid(): void {
-        this.timeAllowNull = { hour: 12, minute: 0, second: 0 };
+        this.timeAllowNull = new FdDate().setTime(12, 0, 0)
     }
 }
