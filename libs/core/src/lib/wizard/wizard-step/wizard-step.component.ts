@@ -152,7 +152,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
                 this.glyph = this.stepIndicator.glyph;
             }
         }
-
     }
 
     /** @hidden */
