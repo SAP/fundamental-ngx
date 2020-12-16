@@ -21,7 +21,7 @@ import { Placement } from '../../popover/popover-position/popover-position';
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required */
     @Input()
-    required = true;
+    required = false;
 
     /** Whether form is required */
     @Input()

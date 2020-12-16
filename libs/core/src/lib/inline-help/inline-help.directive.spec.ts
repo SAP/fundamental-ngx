@@ -1,20 +1,29 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { InlineHelpDirective } from './inline-help.directive';
 import { InlineHelpModule } from './inline-help.module';
 
+@Component({
+    template: ` <div #directiveElement fd-inline-help="123"></div> `
+})
+class TestComponent {
+    @ViewChild('directiveElement', { static: false })
+    ref: ElementRef;
+}
 describe('InlineHelpDirective', () => {
-    let component: InlineHelpDirective;
-    let fixture: ComponentFixture<InlineHelpDirective>;
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [InlineHelpModule]
+            imports: [InlineHelpModule],
+            declarations: [TestComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(InlineHelpDirective);
+        fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

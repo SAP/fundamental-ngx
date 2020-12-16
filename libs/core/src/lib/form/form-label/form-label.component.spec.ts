@@ -38,16 +38,5 @@ describe('FormLabelComponent', () => {
 
     it('should assign class', () => {
         expect(component.getLabelElement().className.includes('fd-form-label')).toBe(true);
-
-    });
-
-    it('should assign readonly/colon class', () => {
-        component.ref.colon = true;
-        component.ref.required = true;
-
-        fixture.detectChanges();
-
-        expect(component.getLabelElement().className.includes('fd-form-label--colon')).toBe(true);
-        expect(component.getLabelElement().className.includes('fd-form-label--required')).toBe(true);
     });
 });
