@@ -19,7 +19,7 @@ import { Subject } from 'rxjs';
 
 let tabPanelUniqueId = 0;
 
-export class TabStateChange {
+export class TabPanelStateChange {
     constructor(public target: TabPanelComponent, public state: boolean) {}
 }
 
@@ -90,7 +90,7 @@ export class TabPanelComponent implements OnChanges {
     titleTemplate: TemplateRef<any>;
 
     /** @hidden Event that is emitted when the tab panel . */
-    _expandedStateChange = new Subject<TabStateChange>();
+    _expandedStateChange = new Subject<TabPanelStateChange>();
 
     /** @hidden Whether to display tab panel content */
     private _expanded = false;
@@ -118,7 +118,7 @@ export class TabPanelComponent implements OnChanges {
 
     /** Whether to expand tab panel content */
     open(open: boolean): void {
-        this._expandedStateChange.next(new TabStateChange(this, open));
+        this._expandedStateChange.next(new TabPanelStateChange(this, open));
     }
 
     /** @hidden Set new expand state */

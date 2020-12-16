@@ -16,7 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { getElementCapacity, getElementWidth } from '../utils/functions';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -75,10 +75,6 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     @Input()
     maxContentHeight = '100%';
 
-    /** Whether to enable reordering tabs in the tab header */
-    @Input()
-    enableReordering = false;
-
     /** Whether to enable collapsing expanded tab on expanded tab click */
     @Input()
     collapsibleTabs = false;
@@ -136,8 +132,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._listenOnTabPanelsChange();
-        this._setupStackedContent();
+        this._setupTabPanelsChangeListeners();
     }
 
     ngAfterViewInit(): void {
@@ -159,10 +154,10 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     _overflowingTabHeaderClickHandler(tabPanel: TabPanelComponent): void {
-        this._expandTab(tabPanel, true);
+        this._expandTab(tabPanel, true, false);
         this._resetVisualOrder();
         this._keepActiveTabVisible();
-        this._changeDetectorRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden */
@@ -177,17 +172,16 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden */
     _highlightActiveTab({ id }: HTMLElement): void {
         const tab = this._tabArray.find(_tab => _tab.id === id);
-        this._activateStackedContentTab(tab.panel, false);
+        this._activateStackedTab(tab.panel, false);
         this.selectedTabChange.emit(tab.panel);
     }
 
-    /** @hidden */
-    private _listenOnKeyboardTabSelect(): void {
-        this._tabsService.tabSelected
-            .pipe(
-                takeUntil(this._onDestroy$),
-                map(index => this._visualOrder.visible[index].panel)
-            ).subscribe(tabPanel => this._expandTab(tabPanel, !tabPanel.expanded));
+    private get _tabPanelsChange$(): Observable<TabPanelComponent[]> {
+        return this.tabPanels.changes.pipe(
+            startWith(this.tabPanels),
+            takeUntil(this._onDestroy$),
+            map(tabPanels => tabPanels.toArray())
+        );
     }
 
     /** @hidden */
@@ -197,41 +191,12 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         }
     }
 
-    /** @hidden Setup mechanisms required for handling the stacked content behavior */
-    private _setupStackedContent(): void {
-        if (this.stackContent) {
-            this._tabArray
-                .filter(tab => !tab.panel.disabled)
-                .forEach(tab => tab.panel._expand(true));
-        }
-    }
-
-    /** @hidden TODO: IMPROVE*/
-    private _expandTab(tabPanel: TabPanelComponent, expand: boolean): void {
-        if (this.stackContent) {
-            this._activateStackedContentTab(tabPanel);
-        } else {
-            if (!this._canChangeExpandState(tabPanel, expand)) {
-                return;
-            }
-
-            const collapse = this.collapsibleTabs && !expand;
-            this._tabArray.forEach(el => {
-                const isActive = el.panel === tabPanel && !collapse;
-                el.panel._expand(isActive);
-                el.active = isActive;
-            });
-        }
-
-        this._changeDetectorRef.detectChanges();
-        this.selectedTabChange.emit(tabPanel);
-    }
-
     /** @hidden */
-    private _listenOnPropertiesChange(): void {
-        this._tabsService.tabPanelPropertyChanged
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._detectChanges());
+    private _setupTabPanelsChangeListeners(): void {
+        this._listenOnTabPanelsAndUpdateStorageStructures();
+        this._listenOnTabPanelsAndSetupStackedContent();
+        this._listenOnTabPanelsExpandedChange();
+        this._listenOnTabPanelsAndInitiallyExpandTabPanel();
     }
 
     /** @hidden Setup mechanisms required for handling the overflowing tabs behavior */
@@ -247,6 +212,64 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         }
     }
 
+    /** @hidden Setup mechanisms required for handling the stacked content behavior */
+    private _listenOnTabPanelsAndSetupStackedContent(): void {
+        if (this.stackContent) {
+            this._tabPanelsChange$.pipe(delay(0))
+                .subscribe(() => this._tabArray
+                    .filter(tab => !tab.panel.disabled)
+                    .forEach(tab => tab.panel._expand(true)
+                    )
+                );
+        }
+    }
+
+    /** @hidden */
+    private _listenOnTabPanelsAndUpdateStorageStructures(): void {
+        this._tabPanelsChange$.pipe(
+            map(tabPanels => tabPanels.map(el => new TabInfo(el)))
+        ).subscribe(tabs => {
+            this._tabArray = tabs;
+            this._numbOfVisibleTabs = tabs.length;
+            this._resetVisualOrder();
+        });
+    }
+
+    /** @hidden */
+    private _listenOnTabPanelsExpandedChange(): void {
+        this._tabPanelsChange$.pipe(
+            map(tabPanels => tabPanels.map(el => el._expandedStateChange.asObservable())),
+            switchMap(tabPanels => merge(...tabPanels))
+        ).subscribe(event => this._expandTab(event.target, event.state));
+    }
+
+    /** @hidden */
+    private _listenOnTabPanelsAndInitiallyExpandTabPanel(): void {
+        this._tabPanelsChange$.pipe(
+            map(_ => this._tabArray.find(tab => tab.active && !tab.disabled)),
+            filter(tab => !tab),
+            map(_ => this._tabArray.find(tab => !tab.disabled)),
+            filter(tab => !!tab),
+            delay(0)
+        ).subscribe(tab => this._expandTab(tab.panel, true));
+    }
+
+    /** @hidden */
+    private _listenOnPropertiesChange(): void {
+        merge(this._tabsService.tabPanelPropertyChanged, this.tabPanels.changes)
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this._detectChanges());
+    }
+
+    /** @hidden */
+    private _listenOnKeyboardTabSelect(): void {
+        this._tabsService.tabSelected
+            .pipe(
+                takeUntil(this._onDestroy$),
+                map(index => this._visualOrder.visible[index].panel)
+            ).subscribe(tabPanel => this._expandTab(tabPanel, !tabPanel.expanded));
+    }
+
     /** @hidden */
     private _listenOnResizeAndHideItems(): void {
         fromEvent(window, 'resize').pipe(
@@ -255,7 +278,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         ).subscribe(_ => {
             this._hideOverflowingItems();
             this._keepActiveTabVisible();
-            this._changeDetectorRef.detectChanges();
+            this._detectChanges();
         })
     }
 
@@ -273,8 +296,44 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
             this._cacheTabsWidth(tabHeaders);
             this._hideOverflowingItems();
             this._keepActiveTabVisible();
-            this._changeDetectorRef.detectChanges();
+            this._detectChanges();
         });
+    }
+
+    /** @hidden */
+    private _activateStackedTab(tabPanel: TabPanelComponent, scroll = true): void {
+        if (scroll) {
+            this._scrollToPanel(tabPanel);
+        }
+        this._tabArray.forEach(tab => tab.active = tab.panel === tabPanel);
+    }
+
+    /** @hidden */
+    private _activateExpandableTab(tabPanel: TabPanelComponent, expand: boolean): void {
+        const collapse = this.collapsibleTabs && !expand;
+        this._tabArray.forEach(tab => {
+            const isActive = tab.panel === tabPanel && !collapse;
+            tab.panel._expand(isActive);
+            tab.active = isActive;
+        });
+    }
+
+    /** @hidden */
+    private _expandTab(tabPanel: TabPanelComponent, expand: boolean, detectChanges = true): void {
+        if (this.stackContent) {
+            this._activateStackedTab(tabPanel);
+        } else {
+            if (!this._canChangeExpandState(tabPanel, expand)) {
+                return;
+            }
+
+            this._activateExpandableTab(tabPanel, expand);
+        }
+
+        if (detectChanges) {
+            this._detectChanges();
+        }
+        this.selectedTabChange.emit(tabPanel);
     }
 
     /** @hidden Divides tabs into tabs visible in the header and moved tabs to the dropdown */
@@ -336,38 +395,6 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this._numbOfVisibleTabs = this._visualOrder.visible.length;
     }
 
-    /** @hidden */
-    private _listenOnTabPanelsChange(): void {
-        const $tabPanelsSource: Observable<TabPanelComponent[]> = this.tabPanels.changes.pipe(
-            startWith(this.tabPanels),
-            takeUntil(this._onDestroy$),
-            map(tabPanels => tabPanels.toArray())
-        );
-
-        // Update tab storage structures
-        $tabPanelsSource.pipe(
-            map(tabPanels => tabPanels.map(el => new TabInfo(el)))
-        ).subscribe(tabs => {
-            this._tabArray = tabs;
-            this._numbOfVisibleTabs = tabs.length;
-            this._resetVisualOrder();
-            this._changeDetectorRef.detectChanges();
-        });
-
-        // Subscribe to tab panels events
-        $tabPanelsSource.pipe(
-            map(tabPanels => tabPanels.map(el => el._expandedStateChange.asObservable())),
-            switchMap(tabPanels => merge(...tabPanels))
-        ).subscribe(event => this._expandTab(event.target, event.state));
-
-        // Expand first panel if no panels expanded
-        $tabPanelsSource.pipe(
-            filter(tabPanels => !tabPanels.some(el => el.expanded)),
-            map(tabPanels => tabPanels.find(el => !el.disabled)),
-            filter(tabPanel => !!tabPanel)
-        ).subscribe(tabPanel => this._expandTab(tabPanel, true));
-    }
-
     /** @hidden Caches width dimension of the elements in the tabs header */
     private _cacheTabsDimensions(tabHeaders: TabItemDirective[]): void {
         this._overflowTriggerWidth = Math.ceil(getElementWidth(this.overflowTrigger));
@@ -379,6 +406,14 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         tabHeaders.forEach((item, i) => {
             this._tabArray[i].headerWidth = Math.ceil(getElementWidth(item.elementRef(), true));
         });
+    }
+
+    /** @hidden */
+    private _resetVisualOrder(): void {
+        this._visualOrder = {
+            visible: this._tabArray.slice(0, this._numbOfVisibleTabs),
+            overflowing: this._tabArray.slice(this._numbOfVisibleTabs)
+        };
     }
 
     /** @hidden */
@@ -407,21 +442,5 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         return !tabPanel.disabled
         && expand !== tabPanel.expanded
         && expand === false ? this.collapsibleTabs : true;
-    }
-
-    /** @hidden */
-    private _activateStackedContentTab(tabPanel: TabPanelComponent, scroll = true): void {
-        if (scroll) {
-            this._scrollToPanel(tabPanel);
-        }
-        this._tabArray.forEach(tab => tab.active = tab.panel === tabPanel);
-    }
-
-    /** @hidden */
-    private _resetVisualOrder(): void {
-        this._visualOrder = {
-            visible: this._tabArray.slice(0, this._numbOfVisibleTabs),
-            overflowing: this._tabArray.slice(this._numbOfVisibleTabs)
-        };
     }
 }

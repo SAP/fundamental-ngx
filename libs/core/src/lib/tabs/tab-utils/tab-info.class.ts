@@ -18,6 +18,7 @@ export class TabInfo {
     /** @hidden */
     constructor(tabPanel: TabPanelComponent) {
         this.panel = tabPanel;
+        this.active = tabPanel.expanded;
     }
 
     get id(): string {
