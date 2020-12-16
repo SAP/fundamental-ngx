@@ -27,6 +27,7 @@ import {
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
 import { VhdSearchComponent } from './components/value-help-dialog-search/value-help-dialog-search.component';
+import { VhdBaseTab } from './components/base-tab/vhd-base-tab.component';
 import { SelectTabComponent } from './components/select-tab/select-tab.component';
 import { DefineTabComponent } from './components/define-tab/define-tab.component';
 import { ConditionCountMessageDirective } from './directives/condition-count-message.directive';
@@ -35,7 +36,7 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
     PlatformValueHelpDialogComponent,
     VhdFilterComponent,
     VhdSearchComponent,
-
+    VhdBaseTab,
     SelectTabComponent,
     DefineTabComponent,
     ConditionCountMessageDirective,

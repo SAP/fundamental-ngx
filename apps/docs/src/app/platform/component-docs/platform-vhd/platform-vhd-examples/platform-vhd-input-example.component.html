@@ -76,10 +76,10 @@
     dialogTitle="Once select value help dialog"
     uniqueKey="id"
     selectTabTitle="Select from list"
-    searchSelection="multi"
+    searchSelection="once"
     tabs="select"
     [dataSource]="dataSource"
-    (valueChange)="values.once = $event.selected"
+    (valueChange)="values.once = $event.selected[0]"
 >
     <fdp-value-help-dialog-search
         placeholder="Search..."

@@ -484,6 +484,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   dismiss(): void {
     if (this.mobile && this.isOpenAdvanced) {
       this.isOpenAdvanced = false;
+      this.switchTab(VhdTab.selectFromList);
     } else {
       if (this.activeDialog) {
         this.activeDialog.close();

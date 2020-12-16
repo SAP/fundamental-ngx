@@ -79,10 +79,10 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
       this._initializeFilters();
     }
     if ('included' in changes) {
-      this._included = this.included as ExtendedIncludedEntity[];
+      this._included = this.included as ExtendedIncludedEntity[] || [];
     }
     if ('excluded' in changes) {
-      this._excluded = this.excluded as ExtendedExcludedEntity[];
+      this._excluded = this.excluded as ExtendedExcludedEntity[] || [];
     }
   }
 
