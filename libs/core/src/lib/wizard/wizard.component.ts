@@ -130,6 +130,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 this._setupStepEvents(step);
             });
             this._cdRef.detectChanges();
+            this._handleStepOrStatusChanges();
             this.resizeHandler();
         });
     }
@@ -407,9 +408,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         if (this.steps.last.isSummary && this.steps.toArray()[this.steps.length - 2]) {
             this.steps.toArray()[this.steps.length - 2].content.tallContent = true;
             this.steps.toArray()[this.steps.length - 2].finalStep = true;
+            // TODO: remove the line below when https://github.com/SAP/fundamental-styles/issues/1978 is addressed
+            this.steps.toArray()[this.steps.length - 2].completed = false;
             this.steps.last.removeFromDom();
-        } else if (this.steps.last.content) {
-            this.steps.last.content.tallContent = true;
+        } else if (this.steps.last) {
+            if (this.steps.last.content) {
+                this.steps.last.content.tallContent = true;
+            }
             this.steps.last.finalStep = true;
         }
     }
