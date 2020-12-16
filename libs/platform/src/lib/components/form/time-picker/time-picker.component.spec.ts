@@ -38,7 +38,7 @@ import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestTimePickerComponent {
-    @ViewChild(PlatformTimePickerComponent) timePickerComponent: PlatformTimePickerComponent;
+    @ViewChild(PlatformTimePickerComponent) timePickerComponent: PlatformTimePickerComponent<FdDate>;
 
     @ViewChild('ffl1') timePickerFormField: FormFieldComponent;
     @ViewChild('submitButton') submitButton: ElementRef<HTMLElement>;

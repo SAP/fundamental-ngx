@@ -12,7 +12,7 @@ import {
 import { Placement } from 'popper.js';
 
 import { BaseInput } from '../base.input';
-import { FdDate, TimePickerComponent } from '@fundamental-ngx/core';
+import { TimePickerComponent } from '@fundamental-ngx/core';
 import { FormFieldControl, Status } from '../form-control';
 
 @Component({
@@ -21,17 +21,17 @@ import { FormFieldControl, Status } from '../form-control';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: PlatformTimePickerComponent, multi: true }]
 })
-export class PlatformTimePickerComponent extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
+export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
 
     /**
      * @Input date time object representation
      */
     @Input()
-    get value(): FdDate {
+    get value(): D {
         return super.getValue();
     }
 
-    set value(value: FdDate) {
+    set value(value: D) {
         super.setValue(value);
     }
 
@@ -39,37 +39,39 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
      * @Input date time object representation
      */
     @Input()
-    time: FdDate = new FdDate().setTime( 0, 0, 0);
-
-    /** @Input When set to true, uses the 24 hour clock (hours ranging from 0 to 23)
-     * and does not display a period control. */
-    @Input()
-    meridian = false;
+    time: D;
 
     /** @Input Whether to show spinner buttons */
     @Input()
     spinnerButtons = true;
 
     /**
+     * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23).
+     * Default value based on the current locale format option
+     */
+    @Input()
+    meridian: boolean;
+
+    /**
      * @Input When set to false, hides the input for seconds.
      * Default value based on the current locale format option
      * */
     @Input()
-    displaySeconds = true;
+    displaySeconds: boolean;
 
     /**
      * @Input When set to false, hides the input for minutes.
      * Default value based on the current locale format option
      * */
     @Input()
-    displayMinutes = true;
+    displayMinutes: boolean;
 
     /**
      * @Input When set to false, hides the input for hours.
      * Default value based on the current locale format option
      * */
     @Input()
-    displayHours = true;
+    displayHours: boolean;
 
     /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds.
      * Otherwise It can be set to a default value
@@ -126,12 +128,26 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
     @Input()
     keepTwoDigitsTime = false;
 
+    /**
+     * Display format option to customize time format in input control.
+     * Must be a format option that is understandable by DatetimeAdapter.
+     */
+    @Input()
+    displayFormat: unknown;
+
+    /**
+     * Parse format option to customize time format in input control.
+     * Must be a format option that is understandable by DatetimeAdapter.
+     */
+    @Input()
+    parseFormat: unknown;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
 
     @ViewChild(TimePickerComponent)
-    timePickerComponent: TimePickerComponent<FdDate>;
+    timePickerComponent: TimePickerComponent<D>;
 
     /**
      * @hidden
@@ -151,7 +167,7 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
      * logic to handle validation from both platform forms and core datetiimepicker
      * @param value inputted
      */
-    handleTimeChange(value: FdDate): void {
+    handleTimeChange(value: D): void {
         if (this.timePickerComponent) {
             if (this.timePickerComponent.isInvalidTimeInput) {
                 this.state = 'error';
@@ -162,24 +178,5 @@ export class PlatformTimePickerComponent extends BaseInput implements OnInit, Af
             this.stateChanges.next('time picker: handleTimeInputChange');
         }
         this.onTouched();
-    }
-
-    /** @hidden */
-    _getPlaceholder(): string {
-        let retVal = '';
-        if (this.displayHours) {
-            retVal = retVal + 'hh';
-        }
-        if (this.displayMinutes) {
-            retVal = retVal + ':mm';
-        }
-        if (this.displaySeconds) {
-            retVal = retVal + ':ss';
-        }
-        if (this.meridian) {
-            retVal = retVal + ' am/pm';
-        }
-
-        return retVal;
     }
 }

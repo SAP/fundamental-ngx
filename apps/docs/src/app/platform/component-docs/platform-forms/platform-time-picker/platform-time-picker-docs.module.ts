@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { API_FILES } from '../../../api-files';
-import { SegmentedButtonModule } from '@fundamental-ngx/core';
+import { FdDatetimeModule, SegmentedButtonModule } from '@fundamental-ngx/core';
 import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/platform';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
@@ -28,6 +28,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SegmentedButtonModule,
         SharedDocumentationPageModule,
+        FdDatetimeModule,
         PlatformTimePickerModule,
         FdpFormGroupModule
     ],
