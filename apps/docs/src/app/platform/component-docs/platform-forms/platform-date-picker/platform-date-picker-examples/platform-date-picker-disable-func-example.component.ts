@@ -14,11 +14,13 @@ export class PlatformDatePickerDisableFuncExampleComponent {
     disableFunction = (fdDate: FdDate): boolean => {
         const month = this.datetimeAdapter.getMonth(fdDate);
         const year = this.datetimeAdapter.getYear(fdDate);
+        const day = this.datetimeAdapter.getDate(fdDate);
 
         const currentYear = this.datetimeAdapter.today().year;
         const currentMonth = this.datetimeAdapter.today().month;
+        const currentDay = this.datetimeAdapter.today().day;
 
-        if (year === currentYear && month === currentMonth) {
+        if (year === currentYear && month === currentMonth && day < currentDay) {
             return false;
         } else {
             return true;

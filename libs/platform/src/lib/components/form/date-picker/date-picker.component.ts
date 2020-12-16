@@ -93,7 +93,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     useValidation = true;
 
-    /** Aria label for the datepicker input. */
+    /** Aria label for the date picker input. */
     @Input()
     dateInputLabel = 'Date input';
 
