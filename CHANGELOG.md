@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.64...v0.25.0-rc.65) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Platform) list screen reader and accessibility issues. ([#4106](https://github.com/SAP/fundamental-ngx/issues/4106)) ([99dd486](https://github.com/SAP/fundamental-ngx/commit/99dd4864860a6606ca9f4ee99224cc3723d746cf))
+
 ## [0.25.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.63...v0.25.0-rc.64) (2020-12-16)
 
 ## [0.25.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.62...v0.25.0-rc.63) (2020-12-14)
