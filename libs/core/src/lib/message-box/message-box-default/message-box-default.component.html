@@ -1,10 +1,7 @@
 <fd-message-box>
     <fd-message-box-header>
+        <fd-message-box-semantic-icon *ngIf="_showSemanticIcon"></fd-message-box-semantic-icon>
         <h1 fd-title>{{ _messageBoxContent.title }}</h1>
-        <fd-message-box-close-icon
-            *ngIf="_messageBoxContent.closeButtonCallback"
-            (click)="_onCloseButton()">
-        </fd-message-box-close-icon>
     </fd-message-box-header>
     <fd-message-box-body>
         <ng-container *ngTemplateOutlet="_contentTemplate"></ng-container>

@@ -44,6 +44,11 @@ export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
     }
 
     /** @hidden */
+    get _showSemanticIcon(): boolean {
+        return this._messageBoxConfig.showSemanticIcon;
+    }
+
+    /** @hidden */
     _onCloseButton(): void {
         this._messageBoxContent.closeButtonCallback();
     }

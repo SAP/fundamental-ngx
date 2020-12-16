@@ -17,4 +17,6 @@ export interface MessageBoxConfigurableElement {
 @Injectable()
 export class MessageBoxConfig<T = any> extends DialogConfigBase<T> {
     type?: MessageBoxType = 'confirmation';
+    showSemanticIcon?: boolean = false;
+    customSemanticIcon?: string;
 }
