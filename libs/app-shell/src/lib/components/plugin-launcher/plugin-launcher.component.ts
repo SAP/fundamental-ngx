@@ -4,28 +4,27 @@ import {
     ChangeDetectorRef,
     Compiler,
     Component,
-    ComponentFactoryResolver,
     ElementRef,
-    Injector,
     Input,
+    Output,
+    EventEmitter,
     NgModuleFactory,
     OnChanges,
     Renderer2,
     SimpleChanges,
     Type,
-    ViewChild,
-    ViewContainerRef
+    ViewChild
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { loadRemoteModule } from '../../api/plugins/federation-utils';
 import {
     AngularIvyComponentDescriptor,
     DescriptorsModule,
+    IframePageDescriptor,
     PluginDescriptor
 } from '../../api/plugins/lookup/plugin-descriptor.model';
 import { LookupService } from '../../api/plugins/lookup/lookup.service';
 import { PluginManagerService } from '../../api/plugins/plugin-manager.service';
-import { PluginLauncherModule } from './plugin-launcher.module';
 
 @Component({
     selector: 'fds-plugin-launcher',
@@ -38,6 +37,7 @@ import { PluginLauncherModule } from './plugin-launcher.module';
             class="responsive-wrapper"
             [src]="_safeIframeUri"
             [style.minHeight]="iframeAttrs.height"
+            (error)="onLoadIframeError()"
         ></iframe>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -56,6 +56,9 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
     @Input()
     iframeAttrs: Record<string, string | number>;
 
+    @Output()
+    error = new EventEmitter<Error>();
+
     @ViewChild('iframe', { static: false })
     iframeEl: ElementRef;
 
@@ -63,17 +66,17 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
     _ngModule: NgModuleFactory<any>;
 
     _safeIframeUri: SafeResourceUrl;
+
     private descriptor: Partial<PluginDescriptor>;
 
-    constructor(private readonly _injector: Injector,
-                private readonly _elementRef: ElementRef,
-                private readonly cfr: ComponentFactoryResolver,
-                private readonly _cd: ChangeDetectorRef,
-                private readonly _render: Renderer2,
-                private readonly _pluginMgr: PluginManagerService,
-                private readonly lookupService: LookupService,
-                private readonly sanitizer: DomSanitizer,
-                private readonly compiler: Compiler) {
+    constructor(
+        private readonly _elementRef: ElementRef,
+        private readonly _cd: ChangeDetectorRef,
+        private readonly _render: Renderer2,
+        private readonly pluginManagerService: PluginManagerService,
+        private readonly lookupService: LookupService,
+        private readonly sanitizer: DomSanitizer,
+        private readonly compiler: Compiler) {
     }
 
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
@@ -101,61 +104,136 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             return;
         }
 
-        const _pluginModule = descriptor.modules.find(module => module.name === this.module);
-        const _remoteModule = await loadRemoteModule<DescriptorsModule>(descriptor, _pluginModule)
-            .catch(err => console.error(err));
-        if (!_remoteModule) {
+        const pluginModule = this.findPluginModule(descriptor);
+        const remoteModule = await loadRemoteModule<DescriptorsModule>(descriptor, pluginModule)
+            .catch((error) => {
+                this.dispatchError(error);
+            });
+
+        if (!remoteModule) {
             return;
         }
-        const _module = _remoteModule[_pluginModule.name];
 
-        if (_pluginModule.type !== 'iframe' && !this.iframeUri) {
+        const moduleOrCustomElementName = remoteModule[pluginModule.name];
+        const isNotIframeType = pluginModule.type !== 'iframe' && !this.iframeUri;
+
+        if (isNotIframeType) {
             this._safeIframeUri = null;
         }
 
-        if (_pluginModule.type === 'iframe') {
-            const _url = descriptor.uri + _pluginModule.html;
-            this._safeIframeUri = this.sanitizer.bypassSecurityTrustResourceUrl(_url);
-            return;
+        switch (pluginModule.type) {
+            case 'iframe':
+                this.renderIframe(descriptor, pluginModule);
+                return;
+
+            case 'custom-element':
+                this.renderCustomElement(moduleOrCustomElementName);
+                return;
+
+            case 'angular-ivy-component':
+                this.renderComponent(moduleOrCustomElementName, pluginModule, remoteModule);
+                break;
         }
 
-        if (_pluginModule.type === 'custom-element') {
-            const element = document.createElement(_module);
-            this._render.appendChild(this._elementRef.nativeElement, element);
-            return;
-        }
+        this.pluginManagerService.register(descriptor);
+    }
 
-        if (_pluginModule.type === 'angular-ivy-component') {
-            const ngPluginModule = _pluginModule as AngularIvyComponentDescriptor;
-            // if provided module name and component name we bootstrap both
-            if (ngPluginModule.name && ngPluginModule.component) {
-                this._ngModule = await this.compiler.compileModuleAsync(_module);
-                this._ngComponent = _remoteModule[ngPluginModule.component];
-            }
-            // if component name is not provided, we suppose that `name` is a component name
-            if (!ngPluginModule.component) {
-                this._ngModule = void 0;
-                this._ngComponent = _remoteModule[ngPluginModule.name];
-            }
-
-            this._cd.detectChanges();
-        }
-        this._pluginMgr.register(descriptor);
+    onLoadIframeError() {
+        this.dispatchError(
+            new Error(
+                `PluginLauncherIframeLoadingError: Can't fetch resource from ${this.iframeUri}`
+            )
+        );
     }
 
     private updateAttrs(newValue: Record<string, string | number>, oldValue?: Record<string, string>): void {
         if (!this._safeIframeUri) {
             return;
         }
+
         if (oldValue) {
             for (const key of Object.keys(oldValue)) {
                 this._render.removeAttribute(this.iframeEl.nativeElement, key);
             }
         }
+
         if (newValue) {
             for (const key of Object.keys(newValue)) {
                 this._render.setAttribute(this.iframeEl.nativeElement, key, `${newValue[key]}`);
             }
         }
+    }
+
+    private findPluginModule(descriptor: Partial<PluginDescriptor>): DescriptorsModule {
+        const pluginModule = descriptor.modules.find(module => module.name === this.module);
+
+        // module plugin descriptor not found
+        if (!pluginModule) {
+            this.dispatchError(
+                new Error(
+                    `PluginLauncherDescriptorNotFoundError: Can't find plugin descriptor module with name ${this.module}`
+                )
+            );
+            return;
+        }
+
+        return pluginModule;
+    }
+
+    private renderIframe(descriptor: Partial<PluginDescriptor>, pluginModule: IframePageDescriptor) {
+        const url = descriptor.uri + pluginModule.html;
+        this._safeIframeUri = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+
+    private renderCustomElement(elementName: string) {
+        const element = document.createElement(elementName);
+        const isCustomElement = element instanceof window.customElements.get(elementName);
+
+        // custom element is unknown in DOM
+        if (!isCustomElement) {
+            this.dispatchError(
+                new Error(
+                    `PluginLauncherCustomElementResolveError: An element with name ${elementName} is not registered`
+                )
+            );
+            return;
+        }
+
+        this._render.appendChild(this._elementRef.nativeElement, element);
+    }
+
+    private async renderComponent(module: any, pluginModule: AngularIvyComponentDescriptor, remoteModule: DescriptorsModule) {
+        const pluginModuleName = pluginModule.name;
+        let pluginComponentName = pluginModule.component;
+
+        // if provided module name and component name we bootstrap both
+        if (pluginModuleName && pluginComponentName) {
+            this._ngModule = await this.compiler.compileModuleAsync(module);
+            this._ngComponent = remoteModule[pluginComponentName];
+        }
+
+        // if component name is not provided, we suppose that `name` is a component name
+        if (!pluginComponentName) {
+            pluginComponentName = pluginModuleName;
+            this._ngModule = void 0;
+            this._ngComponent = remoteModule[pluginComponentName];
+        }
+
+        // check if component is an object
+        const isComponentDefined = Object.prototype.toString.call(this._ngComponent) === '[object Object]';
+
+        if (!isComponentDefined) {
+            this.dispatchError(
+                new Error(
+                    `PluginLauncherComponentResolveError: Can't resolve a component with name ${pluginComponentName}`
+                )
+            );
+        }
+
+        this._cd.detectChanges();
+    }
+
+    private dispatchError(error: Error) {
+        this.error.emit(error);
     }
 }
