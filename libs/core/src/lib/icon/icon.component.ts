@@ -69,11 +69,9 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        console.log(this.glyph);
-        console.log(this.class);
         return [
-            this.glyph ? (PREFIX_ICON_CLASS + this.glyph) : '',
-            this.class
+            this.class,
+            this.glyph ? (PREFIX_ICON_CLASS + this.glyph) : ''
         ];
     }
 
