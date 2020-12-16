@@ -137,7 +137,7 @@ describe('PopoverService', () => {
         expect(service['_overlayRef'].hasAttached()).toBeTrue();
     });
 
-    fit('should open and close on refresh passed values', () => {
+    it('should open and close on refresh passed values', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
         spyOn(service, 'open').and.callThrough();
@@ -163,7 +163,7 @@ describe('PopoverService', () => {
         expect(service.close).toHaveBeenCalled();
     });
 
-    fit('it should change values, when refreshConfiguration method is used', () => {
+    it('it should change values, when refreshConfiguration method is used', () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
         componentInstance.fillControlMode = 'at-least';

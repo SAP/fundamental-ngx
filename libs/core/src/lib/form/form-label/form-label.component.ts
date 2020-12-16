@@ -35,19 +35,29 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     radio = false;
 
-    /** Whether label is for inline-help */
+    /** Inline help body text */
     @Input()
     inlineHelpTitle: string = null;
 
-    /** Whether label is for inline-help */
+    /** Glyph of icon triggering inline help */
     @Input()
     inlineHelpGlyph = 'question-mark';
 
-    /** Whether label is for inline-help */
+    /**
+     * The placement of the inline help.
+     * It can be one of:
+     * top, top-start, top-end, bottom, bottom-start, bottom-end,
+     * right, right-start, right-end, left, left-start, left-end.
+     */
     @Input()
     inlineHelpBodyPlacement: Placement;
 
-    /** Whether label is for inline-help */
+    /** The trigger events that will open/close the inline help.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    inlineHelpTrigger: string[] = ['mouseleave', 'mouseenter'];
+
+    /** If inline help trigger icon should be placed after, or before text */
     @Input()
     inlineHelpPlacement: 'before' | 'after' = 'after';
 
