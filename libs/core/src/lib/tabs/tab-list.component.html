@@ -63,15 +63,12 @@
         <div *ngIf="tab.isHeader" fd-tab-separator></div>
     </ng-container>
 
-    <button #overflowTrigger
-            *ngIf="_isCollapsed"
-            [fdMenuTrigger]="menu"
-            fd-button
-            fdType="transparent"
-            glyph="slim-arrow-down"
-            class="fd-tabs__overflow"
-            aria-label="See More">
-    </button>
+    <li class="fd-tabs__item fd-tabs__item--overflow" #overflowTrigger *ngIf="_isCollapsed">
+        <a class="fd-tabs__link" [attr.tabindex]="0" [fdMenuTrigger]="menu">
+            <span *ngIf="expandOverflowText" fd-tab-tag>{{expandOverflowText}}</span>
+            <fd-icon glyph="slim-arrow-down" aria-label="See More"></fd-icon>
+        </a>
+    </li>
 </ul>
 
 <div #contentContainer

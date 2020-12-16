@@ -79,6 +79,10 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     @Input()
     collapsibleTabs = false;
 
+    /** Text visible in expand overflow trigger */
+    @Input()
+    expandOverflowText = 'More';
+
     /** Event emitted when the selected panel changes. */
     @Output()
     selectedTabChange = new EventEmitter<TabPanelComponent>();
