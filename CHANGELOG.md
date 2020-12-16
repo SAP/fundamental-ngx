@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.68...v0.25.0-rc.69) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Core) Action sheet buttons left position ([#4114](https://github.com/SAP/fundamental-ngx/issues/4114)) ([071d4dd](https://github.com/SAP/fundamental-ngx/commit/071d4dd12bb9cf84daedb0d03c8bc6c1f693cc1e))
+
 ## [0.25.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.67...v0.25.0-rc.68) (2020-12-16)
 
 
