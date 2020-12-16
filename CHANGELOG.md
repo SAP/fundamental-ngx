@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.65...v0.25.0-rc.66) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Core) add fix for missing styling of selected Tabs ([#4011](https://github.com/SAP/fundamental-ngx/issues/4011)) ([cfeaafa](https://github.com/SAP/fundamental-ngx/commit/cfeaafacaea1246a060f814c0368fad2dd904ebd))
+
 ## [0.25.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.64...v0.25.0-rc.65) (2020-12-16)
 
 
