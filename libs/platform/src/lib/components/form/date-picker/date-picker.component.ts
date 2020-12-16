@@ -1,7 +1,21 @@
 import { NgControl, NgForm } from '@angular/forms';
-import { ChangeDetectorRef, ChangeDetectionStrategy, SkipSelf, Host, Inject, ElementRef } from '@angular/core';
-import { Component, EventEmitter, Input, Optional, Output, Self } from '@angular/core';
-import { ViewEncapsulation, ViewChild } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    ElementRef,
+    Host,
+    Inject,
+    Input,
+    Optional,
+    Output,
+    SkipSelf,
+    Self,
+    ViewEncapsulation,
+    ViewChild
+} from '@angular/core';
+
 import {
     CalendarType,
     CalendarYearGrid,
@@ -12,7 +26,6 @@ import {
     DateRange,
     DaysOfWeek,
     FdCalendarView,
-    FdDate,
     SpecialDayRule
 } from '@fundamental-ngx/core';
 import { Placement } from 'popper.js';
@@ -40,12 +53,6 @@ import { FormField } from '../form-field';
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
-    /**
-     * @hidden core date-picker as child
-     */
-    @ViewChild(FdDatePickerComponent)
-    fdDatePickerComponent: FdDatePickerComponent<D>;
-
     /**
      * date-picker value set as controller value
      */
@@ -121,7 +128,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
-    private _state: Status;
 
     @Input()
     get state(): Status {
@@ -206,11 +212,19 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
     /**
+     * @hidden core date-picker as child
+     */
+    @ViewChild(FdDatePickerComponent)
+    fdDatePickerComponent: FdDatePickerComponent<D>;
+
+    private _state: Status;
+
+    /**
      * Function used to disable certain dates in the calendar.
      * @param _ D
      */
     @Input()
-    disableFunction = function (fdDate: FdDate): boolean {
+    disableFunction = function (_: D): boolean {
         return false;
     };
 
@@ -260,7 +274,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * validates date on date change.
      * @param value D | DateRange<D>
      */
-    public handleDateChange(value: D | DateRange<D>): void {
+    handleDateChange(value: D | DateRange<D>): void {
         this.value = value;
         this.onTouched();
 
