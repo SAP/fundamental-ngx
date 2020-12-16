@@ -10,27 +10,34 @@ type Factory = () => any;
 
 interface Container {
     init(shareScope: string): void;
-
     get(module: string): Factory;
 }
 
-const moduleMap = {};
+interface ModuleMaps {
+    [key: string]: Promise<void>;
+}
+
+const moduleMap: ModuleMaps = {};
 
 function loadRemoteEntry(remoteEntry: string): Promise<void> {
-    if (moduleMap[remoteEntry]) {
-        return moduleMap[remoteEntry];
+    const modulePromise = moduleMap[remoteEntry];
+
+    if (modulePromise) {
+        return modulePromise;
     }
+
+    // if we haven't a module promise we should create one
     moduleMap[remoteEntry] = new Promise<any>((resolve, reject) => {
-
-        if (moduleMap[remoteEntry]) {
-            resolve();
-            return;
-        }
-
         const script = document.createElement('script');
         script.src = remoteEntry;
 
-        script.onerror = reject;
+        script.onerror = () => {
+            reject(
+                new Error(
+                    `ModuleRemoteLoadingError: Can't fetch a remote from ${remoteEntry}`
+                )
+            );
+        };
 
         script.onload = () => {
             resolve(); // window is the global namespace
@@ -38,6 +45,7 @@ function loadRemoteEntry(remoteEntry: string): Promise<void> {
 
         document.body.append(script);
     });
+
     return moduleMap[remoteEntry];
 }
 
@@ -49,6 +57,16 @@ async function lookupExposedModule<T>(remoteName: string, exposedModule: string)
 
     await container.init(__webpack_share_scopes__.default);
     const factory = await container.get(exposedModule);
+
+    // if var factory is not a function we have a trouble with a provided module
+    if (typeof factory !== 'function') {
+        return Promise.reject(
+            new Error(
+                `ModuleExposedResolveError: Can't resolve module ${remoteName} from exposed module ${exposedModule}`
+            )
+        );
+    }
+
     const Module = factory();
     return Module as T;
 }
