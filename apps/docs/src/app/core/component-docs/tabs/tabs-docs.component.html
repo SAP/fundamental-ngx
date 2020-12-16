@@ -77,9 +77,7 @@
     Programmatic Selection
 </fd-docs-section-title>
 <description>
-    There are two ways of accomplishing this. First, the <code>selectedIndex</code> input can be used. This requires
-    maintaining a flag. The second method requires setting a template reference variable and then calling the
-    <code>selectTab(index)</code> method.
+    To programmatically open/close the tab, get tab reference and call <code>.open(true | false)</code> method.
 </description>
 <component-example>
     <fd-tab-selection-example></fd-tab-selection-example>
@@ -102,16 +100,17 @@
 <separator></separator>
 
 <fd-docs-section-title id="collapsible" componentName="tabs">
-    Collapsible Tabs
+    Collapsible Overflow
 </fd-docs-section-title>
 <description>
-    When tabs cannot fit in the navigation header, use `[collapseOverflow]="true"` to move overflowing content into
-    collapsed tabs list. To set maximum number of tabs visible in the header, use `[maxVisibleTabs]`.
+    When tabs cannot fit in the navigation header, use <code>[collapseOverflow]="true"</code> to move overflowing
+    content into
+    collapsed tabs list. To set maximum number of tabs visible in the header, use <code>[maxVisibleTabs]</code>.
 </description>
 <component-example>
-    <fd-collapsible-example></fd-collapsible-example>
+    <fd-collapsible-overflow-example></fd-collapsible-overflow-example>
 </component-example>
-<code-example [exampleFiles]="collapsibleTab"></code-example>
+<code-example [exampleFiles]="collapsibleOverflowTab"></code-example>
 
 <separator></separator>
 
@@ -120,12 +119,26 @@
 </fd-docs-section-title>
 <description>
     In stacked content mode, all of the tabs will be initially expanded and the navigation between the tabs will be
-    handled using with scroll. To enable stacked content set `[stackContent]="true"`.
+    handled using with scroll. To enable stacked content set <code>[stackContent]="true"</code>.
 </description>
 <component-example>
     <fd-stacked-content-example></fd-stacked-content-example>
 </component-example>
 <code-example [exampleFiles]="stackedTab"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="collapsible-tab" componentName="tabs">
+    Collapsible Tab
+</fd-docs-section-title>
+<description>
+    By default expanded tab can be collapsed only by opening another tab. To allow user collapsing expanded tab without
+    opening another tab use <code>[collapsibleTabs]="true"</code>.
+</description>
+<component-example>
+    <fd-tab-collapsible-example></fd-tab-collapsible-example>
+</component-example>
+<code-example [exampleFiles]="collapsibleTab"></code-example>
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-tab-list [mode]="data.properties.items.mode" [compact]="data.properties.items.compact">

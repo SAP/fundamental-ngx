@@ -79,9 +79,9 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     @Input()
     enableReordering = false;
 
-    /** Whether to enable collapsing active tab on active tab click */
+    /** Whether to enable collapsing expanded tab on expanded tab click */
     @Input()
-    expandableTabs = false;
+    collapsibleTabs = false;
 
     /** Event emitted when the selected panel changes. */
     @Output()
@@ -215,7 +215,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
                 return;
             }
 
-            const collapse = this.expandableTabs && !expand;
+            const collapse = this.collapsibleTabs && !expand;
             this._tabArray.forEach(el => {
                 const isActive = el.panel === tabPanel && !collapse;
                 el.panel._expand(isActive);
@@ -406,7 +406,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _canChangeExpandState(tabPanel: TabPanelComponent, expand: boolean): boolean {
         return !tabPanel.disabled
         && expand !== tabPanel.expanded
-        && expand === false ? this.expandableTabs : true;
+        && expand === false ? this.collapsibleTabs : true;
     }
 
     /** @hidden */

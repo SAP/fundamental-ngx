@@ -24,10 +24,12 @@
 </div>
 <div class="docs-html-example-container" [@height]="isOpen">
     <div class="docs-code-example-content">
-<!--        <fd-tab-list [(selectedIndex)]="selectedFileIndex">-->
-<!--            <fd-tab *ngFor="let file of exampleFiles" [title]="file.name || file.language | titlecase">-->
-<!--                <fd-code-snippet [file]="file"></fd-code-snippet>-->
-<!--            </fd-tab>-->
-<!--        </fd-tab-list>-->
+        <fd-tab-list>
+            <fd-tab *ngFor="let file of exampleFiles; let i = index"
+                    [title]="file.name || file.language | titlecase"
+                    (opened)="activeIndex = i">
+                <fd-code-snippet [file]="file"></fd-code-snippet>
+            </fd-tab>
+        </fd-tab-list>
     </div>
 </div>

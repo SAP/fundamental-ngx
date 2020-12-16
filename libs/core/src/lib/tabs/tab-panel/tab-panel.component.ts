@@ -77,9 +77,13 @@ export class TabPanelComponent implements OnChanges {
     @Input()
     tabState: TabItemState;
 
-    /** Event that is emitted when the tab panel . */
+    /** Event that is emitted when the tab panel has been opened. */
     @Output()
-    expandedChange = new EventEmitter<boolean>();
+    opened = new EventEmitter<void>();
+
+    /** Event that is emitted when the tab panel has been closed. */
+    @Output()
+    closed = new EventEmitter<void>();
 
     /** @hidden */
     @ContentChild(TabTitleDirective, { read: TemplateRef })
@@ -113,15 +117,15 @@ export class TabPanelComponent implements OnChanges {
     }
 
     /** Whether to expand tab panel content */
-    expand(expand: boolean): void {
-        this._expandedStateChange.next(new TabStateChange(this, expand));
+    open(open: boolean): void {
+        this._expandedStateChange.next(new TabStateChange(this, open));
     }
 
     /** @hidden Set new expand state */
     _expand(expanded: boolean): void {
         if (this._expanded !== expanded) {
             this._expanded = expanded;
-            this.expandedChange.emit(this._expanded);
+            expanded ? this.opened.emit() : this.closed.emit();
             this._changeDetRef.markForCheck();
         }
     }

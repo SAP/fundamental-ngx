@@ -1,27 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-import * as tabSrc from '!raw-loader!./examples/tabs-example.component.html';
-import * as tabCounter from '!raw-loader!./examples/tab-counter/tab-counter.component.html';
+import * as tabSrc from '!raw-loader!./examples/tabs-example/tabs-example.component.html';
+import * as tabCounter from '!raw-loader!./examples/tab-counter-example/tab-counter.component.html';
 import * as tabProcess from '!raw-loader!./examples/tab-process-example/tab-process-example.component.html';
 import * as tabIcon from '!raw-loader!./examples/tab-icon-only-example/tab-icon-only-example.component.html';
 import * as tabFilter from '!raw-loader!./examples/tab-filter-example/tab-filter-example.component.html';
-import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example.component.html';
-import * as tabSelectionSrcTs from '!raw-loader!./examples/tab-selection-example.component.ts';
+import * as tabSelectionSrc from '!raw-loader!./examples/tab-selection-example/tab-selection-example.component.html';
+import * as tabSelectionSrcTs from '!raw-loader!./examples/tab-selection-example/tab-selection-example.component.ts';
 import * as tabAddH from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.html';
 import * as tabAddT from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.ts';
 import * as tabAddS from '!raw-loader!./examples/adding-tab-example/adding-tab-example.component.scss';
-import * as collapsibleTabT from '!raw-loader!./examples/tab-collapsible-example/tab-collapsible-example.component.ts';
-import * as collapsibleTabH from '!raw-loader!./examples/tab-collapsible-example/tab-collapsible-example.component.html';
+import * as collapsibleOverflowTabT from '!raw-loader!./examples/tab-collapsible-overflow-example/tab-collapsible-overflow-example.component.ts';
+import * as collapsibleOverflowTabH from '!raw-loader!./examples/tab-collapsible-overflow-example/tab-collapsible-overflow-example.component.html';
 import * as stackedTabT from '!raw-loader!./examples/tab-stacked-content-example/tab-stacked-content-example.component.ts';
 import * as stackedTabH from '!raw-loader!./examples/tab-stacked-content-example/tab-stacked-content-example.component.html';
+import * as collapsibleTabT from '!raw-loader!./examples/tab-collapsible-example/tab-collapsible-example.component.ts';
+import * as collapsibleTabH from '!raw-loader!./examples/tab-collapsible-example/tab-collapsible-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Icons } from '../../../documentation/utilities/icons';
 
 @Component({
     selector: 'app-tabs',
-    templateUrl: './tabs-docs.component.html'
+    templateUrl: './tabs-docs.component.html',
+    styleUrls: ['tabs-docs.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TabsDocsComponent {
     static schema: Schema = {
@@ -185,18 +189,18 @@ export class TabsDocsComponent {
         }
     ];
 
-    collapsibleTab: ExampleFile[] = [
+    collapsibleOverflowTab: ExampleFile[] = [
         {
             language: 'html',
-            code: collapsibleTabH,
-            fileName: 'tab-collapsible-example',
+            code: collapsibleOverflowTabH,
+            fileName: 'tab-collapsible-overflow-example',
             scssFileCode: tabAddS
         },
         {
             language: 'typescript',
-            code: collapsibleTabT,
-            fileName: 'tab-collapsible-example',
-            component: 'TabCollapsibleExampleComponent'
+            code: collapsibleOverflowTabT,
+            fileName: 'tab-collapsible-overflow-example',
+            component: 'TabCollapsibleOverflowExampleComponent'
         }
     ];
 
@@ -204,7 +208,7 @@ export class TabsDocsComponent {
         {
             language: 'html',
             code: stackedTabH,
-            fileName: 'tab-stacked-content-example',
+            fileName: 'tab-stacked-content-example'
         },
         {
             language: 'typescript',
@@ -214,13 +218,27 @@ export class TabsDocsComponent {
         }
     ];
 
+    collapsibleTab: ExampleFile[] = [
+        {
+            language: 'html',
+            code: collapsibleTabH,
+            fileName: 'tab-collapsible-example'
+        },
+        {
+            language: 'typescript',
+            code: collapsibleTabT,
+            fileName: 'tab-collapsible-example',
+            component: 'tabCollapsibleExampleComponent'
+        }
+    ];
+
     tabSelection: ExampleFile[] = [
         {
             language: 'html',
             code: tabSelectionSrc,
             fileName: 'tab-selection-example',
             typescriptFileCode: tabSelectionSrcTs,
-            component: 'TabSelectionExampleComponent',
+            component: 'TabSelectionExampleComponent'
         }
     ];
 

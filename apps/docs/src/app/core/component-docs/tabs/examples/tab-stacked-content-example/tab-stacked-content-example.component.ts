@@ -1,10 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-stacked-content-example',
-    templateUrl: './tab-stacked-content-example.component.html',
-    encapsulation: ViewEncapsulation.None,
-    styles: ['.content-container { height: 100px; border: 1px dashed grey; padding: 0.5rem; }']
+    templateUrl: './tab-stacked-content-example.component.html'
 })
 export class TabStackedContentExampleComponent {
     tabs: { title: string, content: string }[] = [];
