@@ -12,11 +12,16 @@
             </ng-container>
         </div>
         <div class="approval-flow-node__info">
-            <div class="approval-flow-node__name" [class.approval-flow-node__name--members-count]="node.approvers.length > 1">
-                <ng-container *ngIf="node.approvers.length === 1">{{ node.approvers[0].name }}</ng-container>
-                <ng-container *ngIf="node.approvers.length > 1">
-                    {{ node.approvers.length }} <ng-container i18n="@@platformApprovalFlowNodeMembers">members</ng-container>
-                </ng-container>
+            <div
+                class="approval-flow-node__name"
+                [class.approval-flow-node__name--members-count]="node.approvers.length > 1"
+                i18n="@@platformApprovalFlowNodeMembers">
+                {
+                    node.approvers.length,
+                    plural,
+                    =1 {{{node.approvers[0].name}}}
+                    other {{{node.approvers.length}} members}
+                }
             </div>
             <div class="approval-flow-node__description">
                 {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
