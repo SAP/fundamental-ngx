@@ -204,11 +204,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         this._cd.markForCheck();
     }
     deleteToken(selectedValue): void {
-        console.log('value', selectedValue);
         if (this.tokenizer.tokenList.length > 0) {
             this.tokenizer.tokenList.forEach((token) => {
                 if (token.tokenWrapperElement.nativeElement.innerText === selectedValue.label) {
-                    console.log('token value', token.tokenWrapperElement.nativeElement.innerText);
                     this.selected.splice(this.selected.indexOf(selectedValue), 1);
                 }
             });

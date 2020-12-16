@@ -7,7 +7,7 @@ import { MultiInputSelectionChangeEvent, Status } from '@fundamental-ngx/platfor
     templateUrl: './platform-mulit-input-reactive-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformMulitInputReactiveExampleComponent implements OnInit {
+export class PlatformMulitInputReactiveExampleComponent {
     _datasource = [
         { firstName: 'Alabama', lastName: 'Montgomery' },
         { firstName: 'Alaska', lastName: 'Juneau' },
@@ -62,24 +62,16 @@ export class PlatformMulitInputReactiveExampleComponent implements OnInit {
         { firstName: 'Wyoming', lastName: 'Cheyenne' }
     ];
 
-    customForm: FormGroup;
+    customForm = new FormGroup({});
     submitted = false;
     reactiveForm = new FormControl();
-
-    ngOnInit(): void {
-        this.customForm = new FormGroup({});
-    }
 
     hasError(): boolean {
         return this.hasValue() && this.reactiveForm.touched;
     }
 
     hasValue(): boolean {
-        if (this.reactiveForm.value && this.reactiveForm.value.length) {
-            return true;
-        } else {
-            return false;
-        }
+        return !!this.reactiveForm.value?.length;
     }
 
     onSubmit(): void {
