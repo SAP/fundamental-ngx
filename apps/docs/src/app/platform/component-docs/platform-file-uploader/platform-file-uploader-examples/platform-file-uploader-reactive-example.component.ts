@@ -18,11 +18,15 @@ export class PlatformFileUploaderReactiveExampleComponent {
     handleFileSelection(files: FileUploaderSelectionChangeEvent): void {
         this.files = files.payload;
         console.log(this.customForm);
-        alert('file valid count' + this.files.length);
+        if (this.files.length > 0) {
+            alert('file uploaded' + this.files.length);
+        }
     }
     handleInvalidFileSelection(files: FileUploaderInvalidChangeEvent): void {
         this.invalidFiles = files.payload;
-        alert('file invalid count' + this.invalidFiles.length);
+        if (this.invalidFiles.length > 0) {
+            alert('file invalid uploaded' + this.invalidFiles.length);
+        }
     }
 
     onSubmit(form: NgForm): void {
