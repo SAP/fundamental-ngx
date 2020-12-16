@@ -80,7 +80,9 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
   };
 
   /** @hidden */
-  private _selectedMap: { [key: string]: boolean; } = {};
+  _selectedMap: { [key: string]: boolean; } = {};
+
+  /** @hidden */
   private selectedItems: T[] = [];
 
   /** Selection type getters */

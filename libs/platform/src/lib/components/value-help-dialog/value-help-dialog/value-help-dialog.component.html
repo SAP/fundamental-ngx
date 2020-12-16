@@ -191,6 +191,7 @@
                     <button
                         fd-button
                         fdType="transparent"
+                        *ngIf="_hasAdvanced"
                         [label]="mobile ? searchField.advancedSearchLabel : (isOpenAdvanced ? searchField.hideAdvancedSearchLabel : searchField.showAdvancedSearchLabel)"
                         [compact]="true"
                         (click)="toggleAdvancedSearch()"
@@ -233,7 +234,6 @@
 
 <ng-template #selectionContent>
     <fdp-select-tab
-        *ngIf="_displayedFilters.length; else emptyFilters"
         [selected]="value.selected"
         [uid]="id"
         [displayedData]="_displayedData"
@@ -251,18 +251,16 @@
 </ng-template>
 
 <ng-template #defineConditionsContent>
-    <ng-container *ngIf="_hasDefineFilters; else emptyFilters">
-        <fdp-define-tab
-            [included]="value.included"
-            [excluded]="value.excluded"
-            [uid]="id"
-            [tabTitle]="defineTabTitle"
-            [mobile]="mobile"
-            [filters]="_displayedFilters"
-            (includeChange)="onIncludeChange($event)"
-            (excludeChange)="onExcludeChange($event)"
-        ></fdp-define-tab>
-    </ng-container>
+    <fdp-define-tab
+        [included]="value.included"
+        [excluded]="value.excluded"
+        [uid]="id"
+        [tabTitle]="defineTabTitle"
+        [mobile]="mobile"
+        [filters]="_displayedFilters"
+        (includeChange)="onIncludeChange($event)"
+        (excludeChange)="onExcludeChange($event)"
+    ></fdp-define-tab>
 </ng-template>
 
 <ng-template #dialogTitleText>
