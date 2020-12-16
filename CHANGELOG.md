@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.69...v0.25.0-rc.70) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Platform) Duplicate selection of the dropDown values ([#4008](https://github.com/SAP/fundamental-ngx/issues/4008)) ([fc900d4](https://github.com/SAP/fundamental-ngx/commit/fc900d47cc4059facaeb0ac4224fbbb284dc42b9))
+
 ## [0.25.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.68...v0.25.0-rc.69) (2020-12-16)
 
 
