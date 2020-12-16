@@ -3,10 +3,19 @@ import { TabPanelComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-tab-selection-example',
-    templateUrl: './tab-selection-example.component.html'
+    templateUrl: './tab-selection-example.component.html',
+    styleUrls: ['tab-selection-example.component.scss']
 })
 export class TabSelectionExampleComponent {
 
     @ViewChildren(TabPanelComponent)
-    tabs: QueryList<TabPanelComponent>;
+    set setTabs(value: QueryList<TabPanelComponent>) {
+        this._tabs = value.toArray();
+    };
+
+    get tabs(): TabPanelComponent[] {
+        return this._tabs;
+    }
+
+    private _tabs: TabPanelComponent[];
 }

@@ -112,7 +112,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     contentContainer: ElementRef;
 
     /** @hidden Tabs divided into tabs visible in the tab-bar and collapsed */
-    _tabs: { [key in 'visible' | 'overflowing']: TabInfo[] } = { visible: [], overflowing: [] };
+    _visualOrder: { [key in 'visible' | 'overflowing']: TabInfo[] } = { visible: [], overflowing: [] };
 
     /** @hidden Width of the expand overflowing tabs trigger */
     _overflowTriggerWidth: number;
@@ -120,11 +120,14 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden Whether the tabs header is collapsed */
     _isCollapsed = true;
 
-    /** @hidden */
+    /** @hidden Collection of tabs in original order */
     _tabArray: TabInfo[];
 
     /** @hidden Whether to disable scroll spy */
     _disableScrollSpy = false;
+
+    /** @hidden */
+    private _numbOfVisibleTabs: number;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -157,6 +160,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden */
     _overflowingTabHeaderClickHandler(tabPanel: TabPanelComponent): void {
         this._expandTab(tabPanel, true);
+        this._resetVisualOrder();
         this._keepActiveTabVisible();
         this._changeDetectorRef.detectChanges();
     }
@@ -182,8 +186,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this._tabsService.tabSelected
             .pipe(
                 takeUntil(this._onDestroy$),
-                map(index => this._tabs.visible[index]?.panel),
-                filter(tabPanel => !!tabPanel)
+                map(index => this._visualOrder.visible[index].panel)
             ).subscribe(tabPanel => this._expandTab(tabPanel, !tabPanel.expanded));
     }
 
@@ -218,9 +221,9 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
                 el.panel._expand(isActive);
                 el.active = isActive;
             });
-            this._changeDetectorRef.detectChanges();
         }
 
+        this._changeDetectorRef.detectChanges();
         this.selectedTabChange.emit(tabPanel);
     }
 
@@ -283,27 +286,23 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this._isCollapsed = totalRequiredWidth > capacity || tabsLimit < this._tabArray.length;
 
         const requiredFreeSpace = this._isCollapsed ? this._overflowTriggerWidth : 0;
-        let numOfVisibleElements = 0;
+        this._numbOfVisibleTabs = 0;
         let capacityLeft = capacity;
 
         for (let i = 0; capacityLeft > requiredFreeSpace && this._tabArray.length > i && tabsLimit > i; i++) {
             const width = this._tabArray[i].headerWidth;
 
             if (capacityLeft - width > requiredFreeSpace) {
-                numOfVisibleElements++;
+                this._numbOfVisibleTabs++;
             }
             capacityLeft -= width;
         }
-
-        this._tabs = {
-            visible: this._tabArray.slice(0, numOfVisibleElements),
-            overflowing: this._tabArray.slice(numOfVisibleElements)
-        };
+        this._resetVisualOrder();
     };
 
     /** @hidden Check whether the active tab is visible */
     private _keepActiveTabVisible(): void {
-        const activeTab = this._tabs.overflowing.find(tab => tab.active);
+        const activeTab = this._visualOrder.overflowing.find(tab => tab.active);
 
         if (activeTab) {
             this._moveToVisible(activeTab);
@@ -313,24 +312,28 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden Make given tab visible in the tab bar*/
     private _moveToVisible(tabToMove: TabInfo): void {
         const activeTabWidth = tabToMove.headerWidth;
-        const numOfVisibleTabs = this._tabs.visible.length;
+        const numOfVisibleTabs = this._numbOfVisibleTabs;
         const capacity = getElementCapacity(this.headerContainer);
         const tabsLimit = this.maxVisibleTabs || Number.MAX_SAFE_INTEGER;
-
-        const visibleTabsWidth = this._tabs.visible.reduce((total, tab) => total + tab.headerWidth, 0);
+        const visibleTabsWidth = this._visualOrder.visible.reduce((total, tab) => total + tab.headerWidth, 0);
 
         let widthRequired = activeTabWidth - (capacity - visibleTabsWidth - this._overflowTriggerWidth);
         let numOfTabsToMove = 0;
 
-        for (let i = numOfVisibleTabs - 1; (widthRequired > 0 || numOfVisibleTabs - numOfTabsToMove + 1 < tabsLimit) && i >= 0; i--) {
+        /** As long as:
+         * - There is not enough space for tab to move
+         * - There are other tabs to move from visible to overflow
+         * - Number of visible tabs is larger than the limit */
+        for (let i = numOfVisibleTabs - 1; (widthRequired > 0 && i >= 0) || tabsLimit < numOfVisibleTabs + 1 - numOfTabsToMove; i--) {
             widthRequired -= this._tabArray[i].headerWidth;
             numOfTabsToMove++;
         }
 
-        const tabToMoveIndex = this._tabs.overflowing.indexOf(tabToMove);
-        const [selectedTab] = this._tabs.overflowing.splice(tabToMoveIndex, 1);
-        const tabsToMove = this._tabs.visible.splice(-numOfTabsToMove, numOfTabsToMove, selectedTab);
-        this._tabs.overflowing.unshift(...tabsToMove);
+        const tabToMoveIndex = this._visualOrder.overflowing.indexOf(tabToMove);
+        const [selectedTab] = this._visualOrder.overflowing.splice(tabToMoveIndex, 1);
+        const tabsToMove = this._visualOrder.visible.splice(-numOfTabsToMove, numOfTabsToMove, selectedTab);
+        this._visualOrder.overflowing.unshift(...tabsToMove);
+        this._numbOfVisibleTabs = this._visualOrder.visible.length;
     }
 
     /** @hidden */
@@ -346,7 +349,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
             map(tabPanels => tabPanels.map(el => new TabInfo(el)))
         ).subscribe(tabs => {
             this._tabArray = tabs;
-            this._tabs = { visible: tabs, overflowing: [] };
+            this._numbOfVisibleTabs = tabs.length;
+            this._resetVisualOrder();
             this._changeDetectorRef.detectChanges();
         });
 
@@ -411,5 +415,13 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
             this._scrollToPanel(tabPanel);
         }
         this._tabArray.forEach(tab => tab.active = tab.panel === tabPanel);
+    }
+
+    /** @hidden */
+    private _resetVisualOrder(): void {
+        this._visualOrder = {
+            visible: this._tabArray.slice(0, this._numbOfVisibleTabs),
+            overflowing: this._tabArray.slice(this._numbOfVisibleTabs)
+        };
     }
 }

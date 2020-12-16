@@ -5,7 +5,7 @@
     [class.fd-tabs--compact]="compact"
     [ngClass]="(mode ? 'fd-tabs--' + mode : '') + (' fd-tabs--' + size)"
 >
-    <ng-container *ngFor="let tab of _tabs.visible; let i = index; let last = last">
+    <ng-container *ngFor="let tab of _visualOrder.visible; let i = index; let last = last">
         <li fd-tab-item
             [header]="tab.isHeader"
             [tabItemState]="tab.tabState"
@@ -86,7 +86,7 @@
 
 <fd-menu #menu>
     <li fd-menu-item
-        *ngFor="let tab of _tabs.overflowing"
+        *ngFor="let tab of _visualOrder.overflowing"
         (onSelect)="_overflowingTabHeaderClickHandler(tab.panel)">
         <div fd-menu-interactive [class.is-selected]="tab.active">
             <ng-container
