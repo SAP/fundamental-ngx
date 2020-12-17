@@ -22,22 +22,22 @@
 	</a>
 	<p>Each component that is developed here needs to have corresponding <a href="https://github.com/SAP/fundamental-ngx/wiki/Platform-Library-Home">technical specification</a>, where we need to agree on several things:</p>
 	<ul>
-		<li>Component Signature</li>
-		<li>We try to capture common things among components</li>
-		<li>Functionality</li>
-		<li>We decide how much extensible the component needs to be.</li>
+		<li>  Component Signature</li>
+		<li>  We try to capture common things among components</li>
+		<li>  Functionality</li>
+		<li>  We decide how much extensible the component needs to be.</li>
 	</ul>
 	<p>As already mentioned above platform the goal is try to be closer to application developer as well as make it more ready for
 	enterprise use.</p>
 	<ul>
-		<li>Defining component model and how we work with data</li>
-		<li>Pre-defined layouts (Dashboard, detail page, master/detail page, Search/result page).</li>
+		<li>  Defining component model and how we work with data</li>
+		<li>  Pre-defined layouts (Dashboard, detail page, master/detail page, Search/result page).</li>
 	</ul>
 	<p>This <code>Platform UI library</code> is not going to be only about UI but it needs to also capture other aspects:</p>
 	<ul>
-		<li>Application state UI</li>
-		<li>Bootstrapping and Configuration</li>
-		<li>Communication with the backend system.</li>
+		<li>  Application state UI</li>
+		<li>  Bootstrapping and Configuration</li>
+		<li>  Communication with the backend system.</li>
 	</ul>
 	<a href="#api-reference" id="api-reference" style="color: inherit; text-decoration: none;">
 		<h2>API Reference</h2>
@@ -66,7 +66,7 @@
 
 @NgModule({
     ...
-    imports: [FundamentalNgxPlatformModule],
+    <span class="hljs-attr">imports</span>: [FundamentalNgxPlatformModule],
 })
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
@@ -78,7 +78,7 @@
 
 @NgModule({
     ...
-    imports: [PlatformLinkModule],
+    <span class="hljs-attr">imports</span>: [PlatformLinkModule],
 })
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
 		</li>

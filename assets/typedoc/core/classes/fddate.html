@@ -14,18 +14,32 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>FdDate<span class="tsd-signature-symbol">(</span>year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, month<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, day<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>FdDate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>FdDate<span class="tsd-signature-symbol">(</span>year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, month<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, day<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, hour<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, minute<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, second<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L52">libs/core/src/lib/calendar/models/fd-date.ts:52</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L60">libs/core/src/lib/datetime/fd-date.ts:60</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Constructor to build a FdDate object from a year, month and day.</p>
+						<p>Create FdDate instance of the current moment</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdDate</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L65">libs/core/src/lib/datetime/fd-date.ts:65</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Create FdDate</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -33,25 +47,37 @@
 					<li>
 						<h5>year: <span class="tsd-signature-type">number</span></h5>
 						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>The year of the date.</p>
-							</div>
+							<p>e.g. 2020</p>
 						</div>
 					</li>
 					<li>
-						<h5>month: <span class="tsd-signature-type">number</span></h5>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> month: <span class="tsd-signature-type">number</span></h5>
 						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>The month of the date (1-12).</p>
-							</div>
+							<p>1 = January, 12 = December</p>
 						</div>
 					</li>
 					<li>
-						<h5>day: <span class="tsd-signature-type">number</span></h5>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> day: <span class="tsd-signature-type">number</span></h5>
 						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>The day of the date (1-31, generally).</p>
-							</div>
+							<p>1 - 31</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> hour: <span class="tsd-signature-type">number</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>0 - 23</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> minute: <span class="tsd-signature-type">number</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>0 - 59</p>
+						</div>
+					</li>
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> second: <span class="tsd-signature-type">number</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>0 - 59</p>
 						</div>
 					</li>
 				</ul>
@@ -69,12 +95,44 @@
 		<div class="tsd-signature tsd-kind-icon">day<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L20">libs/core/src/lib/calendar/models/fd-date.ts:20</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L17">libs/core/src/lib/datetime/fd-date.ts:17</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Day of the date. Starts at 1.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="hour" class="tsd-anchor"></a>
+		<h3>hour</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hour<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L22">libs/core/src/lib/datetime/fd-date.ts:22</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Date hours. 0 - 23.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="minute" class="tsd-anchor"></a>
+		<h3>minute</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">minute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L27">libs/core/src/lib/datetime/fd-date.ts:27</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Date minutes. 0 - 59.</p>
 			</div>
 		</div>
 	</section>
@@ -85,12 +143,28 @@
 		<div class="tsd-signature tsd-kind-icon">month<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L15">libs/core/src/lib/calendar/models/fd-date.ts:15</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L12">libs/core/src/lib/datetime/fd-date.ts:12</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>The month of the date. 1 = January, 12 = December.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="second" class="tsd-anchor"></a>
+		<h3>second</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">second<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L32">libs/core/src/lib/datetime/fd-date.ts:32</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Date seconds. 0 - 59.</p>
 			</div>
 		</div>
 	</section>
@@ -101,7 +175,7 @@
 		<div class="tsd-signature tsd-kind-icon">year<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L10">libs/core/src/lib/calendar/models/fd-date.ts:10</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L7">libs/core/src/lib/datetime/fd-date.ts:7</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -114,24 +188,22 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getday" class="tsd-anchor"></a>
-		<h3>get<wbr>Day</h3>
+		<a name="getdayofweek" class="tsd-anchor"></a>
+		<h3>get<wbr>Day<wbr>OfWeek</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Day<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Day<wbr>OfWeek<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L95">libs/core/src/lib/calendar/models/fd-date.ts:95</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L148">libs/core/src/lib/datetime/fd-date.ts:148</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.
-							-1 is thrown when some some of properties (day,month,year) are not defined
-						Native javascript date getDay() function returns Sunday as 0, Monday as 1, etc, to it&#39;s needed to increment value</p>
+						<p>Get number of weekday ex. Sunday = 1, Monday = 2, Tuesday = 3 etc.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -149,33 +221,14 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L81">libs/core/src/lib/calendar/models/fd-date.ts:81</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L141">libs/core/src/lib/datetime/fd-date.ts:141</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get amount of milliseconds from 01.01.1970
-						-1 is thrown when some some of properties (day,month,year) are not defined</p>
+						<p>Get amount of milliseconds from 01.01.1970</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getweeknumber" class="tsd-anchor"></a>
-		<h3>get<wbr>Week<wbr>Number</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Week<wbr>Number<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L144">libs/core/src/lib/calendar/models/fd-date.ts:144</a></li>
-					</ul>
-				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 			</li>
 		</ul>
@@ -191,12 +244,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L160">libs/core/src/lib/calendar/models/fd-date.ts:160</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L162">libs/core/src/lib/datetime/fd-date.ts:162</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Method that checks validity of current FdDate object.</p>
+						<p>Method that checks validity of current FdDate instance.</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -204,47 +257,38 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="nextday" class="tsd-anchor"></a>
-		<h3>next<wbr>Day</h3>
+		<a name="settime" class="tsd-anchor"></a>
+		<h3>set<wbr>Time</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">next<wbr>Day<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Time<span class="tsd-signature-symbol">(</span>hour<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, minute<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, second<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L104">libs/core/src/lib/calendar/models/fd-date.ts:104</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L120">libs/core/src/lib/datetime/fd-date.ts:120</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get next day</p>
+						<p>Set hour, minute and second data</p>
 					</div>
 				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdDate</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="previousday" class="tsd-anchor"></a>
-		<h3>previous<wbr>Day</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">previous<wbr>Day<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L116">libs/core/src/lib/calendar/models/fd-date.ts:116</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Get previous day</p>
-					</div>
-				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>hour: <span class="tsd-signature-type">number</span></h5>
+					</li>
+					<li>
+						<h5>minute: <span class="tsd-signature-type">number</span></h5>
+					</li>
+					<li>
+						<h5>second: <span class="tsd-signature-type">number</span></h5>
+						<div class="tsd-comment tsd-typography">
+						</div>
+					</li>
+				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdDate</span></h4>
 			</li>
 		</ul>
@@ -260,7 +304,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L137">libs/core/src/lib/calendar/models/fd-date.ts:137</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L155">libs/core/src/lib/datetime/fd-date.ts:155</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -283,12 +327,58 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L69">libs/core/src/lib/calendar/models/fd-date.ts:69</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L180">libs/core/src/lib/datetime/fd-date.ts:180</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get Luxon date object converted to string from FdDate.</p>
+						<p>Get date string in yyyy-mm-dd format</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="tostring" class="tsd-anchor"></a>
+		<h3>to<wbr>String</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L169">libs/core/src/lib/datetime/fd-date.ts:169</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Get string representation in yyyy-mm-ddThh:mm:ss format</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="totimestring" class="tsd-anchor"></a>
+		<h3>to<wbr>Time<wbr>String</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">to<wbr>Time<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L191">libs/core/src/lib/datetime/fd-date.ts:191</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Get time string in hh:mm:ss format</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -296,59 +386,22 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-		<a name="getamountofweeks" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagStatic">Static</span> Get<wbr>Amount<wbr>OfWeeks</h3>
+		<a name="getfddatebydate" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>FdDate<wbr>ByDate</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-			<li class="tsd-signature tsd-kind-icon">Get<wbr>Amount<wbr>OfWeeks<span class="tsd-signature-symbol">(</span>year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, month<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, dayStart<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+			<li class="tsd-signature tsd-kind-icon">get<wbr>FdDate<wbr>ByDate<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L35">libs/core/src/lib/calendar/models/fd-date.ts:35</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L51">libs/core/src/lib/datetime/fd-date.ts:51</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Get Amount of weeks in current month/year
-							Month:  1 represents January, 2 is February, 3 is March, and so on.
-						dayStart:  1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>year: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5>month: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5><span class="tsd-flag ts-flagDefault value">Default value</span> dayStart: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-		<a name="getmodelfromdate" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Model<wbr>From<wbr>Date</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Model<wbr>From<wbr>Date<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L48">libs/core/src/lib/calendar/models/fd-date.ts:48</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p> Static function allowing convert js date object to FdDate model</p>
+						<p> Convert js date object to FdDate model</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -357,6 +410,29 @@
 						<h5>date: <span class="tsd-signature-type">Date</span></h5>
 					</li>
 				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdDate</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+		<a name="getnow" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Now</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Now<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDate</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L37">libs/core/src/lib/datetime/fd-date.ts:37</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Create FdDate instance of the current moment</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdDate</span></h4>
 			</li>
 		</ul>
@@ -372,12 +448,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/calendar/models/fd-date.ts#L25">libs/core/src/lib/calendar/models/fd-date.ts:25</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/datetime/fd-date.ts#L44">libs/core/src/lib/datetime/fd-date.ts:44</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Static function to get the current date in FdDate form.</p>
+						<p>Gets today&#39;s FdDate where hour, minute and second is set to 0</p>
 					</div>
 				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FdDate</span></h4>

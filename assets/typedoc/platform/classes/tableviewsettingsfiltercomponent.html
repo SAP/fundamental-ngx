@@ -1,0 +1,122 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fdp-table-view-settings-filter&gt;</p>
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>View settings dialog filter component.</p>
+		</div>
+		<pre><code class="language-html">// With custom form
+<span class="hljs-tag">&lt;<span class="hljs-name">fdp-table-view-settings-filter</span>
+    <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;name&quot;</span>
+    <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;Name&quot;</span>
+    <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;custom&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">fdpViewSettingsFilterCustomDef</span>=<span class="hljs-string">&quot;let model&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Enter name:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fdp-input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">&quot;model.name&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fdp-input</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">fdp-table-view-settings-filter</span>&gt;</span>
+
+// Single select
+<span class="hljs-tag">&lt;<span class="hljs-name">fdp-table-view-settings-filter</span>
+    <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;status&quot;</span>
+    <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;Status&quot;</span>
+    <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;single-select&quot;</span>
+    <span class="hljs-attr">values</span>=<span class="hljs-string">&quot;[{value: &#x27;OUT_OF_STOCK&#x27;, label: &#x27;Out of stock&#x27;}, { value: &#x27;AVAILABLE&#x27;, label: &#x27;Available&#x27;}]&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">fdp-table-view-settings-filter</span>&gt;</span></code></pre>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">TableViewSettingsFilterComponent</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="column" class="tsd-anchor"></a>
+		<h3>column</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">column<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts#L40">libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts:40</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Table column name on which to filter.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="label" class="tsd-anchor"></a>
+		<h3>label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts#L44">libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts:44</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Label for the column.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="type" class="tsd-anchor"></a>
+		<h3>type</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FilterType</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts#L51">libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts:51</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Type of filter interface.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="values" class="tsd-anchor"></a>
+		<h3>values</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TableFilterSelectOption</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts#L55">libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts:55</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Selection values for &#39;single-select&#39; or &#39;multi-select&#39; filter types.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="filtercustomdef" class="tsd-anchor"></a>
+		<h3>filter<wbr>Custom<wbr>Def</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">filter<wbr>Custom<wbr>Def<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdpViewSettingsFilterCustomDef</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts#L59">libs/platform/src/lib/components/table/components/table-view-settings-filter/table-view-settings-filter.component.ts:59</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Custom filter template directive reference</p>
+			</div>
+		</div>
+	</section>
+</section>
+</div>

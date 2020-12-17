@@ -3,10 +3,13 @@
 	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fd-dialog-footer&gt;</p>
 	<div class="tsd-comment tsd-typography">
 		<div class="lead">
-			<p>Applies fundamental layout and styling to the contents of a dialog footer.</p>
+			<p>Building block of the dialog used to create dialog button.</p>
 		</div>
-		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-dialog-footer</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-dialog-decisive-button</span>&gt;</span>Do action<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-dialog-footer</span>&gt;</span><span class="hljs-comment">&lt;!--Content--&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-dialog-footer</span>&gt;</span>
+
+Complex footer:
+<span class="hljs-tag">&lt;<span class="hljs-name">fd-dialog-footer</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ng-template</span> <span class="hljs-attr">fdTemplate</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span><span class="hljs-comment">&lt;!--Content--&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ng-template</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">fd-dialog-footer</span>&gt;</span></code></pre>
 	</div>
 </section>
@@ -14,7 +17,12 @@
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
 		<li>
-			<span class="target">DialogFooterComponent</span>
+			<span class="tsd-signature-type">DialogFooterBase</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">DialogFooterComponent</span>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </section>
@@ -22,34 +30,8 @@
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">AfterContentInit</span></li>
+		<li><span class="tsd-signature-type">AfterContentInit</span></li>
 	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Dialog<wbr>Footer<wbr>Component<span class="tsd-signature-symbol">(</span>dialogConfig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogConfig</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogFooterComponent</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/dialog/dialog-footer/dialog-footer.component.ts#L23">libs/core/src/lib/dialog/dialog-footer/dialog-footer.component.ts:23</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>dialogConfig: <span class="tsd-signature-type">DialogConfig</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DialogFooterComponent</span></h4>
-			</li>
-		</ul>
-	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
@@ -60,7 +42,7 @@
 		<div class="tsd-signature tsd-kind-icon">dialog<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DialogConfig</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a8e57a87/libs/core/src/lib/dialog/dialog-footer/dialog-footer.component.ts#L25">libs/core/src/lib/dialog/dialog-footer/dialog-footer.component.ts:25</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/1565cec07/libs/core/src/lib/dialog/dialog-footer/dialog-footer.component.ts#L24">libs/core/src/lib/dialog/dialog-footer/dialog-footer.component.ts:24</a></li>
 			</ul>
 		</aside>
 	</section>
