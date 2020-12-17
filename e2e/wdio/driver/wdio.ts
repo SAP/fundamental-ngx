@@ -187,8 +187,6 @@ export class Wdio {
         return $$(selector)[index].isClickable();
     }
 
-
-
     getUrl(): string {
         return browser.getUrl();
     }

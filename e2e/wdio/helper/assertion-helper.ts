@@ -66,3 +66,10 @@ export function checkElArrIsClickable(element: string): any {
         expect(webDriver.isElementClickable(element, i)).toBe(true);
     }
 }
+
+export function checkElementTextValue(element: string, expectation): any {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.getText(element, i)).toContain(expectation[i]);
+    }
+}

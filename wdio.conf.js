@@ -71,7 +71,7 @@ exports.config = {
             "sauce:options": {
                 screenResolution: '1920x1080',
                 name: 'e2e-win-edge',
-                tags: [ 'process.env.TRAVIS_BUILD_ID'],
+                //tags: [ 'process.env.TRAVIS_BUILD_ID'],
             }
         },
         {
