@@ -1,0 +1,33 @@
+<fd-wizard>
+    <fd-wizard-navigation>
+        <ul fd-wizard-progress-bar>
+            <li fd-wizard-step *ngFor="let step of steps; let i = index" [status]="step.status" (statusChange)="step.status = $event" [label]="step.label">
+                <fd-wizard-step-indicator [glyph]="step.glyph"></fd-wizard-step-indicator>
+                <fd-wizard-content>
+                    <h3 fd-title>{{i + 1}}. {{step.label}}</h3>
+                    <fd-message-strip type="information" [dismissible]="false">
+                        {{step.messageStrip}}
+                    </fd-message-strip>
+                    <p>
+                        {{step.contentText}}
+                    </p>
+                    <fd-wizard-next-step *ngIf="i !== steps.length - 1">
+                        <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(i + 2)">
+                            Go to Step {{i + 2}}
+                        </button>
+                    </fd-wizard-next-step>
+                </fd-wizard-content>
+            </li>
+        </ul>
+    </fd-wizard-navigation>
+    <div fd-bar barDesign="footer">
+        <div fd-bar-right>
+            <fd-bar-element>
+                <button fd-button label="Save" fdType="transparent" [compact]="true"></button>
+            </fd-bar-element>
+            <fd-bar-element>
+                <button fd-button label="Cancel" fdType="transparent" [compact]="true"></button>
+            </fd-bar-element>
+        </div>
+    </div>
+</fd-wizard>
