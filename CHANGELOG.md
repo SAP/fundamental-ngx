@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.1...v0.26.0-rc.0) (2020-12-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed DIALOG_CONFIG and DIALOG_REF and made DialogConfig and DialogRef classes injectable
+
+### Bug Fixes
+
+* (Core) remove DIALOG_CONFIG and DIALOG_REF and make DialogConfig and DialogRef injectable ([#4108](https://github.com/SAP/fundamental-ngx/issues/4108)) ([356b3bb](https://github.com/SAP/fundamental-ngx/commit/356b3bbc108ac774c089a9b2efd153aa84271cb9))
+
 ### [0.25.1](https://github.com/SAP/fundamental-ngx/compare/v0.25.1-rc.0...v0.25.1) (2020-12-17)
 
 ### [0.25.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.0...v0.25.1-rc.0) (2020-12-17)
