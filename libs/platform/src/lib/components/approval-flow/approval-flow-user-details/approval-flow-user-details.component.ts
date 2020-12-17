@@ -1,12 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Inject,
-    OnInit,
-    TemplateRef
-} from '@angular/core';
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { Observable } from 'rxjs';
 
@@ -45,7 +38,7 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     /** @hidden */
     _listItemIdPrefix = 'approval-node-user-';
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
+    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
     }
 
     /** @hidden */
