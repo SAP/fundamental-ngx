@@ -36,7 +36,6 @@ describe('Card test suite:', function() {
             checkElementTextValue(cardPg.compactCardListItems, CardData.cardListItemText);
             checkElArrIsClickable(cardPg.compactCardHeader);
             checkElArrIsClickable(cardPg.compactCardListItems);
-            // TODO: skip for IE
             if (browser.capabilities.browserName === 'internet explorer') {
                 console.log('skip');
             } else {

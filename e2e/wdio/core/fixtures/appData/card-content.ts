@@ -64,4 +64,4 @@ export default {
         'Contract C',
         'Contract D'
     ]
-}
+};
