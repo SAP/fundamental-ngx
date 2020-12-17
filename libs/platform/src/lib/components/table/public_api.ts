@@ -18,7 +18,8 @@ export {
     CollectionDateFilter,
     CollectionNumberFilter,
     CollectionStringFilter,
-    CollectionPage
+    CollectionPage,
+    TableFilterSelectOption
 } from './interfaces';
 
 export {
