@@ -125,15 +125,15 @@ exports.config = {
                 name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID,
             }
         },
-        {
-            browserName: 'safari',
-            browserVersion: '13.1',
-            platformName: 'macOS 10.15',
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
-            }
-        }
+        // {
+        //     browserName: 'safari',
+        //     browserVersion: '13.1',
+        //     platformName: 'macOS 10.15',
+        //     'sauce:options': {
+        //         screenResolution: '1920x1440',
+        //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
+        //     }
+        // }
     ],
     //
     // ===================

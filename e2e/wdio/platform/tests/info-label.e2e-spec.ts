@@ -3,7 +3,7 @@ import InfoLabelData, { semanticColorsArr } from '../fixtures/appData/info-label
 import { webDriver } from '../../driver/wdio';
 
 describe('Info Label component test suite', () => {
-    const { 
+    const {
         defaultLabel,
         labelsWithTextArr,
         labelsWithTextAndIconArr,
@@ -22,15 +22,9 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check default label info', () => {
-        if (webDriver.isBrowser('Safari')) {
-            expect(webDriver.getText(defaultLabel)).toEqual(InfoLabelData.safariDefaultLabelText);
+            expect(webDriver.getText(defaultLabel).toLowerCase()).toEqual(InfoLabelData.defaultLabelText.toLowerCase());
             expect(webDriver.getCSSPropertyByName(defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
                 .toEqual(InfoLabelData.labelContentAlignment);
-        } else {
-            expect(webDriver.getText(defaultLabel)).toEqual(InfoLabelData.defaultLabelText);
-            expect(webDriver.getCSSPropertyByName(defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
-                .toEqual(InfoLabelData.labelContentAlignment);
-        }
     });
 
     it('should check info label with text', () => {

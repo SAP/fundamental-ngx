@@ -100,8 +100,8 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check disabled checkbox', () => {
-            // TODO: Fix for Safari
-            if (!webDriver.isBrowser('Safari')) {
+            // TODO: Fix for Safari and IE
+            if (!webDriver.isIEorSafari()) {
                 webDriver.waitElementToBePresentInDOM(disabledCheckboxWithoutForm);
                 webDriver.scrollIntoView(disabledCheckboxWithoutForm);
                 webDriver.waitForDisplayed(disabledCheckboxWithoutForm);
@@ -240,11 +240,14 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check error handling form submission', () => {
-            webDriver.click(checkboxPage.submitBtn);
-            expect(webDriver.getAlertText()).toEqual('Status: VALID');
-            webDriver.acceptAlert();
-            // checks with required checkbox not marked
-
+            if (!webDriver.isIEorSafari()) {
+                webDriver.click(checkboxPage.submitBtn);
+                expect(webDriver.getAlertText()).toEqual('Status: VALID');
+                webDriver.acceptAlert();
+                // checks with required checkbox not marked
+                return;
+            }
+            console.log('Skip for Safari and IE');
         });
         it('should check error handling form submission 222 ', () => {
             if (!webDriver.isIEorSafari()) {
