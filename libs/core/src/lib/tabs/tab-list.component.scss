@@ -17,24 +17,6 @@
         overflow-y: auto;
         flex-grow: 1;
     }
-
-    &__item--overflow {
-        margin-left: auto;
-
-        &[dir="rtl"] {
-            margin-left: 0;
-            margin-right: auto;
-        }
-
-        fd-icon:not(:only-child) {
-            margin-left: 0.5rem;
-
-            &[dir="rtl"] {
-                margin-left: 0;
-                margin-right: 0.5rem;
-            }
-        }
-    }
 }
 
 // Temporary solution until the next styles release

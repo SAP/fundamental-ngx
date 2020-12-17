@@ -25,6 +25,7 @@ import { ListModule } from '../list/list.module';
 import { PopoverModule } from '../popover/popover.module';
 import { MenuModule } from '../menu/menu.module';
 import { ScrollSpyModule } from '../scroll-spy/scroll-spy.module';
+import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { ScrollSpyModule } from '../scroll-spy/scroll-spy.module';
         TabLabelDirective,
         TabProcessDirective,
         TabHeaderDirective,
+        TabItemExpandComponent,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
         TabSeparatorDirective,

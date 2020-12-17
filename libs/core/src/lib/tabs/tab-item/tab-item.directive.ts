@@ -20,7 +20,7 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
     selector: '[fd-tab-item]',
 })
 export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
-    /** @hidden Apply user custom styles */
+    /** Apply user custom styles */
     @Input()
     class = '';
 

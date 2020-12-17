@@ -63,12 +63,10 @@
         <div *ngIf="tab.isHeader" fd-tab-separator></div>
     </ng-container>
 
-    <li class="fd-tabs__item fd-tabs__item--overflow" #overflowTrigger *ngIf="_isCollapsed">
-        <a class="fd-tabs__link" [attr.tabindex]="0" [fdMenuTrigger]="menu">
-            <span *ngIf="expandOverflowText" fd-tab-tag>{{expandOverflowText}}</span>
-            <fd-icon glyph="slim-arrow-down" aria-label="See More"></fd-icon>
-        </a>
-    </li>
+    <fd-item-expand *ngIf="_isCollapsed"
+                    [fdMenuTrigger]="menu"
+                    [label]="expandOverflowText">
+    </fd-item-expand>
 </ul>
 
 <div #contentContainer
@@ -85,7 +83,7 @@
     <li fd-menu-item
         *ngFor="let tab of _visualOrder.overflowing"
         (onSelect)="_overflowingTabHeaderClickHandler(tab.panel)">
-        <div fd-menu-interactive [class.is-selected]="tab.active">
+        <div fd-menu-interactive>
             <ng-container
                 *ngTemplateOutlet="tab.titleTemplate || textTitle; context: { $implicit: tab.title }"></ng-container>
         </div>

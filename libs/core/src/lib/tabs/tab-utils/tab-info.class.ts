@@ -6,13 +6,13 @@ import { TabItemState } from '../tab-item/tab-item.directive';
 /** @hidden */
 export class TabInfo {
 
-    /** @hidden */
+    /** Whether the tab is active */
     active: boolean;
 
-    /** @hidden */
+    /** @hidden Width of the tab header */
     headerWidth: number;
 
-    /** @hidden */
+    /** Corresponding tab panel */
     panel: TabPanelComponent;
 
     /** @hidden */
@@ -21,42 +21,52 @@ export class TabInfo {
         this.active = tabPanel.expanded;
     }
 
-    get id(): string {
-        return this.panel.id;
-    }
-
-    get ariaLabel(): string {
-        return this.panel.ariaLabel;
-    }
-
-    get ariaLabelledBy(): string {
-        return this.panel.ariaLabelledBy;
-    }
-
-    get disabled(): boolean {
-        return this.panel.disabled;
-    }
-
-    get isHeader(): boolean {
-        return this.panel.header;
-    }
-
-    get tabState(): TabItemState {
-        return this.panel.tabState;
-    }
-
-    get titleTemplate(): TemplateRef<any> {
-        return this.panel.titleTemplate;
-    }
-
-    get count(): string {
-        return this.panel.count;
-    }
-
+    /** Tab header title */
     get title(): string {
         return this.panel.title;
     }
 
+    /** Whether the tab is disabled */
+    get disabled(): boolean {
+        return this.panel.disabled;
+    }
+
+    /** Whether the tab is tab header */
+    get isHeader(): boolean {
+        return this.panel.header;
+    }
+
+    /** @hidden */
+    get id(): string {
+        return this.panel.id;
+    }
+
+    /** @hidden */
+    get ariaLabel(): string {
+        return this.panel.ariaLabel;
+    }
+
+    /** @hidden */
+    get ariaLabelledBy(): string {
+        return this.panel.ariaLabelledBy;
+    }
+
+    /** @hidden */
+    get tabState(): TabItemState {
+        return this.panel.tabState;
+    }
+
+    /** @hidden */
+    get titleTemplate(): TemplateRef<any> {
+        return this.panel.titleTemplate;
+    }
+
+    /** @hidden */
+    get count(): string {
+        return this.panel.count;
+    }
+
+    /** @hidden */
     get glyph(): string {
         return this.panel.glyph;
     }

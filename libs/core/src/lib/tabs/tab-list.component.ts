@@ -18,6 +18,7 @@ import {
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { getElementCapacity, getElementWidth } from '../utils/functions';
+import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
@@ -100,7 +101,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     tabHeaders: QueryList<TabItemDirective>;
 
     /** @hidden */
-    @ViewChild('overflowTrigger', { read: ElementRef })
+    @ViewChild(TabItemExpandComponent, { read: ElementRef })
     overflowTrigger: ElementRef;
 
     /** @hidden */
