@@ -251,8 +251,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden */
     private _listenOnTabPanelsAndInitiallyExpandTabPanel(): void {
         this._tabPanelsChange$.pipe(
-            map(_ => this._tabArray.find(tab => tab.active && !tab.disabled)),
-            filter(tab => !tab),
+            filter(_ => !this._tabArray.some(tab => tab.active)),
             map(_ => this._tabArray.find(tab => !tab.disabled)),
             filter(tab => !!tab),
             delay(0)

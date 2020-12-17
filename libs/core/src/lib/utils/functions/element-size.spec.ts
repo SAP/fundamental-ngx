@@ -9,9 +9,9 @@ const ELEMENT_DIMENSIONS = { width: 100, margin: 2, padding: 5 };
     host: {
         '[style.display]': '"block"',
         '[style.box-sizing]': '"border-box"',
-        '[style.width]': 'elementDimensions.width',
-        '[style.margin]': 'elementDimensions.width',
-        '[style.padding]': 'elementDimensions.width',
+        '[style.width]': `elementDimensions.width + 'px'`,
+        '[style.margin]': `elementDimensions.margin + 'px'`,
+        '[style.padding]': `elementDimensions.padding + 'px'`,
     }
 })
 class TestComponent {
@@ -51,12 +51,5 @@ describe('Element size utils', () => {
 
         expect(getElementWidth(elementRef)).toEqual(width);
         expect(getElementWidth(elementRef, true)).toEqual(widthWithMargin);
-    });
-
-    it('should accept both ElementRef and HTMLElement', () => {
-        expect(getElementWidth(elementRef)).not.toThrow();
-        expect(getElementWidth(elementRef.nativeElement)).not.toThrow();
-        expect(getElementCapacity(elementRef)).not.toThrow();
-        expect(getElementCapacity(elementRef.nativeElement)).not.toThrow();
     });
 });
