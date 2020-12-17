@@ -50,7 +50,7 @@ do
     if [[  $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
       $NPM_BIN  publish --tag prerelease --access public
     elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
-      $NPM_BIN  publish --tag prerelease --access public
+      $NPM_BIN  publish --access public
     fi
     cd ..
 done
