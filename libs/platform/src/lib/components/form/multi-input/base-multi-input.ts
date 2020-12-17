@@ -6,7 +6,6 @@ import {
     ElementRef,
     EventEmitter,
     Host,
-    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -34,7 +33,6 @@ import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs
 import { takeUntil } from 'rxjs/operators';
 
 import {
-    DIALOG_CONFIG,
     DialogConfig,
     FocusEscapeDirection,
     KeyUtil,
@@ -304,7 +302,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         protected readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
+        @Optional() readonly dialogConfig: DialogConfig,
         protected listConfig: ListConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
