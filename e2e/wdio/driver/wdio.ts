@@ -45,6 +45,7 @@ export class Wdio {
     // Clear value before set new
     setValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+        $$(selector)[index].clearValue();
         $$(selector)[index].setValue(value);
     };
 

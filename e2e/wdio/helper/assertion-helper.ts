@@ -46,6 +46,22 @@ export class AssertionHelper {
     checkNotFocused(element: string, index: number = 0): void {
           expect($$(element)[index].isFocused()).toBe(false);
     }
+
+    checkFocused(element: string, index: number = 0): void {
+        expect($$(element)[index].isFocused()).toBe(true);
+    }
+
+    checkValueChanged(oldValue: string, newValue: string): void {
+          expect(oldValue).not.toEqual(newValue);
+    }
+
+    checkTextValue(oldValue: string, newValue: string): void {
+        expect(oldValue).toContain(newValue);
+    }
+
+    checkValueAfterClearingTheInput(oldValue: string, newValue: string): void {
+        expect(oldValue).toEqual(newValue);
+    }
 }
 
 
