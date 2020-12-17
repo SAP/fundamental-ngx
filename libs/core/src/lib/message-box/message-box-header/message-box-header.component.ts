@@ -42,6 +42,14 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
     }
 
     /** @hidden */
+    get _showSemanticIcon(): boolean {
+        if (this.messageBoxConfig.type) {
+            return this.messageBoxConfig.hideSemanticIcon ? false : true;
+        }
+        return this.messageBoxConfig.showSemanticIcon;
+    }
+
+    /** @hidden */
     ngAfterContentInit(): void {
         super.ngAfterContentInit();
     }

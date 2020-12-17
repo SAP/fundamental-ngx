@@ -9,7 +9,7 @@ export class SemanticTypesExampleComponent {
 
     constructor(private _messageBoxService: MessageBoxService) {}
 
-    open(type: MessageBoxType, customSemanticIcon?: string): void {
+    open(type: MessageBoxType, hideSemanticIcon: boolean = false, customSemanticIcon?: string): void {
         const messageBoxRef = this._messageBoxService.open(
             {
                 title: 'Fruit facts',
@@ -19,6 +19,6 @@ export class SemanticTypesExampleComponent {
                 approveButtonCallback: () => messageBoxRef.close('Approved'),
                 cancelButtonCallback: () => messageBoxRef.close('Canceled'),
                 closeButtonCallback: () => messageBoxRef.dismiss('Dismissed')
-            }, { type: type, showSemanticIcon: true, customSemanticIcon: customSemanticIcon });
+            }, { type: type, hideSemanticIcon: hideSemanticIcon, customSemanticIcon: customSemanticIcon });
     }
 }

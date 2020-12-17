@@ -6,7 +6,6 @@ import { TextData } from './component-based-message-box-example.component';
     template: `
         <fd-message-box>
             <fd-message-box-header>
-                <fd-message-box-semantic-icon></fd-message-box-semantic-icon>
                 <h1 fd-title>{{ messageBoxRef.data.title }}</h1>
             </fd-message-box-header>
             <fd-message-box-body>
