@@ -11,6 +11,7 @@ import {
 import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
+
 import { SortDirection } from '../../enums';
 
 import { CollectionFilter, TableState } from '../../interfaces';
@@ -183,16 +184,24 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
             return;
         }
 
+        this._listenToTableTriggersToOpenDialogs();
+
+        this._listenToTableColumns();
+    }
+
+    /** @hidden */
+    private _listenToTableTriggersToOpenDialogs(): void {
         this._tableSubscriptions.add(this._table.openTableSortSettings.subscribe(() => this.showSortingSettings()));
-
         this._tableSubscriptions.add(this._table.openTableFilterSettings.subscribe(() => this.showFilteringSettings()));
-
         this._tableSubscriptions.add(this._table.openTableGroupSettings.subscribe(() => this.showGroupingSettings()));
+    }
 
+    /** @hidden */
+    private _listenToTableColumns(): void {
         this._tableSubscriptions.add(
             this._table.tableColumnsStream.subscribe((columns: TableColumn[]) => {
-                this._table?.showSortSettingsInToolbar(columns.some((c) => c.sortable));
-                this._table?.showGroupSettingsInToolbar(columns.some((c) => c.groupable));
+                this._table?.showSortSettingsInToolbar(columns.some(({ sortable }) => sortable));
+                this._table?.showGroupSettingsInToolbar(columns.some(({ groupable }) => groupable));
             })
         );
     }
@@ -223,7 +232,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     }
 
     /** @hidden */
-    _unsubscribeFromTable(): void {
+    private _unsubscribeFromTable(): void {
         this._tableSubscriptions.unsubscribe();
         this._tableSubscriptions = new Subscription();
     }

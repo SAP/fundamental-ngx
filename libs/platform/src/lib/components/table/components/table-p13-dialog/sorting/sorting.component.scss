@@ -1,0 +1,19 @@
+.fdp-table-p13-sorting-dialog {
+    .sort-row {
+        display: flex;
+        margin-bottom: 0.5rem;
+
+        .fd-popover-custom {
+            display: block;
+        }
+
+        &__select {
+            flex: 1 1 0;
+            margin-right: 1rem;
+        }
+
+        &__actions {
+            margin-left: 1rem;
+        }
+    }
+}

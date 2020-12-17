@@ -36,7 +36,13 @@ import {
     TableToolbarActionsComponent,
     TableToolbarComponent,
     TableViewSettingsDialogComponent,
-    TableViewSettingsFilterComponent
+    TableViewSettingsFilterComponent,
+    TableP13DialogComponent,
+    TableP13SortComponent,
+    TableP13FilterComponent,
+    TableP13GroupComponent,
+    TableP13ColumnsComponent,
+    P13SortingComponent
 } from './components';
 import {
     FdpCellDef,
@@ -90,7 +96,13 @@ import { ValueByPathPipe } from './pipes';
         FilterSingleSelectComponent,
         FilterMultiSelectComponent,
         FilterCustomComponent,
-        ResetButtonComponent
+        ResetButtonComponent,
+        TableP13DialogComponent,
+        TableP13SortComponent,
+        TableP13FilterComponent,
+        TableP13GroupComponent,
+        TableP13ColumnsComponent,
+        P13SortingComponent
     ],
     exports: [
         TableComponent,
@@ -103,7 +115,12 @@ import { ValueByPathPipe } from './pipes';
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
         TableViewSettingsFilterComponent,
-        FdpViewSettingsFilterCustomDef
+        FdpViewSettingsFilterCustomDef,
+        TableP13DialogComponent,
+        TableP13SortComponent,
+        TableP13FilterComponent,
+        TableP13GroupComponent,
+        TableP13ColumnsComponent
     ]
 })
 export class PlatformTableModule {}

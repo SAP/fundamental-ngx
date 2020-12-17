@@ -1,11 +1,11 @@
-<fd-dialog>
+<fd-dialog class="fdp-table-p13-sorting-dialog">
     <fd-dialog-header>
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
                     <h1
                         fd-title
-                        i18n="@@platformTableSortDialogHeader"
+                        i18n="@@platformTableP13SortDialogHeader"
                     >Sort</h1>
                 </fd-bar-element>
             </div>
@@ -19,24 +19,72 @@
 
     <fd-dialog-body>
 
-        <fd-select
-            placeholder="Select an option"
-            [(value)]="sort.direction"
+        <div
+            class="sort-row"
+            *ngFor="let rule of rules; let i = index"
         >
-            <fd-option
-                [value]="SORT_DIRECTION.ASC"
-                i18n="@@platformTableSortDialogSortOrderAsc"
+            <fd-select
+                class="sort-row__select"
+                [value]="rule.columnKey"
+                (valueChange)="_onRuleColumnKeyChange(rule, $event)"
+                [compact]="true"
+                placeholder="(none)"
+                i18n-placeholder="@@platformTableP13SortDialogNoneSelected"
             >
-                Ascending
-            </fd-option>
-            <fd-option
-                [value]="SORT_DIRECTION.DESC"
-                i18n="@@platformTableSortDialogSortOrderAsc"
+                <fd-option
+                    *ngFor="let column of columns"
+                    [value]="column.key"
+                >
+                    {{column.label}}
+                </fd-option>
+            </fd-select>
+
+            <fd-select
+                class="sort-row__select"
+                [value]="rule.direction"
+                (valueChange)="_onRuleDirectionChange(rule, $event)"
+                [compact]="true"
+                placeholder="(none)"
+                i18n-placeholder="@@platformTableP13SortDialogNoneSelected"
             >
-                Descending
-            </fd-option>
-        </fd-select>
-        
+                <fd-option
+                    [value]="SORT_DIRECTION.ASC"
+                    i18n="@@platformTableSortDialogSortOrderAsc"
+                >
+                    Ascending
+                </fd-option>
+                <fd-option
+                    [value]="SORT_DIRECTION.DESC"
+                    i18n="@@platformTableSortDialogSortOrderAsc"
+                >
+                    Descending
+                </fd-option>
+            </fd-select>
+
+            <div class="sort-row__actions">
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="sys-cancel"
+                    [compact]="true"
+                    aria-label="Remove"
+                    title="Remove"
+                    (click)="_removeRule(rule)"
+                ></button>
+
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="add"
+                    [compact]="true"
+                    aria-label="Add new"
+                    title="Add new"
+                    (click)="_addNew(i)"
+                ></button>
+            </div>
+
+        </div>
+
     </fd-dialog-body>
 
     <fd-dialog-footer>

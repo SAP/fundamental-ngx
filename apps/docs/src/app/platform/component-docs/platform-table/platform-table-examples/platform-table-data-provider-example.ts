@@ -34,16 +34,22 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 
     private sort({ sortBy }: TableState): ExampleItem[] {
-        const items = this.items;
-        const sortCriteria = sortBy[0];
+        const items = this.items.slice();
 
-        if (!sortCriteria?.field) {
+        sortBy = sortBy.filter(({ field }) => !!field);
+
+        if (sortBy.length === 0) {
             return items;
         }
 
-        const ascModifier: number = sortCriteria.direction === SortDirection.ASC ? 1 : -1;
-
-        return items.slice().sort((a, b) => sort(a, b, sortCriteria.field) * ascModifier);
+        return items.sort((a, b) => {
+            return sortBy
+                .map(({ field, direction }) => {
+                    const ascModifier = direction === SortDirection.ASC ? 1 : -1;
+                    return sort(a, b, field) * ascModifier;
+                })
+                .find((result, index, list) => result !== 0 || index === list.length - 1);
+        });
     }
 
     private filter({ filterBy }: TableState): ExampleItem[] {
@@ -135,13 +141,10 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
 const sort = <T extends object>(a: T, b: T, key?: string) => {
     if (key) {
-        const aValue = getNestedValue(key, a);
-        const bValue = getNestedValue(key, b);
-
-        return aValue > bValue ? 1 : -1;
-    } else {
-        return a > b ? 1 : -1;
+        a = getNestedValue(key, a);
+        b = getNestedValue(key, b);
     }
+    return a > b ? 1 : a === b ? 0 : -1;
 };
 
 function getNestedValue<T extends {}>(key: string, object: T): any {

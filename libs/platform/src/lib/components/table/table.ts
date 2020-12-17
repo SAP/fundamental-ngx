@@ -52,6 +52,9 @@ export abstract class Table {
     /** Add Group rules to the existing ones */
     abstract addGroup(groupRules: CollectionGroup[]): void;
 
+    /** Set table columns */
+    abstract setColumns(columns: string[]): void;
+
     /** Freeze table columns to including */
     abstract freezeToColumn(columnKey: string): void;
 

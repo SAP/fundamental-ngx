@@ -23,6 +23,7 @@ import { PlatformTableSortableExampleComponent } from './platform-table-examples
 import { PlatformTableFilterableExampleComponent } from './platform-table-examples/platform-table-filterable-example.component';
 import { PlatformTableGroupableExampleComponent } from './platform-table-examples/platform-table-groupable-example.component';
 import { PlatformTableFreezableExampleComponent } from './platform-table-examples/platform-table-freezable-example.component';
+import { PlatformTableP13ExampleComponent } from './platform-table-examples/platform-table-p13-example.component';
 
 const routes: Routes = [
     {
@@ -59,7 +60,8 @@ const routes: Routes = [
         PlatformTableSortableExampleComponent,
         PlatformTableFilterableExampleComponent,
         PlatformTableGroupableExampleComponent,
-        PlatformTableFreezableExampleComponent
+        PlatformTableFreezableExampleComponent,
+        PlatformTableP13ExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

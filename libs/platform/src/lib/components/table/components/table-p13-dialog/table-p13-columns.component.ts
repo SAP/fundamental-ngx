@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /**
- * Personalization Columns.
+ * Personalization Dialog Columns Settings.
  *
  */
 @Component({

@@ -1,0 +1,50 @@
+<fdp-table
+    #table
+    [dataSource]="source"
+    contentDensity="compact"
+>
+
+    <fdp-table-toolbar
+        title="Order Line Items"
+        [hideItemCount]="false"
+    >
+    </fdp-table-toolbar>
+
+    <fdp-column
+        name="name"
+        key="name"
+        label="Name"
+        align="start"
+        [sortable]="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="description"
+        key="description"
+        label="Description"
+        [sortable]="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="price"
+        key="price.value"
+        label="Price"
+        align="end"
+        [sortable]="true"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="status"
+        key="status"
+        label="Status"
+        align="center"
+        [sortable]="true"
+    >
+    </fdp-column>
+</fdp-table>
+
+<!-- Connect P13 Dialog to the table -->
+<fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>

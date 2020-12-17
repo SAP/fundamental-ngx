@@ -378,6 +378,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._tableService.setGroups(groups);
     }
 
+    /**
+     * Set table columns list
+     * @param columns table columns names
+     */
+    setColumns(columns: string[]): void {
+        this._tableService.setColumns(columns);
+    }
+
     /** Freeze table to column */
     freezeToColumn(columnKey: string): void {
         this._tableService.freezeTo(columnKey);
@@ -563,10 +571,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return this._popoverOpen && this._popoverColumnKey === key;
     }
 
+    /** @hidden */
+    _setPopoverColumnKey(columnKey: string): void {
+        this._popoverColumnKey = columnKey;
+    }
+
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
             this._tableColumnsSubject.next(this.columns.toArray());
-        })
+        });
     }
 
     /** @hidden */
@@ -824,10 +837,5 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         return undefined;
-    }
-
-    /** @hidden */
-    _setPopoverColumnKey(columnKey: string): void {
-        this._popoverColumnKey = columnKey;
     }
 }

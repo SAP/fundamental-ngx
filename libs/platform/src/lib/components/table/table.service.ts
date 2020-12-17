@@ -5,7 +5,7 @@ import { skip } from 'rxjs/operators';
 import { SearchInput } from './interfaces/search-field.interface';
 import { CollectionFilter, CollectionGroup, CollectionSort, TableState } from './interfaces';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange } from './models';
+import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange, ColumnsChange } from './models';
 
 @Injectable()
 export class TableService {
@@ -19,6 +19,7 @@ export class TableService {
     readonly groupChange: EventEmitter<GroupChange> = new EventEmitter<GroupChange>();
     readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
     readonly searchChange: EventEmitter<SearchChange> = new EventEmitter<SearchChange>();
+    readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
 
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
@@ -136,5 +137,18 @@ export class TableService {
         this.setTableState({ ...prevState, searchInput: searchInput });
 
         this.searchChange.emit({ current: searchInput, previous: prevState.searchInput });
+    }
+
+    /** Set table columns */
+    setColumns(columns: string[]): void {
+        const prevState = this.getTableState();
+        const prevColumns = (prevState && prevState.columns) || [];
+
+        const newColumns = [...columns];
+        const state: TableState = { ...prevState, columns: newColumns };
+
+        this.setTableState(state);
+
+        this.columnsChange.emit({ current: state.columns, previous: prevColumns });
     }
 }

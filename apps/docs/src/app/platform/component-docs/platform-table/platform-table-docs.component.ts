@@ -14,6 +14,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
+
 import * as platformTableDefaultSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.html';
 import * as platformTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.ts';
 import * as platformTableCustomColumnSrc from '!raw-loader!./platform-table-examples/platform-table-custom-column-example.component.html';
@@ -30,9 +31,12 @@ import * as platformTableFilterableSrc from '!raw-loader!./platform-table-exampl
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
+import * as platformTableP13Src from '!raw-loader!./platform-table-examples/platform-table-p13-example.component.html';
+import * as platformTableP13TsSrc from '!raw-loader!./platform-table-examples/platform-table-p13-example.component.ts';
+
+import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import * as platformTableDataProviderTs from '!raw-loader!./platform-table-examples/platform-table-data-provider-example';
 import * as platformTableDataItemsTs from '!raw-loader!./platform-table-examples/platform-table-data-items-example';
-import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 
 @Component({
     selector: 'fdp-table-docs',
@@ -315,6 +319,31 @@ export class PlatformTableDocsComponent {
             code: platformTableFreezableTsSrc,
             fileName: 'platform-table-freezable-example',
             component: 'PlatformTableFreezableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataProviderTs,
+            name: 'platform-table-data-provider-example.ts'
+        },
+        {
+            language: 'typescript',
+            code: platformTableDataItemsTs,
+            name: 'platform-table-data-items-example.ts'
+        }
+    ];
+
+    p13Table: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableP13Src,
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableP13TsSrc,
+            fileName: 'platform-table-freezable-example',
+            component: 'PlatformTableP13ExampleComponent',
             name: 'platform-table-example.component.ts'
         },
         {

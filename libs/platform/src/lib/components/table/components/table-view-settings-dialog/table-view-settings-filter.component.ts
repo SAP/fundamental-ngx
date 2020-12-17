@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef } from '@angular/core';
 
 import { TableFilterSelectOption } from '../../interfaces';
 import { FilterType } from '../../enums';
@@ -8,7 +8,7 @@ import { FdpViewSettingsFilterCustomDef } from '../../directives';
  * View settings dialog filter component.
  *
  * ```html
- * // With custom form
+ * <!-- With custom form -->
  * <fdp-table-view-settings-filter
  *     column="name"
  *     label="Name"
@@ -19,7 +19,7 @@ import { FdpViewSettingsFilterCustomDef } from '../../directives';
  *         </ng-container>
  * </fdp-table-view-settings-filter>
  *
- * // Single select
+ * <!-- Single select -->
  * <fdp-table-view-settings-filter
  *     column="status"
  *     label="Status"
@@ -45,7 +45,7 @@ export class TableViewSettingsFilterComponent {
 
     /**
      * Type of filter interface.
-     * @type {'single-select' | 'multi-select' | 'custom' 'category'} 
+     * @type {'single-select' | 'multi-select' | 'custom' 'category'}
      */
     @Input()
     type: FilterType;

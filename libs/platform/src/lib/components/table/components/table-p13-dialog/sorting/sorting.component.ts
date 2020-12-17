@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
@@ -21,27 +21,31 @@ export interface SortDialogResultData {
     collectionSort: CollectionSort[];
 }
 
-const NOT_SORTED_OPTION_VALUE = null;
+const NOT_SELECTED_OPTION_VALUE = null;
+
+class SortRule {
+    /** Indicates if rule fulfilled properly */
+    get isEmpty(): boolean {
+        return this.columnKey === NOT_SELECTED_OPTION_VALUE || this.direction === NOT_SELECTED_OPTION_VALUE;
+    }
+
+    constructor(
+        /** Column key the rule belongs to */
+        public columnKey: string = NOT_SELECTED_OPTION_VALUE,
+        /** Sort direction */
+        public direction: SortDirection = SortDirection.ASC
+    ) {}
+}
 
 @Component({
     templateUrl: './sorting.component.html',
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: SortingComponent }],
+    styleUrls: ['./sorting.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13SortingComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SortingComponent implements Resettable {
-    /** Initial sortBy collection */
-    initialCollectionSort: CollectionSort[];
-
-    /** Active sortBy collection */
-    collectionSort: CollectionSort[];
-
-    /** Current selected direction */
-    direction: SortDirection;
-
-    /** Current selected field */
-    field: string;
-
-    /** Table columns */
+export class P13SortingComponent implements Resettable {
+    /** Table columns available for sorting */
     readonly columns: SortDialogColumn[] = [];
 
     /** @hidden */
@@ -52,21 +56,28 @@ export class SortingComponent implements Resettable {
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
 
-    /** @hidden */
-    readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
+    /** Initial sortBy collection */
+    initialCollectionSort: CollectionSort[];
+
+    /** Sort rules to render */
+    rules: SortRule[] = [];
+
+    /** Columns available for selection in dropdown */
+    availableColumns: SortDialogColumn[] = [];
 
     constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
-        const {columns, collectionSort}: SortDialogData = this.dialogRef.data;
+        const { columns, collectionSort }: SortDialogData = this.dialogRef.data;
 
-        this.initialCollectionSort = this._copySortList(collectionSort);
+        this.initialCollectionSort = [...collectionSort];
+
         this.columns = columns || [];
 
-        this.collectionSort = this._copySortList(this.initialCollectionSort);
+        this._initiateRules();
     }
 
     /** Reset changes to the initial state */
     reset(): void {
-        this.collectionSort = this._copySortList(this.initialCollectionSort);
+        this._initiateRules();
         this._isResetAvailableSubject$.next(false);
     }
 
@@ -77,20 +88,9 @@ export class SortingComponent implements Resettable {
 
     /** Confirm changes and close dialog */
     confirm(): void {
-        const result: SortDialogResultData = { collectionSort: this.collectionSort };
+        const collectionSort = this._getCollectionSortFromSortRules(this._getUniqueSortRules(this.rules));
+        const result: SortDialogResultData = { collectionSort: collectionSort };
         this.dialogRef.close(result);
-    }
-
-    /** @hidden */
-    _sortDirectionChange(direction: SortDirection): void {
-        this.direction = direction;
-        this._onModelChange();
-    }
-
-    /** @hidden */
-    _sortFieldChange(field: string): void {
-        this.field = field;
-        this._onModelChange();
     }
 
     /** @hidden */
@@ -99,7 +99,73 @@ export class SortingComponent implements Resettable {
     }
 
     /** @hidden */
-    private _copySortList(list: CollectionSort[] | null): CollectionSort[] {
-        return (list || []).map(v => ({...v}));
+    _removeRule(rule: SortRule): void {
+        this.rules = this.rules.filter((_rule) => _rule !== rule);
+
+        // Keep at least one item in the least
+        if (this.rules.length === 0) {
+            this.rules.push(new SortRule());
+        }
+
+        this._onModelChange();
     }
+
+    /** @hidden */
+    _addNew(index: number): void {
+        this.rules.splice(index + 1, 0, new SortRule());
+    }
+
+    /** @hidden */
+    _onRuleColumnKeyChange(rule: SortRule, columnKey: string): void {
+        rule.columnKey = columnKey;
+        this._onModelChange();
+    }
+
+    /** @hidden */
+    _onRuleDirectionChange(rule: SortRule, direction: SortDirection): void {
+        rule.direction = direction;
+        this._onModelChange();
+    }
+
+    /** @hidden */
+    private _initiateRules(): void {
+        this.rules = this._createSortRules(this.initialCollectionSort);
+
+        // Keep at least one item in the least
+        if (this.rules.length === 0) {
+            this.rules.push(new SortRule());
+        }
+    }
+
+    /** @hidden */
+    private _createSortRules(collectionSort: CollectionSort[] = []): SortRule[] {
+        return collectionSort.map(({ field, direction }): SortRule => new SortRule(field, direction));
+    }
+
+    /** @hidden */
+    private _getCollectionSortFromSortRules(rules = this.rules): CollectionSort[] {
+        return rules.filter(this._isSortRuleValid).map(
+            ({ columnKey, direction }): CollectionSort => ({
+                field: columnKey,
+                direction: direction
+            })
+        );
+    }
+
+    /** @hidden */
+    private _getUniqueSortRules(rules: SortRule[]): SortRule[] {
+        return Array.from(
+            rules
+                .reduce((map, rule) => {
+                    // In order to keep right order need to delete previous value
+                    map.delete(rule.columnKey);
+                    map.set(rule.columnKey, rule);
+                    return map;
+                }, new Map<string, SortRule>())
+                .values()
+        );
+    }
+
+    /** @hidden */
+    private _isSortRuleValid = (rule: SortRule): boolean => !rule?.isEmpty;
 }
