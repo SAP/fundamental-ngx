@@ -404,6 +404,25 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             item._noSeperator = this.noSeperator;
             this.stateChanges.next(item);
         });
+
+
+        const indicators = this.itemEl.nativeElement.querySelectorAll('fd-busy-indicator');
+        if (indicators !== null && indicators !== undefined) { 
+            indicators.forEach((indicator) => {
+                if (indicator) {
+                    indicator.setAttribute('aria-label', '');
+                }
+            });
+        }
+
+        // const listitemsWithRole = this.itemEl.nativeElement.querySelectorAll('.fd-list__item');
+        // if(listitemsWithRole !== null && listitemsWithRole !== undefined) { 
+        //     listitemsWithRole.forEach((listitemWithRole) => {
+        //         if (listitemWithRole) {
+        //             listitemWithRole.setAttribute('role',' ');
+        //         }
+        //     });
+        // }
     }
 
 
@@ -723,7 +742,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
 @Component({
     selector: 'fdp-list-footer',
-    template: `<li #listfooter class="fd-list__footer" [attr.id]="id" role="listitem">
+    template: `<li #listfooter class="fd-list__footer" [attr.id]="id" role="option">
     <ng-content> </ng-content>
     </li>`
 })
@@ -731,7 +750,7 @@ export class ListFooter extends BaseComponent { }
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: `<li #listItem fd-list-group-header [attr.id]="id" role="listitem"
+    template: `<li #listItem fd-list-group-header [attr.id]="id" role="option"
     tabindex="0">
     {{grpheaderTitle}} <ng-content></ng-content>
 </li>`

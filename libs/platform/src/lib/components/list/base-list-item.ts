@@ -265,11 +265,16 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             currentitem.classList.add('fd-list-item__no-seprator');
         }
         if (currentitem) {
-        currentitem.removeAttribute('role');
+        currentitem.setAttribute('role', 'option');
         if (currentitem.parentNode) {
         currentitem.parentNode.removeAttribute('title');
         currentitem.parentNode.removeAttribute('aria-label');
-            }
+        if (this.selectRow || 
+            this.selectionMode === 'multi' || 
+            this.selectionMode === 'single') {
+        currentitem.parentNode.setAttribute('aria-selected', this._selected ? this._selected : false);
+        }      
+    }
         }
     }
 

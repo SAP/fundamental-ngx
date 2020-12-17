@@ -5,7 +5,7 @@
         [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
         [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
         <a #link fd-list-link [routerLink]="routerLink" [navigationIndicator]="navigationIndicator"
-            [navigated]="navigated">
+            [navigated]="navigated" [attr.aria-label]="navigationIndicator ? title+'has details' :''">
             <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
         </a>
     </li>
