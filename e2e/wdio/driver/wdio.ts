@@ -169,7 +169,7 @@ export class Wdio {
     }
 
     scrollIntoView(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
-        $$(selector)[index].scrollIntoView();
+        $$(selector)[index].scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
     }
 
     isElementClickable(selector: string, index: number = 0): boolean {
