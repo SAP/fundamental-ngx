@@ -1,12 +1,12 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
+import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 import { TabsModule } from './tabs.module';
 import { whenStable } from '../utils/tests';
 
 @Component({
-    selector: 'fd-test-tabs',
     template: `
         <fd-tab-list>
             <fd-tab title="Link" id="tab1">
@@ -24,11 +24,15 @@ import { whenStable } from '../utils/tests';
         </fd-tab-list>`
 })
 class TestTabsComponent {
+    @ViewChildren(TabPanelComponent)
+    tabs: QueryList<TabPanelComponent>;
+
     showDisabled = true;
 }
 
 describe('TabListComponent', () => {
     let component: TabListComponent;
+    let testComponent: TestTabsComponent;
     let fixture: ComponentFixture<TestTabsComponent>;
 
     beforeEach(async(() => {
@@ -40,6 +44,7 @@ describe('TabListComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestTabsComponent);
+        testComponent = fixture.componentInstance;
         component = fixture.debugElement.children[0].componentInstance;
         fixture.detectChanges();
     });
@@ -48,102 +53,88 @@ describe('TabListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should handle ngAfterContentInit', () => {
-        component.ngAfterViewInit();
-        expect(component.selectedIndex).toBe(0);
-        expect(component.tabHeaderLinks.length).toBe(4);
+    it('should initially open first tab', async () => {
+        await whenStable(fixture);
+        expect(testComponent.tabs.first.expanded).toBeTrue();
     });
 
-    it('should select tab', fakeAsync(() => {
-        component.ngAfterViewInit();
-        component.selectTab(3);
+    it('should update tab storing structures', async () => {
+        await whenStable(fixture);
+        expect(component._tabArray.length).toBe(4);
+        expect(component._visualOrder.visible.length).toBe(4);
+    });
 
-        tick(10);
-        fixture.detectChanges();
-        expect(component.selectedIndex).toBe(3);
-    }));
+    it('should select tab', async () => {
+        await whenStable(fixture);
+        const tabChangeSpy = spyOn(component.selectedTabChange, 'emit');
+        const firstActiveTab = testComponent.tabs.first;
+        const secondActiveTab = testComponent.tabs.last;
 
-    it('should call reset tab', fakeAsync(() => {
-        spyOn((component as any), '_resetTabHook').and.callThrough();
-        component.ngAfterViewInit();
-        component.selectTab(3);
+        secondActiveTab.open(true);
 
-        tick(10);
-        fixture.detectChanges();
+        await whenStable(fixture);
 
-        fixture.componentInstance.showDisabled = false;
-        fixture.detectChanges();
-        tick(10);
-        fixture.detectChanges();
-        expect((component as any)._resetTabHook).toHaveBeenCalled();
+        expect(tabChangeSpy).toHaveBeenCalled();
+        expect(firstActiveTab.expanded).toBeFalse();
+        expect(secondActiveTab.expanded).toBeTrue();
+    });
 
-    }));
-
-    it('should not call reset tab', fakeAsync(() => {
-        spyOn((component as any), '_resetTabHook').and.callThrough();
-        component.ngAfterViewInit();
-        component.selectTab(2);
-
-        tick(10);
-        fixture.detectChanges();
+    it('should update on tab panels change', async () => {
+        await whenStable(fixture);
 
         fixture.componentInstance.showDisabled = false;
-        fixture.detectChanges();
-        tick(10);
-        fixture.detectChanges();
-        expect((component as any)._resetTabHook).not.toHaveBeenCalled();
 
-    }));
+        await whenStable(fixture);
 
-    it('should not select out of range tab', fakeAsync(() => {
-        component.ngAfterViewInit();
-        component.selectTab(1);
+        expect(component._tabArray.length).toBe(3);
+        expect(component._visualOrder.visible.length).toBe(3);
+    });
 
-        tick(10);
-        fixture.detectChanges();
-        expect(component.selectedIndex).toBe(1);
+    it('should keep active element after tab panels change', async () => {
+        await whenStable(fixture);
 
-        component.selectTab(7);
+        testComponent.tabs.last.open(true);
 
-        tick(10);
-        fixture.detectChanges();
-        expect(component.selectedIndex).toBe(1);
-    }));
+        await whenStable(fixture);
 
-    it('should call select tab on service event', fakeAsync(() => {
-        component.ngAfterViewInit();
-        component.selectTab(1);
+        const tabChangeSpy = spyOn(component.selectedTabChange, 'emit');
+        fixture.componentInstance.showDisabled = false;
 
-        tick(10);
-        fixture.detectChanges();
-        expect(component.selectedIndex).toBe(1);
+        await whenStable(fixture);
 
-        spyOn((component as any), 'selectTab').and.callThrough();
+        expect(tabChangeSpy).toHaveBeenCalled();
+    });
+
+    it('should call select tab on service event', async () => {
+        await whenStable(fixture);
 
         (component as any)._tabsService.tabSelected.next(2);
 
-        tick(10);
-        fixture.detectChanges();
-        expect(component.selectTab).toHaveBeenCalledWith(2, true);
-        expect(component.selectedIndex).toBe(2);
-    }));
+        await whenStable(fixture);
+
+        expect(component._tabArray[2].active).toBeTrue();
+    });
 });
 
 const NUMBER_OF_TABS = 10;
 
 @Component({
-    selector: 'fd-test-tabs',
     template: `
         <div style="width: 400px">
-            <fd-tab-list [collapseOverflow]="collapseOverflow" [maxVisibleTabs]="maxVisibleTabs">
+            <fd-tab-list [collapseOverflow]="collapseOverflow" [maxVisibleTabs]="maxVisibleTabs"
+                         [collapsibleTabs]="true">
                 <fd-tab *ngFor="let title of tabs" [title]="title">{{title}} content</fd-tab>
             </fd-tab-list>
         </div>
     `
 })
 class TestCollapsibleTabsComponent {
-    @ViewChild(TabListComponent)
-    tabListComponent;
+
+    @ViewChild(TabListComponent, { static: true })
+    tabList: TabListComponent;
+
+    @ViewChildren(TabPanelComponent)
+    tabPanels: QueryList<TabPanelComponent>;
 
     maxVisibleTabs = 10;
     collapseOverflow = false;
@@ -160,7 +151,6 @@ describe('TabListComponent', () => {
     let component: TabListComponent;
     let testComponent: TestCollapsibleTabsComponent;
     let fixture: ComponentFixture<TestCollapsibleTabsComponent>;
-    const getGroupedTabs = tabsComponent => [tabsComponent['_tabs'].visible, tabsComponent['_tabs'].overflowing];
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -172,38 +162,46 @@ describe('TabListComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCollapsibleTabsComponent);
         testComponent = fixture.componentInstance;
-        component = fixture.componentInstance.tabListComponent;
         fixture.detectChanges();
+        component = fixture.componentInstance.tabList;
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should collapse tabs', (async () => {
+    it('should collapse tabs', async () => {
         await whenStable(fixture);
-        const [visibleTabs, overflowingTabs] = getGroupedTabs(component);
+        const numOfVisibleTabs = component._visualOrder.visible.length;
+        const numOfOverflowingTabs = component._visualOrder.overflowing.length;
 
-        expect(visibleTabs.length + overflowingTabs.length === NUMBER_OF_TABS).toBeTrue();
-        expect(overflowingTabs.length > 0).toBeTrue();
-    }));
+        expect(numOfVisibleTabs + numOfOverflowingTabs === NUMBER_OF_TABS).toBeTrue();
+        expect(component._tabArray.length === NUMBER_OF_TABS).toBeTrue();
+        expect(numOfOverflowingTabs > 0).toBeTrue();
+    });
 
-    it('should cache tabs width', (async () => {
-        await whenStable(fixture);
-        expect(component['_tabHeadersWidth'].length === NUMBER_OF_TABS).toBeTrue();
-    }));
-
-    it('should respect maximum number of visible tabs', (async () => {
+    it('should respect maximum number of visible tabs', async () => {
         await whenStable(fixture);
 
         testComponent.maxVisibleTabs = 1;
 
-        fixture.detectChanges();
         await whenStable(fixture);
 
-        const [visibleTabs, overflowingTabs] = getGroupedTabs(component);
+        const numOfVisibleTabs = component._visualOrder.visible.length;
+        const numOfOverflowingTabs = component._visualOrder.overflowing.length;
 
-        expect(visibleTabs.length).toEqual(1);
-        expect(overflowingTabs.length).toEqual(9);
-    }));
+        expect(numOfVisibleTabs).toEqual(1);
+        expect(numOfOverflowingTabs).toEqual(9);
+    });
+
+    it('should collapse active tab', async () => {
+        await whenStable(fixture);
+
+        testComponent.tabPanels.first.open(false);
+
+        await whenStable(fixture);
+
+        const someTabActive = component._tabArray.some(tab => tab.active);
+        expect(someTabActive).toBeFalse();
+    });
 });
