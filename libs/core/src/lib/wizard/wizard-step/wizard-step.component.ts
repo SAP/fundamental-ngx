@@ -196,6 +196,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     removeFromDom(): void {
-        this._elRef.nativeElement.remove();
+        if (this._elRef.nativeElement.parentNode) {
+            this._elRef.nativeElement.parentNode.removeChild(this._elRef.nativeElement);
+        }
     }
 }

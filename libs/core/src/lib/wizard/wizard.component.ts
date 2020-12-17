@@ -265,19 +265,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
              If the step is completed and appendToWizard is true, hide the nextStep button, unless it's the last step,
              or if there's a summary and it is the second to last step
              */
-            if (
-                step.completed &&
-                this.appendToWizard &&
-                (this.steps.last.isSummary
-                    ? step !== this.steps.toArray()[this.steps.length - 2]
-                    : step !== this.steps.last)
-            ) {
+            if (step.completed && this.appendToWizard && step !== this._getLastNonSummaryStep()) {
                 step.content.nextStep._getElRef().nativeElement.style.display = 'none';
             } else if (
                 (step.completed && this.appendToWizard) ||
                 (step.visited && step.branching && step.status === CURRENT_STEP_STATUS)
             ) {
-                step.content.nextStep._getElRef().nativeElement.style.display = 'inherit';
+                step.content.nextStep._getElRef().nativeElement.style.removeProperty('display');
             }
             if (
                 step.visited ||
@@ -366,12 +360,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 }
             }
         });
-
-        if (this.steps.last.isSummary) {
-            this.steps.toArray()[this.steps.length - 2].stepIndicator.setStackedItems(this.stackedStepsRight);
-        } else {
-            this.steps.last.stepIndicator.setStackedItems(this.stackedStepsRight);
-        }
+        this._getLastNonSummaryStep().stepIndicator.setStackedItems(this.stackedStepsRight);
     }
 
     /** @hidden */
@@ -405,39 +394,33 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _setFinalStep(): void {
-        if (this.steps.last.isSummary && this.steps.toArray()[this.steps.length - 2]) {
-            this.steps.toArray()[this.steps.length - 2].content.tallContent = true;
-            this.steps.toArray()[this.steps.length - 2].finalStep = true;
+        const lastNonSummaryStep = this._getLastNonSummaryStep();
+        if (this.steps.last.isSummary && lastNonSummaryStep) {
+            lastNonSummaryStep.content.tallContent = true;
+            lastNonSummaryStep.finalStep = true;
             // TODO: remove the line below when https://github.com/SAP/fundamental-styles/issues/1978 is addressed
-            this.steps.toArray()[this.steps.length - 2].completed = false;
+            lastNonSummaryStep.completed = false;
             this.steps.last.removeFromDom();
-        } else if (this.steps.last) {
-            if (this.steps.last.content) {
-                this.steps.last.content.tallContent = true;
+        } else if (lastNonSummaryStep) {
+            if (lastNonSummaryStep.content) {
+                lastNonSummaryStep.content.tallContent = true;
             }
-            this.steps.last.finalStep = true;
+            lastNonSummaryStep.finalStep = true;
         }
     }
 
     /** @hidden */
     private _showSummary(): void {
-        const summary = this.steps.filter((step) => {
+        const summary = this.steps.find((step) => {
             return step.isSummary;
         });
-        summary[0].content.tallContent = true;
-        this.contentTemplates = [summary[0].content.contentTemplate];
+        summary.content.tallContent = true;
+        this.contentTemplates = [summary.content.contentTemplate];
     }
 
     /** @hidden */
     private _isCurrentStepSummary(): boolean {
-        let retVal = false;
-        this.steps.forEach((step) => {
-            if (step.status === CURRENT_STEP_STATUS && step.isSummary) {
-                retVal = true;
-            }
-        });
-
-        return retVal;
+        return this.steps.some((step) => step.status === CURRENT_STEP_STATUS && step.isSummary);
     }
 
     /** @hidden */
@@ -480,6 +463,18 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => {
             (document.activeElement as HTMLElement).blur(); // this function can focus step indicators undesirably
         });
+    }
+
+    /** @hidden */
+    private _getLastNonSummaryStep(): WizardStepComponent {
+        let retVal;
+        if (this.steps.last.isSummary) {
+            retVal = this.steps.toArray()[this.steps.length - 2];
+        } else {
+            retVal = this.steps.last;
+        }
+
+        return retVal;
     }
 
     /** @hidden */

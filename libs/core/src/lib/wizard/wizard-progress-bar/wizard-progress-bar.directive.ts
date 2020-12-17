@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -13,27 +13,19 @@ export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
         '[class.fd-wizard__progress-bar--xl]': 'size === "xl"'
     }
 })
-export class WizardProgressBarDirective implements OnInit {
+export class WizardProgressBarDirective {
     /**
      * Size of the wizard progress bar.
      */
     @Input()
     size: WizardSize;
 
-    /** @hidden */
-    initDisplay: string;
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.initDisplay = this._elRef.nativeElement.style.display;
-    }
-
     constructor(private _elRef: ElementRef) {}
 
     /** @hidden */
     setCssDisplay(visible: boolean): void {
         if (visible) {
-            this._elRef.nativeElement.style.display = this.initDisplay;
+            this._elRef.nativeElement.style.removeProperty('display');
         } else {
             this._elRef.nativeElement.style.display = 'none';
         }
