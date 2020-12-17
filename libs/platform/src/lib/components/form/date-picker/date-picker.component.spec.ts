@@ -68,7 +68,7 @@ class TestDatePickerComponent {
     datePickerFormData = { birthday: this.birthday };
 }
 
-fdescribe('TestDatePickerComponent', () => {
+describe('TestDatePickerComponent', () => {
     let host: TestDatePickerComponent;
     let fixture: ComponentFixture<TestDatePickerComponent>;
     let adapter: FdDatetimeAdapter;
