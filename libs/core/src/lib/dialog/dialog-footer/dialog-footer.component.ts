@@ -42,22 +42,6 @@ export class DialogFooterComponent extends DialogFooterBase implements AfterCont
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._listenForButtonChanges();
-    }
-
-    /** @hidden */
-    private _listenForButtonChanges(): void {
-        const addClassToButton = (button: ButtonComponent) => {
-            if (button && !button.class.includes(DialogButtonClass)) {
-                button.class = button.class + DialogButtonClass;
-                button.buildComponentCssClass();
-            }
-        }
-
-        this.buttons.changes.pipe(startWith(1)).subscribe(
-            _ => this.buttons.forEach(button => {
-                addClassToButton(button._buttonComponent)
-            })
-        );
+        this._listenForButtonChanges(DialogButtonClass);
     }
 }
