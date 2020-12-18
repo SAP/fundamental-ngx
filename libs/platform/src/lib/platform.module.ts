@@ -38,6 +38,7 @@ import { PlatformTableModule } from './components/table/table.module';
 import { PlatformDatetimePickerModule } from './components/form/datetime-picker/datetime-picker.module';
 import { PlatformMultiInputMobileModule } from './components/form/multi-input/multi-input-mobile/multi-input-mobile.module';
 import { PlatformFeedInputModule } from './components/feed-input/feed-input.module';
+import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -46,6 +47,7 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
         PlatformButtonModule,
         PlatformCheckboxModule,
         PlatformCheckboxGroupModule,
+        PlatformDatePickerModule,
         PlatformSearchFieldModule,
         PlatformActionBarModule,
         PlatformActionButtonGroupModule,

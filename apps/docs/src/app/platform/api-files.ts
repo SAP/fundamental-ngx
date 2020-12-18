@@ -9,6 +9,7 @@ export const API_FILES = {
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     checkboxGroup: ['CheckboxGroupComponent'],
+    datePicker: ['PlatformDatetimePickerComponent'],
     datetimePicker: ['PlatformDatetimePickerComponent'],
     dynamicPage: [
         'DynamicPageComponent',

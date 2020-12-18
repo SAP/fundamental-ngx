@@ -24,6 +24,8 @@ export * from './switch/switch/switch.component';
 export * from './text-area/text-area.module';
 export * from './text-area/text-area.config';
 export * from './text-area/text-area.component';
+export * from './date-picker/date-picker.component';
+export * from './date-picker/date-picker.module';
 export * from './datetime-picker/datetime-picker.module';
 export * from './datetime-picker/datetime-picker.component';
 export * from './step-input/public_api';
