@@ -126,28 +126,17 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fd-dialog-decisive-button
+            <fd-button-bar
                     fdType="emphasized"
                     label="Continue"
-                    [compact]="true"
-                    (click)="dialog.close('Continue')"
-                ></button>
-            </fd-dialog-footer-button>
-
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
+                    type="submit"
+                    (click)="dialog.close('Continue')">
+            </fd-button-bar>
+            <fd-button-bar
                     fd-initial-focus
-                    fd-dialog-decisive-button
-                    fdType="transparent"
                     label="Cancel"
-                    [compact]="true"
-                    (click)="dialog.dismiss()"
-                ></button>
-            </fd-dialog-footer-button>
+                    (click)="dialog.dismiss()">
+            </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

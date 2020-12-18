@@ -66,26 +66,16 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fd-dialog-decisive-button
+                <fd-button-bar
                         fdType="emphasized"
                         label="Save"
-                        [compact]="true"
                         (click)="save()">
-                    </button>
-                </fd-dialog-footer-button>
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fd-dialog-decisive-button
-                        fdType="transparent"
+                </fd-button-bar>
+                <fd-button-bar
+                        fd-initial-focus
                         label="Cancel"
-                        [compact]="true"
                         (click)="dismiss()">
-                    </button>
-                </fd-dialog-footer-button>
+                </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>
     `

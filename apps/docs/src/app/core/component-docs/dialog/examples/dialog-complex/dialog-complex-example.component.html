@@ -52,17 +52,13 @@
                     <fd-bar-element> Total price: {{ totalPrice }}€ </fd-bar-element>
                 </div>
                 <div fd-bar-right>
-                    <fd-bar-element>
-                        <button
-                            fd-button
-                            fd-dialog-decisive-button
+                    <fd-button-bar
+                            fd-initial-focus
                             glyph="cart"
                             fdType="emphasized"
                             label="Checkout"
-                            [compact]="true"
                             (click)="checkout()">
-                        </button>
-                    </fd-bar-element>
+                    </fd-button-bar>
                 </div>
             </ng-template>
         </fd-dialog-footer>
