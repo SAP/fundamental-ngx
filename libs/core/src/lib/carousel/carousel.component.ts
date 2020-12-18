@@ -304,18 +304,22 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
+    _isRtl(): boolean {
+        return this._rtlService?.rtl.getValue();
+    }
+
     /** @hidden */
     @HostListener('keydown.arrowright', ['$event'])
     onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
-        this.next();
+        this._isRtl() ? this.previous() : this.next();
     }
 
     /** @hidden */
     @HostListener('keydown.arrowleft', ['$event'])
     onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
-        this.previous();
+        this._isRtl() ? this.next() : this.previous();
     }
 
     /** Transitions to the previous slide in the carousel. */
