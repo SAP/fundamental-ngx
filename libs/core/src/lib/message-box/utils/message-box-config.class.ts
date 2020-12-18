@@ -18,6 +18,5 @@ export interface MessageBoxConfigurableElement {
 export class MessageBoxConfig<T = any> extends DialogConfigBase<T> {
     type?: MessageBoxType;
     showSemanticIcon?: boolean = false;
-    hideSemanticIcon?: boolean = false;
     customSemanticIcon?: string;
 }

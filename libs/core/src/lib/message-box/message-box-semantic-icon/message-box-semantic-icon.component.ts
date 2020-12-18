@@ -14,7 +14,7 @@ import {
  */
 @Component({
     selector: 'fd-message-box-semantic-icon',
-    template: `<i [ngClass]="'sap-icon--' + _semanticIcon" role="presentation"></i>`,
+    template: `<i [ngClass]="'sap-icon--' + _getIcon" role="presentation"></i>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxSemanticIconComponent, multi: true }
@@ -36,29 +36,25 @@ export class MessageBoxSemanticIconComponent implements MessageBoxConfigurableEl
     }
 
     /** @hidden */
+    get _getIcon(): string {
+        return this.glyph || this.messageBoxConfig.customSemanticIcon || this._semanticIcon;
+    }
+    
+    /** @hidden */
     get _semanticIcon(): string {
-        if (this.glyph) {
-            return this.glyph;
-        }
-        if (this.messageBoxConfig.customSemanticIcon) {
-            return this.messageBoxConfig.customSemanticIcon;
-        }
-        if (this.messageBoxConfig.type) {
-            switch (this.messageBoxConfig.type) {
-                case 'error':
-                    return 'message-error';
-                case 'success':
-                    return 'message-success';
-                case 'warning':
-                    return 'message-warning';
-                case 'information':
-                    return 'message-information';
-                case 'confirmation':
-                    return 'question-mark';
-                default:
-                    return '';
-            }
-        }
-        return '';
+        switch (this.messageBoxConfig.type) {
+           case 'error':
+               return 'message-error';
+           case 'success':
+               return 'message-success';
+           case 'warning':
+               return 'message-warning';
+           case 'information':
+               return 'message-information';
+           case 'confirmation':
+               return 'question-mark';
+           default:
+               return '';
+           }
     }
 }

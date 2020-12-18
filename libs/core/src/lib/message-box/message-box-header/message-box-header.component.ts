@@ -43,10 +43,7 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
 
     /** @hidden */
     get _showSemanticIcon(): boolean {
-        if (this.messageBoxConfig.type) {
-            return this.messageBoxConfig.hideSemanticIcon ? false : true;
-        }
-        return this.messageBoxConfig.showSemanticIcon;
+        return this.messageBoxConfig.type && this.messageBoxConfig.showSemanticIcon || !!this.messageBoxConfig.customSemanticIcon
     }
 
     /** @hidden */
