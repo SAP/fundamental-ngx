@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -10,7 +10,8 @@ export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
         '[class.fd-wizard__progress-bar--s]': 'size === "sm"',
         '[class.fd-wizard__progress-bar--m]': 'size === "md"',
         '[class.fd-wizard__progress-bar--l]': 'size === "lg"',
-        '[class.fd-wizard__progress-bar--xl]': 'size === "xl"'
+        '[class.fd-wizard__progress-bar--xl]': 'size === "xl"',
+        '[style.display]': 'visible ? "" : "none"'
     }
 })
 export class WizardProgressBarDirective {
@@ -20,14 +21,6 @@ export class WizardProgressBarDirective {
     @Input()
     size: WizardSize;
 
-    constructor(private _elRef: ElementRef) {}
-
     /** @hidden */
-    setCssDisplay(visible: boolean): void {
-        if (visible) {
-            this._elRef.nativeElement.style.removeProperty('display');
-        } else {
-            this._elRef.nativeElement.style.display = 'none';
-        }
-    }
+    visible = true;
 }

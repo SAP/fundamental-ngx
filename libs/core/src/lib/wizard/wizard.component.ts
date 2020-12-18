@@ -375,10 +375,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
         if (this._isCurrentStepSummary()) {
-            this.progressBar.setCssDisplay(false);
+            this.progressBar.visible = false;
             this._showSummary();
         } else {
-            this.progressBar.setCssDisplay(true);
+            this.progressBar.visible = true;
             this._setContentTemplates();
             this._shrinkWhileAnyStepIsTooNarrow();
         }
@@ -411,7 +411,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _showSummary(): void {
-        const summary = this.steps.find((step) => {
+        const summary = this.steps.find(step => {
             return step.isSummary;
         });
         summary.content.tallContent = true;
@@ -467,14 +467,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _getLastNonSummaryStep(): WizardStepComponent {
-        let retVal;
         if (this.steps.last.isSummary) {
-            retVal = this.steps.toArray()[this.steps.length - 2];
-        } else {
-            retVal = this.steps.last;
+            return this.steps.toArray()[this.steps.length - 2];
         }
-
-        return retVal;
+        return this.steps.last;
     }
 
     /** @hidden */

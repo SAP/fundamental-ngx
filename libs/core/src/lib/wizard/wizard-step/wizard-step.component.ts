@@ -139,18 +139,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.isSummary) {
-            this._elRef.nativeElement.style.display = 'none';
-            this.content.tallContent = true;
-            this.removeFromDom();
+            this._summaryInit();
         } else if (this.stepIndicator) {
-            this._subscriptions.add(
-                this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
-                    this.stepIndicatorItemClicked.emit(step);
-                })
-            );
-            if (this.stepIndicator.glyph) {
-                this.glyph = this.stepIndicator.glyph;
-            }
+            this._notSummaryInit();
         }
     }
 
@@ -198,6 +189,25 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     removeFromDom(): void {
         if (this._elRef.nativeElement.parentNode) {
             this._elRef.nativeElement.parentNode.removeChild(this._elRef.nativeElement);
+        }
+    }
+
+    /** @hidden */
+    _summaryInit(): void {
+        this._elRef.nativeElement.style.display = 'none';
+        this.content.tallContent = true;
+        this.removeFromDom();
+    }
+
+    /** @hidden */
+    _notSummaryInit(): void {
+        this._subscriptions.add(
+            this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
+                this.stepIndicatorItemClicked.emit(step);
+            })
+        );
+        if (this.stepIndicator.glyph) {
+            this.glyph = this.stepIndicator.glyph;
         }
     }
 }
