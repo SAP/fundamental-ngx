@@ -1,8 +1,6 @@
 <div fd-bar [inPage]="true">
     <div fd-bar-left>
-        <fd-bar-element>
-            <button fd-button [fdType]="'transparent'" [glyph]="navigationArrow$ | async" [compact]="true"></button>
-        </fd-bar-element>
+        <fd-button-bar [glyph]="navigationArrow$ | async"></fd-button-bar>
         <fd-bar-element>
             Left Section
         </fd-bar-element>
