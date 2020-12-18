@@ -248,7 +248,9 @@ export const API_FILES = {
         'TabHeaderDirective',
         'TabCounterHeaderDirective',
         'TabProcessIconDirective',
-        'TabSeparator'
+        'TabItemExpandComponent',
+        'TabSeparator',
+        'TabInfo',
     ],
     tile: [
         'TileComponent',

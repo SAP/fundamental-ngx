@@ -152,6 +152,12 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this._onDestroy$.complete();
     }
 
+    /** Fits tabs in the tab bar and moves overflowing elements into a dropdown */
+    refreshOverflow(): void {
+        this._hideOverflowingItems();
+        this._keepActiveTabVisible();
+    }
+
     /** @hidden */
     _tabHeaderClickHandler(tabPanel: TabPanelComponent): void {
         this._expandTab(tabPanel, !tabPanel.expanded);
@@ -210,8 +216,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
             this._cacheTabsDimensions(this.tabHeaders.toArray());
             this._listenOnTabPanelsChangeAndCollapse();
             this._listenOnResizeAndHideItems();
-            this._hideOverflowingItems();
-            this._keepActiveTabVisible();
+            this.refreshOverflow();
         } else {
             this._isCollapsed = false;
         }
@@ -280,8 +285,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
             debounceTime(100),
             takeUntil(this._onDestroy$)
         ).subscribe(_ => {
-            this._hideOverflowingItems();
-            this._keepActiveTabVisible();
+            this.refreshOverflow();
             this._detectChanges();
         })
     }
@@ -298,8 +302,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
             switchMap(() => $tabHeadersSource)
         ).subscribe(tabHeaders => {
             this._cacheTabsWidth(tabHeaders);
-            this._hideOverflowingItems();
-            this._keepActiveTabVisible();
+            this.refreshOverflow();
             this._detectChanges();
         });
     }

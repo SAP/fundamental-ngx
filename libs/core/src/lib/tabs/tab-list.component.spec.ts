@@ -120,29 +120,24 @@ const NUMBER_OF_TABS = 10;
 
 @Component({
     template: `
-        <div style="width: 400px">
-            <fd-tab-list [collapseOverflow]="collapseOverflow" [maxVisibleTabs]="maxVisibleTabs"
-                         [collapsibleTabs]="true">
-                <fd-tab *ngFor="let title of tabs" [title]="title">{{title}} content</fd-tab>
-            </fd-tab-list>
-        </div>
+        <fd-tab-list style="width: 200px"
+                     [collapsibleTabs]="true"
+                     [collapseOverflow]="true"
+                     [maxVisibleTabs]="maxVisibleTabs">
+            <fd-tab *ngFor="let title of _tabs" [title]="title">{{title}} content</fd-tab>
+        </fd-tab-list>
     `
 })
 class TestCollapsibleTabsComponent {
-
-    @ViewChild(TabListComponent, { static: true })
-    tabList: TabListComponent;
-
     @ViewChildren(TabPanelComponent)
-    tabPanels: QueryList<TabPanelComponent>;
+    tabs: QueryList<TabPanelComponent>;
 
     maxVisibleTabs = 10;
-    collapseOverflow = false;
-    tabs = [];
+    _tabs = [];
 
     constructor() {
         for (let i = 0; i < NUMBER_OF_TABS; i++) {
-            this.tabs.push();
+            this._tabs.push(`Tab ${i + 1}`);
         }
     }
 }
@@ -151,6 +146,7 @@ describe('TabListComponent', () => {
     let component: TabListComponent;
     let testComponent: TestCollapsibleTabsComponent;
     let fixture: ComponentFixture<TestCollapsibleTabsComponent>;
+    const groupedTabs = tabList => [tabList._visualOrder.visible, tabList._visualOrder.overflowing];
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -162,22 +158,21 @@ describe('TabListComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCollapsibleTabsComponent);
         testComponent = fixture.componentInstance;
+        component = fixture.debugElement.children[0].componentInstance;
         fixture.detectChanges();
-        component = fixture.componentInstance.tabList;
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(testComponent).toBeTruthy();
     });
 
     it('should collapse tabs', async () => {
         await whenStable(fixture);
-        const numOfVisibleTabs = component._visualOrder.visible.length;
-        const numOfOverflowingTabs = component._visualOrder.overflowing.length;
+        const [visibleTabs, overflowingTabs] = groupedTabs(component);
 
-        expect(numOfVisibleTabs + numOfOverflowingTabs === NUMBER_OF_TABS).toBeTrue();
+        expect(visibleTabs.length + overflowingTabs.length === NUMBER_OF_TABS).toBeTrue();
         expect(component._tabArray.length === NUMBER_OF_TABS).toBeTrue();
-        expect(numOfOverflowingTabs > 0).toBeTrue();
+        expect(overflowingTabs.length > 0).toBeTrue();
     });
 
     it('should respect maximum number of visible tabs', async () => {
@@ -187,17 +182,17 @@ describe('TabListComponent', () => {
 
         await whenStable(fixture);
 
-        const numOfVisibleTabs = component._visualOrder.visible.length;
-        const numOfOverflowingTabs = component._visualOrder.overflowing.length;
+        const [visibleTabs, overflowingTabs] = groupedTabs(component);
 
-        expect(numOfVisibleTabs).toEqual(1);
-        expect(numOfOverflowingTabs).toEqual(9);
+        expect(testComponent._tabs.length).toEqual(10);
+        expect(visibleTabs.length).toEqual(1);
+        expect(overflowingTabs.length).toEqual(9);
     });
 
     it('should collapse active tab', async () => {
         await whenStable(fixture);
 
-        testComponent.tabPanels.first.open(false);
+        testComponent.tabs.first.open(false);
 
         await whenStable(fixture);
 
