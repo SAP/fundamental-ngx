@@ -1,11 +1,8 @@
 import { Directive } from '@angular/core';
 
 /**
- * Directive that applies fundamental dialog styling to a button.
- *
- * ```html
- * <button fd-dialog-decisive-button></button>
- * ```
+ * @deprecated
+ * Consider using `fd-button-bar`
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
