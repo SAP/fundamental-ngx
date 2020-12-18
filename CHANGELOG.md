@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.3...v0.26.0-rc.4) (2020-12-18)
+
+## [0.26.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.2...v0.26.0-rc.3) (2020-12-18)
+
+
+### Features
+
+* (Platform) Introduce Date picker component ([#4109](https://github.com/SAP/fundamental-ngx/issues/4109)) ([4f9eda9](https://github.com/SAP/fundamental-ngx/commit/4f9eda99b6b216ba3014c086582d0479899a4329))
+
+## [0.26.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.1...v0.26.0-rc.2) (2020-12-18)
+
+
+### Bug Fixes
+
+* (Core) Carousel direction defects ([#4080](https://github.com/SAP/fundamental-ngx/issues/4080)) ([17ffa12](https://github.com/SAP/fundamental-ngx/commit/17ffa1226bb066fe59cd0ca08021d407f17f4c8e))
+
+## [0.26.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.0...v0.26.0-rc.1) (2020-12-17)
+
+## [0.26.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.1...v0.26.0-rc.0) (2020-12-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed DIALOG_CONFIG and DIALOG_REF and made DialogConfig and DialogRef classes injectable
+
+### Bug Fixes
+
+* (Core) remove DIALOG_CONFIG and DIALOG_REF and make DialogConfig and DialogRef injectable ([#4108](https://github.com/SAP/fundamental-ngx/issues/4108)) ([356b3bb](https://github.com/SAP/fundamental-ngx/commit/356b3bbc108ac774c089a9b2efd153aa84271cb9))
+
 ### [0.25.1](https://github.com/SAP/fundamental-ngx/compare/v0.25.1-rc.0...v0.25.1) (2020-12-17)
 
 ### [0.25.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.0...v0.25.1-rc.0) (2020-12-17)

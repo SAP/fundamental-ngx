@@ -1,0 +1,49 @@
+<fd-docs-section-title id="formDatePicker" componentName="DatePicker">
+    Simple Date Picker and Range Date Picker in Platform Form.
+</fd-docs-section-title>
+
+<description>
+    Value of date-picker can be initialized by passing data using object property in fdp-form-group.
+</description>
+<component-example>
+    <fdp-platform-date-picker-example></fdp-platform-date-picker-example>
+</component-example>
+<code-example [exampleFiles]="datePickerExample"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="disablecalnder" componentName="DatePicker">
+    Disable parts of Calender for selection
+</fd-docs-section-title>
+<description>
+    Part of Calendar can be disabled. This can be controlled by passing disableFunction for simple
+    date-picker and passing disableRangeStartFunction and disableRangeEndFunction for range Date Picker.
+</description>
+<component-example>
+    <fdp-date-picker-disable-func-example></fdp-date-picker-disable-func-example>
+</component-example>
+<code-example [exampleFiles]="datePickerDisableFunction"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="datePickerFormat" componentName="DatePicker">
+    Date Picker Formatting
+</fd-docs-section-title>
+<description>
+    Providing a custom format for the dates is possible through providing <code>DATE_TIME_FORMATS</code> config.
+</description>
+<component-example>
+    <fdp-date-picker-format-example></fdp-date-picker-format-example>
+</component-example>
+<code-example [exampleFiles]="datePickerFormat"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="internationalExample" componentName="'DatePickerInternational'">
+    Internationalization of Date Picker
+</fd-docs-section-title>
+<description>
+    It is possible to internationalize both the aria labels and the month names/weekdays through providing a service.
+</description>
+<component-example>
+    <fdp-date-picker-i18n-example></fdp-date-picker-i18n-example>
+</component-example>
+<code-example [exampleFiles]="datePickeri18nExample"></code-example>

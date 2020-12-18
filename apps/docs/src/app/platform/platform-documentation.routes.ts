@@ -41,6 +41,12 @@ export const ROUTES: Routes = [
                     ).then((m) => m.PlatformCheckboxGroupDocsModule)
             },
             {
+                path: 'date-picker',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-date-picker/platform-date-picker-docs.module').then(
+                        (m) => m.PlatformDatePickerDocsModule)
+            },
+            {
                 path: 'datetime-picker',
                 loadChildren: () =>
                     import(
