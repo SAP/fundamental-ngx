@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.2...v0.26.0-rc.3) (2020-12-18)
+
+
+### Features
+
+* (Platform) Introduce Date picker component ([#4109](https://github.com/SAP/fundamental-ngx/issues/4109)) ([4f9eda9](https://github.com/SAP/fundamental-ngx/commit/4f9eda99b6b216ba3014c086582d0479899a4329))
+
 ## [0.26.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.1...v0.26.0-rc.2) (2020-12-18)
 
 
