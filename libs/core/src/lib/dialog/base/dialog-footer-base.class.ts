@@ -26,7 +26,4 @@ export abstract class DialogFooterBase implements AfterContentInit {
         const footerTemplate = this.customTemplates.find(template => template.getName() === 'footer');
         this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
     }
-
-    /** TODO */
-    
 }

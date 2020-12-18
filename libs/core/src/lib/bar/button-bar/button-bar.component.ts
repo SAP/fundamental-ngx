@@ -43,5 +43,5 @@ export class ButtonBarComponent extends BaseButton {
 
     /** @hidden */
     @ViewChild(ButtonComponent)
-    buttonComponent: ButtonComponent;
+    _buttonComponent: ButtonComponent;
 }

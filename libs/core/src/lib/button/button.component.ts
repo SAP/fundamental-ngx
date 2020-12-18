@@ -1,5 +1,5 @@
 import {
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef, Input,
     OnChanges,
@@ -40,7 +40,8 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef
+        private _elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef
     ) {
         super()
     }
@@ -77,5 +78,9 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
      */
     public elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    detectChanges(): void {
+        this._changeDetectorRef.detectChanges();
     }
 }
