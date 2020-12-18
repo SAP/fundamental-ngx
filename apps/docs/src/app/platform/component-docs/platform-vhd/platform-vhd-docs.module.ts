@@ -17,7 +17,8 @@ import {
     PlatformVhdFiltersExampleComponent,
     PlatformVhdMultiInputExampleComponent,
     PlatformVhdInputExampleComponent,
-    PlatformVhdMobileExampleComponent
+    PlatformVhdMobileExampleComponent,
+    PlatformVhdStrategyLabelExampleComponent
 } from './platform-vhd-examples'
 
 const routes: Routes = [
@@ -54,7 +55,8 @@ const routes: Routes = [
         PlatformVhdFiltersExampleComponent,
         PlatformVhdMultiInputExampleComponent,
         PlatformVhdInputExampleComponent,
-        PlatformVhdMobileExampleComponent
+        PlatformVhdMobileExampleComponent,
+        PlatformVhdStrategyLabelExampleComponent
     ]
 
 })

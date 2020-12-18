@@ -40,6 +40,20 @@ export class PlatformVhdDocsComponent {
         }
     ];
 
+    strategyLabelValueHelpDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: basicVhdHtml,
+            fileName: 'platform-vhd-strategy-label-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformVhdStrategyLabelExampleComponent',
+            code: basicVhdTs,
+            fileName: 'platform-vhd-strategy-label-example'
+        }
+    ];
+
     tokenValueHelpDialog: ExampleFile[] = [
         {
             language: 'html',

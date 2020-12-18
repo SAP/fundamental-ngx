@@ -73,9 +73,25 @@
                         [name]="uid + '-' + type + '-strategy-' + item.id"
                         [(ngModel)]="item.strategy"
                         (ngModelChange)="_filterChanged()">
-                        <fd-option *ngFor="let strategy of strategies" [value]="strategy.key">
+                        <fd-option *ngFor="let strategy of strategies" [value]="strategy.label">
                             <ng-container *ngIf="type === 'exclude'" i18n="@@platformI18nValueHelpDialog.Define.Condition.StrategyPrefixExclude">not</ng-container>
-                            {{ strategy.label }}
+                            <ng-container *ngIf="strategyLabels[strategy.key]; else defaultOption">{{ strategyLabels[strategy.key] }}</ng-container>
+                            <ng-template #defaultOption>
+                                <ng-container i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label">
+                                    {strategy.key, select,
+                                        contains {contains}
+                                        equalTo {equal to}
+                                        between {between}
+                                        startsWith {starts with}
+                                        endsWith {ends with}
+                                        lessThan {less than}
+                                        lessThanEqual {less than or equal to}
+                                        greaterThan {greater than}
+                                        greaterThanEqual {greater than or equal to}
+                                        other {empty}
+                                    }
+                                </ng-container>
+                            </ng-template>
                         </fd-option>
                     </fd-select>
                 </div>
@@ -88,7 +104,7 @@
                                 <input
                                     fd-form-control
                                     fdp-condition-count-message
-                                    maxCharacters="7"
+                                    [maxCharacters]="_rules.maxCharactersHintCount"
                                     type="text"
                                     i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
                                     placeholder="from"
@@ -105,7 +121,7 @@
                                 <input
                                     fd-form-control
                                     fdp-condition-count-message
-                                    maxCharacters="7"
+                                    [maxCharacters]="_rules.maxCharactersHintCount"
                                     type="text"
                                     i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
                                     placeholder="to"
@@ -124,7 +140,7 @@
                                 <input
                                     fd-form-control
                                     fdp-condition-count-message
-                                    maxCharacters="7"
+                                    [maxCharacters]="_rules.maxCharactersHintCount"
                                     type="text"
                                     i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
                                     placeholder="value"

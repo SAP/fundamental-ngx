@@ -1,7 +1,7 @@
 $block: fdp-value-help-dialog;
 
 .#{$block} {
-    fdp-define-tab-settings {
+    fdp-define-tab {
         height: 100%;
         overflow: auto;
     }

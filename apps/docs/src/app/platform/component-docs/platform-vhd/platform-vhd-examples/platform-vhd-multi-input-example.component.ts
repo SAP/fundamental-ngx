@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
 
@@ -48,6 +48,9 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
   originalData: ExampleTestModel[];
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
   currentValue: VhdValue = {};
+  selected: ExampleTestModel[] = [];
+
+  constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     const data = exampleDataSource();
@@ -57,7 +60,8 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
   }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
-    this.currentValue = $event;
+    this.selected = [...$event.selected];
+    this._changeDetectorRef.detectChanges();
   }
 
   displayFunc(obj: any): string {
@@ -65,7 +69,8 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
   }
 
   multiSelectChange(): void {
-    this.currentValue = {...this.currentValue};
+    this.currentValue.selected = this.selected;
+    this._changeDetectorRef.detectChanges();
   }
 
   parseFunc(value: string): object {

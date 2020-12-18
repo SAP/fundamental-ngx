@@ -37,7 +37,7 @@ import {
 } from '../models';
 
 import { VhdFilterComponent, VhdSearchComponent } from '../components';
-import { defaultConditionDisplayFn } from '../utils';
+import { defaultConditionDisplayFn } from '../constans/condition-display.function';
 
 export type FdpValueHelpDialogDataSource<T> = ValueHelpDialogDataSource<T>
   | ArrayValueHelpDialogDataSource<T>
@@ -87,7 +87,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
   set dataSource(value: FdpValueHelpDialogDataSource<any>) {
     if (value) {
-      this._dataSource = value;
+      this._dataSource = this.toDataStream(value);
     }
   }
 
@@ -150,6 +150,23 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** Define conditions tab's settings */
   @Input()
   defineTabTitle = 'Define Conditions';
+
+  /** Custom stratagies labels
+   * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
+   */
+  @Input()
+  defineStrategyLabels: {[key in keyof typeof VhdDefineStrategy]?: string} = {
+    contains: 'contains',
+    equalTo: 'equal to',
+    between: 'between',
+    startsWith: 'starts with',
+    endsWith: 'ends with',
+    lessThan: 'less than',
+    lessThanEqual: 'less than or equal to',
+    greaterThan: 'greater than',
+    greaterThanEqual: 'greater than or equal to',
+    empty: 'empty'
+  };
 
   /** Dialog outputs */
   /** Event emitted when filters/tokens were changed. */
@@ -470,17 +487,6 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /** @hidden */
-  _initializeDS(ds: FdpValueHelpDialogDataSource<any> = this.dataSource): void {
-    this._resetSourceStream();
-    this._dsSubscription = this.openDataStream(ds)
-      .pipe(takeUntil(this._destroyed))
-      .subscribe(data => {
-        this._displayedData = data.slice();
-        this._changeDetectorRef.markForCheck();
-      });
-  }
-
-  /** @hidden */
   onSelect($event: T[]): void {
     this.value.selected = $event;
     this._changeDetectorRef.markForCheck();
@@ -518,19 +524,29 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /** @hidden */
+  private _initializeDS(ds: FdpValueHelpDialogDataSource<any> = this.dataSource): void {
+    this._resetSourceStream();
+    if (this.showSelectionTab) {
+      this._dsSubscription = this.openDataStream(ds)
+        .pipe(takeUntil(this._destroyed))
+        .subscribe(data => {
+          this._displayedData = data.slice();
+          this._changeDetectorRef.markForCheck();
+        });
+    }
+  }
+
+  /** @hidden */
   private _initializeTab(): void {
     if (this.mobile) {
-      if (this.showSelectionTab && this.showDefineTab) {
-        this.switchTab();
-      } else if (this.showSelectionTab) {
-        this.switchTab(VhdTab.selectFromList);
-      } else if (this.showDefineTab) {
-        this.switchTab(VhdTab.defineConditions);
-      }
       this.isOpenAdvanced = false;
-    } else {
-
-      this.switchTab(this.initialTab);
+    }
+    if (this.showSelectionTab && this.showDefineTab) {
+      this.switchTab(this.mobile ? null : this.initialTab);
+    } else if (this.showSelectionTab) {
+      this.switchTab(VhdTab.selectFromList);
+    } else if (this.showDefineTab) {
+      this.switchTab(VhdTab.defineConditions);
     }
   }
 
@@ -580,12 +596,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   private openDataStream(ds: FdpValueHelpDialogDataSource<T>): Observable<T[]> {
-    const initDataSource = this.toDataStream(ds);
-    if (initDataSource) {
-      this._dataSource = initDataSource;
-      initDataSource.match();
+    if (this._dataSource) {
+      this._dataSource.match();
 
-      return initDataSource.open();
+      return this._dataSource.open();
     }
     throw new Error(`[dataSource] source did not match an array, Observable, or DataSource`);
   }
@@ -615,7 +629,11 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   private isValidOptions(): boolean {
-    return typeof this.uniqueKey === 'string' &&
-      (typeof this.tokenViewField === 'string' || typeof this.tokenizerFn === 'function');
+    if (this.showSelectionTab) {
+      return this.dataSource &&
+        typeof this.uniqueKey === 'string' &&
+        (typeof this.tokenViewField === 'string' || typeof this.tokenizerFn === 'function');
+    }
+    return true;
   }
 }

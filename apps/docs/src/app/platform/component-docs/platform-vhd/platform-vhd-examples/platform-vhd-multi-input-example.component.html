@@ -5,10 +5,9 @@
         [displayFn]="displayFunc"
         [allowNewTokens]="true"
         [newTokenParseFn]="parseFunc"
-        [(ngModel)]="currentValue.selected"
+        [(ngModel)]="selected"
         (selectedChange)="multiSelectChange()"
     >
-        <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
     </fd-multi-input>
     <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
 </div>

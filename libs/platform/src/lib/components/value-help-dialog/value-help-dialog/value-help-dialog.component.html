@@ -252,6 +252,7 @@
 
 <ng-template #defineConditionsContent>
     <fdp-define-tab
+        [strategyLabels]="defineStrategyLabels"
         [included]="value.included"
         [excluded]="value.excluded"
         [uid]="id"

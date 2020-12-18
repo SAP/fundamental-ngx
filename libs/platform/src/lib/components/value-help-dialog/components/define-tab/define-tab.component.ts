@@ -17,6 +17,7 @@ import {
   VhdDefineStrategy,
   VhdDefineType
 } from '../../models';
+import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
 class ExtendedIncludedEntity extends VhdIncludedEntity {
@@ -39,8 +40,12 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChang
 
   @Input()
   included: ExtendedIncludedEntity[] = [];
+
   @Input()
   excluded: ExtendedExcludedEntity[] = [];
+
+  @Input()
+  strategyLabels: {[key in keyof typeof VhdDefineStrategy]?: string} = {};
 
   @Output()
   includeChange: EventEmitter<ExtendedIncludedEntity[]> = new EventEmitter<ExtendedIncludedEntity[]>();
@@ -61,16 +66,17 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChang
     excluded: false
   }
   /** @hidden */
+  _rules = {
+    maxCharactersHintCount: MAX_CHARACTER_HINT_COUNT
+  }
+  /** @hidden */
   _strategyValues = VhdDefineStrategy;
   /** @hidden */
   _defineTypes = VhdDefineType;
   /** @hidden */
-  _includeStrategy = this._allStrategies();
+  _includeStrategy = [];
   /** @hidden */
-  _excludeStrategy = this._includeStrategy
-    .filter(s => {
-      return s.key === VhdDefineStrategy.equalTo || s.key === VhdDefineStrategy.empty;
-    });
+  _excludeStrategy = [];
 
   /** @hidden */
   ngOnInit(): void {
@@ -89,6 +95,9 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChang
     }
     if ('excluded' in changes) {
       this._excluded = this.excluded as ExtendedExcludedEntity[] || [];
+    }
+    if ('strategyLabels' in changes) {
+      this._refreshStrategies();
     }
   }
 
@@ -135,6 +144,20 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChang
   }
 
   /** @hidden */
+  private _refreshStrategies(): void {
+    this._includeStrategy = this._allStrategies();
+    this._excludeStrategy = this._includeStrategy
+      .filter(({label}) => {
+        switch (label) {
+          case VhdDefineStrategy.equalTo:
+          case VhdDefineStrategy.empty:
+            return true;
+        };
+        return false;
+      });
+  }
+
+  /** @hidden */
   private _addEmptyIncluded(): void {
     if (this._includeFilters.length) {
       const key = this._included.length ? this._included[this._included.length - 1].key : this._includeFilters[0].key;
@@ -172,9 +195,9 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChang
     this._definePanelState.excluded = !!this._excluded.length;
   }
 
-  /** @hidden Define strategies */
-  private _allStrategies(): { label: string; key: VhdDefineStrategy; }[] {
-    return Object.entries(VhdDefineStrategy).map(([label, key]) => ({
+  /** @hidden */
+  private _allStrategies(): { label: VhdDefineStrategy; key: string; }[] {
+    return Object.entries(VhdDefineStrategy).map(([key, label]) => ({
       key: key,
       label: label
     }));
