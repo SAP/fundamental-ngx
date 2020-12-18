@@ -12,10 +12,27 @@
 
 .fd-tabs {
     flex-grow: 0;
+    flex-wrap: nowrap;
 
     &__content {
         overflow-y: auto;
         flex-grow: 1;
+    }
+
+    &__item {
+        flex-shrink: 0;
+    }
+
+    &__wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        &--collapsible {
+            overflow: hidden;
+            flex-wrap: nowrap;
+        }
     }
 }
 
