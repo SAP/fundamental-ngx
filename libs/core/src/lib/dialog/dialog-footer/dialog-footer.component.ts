@@ -1,9 +1,6 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, Optional, QueryList } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/core';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
-import { ButtonBarComponent } from '../../bar/button-bar/button-bar.component';
-import { ButtonComponent } from '../../button/button.component';
-import { startWith } from 'rxjs/operators';
 
 export const DialogButtonClass = 'fd-dialog__decisive-button';
 
@@ -24,10 +21,6 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
     templateUrl: './dialog-footer.component.html'
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
-
-    /** @hidden */
-    @ContentChildren(ButtonBarComponent, { descendants: true })
-    buttons: QueryList<ButtonBarComponent>
 
     /** @hidden */
     constructor(@Optional() public dialogConfig: DialogConfig) {

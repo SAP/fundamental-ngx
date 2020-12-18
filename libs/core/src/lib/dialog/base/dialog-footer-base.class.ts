@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
+import { AfterContentInit, ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
 import { TemplateDirective } from '../../utils/directives/template/template.directive';
 import { ButtonBarComponent } from '../../bar/button-bar/button-bar.component';
 import { ButtonComponent } from '../../button/button.component';
