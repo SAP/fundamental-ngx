@@ -40,7 +40,8 @@ import {
     KeyUtil,
     ListComponent,
     MobileModeConfig,
-    TemplateDirective
+    TemplateDirective,
+    FormStates
 } from '@fundamental-ngx/core';
 import {
     ArrayComboBoxDataSource,
@@ -74,6 +75,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /** Datasource for suggestion list */
     @Input()
