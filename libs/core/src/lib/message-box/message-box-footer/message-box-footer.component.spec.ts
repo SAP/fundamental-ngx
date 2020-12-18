@@ -13,7 +13,7 @@ import { whenStable } from '../../utils/tests';
         <fd-message-box-footer>
             <ng-template fdTemplate="footer">
                 <div fd-bar-middle>
-                    <button fd-message-box-decisive-button>Custom button</button>
+                    <button>Custom button</button>
                 </div>
             </ng-template>
         </fd-message-box-footer>
@@ -26,7 +26,7 @@ class CustomFooterTestComponent {
 @Component({
     template: `
         <fd-message-box-footer>
-            <button fd-message-box-decisive-button>Default button</button>
+            <button>Default button</button>
         </fd-message-box-footer>
     `
 })
