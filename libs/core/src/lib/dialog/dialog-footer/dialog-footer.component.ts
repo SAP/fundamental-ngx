@@ -5,7 +5,7 @@ import { ButtonBarComponent } from '../../bar/button-bar/button-bar.component';
 import { ButtonComponent } from '../../button/button.component';
 import { startWith } from 'rxjs/operators';
 
-const DialogButtonClass = 'fd-dialog__decisive-button';
+export const DialogButtonClass = 'fd-dialog__decisive-button';
 
 /**
  * Building block of the dialog used to create dialog button.
@@ -26,7 +26,7 @@ const DialogButtonClass = 'fd-dialog__decisive-button';
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
 
     /** @hidden */
-    @ContentChildren(ButtonBarComponent)
+    @ContentChildren(ButtonBarComponent, { descendants: true })
     buttons: QueryList<ButtonBarComponent>
 
     /** @hidden */

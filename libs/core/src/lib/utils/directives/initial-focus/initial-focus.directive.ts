@@ -11,6 +11,7 @@ export class InitialFocusDirective implements AfterViewInit {
         private _interactivityChecker: InteractivityChecker
     ) {}
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this._focusFirstTabbableElement();
     }

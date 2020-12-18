@@ -13,6 +13,7 @@ import { ButtonComponent } from '../../button/button.component';
               [fdType]="fdType"
               [label]="label"
               [fdMenu]="fdMenu"
+              [disabled]="disabled"
       >
           <ng-content></ng-content>
       </button>
@@ -29,6 +30,13 @@ export class ButtonBarComponent extends BaseButton {
      */
     @Input()
     compact = true;
+
+    /**
+     * Whether to apply disabled state to the button.
+     * Default value is set to false
+     */
+    @Input()
+    disabled = false;
 
     /** The type of the button. Types include:
      * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
