@@ -24,7 +24,7 @@ if [ -z "$core"  ]
 then
     echo There are no changes at core
 else
-    npm run test && npm run lint:core
+    npm run lint:core
     handle_error
 fi
 

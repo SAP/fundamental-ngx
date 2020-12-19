@@ -35,6 +35,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/datetime-picker', name: 'Datetime Picker' },
             { url: 'core/dialog', name: 'Dialog' },
             { url: 'core/icon', name: 'Icon' },
+            { url: 'core/feed-list-item', name: 'Feed List Item' },
             { url: 'core/feed-input', name: 'Feed Input' },
             { url: 'core/file-uploader', name: 'File Uploader' },
             { url: 'core/form-message', name: 'Form Message' },
@@ -93,7 +94,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.utilities = [
-            { url: 'core/file-input', name: 'File Input' },
             { url: 'core/global-config', name: 'Global Configuration' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
             { url: 'core/popover-directive', name: 'Popover Helper' },

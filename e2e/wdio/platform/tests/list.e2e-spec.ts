@@ -61,7 +61,7 @@ describe('List test suite:', function() {
         it('should do basic checks', () => {
             checkElArrIsClickable(listPg.deletionListItems);
             checkElementText(listPg.deletionListItems);
-            webDriver.waitForDisplayed(listPg.deletionIcon);
+            webDriver.waitForElDisplayed(listPg.deletionIcon);
         });
 
         it('should check deletion', () => {
@@ -127,9 +127,9 @@ describe('List test suite:', function() {
         });
 
         it('should check scroll', () => {
-            if (browser.capabilities.browserName === 'firefox') {
+            if (webDriver.browserIsFirefox()) {
                 // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-                console.log('skip');
+                console.log('skip FF due to issue #4107');
             } else {
                 webDriver.scrollIntoView(listPg.vScrollListItems, 0);
                 const itemsStartCount = webDriver.getElementArrayLength(listPg.vScrollListItems);
@@ -139,7 +139,7 @@ describe('List test suite:', function() {
                 webDriver.sendKeys('ArrowDown');
                 webDriver.sendKeys('ArrowDown');
                 webDriver.sendKeys('ArrowDown');
-                expect(webDriver.waitForDisplayed(listPg.vScrollLoadIcon)).toBe(true);
+                expect(webDriver.waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
                 webDriver.waitForInvisibilityOf(listPg.vScrollLoadIcon);
                 const itemsEndCount = webDriver.getElementArrayLength(listPg.vScrollListItems);
                 expect(itemsStartCount).not.toEqual(itemsEndCount);
@@ -175,7 +175,7 @@ describe('List test suite:', function() {
 
         it('should check delete action', () => {
             webDriver.click(listPg.btnDeleteBtn, 0);
-            if (browser.capabilities.browserName === 'internet explorer') {
+            if (webDriver.browserIsIE()) {
                 webDriver.acceptAlert();
             } else {
                 expect(webDriver.getAlertText()).toContain('Delete row');
@@ -215,7 +215,7 @@ describe('List test suite:', function() {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(listPg.unreadListItems);
             checkElementText(listPg.unreadListItems);
-            if (browser.capabilities.browserName === 'Safari') {
+            if (webDriver.browserIsSafari()) {
                 expect(webDriver.getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 0).value).toBe('normal');
                 expect(webDriver.getAttributeByName(listPg.unreadListAttr, ListData.itemUnreadStatus, 1)).toBe('true');
                 expect(webDriver.getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 1).value).toBe('bold');

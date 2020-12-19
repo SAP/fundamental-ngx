@@ -245,6 +245,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-file-uploader/platform-file-uploader-docs.module').then(
                         (m) => m.PlatformFileUploaderDocsModule
                     )
+            },
+            {
+                path: 'upload-collection',
+                loadChildren: () =>
+                    import('./component-docs/platform-upload-collection/platform-upload-collection-docs.module').then(
+                        (m) => m.PlatformUploadCollectionDocsModule
+                    )
             }
         ]
     }

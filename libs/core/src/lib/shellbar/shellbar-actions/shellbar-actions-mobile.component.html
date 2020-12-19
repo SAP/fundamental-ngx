@@ -19,6 +19,10 @@
             <div fd-menu-interactive>
                 <fd-menu-addon position="before" [glyph]="action.glyph"></fd-menu-addon>
                 <span fd-menu-title>{{ action.label }}</span>
+                <span *ngIf="action.notificationCount"
+                      class="fd-counter fd-counter--notification fd-shellbar__counter--notification">
+                {{ action.notificationCount }}
+            </span>
             </div>
         </li>
     </fd-menu>

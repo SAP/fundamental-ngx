@@ -5,4 +5,4 @@ export default {
     cardMinWidth: '320px',
     placeholderBorderAttr: 'border-bottom-style',
     placeholderBorderStyle: 'dashed'
-}
+};

@@ -1,5 +1,6 @@
 <div class="fd-carousel" [class.fd-carousel--no-navigation]="!navigation" data-ride="carousel" [style.height]="height"
-    [style.width]="width" [attr.dir]="dir">
+    [style.width]="width" [attr.dir]="dir"
+    (click)="_focus()">
 
     <ng-container *ngIf="pageIndicatorContainer && pageIndicatorsOrientation === 'top'">
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
