@@ -10,10 +10,6 @@ describe('Standard List Item test suite:', function() {
         standardListPg.open();
     });
 
-    afterEach(() => {
-        webDriver.refreshPage();
-    });
-
     describe('Standard List Item - Border Less examples:', function() {
         it('should check border and interactions', () => {
             expect(webDriver.getAttributeByName(standardListPg.sNoBorderAttr, StandardLinkData.noBorderAttr)).toBe('true');

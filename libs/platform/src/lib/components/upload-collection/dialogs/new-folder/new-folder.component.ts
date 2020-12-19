@@ -4,7 +4,14 @@ import { DIALOG_REF, DialogRef, FormControlComponent } from '@fundamental-ngx/co
 import { UploadCollectionFolder } from '../../models/upload-collection.models';
 
 @Component({
-    templateUrl: './new-folder.component.html'
+    templateUrl: './new-folder.component.html',
+    styles: [
+        `
+            .fd-title--bold {
+                font-weight: bold;
+            }
+        `
+    ]
 })
 export class NewFolderComponent implements AfterViewInit {
     /** 

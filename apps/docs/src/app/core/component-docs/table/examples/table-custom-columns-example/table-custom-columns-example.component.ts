@@ -16,11 +16,11 @@ export interface CellData {
 }
 
 const CELL_DATA: CellData[] = [
-    { column2: 'Row 221', column1: 'Row 111', column3: 'Row 1', date: '09-07-18', type: 'search' },
-    { column2: 'Row 222', column1: 'Row 112', column3: 'Row 2', date: '09-08-18', type: 'cart' },
-    { column2: 'Row 223', column1: 'Row 113', column3: 'Row 3', date: '02-14-18', type: 'calendar' },
-    { column2: 'Row 224', column1: 'Row 114', column3: 'Row 4', date: '12-30-17', type: 'search' },
-    { column2: 'Row 225', column1: 'Row 115', column3: 'Row 5', date: '11-12-18', type: 'search' }
+    { column1: 'Row 111', column2: 'Row 221', column3: 'Row 1', date: '09-07-18', type: 'search' },
+    { column1: 'Row 112', column2: 'Row 222', column3: 'Row 2', date: '09-08-18', type: 'cart' },
+    { column1: 'Row 113', column2: 'Row 223', column3: 'Row 3', date: '02-14-18', type: 'calendar' },
+    { column1: 'Row 114', column2: 'Row 224', column3: 'Row 4', date: '12-30-17', type: 'search' },
+    { column1: 'Row 115', column2: 'Row 225', column3: 'Row 5', date: '11-12-18', type: 'search' }
 ];
 
 

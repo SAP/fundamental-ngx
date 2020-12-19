@@ -5,7 +5,8 @@ export interface Media {
     mediaType: string;
     mediaUrl: string;
     alt: string;
-    label: string
+    label: string;
+    selected?: boolean;
 }
 
 export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailComponent, K = Media> {

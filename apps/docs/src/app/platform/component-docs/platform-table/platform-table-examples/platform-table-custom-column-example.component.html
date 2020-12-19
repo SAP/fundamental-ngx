@@ -6,7 +6,8 @@
 
     <fdp-table-toolbar
         title="Order Line Items"
-        [hideItemCount]="true">
+        [hideItemCount]="true"
+        [hideSearchInput]="false">
     </fdp-table-toolbar>
 
     <fdp-column
@@ -26,6 +27,7 @@
                 name="description"
                 placeholder="Enter the description"
                 [(ngModel)]="item.description"
+                contentDensity="compact"
             >
             </fdp-input>
         </fdp-table-cell>

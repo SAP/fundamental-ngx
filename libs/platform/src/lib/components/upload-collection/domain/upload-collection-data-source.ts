@@ -48,7 +48,7 @@ export class UploadCollectionDataSource implements DataSource<UploadCollectionIt
 
     /** The method is triggered when an uploaded attachment is selected and the Download button is pressed. */
     download(data: DownloadEvent): Observable<void> {
-        return this.dataProvider.download(data).pipe(take(1));
+        return this.dataProvider.download(data);
     }
 
     /** The method is triggered when Move to button is pressed and folder to move is selected in the dialog modal. */
