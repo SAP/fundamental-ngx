@@ -14,7 +14,7 @@ export class InfoLabelPO extends BaseComponentPo {
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
-     open(): void {
-         super.open(this.url)
+    open(): void {
+        super.open(this.url);
     }
 }

@@ -264,10 +264,10 @@ xdescribe('Checkbox group test suite', () => {
             webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 0);
             expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
-            checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 0 , 3);
+            checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 0, 3);
             checkFocusState(checkboxGroupPage.formValidationCheckboxesArr, 0);
             checkHoverState(checkboxGroupPage.formValidationCheckboxesArr, 0);
-            checkMarkingCheckbox(checkboxGroupPage.formValidationCheckboxesArr, 0 , 3);
+            checkMarkingCheckbox(checkboxGroupPage.formValidationCheckboxesArr, 0, 3);
         });
 
         it('should check Checkbox group created from list of values and value is required', () => {
@@ -300,7 +300,7 @@ xdescribe('Checkbox group test suite', () => {
                 expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
                     .toContain(checkboxGPData.errorBorderStyle);
             }
-            webDriver.click(checkboxGroupPage.sectiontitle, 1 );
+            webDriver.click(checkboxGroupPage.sectiontitle, 1);
             webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
             expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 

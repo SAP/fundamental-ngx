@@ -30,6 +30,6 @@ export class PanelPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        webDriver.waitForElDisplayed(this.root);
     }
 }

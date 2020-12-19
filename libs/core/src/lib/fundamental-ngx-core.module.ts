@@ -7,7 +7,6 @@ import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
-import { BadgeModule } from './badge/badge.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -17,7 +16,7 @@ import { ComboboxModule } from './combobox/combobox.module';
 import { CheckboxModule } from './checkbox/checkbox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
-import { FileInputModule } from './file-input/file-input.module';
+import { FeedListItemModule } from './feed-list-item/public_api';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FixedCardLayoutModule } from './fixed-card-layout/fixed-card-layout.module';
 import { FlexibleColumnLayoutModule } from './flexible-column-layout/flexible-column-layout.module';
@@ -85,7 +84,6 @@ import { ThemesService } from './utils/services/themes.service';
         ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
-        BadgeModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,
@@ -99,7 +97,7 @@ import { ThemesService } from './utils/services/themes.service';
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
-        FileInputModule,
+        FeedListItemModule,
         FileUploaderModule,
         FixedCardLayoutModule,
         FlexibleColumnLayoutModule,

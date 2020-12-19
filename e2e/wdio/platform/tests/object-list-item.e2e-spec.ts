@@ -12,7 +12,6 @@ describe('Object list item suite:', function() {
 
     afterEach(() => {
         webDriver.refreshPage();
-        webDriver.waitForDisplayed(objListPg.root);
     });
 
     describe('Basic checks:', function() {
@@ -34,7 +33,7 @@ describe('Object list item suite:', function() {
            checkElementDisplayed(objListPg.obJListIntro);
            checkElementDisplayed(objListPg.objListAttributes);
            checkElementDisplayed(objListPg.objListStatuses);
-           if (browser.capabilities.browserName === 'firefox') {
+           if (webDriver.browserIsFirefox()) {
                expect(webDriver.getCSSPropertyByName(objListPg.objListItem, ObjListData.altNoBorderStyle).value).toBe('none');
            } else {
                expect(webDriver.getCSSPropertyByName(objListPg.objListItem, ObjListData.noBorderStyle).value).toBe('none');
@@ -51,7 +50,7 @@ describe('Object list item suite:', function() {
         });
         it('should check selection', () => {
             expect(webDriver.getText(objListPg.objSelToolbar)).toBe('0 : Items selected');
-            webDriver.click(objListPg.objListSelItem, 5000, 0);
+            webDriver.click(objListPg.objListSelItem, 0);
             expect(webDriver.getText(objListPg.objSelToolbar)).toBe('1 : Items selected');
         });
     });
@@ -86,7 +85,7 @@ describe('Object list item suite:', function() {
 
         it('should check selection', () => {
             expect(webDriver.getText(objListPg.objRowNavToolbar)).toContain(': is selected');
-            webDriver.click(objListPg.objRowNavList, 5000, 0);
+            webDriver.click(objListPg.objRowNavList, 0);
             expect(webDriver.getText(objListPg.objRowNavToolbar)).toContain('fdp-list-item');
         });
     });

@@ -5,9 +5,7 @@
     [attr.id]="id"
     [attr.placeholder]="placeholder"
     [disabled]="disabled"
-    [attr.aria-disabled]="disabled"
     [readonly]="readonly"
-    [attr.aria-readonly]="readonly"
     [rows]="growing ? 2 : height ? 2 : growingMaxLines"
     [cols]="cols"
     [wrap]="wrapType"
@@ -20,7 +18,7 @@
 ></textarea>
 
 <!-- ICU recommends full text in format -->
-<div class="fd-textarea-counter" *ngIf="showExceededText" role="alert" aria-atomic="true">
+<div class="fd-textarea-counter" *ngIf="showExceededText" aria-live="polite" aria-atomic="true">
     <span i18n="textarea counter|The counter message for this textarea element@@platformI18nTextareaCounterMessage">
         {{ exceededCharCount | number: '1.0-0' }} {exceededCharCount, plural, =1{ character {counterExcessOrRemaining,
         select, excess {over the limit} remaining {remaining}} } other { characters {counterExcessOrRemaining, select,

@@ -2,6 +2,131 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.62...v0.25.0-rc.63) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) address accessibility issues for the Object marker component ([#4081](https://github.com/SAP/fundamental-ngx/issues/4081)) ([a635126](https://github.com/SAP/fundamental-ngx/commit/a635126ce94d1bd09e519b7e6d1b504aa51c597e))
+
+## [0.25.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.61...v0.25.0-rc.62) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) add fix for Tabs programmatic selection not being applied properly ([#4055](https://github.com/SAP/fundamental-ngx/issues/4055)) ([ef8555e](https://github.com/SAP/fundamental-ngx/commit/ef8555e887706372ea2dfd98c271a1822e542d60))
+
+## [0.25.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.60...v0.25.0-rc.61) (2020-12-14)
+
+## [0.25.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.59...v0.25.0-rc.60) (2020-12-14)
+
+
+### Bug Fixes
+
+* **platform:** Adds missing exports ([#4091](https://github.com/SAP/fundamental-ngx/issues/4091)) ([f3024fb](https://github.com/SAP/fundamental-ngx/commit/f3024fba8369ac68598f65ac20e053611df4341f))
+
+## [0.25.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.58...v0.25.0-rc.59) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) Button emphasized text ([#4092](https://github.com/SAP/fundamental-ngx/issues/4092)) ([daa9cd2](https://github.com/SAP/fundamental-ngx/commit/daa9cd288a5ed79f823884ebd938d205c7452370))
+
+## [0.25.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.56...v0.25.0-rc.58) (2020-12-14)
+
+
+### Bug Fixes
+
+* (Core) Fix structure on Shellbar ([#4085](https://github.com/SAP/fundamental-ngx/issues/4085)) ([bfe26d8](https://github.com/SAP/fundamental-ngx/commit/bfe26d8df2839865387eaaf8ea45da0f20c50b82))
+* (platform) fix menu ([#4089](https://github.com/SAP/fundamental-ngx/issues/4089)) ([6a16585](https://github.com/SAP/fundamental-ngx/commit/6a16585f0d964b2f0440a6ed5720f3e94f49aa30))
+* (platform) fix upload collection ([#4063](https://github.com/SAP/fundamental-ngx/issues/4063)) ([4927837](https://github.com/SAP/fundamental-ngx/commit/4927837fbcb2be186f45303dbdf781a5f8753b9b))
+
+## [0.25.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.56...v0.25.0-rc.57) (2020-12-14)
+
+
+### Bug Fixes
+
+* (platform) fix menu ([#4089](https://github.com/SAP/fundamental-ngx/issues/4089)) ([6a16585](https://github.com/SAP/fundamental-ngx/commit/6a16585f0d964b2f0440a6ed5720f3e94f49aa30))
+* (platform) fix upload collection ([#4063](https://github.com/SAP/fundamental-ngx/issues/4063)) ([4927837](https://github.com/SAP/fundamental-ngx/commit/4927837fbcb2be186f45303dbdf781a5f8753b9b))
+
+## [0.25.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.55...v0.25.0-rc.56) (2020-12-13)
+
+## [0.25.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.54...v0.25.0-rc.55) (2020-12-13)
+
+## [0.25.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.53...v0.25.0-rc.54) (2020-12-13)
+
+## [0.25.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.52...v0.25.0-rc.53) (2020-12-11)
+
+## [0.25.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.51...v0.25.0-rc.52) (2020-12-11)
+
+
+### Bug Fixes
+
+* (Platform) Long title example added for object list item ([#4079](https://github.com/SAP/fundamental-ngx/issues/4079)) ([e75d1d2](https://github.com/SAP/fundamental-ngx/commit/e75d1d2d53ed693f2f7ce2dbdf8a52fcd7b31b56))
+
+## [0.25.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.50...v0.25.0-rc.51) (2020-12-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed badge as a standalone component
+
+### Bug Fixes
+
+* remove badge as a standalone component [#3350](https://github.com/SAP/fundamental-ngx/issues/3350) ([#4068](https://github.com/SAP/fundamental-ngx/issues/4068)) ([f153433](https://github.com/SAP/fundamental-ngx/commit/f153433e814c3b33f951896a69331b079ce9a281))
+
+## [0.25.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.49...v0.25.0-rc.50) (2020-12-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed deprecated file-input
+
+### Bug Fixes
+
+* remove deprecated component file-input ([#4067](https://github.com/SAP/fundamental-ngx/issues/4067)) ([4a82777](https://github.com/SAP/fundamental-ngx/commit/4a827775bd7811dd41148ad9f050cb88f1938f2f))
+
+## [0.25.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.48...v0.25.0-rc.49) (2020-12-10)
+
+
+### Features
+
+* (Platform) table phase 2 ([#4028](https://github.com/SAP/fundamental-ngx/issues/4028)) ([89d7803](https://github.com/SAP/fundamental-ngx/commit/89d7803cbb8b0083efcc4a764ccfadbfe828381d))
+
+## [0.25.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.47...v0.25.0-rc.48) (2020-12-10)
+
+## [0.25.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.46...v0.25.0-rc.47) (2020-12-10)
+
+
+### Bug Fixes
+
+* (Platform) accessibility fixes for Textarea ([#4057](https://github.com/SAP/fundamental-ngx/issues/4057)) ([f73410e](https://github.com/SAP/fundamental-ngx/commit/f73410e01f037956dcae4623796912f6d621fd90))
+
+## [0.25.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.45...v0.25.0-rc.46) (2020-12-10)
+
+## [0.25.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.44...v0.25.0-rc.45) (2020-12-10)
+
+
+### Bug Fixes
+
+* (Platform) First avatar in Thumbnail needs highlight on default load ([#4001](https://github.com/SAP/fundamental-ngx/issues/4001)) ([3e63a22](https://github.com/SAP/fundamental-ngx/commit/3e63a22e49d0a8b6b7acbcc829351eec151fcd3b))
+
+## [0.25.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.43...v0.25.0-rc.44) (2020-12-09)
+
+## [0.25.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.42...v0.25.0-rc.43) (2020-12-09)
+
+
+### Bug Fixes
+
+* (Platform|Core) Feed Input placeholder color and button alignment ([#4047](https://github.com/SAP/fundamental-ngx/issues/4047)) ([1a3aa0d](https://github.com/SAP/fundamental-ngx/commit/1a3aa0d903cda4695f5f6c12bacfc6d3df539919))
+
+## [0.25.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.41...v0.25.0-rc.42) (2020-12-08)
+
+
+### Features
+
+* (Core) introduce Feed List Item component ([#3768](https://github.com/SAP/fundamental-ngx/issues/3768)) ([1210ce9](https://github.com/SAP/fundamental-ngx/commit/1210ce9b5a59a125305b0d35f4a6593b3741fefc))
+
 ## [0.25.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.40...v0.25.0-rc.41) (2020-12-07)
 
 

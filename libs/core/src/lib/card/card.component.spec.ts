@@ -68,8 +68,8 @@ describe('CardComponent', () => {
         });
 
         it('should render it in view', () => {
-            const badgeEl: HTMLElement = fixture.debugElement.query(By.css('[fd-badge]')).nativeElement;
-            expect(badgeEl?.innerText).toBe(host.badgeText);
+            const cardEl: HTMLElement = fixture.debugElement.query(By.directive(CardComponent)).nativeElement;
+            expect(cardEl.textContent.includes(host.badgeText)).toBeTruthy();
         });
     });
 

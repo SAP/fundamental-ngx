@@ -8,7 +8,7 @@
             <span *ngIf="!noLabelLayout">{{ label }}</span>
 
             <!-- We can support placement on FormGroup Level to be applied to all the form fields     -->
-            <fd-inline-help *ngIf="hint" [placement]="hintPlacement">
+            <fd-inline-help *ngIf="hint" [placement]="hintPlacement" [attr.aria-label]="hint">
                 {{ hint }}
             </fd-inline-help>
         </label>

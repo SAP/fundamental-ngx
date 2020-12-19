@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import {
@@ -15,7 +16,7 @@ import { PlatformUploadCollectionDataProviderExample } from './platform-upload-c
     templateUrl: './platform-upload-collection-example.component.html'
 })
 export class PlatformUploadCollectionExampleComponent {
-    dataSource = new UploadCollectionDataSource(new PlatformUploadCollectionDataProviderExample());
+    dataSource: UploadCollectionDataSource;
     itemsPerPage: ItemsPerPage[] = [
         {
             label: 5,
@@ -37,6 +38,10 @@ export class PlatformUploadCollectionExampleComponent {
 
     mimeTypes: string[] = ['image/png', 'image/jpeg'];
     fileTypes: string[] = ['jpg', 'png', 'bmp'];
+
+    constructor(private readonly _http: HttpClient) {
+        this.dataSource = new UploadCollectionDataSource(new PlatformUploadCollectionDataProviderExample(_http));
+    }
 
     typeMismatch({ source, payload }: TypeMismatchEvent): void {
         console.log('typeMismatch', source, payload);

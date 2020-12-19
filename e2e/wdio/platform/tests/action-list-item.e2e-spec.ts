@@ -1,6 +1,7 @@
 import { webDriver } from '../../driver/wdio';
 import { ActionListItemPo } from '../pages/action-list-item.po';
-import { checkAttributeValueTrue } from '../../helper/assertion-helper';
+import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
+import ActionData from '../fixtures/appData/action-list-item-contents'
 
 describe('Action List Item Test Suite:', function() {
     const actionListPg = new ActionListItemPo();
@@ -17,13 +18,14 @@ describe('Action List Item Test Suite:', function() {
         it('should check actions on click', () => {
             const actionBtnCount = webDriver.getElementArrayLength(actionListPg.actionBtns);
             for (let i = 0; actionBtnCount > i; i++) {
-                webDriver.click(actionListPg.actionBtns, 5000, i);
+                webDriver.click(actionListPg.actionBtns, i);
                 webDriver.acceptAlert();
             }
         });
 
         it('should check styles', () => {
             checkAttributeValueTrue(actionListPg.actionLists, 'noBorder');
+            checkElementTextValue(actionListPg.actionBtns, ActionData.btnText);
             expect(webDriver.getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 0)).toBe('false');
             expect(webDriver.getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 1)).toBe('true');
         });
@@ -31,16 +33,7 @@ describe('Action List Item Test Suite:', function() {
 
     describe('Orientation check:', function() {
         it('should check RTL and LTR orientation', () => {
-            const areas = webDriver.elementArray(actionListPg.exampleAreaContainersArr);
-            const switchers = webDriver.elementArray(actionListPg.rtlSwitcherArr);
-            for (let i = 0; i < areas.length; i++) {
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(actionListPg.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-                expect(webDriver.getCSSPropertyByName(actionListPg.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(actionListPg.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
-                expect(webDriver.getCSSPropertyByName(actionListPg.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
-            }
+            actionListPg.checkRtlSwitch(actionListPg.rtlSwitcherArr, actionListPg.exampleAreaContainersArr);
         });
     });
 });

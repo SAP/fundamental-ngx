@@ -3,34 +3,33 @@
         <fdp-form-group #fg3 [multiLayout]="true">
             <fdp-form-field
                 #ff3
-                [id]="'templateExample'"
+                id="templateExample"
                 label="Detailed description"
-                [placeholder]="'Start entering detailed description'"
+                placeholder="Start entering detailed description"
                 hint="This is tooltip help"
                 zone="zLeft"
                 rank="10"
-                hintPlacement="'left'"
+                hintPlacement="left"
                 [validators]="textareaValidator"
             >
                 <fdp-textarea
-                    [id]="'templateExample'"
-                    [name]="'templateExample'"
+                    name="templateExample"
                     [growingMaxLines]="3"
                     [cols]="10"
                     [growing]="true"
                     [maxLength]="10"
                     [showExceededText]="true"
-                    [wrapType]="'hard'"
+                    wrapType="hard"
                     [(ngModel)]="tValue"
                 >
                 </fdp-textarea>
             </fdp-form-field>
 
-            <ng-template #i18n let-errros>
-                <span *ngIf="errros.required">
+            <ng-template #i18n let-errors>
+                <span role="alert" aria-atomic="true" *ngIf="errors.required">
                     Value is required
                 </span>
-                <span *ngIf="errros.maxlength">
+                <span role="alert" aria-atomic="true" *ngIf="errors.maxlength">
                     Please get your character count under limit.
                 </span>
             </ng-template>

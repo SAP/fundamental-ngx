@@ -203,6 +203,7 @@ describe('UploadCollectionComponent', () => {
                     id: uuidv4(),
                     name: 'Tod G.'
                 },
+                url: '',
                 uploadedOn: new Date(2010, 9, 4),
                 fileSize: 2048,
                 version: 1
@@ -215,6 +216,7 @@ describe('UploadCollectionComponent', () => {
                     id: uuidv4(),
                     name: 'Alex G.'
                 },
+                url: '',
                 uploadedOn: new Date(2010, 9, 4),
                 fileSize: 2048,
                 version: 1
