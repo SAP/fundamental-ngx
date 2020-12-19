@@ -15,6 +15,32 @@ export class Wdio {
     pause(waitTime: number = this.defaultWaitTime): void {
         browser.pause(waitTime);
     }
+
+    isBrowser(browserName: string): boolean {
+      return browser.capabilities.browserName === browserName;
+    }
+
+    browserIsIEorSafari(): boolean {
+        if (this.isBrowser('Safari')) {return true}
+        if (this.isBrowser('internet explorer')) {return true}
+        return false;
+    }
+
+    browserIsFirefox(): boolean {
+        if (this.isBrowser('firefox')) {return true}
+        return false;
+    }
+
+    browserIsIE(): boolean {
+        if (this.isBrowser('internet explorer')) {return true}
+        return false;
+    }
+
+    browserIsSafari(): boolean {
+        if (this.isBrowser('Safari')) {return true}
+        return false;
+    }
+
     goBack(): void {
         browser.back();
     }
@@ -67,7 +93,7 @@ export class Wdio {
         return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getText());
     }
 
-    waitForDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+    waitForElDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     };
 
@@ -84,16 +110,16 @@ export class Wdio {
     };
 
     waitForPresent(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
-        return $$(selector)[index].waitForExist({ timeout: waitTime});
+        return $$(selector)[index].waitForExist({ timeout: waitTime });
     };
 
-    isEnabled(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): boolean {
+    isEnabled(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].isEnabled();
     };
 
     // Waits to be empty if text is not passed
-    waitTextToBePresentInValue(selector: string, text: string = '', index: number = 0,  waitTime = this.defaultWaitTime): boolean {
+    waitTextToBePresentInValue(selector: string, text: string = '', index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitUntil(function(): boolean {
             return this.getValue() === text;
         }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
@@ -113,7 +139,7 @@ export class Wdio {
     }
 
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string } {
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: any } {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 
@@ -122,7 +148,7 @@ export class Wdio {
         $$(selector)[index].moveTo();
     }
 
-    clearValue(selector: string,  index: number = 0, waitTime = this.defaultWaitTime): void {
+    clearValue(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].clearValue();
     }
@@ -167,13 +193,11 @@ export class Wdio {
         return $$(selector)[index].isDisplayed();
     }
 
-    clickAndHold(selector: string,  index: number = 0, waitTime: number = this.defaultWaitTime): void {
-        $$(selector)[index].waitForDisplayed({timeout: waitTime});
+    clickAndHold(selector: string, index: number = 0, waitTime: number = this.defaultWaitTime): void {
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].moveTo();
         return browser.buttonDown();
     }
-
-    // TODO: add wait 300ms
 
     waitElementToBePresentInDOM (selector: string,  index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime });
@@ -187,9 +211,7 @@ export class Wdio {
         return $$(selector)[index].isClickable();
     }
 
-
-
-    getUrl(): string {
+    getCurrentUrl(): string {
         return browser.getUrl();
     }
 
@@ -208,11 +230,6 @@ export class Wdio {
         // @ts-ignore
         $$(selector)[index].focus();
     }
-
-    getCurrentUrl(): string {
-        return browser.getUrl();
-    }
-
 
     clickNextElement(selector: string, index: number = 0): void {
         $$(selector)[index].nextElement().click();

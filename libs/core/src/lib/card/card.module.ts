@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { AvatarModule } from '../avatar/avatar.module';
 import { ObjectStatusModule } from '../object-status/object-status.module';
-import { BadgeModule } from '../badge/badge.module';
 
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header.component';
@@ -46,7 +45,7 @@ const components = [
 
 @NgModule({
     declarations: [...components],
-    imports: [CommonModule, BadgeModule, ButtonModule, AvatarModule, ObjectStatusModule],
+    imports: [CommonModule, ButtonModule, AvatarModule, ObjectStatusModule],
     exports: [ButtonModule, AvatarModule, ...components]
 })
 export class CardModule {}

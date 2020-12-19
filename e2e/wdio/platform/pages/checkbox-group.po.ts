@@ -1,5 +1,4 @@
 import { BaseComponentPo } from './base-component.po';
-import { $, $$ } from 'protractor';
 
 export class CheckboxGroupPO extends BaseComponentPo {
     url = '/checkbox-group';

@@ -248,7 +248,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             step._stepId = _stepId;
             _stepId++;
             step.finalStep = false;
-            if (step.completed && this.appendToWizard) {
+            if (step.visited && step.branching && step.status === CURRENT_STEP_STATUS) {
+                step.content.nextStep._getElRef().nativeElement.style.display = 'inherit';
+            } else if (step.completed && this.appendToWizard) {
                 step.content.nextStep._getElRef().nativeElement.style.display = 'none';
             }
             if (
