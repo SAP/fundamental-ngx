@@ -123,6 +123,7 @@ describe('FlexibleColumnLayoutComponent', () => {
     // TODO: Unskip after fix
     xit('TWO_COLUMNS_START_EXPANDED should render 2 columns, start expanded, mid open', async () => {
         whenStable(fixture);
+        viewport.set(1023, 900);
 
         testComponent.layout = TWO_COLUMNS_START_EXPANDED;
         fixture.detectChanges();
@@ -140,6 +141,7 @@ describe('FlexibleColumnLayoutComponent', () => {
     // TODO: Unskip after fix
     xit('TWO_COLUMNS_MID_EXPANDED should render 2 columns, start open, mid expanded', async () => {
         whenStable(fixture);
+        viewport.set(1023, 900);
 
         testComponent.layout = TWO_COLUMNS_MID_EXPANDED;
         fixture.detectChanges();

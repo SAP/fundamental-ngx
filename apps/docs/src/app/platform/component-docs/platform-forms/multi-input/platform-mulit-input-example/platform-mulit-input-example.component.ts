@@ -1,10 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-export interface User {
-    firstName: string;
-    lastName: string;
-}
-
 @Component({
     selector: 'fdp-platform-multi-input-example',
     templateUrl: './platform-mulit-input-example.component.html',
@@ -17,8 +12,6 @@ export class PlatformMulitInputExampleComponent {
         { firstName: 'Arizona', lastName: 'Phoenix' },
         { firstName: 'Arkansas', lastName: 'Little Rock' },
         { firstName: 'California', lastName: 'Sacramento' },
-        { firstName: 'Colorado', lastName: 'Denver' },
-        { firstName: 'Connecticut', lastName: 'Hartford' },
         { firstName: 'Colorado', lastName: 'Denver' },
         { firstName: 'Connecticut', lastName: 'Hartford' },
         { firstName: 'Kentucky', lastName: 'Frankfort' },

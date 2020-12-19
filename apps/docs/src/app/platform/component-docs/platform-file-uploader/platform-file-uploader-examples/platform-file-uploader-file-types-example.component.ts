@@ -14,10 +14,14 @@ export class PlatformFileUploaderFileTypesExampleComponent {
 
     handleFileSelection(files: FileUploaderSelectionChangeEvent): void {
         this.files = files.payload;
-        alert('file uploaded' + this.files.length);
+        if (this.files.length > 0) {
+            alert('file uploaded' + this.files.length);
+        }
     }
     handleInvalidFileSelection(files: FileUploaderInvalidChangeEvent): void {
         this.invalidFiles = files.payload;
-        alert('file invalid uploaded' + this.invalidFiles.length);
+        if (this.invalidFiles.length > 0) {
+            alert('file invalid uploaded' + this.invalidFiles.length);
+        }
     }
 }

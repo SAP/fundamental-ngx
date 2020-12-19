@@ -2,12 +2,12 @@
 <ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
     <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabindex="-1" [attr.aria-selected]="_selected"
         (click)="_onItemClick()" (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)"
-        class="fd-object-list__item fd-list__item--link" role="listitem"
+        class="fd-object-list__item fd-list__item--link" role="with Navigation"
         [class.fd-list__item--inactive]="listType === 'inactive'" [attr.ariaLabelledBy]="ariaLabelledBy"
         [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
         <ng-container *ngTemplateOutlet=" selectionTemplate">
         </ng-container>
-        <a #link fd-list-link [routerLink]="routerLink" [attr.href]="routerLink"
+        <a #link fd-list-link [routerLink]="routerLink" [attr.href]="routerLink" 
             [navigationIndicator]="navigationIndicator" [navigated]="navigated" tabindex="-1">
             <ng-container *ngTemplateOutlet="objectTemplate"></ng-container>
         </a>
@@ -16,7 +16,7 @@
 <!--  list item without navigation and used for simple list display-->
 <ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText!==null && noDataText!== undefined)">
     <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabindex="-1"
-        class="fd-object-list__item" role="listitem" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy"
+        class="fd-object-list__item" (keyup)="_onKeyUp($event)" [attr.ariaLabelledBy]="ariaLabelledBy"
         [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet"
         [class.fd-list__item--inactive]="listType === 'inactive'" (click)="_onItemClick()">
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
@@ -32,7 +32,7 @@
 <ng-template #objectTemplate>
     <div class="fd-object-list__container">
         <!--Optional text-->
-        <div class="fd-object-list__intro">{{introductionText}}</div>
+        <div class="fd-object-list__intro" *ngIf="introductionText">{{introductionText}}</div>
         <!--header content-->
         <div class="fd-object-list__header">
             <fd-avatar size="s" [glyph]="glyph" *ngIf="label !== undefined || image !== undefined" [label]="label"
@@ -70,11 +70,11 @@
 <ng-template #actionsTemplate>
     <ng-content selector="#secondaryAction"></ng-content>
     <button fd-button *ngIf="listType === 'detail'" role="button" compact="_isCompact" fdType="transparent" glyph="edit"
-        [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')" (click)="_onActionButtonClick('edit')"
+    title="detail"  [attr.aria-label]="'detail'" (keydown)="_onKeyButtonClick($event,'edit')" (click)="_onActionButtonClick('edit')"
         [attr.id]="'detail-' + id">
     </button>
     <button fd-button *ngIf="selectionMode === 'delete'" role="button" compact="_isCompact" [attr.aria-label]="'delete'"
-        fdType="transparent" glyph="decline" (keydown)="_onKeyButtonClick($event,'delete')"
+    title="delete" fdType="transparent" glyph="decline" (keydown)="_onKeyButtonClick($event,'delete')"
         (click)="_onActionButtonClick('delete')" [attr.id]="'delete-' + id">
     </button>
 </ng-template>

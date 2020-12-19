@@ -46,6 +46,8 @@ const routes: Routes = [
         SecondDialogExampleComponent,
         DialogStackedExampleComponent
     ],
-    providers: [DialogService]
+    providers: [
+        DialogService
+    ]
 })
 export class DialogDocsModule { }

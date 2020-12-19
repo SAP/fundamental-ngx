@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { DIALOG_REF, DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core';
 import { SecondDialogExampleComponent } from './second-dialog-example.component';
 
 @Component({
@@ -32,7 +32,7 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
     `
 })
 export class FirstDialogExampleComponent {
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, public _dialogService: DialogService) {}
+    constructor(public dialogRef: DialogRef, public _dialogService: DialogService) {}
 
     openDialog(): void {
         this._dialogService.open(SecondDialogExampleComponent, { responsivePadding: true });

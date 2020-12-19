@@ -22,7 +22,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import {
     closestElement,
-    DIALOG_CONFIG,
     DialogConfig,
     DynamicComponentService,
     RtlService
@@ -77,7 +76,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
+        @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
         @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
