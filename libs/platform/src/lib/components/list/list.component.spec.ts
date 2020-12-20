@@ -76,7 +76,7 @@ describe('ListComponent', () => {
     });
 
     it('Should display list container with role as list', () => {
-        const listContainer = fixture.debugElement.nativeElement.querySelector('fdp-list');
+        const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
         fixture.detectChanges();
         expect(listContainer.getAttribute('role')).toEqual('list');
     });

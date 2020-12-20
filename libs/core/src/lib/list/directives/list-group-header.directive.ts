@@ -1,7 +1,10 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[fdListGroupHeader], [fd-list-group-header]'
+  selector: '[fdListGroupHeader], [fd-list-group-header]',
+  host: {
+    '[style.outline]': '"none"',
+  }
 })
 export class ListGroupHeaderDirective {
     /** @hidden */
