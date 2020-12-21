@@ -16,13 +16,13 @@ describe('Input Group should', function() {
     });
 
     it('have associated label element to describe its purpose', () => {
-        expect(webDriver.getTextArr(inputGroupPage.standartInputLabelsArr)).toEqual(inputGroupPContent.standartInputLabels);
+        expect(webDriver.getTextArr(inputGroupPage.standartInputLabelsArr)).toEqual(inputGroupPContent.standardInputLabels);
         expect(webDriver.getText(inputGroupPage.withFormInputLabel)).toEqual(inputGroupPContent.inputWithFormLabel);
     });
 
     it('have correct placeholder text', () => {
         expect(webDriver.getAttributeByNameArr(inputGroupPage.standartInputArr, 'placeholder'))
-            .toEqual(inputGroupPContent.standartInputPlaceholders);
+            .toEqual(inputGroupPContent.standardInputPlaceholders);
         expect(webDriver.getAttributeByName(inputGroupPage.withFormInput, 'placeholder'))
             .toEqual(inputGroupPContent.inputWithFormPlaceholder);
     });
@@ -129,18 +129,18 @@ describe('Input Group should', function() {
 
     it('with form input have info tooltip', () => {
         // if(webDriver.isIEorSafari()) {
-            webDriver.waitForDisplayed(inputGroupPage.withFormInput);
-            webDriver.scrollIntoView(inputGroupPage.withFormInput);
-            webDriver.mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
+        webDriver.waitForDisplayed(inputGroupPage.withFormInput);
+        webDriver.scrollIntoView(inputGroupPage.withFormInput);
+        webDriver.mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
 
-            expect(webDriver.getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
-           // return;
-       // }
+        expect(webDriver.getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
+        // return;
+        // }
     });
 
-    // TODO Unxit after merge
-    xit('should check RTL', () => {
-        // inputGroupPage.checkRtlSwitch();
+
+    it('should check RTL', () => {
+        inputGroupPage.checkRtlSwitch();
     });
 
 });

@@ -4,8 +4,10 @@ import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion
 export class BaseComponentPo {
 
     title = 'header .header';
+    exampleAreaContainersArr = '.fd-doc-component';
+    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
-    checkRtlSwitch(switchers: string, areas: string): void {
+    checkRtlSwitch(switchers: string = this.rtlSwitcherArr, areas: string = this.exampleAreaContainersArr): void {
         const areasArray = webDriver.elementArray(areas);
         for (let i = 0; i < areasArray.length; i++) {
             webDriver.click(switchers, i);

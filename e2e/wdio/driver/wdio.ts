@@ -68,7 +68,7 @@ export class Wdio {
         return $$(selector)[index].getValue();
     };
 
-    getValueArr(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
+    getArrValues(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
         return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getValue());
     }
 
@@ -202,7 +202,7 @@ export class Wdio {
 
     }
 
-    isExists(selector: string): boolean {
+    doesItExist(selector: string): boolean {
         return $(selector).isExisting();
     }
 

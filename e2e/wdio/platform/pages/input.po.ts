@@ -25,6 +25,8 @@ export class InputPo extends BaseComponentPo {
     autocompleteOptions = '.fd-popover__popper li';
 
 
+
+
     open(): void {
         super.open(this.url);
         webDriver.waitForDisplayed(this.root);

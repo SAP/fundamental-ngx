@@ -17,7 +17,7 @@ describe('Input should ', function() {
     it('have input without label', () => {
         webDriver.waitElementToBePresentInDOM(inputPage.defaultInput);
         webDriver.waitForDisplayed(inputPage.defaultInput);
-        expect(webDriver.isExists(inputPage.autocompleteInputLabel)).toBe(false);
+        expect(webDriver.doesItExist(inputPage.autocompleteInputLabel)).toBe(false);
     });
 
     it('be able to type something with keyboard', () => {
@@ -102,10 +102,7 @@ describe('Input should ', function() {
     });
 
     it('should have error border color', () => {
-        if (browser.capabilities.browserName === 'Safari' || browser.capabilities.browserName === 'internet explorer') {
-            console.log('skip');
-            pending();
-        } else {
+        if (!webDriver.isIEorSafari()) {
             webDriver.waitElementToBePresentInDOM(inputPage.messagesComponentsInput);
             webDriver.scrollIntoView(inputPage.messagesComponentsInput);
             webDriver.waitForDisplayed(inputPage.messagesComponentsInput);
@@ -116,7 +113,9 @@ describe('Input should ', function() {
             webDriver.pause(300);
             webDriver.waitForDisplayed(inputPage.errorText);
             expect(webDriver.getText(inputPage.errorText).trim()).toBe(inputPContent.errorText);
+            return;
         }
+        console.log('Skip for IE and Safari');
     });
 
     it('should have visual cue for require input', () => {
@@ -151,8 +150,8 @@ describe('Input should ', function() {
 
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
-    // TODO Unxit after merge
-    xit('should check RTL', () => {
-        // inputPage.checkRtlSwitch();
+
+    it('should check RTL', () => {
+        inputPage.checkRtlSwitch();
     });
 });

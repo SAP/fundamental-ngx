@@ -40,6 +40,9 @@ export class InputGroupPo extends BaseComponentPo {
     withFormInputErrorTooltip = '[type="error"] span';
     withFormInputInfoTooltip = '.fd-inline-help__content';
 
+    exampleAreaContainersArr = '.fd-doc-component';
+    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
+
 
     open(): void {
         super.open(this.url);
