@@ -127,11 +127,10 @@ describe('Input Group should', function() {
     });
 
     it('with form input have info tooltip', () => {
-        if (webDriver.isIEorSafari()) {
+        if (!webDriver.isIEorSafari()) {
             webDriver.waitForDisplayed(inputGroupPage.withFormInput);
             webDriver.scrollIntoView(inputGroupPage.withFormInput);
             webDriver.mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
-
             expect(webDriver.getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
             return;
         }
