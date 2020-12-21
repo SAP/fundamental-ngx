@@ -207,7 +207,7 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
 }
 
 .fdp-upload-collection-dialig-no-bg {
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 [dir='rtl'] {
@@ -221,12 +221,12 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
 
 .fd-menu__list {
     .disabled {
-        background-color: #fff;
+        background-color: #fff !important;
         background-color: var(--sapList_Background) !important;
         cursor: not-allowed;
 
         .fd-menu__title {
-            color: #32363a;
+            color: #32363a !important;
             color: var(--sapList_TextColor) !important;
         }
     }

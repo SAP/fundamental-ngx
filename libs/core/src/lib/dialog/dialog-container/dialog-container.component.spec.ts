@@ -3,8 +3,8 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { Component } from '@angular/core';
 
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
-import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
-import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
+import { DialogConfig } from '../utils/dialog-config.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { whenStable } from '../../utils/tests';
 
@@ -25,8 +25,8 @@ describe('DialogContainerComponent', () => {
         TestBed.configureTestingModule({
             declarations: [DialogContainerComponent, ContentTestComponent],
             providers: [
-                { provide: DIALOG_CONFIG, useValue: dialogConfig },
-                { provide: DIALOG_REF, useClass: DialogRef }
+                { provide: DialogConfig, useValue: dialogConfig },
+                { provide: DialogRef, useClass: DialogRef }
             ]
         }).overrideModule(BrowserDynamicTestingModule, {
             set: { entryComponents: [ContentTestComponent] }

@@ -293,7 +293,7 @@ export class UploadCollectionComponent {
     _fileNameChange(e: FocusEvent, item: UploadCollectionItem): void {
         const input = e.target as HTMLInputElement;
         const itemName = input.value;
-        const newName = `${itemName}.${item.name.split('.').pop()}`;
+        const newName = item.type === 'file' ? `${itemName}.${item.name.split('.').pop()}` : itemName;
 
         if (itemName.length > this.maxFilenameLength) {
             const reanmedItem = {
@@ -310,6 +310,7 @@ export class UploadCollectionComponent {
         }
 
         const data = {
+            parentFolderId: this._getCurrentFolderId(),
             fileName: newName,
             item: { ...item }
         };
@@ -318,7 +319,6 @@ export class UploadCollectionComponent {
         this.dataSource
             .fileRenamed(data)
             .pipe(
-                take(1),
                 tap(() => {
                     this.selectedItems = [];
 
@@ -383,7 +383,7 @@ export class UploadCollectionComponent {
         const dialogRef = this._dialogService.open(NewFolderComponent, {
             responsivePadding: true,
             backdropClickCloseable: false,
-            height: '70%',
+            height: '320px',
             data: {
                 currentFolder: this._getCurrentFolder()
             }
@@ -401,10 +401,7 @@ export class UploadCollectionComponent {
 
             this.dataSource
                 .newFolder(data)
-                .pipe(
-                    take(1),
-                    tap(() => this._match())
-                )
+                .pipe(tap(() => this._match()))
                 .subscribe({
                     next: () => {
                         this.showMessage(MessageType.CREATE, {
@@ -434,7 +431,7 @@ export class UploadCollectionComponent {
             responsivePadding: true,
             verticalPadding: false,
             backdropClickCloseable: false,
-            height: '70%',
+            height: '350px',
             data: {
                 items: this.dataSource.dataProvider.items,
                 currentFolder: currentFolder
@@ -454,7 +451,6 @@ export class UploadCollectionComponent {
                 this.dataSource
                     .moveTo(payload)
                     .pipe(
-                        take(1),
                         tap(() => {
                             this.selectedItems = [];
 
@@ -487,7 +483,7 @@ export class UploadCollectionComponent {
         const _activeItem = { ...this._activeItem };
         const items = (multiple ? this.selectedItems : [_activeItem]) as UploadCollectionFile[];
 
-        this.dataSource.download({ items: items }).pipe(take(1)).subscribe();
+        this.dataSource.download({ items: items }).subscribe();
     }
 
     /** @hidden */
@@ -498,12 +494,11 @@ export class UploadCollectionComponent {
 
         const _activeItem = { ...this._activeItem };
         const items = multiple ? this.selectedItems : [_activeItem];
-        const data = { items: items };
+        const data = { parentFolderId: this._getCurrentFolderId(), items: items };
 
         this.dataSource
             .delete(data)
             .pipe(
-                take(1),
                 tap(() => {
                     this.selectedItems = [];
 
@@ -530,10 +525,7 @@ export class UploadCollectionComponent {
     _runUploadNewFileAfterFail(item: UploadCollectionFile): void {
         this.dataSource
             .runAfterFail({ parentFolderId: this._getCurrentFolderId(), items: [item] })
-            .pipe(
-                take(1),
-                tap(() => this._match())
-            )
+            .pipe(tap(() => this._match()))
             .subscribe();
     }
 
@@ -541,10 +533,7 @@ export class UploadCollectionComponent {
     _cancelUploadNewFile(file: UploadCollectionFile): void {
         this.dataSource
             .cancelUploadNewFile({ parentFolderId: this._getCurrentFolderId(), item: file })
-            .pipe(
-                take(1),
-                tap(() => this._match())
-            )
+            .pipe(tap(() => this._match()))
             .subscribe();
     }
 
@@ -731,6 +720,7 @@ export class UploadCollectionComponent {
         };
 
         const data = {
+            parentFolderId: this._getCurrentFolderId(),
             item: this._currentUpdateFileVersion,
             newItem: newItem
         };
@@ -739,10 +729,7 @@ export class UploadCollectionComponent {
 
         this.dataSource
             .updateVersion(data)
-            .pipe(
-                take(1),
-                tap(() => this._match())
-            )
+            .pipe(tap(() => this._match()))
             .subscribe({
                 next: () => {
                     this.showMessage(MessageType.UPDATE_VERSION, {
@@ -772,10 +759,7 @@ export class UploadCollectionComponent {
                 parentFolderId: currentFolderId,
                 items: newItems.map((item) => ({ ...item }))
             })
-            .pipe(
-                take(1),
-                tap(() => this._match())
-            )
+            .pipe(tap(() => this._match()))
             .subscribe();
     }
 
@@ -893,6 +877,7 @@ export class UploadCollectionComponent {
                 uploadedOn: new Date(),
                 fileSize: file.size,
                 version: 1,
+                url: '',
                 status: UploadCollectionItemStatus.LOADING,
                 file: file
             };

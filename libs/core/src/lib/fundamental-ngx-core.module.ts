@@ -75,6 +75,7 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
 import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
 import { MessageBoxModule } from './message-box/message-box.module';
 import { ThemesService } from './utils/services/themes.service';
+import { WizardModule } from './wizard/wizard.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -144,6 +145,7 @@ import { ThemesService } from './utils/services/themes.service';
         SwitchModule,
         TokenModule,
         TreeModule,
+        WizardModule,
         CardModule,
         MessageBoxModule,
         MessageToastModule,

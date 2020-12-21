@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogHeaderComponent } from './dialog-header.component';
 import { Component, Type, ViewChild } from '@angular/core';
-import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { DialogConfig } from '../utils/dialog-config.class';
 import { TemplateModule } from '../../utils/directives/template/template.module';
 import { BarModule } from '../../bar/bar.module';
 
@@ -47,7 +47,7 @@ describe('DialogHeaderComponent', () => {
         TestBed.configureTestingModule({
             declarations: [DialogHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
             imports: [BarModule, TemplateModule],
-            providers: [{ provide: DIALOG_CONFIG, useClass: DialogConfig }]
+            providers: [DialogConfig]
         });
     }));
 

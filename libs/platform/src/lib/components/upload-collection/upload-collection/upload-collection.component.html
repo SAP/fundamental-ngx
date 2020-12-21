@@ -64,10 +64,11 @@
                     [compact]="true"
                     fdType="ghost"
                     [disabled]="disabled"
-                    i18n="@@platformUploadCollection.Btn.Add"
-                >
-                    Add
-                </button>
+                    i18n-label="@@platformUploadCollection.Btn.Add"
+                    label="Add"
+                    i18n-title="@@platformUploadCollection.Btn.Add"
+                    title="Add"
+                ></button>
 
                 <button
                     fd-toolbar-item
@@ -77,10 +78,11 @@
                     *ngIf="hierarchy"
                     [disabled]="disabled"
                     fdType="transparent"
-                    i18n="@@platformUploadCollection.Btn.NewFolder"
-                >
-                    New Folder
-                </button>
+                    i18n-label="@@platformUploadCollection.Btn.NewFolder"
+                    label="New Folder"
+                    i18n-title="@@platformUploadCollection.Btn.NewFolder"
+                    title="New Folder"
+                ></button>
             </ng-container>
         </ng-container>
 
@@ -92,10 +94,11 @@
                 [compact]="true"
                 fdType="ghost"
                 [disabled]="disabled"
-                i18n="@@platformUploadCollection.Btn.MoveTo"
-            >
-                Move to
-            </button>
+                i18n-label="@@platformUploadCollection.Btn.MoveTo"
+                label="Move to"
+                i18n-title="@@platformUploadCollection.Btn.MoveTo"
+                title="Move to"
+            ></button>
             <button
                 fd-toolbar-item
                 fd-button
@@ -104,10 +107,11 @@
                 [compact]="true"
                 [disabled]="disabled"
                 *ngIf="_showIfSelectedOnlyFiles()"
-                i18n="@@platformUploadCollection.Btn.Download"
-            >
-                Download
-            </button>
+                i18n-label="@@platformUploadCollection.Btn.Download"
+                label="Download"
+                i18n-title="@@platformUploadCollection.Btn.Download"
+                title="Download"
+            ></button>
             <button
                 fd-toolbar-item
                 fd-button
@@ -115,10 +119,11 @@
                 [compact]="true"
                 fdType="ghost"
                 [disabled]="disabled"
-                i18n="@@platformUploadCollection.Btn.Remove"
-            >
-                Remove
-            </button>
+                i18n-label="@@platformUploadCollection.Btn.Remove"
+                label="Remove"
+                i18n-title="@@platformUploadCollection.Btn.Remove"
+                title="Remove"
+            ></button>
         </ng-container>
     </fd-toolbar>
 
@@ -140,9 +145,11 @@
             <!-- Table -->
             <fdp-table
                 [dataSource]="_visibleList"
+                *ngIf="_visibleList.length > 0"
                 contentDensity="compact"
                 selectionMode="multiple"
                 emptyTableMessage=""
+                noHorizontalBorders="true"
                 (rowSelectionChange)="_onRowSelectionChange($event)"
             >
                 <fdp-column label="Name">
@@ -189,18 +196,18 @@
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.uploadedBy.name"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="Uploaded on" align="end">
+                <fdp-column label="Uploaded on">
                     <fdp-table-cell
                         *fdpCellDef="let item"
                         [innerText]="item.uploadedOn | date: 'shortDate'"
                     ></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="File size" align="end">
+                <fdp-column label="File size">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.fileSize | convertBytes"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="Version" align="end">
+                <fdp-column label="Version">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.version || ''"></fdp-table-cell>
                 </fdp-column>
 
@@ -236,7 +243,10 @@
                             <div class="fdp-upload-collection__actions--status">
                                 <button
                                     fd-button
+                                    i18n-label="@@platformUploadCollection.Btn.Run"
                                     label="Run"
+                                    i18n-title="@@platformUploadCollection.Btn.Run"
+                                    title="Run"
                                     (click)="_runUploadNewFileAfterFail(item)"
                                     [compact]="true"
                                     fdType="ghost"
@@ -246,7 +256,10 @@
 
                                 <button
                                     fd-button
+                                    i18n-label="@@platformUploadCollection.Btn.Cancel"
                                     label="Cancel"
+                                    i18n-title="@@platformUploadCollection.Btn.Cancel"
+                                    title="Cancel"
                                     fdType="negative"
                                     [compact]="true"
                                     fdType="ghost"
@@ -296,7 +309,10 @@
         <div class="fdp-upload-collection__table-footer" *ngIf="enablePagination">
             <!-- Pagination -->
             <div class="fdp-upload-collection__pagination">
-                <span class="fdp-upload-collection__pagination--total" i18n="@@platformUploadCollection.Pagination.Total">
+                <span
+                    class="fdp-upload-collection__pagination--total"
+                    i18n="@@platformUploadCollection.Pagination.Total"
+                >
                     Showing {{ _countShowedItems }}-{{ _countNotShowedItems }} of {{ _totalItems }}
                 </span>
                 <fd-pagination

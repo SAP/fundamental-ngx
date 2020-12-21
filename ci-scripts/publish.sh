@@ -3,7 +3,7 @@
 set -u -e
 
 PACKAGES=(core platform)
-CURRENT_BRANCH=master
+CURRENT_BRANCH=main
 
 git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
@@ -16,7 +16,7 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
 
 elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
    echo "################ Running Master deploy tasks ################"
-   CURRENT_BRANCH=master
+   CURRENT_BRANCH=main
 
   # delete temp branch
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
@@ -50,7 +50,7 @@ do
     if [[  $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
       $NPM_BIN  publish --tag prerelease --access public
     elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
-      $NPM_BIN  publish --tag prerelease --access public
+      $NPM_BIN  publish --access public
     fi
     cd ..
 done
@@ -59,7 +59,7 @@ cd ../../
 
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
-    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch master
+    npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch main
     npm run build-docs-github-pages
     npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 fi

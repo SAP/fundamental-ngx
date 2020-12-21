@@ -16,6 +16,15 @@ export class Wdio {
         browser.pause(waitTime);
     }
 
+    isBrowser(browserName: string): boolean {
+      return browser.capabilities.browserName === browserName;
+    }
+
+    isIEorSafari(): boolean {
+        if (this.isBrowser('Safari')) {return true}
+        if (this.isBrowser('internet explorer')) {return true}
+        return false;
+    }
     goBack(): void {
         browser.back();
     }
@@ -45,6 +54,7 @@ export class Wdio {
     // Clear value before set new
     setValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+        $$(selector)[index].clearValue();
         $$(selector)[index].setValue(value);
     };
 
@@ -55,18 +65,18 @@ export class Wdio {
             $$(selector)[index].addValue(symbol);
             browser.pause(delay);
         }
-    };
+    }
 
     // add value to existing one
     addValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].addValue(value);
-    };
+    }
 
-    getValue(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): string {
+    getValue(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].getValue();
-    };
+    }
 
     getText(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
@@ -79,14 +89,14 @@ export class Wdio {
 
     waitForDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    };
-
-    waitForInvisibilityOf(selector: string, index: number = 0): boolean {
-        return $$(selector)[index].waitForDisplayed({ reverse: true })
     }
 
-    waitForNotDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
-        return $(selector).waitForDisplayed({ timeout: waitTime, reverse: true });
+    waitForInvisibilityOf(selector: string, index: number = 0): boolean {
+        return $$(selector)[index].waitForDisplayed({ reverse: true });
+    }
+
+    waitForNotDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+        return $$(selector)[index].waitForDisplayed({ timeout: waitTime, reverse: true });
     }
 
     waitForClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
@@ -95,28 +105,28 @@ export class Wdio {
 
     waitForUnclickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
-    };
+    }
 
     waitForPresent(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime});
-    };
+    }
 
-    isEnabled(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): boolean {
+    isEnabled(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].isEnabled();
-    };
+    }
 
     // Waits to be empty if text is not passed
-    waitTextToBePresentInValue(selector: string, text: string = '',  index: number = 0,  waitTime = this.defaultWaitTime): boolean {
+    waitTextToBePresentInValue(selector: string, text: string = '', index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitUntil(function(): boolean {
             return this.getValue() === text;
         }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
-    };
+    }
 
     // Sends to the active element
     sendKeys(keys: string | string[]): void {
         browser.keys(keys);
-    };
+    }
 
     uploadFile(selector: string, pathToFile: string, index: number = 0): void {
         $$(selector)[index].setValue(pathToFile);
@@ -127,7 +137,7 @@ export class Wdio {
     }
 
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0 ): { value: string } {
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string } {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 
@@ -136,7 +146,7 @@ export class Wdio {
         $$(selector)[index].moveTo();
     }
 
-    clearValue(selector: string,  index: number = 0, waitTime = this.defaultWaitTime): void {
+    clearValue(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].clearValue();
     }
@@ -147,6 +157,26 @@ export class Wdio {
 
     executeScript(callback): string {
         return browser.execute(callback());
+    }
+
+    executeScript2(selector): string {
+        const attrName = browser.capabilities.browserName === 'firefox' ? 'border-left-style' : 'border';
+        return browser.execute(function(selector, attrName) {
+            return window.getComputedStyle(
+                document.querySelector(selector), ':after')[attrName];
+        }, selector, attrName);
+    }
+
+    executeScriptBeforeTagAttr(selector, attrName): string {
+        return browser.execute(function(selector, attrName) {
+            return (window.getComputedStyle(document.querySelector(selector), ':before')[attrName]);
+        }, selector, attrName);
+    }
+
+    executeScriptAfterTagAttr(selector, attrName): string {
+        return browser.execute(function(selector, attrName) {
+            return (window.getComputedStyle(document.querySelector(selector), ':after')[attrName]);
+        }, selector, attrName);
     }
 
     getElementArrayLength(selector: string): number {
@@ -161,23 +191,25 @@ export class Wdio {
         return $(selector).isDisplayed();
     }
 
-    clickAndHold(selector: string,  index: number = 0, waitTime: number = this.defaultWaitTime): void {
-        $$(selector)[index].waitForDisplayed({timeout: waitTime});
+    clickAndHold(selector: string, index: number = 0, waitTime: number = this.defaultWaitTime): void {
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].moveTo();
         return browser.buttonDown();
     }
+
     // TODO: add wait 300ms
 
-    waitElementToBePresentInDOM (selector: string,  index: number = 0, waitTime = this.defaultWaitTime): boolean {
+    waitElementToBePresentInDOM(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime });
     }
 
-    scrollIntoView(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
+    scrollIntoView(selector: string, index: number = 0): void {
         $$(selector)[index].scrollIntoView();
     }
 
     isElementClickable(selector: string, index: number = 0): boolean {
         return $$(selector)[index].isClickable();
+
     }
 
     getUrl(): string {
@@ -189,9 +221,9 @@ export class Wdio {
         $$(elementToDragSelector)[index].dragAndDrop($$(targetElementSelector)[targetIndex]);
     }
 
-    isElementDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+    isElementDisplayed(selector: string, index: number = 0): boolean {
         $$(selector)[index].scrollIntoView();
-        return $(selector)[index].isDisplayed();
+        return $$(selector)[index].isDisplayed();
     }
 
     focusElement(selector: string, index: number = 0): void {
