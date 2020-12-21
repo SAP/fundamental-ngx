@@ -43,10 +43,8 @@ export class InputGroupPo extends BaseComponentPo {
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
-
     open(): void {
         super.open(this.url);
         webDriver.waitForDisplayed(this.root);
     }
-
 }

@@ -17,14 +17,19 @@ export class Wdio {
     }
 
     isBrowser(browserName: string): boolean {
-      return browser.capabilities.browserName === browserName;
+        return browser.capabilities.browserName === browserName;
     }
 
     isIEorSafari(): boolean {
-        if (this.isBrowser('Safari')) {return true}
-        if (this.isBrowser('internet explorer')) {return true}
+        if (this.isBrowser('Safari')) {
+            return true;
+        }
+        if (this.isBrowser('internet explorer')) {
+            return true;
+        }
         return false;
     }
+
     goBack(): void {
         browser.back();
     }
@@ -173,7 +178,7 @@ export class Wdio {
         return $$(selector).length;
     }
 
-    elementArray(selector: string): any {
+    elementArray(selector: string): WebdriverIO.ElementArray {
         return $$(selector);
     }
 

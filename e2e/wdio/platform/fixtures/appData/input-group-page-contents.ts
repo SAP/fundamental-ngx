@@ -15,5 +15,4 @@ export default {
     ],
     inputWithFormLabel: 'Quantity',
     inputWithFormPlaceholder: 'Things quantity',
-
 };

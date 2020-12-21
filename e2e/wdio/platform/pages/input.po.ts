@@ -24,12 +24,8 @@ export class InputPo extends BaseComponentPo {
     autocompleteInputLabel = 'fdp-platform-input-auto-complete-form-validation-example label';
     autocompleteOptions = '.fd-popover__popper li';
 
-
-
-
     open(): void {
         super.open(this.url);
         webDriver.waitForDisplayed(this.root);
     }
-
 }

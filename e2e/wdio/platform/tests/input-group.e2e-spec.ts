@@ -4,7 +4,6 @@ import inputGroupPContent from '../fixtures/appData/input-group-page-contents';
 import inputGroupTestData from '../fixtures/testData/input-group';
 
 describe('Input Group should', function() {
-
     const inputGroupPage = new InputGroupPo();
 
     beforeAll(() => {
@@ -128,16 +127,15 @@ describe('Input Group should', function() {
     });
 
     it('with form input have info tooltip', () => {
-        // if(webDriver.isIEorSafari()) {
-        webDriver.waitForDisplayed(inputGroupPage.withFormInput);
-        webDriver.scrollIntoView(inputGroupPage.withFormInput);
-        webDriver.mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
+        if (webDriver.isIEorSafari()) {
+            webDriver.waitForDisplayed(inputGroupPage.withFormInput);
+            webDriver.scrollIntoView(inputGroupPage.withFormInput);
+            webDriver.mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
 
-        expect(webDriver.getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
-        // return;
-        // }
+            expect(webDriver.getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
+            return;
+        }
     });
-
 
     it('should check RTL', () => {
         inputGroupPage.checkRtlSwitch();
