@@ -67,7 +67,8 @@
 
     <fd-item-expand *ngIf="_isCollapsed"
                     [fdMenuTrigger]="menu"
-                    [label]="expandOverflowText">
+                    [label]="expandOverflowText"
+                    (keydown)="_onTriggerKeydown($event, menu)">
     </fd-item-expand>
 </div>
 

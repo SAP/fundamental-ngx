@@ -17,13 +17,15 @@ import {
 } from '@angular/core';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { getElementCapacity, getElementWidth } from '../utils/functions';
+import { getElementCapacity, getElementWidth, KeyUtil } from '../utils/functions';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
 import { TabsService } from './tabs.service';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { MenuComponent } from '../menu/menu.component';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -187,6 +189,15 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this.selectedTabChange.emit(tab.panel);
     }
 
+    /** @hidden */
+    _onTriggerKeydown(event: KeyboardEvent, menuRef: MenuComponent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            event.preventDefault();
+            menuRef.toggle();
+        }
+    }
+
+    /** @hidden */
     private get _tabPanelsChange$(): Observable<TabPanelComponent[]> {
         return this.tabPanels.changes.pipe(
             startWith(this.tabPanels),
