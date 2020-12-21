@@ -83,7 +83,7 @@ export class WizardDocsComponent {
             language: 'typescript',
             code: wizardNgForTs,
             fileName: 'wizard-ngfor-example',
-            component: 'WizardNgforExampleComponent'
+            component: 'WizardNgForExampleComponent'
         }
     ];
 }

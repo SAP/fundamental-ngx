@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { WizardStepStatus } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-wizard-ngfor-example',
@@ -12,7 +11,6 @@ import { WizardStepStatus } from '@fundamental-ngx/core';
 export class WizardNgForExampleComponent {
 
     name = '';
-    addressLine1 = '';
 
     steps = [
         {
