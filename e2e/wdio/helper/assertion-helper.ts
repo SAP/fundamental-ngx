@@ -45,7 +45,3 @@ export function checkLabels(arraySelector: string, expectation: string[], sliceS
 export function checkNotFocused(element: string, index: number = 0): void {
     expect($$(element)[index].isFocused()).toBe(false);
 }
-
-
-
-

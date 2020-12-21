@@ -72,7 +72,7 @@ export class Wdio {
         $$(selector)[index].addValue(value);
     };
 
-    getValue(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): string {
+    getValue(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].getValue();
     };
@@ -91,7 +91,7 @@ export class Wdio {
     };
 
     waitForInvisibilityOf(selector: string, index: number = 0): boolean {
-        return $$(selector)[index].waitForDisplayed({ reverse: true })
+        return $$(selector)[index].waitForDisplayed({ reverse: true });
     }
 
     waitForNotDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
@@ -110,7 +110,7 @@ export class Wdio {
         return $$(selector)[index].waitForExist({ timeout: waitTime});
     };
 
-    isEnabled(selector: string, index: number = 0,  waitTime = this.defaultWaitTime): boolean {
+    isEnabled(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].isEnabled();
     };
@@ -132,7 +132,7 @@ export class Wdio {
     }
 
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0 ): { value: string } {
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string } {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 
@@ -141,7 +141,7 @@ export class Wdio {
         $$(selector)[index].moveTo();
     }
 
-    clearValue(selector: string,  index: number = 0, waitTime = this.defaultWaitTime): void {
+    clearValue(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].clearValue();
     }
