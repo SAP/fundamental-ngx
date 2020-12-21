@@ -64,18 +64,18 @@ export class Wdio {
             $$(selector)[index].addValue(symbol);
             browser.pause(delay);
         }
-    };
+    }
 
     // add value to existing one
     addValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].addValue(value);
-    };
+    }
 
     getValue(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].getValue();
-    };
+    }
 
     getText(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
@@ -88,14 +88,14 @@ export class Wdio {
 
     waitForDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    };
+    }
 
     waitForInvisibilityOf(selector: string, index: number = 0): boolean {
         return $$(selector)[index].waitForDisplayed({ reverse: true });
     }
 
-    waitForNotDisplayed(selector: string, waitTime = this.defaultWaitTime): boolean {
-        return $(selector).waitForDisplayed({ timeout: waitTime, reverse: true });
+    waitForNotDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+        return $$(selector)[index].waitForDisplayed({ timeout: waitTime, reverse: true });
     }
 
     waitForClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
@@ -104,28 +104,28 @@ export class Wdio {
 
     waitForUnclickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
-    };
+    }
 
     waitForPresent(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime});
-    };
+    }
 
     isEnabled(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].isEnabled();
-    };
+    }
 
     // Waits to be empty if text is not passed
     waitTextToBePresentInValue(selector: string, text: string = '', index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitUntil(function(): boolean {
             return this.getValue() === text;
         }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
-    };
+    }
 
     // Sends to the active element
     sendKeys(keys: string | string[]): void {
         browser.keys(keys);
-    };
+    }
 
     getAttributeByName(selector: string, attrName: string, index: number = 0): string {
         return $$(selector)[index].getAttribute(attrName);
