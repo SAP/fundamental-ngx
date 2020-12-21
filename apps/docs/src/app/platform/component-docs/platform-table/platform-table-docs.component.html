@@ -1,4 +1,7 @@
-<fd-docs-section-title id="default-table" componentName="Table">
+<fd-docs-section-title
+    id="default-table"
+    componentName="Table"
+>
     Default Table
 </fd-docs-section-title>
 <description>This example shows table default implementation </description>
@@ -9,7 +12,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="custom-columns-table" componentName="Table">
+<fd-docs-section-title
+    id="custom-columns-table"
+    componentName="Table"
+>
     Custom Column
 </fd-docs-section-title>
 <description>This example shows custom column definition implementation </description>
@@ -20,7 +26,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="single-row-selection" componentName="Table">
+<fd-docs-section-title
+    id="single-row-selection"
+    componentName="Table"
+>
     Single Row Selection
 </fd-docs-section-title>
 <description>This example shows single row selection </description>
@@ -31,7 +40,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="multiple-row-selection" componentName="Table">
+<fd-docs-section-title
+    id="multiple-row-selection"
+    componentName="Table"
+>
     Multiple Row Selection
 </fd-docs-section-title>
 <description>This example shows multiple row selection </description>
@@ -42,47 +54,147 @@
 
 <separator></separator>
 
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fdp-table
-        [dataSource]="tableData"
-        [contentDensity]="data.table.contentDensity"
-        [selectionMode]="data.table.selectionMode"
-        emptyTableMessage="No data found"
-        (rowSelectionChange)="onRowSelectionChange($event)">
-        <fdp-table-toolbar
-            [title]="data['table-toolbar'].title"
-            [hideItemCount]="data['table-toolbar'].hideItemCount">
-            <fdp-table-toolbar-actions>
-                <fdp-button label="Action One"></fdp-button>
-                <fdp-button label="Action Two"></fdp-button>
-            </fdp-table-toolbar-actions>
-        </fdp-table-toolbar>
+<fd-docs-section-title
+    id="sortable-table"
+    componentName="Table"
+>
+    Column Sorting
+</fd-docs-section-title>
+<description>
+    Use <code>[sortable]="true"</code> to mark a column as an sortable one.<br/>
+    In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.
+</description>
+<component-example>
+    <fdp-table-sortable-example></fdp-table-sortable-example>
+</component-example>
+<code-example [exampleFiles]="sortableTable"></code-example>
 
-        <fdp-column
-            name="name"
-            key="name"
-            label="Name"
-            align="start">
-        </fdp-column>
+<separator></separator>
 
-        <fdp-column
-            name="description"
-            key="description"
-            label="Description">
-        </fdp-column>
+<fd-docs-section-title
+    id="filterable-table"
+    componentName="Table"
+>
+    Column Filtering
+</fd-docs-section-title>
+<description>
+    There are two ways to add filtering.
+    The first one is to use the column option <code>[filterable]="true"</code>. This will add filter input field in the column header menu.
+    <br/>
+    The second one is to use <code>fdp-table-view-settings-filter</code> withing <code>fdp-table-view-settings-dialog</code>. It gives ability to define filtering type. For now it supports the next types: 
+    <ul>
+        <li>single-select</li>
+        <li>multi-select</li>
+        <li>custom</li>
+    </ul>
+</description>
+<component-example>
+    <fdp-table-filterable-example></fdp-table-filterable-example>
+</component-example>
+<code-example [exampleFiles]="filterableTable"></code-example>
 
-        <fdp-column
-            name="price"
-            key="price.value"
-            label="Price"
-            align="end">
-        </fdp-column>
+<separator></separator>
 
-        <fdp-column
-            name="status"
-            key="status"
-            label="Status"
-            align="center">
-        </fdp-column>
-    </fdp-table>
+<fd-docs-section-title
+    id="groupable-table"
+    componentName="Table"
+>
+    Column Grouping
+</fd-docs-section-title>
+<description>
+    Use <code>[groupable]="true"</code> to mark a column as one that can be used to group by.
+    <br/>
+    Once there is at least one a groupable column the Group dialog option appears in the table toolbar. To enable grouping by some column you can use the column header menu or the Group dialog. In order to ungroup you should use only the Group dialog.
+    <br/>  
+    In this example <code>Name</code> and <code>Status</code> columns can be used to group by.
+</description>
+<component-example>
+    <fdp-table-groupable-example></fdp-table-groupable-example>
+</component-example>
+<code-example [exampleFiles]="groupableTable"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="freezable-table"
+    componentName="Table"
+>
+    Column Freezing
+</fd-docs-section-title>
+<description>
+    Use <code>[freezeColumnsTo]="columnKey"</code> to freeze columns up to and including.
+</description>
+<component-example>
+    <fdp-table-freezable-example></fdp-table-freezable-example>
+</component-example>
+<code-example [exampleFiles]="freezableTable"></code-example>
+
+<separator></separator>
+
+<playground
+    [schema]="schema"
+    [schemaInitialValues]="data"
+    (onFormChanges)="onSchemaValues($event)"
+>
+    <div style="min-width: 760px">
+        <fdp-table
+            [dataSource]="dataSource"
+            [noBorders]="data.table.noBorders"
+            [noBodyBorders]="data.table.noBodyBorders"
+            [noHorizontalBorders]="data.table.noHorizontalBorders"
+            [noVerticalBorders]="data.table.noVerticalBorders"
+            [contentDensity]="data.table.contentDensity"
+            [selectionMode]="data.table.selectionMode"
+            [freezeColumnsTo]="data.table.freezeColumnsTo"
+            emptyTableMessage="No data found"
+            (rowSelectionChange)="onRowSelectionChange($event)"
+            (sortChange)="onSortChange($event)"
+            (filterChange)="onFilterChange($event)"
+            (columnFreeze)="onFreezeChange($event)"
+            (groupChange)="onGroupChange($event)"
+        >
+            <fdp-table-toolbar
+                [title]="data['table-toolbar'].title"
+                [hideItemCount]="data['table-toolbar'].hideItemCount"
+            >
+                <fdp-table-toolbar-actions>
+                    <fdp-button label="Action Button" [contentDensity]="data.table.contentDensity !== 'cozy' ? 'compact' : 'cozy'"></fdp-button>
+                </fdp-table-toolbar-actions>
+            </fdp-table-toolbar>
+
+            <fdp-column
+                name="name"
+                key="name"
+                label="Name"
+                [align]="data['first-column'].align"
+                [sortable]="data['first-column'].sortable"
+                [filterable]="data['first-column'].filterable"
+                [groupable]="data['first-column'].groupable"
+            >
+            </fdp-column>
+
+            <fdp-column
+                name="description"
+                key="description"
+                label="Description"
+            >
+            </fdp-column>
+
+            <fdp-column
+                name="price"
+                key="price.value"
+                label="Price"
+                align="end"
+            >
+            </fdp-column>
+
+            <fdp-column
+                name="status"
+                key="status"
+                label="Status"
+                align="center"
+            >
+            </fdp-column>
+        </fdp-table>
+    </div>
 </playground>

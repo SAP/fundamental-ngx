@@ -62,12 +62,6 @@ describe('ObjectListItemComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should display list container with role as list', () => {
-        const listContainer = fixture.debugElement.query(By.css('fdp-list'));
-        fixture.detectChanges();
-        expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
-    });
-
     it('Should contain fd-list in list container', () => {
         const listContainer = fixture.debugElement.query(By.css('ul'));
         fixture.detectChanges();
@@ -87,15 +81,15 @@ describe('ObjectListItemComponent', () => {
     });
 
     it('Object list item should have title defined', () => {
-        const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item'));
+        const listItems = fixture.debugElement.queryAll(By.css('fd-object-identifier__title'));
         fixture.detectChanges();
         listItems.forEach((listElem) => {
-            expect(listElem.nativeElement.getAttribute('title')).toEqual('title');
+            expect(listElem.nativeElement.textContent).toContain('title');
         });
     });
 
     it('Object list item has role as list item', () => {
-        const listItems = fixture.debugElement.queryAll(By.css('li'));
+        const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item'));
         fixture.detectChanges();
         listItems.forEach((listElem) => {
             expect(listElem.nativeElement.getAttribute('role')).toEqual('listitem');
@@ -381,7 +375,7 @@ describe('Object  List Item Component with DataSource', () => {
     });
 
     it('Should Object list container with role as list', () => {
-        const listContainer = fixture.debugElement.query(By.css('fdp-list'));
+        const listContainer = fixture.debugElement.query(By.css('ul'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
     });

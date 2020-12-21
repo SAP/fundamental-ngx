@@ -3,6 +3,14 @@
 // Remove after 0.13.1/0.14 is introduced into NGX
 .fd-button {
 	justify-content: center;
+
+	.fd-button__text {
+		font-weight: inherit;
+	}
+
+	.fd-button--text-alignment-left {
+		justify-content: flex-start;
+	}
 }
 
 .fd-button * + * {

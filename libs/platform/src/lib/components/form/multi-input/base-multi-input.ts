@@ -6,7 +6,6 @@ import {
     ElementRef,
     EventEmitter,
     Host,
-    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -34,7 +33,6 @@ import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs
 import { takeUntil } from 'rxjs/operators';
 
 import {
-    DIALOG_CONFIG,
     DialogConfig,
     FocusEscapeDirection,
     KeyUtil,
@@ -54,13 +52,11 @@ import {
 } from '../../../domain';
 import { CollectionBaseInput } from '../collection-base.input';
 import { PlatformMultiInputComponent } from './multi-input.component';
-import { ListConfig, MatchingStrategy } from '../../list/public_api';
+import { FdpListDataSource, ListConfig, MatchingStrategy } from '../../list/public_api';
 import { isFunction, isJsObject, isString } from '../../../utils/lang';
-import { ContentDensity, FormFieldControl } from '../form-control';
+import { ContentDensity, FormFieldControl, Status } from '../form-control';
 import { FormField } from '../form-field';
-
-export type TextAlignment = 'left' | 'right';
-export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[];
+import { TextAlignment } from '../public_api';
 
 export class MultiInputSelectionChangeEvent {
     constructor(
@@ -163,6 +159,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Output()
     selectionChange = new EventEmitter<MultiInputSelectionChangeEvent>();
 
+    /** @hidden Emits event when the menu is opened/closed */
+    @Output()
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** @hidden */
     @ViewChild(ListComponent)
     listComponent: ListComponent;
@@ -192,6 +192,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
+    @ViewChild('searchInputElement', { read: ElementRef })
     searchInputElement: ElementRef;
 
     /** @hidden */
@@ -232,6 +233,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      * List of matched suggestions
      * */
     _suggestions: MultiInputOption[];
+
+    /** @hidden
+     * List of matched suggestions
+     * */
+    _newSuggestions: MultiInputOption[];
 
     /** @hidden
      * Max width of list container
@@ -296,7 +302,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         protected readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
+        @Optional() readonly dialogConfig: DialogConfig,
         protected listConfig: ListConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
@@ -323,12 +329,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             this._dsSubscription.unsubscribe();
         }
     }
-
-    /** @hidden
-     * Method to emit change event
-     */
-    abstract emitChangeEvent<K>(value: K): void;
-
     /** @hidden
      * Define is this item selected
      */
@@ -355,31 +355,34 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         super.writeValue(value);
     }
 
-    /** @hidden
-     * Close list
-     * */
-    close(event: MouseEvent = null, forceClose: boolean = false): void {
-        if (event) {
-            const target = event.target as HTMLInputElement;
-            if (target && target.id === this.id) {
-                return;
-            }
-        }
+    /** @hidden */
+    popoverOpenChangeHandle(isOpen: boolean): void {
+        this.isOpen ? this.close() : this.open();
+    }
 
-        if (this.isOpen && (forceClose || this.canClose)) {
-            this.isOpen = false;
-            this.openChange.next(this.isOpen);
-            this.cd.markForCheck();
-            this.onTouched();
-        }
+    /** Opens the select popover body. */
+    open(): void {
+        this.isOpen = true;
+        this.isOpenChange.emit(this.isOpen);
+        this._cd.markForCheck();
+    }
+    /** Closes the select popover body. */
+    close(): void {
+        this.isOpen = false;
+        this.isOpenChange.emit(this.isOpen);
+        this._cd.markForCheck();
     }
 
     /** @hidden */
     searchTermChanged(text: string = this.inputText): void {
+        if (text) {
+            this.open();
+        }
         const map = new Map();
         map.set('query', text);
         map.set('limit', 12);
         this.ds.match(map);
+
         this.cd.detectChanges();
     }
 
@@ -424,10 +427,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
 
         this.showList(!isOpen);
-
-        if (!this.mobile) {
-            this.searchInputElement.nativeElement.focus();
-        }
     }
 
     /**
@@ -582,7 +581,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     private _getOptionsListWidth(): void {
         const body = document.body;
-        const rect = (this._element.querySelector('fdp-input-group') as HTMLElement).getBoundingClientRect();
+        const rect = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
         this.maxWidth = window.innerWidth - scrollBarWidth - rect.left;
         this.minWidth = rect.width - 2;
@@ -678,8 +677,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             const value = items[i];
             selectItems.push({
                 label: this.displayValue(value),
-                avatarSrc: this.objectGet(value, this.avatarsrc),
-                description: this.objectGet(value, this.description),
+                avatarSrc: this.avatarsrc ? this.objectGet(value, this.avatarsrc) : null,
+                description: this.description ? this.objectGet(value, this.description) : null,
                 value: value
             });
         }

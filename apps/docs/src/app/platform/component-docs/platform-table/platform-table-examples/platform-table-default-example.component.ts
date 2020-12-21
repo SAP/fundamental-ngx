@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ITEMS } from '../platform-table-docs.component';
+import { TableDataSource } from '@fundamental-ngx/platform';
+import { TableDataProviderExample } from './platform-table-data-provider-example';
 
 @Component({
     selector: 'fdp-table-default-example',
     templateUrl: './platform-table-default-example.component.html'
 })
 export class PlatformTableDefaultExampleComponent {
-    source: any[] = ITEMS;
+    source = new TableDataSource(new TableDataProviderExample());
+
+    alert(message: string): void {
+        alert(message);
+    }
 }

@@ -68,7 +68,7 @@ export const API_FILES = {
         'FeedInputButtonDirective',
         'FeedInputAvatarDirective'
     ],
-    fileInput: ['FileInputComponent', 'FileSelectDirective', 'FileDragndropDirective'],
+    feedListItem: ['FeedListComponent', 'FeedListItemComponent'],
     fileUploader: [
         'FileUploaderComponent',
         'FileUploaderSelectDirective',

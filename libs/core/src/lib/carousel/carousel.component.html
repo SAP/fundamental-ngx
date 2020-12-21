@@ -1,5 +1,6 @@
 <div class="fd-carousel" [class.fd-carousel--no-navigation]="!navigation" data-ride="carousel" [style.height]="height"
-    [style.width]="width" [attr.dir]="dir">
+    [style.width]="width" [attr.dir]="dir"
+    (click)="_focus()">
 
     <ng-container *ngIf="pageIndicatorContainer && pageIndicatorsOrientation === 'top'">
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
@@ -31,13 +32,13 @@
 <ng-template #pageIndicatorContainer>
     <div class="fd-carousel__page-indicator-container" dir="ltr">
         <ng-container *ngIf="navigatorInPageIndicator">
-            <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
+            <ng-container *ngTemplateOutlet="_isRtl() ? buttonRight : buttonLeft"></ng-container>
         </ng-container>
 
         <ng-container *ngTemplateOutlet="pageIndicators"></ng-container>
 
         <ng-container *ngIf="navigatorInPageIndicator">
-            <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
+            <ng-container *ngTemplateOutlet="_isRtl() ? buttonLeft : buttonRight"></ng-container>
         </ng-container>
     </div>
 </ng-template>
@@ -67,13 +68,13 @@
 <ng-template #buttonLeft>
     <button class="fd-button fd-carousel__button fd-carousel__button--left" [style.z-index]="1" data-slide="previous"
         [attr.aria-label]="leftNavigationBtnLabel" (click)="previous()" [disabled]="leftButtonDisabled" [attr.title]="leftNavigationBtnLabel">
-        <i class="sap-icon--slim-arrow-left"></i>
+        <i [class]="_isRtl() ? 'sap-icon--slim-arrow-right' : 'sap-icon--slim-arrow-left'"></i>
     </button>
 </ng-template>
 
 <ng-template #buttonRight>
     <button class="fd-button fd-carousel__button fd-carousel__button--right" data-slide="next"
         [attr.aria-label]="rightNavigationBtnLabel" (click)="next()" [disabled]="rightButtonDisabled" [attr.title]="rightNavigationBtnLabel">
-        <i class="sap-icon--slim-arrow-right"></i>
+        <i [class]="_isRtl() ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"></i>
     </button>
 </ng-template>

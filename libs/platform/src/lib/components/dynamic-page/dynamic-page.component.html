@@ -9,7 +9,7 @@
     </header>
 
     <div class="fd-dynamic-page__tabs--overflow tab-sticker" *ngIf="isTabbed" #contentContainer>
-        <fd-tab-list>
+        <fd-tab-list (selectedIndexChange)="_handleTabChange($event)">
             <ng-container *ngFor="let tab of tabs; let i = index">
                 <fd-tab [title]="tab.tabLabel">
                     <fdp-dynamic-page-tabbed-content
