@@ -1,8 +1,6 @@
 import { BaseComponentPo } from './base-component.po';
 import { webDriver } from '../../driver/wdio';
-import { AssertionHelper } from '../../helper/assertion-helper';
-
-const assertionHelper = new AssertionHelper();
+import {compareDropDownOptions, checkNotFocused} from '../../helper/assertion-helper';
 
 export class ComboBoxPo extends BaseComponentPo {
     private url = '/combobox';
@@ -69,9 +67,7 @@ export class ComboBoxPo extends BaseComponentPo {
 
     selectOption(type: string, option: string): void {
         webDriver.scrollIntoView(this.dropDownOption(option));
-  //      webDriver.pause(300);
         webDriver.click(this.dropDownOption(option));
-  //      webDriver.pause(300);
         webDriver.waitForDisplayed(this.filledComboBoxInputs(type, option));
         webDriver.waitForNotDisplayed(this.comboBoxDropdownExpanded);
     }
@@ -126,7 +122,7 @@ export class ComboBoxPo extends BaseComponentPo {
             this.expandDropdown(activeTypes[i]);
             this.selectOption(activeTypes[i], option);
             webDriver.waitForNotDisplayed(this.comboBoxDropdownExpanded);
-            assertionHelper.checkNotFocused(this.comboBoxInput, i);
+            checkNotFocused(this.comboBoxInput, i);
         }
     }
 
@@ -158,13 +154,13 @@ export class ComboBoxPo extends BaseComponentPo {
             driver.keys(['ArrowDown']);
             driver.keys(['Enter']);
             let inputText = webDriver.getText(this.comboBoxInput, i);
-            assertionHelper.compareDropDownOptions(firstOptionText, inputText);
+            compareDropDownOptions(firstOptionText, inputText);
             this.expandDropdown(activeTypes[i]);
             driver.keys(['ArrowDown']);
             driver.keys(['ArrowDown']);
             driver.keys(['Enter']);
             inputText = webDriver.getText(this.comboBoxInput, i);
-            assertionHelper.compareDropDownOptions(secondOptionText, inputText);
+            compareDropDownOptions(secondOptionText, inputText);
         }
     }
 
