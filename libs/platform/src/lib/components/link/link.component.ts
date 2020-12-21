@@ -18,43 +18,34 @@
  */
 import {
     AfterViewInit,
-    Component,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
+    Component,
+    ContentChild,
     EventEmitter,
     ElementRef,
     Input,
     OnInit,
     Output,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BaseComponent } from '../base';
+import { IconComponent } from '@fundamental-ngx/core';
 
-export type LinkType = 'standard' | 'emphasized';
+export type LinkType = 'standard' | 'emphasized' | 'subtle';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
-const VALID_INPUT_TYPES = ['standard', 'emphasized'];
+const VALID_INPUT_TYPES = ['standard', 'emphasized', 'subtle'];
 
-/**
- * Platform Link implementation based on the
- * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Link-Component-Technical-Design
- * documents.
- *
- */
 @Component({
     selector: 'fdp-link',
     templateUrl: './link.component.html',
     styleUrls: ['./link.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class LinkComponent extends BaseComponent implements OnInit, AfterViewInit {
-    emphasized = false;
-    isfocused = false;
-
-    /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
-    anchor: ElementRef;
-
     /**
      * href value to Navigate to. sets href to Native anchor.
      */
@@ -124,10 +115,25 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     @Input()
     rel?: string;
 
+    /**
+     * If text is overlapping. By setting truncate to true, overlapping can be hidden with using ellipsis
+     */
+    @Input()
+    truncate = false;
+
     /** Emitting link click event */
     @Output()
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
+    @ContentChild(IconComponent)
+    icon: IconComponent;
+
+    /** Access child element, for checking link content*/
+    @ViewChild('link', { read: ElementRef })
+    anchor: ElementRef;
+
+    emphasized = false;
+    subtle = false;
     private _inverted = false;
 
     constructor(protected _cd: ChangeDetectorRef) {
@@ -144,6 +150,8 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
         /* If link linkType===emphasized then make link emphasized type */
         if (this.linkType === VALID_INPUT_TYPES[1]) {
             this.emphasized = true;
+        } else if (this.linkType === VALID_INPUT_TYPES[2]) {
+            this.subtle = true;
         }
 
         /* if link type not supported, throw Error */
@@ -156,6 +164,28 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     ngAfterViewInit(): void {
         if (!this.anchor.nativeElement.innerHTML) {
             throw new Error('Mandatory text/icon for fdp-link missing');
+        }
+    }
+
+    /**
+     * Puts underline on Icon
+     * @param event: MouseEvent
+     */
+    onMouseEnter(event: MouseEvent): void {
+        event.stopPropagation();
+        if (this.icon) {
+            this.icon._addStyleToElement('text-decoration', 'underline');
+        }
+    }
+
+    /**
+     * Removes underline on Icon
+     * @param event: MouseEvent
+     */
+    onMouseLeave(event: MouseEvent): void {
+        event.stopPropagation();
+        if (this.icon) {
+            this.icon._addStyleToElement('text-decoration', 'none');
         }
     }
 
