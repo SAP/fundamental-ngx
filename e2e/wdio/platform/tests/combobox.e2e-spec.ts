@@ -5,7 +5,8 @@ import ComboboxData from '../fixtures/appData/combobox.page-content';
 describe('Combobox test suite', () => {
     const {getDropdownOptionsText, verifyComboBoxComponents, verifyDropdownToggle, verifyInputWhileTyping,
         verifyDropdownCollapsedAfterSelectingOption, verifyNavigationByArrowButtons, verifyGroupHeadersAreNotInteractive,
-        verifyOptionHintWhileTyping, verifySelectedOptionHighlighted, verifyComboboxWithTwoColumnsWhileTyping} = new ComboBoxPo();
+        verifyOptionHintWhileTyping, verifySelectedOptionHighlighted, verifyComboboxWithTwoColumnsWhileTyping, checkRtlSwitch
+    } = new ComboBoxPo();
 
     const comboBoxPage: ComboBoxPo = new ComboBoxPo();
 
@@ -42,7 +43,7 @@ describe('Combobox test suite', () => {
     })
 
     it('Verify LTR and RTL orientation', () => {
-        comboBoxPage.checkRtlSwitch();
+        checkRtlSwitch();
     })
 
     it('Verify group headers are not interactive.', () => {
