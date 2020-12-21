@@ -3,7 +3,7 @@ import {
     ContentChildren, QueryList, ViewChild,
     ElementRef, AfterContentInit, Output, EventEmitter,
     HostListener, ChangeDetectorRef, OnInit, AfterViewInit,
-    ContentChild, Self, Optional, SkipSelf, Host, OnDestroy
+    ContentChild, Self, Optional, SkipSelf, Host, OnDestroy, forwardRef
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { NgControl, NgForm } from '@angular/forms';
@@ -385,6 +385,10 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     /**Keyboard manager on list items, set values when passed via array */
     ngAfterViewInit(): void {
         this._keyManager = new FocusKeyManager<BaseListItem>(this.listItems).withWrap();
+
+        if (this.listItems.length !== 0) {
+            this.listItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
+        }
         this.listItems.forEach((item) => {
             if (item.navigationIndicator || item.listType === 'detail') {
                 this._partialNavigation = true;
@@ -407,22 +411,11 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
 
         const indicators = this.itemEl.nativeElement.querySelectorAll('fd-busy-indicator');
-        if (indicators !== null && indicators !== undefined) { 
             indicators.forEach((indicator) => {
                 if (indicator) {
                     indicator.setAttribute('aria-label', '');
                 }
             });
-        }
-
-        // const listitemsWithRole = this.itemEl.nativeElement.querySelectorAll('.fd-list__item');
-        // if(listitemsWithRole !== null && listitemsWithRole !== undefined) { 
-        //     listitemsWithRole.forEach((listitemWithRole) => {
-        //         if (listitemWithRole) {
-        //             listitemWithRole.setAttribute('role',' ');
-        //         }
-        //     });
-        // }
     }
 
 
@@ -492,6 +485,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     _handleKeyDown(event: KeyboardEvent): boolean {
         event.stopImmediatePropagation();
         if (this._keyManager) {
+            this._keyManager.setActiveItem(this._keyManager.activeItemIndex);
             if (KeyUtil.isKeyCode(event, DOWN_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 return false;
             } else if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
@@ -567,9 +561,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             selectedItemId = parent.getAttribute('id');
         }
 
-        this.listItems.forEach((item) => {
+        this.listItems.forEach((item, index) => {
             if (item.anchor !== undefined) {
                 item.anchor.nativeElement.classList.remove('is-navigated');
+            }
+            if (item._focused) {
+                this._keyManager.updateActiveItem(index);
             }
         });
         if (el !== null && el.tagName.toLowerCase() === 'a') {
@@ -753,7 +750,10 @@ export class ListFooter extends BaseComponent { }
     template: `<li #listItem fd-list-group-header [attr.id]="id" role="option"
     tabindex="0">
     {{grpheaderTitle}} <ng-content></ng-content>
-</li>`
+</li>`,
+providers: [
+    { provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeader) }
+]
 })
 export class ListGroupHeader extends BaseListItem implements OnInit {
     /**
