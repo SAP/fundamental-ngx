@@ -1,7 +1,7 @@
 import {
     ElementRef, Input, ChangeDetectorRef, EventEmitter,
     Output, HostListener, ViewChild, AfterViewChecked,
-    OnInit, Directive, TemplateRef
+    OnInit, Directive, TemplateRef, HostBinding
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
@@ -174,6 +174,10 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     @Output()
     itemSelected = new EventEmitter<ModifyItemEvent>();
 
+    /** role */
+    @HostBinding('attr.role')
+    role = 'listitem';
+
     /** Event sent when delete, details or any other action buttons are clicked */
     @Output()
     buttonClicked = new EventEmitter<ModifyItemEvent>();
@@ -236,7 +240,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
 
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef,
-        public itemEl: ElementRef, protected _listConfig: ListConfig,
+        public itemEl: ElementRef,
+        protected _listConfig: ListConfig,
         private router: Router) {
         super(_changeDetectorRef);
 
@@ -255,8 +260,16 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      */
     ngAfterViewChecked(): void {
         this._changeDetectorRef.detectChanges();
+        const currentitem = this.itemEl.nativeElement.querySelector('li');
         if (this._noSeperator) {
-            this.itemEl.nativeElement.querySelector('li').classList.add('fd-list-item__no-seprator');
+            currentitem.classList.add('fd-list-item__no-seprator');
+        }
+        if (currentitem) {
+        currentitem.removeAttribute('role');
+        if (currentitem.parentNode) {
+        currentitem.parentNode.removeAttribute('title');
+        currentitem.parentNode.removeAttribute('aria-label');
+            }
         }
     }
 

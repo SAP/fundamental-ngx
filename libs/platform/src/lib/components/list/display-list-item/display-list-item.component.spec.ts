@@ -59,7 +59,7 @@ describe('DisplayListItemComponent', () => {
     });
 
     it('Should display list container with role as list', () => {
-        const listContainer = fixture.debugElement.query(By.css('fdp-list'));
+        const listContainer = fixture.debugElement.query(By.css('ul'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('list');
     });
@@ -83,13 +83,13 @@ describe('DisplayListItemComponent', () => {
     });
 
     it('Should display item role as list item', () => {
-        const listContainer = fixture.debugElement.query(By.css('li'));
+        const listContainer = fixture.debugElement.query(By.css('fdp-display-list-item'));
         fixture.detectChanges();
         expect(listContainer.nativeElement.getAttribute('role')).toEqual('listitem');
     });
 
     it('Should title 1 title2 2 title 3 and as title 4 as list item', () => {
-        const displayItems = fixture.debugElement.queryAll(By.css('fdp-display-list-item'));
+        const displayItems = fixture.debugElement.queryAll(By.css('.fd-list__title'));
         fixture.detectChanges();
         expect(displayItems[0].nativeElement.getAttribute('title')).toContain('title 1');
         expect(displayItems[1].nativeElement.getAttribute('title')).toContain('title 2');

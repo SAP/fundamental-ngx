@@ -7,6 +7,10 @@
 	.fd-button__text {
 		font-weight: inherit;
 	}
+
+	.fd-button--text-alignment-left {
+		justify-content: flex-start;
+	}
 }
 
 .fd-button * + * {
