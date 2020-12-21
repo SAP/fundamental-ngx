@@ -2,7 +2,7 @@ import { BaseComponentPo } from './base-component.po';
 import { webDriver } from '../../driver/wdio';
 
 export class ActionListItemPo extends BaseComponentPo {
-    private url = '/action-list-item';
+    url = '/action-list-item';
     root = '#page-content';
 
     actionBtns = 'fdp-action-list-item button';

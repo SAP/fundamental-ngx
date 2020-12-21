@@ -35,19 +35,19 @@ describe('Checkbox test suite', function() {
 
     describe('check binary checkbox used with form examples', () => {
         it('should check binary checkbox in template driven form', () => {
-            webDriver.waitElementToBePresentInDOM(binaryTempCheckbox, 0);
-            webDriver.waitForElDisplayed(binaryTempCheckbox, 0);
-            // check checkbox labels
-            for (let i = 0; 3 > i; i++) {
-                checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(binaryTempCheckbox, i);
-            }
-            if (webDriver.isBrowser('Safari') || webDriver.isBrowser('internet explorer')) {
-                console.log('Skip check for Safari and IE');
-            } else {
+            if (!webDriver.browserIsIEorSafari()) {
+                webDriver.waitElementToBePresentInDOM(binaryTempCheckbox, 0);
+                webDriver.waitForElDisplayed(binaryTempCheckbox, 0);
+                // check checkbox labels
+                for (let i = 0; 3 > i; i++) {
+                    checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
+                    checkMarkingCheckbox(binaryTempCheckbox, i);
+                }
                 checkHoverState(binaryTempCheckbox);
+                checkFocusState(binaryTempCheckbox);
+                return;
             }
-            checkFocusState(binaryTempCheckbox);
+        console.log('Skip check for Safari and IE');
         });
 
         it('should check binary checkbox in reactive/model driven form', () => {
@@ -284,28 +284,33 @@ describe('Checkbox test suite', function() {
     });
 
     describe('check example orientation', () => {
-        it('should check LTR orientation', () => {
-            const areaContainersArrayLength = webDriver.getElementArrayLength(exampleAreaContainersArr);
-
-            for (let i = 0; areaContainersArrayLength > i; i++) {
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value)
-                    .toBe('ltr', 'css prop direction ');
+        it('should check orientation', () => {
+            if (!webDriver.browserIsIE()) {
+                checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
+                return;
             }
+            console.log('skip for IE');
+            // const areaContainersArrayLength = webDriver.getElementArrayLength(exampleAreaContainersArr);
+            //
+            // for (let i = 0; areaContainersArrayLength > i; i++) {
+            //     expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value)
+            //         .toBe('ltr', 'css prop direction ');
+            // }
         });
 
-        it('should check RTL orientation', () => {
-            const arrL = webDriver.getElementArrayLength(exampleAreaContainersArr);
-
-            for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(exampleAreaContainersArr, i);
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i);
-                expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(checkboxPage.rtlSwitcherArr, i);
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            }
-        });
+        // it('should check RTL orientation', () => {
+        //     const arrL = webDriver.getElementArrayLength(exampleAreaContainersArr);
+        //
+        //     for (let i = 0; arrL > i; i++) {
+        //         webDriver.scrollIntoView(exampleAreaContainersArr, i);
+        //         expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+        //         const dirValueBefore = webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i);
+        //         expect([null, '']).toContain(dirValueBefore);
+        //         webDriver.click(checkboxPage.rtlSwitcherArr, i);
+        //         expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+        //         expect(webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+        //     }
+        // });
     });
 });
 
