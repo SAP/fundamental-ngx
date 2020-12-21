@@ -11,8 +11,6 @@ export class InfoLabelPO extends BaseComponentPo {
     accessibilityLabelsArr = 'fdp-platform-info-label-aria-label-example span';
     accessibilityAttrArr = 'fdp-platform-info-label-aria-label-example fd-info-label';
 
-     open(): void {
-         super.open(this.url)
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 

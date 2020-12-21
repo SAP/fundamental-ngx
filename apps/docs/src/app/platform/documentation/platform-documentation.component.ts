@@ -20,6 +20,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/button', name: 'Button' },
             { url: 'platform/checkbox', name: 'Checkbox' },
             { url: 'platform/checkbox-group', name: 'Checkbox Group' },
+            { url: 'platform/date-picker', name: 'Date Picker' },
             { url: 'platform/datetime-picker', name: 'Datetime Picker' },
             { url: 'platform/file-uploader', name: 'File Uploader' },
             { url: 'platform/info-label', name: 'Info Label' },
@@ -43,6 +44,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
             { url: 'platform/combobox', name: 'Combobox' },
+            { url: 'platform/upload-collection', name: 'Upload Collection' },
             {
                 name: 'List And Items',
                 subItems: [

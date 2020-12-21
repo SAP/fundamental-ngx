@@ -64,12 +64,12 @@ module.exports = function (config) {
             browserName: 'MicrosoftEdge',
             version: 'latest'
         },
-        sl_ie_win: {
-            base: 'SauceLabs',
-            platform: 'windows 10',
-            browserName: 'internet explorer',
-            version: 'latest'
-        },
+        // sl_ie_win: {
+        //     base: 'SauceLabs',
+        //     platform: 'windows 10',
+        //     browserName: 'internet explorer',
+        //     version: 'latest'
+        // },
     };
 
     config.set({

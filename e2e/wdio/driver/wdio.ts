@@ -16,6 +16,15 @@ export class Wdio {
         browser.pause(waitTime);
     }
 
+    isBrowser(browserName: string): boolean {
+      return browser.capabilities.browserName === browserName;
+    }
+
+    isIEorSafari(): boolean {
+        if (this.isBrowser('Safari')) {return true}
+        if (this.isBrowser('internet explorer')) {return true}
+        return false;
+    }
     goBack(): void {
         browser.back();
     }
@@ -107,7 +116,7 @@ export class Wdio {
     };
 
     // Waits to be empty if text is not passed
-    waitTextToBePresentInValue(selector: string, text: string = '',  index: number = 0,  waitTime = this.defaultWaitTime): boolean {
+    waitTextToBePresentInValue(selector: string, text: string = '', index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitUntil(function(): boolean {
             return this.getValue() === text;
         }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
@@ -145,6 +154,26 @@ export class Wdio {
         return browser.execute(callback());
     }
 
+    executeScript2(selector): string {
+        const attrName = browser.capabilities.browserName === 'firefox' ? 'border-left-style' : 'border';
+        return browser.execute(function(selector, attrName) {
+            return window.getComputedStyle(
+                document.querySelector(selector), ':after')[attrName];
+        }, selector, attrName);
+    }
+
+    executeScriptBeforeTagAttr(selector, attrName): string {
+        return browser.execute(function(selector, attrName) {
+            return (window.getComputedStyle(document.querySelector(selector), ':before')[attrName]);
+        }, selector, attrName);
+    }
+
+    executeScriptAfterTagAttr(selector, attrName): string {
+        return browser.execute(function(selector, attrName) {
+            return (window.getComputedStyle(document.querySelector(selector), ':after')[attrName]);
+        }, selector, attrName);
+    }
+
     getElementArrayLength(selector: string): number {
         return $$(selector).length;
     }
@@ -157,23 +186,25 @@ export class Wdio {
         return $(selector).isDisplayed();
     }
 
-    clickAndHold(selector: string,  index: number = 0, waitTime: number = this.defaultWaitTime): void {
-        $$(selector)[index].waitForDisplayed({timeout: waitTime});
+    clickAndHold(selector: string, index: number = 0, waitTime: number = this.defaultWaitTime): void {
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].moveTo();
         return browser.buttonDown();
     }
+
     // TODO: add wait 300ms
 
-    waitElementToBePresentInDOM (selector: string,  index: number = 0, waitTime = this.defaultWaitTime): boolean {
+    waitElementToBePresentInDOM(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime });
     }
 
-    scrollIntoView(selector: string, index: number = 0, waitTime = this.defaultWaitTime): void {
-        $$(selector)[index].scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+    scrollIntoView(selector: string, index: number = 0): void {
+        $$(selector)[index].scrollIntoView();
     }
 
     isElementClickable(selector: string, index: number = 0): boolean {
         return $$(selector)[index].isClickable();
+
     }
 
     getUrl(): string {
@@ -185,9 +216,9 @@ export class Wdio {
         $$(elementToDragSelector)[index].dragAndDrop($$(targetElementSelector)[targetIndex]);
     }
 
-    isElementDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+    isElementDisplayed(selector: string, index: number = 0): boolean {
         $$(selector)[index].scrollIntoView();
-        return $(selector)[index].isDisplayed();
+        return $$(selector)[index].isDisplayed();
     }
 
     focusElement(selector: string, index: number = 0): void {

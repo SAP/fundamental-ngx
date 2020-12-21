@@ -6,7 +6,7 @@ source .ci-env/flags.sh
 
 PACKAGES=(core platform)
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
-MASTER_BRANCH=master
+MASTER_BRANCH=main
 OLD_TAG=$(git describe --tags --abbrev=0)
 
 git config --global user.email $GH_EMAIL
@@ -67,7 +67,7 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
 fi
 
 
-# Increment version on master
+# Increment version on main
 if [[ $latest == "true" ]]; then
   git checkout $MASTER_BRANCH
   npm run std-version

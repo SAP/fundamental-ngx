@@ -22,44 +22,38 @@ describe('Menu button test suite', function() {
 
         it('should check selected menu option and close menu', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browser.capabilities.browserName === 'internet explorer' || 'Safari') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 webDriver.click(menuBtnPage.cozyBtnArr);
                 webDriver.click(menuBtnPage.menuItemArr);
 
                 expect(webDriver.getText(menuBtnPage.cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
                 expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
             }
+            console.log('Skip for Safari and IE');
         });
 
         it('should check menu items visible', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browser.capabilities.browserName === 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isBrowser('internet explorer')) {
                 webDriver.click(menuBtnPage.cozyBtnArr);
                 expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
+                return;
             }
+            console.log('Skip for IE');
         });
 
         it('should check close menu by clicking menu btn', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browser.capabilities.browserName === 'internet explorer') {
-                console.log('skip');
-            } else {
-
+            if (!webDriver.isBrowser('internet explorer')) {
                 webDriver.doubleClick(menuBtnPage.cozyBtnArr);
                 expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
             }
-
+            console.log('Skip for IE');
         });
 
         it('should check closing menu when clicking outside of menu', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browser.capabilities.browserName === 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isBrowser('internet explorer')) {
                 webDriver.waitElementToBePresentInDOM(menuBtnPage.cozyBtnArr);
                 webDriver.click(menuBtnPage.cozyBtnArr);
                 webDriver.waitForDisplayed(menuBtnPage.menuItemOverlay);
@@ -67,6 +61,7 @@ describe('Menu button test suite', function() {
                 webDriver.click(menuBtnPage.sectionTitle);
                 expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
             }
+            console.log('Skip for IE');
         });
 
     });

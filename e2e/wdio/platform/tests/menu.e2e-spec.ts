@@ -14,9 +14,7 @@ describe('Menu component test suite', function() {
     });
 
     it('should check menu btn styles', () => {
-        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-            console.log('skip');
-        } else {
+        if (!webDriver.isIEorSafari()) {
             const basicMenuBtnArrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
 
             for (let i = 0; basicMenuBtnArrLength > i; i++) {
@@ -32,14 +30,14 @@ describe('Menu component test suite', function() {
 
             const menuBtnBorderStyle = webDriver.executeScript2(menuPage.secondMenuBtn);
             expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
+            return;
         }
+
 
     });
     // Real issue for FF
     xit('should check avatar menu btn styles', () => {
-        if (browser.capabilities.browserName === 'firefox') {
-            console.log('Skip due #3734');
-        } else {
+        if (!webDriver.isBrowser('firefox')) {
             webDriver.doubleClick(menuPage.menuAvatarBtn);
 
             expect(webDriver.getCSSPropertyByName(menuPage.menuAvatarBtn, MenuData.menuAvatarFocusAttr).value)
@@ -49,8 +47,9 @@ describe('Menu component test suite', function() {
             webDriver.doubleClick(menuPage.menuHorizontalAvatarBtn);
             // todo: fails because of issue #3734
             expect(webDriver.getAttributeByName(menuPage.menuHorizontalAvatarBtn, 'image')).not.toBe(null);
+            return
         }
-
+        console.log('Skip for FF due #3734');
     });
 
     it('should check menu btn content', () => {
@@ -80,14 +79,13 @@ describe('Menu component test suite', function() {
 
     it('should check menu item styles', () => {
         // Hover doesn't work correctly in Safari
-        if (browser.capabilities.browserName === 'Safari') {
-            console.log('skip');
-        } else {
+        if (!webDriver.isBrowser('Safari')) {
             webDriver.click(menuPage.menuBtnArr);
-
             checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
             checkMenuItemText(menuPage.menuItemTextArr);
+            return;
         }
+        console.log('Skip for Safari');
     });
 
     xit('should check menu items active state', () => {
@@ -97,18 +95,16 @@ describe('Menu component test suite', function() {
     });
 
     it('should check menu item focus', () => {
-        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-            console.log('skip');
-        } else {
+        if (!webDriver.isIEorSafari()) {
             webDriver.click(menuPage.menuBtnArr);
             checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
+            return;
         }
+        console.log('Skip for Safari and IE');
     });
 
     it('should check cascading menu', () => {
-        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-            console.log('skip');
-        } else {
+        if (!webDriver.isIEorSafari()) {
             webDriver.click(menuPage.cascadingMenuBtn);
             webDriver.waitForDisplayed(menuPage.cascadingMenuItemsArr);
             checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
@@ -117,18 +113,20 @@ describe('Menu component test suite', function() {
             webDriver.doubleClick(menuPage.cascadingMenuBtn);
             check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
                 menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+            return;
         }
+        console.log('Skip for Safari and IE');
     });
 
     it('should check collapsed and expanded states', () => {
-        if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-            console.log('skip');
-        } else {
+        if (!webDriver.isIEorSafari()) {
             webDriver.click(menuPage.firstMenuBtn);
             expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
             webDriver.click(menuPage.firstMenuBtn);
             expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(false);
+            return;
         }
+        console.log('Skip for Safari and IE');
     });
 
     it('should check LTR orientation', () => {

@@ -5,7 +5,7 @@
     (keydown)="_keyManager.onKeydown($event);_handleKeyDown($event);" (change)="_onSelectionChanged($event)"
     [attr.aria-setsize]="ariaSetsize" [attr.aria-label]="ariaLabel" [attr.aria-multiselectable]="ariaMultiselectable">
     <fd-busy-indicator *ngIf="loadMore && loadOnScroll" size="l"
-        class="fd-busy-indicator-custom fd-list__title--growing" [block]="true" [loading]="_loading">
+        class="fd-busy-indicator-custom fd-list__title--growing" [block]="true" [loading]="_loading" role="alert" [attr.aria-busy]="_loading" aria-label="loading">
         <div fd-list fdInfiniteScroll class="fd-infinite-scroll" [ngStyle]="{'max-height': maxHeight}"
             (onScrollAction)="_scrollHandler()" [scrollPercent]="scrollOffsetPercentage">
             <ng-template *ngIf="_items.length !==0; then thenBlock else elseBlock">
@@ -19,7 +19,7 @@
             (keydown)="_loadOnkeyPress($event)" class="fd-list__item fd-list__item--action" tabindex="0" role="button"
             [attr.aria-label]="loadTitle">
             <button class="fd-list__title fd-list__title--growing">
-                <fd-busy-indicator size="m" class="fd-busy-indicator-custom" [block]="true" [loading]="_loading">
+                <fd-busy-indicator size="m" class="fd-busy-indicator-custom" [block]="true" [loading]="_loading" role="alert" [attr.aria-busy]="_loading" aria-label="loading">
                 </fd-busy-indicator>
                 {{loadTitle}} <ng-content selector="#load"></ng-content>
             </button>

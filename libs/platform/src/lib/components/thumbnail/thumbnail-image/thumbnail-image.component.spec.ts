@@ -16,6 +16,12 @@ class DefaultThumbnailImageTestComponent {
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
         alt: 'Failed to load http://lorempixel.com/400/400/nature',
         label: 'nature'
+    }, {
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        mediaType: 'image',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        label: 'nature2'
     }];
     @ViewChild(ThumbnailImageComponent, { static: true })
     thumbnailImage: ThumbnailImageComponent;
@@ -54,6 +60,12 @@ describe('DefaultThumbnailImageComponent', () => {
         expect(thumbNailImageComponent.thumbnailClicked.emit).toHaveBeenCalled();
         expect(thumbNailImageComponent.thumbnailClicked.emit).toHaveBeenCalledWith(component.mediaList[0]);
 
+    });
+
+    it('should highlight the first thumbnail by default', () => {
+        const thumbnails = fixture.debugElement.queryAll(By.css('.fdp-thumbnail-image'));
+        expect(thumbnails[0].classes['fdp-thumbnail-image--selected']).toBeTruthy();
+        expect(thumbnails[1].classes['fdp-thumbnail-image--selected']).toBeFalsy();
     });
 
 });

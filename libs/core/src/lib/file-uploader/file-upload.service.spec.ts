@@ -3,7 +3,6 @@ import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 
 describe('FileUploadService', () => {
     const service: FileUploaderService = new FileUploaderService();
-    const anyService = <any>service;
 
     const fileSource: Partial<File>[] = [
         { name: 'image.png', size: 110000 },
@@ -66,44 +65,5 @@ describe('FileUploadService', () => {
             'png, jpeg, mp3')
         expect(files.validFiles.length).toBe(6);
         expect(files.invalidFiles.length).toBe(4);
-    });
-
-    it('should verify diffrent valid file size of parsing', () => {
-        let size;
-        size = anyService._parseFileSize('2byte');
-        expect(size === 2);
-        size = anyService._parseFileSize('2KB');
-        expect(size === 2048);
-        size = anyService._parseFileSize('5kb');
-        expect(size === 5120);
-        size = anyService._parseFileSize('12Mb ');
-        expect(size === 12582912);
-        size = anyService._parseFileSize('2 gb');
-        expect(size === 2147483648);
-        size = anyService._parseFileSize('2 k b');
-        expect(size === 2048);
-        size = anyService._parseFileSize('120');
-        expect(size === 120);
-    });
-
-
-    it('should verify diffrent invalid file size of parsing', () => {
-
-        expect(function (): void {
-            anyService._parseFileSize('KB')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            anyService._parseFileSize('hb')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            anyService._parseFileSize('2vf')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
-        expect(function (): void {
-            anyService._parseFileSize('gb3')
-        }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
     });
 });

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 @Component({
     template: `
@@ -45,5 +45,5 @@ import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
     `
 })
 export class DialogExampleComponent {
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {}
+    constructor(public dialogRef: DialogRef) {}
 }

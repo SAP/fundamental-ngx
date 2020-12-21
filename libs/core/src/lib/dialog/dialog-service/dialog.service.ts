@@ -1,8 +1,8 @@
 import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
-import { DIALOG_CONFIG, DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
-import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
@@ -33,8 +33,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
 
         const injector = Injector.create({
             providers: [
-                { provide: DIALOG_CONFIG, useValue: dialogConfig },
-                { provide: DIALOG_REF, useValue: dialogRef }
+                { provide: DialogConfig, useValue: dialogConfig },
+                { provide: DialogRef, useValue: dialogRef }
             ]
         });
 

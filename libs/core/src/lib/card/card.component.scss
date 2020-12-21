@@ -1,5 +1,6 @@
 @import '~fundamental-styles/dist/numeric-content';
 @import '~fundamental-styles/dist/card';
+@import '~fundamental-styles/dist/badge';
 
 /* Defined locally as fundamental-styles does not provide it */
 
@@ -41,4 +42,13 @@
             }
         }
     }
+}
+
+.fd-card__numeric-content.fd-numeric-content {
+    width: auto;
+    flex-shrink: 0;
+}
+
+.fd-numeric-content__scale-container {
+    flex: auto;
 }

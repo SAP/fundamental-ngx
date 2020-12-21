@@ -1,5 +1,5 @@
-import { AfterContentInit, ChangeDetectorRef, Component, Inject, Optional } from '@angular/core';
-import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { AfterContentInit, ChangeDetectorRef, Component, Optional } from '@angular/core';
+import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogHeaderBase } from '../base/dialog-header-base.class';
 
 /**
@@ -20,7 +20,7 @@ export class DialogHeaderComponent extends DialogHeaderBase implements AfterCont
 
     /** @hidden */
     constructor(
-        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
+        @Optional() public dialogConfig: DialogConfig,
         changeDetectorRef: ChangeDetectorRef
     ) {
         super(changeDetectorRef);

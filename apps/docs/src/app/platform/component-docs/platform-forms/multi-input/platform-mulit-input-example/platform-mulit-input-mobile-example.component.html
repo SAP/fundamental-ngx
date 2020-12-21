@@ -11,12 +11,16 @@
             [formControl]="ffl1.formControl"
             placeholder="Field placeholder text"
             type="text"
-            id="fdp-id"
+            id="fdp-id-mobile"
             name="input1"
-            [dataSource]="_datasource"
+            [dataSource]="_dataSource"
             displayKey="firstName"
+            description="lastName"
+            showSecondaryText="true"
+            avatarsrc="image"
             mobile="true"
             [mobileConfig]="mobileConfig"
+            hasByLine="true"
         >
         </fdp-multi-input>
     </fdp-form-field>
