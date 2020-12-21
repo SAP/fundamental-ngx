@@ -1,8 +1,7 @@
 import { BaseComponentPo } from './base-component.po';
 import { webDriver } from '../../driver/wdio';
-import { AssertionHelper } from '../../helper/assertion-helper';
+import {checkValueEqual, checkTextValueContain, checkValueChanged, checkFocused , checkNotFocused, checkIfDisabled} from '../../helper/assertion-helper';
 
-const assertionHelper = new AssertionHelper();
 
 export class StepInputPo extends BaseComponentPo {
     private url = '/step-input';
@@ -31,10 +30,10 @@ export class StepInputPo extends BaseComponentPo {
             webDriver.scrollIntoView(this.activeInput, i);
             const defaultValue = webDriver.getValue(this.activeInput, i);
             webDriver.click(this.activeButtonIncrement, i);
-            assertionHelper.checkValueChanged(defaultValue, webDriver.getValue(this.activeInput, i));
+            checkValueChanged(defaultValue, webDriver.getValue(this.activeInput, i));
             const newValue = webDriver.getValue(this.activeInput, i);
             webDriver.click(this.activeButtonDecrement, i);
-            assertionHelper.checkValueChanged(newValue, webDriver.getValue(this.activeInput, i));
+            checkValueChanged(newValue, webDriver.getValue(this.activeInput, i));
         }
     };
 
@@ -54,10 +53,10 @@ export class StepInputPo extends BaseComponentPo {
             webDriver.scrollIntoView(this.activeInput, i);
             const defaultValue = webDriver.getValue(this.activeInput, i);
             webDriver.setValue(this.activeInput, '2', i);
-            assertionHelper.checkValueChanged(defaultValue, webDriver.getValue(this.activeInput, i));
+            checkValueChanged(defaultValue, webDriver.getValue(this.activeInput, i));
             const newValue = webDriver.getValue(this.activeInput, i);
             webDriver.setValue(this.activeInput, '1', i);
-            assertionHelper.checkValueChanged(newValue, webDriver.getValue(this.activeInput, i));
+            checkValueChanged(newValue, webDriver.getValue(this.activeInput, i));
         }
     };
 
@@ -69,12 +68,12 @@ export class StepInputPo extends BaseComponentPo {
             webDriver.click(this.activeInput, i);
             driver.keys(['ArrowDown']);
             driver.keys(['Enter']);
-            assertionHelper.checkValueChanged(defaultValue, webDriver.getValue(this.activeInput, i));
+            checkValueChanged(defaultValue, webDriver.getValue(this.activeInput, i));
             const newValue = webDriver.getValue(this.activeInput, i);
             webDriver.click(this.activeInput, i);
             driver.keys(['ArrowUp']);
             driver.keys(['Enter']);
-            assertionHelper.checkValueChanged(newValue, webDriver.getValue(this.activeInput, i));
+            checkValueChanged(newValue, webDriver.getValue(this.activeInput, i));
         }
     };
 
@@ -85,28 +84,28 @@ export class StepInputPo extends BaseComponentPo {
         driver.keys(['Enter']);
         webDriver.waitForDisplayed(this.errorMessage);
         let formStatusText = webDriver.getText(this.formStatusText)
-        assertionHelper.checkTextValue(formStatusText, 'INVALID')
+        checkTextValueContain(formStatusText, 'INVALID')
 
         webDriver.clearValue(input);
         webDriver.setValue(input, '10'); // reset value to remove error message
         driver.keys(['Enter']);
         webDriver.waitForNotDisplayed(this.errorMessage);
         formStatusText = webDriver.getText(this.formStatusText)
-        assertionHelper.checkTextValue(formStatusText, 'VALID')
+        checkTextValueContain(formStatusText, 'VALID')
 
         webDriver.clearValue(input);
         webDriver.setValue(input, '5');
         driver.keys(['Enter']);
         webDriver.waitForDisplayed(this.errorMessage);
         formStatusText = webDriver.getText(this.formStatusText)
-        assertionHelper.checkTextValue(formStatusText, 'INVALID')
+        checkTextValueContain(formStatusText, 'INVALID')
 
         webDriver.clearValue(input);
         webDriver.setValue(input, '25'); // reset value to remove error message
         driver.keys(['Enter']);
         webDriver.waitForDisplayed(this.errorMessage);
         formStatusText = webDriver.getText(this.formStatusText)
-        assertionHelper.checkTextValue(formStatusText, 'INVALID')
+        checkTextValueContain(formStatusText, 'INVALID')
     }
 
     checkFocusOnInputAfterClickingButtons(): void {
@@ -114,7 +113,7 @@ export class StepInputPo extends BaseComponentPo {
         for (let i = 0; i < arr; i++) {
             webDriver.scrollIntoView(this.activeInput, i);
             webDriver.click(this.activeButtonIncrement, i);
-            assertionHelper.checkNotFocused(this.activeInput, i)
+            checkNotFocused(this.activeInput, i)
         }
     }
 
@@ -125,7 +124,7 @@ export class StepInputPo extends BaseComponentPo {
             webDriver.click(this.activeInput, i);
             webDriver.clearValue(this.activeInput, i);
             const value = webDriver.getValue(this.activeInput, i);
-            assertionHelper.checkValueAfterClearingTheInput(value, '0');
+            checkValueEqual(value, '0');
         }
     }
 
@@ -134,22 +133,22 @@ export class StepInputPo extends BaseComponentPo {
         for (let i = 0; i < 20; i++) {
             webDriver.click(this.minMaxButtonIncrement);
         }
-        assertionHelper.checkIfDisabled(this.minMaxButtonIncrement, 'aria-disabled', 'true')
+        checkIfDisabled(this.minMaxButtonIncrement, 'aria-disabled', 'true')
 
         for (let i = 0; i < 40; i++) {
             webDriver.click(this.minMaxButtonDecrement);
         }
-        assertionHelper.checkIfDisabled(this.minMaxButtonDecrement, 'aria-disabled', 'true')
+        checkIfDisabled(this.minMaxButtonDecrement, 'aria-disabled', 'true')
     }
 
     checkInputFocusedAfterClickingTabButton(): void {
         const arr = webDriver.getElementArrayLength(this.inputWithoutForm);
         webDriver.click(this.inputWithoutForm);
-        assertionHelper.checkFocused(this.inputWithoutForm)
+        checkFocused(this.inputWithoutForm)
         for (let i = 1; i < arr; i++) {
             webDriver.scrollIntoView(this.inputWithoutForm, i);
             driver.keys(['Tab']);
-            assertionHelper.checkFocused(this.inputWithoutForm, i)
+            checkFocused(this.inputWithoutForm, i)
         }
     }
 
@@ -160,7 +159,7 @@ export class StepInputPo extends BaseComponentPo {
             webDriver.clearValue(this.formInput, i);
             webDriver.setValue(this.formInput, '10', i);
             const quantity = webDriver.getText(this.quantityText, i)
-            assertionHelper.checkTextValue(quantity, '10')
+            checkTextValueContain(quantity, '10')
         }
     }
 

@@ -45,3 +45,19 @@ export function checkLabels(arraySelector: string, expectation: string[], sliceS
 export function checkNotFocused(element: string, index: number = 0): void {
     expect($$(element)[index].isFocused()).toBe(false);
 }
+
+export function checkFocused(element: string, index: number = 0): void {
+    expect($$(element)[index].isFocused()).toBe(true);
+}
+
+export function checkValueChanged(oldValue: string, newValue: string): void {
+    expect(oldValue).not.toEqual(newValue);
+}
+
+export function checkTextValueContain(oldValue: string, newValue: string): void {
+    expect(oldValue).toContain(newValue);
+}
+
+export function checkValueEqual(oldValue: string, newValue: string): void {
+    expect(oldValue).toEqual(newValue);
+}
