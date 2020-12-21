@@ -34,7 +34,7 @@ function loadRemoteEntry(remoteEntry: string): Promise<void> {
         script.onerror = () => {
             reject(
                 new Error(
-                    `ModuleRemoteLoadingError: Can't fetch a remote from ${remoteEntry}`
+                    `ModuleRemoteLoadingError: Can't fetch a remote module from ${remoteEntry}`
                 )
             );
         };
