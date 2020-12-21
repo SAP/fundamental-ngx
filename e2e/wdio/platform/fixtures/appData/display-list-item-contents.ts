@@ -18,5 +18,6 @@ export default {
         'Sneeze'
     ],
     compactAttr: 'ng-reflect-compact',
-    borderAttr: 'ng-reflect-no-border'
+    borderAttr: 'ng-reflect-no-border',
+    navUrl: '/platform/home',
 }

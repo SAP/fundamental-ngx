@@ -127,23 +127,19 @@ describe('List test suite:', function() {
         });
 
         it('should check scroll', () => {
-            if (webDriver.browserIsFirefox()) {
-                // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-                console.log('skip FF due to issue #4107');
-            } else {
+            // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
+            if (!webDriver.browserIsFirefox()) {
                 webDriver.scrollIntoView(listPg.vScrollListItems, 0);
                 const itemsStartCount = webDriver.getElementArrayLength(listPg.vScrollListItems);
                 webDriver.click(listPg.vScrollListItems, 0);
-                webDriver.sendKeys('ArrowDown');
-                webDriver.sendKeys('ArrowDown');
-                webDriver.sendKeys('ArrowDown');
-                webDriver.sendKeys('ArrowDown');
-                webDriver.sendKeys('ArrowDown');
+                webDriver.sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
                 expect(webDriver.waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
                 webDriver.waitForInvisibilityOf(listPg.vScrollLoadIcon);
                 const itemsEndCount = webDriver.getElementArrayLength(listPg.vScrollListItems);
                 expect(itemsStartCount).not.toEqual(itemsEndCount);
+                return;
             }
+            console.log('skip FF due to #4107');
         });
     });
 
@@ -175,22 +171,18 @@ describe('List test suite:', function() {
 
         it('should check delete action', () => {
             webDriver.click(listPg.btnDeleteBtn, 0);
-            if (webDriver.browserIsIE()) {
-                webDriver.acceptAlert();
-            } else {
+            if (!webDriver.browserIsIE()) {
                 expect(webDriver.getAlertText()).toContain('Delete row');
-                webDriver.acceptAlert();
             }
+            webDriver.acceptAlert();
         });
 
         it('should check edit action', () => {
             webDriver.click(listPg.btnEditBtn, 0);
-            if (browser.capabilities.browserName === 'internet explorer') {
-                webDriver.acceptAlert();
-            } else {
+            if (!webDriver.browserIsIE()) {
                 expect(webDriver.getAlertText()).toContain('Edit row');
-                webDriver.acceptAlert();
             }
+            webDriver.acceptAlert();
         });
     });
 
@@ -199,7 +191,6 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.noDataListItems);
             checkAttributeValueTrue(listPg.noDataCompactList, ListData.altCompactAttribute);
             checkElementTextValue(listPg.noDataListItems, ListData.noDataText);
-
         });
     });
 

@@ -139,7 +139,7 @@ export class Wdio {
     }
 
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: any } {
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string | number } {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 

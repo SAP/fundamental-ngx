@@ -68,7 +68,7 @@ describe('Object list item suite:', function() {
         it('should check navigation', () => {
             webDriver.click(objListPg.objNavList);
             const currentUrl = webDriver.getCurrentUrl();
-            expect(currentUrl).toContain('platform/home');
+            expect(currentUrl).toContain(ObjListData.navUrl);
             objListPg.open();
         });
     });
@@ -100,16 +100,7 @@ describe('Object list item suite:', function() {
 
     describe('check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            const areas = webDriver.elementArray(objListPg.exampleAreaContainersArr);
-            const switchers = webDriver.elementArray(objListPg.rtlSwitcherArr);
-            for (let i = 0; i < areas.length; i++) {
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(objListPg.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-                expect(webDriver.getCSSPropertyByName(objListPg.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(objListPg.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
-                expect(webDriver.getCSSPropertyByName(objListPg.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
-            }
+            objListPg.checkRtlSwitch(objListPg.rtlSwitcherArr, objListPg.exampleAreaContainersArr);
         });
     });
 });

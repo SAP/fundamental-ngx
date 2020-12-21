@@ -27,7 +27,7 @@ describe('Display List Item test suite:', function() {
         it('should check navigation', () => {
             webDriver.click(displayListPg.displayLinks, 0);
             const newUrl = webDriver.getCurrentUrl();
-            expect(newUrl).toContain('platform/home');
+            expect(newUrl).toContain(DisplayListData.navUrl);
             displayListPg.open();
         });
     });
