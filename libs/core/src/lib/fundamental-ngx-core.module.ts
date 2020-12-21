@@ -7,7 +7,6 @@ import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
-import { BadgeModule } from './badge/badge.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -18,7 +17,6 @@ import { CheckboxModule } from './checkbox/checkbox.module';
 import { DatePickerModule } from './date-picker/date-picker.module';
 import { DatetimePickerModule } from './datetime-picker/datetime-picker.module';
 import { FeedListItemModule } from './feed-list-item/public_api';
-import { FileInputModule } from './file-input/file-input.module';
 import { FileUploaderModule } from './file-uploader/file-uploader.module';
 import { FixedCardLayoutModule } from './fixed-card-layout/fixed-card-layout.module';
 import { FlexibleColumnLayoutModule } from './flexible-column-layout/flexible-column-layout.module';
@@ -77,6 +75,7 @@ import { MessageToastService } from './message-toast/message-toast-service/messa
 import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-content.module';
 import { MessageBoxModule } from './message-box/message-box.module';
 import { ThemesService } from './utils/services/themes.service';
+import { WizardModule } from './wizard/wizard.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -86,7 +85,6 @@ import { ThemesService } from './utils/services/themes.service';
         ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
-        BadgeModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,
@@ -101,7 +99,6 @@ import { ThemesService } from './utils/services/themes.service';
         DatetimePickerModule,
         DragAndDropModule,
         FeedListItemModule,
-        FileInputModule,
         FileUploaderModule,
         FixedCardLayoutModule,
         FlexibleColumnLayoutModule,
@@ -148,6 +145,7 @@ import { ThemesService } from './utils/services/themes.service';
         SwitchModule,
         TokenModule,
         TreeModule,
+        WizardModule,
         CardModule,
         MessageBoxModule,
         MessageToastModule,

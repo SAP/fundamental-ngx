@@ -42,7 +42,11 @@ import { ProductSwitchComponent } from '../../product-switch/product-switch/prod
     templateUrl: './shellbar-actions.component.html',
     styleUrls: ['./shellbar-actions.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[class.fd-shellbar__group]': 'true',
+        '[class.fd-shellbar__group--actions]': 'true',
+    }
 })
 export class ShellbarActionsComponent {
 

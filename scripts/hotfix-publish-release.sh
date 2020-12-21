@@ -5,7 +5,7 @@
 # - npm run hotfix-release-latest
 # `-latest` indicates if the new tag should be treated as a latest one in npm, which is going to trigger
 # - npm publish with `latest` tag, which will become new default version
-# - master version incrementation
+# - main version incrementation
 
 
 
@@ -38,5 +38,5 @@ git commit -m "chore(release): create new release via script" -n
 git push --set-upstream origin $HOTFIX_TMP_BRANCH
 
 # delete branch on local machine
-git checkout master
+git checkout main
 git branch -D $HOTFIX_TMP_BRANCH

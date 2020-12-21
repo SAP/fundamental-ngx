@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 import { Observable, of } from 'rxjs';
 const LIST_ELEMENTS: Address[] = [
@@ -55,9 +55,17 @@ export class ListDataProvider extends DataProvider<Address> {
     selector: 'fdp-standard-list-item-with-single-selection-example',
     templateUrl: './platform-standard-list-item-with-single-selection-example.component.html'
 })
-export class PlatformStandardListItemWithSingleSelectionExampleComponent {
+export class PlatformStandardListItemWithSingleSelectionExampleComponent implements AfterViewInit {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
     _selectedItems: any[] = [];
+
+    constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
+
+    ngAfterViewInit(): void {
+        const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
+        this._render.setAttribute(toolbar, 'tabindex', '0' );
+        this._render.setStyle(toolbar, 'outline', 'none' );
+    }
 
     _showItemInfo(event: any): void {
         this._selectedItems = event.selectedItems[0].getAttribute('id');

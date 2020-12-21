@@ -17,11 +17,11 @@ import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { dialogFadeNgIf } from './utils/dialog.animations';
-import { DIALOG_CONFIG, DialogConfig } from './utils/dialog-config.class';
+import { DialogConfig } from './utils/dialog-config.class';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
-import { DIALOG_REF, DialogRef } from './utils/dialog-ref.class';
+import { DialogRef } from './utils/dialog-ref.class';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 import { DialogBase } from './base/dialog-base.class';
@@ -113,8 +113,8 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
 
     /** @hidden */
     constructor(
-        @Optional() @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
-        @Optional() @Inject(DIALOG_REF) private _dialogRef: DialogRef,
+        @Optional() public dialogConfig: DialogConfig,
+        @Optional() private _dialogRef: DialogRef,
         @Optional() router: Router,
         changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef

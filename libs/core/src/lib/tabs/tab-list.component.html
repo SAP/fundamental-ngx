@@ -4,7 +4,7 @@
     role="tablist"
 >
     <ng-container *ngFor="let tab of panelTabs.toArray(); let i = index">
-        <li fd-tab-item [header]="tab.header" [tabItemState]="tab.tabState">
+        <li fd-tab-item [header]="tab.header" [tabItemState]="tab.tabState" [attr.aria-selected]="tab.expanded">
             <a
                 fd-tab-link
                 [active]="tab.expanded"

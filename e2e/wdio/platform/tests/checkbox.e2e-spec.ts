@@ -3,9 +3,28 @@ import checkboxGPData from '../../platform/fixtures/appData/checkbox-page-conten
 import checkboxData from '../fixtures/appData/checkbox-page-contents';
 import { webDriver } from '../../driver/wdio';
 
-describe('Checkbox test suite', () => {
-    const checkboxPage = new CheckboxPO();
+describe('Checkbox test suite', function() {
 
+    const {
+        binaryTempCheckbox,
+        disabledBinaryCheckbox,
+        checkboxWithoutForm,
+        disabledCheckboxWithoutForm,
+        checkboxWithValue,
+        tristateCheckboxes,
+        acceptAllCheckbox,
+        termsAndConditionsCheckbox,
+        marketingCheckbox,
+        newsletterCheckbox,
+        tristateCheckboxParis,
+        errorCheckboxes,
+        presenceCheckbox,
+        accessibilityCheckboxes,
+        exampleAreaContainersArr,
+        errorExampleTitle,
+
+    } = new CheckboxPO();
+    const checkboxPage = new CheckboxPO();
     beforeAll(() => {
         checkboxPage.open();
     });
@@ -16,241 +35,244 @@ describe('Checkbox test suite', () => {
 
     describe('check binary checkbox used with form examples', () => {
         it('should check binary checkbox in template driven form', () => {
-            webDriver.waitElementToBePresentInDOM(checkboxPage.binaryTempCheckbox, 0);
-            webDriver.waitForDisplayed(checkboxPage.binaryTempCheckbox, 0);
+            webDriver.waitElementToBePresentInDOM(binaryTempCheckbox, 0);
+            webDriver.waitForDisplayed(binaryTempCheckbox, 0);
             // check checkbox labels
             for (let i = 0; 3 > i; i++) {
-                checkIfDisabled(checkboxPage.binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(checkboxPage.binaryTempCheckbox, i);
+                checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
+                checkMarkingCheckbox(binaryTempCheckbox, i);
             }
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
+            if (webDriver.isBrowser('Safari') || webDriver.isBrowser('internet explorer')) {
+                console.log('Skip check for Safari and IE');
             } else {
-                checkHoverState(checkboxPage.binaryTempCheckbox);
+                checkHoverState(binaryTempCheckbox);
             }
-            checkFocusState(checkboxPage.binaryTempCheckbox);
+            checkFocusState(binaryTempCheckbox);
         });
 
         it('should check binary checkbox in reactive/model driven form', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 3; 6 > i; i++) {
-                    checkIfDisabled(checkboxPage.binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
-                    checkMarkingCheckbox(checkboxPage.binaryTempCheckbox, i);
+                    checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
+                    checkMarkingCheckbox(binaryTempCheckbox, i);
                 }
 
-                checkHoverState(checkboxPage.binaryTempCheckbox, 3);
-                checkFocusState(checkboxPage.binaryTempCheckbox, 3);
+                checkHoverState(binaryTempCheckbox, 3);
+                checkFocusState(binaryTempCheckbox, 3);
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
 
         it('should check disabled checkbox', () => {
-            webDriver.waitForDisplayed(checkboxPage.disabledBinaryCheckbox, 0, 10000);
-            checkIfDisabled(checkboxPage.disabledBinaryCheckbox, 'ng-reflect-is-disabled', 'true');
+            webDriver.waitForDisplayed(disabledBinaryCheckbox, 0, 10000);
+            checkIfDisabled(disabledBinaryCheckbox, 'ng-reflect-is-disabled', 'true');
         });
     });
 
     describe('Check checkbox used without form examples', () => {
         it('should check binary checkbox with value', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 0; 2 > i; i++) {
-                    checkIfDisabled(checkboxPage.checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
-                    checkMarkingCheckbox(checkboxPage.checkboxWithoutForm, i);
+                    checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
+                    checkMarkingCheckbox(checkboxWithoutForm, i);
                 }
 
-                checkHoverState(checkboxPage.checkboxWithoutForm);
-                checkFocusState(checkboxPage.checkboxWithoutForm);
+                checkHoverState(checkboxWithoutForm);
+                checkFocusState(checkboxWithoutForm);
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
 
         it('should check binary checkbox without value', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 2; 4 > i; i++) {
-                    checkIfDisabled(checkboxPage.checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
-                    checkMarkingCheckbox(checkboxPage.checkboxWithoutForm, i);
+                    checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
+                    checkMarkingCheckbox(checkboxWithoutForm, i);
                 }
 
-                checkFocusState(checkboxPage.checkboxWithoutForm, 2);
-                checkHoverState(checkboxPage.checkboxWithoutForm, 2);
+                checkFocusState(checkboxWithoutForm, 2);
+                checkHoverState(checkboxWithoutForm, 2);
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
 
         it('should check disabled checkbox', () => {
-            // TODO: Fix for Safari
-            if (browser.capabilities.browserName === 'Safari') {
-                console.log('skip');
-            } else {
-                webDriver.waitElementToBePresentInDOM(checkboxPage.disabledCheckboxWithoutForm);
-                webDriver.scrollIntoView(checkboxPage.disabledCheckboxWithoutForm);
-                webDriver.waitForDisplayed(checkboxPage.disabledCheckboxWithoutForm);
-                checkIfDisabled(checkboxPage.disabledCheckboxWithoutForm, 'ng-reflect-is-disabled', 'true');
+            // TODO: Fix for Safari and IE
+            if (!webDriver.isIEorSafari()) {
+                webDriver.waitElementToBePresentInDOM(disabledCheckboxWithoutForm);
+                webDriver.scrollIntoView(disabledCheckboxWithoutForm);
+                webDriver.waitForDisplayed(disabledCheckboxWithoutForm);
+                checkIfDisabled(disabledCheckboxWithoutForm, 'ng-reflect-is-disabled', 'true');
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
     });
 
     describe('Check checkboxes with value property examples', () => {
         it('should check template driven form', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 0; 2 > i; i++) {
-                    checkIfDisabled(checkboxPage.checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
-                    checkMarkingCheckbox(checkboxPage.checkboxWithValue, i);
+                    checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
+                    checkMarkingCheckbox(checkboxWithValue, i);
                 }
-                checkHoverState(checkboxPage.checkboxWithValue);
-                checkFocusState(checkboxPage.checkboxWithValue);
+                checkHoverState(checkboxWithValue);
+                checkFocusState(checkboxWithValue);
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
         it('should check reactive/model driven form', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 2; 4 > i; i++) {
-                    checkIfDisabled(checkboxPage.checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
-                    checkMarkingCheckbox(checkboxPage.checkboxWithValue, i);
+                    checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
+                    checkMarkingCheckbox(checkboxWithValue, i);
                 }
 
-                checkHoverState(checkboxPage.checkboxWithValue, 2);
-                checkFocusState(checkboxPage.checkboxWithValue, 2);
+                checkHoverState(checkboxWithValue, 2);
+                checkFocusState(checkboxWithValue, 2);
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
     });
 
     describe('Check Tristate Checkbox With Value Property and Without Value Property', () => {
         it('should check reactive form', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 0; 8 > i; i++) {
-                    checkIfDisabled(checkboxPage.tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+                    checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
                 }
 
-                checkHoverState(checkboxPage.tristateCheckboxes);
-                checkFocusState(checkboxPage.tristateCheckboxes);
+                checkHoverState(tristateCheckboxes);
+                checkFocusState(tristateCheckboxes);
 
                 for (let j = 0; 6 > j; j++) {
-                    checkTristateCheckboxMarking(checkboxPage.tristateCheckboxes, j);
+                    checkTristateCheckboxMarking(tristateCheckboxes, j);
                 }
 
-                checkTriStateTwoStateCheckboxMarking(checkboxPage.tristateCheckboxes, 6);
-                checkMarkingCheckbox(checkboxPage.tristateCheckboxes, 7);
+                checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 6);
+                checkMarkingCheckbox(tristateCheckboxes, 7);
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
 
         it('should check template form', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 8; 16 > i; i++) {
-                    checkIfDisabled(checkboxPage.tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+                    checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
                 }
-                checkHoverState(checkboxPage.tristateCheckboxes, 8);
-                checkFocusState(checkboxPage.tristateCheckboxes, 8);
+                checkHoverState(tristateCheckboxes, 8);
+                checkFocusState(tristateCheckboxes, 8);
 
                 for (let j = 8; 14 > j; j++) {
-                    checkTristateCheckboxMarking(checkboxPage.tristateCheckboxes, j);
+                    checkTristateCheckboxMarking(tristateCheckboxes, j);
                 }
 
                 for (let k = 14; 16 > k; k++) {
-                    checkTriStateTwoStateCheckboxMarking(checkboxPage.tristateCheckboxes, k);
+                    checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, k);
                 }
+                return;
             }
+            console.log('Skip for Safari and IE');
+
         });
 
         it('should check tristate checkbox with multiple checkboxes', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
+            if (!webDriver.isIEorSafari()) {
                 for (let i = 16; 20 > i; i++) {
-                    checkIfDisabled(checkboxPage.tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+                    checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
                 }
+                checkHoverState(acceptAllCheckbox);
+                checkFocusState(acceptAllCheckbox);
+                checkHoverState(termsAndConditionsCheckbox);
+                checkFocusState(termsAndConditionsCheckbox);
 
-                checkHoverState(checkboxPage.acceptAllCheckbox);
-                checkFocusState(checkboxPage.acceptAllCheckbox);
-                checkHoverState(checkboxPage.termsAndConditionsCheckbox);
-                checkFocusState(checkboxPage.termsAndConditionsCheckbox);
-
-                webDriver.clickNextElement(checkboxPage.acceptAllCheckbox);
+                webDriver.clickNextElement(acceptAllCheckbox);
                 for (let j = 17; 20 > j; j++) {
-                    expect(webDriver.getAttributeByName(checkboxPage.tristateCheckboxes, 'aria-checked', j)).toBe('true');
+                    expect(webDriver.getAttributeByName(tristateCheckboxes, 'aria-checked', j)).toBe('true');
                 }
 
-                webDriver.clickNextElement(checkboxPage.acceptAllCheckbox);
+                webDriver.clickNextElement(acceptAllCheckbox);
                 for (let k = 17; 20 > k; k++) {
-                    expect(webDriver.getAttributeByName(checkboxPage.tristateCheckboxes, 'aria-checked', k)).toBe('false');
+                    expect(webDriver.getAttributeByName(tristateCheckboxes, 'aria-checked', k)).toBe('false');
                 }
-                webDriver.clickNextElement(checkboxPage.marketingCheckbox);
-                webDriver.clickNextElement(checkboxPage.newsletterCheckbox);
-                expect(webDriver.getAttributeByName(checkboxPage.acceptAllCheckbox, 'aria-checked')).toBe('mixed');
+                webDriver.clickNextElement(marketingCheckbox);
+                webDriver.clickNextElement(newsletterCheckbox);
+                expect(webDriver.getAttributeByName(acceptAllCheckbox, 'aria-checked')).toBe('mixed');
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
 
         it('should check checkbox markings are centered', () => {
-            const checkboxMarkDisplayStyle = webDriver.executeScriptBeforeTagAttr(checkboxPage.tristateCheckboxParis, 'display');
+            const checkboxMarkDisplayStyle = webDriver.executeScriptBeforeTagAttr(tristateCheckboxParis, 'display');
             expect(checkboxMarkDisplayStyle).toContain(checkboxData.markingDisplayStyle);
         });
     });
 
     describe('Checkbox With Form and State Change on Error', () => {
-        it('should check error handling examples', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
-                const errorCheckboxesLength = webDriver.getElementArrayLength(checkboxPage.errorCheckboxes);
+           it('should check error handling examples', () => {
+            if (!webDriver.isIEorSafari()) {
+                const errorCheckboxesLength = webDriver.getElementArrayLength(errorCheckboxes);
 
                 for (let i = 0; errorCheckboxesLength > i; i++) {
-                    checkIfDisabled(checkboxPage.errorCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+                    checkIfDisabled(errorCheckboxes, 'ng-reflect-is-disabled', 'false', i);
                 }
 
-                webDriver.clickNextElement(checkboxPage.presenceCheckbox);
-                expect(webDriver.getCSSPropertyByName(checkboxPage.presenceCheckbox, 'border-bottom-color').value)
+                webDriver.clickNextElement(presenceCheckbox);
+                expect(webDriver.getCSSPropertyByName(presenceCheckbox, 'border-bottom-color').value)
                     .toContain(checkboxGPData.checkboxErrorState);
                 webDriver.scrollIntoView(checkboxPage.errorExampleTitle);
                 webDriver.click(checkboxPage.errorExampleTitle);
-                webDriver.mouseHoverElement(checkboxPage.presenceCheckbox);
+                webDriver.mouseHoverElement(presenceCheckbox);
                 expect(webDriver.getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxData.checkboxErrorTooltip);
 
-                checkHoverState(checkboxPage.errorCheckboxes, 1);
-                checkFocusState(checkboxPage.errorCheckboxes, 1);
+                checkHoverState(errorCheckboxes, 1);
+                checkFocusState(errorCheckboxes, 1);
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
 
         it('should check error handling form submission', () => {
-            webDriver.click(checkboxPage.submitBtn);
-            expect(webDriver.getAlertText()).toEqual('Status: VALID');
-            webDriver.acceptAlert();
-            // checks with required checkbox not marked
-
+            if (!webDriver.isIEorSafari()) {
+                webDriver.click(checkboxPage.submitBtn);
+                expect(webDriver.getAlertText()).toEqual('Status: VALID');
+                webDriver.acceptAlert();
+                // checks with required checkbox not marked
+                return;
+            }
+            console.log('Skip for Safari and IE');
         });
         it('should check error handling form submission 222 ', () => {
-            if (browser.capabilities.browserName === 'Safari' || 'internet explorer') {
-                console.log('skip');
-            } else {
-                webDriver.clickNextElement(checkboxPage.presenceCheckbox);
+            if (!webDriver.isIEorSafari()) {
+                webDriver.clickNextElement(presenceCheckbox);
                 webDriver.click(checkboxPage.submitBtn);
 
                 expect(webDriver.getAlertText()).toEqual('Status: INVALID');
+                return;
             }
+            console.log('Skip for Safari and IE');
         });
     });
 
     xdescribe('Check Accessibility on checkbox examples', () => {
         it('should check a11y checkboxes', () => {
-            checkMarkingCheckbox(checkboxPage.accessibilityCheckboxes, 0);
-            checkMarkingCheckbox(checkboxPage.accessibilityCheckboxes, 1);
+            checkMarkingCheckbox(accessibilityCheckboxes, 0);
+            checkMarkingCheckbox(accessibilityCheckboxes, 1);
 
-            expect(webDriver.getAttributeByName(checkboxPage.accessibilityCheckboxes, 'aria-label'))
+            expect(webDriver.getAttributeByName(accessibilityCheckboxes, 'aria-label'))
                 .toEqual(checkboxData.a11yCheckboxAriaLabel);
-            expect(webDriver.getAttributeByName(checkboxPage.accessibilityCheckboxes, 'aria-disabled')).toBe('false');
+            expect(webDriver.getAttributeByName(accessibilityCheckboxes, 'aria-disabled')).toBe('false');
 
-            expect(webDriver.getAttributeByName(checkboxPage.accessibilityCheckboxes, 'aria-labelledby', 1))
+            expect(webDriver.getAttributeByName(accessibilityCheckboxes, 'aria-labelledby', 1))
                 .toEqual(checkboxData.a11yCheckboxAriaLabelledBy);
-            expect(webDriver.getAttributeByName(checkboxPage.accessibilityCheckboxes, 'aria-disabled', 1)).toBe('false');
+            expect(webDriver.getAttributeByName(accessibilityCheckboxes, 'aria-disabled', 1)).toBe('false');
         });
 
         it('should check the disabled accessibility checkbox', () => {
@@ -261,27 +283,27 @@ describe('Checkbox test suite', () => {
         });
     });
 
-    xdescribe('check example orientation', () => {
+    describe('check example orientation', () => {
         it('should check LTR orientation', () => {
-            const areaContainersArrayLength = webDriver.getElementArrayLength(checkboxPage.exampleAreaContainersArr);
+            const areaContainersArrayLength = webDriver.getElementArrayLength(exampleAreaContainersArr);
 
             for (let i = 0; areaContainersArrayLength > i; i++) {
-                expect(webDriver.getCSSPropertyByName(checkboxPage.exampleAreaContainersArr, 'direction', i).value)
+                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value)
                     .toBe('ltr', 'css prop direction ');
             }
         });
 
         it('should check RTL orientation', () => {
-            const arrL = webDriver.getElementArrayLength(checkboxPage.exampleAreaContainersArr);
+            const arrL = webDriver.getElementArrayLength(exampleAreaContainersArr);
 
             for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(checkboxPage.exampleAreaContainersArr, i);
-                expect(webDriver.getCSSPropertyByName(checkboxPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = webDriver.getAttributeByName(checkboxPage.exampleAreaContainersArr, 'dir', i);
+                webDriver.scrollIntoView(exampleAreaContainersArr, i);
+                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+                const dirValueBefore = webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i);
                 expect([null, '']).toContain(dirValueBefore);
                 webDriver.click(checkboxPage.rtlSwitcherArr, i);
-                expect(webDriver.getCSSPropertyByName(checkboxPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(webDriver.getAttributeByName(checkboxPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+                expect(webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
             }
         });
     });

@@ -1,5 +1,5 @@
-import { Observable, of } from 'rxjs';
-import { delay, filter, map } from 'rxjs/operators';
+import { merge, Observable, of } from 'rxjs';
+import { delay, map, tap } from 'rxjs/operators';
 
 import {
     CancelUploadNewFileEvent,
@@ -18,10 +18,15 @@ import {
 } from '@fundamental-ngx/platform';
 
 import { generateUploadCollectionItems } from './platform-upload-collection-items-generator';
+import { HttpClient } from '@angular/common/http';
 
 export class PlatformUploadCollectionDataProviderExample extends UploadCollectionDataProvider {
     items: UploadCollectionItem[] = generateUploadCollectionItems(50, 4, 2);
     private _cancelUploadNewFileIds: (string | number)[] = [];
+
+    constructor(private readonly _http: HttpClient) {
+        super();
+    }
 
     /** The method is triggered when valid files are selected in the file uploader dialog. */
     upload({ parentFolderId, items }: UploadEvent): Observable<UploadCollectionItem[]> {
@@ -67,7 +72,23 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
     download(data: DownloadEvent): Observable<void> {
         console.log('download', data);
 
-        return of(null);
+        const obs = data.items.map((file) => {
+            return this._http.get(file.url, { responseType: 'blob' }).pipe(map(blob => ({
+                blob: blob,
+                file: file
+            })));
+        });
+
+        return merge(...obs).pipe(map(({ file, blob }) => {
+            const a = document.createElement('a');
+            const objectUrl = URL.createObjectURL(blob);
+            a.href = objectUrl;
+            a.download = file.name;
+            a.click();
+            URL.revokeObjectURL(objectUrl);
+
+            return null;
+        }));
     }
 
     /**
@@ -76,6 +97,11 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
      * */
     moveTo(data: MoveToEvent): Observable<UploadCollectionItem[]> {
         console.log('moveTo', data);
+
+        const ids = data.items.map((item) => item.documentId);
+
+        this._findParentFolderAndRemoveItemsByIds(data.from ? data.from.documentId : null, ids);
+        this._findParentFolderAndAddFiles(data.to ? data.to.documentId : null, data.items);
 
         return of(null);
     }
@@ -287,6 +313,38 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
                 break;
             } else {
                 this._findParentFolderAndAddNewFiles(parentFolderId, uploadedFiles, currentItem.files);
+            }
+        }
+    }
+
+    /** @hidden */
+    private _findParentFolderAndAddFiles(
+        parentFolderId: string | number | null,
+        files: UploadCollectionItem[],
+        items = this.items
+    ): void {
+        if (files.length === 0) {
+            return;
+        }
+
+        if (!parentFolderId) {
+            items.push(...files);
+
+            return;
+        }
+
+        for (let i = 0; i < items.length; i++) {
+            const currentItem = items[i];
+            if (currentItem.type !== 'folder') {
+                continue;
+            }
+
+            if (currentItem.documentId === parentFolderId) {
+                currentItem.files.push(...files);
+
+                break;
+            } else {
+                this._findParentFolderAndAddFiles(parentFolderId, files, currentItem.files);
             }
         }
     }

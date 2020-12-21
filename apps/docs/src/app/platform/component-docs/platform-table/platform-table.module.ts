@@ -5,8 +5,13 @@ import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-import { ObjectStatusModule, TableModule } from '@fundamental-ngx/core';
-import { PlatformButtonModule, PlatformInputModule, PlatformTableModule } from '@fundamental-ngx/platform';
+import { ObjectStatusModule, TableModule, LayoutPanelModule } from '@fundamental-ngx/core';
+import {
+    PlatformButtonModule,
+    PlatformInputModule,
+    PlatformSearchFieldModule,
+    PlatformTableModule
+} from '@fundamental-ngx/platform';
 
 import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
 import { PlatformTableDocsComponent } from './platform-table-docs.component';
@@ -14,6 +19,10 @@ import { PlatformTableDefaultExampleComponent } from './platform-table-examples/
 import { PlatformTableCustomColumnExampleComponent } from './platform-table-examples/platform-table-custom-column-example.component';
 import { PlatformTableMultipleRowSelectionExampleComponent } from './platform-table-examples/platform-table-multiple-row-selection-example.component';
 import { PlatformTableSingleRowSelectionExampleComponent } from './platform-table-examples/platform-table-single-row-selection-example.component';
+import { PlatformTableSortableExampleComponent } from './platform-table-examples/platform-table-sortable-example.component';
+import { PlatformTableFilterableExampleComponent } from './platform-table-examples/platform-table-filterable-example.component';
+import { PlatformTableGroupableExampleComponent } from './platform-table-examples/platform-table-groupable-example.component';
+import { PlatformTableFreezableExampleComponent } from './platform-table-examples/platform-table-freezable-example.component';
 
 const routes: Routes = [
     {
@@ -35,7 +44,9 @@ const routes: Routes = [
         PlatformTableModule,
         PlatformButtonModule,
         ObjectStatusModule,
-        PlatformInputModule
+        LayoutPanelModule,
+        PlatformInputModule,
+        PlatformSearchFieldModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -45,6 +56,10 @@ const routes: Routes = [
         PlatformTableCustomColumnExampleComponent,
         PlatformTableSingleRowSelectionExampleComponent,
         PlatformTableMultipleRowSelectionExampleComponent,
+        PlatformTableSortableExampleComponent,
+        PlatformTableFilterableExampleComponent,
+        PlatformTableGroupableExampleComponent,
+        PlatformTableFreezableExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -48,22 +48,24 @@ jobs:
     if: type = pull_request
     script: npm run test:core:saucelabs
   - stage: "Pre-release"
-    if: branch = master AND type = push
+    if: branch = main AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
-    - git checkout master
+    - git checkout main
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
       script: bash ./ci-scripts/publish.sh
       skip_cleanup: true
+      on:
+        all_branches: true
   - stage: "Release"
     if: branch = tmp_branch_for_automated_release_do_not_use
     before_script: export NODE_OPTIONS='-–-max_old_space_size=4096'
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
     - git fetch
-    - git checkout master
+    - git checkout main
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script

@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogBodyComponent } from './dialog-body.component';
-import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
-import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
+import { DialogConfig } from '../utils/dialog-config.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 import { BusyIndicatorModule } from '../../busy-indicator/busy-indicator.module';
 
 describe('DialogBodyComponent', () => {
@@ -13,10 +13,7 @@ describe('DialogBodyComponent', () => {
         TestBed.configureTestingModule({
             imports: [BusyIndicatorModule],
             declarations: [DialogBodyComponent],
-            providers: [
-                { provide: DIALOG_CONFIG, useClass: DialogConfig },
-                { provide: DIALOG_REF, useClass: DialogRef }
-            ]
+            providers: [DialogConfig, DialogRef]
         }).compileComponents();
     }));
 

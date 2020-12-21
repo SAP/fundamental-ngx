@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { DialogRefBase } from '../base/dialog-ref-base.class';
 
 /**
@@ -8,9 +8,7 @@ import { DialogRefBase } from '../base/dialog-ref-base.class';
  * For a template, it is declared as part of the implicit context, see examples.
  */
 
-/** DialogRef injection token */
-export const DIALOG_REF = new InjectionToken<string[]>('DialogRef');
-
+@Injectable()
 export class DialogRef<T = any> extends DialogRefBase<T> {
     private readonly _onHide = new BehaviorSubject<boolean>(false);
     private readonly _onLoading = new BehaviorSubject<boolean>(false);
