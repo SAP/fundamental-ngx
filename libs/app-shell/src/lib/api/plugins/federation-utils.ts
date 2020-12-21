@@ -22,7 +22,7 @@ const moduleMap: ModuleMaps = {};
 function loadRemoteEntry(remoteEntry: string): Promise<void> {
     const modulePromise = moduleMap[remoteEntry];
 
-    if (modulePromise) {
+    if (modulePromise instanceof Promise) {
         return modulePromise;
     }
 
