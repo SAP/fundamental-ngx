@@ -81,9 +81,9 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
 
     /** @hidden */
     _getUsersFromSelectedItems(): ApprovalUser[] {
-        return this._selectedItems.map(item => {
-            return this._data.node.approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id);
-        });
+        return this._selectedItems.map(item =>
+            this._data.node.approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id)
+        );
     }
 
     /** @hidden */
