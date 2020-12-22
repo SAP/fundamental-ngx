@@ -1,5 +1,4 @@
-export default {
-    activeTypeNames: [
+export const activeTypeNames = [
         'standard',
         'compact',
         'max-height',
@@ -16,13 +15,13 @@ export default {
         'secondaryItemTemplate',
         'selectedItemTemplate',
         'field'
-    ],
-    notActiveTypeNames: [
+];
+export const notActiveTypeNames = [
         'readonly',
         'disabled'
-    ],
+];
 
-    appleOption: 'Apple',
-    bananaOption: 'Banana'
-}
+export const appleOption = 'Apple';
+export const bananaOption = 'Banana';
+
 
