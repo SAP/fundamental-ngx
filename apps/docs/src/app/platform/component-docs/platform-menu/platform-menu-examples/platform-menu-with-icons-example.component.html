@@ -1,0 +1,25 @@
+<fdp-button [fdpMenuTriggerFor]="menuIcons" label="Menu with icons"></fdp-button>
+
+<fdp-menu #menuIcons id="menu-icons">
+    <fdp-menu-item (itemSelect)="onItemSelect('First Item')">
+        <a fd-menu-interactive href="#">
+            <fd-menu-addon position="before" glyph="cart"></fd-menu-addon>
+            <span fd-menu-title>First Item</span>
+        </a>
+    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">
+        <a fd-menu-interactive href="#">
+            <fd-menu-addon position="before" glyph="accept"></fd-menu-addon>
+            <span fd-menu-title>Second Item</span>
+            <fd-menu-addon glyph="decline"></fd-menu-addon>
+        </a>
+    </fdp-menu-item>
+    <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">
+        <a fd-menu-interactive href="#">
+            <span fd-menu-title>Third Item</span>
+            <fd-menu-addon glyph="menu"></fd-menu-addon>
+        </a>
+    </fdp-menu-item>
+</fdp-menu>
+
+<div style="margin-top: 1rem;"><label>Item Selected:</label> {{ item }}</div>
