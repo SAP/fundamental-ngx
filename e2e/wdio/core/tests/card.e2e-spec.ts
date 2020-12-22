@@ -13,13 +13,13 @@ describe('Card test suite:', function() {
     describe('Standard card examples:', function() {
         it('should check card header', () => {
             checkElArrIsClickable(cardPg.cardHeader);
-            checkElementTextValue(cardPg.cardTitle, CardData.cardTitle);
+            checkElementTextValue(cardPg.cardTitle, CardData.cardTitleArr);
             expect(webDriver.isElementDisplayed(cardPg.cardAvatar)).toBe(true);
             expect(webDriver.isElementDisplayed(cardPg.cardCounter)).toBe(true);
             expect(webDriver.isElementDisplayed(cardPg.cardSubtitle)).toBe(true);
             expect(webDriver.isElementDisplayed(cardPg.cardBadge)).toBe(true);
-            checkElementTextValue(cardPg.cardSubtitle, CardData.cardSubtitle);
-            checkElementTextValue(cardPg.cardBadge, CardData.badgeText);
+            expect(webDriver.getText(cardPg.cardSubtitle)).toBe(CardData.cardSubtitle);
+            expect(webDriver.getText(cardPg.cardBadge)).toBe(CardData.badgeText);
         });
 
         it('should check card content', () => {
@@ -36,7 +36,7 @@ describe('Card test suite:', function() {
             checkElementTextValue(cardPg.compactCardListItems, CardData.cardListItemText);
             checkElArrIsClickable(cardPg.compactCardHeader);
             checkElArrIsClickable(cardPg.compactCardListItems);
-            if (browser.capabilities.browserName === 'internet explorer') {
+            if (webDriver.browserIsIE()) {
                 console.log('skip');
             } else {
                 expect(webDriver.getCSSPropertyByName(cardPg.compactCardListItems, CardData.fontSizeAttr).value)
@@ -57,7 +57,7 @@ describe('Card test suite:', function() {
             checkElArrIsClickable(cardPg.ftCardHeader);
             checkElArrIsClickable(cardPg.ftCardListItems);
             checkElementTextValue(cardPg.ftCardListItems, CardData.cardListItemText);
-            checkElementTextValue(cardPg.ftCardHeader, CardData.cardTitle);
+            expect(webDriver.getText(cardPg.ftCardHeader)).toBe(CardData.cardTitleArr[0]);
         });
 
         it('should check footer', () => {
@@ -71,7 +71,7 @@ describe('Card test suite:', function() {
         it('should check header', () => {
             checkElArrIsClickable(cardPg.kpiAnalyticsHeader);
             checkElementText(cardPg.kpiCardHeader);
-            checkElementTextValue(cardPg.kpiCardTitle, CardData.analyticsTitle);
+            expect(webDriver.getText(cardPg.kpiCardTitle)).toBe(CardData.analyticsTitle);
             checkElementText(cardPg.kpiAnalyticsHeaderIcons);
             checkElementText(cardPg.kpiHeaderSubtitle);
         });
@@ -79,14 +79,14 @@ describe('Card test suite:', function() {
         it('should check content', () => {
             // TODO fix/skip for IE
             expect(webDriver.isElementDisplayed(cardPg.kpiCardContent)).toBe(true);
-            expect(webDriver.waitForDisplayed(cardPg.kpiCardChart)).toBe(true);
+            expect(webDriver.waitForElDisplayed(cardPg.kpiCardChart)).toBe(true);
         });
     });
 
     describe('Table card examples:', function() {
         it('should check header', () => {
             checkElArrIsClickable(cardPg.tableCardHeader);
-            checkElementTextValue(cardPg.tableCardHeader, CardData.tableCardTitle);
+            expect(webDriver.getText(cardPg.tableCardHeader)).toBe(CardData.tableCardTitle);
         });
 
         it('should check table content', () => {
@@ -110,8 +110,8 @@ describe('Card test suite:', function() {
     describe('Bar chart list examples:', function() {
         it('should check header', () => {
             checkElArrIsClickable(cardPg.barChartHeader);
-            checkElementTextValue(cardPg.barChartTitle, CardData.barChartTitle);
-            checkElementTextValue(cardPg.barChartCounter, CardData.barChartCounter);
+            expect(webDriver.getText(cardPg.barChartTitle)).toBe(CardData.barChartTitle);
+            expect(webDriver.getText(cardPg.barChartCounter)).toBe(CardData.barChartCounter);
         });
 
         it('should check chart content', () => {

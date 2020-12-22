@@ -35,7 +35,7 @@ export class CardPo extends CoreBaseComponentPo {
     kpiCardContent = 'fd-card-kpi-example fd-card-content';
     kpiCardChart = 'fd-card-kpi-example fd-card-content svg';
     // table card examples
-    tableCardHeader = 'fd-card-table-example fd-card-header';
+    tableCardHeader = 'fd-card-table-example fd-card-header h2';
     tableCardTableHeader = 'fd-card-table-example thead th';
     tableCardItems = 'fd-card-table-example tbody tr';
     tableCardItemNames = 'fd-card-table-example tbody td:first-of-type';
@@ -54,6 +54,6 @@ export class CardPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        webDriver.waitForElDisplayed(this.root);
     }
 }

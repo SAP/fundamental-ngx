@@ -1,5 +1,10 @@
 export default {
-    cardTitle: 'Card Title',
+    cardTitleArr: [
+        'Card Title',
+        'Card Title',
+        'Card Title',
+        'Card Title'
+        ],
     cardSubtitle: 'Card Subtitle',
     badgeText: 'New',
     cardTypeAttr: 'cardtype',
