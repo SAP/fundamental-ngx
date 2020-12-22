@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 
 import { ColumnAlign } from '../../enums/column-align.enum';
+import { FilterableColumnDataType } from '../../enums/filter-type.enum';
 
 export abstract class TableColumn {
     /** Column unique identifier. */
@@ -20,6 +21,9 @@ export abstract class TableColumn {
 
     /** Toggles filter feature in the column header. */
     abstract filterable: boolean;
+
+    /** Data type the column represents. */
+    abstract dataType: FilterableColumnDataType;
 
     /** Toggles grouping feature in the column header. */
     abstract groupable: boolean;

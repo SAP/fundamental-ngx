@@ -14,7 +14,7 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
 
-import { ColumnAlign } from '../../enums';
+import { ColumnAlign, FilterableColumnDataType } from '../../enums';
 import { FdpCellDef, FdpHeaderCellDef } from '../../directives';
 
 import { TableColumn } from './table-column';
@@ -95,6 +95,13 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
     /** Toggles filter feature for the column. */
     @Input()
     filterable = false;
+
+    /**
+     * Data type the column represents. Default is 'string'
+     * @type { 'string' | 'number' | 'date' | 'boolean' }
+     */
+    @Input()
+    dataType: FilterableColumnDataType = FilterableColumnDataType.STRING;
 
     /** Toggles grouping feature for the column. */
     @Input()

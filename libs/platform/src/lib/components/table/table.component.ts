@@ -30,7 +30,14 @@ import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
 
-import { CollectionFilter, CollectionGroup, CollectionSort, SelectableRow, TableState } from './interfaces';
+import {
+    CollectionFilter,
+    CollectionGroup,
+    CollectionSort,
+    CollectionStringFilter,
+    SelectableRow,
+    TableState
+} from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
 import {
     TableColumnFreezeEvent,
@@ -39,7 +46,13 @@ import {
     TableRowSelectionChangeEvent,
     TableSortChangeEvent
 } from './models';
-import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
+import {
+    FILTER_STRING_STRATEGY,
+    ContentDensity,
+    FilterableColumnDataType,
+    SelectionMode,
+    SortDirection
+} from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
@@ -224,7 +237,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _sortDirection: SortDirection;
 
     /** @hidden */
-    _filterType: FilterValueType = FilterValueType.STRING;
+    _filterType: FilterableColumnDataType = FilterableColumnDataType.STRING;
 
     /** @hidden */
     _filterValue: CollectionFilter;
@@ -506,20 +519,21 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Group triggered from column header */
     _columnHeaderGroupBy(field: string): void {
-        this.group([{ field: field, direction: SortDirection.ASC }]);
+        this.group([{ field: field, direction: SortDirection.ASC, showAsColumn: true }]);
 
         this._popoverOpen = false;
     }
 
     /** Filter triggered from column header */
     _columnHeaderFilterBy(field: string, value: string): void {
-        this.addFilter([
-            {
-                field: field,
-                value: value,
-                strategy: CollectionStringFilterStrategy.CONTAINS
-            }
-        ]);
+        const collectionFilter: CollectionStringFilter = {
+            field: field,
+            value: value,
+            strategy: FILTER_STRING_STRATEGY.CONTAINS,
+            exclude: false
+        };
+
+        this.addFilter([collectionFilter]);
 
         this._popoverOpen = false;
     }

@@ -13,6 +13,8 @@ import { TableP13FilterComponent } from './table-p13-filter.component';
 import { TableP13ColumnsComponent } from './table-p13-columns.component';
 
 import { SortDialogData, SortDialogResultData, P13SortingComponent } from './sorting/sorting.component';
+import { GroupDialogData, GroupDialogResultData, P13GroupingComponent } from './grouping/grouping.component';
+import { FilterDialogData, FilterDialogResultData, P13FilteringComponent } from './filtering/filtering.component';
 import { filter } from 'rxjs/operators';
 
 const dialogConfig: DialogConfig = {
@@ -119,18 +121,18 @@ export class TableP13DialogComponent implements OnDestroy {
 
     /** Open Filtering Settings Dialog */
     showFilteringSettings(): void {
-        /* const state = this._getTableState();
+        const state = this._getTableState();
         const columns = this._getTableColumns();
-        const dialogData: FiltersDialogData = {
+        const filterBy = state?.filterBy;
+        const dialogData: FilterDialogData = {
             columns: columns,
-            viewSettingsFilters: this.filters.toArray(),
-            filterBy: state?.filterBy
+            collectionFilter: filterBy
         };
 
-        const dialogRef = this._dialogService.open(FiltersComponent, {
+        const dialogRef = this._dialogService.open(P13FilteringComponent, {
             responsivePadding: false,
             verticalPadding: false,
-            minWidth: '30%',
+            width: '50rem',
             minHeight: '50%',
             data: dialogData
         } as DialogConfig);
@@ -138,21 +140,21 @@ export class TableP13DialogComponent implements OnDestroy {
         this._subscriptions.add(
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
-                .subscribe(({ filterBy }: FiltersDialogResultData) => this._applyFiltering(filterBy))
-        ); */
+                .subscribe(({ collectionFilter }: FilterDialogResultData) => this._applyFiltering(collectionFilter))
+        );
     }
 
     /** Open Grouping Settings Dialog */
     showGroupingSettings(): void {
-        /* const state = this._getTableState();
+        const state = this._getTableState();
         const columns = this._getTableColumns();
+        const groupBy = state.groupBy;
         const dialogData: GroupDialogData = {
             columns: columns.filter(({ groupable }) => groupable),
-            direction: state.groupBy?.[0]?.direction,
-            field: state.groupBy?.[0]?.field
+            collectionGroup: groupBy
         };
 
-        const dialogRef = this._dialogService.open(GroupingComponent, {
+        const dialogRef = this._dialogService.open(P13GroupingComponent, {
             ...dialogConfig,
             data: dialogData
         });
@@ -160,10 +162,10 @@ export class TableP13DialogComponent implements OnDestroy {
         this._subscriptions.add(
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
-                .subscribe(({ field, direction }: GroupDialogResultData) => {
-                    this._applyGrouping(field, direction);
+                .subscribe(({ collectionGroup }: GroupDialogResultData) => {
+                    this._applyGrouping(collectionGroup);
                 })
-        ); */
+        );
     }
 
     /** Open Columns Settings Dialog */

@@ -16,15 +16,21 @@
         label="Name"
         align="start"
         [sortable]="true"
+        [filterable]="true"
+        dataType="string"
     >
     </fdp-column>
 
     <fdp-column
-        name="description"
-        key="description"
-        label="Description"
-        [sortable]="true"
+        name="updatedOn"
+        key="date"
+        label="Updated On"
+        [filterable]="true"
+        dataType="date"
     >
+        <fdp-table-cell *fdpCellDef="let item">
+            {{ item.date?.toDateString() }}
+        </fdp-table-cell>
     </fdp-column>
 
     <fdp-column
@@ -33,15 +39,17 @@
         label="Price"
         align="end"
         [sortable]="true"
+        [filterable]="true"
+        dataType="number"
     >
     </fdp-column>
 
     <fdp-column
-        name="status"
-        key="status"
-        label="Status"
-        align="center"
-        [sortable]="true"
+        name="verified"
+        key="verified"
+        label="Verified"
+        [filterable]="true"
+        dataType="boolean"
     >
     </fdp-column>
 </fdp-table>

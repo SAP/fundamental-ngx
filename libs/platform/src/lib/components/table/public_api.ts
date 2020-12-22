@@ -4,7 +4,7 @@ export {
     ContentDensity as TableContentDensity,
     SortDirection,
     FilterType,
-    FilterValueType
+    FilterableColumnDataType
 } from './enums';
 
 export {

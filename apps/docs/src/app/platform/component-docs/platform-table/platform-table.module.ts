@@ -1,17 +1,19 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
-import { API_FILES } from '../../api-files';
-import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-import { ObjectStatusModule, TableModule, LayoutPanelModule } from '@fundamental-ngx/core';
+import { ObjectStatusModule, TableModule, LayoutPanelModule, FdDatetimeModule } from '@fundamental-ngx/core';
 import {
     PlatformButtonModule,
     PlatformInputModule,
     PlatformSearchFieldModule,
     PlatformTableModule
 } from '@fundamental-ngx/platform';
+
+import { API_FILES } from '../../api-files';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+
 
 import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
 import { PlatformTableDocsComponent } from './platform-table-docs.component';
@@ -46,6 +48,7 @@ const routes: Routes = [
         PlatformButtonModule,
         ObjectStatusModule,
         LayoutPanelModule,
+        FdDatetimeModule,
         PlatformInputModule,
         PlatformSearchFieldModule
     ],

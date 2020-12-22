@@ -14,7 +14,10 @@ import {
     RadioModule,
     TableModule,
     ToolbarModule,
-    SelectModule
+    SelectModule,
+    LayoutGridModule,
+    PanelModule,
+    DatePickerModule
 } from '@fundamental-ngx/core';
 
 import { PlatformInputModule } from '../form/input/fdp-input.module';
@@ -42,7 +45,10 @@ import {
     TableP13FilterComponent,
     TableP13GroupComponent,
     TableP13ColumnsComponent,
-    P13SortingComponent
+    P13SortingComponent,
+    P13GroupingComponent,
+    P13FilteringComponent,
+    FilterRuleComponent
 } from './components';
 import {
     FdpCellDef,
@@ -73,7 +79,10 @@ import { ValueByPathPipe } from './pipes';
         DialogModule,
         PlatformSearchFieldModule,
         IconModule,
-        SelectModule
+        SelectModule,
+        LayoutGridModule,
+        PanelModule,
+        DatePickerModule
     ],
     declarations: [
         TableComponent,
@@ -102,7 +111,10 @@ import { ValueByPathPipe } from './pipes';
         TableP13FilterComponent,
         TableP13GroupComponent,
         TableP13ColumnsComponent,
-        P13SortingComponent
+        P13SortingComponent,
+        P13GroupingComponent,
+        P13FilteringComponent,
+        FilterRuleComponent
     ],
     exports: [
         TableComponent,
