@@ -3,11 +3,6 @@ import {StepInputPo} from '../pages/step-input.po'
 
 describe('Step input test suite', function() {
     const stepInputPage: StepInputPo = new StepInputPo();
-    const{ checkIncrementDecrementButtons, checkStepInputComponent, checkValueAfterTypingTheNumber,
-        checkValueAfterEnteringByKeyboardButtons, checkInvalidInput, checkFocusOnInputAfterClickingButtons,
-        checkValueAfterClearingTheInput, checkIncreaseDecreaseButtonIsDisabledWithMaxValue,
-        checkInputFocusedAfterClickingTabButton, checkQuantity, checkRtlSwitch, reactiveFormInput,
-    } = new StepInputPo();
 
     beforeAll(() => {
         stepInputPage.open();
@@ -18,46 +13,47 @@ describe('Step input test suite', function() {
     });
 
     it('Verify increment and decrement buttons', () => {
-        checkIncrementDecrementButtons();
+        stepInputPage.checkIncrementDecrementButtons();
     });
 
     it('Verify The step input consists of an input field and buttons with icons to decrease or increase the value.', () => {
-        checkStepInputComponent();
+        stepInputPage.checkStepInputComponent();
     });
 
     it('Verify The user changes the value: By typing a number', () => {
-        checkValueAfterTypingTheNumber();
+        stepInputPage.checkValueAfterTypingTheNumber();
     });
 
     it('Verify The user changes the value: With keyboard shortcuts (up/down, page up/down)', () => {
-        checkValueAfterEnteringByKeyboardButtons();
+        stepInputPage.checkValueAfterEnteringByKeyboardButtons();
     });
 
     it('Verify error message when entering invalid value', () => {
-        checkInvalidInput(reactiveFormInput);
+        stepInputPage.checkInvalidInput(stepInputPage.reactiveFormInput);
     });
 
     it('Verify clicking the buttons does not place the caret in the input field.', () => {
-        checkFocusOnInputAfterClickingButtons();
+        stepInputPage.checkFocusOnInputAfterClickingButtons();
     });
 
+    // Need to debug on different browsers
     xit('Verify the value in the field becomes 0 or the minimum if the minimum is larger than 0.', () => {
-        checkValueAfterClearingTheInput();
+        stepInputPage.checkValueAfterClearingTheInput();
     });
 
     it('Verify when the maximum/minimum values are reached, the Increase/Decrease button and up/down keyboard navigation are disabled.', () => {
-        checkIncreaseDecreaseButtonIsDisabledWithMaxValue();
+        stepInputPage.checkIncreaseDecreaseButtonIsDisabledWithMaxValue();
     });
 
     it('Verify when user enter the tap step input field should be highlighted or focused ', () => {
-        checkInputFocusedAfterClickingTabButton();
+        stepInputPage.checkInputFocusedAfterClickingTabButton();
     });
 
     it('Verify you can show a descriptive reference or unit of measurement after the field (property: description).', () => {
-        checkQuantity();
+        stepInputPage.checkQuantity();
     });
 
     it('Check LTR/RTL orientation', () => {
-        checkRtlSwitch();
+        stepInputPage.checkRtlSwitch();
     })
 });

@@ -2,7 +2,6 @@ import { BaseComponentPo } from './base-component.po';
 import { webDriver } from '../../driver/wdio';
 import {checkValueEqual, checkTextValueContain, checkValueChanged, checkFocused , checkNotFocused, checkIfDisabled} from '../../helper/assertion-helper';
 
-
 export class StepInputPo extends BaseComponentPo {
     private url = '/step-input';
     root = '#page-content';
@@ -66,13 +65,13 @@ export class StepInputPo extends BaseComponentPo {
             webDriver.scrollIntoView(this.activeInput, i);
             const defaultValue = webDriver.getValue(this.activeInput, i);
             webDriver.click(this.activeInput, i);
-            driver.keys(['ArrowDown']);
-            driver.keys(['Enter']);
+            webDriver.sendKeys(['ArrowDown']);
+            webDriver.sendKeys(['Enter']);
             checkValueChanged(defaultValue, webDriver.getValue(this.activeInput, i));
             const newValue = webDriver.getValue(this.activeInput, i);
             webDriver.click(this.activeInput, i);
-            driver.keys(['ArrowUp']);
-            driver.keys(['Enter']);
+            webDriver.sendKeys(['ArrowUp']);
+            webDriver.sendKeys(['Enter']);
             checkValueChanged(newValue, webDriver.getValue(this.activeInput, i));
         }
     };
@@ -81,28 +80,28 @@ export class StepInputPo extends BaseComponentPo {
         webDriver.scrollIntoView(input);
         webDriver.clearValue(input);
         webDriver.setValue(input, 'invalid');
-        driver.keys(['Enter']);
+        webDriver.sendKeys(['Enter']);
         webDriver.waitForDisplayed(this.errorMessage);
         let formStatusText = webDriver.getText(this.formStatusText)
         checkTextValueContain(formStatusText, 'INVALID')
 
         webDriver.clearValue(input);
         webDriver.setValue(input, '10'); // reset value to remove error message
-        driver.keys(['Enter']);
+        webDriver.sendKeys(['Enter']);
         webDriver.waitForNotDisplayed(this.errorMessage);
         formStatusText = webDriver.getText(this.formStatusText)
         checkTextValueContain(formStatusText, 'VALID')
 
         webDriver.clearValue(input);
         webDriver.setValue(input, '5');
-        driver.keys(['Enter']);
+        webDriver.sendKeys(['Enter']);
         webDriver.waitForDisplayed(this.errorMessage);
         formStatusText = webDriver.getText(this.formStatusText)
         checkTextValueContain(formStatusText, 'INVALID')
 
         webDriver.clearValue(input);
         webDriver.setValue(input, '25'); // reset value to remove error message
-        driver.keys(['Enter']);
+        webDriver.sendKeys(['Enter']);
         webDriver.waitForDisplayed(this.errorMessage);
         formStatusText = webDriver.getText(this.formStatusText)
         checkTextValueContain(formStatusText, 'INVALID')
@@ -147,7 +146,7 @@ export class StepInputPo extends BaseComponentPo {
         checkFocused(this.inputWithoutForm)
         for (let i = 1; i < arr; i++) {
             webDriver.scrollIntoView(this.inputWithoutForm, i);
-            driver.keys(['Tab']);
+            webDriver.sendKeys(['Tab']);
             checkFocused(this.inputWithoutForm, i)
         }
     }

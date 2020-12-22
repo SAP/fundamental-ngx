@@ -48,9 +48,8 @@ export class ComboBoxPo extends BaseComponentPo {
         return webDriver.getTextArr(this.optionsArray, 0, -1);
     }
 
-
     expandDropdown(type: string): void {
-        driver.keys(['Escape'])
+        webDriver.sendKeys(['Escape'])
         webDriver.scrollIntoView(this.comboBoxButtons(type));
         webDriver.pause(200);
         webDriver.click(this.comboBoxButtons(type));
@@ -151,14 +150,13 @@ export class ComboBoxPo extends BaseComponentPo {
             this.expandDropdown(activeTypes[i]);
             const firstOptionText = webDriver.getText(this.optionsArray, 0);
             const secondOptionText = webDriver.getText(this.optionsArray, 1);
-            driver.keys(['ArrowDown']);
-            driver.keys(['Enter']);
+            webDriver.sendKeys(['ArrowDown']);
+            webDriver.sendKeys(['Enter']);
             let inputText = webDriver.getText(this.comboBoxInput, i);
             compareDropDownOptions(firstOptionText, inputText);
             this.expandDropdown(activeTypes[i]);
-            driver.keys(['ArrowDown']);
-            driver.keys(['ArrowDown']);
-            driver.keys(['Enter']);
+            webDriver.sendKeys(['ArrowDown', 'ArrowDown']);
+            webDriver.sendKeys(['Enter']);
             inputText = webDriver.getText(this.comboBoxInput, i);
             compareDropDownOptions(secondOptionText, inputText);
         }

@@ -2,12 +2,7 @@ import { webDriver } from '../../driver/wdio';
 import { ComboBoxPo } from '../pages/combobox.po';
 import ComboboxData from '../fixtures/appData/combobox.page-content';
 
-describe('Combobox test suite', () => {
-    const {getDropdownOptionsText, verifyComboBoxComponents, verifyDropdownToggle, verifyInputWhileTyping,
-        verifyDropdownCollapsedAfterSelectingOption, verifyNavigationByArrowButtons, verifyGroupHeadersAreNotInteractive,
-        verifyOptionHintWhileTyping, verifySelectedOptionHighlighted, verifyComboboxWithTwoColumnsWhileTyping, checkRtlSwitch
-    } = new ComboBoxPo();
-
+describe('Combobox test suite', function() {
     const comboBoxPage: ComboBoxPo = new ComboBoxPo();
 
     beforeAll(() => {
@@ -19,48 +14,49 @@ describe('Combobox test suite', () => {
     });
 
     it('Verify each combobox consist of input and button', () => {
-        verifyComboBoxComponents(ComboboxData.activeTypeNames, ComboboxData.notActiveTypeNames);
+        comboBoxPage.verifyComboBoxComponents(ComboboxData.activeTypeNames, ComboboxData.notActiveTypeNames);
     });
 
     it('Verify dropdown expands after clicking on the button', () => {
-        verifyDropdownToggle(ComboboxData.activeTypeNames);
+        comboBoxPage.verifyDropdownToggle(ComboboxData.activeTypeNames);
     });
 
     it('Verify each input while typing', () => {
-        verifyInputWhileTyping(ComboboxData.appleOption, ComboboxData.activeTypeNames);
+        comboBoxPage.verifyInputWhileTyping(ComboboxData.appleOption, ComboboxData.activeTypeNames);
     });
 
     it('Verify dropdown collapsed after selecting an option', () => {
-        verifyDropdownCollapsedAfterSelectingOption(ComboboxData.appleOption, ComboboxData.activeTypeNames);
+        comboBoxPage.verifyDropdownCollapsedAfterSelectingOption(ComboboxData.appleOption, ComboboxData.activeTypeNames);
     });
 
     it('Verify selected option is highlighted', () => {
-        verifySelectedOptionHighlighted(ComboboxData.appleOption, ComboboxData.bananaOption, ComboboxData.activeTypeNames);
+        comboBoxPage.verifySelectedOptionHighlighted(ComboboxData.appleOption, ComboboxData.bananaOption, ComboboxData.activeTypeNames);
     });
 
+    // Need to debug on different browsers
     xit('Verify option hint when entering first characters', () => {
-        verifyOptionHintWhileTyping(ComboboxData.appleOption, ComboboxData.activeTypeNames);
+        comboBoxPage.verifyOptionHintWhileTyping(ComboboxData.appleOption, ComboboxData.activeTypeNames);
     })
 
     it('Verify LTR and RTL orientation', () => {
-        checkRtlSwitch();
+        comboBoxPage.checkRtlSwitch();
     })
 
     it('Verify group headers are not interactive.', () => {
-        verifyGroupHeadersAreNotInteractive();
+        comboBoxPage.verifyGroupHeadersAreNotInteractive();
     })
 
     it('Verify navigation by arrow buttons', () => {
-        verifyNavigationByArrowButtons(ComboboxData.activeTypeNames);
+        comboBoxPage.verifyNavigationByArrowButtons(ComboboxData.activeTypeNames);
     })
 
     it('Verify combobox with two columns while typing', () => {
-        verifyComboboxWithTwoColumnsWhileTyping();
+        comboBoxPage.verifyComboboxWithTwoColumnsWhileTyping();
     })
 
     it('Verify options sorting', () => {
        for (let i = 0; i < ComboboxData.activeTypeNames.length; i++) {
-           const textArr = getDropdownOptionsText(ComboboxData.activeTypeNames[i]);
+           const textArr = comboBoxPage.getDropdownOptionsText(ComboboxData.activeTypeNames[i]);
            expect(textArr.sort()).toEqual(textArr);
        }
     });
