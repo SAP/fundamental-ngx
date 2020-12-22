@@ -113,10 +113,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         this.subscriptions.add(this.dataSource.fetch().subscribe(approvalProcess => {
             this._approvalProcess = approvalProcess;
-            this._graph = this.buildNodeTree(approvalProcess.nodes);
+            this._graph = this._buildNodeTree(approvalProcess.nodes);
             this._cdr.detectChanges();
-            this.resetCarousel();
-            this.checkCarouselStatus();
+            this._resetCarousel();
+            this._checkCarouselStatus();
         }));
         this.subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
             this._dir = isRtl ? 'rtl' : 'ltr';
@@ -167,27 +167,27 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     nextSlide(stepSize = 1): void {
-        this.checkCarouselStatus();
-        if (Math.abs(this._carouselScrollX) === this.scrollDiff) {
+        this._checkCarouselStatus();
+        if (Math.abs(this._carouselScrollX) === this._scrollDiff) {
             return;
         }
 
-        const newOffset = this._carouselScrollX - this.carouselStepSize * stepSize;
+        const newOffset = this._carouselScrollX - this._carouselStepSize * stepSize;
         const newCarouselStep = this._carouselStep + stepSize;
-        this._carouselScrollX = (Math.abs(newOffset) > this.scrollDiff) ? -this.scrollDiff : newOffset;
+        this._carouselScrollX = (Math.abs(newOffset) > this._scrollDiff) ? -this._scrollDiff : newOffset;
         this._carouselStep = newCarouselStep <= this._maxCarouselStep ? newCarouselStep : this._maxCarouselStep;
         this._cdr.detectChanges();
     }
 
     previousSlide(stepSize = 1): void {
-        this.checkCarouselStatus();
+        this._checkCarouselStatus();
         if (this._carouselStep === 0) {
             return;
         }
         if (this._carouselStep === 1) {
             this._carouselScrollX = 0;
         } else {
-            this._carouselScrollX += this.carouselStepSize * stepSize;
+            this._carouselScrollX += this._carouselStepSize * stepSize;
             this._carouselScrollX = this._carouselScrollX <= 0 ? this._carouselScrollX : 0;
         }
         const newCarouselStep = this._carouselStep - stepSize;
@@ -229,7 +229,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const nextNode = nodesSequence[currentNodeIndex + diff];
             if (currentNodeIndex > -1 && nextNode) {
                 event.preventDefault();
-                this.focusNode(nextNode, 1);
+                this._focusNode(nextNode, 1);
                 return;
             }
         }
@@ -238,23 +238,23 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         let nextFocusTarget;
 
         if (KeyUtil.isKeyCode(event, UP_ARROW) && nodeIndex > 0) {
-            nextFocusTarget = this.getNextVerticalNode(nodeIndex, columnIndex, 'up');
+            nextFocusTarget = this._getNextVerticalNode(nodeIndex, columnIndex, 'up');
         }
 
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            nextFocusTarget = this.getNextVerticalNode(nodeIndex, columnIndex, 'down');
+            nextFocusTarget = this._getNextVerticalNode(nodeIndex, columnIndex, 'down');
         }
 
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            nextFocusTarget = this.getNextHorizontalNode(nodeIndex, columnIndex, this._isRTL ? 'right' : 'left');
+            nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._isRTL ? 'right' : 'left');
         }
 
         if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-            nextFocusTarget = this.getNextHorizontalNode(nodeIndex, columnIndex, this._isRTL ? 'left' : 'right');
+            nextFocusTarget = this._getNextHorizontalNode(nodeIndex, columnIndex, this._isRTL ? 'left' : 'right');
         }
 
         if (nextFocusTarget?.nextNode) {
-            this.focusNode(nextFocusTarget.nextNode, nextFocusTarget.stepSize);
+            this._focusNode(nextFocusTarget.nextNode, nextFocusTarget.stepSize);
         }
     }
 
@@ -264,7 +264,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
+    private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
         const rootNode = findRootNode(nodes);
         if (!rootNode) {
@@ -321,20 +321,20 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private focusNode(node: ApprovalGraphNode, step: number): void {
+    private _focusNode(node: ApprovalGraphNode, step: number): void {
         const nodeToFocus = this.nodeComponents.find(comp => comp.node === node);
         if (!nodeToFocus) {
             return;
         }
 
-        const nodeRect = nodeToFocus.nativeElement.getBoundingClientRect();
+        const nodeRect = nodeToFocus._nativeElement.getBoundingClientRect();
         const graphContainerRect = this.graphContainerEl.nativeElement.getBoundingClientRect();
         const graphVisibilityThreshold = graphContainerRect.width;
         const nodeOffsetFromContainerEdge = this._isRTL ?
             (graphContainerRect.right - nodeRect.right) :
             (nodeRect.left - graphContainerRect.left);
 
-        nodeToFocus.focus();
+        nodeToFocus._focus();
 
         if ((nodeOffsetFromContainerEdge + nodeRect.width) > graphVisibilityThreshold) {
             this.nextSlide(step);
@@ -347,20 +347,20 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private checkCarouselStatus(): void {
+    private _checkCarouselStatus(): void {
         this._isCarousel = this.graphEl.nativeElement.scrollWidth > this.graphEl.nativeElement.clientWidth;
-        this._maxCarouselStep = Math.ceil(this.scrollDiff / this.carouselStepSize);
+        this._maxCarouselStep = Math.ceil(this._scrollDiff / this._carouselStepSize);
         this._cdr.detectChanges();
     }
 
     /** @hidden */
-    private resetCarousel(): void {
+    private _resetCarousel(): void {
         this._carouselStep = 0;
         this._carouselScrollX = 0;
     }
 
     /** @hidden */
-    private getNextHorizontalNode = (_ni: number, _ci: number, direction: 'left' | 'right', stepSize: number = 1) => {
+    private _getNextHorizontalNode = (_ni: number, _ci: number, direction: 'left' | 'right', stepSize: number = 1) => {
         const indexDiff = (direction === 'right' ? 1 : -1);
         const _column = this._graph[_ci + indexDiff];
         if (!_column) {
@@ -369,32 +369,32 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         const _nextNode = _column.nodes[_ni] || _column.nodes[0];
         if (_nextNode.blank) {
-            return this.getNextHorizontalNode(_ni, _ci + indexDiff, direction, stepSize + 1);
+            return this._getNextHorizontalNode(_ni, _ci + indexDiff, direction, stepSize + 1);
         }
 
         return { nextNode: _nextNode, stepSize: stepSize };
     };
 
     /** @hidden */
-    private getNextVerticalNode = (_ni: number, _ci: number, direction: 'up' | 'down', stepSize: number = 1) => {
+    private _getNextVerticalNode = (_ni: number, _ci: number, direction: 'up' | 'down', stepSize: number = 1) => {
         const indexDiff = (direction === 'down' ? 1 : -1);
         const _column = this._graph[_ci];
         const _nextColumn = this._graph[_ci + 1];
         const _nextNode = _column.nodes[_ni + indexDiff] || _nextColumn?.nodes[_ni + 1];
         if (_nextNode && _nextNode.blank) {
-            return this.getNextVerticalNode(_ni, _ci + indexDiff, direction, stepSize + 1);
+            return this._getNextVerticalNode(_ni, _ci + indexDiff, direction, stepSize + 1);
         }
 
         return { nextNode: _nextNode, stepSize: stepSize };
     };
 
     /** @hidden */
-    private get carouselStepSize(): number {
+    private get _carouselStepSize(): number {
         return this.graphEl.nativeElement.scrollWidth / this.graphEl.nativeElement.children.length;
     }
 
     /** @hidden */
-    private get scrollDiff(): number {
+    private get _scrollDiff(): number {
         return this.graphEl.nativeElement.scrollWidth - this.graphEl.nativeElement.clientWidth;
     }
 }

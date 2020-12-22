@@ -82,27 +82,29 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {}
 
-    get nativeElement(): HTMLElement {
+    /** @hidden */
+    get _nativeElement(): HTMLElement {
         return this.elRef.nativeElement;
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this.checkNodeStatus();
+        this._checkNodeStatus();
     }
 
     /** @hidden */
     ngOnChanges(): void {
-        this.checkNodeStatus();
+        this._checkNodeStatus();
     }
 
-    focus(): void {
-        this.nativeElement.focus({ preventScroll: true });
+    /** @hidden */
+    _focus(): void {
+        this._nativeElement.focus({ preventScroll: true });
     }
 
     /** @hidden */
     @HostListener('click')
-    onClick(): void {
+    _onClick(): void {
         if (this.node.blank) {
             return;
         }
@@ -110,7 +112,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    private checkNodeStatus(): void {
+    private _checkNodeStatus(): void {
         if (!this.node) {
             return;
         }

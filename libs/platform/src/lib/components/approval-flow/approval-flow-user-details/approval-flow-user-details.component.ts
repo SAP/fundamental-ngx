@@ -42,65 +42,60 @@ export class ApprovalFlowUserDetailsComponent implements OnInit {
     }
 
     /** @hidden */
+    get _data(): DialogRefData {
+        return this.dialogRef.data;
+    }
+
+    /** @hidden */
     ngOnInit(): void {
-        this._isListMode = this.data.node?.approvers.length > 1;
+        this._isListMode = this._data.node?.approvers.length > 1;
         if (this._isListMode) {
-            this.setListItems(this.data.node.approvers);
+            this._setListItems(this._data.node.approvers);
         } else {
-            this.setUserToShowDetails(this.data.watcher || this.data.node?.approvers[0]);
+            this._setUserToShowDetails(this._data.watcher || this._data.node?.approvers[0]);
         }
     }
 
     /** @hidden */
-    setListItems(items: ApprovalUser[]): void {
+    _setListItems(items: ApprovalUser[]): void {
         this._listItems = [...items];
         this._cdr.detectChanges();
     }
 
     /** @hidden */
-    onUserClick(user: ApprovalUser): void {
-        this.setUserToShowDetails(user);
-    }
-
-    /** @hidden */
-    backToListFromDetails(): void {
+    _backToListFromDetails(): void {
         this._userToShowDetails = undefined;
     }
 
     /** @hidden */
-    setUserToShowDetails(user: ApprovalUser): void {
+    _setUserToShowDetails(user: ApprovalUser): void {
         this._userToShowDetails = user;
-        this._userToShowDetailsData$ = this.data.approvalFlowDataSource.fetchUser(user.id);
+        this._userToShowDetailsData$ = this._data.approvalFlowDataSource.fetchUser(user.id);
     }
 
     /** @hidden */
-    sendReminder(): void {
-        const reminderTargets = this._isListMode ? this.getUsersFromSelectedItems() : this.data.node.approvers;
+    _sendReminder(): void {
+        const reminderTargets = this._isListMode ? this._getUsersFromSelectedItems() : this._data.node.approvers;
         this.dialogRef.close(reminderTargets);
     }
 
     /** @hidden */
-    getUsersFromSelectedItems(): ApprovalUser[] {
+    _getUsersFromSelectedItems(): ApprovalUser[] {
         return this._selectedItems.map(item => {
-            return this.data.node.approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id);
+            return this._data.node.approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id);
         });
     }
 
     /** @hidden */
-    onSearchStringChange(searchString: string): void {
+    _onSearchStringChange(searchString: string): void {
         this._selectedItems = [];
         if (!searchString) {
-            this.setListItems(this.data.node.approvers);
+            this._setListItems(this._data.node.approvers);
             return;
         }
 
-        this.setListItems(this.data.node.approvers.filter(
+        this._setListItems(this._data.node.approvers.filter(
             user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1
         ));
-    }
-
-    /** @hidden */
-    get data(): DialogRefData {
-        return this.dialogRef.data;
     }
 }

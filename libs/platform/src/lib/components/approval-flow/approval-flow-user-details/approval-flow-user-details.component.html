@@ -1,20 +1,20 @@
-<fd-dialog [attr.dir]="data.rtl ? 'rtl' : 'ltr'">
+<fd-dialog [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
     <fd-dialog-header [class.show-search]="!_userToShowDetails && _isListMode">
         <ng-template fdTemplate="header">
             <p>
                 <fd-icon
                     *ngIf="_userToShowDetails && _isListMode"
-                    [glyph]="'navigation-' + (data.rtl ? 'right' : 'left') + '-arrow'"
-                    (click)="backToListFromDetails()"
+                    [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"
+                    (click)="_backToListFromDetails()"
                 ></fd-icon>
-                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ data.node.description }} ({{ data.node.approvers.length }})</ng-container>
+                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ _data.node.description }} ({{ _data.node.approvers.length }})</ng-container>
             </p>
             <fdp-search-field
                 *ngIf="!_userToShowDetails && _isListMode"
                 placeholder="Search"
                 contentDensity="compact"
                 [suggestions]="[]"
-                (inputChange)="onSearchStringChange($event.text)"
+                (inputChange)="_onSearchStringChange($event.text)"
             ></fdp-search-field>
         </ng-template>
     </fd-dialog-header>
@@ -35,8 +35,8 @@
             </div>
 
             <ng-container
-                *ngIf="data.userDetailsTemplate"
-                [ngTemplateOutlet]="data.userDetailsTemplate"
+                *ngIf="_data.userDetailsTemplate"
+                [ngTemplateOutlet]="_data.userDetailsTemplate"
                 [ngTemplateOutletContext]="{ data: _userToShowDetailsData$ | async }">
             </ng-container>
 
@@ -59,7 +59,7 @@
                     [avatarTitle]="user.name"
                     [description]="user.description"
                     [title]="user.name"
-                    (click)="onUserClick(user)"
+                    (click)="_setUserToShowDetails(user)"
                 >
                 </fdp-standard-list-item>
             </fdp-list>
@@ -67,7 +67,7 @@
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-dialog-footer-button *ngIf="data.node && !(_userToShowDetails && _isListMode)">
+        <fd-dialog-footer-button *ngIf="_data.node && !(_userToShowDetails && _isListMode)">
             <button
                 fd-button
                 fd-dialog-decisive-button
@@ -75,7 +75,7 @@
                 label="Send reminder"
                 [compact]="true"
                 [disabled]="_isListMode && !_userToShowDetails && !_selectedItems.length"
-                (click)="sendReminder()">
+                (click)="_sendReminder()">
             </button>
         </fd-dialog-footer-button>
 
