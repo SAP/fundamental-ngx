@@ -104,11 +104,14 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             return;
         }
 
-        const pluginModule = this.findPluginModule(descriptor);
+        const pluginModule = this.findPluginModule(descriptor) as DescriptorsModule;
+
+        if (!pluginModule) {
+            return;
+        }
+
         const remoteModule = await loadRemoteModule<DescriptorsModule>(descriptor, pluginModule)
-            .catch((error) => {
-                this.dispatchError(error);
-            });
+            .catch((error) => this.dispatchError(error));
 
         if (!remoteModule) {
             return;
@@ -121,18 +124,16 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             this._safeIframeUri = null;
         }
 
-        switch (pluginModule.type) {
-            case 'iframe':
-                this.renderIframe(descriptor, pluginModule);
-                return;
+        if (pluginModule.type === 'iframe') {
+            return this.renderIframe(descriptor, pluginModule);
+        }
 
-            case 'custom-element':
-                this.renderCustomElement(moduleOrCustomElementName);
-                return;
+        if (pluginModule.type === 'custom-element') {
+            return this.renderCustomElement(moduleOrCustomElementName);
+        }
 
-            case 'angular-ivy-component':
-                this.renderComponent(moduleOrCustomElementName, pluginModule, remoteModule);
-                break;
+        if (pluginModule.type === 'angular-ivy-component') {
+            this.renderComponent(moduleOrCustomElementName, pluginModule, remoteModule);
         }
 
         this.pluginManagerService.register(descriptor);
@@ -140,9 +141,7 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
 
     onLoadIframeError() {
         this.dispatchError(
-            new Error(
-                `PluginLauncherIframeLoadingError: Can't fetch resource from ${this.iframeUri}`
-            )
+            `PluginLauncherIframeLoadingError: Can't fetch resource from ${this.iframeUri}`
         );
     }
 
@@ -164,45 +163,39 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         }
     }
 
-    private findPluginModule(descriptor: Partial<PluginDescriptor>): DescriptorsModule {
+    private findPluginModule(descriptor: Partial<PluginDescriptor>): void | DescriptorsModule {
         const pluginModule = descriptor.modules.find(module => module.name === this.module);
 
         // module plugin descriptor not found
         if (!pluginModule) {
-            this.dispatchError(
-                new Error(
-                    `PluginLauncherDescriptorNotFoundError: Can't find plugin descriptor module with name ${this.module}`
-                )
+            return this.dispatchError(
+                `PluginLauncherDescriptorNotFoundError: Can't find plugin descriptor module with name ${this.module}`
             );
-            return;
         }
 
         return pluginModule;
     }
 
-    private renderIframe(descriptor: Partial<PluginDescriptor>, pluginModule: IframePageDescriptor) {
+    private renderIframe(descriptor: Partial<PluginDescriptor>, pluginModule: IframePageDescriptor): void {
         const url = descriptor.uri + pluginModule.html;
         this._safeIframeUri = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
 
-    private renderCustomElement(elementName: string) {
+    private renderCustomElement(elementName: string): void {
         const element = document.createElement(elementName);
         const isCustomElement = element instanceof window.customElements.get(elementName);
 
         // custom element is unknown in DOM
         if (!isCustomElement) {
-            this.dispatchError(
-                new Error(
-                    `PluginLauncherCustomElementResolveError: An element with name ${elementName} is not registered`
-                )
+            return this.dispatchError(
+                `PluginLauncherCustomElementResolveError: An element with name ${elementName} is not registered`
             );
-            return;
         }
 
         this._render.appendChild(this._elementRef.nativeElement, element);
     }
 
-    private async renderComponent(module: any, pluginModule: AngularIvyComponentDescriptor, remoteModule: DescriptorsModule) {
+    private async renderComponent(module: any, pluginModule: AngularIvyComponentDescriptor, remoteModule: DescriptorsModule): Promise<void> {
         const pluginModuleName = pluginModule.name;
         let pluginComponentName = pluginModule.component;
 
@@ -223,17 +216,19 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         const isComponentDefined = Object.prototype.toString.call(this._ngComponent) === '[object Object]';
 
         if (!isComponentDefined) {
-            this.dispatchError(
-                new Error(
-                    `PluginLauncherComponentResolveError: Can't resolve a component with name ${pluginComponentName}`
-                )
+            return this.dispatchError(
+                `PluginLauncherComponentResolveError: Can't resolve a component with name ${pluginComponentName}`
             );
         }
 
         this._cd.detectChanges();
     }
 
-    private dispatchError(error: Error) {
-        this.error.emit(error);
+    private dispatchError(error: string | Error) {
+        const message = typeof error === 'string'
+            ? new Error(error)
+            : error;
+
+        this.error.emit(message);
     }
 }

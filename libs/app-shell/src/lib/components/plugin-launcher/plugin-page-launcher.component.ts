@@ -40,12 +40,11 @@ export class PluginPageLauncherComponent implements OnInit {
                 if (!lookupItem) {
                     // Inject Router and navigate to NotFound page
                     this._plugin = null;
-                    this.dispatchError(
+                    return this.dispatchError(
                         new Error(
                             `PluginPageLauncherRoutingModuleNotFoundError: Can't find routing module with id ${id}`
                         )
                     );
-                    return;
                 }
                 // init
                 this._plugin = lookupItem.id;
