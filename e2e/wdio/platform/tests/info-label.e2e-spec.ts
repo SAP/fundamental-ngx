@@ -22,9 +22,10 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check default label info', () => {
-            expect(webDriver.getText(defaultLabel).toLowerCase()).toEqual(InfoLabelData.defaultLabelText.toLowerCase());
-            expect(webDriver.getCSSPropertyByName(defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
-                .toEqual(InfoLabelData.labelContentAlignment);
+        webDriver.waitElementToBePresentInDOM(defaultLabel);
+        expect(webDriver.getText(defaultLabel).toLowerCase()).toEqual(InfoLabelData.defaultLabelText.toLowerCase());
+        expect(webDriver.getCSSPropertyByName(defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
+            .toEqual(InfoLabelData.labelContentAlignment);
     });
 
     it('should check info label with text', () => {
