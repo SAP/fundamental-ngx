@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.13...v0.26.0-rc.14) (2020-12-23)
+
+
+### Features
+
+* (Platform) introduce Approval Flow component - Phase 1  ([#4177](https://github.com/SAP/fundamental-ngx/issues/4177)) ([c6d8277](https://github.com/SAP/fundamental-ngx/commit/c6d827776ad35c48f0f53b0213a51b6b35c79857))
+
 ## [0.26.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.12...v0.26.0-rc.13) (2020-12-23)
 
 
