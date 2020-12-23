@@ -57,4 +57,18 @@ export class PlatformStepInputDocsComponent {
             component: 'PlatformNumberStepInputTemplateExample'
         }
     ];
+
+    numberStepInputStates: ExampleFile[] = [
+        {
+            language: 'html',
+            code: templateFormExampleHtml,
+            fileName: 'platform-number-step-input-states-example'
+        },
+        {
+            language: 'typescript',
+            code: templateFormExampleTs,
+            fileName: 'platform-number-step-input-states-example',
+            component: 'PlatformNumberStepInputStateExampleComponent'
+        }
+    ];
 }
