@@ -8,6 +8,7 @@
                 class="fd-pagination__link fd-pagination__link--previous"
                 tabindex="0"
                 role="button"
+                [title]="previousLabel"
                 [attr.aria-label]="previousLabel"
                 [attr.aria-disabled]="isFirstPage"
                 (keypress)="onKeypressHandler(currentPage - 1, $event)"
@@ -31,6 +32,7 @@
             </div>
             <a
                 class="fd-pagination__link fd-pagination__link--next"
+                [title]="nextLabel"
                 [attr.aria-label]="nextLabel"
                 tabindex="0"
                 role="button"
