@@ -12,9 +12,9 @@ import { TableP13GroupComponent } from './table-p13-group.component';
 import { TableP13FilterComponent } from './table-p13-filter.component';
 import { TableP13ColumnsComponent } from './table-p13-columns.component';
 
-import { SortDialogData, SortDialogResultData, P13SortingComponent } from './sorting/sorting.component';
-import { GroupDialogData, GroupDialogResultData, P13GroupingComponent } from './grouping/grouping.component';
-import { FilterDialogData, FilterDialogResultData, P13FilteringComponent } from './filtering/filtering.component';
+import { SortDialogData, SortDialogResultData, P13SortingDialogComponent } from './sorting/sorting.component';
+import { GroupDialogData, GroupDialogResultData, P13GroupingDialogComponent } from './grouping/grouping.component';
+import { FilterDialogData, FilterDialogResultData, P13FilteringDialogComponent } from './filtering/filtering.component';
 import { filter } from 'rxjs/operators';
 
 const dialogConfig: DialogConfig = {
@@ -105,7 +105,7 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionSort: sortBy
         };
 
-        const dialogRef = this._dialogService.open(P13SortingComponent, {
+        const dialogRef = this._dialogService.open(P13SortingDialogComponent, {
             ...dialogConfig,
             data: dialogData
         });
@@ -129,7 +129,7 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionFilter: filterBy
         };
 
-        const dialogRef = this._dialogService.open(P13FilteringComponent, {
+        const dialogRef = this._dialogService.open(P13FilteringDialogComponent, {
             responsivePadding: false,
             verticalPadding: false,
             width: '50rem',
@@ -154,7 +154,7 @@ export class TableP13DialogComponent implements OnDestroy {
             collectionGroup: groupBy
         };
 
-        const dialogRef = this._dialogService.open(P13GroupingComponent, {
+        const dialogRef = this._dialogService.open(P13GroupingDialogComponent, {
             ...dialogConfig,
             data: dialogData
         });

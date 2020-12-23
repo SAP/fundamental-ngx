@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {
     ButtonModule,
@@ -45,10 +45,11 @@ import {
     TableP13FilterComponent,
     TableP13GroupComponent,
     TableP13ColumnsComponent,
-    P13SortingComponent,
-    P13GroupingComponent,
-    P13FilteringComponent,
-    FilterRuleComponent
+    P13SortingDialogComponent,
+    P13GroupingDialogComponent,
+    P13FilteringDialogComponent,
+    FilterRuleComponent,
+    P13ColumnsDialogComponent
 } from './components';
 import {
     FdpCellDef,
@@ -63,8 +64,6 @@ import { ValueByPathPipe } from './pipes';
     imports: [
         CommonModule,
         FormsModule,
-        ReactiveFormsModule,
-        FormModule,
 
         TableModule,
         ToolbarModule,
@@ -111,10 +110,11 @@ import { ValueByPathPipe } from './pipes';
         TableP13FilterComponent,
         TableP13GroupComponent,
         TableP13ColumnsComponent,
-        P13SortingComponent,
-        P13GroupingComponent,
-        P13FilteringComponent,
-        FilterRuleComponent
+        P13SortingDialogComponent,
+        P13GroupingDialogComponent,
+        P13FilteringDialogComponent,
+        FilterRuleComponent,
+        P13ColumnsDialogComponent
     ],
     exports: [
         TableComponent,

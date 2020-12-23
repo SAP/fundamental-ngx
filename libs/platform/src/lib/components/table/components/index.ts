@@ -21,7 +21,8 @@ export { TableP13SortComponent } from './table-p13-dialog/table-p13-sort.compone
 export { TableP13FilterComponent } from './table-p13-dialog/table-p13-filter.component';
 export { TableP13GroupComponent } from './table-p13-dialog/table-p13-group.component';
 export { TableP13ColumnsComponent } from './table-p13-dialog/table-p13-columns.component';
-export { P13SortingComponent } from './table-p13-dialog/sorting/sorting.component';
-export { P13GroupingComponent } from './table-p13-dialog/grouping/grouping.component';
-export { P13FilteringComponent } from './table-p13-dialog/filtering/filtering.component';
+export { P13SortingDialogComponent } from './table-p13-dialog/sorting/sorting.component';
+export { P13GroupingDialogComponent } from './table-p13-dialog/grouping/grouping.component';
+export { P13FilteringDialogComponent } from './table-p13-dialog/filtering/filtering.component';
 export { FilterRuleComponent } from './table-p13-dialog/filtering/filter-rule.component';
+export { P13ColumnsDialogComponent } from './table-p13-dialog/columns/columns.component';

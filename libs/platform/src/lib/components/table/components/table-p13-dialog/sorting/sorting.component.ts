@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core';
@@ -40,10 +40,10 @@ class SortRule {
     templateUrl: './sorting.component.html',
     styleUrls: ['./sorting.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13SortingComponent }],
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13SortingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class P13SortingComponent implements Resettable {
+export class P13SortingDialogComponent implements Resettable {
     /** Table columns available for sorting */
     readonly columns: SortDialogColumn[] = [];
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core';
@@ -40,10 +40,10 @@ class GroupRule {
     templateUrl: './grouping.component.html',
     styleUrls: ['./grouping.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13GroupingComponent }],
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13GroupingDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class P13GroupingComponent implements Resettable {
+export class P13GroupingDialogComponent implements Resettable {
     /** Table columns available for grouping */
     readonly columns: GroupDialogColumn[] = [];
 

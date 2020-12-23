@@ -14,10 +14,10 @@ export { FilterDialogData, FilterDialogResultData };
     templateUrl: './filtering.component.html',
     styleUrls: ['./filtering.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13FilteringComponent }],
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13FilteringDialogComponent }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class P13FilteringComponent implements Resettable {
+export class P13FilteringDialogComponent implements Resettable {
     /** @hidden */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     /** Indicates when reset command is available */
