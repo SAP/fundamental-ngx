@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.11...v0.26.0-rc.12) (2020-12-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove [optionalText] from switch component | bring v.0.14.0 of fundamental-styles
+
+* fix: (Core|Platform) bring v.0.14.0 of fundamental-styles
+
+* PR review comments
+
+### Bug Fixes
+
+* (Core|Platform) bring v.0.14.0 of fundamental-styles ([#4116](https://github.com/SAP/fundamental-ngx/issues/4116)) ([848bffe](https://github.com/SAP/fundamental-ngx/commit/848bffe366fab7dcd83dfc6e19d76bfe2008acd5))
+
 ## [0.26.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.9...v0.26.0-rc.11) (2020-12-22)
 
 
