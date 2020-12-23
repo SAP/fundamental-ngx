@@ -120,7 +120,7 @@ describe('Fixed card layout test suite', function() {
             console.log('Firefox for Safari and IE');
         });
 
-        it('should check placeholder exists on drag', () => {
+        fit('should check placeholder exists on drag', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
             if (!browserIsIE()) {
                 const clickElement = elementArray(fxdCardLayoutPg.cardContentArr);
@@ -129,12 +129,12 @@ describe('Fixed card layout test suite', function() {
                 const endElementLocation = cards[1];
 
                 // tslint:disable:radix
-                const clickXLocation = clickElement[0].getLocation('x');
-                const clickYLocation = clickElement[0].getLocation('y');
-                const startXLocation = startLocation.getLocation('x');
-                const startYLocation = startLocation.getLocation('y');
-                const endXLocation = endElementLocation.getLocation('x');
-                const endYLocation = endElementLocation.getLocation('y');
+                const clickXLocation: number = Math.round(clickElement[0].getLocation('x'));
+                const clickYLocation: number = Math.round(clickElement[0].getLocation('y'));
+                const startXLocation: number = Math.round(startLocation.getLocation('x'));
+                const startYLocation: number = Math.round(startLocation.getLocation('y'));
+                const endXLocation: number = Math.round(endElementLocation.getLocation('x'));
+                const endYLocation: number = Math.round(endElementLocation.getLocation('y'));
 
                 browser.performActions([{
                     'type': 'pointer',

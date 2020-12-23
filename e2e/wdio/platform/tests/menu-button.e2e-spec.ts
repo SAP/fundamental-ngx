@@ -10,13 +10,18 @@ import {
     getElementArrayLength,
     getText,
     isElementDisplayed,
-    refreshPage,
+    refreshPage, scrollIntoView,
     waitElementToBePresentInDOM,
     waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Menu button test suite', function() {
     const menuBtnPage = new MenuButtonPo();
+
+    beforeAll(()=> {
+
+    })
+
 
     beforeEach(() => {
         menuBtnPage.open();
