@@ -1,0 +1,96 @@
+
+<div class="table-header">
+    <h4><ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{ displayedData.length }})</h4>
+</div>
+<div class="fdp-value-help-dialog__table-holder table-content">
+    <table fd-table
+        [compact]="contentTableDensity === _contentDensityOptions.COMPACT"
+        [condensed]="contentTableDensity === _contentDensityOptions.CONDENSED"
+        [popIn]="mobile"
+        [noBorderX]="mobile"
+        [noBorderY]="mobile"
+    >
+        <thead fd-table-header>
+            <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
+                <th fd-table-cell [fitContent]="mobile">
+                    <fd-checkbox
+                        role="checkbox"
+                        *ngIf="isMultiSelection"
+                        [name]="uid + '-row-all'"
+                        [compact]="true"
+                        [tristate]="true"
+                        [tristateSelectable]="false"
+                        [ngModel]="_selectedAll"
+                        (ngModelChange)="_toggleAllRows()"
+                    ></fd-checkbox>
+                </th>
+                <th fd-table-cell *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn">{{ filter.label }}</th>
+            </tr>
+        </thead>
+        <tbody fd-table-body>
+            <ng-container *ngFor="let row of displayedData | slice:_shownFrom:_shownCount; trackBy:_trackByTableRowFn; index as i">
+                <tr
+                    fd-table-row
+                    [hoverable]="!mobile"
+                    [main]="mobile"
+                    [attr.aria-selected]="_selectedMap[row[uniqueKey]]"
+                    [activable]="!isMultiSelection"
+                    (click)="!isMultiSelection && _toggleSelectRow(row)"
+                >
+                    <td fd-table-cell [fitContent]="mobile">
+                        <fd-checkbox
+                            role="checkbox"
+                            *ngIf="isMultiSelection"
+                            [name]="uid + '-row-' + i"
+                            [compact]="true"
+                            [ngModel]="_selectedMap[row[uniqueKey]]"
+                            (change)="_toggleSelectRow(row)"
+                        ></fd-checkbox>
+                    </td>
+                    <td fd-table-cell *ngFor="let filter of _tableFilters.main">{{ row[filter.key] || '' }}</td>
+                </tr>
+                <!-- Only for mobile view if exist -->
+                <tr fd-table-row *ngIf="mobile && _tableFilters.secondary.length" [secondary]="true" [attr.aria-selected]="_selectedMap[row[uniqueKey]]">
+                    <td fd-table-cell></td>
+                    <td fd-table-cell colspan="100%" [fitContent]="true">
+                        <p fd-table-text *ngFor="let filter of _tableFilters.secondary">
+                            <label>{{ filter.label }}:</label>
+                            {{ row[filter.key] || '' }}
+                        </p>
+                    </td>
+                </tr>
+            </ng-container>
+            <tr fd-table-row *ngIf="displayedData.length && mobile && _shownCount && _shownCount !== displayedData.length">
+                <td colspan="100%">
+                    <div fd-bar barDesign="header-with-subheader">
+                        <div fd-bar-middle>
+                            <fd-bar-element>
+                                <button fd-button fdType="transparent" i18n-label="@@platformI18nValueHelpDialogMoreButton" label="More" (click)="_showMoreElements()"></button>
+                            </fd-bar-element>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr fd-table-row *ngIf="!displayedData.length">
+                <td colspan="100%">
+                    <div class="fdp-value-help-dialog__empty-message">
+                        {{ emptyTableMessage }}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-container *ngIf="displayedData.length as _itemCount">
+    <div fd-bar *ngIf="!mobile && _itemCount">
+        <div fd-bar-left>
+            <fd-pagination
+                [totalItems]="_itemCount"
+                (pageChangeStart)="_updatePage($event)"
+                [itemsPerPage]="pageSize"
+                [currentPage]="_currentPage"
+            ></fd-pagination>
+        </div>
+    </div>
+</ng-container>

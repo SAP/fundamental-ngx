@@ -54,7 +54,8 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                     { url: 'platform/display-list-item', name: 'Display List Item' },
                     { url: 'platform/object-list-item', name: 'Object List Item' }
                 ]
-            }
+            },
+            { url: 'platform/value-help-dialog', name: 'Value Help Dialog' }
         ];
 
         this.layouts = [{ url: 'platform/dynamic-page', name: 'Dynamic Page' }];

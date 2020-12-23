@@ -21,6 +21,7 @@ export * from './lib/components/object-marker/public_api';
 export * from './lib/components/object-attribute/public_api';
 export * from './lib/components/table/public_api';
 export * from './lib/components/dynamic-page/public_api';
+export * from './lib/components/value-help-dialog/public_api';
 export * from './lib/components/feed-input/public_api';
 export * from './lib/components/upload-collection';
 export * from './lib/utils/pipes/pipe.module';
