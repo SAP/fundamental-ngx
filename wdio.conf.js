@@ -31,7 +31,6 @@ exports.config = {
         './e2e/wdio/**/standard-list-item.e2e-spec.ts',
         './e2e/wdio/**/display-list-item.e2e-spec.ts',
         './e2e/wdio/**/checkbox-group.e2e-spec.ts',
-        './e2e/wdio/**/link.e2e-spec.ts', // Skip because of page loading issue.
     ],
     //
     // ============

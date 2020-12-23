@@ -14,6 +14,8 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     placeholderCard = 'div.fd-fixed-card-group--card-placeholder';
     navigationMenuBtn = 'button[aria-label*="Switch Navigation"]';
     pageSidebar = 'sections-toolbar .sidebar';
+    disabledCardContent = 'fd-fixed-card-layout-disabled-drag fd-card fd-card-content';
+    disabledCardDiv = 'fd-fixed-card-layout-disabled-drag div.cdk-drag.fd-fixed-card-group--card.ng-star-inserted';
 
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
