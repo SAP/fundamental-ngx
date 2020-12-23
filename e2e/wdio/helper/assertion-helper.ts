@@ -1,5 +1,15 @@
 import { webDriver } from '../driver/wdio';
 
+export function checkRtlOrientation(element: string, index: number): void {
+    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('rtl');
+    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('rtl');
+}
+
+export function checkLtrOrientation(element: string, index: number): void {
+    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('ltr');
+    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('ltr');
+}
+
 export function checkIfDisabled(element, attribute: string, value: string, index: number = 0): void {
     expect(webDriver.getAttributeByName(element, attribute, index)).toBe(value);
 }
@@ -28,14 +38,12 @@ export function checkLabels(arraySelector: string, expectation: string[], sliceS
     expect(webDriver.getTextArr(arraySelector, sliceStart, sliceEnd)).toEqual(expectation);
 }
 
-export function checkRtlOrientation(element: string, index: number): void {
-    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('rtl');
-    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('rtl');
+export function checkNotFocused(element: string, index: number = 0): void {
+    expect($$(element)[index].isFocused()).toBe(false);
 }
 
-export function checkLtrOrientation(element: string, index: number): void {
-    expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('ltr');
-    expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('ltr');
+export function checkFocused(element: string, index: number = 0): void {
+    expect($$(element)[index].isFocused()).toBe(true);
 }
 
 export function checkElementDisplayed(element: string): void {
@@ -58,6 +66,9 @@ export function checkAttributeValueTrue(element: string, attribute: string): voi
         expect(webDriver.getAttributeByName(element, attribute, i)).toBe('true');
     }
 }
+export function checkValueChanged(oldValue: string, newValue: string): void {
+    expect(oldValue).not.toEqual(newValue);
+}
 
 export function checkElArrIsClickable(element: string): void {
     const elLength = webDriver.getElementArrayLength(element);
@@ -71,4 +82,7 @@ export function checkElementTextValue(element: string, expectation): void {
     for (let i = 0; elLength > i; i++) {
         expect(webDriver.getText(element, i).trim()).toBe(expectation[i]);
     }
+}
+export function checkTextValueContain(oldValue: string, newValue: string): void {
+    expect(oldValue).toContain(newValue);
 }

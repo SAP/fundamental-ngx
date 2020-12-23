@@ -10,8 +10,10 @@ export class BaseComponentPo {
     checkRtlSwitch(switchers: string = this.rtlSwitcherArr, areas: string = this.exampleAreaContainersArr): void {
         const areasArray = webDriver.elementArray(areas);
         for (let i = 0; i < areasArray.length; i++) {
+            webDriver.scrollIntoView(switchers, i);
             webDriver.click(switchers, i);
             checkRtlOrientation(areas, i);
+            webDriver.scrollIntoView(switchers, i);
             webDriver.click(switchers, i);
             checkLtrOrientation(areas, i);
         }

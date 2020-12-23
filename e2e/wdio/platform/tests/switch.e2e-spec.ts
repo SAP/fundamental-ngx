@@ -106,7 +106,7 @@ describe('Verify Switch component', function() {
             webDriver.waitElementToBePresentInDOM(switchPage.disabledSwitchHandel);
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.disabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (webDriver.isBrowser('Safari')) {
+            if (!webDriver.browserIsSafari()) {
                 webDriver.scrollIntoView(switchPage.disabledSwitchHandel);
                 webDriver.mouseHoverElement(switchPage.disabledSwitchHandel);
                 const handelColorAfter = webDriver.getCSSPropertyByName(switchPage.disabledSwitchHandel, 'background-color');
@@ -242,7 +242,6 @@ describe('Verify Switch component', function() {
         /*        xit('should be able to display 2-3 letters', async () => {
         });*/
     });
-
     /*xdescribe('has correct page content', function() {
          // TODO: add page content checks
     });*/

@@ -151,7 +151,6 @@ describe('Menu component test suite', function() {
     });
 });
 
-
 function checkMenuItemsHoverState(itemsArrSelector, attribute, expectation): void {
     const menuItemsArrLength = webDriver.getElementArrayLength(itemsArrSelector);
 
@@ -189,7 +188,6 @@ function checkMenuItemsActiveState(itemsArrSelector: string, attribute: string, 
         browser.releaseActions();
     }
 }
-
 
 function check2ndLvlMenuItemsHvrState(itemsArr, itemsArr2, attribute, expectation): void {
     webDriver.mouseHoverElement(itemsArr, 1);

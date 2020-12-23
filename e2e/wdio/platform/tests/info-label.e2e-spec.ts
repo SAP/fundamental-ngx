@@ -11,8 +11,6 @@ describe('Info Label component test suite', () => {
         labelsWithNumberOrIconArr,
         accessibilityLabelsArr,
         accessibilityAttrArr,
-        rtlSwitcherArr,
-        exampleAreaContainersArr,
         checkRtlSwitch
     } = new InfoLabelPO();
     const infoLabelPage = new InfoLabelPO();
@@ -133,6 +131,6 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check LTR and RTL orientation', () => {
-        checkRtlSwitch(rtlSwitcherArr, exampleAreaContainersArr);
+        infoLabelPage.checkRtlSwitch();
     });
 });

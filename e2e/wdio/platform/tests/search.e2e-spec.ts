@@ -11,7 +11,4 @@ describe('Search field', () => {
     afterEach(() => {
         webDriver.refreshPage();
     });
-
-
-
 });

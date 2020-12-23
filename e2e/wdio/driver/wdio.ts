@@ -70,19 +70,29 @@ export class Wdio {
     // Clear value before set new
     setValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+        $$(selector)[index].clearValue();
         $$(selector)[index].setValue(value);
     };
+
+    addValueWithDelay(selector: string, value: string, delay: number = 100, index: number = 0, waitTime = this.defaultWaitTime): void {
+        $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+        const valueArray = Array.from(value);
+        for (const symbol of valueArray) {
+            $$(selector)[index].addValue(symbol);
+            browser.pause(delay);
+        }
+    }
 
     // add value to existing one
     addValue(selector: string, value: string, index: number = 0, waitTime = this.defaultWaitTime): void {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         $$(selector)[index].addValue(value);
-    };
+    }
 
     getValue(selector: string, index: number = 0, waitTime = this.defaultWaitTime): string {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].getValue();
-    };
+    }
 
     getArrValues(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
         return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getValue());
@@ -99,7 +109,7 @@ export class Wdio {
 
     waitForElDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
-    };
+    }
 
     waitForInvisibilityOf(selector: string, index: number = 0): boolean {
         return $$(selector)[index].waitForDisplayed({ reverse: true });
@@ -107,32 +117,40 @@ export class Wdio {
 
     waitForNotDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime, reverse: true });
-    };
+    }
 
     waitForClickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForClickable({ timeout: waitTime });
     };
 
+    waitForUnclickable(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+        return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
+    }
+
     waitForPresent(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
-        return $$(selector)[index].waitForExist({ timeout: waitTime });
-    };
+        return $$(selector)[index].waitForExist({ timeout: waitTime});
+    }
 
     isEnabled(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         $$(selector)[index].waitForDisplayed({ timeout: waitTime });
         return $$(selector)[index].isEnabled();
-    };
+    }
 
     // Waits to be empty if text is not passed
     waitTextToBePresentInValue(selector: string, text: string = '', index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitUntil(function(): boolean {
             return this.getValue() === text;
         }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
-    };
+    }
 
     // Sends to the active element
     sendKeys(keys: string | string[]): void {
         browser.keys(keys);
-    };
+    }
+
+    uploadFile(selector: string, pathToFile: string, index: number = 0): void {
+        $$(selector)[index].setValue(pathToFile);
+    }
 
     getAttributeByName(selector: string, attrName: string, index: number = 0): string {
         return $$(selector)[index].getAttribute(attrName);
@@ -215,12 +233,11 @@ export class Wdio {
         return $$(selector)[index].isClickable();
     }
 
-
     doesItExist(selector: string): boolean {
         return $(selector).isExisting();
     }
 
-        getCurrentUrl(): string {
+    getCurrentUrl(): string {
         return browser.getUrl();
     }
 
@@ -240,9 +257,18 @@ export class Wdio {
         $$(selector)[index].focus();
     }
 
+    mouseButtonDown(button: 0 | 1 | 2 = 0): void {
+        browser.buttonDown(button);
+    }
+
+    mouseButtonUp(button: 0 | 1 | 2 = 0): void {
+        browser.buttonUp(button);
+    }
+
     clickNextElement(selector: string, index: number = 0): void {
         $$(selector)[index].nextElement().click();
     }
+
 }
 
 export const webDriver = new Wdio();

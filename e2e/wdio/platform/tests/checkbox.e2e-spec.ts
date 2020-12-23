@@ -20,8 +20,6 @@ describe('Checkbox test suite', function() {
         errorCheckboxes,
         presenceCheckbox,
         accessibilityCheckboxes,
-        exampleAreaContainersArr,
-        errorExampleTitle,
 
     } = new CheckboxPO();
     const checkboxPage = new CheckboxPO();
