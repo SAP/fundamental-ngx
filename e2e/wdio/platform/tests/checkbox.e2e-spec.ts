@@ -35,23 +35,23 @@ describe('Checkbox test suite', function() {
 
     describe('check binary checkbox used with form examples', () => {
         it('should check binary checkbox in template driven form', () => {
-            webDriver.waitElementToBePresentInDOM(binaryTempCheckbox, 0);
-            webDriver.waitForDisplayed(binaryTempCheckbox, 0);
-            // check checkbox labels
-            for (let i = 0; 3 > i; i++) {
-                checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(binaryTempCheckbox, i);
-            }
-            if (webDriver.isBrowser('Safari') || webDriver.isBrowser('internet explorer')) {
-                console.log('Skip check for Safari and IE');
-            } else {
+            if (!webDriver.browserIsIEorSafari()) {
+                webDriver.waitElementToBePresentInDOM(binaryTempCheckbox, 0);
+                webDriver.waitForElDisplayed(binaryTempCheckbox, 0);
+                // check checkbox labels
+                for (let i = 0; 3 > i; i++) {
+                    checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
+                    checkMarkingCheckbox(binaryTempCheckbox, i);
+                }
                 checkHoverState(binaryTempCheckbox);
+                checkFocusState(binaryTempCheckbox);
+                return;
             }
-            checkFocusState(binaryTempCheckbox);
+        console.log('Skip check for Safari and IE');
         });
 
         it('should check binary checkbox in reactive/model driven form', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 3; 6 > i; i++) {
                     checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
                     checkMarkingCheckbox(binaryTempCheckbox, i);
@@ -65,14 +65,14 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check disabled checkbox', () => {
-            webDriver.waitForDisplayed(disabledBinaryCheckbox, 0, 10000);
+            webDriver.waitForElDisplayed(disabledBinaryCheckbox, 0, 10000);
             checkIfDisabled(disabledBinaryCheckbox, 'ng-reflect-is-disabled', 'true');
         });
     });
 
     describe('Check checkbox used without form examples', () => {
         it('should check binary checkbox with value', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 0; 2 > i; i++) {
                     checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
                     checkMarkingCheckbox(checkboxWithoutForm, i);
@@ -86,7 +86,7 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check binary checkbox without value', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 2; 4 > i; i++) {
                     checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
                     checkMarkingCheckbox(checkboxWithoutForm, i);
@@ -101,10 +101,10 @@ describe('Checkbox test suite', function() {
 
         it('should check disabled checkbox', () => {
             // TODO: Fix for Safari and IE
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.waitElementToBePresentInDOM(disabledCheckboxWithoutForm);
                 webDriver.scrollIntoView(disabledCheckboxWithoutForm);
-                webDriver.waitForDisplayed(disabledCheckboxWithoutForm);
+                webDriver.waitForElDisplayed(disabledCheckboxWithoutForm);
                 checkIfDisabled(disabledCheckboxWithoutForm, 'ng-reflect-is-disabled', 'true');
                 return;
             }
@@ -114,7 +114,7 @@ describe('Checkbox test suite', function() {
 
     describe('Check checkboxes with value property examples', () => {
         it('should check template driven form', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 0; 2 > i; i++) {
                     checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
                     checkMarkingCheckbox(checkboxWithValue, i);
@@ -126,7 +126,7 @@ describe('Checkbox test suite', function() {
             console.log('Skip for Safari and IE');
         });
         it('should check reactive/model driven form', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 2; 4 > i; i++) {
                     checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
                     checkMarkingCheckbox(checkboxWithValue, i);
@@ -142,7 +142,7 @@ describe('Checkbox test suite', function() {
 
     describe('Check Tristate Checkbox With Value Property and Without Value Property', () => {
         it('should check reactive form', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 0; 8 > i; i++) {
                     checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
                 }
@@ -162,7 +162,7 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check template form', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 8; 16 > i; i++) {
                     checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
                 }
@@ -183,7 +183,7 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check tristate checkbox with multiple checkboxes', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 for (let i = 16; 20 > i; i++) {
                     checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
                 }
@@ -217,7 +217,7 @@ describe('Checkbox test suite', function() {
 
     describe('Checkbox With Form and State Change on Error', () => {
            it('should check error handling examples', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 const errorCheckboxesLength = webDriver.getElementArrayLength(errorCheckboxes);
 
                 for (let i = 0; errorCheckboxesLength > i; i++) {
@@ -240,7 +240,7 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check error handling form submission', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.click(checkboxPage.submitBtn);
                 expect(webDriver.getAlertText()).toEqual('Status: VALID');
                 webDriver.acceptAlert();
@@ -250,7 +250,7 @@ describe('Checkbox test suite', function() {
             console.log('Skip for Safari and IE');
         });
         it('should check error handling form submission 222 ', () => {
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.clickNextElement(presenceCheckbox);
                 webDriver.click(checkboxPage.submitBtn);
 
@@ -284,28 +284,33 @@ describe('Checkbox test suite', function() {
     });
 
     describe('check example orientation', () => {
-        it('should check LTR orientation', () => {
-            const areaContainersArrayLength = webDriver.getElementArrayLength(exampleAreaContainersArr);
-
-            for (let i = 0; areaContainersArrayLength > i; i++) {
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value)
-                    .toBe('ltr', 'css prop direction ');
+        it('should check orientation', () => {
+            if (!webDriver.browserIsIE()) {
+                checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
+                return;
             }
+            console.log('skip for IE');
+            // const areaContainersArrayLength = webDriver.getElementArrayLength(exampleAreaContainersArr);
+            //
+            // for (let i = 0; areaContainersArrayLength > i; i++) {
+            //     expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value)
+            //         .toBe('ltr', 'css prop direction ');
+            // }
         });
 
-        it('should check RTL orientation', () => {
-            const arrL = webDriver.getElementArrayLength(exampleAreaContainersArr);
-
-            for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(exampleAreaContainersArr, i);
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i);
-                expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(checkboxPage.rtlSwitcherArr, i);
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            }
-        });
+        // it('should check RTL orientation', () => {
+        //     const arrL = webDriver.getElementArrayLength(exampleAreaContainersArr);
+        //
+        //     for (let i = 0; arrL > i; i++) {
+        //         webDriver.scrollIntoView(exampleAreaContainersArr, i);
+        //         expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+        //         const dirValueBefore = webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i);
+        //         expect([null, '']).toContain(dirValueBefore);
+        //         webDriver.click(checkboxPage.rtlSwitcherArr, i);
+        //         expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+        //         expect(webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+        //     }
+        // });
     });
 });
 

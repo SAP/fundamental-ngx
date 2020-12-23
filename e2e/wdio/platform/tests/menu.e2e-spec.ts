@@ -14,7 +14,7 @@ describe('Menu component test suite', function() {
     });
 
     it('should check menu btn styles', () => {
-        if (!webDriver.isIEorSafari()) {
+        if (!webDriver.browserIsIEorSafari()) {
             const basicMenuBtnArrLength = webDriver.getElementArrayLength(menuPage.menuBtnArr);
 
             for (let i = 0; basicMenuBtnArrLength > i; i++) {
@@ -32,8 +32,6 @@ describe('Menu component test suite', function() {
             expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
             return;
         }
-
-
     });
     // Real issue for FF
     xit('should check avatar menu btn styles', () => {
@@ -90,12 +88,12 @@ describe('Menu component test suite', function() {
 
     xit('should check menu items active state', () => {
         webDriver.click(menuPage.menuBtnArr);
-        webDriver.waitForDisplayed(menuPage.menuItemArr);
+        webDriver.waitForElDisplayed(menuPage.menuItemArr);
         checkMenuItemsActiveState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuBtnActiveColor);
     });
 
     it('should check menu item focus', () => {
-        if (!webDriver.isIEorSafari()) {
+        if (!webDriver.browserIsIEorSafari()) {
             webDriver.click(menuPage.menuBtnArr);
             checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
             return;
@@ -104,9 +102,9 @@ describe('Menu component test suite', function() {
     });
 
     it('should check cascading menu', () => {
-        if (!webDriver.isIEorSafari()) {
+        if (!webDriver.browserIsIEorSafari()) {
             webDriver.click(menuPage.cascadingMenuBtn);
-            webDriver.waitForDisplayed(menuPage.cascadingMenuItemsArr);
+            webDriver.waitForElDisplayed(menuPage.cascadingMenuItemsArr);
             checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
             check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
                 MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
@@ -119,7 +117,7 @@ describe('Menu component test suite', function() {
     });
 
     it('should check collapsed and expanded states', () => {
-        if (!webDriver.isIEorSafari()) {
+        if (!webDriver.browserIsIEorSafari()) {
             webDriver.click(menuPage.firstMenuBtn);
             expect(webDriver.isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
             webDriver.click(menuPage.firstMenuBtn);

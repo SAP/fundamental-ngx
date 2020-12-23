@@ -15,7 +15,7 @@ describe('Verify Panel', () => {
     });
 
     xit('should be expandable', () => {
-        const isVisibleContentBefore = webDriver.waitForDisplayed(panelPage.expandablePanelContent);
+        const isVisibleContentBefore = webDriver.waitForElDisplayed(panelPage.expandablePanelContent);
         webDriver.click(panelPage.expandablePanelBtn);
         webDriver.pause(3000);
         const isInvisibleVisibleContentAfter = webDriver.waitForNotDisplayed(panelPage.expandablePanelContent);

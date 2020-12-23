@@ -20,14 +20,25 @@ export class Wdio {
         return browser.capabilities.browserName === browserName;
     }
 
-    isIEorSafari(): boolean {
-        if (this.isBrowser('Safari')) {
-            return true;
-        }
-        if (this.isBrowser('internet explorer')) {
-            return true;
-        }
+    browserIsIEorSafari(): boolean {
+        if (this.isBrowser('Safari')) {return true}
+        if (this.isBrowser('internet explorer')) {return true}
         return false;
+    }
+
+    browserIsFirefox(): boolean {
+        return this.isBrowser('firefox');
+
+    }
+
+    browserIsIE(): boolean {
+        return this.isBrowser('internet explorer');
+
+    }
+
+    browserIsSafari(): boolean {
+        return this.isBrowser('Safari');
+
     }
 
     goBack(): void {
@@ -86,7 +97,7 @@ export class Wdio {
         return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getText());
     }
 
-    waitForDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+    waitForElDisplayed(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     };
 
@@ -132,7 +143,7 @@ export class Wdio {
     }
 
     // Returns object (assertions needs to be adapted)
-    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string } {
+    getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string | number } {
         return $$(selector)[index].getCSSProperty(propertyName);
     }
 
@@ -182,8 +193,8 @@ export class Wdio {
         return $$(selector);
     }
 
-    elementDisplayed(selector: string): boolean {
-        return $(selector).isDisplayed();
+    elementDisplayed(selector: string, index: number = 0): boolean {
+        return $$(selector)[index].isDisplayed();
     }
 
     clickAndHold(selector: string, index: number = 0, waitTime: number = this.defaultWaitTime): void {
@@ -192,9 +203,7 @@ export class Wdio {
         return browser.buttonDown();
     }
 
-    // TODO: add wait 300ms
-
-    waitElementToBePresentInDOM(selector: string, index: number = 0, waitTime = this.defaultWaitTime): boolean {
+    waitElementToBePresentInDOM (selector: string,  index: number = 0, waitTime = this.defaultWaitTime): boolean {
         return $$(selector)[index].waitForExist({ timeout: waitTime });
     }
 
@@ -204,14 +213,14 @@ export class Wdio {
 
     isElementClickable(selector: string, index: number = 0): boolean {
         return $$(selector)[index].isClickable();
-
     }
+
 
     doesItExist(selector: string): boolean {
         return $(selector).isExisting();
     }
 
-    getUrl(): string {
+        getCurrentUrl(): string {
         return browser.getUrl();
     }
 

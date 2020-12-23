@@ -10,7 +10,7 @@ describe('Verify Switch component', function() {
 
     afterEach(() => {
         webDriver.refreshPage();
-        webDriver.waitForDisplayed(switchPage.root, 0, 10000);
+        webDriver.waitForElDisplayed(switchPage.root, 0, 10000);
     });
 
     describe('has default and compact switch and', function() {
@@ -48,7 +48,7 @@ describe('Verify Switch component', function() {
         it('should default change state on hover', () => {
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.mouseHoverElement(switchPage.defaultSwitchHandel);
 
                 const handelColorAfter = webDriver.getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
@@ -63,7 +63,7 @@ describe('Verify Switch component', function() {
         it('should compact default change state on hover', () => {
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.mouseHoverElement(switchPage.defaultCompactSwitchHandel);
                 const handelColorAfter = webDriver.getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
 
@@ -92,7 +92,7 @@ describe('Verify Switch component', function() {
 
         it('should not be able to interact with disabled form switch', () => {
             // TODO: Investigate problem with disabled switch in Safari
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.waitElementToBePresentInDOM(switchPage.formDisabledSwitch);
                 webDriver.scrollIntoView(switchPage.formDisabledSwitch);
                 const isClickable = webDriver.isElementClickable(switchPage.formDisabledSwitch);
@@ -211,7 +211,7 @@ describe('Verify Switch component', function() {
         it('should semantic change state on hover', () => {
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.semanticSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.scrollIntoView(switchPage.semanticSwitchHandel);
                 webDriver.mouseHoverElement(switchPage.semanticSwitchHandel);
                 const handelColorAfter = webDriver.getCSSPropertyByName(switchPage.semanticSwitchHandel, 'background-color');
@@ -226,7 +226,7 @@ describe('Verify Switch component', function() {
         it('should semantic compact change state on hover', () => {
             const handelColorBefore = webDriver.getCSSPropertyByName(switchPage.semanticCompactSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.scrollIntoView(switchPage.semanticCompactSwitchHandel);
                 webDriver.mouseHoverElement(switchPage.semanticCompactSwitchHandel);
                 const handelColorAfter = webDriver.getCSSPropertyByName(switchPage.semanticCompactSwitchHandel, 'background-color');

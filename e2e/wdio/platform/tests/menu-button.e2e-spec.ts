@@ -8,7 +8,7 @@ describe('Menu button test suite', function() {
     beforeEach(() => {
         menuBtnPage.open();
         webDriver.refreshPage();
-        webDriver.waitForDisplayed(menuBtnPage.root);
+        webDriver.waitForElDisplayed(menuBtnPage.root);
     });
 
     describe('Check general menu button states', function() {
@@ -22,7 +22,7 @@ describe('Menu button test suite', function() {
 
         it('should check selected menu option and close menu', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 webDriver.click(menuBtnPage.cozyBtnArr);
                 webDriver.click(menuBtnPage.menuItemArr);
 
@@ -56,7 +56,7 @@ describe('Menu button test suite', function() {
             if (!webDriver.isBrowser('internet explorer')) {
                 webDriver.waitElementToBePresentInDOM(menuBtnPage.cozyBtnArr);
                 webDriver.click(menuBtnPage.cozyBtnArr);
-                webDriver.waitForDisplayed(menuBtnPage.menuItemOverlay);
+                webDriver.waitForElDisplayed(menuBtnPage.menuItemOverlay);
                 expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
                 webDriver.click(menuBtnPage.sectionTitle);
                 expect(webDriver.isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
@@ -129,7 +129,7 @@ describe('Menu button test suite', function() {
         });
 
         it('should check btn with and without icon', () => {
-            webDriver.waitForDisplayed(menuBtnPage.menuTypeBtnArr, 0);
+            webDriver.waitForElDisplayed(menuBtnPage.menuTypeBtnArr, 0);
             expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 6)).toBe(MenuBtnData.icon);
             expect(webDriver.getText(menuBtnPage.menuTypeBtnArr, 6).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
             expect(webDriver.getAttributeByName(menuBtnPage.menuTypeBtnArr, MenuBtnData.iconAttr, 7)).toBe(null);

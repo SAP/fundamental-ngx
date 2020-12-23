@@ -37,3 +37,38 @@ export function checkLtrOrientation(element: string, index: number): void {
     expect(webDriver.getAttributeByName(element, 'dir', index)).toBe('ltr');
     expect(webDriver.getCSSPropertyByName(element, 'direction', index).value).toBe('ltr');
 }
+
+export function checkElementDisplayed(element: string): void {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.elementDisplayed(element, i)).toBe(true);
+    }
+}
+
+export function checkElementText(element: string): void {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.getText(element, i)).not.toBe(null, '');
+    }
+}
+
+export function checkAttributeValueTrue(element: string, attribute: string): void {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.getAttributeByName(element, attribute, i)).toBe('true');
+    }
+}
+
+export function checkElArrIsClickable(element: string): void {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.isElementClickable(element, i)).toBe(true);
+    }
+}
+
+export function checkElementTextValue(element: string, expectation): void {
+    const elLength = webDriver.getElementArrayLength(element);
+    for (let i = 0; elLength > i; i++) {
+        expect(webDriver.getText(element, i).trim()).toBe(expectation[i]);
+    }
+}

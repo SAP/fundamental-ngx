@@ -13,13 +13,13 @@ describe('Split menu button test suite', () => {
         webDriver.refreshPage();
     });
     // Wasn't debuged yet in IE and Safari
-    if (!webDriver.isIEorSafari()) {
+    if (!webDriver.browserIsIEorSafari()) {
         it('should check drop-down arrow menu functionality', () => {
             const dropdownArrowBtnArr = webDriver.elementArray(spMenuBtnPage.arrowBtnArr);
 
             for (let i = 0; i < dropdownArrowBtnArr.length; i++) {
                 webDriver.click(spMenuBtnPage.arrowBtnArr, i);
-                expect(webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay));
+                expect(webDriver.waitForElDisplayed(spMenuBtnPage.menuOverlay));
                 webDriver.click(spMenuBtnPage.arrowBtnArr, i);
             }
         });
@@ -33,7 +33,7 @@ describe('Split menu button test suite', () => {
 
         it('should check that menu closed after making one selection', () => {
             webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr);
-            webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay);
+            webDriver.waitForElDisplayed(spMenuBtnPage.menuOverlay);
 
             webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr);
             webDriver.waitForNotDisplayed(spMenuBtnPage.menuOverlay);

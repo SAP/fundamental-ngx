@@ -22,10 +22,9 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check default label info', () => {
-        webDriver.waitElementToBePresentInDOM(defaultLabel);
-        expect(webDriver.getText(defaultLabel).toLowerCase()).toEqual(InfoLabelData.defaultLabelText.toLowerCase());
-        expect(webDriver.getCSSPropertyByName(defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
-            .toEqual(InfoLabelData.labelContentAlignment);
+            expect(webDriver.getText(defaultLabel).toLowerCase()).toEqual(InfoLabelData.defaultLabelText.toLowerCase());
+            expect(webDriver.getCSSPropertyByName(defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
+                .toEqual(InfoLabelData.labelContentAlignment);
     });
 
     it('should check info label with text', () => {
@@ -65,7 +64,7 @@ describe('Info Label component test suite', () => {
 
             }
             for (let i = 0; i < labelIconsArr.length; i++) {
-                expect(webDriver.waitForDisplayed(labelsWithTextAndIconArr, i)).toBe(true);
+                expect(webDriver.waitForElDisplayed(labelsWithTextAndIconArr, i)).toBe(true);
             }
         } else {
             for (let i = 0; i < labelsWithIconsArr.length; i++) {
@@ -79,7 +78,7 @@ describe('Info Label component test suite', () => {
 
             }
             for (let i = 0; i < labelIconsArr.length; i++) {
-                expect(webDriver.waitForDisplayed(labelsWithTextAndIconArr, i)).toBe(true);
+                expect(webDriver.waitForElDisplayed(labelsWithTextAndIconArr, i)).toBe(true);
             }
         }
     });

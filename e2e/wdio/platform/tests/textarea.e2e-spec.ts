@@ -16,7 +16,7 @@ describe('Verify Textarea component', function() {
         webDriver.refreshPage();
         webDriver.pause(16000);
     });
-    if (!webDriver.isIEorSafari()) {
+    if (!webDriver.browserIsIEorSafari()) {
         describe('has Textarea and', function() {
             it('should allow the user to enter multiple lines of text', () => {
                 webDriver.setValue(textareaPage.basicTextArea, testData.multiple_lines_text);
@@ -231,7 +231,7 @@ describe('Verify Textarea component', function() {
 
                 it('should have popover with text', () => {
                     webDriver.mouseHoverElement(textareaPage.basicTextAreaPopoverIcon);
-                    webDriver.waitForDisplayed(textareaPage.basicTextAreaPopoverBody);
+                    webDriver.waitForElDisplayed(textareaPage.basicTextAreaPopoverBody);
                     const popoverText = webDriver.getText(textareaPage.basicTextAreaPopoverBody);
                     expect(popoverText).toContain(textAreaPageContent.basic_text_area_popover);
                 });

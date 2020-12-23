@@ -16,16 +16,16 @@ describe('Fixed card layout test suite', function() {
     describe('main checks', function() {
         // TODO rework
         xit('should check spacing between cards', () => {
-            const cardsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardDivArr);
-            const columnsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
-
-            for (let i = 0; cardsCount > i; i++) {
-                const cardsMarginValue = webDriver.getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardSpacingValue, i);
-                if (cardsMarginValue.value !== null) {
-                    const arrL = webDriver.getElementArrayLength(cardsMarginValue.value);
-                    expect(arrL).toEqual(cardsCount - columnsCount);
-                }
-            }
+            // const cardsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            // const columnsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
+            //
+            // for (let i = 0; cardsCount > i; i++) {
+            //     const cardsMarginValue = webDriver.getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardSpacingValue, i);
+            //     if (cardsMarginValue.value !== null) {
+            //         const arrL = webDriver.getElementArrayLength(cardsMarginValue.value);
+            //         expect(arrL).toEqual(cardsCount - columnsCount);
+            //     }
+            // }
             // kept old protractor version to remember logic for rework:
             // const cardsMarginValue = fxdCardLayoutPg.cardDivArr.map(async element => {
             //     return await element.getCssValue(fxdCardLytData.cardSpacingAttr);
@@ -58,7 +58,7 @@ describe('Fixed card layout test suite', function() {
         it('should drag a card from the header', () => {
             // skip Safari for now due to issue where mouse position resets to 0,0
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 const cardHeader = webDriver.elementArray(fxdCardLayoutPg.cardHeaderArr);
                 const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
@@ -74,7 +74,7 @@ describe('Fixed card layout test suite', function() {
         // TODO: Need to be fixed for FF
         xit('should drag a card from the content area', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
                 const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
                 const cardDivArr = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
@@ -90,7 +90,7 @@ describe('Fixed card layout test suite', function() {
         // TODO: Unskip after fix
         xit('should check drag and drop cards swap locations', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isIEorSafari()) {
+            if (!webDriver.browserIsIEorSafari()) {
                 const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
                 const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
                 const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 0);
@@ -109,19 +109,19 @@ describe('Fixed card layout test suite', function() {
 
         it('should check placeholder exists on drag', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isBrowser('internet explorer')) {
+            if (!webDriver.browserIsIE()) {
                 const clickElement = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
                 const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
                 const startLocation = cards[0];
                 const endElementLocation = cards[1];
 
                 // tslint:disable:radix
-                const clickXLocation = parseInt(clickElement[0].getLocation('x'));
-                const clickYLocation = parseInt(clickElement[0].getLocation('y'));
-                const startXLocation = parseInt(startLocation.getLocation('x'));
-                const startYLocation = parseInt(startLocation.getLocation('y'));
-                const endXLocation = parseInt(endElementLocation.getLocation('x'));
-                const endYLocation = parseInt(endElementLocation.getLocation('y'));
+                const clickXLocation = clickElement[0].getLocation('x');
+                const clickYLocation = clickElement[0].getLocation('y');
+                const startXLocation = startLocation.getLocation('x');
+                const startYLocation = startLocation.getLocation('y');
+                const endXLocation = endElementLocation.getLocation('x');
+                const endYLocation = endElementLocation.getLocation('y');
 
                 browser.performActions([{
                     'type': 'pointer',
