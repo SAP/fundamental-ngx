@@ -50,8 +50,7 @@ export class VhdDataProvider<R> extends DataProvider<R> {
         const arrayParams = Array.from(params);
         const filterFn = (row: R) => {
             const rowEntries = Object.entries(row) as string[][];
-
-            return arrayParams.some(([key, value]) => {
+            return arrayParams.every(([key, value]) => {
                 if (key === '*') {
                     return rowEntries.some(([_rowEntryKey, rowEntryValue]) => {
                         return String(rowEntryValue).toLowerCase().includes(value.toLowerCase())
