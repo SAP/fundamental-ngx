@@ -1,0 +1,60 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false" mainTitle="Combobox playground">
+    <fdp-form-field id="combobox-states" label="Select state" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="combobox-states"
+            placeholder="Select state"
+            contentDensity="compact"
+            [dataSource]="states"
+            (selectionChange)="onSelectState($event)"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state" label="Combobox with selected state" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            contentDensity="compact"
+            [state]="selectedState"
+            [dataSource]="dataSource"
+        >
+        </fdp-combobox>
+    </fdp-form-field>
+</fdp-form-group>
+
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false" mainTitle="Static states">
+    <fdp-form-field id="combobox-state-success" label="Combobox with success state" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="success"
+            contentDensity="compact"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state-error" label="Combobox with error state" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="error"
+            contentDensity="compact"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state-warning" label="Combobox with warning state" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="warning"
+            contentDensity="compact"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+    <fdp-form-field id="combobox-state-info" label="Combobox with information state" zone="zLeft" rank="4">
+        <fdp-combobox
+            name="combobox-state"
+            placeholder="Type some text..."
+            state="information"
+            contentDensity="compact"
+            [dataSource]="dataSource"
+        ></fdp-combobox>
+    </fdp-form-field>
+</fdp-form-group>
