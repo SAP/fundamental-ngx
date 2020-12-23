@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogRef, DIALOG_REF } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { FiltersComponent, FiltersDialogData } from './filters.component';
 
@@ -14,7 +14,7 @@ describe('PlatformTableFiltersDialogComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [FiltersComponent],
-                providers: [{ provide: DIALOG_REF, useValue: dialogRef }]
+                providers: [{ provide: DialogRef, useValue: dialogRef }]
             }).compileComponents();
         })
     );

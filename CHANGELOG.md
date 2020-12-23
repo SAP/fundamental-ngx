@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.1...v0.26.0-rc.2) (2020-12-18)
+
+
+### Bug Fixes
+
+* (Core) Carousel direction defects ([#4080](https://github.com/SAP/fundamental-ngx/issues/4080)) ([17ffa12](https://github.com/SAP/fundamental-ngx/commit/17ffa1226bb066fe59cd0ca08021d407f17f4c8e))
+
+## [0.26.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.0...v0.26.0-rc.1) (2020-12-17)
+
+## [0.26.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.1...v0.26.0-rc.0) (2020-12-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed DIALOG_CONFIG and DIALOG_REF and made DialogConfig and DialogRef classes injectable
+
+### Bug Fixes
+
+* (Core) remove DIALOG_CONFIG and DIALOG_REF and make DialogConfig and DialogRef injectable ([#4108](https://github.com/SAP/fundamental-ngx/issues/4108)) ([356b3bb](https://github.com/SAP/fundamental-ngx/commit/356b3bbc108ac774c089a9b2efd153aa84271cb9))
+
+### [0.25.1](https://github.com/SAP/fundamental-ngx/compare/v0.25.1-rc.0...v0.25.1) (2020-12-17)
+
+### [0.25.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.0...v0.25.1-rc.0) (2020-12-17)
+
+## [0.25.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.70...v0.25.0) (2020-12-17)
+
+## [0.25.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.69...v0.25.0-rc.70) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Platform) Duplicate selection of the dropDown values ([#4008](https://github.com/SAP/fundamental-ngx/issues/4008)) ([fc900d4](https://github.com/SAP/fundamental-ngx/commit/fc900d47cc4059facaeb0ac4224fbbb284dc42b9))
+
+## [0.25.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.68...v0.25.0-rc.69) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Core) Action sheet buttons left position ([#4114](https://github.com/SAP/fundamental-ngx/issues/4114)) ([071d4dd](https://github.com/SAP/fundamental-ngx/commit/071d4dd12bb9cf84daedb0d03c8bc6c1f693cc1e))
+
+## [0.25.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.67...v0.25.0-rc.68) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Platform) add tabChange output event to dynamic page ([#4084](https://github.com/SAP/fundamental-ngx/issues/4084)) ([29cd288](https://github.com/SAP/fundamental-ngx/commit/29cd288e15a5345bde34262ff9aa4a7c580bea35))
+
+## [0.25.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.66...v0.25.0-rc.67) (2020-12-16)
+
+## [0.25.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.65...v0.25.0-rc.66) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Core) add fix for missing styling of selected Tabs ([#4011](https://github.com/SAP/fundamental-ngx/issues/4011)) ([cfeaafa](https://github.com/SAP/fundamental-ngx/commit/cfeaafacaea1246a060f814c0368fad2dd904ebd))
+
+## [0.25.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.64...v0.25.0-rc.65) (2020-12-16)
+
+
+### Bug Fixes
+
+* (Platform) list screen reader and accessibility issues. ([#4106](https://github.com/SAP/fundamental-ngx/issues/4106)) ([99dd486](https://github.com/SAP/fundamental-ngx/commit/99dd4864860a6606ca9f4ee99224cc3723d746cf))
+
+## [0.25.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.63...v0.25.0-rc.64) (2020-12-16)
+
 ## [0.25.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.25.0-rc.62...v0.25.0-rc.63) (2020-12-14)
 
 

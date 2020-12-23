@@ -2,7 +2,8 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core';
-import { OptionItem } from '../../../../domain/data-model';
+
+import { OptionItem } from '../../../domain/data-model';
 
 export interface AutoCompleteEvent {
     term: string;
@@ -33,25 +34,16 @@ export class AutoCompleteDirective {
     @Output()
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
-    private readonly _completeKeys: number[] = [
-        ENTER
-    ];
+    private readonly _completeKeys: number[] = [ENTER];
 
-    private readonly _fillKeys: number[] = [
-        LEFT_ARROW,
-        RIGHT_ARROW
-    ];
+    private readonly _fillKeys: number[] = [LEFT_ARROW, RIGHT_ARROW];
 
-    private readonly _stopKeys: number[] = [
-        BACKSPACE,
-        DELETE,
-        ESCAPE
-    ];
+    private readonly _stopKeys: number[] = [BACKSPACE, DELETE, ESCAPE];
 
     private _oldValue: string;
     private _lastKeyUpEvent: KeyboardEvent;
 
-    constructor(private readonly _elementRef: ElementRef) { }
+    constructor(private readonly _elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('blur')
@@ -148,7 +140,6 @@ export class AutoCompleteDirective {
     }
 
     private _findByStrategyStartsWith(options: OptionItem[], inputText: string): OptionItem | undefined {
-        return options.find(option => option.label.toLocaleLowerCase()
-            .startsWith(inputText.toLocaleLowerCase()));
+        return options.find((option) => option.label.toLocaleLowerCase().startsWith(inputText.toLocaleLowerCase()));
     }
 }

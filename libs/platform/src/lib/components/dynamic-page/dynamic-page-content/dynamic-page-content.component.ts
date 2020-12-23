@@ -2,8 +2,10 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    EventEmitter,
     Input,
     OnInit,
+    Output,
     Renderer2,
     TemplateRef,
     ViewChild,
@@ -13,6 +15,10 @@ import {
 import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../constants';
 import { addClassNameToElement } from '../utils';
 
+/** Dynamic Page tab change event */
+export class DynamicPageTabChangeEvent {
+    constructor(public source: DynamicPageContentComponent, public payload: number) {}
+}
 @Component({
     selector: 'fdp-dynamic-page-content',
     templateUrl: './dynamic-page-content.component.html',
@@ -58,6 +64,9 @@ export class DynamicPageContentComponent implements OnInit {
     get size(): DynamicPageResponsiveSize {
         return this._size;
     }
+
+    @Output()
+    tabChange: EventEmitter<DynamicPageTabChangeEvent> = new EventEmitter<DynamicPageTabChangeEvent>();
 
     /**
      * the underlying content template

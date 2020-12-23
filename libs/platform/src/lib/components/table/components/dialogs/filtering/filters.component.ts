@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { CollectionFilter } from '../../../interfaces';
 import { TableColumnComponent } from '../../table-column/table-column.component';
@@ -84,7 +84,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Current step component to render */
     activeFilterStepView: FiltersViewStep;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef, private _cd: ChangeDetectorRef) {
+    constructor(public dialogRef: DialogRef, private _cd: ChangeDetectorRef) {
         const dialogData: FiltersDialogData = this.dialogRef.data;
         this.initialFilterBy = [...dialogData.filterBy];
         this.filterBy = [...dialogData.filterBy];

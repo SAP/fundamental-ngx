@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogRef, DIALOG_REF } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { GroupingComponent, GroupDialogData } from './grouping.component';
 
@@ -14,7 +14,7 @@ describe('PlatformTableGroupDialogComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [GroupingComponent],
-                providers: [{ provide: DIALOG_REF, useValue: dialogRef }]
+                providers: [{ provide: DialogRef, useValue: dialogRef }]
             }).compileComponents();
         })
     );

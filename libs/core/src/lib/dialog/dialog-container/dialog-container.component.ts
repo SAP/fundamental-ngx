@@ -4,15 +4,14 @@ import {
     Component,
     ComponentFactoryResolver,
     ElementRef,
-    Inject,
     Input,
     TemplateRef,
     Type,
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
-import { DIALOG_REF, DialogRef } from '../utils/dialog-ref.class';
-import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { DialogRef } from '../utils/dialog-ref.class';
+import { DialogConfig } from '../utils/dialog-config.class';
 import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
 import { DynamicComponentContainer } from '../../utils/dynamic-component/dynamic-component-container';
@@ -42,8 +41,8 @@ export class DialogContainerComponent extends DynamicComponentContainer<DialogCo
 
     /** @hidden */
     constructor(
-        @Inject(DIALOG_CONFIG) public dialogConfig: DialogConfig,
-        @Inject(DIALOG_REF) private _dialogRef: DialogRef,
+        public dialogConfig: DialogConfig,
+        private _dialogRef: DialogRef,
         elementRef: ElementRef,
         componentFactoryResolver: ComponentFactoryResolver,
         private _changeDetectorRef: ChangeDetectorRef

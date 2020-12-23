@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
     DataProvider,
     DATA_PROVIDERS,
     FdpFormGroupModule,
+    PlatformButtonModule,
     PlatformListModule,
     PlatformMultiInputModule,
     StandardListItemModule
@@ -26,6 +27,7 @@ import { API_FILES } from '../../../api-files';
 import { PlatformMulitInputDisabledExampleComponent } from './platform-mulit-input-example/platform-mulit-input-disabled.component';
 import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
 import { MULTI_INPUT_MOBILE_CONFIG } from '../../../../documentation/utilities/consts/mobile-mode-configuration-tokens';
+import { PlatformMulitInputReactiveExampleComponent } from './platform-mulit-input-example/platform-mulit-input-reactive-example.component';
 
 const routes: Routes = [
     {
@@ -48,7 +50,8 @@ const routes: Routes = [
         PlatformMulitInputDeclineExampleComponent,
         PlatformMulitInputDeclineExampleComponent,
         PlatformMulitInputDisabledExampleComponent,
-        PlatformMulitInputMobileExampleComponent
+        PlatformMulitInputMobileExampleComponent,
+        PlatformMulitInputReactiveExampleComponent
     ],
     imports: [
         CommonModule,
@@ -61,7 +64,8 @@ const routes: Routes = [
         StandardListItemModule,
         DialogModule,
         InputGroupModule,
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        PlatformButtonModule
     ],
     exports: [RouterModule],
     providers: [

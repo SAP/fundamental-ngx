@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { SortingComponent, SortDialogData } from './sorting.component';
 
@@ -14,7 +14,7 @@ describe('PlatformTableSortDialogComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [SortingComponent],
-                providers: [{ provide: DIALOG_REF, useValue: dialogRef }]
+                providers: [{ provide: DialogRef, useValue: dialogRef }]
             }).compileComponents();
         })
     );

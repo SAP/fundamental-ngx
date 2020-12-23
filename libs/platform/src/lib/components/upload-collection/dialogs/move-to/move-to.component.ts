@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { DIALOG_REF, DialogRef, DialogService, DialogConfig } from '@fundamental-ngx/core';
+import { DialogRef, DialogService, DialogConfig } from '@fundamental-ngx/core';
 import { isObject } from '../../../../utils/lang';
 
 import { UploadCollectionItem, UploadCollectionFolder } from '../../models/upload-collection.models';
@@ -46,7 +46,7 @@ export class MoveToComponent implements OnInit {
     _foldersList: UploadCollectionFolder[] = [];
 
     constructor(
-        @Inject(DIALOG_REF) private readonly dialogRef: DialogRef,
+        private readonly dialogRef: DialogRef,
         private readonly _dialogService: DialogService,
         private readonly _cd: ChangeDetectorRef
     ) {}

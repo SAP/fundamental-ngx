@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { ListDataSource, DataProvider, SelectionChangeEvent } from '@fundamental-ngx/platform';
@@ -30,12 +30,22 @@ export class ListDataProvider extends DataProvider<Address> {
     selector: 'fdp-list-with-selection-example',
     templateUrl: './platform-list-with-selection-example.component.html'
 })
-export class PlatformListWithSelectionExampleComponent {
+export class PlatformListWithSelectionExampleComponent implements AfterViewInit {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());
     _selectedItems: Address[] = [];
+
+    constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
+
+    ngAfterViewInit(): void {
+        const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
+        this._render.setAttribute(toolbar, 'tabindex', '0' );
+        this._render.setStyle(toolbar, 'outline', 'none' );
+    }
 
     _showItemInfo(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
     }
+
+    
 
 }
