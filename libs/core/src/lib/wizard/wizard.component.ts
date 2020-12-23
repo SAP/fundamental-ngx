@@ -411,9 +411,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _showSummary(): void {
-        const summary = this.steps.find(step => {
-            return step.isSummary;
-        });
+        const summary = this.steps.find(step => step.isSummary);
         summary.content.tallContent = true;
         this.contentTemplates = [summary.content.contentTemplate];
     }
