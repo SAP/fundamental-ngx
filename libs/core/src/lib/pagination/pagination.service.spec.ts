@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { PaginationService } from './pagination.service';
 import { Pagination } from './pagination.model';
 
@@ -42,22 +42,6 @@ describe('PaginationService', () => {
         expect(total).toEqual(3);
     });
 
-    it('should default to 10 items per page', () => {
-        const pagination: Pagination = {
-            totalItems: 10
-        };
-        service.validate(pagination);
-        expect(pagination.itemsPerPage).toEqual(service.DEFAULT_ITEMS_PER_PAGE);
-    });
-
-    it('should default to first page', () => {
-        const pagination: Pagination = {
-            totalItems: 10
-        };
-        service.validate(pagination);
-        expect(pagination.currentPage).toEqual(1);
-    });
-
     it('should calc 3 pages', () => {
         const pagination: Pagination = {
             totalItems: 30,
@@ -73,7 +57,7 @@ describe('PaginationService', () => {
             itemsPerPage: 10
         };
         const pages = service.getPages(pagination);
-        expect(pages[3]).toEqual(service.MORE);
+        expect(pages[3]).toEqual(service.buffer);
     });
 
     it('should have two dots sections', () => {
@@ -83,8 +67,8 @@ describe('PaginationService', () => {
             currentPage: 4
         };
         const pages = service.getPages(pagination);
-        expect(pages[1]).toEqual(service.MORE);
-        expect(pages[5]).toEqual(service.MORE);
+        expect(pages[1]).toEqual(service.buffer);
+        expect(pages[5]).toEqual(service.buffer);
     });
 
     it('should not have two dots sections if second to last page is currentPage', () => {
@@ -94,8 +78,8 @@ describe('PaginationService', () => {
             currentPage: 73
         };
         const pages = service.getPages(pagination);
-        expect(pages[1]).toEqual(service.MORE);
-        expect(pages[5]).not.toEqual(service.MORE);
+        expect(pages[1]).toEqual(service.buffer);
+        expect(pages[5]).not.toEqual(service.buffer);
         expect(pages[5]).toEqual(75);
     });
 });
