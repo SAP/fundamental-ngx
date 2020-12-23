@@ -1,6 +1,7 @@
 import { InfoLabelPO } from '../pages/info-label.po';
 import InfoLabelData, { semanticColorsArr } from '../fixtures/appData/info-label-page-contents';
 import {
+    browserIsSafari,
     elementArray,
     getAttributeByName,
     getCSSPropertyByName,
@@ -33,7 +34,7 @@ describe('Info Label component test suite', () => {
 
     it('should check info label with text', () => {
         const labelsArr = elementArray(labelsWithTextArr);
-        if (isBrowser('Safari')) {
+        if (browserIsSafari()) {
             for (let i = 0; i < labelsArr.length; i++) {
                 expect(getText(labelsArr[i].selector)).toEqual(InfoLabelData.safariInfoLabelText);
                 expect(getCSSPropertyByName(labelsWithTextArr, InfoLabelData.backgroundColor, i).value)
@@ -56,7 +57,7 @@ describe('Info Label component test suite', () => {
         const labelsWithIconsArr = elementArray(labelsWithTextAndIconArr);
         const labelIconsArr = elementArray(labelsIconArr);
 
-        if (isBrowser('Safari')) {
+        if (browserIsSafari()) {
             for (let i = 0; i < labelsWithIconsArr.length; i++) {
                 expect(getText(labelsWithTextAndIconArr, i)).toEqual(InfoLabelData.safariIconInfoLabelText);
                 expect(getCSSPropertyByName(labelsWithTextAndIconArr, InfoLabelData.backgroundColor, i).value)
@@ -88,7 +89,7 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check info label with a number or an icon', () => {
-        if (isBrowser('Safari')) {
+        if (browserIsSafari()) {
 
             expect(getText(labelsWithNumberOrIconArr, 1)).toEqual(InfoLabelData.safariLargeNumberLabel);
             expect(getText(labelsWithNumberOrIconArr, 0)).toEqual(InfoLabelData.numberLabel);
@@ -107,7 +108,7 @@ describe('Info Label component test suite', () => {
     it('should check info label with aria label for accessibility', () => {
         const ariaAttrArr = elementArray(accessibilityAttrArr);
 
-        if (isBrowser('Safari')) {
+        if (browserIsSafari()) {
             expect(getAttributeByName(accessibilityLabelsArr, InfoLabelData.ariaLabelAttribute, 0))
                 .not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, InfoLabelData.ariaLabelledByAttribute, 1))

@@ -138,7 +138,7 @@ describe('Input Group should', function() {
         expect(executeScriptBeforeTagAttr(inputGroupPage.withFormInputQuestionMark, 'content')).toBe('"?"');
         expect(executeScriptAfterTagAttr(inputGroupPage.withFormInputAsterixMark, 'content')).toBe('"*"');
         // TODO: Uncomment after merge
-        /*        if (isBrowser('Safari')) {
+        /*        if (browserIsSafari()) {
             expect(getText(inputGroupPage.withFormInputErrorTooltip)).toEqual('Value is required');
             return;
         }
