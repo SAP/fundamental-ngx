@@ -92,8 +92,8 @@ describe('Verify Switch component', function() {
             const defaultSwitchSize = getElementSize(switchPage.defaultSwitchSize);
             const defaultCompactSwitchSize = getElementSize(switchPage.defaultCompactSwitchSize);
 
-            expect(defaultSwitchSize.height > defaultCompactSwitchSize.height).toBe(true);
-            expect(defaultSwitchSize.width > defaultCompactSwitchSize.width).toBe(true);
+            expect(defaultSwitchSize.height).toBeGreaterThan(defaultCompactSwitchSize.height, 'height');
+            expect(defaultSwitchSize.width).toBeGreaterThan(defaultCompactSwitchSize.width, 'width');
         });
     });
 

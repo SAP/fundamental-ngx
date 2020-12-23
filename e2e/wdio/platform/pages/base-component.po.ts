@@ -1,4 +1,4 @@
-import { click, elementArray, scrollIntoView } from '../../driver/wdio';
+import { click, elementArray, scrollIntoView, open } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 
 export class BaseComponentPo {

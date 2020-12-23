@@ -192,7 +192,6 @@ describe('Checkbox test suite', () => {
                 return;
             }
             console.log('Skip for Safari and IE');
-
         });
 
         it('should check tristate checkbox with multiple checkboxes', () => {

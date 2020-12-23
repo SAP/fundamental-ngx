@@ -1,3 +1,4 @@
+import {open } from '../../driver/wdio';
 export class CoreBaseComponentPo {
 
     title = 'header .header';
