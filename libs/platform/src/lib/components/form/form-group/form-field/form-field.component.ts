@@ -205,6 +205,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     hasErrors(): boolean {
+        console.log('hasErrors this.control?.status: ', this.control?.status);
         return this._editable && this.control?.status === 'error';
     }
 
@@ -283,6 +284,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     private validateErrorHandler(): void {
+        console.log('validateErrorHandler i18Strings: ', this.i18Strings);
         if (this._editable && this.control && this.hasValidators() && !this.i18Strings) {
             throw new Error('Validation strings are required for the any provided validations.');
         }
