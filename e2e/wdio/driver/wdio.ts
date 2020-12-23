@@ -21,24 +21,22 @@ export function isBrowser(browserName: string): boolean {
 export function browserIsIEorSafari(): boolean {
     if (browserIsSafari()) {
         return true;
-    } else if (browserIsIE) {
+    } else if (browserIsIE()) {
         return true;
     }
     return false;
 }
 
 export function browserIsFirefox(): boolean {
-    return this.isBrowser('firefox');
-
+    return isBrowser('firefox');
 }
 
 export function browserIsIE(): boolean {
-    return this.isBrowser('internet explorer');
-
+    return isBrowser('internet explorer');
 }
 
 export function browserIsSafari(): boolean {
-    return this.isBrowser('Safari');
+    return isBrowser('Safari');
 }
 
 export function goBack(): void {

@@ -10,7 +10,7 @@ import {
     getElementArrayLength,
     getText,
     isElementDisplayed,
-    refreshPage,
+    refreshPage, scrollIntoView,
     waitElementToBePresentInDOM,
     waitForElDisplayed
 } from '../../driver/wdio';
