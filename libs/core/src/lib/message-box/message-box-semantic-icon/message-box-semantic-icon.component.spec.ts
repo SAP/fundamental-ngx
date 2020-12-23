@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageBoxConfig } from '../utils/message-box-config.class';
-import { MessageBoxCloseIconComponent } from './message-box-close-icon.component';
+import { MessageBoxSemanticIconComponent } from './message-box-semantic-icon.component';
 
-describe('MessageBoxCloseIconComponent', () => {
-    let component: MessageBoxCloseIconComponent;
-    let fixture: ComponentFixture<MessageBoxCloseIconComponent>;
+describe('MessageBoxSemanticIconComponent', () => {
+    let component: MessageBoxSemanticIconComponent;
+    let fixture: ComponentFixture<MessageBoxSemanticIconComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [MessageBoxCloseIconComponent],
+            declarations: [MessageBoxSemanticIconComponent],
             providers: [MessageBoxConfig]
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(MessageBoxCloseIconComponent);
+        fixture = TestBed.createComponent(MessageBoxSemanticIconComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

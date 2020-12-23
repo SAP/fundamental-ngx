@@ -8,6 +8,7 @@ import { MessageBoxRef } from '@fundamental-ngx/core';
                 <ng-template fdTemplate="header">
                     <div fd-bar-left>
                         <fd-bar-element>
+                            <fd-message-box-semantic-icon glyph="activate"></fd-message-box-semantic-icon>
                             <h1 fd-title>Fruit facts</h1>
                         </fd-bar-element>
                     </div>

@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.12...v0.26.0-rc.13) (2020-12-23)
+
+
+### Bug Fixes
+
+* (Platform) two columns wrong align and add value states ([#4138](https://github.com/SAP/fundamental-ngx/issues/4138)) ([5415811](https://github.com/SAP/fundamental-ngx/commit/5415811233899b70e5fac05afd8e07db7df6022b))
+
+## [0.26.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.11...v0.26.0-rc.12) (2020-12-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove [optionalText] from switch component | bring v.0.14.0 of fundamental-styles
+
+* fix: (Core|Platform) bring v.0.14.0 of fundamental-styles
+
+* PR review comments
+
+### Bug Fixes
+
+* (Core|Platform) bring v.0.14.0 of fundamental-styles ([#4116](https://github.com/SAP/fundamental-ngx/issues/4116)) ([848bffe](https://github.com/SAP/fundamental-ngx/commit/848bffe366fab7dcd83dfc6e19d76bfe2008acd5))
+
+## [0.26.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.9...v0.26.0-rc.11) (2020-12-22)
+
+
+### Features
+
+* (Core) add semantic icons to Message box and remove the close button ([#4128](https://github.com/SAP/fundamental-ngx/issues/4128)) ([3a5aa87](https://github.com/SAP/fundamental-ngx/commit/3a5aa870d05cad2ee7f971e4f03f385da1c19d88))
+
+
+### Bug Fixes
+
+* Add null validation for route change in theme service ([#4178](https://github.com/SAP/fundamental-ngx/issues/4178)) ([89f64b6](https://github.com/SAP/fundamental-ngx/commit/89f64b6f8618a491d6b25974f8afc980fb75fd41))
+
+## [0.26.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.9...v0.26.0-rc.10) (2020-12-22)
+
+
+### Features
+
+* (Core) add semantic icons to Message box and remove the close button ([#4128](https://github.com/SAP/fundamental-ngx/issues/4128)) ([3a5aa87](https://github.com/SAP/fundamental-ngx/commit/3a5aa870d05cad2ee7f971e4f03f385da1c19d88))
+
 ## [0.26.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.8...v0.26.0-rc.9) (2020-12-21)
 
 

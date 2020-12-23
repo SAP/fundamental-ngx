@@ -16,11 +16,11 @@ import { MessageBoxDefaultComponent } from './message-box-default/message-box-de
 import { TemplateModule } from '../utils/directives/template/template.module';
 import { InitialFocusModule } from '../utils/directives/initial-focus/initial-focus.module';
 import { MessageBoxFooterButtonComponent } from './message-box-footer-button/message-box-footer-button.component';
-import { MessageBoxCloseIconComponent } from './message-box-close-icon/message-box-close-icon.component';
+import { MessageBoxSemanticIconComponent } from './message-box-semantic-icon/message-box-semantic-icon.component';
 
 const declarations = [
     MessageBoxFooterButtonComponent,
-    MessageBoxCloseIconComponent,
+    MessageBoxSemanticIconComponent,
     MessageBoxContainerComponent,
     MessageBoxDefaultComponent,
     MessageBoxFooterComponent,

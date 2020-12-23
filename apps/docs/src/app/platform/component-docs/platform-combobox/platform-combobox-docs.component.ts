@@ -23,6 +23,9 @@ import * as comboboxTemplatesTs from '!raw-loader!./examples/combobox-templates/
 import * as comboboxFormHtml from '!raw-loader!./examples/combobox-forms/combobox-forms-example.component.html';
 import * as comboboxFormTs from '!raw-loader!./examples/combobox-forms/combobox-forms-example.component';
 
+import * as comboboxStatesHtml from '!raw-loader!./examples/combobox-states/combobox-states-example.component.html';
+import * as comboboxStatesTs from '!raw-loader!./examples/combobox-states/combobox-states-example.component';
+
 @Component({
     selector: 'platform-combobox-docs',
     templateUrl: './platform-combobox-docs.component.html'
@@ -90,5 +93,14 @@ export class PlatformComboboxDocsComponent {
         language: 'typescript',
         fileName: 'combobox-forms-example',
         code: comboboxFormTs
+    }];
+    comboboxStateExample: ExampleFile[] = [{
+        language: 'html',
+        fileName: 'combobox-states-example',
+        code: comboboxStatesHtml
+    }, {
+        language: 'typescript',
+        fileName: 'combobox-states-example',
+        code: comboboxStatesTs
     }];
 }
