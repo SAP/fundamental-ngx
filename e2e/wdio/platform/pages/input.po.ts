@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class InputPo extends BaseComponentPo {
     readonly url = '/input';
@@ -26,6 +26,6 @@ export class InputPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 }

@@ -1,7 +1,29 @@
 import { ListPo } from '../pages/list.po';
-import { checkAttributeValueTrue, checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
+import {
+    checkAttributeValueTrue,
+    checkElArrIsClickable,
+    checkElementText,
+    checkElementTextValue
+} from '../../helper/assertion-helper';
 import ListData from '../fixtures/appData/list-contents';
-import { webDriver } from '../../driver/wdio';
+import {
+    acceptAlert,
+    browserIsFirefox,
+    browserIsIE,
+    browserIsSafari,
+    click,
+    getAlertText,
+    getAttributeByName,
+    getCSSPropertyByName,
+    getCurrentUrl,
+    getElementArrayLength,
+    getText,
+    refreshPage,
+    scrollIntoView,
+    sendKeys,
+    waitForElDisplayed,
+    waitForInvisibilityOf
+} from '../../driver/wdio';
 
 describe('List test suite:', function() {
     const listPg = new ListPo();
@@ -14,12 +36,12 @@ describe('List test suite:', function() {
         it('should do basic checks', () => {
             checkElArrIsClickable(listPg.noBorderListItems);
             checkElementText(listPg.noBorderListItems);
-            expect(webDriver.getAttributeByName(listPg.noBorderCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.noBorderCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
         });
 
         it('should check border', () => {
             checkAttributeValueTrue(listPg.noBorderList, ListData.noBorderAttr);
-            webDriver.getCSSPropertyByName(listPg.noBorderListItems, ListData.borderStyleAttr);
+            getCSSPropertyByName(listPg.noBorderListItems, ListData.borderStyleAttr);
         });
     });
 
@@ -28,7 +50,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.footerListItems);
             checkElementText(listPg.footerListItems);
             checkElementText(listPg.footer);
-            expect(webDriver.getAttributeByName(listPg.footerCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.footerCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
         });
     });
 
@@ -37,7 +59,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.groupHeaderListItems);
             checkElementText(listPg.groupHeaderListItems);
             checkElementText(listPg.groupHeader);
-            expect(webDriver.getAttributeByName(listPg.groupCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.groupCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
         });
     });
 
@@ -53,7 +75,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.counterListItems);
             checkElementText(listPg.counterTitleItems);
             checkElementText(listPg.counterCounterItem);
-            expect(webDriver.getAttributeByName(listPg.counterCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.counterCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
         });
     });
 
@@ -61,12 +83,12 @@ describe('List test suite:', function() {
         it('should do basic checks', () => {
             checkElArrIsClickable(listPg.deletionListItems);
             checkElementText(listPg.deletionListItems);
-            webDriver.waitForElDisplayed(listPg.deletionIcon);
+            waitForElDisplayed(listPg.deletionIcon);
         });
 
         it('should check deletion', () => {
-            webDriver.click(listPg.deletionBtn, 0);
-            webDriver.waitForInvisibilityOf(listPg.deletionListItems, 0);
+            click(listPg.deletionBtn, 0);
+            waitForInvisibilityOf(listPg.deletionListItems, 0);
         });
     });
 
@@ -77,12 +99,12 @@ describe('List test suite:', function() {
         });
 
         it('should check selection', () => {
-            expect(webDriver.getAttributeByName(listPg.multiList, ListData.selectionAttr)).toBe(ListData.multiSelect);
-            expect(webDriver.getText(listPg.multiToolbar)).toBe('0 : Items selected');
-            webDriver.click(listPg.multiCheckbox, 0);
-            expect(webDriver.getText(listPg.multiToolbar)).toBe('1 : Items selected');
-            webDriver.click(listPg.multiCheckbox, 1);
-            expect(webDriver.getText(listPg.multiToolbar)).toBe('2 : Items selected');
+            expect(getAttributeByName(listPg.multiList, ListData.selectionAttr)).toBe(ListData.multiSelect);
+            expect(getText(listPg.multiToolbar)).toBe('0 : Items selected');
+            click(listPg.multiCheckbox, 0);
+            expect(getText(listPg.multiToolbar)).toBe('1 : Items selected');
+            click(listPg.multiCheckbox, 1);
+            expect(getText(listPg.multiToolbar)).toBe('2 : Items selected');
         });
     });
 
@@ -93,12 +115,12 @@ describe('List test suite:', function() {
         });
 
         it('should check selection', () => {
-            const listItemId = webDriver.getAttributeByName(listPg.singleListItems, 'id');
+            const listItemId = getAttributeByName(listPg.singleListItems, 'id');
 
-            expect(webDriver.getAttributeByName(listPg.singleList, ListData.altSelectionAttr)).toBe(ListData.singleSelect);
-            expect(webDriver.getText(listPg.singleToolbar)).toContain(': selected');
-            webDriver.click(listPg.singleRadioBtn, 0);
-            expect(webDriver.getText(listPg.singleToolbar)).toContain(listItemId + ' : selected');
+            expect(getAttributeByName(listPg.singleList, ListData.altSelectionAttr)).toBe(ListData.singleSelect);
+            expect(getText(listPg.singleToolbar)).toContain(': selected');
+            click(listPg.singleRadioBtn, 0);
+            expect(getText(listPg.singleToolbar)).toContain(listItemId + ' : selected');
         });
     });
 
@@ -110,8 +132,8 @@ describe('List test suite:', function() {
         });
 
         it('should check navigation', () => {
-            webDriver.click(listPg.navListLink, 0);
-            const newUrl = webDriver.getCurrentUrl();
+            click(listPg.navListLink, 0);
+            const newUrl = getCurrentUrl();
             expect(newUrl).toContain(ListData.navUrl);
             listPg.open();
         });
@@ -123,19 +145,19 @@ describe('List test suite:', function() {
             checkElementText(listPg.vScrollListItems);
             checkAttributeValueTrue(listPg.vScrollList, ListData.scrollLoadAttr);
             checkAttributeValueTrue(listPg.vScrollList, ListData.lazyLoadAttr);
-            webDriver.refreshPage();
+            refreshPage();
         });
 
         it('should check scroll', () => {
             // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-            if (!webDriver.browserIsFirefox()) {
-                webDriver.scrollIntoView(listPg.vScrollListItems, 0);
-                const itemsStartCount = webDriver.getElementArrayLength(listPg.vScrollListItems);
-                webDriver.click(listPg.vScrollListItems, 0);
-                webDriver.sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
-                expect(webDriver.waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
-                webDriver.waitForInvisibilityOf(listPg.vScrollLoadIcon);
-                const itemsEndCount = webDriver.getElementArrayLength(listPg.vScrollListItems);
+            if (!browserIsFirefox()) {
+                scrollIntoView(listPg.vScrollListItems, 0);
+                const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
+                click(listPg.vScrollListItems, 0);
+                sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
+                expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
+                waitForInvisibilityOf(listPg.vScrollLoadIcon);
+                const itemsEndCount = getElementArrayLength(listPg.vScrollListItems);
                 expect(itemsStartCount).not.toEqual(itemsEndCount);
                 return;
             }
@@ -151,10 +173,10 @@ describe('List test suite:', function() {
         });
 
         it('should check loading on click', () => {
-            const itemsStartCount = webDriver.getElementArrayLength(listPg.loadListItems);
-            webDriver.click(listPg.loadShowMoreBtn);
-            webDriver.waitForInvisibilityOf(listPg.loadIcon);
-            const itemsEndCount = webDriver.getElementArrayLength(listPg.loadListItems);
+            const itemsStartCount = getElementArrayLength(listPg.loadListItems);
+            click(listPg.loadShowMoreBtn);
+            waitForInvisibilityOf(listPg.loadIcon);
+            const itemsEndCount = getElementArrayLength(listPg.loadListItems);
             expect(itemsStartCount).not.toEqual(itemsEndCount);
         });
     });
@@ -165,24 +187,24 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.btnDeleteBtn);
             checkElArrIsClickable(listPg.btnEditBtn);
             checkElementText(listPg.btnListItems);
-            expect(webDriver.getAttributeByName(listPg.btnList, ListData.listTypeAttr)).toBe('detail');
-            expect(webDriver.getAttributeByName(listPg.btnList, ListData.selectionAttr)).toBe('delete');
+            expect(getAttributeByName(listPg.btnList, ListData.listTypeAttr)).toBe('detail');
+            expect(getAttributeByName(listPg.btnList, ListData.selectionAttr)).toBe('delete');
         });
 
         it('should check delete action', () => {
-            webDriver.click(listPg.btnDeleteBtn, 0);
-            if (!webDriver.browserIsIE()) {
-                expect(webDriver.getAlertText()).toContain('Delete row');
+            click(listPg.btnDeleteBtn, 0);
+            if (!browserIsIE()) {
+                expect(getAlertText()).toContain('Delete row');
             }
-            webDriver.acceptAlert();
+            acceptAlert();
         });
 
         it('should check edit action', () => {
-            webDriver.click(listPg.btnEditBtn, 0);
-            if (!webDriver.browserIsIE()) {
-                expect(webDriver.getAlertText()).toContain('Edit row');
+            click(listPg.btnEditBtn, 0);
+            if (!browserIsIE()) {
+                expect(getAlertText()).toContain('Edit row');
             }
-            webDriver.acceptAlert();
+            acceptAlert();
         });
     });
 
@@ -206,14 +228,14 @@ describe('List test suite:', function() {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(listPg.unreadListItems);
             checkElementText(listPg.unreadListItems);
-            if (webDriver.browserIsSafari()) {
-                expect(webDriver.getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 0).value).toBe('normal');
-                expect(webDriver.getAttributeByName(listPg.unreadListAttr, ListData.itemUnreadStatus, 1)).toBe('true');
-                expect(webDriver.getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 1).value).toBe('bold');
+            if (browserIsSafari()) {
+                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 0).value).toBe('normal');
+                expect(getAttributeByName(listPg.unreadListAttr, ListData.itemUnreadStatus, 1)).toBe('true');
+                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 1).value).toBe('bold');
             } else {
-                expect(webDriver.getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 0).value).toBe(400);
-                expect(webDriver.getAttributeByName(listPg.unreadListAttr, ListData.itemUnreadStatus, 1)).toBe('true');
-                expect(webDriver.getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 1).value).toBe(700);
+                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 0).value).toBe(400);
+                expect(getAttributeByName(listPg.unreadListAttr, ListData.itemUnreadStatus, 1)).toBe('true');
+                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 1).value).toBe(700);
             }
         });
     });

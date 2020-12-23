@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { clearValue, sendKeys, setValue, waitForElDisplayed } from '../../driver/wdio';
 
 export class StepInputPo extends BaseComponentPo {
     private url = '/step-input';
@@ -13,24 +13,24 @@ export class StepInputPo extends BaseComponentPo {
     allButtonDecrement = '//button[@title="Decrement" and not(ancestor::div[contains(@class, "is-readonly")])]';
     activeInput = '//input[contains(@class, "fd-step-input__input") and not(ancestor::div[contains(@class, "is-disabled")]) and not (ancestor::div[contains(@class, "is-readonly")])]';
     reactiveFormInput = 'input#qty';
-    formInput = 'input[name=qty]'
-    inputInTemplateDriverForm = 'input#number'
+    formInput = 'input[name=qty]';
+    inputInTemplateDriverForm = 'input#number';
     errorMessage = '.is-error';
     minMaxButtonDecrement = '[ng-reflect-name="minMaxLimits"] button[title="Decrement"]';
     minMaxButtonIncrement = '[ng-reflect-name="minMaxLimits"] button[title="Increment"]';
     inputWithoutForm = '//input[contains(@class, "fd-step-input__input") and not (ancestor::div[contains(@class, "is-disabled")]) and not (@name="qty")]';
-    quantityText = '.fd-page__content + pre'
-    formStatusText = '.fd-page__content + pre ~ pre'
+    quantityText = '.fd-page__content + pre';
+    formStatusText = '.fd-page__content + pre ~ pre';
 
-    fillInput(input: string , value: string): void {
-        webDriver.clearValue(input);
-        webDriver.setValue(input, value);
-        webDriver.sendKeys(['Enter']);
+    fillInput(input: string, value: string): void {
+        clearValue(input);
+        setValue(input, value);
+        sendKeys(['Enter']);
     }
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 }
 

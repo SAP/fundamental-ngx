@@ -14,5 +14,5 @@ export default {
         'Email'
     ],
     inputWithFormLabel: 'Quantity',
-    inputWithFormPlaceholder: 'Things quantity',
+    inputWithFormPlaceholder: 'Things quantity'
 };

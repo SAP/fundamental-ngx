@@ -1,5 +1,4 @@
-export default
-{
+export default {
     labelsArray: [
         'Default Input Field',
         'Text Input Field',
@@ -19,8 +18,8 @@ export default
         'Field placeholder text',
         'Field placeholder text',
         'Field placeholder text',
-        'Enter the sport name',
+        'Enter the sport name'
     ],
     errorText: 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc',
-    errorBorderColor: '187,0,0',
-}
+    errorBorderColor: '187,0,0'
+};

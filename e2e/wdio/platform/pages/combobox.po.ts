@@ -1,6 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
-import {checkTextValueContain, checkNotFocused} from '../../helper/assertion-helper';
+import { click, pause, scrollIntoView, sendKeys, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ComboBoxPo extends BaseComponentPo {
     private url = '/combobox';
@@ -43,23 +42,23 @@ export class ComboBoxPo extends BaseComponentPo {
     };
 
     expandDropdown(type: string): void {
-        webDriver.sendKeys(['Escape'])
-        webDriver.scrollIntoView(this.comboBoxButtons(type));
-        webDriver.pause(200);
-        webDriver.click(this.comboBoxButtons(type));
-        webDriver.pause(500);
-        webDriver.waitForPresent(this.comboBoxExpandedButtons(type));
-        webDriver.waitForPresent(this.comboBoxDropdownExpanded);
+        sendKeys(['Escape']);
+        scrollIntoView(this.comboBoxButtons(type));
+        pause(200);
+        click(this.comboBoxButtons(type));
+        pause(500);
+        waitForPresent(this.comboBoxExpandedButtons(type));
+        waitForPresent(this.comboBoxDropdownExpanded);
     }
 
     selectOption(type: string, option: string): void {
-        webDriver.scrollIntoView(this.dropDownOption(option));
-        webDriver.click(this.dropDownOption(option));
-        webDriver.waitForDisplayed(this.filledComboBoxInputs(type, option));
+        scrollIntoView(this.dropDownOption(option));
+        click(this.dropDownOption(option));
+        waitForElDisplayed(this.filledComboBoxInputs(type, option));
     }
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 }

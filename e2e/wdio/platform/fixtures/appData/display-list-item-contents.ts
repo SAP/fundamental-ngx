@@ -6,5 +6,5 @@ export default {
     ],
     compactAttr: 'ng-reflect-compact',
     borderAttr: 'ng-reflect-no-border',
-    navUrl: '/platform/home',
-}
+    navUrl: '/platform/home'
+};
