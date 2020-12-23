@@ -24,8 +24,8 @@ export interface SortDialogResultData {
 const NOT_SELECTED_OPTION_VALUE = null;
 
 class SortRule {
-    get isEmpty(): boolean {
-        return this.columnKey === NOT_SELECTED_OPTION_VALUE || this.direction === NOT_SELECTED_OPTION_VALUE;
+    get isValid(): boolean {
+        return this.columnKey !== NOT_SELECTED_OPTION_VALUE && this.direction !== NOT_SELECTED_OPTION_VALUE;
     }
 
     constructor(
@@ -56,7 +56,7 @@ export class P13SortingComponent implements Resettable {
     readonly SORT_DIRECTION = SortDirection;
 
     /** Initial sortBy collection */
-    initialCollectionSort: CollectionSort[];
+    readonly initialCollectionSort: CollectionSort[];
 
     /** Sort rules to render */
     rules: SortRule[] = [];
@@ -84,7 +84,7 @@ export class P13SortingComponent implements Resettable {
 
     /** Confirm changes and close dialog */
     confirm(): void {
-        const collectionSort = this._getCollectionSortFromSortRules(this._getUniqueSortRules(this.rules));
+        const collectionSort = this._getCollectionSortFromSortRules(this._getUniqueRules(this.rules));
         const result: SortDialogResultData = { collectionSort: collectionSort };
         this.dialogRef.close(result);
     }
@@ -125,7 +125,7 @@ export class P13SortingComponent implements Resettable {
 
     /** @hidden */
     private _initiateRules(): void {
-        this.rules = this._createSortRules(this.initialCollectionSort);
+        this.rules = this._createRules(this.initialCollectionSort);
 
         // Keep at least one item in the list
         if (this.rules.length === 0) {
@@ -134,7 +134,7 @@ export class P13SortingComponent implements Resettable {
     }
 
     /** @hidden */
-    private _createSortRules(collectionSort: CollectionSort[] = []): SortRule[] {
+    private _createRules(collectionSort: CollectionSort[] = []): SortRule[] {
         return collectionSort.map(({ field, direction }): SortRule => new SortRule(field, direction));
     }
 
@@ -149,7 +149,7 @@ export class P13SortingComponent implements Resettable {
     }
 
     /** @hidden */
-    private _getUniqueSortRules(rules: SortRule[]): SortRule[] {
+    private _getUniqueRules(rules: SortRule[]): SortRule[] {
         return Array.from(
             rules
                 .reduce((map, rule) => {
@@ -163,5 +163,5 @@ export class P13SortingComponent implements Resettable {
     }
 
     /** @hidden */
-    private _isRuleValid = (rule: SortRule): boolean => !rule?.isEmpty;
+    private _isRuleValid = (rule: SortRule): boolean => rule?.isValid;
 }

@@ -14,7 +14,7 @@ import { skip } from 'rxjs/operators';
 
 import { FILTER_STRATEGY, FilterableColumnDataType } from '../../../enums';
 
-import { FilterRule } from './filtering.component';
+import { FilterRule } from './filtering.model';
 
 @Component({
     selector: 'fdp-table-filter-rule',

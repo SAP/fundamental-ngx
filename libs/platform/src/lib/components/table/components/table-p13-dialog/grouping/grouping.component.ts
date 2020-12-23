@@ -24,8 +24,8 @@ export interface GroupDialogResultData {
 const NOT_SELECTED_OPTION_VALUE = null;
 
 class GroupRule {
-    get isEmpty(): boolean {
-        return this.columnKey === NOT_SELECTED_OPTION_VALUE;
+    get isValid(): boolean {
+        return this.columnKey !== NOT_SELECTED_OPTION_VALUE;
     }
 
     constructor(
@@ -56,7 +56,7 @@ export class P13GroupingComponent implements Resettable {
     readonly SORT_DIRECTION = SortDirection;
 
     /** Initial collection to reset */
-    initialCollectionGroup: CollectionGroup[];
+    readonly initialCollectionGroup: CollectionGroup[];
 
     /** Group rules to render */
     rules: GroupRule[] = [];
@@ -164,5 +164,5 @@ export class P13GroupingComponent implements Resettable {
     }
 
     /** @hidden */
-    private _isRuleValid = (rule: GroupRule): boolean => !rule?.isEmpty;
+    private _isRuleValid = (rule: GroupRule): boolean => rule?.isValid;
 }

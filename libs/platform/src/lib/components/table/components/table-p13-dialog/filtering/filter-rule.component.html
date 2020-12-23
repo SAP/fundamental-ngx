@@ -96,6 +96,7 @@
                 </div>
             </ng-container>
 
+            <!-- Rule Control Based on Data Type -->
             <ng-template
                 #ruleInputTemplate
                 let-valueKey="valueKey"
@@ -111,6 +112,35 @@
                             [(ngModel)]="rule[valueKey]"
                             (ngModelChange)="_onModelChange()"
                         ></fd-date-picker>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="DATA_TYPE.BOOLEAN">
+                        <fd-select
+                            class="filter-row__select"
+                            [compact]="true"
+                            [name]="valueKey"
+                            [(ngModel)]="rule[valueKey]"
+                            (ngModelChange)="_onModelChange()"
+                            required
+                        >
+                            <fd-option
+                                [value]="undefined"
+                                i18n="@@platformTableP13FilterBooleanOptionNotDefined"
+                            >
+                                &nbsp;
+                            </fd-option>
+                            <fd-option
+                                [value]="true"
+                                i18n="@@platformTableP13FilterBooleanOptionTrue"
+                            >
+                                Yes
+                            </fd-option>
+                            <fd-option
+                                [value]="false"
+                                i18n="@@platformTableP13FilterBooleanOptionFalse"
+                            >
+                                No
+                            </fd-option>
+                        </fd-select>
                     </ng-container>
                     <ng-container *ngSwitchDefault>
                         <input

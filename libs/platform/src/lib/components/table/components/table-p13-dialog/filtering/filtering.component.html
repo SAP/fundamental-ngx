@@ -1,4 +1,4 @@
-<fd-dialog class="fdp-table-p13-sorting-dialog">
+<fd-dialog class="fdp-table-p13-filtering-dialog">
     <fd-dialog-header>
         <ng-template fdTemplate="header">
             <div fd-bar-left>
@@ -21,16 +21,16 @@
         <!-- Include Rules -->
         <fd-panel
             [compact]="true"
-            [expanded]="includePanelExpanded"
+            [expanded]="_includePanelExpanded"
         >
             <div
                 fd-panel-title
                 i18n="@@platformTableP13FilterDialogIncludePanelTitle"
             >
-                Include <ng-container *ngIf="validIncludeRulesCount > 0">({{ validIncludeRulesCount }})</ng-container>
+                Include <ng-container *ngIf="_validIncludeRulesCount > 0">({{ _validIncludeRulesCount }})</ng-container>
             </div>
             <div fd-panel-content>
-                <fd-layout-grid *ngFor="let rule of includeRules; let i = index">
+                <fd-layout-grid *ngFor="let rule of _includeRules; let i = index">
                     <fdp-table-filter-rule
                         fdLayoutGridCol="10"
                         [rule]="rule"
@@ -47,11 +47,11 @@
                             i18n-aria-label="@@platformTableP13FilterDialogRemoveFilterLabel"
                             aria-label="Remove Filter"
                             title="Remove Filter"
-                            (click)="_removeRule(rule, includeRules)"
+                            (click)="_removeRule(rule, _includeRules)"
                         ></button>
 
                         <button
-                            *ngIf="includeRules.length - 1 == i"
+                            *ngIf="_includeRules.length - 1 == i"
                             fd-button
                             fdType="transparent"
                             glyph="add"
@@ -59,7 +59,7 @@
                             i18n-aria-label="@@platformTableP13FilterDialogAddFilterLabel"
                             aria-label="Add Filter"
                             title="Add Filter"
-                            (click)="_addNewRule(includeRules)"
+                            (click)="_addNewRule(_includeRules)"
                         ></button>
                     </div>
                 </fd-layout-grid>
@@ -68,16 +68,16 @@
         <!-- Exclude Rules -->
         <fd-panel
             [compact]="true"
-            [expanded]="excludePanelExpanded"
+            [expanded]="_excludePanelExpanded"
         >
             <div
                 fd-panel-title
                 i18n="@@platformTableP13FilterDialogExcludePanelTitle"
             >
-                Exclude <ng-container *ngIf="validExcludeRulesCount > 0">({{ validExcludeRulesCount }})</ng-container>
+                Exclude <ng-container *ngIf="_validExcludeRulesCount > 0">({{ _validExcludeRulesCount }})</ng-container>
             </div>
             <div fd-panel-content>
-                <fd-layout-grid *ngFor="let rule of excludeRules; let i = index">
+                <fd-layout-grid *ngFor="let rule of _excludeRules; let i = index">
                     <fdp-table-filter-rule
                         fdLayoutGridCol="10"
                         [rule]="rule"
@@ -94,11 +94,11 @@
                             i18n-aria-label="@@platformTableP13FilterDialogRemoveFilterLabel"
                             aria-label="Remove Filter"
                             title="Remove Filter"
-                            (click)="_removeRule(rule, excludeRules)"
+                            (click)="_removeRule(rule, _excludeRules)"
                         ></button>
 
                         <button
-                            *ngIf="excludeRules.length - 1 == i"
+                            *ngIf="_excludeRules.length - 1 == i"
                             fd-button
                             fdType="transparent"
                             glyph="add"
@@ -106,7 +106,7 @@
                             i18n-aria-label="@@platformTableP13FilterDialogAddFilterLabel"
                             aria-label="Add Filter"
                             title="Add Filter"
-                            (click)="_addNewRule(excludeRules)"
+                            (click)="_addNewRule(_excludeRules)"
                         ></button>
                     </div>
                 </fd-layout-grid>
