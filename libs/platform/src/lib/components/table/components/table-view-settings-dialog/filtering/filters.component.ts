@@ -4,7 +4,6 @@ import {
     ChangeDetectorRef,
     Component,
     forwardRef,
-    Inject,
     ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -66,11 +65,11 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** 
+    /**
      * Current FiltersViewStep component to render.
-     * The fd-dialog component relies on named projected content. 
+     * The fd-dialog component relies on named projected content.
      * It means we must define all projected dialog options in the same view withing fd-dialog.
-     * In order to keep filters steps as separate components 
+     * In order to keep filters steps as separate components
      * and do not break dialog content we are using this ViewChild hook
      * keeping reference to the conditionally rendered active step.
      * Each "FilterStepView" has template refs for dialog.title and dialog.body template
@@ -91,7 +90,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
         this.viewSettingsFilters = dialogData.viewSettingsFilters;
         this.columns = dialogData.columns;
     }
-    
+
     /** Need it to keep activeFilterStepView rendering up to date */
     ngAfterViewInit(): void {
         this._cd.detectChanges();

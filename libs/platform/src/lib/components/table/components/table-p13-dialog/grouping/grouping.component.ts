@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { CollectionGroup } from '../../../interfaces';
 import { SortDirection } from '../../../enums';
@@ -61,7 +61,7 @@ export class P13GroupingComponent implements Resettable {
     /** Group rules to render */
     rules: GroupRule[] = [];
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+    constructor(private dialogRef: DialogRef) {
         const { columns, collectionGroup }: GroupDialogData = this.dialogRef.data;
 
         this.initialCollectionGroup = [...collectionGroup];

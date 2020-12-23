@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { CollectionFilter } from '../../../interfaces';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
@@ -45,7 +45,7 @@ export class P13FilteringComponent implements Resettable {
     /** Panel opened/closed flag  */
     _excludePanelExpanded = false;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+    constructor(private dialogRef: DialogRef) {
         const { columns, collectionFilter }: FilterDialogData = this.dialogRef.data;
 
         this.initialCollectionFilter = [...collectionFilter];
