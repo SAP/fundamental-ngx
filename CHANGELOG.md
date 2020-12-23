@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.12...v0.26.0-rc.13) (2020-12-23)
+
+
+### Bug Fixes
+
+* (Platform) two columns wrong align and add value states ([#4138](https://github.com/SAP/fundamental-ngx/issues/4138)) ([5415811](https://github.com/SAP/fundamental-ngx/commit/5415811233899b70e5fac05afd8e07db7df6022b))
+
 ## [0.26.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.11...v0.26.0-rc.12) (2020-12-23)
 
 
