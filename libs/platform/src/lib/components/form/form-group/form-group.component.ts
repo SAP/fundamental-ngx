@@ -23,24 +23,27 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    ElementRef,
     EventEmitter,
+    forwardRef,
     Input,
     OnDestroy,
     OnInit,
     Optional,
     Output,
-    TemplateRef,
-    ViewEncapsulation,
     Provider,
-    forwardRef
+    TemplateRef,
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, FormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { FormField } from '../form-field';
 import { FormGroupContainer } from '../form-group';
-import { LabelLayout, HintPlacement, FormZone } from '../form-options';
+import { FormZone, HintPlacement, LabelLayout } from '../form-options';
+import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -216,12 +219,20 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     @Output()
     onSubmit: EventEmitter<any> = new EventEmitter<any>();
 
+    @ViewChildren(FormFieldGroupComponent) formFieldGroup;
+
     /**
      * Cached fields so we don't have recalculate them every time
      */
     mZone: Array<GroupField>;
     tZone: Array<GroupField>;
     bZone: Array<GroupField>;
+
+    modifiedColumns: any = [];
+    columnFields: any = [];
+    groupsF: any;
+    groupC: any;
+    xlCol: string;
 
     /**
      *  Keep track of added form fields children.
@@ -233,7 +244,8 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *  We want to make sure that we don't include content and then try to somehow position it as it
      *  would lead to the UI where user can see elementing moving as you try to position it.
      */
-    protected formFieldChildren: FormField[] = [];
+    protected formFieldChildren: FormField[] | any = [];
+    protected formFieldGroupChildren: any = [];
 
     private _useForm = false;
     private _multiLayout = false;
@@ -256,6 +268,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.updateFieldByZone();
         this.updateFormFieldsProperties();
         this.updateFieldByColumn();
+
         this._cd.markForCheck();
     }
 
@@ -298,27 +311,63 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         const xl = this.columnLayoutType.split('-');
         const xlColumnsNumber = parseInt(xl[0].slice(2, xl.length), 10);
 
-        const mergedFields = [];
+        this.xlCol = `fd-col-xl--${ 12 / xlColumnsNumber }`;
 
-        this.formFieldChildren.forEach((item, index) => {
-            if (xlColumnsNumber && item.column) {
-                const field = new GroupField(
-                    item.zone,
-                    'test' + index,
-                    item.column,
-                    item.renderer,
-                    xlColumnsNumber
-                );
+        const modifiedColumns: { [key: string]: any } = { };
+        let rowNumber = 0;
+        let col = {}
 
-                this._setUserSpecifiedLayout(field);
+        for (const field of this.formFieldChildren) {
+            if (!Boolean(field instanceof FormFieldGroupComponent)) {
+                const f = this._getGroupField(field);
+                this._setUserSpecifiedLayout(f);
 
-                mergedFields.push(field);
+                if (!col[field.column]) {
+                    col[field.column] = [f];
+                } else {
+                    col[field.column].push(f);
+                }
+
+            } else {
+                const groupCol = {};
+                modifiedColumns[rowNumber] = col;
+                col = {};
+                rowNumber++;
+                const g = field.fields.map(f => {
+                    const _f = this._getGroupField(f);
+                    this._setUserSpecifiedLayout(_f);
+
+                    return _f;
+                });
+
+                g.forEach(_g => {
+                    if (!groupCol[_g.column]) {
+                        groupCol[_g.column] = [_g];
+                    } else {
+                        groupCol[_g.column].push(_g);
+                    }
+                });
+
+                modifiedColumns[rowNumber] = { label: field.label, g: groupCol};
+                rowNumber++;
             }
-        });
+        }
+        modifiedColumns[rowNumber] = col;
 
+        this.modifiedColumns = modifiedColumns;
+    }
 
-        console.log('merged new', mergedFields);
-        this.mZone = mergedFields;
+    _getGroupField(field: any): any {
+        return new GroupField(
+            field.zone,
+            field.name,
+            field.rank,
+            field.renderer,
+            field.columns,
+            field.isFluid,
+            field.styleClass,
+            field.column,
+        );
     }
 
     /**
@@ -362,7 +411,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
         this.evenFields(zLeft, zRight);
         this.mZone = this.calculateMainZone(zLeft, zRight);
-        console.log(this.mZone);
     }
 
     /** @hidden */
@@ -523,6 +571,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             const mdColumns = 12 / mdColumnsNumber;
             const xlColumns = 12 / xlColumnsNumber;
 
+
             // for `lg` single-column layout, Styles does not use any class, and providing `fd-col-lg--12` has unintended side-effects
             // therefore, we remove the lg class for single-column layout
             if (lgColumns === 12) {
@@ -543,6 +592,6 @@ export class GroupField {
         public columns: number = 6,
         public isFluid: boolean = false,
         public styleClass?: string,
-        public column?: number
+        public column?: number,
     ) {}
 }

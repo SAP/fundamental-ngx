@@ -14,7 +14,7 @@ import {
     ViewChild,
     Optional,
     Provider,
-    forwardRef
+    forwardRef, ViewContainerRef, ElementRef
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
@@ -151,6 +151,8 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      */
     control: FormFieldControl<any>;
 
+    isGroupField: boolean;
+
     /**
      * @hidden
      * Optional FormControl
@@ -166,7 +168,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, @Optional() readonly formGroupContainer: FormGroupContainer) {
+    constructor(
+        private _cd: ChangeDetectorRef,
+        // private _viewContainerRef: ViewContainerRef,
+        private _elementRef: ElementRef,
+        @Optional() readonly formGroupContainer: FormGroupContainer) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
     }
@@ -298,9 +304,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Add FormField to FormGroup
      */
     private addToFormGroup(): void {
-        if (!this.formGroupContainer) {
+        if (!this.formGroupContainer || !Boolean(this._elementRef.nativeElement.parentElement.attributes.mainTitle)) {
             return;
         }
+
         this.formGroupContainer.addFormField(this);
     }
 

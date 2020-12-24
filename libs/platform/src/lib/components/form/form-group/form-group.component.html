@@ -7,7 +7,20 @@
     <ng-container *ngTemplateOutlet="zone; context: { $implicit: tZone, title: topTitle }"> </ng-container>
 
     <!--  Render MAIN Zone in which we usually support LEFT and RIGHT column -->
-    <ng-container *ngTemplateOutlet="zone; context: { $implicit: mZone, title: mainTitle, multiColumn: true }">
+<!--    <ng-container *ngTemplateOutlet="zone; context: { $implicit: mZone, title: mainTitle, multiColumn: true }">-->
+<!--    </ng-container>-->
+
+<!--    <ng-container *ngTemplateOutlet="columns; context: { $implicit: columnFields, title: mainTitle, multiColumn: true }">-->
+<!--    </ng-container>-->
+
+<!--    <ng-container *ngTemplateOutlet="groups; context: { $implicit: groupTitle, title: mainTitle, multiColumn: true }">-->
+<!--    </ng-container>-->
+
+<!--    <ng-container *ngTemplateOutlet="anGroup; context: { $implicit: groupsF, title: mainTitle, groupTitle: 'Title', multiColumn: true }">-->
+<!--    </ng-container>-->
+
+
+    <ng-container *ngTemplateOutlet="renderColumns; context: { $implicit: modifiedColumns, title: mainTitle, multiColumn: true }">
     </ng-container>
 
     <!--  Render BOTTOM Zone-->
@@ -31,20 +44,114 @@
                 class="fd-col fd-col--wrap"
                 [style.order]="f.rank"
             >
-<!--                <p>{{ f.styleClass }}</p>-->
-<!--                <p>{{ f.rank }}</p>-->
-<!--                <p>{{ f.columns }}</p>-->
                 <ng-container *ngTemplateOutlet="f?.renderer"></ng-container>
-            </div>
-        </div>
-
-        <div class="fd-row">
-            <div class="fd-col fd-col--wrap">
-                <textarea>Yep</textarea>
             </div>
         </div>
     </div>
 </ng-template>
+
+<ng-template #columns let-multiColumn="multiColumn" let-title="title">
+    <div *ngIf="title" class="fd-form-header">
+        <span class="fd-form-header__text">{{ title }}</span>
+    </div>
+    <div
+        *ngIf="columnFields"
+        [formGroup]="formGroup"
+        class="fd-container fd-form-layout-grid-container"
+    >
+        <ng-container *ngFor="let column of columnFields | keyvalue">
+            <div [ngClass]="xlCol" [style.order]="column.key">
+                <ng-container *ngFor="let f of column.value;">
+                    <div class="fd-col fd-col--wrap" *ngIf="!f.isGroup">
+                        <ng-container *ngTemplateOutlet="f?.renderer"></ng-container>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #anGroup let-groups let-groupTitle>
+    <div class="fd-row" *ngFor="let group of groupC">
+        <div class="fd-form-group__header">
+            <h1 class="fd-form-group__header-text">{{ group.label }}</h1>
+        </div>
+        <div
+            *ngIf="columnFields"
+            [formGroup]="formGroup"
+            class="fd-container fd-form-layout-grid-container"
+        >
+            <ng-container *ngFor="let column of groups | keyvalue">
+                <div [ngClass]="xlCol" [style.order]="column.key">
+                    <ng-container *ngFor="let f of column.value;">
+                        <div class="fd-col fd-col--wrap">
+                            <ng-container *ngTemplateOutlet="f?.renderer"></ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #renderColumns let-rows let-title="title">
+    <div *ngIf="title" class="fd-form-header">
+        <span class="fd-form-header__text">{{ title }}</span>
+    </div>
+    <div *ngFor="let row of rows | keyvalue">
+        <div class="fd-form-group__header" *ngIf="row.value.label">
+            <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
+        </div>
+
+        <div class="fd-container fd-form-layout-grid-container">
+                <ng-container *ngFor="let r of (row.value.label ? row.value.g : row.value) | keyvalue">
+                    <div [ngClass]="xlCol" [style.order]="r.key">
+                        <ng-container *ngFor="let c of r.value">
+                            <div
+                                class="fd-col fd-col--wrap"
+                                [style.order]="c.rank"
+                            >
+                                <ng-container *ngTemplateOutlet="c?.renderer"></ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+        </div>
+    </div>
+</ng-template>
+
+<!--<ng-template #group let-row *ngIf="row.value.label">-->
+<!--    <div class="fd-form-group__header" *ngIf="row.value.label">-->
+<!--        <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>-->
+<!--    </div>-->
+<!--</ng-template>-->
+
+<!--<ng-template #renderColumns let-rows>-->
+<!--    <div class="fd-row">-->
+<!--        <div class="fd-container fd-form-layout-grid-container">-->
+<!--            <ng-container *ngFor="let row of rows; let index = index">-->
+<!--                <ng-container *ngFor="let field of row">-->
+<!--                    <div [ngClass]="xlCol" [style.order]="field.column">-->
+<!--                        <div class="fd-col fd-col&#45;&#45;wrap">-->
+<!--                            <ng-container *ngTemplateOutlet="field?.renderer"></ng-container>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </ng-container>-->
+<!--            </ng-container>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</ng-template>-->
+
+<!--<ng-template #groups let-groups>-->
+<!--    <div *ngFor="let group of groups">-->
+<!--        <ng-container *ngTemplateOutlet="group?.renderer"></ng-container>-->
+<!--        <div *ngFor="let field of group.fields">-->
+<!--            <ng-container *ngTemplateOutlet="field?.renderer"></ng-container>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</ng-template>-->
+
 
 <!-- For nested form-group -->
 <ng-content></ng-content>
