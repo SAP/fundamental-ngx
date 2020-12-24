@@ -95,6 +95,7 @@ describe('Verify Switch component', function() {
             if (!webDriver.isIEorSafari()) {
                 webDriver.waitElementToBePresentInDOM(switchPage.formDisabledSwitch);
                 webDriver.scrollIntoView(switchPage.formDisabledSwitch);
+
                 const isClickable = webDriver.isElementClickable(switchPage.formDisabledSwitch);
                 expect(isClickable).toBe(false);
                 return;
