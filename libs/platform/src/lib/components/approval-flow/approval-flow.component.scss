@@ -33,6 +33,10 @@ $block: approval-flow;
             margin-right: 0;
         }
     }
+
+    .#{$block}__watchers-input-container {
+        width: 278px;
+    }
 }
 
 .#{$block}__watchers-title {
@@ -194,5 +198,16 @@ $block: approval-flow;
         outline-width: 0.0625rem;
         outline-style: dotted;
         outline-color: var(--sapContent_FocusColor, #0854A0);
+    }
+}
+
+:host ::ng-deep {
+    .fd-toolbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    fd-multi-input .fd-input-group__input {
+        display: none;
     }
 }

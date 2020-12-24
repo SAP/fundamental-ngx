@@ -16,6 +16,16 @@ export interface ApprovalDataSource {
     fetchUser(id: string): Observable<any>;
 
     /**
+     * Fetch users list to be used in "edit approvers" flow.
+     */
+    fetchApprovers(): Observable<ApprovalUser[]>;
+
+    /**
+     * Fetch users list to be used in "edit watchers" flow..
+     */
+    fetchWatchers(): Observable<ApprovalUser[]>;
+
+    /**
      * Update watcher list. Called whenever there is a change
      * to the watcher list.
      */

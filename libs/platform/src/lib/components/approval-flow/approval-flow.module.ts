@@ -8,6 +8,7 @@ import {
     DialogModule,
     IconModule,
     MessageToastModule,
+    MultiInputModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
 
@@ -33,7 +34,8 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
         PlatformObjectStatusModule,
         PlatformListModule,
         StandardListItemModule,
-        PlatformSearchFieldModule
+        PlatformSearchFieldModule,
+        MultiInputModule
     ],
     exports: [
         ApprovalFlowComponent

@@ -12,6 +12,7 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
             [dataSource]="dataSource"
             [userDetailsTemplate]="userDetailsTemplate"
             (nodeClick)="nodeClick($event)"
+            [isEditAvailable]="true"
         >
         </fdp-approval-flow>
         <ng-template #userDetailsTemplate let-data="data">

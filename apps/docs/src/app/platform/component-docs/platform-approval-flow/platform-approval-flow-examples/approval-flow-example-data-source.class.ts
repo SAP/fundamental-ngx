@@ -346,11 +346,28 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         });
     }
 
-    updateWatchers(watchers: ApprovalUser[]): void {}
+    fetchApprovers(): Observable<ApprovalUser[]> {
+        return of(users);
+    }
 
-    updateApproval(approval: ApprovalNode): void {}
+    fetchWatchers(): Observable<ApprovalUser[]> {
+        return of(users);
+    }
 
-    updateApprovals(approvals: ApprovalNode[]): void {}
+    updateWatchers(watchers: ApprovalUser[]): void {
+        console.log('call "updateWatchers" method from ApprovalDataSource implementation class');
+        const currentGraph = graphs[this.selectedGraph];
+        currentGraph.watchers = watchers;
+        this.selectGraph(this.selectedGraph);
+    }
+
+    updateApproval(approval: ApprovalNode): void {
+        console.log('call "updateApproval" method from ApprovalDataSource implementation class');
+    }
+
+    updateApprovals(approvals: ApprovalNode[]): void {
+        console.log('call "updateApprovals" method from ApprovalDataSource implementation class');
+    }
 
     sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {
         console.log('call "sendReminders" method from ApprovalDataSource implementation class');

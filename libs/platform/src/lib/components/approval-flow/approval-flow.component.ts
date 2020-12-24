@@ -52,6 +52,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** A reference to the user details template */
     @Input() userDetailsTemplate: TemplateRef<any>;
 
+    /** Whether the approval flow is editable */
+    @Input() isEditAvailable = false;
+
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
 
@@ -91,6 +94,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /**  @hidden */
     _dir: string;
 
+    /**  @hidden */
+    _isEditMode = false;
+
+    /**  @hidden */
+    _usersForWatchersList: ApprovalUser[] = [];
+
+    /**  @hidden */
+    _selectedWatchers: ApprovalUser[] = [];
+
     private subscriptions = new Subscription();
 
     /** @hidden */
@@ -114,6 +126,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         this.subscriptions.add(this.dataSource.fetch().subscribe(approvalProcess => {
+            console.log('Got approval process data from DataSource');
             this._approvalProcess = approvalProcess;
             this._graph = this._buildNodeTree(approvalProcess.nodes);
             this._cdr.detectChanges();
@@ -260,6 +273,29 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         if (nextFocusTarget?.nextNode) {
             this._focusNode(nextFocusTarget.nextNode, nextFocusTarget.stepSize);
         }
+    }
+
+    _enterEditMode(): void {
+        this.dataSource.fetchApprovers().pipe(take(1)).subscribe(users => {
+            this._usersForWatchersList = users;
+            this._selectedWatchers = [...this._approvalProcess.watchers];
+            this._isEditMode = true;
+        });
+    }
+
+    _onWatchersPopoverClose(): void {
+        const isChanged =
+            this._selectedWatchers.length !== this._approvalProcess.watchers.length ||
+            this._selectedWatchers.some(watcher => !this._approvalProcess.watchers.find(_watcher => _watcher === watcher));
+        console.log('isChanged', isChanged);
+        if (isChanged) {
+            console.log('save new watchers', this._selectedWatchers);
+            this.dataSource.updateWatchers(this._selectedWatchers);
+        }
+    }
+
+    _displayUserFn(watcher: ApprovalUser): string {
+        return watcher.name;
     }
 
     /** @hidden */
