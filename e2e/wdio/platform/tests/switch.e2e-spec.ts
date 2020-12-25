@@ -24,7 +24,7 @@ describe('Verify Switch component', function() {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(switchPage.root, 0, 10000);
+        waitForElDisplayed(switchPage.root, 0, 20000);
     });
 
     describe('has default and compact switch and', function() {
@@ -88,7 +88,11 @@ describe('Verify Switch component', function() {
             console.log('Skip for Safari and IE');
         });
 
-        it('compact switch should be smaller than default', () => {
+        fit('compact switch should be smaller than default', () => {
+            waitElementToBePresentInDOM(switchPage.defaultSwitchSize);
+            waitForElDisplayed(switchPage.defaultSwitchSize);
+            waitElementToBePresentInDOM(switchPage.defaultCompactSwitchSize);
+            waitForElDisplayed(switchPage.defaultCompactSwitchSize);
             const defaultSwitchSize = getElementSize(switchPage.defaultSwitchSize);
             const defaultCompactSwitchSize = getElementSize(switchPage.defaultCompactSwitchSize);
 
