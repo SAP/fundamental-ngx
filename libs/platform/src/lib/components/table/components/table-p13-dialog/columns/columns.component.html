@@ -96,13 +96,24 @@
         <ul
             fd-list
             compact="true"
-            selection="true"
         >
+            <li fd-list-item>
+                <fd-checkbox
+                    [ngModel]="_selectedColumnsCount == _selectableColumns.length"
+                    (ngModelChange)="_toggleSelectAll($event)"
+                    [disabled]="_selectAllDisabled"
+                    compact="true"
+                ></fd-checkbox>
+                <span fd-list-title i18n="@@platformTableP13ColumnsDialogSelectAll">
+                    Select All ({{_selectedColumnsCount}}/{{_selectableColumns.length}})
+                </span>
+            </li>
             <li
                 fd-list-item
                 *ngFor="let item of _filteredColumns"
-                [selected]="item.selected"
-                [class.fd-select-item--active]="item == _activeColumn"
+                [class.fd-select-item--selected]="item.selected"
+                [class.fd-select-item--active]="item.active"
+                (click)="_setActiveColumn(item)"
             >
                 <fd-checkbox
                     [(ngModel)]="item.selected"
