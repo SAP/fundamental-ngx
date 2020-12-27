@@ -21,7 +21,7 @@ import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { BehaviorSubject, isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, startWith } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core';
 
@@ -119,8 +119,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Data source for table data. */
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
-        if (value) {
-            this._resetChecks();
+        this._ds = value;
+        if (value && this._viewInitiated) {
             this._initializeDS(value);
         }
     }
@@ -176,6 +176,22 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Table body without borders, but header with borders. */
     @Input()
     noBodyBorders = false;
+
+    /** Initial visible columns. Consist of list of unique columns names */
+    @Input()
+    initialVisibleColumns: string[];
+
+    /** Sort options. It's applied on initial phase */
+    @Input()
+    initialSortBy: CollectionSort[];
+
+    /** Filter options. It's applied on initial phase */
+    @Input()
+    initialFilterBy: CollectionFilter[];
+
+    /** Group options. It's applied on initial phase */
+    @Input()
+    initialGroupBy: CollectionGroup[];
 
     /** Event fired when table selection has changed. */
     @Output()
@@ -245,12 +261,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _sortField: string;
     /** @hidden */
     _sortDirection: SortDirection;
-
-    /** @hidden */
-    _filterType: FilterableColumnDataType = FilterableColumnDataType.STRING;
-
-    /** @hidden */
-    _filterValue: CollectionFilter;
 
     /** @hidden */
     _groupField: string;
@@ -338,7 +348,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._viewInitiated = true;
+
         this._setInitialState();
+
+        if (this._ds) {
+            this._initializeDS(this._ds);
+        }
 
         this._listenToTableStateChanges();
 
@@ -346,15 +362,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._listenToColumns();
 
-        this._listenToTableColumnsLength();
-
         this._setFreezableInfo();
 
         this._calculateVisibleColumns();
 
-        this._cd.detectChanges();
+        this._constructTableMetadata();
 
-        this._viewInitiated = true;
+        this._groupRows();
+
+        this._cd.detectChanges();
     }
 
     /** @hidden */
@@ -607,6 +623,24 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    private _setInitialState(): void {
+        const prevState = this.getTableState();
+        const columns = this.columns.toArray();
+        const visibleColumns =
+            this.initialVisibleColumns ||
+            (prevState.columns.length ? prevState.columns : columns.map(({ name }) => name));
+
+        this.setTableState({
+            ...prevState,
+            columns: visibleColumns,
+            sortBy: this.initialSortBy || prevState.sortBy,
+            filterBy: this.initialFilterBy || prevState.filterBy,
+            groupBy: this.initialGroupBy || prevState.groupBy,
+            freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn
+        });
+    }
+
+    /** @hidden */
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
             this._tableColumnsSubject.next(this.columns.toArray());
@@ -617,7 +651,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _calculateVisibleColumns(): void {
         const columnsDefinition = this.columns.toArray();
         const { columns } = this.getTableState();
-        this._visibleColumns = columns.map((columnName) => columnsDefinition.find(({ name }) => columnName === name));
+        this._visibleColumns = columns
+            .map((columnName) => columnsDefinition.find(({ name }) => columnName === name))
+            .filter((v) => !!v);
+
+        this._calculateTableColumnsLength();
+    }
+
+    private _calculateTableColumnsLength(): void {
+        const columnsLen = this._visibleColumns.length;
+        this._tableColumnsLength = this.selectionMode !== SelectionMode.NONE ? columnsLen + 1 : columnsLen;
     }
 
     /** @hidden */
@@ -652,17 +695,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    private _setInitialState(): void {
-        const prevState = this.getTableState();
-
-        this.setTableState({
-            ...prevState,
-            freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
-            columns: this.columns.toArray().map(({ name }) => name)
-        });
-    }
-
-    /** @hidden */
     private _listenToTableStateChanges(): void {
         this._subscriptions.add(
             this._tableService.tableStateChanges$
@@ -673,23 +705,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .subscribe((state) => {
                     this._tableDataSource?.fetch(state);
 
-                    // SORTING
-                    if (state.sortBy?.length) {
-                        this._sortDirection = state.sortBy[0].direction || null;
-                        this._sortField = state.sortBy[0].field || null;
-                    }
-
-                    // FILTERING
-                    const filterBy = state.filterBy;
-                    if (filterBy?.length) {
-                        this._filterValue = filterBy[0] || null;
-                    }
-
-                    // GROUPING
-                    if (state.groupBy?.length) {
-                        this._groupOrder = state.groupBy[0].direction || null;
-                        this._groupField = state.groupBy[0].field || null;
-                    }
+                    this._constructTableMetadata();
                 })
         );
 
@@ -735,13 +751,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         );
     }
 
-    private _listenToTableColumnsLength(): void {
-        this._subscriptions.add(
-            this.columns.changes.pipe(startWith(null)).subscribe(() => {
-                const columnsLen = this.columns.length;
-                this._tableColumnsLength = this.selectionMode !== SelectionMode.NONE ? columnsLen + 1 : columnsLen;
-            })
-        );
+    /** @hidden */
+    private _constructTableMetadata(): void {
+        const state = this.getTableState();
+
+        // SORTING
+        this._sortDirection = state.sortBy[0]?.direction || null;
+        this._sortField = state.sortBy[0]?.field || null;
+
+        // GROUPING
+        this._groupOrder = state.groupBy[0]?.direction || null;
+        this._groupField = state.groupBy[0]?.field || null;
     }
 
     private _groupRows(): void {
@@ -822,11 +842,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _initializeDS(dataSource: FdpTableDataSource<T>): void {
-        if (isDataSource(this.dataSource)) {
-            this._closeDataSource(this.dataSource);
+        if (isDataSource(this._tableDataSource)) {
+            this._closeDataSource(this._tableDataSource);
         }
 
-        this._ds = dataSource;
+        this._resetChecks();
 
         this._tableDataSource = this._openDataStream(dataSource);
     }

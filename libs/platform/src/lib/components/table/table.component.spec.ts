@@ -2,16 +2,10 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {
-    ListModule,
-    PopoverModule,
-    RtlService,
-    TableModule,
-    CheckboxModule
-} from '@fundamental-ngx/core';
+import { ListModule, PopoverModule, RtlService, TableModule, CheckboxModule } from '@fundamental-ngx/core';
 
 import { TableComponent } from './table.component';
-import { CollectionStringFilterStrategy, SelectionMode, SortDirection } from './enums';
+import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection } from './enums';
 import { TableDataProvider, TableDataSource } from './domain';
 import { TableState } from './interfaces';
 import { TableService } from './table.service';
@@ -58,14 +52,7 @@ describe('TableComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [
-                    FormsModule,
-                    ReactiveFormsModule,
-                    TableModule,
-                    CheckboxModule,
-                    PopoverModule,
-                    ListModule,
-                ],
+                imports: [FormsModule, ReactiveFormsModule, TableModule, CheckboxModule, PopoverModule, ListModule],
                 declarations: [TableComponent],
                 providers: [RtlService]
             }).compileComponents();
@@ -203,7 +190,7 @@ describe('TableComponent', () => {
             {
                 field: field,
                 value: value,
-                strategy: CollectionStringFilterStrategy.CONTAINS
+                strategy: FILTER_STRING_STRATEGY.CONTAINS
             }
         ]);
         expect(component._popoverOpen).toBeFalse();

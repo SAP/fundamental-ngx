@@ -1,7 +1,10 @@
 <fdp-table
     #table
-    [dataSource]="source"
     contentDensity="compact"
+    [dataSource]="source"
+    [initialVisibleColumns]="['updatedOn', 'name', 'price', 'verified']"
+    [initialSortBy]="[{field: 'price.value', direction: 'asc'}]"
+    [initialGroupBy]="[{field: 'verified', showAsColumn: true, direction: 'asc'}]"
 >
 
     <fdp-table-toolbar

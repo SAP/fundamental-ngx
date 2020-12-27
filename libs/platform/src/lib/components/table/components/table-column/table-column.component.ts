@@ -18,6 +18,7 @@ import { ColumnAlign, FilterableColumnDataType } from '../../enums';
 import { FdpCellDef, FdpHeaderCellDef } from '../../directives';
 
 import { TableColumn } from './table-column';
+import { strict } from 'assert';
 
 enum ColumnAlignEnum {
     Start = 'left',
@@ -143,6 +144,8 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
 
     /** @hidden */
     ngOnInit(): void {
+        this._validateNameOption();
+
         this._listenToAlign();
     }
 
@@ -150,6 +153,12 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
+    }
+
+    private _validateNameOption(): void {
+        if (typeof this.name !== 'string') {
+            throw Error('fdp-column: "name" option is required.');
+        }
     }
 
     /** @hidden */
