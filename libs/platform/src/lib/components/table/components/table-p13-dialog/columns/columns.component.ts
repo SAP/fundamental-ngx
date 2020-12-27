@@ -1,10 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, combineLatest } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { DialogRef } from '@fundamental-ngx/core';
 
+import { SearchInput } from '../../../../search-field/public_api';
+
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
-import { map } from 'rxjs/operators';
 
 export interface TableColumn {
     label: string;
@@ -33,6 +42,9 @@ class SelectableColumn {
     ) {}
 }
 
+const INITIAL_SEARCH_TEXT = '';
+const INITIAL_SHOW_ALL_ITEMS = true;
+
 @Component({
     templateUrl: './columns.component.html',
     styleUrls: ['./columns.component.scss'],
@@ -55,20 +67,20 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** All available columns for interacting */
     _selectableColumns: SelectableColumn[] = [];
 
-    /** filtered columns to render in the list */
+    /** filtered columns that are rendered in the list */
     _filteredColumns: SelectableColumn[] = [];
 
     /** Search Query subject */
-    _searchQuerySubject: BehaviorSubject<string> = new BehaviorSubject('');
+    _searchQuerySubject: BehaviorSubject<string> = new BehaviorSubject(INITIAL_SEARCH_TEXT);
     /** Show All flag subject */
-    _showAllItemsSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
+    _showAllItemsSubject: BehaviorSubject<boolean> = new BehaviorSubject(INITIAL_SHOW_ALL_ITEMS);
 
     /** Selected columns count */
     _selectedColumnsCount = 0;
 
     /** Flag to track disabled state for move-down move-up buttons */
-    _isMoveDownDisabled = false;
-    _isMoveUpDisabled = false;
+    _moveUpDisabled = true;
+    _moveDownDisabled = true;
 
     /** @hidden */
     get _isShownAllItems(): boolean {
@@ -82,7 +94,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
     private subscriptions = new Subscription();
 
-    constructor(private dialogRef: DialogRef) {
+    constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
         const { availableColumns, visibleColumns: visibleColumnKeys }: ColumnsDialogData = this.dialogRef.data;
 
         this.initialVisibleColumnKeys = [...visibleColumnKeys];
@@ -93,9 +105,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     ngOnInit(): void {
         this._initiateColumns();
 
-        this._constructFilteredColumnsList();
-
-        this._countSelectedColumns();
+        this._listenToFilterOptions();
     }
 
     ngOnDestroy(): void {
@@ -123,6 +133,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     /** @hidden */
     _onToggleColumn(): void {
         this._countSelectedColumns();
+        this._onModelChange();
     }
 
     /** @hidden */
@@ -131,8 +142,8 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    _searchInputChange(searchQuery = ''): void {
-        this._searchQuerySubject.next(searchQuery);
+    _searchInputChange({ text }: SearchInput): void {
+        this._searchQuerySubject.next(text || '');
     }
 
     /** @hidden */
@@ -143,53 +154,103 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
 
     /** @hidden */
     _setActiveColumn(column: SelectableColumn): void {
-        this._filteredColumns.map((_column) => {
+        this._selectableColumns.map((_column) => {
             _column.active = _column === column;
         });
 
-        this._calculateMoveButtonDisabledStates();
+        this._calculateMovementButtonsState();
     }
 
     /** @hidden */
     _moveActiveToTop(): void {
-        this._moveColumnInFilteredListFromToIndex(this._getActiveColumnIndex(), 0);
+        this._moveColumnInFilteredListByIndex(this._getActiveColumnIndexInFilteredList(), 0);
     }
 
     /** @hidden */
     _moveActiveToBottom(): void {
-        this._moveColumnInFilteredListFromToIndex(this._getActiveColumnIndex(), this._filteredColumns.length - 0);
+        this._moveColumnInFilteredListByIndex(
+            this._getActiveColumnIndexInFilteredList(),
+            this._filteredColumns.length - 1
+        );
     }
 
     /** @hidden */
     _moveActiveUp(): void {
-        const activeColumnIndex = this._getActiveColumnIndex();
-        this._moveColumnInFilteredListFromToIndex(activeColumnIndex, activeColumnIndex + 1);
+        const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
+        this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex - 1);
     }
 
     /** @hidden */
     _moveActiveDown(): void {
-        const activeColumnIndex = this._getActiveColumnIndex();
-        this._moveColumnInFilteredListFromToIndex(activeColumnIndex, activeColumnIndex - 1);
+        const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
+        this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
     }
 
     _toggleSelectAll(selectAll: boolean): void {
         this._selectableColumns.forEach((column) => (column.selected = selectAll));
+        this._onModelChange();
+    }
+
+    /** @hidden */
+    _filterByColumnKy(index: number, item: SelectableColumn): string {
+        return item?.column.key;
     }
 
     /** @hidden */
     private _initiateColumns(): void {
-        const selectedColumnKeys = this.initialVisibleColumnKeys;
+        const visibleColumnKeys = this.initialVisibleColumnKeys;
 
         this._selectableColumns = this.availableColumns
+            // Selected items go on top
             .slice()
-            .sort((a, b) => selectedColumnKeys.indexOf(a.key) - selectedColumnKeys.indexOf(b.key))
+            .sort((a, b) => {
+                const aIndex = visibleColumnKeys.indexOf(a.key);
+                const bIndex = visibleColumnKeys.indexOf(b.key);
+                if (aIndex === -1 && bIndex > -1) {
+                    return 1;
+                }
+                if (aIndex > -1 && bIndex === -1) {
+                    return -1;
+                }
+                return aIndex - bIndex;
+            })
             .map(
                 (column, index: number): SelectableColumn => ({
                     column: column,
-                    selected: selectedColumnKeys.includes(column.key),
+                    selected: visibleColumnKeys.includes(column.key),
                     active: index === 0
                 })
             );
+
+        // keep count of selected
+        this._countSelectedColumns();
+
+        // reset filter settings settings
+        this._searchQuerySubject.next(INITIAL_SEARCH_TEXT);
+        this._showAllItemsSubject.next(INITIAL_SHOW_ALL_ITEMS);
+    }
+
+    private _listenToFilterOptions(): void {
+        this.subscriptions.add(
+            combineLatest([this._showAllItemsSubject, this._searchQuerySubject])
+                .pipe(debounceTime(20))
+                .subscribe(([showAll, searchQuery]) => {
+                    this._filteredColumns = this._selectableColumns
+                        .filter((item) =>
+                            item.column.label.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
+                        )
+                        .filter((item) => showAll || item.selected);
+
+                    this._onChangeFilteredColumnsList();
+
+                    this.cdr.markForCheck();
+                })
+        );
+    }
+
+    /** @hidden */
+    private _onChangeFilteredColumnsList(): void {
+        this._calculateMovementButtonsState();
     }
 
     /** @hidden */
@@ -198,73 +259,52 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    private _getActiveColumnIndex(): number {
+    private _getActiveColumnIndexInFilteredList(): number {
         return this._filteredColumns.findIndex(({ active }) => active);
     }
 
     /** @hidden */
-    private _moveColumnInFilteredListFromToIndex(from: number, to: number): void {
-        const listLength = this._filteredColumns.length;
-        from = Math.min(Math.max(from, 0), listLength);
-        to = Math.min(Math.max(to, 0), listLength);
-
-        if (from === to) {
-            return;
-        }
-
-        const column = this._filteredColumns.splice(from, 1)[0];
-
-        this._filteredColumns.splice(to, 0, column);
-
-        this._calculateMoveButtonDisabledStates();
-
+    private _moveColumnInFilteredListByIndex(from: number, to: number): void {
+        const { movedItem, replacedItem } = this._moveElementInTheListByIndex(this._filteredColumns, from, to);
         /**
          * need to reflect analogical movement in the original list
          * with respect to the original list order
          */
-        const dir = to - from > 0 ? 1 : -1;
-        this._moveColumnInSelectableList(column, this._filteredColumns[to + -1 * dir], dir);
+        this._moveColumnInSelectableList(movedItem, replacedItem);
+
+        this._calculateMovementButtonsState();
+
+        this._onModelChange();
     }
 
     /**
      * Move column in selectable list.
-     * Movement based on target column.
-     * @param column Column to be moved.
-     * @param targetColumn Target column.
-     * @param direction +1 - column should be located after targetColumn. -1 - column should be located before targetColumn.
      */
-    private _moveColumnInSelectableList(
-        column: SelectableColumn,
-        targetColumn: SelectableColumn,
-        direction: 1 | -1
-    ): void {
+    private _moveColumnInSelectableList(itemToMove: SelectableColumn, targetItem: SelectableColumn): void {
         const list = this._selectableColumns;
-        const listLength = list.length;
-        let from = list.indexOf(column);
-        let to = list.indexOf(targetColumn) + direction;
-
-        from = Math.min(Math.max(from, 0), listLength);
-        to = Math.min(Math.max(to, 0), listLength);
-
-        if (from === to) {
-            return;
-        }
-
-        const movedElement = list.splice(from, 1)[0];
-
-        this._filteredColumns.splice(to, 0, movedElement);
+        this._moveElementInTheListByIndex(list, list.indexOf(itemToMove), list.indexOf(targetItem));
     }
 
-    private _constructFilteredColumnsList(): void {
-        this.subscriptions.add(
-            combineLatest([this._showAllItemsSubject, this._searchQuerySubject]).subscribe(([showAll, searchQuery]) => {
-                this._filteredColumns = this._selectableColumns
-                    .filter((item) => item.column.label.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase()))
-                    .filter((item) => showAll || item.selected);
+    /**
+     * Move element in the list
+     * @return moved item and replaced item.
+     */
+    private _moveElementInTheListByIndex<T>(
+        list: T[],
+        fromIndex: number,
+        toIndex: number
+    ): { movedItem: T; replacedItem: T } {
+        const listLength = list.length;
 
-                this._calculateMoveButtonDisabledStates();
-            })
-        );
+        fromIndex = Math.min(Math.max(fromIndex, 0), listLength - 1);
+        toIndex = Math.min(Math.max(toIndex, 0), listLength - 1);
+
+        const replacedItem = list[toIndex];
+        const movedItem = list.splice(fromIndex, 1)[0];
+
+        list.splice(toIndex, 0, movedItem);
+
+        return { movedItem: movedItem, replacedItem: replacedItem };
     }
 
     /** @hidden */
@@ -273,9 +313,9 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
-    private _calculateMoveButtonDisabledStates(): void {
-        const activeIndex = this._getActiveColumnIndex();
-        this._isMoveUpDisabled = activeIndex < 1;
-        this._isMoveUpDisabled = activeIndex >= this._filteredColumns.length - 1;
+    private _calculateMovementButtonsState(): void {
+        const activeIndex = this._getActiveColumnIndexInFilteredList();
+        this._moveUpDisabled = activeIndex < 1;
+        this._moveDownDisabled = activeIndex < 0 || activeIndex >= this._filteredColumns.length - 1;
     }
 }

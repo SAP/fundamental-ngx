@@ -24,8 +24,12 @@
                 i18n-placeholder="@@platformTableP13ColumnsDialogSearchPlaceholder"
                 placeholder="Search"
                 contentDensity="compact"
+                [inputText]="_searchQuerySubject | async"
+                [suggestions]="[]"
                 (inputChange)="_searchInputChange($event)"
             ></fdp-search-field>
+
+            <fd-toolbar-spacer></fd-toolbar-spacer>
 
             <!-- Show Selected/All -->
             <button
@@ -36,7 +40,7 @@
                 i18n="@@platformTableP13ColumnsDialogShowAllOrSelected"
                 (click)="_toggleShowAll()"
             >
-                {_isShownAllItems, select, true {Show Selected} other {Show All}}
+                {_showAllItemsSubject | async, select, true {Show Selected} other {Show All}}
             </button>
 
             <!-- Active Button Movement -->
@@ -44,8 +48,9 @@
                 fd-toolbar-item
                 fd-button
                 fdType="transparent"
-                glyph="slim-arrow-down"
+                glyph="collapse-group"
                 [compact]="true"
+                [disabled]="_moveUpDisabled"
                 aria-label="Move to Top"
                 i18n-aria-label="@@platformTableP13ColumnsDialogMoveToTop"
                 title="Move to Top"
@@ -59,6 +64,7 @@
                 fdType="transparent"
                 glyph="slim-arrow-up"
                 [compact]="true"
+                [disabled]="_moveUpDisabled"
                 aria-label="Move Up"
                 i18n-aria-label="@@platformTableP13ColumnsDialogMoveUp"
                 title="Move Up"
@@ -72,6 +78,7 @@
                 fdType="transparent"
                 glyph="slim-arrow-down"
                 [compact]="true"
+                [disabled]="_moveDownDisabled"
                 aria-label="Move Down"
                 i18n-aria-label="@@platformTableP13ColumnsDialogMoveDown"
                 title="Move Down"
@@ -85,6 +92,7 @@
                 fdType="transparent"
                 glyph="expand-group"
                 [compact]="true"
+                [disabled]="_moveDownDisabled"
                 aria-label="Move to Bottom"
                 i18n-aria-label="@@platformTableP13ColumnsDialogMoveToBottom"
                 title="Move to Bottom"
@@ -104,19 +112,23 @@
                     [disabled]="_selectAllDisabled"
                     compact="true"
                 ></fd-checkbox>
-                <span fd-list-title i18n="@@platformTableP13ColumnsDialogSelectAll">
+                <span
+                    fd-list-title
+                    i18n="@@platformTableP13ColumnsDialogSelectAll"
+                >
                     Select All ({{_selectedColumnsCount}}/{{_selectableColumns.length}})
                 </span>
             </li>
             <li
                 fd-list-item
-                *ngFor="let item of _filteredColumns"
+                *ngFor="let item of _filteredColumns; trackBy: _filterByColumnKy"
                 [class.fd-select-item--selected]="item.selected"
                 [class.fd-select-item--active]="item.active"
                 (click)="_setActiveColumn(item)"
             >
                 <fd-checkbox
                     [(ngModel)]="item.selected"
+                    (ngModelChange)="_onToggleColumn($event)"
                     compact="true"
                 ></fd-checkbox>
                 <span fd-list-title>

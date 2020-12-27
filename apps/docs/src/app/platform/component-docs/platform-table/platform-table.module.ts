@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 
-import { ObjectStatusModule, TableModule, LayoutPanelModule, FdDatetimeModule } from '@fundamental-ngx/core';
+import { ObjectStatusModule, TableModule, LayoutPanelModule, FdDatetimeModule, RtlService } from '@fundamental-ngx/core';
 import {
     PlatformButtonModule,
     PlatformInputModule,
@@ -66,6 +66,7 @@ const routes: Routes = [
         PlatformTableFreezableExampleComponent,
         PlatformTableP13ExampleComponent
     ],
+    providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PlatformTableDocsModule {}

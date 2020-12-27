@@ -37,7 +37,7 @@
                             ></fd-checkbox>
                         </th>
 
-                        <ng-container *ngFor="let column of columns; let colIdx = index">
+                        <ng-container *ngFor="let column of _visibleColumns; let colIdx = index">
                             <th
                                 fd-table-cell
                                 scope="col"
@@ -264,6 +264,7 @@
         [attr.aria-selected]="row.checked"
     >
         <td
+            *ngIf="selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
             fd-table-cell
             class="fd-table__cell--fixed"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -271,7 +272,6 @@
             [ngStyle]="_getFreezableSelectionCellStyles()"
             [attr.tabindex]="selectionMode === SELECTION_MODE.SINGLE ? 0 : ''"
             [attr.role]="selectionMode === SELECTION_MODE.SINGLE ? 'checkbox' : 'cell'"
-            *ngIf="selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
             (click)="_selectSingle(row.index, row)"
             (keydown)="_onSelectControlKeydown($event)"
         >
@@ -284,9 +284,9 @@
             ></fd-checkbox>
         </td>
         <td
+            *ngFor="let column of _visibleColumns; let colIdx = index"
             fd-table-cell
             [style.textAlign]="column.align"
-            *ngFor="let column of columns; let colIdx = index"
             [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.key)"
             [ngStyle]="_freezableColumns?.includes(column.key) ? _getFreezableCellStyles(colIdx) : null"
         >

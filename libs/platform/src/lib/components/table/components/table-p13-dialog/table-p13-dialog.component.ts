@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
@@ -15,12 +16,12 @@ import { TableP13ColumnsComponent } from './table-p13-columns.component';
 import { SortDialogData, SortDialogResultData, P13SortingDialogComponent } from './sorting/sorting.component';
 import { GroupDialogData, GroupDialogResultData, P13GroupingDialogComponent } from './grouping/grouping.component';
 import { FilterDialogData, FilterDialogResultData, P13FilteringDialogComponent } from './filtering/filtering.component';
-import { filter } from 'rxjs/operators';
+import { ColumnsDialogData, ColumnsDialogResultData, P13ColumnsDialogComponent } from './columns/columns.component';
 
 const dialogConfig: DialogConfig = {
     responsivePadding: true,
     verticalPadding: true,
-    minWidth: '30%',
+    minWidth: '30rem',
     minHeight: '50%'
 };
 
@@ -101,7 +102,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns().filter(({ sortable }) => sortable);
         const sortBy = state.sortBy;
         const dialogData: SortDialogData = {
-            columns: columns,
+            columns: columns.map(({ label, key }) => ({ label: label, key: key })),
             collectionSort: sortBy
         };
 
@@ -125,7 +126,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const filterBy = state?.filterBy;
         const dialogData: FilterDialogData = {
-            columns: columns,
+            columns: columns.map(({ label, key, dataType }) => ({ label: label, key: key, dataType: dataType })),
             collectionFilter: filterBy
         };
 
@@ -150,7 +151,7 @@ export class TableP13DialogComponent implements OnDestroy {
         const columns = this._getTableColumns();
         const groupBy = state.groupBy;
         const dialogData: GroupDialogData = {
-            columns: columns.filter(({ groupable }) => groupable),
+            columns: columns.filter(({ groupable }) => groupable).map(({ label, key }) => ({ label: label, key: key })),
             collectionGroup: groupBy
         };
 
@@ -170,7 +171,29 @@ export class TableP13DialogComponent implements OnDestroy {
 
     /** Open Columns Settings Dialog */
     showColumnsSettings(): void {
-        this._applyColumns([]);
+        const state = this._getTableState();
+        const columns = this._getTableColumns();
+        const visibleColumns = state.columns;
+        const dialogData: ColumnsDialogData = {
+            availableColumns: columns.map(({ label, name }) => ({ label: label, key: name })),
+            visibleColumns: visibleColumns
+        };
+
+        const dialogRef = this._dialogService.open(P13ColumnsDialogComponent, {
+            ...dialogConfig,
+            minWidth: '35rem',
+            responsivePadding: false,
+            verticalPadding: false,
+            data: dialogData
+        });
+
+        this._subscriptions.add(
+            dialogRef.afterClosed
+                .pipe(filter((result) => !!result))
+                .subscribe(({ visibleColumns: result }: ColumnsDialogResultData) => {
+                    this._applyColumns(result);
+                })
+        );
     }
 
     /** @hidden */
@@ -205,7 +228,7 @@ export class TableP13DialogComponent implements OnDestroy {
                 this._table?.showSortSettingsInToolbar(columns.some(({ sortable }) => sortable));
                 this._table?.showFilterSettingsInToolbar(columns.some(({ filterable }) => filterable));
                 this._table?.showGroupSettingsInToolbar(columns.some(({ groupable }) => groupable));
-                this._table?.showColumnSettingsInToolbar(columns.some(() => columns.length > 0));
+                this._table?.showColumnSettingsInToolbar(columns.length > 0);
             })
         );
     }

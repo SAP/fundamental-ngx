@@ -21,7 +21,7 @@ import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { BehaviorSubject, isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, startWith } from 'rxjs/operators';
+import { distinctUntilChanged, filter, startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core';
 
@@ -40,7 +40,13 @@ import {
 } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
 import {
+    ColumnsChange,
+    FilterChange,
+    FreezeChange,
+    GroupChange,
+    SortChange,
     TableColumnFreezeEvent,
+    TableColumnsChangeEvent,
     TableFilterChangeEvent,
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
@@ -189,6 +195,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Output()
     readonly groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
 
+    /** Event fired when visible columns list has been changed. */
+    @Output()
+    readonly columnsChange: EventEmitter<TableColumnsChangeEvent> = new EventEmitter<TableColumnsChangeEvent>();
+
     /** Event fired when there is a change in the frozen column. */
     @Output()
     readonly columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
@@ -280,6 +290,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _totalItems = 0;
 
+    /** Columns to be rendered in the template */
+    _visibleColumns: TableColumn[] = [];
+
     /** @hidden */
     private _checked = [];
 
@@ -333,9 +346,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._listenToColumns();
 
+        this._listenToTableColumnsLength();
+
         this._setFreezableInfo();
 
-        this._listenToTableColumnsLength();
+        this._calculateVisibleColumns();
 
         this._cd.detectChanges();
 
@@ -392,7 +407,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /**
-     * Set table columns list
+     * Set visible table columns
+     * The order is matter
      * @param columns table columns names
      */
     setColumns(columns: string[]): void {
@@ -590,10 +606,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._popoverColumnKey = columnKey;
     }
 
+    /** @hidden */
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
             this._tableColumnsSubject.next(this.columns.toArray());
         });
+    }
+
+    /** Construct visible columns for rendering purpose  */
+    private _calculateVisibleColumns(): void {
+        const columnsDefinition = this.columns.toArray();
+        const { columns } = this.getTableState();
+        this._visibleColumns = columns.map((columnName) => columnsDefinition.find(({ name }) => columnName === name));
     }
 
     /** @hidden */
@@ -634,7 +658,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this.setTableState({
             ...prevState,
             freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
-            columns: this.columns.toArray().map((column) => column.key)
+            columns: this.columns.toArray().map(({ name }) => name)
         });
     }
 
@@ -670,27 +694,34 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         );
 
         this._subscriptions.add(
-            this._tableService.sortChange.subscribe((event) => {
+            this._tableService.sortChange.subscribe((event: SortChange) => {
                 this.sortChange.emit(new TableSortChangeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.filterChange.subscribe((event) => {
+            this._tableService.filterChange.subscribe((event: FilterChange) => {
                 this.filterChange.emit(new TableFilterChangeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.freezeChange.subscribe((event) => {
+            this._tableService.freezeChange.subscribe((event: FreezeChange) => {
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.groupChange.subscribe((event) => {
+            this._tableService.groupChange.subscribe((event: GroupChange) => {
                 this._groupRows();
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
+            })
+        );
+
+        this._subscriptions.add(
+            this._tableService.columnsChange.subscribe((event: ColumnsChange) => {
+                this._calculateVisibleColumns();
+                this.columnsChange.emit(new TableColumnsChangeEvent(this, event.current, event.previous));
             })
         );
     }
