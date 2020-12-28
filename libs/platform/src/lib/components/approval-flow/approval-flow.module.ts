@@ -5,8 +5,11 @@ import { FormsModule } from '@angular/forms';
 import {
     AvatarModule,
     ButtonModule,
+    CheckboxModule,
     DialogModule,
     IconModule,
+    MenuModule,
+    MessageStripModule,
     MessageToastModule,
     MultiInputModule,
     ToolbarModule
@@ -35,7 +38,10 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
         PlatformListModule,
         StandardListItemModule,
         PlatformSearchFieldModule,
-        MultiInputModule
+        MultiInputModule,
+        MessageStripModule,
+        CheckboxModule,
+        MenuModule
     ],
     exports: [
         ApprovalFlowComponent

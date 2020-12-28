@@ -98,10 +98,19 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _isEditMode = false;
 
     /**  @hidden */
+    _isAddButtonsVisible = false;
+
+    /**  @hidden */
+    _isRemoveButtonVisible = false;
+
+    /**  @hidden */
     _usersForWatchersList: ApprovalUser[] = [];
 
     /**  @hidden */
     _selectedWatchers: ApprovalUser[] = [];
+
+    /**  @hidden */
+    _messages: { text: string; type: 'success'|'error' }[] = [];
 
     private subscriptions = new Subscription();
 
@@ -156,6 +165,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
         });
         this.nodeClick.emit(node);
+    }
+
+    onNodeCheck(node: ApprovalNode, isChecked: boolean): void {
+        console.log('onNodeCheck', node, isChecked);
+        const checkedNodesCount = this.nodeComponents.filter(n => n._isSelected).length;
+        this._isRemoveButtonVisible = checkedNodesCount > 0;
+        this._isAddButtonsVisible = checkedNodesCount === 1;
     }
 
     onWatcherClick(watcher: ApprovalUser): void {
@@ -276,7 +292,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     _enterEditMode(): void {
-        this.dataSource.fetchApprovers().pipe(take(1)).subscribe(users => {
+        this.dataSource.fetchWatchers().pipe(take(1)).subscribe(users => {
             this._usersForWatchersList = users;
             this._selectedWatchers = [...this._approvalProcess.watchers];
             this._isEditMode = true;
@@ -291,11 +307,21 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         if (isChanged) {
             console.log('save new watchers', this._selectedWatchers);
             this.dataSource.updateWatchers(this._selectedWatchers);
+            this._messages.push({ text: 'Watchers changed', type: 'success' });
+            this._cdr.detectChanges();
         }
     }
 
     _displayUserFn(watcher: ApprovalUser): string {
         return watcher.name;
+    }
+
+    _onMessageDismiss(index: number): void {
+        this._messages.splice(index, 1);
+    }
+
+    _removeCheckedNodes(): void {
+        console.log('removeCheckedNodes');
     }
 
     /** @hidden */

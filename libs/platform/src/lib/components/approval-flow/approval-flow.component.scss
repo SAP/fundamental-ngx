@@ -9,6 +9,10 @@ $block: approval-flow;
     }
 }
 
+.#{$block}__messages {
+    margin-bottom: 1rem;
+}
+
 .#{$block}__watchers {
     margin-bottom: .5rem;
     padding-left: 1rem;
@@ -205,6 +209,12 @@ $block: approval-flow;
     .fd-toolbar {
         display: flex;
         justify-content: space-between;
+
+        .#{$block}__toolbar-controls {
+            button:not(:last-child) {
+                margin-right: .5rem;
+            }
+        }
     }
 
     fd-multi-input .fd-input-group__input {

@@ -52,6 +52,10 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @HostBinding('class.approval-flow-node--blank')
     blank: boolean;
 
+    /** Whether the node is in edit mode */
+    @HostBinding('class.approval-flow-node--edit-mode')
+    @Input() isEdit: boolean;
+
     /** Whether node element has connection line before the node element */
     @Input()
     @HostBinding('class.approval-flow-node--line-before')
@@ -75,9 +79,21 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
+    @HostBinding('class.approval-flow-node--selected')
+    get _isNodeSelected(): boolean {
+        return this.isEdit && this._isSelected;
+    }
+
+    /** @hidden */
+    // make public input?
+    _isSelected = false;
+
+    /** @hidden */
     _objectStatus: ObjectStatus;
 
     @Output() onNodeClick = new EventEmitter<void>();
+
+    @Output() onNodeCheck = new EventEmitter<boolean>();
 
     /** @hidden */
     constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {}
@@ -100,6 +116,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     _focus(): void {
         this._nativeElement.focus({ preventScroll: true });
+    }
+
+    /** @hidden */
+    _onCheck(isChecked: boolean): void {
+        this.onNodeCheck.emit(isChecked);
     }
 
     /** @hidden */

@@ -1,4 +1,9 @@
 $block: approval-flow-node;
+$node-height: 94px;
+$node-height--edit-mode: 126px;
+$carousel-marker-height: 11px;
+$carousel-marker-top: $node-height / 2 - $carousel-marker-height / 2;
+$carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-height / 2;
 
 :host {
     box-sizing: border-box;
@@ -9,9 +14,10 @@ $block: approval-flow-node;
     background: #fff;
     background: var(--sapBaseColor, #fff);
     border-radius: 4px;
+    //border: 2px solid transparent;
     box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
     width: 278px;
-    height: 94px;
+    height: $node-height;
     cursor: pointer;
 
     &.#{$block}--blank {
@@ -69,6 +75,20 @@ $block: approval-flow-node;
         }
     }
 
+
+    &.#{$block}--selected {
+        background: #E5F0FA;
+        //border: 2px solid #0854A0;
+    }
+
+    &.#{$block}--edit-mode {
+        height: $node-height--edit-mode;
+
+        .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
+            top: $carousel-marker-top--edit-mode;
+        }
+    }
+
     &[dir='rtl'] {
         .#{$block}__avatar {
             margin-right: 0;
@@ -115,6 +135,42 @@ $block: approval-flow-node;
     display: flex;
 }
 
+.#{$block}__edit-controls {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    margin: -1rem -1rem 1rem -1rem;
+    padding: 0 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .15);
+
+    ::ng-deep {
+        fd-popover-container {
+            left: -134px !important;
+            width: 166px !important;
+        }
+
+        fd-checkbox {
+            position: absolute !important;
+            left: .3rem;
+        }
+
+        .fd-menu__list {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
+
+            & > li:not(:last-child) {
+                border-bottom: 1px solid var(--sapList_Hover_Background, #f5f5f5);
+            }
+        }
+    }
+
+    .#{$block}__menu-button {
+        position: absolute;
+        right: .5rem;
+    }
+}
+
 .#{$block}__avatar {
     margin-right: .5rem;
 }
@@ -157,7 +213,7 @@ $block: approval-flow-node;
     position: absolute;
     width: 4px;
     height: 11px;
-    top: 42px;
+    top: $carousel-marker-top;
 }
 
 .#{$block}__carousel-start-marker {

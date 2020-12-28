@@ -1,8 +1,23 @@
+<div class="approval-flow__messages" *ngIf="_messages.length">
+    <fd-message-strip
+        *ngFor="let message of _messages; let i = index"
+        [type]="message.type"
+        (onDismiss)="_onMessageDismiss(i)">
+        <ng-container [ngTemplateOutlet]="message.type === 'success' ? watchersChangedSuccess : null"></ng-container>
+    </fd-message-strip>
+</div>
+
 <fd-toolbar [hasTitle]="true">
-    <h3 class="approval-flow__title" [attr.dir]="_dir" [attr.aria-label]="title">{{ title }}</h3>
-    <div class="approval-flow_toolbar-controls" *ngIf="isEditAvailable">
+    <h3 class="approval-flow__title" [attr.dir]="_dir">{{ title }}</h3>
+    <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
         <button *ngIf="!_isEditMode" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
-        <button *ngIf="_isEditMode" fd-button label="View mode" [compact]="true" (click)="_isEditMode = false"></button>
+        <ng-container *ngIf="_isEditMode">
+            <button fd-button label="View mode" [compact]="true" (click)="_isEditMode = false"></button>
+            <button *ngIf="_isAddButtonsVisible" fd-button label="Add approvers before" [compact]="true" (click)="_removeCheckedNodes()"></button>
+            <button *ngIf="_isAddButtonsVisible" fd-button label="Add approvers after" [compact]="true" (click)="_removeCheckedNodes()"></button>
+            <button *ngIf="_isAddButtonsVisible" fd-button label="Add parallel approvers" [compact]="true" (click)="_removeCheckedNodes()"></button>
+            <button *ngIf="_isRemoveButtonVisible" fd-button label="Remove" [compact]="true" (click)="_removeCheckedNodes()"></button>
+        </ng-container>
     </div>
 </fd-toolbar>
 
@@ -62,12 +77,14 @@
                         [node]="node"
                         [blank]="node.blank"
                         [parent]="_nodeParentsMap[node.id]"
+                        [isEdit]="_isEditMode"
                         [renderArrow]="columnIndex > 0"
                         [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                         [renderCarouselStartMarker]="(_isCarousel && firstColumn && firstNode)"
                         [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
                         (onNodeClick)="onNodeClick(node)"
+                        (onNodeCheck)="onNodeCheck(node, $event)"
                         (keyup.enter)="onNodeClick(node)"
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
                     ></fdp-approval-flow-node>
@@ -86,5 +103,10 @@
             =1 {{{messageToast.data.targets[0].name}}}
             other {{{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}}
             }
+    </ng-container>
+</ng-template>
+
+<ng-template #watchersChangedSuccess>
+    <ng-container i18n="@@platformApprovalFlowWatchersChangedSuccess">Watchers list has been changed successfully
     </ng-container>
 </ng-template>
