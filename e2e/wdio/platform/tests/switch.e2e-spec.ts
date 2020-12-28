@@ -75,11 +75,15 @@ describe('Verify Switch component', function() {
         });
 
         it('compact switch should be smaller than default', () => {
+            webDriver.waitElementToBePresentInDOM(switchPage.defaultSwitchSize);
+            webDriver.waitForDisplayed(switchPage.defaultSwitchSize);
+            webDriver.waitElementToBePresentInDOM(switchPage.defaultCompactSwitchSize);
+            webDriver.waitForDisplayed(switchPage.defaultCompactSwitchSize);
             const defaultSwitchSize = webDriver.getElementSize(switchPage.defaultSwitchSize) as WebdriverIO.SizeReturn;
             const defaultCompactSwitchSize = webDriver.getElementSize(switchPage.defaultCompactSwitchSize) as WebdriverIO.SizeReturn;
 
-            expect(defaultSwitchSize.height > defaultCompactSwitchSize.height).toBe(true);
-            expect(defaultSwitchSize.width > defaultCompactSwitchSize.width).toBe(true);
+            expect(defaultSwitchSize.height).toBeGreaterThan(defaultCompactSwitchSize.height);
+            expect(defaultSwitchSize.width).toBeGreaterThan(defaultCompactSwitchSize.width);
         });
     });
 
