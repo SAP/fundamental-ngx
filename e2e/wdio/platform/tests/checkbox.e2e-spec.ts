@@ -294,17 +294,7 @@ describe('Checkbox test suite', function() {
         });
 
         it('should check RTL orientation', () => {
-            const arrL = webDriver.getElementArrayLength(exampleAreaContainersArr);
-
-            for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(exampleAreaContainersArr, i);
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i);
-                expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(checkboxPage.rtlSwitcherArr, i);
-                expect(webDriver.getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(webDriver.getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            }
+            checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
         });
     });
 });
