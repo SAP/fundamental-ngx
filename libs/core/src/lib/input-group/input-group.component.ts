@@ -9,11 +9,16 @@ import {
     TemplateRef,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
+    ElementRef,
+    OnDestroy,
+    OnInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fromEvent, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
-import { ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
 
@@ -40,7 +45,7 @@ export type InputGroupPlacement = 'before' | 'after';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent implements ControlValueAccessor {
+export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
     @ContentChild(InputGroupInputDirective)
     inputElement: InputGroupInputDirective;
@@ -117,8 +122,22 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
+    /** @hidden Focus state */
+    get isFocused(): boolean {
+        return this._isFocused;
+    };
+
     /** @hidden */
-    constructor(private changeDetectorRef: ChangeDetectorRef) {}
+    private _isFocused = false;
+
+    /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    constructor (
+        private readonly elementRef: ElementRef,
+        private readonly changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     inputTextValue: string;
@@ -145,6 +164,17 @@ export class InputGroupComponent implements ControlValueAccessor {
         this.inputTextValue = value;
         this.onChange(value);
         this.onTouched();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._listenElementEvents();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -185,5 +215,22 @@ export class InputGroupComponent implements ControlValueAccessor {
         if (!this.buttonFocusable) {
             event.preventDefault();
         }
+    }
+    /** @hidden */
+    private _listenElementEvents(): void {
+        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true }).pipe(
+            tap(() => {
+                this._isFocused = true;
+                this.changeDetectorRef.markForCheck();
+            }),
+            takeUntil(this._onDestroy$)
+        ).subscribe();
+        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true }).pipe(
+            tap(() => {
+                this._isFocused = false;
+                this.changeDetectorRef.markForCheck();
+            }),
+            takeUntil(this._onDestroy$)
+        ).subscribe();
     }
 }
