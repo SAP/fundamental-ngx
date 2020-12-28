@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.14...v0.26.0-rc.15) (2020-12-28)
+
+
+### Bug Fixes
+
+* Toolbar refresh on item change, add height limits ([#4156](https://github.com/SAP/fundamental-ngx/issues/4156)) ([497cc30](https://github.com/SAP/fundamental-ngx/commit/497cc30bbadd4aa6ae2694519fdc704f2c0cf2b8))
+
 ## [0.26.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.13...v0.26.0-rc.14) (2020-12-23)
 
 
