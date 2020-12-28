@@ -130,6 +130,9 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     _disableScrollSpy = false;
 
     /** @hidden */
+    _init = true;
+
+    /** @hidden */
     private _numbOfVisibleTabs: number;
 
     /** @hidden */
@@ -443,7 +446,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         const currentScrollPosition = Math.ceil(containerElement.scrollTop);
 
         if (!(currentScrollPosition === maximumScrollTop && distanceToScroll > maximumScrollTop)) {
-            this._disableScrollSpy = true;
+            !this._init ? this._disableScrollSpy = true : this._init = false;
             fromEvent(containerElement, 'scroll')
                 .pipe(
                     takeUntil(this._onDestroy$),
