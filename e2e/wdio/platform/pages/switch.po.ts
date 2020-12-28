@@ -6,11 +6,11 @@ export class SwitchPo extends BaseComponentPo {
 
     root = '#page-content';
     defaultSwitch = '#default-switch-input';
-    defaultSwitchSize = '#default-switch .fd-switch';
+    defaultSwitchSize = '#default-switch .fd-switch span';
     defaultSwitchHandel = '#default-switch .fd-switch__handle';
 
     defaultCompactSwitch = '#default-compact-switch-input';
-    defaultCompactSwitchSize = '#default-compact-switch .fd-switch--compact';
+    defaultCompactSwitchSize = '#default-compact-switch .fd-switch--compact span';
     defaultCompactSwitchHandel = '#default-compact-switch .fd-switch__handle';
 
     disabledSwitch = '#switch-disabled-input';
