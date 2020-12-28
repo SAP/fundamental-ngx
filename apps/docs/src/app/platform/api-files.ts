@@ -80,5 +80,6 @@ export const API_FILES = {
     valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
     feedInput: ['FeedInputComponent'],
     fileUploader: ['PlatformFileUploaderComponent'],
-    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource']
+    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
+    approvalFlow: ['ApprovalFlowComponent', 'ApprovalFlowNodeComponent']
 };
