@@ -1,21 +1,3 @@
-/**
- * @license
- * SAP
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- *
- */
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -28,7 +10,8 @@ import {
     OnInit,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Renderer2
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BaseComponent } from '../base';
@@ -136,7 +119,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     subtle = false;
     private _inverted = false;
 
-    constructor(protected _cd: ChangeDetectorRef) {
+    constructor(protected _cd: ChangeDetectorRef, private renderer2: Renderer2) {
         super(_cd);
     }
 
@@ -148,11 +131,8 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
         }
 
         /* If link linkType===emphasized then make link emphasized type */
-        if (this.linkType === VALID_INPUT_TYPES[1]) {
-            this.emphasized = true;
-        } else if (this.linkType === VALID_INPUT_TYPES[2]) {
-            this.subtle = true;
-        }
+        this.emphasized = this.linkType === VALID_INPUT_TYPES[1];
+        this.subtle = this.linkType === VALID_INPUT_TYPES[2];
 
         /* if link type not supported, throw Error */
         if (this.linkType && VALID_INPUT_TYPES.indexOf(this.linkType) === -1) {
@@ -174,7 +154,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     onMouseEnter(event: MouseEvent): void {
         event.stopPropagation();
         if (this.icon) {
-            this.icon._addStyleToElement('text-decoration', 'underline');
+            this.renderer2.setStyle(this.icon.elementRef().nativeElement, 'text-decoration', 'underline');
         }
     }
 
@@ -185,7 +165,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     onMouseLeave(event: MouseEvent): void {
         event.stopPropagation();
         if (this.icon) {
-            this.icon._addStyleToElement('text-decoration', 'none');
+            this.renderer2.setStyle(this.icon.elementRef().nativeElement, 'text-decoration', 'none');
         }
     }
 
