@@ -1,5 +1,7 @@
 <fd-grid-list>
-    <fd-grid-list-title-bar title="Products" totalCount="7"></fd-grid-list-title-bar>
+    <fd-grid-list-title-bar title="Products">
+        <span fd-grid-list-title-bar-additional-title-item>(7)</span>
+    </fd-grid-list-title-bar>
 
     <fd-grid-list-group-header> State: Unread </fd-grid-list-group-header>
 
@@ -9,7 +11,7 @@
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4">Title 1</h4>
+                <h6 fd-title>Title 1</h6>
                 <p>Description 1</p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -17,7 +19,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
     </fd-grid-list-item>
@@ -30,7 +32,7 @@
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4">Title 2</h4>
+                <h6 fd-title>Title 2</h6>
                 <p>Description 2</p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -38,7 +40,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
     </fd-grid-list-item>
@@ -49,7 +51,7 @@
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4">Title 2.1</h4>
+                <h6 fd-title>Title 2.1</h6>
                 <p>Description 2.1</p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -57,7 +59,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
 
@@ -74,7 +76,7 @@
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4">Title 3</h4>
+                <h6 fd-title>Title 3</h6>
                 <p>Description 3</p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -82,7 +84,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
     </fd-grid-list-item>
@@ -93,7 +95,7 @@
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4">Title 3.1</h4>
+                <h6 fd-title>Title 3.1</h6>
                 <p>Description 3.1</p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -101,7 +103,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
 
@@ -118,7 +120,7 @@
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4">Title 4</h4>
+                <h6 fd-title>Title 4</h6>
                 <p>Description 4</p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -126,7 +128,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
     </fd-grid-list-item>
@@ -137,7 +139,7 @@
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4">Title 4.1</h4>
+                <h6 fd-title>Title 4.1</h6>
                 <p>Description 4.1</p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -145,7 +147,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
 

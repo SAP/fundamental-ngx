@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FdDropEvent } from '@fundamental-ngx/core';
-import { GridListItem } from '../grid-list-item.interface';
+
+interface GridListItem {
+    id: number;
+    title: string;
+    description: string;
+}
 
 @Component({
     selector: 'fd-grid-list-dnd-example',
     templateUrl: './grid-list-dnd-example.component.html',
-    styleUrls: ['../grid-list.component.scss'],
+    styleUrls: ['./grid-list-dnd-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridListDndExampleComponent {
@@ -18,8 +23,7 @@ export class GridListDndExampleComponent {
         {
             id: 2,
             title: 'Title 2',
-            description: 'Description 2',
-            selected: true
+            description: 'Description 2'
         },
         {
             id: 3,

@@ -30,6 +30,8 @@ import * as gridListFooterHtml from '!raw-loader!./examples/footer/grid-list-foo
 import * as gridListDndHtml from '!raw-loader!./examples/dnd/grid-list-dnd-example.component.html';
 import * as gridListLayoutHtml from '!raw-loader!./examples/layout/grid-list-layout-example.component.html';
 
+import * as scssFileCode from '!raw-loader!./examples/grid-list.component.scss';
+
 @Component({
     selector: 'app-grid-list',
     templateUrl: './grid-list-docs.component.html'
@@ -39,6 +41,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListDefaultHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-example'
         },
         {
@@ -53,6 +56,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListSingleSelectHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-single-select-example'
         },
         {
@@ -67,6 +71,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListSingleSelectLeftHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-single-select-left-example'
         },
         {
@@ -81,6 +86,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListSingleSelectRightHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-single-select-right-example'
         },
         {
@@ -95,6 +101,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListMultiSelectHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-multi-select-example'
         },
         {
@@ -109,6 +116,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListDeleteHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-delete-example'
         },
         {
@@ -123,6 +131,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListGroupHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-delete-example'
         },
         {
@@ -137,6 +146,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListStatesHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-states-example'
         },
         {
@@ -151,6 +161,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListStatusesHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-statuses-example'
         },
         {
@@ -165,6 +176,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListMoreHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-more-example'
         },
         {
@@ -179,6 +191,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListFooterHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-footer-example'
         },
         {
@@ -193,6 +206,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListDndHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-dnd-example'
         },
         {
@@ -207,6 +221,7 @@ export class GridListDocsComponent {
         {
             language: 'html',
             code: gridListLayoutHtml,
+            scssFileCode: scssFileCode,
             fileName: 'grid-list-layout-example'
         },
         {

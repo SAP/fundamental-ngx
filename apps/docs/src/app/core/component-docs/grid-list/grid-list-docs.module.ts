@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AvatarModule, DragAndDropModule, GridListModule } from '@fundamental-ngx/core';
+import { AvatarModule, DragAndDropModule, GridListModule, LinkModule, TitleModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -27,7 +27,9 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         GridListModule,
         DragAndDropModule,
-        AvatarModule
+        AvatarModule,
+        LinkModule,
+        TitleModule
     ],
     exports: [RouterModule],
     declarations: [

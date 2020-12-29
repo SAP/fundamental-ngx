@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GridListItem } from '../grid-list-item.interface';
+
+interface GridListItem {
+    id: number;
+    title: string;
+    description: string;
+}
 
 @Component({
     selector: 'fd-grid-list-group-example',
     templateUrl: './grid-list-group-example.component.html',
-    styleUrls: ['../grid-list.component.scss'],
+    styleUrls: ['./grid-list-group-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridListGroupExampleComponent {
@@ -17,8 +22,7 @@ export class GridListGroupExampleComponent {
         {
             id: 2,
             title: 'Title 2',
-            description: 'Description 2',
-            selected: true
+            description: 'Description 2'
         },
         {
             id: 3,

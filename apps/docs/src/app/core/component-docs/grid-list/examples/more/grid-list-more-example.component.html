@@ -1,11 +1,11 @@
 <fd-grid-list>
-    <fd-grid-list-title-bar title="Products" [totalCount]="totalItems"></fd-grid-list-title-bar>
+    <fd-grid-list-title-bar title="Products"></fd-grid-list-title-bar>
 
     <fd-grid-list-item *ngFor="let item of list; let i = index">
         <div class="fd-grid-list-item-body--container">
             <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
-                <h4 class="fd-title fd-title--h4" [innerText]="item.title + ' ' + (i + 1)"></h4>
+                <h6 fd-title [innerText]="item.title + ' ' + (i + 1)"></h6>
                 <p [innerText]="item.description + ' ' + (i + 1)"></p>
                 <div class="fd-grid-list-item-body--content-address">
                     <p>781 Main Street</p>
@@ -13,7 +13,7 @@
                     <p>USA</p>
                 </div>
 
-                <a href="#" class="fd-link" tabindex="0">john_li@example.com</a>
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
             </div>
         </div>
     </fd-grid-list-item>

@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { parseItemLayoutPattern } from '../../helpers';
+import { parseLayoutPattern } from '../../helpers';
 import { GridListSelectionActions, GridListSelectionService } from '../../services/grid-list-selection.service';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar';
 import { GridListSelectionMode } from '../grid-list';
@@ -163,7 +163,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     set gridLayoutClasses(value: string) {
         const el = this._elementRef.nativeElement;
         if (!this._gridLayoutClasses) {
-            this._gridLayoutClasses = `fd-col ${value}`;
+            this._gridLayoutClasses = value;
 
             el.classList.add(...this._gridLayoutClasses.split(' '));
 
@@ -171,7 +171,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         }
 
         el.classList.remove(...this._gridLayoutClasses.split(' '));
-        this._gridLayoutClasses = `fd-col ${value}`;
+        this._gridLayoutClasses = value;
         el.classList.add(...this._gridLayoutClasses.split(' '));
     }
 
@@ -239,7 +239,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
             changes.layoutItemPattern &&
             changes.layoutItemPattern.previousValue !== changes.layoutItemPattern.currentValue
         ) {
-            this.gridLayoutClasses = parseItemLayoutPattern(this.layoutItemPattern);
+            this.gridLayoutClasses = parseLayoutPattern(this.layoutItemPattern, false);
         }
     }
 
@@ -254,7 +254,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    singleSelect(event: MouseEvent): void {
+    _singleSelect(event: MouseEvent): void {
         this._preventDefault(event);
 
         this._gridListSelectionService.setSelectedItem(this.value, this._index);
@@ -276,40 +276,28 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     _onDetail(event: MouseEvent): void {
         this._preventDefault(event);
 
-        this.detail.emit({
-            value: this.value,
-            index: this._index
-        });
+        this.detail.emit(this._outputEventValue);
     }
 
     /** @hidden */
     _onNavigate(event: MouseEvent): void {
         this._preventDefault(event);
 
-        this.navigate.emit({
-            value: this.value,
-            index: this._index
-        });
+        this.navigate.emit(this._outputEventValue);
     }
 
     /** @hidden */
     _onDelete(event: MouseEvent): void {
         this._preventDefault(event);
 
-        this.delete.emit({
-            value: this.value,
-            index: this._index
-        });
+        this.delete.emit(this._outputEventValue);
     }
 
     /** @hidden */
     _clickOnDraft(event: MouseEvent): void {
         this._preventDefault(event);
 
-        this.draft.emit({
-            value: this.value,
-            index: this._index
-        });
+        this.draft.emit(this._outputEventValue);
     }
 
     /** @hidden */
@@ -317,10 +305,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         event.stopPropagation();
         event.preventDefault();
 
-        this.locked.emit({
-            value: this.value,
-            index: this._index
-        });
+        this.locked.emit(this._outputEventValue);
     }
 
     /** @hidden */
@@ -329,10 +314,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
             return;
         }
 
-        this.press.emit({
-            value: this.value,
-            index: this._index
-        });
+        this.press.emit(this._outputEventValue);
     }
 
     /** @hidden */
@@ -340,4 +322,11 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         event.preventDefault();
         event.stopPropagation();
     }
+
+    private get _outputEventValue(): GridListItemOutputEvent<T> {
+        return {
+             value: this.value,
+             index: this._index
+         }
+     }
 }

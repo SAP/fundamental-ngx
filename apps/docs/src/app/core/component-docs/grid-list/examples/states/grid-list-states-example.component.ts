@@ -4,7 +4,7 @@ import { GridListItemOutputEvent } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-grid-list-states-example',
     templateUrl: './grid-list-states-example.component.html',
-    styleUrls: ['../grid-list.component.scss']
+    styleUrls: ['./grid-list-states-example.component.scss']
 })
 export class GridListStatesExampleComponent {
     locked(event: GridListItemOutputEvent<undefined>): void {

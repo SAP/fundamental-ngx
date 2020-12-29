@@ -1,6 +1,5 @@
 import {
     Component,
-    ContentChild,
     ContentChildren,
     QueryList,
     ViewEncapsulation,
@@ -19,8 +18,6 @@ import { filter } from 'rxjs/operators';
 import { parseLayoutPattern } from '../../helpers';
 import { GridListSelectionEvent, GridListSelectionService } from '../../services/grid-list-selection.service';
 import { GridListItemComponent } from '../grid-list-item';
-import { GridListMoreBtnComponent } from '../grid-list-more-btn';
-import { GridListTitleBarComponent } from '../grid-list-title-bar';
 
 let gridListUniqueId = 0;
 
@@ -78,19 +75,11 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
     selectionChange = new EventEmitter<GridListSelectionEvent<T>>();
 
     /** @hidden */
-    @ContentChild(GridListTitleBarComponent)
-    titleBarComponent: GridListTitleBarComponent;
-
-    /** @hidden */
     @ContentChildren(GridListItemComponent, { descendants: true })
     set gridListItems(components: QueryList<GridListItemComponent<T>>) {
         this._gridListItems = components;
         this._updateGridListItemsProperties(components);
     }
-
-    /** @hidden */
-    @ContentChild(GridListMoreBtnComponent)
-    moreBtnComponent: GridListMoreBtnComponent;
 
     /** @hidden */
     private _gridListItems: QueryList<GridListItemComponent<T>>;
@@ -132,10 +121,6 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.moreBtnComponent) {
-            this.titleBarComponent._showTotalCount = false;
-        }
-
         this._cd.detectChanges();
     }
 

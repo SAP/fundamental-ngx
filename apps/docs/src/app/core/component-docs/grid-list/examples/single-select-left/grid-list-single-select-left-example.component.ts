@@ -1,11 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GridListItemOutputEvent } from '@fundamental-ngx/core';
-import { GridListItem } from '../grid-list-item.interface';
+
+interface GridListItem {
+    id: number;
+    title: string;
+    description: string;
+    type?: string,
+    counter?: number;
+    selected?: boolean;
+}
 
 @Component({
     selector: 'fd-grid-list-single-select-left-example',
     templateUrl: './grid-list-single-select-left-example.component.html',
-    styleUrls: ['../grid-list.component.scss'],
+    styleUrls: ['./grid-list-single-select-left-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridListSingleSelectLeftExampleComponent {

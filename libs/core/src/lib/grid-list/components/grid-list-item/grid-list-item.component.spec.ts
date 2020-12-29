@@ -6,10 +6,10 @@ import { GridListModule } from '../../grid-list.module';
 import { GridListComponent } from '../grid-list/grid-list.component';
 
 @Component({
-    selector: 'fd-test-object-status',
+    selector: 'fd-test-grid-list-item',
     template: `
         <fd-grid-list>
-            <fd-grid-list-title-bar title="Products" [totalCount]="list.length"></fd-grid-list-title-bar>
+            <fd-grid-list-title-bar title="Products"></fd-grid-list-title-bar>
 
             <fd-grid-list-item
                 *ngFor="let item of list"

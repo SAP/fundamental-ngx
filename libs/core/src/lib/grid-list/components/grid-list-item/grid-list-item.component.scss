@@ -2,13 +2,11 @@
     position: relative;
 
     &.fd-dnd-on-drag {
-        z-index: 1;
+        background-color: transparent;
     }
 }
 
 .fd-grid-list__item {
-    overflow: hidden;
-
     &::ng-deep {
         .drop-area__line--vertical {
             height: 100%;

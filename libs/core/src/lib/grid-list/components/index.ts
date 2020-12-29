@@ -1,12 +1,13 @@
 import { GridListComponent } from './grid-list';
 import { GridListItemComponent } from './grid-list-item';
-import { GridListTitleBarComponent } from './grid-list-title-bar';
+import { GridListTitleBarAdditionalTitleItemDirective, GridListTitleBarComponent } from './grid-list-title-bar';
 import { GridListFilterBarComponent } from './grid-list-filter-bar';
 import { GridListMoreBtnComponent } from './grid-list-more-btn';
 import { GridListFooterComponent } from './grid-list-footer';
 import { GridListItemFooterBarComponent } from './grid-list-item-footer-bar';
 import { GridListItemToolbarComponent } from './grid-list-item-toolbar';
 import { GridListGroupHeaderComponent } from './grid-list-group-header';
+import { GridListTitleBarSpacerComponent } from './grid-list-title-bar-spacer';
 
 export * from './grid-list';
 export * from './grid-list-item';
@@ -17,6 +18,7 @@ export * from './grid-list-footer';
 export * from './grid-list-item-footer-bar';
 export * from './grid-list-item-toolbar';
 export * from './grid-list-group-header';
+export * from './grid-list-title-bar-spacer';
 
 export const COMPONENTS = [
     GridListComponent,
@@ -27,5 +29,7 @@ export const COMPONENTS = [
     GridListFooterComponent,
     GridListItemFooterBarComponent,
     GridListItemToolbarComponent,
-    GridListGroupHeaderComponent
+    GridListGroupHeaderComponent,
+    GridListTitleBarSpacerComponent,
+    GridListTitleBarAdditionalTitleItemDirective
 ];

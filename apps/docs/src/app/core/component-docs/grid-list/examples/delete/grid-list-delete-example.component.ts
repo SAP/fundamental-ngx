@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GridListItemOutputEvent } from '@fundamental-ngx/core';
-import { GridListItem } from '../grid-list-item.interface';
+
+interface GridListItem {
+    id: number;
+    title: string;
+    description: string;
+}
 
 @Component({
     selector: 'fd-grid-list-delete-example',
     templateUrl: './grid-list-delete-example.component.html',
-    styleUrls: ['../grid-list.component.scss'],
+    styleUrls: ['./grid-list-delete-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridListDeleteExampleComponent {
@@ -18,8 +23,7 @@ export class GridListDeleteExampleComponent {
         {
             id: 2,
             title: 'Title 2',
-            description: 'Description 2',
-            selected: true
+            description: 'Description 2'
         },
         {
             id: 3,
@@ -49,6 +53,7 @@ export class GridListDeleteExampleComponent {
     ];
 
     delete(event: GridListItemOutputEvent<number>): void {
+        this.list.splice(event.index, 1);
         console.log('Deleted item event', event);
     }
 }

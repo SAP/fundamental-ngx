@@ -9,14 +9,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridListTitleBarComponent {
-    /** Sets title of the button */
+    /** Sets title of the Grid List */
     @Input()
     title: string;
-
-    /** Sets the number of total items. */
-    @Input()
-    totalCount = 0;
-
-    /** @hidden */
-    _showTotalCount = true;
 }

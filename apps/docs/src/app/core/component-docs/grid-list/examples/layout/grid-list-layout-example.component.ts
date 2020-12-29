@@ -1,10 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GridListItem } from '../grid-list-item.interface';
+
+interface GridListItem {
+    id: number;
+    title: string;
+    description: string;
+    layoutItemPattern?: string;
+}
 
 @Component({
     selector: 'fd-grid-list-layout-example',
     templateUrl: './grid-list-layout-example.component.html',
-    styleUrls: ['../grid-list.component.scss'],
+    styleUrls: ['./grid-list-layout-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridListLayoutExampleComponent {
