@@ -197,17 +197,23 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setContainerAndTallContentHeight(): void {
         const wizard = this._elRef.nativeElement;
+        let calcVal;
+        if (this._elRef.nativeElement.parentNode.nodeName.toLowerCase() === 'fd-dialog-body') {
+            calcVal = 'calc(' + this._elRef.nativeElement.offsetParent.clientHeight + ' - ';
+        } else {
+            calcVal = 'calc(100vh - ';
+        }
         const combinedHeight = this.contentHeight ? this.contentHeight : this._calculateContentHeight();
         if (wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS)) {
             wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height =
-                'calc(100vh - ' + combinedHeight + 'px)';
+                calcVal + combinedHeight + 'px)';
         }
         wizard.querySelectorAll('.' + WIZARD_CONTENT_CLASS).forEach((node) => {
             node.style.height = 'auto';
         });
         if (wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS)) {
             wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).style.height =
-                'calc(100vh - ' + combinedHeight + 'px)';
+                calcVal + combinedHeight + 'px)';
         }
     }
 
