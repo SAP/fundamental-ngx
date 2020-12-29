@@ -1,0 +1,27 @@
+<fd-time-picker
+    [attr.aria-label]="ariaLabel"
+    [attr.ariaLabelledBy]="ariaLabelledBy"
+    [attr.ariaDescribedBy]="ariaDescribedBy"
+    [time]="time"
+    [compact]="contentDensity === 'compact'"
+    [meridian]="meridian"
+    [disabled]="disabled"
+    [displayFormat]="displayFormat"
+    [spinnerButtons]="spinnerButtons"
+    [displaySeconds]="displaySeconds"
+    [displayMinutes]="displayMinutes"
+    [displayHours]="displayHours"
+    [placeholder]="placeholder"
+    [timePickerInputLabel]="timePickerInputLabel"
+    [allowNull]="allowNull"
+    [tablet]="tablet"
+    [placement]="placement"
+    [parseFormat]="parseFormat"
+    [state]="state"
+    [buttonFocusable]="buttonFocusable"
+    [keepTwoDigitsTime]="keepTwoDigitsTime"
+    (isOpenChange)="handleOpenChange($event)"
+    (ngModelChange)="handleTimeChange($event)"
+    [(ngModel)]="value">
+    <ng-content></ng-content>
+</fd-time-picker>
