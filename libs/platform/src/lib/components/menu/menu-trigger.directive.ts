@@ -253,8 +253,8 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                         originY: 'top',
                         overlayX: 'end',
                         overlayY: 'top',
-                        offsetX: 4,
-                        offsetY: 4
+                        offsetX: subMenuXPadding,
+                        offsetY: subMenuYPadding
                     },
                     {
                         originX: 'start',
@@ -262,7 +262,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                         overlayX: 'end',
                         overlayY: 'bottom',
                         offsetX: subMenuXPadding,
-                        offsetY: subMenuYPadding
+                        offsetY: -subMenuYPadding
                     }
                 ];
             } else {
@@ -280,8 +280,8 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                         originY: 'bottom',
                         overlayX: 'start',
                         overlayY: 'bottom',
-                        offsetX: -4,
-                        offsetY: 4
+                        offsetX: -subMenuXPadding,
+                        offsetY: -subMenuYPadding
                     }
                 ];
             }
