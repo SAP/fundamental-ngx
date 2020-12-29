@@ -302,27 +302,11 @@ describe('Checkbox test suite', () => {
                 return;
             }
             console.log('skip for IE');
-            // const areaContainersArrayLength = getElementArrayLength(exampleAreaContainersArr);
-            //
-            // for (let i = 0; areaContainersArrayLength > i; i++) {
-            //     expect(getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value)
-            //         .toBe('ltr', 'css prop direction ');
-            // }
         });
 
-        // it('should check RTL orientation', () => {
-        //     const arrL = getElementArrayLength(exampleAreaContainersArr);
-        //
-        //     for (let i = 0; arrL > i; i++) {
-        //         scrollIntoView(exampleAreaContainersArr, i);
-        //         expect(getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-        //         const dirValueBefore = getAttributeByName(exampleAreaContainersArr, 'dir', i);
-        //         expect([null, '']).toContain(dirValueBefore);
-        //         click(checkboxPage.rtlSwitcherArr, i);
-        //         expect(getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-        //         expect(getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-        //     }
-        // });
+        it('should check RTL orientation', () => {
+            checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
+        });
     });
 });
 
