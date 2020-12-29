@@ -55,7 +55,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         private _viewContainerRef: ViewContainerRef,
         @Optional() @Self() private _menuItem: MenuItemComponent,
         @Optional() private _parentMenu: MenuComponent
-    ) { }
+    ) {}
 
     ngAfterContentInit(): void {
         if (this._isMenuItem()) {
@@ -97,7 +97,6 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         if ($event.detail > 0) {
             this.toggleMenu();
         }
-
     }
 
     /** @hidden Handled keypress which focus is on trigger element. */
@@ -242,8 +241,8 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         let positions: ConnectedPosition[] = [];
         const offsetYPosition = 0;
         const offsetXPosition = 0;
-        const subMenuXPadding = 4;
-        const subMenuYPadding = 4;
+        const subMenuXPadding = 4; // horizontal padding of 0.25rem(4px) is needed for sub-menu
+        const subMenuYPadding = 4; // vertical padding of 0.25rem(4px) is needed for sub-menu
 
         if (this._isMenuItem()) {
             if (this._menu.cascadesLeft()) {
