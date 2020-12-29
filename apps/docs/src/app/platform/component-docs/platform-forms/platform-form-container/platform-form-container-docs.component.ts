@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 import * as platformFormLayoutContainerSrc from '!raw-loader!./platform-form-container-examples/platform-form-container-recommended-example.component.html';
@@ -9,6 +9,8 @@ import * as platformNotRecommendedFormContainerSrc from '!raw-loader!./platform-
 import * as platformNotRecommendedFormContainerTsCode from '!raw-loader!./platform-form-container-examples/platform-form-container-not-recommended-example.component.ts';
 import * as platformComplexFormContainerSrc from '!raw-loader!./platform-form-container-examples/platform-form-container-complex-example.component.html';
 import * as platformComplexFormContainerTsCode from '!raw-loader!./platform-form-container-examples/platform-form-container-complex-example.component.ts';
+import * as platformColumnsFormContainerSrc from '!raw-loader!./platform-form-container-examples/platform-form-basic/platform-form-basic-example.component.html';
+import * as platformGroupingFormContainerSrc from '!raw-loader!./platform-form-container-examples/platform-form-group/platform-form-group-example.component.html';
 
 @Component({
     selector: 'app-form-container',
@@ -69,4 +71,24 @@ export class PlatformFormContainerDocsComponent {
             component: 'PlatformFormContainerComplexExampleComponent'
         }
     ];
+
+    formContainerColumn: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformColumnsFormContainerSrc,
+            fileName: 'platform-form-container-columns-example',
+            component: 'PlatformFormContainerBasicExampleComponent'
+        }
+    ]
+
+    formContainerGroup: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformGroupingFormContainerSrc,
+            fileName: 'platform-form-container-grouping-example',
+            component: 'PlatformFormContainerGroupExampleComponent'
+        }
+    ]
+
+
 }

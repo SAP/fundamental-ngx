@@ -1,112 +1,86 @@
-<fdp-form-group mainTitle="Header" columnLayoutType="XL3-L1-M1-S1" labelLayout="horizontal" multiLayout="true">
+<fdp-form-group mainTitle="Header" columnLayoutType="XL3-L2-M1-S1" labelLayout="horizontal" multiLayout="true">
     <fdp-form-field
         #f1
-        id="textarea1"
-        label="Textarea 1 Column"
+        id="basicTextarea1"
+        label="Basic Textarea 1"
         placeholder="Start entering detailed description"
-        rank="10"
         column="1"
     >
-        <fdp-textarea name="textarea1" [formControl]="f1.formControl"></fdp-textarea>
+        <fdp-textarea name="basicTextarea1" [formControl]="f1.formControl"></fdp-textarea>
     </fdp-form-field>
 
     <fdp-form-field
         #f2
-        id="textarea2"
-        label="Textarea 2 Column"
+        id="basicTextarea2"
+        label="Basic Textarea 2"
         placeholder="Start entering detailed description"
-        rank="20"
         column="2"
     >
         <fdp-textarea name="textarea1" [formControl]="f2.formControl"></fdp-textarea>
     </fdp-form-field>
 
     <fdp-form-field
-        #f33
-        id="textarea33"
-        label="Textarea 3 Column"
+        #f3
+        id="basicTextarea"
+        label="Basic Textarea 3"
         placeholder="Start entering detailed description"
         column="3"
-        rank="30"
     >
-        <fdp-textarea name="textarea1" [formControl]="f33.formControl"></fdp-textarea>
+        <fdp-textarea name="textarea1" [formControl]="f3.formControl"></fdp-textarea>
     </fdp-form-field>
 
     <fdp-form-field-group label="Group Label Custom">
         <fdp-form-field
-            #f3
-            id="textarea3"
-            label="Textarea 1 Group"
+            #f4
+            id="fieldGroupTextArea1"
+            label="Field Group Textarea 1"
             placeholder="Start entering detailed description"
             column="1"
         >
-            <fdp-textarea name="textarea3" [formControl]="f3.formControl"></fdp-textarea>
+            <fdp-textarea name="fieldGroupTextArea1" [formControl]="f4.formControl"></fdp-textarea>
         </fdp-form-field>
 
         <fdp-form-field
-            #f4
-            id="textarea4"
-            label="Textarea 2 Group"
+            #f5
+            id="fieldGroupTextArea2"
+            label="Field Group Textarea 2"
             placeholder="Start entering detailed description"
             column="2"
         >
-            <fdp-textarea name="textarea3" [formControl]="f4.formControl"></fdp-textarea>
+            <fdp-textarea name="fieldGroupTextArea2" [formControl]="f5.formControl"></fdp-textarea>
         </fdp-form-field>
 
         <fdp-form-field
-            #f55
-            id="textarea55"
-            label="Textarea 55 Group"
+            #f6
+            id="fieldGroupTextArea3"
+            label="Field Group Textarea 3"
             placeholder="Start entering detailed description"
-            column="2"
+            column="3"
         >
-            <fdp-textarea name="textarea3" [formControl]="f55.formControl"></fdp-textarea>
+            <fdp-textarea name="fieldGroupTextArea3" [formControl]="f6.formControl"></fdp-textarea>
         </fdp-form-field>
 
     </fdp-form-field-group>
-
 
     <fdp-form-field-group label="Group Label Custom 2">
         <fdp-form-field
-            #f3
-            id="textarea333"
-            label="Textarea 1 Group"
+            #f7
+            id="fieldGroupTextArea4"
+            label="Field Group Textarea 4"
             placeholder="Start entering detailed description"
             column="1"
         >
-            <fdp-textarea name="textarea3" [formControl]="f3.formControl"></fdp-textarea>
+            <fdp-textarea name="fieldGroupTextArea4" [formControl]="f7.formControl"></fdp-textarea>
         </fdp-form-field>
 
         <fdp-form-field
-            #f4
-            id="textarea444"
-            label="Textarea 2 Group"
+            #f8
+            id="fieldGroupTextArea5"
+            label="Field Group Textarea 4"
             placeholder="Start entering detailed description"
-            column="2"
+            column="1"
         >
-            <fdp-textarea name="textarea3" [formControl]="f4.formControl"></fdp-textarea>
+            <fdp-textarea name="fieldGroupTextArea5" [formControl]="f8.formControl"></fdp-textarea>
         </fdp-form-field>
-
     </fdp-form-field-group>
-
-    <fdp-form-field
-        #f233
-        id="textareaSeparate"
-        label="TextareaSeparate"
-        placeholder="Start entering detailed description"
-        column="2"
-    >
-        <fdp-textarea name="textareaSeparate" [formControl]="f233.formControl"></fdp-textarea>
-    </fdp-form-field>
-
-    <fdp-form-field
-        #f355
-        id="textarea355"
-        label="Textarea 355 S"
-        placeholder="Start entering detailed description"
-        column="1"
-    >
-        <fdp-textarea name="textarea355" [formControl]="f355.formControl"></fdp-textarea>
-    </fdp-form-field>
-
 </fdp-form-group>

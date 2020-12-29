@@ -42,15 +42,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="formContainerBasic" componentName="formContainer"> Form XL Columns </fd-docs-section-title>
-<description>Platform Form</description>
+<fd-docs-section-title id="formContainerBasic" componentName="formContainer"> Column Binding </fd-docs-section-title>
+<description>To bind column use the <code>[column]</code> attribute. The column attribute specify the respective layout for XL size, the rest automatically wrap according to layout pattern.</description>
 <component-example>
     <fdp-platform-form-basic-example></fdp-platform-form-basic-example>
 </component-example>
-<code-example [exampleFiles]="formContainerComplex"></code-example>
+<code-example [exampleFiles]="formContainerColumn"></code-example>
 
-<fd-docs-section-title id="formContainerGroup" componentName="formContainer"> Form Group </fd-docs-section-title>
-<description>Group</description>
+<fd-docs-section-title id="formContainerGroup" componentName="formContainer"> Form Field Group </fd-docs-section-title>
+<description>Wrap fields with the <code>[form-field-group]</code> component to group them. You can use <code>[column]</code> and <code>[rank]</code> attribute</description>
 <component-example>
     <fdp-platform-form-group-example></fdp-platform-form-group-example>
 </component-example>
+<code-example [exampleFiles]="formContainerGroup"></code-example>

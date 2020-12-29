@@ -23,7 +23,6 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
-    ElementRef,
     EventEmitter,
     forwardRef,
     Input,
@@ -265,9 +264,10 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     ngAfterContentInit(): void {
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
-        this.updateFieldByZone();
-        this.updateFormFieldsProperties();
+        this._setUserSpecifiedLayout();
+        // this.updateFieldByZone();
         this.updateFieldByColumn();
+        this.updateFormFieldsProperties();
 
         this._cd.markForCheck();
     }
@@ -307,53 +307,49 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         return zoneField ? zoneField.name : undefined;
     }
 
+    /**
+     *
+     * Assign the fields or field group to specified columns with rank
+     */
     private updateFieldByColumn(): void {
-        const xl = this.columnLayoutType.split('-');
-        const xlColumnsNumber = parseInt(xl[0].slice(2, xl.length), 10);
-
-        this.xlCol = `fd-col-xl--${ 12 / xlColumnsNumber }`;
-
+        const [xl] = this.columnLayoutType.split('-');
+        const xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
         const modifiedColumns: { [key: string]: any } = { };
         let rowNumber = 0;
-        let col = {}
+        let cols = {};
 
         for (const field of this.formFieldChildren) {
             if (!Boolean(field instanceof FormFieldGroupComponent)) {
                 const f = this._getGroupField(field);
-                this._setUserSpecifiedLayout(f);
+                const columnNumber = field.column ? field.column : xlColumnsNumber;
 
-                if (!col[field.column]) {
-                    col[field.column] = [f];
+                if (!cols[columnNumber]) {
+                    cols[columnNumber] = [f];
                 } else {
-                    col[field.column].push(f);
+                    cols[columnNumber].push(f);
                 }
-
             } else {
-                const groupCol = {};
-                modifiedColumns[rowNumber] = col;
-                col = {};
+                const fieldGroupColumns = {};
+                modifiedColumns[rowNumber] = cols;
+                cols = {};
                 rowNumber++;
-                const g = field.fields.map(f => {
-                    const _f = this._getGroupField(f);
-                    this._setUserSpecifiedLayout(_f);
-
-                    return _f;
+                const group = field.fields.map(f => {
+                    return this._getGroupField(f);
                 });
 
-                g.forEach(_g => {
-                    if (!groupCol[_g.column]) {
-                        groupCol[_g.column] = [_g];
+                group.forEach(_g => {
+                    if (!fieldGroupColumns[_g.column]) {
+                        fieldGroupColumns[_g.column] = [_g];
                     } else {
-                        groupCol[_g.column].push(_g);
+                        fieldGroupColumns[_g.column].push(_g);
                     }
                 });
 
-                modifiedColumns[rowNumber] = { label: field.label, g: groupCol};
+                modifiedColumns[rowNumber] = { label: field.label, fieldGroup: fieldGroupColumns};
                 rowNumber++;
             }
         }
-        modifiedColumns[rowNumber] = col;
-
+        modifiedColumns[rowNumber] = cols;
         this.modifiedColumns = modifiedColumns;
     }
 
@@ -415,7 +411,14 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     /** @hidden */
     private updateFormFieldsProperties(): void {
-        this.formFieldChildren.forEach((formField) => this.updateFormFieldProperties(formField));
+        // this.formFieldChildren.forEach((formField) => this.updateFormFieldProperties(formField));
+        this.formFieldChildren.forEach(formField => {
+           if (formField instanceof FormFieldGroupComponent) {
+               formField.fields.forEach(field => this.updateFormFieldProperties(field));
+           } else {
+               this.updateFormFieldProperties(formField);
+           }
+        });
     }
 
     /**
@@ -498,6 +501,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                 if (indexR < right.length) {
                     if (right[indexR].columns + left[indexL - 1].columns !== 12) {
                         right[indexR].columns = 12 - left[indexL - 1].columns;
+                        console.log(right[indexR].columns);
                     }
                     const f = new GroupField(
                         right[indexR].zone,
@@ -556,7 +560,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * @hidden
      * if `columnLayoutType` is given, set those column layouts appropriately
      */
-    private _setUserSpecifiedLayout(groupField: GroupField): void {
+    private _setUserSpecifiedLayout(groupField?: GroupField): void {
         const [xl, lg, md] = this.columnLayoutType.split('-');
         const xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
         const lgColumnsNumber = parseInt(lg.slice(1, lg.length), 10);
@@ -571,13 +575,14 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             const mdColumns = 12 / mdColumnsNumber;
             const xlColumns = 12 / xlColumnsNumber;
 
-
             // for `lg` single-column layout, Styles does not use any class, and providing `fd-col-lg--12` has unintended side-effects
             // therefore, we remove the lg class for single-column layout
             if (lgColumns === 12) {
-                groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
+                // groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
+                this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
             } else {
-                groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
+                // groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
+                this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
             }
         }
     }

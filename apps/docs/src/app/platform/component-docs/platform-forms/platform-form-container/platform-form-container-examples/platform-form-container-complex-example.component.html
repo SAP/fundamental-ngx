@@ -6,13 +6,18 @@
         label="Basic Textarea"
         [placeholder]="'Start entering detailed description'"
         hint="This is tooltip help"
-        zone="zLeft"
+        column="1"
         rank="1"
         hintPlacement="left"
     >
         <fdp-textarea name="basicTextarea22" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field #ff8 id="switch1" label="Switch" zone="zLeft" rank="2">
+    <fdp-form-field
+        #ff8 id="switch1"
+        label="Switch"
+        column="1"
+        rank="2"
+    >
         <fdp-switch
             [formControl]="ff8.formControl"
             name="switch-1"
@@ -24,7 +29,13 @@
         </fdp-switch>
     </fdp-form-field>
 
-    <fdp-form-field #ff3 label="Input Field" id="inputField" zone="zLeft" rank="3" placeholder="Field placeholder text">
+    <fdp-form-field
+        #ff3 label="Input Field"
+        id="inputField"
+        column="1"
+        rank="3"
+        placeholder="Field placeholder text"
+    >
         <fdp-input name="inputField" id="inputField" type="text" [formControl]="ff3.formControl"> </fdp-input>
     </fdp-form-field>
     <fdp-form-field
@@ -33,7 +44,7 @@
         label="Step Input"
         placeholder="Things quantity"
         hint="This is tooltip to help"
-        zone="zLeft"
+        column="1"
         rank="7"
         hintPlacement="left"
     >
@@ -55,7 +66,7 @@
         id="qty"
         label="Input Group"
         placeholder="Things quantity"
-        zone="zRight"
+        column="2"
         rank="5"
         [required]="true"
     >
