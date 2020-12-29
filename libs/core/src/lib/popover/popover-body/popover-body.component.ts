@@ -79,9 +79,9 @@ export class PopoverBodyComponent {
     onClose = new Subject<void>();
 
     constructor(
+        readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _renderer2: Renderer2,
-        private readonly _elementRef: ElementRef
+        private _renderer2: Renderer2
     ) {}
 
     /** @hidden */

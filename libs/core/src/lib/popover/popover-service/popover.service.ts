@@ -42,6 +42,9 @@ export class PopoverService extends BasePopoverClass {
     templateContent: TemplateRef<any>;
 
     /** @hidden */
+    _onLoad = new Subject<ElementRef>();
+
+    /** @hidden */
     private _eventRef: Function[] = [];
 
     /** @hidden */
@@ -140,6 +143,7 @@ export class PopoverService extends BasePopoverClass {
 
             this._listenOnClose();
             this._listenOnOutClicks();
+            this._onLoad.next(this._getPopoverBody()._elementRef);
         }
     }
 

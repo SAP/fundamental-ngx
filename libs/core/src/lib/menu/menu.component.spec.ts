@@ -42,7 +42,7 @@ export class TestMenuComponent {
     trigger: ElementRef;
 }
 
-fdescribe('MenuComponent', () => {
+describe('MenuComponent', () => {
     let menu: MenuComponent;
     let menuService: MenuService;
     let menuItems: QueryList<MenuItemComponent>;

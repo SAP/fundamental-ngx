@@ -138,7 +138,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     private _mobileModeComponentRef: ComponentRef<MenuMobileComponent>;
 
     /** @hidden */
-    private _listeners: Function;
+    private _clickEventListener: Function;
 
     constructor(public elementRef: ElementRef,
                 @Optional() public dialogConfig: DialogConfig,
@@ -255,7 +255,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
      */
     private _listenOnTriggerRefClicks(): void {
         if (this.trigger) {
-            this._listeners = this._rendered.listen(this.trigger.nativeElement, 'click', () => this.toggle());
+            this._clickEventListener = this._rendered.listen(this.trigger.nativeElement, 'click', () => this.toggle());
         }
     }
 
@@ -264,8 +264,9 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
      * This is going to be removed in feature, on dialog and dynamic service component refactor
      */
     private _destroyEventListeners(): void {
-        if (this._listeners) {
-            this._listeners();
+        if (this._clickEventListener) {
+            this._clickEventListener();
+            this._clickEventListener = null;
         }
     }
 

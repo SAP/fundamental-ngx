@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopoverBodyComponent } from './popover-body.component';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { ConnectedPosition } from '@angular/cdk/overlay';
-import { DefaultPositions, PopoverPosition } from '@fundamental-ngx/core';
+import { DefaultPositions, PopoverPosition } from '../popover-position/popover-position';
 
 describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
