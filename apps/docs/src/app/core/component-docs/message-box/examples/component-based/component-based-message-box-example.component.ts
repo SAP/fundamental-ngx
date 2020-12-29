@@ -25,6 +25,8 @@ export class ComponentBasedMessageBoxExampleComponent {
                 title: 'Fruit facts',
                 text: 'Coffee beans aren\'t beans. They are fruit pits.'
             },
+            showSemanticIcon: true,
+            customSemanticIcon: 'thumb-up',
             width: '400px'
         });
 

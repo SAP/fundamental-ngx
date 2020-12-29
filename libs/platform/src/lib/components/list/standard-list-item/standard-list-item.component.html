@@ -34,17 +34,17 @@
 <ng-template #commonTemplate>
     <fd-icon class="fd-list__icon" *ngIf="titleIcon" [glyph]="titleIcon" [attr.alt]="titleIcon" role="img">
     </fd-icon>
-    <fd-avatar class="fd-list__icon" size="s" [image]="avatarSrc" *ngIf="avatarSrc!==null && avatarSrc!==undefined"
+    <fd-avatar class="fd-list__icon" size="s" [image]="avatarSrc" *ngIf="avatarSrc !== null && avatarSrc !== undefined"
         [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
     </fd-avatar>
-    <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap"
+    <span *ngIf="title" fd-list-title [attr.aria-label]="unRead? 'unread ' + title: title" [attr.nowrap]="titleWrap"
         [class.fd-list-title__unread]="unRead" [attr.title]="title">{{title}}</span>
-    <span fd-list-secondary [attr.aria-label]="secondary" *ngIf="secondary!== null && secondary!== undefined"
+    <span fd-list-secondary [attr.aria-label]="unRead? 'unread ' + secondary: secondary" *ngIf="secondary !== null && secondary !== undefined"
         [attr.title]="secondary" [attr.nowrap]="secondaryWrap" [class.fd-list-title__unread]="unRead">
         {{secondary}}
     </span>
-    <span fd-list-secondary class="fd-list__counter" [attr.aria-label]="counter" [class.fd-list-title__unread]="unRead"
-        *ngIf="counter!== null && counter!== undefined" [attr.title]="counter">
+    <span fd-list-secondary class="fd-list__counter" [attr.aria-label]="unRead? 'unread ' + counter: counter" [class.fd-list-title__unread]="unRead"
+        *ngIf="counter !== null && counter !== undefined" [attr.title]="counter">
         {{counter}}
     </span>
     <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
@@ -55,7 +55,7 @@
         role="img">
     </fd-icon>
     <fd-avatar class="fd-list__icon fd-list__thumbnail" size="s" [image]="avatarSrc"
-        *ngIf="avatarSrc!==null && avatarSrc!==undefined" [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
+        *ngIf="avatarSrc !== null && avatarSrc !== undefined" [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
     </fd-avatar>
 
     <div class="fd-list__content">
@@ -63,7 +63,7 @@
             [class.fd-list-title__unread]="unRead">
             {{title}}</div>
         <div class="fd-list__byline fd-list__byline--2-col">
-            <span *ngIf="description" class="fd-list__byline-left" [attr.aria-label]="description"
+            <span *ngIf="description" class="fd-list__byline-left" [attr.aria-label]="unRead? 'unread ' + description : description"
                 [class.fd-list-title__unread]="unRead" [attr.title]="description"
                 [attr.nowrap]="titleWrap">{{description}}</span>
             <span #rt *ngIf="secondary && !inverted" [attr.aria-label]="secondary" class="fd-list__byline-right"
@@ -71,7 +71,7 @@
                 [class.fd-list-title__unread]="unRead" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
                 {{secondary}}
             </span>
-            <span #rt1 class="fd-list__byline-right" *ngIf="inverted" [attr.aria-label]="secondary"
+            <span #rt1 class="fd-list__byline-right" *ngIf="inverted" [attr.aria-label]="unRead? 'unread ' + secondary : secondary"
                 [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
                 <fdp-object-status [status]="statusType" [inverted]="inverted" [class.fd-list-title__unread]="unRead">
                     {{secondary}}</fdp-object-status>

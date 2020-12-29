@@ -5,7 +5,8 @@ cache: npm
 dist: trusty
 addons:
     chrome: stable
-
+    hosts:
+      - sap.dev
 git:
   depth: false
 script:
@@ -15,24 +16,56 @@ jobs:
   - stage: "Lint and Test"
     if: type = pull_request
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
+    env:
+      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+      - BUILD_ID=$TRAVIS_BUILD_ID
+      - JOB_URL=$TRAVIS_JOB_WEB_UR
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
     script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
+  - stage: "Test"
+    name: Sauce Labs - e2e tests
+    if: type = pull_request
+    env:
+      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+      - BUILD_ID=$TRAVIS_BUILD_ID
+      - JOB_URL=$TRAVIS_JOB_WEB_UR
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+    script: npm run e2e:ci
+  - stage: "Test"
+    name: Sauce Labs - unit tests platform
+    if: type = pull_request
+    env:
+      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+      - BUILD_ID=$TRAVIS_BUILD_ID
+      - JOB_URL=$TRAVIS_JOB_WEB_UR
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+    script: npm run test:platform:saucelabs
+  - stage: "Test"
+    name: Sauce Labs - unit tests core
+    if: type = pull_request
+    script: npm run test:core:saucelabs
   - stage: "Pre-release"
-    if: branch = master AND type = push
+    if: branch = main AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
     before_deploy:
-    - git checkout master
+    - git checkout main
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script
       script: bash ./ci-scripts/publish.sh
       skip_cleanup: true
+      on:
+        all_branches: true
   - stage: "Release"
     if: branch = tmp_branch_for_automated_release_do_not_use
     before_script: export NODE_OPTIONS='-–-max_old_space_size=4096'
     before_deploy:
     - git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
     - git fetch
-    - git checkout master
+    - git checkout main
     - bash ./ci-scripts/setup-npm.sh
     deploy:
     - provider: script

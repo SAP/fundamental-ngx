@@ -1,13 +1,15 @@
-<label class="fd-switch__label" (click)="focus()" [ngStyle]="{ cursor: disabled ? 'auto' : 'pointer'}">
-    <span
-        class="fd-switch"
-        [ngClass]="{
-            'fd-switch--no-text': !optionalText && !semantic,
-            'fd-switch--compact': compact,
-            'fd-switch--semantic': semantic,
-            'is-disabled': disabled
-        }"
-    >
+<label 
+    class="fd-switch" 
+    (click)="focus()" 
+    [ngStyle]="{ cursor: disabled ? 'auto' : 'pointer'}"
+    [class.fd-switch--compact]="compact"
+    [class.fd-switch--semantic]="semantic"
+    [class.is-disabled]="disabled"
+>
+    <span *ngIf="activeText || inactiveText" class="fd-switch__text">
+        {{isChecked ? activeText : inactiveText}}
+    </span>
+    <span class="fd-switch__control">
         <input
             #switchInput
             class="fd-switch__input"
@@ -21,17 +23,17 @@
             [attr.aria-labelledby]="ariaLabelledby"
             [(ngModel)]="isChecked"
         />
-        <div class="fd-switch__wrapper">
+        <div class="fd-switch__slider">
             <div class="fd-switch__track">
                 <i
                     *ngIf="semantic"
                     role="presentation"
-                    class="fd-switch__text fd-switch__icon--on fd-switch__icon sap-icon--accept"></i>
+                    class="fd-switch__icon fd-switch__icon--on sap-icon--accept"></i>
                 <span class="fd-switch__handle" role="presentation"></span>
                 <i
                     *ngIf="semantic"
                     role="presentation"
-                    class="fd-switch__text fd-switch__icon--off fd-switch__icon sap-icon--decline"></i>
+                    class="fd-switch__icon--off fd-switch__icon sap-icon--decline"></i>
             </div>
         </div>
     </span>
