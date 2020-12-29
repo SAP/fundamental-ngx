@@ -242,6 +242,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         let positions: ConnectedPosition[] = [];
         const offsetYPosition = 0;
         const offsetXPosition = 0;
+        const subMenuXPadding = 4;
+        const subMenuYPadding = 4;
+
         if (this._isMenuItem()) {
             if (this._menu.cascadesLeft()) {
                 positions = [
@@ -250,14 +253,16 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                         originY: 'top',
                         overlayX: 'end',
                         overlayY: 'top',
-                        offsetX: offsetXPosition
+                        offsetX: 4,
+                        offsetY: 4
                     },
                     {
                         originX: 'start',
                         originY: 'bottom',
                         overlayX: 'end',
                         overlayY: 'bottom',
-                        offsetX: offsetXPosition
+                        offsetX: subMenuXPadding,
+                        offsetY: subMenuYPadding
                     }
                 ];
             } else {
@@ -267,14 +272,16 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                         originY: 'top',
                         overlayX: 'start',
                         overlayY: 'top',
-                        offsetX: -offsetXPosition
+                        offsetX: -subMenuXPadding,
+                        offsetY: subMenuYPadding
                     },
                     {
                         originX: 'end',
                         originY: 'bottom',
                         overlayX: 'start',
                         overlayY: 'bottom',
-                        offsetX: -offsetXPosition
+                        offsetX: -4,
+                        offsetY: 4
                     }
                 ];
             }
