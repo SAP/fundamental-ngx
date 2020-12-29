@@ -157,7 +157,7 @@ export const API_FILES = {
         'MessageBoxHeaderComponent',
         'MessageBoxFooterComponent',
         'MessageBoxDefaultComponent',
-        'MessageBoxCloseIconComponent',
+        'MessageBoxSemanticIconComponent',
         'MessageBoxContainerComponent',
         'MessageBoxFooterButtonComponent',
     ],

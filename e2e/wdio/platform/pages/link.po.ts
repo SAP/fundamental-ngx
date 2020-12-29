@@ -1,0 +1,22 @@
+import { BaseComponentPo } from './base-component.po';
+import { webDriver } from '../../driver/wdio';
+
+export class LinkPo extends BaseComponentPo {
+    readonly url = '/link';
+    readonly root = '#page-content';
+    readonly iconLink = 'fdp-platform-link-icon-example a';
+    readonly standardLinks = 'fdp-platform-link-standard-example a';
+    readonly emphasizedLink = 'fdp-platform-link-emphasized-example a';
+    readonly disabledLink = 'fdp-platform-link-disabled-example a';
+    readonly emphasizedDisabledLink = 'fdp-platform-link-disabled-emphasized-example a';
+    readonly invertedLink = 'fdp-platform-link-inverted-example a';
+    readonly truncatedLink = 'fdp-platform-link-truncated-example a';
+    readonly rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
+    readonly exampleAreaContainersArr = '.fd-doc-component';
+
+    open(): void {
+        super.open(this.url);
+        webDriver.waitForDisplayed(this.root);
+    }
+
+}

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 
 /**
  * @hidden
@@ -30,11 +31,16 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IconComponent extends AbstractFdNgxClass {
+export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
+
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
     @Input() glyph;
+
+    /** user's custom classes */
+    @Input()
+    class: string;
 
     /** @deprecated
      * Icon size is deprecated. The size can be set by font-size. It will be removed after version 0.23
@@ -45,14 +51,31 @@ export class IconComponent extends AbstractFdNgxClass {
     @Input() size = '';
 
     /** @hidden */
-    _setProperties(): void {
-        if (this.glyph) {
-            this._addClassToElement(PREFIX_ICON_CLASS + this.glyph);
-        }
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string[] {
+        return [
+            this.class,
+            this.glyph ? (PREFIX_ICON_CLASS + this.glyph) : ''
+        ];
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

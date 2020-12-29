@@ -8,13 +8,9 @@
 
     <ng-template #defaultTemplate>
         <div fd-bar-left>
-            <fd-bar-element [fullWidth]="true">
-                <ng-content select="[fd-title]"></ng-content>
-            </fd-bar-element>
-        </div>
-        <div fd-bar-right>
             <fd-bar-element>
-                <ng-content select="fd-message-box-close-icon"></ng-content>
+                <fd-message-box-semantic-icon *ngIf="_showSemanticIcon"></fd-message-box-semantic-icon>
+                <ng-content select="[fd-title]"></ng-content>
             </fd-bar-element>
         </div>
     </ng-template>

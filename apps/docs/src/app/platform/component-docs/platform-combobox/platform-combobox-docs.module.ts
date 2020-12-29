@@ -22,6 +22,7 @@ import { ComboboxColumnsExampleComponent } from './examples/combobox-columns/com
 import { ComboboxTemplatesExampleComponent } from './examples/combobox-templates/combobox-templates-example.component';
 import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobox-group-example.component';
 import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
+import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
         ComboboxColumnsExampleComponent,
         ComboboxTemplatesExampleComponent,
         ComboboxGroupExampleComponent,
-        ComboboxFormsExampleComponent
+        ComboboxFormsExampleComponent,
+        ComboboxStateComponent
     ]
 })
 export class PlatformComboboxDocsModule {
