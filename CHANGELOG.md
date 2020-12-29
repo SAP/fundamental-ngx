@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.17...v0.26.0-rc.18) (2020-12-29)
+
+
+### Bug Fixes
+
+* (Core) Dialog close button arial-label ([#4185](https://github.com/SAP/fundamental-ngx/issues/4185)) ([e68899a](https://github.com/SAP/fundamental-ngx/commit/e68899af12320b3128cf2fb0aef1a8e766c22f3a))
+
+## [0.26.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.16...v0.26.0-rc.17) (2020-12-28)
+
+## [0.26.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.15...v0.26.0-rc.16) (2020-12-28)
+
+## [0.26.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.14...v0.26.0-rc.15) (2020-12-28)
+
+
+### Bug Fixes
+
+* Toolbar refresh on item change, add height limits ([#4156](https://github.com/SAP/fundamental-ngx/issues/4156)) ([497cc30](https://github.com/SAP/fundamental-ngx/commit/497cc30bbadd4aa6ae2694519fdc704f2c0cf2b8))
+
+## [0.26.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.13...v0.26.0-rc.14) (2020-12-23)
+
+
+### Features
+
+* (Platform) introduce Approval Flow component - Phase 1  ([#4177](https://github.com/SAP/fundamental-ngx/issues/4177)) ([c6d8277](https://github.com/SAP/fundamental-ngx/commit/c6d827776ad35c48f0f53b0213a51b6b35c79857))
+
 ## [0.26.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.12...v0.26.0-rc.13) (2020-12-23)
 
 

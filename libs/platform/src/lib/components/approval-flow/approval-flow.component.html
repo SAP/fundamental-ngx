@@ -1,0 +1,75 @@
+<fd-toolbar [hasTitle]="true">
+    <h3 class="approval-flow__title" [attr.dir]="_dir">{{ title }}</h3>
+</fd-toolbar>
+
+<div class="approval-flow__watchers" [attr.dir]="_dir">
+    <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
+    <fd-avatar
+        *ngFor="let watcher of _approvalProcess?.watchers"
+        tabindex="0"
+        size="xs"
+        [image]="watcher.imgUrl"
+        [label]="watcher.name"
+        [circle]="true"
+        (keyup.enter)="$event.stopPropagation(); onWatcherClick(watcher)"
+        (click)="onWatcherClick(watcher)"></fd-avatar>
+</div>
+
+<div class="approval-flow__container">
+    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel" [attr.dir]="_dir">
+        <button class="approval-flow__control--prev-slide"
+                *ngIf="_carouselStep > 0"
+                (click)="previousSlide()">
+            <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
+            {{ _carouselStep }}
+        </button>
+        <button class="approval-flow__control--next-slide"
+                *ngIf="(_maxCarouselStep - _carouselStep) > 0"
+                (click)="nextSlide()">
+            {{ _maxCarouselStep - _carouselStep }}
+            <fd-icon [glyph]="'navigation-' + (_isRTL ? 'left' : 'right') + '-arrow'"></fd-icon>
+        </button>
+    </div>
+    <div class="approval-flow__graph-container" #graphContainerEl>
+        <div class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
+             [attr.dir]="_dir">
+            <div class="approval-flow__column"
+                 *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last"
+                 [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
+                 [class.approval-flow__column--vertical-line-after]="column.isPartial || (column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
+                 [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
+            >
+                <ng-container
+                    *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last">
+                    <fdp-approval-flow-node
+                        [attr.dir]="_dir"
+                        [attr.tabindex]="node.blank ? -1 : 0"
+                        [node]="node"
+                        [blank]="node.blank"
+                        [parent]="_nodeParentsMap[node.id]"
+                        [renderArrow]="columnIndex > 0"
+                        [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
+                        [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
+                        [renderCarouselStartMarker]="(_isCarousel && firstColumn && firstNode)"
+                        [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
+                        (onNodeClick)="onNodeClick(node)"
+                        (keyup.enter)="onNodeClick(node)"
+                        (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
+                    ></fdp-approval-flow-node>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template let-messageToast #reminderTemplate>
+    <ng-container i18n="@@platformApprovalFlowReminderMessage">
+        Reminder has been sent to
+        {
+            messageToast.data.targets.length,
+            plural,
+            =1 {{{messageToast.data.targets[0].name}}}
+            other {{{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}}
+        }
+    </ng-container>
+</ng-template>
