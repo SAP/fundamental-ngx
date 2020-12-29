@@ -219,7 +219,7 @@ describe('TableComponent', () => {
         expect(component.freezeColumnsTo).toEqual(columnKey);
         expect(setFreezableInfoSpy).toHaveBeenCalled();
         expect(getFreezableColumnsSpy).toHaveBeenCalled();
-        expect(component._selectionColumnsSize).toEqual(0);
+        expect(component._selectionColumnWidth).toEqual(0);
         expect(component._tablePadding).toEqual(0);
     });
 
@@ -238,7 +238,7 @@ describe('TableComponent', () => {
         expect(component.freezeColumnsTo).toEqual(freezeToKey);
         expect(setFreezableInfoSpy).toHaveBeenCalled();
         expect(getFreezableColumnsSpy).toHaveBeenCalled();
-        expect(component._selectionColumnsSize).toEqual(0);
+        expect(component._selectionColumnWidth).toEqual(0);
         expect(component._tablePadding).toEqual(0);
     });
 });

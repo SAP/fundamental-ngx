@@ -10,7 +10,7 @@ import { TableColumn } from './components/table-column/table-column';
 import { Observable } from 'rxjs';
 
 export abstract class Table {
-    /** Get table columns list */
+    /** Table columns definition list */
     abstract readonly tableColumnsStream: Observable<TableColumn[]>;
 
     /** Toolbar Sort Settings button click event */

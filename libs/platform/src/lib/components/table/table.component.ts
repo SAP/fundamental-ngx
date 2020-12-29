@@ -10,6 +10,7 @@ import {
     Input,
     OnChanges,
     OnDestroy,
+    OnInit,
     Optional,
     Output,
     QueryList,
@@ -20,8 +21,8 @@ import {
 import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { BehaviorSubject, isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, startWith } from 'rxjs/operators';
+import { BehaviorSubject, from, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core';
 
@@ -52,13 +53,7 @@ import {
     TableRowSelectionChangeEvent,
     TableSortChangeEvent
 } from './models';
-import {
-    FILTER_STRING_STRATEGY,
-    ContentDensity,
-    FilterableColumnDataType,
-    SelectionMode,
-    SortDirection
-} from './enums';
+import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
@@ -69,6 +64,38 @@ import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-tool
 import { Table } from './table';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
+
+let tableRowId = 0;
+/**
+ * Table row entity
+ * Used to represent table row in the template
+ */
+class TableRow<T = any> {
+    public tableRowId = `fdp-table-row-id-${tableRowId++}`;
+
+    constructor(
+        // Row semantic type
+        public type: 'item' | 'group',
+        // Indicates if row is checked
+        public checked: boolean,
+        // Index of a model it belongs to
+        public index: number,
+        // Domain model
+        public readonly value: T,
+        // Reference to a parent value
+        public parentValue: T | null = null,
+        // Nesting level
+        public level = 0,
+        // expandable
+        public expandable = false,
+        // expandable
+        public expanded = true
+    ) {}
+}
+
+type Tree<T> = T & {
+    children?: Tree<T>[];
+};
 
 /**
  * The component that represents a table.
@@ -115,7 +142,7 @@ export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
     }
 })
-export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges {
+export class TableComponent<T = any> extends Table implements OnInit, AfterViewInit, OnDestroy, OnChanges {
     /** Data source for table data. */
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
@@ -227,7 +254,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
+    /** @hidden */
     _tableColumnsSubject: BehaviorSubject<TableColumn[]> = new BehaviorSubject([]);
+    /** @hidden */
     readonly tableColumnsStream = this._tableColumnsSubject.asObservable();
 
     /** @hidden */
@@ -243,13 +272,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     readonly CONTENT_DENSITY = ContentDensity;
 
-    /** @hidden Formatted rows data. */
+    /**
+     * @hidden
+     * @deprecated
+     * Representation of table row.
+     */
     _rows: SelectableRow[] = [];
 
-    /** @hidden Grouped rows data. */
-    _groupedRows: { [key: string]: SelectableRow[] };
-    /** @hidden */
-    _groupsMeta: { [key: string]: any };
+    /**
+     * @hidden
+     * Data source items stream.
+     */
+    readonly _dataSourceItemsSubject: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    /**
+     * @hidden
+     * Table rows to render in the view
+     */
+    readonly _tableRowsStream: Observable<TableRow[]>;
 
     /** @hidden */
     _popoverOpen = false;
@@ -257,22 +296,30 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _popoverColumnKey: string;
 
-    /** @hidden */
-    _sortField: string;
-    /** @hidden */
-    _sortDirection: SortDirection;
+    /**
+     * @hidden
+     * Sort Rules Map. Where key is column key and value is associated sort rule
+     */
+    _sortRulesMap = new Map<string, CollectionSort>();
 
+    /**
+     * @hidden
+     * Group Rules Map. Where key is column key and value is associated group rule
+     */
+    _groupRulesMapSubject: BehaviorSubject<Map<string, CollectionGroup>> = new BehaviorSubject(new Map());
     /** @hidden */
-    _groupField: string;
+    _groupRulesMapStream: Observable<Map<string, CollectionGroup>> = this._groupRulesMapSubject.asObservable();
     /** @hidden */
-    _groupOrder: SortDirection;
+    get _groupRulesMap(): Map<string, CollectionGroup> {
+        return this._groupRulesMapSubject.getValue();
+    }
 
     /** @hidden */
     _freezableColumns: string[] = [];
     /** @hidden */
-    _columnsSize = DEFAULT_COLUMN_WIDTH;
+    _columnWidth = DEFAULT_COLUMN_WIDTH;
     /** @hidden */
-    _selectionColumnsSize = 0;
+    _selectionColumnWidth = 0;
     /** @hidden */
     _tablePadding = 0;
 
@@ -303,10 +350,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Columns to be rendered in the template */
     _visibleColumns: TableColumn[] = [];
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Needed to track newly checked items for change selection event
+     */
     private _checked = [];
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Needed to track unchecked items for change selection event
+     */
     private _unchecked = [];
 
     /** @hidden */
@@ -322,9 +375,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private readonly _rowsStateChanges: Subject<SelectableRow[]> = new Subject<SelectableRow[]>();
-
-    /** @hidden */
     private _viewInitiated = false;
 
     /** @hidden */
@@ -334,6 +384,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         @Optional() private readonly _rtlService: RtlService
     ) {
         super();
+
+        this._tableRowsStream = this._dataSourceItemsSubject.pipe(
+            // map source items to table rows
+            switchMap((sourceItems: T[]) => {
+                return from([sourceItems.map((item: T, index: number) => new TableRow('item', false, index, item))]);
+            }),
+            // Rearrange items to show groups
+            switchMap((rows: TableRow[]) =>
+                this._groupRulesMapSubject.pipe(map((groupRules) => this._groupTableRows(rows, groupRules.values())))
+            )
+        );
     }
 
     /** @hidden */
@@ -346,6 +407,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
     }
 
+    ngOnInit(): void {}
+
     /** @hidden */
     ngAfterViewInit(): void {
         this._viewInitiated = true;
@@ -356,9 +419,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._initializeDS(this._ds);
         }
 
-        this._listenToTableStateChanges();
-
         this._listenToRtlChanges();
+
+        this._listenToTableStateChanges();
 
         this._listenToColumns();
 
@@ -367,8 +430,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._calculateVisibleColumns();
 
         this._constructTableMetadata();
-
-        this._groupRows();
 
         this._cd.detectChanges();
     }
@@ -481,7 +542,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Select/unselect one row in 'multiple' mode.
      */
     _select(index: number, row: SelectableRow, checked: boolean): void {
-        this._reset();
+        this._resetSelectionMetaData();
         row.checked = checked;
         this._checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
         checked ? this._checked.push(row.value) : this._unchecked.push(row.value);
@@ -497,7 +558,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return;
         }
 
-        this._reset();
+        this._resetSelectionMetaData();
 
         const alreadySelected = this._rows.find((r) => r.checked === true);
 
@@ -522,7 +583,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Select/Unselect all rows in 'multiple' mode.
      */
     _selectAll(checked: boolean): void {
-        this._reset();
+        this._resetSelectionMetaData();
         this._checkedAll = checked;
 
         if (checked) {
@@ -538,7 +599,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     _onSelectControlKeydown(event: KeyboardEvent): void {
-        // TODO: since the table should be able the focusable cells, needs to implement arrow buttons navigation in next phases
+        // TODO: since the table need to have focusable cells, it's needed to implement arrow buttons navigation in next phases
 
         event.stopPropagation();
 
@@ -586,12 +647,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _getFreezableCellStyles(colIdx: number): { [klass: string]: number } {
         const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
-        return { [key]: this._selectionColumnsSize + colIdx * this._columnsSize };
+        return { [key]: this._selectionColumnWidth + colIdx * this._columnWidth };
     }
 
     /** @hidden */
     _getFreezableSelectionCellStyles(): any {
-        return { 'min-width.px': this._selectionColumnsSize, 'max-width.px': this._selectionColumnsSize };
+        return { 'min-width.px': this._selectionColumnWidth, 'max-width.px': this._selectionColumnWidth };
     }
 
     /** @hidden */
@@ -599,9 +660,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return ROW_HEIGHT.get(this.contentDensity);
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * @deprecated
+     * */
     _keyDescOrder = (a: KeyValue<string, SelectableRow[]>, b: KeyValue<string, SelectableRow[]>): number => {
-        const ascModifier: number = this._groupOrder === SortDirection.ASC ? 1 : -1;
+        const ascModifier: number = this._groupRulesMap.get(a.key)?.direction === SortDirection.ASC ? 1 : -1;
         const aNumber = parseFloat(a.key);
         const bNumber = parseFloat(b.key);
 
@@ -666,8 +730,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumn();
-        this._selectionColumnsSize = SELECTION_COLUMN_WIDTH.get(`${this.selectionMode}-${this.contentDensity}`) || 0;
-        this._tablePadding = this._selectionColumnsSize + this._columnsSize * (this._freezableColumns?.length || 0);
+        this._selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(`${this.selectionMode}-${this.contentDensity}`) || 0;
+        this._tablePadding = this._selectionColumnWidth + this._columnWidth * (this._freezableColumns?.length || 0);
     }
 
     /** @hidden */
@@ -704,13 +768,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 )
                 .subscribe((state) => {
                     this._tableDataSource?.fetch(state);
-
-                    this._constructTableMetadata();
                 })
         );
 
         this._subscriptions.add(
             this._tableService.sortChange.subscribe((event: SortChange) => {
+                this._buildSortRulesMap();
                 this.sortChange.emit(new TableSortChangeEvent(this, event.current, event.previous));
             })
         );
@@ -729,7 +792,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._subscriptions.add(
             this._tableService.groupChange.subscribe((event: GroupChange) => {
-                this._groupRows();
+                this._buildGroupRulesMap();
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
             })
         );
@@ -755,34 +818,81 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _constructTableMetadata(): void {
         const state = this.getTableState();
 
-        // SORTING
-        this._sortDirection = state.sortBy[0]?.direction || null;
-        this._sortField = state.sortBy[0]?.field || null;
+        this._buildSortRulesMap(state);
 
-        // GROUPING
-        this._groupOrder = state.groupBy[0]?.direction || null;
-        this._groupField = state.groupBy[0]?.field || null;
+        this._buildGroupRulesMap(state);
     }
 
-    private _groupRows(): void {
-        if (!this._groupField) {
-            return;
+    /** @hidden */
+    private _buildGroupRulesMap(state = this.getTableState()): void {
+        const groupMap = new Map(state.groupBy.map((rule) => [rule.field, rule]));
+        this._groupRulesMapSubject.next(groupMap);
+    }
+
+    /** @hidden */
+    private _buildSortRulesMap(state = this.getTableState()): void {
+        this._sortRulesMap = new Map(state.sortBy.map((rule) => [rule.field, rule]));
+    }
+
+    /** @hidden */
+    private _buildNestedGroups(rules: CollectionGroup[], rows: TableRow[], level = 0): Tree<TableRow>[] {
+        rules = [...rules];
+
+        if (!rules.length) {
+            return rows;
         }
 
-        this._groupsMeta = {};
-        this._groupedRows = this._rows.reduce((acc, r) => {
-            const groupKey = getNestedValue(this._groupField, r.value);
-            if (!acc[groupKey]?.length) {
-                acc[groupKey] = [];
+        // Retrieve first group rule
+        const rule = rules.shift();
 
-                this._groupsMeta[groupKey] = { expanded: true };
+        const valuesHash = rows.reduce((hash, row) => {
+            const modelValue = getNestedValue(rule.field, row.value);
+
+            if (!hash.has(modelValue)) {
+                hash.set(modelValue, []);
             }
-            acc[groupKey].push(r);
 
-            return acc;
-        }, {});
+            hash.get(modelValue).push(row);
 
-        this._cd.detectChanges();
+            return hash;
+        }, new Map<unknown, TableRow[]>());
+
+        const children: Tree<TableRow>[] = [];
+
+        for (const [value, values] of Array.from(valuesHash)) {
+            const filteredSource = rows.filter((_item) => values.includes(_item));
+
+            if (filteredSource.length === 0) {
+                continue;
+            }
+
+            const groupTableRow = new TableRow('group', false, 0, {field: rule.field, value: value});
+
+            groupTableRow.level = level;
+
+            children.push({
+                ...groupTableRow,
+                children: this._buildNestedGroups(rules, filteredSource, level + 1)
+            });
+        }
+
+        return children;
+    }
+
+    private _groupTableRows(tableRows: TableRow[], groups: Iterable<CollectionGroup>): TableRow[] {
+        const rules = Array.from(groups);
+
+        if (!rules.length) {
+            return tableRows;
+        }
+
+        const nestedRows = this._buildNestedGroups(rules, tableRows);
+
+        console.log(nestedRows);
+        
+        return tableRows;
+
+        // TODO: need to build new rows in the right order
     }
 
     /** @hidden */
@@ -808,7 +918,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    private _reset(): void {
+    private _resetSelectionMetaData(): void {
         this._checked = [];
         this._unchecked = [];
     }
@@ -817,7 +927,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _resetChecks(): void {
         this._checkedAll = false;
         this._rows.forEach((r) => (r.checked = false));
-        this._reset();
+        this._resetSelectionMetaData();
     }
 
     /** @hidden */
@@ -874,9 +984,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource.open().subscribe((rows) => {
-            this._rows = rows.map((row, index) => ({ checked: false, index: index, value: row })) || [];
-            this._rowsStateChanges.next(this._rows);
+        this._dsSubscription = initDataSource.open().subscribe((items) => {
+            // this._rows = items.map((row, index) => ({ checked: false, index: index, value: row })) || [];
+            this._dataSourceItemsSubject.next(items);
             this._totalItems = initDataSource.dataProvider.totalItems;
             this._cd.markForCheck();
         });

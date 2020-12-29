@@ -65,9 +65,9 @@
                                         </ng-container>
 
                                         <fd-icon
-                                            *ngIf="column.sortable && column.key === _sortField"
+                                            *ngIf="_sortRulesMap.has(column.key)"
                                             fd-table-icon
-                                            [glyph]="_sortDirection === SORT_DIRECTION.ASC ? 'sort-ascending' : _sortDirection === SORT_DIRECTION.DESC ? 'sort-descending' : ''"
+                                            [glyph]="_sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC ? 'sort-ascending' : 'sort-descending'"
                                         ></fd-icon>
                                     </fd-popover-control>
 
@@ -190,8 +190,9 @@
                 </thead>
 
                 <!-- Table body outlet -->
-                <ng-container *ngIf="_rows.length; else emptyTableRowTemplate">
-                    <ng-container *ngIf="_groupField then groupedTemplate; else notGroupedTemplate"></ng-container>
+                <ng-container *ngIf="(_tableRowsStream | async)?.length; else emptyTableRowTemplate">
+                    <!-- TODO: recognize if need show groups -->
+                    <ng-container *ngIf="false then groupedTemplate; else notGroupedTemplate"></ng-container>
                 </ng-container>
             </table>
         </div>
@@ -215,7 +216,7 @@
 <!-- Grouped table body -->
 <ng-template #groupedTemplate>
     <tbody
-        *ngFor="let group of _groupedRows | keyvalue: _keyDescOrder; let groupIdx = index"
+        *ngFor="let group of _groupedRows; let groupIdx = index"
         fd-table-body
         [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
         [class.fd-table__body--no-vertical-borders]="noBodyBorders"
@@ -260,11 +261,11 @@
     <tr
         fd-table-row
         scope="row"
-        *ngFor="let row of rows; let rowIdx = index"
+        *ngFor="let row of _tableRowsStream | async"
         [attr.aria-selected]="row.checked"
     >
         <td
-            *ngIf="selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
+            *ngIf="row.type == 'item' && selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
             fd-table-cell
             class="fd-table__cell--fixed"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
