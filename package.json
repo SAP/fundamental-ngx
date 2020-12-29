@@ -150,7 +150,7 @@
     "@wdio/mocha-framework": "6.8.0",
     "@wdio/sauce-service": "6.8.0",
     "@wdio/spec-reporter": "6.8.1",
-    "@wdio/sync": "6.9.1",
+    "@wdio/sync": "6.10.11",
     "angular-cli-ghpages": "0.6.2",
     "autoprefixer": "9.8.6",
     "babel-loader": "8.2.2",
