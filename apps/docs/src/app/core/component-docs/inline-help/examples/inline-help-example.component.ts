@@ -4,11 +4,7 @@ import { Component } from '@angular/core';
     selector: 'fd-inline-help-example',
     templateUrl: './inline-help-example.component.html',
     styles: [
-        `
-            .fd-inline-help-example>span {
-                margin: 0 0.25rem;
-            }
-
+        `            
             .fd-inline-help-example>input {
                 max-width: 300px;
             }

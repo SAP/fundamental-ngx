@@ -11,7 +11,8 @@ const INLINE_HELP_CLASS = 'fd-inline-help__content';
 @Directive({
     // tslint:disable-next-line:directive-selector
     selector: '[fd-inline-help], [fd-inline-help-template]',
-    providers: [PopoverService]
+    providers: [PopoverService],
+    host: { '[class.fd-inline-help__trigger]': 'true' }
 })
 export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges {
     /** The trigger events that will open/close the inline help component.

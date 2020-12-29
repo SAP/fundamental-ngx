@@ -1,7 +1,6 @@
 @import '~fundamental-styles/dist/form-label';
 
-$form-label-inline-help-placement-space: 1rem;
-$form-label-margin: 0.5rem;
+$form-label-inline-help-placement-space: 1.25rem;
 
 @mixin rtl() {
 	@at-root {
@@ -30,12 +29,6 @@ $form-label-margin: 0.5rem;
 	position: relative;
 	display: block;
 	overflow: hidden;
-	margin-right: $form-label-margin;
-
-	@include rtl() {
-		margin-left: $form-label-margin;
-		margin-right: 0;
-	}
 
 	&--inline-help {
 		padding-left: $form-label-inline-help-placement-space;
