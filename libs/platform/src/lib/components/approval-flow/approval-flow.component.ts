@@ -110,7 +110,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _selectedWatchers: ApprovalUser[] = [];
 
     /**  @hidden */
-    _messages: { text: string; type: 'success'|'error' }[] = [];
+    _messages: { text: string; type: 'success' | 'error' }[] = [];
 
     private subscriptions = new Subscription();
 
@@ -137,6 +137,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this.subscriptions.add(this.dataSource.fetch().subscribe(approvalProcess => {
             console.log('Got approval process data from DataSource');
             this._approvalProcess = approvalProcess;
+            this._nodeParentsMap = {};
             this._graph = this._buildNodeTree(approvalProcess.nodes);
             this._cdr.detectChanges();
             this._resetCarousel();
@@ -324,6 +325,19 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         console.log('removeCheckedNodes');
     }
 
+    deleteNode(node: ApprovalNode): void {
+        console.log('delete node', node);
+        const index = this._approvalProcess.nodes.findIndex(n => n.id === node.id);
+        const parent = this._approvalProcess.nodes.filter(n => n.targets.includes(node.id));
+        const children = this._approvalProcess.nodes.filter(n => node.targets.includes(n.id));
+        console.log('parent', parent);
+        console.log('children', children);
+        this._approvalProcess.nodes.splice(index, 1);
+        parent.forEach(n => n.targets = n.targets.filter(t => t !== node.id).concat(children.map(c => c.id)));
+        console.log('saving new graph', this._approvalProcess.nodes);
+        this.dataSource.updateApprovals(this._approvalProcess.nodes);
+    }
+
     /** @hidden */
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
@@ -345,6 +359,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
         const rootNode = findRootNode(nodes);
+        const blankNode: ApprovalGraphNode = {
+            id: '',
+            name: '',
+            targets: [],
+            approvers: [],
+            status: 'not started',
+            blank: true
+        };
         if (!rootNode) {
             return graph;
         }
@@ -354,7 +376,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         let foundLastStep = false;
         do {
             const dependentNodes: ApprovalNode[] = [];
-            graph[index - 1].nodes.forEach(node => {
+            const previousStep = graph[index - 1];
+            previousStep.nodes.forEach(node => {
                 const _dependentNodes = findDependentNodes([node], nodes);
                 _dependentNodes.forEach(dependentNode => this._nodeParentsMap[dependentNode.id] = node);
                 dependentNodes.push(..._dependentNodes);
@@ -368,20 +391,25 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const nodesWithTarget = dependentNodes.filter(node => node.targets.length);
 
             const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length && nodesWithoutTarget.length !== dependentNodes.length;
-            if (isMixed && graph[index - 1].nodes.length > 1) {
-                const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
+            // const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length;
+            if (isMixed && previousStep.nodes.length > 1) {
+                // if (isMixed) {
+                console.log('found mixed step');
+                // const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
+                const nodesWithBlankSpaces: ApprovalGraphNode[] = [...previousStep.nodes];
                 nodesWithBlankSpaces.forEach((node, i) => {
-                    if (nodesWithTarget.includes(node)) {
-                        nodesWithBlankSpaces[i] = {
-                            id: '',
-                            name: '',
-                            targets: [],
-                            approvers: [],
-                            status: 'not started',
-                            blank: true
-                        };
+                    const targetNode = dependentNodes.find(n => node.targets.includes(n.id));
+                    if (targetNode && !nodesWithTarget.includes(targetNode)) {
+                        nodesWithBlankSpaces[i] = targetNode;
+                    } else {
+                        nodesWithBlankSpaces[i] = blankNode;
                     }
                 });
+                // nodesWithBlankSpaces.forEach((node, i) => {
+                //     if (nodesWithTarget.includes(node)) {
+                //         nodesWithBlankSpaces[i] = blankNode;
+                //     }
+                // });
                 graph[index] = { nodes: nodesWithBlankSpaces, isPartial: true };
                 graph[index + 1] = { nodes: nodesWithTarget };
                 index += 2;
@@ -394,6 +422,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         graph.forEach(column => {
             column.allNodesApproved = column.nodes.every(node => node.status === 'approved');
         });
+
+        console.log('graph to display', graph);
 
         return graph;
     }

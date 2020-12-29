@@ -17,6 +17,9 @@
                 <div fd-menu-interactive>Add parallel approvers</div>
             </li>
             <li fd-menu-item>
+                <div fd-menu-interactive>Edit</div>
+            </li>
+            <li fd-menu-item (click)="onDelete.emit()">
                 <div fd-menu-interactive>Delete</div>
             </li>
         </fd-menu>
@@ -52,4 +55,7 @@
             </fdp-object-status>
         </div>
     </div>
+    <span style="position: absolute; font-size: 11px; right: 0; top: 0; ">{{ node.id }} </span>
+    <span *ngIf="parent" style="position: absolute; font-size: 11px; left: 0; top: 0; color: orangered;">Parent - {{ parent.id }} </span>
+    <span *ngIf="node.targets.length" style="position: absolute; font-size: 11px; right: 0; bottom: 0; color: orange">Targets - {{ node.targets }}</span>
 </ng-container>

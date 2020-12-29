@@ -250,6 +250,7 @@ const complexGraph: ApprovalProcess = {
             approvers: [getRandomUser()],
             status: 'approved',
             targets: ['ID220'],
+            // targets: [],
             dueDate: new Date(),
             createDate: new Date()
         },
@@ -367,6 +368,9 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
 
     updateApprovals(approvals: ApprovalNode[]): void {
         console.log('call "updateApprovals" method from ApprovalDataSource implementation class');
+        const currentGraph = graphs[this.selectedGraph];
+        currentGraph.nodes = approvals;
+        this.selectGraph(this.selectedGraph);
     }
 
     sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {

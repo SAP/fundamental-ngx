@@ -48,7 +48,7 @@
 </div>
 
 <div class="approval-flow__container">
-    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel" [attr.dir]="_dir">
+    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel" [attr.dir]="_dir" [class.approval-flow__carousel-controls--edit-mode]="_isEditMode" >
         <button class="approval-flow__control--prev-slide" *ngIf="_carouselStep > 0" (click)="previousSlide()"
             aria-label="Go to previous slide" i18n-aria-label="@@platformApprovalPrevButton">
             <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
@@ -62,7 +62,9 @@
     </div>
     <div class="approval-flow__graph-container" #graphContainerEl>
         <div class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
-             [attr.dir]="_dir">
+             [attr.dir]="_dir"
+             [class.approval-flow__graph--edit-mode]="_isEditMode"
+        >
             <div class="approval-flow__column"
                  *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last"
                  [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
@@ -85,6 +87,7 @@
                         [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
                         (onNodeClick)="onNodeClick(node)"
                         (onNodeCheck)="onNodeCheck(node, $event)"
+                        (onDelete)="deleteNode(node)"
                         (keyup.enter)="onNodeClick(node)"
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
                     ></fdp-approval-flow-node>
