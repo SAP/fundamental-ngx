@@ -122,13 +122,14 @@ describe('MenuComponent', () => {
         menu.setMobileMode = true;
         (<any>menu)._listenOnTriggerRefClicks();
 
-        fixture.detectChanges();
+        expect(menu.isOpen).toBeFalse();
 
+        fixture.detectChanges();
         menu.trigger.nativeElement.dispatchEvent(new MouseEvent('click'));
 
         fixture.detectChanges();
 
-        expect(menu.isOpen).toBeTrue()
+        expect(menu.isOpen).toBeTrue();
     });
 
     it('should destroy all references', () => {

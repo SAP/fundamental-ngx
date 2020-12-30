@@ -246,6 +246,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
      * This is going to be removed in feature, on dialog and dynamic service component refactor
      */
     private _listenOnTriggerRefClicks(): void {
+        this._destroyEventListeners();
         if (this.trigger) {
             this._clickEventListener = this._rendered.listen(
                 this.trigger.nativeElement, 'click', () => this.toggle()
