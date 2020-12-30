@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.24...v0.26.0-rc.25) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Platform) title for buttons with icon in Search Field and trigger submit with empty value ([#4175](https://github.com/SAP/fundamental-ngx/issues/4175)) ([1752249](https://github.com/SAP/fundamental-ngx/commit/1752249ec1340c4ec90da44b143ca21ed71b08d6))
+
 ## [0.26.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.23...v0.26.0-rc.24) (2020-12-30)
 
 
