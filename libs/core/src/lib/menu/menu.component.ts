@@ -4,7 +4,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
     ComponentRef,
     ContentChildren,
     ElementRef,
@@ -19,7 +18,6 @@ import {
     Renderer2,
     TemplateRef,
     ViewChild,
-    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { MenuItemComponent } from './menu-item/menu-item.component';
@@ -110,14 +108,6 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     @ViewChild('menuRootTemplate')
     menuRootTemplate: TemplateRef<any>;
 
-    /** @hidden Reference to the menu root template */
-    @ViewChild('menuRootTemplate', { read: ElementRef })
-    menuList: ElementRef;
-
-    /** @hidden Reference  the container where component views are instantiated */
-    @ViewChild('viewContainer', {read: ViewContainerRef})
-    viewContainer: ViewContainerRef;
-
     /** @hidden Reference to all menu Items */
     @ContentChildren(MenuItemComponent, {descendants: true})
     menuItems: QueryList<MenuItemComponent>;
@@ -166,8 +156,8 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     /** @hidden */
     ngOnDestroy(): void {
         this._destroyMobileComponent();
-        this._menuService.onDestroy();
         this._destroyEventListeners();
+        this._menuService.onDestroy();
         this._subscriptions.unsubscribe();
     }
 
@@ -177,6 +167,8 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     set trigger(trigger: ElementRef) {
         this._externalTrigger = trigger;
+        this._destroyEventListeners();
+        this._listenOnTriggerRefClicks();
     }
 
     /** Opens the menu */
@@ -255,7 +247,9 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
      */
     private _listenOnTriggerRefClicks(): void {
         if (this.trigger) {
-            this._clickEventListener = this._rendered.listen(this.trigger.nativeElement, 'click', () => this.toggle());
+            this._clickEventListener = this._rendered.listen(
+                this.trigger.nativeElement, 'click', () => this.toggle()
+            );
         }
     }
 

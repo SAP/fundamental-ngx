@@ -71,18 +71,3 @@ $form-label-inline-help-placement-space: 1.25rem;
 		}
 	}
 }
-
-.fd-form__inline-help {
-	position: absolute;
-	top: 0;
-	left: 0;
-
-
-	@at-root {
-		[dir="rtl"] &,
-		&[dir="rtl"] {
-			left: auto;
-			right: 0;
-		}
-	}
-}
