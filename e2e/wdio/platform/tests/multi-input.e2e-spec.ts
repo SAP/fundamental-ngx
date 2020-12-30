@@ -6,7 +6,9 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed,
+    sendKeys, getAttributeByName
 } from '../../driver/wdio';
+import {placeholderValue} from '../fixtures/appData/file-uploader.page-content';
 import { MultiInputPo } from '../pages/multi-input.po';
 
 describe('Combobox test suite', function() {
@@ -72,7 +74,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    fit('Verify The user can deselect an item by clicking its delete icon[X].', () => {
+    it('Verify The user can deselect an item by clicking its delete icon[X].', () => {
         const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropDownButtons);
         for (let i = 0; i < activeButtonsQuantity; i++) {
             if (i !== activeButtonsQuantity - 2) {
@@ -95,4 +97,70 @@ describe('Combobox test suite', function() {
             }
         }
     });
-});
+
+    it('Verify When the user starts typing in the input field, the list is filtered', () => {
+        const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropDownButtons);
+        console.log(activeButtonsQuantity);
+        multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, 1);
+        const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+        click(multiInputPage.activeDropDownButtons, 1);
+        setValue(multiInputPage.activeInputs, optionsArr[1].substring(0, 3), 1);
+        let filteredOptions = getElementArrayLength(multiInputPage.dropdownOption);
+        for (let j = 0; j < filteredOptions; j++) {
+            const dropdownOption = getText(multiInputPage.dropdownOptionTextValueHelp, j);
+            expect(dropdownOption).toContain(optionsArr[1].substring(0, 3));
+        }
+        scrollIntoView(multiInputPage.activeInputs, 0);
+        multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, 0);
+        setValue(multiInputPage.activeInputs, optionsArr[0].substring(0, 3), 0);
+        filteredOptions = getElementArrayLength(multiInputPage.dropdownOption);
+        for (let j = 0; j < filteredOptions; j++) {
+            const dropdownOption = getText(multiInputPage.dropdownOptionText, j);
+            expect(dropdownOption).toContain(optionsArr[0].substring(0, 3));
+        }
+        multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, 4);
+        setValue(multiInputPage.mobileInput, optionsArr[4].substring(0, 3));
+        filteredOptions = getElementArrayLength(multiInputPage.dropdownOption);
+        for (let j = 0; j < filteredOptions; j++) {
+            const dropdownOption = getText(multiInputPage.dropdownOptionTextValueHelp, j);
+            expect(dropdownOption).toContain(optionsArr[4].substring(0, 3));
+        }
+    });
+
+    it('Verify user can delete the token using backspace and delete key', () => {
+        const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropDownButtons);
+        for (let i = 0; i < activeButtonsQuantity; i++) {
+            if (i !== activeButtonsQuantity - 2) {
+                multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, i);
+                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.selectOption(optionsArr[0]);
+                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
+                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                click(multiInputPage.selectedToken);
+                sendKeys(['Backspace']);
+                sendKeys(['Backspace']);
+                expect(multiInputPage.selectedToken).not.toBeDisplayed();
+            } else {
+                multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, i);
+                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.selectOption(optionsArr[0]);
+                click(multiInputPage.approveButton);
+                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
+                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                click(multiInputPage.selectedToken);
+                sendKeys(['Backspace']);
+                sendKeys(['Backspace']);
+                expect(multiInputPage.selectedToken).not.toBeDisplayed();
+            }
+        }
+    });
+
+    it('Verify inputs should have placeholder', () => {
+        const activeInputsQuantity = getElementArrayLength(multiInputPage.activeInputs);
+        for (let i = 0; i < activeInputsQuantity; i++) {
+            expect(placeholderValue).toContain(getAttributeByName
+            (multiInputPage.activeInputs, 'placeholder', i));
+        }
+    });
+})
+;
