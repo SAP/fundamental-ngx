@@ -1,12 +1,13 @@
 <a
     #link
     fd-link
-    class="fdp-link-truncate__txt"
+    [class.fdp-link--truncate-txt]="truncate"
     [attr.id]="id"
     [attr.href]="href"
     [attr.target]="target"
     [disabled]="disabled"
     [emphasized]="emphasized"
+    [subtle]="subtle"
     [inverted]="inverted"
     [attr.title]="title"
     [attr.type]="type"
@@ -15,6 +16,8 @@
     [attr.download]="download"
     [attr.media]="media"
     [attr.rel]="rel"
+    (mouseenter)="onMouseEnter($event)"
+    (mouseleave)="onMouseLeave($event)"
     (click)="clicked($event)"
 >
     <ng-content></ng-content>

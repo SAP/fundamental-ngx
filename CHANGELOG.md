@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.21...v0.26.0-rc.22) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Platform) add subtle mode in core and platform. Fix vertical align in platform link. ([#4148](https://github.com/SAP/fundamental-ngx/issues/4148)) ([eabf86c](https://github.com/SAP/fundamental-ngx/commit/eabf86c362ad8405336bebd3949479a3df5ce4ee))
+
 ## [0.26.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.20...v0.26.0-rc.21) (2020-12-29)
 
 
