@@ -1,13 +1,10 @@
 <header>Popover Directive</header>
 <description>
-    <p>
-        The popover directive is used by the fd-popover component. It constitutes an abstraction of both Popper.js and
-        Fundamental-ngx features.
-    </p>
-    <p>
-        In cases where the popover component is insufficient, or even unneeded, this directive can serve as a powerful
-        alternative.
-    </p>
+    <fd-message-strip [type]="'warning'" [dismissible]="false">
+        DEPRECATED. Popover directive shouldn't be used anymore. There is great successor of popover directive -
+        <a routerLink="/core/popover" fragment="trigger">Simple Popover</a>, which has whole functionality of popover
+        component.
+    </fd-message-strip>
 </description>
 <import module="PopoverModule"></import>
 
