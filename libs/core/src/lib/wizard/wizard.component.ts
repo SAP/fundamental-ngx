@@ -291,8 +291,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.visited = true;
             }
         }
-        if (this.steps.last.content) {
-            this.steps.last.content.tallContent = true;
+        const lastVisibleTemplate = this.steps.toArray()[this.contentTemplates.length - 1];
+        if (lastVisibleTemplate && lastVisibleTemplate.content) {
+            lastVisibleTemplate.content.tallContent = true;
         }
         this.steps.last.finalStep = true;
     }
