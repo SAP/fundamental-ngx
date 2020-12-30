@@ -24,7 +24,10 @@ export class WizardDialogExampleComponent {
     constructor(private _dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
-        this._dialogService.open(dialog);
+        this._dialogService.open(dialog, {
+            width: '100%',
+            height: '100%'
+        });
     }
 
     goToStep(step: number): void {
