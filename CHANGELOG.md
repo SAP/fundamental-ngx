@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.22...v0.26.0-rc.23) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Core) added aria-label to button with icon in Input Group ([#4198](https://github.com/SAP/fundamental-ngx/issues/4198)) ([a12e6ad](https://github.com/SAP/fundamental-ngx/commit/a12e6ad453dbba15e0945d673cc847420f70b6d5))
+
 ## [0.26.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.21...v0.26.0-rc.22) (2020-12-30)
 
 
