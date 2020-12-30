@@ -190,82 +190,86 @@
                 </thead>
 
                 <!-- Table body outlet -->
-                <ng-container *ngIf="(_tableRowsStream | async)?.length; else emptyTableRowTemplate">
-                    <!-- TODO: recognize if need show groups -->
-                    <ng-container *ngIf="false then groupedTemplate; else notGroupedTemplate"></ng-container>
+                <ng-container
+                    *ngIf="_tableRowsVisible.length; else emptyTableRowTemplate"
+                    [ngTemplateOutlet]="tableBodyTemplate"
+                    [ngTemplateOutletContext]="{ rows: _tableRowsVisible }"
+                >
                 </ng-container>
             </table>
         </div>
     </div>
 </div>
 
-<!-- Not Grouped table body -->
-<ng-template #notGroupedTemplate>
+<!-- Table Body Template -->
+<ng-template
+    #tableBodyTemplate
+    let-rows="rows"
+>
     <tbody
         fd-table-body
         [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
         [class.fd-table__body--no-vertical-borders]="noBodyBorders"
     >
         <ng-container
-            [ngTemplateOutlet]="rowsTemplate"
-            [ngTemplateOutletContext]="{ rows: _rows }"
-        ></ng-container>
-    </tbody>
-</ng-template>
-
-<!-- Grouped table body -->
-<ng-template #groupedTemplate>
-    <tbody
-        *ngFor="let group of _groupedRows; let groupIdx = index"
-        fd-table-body
-        [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
-        [class.fd-table__body--no-vertical-borders]="noBodyBorders"
-    >
-
-        <tr
-            fd-table-row
-            scope="row"
-            class="fd-table__row--group"
+            *ngFor="let row of rows"
+            [ngSwitch]="row.type"
         >
-            <td
-                fd-table-cell
-                class="fd-table__cell--fixed fd-table__cell--focusable fd-table__cell--group"
-                tabindex="0"
-                role="cell"
-                [colSpan]="_tableColumnsLength"
-                (click)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
-                (keydown.enter)="_groupsMeta[group.key].expanded = !_groupsMeta[group.key].expanded"
-            >
-                <fd-icon
-                    [glyph]="_groupsMeta[group.key].expanded ? 'navigation-down-arrow' : _rtl ? 'navigation-left-arrow' : 'navigation-right-arrow'"
-                ></fd-icon>
-                {{ group.key }} - {{ group.value.length }}
-            </td>
-        </tr>
-        <tr [style.height.px]="_getGroupRowHeight()"></tr>
-
-        <ng-container *ngIf="_groupsMeta[group.key].expanded">
             <ng-container
-                [ngTemplateOutlet]="rowsTemplate"
-                [ngTemplateOutletContext]="{ rows: group.value }"
+                *ngSwitchCase="'group'"
+                [ngTemplateOutlet]="groupRowTemplate"
+                [ngTemplateOutletContext]="{row: row, rows: rows}"
+            ></ng-container>
+
+            <ng-container
+                *ngSwitchCase="'item'"
+                [ngTemplateOutlet]="itemRowTemplate"
+                [ngTemplateOutletContext]="{row: row, rows: rows}"
             ></ng-container>
         </ng-container>
     </tbody>
 </ng-template>
 
-<!-- Rows Template -->
+<!-- Group row Template -->
 <ng-template
-    #rowsTemplate
-    let-rows="rows"
+    #groupRowTemplate
+    let-row="row"
 >
     <tr
         fd-table-row
         scope="row"
-        *ngFor="let row of _tableRowsStream | async"
+        class="fd-table__row--group"
+    >
+        <td
+            fd-table-cell
+            class="fd-table__cell--fixed fd-table__cell--focusable fd-table__cell--group"
+            tabindex="0"
+            role="cell"
+            [colSpan]="_tableColumnsLength"
+            (click)="_toggleGroupRow(row)"
+            [ngStyle]="{'padding-left': _getRowNestingPadding(row) + 'px'}"
+        >
+            <fd-icon
+                [glyph]="row.expanded ? 'navigation-down-arrow' : _rtl ? 'navigation-left-arrow' : 'navigation-right-arrow'"
+            ></fd-icon>
+            {{ row.value?.field }}: {{ row.value?.value }}
+        </td>
+    </tr>
+    <tr [style.height.px]="_getGroupRowHeight()"></tr>
+</ng-template>
+
+<!-- Item Row Template -->
+<ng-template
+    #itemRowTemplate
+    let-row="row"
+>
+    <tr
+        fd-table-row
+        scope="row"
         [attr.aria-selected]="row.checked"
     >
         <td
-            *ngIf="row.type == 'item' && selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
+            *ngIf="selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
             fd-table-cell
             class="fd-table__cell--fixed"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -291,11 +295,12 @@
             [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.key)"
             [ngStyle]="_freezableColumns?.includes(column.key) ? _getFreezableCellStyles(colIdx) : null"
         >
-            <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
-                <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">
+            <div [ngStyle]="{'padding-left': selectionMode === SELECTION_MODE.NONE && _getRowNestingPadding(row) + 'px'}">
+                <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
+                    <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-
+            </div>
             <ng-template #defaultTableCellTemplate>{{ row.value | valueByPath: column.key }}</ng-template>
         </td>
     </tr>
@@ -303,26 +308,20 @@
 
 <!-- Empty Table Message -->
 <ng-template #emptyTableRowTemplate>
-    <tbody
-        fd-table-body
-        [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
-        [class.fd-table__body--no-vertical-borders]="noBodyBorders"
+    <tr
+        fd-table-row
+        scope="row"
     >
-        <tr
-            fd-table-row
-            scope="row"
+        <td
+            fd-table-cell
+            [attr.colspan]="_tableColumnsLength"
         >
-            <td
-                fd-table-cell
-                [attr.colspan]="_tableColumnsLength"
-            >
-                <div class="fd-table__empty-table-message">
-                    <div
-                        i18n="@@platformTableEmptyMessage"
-                        [innerText]="emptyTableMessage"
-                    ></div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
+            <div class="fd-table__empty-table-message">
+                <div
+                    i18n="@@platformTableEmptyMessage"
+                    [innerText]="emptyTableMessage"
+                ></div>
+            </div>
+        </td>
+    </tr>
 </ng-template>

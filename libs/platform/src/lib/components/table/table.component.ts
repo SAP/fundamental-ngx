@@ -82,19 +82,21 @@ class TableRow<T = any> {
         public index: number,
         // Domain model
         public readonly value: T,
-        // Reference to a parent value
-        public parentValue: T | null = null,
+        // Reference to a parent if any
+        public parent: TableRow | null = null,
         // Nesting level
         public level = 0,
         // expandable
         public expandable = false,
         // expandable
-        public expanded = true
+        public expanded = true,
+        // if item should be hidden. Used to skip rendering
+        public hidden = false
     ) {}
 }
 
-type Tree<T> = T & {
-    children?: Tree<T>[];
+type RowTree<T> = T & {
+    __fdpTableRowChildren?: RowTree<T>[];
 };
 
 /**
@@ -274,21 +276,29 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
 
     /**
      * @hidden
-     * @deprecated
-     * Representation of table row.
-     */
-    _rows: SelectableRow[] = [];
-
-    /**
-     * @hidden
      * Data source items stream.
      */
     readonly _dataSourceItemsSubject: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
     /**
      * @hidden
-     * Table rows to render in the view
+     * Representation of table rows.
      */
-    readonly _tableRowsStream: Observable<TableRow[]>;
+    _tableRows: TableRow[] = [];
+
+    /**
+     * @hidden
+     * Visible table rows.
+     * Rows list that is used to be rendered in the ui.
+     * Excludes hidden rows.
+     */
+    _tableRowsVisible: TableRow[] = [];
+
+    /**
+     * @hidden
+     * @deprecated
+     * Representation of table row.
+     */
+    _rows: SelectableRow[] = [];
 
     /** @hidden */
     _popoverOpen = false;
@@ -307,8 +317,6 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
      * Group Rules Map. Where key is column key and value is associated group rule
      */
     _groupRulesMapSubject: BehaviorSubject<Map<string, CollectionGroup>> = new BehaviorSubject(new Map());
-    /** @hidden */
-    _groupRulesMapStream: Observable<Map<string, CollectionGroup>> = this._groupRulesMapSubject.asObservable();
     /** @hidden */
     get _groupRulesMap(): Map<string, CollectionGroup> {
         return this._groupRulesMapSubject.getValue();
@@ -384,17 +392,6 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         @Optional() private readonly _rtlService: RtlService
     ) {
         super();
-
-        this._tableRowsStream = this._dataSourceItemsSubject.pipe(
-            // map source items to table rows
-            switchMap((sourceItems: T[]) => {
-                return from([sourceItems.map((item: T, index: number) => new TableRow('item', false, index, item))]);
-            }),
-            // Rearrange items to show groups
-            switchMap((rows: TableRow[]) =>
-                this._groupRulesMapSubject.pipe(map((groupRules) => this._groupTableRows(rows, groupRules.values())))
-            )
-        );
     }
 
     /** @hidden */
@@ -430,6 +427,8 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         this._calculateVisibleColumns();
 
         this._constructTableMetadata();
+
+        this._listenToTableRowsPipe();
 
         this._cd.detectChanges();
     }
@@ -480,7 +479,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
 
     /** Add Groups */
     addGroup(groups: CollectionGroup[]): void {
-        this._tableService.setGroups(groups);
+        this._tableService.addGroups(groups);
     }
 
     /**
@@ -535,6 +534,10 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
         this._isShownColumnSettingsInToolbar = showColumnSettings;
         this._cd.detectChanges();
+    }
+
+    _getRowNestingPadding(row: TableRow): number {
+        return ROW_HEIGHT.get(this.contentDensity) * row?.level;
     }
 
     /**
@@ -687,6 +690,34 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     }
 
     /** @hidden */
+    _toggleGroupRow(groupRow: TableRow): void {
+        const rows = this._tableRows;
+        const expanded = (groupRow.expanded = !groupRow.expanded);
+
+        const findAllChildren = (row: TableRow): TableRow[] => {
+            let children = [];
+            rows.forEach((_row) => {
+                if (_row.parent === row) {
+                    children.push(_row);
+                    if (expanded && !_row.expanded) {
+                        return;
+                    }
+                    if (_row.expandable) {
+                        children = children.concat(findAllChildren(_row));
+                    }
+                }
+            });
+            return children;
+        };
+
+        findAllChildren(groupRow).forEach((row) => {
+            row.hidden = !groupRow.expanded;
+        });
+
+        this._onTableRowsChanged();
+    }
+
+    /** @hidden */
     private _setInitialState(): void {
         const prevState = this.getTableState();
         const columns = this.columns.toArray();
@@ -702,6 +733,50 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
             groupBy: this.initialGroupBy || prevState.groupBy,
             freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn
         });
+    }
+
+    /** @hidden */
+    private _listenToTableRowsPipe(): void {
+        this._subscriptions.add(
+            this._dataSourceItemsSubject
+                .asObservable()
+                .pipe(
+                    // map source items to table rows
+                    switchMap((sourceItems: T[]) => {
+                        return from([
+                            sourceItems.map((item: T, index: number) => new TableRow('item', false, index, item))
+                        ]);
+                    }),
+                    // Insert items to show groups
+                    switchMap((rows: TableRow[]) =>
+                        this._groupRulesMapSubject.pipe(
+                            map((groupRules) => this._groupTableRows(rows, groupRules.values()))
+                        )
+                    )
+                )
+                .subscribe((rows) => {
+                    this._setTableRows(rows);
+
+                    this._cd.markForCheck();
+                })
+        );
+    }
+
+    /** @hidden */
+    private _setTableRows(rows: TableRow[]): void {
+        this._tableRows = rows;
+
+        this._onTableRowsChanged();
+    }
+
+    /** @hidden */
+    private _onTableRowsChanged(): void {
+        this._buildVisibleTableRows();
+    }
+
+    /** @hidden */
+    private _buildVisibleTableRows(): void {
+        this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
     }
 
     /** @hidden */
@@ -834,17 +909,37 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         this._sortRulesMap = new Map(state.sortBy.map((rule) => [rule.field, rule]));
     }
 
-    /** @hidden */
-    private _buildNestedGroups(rules: CollectionGroup[], rows: TableRow[], level = 0): Tree<TableRow>[] {
+    /**
+     * Group given table rows and return flat rows list.
+     * It's intended to be called recursively.
+     * @param rules group rules to build rows for
+     * @param rows source table rows to group by
+     * @param parent row parent
+     * @param level level of nesting
+     * @returns flat table rows including a groups rows
+     */
+    private _wrapTableRowsIntoGroupRows(
+        rules: CollectionGroup[],
+        rows: TableRow[],
+        parent: TableRow = null,
+        level = 0
+    ): TableRow[] {
         rules = [...rules];
 
         if (!rules.length) {
-            return rows;
+            // no rules mean that it's the level of source items
+            return rows.map((row) => {
+                row.parent = parent;
+                row.level = level;
+                row.hidden = parent && !parent.expanded;
+                return row;
+            });
         }
 
         // Retrieve first group rule
         const rule = rules.shift();
 
+        // Build map of unique values for a given group rule
         const valuesHash = rows.reduce((hash, row) => {
             const modelValue = getNestedValue(rule.field, row.value);
 
@@ -857,42 +952,46 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
             return hash;
         }, new Map<unknown, TableRow[]>());
 
-        const children: Tree<TableRow>[] = [];
-
+        // Build table rows in a right order included required group rows
+        let children: RowTree<TableRow>[] = [];
         for (const [value, values] of Array.from(valuesHash)) {
-            const filteredSource = rows.filter((_item) => values.includes(_item));
+            const filteredRows = rows.filter((_item) => values.includes(_item));
 
-            if (filteredSource.length === 0) {
+            if (filteredRows.length === 0) {
                 continue;
             }
 
-            const groupTableRow = new TableRow('group', false, 0, {field: rule.field, value: value});
+            const groupTableRow = new TableRow(
+                'group',
+                false,
+                0,
+                { field: rule.field, value: value },
+                parent,
+                level,
+                true /** expandable */,
+                true /** expanded */,
+                parent && !parent.expanded /** hidden */
+            );
 
-            groupTableRow.level = level;
-
-            children.push({
-                ...groupTableRow,
-                children: this._buildNestedGroups(rules, filteredSource, level + 1)
-            });
+            // Add group row
+            children.push(groupTableRow);
+            // Ads group's children
+            children = children.concat(this._wrapTableRowsIntoGroupRows(rules, filteredRows, groupTableRow, level + 1));
         }
 
         return children;
     }
 
-    private _groupTableRows(tableRows: TableRow[], groups: Iterable<CollectionGroup>): TableRow[] {
+    private _groupTableRows(sourceRows: TableRow[], groups: Iterable<CollectionGroup>): TableRow[] {
         const rules = Array.from(groups);
 
         if (!rules.length) {
-            return tableRows;
+            return sourceRows;
         }
 
-        const nestedRows = this._buildNestedGroups(rules, tableRows);
+        const flattenRowsIncludedGroups = this._wrapTableRowsIntoGroupRows(rules, sourceRows);
 
-        console.log(nestedRows);
-        
-        return tableRows;
-
-        // TODO: need to build new rows in the right order
+        return flattenRowsIncludedGroups;
     }
 
     /** @hidden */
