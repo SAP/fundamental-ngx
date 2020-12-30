@@ -13,10 +13,13 @@ import { QuickViewGroupItemLabelComponent } from './quick-view-group-item-label/
 import { QuickViewGroupItemContentComponent } from './quick-view-group-item-content/quick-view-group-item-content.component';
 import { TitleModule } from '../title/title.module';
 import { BarModule } from '../bar/bar.module';
+import { FormGroupModule } from '../form/form-group/form-group.module';
+import { FormItemModule } from '../form/form-item/form-item.module';
+import { FormLabelModule } from '../form/form-label/form-label.module';
 
 
 @NgModule({
-    imports: [CommonModule, TitleModule, BarModule],
+    imports: [CommonModule, TitleModule, BarModule, FormGroupModule, FormItemModule, FormLabelModule],
     declarations: [
         QuickViewComponent,
         QuickViewTitleComponent,

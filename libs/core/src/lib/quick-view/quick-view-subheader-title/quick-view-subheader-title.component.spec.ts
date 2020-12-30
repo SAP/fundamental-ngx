@@ -6,15 +6,9 @@ import { QuickViewModule } from '../quick-view.module';
 import { QuickViewSubheaderTitleComponent } from './quick-view-subheader-title.component';
 
 @Component({
-    template: `
-        <fd-quick-view-subheader-title>
-            {{ title }}
-        </fd-quick-view-subheader-title>
-    `
+    template: `<fd-quick-view-subheader-title> Subheader Title </fd-quick-view-subheader-title>`
 })
-class TestComponent {
-    title = 'Michael Adams';
-}
+class TestComponent {}
 
 describe('QuickViewSubheaderTitleComponent', () => {
     let component: TestComponent;

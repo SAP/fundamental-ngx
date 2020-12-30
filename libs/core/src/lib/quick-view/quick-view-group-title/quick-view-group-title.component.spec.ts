@@ -7,12 +7,13 @@ import { QuickViewGroupTitleComponent } from './quick-view-group-title.component
 
 @Component({
     template: `
-        <fd-quick-view-group-title>
+        <fd-quick-view-group-title [id]="id">
             {{ title }}
         </fd-quick-view-group-title>
     `
 })
 class TestComponent {
+    id = 'contact-details-1';
     title = 'Contact Details';
 }
 
@@ -37,10 +38,15 @@ describe('QuickViewGroupTitleComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should assign classes to h5 tag', () => {
-        const h5 = fixture.debugElement.query(By.css('h5[fd-title]'));
+    it('should assign id to header text', () => {
+        const quickViewContainer = fixture.debugElement.query(By.css('.fd-form-group__header-text'));
 
-        expect(h5.nativeElement.classList).toContain('fd-title');
-        expect(h5.nativeElement.classList).toContain('fd-title--h5');
+        expect(quickViewContainer.nativeElement.id).toEqual(component.id);
+    });
+
+    it('should assign aria-labelledby to header', () => {
+        const quickViewContainer = fixture.debugElement.query(By.css('.fd-form-group__header'));
+
+        expect(quickViewContainer.nativeElement.getAttribute('aria-labelledby')).toEqual(component.id);
     });
 });
