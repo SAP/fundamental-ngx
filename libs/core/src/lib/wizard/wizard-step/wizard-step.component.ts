@@ -70,6 +70,12 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     optionalText: string;
 
     /**
+     * Whether or not this step is the summary page.
+     */
+    @Input()
+    isSummary = false;
+
+    /**
      * Event emitted when the wizard step's status changes.
      */
     @Output()
@@ -132,15 +138,10 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.stepIndicator) {
-            this._subscriptions.add(
-                this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
-                    this.stepIndicatorItemClicked.emit(step);
-                })
-            );
-            if (this.stepIndicator.glyph) {
-                this.glyph = this.stepIndicator.glyph;
-            }
+        if (this.isSummary) {
+            this._summaryInit();
+        } else if (this.stepIndicator) {
+            this._notSummaryInit();
         }
     }
 
@@ -182,5 +183,31 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     getStepClientWidth(): number {
         return this._elRef.nativeElement.clientWidth;
+    }
+
+    /** @hidden */
+    removeFromDom(): void {
+        if (this._elRef.nativeElement.parentNode) {
+            this._elRef.nativeElement.parentNode.removeChild(this._elRef.nativeElement);
+        }
+    }
+
+    /** @hidden */
+    _summaryInit(): void {
+        this._elRef.nativeElement.style.display = 'none';
+        this.content.tallContent = true;
+        this.removeFromDom();
+    }
+
+    /** @hidden */
+    _notSummaryInit(): void {
+        this._subscriptions.add(
+            this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
+                this.stepIndicatorItemClicked.emit(step);
+            })
+        );
+        if (this.stepIndicator.glyph) {
+            this.glyph = this.stepIndicator.glyph;
+        }
     }
 }

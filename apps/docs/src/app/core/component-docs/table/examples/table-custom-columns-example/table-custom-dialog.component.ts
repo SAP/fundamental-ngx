@@ -26,6 +26,7 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
                         </fd-bar-element>
                         <fd-bar-element [fullWidth]="true">
                             <fd-input-group glyph="search"
+                                            glyphAriaLabel="Submit"
                                             name="filter"
                                             [compact]="true"
                                             [(ngModel)]="filterPhrase">
