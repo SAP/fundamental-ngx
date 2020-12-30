@@ -6,12 +6,14 @@ import {
     AvatarModule,
     ButtonModule,
     CheckboxModule,
+    ComboboxModule, DatePickerModule,
     DialogModule,
+    FormModule,
     IconModule,
     MenuModule,
     MessageStripModule,
     MessageToastModule,
-    MultiInputModule,
+    MultiInputModule, SelectModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
 
@@ -21,10 +23,11 @@ import { PlatformSearchFieldModule } from '../search-field/public_api';
 import { PlatformListModule, StandardListItemModule } from '../list/public_api';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
+import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
 
 
 @NgModule({
-    declarations: [ApprovalFlowComponent, ApprovalFlowNodeComponent, ApprovalFlowUserDetailsComponent],
+    declarations: [ApprovalFlowComponent, ApprovalFlowNodeComponent, ApprovalFlowUserDetailsComponent, ApprovalFlowAddNodeComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -41,7 +44,11 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
         MultiInputModule,
         MessageStripModule,
         CheckboxModule,
-        MenuModule
+        MenuModule,
+        ComboboxModule,
+        SelectModule,
+        DatePickerModule,
+        FormModule
     ],
     exports: [
         ApprovalFlowComponent

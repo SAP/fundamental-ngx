@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RtlService } from '@fundamental-ngx/core';
+import { FdDatetimeModule, RtlService } from '@fundamental-ngx/core';
 import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformApprovalFlowModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformApprovalFlowModule, FdDatetimeModule],
     exports: [RouterModule],
     declarations: [
         PlatformApprovalFlowHeaderComponent,

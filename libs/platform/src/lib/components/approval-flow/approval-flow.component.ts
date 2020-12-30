@@ -22,7 +22,7 @@ import { debounceTime, take, takeUntil } from 'rxjs/operators';
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
-import { BaseComponent } from '../base';
+import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: true };
 
@@ -34,6 +34,15 @@ interface ApprovalGraphColumn {
 }
 
 type ApprovalFlowGraph = ApprovalGraphColumn[];
+
+const BLANK_NODE: ApprovalGraphNode = {
+    id: '',
+    name: '',
+    targets: [],
+    approvers: [],
+    status: 'not started',
+    blank: true
+};
 
 @Component({
     selector: 'fdp-approval-flow',
@@ -325,6 +334,28 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         console.log('removeCheckedNodes');
     }
 
+    addNode(): void {
+        console.log('add node fn');
+        const dialogRef = this._dialogService.open(ApprovalFlowAddNodeComponent, {
+            data: {
+                node: BLANK_NODE,
+                approvalFlowDataSource: this.dataSource,
+                userDetailsTemplate: this.userDetailsTemplate,
+                rtl: this._isRTL
+            }
+            //     node: node,
+            //     approvalFlowDataSource: this.dataSource,
+            //     userDetailsTemplate: this.userDetailsTemplate,
+            //     rtl: this._isRTL
+            // }
+        });
+        // dialogRef.afterClosed.subscribe((reminderTargets) => {
+        //     if (Array.isArray(reminderTargets)) {
+        //         this.sendReminders(reminderTargets, node);
+        //     }
+        // });
+    }
+
     deleteNode(node: ApprovalNode): void {
         console.log('delete node', node);
         const index = this._approvalProcess.nodes.findIndex(n => n.id === node.id);
@@ -359,14 +390,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
         const rootNode = findRootNode(nodes);
-        const blankNode: ApprovalGraphNode = {
-            id: '',
-            name: '',
-            targets: [],
-            approvers: [],
-            status: 'not started',
-            blank: true
-        };
         if (!rootNode) {
             return graph;
         }
@@ -402,7 +425,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     if (targetNode && !nodesWithTarget.includes(targetNode)) {
                         nodesWithBlankSpaces[i] = targetNode;
                     } else {
-                        nodesWithBlankSpaces[i] = blankNode;
+                        nodesWithBlankSpaces[i] = BLANK_NODE;
                     }
                 });
                 // nodesWithBlankSpaces.forEach((node, i) => {

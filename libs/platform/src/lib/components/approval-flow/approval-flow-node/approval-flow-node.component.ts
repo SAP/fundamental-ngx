@@ -95,6 +95,8 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     @Output() onNodeCheck = new EventEmitter<boolean>();
 
+    @Output() onAdd = new EventEmitter<void>();
+
     @Output() onDelete = new EventEmitter<void>();
 
     /** @hidden */

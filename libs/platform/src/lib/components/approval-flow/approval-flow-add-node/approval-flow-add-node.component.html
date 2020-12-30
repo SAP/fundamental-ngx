@@ -1,0 +1,107 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <p>
+                Add approver
+                <!--                <fd-icon-->
+                <!--                    *ngIf="_userToShowDetails && _isListMode"-->
+                <!--                    [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"-->
+                <!--                    (click)="_backToListFromDetails()"-->
+                <!--                ></fd-icon>-->
+                <!--                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ _data.node.description }} ({{ _data.node.approvers.length }})</ng-container>-->
+            </p>
+            <!--            <fdp-search-field-->
+            <!--                *ngIf="!_userToShowDetails && _isListMode"-->
+            <!--                placeholder="Search"-->
+            <!--                contentDensity="compact"-->
+            <!--                [suggestions]="[]"-->
+            <!--                (inputChange)="_onSearchStringChange($event.text)"-->
+            <!--            ></fdp-search-field>-->
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <ng-container *ngIf="!_selectApproversMode">
+            <div fd-form-item>
+                <label fd-form-label>Add as</label>
+                <fd-select placeholder="Select an option" [compact]="true" [(value)]="_approverType">
+                    <fd-option *ngFor="let option of ['before', 'after', 'parallel']"
+                               [value]="option">{{ option }}</fd-option>
+                </fd-select>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label>Who will approve?</label>
+                <fd-select placeholder="Select an option" [compact]="true">
+                    <fd-option *ngFor="let option of ['Any team member', 'All team members']"
+                               [value]="option">{{ option }}</fd-option>
+                </fd-select>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label>Approvers</label>
+                <div class="approval-flow__select-approvers-input-container">
+                    <input
+                        fd-form-control
+                        [compact]="true"
+                        type="text"
+                        readonly
+                    />
+                    <fd-icon glyph="value-help" (click)="_goToSelectApproversMode()"></fd-icon>
+                </div>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label>Due date</label>
+                <fd-date-picker type="single" compact="true" [(ngModel)]="_dueDate"></fd-date-picker>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="_selectApproversMode">
+            <div class="approval-flow-user-details__selected-count" i18n="@@platformApprovalFlowSelectedUsers"
+                 *ngIf="_selectedApprovers.length">{{ _selectedApprovers.length }}
+                {_selectedApprovers.length, plural, =1 {item} other {items}} selected
+            </div>
+            <fdp-list
+                selectionMode="multi"
+                [selection]="true"
+                [hasByLine]="true"
+                [(ngModel)]="_selectedApprovers"
+                (selectedItemChange)="_selectedApprovers = $event.selectedItems">
+                <fdp-standard-list-item
+                    *ngFor="let user of _data.approvalFlowDataSource.fetchApprovers() | async"
+                    [avatarSrc]="user.imgUrl"
+                    [avatarTitle]="user.name"
+                    [description]="user.description"
+                    [title]="user.name"
+                >
+                </fdp-standard-list-item>
+            </fdp-list>
+        </ng-container>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fd-dialog-decisive-button
+                fdType="emphasized"
+                label="Ok"
+                [compact]="true">
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fd-initial-focus
+                fd-dialog-decisive-button
+                fdType="transparent"
+                label="Cancel"
+                [compact]="true"
+                (click)="dialogRef.close('Cancel')">
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>
+
+
+<ng-template #defaultHeader>
+    <ng-container i18n="@@platformApprovalFlowUserDetailHeader">Detail</ng-container>
+</ng-template>

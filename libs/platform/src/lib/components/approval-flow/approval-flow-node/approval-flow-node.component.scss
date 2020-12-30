@@ -84,6 +84,10 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     &.#{$block}--edit-mode {
         height: $node-height--edit-mode;
 
+        &.#{$block}--blank {
+            pointer-events: auto;
+        }
+
         .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
             top: $carousel-marker-top--edit-mode;
         }
@@ -222,4 +226,31 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
 .#{$block}__carousel-end-marker {
     right: -2rem;
+}
+
+.#{$block}__add {
+    position: absolute;
+    z-index: 10;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    padding: 0;
+    background-color: #fff;
+    cursor: pointer;
+    border: 1px solid #0854A0;
+    line-height: 0;
+
+    fd-icon {
+        position: relative;
+        left: 2.6px;
+        top: 1px;
+        font-size: 0.59rem;
+        color: #0854A0;
+        font-weight: 600;
+    }
 }

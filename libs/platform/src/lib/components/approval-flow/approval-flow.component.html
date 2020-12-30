@@ -87,6 +87,7 @@
                         [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
                         (onNodeClick)="onNodeClick(node)"
                         (onNodeCheck)="onNodeCheck(node, $event)"
+                        (onAdd)="addNode()"
                         (onDelete)="deleteNode(node)"
                         (keyup.enter)="onNodeClick(node)"
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
