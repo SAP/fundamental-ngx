@@ -46,13 +46,6 @@ export type InputGroupPlacement = 'before' | 'after';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDestroy {
-    /** @hidden */
-    @ContentChild(InputGroupInputDirective)
-    inputElement: InputGroupInputDirective;
-
-    /** @hidden */
-    @ContentChild(InputGroupAddOnDirective)
-    addOnElement: InputGroupAddOnDirective;
 
     /** Input template */
     @Input()
@@ -118,6 +111,10 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     isExpanded = false;
 
+    /** Label applied to button with glyph element. */
+    @Input()
+    glyphAriaLabel: string;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
@@ -132,6 +129,13 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    @ContentChild(InputGroupInputDirective)
+    inputElement: InputGroupInputDirective;
+
+    /** @hidden */
+    @ContentChild(InputGroupAddOnDirective)
+    addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
     constructor (

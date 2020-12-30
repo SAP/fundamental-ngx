@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.23...v0.26.0-rc.24) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Core) Overflowing, stacked and collapsible tabs ([#4120](https://github.com/SAP/fundamental-ngx/issues/4120)) ([38d3eba](https://github.com/SAP/fundamental-ngx/commit/38d3ebadc84389d9a668ef2cab249db2b0a2cf83))
+
+## [0.26.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.22...v0.26.0-rc.23) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Core) added aria-label to button with icon in Input Group ([#4198](https://github.com/SAP/fundamental-ngx/issues/4198)) ([a12e6ad](https://github.com/SAP/fundamental-ngx/commit/a12e6ad453dbba15e0945d673cc847420f70b6d5))
+
+## [0.26.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.21...v0.26.0-rc.22) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Platform) add subtle mode in core and platform. Fix vertical align in platform link. ([#4148](https://github.com/SAP/fundamental-ngx/issues/4148)) ([eabf86c](https://github.com/SAP/fundamental-ngx/commit/eabf86c362ad8405336bebd3949479a3df5ce4ee))
+
+## [0.26.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.20...v0.26.0-rc.21) (2020-12-29)
+
+
+### Features
+
+* (Core) implement wizard summary ([#4082](https://github.com/SAP/fundamental-ngx/issues/4082)) ([d7c3571](https://github.com/SAP/fundamental-ngx/commit/d7c35716517e0cf2bf40653c56d979ebd810371b))
+
+## [0.26.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.19...v0.26.0-rc.20) (2020-12-29)
+
+## [0.26.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.18...v0.26.0-rc.19) (2020-12-29)
+
+## [0.26.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.17...v0.26.0-rc.18) (2020-12-29)
+
+
+### Bug Fixes
+
+* (Core) Dialog close button arial-label ([#4185](https://github.com/SAP/fundamental-ngx/issues/4185)) ([e68899a](https://github.com/SAP/fundamental-ngx/commit/e68899af12320b3128cf2fb0aef1a8e766c22f3a))
+
 ## [0.26.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.16...v0.26.0-rc.17) (2020-12-28)
 
 ## [0.26.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.15...v0.26.0-rc.16) (2020-12-28)

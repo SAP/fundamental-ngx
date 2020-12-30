@@ -1,0 +1,26 @@
+<ng-template #inlineHelpRef>
+    <fd-icon
+            *ngIf="inlineHelpTitle"
+            [class.fd-form-label__help]="true"
+            [class.fd-form-label__help--after]="inlineHelpPlacement === 'after'"
+            [glyph]="inlineHelpGlyph"
+            [fd-inline-help]="inlineHelpTitle"
+            [triggers]="inlineHelpTrigger"
+            [placement]="inlineHelpBodyPlacement"
+        ></fd-icon>
+</ng-template>
+
+<ng-container *ngIf="inlineHelpPlacement === 'before' && inlineHelpTitle">
+    <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
+</ng-container>
+
+<span class="fd-form-label"
+      [class.fd-form-label--required]="required"
+      [class.fd-form-label--colon]="colon"
+>
+    <ng-content></ng-content>
+</span>
+
+<ng-container *ngIf="inlineHelpPlacement === 'after' && inlineHelpTitle">
+    <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
+</ng-container>

@@ -1,60 +1,34 @@
-/**
- * @license
- * SAP
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- *
- */
 import {
     AfterViewInit,
-    Component,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
+    Component,
+    ContentChild,
     EventEmitter,
     ElementRef,
     Input,
     OnInit,
     Output,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation,
+    Renderer2
 } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BaseComponent } from '../base';
+import { IconComponent } from '@fundamental-ngx/core';
 
-export type LinkType = 'standard' | 'emphasized';
+export type LinkType = 'standard' | 'emphasized' | 'subtle';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
-const VALID_INPUT_TYPES = ['standard', 'emphasized'];
+const VALID_INPUT_TYPES = ['standard', 'emphasized', 'subtle'];
 
-/**
- * Platform Link implementation based on the
- * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Link-Component-Technical-Design
- * documents.
- *
- */
 @Component({
     selector: 'fdp-link',
     templateUrl: './link.component.html',
     styleUrls: ['./link.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class LinkComponent extends BaseComponent implements OnInit, AfterViewInit {
-    emphasized = false;
-    isfocused = false;
-
-    /** Access child element, for checking link content*/
-    @ViewChild('link', { read: ElementRef })
-    anchor: ElementRef;
-
     /**
      * href value to Navigate to. sets href to Native anchor.
      */
@@ -124,13 +98,28 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     @Input()
     rel?: string;
 
+    /**
+     * If text is overlapping. By setting truncate to true, overlapping can be hidden with using ellipsis
+     */
+    @Input()
+    truncate = false;
+
     /** Emitting link click event */
     @Output()
     click: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
+    @ContentChild(IconComponent)
+    icon: IconComponent;
+
+    /** Access child element, for checking link content*/
+    @ViewChild('link', { read: ElementRef })
+    anchor: ElementRef;
+
+    emphasized = false;
+    subtle = false;
     private _inverted = false;
 
-    constructor(protected _cd: ChangeDetectorRef) {
+    constructor(protected _cd: ChangeDetectorRef, private renderer2: Renderer2) {
         super(_cd);
     }
 
@@ -142,9 +131,8 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
         }
 
         /* If link linkType===emphasized then make link emphasized type */
-        if (this.linkType === VALID_INPUT_TYPES[1]) {
-            this.emphasized = true;
-        }
+        this.emphasized = this.linkType === VALID_INPUT_TYPES[1];
+        this.subtle = this.linkType === VALID_INPUT_TYPES[2];
 
         /* if link type not supported, throw Error */
         if (this.linkType && VALID_INPUT_TYPES.indexOf(this.linkType) === -1) {
@@ -156,6 +144,28 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     ngAfterViewInit(): void {
         if (!this.anchor.nativeElement.innerHTML) {
             throw new Error('Mandatory text/icon for fdp-link missing');
+        }
+    }
+
+    /**
+     * Puts underline on Icon
+     * @param event: MouseEvent
+     */
+    onMouseEnter(event: MouseEvent): void {
+        event.stopPropagation();
+        if (this.icon) {
+            this.renderer2.setStyle(this.icon.elementRef().nativeElement, 'text-decoration', 'underline');
+        }
+    }
+
+    /**
+     * Removes underline on Icon
+     * @param event: MouseEvent
+     */
+    onMouseLeave(event: MouseEvent): void {
+        event.stopPropagation();
+        if (this.icon) {
+            this.renderer2.setStyle(this.icon.elementRef().nativeElement, 'text-decoration', 'none');
         }
     }
 
