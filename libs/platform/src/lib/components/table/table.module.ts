@@ -5,16 +5,16 @@ import { FormsModule } from '@angular/forms';
 import {
     ButtonModule,
     CheckboxModule,
-    DialogModule,
     FormModule,
-    IconModule,
+    SelectModule,
+    RadioModule,
     InputGroupModule,
+    DialogModule,
+    IconModule,
     ListModule,
     PopoverModule,
-    RadioModule,
     TableModule,
     ToolbarModule,
-    SelectModule,
     LayoutGridModule,
     PanelModule,
     DatePickerModule
@@ -67,6 +67,7 @@ import { ValueByPathPipe } from './pipes';
 
         TableModule,
         ToolbarModule,
+        FormModule,
         CheckboxModule,
         RadioModule,
         InputGroupModule,

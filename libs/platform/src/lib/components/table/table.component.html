@@ -32,8 +32,8 @@
                                 [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                                 [ngModel]="_checkedAll"
-                                (ngModelChange)="_selectAll($event)"
-                                (keydown)="_onSelectControlKeydown($event)"
+                                (ngModelChange)="_toggleAllSelectableRows($event)"
+                                (keydown)="_triggerClickOnKeyboardEnter($event)"
                             ></fd-checkbox>
                         </th>
 
@@ -247,7 +247,7 @@
             role="cell"
             [colSpan]="_tableColumnsLength"
             (click)="_toggleGroupRow(row)"
-            [ngStyle]="{'padding-left': _getRowNestingPadding(row) + 'px'}"
+            [style.paddingLeft.px]="_getRowNestingPadding(row)"
         >
             <fd-icon
                 [glyph]="row.expanded ? 'navigation-down-arrow' : _rtl ? 'navigation-left-arrow' : 'navigation-right-arrow'"
@@ -255,7 +255,7 @@
             {{ row.value?.field }}: {{ row.value?.value }}
         </td>
     </tr>
-    <tr [style.height.px]="_getGroupRowHeight()"></tr>
+    <tr [style.height.px]="_getRowHeight()"></tr>
 </ng-template>
 
 <!-- Item Row Template -->
@@ -269,7 +269,7 @@
         [attr.aria-selected]="row.checked"
     >
         <td
-            *ngIf="selectionMode === SELECTION_MODE.SINGLE || selectionMode === SELECTION_MODE.MULTIPLE"
+            *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -277,15 +277,15 @@
             [ngStyle]="_getFreezableSelectionCellStyles()"
             [attr.tabindex]="selectionMode === SELECTION_MODE.SINGLE ? 0 : ''"
             [attr.role]="selectionMode === SELECTION_MODE.SINGLE ? 'checkbox' : 'cell'"
-            (click)="_selectSingle(row.index, row)"
-            (keydown)="_onSelectControlKeydown($event)"
+            (click)="_toggleSelectableRow(row)"
+            (keydown)="_triggerClickOnKeyboardEnter($event)"
         >
             <fd-checkbox
-                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
-                [(ngModel)]="row.checked"
-                (ngModelChange)="_select(row.index, row, $event)"
-                (keydown)="_onSelectControlKeydown($event)"
+                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
+                [ngModel]="row.checked"
+                (ngModelChange)="_toggleSelectableRow(row)"
+                (keydown)="_triggerClickOnKeyboardEnter($event)"
             ></fd-checkbox>
         </td>
         <td
@@ -295,7 +295,7 @@
             [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.key)"
             [ngStyle]="_freezableColumns?.includes(column.key) ? _getFreezableCellStyles(colIdx) : null"
         >
-            <div [ngStyle]="{'padding-left': selectionMode === SELECTION_MODE.NONE && _getRowNestingPadding(row) + 'px'}">
+            <div [style.paddingLeft.px]="colIdx === 0 && _getRowNestingPadding(row)">
                 <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
                     <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">
                     </ng-container>

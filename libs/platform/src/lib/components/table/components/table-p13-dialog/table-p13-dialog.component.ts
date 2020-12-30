@@ -149,9 +149,14 @@ export class TableP13DialogComponent implements OnDestroy {
     showGroupingSettings(): void {
         const state = this._getTableState();
         const columns = this._getTableColumns();
+        const visibleColumns = state.columns;
         const groupBy = state.groupBy;
         const dialogData: GroupDialogData = {
-            columns: columns.filter(({ groupable }) => groupable).map(({ label, key }) => ({ label: label, key: key })),
+            columns: columns
+                // We can group by visible columns only
+                .filter(({ name }) => visibleColumns.includes(name))
+                .filter(({ groupable }) => groupable)
+                .map(({ label, key }) => ({ label: label, key: key })),
             collectionGroup: groupBy
         };
 

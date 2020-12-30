@@ -14,11 +14,11 @@ export class TableService {
     readonly tableState$: Observable<TableState> = this._tableStateSubject$.asObservable();
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
 
+    readonly searchChange: EventEmitter<SearchChange> = new EventEmitter<SearchChange>();
     readonly sortChange: EventEmitter<SortChange> = new EventEmitter<SortChange>();
     readonly filterChange: EventEmitter<FilterChange> = new EventEmitter<FilterChange>();
     readonly groupChange: EventEmitter<GroupChange> = new EventEmitter<GroupChange>();
     readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
-    readonly searchChange: EventEmitter<SearchChange> = new EventEmitter<SearchChange>();
     readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
 
     /** Get current state/settings of the Table. */

@@ -79,14 +79,14 @@ describe('TableComponent', () => {
         const resetSpy = spyOn(<any>component, '_reset').and.callThrough();
         const emitChangeSpy = spyOn(<any>component, '_emitSelectionChange').and.stub();
 
-        component._select(0, (<any>component)._rows[0], true);
+        component._toggleSelectableRow(0, (<any>component)._rows[0], true);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(0);
         expect(component._checkedAll).toBeFalse();
         expect((<any>component)._checked.length).toEqual(1);
 
-        component._select(1, (<any>component)._rows[1], true);
+        component._toggleSelectableRow(1, (<any>component)._rows[1], true);
 
         expect(resetSpy).toHaveBeenCalled();
         expect(emitChangeSpy).toHaveBeenCalledWith(1);

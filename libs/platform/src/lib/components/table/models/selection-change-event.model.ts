@@ -1,6 +1,6 @@
 import { Table } from '../table';
 
-class SelectionChangeEvent<T> {
+export class SelectionChangeEvent<T> {
     selection: T[]; // currently selected items
     added: T[]; // items added
     removed: T[]; // items removed

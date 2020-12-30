@@ -10,7 +10,6 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
     Optional,
     Output,
     QueryList,
@@ -21,7 +20,7 @@ import {
 import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { BehaviorSubject, from, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, from, isObservable, merge, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core';
@@ -51,7 +50,9 @@ import {
     TableFilterChangeEvent,
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
-    TableSortChangeEvent
+    TableSortChangeEvent,
+    TableRowSelectionEventBuilder,
+    TableRow
 } from './models';
 import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
@@ -64,40 +65,6 @@ import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-tool
 import { Table } from './table';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
-
-let tableRowId = 0;
-/**
- * Table row entity
- * Used to represent table row in the template
- */
-class TableRow<T = any> {
-    public tableRowId = `fdp-table-row-id-${tableRowId++}`;
-
-    constructor(
-        // Row semantic type
-        public type: 'item' | 'group',
-        // Indicates if row is checked
-        public checked: boolean,
-        // Index of a model it belongs to
-        public index: number,
-        // Domain model
-        public readonly value: T,
-        // Reference to a parent if any
-        public parent: TableRow | null = null,
-        // Nesting level
-        public level = 0,
-        // expandable
-        public expandable = false,
-        // expandable
-        public expanded = true,
-        // if item should be hidden. Used to skip rendering
-        public hidden = false
-    ) {}
-}
-
-type RowTree<T> = T & {
-    __fdpTableRowChildren?: RowTree<T>[];
-};
 
 /**
  * The component that represents a table.
@@ -144,8 +111,12 @@ type RowTree<T> = T & {
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
     }
 })
-export class TableComponent<T = any> extends Table implements OnInit, AfterViewInit, OnDestroy, OnChanges {
-    /** Data source for table data. */
+export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges {
+    /**
+     * Table data source.
+     * Can be @type { T[] | Observable<T[]> | TableDataSource<T> }
+     *
+     */
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
         this._ds = value;
@@ -157,7 +128,9 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         return this._ds;
     }
 
-    /** Initial state of table. */
+    /**
+     * Initial state of table.
+     */
     @Input()
     set state(value: TableState) {
         this.setTableState(value || DEFAULT_TABLE_STATE);
@@ -170,14 +143,6 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     @Input()
     freezeColumnsTo: string;
 
-    /** Toggle for page scrolling feature. */
-    @Input()
-    pageScrolling: boolean;
-
-    /** Number of items per page. */
-    @Input()
-    pageSize: number;
-
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input()
     contentDensity: ContentDensity = ContentDensity.COZY;
@@ -185,6 +150,14 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
     selectionMode: SelectionMode = SelectionMode.NONE;
+
+    /** Toggle for page scrolling feature. */
+    @Input()
+    pageScrolling: boolean;
+
+    /** Number of items per page. */
+    @Input()
+    pageSize: number;
 
     /** Text displayed when table has no items. */
     @Input()
@@ -206,19 +179,19 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     @Input()
     noBodyBorders = false;
 
-    /** Initial visible columns. Consist of list of unique columns names */
+    /** Initial visible columns. Consist of a list of unique column names */
     @Input()
     initialVisibleColumns: string[];
 
-    /** Sort options. It's applied on initial phase */
+    /** Initial sort options. */
     @Input()
     initialSortBy: CollectionSort[];
 
-    /** Filter options. It's applied on initial phase */
+    /** Initial filter options. */
     @Input()
     initialFilterBy: CollectionFilter[];
 
-    /** Group options. It's applied on initial phase */
+    /** Initial group options. */
     @Input()
     initialGroupBy: CollectionGroup[];
 
@@ -282,6 +255,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     /**
      * @hidden
      * Representation of table rows.
+     * Contains all rows including group rows
      */
     _tableRows: TableRow[] = [];
 
@@ -289,16 +263,9 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
      * @hidden
      * Visible table rows.
      * Rows list that is used to be rendered in the ui.
-     * Excludes hidden rows.
+     * Based on _tableRows and excludes hidden rows.
      */
     _tableRowsVisible: TableRow[] = [];
-
-    /**
-     * @hidden
-     * @deprecated
-     * Representation of table row.
-     */
-    _rows: SelectableRow[] = [];
 
     /** @hidden */
     _popoverOpen = false;
@@ -332,9 +299,6 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     _tablePadding = 0;
 
     /** @hidden */
-    _checkedAll = false;
-
-    /** @hidden */
     _isShownSortSettingsInToolbar = false;
 
     /** @hidden */
@@ -349,26 +313,34 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     /** @hidden */
     _tableColumnsLength = 0;
 
-    /** @hidden */
+    /**
+     * @hidden
+     * RTL flag
+     */
     _rtl = false;
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Indicates when all items are checked
+     */
+    _checkedAll = false;
+
+    /**
+     * @hidden
+     * Total items length given by data source
+     */
     _totalItems = 0;
 
-    /** Columns to be rendered in the template */
+    /**
+     * @hidden
+     * Columns to be rendered in the template
+     */
     _visibleColumns: TableColumn[] = [];
 
-    /**
-     * @hidden
-     * Needed to track newly checked items for change selection event
-     */
-    private _checked = [];
-
-    /**
-     * @hidden
-     * Needed to track unchecked items for change selection event
-     */
-    private _unchecked = [];
+    /** @hidden */
+    get _isShownSelectionColumn(): boolean {
+        return this.selectionMode !== this.SELECTION_MODE.NONE;
+    }
 
     /** @hidden */
     private _ds: FdpTableDataSource<T>;
@@ -403,8 +375,6 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
             this._setFreezableInfo();
         }
     }
-
-    ngOnInit(): void {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -446,6 +416,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
         this._tableService.setTableState(state);
+        this._cd.markForCheck();
     }
 
     getTableColumns(): TableColumn[] {
@@ -455,31 +426,37 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     /** Set Sorting rules */
     sort(sortRules: CollectionSort[]): void {
         this._tableService.setSort(sortRules);
+        this._cd.markForCheck();
     }
 
     /** Add Sorting rules to the existing ones */
     addSort(sortRules: CollectionSort[]): void {
         this._tableService.addSort(sortRules);
+        this._cd.markForCheck();
     }
 
     /** Set Filter rules */
     filter(filterRules: CollectionFilter[]): void {
         this._tableService.setFilters(filterRules);
+        this._cd.markForCheck();
     }
 
     /** Add Filter rule */
     addFilter(filterRules: CollectionFilter[]): void {
         this._tableService.addFilters(filterRules);
+        this._cd.markForCheck();
     }
 
     /** Set Groups */
     group(groups: CollectionGroup[]): void {
         this._tableService.setGroups(groups);
+        this._cd.markForCheck();
     }
 
     /** Add Groups */
     addGroup(groups: CollectionGroup[]): void {
         this._tableService.addGroups(groups);
+        this._cd.markForCheck();
     }
 
     /**
@@ -489,6 +466,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
      */
     setColumns(columns: string[]): void {
         this._tableService.setColumns(columns);
+        this._cd.markForCheck();
     }
 
     /** Freeze table to column */
@@ -496,6 +474,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         this._tableService.freezeTo(columnKey);
         this.freezeColumnsTo = columnKey;
         this._setFreezableInfo();
+        this._cd.markForCheck();
     }
 
     /** Unfreeze column */
@@ -505,105 +484,70 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         this._tableService.freezeTo(freezeToKey);
         this.freezeColumnsTo = freezeToKey;
         this._setFreezableInfo();
+        this._cd.markForCheck();
     }
 
     /** Search in table */
     search(searchInput: SearchInput): void {
         this._tableService.search(searchInput);
+        this._cd.markForCheck();
     }
 
     /** Toolbar Sort Settings button visibility */
     showSortSettingsInToolbar(showSortSettings: boolean): void {
         this._isShownSortSettingsInToolbar = showSortSettings;
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /** Toolbar Filter Settings button visibility */
     showFilterSettingsInToolbar(showFilterSettings: boolean): void {
         this._isShownFilterSettingsInToolbar = showFilterSettings;
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /** Toolbar Group Settings button visibility */
     showGroupSettingsInToolbar(showGroupSettings: boolean): void {
         this._isShownGroupSettingsInToolbar = showGroupSettings;
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
         this._isShownColumnSettingsInToolbar = showColumnSettings;
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 
+    // Private API
+
+    /** @hidden */
     _getRowNestingPadding(row: TableRow): number {
-        return ROW_HEIGHT.get(this.contentDensity) * row?.level;
+        return (row.level || 0) * SELECTION_COLUMN_WIDTH.get(this.contentDensity);
     }
 
     /**
      * @hidden
      * Select/unselect one row in 'multiple' mode.
      */
-    _select(index: number, row: SelectableRow, checked: boolean): void {
-        this._resetSelectionMetaData();
-        row.checked = checked;
-        this._checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
-        checked ? this._checked.push(row.value) : this._unchecked.push(row.value);
-        this._emitSelectionChange(index);
-    }
-
-    /**
-     * @hidden
-     * Select one row in 'single' mode.
-     */
-    _selectSingle(index: number, row: SelectableRow): void {
-        if (this.selectionMode !== SelectionMode.SINGLE) {
-            return;
-        }
-
-        this._resetSelectionMetaData();
-
-        const alreadySelected = this._rows.find((r) => r.checked === true);
-
-        if (alreadySelected) {
-            alreadySelected.checked = false;
-        }
-
-        if (alreadySelected === row) {
-            this._unchecked.push(alreadySelected.value);
-            this._emitSelectionChange(index);
-
-            return;
-        }
-
-        this._rows[index].checked = true;
-        this._checked.push(row.value);
-        this._emitSelectionChange(index);
+    _toggleSelectableRow(row: TableRow): void {
+        const selectionBuilder = new TableRowSelectionEventBuilder<T>(this.selectionMode, this._tableRows);
+        selectionBuilder.toggle(row);
+        this._checkedAll = selectionBuilder.isAllSelected();
+        this._emitSelectionEventByBuilder(selectionBuilder);
     }
 
     /**
      * @hidden
      * Select/Unselect all rows in 'multiple' mode.
      */
-    _selectAll(checked: boolean): void {
-        this._resetSelectionMetaData();
-        this._checkedAll = checked;
-
-        if (checked) {
-            this._checkAll();
-            this._emitSelectionChange();
-
-            return;
-        }
-
-        this._uncheckAll();
-        this._emitSelectionChange();
+    _toggleAllSelectableRows(checked: boolean): void {
+        const selectionBuilder = new TableRowSelectionEventBuilder<T>(this.selectionMode, this._tableRows);
+        selectionBuilder.toggleAll(checked);
+        this._checkedAll = selectionBuilder.isAllSelected();
+        this._emitSelectionEventByBuilder(selectionBuilder);
     }
 
     /** @hidden */
-    _onSelectControlKeydown(event: KeyboardEvent): void {
-        // TODO: since the table need to have focusable cells, it's needed to implement arrow buttons navigation in next phases
-
+    _triggerClickOnKeyboardEnter(event: KeyboardEvent): void {
         event.stopPropagation();
 
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
@@ -613,7 +557,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         }
     }
 
-    /** Group triggered from column header */
+    /** Group By triggered from column header */
     _columnHeaderGroupBy(field: string): void {
         this.group([{ field: field, direction: SortDirection.ASC, showAsColumn: true }]);
 
@@ -659,7 +603,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     }
 
     /** @hidden */
-    _getGroupRowHeight(): number {
+    _getRowHeight(): number {
         return ROW_HEIGHT.get(this.contentDensity);
     }
 
@@ -689,32 +633,12 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         this._popoverColumnKey = columnKey;
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Expand/Collapse group row
+     */
     _toggleGroupRow(groupRow: TableRow): void {
-        const rows = this._tableRows;
-        const expanded = (groupRow.expanded = !groupRow.expanded);
-
-        const findAllChildren = (row: TableRow): TableRow[] => {
-            let children = [];
-            rows.forEach((_row) => {
-                if (_row.parent === row) {
-                    children.push(_row);
-                    if (expanded && !_row.expanded) {
-                        return;
-                    }
-                    if (_row.expandable) {
-                        children = children.concat(findAllChildren(_row));
-                    }
-                }
-            });
-            return children;
-        };
-
-        findAllChildren(groupRow).forEach((row) => {
-            row.hidden = !groupRow.expanded;
-        });
-
-        this._onTableRowsChanged();
+        this._toggleExpandableTableRow(groupRow);
     }
 
     /** @hidden */
@@ -750,7 +674,9 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
                     // Insert items to show groups
                     switchMap((rows: TableRow[]) =>
                         this._groupRulesMapSubject.pipe(
-                            map((groupRules) => this._groupTableRows(rows, groupRules.values()))
+                            map((groupRules) => {
+                                return this._groupTableRows(rows, groupRules.values());
+                            })
                         )
                     )
                 )
@@ -763,87 +689,21 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     }
 
     /** @hidden */
-    private _setTableRows(rows: TableRow[]): void {
-        this._tableRows = rows;
-
-        this._onTableRowsChanged();
-    }
-
-    /** @hidden */
-    private _onTableRowsChanged(): void {
-        this._buildVisibleTableRows();
-    }
-
-    /** @hidden */
-    private _buildVisibleTableRows(): void {
-        this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
-    }
-
-    /** @hidden */
-    private _listenToColumns(): void {
-        this.columns.changes.pipe(startWith(null)).subscribe(() => {
-            this._tableColumnsSubject.next(this.columns.toArray());
-        });
-    }
-
-    /** Construct visible columns for rendering purpose  */
-    private _calculateVisibleColumns(): void {
-        const columnsDefinition = this.columns.toArray();
-        const { columns } = this.getTableState();
-        this._visibleColumns = columns
-            .map((columnName) => columnsDefinition.find(({ name }) => columnName === name))
-            .filter((v) => !!v);
-
-        this._calculateTableColumnsLength();
-    }
-
-    private _calculateTableColumnsLength(): void {
-        const columnsLen = this._visibleColumns.length;
-        this._tableColumnsLength = this.selectionMode !== SelectionMode.NONE ? columnsLen + 1 : columnsLen;
-    }
-
-    /** @hidden */
-    private _setFreezableInfo(): void {
-        this._freezableColumns = this._getFreezableColumn();
-        this._selectionColumnWidth = SELECTION_COLUMN_WIDTH.get(`${this.selectionMode}-${this.contentDensity}`) || 0;
-        this._tablePadding = this._selectionColumnWidth + this._columnWidth * (this._freezableColumns?.length || 0);
-    }
-
-    /** @hidden */
-    private _getFreezableColumn(): string[] {
-        const columns = [];
-
-        if (!this.columns?.length || !this.freezeColumnsTo) {
-            return columns;
-        }
-
-        for (const column of this.columns.toArray()) {
-            if (!column.key) {
-                continue;
-            }
-            if (column.key === this.freezeColumnsTo) {
-                columns.push(column.key);
-
-                return columns;
-            }
-
-            columns.push(column.key);
-        }
-
-        return [];
-    }
-
-    /** @hidden */
     private _listenToTableStateChanges(): void {
         this._subscriptions.add(
-            this._tableService.tableStateChanges$
-                .pipe(
-                    filter((state) => !!state),
-                    distinctUntilChanged()
-                )
-                .subscribe((state) => {
-                    this._tableDataSource?.fetch(state);
-                })
+            merge([
+                // Events that should trigger DataSource.fetch()
+                this._tableService.sortChange,
+                this._tableService.filterChange,
+                this._tableService.searchChange,
+            ]).pipe(
+                map(() => this._tableService.getTableState()),
+                filter((state) => !!state),
+                distinctUntilChanged()
+            )
+            .subscribe((state) => {
+                this._tableDataSource?.fetch(state);
+            })
         );
 
         this._subscriptions.add(
@@ -887,6 +747,77 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
                 this._cd.markForCheck();
             })
         );
+    }
+
+    /** @hidden */
+    private _setTableRows(rows: TableRow[]): void {
+        this._tableRows = rows;
+
+        this._onTableRowsChanged();
+    }
+
+    /** @hidden */
+    private _onTableRowsChanged(): void {
+        this._calculateVisibleTableRows();
+    }
+
+    /** @hidden */
+    private _calculateVisibleTableRows(): void {
+        this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
+    }
+
+    /** @hidden */
+    private _listenToColumns(): void {
+        this.columns.changes.pipe(startWith(null)).subscribe(() => {
+            this._tableColumnsSubject.next(this.columns.toArray());
+        });
+    }
+
+    /** Construct visible columns for rendering purpose  */
+    private _calculateVisibleColumns(): void {
+        const columnsDefinition = this.columns.toArray();
+        const { columns } = this.getTableState();
+        this._visibleColumns = columns
+            .map((columnName) => columnsDefinition.find(({ name }) => columnName === name))
+            .filter((v) => !!v);
+
+        this._calculateTableColumnsLength();
+    }
+
+    private _calculateTableColumnsLength(): void {
+        const columnsLen = this._visibleColumns.length;
+        this._tableColumnsLength = this.selectionMode !== SelectionMode.NONE ? columnsLen + 1 : columnsLen;
+    }
+
+    /** @hidden */
+    private _setFreezableInfo(): void {
+        this._freezableColumns = this._getFreezableColumn();
+        this._selectionColumnWidth = this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
+        this._tablePadding = this._selectionColumnWidth + this._columnWidth * this._freezableColumns.length;
+    }
+
+    /** @hidden */
+    private _getFreezableColumn(): string[] {
+        const columns = [];
+
+        if (!this.columns?.length || !this.freezeColumnsTo) {
+            return columns;
+        }
+
+        for (const column of this.columns.toArray()) {
+            if (!column.key) {
+                continue;
+            }
+            if (column.key === this.freezeColumnsTo) {
+                columns.push(column.key);
+
+                return columns;
+            }
+
+            columns.push(column.key);
+        }
+
+        return [];
     }
 
     /** @hidden */
@@ -953,7 +884,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
         }, new Map<unknown, TableRow[]>());
 
         // Build table rows in a right order included required group rows
-        let children: RowTree<TableRow>[] = [];
+        let children: TableRow[] = [];
         for (const [value, values] of Array.from(valuesHash)) {
             const filteredRows = rows.filter((_item) => values.includes(_item));
 
@@ -995,57 +926,73 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
     }
 
     /** @hidden */
-    private _checkAll(): void {
-        this._rows.forEach((r) => {
-            if (!r.checked) {
-                this._checked.push(r.value);
-            }
+    private _toggleExpandableTableRow(rowToToggle: TableRow): void {
+        const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
 
-            r.checked = true;
+        this._findRowChildren(rowToToggle).forEach((row) => {
+            /**
+             * if parent is collapsed we want to hide all nested items
+             * if parent is expanded we want show only items which direct parent is expanded as well
+             */
+            row.hidden = !expanded ? true : !row.parent.expanded;
         });
+
+        this._onTableRowsChanged();
     }
 
     /** @hidden */
-    private _uncheckAll(): void {
-        this._rows.forEach((r) => {
-            if (r.checked) {
-                this._unchecked.push(r.value);
+    private _findRowChildren(row: TableRow): TableRow[] {
+        const allRows = this._tableRows;
+        const rowsLength = allRows.length;
+
+        /**
+         * Since we are dealing with a flat list
+         * it means all children go next right after the expandable row
+         * until the next row has a mutual parent
+         */
+
+        let index = allRows.indexOf(row);
+        const parents = this._getRowParents(row);
+        const children = [];
+
+        while (index++ < rowsLength) {
+            const nextRow = allRows[index];
+            if (!nextRow?.parent || parents.includes(nextRow.parent)) {
+                break;
             }
+            children.push(nextRow);
+        }
 
-            r.checked = false;
-        });
+        return children;
+    }
+
+    /**
+     * Get row parents path where the first is the direct parent
+     * @hidden
+     * @returns parents list [direct parent, ..., ancestor]
+     */
+    private _getRowParents(row: TableRow): TableRow[] {
+        const parents = [];
+        let parent = row.parent;
+        while (parent) {
+            parents.push(parent);
+            parent = parent.parent;
+        }
+        return parents;
     }
 
     /** @hidden */
-    private _resetSelectionMetaData(): void {
-        this._checked = [];
-        this._unchecked = [];
-    }
-
-    /** @hidden */
-    private _resetChecks(): void {
+    private _resetAllSelectedRows(): void {
         this._checkedAll = false;
-        this._rows.forEach((r) => (r.checked = false));
-        this._resetSelectionMetaData();
+        this._tableRows.filter(({ type }) => type === 'item').forEach((r) => (r.checked = false));
     }
 
     /** @hidden */
-    private _emitSelectionChange(index?: number): void {
-        const selected = this._rows.filter((r) => r.checked).map((r) => r.value);
+    private _emitSelectionEventByBuilder(builder: TableRowSelectionEventBuilder<T>): void {
+        const event = builder.createEvent();
         this.rowSelectionChange.emit({
-            source: this,
-            selection: selected,
-            added: this._checked,
-            removed: this._unchecked,
-            index: index
-                ? [index]
-                : this._rows.reduce((indexes, row, idx) => {
-                      if (this._checked.includes(row.value) || this._unchecked.includes(row.value)) {
-                          indexes.push(idx);
-                      }
-
-                      return indexes;
-                  }, [])
+            ...event,
+            source: this
         });
     }
 
@@ -1055,7 +1002,7 @@ export class TableComponent<T = any> extends Table implements OnInit, AfterViewI
             this._closeDataSource(this._tableDataSource);
         }
 
-        this._resetChecks();
+        this._resetAllSelectedRows();
 
         this._tableDataSource = this._openDataStream(dataSource);
     }
