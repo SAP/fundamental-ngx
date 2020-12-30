@@ -1,59 +1,62 @@
-interface ColumnsNumber {
-    xl?: number;
-    l?: number;
-    m?: number;
-    s?: number;
+interface ParseLayout {
+    [key: string]: {
+        pattern: string;
+        value: number;
+        size: string;
+    }
 }
 
-export function parseLayoutPattern(pattern: string, isBaseLayout = true): string | null {
-    const validColumns = getValidLayoutPatternColumns(pattern, isBaseLayout);
+export function parseLayoutPattern(pattern: string, isBaseLayout = true): string | undefined {
+    const parseLayout = validateAndParseLayoutPattern(pattern, isBaseLayout);
 
-    if (!validColumns) {
-        return null;
+    if (!parseLayout) {
+        throw new Error('Invalid layoutPattern.');
     }
 
-    const columnsNumber = getColumnsNumber(validColumns, isBaseLayout);
-
-    return generateLayoutClasses(columnsNumber);
+    return generateLayoutClasses(parseLayout);
 }
 
-function getValidLayoutPatternColumns(pattern: string, isBaseLayout: boolean): string[] | null {
+function validateAndParseLayoutPattern(pattern: string, isBaseLayout: boolean): ParseLayout | undefined {
     const columnsNames = 'XL|L|M|S';
     const columnNumbers = isBaseLayout ? '12|6|4|3|2|1' : '12|11|10|9|8|7|6||4|3|2|1';
-    const reg = new RegExp(`((?!\-)((${columnsNames})(${columnNumbers})))`, 'gi');
+    const reg = new RegExp(`(?!\-)((${columnsNames})(${columnNumbers}))`, 'gi');
+    const match = pattern.match(reg);
+    if (!match) {
+        return;
+    }
 
-    return pattern.match(reg);
-}
+    return match.reduce((res, item) => {
+        const size = item.replace(reg, '$2').toLocaleLowerCase();
+        const num = +item.replace(reg, '$3');
 
-function getColumnsNumber(columns: string[], isBaseLayout: boolean): ColumnsNumber {
-    return columns.reduce((res, item) => {
-        const size = item.match(/[a-zA-Z]+/g)[0].toLocaleLowerCase();
-        const num = +item.match(/\d+/g)[0];
-
-        res[size] = isBaseLayout ? 12 / num : num;
+        res[size] = {
+            pattern: item,
+            size: size,
+            value: isBaseLayout ? 12 / num : num
+        };
 
         return res;
     }, {});
 }
 
-function generateLayoutClasses({ xl, l, m, s }: ColumnsNumber): string {
-    let classes = 'fd-col';
+function generateLayoutClasses({ xl, l, m, s }: ParseLayout): string {
+    const classes: string[] = ['fd-col'];
 
     if (s) {
-        classes += ` fd-col--${s}`;
+        classes.push(`fd-col--${s.value}`);
     }
 
     if (m) {
-        classes += ` fd-col-md--${m}`;
+        classes.push(`fd-col-md--${m.value}`);
     }
 
     if (l) {
-        classes += ` fd-col-lg--${l}`;
+        classes.push(`fd-col-lg--${l.value}`);
     }
 
     if (xl) {
-        classes += ` fd-col-xl--${xl}`;
+        classes.push(`fd-col-xl--${xl.value}`);
     }
 
-    return classes;
+    return classes.join(' ');
 }

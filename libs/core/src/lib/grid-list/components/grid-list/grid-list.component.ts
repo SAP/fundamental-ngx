@@ -107,7 +107,7 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
             changes.layoutPattern.previousValue !== changes.layoutPattern.currentValue
         ) {
             const baseLayoutItemPattern = parseLayoutPattern(this.layoutPattern);
-            this._updateGridListItemsProperty('_baseLayoutItemPattern', baseLayoutItemPattern);
+            this._updateGridListItemsProperty('gridLayoutClasses', baseLayoutItemPattern);
         }
 
         if (
