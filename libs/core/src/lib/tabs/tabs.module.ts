@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TabPanelComponent } from './tab/tab-panel.component';
+import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 
 import {
@@ -10,7 +10,6 @@ import {
     TabHeaderDirective,
     TabIconComponent,
     TabLabelDirective,
-    TabLoadTitleDirective,
     TabProcessDirective,
     TabProcessIconDirective,
     TabSeparatorDirective,
@@ -21,13 +20,18 @@ import { TabNavComponent } from './tab-nav/tab-nav.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { IconModule } from '../icon/icon.module';
+import { ButtonModule } from '../button/button.module';
+import { ListModule } from '../list/list.module';
+import { PopoverModule } from '../popover/popover.module';
+import { MenuModule } from '../menu/menu.module';
+import { ScrollSpyModule } from '../scroll-spy/scroll-spy.module';
+import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 
 @NgModule({
     declarations: [
         TabListComponent,
         TabPanelComponent,
         TabTitleDirective,
-        TabLoadTitleDirective,
         TabNavComponent,
         TabLinkDirective,
         TabItemDirective,
@@ -37,16 +41,16 @@ import { IconModule } from '../icon/icon.module';
         TabLabelDirective,
         TabProcessDirective,
         TabHeaderDirective,
+        TabItemExpandComponent,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective
+        TabSeparatorDirective,
     ],
-    imports: [CommonModule, IconModule],
+    imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule, ScrollSpyModule],
     exports: [
         TabListComponent,
         TabPanelComponent,
         TabTitleDirective,
-        TabLoadTitleDirective,
         TabNavComponent,
         TabItemDirective,
         TabLinkDirective,
@@ -61,4 +65,5 @@ import { IconModule } from '../icon/icon.module';
         TabSeparatorDirective
     ]
 })
-export class TabsModule {}
+export class TabsModule {
+}

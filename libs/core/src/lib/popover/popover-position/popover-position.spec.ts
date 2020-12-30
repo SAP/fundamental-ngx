@@ -7,10 +7,10 @@ describe('PopoverPosition', () => {
 
         const position: ConnectedPosition = { overlayY: 'top', overlayX: 'center', originX: 'center', originY: 'bottom' }
         const arrowPosition = PopoverPosition.getArrowPosition(position);
-        const margin = PopoverPosition.getMarginStyle(arrowPosition);
+        const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('top');
-        expect(margin).toBe('margin-top: 0.5rem;');
+        expect(margin).toBe('margin-top');
 
     });
 
@@ -18,10 +18,10 @@ describe('PopoverPosition', () => {
 
         const position: ConnectedPosition = { overlayY: 'bottom', overlayX: 'center', originX: 'center', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position);
-        const margin = PopoverPosition.getMarginStyle(arrowPosition);
+        const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('bottom');
-        expect(margin).toBe('margin-bottom: 0.5rem;');
+        expect(margin).toBe('margin-bottom');
 
     });
 
@@ -29,10 +29,10 @@ describe('PopoverPosition', () => {
 
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'end', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position);
-        const margin = PopoverPosition.getMarginStyle(arrowPosition);
+        const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('start');
-        expect(margin).toBe('margin-left: 0.5rem;');
+        expect(margin).toBe('margin-left');
 
     });
 
@@ -40,10 +40,10 @@ describe('PopoverPosition', () => {
 
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'end', originX: 'start', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position);
-        const margin = PopoverPosition.getMarginStyle(arrowPosition);
+        const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('end');
-        expect(margin).toBe('margin-right: 0.5rem;');
+        expect(margin).toBe('margin-right');
 
     });
 
@@ -51,10 +51,10 @@ describe('PopoverPosition', () => {
 
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'start', originX: 'end', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position, true);
-        const margin = PopoverPosition.getMarginStyle(arrowPosition);
+        const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('end');
-        expect(margin).toBe('margin-right: 0.5rem;');
+        expect(margin).toBe('margin-right');
 
     });
 
@@ -62,10 +62,10 @@ describe('PopoverPosition', () => {
 
         const position: ConnectedPosition = { overlayY: 'center', overlayX: 'end', originX: 'start', originY: 'top' }
         const arrowPosition = PopoverPosition.getArrowPosition(position, true);
-        const margin = PopoverPosition.getMarginStyle(arrowPosition);
+        const margin = PopoverPosition.getMarginDirection(arrowPosition);
 
         expect(arrowPosition).toBe('start');
-        expect(margin).toBe('margin-left: 0.5rem;');
+        expect(margin).toBe('margin-left');
 
     });
 });

@@ -18,7 +18,6 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     button: ButtonDocsComponent.schema,
     segmentedButton: SegmentedButtonDocsComponent.schema,
     alert: AlertDocsComponent.schema,
-    inlineHelp: InlineHelpDocsComponent.schema,
     inputGroup: InputGroupDocsComponent.schema,
     pagination: PaginationDocsComponent.schema,
     messageStrip: MessageStripDocsComponent.schema,

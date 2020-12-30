@@ -257,7 +257,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const templatesLength = this.contentTemplates.length;
         this.contentTemplates = [];
         let _stepId = 0;
-        this.steps.forEach((step) => {
+        for (const step of this.steps.toArray()) {
             if (step.content) {
                 if (!step.isSummary) {
                     step.content.tallContent = false;
@@ -283,17 +283,24 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.visited ||
                 ((step.status === CURRENT_STEP_STATUS || step.status === COMPLETED_STEP_STATUS) && step.content)
             ) {
-                if (step.status === CURRENT_STEP_STATUS && !step.completed) {
+                if (step.status === CURRENT_STEP_STATUS && (!step.completed || !this.appendToWizard)) {
                     step.content.tallContent = true;
                 }
                 if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
+                    if (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) {
+                        break;
+                    }
                 } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
                 step.visited = true;
             }
-        });
+        }
+        if (this.steps.last.content) {
+            this.steps.last.content.tallContent = true;
+        }
+        this.steps.last.finalStep = true;
     }
 
     /** @hidden */

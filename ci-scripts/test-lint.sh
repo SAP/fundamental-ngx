@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMMIT_RANGE_BRANCH=master
+COMMIT_RANGE_BRANCH=main
 CORE_PATH=libs/core/
 PLATFORM_PATH=libs/platform/
 DOCS_PATH=apps/docs/
@@ -24,7 +24,7 @@ if [ -z "$core"  ]
 then
     echo There are no changes at core
 else
-    npm run test && npm run lint:core
+    npm run lint:core
     handle_error
 fi
 

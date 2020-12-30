@@ -12,6 +12,8 @@ import * as wizardBranchingHtml from '!raw-loader!./examples/wizard-branching-ex
 import * as wizardBranchingTs from '!raw-loader!./examples/wizard-branching-example.component.ts';
 import * as wizardDialogHtml from '!raw-loader!./examples/wizard-dialog-example.component.html';
 import * as wizardDialogTs from '!raw-loader!./examples/wizard-dialog-example.component.ts';
+import * as wizardNgForHtml from '!raw-loader!./examples/wizard-ngfor-example.component.html';
+import * as wizardNgForTs from '!raw-loader!./examples/wizard-ngfor-example.component.ts';
 
 @Component({
     selector: 'app-wizard',
@@ -88,6 +90,20 @@ export class WizardDocsComponent {
             code: wizardDialogTs,
             fileName: 'wizard-dialog-example',
             component: 'WizardDialogExampleComponent'
+        }
+    ];
+
+    wizardNgForExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: wizardNgForHtml,
+            fileName: 'wizard-ngfor-example'
+        },
+        {
+            language: 'typescript',
+            code: wizardNgForTs,
+            fileName: 'wizard-ngfor-example',
+            component: 'WizardNgForExampleComponent'
         }
     ];
 }

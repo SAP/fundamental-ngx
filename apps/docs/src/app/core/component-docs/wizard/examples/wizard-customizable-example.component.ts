@@ -42,12 +42,6 @@ export class WizardCustomizableExampleComponent {
                 this.step3status = 'current';
                 break;
             }
-            case 4: {
-                this.step1status = 'completed';
-                this.step2status = 'completed';
-                this.step3status = 'completed';
-                break;
-            }
         }
     }
 

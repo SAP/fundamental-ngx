@@ -1,0 +1,20 @@
+.fd-tabs__item--overflow {
+    margin-left: auto;
+    margin-right: 0;
+
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    fd-icon:not(:only-child) {
+        margin-left: 0.5rem;
+
+        [dir="rtl"] &,
+        &[dir="rtl"] {
+            margin-left: 0;
+            margin-right: 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+<ng-container *ngIf="!blank">
+    <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
+    <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
+    <div *ngIf="renderCarouselEndMarker" class="approval-flow-node__carousel-end-marker"></div>
+    <div class="approval-flow-node__inner">
+        <div class="approval-flow-node__avatar">
+            <ng-container *ngIf="node.approvers.length === 1">
+                <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
+            </ng-container>
+            <ng-container *ngIf="node.approvers.length > 1">
+                <fd-avatar [label]="node.description" size="xs" [circle]="true"></fd-avatar>
+            </ng-container>
+        </div>
+        <div class="approval-flow-node__info">
+            <div
+                class="approval-flow-node__name"
+                [class.approval-flow-node__name--members-count]="node.approvers.length > 1"
+                i18n="@@platformApprovalFlowNodeMembers">
+                {
+                    node.approvers.length,
+                    plural,
+                    =1 {{{node.approvers[0].name}}}
+                    other {{{node.approvers.length}} members}
+                }
+            </div>
+            <div class="approval-flow-node__description">
+                {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
+            </div>
+            <fdp-object-status
+                [status]="_objectStatus"
+                inverted="true">
+                {{ node.status }}
+            </fdp-object-status>
+        </div>
+    </div>
+</ng-container>

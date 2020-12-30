@@ -34,6 +34,10 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
     @Input()
     inverted: boolean;
 
+    /** Whether user wants to use subtle mode */
+    @Input()
+    subtle: boolean;
+
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
@@ -52,6 +56,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder {
             this.emphasized ? 'fd-link--emphasized' : '',
             this.disabled ? 'is-disabled' : '',
             this.inverted ? `fd-link--inverted` : '',
+            this.subtle ? 'fd-link--subtle' : '',
             this.class
         ];
     }

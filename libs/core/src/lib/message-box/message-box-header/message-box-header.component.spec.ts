@@ -36,7 +36,6 @@ class CustomHeaderTestComponent {
     template: `
         <fd-message-box-header>
             <h1 fd-title>Default Title</h1>
-            <fd-message-box-close-icon></fd-message-box-close-icon>
         </fd-message-box-header>
     `
 })
@@ -84,10 +83,8 @@ describe('MessageBoxHeaderComponent', () => {
         const { fixture } = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
         await whenStable(fixture);
 
-        const buttonEl = fixture.nativeElement.querySelector('fd-message-box-close-icon');
         const headerEl = fixture.nativeElement.querySelector('.fd-bar--header');
 
-        expect(buttonEl).toBeTruthy();
         expect(headerEl).toBeTruthy();
     });
 
