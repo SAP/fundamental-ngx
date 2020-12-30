@@ -13,7 +13,6 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
-import { ButtonType } from '../button/button.component';
 
 export type InputGroupPlacement = 'before' | 'after';
 
@@ -41,14 +40,6 @@ export type InputGroupPlacement = 'before' | 'after';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupComponent implements ControlValueAccessor {
-    /** @hidden */
-    @ContentChild(InputGroupInputDirective)
-    inputElement: InputGroupInputDirective;
-
-    /** @hidden */
-    @ContentChild(InputGroupAddOnDirective)
-    addOnElement: InputGroupAddOnDirective;
-
     /** Input template */
     @Input()
     inputTemplate: TemplateRef<any>;
@@ -113,9 +104,21 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     isExpanded = false;
 
+    /** Label applied to button with glyph element. */
+    @Input()
+    glyphAriaLabel: string;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
+
+    /** @hidden */
+    @ContentChild(InputGroupInputDirective)
+    inputElement: InputGroupInputDirective;
+
+    /** @hidden */
+    @ContentChild(InputGroupAddOnDirective)
+    addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
     constructor(private changeDetectorRef: ChangeDetectorRef) {}
