@@ -134,17 +134,17 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
         const layoutPattern = this.layoutPattern ? this.layoutPattern : 'XL4-L3-M2-S1';
         const baseLayoutItemPattern = parseLayoutPattern(layoutPattern);
 
-        components.forEach((componenet, index) => {
-            if (componenet._index !== index) {
-                componenet._index = index;
+        components.forEach((component, index) => {
+            if (component._index !== index) {
+                component._index = index;
             }
 
-            if (!componenet.selectionMode) {
-                componenet.selectionMode = this.selectionMode;
+            if (!component.selectionMode) {
+                component.selectionMode = this.selectionMode;
             }
 
-            if (!componenet.layoutItemPattern) {
-                componenet.gridLayoutClasses = baseLayoutItemPattern;
+            if (!component.layoutItemPattern) {
+                component.gridLayoutClasses = baseLayoutItemPattern;
             }
         });
     }
