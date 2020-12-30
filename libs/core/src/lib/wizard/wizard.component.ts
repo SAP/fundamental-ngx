@@ -406,7 +406,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             lastNonSummaryStep.content.tallContent = true;
             lastNonSummaryStep.finalStep = true;
             // TODO: remove the line below when https://github.com/SAP/fundamental-styles/issues/1978 is addressed
-            lastNonSummaryStep.completed = false;
+            lastNonSummaryStep.getClassList().remove('fd-wizard__step--completed');
             this.steps.last.removeFromDom();
         } else if (lastNonSummaryStep) {
             if (lastNonSummaryStep.content) {
