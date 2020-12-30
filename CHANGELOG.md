@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.25...v0.26.0-rc.26) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Core) bug fixes for appendToWizard="false" ([#4191](https://github.com/SAP/fundamental-ngx/issues/4191)) ([941f7f5](https://github.com/SAP/fundamental-ngx/commit/941f7f5eb57f3f1b4018594964c274e3404906dc))
+
 ## [0.26.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.24...v0.26.0-rc.25) (2020-12-30)
 
 
