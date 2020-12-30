@@ -26,14 +26,14 @@
 
                     <ng-container *ngIf="!tab.titleTemplate" [ngSwitch]="mode">
                         <ng-container *ngSwitchCase="'filter'">
-                        <span fd-tab-header *ngIf="tab.isHeader">
-                            <span fd-tab-counter-header *ngIf="tab.count">{{ tab.count }}</span>
-                            <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
-                        </span>
-                            <ng-container *ngIf="!tab.isHeader">
-                            <span fd-tab-icon [icon]="tab.glyph">
-                                <p fd-tab-count>{{ tab.count }}</p>
+                            <span fd-tab-header *ngIf="tab.isHeader">
+                                <span fd-tab-counter-header *ngIf="tab.count">{{ tab.count }}</span>
+                                <span fd-tab-label *ngIf="tab.title">{{ tab.title }}</span>
                             </span>
+                            <ng-container *ngIf="!tab.isHeader">
+                                <span fd-tab-icon [icon]="tab.glyph">
+                                    <p fd-tab-count>{{ tab.count }}</p>
+                                </span>
                                 <span fd-tab-label>{{ tab.title }}</span>
                             </ng-container>
                         </ng-container>
