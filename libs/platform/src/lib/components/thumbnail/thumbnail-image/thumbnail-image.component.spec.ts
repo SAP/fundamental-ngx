@@ -11,16 +11,16 @@ import { Media } from '../thumbnail.component';
 })
 class DefaultThumbnailImageTestComponent {
     mediaList: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        alt: 'Failed to load https://picsum.photos/400/400',
         label: 'nature'
     }, {
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        alt: 'Failed to load https://picsum.photos/400/400',
         label: 'nature2'
     }];
     @ViewChild(ThumbnailImageComponent, { static: true })
@@ -76,10 +76,10 @@ describe('DefaultThumbnailImageComponent', () => {
 })
 class HorizontalThumbnailImageTestComponent {
     mediaList: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        alt: 'Failed to load https://picsum.photos/400/400',
         label: 'nature'
     }];
 
