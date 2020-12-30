@@ -9,7 +9,7 @@ describe('PaginationService', () => {
         TestBed.configureTestingModule({
             providers: [PaginationService]
         });
-        service = TestBed.get(PaginationService);
+        service = TestBed.inject(PaginationService);
     });
 
     it('should be created', () => {
@@ -17,7 +17,7 @@ describe('PaginationService', () => {
     });
 
     it('should default to 10 pages per page', () => {
-        const pages = service.getPages({ totalItems: 10, itemsPerPage: null });
+        const pages = service.getPages({ totalItems: 10, itemsPerPage: 10 });
         expect(pages.length).toEqual(1);
     });
 
