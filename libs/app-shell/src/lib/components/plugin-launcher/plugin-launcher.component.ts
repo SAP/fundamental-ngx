@@ -110,7 +110,7 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             return;
         }
 
-        const remoteModule = await loadRemoteModule<DescriptorsModule>(descriptor, pluginModule)
+        const remoteModule = await this.loadRemoteModule(descriptor, pluginModule)
             .catch((error) => this.dispatchError(error));
 
         if (!remoteModule) {
@@ -137,6 +137,10 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         }
 
         this.pluginManagerService.register(descriptor);
+    }
+
+    async loadRemoteModule(descriptor: Partial<PluginDescriptor>, pluginModule: DescriptorsModule): Promise<DescriptorsModule> {
+        return await loadRemoteModule<DescriptorsModule>(descriptor, pluginModule);
     }
 
     onLoadIframeError() {
@@ -183,7 +187,8 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
 
     private renderCustomElement(elementName: string): void {
         const element = document.createElement(elementName);
-        const isCustomElement = element instanceof window.customElements.get(elementName);
+        const definedCustomElement = window.customElements.get(elementName);
+        const isCustomElement = definedCustomElement && element instanceof definedCustomElement;
 
         // custom element is unknown in DOM
         if (!isCustomElement) {
