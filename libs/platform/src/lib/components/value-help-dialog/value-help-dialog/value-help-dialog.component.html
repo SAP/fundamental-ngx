@@ -301,7 +301,7 @@
 </ng-template>
 
 <ng-template #desktopTabs>
-    <fd-tab-list class="fdp-value-help-dialog__tabs" [(selectedIndex)]="selectedTab" *ngIf="showSelectionTab && showDefineTab">
+    <fd-tab-list class="fdp-value-help-dialog__tabs" [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event" *ngIf="showSelectionTab && showDefineTab">
         <fd-tab [title]="selectTabTitle" tabState="information" *ngIf="showSelectionTab"></fd-tab>
         <fd-tab [title]="defineTabTitle" tabState="information" *ngIf="showDefineTab"></fd-tab>
     </fd-tab-list>
