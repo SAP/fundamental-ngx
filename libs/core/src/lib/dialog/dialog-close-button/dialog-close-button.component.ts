@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
     // tslint:disable-next-line:component-selector
     selector: '[fd-dialog-close-button]',
     host: {
-        'attr.aria-label': 'close',
+        '[attr.aria-label]': '"close"',
         '[class.fd-button]': 'true',
         '[class.fd-button--compact]': '!mobile',
         '[class.fd-button--transparent]': 'true',

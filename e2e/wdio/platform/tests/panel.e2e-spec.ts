@@ -10,6 +10,7 @@ describe('Verify Panel', () => {
     });
 
     it('should have fixed header', () => {
+        webDriver.waitElementToBePresentInDOM(panelPage.fixedPanelDescription);
         // Checks that fixed panel has no expand button
         expect(webDriver.waitForPresent(panelPage.fixedPanelDescription)).toBe(true);
     });

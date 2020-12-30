@@ -263,6 +263,12 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-upload-collection/platform-upload-collection-docs.module').then(
                         (m) => m.PlatformUploadCollectionDocsModule
                     )
+            },
+            {
+                path: 'approval-flow',
+                loadChildren: () =>
+                    import('./component-docs/platform-approval-flow/platform-approval-flow-docs.module').then((m) =>
+                        m.PlatformApprovalFlowDocsModule)
             }
         ]
     }

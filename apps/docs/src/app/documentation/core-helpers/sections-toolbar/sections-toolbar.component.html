@@ -1,7 +1,14 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': sideCollapsed | async }">
     <div class="fd-docs-search">
-        <fd-input-group glyph="decline" placeholder="Search" buttonType="transparent" [button]="true" [disabled]="false"
-            [(ngModel)]="search" (addOnButtonClicked)="search = ''">
+        <fd-input-group
+            glyph="decline"
+            glyphAriaLabel="Clear"
+            placeholder="Search"
+            buttonType="transparent"
+            [button]="true"
+            [disabled]="false"
+            [(ngModel)]="search"
+            (addOnButtonClicked)="search = ''">
         </fd-input-group>
     </div>
     <div class="fd-docs-sidebar-content">

@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 
 import { Observable, of, fromEvent } from 'rxjs';
-import { delay, tap, debounceTime, takeWhile, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { delay, tap, debounceTime, takeWhile, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
 
 import { ToolbarItemDirective } from './public_api';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
@@ -151,11 +151,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         fromEvent(window, 'resize')
             .pipe(
                 takeWhile(() => this._alive && this.shouldOverflow),
-                debounceTime(100),
-                distinctUntilChanged(),
-                switchMap(() => this._onResize())
-            )
-            .subscribe();
+                debounceTime(25),
+                distinctUntilChanged()
+            ).subscribe(_ => this._onResize());
     }
 
     /** @hidden */
@@ -169,6 +167,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
                 .subscribe(() => this._collapseItems());
         }
 
+        this._listenForItemChanges();
         this.buildComponentCssClass();
     }
 
@@ -200,13 +199,15 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         ];
     }
 
+    /** Method triggering collapsible toolbar  */
+    updateCollapsibleItems(): void {
+        this._onResize();
+    }
+
     /** @hidden */
-    private _onResize(): Observable<boolean> {
-        return of(true).pipe(
-            takeWhile(() => this._alive),
-            tap(() => this._reset()),
-            tap(() => this._collapseItems())
-        );
+    private _onResize(): void {
+        this._reset();
+        this._collapseItems();
     }
 
     // shouldOverflow items
@@ -293,6 +294,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     private _getElementWidthWithMargin(toolbarItem: ToolbarItemDirective): number {
         return toolbarItem.elementRef.nativeElement
             && toolbarItem.elementRef.nativeElement.offsetWidth + ELEMENT_MARGIN;
+    }
+
+    /** @hidden */
+    private _listenForItemChanges(): void {
+        this.toolbarItems.changes.pipe(
+            filter(_ => this.shouldOverflow)
+        )
+            .subscribe(() => this._onResize());
     }
 
     /** @hidden */

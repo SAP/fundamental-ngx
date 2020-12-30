@@ -39,6 +39,7 @@ import { PlatformDatetimePickerModule } from './components/form/datetime-picker/
 import { PlatformMultiInputMobileModule } from './components/form/multi-input/multi-input-mobile/multi-input-mobile.module';
 import { PlatformFeedInputModule } from './components/feed-input/feed-input.module';
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
+import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -78,7 +79,8 @@ import { PlatformDatePickerModule } from './components/form/date-picker/date-pic
         PlatformMultiInputMobileModule,
         PlatformFeedInputModule,
         PlatformFileUploaderModule,
-        PlatformAutoCompleteModule
+        PlatformAutoCompleteModule,
+        PlatformApprovalFlowModule
     ]
 })
 export class FundamentalNgxPlatformModule {}
