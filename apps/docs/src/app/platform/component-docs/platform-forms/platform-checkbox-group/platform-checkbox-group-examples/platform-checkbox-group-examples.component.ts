@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { SelectItem } from '@fundamental-ngx/platform';
 
 @Component({
@@ -8,8 +8,8 @@ import { SelectItem } from '@fundamental-ngx/platform';
 })
 export class PlatformCheckboxGroupExampleComponent {
     fruits: string[] = ['Apple', 'Banana', 'Grapes'];
-    favourites = { fruitsEx: ['banana'] };
-    favourites1 = { fruits1: ['Apple'] };
+    favorites = { fruitsEx: ['banana'] };
+    favorites1 = { fruits1: ['Apple'] };
     languages = [
         new LanguageKnown('Java', 'java', false),
         new LanguageKnown('Javascript', 'javascript', true),
@@ -17,6 +17,7 @@ export class PlatformCheckboxGroupExampleComponent {
         new LanguageKnown('GoLang', 'go', true)
     ];
 
+    validators = [Validators.requiredTrue];
     form1 = new FormGroup({});
     form2 = new FormGroup({});
     form3 = new FormGroup({});
