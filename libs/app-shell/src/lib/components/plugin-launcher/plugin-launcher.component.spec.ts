@@ -7,22 +7,22 @@ import {
 } from '@angular/core/testing';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
-
+import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
 import {
+    NO_ERRORS_SCHEMA,
     ChangeDetectorRef,
     Compiler,
     ElementRef,
-    Renderer2
+    Renderer2,
+    SimpleChange
 } from '@angular/core';
 
-import { PluginLauncherComponent } from './plugin-launcher.component';
-import { NgxPubSubService } from '@pscoped/ngx-pub-sub';
 import { MessagingTopics } from '../../api/events/topics.service';
 import { MessagingService } from '../../api/events/messaging.service';
 import { LookupItem, LookupService } from '../../api/plugins/lookup/lookup.service';
 import { PluginManagerService } from '../../api/plugins/plugin-manager.service';
 import { DescriptorsModule } from '../../api/public_api';
+import { PluginLauncherComponent } from './plugin-launcher.component';
 
 // Mock providers, values and functions
 class MockElementRef extends ElementRef {
