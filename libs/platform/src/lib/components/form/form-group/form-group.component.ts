@@ -228,9 +228,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     bZone: Array<GroupField>;
 
     modifiedColumns: any = [];
-    columnFields: any = [];
-    groupsF: any;
-    groupC: any;
     xlCol: string;
 
     /**
@@ -244,7 +241,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *  would lead to the UI where user can see elementing moving as you try to position it.
      */
     protected formFieldChildren: FormField[] | any = [];
-    protected formFieldGroupChildren: any = [];
 
     private _useForm = false;
     private _multiLayout = false;
@@ -351,6 +347,8 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         }
         modifiedColumns[rowNumber] = cols;
         this.modifiedColumns = modifiedColumns;
+
+        console.log(this.modifiedColumns);
     }
 
     _getGroupField(field: any): any {
