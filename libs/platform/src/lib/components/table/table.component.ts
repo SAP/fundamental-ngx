@@ -20,7 +20,7 @@ import {
 import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { BehaviorSubject, from, isObservable, merge, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core';
@@ -51,7 +51,6 @@ import {
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
     TableSortChangeEvent,
-    TableRowSelectionEventBuilder,
     TableRow
 } from './models';
 import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
@@ -525,25 +524,70 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /**
-     * @hidden
-     * Select/unselect one row in 'multiple' mode.
+     * Toggle one row
+     * @param row to toggle checked state
      */
     _toggleSelectableRow(row: TableRow): void {
-        const selectionBuilder = new TableRowSelectionEventBuilder<T>(this.selectionMode, this._tableRows);
-        selectionBuilder.toggle(row);
-        this._checkedAll = selectionBuilder.isAllSelected();
-        this._emitSelectionEventByBuilder(selectionBuilder);
+        const checked = row.checked = !row.checked;
+        const removed = [];
+        const added = [];
+
+        if (this.selectionMode === SelectionMode.SINGLE) {
+            // uncheck previously checked
+            this._getSelectableRows().forEach((_row) => {
+                if (_row === row) {
+                    return;
+                }
+                if (_row.checked) {
+                    _row.checked = false;
+                    removed.push(row);
+                }
+            });
+        }
+
+        checked ? added.push(row) : removed.push(row);
+
+        this._emitRowSelectionChangeEvent(added, removed);
+
+        this._calculateCheckedAll();
     }
 
     /**
-     * @hidden
-     * Select/Unselect all rows in 'multiple' mode.
+     * Select / Unselect all selectable rows
+     * @param selectAll select/unselect all flag
      */
-    _toggleAllSelectableRows(checked: boolean): void {
-        const selectionBuilder = new TableRowSelectionEventBuilder<T>(this.selectionMode, this._tableRows);
-        selectionBuilder.toggleAll(checked);
-        this._checkedAll = selectionBuilder.isAllSelected();
-        this._emitSelectionEventByBuilder(selectionBuilder);
+    _toggleAllSelectableRows(selectAll: boolean): void {
+        const removed = [];
+        const added = [];
+
+        this._getSelectableRows().forEach((row) => {
+            if (row.checked === selectAll) {
+                return;
+            }
+            row.checked = selectAll;
+            selectAll ? added.push(row) : removed.push(row);
+        });
+
+        this._emitRowSelectionChangeEvent(added, removed);
+
+        this._calculateCheckedAll();
+    }
+
+    /**
+     * Create table row selection event
+     */
+    _emitRowSelectionChangeEvent(added: TableRow[], removed: TableRow[]): void {
+        const selected = this._getSelectableRows()
+            .filter(({ checked }) => checked)
+            .map(({ value }) => value);
+
+        this.rowSelectionChange.emit({
+            source: this,
+            selection: selected,
+            added: added.map(({ value }) => value),
+            removed: removed.map(({ value }) => value),
+            index: added.concat(removed).map(({ index }) => index)
+        });
     }
 
     /** @hidden */
@@ -666,10 +710,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .asObservable()
                 .pipe(
                     // map source items to table rows
-                    switchMap((sourceItems: T[]) => {
-                        return from([
-                            sourceItems.map((item: T, index: number) => new TableRow('item', false, index, item))
-                        ]);
+                    switchMap((source: T[]) => {
+                        return of(this._createTableRowsByDataSourceItems(source));
                     }),
                     // Insert items to show groups
                     switchMap((rows: TableRow[]) =>
@@ -691,12 +733,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _listenToTableStateChanges(): void {
         this._subscriptions.add(
-            merge([
+            merge(
                 // Events that should trigger DataSource.fetch()
                 this._tableService.sortChange,
                 this._tableService.filterChange,
                 this._tableService.searchChange,
-            ]).pipe(
+            ).pipe(
                 map(() => this._tableService.getTableState()),
                 filter((state) => !!state),
                 distinctUntilChanged()
@@ -728,6 +770,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._subscriptions.add(
             this._tableService.groupChange.subscribe((event: GroupChange) => {
                 this._buildGroupRulesMap();
+                this._calculateVisibleColumns();
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
             })
         );
@@ -750,15 +793,20 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    private _createTableRowsByDataSourceItems(source: T[]): TableRow[] {
+        return source.map((item: T, index: number) => new TableRow('item', false, index, item));
+    }
+
+    /** @hidden */
     private _setTableRows(rows: TableRow[]): void {
         this._tableRows = rows;
-
         this._onTableRowsChanged();
     }
 
     /** @hidden */
     private _onTableRowsChanged(): void {
         this._calculateVisibleTableRows();
+        this._calculateCheckedAll();
     }
 
     /** @hidden */
@@ -776,10 +824,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Construct visible columns for rendering purpose  */
     private _calculateVisibleColumns(): void {
         const columnsDefinition = this.columns.toArray();
-        const { columns } = this.getTableState();
-        this._visibleColumns = columns
-            .map((columnName) => columnsDefinition.find(({ name }) => columnName === name))
-            .filter((v) => !!v);
+        const { columns, groupBy } = this.getTableState();
+        const groupedColumnsToHide = groupBy.filter(({showAsColumn}) => !showAsColumn).map(({field}) => field);
+        this._visibleColumns = columnsDefinition
+            .filter(({name}) => columns.includes(name))
+            .filter(({key}) => !groupedColumnsToHide.includes(key))
 
         this._calculateTableColumnsLength();
     }
@@ -984,16 +1033,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _resetAllSelectedRows(): void {
         this._checkedAll = false;
-        this._tableRows.filter(({ type }) => type === 'item').forEach((r) => (r.checked = false));
+        this._getSelectableRows().forEach((r) => (r.checked = false));
     }
 
     /** @hidden */
-    private _emitSelectionEventByBuilder(builder: TableRowSelectionEventBuilder<T>): void {
-        const event = builder.createEvent();
-        this.rowSelectionChange.emit({
-            ...event,
-            source: this
-        });
+    private _calculateCheckedAll(): void {
+        this._checkedAll = this._getSelectableRows().every(({checked}) => checked);
+    }
+
+    /** @hidden */
+    private _getSelectableRows(): TableRow[] {
+       return  this._tableRows.filter(({ type }) => type === 'item');
     }
 
     /** @hidden */

@@ -6,4 +6,3 @@ export * from './column-freeze-event.model';
 export * from './search-change-event.model';
 export * from './columns-change-event.model';
 export * from './table-row.model';
-export * from './selection-change-event-builder.model';
