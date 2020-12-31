@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.27...v0.26.0-rc.28) (2020-12-31)
+
+
+### Bug Fixes
+
+* (platform) add vertical checkbox group and radio group example ([#4192](https://github.com/SAP/fundamental-ngx/issues/4192)) ([607cd82](https://github.com/SAP/fundamental-ngx/commit/607cd8223ce94e9ee446aed747961e6b9a609265))
+
 ## [0.26.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.26...v0.26.0-rc.27) (2020-12-30)
 
 
