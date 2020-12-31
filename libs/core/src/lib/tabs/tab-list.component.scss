@@ -1,12 +1,39 @@
 @import '~fundamental-styles/dist/tabs';
 
 .fd-tabs-custom {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 .is-disabled {
     pointer-events: none;
     opacity: 0.4;
+}
+
+.fd-tabs {
+    flex-grow: 0;
+    flex-wrap: nowrap;
+
+    &__content {
+        overflow-y: auto;
+        flex-grow: 1;
+    }
+
+    &__item {
+        flex-shrink: 0;
+    }
+
+    &__wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        &--collapsible {
+            overflow: hidden;
+            flex-wrap: nowrap;
+        }
+    }
 }
 
 // Temporary solution until the next styles release

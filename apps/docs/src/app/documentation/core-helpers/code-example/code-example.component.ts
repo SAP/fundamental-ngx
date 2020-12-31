@@ -31,10 +31,12 @@ export class CodeExampleComponent implements OnInit {
      */
     @Input()
     exampleFiles: ExampleFile[] = [];
-    smallScreen: boolean;
-    selectedFileIndex = 0;
 
     isOpen = false;
+
+    smallScreen: boolean;
+
+    activeIndex = 0;
 
     constructor(
         private element: ElementRef,
@@ -52,7 +54,7 @@ export class CodeExampleComponent implements OnInit {
     }
 
     copyText(): void {
-        this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code.default);
+        this.copyService.copyText(this.exampleFiles[this.activeIndex].code.default);
         this.alertService.open('Code copied!', { type: 'success', duration: 5000 } as AlertConfig);
     }
 

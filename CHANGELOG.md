@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.26...v0.26.0-rc.27) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Core) wizard quick fix for bug related to marking step as not completed ([#4217](https://github.com/SAP/fundamental-ngx/issues/4217)) ([72c617d](https://github.com/SAP/fundamental-ngx/commit/72c617da646e583a8e33c3492186ecd1caeb2f2d))
+
+## [0.26.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.25...v0.26.0-rc.26) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Core) bug fixes for appendToWizard="false" ([#4191](https://github.com/SAP/fundamental-ngx/issues/4191)) ([941f7f5](https://github.com/SAP/fundamental-ngx/commit/941f7f5eb57f3f1b4018594964c274e3404906dc))
+
+## [0.26.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.24...v0.26.0-rc.25) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Platform) title for buttons with icon in Search Field and trigger submit with empty value ([#4175](https://github.com/SAP/fundamental-ngx/issues/4175)) ([1752249](https://github.com/SAP/fundamental-ngx/commit/1752249ec1340c4ec90da44b143ca21ed71b08d6))
+
+## [0.26.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.23...v0.26.0-rc.24) (2020-12-30)
+
+
+### Bug Fixes
+
+* (Core) Overflowing, stacked and collapsible tabs ([#4120](https://github.com/SAP/fundamental-ngx/issues/4120)) ([38d3eba](https://github.com/SAP/fundamental-ngx/commit/38d3ebadc84389d9a668ef2cab249db2b0a2cf83))
+
 ## [0.26.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.22...v0.26.0-rc.23) (2020-12-30)
 
 
