@@ -31,7 +31,7 @@ export abstract class Table {
     /** Set table state */
     abstract setTableState(tableState: TableState): void;
 
-    /** Get table columns list */
+    /** Get table columns definition list */
     abstract getTableColumns(): TableColumn[];
 
     /** Set Sorting rules */
@@ -75,4 +75,7 @@ export abstract class Table {
 
     /** Toolbar Columns Settings button visibility */
     abstract showColumnSettingsInToolbar(showColumnSettings: boolean): void;
+
+     /** Disable filtering by header column menu */
+     abstract setHeaderColumnFilteringDisabled(disabled: boolean): void;
 }

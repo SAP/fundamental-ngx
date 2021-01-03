@@ -10,6 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core';
 
+import { FilterType } from '../../../enums';
 import { CollectionFilter } from '../../../interfaces';
 import { TableColumn } from '../../table-column/table-column';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
@@ -111,17 +112,27 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     }
 
     /** Apply filter rule changes and emit the event */
-    applyFilter(filter: CollectionFilter): void {
-        if (filter) {
-            this.filterBy = this.filterBy.filter(({ field }) => field !== filter.field);
-
-            this.filterBy.push(filter);
-
-            this._isResetAvailableSubject$.next(true);
-
-            // To fix "Expression has changed after it was checked"
-            this._cd.detectChanges();
+    applyFilter(filter: CollectionFilter, { type }: TableViewSettingsFilterComponent): void {
+        if (!filter) {
+            return;
         }
+        // exclude this filter from filters list
+        this.filterBy = this.filterBy.filter(({ field }) => field !== filter.field);
+
+        const filterIsNotEmpty =
+            type === FilterType.CUSTOM ||
+            (type === FilterType.MULTI && filter.value?.length) ||
+            (type === FilterType.SINGLE && filter.value?.length);
+
+        // if filter is not empty add it to the list
+        if (filterIsNotEmpty) {
+            this.filterBy.push(filter);
+        }
+
+        this._isResetAvailableSubject$.next(true);
+
+        // To fix "Expression has changed after it was checked"
+        this._cd.detectChanges();
     }
 
     /** Reset changes to the initial state */

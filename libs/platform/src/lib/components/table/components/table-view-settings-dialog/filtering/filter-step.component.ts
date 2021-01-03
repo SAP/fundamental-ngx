@@ -9,7 +9,7 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { FilterType } from '../../../enums';
+import { FilterType, FILTER_STRATEGY } from '../../../enums';
 import { CollectionFilter } from '../../../interfaces';
 import { TableViewSettingsFilterComponent } from '../../table-view-settings-dialog/table-view-settings-filter.component';
 import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step';
@@ -67,7 +67,12 @@ export class FilterStepComponent implements FiltersViewStep {
 
     /** @hidden */
     _onFilterValueChange(filterValue: any): void {
-        const filterBy: CollectionFilter = this._filterBy || { field: this.columnKey, value: null, strategy: null };
+        const filterBy: CollectionFilter = this._filterBy || {
+            field: this.columnKey,
+            value: null,
+            strategy: FILTER_STRATEGY.CONTAINS,
+            exclude: false
+        };
 
         const newFilterBy = { ...filterBy, value: filterValue };
 

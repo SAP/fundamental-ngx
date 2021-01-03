@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { CollectionSelectFilter, TableFilterSelectOption } from '../../../interfaces';
+import { NOT_FILTERED_OPTION_VALUE } from './constants';
 
 /**
  * Single Select filter type.
- * 
+ *
  */
-
-const NOT_FILTERED_OPTION_VALUE = null;
 
 @Component({
     selector: 'fdp-filter-single-select',

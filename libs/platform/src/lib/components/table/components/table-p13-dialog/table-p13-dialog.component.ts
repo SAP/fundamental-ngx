@@ -231,9 +231,14 @@ export class TableP13DialogComponent implements OnDestroy {
         this._tableSubscriptions.add(
             this._table.tableColumnsStream.subscribe((columns: TableColumn[]) => {
                 this._table?.showSortSettingsInToolbar(columns.some(({ sortable }) => sortable));
-                this._table?.showFilterSettingsInToolbar(columns.some(({ filterable }) => filterable));
+
                 this._table?.showGroupSettingsInToolbar(columns.some(({ groupable }) => groupable));
+
                 this._table?.showColumnSettingsInToolbar(columns.length > 0);
+
+                this._table?.showFilterSettingsInToolbar(columns.some(({ filterable }) => filterable));
+
+                this._table?.setHeaderColumnFilteringDisabled(columns.some(({ filterable }) => filterable));
             })
         );
     }

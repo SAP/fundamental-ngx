@@ -52,9 +52,6 @@ export class P13GroupingDialogComponent implements Resettable {
     /** Indicates when reset command is available */
     readonly isResetAvailable$: Observable<boolean> = this._isResetAvailableSubject$.asObservable();
 
-    /** @hidden */
-    readonly SORT_DIRECTION = SortDirection;
-
     /** Initial collection to reset */
     readonly initialCollectionGroup: CollectionGroup[];
 
@@ -144,7 +141,7 @@ export class P13GroupingDialogComponent implements Resettable {
             ({ columnKey, showAsColumn }): CollectionGroup => ({
                 field: columnKey,
                 showAsColumn: showAsColumn,
-                direction: null
+                direction: SortDirection.NONE
             })
         );
     }

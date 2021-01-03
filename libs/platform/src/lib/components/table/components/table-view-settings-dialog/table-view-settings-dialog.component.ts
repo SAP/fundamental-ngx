@@ -218,7 +218,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
 
     /** @hidden */
     private _applySorting(field: string, direction: SortDirection): void {
-        this._table?.sort([{ field: field, direction: direction }]);
+        this._table?.sort(field ? [{ field: field, direction: direction }] : []);
     }
 
     /** @hidden */
@@ -228,7 +228,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
 
     /** @hidden */
     private _applyGrouping(field: string, direction: SortDirection): void {
-        this._table?.group([{ field: field, direction: direction, showAsColumn: false }]);
+        this._table?.group(field ? [{ field: field, direction: direction, showAsColumn: false }] : []);
     }
 
     /** @hidden */

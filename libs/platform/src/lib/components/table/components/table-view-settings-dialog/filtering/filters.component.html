@@ -48,7 +48,7 @@
             [filter]="activeFilter"
             [filterBy]="filterBy"
             (back)="goToFilters()"
-            (valueChange)="applyFilter($event)"
+            (valueChange)="applyFilter($event, activeFilter)"
         ></fdp-filter-step>
     </ng-container>
 </ng-container>
