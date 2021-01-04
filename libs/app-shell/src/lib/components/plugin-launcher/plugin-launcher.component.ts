@@ -217,8 +217,8 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             this._ngComponent = remoteModule[pluginComponentName];
         }
 
-        // check if component is an object
-        const isComponentDefined = Object.prototype.toString.call(this._ngComponent) === '[object Object]';
+        // check if component is a function
+        const isComponentDefined = typeof this._ngComponent === 'function';
 
         if (!isComponentDefined) {
             return this.dispatchError(
