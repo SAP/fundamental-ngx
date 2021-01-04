@@ -53,7 +53,7 @@ describe('PaginationService', () => {
 
     it('should have one dots section', () => {
         const pagination: Pagination = {
-            totalItems: 60,
+            totalItems: 100,
             itemsPerPage: 10
         };
         const pages = service.getPages(pagination);

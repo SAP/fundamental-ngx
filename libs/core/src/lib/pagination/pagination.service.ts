@@ -26,7 +26,7 @@ export class PaginationService {
         const pages = [];
         this.validate(pagination);
         const totalPages = this.getTotalPages(pagination);
-        if (totalPages <= SIDE_CURRENT_DISPLAY_PAGES * 2 + 2) {
+        if (totalPages <= SIDE_CURRENT_DISPLAY_PAGES * 2 + MIN_CORNER_DISPLAY_PAGES + 1 + 2 ) {
             for (let i = 1; i <= totalPages; i++) {
                 pages.push(i);
             }
