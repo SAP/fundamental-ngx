@@ -103,7 +103,7 @@ module.exports = function (config) {
             region: 'eu',
             startConnect: true,
             maxDuration: 10800,
-            testName: 'fundamental-ngx' + process.env.BUILD_ID,
+            testName: 'fundamental-ngx' + process.env.BUILD_ID + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             recordScreenshots: false,
             connectOptions: {
                 user: process.env.SAUCE_USERNAME,

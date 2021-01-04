@@ -90,6 +90,9 @@ $block: fd-toolbar;
 
 
 .#{$block}__overflow__body {
+	max-height: 50vh;
+	overflow: auto;
+
 	.fd-button--menu {
 		display: flex;
 		align-items: center;
