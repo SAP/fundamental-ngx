@@ -70,7 +70,7 @@ export class FilterStepComponent implements FiltersViewStep {
         const filterBy: CollectionFilter = this._filterBy || {
             field: this.columnKey,
             value: null,
-            strategy: FILTER_STRATEGY.CONTAINS,
+            strategy: FILTER_STRATEGY.EQ,
             exclude: false
         };
 

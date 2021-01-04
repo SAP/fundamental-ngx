@@ -14,7 +14,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
-
 import * as platformTableDefaultSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.html';
 import * as platformTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.ts';
 import * as platformTableCustomColumnSrc from '!raw-loader!./platform-table-examples/platform-table-custom-column-example.component.html';
@@ -31,8 +30,13 @@ import * as platformTableFilterableSrc from '!raw-loader!./platform-table-exampl
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
+import * as platformTableInitialStateSrc from '!raw-loader!./platform-table-examples/platform-table-initial-state-example.component.html';
 import * as platformTableP13Src from '!raw-loader!./platform-table-examples/platform-table-p13-example.component.html';
 import * as platformTableP13TsSrc from '!raw-loader!./platform-table-examples/platform-table-p13-example.component.ts';
+import * as platformTableP13ColumnSrc from '!raw-loader!./platform-table-examples/platform-table-p13-columns-example.component.html';
+import * as platformTableP13SortSrc from '!raw-loader!./platform-table-examples/platform-table-p13-sort-example.component.html';
+import * as platformTableP13FilterSrc from '!raw-loader!./platform-table-examples/platform-table-p13-filter-example.component.html';
+import * as platformTableP13GroupSrc from '!raw-loader!./platform-table-examples/platform-table-p13-group-example.component.html';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import * as platformTableDataProviderTs from '!raw-loader!./platform-table-examples/platform-table-data-provider-example';
@@ -112,7 +116,7 @@ export class PlatformTableDocsComponent {
 
     data: any = {
         table: {
-            contentDensity: 'cozy',
+            contentDensity: 'compact',
             selectionMode: 'none',
             freezeColumnsTo: null,
             noHorizontalBorders: false,
@@ -132,7 +136,7 @@ export class PlatformTableDocsComponent {
         }
     };
 
-    defaultTable: ExampleFile[] = [
+    defaultTableFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableDefaultSrc,
@@ -158,7 +162,7 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    customColumnTable: ExampleFile[] = [
+    customColumnTableFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableCustomColumnSrc,
@@ -183,7 +187,7 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    singleRowSelection: ExampleFile[] = [
+    singleRowSelectionFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableSingleRowSelectionSrc,
@@ -208,7 +212,7 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    multipleRowSelection: ExampleFile[] = [
+    multipleRowSelectionFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableMultipleRowSelectionSrc,
@@ -233,7 +237,7 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    sortableTable: ExampleFile[] = [
+    sortableTableFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableSortableSrc,
@@ -258,7 +262,7 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    filterableTable: ExampleFile[] = [
+    filterableTableFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableFilterableSrc,
@@ -283,7 +287,7 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    groupableTable: ExampleFile[] = [
+    groupableTableFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableGroupableSrc,
@@ -308,7 +312,7 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    freezableTable: ExampleFile[] = [
+    freezableTableFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableFreezableSrc,
@@ -333,7 +337,15 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    p13Table: ExampleFile[] = [
+    initialStateFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableInitialStateSrc,
+            name: 'platform-table-example.component.html'
+        }
+    ];
+
+    p13TableFiles: ExampleFile[] = [
         {
             language: 'html',
             code: platformTableP13Src,
@@ -355,6 +367,38 @@ export class PlatformTableDocsComponent {
             language: 'typescript',
             code: platformTableDataItemsTs,
             name: 'platform-table-data-items-example.ts'
+        }
+    ];
+
+    p13ColumnsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableP13ColumnSrc,
+            name: 'platform-table-example.component.html'
+        }
+    ];
+
+    p13SortFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableP13SortSrc,
+            name: 'platform-table-example.component.html'
+        }
+    ];
+
+    p13FilterFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableP13FilterSrc,
+            name: 'platform-table-example.component.html'
+        }
+    ];
+
+    p13GroupFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableP13GroupSrc,
+            name: 'platform-table-example.component.html'
         }
     ];
 

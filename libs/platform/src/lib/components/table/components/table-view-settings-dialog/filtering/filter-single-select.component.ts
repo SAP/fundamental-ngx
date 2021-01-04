@@ -27,12 +27,12 @@ export class FilterSingleSelectComponent {
 
     /** Filter model change event */
     @Output()
-    valueChange: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
+    valueChange: EventEmitter<any[]> = new EventEmitter();
 
     readonly NOT_FILTERED_OPTION_VALUE = NOT_FILTERED_OPTION_VALUE;
 
     /** Currently selected value */
-    _value: unknown;
+    _value: any;
 
     /** @hidden */
     _onValueChange(value: unknown): void {

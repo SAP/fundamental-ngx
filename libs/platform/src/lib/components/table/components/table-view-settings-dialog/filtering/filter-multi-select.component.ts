@@ -34,10 +34,10 @@ export class FilterMultiSelectComponent {
 
     /** Filter model change event */
     @Output()
-    valueChange: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
+    valueChange: EventEmitter<any[]> = new EventEmitter();
 
     /** Currently selected values */
-    _value: unknown[];
+    _value: any[];
 
     /** @hidden */
     _selectableOptions: SelectableOption[];

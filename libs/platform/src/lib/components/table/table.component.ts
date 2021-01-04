@@ -546,11 +546,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     // Private API
 
-    /** @hidden */
-    _getRowNestingPadding(row: TableRow): number {
-        return (row.level || 0) * SELECTION_COLUMN_WIDTH.get(this.contentDensity);
-    }
-
     /**
      * @hidden
      * Toggle selectable row

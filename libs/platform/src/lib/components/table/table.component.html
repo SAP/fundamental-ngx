@@ -14,7 +14,7 @@
     ></ng-container>
     <div style="position: relative">
         <div
-            class="fd-table--fixed"
+            class="fdp-table fd-table--fixed"
             [ngStyle]="_getFixedTableStyles()"
         >
             <table fd-table>
@@ -45,7 +45,6 @@
                                 [ngStyle]="_freezableColumns?.includes(column.name) ? _getFreezableCellStyles(colIdx) : null"
                                 [style.textAlign]="column.align"
                             >
-
                                 <fd-popover
                                     [isOpen]="_isColumnPopoverOpened(column.key)"
                                     style="width: 100%"
@@ -239,9 +238,11 @@
             class="fd-table__cell--fixed fd-table__cell--focusable fd-table__cell--group"
             tabindex="0"
             role="cell"
-            [colSpan]="_tableColumnsLength"
+            [attr.col-span]="_tableColumnsLength"
+            [attr.aria-expanded]="row.expanded"
+            [attr.data-nesting-level]="row.level"
             (click)="_toggleGroupRow(row)"
-            [style.paddingLeft.px]="_getRowNestingPadding(row)"
+            (keyup.enter)="_toggleGroupRow(row)"
         >
             <fd-icon
                 [glyph]="row.expanded ? 'navigation-down-arrow' : _rtl ? 'navigation-left-arrow' : 'navigation-right-arrow'"
@@ -249,7 +250,7 @@
 
             <!-- Group row template when no nested groups -->
             <ng-container *ngIf="_groupRulesMap.size == 1">
-                {{ row.value?.value }}: {{ row.value?.count }}
+                {{ row.value?.value }} - {{ row.value?.count }}
             </ng-container>
             <!-- Group row template when there are nested groups -->
             <ng-container *ngIf="_groupRulesMap.size != 1">
@@ -298,13 +299,12 @@
             [style.textAlign]="column.align"
             [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
             [ngStyle]="_freezableColumns?.includes(column.name) ? _getFreezableCellStyles(colIdx) : null"
+            [attr.data-nesting-level]="colIdx === 0 && row.level"
         >
-            <div [style.paddingLeft.px]="colIdx === 0 && _getRowNestingPadding(row)">
-                <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
-                    <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">
-                    </ng-container>
+            <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
+                <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">
                 </ng-container>
-            </div>
+            </ng-container>
             <ng-template #defaultTableCellTemplate>{{ row.value | valueByPath: column.key }}</ng-template>
         </td>
     </tr>
@@ -346,7 +346,7 @@
         *ngTemplateOutlet="defaultTableHeaderCellTemplate; context: {column: column}"
     ></ng-container>
 </ng-template>
-
+<!-- Default Column Header Cell Template  -->
 <ng-template
     #defaultTableHeaderCellTemplate
     let-column="column"
