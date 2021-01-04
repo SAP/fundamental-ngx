@@ -217,8 +217,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @ViewChild(FdDatePickerComponent)
     fdDatePickerComponent: FdDatePickerComponent<D>;
 
-    private _state: Status;
-
     /**
      * Function used to disable certain dates in the calendar.
      * @param _ D

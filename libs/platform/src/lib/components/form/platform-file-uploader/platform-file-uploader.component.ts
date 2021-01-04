@@ -38,9 +38,6 @@ export class FileUploaderSelectionChangeEvent {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformFileUploaderComponent extends BaseInput {
-    /** @hidden state of checkbox, coming from CBG */
-    private _state: stateType;
-
     /** Button value */
     @Input()
     buttonLabel: string;
