@@ -21,6 +21,8 @@ export class WizardDialogExampleComponent {
     addressLine1 = '';
     addressLine2 = '';
 
+    currentStep = 1;
+
     constructor(private _dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
@@ -38,6 +40,7 @@ export class WizardDialogExampleComponent {
                 this.step3status = 'upcoming';
                 this.step4status = 'upcoming';
                 this.summaryStatus = 'upcoming';
+                this.currentStep = 1;
                 break;
             }
             case 2: {
@@ -46,6 +49,7 @@ export class WizardDialogExampleComponent {
                 this.step3status = 'upcoming';
                 this.step4status = 'upcoming';
                 this.summaryStatus = 'upcoming';
+                this.currentStep = 2;
                 break;
             }
             case 3: {
@@ -54,6 +58,7 @@ export class WizardDialogExampleComponent {
                 this.step3status = 'current';
                 this.step4status = 'upcoming';
                 this.summaryStatus = 'upcoming';
+                this.currentStep = 3;
                 break;
             }
             case 4: {
@@ -62,6 +67,7 @@ export class WizardDialogExampleComponent {
                 this.step3status = 'completed';
                 this.step4status = 'current';
                 this.summaryStatus = 'upcoming';
+                this.currentStep = 4;
                 break;
             }
             case 5: {
@@ -70,6 +76,7 @@ export class WizardDialogExampleComponent {
                 this.step3status = 'completed';
                 this.step4status = 'completed';
                 this.summaryStatus = 'current';
+                this.currentStep = 5;
                 break;
             }
         }
