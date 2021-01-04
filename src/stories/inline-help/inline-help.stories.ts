@@ -1,11 +1,11 @@
 import { moduleMetadata } from '@storybook/angular';
 import { withKnobs, boolean, select, text, object } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import { InlineHelpComponent, InlineHelpModule } from 'libs/core/src/lib/inline-help/public_api';
+import { InlineHelpDirective, InlineHelpModule } from 'libs/core/src/lib/inline-help/public_api';
 
 export default {
     title: 'Fd inline-help',
-    component: InlineHelpComponent,
+    component: InlineHelpDirective,
     moduleMetadata: moduleMetadata,
     decorators: [
         withKnobs,

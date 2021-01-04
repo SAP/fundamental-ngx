@@ -42,23 +42,18 @@ export class TabsService {
     /** @hidden */
     private _focusNext(index: number, elements: HTMLElement[]): void {
         if (index + 1 < elements.length) {
-            this._getTabLinkFromIndex(index + 1, elements).focus();
+            elements[index + 1].focus();
         } else {
-            this._getTabLinkFromIndex(0, elements).focus();
+            elements[0].focus();
         }
     }
 
     /** @hidden */
     private _focusPrevious(index: number, elements: HTMLElement[]): void {
         if (index - 1 >= 0) {
-            this._getTabLinkFromIndex(index - 1, elements).focus();
+            elements[index - 1].focus();
         } else {
-            this._getTabLinkFromIndex(elements.length - 1, elements).focus();
+            elements[elements.length - 1].focus();
         }
-    }
-
-    /** @hidden */
-    private _getTabLinkFromIndex(index: number, elements: HTMLElement[]): HTMLElement {
-        return elements[index];
     }
 }

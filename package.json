@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.26.0-rc.14",
+  "version": "0.26.0-rc.29",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -130,11 +130,11 @@
     "@angular/compiler-cli": "~10.2.1",
     "@angular/language-service": "~10.2.1",
     "@angularclass/hmr": "3.0.0",
-    "@babel/core": "7.12.3",
+    "@babel/core": "7.12.10",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/workspace": "10.3.0",
     "@schematics/angular": "10.1.7",
-    "@storybook/addon-a11y": "6.1.2",
+    "@storybook/addon-a11y": "6.1.11",
     "@storybook/addon-actions": "6.1.10",
     "@storybook/addon-knobs": "6.1.11",
     "@storybook/addon-links": "6.1.11",
@@ -190,7 +190,7 @@
     "wait-on": "5.2.0",
     "wdio-chromedriver-service": "6.0.4",
     "wdio-html-format-reporter": "0.4.0",
-    "webdriverio": "6.9.1"
+    "webdriverio": "6.10.11"
   },
   "pre-commit": {
     "color": true,
