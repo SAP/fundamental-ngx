@@ -150,13 +150,6 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     timePickerComponent: TimePickerComponent<D>;
 
     /**
-     * @hidden
-     * The state of the form control - applies css classes.
-     * Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    private _state: Status;
-
-    /**
      * Method that handles changes when popover is opened or closed.
      */
     handleOpenChange(open: boolean): void {
