@@ -291,8 +291,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.visited = true;
             }
         }
-        if (this.steps.last.content) {
-            this.steps.last.content.tallContent = true;
+        const lastVisibleTemplate = this.steps.toArray()[this.contentTemplates.length - 1];
+        if (lastVisibleTemplate && lastVisibleTemplate.content) {
+            lastVisibleTemplate.content.tallContent = true;
         }
         this.steps.last.finalStep = true;
     }
@@ -406,7 +407,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             lastNonSummaryStep.content.tallContent = true;
             lastNonSummaryStep.finalStep = true;
             // TODO: remove the line below when https://github.com/SAP/fundamental-styles/issues/1978 is addressed
-            lastNonSummaryStep.completed = false;
+            lastNonSummaryStep.getClassList().remove('fd-wizard__step--completed');
             this.steps.last.removeFromDom();
         } else if (lastNonSummaryStep) {
             if (lastNonSummaryStep.content) {
