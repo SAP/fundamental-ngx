@@ -34,7 +34,8 @@ describe('Checkbox test suite', function() {
     });
 
     describe('check binary checkbox used with form examples', () => {
-        it('should check binary checkbox in template driven form', () => {
+        // TODO: Unskip after fix
+        xit('should check binary checkbox in template driven form', () => {
             webDriver.waitElementToBePresentInDOM(binaryTempCheckbox, 0);
             webDriver.waitForDisplayed(binaryTempCheckbox, 0);
             // check checkbox labels

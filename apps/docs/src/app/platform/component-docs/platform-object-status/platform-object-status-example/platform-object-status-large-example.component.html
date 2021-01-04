@@ -4,6 +4,7 @@
     inverted="true"
     large="true"
     title="Status Negative"
+    ariaLabel="Object status Negative large"
 ></fdp-object-status>
 <fdp-object-status
     status="critical"
@@ -11,6 +12,7 @@
     inverted="true"
     large="true"
     title="Status Critical"
+    ariaLabel="Object status Critical large"
 ></fdp-object-status>
 <fdp-object-status
     status="positive"
@@ -18,6 +20,7 @@
     inverted="true"
     large="true"
     title="Status Positive"
+    ariaLabel="Object status Positive large"
 ></fdp-object-status>
 <fdp-object-status
     status="informative"
@@ -25,32 +28,117 @@
     inverted="true"
     large="true"
     title="Status Informative"
+    ariaLabel="Object status Informative large"
 ></fdp-object-status>
-<fdp-object-status glyph="to-be-reviewed" inverted="true" large="true" title="Status Reviewd"></fdp-object-status>
+<fdp-object-status
+    glyph="to-be-reviewed"
+    inverted="true"
+    large="true"
+    title="Status Reviewd"
+    ariaLabel="Object status Default large"
+></fdp-object-status>
 
 <br /><br />
 
-<fdp-object-status status="negative" large="true" label="Negative"></fdp-object-status>
-<fdp-object-status status="critical" large="true" label="Critical"></fdp-object-status>
-<fdp-object-status status="positive" large="true" label="Positive"></fdp-object-status>
-<fdp-object-status status="informative" large="true" label="Informative"></fdp-object-status>
-<fdp-object-status large="true" label="Default"></fdp-object-status>
+<fdp-object-status
+    status="negative"
+    large="true"
+    label="Negative"
+    ariaLabel="Object status Negative large"
+></fdp-object-status>
+<fdp-object-status
+    status="critical"
+    large="true"
+    label="Critical"
+    ariaLabel="Object status Critical large"
+></fdp-object-status>
+<fdp-object-status
+    status="positive"
+    large="true"
+    label="Positive"
+    ariaLabel="Object status Positive large"
+></fdp-object-status>
+<fdp-object-status
+    status="informative"
+    large="true"
+    label="Informative"
+    ariaLabel="Object status Informative large"
+></fdp-object-status>
+<fdp-object-status large="true" label="Default" ariaLabel="Object status Default large"></fdp-object-status>
 
 <br /><br />
 
-<fdp-object-status status="negative" large="true" title="5" label="5"></fdp-object-status>
-<fdp-object-status status="critical" large="true" title="20" label="20"></fdp-object-status>
-<fdp-object-status status="positive" large="true" title="2.99" label="2.99"></fdp-object-status>
-<fdp-object-status status="informative" large="true" title="10" label="10"></fdp-object-status>
-<fdp-object-status large="true" title="99+" label="99+"></fdp-object-status>
+<fdp-object-status
+    status="negative"
+    large="true"
+    title="5"
+    label="5"
+    ariaLabel="Object status Negative numeric large"
+></fdp-object-status>
+<fdp-object-status
+    status="critical"
+    large="true"
+    title="20"
+    label="20"
+    ariaLabel="Object status Critical numeric large"
+></fdp-object-status>
+<fdp-object-status
+    status="positive"
+    large="true"
+    title="2.99"
+    label="2.99"
+    ariaLabel="Object status Positive numeric large"
+></fdp-object-status>
+<fdp-object-status
+    status="informative"
+    large="true"
+    title="10"
+    label="10"
+    ariaLabel="Object status Informative numeric large"
+></fdp-object-status>
+<fdp-object-status
+    large="true"
+    title="99+"
+    label="99+"
+    ariaLabel="Object status default numeric large"
+></fdp-object-status>
 
 <br /><br />
 
-<fdp-object-status status="negative" glyph="status-negative" large="true" label="Negative"></fdp-object-status>
-<fdp-object-status status="critical" glyph="status-critical" large="true" label="Critical"></fdp-object-status>
-<fdp-object-status status="positive" glyph="status-positive" large="true" label="Positive"></fdp-object-status>
-<fdp-object-status status="informative" glyph="hint" large="true" label="Informative"></fdp-object-status>
-<fdp-object-status glyph="to-be-reviewed" large="true" label="Default"></fdp-object-status>
+<fdp-object-status
+    status="negative"
+    glyph="status-negative"
+    large="true"
+    label="Negative"
+    ariaLabel="Object status Negative large"
+></fdp-object-status>
+<fdp-object-status
+    status="critical"
+    glyph="status-critical"
+    large="true"
+    label="Critical"
+    ariaLabel="Object status Critical large"
+></fdp-object-status>
+<fdp-object-status
+    status="positive"
+    glyph="status-positive"
+    large="true"
+    label="Positive"
+    ariaLabel="Object status Positive large"
+></fdp-object-status>
+<fdp-object-status
+    status="informative"
+    glyph="hint"
+    large="true"
+    label="Informative"
+    ariaLabel="Object status Informative large"
+></fdp-object-status>
+<fdp-object-status
+    glyph="to-be-reviewed"
+    large="true"
+    label="Default"
+    ariaLabel="Object status Default large"
+></fdp-object-status>
 
 <br /><br />
 
@@ -61,6 +149,7 @@
     large="true"
     inverted="true"
     (click)="showAlert()"
+    ariaLabel="Object status Negative large inverted"
     >Negative</fdp-object-status
 >
 <fdp-object-status
@@ -70,6 +159,7 @@
     large="true"
     inverted="true"
     (click)="showAlert()"
+    ariaLabel="Object status Critical large inverted"
     >Critical</fdp-object-status
 >
 <fdp-object-status
@@ -80,6 +170,7 @@
     inverted="true"
     (click)="showAlert()"
     label="Positive"
+    ariaLabel="Object status Positive large inverted"
 ></fdp-object-status>
 <fdp-object-status
     status="informative"
@@ -88,6 +179,7 @@
     large="true"
     inverted="true"
     label="Informative"
+    ariaLabel="Object status Informative large inverted"
 ></fdp-object-status>
 <fdp-object-status
     glyph="to-be-reviewed"
@@ -95,4 +187,5 @@
     large="true"
     inverted="true"
     label="Default"
+    ariaLabel="Object status default large inverted"
 ></fdp-object-status>
