@@ -128,7 +128,7 @@ describe('Input Group should', function() {
         expect(getValue(inputGroupPage.withFormInput)).toBe(inputGroupTestData.numeric_value);
     });
 
-    it('with form input have error tooltip and visual que if empty', () => {
+    xit('with form input have error tooltip and visual que if empty', () => {
         waitForElDisplayed(inputGroupPage.withFormInput);
         scrollIntoView(inputGroupPage.withFormInput);
         click(inputGroupPage.withFormInput);
@@ -145,7 +145,7 @@ describe('Input Group should', function() {
         console.log('Skip hover check for Safari');*/
     });
 
-    it('with form input have info tooltip', () => {
+    xit('with form input have info tooltip', () => {
         if (!browserIsIEorSafari()) {
             waitForElDisplayed(inputGroupPage.withFormInput);
             scrollIntoView(inputGroupPage.withFormInput);
