@@ -25,4 +25,8 @@ export class PlatformRadioGroupListExampleComponent {
             this.form1.controls.radiol1.markAsTouched();
         }
     }
+
+    onReset(form: NgForm): void {
+        this.form1.reset();
+    }
 }
