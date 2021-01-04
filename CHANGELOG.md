@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.31...v0.26.0-rc.32) (2021-01-04)
+
+## [0.26.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.30...v0.26.0-rc.31) (2021-01-04)
+
+
+### Features
+
+* (Platform) Add state to step input component and base input. ([#4182](https://github.com/SAP/fundamental-ngx/issues/4182)) ([0748438](https://github.com/SAP/fundamental-ngx/commit/07484384969c018ead85bf1f935e7152254abe5d))
+
+## [0.26.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.29...v0.26.0-rc.30) (2021-01-04)
+
+## [0.26.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.28...v0.26.0-rc.29) (2021-01-03)
+
+## [0.26.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.27...v0.26.0-rc.28) (2020-12-31)
+
+
+### Bug Fixes
+
+* (platform) add vertical checkbox group and radio group example ([#4192](https://github.com/SAP/fundamental-ngx/issues/4192)) ([607cd82](https://github.com/SAP/fundamental-ngx/commit/607cd8223ce94e9ee446aed747961e6b9a609265))
+
 ## [0.26.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.26...v0.26.0-rc.27) (2020-12-30)
 
 
