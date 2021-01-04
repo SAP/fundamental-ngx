@@ -211,6 +211,12 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'time-picker',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-time-picker/platform-time-picker-docs.module').then((m) =>
+                        m.PlatformTimePickerDocsModule)
+            },
+            {
                 path: 'action-list-item',
                 loadChildren: () =>
                     import('./component-docs/platform-action-list-item/platform-action-list-item-docs.module').then(
