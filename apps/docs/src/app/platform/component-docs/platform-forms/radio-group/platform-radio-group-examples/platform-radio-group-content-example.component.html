@@ -61,6 +61,8 @@
         </ng-template>
     </fdp-form-group>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
+    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
+        (click)="onReset(myForm)"></fdp-button>
 </form>
 <p style="margin-left: 2rem;">Selected value: {{ form4.controls.radioc4?.value }}</p>
 <br />
@@ -79,7 +81,7 @@
 </fdp-form-group>
 <p style="margin-left: 2rem;">Selected value: {{ form5.controls.month?.value }}</p>
 
-<hr/>
+<hr />
 <h3>Use With Template Driven Form</h3>
 <p>Inline compact radio group with default selection</p>
 <fdp-form-group multiLayout="true">

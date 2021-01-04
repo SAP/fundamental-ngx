@@ -29,7 +29,10 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     `,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[attr.tabindex]': 'clickable ? 0 : -1'
+    }
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

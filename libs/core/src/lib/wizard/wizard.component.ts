@@ -251,7 +251,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const templatesLength = this.contentTemplates.length;
         this.contentTemplates = [];
         let _stepId = 0;
-        this.steps.forEach((step) => {
+        for (const step of this.steps.toArray()) {
             if (step.content) {
                 if (!step.isSummary) {
                     step.content.tallContent = false;
@@ -277,17 +277,25 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.visited ||
                 ((step.status === CURRENT_STEP_STATUS || step.status === COMPLETED_STEP_STATUS) && step.content)
             ) {
-                if (step.status === CURRENT_STEP_STATUS && !step.completed) {
+                if (step.status === CURRENT_STEP_STATUS && (!step.completed || !this.appendToWizard)) {
                     step.content.tallContent = true;
                 }
                 if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
+                    if (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) {
+                        break;
+                    }
                 } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
                 step.visited = true;
             }
-        });
+        }
+        const lastVisibleTemplate = this.steps.toArray()[this.contentTemplates.length - 1];
+        if (lastVisibleTemplate && lastVisibleTemplate.content) {
+            lastVisibleTemplate.content.tallContent = true;
+        }
+        this.steps.last.finalStep = true;
     }
 
     /** @hidden */
@@ -399,7 +407,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             lastNonSummaryStep.content.tallContent = true;
             lastNonSummaryStep.finalStep = true;
             // TODO: remove the line below when https://github.com/SAP/fundamental-styles/issues/1978 is addressed
-            lastNonSummaryStep.completed = false;
+            lastNonSummaryStep.getClassList().remove('fd-wizard__step--completed');
             this.steps.last.removeFromDom();
         } else if (lastNonSummaryStep) {
             if (lastNonSummaryStep.content) {
