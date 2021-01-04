@@ -3,9 +3,9 @@
     <ng-container *ngIf="shouldOverflow">
         <span #overflowSpacer></span>
         <fd-popover
-                [placement]="'bottom-end'"
+                placement="bottom-end"
                 [noArrow]="true"
-                [class]="'fd-popover fd-toolbar__overflow'">
+                class="fd-popover fd-toolbar__overflow">
             <fd-popover-control>
                 <button
                     *ngIf="overflowVisibility | async"
