@@ -315,11 +315,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         if (this.isLoading) {
             this.cancelSearch.emit();
         } else {
-            // if there is no input text, don't emit event
-            if (!this.inputText) {
-                return;
-            }
-
             this.searchSubmit.emit({
                 text: this.inputText,
                 category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import * as wizardHtml from '!raw-loader!./examples/wizard-example.component.html';
 import * as wizardTs from '!raw-loader!./examples/wizard-example.component.ts';
+import * as wizardScss from '!raw-loader!./examples/wizard-example.component.scss';
 import * as wizardCustomizableHtml from '!raw-loader!./examples/wizard-customizable-example.component.html';
 import * as wizardCustomizableTs from '!raw-loader!./examples/wizard-customizable-example.component.ts';
 import * as wizardMobileHtml from '!raw-loader!./examples/wizard-mobile-example.component.html';
@@ -21,7 +22,8 @@ export class WizardDocsComponent {
         {
             language: 'html',
             code: wizardHtml,
-            fileName: 'wizard-example'
+            fileName: 'wizard-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',
@@ -63,7 +65,8 @@ export class WizardDocsComponent {
         {
             language: 'html',
             code: wizardBranchingHtml,
-            fileName: 'wizard-branching-example'
+            fileName: 'wizard-branching-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',

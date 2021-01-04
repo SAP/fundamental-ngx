@@ -33,7 +33,7 @@ export const DefaultPositions: ConnectedPosition[] = [
  */
 export type PopoverFillMode = 'at-least' | 'equal' | 'fit-content';
 
-const ARROW_SIZE  = '0.5rem';
+export const ARROW_SIZE  = '0.5rem';
 
 
 export type Placement = 'auto-start'
@@ -95,13 +95,13 @@ export class PopoverPosition {
         return _position;
     }
 
-    static getMarginStyle(position: ArrowPosition): string {
+    static getMarginDirection(position: ArrowPosition): string {
         if (!position) {
             return;
         }
 
         const resultPosition = position.replace('start', 'left').replace('end', 'right');
-        return 'margin-' + resultPosition + ': ' + ARROW_SIZE + ';';
+        return 'margin-' + resultPosition;
     }
 
 }

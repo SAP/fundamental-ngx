@@ -3,13 +3,9 @@ import {
     Component,
     Directive,
     ElementRef,
-    EmbeddedViewRef,
     HostBinding,
     Input,
     OnChanges,
-    OnInit,
-    TemplateRef,
-    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
@@ -33,28 +29,6 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
     selector: '[fd-tab-title-template]'
 })
 export class TabTitleDirective {}
-
-/**
- * Not for external use. Portal to render the complex title template.
- */
-@Directive({
-    // TODO to be discussed
-    // tslint:disable-next-line:directive-selector
-    selector: '[fd-tab-load-title]'
-})
-export class TabLoadTitleDirective implements OnInit {
-    @Input('fd-tab-load-title')
-    content: TemplateRef<any>;
-
-    private contentRef: EmbeddedViewRef<any>;
-
-    constructor(private _viewRef: ViewContainerRef) {}
-
-    ngOnInit(): void {
-        this._viewRef.clear();
-        this.contentRef = this._viewRef.createEmbeddedView(this.content);
-    }
-}
 
 /**
  * Directive for counter element, available in most of modes on `tab` component
