@@ -11,6 +11,8 @@ import { PlatformStepInputHeaderComponent } from './platform-step-input-header/p
 import { PlatformNumberStepInputExampleComponent } from './platform-step-input-examples/platform-number-step-input-example.component';
 import { PlatformNumberStepInputFormExampleComponent } from './platform-step-input-examples/platform-number-step-input-reactive-example.component';
 import { PlatformNumberStepInputTemplateFormExampleComponent } from './platform-step-input-examples/platform-number-step-input-template-example.component';
+import { PlatformNumberStepInputStateExampleComponent } from './platform-step-input-examples/platform-number-step-input-state-example.component';
+
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
@@ -32,7 +34,8 @@ const routes: Routes = [
         PlatformStepInputHeaderComponent,
         PlatformNumberStepInputExampleComponent,
         PlatformNumberStepInputFormExampleComponent,
-        PlatformNumberStepInputTemplateFormExampleComponent
+        PlatformNumberStepInputTemplateFormExampleComponent,
+        PlatformNumberStepInputStateExampleComponent
     ]
 })
 export class PlatformStepInputDocsModule {}

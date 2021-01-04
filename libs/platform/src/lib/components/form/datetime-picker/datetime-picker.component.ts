@@ -216,12 +216,6 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput {
     @ViewChild(DatetimePickerComponent)
     dateTimePickerComponent: DatetimePickerComponent<D>;
 
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    private _state: Status;
-
     @ViewChild(DatetimePickerComponent, { static: true, read: ElementRef })
     protected _elRef: ElementRef;
 

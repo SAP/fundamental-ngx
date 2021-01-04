@@ -130,7 +130,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     mode: 'decimal' | 'currency' = 'decimal';
 
-    /** Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default.*/
+    /** Sets state of the control. Can be `success`, `error`, `warning`, `information` or blank for default. */
     @Input()
     state: FormStates;
 
