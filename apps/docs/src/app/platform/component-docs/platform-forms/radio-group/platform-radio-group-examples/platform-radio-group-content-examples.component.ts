@@ -29,4 +29,8 @@ export class PlatformRadioGroupContentExampleComponent {
             this.form4.controls.radioc4.markAsTouched();
         }
     }
+
+    onReset(form: NgForm): void {
+        this.form4.reset();
+    }
 }

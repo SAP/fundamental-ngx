@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { Placement } from '../../popover/popover-position/popover-position';
 
 /**
  * Label to be linked to a form control.
@@ -12,33 +13,70 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     // TODO to be discussed
     // tslint:disable-next-line:component-selector
     selector: '[fd-form-label]',
-    template: `<ng-content></ng-content>`,
+    templateUrl: './form-label.component.html',
     styleUrls: ['./form-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormLabelComponent {
-    /** @hidden */
-    @HostBinding('class.fd-form-label')
-    fdFormLabelClass = true;
+export class FormLabelComponent implements OnChanges {
+    /** Whether form is required */
+    @Input()
+    required = false;
 
     /** Whether form is required */
     @Input()
-    @HostBinding('class.fd-form-label--required')
-    required = false;
+    colon = false;
 
-    /** Whether label is for checkbox */
+    /** @deprecated */
     @Input()
-    @HostBinding('class.fd-form-label--checkbox')
     checkbox = false;
 
-    /** Whether label is for radio */
+    /** @deprecated */
     @Input()
-    @HostBinding('class.fd-form-label--radio')
     radio = false;
 
-    /** Whether label is for inline-help */
+    /** Inline help body text */
     @Input()
-    @HostBinding('class.fd-form-label--inline-help')
-    inlineHelp = false;
+    inlineHelpTitle: string = null;
+
+    /** Glyph of icon triggering inline help */
+    @Input()
+    inlineHelpGlyph = 'question-mark';
+
+    /**
+     * The placement of the inline help.
+     * It can be one of:
+     * top, top-start, top-end, bottom, bottom-start, bottom-end,
+     * right, right-start, right-end, left, left-start, left-end.
+     */
+    @Input()
+    inlineHelpBodyPlacement: Placement;
+
+    /** The trigger events that will open/close the inline help.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    inlineHelpTrigger: string[] = ['mouseleave', 'mouseenter'];
+
+    /** If inline help trigger icon should be placed after, or before text */
+    @Input()
+    inlineHelpPlacement: 'before' | 'after' = 'after';
+
+    /** @hidden */
+    @HostBinding('class.fd-form-label__wrapper')
+    defaultClass = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-form-label__wrapper--inline-help')
+    inlineHelpClass = true;
+
+    /** @hidden */
+    @HostBinding('class.fd-form-label__wrapper--inline-help--after')
+    inlineHelpAfter = true;
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.inlineHelpClass = !!this.inlineHelpTitle;
+        this.inlineHelpAfter = this.inlineHelpTitle && this.inlineHelpPlacement === 'after';
+    }
+
 }

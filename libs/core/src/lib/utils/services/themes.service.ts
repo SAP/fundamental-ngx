@@ -1,7 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
@@ -55,7 +55,7 @@ export class ThemesService {
 
     constructor(
         @Optional() private _activatedRoute: ActivatedRoute,
-        private _sanitizer: DomSanitizer,
+        private _sanitizer: DomSanitizer
     ) {}
 
 
@@ -72,12 +72,15 @@ export class ThemesService {
         }
 
         this._activatedRoute.queryParams
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter(param => param && param[paramName])
+            )
             .subscribe(param => this.onThemeQueryParamChange.next({
-                themeUrl: this.setTheme(param[paramName]),
-                customThemeUrl: this.setCustomTheme(param[paramName])
-            })
-        );
+                    themeUrl: this.setTheme(param[paramName]),
+                    customThemeUrl: this.setCustomTheme(param[paramName])
+                })
+            );
     };
 
     /** Assign css file corresponding to chosen theme from @sap-theming **/

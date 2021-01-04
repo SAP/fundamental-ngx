@@ -13,5 +13,13 @@
 
     &__list {
         overflow: auto;
+        .fd-list__item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     }
 }

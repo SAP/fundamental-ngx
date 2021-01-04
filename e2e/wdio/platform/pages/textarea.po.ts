@@ -24,7 +24,7 @@ export class TextareaPo extends BaseComponentPo {
     compactTextArea = '#compactTextarea';
     compactTextAreaLabel = '[for="compactTextarea"] > span';
 
-    detailedTextAreaLabel = '[for="detailedDescription"]';
+    detailedTextAreaLabel = '[for="detailedDescription"] > span';
     detailedTextArea = '#detailedDescription';
     detailedTextAreaErrorMessage = '[type="error"]';
     detailedTextAreaCharacterCounter = '//div[label[@for="detailedDescription"]]//div[@role="alert"]//span';

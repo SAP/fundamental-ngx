@@ -1,0 +1,169 @@
+$block: approval-flow-node;
+
+:host {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #fff;
+    background: var(--sapBaseColor, #fff);
+    border-radius: 4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
+    width: 278px;
+    height: 94px;
+    cursor: pointer;
+
+    &.#{$block}--blank {
+        background: transparent;
+        box-shadow: none;
+        pointer-events: none;
+        cursor: default;
+
+        &:before {
+            content: '';
+            width: calc(100% + 8rem);
+            height: 0;
+            display: block;
+            position: absolute;
+            left: -4rem;
+            border-top: 2px dashed #89919A;
+            border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+            top: calc(50% - 1px);
+        }
+    }
+
+    &.#{$block}--line-before:before, &.#{$block}--line-after:after {
+        content: '';
+        width: 1.9rem;
+        height: 0;
+        display: block;
+        position: absolute;
+        border-top: 2px dashed #89919A;
+        border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    &.#{$block}--line-before:before {
+        left: -2rem;
+    }
+
+    &.#{$block}--line-after:after {
+        right: -1.9rem;
+    }
+
+    &.#{$block}--approved {
+        &.#{$block}--line-after:after {
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+    }
+
+    &.#{$block}--parent-approved {
+        &.#{$block}--line-before:before {
+            border-top-style: solid;
+            border-top-width: 1px;
+            left: -2.2rem;
+        }
+    }
+
+    &[dir='rtl'] {
+        .#{$block}__avatar {
+            margin-right: 0;
+            margin-left: .5rem;
+        }
+
+        .#{$block}__arrow {
+            left: auto;
+            right: -8px;
+            border-width: 4px 8px 4px 0;
+            border-color: transparent #89919A transparent transparent;
+            border-color: transparent var(--sapField_ReadOnly_BorderColor, #89919A) transparent transparent;
+        }
+
+        .#{$block}__carousel-start-marker {
+            left: auto;
+            right: -2rem;
+        }
+
+        .#{$block}__carousel-end-marker {
+            right: auto;
+            left: -2rem;
+        }
+
+        &.#{$block}--line-before:before {
+            left: auto;
+            right: -2rem;
+        }
+
+        &.#{$block}--line-after:after {
+            right: auto;
+            left: -2rem;
+            width: 2rem;
+        }
+
+        .#{$block}__name.#{$block}__name--members-count {
+            direction: ltr;
+            text-align: right;
+        }
+    }
+}
+
+.#{$block}__inner {
+    display: flex;
+}
+
+.#{$block}__avatar {
+    margin-right: .5rem;
+}
+
+.#{$block}__name {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-bottom: .1rem;
+    color: #32363a;
+    color: var(--sapTextColor, #32363a);
+}
+
+.#{$block}__description {
+    font-size: .875rem;
+    line-height: 1rem;
+    color: #6A6D70;
+    color: var(--sapContent_LabelColor, #6A6D70);
+    margin-bottom: .4rem;
+}
+
+.#{$block}__arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 0 4px 8px;
+    border-color: transparent transparent transparent #89919A;
+    border-color: transparent transparent transparent var(--sapField_ReadOnly_BorderColor, #89919A);
+    position: absolute;
+    left: -8px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
+    z-index: 1;
+    background: #89919A;
+    background: var(--sapField_ReadOnly_BorderColor, #89919A);
+    display: block;
+    position: absolute;
+    width: 4px;
+    height: 11px;
+    top: 42px;
+}
+
+.#{$block}__carousel-start-marker {
+    left: -2rem;
+}
+
+.#{$block}__carousel-end-marker {
+    right: -2rem;
+}

@@ -24,3 +24,4 @@ export * from './lib/components/dynamic-page/public_api';
 export * from './lib/components/feed-input/public_api';
 export * from './lib/components/upload-collection';
 export * from './lib/utils/pipes/pipe.module';
+export * from './lib/components/approval-flow/public_api';
