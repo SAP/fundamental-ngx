@@ -1,6 +1,7 @@
 .fd-grid-list-item-body {
     &--container {
         display: flex;
+        word-break: break-all;
 
         fd-avatar {
             margin-right: 1rem;
