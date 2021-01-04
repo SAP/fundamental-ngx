@@ -301,10 +301,14 @@
 </ng-template>
 
 <ng-template #desktopTabs>
-    <fd-tab-list class="fdp-value-help-dialog__tabs" [selectedIndex]="selectedTab" (selectedIndexChange)="selectedTab = $event" *ngIf="showSelectionTab && showDefineTab">
-        <fd-tab [title]="selectTabTitle" tabState="information" *ngIf="showSelectionTab"></fd-tab>
-        <fd-tab [title]="defineTabTitle" tabState="information" *ngIf="showDefineTab"></fd-tab>
-    </fd-tab-list>
+    <nav fd-tab-nav *ngIf="showSelectionTab && showDefineTab">
+        <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)" *ngIf="showSelectionTab">
+            <a fd-tab-link [active]="selectedTab === _tabTypes.selectFromList"><span fd-tab-tag>{{ selectTabTitle }}</span></a>
+        </div>
+        <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
+            <a fd-tab-link [active]="selectedTab === _tabTypes.defineConditions"><span fd-tab-tag>{{ defineTabTitle }}</span></a>
+        </div>
+    </nav>
 </ng-template>
 
 <ng-template #mobileTabs>

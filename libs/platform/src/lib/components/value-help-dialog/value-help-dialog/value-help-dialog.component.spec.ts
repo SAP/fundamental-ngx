@@ -15,6 +15,7 @@ async function whenStable(fixture: ComponentFixture<any>): Promise<void> {
     <fdp-value-help-dialog #vhd
         dialogTitle="Simple value help dialog"
         uniqueKey="id"
+        tokenViewField="name"
         selectTabTitle="Select from list"
         defineTabTitle="Define Conditions"
         [dataSource]="data"
@@ -101,7 +102,8 @@ describe('PlatformValueHelpDialogComponent', () => {
   it('should have value help dialog reference', async () => {
     await whenStable(testFixture);
     testComponent.vhdComponent.open();
-    expect(!!testComponent.vhdComponent.activeDialog).toBeTrue();
+    await whenStable(testFixture);
+    expect(!!testComponent.vhdComponent.isOpen).toBeTrue();
   });
 
   it('should have 3 filters', async () => {
@@ -110,6 +112,8 @@ describe('PlatformValueHelpDialogComponent', () => {
   });
 
   it('should have 1 selected items', async () => {
+    await whenStable(testFixture);
+    testComponent.vhdComponent.open();
     await whenStable(testFixture);
     testComponent.vhdComponent.value = {
       selected: testComponent.data.slice(0, 3)
@@ -134,6 +138,7 @@ describe('PlatformValueHelpDialogComponent', () => {
   it('should emit value on success', async () => {
     await whenStable(testFixture);
     testComponent.vhdComponent.open();
+    await whenStable(testFixture);
     testComponent.vhdComponent.value = {
       selected: testComponent.data.slice(0, 3)
     };
