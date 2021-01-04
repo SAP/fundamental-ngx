@@ -205,8 +205,10 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     /** @hidden */
     private _setupPopoverService(): void {
-        this._popoverService._onLoad.subscribe(elementRef =>
-            this._manageKeyboardSupport(elementRef)
+        this._subscriptions.add(
+            this._popoverService._onLoad.subscribe(elementRef =>
+                this._manageKeyboardSupport(elementRef)
+            )
         )
 
         this._popoverService.templateContent = this.menuRootTemplate;
