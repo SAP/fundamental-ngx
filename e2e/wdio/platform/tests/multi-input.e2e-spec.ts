@@ -136,29 +136,31 @@ describe('Multi input test suite', function() {
     });
 
     it('Verify user can delete the token using backspace and delete key', () => {
-        const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropDownButtons);
-        for (let i = 0; i < activeButtonsQuantity; i++) {
-            if (i !== activeButtonsQuantity - 2) {
-                multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
-                multiInputPage.selectOption(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                click(multiInputPage.selectedToken);
-                sendKeys(['Backspace']);
-                sendKeys(['Backspace']);
-                expect(multiInputPage.selectedToken).not.toBeDisplayed();
-            } else {
-                multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
-                multiInputPage.selectOption(optionsArr[0]);
-                click(multiInputPage.approveButton);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                click(multiInputPage.selectedToken);
-                sendKeys(['Backspace']);
-                sendKeys(['Backspace']);
-                expect(multiInputPage.selectedToken).not.toBeDisplayed();
+        if (!browserIsIEorSafari()) {
+            const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropDownButtons);
+            for (let i = 0; i < activeButtonsQuantity; i++) {
+                if (i !== activeButtonsQuantity - 2) {
+                    multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, i);
+                    const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                    multiInputPage.selectOption(optionsArr[0]);
+                    expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
+                    expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                    click(multiInputPage.selectedToken);
+                    sendKeys(['Backspace']);
+                    sendKeys(['Backspace']);
+                    expect(multiInputPage.selectedToken).not.toBeDisplayed();
+                } else {
+                    multiInputPage.expandDropdown(multiInputPage.activeDropDownButtons, i);
+                    const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                    multiInputPage.selectOption(optionsArr[0]);
+                    click(multiInputPage.approveButton);
+                    expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
+                    expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                    click(multiInputPage.selectedToken);
+                    sendKeys(['Backspace']);
+                    sendKeys(['Backspace']);
+                    expect(multiInputPage.selectedToken).not.toBeDisplayed();
+                }
             }
         }
     });
