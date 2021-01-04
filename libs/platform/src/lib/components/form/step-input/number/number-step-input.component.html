@@ -5,7 +5,7 @@
     [class.is-disabled]="disabled"
     [class.fd-step-input--compact]="isCompact"
     [class.fd-step-input--without-buttons]="showLabels"
-    [class.is-error]="isErrorState"
+    [ngClass]="status ? 'is-' + status : ''"
 >
     <button
         class="fd-step-input__button"
