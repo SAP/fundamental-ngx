@@ -249,7 +249,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
      */
     private _listenOnTriggerRefClicks(): void {
         this._destroyEventListeners();
-        if (this.trigger) {
+        if (this.trigger && this.mobile) {
             this._clickEventListener = this._rendered.listen(
                 this.trigger.nativeElement, 'click', () => this.toggle()
             );
