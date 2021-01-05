@@ -5,11 +5,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
 import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
 
-async function whenStable(fixture: ComponentFixture<any>): Promise<void> {
-  fixture.changeDetectorRef.markForCheck();
-  fixture.detectChanges();
-  await fixture.whenStable();
-}
 @Component({
   template: `
     <fdp-value-help-dialog #vhd
@@ -61,6 +56,12 @@ describe('PlatformValueHelpDialogComponent', () => {
   let testComponent: TestWrapperComponent;
   let testFixture: ComponentFixture<TestWrapperComponent>;
 
+  function setup(): void {
+    TestBed.compileComponents();
+    testFixture = TestBed.createComponent(TestWrapperComponent);
+    testComponent = testFixture.componentInstance;
+    testFixture.detectChanges();
+  }
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -71,8 +72,7 @@ describe('PlatformValueHelpDialogComponent', () => {
       declarations: [
         TestWrapperComponent
       ]
-    })
-    .overrideComponent(
+    }).overrideComponent(
       PlatformValueHelpDialogComponent,
       {
         set: {
@@ -80,73 +80,46 @@ describe('PlatformValueHelpDialogComponent', () => {
         }
       }
     );
-  });
-
-
-  function setup(): void {
-    TestBed.compileComponents();
-    testFixture = TestBed.createComponent(TestWrapperComponent);
-    testComponent = testFixture.componentInstance;
-    testFixture.detectChanges();
-  }
-  beforeEach(() => {
     setup();
   });
 
   it('should create', async () => {
     expect(testComponent).toBeTruthy();
-    await whenStable(testFixture);
     expect(testComponent.vhdComponent).toBeTruthy();
   });
 
   it('should have value help dialog reference', async () => {
-    await whenStable(testFixture);
     testComponent.vhdComponent.open();
-    await whenStable(testFixture);
     expect(!!testComponent.vhdComponent.isOpen).toBeTrue();
   });
 
   it('should have 3 filters', async () => {
-    await whenStable(testFixture);
     expect(testComponent.vhdComponent.filters.length).toEqual(3);
   });
 
   it('should have 1 selected items', async () => {
-    await whenStable(testFixture);
     testComponent.vhdComponent.open();
-    await whenStable(testFixture);
     testComponent.vhdComponent.value = {
       selected: testComponent.data.slice(0, 3)
     };
-    await whenStable(testFixture);
     testComponent.vhdComponent.removeSelected(0);
-    await whenStable(testFixture);
     expect(testComponent.vhdComponent.selectedItems.length).toEqual(2);
   });
 
   it('should not emit value on cancel', async () => {
-    await whenStable(testFixture);
     testComponent.vhdComponent.open();
-    await whenStable(testFixture);
     spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
-    await whenStable(testFixture);
     testComponent.vhdComponent.dismiss();
-    await whenStable(testFixture);
     expect(testComponent.vhdComponent.valueChange.emit).not.toHaveBeenCalled();
   });
 
   it('should emit value on success', async () => {
-    await whenStable(testFixture);
     testComponent.vhdComponent.open();
-    await whenStable(testFixture);
     testComponent.vhdComponent.value = {
       selected: testComponent.data.slice(0, 3)
     };
-    await whenStable(testFixture);
     spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
-    await whenStable(testFixture);
     testComponent.vhdComponent.success();
-    await whenStable(testFixture);
     expect(testComponent.vhdComponent.valueChange.emit).toHaveBeenCalled();
   });
 });

@@ -312,12 +312,18 @@
 </ng-template>
 
 <ng-template #mobileTabs>
-    <ul fd-list [compact]="true" size="s" [byline]="true" *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
+    <ul fd-list [compact]="true" *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
         <li fd-list-item *ngIf="showSelectionTab">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: selectTabTitle, type: _tabTypes.selectFromList}"></ng-container>
+            <a fd-list-link (click)="switchTab(_tabTypes.selectFromList)">
+                <span fd-list-title>{{ selectTabTitle }}</span>
+                <i fd-list-icon glyph="navigation-right-arrow"></i>
+            </a>
         </li>
         <li fd-list-item *ngIf="showDefineTab">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTabTitle, type: _tabTypes.defineConditions}"></ng-container>
+            <a fd-list-link (click)="switchTab(_tabTypes.defineConditions)">
+                <span fd-list-title>{{ defineTabTitle }}</span>
+                <i fd-list-icon glyph="navigation-right-arrow"></i>
+            </a>
         </li>
     </ul>
 </ng-template>
