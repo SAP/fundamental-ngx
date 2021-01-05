@@ -11,7 +11,7 @@ import {
     getValue,
     isElementClickable,
     isEnabled,
-    mouseHoverElement,
+    mouseHoverElement, pause,
     refreshPage,
     scrollIntoView,
     setValue,
@@ -27,6 +27,7 @@ describe('Input Group should', function() {
 
     beforeAll(() => {
         inputGroupPage.open();
+        pause(16000);
     });
 
     afterEach(() => {
