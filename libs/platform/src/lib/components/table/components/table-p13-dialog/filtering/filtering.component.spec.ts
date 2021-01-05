@@ -1,26 +1,26 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogRef } from '@fundamental-ngx/core';
 
-// import { SortingComponent, SortDialogData } from './sorting.component';
+import { P13FilteringDialogComponent, FilterDialogData } from './filtering.component';
 
-/* describe('PlatformTableP13SortDialogComponent', () => {
-    let component: SortingComponent;
-    let fixture: ComponentFixture<SortingComponent>;
+describe('PlatformTableP13FilterDialogComponent', () => {
+    let component: P13FilteringDialogComponent;
+    let fixture: ComponentFixture<P13FilteringDialogComponent>;
     const dialogRef = new DialogRef();
-    const dialogData: SortDialogData = { columns: [], collectionSort: [] };
+    const dialogData: FilterDialogData = { columns: [], collectionFilter: [] };
     dialogRef.data = dialogData;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [SortingComponent],
+                declarations: [P13FilteringDialogComponent],
                 providers: [{ provide: DialogRef, useValue: dialogRef }]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SortingComponent);
+        fixture = TestBed.createComponent(P13FilteringDialogComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -28,4 +28,4 @@ import { DialogRef } from '@fundamental-ngx/core';
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-}); */
+});

@@ -103,7 +103,7 @@ export class FilterRule<T = any> {
     }
 
     setDataTypeByColumnKey(columnKey: string): void {
-        const dataType = this.columns.find((column) => column.key === columnKey).dataType;
+        const dataType = this.columns.find((column) => column.key === columnKey)?.dataType;
 
         if (dataType === this.dataType) {
             return;

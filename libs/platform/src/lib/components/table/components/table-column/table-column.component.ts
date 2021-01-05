@@ -68,7 +68,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
     /** Cell text alignment. */
     /** @ts-ignore */
     @Input() set align(align: ColumnAlign) {
-        let _align;
+        let _align = ColumnAlignEnum.Start;
         switch (align) {
             case ColumnAlign.CENTER:
                 _align = ColumnAlignEnum.Center;
@@ -77,10 +77,8 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
                 _align = ColumnAlignEnum.End;
                 break;
             case ColumnAlign.START:
-            default:
                 _align = ColumnAlignEnum.Start;
         }
-
         this._align$.next(_align);
     }
 

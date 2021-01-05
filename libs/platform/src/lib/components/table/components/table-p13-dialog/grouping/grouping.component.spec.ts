@@ -1,26 +1,26 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogRef } from '@fundamental-ngx/core';
 
-// import { SortingComponent, SortDialogData } from './grouping.component';
+import { GroupDialogData, P13GroupingDialogComponent } from './grouping.component';
 
-/* describe('PlatformTableP13SortDialogComponent', () => {
-    let component: SortingComponent;
-    let fixture: ComponentFixture<SortingComponent>;
+describe('PlatformTableP13GroupDialogComponent', () => {
+    let component: P13GroupingDialogComponent;
+    let fixture: ComponentFixture<P13GroupingDialogComponent>;
     const dialogRef = new DialogRef();
-    const dialogData: SortDialogData = { columns: [], collectionSort: [] };
+    const dialogData: GroupDialogData = { columns: [], collectionGroup: [] };
     dialogRef.data = dialogData;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [SortingComponent],
+                declarations: [P13GroupingDialogComponent],
                 providers: [{ provide: DialogRef, useValue: dialogRef }]
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SortingComponent);
+        fixture = TestBed.createComponent(P13GroupingDialogComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -28,4 +28,4 @@ import { DialogRef } from '@fundamental-ngx/core';
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-}); */
+});
