@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.36...v0.26.0-rc.37) (2021-01-05)
+
+
+### Features
+
+* (Core) introduce Grid List component ([#4199](https://github.com/SAP/fundamental-ngx/issues/4199)) ([7201251](https://github.com/SAP/fundamental-ngx/commit/7201251b9633eb42afffe679e5d341b501851e2b))
+
 ## [0.26.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.35...v0.26.0-rc.36) (2021-01-05)
 
 ## [0.26.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.34...v0.26.0-rc.35) (2021-01-04)
