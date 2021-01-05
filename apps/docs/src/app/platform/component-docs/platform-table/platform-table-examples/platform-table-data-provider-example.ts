@@ -24,6 +24,10 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [];
     totalItems = 0;
 
+    constructor(private dateTimeAdapter: DatetimeAdapter<FdDate>) {
+        super();
+    }
+
     fetch(tableState: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
 
@@ -87,8 +91,10 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
                             return this.filterByStatusColor(item, rule);
                         case 'verified':
                             return filterByBoolean(item, rule as CollectionBooleanFilter);
+                        case 'date':
+                            return filterByDate(item, rule as CollectionBooleanFilter, this.dateTimeAdapter);
                         default:
-                            return filterByString(item, rule as CollectionStringFilter);
+                            return false;
                     }
                 });
             });
@@ -197,7 +203,7 @@ export const filterByString = (item: ExampleItem, filter: CollectionStringFilter
             result = itemValue <= filterValue;
             break;
         case 'between':
-            result = itemValue > filterValue && itemValue < filterValue2;
+            result = itemValue >= filterValue && itemValue <= filterValue2;
             break;
         case 'beginsWith':
             result = itemValue.startsWith(filterValue);
@@ -233,7 +239,7 @@ export const filterByNumber = (item: ExampleItem, filter: CollectionNumberFilter
             result = itemValue <= filterValue;
             break;
         case 'between':
-            result = itemValue > filterValue && itemValue < filterValue2;
+            result = itemValue >= filterValue && itemValue <= filterValue2;
             break;
         case 'equalTo':
         default:

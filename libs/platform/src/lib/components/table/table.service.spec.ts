@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { Observer } from 'rxjs';
-import { SortDirection } from '@fundamental-ngx/platform';
 
 import { TableService } from './table.service';
 import { DEFAULT_TABLE_STATE } from './constants';
 import { CollectionStringFilter, TableState } from './interfaces';
 import { GroupChange, SortChange, FilterChange, FreezeChange, SearchChange } from './models';
-import { CollectionStringFilterStrategy } from './enums';
+import { CollectionStringFilterStrategy, SortDirection } from './enums';
 import { SearchInput } from './interfaces/search-field.interface';
 
 describe('TableServiceService', () => {

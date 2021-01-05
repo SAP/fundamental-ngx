@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/core';
+import { DatetimeAdapter, RtlService } from '@fundamental-ngx/core';
 import {
     TableColumnFreezeEvent,
     TableDataSource,
@@ -31,14 +31,12 @@ import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-exam
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
 import * as platformTableInitialStateSrc from '!raw-loader!./platform-table-examples/platform-table-initial-state-example.component.html';
-import * as platformTableP13Src from '!raw-loader!./platform-table-examples/platform-table-p13-example.component.html';
-import * as platformTableP13TsSrc from '!raw-loader!./platform-table-examples/platform-table-p13-example.component.ts';
 import * as platformTableP13ColumnSrc from '!raw-loader!./platform-table-examples/platform-table-p13-columns-example.component.html';
 import * as platformTableP13SortSrc from '!raw-loader!./platform-table-examples/platform-table-p13-sort-example.component.html';
 import * as platformTableP13FilterSrc from '!raw-loader!./platform-table-examples/platform-table-p13-filter-example.component.html';
 import * as platformTableP13GroupSrc from '!raw-loader!./platform-table-examples/platform-table-p13-group-example.component.html';
 
-import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
+import { ExampleItem, TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import * as platformTableDataProviderTs from '!raw-loader!./platform-table-examples/platform-table-data-provider-example';
 import * as platformTableDataItemsTs from '!raw-loader!./platform-table-examples/platform-table-data-items-example';
 
@@ -345,31 +343,6 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    p13TableFiles: ExampleFile[] = [
-        {
-            language: 'html',
-            code: platformTableP13Src,
-            name: 'platform-table-example.component.html'
-        },
-        {
-            language: 'typescript',
-            code: platformTableP13TsSrc,
-            fileName: 'platform-table-freezable-example',
-            component: 'PlatformTableP13ExampleComponent',
-            name: 'platform-table-example.component.ts'
-        },
-        {
-            language: 'typescript',
-            code: platformTableDataProviderTs,
-            name: 'platform-table-data-provider-example.ts'
-        },
-        {
-            language: 'typescript',
-            code: platformTableDataItemsTs,
-            name: 'platform-table-data-items-example.ts'
-        }
-    ];
-
     p13ColumnsFiles: ExampleFile[] = [
         {
             language: 'html',
@@ -402,10 +375,15 @@ export class PlatformTableDocsComponent {
         }
     ];
 
-    dataSource = new TableDataSource(new TableDataProviderExample());
+    dataSource: TableDataSource<ExampleItem>;
 
-    constructor(private schemaFactory: SchemaFactoryService, private _cd: ChangeDetectorRef) {
+    constructor(
+        private schemaFactory: SchemaFactoryService,
+        private _cd: ChangeDetectorRef,
+        datetimeAdapter: DatetimeAdapter<any>
+    ) {
         this.schema = this.schemaFactory.getComponent('fdp-table');
+        this.dataSource = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
 
     onSchemaValues(data): void {
