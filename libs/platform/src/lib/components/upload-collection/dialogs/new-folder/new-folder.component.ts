@@ -1,10 +1,17 @@
 import { Component, Inject, ViewChild, AfterViewInit } from '@angular/core';
 
-import { DIALOG_REF, DialogRef, FormControlComponent } from '@fundamental-ngx/core';
+import { DialogRef, FormControlComponent } from '@fundamental-ngx/core';
 import { UploadCollectionFolder } from '../../models/upload-collection.models';
 
 @Component({
-    templateUrl: './new-folder.component.html'
+    templateUrl: './new-folder.component.html',
+    styles: [
+        `
+            .fd-title--bold {
+                font-weight: bold;
+            }
+        `
+    ]
 })
 export class NewFolderComponent implements AfterViewInit {
     /** 
@@ -20,7 +27,7 @@ export class NewFolderComponent implements AfterViewInit {
     @ViewChild(FormControlComponent)
     private readonly formControl: FormControlComponent;
 
-    constructor(@Inject(DIALOG_REF) public readonly dialogRef: DialogRef) {}
+    constructor(public readonly dialogRef: DialogRef) {}
 
     ngAfterViewInit(): void {
         const el = this.formControl.elementRef().nativeElement as HTMLInputElement;

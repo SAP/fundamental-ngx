@@ -5,7 +5,7 @@ import { DialogDecisiveButtonDirective } from '../directives/dialog-decisive-but
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
 import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
-import { DIALOG_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { DialogConfig } from '../utils/dialog-config.class';
 
 describe('DefaultDialogComponent', () => {
     let component: DialogDefaultComponent;
@@ -21,7 +21,7 @@ describe('DefaultDialogComponent', () => {
                 DialogDecisiveButtonDirective,
                 DialogHeaderComponent
             ],
-            providers: [{ provide: DIALOG_CONFIG, useClass: DialogConfig }]
+            providers: [DialogConfig]
         }).compileComponents();
     });
 

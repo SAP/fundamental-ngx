@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Inject, Optional } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DIALOG_REF, DialogRef } from '@fundamental-ngx/core';
+import { DialogRef } from '@fundamental-ngx/core';
 
 import { SortDirection } from '../../../enums';
 import { Resettable, RESETTABLE_TOKEN } from '../reset-button/reset-button.component';
@@ -56,7 +56,7 @@ export class SortingComponent implements Resettable {
     /** @hidden */
     readonly NOT_SORTED_OPTION_VALUE = NOT_SORTED_OPTION_VALUE;
 
-    constructor(@Inject(DIALOG_REF) public dialogRef: DialogRef) {
+    constructor(public dialogRef: DialogRef) {
         const data: SortDialogData = this.dialogRef.data;
 
         this.initialDirection = data.direction || this.initialDirection;

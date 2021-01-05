@@ -3,7 +3,12 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1 *ngIf="!_currentFolder" fd-title i18n="@@platformUploadCollection.MoveTo.Title">
+                    <h1
+                        class="fd-title--bold"
+                        *ngIf="!_currentFolder"
+                        fd-title
+                        i18n="@@platformUploadCollection.MoveTo.Title"
+                    >
                         Move to
                     </h1>
                     <ng-container *ngIf="_currentFolder">
@@ -46,6 +51,7 @@
                 [selected]="selectedFolder?.documentId === folder.documentId"
             >
                 <a fd-list-link (click)="_hasFolders(folder.files) ? _openFolder(folder) : _selectFolder(folder)">
+                    <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
                     <span fd-list-title [innerText]="folder.name"></span>
                     <i *ngIf="_hasFolders(folder.files)" fd-list-icon glyph="slim-arrow-right"></i>
                 </a>

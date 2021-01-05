@@ -119,7 +119,7 @@ describe('SwitchComponent', () => {
     });
 
     it('should trigger an event after click', async () => {
-        const switchLabel = fixture.debugElement.query(By.css('#switch-0 .fd-switch__label'));
+        const switchLabel = fixture.debugElement.query(By.css('#switch-0 .fd-switch'));
 
         expect(component.switch0CurrentValue).toBeNull();
 
@@ -139,7 +139,7 @@ describe('SwitchComponent', () => {
         expect(switches[0].switchCurrentValue).toBeFalse();
         expect(component.customForm.get('switch0').value).toBeFalse();
 
-        const switchLabel = fixture.debugElement.query(By.css('#switch-0 .fd-switch__label'));
+        const switchLabel = fixture.debugElement.query(By.css('#switch-0 .fd-switch'));
 
         switchLabel.nativeElement.click();
         fixture.detectChanges();
@@ -174,7 +174,7 @@ describe('SwitchComponent', () => {
         fixture.detectChanges();
 
         const switches = component.fdpSwitch.toArray();
-        const switchLabel = fixture.debugElement.query(By.css('#switch-3 .fd-switch__label'));
+        const switchLabel = fixture.debugElement.query(By.css('#switch-3 .fd-switch'));
 
         fixture.detectChanges();
 

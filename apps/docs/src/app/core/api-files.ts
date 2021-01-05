@@ -157,7 +157,7 @@ export const API_FILES = {
         'MessageBoxHeaderComponent',
         'MessageBoxFooterComponent',
         'MessageBoxDefaultComponent',
-        'MessageBoxCloseIconComponent',
+        'MessageBoxSemanticIconComponent',
         'MessageBoxContainerComponent',
         'MessageBoxFooterButtonComponent',
     ],
@@ -237,7 +237,6 @@ export const API_FILES = {
         'TabListComponent',
         'TabPanelComponent',
         'TabTitleDirective',
-        'TabLoadTitleDirective',
         'TabNavComponent',
         'TabLinkDirective',
         'TabItemDirective',
@@ -249,7 +248,9 @@ export const API_FILES = {
         'TabHeaderDirective',
         'TabCounterHeaderDirective',
         'TabProcessIconDirective',
-        'TabSeparator'
+        'TabItemExpandComponent',
+        'TabSeparator',
+        'TabInfo',
     ],
     tile: [
         'TileComponent',

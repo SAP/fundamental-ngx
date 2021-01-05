@@ -349,7 +349,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      */
     private updateFormFieldProperties(formField: FormField): void {
         formField.hintPlacement = this._hintPlacement;
-        formField.i18Strings = this.i18Strings;
+        formField.i18Strings = formField.i18Strings ? formField.i18Strings : this.i18Strings;
         formField.editable = this.editable;
         formField.noLabelLayout = this.noLabelLayout;
         formField.labelLayout = this.labelLayout;

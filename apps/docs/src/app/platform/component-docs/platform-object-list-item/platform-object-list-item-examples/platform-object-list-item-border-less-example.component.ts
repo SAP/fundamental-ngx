@@ -53,8 +53,18 @@ export class PlatformObjectListItemBorderLessExampleComponent {
             decimal: 2
         },
         {
-            title: 'Gladiator MX',
-            introductionText: 'Gladiator product with discount',
+            title: 'Apple Macintosh Performa/Power Macintosh 5200' +
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+            'Cras sapien est, efficitur eu urna quis, sagittis posuere massa.' +
+            ' Integer euismod purus ligula, vitae efficitur massa volutpat sit amet.' +
+            '  Cras tempor placerat elit, a commodo odio vehicula at.' +
+            'Macintosh Performa Power Macintosh 24/5200',
+            introductionText: 'Product with' +
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+            'Cras sapien est, efficitur eu urna quis, sagittis posuere massa.' +
+            ' Integer euismod purus ligula, vitae efficitur massa volutpat sit amet.' +
+            '  Cras tempor placerat elit, a commodo odio vehicula at.' +
+            'Macintosh Performa Power Macintosh 24/5200',
             currency: 'Euro',
             amount: 27.50,
             image: 'http://picsum.photos/id/1018/400',

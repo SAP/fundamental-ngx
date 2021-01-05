@@ -7,7 +7,6 @@ import { TextData } from './component-based-message-box-example.component';
         <fd-message-box>
             <fd-message-box-header>
                 <h1 fd-title>{{ messageBoxRef.data.title }}</h1>
-                <fd-message-box-close-icon (click)="messageBoxRef.dismiss('Close button')"></fd-message-box-close-icon>
             </fd-message-box-header>
             <fd-message-box-body>
                 {{ messageBoxRef.data.text }}

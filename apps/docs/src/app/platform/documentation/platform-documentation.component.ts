@@ -20,6 +20,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/button', name: 'Button' },
             { url: 'platform/checkbox', name: 'Checkbox' },
             { url: 'platform/checkbox-group', name: 'Checkbox Group' },
+            { url: 'platform/date-picker', name: 'Date Picker' },
             { url: 'platform/datetime-picker', name: 'Datetime Picker' },
             { url: 'platform/file-uploader', name: 'File Uploader' },
             { url: 'platform/info-label', name: 'Info Label' },
@@ -40,6 +41,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/table', name: 'Table' },
             { url: 'platform/textarea', name: 'Textarea' },
             { url: 'platform/thumbnail', name: 'Thumbnail' },
+            { url: 'platform/time-picker', name: 'Time Picker' },
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
             { url: 'platform/combobox', name: 'Combobox' },
@@ -53,7 +55,8 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                     { url: 'platform/display-list-item', name: 'Display List Item' },
                     { url: 'platform/object-list-item', name: 'Object List Item' }
                 ]
-            }
+            },
+            { url: 'platform/approval-flow', name: 'Approval Flow' }
         ];
 
         this.layouts = [{ url: 'platform/dynamic-page', name: 'Dynamic Page' }];

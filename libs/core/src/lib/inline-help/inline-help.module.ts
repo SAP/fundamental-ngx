@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InlineHelpComponent } from './inline-help.component';
-import { PopoverModule } from '../popover/public_api';
+import { InlineHelpDirective } from './inline-help.directive';
+import { PopoverModule } from '../popover/popover.module';
 
-/**
- * @deprecated
- */
 @NgModule({
     imports: [CommonModule, PopoverModule],
-    exports: [InlineHelpComponent],
-    declarations: [InlineHelpComponent]
+    exports: [InlineHelpDirective],
+    declarations: [InlineHelpDirective]
 })
 export class InlineHelpModule {}

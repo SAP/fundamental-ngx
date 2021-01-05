@@ -41,6 +41,12 @@ export const ROUTES: Routes = [
                     ).then((m) => m.PlatformCheckboxGroupDocsModule)
             },
             {
+                path: 'date-picker',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-date-picker/platform-date-picker-docs.module').then(
+                        (m) => m.PlatformDatePickerDocsModule)
+            },
+            {
                 path: 'datetime-picker',
                 loadChildren: () =>
                     import(
@@ -205,6 +211,12 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'time-picker',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-time-picker/platform-time-picker-docs.module').then((m) =>
+                        m.PlatformTimePickerDocsModule)
+            },
+            {
                 path: 'action-list-item',
                 loadChildren: () =>
                     import('./component-docs/platform-action-list-item/platform-action-list-item-docs.module').then(
@@ -252,6 +264,12 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-upload-collection/platform-upload-collection-docs.module').then(
                         (m) => m.PlatformUploadCollectionDocsModule
                     )
+            },
+            {
+                path: 'approval-flow',
+                loadChildren: () =>
+                    import('./component-docs/platform-approval-flow/platform-approval-flow-docs.module').then((m) =>
+                        m.PlatformApprovalFlowDocsModule)
             }
         ]
     }

@@ -1,9 +1,18 @@
-import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import { Placement, PopoverFillMode } from '../popover-position/popover-position';
 
 @Directive()
 export class BasePopoverClass {
+
+    /** Whether the popover is disabled. */
+    @Input()
+    @HostBinding('class.fd-popover-custom--disabled')
+    disabled = false;
+
+    /** Maximum width of popover body in px, prevents from overextending body by `fillControlMode`  */
+    @Input()
+    maxWidth: number = null;
 
     /** Whether the popover should have an arrow. */
     @Input()
@@ -11,11 +20,11 @@ export class BasePopoverClass {
 
     /** Whether the popover container needs an extra class for styling. */
     @Input()
-    additionalBodyClass: string;
+    additionalBodyClass: string = null;
 
     /** Whether the popover container needs an extra class for styling. */
     @Input()
-    additionalTriggerClass: string;
+    additionalTriggerClass: string = null;
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
@@ -28,7 +37,7 @@ export class BasePopoverClass {
      * right, right-start, right-end, left, left-start, left-end.
      */
     @Input()
-    placement: Placement;
+    placement: Placement = null;
 
     /** The trigger events that will open/close the popover.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
@@ -62,7 +71,7 @@ export class BasePopoverClass {
      * - RepositionScrollStrategy ( default )
      */
     @Input()
-    scrollStrategy: ScrollStrategy;
+    scrollStrategy: ScrollStrategy = null;
 
     /**
      * List of positions options for overlay defined by angular CDK.
@@ -71,7 +80,7 @@ export class BasePopoverClass {
      * More information can be found in https://material.angular.io/cdk/overlay/api
      */
     @Input()
-    cdkPositions: ConnectedPosition[];
+    cdkPositions: ConnectedPosition[] = null;
 
     /**
      * Preset options for the popover body width.
@@ -80,11 +89,15 @@ export class BasePopoverClass {
      * * Leave blank for no effect.
      */
     @Input()
-    fillControlMode: PopoverFillMode;
+    fillControlMode: PopoverFillMode = null;
 
     /** The element to which  the overlay is attached. By default it is body */
     @Input()
-    appendTo: ElementRef
+    appendTo: ElementRef = null;
+
+    /** Whether position shouldn't change, when popover approach the corner of page */
+    @Input()
+    fixedPosition = false;
 
     /** @deprecated */
     @Input()

@@ -41,9 +41,13 @@ export class SwitchComponent implements ControlValueAccessor {
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
 
-    /** If the switch should have text in it or not. */
+    /** Optional text for the active state of the switch. */
     @Input()
-    optionalText = false;
+    activeText = '';
+
+    /** Optional text for the inactive state of the switch. */
+    @Input()
+    inactiveText = '';
 
     /** Whether the switch is disabled. */
     @Input()

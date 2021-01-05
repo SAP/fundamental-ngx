@@ -34,7 +34,7 @@ import {
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
 
-import { FormFieldControl, Status } from '../form-control';
+import { FormFieldControl } from '../form-control';
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
 
@@ -57,8 +57,6 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
 export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Input()
     type: InputType = 'text';
-
-    state: Status = 'default';
 
     /** @hidden */
     @ViewChild('inputElemRef')

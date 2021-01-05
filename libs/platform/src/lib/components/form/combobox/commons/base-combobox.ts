@@ -6,7 +6,6 @@ import {
     ElementRef,
     EventEmitter,
     Host,
-    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -34,13 +33,13 @@ import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs
 import { takeUntil } from 'rxjs/operators';
 
 import {
-    DIALOG_CONFIG,
     DialogConfig,
     FocusEscapeDirection,
     KeyUtil,
     ListComponent,
     MobileModeConfig,
-    TemplateDirective
+    TemplateDirective,
+    FormStates
 } from '@fundamental-ngx/core';
 import {
     ArrayComboBoxDataSource,
@@ -74,6 +73,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    state: FormStates;
 
     /** Datasource for suggestion list */
     @Input()
@@ -285,7 +291,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         protected readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
-        @Optional() @Inject(DIALOG_CONFIG) readonly dialogConfig: DialogConfig,
+        @Optional() readonly dialogConfig: DialogConfig,
         protected comboboxConfig: ComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
