@@ -3,6 +3,9 @@
     fd-form-control
     [compact]="isCompact"
     [attr.id]="id"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-labelledby]="ariaLabelledBy"
+    [attr.aria-describedby]="id+'-counter'"
     [attr.placeholder]="placeholder"
     [disabled]="disabled"
     [readonly]="readonly"
@@ -18,7 +21,7 @@
 ></textarea>
 
 <!-- ICU recommends full text in format -->
-<div class="fd-textarea-counter" *ngIf="showExceededText" aria-live="polite" aria-atomic="true">
+<div class="fd-textarea-counter" *ngIf="showExceededText" aria-live="polite" aria-atomic="true" [attr.id]="id+'-counter'">
     <span i18n="textarea counter|The counter message for this textarea element@@platformI18nTextareaCounterMessage">
         {{ exceededCharCount | number: '1.0-0' }} {exceededCharCount, plural, =1{ character {counterExcessOrRemaining,
         select, excess {over the limit} remaining {remaining}} } other { characters {counterExcessOrRemaining, select,
