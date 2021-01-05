@@ -84,6 +84,7 @@ export class FiltersComponent implements Resettable, AfterViewInit {
     /** Current step component to render */
     activeFilterStepView: FiltersViewStep;
 
+    /** @hidden */
     constructor(public dialogRef: DialogRef, private _cd: ChangeDetectorRef) {
         const dialogData: FiltersDialogData = this.dialogRef.data;
         this.initialFilterBy = [...dialogData.filterBy];

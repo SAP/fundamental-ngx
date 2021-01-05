@@ -58,6 +58,7 @@ export class P13GroupingDialogComponent implements Resettable {
     /** Group rules to render */
     rules: GroupRule[] = [];
 
+    /** @hidden */
     constructor(private dialogRef: DialogRef) {
         const { columns, collectionGroup }: GroupDialogData = this.dialogRef.data;
 

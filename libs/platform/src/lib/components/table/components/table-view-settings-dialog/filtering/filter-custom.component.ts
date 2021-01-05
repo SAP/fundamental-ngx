@@ -7,7 +7,7 @@ import { TableViewSettingsFilterComponent } from '../../table-view-settings-dial
  * Custom Select filter type.
  *
  * Used to render user's custom filter template
- * 
+ *
  */
 
 @Component({
@@ -17,7 +17,7 @@ import { TableViewSettingsFilterComponent } from '../../table-view-settings-dial
     changeDetection: ChangeDetectionStrategy.Default
 })
 export class FilterCustomComponent implements DoCheck {
-     /** ViewSettingsFilter options the filter is created from */
+    /** ViewSettingsFilter options the filter is created from */
     @Input()
     filter: TableViewSettingsFilterComponent;
 
@@ -38,10 +38,16 @@ export class FilterCustomComponent implements DoCheck {
     @Output()
     valueChange: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-    /** Currently selected value */
+    /**
+     * @hidden
+     * Currently selected value
+     */
     _value: object;
 
-    /** Last emitted value */
+    /**
+     * @hidden
+     * Last emitted value
+     */
     _valueLastEmitted: object;
 
     /** @hidden */

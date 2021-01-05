@@ -54,9 +54,10 @@ export class TableViewSettingsFilterComponent {
     @Input()
     values: TableFilterSelectOption[];
 
+    /** Custom filter template directive reference */
     customFilterTemplate: TemplateRef<any>;
 
-    /** Custom filter template directive reference */
+    /** @hidden */
     @ContentChild(FdpViewSettingsFilterCustomDef)
     set _filterCustomDef(filterCustomDef: FdpViewSettingsFilterCustomDef) {
         this.customFilterTemplate = filterCustomDef?.templateRef;

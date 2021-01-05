@@ -61,6 +61,7 @@ export class P13SortingDialogComponent implements Resettable {
     /** Sort rules to render */
     rules: SortRule[] = [];
 
+    /** @hidden */
     constructor(private dialogRef: DialogRef) {
         const { columns, collectionSort }: SortDialogData = this.dialogRef.data;
 

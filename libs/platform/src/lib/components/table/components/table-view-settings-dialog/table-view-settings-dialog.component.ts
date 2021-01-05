@@ -77,6 +77,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     /** @hidden */
     _table: Table;
 
+    /** @hidden */
     constructor(private readonly _dialogService: DialogService) {}
 
     /** @hidden */

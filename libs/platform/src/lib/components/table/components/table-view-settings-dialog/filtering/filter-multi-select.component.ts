@@ -36,7 +36,10 @@ export class FilterMultiSelectComponent {
     @Output()
     valueChange: EventEmitter<any[]> = new EventEmitter();
 
-    /** Currently selected values */
+    /**
+     * @hidden
+     * Currently selected values
+     */
     _value: any[];
 
     /** @hidden */

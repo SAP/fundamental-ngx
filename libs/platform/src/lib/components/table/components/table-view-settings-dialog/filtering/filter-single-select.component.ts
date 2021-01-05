@@ -31,7 +31,10 @@ export class FilterSingleSelectComponent {
 
     readonly NOT_FILTERED_OPTION_VALUE = NOT_FILTERED_OPTION_VALUE;
 
-    /** Currently selected value */
+    /**
+     * @hidden
+     * Currently selected value
+     */
     _value: any;
 
     /** @hidden */

@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Input,
-    OnDestroy,
-    Output,
-    ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
@@ -36,7 +27,7 @@ export class FilterRuleComponent implements OnDestroy {
         if (!ngForm) {
             return;
         }
-        this.subscriptions.add(
+        this._subscriptions.add(
             ngForm.statusChanges
                 .pipe(
                     // Skip first that triggers on initial phase
@@ -50,12 +41,15 @@ export class FilterRuleComponent implements OnDestroy {
         );
     }
 
-    private subscriptions = new Subscription();
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
+    /** @hidden */
     ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
+        this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
     _onModelChange(): void {
         this.ruleChange.emit();
     }

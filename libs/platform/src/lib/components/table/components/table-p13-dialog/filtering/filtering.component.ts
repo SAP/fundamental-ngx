@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core';
@@ -29,22 +29,43 @@ export class P13FilteringDialogComponent implements Resettable {
     /** Initial filterBy collection */
     readonly initialCollectionFilter: CollectionFilter[];
 
-    /** Include Rules */
+    /**
+     * @hidden
+     * Include Rules
+     */
     _includeRules: FilterRule[] = [];
 
-    /** Exclude Rules */
+    /**
+     * @hidden
+     * Exclude Rules
+     */
     _excludeRules: FilterRule[] = [];
 
-    /** Count of valid included rules */
+    /**
+     * @hidden
+     * Count of valid included rules
+     */
     _validIncludeRulesCount = 0;
-    /** Count of valid excluded rules */
+
+    /**
+     * @hidden
+     * Count of valid excluded rules
+     */
     _validExcludeRulesCount = 0;
 
-    /** Panel opened/closed flag  */
+    /**
+     * @hidden
+     * Panel opened/closed flag
+     */
     _includePanelExpanded = true;
-    /** Panel opened/closed flag  */
+
+    /**
+     * @hidden
+     * Panel opened/closed flag
+     */
     _excludePanelExpanded = false;
 
+    /** @hidden */
     constructor(private dialogRef: DialogRef) {
         const { columns, collectionFilter }: FilterDialogData = this.dialogRef.data;
 

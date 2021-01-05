@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core';
@@ -57,6 +57,7 @@ export class GroupingComponent implements Resettable {
     /** Not Grouped Option model value */
     readonly NOT_GROUPED_OPTION_VALUE = NOT_GROUPED_OPTION_VALUE;
 
+    /** @hidden */
     constructor(public dialogRef: DialogRef) {
         const data: GroupDialogData = this.dialogRef.data;
 

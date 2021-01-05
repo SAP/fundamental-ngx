@@ -92,8 +92,10 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         return !this._isShownAllItems || this._filteredColumns.length === 0;
     }
 
-    private subscriptions = new Subscription();
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
         const { availableColumns, visibleColumns: visibleColumnKeys }: ColumnsDialogData = this.dialogRef.data;
 
@@ -102,14 +104,16 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         this.availableColumns = availableColumns?.map(({ label, key }) => ({ label: label, key: key })) || [];
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._initiateColumns();
 
         this._listenToFilterOptions();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
+        this._subscriptions.unsubscribe();
     }
 
     /** Reset to the initial state */
@@ -186,6 +190,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
     }
 
+    /** @hidden */
     _toggleSelectAll(selectAll: boolean): void {
         this._selectableColumns.forEach((column) => (column.selected = selectAll));
         this._onModelChange();
@@ -230,8 +235,9 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         this._showAllItemsSubject.next(INITIAL_SHOW_ALL_ITEMS);
     }
 
+    /** @hidden */
     private _listenToFilterOptions(): void {
-        this.subscriptions.add(
+        this._subscriptions.add(
             combineLatest([this._showAllItemsSubject, this._searchQuerySubject])
                 .pipe(debounceTime(20))
                 .subscribe(([showAll, searchQuery]) => {
@@ -278,6 +284,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /**
+     * @hidden
      * Move column in selectable list.
      */
     private _moveColumnInSelectableList(itemToMove: SelectableColumn, targetItem: SelectableColumn): void {
@@ -286,6 +293,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /**
+     * @hidden
      * Move element in the list
      * @return moved item and replaced item.
      */
