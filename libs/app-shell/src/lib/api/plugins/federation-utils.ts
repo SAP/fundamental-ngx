@@ -52,10 +52,8 @@ function loadRemoteEntry(remoteEntry: string): Promise<void> {
 async function lookupExposedModule<T>(remoteName: string, exposedModule: string): Promise<T> {
     // Initializes the share scope. This fills it with known provided modules from this build and all remotes
     await __webpack_init_sharing__('default');
-    const container = window[remoteName] as Container; // or get the container somewhere else
-    // Initialize the container, it may provide shared modules
 
-    await container.init(__webpack_share_scopes__.default);
+    const container = window[remoteName] as Container; // or get the container somewhere else
 
     const rejectWithError = () => {
         return Promise.reject(
@@ -64,6 +62,16 @@ async function lookupExposedModule<T>(remoteName: string, exposedModule: string)
             )
         );
     }
+
+    // Check if a container is an object
+    const isContainerDefined = Object.prototype.toString.call(container) === '[object Object]';
+
+    if (!isContainerDefined) {
+        return rejectWithError();
+    }
+
+    // Initialize the container, it may provide shared modules
+    await container.init(__webpack_share_scopes__.default);
 
     let factory;
 
