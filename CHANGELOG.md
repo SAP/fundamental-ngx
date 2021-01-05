@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.36...v0.26.0-rc.37) (2021-01-05)
+
+
+### Features
+
+* (Core) introduce Grid List component ([#4199](https://github.com/SAP/fundamental-ngx/issues/4199)) ([7201251](https://github.com/SAP/fundamental-ngx/commit/7201251b9633eb42afffe679e5d341b501851e2b))
+
+## [0.26.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.35...v0.26.0-rc.36) (2021-01-05)
+
+## [0.26.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.34...v0.26.0-rc.35) (2021-01-04)
+
+## [0.26.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.33...v0.26.0-rc.34) (2021-01-04)
+
+
+### Features
+
+* (platform) added time picker component with examples ([#4212](https://github.com/SAP/fundamental-ngx/issues/4212)) ([3ef1056](https://github.com/SAP/fundamental-ngx/commit/3ef1056296edae1cfb7c1339a43e080bb96a07be))
+
+## [0.26.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.32...v0.26.0-rc.33) (2021-01-04)
+
 ## [0.26.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.31...v0.26.0-rc.32) (2021-01-04)
 
 ## [0.26.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.30...v0.26.0-rc.31) (2021-01-04)

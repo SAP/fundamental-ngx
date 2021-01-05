@@ -1,0 +1,41 @@
+:host {
+    position: relative;
+
+    &.fd-dnd-on-drag {
+        background-color: transparent;
+    }
+}
+
+.fd-grid-list__item {
+    &::ng-deep {
+        .drop-area__line--vertical {
+            height: 100%;
+
+            &.before {
+                left: -0.55rem;
+            }
+
+            &.after {
+                right: -0.55rem;
+            }
+        }
+    }
+
+    .fd-toolbar {
+        &--actions {
+            margin-left: auto !important;
+
+            > * {
+                margin-left: 0.5rem;
+            }
+        }
+
+        .fd-grid-list__item-input,
+        &--actions,
+        &--extra-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+    }
+}
