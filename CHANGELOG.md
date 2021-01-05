@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.37...v0.26.0-rc.38) (2021-01-05)
+
+
+### Bug Fixes
+
+* (Platform) add aria tags to textarea to read counter messages ([#4220](https://github.com/SAP/fundamental-ngx/issues/4220)) ([6f16667](https://github.com/SAP/fundamental-ngx/commit/6f16667c979c5b4fb06f41cdafbb0e8827257270))
+
 ## [0.26.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.36...v0.26.0-rc.37) (2021-01-05)
 
 
