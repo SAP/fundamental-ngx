@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.38...v0.26.0-rc.39) (2021-01-05)
+
+
+### Bug Fixes
+
+* (core|platform) change image service ([#4215](https://github.com/SAP/fundamental-ngx/issues/4215)) ([698cf29](https://github.com/SAP/fundamental-ngx/commit/698cf2908192e9144bf73cd7d57faed3eba30583))
+
 ## [0.26.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.37...v0.26.0-rc.38) (2021-01-05)
 
 
