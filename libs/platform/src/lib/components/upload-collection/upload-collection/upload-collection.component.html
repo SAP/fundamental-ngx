@@ -152,7 +152,7 @@
                 noHorizontalBorders="true"
                 (rowSelectionChange)="_onRowSelectionChange($event)"
             >
-                <fdp-column label="Name">
+                <fdp-column name="name" label="Name">
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__vertical-align-center">
                             <fd-icon
@@ -192,26 +192,26 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="Uploaded by">
+                <fdp-column name="uploadedBy" label="Uploaded by">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.uploadedBy.name"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="Uploaded on">
+                <fdp-column name="uploadedOn" label="Uploaded on">
                     <fdp-table-cell
                         *fdpCellDef="let item"
                         [innerText]="item.uploadedOn | date: 'shortDate'"
                     ></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="File size">
+                <fdp-column name="size" label="File size">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.fileSize | convertBytes"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="Version">
+                <fdp-column name="version" label="Version">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.version || ''"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="Status">
+                <fdp-column name="status" label="Status">
                     <fdp-table-cell *fdpCellDef="let item">
                         <fd-busy-indicator
                             *ngIf="item.status === _uploadCollectionItemStatus.LOADING"
@@ -237,7 +237,7 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column label="Action" *ngIf="!readonly">
+                <fdp-column name="action" label="Action" *ngIf="!readonly">
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__actions">
                             <div class="fdp-upload-collection__actions--status">
