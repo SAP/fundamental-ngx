@@ -29,6 +29,12 @@ export class PlatformRadioGroupListItemsExampleComponent {
         radiolo4: 'samsung'
     };
 
+    form5 = new FormGroup({
+        example2: new FormControl('')
+    });
+
+    form6 = new FormGroup({});
+
     invoiceItems = [
         new Item('1', 'samsung', 'Samsung', 1, 12000),
         new Item('2', 'xiomi', 'Xiomi', 1, 10500),
@@ -58,10 +64,43 @@ export class PlatformRadioGroupListItemsExampleComponent {
         }
     ];
 
+    items1 = [
+        {
+            label: 'Education',
+            value: 'education'
+        }
+    ];
+
+    items2 = [
+        {
+            label: 'Engineering',
+            value: 'engineering'
+        }
+    ];
+
+    items3 = [
+        {
+            label: 'Work',
+            value: 'work'
+        }
+    ];
+
     onSubmit(form: NgForm): void {
         if (this.form1.controls.radiolo1.status === 'INVALID' && form.submitted) {
             this.form1.controls.radiolo1.markAsTouched();
         }
+    }
+
+    onResetForm1(form: NgForm): void {
+        this.form1.reset();
+    }
+
+    onResetForm5(form: NgForm): void {
+        this.form5.reset();
+    }
+
+    onResetForm6(form: NgForm): void {
+        this.form6.reset();
     }
 }
 

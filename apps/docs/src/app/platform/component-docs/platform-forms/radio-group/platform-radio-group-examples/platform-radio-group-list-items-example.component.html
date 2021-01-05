@@ -9,15 +9,97 @@
         </fdp-form-field>
         <ng-template #i18n let-errors>
             <ng-container *ngIf="errors.required">
-                <span>Value is required.</span>
+                <span>Selection is mandatory</span>
             </ng-container>
         </ng-template>
     </fdp-form-group>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
+    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
+        (click)="onResetForm1(listform)"></fdp-button>
 </form>
 <p style="margin-left: 2rem;">Selected value: {{ form1.controls.example1?.value }}</p>
 <br />
 
+<div>Vertical radio group</div>
+<form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
+    <fdp-form-group multiLayout="true" [formGroup]="form5">
+
+        <fdp-form-field id="radio-lo2" zone="zLeft" rank="2" [required]="true">
+            <fdp-radio-group name="vertical-radio-group" [list]="items" [isInline]="false" formControlName="example2">
+            </fdp-radio-group>
+        </fdp-form-field>
+
+        <ng-template #i18n let-errors>
+            <ng-container *ngIf="errors.required">
+                <span>Selection is mandatory.</span>
+            </ng-container>
+        </ng-template>
+    </fdp-form-group>
+    <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
+    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
+        (click)="onResetForm5(listform)"></fdp-button>
+</form>
+<br />
+<br />
+
+<h3>Vertical radios with different contexts</h3>
+<form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
+    <div>Qualification form</div>
+    <fdp-form-group #fg hintPlacement="left" [multiLayout]="false" [formGroup]="form6">
+        <fdp-form-field #ffr1 id="education" [required]="true" hintPlacement="left" [rank]="1" zone="zLeft"
+            [i18Strings]="graduation">
+            <fdp-radio-group name="education" [list]="items1" title="minimum education level"
+                [formControl]="ffr1.formControl">Graduated</fdp-radio-group>
+        </fdp-form-field>
+
+        <fdp-form-field #ffr2 id="engineering" [required]="true" hintPlacement="left" [rank]="2" zone="zLeft"
+            [i18Strings]="engineering">
+            <fdp-radio-group name="engineering" [list]="items2" title="have engineering degree"
+                [formControl]="ffr2.formControl">
+                Engineering completed
+            </fdp-radio-group>
+        </fdp-form-field>
+
+        <fdp-form-field #ffr3 id="work" [required]="true" hintPlacement="left" [rank]="3" zone="zLefts"
+            [i18Strings]="work">
+            <fdp-radio-group name="work" [list]="items3" title="Work experience" [formControl]="ffr3.formControl">
+                5 year of work experience
+            </fdp-radio-group>
+        </fdp-form-field>
+
+        <ng-template #i18n let-errors>
+            <span *ngIf="errors.required">
+                Selection is mandatory
+            </span>
+            <span *ngIf="errors.invalid">
+                Selection is mandatory
+            </span>
+        </ng-template>
+
+        <ng-template #graduation let-errors>
+            <span *ngIf="errors.required">
+                Graduation is mandatory
+            </span>
+        </ng-template>
+
+        <ng-template #engineering let-errors>
+            <span *ngIf="errors.required">
+                Engineering is mandatory
+            </span>
+        </ng-template>
+
+        <ng-template #work let-errors>
+            <span *ngIf="errors.required">
+                Minimum 5 years of work experience required
+            </span>
+        </ng-template>
+    </fdp-form-group>
+    <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
+    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
+        (click)="onResetForm6(listform)"></fdp-button>
+</form>
+<br />
+<br />
 <p>Compact platform radio button created with given list of SelectItem objects.Using FormGroup and FormControl</p>
 <fdp-form-group multiLayout="true" [formGroup]="form2">
     <fdp-form-field id="radiolo2" zone="zLeft" rank="1">
@@ -49,7 +131,7 @@
 </fdp-form-group>
 <p style="margin-left: 2rem;">Preferred Brand: {{ form4.controls.radiolo4?.value }}</p>
 
-<hr/>
+<hr />
 <h3>Use With Template Driven Form</h3>
 
 <p>Platform radio buttons created with given list of SelectItem objects also pre-selection based on control value</p>

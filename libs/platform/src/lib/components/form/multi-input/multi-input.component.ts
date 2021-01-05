@@ -59,7 +59,6 @@ import { MULTIINPUT_COMPONENT } from './multi-input.interface';
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
-    private _state: Status;
 
     /** type Represent the type of input used for the multi Input */
     @Input()

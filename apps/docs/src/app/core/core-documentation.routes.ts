@@ -403,6 +403,10 @@ export const ROUTES: Routes = [
             {
                 path: 'wizard',
                 loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
+            },
+            {
+                path: 'grid-list',
+                loadChildren: () => import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
             }
         ]
     }
