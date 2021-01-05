@@ -33,13 +33,7 @@
             <div fd-popover-body-header>
                 <div fd-bar [barDesign]="'header'">
                     <div fd-bar-left>
-                        <fd-bar-element>
-                            <button
-                                fd-button
-                                [glyph]="'navigation-left-arrow'"
-                                [compact]="true"
-                            ></button>
-                        </fd-bar-element>
+                        <fd-button-bar glyph="navigation-left-arrow" fdType="standard"></fd-button-bar>
                         <fd-bar-element>Header</fd-bar-element>
                     </div>
                 </div>
@@ -79,12 +73,8 @@
             <div fd-popover-body-footer>
                 <div fd-bar [barDesign]="'footer'" [cozy]="true">
                     <div fd-bar-right>
-                        <fd-bar-element>
-                            <button fd-button label="Save" [fdType]="'emphasized'" [compact]="true"></button>
-                        </fd-bar-element>
-                        <fd-bar-element>
-                            <button fd-button label="Cancel" [fdType]="'transparent'" [compact]="true"></button>
-                        </fd-bar-element>
+                        <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
+                        <fd-button-bar label="Cancel"></fd-button-bar>
                     </div>
                 </div>
             </div>

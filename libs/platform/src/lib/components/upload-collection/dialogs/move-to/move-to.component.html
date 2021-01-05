@@ -60,13 +60,9 @@
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-dialog-footer-button>
-            <button
-                fd-button
+        <fd-button-bar
                 fdType="emphasized"
-                fd-dialog-decisive-button
-                compact="true"
-                (click)="_confirm()"
+                i18n="@@platformUploadCollection.MoveTo.Btn.Confirm"
                 type="submit"
                 [disabled]="
                     !(
@@ -74,22 +70,13 @@
                         (!selectedFolder && originalFolder?.documentId !== _currentFolder?.documentId)
                     )
                 "
-                i18n="@@platformUploadCollection.MoveTo.Btn.Confirm"
-            >
-                Move
-            </button>
-        </fd-dialog-footer-button>
-        <fd-dialog-footer-button>
-            <button
-                fd-button
-                fdType="transparent"
-                fd-dialog-decisive-button
-                compact="true"
-                (click)="_close()"
+                (click)="_confirm()">
+            Move
+        </fd-button-bar>
+        <fd-button-bar
                 i18n="@@platformUploadCollection.MoveTo.Btn.Close"
-            >
-                Cancel
-            </button>
-        </fd-dialog-footer-button>
+                (click)="_close()">
+            Cancel
+        </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

@@ -13,6 +13,7 @@ import {
     FirstDialogExampleComponent,
     SecondDialogExampleComponent
 } from './examples';
+import { A11yModule } from '@angular/cdk/a11y';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
         FormModule,
         ListModule,
         DialogModule,
-        InputGroupModule
+        InputGroupModule,
+        A11yModule
     ],
     exports: [RouterModule],
     declarations: [
