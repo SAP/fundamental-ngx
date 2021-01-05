@@ -56,15 +56,26 @@ async function lookupExposedModule<T>(remoteName: string, exposedModule: string)
     // Initialize the container, it may provide shared modules
 
     await container.init(__webpack_share_scopes__.default);
-    const factory = await container.get(exposedModule);
 
-    // if var factory is not a function we have a trouble with a provided module
-    if (typeof factory !== 'function') {
+    const rejectWithError = () => {
         return Promise.reject(
             new Error(
                 `ModuleExposedResolveError: Can't resolve module ${remoteName} from exposed module ${exposedModule}`
             )
         );
+    }
+
+    let factory;
+
+    try {
+        factory = await container.get(exposedModule);
+    } catch {
+        return rejectWithError();
+    }
+
+    // if var factory is not a function we have a trouble with a provided module
+    if (typeof factory !== 'function') {
+        return rejectWithError();
     }
 
     const Module = factory();
