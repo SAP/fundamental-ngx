@@ -260,8 +260,13 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     ngAfterContentInit(): void {
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
-        this._setUserSpecifiedLayout();
-        // this.updateFieldByZone();
+
+        if (this.columnLayoutType) {
+            // columns change as per user specification
+            this._setUserSpecifiedLayout();
+        } else {
+            this.xlCol = `fd-col-xl--6 fd-col-md--6 fd-col-lg--6`;
+        }
         this.updateFieldByColumn();
         this.updateFormFieldsProperties();
 
@@ -304,20 +309,26 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     /**
-     *
+     * @hidden
      * Assign the fields or field group to specified columns with rank
      */
     private updateFieldByColumn(): void {
-        const [xl] = this.columnLayoutType.split('-');
-        const xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
-        const modifiedColumns: { [key: string]: any } = { };
+        let xlColumnsNumber = 1;
+        const modifiedColumns: { [key: string]: any } = {};
         let rowNumber = 0;
         let cols = {};
 
-        for (const field of this.formFieldChildren) {
-            if (!Boolean(field instanceof FormFieldGroupComponent)) {
-                const f = this._getGroupField(field);
-                const columnNumber = field.column ? field.column : xlColumnsNumber;
+        if (this.columnLayoutType) {
+            const [xl] = this.columnLayoutType.split('-');
+            xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
+        }
+
+        for (const child of this.formFieldChildren) {
+            if (!Boolean(child instanceof FormFieldGroupComponent)) {
+                const f = this._getGroupField(child);
+
+                // a fields without column property will set on last column
+                const columnNumber = child.column ? child.column : xlColumnsNumber;
 
                 if (!cols[columnNumber]) {
                     cols[columnNumber] = [f];
@@ -329,29 +340,26 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                 modifiedColumns[rowNumber] = cols;
                 cols = {};
                 rowNumber++;
-                const group = field.fields.map(f => {
-                    return this._getGroupField(f);
-                });
 
-                group.forEach(_g => {
-                    if (!fieldGroupColumns[_g.column]) {
-                        fieldGroupColumns[_g.column] = [_g];
+                const group = child.fields.map(f => this._getGroupField(f));
+                group.forEach(field => {
+                    if (!fieldGroupColumns[field.column]) {
+                        fieldGroupColumns[field.column] = [field];
                     } else {
-                        fieldGroupColumns[_g.column].push(_g);
+                        fieldGroupColumns[field.column].push(field);
                     }
                 });
 
-                modifiedColumns[rowNumber] = { label: field.label, fieldGroup: fieldGroupColumns};
+                modifiedColumns[rowNumber] = { label: child.label, fieldGroup: fieldGroupColumns};
                 rowNumber++;
             }
         }
         modifiedColumns[rowNumber] = cols;
         this.modifiedColumns = modifiedColumns;
-
-        console.log(this.modifiedColumns);
     }
 
-    _getGroupField(field: any): any {
+    /** @hidden */
+    _getGroupField(field: GroupField): GroupField {
         return new GroupField(
             field.zone,
             field.name,
@@ -409,7 +417,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     /** @hidden */
     private updateFormFieldsProperties(): void {
-        // this.formFieldChildren.forEach((formField) => this.updateFormFieldProperties(formField));
         this.formFieldChildren.forEach(formField => {
            if (formField instanceof FormFieldGroupComponent) {
                formField.fields.forEach(field => this.updateFormFieldProperties(field));
@@ -499,7 +506,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                 if (indexR < right.length) {
                     if (right[indexR].columns + left[indexL - 1].columns !== 12) {
                         right[indexR].columns = 12 - left[indexL - 1].columns;
-                        console.log(right[indexR].columns);
                     }
                     const f = new GroupField(
                         right[indexR].zone,

@@ -4,7 +4,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     EventEmitter,
     Input,
     OnDestroy,
@@ -14,7 +13,8 @@ import {
     ViewChild,
     Optional,
     Provider,
-    forwardRef, ViewContainerRef, ElementRef
+    forwardRef,
+    ElementRef
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
@@ -304,7 +304,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Add FormField to FormGroup
      */
     private addToFormGroup(): void {
-        if (!this.formGroupContainer || !Boolean(this._elementRef.nativeElement.parentElement.attributes.mainTitle)) {
+        if (!this.formGroupContainer || Boolean(this._elementRef.nativeElement.parentElement.attributes.label)) {
             return;
         }
 
