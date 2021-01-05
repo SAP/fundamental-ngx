@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.41...v0.26.0-rc.42) (2021-01-05)
+
+
+### Bug Fixes
+
+* (Core|Platform) simplify dialog, bar, message-box markup ([#4140](https://github.com/SAP/fundamental-ngx/issues/4140)) ([fe3e892](https://github.com/SAP/fundamental-ngx/commit/fe3e89245c3dd58ee19b9704963673408914a658))
+
 ## [0.26.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.40...v0.26.0-rc.41) (2021-01-05)
 
 ## [0.26.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.39...v0.26.0-rc.40) (2021-01-05)
