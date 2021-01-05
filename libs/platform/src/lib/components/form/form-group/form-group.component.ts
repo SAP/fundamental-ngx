@@ -336,21 +336,21 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                     cols[columnNumber].push(f);
                 }
             } else {
-                const fieldGroupColumns = {};
+                const groupFieldColumns = {};
                 modifiedColumns[rowNumber] = cols;
                 cols = {};
                 rowNumber++;
 
-                const group = child.fields.map(f => this._getGroupField(f));
+                const group = child.groupFields.map(f => this._getGroupField(f));
                 group.forEach(field => {
-                    if (!fieldGroupColumns[field.column]) {
-                        fieldGroupColumns[field.column] = [field];
+                    if (!groupFieldColumns[field.column]) {
+                        groupFieldColumns[field.column] = [field];
                     } else {
-                        fieldGroupColumns[field.column].push(field);
+                        groupFieldColumns[field.column].push(field);
                     }
                 });
 
-                modifiedColumns[rowNumber] = { label: child.label, fieldGroup: fieldGroupColumns};
+                modifiedColumns[rowNumber] = { label: child.label, fields: groupFieldColumns };
                 rowNumber++;
             }
         }
@@ -419,7 +419,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     private updateFormFieldsProperties(): void {
         this.formFieldChildren.forEach(formField => {
            if (formField instanceof FormFieldGroupComponent) {
-               formField.fields.forEach(field => this.updateFormFieldProperties(field));
+               formField.groupFields.forEach(field => this.updateFormFieldProperties(field));
            } else {
                this.updateFormFieldProperties(formField);
            }

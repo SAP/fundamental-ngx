@@ -50,7 +50,7 @@
             <div class="fd-form-group__header" *ngIf="row.value.label">
                 <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
             </div>
-            <ng-container *ngFor="let r of (row.value.label ? row.value.fieldGroup: row.value) | keyvalue; trackBy: trackByFieldName">
+            <ng-container *ngFor="let r of (row.value.label ? row.value.fields: row.value) | keyvalue; trackBy: trackByFieldName">
                 <div class="fd-row" [ngClass]="xlCol">
                     <div
                         *ngFor="let f of r.value; trackBy: trackByFieldName"

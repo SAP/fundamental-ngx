@@ -9,7 +9,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormFieldComponent, FormGroupContainer } from '@fundamental-ngx/platform';
+import { FormField } from '../../form-field';
+import { FormGroupContainer} from '../../form-group';
 
 @Component({
     selector: 'fdp-form-field-group',
@@ -25,7 +26,7 @@ export class FormFieldGroupComponent implements OnInit {
     @ViewChild('renderer', { read: TemplateRef })
     renderer: TemplateRef<any>;
 
-    @ContentChildren(FormFieldComponent) fields: QueryList<any>;
+    @ContentChildren(FormField) groupFields: QueryList<any>;
 
     constructor(
         readonly formGroupContainer: FormGroupContainer
