@@ -32,9 +32,3 @@ export const ROW_HEIGHT = new Map<ContentDensity, number>([
     [ContentDensity.COMPACT, 32],
     [ContentDensity.CONDENSED, 24]
 ]);
-
-export const NESTED_ROW_PADDING_MULTIPLIER = new Map<ContentDensity, number>([
-    [ContentDensity.COZY, 44],
-    [ContentDensity.COMPACT, 32],
-    [ContentDensity.CONDENSED, 24]
-]);

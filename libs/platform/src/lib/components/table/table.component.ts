@@ -1015,9 +1015,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /**
      * @hidden
-     * Sort tree like groups be group value
+     * Sort tree like groups by group.direction setting
      */
-    private _sortTreeLikeGroupedRows<K>(groupedRows: TreeLike<TableRow>[]): TreeLike<TableRow>[] {
+    private _sortTreeLikeGroupedRows(groupedRows: TreeLike<TableRow>[]): TreeLike<TableRow>[] {
         if (!groupedRows[0] || groupedRows[0].type !== 'group') {
             return groupedRows;
         }
@@ -1044,9 +1044,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             const aValue = a.value.value as any;
             const bValue = b.value.value as any;
 
-            const aNumber = parseFloat(aValue);
-            const bNumber = parseFloat(bValue);
-            if (!isNaN(aNumber) && !isNaN(bNumber)) {
+            const aNumber = Number.parseFloat(aValue);
+            const bNumber = Number.parseFloat(bValue);
+            if (!Number.isNaN(aNumber) && !Number.isNaN(bNumber)) {
                 return (aNumber - bNumber) * directionMultiplier;
             }
 
@@ -1197,7 +1197,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
          * its here.
          */
         this._dsSubscription = initDataSource.open().subscribe((items) => {
-            // this._rows = items.map((row, index) => ({ checked: false, index: index, value: row })) || [];
             this._dataSourceItemsSubject.next(items);
             this._totalItems = initDataSource.dataProvider.totalItems;
             this._cd.markForCheck();
