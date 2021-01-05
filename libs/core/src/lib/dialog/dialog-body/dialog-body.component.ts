@@ -36,8 +36,9 @@ export class DialogBodyComponent implements AfterContentInit {
     /** @hidden */
     ngAfterContentInit(): void {
         if (this.wizard) {
-            this._elRef.nativeElement.style.paddingTop = '0px';
-            this._elRef.nativeElement.style.paddingBottom = '0px';
+            const style = this._elRef.nativeElement.style;
+            style.paddingTop = '0px';
+            style.paddingBottom = '0px';
         }
     }
 }
