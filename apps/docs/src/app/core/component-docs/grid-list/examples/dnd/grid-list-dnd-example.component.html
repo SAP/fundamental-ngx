@@ -1,0 +1,48 @@
+<fd-grid-list>
+    <fd-grid-list-title-bar title="Products">
+        <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
+
+        <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+
+        <button fd-button fdType="transparent" glyph="sort" aria-label="Sort" title="Sort" [compact]="true"></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="filter"
+            aria-title="Filter"
+            title="Filter"
+            [compact]="true"
+        ></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="group-2"
+            aria-title="Group"
+            title="Group"
+            [compact]="true"
+        ></button>
+    </fd-grid-list-title-bar>
+
+    <div class="fd-row" fd-dnd-list [items]="list" [gridMode]="true" (itemDropped)="itemsChangeHandle($event)" style="margin-top: 0;">
+        <fd-grid-list-item *ngFor="let item of list;" [value]="item.id" fd-dnd-item containerSelector=".fd-grid-list__item" type="navigatio">
+            <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
+
+            <div class="fd-grid-list-item-body--container">
+                <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+                <div class="fd-grid-list-item-body--content">
+                    <h6 fd-title [innerText]="item.title"></h6>
+                    <p [innerText]="item.description"></p>
+                    <div class="fd-grid-list-item-body--content-address">
+                        <p>781 Main Street</p>
+                        <p>Anytown, SD 57401</p>
+                        <p>USA</p>
+                    </div>
+    
+                    <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+                </div>
+            </div>
+
+            <fd-grid-list-item-footer-bar> Footer Item </fd-grid-list-item-footer-bar>
+        </fd-grid-list-item>
+    </div>
+</fd-grid-list>

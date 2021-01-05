@@ -1,0 +1,144 @@
+<fd-docs-section-title id="default" componentName="grid-list">Modes</fd-docs-section-title>
+<description>
+    Use the <code>[mode]</code> property to specify the one of these modes.
+
+    <h4>Modes:</h4>
+    <ul>
+        <li><code>none</code>: Default mode (no selection)</li>
+        <li><code>delete</code>: Delete mode (only one list item can be deleted via provided delete button)</li>
+        <li>
+            <code>singleSelect</code>: Selected item is highlighted but no selection control is visible (only one list
+            item can be selected)
+        </li>
+        <li>
+            <code>singleSelectLeft</code>: Left-positioned single selection mode (only one list item can be selected)
+        </li>
+        <li>
+            <code>singleSelectRight</code>: Right-positioned single selection mode (only one list item can be selected)
+        </li>
+        <li><code>multiSelect</code>: Multi-selection mode (more than one list item can be selected)</li>
+    </ul>
+</description>
+
+<fd-docs-section-title id="none-mode" componentName="grid-list">None mode</fd-docs-section-title>
+<description>
+    Items cannot be selected but can still use "navigation", which allows click handling on specific items.
+</description>
+<component-example>
+    <fd-grid-list-default-example></fd-grid-list-default-example>
+</component-example>
+<code-example [exampleFiles]="gridListDefaultExample"></code-example>
+
+<fd-docs-section-title id="single-select-mode" componentName="grid-list">Single select mode</fd-docs-section-title>
+<description>
+    One item in the grid list can be selected. Need click on an item to select it. To use the Single select mode, set
+    <code>[mode]</code> as <code>singleSelect</code>.
+</description>
+<component-example>
+    <fd-grid-list-single-select-example></fd-grid-list-single-select-example>
+</component-example>
+<code-example [exampleFiles]="gridListSingleSelectExample"></code-example>
+
+<fd-docs-section-title id="single-select-left-mode" componentName="grid-list"
+    >Single select left mode</fd-docs-section-title
+>
+<description>
+    One item in the grid list can be selected. For this, the grid list provides radio buttons on the left side of each
+    item toolbar. To use the Single select left mode, set <code>[mode]</code> as <code>singleSelectLeft</code>.
+</description>
+<component-example>
+    <fd-grid-list-single-select-left-example></fd-grid-list-single-select-left-example>
+</component-example>
+<code-example [exampleFiles]="gridListSingleSelectLeftExample"></code-example>
+
+<fd-docs-section-title id="single-select-right-mode" componentName="grid-list">
+    Single select right mode
+</fd-docs-section-title>
+<description>
+    One item in the grid list can be selected. For this, the grid list provides radio buttons on the left side of each
+    item toolbar. To use the Single select right mode, set <code>[mode]</code> as <code>singleSelectRight</code>.
+</description>
+<component-example>
+    <fd-grid-list-single-select-right-example></fd-grid-list-single-select-right-example>
+</component-example>
+<code-example [exampleFiles]="gridListSingleSelectRightExample"></code-example>
+
+<fd-docs-section-title id="multi-select-mode" componentName="grid-list">Multi select mode</fd-docs-section-title>
+<description>
+    Users can select one or more items. For this, the grid list provides checkboxes on the left side of each item
+    toolbar. To use the Multi select mode, set <code>[mode]</code> as <code>multiSelect</code>.
+</description>
+<component-example>
+    <fd-grid-list-multi-select-example></fd-grid-list-multi-select-example>
+</component-example>
+<code-example [exampleFiles]="gridListMultiSelectExample"></code-example>
+
+<fd-docs-section-title id="delete-mode" componentName="grid-list">Delete mode</fd-docs-section-title>
+<description>
+    This places a Delete button on the right side of an item toolbar. To use the Delete mode, set <code>[mode]</code> as <code>delete</code>.
+</description>
+<component-example>
+    <fd-grid-list-delete-example></fd-grid-list-delete-example>
+</component-example>
+<code-example [exampleFiles]="gridListDeleteExample"></code-example>
+
+<fd-docs-section-title id="group" componentName="grid-list">Group</fd-docs-section-title>
+<description>
+    If grouped, a group header is displayed above all items which belong to the corresponding group. The group header is
+    not interactive. To create grid list group headers use fd-grid-list-group-header component.
+</description>
+<component-example>
+    <fd-grid-list-group-example></fd-grid-list-group-example>
+</component-example>
+<code-example [exampleFiles]="gridListGroupExample"></code-example>
+
+<fd-docs-section-title id="states" componentName="grid-list">States</fd-docs-section-title>
+<description>
+    To apply state, set <code>[state]</code> as <code>unread|error|locked|draft</code>.
+</description>
+<component-example>
+    <fd-grid-list-states-example></fd-grid-list-states-example>
+</component-example>
+<code-example [exampleFiles]="gridListStatesExample"></code-example>
+
+<fd-docs-section-title id="statuses" componentName="grid-list">Status</fd-docs-section-title>
+<description>
+    A status indicator is shown in front of the item it needs to show that an item needs attention. To add status
+    indicator, set <code>[status]</code> as <code>success|warning|error|neutral</code>.
+</description>
+<component-example>
+    <fd-grid-list-statuses-example></fd-grid-list-statuses-example>
+</component-example>
+<code-example [exampleFiles]="gridListStatusesExample"></code-example>
+
+<fd-docs-section-title id="more" componentName="grid-list">More button</fd-docs-section-title>
+<description> The More button loads more items to the front end if not all items have yet been loaded. </description>
+<component-example>
+    <fd-grid-list-more-example></fd-grid-list-more-example>
+</component-example>
+<code-example [exampleFiles]="gridListMoreExample"></code-example>
+
+<fd-docs-section-title id="footer" componentName="grid-list">Footer</fd-docs-section-title>
+<description> The footer can be used to display additional static information relating to the content. </description>
+<component-example>
+    <fd-grid-list-footer-example></fd-grid-list-footer-example>
+</component-example>
+<code-example [exampleFiles]="gridListFooterExample"></code-example>
+
+<fd-docs-section-title id="dnd" componentName="grid-list">Drag and Drop</fd-docs-section-title>
+<component-example>
+    <fd-grid-list-dnd-example></fd-grid-list-dnd-example>
+</component-example>
+<code-example [exampleFiles]="gridListDndExample"></code-example>
+
+<fd-docs-section-title id="layoutPattern" componentName="grid-list">Layout</fd-docs-section-title>
+<description> 
+    Defines the column layout in the format <code>XLn-Ln-Mn-Sn</code> where n is the number of columns and can be different for each size. <br />
+    Default: <code>XL4-L3-M2-S1</code><br />
+    For a base Layout, we can use only 1, 2, 3, 4, 6, or 12 columns in a row.<br />
+    But it can be more flexible using <code>layoutItemPattern</code>.
+ </description>
+<component-example>
+    <fd-grid-list-layout-example></fd-grid-list-layout-example>
+</component-example>
+<code-example [exampleFiles]="gridListLayoutExample"></code-example>

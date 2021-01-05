@@ -1,0 +1,47 @@
+<fd-grid-list>
+    <fd-grid-list-title-bar title="Products">
+        <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
+
+        <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+
+        <button fd-button fdType="transparent" glyph="sort" aria-label="Sort" title="Sort" [compact]="true"></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="filter"
+            aria-title="Filter"
+            title="Filter"
+            [compact]="true"
+        ></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="group-2"
+            aria-title="Group"
+            title="Group"
+            [compact]="true"
+        ></button>
+    </fd-grid-list-title-bar>
+
+    <fd-grid-list-item
+        *ngFor="let item of list"
+        [type]="item.type"
+        [counter]="item.counter"
+        (navigate)="navigate($event)"
+    >
+        <div class="fd-grid-list-item-body--container">
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <div class="fd-grid-list-item-body--content">
+                <h6 fd-title [innerText]="item.title"></h6>
+                <p [innerText]="item.description"></p>
+                <div class="fd-grid-list-item-body--content-address">
+                    <p>781 Main Street</p>
+                    <p>Anytown, SD 57401</p>
+                    <p>USA</p>
+                </div>
+
+                <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
+            </div>
+        </div>
+    </fd-grid-list-item>
+</fd-grid-list>
