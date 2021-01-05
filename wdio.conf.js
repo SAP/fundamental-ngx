@@ -1,6 +1,7 @@
 /*require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
 require('ts-node').register({ transpileOnly: true });
+AllureReporter = require('@wdio/allure-reporter').default;
 exports.config = {
     //
     // ====================
@@ -209,14 +210,6 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['spec' , []],
 
-    reporters: [['spec', {
-        symbols: { passed: '[PASS]', failed: '[FAIL]' }
-    }], ['allure', {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true
-    }]],
-
     jasmineNodeOpts: {
         isVerbose: true,
         showColors: true,
@@ -224,6 +217,19 @@ exports.config = {
         grep: null,
         invertGrep: null
     },
+
+    reporters: [
+        'spec',
+        [
+            'allure',
+            {
+                outputDir: 'allure-results',
+                disableWebdriverStepsReporting: true,
+                disableWebdriverScreenshotsReporting: false,
+                disableMochaHooks: true,
+            },
+        ],
+    ],
 
     //
     // Options to be passed to Mocha.
@@ -288,7 +294,8 @@ exports.config = {
 
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
-    }
+    },
+
 
 
 //     const processedConfig = await browser.getProcessedConfig();
@@ -330,8 +337,14 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: async function (test, context, {error, result, duration, passed, retries}) {
+        if (error !== undefined) {
+            await browser.takeScreenshot();
+            const html = await browser.getPageSource();
+            AllureReporter.addAttachment('page.html', html, 'text/html');
+        }
+        await browser.reloadSession();
+    },
 
 
     /**
