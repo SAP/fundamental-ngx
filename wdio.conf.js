@@ -23,8 +23,6 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        // './e2e/wdio/**/checkbox.e2e-spec.ts',
-        // './e2e/wdio/**/fixed-card-layout.e2e-spec.ts',
         './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
@@ -48,7 +46,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 20,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -61,7 +59,7 @@ exports.config = {
             platformName: 'Windows 10',
             'sauce:options': {
                 screenResolution: '1920x1080',
-                name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID,
+                name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
                 requireWindowFocus: true,
             }
         },
@@ -72,7 +70,7 @@ exports.config = {
             acceptInsecureCerts: true,
             'sauce:options': {
                 screenResolution: '1920x1080',
-                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID,
+                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             }
         },
         {
@@ -81,7 +79,7 @@ exports.config = {
             platformName: 'Windows 10',
             acceptInsecureCerts: true,
             'sauce:options': {
-                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID,
+                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
                 screenResolution: '1920x1080',
             }
         },
@@ -92,7 +90,7 @@ exports.config = {
             acceptInsecureCerts: true,
             'sauce:options': {
                 screenResolution: '1920x1080',
-                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID,
+                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             }
         },
         {
@@ -101,7 +99,7 @@ exports.config = {
             browserVersion: 'latest',
             acceptInsecureCerts: true,
             'sauce:options': {
-                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID,
+                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
                 screenResolution: '1920x1440',
             }
         },
@@ -112,7 +110,7 @@ exports.config = {
             acceptInsecureCerts: true,
             'sauce:options': {
                 screenResolution: '1920x1440',
-                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID,
+                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             }
         },
         {
@@ -122,7 +120,7 @@ exports.config = {
             acceptInsecureCerts: true,
             'sauce:options': {
                 screenResolution: '1920x1440',
-                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID,
+                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             }
         },
         // {
@@ -169,7 +167,7 @@ exports.config = {
     baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 30000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
