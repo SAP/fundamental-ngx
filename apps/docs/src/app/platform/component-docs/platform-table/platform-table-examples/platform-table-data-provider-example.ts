@@ -180,7 +180,7 @@ function getNestedValue<T extends {}>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
 
-export const filterByString = (item: ExampleItem, filter: CollectionStringFilter): boolean => {
+const filterByString = (item: ExampleItem, filter: CollectionStringFilter): boolean => {
     const filterValue = filter.value && filter.value.toLocaleLowerCase();
     const filterValue2 = (filter.value2 && filter.value2.toLocaleLowerCase()) || '';
     const itemValue = getNestedValue(filter.field, item).toLocaleLowerCase();
@@ -219,7 +219,7 @@ export const filterByString = (item: ExampleItem, filter: CollectionStringFilter
     return filter.exclude ? !result : result;
 };
 
-export const filterByNumber = (item: ExampleItem, filter: CollectionNumberFilter): boolean => {
+const filterByNumber = (item: ExampleItem, filter: CollectionNumberFilter): boolean => {
     const filterValue = Number.parseFloat((filter.value as unknown) as string);
     const filterValue2 = Number.parseFloat((filter.value2 as unknown) as string) || 0;
     const itemValue = Number.parseFloat(getNestedValue(filter.field, item));
@@ -249,7 +249,7 @@ export const filterByNumber = (item: ExampleItem, filter: CollectionNumberFilter
     return filter.exclude ? !result : result;
 };
 
-export const filterByDate = <D = FdDate>(
+const filterByDate = <D = FdDate>(
     item: ExampleItem,
     filter: CollectionDateFilter,
     adapter: DatetimeAdapter<D>
@@ -285,7 +285,7 @@ export const filterByDate = <D = FdDate>(
     return filter.exclude ? !result : result;
 };
 
-export const filterByBoolean = (item: ExampleItem, filter: CollectionBooleanFilter): boolean => {
+const filterByBoolean = (item: ExampleItem, filter: CollectionBooleanFilter): boolean => {
     const filterValue = filter.value;
     const itemValue = getNestedValue(filter.field, item);
     let result = false;
@@ -299,7 +299,7 @@ export const filterByBoolean = (item: ExampleItem, filter: CollectionBooleanFilt
     return filter.exclude ? !result : result;
 };
 
-export const filterBySelect = (item: ExampleItem, filter: CollectionSelectFilter): boolean => {
+const filterBySelect = (item: ExampleItem, filter: CollectionSelectFilter): boolean => {
     const filterValues = filter.value;
     const itemValue = getNestedValue(filter.field, item);
     let result = false;
@@ -312,5 +312,3 @@ export const filterBySelect = (item: ExampleItem, filter: CollectionSelectFilter
 
     return !filterValues.length || filter.exclude ? !result : result;
 };
-
-export { ExampleItem };

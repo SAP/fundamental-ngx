@@ -2,21 +2,17 @@ import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core';
-import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform';
+import { TableDataSource, TableDataProvider, TableState, SortDirection } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-table-default-example',
-    templateUrl: './platform-table-default-example.component.html'
+    selector: 'fdp-platform-table-p13-sort-example',
+    templateUrl: './platform-table-p13-sort-example.component.html'
 })
-export class PlatformTableDefaultExampleComponent {
+export class PlatformTableP13SortExampleComponent {
     source: TableDataSource<ExampleItem>;
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
-    }
-
-    alert(message: string): void {
-        alert(message);
     }
 }
 
@@ -48,6 +44,10 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         if (tableState.searchInput) {
             this.items = this.search(tableState);
         }
+        // apply sorting
+        if (tableState.sortBy) {
+            this.items = this.sort(tableState);
+        }
 
         this.totalItems = this.items.length;
 
@@ -71,7 +71,36 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
                 .some((value) => value.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
         });
     }
+
+    private sort({ sortBy }: TableState): ExampleItem[] {
+        const items = this.items.slice();
+
+        sortBy = sortBy.filter(({ field }) => !!field);
+
+        if (sortBy.length === 0) {
+            return items;
+        }
+
+        return items.sort((a, b) => {
+            return sortBy
+                .map(({ field, direction }) => {
+                    const ascModifier = direction === SortDirection.ASC ? 1 : -1;
+                    return sort(a, b, field) * ascModifier;
+                })
+                .find((result, index, list) => result !== 0 || index === list.length - 1);
+        });
+    }
 }
+
+/* UTILS */
+
+const sort = <T extends object>(a: T, b: T, key?: string) => {
+    if (key) {
+        a = getNestedValue(key, a);
+        b = getNestedValue(key, b);
+    }
+    return a > b ? 1 : a === b ? 0 : -1;
+};
 
 function getNestedValue<T extends {}>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => a[b], object);

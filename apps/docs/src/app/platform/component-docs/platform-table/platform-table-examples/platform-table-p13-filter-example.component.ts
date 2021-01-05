@@ -1,22 +1,35 @@
 import { Component } from '@angular/core';
+
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core';
-import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform';
+import { DatetimeAdapter, FdDatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import {
+    TableDataSource,
+    CollectionBooleanFilter,
+    CollectionDateFilter,
+    CollectionNumberFilter,
+    CollectionSelectFilter,
+    CollectionStringFilter,
+    SortDirection,
+    TableDataProvider,
+    TableState
+} from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-table-default-example',
-    templateUrl: './platform-table-default-example.component.html'
+    selector: 'fdp-platform-table-p13-filter-example',
+    templateUrl: './platform-table-p13-filter-example.component.html',
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        }
+    ]
 })
-export class PlatformTableDefaultExampleComponent {
+export class PlatformTableP13FilterExampleComponent {
     source: TableDataSource<ExampleItem>;
 
-    constructor() {
-        this.source = new TableDataSource(new TableDataProviderExample());
-    }
-
-    alert(message: string): void {
-        alert(message);
+    constructor(datetimeAdapter: DatetimeAdapter<FdDate>) {
+        this.source = new TableDataSource(new TableDataProviderExample(datetimeAdapter));
     }
 }
 
@@ -38,8 +51,12 @@ export interface ExampleItem {
  *
  */
 export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
-    totalItems = ITEMS.length;
+    items: ExampleItem[] = [];
+    totalItems = 0;
+
+    constructor(private dateTimeAdapter: DatetimeAdapter<FdDate>) {
+        super();
+    }
 
     fetch(tableState: TableState): Observable<ExampleItem[]> {
         this.items = [...ITEMS];
@@ -48,10 +65,65 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         if (tableState.searchInput) {
             this.items = this.search(tableState);
         }
+        // apply filtering
+        if (tableState.filterBy) {
+            this.items = this.filter(tableState);
+        }
+        // apply sorting
+        if (tableState.sortBy) {
+            this.items = this.sort(tableState);
+        }
 
         this.totalItems = this.items.length;
 
         return of(this.items);
+    }
+
+    private sort({ sortBy }: TableState): ExampleItem[] {
+        const items = this.items.slice();
+
+        sortBy = sortBy.filter(({ field }) => !!field);
+
+        if (sortBy.length === 0) {
+            return items;
+        }
+
+        return items.sort((a, b) => {
+            return sortBy
+                .map(({ field, direction }) => {
+                    const ascModifier = direction === SortDirection.ASC ? 1 : -1;
+                    return sort(a, b, field) * ascModifier;
+                })
+                .find((result, index, list) => result !== 0 || index === list.length - 1);
+        });
+    }
+
+    private filter({ filterBy }: TableState): ExampleItem[] {
+        let items = this.items;
+
+        filterBy
+            .filter(({ field }) => !!field)
+            .forEach((rule) => {
+                items = items.filter((item) => {
+                    switch (rule.field) {
+                        case 'name':
+                        case 'description':
+                        case 'status':
+                        case 'statusColor':
+                            return filterByString(item, rule as CollectionStringFilter);
+                        case 'price.value':
+                            return filterByNumber(item, rule as CollectionNumberFilter);
+                        case 'verified':
+                            return filterByBoolean(item, rule as CollectionBooleanFilter);
+                        case 'date':
+                            return filterByDate(item, rule as CollectionBooleanFilter, this.dateTimeAdapter);
+                        default:
+                            return false;
+                    }
+                });
+            });
+
+        return items;
     }
 
     private search({ searchInput, columns }: TableState): ExampleItem[] {
@@ -73,9 +145,152 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     }
 }
 
+/* UTILS */
+
+const sort = <T extends object>(a: T, b: T, key?: string) => {
+    if (key) {
+        a = getNestedValue(key, a);
+        b = getNestedValue(key, b);
+    }
+    return a > b ? 1 : a === b ? 0 : -1;
+};
+
 function getNestedValue<T extends {}>(key: string, object: T): any {
     return key.split('.').reduce((a, b) => a[b], object);
 }
+
+const filterByString = (item: ExampleItem, filter: CollectionStringFilter): boolean => {
+    const filterValue = filter.value && filter.value.toLocaleLowerCase();
+    const filterValue2 = (filter.value2 && filter.value2.toLocaleLowerCase()) || '';
+    const itemValue = getNestedValue(filter.field, item).toLocaleLowerCase();
+    let result = false;
+
+    switch (filter.strategy) {
+        case 'equalTo':
+            result = itemValue === filterValue;
+            break;
+        case 'greaterThan':
+            result = itemValue > filterValue;
+            break;
+        case 'greaterThanOrEqualTo':
+            result = itemValue >= filterValue;
+            break;
+        case 'lessThan':
+            result = itemValue < filterValue;
+            break;
+        case 'lessThanOrEqualTo':
+            result = itemValue <= filterValue;
+            break;
+        case 'between':
+            result = itemValue >= filterValue && itemValue <= filterValue2;
+            break;
+        case 'beginsWith':
+            result = itemValue.startsWith(filterValue);
+            break;
+        case 'endsWith':
+            result = itemValue.endsWith(filterValue);
+            break;
+        case 'contains':
+        default:
+            result = itemValue.includes(filterValue);
+    }
+
+    return filter.exclude ? !result : result;
+};
+
+const filterByNumber = (item: ExampleItem, filter: CollectionNumberFilter): boolean => {
+    const filterValue = Number.parseFloat((filter.value as unknown) as string);
+    const filterValue2 = Number.parseFloat((filter.value2 as unknown) as string) || 0;
+    const itemValue = Number.parseFloat(getNestedValue(filter.field, item));
+    let result = false;
+
+    switch (filter.strategy) {
+        case 'greaterThan':
+            result = itemValue > filterValue;
+            break;
+        case 'greaterThanOrEqualTo':
+            result = itemValue >= filterValue;
+            break;
+        case 'lessThan':
+            result = itemValue < filterValue;
+            break;
+        case 'lessThanOrEqualTo':
+            result = itemValue <= filterValue;
+            break;
+        case 'between':
+            result = itemValue >= filterValue && itemValue <= filterValue2;
+            break;
+        case 'equalTo':
+        default:
+            result = itemValue === filterValue;
+    }
+
+    return filter.exclude ? !result : result;
+};
+
+const filterByDate = <D = FdDate>(
+    item: ExampleItem,
+    filter: CollectionDateFilter,
+    adapter: DatetimeAdapter<D>
+): boolean => {
+    const filterValue = filter.value;
+    const filterValue2 = filter.value2;
+    const itemValue = getNestedValue(filter.field, item);
+    const diff = adapter.compareDate(itemValue, filterValue);
+    let result = false;
+
+    switch (filter.strategy) {
+        case 'after':
+            result = diff > 0;
+            break;
+        case 'onOrAfter':
+            result = diff >= 0;
+            break;
+        case 'before':
+            result = diff < 0;
+            break;
+        case 'beforeOrOn':
+            result = diff <= 0;
+            break;
+        case 'between':
+            result = adapter.isBetween(itemValue, filterValue, filterValue2);
+            break;
+
+        case 'equalTo':
+        default:
+            result = adapter.dateTimesEqual(itemValue, filterValue);
+    }
+
+    return filter.exclude ? !result : result;
+};
+
+const filterByBoolean = (item: ExampleItem, filter: CollectionBooleanFilter): boolean => {
+    const filterValue = filter.value;
+    const itemValue = getNestedValue(filter.field, item);
+    let result = false;
+
+    switch (filter.strategy) {
+        case 'equalTo':
+        default:
+            result = itemValue === filterValue;
+    }
+
+    return filter.exclude ? !result : result;
+};
+
+const filterBySelect = (item: ExampleItem, filter: CollectionSelectFilter): boolean => {
+    const filterValues = filter.value;
+    const itemValue = getNestedValue(filter.field, item);
+    let result = false;
+
+    switch (filter.strategy) {
+        case 'equalTo':
+        default:
+            result = filterValues.includes(itemValue);
+    }
+
+    return !filterValues.length || filter.exclude ? !result : result;
+};
 
 // Example items
 const ITEMS: ExampleItem[] = [

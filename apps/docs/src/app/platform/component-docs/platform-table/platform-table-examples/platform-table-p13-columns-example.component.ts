@@ -5,18 +5,14 @@ import { FdDate } from '@fundamental-ngx/core';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-table-default-example',
-    templateUrl: './platform-table-default-example.component.html'
+    selector: 'fdp-platform-table-p13-columns-example',
+    templateUrl: './platform-table-p13-columns-example.component.html'
 })
-export class PlatformTableDefaultExampleComponent {
+export class PlatformTableP13ColumnsExampleComponent {
     source: TableDataSource<ExampleItem>;
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
-    }
-
-    alert(message: string): void {
-        alert(message);
     }
 }
 
