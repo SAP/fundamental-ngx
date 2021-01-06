@@ -133,6 +133,15 @@ import { ValueByPathPipe } from './pipes';
         TableP13FilterComponent,
         TableP13GroupComponent,
         TableP13ColumnsComponent
+    ],
+    entryComponents: [
+        SortingComponent,
+        GroupingComponent,
+        FiltersComponent,
+        P13SortingDialogComponent,
+        P13GroupingDialogComponent,
+        P13FilteringDialogComponent,
+        P13ColumnsDialogComponent
     ]
 })
 export class PlatformTableModule {}
