@@ -1,5 +1,3 @@
-import { getObjectValues } from '../../../utils/object';
-
 import { FilterableColumnDataType } from './filter-type.enum';
 
 /** All possible strategies */
@@ -38,7 +36,7 @@ export const FILTER_DATE_STRATEGY: Pick<
 
 export type FilterDateStrategy = typeof FILTER_DATE_STRATEGY[keyof typeof FILTER_DATE_STRATEGY];
 
-export const FILTER_DATE_STRATEGIES: ReadonlyArray<FilterDateStrategy> = getObjectValues(FILTER_DATE_STRATEGY);
+export const FILTER_DATE_STRATEGIES: ReadonlyArray<FilterDateStrategy> = Object.values(FILTER_DATE_STRATEGY);
 
 /** Number Filter Strategies */
 export const FILTER_NUMBER_STRATEGY: Pick<FilterStrategyType, 'BETWEEN' | 'EQ' | 'GT' | 'GTE' | 'LT' | 'LTE'> = {
@@ -52,7 +50,7 @@ export const FILTER_NUMBER_STRATEGY: Pick<FilterStrategyType, 'BETWEEN' | 'EQ' |
 
 export type FilterNumberStrategy = typeof FILTER_NUMBER_STRATEGY[keyof typeof FILTER_NUMBER_STRATEGY];
 
-export const FILTER_NUMBER_STRATEGIES: ReadonlyArray<FilterNumberStrategy> = getObjectValues(FILTER_NUMBER_STRATEGY);
+export const FILTER_NUMBER_STRATEGIES: ReadonlyArray<FilterNumberStrategy> = Object.values(FILTER_NUMBER_STRATEGY);
 
 /** String Filter Strategies */
 export const FILTER_STRING_STRATEGY: Pick<
@@ -72,7 +70,7 @@ export const FILTER_STRING_STRATEGY: Pick<
 
 export type FilterStringStrategy = typeof FILTER_STRING_STRATEGY[keyof typeof FILTER_STRING_STRATEGY];
 
-export const FILTER_STRING_STRATEGIES: ReadonlyArray<FilterStringStrategy> = getObjectValues(FILTER_STRING_STRATEGY);
+export const FILTER_STRING_STRATEGIES: ReadonlyArray<FilterStringStrategy> = Object.values(FILTER_STRING_STRATEGY);
 
 /** Boolean Filter Strategies */
 export const FILTER_BOOLEAN_STRATEGY: Pick<FilterStrategyType, 'EQ'> = {
@@ -81,7 +79,7 @@ export const FILTER_BOOLEAN_STRATEGY: Pick<FilterStrategyType, 'EQ'> = {
 
 export type FilterBooleanStrategy = typeof FILTER_BOOLEAN_STRATEGY[keyof typeof FILTER_BOOLEAN_STRATEGY];
 
-export const FILTER_BOOLEAN_STRATEGIES: ReadonlyArray<FilterStringStrategy> = getObjectValues(FILTER_BOOLEAN_STRATEGY);
+export const FILTER_BOOLEAN_STRATEGIES: ReadonlyArray<FilterStringStrategy> = Object.values(FILTER_BOOLEAN_STRATEGY);
 
 /** Default Filter Strategies for undefined data type */
 export const FILTER_DEFAULT_STRATEGY: Pick<FilterStrategyType, 'EQ'> = {
@@ -90,7 +88,7 @@ export const FILTER_DEFAULT_STRATEGY: Pick<FilterStrategyType, 'EQ'> = {
 
 export type FilterDefaultStrategy = typeof FILTER_DEFAULT_STRATEGY[keyof typeof FILTER_DEFAULT_STRATEGY];
 
-export const FILTER_DEFAULT_STRATEGIES: ReadonlyArray<FilterStringStrategy> = getObjectValues(FILTER_DEFAULT_STRATEGY);
+export const FILTER_DEFAULT_STRATEGIES: ReadonlyArray<FilterStringStrategy> = Object.values(FILTER_DEFAULT_STRATEGY);
 
 // Get Possible strategies based on data type
 export const getFilterStrategiesBasedOnDataType = (dataType: FilterableColumnDataType) => {

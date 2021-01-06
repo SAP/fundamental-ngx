@@ -3,10 +3,11 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1
+                    <h4
                         fd-title
+                        [headerSize]="4"
                         i18n="@@platformTableP13FilterDialogHeader"
-                    >Filter By</h1>
+                    >Filter By</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -44,8 +45,9 @@
                             fdType="transparent"
                             glyph="sys-cancel"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogRemoveFilterLabel"
+                            i18n-aria-label="@@platformTableP13FilterDialogRemoveFilter"
                             aria-label="Remove Filter"
+                            i18n-title="@@platformTableP13FilterDialogRemoveFilter"
                             title="Remove Filter"
                             (click)="_removeRule(rule, _includeRules)"
                         ></button>
@@ -56,8 +58,9 @@
                             fdType="transparent"
                             glyph="add"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogAddFilterLabel"
+                            i18n-aria-label="@@platformTableP13FilterDialogAddFilter"
                             aria-label="Add Filter"
+                            i18n-title="@@platformTableP13FilterDialogAddFilter"
                             title="Add Filter"
                             (click)="_addNewRule(_includeRules)"
                         ></button>
@@ -91,8 +94,9 @@
                             fdType="transparent"
                             glyph="sys-cancel"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogRemoveFilterLabel"
+                            i18n-aria-label="@@platformTableP13FilterDialogRemoveFilter"
                             aria-label="Remove Filter"
+                            i18n-title="@@platformTableP13FilterDialogRemoveFilter"
                             title="Remove Filter"
                             (click)="_removeRule(rule, _excludeRules)"
                         ></button>
@@ -103,8 +107,9 @@
                             fdType="transparent"
                             glyph="add"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogAddFilterLabel"
+                            i18n-aria-label="@@platformTableP13FilterDialogAddFilter"
                             aria-label="Add Filter"
+                            i18n-title="@@platformTableP13FilterDialogAddFilter"
                             title="Add Filter"
                             (click)="_addNewRule(_excludeRules)"
                         ></button>

@@ -3,10 +3,11 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1
+                    <h4
                         fd-title
+                        [headerSize]="4"
                         i18n="@@platformTableP13SortDialogHeader"
-                    >Sort</h1>
+                    >Sort</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -67,7 +68,9 @@
                     fdType="transparent"
                     glyph="sys-cancel"
                     [compact]="true"
+                    i18n-aria-label="@@platformTableP13SortDialogRemoveSort"
                     aria-label="Remove"
+                    i18n-title="@@platformTableP13SortDialogRemoveSort"
                     title="Remove"
                     (click)="_removeRule(rule)"
                 ></button>
@@ -77,7 +80,9 @@
                     fdType="transparent"
                     glyph="add"
                     [compact]="true"
+                    i18n-aria-label="@@platformTableP13SortDialogAddNewSort"
                     aria-label="Add new"
+                    i18n-title="@@platformTableP13SortDialogAddNewSort"
                     title="Add new"
                     (click)="_addNew(i)"
                 ></button>

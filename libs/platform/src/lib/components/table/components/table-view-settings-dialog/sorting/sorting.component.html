@@ -3,10 +3,11 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1
+                    <h4
                         fd-title
+                        [headerSize]="4"
                         i18n="@@platformTableSortDialogHeader"
-                    >Sort</h1>
+                    >Sort</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -114,16 +115,18 @@
 
     <fd-dialog-footer>
         <fd-button-bar
-                fdType="emphasized"
-                i18n-label="@@platformTableDialogButtonOK"
-                label="OK"
-                (click)="confirm()">
+            fdType="emphasized"
+            i18n-label="@@platformTableDialogButtonOK"
+            label="OK"
+            (click)="confirm()"
+        >
         </fd-button-bar>
         <fd-button-bar
-                i18n-label="@@platformTableDialogButtonCancel"
-                label="Cancel"
-                fd-initial-focus
-                (click)="cancel()">
+            i18n-label="@@platformTableDialogButtonCancel"
+            label="Cancel"
+            fd-initial-focus
+            (click)="cancel()"
+        >
         </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

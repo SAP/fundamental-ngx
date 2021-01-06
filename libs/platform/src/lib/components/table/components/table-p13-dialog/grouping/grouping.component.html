@@ -3,10 +3,11 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1
+                    <h4
                         fd-title
+                        [headerSize]="4"
                         i18n="@@platformTableP13GroupDialogHeader"
-                    >Group</h1>
+                    >Group</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -45,7 +46,7 @@
                 (ngModelChange)="_onRuleShowAsColumnChange(rule, $event)"
                 [compact]="true"
                 label="Show Field as Column"
-                i18n-label="@@platformTableP13GroupDialogShowFieldAsColumnLabel"
+                i18n-label="@@platformTableP13GroupDialogShowFieldAsColumn"
             ></fd-checkbox>
 
             <div class="group-row__actions">
@@ -54,7 +55,9 @@
                     fdType="transparent"
                     glyph="sys-cancel"
                     [compact]="true"
+                    i18n-aria-label="@@platformTableP13GroupDialogRemoveGroup"
                     aria-label="Remove"
+                    i18n-title="@@platformTableP13GroupDialogRemoveGroup"
                     title="Remove"
                     (click)="_removeRule(rule)"
                 ></button>
@@ -64,7 +67,9 @@
                     fdType="transparent"
                     glyph="add"
                     [compact]="true"
+                    i18n-aria-label="@@platformTableP13GroupDialogAddNewGroup"
                     aria-label="Add new"
+                    i18n-title="@@platformTableP13GroupDialogAddNewGroup"
                     title="Add new"
                     (click)="_addNew(i)"
                 ></button>
