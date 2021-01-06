@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.44...v0.26.0-rc.45) (2021-01-06)
+
+
+### Bug Fixes
+
+* (platform) Menu position in split-menu-button and Sub-menu padding fix in cascading menu ([#4205](https://github.com/SAP/fundamental-ngx/issues/4205)) ([774f738](https://github.com/SAP/fundamental-ngx/commit/774f738b1cd106523dcdbc92a347cc57c1941af7))
+
 ## [0.26.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.43...v0.26.0-rc.44) (2021-01-05)
 
 ## [0.26.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.42...v0.26.0-rc.43) (2021-01-05)
