@@ -76,7 +76,7 @@ describe('StandardListItemComponent', () => {
     it('list item should have tabindex', () => {
         fixture.detectChanges();
         const listElement = fixture.debugElement.nativeElement.querySelector('li');
-        expect(listElement.getAttribute('tabindex')).toEqual('-1');
+        expect(listElement.getAttribute('tabindex')).toEqual('0');
     });
 
     it('list item should have id', () => {
