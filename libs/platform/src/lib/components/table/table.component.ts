@@ -727,9 +727,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .asObservable()
                 .pipe(
                     // map source items to table rows
-                    switchMap((source: T[]) => {
-                        return of(this._createTableRowsByDataSourceItems(source));
-                    }),
+                    switchMap((source: T[]) => of(this._createTableRowsByDataSourceItems(source))),
                     // Insert items to show groups
                     switchMap((rows: TableRow[]) =>
                         this._groupRulesMapSubject.pipe(
