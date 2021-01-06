@@ -78,8 +78,8 @@ describe('DisplayListItemComponent', () => {
 
     it('Display items should has aria-label attribute', () => {
         const spanElems = fixture.debugElement.queryAll(By.css('span'));
-        expect(spanElems.length).toEqual(8);
-        expect(spanElems[0].nativeElement.getAttribute('aria-label')).toContain('title 1');
+        expect(spanElems.length).toEqual(10);
+        expect(spanElems[1].nativeElement.getAttribute('aria-label')).toContain('secondary 1');
     });
 
     it('Should display item role as list item', () => {

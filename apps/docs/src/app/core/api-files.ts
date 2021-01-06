@@ -302,5 +302,16 @@ export const API_FILES = {
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
     ratingIndicator: ['RatingIndicatorComponent'],
-    wizard: ['WizardComponent']
+    wizard: ['WizardComponent'],
+    gridList: [
+        'GridListComponent',
+        'GridListItemComponent',
+        'GridListTitleBarComponent',
+        'GridListFilterBarComponent',
+        'GridListMoreBtnComponent',
+        'GridListFooterComponent',
+        'GridListItemFooterBarComponent',
+        'GridListItemToolbarComponent',
+        'GridListGroupHeaderComponent'
+    ]
 };

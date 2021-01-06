@@ -2,7 +2,14 @@ import { CheckboxGroupPO } from '../pages/checkbox-group.po';
 import { checkIfDisabled, checkLabels, checkMarkingCheckbox } from '../../helper/assertion-helper';
 import checkboxGPData from '../fixtures/appData/checkbox-group-page-content';
 import checkboxGPData2 from '../fixtures/appData/checkbox-page-contents';
-import { webDriver } from '../../driver/wdio';
+import {
+    click,
+    clickNextElement,
+    executeScriptBeforeTagAttr, focusElement, getAttributeByName, getCSSPropertyByName,
+    getElementArrayLength, getText, mouseHoverElement,
+    refreshPage, scrollIntoView,
+    webDriver
+} from '../../driver/wdio';
 
 xdescribe('Checkbox group test suite', () => {
     const checkboxGroupPage = new CheckboxGroupPO();
@@ -12,31 +19,31 @@ xdescribe('Checkbox group test suite', () => {
     });
 
     afterEach(() => {
-        webDriver.refreshPage();
+        refreshPage();
     });
 
     describe('Checkbox Group created with List of Values.', () => {
         // TODO: Need to revise this one and consider using nexElement method
         it('should check that each group and checkbox have labels', () => {
-            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValuecheckboxGroupsArr);
-            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValuecheckboxGroupLabelsArr);
-            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValueCheckboxesArr);
-            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.stringValueCheckboxLabelArr);
+            const checkboxGroupCount = getElementArrayLength(checkboxGroupPage.stringValuecheckboxGroupsArr);
+            const groupLabelsCount = getElementArrayLength(checkboxGroupPage.stringValuecheckboxGroupLabelsArr);
+            const checkboxCount = getElementArrayLength(checkboxGroupPage.stringValueCheckboxesArr);
+            const checkboxLabelCount = getElementArrayLength(checkboxGroupPage.stringValueCheckboxLabelArr);
 
             expect(checkboxGroupCount).toEqual(groupLabelsCount);
             expect(checkboxCount).toEqual(checkboxLabelCount);
         });
 
         it('should check checkbox markings are centered', () => {
-            const checkboxMarkDisplayStyle = webDriver.executeScriptBeforeTagAttr(checkboxGroupPage.winterCheckbox, 'display');
+            const checkboxMarkDisplayStyle = executeScriptBeforeTagAttr(checkboxGroupPage.winterCheckbox, 'display');
             expect(checkboxMarkDisplayStyle).toContain(checkboxGPData.markingsStyle);
         });
 
         it('should check outputs1', () => {
-            webDriver.clickNextElement(checkboxGroupPage.stringValueCheckboxesArr, 1);
+            clickNextElement(checkboxGroupPage.stringValueCheckboxesArr, 1);
             checkOutputLabel(checkboxGroupPage.stringValueoutputLabelsArr, checkboxGPData.seasonsOutputLabel, checkboxGPData.seasonsArr[1]);
 
-            webDriver.clickNextElement(checkboxGroupPage.stringValueCheckboxesArr, 0);
+            clickNextElement(checkboxGroupPage.stringValueCheckboxesArr, 0);
             checkOutputLabel(checkboxGroupPage.stringValueoutputLabelsArr, checkboxGPData.seasonsOutputLabel,
                 checkboxGPData.seasonsArr[1] + ',' + checkboxGPData.seasonsArr[0]);
         });
@@ -93,10 +100,10 @@ xdescribe('Checkbox group test suite', () => {
 
     describe('Checkbox Group created From List of Objects.', () => {
         it('should check that each group and checkbox have labels', () => {
-            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValuecheckboxGroupsArr);
-            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValuecheckboxGroupLabelsArr);
-            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValueCheckboxesArr);
-            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.objectValueCheckboxLabelArr);
+            const checkboxGroupCount = getElementArrayLength(checkboxGroupPage.objectValuecheckboxGroupsArr);
+            const groupLabelsCount = getElementArrayLength(checkboxGroupPage.objectValuecheckboxGroupLabelsArr);
+            const checkboxCount = getElementArrayLength(checkboxGroupPage.objectValueCheckboxesArr);
+            const checkboxLabelCount = getElementArrayLength(checkboxGroupPage.objectValueCheckboxLabelArr);
 
             expect(checkboxGroupCount).toEqual(groupLabelsCount);
             expect(checkboxCount).toEqual(checkboxLabelCount);
@@ -175,10 +182,10 @@ xdescribe('Checkbox group test suite', () => {
 
     describe('Checkbox Group created From content projected Checkboxes.', () => {
         it('should check that each group and checkbox have labels', () => {
-            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValuecheckboxGroupsArr);
-            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValuecheckboxGroupLabelsArr);
-            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValueCheckboxesArr);
-            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.projectedValueCheckboxLabelArr);
+            const checkboxGroupCount = getElementArrayLength(checkboxGroupPage.projectedValuecheckboxGroupsArr);
+            const groupLabelsCount = getElementArrayLength(checkboxGroupPage.projectedValuecheckboxGroupLabelsArr);
+            const checkboxCount = getElementArrayLength(checkboxGroupPage.projectedValueCheckboxesArr);
+            const checkboxLabelCount = getElementArrayLength(checkboxGroupPage.projectedValueCheckboxLabelArr);
 
             expect(checkboxGroupCount).toEqual(groupLabelsCount);
             expect(checkboxCount).toEqual(checkboxLabelCount);
@@ -242,27 +249,27 @@ xdescribe('Checkbox group test suite', () => {
 
     describe('Checkbox Group handling of Form Validation and Error Message Display.', () => {
         it('should check that each group and checkbox have labels', () => {
-            const checkboxGroupCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationcheckboxGroupsArr);
-            const groupLabelsCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationcheckboxGroupLabelsArr);
-            const checkboxCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationCheckboxesArr);
-            const checkboxLabelCount = webDriver.getElementArrayLength(checkboxGroupPage.formValidationCheckboxLabelArr);
+            const checkboxGroupCount = getElementArrayLength(checkboxGroupPage.formValidationcheckboxGroupsArr);
+            const groupLabelsCount = getElementArrayLength(checkboxGroupPage.formValidationcheckboxGroupLabelsArr);
+            const checkboxCount = getElementArrayLength(checkboxGroupPage.formValidationCheckboxesArr);
+            const checkboxLabelCount = getElementArrayLength(checkboxGroupPage.formValidationCheckboxLabelArr);
 
             expect(checkboxGroupCount).toEqual(groupLabelsCount);
             expect(checkboxCount).toEqual(checkboxLabelCount);
         });
 
         it('should check Checkbox group created from passed checkboxes and value is required', () => {
-            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 1);
+            clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 1);
             for (let i = 0; 3 > i; i++) {
-                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
+                expect(getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
                     .toContain(checkboxGPData.errorBorderStyle);
             }
 
-            webDriver.click(checkboxGroupPage.sectiontitle, 2);
+            click(checkboxGroupPage.sectiontitle, 2);
 
-            // webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 2);
-            webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 0);
-            expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            // clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 2);
+            mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 0);
+            expect(getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
             checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 0, 3);
             checkFocusState(checkboxGroupPage.formValidationCheckboxesArr, 0);
@@ -272,17 +279,17 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check Checkbox group created from list of values and value is required', () => {
             // get checkbox error color and tooltip
-            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 4);
+            clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 4);
             // click twice to mark and unmark box to get error state
-            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 4);
+            clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 4);
             for (let i = 3; 6 > i; i++) {
-                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
+                expect(getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
                     .toContain(checkboxGPData.errorBorderStyle);
             }
             // needed for getting the tooltip in next line
-            webDriver.click(checkboxGroupPage.sectiontitle, 1);
-            webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 3);
-            expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            click(checkboxGroupPage.sectiontitle, 1);
+            mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 3);
+            expect(getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
             checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 3, 6);
             checkFocusState(checkboxGroupPage.formValidationCheckboxesArr, 4);
@@ -292,17 +299,17 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check Checkbox group created from list of values and value is required', () => {
             // get checkbox error color and tooltip
-            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
+            clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
             // click twice to mark and unmark box to get error state
-            webDriver.clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
+            clickNextElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
 
             for (let i = 6; 10 > i; i++) {
-                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
+                expect(getCSSPropertyByName(checkboxGroupPage.formValidationCheckboxesArr, 'border-color', i).value)
                     .toContain(checkboxGPData.errorBorderStyle);
             }
-            webDriver.click(checkboxGroupPage.sectiontitle, 1);
-            webDriver.mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
-            expect(webDriver.getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            click(checkboxGroupPage.sectiontitle, 1);
+            mouseHoverElement(checkboxGroupPage.formValidationCheckboxesArr, 6);
+            expect(getText(checkboxGroupPage.errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
 
             checkLabels(checkboxGroupPage.formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 6, 10);
             checkFocusState(checkboxGroupPage.formValidationCheckboxLabelArr, 6);
@@ -316,47 +323,47 @@ xdescribe('Checkbox group test suite', () => {
 
     xdescribe('check example orientation', () => {
         it('should check LTR orientation', () => {
-            const areaContainersArrayLength = webDriver.getElementArrayLength(checkboxGroupPage.exampleAreaContainersArr);
+            const areaContainersArrayLength = getElementArrayLength(checkboxGroupPage.exampleAreaContainersArr);
 
             for (let i = 0; areaContainersArrayLength > i; i++) {
-                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value)
+                expect(getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value)
                     .toBe('ltr', 'css prop direction ');
             }
         });
 
         it('should check RTL orientation', () => {
-            const arrL = webDriver.getElementArrayLength(checkboxGroupPage.exampleAreaContainersArr);
+            const arrL = getElementArrayLength(checkboxGroupPage.exampleAreaContainersArr);
 
             for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(checkboxGroupPage.exampleAreaContainersArr, i);
-                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = webDriver.getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i);
+                scrollIntoView(checkboxGroupPage.exampleAreaContainersArr, i);
+                expect(getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+                const dirValueBefore = getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i);
                 expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(checkboxGroupPage.rtlSwitcherArr, i);
-                expect(webDriver.getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(webDriver.getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
+                click(checkboxGroupPage.rtlSwitcherArr, i);
+                expect(getCSSPropertyByName(checkboxGroupPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
+                expect(getAttributeByName(checkboxGroupPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
             }
         });
     });
 });
 
 function checkHoverState(elementSelector, index: number = 0): boolean {
-    webDriver.scrollIntoView(elementSelector, index);
-    webDriver.mouseHoverElement(elementSelector, index);
-    return expect(webDriver.getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value)
+    scrollIntoView(elementSelector, index);
+    mouseHoverElement(elementSelector, index);
+    return expect(getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value)
         .toContain(checkboxGPData2.checkboxHoverState);
 }
 
 function checkFocusState(elementSelector, index: number = 0): boolean {
-    // webDriver.clickNextElement(elementSelector, index);
-    webDriver.focusElement(elementSelector, index);
-    return expect(webDriver.getCSSPropertyByName(elementSelector, 'outline-style', index).value)
+    // clickNextElement(elementSelector, index);
+    focusElement(elementSelector, index);
+    return expect(getCSSPropertyByName(elementSelector, 'outline-style', index).value)
         .toContain(checkboxGPData2.checkboxFocusStyle);
 }
 
 function checkOutputLabel(array, label, selections): void {
-    const arrL = webDriver.getElementArrayLength(array);
+    const arrL = getElementArrayLength(array);
     for (let i = 0; arrL > i; i++) {
-        expect(webDriver.getText(array, i)).toEqual(label + selections);
+        expect(getText(array, i)).toEqual(label + selections);
     }
 }

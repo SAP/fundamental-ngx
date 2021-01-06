@@ -19,6 +19,9 @@ export interface ElementPosition {
     ]
 })
 export class DndItemDirective implements AfterContentInit, OnDestroy {
+    @Input()
+    containerSelector?: string;
+
     /** Event thrown when the element is moved by 1px */
     @Output()
     readonly moved = new EventEmitter<ElementPosition>();
@@ -82,15 +85,14 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
 
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
-        /** Depending on the position, gets the left or right side of element */
-        const x = rect.left + ((isBefore && gridMode) ? this.element.nativeElement.offsetWidth : 0);
-
         /** Vertically distance is counted by distance from top of the side + half of the element height */
         return {
-            x: x,
+            x: rect.left,
             position: position,
-            y: rect.top + this.element.nativeElement.offsetHeight / 2,
-            stickToPosition: this.stickInPlace
+            y: rect.top,
+            stickToPosition: this.stickInPlace,
+            width: rect.width,
+            height: rect.height
         };
     }
 
@@ -163,7 +165,16 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     createReplaceIndicator(): void {
         this._replaceIndicator = document.createElement('DIV');
         this._replaceIndicator.classList.add('fd-replace-indicator');
-        this.element.nativeElement.appendChild(this._replaceIndicator);
+
+        let container = this.element.nativeElement;
+        if (this.containerSelector) {
+            const newContainer = this.element.nativeElement.querySelector(this.containerSelector);
+            if (newContainer) {
+                container = newContainer;
+            }
+        }
+
+        container.appendChild(this._replaceIndicator);
     }
 
     /** @hidden */
@@ -185,7 +196,15 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         }
 
         /** Putting element to the container */
-        this.element.nativeElement.appendChild(this._lineElement);
+        let container = this.element.nativeElement;
+        if (this.containerSelector) {
+            const newContainer = this.element.nativeElement.querySelector(this.containerSelector);
+            if (newContainer) {
+                container = newContainer;
+            }
+        }
+
+        container.appendChild(this._lineElement);
     }
 
     /** @hidden */

@@ -11,4 +11,4 @@ export default {
     menuItemFocusStyle: 'dotted',
     menuBtnFocusStyleAttr: 'border',
     menuBtnFocusStyle: 'dotted'
-}
+};

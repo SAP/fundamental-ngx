@@ -12,27 +12,13 @@ import { TextData } from './component-based-message-box-example.component';
                 {{ messageBoxRef.data.text }}
             </fd-message-box-body>
             <fd-message-box-footer>
-                <fd-message-box-footer-button>
-                    <button
-                        fd-button
-                        fd-initial-focus
-                        fd-message-box-decisive-button
-                        fdType="emphasized"
-                        label="Ok"
-                        [compact]="true"
+                <fd-button-bar 
+                        fd-initial-focus 
+                        label="Ok"  
+                        fdType="emphasized" 
                         (click)="messageBoxRef.close('Ok')">
-                    </button>
-                </fd-message-box-footer-button>
-                <fd-message-box-footer-button>
-                    <button
-                        fd-button
-                        fd-message-box-decisive-button
-                        fdType="transparent"
-                        label="Cancel"
-                        [compact]="true"
-                        (click)="messageBoxRef.dismiss('Cancel')">
-                    </button>
-                </fd-message-box-footer-button>
+                </fd-button-bar>
+                <fd-button-bar label="Cancel" (click)="messageBoxRef.dismiss('Cancel')"></fd-button-bar>
             </fd-message-box-footer>
         </fd-message-box>
     `

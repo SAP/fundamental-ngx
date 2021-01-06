@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class FixedCardLayoutPo extends CoreBaseComponentPo {
     private url = '/fixed-card-layout';
@@ -20,6 +20,6 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 }
