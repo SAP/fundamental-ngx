@@ -13,15 +13,15 @@
         <button *ngIf="!_isEditMode" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
         <ng-container *ngIf="_isEditMode">
             <button fd-button label="View mode" [compact]="true" (click)="_isEditMode = false"></button>
-            <button *ngIf="_isAddButtonsVisible" fd-button label="Add approvers before" [compact]="true" (click)="_removeCheckedNodes()"></button>
-            <button *ngIf="_isAddButtonsVisible" fd-button label="Add approvers after" [compact]="true" (click)="_removeCheckedNodes()"></button>
-            <button *ngIf="_isAddButtonsVisible" fd-button label="Add parallel approvers" [compact]="true" (click)="_removeCheckedNodes()"></button>
+            <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="_removeCheckedNodes()"></button>
+            <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="addNodeAfterSelected()"></button>
+            <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_removeCheckedNodes()"></button>
             <button *ngIf="_isRemoveButtonVisible" fd-button label="Remove" [compact]="true" (click)="_removeCheckedNodes()"></button>
         </ng-container>
     </div>
 </fd-toolbar>
 
-<div class="approval-flow__watchers" [attr.dir]="_dir">
+<div class="approval-flow__watchers" [attr.dir]="_dir" *ngIf=" _approvalProcess?.watchers.length">
     <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
     <ng-container *ngIf="!_isEditMode">
         <fd-avatar
@@ -38,7 +38,7 @@
         <fd-multi-input
             [compact]="true"
             [dropdownValues]="_usersForWatchersList"
-            [placeholder]="'Search here...'"
+            placeholder="Search here..."
             [displayFn]="_displayUserFn"
             [showAllButton]="false"
             [(ngModel)]="_selectedWatchers"
@@ -68,7 +68,7 @@
             <div class="approval-flow__column"
                  *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last"
                  [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
-                 [class.approval-flow__column--vertical-line-after]="column.isPartial || (column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
+                 [class.approval-flow__column--vertical-line-after]="(column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
                  [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
             >
                 <ng-container
@@ -85,9 +85,11 @@
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                         [renderCarouselStartMarker]="(_isCarousel && firstColumn && firstNode)"
                         [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
+                        [canAddNodeBefore]="false"
+                        [canAddNodeAfter]="node.status !== 'approved' && !_nodeMetaMap[node.id]?.nextHNode?.blank"
                         (onNodeClick)="onNodeClick(node)"
                         (onNodeCheck)="onNodeCheck(node, $event)"
-                        (onAdd)="addNode()"
+                        (onAdd)="addNode(node, 'after')"
                         (onDelete)="deleteNode(node)"
                         (keyup.enter)="onNodeClick(node)"
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
@@ -111,6 +113,7 @@
 </ng-template>
 
 <ng-template #watchersChangedSuccess>
-    <ng-container i18n="@@platformApprovalFlowWatchersChangedSuccess">Watchers list has been changed successfully
+    <ng-container i18n="@@platformApprovalFlowWatchersChangedSuccess">
+        Watchers list has been changed successfully
     </ng-container>
 </ng-template>

@@ -23,8 +23,24 @@ import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from 
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
+import { isNodeApproved } from '@fundamental-ngx/platform';
 
-export type ApprovalGraphNode = ApprovalNode & { blank?: true };
+export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any };
+
+export interface ApprovalGraphNodeMetadata {
+    parent: ApprovalGraphNode;
+    isRoot: boolean;
+    isLast: boolean;
+    parallelStart: boolean;
+    parallelEnd: boolean;
+    isParallel: boolean;
+    columnIndex?: number;
+    nodeIndex?: number;
+    prevVNode?: ApprovalGraphNode;
+    nextVNode?: ApprovalGraphNode;
+    prevHNode?: ApprovalGraphNode;
+    nextHNode?: ApprovalGraphNode;
+}
 
 interface ApprovalGraphColumn {
     nodes: ApprovalGraphNode[];
@@ -100,6 +116,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     _nodeParentsMap: { [key: string]: ApprovalGraphNode } = {};
 
+    /** @hidden */
+    _nodeMetaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
+
     /**  @hidden */
     _dir: string;
 
@@ -107,7 +126,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _isEditMode = false;
 
     /**  @hidden */
-    _isAddButtonsVisible = false;
+    _canAddBefore = false;
+
+    /**  @hidden */
+    _canAddAfter = false;
+
+    /**  @hidden */
+    _canAddParallel = false;
 
     /**  @hidden */
     _isRemoveButtonVisible = false;
@@ -144,12 +169,19 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         this.subscriptions.add(this.dataSource.fetch().subscribe(approvalProcess => {
-            console.log('Got approval process data from DataSource');
+            console.log('Got approval process data from DataSource, nodes count', approvalProcess.nodes.length);
             this._approvalProcess = approvalProcess;
             this._nodeParentsMap = {};
             this._graph = this._buildNodeTree(approvalProcess.nodes);
+            const graphNodes = this._graph.map(a => a.nodes).reduce((a, b) => a.concat(b));
+            const blankLength = graphNodes.filter(n => n.blank).length;
+            console.log(
+                `graph nodes length ${graphNodes.length}`,
+                graphNodes.length !== approvalProcess.nodes.length && !blankLength ? 'ERROR: rendered more nodes than provided' : `${blankLength} blank nodes`
+            );
             this._cdr.detectChanges();
             this._resetCarousel();
+            this._resetAddButtons();
             this._checkCarouselStatus();
         }));
         this.subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
@@ -179,9 +211,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     onNodeCheck(node: ApprovalNode, isChecked: boolean): void {
         console.log('onNodeCheck', node, isChecked);
-        const checkedNodesCount = this.nodeComponents.filter(n => n._isSelected).length;
+        const checked = this.nodeComponents.filter(n => n._isSelected);
+        const checkedNodesCount = checked.length;
         this._isRemoveButtonVisible = checkedNodesCount > 0;
-        this._isAddButtonsVisible = checkedNodesCount === 1;
+        // this._canAddBefore = checkedNodesCount === 1;
+        this._canAddAfter = checkedNodesCount === 1 && !isNodeApproved(checked[0].node) && !this._nodeMetaMap[node.id]?.nextHNode?.blank;
+        // not approved & !_nodeMetaMap[node.id]?.nextHNode?.blank
     }
 
     onWatcherClick(watcher: ApprovalUser): void {
@@ -322,8 +357,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
     }
 
-    _displayUserFn(watcher: ApprovalUser): string {
-        return watcher.name;
+    _displayUserFn(user: ApprovalUser): string {
+        return user.name;
     }
 
     _onMessageDismiss(index: number): void {
@@ -334,26 +369,37 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         console.log('removeCheckedNodes');
     }
 
-    addNode(): void {
-        console.log('add node fn');
+    addNode(sourceNode: ApprovalNode, type: 'before' | 'after' | 'parallel'): void {
         const dialogRef = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
-                node: BLANK_NODE,
+                node: Object.assign({}, BLANK_NODE, { blank: false }),
                 approvalFlowDataSource: this.dataSource,
                 userDetailsTemplate: this.userDetailsTemplate,
                 rtl: this._isRTL
             }
-            //     node: node,
-            //     approvalFlowDataSource: this.dataSource,
-            //     userDetailsTemplate: this.userDetailsTemplate,
-            //     rtl: this._isRTL
-            // }
         });
-        // dialogRef.afterClosed.subscribe((reminderTargets) => {
-        //     if (Array.isArray(reminderTargets)) {
-        //         this.sendReminders(reminderTargets, node);
-        //     }
-        // });
+        dialogRef.afterClosed.subscribe((newNode: ApprovalGraphNode) => {
+            if (newNode) {
+                newNode.id = `tempId${(Math.random() * 1000).toFixed()}`;
+                newNode.description = `temporary description`;
+                if (type === 'after') {
+                    // const targetNode = this._approvalProcess.nodes.find(n => sourceNode.targets.includes(n.id));
+                    newNode.targets = sourceNode.targets;
+                    sourceNode.targets = [newNode.id];
+                    console.log('changed prev node', sourceNode);
+                    this._updateNode(sourceNode);
+                }
+                console.log('add new node', newNode);
+                this._approvalProcess.nodes.push(newNode);
+                console.log('saving new graph', this._approvalProcess.nodes);
+                this.dataSource.updateApprovals(this._approvalProcess.nodes);
+            }
+        });
+    }
+
+    addNodeAfterSelected(): void {
+        const node = this.nodeComponents.filter(n => n._isSelected)[0].node;
+        this.addNode(node, 'after')
     }
 
     deleteNode(node: ApprovalNode): void {
@@ -397,55 +443,81 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         graph[0] = { nodes: [rootNode] };
         let index = 1;
         let foundLastStep = false;
+        const _nodeMetaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
+        const _parentsMap: any = {};
+        nodes.forEach(n => {
+            const parents = findParentNode(n, nodes);
+            _nodeMetaMap[n.id] = {
+                parent: parents[0],
+                isRoot: !parents.length,
+                isLast: !n.targets.length,
+                parallelStart: n.targets.length > 1,
+                parallelEnd: parents.length > 1,
+                isParallel: nodes.filter(_n => findParentNode(_n, nodes).includes(parents[0])).length > 1
+            };
+        });
+        Object.keys(_nodeMetaMap).forEach(id => {
+            const meta = _nodeMetaMap[id];
+            meta.isParallel = meta.isParallel || (_nodeMetaMap[meta.parent?.id]?.isParallel && !meta.parallelEnd);
+        });
+        let _nodes = [...nodes];
         do {
-            const dependentNodes: ApprovalNode[] = [];
-            const previousStep = graph[index - 1];
-            previousStep.nodes.forEach(node => {
-                const _dependentNodes = findDependentNodes([node], nodes);
-                _dependentNodes.forEach(dependentNode => this._nodeParentsMap[dependentNode.id] = node);
-                dependentNodes.push(..._dependentNodes);
+            const columnNodes: ApprovalGraphNode[] = [];
+            const previousColumnNodes = graph[index - 1].nodes;
+            previousColumnNodes.forEach(node => {
+                const _columnNodes = findDependentNodes(node, _nodes);
+                _nodes = _nodes.filter(n => !_columnNodes.includes(n));
+                _columnNodes.forEach(columnNode => this._nodeParentsMap[columnNode.id] = node);
+                columnNodes.push(..._columnNodes);
             });
-            foundLastStep = dependentNodes.length === 0;
+            foundLastStep = columnNodes.length === 0;
             if (foundLastStep) {
                 break;
             }
 
-            const nodesWithoutTarget = dependentNodes.filter(node => !node.targets.length);
-            const nodesWithTarget = dependentNodes.filter(node => node.targets.length);
-
-            const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length && nodesWithoutTarget.length !== dependentNodes.length;
-            // const isMixed = dependentNodes.length > 1 && nodesWithoutTarget.length;
-            if (isMixed && previousStep.nodes.length > 1) {
-                // if (isMixed) {
-                console.log('found mixed step');
-                // const nodesWithBlankSpaces: ApprovalGraphNode[] = [...dependentNodes];
-                const nodesWithBlankSpaces: ApprovalGraphNode[] = [...previousStep.nodes];
-                nodesWithBlankSpaces.forEach((node, i) => {
-                    const targetNode = dependentNodes.find(n => node.targets.includes(n.id));
-                    if (targetNode && !nodesWithTarget.includes(targetNode)) {
-                        nodesWithBlankSpaces[i] = targetNode;
+            const parallelNodes = columnNodes.filter(node => _nodeMetaMap[node.id].isParallel);
+            const isMixed = columnNodes.length > 1 && parallelNodes.length && parallelNodes.length !== columnNodes.length;
+            if (isMixed && previousColumnNodes.length > 1) {
+                const parallelColumn: ApprovalGraphNode[] = [...previousColumnNodes];
+                parallelColumn.forEach((node, i) => {
+                    if (node.blank) {
+                        parallelColumn[i] = BLANK_NODE;
+                        return;
+                    }
+                    const target = columnNodes.find(n => node.targets.includes(n.id));
+                    if (target && !_nodeMetaMap[target.id].isParallel) {
+                        if (_nodes.indexOf(target) === -1) {
+                            _nodes.push(target);
+                        }
+                        parallelColumn[i] = BLANK_NODE;
                     } else {
-                        nodesWithBlankSpaces[i] = BLANK_NODE;
+                        parallelColumn[i] = target;
                     }
                 });
-                // nodesWithBlankSpaces.forEach((node, i) => {
-                //     if (nodesWithTarget.includes(node)) {
-                //         nodesWithBlankSpaces[i] = blankNode;
-                //     }
-                // });
-                graph[index] = { nodes: nodesWithBlankSpaces, isPartial: true };
-                graph[index + 1] = { nodes: nodesWithTarget };
-                index += 2;
+                graph[index] = { nodes: parallelColumn, isPartial: true };
             } else {
-                graph[index] = { nodes: dependentNodes };
-                index++;
+                graph[index] = { nodes: columnNodes };
             }
+
+            index++;
         } while (!foundLastStep);
 
-        graph.forEach(column => {
-            column.allNodesApproved = column.nodes.every(node => node.status === 'approved');
+        nodes.forEach(n => {
+            const columnIndex = graph.findIndex(c => c.nodes.includes(n));
+            const nodeIndex = graph[columnIndex].nodes.findIndex(_n => _n === n);
+            _nodeMetaMap[n.id] = {
+                ..._nodeMetaMap[n.id],
+                columnIndex: columnIndex,
+                nodeIndex: nodeIndex,
+                prevVNode: graph[columnIndex].nodes[nodeIndex - 1],
+                nextVNode: graph[columnIndex].nodes[nodeIndex + 1],
+                prevHNode: graph[columnIndex - 1]?.nodes[nodeIndex],
+                nextHNode: graph[columnIndex + 1]?.nodes[nodeIndex]
+            };
         });
-
+        this._nodeMetaMap = _nodeMetaMap;
+        graph.forEach(col => col.allNodesApproved = col.nodes.every(isNodeApproved));
+        console.log('nodes metadata', this._nodeMetaMap);
         console.log('graph to display', graph);
 
         return graph;
@@ -491,6 +563,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
+    private _resetAddButtons(): void {
+        this._canAddAfter = false;
+        this._canAddBefore = false;
+        this._canAddParallel = false;
+    }
+
+    /** @hidden */
     private _getNextHorizontalNode = (_ni: number, _ci: number, direction: 'left' | 'right', stepSize: number = 1) => {
         const indexDiff = (direction === 'right' ? 1 : -1);
         const _column = this._graph[_ci + indexDiff];
@@ -505,6 +584,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         return { nextNode: _nextNode, stepSize: stepSize };
     };
+
+    /** @hidden */
+    private _updateNode(node: ApprovalNode): void {
+        const nodeIndex = this._approvalProcess.nodes.findIndex(n => n.id === node.id);
+        if (nodeIndex > -1) {
+            this._approvalProcess.nodes[nodeIndex] = node;
+        }
+    }
 
     /** @hidden */
     private _getNextVerticalNode = (_ni: number, _ci: number, direction: 'up' | 'down', stepSize: number = 1) => {
@@ -534,7 +621,15 @@ function findRootNode(nodes: ApprovalNode[]): ApprovalNode {
     return nodes.find(node => nodes.every(n => !n.targets.includes(node.id)));
 }
 
-function findDependentNodes(rootNodes: ApprovalGraphNode[], nodes: ApprovalNode[]): ApprovalNode[] {
-    const rootNodeTargetIds = rootNodes.reduce((acc: string[], node: ApprovalGraphNode) => acc.concat(node.targets), []);
-    return nodes.filter(node => rootNodeTargetIds.includes(node.id));
+function findParentNode(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
+    return nodes.filter(_n => _n.targets.includes(node.id));
 }
+
+function findDependentNodes(root: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
+    return nodes.filter(node => root.targets.includes(node.id));
+}
+
+// function findDependentNodes(rootNodes: ApprovalGraphNode[], nodes: ApprovalNode[]): ApprovalNode[] {
+//     const rootNodeTargetIds = rootNodes.reduce((acc: string[], node: ApprovalGraphNode) => acc.concat(node.targets), []);
+//     return nodes.filter(node => rootNodeTargetIds.includes(node.id));
+// }

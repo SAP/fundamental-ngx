@@ -253,4 +253,14 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         color: #0854A0;
         font-weight: 600;
     }
+
+    &.#{$block}__add--before {
+        left: -2.5rem;
+        right: auto;
+    }
+
+    &.#{$block}__add--after {
+        right: -2.5rem;
+        left: auto;
+    }
 }

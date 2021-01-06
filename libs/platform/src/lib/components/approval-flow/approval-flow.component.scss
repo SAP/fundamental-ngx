@@ -218,6 +218,10 @@ $carousel-controls-height--edit-mode: 126px;
     }
 }
 
+fd-toolbar + .#{$block}__container {
+    padding-top: .5rem;
+}
+
 :host ::ng-deep {
     .fd-toolbar {
         display: flex;

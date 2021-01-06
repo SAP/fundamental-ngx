@@ -14,6 +14,7 @@ import { ObjectStatus } from '@fundamental-ngx/core';
 
 import { ApprovalGraphNode } from '../approval-flow.component';
 import { ApprovalNode, ApprovalStatus } from '../interfaces';
+import { isNodeApproved } from '../helpers';
 
 const NODE_STATUS_CLASS_MAP = {
     'approved': 'positive',
@@ -47,6 +48,12 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** Whether node element has carousel end marker. Should be set to 'true' for the last node */
     @Input() renderCarouselEndMarker = false;
 
+    /** Whether to display add node button before in Edit mode */
+    @Input() canAddNodeBefore = false;
+
+    /** Whether to display add node button after in Edit mode */
+    @Input() canAddNodeAfter = false;
+
     /** Whether node is blank */
     @Input()
     @HostBinding('class.approval-flow-node--blank')
@@ -75,6 +82,10 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     @HostBinding('class.approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
+        if (!this.parent) {
+            return true;
+        }
+
         return this.parent && isNodeApproved(this.parent);
     }
 
@@ -146,10 +157,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
         this.cd.detectChanges();
     }
 
-}
-
-function isNodeApproved(node: ApprovalNode): boolean {
-    return node.status === 'approved';
 }
 
 function getNodeStatusClass(status: ApprovalStatus): ObjectStatus {

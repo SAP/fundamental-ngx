@@ -2,19 +2,8 @@
     margin-bottom: 1rem;
 }
 
-.approval-flow__select-approvers-input-container {
-    position: relative;
-
-    input {
-        cursor: pointer;
-        background-color: #fff;
-    }
-
-    fd-icon {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+.approval-flow__select-approvers-container {
+    width: 288px;
 }
 
 :host ::ng-deep {

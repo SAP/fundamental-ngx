@@ -43,7 +43,7 @@
                     plural,
                     =1 {{{node.approvers[0].name}}}
                     other {{{node.approvers.length}} members}
-                    }
+                }
             </div>
             <div class="approval-flow-node__description">
                 {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
@@ -59,8 +59,17 @@
     <span *ngIf="parent" style="position: absolute; font-size: 11px; left: 0; top: 0; color: orangered;">Parent - {{ parent.id }} </span>
     <span *ngIf="node.targets.length" style="position: absolute; font-size: 11px; right: 0; bottom: 0; color: orange">Targets - {{ node.targets }}</span>
 </ng-container>
-<ng-container *ngIf="blank">
-    <div class="approval-flow-node__add" (click)="onAdd.emit()">
+<ng-container *ngIf="isEdit && (blank || canAddNodeBefore || canAddNodeAfter)">
+    <ng-container *ngTemplateOutlet="addNodeButton"></ng-container>
+</ng-container>
+<ng-template #addNodeButton>
+    <div
+        class="approval-flow-node__add"
+        [class.approval-flow-node__add--blank]="blank"
+        [class.approval-flow-node__add--before]="!blank && canAddNodeBefore"
+        [class.approval-flow-node__add--after]="!blank && canAddNodeAfter"
+        (click)="$event.stopPropagation(); onAdd.emit()"
+    >
         <fd-icon glyph="add"></fd-icon>
     </div>
-</ng-container>
+</ng-template>

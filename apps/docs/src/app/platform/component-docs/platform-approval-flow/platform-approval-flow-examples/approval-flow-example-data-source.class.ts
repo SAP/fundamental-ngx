@@ -1,5 +1,5 @@
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from '@fundamental-ngx/platform';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 const users: ApprovalUser[] = [
     {
@@ -117,7 +117,88 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
+const ex1: ApprovalProcess = {
 
+    watchers: [],
+    nodes: [
+        {
+            id: 'node1id',
+            name: 'node1 name',
+            description: 'Finance Group(node1)',
+            approvers: [
+                {
+                    id: 'ghalas',
+                    name: 'Gene Halas',
+                    description: 'node1user descr',
+                    imgUrl: 'https://randomuser.me/api/portraits/men/0.jpg'
+                }
+            ],
+            targets: [
+                'node2id',
+                'node3id'
+            ],
+            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
+            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
+            status: 'approved'
+        },
+        {
+            id: 'node2id',
+            name: 'node2 name',
+            description: 'Marketing Group(node2)',
+            approvers: [
+                {
+                    id: 'cnoll',
+                    name: 'Chad Noll',
+                    description: 'node2user descr',
+                    imgUrl: 'https://randomuser.me/api/portraits/men/1.jpg'
+                }
+            ],
+            targets: [
+                'node4id'
+            ],
+            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
+            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
+            status: 'in progress'
+        },
+        {
+            id: 'node3id',
+            name: 'node3 name',
+            description: 'Bugdet Group(node3)',
+            approvers: [
+                {
+                    id: 'adavis',
+                    name: 'Arnold Davis',
+                    description: 'node3user descr',
+                    imgUrl: 'https://randomuser.me/api/portraits/men/10.jpg'
+                }
+            ],
+            targets: [
+                'node4id'
+            ],
+            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
+            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
+            status: 'in progress'
+        },
+        {
+            id: 'node4id',
+            name: 'node4 name',
+            description: 'Admin Group(node4)',
+            approvers: [
+                {
+
+                    id: 'prozelle',
+                    name: 'Patrick Rozelle',
+                    description: 'node4user descr',
+                    imgUrl: 'https://randomuser.me/api/portraits/men/11.jpg'
+                }
+            ],
+            targets: [],
+            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
+            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
+            status: 'not started'
+        }
+    ]
+};
 const simpleGraph: ApprovalProcess = {
     watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
     nodes: [
@@ -183,7 +264,7 @@ const mediumGraph: ApprovalProcess = {
             description: 'node description',
             approvers: [getRandomUser()],
             status: 'approved',
-            targets: [],
+            targets: ['ID3'],
             dueDate: new Date(),
             createDate: new Date()
         },
@@ -193,7 +274,7 @@ const mediumGraph: ApprovalProcess = {
             description: 'Marketing team',
             approvers: [getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser()],
             status: 'in progress',
-            targets: [],
+            targets: ['ID3'],
             dueDate: new Date(),
             createDate: new Date()
         },
@@ -270,7 +351,7 @@ const complexGraph: ApprovalProcess = {
             description: 'node description',
             approvers: [getRandomUser()],
             status: 'in progress',
-            targets: [],
+            targets: ['ID3'],
             dueDate: new Date(),
             createDate: new Date()
         },
@@ -280,7 +361,7 @@ const complexGraph: ApprovalProcess = {
             description: 'Marketing',
             approvers: [getRandomUser()],
             status: 'not started',
-            targets: [],
+            targets: ['ID3'],
             dueDate: new Date(),
             createDate: new Date()
         },
@@ -308,7 +389,8 @@ const complexGraph: ApprovalProcess = {
 };
 
 const graphs = {
-    simple: simpleGraph,
+    simple: ex1,
+    // simple: simpleGraph,
     medium: mediumGraph,
     complex: complexGraph
 };
