@@ -37,8 +37,10 @@ import { PluginManagerService } from '../../api/plugins/plugin-manager.service';
             class="responsive-wrapper"
             [src]="_safeIframeUri"
             [style.minHeight]="iframeAttrs.height"
-            (error)="onLoadIframeError()"
-        ></iframe>`,
+            fdsIframeError
+            (fdsError)="onLoadIframeError()"
+            (error)="onLoadIframeError()">
+        </iframe>`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PluginLauncherComponent implements OnChanges, AfterViewChecked {

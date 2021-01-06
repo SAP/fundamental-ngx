@@ -66,24 +66,20 @@ describe('PluginPageLauncherComponent', () => {
         expect(component).toBeDefined();
     });
 
-    it('should not find routing module with id `/entry/to/module`', fakeAsync(() => {
+    it('should not find routing module with id `/entry/to/module`', () => {
         const spyEmit = spyOn(component.error, 'emit');
 
         spyOn(lookupService, 'lookup').and.returnValue(undefined);
 
         component.ngOnInit();
-
-        flushMicrotasks();
-
         fixture.detectChanges();
         expect(spyEmit).toHaveBeenCalled();
-    }));
+    });
 
     it('should emit an error from fake PluginLauncherComponent', () => {
         const spyEmit = spyOn(component.error, 'emit');
 
         component.dispatchError(new Error('Error'));
-
         fixture.detectChanges();
         expect(spyEmit).toHaveBeenCalled();
     });
