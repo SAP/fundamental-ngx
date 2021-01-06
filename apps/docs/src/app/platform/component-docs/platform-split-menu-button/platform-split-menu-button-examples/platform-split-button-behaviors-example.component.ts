@@ -20,6 +20,7 @@ export class PlatformDocsSplitMenuButtonBehaviorComponent {
 
     public onPrimaryButtonClick1(): void {
         this.selectedItem1 = this.label1;
+        alert('primary button clicked');
     }
 
     public onItemSelect2(menuItemValue: string): void {
@@ -29,6 +30,7 @@ export class PlatformDocsSplitMenuButtonBehaviorComponent {
 
     public onPrimaryButtonClick2(): void {
         this.selectedItem1 = this.label2;
+        alert('primary button clicked');
     }
 
     public onItemSelect3(menuItemValue: string): void {
@@ -38,5 +40,6 @@ export class PlatformDocsSplitMenuButtonBehaviorComponent {
 
     public onPrimaryButtonClick3(): void {
         this.selectedItem3 = this.label3;
+        alert('primary button clicked');
     }
 }

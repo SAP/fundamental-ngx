@@ -1,4 +1,11 @@
-<div class="fd-button-split" role="group" aria-label="split-button" [attr.dir]="dir" [style.max-width]="splitButtonMaxWidth">
+<div
+    class="fd-button-split"
+    role="group"
+    aria-label="split-button"
+    [attr.dir]="dir"
+    [style.max-width]="splitButtonMaxWidth"
+    [fdpMenuTriggerFor]="menu"
+>
     <button
         fd-button
         #primaryBtn
@@ -27,7 +34,6 @@
         [fdType]="type"
         [attr.tabindex]="0"
         [compact]="contentDensity === 'compact'"
-        [fdpMenuTriggerFor]="menu"
         [attr.aria-haspopup]="true"
     ></button>
 </div>
