@@ -170,7 +170,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        // private _viewContainerRef: ViewContainerRef,
         private _elementRef: ElementRef,
         @Optional() readonly formGroupContainer: FormGroupContainer) {
         // provides capability to make a field disabled. useful in reactive form approach.

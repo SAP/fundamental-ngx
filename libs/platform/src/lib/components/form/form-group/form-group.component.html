@@ -46,12 +46,16 @@
         <span class="fd-form-header__text">{{ title }}</span>
     </div>
     <div class="fd-container fd-form-layout-grid-container">
+        <div class="fd-row">
         <ng-container *ngFor="let row of rows | keyvalue; trackBy: trackByFieldName">
             <div class="fd-form-group__header" *ngIf="row.value.label">
                 <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
             </div>
+
             <ng-container *ngFor="let r of (row.value.label ? row.value.fields: row.value) | keyvalue; trackBy: trackByFieldName">
-                <div class="fd-row" [ngClass]="xlCol">
+                <div class="fd-form-group fd-col__form-group fd-col" [ngClass]="xlCol">
+
+                    <div class="fd-form-item fd-row__form-item fd-row">
                     <div
                         *ngFor="let f of r.value; trackBy: trackByFieldName"
                         class="fd-col fd-col-wrap"
@@ -59,9 +63,12 @@
                     >
                         <ng-container *ngTemplateOutlet="f?.renderer"></ng-container>
                     </div>
+                    </div>
                 </div>
             </ng-container>
+
         </ng-container>
+        </div>
     </div>
 </ng-template>
 
