@@ -731,9 +731,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                     // Insert items to show groups
                     switchMap((rows: TableRow[]) =>
                         this._groupRulesMapSubject.pipe(
-                            map((groupRules) => {
-                                return this._groupTableRows(rows, groupRules.values());
-                            })
+                            map((groupRules) => this._groupTableRows(rows, groupRules.values()))
                         )
                     )
                 )
