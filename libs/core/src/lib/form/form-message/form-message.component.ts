@@ -20,6 +20,10 @@ export type MessageStates = 'success' | 'error' | 'warning' | 'information';
     selector: 'fd-form-message',
     templateUrl: './form-message.component.html',
     styleUrls: ['./form-message.component.scss'],
+    host: {
+        '[attr.aria-live]': '"assertive"',
+        '[attr.aria-atomic]': 'true'
+    },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
