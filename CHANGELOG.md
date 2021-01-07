@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.25.2](https://github.com/SAP/fundamental-ngx/compare/v0.25.1...v0.25.2) (2021-01-07)
+
+
+### Bug Fixes
+
+* Add null validation for route change in theme service ([867ee94](https://github.com/SAP/fundamental-ngx/commit/867ee94c65cd76762a18b888cc357588e27cbb97))
+
 ### [0.25.1](https://github.com/SAP/fundamental-ngx/compare/v0.25.1-rc.0...v0.25.1) (2020-12-17)
 
 ### [0.25.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.25.0...v0.25.1-rc.0) (2020-12-17)
