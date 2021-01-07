@@ -5,7 +5,6 @@ import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@s
 import { hasModuleImport } from '../utils/ng-module-utils';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-import { cdkVersion } from './versions';
 import { defaultFontStyle } from './styles';
 import { addModuleImportToModule, getProjectFromWorkspace, getProjectMainFile, getAppModulePath } from '@angular/cdk/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
@@ -17,10 +16,10 @@ const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
 export function ngAdd(options: any): Rule {
     return chain([
         addDependencies(),
+        endInstallTask(),
         addAnimations(options),
         addStylePathToConfig(options),
-        addFontsToStyles(options),
-        endInstallTask()
+        addFontsToStyles(options)
     ]);
 }
 
@@ -52,10 +51,6 @@ function addDependencies(): Rule {
                 version: `${ngCoreVersionTag}`,
                 name: '@angular/animations'
             });
-        }
-
-        if (!hasPackage(tree, '@angular/cdk')) {
-            dependencies.push({ type: NodeDependencyType.Default, version: `${cdkVersion}`, name: '@angular/cdk' });
         }
 
         dependencies.forEach((dependency) => {
