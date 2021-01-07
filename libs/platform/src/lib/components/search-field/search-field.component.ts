@@ -207,15 +207,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _suggestionOverlayRef: OverlayRef;
     private _suggestionPortal: TemplatePortal;
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
+    private _isFocused = false;
 
     private _rtlChangeSubscription = Subscription.EMPTY;
     private _outsideClickSubscription = Subscription.EMPTY;
     private _dataSourceSubscription = Subscription.EMPTY;
-
-    /** @hidden */
-    private _isFocused = false;
-
-    /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
@@ -257,6 +253,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._rtlChangeSubscription.unsubscribe();
         this._outsideClickSubscription.unsubscribe();
         this._dataSourceSubscription.unsubscribe();
+        this._onDestroy$.next();
     }
 
     onKeydown($event: KeyboardEvent): void {
