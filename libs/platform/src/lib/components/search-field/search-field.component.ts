@@ -15,14 +15,15 @@ import {
     ChangeDetectorRef,
     Directive,
     ViewChildren,
-    QueryList
+    QueryList,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { Overlay, OverlayConfig, ConnectedPosition, OverlayRef } from '@angular/cdk/overlay';
 
 import { PopoverComponent } from '@fundamental-ngx/core';
-import { Observable, isObservable, of, Subscription, fromEvent } from 'rxjs';
-import { map, filter, take, takeUntil } from 'rxjs/operators';
+import { Observable, isObservable, of, Subscription, fromEvent, Subject } from 'rxjs';
+import { map, filter, take, takeUntil, tap } from 'rxjs/operators';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
 import { RtlService } from '@fundamental-ngx/core';
@@ -53,7 +54,7 @@ export interface ValueLabelItem {
     }
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
-    constructor(private element: ElementRef) { }
+    constructor(private element: ElementRef) {}
     focus(): void {
         this.element.nativeElement.focus();
     }
@@ -65,7 +66,8 @@ let searchFieldIdCount = 0;
     selector: 'fdp-search-field',
     templateUrl: './search-field.component.html',
     styleUrls: ['./search-field.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy {
     /**
@@ -148,11 +150,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Input() isLoading = false;
 
     /**
-     * Toggle "disabled" mode.
-     */
-    @Input() disabled = false;
-
-    /**
      * Input change event.
      */
     @Output() inputChange: EventEmitter<SearchInput> = new EventEmitter();
@@ -166,6 +163,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Cancel search event.
      */
     @Output() cancelSearch: EventEmitter<void> = new EventEmitter();
+
+    /** @hidden Focus state */
+    get isFocused(): boolean {
+        return this._isFocused;
+    }
 
     /**
      * Observable list of string values taken from `suggestions` to populate dropdown menu.
@@ -210,6 +212,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _outsideClickSubscription = Subscription.EMPTY;
     private _dataSourceSubscription = Subscription.EMPTY;
 
+    /** @hidden */
+    private _isFocused = false;
+
+    /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
     @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
     @ViewChild('inputGroup', { static: false }) inputGroup: ElementRef<HTMLElement>;
     @ViewChild('inputField', { static: false }) inputField: ElementRef<HTMLElement>;
@@ -221,7 +229,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef,
         protected _cd: ChangeDetectorRef,
-        private _rtl: RtlService
+        private _rtl: RtlService,
+        private readonly elementRef: ElementRef
     ) {
         super(_cd);
     }
@@ -236,6 +245,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this.dir = isRtl ? 'rtl' : 'ltr';
             this._cd.detectChanges();
         });
+
+        this._listenElementEvents();
     }
 
     ngOnDestroy(): void {
@@ -387,8 +398,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.showDropdown = false;
     }
 
-    openCategoryMenu(): void { }
-
     clearTextInput(): void {
         this.inputText = '';
         this._cd.detectChanges();
@@ -433,6 +442,28 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this.dropdownValues$ = of(data);
         });
         this._dataSource = dataSource;
+    }
+
+    /** @hidden */
+    private _listenElementEvents(): void {
+        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true })
+            .pipe(
+                tap(() => {
+                    this._isFocused = true;
+                    this._cd.markForCheck();
+                }),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe();
+        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true })
+            .pipe(
+                tap(() => {
+                    this._isFocused = false;
+                    this._cd.markForCheck();
+                }),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe();
     }
 }
 
