@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.48...v0.26.0-rc.49) (2021-01-08)
+
+
+### Bug Fixes
+
+* (Core) Toolbar spacing elements, simplify code ([#4188](https://github.com/SAP/fundamental-ngx/issues/4188)) ([dcdb728](https://github.com/SAP/fundamental-ngx/commit/dcdb728c618cb1b21202aade227d6a2988fce70d))
+
 ## [0.26.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.47...v0.26.0-rc.48) (2021-01-07)
 
 ## [0.26.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.46...v0.26.0-rc.47) (2021-01-07)
