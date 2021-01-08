@@ -2,8 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopoverBodyComponent } from './popover-body.component';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { ConnectedPosition } from '@angular/cdk/overlay';
+import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { DefaultPositions, PopoverPosition } from '../popover-position/popover-position';
+import { PopoverModule } from '../popover.module';
+import { A11yModule } from '@angular/cdk/a11y';
 
 describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
@@ -11,7 +13,7 @@ describe('PopoverBodyComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [PopoverBodyComponent]
+            imports: [PopoverModule, OverlayModule, A11yModule]
         }).compileComponents();
     }));
 
