@@ -9,8 +9,11 @@
                [showTicks]="showTicks"
                [showTicksLabels]="showTicksLabels"
                [mode]="range ? 'range' : 'single'"
-               [hideProgressBar]="hideProgressBar">
+               [hideProgressBar]="hideProgressBar"
+               [customLabelsValues]="customLabels">
     </fd-slider>
+    <br>
+    <pre><b>Value:{{ value | json }}</b></pre>
     <br>
     <div>
         width - <input type="number" [(ngModel)]="width"><br>

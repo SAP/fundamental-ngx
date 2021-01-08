@@ -16,17 +16,21 @@
                      [attr.aria-valuemin]="min"
                      [attr.aria-valuemax]="max"
                      [attr.aria-valuenow]="_value"
-                     [style.left.%]="_progress"
+                     [style.left.%]="!_isRtl ? _progress : null"
+                     [style.right.%]="_isRtl ? _progress : null"
                      (mousedown)="onHandleClick($event); $event.stopPropagation()"
                      (keydown)="onKeyDown($event)"
                 ></div>
             </ng-container>
+
             <ng-container *ngIf="_isRange">
                 <div *ngIf="!hideProgressBar"
                      class="fd-slider__track-range"
                      [style.width.%]="_rangeProgress"
-                     [style.left.%]="_handle1Position < _handle2Position ? _handle1Position : _handle2Position"
+                     [style.left.%]="!_isRtl ? _handle1Position < _handle2Position ? _handle1Position : _handle2Position : null"
+                     [style.right.%]="_isRtl ? _handle1Position < _handle2Position ? _handle1Position : _handle2Position : null"
                 ></div>
+
                 <div #rangeHandle1
                      class="fd-slider__handle"
                      tabindex="0"
@@ -40,10 +44,12 @@
                      [attr.aria-valuemin]="min"
                      [attr.aria-valuemax]="max"
                      [attr.aria-valuenow]="_handle1Value"
-                     [style.left.%]="_handle1Position"
+                     [style.left.%]="!_isRtl ? _handle1Position : null"
+                     [style.right.%]="_isRtl ? _handle1Position : null"
                      (mousedown)="onHandleClick($event); $event.stopPropagation()"
                      (keydown)="onKeyDown($event)"
                 ></div>
+
                 <div #rangeHandle2
                      class="fd-slider__handle"
                      tabindex="0"
@@ -57,20 +63,22 @@
                      [attr.aria-valuemin]="min"
                      [attr.aria-valuemax]="max"
                      [attr.aria-valuenow]="_handle2Value"
-                     [style.left.%]="_handle2Position"
+                     [style.left.%]="!_isRtl ? _handle2Position : null"
+                     [style.right.%]="_isRtl ? _handle2Position : null"
                      (mousedown)="onHandleClick($event); $event.stopPropagation()"
                      (keydown)="onKeyDown($event)"
                 ></div>
             </ng-container>
         </div>
+
         <div class="fd-slider__tick-wrapper">
             <div class="fd-slider__ticks" style="height: 1rem" (click)="onTrackClick($event)">
                 <ng-container *ngIf="showTicks">
                     <ng-container *ngFor="let tick of _tickMarks; let first = first; let last = last;">
                         <div
                             class="fd-slider__tick"
-                            [style.position]="'absolute'"
-                            [style.left.%]="(tick.value / (max - min)) * 100"
+                            [style.left.%]="!_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
+                            [style.right.%]="_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
                             [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
                             (_isRange ? (tick.value >= this.value[0] && tick.value <= this.value[1]) : tick.value <= value)
@@ -79,12 +87,13 @@
                     </ng-container>
                 </ng-container>
             </div>
+
             <div class="fd-slider__labels" *ngIf="showTicks && showTicksLabels">
                 <div
                     *ngFor="let tick of _tickMarks; let i = index"
                     class="fd-slider__label"
-                    [style.position]="'absolute'"
-                    [style.left.%]="(tick.value / (max - min)) * 100"
+                    [style.left.%]="!_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
+                    [style.right.%]="_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
                 >{{ tick.label }}
                 </div>
             </div>
@@ -92,27 +101,28 @@
     </div>
 </div>
 
-<pre><b>Value:{{ value | json }}</b></pre>
-
 <ng-template #singleSliderPopover>
     <ng-container *ngTemplateOutlet="popoverInner; context: { target: _sliderValueTargets.SINGLE_SLIDER }"></ng-container>
 </ng-template>
+
 <ng-template #rangeSliderPopover1>
     <ng-container *ngTemplateOutlet="popoverInner; context: { target: _sliderValueTargets.RANGE_SLIDER1 }"></ng-container>
 </ng-template>
+
 <ng-template #rangeSliderPopover2>
     <ng-container *ngTemplateOutlet="popoverInner; context: { target: _sliderValueTargets.RANGE_SLIDER2 }"></ng-container>
 </ng-template>
+
 <ng-template #popoverInner let-target="target">
     <div class="slider-tooltip-wrapper" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
-        <div *ngIf="tooltipMode === 'readonly'" class="slider-tooltip">{{ popoverValueRef[target] }}</div>
+        <div *ngIf="tooltipMode === 'readonly'" class="slider-tooltip">{{ _popoverValueRef[target] }}</div>
         <input
             #popoverInputField
             tabindex="-1"
             type="text"
             class="fd-input slider-tooltip {{ _popoverInputFieldClass }}"
             *ngIf="tooltipMode === 'editable'"
-            [(ngModel)]="popoverValueRef[target]"
+            [(ngModel)]="_popoverValueRef[target]"
             (blur)="_updateValueFromInput(popoverInputField.value, target)"
             (keydown.enter)="_updateValueFromInput(popoverInputField.value, target)">
     </div>
