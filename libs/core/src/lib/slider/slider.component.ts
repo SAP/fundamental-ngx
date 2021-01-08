@@ -10,6 +10,7 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     QueryList,
     Renderer2,
     ViewChild,
@@ -19,9 +20,11 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
-import { applyCssClass, CssClassBuilder, PopoverDirective } from '@fundamental-ngx/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+
+import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
+import { PopoverDirective } from '../popover/public_api';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -57,7 +60,8 @@ let sliderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [SLIDER_VALUE_ACCESSOR]
 })
-export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor, CssClassBuilder {
+export class SliderComponent
+    implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor, CssClassBuilder {
     /** Slider id, it has some default value if not set,  */
     @Input()
     @HostBinding('attr.id')
@@ -123,11 +127,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     @Input()
     readonly = false;
 
+    /** Control value */
     @Input()
     get value(): number | number[] {
         return this._value;
     }
 
+    /** Set control value */
     set value(val: number | number[]) {
         if (typeof val === 'string') {
             val = Number(val);
@@ -137,11 +143,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             return;
         }
 
-        if (!this._isRange && (typeof val === 'number')) {
-            this._progress = this._calcProgress(val);
+        if (!this._isRange && typeof val === 'number') {
+            this._progress = this._calcProgress(val, true);
         }
 
-        if (this._isRange && Array.isArray(val) && !(this._handle1Value && this._handle2Value)) {
+        if (this._isRange && Array.isArray(val) && this._handle1Value === 0 && this._handle2Value === 0) {
             this._setRangeHandleValueAndPosition(RangeHandles.First, val[0]);
             this._setRangeHandleValueAndPosition(RangeHandles.Second, val[1]);
         }
@@ -152,45 +158,87 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         this._cdr.markForCheck();
     }
 
-    get popoverValueRef(): number[] {
+    /** @hidden */
+    get _popoverValueRef(): number[] {
         return [this.value as number, this._handle1Value, this._handle2Value];
     }
 
-    @ViewChild('track', { read: ElementRef }) trackEl: ElementRef<any>;
-    @ViewChild('handle', { read: ElementRef }) handle: ElementRef<any>;
-    @ViewChild('rangeHandle1', { read: ElementRef }) rangeHandle1: ElementRef<any>;
-    @ViewChild('rangeHandle2', { read: ElementRef }) rangeHandle2: ElementRef<any>;
+    /** @hidden */
+    @ViewChild('track', { read: ElementRef })
+    trackEl: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
+    @ViewChild('handle', { read: ElementRef })
+    handle: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
+    @ViewChild('rangeHandle1', { read: ElementRef })
+    rangeHandle1: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
+    @ViewChild('rangeHandle2', { read: ElementRef })
+    rangeHandle2: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChildren(PopoverDirective)
     _popovers: QueryList<PopoverDirective>;
 
+    /** @hidden */
     _value: number | number[] = 0;
+
+    /** @hidden */
     _progress = 0;
+
+    /** @hidden */
     _isRange = false;
+
+    /** @hidden */
     _handle1Position = 0;
+
+    /** @hidden */
     _handle2Position = 0;
+
+    /** @hidden */
     _handle1Value = 0;
+
+    /** @hidden */
     _handle2Value = 0;
+
+    /** @hidden */
     _rangeProgress = 0;
+
+    /** @hidden */
     _tickMarks: SliderTickMark[] = [];
+
+    /** @hidden */
     _valuesBySteps: number[] = [];
+
+    /** @hidden */
     _sliderValueTargets = SliderValueTargets;
+
+    /** @hidden */
     _popoverInputFieldClass = `fd-slider-popover-input-${sliderId}`;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /** @hidden */
+    _isRtl = false;
+
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
-        private _cdr: ChangeDetectorRef,
-        private _renderer: Renderer2
-    ) {
-    }
+        private readonly _elementRef: ElementRef,
+        private readonly _cdr: ChangeDetectorRef,
+        private readonly _renderer: Renderer2,
+        @Optional() private readonly _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
+        this._subscribeToRtl();
         this.buildComponentCssClass();
         this._checkIsInRangeMode();
         this._attachResizeListener();
@@ -219,15 +267,14 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
     @applyCssClass
-    /** CssClassBuilder interface implementation
+    /**
+     * @hidden
+     * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-slider',
-            this.class
-        ];
+        return ['fd-slider', this.class];
     }
 
     /** @hidden */
@@ -236,20 +283,18 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     }
 
     /** @hidden */
-    onChange: Function = () => {
-    };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {
-    };
+    onTouched: Function = () => {};
 
     /** @hidden */
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: Function): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: Function): void {
         this.onTouched = fn;
     }
 
@@ -275,14 +320,15 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
 
     /** @hidden */
     onHandleClick(event: MouseEvent): void {
-        const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', moveEvent => {
+        const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
             this._updatePopoversPosition();
+
             if (!this._isRange) {
                 this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
+
                 return;
             }
 
-            const value = this._calculateValueFromPointerPosition(moveEvent);
             let handleIndex: RangeHandles;
             if (event.target === this.rangeHandle1.nativeElement) {
                 handleIndex = RangeHandles.First;
@@ -292,10 +338,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
                 handleIndex = RangeHandles.Second;
             }
 
+            const value = this._calculateValueFromPointerPosition(moveEvent);
             this._setRangeHandleValueAndPosition(handleIndex, value);
+
             this.writeValue(this._constructRangeModelValue());
             this._cdr.detectChanges();
         });
+
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
             unsubscribeFromMousemove();
             unsubscribeFromMouseup();
@@ -304,12 +353,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
 
     /** @hidden */
     onKeyDown(event: KeyboardEvent): void {
-        const allowedKeys = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW];
-        if (!allowedKeys.includes(event.keyCode)) {
+        const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW];
+        if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;
         }
 
         event.preventDefault();
+
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | null = null;
         let prevValue = this.value as number;
@@ -326,11 +376,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             }
         }
 
-        if (event.keyCode === LEFT_ARROW || event.keyCode === DOWN_ARROW) {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             newValue = prevValue - diff;
         }
 
-        if (event.keyCode === RIGHT_ARROW || event.keyCode === UP_ARROW) {
+        if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
             newValue = prevValue + diff;
         }
 
@@ -343,6 +393,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         if (!this._isRange) {
             this.writeValue(newValue);
             this._updatePopoversPosition();
+
             return;
         }
 
@@ -354,13 +405,17 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
 
     /** @hidden */
     _showPopovers(): void {
-        this._popovers.forEach(popover => popover.open());
+        this._popovers.forEach((popover) => popover.open());
     }
 
     /** @hidden */
     _hidePopovers(): void {
-        const elementsToCheck = [this.handle?.nativeElement, this.rangeHandle1?.nativeElement, this.rangeHandle2?.nativeElement];
-        const handleFocused = elementsToCheck.some(el => document.activeElement === el);
+        const elementsToCheck = [
+            this.handle?.nativeElement,
+            this.rangeHandle1?.nativeElement,
+            this.rangeHandle2?.nativeElement
+        ];
+        const handleFocused = elementsToCheck.some((el) => document.activeElement === el);
         const popoverInputFocused = document.activeElement.classList.contains(this._popoverInputFieldClass);
         if (handleFocused || popoverInputFocused) {
             const unsubscribeFromBlur = this._renderer.listen(document.activeElement, 'focusout', () => {
@@ -369,16 +424,19 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
                     this._hidePopovers();
                 });
             });
+
             return;
         }
 
-        this._popovers.forEach(popover => popover.close());
+        this._popovers.forEach((popover) => popover.close());
     }
 
+    /** @hidden */
     _updatePopoversPosition(): void {
-        this._popovers.forEach(popover => popover.updatePopper());
+        this._popovers.forEach((popover) => popover.updatePopper());
     }
 
+    /** @hidden */
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
         const newValue = this._processNewValue(+value);
         if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
@@ -403,12 +461,17 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
     /** @hidden */
     private _calculateValueFromPointerPosition(event: MouseEvent): number {
         const { x, width } = this.trackEl.nativeElement.getBoundingClientRect();
-        const percentage = ((event.clientX - x) / width);
+        let percentage = (event.clientX - x) / width;
+        if (this._isRtl) {
+            percentage = 1 - (event.clientX - x) / width;
+        }
+
         const newValue = this.min + percentage * (this.max - this.min);
 
         return this._processNewValue(newValue);
     }
 
+    /** @hidden */
     private _processNewValue(newValue: number): number {
         if (newValue > this.max) {
             return this.max;
@@ -419,15 +482,15 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         }
 
         const stepDiffArray = this._valuesBySteps
-            .map(stepValue => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
+            .map((stepValue) => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
             .sort((a, b) => a.diff - b.diff);
 
         return stepDiffArray[0].value;
     }
 
-
+    /** @hidden */
     private _setRangeHandleValueAndPosition(handleIndex: RangeHandles, value: number): void {
-        const position = this._calcProgress(value);
+        const position = this._calcProgress(value, true);
         if (handleIndex === RangeHandles.First) {
             this._handle1Value = value;
             this._handle1Position = position;
@@ -441,33 +504,31 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
     }
 
+    /** @hidden */
     private _constructRangeModelValue(): number[] {
-        return [
-            Math.min(this._handle1Value, this._handle2Value),
-            Math.max(this._handle1Value, this._handle2Value)
-        ];
+        return [Math.min(this._handle1Value, this._handle2Value), Math.max(this._handle1Value, this._handle2Value)];
     }
 
+    /** @hidden */
     private _attachResizeListener(): void {
         fromEvent(window, 'resize')
             .pipe(debounceTime(500), takeUntil(this._onDestroy$))
             .subscribe(() => this._onResize());
     }
 
+    /** @hidden */
     private _onResize(): void {
         this._constructTickMarks();
         this._cdr.detectChanges();
     }
 
+    /** @hidden */
     private _constructValuesBySteps(): void {
         try {
-            this._valuesBySteps = Array(((this.max - this.min) / this.step) + 1)
+            this._valuesBySteps = Array((this.max - this.min) / this.step + 1)
                 .fill({})
-                .map((tickMark, i) => {
-                    return Number((this.min + i * this.step).toFixed(2));
-                });
-        } catch (e) {
-        }
+                .map((_, i) => Number((this.min + i * this.step).toFixed(2)));
+        } catch (e) {}
     }
 
     /** @hidden */
@@ -481,22 +542,23 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             this._tickMarks = [...this.customLabelsValues];
         } else {
             try {
-                const tickMarksCount = ((this.max - this.min) / this.step) + 1;
+                const tickMarksCount = (this.max - this.min) / this.step + 1;
                 if (tickMarksCount > this._maxTickMarksNumber) {
                     this._tickMarks = [{ value: this.min }, { value: this.max }];
+
                     return;
                 }
+
                 this._tickMarks = Array(tickMarksCount)
                     .fill({})
-                    .map((_, i) => {
-                        return { value: this.min + i * this.step };
-                    });
-            } catch (e) {
-            }
+                    .map((_, i) => ({ value: this.min + i * this.step }));
+            } catch (e) {}
         }
+
         this._cdr.detectChanges();
     }
 
+    /** @hidden */
     private get _maxTickMarksNumber(): number {
         if (!this.trackEl || !this.trackEl.nativeElement) {
             return;
@@ -505,10 +567,17 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
         return Math.floor(this.trackEl.nativeElement.getBoundingClientRect().width / MIN_DISTANCE_BETWEEN_TICKS);
     }
 
-    private _calcProgress(value: number): number {
-        return (value - this.min) / (this.max - this.min) * 100;
+    /** @hidden */
+    private _calcProgress(value: number, skipRtl = false): number {
+        let progress = ((value - this.min) / (this.max - this.min)) * 100;
+        if (!skipRtl && this._isRtl) {
+            progress = 100 - progress;
+        }
+
+        return progress;
     }
 
+    /** @hidden */
     private _recalcHandlePositions(): void {
         if (this._isRange) {
             this._handle1Position = this._calcProgress(this._handle1Value);
@@ -516,11 +585,20 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, AfterViewI
             this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
         }
 
-        this._progress = this._calcProgress(this.value as number);
+        this._progress = this._calcProgress(this.value as number, true);
         this._cdr.markForCheck();
     }
 
+    /** @hidden */
     private _checkIsInRangeMode(): void {
         this._isRange = this.mode === 'range';
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
+            this._isRtl = isRtl;
+            this._cdr.detectChanges();
+        });
     }
 }
