@@ -21,6 +21,6 @@ export class ComboboxDynamicExampleComponent {
 
     customFilter(content: any[], searchTerm: string): any[] {
         const search = searchTerm.toLocaleLowerCase();
-        return content.filter((item) => item.toLocaleLowerCase().startsWith(search));
+        return content.filter((item) => item.toLocaleLowerCase().includes(search));
     }
 }

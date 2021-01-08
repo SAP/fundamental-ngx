@@ -536,7 +536,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             const searchLower = searchTerm.toLocaleLowerCase();
             return contentArray.filter((item) => {
                 if (item) {
-                    return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
+                    return this.displayFn(item).toLocaleLowerCase().startsWith(searchLower);
                 }
             });
         } else if (typeof searchTerm === 'object') {

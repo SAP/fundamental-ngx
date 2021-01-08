@@ -12,6 +12,6 @@ export class MultiInputFilterExampleComponent {
             return content;
         }
         const search = searchTerm.toLocaleLowerCase();
-        return content.filter((item) => item.toLocaleLowerCase().startsWith(search));
+        return content.filter((item) => item.toLocaleLowerCase().includesWith(search));
     }
 }

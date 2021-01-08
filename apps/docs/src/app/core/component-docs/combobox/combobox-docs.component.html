@@ -15,9 +15,8 @@
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
     accepts an array and a search term, handle filtering logic within this function, and then return the desired
-    filtered array. In this example, we are only populating the list with results where the search term matches the
-    beginning of the result, as opposed to the usual behavior where the list will be populated if the search term
-    appears anywhere in the string.
+    filtered array. In this example, we are returning results where the search term matches any portion of the results,
+    as opposed to the default behavior where the search term matches only the beginning of the results.
 </description>
 <component-example>
     <fd-combobox-dynamic-example></fd-combobox-dynamic-example>

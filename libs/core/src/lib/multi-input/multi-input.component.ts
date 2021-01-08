@@ -466,7 +466,7 @@ export class MultiInputComponent implements
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
-                return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
+                return this.displayFn(item).toLocaleLowerCase().startsWith(searchLower);
             }
         });
     }
