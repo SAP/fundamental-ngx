@@ -120,7 +120,7 @@
     "wait-on": "5.2.0",
     "web-animations-js": "2.3.2",
     "webdriver-manager": "12.1.7",
-    "zone.js": "0.11.2"
+    "zone.js": "0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1002.0",
