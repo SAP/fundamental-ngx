@@ -175,7 +175,7 @@ export function clearValue(selector: string, index: number = 0, waitTime = defau
 export function getElementSize(selector: string, index?: number):  WebdriverIO.SizeReturn;
 export function getElementSize(selector: string, index: number, prop: 'width' | 'height'): number;
 export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number | WebdriverIO.SizeReturn {
-    return prop ? $$(selector)[index].getSize() : $$(selector)[index].getSize(prop);
+    return prop ? $$(selector)[index].getSize(prop) : $$(selector)[index].getSize();
 }
 
 export function executeScript(callback): string {
@@ -264,6 +264,6 @@ export function mouseButtonUp(button: 0 | 1 | 2 = 0): void {
     browser.buttonUp(button);
 }
 
-export function  clickNextElement(selector: string, index: number = 0): void {
+export function clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
 }
