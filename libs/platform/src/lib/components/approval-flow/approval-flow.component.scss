@@ -22,7 +22,7 @@ $block: approval-flow;
         outline-offset: 0.0625rem;
         outline-width: 0.0625rem;
         outline-style: dotted;
-        outline-color: #0854A0;
+        outline-color: var(--sapContent_FocusColor, #0854A0);
     }
 
     &[dir='rtl'] {
@@ -93,7 +93,7 @@ $block: approval-flow;
         outline-offset: 0.0625rem;
         outline-width: 0.0625rem;
         outline-style: dotted;
-        outline-color: #0854A0;
+        outline-color: var(--sapContent_FocusColor, #0854A0);
     }
 
     &[dir='rtl'] {
@@ -193,6 +193,6 @@ $block: approval-flow;
         outline-offset: 0.0625rem;
         outline-width: 0.0625rem;
         outline-style: dotted;
-        outline-color: #0854A0;
+        outline-color: var(--sapContent_FocusColor, #0854A0);
     }
 }

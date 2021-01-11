@@ -264,6 +264,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
+        this._onDestroy$.complete();
     }
 
     /** @hidden Listen window resize and distribute cards on column change */
