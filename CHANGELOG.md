@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.54...v0.26.0-rc.55) (2021-01-11)
+
+## [0.26.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.53...v0.26.0-rc.54) (2021-01-11)
+
+## [0.26.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.52...v0.26.0-rc.53) (2021-01-11)
+
+## [0.26.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.51...v0.26.0-rc.52) (2021-01-10)
+
+## [0.26.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.50...v0.26.0-rc.51) (2021-01-10)
+
+## [0.26.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.49...v0.26.0-rc.50) (2021-01-10)
+
+## [0.26.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.48...v0.26.0-rc.49) (2021-01-08)
+
+
+### Bug Fixes
+
+* (Core) Toolbar spacing elements, simplify code ([#4188](https://github.com/SAP/fundamental-ngx/issues/4188)) ([dcdb728](https://github.com/SAP/fundamental-ngx/commit/dcdb728c618cb1b21202aade227d6a2988fce70d))
+
+## [0.26.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.47...v0.26.0-rc.48) (2021-01-07)
+
+## [0.26.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.46...v0.26.0-rc.47) (2021-01-07)
+
+## [0.26.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.45...v0.26.0-rc.46) (2021-01-06)
+
+
+### Bug Fixes
+
+* (Platform) list screen reader and accessibility issues for set2 ([#4160](https://github.com/SAP/fundamental-ngx/issues/4160)) ([2084a29](https://github.com/SAP/fundamental-ngx/commit/2084a29f3e45810534222347d970aabfb3416701))
+
+## [0.26.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.44...v0.26.0-rc.45) (2021-01-06)
+
+
+### Bug Fixes
+
+* (platform) Menu position in split-menu-button and Sub-menu padding fix in cascading menu ([#4205](https://github.com/SAP/fundamental-ngx/issues/4205)) ([774f738](https://github.com/SAP/fundamental-ngx/commit/774f738b1cd106523dcdbc92a347cc57c1941af7))
+
+## [0.26.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.43...v0.26.0-rc.44) (2021-01-05)
+
+## [0.26.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.42...v0.26.0-rc.43) (2021-01-05)
+
+## [0.26.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.41...v0.26.0-rc.42) (2021-01-05)
+
+
+### Bug Fixes
+
+* (Core|Platform) simplify dialog, bar, message-box markup ([#4140](https://github.com/SAP/fundamental-ngx/issues/4140)) ([fe3e892](https://github.com/SAP/fundamental-ngx/commit/fe3e89245c3dd58ee19b9704963673408914a658))
+
+## [0.26.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.40...v0.26.0-rc.41) (2021-01-05)
+
+## [0.26.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.39...v0.26.0-rc.40) (2021-01-05)
+
 ## [0.26.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.38...v0.26.0-rc.39) (2021-01-05)
 
 

@@ -1,5 +1,5 @@
 import { CheckboxGroupPO } from '../pages/checkbox-group.po';
-import { webDriver } from '../../driver/wdio';
+import { refreshPage } from '../../driver/wdio';
 
 describe('Search field', () => {
     const checkboxGroupPage = new CheckboxGroupPO();
@@ -9,9 +9,6 @@ describe('Search field', () => {
     });
 
     afterEach(() => {
-        webDriver.refreshPage();
+        refreshPage();
     });
-
-
-
 });

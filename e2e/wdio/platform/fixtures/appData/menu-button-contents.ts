@@ -29,4 +29,4 @@ export default {
     truncatedBtnTooltipText: 'Default menu button with icon and long text',
     truncatedBtnNoIconTooltipText: 'Default menu button with long text',
     tooltipAttr: 'title'
-}
+};
