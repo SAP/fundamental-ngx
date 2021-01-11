@@ -29,9 +29,7 @@ mergeable:
           - required:
               reviewers: [ 'mikerodonnell89' ]
           - required:
-              reviewers: [ 'rengare' ]
-          - required:
-              reviewers: [ 'salarenko' ]
+              reviewers: [ 'valorkin' ]
           - min:
               count: 2
   - when: schedule.repository

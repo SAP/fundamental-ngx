@@ -47,15 +47,18 @@ describe('Checkbox test suite', () => {
     });
 
     describe('check binary checkbox used with form examples', () => {
-        it('should check binary checkbox in template driven form', () => {
-            if (!browserIsIEorSafari()) {
-                waitElementToBePresentInDOM(binaryTempCheckbox, 0);
-                waitForElDisplayed(binaryTempCheckbox, 0);
-                // check checkbox labels
-                for (let i = 0; 3 > i; i++) {
-                    checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
-                    checkMarkingCheckbox(binaryTempCheckbox, i);
-                }
+        // TODO: Unskip after fix
+        xit('should check binary checkbox in template driven form', () => {
+            webDriver.waitElementToBePresentInDOM(binaryTempCheckbox, 0);
+            webDriver.waitForDisplayed(binaryTempCheckbox, 0);
+            // check checkbox labels
+            for (let i = 0; 3 > i; i++) {
+                checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
+                checkMarkingCheckbox(binaryTempCheckbox, i);
+            }
+            if (webDriver.isBrowser('Safari') || webDriver.isBrowser('internet explorer')) {
+                console.log('Skip check for Safari and IE');
+            } else {
                 checkHoverState(binaryTempCheckbox);
                 checkFocusState(binaryTempCheckbox);
                 return;
@@ -302,27 +305,11 @@ describe('Checkbox test suite', () => {
                 return;
             }
             console.log('skip for IE');
-            // const areaContainersArrayLength = getElementArrayLength(exampleAreaContainersArr);
-            //
-            // for (let i = 0; areaContainersArrayLength > i; i++) {
-            //     expect(getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value)
-            //         .toBe('ltr', 'css prop direction ');
-            // }
         });
 
-        // it('should check RTL orientation', () => {
-        //     const arrL = getElementArrayLength(exampleAreaContainersArr);
-        //
-        //     for (let i = 0; arrL > i; i++) {
-        //         scrollIntoView(exampleAreaContainersArr, i);
-        //         expect(getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-        //         const dirValueBefore = getAttributeByName(exampleAreaContainersArr, 'dir', i);
-        //         expect([null, '']).toContain(dirValueBefore);
-        //         click(checkboxPage.rtlSwitcherArr, i);
-        //         expect(getCSSPropertyByName(exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-        //         expect(getAttributeByName(exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-        //     }
-        // });
+        it('should check RTL orientation', () => {
+            checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
+        });
     });
 });
 

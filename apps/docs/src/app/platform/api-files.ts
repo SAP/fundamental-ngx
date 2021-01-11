@@ -45,6 +45,7 @@ export const API_FILES = {
         'TableDataProvider'
     ],
     textarea: ['TextAreaComponent'],
+    timePicker: ['PlatformTimePickerComponent'],
     panel: [
         'PlatformPanelComponent',
         'PlatformPanelContentComponent',

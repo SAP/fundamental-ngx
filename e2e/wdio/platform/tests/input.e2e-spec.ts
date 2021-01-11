@@ -150,7 +150,7 @@ describe('Input should ', function() {
         expect(executeScriptAfterTagAttr(inputPage.requiredInputLabel, 'content')).toBe('"*"');
     });
 
-    it('should have visual cue for information', () => {
+    xit('should have visual cue for information', () => {
         expect(executeScriptBeforeTagAttr(inputPage.questionMarkSpan, 'content')).toBe('"?"');
     });
 

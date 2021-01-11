@@ -15,19 +15,17 @@
         </fd-dialog-body>
 
         <fd-dialog-footer *ngIf="mobileConfig.approveButtonText || mobileConfig.cancelButtonText">
-            <fd-dialog-footer-button *ngIf="mobileConfig.approveButtonText">
-                <button fd-button fdType="emphasized" fd-dialog-decisive-button [label]="mobileConfig.approveButtonText" (click)="approve()">
-                </button>
-            </fd-dialog-footer-button>
-
-            <fd-dialog-footer-button *ngIf="mobileConfig.cancelButtonText">
-                <button fd-button
-                        fd-dialog-decisive-button
-                        fdType="transparent"
-                        [label]="mobileConfig.cancelButtonText"
-                        (click)="cancel()">
-                </button>
-            </fd-dialog-footer-button>
+            <fd-button-bar
+                    *ngIf="mobileConfig?.approveButtonText"
+                    fdType="emphasized"
+                    [label]="mobileConfig?.approveButtonText"
+                    (click)="approve()">
+            </fd-button-bar>
+            <fd-button-bar
+                    *ngIf="mobileConfig?.cancelButtonText"
+                    [label]="mobileConfig?.cancelButtonText"
+                    (click)="cancel()">
+            </fd-button-bar>
         </fd-dialog-footer>
 
     </fd-dialog>

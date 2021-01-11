@@ -1,5 +1,13 @@
 import { BaseComponentPo } from './base-component.po';
-import { click, pause, scrollIntoView, sendKeys, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import {
+    click,
+    pause,
+    scrollIntoView,
+    sendKeys,
+    waitElementToBePresentInDOM,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 export class ComboBoxPo extends BaseComponentPo {
     private url = '/combobox';
@@ -52,6 +60,7 @@ export class ComboBoxPo extends BaseComponentPo {
     }
 
     selectOption(type: string, option: string): void {
+        waitElementToBePresentInDOM(this.dropDownOption(option));
         scrollIntoView(this.dropDownOption(option));
         click(this.dropDownOption(option));
         waitForElDisplayed(this.filledComboBoxInputs(type, option));

@@ -80,7 +80,7 @@ describe('Step input test suite', function() {
         }
     });
 
-    it('Verify error message when entering invalid value', () => {
+    xit('Verify error message when entering invalid value', () => {
         scrollIntoView(stepInputPage.reactiveFormInput);
         stepInputPage.fillInput(stepInputPage.reactiveFormInput, 'invalid');
         waitForElDisplayed(stepInputPage.errorMessage);
@@ -138,7 +138,7 @@ describe('Step input test suite', function() {
         checkIfDisabled(stepInputPage.minMaxButtonDecrement, 'aria-disabled', 'true')
     });
 
-    it('Verify when user enter the tap step input field should be highlighted or focused ', () => {
+    xit('Verify when user enter the tap step input field should be highlighted or focused ', () => {
         const arr = getElementArrayLength(stepInputPage.inputWithoutForm);
         click(stepInputPage.inputWithoutForm);
         checkFocused(stepInputPage.inputWithoutForm);

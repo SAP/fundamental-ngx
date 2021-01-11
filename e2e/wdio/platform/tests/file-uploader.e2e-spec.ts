@@ -1,10 +1,11 @@
 import {
+    browserIsIEorSafari,
     click,
     getAlertText,
     getAttributeByName,
     getElementArrayLength,
     getText,
-    refreshPage,
+    refreshPage, sendKeys,
     uploadFile
 } from '../../driver/wdio';
 import { FileUploaderPo } from '../pages/file-uploader.po';
@@ -30,9 +31,11 @@ describe('File uploader test suite', function() {
     });
 
     it('Verify browser button', () => {
-        const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
-        for (let i = 0; i < arrLength; i++) {
-            click(fileUploaderPO.browseButton, i);
+        if (!browserIsIEorSafari()) {
+            const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
+            for (let i = 0; i < arrLength; i++) {
+                click(fileUploaderPO.browseButton, i);
+            }
         }
     });
 

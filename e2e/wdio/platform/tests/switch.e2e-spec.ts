@@ -88,7 +88,7 @@ describe('Verify Switch component', function() {
             console.log('Skip for Safari and IE');
         });
 
-        fit('compact switch should be smaller than default', () => {
+        it('compact switch should be smaller than default', () => {
             waitElementToBePresentInDOM(switchPage.defaultSwitchSize);
             waitForElDisplayed(switchPage.defaultSwitchSize);
             waitElementToBePresentInDOM(switchPage.defaultCompactSwitchSize);

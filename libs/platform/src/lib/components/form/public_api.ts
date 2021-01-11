@@ -28,6 +28,8 @@ export * from './date-picker/date-picker.component';
 export * from './date-picker/date-picker.module';
 export * from './datetime-picker/datetime-picker.module';
 export * from './datetime-picker/datetime-picker.component';
+export * from './time-picker/time-picker.module';
+export * from './time-picker/time-picker.component';
 export * from './step-input/public_api';
 export * from './input-group/public_api';
 export * from './combobox';

@@ -3,7 +3,7 @@ Default behavior:
     title="Default behavior for split menu button" menuTitle="More options"
     (primaryButtonClick)="onPrimaryButtonClick1()">
 </fdp-split-menu-button>
-<fdp-menu #menu1 xPosition="before">
+<fdp-menu #menu1 xPosition="after">
     <fdp-menu-item (itemSelect)="onItemSelect1('Option 1')">Option 1</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect1('Option 2')">Option 2</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect1('Option 3')">Option 3</fdp-menu-item>
@@ -16,7 +16,7 @@ Longer text in menu:
     title="option with longer text gets truncated" menuTitle="More options"
     (primaryButtonClick)="onPrimaryButtonClick2()">
 </fdp-split-menu-button>
-<fdp-menu #menu2 xPosition="before">
+<fdp-menu #menu2 xPosition="after">
     <fdp-menu-item (itemSelect)="onItemSelect2('Option 1')">Option 1</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect2('Option 2 with long text')">Option 2 with long text</fdp-menu-item>
 </fdp-menu>
@@ -28,7 +28,7 @@ fixedWidth=false:
     title="option with longer text gets truncated" menuTitle="More options"
     (primaryButtonClick)="onPrimaryButtonClick3()">
 </fdp-split-menu-button>
-<fdp-menu #menu3 xPosition="before">
+<fdp-menu #menu3 xPosition="after">
     <fdp-menu-item (itemSelect)="onItemSelect3('Option 1')">Option 1</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect3('Option 2 with text')">Option 2 with text</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect3('Split menu button width more than 12rem')">Split menu button width more

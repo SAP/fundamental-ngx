@@ -82,7 +82,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/token', name: 'Token' },
             { url: 'core/toolbar', name: 'Toolbar' },
             { url: 'core/object-number', name: 'Object Number' },
-            { url: 'core/wizard', name: 'Wizard' }
+            { url: 'core/wizard', name: 'Wizard' },
+            { url: 'core/grid-list', name: 'Grid List' }
         ];
 
         this.layouts = [

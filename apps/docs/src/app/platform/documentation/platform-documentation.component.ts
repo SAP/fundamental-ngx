@@ -41,6 +41,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/table', name: 'Table' },
             { url: 'platform/textarea', name: 'Textarea' },
             { url: 'platform/thumbnail', name: 'Thumbnail' },
+            { url: 'platform/time-picker', name: 'Time Picker' },
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
             { url: 'platform/combobox', name: 'Combobox' },

@@ -18,6 +18,11 @@ import {
 describe('Menu button test suite', function() {
     const menuBtnPage = new MenuButtonPo();
 
+    beforeAll(()=> {
+
+    })
+
+
     beforeEach(() => {
         menuBtnPage.open();
         refreshPage();
