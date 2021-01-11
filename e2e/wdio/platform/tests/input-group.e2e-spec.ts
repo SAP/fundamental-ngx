@@ -16,7 +16,7 @@ import {
     scrollIntoView,
     setValue,
     waitElementToBePresentInDOM,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
 import inputGroupPContent from '../fixtures/appData/input-group-page-contents';
@@ -27,11 +27,12 @@ describe('Input Group should', function() {
 
     beforeAll(() => {
         inputGroupPage.open();
-        pause(16000);
+        waitForPresent(inputGroupPage.leftAlignedTextInput);
     });
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(inputGroupPage.leftAlignedTextInput);
     });
 
     it('have associated label element to describe its purpose', () => {

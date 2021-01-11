@@ -29,11 +29,12 @@ describe('Combobox test suite', function() {
 
     beforeAll(() => {
         comboBoxPage.open();
-        pause(16000);
+        waitForPresent(comboBoxPage.comboBoxButtons(activeTypeNames[0]));
     });
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(comboBoxPage.comboBoxButtons(activeTypeNames[0]));
     });
 
     it('Verify each combobox consist of input and button', () => {
