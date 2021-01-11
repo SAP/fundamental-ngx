@@ -4,7 +4,7 @@ import {
     getAttributeByName,
     getCSSPropertyByName,
     getElementArrayLength,
-    mouseHoverElement,
+    mouseHoverElement, pause,
     refreshPage,
     scrollIntoView
 } from '../../driver/wdio';
@@ -17,6 +17,7 @@ describe('Object marker test suite', function() {
     const objectMarkerPage = new ObjectMarkerPo();
     beforeAll(() => {
         objectMarkerPage.open();
+        pause(16000);
     });
     afterEach(() => {
         refreshPage();

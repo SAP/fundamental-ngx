@@ -6,7 +6,7 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed,
-    sendKeys, getAttributeByName, browserIsIEorSafari
+    sendKeys, getAttributeByName, browserIsIEorSafari, pause
 } from '../../driver/wdio';
 import {placeholderValue} from '../fixtures/appData/file-uploader.page-content';
 import { MultiInputPo } from '../pages/multi-input.po';
@@ -16,6 +16,7 @@ describe('Multi input test suite', function() {
 
     beforeAll(() => {
         multiInputPage.open();
+        pause(16000);
     });
 
     afterEach(() => {
