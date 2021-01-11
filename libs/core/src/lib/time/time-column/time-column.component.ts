@@ -299,7 +299,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * after => Defines if value was incremented/decremented, needed for hours to trigger AM/PM change
      */
     private _pickTime(item: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
-
         if (!item) {
             return;
         }
@@ -364,9 +363,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                     map((value) => this._getValue(value)),
                     map((value) => this._getItem(value))
                 )
-                .subscribe((item) =>
-                    this._pickTime(item, false, true)
-                )
+                .subscribe((item) => this._pickTime(item, false, true))
         );
     }
 
