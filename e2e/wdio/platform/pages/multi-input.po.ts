@@ -5,9 +5,9 @@ export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
     expandedDropdown = '.fd-list'
-    activeDropDownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]'
-    allDropDownButtons = 'button[ng-reflect-glyph="value-help"]';
-    disabledDropDownButtons = '[ng-reflect-disabled="true"] button[ng-reflect-glyph="value-help"]'
+    activeDropdownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]'
+    allDropdownButtons = 'button[ng-reflect-glyph="value-help"]';
+    disabledDropdownButtons = '[ng-reflect-disabled="true"] button[ng-reflect-glyph="value-help"]'
     activeInputs = '.fd-multi-input-field [ng-reflect-disabled="false"] input';
     mobileInput = 'div[role="dialog"] input'
     disabledInputs = '.fdp-multi-input [ng-reflect-disabled="true"] input';

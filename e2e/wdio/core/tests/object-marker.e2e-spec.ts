@@ -15,13 +15,16 @@ import {
 } from '../fixtures/appData/object-marker-content';
 describe('Object marker test suite', function() {
     const objectMarkerPage = new ObjectMarkerPo();
+
     beforeAll(() => {
         objectMarkerPage.open();
         pause(16000);
     });
+
     afterEach(() => {
         refreshPage();
     });
+
     it('Verify each marker is clickable', () => {
         const arr = getElementArrayLength(objectMarkerPage.marker);
         for (let i = 0; i < arr; i++) {
@@ -29,6 +32,7 @@ describe('Object marker test suite', function() {
             click(objectMarkerPage.marker, i);
         }
     });
+
     it('Verify technical statuses', () => {
         const arr = getElementArrayLength(objectMarkerPage.iconOnlyMarkers);
         for (let i = 0; i < arr; i++) {
@@ -36,9 +40,11 @@ describe('Object marker test suite', function() {
             expect(getAttributeByName(objectMarkerPage.iconOnlyMarkers, 'aria-label', i)).toBe(iconStatusesList[i][1]);
         }
     });
+
     it('Verify RTL and LTR orientation', () => {
         objectMarkerPage.checkRtlSwitch();
     });
+
     it('Verify marker hover state', () => {
         const arr = getElementArrayLength(objectMarkerPage.clickableMarkers);
         for (let i = 0; i < arr; i++) {
