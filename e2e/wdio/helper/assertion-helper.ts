@@ -96,7 +96,7 @@ export function checkElementTextValue(element: string, expectation): void {
     }
 }
 
-export function checkTextValueContain(oldValue: string, newValue: string): void {
-    expect(oldValue).toContain(newValue);
+export function checkTextValueContain(str: string, subStr: string): void {
+    expect(str).toContain(subStr);
 }
 

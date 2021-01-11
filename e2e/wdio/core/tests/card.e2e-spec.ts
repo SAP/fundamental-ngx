@@ -12,101 +12,104 @@ import { checkAttributeValueTrue, checkElArrIsClickable, checkElementText, check
 import CardData from '../fixtures/appData/card-content';
 
 describe('Card test suite:', function() {
-    const cardPg = new CardPo();
+    const cardPage = new CardPo();
 
     beforeAll(() => {
-        cardPg.open();
+        cardPage.open();
     });
 
     describe('Standard card examples:', function() {
         it('should check card header', () => {
-            checkElArrIsClickable(cardPg.cardHeader);
-            checkElementTextValue(cardPg.cardTitle, CardData.cardTitleArr);
-            expect(isElementDisplayed(cardPg.cardAvatar)).toBe(true);
-            expect(isElementDisplayed(cardPg.cardCounter)).toBe(true);
-            expect(isElementDisplayed(cardPg.cardSubtitle)).toBe(true);
-            expect(isElementDisplayed(cardPg.cardBadge)).toBe(true);
-            expect(getText(cardPg.cardSubtitle)).toBe(CardData.cardSubtitle);
-            expect(getText(cardPg.cardBadge)).toBe(CardData.badgeText);
+            checkElArrIsClickable(cardPage.cardHeader);
+            checkElementTextValue(cardPage.cardTitle, CardData.cardTitleArr);
+            expect(isElementDisplayed(cardPage.cardAvatar)).toBe(true);
+            expect(isElementDisplayed(cardPage.cardCounter)).toBe(true);
+            expect(isElementDisplayed(cardPage.cardSubtitle)).toBe(true);
+            expect(isElementDisplayed(cardPage.cardBadge)).toBe(true);
+            expect(getText(cardPage.cardSubtitle)).toBe(CardData.cardSubtitle);
+            expect(getText(cardPage.cardBadge)).toBe(CardData.badgeText);
         });
 
         it('should check card content', () => {
-            checkElArrIsClickable(cardPg.cardListItems);
-            checkElementText(cardPg.cardListItems);
-            expect(getAttributeByName(cardPg.cardAttr, CardData.cardTypeAttr, 2)).toBe('list');
+            checkElArrIsClickable(cardPage.cardListItems);
+            checkElementText(cardPage.cardListItems);
+            expect(getAttributeByName(cardPage.cardAttr, CardData.cardTypeAttr, 2)).toBe('list');
         });
     });
 
     describe('Compact examples:', function() {
         it('should check its compact and do basic checks', () => {
-            checkAttributeValueTrue(cardPg.compactCardAttr, CardData.compactAttr);
-            checkElementText(cardPg.compactCardHeader);
-            checkElementTextValue(cardPg.compactCardListItems, CardData.cardListItemText);
-            checkElArrIsClickable(cardPg.compactCardHeader);
-            checkElArrIsClickable(cardPg.compactCardListItems);
+            checkAttributeValueTrue(cardPage.compactCardAttr, CardData.compactAttr);
+            checkElementText(cardPage.compactCardHeader);
+            checkElementTextValue(cardPage.compactCardListItems, CardData.cardListItemText);
+            checkElArrIsClickable(cardPage.compactCardHeader);
+            checkElArrIsClickable(cardPage.compactCardListItems);
+            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/4310
             if (!browserIsIE()) {
-                expect(getCSSPropertyByName(cardPg.compactCardListItems, CardData.fontSizeAttr).value)
+                expect(getCSSPropertyByName(cardPage.compactCardListItems, CardData.fontSizeAttr).value)
                     .toBe(CardData.compactFont);
+                return;
             }
+            console.log('skip IE due to issue #4310');
         });
     });
 
     describe('Card loader examples:', function() {
         it('should check loading icon and attributes', () => {
-            checkAttributeValueTrue(cardPg.loaderCardAttr, CardData.loaderAttr);
-            expect(isElementDisplayed(cardPg.loaderIcon)).toBe(true);
+            checkAttributeValueTrue(cardPage.loaderCardAttr, CardData.loaderAttr);
+            expect(isElementDisplayed(cardPage.loaderIcon)).toBe(true);
         });
     });
 
     describe('Card footer examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(cardPg.ftCardHeader);
-            checkElArrIsClickable(cardPg.ftCardListItems);
-            checkElementTextValue(cardPg.ftCardListItems, CardData.cardListItemText);
-            expect(getText(cardPg.ftCardHeader)).toBe(CardData.cardTitleArr[0]);
+            checkElArrIsClickable(cardPage.ftCardHeader);
+            checkElArrIsClickable(cardPage.ftCardListItems);
+            checkElementTextValue(cardPage.ftCardListItems, CardData.cardListItemText);
+            expect(getText(cardPage.ftCardHeader)).toBe(CardData.cardTitleArr[0]);
         });
 
         it('should check footer', () => {
-            expect(isElementDisplayed(cardPg.ftFooter)).toBe(true);
-            checkElArrIsClickable(cardPg.ftButtons);
-            checkElementTextValue(cardPg.ftButtons, CardData.btnText);
+            expect(isElementDisplayed(cardPage.ftFooter)).toBe(true);
+            checkElArrIsClickable(cardPage.ftButtons);
+            checkElementTextValue(cardPage.ftButtons, CardData.btnText);
         });
     });
 
     describe('Analytical card examples:', function() {
         it('should check header', () => {
-            checkElArrIsClickable(cardPg.kpiAnalyticsHeader);
-            checkElementText(cardPg.kpiCardHeader);
-            expect(getText(cardPg.kpiCardTitle)).toBe(CardData.analyticsTitle);
-            checkElementText(cardPg.kpiAnalyticsHeaderIcons);
-            checkElementText(cardPg.kpiHeaderSubtitle);
+            checkElArrIsClickable(cardPage.kpiAnalyticsHeader);
+            checkElementText(cardPage.kpiCardHeader);
+            expect(getText(cardPage.kpiCardTitle)).toBe(CardData.analyticsTitle);
+            checkElementText(cardPage.kpiAnalyticsHeaderIcons);
+            checkElementText(cardPage.kpiHeaderSubtitle);
         });
 
         it('should check content', () => {
-            expect(isElementDisplayed(cardPg.kpiCardContent)).toBe(true);
-            expect(waitForElDisplayed(cardPg.kpiCardChart)).toBe(true);
+            expect(isElementDisplayed(cardPage.kpiCardContent)).toBe(true);
+            expect(waitForElDisplayed(cardPage.kpiCardChart)).toBe(true);
         });
     });
 
     describe('Table card examples:', function() {
         it('should check header', () => {
-            checkElArrIsClickable(cardPg.tableCardHeader);
-            expect(getText(cardPg.tableCardHeader)).toBe(CardData.tableCardTitle);
+            checkElArrIsClickable(cardPage.tableCardHeader);
+            expect(getText(cardPage.tableCardHeader)).toBe(CardData.tableCardTitle);
         });
 
         it('should check table content', () => {
-            checkElementTextValue(cardPg.tableCardTableHeader, CardData.tableHeaderText);
-            checkElementTextValue(cardPg.tableCardItemNames, CardData.tableCardNames);
-            checkElementTextValue(cardPg.tableCardItemCountries, CardData.tableCardCountries);
-            checkElementTextValue(cardPg.tableCardItemPrices, CardData.tableCardPrices);
-            checkElementTextValue(cardPg.tableCardItemStatuses, CardData.tableCardStatuses);
-            checkElArrIsClickable(cardPg.tableCardItems);
+            checkElementTextValue(cardPage.tableCardTableHeader, CardData.tableHeaderText);
+            checkElementTextValue(cardPage.tableCardItemNames, CardData.tableCardNames);
+            checkElementTextValue(cardPage.tableCardItemCountries, CardData.tableCardCountries);
+            checkElementTextValue(cardPage.tableCardItemPrices, CardData.tableCardPrices);
+            checkElementTextValue(cardPage.tableCardItemStatuses, CardData.tableCardStatuses);
+            checkElArrIsClickable(cardPage.tableCardItems);
         });
 
         it('should check status colors', () => {
-            const statusesCount = getElementArrayLength(cardPg.tableCardItemStatuses);
+            const statusesCount = getElementArrayLength(cardPage.tableCardItemStatuses);
             for (let i = 0; statusesCount > i; i++) {
-                expect(getCSSPropertyByName(cardPg.tableCardItemStatuses, CardData.colorAttr, i).value)
+                expect(getCSSPropertyByName(cardPage.tableCardItemStatuses, CardData.colorAttr, i).value)
                     .toContain(CardData.statusColors[i]);
             }
         });
@@ -114,20 +117,20 @@ describe('Card test suite:', function() {
 
     describe('Bar chart list examples:', function() {
         it('should check header', () => {
-            checkElArrIsClickable(cardPg.barChartHeader);
-            expect(getText(cardPg.barChartTitle)).toBe(CardData.barChartTitle);
-            expect(getText(cardPg.barChartCounter)).toBe(CardData.barChartCounter);
+            checkElArrIsClickable(cardPage.barChartHeader);
+            expect(getText(cardPage.barChartTitle)).toBe(CardData.barChartTitle);
+            expect(getText(cardPage.barChartCounter)).toBe(CardData.barChartCounter);
         });
 
         it('should check chart content', () => {
-            checkElementTextValue(cardPg.barChartItems, CardData.barChartItems);
-            expect(isElementDisplayed(cardPg.barCharBars)).toBe(true);
+            checkElementTextValue(cardPage.barChartItems, CardData.barChartItems);
+            expect(isElementDisplayed(cardPage.barCharBars)).toBe(true);
         });
     });
 
     describe('Check orientation:', function() {
         it('should check LTR and RTL', () => {
-            cardPg.checkRtlSwitch(cardPg.rtlSwitcherArr, cardPg.exampleAreaContainersArr);
+            cardPage.checkRtlSwitch();
         });
     });
 });

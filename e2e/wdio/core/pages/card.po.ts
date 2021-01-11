@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class CardPo extends CoreBaseComponentPo {
     private url = '/card';
@@ -49,11 +49,9 @@ export class CardPo extends CoreBaseComponentPo {
     barChartItems = 'fd-bar-chart-list-card-example li span';
     barCharBars = 'fd-bar-chart-list-card-example fd-card-bar';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.cardTitle);
     }
 }
