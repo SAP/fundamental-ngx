@@ -8,7 +8,10 @@ export function getSourceFile(host: Tree, path: string): ts.SourceFile {
     if (!buffer) {
         throw new SchematicsException(`Could not find file for path: ${path}`);
     }
-    return ts.createSourceFile(path, buffer.toString(), ts.ScriptTarget.Latest, true);
+
+    const text = buffer.toString('utf-8');
+
+    return ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
 }
 
 // Get the version of a package name
