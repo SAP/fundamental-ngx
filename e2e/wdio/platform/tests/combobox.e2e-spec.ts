@@ -29,6 +29,7 @@ describe('Combobox test suite', function() {
 
     beforeAll(() => {
         comboBoxPage.open();
+        pause(16000);
     });
 
     afterEach(() => {
