@@ -22,6 +22,7 @@ import { debounceTime, take, takeUntil } from 'rxjs/operators';
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
+import { BaseComponent } from '../base';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: true };
 
@@ -264,17 +265,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
-        this._onDestroy$.complete();
     }
 
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
-        fromEvent(window, 'resize')
-            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => {
-                this._resetCarousel();
-                this._checkCarouselStatus();
-            });
+        this.subscriptions.add(
+            fromEvent(window, 'resize')
+                .pipe(debounceTime(60))
+                .subscribe(() => {
+                    this._resetCarousel();
+                    this._checkCarouselStatus();
+                })
+        );
     }
 
     /** @hidden */
