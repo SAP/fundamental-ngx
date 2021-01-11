@@ -154,7 +154,7 @@
     "angular-cli-ghpages": "0.6.2",
     "autoprefixer": "9.8.6",
     "babel-loader": "8.2.2",
-    "chromedriver": "87.0.0",
+    "chromedriver": "87.0.5",
     "codelyzer": "6.0.1",
     "coveralls": "3.1.0",
     "dotenv": "8.2.0",
