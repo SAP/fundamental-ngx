@@ -11,8 +11,8 @@
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
     accepts an array and a search term, handle filtering logic within this function, and then return the desired
-    filtered array. In this example, we are returning results where the search term matches any portion of the results,
-    as opposed to the default behavior where the search term matches only the beginning of the results.
+    filtered array. In this example, the list will only display if the search term case matches the result (the combobox
+    will still auto-select a match regardless of case, however).
 </description>
 <component-example>
     <fd-combobox-dynamic-example></fd-combobox-dynamic-example>
@@ -153,6 +153,20 @@
     <fd-combobox-height-example></fd-combobox-height-example>
 </component-example>
 <code-example [exampleFiles]="comboboxHeightExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="combobox-includes" componentName="combobox">
+    Return results including search term
+</fd-docs-section-title>
+<description>
+    By default, the combobox will only return results where the result starts with the search term. By setting
+    <code>[includes]="true"</code>, the combobox will return results where the result includes the search term at
+    any place in the string.</description>
+<component-example>
+    <fd-combobox-includes-example></fd-combobox-includes-example>
+</component-example>
+<code-example [exampleFiles]="comboboxIncludesExample"></code-example>
 
 <separator></separator>
 

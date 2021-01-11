@@ -68,12 +68,24 @@
 
 <separator></separator>
 
+<fd-docs-section-title [id]="'includes'" [componentName]="'multi-input'"> Return results including search term </fd-docs-section-title>
+<description>
+    By default, the multi-input will only return results where the result starts with the search term. By setting
+    <code>[includes]="true"</code>, the multi-input will return results where the result includes the search term at
+    any place in the string.
+</description>
+<component-example>
+    <fd-multi-input-includes-example></fd-multi-input-includes-example>
+</component-example>
+<code-example [exampleFiles]="includes"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title [id]="'customFilter'" [componentName]="'multi-input'"> Custom Filter </fd-docs-section-title>
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
-    accepts an array and a search term, and then returns the desired filtered array. In this example, we are returning
-    results where the search term matches any portion of the results, as opposed to the default behavior where the
-    search term matches only the beginning of the results.
+    accepts an array and a search term, and then returns the desired filtered array. In this example, we are requiring
+    that the search term is case-sensitive.
 </description>
 <component-example>
     <fd-multi-input-filter-example></fd-multi-input-filter-example>
