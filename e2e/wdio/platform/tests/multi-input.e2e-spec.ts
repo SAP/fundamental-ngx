@@ -136,7 +136,7 @@ describe('Multi input test suite', function() {
         }
     });
 
-    fit('Verify user can delete the token using backspace and delete key', () => {
+    it('Verify user can delete the token using backspace and delete key', () => {
         if (!browserIsIEorSafari()) {
             const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropdownButtons);
             for (let i = 0; i < activeButtonsQuantity; i++) {
