@@ -6,11 +6,7 @@
     <!--  Render TOP Zone-->
     <ng-container *ngTemplateOutlet="zone; context: { $implicit: tZone, title: topTitle }"> </ng-container>
 
-    <!-- Todo The zone deprecated. Remove if no further use for it.-->
-    <!-- Render MAIN Zone in which we usually support LEFT and RIGHT column -->
-    <!-- <ng-container *ngTemplateOutlet="zone; context: { $implicit: mZone, title: mainTitle, multiColumn: true }">-->
-    <!-- </ng-container>-->
-
+    <!--  Render fields and fields group with assigned columns -->
     <ng-container *ngTemplateOutlet="columns; context: { $implicit: modifiedColumns, title: mainTitle }">
     </ng-container>
 

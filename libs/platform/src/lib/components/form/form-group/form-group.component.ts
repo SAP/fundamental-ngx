@@ -43,6 +43,13 @@ import { FormField } from '../form-field';
 import { FormGroupContainer } from '../form-group';
 import { FormZone, HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
+import { FormFieldGroup } from '../form-field-group';
+import { FormFieldComponent } from './form-field/form-field.component';
+
+interface FormGroupField {
+    label: string;
+    fields: Array<GroupField>
+}
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -218,8 +225,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     @Output()
     onSubmit: EventEmitter<any> = new EventEmitter<any>();
 
-    @ViewChildren(FormFieldGroupComponent) formFieldGroup;
-
     /**
      * Cached fields so we don't have recalculate them every time
      */
@@ -227,8 +232,11 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     tZone: Array<GroupField>;
     bZone: Array<GroupField>;
 
-    modifiedColumns: any = [];
+    /** User responsive layout */
     xlCol: string;
+
+    /** Packed fields which should be rendered */
+    modifiedColumns: { [key: number]: { [key: number]: Array<GroupField | FormGroupField>} } = { };
 
     /**
      *  Keep track of added form fields children.
@@ -240,7 +248,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *  We want to make sure that we don't include content and then try to somehow position it as it
      *  would lead to the UI where user can see elementing moving as you try to position it.
      */
-    protected formFieldChildren: FormField[] | any = [];
+    protected formFieldChildren: Array<FormField | FormFieldGroup> = [];
 
     private _useForm = false;
     private _multiLayout = false;
@@ -310,7 +318,8 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     /**
      * @hidden
-     * Assign the fields or field group to specified columns with rank
+     * Assign a fields or field group to specified columns with rank
+     *
      */
     private updateFieldByColumn(): void {
         let xlColumnsNumber = 1;
@@ -324,7 +333,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         }
 
         for (const child of this.formFieldChildren) {
-            if (!Boolean(child instanceof FormFieldGroupComponent)) {
+            if (this._isFieldChild(child)) {
                 const f = this._getGroupField(child);
 
                 // a fields without column property will set on last column
@@ -335,13 +344,15 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                 } else {
                     cols[columnNumber].push(f);
                 }
-            } else {
+            }
+
+            if (this._isFieldGroupChild(child)) {
                 const groupFieldColumns = {};
                 modifiedColumns[rowNumber] = cols;
                 cols = {};
                 rowNumber++;
 
-                const group = child.groupFields.map(f => this._getGroupField(f));
+                const group = child.fields.map(f => this._getGroupField(f));
                 group.forEach(field => {
                     if (!groupFieldColumns[field.column]) {
                         groupFieldColumns[field.column] = [field];
@@ -359,70 +370,37 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     /** @hidden */
-    _getGroupField(field: GroupField): GroupField {
+    _getGroupField(field: FormField): GroupField {
         return new GroupField(
-            field.zone,
-            field.name,
+            field.id,
             field.rank,
             field.renderer,
             field.columns,
-            field.isFluid,
-            field.styleClass,
+            field.fluid,
             field.column,
         );
     }
 
-    /**
-     * This reads FormFieldComponent from the QueyList and break all down into individual zones.
-     * Right now I support only 5 zones, but it could be easily extended to support any number of
-     * columns.
-     * Since I want to have it cached I know zones ahead of time, but you can have this generic and
-     * store everything in Map. Since here we have OnPush CD strategy it should not be a big deal.
-     */
-    private updateFieldByZone(): void {
-        const zLeft: Array<GroupField> = [];
-        const zRight: Array<GroupField> = [];
+    /** @hidden */
+    private _isFieldChild(child: unknown): child is FormFieldComponent {
+        return child instanceof FormFieldComponent;
+    }
 
-        this.formFieldChildren.forEach((item, index) => {
-            const zone: FormZone = this._multiLayout ? item.zone || 'zLeft' : 'zLeft';
-            const field = new GroupField(zone, item.id, item.rank || index, item.renderer, item.columns, item.fluid);
-
-            switch (zone) {
-                case 'zTop':
-                    if (!this.tZone) {
-                        this.tZone = [];
-                    }
-                    field.columns = 12;
-                    this.tZone.push(field);
-                    break;
-                case 'zBottom':
-                    if (!this.bZone) {
-                        this.bZone = [];
-                    }
-                    field.columns = 12;
-                    this.bZone.push(field);
-                    break;
-                case 'zLeft':
-                    zLeft.push(field);
-                    break;
-                case 'zRight':
-                    zRight.push(field);
-                    break;
-            }
-        });
-
-        this.evenFields(zLeft, zRight);
-        this.mZone = this.calculateMainZone(zLeft, zRight);
+    /** @hidden */
+    private _isFieldGroupChild(child: unknown): child is FormFieldGroupComponent {
+        return child instanceof FormFieldGroupComponent;
     }
 
     /** @hidden */
     private updateFormFieldsProperties(): void {
-        this.formFieldChildren.forEach(formField => {
-           if (formField instanceof FormFieldGroupComponent) {
-               formField.groupFields.forEach(field => this.updateFormFieldProperties(field));
-           } else {
+        this.formFieldChildren.forEach((formField: FormField | FormFieldGroup) => {
+           if (this._isFieldChild(formField)) {
                this.updateFormFieldProperties(formField);
            }
+
+            if (this._isFieldGroupChild(formField)) {
+                formField.fields.forEach(field => this.updateFormFieldProperties(field));
+            }
         });
     }
 
@@ -437,127 +415,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         formField.editable = this.editable;
         formField.noLabelLayout = this.noLabelLayout;
         formField.labelLayout = this.labelLayout;
-    }
-
-    /**
-     * To achieve LEFT and RIGHT layout we need to iterate and merge LEFT and RIGHT zones together
-     * and assign each field an rank number they will appear in teh UI. Just think of one columns
-     * layout when they are merged.
-     *
-     * [Field 1] - zoneLeft, rank 1
-     * [Field 2] - zoneLeft, rank 2
-     * [Field 3] - zoneRight, rank 20
-     * [Field 4] - zoneRight, rank 30
-     *
-     *
-     * [Field 1]      [Field 3]
-     * [Field 2]      [Field 4]
-     *
-     * When they are merged together into one column:
-     *
-     * [Field 1]
-     * [Field 3]
-     * [Field 2]
-     * [Field 4]
-     *
-     * We can pre-calculate and cache.
-     *
-     * We take a rank for each zone sort fields inside and then based on number of support it columns
-     * we need rearrange entries and give it different rank as it shows on the UI screen.
-     *
-     * Rank is important here, because its read by [style.order] in the template that nicelly
-     * re-arrange fields based on its rank number. Its pure CSS solution
-     *
-     *
-     * Todo: this should be more generic with variable num of columns
-     */
-    private calculateMainZone(left: GroupField[], right: GroupField[]): GroupField[] {
-        if (left.length > 0 && right.length > 0) {
-            const merged: GroupField[] = [];
-            let indexL = 0,
-                indexR = 0,
-                current = 0;
-
-            while (current < left.length + right.length) {
-                if (indexL < left.length) {
-                    const f = new GroupField(
-                        left[indexL].zone,
-                        left[indexL].name,
-                        current,
-                        left[indexL].renderer,
-                        left[indexL].columns,
-                        left[indexL].isFluid
-                    );
-
-                    merged[current++] = f;
-                    indexL++;
-
-                    if (f.isFluid) {
-                        continue;
-                    }
-                    if (this.columnLayoutType) {
-                        // columns change as per user specification
-                        this._setUserSpecifiedLayout(f);
-                    } else {
-                        f.styleClass = `fd-col-xl--${f.columns} fd-col-md--${f.columns} fd-col-lg--${f.columns}`;
-                    }
-                }
-
-                if (indexR < right.length) {
-                    if (right[indexR].columns + left[indexL - 1].columns !== 12) {
-                        right[indexR].columns = 12 - left[indexL - 1].columns;
-                    }
-                    const f = new GroupField(
-                        right[indexR].zone,
-                        right[indexR].name,
-                        current,
-                        right[indexR].renderer,
-                        right[indexR].columns
-                    );
-                    if (this.columnLayoutType) {
-                        // columns change as per user specification
-                        this._setUserSpecifiedLayout(f);
-                    } else {
-                        f.styleClass = `fd-col-xl--${f.columns} fd-col-md--${f.columns} fd-col-lg--${f.columns}`;
-                    }
-                    merged[current++] = f;
-                    indexR++;
-                }
-            }
-            return merged;
-        } else if (left.length > 0) {
-            // when only one column dont use 6 columsn and 6 colums
-            return left.map((item) => {
-                item.isFluid = true;
-                return item;
-            });
-        }
-        return [];
-    }
-
-    /**
-     * This is just the temp solution until I can figure out better way of doing this. If I want
-     * to have e.g. 3 fields on the left and 1 field on the right. It will not work with current
-     * 6-column width layout as left and right side are not even.
-     *
-     */
-    private evenFields(zLeft: GroupField[], zRight: GroupField[]): void {
-        zLeft.sort((a, b) => a.rank - b.rank);
-
-        if (zRight.length === 0) {
-            return;
-        }
-
-        zRight.sort((a, b) => a.rank - b.rank);
-        if (zLeft.length !== zRight.length) {
-            // retrieve the smallest from both
-            const toEven = zLeft.length > zRight.length ? zRight : zLeft;
-            for (let i = 0; i <= Math.abs(zLeft.length - zRight.length); i++) {
-                const zone = toEven[0].zone;
-                toEven.push(new GroupField(zone, `${zone}-${i}`, toEven.length + 1, null, 6));
-            }
-        }
-        return;
     }
 
     /**
@@ -582,10 +439,8 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             // for `lg` single-column layout, Styles does not use any class, and providing `fd-col-lg--12` has unintended side-effects
             // therefore, we remove the lg class for single-column layout
             if (lgColumns === 12) {
-                // groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
                 this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
             } else {
-                // groupField.styleClass = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
                 this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
             }
         }
@@ -594,13 +449,12 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
 export class GroupField {
     constructor(
-        public zone?: string,
         public name?: string,
         public rank?: number,
         public renderer?: TemplateRef<any>,
         public columns: number = 6,
         public isFluid: boolean = false,
-        public styleClass?: string,
         public column?: number,
+        public styleClass?: string,
     ) {}
 }

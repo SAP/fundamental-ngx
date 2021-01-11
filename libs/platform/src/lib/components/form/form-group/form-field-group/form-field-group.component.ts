@@ -5,12 +5,11 @@ import {
     Input,
     OnInit,
     QueryList,
-    TemplateRef,
-    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { FormField } from '../../form-field';
 import { FormGroupContainer} from '../../form-group';
+import { FormFieldGroup } from '../../form-field-group';
 
 @Component({
     selector: 'fdp-form-field-group',
@@ -19,25 +18,26 @@ import { FormGroupContainer} from '../../form-group';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class FormFieldGroupComponent implements OnInit {
+export class FormFieldGroupComponent implements FormFieldGroup, OnInit {
+    /** Group header title*/
     @Input()
     label: string;
 
-    @ViewChild('renderer', { read: TemplateRef })
-    renderer: TemplateRef<any>;
-
-    @ContentChildren(FormField) groupFields: QueryList<any>;
+    /** Get form fields wrapped into form field group */
+    @ContentChildren(FormField) fields: QueryList<FormField>;
 
     constructor(
-        readonly formGroupContainer: FormGroupContainer
+        private readonly formGroupContainer: FormGroupContainer
     ) {
     }
 
+    /** @hidden */
     ngOnInit(): void {
-        this.addFormFieldGroup();
+        this._addFormFieldGroup();
     }
 
-    addFormFieldGroup(): void {
+    /** @hidden */
+    private _addFormFieldGroup(): void {
         this.formGroupContainer.addFormField(this);
     }
  }

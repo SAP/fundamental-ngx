@@ -151,8 +151,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      */
     control: FormFieldControl<any>;
 
-    isGroupField: boolean;
-
     /**
      * @hidden
      * Optional FormControl
