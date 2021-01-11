@@ -27,7 +27,7 @@
         [compact]="isCompact"
         [button]="!readonly"
         [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
-        [state]="status === 'error' ? 'error' : null"
+        [state]="status === 'error' ? 'error' : state"
         [buttonFocusable]="false"
         [disabled]="disabled || readonly"
         [isControl]="true"

@@ -1,7 +1,12 @@
 import { StandardListItemPo } from '../pages/standard-list-item.po';
-import { webDriver } from '../../driver/wdio';
+import { click, getAttributeByName, getCSSPropertyByName, getElementArrayLength, getText } from '../../driver/wdio';
 import StandardLinkData from '../fixtures/appData/standard-link-item-contents';
-import { checkElementDisplayed, checkElementText, checkAttributeValueTrue, checkElArrIsClickable } from '../../helper/assertion-helper';
+import {
+    checkAttributeValueTrue,
+    checkElArrIsClickable,
+    checkElementDisplayed,
+    checkElementText
+} from '../../helper/assertion-helper';
 
 describe('Standard List Item test suite:', function() {
     const standardListPg = new StandardListItemPo();
@@ -12,8 +17,8 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item - Border Less examples:', function() {
         it('should check border and interactions', () => {
-            expect(webDriver.getAttributeByName(standardListPg.sNoBorderAttr, StandardLinkData.noBorderAttr)).toBe('true');
-            expect(webDriver.getCSSPropertyByName(standardListPg.sNoBorderList, StandardLinkData.borderAttr).value)
+            expect(getAttributeByName(standardListPg.sNoBorderAttr, StandardLinkData.noBorderAttr)).toBe('true');
+            expect(getCSSPropertyByName(standardListPg.sNoBorderList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.noStyle);
             checkElArrIsClickable(standardListPg.sNoBorderList);
         });
@@ -21,13 +26,13 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Border Less examples:', function() {
         it('should check border and styles', () => {
-            expect(webDriver.getAttributeByName(standardListPg.sNoBorderByLineAttr, StandardLinkData.noBorderAttr))
+            expect(getAttributeByName(standardListPg.sNoBorderByLineAttr, StandardLinkData.noBorderAttr))
                 .toBe('true');
-            expect(webDriver.getCSSPropertyByName(standardListPg.sNoBorderByLineList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(standardListPg.sNoBorderByLineList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.noStyle);
-            expect(webDriver.getAttributeByName(standardListPg.sNoBorderByLineSection, StandardLinkData.compactAttr, 0))
+            expect(getAttributeByName(standardListPg.sNoBorderByLineSection, StandardLinkData.compactAttr, 0))
                 .toBe('false');
-            expect(webDriver.getAttributeByName(standardListPg.sNoBorderByLineSection, StandardLinkData.compactAttr, 1))
+            expect(getAttributeByName(standardListPg.sNoBorderByLineSection, StandardLinkData.compactAttr, 1))
                 .toBe('true');
             checkAttributeValueTrue(standardListPg.sNoBorderByLineAttr, StandardLinkData.byLineAltAttr);
         });
@@ -41,7 +46,7 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Footer examples:', function() {
         it('should check border, styles, and footer', () => {
-            expect(webDriver.getCSSPropertyByName(standardListPg.sFooterByLineList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(standardListPg.sFooterByLineList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
             checkAttributeValueTrue(standardListPg.sFooterAttr, StandardLinkData.byLineAttr);
             checkElementDisplayed(standardListPg.sFooter);
@@ -57,7 +62,7 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Group header examples:', function() {
         it('should check border and styles', () => {
-            expect(webDriver.getCSSPropertyByName(standardListPg.sGroupHeaderList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(standardListPg.sGroupHeaderList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
             checkAttributeValueTrue(standardListPg.sGroupHeaderAttr, StandardLinkData.byLineAttr);
         });
@@ -71,12 +76,12 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item- Interactive state examples:', function() {
         it('should check border and styles', () => {
-            expect(webDriver.getCSSPropertyByName(standardListPg.sInteractiveList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(standardListPg.sInteractiveList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
             checkAttributeValueTrue(standardListPg.sInteractiveAttr, StandardLinkData.byLineAltAttr);
-            const linkCount = webDriver.getElementArrayLength(standardListPg.sInteractiveLink);
+            const linkCount = getElementArrayLength(standardListPg.sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
-                expect(webDriver.getAttributeByName(standardListPg.sInteractiveLink, StandardLinkData.linkAttr, i))
+                expect(getAttributeByName(standardListPg.sInteractiveLink, StandardLinkData.linkAttr, i))
                     .not.toBe(null, '');
             }
         });
@@ -94,7 +99,7 @@ describe('Standard List Item test suite:', function() {
     describe('Standard List Item (ByLine)- Secondary text types examples:', function() {
         it('should check border and styles', () => {
             checkAttributeValueTrue(standardListPg.sSecTypeAttr, StandardLinkData.byLineAltAttr);
-            expect(webDriver.getCSSPropertyByName(standardListPg.sSecTypeList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(standardListPg.sSecTypeList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
 
         });
@@ -107,9 +112,9 @@ describe('Standard List Item test suite:', function() {
         });
 
         it('should check secondary text types', () => {
-            const elCount = webDriver.getElementArrayLength(standardListPg.sSecTypeListItem);
+            const elCount = getElementArrayLength(standardListPg.sSecTypeListItem);
             for (let i = 0; elCount > i; i++) {
-                expect(webDriver.getAttributeByName(standardListPg.sSecTypeListItem, StandardLinkData.secondaryAttr, i))
+                expect(getAttributeByName(standardListPg.sSecTypeListItem, StandardLinkData.secondaryAttr, i))
                     .toBe(StandardLinkData.secondaryTypes[i]);
             }
         });
@@ -118,7 +123,7 @@ describe('Standard List Item test suite:', function() {
     describe('Standard List Item (ByLine)- Multi Selection examples:', function() {
         it('should check border and styles', () => {
             checkAttributeValueTrue(standardListPg.sMultiAttr, StandardLinkData.byLineAltAttr);
-            expect(webDriver.getCSSPropertyByName(standardListPg.sMultiList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(standardListPg.sMultiList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
         });
 
@@ -133,10 +138,10 @@ describe('Standard List Item test suite:', function() {
         });
 
         it('should check selected item count is displayed in the toolbar', () => {
-            expect(webDriver.getText(standardListPg.sMultiToolbar)).toContain('0 : Items selected');
-            webDriver.click(standardListPg.sMultiCheckbox, 0);
-            expect(webDriver.getAttributeByName(standardListPg.sMultiCheckbox, 'aria-checked')).toBe('true');
-            expect(webDriver.getText(standardListPg.sMultiToolbar)).toContain('1 : Items selected');
+            expect(getText(standardListPg.sMultiToolbar)).toContain('0 : Items selected');
+            click(standardListPg.sMultiCheckbox, 0);
+            expect(getAttributeByName(standardListPg.sMultiCheckbox, 'aria-checked')).toBe('true');
+            expect(getText(standardListPg.sMultiToolbar)).toContain('1 : Items selected');
         });
     });
 
@@ -146,7 +151,7 @@ describe('Standard List Item test suite:', function() {
                 console.log('skip');
             } else {
                 checkAttributeValueTrue(standardListPg.sInvtAttr, StandardLinkData.byLineAltAttr);
-                expect(webDriver.getCSSPropertyByName(standardListPg.sInvtList, StandardLinkData.borderAttr).value)
+                expect(getCSSPropertyByName(standardListPg.sInvtList, StandardLinkData.borderAttr).value)
                     .toBe(StandardLinkData.solidStyle);
             }
         });
@@ -159,11 +164,11 @@ describe('Standard List Item test suite:', function() {
         });
 
         it('should check secondary text types', () => {
-            const elCount = webDriver.getElementArrayLength(standardListPg.sInvtListItem);
+            const elCount = getElementArrayLength(standardListPg.sInvtListItem);
             for (let i = 0; elCount > i; i++) {
-                expect(webDriver.getAttributeByName(standardListPg.sInvtListItem, StandardLinkData.secondaryAttr, i))
+                expect(getAttributeByName(standardListPg.sInvtListItem, StandardLinkData.secondaryAttr, i))
                     .not.toBe(null, '');
-                expect(webDriver.getAttributeByName(standardListPg.sInvtListItem, StandardLinkData.secondaryAttr, i))
+                expect(getAttributeByName(standardListPg.sInvtListItem, StandardLinkData.secondaryAttr, i))
                     .toBe(StandardLinkData.secondaryTypes[i]);
             }
         });

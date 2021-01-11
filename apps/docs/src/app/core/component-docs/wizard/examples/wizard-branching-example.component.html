@@ -1,93 +1,115 @@
-<fd-wizard>
-    <fd-wizard-navigation>
-        <ul fd-wizard-progress-bar>
-            <li fd-wizard-step [status]="step1status" (statusChange)="step1status = $event" label="Step 1: One Line">
-                <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
-                <fd-wizard-content>
-                    <div fd-form-item>
-                        <label fd-form-label for="address-1">Address Line 1</label>
-                        <input fd-form-control type="text" id="address-1" />
-                    </div>
-                    <div fd-form-item>
-                        <label fd-form-label for="address-2">Address Line 2</label>
-                        <input fd-form-control type="text" id="address-2" />
-                    </div>
-                    <div fd-form-item>
-                        <label fd-form-label for="address-3">City, State, and Zip</label>
-                        <input fd-form-control type="text" id="address-3" />
-                    </div>
-                    <fd-wizard-next-step>
-                        <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(2)">
-                            Go to the payment selection page
-                        </button>
-                    </fd-wizard-next-step>
-                </fd-wizard-content>
-            </li>
-            <li
-                fd-wizard-step
-                branching="true"
-                [status]="step2status"
-                (statusChange)="step2status = $event"
-                label="Step 2: Payment Selection"
-            >
-                <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
-                <fd-wizard-content>
-                    Please select a payment type:
-                    <fd-radio-button
-                        value="bank"
-                        id="radio-1"
-                        name="radio-name-1"
-                        [(ngModel)]="paymentSelection"
-                        (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
-                    >
-                        Bank Transfer
-                    </fd-radio-button>
-                    <fd-radio-button value="credit" id="radio-2" name="radio-name-2" [(ngModel)]="paymentSelection">
-                        Credit Card
-                    </fd-radio-button>
-                    <fd-wizard-next-step>
-                        <button
-                            [disabled]="!paymentSelection"
-                            fd-button
-                            [compact]="true"
-                            fdType="emphasized"
-                            (click)="goToStep(3)"
+<button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
+
+<div cdkScrollable class="docs-wizard-example-overlay" #overlay>
+    <ng-container *ngIf="fullscreen">
+        <div class="docs-wizard-example-overlay-content">
+            <div class="docs-wizard-example-button">
+                <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
+            </div>
+
+            <!-- The Wizard -->
+            <fd-wizard>
+                <fd-wizard-navigation>
+                    <ul fd-wizard-progress-bar>
+                        <li
+                            fd-wizard-step
+                            [status]="step1status"
+                            (statusChange)="step1status = $event"
+                            label="Step 1: One Line"
                         >
-                            Go to Payment Details Page
-                        </button>
-                    </fd-wizard-next-step>
-                </fd-wizard-content>
-            </li>
-            <li
-                *ngIf="step2status === 'completed'"
-                fd-wizard-step
-                [status]="step3status"
-                (statusChange)="step3status = $event"
-                [label]="paymentSelection === 'bank' ? 'Step 3: Bank Details' : 'Step 3: Credit Card Details'"
-            >
-                <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
-                <fd-wizard-content>
-                    <div fd-form-item>
-                        <label fd-form-label for="payment"
-                            >Enter your {{ paymentSelection === 'bank' ? 'bank' : 'credit card' }} details:</label
+                            <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
+                            <fd-wizard-content>
+                                <div fd-form-item>
+                                    <label fd-form-label for="address-1">Address Line 1</label>
+                                    <input fd-form-control type="text" id="address-1" />
+                                </div>
+                                <div fd-form-item>
+                                    <label fd-form-label for="address-2">Address Line 2</label>
+                                    <input fd-form-control type="text" id="address-2" />
+                                </div>
+                                <div fd-form-item>
+                                    <label fd-form-label for="address-3">City, State, and Zip</label>
+                                    <input fd-form-control type="text" id="address-3" />
+                                </div>
+                                <fd-wizard-next-step>
+                                    <button fd-button [compact]="true" fdType="emphasized" (click)="goToStep(2)">
+                                        Go to the payment selection page
+                                    </button>
+                                </fd-wizard-next-step>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            fd-wizard-step
+                            branching="true"
+                            [status]="step2status"
+                            (statusChange)="step2status = $event"
+                            label="Step 2: Payment Selection"
                         >
-                        <input fd-form-control type="text" id="payment" />
+                            <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
+                            <fd-wizard-content>
+                                Please select a payment type:
+                                <fd-radio-button
+                                    value="bank"
+                                    id="radio-1"
+                                    name="radio-name-1"
+                                    [(ngModel)]="paymentSelection"
+                                    (ngModelChange)="paymentSelectionChanged(confirmationDialog)"
+                                >
+                                    Bank Transfer
+                                </fd-radio-button>
+                                <fd-radio-button
+                                    value="credit"
+                                    id="radio-2"
+                                    name="radio-name-2"
+                                    [(ngModel)]="paymentSelection"
+                                >
+                                    Credit Card
+                                </fd-radio-button>
+                                <fd-wizard-next-step>
+                                    <button
+                                        [disabled]="!paymentSelection"
+                                        fd-button
+                                        [compact]="true"
+                                        fdType="emphasized"
+                                        (click)="goToStep(3)"
+                                    >
+                                        Go to Payment Details Page
+                                    </button>
+                                </fd-wizard-next-step>
+                            </fd-wizard-content>
+                        </li>
+                        <li
+                            *ngIf="step2status === 'completed'"
+                            fd-wizard-step
+                            [status]="step3status"
+                            (statusChange)="step3status = $event"
+                            [label]="
+                                paymentSelection === 'bank' ? 'Step 3: Bank Details' : 'Step 3: Credit Card Details'
+                            "
+                        >
+                            <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                            <fd-wizard-content>
+                                <div fd-form-item>
+                                    <label fd-form-label for="payment"
+                                        >Enter your
+                                        {{ paymentSelection === 'bank' ? 'bank' : 'credit card' }} details:</label
+                                    >
+                                    <input fd-form-control type="text" id="payment" />
+                                </div>
+                            </fd-wizard-content>
+                        </li>
+                    </ul>
+                </fd-wizard-navigation>
+                <div fd-bar barDesign="footer">
+                    <div fd-bar-right>
+                        <fd-button-bar label="Save"></fd-button-bar>
+                        <fd-button-bar label="Cancel"></fd-button-bar>
                     </div>
-                </fd-wizard-content>
-            </li>
-        </ul>
-    </fd-wizard-navigation>
-    <div fd-bar barDesign="footer">
-        <div fd-bar-right>
-            <fd-bar-element>
-                <button fd-button label="Save" fdType="transparent" [compact]="true"></button>
-            </fd-bar-element>
-            <fd-bar-element>
-                <button fd-button label="Cancel" fdType="transparent" [compact]="true"></button>
-            </fd-bar-element>
+                </div>
+            </fd-wizard>
         </div>
-    </div>
-</fd-wizard>
+    </ng-container>
+</div>
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
@@ -100,28 +122,17 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fd-dialog-decisive-button
+            <fd-button-bar
                     fdType="emphasized"
                     label="Continue"
-                    [compact]="true"
-                    (click)="dialog.close('Continue')"
-                ></button>
-            </fd-dialog-footer-button>
-
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
+                    type="submit"
+                    (click)="dialog.close('Continue')">
+            </fd-button-bar>
+            <fd-button-bar
                     fd-initial-focus
-                    fd-dialog-decisive-button
-                    fdType="transparent"
                     label="Cancel"
-                    [compact]="true"
-                    (click)="dialog.dismiss()"
-                ></button>
-            </fd-dialog-footer-button>
+                    (click)="dialog.dismiss()">
+            </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

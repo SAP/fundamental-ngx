@@ -143,24 +143,8 @@
                     <!-- page footer content goes here -->
                     <div fd-bar barDesign="floating-footer">
                         <div fd-bar-right>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fdType="emphasized"
-                                    [compact]="true"
-                                    label="Save"
-                                    (click)="closePage($event)"
-                                ></button>
-                            </fd-bar-element>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fdType="transparent"
-                                    [compact]="true"
-                                    label="Cancel"
-                                    (click)="closePage($event)"
-                                ></button>
-                            </fd-bar-element>
+                            <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
+                            <fd-button-bar label="Cancel" (click)="closePage($event)"></fd-button-bar>
                         </div>
                     </div>
                 </fdp-dynamic-page-footer>

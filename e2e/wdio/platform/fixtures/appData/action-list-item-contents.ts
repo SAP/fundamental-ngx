@@ -17,4 +17,4 @@ export default {
         'Action 3',
         'Action 4'
     ]
-}
+};

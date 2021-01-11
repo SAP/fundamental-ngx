@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ContentChildren,
     ElementRef,
     HostListener,
@@ -15,6 +16,7 @@ import {
 } from '@angular/core';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { Subscription } from 'rxjs';
+import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -71,6 +73,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     steps: QueryList<WizardStepComponent>;
 
     /** @hidden */
+    @ContentChild(WizardProgressBarDirective)
+    progressBar: WizardProgressBarDirective;
+
+    /** @hidden */
     @ViewChild('wrapperContainer')
     wrapperContainer: ElementRef<HTMLElement>;
 
@@ -124,8 +130,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 this._setupStepEvents(step);
             });
             this._cdRef.detectChanges();
+            this._handleStepOrStatusChanges();
+            this.resizeHandler();
         });
-        this.resizeHandler();
     }
 
     /** @hidden */
@@ -141,9 +148,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * navigation and the wizard footer, and calculating the height based on their presence.
      */
     private _calculateContentHeight(): number {
-        let shellbarHeight, wizardNavHeight, wizardFooterHeight;
+        let shellbarHeight,
+            wizardNavHeight = 0,
+            wizardFooterHeight;
         shellbarHeight = this._getShellbarHeight();
-        wizardNavHeight = this._getWizardNavHeight();
+        if (!this._isCurrentStepSummary()) {
+            wizardNavHeight = this._getWizardNavHeight();
+        }
         wizardFooterHeight = this._getWizardFooterHeight();
         return shellbarHeight + wizardNavHeight + wizardFooterHeight;
     }
@@ -226,7 +237,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _wizardShrinking(): void {
         this.steps.forEach((step) => {
-            if (step.status === ACTIVE_STEP_STATUS || step.status === CURRENT_STEP_STATUS) {
+            if (!step.isSummary && (step.status === ACTIVE_STEP_STATUS || step.status === CURRENT_STEP_STATUS)) {
                 const currentStep = step;
                 if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
                     this._hideSomeStep(currentStep);
@@ -240,36 +251,49 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const templatesLength = this.contentTemplates.length;
         this.contentTemplates = [];
         let _stepId = 0;
-        this.steps.forEach((step) => {
+        for (const step of this.steps.toArray()) {
             if (step.content) {
-                step.content.tallContent = false;
+                if (!step.isSummary) {
+                    step.content.tallContent = false;
+                }
                 step.content.wizardContentId = _stepId.toString();
             }
             step._stepId = _stepId;
             _stepId++;
             step.finalStep = false;
-            if (step.visited && step.branching && step.status === CURRENT_STEP_STATUS) {
-                step.content.nextStep._getElRef().nativeElement.style.display = 'inherit';
-            } else if (step.completed && this.appendToWizard) {
+            /*
+             If the step is completed and appendToWizard is true, hide the nextStep button, unless it's the last step,
+             or if there's a summary and it is the second to last step
+             */
+            if (step.completed && this.appendToWizard && step !== this._getLastNonSummaryStep()) {
                 step.content.nextStep._getElRef().nativeElement.style.display = 'none';
+            } else if (
+                (step.completed && this.appendToWizard) ||
+                (step.visited && step.branching && step.status === CURRENT_STEP_STATUS)
+            ) {
+                step.content.nextStep._getElRef().nativeElement.style.removeProperty('display');
             }
             if (
                 step.visited ||
                 ((step.status === CURRENT_STEP_STATUS || step.status === COMPLETED_STEP_STATUS) && step.content)
             ) {
-                if (step.status === CURRENT_STEP_STATUS && !step.completed) {
+                if (step.status === CURRENT_STEP_STATUS && (!step.completed || !this.appendToWizard)) {
                     step.content.tallContent = true;
                 }
-                step.visited = true;
                 if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
-                } else if (this.appendToWizard) {
+                    if (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) {
+                        break;
+                    }
+                } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
+                step.visited = true;
             }
-        });
-        if (this.steps.last.content) {
-            this.steps.last.content.tallContent = true;
+        }
+        const lastVisibleTemplate = this.steps.toArray()[this.contentTemplates.length - 1];
+        if (lastVisibleTemplate && lastVisibleTemplate.content) {
+            lastVisibleTemplate.content.tallContent = true;
         }
         this.steps.last.finalStep = true;
     }
@@ -279,7 +303,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         if (this.appendToWizard) {
             _fromScrollToCurrentStep = true;
             this.steps.forEach((step, index) => {
-                if (step.status === CURRENT_STEP_STATUS) {
+                if (step.status === CURRENT_STEP_STATUS && !step.isSummary) {
                     const child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
                     const wizardNavigationHeight = this._elRef.nativeElement.querySelector(
                         '.' + WIZARD_NAVIGATION_CLASS
@@ -306,6 +330,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         stepsArray = stepsArray.filter((step) => {
             return !step.hasLabel(STEP_NO_LABEL_CLASS);
         });
+        if (this.steps.last.isSummary) {
+            stepsArray.pop();
+        }
         if (stepsArray.length > 1) {
             let currentStepIndex = 0,
                 stepToHide;
@@ -329,18 +356,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setStackedTop(currentStep: WizardStepComponent): void {
         this.steps.forEach((step, index) => {
-            step.getClassList().remove(STEP_STACKED_TOP_CLASS);
-            if (this.steps.toArray()[index + 1] === currentStep) {
-                if (this.steps.length > 1) {
-                    step.getClassList().add(STEP_STACKED_TOP_CLASS);
+            if (step.stepIndicator) {
+                step.getClassList().remove(STEP_STACKED_TOP_CLASS);
+                if (this.steps.toArray()[index + 1] === currentStep) {
+                    if (this.steps.length > 1) {
+                        step.getClassList().add(STEP_STACKED_TOP_CLASS);
+                    }
+                    step.stepIndicator.setStackedItems(this.stackedStepsLeft);
+                } else {
+                    step.stepIndicator.stackedItems = [];
                 }
-                step.stepIndicator.setStackedItems(this.stackedStepsLeft);
-            } else {
-                step.stepIndicator.stackedItems = [];
             }
         });
-
-        this.steps.last.stepIndicator.setStackedItems(this.stackedStepsRight);
+        this._getLastNonSummaryStep().stepIndicator.setStackedItems(this.stackedStepsRight);
     }
 
     /** @hidden */
@@ -354,11 +382,51 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
-        this._setContentTemplates();
-        this._shrinkWhileAnyStepIsTooNarrow();
-        this._cdRef.detectChanges();
-        this._setContainerAndTallContentHeight();
-        this._scrollToCurrentStep();
+        if (this._isCurrentStepSummary()) {
+            this.progressBar.visible = false;
+            this._showSummary();
+        } else {
+            this.progressBar.visible = true;
+            this._setContentTemplates();
+            this._shrinkWhileAnyStepIsTooNarrow();
+        }
+        setTimeout(() => {
+            this._cdRef.detectChanges();
+            this.resizeHandler();
+            if (!this._isCurrentStepSummary()) {
+                this._scrollToCurrentStep();
+            }
+        });
+        this._setFinalStep();
+    }
+
+    /** @hidden */
+    private _setFinalStep(): void {
+        const lastNonSummaryStep = this._getLastNonSummaryStep();
+        if (this.steps.last.isSummary && lastNonSummaryStep) {
+            lastNonSummaryStep.content.tallContent = true;
+            lastNonSummaryStep.finalStep = true;
+            // TODO: remove the line below when https://github.com/SAP/fundamental-styles/issues/1978 is addressed
+            lastNonSummaryStep.getClassList().remove('fd-wizard__step--completed');
+            this.steps.last.removeFromDom();
+        } else if (lastNonSummaryStep) {
+            if (lastNonSummaryStep.content) {
+                lastNonSummaryStep.content.tallContent = true;
+            }
+            lastNonSummaryStep.finalStep = true;
+        }
+    }
+
+    /** @hidden */
+    private _showSummary(): void {
+        const summary = this.steps.find(step => step.isSummary);
+        summary.content.tallContent = true;
+        this.contentTemplates = [summary.content.contentTemplate];
+    }
+
+    /** @hidden */
+    private _isCurrentStepSummary(): boolean {
+        return this.steps.some((step) => step.status === CURRENT_STEP_STATUS && step.isSummary);
     }
 
     /** @hidden */
@@ -401,6 +469,14 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => {
             (document.activeElement as HTMLElement).blur(); // this function can focus step indicators undesirably
         });
+    }
+
+    /** @hidden */
+    private _getLastNonSummaryStep(): WizardStepComponent {
+        if (this.steps.last.isSummary) {
+            return this.steps.toArray()[this.steps.length - 2];
+        }
+        return this.steps.last;
     }
 
     /** @hidden */

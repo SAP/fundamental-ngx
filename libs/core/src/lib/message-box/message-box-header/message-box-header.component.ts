@@ -11,8 +11,8 @@ import {
  *
  * ```html
  * <fd-message-box-header>
- *     <h1 fd-title><!-- Content --></h1>
- *     <fd-message-box-close-icon></fd-message-box-close-icon>
+ *     <fd-message-box-semantic-icon></fd-message-box-semantic-icon>
+ *     <h1 fd-title><!-- Content --></h1> 
  * </fd-message-box-header>
  *
  * Complex header:
@@ -39,6 +39,11 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
     ) {
         super(changeDetectorRef);
         this.messageBoxConfig = this.messageBoxConfig || {};
+    }
+
+    /** @hidden */
+    get _showSemanticIcon(): boolean {
+        return this.messageBoxConfig.type && this.messageBoxConfig.showSemanticIcon || !!this.messageBoxConfig.customSemanticIcon
     }
 
     /** @hidden */

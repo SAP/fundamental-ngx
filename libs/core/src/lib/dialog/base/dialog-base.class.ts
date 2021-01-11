@@ -8,10 +8,10 @@ import {
     OnInit
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { ESCAPE } from '@angular/cdk/keycodes';
 
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { ESCAPE } from '@angular/cdk/keycodes';
 import { createFocusTrap, FocusTrap } from 'focus-trap';
 
 import { DialogConfigBase } from './dialog-config-base.class';

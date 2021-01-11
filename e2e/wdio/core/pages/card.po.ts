@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class CardPo extends CoreBaseComponentPo {
     private url = '/card';
@@ -54,6 +54,6 @@ export class CardPo extends CoreBaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForElDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 }

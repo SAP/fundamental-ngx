@@ -34,4 +34,4 @@ export default {
     separatorAttr: 'noseperator',
     fontWeightAttr: 'font-weight',
     itemUnreadStatus: 'unread'
-}
+};

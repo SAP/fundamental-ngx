@@ -1,4 +1,14 @@
-import { webDriver } from '../../driver/wdio';
+import {
+    browserIsFirefox,
+    click,
+    elementDisplayed,
+    getAttributeByName,
+    getCSSPropertyByName,
+    getCurrentUrl,
+    getElementArrayLength,
+    getText,
+    refreshPage
+} from '../../driver/wdio';
 import { ObjectListItemPo } from '../pages/object-list-item.po';
 import { checkElArrIsClickable, checkElementDisplayed, checkElementText } from '../../helper/assertion-helper';
 import ObjListData from '../fixtures/appData/object-list-item-contents';
@@ -11,7 +21,7 @@ describe('Object list item suite:', function() {
     });
 
     afterEach(() => {
-        webDriver.refreshPage();
+        refreshPage();
     });
 
     describe('Basic checks:', function() {
@@ -29,14 +39,14 @@ describe('Object list item suite:', function() {
 
     describe('Object List Item examples:', function() {
         it('should check styles and content', () => {
-           expect(webDriver.getAttributeByName(objListPg.objListAttr, ObjListData.noBorderAttr)).toBe('true');
+           expect(getAttributeByName(objListPg.objListAttr, ObjListData.noBorderAttr)).toBe('true');
            checkElementDisplayed(objListPg.obJListIntro);
            checkElementDisplayed(objListPg.objListAttributes);
            checkElementDisplayed(objListPg.objListStatuses);
-           if (webDriver.browserIsFirefox()) {
-               expect(webDriver.getCSSPropertyByName(objListPg.objListItem, ObjListData.altNoBorderStyle).value).toBe('none');
+           if (browserIsFirefox()) {
+               expect(getCSSPropertyByName(objListPg.objListItem, ObjListData.altNoBorderStyle).value).toBe('none');
            } else {
-               expect(webDriver.getCSSPropertyByName(objListPg.objListItem, ObjListData.noBorderStyle).value).toBe('none');
+               expect(getCSSPropertyByName(objListPg.objListItem, ObjListData.noBorderStyle).value).toBe('none');
            }
         });
     });
@@ -45,71 +55,62 @@ describe('Object list item suite:', function() {
         it('should check content', () => {
             checkElementDisplayed(objListPg.obJListSelIntro);
             checkElementDisplayed(objListPg.objSelToolbar);
-            webDriver.elementDisplayed(objListPg.objListSelAttributes, 2);
-            webDriver.elementDisplayed(objListPg.objListSelStatuses, 2);
+            elementDisplayed(objListPg.objListSelAttributes, 2);
+            elementDisplayed(objListPg.objListSelStatuses, 2);
         });
         it('should check selection', () => {
-            expect(webDriver.getText(objListPg.objSelToolbar)).toBe('0 : Items selected');
-            webDriver.click(objListPg.objListSelItem, 0);
-            expect(webDriver.getText(objListPg.objSelToolbar)).toBe('1 : Items selected');
+            expect(getText(objListPg.objSelToolbar)).toBe('0 : Items selected');
+            click(objListPg.objListSelItem, 0);
+            expect(getText(objListPg.objSelToolbar)).toBe('1 : Items selected');
         });
     });
 
     describe('Object List Item With Navigation examples:', function() {
         it('should check content', () => {
-            const linkCount = webDriver.getElementArrayLength(objListPg.objNavLink);
+            const linkCount = getElementArrayLength(objListPg.objNavLink);
             for (let i = 0; linkCount > i; i++) {
-                expect(webDriver.getAttributeByName(objListPg.objNavLink, 'href')).not.toBe(null, '');
+                expect(getAttributeByName(objListPg.objNavLink, 'href')).not.toBe(null, '');
             }
-            webDriver.elementDisplayed(objListPg.objNavAttributes, 2);
-            webDriver.elementDisplayed(objListPg.objNavStatuses, 2);
+            elementDisplayed(objListPg.objNavAttributes, 2);
+            elementDisplayed(objListPg.objNavStatuses, 2);
         });
 
         it('should check navigation', () => {
-            webDriver.click(objListPg.objNavList);
-            const currentUrl = webDriver.getCurrentUrl();
-            expect(currentUrl).toContain('platform/home');
+            click(objListPg.objNavList);
+            const currentUrl = getCurrentUrl();
+            expect(currentUrl).toContain(ObjListData.navUrl);
             objListPg.open();
         });
     });
 
     describe('Object List Item With Row Selection And Navigation examples:', function() {
         it('should check content', () => {
-            const linkCount = webDriver.getElementArrayLength(objListPg.objRowNavLink);
+            const linkCount = getElementArrayLength(objListPg.objRowNavLink);
             for (let i = 0; linkCount > i; i++) {
-                expect(webDriver.getAttributeByName(objListPg.objRowNavLink, 'href')).not.toBe(null, '');
+                expect(getAttributeByName(objListPg.objRowNavLink, 'href')).not.toBe(null, '');
             }
-            webDriver.elementDisplayed(objListPg.objRowNavAttributes, 2);
-            webDriver.elementDisplayed(objListPg.objRowNavStatuses, 3);
+            elementDisplayed(objListPg.objRowNavAttributes, 2);
+            elementDisplayed(objListPg.objRowNavStatuses, 3);
         });
 
         it('should check selection', () => {
-            expect(webDriver.getText(objListPg.objRowNavToolbar)).toContain(': is selected');
-            webDriver.click(objListPg.objRowNavList, 0);
-            expect(webDriver.getText(objListPg.objRowNavToolbar)).toContain('fdp-list-item');
+            expect(getText(objListPg.objRowNavToolbar)).toContain(': is selected');
+            click(objListPg.objRowNavList, 0);
+            expect(getText(objListPg.objRowNavToolbar)).toContain('fdp-list-item');
         });
     });
 
     describe('Object List Item In Declarative examples:', function() {
         it('should check content', () => {
-            webDriver.elementDisplayed(objListPg.objDecAttributes, 0);
-            webDriver.elementDisplayed(objListPg.objDecStatuses, 0);
+            elementDisplayed(objListPg.objDecAttributes, 0);
+            elementDisplayed(objListPg.objDecStatuses, 0);
             checkElementDisplayed(objListPg.objDecIntro);
         });
     });
 
     describe('check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            const areas = webDriver.elementArray(objListPg.exampleAreaContainersArr);
-            const switchers = webDriver.elementArray(objListPg.rtlSwitcherArr);
-            for (let i = 0; i < areas.length; i++) {
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(objListPg.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-                expect(webDriver.getCSSPropertyByName(objListPg.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                switchers[i].click();
-                expect(webDriver.getAttributeByName(objListPg.exampleAreaContainersArr, 'dir', i)).toBe('ltr');
-                expect(webDriver.getCSSPropertyByName(objListPg.exampleAreaContainersArr, 'direction', i).value).toBe('ltr');
-            }
+            objListPg.checkRtlSwitch(objListPg.rtlSwitcherArr, objListPg.exampleAreaContainersArr);
         });
     });
 });

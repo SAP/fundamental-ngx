@@ -21,6 +21,7 @@ export class PlatformDocsSplitMenuButtonTypesComponent {
 
     public onPrimaryButtonClickCozyStandard(): void {
         this.selectedCozyItem = this.labelStandardCozy;
+        alert('standard primary button clicked');
     }
 
     public onItemSelectCozyPositive(menuItemValue: string): void {
@@ -30,6 +31,7 @@ export class PlatformDocsSplitMenuButtonTypesComponent {
 
     public onPrimaryButtonClickCozyPositive(): void {
         this.selectedCozyItem = this.labelPositiveCozy;
+        alert('Positive primary button clicked');
     }
 
     public onItemSelectCozyNegative(menuItemValue: string): void {
@@ -39,6 +41,7 @@ export class PlatformDocsSplitMenuButtonTypesComponent {
 
     public onPrimaryButtonClickCozyNegative(): void {
         this.selectedCozyItem = this.labelNegativeCozy;
+        alert('Negative primary button clicked');
     }
 
     public onItemSelectCozyGhost(menuItemValue: string): void {
@@ -48,6 +51,7 @@ export class PlatformDocsSplitMenuButtonTypesComponent {
 
     public onPrimaryButtonClickCozyGhost(): void {
         this.selectedCozyItem = this.labelGhostCozy;
+        alert('Ghost primary button clicked');
     }
 
     public onItemSelectCozyTransparent(menuItemValue: string): void {
@@ -57,6 +61,7 @@ export class PlatformDocsSplitMenuButtonTypesComponent {
 
     public onPrimaryButtonClickCozyTransparent(): void {
         this.selectedCozyItem = this.labelTransparentCozy;
+        alert('Transparent primary button clicked');
     }
 
     public onItemSelectCozyEmphasized(menuItemValue: string): void {
@@ -66,5 +71,6 @@ export class PlatformDocsSplitMenuButtonTypesComponent {
 
     public onPrimaryButtonClickCozyEmphasized(): void {
         this.selectedCozyItem = this.labelEmphasizedCozy;
+        alert('Emphasized primary button clicked');
     }
 }

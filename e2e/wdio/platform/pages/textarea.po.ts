@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class TextareaPo extends BaseComponentPo {
     url = '/textarea';
@@ -24,7 +24,7 @@ export class TextareaPo extends BaseComponentPo {
     compactTextArea = '#compactTextarea';
     compactTextAreaLabel = '[for="compactTextarea"] > span';
 
-    detailedTextAreaLabel = '[for="detailedDescription"]';
+    detailedTextAreaLabel = '[for="detailedDescription"] > span';
     detailedTextArea = '#detailedDescription';
     detailedTextAreaErrorMessage = '[type="error"]';
     detailedTextAreaCharacterCounter = '//div[label[@for="detailedDescription"]]//div[@role="alert"]//span';
@@ -33,6 +33,6 @@ export class TextareaPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForElDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 }

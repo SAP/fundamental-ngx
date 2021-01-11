@@ -45,6 +45,7 @@ export const API_FILES = {
         'TableDataProvider'
     ],
     textarea: ['TextAreaComponent'],
+    timePicker: ['PlatformTimePickerComponent'],
     panel: [
         'PlatformPanelComponent',
         'PlatformPanelContentComponent',
@@ -79,5 +80,6 @@ export const API_FILES = {
     multiInput: ['PlatformMultiInputComponent'],
     feedInput: ['FeedInputComponent'],
     fileUploader: ['PlatformFileUploaderComponent'],
-    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource']
+    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
+    approvalFlow: ['ApprovalFlowComponent', 'ApprovalFlowNodeComponent']
 };

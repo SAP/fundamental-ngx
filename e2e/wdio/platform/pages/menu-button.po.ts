@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitElementToBePresentInDOM, waitForElDisplayed } from '../../driver/wdio';
 
 export class MenuButtonPo extends BaseComponentPo {
     private url = '/menu-button';
@@ -23,6 +23,7 @@ export class MenuButtonPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForElDisplayed(this.root);
+        waitElementToBePresentInDOM(this.root);
+        waitForElDisplayed(this.root);
     }
 }

@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitForElDisplayed, waitElementToBePresentInDOM } from '../../driver/wdio';
 
 export class PanelPo extends BaseComponentPo {
 
@@ -30,6 +30,7 @@ export class PanelPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForElDisplayed(this.root);
+        waitElementToBePresentInDOM(this.root);
+        waitForElDisplayed(this.root);
     }
 }

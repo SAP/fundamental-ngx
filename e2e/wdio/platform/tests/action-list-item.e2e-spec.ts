@@ -1,7 +1,7 @@
-import { webDriver } from '../../driver/wdio';
 import { ActionListItemPo } from '../pages/action-list-item.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
-import ActionData from '../fixtures/appData/action-list-item-contents'
+import ActionData from '../fixtures/appData/action-list-item-contents';
+import { acceptAlert, click, getAttributeByName, getElementArrayLength, refreshPage } from '../../driver/wdio';
 
 describe('Action List Item Test Suite:', function() {
     const actionListPg = new ActionListItemPo();
@@ -11,23 +11,23 @@ describe('Action List Item Test Suite:', function() {
     });
 
     afterEach(() => {
-        webDriver.refreshPage();
+        refreshPage();
     });
 
     describe('Main checks:', function() {
         it('should check actions on click', () => {
-            const actionBtnCount = webDriver.getElementArrayLength(actionListPg.actionBtns);
+            const actionBtnCount = getElementArrayLength(actionListPg.actionBtns);
             for (let i = 0; actionBtnCount > i; i++) {
-                webDriver.click(actionListPg.actionBtns, i);
-                webDriver.acceptAlert();
+                click(actionListPg.actionBtns, i);
+                acceptAlert();
             }
         });
 
         it('should check styles', () => {
             checkAttributeValueTrue(actionListPg.actionLists, 'noBorder');
             checkElementTextValue(actionListPg.actionBtns, ActionData.btnText);
-            expect(webDriver.getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 0)).toBe('false');
-            expect(webDriver.getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 1)).toBe('true');
+            expect(getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 0)).toBe('false');
+            expect(getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 1)).toBe('true');
         });
     });
 

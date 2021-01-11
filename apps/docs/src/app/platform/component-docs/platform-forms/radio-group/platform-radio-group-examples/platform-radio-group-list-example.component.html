@@ -14,7 +14,10 @@
         </ng-template>
     </fdp-form-group>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
+    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
+        (click)="onReset(listform)"></fdp-button>
 </form>
+
 <p style="margin-left: 2rem;">Selected value: {{ form1.controls.radiol1?.value }}</p>
 <br />
 
@@ -38,7 +41,7 @@
 </fdp-form-group>
 <p style="margin-left: 2rem;">Selected value: {{ form3.controls.month?.value }}</p>
 
-<hr/>
+<hr />
 <h3>Use With Template Driven Form</h3>
 
 <p>Creating platform radio button with list of string values also pre-selection based on control value</p>

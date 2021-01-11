@@ -28,9 +28,13 @@
        [class.fd-checkbox__label--compact]="compact"
        (click)="checkByClick($event)">
     <ng-container *ngIf="label">
-        {{ label }}
+        <span class="fd-checkbox__text">
+            {{ label }}
+        </span>
     </ng-container>
     <ng-container *ngIf="!label">
-        <ng-content></ng-content>
+        <span class="fd-checkbox__text">
+            <ng-content></ng-content>
+        </span>
     </ng-container>
 </label>

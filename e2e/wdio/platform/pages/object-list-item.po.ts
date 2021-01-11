@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class ObjectListItemPo extends BaseComponentPo {
     private url = '/object-list-item';
@@ -43,10 +43,8 @@ export class ObjectListItemPo extends BaseComponentPo {
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
-
-
     open(): void {
         super.open(this.url);
-        webDriver.waitForElDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 }
