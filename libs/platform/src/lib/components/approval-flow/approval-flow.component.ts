@@ -16,8 +16,8 @@ import {
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundamental-ngx/core';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { debounceTime, take, takeUntil } from 'rxjs/operators';
 
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
@@ -90,6 +90,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _dir: string;
 
     private subscriptions = new Subscription();
+    private _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     constructor(
@@ -122,6 +123,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._dir = isRtl ? 'rtl' : 'ltr';
             this._cdr.detectChanges();
         }));
+
+        this._listenOnResize();
     }
 
     onNodeClick(node: ApprovalNode): void {
@@ -261,6 +264,16 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
+    }
+
+    /** @hidden Listen window resize and distribute cards on column change */
+    private _listenOnResize(): void {
+        fromEvent(window, 'resize')
+            .pipe(debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => {
+                this._resetCarousel();
+                this._checkCarouselStatus();
+            });
     }
 
     /** @hidden */

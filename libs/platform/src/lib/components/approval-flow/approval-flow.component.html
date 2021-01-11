@@ -1,5 +1,5 @@
 <fd-toolbar [hasTitle]="true">
-    <h3 class="approval-flow__title" [attr.dir]="_dir">{{ title }}</h3>
+    <h3 class="approval-flow__title" [attr.dir]="_dir" [attr.aria-label]="title">{{ title }}</h3>
 </fd-toolbar>
 
 <div class="approval-flow__watchers" [attr.dir]="_dir">
@@ -17,15 +17,13 @@
 
 <div class="approval-flow__container">
     <div class="approval-flow__carousel-controls" *ngIf="_isCarousel" [attr.dir]="_dir">
-        <button class="approval-flow__control--prev-slide"
-                *ngIf="_carouselStep > 0"
-                (click)="previousSlide()">
+        <button class="approval-flow__control--prev-slide" *ngIf="_carouselStep > 0" (click)="previousSlide()"
+            aria-label="Go to previous slide">
             <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
             {{ _carouselStep }}
         </button>
-        <button class="approval-flow__control--next-slide"
-                *ngIf="(_maxCarouselStep - _carouselStep) > 0"
-                (click)="nextSlide()">
+        <button class="approval-flow__control--next-slide" *ngIf="(_maxCarouselStep - _carouselStep) > 0"
+            (click)="nextSlide()" aria-label="Go to next slide">
             {{ _maxCarouselStep - _carouselStep }}
             <fd-icon [glyph]="'navigation-' + (_isRTL ? 'left' : 'right') + '-arrow'"></fd-icon>
         </button>

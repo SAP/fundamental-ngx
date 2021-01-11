@@ -18,6 +18,13 @@ $block: approval-flow;
         cursor: pointer;
     }
 
+    fd-avatar:focus {
+        outline-offset: 0.0625rem;
+        outline-width: 0.0625rem;
+        outline-style: dotted;
+        outline-color: #0854A0;
+    }
+
     &[dir='rtl'] {
         padding-right: 1rem;
 
@@ -80,6 +87,13 @@ $block: approval-flow;
             position: relative;
             top: 1px;
         }
+    }
+
+    button:focus {
+        outline-offset: 0.0625rem;
+        outline-width: 0.0625rem;
+        outline-style: dotted;
+        outline-color: #0854A0;
     }
 
     &[dir='rtl'] {
@@ -173,5 +187,12 @@ $block: approval-flow;
 
     fdp-approval-flow-node + fdp-approval-flow-node:not(:last-child) {
         margin-bottom: 1rem;
+    }
+
+    fdp-approval-flow-node:focus {
+        outline-offset: 0.0625rem;
+        outline-width: 0.0625rem;
+        outline-style: dotted;
+        outline-color: #0854A0;
     }
 }
