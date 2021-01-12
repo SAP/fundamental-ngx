@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class LinkPo extends BaseComponentPo {
     readonly url = '/link';
@@ -16,7 +16,7 @@ export class LinkPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        waitForElDisplayed(this.root);
     }
 
 }

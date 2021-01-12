@@ -1,7 +1,9 @@
 import { BaseComponentPo } from './base-component.po';
+import { waitElementToBePresentInDOM, waitForElDisplayed } from '../../driver/wdio';
 
 export class MenuPo extends BaseComponentPo {
     url = '/menu';
+    root = '#page-content';
     menuBtnArr = 'fdp-button button';
     firstMenuBtn = 'fdp-platform-menu-basic-example button[ng-reflect-label="Button"]';
     secondMenuBtn = 'fdp-platform-menu-basic-example button[ng-reflect-label="Menu Button"]';
@@ -23,5 +25,7 @@ export class MenuPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
+        waitElementToBePresentInDOM(this.root);
+        waitForElDisplayed(this.root);
     }
 }

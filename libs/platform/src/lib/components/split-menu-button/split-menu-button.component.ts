@@ -14,11 +14,14 @@ import { MenuComponent } from './../menu/menu.component';
 import { BaseComponent } from '../base';
 
 /**
- * Split Menu Button implementation based on the
- * https://github.com/SAP/fundamental-ngx/wiki/Platform:-Split-Menu-Button-Component-V1.0-Technical-Design
- * documents.
+ * <fdp-split-menu-button [menu]="menu" [buttonLabel]="Default button" (primaryButtonClick)="onPrimaryButtonClick1()">
+ * </fdp-split-menu-button>
  *
- *
+ * <fdp-menu #menu xPosition="after|before">
+ *      <fdp-menu-item (itemSelect)="onItemSelect1('Option 1')">Option 1</fdp-menu-item>
+ *      <fdp-menu-item (itemSelect)="onItemSelect1('Option 2')">Option 2</fdp-menu-item>
+ *      <fdp-menu-item (itemSelect)="onItemSelect1('Option 3')">Option 3</fdp-menu-item>
+ * </fdp-menu>
  */
 @Component({
     selector: 'fdp-split-menu-button',

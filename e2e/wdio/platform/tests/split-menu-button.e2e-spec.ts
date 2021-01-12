@@ -1,6 +1,18 @@
 import { SplitMenuButtonPo } from '../pages/split-menu-button.po';
 import SMBData from '../fixtures/appData/split-menu-button-page-contents';
-import { webDriver } from '../../driver/wdio';
+import {
+    browserIsIEorSafari,
+    click,
+    elementArray,
+    getAttributeByName,
+    getCSSPropertyByName,
+    getElementArrayLength,
+    mouseHoverElement,
+    refreshPage,
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForNotDisplayed
+} from '../../driver/wdio';
 
 describe('Split menu button test suite', () => {
     const spMenuBtnPage = new SplitMenuButtonPo();
@@ -10,176 +22,176 @@ describe('Split menu button test suite', () => {
     });
 
     afterEach(() => {
-        webDriver.refreshPage();
+        refreshPage();
     });
     // Wasn't debuged yet in IE and Safari
-    if (!webDriver.isIEorSafari()) {
+    if (!browserIsIEorSafari()) {
         it('should check drop-down arrow menu functionality', () => {
-            const dropdownArrowBtnArr = webDriver.elementArray(spMenuBtnPage.arrowBtnArr);
+            const dropdownArrowBtnArr = getElementArrayLength(spMenuBtnPage.arrowBtnArr);
 
-            for (let i = 0; i < dropdownArrowBtnArr.length; i++) {
-                webDriver.click(spMenuBtnPage.arrowBtnArr, i);
-                expect(webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay));
-                webDriver.click(spMenuBtnPage.arrowBtnArr, i);
+            for (let i = 0; i < dropdownArrowBtnArr; i++) {
+                click(spMenuBtnPage.arrowBtnArr, i);
+                expect(waitForElDisplayed(spMenuBtnPage.menuOverlay));
+                click(spMenuBtnPage.arrowBtnArr, i);
             }
         });
 
         it('should check each split btn has main and arrow btns', () => {
-            const dropdownArrowBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.arrowBtnArr);
-            const mainBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.mainBtnArr);
+            const dropdownArrowBtnCount = getElementArrayLength(spMenuBtnPage.arrowBtnArr);
+            const mainBtnCount = getElementArrayLength(spMenuBtnPage.mainBtnArr);
 
             expect(dropdownArrowBtnCount).toEqual(mainBtnCount);
         });
 
         it('should check that menu closed after making one selection', () => {
-            webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr);
-            webDriver.waitForDisplayed(spMenuBtnPage.menuOverlay);
+            click(spMenuBtnPage.behaviorsExArrowBtnArr);
+            waitForElDisplayed(spMenuBtnPage.menuOverlay);
 
-            webDriver.click(spMenuBtnPage.behaviorsExArrowBtnArr);
-            webDriver.waitForNotDisplayed(spMenuBtnPage.menuOverlay);
+            click(spMenuBtnPage.behaviorsExArrowBtnArr);
+            waitForNotDisplayed(spMenuBtnPage.menuOverlay);
         });
 
         it('should check split menu button behaviors examples', () => {
-            const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
+            const behaviorArrowBtnArr = elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
             spMenuBtnPage.checkBtnSelectionChange(behaviorArrowBtnArr, spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.behaviorBtnTextArr);
         });
 
         it('should check split menu button type examples', () => {
-            const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
+            const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
             spMenuBtnPage.checkBtnSelectionChange(typesArrowBtnArr, spMenuBtnPage.typesExSelectionBtnArr, SMBData.typesBtnTextArr);
         });
 
         it('should check btn selections', () => {
-            webDriver.click(spMenuBtnPage.typesExSelectionBtnArr);
+            click(spMenuBtnPage.typesExSelectionBtnArr);
             spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText);
 
-            webDriver.click(spMenuBtnPage.typesExArrowBtnArr);
-            webDriver.click(spMenuBtnPage.menuItemArr, 1);
+            click(spMenuBtnPage.typesExArrowBtnArr);
+            click(spMenuBtnPage.menuItemArr, 1);
             spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, SMBData.standardBtnText2);
         });
 
         it('should check split menu buttons with icon examples', () => {
-            const iconArrowBtnArr = webDriver.elementArray(spMenuBtnPage.iconExArrowBtnArr);
-            const iconBtnArr = webDriver.elementArray(spMenuBtnPage.iconBtnAttrArr);
+            const iconArrowBtnArr = elementArray(spMenuBtnPage.iconExArrowBtnArr);
+            const iconBtnArr = elementArray(spMenuBtnPage.iconBtnAttrArr);
 
             spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, spMenuBtnPage.iconExSelectionBtnArr, SMBData.iconBtnTextArr);
             for (let i = 0; i < iconBtnArr.length; i++) {
-                expect(webDriver.getAttributeByName(spMenuBtnPage.iconBtnAttrArr, SMBData.iconAttr, i)).toContain(SMBData.iconLabel);
+                expect(getAttributeByName(spMenuBtnPage.iconBtnAttrArr, SMBData.iconAttr, i)).toContain(SMBData.iconLabel);
             }
         });
 
         it('should check compact btn styles', () => {
-            expect(webDriver.getAttributeByName(spMenuBtnPage.iconBtnAttrArr, SMBData.compactAttr, 1)).toContain(SMBData.compactValue);
+            expect(getAttributeByName(spMenuBtnPage.iconBtnAttrArr, SMBData.compactAttr, 1)).toContain(SMBData.compactValue);
         });
 
         it('should check default hover state', () => {
-            const behaviorBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
-            const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
+            const behaviorBtnArr = elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
+            const behaviorArrowBtnArr = elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
 
             for (let i = 0; i < behaviorBtnArr.length; i++) {
-                webDriver.scrollIntoView(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
-                webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
-                expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                scrollIntoView(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
+                mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
+                expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                     .toContain(SMBData.defaultHvrColor);
             }
 
             for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
-                webDriver.scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-                webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-                expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
+                mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr, i);
+                expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
                     .toContain(SMBData.defaultHvrColor);
             }
         });
 
         xit('should check default active state', () => {
-            // const behaviorBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
-            // const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
+            // const behaviorBtnArr = elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
+            // const behaviorArrowBtnArr = elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
             //
             // for (let i = 0; i < behaviorBtnArr.length; i++) {
-            //     webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
-            //     webDriver.mouseButtonDown();
-            //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+            //     mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
+            //     mouseButtonDown();
+            //     expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
             //         .toContain(SMBData.defaultBtnColor);
-            //     webDriver.mouseButtonUp();
+            //     mouseButtonUp();
             // }
             //
             // for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
-            //     webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
-            //     webDriver.mouseButtonDown();
-            //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
+            //     mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
+            //     mouseButtonDown();
+            //     expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
             //         .toContain(SMBData.defaultBtnColor);
-            //     webDriver.mouseButtonUp();
+            //     mouseButtonUp();
             // }
         });
 
         it('should check split btn types example colors', () => {
-            const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-            const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
+            const typesBtnArr = elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+            const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
             for (let i = 0; i < typesBtnArr.length; i++) {
-                expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.textColorAttr, i).value)
+                expect(getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.textColorAttr, i).value)
                     .toContain(SMBData.typesBtnColorArr[i]);
             }
 
             for (let i = 0; i < typesArrowBtnArr.length; i++) {
-                expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.textColorAttr, i).value)
+                expect(getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.textColorAttr, i).value)
                     .toContain(SMBData.typesBtnColorArr[i]);
             }
         });
 
         it('should check split btn type examples hover colors', () => {
-            const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-            const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
+            const typesBtnArr = elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+            const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
             for (let i = 0; i < typesBtnArr.length; i++) {
-                webDriver.scrollIntoView(spMenuBtnPage.typesExSelectionBtnArr, i);
-                webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr, i);
-                expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                scrollIntoView(spMenuBtnPage.typesExSelectionBtnArr, i);
+                mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr, i);
+                expect(getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                     .toContain(SMBData.typesBtnHvrColorArr[i]);
             }
 
             for (let i = 0; i < typesArrowBtnArr.length; i++) {
-                webDriver.scrollIntoView(spMenuBtnPage.typesExArrowBtnArr, i);
-                webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr, i);
-                expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                scrollIntoView(spMenuBtnPage.typesExArrowBtnArr, i);
+                mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr, i);
+                expect(getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
                     .toContain(SMBData.typesBtnHvrColorArr[i]);
             }
         });
 
         xit('should check split btn type examples active state', () => {
-            // const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-            // const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
+            // const typesBtnArr = elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+            // const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
             //
             // for (let i = 0; i < typesBtnArr.length; i++) {
-            //     webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
-            //     webDriver.mouseButtonDown();
-            //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+            //     mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
+            //     mouseButtonDown();
+            //     expect(getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
             //         .toContain(SMBData.typesBtnActiveColorArr[i]);
-            //     webDriver.mouseButtonUp();
+            //     mouseButtonUp();
             // }
             //
             // for (let i = 0; i < typesArrowBtnArr.length; i++) {
-            //     webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
-            //     webDriver.mouseButtonDown();
-            //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
+            //     mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
+            //     mouseButtonDown();
+            //     expect(getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
             //         .toContain(SMBData.typesBtnActiveColorArr[i]);
-            //     webDriver.mouseButtonUp();
+            //     mouseButtonUp();
             // }
 
         });
 
         it('should check tooltips', () => {
-            const menuBtnArr = webDriver.elementArray(spMenuBtnPage.mainBtnArr);
+            const menuBtnArr = elementArray(spMenuBtnPage.mainBtnArr);
 
             for (let i = 0; i < menuBtnArr.length; i++) {
-                expect(webDriver.getAttributeByName(spMenuBtnPage.mainBtnArr, SMBData.tooltipAttr, i))
+                expect(getAttributeByName(spMenuBtnPage.mainBtnArr, SMBData.tooltipAttr, i))
                     .not.toEqual(null);
             }
         });
 
         it('should check RTL orientation', () => {
-            spMenuBtnPage.checkRtlSwitch(spMenuBtnPage.rtlSwitcherArr, spMenuBtnPage.exampleAreaContainersArr);
+            spMenuBtnPage.checkRtlSwitch();
         });
     }
 });

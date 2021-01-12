@@ -1,10 +1,12 @@
-import { AfterContentInit, Component, Optional } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/core';
 import {
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
     MessageBoxConfig,
     MessageBoxConfigurableElement
 } from '../utils/message-box-config.class';
 import { DialogFooterBase } from '../../dialog/base/dialog-footer-base.class';
+
+export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
 
 /**
  * Building block of the message box used to create message box header.
@@ -25,7 +27,8 @@ import { DialogFooterBase } from '../../dialog/base/dialog-footer-base.class';
         { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxFooterComponent, multi: true }
     ]
 })
-export class MessageBoxFooterComponent extends DialogFooterBase implements AfterContentInit, MessageBoxConfigurableElement {
+export class MessageBoxFooterComponent extends DialogFooterBase
+    implements AfterContentInit, AfterViewInit , MessageBoxConfigurableElement {
 
     /** @hidden */
     constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {
@@ -36,5 +39,10 @@ export class MessageBoxFooterComponent extends DialogFooterBase implements After
     /** @hidden */
     ngAfterContentInit(): void {
         super.ngAfterContentInit();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._listenForButtonChanges(MessageBoxButtonClass);
     }
 }

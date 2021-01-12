@@ -206,7 +206,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        fixture.nativeElement.querySelector('[fd-dialog-decisive-button]').click();
+        fixture.nativeElement.querySelector('fd-button-bar').click();
 
         await whenStable(fixture);
 

@@ -2,7 +2,8 @@
     <label fd-toolbar-label>{{_selectedItems.length}} : Items selected</label>
 </fd-toolbar>
 <fdp-list [hasObject]="true" [dataSource]="_dataSource" [(ngModel)]="_selectedItems" selectionMode="multi"
-    (selectedItemChange)="_showItemInfo($event)" [rowSelection]=true>
+    (selectedItemChange)="_showItemInfo($event)" [rowSelection]=true
+    [ariaMultiselectable]="true" [ariaLabel]="_selectedItems.length > 0 ? _selectedItems.length +'Items selected': '0 Items selected'">
     <fdp-object-list-item *fdpItemDef="let product" [title]="product.title"
         [introductionText]="product.introductionText" [currency]="product.currency" [amount]="product.amount"
         [image]="product.image">

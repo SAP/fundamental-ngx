@@ -3,7 +3,7 @@ Cozy Split Menu Button:
     title="Default behavior for split menu button" menuTitle="More options" [fixedWidth]="false"
     (primaryButtonClick)="onPrimaryButtonClick1()">
 </fdp-split-menu-button>
-<fdp-menu #menu1 xPosition="before">
+<fdp-menu #menu1 xPosition="after">
     <fdp-menu-item (itemSelect)="onItemSelect1('Option 1')">Option 1</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect1('Option 2')">Option 2</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect1('Option 3')">Option 3</fdp-menu-item>
@@ -17,7 +17,7 @@ Compact Split Menu Button:
     title="option with longer text gets truncated" menuTitle="More options" [fixedWidth]="false"
     (primaryButtonClick)="onPrimaryButtonClick2()">
 </fdp-split-menu-button>
-<fdp-menu #menu2 xPosition="before" contentDensity="compact">
+<fdp-menu #menu2 xPosition="after" contentDensity="compact">
     <fdp-menu-item (itemSelect)="onItemSelect2('Option 1')">Option 1</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect2('Option 2 with long text')">Option 2 with long text</fdp-menu-item>
 </fdp-menu>
@@ -31,7 +31,7 @@ Split Menu Button with only Icon and Without icon & text. fixedWidth=false.
     [fixedWidth]="false" ariaLabel="Split button with icon" type="standard"
     (primaryButtonClick)="onPrimaryButtonClick3()">
 </fdp-split-menu-button>
-<fdp-menu #menu3 xPosition="before">
+<fdp-menu #menu3 xPosition="after">
     <fdp-menu-item (itemSelect)="onItemSelect3('')">Option 1 with blank value</fdp-menu-item>
     <fdp-menu-item (itemSelect)="onItemSelect3('Option 2 with text')">Option 2 with text</fdp-menu-item>
 </fdp-menu>

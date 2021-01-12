@@ -1,0 +1,18 @@
+<div class="fd-toolbar fd-toolbar--info fd-toolbar--active fd-grid-list__filter" tabindex="0">
+    <ng-content></ng-content>
+
+    <span class="fd-toolbar__spacer"></span>
+
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="decline"
+        i18n-aria-label
+        aria-label="Cancel"
+        i18n-title
+        title="Cancel"
+        [compact]="true"
+        class="fd-grid-list__filter-button"
+        (click)="close.emit()"
+    ></button>
+</div>
