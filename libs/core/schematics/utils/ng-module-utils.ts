@@ -1,29 +1,7 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
-import { getSourceFile } from './package-utils';
-import { addImportToModule } from '@schematics/angular/utility/ast-utils';
-import { InsertChange } from '@schematics/angular/utility/change';
 
 import * as ts from 'typescript';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
-
-// Adds an import to the root module.
-export function addImportToRootModule(tree: Tree, moduleName: string, src: string, modulePath: string): void {
-    const moduleSource = getSourceFile(tree, modulePath);
-    if (!moduleSource) {
-        throw new SchematicsException(`Module not found ${modulePath}`);
-    }
-
-    const changes = addImportToModule(moduleSource as any, modulePath, moduleName, src);
-    const recorder = tree.beginUpdate(modulePath);
-
-    changes.forEach((change) => {
-        if (change instanceof InsertChange) {
-            recorder.insertLeft(change.pos, change.toAdd);
-        }
-    });
-
-    tree.commitUpdate(recorder);
-}
 
 // Checks if an import is included in the module.
 export function hasModuleImport(tree: Tree, modulePath: string, className: string): boolean {

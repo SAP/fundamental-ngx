@@ -16,7 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
-import { ButtonType } from '../button/button.component';
+import { ButtonType } from '../button/base-button';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuItemComponent } from '../menu/menu-item/menu-item.component';
 import { Subscription } from 'rxjs';
