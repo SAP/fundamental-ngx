@@ -273,26 +273,37 @@
         scope="row"
         [attr.aria-selected]="row.checked"
     >
-        <td
-            *ngIf="_isShownSelectionColumn"
-            fd-table-cell
-            class="fd-table__cell--fixed"
-            [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
-            [class.fd-table__cell--focusable]="selectionMode === SELECTION_MODE.SINGLE"
-            [ngStyle]="_getFreezableSelectionCellStyles()"
-            [attr.tabindex]="selectionMode === SELECTION_MODE.SINGLE ? 0 : ''"
-            [attr.role]="selectionMode === SELECTION_MODE.SINGLE ? 'checkbox' : 'cell'"
-            (click)="_toggleSelectableRow(row)"
-            (keydown)="_triggerClickOnKeyboardEnter($event)"
-        >
-            <fd-checkbox
-                *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
-                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
-                [ngModel]="row.checked"
-                (ngModelChange)="_toggleSelectableRow(row)"
-                (keydown)="_triggerClickOnKeyboardEnter($event)"
-            ></fd-checkbox>
-        </td>
+
+        <!-- Row Selection Cell -->
+        <ng-container [ngSwitch]="selectionMode">
+            <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
+                <td
+                    class="fd-table__cell--fixed fd-table__cell--focusable"
+                    tabindex="0"
+                    role="checkbox"
+                    fd-table-cell
+                    [ngStyle]="_getFreezableSelectionCellStyles()"
+                    (click)="_toggleSelectableRow(row)"
+                    (keydown)="_triggerClickOnKeyboardEnter($event)"
+                ></td>
+            </ng-container>
+            <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
+                <td
+                    class="fd-table__cell--fixed fd-table__cell--checkbox"
+                    role="cell"
+                    fd-table-cell
+                    [ngStyle]="_getFreezableSelectionCellStyles()"
+                >
+                    <fd-checkbox
+                        [compact]="contentDensity !== CONTENT_DENSITY.COZY"
+                        [ngModel]="row.checked"
+                        (ngModelChange)="_toggleSelectableRow(row)"
+                        (keydown)="_triggerClickOnKeyboardEnter($event)"
+                    ></fd-checkbox>
+                </td>
+            </ng-container>
+        </ng-container>
+
         <td
             *ngFor="let column of _visibleColumns; let colIdx = index"
             fd-table-cell

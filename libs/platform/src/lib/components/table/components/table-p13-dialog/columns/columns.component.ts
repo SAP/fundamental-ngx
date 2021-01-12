@@ -135,6 +135,12 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     }
 
     /** @hidden */
+    _toggleSelectAll(selectAll: boolean): void {
+        this._selectableColumns.forEach((column) => (column.selected = selectAll));
+        this._onToggleColumn();
+    }
+
+    /** @hidden */
     _onToggleColumn(): void {
         this._countSelectedColumns();
         this._onModelChange();
@@ -188,12 +194,6 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     _moveActiveDown(): void {
         const activeColumnIndex = this._getActiveColumnIndexInFilteredList();
         this._moveColumnInFilteredListByIndex(activeColumnIndex, activeColumnIndex + 1);
-    }
-
-    /** @hidden */
-    _toggleSelectAll(selectAll: boolean): void {
-        this._selectableColumns.forEach((column) => (column.selected = selectAll));
-        this._onModelChange();
     }
 
     /** @hidden */

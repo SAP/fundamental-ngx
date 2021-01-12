@@ -258,7 +258,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Representation of table rows.
      * Contains all rows including group rows
      */
-    _tableRows: TableRow[] = [];
+    _tableRows: TableRow<T>[] = [];
 
     /**
      * @hidden
@@ -266,7 +266,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Rows list that is used to be rendered in the ui.
      * Based on _tableRows and excludes hidden rows.
      */
-    _tableRowsVisible: TableRow[] = [];
+    _tableRowsVisible: TableRow<T>[] = [];
 
     /** @hidden */
     _popoverOpen = false;
@@ -361,7 +361,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     get _isShownSelectionColumn(): boolean {
-        return this.selectionMode !== this.SELECTION_MODE.NONE;
+        return this.selectionMode !== SelectionMode.NONE;
     }
 
     /** @hidden */
@@ -809,7 +809,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    private _createTableRowsByDataSourceItems(source: T[]): TableRow[] {
+    private _createTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         return source.map((item: T, index: number) => new TableRow('item', false, index, item));
     }
 
@@ -986,7 +986,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 continue;
             }
 
-            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = new TableRow(
+            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = new TableRow<GroupTableRowValueType>(
                 'group',
                 false,
                 0,
