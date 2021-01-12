@@ -16,5 +16,4 @@ import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-c
     providers: [DynamicComponentService],
     entryComponents: [SelectMobileComponent]
 })
-export class SelectMobileModule {
-}
+export class SelectMobileModule {}

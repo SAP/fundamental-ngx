@@ -2,17 +2,17 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 
 import { SelectComponent } from './select.component';
 import { SelectModule } from './select.module';
-import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { PopoverComponent } from '../popover/popover.component';
-import { OptionComponent } from './option/option.component';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, X } from '@angular/cdk/keycodes';
+import { ModifierKeys } from '@angular/cdk/testing';
 
 @Component({
     template: `
-        <fd-select [(value)]="value" formControlName="selectControl">
+        <fd-select [(value)]="value" formControlName="selectControl" (openedChange)="onOpen($event)">
             <fd-option id="option-1" [value]="'value-1'">Test1</fd-option>
             <fd-option id="option-2" [value]="'value-2'">Test2</fd-option>
-            <fd-option id="option-3" [value]="'value-3'">Test3</fd-option>
-            <fd-option id="option-4" *ngIf="optionVisible" [value]="'value-4'">Test4</fd-option>
+            <fd-option id="option-3" [disabled]="disabled" [value]="'value-3'">Test3</fd-option>
+            <fd-option id="option-4" [value]="'value-4'">Test4</fd-option>
         </fd-select>
     `
 })
@@ -23,28 +23,54 @@ class TestWrapperComponent {
     @ViewChild(SelectComponent, { read: ElementRef, static: true })
     selectElement: ElementRef;
 
-    @ViewChildren(OptionComponent)
-    optionComponents: QueryList<OptionComponent>;
+    value: string;
+    disabled = false;
+    overlayOpened: boolean;
+
+    onOpen(isOpen: boolean): void {
+        this.overlayOpened = isOpen;
+    }
+}
+
+@Component({
+    template: `
+        <fd-select [(value)]="value" formControlName="selectControl" (openedChange)="onOpen($event)">
+            <fd-option id="option-1" [value]="'aaa'">aaaa</fd-option>
+            <fd-option id="option-2" [value]="'bbb'">bbbb</fd-option>
+            <fd-option id="option-2a" [value]="'bxbb'">bxbb</fd-option>
+            <fd-option id="option-3" [value]="'ccc'">cccc</fd-option>
+            <fd-option id="option-4" [value]="'ddd'">dddd</fd-option>
+        </fd-select>
+    `
+})
+class TestFilteringWrapperComponent {
+    @ViewChild(SelectComponent, { static: true })
+    selectComponent: SelectComponent;
+
+    @ViewChild(SelectComponent, { read: ElementRef, static: true })
+    selectElement: ElementRef;
 
     value: string;
 
-    optionVisible = true;
+    overlayOpened: boolean;
+
+    onOpen(isOpen: boolean): void {
+        this.overlayOpened = isOpen;
+    }
 }
 
 describe('SelectComponent', () => {
     let element: ElementRef;
     let component: SelectComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
+    let triggerControl: HTMLElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
+            declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
             imports: [SelectModule]
         })
             .overrideComponent(SelectComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
-            })
-            .overrideComponent(PopoverComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
             })
             .compileComponents();
@@ -55,256 +81,374 @@ describe('SelectComponent', () => {
         component = fixture.componentInstance.selectComponent;
         element = fixture.componentInstance.selectElement;
         fixture.detectChanges();
+
+        triggerControl = fixture.nativeElement.querySelector('div.fd-select');
     });
 
-    async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
     }
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
+    describe('basic behavior', () => {
+        it('should create so that componennt instance is non null', () => {
+            expect(component).toBeTruthy();
+        });
+
+        it('should have default state closed when component is initialized', () => {
+            expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
+        });
+
+        it('should open options panel when we click on the trigger control.', async () => {
+            triggerControl.click();
+            await wait(fixture);
+
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
+            expect(component.panelOpen).toBeTruthy();
+        });
+
+        it('should close options panel when we click on the trigger control while select is open', async () => {
+            triggerControl.click();
+            await wait(fixture);
+
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
+            expect(component.panelOpen).toBeTruthy();
+            triggerControl.click();
+            expect(fixture.componentInstance.overlayOpened).toBeFalsy();
+            expect(component.panelOpen).toBeFalsy();
+        });
+
+        it('should close options panel when we select first optionItem', async () => {
+            triggerControl.click();
+            await wait(fixture);
+
+            const option1: HTMLElement = document.querySelector('.cdk-overlay-container #option-1');
+            option1.click();
+            await wait(fixture);
+
+            expect(fixture.componentInstance.overlayOpened).toBeFalsy();
+            expect(component.panelOpen).toBeFalsy();
+        });
+
+        it('should close options panel when we click outside of the overlay and trigger', async () => {
+            component.open();
+
+            await wait(fixture);
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
+            expect(component.panelOpen).toBeTruthy();
+
+            (document.querySelector('.cdk-overlay-backdrop') as HTMLElement).click();
+            await wait(fixture);
+
+            expect(fixture.componentInstance.overlayOpened).toBeFalsy();
+            expect(component.panelOpen).toBeFalsy();
+        });
     });
 
-    it('should open', async () => {
-        spyOn(component.isOpenChange, 'emit');
-        component.open();
+    describe('option items selection process', () => {
+        it('should select 2nd option when item is clicked so that select value is "value-2" ', async () => {
+            component.open();
+            await wait(fixture);
 
-        fixture.detectChanges();
+            const options: NodeListOf<HTMLElement> = document.querySelectorAll(
+                '.cdk-overlay-container .fd-list .fd-list__item '
+            );
+            options[1].click();
 
-        expect(component.isOpen).toBeTruthy()
-        expect(component.isOpenChange.emit).toHaveBeenCalledWith(true)
+            await wait(fixture);
+
+            expect(component.selected.value).toBe('value-2');
+            expect(component.keyManager.activeItem.value).toBe('value-2');
+        });
+
+        it('should initialize select with option value-3 active when [value] binding is set ', async () => {
+            component.value = 'value-3';
+            await wait(fixture);
+
+            expect(component.selected.value).toBe('value-3');
+            expect(component.keyManager.activeItem.value).toBe('value-3');
+        });
+
+        it('should reset to NULL when initialized with non-existing value that is not part of original list', async () => {
+            component.value = 'value-3aaa';
+            await wait(fixture);
+
+            expect(component.selected).toBeUndefined();
+            expect(component.keyManager.activeItemIndex).toBe(-1);
+        });
+
+        it('should be able to change initially selected value after selected is initialized', async () => {
+            const testValue = 'value-1';
+            fixture.componentInstance.value = testValue;
+            await wait(fixture);
+
+            expect(component.selected).toBeTruthy();
+            expect(component.selected.value).toBe(testValue);
+            expect(component.keyManager.activeItem.value).toBe(testValue);
+
+            fixture.componentInstance.value = 'value-2';
+            await wait(fixture);
+
+            expect(component.selected).toBeTruthy();
+            expect(component.selected.value).toBe('value-2');
+            expect(component.keyManager.activeItem.value).toBe('value-2');
+        });
+
+        it('should not be clickable if option item is disabled', async () => {
+            const testValue = 'value-1';
+            fixture.componentInstance.value = testValue;
+            fixture.componentInstance.disabled = true;
+            await wait(fixture);
+            expect(component.selected).toBeTruthy();
+            expect(component.selected.value).toBe(testValue);
+            expect(component.keyManager.activeItem.value).toBe(testValue);
+
+            const optionComponent = component.options.toArray()[2];
+            optionComponent.getHtmlElement().click();
+
+            await wait(fixture);
+
+            expect(component.selected).toBeTruthy();
+            expect(component.selected.value).toBe('value-1');
+            expect(component.keyManager.activeItem.value).toBe('value-1');
+        });
     });
 
-    it('should close', async () => {
-        component.open();
+    describe('keyboard navigation', () => {
+        it('should focus select when we TABin to it', async () => {
+            document.body.focus();
 
-        fixture.detectChanges();
+            spyOn(component, 'focus').and.callThrough();
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', TAB));
+            await wait(fixture);
+            expect(component.focus).toHaveBeenCalled();
+        });
 
-        spyOn(component.isOpenChange, 'emit');
+        it('should navigate to second item, when pressing ArrowDown and FirstItem is focused', async () => {
+            component.value = 'value-1';
+            await wait(fixture);
 
-        component.close()
+            triggerControl.click();
+            await wait(fixture);
 
-        expect(component.isOpen).toBeFalsy()
-        expect(component.isOpenChange.emit).toHaveBeenCalledWith(false)
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
+            expect(component.keyManager.activeItemIndex).toBe(0);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
+            await wait(fixture);
+
+            expect(component.keyManager.activeItemIndex).toBe(1);
+            expect(component.keyManager.activeItem.active).toBeTruthy();
+        });
+
+        it('should navigate to the end of the list when pressing END', async () => {
+            component.value = 'value-1';
+            await wait(fixture);
+
+            triggerControl.click();
+            await wait(fixture);
+
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
+            expect(component.keyManager.activeItemIndex).toBe(0);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', END));
+            await wait(fixture);
+
+            expect(component.keyManager.activeItemIndex).toBe(3);
+        });
+
+        it('should navigate to the top of the list when pressing HOME', async () => {
+            component.value = 'value-3';
+            await wait(fixture);
+
+            triggerControl.click();
+            await wait(fixture);
+
+            expect(fixture.componentInstance.overlayOpened).toBeTruthy();
+            expect(component.keyManager.activeItemIndex).toBe(2);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', HOME));
+            await wait(fixture);
+
+            expect(component.keyManager.activeItemIndex).toBe(0);
+        });
+
+        it('should select the item and close option panel when pressing ENTER', async () => {
+            component.value = 'value-1';
+            await wait(fixture);
+
+            triggerControl.click();
+            await wait(fixture);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
+            await wait(fixture);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ENTER));
+            await wait(fixture);
+
+            expect(component.value).toBe('value-2');
+        });
+
+        it('should select the item and close option panel when pressing SPACE', async () => {
+            component.value = 'value-1';
+            await wait(fixture);
+
+            triggerControl.click();
+            await wait(fixture);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
+            await wait(fixture);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', SPACE));
+
+            expect(component.value).toBe('value-2');
+        });
+
+        it('should open option panel when pressing ENTER and having focus on the select trigger', async () => {
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ENTER));
+            await wait(fixture);
+
+            expect(component.panelOpen).toBeTruthy();
+        });
+
+        it('should close opened option panel when pressing ESC', async () => {
+            triggerControl.click();
+            await wait(fixture);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ESCAPE));
+            await wait(fixture);
+
+            expect(component.panelOpen).toBeFalsy();
+        });
+
+        it('should not be selectabe if option is disabled so that when we' + 
+        ' navigate the item is skipped and value-4 is selected', async () => {
+            component.value = 'value-2';
+            fixture.componentInstance.disabled = true;
+
+            await wait(fixture);
+            triggerControl.click();
+            await wait(fixture);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
+            await wait(fixture);
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ENTER));
+            await wait(fixture);
+
+            expect(component.value).toBe('value-4');
+        });
     });
 
+    describe('filtering ', () => {
+        let fixtureFilter: ComponentFixture<TestFilteringWrapperComponent>;
+        beforeEach(() => {
+            fixtureFilter = TestBed.createComponent(TestFilteringWrapperComponent);
+            component = fixtureFilter.componentInstance.selectComponent;
+            element = fixtureFilter.componentInstance.selectElement;
+            fixtureFilter.detectChanges();
 
-    it('should start closed', () => {
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
+            triggerControl = fixtureFilter.nativeElement.querySelector('div.fd-select');
+        });
+
+        it('should make active second option "bbb" when start typing "b"', fakeAsync(() => {
+            fixtureFilter.detectChanges();
+            tick();
+
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', 66, 'b'));
+            tick(component.typeaheadDebounceInterval + 10);
+
+            expect(component.keyManager.activeItemIndex).toBe(1);
+        }));
+
+        it('should make active 3th option "bxbb" when start typing "bx"', fakeAsync(() => {
+            fixtureFilter.detectChanges();
+            tick();
+
+            const optionComponents = component.options.toArray();
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', B, 'b'));
+            triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', X, 'x'));
+            tick(component.typeaheadDebounceInterval + 10);
+
+            expect(component.keyManager.activeItemIndex).toBe(2);
+        }));
     });
-
-    it('should open on click', async () => {
-        component.close();
-        element.nativeElement.querySelector('.fd-button').click();
-
-        await wait(fixture);
-
-        expect(component.isOpen).toBe(true);
-    });
-
-    it('should close on click while open', async () => {
-        component.open();
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        element.nativeElement.querySelector('.fd-button').click();
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        expect(component.isOpen).toBe(false);
-    });
-
-    it('should select an option', async () => {
-        spyOn(component.valueChange, 'emit').and.callThrough();
-        component.open();
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        fixture.componentInstance.optionComponents.first.selectionHandler();
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        expect(fixture.componentInstance.value).toBe('value-1');
-        expect(component.valueChange.emit).toHaveBeenCalledWith('value-1');
-    });
-
-    it('should be disabled', async () => {
-        component.disabled = true;
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        element.nativeElement.querySelector('.fd-button').click();
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        expect(fixture.nativeElement.querySelector('#option-1')).toBeFalsy();
-    });
-
-    it('should change value programmatically', async () => {
-        const testValue = 'value-1';
-        fixture.componentInstance.value = testValue;
-
-        await wait(fixture);
-
-        expect(component.selected).toBeTruthy();
-        expect(component.selected.value).toBe(testValue);
-        expect(component.options.find(option => option.value === testValue).selected).toBe(true);
-    });
-
-    it('Should unselect option', async () => {
-        const selectValue = 'value-4';
-        component.unselectMissingOption = true;
-        fixture.componentInstance.optionVisible = true;
-
-        fixture.componentInstance.value = selectValue;
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        fixture.componentInstance.optionVisible = false;
-
-        await wait(fixture);
-        fixture.detectChanges();
-
-        expect(fixture.componentInstance.value).toBe(undefined);
-    });
-
-    it('Should not unselect option', async () => {
-        const selectValue = 'value-4';
-        component.unselectMissingOption = false;
-        fixture.componentInstance.optionVisible = true;
-
-        fixture.componentInstance.value = selectValue;
-
-        await wait(fixture);
-
-        fixture.componentInstance.optionVisible = false;
-
-        await wait(fixture);
-
-        expect(fixture.componentInstance.value).toBe(selectValue);
-    });
-
-    it('Should focus first when no selected value', fakeAsync(() => {
-        component.open();
-
-        fixture.detectChanges();
-        tick(100);
-
-        expect(document.activeElement).toBe(component.options.first.getHtmlElement());
-    }));
-
-    it('Should focus selected', fakeAsync(() => {
-        fixture.componentInstance.value = 'value-2';
-
-        fixture.detectChanges();
-        tick();
-
-        component.open();
-
-        fixture.detectChanges();
-        tick(100);
-
-        expect(document.activeElement).toBe(component.selected.getHtmlElement());
-    }));
-
-    it('Should support arrows navigation', fakeAsync(() => {
-        const options: any = component.options.toArray();
-        component.open();
-
-        fixture.detectChanges();
-        tick(100);
-
-        expect(document.activeElement).toBe(options[0].getHtmlElement());
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-
-        fixture.detectChanges();
-        tick();
-
-        expect(document.activeElement).toBe(options[1].getHtmlElement());
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
-
-        fixture.detectChanges();
-        tick();
-
-        expect(document.activeElement).toBe(options[0].getHtmlElement());
-    }));
-
-    it('Should support opening and closing with keyboard', async () => {
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
-
-        await wait(fixture);
-
-        expect(component.isOpen).toBeTrue();
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-
-        await wait(fixture);
-
-        expect(component.isOpen).toBeFalse();
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-
-        await wait(fixture);
-
-        expect(component.isOpen).toBeTrue();
-    });
-
-    it('Should support alphanumerical keys selection', async () => {
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyV' }));
-
-        await wait(fixture);
-
-        expect(component.selected.value).toEqual('value-1');
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyV' }));
-
-        await wait(fixture);
-
-        expect(component.selected.value).toEqual('value-2');
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-
-        await wait(fixture);
-
-        expect(component.selected.value).toEqual('value-3');
-    });
-
-    it('Should support alphanumerical keys focus', fakeAsync(() => {
-        fixture.componentInstance.value = 'value-1';
-        component.open();
-
-        fixture.detectChanges();
-        tick();
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyT' }));
-
-        fixture.detectChanges();
-        tick(component.typeaheadDebounceInterval + 1);
-
-        expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyT' }));
-
-        fixture.detectChanges();
-        tick(component.typeaheadDebounceInterval + 1);
-
-        expect(document.activeElement).toBe(component['_options'][2].getHtmlElement());
-
-        component['_elementRef'].nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
-
-        fixture.detectChanges();
-        tick(component.typeaheadDebounceInterval + 1);
-
-        expect(document.activeElement).toBe(component['_options'][1].getHtmlElement());
-    }));
 });
+
+export function keyboardEventWithModifier(
+    type: string,
+    keyCode = 0,
+    key = '',
+    target?: Element,
+    modifiers: ModifierKeys = {}
+): void {
+    const event = document.createEvent('KeyboardEvent') as any;
+    const originalPreventDefault = event.preventDefault;
+
+    // Firefox does not support `initKeyboardEvent`, but supports `initKeyEvent`.
+    if (event.initKeyEvent) {
+        event.initKeyEvent(
+            type,
+            true,
+            true,
+            window,
+            modifiers.control,
+            modifiers.alt,
+            modifiers.shift,
+            modifiers.meta,
+            keyCode
+        );
+    } else {
+        // `initKeyboardEvent` expects to receive modifiers as a whitespace-delimited string
+        // See https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
+        let modifiersList = '';
+
+        if (modifiers.control) {
+            modifiersList += 'Control ';
+        }
+
+        if (modifiers.alt) {
+            modifiersList += 'Alt ';
+        }
+
+        if (modifiers.shift) {
+            modifiersList += 'Shift ';
+        }
+
+        if (modifiers.meta) {
+            modifiersList += 'Meta ';
+        }
+
+        event.initKeyboardEvent(
+            type,
+            true /* canBubble */,
+            true /* cancelable */,
+            window /* view */,
+            0 /* char */,
+            key /* key */,
+            0 /* location */,
+            modifiersList.trim() /* modifiersList */,
+            false /* repeat */
+        );
+    }
+
+    // Webkit Browsers don't set the keyCode when calling the init function.
+    // See related bug https://bugs.webkit.org/show_bug.cgi?id=16735
+    Object.defineProperties(event, {
+        keyCode: { get: () => keyCode },
+        key: { get: () => key },
+        target: { get: () => target },
+        ctrlKey: { get: () => !!modifiers.control },
+        altKey: { get: () => !!modifiers.alt },
+        shiftKey: { get: () => !!modifiers.shift },
+        metaKey: { get: () => !!modifiers.meta }
+    });
+
+    // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
+    event.preventDefault = function (): void {
+        Object.defineProperty(event, 'defaultPrevented', { get: () => true });
+        return originalPreventDefault.apply(this, arguments);
+    };
+
+    return event;
+}

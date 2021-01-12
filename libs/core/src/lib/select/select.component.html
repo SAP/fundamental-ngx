@@ -1,90 +1,103 @@
-<ng-container *ngTemplateOutlet="mobile ? selectMobileTemplate : selectDesktopTemplate"></ng-container>
+<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
 
-<ng-template #selectDesktopTemplate>
-    <fd-popover
-        additionalBodyClass="fd-popover-custom-list"
-        [isOpen]="isOpen"
-        [triggers]="[]"
-        [focusTrapped]="true"
-        [disabled]="disabled"
-        [appendTo]="appendTo"
-        [options]="popperOptions"
-        [closeOnEscapeKey]="false"
-        [fillControlMode]="'at-least'"
-        [maxWidth]="600"
-        [closeOnOutsideClick]="closeOnOutsideClick"
-        (isOpenChange)="popoverOpenChangeHandle($event)">
+<!--
+    With CDK overlays the origin trigger and connected overlay needs to be together within one level
+-->
 
-        <fd-popover-control>
-            <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
-        </fd-popover-control>
+<ng-template #desktopTemplate>
+    <div
+        cdk-overlay-origin
+        #selectTrigger="cdkOverlayOrigin"
+        class="fd-select fd-popover__control"
+        [class.fd-select--compact]="compact"
+        (keydown)="handleKeydown($event)"
+        (click)="toggle()"
+    >
+        <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+    </div>
 
-        <fd-popover-body>
+    <!--
+        Option panel using Material CDK overlay system
+    -->
+    <ng-template
+        cdk-connected-overlay
+        cdkConnectedOverlayLockPosition
+        cdkConnectedOverlayHasBackdrop
+        cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+        [cdkConnectedOverlayOrigin]="selectTrigger"
+        [cdkConnectedOverlayOpen]="panelOpen"
+        [cdkConnectedOverlayPositions]="positions"
+        [cdkConnectedOverlayMinWidth]="triggerRect?.width"
+        [cdkConnectedOverlayOffsetY]="offsetY"
+        (backdropClick)="close()"
+        (attach)="onAttached()"
+        (detach)="close()"
+    >
+        <div [attr.dir]="_direction" class="fd-select-overlay fd-popover-custom-list fd-popover__body fd-popover__body--no-arrow fd-popover__body--dropdown">
             <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
-        </fd-popover-body>
-    </fd-popover>
-</ng-template>
-
-<ng-template #selectMobileTemplate>
-    <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+        </div>
+    </ng-template>
 </ng-template>
 
 <ng-template #selectInputControlTemplate>
-    <div class="fd-select"
-         [class.fd-select--compact]="compact"
-         (click)="toggle()">
-        <div class="fd-select__control"
-             role="listbox"
-             #selectControl
-             [ngClass]="state ? 'is-' + state : ''"
-             [class.is-active]="isOpen"
-             [class.is-expanded]="isOpen"
-             [class.is-disabled]="disabled"
-             [class.is-readonly]="readonly"
-             [attr.tabindex]="disabled ? -1 : 0"
-             [attr.id]="controlId"
-             [attr.aria-active]="isOpen"
-             [attr.aria-expanded]="isOpen"
-             [attr.aria-disabled]="disabled"
-             [attr.aria-readonly]="readonly"
-             [attr.aria-controls]="controlId + '-list-box'"
-             [attr.aria-haspopup]="isInteractive"
-             [attr.aria-label]="ariaLabel"
-             [attr.aria-labelledby]="ariaLabelledBy"
-             [attr.aria-activedescendant]="selected?.id || null">
+    <div
+        class="fd-select__control"
+        role="listbox"
+        #selectControl
+        [ngClass]="state ? 'is-' + state : ''"
+        [class.is-active]="panelOpen"
+        [class.is-expanded]="panelOpen"
+        [class.is-disabled]="disabled"
+        [class.is-readonly]="readonly"
+        [attr.tabindex]="tabIndex"
+        [attr.id]="controlId"
+        [attr.aria-active]="panelOpen"
+        [attr.aria-expanded]="panelOpen"
+        [attr.aria-disabled]="disabled"
+        [attr.aria-readonly]="readonly"
+        [attr.aria-controls]="controlId + '-list-box'"
+        [attr.aria-haspopup]="!(this.readonly || this.disabled)"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.aria-activedescendant]="getAriaActiveDescendant()"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+    >
+        <div class="fd-select__text-content">
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                [ngTemplateOutletContext]="{$implicit: selectViewValue, selected: selected}">
+                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
+            >
             </ng-container>
 
             <ng-template #defaultSelectContent>
-                <span class="fd-select__text-content">
-                    {{ selectViewValue }}
-                </span>
+                {{ triggerValue }}
             </ng-template>
-
-            <button fd-button
-                    tabindex="-1"
-                    class="fd-button--transparent fd-select__button"
-                    *ngIf="!readonly"
-                    [disabled]="disabled"
-                    [glyph]="glyph">
-            </button>
         </div>
+        <button
+            fd-button
+            tabindex="-1"
+            class="fd-button--transparent fd-select__button"
+            *ngIf="!readonly"
+            [disabled]="disabled"
+            [glyph]="glyph">
+        </button>
     </div>
 </ng-template>
 
 <ng-template #selectOptionsListTemplate>
-    <ul fd-list
+    <ul
+        #optionPanel
+        fd-list
+        class="fd-select-options"
         role="listbox"
         tabindex="-1"
         [compact]="compact"
         [dropdownMode]="true"
-        [keyboardSupport]="false"
         [hasMessage]="!!stateMessage"
         [attr.id]="controlId + '-list-box'"
-        [style.maxHeight]="maxHeight || calculatedMaxHeight + 'px'">
-
+        [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
+    >
         <li *ngIf="stateMessage"
             fd-list-message
             tabindex="-1"
@@ -94,6 +107,13 @@
         </li>
 
         <ng-content></ng-content>
-
     </ul>
+</ng-template>
+
+<ng-template #mobileTemplate>
+    <div class="fd-select" [class.fd-select--compact]="compact" (keydown)="handleKeydown($event)" (click)="toggle()">
+        <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+    </div>
+
+    <div #dialogContainer></div>
 </ng-template>

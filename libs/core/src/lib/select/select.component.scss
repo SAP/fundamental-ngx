@@ -1,17 +1,29 @@
+@import "~@angular/cdk/overlay-prebuilt";
 @import "~fundamental-styles/dist/select";
+@import '~fundamental-styles/dist/popover';
 
-.fd-popover__body > :first-child {
-	border-radius: 0;
-}
-
-// TODO: Remove after issue on styles addressed.
 .fd-select__text-content {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	line-height: 1rem;
-	display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1rem;
+    display: block;
 }
 
 .fd-select-custom-class {
-	display: inline-block;
+   display: inline-block;
+}
+
+.fd-select-overlay {
+    flex-basis: 100%;
+    position: static;
+    border-radius: 0.25rem;
+}
+
+.fd-select-options {
+    max-width: 100%;
+    overflow: auto;
+
+    &.fd-list--dropdown {
+     max-width: inherit;
+    }
 }
