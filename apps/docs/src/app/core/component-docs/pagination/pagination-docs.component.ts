@@ -3,6 +3,12 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as paginationSrc from '!raw-loader!./examples/pagination-example.component.ts';
+
+import * as paginationShowingSrc from '!raw-loader!./examples/pagination-showing-example.component.ts';
+
+import * as paginationPerPageHtml from '!raw-loader!./examples/pagination-per-page-example.component.html';
+import * as paginationPerPageTs from '!raw-loader!./examples/pagination-per-page-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -50,6 +56,28 @@ export class PaginationDocsComponent {
             code: paginationSrc,
             fileName: 'pagination-example',
             component: 'PaginationExampleComponent'
+        }
+    ];
+
+    paginationShowing: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: paginationShowingSrc,
+            fileName: 'pagination-showing-example',
+            component: 'PaginationShowingExampleComponent'
+        }
+    ];
+    paginationPerPageSrc: ExampleFile[] = [
+        {
+            language: 'html',
+            code: paginationPerPageHtml,
+            fileName: 'pagination-perpage-example',
+        },
+        {
+            language: 'typescript',
+            code: paginationPerPageTs,
+            fileName: 'pagination-perpage-example',
+            component: 'PaginationPerPageExampleComponent'
         }
     ];
 
