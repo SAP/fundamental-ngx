@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, ElementRef, Optional } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, ElementRef, Optional, QueryList } from '@angular/core';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../../dialog/utils/dialog-ref.class';
 import { WizardComponent } from '../../wizard/wizard.component';
@@ -23,8 +23,8 @@ import { WizardComponent } from '../../wizard/wizard.component';
 export class DialogBodyComponent implements AfterContentInit {
 
     /** @hidden */
-    @ContentChild(WizardComponent)
-    wizard: WizardComponent;
+    @ContentChildren(WizardComponent, { descendants: true })
+    _wizard: QueryList<WizardComponent>;
 
     /** @hidden */
     constructor(
@@ -35,10 +35,10 @@ export class DialogBodyComponent implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.wizard) {
+        if (this._wizard && this._wizard.first) {
             const style = this._elRef.nativeElement.style;
-            style.paddingTop = '0px';
-            style.paddingBottom = '0px';
+            style.paddingTop = '0';
+            style.paddingBottom = '0';
         }
     }
 }
