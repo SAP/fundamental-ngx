@@ -23,7 +23,7 @@ import { FormGroupModule } from './form-group/form-group.module';
         FormLegendModule,
         FormMessageModule,
         FormInputMessageGroupModule,
-        FormGroupModule
+        FormGroupModule,
     ]
 })
 export class FormModule {}

@@ -37,6 +37,8 @@ export interface PopoverTemplate {
 @Injectable()
 export class PopoverService extends BasePopoverClass {
 
+    tmp = false;
+
     stringContent: string;
 
     templateContent: TemplateRef<any>;
@@ -95,6 +97,10 @@ export class PopoverService extends BasePopoverClass {
         this._triggerElement = triggerElement;
         if (config) {
             this.refreshConfiguration(config);
+        }
+
+        if (this.tmp) {
+            console.log(this.triggers);;
         }
 
         this._refreshTriggerListeners();
@@ -158,6 +164,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** Toggles the popover open state */
     toggle(): void {
+        console.log('toggle');
         if (this.isOpen) {
             this.close();
         } else {
@@ -266,6 +273,9 @@ export class PopoverService extends BasePopoverClass {
     /** Refresh listeners on trigger element events */
     private _refreshTriggerListeners(): void {
         if (!this._triggerElement) {
+            if (this.tmp) {
+                console.log(this._triggerElement);
+            }
             return;
         }
 

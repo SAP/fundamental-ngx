@@ -1,6 +1,6 @@
 <fd-popover
     [(isOpen)]="isOpen"
-    (isOpenChange)="isOpenChange.emit($event)"
+    (isOpenChange)="isOpenChange.emit($event); _changeMessageVisibility()"
     [triggers]="[]"
     [placement]="placement"
     [disabled]="disabled"
@@ -9,7 +9,7 @@
     [appendTo]="appendTo"
 >
     <fd-popover-control>
-        <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled">
+        <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled" #inputGroupComponent>
             <input
                 type="text"
                 class="fd-input"
@@ -38,7 +38,10 @@
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body [style.display]="'block'" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
-        <ng-content></ng-content>
+        <fd-form-message [embedded]="true" *ngIf="message" [type]="messageType">
+            {{ message }}
+        </fd-form-message>
+
         <fd-calendar
             (closeCalendar)="closeFromCalendar()"
             [activeView]="activeView"
