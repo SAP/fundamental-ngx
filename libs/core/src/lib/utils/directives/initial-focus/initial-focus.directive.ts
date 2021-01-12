@@ -1,10 +1,14 @@
-import { AfterViewInit, Directive, ElementRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 
 @Directive({
     selector: '[fdInitialFocus], [fd-initial-focus]'
 })
 export class InitialFocusDirective implements AfterViewInit {
+
+    /** Whether initial focus functionality should be enabled */
+    @Input()
+    enabled = true;
 
     constructor(
         private _elementRef: ElementRef,
@@ -13,7 +17,9 @@ export class InitialFocusDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._focusFirstTabbableElement();
+        if (this.enabled) {
+            this._focusFirstTabbableElement();
+        }
     }
 
     private _focusFirstTabbableElement(): void {

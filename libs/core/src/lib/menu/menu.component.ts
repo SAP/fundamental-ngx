@@ -69,13 +69,6 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     @Input()
     focusTrapped = true;
 
-    /**
-     * Whether the popover should automatically move focus into the trapped region upon
-     * initialization and return focus to the previous activeElement upon destruction.
-     */
-    @Input()
-    focusAutoCapture = true;
-
     /** Open submenu on hover after given milliseconds */
     @Input()
     openOnHoverTime = 0;
@@ -185,6 +178,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
         this._popoverService.close();
         this._menuService.resetMenuState();
         this.isOpenChange.emit(this.isOpen);
+        this._focusTrigger();
         this._changeDetectorRef.markForCheck();
     }
 
@@ -271,6 +265,13 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     private _destroyMobileComponent(): void {
         if (this._mobileModeComponentRef) {
             this._mobileModeComponentRef.destroy();
+        }
+    }
+
+    /** @hidden */
+    private _focusTrigger(): void {
+        if (this.focusTrapped && this.trigger) {
+            this.trigger.nativeElement.focus();
         }
     }
 }

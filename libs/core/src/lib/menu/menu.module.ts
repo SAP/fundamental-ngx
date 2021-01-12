@@ -11,9 +11,10 @@ import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
 import { PopoverModule } from '../popover/popover.module';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 import { IconModule } from '../icon/icon.module';
+import { InitialFocusModule } from '../utils/directives/initial-focus/initial-focus.module';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, IconModule],
+    imports: [CommonModule, PopoverModule, IconModule, InitialFocusModule],
     declarations: [
         MenuComponent,
         MenuItemComponent,
