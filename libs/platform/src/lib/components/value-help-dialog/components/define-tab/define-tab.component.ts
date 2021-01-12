@@ -183,14 +183,9 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChang
 
   /** @hidden */
   private _initializeFilters(): void {
-    for (const filter of this.filters) {
-      if (filter.include) {
-        this._includeFilters.push(filter);
-      }
-      if (filter.exclude) {
-        this._excludeFilters.push(filter);
-      }
-    }
+    this._includeFilters = this.filters.filter(f => f.include);
+    this._excludeFilters = this.filters.filter(f => f.exclude);
+
     this._definePanelState.included = !!this._included.length;
     this._definePanelState.excluded = !!this._excluded.length;
   }

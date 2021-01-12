@@ -188,22 +188,27 @@
                 </div>
 
                 <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12: 6" [colXl]="mobile ? 12: 6" *ngIf="_hasAdvanced" class="fdp-value-help-dialog__advanced-actions">
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        *ngIf="_hasAdvanced"
-                        [label]="mobile ? searchField.advancedSearchLabel : (isOpenAdvanced ? searchField.hideAdvancedSearchLabel : searchField.showAdvancedSearchLabel)"
-                        [compact]="true"
-                        (click)="toggleAdvancedSearch()"
-                    ></button>
-                    <button
-                        type="submit"
-                        fd-button
-                        i18n-label="@@platformI18nValueHelpDialog.Search.Button"
-                        label="Go"
-                        fdType="emphasized"
-                        [compact]="true"
-                    ></button>
+                    <fd-toolbar [clearBorder]="true">
+                        <fd-toolbar-spacer></fd-toolbar-spacer>
+                        <button
+                            fd-toolbar-item
+                            fd-button
+                            fdType="transparent"
+                            *ngIf="_hasAdvanced"
+                            [label]="mobile ? searchField.advancedSearchLabel : (isOpenAdvanced ? searchField.hideAdvancedSearchLabel : searchField.showAdvancedSearchLabel)"
+                            [compact]="true"
+                            (click)="toggleAdvancedSearch()"
+                        ></button>
+                        <button
+                            fd-toolbar-item
+                            type="submit"
+                            fd-button
+                            i18n-label="@@platformI18nValueHelpDialog.Search.Button"
+                            label="Go"
+                            fdType="emphasized"
+                            [compact]="true"
+                        ></button>
+                    </fd-toolbar>
                 </div>
             </fd-layout-grid>
             <div
@@ -215,14 +220,14 @@
                     <ng-container *ngFor="let filter of _displayedFilters; trackBy: _trackByFilterFn">
                         <ng-container *ngIf="filter.advanced">
                             <div fdLayoutGridCol="12" colMd="12" colLg="6" colXl="6">
-                                <fd-layout-grid [noGap]="true">
-                                    <div fdLayoutGridCol="12" colMd="12" colLg="4" colXl="4">
-                                        <label fd-form-label [for]="'input' + filter.key">{{ filter.label }}:</label>
-                                    </div>
-                                    <div fdLayoutGridCol="12" colMd="12" colLg="8" colXl="8">
-                                        <input [(ngModel)]="filter.value" fd-form-control type="text" [name]="'search-by-' + filter.label" [id]="'input' + filter.key" />
-                                    </div>
-                                </fd-layout-grid>
+                                <fd-form-group>
+                                    <fd-layout-grid [noGap]="true">
+                                        <label fdLayoutGridCol="12" colMd="12" colLg="4" colXl="4" class="fd-form-group__header" fd-form-label [for]="'input' + filter.key">{{ filter.label }}:</label>
+                                        <div fdLayoutGridCol="12" colMd="12" colLg="8" colXl="8">
+                                            <input [(ngModel)]="filter.value" fd-form-control type="text" [name]="'search-by-' + filter.label" [id]="'input' + filter.key" />
+                                        </div>
+                                    </fd-layout-grid>
+                                </fd-form-group>
                             </div>
                         </ng-container>
                     </ng-container>

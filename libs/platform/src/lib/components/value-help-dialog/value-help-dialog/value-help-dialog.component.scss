@@ -17,6 +17,9 @@ $block: fdp-value-help-dialog;
         .#{$block}-mobile & {
             justify-content: flex-start;
         }
+        .fd-toolbar {
+            padding: 0;
+        }
     }
     .fd-dialog__header {
         box-shadow: none;
@@ -104,8 +107,5 @@ $block: fdp-value-help-dialog;
         .fd-button {
             margin-left: .5rem;
         }
-    }
-    &__selection-token {
-        margin-bottom: 0.25rem;
     }
 }
