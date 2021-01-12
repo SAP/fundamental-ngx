@@ -91,7 +91,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _dir: string;
 
     private subscriptions = new Subscription();
-    private _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     constructor(
