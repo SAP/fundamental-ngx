@@ -1,4 +1,5 @@
 import {
+    browserIsIE,
     click,
     getAttributeByNameArr,
     getElementArrayLength,
@@ -14,8 +15,8 @@ import {
 import { SearchPo } from '../pages/search.po';
 import searchPageContent from '../fixtures/appData/search-page-content';
 
-describe('Search field', () => {
-    const searchPo = new SearchPo();
+describe('Search field', function() {
+    const searchPo: SearchPo = new SearchPo();
 
     beforeAll(() => {
         searchPo.open();
@@ -43,7 +44,7 @@ describe('Search field', () => {
         }
     });
 
-    it('should have placeholder text', async () => {
+    it('should have placeholder text', () => {
         const arrLength = getElementArrayLength(searchPo.searchFields);
         const actualPlaceholders = getAttributeByNameArr(searchPo.searchFields, 'placeholder');
         for (let i = 0; arrLength > i; i++) {
@@ -53,7 +54,7 @@ describe('Search field', () => {
         }
     });
 
-    it('should submit term by click on search icon ', async () => {
+    it('should submit term by click on search icon ', () => {
         const arrLength = getElementArrayLength(searchPo.searchFields);
         for (let i = 0; arrLength > i; i++) {
             // value without suggestion
@@ -73,7 +74,7 @@ describe('Search field', () => {
         expect(getText(searchPo.cozyWithDataSourceSearch, 2)).toContain('test');
     });
 
-    it('should clear search by click on click icon ', async () => {
+    it('should clear search by click on click icon ', () => {
         const arrLength = getElementArrayLength(searchPo.searchFields);
         for (let i = 0; arrLength > i; i++) {
             // value without suggestion
@@ -120,21 +121,26 @@ describe('Search field', () => {
         expect(withCategoryCozySize).toBeGreaterThan(withCategoryCompactSize);
     });
 
-    it('should be able so set category if this option enabled', () => {
-        const arrLength = getElementArrayLength(searchPo.searchCategoryBtn);
-        for (let i = 0; arrLength > i; i++) {
-            click(searchPo.searchCategoryBtn, i);
-            click(searchPo.autosuggestionItems);
-            click(searchPo.searchIcons, i + 2);
+    it('should be able to set category if this option enabled', () => {
+        // TODO: Unskip after fix #4317
+        if (!browserIsIE()) {
+            const arrLength = getElementArrayLength(searchPo.searchCategoryBtn);
+            for (let i = 0; arrLength > i; i++) {
+                click(searchPo.searchCategoryBtn, i);
+                click(searchPo.autosuggestionItems);
+                click(searchPo.searchIcons, i + 2);
+            }
+            expect(getText(searchPo.cozyWithCategoriesSearch, 1)).toContain(searchPageContent.expected_category);
+            expect(getText(searchPo.cozyWithCategoriesSearch, 3)).toContain(searchPageContent.expected_category);
+
+            expect(getText(searchPo.compactWithCategoriesSearch, 1)).toContain(searchPageContent.expected_category);
+            expect(getText(searchPo.compactWithCategoriesSearch, 3)).toContain(searchPageContent.expected_category);
+
+            expect(getText(searchPo.cozyWithDataSourceSearch, 1)).toContain(searchPageContent.expected_category);
+            expect(getText(searchPo.cozyWithDataSourceSearch, 3)).toContain(searchPageContent.expected_category);
+            return;
         }
-        expect(getText(searchPo.cozyWithCategoriesSearch, 1)).toContain('red');
-        expect(getText(searchPo.cozyWithCategoriesSearch, 3)).toContain('red');
-
-        expect(getText(searchPo.compactWithCategoriesSearch, 1)).toContain('red');
-        expect(getText(searchPo.compactWithCategoriesSearch, 3)).toContain('red');
-
-        expect(getText(searchPo.cozyWithDataSourceSearch, 1)).toContain('red');
-        expect(getText(searchPo.cozyWithDataSourceSearch, 3)).toContain('red');
+        console.log('Skip for IE');
     });
 
     it('should check rtl switch', () => {
