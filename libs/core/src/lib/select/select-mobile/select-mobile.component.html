@@ -6,7 +6,7 @@
             <button *ngIf="mobileConfig.hasCloseButton"
                     fd-dialog-close-button
                     [mobile]="true"
-                    (click)="cancel()">
+                    (click)="_cancel()">
             </button>
         </fd-dialog-header>
 
@@ -19,12 +19,12 @@
                     *ngIf="mobileConfig?.approveButtonText"
                     fdType="emphasized"
                     [label]="mobileConfig?.approveButtonText"
-                    (click)="approve()">
+                    (click)="_approve()">
             </fd-button-bar>
             <fd-button-bar
                     *ngIf="mobileConfig?.cancelButtonText"
                     [label]="mobileConfig?.cancelButtonText"
-                    (click)="cancel()">
+                    (click)="_cancel()">
             </fd-button-bar>
         </fd-dialog-footer>
 

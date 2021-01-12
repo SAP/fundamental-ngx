@@ -1,6 +1,6 @@
-@import "~@angular/cdk/overlay-prebuilt";
-@import "~fundamental-styles/dist/select";
-@import '~fundamental-styles/dist/popover';
+ @import "~@angular/cdk/overlay-prebuilt";
+ @import "~fundamental-styles/dist/select";
+ @import '~fundamental-styles/dist/popover';
 
 .fd-select__text-content {
     overflow: hidden;
@@ -27,3 +27,4 @@
      max-width: inherit;
     }
 }
+

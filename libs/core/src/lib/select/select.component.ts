@@ -25,17 +25,19 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { FD_OPTION_PARENT_COMPONENT, OptionComponent } from './option/option.component';
 import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
-import { MatSelectCommonBehavior, MatSelectCommonBehaviorCtor, mixinMatSelectCommons } from './commons/select-commons';
+
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { DialogConfig } from '../dialog/utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
-import { Subscription } from 'rxjs';
-
+import { SelectMobileComponent } from './select-mobile/select-mobile.component';
+import { FD_OPTION_PARENT_COMPONENT, OptionComponent } from './option/option.component';
+import { MatSelectCommonBehaviorCtor, mixinMatSelectCommons } from './commons/select-commons';
+import { MatSelectCommonBehavior } from './iselect-common-behavior';
+import { PopperOptions } from 'popper.js';
+import { PopoverFillMode } from '../popover/popover-position/popover-position';
 let selectUniqueId = 0;
 export type SelectControlState = 'error' | 'success' | 'warning' | 'information';
 
@@ -113,21 +115,12 @@ export class SelectComponent extends _MatSelectMixinCommons
     @Input()
     controlId = `fd-select-${selectUniqueId++}`;
 
-    /**
-     * Whether the select component is disabled.
-     */
-    @Input()
-    disabled = false;
-
     /** Whether the select component is disabled. */
     @Input()
     state: SelectControlState = null;
 
-    /**
-     * Whether the select component is readonly.
-     */
     @Input()
-    readonly = false;
+    mobile = false;
 
     /**
      * In case of error or warning msg appears as first item in the list of values
@@ -136,25 +129,22 @@ export class SelectComponent extends _MatSelectMixinCommons
     stateMessage: string;
 
     /**
+     * Whether the select component is disabled.
+     */
+    @Input()
+    disabled = false;
+
+    /**
+     * Whether the select component is readonly.
+     */
+    @Input()
+    readonly = false;
+
+    /**
      * Placeholder for the select. Appears in the triggerbox if no option is selected.
      */
     @Input()
     placeholder: string;
-
-    /**
-     * Sets value of the selected option.
-     */
-    @Input()
-    get value(): any {
-        return this.internalValue;
-    }
-
-    set value(newValue: any) {
-        if (newValue !== this.internalValue) {
-            this.writeValue(newValue);
-            this.internalValue = newValue;
-        }
-    }
 
     /**
      * Whether the select is in compact mode.
@@ -162,17 +152,59 @@ export class SelectComponent extends _MatSelectMixinCommons
     @Input()
     compact = false;
 
+    /** Whether option components contain more than basic text. */
+    @Input()
+    extendedBodyTemplate = false;
+
+    /**
+     * Max height of the popover. Any overflowing elements will be accessible through scrolling. *
+     */
+    @Input()
+    maxHeight: string;
+
     /**
      * Glyph to add icon in the select component.
      */
     @Input()
     glyph = 'slim-arrow-down';
 
+    /** Whether close the popover on outside click. */
+    @Input()
+    closeOnOutsideClick = true;
+
+    /** Popper.js options of the popover. */
+    @Input()
+    popperOptions: PopperOptions = {
+        placement: 'bottom-start',
+        modifiers: {
+            preventOverflow: {
+                enabled: true,
+                escapeWithReference: true,
+                boundariesElement: 'scrollParent'
+            }
+        }
+    };
+
     /**
-     * If the option should be unselected and value changed to undefined, when the current value is
-     * not presented in option array. Switching it off can be handy, when there is some delay between providing
-     * possible options and chosen value.
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
      */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
+
+    /** The element to which the popover should be appended. */
+    @Input()
+    appendTo: ElementRef;
+
+    /** makes undefined value also be selected */
+    @Input()
+    unselectMissingOption = true;
+
+    /** Time to wait in milliseconds after the last keydown before focusing or selecting option based on alphanumeric keys. */
+    @Input()
+    typeaheadDebounceInterval = 250;
 
     /**
      * Binds to control aria-labelledBy attribute
@@ -186,20 +218,6 @@ export class SelectComponent extends _MatSelectMixinCommons
     @Input()
     ariaLabel: string = null;
 
-    /**
-     * Max height of the popover. Any overflowing elements will be accessible through scrolling. *
-     */
-    @Input()
-    maxHeight: string;
-
-    /**
-     * Time to wait in milliseconds after the last keydown before focusing or 
-     * selecting option based on alphanumeric
-     * keys.
-     */
-    @Input()
-    typeaheadDebounceInterval = 250;
-
     /** Select Input Mobile Configuration */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
@@ -208,15 +226,23 @@ export class SelectComponent extends _MatSelectMixinCommons
     @Input()
     controlTemplate: TemplateRef<any>;
 
+    /**
+     * Sets value of the selected option.
+     */
     @Input()
-    mobile = false;
+    get value(): any {
+        return this._internalValue;
+    }
 
-    @Input()
-    closeOnOutsideClick = true;
+    set value(newValue: any) {
+        if (newValue !== this._internalValue) {
+            this.writeValue(newValue);
+            this._internalValue = newValue;
+        }
+    }
 
     /**
      * Function to compare the option values with the selected values.
-     *
      * @see MatSelectCommonBehavior
      */
     @Input()
@@ -229,9 +255,9 @@ export class SelectComponent extends _MatSelectMixinCommons
             throw Error('compareWith` must be a function.');
         }
         this._compareWith = fn;
-        if (this.selectionModel) {
+        if (this._selectionModel) {
             // A different comparator means the selection could change.
-            this.initializeSelection();
+            this._initializeSelection();
         }
     }
 
@@ -239,7 +265,7 @@ export class SelectComponent extends _MatSelectMixinCommons
      * Event emitted when the popover open state changes
      */
     @Output()
-    readonly openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**
      * Event emitted when the selected value of the select changes.
@@ -249,54 +275,42 @@ export class SelectComponent extends _MatSelectMixinCommons
 
     /**
      * Queries all the define FdOptions
-     *
      * @hidden
      */
     @ContentChildren(OptionComponent, { descendants: true })
-    options: QueryList<OptionComponent>;
+    _options: QueryList<OptionComponent>;
 
-    /**
+    /**@hidden
      * Triggering element that opens up the overlay with list of options
      */
     @ViewChild('selectControl')
-    controlElementRef: ElementRef;
+    _controlElementRef: ElementRef;
 
-    /** Reference to root element for the mobile mode dialog */
-    @ViewChild('dialogContainer')
-    dialogContainerElementRef: ElementRef;
-
-    /** Reference to element containing list of options */
+    /**@hidden
+     * Reference to element containing list of options */
     @ViewChild('selectOptionsListTemplate')
-    selectOptionsListTemplate: TemplateRef<any>;
+    _selectOptionsListTemplate: TemplateRef<any>;
+
+    /** @hidden
+     * Reference to root element for the mobile mode dialog */
+    @ViewChild('dialogContainer')
+    _dialogContainerElementRef: ElementRef;
 
     /**
      * Overlay pane containing the options.
-     *
      * @hidden
      */
     @ViewChild(CdkConnectedOverlay)
-    overlayDir: CdkConnectedOverlay;
+    _overlayDir: CdkConnectedOverlay;
 
-    /**
+    /**@hidden
      * Referent to the option;s container
      */
     @ViewChild('optionPanel', { read: ElementRef })
-    optionPanel: ElementRef;
+    _optionPanel: ElementRef;
 
     /** @hidden */
-    tabIndex: number;
-
-   /** @hidden */
-   /** Whether the widget has in RTL|LTR mode. */
-   public _direction: string;
-    
-   /** @hidden */
-   /** Subscription to the Directionality change EventEmitter. */
-   private _dirChangeSubscription = Subscription.EMPTY; 
-
-    /** @hidden */
-    /** Whether the widget is in RTL mode or not. */
-    private isRtl: boolean;
+    _tabIndex: number;
 
     /**
      * Retrieves selected value if any.
@@ -338,12 +352,16 @@ export class SelectComponent extends _MatSelectMixinCommons
     }
 
     /** @hidden */
-    private _compareWith = (o1: any, o2: any) => o1 === o2;
+    _compareWith = (o1: any, o2: any) => o1 === o2;
 
-    /** @hidden */
+    /** @hidden
+     * from controlvalue accessor
+    */
     onChange: Function = (value: any) => {};
 
-    /** @hidden */
+     /** @hidden
+     * from controlvalue accessor
+    */
     onTouched: Function = () => {};
 
     constructor(
@@ -365,14 +383,7 @@ export class SelectComponent extends _MatSelectMixinCommons
             this.ngControl.valueAccessor = this;
         }
 
-        this.tabIndex = parseInt(_tabIndex, 10) || 0;
-
-
-        this.isRtl = dir.value === 'rtl';
-        this._dirChangeSubscription = dir.change.subscribe(() => {
-            this._direction = this.isRtl ? 'rtl' : 'ltr';
-            this.changeDetectorRef.detectChanges();
-        });
+        this._tabIndex = parseInt(_tabIndex, 10) || 0;
     }
 
     /** @hidden */
@@ -380,12 +391,12 @@ export class SelectComponent extends _MatSelectMixinCommons
         this.ariaLabel = this.ariaLabel || this.placeholder;
         this.ariaLabelledBy = this.ariaLabelledBy || this.placeholder;
 
-        this.initializeCommonBehavior();
+        this._initializeCommonBehavior();
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.registerEventsAfterContentInit();
+        this._registerEventsAfterContentInit();
     }
 
     /** @hidden */
@@ -395,48 +406,58 @@ export class SelectComponent extends _MatSelectMixinCommons
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes['typeaheadDebounceInterval'] && this.keyManager) {
-            this.keyManager.withTypeAhead(this.typeaheadDebounceInterval);
+        if (changes['typeaheadDebounceInterval'] && this._keyManager) {
+            this._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
         } else if (changes['disabled']) {
-            this.tabIndex = this.disabled ? -1 : 0;
+            this._tabIndex = this.disabled ? -1 : 0;
         }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.cleanupCommonBehavior();
-        this._dirChangeSubscription.unsubscribe();
+        this._cleanupCommonBehavior();
     }
 
-    /** @hidden */
+    /** @hidden
+     * from ControlValue Accessor
+     */
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    /** @hidden */
+    /** @hidden
+     *   from ControlValue Accessor
+    */
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    /** @hidden */
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-        this.changeDetectorRef.markForCheck();
-
-        this.tabIndex = -1;
+    /** @hidden
+     *  from ControlValue Accessor
+    */
+   writeValue(value: any): void {
+     if (this._options) {
+        this._setSelectionByValue(value);
+     }
     }
 
     /** @hidden */
-    writeValue(value: any): void {
-        if (this.options) {
-            this.setSelectionByValue(value);
-        }
+    _popoverOpenChangeHandle(isOpen: boolean): void {
+      isOpen ? this.open() : this.close();
+    }
+
+    /** @hidden */
+    _setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this.changeDetectorRef.markForCheck();
+
+        this._tabIndex = -1;
     }
 
     /** @hidden */
     @HostListener('window:resize')
-    resizeScrollHandler(): void {
-        this.updateCalculatedHeight();
+    _resizeScrollHandler(): void {
+        this._updateCalculatedHeight();
     }
 
     /**
@@ -450,7 +471,7 @@ export class SelectComponent extends _MatSelectMixinCommons
     private _setupMobileMode(): void {
         if (this.mobile) {
             this._dynamicComponentService.createDynamicComponent(
-                this.selectOptionsListTemplate,
+                this._selectOptionsListTemplate,
                 SelectMobileComponent,
                 { container: this.elementRef.nativeElement },
                 { injector: Injector.create({providers: [{provide: FD_OPTION_PARENT_COMPONENT, useValue: this}]})}

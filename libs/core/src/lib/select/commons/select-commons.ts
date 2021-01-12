@@ -1,25 +1,30 @@
-/** The MIT License
-* Copyright (c) 2014-2016 Google, Inc. http://angularjs.org
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
-* associated documentation files (the "Software"), to deal in the Software without restriction,
-* including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-* and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
-* subject to the following conditions:
-* The above copyright notice and this permission notice shall be
-* included in all copies or substantial portions of the Software.
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-* INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
-* AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-* DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*
+/**
+* The MIT License
+* Format: Copyright (c) 2010-2020 Google LLC. http://angular.io/license
+* Upstream-Name: Angular material
+* Upstream-Contact: fundamental@sap.com
+* Source: https://github.com/angular/components
+* Disclaimer:
+*  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+*  associated documentation files (the "Software"), to deal in the Software without restriction,
+*  including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+*  and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+*  subject to the following conditions:
+*  The above copyright notice and this permission notice shall be
+*  included in all copies or substantial portions of the Software.
+*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+*  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+*  AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+*  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+Files: **
+Copyright (c) 2010-2020 Google LLC. http://angular.io/license
+License: The MIT License
 *
 * */
 import { ActiveDescendantKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { FdOptionSelectionChange, OptionComponent } from '../option/option.component';
-import { FdSelectChange } from '../select.component';
-import { ChangeDetectorRef, ElementRef, EventEmitter, isDevMode, NgZone, QueryList, Input } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, isDevMode, NgZone, QueryList } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { defer, merge, Observable, Subject } from 'rxjs';
 import { CdkConnectedOverlay, ConnectedPosition, ViewportRuler } from '@angular/cdk/overlay';
@@ -28,18 +33,19 @@ import { NgControl } from '@angular/forms';
 import { startWith, switchMap, take, takeUntil } from 'rxjs/operators';
 import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
-
- import { KeyUtil } from '../../utils/functions/key-util';
+import { FdOptionSelectionChange, OptionComponent } from '../option/option.component';
+import { FdSelectChange } from '../select.component';
+import { KeyUtil } from '../../utils/functions/key-util';
+import { MatSelectCommonBehavior } from '../iselect-common-behavior';
 
 /**
- * Common behaviors from Material Select Component to build Fundamental-ngx Select on top of it. We need this solid
- * foundation to deliver robust solution and only focus on additional Fiori 3 enhancement.
- *
- * Even this seems to be implemented as one big mixins with single anonymous class all this is going to be broking down
+ * by @Frank:
+ * Common behaviors from Material Select Component to build Fundamental-ngx Select on top of it.
+ * We need this solid foundation to deliver robust solution and only focus on additional Fiori 3 enhancement.
+ * Even this seems to be implemented as one big mixins with single anonymous class all this is going to
+ * breaking down
  * into several pieces in order to maximize reusability. Such as a possible candidates would be to separate
  * Keyboard Support, Overlay support and option panel positioning and maybe select behavior itself.
- *
- * @Hidden
  */
 
 /**
@@ -48,95 +54,19 @@ import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, SPACE, UP_ARROW } from '@
  */
 export const SELECT_PANEL_VIEWPORT_PADDING = 5;
 
-/** The height of the select items in `em` units. */
+/** The height of the select items in `rem` units. */
 export const SELECT_ITEM_HEIGHT_EM = 3;
 
 /**
  * Dropdown Header identifier. Since existing logic is relaying on the options[] for the height calculation of
  * the panel existing native with LI does not fit into this structure.
- *
- * We need to improve this implementation to have something like fd-option-header that we can query and provide
- * more readable structure instead of allowing user to mix <fd-option> with LI element on the same level.
- *
- * todo: This should temporary solution used only for current calculation until we introduce fd-option-header
  */
-
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 
 export type Constructor<T> = new (...args: any[]) => T;
 
-/**
- * Common Interface to define shareable properties and method
- *
- * @hidden
- */
-export interface MatSelectCommonBehavior {
-    disabled: boolean;
-    readonly: boolean;
-    mobile: boolean;
-    typeaheadDebounceInterval: number;
-    maxHeight: string;
-    compareWith: (o1: any, o2: any) => boolean;
-    controlElementRef: ElementRef;
-    options: QueryList<OptionComponent>;
-    readonly valueChange: EventEmitter<FdSelectChange>;
-    readonly openedChange: EventEmitter<boolean>;
-    readonly selected: OptionComponent;
-    readonly empty: boolean;
-    readonly panelOpen: boolean;
-    readonly canClose: boolean;
-    readonly canEmitValueChange: boolean;
-    readonly focused: boolean;
-    readonly calculatedMaxHeight: number;
-    readonly positions: ConnectedPosition[];
 
-    /**
-     * Even we want to name this `_value` it breaks the bound we have set. _ prefix can be used
-     * only for private properties and we are not going to make private property out of interface
-     */
-    internalValue: any;
-    offsetY: number;
-    triggerRect: ClientRect;
-    onTouched: Function;
-    onChange: Function;
-    overlayDir: CdkConnectedOverlay;
-    keyManager: ActiveDescendantKeyManager<OptionComponent>;
-    selectionModel: SelectionModel<OptionComponent>;
-
-    toggle(): void;
-
-    open(): void;
-
-    close(forceClose?: boolean): void;
-
-    focus(): void;
-
-    initializeCommonBehavior(): void;
-
-    initializeSelection(): void;
-
-    cleanupCommonBehavior(): void;
-
-    registerEventsAfterContentInit(): void;
-
-    handleKeydown(event: KeyboardEvent): void;
-
-    onFocus(): void;
-
-    onBlur(): void;
-
-    onAttached(): void;
-
-    getAriaActiveDescendant(): string | null;
-
-    setSelectionByValue(value: any | any[]): void;
-
-    updateCalculatedHeight(): void;
-}
-
-/**
- * @hidden
- */
+/** @hidden */
 export type MatSelectCommonBehaviorCtor = Constructor<MatSelectCommonBehavior>;
 
 /**
@@ -163,122 +93,17 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         canEmitValueChange: boolean;
         typeaheadDebounceInterval: number;
         maxHeight: string;
-        controlElementRef: ElementRef;
-        options: QueryList<OptionComponent>;
-        optionPanel: ElementRef;
-        overlayDir: CdkConnectedOverlay;
-
         /**
          * Tells if the panel is open
          */
         panelOpen = false;
 
         /**
-         * Verifes outside click tigger overlay close
-         * @hidden
+         * Making true will not unselect the missing or defined value
          */
-        closeOnOutsideClick: boolean;
+        unselectMissingOption: boolean;
 
-        /**
-         * Handles selection interaction logic
-         * @hidden
-         */
-        selectionModel: SelectionModel<OptionComponent>;
-
-        /**
-         * @hidden
-         */
-        triggerRect: ClientRect;
-
-        /**
-         * Handles keyboard events
-         *
-         * @hidden
-         */
-        keyManager: ActiveDescendantKeyManager<OptionComponent>;
-
-        /**
-         *
-         * @hidden
-         */
-        private _controlElemFontSize = 0;
-
-        /**
-         * The y-offset of the overlay panel in relation to the trigger's top start corner.
-         * This must be adjusted to align the selected option text over the trigger text.
-         * when the panel opens. Will change based on the y-position of the selected option.
-         *
-         * In current implemenation we keep 0 as we dont want any panel centering here.
-         *
-         * @hidden
-         */
-        offsetY = 0;
-
-        /**
-         * This position config ensures that the top "start" corner of the overlay
-         * is aligned with with the top "start" of the origin by default (overlapping
-         * the trigger completely). If the panel cannot fit below the trigger, it
-         * will fall back to a position above the trigger.
-         *
-         * @hidden
-         */
-
-        /**
-         * The value of the select panel's transform-origin property.
-         * @hidden
-         */
-        private _transformOrigin = 'top';
-
-        /** @hidden */
-        private _calculatedMaxHeight: number;
-
-        /** @hidden */
-        internalValue: any;
-
-        /**
-         * Triggers when component is destroyed
-         */
-        private readonly _destroy = new Subject<void>();
-
-        /**
-         * Used by overlay panel to tell scroll position
-         *
-         * @hidden
-         */
-        private _scrollTop = 0;
-        private _focused = false;
-
-        /**
-         * Stored calculated maxHeight from Option Panel
-         */
-        private _maxHeight: number;
-
-        /**
-         * Combined stream of all of the child options' change events.
-         */
-        readonly optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
-            const options = this.options;
-
-            if (options) {
-                return options.changes.pipe(
-                    startWith(options),
-                    switchMap(() => merge(...options.map((option) => option.selectionChange)))
-                );
-            }
-
-            return this.ngZone.onStable.asObservable().pipe(
-                take(1),
-                switchMap(() => this.optionSelectionChanges)
-            );
-        }) as Observable<FdOptionSelectionChange>;
-
-        /**
-         * Handle to Value Accessor that is expected to be implemented by host class
-         */
-        onTouched: Function;
-        onChange: Function;
-
-        /**
+         /**
          * Event emitted when the selected value of the select changes.
          */
         readonly valueChange: EventEmitter<FdSelectChange>;
@@ -286,7 +111,128 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         /**
          * Event emitted when the popover open state changes
          */
-        readonly openedChange: EventEmitter<boolean>;
+        readonly isOpenChange: EventEmitter<boolean>;
+
+        /***
+        * Handle to Value Accessor that is expected to be implemented by host class
+        */
+       onTouched: Function;
+
+       /***
+       * Handle to Value Accessor that is expected to be implemented by host class
+       */
+       onChange: Function;
+
+        /*** @hidden */
+        _controlElementRef: ElementRef;
+
+        /*** @hidden */
+        _options: QueryList<OptionComponent>;
+
+        /*** @hidden */
+        _optionPanel: ElementRef;
+
+        /*** @hidden */
+        _overlayDir: CdkConnectedOverlay;
+
+        /**
+         * Verifes outside click tigger overlay close
+         * It needs to be removed as it is not select basic feature.
+         * @hidden
+         */
+        _closeOnOutsideClick: boolean;
+
+        /**
+         * Handles selection interaction logic
+         * MatSelectCommonBehavior interface propertie
+         * @hidden
+         */
+         _selectionModel: SelectionModel<OptionComponent>;
+
+        /**
+         * @hidden
+         * MatSelectCommonBehavior interface propertie
+         */
+        _triggerRect: ClientRect;
+
+        /**
+         * Handles keyboard events
+         * MatSelectCommonBehavior interface propertie
+         * @hidden
+         */
+        _keyManager: ActiveDescendantKeyManager<OptionComponent>;
+
+        /**
+         * The y-offset of the overlay panel in relation to the trigger's top start corner.
+         * This must be adjusted to align the selected option text over the trigger text.
+         * when the panel opens. Will change based on the y-position of the selected option.
+         *
+         * In current implemenation we keep 0 as we dont want any panel centering here.
+         *MatSelectCommonBehavior interface propertie
+         * @hidden
+         */
+        _offsetY = 0;
+
+        /** @hidden
+         * MatSelectCommonBehavior interface propertie
+        */
+        _internalValue: any;
+
+        /** @hidden */
+        _calculatedMaxHeight: number;
+
+        /**
+         * @hidden
+         */
+        private _controlElemFontSize = 0;
+
+        /**
+         * The value of the select panel's transform-origin property.
+         * @hidden
+         */
+        private _transformOrigin = 'top';
+
+        /** @hidden
+         * Triggers when component is destroyed
+         */
+        private readonly _destroy = new Subject<void>();
+
+        /**
+         * Used by overlay panel to tell scroll position
+         * @hidden
+         */
+        private _scrollTop = 0;
+
+        /** @hidden */
+        private _focused = false;
+
+        /**@hidden
+         * Stored calculated maxHeight from Option Panel
+         */
+        private _maxHeight: number;
+
+        /**
+         * Combined stream of all of the child options' change events.
+         */
+        readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
+            const _options = this._options;
+
+            if (_options) {
+                return _options.changes.pipe(
+                    startWith(_options),
+                    switchMap(() => merge(..._options.map((option) => option.selectionChange)))
+                );
+            }
+
+            return this.ngZone.onStable.asObservable().pipe(
+                take(1),
+                switchMap(() => this._optionSelectionChanges)
+            );
+        }) as Observable<FdOptionSelectionChange>;
+
+        constructor(...args: any[]) {
+            super(...args);
+        }
 
         get calculatedMaxHeight(): number {
             return this._maxHeight || this._calculatedMaxHeight;
@@ -296,7 +242,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          * Returns true if select has any value selected
          */
         get empty(): boolean {
-            return !this.selectionModel || this.selectionModel.isEmpty();
+            return !this._selectionModel || this._selectionModel.isEmpty();
         }
 
         get focused(): boolean {
@@ -304,10 +250,9 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         }
 
         get selected(): OptionComponent {
-            return this.selectionModel.selected[0];
+            return this._selectionModel.selected[0];
         }
 
-        /** @hidden */
         get positions(): ConnectedPosition[] {
             return [
                 {
@@ -325,26 +270,10 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             ];
         }
 
-        /**
-         * Function to compare the option values with the selected values. The first argument
-         * is a value from an option. The second is a value from the selection. A boolean
-         * should be returned.
-         *
-         *
-         * Default comparision function to identify which option to display
-         *
-         * @hidden
-         */
-        compareWith = (o1: any, o2: any) => o1 === o2;
-
-        constructor(...args: any[]) {
-            super(...args);
-        }
-
         /** Focuses select control. */
         focus(): void {
-            if (this.controlElementRef) {
-                (this.controlElementRef.nativeElement as HTMLElement).focus();
+            if (this._controlElementRef) {
+                (this._controlElementRef.nativeElement as HTMLElement).focus();
             }
         }
 
@@ -355,23 +284,23 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
 
         /** Opens the select popover body. */
         open(): void {
-            if (this.disabled || this.readonly || !this.options || !this._getItemCount() || this.panelOpen) {
+            if (this.disabled || this.readonly || !this._options || !this._getItemCount() || this.panelOpen) {
                 return;
             }
-            this.triggerRect = this.controlElementRef.nativeElement.getBoundingClientRect();
+            this._triggerRect = this._controlElementRef.nativeElement.getBoundingClientRect();
             this.panelOpen = true;
 
             this._controlElemFontSize = parseInt(
-                getComputedStyle(this.controlElementRef.nativeElement).fontSize || '0',
+                getComputedStyle(this._controlElementRef.nativeElement).fontSize || '0',
                 10
             );
 
-            this.keyManager.withHorizontalOrientation(null);
+            this._keyManager.withHorizontalOrientation(null);
             this._calculateOverlayPosition();
             this._highlightCorrectOption();
             this.changeDetectorRef.markForCheck();
 
-            this.openedChange.emit(true);
+            this.isOpenChange.emit(true);
             // Set the font size on the panel element once it exists.
             this.ngZone.onStable
                 .asObservable()
@@ -379,68 +308,80 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
                 .subscribe(() => {
                     if (
                         this._controlElemFontSize &&
-                        this.overlayDir &&
-                        this.overlayDir.overlayRef &&
-                        this.overlayDir.overlayRef.overlayElement
+                        this._overlayDir &&
+                        this._overlayDir.overlayRef &&
+                        this._overlayDir.overlayRef.overlayElement
                     ) {
-                        this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this._controlElemFontSize}px`;
+                        this._overlayDir.overlayRef.overlayElement.style.fontSize = `${this._controlElemFontSize}px`;
                     }
                 });
         }
 
-        /** @hidden */
-        initializeCommonBehavior(): void {
-            this.selectionModel = new SelectionModel<OptionComponent>(false);
-            this.viewportRuler
-                .change()
-                .pipe(takeUntil(this._destroy))
-                .subscribe(() => {
-                    if (this.panelOpen) {
-                        this.triggerRect = this.controlElementRef.nativeElement.getBoundingClientRect();
-                        this.changeDetectorRef.markForCheck();
-                    }
-                });
-            this.updateCalculatedHeight();
-        }
-
-        /** @hidden */
-        cleanupCommonBehavior(): void {
-            this._destroy.next();
-            this._destroy.complete();
-        }
-
-        /** @hidden */
-        registerEventsAfterContentInit(): void {
-            this._initKeyManager();
-
-            this.selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
-                event.added.forEach((option) => option.select());
-                event.removed.forEach((option) => option.deselect());
-            });
-
-            this.options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
-                this._resetOptions();
-                this.initializeSelection();
-            });
-        }
 
         /**
          * Closes the select popover body. Close has special behavior to support mobile mobile where we display
          * option values inside a full screen dialog and there are several modes. Usually canClose is true if we are
          * not in mobile mode or mobile mode has only cancel button available. If inside mobile mode we also have
          * confirmation button then we dont want to close the option values after every selection.
-         *
          * @param forceClose: Do close dialog regardless if the dialog is dismissible or not.
          */
         close(forceClose: boolean = false): void {
             if (this.panelOpen && (forceClose || this.canClose)) {
                 this.panelOpen = false;
-                this.keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
+                this._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
                 this.changeDetectorRef.markForCheck();
                 this.onTouched();
 
-                this.openedChange.emit(false);
+                this.isOpenChange.emit(false);
             }
+        }
+
+         /**
+         * Function to compare the option values with the selected values. The first argument
+         * is a value from an option. The second is a value from the selection. A boolean
+         * should be returned.
+         *
+         *
+         * Default comparision function to identify which option to display
+         *
+         * @hidden
+        */
+       _compareWith = (o1: any, o2: any) => o1 === o2;
+
+        /** @hidden */
+        _initializeCommonBehavior(): void {
+            this._selectionModel = new SelectionModel<OptionComponent>(false);
+            this.viewportRuler
+                .change()
+                .pipe(takeUntil(this._destroy))
+                .subscribe(() => {
+                    if (this.panelOpen) {
+                        this._triggerRect = this._controlElementRef.nativeElement.getBoundingClientRect();
+                        this.changeDetectorRef.markForCheck();
+                    }
+                });
+            this._updateCalculatedHeight();
+        }
+
+        /** @hidden */
+        _cleanupCommonBehavior(): void {
+            this._destroy.next();
+            this._destroy.complete();
+        }
+
+        /** @hidden */
+        _registerEventsAfterContentInit(): void {
+            this._initKeyManager();
+
+            this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
+                event.added.forEach((option) => option.select());
+                event.removed.forEach((option) => option.deselect());
+            });
+
+            this._options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+                this._resetOptions();
+                this._initializeSelection();
+            });
         }
 
         /**
@@ -448,22 +389,20 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          *
          * @hidden
          */
-        handleKeydown(event: KeyboardEvent): void {
+        _handleKeydown(event: KeyboardEvent): void {
             if (!this.disabled && !this.readonly) {
                 this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
             }
         }
 
         /**
-         *
-         * Callback that is invoked when the overlay panel has been attached.
-         *
+         * Callback that is invoked when the overlay panel has been attached
          * @hidden
          */
-        onAttached(): void {
-            this.overlayDir.positionChange.pipe(take(1)).subscribe(() => {
+        _onAttached(): void {
+            this._overlayDir.positionChange.pipe(take(1)).subscribe(() => {
                 this.changeDetectorRef.detectChanges();
-                this.updateMaxHeight();
+                this._updateMaxHeight();
                 this._calculateOverlayOffsetX();
 
                 /**
@@ -473,7 +412,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
                  */
                 this._calculateOverlayPosition();
                 this.changeDetectorRef.markForCheck();
-                this.optionPanel.nativeElement.scrollTop = this._scrollTop;
+                this._optionPanel.nativeElement.scrollTop = this._scrollTop;
             });
         }
 
@@ -482,43 +421,43 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          *
          * @hidden
          */
-        getAriaActiveDescendant(): string | null {
-            if (this.panelOpen && this.keyManager && this.keyManager.activeItem) {
-                return this.keyManager.activeItem.id;
+        _getAriaActiveDescendant(): string | null {
+            if (this.panelOpen && this._keyManager && this._keyManager.activeItem) {
+                return this._keyManager.activeItem.id;
             }
 
             return null;
         }
 
         /** @hidden */
-        initializeSelection(): void {
+        _initializeSelection(): void {
             // Defer setting the value in order to avoid the "Expression
             // has changed after it was checked" errors from Angular.
             Promise.resolve().then(() => {
-                this.setSelectionByValue(this.ngControl ? this.ngControl.value : this.internalValue);
+                this._setSelectionByValue(this.ngControl ? this.ngControl.value : this._internalValue);
             });
         }
 
         /** @hidden */
-        setSelectionByValue(value: any | any[]): void {
-            this.selectionModel.clear();
+        _setSelectionByValue(value: any | any[]): void {
+            this._selectionModel.clear();
             const correspondingOption = this._selectValue(value);
 
             // Shift focus to the active item. Note that we shouldn't do this in multiple
             // mode, because we don't know what option the user interacted with last.
             if (correspondingOption) {
-                this.keyManager.setActiveItem(correspondingOption);
+                this._keyManager.setActiveItem(correspondingOption);
             } else if (!this.panelOpen) {
                 // Otherwise reset the highlighted option. Note that we only want to do this while
                 // closed, because doing it while open can shift the user's focus unnecessarily.
-                this.keyManager.setActiveItem(-1);
+                this._keyManager.setActiveItem(-1);
             }
 
             this.changeDetectorRef.markForCheck();
         }
 
         /** @hidden */
-        onFocus(): void {
+        _onFocus(): void {
             if (!this.disabled) {
                 this._focused = true;
                 this.changeDetectorRef.markForCheck();
@@ -526,7 +465,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         }
 
         /** @hidden */
-        onBlur(): void {
+        _onBlur(): void {
             this._focused = false;
 
             if (!this.disabled && !this.panelOpen) {
@@ -536,19 +475,19 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         }
 
         /**
-         * Expose expose outside of this mixin to give component ability to update caluclatedMaxHeight if needed
-         *
+         * Expose expose outside of this mixin to give component ability
+         * to update caluclatedMaxHeight if needed
          * @hidden
          */
-        updateCalculatedHeight(): void {
+        _updateCalculatedHeight(): void {
             this._calculatedMaxHeight = window.innerHeight * 0.45;
         }
 
         /** @hidden */
         private _resetOptions(): void {
-            const changedOrDestroyed = merge(this.options.changes, this._destroy);
+            const changedOrDestroyed = merge(this._options.changes, this._destroy);
 
-            this.optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
+            this._optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
                 this._onSelect(event.source, event.isUserInput);
 
                 if (event.isUserInput && this.panelOpen) {
@@ -557,9 +496,9 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
                 }
             });
 
-            // Listen to changes in the internal state of the options and react accordingly.
-            // Handles cases like the labels of the selected options changing.
-            merge(...this.options.map((option) => option._stateChanges))
+            // Listen to changes in the internal state of the _options and react accordingly.
+            // Handles cases like the labels of the selected _options changing.
+            merge(...this._options.map((option) => option._stateChanges))
                 .pipe(takeUntil(changedOrDestroyed))
                 .subscribe(() => {
                     this.changeDetectorRef.markForCheck();
@@ -568,10 +507,10 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
 
         /** @hidden */
         private _selectValue(value: any): OptionComponent | undefined {
-            const correspondingOption = this.options.find((option: OptionComponent) => {
+            const correspondingOption = this._options.find((option: OptionComponent) => {
                 try {
                     // Treat null as a special reset value.
-                    return option.value != null && this.compareWith(option.value, value);
+                    return option.value != null && this._compareWith(option.value, value);
                 } catch (error) {
                     if (isDevMode()) {
                         // Notify developers of errors in their comparator.
@@ -582,7 +521,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             });
 
             if (correspondingOption) {
-                this.selectionModel.select(correspondingOption);
+                this._selectionModel.select(correspondingOption);
             }
 
             return correspondingOption;
@@ -594,22 +533,22 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          * @hidden
          */
         private _initKeyManager(): void {
-            this.keyManager = new ActiveDescendantKeyManager<OptionComponent>(this.options)
+            this._keyManager = new ActiveDescendantKeyManager<OptionComponent>(this._options)
                 .withTypeAhead(this.typeaheadDebounceInterval)
                 .withVerticalOrientation()
                 .withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr')
                 .withAllowedModifierKeys(['shiftKey']);
 
-            this.keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => {
+            this._keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => {
                 this.focus();
                 this.close();
             });
 
-            this.keyManager.change.pipe(takeUntil(this._destroy)).subscribe(() => {
-                if (this.panelOpen && this.optionPanel) {
+            this._keyManager.change.pipe(takeUntil(this._destroy)).subscribe(() => {
+                if (this.panelOpen && this._optionPanel) {
                     this._scrollActiveOptionIntoView();
-                } else if (!this.panelOpen && this.keyManager.activeItem) {
-                    this.keyManager.activeItem.selectViaInteraction();
+                } else if (!this.panelOpen && this._keyManager.activeItem) {
+                    this._keyManager.activeItem._selectViaInteraction();
                 }
             });
         }
@@ -621,13 +560,13 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
 
         /** @hidden */
         private _scrollActiveOptionIntoView(): void {
-            const activeOptionIndex = this.keyManager.activeItemIndex || 0;
+            const activeOptionIndex = this._keyManager.activeItemIndex || 0;
 
-            this.optionPanel.nativeElement.scrollTop = this._getOptionScrollPosition(
+            this._optionPanel.nativeElement.scrollTop = this._getOptionScrollPosition(
                 activeOptionIndex,
                 this._getItemHeight(),
-                this.optionPanel.nativeElement.scrollTop,
-                this.calculatedMaxHeight
+                this._optionPanel.nativeElement.scrollTop,
+                this._calculatedMaxHeight
             );
         }
 
@@ -664,26 +603,25 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
 
         /**
          * Invoked when an option is clicked.
-         *
          * @hidden
          */
         private _onSelect(option: OptionComponent, isUserInput: boolean): void {
-            const wasSelected = this.selectionModel.isSelected(option);
-
-            if (option.value == null) {
+            const wasSelected = this._selectionModel.isSelected(option);
+            if ((option.value === null || option.value === undefined) &&
+            this.unselectMissingOption) {
                 option.deselect();
-                this.selectionModel.clear();
+                this._selectionModel.clear();
                 this._emitSelectChange(option.value);
             } else {
                 if (wasSelected !== option.selected) {
-                    option.selected ? this.selectionModel.select(option) : this.selectionModel.deselect(option);
+                    option.selected ? this._selectionModel.select(option) : this._selectionModel.deselect(option);
                 }
                 if (isUserInput) {
-                    this.keyManager.setActiveItem(option);
+                    this._keyManager.setActiveItem(option);
                 }
             }
 
-            if (wasSelected !== this.selectionModel.isSelected(option) || this.mobile) {
+            if (wasSelected !== this._selectionModel.isSelected(option) || this.mobile) {
                 this._emitSelectChange();
             }
         }
@@ -691,28 +629,28 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         /** @hidden */
         private _emitSelectChange(defaultVal?: any): void {
             if (this.canEmitValueChange) {
-                this.internalValue = this.selectionModel.selected
+                this._internalValue = this._selectionModel.selected
                     ? (this.selected as OptionComponent).value
                     : defaultVal;
-                this.valueChange.emit(this.internalValue);
-                this.onChange(this.internalValue);
+                this.valueChange.emit(this._internalValue);
+                this.onChange(this._internalValue);
                 this.changeDetectorRef.markForCheck();
             }
         }
 
         /** @hidden */
         private _getItemCount(): number {
-            if (this.optionPanel && this._headerElements().length > 0) {
-                return this.options.length + this._headerElements().length;
+            if (this._optionPanel && this._headerElements().length > 0) {
+                return this._options.length + this._headerElements().length;
             }
-            return this.options.length;
+            return this._options.length;
         }
 
         /** @hidden */
         private _calculateOverlayPosition(): void {
             const itemHeight = this._getItemHeight();
             const items = this._getItemCount();
-            const panelHeight = Math.min(items * itemHeight, this.calculatedMaxHeight);
+            const panelHeight = Math.min(items * itemHeight, this._calculatedMaxHeight);
             const scrollContainerHeight = items * itemHeight;
 
             // The farthest the panel can be scrolled before it hits the bottom
@@ -727,15 +665,12 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             // center of the overlay panel rather than the top.
             const scrollBuffer = panelHeight / 2;
             this._scrollTop = this._calculateOverlayScroll(selectedOptionOffset, scrollBuffer, maxScroll);
-            this.offsetY = 0;
-            // temporary disabling as i found issue in the material code
-            // https://github.com/angular/components/issues/19620
-            // this._checkOverlayWithinViewport(maxScroll);
+            this._offsetY = 0;
         }
 
         /** @hidden */
         private _getOptionIndex(option: OptionComponent): number | undefined {
-            return this.options.reduce((result: number | undefined, current: OptionComponent, index: number) => {
+            return this._options.reduce((result: number | undefined, current: OptionComponent, index: number) => {
                 if (result !== undefined) {
                     return result;
                 }
@@ -776,7 +711,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          * @hidden
          */
         private _calculateOverlayOffsetX(): void {
-            const overlayRect = this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
+            const overlayRect = this._overlayDir.overlayRef.overlayElement.getBoundingClientRect();
             const viewportSize = this.viewportRuler.getViewportSize();
             const isRtl = this._isRtl();
             const paddingWidth = 2;
@@ -801,8 +736,8 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             // Set the offset directly in order to avoid having to go through change detection and
             // potentially triggering "changed after it was checked" errors. Round the value to avoid
             // blurry content in some browsers.
-            this.overlayDir.offsetX = Math.round(offsetX);
-            this.overlayDir.overlayRef.updatePosition();
+            this._overlayDir.offsetX = Math.round(offsetX);
+            this._overlayDir.overlayRef.updatePosition();
         }
 
         /**
@@ -817,12 +752,12 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             const itemHeight = this._getItemHeight();
             const viewportSize = this.viewportRuler.getViewportSize();
 
-            const topSpaceAvailable = this.triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
-            const bottomSpaceAvailable = viewportSize.height - this.triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
+            const topSpaceAvailable = this._triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
+            const bottomSpaceAvailable = viewportSize.height - this._triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
 
-            const panelHeightTop = Math.abs(this.offsetY);
-            const totalPanelHeight = Math.min(this._getItemCount() * itemHeight, this.calculatedMaxHeight);
-            const panelHeightBottom = totalPanelHeight - panelHeightTop - this.triggerRect.height;
+            const panelHeightTop = Math.abs(this._offsetY);
+            const totalPanelHeight = Math.min(this._getItemCount() * itemHeight, this._calculatedMaxHeight);
+            const panelHeightBottom = totalPanelHeight - panelHeightTop - this._triggerRect.height;
 
             if (panelHeightBottom > bottomSpaceAvailable) {
                 this._adjustPanelUp(panelHeightBottom, bottomSpaceAvailable);
@@ -841,7 +776,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             // Scrolls the panel up by the distance it was extending past the boundary, then
             // adjusts the offset by that amount to move the panel up into the viewport.
             this._scrollTop -= distanceBelowViewport;
-            this.offsetY -= distanceBelowViewport;
+            this._offsetY -= distanceBelowViewport;
             this._transformOrigin = this._getOriginBasedOnOption();
 
             // If the panel is scrolled to the very top, it won't be able to fit the panel
@@ -849,7 +784,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             // effect.
             if (this._scrollTop <= 0) {
                 this._scrollTop = 0;
-                this.offsetY = 0;
+                this._offsetY = 0;
                 this._transformOrigin = `50% bottom 0px`;
             }
         }
@@ -862,7 +797,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             // Scrolls the panel down by the distance it was extending past the boundary, then
             // adjusts the offset by that amount to move the panel down into the viewport.
             this._scrollTop += distanceAboveViewport;
-            this.offsetY += distanceAboveViewport;
+            this._offsetY += distanceAboveViewport;
             this._transformOrigin = this._getOriginBasedOnOption();
 
             // If the panel is scrolled to the very bottom, it won't be able to fit the
@@ -870,7 +805,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             // to take effect.
             if (this._scrollTop >= maxScroll) {
                 this._scrollTop = maxScroll;
-                this.offsetY = 0;
+                this._offsetY = 0;
                 this._transformOrigin = `50% top 0px`;
                 return;
             }
@@ -883,18 +818,18 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          */
         private _getOriginBasedOnOption(): string {
             const itemHeight = this._getItemHeight();
-            const optionHeightAdjustment = (itemHeight - this.triggerRect.height) / 2;
-            const originY = Math.abs(this.offsetY) - optionHeightAdjustment + itemHeight / 2;
+            const optionHeightAdjustment = (itemHeight - this._triggerRect.height) / 2;
+            const originY = Math.abs(this._offsetY) - optionHeightAdjustment + itemHeight / 2;
             return `50% ${originY}px 0px`;
         }
 
         /** @hidden */
         private _highlightCorrectOption(): void {
-            if (this.keyManager) {
+            if (this._keyManager) {
                 if (this.empty) {
-                    this.keyManager.setFirstItemActive();
+                    this._keyManager.setFirstItemActive();
                 } else {
-                    this.keyManager.setActiveItem(this.selected);
+                    this._keyManager.setActiveItem(this.selected);
                 }
             }
         }
@@ -907,7 +842,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         private _handleClosedKeydown(event: KeyboardEvent): void {
             const isArrowKey = KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW]);
             const isOpenKey = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
-            const manager = this.keyManager;
+            const manager = this._keyManager;
 
             // Open the select on ALT + arrow key to match the native <select>
             if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event)) || (event.altKey && isArrowKey)) {
@@ -939,7 +874,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          * @hidden
          */
         private _handleOpenKeydown(event: KeyboardEvent): void {
-            const manager = this.keyManager;
+            const manager = this._keyManager;
             const isArrowKey = KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW]);
             const isTyping = manager.isTyping();
 
@@ -959,7 +894,7 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
                 !hasModifierKey(event)
             ) {
                 event.preventDefault();
-                manager.activeItem.selectViaInteraction();
+                manager.activeItem._selectViaInteraction();
             } else {
                 manager.onKeydown(event);
             }
@@ -968,15 +903,15 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         /**
          * In order to calculate overlay position as well as to be able scroll to the element we need
          * to know proper height of the option panel when maxHeight binding is used. We cannot use this
-         * property directly as it can come in different units, but instead we asked optionPanel what is the set
+         * property directly as it can come in different units, but instead we asked _optionPanel what is the set
          * height if any.
          *
          *
          * @hidden
          */
-        private updateMaxHeight(): void {
-            if (this.maxHeight && this.optionPanel) {
-                this._maxHeight = this.optionPanel.nativeElement.offsetHeight;
+        private _updateMaxHeight(): void {
+            if (this.maxHeight && this._optionPanel) {
+                this._maxHeight = this._optionPanel.nativeElement.offsetHeight;
             }
         }
 
@@ -984,9 +919,9 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
          * @hidden
          */
         private _headerElements(): NodeListOf<Element> {
-            return this.optionPanel.nativeElement.querySelectorAll(SELECT_HEADER_IDENTIFIER);
+            return this._optionPanel.nativeElement.querySelectorAll(SELECT_HEADER_IDENTIFIER);
         }
     };
 
-    
+
 }

@@ -2,16 +2,26 @@ import {
     Component,
     OnInit,
     Input,
-    forwardRef,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     ContentChild,
     TemplateRef,
     AfterContentInit,
-    ElementRef
+    ElementRef,
+    NgZone,
+    Optional,
+    Attribute,
+    Self,
+    Injector
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DynamicComponentService, SelectComponent as fdSelect, SelectProxy } from '@fundamental-ngx/core';
+import { NgControl } from '@angular/forms';
+import { ViewportRuler } from '@angular/cdk/scrolling';
+import { Directionality } from '@angular/cdk/bidi';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
+import { DynamicComponentService, SelectComponent as fdSelect, DialogConfig} from '@fundamental-ngx/core';
+
+import { FormFieldControl } from '../form-control';
 
 @Component({
     selector: 'fdp-select',
@@ -19,8 +29,8 @@ import { DynamicComponentService, SelectComponent as fdSelect, SelectProxy } fro
     styleUrls: ['./select.component.scss'],
     providers: [
         {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => SelectPlatformComponent),
+            provide: FormFieldControl,
+            useExisting: SelectPlatformComponent,
             multi: true
         }
     ],
@@ -78,9 +88,28 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
      */
     private _value: any;
 
-    constructor(private cd: ChangeDetectorRef, elementRef: ElementRef, dynamicComponentService: DynamicComponentService
+    constructor(
+        public viewportRuler: ViewportRuler,
+        public elementRef: ElementRef,
+        public ngZone: NgZone,
+        public cd: ChangeDetectorRef,
+        @Optional() public dir: Directionality,
+        @Attribute('tabindex') _tabIndex: string,
+        @Self() @Optional() public ngControl: NgControl,
+        public la: LiveAnnouncer,
+        public dialogConfig: DialogConfig,
+        @Optional() _dynamicComponentService: DynamicComponentService,
+        @Optional() _injector: Injector
     ) {
-        super(elementRef, new SelectProxy(), cd, dynamicComponentService, null);
+        super(viewportRuler, elementRef, ngZone, cd,
+            dir, _tabIndex, ngControl, la, dialogConfig,
+            _dynamicComponentService, _injector);
+
+        if (this.ngControl) {
+            this.ngControl.valueAccessor = this;
+        }
+
+        this._tabIndex = parseInt(_tabIndex, 10) || 0;
     }
 
     onSelection(value: any): void {

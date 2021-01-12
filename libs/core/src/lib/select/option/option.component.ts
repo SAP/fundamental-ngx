@@ -23,6 +23,7 @@ import {
     hasModifierKey,
     SPACE
 } from '@angular/cdk/keycodes';
+
 import { FdSelectChange } from '../select.component';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
@@ -54,10 +55,10 @@ export const FD_OPTION_PARENT_COMPONENT = new InjectionToken<FdOptionParentCompo
  * @docs-private
  */
 export interface FdOptionParentComponent extends MobileMode {
-    openedChange: EventEmitter<boolean>;
+    isOpenChange: EventEmitter<boolean>;
     valueChange: EventEmitter<FdSelectChange>;
     mobileConfig: MobileModeConfig;
-    keyManager: ActiveDescendantKeyManager<OptionComponent>;
+    _keyManager: ActiveDescendantKeyManager<OptionComponent>;
     dialogConfig: DialogConfig;
 
     close(forceClose?: boolean): void;
@@ -80,8 +81,8 @@ export interface FdOptionParentComponent extends MobileMode {
         '[attr.id]': 'id',
         '[tabindex]': 'disabled ? -1 : 0',
         role: 'option',
-        '(click)': 'selectViaInteraction()',
-        '(keydown)': 'handleKeydown($event)'
+        '(click)': '_selectViaInteraction()',
+        '(keydown)': '_handleKeydown($event)'
     },
     styles: [`
             .fd-list__item[aria-disabled='true'],
@@ -110,15 +111,14 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     @Input()
     disabled = false;
 
+    @HostBinding('class.is-selected')
+    selected = false;
+
     /**
      * Emits event when option is selected or deselected.
      */
     @Output()
     readonly selectionChange = new EventEmitter<FdOptionSelectionChange>();
-
-    /** @hidden */
-    @HostBinding('class.is-selected')
-    selected = false;
 
     readonly _stateChanges = new Subject<void>();
 
@@ -211,29 +211,6 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     }
 
     /**
-     * Ensures the option is selected when activated from the keyboard.
-     *
-     * @hidden
-     */
-    handleKeydown(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, [ENTER, SPACE]) && !hasModifierKey(event)) {
-            this.selectViaInteraction();
-
-            // Prevent the page from scrolling down and form submits.
-            event.preventDefault();
-        }
-    }
-
-    /** @hidden */
-    selectViaInteraction(): void {
-        if (!this.disabled) {
-            this.selected = true;
-            this._changeDetectorRef.markForCheck();
-            this.selectionChange.emit(new FdOptionSelectionChange(this, true));
-        }
-    }
-
-    /**
      * This method sets display styles on the option to make it appear
      * active. This is used by the ActiveDescendantKeyManager so key
      * events will display the proper options as active on arrow key events.
@@ -254,6 +231,29 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
         if (this._active) {
             this._active = false;
             this._changeDetectorRef.markForCheck();
+        }
+    }
+
+    /**
+     * Ensures the option is selected when activated from the keyboard.
+     *
+     * @hidden
+     */
+    _handleKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE]) && !hasModifierKey(event)) {
+            this._selectViaInteraction();
+
+            // Prevent the page from scrolling down and form submits.
+            event.preventDefault();
+        }
+    }
+
+    /** @hidden */
+    _selectViaInteraction(): void {
+        if (!this.disabled) {
+            this.selected = true;
+            this._changeDetectorRef.markForCheck();
+            this.selectionChange.emit(new FdOptionSelectionChange(this, true));
         }
     }
 }

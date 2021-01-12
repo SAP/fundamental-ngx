@@ -31,18 +31,11 @@ import { MOBILE_MODE_CONFIG, MobileModeConfigToken, MobileModeBase, MobileModeCo
     templateUrl: './select-mobile.component.html'
 })
 export class SelectMobileComponent extends MobileModeBase<FdOptionParentComponent> implements OnInit, AfterViewInit, OnDestroy {
-    /**
-     * Dialog template reference
-     *
-     * @hidden
-     */
-    @ViewChild('dialogTemplate')
-    dialogTemplate: TemplateRef<any>;
 
-    /** @hidden */
-    dialogRef: DialogRef;
-
-    /** @hidden */
+    /** @hidden
+     * from mobile class can not prefix _,
+     * to avoid build issues
+    */
     childContent: TemplateRef<any> = undefined;
 
     /** @hidden */
@@ -50,6 +43,10 @@ export class SelectMobileComponent extends MobileModeBase<FdOptionParentComponen
 
     /** @hidden */
     private _activeItemIndex: number;
+
+    /** @hidden */
+    @ViewChild('dialogTemplate')
+    _dialogTemplate: TemplateRef<any>;
 
     constructor(
         _elementRef: ElementRef,
@@ -60,20 +57,12 @@ export class SelectMobileComponent extends MobileModeBase<FdOptionParentComponen
         super(_elementRef, _dialogService, _parent,
              MobileModeControl.SELECT,
             mobileModes);
- 
+
     }
 
     /** @hidden */
     ngOnInit(): void {
-        // Listens for Select option HIDE/SHOW events in order to show or hide this dialog
-        // When in non dismissible mode we save currently selected item index to rollback original selection
-        //
-        this._subscriptions.add(
-            this._parent.openedChange.subscribe((isOpen) => {
-                this.dialogRef.hide(!isOpen);
-                this._activeItemIndex = this._parent.keyManager.activeItemIndex;
-            })
-        );
+        this._listenOnSelectOpenChange();
     }
 
     /** @hidden */
@@ -88,10 +77,6 @@ export class SelectMobileComponent extends MobileModeBase<FdOptionParentComponen
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden */
-    // get mobileConfig(): MobileModeConfig {
-    //     return this._parent.mobileConfig || {};
-    // }
 
     /**
      * Only when we have Approve button available we do rollback to original selection that is stored in the
@@ -99,25 +84,38 @@ export class SelectMobileComponent extends MobileModeBase<FdOptionParentComponen
      *
      * @hidden
      */
-    cancel(): void {
+    _cancel(): void {
         this._parent.close(true);
-        if (this._parent.keyManager.activeItem && !!this.mobileConfig.approveButtonText) {
-            this._parent.keyManager.setActiveItem(this._activeItemIndex);
-            this._parent.keyManager.activeItem.selectViaInteraction();
+        if (this._parent._keyManager.activeItem && !!this.mobileConfig.approveButtonText) {
+            this._parent._keyManager.setActiveItem(this._activeItemIndex);
+            this._parent._keyManager.activeItem._selectViaInteraction();
         }
     }
 
     /** @hidden */
-    approve(): void {
+    _approve(): void {
         this._parent.close(true);
-        if (this._parent.keyManager.activeItem) {
-            this._parent.keyManager.activeItem.selectViaInteraction();
+        if (this._parent._keyManager.activeItem) {
+            this._parent._keyManager.activeItem._selectViaInteraction();
         }
+    }
+
+    /** @hidden Hide/Show the Dialog when Select Open/Close*/
+    private _listenOnSelectOpenChange(): void {
+      // Listens for Select option HIDE/SHOW events in order to show or hide this dialog
+        // When in non dismissible mode we save currently selected item index to rollback original selection
+        //
+        this._subscriptions.add(
+            this._parent.isOpenChange.subscribe((isOpen) => {
+                this.dialogRef.hide(!isOpen);
+                this._activeItemIndex = this._parent._keyManager.activeItemIndex;
+            })
+        );
     }
 
     /** @hidden */
     private _openDialog(): void {
-           this.dialogRef = this._dialogService.open(this.dialogTemplate, {
+           this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
             mobile: true,
             focusTrapped: false,
