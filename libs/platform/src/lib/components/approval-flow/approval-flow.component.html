@@ -12,10 +12,9 @@
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
         <button *ngIf="!_isEditMode" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
         <ng-container *ngIf="_isEditMode">
-            <button fd-button label="View mode" [compact]="true" (click)="_isEditMode = false"></button>
-            <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="_removeCheckedNodes()"></button>
-            <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="addNodeAfterSelected()"></button>
-            <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_removeCheckedNodes()"></button>
+            <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="addNodeFromToolbar('before')"></button>
+            <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="addNodeFromToolbar('after')"></button>
+            <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="addNodeFromToolbar('parallel')"></button>
             <button *ngIf="_isRemoveButtonVisible" fd-button label="Remove" [compact]="true" (click)="_removeCheckedNodes()"></button>
         </ng-container>
     </div>
@@ -42,7 +41,8 @@
             [displayFn]="_displayUserFn"
             [showAllButton]="false"
             [(ngModel)]="_selectedWatchers"
-            (openChange)="!$event && _onWatchersPopoverClose()"
+            (openChange)="!$event && _checkWatchersUpdates()"
+            (selectedChange)="_checkWatchersUpdates()"
         ></fd-multi-input>
     </div>
 </div>
@@ -79,6 +79,7 @@
                         [node]="node"
                         [blank]="node.blank"
                         [parent]="_nodeParentsMap[node.id]"
+                        [meta]="_nodeMetaMap[node.id]"
                         [isEdit]="_isEditMode"
                         [renderArrow]="columnIndex > 0"
                         [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
@@ -89,7 +90,8 @@
                         [canAddNodeAfter]="node.status !== 'approved' && !_nodeMetaMap[node.id]?.nextHNode?.blank"
                         (onNodeClick)="onNodeClick(node)"
                         (onNodeCheck)="onNodeCheck(node, $event)"
-                        (onAdd)="addNode(node, 'after')"
+                        (onAdd)="addNode(node, $event)"
+                        (onEdit)="editNode(node)"
                         (onDelete)="deleteNode(node)"
                         (keyup.enter)="onNodeClick(node)"
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
@@ -98,6 +100,10 @@
             </div>
         </div>
     </div>
+</div>
+<div class="approval-flow__edit-mode-footer" *ngIf="_isEditMode">
+    <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_isEditMode = false"></button>
+    <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_isEditMode = false"></button>
 </div>
 
 <ng-template let-messageToast #reminderTemplate>

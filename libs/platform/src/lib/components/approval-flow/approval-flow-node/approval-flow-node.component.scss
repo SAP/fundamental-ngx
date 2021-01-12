@@ -28,11 +28,25 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         &:before {
             content: '';
-            width: calc(100% + 8rem);
+            //width: calc(100% + 8rem);
+            width: calc(100% + 5.7rem);
             height: 0;
             display: block;
             position: absolute;
             left: -4rem;
+            border-top: 2px dashed #89919A;
+            border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+            top: calc(50% - 1px);
+        }
+
+        &.#{$block}--blank-top:after {
+            content: '';
+            //width: calc(100% + 8rem);
+            width: 1.6rem;
+            height: 0;
+            display: block;
+            position: absolute;
+            right: -3.7rem;
             border-top: 2px dashed #89919A;
             border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
             top: calc(50% - 1px);

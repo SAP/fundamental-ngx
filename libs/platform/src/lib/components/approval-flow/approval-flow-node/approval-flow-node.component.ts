@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core';
 
-import { ApprovalGraphNode } from '../approval-flow.component';
+import { ApprovalGraphNode, ApprovalGraphNodeMetadata } from '../approval-flow.component';
 import { ApprovalNode, ApprovalStatus } from '../interfaces';
 import { isNodeApproved } from '../helpers';
 
@@ -39,6 +39,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** A reference to a parent node */
     @Input() parent: ApprovalNode;
 
+    /** Node metadata */
+    @Input() meta: ApprovalGraphNodeMetadata;
+
     /** Whether node element has arrow on the left side pointing to the node */
     @Input() renderArrow = false;
 
@@ -60,8 +63,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     blank: boolean;
 
     /** Whether the node is in edit mode */
+    @Input()
     @HostBinding('class.approval-flow-node--edit-mode')
-    @Input() isEdit: boolean;
+    isEdit: boolean;
 
     /** Whether node element has connection line before the node element */
     @Input()
@@ -96,6 +100,12 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
+    @HostBinding('class.approval-flow-node--blank-top')
+    get _isBlankTopNode(): boolean {
+        return Boolean(this.blank && this.meta?.nextHNode);
+    }
+
+    /** @hidden */
     // make public input?
     _isSelected = false;
 
@@ -106,7 +116,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     @Output() onNodeCheck = new EventEmitter<boolean>();
 
-    @Output() onAdd = new EventEmitter<void>();
+    @Output() onAdd = new EventEmitter<string>();
+
+    @Output() onEdit = new EventEmitter<void>();
 
     @Output() onDelete = new EventEmitter<void>();
 

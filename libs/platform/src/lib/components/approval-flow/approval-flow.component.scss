@@ -135,6 +135,7 @@ $carousel-controls-height--edit-mode: 126px;
 
 .#{$block}__graph {
     display: flex;
+    align-items: flex-start;
     position: relative;
     left: 0;
     transition: left .3s;
@@ -216,6 +217,15 @@ $carousel-controls-height--edit-mode: 126px;
         outline-style: dotted;
         outline-color: var(--sapContent_FocusColor, #0854A0);
     }
+}
+
+.#{$block}__edit-mode-footer {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #fff;
+    padding: .5rem;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
 }
 
 fd-toolbar + .#{$block}__container {

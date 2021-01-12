@@ -7,16 +7,16 @@
         <button class="approval-flow-node__menu-button" [compact]="true" fd-button fdType="transparent" glyph="overflow" [fdMenuTrigger]="menu"></button>
 
         <fd-menu #menu [compact]="true" placement="bottom-end">
-            <li fd-menu-item>
+            <li fd-menu-item (click)="onAdd.emit('before')">
                 <div fd-menu-interactive>Add approvers before</div>
             </li>
-            <li fd-menu-item>
+            <li fd-menu-item (click)="onAdd.emit('after')">
                 <div fd-menu-interactive>Add approvers after</div>
             </li>
-            <li fd-menu-item>
+            <li fd-menu-item (click)="onAdd.emit('parallel')">
                 <div fd-menu-interactive>Add parallel approvers</div>
             </li>
-            <li fd-menu-item>
+            <li fd-menu-item (click)="onEdit.emit()">
                 <div fd-menu-interactive>Edit</div>
             </li>
             <li fd-menu-item (click)="onDelete.emit()">
@@ -55,9 +55,11 @@
             </fdp-object-status>
         </div>
     </div>
-    <span style="position: absolute; font-size: 11px; right: 0; top: 0; ">{{ node.id }} </span>
-    <span *ngIf="parent" style="position: absolute; font-size: 11px; left: 0; top: 0; color: orangered;">Parent - {{ parent.id }} </span>
-    <span *ngIf="node.targets.length" style="position: absolute; font-size: 11px; right: 0; bottom: 0; color: orange">Targets - {{ node.targets }}</span>
+    <ng-container *ngIf="true">
+        <span style="position: absolute; font-size: 11px; right: 0; top: 0; ">{{ node.id }} </span>
+        <span *ngIf="parent" style="position: absolute; font-size: 11px; left: 0; top: 0; color: orangered;">Parent - {{ parent.id }} </span>
+        <span *ngIf="node.targets.length" style="position: absolute; font-size: 11px; right: 0; bottom: 0; color: orange">Targets - {{ node.targets }}</span>
+    </ng-container>
 </ng-container>
 <ng-container *ngIf="isEdit && (blank || canAddNodeBefore || canAddNodeAfter)">
     <ng-container *ngTemplateOutlet="addNodeButton"></ng-container>
@@ -68,7 +70,7 @@
         [class.approval-flow-node__add--blank]="blank"
         [class.approval-flow-node__add--before]="!blank && canAddNodeBefore"
         [class.approval-flow-node__add--after]="!blank && canAddNodeAfter"
-        (click)="$event.stopPropagation(); onAdd.emit()"
+        (click)="$event.stopPropagation(); onAdd.emit('after')"
     >
         <fd-icon glyph="add"></fd-icon>
     </div>
