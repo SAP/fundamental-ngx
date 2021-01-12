@@ -1,48 +1,53 @@
 import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PaginationComponent } from '@fundamental-ngx/core';
+import { tap, delay } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-pagination-example',
     template: ` <fd-pagination
+            [displayTotalItems]="false"
             [totalItems]="totalItems"
             (pageChangeStart)="newPageClicked($event)"
-            [itemsPerPage]="itemsPerPage"
             [currentPage]="currentPage"
         ></fd-pagination>
         <br /><br />
-        <button fd-button label="Go to page 1" (click)="goToPage1()"></button>`
+        <button fd-button label="Go to page 1" (click)="goToPage(1)"></button>
+        <div *ngIf="notification">{{ notification }}</div>
+        `
 })
 export class PaginationExampleComponent {
     totalItems = 50;
     itemsPerPage = 10;
-    currentPage = 3;
+    currentPage = 5;
+    notification: string = null;
 
     @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
-    newPageClicked(event): void {
-        this.http.get('assets/pagination-data.json').subscribe(
+    newPageClicked(event: number): void {
+        this.http.get('assets/pagination-data.json').pipe(
+            tap(() => {
+                this.notification = 'loading...';
+            }),
+            delay(100),
+        ).subscribe(
             (data) => {
-                /*
-             update the currentPage when the http action is successful
-             */
+                /* update the currentPage when the http action is successful */
                 this.currentPage = event;
-                console.log('page change success!');
+                this.notification = 'page change success!';
             },
             (error) => {
-                /*
-             do not update the currentPage when the http action fails
-             */
-                console.log('page change error!');
+                /* do not update the currentPage when the http action fails */
+                this.notification = 'page change error!';
             },
             () => {
-                alert('New page selected: ' + this.currentPage);
+                this.notification = 'New page selected: ' + this.currentPage;
             }
         );
     }
 
-    goToPage1(): void {
-        this.paginationComponent.goToPage(1);
+    goToPage(page: number): void {
+        this.paginationComponent.goToPage(page);
     }
 
     constructor(private http: HttpClient) {}
