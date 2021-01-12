@@ -16,6 +16,7 @@ import { ListFocusItem } from '../list-focus-item.model';
   selector: '[fdListGroupHeader], [fd-list-group-header]',
   host: {
     '[style.outline]': '"none"',
+    '[class.fd-list__item]' : 'true'
   },
   providers: [{
     provide: ListFocusItem,
@@ -38,6 +39,9 @@ export class ListGroupHeaderDirective extends ListFocusItem {
     /** @hidden */
     @HostBinding('class.fd-list__group-header')
     fdListGroupHeaderClass = true;
+
+    /** @hidden */
+    clicked = new EventEmitter<MouseEvent>();
 
     /** @hidden */
     private _tabIndex = -1;
