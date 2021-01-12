@@ -16,6 +16,11 @@ export abstract class FormFieldControl<T> {
     placeholder: string;
 
     /**
+     * Need to have a way to set Mandatory to the input field
+     */
+    required: boolean;
+
+    /**
      * Sets id from FF to Input
      */
     id: string;

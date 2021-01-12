@@ -141,6 +141,10 @@ export abstract class BaseInput extends BaseComponent
     readonly stateChanges: Subject<any> = new Subject<any>();
 
     readonly formField: FormField | null = null;
+
+    /** set when input field is mandatory form field */
+    required: boolean;
+
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
