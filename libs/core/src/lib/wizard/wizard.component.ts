@@ -308,13 +308,24 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                     const wizardNavigationHeight = this._elRef.nativeElement.querySelector(
                         '.' + WIZARD_NAVIGATION_CLASS
                     ).clientHeight;
-                    this.wrapperContainer.nativeElement.scrollTo({
-                        top: child.offsetTop - wizardNavigationHeight,
-                        behavior: 'smooth'
-                    });
+
+                    this.scrollTo(this.wrapperContainer.nativeElement, child.offsetTop - wizardNavigationHeight);
                 }
             });
             this._setUpScrollListener();
+        }
+    }
+
+    /** @hidden */
+    private scrollTo(containerElement: Element, distanceToScroll: number): void {
+        // Check if scrollTo method is supported by current browser
+        if (containerElement.scrollTo && containerElement.scrollTo instanceof Function) {
+            containerElement.scrollTo({
+                top: distanceToScroll,
+                behavior: 'smooth'
+            })
+        } else {
+            containerElement.scrollTop = distanceToScroll;
         }
     }
 

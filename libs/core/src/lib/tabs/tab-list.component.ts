@@ -453,8 +453,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
                     debounceTime(100),
                     first()
                 ).subscribe(() => this._disableScrollSpy = false);
-
-            containerElement.scrollTo({ top: distanceToScroll, behavior: 'smooth' });
+            this.scrollTo(containerElement, distanceToScroll);
         }
     }
 
@@ -463,5 +462,18 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         return !tabPanel.disabled
         && expand !== tabPanel.expanded
         && expand === false ? this.collapsibleTabs : true;
+    }
+
+    /** @hidden */
+    private scrollTo(containerElement: Element, distanceToScroll: number): void {
+        // Check if scrollTo method is supported by current browser
+        if (containerElement.scrollTo && containerElement.scrollTo instanceof Function) {
+            containerElement.scrollTo({
+                top: distanceToScroll,
+                behavior: 'smooth'
+            })
+        } else {
+            containerElement.scrollTop = distanceToScroll;
+        }
     }
 }
