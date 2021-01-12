@@ -7,13 +7,6 @@ export class PanelPo extends BaseComponentPo {
     root = '#page-content';
 
 
-    cozySearch = '';
-    compactSearch = '';
-
-    cozyWithCategoriesSearch = '';
-    compactWithCategoriesSearch = '';
-
-    cozyWithDataSourceSearch = '';
 
     open(): void {
         super.open(this.url);

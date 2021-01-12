@@ -1,0 +1,102 @@
+import {
+    getAttributeByName,
+    getElementArrayLength, getElementLocation,
+    isElementDisplayed,
+    refreshPage, scrollIntoView,
+    waitElementToBePresentInDOM,
+    waitForElDisplayed,
+    click
+} from '../../driver/wdio';
+import { ThumbnailPo } from '../pages/thumbnail.po';
+
+describe('Thumbnail field', () => {
+    const thumbnailPage = new ThumbnailPo();
+
+    beforeAll(() => {
+        thumbnailPage.open();
+    });
+
+    afterEach(() => {
+        refreshPage();
+    });
+
+    it('should be able to view all thumbnail images', () => {
+        waitElementToBePresentInDOM(thumbnailPage.mainImage);
+        waitForElDisplayed(thumbnailPage.mainImage);
+        expect(isElementDisplayed(thumbnailPage.mainImage)).toBeTrue();
+        expect(isElementDisplayed(thumbnailPage.mainImage, 1)).toBeTrue();
+        expect(isElementDisplayed(thumbnailPage.mainImage, 2)).toBeTrue();
+    });
+
+    it('should be able to display images vertical', () => {
+        scrollIntoView(thumbnailPage.verticalGalleryImages);
+        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
+        for (let i = 0; arrLength > i; i++) {
+            if (i !== arrLength - 1) {
+                expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).x)
+                    .toEqual(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).x);
+                expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).y)
+                    .toBeLessThan(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).y);
+            }
+        }
+    });
+
+    it('should be able to display images horizontal', () => {
+        scrollIntoView(thumbnailPage.horizontalGalleryImages);
+        const arrLength = getElementArrayLength(thumbnailPage.horizontalGalleryImages);
+        for (let i = 0; arrLength > i; i++) {
+            if (i !== arrLength - 1) {
+                expect(getElementLocation(thumbnailPage.horizontalGalleryImages, i).y)
+                    .toEqual(getElementLocation(thumbnailPage.horizontalGalleryImages, i + 1).y);
+                expect(getElementLocation(thumbnailPage.horizontalGalleryImages, i).x)
+                    .toBeLessThan(getElementLocation(thumbnailPage.horizontalGalleryImages, i + 1).x);
+            }
+        }
+    });
+
+    it('should be able to display vertical for video gallery', () => {
+        scrollIntoView(thumbnailPage.verticalGalleryVideo);
+        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryVideo);
+        for (let i = 0; arrLength > i; i++) {
+            if (i !== arrLength - 1) {
+                expect(getElementLocation(thumbnailPage.verticalGalleryVideo, i).x)
+                    .toEqual(getElementLocation(thumbnailPage.verticalGalleryVideo, i + 1).x);
+                expect(getElementLocation(thumbnailPage.verticalGalleryVideo, i).y)
+                    .toBeLessThan(getElementLocation(thumbnailPage.verticalGalleryVideo, i + 1).y);
+            }
+        }
+    });
+
+    it('should on click display image for vertical', () => {
+        scrollIntoView(thumbnailPage.verticalGalleryImages);
+        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
+        for (let i = 0; arrLength > i; i++) {
+            const imageUrl = getAttributeByName(thumbnailPage.verticalGalleryImages, 'ng-reflect-image', i);
+            click(thumbnailPage.verticalGalleryImages, i);
+            expect(getAttributeByName(thumbnailPage.mainImage, 'src', 0)).toContain(imageUrl);
+        }
+    });
+
+    it('should on click display image for horizontal', () => {
+        scrollIntoView(thumbnailPage.horizontalGalleryImages);
+        const arrLength = getElementArrayLength(thumbnailPage.horizontalGalleryImages);
+        for (let i = 0; arrLength > i; i++) {
+            const imageUrl = getAttributeByName(thumbnailPage.horizontalGalleryImages, 'ng-reflect-image', i);
+            click(thumbnailPage.horizontalGalleryImages, i);
+            expect(getAttributeByName(thumbnailPage.mainImage, 'src', 1)).toContain(imageUrl);
+        }
+    });
+
+    it('should highlight on hover', () => {
+        scrollIntoView(thumbnailPage.verticalGalleryImages);
+        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
+        for (let i = 0; arrLength > i; i++) {
+
+        }
+
+    });
+
+    it('should have rtl orientation', () => {
+        thumbnailPage.checkRtlSwitch();
+    });
+});

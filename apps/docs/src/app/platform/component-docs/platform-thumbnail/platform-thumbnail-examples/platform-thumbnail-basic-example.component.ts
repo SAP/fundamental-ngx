@@ -38,8 +38,8 @@ export class PlatformThumbnailBasicExampleComponent {
     {
         thumbnailUrl: 'http://picsum.photos/id/317/600',
         mediaType: 'image',
-        mediaUrl: 'http://picsum.photos/id/316/600',
-        alt: 'Failed to load http://picsum.photos/id/316/600',
+        mediaUrl: 'http://picsum.photos/id/317/600',
+        alt: 'Failed to load http://picsum.photos/id/317/600',
         label: 'art'
     }
     ];

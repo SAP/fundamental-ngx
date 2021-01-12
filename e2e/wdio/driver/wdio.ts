@@ -267,3 +267,13 @@ export function mouseButtonUp(button: 0 | 1 | 2 = 0): void {
 export function  clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
 }
+
+export function getElementLocation(selector: string, index?: number):  WebdriverIO.LocationReturn;
+export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
+export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
+    return prop ? $$(selector)[index].getLocation(prop) : $$(selector)[index].getLocation();
+}
+
+export function getPerrentElementCSSPropetry(selector: string, prop: string, index: number): string {
+    return $$(selector)[index].parentElement().getCSSProperty(prop).value;
+}
