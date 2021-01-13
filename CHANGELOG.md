@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.60...v0.26.0-rc.61) (2021-01-13)
+
+
+### Bug Fixes
+
+* (core) fix Grid List IE11 issues ([156e24a](https://github.com/SAP/fundamental-ngx/commit/156e24aba47bbd3e3d6a545e8f79636c3f4e9aa9))
+
 ## [0.26.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.58...v0.26.0-rc.60) (2021-01-13)
 
 
