@@ -66,9 +66,11 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             this.menuItemHoverChangeSubscription = this._parentMenu.menuItemHoverChange().subscribe((item) => {
                 if (item === this._menuItem) {
                     if (!this.isMenuOpen) {
+                        this._menuItem.isSelected = true;
                         this.openMenu();
                     }
                 } else {
+                    this._menuItem.isSelected = false;
                     this.closeMenu();
                 }
             });
@@ -108,17 +110,26 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                     $event.preventDefault();
                     $event.stopPropagation();
                 }
+                if (this._menuItem) {
+                    this._menuItem.isSelected = true;
+                }
                 this.openMenu();
                 break;
             case 'ArrowRight':
             case 'Right':
                 if (this._menu.cascadesRight()) {
+                    if (this._menuItem) {
+                        this._menuItem.isSelected = true;
+                    }
                     this.openMenu();
                 }
                 break;
             case 'ArrowLeft':
             case 'Left':
                 if (this._menu.cascadesLeft()) {
+                    if (this._menuItem) {
+                        this._menuItem.isSelected = true;
+                    }
                     this.openMenu();
                 }
                 break;
@@ -209,6 +220,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
 
     /** @hidden destroy associated menu. */
     destroyMenu(): void {
+        if (this._menuItem) {
+            this._menuItem.isSelected = false;
+        }
         if (!this._overlayRef || !this._isMenuOpen) {
             return;
         }

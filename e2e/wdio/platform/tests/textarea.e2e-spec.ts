@@ -19,7 +19,7 @@ import {
     refreshPage,
     sendKeys,
     setValue,
-    waitForElDisplayed,
+    waitForElDisplayed, waitForPresent,
     waitTextToBePresentInValue
 } from '../../driver/wdio';
 
@@ -29,12 +29,12 @@ describe('Verify Textarea component', function() {
     const copyPasteBtn = currentPlatformName() === 'Mac OS X' ? 'Command' : 'Control';
     beforeAll(() => {
         textareaPage.open();
-        pause(16000);
+        waitForPresent(textareaPage.readOnlyTextAreaLabel);
     });
 
     afterEach(() => {
         refreshPage();
-        pause(16000);
+        waitForPresent(textareaPage.readOnlyTextAreaLabel);
     });
 
     if (!browserIsIEorSafari()) {

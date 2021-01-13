@@ -49,6 +49,10 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
         return this.cascadeDirection === 'left';
     }
 
+    /** @hidden set CSS class 'is-selected' if menu-item opens a sub-menu. */
+    @HostBinding('class.is-selected')
+    isSelected = false;
+
     /** @hidden set role attribute for host. */
     @HostBinding('attr.role') role = 'menuitem';
 

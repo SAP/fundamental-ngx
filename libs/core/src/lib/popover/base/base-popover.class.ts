@@ -5,6 +5,10 @@ import { Placement, PopoverFillMode } from '../popover-position/popover-position
 @Directive()
 export class BasePopoverClass {
 
+    @Input()
+    /** Whether to close the popover on router navigation start. */
+    closeOnNavigation = true;
+
     /** Whether the popover is disabled. */
     @Input()
     @HostBinding('class.fd-popover-custom--disabled')

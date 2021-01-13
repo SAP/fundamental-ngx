@@ -1,7 +1,7 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { MenuMobileComponent } from './menu-mobile.component';
-import { Component, Inject, InjectionToken, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, InjectionToken, ViewChild } from '@angular/core';
 import { MenuComponent } from '../menu.component';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuItemComponent, SubmenuComponent } from '../menu-item/menu-item.component';
@@ -40,7 +40,10 @@ class TesNestedMenuItemComponent {
 
     menuItemTitle = 'Test item title';
 
-    constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) {}
+    constructor(
+        public elementRef: ElementRef,
+        @Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig
+    ) {}
 }
 
 describe('MenuMobileComponent', () => {
