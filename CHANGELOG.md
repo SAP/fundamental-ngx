@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.57...v0.26.0-rc.58) (2021-01-13)
+
+
+### Bug Fixes
+
+* (Platform) add outline in search field, fix category contentDensity for compact case ([#4287](https://github.com/SAP/fundamental-ngx/issues/4287)) ([7ccb369](https://github.com/SAP/fundamental-ngx/commit/7ccb3699d557b16be89c13f0e73180eccfcca715))
+
+## [0.26.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.56...v0.26.0-rc.57) (2021-01-13)
+
+## [0.26.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.55...v0.26.0-rc.56) (2021-01-12)
+
+
+### Bug Fixes
+
+* (Core) Add missed controls into Pagination component and fix small issue ([#4183](https://github.com/SAP/fundamental-ngx/issues/4183)) ([d6864be](https://github.com/SAP/fundamental-ngx/commit/d6864be85dcf43dd06df50a9be892145e218f2a4))
+* (Platform) add screen reader detection for required form field ([#4281](https://github.com/SAP/fundamental-ngx/issues/4281)) ([ce83958](https://github.com/SAP/fundamental-ngx/commit/ce839589a3572fea7e7612f158d5659de081ce47))
+
 ## [0.26.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.54...v0.26.0-rc.55) (2021-01-11)
 
 ## [0.26.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.53...v0.26.0-rc.54) (2021-01-11)
