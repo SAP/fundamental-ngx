@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.7](https://github.com/SAP/fundamental-ngx/compare/v0.21.6...v0.21.7) (2021-01-13)
+
+
+### Bug Fixes
+
+* add nullcheck to menu component ([0bf37ca](https://github.com/SAP/fundamental-ngx/commit/0bf37ca49909af133feedeeb84db72501fa79744))
+
 ### [0.21.6](https://github.com/SAP/fundamental-ngx/compare/v0.21.5...v0.21.6) (2020-10-07)
 
 
