@@ -26,6 +26,8 @@ import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
 import { FormZone, Column, LabelLayout, HintPlacement } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
+import { FormFieldGroup } from '../../form-field-group';
+import { FormFieldGroupComponent } from '../form-field-group/form-field-group.component';
 
 export const formFieldProvider: Provider = {
     provide: FormField,
@@ -54,9 +56,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     id: string;
 
     @Input()
-    zone: FormZone;
-
-    @Input()
     hintPlacement: HintPlacement = 'right';
 
     @Input()
@@ -68,17 +67,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     noLabelLayout = false;
 
-    /**
-     * By default form field does not render any content as it is wrapped inside ng-template and
-     * controlled by parent. This is for cases where FormField is direct child of the form-group.
-     *
-     * In case we have more nested structure and Form-Field is wrapped with some other element
-     * that controls the rendering we need to let go this rendering and render the content
-     * directly
-     */
-    @Input()
-    forceRender = false;
-
     @Input()
     validators: Array<ValidatorFn> = [Validators.nullValidator];
 
@@ -88,12 +76,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     placeholder: string;
 
-    /** A column in belongs to */
+    /** Form Container column it belongs to */
     @Input()
     column: number;
 
-    @Input()
-    fluid = false;
     /**
      * This is in most of the cases set from parent container (form-group)
      */
@@ -178,10 +164,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     ngOnInit(): void {
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
-        }
-
-        if (this.fluid) {
-            this.columns = 12;
         }
 
         this.addToFormGroup();
@@ -301,7 +283,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Add FormField to FormGroup
      */
     private addToFormGroup(): void {
-        if (!this.formGroupContainer || Boolean(this._elementRef.nativeElement.parentElement.attributes.label)) {
+        // prevent adding wrapped fields into field group into form group container
+        const isFieldGroup = this._elementRef.nativeElement.parentElement.tagName.toLowerCase() === 'fdp-form-field-group';
+
+        if (!this.formGroupContainer || isFieldGroup) {
             return;
         }
 

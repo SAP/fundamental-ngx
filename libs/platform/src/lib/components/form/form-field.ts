@@ -28,14 +28,6 @@ export abstract class FormField {
      */
     columns: Column;
     /**
-     * Indicates when "columns" should be ignored
-     */
-    fluid: boolean;
-    /**
-     * Indicates in which FormZone a form field should be rendered
-     */
-    zone: FormZone;
-    /**
      * Define form field column belongs
      */
     column: number;

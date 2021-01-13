@@ -3,6 +3,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { FormField } from './form-field';
 import { LabelLayout, HintPlacement } from './form-options';
+import { FormFieldGroup } from './form-field-group';
 
 /**
  * FormGroup base class.
@@ -38,7 +39,7 @@ export abstract class FormGroupContainer {
     /**
      * Attach underlying form field
      */
-    addFormField: (formField: FormField | any) => void;
+    addFormField: (formField: FormField | FormFieldGroup) => void;
     /**
      * Detach underlying form field
      */
