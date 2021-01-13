@@ -19,7 +19,6 @@ export class SearchPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
         waitForElDisplayed(this.searchFields);
     }
 }

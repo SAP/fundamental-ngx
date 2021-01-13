@@ -30,9 +30,10 @@ describe('Search field', function() {
         open,
         checkRtlSwitch
     } = new SearchPo();
+    const searchPage = new SearchPo();
 
     beforeAll(() => {
-        open();
+        searchPage.open();
     });
 
     afterEach(() => {
@@ -157,6 +158,6 @@ describe('Search field', function() {
     });
 
     it('should check rtl switch', () => {
-        checkRtlSwitch();
+        searchPage.checkRtlSwitch();
     });
 });
