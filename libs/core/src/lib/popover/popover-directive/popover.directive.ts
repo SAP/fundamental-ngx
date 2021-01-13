@@ -34,6 +34,7 @@ import { PopoverFillMode } from '../popover-position/popover-position';
  *     Popover Body
  * </ng-template>
  * ```
+ * @deprecated
  */
 @Directive({
     selector: '[fdPopover]'

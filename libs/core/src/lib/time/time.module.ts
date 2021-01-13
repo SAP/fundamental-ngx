@@ -13,6 +13,6 @@ import { CarouselModule } from '../utils/directives/carousel/carousel.module';
 @NgModule({
     declarations: [TimeComponent, OnlyDigitsDirective, TimeColumnComponent],
     imports: [CommonModule, FormsModule, FormModule, ButtonModule, PipeModule, CarouselModule],
-    exports: [TimeComponent, OnlyDigitsDirective]
+    exports: [TimeComponent, OnlyDigitsDirective, TimeColumnComponent]
 })
 export class TimeModule {}
