@@ -16,6 +16,28 @@ export class DatePicker extends BaseComponentPo {
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
+    prePopulatedSimpleInput = '#fd-popover-0 input';
+    singleTypeInput = '#fd-popover-1 input';
+    prePopulatedRangeInput = '#fd-popover-2 input';
+    rangeTypeInput = '#fd-popover-3 input';
+    birthdateInput = '#fd-popover-4 input';
+    holidayInput = '#fd-popover-6 input';
+    outsideFormInput = '#fd-popover-8 input';
+    outsideFormRangeInput = '#fd-popover-9 input';
+
+    firstDayInCalendarButton = '[id="fd-calendar-0-fd-day-1"]'
+
+    buttonGerman = 'button[ng-reflect-label="German"]'
+    buttonBulgarian = 'button[ng-reflect-label="Bulgarian"]';
+
+    datePickerInputsByIndex = (index: string) => {
+        return `#fd-popover-${index} input`;
+    };
+
+    dayInCalendarButtonByValue = (index: string) => {
+        return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+    };
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
