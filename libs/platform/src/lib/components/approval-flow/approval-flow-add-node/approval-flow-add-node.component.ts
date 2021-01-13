@@ -16,6 +16,7 @@ import { ListComponent } from '@fundamental-ngx/platform';
 
 interface AddNodeDialogRefData {
     isEdit?: boolean;
+    showNodeTypeSelect?: boolean;
     node?: ApprovalNode;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
@@ -34,6 +35,7 @@ const EVERYONE = 'Everyone on the team';
 })
 export class ApprovalFlowAddNodeComponent implements OnInit {
     _nodeType = '';
+    _nodeTypes = ['Parallel', 'Serial'];
     _approverType = '';
     _approverTypes = [SINGLE_USER, ANYONE, EVERYONE];
     _dueDate = FdDate.getNow();

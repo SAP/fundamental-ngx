@@ -24,18 +24,24 @@
 
     <fd-dialog-body>
         <ng-container *ngIf="!_selectApproversMode">
-            <div fd-form-item *ngIf="!_data.isEdit">
+            <div fd-form-item *ngIf="_data.showNodeTypeSelect">
                 <label fd-form-label>Parallel or serial</label>
-                <fd-select placeholder="Select an option" [compact]="true" [(value)]="_nodeType">
-                    <fd-option *ngFor="let option of ['Parallel', 'Serial']"
-                               [value]="option">{{ option }}</fd-option>
+                <fd-select [compact]="true" [(value)]="_nodeType">
+                    <fd-option
+                        *ngFor="let option of _nodeTypes"
+                        [value]="option">
+                        {{ option }}
+                    </fd-option>
                 </fd-select>
             </div>
             <div fd-form-item>
                 <label fd-form-label>Approver type</label>
-                <fd-select placeholder="Select an option" [compact]="true" [(value)]="_approverType">
-                    <fd-option *ngFor="let option of _approverTypes"
-                               [value]="option">{{ option }}</fd-option>
+                <fd-select [compact]="true" [(value)]="_approverType">
+                    <fd-option
+                        *ngFor="let option of _approverTypes"
+                        [value]="option">
+                        {{ option }}
+                    </fd-option>
                 </fd-select>
             </div>
             <div fd-form-item>
@@ -43,7 +49,6 @@
                 <div class="approval-flow__select-approvers-container">
                     <fd-multi-input
                         [compact]="true"
-                        placeholder="Search here..."
                         [showAllButton]="false"
                         [(ngModel)]="_selectedApprovers"
                         [displayFn]="_displayUserFn"
@@ -53,7 +58,8 @@
             </div>
             <div fd-form-item>
                 <label fd-form-label>Due date</label>
-                <fd-date-picker type="single" compact="true" [(ngModel)]="_dueDate" (ngModelChange)="_data.node.dueDate = _dueDate.toDate()"></fd-date-picker>
+                <fd-date-picker type="single" compact="true" [(ngModel)]="_dueDate"
+                                (ngModelChange)="_data.node.dueDate = _dueDate.toDate()"></fd-date-picker>
             </div>
         </ng-container>
         <ng-container *ngIf="_selectApproversMode">
@@ -89,7 +95,7 @@
                     fdType="emphasized"
                     label="Ok"
                     [compact]="true"
-                    (click)="dialogRef.close(_data.node)">
+                    (click)="dialogRef.close({ node: _data.node, nodeType: _nodeType })">
                 </button>
             </fd-dialog-footer-button>
 

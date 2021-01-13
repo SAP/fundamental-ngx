@@ -1,9 +1,11 @@
 <div class="approval-flow__messages" *ngIf="_messages.length">
     <fd-message-strip
         *ngFor="let message of _messages; let i = index"
-        [type]="message.type"
+        [type]="'success'"
         (onDismiss)="_onMessageDismiss(i)">
-        <ng-container [ngTemplateOutlet]="message.type === 'success' ? watchersChangedSuccess : null"></ng-container>
+        <ng-container [ngTemplateOutlet]="message.type === 'watchersChangeSuccess' ? watchersChangedSuccess : null"></ng-container>
+        <ng-container [ngTemplateOutlet]="message.type === 'nodeAddSuccess' ? nodeAddSuccess : null"></ng-container>
+        <ng-container [ngTemplateOutlet]="message.type === 'nodeRemove' ? nodeRemove : null"></ng-container>
     </fd-message-strip>
 </div>
 
@@ -121,5 +123,15 @@
 <ng-template #watchersChangedSuccess>
     <ng-container i18n="@@platformApprovalFlowWatchersChangedSuccess">
         Watchers list has been changed successfully
+    </ng-container>
+</ng-template>
+<ng-template #nodeAddSuccess>
+    <ng-container i18n="@@platformApprovalFlowNodeAddSuccess">
+        1 node has been added
+    </ng-container>
+</ng-template>
+<ng-template #nodeRemove>
+    <ng-container i18n="@@platformApprovalFlowNodeRemove">
+        1 approver has been removed
     </ng-container>
 </ng-template>
