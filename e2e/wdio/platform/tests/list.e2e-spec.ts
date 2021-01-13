@@ -150,17 +150,19 @@ describe('List test suite:', function() {
 
         it('should check scroll', () => {
             // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-            if (!browserIsFirefox()) {
-                scrollIntoView(listPg.vScrollListItems, 0);
-                const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
-                click(listPg.vScrollListItems, 0);
-                sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
-                expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
-                waitForInvisibilityOf(listPg.vScrollLoadIcon);
-                const itemsEndCount = getElementArrayLength(listPg.vScrollListItems);
-                expect(itemsStartCount).not.toEqual(itemsEndCount);
+            if (browserIsFirefox()) {
+
                 return;
             }
+
+            scrollIntoView(listPg.vScrollListItems, 0);
+            const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
+            click(listPg.vScrollListItems, 0);
+            sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
+            expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
+            waitForInvisibilityOf(listPg.vScrollLoadIcon);
+            const itemsEndCount = getElementArrayLength(listPg.vScrollListItems);
+            expect(itemsStartCount).not.toEqual(itemsEndCount);
             console.log('skip FF due to #4107');
         });
     });
@@ -193,18 +195,20 @@ describe('List test suite:', function() {
 
         it('should check delete action', () => {
             click(listPg.btnDeleteBtn, 0);
-            if (!browserIsIE()) {
-                expect(getAlertText()).toContain('Delete row');
+            if (browserIsIE()) {
+                acceptAlert();
+                return;
             }
-            acceptAlert();
+            expect(getAlertText()).toContain('Delete row');
         });
 
         it('should check edit action', () => {
             click(listPg.btnEditBtn, 0);
-            if (!browserIsIE()) {
-                expect(getAlertText()).toContain('Edit row');
+            if (browserIsIE()) {
+                acceptAlert();
+                return;
             }
-            acceptAlert();
+            expect(getAlertText()).toContain('Edit row');
         });
     });
 

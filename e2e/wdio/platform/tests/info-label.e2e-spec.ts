@@ -6,7 +6,6 @@ import {
     getAttributeByName,
     getCSSPropertyByName,
     getText,
-    isBrowser,
     waitForElDisplayed
 } from '../../driver/wdio';
 

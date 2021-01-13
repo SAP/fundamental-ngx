@@ -11,12 +11,12 @@ import {
     getValue,
     isElementClickable,
     isEnabled,
-    mouseHoverElement, pause,
+    mouseHoverElement,
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForPresent,
-    waitForElDisplayed, waitForPresent
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
 import inputGroupPContent from '../fixtures/appData/input-group-page-contents';
@@ -148,17 +148,17 @@ describe('Input Group should', function() {
     });
 
     xit('with form input have info tooltip', () => {
-        if (!browserIsIEorSafari()) {
-            waitForElDisplayed(inputGroupPage.withFormInput);
-            scrollIntoView(inputGroupPage.withFormInput);
-            mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
-            expect(getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
+        if (browserIsIEorSafari()) {
+            console.log('Skip for IE and Safari');
             return;
         }
+        waitForElDisplayed(inputGroupPage.withFormInput);
+        scrollIntoView(inputGroupPage.withFormInput);
+        mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
+        expect(getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
     });
 
     it('should check RTL', () => {
         inputGroupPage.checkRtlSwitch();
     });
-
 });

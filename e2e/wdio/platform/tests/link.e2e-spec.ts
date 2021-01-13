@@ -30,19 +30,14 @@ xdescribe('Link component test suite', function() {
     it('should check icon link', () => {
         const iconLinkAltText = getAttributeByName(linkPage.iconLink, 'aria-label');
         mouseHoverElement(linkPage.iconLink);
-        //  const iconLinkHoverState = getCSSPropertyByName(linkPage.iconLink, 'text-decoration');
-
         checkLinkData(linkPage.iconLink);
-        //  checkLinkHover(iconLinkHoverState);
+
         expect(iconLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.iconLink)).toBe(true);
     });
 
     it('should check standard links', () => {
-        //  const linksArray = elementArray(linkPage.standardLinks);
         mouseHoverElement(linkPage.standardLinks);
-        //  const standardLinkHoverState = getCSSPropertyByName(linkPage.standardLinks, 'text-decoration');
-        //  expect(standardLinkHoverState.value).toContain('underline');
 
         const arrL = getElementArrayLength(linkPage.standardLinks);
         for (let i = 0; arrL > i; i++) {
@@ -59,11 +54,10 @@ xdescribe('Link component test suite', function() {
         const emphasizedLinkAltText = getAttributeByName(linkPage.emphasizedLink, 'aria-label');
         scrollIntoView(linkPage.emphasizedLink);
         mouseHoverElement(linkPage.emphasizedLink);
-        //   const emphasizedLinkHoverState = getCSSPropertyByName(linkPage.emphasizedLink, 'text-decoration');
 
         expect(getAttributeByName(linkPage.emphasizedLink, 'class')).toContain('emphasized');
         checkLinkData(linkPage.emphasizedLink);
-        //  checkLinkHover(emphasizedLinkHoverState);
+
         expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.emphasizedLink)).toBe(true);
     });
@@ -72,7 +66,6 @@ xdescribe('Link component test suite', function() {
         const disabledLinkAltText = getAttributeByName(linkPage.disabledLink, 'aria-label');
 
         expect(getAttributeByName(linkPage.disabledLink, 'class')).toContain('disabled');
-        //  checkLinkData(linkPage.disabledLink);
         expect(disabledLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.disabledLink)).toBe(false);
     });
@@ -82,7 +75,6 @@ xdescribe('Link component test suite', function() {
 
         expect(getAttributeByName(linkPage.emphasizedDisabledLink, 'class'))
             .toContain('disabled', 'emphasized');
-        //   checkLinkData(linkPage.emphasizedDisabledLink);
         expect(disabledEmphasizedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.emphasizedDisabledLink)).toBe(false);
     });
@@ -91,11 +83,10 @@ xdescribe('Link component test suite', function() {
         const invertedLinkAltText = getAttributeByName(linkPage.invertedLink, 'aria-label');
         scrollIntoView(linkPage.invertedLink);
         mouseHoverElement(linkPage.invertedLink);
-        //   const invertedLinkHoverState = getCSSPropertyByName(linkPage.invertedLink, 'text-decoration');
 
         expect(getAttributeByName(linkPage.invertedLink, 'class')).toContain('inverted');
         checkLinkData(linkPage.invertedLink);
-        //    checkLinkHover(invertedLinkHoverState);
+
         expect(invertedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.invertedLink)).toBe(true);
     });
@@ -104,11 +95,10 @@ xdescribe('Link component test suite', function() {
         const truncatedLinkAltText = getAttributeByName(linkPage.truncatedLink, 'aria-label');
         scrollIntoView(linkPage.truncatedLink);
         mouseHoverElement(linkPage.truncatedLink);
-        //   const truncatedLinkHoverState = getCSSPropertyByName(linkPage.truncatedLink, 'text-decoration');
 
         expect(getAttributeByName(linkPage.truncatedLink, 'class')).toContain('truncate');
         checkLinkData(linkPage.truncatedLink);
-        //   checkLinkHover(truncatedLinkHoverState);
+
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
         expect(isElementClickable(linkPage.truncatedLink)).toBe(true);
     });

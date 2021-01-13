@@ -8,7 +8,6 @@ import {
     executeScriptBeforeTagAttr, focusElement, getAttributeByName, getCSSPropertyByName,
     getElementArrayLength, getText, mouseHoverElement,
     refreshPage, scrollIntoView,
-    webDriver
 } from '../../driver/wdio';
 
 xdescribe('Checkbox group test suite', () => {

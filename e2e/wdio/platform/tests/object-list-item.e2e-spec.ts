@@ -58,6 +58,7 @@ describe('Object list item suite:', function() {
             elementDisplayed(objListPg.objListSelAttributes, 2);
             elementDisplayed(objListPg.objListSelStatuses, 2);
         });
+
         it('should check selection', () => {
             expect(getText(objListPg.objSelToolbar)).toBe('0 : Items selected');
             click(objListPg.objListSelItem, 0);

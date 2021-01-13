@@ -6,7 +6,6 @@ import {
     getElementSize,
     getText,
     pause,
-    waitForPresent,
     waitForClickable,
     waitForElDisplayed,
     waitForNotDisplayed,

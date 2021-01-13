@@ -106,6 +106,7 @@ export function getTextArr(selector: string, sliceStart?: number, sliceEnd?: num
 }
 
 export function waitForElDisplayed(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
+    waitForPresent(selector, index);
     return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
 }
 
@@ -172,7 +173,8 @@ export function clearValue(selector: string, index: number = 0, waitTime = defau
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     $$(selector)[index].clearValue();
 }
-export function getElementSize(selector: string, index?: number):  WebdriverIO.SizeReturn;
+
+export function getElementSize(selector: string, index?: number): WebdriverIO.SizeReturn;
 export function getElementSize(selector: string, index: number, prop: 'width' | 'height'): number;
 export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number | WebdriverIO.SizeReturn {
     return prop ? $$(selector)[index].getSize() : $$(selector)[index].getSize(prop);
@@ -260,14 +262,14 @@ export function mouseButtonUp(button: 0 | 1 | 2 = 0): void {
     browser.buttonUp(button);
 }
 
-export function  clickNextElement(selector: string, index: number = 0): void {
+export function clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
 }
 
-export function getElementLocation(selector: string, index?: number):  WebdriverIO.LocationReturn;
+export function getElementLocation(selector: string, index?: number): WebdriverIO.LocationReturn;
 export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
 export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
-    return prop ? $$(selector)[index].getLocation(prop) : $$(selector)[index].getLocation();
+    return $$(selector)[index].getLocation(prop || void 0);
 }
 
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {

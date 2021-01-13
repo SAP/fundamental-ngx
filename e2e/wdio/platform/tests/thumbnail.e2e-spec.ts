@@ -36,13 +36,11 @@ describe('Thumbnail field', function() {
     it('should be able to display images vertical', () => {
         scrollIntoView(thumbnailPage.verticalGalleryImages);
         const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
-        for (let i = 0; arrLength > i; i++) {
-            if (i !== arrLength - 1) {
-                expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).x)
-                    .toEqual(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).x);
-                expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).y)
-                    .toBeLessThan(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).y);
-            }
+        for (let i = 0; arrLength - 1 > i; i++) {
+            expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).x)
+                .toEqual(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).x);
+            expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).y)
+                .toBeLessThan(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).y);
         }
     });
 
