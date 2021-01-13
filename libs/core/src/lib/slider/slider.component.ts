@@ -123,10 +123,6 @@ export class SliderComponent
     @Input()
     disabled = false;
 
-    /** Whether the control is readonly . */
-    @Input()
-    readonly = false;
-
     /** Control value */
     @Input()
     get value(): number | number[] {
@@ -410,6 +406,7 @@ export class SliderComponent
 
     /** @hidden */
     _hidePopovers(): void {
+        console.log(11111);
         const elementsToCheck = [
             this.handle?.nativeElement,
             this.rangeHandle1?.nativeElement,
@@ -420,6 +417,7 @@ export class SliderComponent
         if (handleFocused || popoverInputFocused) {
             const unsubscribeFromBlur = this._renderer.listen(document.activeElement, 'focusout', () => {
                 setTimeout(() => {
+                    console.log(2222222);
                     unsubscribeFromBlur();
                     this._hidePopovers();
                 });
