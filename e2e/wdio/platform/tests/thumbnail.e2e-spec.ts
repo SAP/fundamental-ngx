@@ -3,12 +3,12 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getElementLocation,
-    getPerrentElementCSSPropetry,
+    getParentElementCSSProperty,
     isElementDisplayed,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitElementToBePresentInDOM,
+    waitForPresent,
     waitForElDisplayed
 } from '../../driver/wdio';
 import { ThumbnailPo } from '../pages/thumbnail.po';
@@ -22,10 +22,11 @@ describe('Thumbnail field', function() {
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(thumbnailPage.mainImage);
     });
 
     it('should be able to view all thumbnail images', () => {
-        waitElementToBePresentInDOM(thumbnailPage.mainImage);
+        waitForPresent(thumbnailPage.mainImage);
         waitForElDisplayed(thumbnailPage.mainImage);
         expect(isElementDisplayed(thumbnailPage.mainImage)).toBeTrue();
         expect(isElementDisplayed(thumbnailPage.mainImage, 1)).toBeTrue();
@@ -97,19 +98,19 @@ describe('Thumbnail field', function() {
         for (let i = 0; arrLength > i; i++) {
             scrollIntoView(thumbnailPage.verticalGalleryImages, i);
             mouseHoverElement(thumbnailPage.verticalGalleryImages, i);
-            expect(getPerrentElementCSSPropetry(thumbnailPage.verticalGalleryImages, 'border-bottom-color', i)).toContain('8,84,160');
+            expect(getParentElementCSSProperty(thumbnailPage.verticalGalleryImages, 'border-bottom-color', i)).toContain('8,84,160');
         }
 
         for (let i = 0; arrLength > i; i++) {
             scrollIntoView(thumbnailPage.horizontalGalleryImages, i);
             mouseHoverElement(thumbnailPage.horizontalGalleryImages, i);
-            expect(getPerrentElementCSSPropetry(thumbnailPage.horizontalGalleryImages, 'border-bottom-color', i)).toContain('8,92,175');
+            expect(getParentElementCSSProperty(thumbnailPage.horizontalGalleryImages, 'border-bottom-color', i)).toContain('8,92,175');
         }
 
         for (let i = 0; arrLength > i; i++) {
             scrollIntoView(thumbnailPage.verticalGalleryVideo, i);
             mouseHoverElement(thumbnailPage.verticalGalleryVideo, i);
-            expect(getPerrentElementCSSPropetry(thumbnailPage.verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
+            expect(getParentElementCSSProperty(thumbnailPage.verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
         }
 
     });

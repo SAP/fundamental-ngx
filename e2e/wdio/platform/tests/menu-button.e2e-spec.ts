@@ -11,7 +11,7 @@ import {
     getText,
     isElementDisplayed,
     refreshPage, scrollIntoView,
-    waitElementToBePresentInDOM,
+    waitForPresent,
     waitForElDisplayed
 } from '../../driver/wdio';
 
@@ -72,7 +72,7 @@ describe('Menu button test suite', function() {
         it('should check closing menu when clicking outside of menu', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
             if (!browserIsIE()) {
-                waitElementToBePresentInDOM(menuBtnPage.cozyBtnArr);
+                waitForPresent(menuBtnPage.cozyBtnArr);
                 click(menuBtnPage.cozyBtnArr);
                 waitForElDisplayed(menuBtnPage.menuItemOverlay);
                 expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);

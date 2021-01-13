@@ -220,10 +220,6 @@ export function clickAndHold(selector: string, index: number = 0, waitTime: numb
     return browser.buttonDown();
 }
 
-export function waitElementToBePresentInDOM(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    return $$(selector)[index].waitForExist({ timeout: waitTime });
-}
-
 export function scrollIntoView(selector: string, index: number = 0): void {
     $$(selector)[index].scrollIntoView();
 }
@@ -274,6 +270,6 @@ export function getElementLocation(selector: string, index: number = 0, prop?: '
     return prop ? $$(selector)[index].getLocation(prop) : $$(selector)[index].getLocation();
 }
 
-export function getPerrentElementCSSPropetry(selector: string, prop: string, index: number): string {
+export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
 }

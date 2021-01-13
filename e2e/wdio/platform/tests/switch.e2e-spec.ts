@@ -13,7 +13,7 @@ import {
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitElementToBePresentInDOM,
+    waitForPresent,
     waitForElDisplayed
 } from '../../driver/wdio';
 
@@ -31,7 +31,7 @@ describe('Verify Switch component', function() {
     describe('has default and compact switch and', function() {
         it('should default change something to active or inactive', () => {
             // capture before state
-            waitElementToBePresentInDOM(switchPage.defaultSwitch);
+            waitForPresent(switchPage.defaultSwitch);
             const isCheckedBefore = getAttributeByName(switchPage.defaultSwitch, 'aria-checked');
             const handelColorBefore = getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
             click(switchPage.defaultSwitchHandel);
@@ -90,9 +90,9 @@ describe('Verify Switch component', function() {
         });
 
         it('compact switch should be smaller than default', () => {
-            waitElementToBePresentInDOM(switchPage.defaultSwitchSize);
+            waitForPresent(switchPage.defaultSwitchSize);
             waitForElDisplayed(switchPage.defaultSwitchSize);
-            waitElementToBePresentInDOM(switchPage.defaultCompactSwitchSize);
+            waitForPresent(switchPage.defaultCompactSwitchSize);
             waitForElDisplayed(switchPage.defaultCompactSwitchSize);
             const defaultSwitchSize = getElementSize(switchPage.defaultSwitchSize);
             const defaultCompactSwitchSize = getElementSize(switchPage.defaultCompactSwitchSize);
@@ -112,7 +112,7 @@ describe('Verify Switch component', function() {
         it('should not be able to interact with disabled form switch', () => {
             // TODO: Investigate problem with disabled switch in Safari
             if (!browserIsIEorSafari()) {
-                waitElementToBePresentInDOM(switchPage.formDisabledSwitch);
+                waitForPresent(switchPage.formDisabledSwitch);
                 scrollIntoView(switchPage.formDisabledSwitch);
                 const isClickable = isElementClickable(switchPage.formDisabledSwitch);
                 expect(isClickable).toBe(false);
@@ -122,7 +122,7 @@ describe('Verify Switch component', function() {
         });
 
         it('should not change state on hover', () => {
-            waitElementToBePresentInDOM(switchPage.disabledSwitchHandel);
+            waitForPresent(switchPage.disabledSwitchHandel);
             const handelColorBefore = getCSSPropertyByName(switchPage.disabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (!browserIsSafari()) {
@@ -152,7 +152,7 @@ describe('Verify Switch component', function() {
 
 
     it('should have alternative title or aria-label for all switches', () => {
-        waitElementToBePresentInDOM(switchPage.defaultSwitch);
+        waitForPresent(switchPage.defaultSwitch);
         const alternativeTextDefaultSwitch = getAttributeByName(switchPage.defaultSwitch, 'aria-label');
         const alternativeTextDefaultCompactSwitch = getAttributeByName(switchPage.defaultCompactSwitch, 'aria-label');
         const alternativeTextDisabledSwitch = getAttributeByName(switchPage.disabledSwitch, 'aria-label');

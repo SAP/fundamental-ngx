@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitElementToBePresentInDOM, waitForElDisplayed } from '../../driver/wdio';
+import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
 
 export class ThumbnailPo extends BaseComponentPo {
 
@@ -13,7 +13,7 @@ export class ThumbnailPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitElementToBePresentInDOM(this.root, 30000);
-        waitForElDisplayed(this.root, 30000);
+        waitForPresent(this.mainImage, 30000);
+        waitForElDisplayed(this.mainImage, 30000);
     }
 }

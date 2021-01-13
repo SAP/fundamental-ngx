@@ -14,7 +14,7 @@ import {
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitElementToBePresentInDOM,
+    waitForPresent,
     waitForElDisplayed
 } from '../../driver/wdio';
 
@@ -118,7 +118,7 @@ describe('Checkbox test suite', () => {
         it('should check disabled checkbox', () => {
             // TODO: Fix for Safari and IE
             if (!browserIsIEorSafari()) {
-                waitElementToBePresentInDOM(disabledCheckboxWithoutForm);
+                waitForPresent(disabledCheckboxWithoutForm);
                 scrollIntoView(disabledCheckboxWithoutForm);
                 waitForElDisplayed(disabledCheckboxWithoutForm);
                 checkIfDisabled(disabledCheckboxWithoutForm, 'ng-reflect-is-disabled', 'true');

@@ -15,7 +15,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    waitElementToBePresentInDOM,
+    waitForPresent,
     waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
@@ -108,7 +108,7 @@ describe('Input Group should', function() {
     });
 
     it('check have disabled attr assigned', () => {
-        waitElementToBePresentInDOM(inputGroupPage.disabledInput);
+        waitForPresent(inputGroupPage.disabledInput);
         waitForElDisplayed(inputGroupPage.disabledInput);
 
         expect(getAttributeByName(inputGroupPage.disabledInput, 'ng-reflect-is-disabled')).toBe('true');
