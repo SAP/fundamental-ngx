@@ -1,9 +1,7 @@
 import {
     Component,
     ContentChildren,
-    HostListener,
     Input,
-    OnInit,
     QueryList,
     ViewEncapsulation,
     ContentChild,
@@ -50,15 +48,30 @@ import { ProductSwitchComponent } from '../../product-switch/product-switch/prod
 })
 export class ShellbarActionsComponent {
 
-    /** The user data. */
+    /**
+     * @deprecated
+     * Deprecated since the Shellbar user menu is deprecated.
+     * User actions menu component should be used instead.
+     * The user data.
+     */
     @Input()
     user: ShellbarUser;
 
-    /** The user menu data. */
+    /**
+     * @deprecated
+     * Deprecated since the Shellbar user menu is deprecated.
+     * User actions menu component should be used instead.
+     * The user menu data.
+     */
     @Input()
     userMenu: ShellbarMenuItem[];
 
-    /** When set to true, popover list will be closed after selecting the option */
+    /**
+     * @deprecated
+     * Deprecated since the Shellbar user menu is deprecated.
+     * User actions menu component should be used instead.
+     * When set to true, popover list will be closed after selecting the option.
+     */
     @Input()
     closePopoverOnSelect = false;
 

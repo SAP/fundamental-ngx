@@ -13,4 +13,7 @@ export interface ShellbarUser {
      * please visit: https://sap.github.io/fundamental-styles/components/identifier.html
      */
     colorAccent?: number;
+
+    /** User Role */
+    role?: string;
 }

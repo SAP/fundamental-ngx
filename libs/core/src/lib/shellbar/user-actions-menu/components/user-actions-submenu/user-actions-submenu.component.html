@@ -1,0 +1,9 @@
+<ng-template>
+    <fd-user-actions-menu-header *ngIf="!_header"></fd-user-actions-menu-header>
+    <ng-content select="fd-user-actions-menu-header"></ng-content>
+    <div class="fd-user-menu__body" [class.fd-user-menu__body--compact]="_compact">
+        <ng-content></ng-content>
+    </div>
+
+    <ng-content select="fd-user-actions-menu-footer"></ng-content>
+</ng-template>

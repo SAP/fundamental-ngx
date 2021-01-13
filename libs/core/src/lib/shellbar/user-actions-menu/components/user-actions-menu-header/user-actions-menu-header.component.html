@@ -1,0 +1,58 @@
+<ng-container *ngIf="_isSubmenu; else mainHeader">
+    <div fd-popover-body-header>
+        <div fd-bar barDesign="header-with-subheader" [cozy]="!_compact">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <button
+                        fd-button
+                        [compact]="_compact"
+                        fdType="transparent"
+                        glyph="slim-arrow-left"
+                        i18n-aria-label="@@coreUserActionsMenu.Header.BackButton.AriaLabel"
+                        aria-label="Back button"
+                        i18n-title="@@coreUserActionsMenu.Header.BackButton.Title"
+                        title="Back"
+                        (click)="_backToParentLevel()"
+                    ></button>
+                </fd-bar-element>
+
+                <fd-bar-element [innerText]="title"></fd-bar-element>
+            </div>
+        </div>
+
+        <div fd-bar barDesign="subheader" [cozy]="!_compact" style="height: auto;">
+            <ng-container [ngTemplateOutlet]="content"></ng-container>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #mainHeader>
+    <ng-container *ngIf="showMainHeader">
+        <div class="fd-user-menu__header">
+            <ng-content select="[fd-user-actions-menu-header-addon-left]"></ng-content>
+
+            <fd-avatar
+                class="fd-user-menu__avatar"
+                size="xl"
+                [colorAccent]="user.colorAccent"
+                [circle]="true"
+                [label]="user.image ? '' : user.fullName"
+                [image]="user.image"
+            >
+            </fd-avatar>
+
+            <ng-content select="[fd-user-actions-menu-header-addon-right]"></ng-content>
+        </div>
+
+        <div class="fd-user-menu__subheader">
+            <div class="fd-user-menu__user-name" [innerText]="user.fullName"></div>
+            <div class="fd-user-menu__user-role" *ngIf="user.role" [innerText]="user.role"></div>
+        </div>
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="content"></ng-container>
+</ng-template>
+
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>

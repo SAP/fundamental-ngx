@@ -1,6 +1,4 @@
-<fd-docs-section-title [id]="'basic'" [componentName]="'shellbar'">
-    Basic
-</fd-docs-section-title>
+<fd-docs-section-title id="basic" componentName="shellbar"> Basic </fd-docs-section-title>
 <description>
     This example shows the minimum shellbar for a single application product with only user settings. If no user
     thumbnail is available then display initials.
@@ -12,15 +10,17 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'linksCollapseProductSwitcher'" [componentName]="'shellbar'">
+<fd-docs-section-title id="linksCollapseProductSwitcher" componentName="shellbar">
     Links with collapsible menu and product switcher.
 </fd-docs-section-title>
 <description>
     The shellbar can have 4 different sizes <code>'s' | 'm' | 'l' | 'xl'</code>, where <code>"m"</code> is default one.
-    <br>
-    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens
-    (<code>s</code> size). All actions, except for the user menu, should be collapsed.
-    <br>
+    <br />
+    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens (<code
+        >s</code
+    >
+    size). All actions, except for the user menu, should be collapsed.
+    <br />
     <code>ProductSwitchComponent</code> and <code>ProductMenuComponent</code> have properties straight from popover
     component, so some customisation can be added, by passing inputs ex. <code>[position]="'bottom-end'"</code>.
 </description>
@@ -31,12 +31,15 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'shellbarSideNav'" [componentName]="'shellbar'">
+<fd-docs-section-title id="shellbarSideNav" componentName="shellbar">
     Shellbar with SideNavigation
 </fd-docs-section-title>
 <description>
-    When Shellbar is used together with Vertical Navigation (aka Side Navigation) set the 
-    <code>sideNav</code> property to <b>true</b>. This will remove the responsive paddings applied on different screen sizes and will align vertically the control button with the items in the Side Navigation. The control button, situated on the far left hand-side of the Shellbar, is responsible for switching the modes of the Side Navigation (expanded, condensed and off-screen) and requires the <code>fd-shellbar-side-nav</code> directive.
+    When Shellbar is used together with Vertical Navigation (aka Side Navigation) set the
+    <code>sideNav</code> property to <b>true</b>. This will remove the responsive paddings applied on different screen
+    sizes and will align vertically the control button with the items in the Side Navigation. The control button,
+    situated on the far left hand-side of the Shellbar, is responsible for switching the modes of the Side Navigation
+    (expanded, condensed and off-screen) and requires the <code>fd-shellbar-side-nav</code> directive.
 </description>
 <component-example>
     <fd-shellbar-side-nav-example></fd-shellbar-side-nav-example>
@@ -45,20 +48,101 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'howItWorks'" [componentName]="'shellbar'">
-    How it works
+<fd-docs-section-title id="user-actions-menu" componentName="shellbar"> User actions menu </fd-docs-section-title>
+<description>
+    This example shows the user actions menu in shellbar. If no user thumbnail is available then display initials.
+</description>
+<component-example>
+    <fd-shellbar-user-actions-menu-example></fd-shellbar-user-actions-menu-example>
+</component-example>
+<code-example [exampleFiles]="shellbarUserActionsMenuExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="user-actions-menu-header" componentName="shellbar">
+    User actions menu with header
 </fd-docs-section-title>
 <description>
+    By default, the header is displayed even it not defined in the HTML.<br />
+    To extend existing use <code>fd-user-actions-menu-header</code> component.
+</description>
+<component-example>
+    <fd-shellbar-user-actions-menu-header-example></fd-shellbar-user-actions-menu-header-example>
+</component-example>
+<code-example [exampleFiles]="shellbarUserActionsMenuHeaderExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="user-actions-menu-without-header" componentName="shellbar">
+    User actions menu without header
+</fd-docs-section-title>
+<description>
+    To hide default header content use <code>fd-user-actions-menu-header</code> component with
+    <code>[showMainHeader]="false"</code>.<br />
+    To redefine existing header content use <code>fd-user-actions-menu-header</code> component with
+    <code>[showMainHeader]="false"</code> and paste new content to the <code>fd-user-actions-menu-header</code>.
+</description>
+<component-example>
+    <fd-shellbar-user-actions-menu-without-header-example></fd-shellbar-user-actions-menu-without-header-example>
+</component-example>
+<code-example [exampleFiles]="shellbarUserActionsMenuWithoutHeaderExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="user-actions-menu-header-with-addons" componentName="shellbar">
+    User actions menu header with addons
+</fd-docs-section-title>
+<description>
+    To define addons use <code>[fd-user-actions-menu-header-addon-left]</code> or
+    <code>[fd-user-actions-menu-header-addon-right]</code> directives.
+</description>
+<component-example>
+    <fd-shellbar-user-actions-menu-header-with-addons-example></fd-shellbar-user-actions-menu-header-with-addons-example>
+</component-example>
+<code-example [exampleFiles]="shellbarUserActionsMenuHeaderWithAddonsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="user-actions-menu-header-footer" componentName="shellbar">
+    User actions menu with footer
+</fd-docs-section-title>
+<description> To define footer use <code>fd-user-actions-menu-footer</code> component. </description>
+<component-example>
+    <fd-shellbar-user-actions-menu-footer-example></fd-shellbar-user-actions-menu-footer-example>
+</component-example>
+<code-example [exampleFiles]="shellbarUserActionsMenuFooterExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="user-actions-menu-submenu" componentName="shellbar">
+    User actions menu item with submenu
+</fd-docs-section-title>
+<description>
+    To define item submenu use <code>[fd-user-actions-menu-item]</code> directive with <code>submenu</code> input.
+</description>
+<component-example>
+    <fd-shellbar-user-actions-menu-submenu-example></fd-shellbar-user-actions-menu-submenu-example>
+</component-example>
+<code-example [exampleFiles]="shellbarUserActionsMenuSubmenuExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="user-actions-menu-compact" componentName="shellbar">
+    User actions menu compact mode
+</fd-docs-section-title>
+<component-example>
+    <fd-shellbar-user-actions-menu-compact-example></fd-shellbar-user-actions-menu-compact-example>
+</component-example>
+<code-example [exampleFiles]="shellbarUserActionsMenuCompactExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="howItWorks" componentName="shellbar"> How it works </fd-docs-section-title>
+<description>
     <ul>
-        <li>
-            The shellbar should be placed inside the shell layout container.
-        </li>
-        <li>
-            The shellbar is fluid and responsive by default with proper margins and padding built in.
-        </li>
-        <li>
-            The shellbar actions are duplicated into the overflow menu on mobile screens.
-        </li>
+        <li>The shellbar should be placed inside the shell layout container.</li>
+        <li>The shellbar is fluid and responsive by default with proper margins and padding built in.</li>
+        <li>The shellbar actions are duplicated into the overflow menu on mobile screens.</li>
         <li>
             Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component. The user, user
             menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component. Data

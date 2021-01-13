@@ -1,0 +1,58 @@
+<fd-shellbar>
+    <fd-shellbar-logo>
+        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+    </fd-shellbar-logo>
+    <fd-shellbar-actions>
+        <fd-user-actions-menu [user]="user">
+            <ul fd-list [noBorder]="true" navigationIndicator="true">
+                <li fd-list-item fd-user-actions-menu-item>
+                    <a fd-list-link>
+                        <i fd-list-icon glyph="border"></i>
+                        <span fd-list-title>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry
+                        </span>
+                    </a>
+                </li>
+                <li fd-list-item fd-user-actions-menu-item>
+                    <a fd-list-link [routerLink]="['/']">
+                        <i fd-list-icon glyph="chain-link"></i>
+                        <span fd-list-title> Router link </span>
+                    </a>
+                </li>
+                <li fd-list-item fd-user-actions-menu-item>
+                    <a fd-list-link (click)="clickUserAction($event)">
+                        <i fd-list-icon glyph="example"></i>
+                        <span fd-list-title> Example click </span>
+                    </a>
+                </li>
+                <li fd-list-item fd-user-actions-menu-item [dialogContent]="aboutTemplate">
+                    <a fd-list-link>
+                        <i fd-list-icon glyph="hint"></i>
+                        <span fd-list-title> About </span>
+                    </a>
+                </li>
+
+                <li fd-list-item fd-user-actions-menu-item *ngFor="let item of userMenuListItems">
+                    <a fd-list-link (click)="item.callback && item.callback()">
+                        <i fd-list-icon [glyph]="item.glyph"></i>
+                        <span fd-list-title> {{ item.text }} </span>
+                    </a>
+                </li>
+            </ul>
+        </fd-user-actions-menu>
+    </fd-shellbar-actions>
+</fd-shellbar>
+
+<!-- Example dialog for user actions menu -->
+<ng-template let-dialog let-dialogConfig="dialogConfig" #aboutTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title>About</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body> About dialog for user actions menu </fd-dialog-body>
+        <fd-dialog-footer>
+            <fd-button-bar fdType="transparent" label="OK" (click)="dialog.close()"> </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

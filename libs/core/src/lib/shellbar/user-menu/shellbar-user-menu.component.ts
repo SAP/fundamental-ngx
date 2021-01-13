@@ -6,6 +6,10 @@ import { Placement } from '../../popover/popover-position/popover-position';
 import { PopoverFillMode } from '../../popover/popover-position/popover-position';
 
 /**
+ * @deprecated
+ * Shellbar User Menu component is deprecated
+ * User actions menu component should be used instead.
+ *
  * This Component extends popover component and passes all of the options and events from outside to popover component
  * and Vice Versa
  * */

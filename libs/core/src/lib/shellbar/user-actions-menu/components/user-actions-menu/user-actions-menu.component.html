@@ -1,0 +1,42 @@
+<fd-popover
+    #menu
+    [(isOpen)]="isOpen"
+    [disabled]="disabled"
+    [triggers]="[]"
+    [placement]="placement"
+    [closeOnEscapeKey]="closeOnEscapeKey"
+    [noArrow]="false"
+    [focusAutoCapture]="true"
+    [additionalBodyClass]="additionalBodyClass"
+    [closeOnOutsideClick]="closeOnOutsideClick"
+    (isOpenChange)="isOpenChangeEvent($event)"
+>
+    <fd-popover-control>
+        <fd-avatar
+            class="fd-user-menu__popover-control"
+            (click)="_toggle()"
+            size="xs"
+            [colorAccent]="user.colorAccent"
+            [circle]="true"
+            [label]="user.image ? '' : user.fullName"
+            [image]="user.image"
+        >
+        </fd-avatar>
+    </fd-popover-control>
+    <fd-popover-body class="fd-user-menu" [style.width.px]="width">
+        <ng-container
+            *ngIf="activeSubmenu; else content"
+            [ngTemplateOutlet]="activeSubmenu._templateRef"
+        ></ng-container>
+    </fd-popover-body>
+</fd-popover>
+
+<ng-template #content>
+    <div class="fd-user-menu__body" [class.fd-user-menu__body--compact]="compact">
+        <fd-user-actions-menu-header *ngIf="!_header" [showMainHeader]="true"></fd-user-actions-menu-header>
+        <ng-content select="fd-user-actions-menu-header"></ng-content>
+        <ng-content></ng-content>
+    </div>
+
+    <ng-content select="fd-user-actions-menu-footer"></ng-content>
+</ng-template>
