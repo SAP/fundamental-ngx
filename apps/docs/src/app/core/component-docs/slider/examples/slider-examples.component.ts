@@ -61,7 +61,6 @@ export class SliderPlaygroundExampleComponent {
     showTicksLabels = true;
     range = false;
     disabled = false;
-    readonly = false;
 
     customLabels = [
         { value: 0, label: '0' },

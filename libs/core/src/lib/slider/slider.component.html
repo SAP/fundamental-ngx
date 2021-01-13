@@ -1,4 +1,4 @@
-<div class="fd-slider">
+<div class="fd-slider" [class.is-disabled]="disabled">
     <div class="fd-slider__inner" (mouseenter)="_showPopovers()" (mouseleave)="_hidePopovers()">
         <div class="fd-slider__track" (click)="onTrackClick($event)" #track>
             <ng-container *ngIf="!_isRange">
@@ -77,11 +77,11 @@
                     <ng-container *ngFor="let tick of _tickMarks; let first = first; let last = last;">
                         <div
                             class="fd-slider__tick"
-                            [style.left.%]="!_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
-                            [style.right.%]="_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
+                            [style.left.%]="!_isRtl ? (tick.value / (max - min)) * 100 : null"
+                            [style.right.%]="_isRtl ? (tick.value / (max - min)) * 100 : null"
                             [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
-                            (_isRange ? (tick.value >= this.value[0] && tick.value <= this.value[1]) : tick.value <= value)
+                            (_isRange ? (tick.value >= value[0] && tick.value <= value[1]) : tick.value <= value)
                         "
                         ></div>
                     </ng-container>
@@ -92,8 +92,8 @@
                 <div
                     *ngFor="let tick of _tickMarks; let i = index"
                     class="fd-slider__label"
-                    [style.left.%]="!_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
-                    [style.right.%]="_isRtl ? (tick.value / (this.max - this.min)) * 100 : null"
+                    [style.left.%]="!_isRtl ? (tick.value / (max - min)) * 100 : null"
+                    [style.right.%]="_isRtl ? (tick.value / (max - min)) * 100 : null"
                 >{{ tick.label }}
                 </div>
             </div>
@@ -114,13 +114,14 @@
 </ng-template>
 
 <ng-template #popoverInner let-target="target">
-    <div class="slider-tooltip-wrapper" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
-        <div *ngIf="tooltipMode === 'readonly'" class="slider-tooltip">{{ _popoverValueRef[target] }}</div>
+    <div class="fd-slider--tooltip-wrapper" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        <div *ngIf="tooltipMode === 'readonly'" class="fd-slider--tooltip">{{ _popoverValueRef[target] }}</div>
         <input
             #popoverInputField
             tabindex="-1"
             type="text"
-            class="fd-input slider-tooltip {{ _popoverInputFieldClass }}"
+            [disabled]="disabled"
+            class="fd-input fd-slider--tooltip {{ _popoverInputFieldClass }}"
             *ngIf="tooltipMode === 'editable'"
             [(ngModel)]="_popoverValueRef[target]"
             (blur)="_updateValueFromInput(popoverInputField.value, target)"
