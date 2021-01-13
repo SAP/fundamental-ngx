@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { findWithin, getText, waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class SearchPo extends BaseComponentPo {
 
@@ -9,14 +9,8 @@ export class SearchPo extends BaseComponentPo {
     searchFields = '[type="search"]';
     searchIcons = '[title="Submit"]';
     clearSearchIcon = '.fdp-search-field__clear';
-
-    searchResults = '.result-block';
-    resultField = '.result-field';
     searchCategoryBtn = '.fdp-search-field__category-button';
-
-
     autosuggestionItems = '[role="menu"] [role="menuitem"]';
-
     cozySearchResult = 'fdp-platform-search-field-basic-example .result-block:nth-child(3) span';
     compactSearchResult = 'fdp-platform-search-field-basic-example .result-block:nth-child(6) span';
     cozyWithCategoriesSearch = 'fdp-platform-search-field-categories-example .result-block:nth-child(3) span';
