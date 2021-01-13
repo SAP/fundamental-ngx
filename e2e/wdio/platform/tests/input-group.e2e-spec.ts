@@ -28,12 +28,12 @@ describe('Input Group should', function() {
     beforeAll(() => {
         inputGroupPage.open();
         waitForPresent(inputGroupPage.leftAlignedTextInput);
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
         waitForPresent(inputGroupPage.leftAlignedTextInput);
-    });
+    }, 1);
 
     it('have associated label element to describe its purpose', () => {
         expect(getTextArr(inputGroupPage.standartInputLabelsArr)).toEqual(inputGroupPContent.standardInputLabels);

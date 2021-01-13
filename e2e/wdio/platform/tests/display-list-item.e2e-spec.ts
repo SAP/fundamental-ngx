@@ -1,5 +1,5 @@
 import { DisplayListItemPo } from '../pages/display-list-item.po';
-import { click, getAttributeByName, getCurrentUrl, refreshPage } from '../../driver/wdio';
+import { click, getAttributeByName, getCurrentUrl, refreshPage, waitForPresent } from '../../driver/wdio';
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import DisplayListData from '../fixtures/appData/display-list-item-contents';
 
@@ -8,11 +8,12 @@ describe('Display List Item test suite:', function() {
 
     beforeAll(() => {
         displayListPg.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(displayListPg.displayLinks);
+    }, 1);
 
     describe('Display List Item - cozy and comfy examples:', function() {
         it('should do basic checks', () => {

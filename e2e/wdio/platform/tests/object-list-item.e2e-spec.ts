@@ -7,7 +7,7 @@ import {
     getCurrentUrl,
     getElementArrayLength,
     getText,
-    refreshPage
+    refreshPage, waitForPresent
 } from '../../driver/wdio';
 import { ObjectListItemPo } from '../pages/object-list-item.po';
 import { checkElArrIsClickable, checkElementDisplayed, checkElementText } from '../../helper/assertion-helper';
@@ -18,11 +18,12 @@ describe('Object list item suite:', function() {
 
     beforeAll(() => {
         objListPg.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(objListPg.allObjsList);
+    }, 1);
 
     describe('Basic checks:', function() {
         it('should check basic interactions and content', () => {
@@ -58,6 +59,7 @@ describe('Object list item suite:', function() {
             elementDisplayed(objListPg.objListSelAttributes, 2);
             elementDisplayed(objListPg.objListSelStatuses, 2);
         });
+
         it('should check selection', () => {
             expect(getText(objListPg.objSelToolbar)).toBe('0 : Items selected');
             click(objListPg.objListSelItem, 0);
@@ -110,7 +112,7 @@ describe('Object list item suite:', function() {
 
     describe('check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            objListPg.checkRtlSwitch(objListPg.rtlSwitcherArr, objListPg.exampleAreaContainersArr);
+            objListPg.checkRtlSwitch();
         });
     });
 });

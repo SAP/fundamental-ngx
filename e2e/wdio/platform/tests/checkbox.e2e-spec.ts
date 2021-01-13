@@ -15,7 +15,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitElementToBePresentInDOM,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 describe('Checkbox test suite', () => {
@@ -40,11 +40,12 @@ describe('Checkbox test suite', () => {
     const checkboxPage = new CheckboxPO();
     beforeAll(() => {
         checkboxPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(checkboxPage.binaryTempCheckbox);
+    }, 1);
 
     describe('check binary checkbox used with form examples', () => {
         // TODO: Unskip after fix

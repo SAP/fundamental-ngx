@@ -1,4 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
+import { waitForPresent } from '../../driver/wdio';
 
 export class CheckboxPO extends BaseComponentPo {
     url = '/checkbox';
@@ -27,6 +28,7 @@ export class CheckboxPO extends BaseComponentPo {
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
      open(): void {
-         super.open(this.url)
+         super.open(this.url);
+         waitForPresent(this.binaryTempCheckbox);
     }
 }

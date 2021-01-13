@@ -13,7 +13,7 @@ describe('Standard List Item test suite:', function() {
 
     beforeAll(() => {
         standardListPg.open();
-    });
+    }, 1);
 
     describe('Standard List Item - Border Less examples:', function() {
         it('should check border and interactions', () => {
@@ -176,7 +176,7 @@ describe('Standard List Item test suite:', function() {
 
     describe('Check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            standardListPg.checkRtlSwitch(standardListPg.rtlSwitcherArr, standardListPg.exampleAreaContainersArr);
+            standardListPg.checkRtlSwitch();
         });
     });
 });

@@ -1,6 +1,6 @@
 import { BaseComponentPo } from './base-component.po';
 import SMBData from '../fixtures/appData/split-menu-button-page-contents';
-import { getText, waitForElDisplayed } from '../../driver/wdio';
+import { getText, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SplitMenuButtonPo extends BaseComponentPo {
     private url = '/split-menu-button';
@@ -35,5 +35,6 @@ export class SplitMenuButtonPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.arrowBtnArr);
     }
 }

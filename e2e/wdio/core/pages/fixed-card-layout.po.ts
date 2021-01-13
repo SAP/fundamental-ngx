@@ -1,9 +1,10 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FixedCardLayoutPo extends CoreBaseComponentPo {
     private url = '/fixed-card-layout';
     root = '#page-content';
+    pageHeader = 'fd-fixed-card-layout-docs-header h1';
 
     hideCardBtnArr = 'fd-fixed-card-layout-examples button';
     cardDivArr = 'div.cdk-drag.fd-fixed-card-group--card.ng-star-inserted';
@@ -17,11 +18,9 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     disabledCardContent = 'fd-fixed-card-layout-disabled-drag fd-card fd-card-content';
     disabledCardDiv = 'fd-fixed-card-layout-disabled-drag div.cdk-drag.fd-fixed-card-group--card.ng-star-inserted';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.pageHeader);
     }
 }

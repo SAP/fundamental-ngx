@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class DisplayListItemPo extends BaseComponentPo {
     private url = '/display-list-item';
@@ -21,5 +21,6 @@ export class DisplayListItemPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.displayLinks);
     }
 }

@@ -30,7 +30,7 @@ describe('List test suite:', function() {
 
     beforeAll(() => {
         listPg.open();
-    });
+    }, 1);
 
     describe('Borderless examples:', function() {
         it('should do basic checks', () => {
