@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.58...v0.26.0-rc.59) (2021-01-13)
+
+
+### Bug Fixes
+
+* (Platform) add fix for selected state for opened sub-menu item in Menu component ([#4258](https://github.com/SAP/fundamental-ngx/issues/4258)) ([545f64a](https://github.com/SAP/fundamental-ngx/commit/545f64a94bbff403809a229ea98477095ad492c3))
+* (Platform) Add outline on nodes, detects window change for Approval flow component ([#4307](https://github.com/SAP/fundamental-ngx/issues/4307)) ([10bca96](https://github.com/SAP/fundamental-ngx/commit/10bca9658ad14daa194d07b6dca13427c0802eed))
+* deprecate Popper.js and refactor Menu component ([#4214](https://github.com/SAP/fundamental-ngx/issues/4214)) ([1b1e081](https://github.com/SAP/fundamental-ngx/commit/1b1e0815d3ed3f3fd23861be3fb0435a4545c574))
+
 ## [0.26.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.57...v0.26.0-rc.58) (2021-01-13)
 
 
