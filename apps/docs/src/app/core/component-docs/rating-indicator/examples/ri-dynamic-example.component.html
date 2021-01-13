@@ -6,6 +6,7 @@
     [value]="modelValue"
     [size]="config.size"
     [disabled]="config.disabled"
+    [displayMode]="config.displayMode"
     (ratingChanged)="onRatingChanged($event)"
 ></fd-rating-indicator>
 <div *ngIf="dynamicChangeRate">
@@ -19,6 +20,9 @@
 </div>
 <div>
     Disabled: <input [(ngModel)]="config.disabled" type="checkbox" />
+</div>
+<div>
+    Display Mode: <input [(ngModel)]="config.displayMode" type="checkbox" />
 </div>
 <div>
     Sizes: <select [(ngModel)]="config.size">

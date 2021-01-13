@@ -10,6 +10,7 @@ export class RatingIndicatorDynamicExampleComponent {
         indicatorCapacity: 5,
         allowHalves: false,
         disabled: false,
+        displayMode: false,
         size: 'md'
     };
     sizes = ['xs', 'sm', 'md', 'lg', 'cozy', 'compact', 'condensed'];

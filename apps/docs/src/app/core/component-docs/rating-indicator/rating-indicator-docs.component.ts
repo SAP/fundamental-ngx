@@ -17,6 +17,9 @@ import * as dynamicTs from '!raw-loader!./examples/ri-dynamic-example.component.
 import * as customIconHtml from '!raw-loader!./examples/ri-custom-icon-example.component.html';
 import * as customIconTs from '!raw-loader!./examples/ri-custom-icon-example.component.ts';
 
+import * as displayModeHtml from '!raw-loader!./examples/ri-display-mode-example.component.html';
+import * as displayModeTs from '!raw-loader!./examples/ri-display-mode-example.component.ts';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -79,6 +82,17 @@ export class RatingIndicatorDocsComponent {
             fileName: 'ri-custom-icon-example',
             typescriptFileCode: customIconTs,
             component: 'RatingIndicatorCustomIconExampleComponent',
+            scssFileCode: ratingExampleScs
+        }
+    ];
+
+    ratingIndicatorDisplayMode: ExampleFile[] = [
+        {
+            language: 'html',
+            code: displayModeHtml,
+            fileName: 'ri-display-mode-example',
+            typescriptFileCode: displayModeTs,
+            component: 'RatingIndicatorDisplayModeComponent',
             scssFileCode: ratingExampleScs
         }
     ];
