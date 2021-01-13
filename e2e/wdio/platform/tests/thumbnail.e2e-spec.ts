@@ -1,16 +1,20 @@
 import {
+    click,
     getAttributeByName,
-    getElementArrayLength, getElementLocation,
+    getElementArrayLength,
+    getElementLocation,
+    getPerrentElementCSSPropetry,
     isElementDisplayed,
-    refreshPage, scrollIntoView,
+    mouseHoverElement,
+    refreshPage,
+    scrollIntoView,
     waitElementToBePresentInDOM,
-    waitForElDisplayed,
-    click
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { ThumbnailPo } from '../pages/thumbnail.po';
 
-describe('Thumbnail field', () => {
-    const thumbnailPage = new ThumbnailPo();
+describe('Thumbnail field', function() {
+    const thumbnailPage: ThumbnailPo = new ThumbnailPo();
 
     beforeAll(() => {
         thumbnailPage.open();
@@ -91,7 +95,21 @@ describe('Thumbnail field', () => {
         scrollIntoView(thumbnailPage.verticalGalleryImages);
         const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
+            scrollIntoView(thumbnailPage.verticalGalleryImages, i);
+            mouseHoverElement(thumbnailPage.verticalGalleryImages, i);
+            expect(getPerrentElementCSSPropetry(thumbnailPage.verticalGalleryImages, 'border-bottom-color', i)).toContain('8,84,160');
+        }
 
+        for (let i = 0; arrLength > i; i++) {
+            scrollIntoView(thumbnailPage.horizontalGalleryImages, i);
+            mouseHoverElement(thumbnailPage.horizontalGalleryImages, i);
+            expect(getPerrentElementCSSPropetry(thumbnailPage.horizontalGalleryImages, 'border-bottom-color', i)).toContain('8,92,175');
+        }
+
+        for (let i = 0; arrLength > i; i++) {
+            scrollIntoView(thumbnailPage.verticalGalleryVideo, i);
+            mouseHoverElement(thumbnailPage.verticalGalleryVideo, i);
+            expect(getPerrentElementCSSPropetry(thumbnailPage.verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
         }
 
     });

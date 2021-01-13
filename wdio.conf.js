@@ -49,23 +49,23 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 20,
+    maxInstances: 10,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-        {
-            browserName: 'internet explorer',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                requireWindowFocus: true,
-            }
-        },
+        // {
+        //     browserName: 'internet explorer',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     'sauce:options': {
+        //         screenResolution: '1920x1080',
+        //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //         requireWindowFocus: true,
+        //     }
+        // },
         {
             browserName: 'MicrosoftEdge',
             browserVersion: 'latest',
@@ -174,7 +174,7 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 200000,
     //
     // Default request retries count
     connectionRetryCount: 3,
