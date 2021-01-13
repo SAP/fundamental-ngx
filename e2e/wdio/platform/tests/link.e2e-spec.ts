@@ -15,6 +15,7 @@ import {
     refreshPage,
     scrollIntoView
 } from '../../driver/wdio';
+import { checkLinkTargetDestination } from '../../helper/common-helper';
 
 xdescribe('Link component test suite', function() {
     const linkPage = new LinkPo();
@@ -151,7 +152,4 @@ function checkLinkData(element, index: number = 0): void {
 //     expect(element.value).toContain(linkFocusState);
 // }
 
-function checkLinkTargetDestination(element, site: string): void {
-    click(element);
-    expect(browser).toHaveUrlContaining(site);
-}
+
