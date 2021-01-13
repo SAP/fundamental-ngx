@@ -11,7 +11,7 @@ import {
     ViewChild,
     ViewChildren,
     EventEmitter,
-    OnDestroy, Optional
+    OnDestroy, Optional, ViewEncapsulation
 } from '@angular/core';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
@@ -39,7 +39,8 @@ type ApprovalFlowGraph = ApprovalGraphColumn[];
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
     styleUrls: ['./approval-flow.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
