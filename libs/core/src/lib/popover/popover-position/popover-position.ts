@@ -22,8 +22,22 @@ export const DefaultPositions: ConnectedPosition[] = [
     { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top' },
     { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom' },
     { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' },
-    { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' }
+    { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom' },
 ];
+
+export const GetDefaultPosition = (position: ConnectedPosition[]): ConnectedPosition[] => {
+    const resultPosition: ConnectedPosition[] = [];
+    if (position && position[0]) {
+        const firstPosition: ConnectedPosition = position[0];
+        resultPosition.push({
+            ...firstPosition,
+            originY: PopoverFlippedYDirection[firstPosition.originY],
+            overlayY: PopoverFlippedYDirection[firstPosition.overlayY]
+        });
+    }
+
+    return resultPosition.concat(DefaultPositions);
+}
 
 /**
  * Preset options for the popover body width.
@@ -56,9 +70,15 @@ export type XPositions = 'start' | 'center' | 'end';
 export type YPositions = 'top' | 'center' | 'bottom';
 export type ArrowPosition = 'top' | 'bottom' | 'start' | 'end' | 'center';
 
-export const PopoverFlippedDirection: {[key: string]: ArrowPosition} = {
+export const PopoverFlippedXDirection: {[key: string]: ArrowPosition} = {
     'start': 'end',
     'end': 'start',
+    'center': 'center'
+};
+
+export const PopoverFlippedYDirection: {[key: string]: YPositions} = {
+    'bottom': 'top',
+    'top': 'bottom',
     'center': 'center'
 };
 
@@ -88,7 +108,7 @@ export class PopoverPosition {
             _position = position.overlayX;
 
             if (rtl) {
-                _position = PopoverFlippedDirection[_position];
+                _position = PopoverFlippedXDirection[_position];
             }
         }
 

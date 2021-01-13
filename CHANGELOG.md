@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.60...v0.26.0-rc.61) (2021-01-13)
+
+
+### Bug Fixes
+
+* (core) fix Grid List IE11 issues ([156e24a](https://github.com/SAP/fundamental-ngx/commit/156e24aba47bbd3e3d6a545e8f79636c3f4e9aa9))
+
+## [0.26.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.58...v0.26.0-rc.60) (2021-01-13)
+
+
+### Features
+
+* (Core) introduce Quick View component ([#4216](https://github.com/SAP/fundamental-ngx/issues/4216)) ([5821253](https://github.com/SAP/fundamental-ngx/commit/58212531f7beb6d0b9e4595640eb40f5078a398f))
+
+
+### Bug Fixes
+
+* (Platform) add fix for selected state for opened sub-menu item in Menu component ([#4258](https://github.com/SAP/fundamental-ngx/issues/4258)) ([545f64a](https://github.com/SAP/fundamental-ngx/commit/545f64a94bbff403809a229ea98477095ad492c3))
+* (Platform) Add outline on nodes, detects window change for Approval flow component ([#4307](https://github.com/SAP/fundamental-ngx/issues/4307)) ([10bca96](https://github.com/SAP/fundamental-ngx/commit/10bca9658ad14daa194d07b6dca13427c0802eed))
+* deprecate Popper.js and refactor Menu component ([#4214](https://github.com/SAP/fundamental-ngx/issues/4214)) ([1b1e081](https://github.com/SAP/fundamental-ngx/commit/1b1e0815d3ed3f3fd23861be3fb0435a4545c574))
+
+## [0.26.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.58...v0.26.0-rc.59) (2021-01-13)
+
+
+### Bug Fixes
+
+* (Platform) add fix for selected state for opened sub-menu item in Menu component ([#4258](https://github.com/SAP/fundamental-ngx/issues/4258)) ([545f64a](https://github.com/SAP/fundamental-ngx/commit/545f64a94bbff403809a229ea98477095ad492c3))
+* (Platform) Add outline on nodes, detects window change for Approval flow component ([#4307](https://github.com/SAP/fundamental-ngx/issues/4307)) ([10bca96](https://github.com/SAP/fundamental-ngx/commit/10bca9658ad14daa194d07b6dca13427c0802eed))
+* deprecate Popper.js and refactor Menu component ([#4214](https://github.com/SAP/fundamental-ngx/issues/4214)) ([1b1e081](https://github.com/SAP/fundamental-ngx/commit/1b1e0815d3ed3f3fd23861be3fb0435a4545c574))
+
+## [0.26.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.57...v0.26.0-rc.58) (2021-01-13)
+
+
+### Bug Fixes
+
+* (Platform) add outline in search field, fix category contentDensity for compact case ([#4287](https://github.com/SAP/fundamental-ngx/issues/4287)) ([7ccb369](https://github.com/SAP/fundamental-ngx/commit/7ccb3699d557b16be89c13f0e73180eccfcca715))
+
+## [0.26.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.56...v0.26.0-rc.57) (2021-01-13)
+
+## [0.26.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.55...v0.26.0-rc.56) (2021-01-12)
+
+
+### Bug Fixes
+
+* (Core) Add missed controls into Pagination component and fix small issue ([#4183](https://github.com/SAP/fundamental-ngx/issues/4183)) ([d6864be](https://github.com/SAP/fundamental-ngx/commit/d6864be85dcf43dd06df50a9be892145e218f2a4))
+* (Platform) add screen reader detection for required form field ([#4281](https://github.com/SAP/fundamental-ngx/issues/4281)) ([ce83958](https://github.com/SAP/fundamental-ngx/commit/ce839589a3572fea7e7612f158d5659de081ce47))
+
 ## [0.26.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.54...v0.26.0-rc.55) (2021-01-11)
 
 ## [0.26.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.53...v0.26.0-rc.54) (2021-01-11)

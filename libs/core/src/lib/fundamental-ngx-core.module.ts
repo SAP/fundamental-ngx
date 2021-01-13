@@ -76,6 +76,7 @@ import { DynamicSideContentModule } from './dynamic-side-content/dynamic-side-co
 import { MessageBoxModule } from './message-box/message-box.module';
 import { ThemesService } from './utils/services/themes.service';
 import { WizardModule } from './wizard/wizard.module';
+import { QuickViewModule } from './quick-view/quick-view.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -127,6 +128,7 @@ import { WizardModule } from './wizard/wizard.module';
         PanelModule,
         ProductSwitchModule,
         PopoverModule,
+        QuickViewModule,
         RatingIndicatorModule,
         RadioModule,
         ScrollSpyModule,

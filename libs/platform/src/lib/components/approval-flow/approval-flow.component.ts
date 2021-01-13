@@ -11,17 +11,18 @@ import {
     ViewChild,
     ViewChildren,
     EventEmitter,
-    OnDestroy, Optional
+    OnDestroy, Optional, ViewEncapsulation
 } from '@angular/core';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundamental-ngx/core';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { debounceTime, take, takeUntil } from 'rxjs/operators';
 
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from './interfaces';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
+import { BaseComponent } from '../base';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: true };
 
@@ -38,7 +39,8 @@ type ApprovalFlowGraph = ApprovalGraphColumn[];
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
     styleUrls: ['./approval-flow.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
@@ -122,6 +124,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._dir = isRtl ? 'rtl' : 'ltr';
             this._cdr.detectChanges();
         }));
+
+        this._listenOnResize();
     }
 
     onNodeClick(node: ApprovalNode): void {
@@ -261,6 +265,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
+    }
+
+    /** @hidden Listen window resize and distribute cards on column change */
+    private _listenOnResize(): void {
+        this.subscriptions.add(
+            fromEvent(window, 'resize')
+                .pipe(debounceTime(60))
+                .subscribe(() => {
+                    this._resetCarousel();
+                    this._checkCarouselStatus();
+                })
+        );
     }
 
     /** @hidden */
