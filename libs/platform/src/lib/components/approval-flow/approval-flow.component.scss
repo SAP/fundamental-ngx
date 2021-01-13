@@ -49,6 +49,10 @@ $carousel-controls-height--edit-mode: 126px;
     .#{$block}__watchers-input-container {
         width: 278px;
     }
+
+    fd-multi-input .fd-input-group__input {
+        display: none;
+    }
 }
 
 .#{$block}__watchers-title {
@@ -232,11 +236,10 @@ $carousel-controls-height--edit-mode: 126px;
     border-radius: 4px;
 }
 
-fd-toolbar + .#{$block}__container {
-    padding-top: .5rem;
-}
+fd-toolbar {
+    display: block;
+    margin-bottom: .5rem;
 
-:host ::ng-deep {
     .fd-toolbar {
         display: flex;
         justify-content: space-between;
@@ -246,9 +249,5 @@ fd-toolbar + .#{$block}__container {
                 margin-right: .5rem;
             }
         }
-    }
-
-    fd-multi-input .fd-input-group__input {
-        display: none;
     }
 }

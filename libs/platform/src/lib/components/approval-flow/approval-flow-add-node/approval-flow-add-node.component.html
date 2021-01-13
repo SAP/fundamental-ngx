@@ -5,20 +5,7 @@
                 <ng-container *ngIf="!_selectApproversMode && !_data.isEdit">Add approver</ng-container>
                 <ng-container *ngIf="!_selectApproversMode && _data.isEdit">Edit approver</ng-container>
                 <ng-container *ngIf="_selectApproversMode">Approvers</ng-container>
-                <!--                <fd-icon-->
-                <!--                    *ngIf="_userToShowDetails && _isListMode"-->
-                <!--                    [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"-->
-                <!--                    (click)="_backToListFromDetails()"-->
-                <!--                ></fd-icon>-->
-                <!--                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ _data.node.description }} ({{ _data.node.approvers.length }})</ng-container>-->
             </p>
-            <!--            <fdp-search-field-->
-            <!--                *ngIf="!_userToShowDetails && _isListMode"-->
-            <!--                placeholder="Search"-->
-            <!--                contentDensity="compact"-->
-            <!--                [suggestions]="[]"-->
-            <!--                (inputChange)="_onSearchStringChange($event.text)"-->
-            <!--            ></fdp-search-field>-->
         </ng-template>
     </fd-dialog-header>
 

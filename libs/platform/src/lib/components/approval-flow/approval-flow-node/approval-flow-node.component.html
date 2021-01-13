@@ -65,7 +65,7 @@
     <ng-container *ngTemplateOutlet="addNodeButton"></ng-container>
 </ng-container>
 <ng-template #addNodeButton>
-    <div
+    <button
         class="approval-flow-node__add"
         [class.approval-flow-node__add--blank]="blank"
         [class.approval-flow-node__add--before]="!blank && canAddNodeBefore"
@@ -73,5 +73,5 @@
         (click)="$event.stopPropagation(); onAdd.emit('after')"
     >
         <fd-icon glyph="add"></fd-icon>
-    </div>
+    </button>
 </ng-template>
