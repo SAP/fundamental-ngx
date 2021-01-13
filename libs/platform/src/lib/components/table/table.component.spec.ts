@@ -154,7 +154,6 @@ describe('TableComponent internal', () => {
         component._columnHeaderSortBy(field, direction);
 
         expect(serviceSortSpy).toHaveBeenCalledWith([{ field: field, direction: direction }]);
-        expect(component._popoverOpen).toBeFalse();
     });
 
     it('filter by cell header method should call TableService.addFilters with a proper params', () => {
@@ -171,7 +170,6 @@ describe('TableComponent internal', () => {
         component._columnHeaderFilterBy(field, value);
 
         expect(serviceFilterSpy).toHaveBeenCalledWith([payload]);
-        expect(component._popoverOpen).toBeFalse();
     });
 
     it('group by cell header method should call TableService.setGroups with a proper params', () => {
@@ -182,7 +180,6 @@ describe('TableComponent internal', () => {
         component._columnHeaderGroupBy(field);
 
         expect(serviceGroupSpy).toHaveBeenCalledWith(payload);
-        expect(component._popoverOpen).toBeFalse();
     });
 
     it('freezeTo method should call TableService.freezeTo and set freezable info', async () => {

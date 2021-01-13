@@ -11,8 +11,14 @@
         max-width: 200px;
     }
 
-    .fd-popover__control {
-        position: initial;
+    .fd-table__cell--has-menu {
+        cursor: pointer;
+    }
+
+    .fd-table__header {
+        .fd-table__popover--custom {
+            display: none;
+        }
     }
 
     .fd-table__row--group {
@@ -58,4 +64,9 @@
         padding: 1rem;
         text-align: center;
     }
+}
+
+/* Need to make it global cause this item is rendered in the overlay */
+.fdp-table__item--clickable {
+    cursor: pointer;
 }

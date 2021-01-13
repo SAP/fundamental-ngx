@@ -105,7 +105,7 @@ interface GroupTableRowValueType {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TableService, { provide: Table, useExisting: TableComponent }],
     host: {
-        '[class.fd-table]': 'true',
+        class: 'fd-table',
         '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
         '[class.fd-table--condensed]': 'contentDensity === CONTENT_DENSITY.CONDENSED',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
@@ -267,12 +267,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Based on _tableRows and excludes hidden rows.
      */
     _tableRowsVisible: TableRow<T>[] = [];
-
-    /** @hidden */
-    _popoverOpen = false;
-
-    /** @hidden */
-    _popoverColumnKey: string;
 
     /**
      * @hidden
@@ -631,8 +625,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderGroupBy(field: string): void {
         this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
-
-        this._popoverOpen = false;
     }
 
     /**
@@ -648,8 +640,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         };
 
         this.addFilter([collectionFilter]);
-
-        this._popoverOpen = false;
     }
 
     /**
@@ -658,8 +648,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field: field, direction: direction }]);
-
-        this._popoverOpen = false;
     }
 
     /** @hidden */
@@ -684,22 +672,22 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return ROW_HEIGHT.get(this.contentDensity);
     }
 
-    /** @hidden */
-    _isColumnPopoverOpened(key: string): boolean {
-        return this._popoverOpen && this._popoverColumnKey === key;
-    }
-
-    /** @hidden */
-    _setPopoverColumnKey(columnKey: string): void {
-        this._popoverColumnKey = columnKey;
-    }
-
     /**
      * @hidden
      * Expand/Collapse group row
      */
     _toggleGroupRow(groupRow: TableRow): void {
         this._toggleExpandableTableRow(groupRow);
+    }
+
+    /** @hidden */
+    _isColumnHasHeaderMenu(column: TableColumn): boolean {
+        return (
+            column.sortable ||
+            column.groupable ||
+            column.freezable ||
+            (column.filterable && !this._isFilteringFromHeaderDisabled)
+        );
     }
 
     /** @hidden */
