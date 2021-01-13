@@ -7,13 +7,13 @@ export class ThumbnailPo extends BaseComponentPo {
     root = '#page-content';
 
     mainImage = '.fdp-media-container img';
+    mainVideo = '.fdp-media-container video';
     verticalGalleryImages = 'fdp-thumbnail-basic-example fd-avatar';
     horizontalGalleryImages = 'fdp-thumbnail-horizontal-example fd-avatar';
     verticalGalleryVideo = 'fdp-thumbnail-video-media-example fd-avatar';
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.mainImage, 30000);
-        waitForElDisplayed(this.mainImage, 30000);
+        waitForElDisplayed(this.mainImage);
     }
 }

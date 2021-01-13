@@ -30,7 +30,7 @@ describe('Thumbnail field', function() {
         waitForElDisplayed(thumbnailPage.mainImage);
         expect(isElementDisplayed(thumbnailPage.mainImage)).toBeTrue();
         expect(isElementDisplayed(thumbnailPage.mainImage, 1)).toBeTrue();
-        expect(isElementDisplayed(thumbnailPage.mainImage, 2)).toBeTrue();
+        expect(isElementDisplayed(thumbnailPage.mainVideo)).toBeTrue();
     });
 
     it('should be able to display images vertical', () => {
