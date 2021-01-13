@@ -35,5 +35,8 @@ import { PopoverTriggerDirective } from './popover-trigger.directive';
         PopoverContainer,
         PopoverTriggerDirective
     ],
+    entryComponents: [
+        PopoverBodyComponent
+    ]
 })
 export class PopoverModule {}
