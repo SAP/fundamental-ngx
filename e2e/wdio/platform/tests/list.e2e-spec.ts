@@ -17,7 +17,7 @@ import {
     getCSSPropertyByName,
     getCurrentUrl,
     getElementArrayLength,
-    getText,
+    getText, isElementClickable,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -141,7 +141,7 @@ describe('List test suite:', function() {
 
     describe('Virtual Scroll examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(listPg.vScrollListItems);
+            isElementClickable(listPg.vScrollListItems, 0);
             checkElementText(listPg.vScrollListItems);
             checkAttributeValueTrue(listPg.vScrollList, ListData.scrollLoadAttr);
             checkAttributeValueTrue(listPg.vScrollList, ListData.lazyLoadAttr);
@@ -150,7 +150,7 @@ describe('List test suite:', function() {
 
         it('should check scroll', () => {
             // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-            if (!browserIsFirefox()) {
+            if (!browserIsFirefox() && !browserIsSafari()) {
                 scrollIntoView(listPg.vScrollListItems, 0);
                 const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
                 click(listPg.vScrollListItems, 0);
@@ -161,7 +161,7 @@ describe('List test suite:', function() {
                 expect(itemsStartCount).not.toEqual(itemsEndCount);
                 return;
             }
-            console.log('skip FF due to #4107');
+            console.log('skip FF due to #4107, skip Safari');
         });
     });
 

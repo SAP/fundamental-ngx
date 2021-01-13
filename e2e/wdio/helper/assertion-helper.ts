@@ -76,22 +76,6 @@ export function checkAttributeValueTrue(element: string, attribute: string): voi
     for (let i = 0; elLength > i; i++) {
         expect(getAttributeByName(element, attribute, i)).toBe('true');
     }
-
-    checkFocused(element: string, index: number = 0): void {
-        expect($$(element)[index].isFocused()).toBe(true);
-    }
-
-    checkValueChanged(oldValue: string, newValue: string): void {
-          expect(oldValue).not.toEqual(newValue);
-    }
-
-    checkTextValue(oldValue: string, newValue: string): void {
-        expect(oldValue).toContain(newValue);
-    }
-
-    checkValueAfterClearingTheInput(oldValue: string, newValue: string): void {
-        expect(oldValue).toEqual(newValue);
-    }
 }
 
 export function checkValueChanged(oldValue: string, newValue: string): void {

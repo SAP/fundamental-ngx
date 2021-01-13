@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { click, scrollIntoView, sendKeys, waitForElDisplayed } from '../../driver/wdio';
+import { click, scrollIntoView, sendKeys, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
@@ -50,5 +50,6 @@ export class MultiInputPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.allDropdownButtons);
     }
 }

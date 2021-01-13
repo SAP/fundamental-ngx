@@ -267,3 +267,7 @@ export function mouseButtonUp(button: 0 | 1 | 2 = 0): void {
 export function  clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
 }
+
+export function getElementLocation(selector: string, LocationParam, index: number = 0): any {
+    return $$(selector)[index].getLocation(LocationParam);
+}

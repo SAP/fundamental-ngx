@@ -19,7 +19,7 @@ describe('Display List Item test suite:', function() {
         it('should do basic checks', () => {
             checkElArrIsClickable(displayListPg.displayLinks);
             checkElementText(displayListPg.cozyDisplayTitles);
-            checkElementText(displayListPg.cozyDisplaySecText);
+            checkElementText(displayListPg.comfyDisplayTitles);
             expect(getAttributeByName(displayListPg.sections, DisplayListData.compactAttr, 0)).toBe('false');
             expect(getAttributeByName(displayListPg.sections, DisplayListData.compactAttr, 1)).toBe('true');
             expect(getAttributeByName(displayListPg.sections, DisplayListData.borderAttr)).toBe('true');

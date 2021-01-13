@@ -140,7 +140,7 @@ describe('Standard List Item test suite:', function() {
         it('should check selected item count is displayed in the toolbar', () => {
             expect(getText(standardListPg.sMultiToolbar)).toContain('0 : Items selected');
             click(standardListPg.sMultiCheckbox, 0);
-            expect(getAttributeByName(standardListPg.sMultiCheckbox, 'aria-checked')).toBe('true');
+            expect(getAttributeByName(standardListPg.sMultiCheckbox, 'aria-selected')).toBe('true');
             expect(getText(standardListPg.sMultiToolbar)).toContain('1 : Items selected');
         });
     });
