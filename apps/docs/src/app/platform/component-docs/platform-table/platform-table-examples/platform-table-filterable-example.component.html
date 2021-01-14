@@ -1,5 +1,5 @@
 <fdp-table
-    #filterableTbl
+    #table
     [dataSource]="source"
     (filterChange)="logFilterChange($event)"
     contentDensity="compact"
@@ -54,7 +54,7 @@
 </fdp-table>
 
 <!-- View Settings Dialog-->
-<fdp-table-view-settings-dialog [table]="filterableTbl">
+<fdp-table-view-settings-dialog [table]="table">
     <fdp-table-view-settings-filter
         column="price"
         label="Price"

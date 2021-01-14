@@ -6,7 +6,7 @@ interface ParseLayout {
     }
 }
 
-export function parseLayoutPattern(pattern: string, isBaseLayout = true): string | undefined {
+export function parseLayoutPattern(pattern: string, isBaseLayout = true): string[] | undefined {
     const parseLayout = validateAndParseLayoutPattern(pattern, isBaseLayout);
 
     if (!parseLayout) {
@@ -39,7 +39,7 @@ function validateAndParseLayoutPattern(pattern: string, isBaseLayout: boolean): 
     }, {});
 }
 
-function generateLayoutClasses({ xl, l, m, s }: ParseLayout): string {
+function generateLayoutClasses({ xl, l, m, s }: ParseLayout): string[] {
     const classes: string[] = ['fd-col'];
 
     if (s) {
@@ -58,5 +58,5 @@ function generateLayoutClasses({ xl, l, m, s }: ParseLayout): string {
         classes.push(`fd-col-xl--${xl.value}`);
     }
 
-    return classes.join(' ');
+    return classes;
 }

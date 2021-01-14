@@ -168,6 +168,13 @@ export class MultiInputComponent implements
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true, approveButtonText: 'Select' };
 
+    /**
+     * Whether or not to return results where the input matches the entire string. By default, only results that start
+     * with the input search term will be returned.
+     */
+    @Input()
+    includes = false;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -466,7 +473,10 @@ export class MultiInputComponent implements
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
-                return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
+                const term = this.displayFn(item).toLocaleLowerCase();
+                let retVal;
+                this.includes ? retVal = term.includes(searchLower) : retVal = term.startsWith(searchLower);
+                return retVal;
             }
         });
     }

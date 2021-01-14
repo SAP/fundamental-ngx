@@ -2,13 +2,13 @@
     id="default-table"
     componentName="Table"
 >
-    Default Table
+    Simple Table
 </fd-docs-section-title>
-<description>This example shows table default implementation </description>
+<description>This example shows simple table usage</description>
 <component-example>
-    <fdp-table-default-example></fdp-table-default-example>
+    <fdp-platform-table-default-example></fdp-platform-table-default-example>
 </component-example>
-<code-example [exampleFiles]="defaultTable"></code-example>
+<code-example [exampleFiles]="defaultTableFiles"></code-example>
 
 <separator></separator>
 
@@ -20,9 +20,9 @@
 </fd-docs-section-title>
 <description>This example shows custom column definition implementation </description>
 <component-example>
-    <fdp-table-custom-column-example></fdp-table-custom-column-example>
+    <fdp-platform-table-custom-column-example></fdp-platform-table-custom-column-example>
 </component-example>
-<code-example [exampleFiles]="customColumnTable"></code-example>
+<code-example [exampleFiles]="customColumnTableFiles"></code-example>
 
 <separator></separator>
 
@@ -34,9 +34,9 @@
 </fd-docs-section-title>
 <description>This example shows single row selection </description>
 <component-example>
-    <fdp-table-single-row-selection-example></fdp-table-single-row-selection-example>
+    <fdp-platform-table-single-row-selection-example></fdp-platform-table-single-row-selection-example>
 </component-example>
-<code-example [exampleFiles]="singleRowSelection"></code-example>
+<code-example [exampleFiles]="singleRowSelectionFiles"></code-example>
 
 <separator></separator>
 
@@ -48,9 +48,9 @@
 </fd-docs-section-title>
 <description>This example shows multiple row selection </description>
 <component-example>
-    <fdp-table-multiple-row-selection-example></fdp-table-multiple-row-selection-example>
+    <fdp-platform-table-multiple-row-selection-example></fdp-platform-table-multiple-row-selection-example>
 </component-example>
-<code-example [exampleFiles]="multipleRowSelection"></code-example>
+<code-example [exampleFiles]="multipleRowSelectionFiles"></code-example>
 
 <separator></separator>
 
@@ -61,13 +61,13 @@
     Column Sorting
 </fd-docs-section-title>
 <description>
-    Use <code>[sortable]="true"</code> to mark a column as an sortable one.<br/>
+    Use <code>[sortable]="true"</code> to mark a column as an sortable one.<br />
     In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.
 </description>
 <component-example>
-    <fdp-table-sortable-example></fdp-table-sortable-example>
+    <fdp-platform-table-sortable-example></fdp-platform-table-sortable-example>
 </component-example>
-<code-example [exampleFiles]="sortableTable"></code-example>
+<code-example [exampleFiles]="sortableTableFiles"></code-example>
 
 <separator></separator>
 
@@ -79,9 +79,12 @@
 </fd-docs-section-title>
 <description>
     There are two ways to add filtering.
-    The first one is to use the column option <code>[filterable]="true"</code>. This will add filter input field in the column header menu.
-    <br/>
-    The second one is to use <code>fdp-table-view-settings-filter</code> withing <code>fdp-table-view-settings-dialog</code>. It gives ability to define filtering type. For now it supports the next types: 
+    The first one is to use the column option <code>[filterable]="true"</code>. This will add filter input field in the
+    column header menu.
+    <br />
+    The second one is to use <code>fdp-table-view-settings-filter</code> withing
+    <code>fdp-table-view-settings-dialog</code>. It gives ability to define filtering type. For now it supports the next
+    types:
     <ul>
         <li>single-select</li>
         <li>multi-select</li>
@@ -89,9 +92,9 @@
     </ul>
 </description>
 <component-example>
-    <fdp-table-filterable-example></fdp-table-filterable-example>
+    <fdp-platform-table-filterable-example></fdp-platform-table-filterable-example>
 </component-example>
-<code-example [exampleFiles]="filterableTable"></code-example>
+<code-example [exampleFiles]="filterableTableFiles"></code-example>
 
 <separator></separator>
 
@@ -103,15 +106,17 @@
 </fd-docs-section-title>
 <description>
     Use <code>[groupable]="true"</code> to mark a column as one that can be used to group by.
-    <br/>
-    Once there is at least one a groupable column the Group dialog option appears in the table toolbar. To enable grouping by some column you can use the column header menu or the Group dialog. In order to ungroup you should use only the Group dialog.
-    <br/>  
+    <br />
+    Once there is at least one a groupable column the Group dialog option appears in the table toolbar. To enable
+    grouping by some column you can use the column header menu or the Group dialog. In order to ungroup you should use
+    only the Group dialog.
+    <br />
     In this example <code>Name</code> and <code>Status</code> columns can be used to group by.
 </description>
 <component-example>
-    <fdp-table-groupable-example></fdp-table-groupable-example>
+    <fdp-platform-table-groupable-example></fdp-platform-table-groupable-example>
 </component-example>
-<code-example [exampleFiles]="groupableTable"></code-example>
+<code-example [exampleFiles]="groupableTableFiles"></code-example>
 
 <separator></separator>
 
@@ -122,15 +127,173 @@
     Column Freezing
 </fd-docs-section-title>
 <description>
-    Use <code>[freezeColumnsTo]="columnKey"</code> to freeze columns up to and including.
+    Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.
 </description>
 <component-example>
-    <fdp-table-freezable-example></fdp-table-freezable-example>
+    <fdp-platform-table-freezable-example></fdp-platform-table-freezable-example>
 </component-example>
-<code-example [exampleFiles]="freezableTable"></code-example>
+<code-example [exampleFiles]="freezableTableFiles"></code-example>
 
 <separator></separator>
 
+<fd-docs-section-title
+    id="table-initial-state"
+    componentName="Table"
+>
+    Initial State
+</fd-docs-section-title>
+<description>
+    To setup initial state use next properties:
+    <ul>
+        <li>
+            <code>[initialVisibleColumns]</code> List of column names in order.
+        </li>
+        <li>
+            <code>[initialSortBy]</code> Initial sorting parameters for table state.
+        </li>
+        <li>
+            <code>[initialFilterBy]</code> Initial filtering parameters for table state.
+        </li>
+        <li>
+            <code>[initialGroupBy]</code> Initial grouping parameters for table state.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-initial-state-example></fdp-platform-table-initial-state-example>
+</component-example>
+<code-example [exampleFiles]="initialStateFiles"></code-example>
+
+<separator></separator>
+
+<!-- P13 dialogs -->
+<fd-docs-section-title
+    id="table-P13"
+    componentName="Table"
+>
+    Personalization Dialog.
+</fd-docs-section-title>
+<description>
+    The p13n dialog control provides a dialog for tables that allows the user to personalize one or more of the
+    following attributes:
+    <ul>
+        <li>
+            Columns (visibility and order of columns)
+        </li>
+        <li>
+            Sorting by multiple columns
+        </li>
+        <li>
+            Filtering by multiple columns
+        </li>
+        <li>
+            Grouping by multiple columns
+        </li>
+    </ul>
+</description>
+
+<fd-docs-section-title
+    id="p13-table-columns"
+    componentName="Table"
+>
+    Table columns visibility and order
+</fd-docs-section-title>
+<description>
+    To make columns settings available connect <code>&lt;fdp-table-p13-dialog
+        [table]="table"&gt;&lt;/fdp-table-p13-dialog&gt;</code>
+    to a table. Once there is at least one <code>fdp-column</code> definition the columns settings button will be
+    available in the table toolbar.
+</description>
+<component-example>
+    <fdp-platform-table-p13-columns-example></fdp-platform-table-p13-columns-example>
+</component-example>
+<code-example [exampleFiles]="p13ColumnsFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="p13-table-sort"
+    componentName="Table"
+>
+    Sorting by multiple columns
+</fd-docs-section-title>
+<description>
+    <ul>
+        <li>
+            Connect your table to p13 columns dialog by adding
+            <code>&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-sort&gt;&lt;/fdp-table-p13n-sort&gt;&lt;/fdp-table-p13-dialog&gt;</code>
+        </li>
+        <li>
+            Add <code>&lt;fdp-column [sortable]="true"&gt;</code> option to mark a column as sortable.
+        </li>
+    </ul>
+    The order of the criteria is exactly the same as the order in which sorting is applied to the table.
+</description>
+<component-example>
+    <fdp-platform-table-p13-sort-example></fdp-platform-table-p13-sort-example>
+</component-example>
+<code-example [exampleFiles]="p13SortFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="p13-table-filter"
+    componentName="Table"
+>
+    Filtering by multiple columns
+</fd-docs-section-title>
+<description>
+    <ul>
+        <li>
+            Connect your table to p13 filtering dialog by adding
+            <code>&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-filter&gt;&lt;/fdp-table-p13n-filter&gt;&lt;/fdp-table-p13-dialog&gt;</code>
+        </li>
+        <li>
+            Add <code>&lt;fdp-column [filterable]="true"&gt;</code> option to mark a column as filterable.
+        </li>
+        <li>
+            Add column data type <code>&lt;fdp-column [dataType]="'string' | 'number' | 'date' | 'boolean'"&gt;</code>
+            to show corresponding filtering ui.
+        </li>
+    </ul>
+    Please note once the <code>fdp-table-p13n-filter</code> is connected to a table the filter option is not available
+    from column header dialog menu.
+</description>
+<component-example>
+    <fdp-platform-table-p13-filter-example></fdp-platform-table-p13-filter-example>
+</component-example>
+<code-example [exampleFiles]="p13FilterFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="p13-table-group"
+    componentName="Table"
+>
+    Grouping by multiple columns
+</fd-docs-section-title>
+<description>
+    <ul>
+        <li>
+            Connect your table to p13 group dialog by adding
+            <code>&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-group&gt;&lt;/fdp-table-p13n-group&gt;&lt;/fdp-table-p13-dialog&gt;</code>
+        </li>
+        <li>
+            Add <code>&lt;fdp-column [groupable]="true"&gt;</code> option to mark a column as groupable.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-p13-group-example></fdp-platform-table-p13-group-example>
+</component-example>
+<code-example [exampleFiles]="p13GroupFiles"></code-example>
+
+<separator></separator>
+
+<!-- Playground -->
 <playground
     [schema]="schema"
     [schemaInitialValues]="data"
@@ -158,7 +321,10 @@
                 [hideItemCount]="data['table-toolbar'].hideItemCount"
             >
                 <fdp-table-toolbar-actions>
-                    <fdp-button label="Action Button" [contentDensity]="data.table.contentDensity !== 'cozy' ? 'compact' : 'cozy'"></fdp-button>
+                    <fdp-button
+                        label="Action Button"
+                        [contentDensity]="data.table.contentDensity !== 'cozy' ? 'compact' : 'cozy'"
+                    ></fdp-button>
                 </fdp-table-toolbar-actions>
             </fdp-table-toolbar>
 

@@ -7,7 +7,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Input,
     OnChanges,
     OnDestroy,
@@ -18,57 +17,55 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyValue } from '@angular/common';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, startWith } from 'rxjs/operators';
+import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { DialogConfig, DialogService, KeyUtil, RtlService } from '@fundamental-ngx/core';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
 
-import { CollectionFilter, SelectableRow, TableState } from './interfaces';
+import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
 import {
+    ColumnsChange,
+    FilterChange,
+    FreezeChange,
+    GroupChange,
+    SortChange,
     TableColumnFreezeEvent,
+    TableColumnsChangeEvent,
     TableFilterChangeEvent,
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
-    TableSortChangeEvent
+    TableSortChangeEvent,
+    TableRow
 } from './models';
-import { CollectionStringFilterStrategy, ContentDensity, FilterValueType, SelectionMode, SortDirection } from './enums';
+import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
 
-import { TableColumnComponent } from './components/table-column/table-column.component';
+import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
-import { TableViewSettingsFilterComponent } from './components/table-view-settings-filter/table-view-settings-filter.component';
-import { SortDialogData, SortDialogResultData, SortingComponent } from './components/dialogs/sorting/sorting.component';
-import {
-    FiltersComponent,
-    FiltersDialogData,
-    FiltersDialogResultData
-} from './components/dialogs/filtering/filters.component';
-import {
-    GroupDialogData,
-    GroupDialogResultData,
-    GroupingComponent
-} from './components/dialogs/grouping/grouping.component';
+import { Table } from './table';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
-const dialogConfig: DialogConfig = {
-    responsivePadding: false,
-    verticalPadding: false,
-    minWidth: '30%',
-    minHeight: '50%'
+type TreeLike<T> = T & {
+    _children?: TreeLike<T>[];
 };
+
+interface GroupTableRowValueType {
+    field: string;
+    value: unknown;
+    count: number;
+}
 
 /**
  * The component that represents a table.
@@ -106,21 +103,25 @@ const dialogConfig: DialogConfig = {
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TableService],
+    providers: [TableService, { provide: Table, useExisting: TableComponent }],
     host: {
-        '[class.fd-table]': 'true',
+        class: 'fd-table',
         '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
         '[class.fd-table--condensed]': 'contentDensity === CONTENT_DENSITY.CONDENSED',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
     }
 })
-export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChanges {
-    /** Data source for table data. */
+export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges {
+    /**
+     * Table data source.
+     * Can be @type { T[] | Observable<T[]> | TableDataSource<T> }
+     *
+     */
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
-        if (value) {
-            this._resetChecks();
+        this._ds = value;
+        if (value && this._viewInitiated) {
             this._initializeDS(value);
         }
     }
@@ -128,7 +129,9 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         return this._ds;
     }
 
-    /** Initial state of table. */
+    /**
+     * Initial state of table.
+     */
     @Input()
     set state(value: TableState) {
         this.setTableState(value || DEFAULT_TABLE_STATE);
@@ -137,17 +140,9 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         return this.getTableState();
     }
 
-    /** The column `key` to freeze columns up to and including. */
+    /** The column `name` to freeze columns up to and including. */
     @Input()
     freezeColumnsTo: string;
-
-    /** Toggle for page scrolling feature. */
-    @Input()
-    pageScrolling: boolean;
-
-    /** Number of items per page. */
-    @Input()
-    pageSize: number;
 
     /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
     @Input()
@@ -156,6 +151,14 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** Sets selection mode for the table. 'single' | 'multiple' | 'none' */
     @Input()
     selectionMode: SelectionMode = SelectionMode.NONE;
+
+    /** Toggle for page scrolling feature. */
+    @Input()
+    pageScrolling: boolean;
+
+    /** Number of items per page. */
+    @Input()
+    pageSize: number;
 
     /** Text displayed when table has no items. */
     @Input()
@@ -177,42 +180,64 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     @Input()
     noBodyBorders = false;
 
+    /** Initial visible columns. Consist of a list of unique column names */
+    @Input()
+    initialVisibleColumns: string[];
+
+    /** Initial sort options. */
+    @Input()
+    initialSortBy: CollectionSort[];
+
+    /** Initial filter options. */
+    @Input()
+    initialFilterBy: CollectionFilter[];
+
+    /** Initial group options. */
+    @Input()
+    initialGroupBy: CollectionGroup[];
+
     /** Event fired when table selection has changed. */
     @Output()
-    rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
+    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
         TableRowSelectionChangeEvent<T>
     >();
 
     /** Event fired when table sort order has changed. */
     @Output()
-    sortChange: EventEmitter<TableSortChangeEvent> = new EventEmitter<TableSortChangeEvent>();
+    readonly sortChange: EventEmitter<TableSortChangeEvent> = new EventEmitter<TableSortChangeEvent>();
 
     /** Event fired when the table filter has changed. */
     @Output()
-    filterChange: EventEmitter<TableFilterChangeEvent> = new EventEmitter<TableFilterChangeEvent>();
+    readonly filterChange: EventEmitter<TableFilterChangeEvent> = new EventEmitter<TableFilterChangeEvent>();
 
     /** Event fired when table grouping has changed. */
     @Output()
-    groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
+    readonly groupChange: EventEmitter<TableGroupChangeEvent> = new EventEmitter<TableGroupChangeEvent>();
+
+    /** Event fired when visible columns list has been changed. */
+    @Output()
+    readonly columnsChange: EventEmitter<TableColumnsChangeEvent> = new EventEmitter<TableColumnsChangeEvent>();
 
     /** Event fired when there is a change in the frozen column. */
     @Output()
-    columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
+    readonly columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
 
     /** @hidden */
     @ViewChild('tableContainer')
-    tableContainer: ElementRef;
+    readonly tableContainer: ElementRef;
 
     /** @hidden */
-    @ContentChildren(forwardRef(() => TableColumnComponent))
-    columns: QueryList<TableColumnComponent>;
+    @ContentChildren(TableColumn)
+    readonly columns: QueryList<TableColumn>;
+
+    /** @hidden */
+    _tableColumnsSubject: BehaviorSubject<TableColumn[]> = new BehaviorSubject([]);
+    /** @hidden */
+    readonly tableColumnsStream = this._tableColumnsSubject.asObservable();
 
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
-    tableToolbar: TableToolbarWithTemplate;
-
-    /** @hidden */
-    viewSettingsFilters: TableViewSettingsFilterComponent[] = [];
+    readonly tableToolbar: TableToolbarWithTemplate;
 
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
@@ -223,71 +248,115 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** @hidden */
     readonly CONTENT_DENSITY = ContentDensity;
 
-    /** @hidden Formatted rows data. */
-    _rows: SelectableRow[] = [];
+    /**
+     * @hidden
+     * Data source items stream.
+     */
+    readonly _dataSourceItemsSubject: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+    /**
+     * @hidden
+     * Representation of table rows.
+     * Contains all rows including group rows
+     */
+    _tableRows: TableRow<T>[] = [];
 
-    /** @hidden Grouped rows data. */
-    _groupedRows: { [key: string]: SelectableRow[] };
-    /** @hidden */
-    _groupsMeta: { [key: string]: any };
+    /**
+     * @hidden
+     * Visible table rows.
+     * Rows list that is used to be rendered in the ui.
+     * Based on _tableRows and excludes hidden rows.
+     */
+    _tableRowsVisible: TableRow<T>[] = [];
 
-    /** @hidden */
-    _popoverOpen = false;
+    /**
+     * @hidden
+     * Sort Rules Map. Where key is column key and value is associated sort rule
+     */
+    _sortRulesMap: Map<string, CollectionSort> = new Map();
 
-    /** @hidden */
-    _popoverColumnKey: string;
+    /**
+     * @hidden
+     * Filter Rules Map. Where key is column key and value is associated filter rules
+     * Many filters can be applied to one column
+     */
+    _filterRulesMap: Map<string, CollectionFilter[]> = new Map();
 
+    /**
+     * @hidden
+     * Group Rules Map. Where key is column key and value is associated group rule
+     */
+    _groupRulesMapSubject: BehaviorSubject<Map<string, CollectionGroup>> = new BehaviorSubject(new Map());
     /** @hidden */
-    _sortField: string;
-    /** @hidden */
-    _sortDirection: SortDirection;
+    get _groupRulesMap(): Map<string, CollectionGroup> {
+        return this._groupRulesMapSubject.getValue();
+    }
 
-    /** @hidden */
-    _filterType: FilterValueType = FilterValueType.STRING;
-
-    /** @hidden */
-    _filterValue: CollectionFilter;
-
-    /** @hidden */
-    _groupField: string;
-    /** @hidden */
-    _groupOrder: SortDirection;
+    /**
+     * @hidden
+     * Table Column Map. Where key is column key and value is column
+     */
+    _keyToColumnMap: Map<string, TableColumn> = new Map();
+    /**
+     * @hidden
+     * Table Column Map. Where key is column name and value is column
+     */
+    _nameToColumnMap: Map<string, TableColumn> = new Map();
 
     /** @hidden */
     _freezableColumns: string[] = [];
     /** @hidden */
-    _columnsSize = DEFAULT_COLUMN_WIDTH;
+    _columnWidth = DEFAULT_COLUMN_WIDTH;
     /** @hidden */
-    _selectionColumnsSize = 0;
+    _selectionColumnWidth = 0;
     /** @hidden */
     _tablePadding = 0;
 
     /** @hidden */
-    _checkedAll = false;
+    _isShownSortSettingsInToolbar = false;
 
     /** @hidden */
-    _isSortable = false;
+    _isShownFilterSettingsInToolbar = false;
 
     /** @hidden */
-    _isFilterable = false;
+    _isShownGroupSettingsInToolbar = false;
 
     /** @hidden */
-    _isGroupable = false;
+    _isShownColumnSettingsInToolbar = false;
+
+    /** @hidden */
+    _isFilteringFromHeaderDisabled = false;
 
     /** @hidden */
     _tableColumnsLength = 0;
 
-    /** @hidden */
+    /**
+     * @hidden
+     * RTL flag
+     */
     _rtl = false;
 
-    /** @hidden */
+    /**
+     * @hidden
+     * Indicates when all items are checked
+     */
+    _checkedAll = false;
+
+    /**
+     * @hidden
+     * Total items length given by data source
+     */
     _totalItems = 0;
 
-    /** @hidden */
-    private _checked = [];
+    /**
+     * @hidden
+     * Columns to be rendered in the template
+     */
+    _visibleColumns: TableColumn[] = [];
 
     /** @hidden */
-    private _unchecked = [];
+    get _isShownSelectionColumn(): boolean {
+        return this.selectionMode !== SelectionMode.NONE;
+    }
 
     /** @hidden */
     private _ds: FdpTableDataSource<T>;
@@ -302,18 +371,16 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private readonly _rowsStateChanges: Subject<SelectableRow[]> = new Subject<SelectableRow[]>();
-
-    /** @hidden */
     private _viewInitiated = false;
 
     /** @hidden */
     constructor(
         private readonly _tableService: TableService,
         private readonly _cd: ChangeDetectorRef,
-        private readonly _dialogService: DialogService,
         @Optional() private readonly _rtlService: RtlService
-    ) {}
+    ) {
+        super();
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -327,21 +394,29 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._viewInitiated = true;
+
         this._setInitialState();
 
-        this._listenToTableStateChanges();
+        if (this._ds) {
+            this._initializeDS(this._ds);
+        }
 
         this._listenToRtlChanges();
 
-        this._checkColumnsAbilities();
+        this._listenToTableStateChanges();
+
+        this._listenToColumns();
+
+        this._calculateVisibleColumns();
 
         this._setFreezableInfo();
 
-        this._listenToTableColumnsLength();
+        this._constructTableMetadata();
+
+        this._listenToTableRowsPipe();
 
         this._cd.detectChanges();
-
-        this._viewInitiated = true;
     }
 
     /** @hidden */
@@ -357,68 +432,184 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
         this._tableService.setTableState(state);
+        this._cd.markForCheck();
+    }
+
+    getTableColumns(): TableColumn[] {
+        return this.columns?.toArray() || [];
+    }
+
+    /** Set Sorting rules */
+    sort(sortRules: CollectionSort[]): void {
+        this._tableService.setSort(sortRules);
+        this._cd.markForCheck();
+    }
+
+    /** Add Sorting rules to the existing ones */
+    addSort(sortRules: CollectionSort[]): void {
+        this._tableService.addSort(sortRules);
+        this._cd.markForCheck();
+    }
+
+    /** Set Filter rules */
+    filter(filterRules: CollectionFilter[]): void {
+        this._tableService.setFilters(filterRules);
+        this._cd.markForCheck();
+    }
+
+    /** Add Filter rule */
+    addFilter(filterRules: CollectionFilter[]): void {
+        this._tableService.addFilters(filterRules);
+        this._cd.markForCheck();
+    }
+
+    /** Set Groups */
+    group(groups: CollectionGroup[]): void {
+        this._tableService.setGroups(groups);
+        this._cd.markForCheck();
+    }
+
+    /** Add Groups */
+    addGroup(groups: CollectionGroup[]): void {
+        this._tableService.addGroups(groups);
+        this._cd.markForCheck();
+    }
+
+    /**
+     * Set visible table columns
+     * The order is matter
+     * @param columns table columns names
+     */
+    setColumns(columns: string[]): void {
+        this._tableService.setColumns(columns);
+        this._cd.markForCheck();
+    }
+
+    /** Freeze table to column */
+    freezeToColumn(columnName: string): void {
+        this._tableService.freezeTo(columnName);
+        this.freezeColumnsTo = columnName;
+        this._setFreezableInfo();
+        this._cd.markForCheck();
+    }
+
+    /** Unfreeze column */
+    unfreeze(columnName: string): void {
+        const idx = this._freezableColumns.indexOf(columnName);
+        const freezeToName = this._freezableColumns[idx - 1];
+        this._tableService.freezeTo(freezeToName);
+        this.freezeColumnsTo = freezeToName;
+        this._setFreezableInfo();
+        this._cd.markForCheck();
+    }
+
+    /** Search in table */
+    search(searchInput: SearchInput): void {
+        this._tableService.search(searchInput);
+        this._cd.markForCheck();
+    }
+
+    /** Toolbar Sort Settings button visibility */
+    showSortSettingsInToolbar(showSortSettings: boolean): void {
+        this._isShownSortSettingsInToolbar = showSortSettings;
+        this._cd.detectChanges();
+    }
+
+    /** Toolbar Filter Settings button visibility */
+    showFilterSettingsInToolbar(showFilterSettings: boolean): void {
+        this._isShownFilterSettingsInToolbar = showFilterSettings;
+        this._cd.detectChanges();
+    }
+
+    /** Toolbar Group Settings button visibility */
+    showGroupSettingsInToolbar(showGroupSettings: boolean): void {
+        this._isShownGroupSettingsInToolbar = showGroupSettings;
+        this._cd.detectChanges();
+    }
+
+    /** Toolbar Columns Settings button visibility */
+    showColumnSettingsInToolbar(showColumnSettings: boolean): void {
+        this._isShownColumnSettingsInToolbar = showColumnSettings;
+        this._cd.detectChanges();
+    }
+
+    /** Disable filter from column heder menu */
+    setHeaderColumnFilteringDisabled(disabled: boolean): void {
+        this._isFilteringFromHeaderDisabled = disabled;
+    }
+
+    // Private API
+
+    /**
+     * @hidden
+     * Toggle selectable row
+     */
+    _toggleSelectableRow(rowToToggle: TableRow): void {
+        const checked = (rowToToggle.checked = !rowToToggle.checked);
+        const removed = [];
+        const added = [];
+
+        if (this.selectionMode === SelectionMode.SINGLE) {
+            // uncheck previously checked
+            this._getSelectableRows().forEach((row) => {
+                if (row === rowToToggle) {
+                    return;
+                }
+                if (row.checked) {
+                    row.checked = false;
+                    removed.push(row);
+                }
+            });
+        }
+
+        checked ? added.push(rowToToggle) : removed.push(rowToToggle);
+
+        this._emitRowSelectionChangeEvent(added, removed);
+
+        this._calculateCheckedAll();
+    }
+
+    /**
+     * @hidden
+     * Select / Unselect all selectable rows
+     */
+    _toggleAllSelectableRows(selectAll: boolean): void {
+        const removed = [];
+        const added = [];
+
+        this._getSelectableRows().forEach((row) => {
+            if (row.checked === selectAll) {
+                return;
+            }
+            row.checked = selectAll;
+            selectAll ? added.push(row) : removed.push(row);
+        });
+
+        this._emitRowSelectionChangeEvent(added, removed);
+
+        this._calculateCheckedAll();
+    }
+
+    /**
+     * @hidden
+     * Create table row selection event
+     */
+    _emitRowSelectionChangeEvent(added: TableRow[], removed: TableRow[]): void {
+        const selected = this._getSelectableRows()
+            .filter(({ checked }) => checked)
+            .map(({ value }) => value);
+
+        this.rowSelectionChange.emit({
+            source: this,
+            selection: selected,
+            added: added.map(({ value }) => value),
+            removed: removed.map(({ value }) => value),
+            index: added.concat(removed).map(({ index }) => index)
+        });
     }
 
     /** @hidden */
-    elementRef(): ElementRef<HTMLElement> {
-        return this.tableContainer;
-    }
-
-    /** @hidden Select/unselect one row in 'multiple' mode. */
-    select(index: number, row: SelectableRow, checked: boolean): void {
-        this._reset();
-        row.checked = checked;
-        this._checkedAll = !checked ? false : this._rows.reduce((check, r) => check && r.checked, true);
-        checked ? this._checked.push(row.value) : this._unchecked.push(row.value);
-        this._emitSelectionChange(index);
-    }
-
-    /** @hidden Select one row in 'single' mode. */
-    selectSingle(index: number, row: SelectableRow): void {
-        if (this.selectionMode !== SelectionMode.SINGLE) {
-            return;
-        }
-
-        this._reset();
-
-        const alreadySelected = this._rows.find((r) => r.checked === true);
-
-        if (alreadySelected) {
-            alreadySelected.checked = false;
-        }
-
-        if (alreadySelected === row) {
-            this._unchecked.push(alreadySelected.value);
-            this._emitSelectionChange(index);
-
-            return;
-        }
-
-        this._rows[index].checked = true;
-        this._checked.push(row.value);
-        this._emitSelectionChange(index);
-    }
-
-    /** @hidden Select/Unselect all rows in 'multiple' mode. */
-    selectAll(checked: boolean): void {
-        this._reset();
-        this._checkedAll = checked;
-
-        if (checked) {
-            this._checkAll();
-            this._emitSelectionChange();
-
-            return;
-        }
-
-        this._uncheckAll();
-        this._emitSelectionChange();
-    }
-
-    /** @hidden */
-    onKeydown(event: KeyboardEvent): void {
-        // TODO: since the table should be able the focusable cells, needs to implement arrow buttons navigation in next phases
-
+    _triggerClickOnKeyboardEnter(event: KeyboardEvent): void {
         event.stopPropagation();
 
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
@@ -428,126 +619,35 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         }
     }
 
-    /** @hidden */
-    sort(field: string, direction: SortDirection): void {
-        this._tableService.sort(field, direction);
-        this._popoverOpen = false;
+    /**
+     * @hidden
+     * Group By triggered from column header
+     */
+    _columnHeaderGroupBy(field: string): void {
+        this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
     }
 
-    /** @hidden */
-    filter(field: string, value: string): void {
-        this._tableService.filter([
-            {
-                field: field,
-                value: value,
-                strategy: CollectionStringFilterStrategy.CONTAINS
-            } as CollectionFilter
-        ]);
-
-        this._popoverOpen = false;
-    }
-
-    /** @hidden */
-    group(field: string): void {
-        this._tableService.group(field, SortDirection.ASC);
-        this._popoverOpen = false;
-    }
-
-    /** @hidden */
-    freezeTo(columnKey: string): void {
-        this._tableService.freezeTo(columnKey);
-        this.freezeColumnsTo = columnKey;
-        this._setFreezableInfo();
-    }
-
-    /** @hidden */
-    unfreeze(columnKey: string): void {
-        const idx = this._freezableColumns.indexOf(columnKey);
-        const freezeToKey = this._freezableColumns[idx - 1];
-        this._tableService.freezeTo(freezeToKey);
-        this.freezeColumnsTo = freezeToKey;
-        this._setFreezableInfo();
-    }
-
-    /** Search */
-    search(searchInput: SearchInput): void {
-        this._tableService.search(searchInput);
-    }
-
-    /** Open Sort Dialog */
-    openSortingDialog(): void {
-        const state = this.getTableState();
-        const columns = this._getTableColumnsAsArray();
-        const sortBy = state.sortBy?.[0];
-        const dialogData: SortDialogData = {
-            columns: columns.filter(({ sortable }) => sortable),
-            direction: sortBy?.direction,
-            field: sortBy?.field
+    /**
+     * @hidden
+     * Filter triggered from column header
+     */
+    _columnHeaderFilterBy(field: string, value: string): void {
+        const collectionFilter: CollectionStringFilter = {
+            field: field,
+            value: value,
+            strategy: FILTER_STRING_STRATEGY.CONTAINS,
+            exclude: false
         };
 
-        const dialogRef = this._dialogService.open(SortingComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
-
-        this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: SortDialogResultData) => {
-                this._tableService.sort(result.field, result.direction);
-            })
-        );
+        this.addFilter([collectionFilter]);
     }
 
-    /** Open Filtering Dialog */
-    openFilteringDialog(): void {
-        const state = this.getTableState();
-        const columns = this._getTableColumnsAsArray();
-        const dialogData: FiltersDialogData = {
-            columns: columns,
-            viewSettingsFilters: this.viewSettingsFilters,
-            filterBy: state?.filterBy
-        };
-
-        const dialogRef = this._dialogService.open(FiltersComponent, {
-            responsivePadding: false,
-            verticalPadding: false,
-            minWidth: '30%',
-            minHeight: '50%',
-            data: dialogData
-        } as DialogConfig);
-
-        this._subscriptions.add(
-            dialogRef.afterClosed
-                .pipe(filter((result) => !!result?.filterBy))
-                .subscribe((result: FiltersDialogResultData) => this._tableService.filter(result.filterBy))
-        );
-    }
-
-    /** Open Grouping Dialog */
-    openGroupingDialog(): void {
-        const state = this.getTableState();
-        const columns = this._getTableColumnsAsArray();
-        const dialogData: GroupDialogData = {
-            columns: columns.filter(({ groupable }) => groupable),
-            direction: state.groupBy?.[0]?.direction,
-            field: state.groupBy?.[0]?.field
-        };
-
-        const dialogRef = this._dialogService.open(GroupingComponent, {
-            ...dialogConfig,
-            data: dialogData
-        });
-
-        this._subscriptions.add(
-            dialogRef.afterClosed.pipe(filter((result) => !!result)).subscribe((result: GroupDialogResultData) => {
-                this._tableService.group(result.field, result.direction);
-            })
-        );
-    }
-
-    /** Set view settings filters list */
-    setViewSettingsFilters(filters: TableViewSettingsFilterComponent[]): void {
-        this.viewSettingsFilters = filters;
-        this._cd.detectChanges();
+    /**
+     * @hidden
+     * Sort triggered from column header
+     */
+    _columnHeaderSortBy(field: string, direction: SortDirection): void {
+        this.sort([{ field: field, direction: direction }]);
     }
 
     /** @hidden */
@@ -559,141 +659,134 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
     /** @hidden */
     _getFreezableCellStyles(colIdx: number): { [klass: string]: number } {
         const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
-        return { [key]: this._selectionColumnsSize + colIdx * this._columnsSize };
+        return { [key]: this._selectionColumnWidth + colIdx * this._columnWidth };
     }
 
     /** @hidden */
     _getFreezableSelectionCellStyles(): any {
-        return { 'min-width.px': this._selectionColumnsSize, 'max-width.px': this._selectionColumnsSize };
+        return { 'min-width.px': this._selectionColumnWidth, 'max-width.px': this._selectionColumnWidth };
     }
 
     /** @hidden */
-    _getGroupRowHeight(): number {
+    _getRowHeight(): number {
         return ROW_HEIGHT.get(this.contentDensity);
     }
 
-    /** @hidden */
-    _keyDescOrder = (a: KeyValue<string, SelectableRow[]>, b: KeyValue<string, SelectableRow[]>): number => {
-        const ascModifier: number = this._groupOrder === SortDirection.ASC ? 1 : -1;
-        const aNumber = parseFloat(a.key);
-        const bNumber = parseFloat(b.key);
-
-        if (!isNaN(aNumber) && !isNaN(bNumber)) {
-            return (aNumber > bNumber ? 1 : -1) * ascModifier;
-        }
-
-        return (a.key > b.key ? 1 : -1) * ascModifier;
-    };
-
-    /** @hidden */
-    _isColumnPopoverOpened(key: string): boolean {
-        return this._popoverOpen && this._popoverColumnKey === key;
+    /**
+     * @hidden
+     * Expand/Collapse group row
+     */
+    _toggleGroupRow(groupRow: TableRow): void {
+        this._toggleExpandableTableRow(groupRow);
     }
 
     /** @hidden */
-    private _getTableColumnsAsArray(): TableColumnComponent[] {
-        return this.columns?.toArray() || [];
-    }
-
-    /** @hidden */
-    private _setFreezableInfo(): void {
-        this._freezableColumns = this._getFreezableColumn();
-        this._selectionColumnsSize = SELECTION_COLUMN_WIDTH.get(`${this.selectionMode}-${this.contentDensity}`) || 0;
-        this._tablePadding = this._selectionColumnsSize + this._columnsSize * (this._freezableColumns?.length || 0);
-    }
-
-    /** @hidden */
-    private _getFreezableColumn(): string[] {
-        const columns = [];
-
-        if (!this.columns?.length || !this.freezeColumnsTo) {
-            return columns;
-        }
-
-        for (const column of this.columns.toArray()) {
-            if (!column.key) {
-                continue;
-            }
-            if (column.key === this.freezeColumnsTo) {
-                columns.push(column.key);
-
-                return columns;
-            }
-
-            columns.push(column.key);
-        }
-
-        return [];
+    _isColumnHasHeaderMenu(column: TableColumn): boolean {
+        return (
+            column.sortable ||
+            column.groupable ||
+            column.freezable ||
+            (column.filterable && !this._isFilteringFromHeaderDisabled)
+        );
     }
 
     /** @hidden */
     private _setInitialState(): void {
         const prevState = this.getTableState();
+        const columns = this.columns.toArray();
+        const visibleColumns =
+            this.initialVisibleColumns ||
+            (prevState.columns.length ? prevState.columns : columns.map(({ name }) => name));
 
         this.setTableState({
             ...prevState,
-            freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
-            columns: this.columns.toArray().map((column) => column.key)
+            columns: visibleColumns,
+            sortBy: this.initialSortBy || prevState.sortBy,
+            filterBy: this.initialFilterBy || prevState.filterBy,
+            groupBy: this.initialGroupBy || prevState.groupBy,
+            freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn
         });
+    }
+
+    /** @hidden */
+    private _listenToTableRowsPipe(): void {
+        this._subscriptions.add(
+            this._dataSourceItemsSubject
+                .asObservable()
+                .pipe(
+                    // map source items to table rows
+                    switchMap((source: T[]) => of(this._createTableRowsByDataSourceItems(source))),
+                    // Insert items to show groups
+                    switchMap((rows: TableRow[]) =>
+                        this._groupRulesMapSubject.pipe(
+                            map((groupRules) => this._groupTableRows(rows, groupRules.values()))
+                        )
+                    )
+                )
+                .subscribe((rows) => {
+                    this._setTableRows(rows);
+
+                    this._cd.markForCheck();
+                })
+        );
     }
 
     /** @hidden */
     private _listenToTableStateChanges(): void {
         this._subscriptions.add(
-            this._tableService.tableStateChanges$
+            merge(
+                // Events that should trigger DataSource.fetch()
+                this._tableService.sortChange,
+                this._tableService.filterChange,
+                this._tableService.searchChange
+            )
                 .pipe(
+                    map(() => this._tableService.getTableState()),
                     filter((state) => !!state),
                     distinctUntilChanged()
                 )
                 .subscribe((state) => {
                     this._tableDataSource?.fetch(state);
-
-                    // SORTING
-                    if (state.sortBy?.length) {
-                        this._sortDirection = state.sortBy[0].direction || null;
-                        this._sortField = state.sortBy[0].field || null;
-                    }
-
-                    // FILTERING
-                    const filterBy = state.filterBy;
-                    if (filterBy?.length) {
-                        this._filterValue = filterBy[0] || null;
-                    }
-
-                    // GROUPING
-                    if (state.groupBy?.length) {
-                        this._groupOrder = state.groupBy[0].direction || null;
-                        this._groupField = state.groupBy[0].field || null;
-                    }
                 })
         );
 
         this._subscriptions.add(
-            this._tableService.sortChange.subscribe((event) => {
+            this._tableService.sortChange.subscribe((event: SortChange) => {
+                this._buildSortRulesMap();
                 this.sortChange.emit(new TableSortChangeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.filterChange.subscribe((event) => {
+            this._tableService.filterChange.subscribe((event: FilterChange) => {
+                this._buildFilterRulesMap();
                 this.filterChange.emit(new TableFilterChangeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.freezeChange.subscribe((event) => {
+            this._tableService.freezeChange.subscribe((event: FreezeChange) => {
                 this.columnFreeze.emit(new TableColumnFreezeEvent(this, event.current, event.previous));
             })
         );
 
         this._subscriptions.add(
-            this._tableService.groupChange.subscribe((event) => {
-                this._groupRows();
+            this._tableService.groupChange.subscribe((event: GroupChange) => {
+                this._buildGroupRulesMap();
+                this._calculateVisibleColumns();
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
+            })
+        );
+
+        this._subscriptions.add(
+            this._tableService.columnsChange.subscribe((event: ColumnsChange) => {
+                this._calculateVisibleColumns();
+                this.columnsChange.emit(new TableColumnsChangeEvent(this, event.current, event.previous));
             })
         );
     }
 
+    /** @hidden */
     private _listenToRtlChanges(): void {
         this._subscriptions.add(
             this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe((rtl) => {
@@ -703,108 +796,377 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         );
     }
 
-    private _listenToTableColumnsLength(): void {
-        this._subscriptions.add(
-            this.columns.changes.pipe(startWith(null)).subscribe(() => {
-                const columnsLen = this.columns.length;
-                this._tableColumnsLength = this.selectionMode !== SelectionMode.NONE ? columnsLen + 1 : columnsLen;
-            })
-        );
-    }
-
-    private _groupRows(): void {
-        if (!this._groupField) {
-            return;
-        }
-
-        this._groupsMeta = {};
-        this._groupedRows = this._rows.reduce((acc, r) => {
-            const groupKey = getNestedValue(this._groupField, r.value);
-            if (!acc[groupKey]?.length) {
-                acc[groupKey] = [];
-
-                this._groupsMeta[groupKey] = { expanded: true };
-            }
-            acc[groupKey].push(r);
-
-            return acc;
-        }, {});
-
-        this._cd.detectChanges();
-    }
-
-    private _checkColumnsAbilities(): void {
-        if (!this.columns || !this.columns.length) {
-            return;
-        }
-
-        this._isSortable = this.columns.some((c) => c.sortable);
-        this._isFilterable = this.columns.some((c) => c.filterable);
-        this._isGroupable = this.columns.some((c) => c.groupable);
+    /** @hidden */
+    private _createTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
+        return source.map((item: T, index: number) => new TableRow('item', false, index, item));
     }
 
     /** @hidden */
-    private _checkAll(): void {
-        this._rows.forEach((r) => {
-            if (!r.checked) {
-                this._checked.push(r.value);
+    private _setTableRows(rows: TableRow[]): void {
+        this._tableRows = rows;
+        this._onTableRowsChanged();
+    }
+
+    /** @hidden */
+    private _onTableRowsChanged(): void {
+        this._calculateVisibleTableRows();
+        this._calculateCheckedAll();
+    }
+
+    /** @hidden */
+    private _calculateVisibleTableRows(): void {
+        this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
+    }
+
+    /** @hidden */
+    private _listenToColumns(): void {
+        this.columns.changes.pipe(startWith(null)).subscribe(() => {
+            const columns = this.columns.toArray();
+            this._buildColumnsMap(columns);
+            this._tableColumnsSubject.next(columns);
+        });
+    }
+
+    /**
+     * @hidden
+     * Construct visible columns for rendering purpose
+     */
+    private _calculateVisibleColumns(): void {
+        const columnsDefinition = this.columns.toArray();
+        const { columns, groupBy } = this.getTableState();
+        const groupedColumnsToHide = groupBy.filter(({ showAsColumn }) => !showAsColumn).map(({ field }) => field);
+        this._visibleColumns = columns // need to start mapping from state.columns list to keep right order
+            .map((name) => columnsDefinition.find((column) => column.name === name))
+            .filter((column) => !!column)
+            // exclude columns which shouldn't be shown due to group settings
+            .filter(({ key }) => !groupedColumnsToHide.includes(key));
+
+        this._calculateTableColumnsLength();
+    }
+
+    /** @hidden */
+    private _calculateTableColumnsLength(): void {
+        const columnsLen = this._visibleColumns.length;
+        this._tableColumnsLength = this._isShownSelectionColumn ? columnsLen + 1 : columnsLen;
+    }
+
+    /** @hidden */
+    private _setFreezableInfo(): void {
+        this._freezableColumns = this._getFreezableColumn();
+        this._selectionColumnWidth = this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
+        this._tablePadding = this._selectionColumnWidth + this._columnWidth * this._freezableColumns.length;
+    }
+
+    /** @hidden */
+    private _getFreezableColumn(): string[] {
+        const columnNames: string[] = [];
+        const columns = this._visibleColumns;
+
+        if (!columns.length || !this.freezeColumnsTo) {
+            return columnNames;
+        }
+
+        for (const column of columns) {
+            if (!column.name) {
+                continue;
+            }
+            if (column.name === this.freezeColumnsTo) {
+                columnNames.push(column.name);
+
+                return columnNames;
             }
 
-            r.checked = true;
+            columnNames.push(column.name);
+        }
+
+        return [];
+    }
+
+    /** @hidden */
+    private _constructTableMetadata(): void {
+        const state = this.getTableState();
+
+        this._buildSortRulesMap(state);
+
+        this._buildGroupRulesMap(state);
+
+        this._buildFilterRulesMap(state);
+    }
+
+    /** @hidden */
+    private _buildGroupRulesMap(state = this.getTableState()): void {
+        const groupMap = new Map(state.groupBy.map((rule) => [rule.field, rule]));
+        this._groupRulesMapSubject.next(groupMap);
+    }
+
+    /** @hidden */
+    private _buildSortRulesMap(state = this.getTableState()): void {
+        this._sortRulesMap = new Map(state.sortBy.map((rule) => [rule.field, rule]));
+    }
+
+    /** @hidden */
+    private _buildFilterRulesMap(state = this.getTableState()): void {
+        this._filterRulesMap = state.filterBy.reduce((hash, rule) => {
+            const key = rule.field;
+            if (!hash.has(key)) {
+                hash.set(key, []);
+            }
+            hash.get(key).push(rule);
+            return hash;
+        }, new Map<string, CollectionFilter[]>());
+    }
+
+    /** @hidden */
+    private _buildColumnsMap(columns = this._tableColumnsSubject.getValue()): void {
+        this._keyToColumnMap = new Map(columns.map((column) => [column.key, column]));
+        this._nameToColumnMap = new Map(columns.map((column) => [column.name, column]));
+    }
+
+    /**
+     * @hidden
+     * Group table rows and return tree like rows list.
+     * It's intended to be called recursively.
+     * @param rules group rules to group by
+     * @param rows source table rows
+     * @param parent row parent
+     * @param level level of nesting
+     */
+    private _createGroupedTableRowsTree(
+        rules: CollectionGroup[],
+        rows: TableRow[],
+        parent: TableRow = null,
+        level = 0
+    ): TreeLike<TableRow>[] {
+        rules = [...rules];
+
+        if (!rules.length) {
+            // no rules mean that it's the level of source items
+            return rows.map((row) => {
+                row.parent = parent;
+                row.level = level;
+                row.hidden = parent && !parent.expanded;
+                return row;
+            });
+        }
+
+        // Retrieve first group rule
+        const rule = rules.shift();
+
+        // Build map of unique values for a given group rule
+        const valuesHash = rows.reduce((hash, row) => {
+            const modelValue = getNestedValue(rule.field, row.value);
+
+            if (!hash.has(modelValue)) {
+                hash.set(modelValue, []);
+            }
+
+            hash.get(modelValue).push(row);
+
+            return hash;
+        }, new Map<unknown, TableRow[]>());
+
+        // Build table rows tree
+        const groupedTableRows: TreeLike<TableRow>[] = [];
+        for (const [value, values] of Array.from(valuesHash)) {
+            const filteredRows = rows.filter((_item) => values.includes(_item));
+
+            if (filteredRows.length === 0) {
+                continue;
+            }
+
+            const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = new TableRow<GroupTableRowValueType>(
+                'group',
+                false,
+                0,
+                { field: rule.field, value: value, count: 0 },
+                parent,
+                level,
+                true /** expandable */,
+                true /** expanded */,
+                parent && !parent.expanded /** hidden */
+            );
+
+            // Ads group's children rows
+            groupTableRow._children = this._createGroupedTableRowsTree(rules, filteredRows, groupTableRow, level + 1);
+
+            groupTableRow.value.count = groupTableRow._children?.length;
+
+            groupedTableRows.push(groupTableRow);
+        }
+
+        return groupedTableRows;
+    }
+
+    /**
+     * @hidden
+     * Sort tree like groups by group.direction setting
+     */
+    private _sortTreeLikeGroupedRows(groupedRows: TreeLike<TableRow>[]): TreeLike<TableRow>[] {
+        if (!groupedRows[0] || groupedRows[0].type !== 'group') {
+            return groupedRows;
+        }
+
+        const treeLikeRows = groupedRows as TreeLike<TableRow<GroupTableRowValueType>>[];
+        const firstRow = treeLikeRows[0];
+
+        treeLikeRows.forEach((group) => {
+            if (group._children) {
+                group._children = this._sortTreeLikeGroupedRows(group._children);
+            }
+        });
+
+        const groupRule = this._groupRulesMap.get(firstRow.value.field);
+
+        if (!groupRule || groupRule.direction === SortDirection.NONE) {
+            return treeLikeRows;
+        }
+
+        const direction = groupRule.direction;
+        const directionMultiplier = direction === SortDirection.ASC ? 1 : direction === SortDirection.DESC ? -1 : 0;
+
+        return treeLikeRows.slice().sort((a, b) => {
+            const aValue = a.value.value as any;
+            const bValue = b.value.value as any;
+
+            const aNumber = Number.parseFloat(aValue);
+            const bNumber = Number.parseFloat(bValue);
+            if (!Number.isNaN(aNumber) && !Number.isNaN(bNumber)) {
+                return (aNumber - bNumber) * directionMultiplier;
+            }
+
+            return (aValue > bValue ? 1 : -1) * directionMultiplier;
         });
     }
 
     /** @hidden */
-    private _uncheckAll(): void {
-        this._rows.forEach((r) => {
-            if (r.checked) {
-                this._unchecked.push(r.value);
+    private _convertTreeLikeToFlatList<K>(treeLikeList: TreeLike<K>[]): K[] {
+        let flatList: K[] = [];
+
+        for (const item of treeLikeList) {
+            flatList.push(item);
+
+            if (Array.isArray(item._children)) {
+                flatList = flatList.concat(this._convertTreeLikeToFlatList(item._children));
+                delete item._children;
             }
+        }
 
-            r.checked = false;
+        return flatList;
+    }
+
+    /** @hidden */
+    private _groupTableRows(sourceRows: TableRow[], groups: Iterable<CollectionGroup>): TableRow[] {
+        const groupRules = Array.from(groups);
+
+        if (!groupRules.length) {
+            /**
+             * In case if previously we had groups with collapsed items
+             * but now we don't have it we need to reset row.hidden flag
+             * in order to avoid empty table after groups settings removing
+             */
+            sourceRows.forEach((row) => {
+                row.hidden = false;
+            });
+            return sourceRows;
+        }
+
+        // Build tree like groups
+        const treeLikeGroupedRows = this._createGroupedTableRowsTree(groupRules, sourceRows);
+
+        // Sort tree like groups
+        const sortedTreeLikeGroupedRows = this._sortTreeLikeGroupedRows(treeLikeGroupedRows);
+
+        // Convert tree like list to a flat list
+        const flatTableRowsList = this._convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
+
+        return flatTableRowsList;
+    }
+
+    /** @hidden */
+    private _toggleExpandableTableRow(rowToToggle: TableRow): void {
+        const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
+
+        this._findRowChildren(rowToToggle).forEach((row) => {
+            // if parent is collapsed we want to hide all nested items
+            if (!expanded) {
+                row.hidden = true;
+            }
+            // if parent is expanded we want show only items which direct parents are expanded as well
+            if (expanded) {
+                row.hidden = !this._getRowParents(row, rowToToggle).every((parent) => parent.expanded);
+            }
         });
+
+        this._onTableRowsChanged();
     }
 
     /** @hidden */
-    private _reset(): void {
-        this._checked = [];
-        this._unchecked = [];
+    private _findRowChildren(row: TableRow): TableRow[] {
+        const allRows = this._tableRows;
+        const rowsLength = allRows.length;
+
+        /**
+         * Since we are dealing with a flat list
+         * it means all children go next right after the expandable row
+         * until the next row has a mutual parent
+         */
+
+        let index = allRows.indexOf(row);
+        const parents = this._getRowParents(row);
+        const children = [];
+
+        while (index++ < rowsLength) {
+            const nextRow = allRows[index];
+            if (!nextRow?.parent || parents.includes(nextRow.parent)) {
+                break;
+            }
+            children.push(nextRow);
+        }
+
+        return children;
+    }
+
+    /**
+     * Get row parents path where the first is the direct parent
+     * @param row Row which parents we need to find
+     * @param untilParent Parent to stop a search on. Default is "null" that means look up until the root
+     * @returns parents list [direct parent, ..., ancestor]
+     * @hidden
+     */
+    private _getRowParents(row: TableRow, untilParent: TableRow = null): TableRow[] {
+        untilParent = untilParent || null; // to avoid "undefined"
+        const parents = [];
+        let parent = row.parent || null; // empty parent should be coerced to "null" do not get into infinite loop
+        while (parent !== untilParent) {
+            parents.push(parent);
+            parent = parent.parent || null;
+        }
+        return parents;
     }
 
     /** @hidden */
-    private _resetChecks(): void {
+    private _resetAllSelectedRows(): void {
         this._checkedAll = false;
-        this._rows.forEach((r) => (r.checked = false));
-        this._reset();
+        this._getSelectableRows().forEach((r) => (r.checked = false));
     }
 
     /** @hidden */
-    private _emitSelectionChange(index?: number): void {
-        const selected = this._rows.filter((r) => r.checked).map((r) => r.value);
-        this.rowSelectionChange.emit({
-            source: this,
-            selection: selected,
-            added: this._checked,
-            removed: this._unchecked,
-            index: index
-                ? [index]
-                : this._rows.reduce((indexes, row, idx) => {
-                      if (this._checked.includes(row.value) || this._unchecked.includes(row.value)) {
-                          indexes.push(idx);
-                      }
+    private _calculateCheckedAll(): void {
+        this._checkedAll = this._getSelectableRows().every(({ checked }) => checked);
+    }
 
-                      return indexes;
-                  }, [])
-        });
+    /** @hidden */
+    private _getSelectableRows(): TableRow[] {
+        return this._tableRows.filter(({ type }) => type === 'item');
     }
 
     /** @hidden */
     private _initializeDS(dataSource: FdpTableDataSource<T>): void {
-        if (isDataSource(this.dataSource)) {
-            this._closeDataSource(this.dataSource);
+        if (isDataSource(this._tableDataSource)) {
+            this._closeDataSource(this._tableDataSource);
         }
 
-        this._ds = dataSource;
+        this._resetAllSelectedRows();
 
         this._tableDataSource = this._openDataStream(dataSource);
     }
@@ -832,9 +1194,8 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource.open().subscribe((rows) => {
-            this._rows = rows.map((row, index) => ({ checked: false, index: index, value: row })) || [];
-            this._rowsStateChanges.next(this._rows);
+        this._dsSubscription = initDataSource.open().subscribe((items) => {
+            this._dataSourceItemsSubject.next(items);
             this._totalItems = initDataSource.dataProvider.totalItems;
             this._cd.markForCheck();
         });
@@ -860,10 +1221,5 @@ export class TableComponent<T = any> implements AfterViewInit, OnDestroy, OnChan
         }
 
         return undefined;
-    }
-
-    /** @hidden */
-    _setPopoverColumnKey(columnKey: string): void {
-        this._popoverColumnKey = columnKey;
     }
 }

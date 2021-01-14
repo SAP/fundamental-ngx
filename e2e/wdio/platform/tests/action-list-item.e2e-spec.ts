@@ -1,18 +1,19 @@
 import { ActionListItemPo } from '../pages/action-list-item.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
 import ActionData from '../fixtures/appData/action-list-item-contents';
-import { acceptAlert, click, getAttributeByName, getElementArrayLength, refreshPage } from '../../driver/wdio';
+import { acceptAlert, click, getAttributeByName, getElementArrayLength, refreshPage, waitForPresent } from '../../driver/wdio';
 
 describe('Action List Item Test Suite:', function() {
     const actionListPg = new ActionListItemPo();
 
     beforeAll(() => {
         actionListPg.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(actionListPg.actionBtns);
+    }, 1);
 
     describe('Main checks:', function() {
         it('should check actions on click', () => {

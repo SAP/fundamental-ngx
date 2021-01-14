@@ -1,22 +1,24 @@
 import { BaseComponentPo } from './base-component.po';
 import { waitForElDisplayed } from '../../driver/wdio';
 
-export class PanelPo extends BaseComponentPo {
+export class SearchPo extends BaseComponentPo {
 
     url = '/search-field';
     root = '#page-content';
 
-
-    cozySearch = '';
-    compactSearch = '';
-
-    cozyWithCategoriesSearch = '';
-    compactWithCategoriesSearch = '';
-
-    cozyWithDataSourceSearch = '';
+    searchFields = '[type="search"]';
+    searchIcons = '[title="Submit"]';
+    clearSearchIcon = '.fdp-search-field__clear';
+    searchCategoryBtn = '.fdp-search-field__category-button';
+    autosuggestionItems = '[role="menu"] [role="menuitem"]';
+    cozySearchResult = 'fdp-platform-search-field-basic-example .result-block:nth-child(3) span';
+    compactSearchResult = 'fdp-platform-search-field-basic-example .result-block:nth-child(6) span';
+    cozyWithCategoriesSearch = 'fdp-platform-search-field-categories-example .result-block:nth-child(3) span';
+    compactWithCategoriesSearch = 'fdp-platform-search-field-categories-example .result-block:nth-child(3) span';
+    cozyWithDataSourceSearch = 'fdp-platform-search-field-data-source-example .result-block:nth-child(3) span';
 
     open(): void {
         super.open(this.url);
-        waitForElDisplayed(this.root);
+        waitForElDisplayed(this.searchFields);
     }
 }
