@@ -18,6 +18,6 @@ export class ListFocusItem implements KeyboardSupportItemInterface {
 
     /** @hidden */
     focus(): void {
-      this.elementRef.nativeElement.focus();
+      this.elementRef?.nativeElement?.focus();
     }
 }
