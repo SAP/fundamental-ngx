@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.63...v0.26.0-rc.64) (2021-01-14)
+
+
+### Bug Fixes
+
+* IE11 unit description center ([#4318](https://github.com/SAP/fundamental-ngx/issues/4318)) ([6769148](https://github.com/SAP/fundamental-ngx/commit/67691489504187eaabc8d32d9e5077b4b1ada004))
+
 ## [0.26.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.62...v0.26.0-rc.63) (2021-01-14)
 
 
