@@ -7,6 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    HostBinding,
     Injector,
     Input,
     OnChanges,
@@ -50,6 +51,8 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 
+let comboboxUniqueId = 0;
+
 /**
  * Allows users to filter through results and select a value.
  *
@@ -83,6 +86,20 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
+
+    /** Id for the Combobox. */
+    @Input()
+    comboboxId = `fd-combobox-${comboboxUniqueId++}`;
+
+    /** Aria-label for Combobox. */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: string = null;
+
+    /** Aria-Labelledby for element describing Combobox. */
+    @Input()
+    @HostBinding('attr.aria-labelledby')
+    ariaLabelledby: string = null;
 
     /** Values to be filtered in the search input. */
     @Input()
@@ -472,9 +489,14 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this.openChange.emit(isOpen);
         }
 
-        if (!this.open && !this.mobile) {
-            this.handleBlur();
-            this.searchInputElement.nativeElement.focus();
+        
+        if (!this.mobile) {
+            if (this.open) {
+                this.listComponent.setItemActive(0);
+            } else {
+                this.handleBlur();
+                this.searchInputElement.nativeElement.focus();
+            }
         }
 
         this._cdRef.detectChanges();
