@@ -21,11 +21,12 @@ describe('Multi input test suite', function() {
     beforeAll(() => {
         multiInputPage.open();
         waitForPresent(multiInputPage.mobileInput);
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(multiInputPage.allDropdownButtons);
+    }, 1);
 
     it('Verify multi input allows user to enter multiple values', () => {
         if (browserIsIEorSafari()) {

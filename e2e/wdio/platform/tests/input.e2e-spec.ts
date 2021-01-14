@@ -33,11 +33,12 @@ describe('Input should ', function() {
 
     beforeAll(() => {
         inputPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(inputPage.defaultInput);
+    }, 1);
 
     it('have input without label', () => {
         waitForElDisplayed(inputPage.defaultInput);
@@ -77,7 +78,6 @@ describe('Input should ', function() {
     });
     // TODO: it is not working the same for manual and automation.
     xit('impose any filters on the kind of input values the component receives (number)', () => {
-        waitForPresent(inputPage.numberInput);
         waitForElDisplayed(inputPage.numberInput);
         click(inputPage.numberInput);
 

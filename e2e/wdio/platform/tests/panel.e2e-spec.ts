@@ -17,7 +17,7 @@ describe('Verify Panel', () => {
 
     beforeEach(() => {
         panelPage.open();
-    });
+    }, 1);
 
     it('should have fixed header', () => {
         waitForPresent(panelPage.fixedPanelDescription);

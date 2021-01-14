@@ -23,7 +23,7 @@ describe('Info Label component test suite', () => {
 
     beforeEach(() => {
         infoLabelPage.open();
-    });
+    }, 1);
 
     it('should check default label info', () => {
         expect(getText(defaultLabel).toLowerCase()).toEqual(InfoLabelData.defaultLabelText.toLowerCase());

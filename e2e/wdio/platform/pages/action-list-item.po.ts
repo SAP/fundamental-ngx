@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ActionListItemPo extends BaseComponentPo {
     url = '/action-list-item';
@@ -15,5 +15,6 @@ export class ActionListItemPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.actionBtns);
     }
 }

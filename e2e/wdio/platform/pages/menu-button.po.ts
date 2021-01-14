@@ -23,7 +23,7 @@ export class MenuButtonPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.root);
         waitForElDisplayed(this.root);
+        waitForPresent(this.btnArrowIconsArr);
     }
 }

@@ -150,7 +150,7 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
     }
 
     /** @hidden */
-    private _updateGridListItemsProperty(key: string, value: string): void {
+    private _updateGridListItemsProperty(key: string, value: string | string[]): void {
         this._gridListItems.forEach((componenet) => {
             componenet[key] = value;
         });

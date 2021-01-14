@@ -15,11 +15,11 @@ xdescribe('Checkbox group test suite', () => {
 
     beforeAll(() => {
         checkboxGroupPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+    }, 1);
 
     describe('Checkbox Group created with List of Values.', () => {
         // TODO: Need to revise this one and consider using nexElement method

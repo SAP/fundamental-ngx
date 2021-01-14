@@ -40,11 +40,12 @@ describe('Checkbox test suite', () => {
     const checkboxPage = new CheckboxPO();
     beforeAll(() => {
         checkboxPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(checkboxPage.binaryTempCheckbox);
+    }, 1);
 
     describe('check binary checkbox used with form examples', () => {
         // TODO: Unskip after fix
@@ -311,7 +312,7 @@ describe('Checkbox test suite', () => {
         });
 
         it('should check RTL orientation', () => {
-            checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
+            checkboxPage.checkRtlSwitch();
         });
     });
 });

@@ -18,11 +18,14 @@ import {
 describe('Menu button test suite', function() {
     const menuBtnPage = new MenuButtonPo();
 
-    beforeEach(() => {
+    beforeAll(() => {
         menuBtnPage.open();
+    }, 1);
+
+    afterEach(() => {
         refreshPage();
-        waitForElDisplayed(menuBtnPage.root);
-    });
+        waitForPresent(menuBtnPage.btnArrowIconsArr);
+    }, 1);
 
     describe('Check general menu button states', function() {
         it('should check that the arrow icon is present', () => {
@@ -191,17 +194,8 @@ describe('Menu button test suite', function() {
         });
 
         it('should check RTL orientation', () => {
-            const arrL = getElementArrayLength(menuBtnPage.exampleAreaContainersArr);
-
-            for (let i = 0; arrL > i; i++) {
-                scrollIntoView(menuBtnPage.exampleAreaContainersArr, i);
-                expect(getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i);
-                expect([null, '']).toContain(dirValueBefore);
-                click(menuBtnPage.rtlSwitcherArr, i);
-                expect(getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            }
+            menuBtnPage.checkRtlSwitch();
         });
     });
-});
+})
+;

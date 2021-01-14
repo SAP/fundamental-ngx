@@ -38,7 +38,10 @@ let stepInputUniqueId = 0;
             useExisting: forwardRef(() => StepInputComponent),
             multi: true
         }
-    ]
+    ],
+    host: {
+        class: 'fd-step-input__container'
+    }
 })
 export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 

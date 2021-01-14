@@ -11,6 +11,7 @@ import {
     OnChanges,
     OnDestroy,
     Output,
+    Renderer2,
     SimpleChanges
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -156,23 +157,22 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     locked = new EventEmitter<GridListItemOutputEvent<T>>();
 
     /** @hidden */
-    get gridLayoutClasses(): string {
+    get gridLayoutClasses(): string[] {
         return this._gridLayoutClasses;
     }
 
-    set gridLayoutClasses(value: string) {
-        const el = this._elementRef.nativeElement;
+    set gridLayoutClasses(value: string[]) {
         if (!this._gridLayoutClasses) {
             this._gridLayoutClasses = value;
 
-            el.classList.add(...this._gridLayoutClasses.split(' '));
+            this._addClassesNames(this._gridLayoutClasses);
 
             return;
         }
 
-        el.classList.remove(...this._gridLayoutClasses.split(' '));
+        this._removeClassesNames(this._gridLayoutClasses);
         this._gridLayoutClasses = value;
-        el.classList.add(...this._gridLayoutClasses.split(' '));
+        this._addClassesNames(this._gridLayoutClasses);
     }
 
     /** @hidden */
@@ -216,7 +216,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     private _selectionMode?: GridListSelectionMode;
 
     /** @hidden */
-    private _gridLayoutClasses?: string;
+    private _gridLayoutClasses?: string[] = [];
 
     /** @hidden */
     private readonly subscription = new Subscription();
@@ -224,6 +224,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     constructor(
         private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
+        private readonly _render: Renderer2,
         private readonly _gridListSelectionService: GridListSelectionService<T>
     ) {
         const selectedItemsSub = this._gridListSelectionService.selectedItemsObs.subscribe((items) => {
@@ -323,10 +324,25 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         event.stopPropagation();
     }
 
+    /** @hidden */
     private get _outputEventValue(): GridListItemOutputEvent<T> {
         return {
              value: this.value,
              index: this._index
          }
      }
+
+    /** @hidden */
+    private _addClassesNames(classesNames: string[]): void {
+        for (const className of classesNames) {
+            this._render.addClass(this._elementRef.nativeElement, className);
+        }
+    }
+
+    /** @hidden */
+    private _removeClassesNames(classesNames: string[]): void {
+        for (const className of classesNames) {
+            this._render.removeClass(this._elementRef.nativeElement, className);
+        }
+    }
 }

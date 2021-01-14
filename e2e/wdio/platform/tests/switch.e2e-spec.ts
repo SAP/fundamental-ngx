@@ -21,12 +21,12 @@ describe('Verify Switch component', function() {
     const switchPage = new SwitchPo();
     beforeAll(() => {
         switchPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
         waitForElDisplayed(switchPage.root, 0, 20000);
-    });
+    }, 1);
 
     describe('has default and compact switch and', function() {
         it('should default change something to active or inactive', () => {

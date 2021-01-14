@@ -39,6 +39,10 @@ export function browserIsSafari(): boolean {
     return isBrowser('Safari');
 }
 
+export function browserIsSafariorFF(): boolean {
+    return browserIsSafari() || browserIsFirefox() ? true : false;
+}
+
 export function goBack(): void {
     browser.back();
 }
@@ -271,6 +275,7 @@ export function getElementLocation(selector: string, index: number, prop: 'x' | 
 export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
     return $$(selector)[index].getLocation(prop || void 0);
 }
+
 
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
