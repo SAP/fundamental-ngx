@@ -1059,6 +1059,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const groupRules = Array.from(groups);
 
         if (!groupRules.length) {
+            /**
+             * In case if previously we had groups with collapsed items
+             * but now we don't have it we need to reset row.hidden flag
+             * in order to avoid empty table after groups settings removing
+             */
+            sourceRows.forEach((row) => {
+                row.hidden = false;
+            });
             return sourceRows;
         }
 
