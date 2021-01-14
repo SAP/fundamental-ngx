@@ -26,7 +26,7 @@ describe('Info Label component test suite', () => {
         infoLabelPage.open();
     });
 
-    fit('should check default label info', () => {
+    it('should check default label info', () => {
         expect(getText(defaultLabel).toLowerCase()).toEqual(InfoLabelData.defaultLabelText.toLowerCase());
         expect(getCSSPropertyByName(defaultLabel, InfoLabelData.cssAlignmentAttribute).value)
             .toEqual(InfoLabelData.labelContentAlignment);
@@ -105,7 +105,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    fit('should check info label with aria label for accessibility', () => {
+    it('should check info label with aria label for accessibility', () => {
         const ariaAttrArr = elementArray(accessibilityAttrArr);
 
         if (browserIsSafari()) {
@@ -132,7 +132,7 @@ describe('Info Label component test suite', () => {
 
             for (let i = 0; i < ariaAttrArr.length; i++) {
                 expect(getCSSPropertyByName(accessibilityAttrArr, InfoLabelData.backgroundColor, i).value)
-                    .toContain(semanticColorsArr[4].value);
+                    .toContain(semanticColorsArr[1].value);
             }
         }
     });
