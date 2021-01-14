@@ -8,9 +8,8 @@ import {
 import ListData from '../fixtures/appData/list-contents';
 import {
     acceptAlert,
-    browserIsFirefox,
     browserIsIE,
-    browserIsSafari,
+    browserIsSafari, browserIsSafariorFF,
     click,
     getAlertText,
     getAttributeByName,
@@ -150,18 +149,18 @@ describe('List test suite:', function() {
 
         it('should check scroll', () => {
             // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-            if (!browserIsFirefox() && !browserIsSafari()) {
-                scrollIntoView(listPg.vScrollListItems, 0);
-                const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
-                click(listPg.vScrollListItems, 0);
-                sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
-                expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
-                waitForInvisibilityOf(listPg.vScrollLoadIcon);
-                const itemsEndCount = getElementArrayLength(listPg.vScrollListItems);
-                expect(itemsStartCount).not.toEqual(itemsEndCount);
+            if (browserIsSafariorFF()) {
+                console.log('skip FF due to #4107, skip Safari');
                 return;
             }
-            console.log('skip FF due to #4107, skip Safari');
+            scrollIntoView(listPg.vScrollListItems, 0);
+            const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
+            click(listPg.vScrollListItems, 0);
+            sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
+            expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
+            waitForInvisibilityOf(listPg.vScrollLoadIcon);
+            const itemsEndCount = getElementArrayLength(listPg.vScrollListItems);
+            expect(itemsStartCount).not.toEqual(itemsEndCount);
         });
     });
 
@@ -193,17 +192,21 @@ describe('List test suite:', function() {
 
         it('should check delete action', () => {
             click(listPg.btnDeleteBtn, 0);
-            if (!browserIsIE()) {
-                expect(getAlertText()).toContain('Delete row');
+            if (browserIsIE()) {
+                acceptAlert();
+                return;
             }
+            expect(getAlertText()).toContain('Delete row');
             acceptAlert();
         });
 
         it('should check edit action', () => {
             click(listPg.btnEditBtn, 0);
-            if (!browserIsIE()) {
-                expect(getAlertText()).toContain('Edit row');
+            if (browserIsIE()) {
+                acceptAlert();
+                return;
             }
+            expect(getAlertText()).toContain('Edit row');
             acceptAlert();
         });
     });

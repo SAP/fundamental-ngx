@@ -115,9 +115,9 @@ describe('Link component test suite', function() {
 
 function checkLinkData(element, index: number = 0): void {
     expect(getAttributeByName(element, 'type', index)).toBe('text');
-    expect(getAttributeByName(element, 'aria-label', index)).not.toBe(null, '');
-    expect(getAttributeByName(element, 'title', index)).not.toBe(null, '');
-    expect(getAttributeByName(element, 'href', index)).not.toBe(null, '');
+    expect([null, '']).not.toContain(getAttributeByName(element, 'aria-label', index));
+    expect([null, '']).not.toContain(getAttributeByName(element, 'title', index));
+    expect([null, '']).not.toContain(getAttributeByName(element, 'href', index));
 }
 
 function checkLinkHover(element): void {
@@ -137,7 +137,7 @@ function checkLinkTarget(element, site: string, newPageElement): void {
 }
 
 function checkDisabledLinkData(element, index: number = 0): void {
+    expect([null, '']).not.toContain(getAttributeByName(element, 'aria-label', index));
+    expect([null, '']).not.toContain(getAttributeByName(element, 'title', index));
     expect(getAttributeByName(element, 'type', index)).toBe('text');
-    expect(getAttributeByName(element, 'aria-label', index)).not.toBe(null, '');
-    expect(getAttributeByName(element, 'title', index)).not.toBe(null, '');
 }

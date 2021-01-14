@@ -21,6 +21,8 @@ import * as comboboxGroupTemplateT from '!raw-loader!./examples/combobox-group-e
 import * as comboboxScss from '!raw-loader!./examples/combobox-example.component.scss';
 import * as comboboxFormT from '!raw-loader!./examples/combobox-forms-example.component.ts';
 import * as comboboxFormH from '!raw-loader!./examples/combobox-forms-example.component.html';
+import * as comboboxIncludesT from '!raw-loader!./examples/combobox-includes-example.component.ts';
+import * as comboboxIncludesH from '!raw-loader!./examples/combobox-includes-example.component.html';
 import * as comboboxHeightHtml from '!raw-loader!./examples/combobox-height-example.component.html';
 import * as comboboxHeightTs from '!raw-loader!./examples/combobox-height-example.component.ts';
 import * as comboboxSeaTs from '!raw-loader!./examples/combobox-search-function-example.component.ts';
@@ -214,6 +216,20 @@ export class ComboboxDocsComponent {
             component: 'ComboboxFormsExampleComponent',
             code: comboboxFormT,
             fileName: 'combobox-forms-example'
+        }
+    ];
+
+    comboboxIncludesExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxIncludesH,
+            fileName: 'combobox-includes-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxincludesExampleComponent',
+            code: comboboxIncludesT,
+            fileName: 'combobox-includes-example'
         }
     ];
 }

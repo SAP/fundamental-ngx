@@ -63,7 +63,7 @@ describe('Fixed card layout test suite', function() {
             }
             const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
 
-            scrollIntoView(fxdCardLayoutPg.cardHeaderArr, 0);
+            scrollIntoView(fxdCardLayoutPg.cardHeaderArr);
             checkDragAndDrop(fxdCardLayoutPg.cardHeaderArr, fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardContentArr, 4);
             const newText = getText(fxdCardLayoutPg.cardDivArr);
             expect(newText).not.toBe(originalFirstCardText);
@@ -77,7 +77,7 @@ describe('Fixed card layout test suite', function() {
             }
             const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
 
-            scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
+            scrollIntoView(fxdCardLayoutPg.cardDivArr);
             checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
             const newText = getText(fxdCardLayoutPg.cardDivArr);
             expect(newText).not.toBe(originalFirstCardText);
@@ -92,7 +92,7 @@ describe('Fixed card layout test suite', function() {
             const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr, 0);
             const originalSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
 
-            scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
+            scrollIntoView(fxdCardLayoutPg.cardDivArr);
             checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
             const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
             const newSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);

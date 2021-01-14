@@ -39,6 +39,15 @@ export function browserIsSafari(): boolean {
     return isBrowser('Safari');
 }
 
+export function browserIsSafariorFF(): boolean {
+    if (browserIsSafari()) {
+        return true;
+    } else if (browserIsFirefox()) {
+        return true;
+    }
+    return false;
+}
+
 export function goBack(): void {
     browser.back();
 }
