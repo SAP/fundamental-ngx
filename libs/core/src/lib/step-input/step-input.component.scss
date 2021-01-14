@@ -15,3 +15,12 @@
         }
     }
 }
+
+.fd-step-input__container {
+	display: flex;
+	align-items: center;
+
+	.fd-form-label {
+		align-self: auto;
+	}
+}

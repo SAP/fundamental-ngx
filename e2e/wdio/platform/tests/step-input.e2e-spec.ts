@@ -5,7 +5,7 @@ import {
     getValue,
     refreshPage,
     scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 import {StepInputPo} from '../pages/step-input.po'
 import {
@@ -21,11 +21,12 @@ describe('Step input test suite', function() {
 
     beforeAll(() => {
         stepInputPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(stepInputPage.stepInputRoot);
+    }, 1);
 
     it('Verify increment and decrement buttons', () => {
         const arr = getElementArrayLength(stepInputPage.activeInput);

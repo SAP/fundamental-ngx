@@ -38,6 +38,7 @@ export * from './lib/pagination/public_api';
 export * from './lib/panel/public_api';
 export * from './lib/popover/public_api';
 export * from './lib/product-switch/public_api';
+export * from './lib/quick-view/public_api';
 export * from './lib/radio/public_api';
 export * from './lib/scroll-spy/public_api';
 export * from './lib/shellbar/public_api';

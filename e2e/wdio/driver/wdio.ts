@@ -39,6 +39,15 @@ export function browserIsSafari(): boolean {
     return isBrowser('Safari');
 }
 
+export function browserIsSafariorFF(): boolean {
+    if (browserIsSafari()) {
+        return true;
+    } else if (browserIsFirefox()) {
+        return true;
+    }
+    return false;
+}
+
 export function goBack(): void {
     browser.back();
 }
@@ -262,4 +271,10 @@ export function mouseButtonUp(button: 0 | 1 | 2 = 0): void {
 
 export function clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
+}
+
+export function getElementLocation(selector: string, index?: number): WebdriverIO.LocationReturn;
+export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
+export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
+    return $$(selector)[index].getLocation(prop || void 0);
 }

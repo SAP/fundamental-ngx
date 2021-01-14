@@ -12,22 +12,20 @@ import {
     isElementDisplayed,
     refreshPage, scrollIntoView,
     waitElementToBePresentInDOM,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 describe('Menu button test suite', function() {
     const menuBtnPage = new MenuButtonPo();
 
-    beforeAll(()=> {
-
-    })
-
-
-    beforeEach(() => {
+    beforeAll(() => {
         menuBtnPage.open();
+    }, 1);
+
+    afterEach(() => {
         refreshPage();
-        waitForElDisplayed(menuBtnPage.root);
-    });
+        waitForPresent(menuBtnPage.btnArrowIconsArr);
+    }, 1);
 
     describe('Check general menu button states', function() {
         it('should check that the arrow icon is present', () => {
@@ -196,7 +194,8 @@ describe('Menu button test suite', function() {
 
             for (let i = 0; arrL > i; i++) {
                 scrollIntoView(menuBtnPage.exampleAreaContainersArr, i);
-                expect(getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
+                expect(getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value)
+                    .toBe('ltr', 'css prop direction ' + i);
                 const dirValueBefore = getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i);
                 expect([null, '']).toContain(dirValueBefore);
                 click(menuBtnPage.rtlSwitcherArr, i);

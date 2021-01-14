@@ -14,6 +14,7 @@ import { MultiInputModule, MultiInputMobileModule, FormModule } from '@fundament
 import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
 import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
 
 const routes: Routes = [
     {
@@ -39,7 +40,8 @@ const routes: Routes = [
         MultiInputDisplaywithExampleComponent,
         MultiInputCompactExampleComponent,
         MultiInputNewTokensExampleComponent,
-        MultiInputMobileExampleComponent
+        MultiInputMobileExampleComponent,
+        MultiInputIncludesExampleComponent
     ]
 })
 export class MultiInputDocsModule {}

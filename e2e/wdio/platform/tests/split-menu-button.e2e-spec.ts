@@ -11,7 +11,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    waitForNotDisplayed
+    waitForNotDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 describe('Split menu button test suite', () => {
@@ -19,11 +19,13 @@ describe('Split menu button test suite', () => {
 
     beforeAll(() => {
         spMenuBtnPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(spMenuBtnPage.arrowBtnArr);
+    }, 1);
+
     // Wasn't debuged yet in IE and Safari
     if (!browserIsIEorSafari()) {
         it('should check drop-down arrow menu functionality', () => {
