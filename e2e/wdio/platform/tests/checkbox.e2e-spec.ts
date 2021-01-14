@@ -309,7 +309,7 @@ describe('Checkbox test suite', () => {
         });
 
         it('should check RTL orientation', () => {
-            checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
+            checkboxPage.checkRtlSwitch();
         });
     });
 });

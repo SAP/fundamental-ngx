@@ -86,8 +86,8 @@ describe('List test suite:', function() {
         });
 
         it('should check deletion', () => {
-            click(listPg.deletionBtn, 0);
-            waitForInvisibilityOf(listPg.deletionListItems, 0);
+            click(listPg.deletionBtn);
+            waitForInvisibilityOf(listPg.deletionListItems);
         });
     });
 
@@ -100,7 +100,7 @@ describe('List test suite:', function() {
         it('should check selection', () => {
             expect(getAttributeByName(listPg.multiList, ListData.selectionAttr)).toBe(ListData.multiSelect);
             expect(getText(listPg.multiToolbar)).toBe('0 : Items selected');
-            click(listPg.multiCheckbox, 0);
+            click(listPg.multiCheckbox);
             expect(getText(listPg.multiToolbar)).toBe('1 : Items selected');
             click(listPg.multiCheckbox, 1);
             expect(getText(listPg.multiToolbar)).toBe('2 : Items selected');
@@ -118,7 +118,7 @@ describe('List test suite:', function() {
 
             expect(getAttributeByName(listPg.singleList, ListData.altSelectionAttr)).toBe(ListData.singleSelect);
             expect(getText(listPg.singleToolbar)).toContain(': selected');
-            click(listPg.singleRadioBtn, 0);
+            click(listPg.singleRadioBtn);
             expect(getText(listPg.singleToolbar)).toContain(listItemId + ' : selected');
         });
     });
@@ -131,7 +131,7 @@ describe('List test suite:', function() {
         });
 
         it('should check navigation', () => {
-            click(listPg.navListLink, 0);
+            click(listPg.navListLink);
             const newUrl = getCurrentUrl();
             expect(newUrl).toContain(ListData.navUrl);
             listPg.open();
@@ -140,7 +140,7 @@ describe('List test suite:', function() {
 
     describe('Virtual Scroll examples:', function() {
         it('should do basic checks', () => {
-            isElementClickable(listPg.vScrollListItems, 0);
+            isElementClickable(listPg.vScrollListItems);
             checkElementText(listPg.vScrollListItems);
             checkAttributeValueTrue(listPg.vScrollList, ListData.scrollLoadAttr);
             checkAttributeValueTrue(listPg.vScrollList, ListData.lazyLoadAttr);
@@ -153,9 +153,9 @@ describe('List test suite:', function() {
                 console.log('skip FF due to #4107, skip Safari');
                 return;
             }
-            scrollIntoView(listPg.vScrollListItems, 0);
+            scrollIntoView(listPg.vScrollListItems);
             const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
-            click(listPg.vScrollListItems, 0);
+            click(listPg.vScrollListItems);
             sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
             expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
             waitForInvisibilityOf(listPg.vScrollLoadIcon);
@@ -191,7 +191,7 @@ describe('List test suite:', function() {
         });
 
         it('should check delete action', () => {
-            click(listPg.btnDeleteBtn, 0);
+            click(listPg.btnDeleteBtn);
             if (browserIsIE()) {
                 acceptAlert();
                 return;
@@ -201,7 +201,7 @@ describe('List test suite:', function() {
         });
 
         it('should check edit action', () => {
-            click(listPg.btnEditBtn, 0);
+            click(listPg.btnEditBtn);
             if (browserIsIE()) {
                 acceptAlert();
                 return;

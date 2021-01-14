@@ -89,7 +89,7 @@ describe('Fixed card layout test suite', function() {
                 console.log('skip IE because of #3882');
                 return;
             }
-            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr, 0);
+            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
             const originalSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
 
             scrollIntoView(fxdCardLayoutPg.cardDivArr);
@@ -157,12 +157,12 @@ describe('Fixed card layout test suite', function() {
         });
 
         it('should check drag and drop is disabled', () => {
-            const originalFirstCardText = getText(fxdCardLayoutPg.disabledCardDiv, 0);
+            const originalFirstCardText = getText(fxdCardLayoutPg.disabledCardDiv);
 
             scrollIntoView(fxdCardLayoutPg.disableDragBtn);
             click(fxdCardLayoutPg.disableDragBtn);
             checkDragAndDrop(fxdCardLayoutPg.disabledCardContent, fxdCardLayoutPg.disabledCardDiv, fxdCardLayoutPg.disabledCardContent, 4);
-            const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr, 0);
+            const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
             expect(newFirstCardText).toBe(originalFirstCardText);
         });
 
@@ -173,7 +173,7 @@ describe('Fixed card layout test suite', function() {
         });
     });
 
-    function checkDragAndDrop(clickElement, startLocation, endLocation, endLocationIndex): any {
+    function checkDragAndDrop(clickElement, startLocation, endLocation, endLocationIndex): void {
         // tslint:disable:radix
         const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
         const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));

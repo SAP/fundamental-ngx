@@ -44,7 +44,7 @@ describe('Display List Item test suite:', function() {
 
     describe('Orientation check:', function() {
         it('should check RTL and LTR orientation', () => {
-            displayListPg.checkRtlSwitch(displayListPg.rtlSwitcherArr, displayListPg.exampleAreaContainersArr);
+            displayListPg.checkRtlSwitch();
         });
     });
 });

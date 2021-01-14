@@ -15,9 +15,6 @@ export class DisplayListItemPo extends BaseComponentPo {
     declarativeDisplayTitles = 'fdp-display-list-item-with-navigation-example a span:first-of-type';
     declarativeSection = 'fdp-display-list-item-with-navigation-example ul';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

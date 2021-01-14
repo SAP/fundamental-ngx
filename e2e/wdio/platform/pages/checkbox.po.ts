@@ -24,8 +24,6 @@ export class CheckboxPO extends BaseComponentPo {
     accessibilityCheckboxes = 'fdp-platform-checkbox-a11y input';
     disabledAccessibilityCheckbox = 'fdp-platform-checkbox-a11y #a11y3';
     disabledAccessibilityCheckboxLabel = 'fdp-platform-checkbox-a11y fd-checkbox label[for=a11y3]';
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
      open(): void {
          super.open(this.url);
