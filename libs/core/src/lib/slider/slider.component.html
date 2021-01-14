@@ -5,7 +5,7 @@
                 <div *ngIf="!hideProgressBar" class="fd-slider__track-range" [style.width.%]="_progress"></div>
                 <div #handle
                      class="fd-slider__handle"
-                     tabindex="0"
+                     [attr.tabindex]="disabled ? -1 : 0"
                      role="slider"
                      aria-label="slider"
                      [fdPopover]="singleSliderPopover"
@@ -33,7 +33,7 @@
 
                 <div #rangeHandle1
                      class="fd-slider__handle"
-                     tabindex="0"
+                     [attr.tabindex]="disabled ? -1 : 0"
                      role="slider"
                      aria-label="slider"
                      [fdPopover]="rangeSliderPopover1"
@@ -52,7 +52,7 @@
 
                 <div #rangeHandle2
                      class="fd-slider__handle"
-                     tabindex="0"
+                     [attr.tabindex]="disabled ? -1 : 0"
                      role="slider"
                      aria-label="slider"
                      [fdPopover]="rangeSliderPopover2"

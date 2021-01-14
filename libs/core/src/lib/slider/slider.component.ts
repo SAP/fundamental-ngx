@@ -13,6 +13,7 @@ import {
     Optional,
     QueryList,
     Renderer2,
+    SimpleChanges,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -248,9 +249,15 @@ export class SliderComponent
     }
 
     /** @hidden */
-    ngOnChanges(): void {
+    ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
-        this._checkIsInRangeMode();
+
+        if (changes.mode.previousValue !== changes.mode.currentValue) {
+            this._checkIsInRangeMode();
+
+            
+        }
+
         this._constructTickMarks();
         this._constructValuesBySteps();
         this._recalcHandlePositions();

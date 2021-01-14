@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { SliderModule } from '@fundamental-ngx/core';
 
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+
+import { COMPONENTS } from './examples';
 import { SliderDocsComponent } from './slider-docs.component';
-import {
-    SliderBasicExampleComponent,
-    SliderPlaygroundExampleComponent,
-    SliderRangeExampleComponent, SliderTicksAndLabelsExampleComponent, SliderTicksExampleComponent
-} from './examples/slider-examples.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -28,17 +25,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, SharedDocumentationPageModule, SliderModule, FormsModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationModule,
+        SharedDocumentationPageModule,
+        SliderModule,
+        FormsModule
+    ],
     exports: [RouterModule],
-    declarations: [
-        SliderHeaderComponent,
-        SliderDocsComponent,
-        SliderBasicExampleComponent,
-        SliderRangeExampleComponent,
-        SliderTicksExampleComponent,
-        SliderTicksAndLabelsExampleComponent,
-        SliderPlaygroundExampleComponent
-    ]
+    declarations: [SliderHeaderComponent, SliderDocsComponent, ...COMPONENTS]
 })
-export class SliderDocsModule {
-}
+export class SliderDocsModule {}
