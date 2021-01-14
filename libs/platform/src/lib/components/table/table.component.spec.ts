@@ -691,8 +691,8 @@ describe('TableComponent internal', () => {
                 calculateTableElementsMetaData();
 
                 expect(tableHeaderCells.length).toBe(2); 
-                expect(tableHeaderCells[0].nativeElement.innerText).toEqual('Name');                    
-                expect(tableHeaderCells[1].nativeElement.innerText).toEqual('Status');                    
+                expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');                    
+                expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');                    
             });
         });
     });
