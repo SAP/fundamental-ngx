@@ -1,10 +1,4 @@
-.fd-form-item {
-    margin-bottom: 1rem;
-}
-
-.approval-flow__select-approvers-container {
-    width: 288px;
-}
+$block: approval-flow-user-details;
 
 :host ::ng-deep {
     a {
@@ -13,10 +7,6 @@
     }
 
     .fd-list--byline .fd-list__byline-left {
-        width: 100%;
-    }
-
-    fd-popover {
         width: 100%;
     }
 
@@ -56,10 +46,6 @@
         fd-dialog-body {
             padding: 1rem;
 
-            //&.no-top-padding {
-            //    padding-top: 0;
-            //}
-
             fdp-list {
                 display: block;
                 margin-left: -1rem;
@@ -76,6 +62,25 @@
             fd-avatar {
                 margin-left: .1875rem;
             }
+        }
+    }
+}
+
+[dir='rtl'] {
+    fd-avatar {
+        margin-right: 0;
+        margin-left: .652rem;
+    }
+
+    fd-icon {
+        margin-right: 0;
+        margin-left: .75rem;
+    }
+
+    fdp-standard-list-item::ng-deep {
+        .fd-checkbox__label {
+            left: auto;
+            right: .3125rem;
         }
     }
 }

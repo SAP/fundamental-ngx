@@ -22,12 +22,21 @@ import { PlatformObjectStatusModule } from '../object-status/public_api';
 import { PlatformSearchFieldModule } from '../search-field/public_api';
 import { PlatformListModule, StandardListItemModule } from '../list/public_api';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
-import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
+import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-details/approval-flow-approver-details.component';
 import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
+import { ApprovalFlowUserListComponent } from './approval-flow-user-list/approval-flow-user-list.component';
+import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 
 
 @NgModule({
-    declarations: [ApprovalFlowComponent, ApprovalFlowNodeComponent, ApprovalFlowUserDetailsComponent, ApprovalFlowAddNodeComponent],
+    declarations: [
+        ApprovalFlowComponent,
+        ApprovalFlowNodeComponent,
+        ApprovalFlowApproverDetailsComponent,
+        ApprovalFlowAddNodeComponent,
+        ApprovalFlowUserListComponent,
+        ApprovalFlowUserDetailsComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,

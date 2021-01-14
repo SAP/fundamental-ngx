@@ -3,24 +3,26 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     Input,
+    OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    EventEmitter,
-    OnDestroy, Optional, ViewEncapsulation
+    ViewEncapsulation
 } from '@angular/core';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundamental-ngx/core';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { debounceTime, take, takeUntil } from 'rxjs/operators';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, take } from 'rxjs/operators';
 
 import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from './interfaces';
-import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
+import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-details/approval-flow-approver-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
 import { isNodeApproved } from '@fundamental-ngx/platform';
@@ -185,7 +187,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     onNodeClick(node: ApprovalNode): void {
-        const dialog = this._dialogService.open(ApprovalFlowUserDetailsComponent, {
+        const dialog = this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
                 node: node,
                 ...this._defaultDialogOptions
@@ -212,7 +214,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     onWatcherClick(watcher: ApprovalUser): void {
-        this._dialogService.open(ApprovalFlowUserDetailsComponent, {
+        this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
                 watcher: watcher,
                 ...this._defaultDialogOptions

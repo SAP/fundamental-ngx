@@ -1,11 +1,25 @@
 <fd-dialog>
-    <fd-dialog-header>
+    <fd-dialog-header [class.show-search]="_selectApproversMode && !_userToShowDetails">
         <ng-template fdTemplate="header">
             <p>
-                <ng-container *ngIf="!_selectApproversMode && !_data.isEdit">Add approver</ng-container>
+                <ng-container *ngIf="!_selectApproversMode && !_data.isEdit">Add approvers</ng-container>
                 <ng-container *ngIf="!_selectApproversMode && _data.isEdit">Edit approver</ng-container>
-                <ng-container *ngIf="_selectApproversMode">Approvers</ng-container>
+                <ng-container *ngIf="_selectApproversMode && !_userToShowDetails">User/Team</ng-container>
+                <ng-container *ngIf="_selectApproversMode && _userToShowDetails">
+                    <fd-icon
+                        [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"
+                        (click)="_exitUserDetailsMode()"
+                    ></fd-icon>
+                    <ng-container *ngTemplateOutlet="defaultHeader"></ng-container>
+                </ng-container>
             </p>
+            <fdp-search-field
+                *ngIf="_selectApproversMode && !_userToShowDetails"
+                placeholder="Search"
+                contentDensity="compact"
+                [suggestions]="[]"
+                (inputChange)="_onSearchStringChange($event.text)"
+            ></fdp-search-field>
         </ng-template>
     </fd-dialog-header>
 
@@ -45,36 +59,32 @@
             </div>
             <div fd-form-item>
                 <label fd-form-label>Due date</label>
-                <fd-date-picker type="single" compact="true" [(ngModel)]="_dueDate"
-                                (ngModelChange)="_data.node.dueDate = _dueDate.toDate()"></fd-date-picker>
+                <fd-date-picker
+                    type="single"
+                    compact="true"
+                    [(ngModel)]="_dueDate"
+                    (ngModelChange)="_data.node.dueDate = _dueDate.toDate()">
+                </fd-date-picker>
             </div>
         </ng-container>
         <ng-container *ngIf="_selectApproversMode">
-            <div class="approval-flow-user-details__selected-count" i18n="@@platformApprovalFlowSelectedUsers"
-                 *ngIf="_selectedItems.length">{{ _selectedItems.length }}
-                {_selectedItems.length, plural, =1 {item} other {items}} selected
-            </div>
-            <fdp-list
-                selectionMode="multi"
-                [selection]="true"
-                [hasByLine]="true"
-                [(ngModel)]="_selectedItems"
-                (selectedItemChange)="_onSelectApprover($event)">
-                <fdp-standard-list-item
-                    *ngFor="let user of _approvers"
-                    [attr.id]="_listItemIdPrefix + user.id"
-                    [avatarSrc]="user.imgUrl"
-                    [avatarTitle]="user.name"
-                    [description]="user.description"
-                    [title]="user.name"
-                >
-                </fdp-standard-list-item>
-            </fdp-list>
+            <fdp-approval-flow-user-details
+                *ngIf="_userToShowDetails"
+                [user]="_userToShowDetails"
+                [detailsTemplate]="_data.userDetailsTemplate"
+                [details]="_userToShowDetailsData$"
+            ></fdp-approval-flow-user-details>
+            <fdp-approval-flow-user-list
+                *ngIf="!_userToShowDetails"
+                [users]="_filteredApprovers"
+                (onUserClick)="_seeUserDetails($event)"
+                (onSelectionChange)="_selectedApprovers = $event"
+            ></fdp-approval-flow-user-list>
         </ng-container>
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <ng-container *ngIf="!_selectApproversMode">
+        <ng-container *ngIf="!_selectApproversMode && !_userToShowDetails">
             <fd-dialog-footer-button>
                 <button
                     fd-button
@@ -98,14 +108,14 @@
                 </button>
             </fd-dialog-footer-button>
         </ng-container>
-        <ng-container *ngIf="_selectApproversMode">
+        <ng-container *ngIf="_selectApproversMode && !_userToShowDetails">
             <fd-dialog-footer-button>
                 <button
                     fd-button
                     fdType="emphasized"
                     label="Select"
                     [compact]="true"
-                    (click)="_selectApprovers()">
+                    (click)="_confirmSelectedApprovers()">
                 </button>
             </fd-dialog-footer-button>
 
@@ -117,6 +127,18 @@
                     label="Cancel"
                     [compact]="true"
                     (click)="_exitSelectApproversMode()">
+                </button>
+            </fd-dialog-footer-button>
+        </ng-container>
+        <ng-container *ngIf="_selectApproversMode && _userToShowDetails">
+            <fd-dialog-footer-button>
+                <button
+                    fd-button
+                    fd-initial-focus
+                    fdType="transparent"
+                    label="Close"
+                    [compact]="true"
+                    (click)="_exitUserDetailsMode()">
                 </button>
             </fd-dialog-footer-button>
         </ng-container>

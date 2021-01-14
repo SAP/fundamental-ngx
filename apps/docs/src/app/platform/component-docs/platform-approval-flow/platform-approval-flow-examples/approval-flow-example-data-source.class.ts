@@ -389,8 +389,8 @@ const complexGraph: ApprovalProcess = {
 };
 
 const graphs = {
-    simple: ex1,
-    // simple: simpleGraph,
+    // simple: ex1,
+    simple: simpleGraph,
     medium: mediumGraph,
     complex: complexGraph
 };

@@ -13,6 +13,7 @@ import { take } from 'rxjs/operators';
 import { ApprovalDataSource, ApprovalNode, ApprovalUser } from '../public_api';
 import { StandardListItemComponent } from '../../list/standard-list-item/standard-list-item.component';
 import { ListComponent } from '@fundamental-ngx/platform';
+import { Observable } from 'rxjs';
 
 interface AddNodeDialogRefData {
     isEdit?: boolean;
@@ -42,11 +43,14 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     _selectApproversMode = false;
     _userDetailsMode = false;
     _approvers: ApprovalUser[] = [];
-    _selectedItems: any[] = [];
+    _filteredApprovers: ApprovalUser[] = [];
     _selectedApprovers: ApprovalUser[] = [];
 
     /** @hidden */
-    _listItemIdPrefix = 'approval-node-user-';
+    _userToShowDetails: ApprovalUser;
+
+    /** @hidden */
+    _userToShowDetailsData$: Observable<any>;
 
     @ViewChild(ListComponent) list: ListComponent;
     @ViewChildren(StandardListItemComponent) listItems: QueryList<StandardListItemComponent>;
@@ -62,7 +66,10 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     ngOnInit(): void {
         this._data.approvalFlowDataSource.fetchApprovers()
             .pipe(take(1))
-            .subscribe(approvers => this._approvers = approvers);
+            .subscribe(approvers => {
+                this._approvers = approvers;
+                this._setFilteredApprovers(approvers);
+            });
         if (this._data.isEdit) {
             this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
             this._selectedApprovers = [...this._data.node.approvers];
@@ -85,14 +92,17 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
                 const selectedApproversNames = this._selectedApprovers.map(approver => approver.name);
                 this.listItems.forEach(item => {
                     item._selected = selectedApproversNames.includes(item.avatarTitle);
-                    // item.itemEl.nativeElement.click();
                     this.list._onSelectionChanged({ target: item.itemEl.nativeElement } as Event)
                 });
-                // this._selectedItems = this.listItems.filter(item => item._selected);
-                // this.listItems.filter(item => item._selected).forEach(item => this.list.selectionModel)
                 this._cdr.detectChanges();
             });
         }
+    }
+
+    /** @hidden */
+    _confirmSelectedApprovers(): void {
+        this._data.node.approvers = this._selectedApprovers;
+        this._exitSelectApproversMode();
     }
 
     /** @hidden */
@@ -102,23 +112,37 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     }
 
     /** @hidden */
-    _onSelectApprover(event: any): void {
-        console.log('onSelectApprover', event);
-        this._selectedItems = event.selectedItems;
-        this._selectedApprovers = this._getUsersFromSelectedItems();
+    _seeUserDetails(user: ApprovalUser): void {
+        this._userToShowDetails = user;
+        this._userToShowDetailsData$ = this._data.approvalFlowDataSource.fetchUser(user.id);
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
-    _selectApprovers(): void {
-        this._data.node.approvers = this._getUsersFromSelectedItems();
-        this._exitSelectApproversMode();
+    _exitUserDetailsMode(): void {
+        this._userToShowDetails = undefined;
+        this._userToShowDetailsData$ = undefined;
+        this._setFilteredApprovers(this._approvers);
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
-    _getUsersFromSelectedItems(): ApprovalUser[] {
-        return this._selectedItems.map(item =>
-            this._approvers.find(user => `${this._listItemIdPrefix + user.id}` === item.itemEl.nativeElement.id)
-        );
+    _onSearchStringChange(searchString: string): void {
+        if (!searchString) {
+            this._setFilteredApprovers(this._approvers);
+            return;
+        }
+
+        this._setFilteredApprovers(this._approvers.filter(
+            user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1
+        ));
+    }
+
+    /** @hidden */
+    _setFilteredApprovers(users: ApprovalUser[]): void {
+        console.log('_setFilteredApprovers');
+        this._filteredApprovers = [...users];
+        this._cdr.detectChanges();
     }
 
     /** @hidden */

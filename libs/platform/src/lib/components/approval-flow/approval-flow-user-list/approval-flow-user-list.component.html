@@ -1,0 +1,21 @@
+<div class="approval-flow-user-list__selected-count" i18n="@@platformApprovalFlowSelectedUsers"
+     *ngIf="_selectedItems.length">{{ _selectedItems.length }}
+    {_selectedItems.length, plural, =1 {item} other {items}} selected
+</div>
+<fdp-list
+    selectionMode="multi"
+    [selection]="true"
+    [hasByLine]="true"
+    [(ngModel)]="_selectedItems"
+    (selectedItemChange)="_onSelect($event)">
+    <fdp-standard-list-item
+        *ngFor="let _user of users"
+        [attr.id]="_idPrefix + _user.id"
+        [avatarSrc]="_user.imgUrl"
+        [avatarTitle]="_user.name"
+        [description]="_user.description"
+        [title]="_user.name"
+        (click)="$event.stopPropagation(); onUserClick.emit(_user)"
+    >
+    </fdp-standard-list-item>
+</fdp-list>
