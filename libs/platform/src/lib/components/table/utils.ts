@@ -116,3 +116,15 @@ export const filterBySelect = (rows: TableRow[], filter: CollectionSelectFilter)
 
     return rows.filter((r) => filterValues.includes(getNestedValue(filter.field, r.value)));
 };
+
+export const getUniqueListValuesByKey = <T, K extends keyof T>(list: T[], key: K): T[] => {
+    return Array.from(
+        list
+            .reduce((map, item) => {
+                map.delete(item[key]);
+                map.set(item[key], item);
+                return map;
+            }, new Map<T[K], T>())
+            .values()
+    );
+};

@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core';
 
+import { getUniqueListValuesByKey } from '../../../utils';
 import { CollectionGroup } from '../../../interfaces';
 import { SortDirection } from '../../../enums';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
@@ -149,16 +150,7 @@ export class P13GroupingDialogComponent implements Resettable {
 
     /** @hidden */
     private _getUniqueRules(rules: GroupRule[]): GroupRule[] {
-        return Array.from(
-            rules
-                .reduce((map, rule) => {
-                    // In order to keep right order need to delete previous value
-                    map.delete(rule.columnKey);
-                    map.set(rule.columnKey, rule);
-                    return map;
-                }, new Map<string, GroupRule>())
-                .values()
-        );
+        return getUniqueListValuesByKey(rules, 'columnKey');
     }
 
     /** @hidden */
