@@ -2,8 +2,10 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    forwardRef,
     Input,
     OnInit,
+    Provider,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -11,12 +13,18 @@ import { FormField } from '../../form-field';
 import { FormGroupContainer} from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
 
+export const formFieldGroupProvider: Provider = {
+    provide: FormFieldGroup,
+    useExisting: forwardRef(() => FormFieldGroupComponent)
+};
+
 @Component({
     selector: 'fdp-form-field-group',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./form-field-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [formFieldGroupProvider]
 })
 export class FormFieldGroupComponent implements FormFieldGroup, OnInit {
     /** Group header title*/
@@ -38,6 +46,6 @@ export class FormFieldGroupComponent implements FormFieldGroup, OnInit {
 
     /** @hidden */
     private _addFormFieldGroup(): void {
-        this.formGroupContainer.addFormField(this);
+        this.formGroupContainer.addFormFieldGroup(this);
     }
  }

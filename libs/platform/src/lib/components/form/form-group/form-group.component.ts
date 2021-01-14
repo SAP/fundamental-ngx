@@ -44,14 +44,10 @@ import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
 import { FormFieldGroup } from '../form-field-group';
 import { FormFieldComponent } from './form-field/form-field.component';
+import { KeyValue } from '@angular/common';
 
 interface FieldColumn {
-    [key: number]: Array<GroupField>;
-}
-
-interface FieldGroup {
-    label: string;
-    fields: FieldColumn
+    [key: number]: Array<Field>;
 }
 
 export const formGroupProvider: Provider = {
@@ -220,7 +216,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L, and M sizes and single-column layout for S size.
      */
     @Input()
-    columnLayoutType: string;
+    columnLayout: string;
 
     @ContentChild('i18n', { static: true })
     i18Template: TemplateRef<any>;
@@ -292,6 +288,10 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.updateFormFieldProperties(formField);
     }
 
+    addFormFieldGroup(formFieldGroup: FormFieldGroup): void {
+        this.formChildren.push(formFieldGroup);
+    }
+
     removeFormField(formField: FormField): void {
         this.formChildren = this.formChildren.filter((ff) => ff !== formField);
         this.removeFormControl(formField.id);
@@ -313,8 +313,12 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         return index;
     }
 
-    trackByFieldName(index: number, field: GroupField): string | undefined {
+    trackByFieldName(index: number, field: Field): string | undefined {
         return field ? field.name : undefined;
+    }
+
+    isFieldGroupRow(row: KeyValue<FieldColumn, FieldGroup>): FieldColumn {
+        return row.value instanceof FieldGroup ? row.value.fields : row.value;
     }
 
     /**
@@ -326,15 +330,12 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     private _updateFieldByColumn(): void {
         const rows: { [key: number]: FieldColumn } | { [key: number]: FieldGroup } = {};
         let rowNumber = 0;
-        let columnNumber = 1;
         let columns: FieldColumn = {};
 
         for (const child of this.formChildren) {
             if (this._isFieldChild(child)) {
-                const f = this._getGroupField(child);
-                if (this.columnLayoutType) {
-                    columnNumber = child.column ? child.column : this.xlColumnsNumber;
-                }
+                const f = this._getField(child);
+                const columnNumber = this._validateFieldColumn(child.column);
 
                 if (!columns[columnNumber]) {
                     columns[columnNumber] = [f];
@@ -349,11 +350,9 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                 columns = {};
                 rowNumber++;
 
-                const group = child.fields.map(f => this._getGroupField(f));
+                const group = child.fields.map(f => this._getField(f));
                 group.forEach(field => {
-                    if (this.columnLayoutType) {
-                        columnNumber = field.column ? field.column : this.xlColumnsNumber;
-                    }
+                    const columnNumber = this._validateFieldColumn(field.column);
 
                     if (!fieldGroupColumns[columnNumber]) {
                         fieldGroupColumns[columnNumber] = [field];
@@ -362,7 +361,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                     }
                 });
 
-                rows[rowNumber] = { label: child.label, fields: fieldGroupColumns } ;
+                rows[rowNumber] = new FieldGroup(child.label, fieldGroupColumns);
                 rowNumber++;
             }
         }
@@ -370,9 +369,26 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.formRows = rows;
     }
 
+    /** @hidden Validate column number */
+    private _validateFieldColumn(columnNumber: number): number {
+        if (this.columnLayout && columnNumber) {
+            if (isNaN(columnNumber)) {
+                throw new Error('Input a valid column number');
+            }
+
+            if (columnNumber > this.xlColumnsNumber) {
+                throw new Error(`Columns cannot be more than ${this.xlColumnsNumber}`);
+            }
+
+            return columnNumber;
+        }
+
+        return this.xlColumnsNumber;
+    }
+
     /** @hidden */
-    private _getGroupField(field: FormField): GroupField {
-        return new GroupField(
+    private _getField(field: FormField): Field {
+        return new Field(
             field.id,
             field.rank,
             field.renderer,
@@ -422,7 +438,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise a layout will set on 2 columns
      */
     private _setUserLayout(): void {
-        if (this.columnLayoutType) {
+        if (this.columnLayout) {
             this._getColumnNumbers();
             if (isNaN(this.xlColumnsNumber) || isNaN(this.lgColumnsNumber) || isNaN(this.mdColumnsNumber)) {
                 throw new Error('Input a valid number for columns');
@@ -448,14 +464,14 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     /** @hidden */
     private _getColumnNumbers(): void {
-        const [xl, lg, md] = this.columnLayoutType.split('-');
+        const [xl, lg, md] = this.columnLayout.split('-');
         this.xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
         this.lgColumnsNumber = parseInt(lg.slice(1, lg.length), 10);
         this.mdColumnsNumber = parseInt(md.slice(1, md.length), 10);
     }
 }
 
-export class GroupField {
+export class Field {
     constructor(
         public name?: string,
         public rank?: number,
@@ -463,5 +479,12 @@ export class GroupField {
         public columns: number = 6,
         public column?: number,
         public styleClass?: string,
+    ) {}
+}
+
+export class FieldGroup {
+    constructor(
+        public label: string,
+        public fields: FieldColumn,
     ) {}
 }

@@ -14,7 +14,9 @@ import {
     Optional,
     Provider,
     forwardRef,
-    ElementRef
+    ElementRef,
+    Host,
+    SkipSelf
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
@@ -24,10 +26,9 @@ import { startWith, takeUntil } from 'rxjs/operators';
 
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
-import { FormZone, Column, LabelLayout, HintPlacement } from '../../form-options';
+import { Column, LabelLayout, HintPlacement } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
-import { FormFieldGroupComponent } from '../form-field-group/form-field-group.component';
 
 export const formFieldProvider: Provider = {
     provide: FormField,
@@ -155,9 +156,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     constructor(
         private _cd: ChangeDetectorRef,
         private _elementRef: ElementRef,
-        @Optional() readonly formGroupContainer: FormGroupContainer) {
+        @Optional() readonly formGroupContainer: FormGroupContainer,
+        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
+
     }
 
     /** @hidden */
@@ -283,10 +286,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Add FormField to FormGroup
      */
     private addToFormGroup(): void {
-        // prevent adding wrapped fields into field group into form group container
-        const isFieldGroup = this._elementRef.nativeElement.parentElement.tagName.toLowerCase() === 'fdp-form-field-group';
-
-        if (!this.formGroupContainer || isFieldGroup) {
+        if (!this.formGroupContainer || this.formFieldGroup) {
             return;
         }
 

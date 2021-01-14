@@ -1,4 +1,4 @@
-<fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayoutType="XL2-L2-M2-S1">
+<fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayout="XL2-L2-M2-S1">
     <fdp-form-field
         #ff1
         id="basicTextarea"
@@ -11,7 +11,7 @@
     >
         <fdp-textarea name="basicTextarea" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field #ff2 id="seasons0" label="My favourite Seasons:" zone="zLeft" rank="2">
+    <fdp-form-field #ff2 id="seasons0" label="My favourite Seasons:" rank="2">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons0"
@@ -56,7 +56,7 @@
 </fdp-form-group>
 <br />
 
-<fdp-form-group #fg2 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M1-S1" columnLayoutType="XL2-L2-M1-S1">
+<fdp-form-group #fg2 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M1-S1" columnLayout="XL2-L2-M1-S1">
     <fdp-form-field
         #ff1
         id="basicTextarea4"
@@ -69,7 +69,7 @@
     >
         <fdp-textarea name="basicTextarea4" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field #ff2 id="seasons1" label="My favourite Seasons:" zone="zLeft" rank="2">
+    <fdp-form-field #ff2 id="seasons1" label="My favourite Seasons:" rank="2">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons1"
@@ -113,7 +113,7 @@
     </fdp-form-field>
 </fdp-form-group>
 
-<fdp-form-group #fg3 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L1-M1-S1" columnLayoutType="XL2-L1-M1-S1">
+<fdp-form-group #fg3 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L1-M1-S1" columnLayout="XL2-L1-M1-S1">
     <fdp-form-field
         #ff1
         id="basicTextarea8"
@@ -126,7 +126,7 @@
     >
         <fdp-textarea name="basicTextarea8" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field #ff2 id="seasons2" label="My favourite Seasons:" zone="zLeft" rank="2">
+    <fdp-form-field #ff2 id="seasons2" label="My favourite Seasons:" rank="2">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons2"
@@ -141,7 +141,7 @@
         label="Basic Textarea with Platform Forms 2"
         [placeholder]="'Start entering detailed description'"
         hint="This is tooltip help"
-        column="2"
+        column="1"
         rank="3"
     >
         <fdp-textarea name="basicTextarea9" [formControl]="ff3.formControl"></fdp-textarea>

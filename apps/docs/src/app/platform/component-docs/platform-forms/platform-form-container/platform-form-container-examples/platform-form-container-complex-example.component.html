@@ -1,5 +1,4 @@
-<fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayoutType="XL2-L2-M2-S1">
-    <!-- Left side -->
+<fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayout="XL2-L2-M2-S1">
     <fdp-form-field
         #ff1
         id="basicTextarea22"
@@ -44,15 +43,14 @@
         label="Step Input"
         placeholder="Things quantity"
         hint="This is tooltip to help"
-        column="1"
+        column="2"
         rank="7"
         hintPlacement="left"
     >
         <fdp-number-step-input name="qty" [formControl]="ff7.formControl"></fdp-number-step-input>
     </fdp-form-field>
 
-    <!-- Right side -->
-    <fdp-form-field #ff5 id="seasons6" label="Checkbox group " zone="zRight" rank="4">
+    <fdp-form-field #ff5 id="seasons6" label="Checkbox group " rank="4">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons6"

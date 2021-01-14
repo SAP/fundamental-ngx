@@ -18,7 +18,7 @@
                 <div class="fd-form-group__header" *ngIf="row.value.label">
                     <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
                 </div>
-                <ng-container *ngFor="let r of (row.value.fields ? row.value.fields : row.value) | keyvalue; trackBy: trackByFn">
+                <ng-container *ngFor="let r of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
                     <div class="fd-form-group fd-col__form-group fd-col" [ngClass]="xlCol">
                         <div class="fd-form-item fd-row__form-item fd-row">
                             <div

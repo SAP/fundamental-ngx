@@ -5,7 +5,7 @@
             [multiLayout]="true"
             [formGroup]="form"
             mainTitle="XL3-L1-M1-S1"
-            columnLayoutType="XL3-L1-M1-S1"
+            columnLayout="XL3-L1-M1-S1"
         >
             <fdp-form-field
                 #ff1
@@ -19,7 +19,7 @@
             >
                 <fdp-textarea name="basicTextarea12" [formControl]="ff1.formControl"></fdp-textarea>
             </fdp-form-field>
-            <fdp-form-field #ff2 id="favSeasons" label="My favourite Seasons:" zone="zLeft" rank="2">
+            <fdp-form-field #ff2 id="favSeasons" label="My favourite Seasons:" rank="2">
                 <fdp-checkbox-group
                     [list]="seasons"
                     name="favSeasons"
@@ -67,7 +67,7 @@
             [multiLayout]="true"
             [formGroup]="form"
             mainTitle="XL1-L1-M1-S1"
-            columnLayoutType="XL1-L1-M1-S1"
+            columnLayout="XL1-L1-M1-S1"
         >
             <fdp-form-field
                 #ff1
@@ -75,14 +75,13 @@
                 label="Basic Textarea with Platform Forms"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                column="3"
                 rank="1"
                 hintPlacement="left"
             >
                 <fdp-textarea name="basicTextarea16" [formControl]="ff1.formControl"></fdp-textarea>
             </fdp-form-field>
 
-            <fdp-form-field #ff2 id="seasons3" label="My favourite Seasons:" zone="zLeft" rank="2">
+            <fdp-form-field #ff2 id="seasons3" label="My favourite Seasons:" rank="2">
                 <fdp-checkbox-group
                     [list]="seasons"
                     name="seasons3"
@@ -97,7 +96,6 @@
                 label="Basic Textarea with Platform Forms"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                column="3"
                 rank="3"
                 hintPlacement="left"
             >
