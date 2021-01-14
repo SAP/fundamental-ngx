@@ -1079,11 +1079,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
 
         this._findRowChildren(rowToToggle).forEach((row) => {
-            /**
-             * if parent is collapsed we want to hide all nested items
-             * if parent is expanded we want show only items which direct parent is expanded as well
-             */
-            row.hidden = !expanded ? true : !row.parent.expanded;
+            // if parent is collapsed we want to hide all nested items
+            if (!expanded) {
+                row.hidden = true;
+            }
+            // if parent is expanded we want show only items which direct parents are expanded as well
+            if (expanded) {
+                row.hidden = !this._getRowParents(row, rowToToggle).every((parent) => parent.expanded);
+            }
         });
 
         this._onTableRowsChanged();
@@ -1117,15 +1120,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /**
      * Get row parents path where the first is the direct parent
-     * @hidden
+     * @param row Row which parents we need to find
+     * @param untilParent Parent to stop a search on. Default is "null" that means look up until the root
      * @returns parents list [direct parent, ..., ancestor]
+     * @hidden
      */
-    private _getRowParents(row: TableRow): TableRow[] {
+    private _getRowParents(row: TableRow, untilParent: TableRow = null): TableRow[] {
+        untilParent = untilParent || null; // to avoid "undefined"
         const parents = [];
-        let parent = row.parent;
-        while (parent) {
+        let parent = row.parent || null; // empty parent should be coerced to "null" do not get into infinite loop
+        while (parent !== untilParent) {
             parents.push(parent);
-            parent = parent.parent;
+            parent = parent.parent || null;
         }
         return parents;
     }
