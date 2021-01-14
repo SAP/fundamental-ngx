@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.61...v0.26.0-rc.62) (2021-01-14)
+
+
+### Bug Fixes
+
+* (Core) multi-input and combobox filtering should use startsWith ([#4288](https://github.com/SAP/fundamental-ngx/issues/4288)) ([4ea5cbe](https://github.com/SAP/fundamental-ngx/commit/4ea5cbe71ab010f81ca1bcc21ac81716963d44b5))
+
 ## [0.26.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.60...v0.26.0-rc.61) (2021-01-13)
 
 
