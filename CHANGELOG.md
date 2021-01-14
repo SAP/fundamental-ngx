@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.70...v0.26.0-rc.71) (2021-01-14)
+
+
+### Bug Fixes
+
+* (Core) add fix for empty checkbox focus ([#4323](https://github.com/SAP/fundamental-ngx/issues/4323)) ([e8fe5f5](https://github.com/SAP/fundamental-ngx/commit/e8fe5f5b4c756618af2efd67180405a3dec9851c))
+
 ## [0.26.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.69...v0.26.0-rc.70) (2021-01-14)
 
 
