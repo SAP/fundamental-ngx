@@ -61,7 +61,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @Input()
     set activeValue(activeItem: T) {
         if (this._initialized && this._activeValue !== activeItem) {
-            this._pickTime(this._getItem(activeItem), true);
+            this._pickTime(this._getItem(activeItem), false);
         }
         this._activeValue = activeItem;
     }
@@ -302,9 +302,14 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         if (!item) {
             return;
         }
-        this._triggerCarousel(item, smooth);
+
+        if (this.active) {
+            this._triggerCarousel(item, smooth);
+        }
+
         this._activeCarouselItem = item;
         this._activeValue = item.value;
+
         if (emitEvent) {
             this.activeValueChange.emit({
                 value: item.value,
@@ -382,6 +387,6 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
         if (!this._activeValue) {
             this._activeValue = this.items.first.value;
         }
-        this._pickTime(this._getItem(this._activeValue), true);
+        this._pickTime(this._getItem(this._activeValue), false);
     }
 }

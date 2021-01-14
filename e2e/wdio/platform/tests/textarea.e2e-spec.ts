@@ -30,12 +30,12 @@ describe('Verify Textarea component', function() {
     beforeAll(() => {
         textareaPage.open();
         waitForPresent(textareaPage.readOnlyTextAreaLabel);
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
         waitForPresent(textareaPage.readOnlyTextAreaLabel);
-    });
+    }, 1);
 
     if (!browserIsIEorSafari()) {
         describe('has Textarea and', function() {

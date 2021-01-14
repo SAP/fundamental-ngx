@@ -31,6 +31,7 @@ $form-label-inline-help-placement-space: 1.25rem;
 	overflow: hidden;
 
 	&--inline-help {
+		display: flex;
 		padding-left: $form-label-inline-help-placement-space;
 
 		@include rtl() {

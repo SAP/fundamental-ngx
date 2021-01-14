@@ -16,7 +16,7 @@ describe('Card test suite:', function() {
 
     beforeAll(() => {
         cardPage.open();
-    });
+    }, 1);
 
     describe('Standard card examples:', function() {
         it('should check card header', () => {

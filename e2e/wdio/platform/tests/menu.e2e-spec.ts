@@ -17,7 +17,7 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 describe('Menu component test suite', function() {
@@ -25,11 +25,12 @@ describe('Menu component test suite', function() {
 
     beforeAll(() => {
         menuPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(menuPage.menuBtnArr);
+    }, 1);
 
     it('should check menu btn styles', () => {
         if (!browserIsIEorSafari()) {

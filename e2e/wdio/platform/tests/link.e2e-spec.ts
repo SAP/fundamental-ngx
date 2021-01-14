@@ -1,53 +1,45 @@
 import { LinkPo } from '../pages/link.po';
 import {
     defaultLink_alt_text,
-    googleLink,
+    googleLink, linkFocusState,
     standardLinksAltTextArray,
     truncatedLink_alt_text
 } from '../fixtures/appData/link-page-contents';
 import {
+    browserIsIEorSafari,
     click,
     getAttributeByName,
-    getCSSPropertyByName,
+    getCSSPropertyByName, getCurrentUrl,
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    refreshPage,
-    scrollIntoView
+    scrollIntoView, waitForPresent
 } from '../../driver/wdio';
 
-xdescribe('Link component test suite', function() {
+describe('Link component test suite', function() {
     const linkPage = new LinkPo();
 
     beforeAll(() => {
         linkPage.open();
-    });
-
-    afterEach(() => {
-        refreshPage();
-    });
+    }, 1);
 
     it('should check icon link', () => {
         const iconLinkAltText = getAttributeByName(linkPage.iconLink, 'aria-label');
-        mouseHoverElement(linkPage.iconLink);
-        //  const iconLinkHoverState = getCSSPropertyByName(linkPage.iconLink, 'text-decoration');
 
+        mouseHoverElement(linkPage.iconLink);
         checkLinkData(linkPage.iconLink);
-        //  checkLinkHover(iconLinkHoverState);
+        checkLinkHover(linkPage.iconLink);
         expect(iconLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.iconLink)).toBe(true);
     });
 
     it('should check standard links', () => {
-        //  const linksArray = elementArray(linkPage.standardLinks);
         mouseHoverElement(linkPage.standardLinks);
-        //  const standardLinkHoverState = getCSSPropertyByName(linkPage.standardLinks, 'text-decoration');
-        //  expect(standardLinkHoverState.value).toContain('underline');
 
         const arrL = getElementArrayLength(linkPage.standardLinks);
         for (let i = 0; arrL > i; i++) {
-            // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement
-            if (i !== 8) {
+            // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement index 9
+            if (i !== 9) {
                 expect(getAttributeByName(linkPage.standardLinks, 'aria-label', i)).toBe(standardLinksAltTextArray[i]);
                 checkLinkData(linkPage.standardLinks, i);
                 expect(isElementClickable(linkPage.standardLinks, i)).toBe(true);
@@ -57,13 +49,13 @@ xdescribe('Link component test suite', function() {
 
     it('should check emphasized link', () => {
         const emphasizedLinkAltText = getAttributeByName(linkPage.emphasizedLink, 'aria-label');
+
         scrollIntoView(linkPage.emphasizedLink);
         mouseHoverElement(linkPage.emphasizedLink);
-        //   const emphasizedLinkHoverState = getCSSPropertyByName(linkPage.emphasizedLink, 'text-decoration');
 
         expect(getAttributeByName(linkPage.emphasizedLink, 'class')).toContain('emphasized');
         checkLinkData(linkPage.emphasizedLink);
-        //  checkLinkHover(emphasizedLinkHoverState);
+        checkLinkHover(linkPage.emphasizedLink);
         expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.emphasizedLink)).toBe(true);
     });
@@ -72,8 +64,8 @@ xdescribe('Link component test suite', function() {
         const disabledLinkAltText = getAttributeByName(linkPage.disabledLink, 'aria-label');
 
         expect(getAttributeByName(linkPage.disabledLink, 'class')).toContain('disabled');
-        //  checkLinkData(linkPage.disabledLink);
-        expect(disabledLinkAltText).toBe(defaultLink_alt_text);
+        checkDisabledLinkData(linkPage.disabledLink);
+        expect(disabledLinkAltText).toEqual(defaultLink_alt_text);
         expect(isElementClickable(linkPage.disabledLink)).toBe(false);
     });
 
@@ -82,76 +74,70 @@ xdescribe('Link component test suite', function() {
 
         expect(getAttributeByName(linkPage.emphasizedDisabledLink, 'class'))
             .toContain('disabled', 'emphasized');
-        //   checkLinkData(linkPage.emphasizedDisabledLink);
-        expect(disabledEmphasizedLinkAltText).toBe(defaultLink_alt_text);
+        checkDisabledLinkData(linkPage.emphasizedDisabledLink);
+        expect(disabledEmphasizedLinkAltText).toEqual(defaultLink_alt_text);
         expect(isElementClickable(linkPage.emphasizedDisabledLink)).toBe(false);
     });
 
     it('should check inverted link', () => {
         const invertedLinkAltText = getAttributeByName(linkPage.invertedLink, 'aria-label');
+
         scrollIntoView(linkPage.invertedLink);
         mouseHoverElement(linkPage.invertedLink);
-        //   const invertedLinkHoverState = getCSSPropertyByName(linkPage.invertedLink, 'text-decoration');
-
         expect(getAttributeByName(linkPage.invertedLink, 'class')).toContain('inverted');
         checkLinkData(linkPage.invertedLink);
-        //    checkLinkHover(invertedLinkHoverState);
+        checkLinkHover(linkPage.invertedLink);
         expect(invertedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(linkPage.invertedLink)).toBe(true);
     });
 
     it('should check truncated link', () => {
         const truncatedLinkAltText = getAttributeByName(linkPage.truncatedLink, 'aria-label');
+
         scrollIntoView(linkPage.truncatedLink);
         mouseHoverElement(linkPage.truncatedLink);
-        //   const truncatedLinkHoverState = getCSSPropertyByName(linkPage.truncatedLink, 'text-decoration');
-
         expect(getAttributeByName(linkPage.truncatedLink, 'class')).toContain('truncate');
         checkLinkData(linkPage.truncatedLink);
-        //   checkLinkHover(truncatedLinkHoverState);
+        checkLinkHover(linkPage.truncatedLink);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
         expect(isElementClickable(linkPage.truncatedLink)).toBe(true);
     });
 
-    it('should check LTR is default orientation', () => {
-        const arrL = getElementArrayLength(linkPage.exampleAreaContainersArr);
-        for (let i = 0; arrL > i; i++) {
-            expect(getCSSPropertyByName(linkPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ');
-        }
-    });
-
-    it('should have RTL orientation', () => {
-        const arrL = getElementArrayLength(linkPage.exampleAreaContainersArr);
-        for (let i = 0; arrL > i; i++) {
-            scrollIntoView(linkPage.exampleAreaContainersArr, i);
-            expect(getCSSPropertyByName(linkPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-            const dirValueBefore = getAttributeByName(linkPage.exampleAreaContainersArr, 'dir', i);
-            expect([null, '']).toContain(dirValueBefore);
-            click(linkPage.rtlSwitcherArr, i);
-            expect(getCSSPropertyByName(linkPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-            expect(getAttributeByName(linkPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-        }
-    });
-
     it('should check link navigation to new page', () => {
-        checkLinkTargetDestination(linkPage.iconLink, googleLink);
-    });
+        checkLinkTarget(linkPage.iconLink, googleLink, 'center img');
+        linkPage.open();
+    }, 2);
 
+    it('should check orientation', () => {
+        linkPage.checkRtlSwitch();
+    });
 });
 
 function checkLinkData(element, index: number = 0): void {
     expect(getAttributeByName(element, 'type', index)).toBe('text');
-    expect(getAttributeByName(element, 'aria-label', index)).not.toBe(null);
-    expect(getAttributeByName(element, 'title', index)).not.toBe(null);
-    expect(getAttributeByName(element, 'href', index)).not.toBe(null);
+    expect([null, '']).not.toContain(getAttributeByName(element, 'aria-label', index));
+    expect([null, '']).not.toContain(getAttributeByName(element, 'title', index));
+    expect([null, '']).not.toContain(getAttributeByName(element, 'href', index));
 }
 
-// TODO: fails in IE, Safari
-// function checkLinkHover(element): void {
-//     expect(element.value).toContain(linkFocusState);
-// }
+function checkLinkHover(element): void {
+    // TODO fix for IE & Safari
+    if (browserIsIEorSafari()) {
+        console.log('skip hover check for IE, Safari');
+        return;
+    }
+    expect(getCSSPropertyByName(element, 'text-decoration').value).toContain(linkFocusState);
+}
 
-function checkLinkTargetDestination(element, site: string): void {
+function checkLinkTarget(element, site: string, newPageElement): void {
     click(element);
-    expect(browser).toHaveUrlContaining(site);
+    waitForPresent(newPageElement);
+    const newUrl = getCurrentUrl();
+    expect(newUrl).toContain(site);
+}
+
+function checkDisabledLinkData(element, index: number = 0): void {
+    expect([null, '']).not.toContain(getAttributeByName(element, 'aria-label', index));
+    expect([null, '']).not.toContain(getAttributeByName(element, 'title', index));
+    expect(getAttributeByName(element, 'type', index)).toBe('text');
 }

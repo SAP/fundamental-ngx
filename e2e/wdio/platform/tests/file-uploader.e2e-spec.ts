@@ -6,7 +6,7 @@ import {
     getElementArrayLength,
     getText,
     refreshPage, sendKeys,
-    uploadFile
+    uploadFile, waitForPresent
 } from '../../driver/wdio';
 import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';
@@ -16,11 +16,12 @@ describe('File uploader test suite', function() {
 
     beforeAll(() => {
         fileUploaderPO.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(fileUploaderPO.fileUploaderRoot);
+    }, 1);
 
     it('Verify placeholders', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.fileUploaderInput);
