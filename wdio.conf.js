@@ -11,9 +11,9 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     // runner: 'local',
-    user: process.env.SAUCE_USERNAME,
-    key: process.env.SAUCE_ACCESS_KEY,
-    region: 'eu',
+    // user: process.env.SAUCE_USERNAME,
+    // key: process.env.SAUCE_ACCESS_KEY,
+    // region: 'eu',
     //
     // ==================
     // Specify Test Files
@@ -24,7 +24,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*.e2e-spec.ts'
+        './e2e/wdio/**/info-label.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -54,46 +54,46 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [
-        {
-            browserName: 'internet explorer',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                requireWindowFocus: true,
-            }
-        },
-        {
-            browserName: 'MicrosoftEdge',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'firefox',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1080',
-            }
-        },
-        {
-            browserName: 'chrome',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
+        // {
+        //     browserName: 'internet explorer',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     'sauce:options': {
+        //         screenResolution: '1920x1080',
+        //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //         requireWindowFocus: true,
+        //     }
+        // },
+        // {
+        //     browserName: 'MicrosoftEdge',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         screenResolution: '1920x1080',
+        //         name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //     }
+        // },
+        // {
+        //     browserName: 'firefox',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //         screenResolution: '1920x1080',
+        //     }
+        // },
+        // {
+        //     browserName: 'chrome',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         screenResolution: '1920x1080',
+        //         name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //     }
+        // },
         {
             browserName: 'chrome',
             platformName: 'macOS 10.15',
@@ -104,26 +104,26 @@ exports.config = {
                 screenResolution: '1920x1440',
             }
         },
-        {
-            browserName: 'firefox',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'MicrosoftEdge',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
+        // {
+        //     browserName: 'firefox',
+        //     platformName: 'macOS 10.15',
+        //     browserVersion: 'latest',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         screenResolution: '1920x1440',
+        //         name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //     }
+        // },
+        // {
+        //     browserName: 'MicrosoftEdge',
+        //     platformName: 'macOS 10.15',
+        //     browserVersion: 'latest',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         screenResolution: '1920x1440',
+        //         name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //     }
+        // },
         // {
         //     browserName: 'safari',
         //     browserVersion: '13.1',
@@ -165,7 +165,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://sap.dev:4200/',
+    baseUrl: 'localhost:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
@@ -182,11 +182,11 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     // services: ['chromedriver'],
-    services: [
-        ['sauce', {
-            sauceConnect: true
-        }]
-    ],
+    // services: [
+    //     ['sauce', {
+    //         sauceConnect: true
+    //     }]
+    // ],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
