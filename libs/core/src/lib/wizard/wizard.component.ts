@@ -17,6 +17,7 @@ import {
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { Subscription } from 'rxjs';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
+import { scrollTop } from '../utils/functions/scroll';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -309,23 +310,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                         '.' + WIZARD_NAVIGATION_CLASS
                     ).clientHeight;
 
-                    this.scrollTo(this.wrapperContainer.nativeElement, child.offsetTop - wizardNavigationHeight);
+                    scrollTop(this.wrapperContainer.nativeElement, child.offsetTop - wizardNavigationHeight);
                 }
             });
             this._setUpScrollListener();
-        }
-    }
-
-    /** @hidden */
-    private scrollTo(containerElement: Element, distanceToScroll: number): void {
-        // Check if scrollTo method is supported by current browser
-        if (containerElement.scrollTo && containerElement.scrollTo instanceof Function) {
-            containerElement.scrollTo({
-                top: distanceToScroll,
-                behavior: 'smooth'
-            })
-        } else {
-            containerElement.scrollTop = distanceToScroll;
         }
     }
 

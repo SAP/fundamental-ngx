@@ -26,6 +26,7 @@ import { TabInfo } from './tab-utils/tab-info.class';
 import { TabsService } from './tabs.service';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '../menu/menu.component';
+import { scrollTop } from '../utils/functions/scroll';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -453,7 +454,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
                     debounceTime(100),
                     first()
                 ).subscribe(() => this._disableScrollSpy = false);
-            this.scrollTo(containerElement, distanceToScroll);
+            scrollTop(containerElement, distanceToScroll);
         }
     }
 
@@ -462,18 +463,5 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         return !tabPanel.disabled
         && expand !== tabPanel.expanded
         && expand === false ? this.collapsibleTabs : true;
-    }
-
-    /** @hidden */
-    private scrollTo(containerElement: Element, distanceToScroll: number): void {
-        // Check if scrollTo method is supported by current browser
-        if (containerElement.scrollTo && containerElement.scrollTo instanceof Function) {
-            containerElement.scrollTo({
-                top: distanceToScroll,
-                behavior: 'smooth'
-            })
-        } else {
-            containerElement.scrollTop = distanceToScroll;
-        }
     }
 }
