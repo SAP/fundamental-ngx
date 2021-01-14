@@ -21,7 +21,7 @@ import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/co
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { DefaultPositions, PopoverPosition } from '../popover-position/popover-position';
+import { GetDefaultPosition, PopoverPosition } from '../popover-position/popover-position';
 import { BasePopoverClass } from '../base/base-popover.class';
 import { RtlService } from '../../utils/services/rtl.service';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
@@ -40,6 +40,9 @@ export class PopoverService extends BasePopoverClass {
     stringContent: string;
 
     templateContent: TemplateRef<any>;
+
+    /** @hidden */
+    _onLoad = new Subject<ElementRef>();
 
     /** @hidden */
     private _eventRef: Function[] = [];
@@ -140,6 +143,7 @@ export class PopoverService extends BasePopoverClass {
 
             this._listenOnClose();
             this._listenOnOutClicks();
+            this._onLoad.next(this._getPopoverBody()._elementRef);
         }
     }
 
@@ -214,6 +218,7 @@ export class PopoverService extends BasePopoverClass {
 
         return new OverlayConfig({
             direction: direction,
+            disposeOnNavigation: this.closeOnNavigation,
             positionStrategy: position,
             scrollStrategy: this.scrollStrategy || this._overlay.scrollStrategies.reposition()
         });
@@ -242,7 +247,7 @@ export class PopoverService extends BasePopoverClass {
         let resultPosition = forcedPositions ? forcedPositions : this._getPositions();
 
         if (!this.fixedPosition) {
-            resultPosition = resultPosition.concat(DefaultPositions);
+            resultPosition = resultPosition.concat(GetDefaultPosition(resultPosition));
         }
 
         return this._overlay

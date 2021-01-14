@@ -215,6 +215,13 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     @Input()
     showDropdownButton = true;
 
+    /**
+     * Whether or not to return results where the input matches the entire string. By default, only results that start
+     * with the input search term will be returned.
+     */
+    @Input()
+    includes = false;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
@@ -536,7 +543,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             const searchLower = searchTerm.toLocaleLowerCase();
             return contentArray.filter((item) => {
                 if (item) {
-                    return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
+                    const term = this.displayFn(item).toLocaleLowerCase();
+                    let retVal;
+                    this.includes ? retVal = term.includes(searchLower) : retVal = term.startsWith(searchLower);
+                    return retVal;
                 }
             });
         } else if (typeof searchTerm === 'object') {

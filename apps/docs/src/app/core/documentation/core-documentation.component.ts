@@ -65,6 +65,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/panel', name: 'Panel' },
             { url: 'core/popover', name: 'Popover' },
             { url: 'core/product-switch', name: 'Product Switch' },
+            { url: 'core/quick-view', name: 'Quick View' },
             { url: 'core/radio', name: 'Radio Button' },
             { url: 'core/rating-indicator', name: 'Rating Indicator' },
             { url: 'core/select', name: 'Select' },
