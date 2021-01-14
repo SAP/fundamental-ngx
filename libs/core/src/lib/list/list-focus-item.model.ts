@@ -13,7 +13,7 @@ export class ListFocusItem implements KeyboardSupportItemInterface {
 
     /** @hidden */
     click(): void {
-      this.elementRef.nativeElement.click();
+      this.elementRef?.nativeElement?.click();
     }
 
     /** @hidden */
