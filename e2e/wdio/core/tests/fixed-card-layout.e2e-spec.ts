@@ -57,83 +57,83 @@ describe('Fixed card layout test suite', function() {
         it('should drag a card from the header', () => {
             // skip Safari for now due to issue where mouse position resets to 0,0
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!browserIsIEorSafari()) {
-                const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
-
-                scrollIntoView(fxdCardLayoutPg.cardHeaderArr, 0);
-                checkDragAndDrop(fxdCardLayoutPg.cardHeaderArr, fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardContentArr, 4);
-                const newText = getText(fxdCardLayoutPg.cardDivArr);
-                expect(newText).not.toBe(originalFirstCardText);
+            if (browserIsIEorSafari()) {
+                console.log('Skip for Safari and IE');
                 return;
             }
-            console.log('Skip for Safari and IE');
+            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+
+            scrollIntoView(fxdCardLayoutPg.cardHeaderArr, 0);
+            checkDragAndDrop(fxdCardLayoutPg.cardHeaderArr, fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardContentArr, 4);
+            const newText = getText(fxdCardLayoutPg.cardDivArr);
+            expect(newText).not.toBe(originalFirstCardText);
         });
 
         it('should drag a card from the content area', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!browserIsIE()) {
-                const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
-
-                scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
-                checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
-                const newText = getText(fxdCardLayoutPg.cardDivArr);
-                expect(newText).not.toBe(originalFirstCardText);
+            if (browserIsIE()) {
+                console.log('Skip IE because of #3882');
                 return;
             }
-            console.log('Skip IE because of #3882');
+            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+
+            scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
+            checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
+            const newText = getText(fxdCardLayoutPg.cardDivArr);
+            expect(newText).not.toBe(originalFirstCardText);
         });
 
         it('should check drag and drop cards swap locations', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!browserIsIE()) {
-                const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr, 0);
-                const originalSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
-
-                scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
-                checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
-                const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
-                const newSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
-                expect(newFirstCardText).not.toBe(originalFirstCardText);
-                expect(newSwapCardText).not.toBe(originalSwapCardText);
+            if (browserIsIE()) {
+                console.log('skip IE because of #3882');
                 return;
             }
-            console.log('skip IE because of #3882');
+            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr, 0);
+            const originalSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
+
+            scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
+            checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
+            const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+            const newSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
+            expect(newFirstCardText).not.toBe(originalFirstCardText);
+            expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
 
         it('should check placeholder exists on drag', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!browserIsIE()) {
-                scrollIntoView(fxdCardLayoutPg.cardDivArr);
-                const clickElement = fxdCardLayoutPg.cardContentArr;
-                const locationElement = fxdCardLayoutPg.cardDivArr;
-
-                // tslint:disable:radix
-                const clickXLocation = parseInt(getElementLocation(clickElement, 'x'));
-                const clickYLocation = parseInt(getElementLocation(clickElement, 'y'));
-                const startXLocation = parseInt(getElementLocation(locationElement, 'x'));
-                const startYLocation = parseInt(getElementLocation(locationElement, 'y'));
-                const endXLocation = parseInt(getElementLocation(locationElement, 'x', 4));
-                const endYLocation = parseInt(getElementLocation(locationElement, 'y', 4));
-
-                browser.performActions([{
-                    'type': 'pointer',
-                    'id': 'pointer1',
-                    'parameters': { 'pointerType': 'mouse' },
-                    'actions': [
-                        { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
-                        { 'type': 'pointerDown', 'button': 0 },
-                        { 'type': 'pause', 'duration': 600 },
-                        { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
-                        { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 30, 'y': endYLocation + 30 }
-                    ]
-                }]);
-
-                expect(elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
-                expect(getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
-                    .toEqual(fxdCardLytData.placeholderBorderStyle);
+            if (browserIsIE()) {
+                console.log('Skip for IE because of #3882');
                 return;
             }
-            console.log('Skip for IE because of #3882');
+            scrollIntoView(fxdCardLayoutPg.cardDivArr);
+            const clickElement = fxdCardLayoutPg.cardContentArr;
+            const locationElement = fxdCardLayoutPg.cardDivArr;
+
+            // tslint:disable:radix
+            const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
+            const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
+            const startXLocation = Math.floor(getElementLocation(locationElement, 0, 'x'));
+            const startYLocation = Math.floor(getElementLocation(locationElement, 0, 'y'));
+            const endXLocation = Math.floor(getElementLocation(locationElement, 4, 'x'));
+            const endYLocation = Math.floor(getElementLocation(locationElement, 4, 'y'));
+
+            browser.performActions([{
+                'type': 'pointer',
+                'id': 'pointer1',
+                'parameters': { 'pointerType': 'mouse' },
+                'actions': [
+                    { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
+                    { 'type': 'pointerDown', 'button': 0 },
+                    { 'type': 'pause', 'duration': 600 },
+                    { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
+                    { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 30, 'y': endYLocation + 30 }
+                ]
+            }]);
+
+            expect(elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
+            expect(getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
+                .toEqual(fxdCardLytData.placeholderBorderStyle);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
@@ -175,12 +175,12 @@ describe('Fixed card layout test suite', function() {
 
     function checkDragAndDrop(clickElement, startLocation, endLocation, endLocationIndex): any {
         // tslint:disable:radix
-        const clickXLocation = parseInt(getElementLocation(clickElement, 'x'));
-        const clickYLocation = parseInt(getElementLocation(clickElement, 'y'));
-        const startXLocation = parseInt(getElementLocation(startLocation, 'x'));
-        const startYLocation = parseInt(getElementLocation(startLocation, 'y'));
-        const endXLocation = parseInt(getElementLocation(endLocation, 'x', endLocationIndex));
-        const endYLocation = parseInt(getElementLocation(endLocation, 'y', endLocationIndex));
+        const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
+        const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
+        const startXLocation = Math.floor(getElementLocation(startLocation, 0, 'x'));
+        const startYLocation = Math.floor(getElementLocation(startLocation, 0, 'y'));
+        const endXLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'x'));
+        const endYLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'y'));
 
         browser.performActions([{
             'type': 'pointer',

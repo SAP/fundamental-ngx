@@ -268,6 +268,8 @@ export function  clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
 }
 
-export function getElementLocation(selector: string, LocationParam, index: number = 0): any {
-    return $$(selector)[index].getLocation(LocationParam);
+export function getElementLocation(selector: string, index?: number): WebdriverIO.LocationReturn;
+export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
+export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
+    return $$(selector)[index].getLocation(prop || void 0);
 }

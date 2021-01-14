@@ -12,8 +12,8 @@ import {
     getCSSPropertyByName, getCurrentUrl,
     getElementArrayLength,
     isElementClickable,
-    mouseHoverElement, pause,
-    scrollIntoView
+    mouseHoverElement,
+    scrollIntoView, waitForPresent
 } from '../../driver/wdio';
 
 describe('Link component test suite', function() {
@@ -104,9 +104,9 @@ describe('Link component test suite', function() {
     });
 
     it('should check link navigation to new page', () => {
-        checkLinkTarget(linkPage.iconLink, googleLink);
+        checkLinkTarget(linkPage.iconLink, googleLink, 'center img');
         linkPage.open();
-    }, 1);
+    }, 2);
 
     it('should check orientation', () => {
         linkPage.checkRtlSwitch();
@@ -122,16 +122,16 @@ function checkLinkData(element, index: number = 0): void {
 
 function checkLinkHover(element): void {
     // TODO fix for IE & Safari
-    if (!browserIsIEorSafari()) {
-        expect(getCSSPropertyByName(element, 'text-decoration').value).toContain(linkFocusState);
+    if (browserIsIEorSafari()) {
+        console.log('skip hover check for IE, Safari');
         return;
     }
-    console.log('skip hover check for IE, Safari');
+    expect(getCSSPropertyByName(element, 'text-decoration').value).toContain(linkFocusState);
 }
 
-function checkLinkTarget(element, site: string): void {
+function checkLinkTarget(element, site: string, newPageElement): void {
     click(element);
-    pause(5000);
+    waitForPresent(newPageElement);
     const newUrl = getCurrentUrl();
     expect(newUrl).toContain(site);
 }
