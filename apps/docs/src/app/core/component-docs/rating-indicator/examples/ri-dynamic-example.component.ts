@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-ri-dynamic-example',
-    templateUrl: './ri-dynamic-example.component.html',
-    styleUrls: ['./rating-indicator-style.component.scss']
+    selector: 'fd-ri-dynamic-example',
+    templateUrl: './ri-dynamic-example.component.html'
 })
 export class RatingIndicatorDynamicExampleComponent {
     config = {

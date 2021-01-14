@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import * as ratingExampleScs from '!raw-loader!./examples/rating-indicator-style.component.scss';
 
 import * as sizeRatingHtml from '!raw-loader!./examples/rating-indicator-sizes.component.html';
 import * as sizesRatingTs from '!raw-loader!./examples/rating-indicator-sizes.component.ts';
@@ -33,8 +32,7 @@ export class RatingIndicatorDocsComponent {
             code: sizeRatingHtml,
             fileName: 'rating-indicator-sizes',
             typescriptFileCode: sizesRatingTs,
-            component: 'RatingIndicatorSizesExampleComponent',
-            scssFileCode: ratingExampleScs
+            component: 'RatingIndicatorSizesExampleComponent'
         }
     ];
 
@@ -42,8 +40,7 @@ export class RatingIndicatorDocsComponent {
         {
             language: 'html',
             fileName: 'rating-indicator-ratings',
-            code: ratingsObjectHtml,
-            scssFileCode: ratingExampleScs
+            code: ratingsObjectHtml
         },
         {
             language: 'typescript',
@@ -59,8 +56,7 @@ export class RatingIndicatorDocsComponent {
             code: baseHtml,
             fileName: 'rating-indicator-example',
             typescriptFileCode: baseTs,
-            component: 'RatingIndicatorExampleComponent',
-            scssFileCode: ratingExampleScs
+            component: 'RatingIndicatorExampleComponent'
         }
     ];
 
@@ -70,8 +66,7 @@ export class RatingIndicatorDocsComponent {
             code: dynamicHtml,
             fileName: 'ri-dynamic-example',
             typescriptFileCode: dynamicTs,
-            component: 'RatingIndicatorDynamicExampleComponent',
-            scssFileCode: ratingExampleScs
+            component: 'RatingIndicatorDynamicExampleComponent'
         }
     ];
 
@@ -81,8 +76,7 @@ export class RatingIndicatorDocsComponent {
             code: customIconHtml,
             fileName: 'ri-custom-icon-example',
             typescriptFileCode: customIconTs,
-            component: 'RatingIndicatorCustomIconExampleComponent',
-            scssFileCode: ratingExampleScs
+            component: 'RatingIndicatorCustomIconExampleComponent'
         }
     ];
 
@@ -92,8 +86,7 @@ export class RatingIndicatorDocsComponent {
             code: displayModeHtml,
             fileName: 'ri-display-mode-example',
             typescriptFileCode: displayModeTs,
-            component: 'RatingIndicatorDisplayModeComponent',
-            scssFileCode: ratingExampleScs
+            component: 'RatingIndicatorDisplayModeComponent'
         }
     ];
 }
