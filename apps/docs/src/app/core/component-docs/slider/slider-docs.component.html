@@ -1,39 +1,47 @@
-<fd-docs-section-title id="basic" componentName="slider">
-    Basic
-</fd-docs-section-title>
+<fd-docs-section-title id="basic" componentName="slider">Basic</fd-docs-section-title>
 <component-example>
     <fd-slider-basic-example></fd-slider-basic-example>
 </component-example>
 <code-example [exampleFiles]="basic"></code-example>
 
-<fd-docs-section-title id="range" componentName="slider">
-    Range
-</fd-docs-section-title>
+<fd-docs-section-title id="range" componentName="slider">Range</fd-docs-section-title>
 <component-example>
     <fd-slider-range-example></fd-slider-range-example>
 </component-example>
 <code-example [exampleFiles]="range"></code-example>
 
-<fd-docs-section-title id="ticks" componentName="slider">
-    Ticks
-</fd-docs-section-title>
+<fd-docs-section-title id="ticks" componentName="slider">Ticks</fd-docs-section-title>
 <component-example>
     <fd-slider-ticks-example></fd-slider-ticks-example>
 </component-example>
 <code-example [exampleFiles]="ticks"></code-example>
 
-<fd-docs-section-title id="ticks-and-labels" componentName="slider">
-    Ticks and labels
-</fd-docs-section-title>
+<fd-docs-section-title id="ticks-and-labels" componentName="slider">Ticks and labels</fd-docs-section-title>
 <component-example>
     <fd-slider-ticks-and-labels-example></fd-slider-ticks-and-labels-example>
 </component-example>
 <code-example [exampleFiles]="ticksAndLabels"></code-example>
 
-<fd-docs-section-title id="playground" componentName="slider">
-    Playground
-</fd-docs-section-title>
+<fd-docs-section-title id="disabled" componentName="slider">Disabled</fd-docs-section-title>
 <component-example>
-    <fd-slider-playground-example></fd-slider-playground-example>
+    <fd-slider-disabled-example></fd-slider-disabled-example>
 </component-example>
-<code-example [exampleFiles]="playground"></code-example>
+<code-example [exampleFiles]="disabled"></code-example>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fd-slider
+        [(ngModel)]="value"
+        [min]="data.properties.min"
+        [max]="data.properties.max"
+        [step]="data.properties.step"
+        [jump]="data.properties.jump"
+        [disabled]="data.properties.disabled"
+        [showTicks]="data.properties.showTicks"
+        [showTicksLabels]="data.properties.showTicksLabels"
+        [mode]="data.properties.range"
+        [hideProgressBar]="data.properties.hideProgressBar"
+        [customLabelsValues]="customLabels"
+    ></fd-slider>
+
+    <p>Value: {{ value }}</p>
+</playground>
