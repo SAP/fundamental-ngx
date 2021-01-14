@@ -1,3 +1,4 @@
+import { ContentDensity } from '../enums';
 import { TableState } from '../interfaces';
 
 export const DEFAULT_TABLE_STATE: TableState = {
@@ -19,17 +20,15 @@ export const DEFAULT_TABLE_STATE: TableState = {
 
 // SIZES
 export const DEFAULT_COLUMN_WIDTH = 200;
-export const SELECTION_COLUMN_WIDTH = new Map([
-    ['single-cozy', 44], // 45
-    ['single-compact', 32], // 45
-    ['single-condensed', 24], // 45
-    ['multiple-cozy', 45], // 45
-    ['multiple-compact', 33], // 32
-    ['multiple-condensed', 25] // 32
+
+export const SELECTION_COLUMN_WIDTH = new Map<ContentDensity, number>([
+    [ContentDensity.COZY, 44],
+    [ContentDensity.COMPACT, 32],
+    [ContentDensity.CONDENSED, 24]
 ]);
 
-export const ROW_HEIGHT = new Map([
-    ['cozy', 44],
-    ['compact', 32],
-    ['condensed', 24]
+export const ROW_HEIGHT = new Map<ContentDensity, number>([
+    [ContentDensity.COZY, 44],
+    [ContentDensity.COMPACT, 32],
+    [ContentDensity.CONDENSED, 24]
 ]);

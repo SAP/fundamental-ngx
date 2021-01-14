@@ -1,6 +1,5 @@
 import { SearchInput } from '../interfaces/search-field.interface';
-
-import { TableComponent } from '../table.component';
+import { Table } from '../table';
 
 export interface SearchChange {
     current: SearchInput;
@@ -8,5 +7,5 @@ export interface SearchChange {
 }
 
 export class TableSearchChangeEvent {
-    constructor(public source: TableComponent, public current: SearchInput, public previous: SearchInput) {}
+    constructor(public source: Table, public current: SearchInput, public previous: SearchInput) {}
 }

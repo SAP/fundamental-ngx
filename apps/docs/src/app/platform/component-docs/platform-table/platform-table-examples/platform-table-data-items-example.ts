@@ -1,3 +1,5 @@
+import { FdDate } from '@fundamental-ngx/core';
+
 export interface ExampleItem {
     name: string;
     description: string;
@@ -7,6 +9,8 @@ export interface ExampleItem {
     };
     status: string;
     statusColor?: string;
+    date: FdDate;
+    verified: boolean;
 }
 
 // Example items
@@ -19,7 +23,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'CNY'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 1, 7),
+        verified: true
     },
     {
         name: 'Astro Laptop 1516',
@@ -29,7 +35,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EUR'
         },
         status: 'Out of stock',
-        statusColor: 'negative'
+        statusColor: 'negative',
+        date: new FdDate(2020, 2, 5),
+        verified: true
     },
     {
         name: 'Astro Phone 6',
@@ -39,7 +47,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'IDR'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 1, 12),
+        verified: true
     },
     {
         name: 'Beam Breaker B-1',
@@ -49,7 +59,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'NZD'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 11, 24),
+        verified: false
     },
     {
         name: 'Beam Breaker B-2',
@@ -58,7 +70,9 @@ export const ITEMS: ExampleItem[] = [
             value: 332.57,
             currency: 'NZD'
         },
-        status: 'No info'
+        status: 'No info',
+        date: new FdDate(2020, 10, 23),
+        verified: true
     },
     {
         name: 'Benda Laptop 1408',
@@ -68,7 +82,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'CNY'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 9, 22),
+        verified: true
     },
     {
         name: 'Bending Screen 21HD',
@@ -78,7 +94,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EUR'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2020, 8, 14),
+        verified: false
     },
     {
         name: 'Blaster Extreme',
@@ -88,7 +106,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'USD'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2020, 8, 15),
+        verified: true
     },
     {
         name: 'Broad Screen 22HD',
@@ -98,7 +118,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'CNY'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2020, 5, 4),
+        verified: true
     },
     {
         name: 'Camcorder View',
@@ -108,7 +130,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'USD'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2020, 5, 5),
+        verified: true
     },
     {
         name: 'Cepat Tablet 10.5',
@@ -117,7 +141,9 @@ export const ITEMS: ExampleItem[] = [
             value: 365.12,
             currency: 'NZD'
         },
-        status: 'No info'
+        status: 'No info',
+        date: new FdDate(2020, 5, 6),
+        verified: true
     },
     {
         name: 'Ergo Mousepad',
@@ -127,7 +153,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EUR'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 5, 7),
+        verified: true
     },
     {
         name: 'Ergo Screen E-I',
@@ -137,7 +165,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'NZD'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 3, 23),
+        verified: true
     },
     {
         name: 'Ergo Screen E-II',
@@ -146,7 +176,9 @@ export const ITEMS: ExampleItem[] = [
             value: 75.86,
             currency: 'EUR'
         },
-        status: 'No info'
+        status: 'No info',
+        date: new FdDate(2020, 3, 20),
+        verified: false
     },
     {
         name: 'Gaming Monster',
@@ -155,7 +187,9 @@ export const ITEMS: ExampleItem[] = [
             value: 152.95,
             currency: 'EGP'
         },
-        status: 'No info'
+        status: 'No info',
+        date: new FdDate(2020, 9, 20),
+        verified: false
     },
     {
         name: 'Gaming Monster Pro',
@@ -165,7 +199,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'MZN'
         },
         status: 'Out of stock',
-        statusColor: 'negative'
+        statusColor: 'negative',
+        date: new FdDate(2020, 4, 17),
+        verified: false
     },
     {
         name: 'ITelO Vault',
@@ -175,7 +211,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EGP'
         },
         status: 'Become out of stock',
-        statusColor: 'critical'
+        statusColor: 'critical',
+        date: new FdDate(2020, 4, 17),
+        verified: false
     },
     {
         name: 'ITelO Vault Net',
@@ -185,7 +223,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EUR'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2020, 10, 23),
+        verified: true
     },
     {
         name: 'Multi Color',
@@ -195,7 +235,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'MZN'
         },
         status: 'Become out of stock',
-        statusColor: 'critical'
+        statusColor: 'critical',
+        date: new FdDate(2019, 8, 12),
+        verified: false
     },
     {
         name: 'Multi Print',
@@ -205,7 +247,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'IDR'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2018, 5, 26),
+        verified: true
     },
     {
         name: 'Mini Tablet',
@@ -215,7 +259,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EGP'
         },
         status: 'Out of stock',
-        statusColor: 'negative'
+        statusColor: 'negative',
+        date: new FdDate(2019, 12, 30),
+        verified: true
     },
     {
         name: 'Proctra X',
@@ -225,7 +271,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'USD'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2019, 2, 7),
+        verified: true
     },
     {
         name: 'Server Professional',
@@ -235,7 +283,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EGP'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 11, 27),
+        verified: false
     },
     {
         name: 'Ultra Jet Super Color',
@@ -245,7 +295,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EUR'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 10, 10),
+        verified: false
     },
     {
         name: 'Ultra Jet Mobile',
@@ -255,7 +307,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'NZD'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2020, 10, 13),
+        verified: false
     },
     {
         name: 'Wireless DSL Router',
@@ -265,7 +319,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'USD'
         },
         status: 'Become out of stock',
-        statusColor: 'critical'
+        statusColor: 'critical',
+        date: new FdDate(2020, 9, 16),
+        verified: false
     },
     {
         name: '10 Portable DVD player',
@@ -275,7 +331,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'EUR'
         },
         status: 'Out of stock',
-        statusColor: 'negative'
+        statusColor: 'negative',
+        date: new FdDate(2020, 9, 12),
+        verified: true
     },
     {
         name: 'Astro Laptop 1516',
@@ -285,7 +343,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'MZN'
         },
         status: 'Become out of stock',
-        statusColor: 'critical'
+        statusColor: 'critical',
+        date: new FdDate(2020, 7, 30),
+        verified: true
     },
     {
         name: 'Astro Phone 6',
@@ -295,7 +355,9 @@ export const ITEMS: ExampleItem[] = [
             currency: 'MZN'
         },
         status: 'Stocked on demand',
-        statusColor: 'informative'
+        statusColor: 'informative',
+        date: new FdDate(2020, 9, 28),
+        verified: false
     },
     {
         name: 'Beam Breaker B-1',
@@ -305,6 +367,8 @@ export const ITEMS: ExampleItem[] = [
             currency: 'IDR'
         },
         status: 'Available',
-        statusColor: 'positive'
+        statusColor: 'positive',
+        date: new FdDate(2020, 6, 17),
+        verified: false
     }
 ];
