@@ -1,17 +1,24 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
-import { API_FILES } from '../../api-files';
-import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-import { ObjectStatusModule, TableModule, LayoutPanelModule } from '@fundamental-ngx/core';
+import {
+    ObjectStatusModule,
+    TableModule,
+    LayoutPanelModule,
+    FdDatetimeModule,
+    RtlService
+} from '@fundamental-ngx/core';
 import {
     PlatformButtonModule,
     PlatformInputModule,
     PlatformSearchFieldModule,
     PlatformTableModule
 } from '@fundamental-ngx/platform';
+
+import { API_FILES } from '../../api-files';
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
 import { PlatformTableDocsComponent } from './platform-table-docs.component';
@@ -23,6 +30,11 @@ import { PlatformTableSortableExampleComponent } from './platform-table-examples
 import { PlatformTableFilterableExampleComponent } from './platform-table-examples/platform-table-filterable-example.component';
 import { PlatformTableGroupableExampleComponent } from './platform-table-examples/platform-table-groupable-example.component';
 import { PlatformTableFreezableExampleComponent } from './platform-table-examples/platform-table-freezable-example.component';
+import { PlatformTableInitialStateExampleComponent } from './platform-table-examples/platform-table-initial-state-example.component';
+import { PlatformTableP13ColumnsExampleComponent } from './platform-table-examples/platform-table-p13-columns-example.component';
+import { PlatformTableP13FilterExampleComponent } from './platform-table-examples/platform-table-p13-filter-example.component';
+import { PlatformTableP13GroupExampleComponent } from './platform-table-examples/platform-table-p13-group-example.component';
+import { PlatformTableP13SortExampleComponent } from './platform-table-examples/platform-table-p13-sort-example.component';
 
 const routes: Routes = [
     {
@@ -45,6 +57,7 @@ const routes: Routes = [
         PlatformButtonModule,
         ObjectStatusModule,
         LayoutPanelModule,
+        FdDatetimeModule,
         PlatformInputModule,
         PlatformSearchFieldModule
     ],
@@ -59,8 +72,14 @@ const routes: Routes = [
         PlatformTableSortableExampleComponent,
         PlatformTableFilterableExampleComponent,
         PlatformTableGroupableExampleComponent,
-        PlatformTableFreezableExampleComponent
+        PlatformTableFreezableExampleComponent,
+        PlatformTableInitialStateExampleComponent,
+        PlatformTableP13ColumnsExampleComponent,
+        PlatformTableP13SortExampleComponent,
+        PlatformTableP13FilterExampleComponent,
+        PlatformTableP13GroupExampleComponent
     ],
+    providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PlatformTableDocsModule {}

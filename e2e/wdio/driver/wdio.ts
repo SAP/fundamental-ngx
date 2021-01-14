@@ -19,12 +19,7 @@ export function isBrowser(browserName: string): boolean {
 }
 
 export function browserIsIEorSafari(): boolean {
-    if (browserIsSafari()) {
-        return true;
-    } else if (browserIsIE()) {
-        return true;
-    }
-    return false;
+    return browserIsSafari() || browserIsIE() ;
 }
 
 export function browserIsFirefox(): boolean {
@@ -40,7 +35,7 @@ export function browserIsSafari(): boolean {
 }
 
 export function browserIsSafariorFF(): boolean {
-    return browserIsSafari() || browserIsFirefox() ? true : false;
+    return browserIsSafari() || browserIsFirefox();
 }
 
 export function goBack(): void {
@@ -181,11 +176,7 @@ export function clearValue(selector: string, index: number = 0, waitTime = defau
 export function getElementSize(selector: string, index?: number): WebdriverIO.SizeReturn;
 export function getElementSize(selector: string, index: number, prop: 'width' | 'height'): number;
 export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number | WebdriverIO.SizeReturn {
-    return prop ? $$(selector)[index].getSize() : $$(selector)[index].getSize(prop);
-}
-
-export function executeScript(callback): string {
-    return browser.execute(callback());
+    return $$(selector)[index].getSize(prop || void 0);
 }
 
 export function executeScript2(selector): string {

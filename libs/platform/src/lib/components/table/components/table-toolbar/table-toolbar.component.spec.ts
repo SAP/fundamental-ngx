@@ -1,17 +1,28 @@
+import { EventEmitter } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchInput } from '../../interfaces/search-field.interface';
 
-import { TableComponent } from '../../table.component';
+import { Table } from '../../table';
 
 import { TableToolbarComponent } from './table-toolbar.component';
 
 class TableComponentMock
-    implements Pick<TableComponent, 'search' | 'openSortingDialog' | 'openFilteringDialog' | 'openGroupingDialog'> {
+    implements
+        Pick<
+            Table,
+            | 'search'
+            | 'openTableSortSettings'
+            | 'openTableFilterSettings'
+            | 'openTableGroupSettings'
+            | 'openTableColumnSettings'
+        > {
+    openTableSortSettings = new EventEmitter();
+    openTableFilterSettings = new EventEmitter();
+    openTableGroupSettings = new EventEmitter();
+    openTableColumnSettings = new EventEmitter();
+
     search(): void {}
-    openSortingDialog(): void {}
-    openFilteringDialog(): void {}
-    openGroupingDialog(): void {}
 }
 
 describe('TableToolbarComponent', () => {
@@ -25,7 +36,7 @@ describe('TableToolbarComponent', () => {
                 declarations: [TableToolbarComponent],
                 providers: [
                     {
-                        provide: TableComponent,
+                        provide: Table,
                         useFactory: () => {
                             table = new TableComponentMock();
                             return table;
@@ -60,8 +71,8 @@ describe('TableToolbarComponent', () => {
             expect(tableHandlerSpy).toHaveBeenCalledWith(searchInput);
         });
 
-        it('Should call table.openSortingDialog by "openSorting"', () => {
-            const tableHandlerSpy = spyOn(table, 'openSortingDialog').and.stub();
+        it('Should trigger table.openTableSortSettings by "openSorting"', () => {
+            const tableHandlerSpy = spyOn(table.openTableSortSettings, 'emit').and.stub();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
@@ -70,8 +81,8 @@ describe('TableToolbarComponent', () => {
             expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
         });
 
-        it('Should call table.openFilteringDialog by "openSorting"', () => {
-            const tableHandlerSpy = spyOn(table, 'openFilteringDialog').and.stub();
+        it('Should trigger table.openFilteringDialog by "openFiltering"', () => {
+            const tableHandlerSpy = spyOn(table.openTableFilterSettings, 'emit').and.stub();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
@@ -80,12 +91,22 @@ describe('TableToolbarComponent', () => {
             expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
         });
 
-        it('Should call table.openGroupingDialog by "openGrouping"', () => {
-            const tableHandlerSpy = spyOn(table, 'openGroupingDialog').and.stub();
+        it('Should trigger table.openGroupingDialog by "openGrouping"', () => {
+            const tableHandlerSpy = spyOn(table.openTableGroupSettings, 'emit').and.stub();
 
             expect(tableHandlerSpy).not.toHaveBeenCalled();
 
             component.openGrouping();
+
+            expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('Should trigger table.openTableColumnSettings by "openColumns"', () => {
+            const tableHandlerSpy = spyOn(table.openTableColumnSettings, 'emit').and.stub();
+
+            expect(tableHandlerSpy).not.toHaveBeenCalled();
+
+            component.openColumns();
 
             expect(tableHandlerSpy).toHaveBeenCalledTimes(1);
         });

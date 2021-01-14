@@ -5,15 +5,20 @@ import {
     ContentChild,
     Input,
     OnDestroy,
-    OnInit
+    OnInit,
+    TemplateRef
 } from '@angular/core';
 
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
-import { ColumnAlign } from '../../enums';
+
+import { ColumnAlign, FilterableColumnDataType } from '../../enums';
 import { FdpCellDef, FdpHeaderCellDef } from '../../directives';
+
+import { TableColumn } from './table-column';
+import { strict } from 'assert';
 
 enum ColumnAlignEnum {
     Start = 'left',
@@ -44,9 +49,10 @@ enum ColumnAlignEnum {
 @Component({
     selector: 'fdp-column',
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: TableColumn, useExisting: TableColumnComponent }]
 })
-export class TableColumnComponent implements OnInit, OnDestroy {
+export class TableColumnComponent extends TableColumn implements OnInit, OnDestroy {
     /** Column unique identifier. */
     @Input()
     name: string;
@@ -62,7 +68,7 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     /** Cell text alignment. */
     /** @ts-ignore */
     @Input() set align(align: ColumnAlign) {
-        let _align;
+        let _align = ColumnAlignEnum.Start;
         switch (align) {
             case ColumnAlign.CENTER:
                 _align = ColumnAlignEnum.Center;
@@ -71,10 +77,8 @@ export class TableColumnComponent implements OnInit, OnDestroy {
                 _align = ColumnAlignEnum.End;
                 break;
             case ColumnAlign.START:
-            default:
                 _align = ColumnAlignEnum.Start;
         }
-
         this._align$.next(_align);
     }
 
@@ -91,6 +95,13 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     @Input()
     filterable = false;
 
+    /**
+     * Data type the column represents. Default is 'string'
+     * @type { 'string' | 'number' | 'date' | 'boolean' }
+     */
+    @Input()
+    dataType: FilterableColumnDataType = FilterableColumnDataType.STRING;
+
     /** Toggles grouping feature for the column. */
     @Input()
     groupable = false;
@@ -99,11 +110,21 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     @Input()
     freezable = false;
 
+    /** Column cell template */
+    columnCellTemplate: TemplateRef<any>;
+
+    /** Column header template */
+    headerCellTemplate: TemplateRef<any>;
+
     @ContentChild(FdpCellDef)
-    fdpCellDef: FdpCellDef;
+    set fdpCellDef(fdpCellDef: FdpCellDef) {
+        this.columnCellTemplate = fdpCellDef?.templateRef;
+    }
 
     @ContentChild(FdpHeaderCellDef)
-    fdpHeaderCellDef: FdpHeaderCellDef;
+    set fdpHeaderCellDef(fdpHeaderCellDef: FdpHeaderCellDef) {
+        this.headerCellTemplate = fdpHeaderCellDef?.templateRef;
+    }
 
     /** @hidden */
     private _align$: BehaviorSubject<ColumnAlignEnum> = new BehaviorSubject<ColumnAlignEnum>(null);
@@ -115,10 +136,14 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     private _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private readonly _rtlService: RtlService, private readonly _cd: ChangeDetectorRef) {}
+    constructor(private readonly _rtlService: RtlService, private readonly _cd: ChangeDetectorRef) {
+        super();
+    }
 
     /** @hidden */
     ngOnInit(): void {
+        this._validateNameOption();
+
         this._listenToAlign();
     }
 
@@ -126,6 +151,12 @@ export class TableColumnComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
+    }
+
+    private _validateNameOption(): void {
+        if (typeof this.name !== 'string') {
+            throw Error('fdp-column: "name" option is required.');
+        }
     }
 
     /** @hidden */

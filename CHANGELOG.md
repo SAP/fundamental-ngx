@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.68...v0.26.0-rc.69) (2021-01-14)
+
+## [0.26.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.67...v0.26.0-rc.68) (2021-01-14)
+
+## [0.26.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.66...v0.26.0-rc.67) (2021-01-14)
+
+
+### Features
+
+* (Platform) platform table grid phase 3 ([#4255](https://github.com/SAP/fundamental-ngx/issues/4255)) ([43e8fc8](https://github.com/SAP/fundamental-ngx/commit/43e8fc8a4925e00af0bc0a491a2b93dade6603e3))
+
 ## [0.26.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.65...v0.26.0-rc.66) (2021-01-14)
 
 ## [0.26.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.64...v0.26.0-rc.65) (2021-01-14)
