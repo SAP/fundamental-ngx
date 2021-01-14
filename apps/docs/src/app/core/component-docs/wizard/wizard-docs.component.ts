@@ -39,7 +39,8 @@ export class WizardDocsComponent {
         {
             language: 'html',
             code: wizardCustomizableHtml,
-            fileName: 'wizard-customizable-example'
+            fileName: 'wizard-customizable-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',
@@ -53,7 +54,8 @@ export class WizardDocsComponent {
         {
             language: 'html',
             code: wizardMobileHtml,
-            fileName: 'wizard-mobile-example'
+            fileName: 'wizard-mobile-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',
@@ -97,7 +99,8 @@ export class WizardDocsComponent {
         {
             language: 'html',
             code: wizardNgForHtml,
-            fileName: 'wizard-ngfor-example'
+            fileName: 'wizard-ngfor-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',
