@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class StandardListItemPo extends BaseComponentPo {
     private url = '/standard-list-item';
@@ -45,11 +45,9 @@ export class StandardListItemPo extends BaseComponentPo {
     sInvtAvatar = 'fdp-standard-list-item-with-inverted-secondary-type-example fd-avatar';
     sInvtListItem = 'fdp-standard-list-item-with-inverted-secondary-type-example fdp-standard-list-item';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.sNoBorderList);
     }
 }

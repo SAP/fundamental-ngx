@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FileUploaderPo extends BaseComponentPo {
     private url = '/file-uploader';
@@ -14,5 +14,6 @@ export class FileUploaderPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.fileUploaderRoot);
     }
 }

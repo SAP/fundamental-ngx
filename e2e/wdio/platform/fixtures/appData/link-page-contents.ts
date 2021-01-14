@@ -3,6 +3,7 @@ export const truncatedLink_alt_text = 'this is a long text link. so getting trun
 
 export const standardLinksAltTextArray: Array<string> = [
     'Extra info as tooltip text',
+    'Extra info as tooltip text',
     'Regular link description',
     'opens a external webpage',
     'opens a internal page',
@@ -10,7 +11,7 @@ export const standardLinksAltTextArray: Array<string> = [
     'click link to start download',
     'On click you will get to target page',
     'target web is printable for resolution:300dpi',
-    '', // need to update after https://github.com/SAP/fundamental-ngx/issues/3633
+    null, // need to update after https://github.com/SAP/fundamental-ngx/issues/3633
     'text will be translated'
 ];
 

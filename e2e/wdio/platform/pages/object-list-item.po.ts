@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ObjectListItemPo extends BaseComponentPo {
     private url = '/object-list-item';
@@ -40,11 +40,9 @@ export class ObjectListItemPo extends BaseComponentPo {
     objDecAttributes = 'fdp-object-list-item-example fdp-object-attribute';
     objDecStatuses = 'fdp-object-list-item-example .fd-object-status';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.allObjsList);
     }
 }
