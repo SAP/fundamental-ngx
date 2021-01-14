@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.62...v0.26.0-rc.63) (2021-01-14)
+
+
+### Bug Fixes
+
+* (Core) Popover add missing entry component ([#4328](https://github.com/SAP/fundamental-ngx/issues/4328)) ([63a7cdc](https://github.com/SAP/fundamental-ngx/commit/63a7cdc14b5143e6be3114bd8898b19dbb2327a1))
+
 ## [0.26.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.61...v0.26.0-rc.62) (2021-01-14)
 
 
