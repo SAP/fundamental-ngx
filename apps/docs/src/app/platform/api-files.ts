@@ -41,6 +41,11 @@ export const API_FILES = {
         'TableViewSettingsDialogComponent',
         'TableViewSettingsFilterComponent',
         'FdpViewSettingsFilterCustomDef',
+        'TableP13DialogComponent',
+        'TableP13SortComponent',
+        'TableP13FilterComponent',
+        'TableP13GroupComponent',
+        'TableP13ColumnsComponent',
         'TableDataSource',
         'TableDataProvider'
     ],

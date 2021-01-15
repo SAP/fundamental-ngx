@@ -1,6 +1,7 @@
 import { SwitchPo } from '../pages/switch.po';
 import switchPageContent from '../fixtures/appData/swich-page-content';
 import {
+    browserIsIE,
     browserIsIEorSafari,
     browserIsSafari,
     click,
@@ -20,12 +21,12 @@ describe('Verify Switch component', function() {
     const switchPage = new SwitchPo();
     beforeAll(() => {
         switchPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
         waitForElDisplayed(switchPage.root, 0, 20000);
-    });
+    }, 1);
 
     describe('has default and compact switch and', function() {
         it('should default change something to active or inactive', () => {
@@ -189,22 +190,24 @@ describe('Verify Switch component', function() {
 
     describe('has semantic switch and', function() {
         it('should change something from positive to negative', () => {
-            // capture before state
-            const isCheckedBefore = getAttributeByName(switchPage.semanticSwitch, 'aria-checked');
-            const onIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
-            const offIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
-            click(switchPage.semanticSwitchHandel);
-            // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.semanticSwitch, 'aria-checked');
-            const onIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
-            const offIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
+            if (!browserIsIE()) {
+                // capture before state
+                const isCheckedBefore = getAttributeByName(switchPage.semanticSwitch, 'aria-checked');
+                const onIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
+                const offIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
+                click(switchPage.semanticSwitchHandel);
+                // capture after state
+                const isCheckedAfter = getAttributeByName(switchPage.semanticSwitch, 'aria-checked');
+                const onIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
+                const offIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
 
-            expect(isCheckedBefore).toBe('false', 'Semantic switch has incorrect state before click');
-            expect(isCheckedAfter).toBe('true', 'Semantic switch has incorrect state after click');
-            expect(onIconStateBefore.value).toBe('hidden');
-            expect(offIconStateBefore.value).toBe('visible');
-            expect(onIconStateAfter.value).toBe('visible');
-            expect(offIconStateAfter.value).toBe('hidden');
+                expect(isCheckedBefore).toBe('false', 'Semantic switch has incorrect state before click');
+                expect(isCheckedAfter).toBe('true', 'Semantic switch has incorrect state after click');
+                expect(onIconStateBefore.value).toBe('hidden');
+                expect(offIconStateBefore.value).toBe('visible');
+                expect(onIconStateAfter.value).toBe('visible');
+                expect(offIconStateAfter.value).toBe('hidden');
+            }
         });
 
         it('compact should change something from positive to negative', () => {

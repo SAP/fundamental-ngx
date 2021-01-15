@@ -14,7 +14,7 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 
 import { ARROW_SIZE, ArrowPosition } from '../popover-position/popover-position';
-import { PopoverFlippedDirection } from '../popover-position/popover-position';
+import { PopoverFlippedXDirection } from '../popover-position/popover-position';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { PopoverPosition } from '../popover-position/popover-position';
 
@@ -79,9 +79,9 @@ export class PopoverBodyComponent {
     onClose = new Subject<void>();
 
     constructor(
+        readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _renderer2: Renderer2,
-        private readonly _elementRef: ElementRef
+        private _renderer2: Renderer2
     ) {}
 
     /** @hidden */
@@ -95,7 +95,7 @@ export class PopoverBodyComponent {
         if (arrowDirection === 'top' || arrowDirection === 'bottom') {
             let _position: string = position.overlayX;
             if (rtl === 'rtl') {
-                _position = PopoverFlippedDirection[_position];
+                _position = PopoverFlippedXDirection[_position];
             }
             this._arrowClasses.push(`fd-popover__arrow-x--${_position}`)
         } else if (arrowDirection === 'start' || arrowDirection === 'end') {

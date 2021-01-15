@@ -32,6 +32,11 @@ export class CodeExampleComponent implements OnInit {
     @Input()
     exampleFiles: ExampleFile[] = [];
 
+    /**
+     * @hidden
+     */
+    _displayedFiles: ExampleFile[] = [];
+
     isOpen = false;
 
     smallScreen: boolean;
@@ -60,6 +65,18 @@ export class CodeExampleComponent implements OnInit {
 
     ngOnInit(): void {
         this.smallScreen = window.innerWidth <= 768;
+        const scssExamples: ExampleFile[] = [];
+        this.exampleFiles.forEach(file => {
+            if (file.scssFileCode) {
+                scssExamples.push({
+                    code: file.scssFileCode,
+                    language: 'scss',
+                    name: 'Scss'
+                });
+            }
+        });
+
+        this._displayedFiles = this.exampleFiles.concat(scssExamples);
     }
 
     @HostListener('window:resize', ['$event'])

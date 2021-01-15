@@ -1,4 +1,4 @@
-import { Injectable, Renderer2 } from '@angular/core';
+import { ElementRef, Injectable, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
 import { KeyUtil } from '../../utils/functions';
@@ -104,9 +104,9 @@ export class MenuService {
     }
 
     /** Adds Menu keyboard support */
-    addKeyboardSupport(): void {
+    addKeyboardSupport(elementRef: ElementRef): void {
         this.removeKeyboardSupport();
-        this._setKeyboardSupport();
+        this._setKeyboardSupport(elementRef);
     }
 
     /** Removes Menu keyboard support */
@@ -204,9 +204,9 @@ export class MenuService {
     }
 
     /** @hidden Adds keyboard support */
-    private _setKeyboardSupport(): void {
+    private _setKeyboardSupport(elementRef: ElementRef): void {
         this._destroyKeyboardHandlerListener = this._renderer.listen(
-            this.menu.elementRef.nativeElement,
+            elementRef.nativeElement,
             'keydown',
             (event: KeyboardEvent) => this._handleKey(event)
         );

@@ -1,4 +1,4 @@
-import { TableComponent } from '../table.component';
+import { Table } from '../table';
 
 export interface FreezeChange {
     current: string;
@@ -6,9 +6,5 @@ export interface FreezeChange {
 }
 
 export class TableColumnFreezeEvent {
-    constructor (
-        public source: TableComponent,
-        public current: string,
-        public previous: string
-    ) {}
+    constructor(public source: Table, public current: string, public previous: string) {}
 }

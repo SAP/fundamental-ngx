@@ -8,13 +8,27 @@ import {
     Optional,
     Output,
     SimpleChanges,
-    ViewEncapsulation
+    ViewEncapsulation,
+    TemplateRef
 } from '@angular/core';
+import {
+    ENTER,
+    SPACE
+} from '@angular/cdk/keycodes';
+import { coerceNumberProperty, coerceArray } from '@angular/cdk/coercion';
+
+import { KeyUtil } from '../utils/functions';
 import { PaginationService } from './pagination.service';
 import { RtlService } from '../utils/services/rtl.service';
-import { BehaviorSubject } from 'rxjs';
 import { Pagination } from './pagination.model';
 
+/** Constant representing the default number of items per page. */
+const DEFAULT_ITEMS_PER_PAGE = 10;
+interface CurrentShowing {
+    from: number;
+    to: number;
+    of: number;
+};
 /**
  * The component that is used to provide navigation between paged information.
  * ```html
@@ -41,7 +55,8 @@ import { Pagination } from './pagination.model';
     ],
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./pagination.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: true
 })
 export class PaginationComponent implements OnChanges, OnInit {
     /** Represents the total number of items. */
@@ -50,22 +65,57 @@ export class PaginationComponent implements OnChanges, OnInit {
 
     /** Represents the current page number. */
     @Input()
-    currentPage: number;
+    get currentPage(): number {
+        return this._currentPage;
+    };
+    set currentPage(value: number) {
+        this._currentPage = coerceNumberProperty(value, 1);
+    };
 
     /** Represents the number of items per page. */
     @Input()
-    itemsPerPage: number;
+    get itemsPerPage(): number {
+        return this._itemsPerPage;
+    }
+    set itemsPerPage(value: number) {
+        this._itemsPerPage = Math.min(coerceNumberProperty(value, DEFAULT_ITEMS_PER_PAGE), this.totalItems);
+    }
+
+    /**
+     * The custom template show range of item by current page of items.
+     * It has higher priority than `itemsPerPageOptions` property.
+     */
+    @Input()
+    itemsPerPageTemplate: TemplateRef<any>;
+
+    /** Label for options for items per page. */
+    @Input()
+    itemsPerPageLabel = 'Results per page';
+
+    /** Represents the options for items per page. */
+    @Input()
+    get itemsPerPageOptions(): number[] {
+        return this._itemsPerPageOptions;
+    }
+    set itemsPerPageOptions(value: number[]) {
+        this._itemsPerPageOptions = coerceArray<number>(value)
+            .filter(v => v > 0 && v < this.totalItems)
+            .sort((a, b) => a - b);
+        if (this._itemsPerPageOptions.some(v => v !== this.itemsPerPage)) {
+            this.itemsPerPage = this._itemsPerPageOptions[0];
+        }
+    }
 
     /** Whether to display the total number of items. */
     @Input()
     displayTotalItems = true;
 
     /**
-     * The text appended to the total number of items.
-     * The default text is set to 'items'
+     * The template show range of item by current page of items.
+     * Default view: Showing {{ from }}-{{ to }} of {{ of }}
      */
     @Input()
-    displayText = 'items';
+    displayTextTemplate: TemplateRef<any>;
 
     /** Label for the 'previous' page button. */
     @Input()
@@ -83,17 +133,51 @@ export class PaginationComponent implements OnChanges, OnInit {
     rtl = false;
 
     /** @hidden */
-    get customClasses(): string {
+    get rtlClass(): string {
         return this.rtl ? 'fd-pagination__total--rtl' : '';
     }
 
     /** @hidden */
-    pages$: BehaviorSubject<number[]> = new BehaviorSubject([]);
+    pages: number[] = [];
+    /** @hidden */
+    get isFirstPage(): boolean {
+        return this.currentPage === 1;
+    };
+    get isLastPage(): boolean {
+        return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
+    };
 
-    isLastPage$: BehaviorSubject<boolean> = new BehaviorSubject(this._isLastPage);
+    get currentShowing(): CurrentShowing {
+        return this._currentShowing;
+    };
+    /** @hidden */
+    private _currentShowing: CurrentShowing = {
+        from: 0,
+        to: 0,
+        of: 0
+    };
+    /** @hidden */
+    private _itemsPerPage: number = DEFAULT_ITEMS_PER_PAGE;
+    /** @hidden */
+    private _itemsPerPageOptions: number[];
+    /** @hidden */
+    private _currentPage = 1;
 
     /** @hidden */
-    constructor(private paginationService: PaginationService, @Optional() private rtlService: RtlService) {}
+    constructor (
+        private readonly paginationService: PaginationService,
+        @Optional() private readonly rtlService: RtlService
+    ) {}
+
+    /** @hidden */
+    onChangePerPage = (event: number) => {
+        this.itemsPerPage = event;
+        this._refreshPages();
+        const maxPage = this.pages[this.pages.length - 1];
+        if (this.currentPage > maxPage) {
+            this.pageChangeStart.emit(maxPage);
+        }
+    };
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -103,14 +187,13 @@ export class PaginationComponent implements OnChanges, OnInit {
 
         this._refreshPages();
 
-        const totalPages = this.paginationService.getTotalPages(this.getPaginationObject());
+        const pagination = this.getPaginationObject();
+        const totalPages = this.paginationService.getTotalPages(pagination);
         if (!this.currentPage || this.currentPage < 1) {
             this.currentPage = 1;
         } else if (this.currentPage > totalPages) {
             this.currentPage = totalPages;
         }
-
-        this.isLastPage$.next(this._isLastPage);
     }
 
     /** @hidden */
@@ -129,7 +212,7 @@ export class PaginationComponent implements OnChanges, OnInit {
      * @param $event The keyboard event.
      */
     onKeypressHandler(page: number, $event: KeyboardEvent): void {
-        if ($event.key === ' ' || $event.key === 'Enter') {
+        if (KeyUtil.isKeyCode($event, SPACE) || KeyUtil.isKeyCode($event, ENTER)) {
             $event.preventDefault();
             this.goToPage(page);
         }
@@ -147,10 +230,23 @@ export class PaginationComponent implements OnChanges, OnInit {
         if (page > this.paginationService.getTotalPages(this.getPaginationObject()) || page < 1) {
             return;
         }
-
         this._refreshPages();
 
         this.pageChangeStart.emit(page);
+    }
+
+    /**
+     * Navigates to a previous page.
+     */
+    previousPage(): void {
+        this.goToPage(this.currentPage - 1);
+    }
+
+    /**
+     * Navigates to a next page.
+     */
+    nextPage(): void {
+        this.goToPage(this.currentPage + 1);
     }
 
     /**
@@ -167,13 +263,15 @@ export class PaginationComponent implements OnChanges, OnInit {
 
     /** @hidden */
     private _refreshPages(): void {
-        let pages = this.paginationService.getPages(this.getPaginationObject());
-        pages = this.rtl ? pages.slice().reverse() : pages;
-        this.pages$.next(pages);
-    }
+        const pagination = this.getPaginationObject();
+        let pages = this.paginationService.getPages(pagination);
+        if (this.rtl) {
+            pages = pages.slice().reverse();
+        }
+        this.pages = pages;
 
-    /** @hidden */
-    private get _isLastPage(): boolean {
-        return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
+        this._currentShowing.from = this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1;
+        this._currentShowing.to = Math.min((this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage, this.totalItems);
+        this._currentShowing.of = this.totalItems;
     }
 }

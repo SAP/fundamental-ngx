@@ -9,6 +9,9 @@ import * as displayT from '!raw-loader!./examples/multi-input-displaywith-exampl
 import * as filterH from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.html';
 import * as filterT from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.ts';
 
+import * as includesH from '!raw-loader!./examples/multi-input-includes-example/multi-input-includes-example.component.html';
+import * as includesT from '!raw-loader!./examples/multi-input-includes-example/multi-input-includes-example.component.ts';
+
 import * as asyncH from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.html';
 import * as asyncT from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.ts';
 
@@ -71,6 +74,20 @@ export class MultiInputDocsComponent {
             component: 'MultiInputFilterExampleComponent',
             code: filterT,
             fileName: 'multi-input-filter-example'
+        }
+    ];
+
+    includes: ExampleFile[] = [
+        {
+            language: 'html',
+            code: includesH,
+            fileName: 'multi-input-includes-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputIncludesExampleComponent',
+            code: includesT,
+            fileName: 'multi-input-includes-example'
         }
     ];
 

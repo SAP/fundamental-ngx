@@ -3,6 +3,10 @@
 @import '~fundamental-styles/dist/layout-grid';
 @import '~fundamental-styles/dist/list-grid';
 
+.fd-grid-list {
+    display: block !important;
+}
+
 .fd-grid-list__highlight {
     z-index: 1;
 }

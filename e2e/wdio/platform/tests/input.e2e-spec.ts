@@ -22,7 +22,7 @@ import {
     sendKeys,
     setValue,
     waitElementToBePresentInDOM,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 import inputPContent from '../fixtures/appData/input-page-contents';
 import inputTestData from '../fixtures/testData/input';
@@ -33,11 +33,12 @@ describe('Input should ', function() {
 
     beforeAll(() => {
         inputPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(inputPage.defaultInput);
+    }, 1);
 
     it('have input without label', () => {
         waitElementToBePresentInDOM(inputPage.defaultInput);

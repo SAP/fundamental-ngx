@@ -17,7 +17,7 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 describe('Menu component test suite', function() {
@@ -25,11 +25,12 @@ describe('Menu component test suite', function() {
 
     beforeAll(() => {
         menuPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(menuPage.menuBtnArr);
+    }, 1);
 
     it('should check menu btn styles', () => {
         if (!browserIsIEorSafari()) {
@@ -123,9 +124,9 @@ describe('Menu component test suite', function() {
         if (!browserIsIEorSafari()) {
             click(menuPage.cascadingMenuBtn);
             waitForElDisplayed(menuPage.cascadingMenuItemsArr);
-            checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+            checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
             check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-                MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+                MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
             doubleClick(menuPage.cascadingMenuBtn);
             check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
                 menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);

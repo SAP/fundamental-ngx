@@ -216,8 +216,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
         this._groupedCollection = this._getGroupedCollection();
         this._groupedCollectionPriority = this._getGroupedCollectionPriority();
         const _sortedByPriorityAndGroupItems = this._getSortedByPriorityAndGroupItems();
-        const overflowItems: ToolbarItemDirective[] = [];
-        const normalItems: ToolbarItemDirective[] = [];
 
         _sortedByPriorityAndGroupItems.reduce((_contentWidth, toolbarItem) => {
             const itemWidth = this._getElementWidthWithMargin(toolbarItem);
@@ -227,58 +225,27 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             const shouldAlwaysBeInOverflow = itemPriority === OverflowPriorityEnum.ALWAYS;
             const shouldNeverBeInOverflow = itemPriority === OverflowPriorityEnum.NEVER;
 
-            if (shouldItemBeRemovedByWidth && itemGroup && !shouldNeverBeInOverflow) {
-                const lowestGroup = this._getLowestGroupByPriority(itemGroup);
-                let itemsToRemove = this._groupedCollection[lowestGroup];
-                delete this._groupedCollection[lowestGroup];
-                delete this._groupedCollectionPriority[lowestGroup];
-
-                if (lowestGroup !== itemGroup) {
-                    itemsToRemove = [...itemsToRemove, ...this._groupedCollection[itemGroup]];
-                    delete this._groupedCollection[itemGroup];
-                    delete this._groupedCollectionPriority[itemGroup];
-                }
-
-                // tslint:disable-next-line:no-unused-expression
-                itemsToRemove && itemsToRemove.forEach(item => {
-                    this._removeItemFromArray(normalItems, item);
-                    const isDisappear = this._getElementPriority(item) === OverflowPriorityEnum.DISAPPEAR;
-                    if (isDisappear) {
-                        this._disappearElements.push(item);
-                    }
-
-                    if (overflowItems.indexOf(item) === -1 && !isDisappear) {
-                        overflowItems.push(item);
-                    }
-                });
-
-                return MAX_CONTENT_SIZE;
-            }
-
-            if ((shouldItemBeRemovedByWidth && !itemGroup && !shouldNeverBeInOverflow) || shouldAlwaysBeInOverflow) {
-                const isDisappear = itemPriority === OverflowPriorityEnum.DISAPPEAR;
-                if (isDisappear) {
-                    this._disappearElements.push(toolbarItem);
+            if ((shouldItemBeRemovedByWidth && !shouldNeverBeInOverflow) || shouldAlwaysBeInOverflow) {
+                if (itemGroup) {
+                    this._hideElementsFromCurrentGroup(itemGroup);
                 } else {
-                    overflowItems.push(toolbarItem);
+                    this._hideElementWithoutGroup(toolbarItem, itemPriority);
                 }
-
                 return shouldAlwaysBeInOverflow ? _contentWidth : MAX_CONTENT_SIZE;
+            } else {
+                this._normalElements.push(toolbarItem);
+                return _contentWidth + itemWidth;
             }
-
-            normalItems.push(toolbarItem);
-
-            return _contentWidth + itemWidth;
         }, 0);
 
-        this._normalElements.push(...this.toolbarItems.filter(item => normalItems.indexOf(item) >= 0));
-        this._overflowElements.push(...this.toolbarItems.filter(item => overflowItems.indexOf(item) >= 0));
+        this._collapseLastSpacerElement(this._overflowElements, this._normalElements);
         this._addToolbarItemToOverflow(this._overflowElements);
         this._disappearElements.forEach(this._removeToolbarItemFromDOM.bind(this));
 
-        this.toolbarItems.forEach((x) =>
-            this._changeItemVisibilityState(x.elementRef.nativeElement, true)
-        );
+        this._normalElements = [...this._getOrderedItemsFollowingQuery(this._normalElements)];
+        this._overflowElements = [...this._getOrderedItemsFollowingQuery(this._overflowElements)];
+
+        this.toolbarItems.forEach(item => this._changeItemVisibilityState(item.elementRef.nativeElement, true));
 
         this._changeOverflowVisibleState(this._overflowElements.length > 0);
 
@@ -318,6 +285,44 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             && toolbarItem.elementRef.nativeElement.attributes.fdOverflowGroup;
 
         return itemGroup && itemGroup.value || 0;
+    }
+
+    /** @hidden */
+    private _hideElementsFromCurrentGroup(itemGroup: number): void {
+        const lowestPriorityFromGroup = this._getLowestPriorityFromGroup(itemGroup);
+        let itemsToRemove = this._groupedCollection[lowestPriorityFromGroup];
+
+        delete this._groupedCollection[lowestPriorityFromGroup];
+        delete this._groupedCollectionPriority[lowestPriorityFromGroup];
+
+        if (lowestPriorityFromGroup !== itemGroup) {
+            itemsToRemove = [...itemsToRemove, ...this._groupedCollection[itemGroup]];
+            delete this._groupedCollection[itemGroup];
+            delete this._groupedCollectionPriority[itemGroup];
+        }
+
+        // tslint:disable-next-line:no-unused-expression
+        itemsToRemove && itemsToRemove.forEach(item => {
+            this._removeItemFromArray(this._normalElements, item);
+            const isDisappear = this._getElementPriority(item) === OverflowPriorityEnum.DISAPPEAR;
+            if (isDisappear) {
+                this._disappearElements.push(item);
+            }
+
+            if (this._overflowElements.indexOf(item) === -1 && !isDisappear) {
+                this._overflowElements.push(item);
+            }
+        });
+    }
+
+    /** @hidden */
+    private _hideElementWithoutGroup(toolbarItem: ToolbarItemDirective, itemPriority: OverflowPriority): void {
+        const isDisappear = itemPriority === OverflowPriorityEnum.DISAPPEAR;
+        if (isDisappear) {
+            this._disappearElements.push(toolbarItem);
+        } else {
+            this._overflowElements.push(toolbarItem);
+        }
     }
 
     /** @hidden Sort by group and priority and initial position */
@@ -402,7 +407,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden Get group number with the lowest priority.
      *  Uses for detecting a group of elements which would be hidden from the toolbar.
      *  */
-    private _getLowestGroupByPriority(itemGroup: number): number {
+    private _getLowestPriorityFromGroup(itemGroup: number): number {
         if (!OVERFLOW_PRIORITY_SCORE.get(this._groupedCollectionPriority[itemGroup])) {
             return itemGroup;
         }
@@ -437,9 +442,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     private _addToolbarItemToOverflow(toolbarItems: ToolbarItemDirective[]): void {
-        toolbarItems.forEach((x) => {
-            this._overflowBody.appendChild(x.elementRef.nativeElement);
-        });
+        toolbarItems.forEach((x) => this._overflowBody.appendChild(x.elementRef.nativeElement));
     }
 
     /** @hidden */
@@ -482,5 +485,38 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     /** @hidden Sort priorities of elements/groups. */
     private _sortPriorities(a: OverflowPriority, b: OverflowPriority): number {
         return OVERFLOW_PRIORITY_SCORE.get(b) - OVERFLOW_PRIORITY_SCORE.get(a);
+    }
+
+    /** @hidden */
+    private _collapseLastSpacerElement(
+        overflowElements: ToolbarItemDirective[],
+        normalElements: ToolbarItemDirective[]
+    ): void {
+        if (!normalElements || normalElements.length < 1) {
+            return;
+        }
+
+        const isSpacer = (element: ToolbarItemDirective): boolean => {
+            return element.elementRef.nativeElement.classList.contains('fd-toolbar__spacer');
+        }
+
+        let lastItem: ToolbarItemDirective = normalElements[normalElements.length - 1];
+
+        while (isSpacer(lastItem) && normalElements.length > 0) {
+            overflowElements.push(normalElements.pop());
+            lastItem = normalElements[normalElements.length - 1]
+        }
+    }
+
+    /** @hidden */
+    private _getOrderedItemsFollowingQuery(toolbarItems: ToolbarItemDirective[]): ToolbarItemDirective[] {
+        const queryArray = this.toolbarItems.toArray();
+        const sortMethod = (a: ToolbarItemDirective, b: ToolbarItemDirective): number => {
+            return (
+                queryArray.findIndex(_item => _item === a) >
+                queryArray.findIndex(_item => _item === b)
+            ) ? 1 : -1
+        }
+        return toolbarItems.sort(sortMethod);
     }
 }

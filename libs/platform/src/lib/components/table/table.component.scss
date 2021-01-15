@@ -1,51 +1,72 @@
-.fd-table--fixed {
+.fdp-table {
     .fd-table__cell {
         max-width: 200px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .fd-table__cell--fixed {
         min-width: 200px;
         max-width: 200px;
     }
 
-    .fd-popover__control {
-        position: initial;
-    }
-}
-
-.fd-table__row--group .fd-table__cell {
-    z-index: 1;
-    min-width: 100%;
-    max-width: 100%;
-    background-color: #f2f2f2;
-    background-color: var(--sapList_HeaderBackground, #f2f2f2);
-
-    &:first-child {
-        padding-left: 0;
-        padding-right: 0;
-        border-right: none;
+    .fd-table__cell--has-menu {
+        cursor: pointer;
     }
 
-    fd-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 0.75rem;
-        color: #0854a0;
-        color: var(--sapButton_TextColor, #0854a0);
-        height: 100%;
-        width: 100%;
-        max-height: 100%;
-        min-width: 20px;
-        max-width: 50px;
+    .fd-table__header {
+        .fd-table__popover--custom {
+            display: none;
+        }
     }
-}
 
-.fd-table {
+    .fd-table__row--group {
+        .fd-table__cell {
+            z-index: 1;
+            min-width: 100%;
+            max-width: 100%;
+            background-color: #f2f2f2;
+            background-color: var(--sapList_HeaderBackground, #f2f2f2);
+
+            &:first-child {
+                padding-left: 0;
+                padding-right: 0;
+                border-right: none;
+            }
+
+            fd-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 0.75rem;
+                color: #0854a0;
+                color: var(--sapButton_TextColor, #0854a0);
+                width: 32px;
+            }
+        }
+    }
+
+    .fd-table__cell,
+    .fd-table__row--group .fd-table__cell {
+        @mixin fd-table-nested-cell-padding($padding: 0, $levels: 0) {
+            @for $i from 1 through $levels {
+                &[data-nesting-level='#{$i}'] {
+                    padding-left: #{$i * $padding};
+                }
+            }
+        }
+
+        @include fd-table-nested-cell-padding(24px, 20);
+    }
+
     .fd-table__empty-table-message {
         padding: 1rem;
         text-align: center;
     }
+}
+
+/* Need to make it global cause this item is rendered in the overlay */
+.fdp-table__item--clickable {
+    cursor: pointer;
 }
