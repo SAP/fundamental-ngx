@@ -4,7 +4,7 @@ import {
     pause,
     scrollIntoView,
     sendKeys,
-    waitElementToBePresentInDOM,
+    waitForPresent,
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
@@ -60,7 +60,7 @@ export class ComboBoxPo extends BaseComponentPo {
     }
 
     selectOption(type: string, option: string): void {
-        waitElementToBePresentInDOM(this.dropDownOption(option));
+        waitForPresent(this.dropDownOption(option));
         scrollIntoView(this.dropDownOption(option));
         click(this.dropDownOption(option));
         waitForElDisplayed(this.filledComboBoxInputs(type, option));

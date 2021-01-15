@@ -19,12 +19,7 @@ export function isBrowser(browserName: string): boolean {
 }
 
 export function browserIsIEorSafari(): boolean {
-    if (browserIsSafari()) {
-        return true;
-    } else if (browserIsIE()) {
-        return true;
-    }
-    return false;
+    return browserIsSafari() || browserIsIE() ;
 }
 
 export function browserIsFirefox(): boolean {
@@ -40,12 +35,7 @@ export function browserIsSafari(): boolean {
 }
 
 export function browserIsSafariorFF(): boolean {
-    if (browserIsSafari()) {
-        return true;
-    } else if (browserIsFirefox()) {
-        return true;
-    }
-    return false;
+    return browserIsSafari() || browserIsFirefox();
 }
 
 export function goBack(): void {
@@ -115,6 +105,7 @@ export function getTextArr(selector: string, sliceStart?: number, sliceEnd?: num
 }
 
 export function waitForElDisplayed(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
+    waitForPresent(selector, index);
     return $$(selector)[index].waitForDisplayed({ timeout: waitTime });
 }
 
@@ -181,7 +172,8 @@ export function clearValue(selector: string, index: number = 0, waitTime = defau
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     $$(selector)[index].clearValue();
 }
-export function getElementSize(selector: string, index?: number):  WebdriverIO.SizeReturn;
+
+export function getElementSize(selector: string, index?: number): WebdriverIO.SizeReturn;
 export function getElementSize(selector: string, index: number, prop: 'width' | 'height'): number;
 export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number | WebdriverIO.SizeReturn {
     return $$(selector)[index].getSize(prop || void 0);
@@ -223,10 +215,6 @@ export function clickAndHold(selector: string, index: number = 0, waitTime: numb
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     $$(selector)[index].moveTo();
     return browser.buttonDown();
-}
-
-export function waitElementToBePresentInDOM(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
-    return $$(selector)[index].waitForExist({ timeout: waitTime });
 }
 
 export function scrollIntoView(selector: string, index: number = 0): void {
@@ -277,4 +265,9 @@ export function getElementLocation(selector: string, index?: number): WebdriverI
 export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
 export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
     return $$(selector)[index].getLocation(prop || void 0);
+}
+
+
+export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
+    return $$(selector)[index].parentElement().getCSSProperty(prop).value;
 }

@@ -32,11 +32,13 @@ describe('File uploader test suite', function() {
     });
 
     it('Verify browser button', () => {
-        if (!browserIsIEorSafari()) {
-            const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
-            for (let i = 0; i < arrLength; i++) {
-                click(fileUploaderPO.browseButton, i);
-            }
+        if (browserIsIEorSafari()) {
+            console.log('Skip for IE and Safari');
+            return;
+        }
+        const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
+        for (let i = 0; i < arrLength; i++) {
+            click(fileUploaderPO.browseButton, i);
         }
     });
 
