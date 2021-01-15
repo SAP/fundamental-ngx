@@ -13,7 +13,6 @@ import {
     Optional,
     QueryList,
     Renderer2,
-    SimpleChanges,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -46,8 +45,10 @@ export enum RangeHandles {
 
 export interface SliderTickMark {
     value: number;
-    label?: string;
+    label: string;
 }
+
+export type ControlValue = number | number[] | SliderTickMark | SliderTickMark[];
 
 const MIN_DISTANCE_BETWEEN_TICKS = 8;
 
@@ -80,17 +81,50 @@ export class SliderComponent
     @Input()
     ariaLabel: string = null;
 
-    /** Minimum value. */
+    /** Get Minimum value. */
     @Input()
-    min = 0;
+    get min(): number {
+        return this._min;
+    }
 
-    /** Maximum value. */
-    @Input()
-    max = 100;
+    /** Set Minimum value. */
+    set min(value: number) {
+        if (((this.max - value) / this.step) % 1 !== 0) {
+            return;
+        }
 
-    /** Step value. */
+        this._min = value;
+    }
+
+    /** Get Maximum value. */
     @Input()
-    step = 1;
+    get max(): number {
+        return this._max;
+    }
+
+    /** Set Maximum value. */
+    set max(value: number) {
+        if (((value - this.min) / this.step) % 1 !== 0) {
+            return;
+        }
+
+        this._max = value;
+    }
+
+    /** Get Step value. */
+    @Input()
+    get step(): number {
+        return this._step;
+    }
+
+    /** Set Step value. */
+    set step(value: number) {
+        if (((this.max - this.min) / value) % 1 !== 0) {
+            return;
+        }
+
+        this._step = value;
+    }
 
     /** Jump value. */
     @Input()
@@ -108,9 +142,9 @@ export class SliderComponent
     @Input()
     showTicksLabels = false;
 
-    /** Array of custom labels values to use for Slider. */
+    /** Array of custom values to use for Slider. */
     @Input()
-    customLabelsValues: SliderTickMark[] = [];
+    customValues: SliderTickMark[] = [];
 
     /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
     @Input()
@@ -124,40 +158,59 @@ export class SliderComponent
     @Input()
     disabled = false;
 
+    _position: number | number[] = 0;
+
     /** Control value */
     @Input()
-    get value(): number | number[] {
+    get value(): ControlValue {
         return this._value;
     }
 
     /** Set control value */
-    set value(val: number | number[]) {
-        if (typeof val === 'string') {
-            val = Number(val);
-        }
-
-        if (this.value === val) {
+    set value(value: ControlValue) {
+        if (value === undefined || value === null) {
             return;
         }
 
-        if (!this._isRange && typeof val === 'number') {
-            this._progress = this._calcProgress(val, true);
+        if (typeof value === 'string') {
+            value = Number(value);
         }
 
-        if (this._isRange && Array.isArray(val) && this._handle1Value === 0 && this._handle2Value === 0) {
-            this._setRangeHandleValueAndPosition(RangeHandles.First, val[0]);
-            this._setRangeHandleValueAndPosition(RangeHandles.Second, val[1]);
+        if (this.value === value) {
+            return;
         }
 
-        this._value = val;
-        this.onChange(val);
+        let _position: number | number[] = value as number | number[];
+
+        if (this.customValues?.length > 0) {
+            this.min = 0;
+            this.max = this.customValues.length - 1;
+            this.step = 1;
+
+            _position = this._getCustomValuesPositions(value as SliderTickMark | SliderTickMark[]);
+        }
+
+        if (!this._isRange && typeof _position === 'number') {
+            this._progress = this._calcProgress(_position, true);
+        }
+
+        if (this._isRange && Array.isArray(_position) && this._handle1Value === 0 && this._handle2Value === 0) {
+            this._setRangeHandleValueAndPosition(RangeHandles.First, _position[0]);
+            this._setRangeHandleValueAndPosition(RangeHandles.Second, _position[1]);
+        }
+
+        this._value = value;
+        this._position = _position;
+
+        this.onChange(value);
         this.onTouched();
+
         this._cdr.markForCheck();
     }
 
     /** @hidden */
     get _popoverValueRef(): number[] {
-        return [this.value as number, this._handle1Value, this._handle2Value];
+        return [this._position as number, this._handle1Value, this._handle2Value];
     }
 
     /** @hidden */
@@ -181,7 +234,16 @@ export class SliderComponent
     _popovers: QueryList<PopoverDirective>;
 
     /** @hidden */
-    _value: number | number[] = 0;
+    _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
+
+    /** @hidden */
+    _min = 0;
+
+    /** @hidden */
+    _max = 100;
+
+    /** @hidden */
+    _step = 1;
 
     /** @hidden */
     _progress = 0;
@@ -249,15 +311,9 @@ export class SliderComponent
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.buildComponentCssClass();
-
-        if (changes.mode.previousValue !== changes.mode.currentValue) {
-            this._checkIsInRangeMode();
-
-            
-        }
-
+        this._checkIsInRangeMode();
         this._constructTickMarks();
         this._constructValuesBySteps();
         this._recalcHandlePositions();
@@ -307,7 +363,7 @@ export class SliderComponent
     }
 
     /** @hidden */
-    writeValue(value: number | number[]): void {
+    writeValue(value: ControlValue): void {
         this.value = value;
     }
 
@@ -341,7 +397,7 @@ export class SliderComponent
                 handleIndex = RangeHandles.Second;
             }
 
-            const value = this._calculateValueFromPointerPosition(moveEvent);
+            const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
             this._setRangeHandleValueAndPosition(handleIndex, value);
 
             this.writeValue(this._constructRangeModelValue());
@@ -364,8 +420,8 @@ export class SliderComponent
         event.preventDefault();
 
         const diff = event.shiftKey ? this.jump : this.step;
-        let newValue: number | null = null;
-        let prevValue = this.value as number;
+        let newValue: number | SliderTickMark | null = null;
+        let prevValue = this._position as number;
         let handleIndex: RangeHandles;
         if (this._isRange) {
             if (event.target === this.rangeHandle1.nativeElement) {
@@ -391,7 +447,7 @@ export class SliderComponent
             return;
         }
 
-        newValue = this._processNewValue(newValue);
+        newValue = this._processNewValue(newValue as number, !this._isRange);
 
         if (!this._isRange) {
             this.writeValue(newValue);
@@ -400,7 +456,7 @@ export class SliderComponent
             return;
         }
 
-        this._setRangeHandleValueAndPosition(handleIndex, newValue);
+        this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
         this.writeValue(this._constructRangeModelValue());
         this._updatePopoversPosition();
         this._cdr.detectChanges();
@@ -413,7 +469,6 @@ export class SliderComponent
 
     /** @hidden */
     _hidePopovers(): void {
-        console.log(11111);
         const elementsToCheck = [
             this.handle?.nativeElement,
             this.rangeHandle1?.nativeElement,
@@ -424,7 +479,6 @@ export class SliderComponent
         if (handleFocused || popoverInputFocused) {
             const unsubscribeFromBlur = this._renderer.listen(document.activeElement, 'focusout', () => {
                 setTimeout(() => {
-                    console.log(2222222);
                     unsubscribeFromBlur();
                     this._hidePopovers();
                 });
@@ -443,10 +497,11 @@ export class SliderComponent
 
     /** @hidden */
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
-        const newValue = this._processNewValue(+value);
+        const newValue = this._processNewValue(+value) as number;
         if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
             this.writeValue(newValue);
             this.handle.nativeElement.focus();
+
             return;
         }
 
@@ -463,39 +518,69 @@ export class SliderComponent
         this.writeValue(this._constructRangeModelValue());
     }
 
+    private _getCustomValuesPositions(value: SliderTickMark | SliderTickMark[]): number | number[] {
+        if (!value) {
+            return;
+        }
+
+        if (Array.isArray(value)) {
+            const indexes = [];
+
+            for (const customValue of value) {
+                let customValueIndex = this.customValues.findIndex((item) => item.value === customValue.value);
+                if (!customValueIndex) {
+                    customValueIndex = indexes.length === 0 ? 0 : this.customValues.length - 1;
+                }
+
+                indexes.push(customValueIndex);
+            }
+
+            return indexes;
+        } else {
+            return this.customValues.findIndex((item) => item.value === value.value) || 0;
+        }
+    }
+
     /** @hidden */
-    private _calculateValueFromPointerPosition(event: MouseEvent): number {
+    private _calculateValueFromPointerPosition(event: MouseEvent, takeCustomValue = true): number | SliderTickMark {
         const { x, width } = this.trackEl.nativeElement.getBoundingClientRect();
         let percentage = (event.clientX - x) / width;
+
         if (this._isRtl) {
-            percentage = 1 - (event.clientX - x) / width;
+            percentage = 1 - percentage;
         }
 
         const newValue = this.min + percentage * (this.max - this.min);
 
-        return this._processNewValue(newValue);
+        return this._processNewValue(newValue, takeCustomValue);
     }
 
     /** @hidden */
-    private _processNewValue(newValue: number): number {
+    private _processNewValue(newValue: number, takeCustomValue = true): number | SliderTickMark {
         if (newValue > this.max) {
-            return this.max;
+            newValue = this.max;
         }
 
         if (newValue < this.min) {
-            return this.min;
+            newValue = this.min;
         }
 
         const stepDiffArray = this._valuesBySteps
             .map((stepValue) => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
             .sort((a, b) => a.diff - b.diff);
+        let value: SliderTickMark | number = stepDiffArray[0].value;
 
-        return stepDiffArray[0].value;
+        if (takeCustomValue && this.customValues.length > 0) {
+            value = this.customValues[value];
+        }
+
+        return value;
     }
 
     /** @hidden */
     private _setRangeHandleValueAndPosition(handleIndex: RangeHandles, value: number): void {
         const position = this._calcProgress(value, true);
+
         if (handleIndex === RangeHandles.First) {
             this._handle1Value = value;
             this._handle1Position = position;
@@ -510,8 +595,20 @@ export class SliderComponent
     }
 
     /** @hidden */
-    private _constructRangeModelValue(): number[] {
-        return [Math.min(this._handle1Value, this._handle2Value), Math.max(this._handle1Value, this._handle2Value)];
+    private _constructRangeModelValue(): number[] | SliderTickMark[] {
+        let rangeValue: number[] | SliderTickMark[] = [
+            Math.min(this._handle1Value, this._handle2Value),
+            Math.max(this._handle1Value, this._handle2Value)
+        ];
+
+        if (this.customValues.length > 0) {
+            const min = this.customValues[rangeValue[0]] || this.customValues[0];
+            const max = this.customValues[rangeValue[1]] || this.customValues[this.customValues.length - 1];
+
+            rangeValue = [min, max];
+        }
+
+        return rangeValue;
     }
 
     /** @hidden */
@@ -540,24 +637,36 @@ export class SliderComponent
     private _constructTickMarks(): void {
         if (!this.showTicks) {
             this._tickMarks = [];
+
             return;
         }
 
-        if (this.customLabelsValues.length) {
-            this._tickMarks = [...this.customLabelsValues];
+        if (this.customValues.length) {
+            this.min = 0;
+            this.max = this.customValues.length - 1;
+            this.step = 1;
+            this._tickMarks = [...this.customValues];
         } else {
-            try {
-                const tickMarksCount = (this.max - this.min) / this.step + 1;
-                if (tickMarksCount > this._maxTickMarksNumber) {
-                    this._tickMarks = [{ value: this.min }, { value: this.max }];
+            const total = this.max - this.min;
+            const tickMarksCount = total / this.step + 1;
+            if (tickMarksCount > this._maxTickMarksNumber) {
+                this._tickMarks = [
+                    { value: 0, label: `${this.min}` },
+                    { value: total, label: `${this.max}` }
+                ];
 
-                    return;
-                }
+                return;
+            }
 
+            if (tickMarksCount % 1 === 0) {
                 this._tickMarks = Array(tickMarksCount)
                     .fill({})
-                    .map((_, i) => ({ value: this.min + i * this.step }));
-            } catch (e) {}
+                    .map((_, i) => {
+                        const value = i * this.step;
+
+                        return { value: value, label: `${this.min + value}` };
+                    });
+            }
         }
 
         this._cdr.detectChanges();
@@ -575,8 +684,17 @@ export class SliderComponent
     /** @hidden */
     private _calcProgress(value: number, skipRtl = false): number {
         let progress = ((value - this.min) / (this.max - this.min)) * 100;
+
         if (!skipRtl && this._isRtl) {
             progress = 100 - progress;
+        }
+
+        if (progress > 100) {
+            return 100;
+        }
+
+        if (progress < 0) {
+            return 0;
         }
 
         return progress;
@@ -590,7 +708,7 @@ export class SliderComponent
             this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
         }
 
-        this._progress = this._calcProgress(this.value as number, true);
+        this._progress = this._calcProgress(this._position as number, true);
         this._cdr.markForCheck();
     }
 

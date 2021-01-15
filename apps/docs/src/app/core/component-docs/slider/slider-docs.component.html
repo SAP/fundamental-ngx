@@ -31,16 +31,15 @@
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-slider
         [(ngModel)]="value"
-        [min]="data.properties.min"
-        [max]="data.properties.max"
-        [step]="data.properties.step"
-        [jump]="data.properties.jump"
+        [min]="+data.properties.min"
+        [max]="+data.properties.max"
+        [step]="+data.properties.step"
+        [jump]="+data.properties.jump"
         [disabled]="data.properties.disabled"
         [showTicks]="data.properties.showTicks"
         [showTicksLabels]="data.properties.showTicksLabels"
         [mode]="data.properties.range"
         [hideProgressBar]="data.properties.hideProgressBar"
-        [customLabelsValues]="customLabels"
     ></fd-slider>
 
     <p>Value: {{ value }}</p>

@@ -1,10 +1,78 @@
 <fd-slider
+    [(ngModel)]="value6"
+    [showTicks]="true"
+    [showTicksLabels]="true"
+    [customValues]="customValues"
+>
+</fd-slider>
+<p>Value: {{ value6 | json }}</p>
+
+<fd-slider
     tooltipMode="editable"
     [(ngModel)]="value"
+    [min]="1"
+    [max]="10"
+    [step]="0.1"
+    [showTicks]="true"
+    [showTicksLabels]="true"
+    [jump]="2"
+>
+</fd-slider>
+<p>Value: {{ value }}</p>
+
+<fd-slider
+    [(ngModel)]="value7"
+    [min]="0"
+    [max]="10"
+>
+</fd-slider>
+<p>Value: {{ value7 }}</p>
+
+<fd-slider
+    tooltipMode="editable"
+    [(ngModel)]="value1"
+    [min]="-1000"
+    [max]="1000"
+>
+</fd-slider>
+<p>Value: {{ value1 }}</p>
+
+<fd-slider
+    tooltipMode="editable"
+    [(ngModel)]="value2"
+    [min]="0"
+    [max]="500"
+>
+</fd-slider>
+<p>Value: {{ value2 }}</p>
+
+<fd-slider
+    tooltipMode="editable"
+    [(ngModel)]="value3"
+    [min]="0"
+    [max]="10"
+    [showTicks]="true"
+>
+</fd-slider>
+<p>Value: {{ value3 }}</p>
+
+<fd-slider
+    tooltipMode="editable"
+    [(ngModel)]="value4"
     [min]="0"
     [max]="100"
-    [step]="1"
-    [jump]="10">
+    [showTicks]="true"
+>
 </fd-slider>
+<p>Value: {{ value4 }}</p>
 
-<p>Value: {{ value }}</p>
+<fd-slider
+    tooltipMode="editable"
+    [(ngModel)]="value5"
+    [min]="-100"
+    [max]="100"
+    [step]="5"
+    [showTicks]="true"
+>
+</fd-slider>
+<p>Value: {{ value5 }}</p>

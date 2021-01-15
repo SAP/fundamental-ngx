@@ -13,3 +13,20 @@
     <br>
     Max value: {{ value[1] }}
 </p>
+
+<fd-slider
+    [(ngModel)]="value2"
+    mode="range"
+    tooltipMode="editable"
+    [min]="0"
+    [max]="100"
+    [step]="1"
+    [jump]="10"
+    [customValues]="customValues">
+</fd-slider>
+
+<p>
+    Min value: {{ value2[0] | json }}
+    <br>
+    Max value: {{ value2[1] | json }}
+</p>
