@@ -1,0 +1,161 @@
+<div fdLayoutGridRow>
+    <div
+        fdLayoutGridCol
+        colGrow
+    >
+        <div fdLayoutGridRow>
+            <!-- Column -->
+            <fd-select
+                class="filter-row__select"
+                fdLayoutGridCol
+                colGrow
+                [compact]="true"
+                [ngModel]="rule.columnKey"
+                (ngModelChange)="rule.setColumnKey($event)"
+                (ngModelChange)="_onModelChange()"
+            >
+                <fd-option
+                    *ngFor="let column of rule.columns"
+                    [value]="column.key"
+                >{{ column.label }}</fd-option>
+            </fd-select>
+            <!-- Strategy -->
+            <fd-select
+                class="filter-row__select"
+                fdLayoutGridCol
+                colGrow
+                [compact]="true"
+                [ngModel]="rule.strategy"
+                (ngModelChange)="rule.setStrategy($event)"
+                (ngModelChange)="_onModelChange()"
+            >
+                <fd-option
+                    *ngFor="let strategy of rule.strategies"
+                    [value]="strategy"
+                >
+                    <ng-container i18n="@@platformTableP13FilterStrategyLabel">
+                        { strategy, select,
+                        between {between}
+                        contains {contains}
+                        beginsWith {begins with}
+                        endsWith {ends with}
+                        equalTo {equal to}
+                        greaterThan {greater than}
+                        greaterThanOrEqualTo {greater than or equal to}
+                        lessThan {less than}
+                        lessThanOrEqualTo {less than or equal to}
+                        after {after}
+                        onOrAfter {on or after}
+                        before {before}
+                        beforeOrOn {before or on}
+                        other {Not defined}
+                        }
+                    </ng-container>
+                </fd-option>
+            </fd-select>
+        </div>
+    </div>
+    <div
+        fdLayoutGridCol
+        colGrow
+    >
+        <div
+            fdLayoutGridRow
+            [ngSwitch]="rule.strategy"
+            ngForm
+        >
+            <ng-container *ngSwitchCase="FILTER_STRATEGY.BETWEEN">
+                <div
+                    fdLayoutGridCol
+                    colGrow
+                >
+                    <ng-container
+                        [ngTemplateOutlet]="ruleInputTemplate"
+                        [ngTemplateOutletContext]="{valueKey: 'value'}"
+                    ></ng-container>
+                </div>
+                <div
+                    fdLayoutGridCol
+                    colGrow
+                >
+                    <ng-container
+                        [ngTemplateOutlet]="ruleInputTemplate"
+                        [ngTemplateOutletContext]="{valueKey: 'value2'}"
+                    ></ng-container>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                <div
+                    fdLayoutGridCol
+                    colGrow
+                >
+                    <ng-container
+                        [ngTemplateOutlet]="ruleInputTemplate"
+                        [ngTemplateOutletContext]="{valueKey: 'value'}"
+                    ></ng-container>
+                </div>
+            </ng-container>
+
+            <!-- Rule Control Based on Data Type -->
+            <ng-template
+                #ruleInputTemplate
+                let-valueKey="valueKey"
+            >
+                <ng-container [ngSwitch]="rule.dataType">
+                    <ng-container *ngSwitchCase="DATA_TYPE.DATE">
+                        <fd-date-picker
+                            class="filter-row__input"
+                            type="single"
+                            [compact]="true"
+                            required
+                            [name]="valueKey"
+                            [(ngModel)]="rule[valueKey]"
+                            (ngModelChange)="_onModelChange()"
+                        ></fd-date-picker>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="DATA_TYPE.BOOLEAN">
+                        <fd-select
+                            class="filter-row__select"
+                            [compact]="true"
+                            [name]="valueKey"
+                            [(ngModel)]="rule[valueKey]"
+                            (ngModelChange)="_onModelChange()"
+                            required
+                        >
+                            <fd-option
+                                [value]="undefined"
+                                i18n="@@platformTableP13FilterBooleanOptionNotDefined"
+                            >
+                                &nbsp;
+                            </fd-option>
+                            <fd-option
+                                [value]="true"
+                                i18n="@@platformTableP13FilterBooleanOptionTrue"
+                            >
+                                Yes
+                            </fd-option>
+                            <fd-option
+                                [value]="false"
+                                i18n="@@platformTableP13FilterBooleanOptionFalse"
+                            >
+                                No
+                            </fd-option>
+                        </fd-select>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        <input
+                            type="text"
+                            class="filter-row__input"
+                            fd-form-control
+                            [compact]="true"
+                            required
+                            [name]="valueKey"
+                            [(ngModel)]="rule[valueKey]"
+                            (ngModelChange)="_onModelChange()"
+                        />
+                    </ng-container>
+                </ng-container>
+            </ng-template>
+        </div>
+    </div>
+</div>

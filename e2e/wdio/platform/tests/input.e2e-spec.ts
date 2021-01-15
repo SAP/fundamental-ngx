@@ -21,8 +21,8 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitElementToBePresentInDOM,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import inputPContent from '../fixtures/appData/input-page-contents';
 import inputTestData from '../fixtures/testData/input';
@@ -33,20 +33,19 @@ describe('Input should ', function() {
 
     beforeAll(() => {
         inputPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(inputPage.defaultInput);
+    }, 1);
 
     it('have input without label', () => {
-        waitElementToBePresentInDOM(inputPage.defaultInput);
         waitForElDisplayed(inputPage.defaultInput);
         expect(doesItExist(inputPage.autocompleteInputLabel)).toBe(false);
     });
 
     it('be able to type something with keyboard', () => {
-        waitElementToBePresentInDOM(inputPage.defaultInput);
         waitForElDisplayed(inputPage.defaultInput);
         setValue(inputPage.defaultInput, inputTestData.text);
 
@@ -59,7 +58,6 @@ describe('Input should ', function() {
     });
 
     it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {
-        waitElementToBePresentInDOM(inputPage.defaultInput);
         waitForElDisplayed(inputPage.defaultInput);
         setValue(inputPage.defaultInput, inputTestData.text);
         addValue(inputPage.defaultInput, inputTestData.number);
@@ -70,7 +68,6 @@ describe('Input should ', function() {
     });
 
     it('impose any filters on the kind of input values the component receives (text)', () => {
-        waitElementToBePresentInDOM(inputPage.textInput);
         waitForElDisplayed(inputPage.textInput);
         addValue(inputPage.textInput, inputTestData.number);
         addValue(inputPage.textInput, inputTestData.special_characters);
@@ -81,7 +78,6 @@ describe('Input should ', function() {
     });
     // TODO: it is not working the same for manual and automation.
     xit('impose any filters on the kind of input values the component receives (number)', () => {
-        waitElementToBePresentInDOM(inputPage.numberInput);
         waitForElDisplayed(inputPage.numberInput);
         click(inputPage.numberInput);
 
@@ -93,7 +89,6 @@ describe('Input should ', function() {
     });
 
     it('wrap the input characters to the next line', () => {
-        waitElementToBePresentInDOM(inputPage.defaultInput);
         waitForElDisplayed(inputPage.defaultInput);
         const heightBefore = getElementSize(inputPage.defaultInput, 0, 'height') ;
         setValue(inputPage.defaultInput, inputTestData.longLine);
@@ -103,7 +98,6 @@ describe('Input should ', function() {
     });
 
     it('enable editing the entered characters', () => {
-        waitElementToBePresentInDOM(inputPage.defaultInput);
         waitForElDisplayed(inputPage.defaultInput);
         setValue(inputPage.defaultInput, inputTestData.text);
         sendKeys('Backspace');
@@ -114,7 +108,6 @@ describe('Input should ', function() {
     });
 
     it('check have disabled attr assigned', () => {
-        waitElementToBePresentInDOM(inputPage.disabledInput);
         waitForElDisplayed(inputPage.disabledInput);
 
         expect(getAttributeByName(inputPage.disabledInput, 'ng-reflect-is-disabled')).toBe('true');
@@ -127,24 +120,24 @@ describe('Input should ', function() {
     });
 
     it('should have error border color', () => {
-        if (!browserIsIEorSafari()) {
-            waitElementToBePresentInDOM(inputPage.messagesComponentsInput);
-            scrollIntoView(inputPage.messagesComponentsInput);
-            waitForElDisplayed(inputPage.messagesComponentsInput);
-            click(inputPage.submitBtn);
-            const errorBackgroundColor = getCSSPropertyByName(inputPage.messagesComponentsInput, 'border-bottom-color').value;
-            expect(errorBackgroundColor).toContain(inputPContent.errorBorderColor);
-            mouseHoverElement(inputPage.messagesComponentsInput);
-            pause(300);
-            waitForElDisplayed(inputPage.errorText);
-            expect(getText(inputPage.errorText).trim()).toBe(inputPContent.errorText);
+        if (browserIsIEorSafari()) {
+            console.log('Skip for IE and Safari');
             return;
         }
-        console.log('Skip for IE and Safari');
+        waitForPresent(inputPage.messagesComponentsInput);
+        scrollIntoView(inputPage.messagesComponentsInput);
+        waitForElDisplayed(inputPage.messagesComponentsInput);
+        click(inputPage.submitBtn);
+        const errorBackgroundColor = getCSSPropertyByName(inputPage.messagesComponentsInput, 'border-bottom-color').value;
+        expect(errorBackgroundColor).toContain(inputPContent.errorBorderColor);
+        mouseHoverElement(inputPage.messagesComponentsInput);
+        pause(300);
+        waitForElDisplayed(inputPage.errorText);
+        expect(getText(inputPage.errorText).trim()).toBe(inputPContent.errorText);
     });
 
     it('should have visual cue for require input', () => {
-        waitElementToBePresentInDOM(inputPage.requiredInputLabel);
+        waitForPresent(inputPage.requiredInputLabel);
         scrollIntoView(inputPage.requiredInputLabel);
         pause(2000);
         expect(executeScriptAfterTagAttr(inputPage.requiredInputLabel, 'content')).toBe('"*"');
@@ -155,7 +148,6 @@ describe('Input should ', function() {
     });
 
     it('should implement autosuggestion', () => {
-        waitElementToBePresentInDOM(inputPage.autocompleteInput);
         waitForElDisplayed(inputPage.autocompleteInput);
         addValue(inputPage.autocompleteInput, inputTestData.autocompleteOption);
 

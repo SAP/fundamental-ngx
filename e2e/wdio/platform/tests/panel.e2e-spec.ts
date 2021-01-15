@@ -6,7 +6,6 @@ import {
     getElementSize,
     getText,
     pause,
-    waitElementToBePresentInDOM,
     waitForClickable,
     waitForElDisplayed,
     waitForNotDisplayed,
@@ -18,10 +17,10 @@ describe('Verify Panel', () => {
 
     beforeEach(() => {
         panelPage.open();
-    });
+    }, 1);
 
     it('should have fixed header', () => {
-        waitElementToBePresentInDOM(panelPage.fixedPanelDescription);
+        waitForPresent(panelPage.fixedPanelDescription);
         // Checks that fixed panel has no expand button
         expect(waitForPresent(panelPage.fixedPanelDescription)).toBe(true);
     });

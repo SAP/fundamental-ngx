@@ -11,23 +11,21 @@ import {
     getText,
     isElementDisplayed,
     refreshPage, scrollIntoView,
-    waitElementToBePresentInDOM,
+    waitForPresent,
     waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Menu button test suite', function() {
     const menuBtnPage = new MenuButtonPo();
 
-    beforeAll(()=> {
-
-    })
-
-
-    beforeEach(() => {
+    beforeAll(() => {
         menuBtnPage.open();
+    }, 1);
+
+    afterEach(() => {
         refreshPage();
-        waitForElDisplayed(menuBtnPage.root);
-    });
+        waitForPresent(menuBtnPage.btnArrowIconsArr);
+    }, 1);
 
     describe('Check general menu button states', function() {
         it('should check that the arrow icon is present', () => {
@@ -40,46 +38,50 @@ describe('Menu button test suite', function() {
 
         it('should check selected menu option and close menu', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (!browserIsIEorSafari()) {
-                click(menuBtnPage.cozyBtnArr);
-                click(menuBtnPage.menuItemArr);
-
-                expect(getText(menuBtnPage.cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
-                expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+            if (browserIsIEorSafari()) {
+                console.log('Skip for Safari and IE');
+                return;
             }
-            console.log('Skip for Safari and IE');
+            click(menuBtnPage.cozyBtnArr);
+            click(menuBtnPage.menuItemArr);
+
+            expect(getText(menuBtnPage.cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
+            expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
         });
 
         it('should check menu items visible', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (!browserIsIE()) {
-                click(menuBtnPage.cozyBtnArr);
-                expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
+            if (browserIsIE()) {
+                console.log('Skip for IE');
                 return;
             }
-            console.log('Skip for IE');
+            click(menuBtnPage.cozyBtnArr);
+            expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
         });
 
         it('should check close menu by clicking menu btn', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (!browserIsIE()) {
-                doubleClick(menuBtnPage.cozyBtnArr);
-                expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+            if (browserIsIE()) {
+                console.log('Skip for IE');
+                return;
             }
-            console.log('Skip for IE');
+            doubleClick(menuBtnPage.cozyBtnArr);
+            expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+
         });
 
         it('should check closing menu when clicking outside of menu', () => {
             // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (!browserIsIE()) {
-                waitElementToBePresentInDOM(menuBtnPage.cozyBtnArr);
-                click(menuBtnPage.cozyBtnArr);
-                waitForElDisplayed(menuBtnPage.menuItemOverlay);
-                expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
-                click(menuBtnPage.sectionTitle);
-                expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
+            if (browserIsIE()) {
+                console.log('Skip for IE');
+                return;
             }
-            console.log('Skip for IE');
+            waitForPresent(menuBtnPage.cozyBtnArr);
+            click(menuBtnPage.cozyBtnArr);
+            waitForElDisplayed(menuBtnPage.menuItemOverlay);
+            expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(true);
+            click(menuBtnPage.sectionTitle);
+            expect(isElementDisplayed(menuBtnPage.menuItemOverlay)).toBe(false);
         });
 
     });
@@ -192,17 +194,8 @@ describe('Menu button test suite', function() {
         });
 
         it('should check RTL orientation', () => {
-            const arrL = getElementArrayLength(menuBtnPage.exampleAreaContainersArr);
-
-            for (let i = 0; arrL > i; i++) {
-                scrollIntoView(menuBtnPage.exampleAreaContainersArr, i);
-                expect(getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i);
-                expect([null, '']).toContain(dirValueBefore);
-                click(menuBtnPage.rtlSwitcherArr, i);
-                expect(getCSSPropertyByName(menuBtnPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(getAttributeByName(menuBtnPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            }
+            menuBtnPage.checkRtlSwitch();
         });
     });
-});
+})
+;

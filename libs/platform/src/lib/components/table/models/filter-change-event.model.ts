@@ -1,4 +1,4 @@
-import { TableComponent } from '../table.component';
+import { Table } from '../table';
 import { CollectionFilter } from '../interfaces';
 
 export interface FilterChange {
@@ -7,9 +7,5 @@ export interface FilterChange {
 }
 
 export class TableFilterChangeEvent {
-    constructor(
-        public source: TableComponent,
-        public current: CollectionFilter[],
-        public previous: CollectionFilter[]
-    ) {}
+    constructor(public source: Table, public current: CollectionFilter[], public previous: CollectionFilter[]) {}
 }

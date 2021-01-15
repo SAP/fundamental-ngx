@@ -1,0 +1,34 @@
+.fdp-table-p13-columns-dialog {
+    fd-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: block;
+    }
+
+    .fd-select-item--active {
+        background: #e5f0fa;
+        background: var(--sapList_SelectionBackgroundColor, #e5f0fa);
+    }
+
+    .group-row {
+        display: flex;
+        align-items: center;
+
+        margin-bottom: 0.5rem;
+
+        .fd-popover-custom {
+            display: block;
+        }
+
+        &__checkbox,
+        &__actions,
+        &__select {
+            margin-right: 1rem;
+        }
+
+        &__select {
+            flex: 1 1 0;
+        }
+    }
+}

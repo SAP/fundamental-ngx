@@ -193,7 +193,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return FdDate.getNow();
     }
 
-    parse(value: any): FdDate | null {
+    parse(value: any, parseFormat: Intl.DateTimeFormatOptions = {}): FdDate | null {
         if (value instanceof FdDate) {
             return this.clone(value);
         }
@@ -205,6 +205,19 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         if (typeof value === 'number') {
             date = new Date(value);
         }
+
+        // Check if we are dealing with a time string
+        if (
+            Number.isNaN(date.valueOf()) &&
+            typeof value === 'string' &&
+            !parseFormat.year &&
+            !parseFormat.day &&
+            !parseFormat.month &&
+            parseFormat.hour
+        ) {
+            date = this._parseTimeString(value);
+        }
+
         return Number.isNaN(date.valueOf()) ? null : this._createFdDateFromDateInstance(date);
     }
 
@@ -396,5 +409,26 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             date.getMinutes(),
             date.getSeconds()
         );
+    }
+
+    /**
+     * @hidden
+     *
+     * Since FdDatetimeAdapter can parse only "en-US" locale
+     * there is no reason to create comprehensive time parse
+     * that can understand plenty of locales.
+     *
+     * @param timeStr Time string to parse (E.g. '10:30 PM')
+     * @returns date Native date instance
+     *
+     */
+    private _parseTimeString(timeStr: string): Date {
+        /**
+         * Date.parse('10:30 AM') doesn't work so we need do a trick
+         * and prepend it by a date string.
+         */
+        const dateStr = this.format(this.now(), { year: 'numeric', month: 'numeric', day: 'numeric' });
+        const dateTimeString = `${dateStr} ${timeStr}`;
+        return new Date(Date.parse(dateTimeString));
     }
 }

@@ -36,7 +36,8 @@
 
                 <fd-card-kpi-header>
                     <strong fd-card-kpi-value>21.83</strong>
-                    <span fd-card-kpi-scale-icon glyph="up" fd-object-status status="positive"></span>
+                    <span fd-card-kpi-scale-icon glyph="up" aria-label="up arrow" title="up arrow" fd-object-status
+                        status="positive"></span>
                     <span fd-card-kpi-scale-text>K</span>
 
                     <div fd-card-kpi-analytics>
@@ -76,7 +77,7 @@
                 <h2 fd-card-title>Table card</h2>
                 <span fd-card-counter>3 of 10</span>
             </fd-card-header>
-            <fd-card-content>
+            <fd-card-content tabindex="0">
                 <table fd-table [noBorderX]="true">
                     <thead fd-table-header>
                         <tr fd-table-row>
@@ -87,7 +88,7 @@
                         </tr>
                     </thead>
                     <tbody fd-table-body>
-                        <tr fd-table-row [main]="true" [activable]="true">
+                        <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                             <td fd-table-cell>
                                 Banana
                             </td>
@@ -101,7 +102,7 @@
                                 <span fd-object-status status="positive">Available</span>
                             </td>
                         </tr>
-                        <tr fd-table-row [main]="true" [activable]="true">
+                        <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                             <td fd-table-cell>
                                 Pineapple
                             </td>
@@ -115,7 +116,7 @@
                                 <span fd-object-status status="negative">Out of stock</span>
                             </td>
                         </tr>
-                        <tr fd-table-row [main]="true" [activable]="true">
+                        <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                             <td fd-table-cell>
                                 Orange
                             </td>
@@ -135,7 +136,8 @@
         </fd-card>
         <fd-card *fdCardDef badge="New" cardType="list">
             <fd-card-header>
-                <fd-avatar image="http://picsum.photos/id/1018/400"></fd-avatar>
+                <fd-avatar image="http://picsum.photos/id/1018/400" ariaLabel="avatar image" title="avatar image">
+                </fd-avatar>
                 <h2 fd-card-title>Card Title</h2>
                 <h3 fd-card-subtitle>Card Subtitle</h3>
                 <span fd-card-counter status="positive">3 of 10</span>
@@ -230,7 +232,7 @@
                 <h2 fd-card-title>Table card</h2>
                 <span fd-card-counter>3 of 10</span>
             </fd-card-header>
-            <fd-card-content>
+            <fd-card-content tabindex="0">
                 <table fd-table [noBorderX]="true">
                     <thead fd-table-header>
                         <tr fd-table-row>
@@ -241,7 +243,7 @@
                         </tr>
                     </thead>
                     <tbody fd-table-body>
-                        <tr fd-table-row [main]="true" [activable]="true">
+                        <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                             <td fd-table-cell>
                                 Banana
                             </td>
@@ -255,7 +257,7 @@
                                 <span fd-object-status status="positive">Available</span>
                             </td>
                         </tr>
-                        <tr fd-table-row [main]="true" [activable]="true">
+                        <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                             <td fd-table-cell>
                                 Pineapple
                             </td>
@@ -269,7 +271,7 @@
                                 <span fd-object-status status="negative">Out of stock</span>
                             </td>
                         </tr>
-                        <tr fd-table-row [main]="true" [activable]="true">
+                        <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                             <td fd-table-cell>
                                 Orange
                             </td>
@@ -289,7 +291,8 @@
         </fd-card>
         <fd-card *fdCardDef badge="New" cardType="list">
             <fd-card-header>
-                <fd-avatar image="http://picsum.photos/id/1018/400"></fd-avatar>
+                <fd-avatar image="http://picsum.photos/id/1018/400" ariaLabel="avatar image" title="avatar image">
+                </fd-avatar>
                 <h2 fd-card-title>Card Title</h2>
                 <h3 fd-card-subtitle>Card Subtitle</h3>
                 <span fd-card-counter status="positive">3 of 10</span>

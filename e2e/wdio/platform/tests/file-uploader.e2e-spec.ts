@@ -6,7 +6,7 @@ import {
     getElementArrayLength,
     getText,
     refreshPage, sendKeys,
-    uploadFile
+    uploadFile, waitForPresent
 } from '../../driver/wdio';
 import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';
@@ -16,11 +16,12 @@ describe('File uploader test suite', function() {
 
     beforeAll(() => {
         fileUploaderPO.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(fileUploaderPO.fileUploaderRoot);
+    }, 1);
 
     it('Verify placeholders', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.fileUploaderInput);
@@ -31,11 +32,13 @@ describe('File uploader test suite', function() {
     });
 
     it('Verify browser button', () => {
-        if (!browserIsIEorSafari()) {
-            const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
-            for (let i = 0; i < arrLength; i++) {
-                click(fileUploaderPO.browseButton, i);
-            }
+        if (browserIsIEorSafari()) {
+            console.log('Skip for IE and Safari');
+            return;
+        }
+        const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
+        for (let i = 0; i < arrLength; i++) {
+            click(fileUploaderPO.browseButton, i);
         }
     });
 

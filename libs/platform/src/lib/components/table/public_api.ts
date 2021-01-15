@@ -1,16 +1,59 @@
-export * from './table.module';
-export * from './table.component';
-export * from './components/table-column/table-column.component';
-export * from './components/table-toolbar/table-toolbar.component';
-export * from './components/table-toolbar-actions/table-toolbar-actions.component';
-export * from './components/table-view-settings-dialog/table-view-settings-dialog.component';
-export * from './components/table-view-settings-filter/table-view-settings-filter.component';
-export * from './directives/';
 export {
-    ColumnAlign, SelectionMode, ContentDensity as TableContentDensity, SortDirection, FilterType, FilterValueType
-} from './enums'; // ContentDensity already exported
-export * from './interfaces';
-export * from './models';
-export * from './pipes';
-export * from './pipes';
-export * from './domain';
+    ColumnAlign,
+    SelectionMode,
+    ContentDensity as TableContentDensity,
+    SortDirection,
+    FilterType,
+    FilterableColumnDataType
+} from './enums';
+
+export {
+    TableState,
+    CollectionGroup,
+    CollectionSort,
+    CollectionFilter,
+    CollectionSelectFilter,
+    CollectionCustomFilter,
+    CollectionBooleanFilter,
+    CollectionDateFilter,
+    CollectionNumberFilter,
+    CollectionStringFilter,
+    CollectionPage,
+    TableFilterSelectOption
+} from './interfaces';
+
+export {
+    TableColumnFreezeEvent,
+    TableSortChangeEvent,
+    TableGroupChangeEvent,
+    TableFilterChangeEvent,
+    TableColumnsChangeEvent,
+    TableSearchChangeEvent,
+    TableRowSelectionChangeEvent
+} from './models';
+
+export { TableDataSource, TableDataProvider } from './domain';
+
+export { PlatformTableModule } from './table.module';
+export { TableComponent } from './table.component';
+export { TableColumnComponent } from './components/table-column/table-column.component';
+
+export {
+    FdpCellDef,
+    FdpHeaderCellDef,
+    FdpTableCell,
+    FdpTableHeader,
+    FdpViewSettingsFilterCustomDef
+} from './directives';
+
+export { TableToolbarComponent } from './components/table-toolbar/table-toolbar.component';
+export { TableToolbarActionsComponent } from './components/table-toolbar/table-toolbar-actions.component';
+
+export { TableViewSettingsDialogComponent } from './components/table-view-settings-dialog/table-view-settings-dialog.component';
+export { TableViewSettingsFilterComponent } from './components/table-view-settings-dialog/table-view-settings-filter.component';
+
+export { TableP13DialogComponent } from './components/table-p13-dialog/table-p13-dialog.component';
+export { TableP13SortComponent } from './components/table-p13-dialog/table-p13-sort.component';
+export { TableP13GroupComponent } from './components/table-p13-dialog/table-p13-group.component';
+export { TableP13FilterComponent } from './components/table-p13-dialog/table-p13-filter.component';
+export { TableP13ColumnsComponent } from './components/table-p13-dialog/table-p13-columns.component';

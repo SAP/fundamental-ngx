@@ -42,7 +42,7 @@ describe('TimeColumnComponent', () => {
         component.activeValue = rows[2];
         fixture.detectChanges();
 
-        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[2], true);
+        expect((<any>component)._pickTime).toHaveBeenCalledWith(component.items.toArray()[2], false);
     });
 
     it('should call pick time method with scrollUp', () => {

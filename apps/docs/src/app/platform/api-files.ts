@@ -41,6 +41,11 @@ export const API_FILES = {
         'TableViewSettingsDialogComponent',
         'TableViewSettingsFilterComponent',
         'FdpViewSettingsFilterCustomDef',
+        'TableP13DialogComponent',
+        'TableP13SortComponent',
+        'TableP13FilterComponent',
+        'TableP13GroupComponent',
+        'TableP13ColumnsComponent',
         'TableDataSource',
         'TableDataProvider'
     ],
@@ -78,6 +83,7 @@ export const API_FILES = {
         'ListConfig'
     ],
     multiInput: ['PlatformMultiInputComponent'],
+    valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
     feedInput: ['FeedInputComponent'],
     fileUploader: ['PlatformFileUploaderComponent'],
     uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],

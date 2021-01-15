@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitElementToBePresentInDOM, waitForElDisplayed } from '../../driver/wdio';
+import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
 
 export class InfoLabelPO extends BaseComponentPo {
     url = '/info-label';
@@ -18,7 +18,7 @@ export class InfoLabelPO extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitElementToBePresentInDOM(this.root);
         waitForElDisplayed(this.root);
+        waitForPresent(this.defaultLabel);
     }
 }

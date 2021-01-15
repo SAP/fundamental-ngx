@@ -5,15 +5,15 @@ import {
     getValue,
     refreshPage,
     scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
-import {StepInputPo} from '../pages/step-input.po'
+import { StepInputPo } from '../pages/step-input.po';
 import {
     checkFocused,
     checkIfDisabled,
     checkNotFocused,
     checkTextValueContain,
-    checkValueChanged,
+    checkValueChanged
 } from '../../helper/assertion-helper';
 
 describe('Step input test suite', function() {
@@ -21,11 +21,12 @@ describe('Step input test suite', function() {
 
     beforeAll(() => {
         stepInputPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(stepInputPage.stepInputRoot);
+    }, 1);
 
     it('Verify increment and decrement buttons', () => {
         const arr = getElementArrayLength(stepInputPage.activeInput);
@@ -109,7 +110,7 @@ describe('Step input test suite', function() {
         for (let i = 0; i < arr; i++) {
             scrollIntoView(stepInputPage.activeInput, i);
             click(stepInputPage.activeButtonIncrement, i);
-            checkNotFocused(stepInputPage.activeInput, i)
+            checkNotFocused(stepInputPage.activeInput, i);
         }
     });
 
@@ -121,7 +122,7 @@ describe('Step input test suite', function() {
             click(stepInputPage.activeInput, i);
             clearValue(stepInputPage.activeInput, i);
             const value = getValue(stepInputPage.activeInput, i);
-            expect(value).toEqual( '0');
+            expect(value).toEqual('0');
         }
     });
 
@@ -135,7 +136,7 @@ describe('Step input test suite', function() {
         for (let i = 0; i < 40; i++) {
             click(stepInputPage.minMaxButtonDecrement);
         }
-        checkIfDisabled(stepInputPage.minMaxButtonDecrement, 'aria-disabled', 'true')
+        checkIfDisabled(stepInputPage.minMaxButtonDecrement, 'aria-disabled', 'true');
     });
 
     xit('Verify when user enter the tap step input field should be highlighted or focused ', () => {
@@ -145,7 +146,7 @@ describe('Step input test suite', function() {
         for (let i = 1; i < arr; i++) {
             scrollIntoView(stepInputPage.inputWithoutForm, i);
             sendKeys(['Tab']);
-            checkFocused(stepInputPage.inputWithoutForm, i)
+            checkFocused(stepInputPage.inputWithoutForm, i);
         }
     });
 
@@ -156,11 +157,11 @@ describe('Step input test suite', function() {
             clearValue(stepInputPage.formInput, i);
             setValue(stepInputPage.formInput, '10', i);
             const quantity = getText(stepInputPage.quantityText, i);
-            checkTextValueContain(quantity, '10')
+            checkTextValueContain(quantity, '10');
         }
     });
 
     it('Check LTR/RTL orientation', () => {
         stepInputPage.checkRtlSwitch();
-    })
+    });
 });

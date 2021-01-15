@@ -8,16 +8,15 @@ import {
 import ListData from '../fixtures/appData/list-contents';
 import {
     acceptAlert,
-    browserIsFirefox,
     browserIsIE,
-    browserIsSafari,
+    browserIsSafari, browserIsSafariorFF,
     click,
     getAlertText,
     getAttributeByName,
     getCSSPropertyByName,
     getCurrentUrl,
     getElementArrayLength,
-    getText,
+    getText, isElementClickable,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -30,7 +29,7 @@ describe('List test suite:', function() {
 
     beforeAll(() => {
         listPg.open();
-    });
+    }, 1);
 
     describe('Borderless examples:', function() {
         it('should do basic checks', () => {
@@ -87,8 +86,8 @@ describe('List test suite:', function() {
         });
 
         it('should check deletion', () => {
-            click(listPg.deletionBtn, 0);
-            waitForInvisibilityOf(listPg.deletionListItems, 0);
+            click(listPg.deletionBtn);
+            waitForInvisibilityOf(listPg.deletionListItems);
         });
     });
 
@@ -101,7 +100,7 @@ describe('List test suite:', function() {
         it('should check selection', () => {
             expect(getAttributeByName(listPg.multiList, ListData.selectionAttr)).toBe(ListData.multiSelect);
             expect(getText(listPg.multiToolbar)).toBe('0 : Items selected');
-            click(listPg.multiCheckbox, 0);
+            click(listPg.multiCheckbox);
             expect(getText(listPg.multiToolbar)).toBe('1 : Items selected');
             click(listPg.multiCheckbox, 1);
             expect(getText(listPg.multiToolbar)).toBe('2 : Items selected');
@@ -119,7 +118,7 @@ describe('List test suite:', function() {
 
             expect(getAttributeByName(listPg.singleList, ListData.altSelectionAttr)).toBe(ListData.singleSelect);
             expect(getText(listPg.singleToolbar)).toContain(': selected');
-            click(listPg.singleRadioBtn, 0);
+            click(listPg.singleRadioBtn);
             expect(getText(listPg.singleToolbar)).toContain(listItemId + ' : selected');
         });
     });
@@ -132,7 +131,7 @@ describe('List test suite:', function() {
         });
 
         it('should check navigation', () => {
-            click(listPg.navListLink, 0);
+            click(listPg.navListLink);
             const newUrl = getCurrentUrl();
             expect(newUrl).toContain(ListData.navUrl);
             listPg.open();
@@ -141,7 +140,7 @@ describe('List test suite:', function() {
 
     describe('Virtual Scroll examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(listPg.vScrollListItems);
+            isElementClickable(listPg.vScrollListItems);
             checkElementText(listPg.vScrollListItems);
             checkAttributeValueTrue(listPg.vScrollList, ListData.scrollLoadAttr);
             checkAttributeValueTrue(listPg.vScrollList, ListData.lazyLoadAttr);
@@ -150,18 +149,18 @@ describe('List test suite:', function() {
 
         it('should check scroll', () => {
             // skip for FF due to issue https://github.com/SAP/fundamental-ngx/issues/4107
-            if (!browserIsFirefox()) {
-                scrollIntoView(listPg.vScrollListItems, 0);
-                const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
-                click(listPg.vScrollListItems, 0);
-                sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
-                expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
-                waitForInvisibilityOf(listPg.vScrollLoadIcon);
-                const itemsEndCount = getElementArrayLength(listPg.vScrollListItems);
-                expect(itemsStartCount).not.toEqual(itemsEndCount);
+            if (browserIsSafariorFF()) {
+                console.log('skip FF due to #4107, skip Safari');
                 return;
             }
-            console.log('skip FF due to #4107');
+            scrollIntoView(listPg.vScrollListItems);
+            const itemsStartCount = getElementArrayLength(listPg.vScrollListItems);
+            click(listPg.vScrollListItems);
+            sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
+            expect(waitForElDisplayed(listPg.vScrollLoadIcon)).toBe(true);
+            waitForInvisibilityOf(listPg.vScrollLoadIcon);
+            const itemsEndCount = getElementArrayLength(listPg.vScrollListItems);
+            expect(itemsStartCount).not.toEqual(itemsEndCount);
         });
     });
 
@@ -192,18 +191,22 @@ describe('List test suite:', function() {
         });
 
         it('should check delete action', () => {
-            click(listPg.btnDeleteBtn, 0);
-            if (!browserIsIE()) {
-                expect(getAlertText()).toContain('Delete row');
+            click(listPg.btnDeleteBtn);
+            if (browserIsIE()) {
+                acceptAlert();
+                return;
             }
+            expect(getAlertText()).toContain('Delete row');
             acceptAlert();
         });
 
         it('should check edit action', () => {
-            click(listPg.btnEditBtn, 0);
-            if (!browserIsIE()) {
-                expect(getAlertText()).toContain('Edit row');
+            click(listPg.btnEditBtn);
+            if (browserIsIE()) {
+                acceptAlert();
+                return;
             }
+            expect(getAlertText()).toContain('Edit row');
             acceptAlert();
         });
     });

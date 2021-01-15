@@ -11,12 +11,12 @@ import {
     getValue,
     isElementClickable,
     isEnabled,
-    mouseHoverElement, pause,
+    mouseHoverElement,
     refreshPage,
     scrollIntoView,
     setValue,
-    waitElementToBePresentInDOM,
-    waitForElDisplayed, waitForPresent
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
 import inputGroupPContent from '../fixtures/appData/input-group-page-contents';
@@ -28,12 +28,12 @@ describe('Input Group should', function() {
     beforeAll(() => {
         inputGroupPage.open();
         waitForPresent(inputGroupPage.leftAlignedTextInput);
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
         waitForPresent(inputGroupPage.leftAlignedTextInput);
-    });
+    }, 1);
 
     it('have associated label element to describe its purpose', () => {
         expect(getTextArr(inputGroupPage.standartInputLabelsArr)).toEqual(inputGroupPContent.standardInputLabels);
@@ -108,7 +108,7 @@ describe('Input Group should', function() {
     });
 
     it('check have disabled attr assigned', () => {
-        waitElementToBePresentInDOM(inputGroupPage.disabledInput);
+        waitForPresent(inputGroupPage.disabledInput);
         waitForElDisplayed(inputGroupPage.disabledInput);
 
         expect(getAttributeByName(inputGroupPage.disabledInput, 'ng-reflect-is-disabled')).toBe('true');
@@ -148,17 +148,17 @@ describe('Input Group should', function() {
     });
 
     xit('with form input have info tooltip', () => {
-        if (!browserIsIEorSafari()) {
-            waitForElDisplayed(inputGroupPage.withFormInput);
-            scrollIntoView(inputGroupPage.withFormInput);
-            mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
-            expect(getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
+        if (browserIsIEorSafari()) {
+            console.log('Skip for IE and Safari');
             return;
         }
+        waitForElDisplayed(inputGroupPage.withFormInput);
+        scrollIntoView(inputGroupPage.withFormInput);
+        mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
+        expect(getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
     });
 
     it('should check RTL', () => {
         inputGroupPage.checkRtlSwitch();
     });
-
 });

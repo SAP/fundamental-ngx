@@ -1,13 +1,10 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed, waitElementToBePresentInDOM } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class PanelPo extends BaseComponentPo {
 
     url = '/panel';
     root = '#page-content';
-
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
     expandablePanelRoot = '#panel-id';
     expandablePanelBtn = this.expandablePanelRoot + ' button';
@@ -30,7 +27,7 @@ export class PanelPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitElementToBePresentInDOM(this.root);
         waitForElDisplayed(this.root);
+        waitForPresent(this.expandablePanelBtn);
     }
 }
