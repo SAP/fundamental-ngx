@@ -1,7 +1,7 @@
 import {
     browserIsIE,
     clearValue,
-    click,
+    click, getAttributeByName,
     getElementArrayLength,
     getText,
     getTextArr,
@@ -132,7 +132,7 @@ describe('Combobox test suite', function() {
     });
 
     it('Verify navigation by arrow buttons', () => {
-        if (browserIsIE()) {
+       if (browserIsIE()) {
             console.log('Skip for IE');
             return;
         }
@@ -140,6 +140,9 @@ describe('Combobox test suite', function() {
             comboBoxPage.expandDropdown(activeTypeNames[i]);
             const firstOptionText = getText(comboBoxPage.optionsArray, 0);
             const secondOptionText = getText(comboBoxPage.optionsArray, 1);
+            if (getAttributeByName(comboBoxPage.optionsArray, 'tabindex') === '-1') {
+                sendKeys(['ArrowDown']);
+            }
             sendKeys(['ArrowDown']);
             sendKeys(['Enter']);
             let inputText = getText(comboBoxPage.comboBoxInput, i);
