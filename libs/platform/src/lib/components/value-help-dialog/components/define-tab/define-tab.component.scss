@@ -1,0 +1,26 @@
+$block: fdp-value-help-dialog;
+
+.#{$block} {
+    fdp-define-tab {
+        height: 100%;
+        overflow: auto;
+    }
+    .vhd-condition-filters {
+        fd-popover {
+            width: 100%;
+        }
+    }
+    .condition-row {
+        .main-col {
+            min-width: auto;
+            flex: 1 1 auto;
+        }
+        .action-col {
+            min-width: auto;
+            flex: 0 0 auto;
+        }
+        .fd-input {
+            margin-top: 0;
+        }
+    }
+}
