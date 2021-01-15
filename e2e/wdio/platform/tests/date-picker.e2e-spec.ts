@@ -12,13 +12,12 @@ describe('Date picker suite', function() {
 
     beforeAll(() => {
         datePickerPage.open();
-        waitForPresent(datePickerPage.inputDatePicker);
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
         waitForPresent(datePickerPage.inputDatePicker);
-    });
+    }, 1);
 
     it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
         const buttons = elementArray(datePickerPage.buttonDatePicker);
