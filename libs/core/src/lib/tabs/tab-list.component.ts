@@ -26,6 +26,7 @@ import { TabInfo } from './tab-utils/tab-info.class';
 import { TabsService } from './tabs.service';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '../menu/menu.component';
+import { scrollTop } from '../utils/functions/scroll';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -453,8 +454,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
                     debounceTime(100),
                     first()
                 ).subscribe(() => this._disableScrollSpy = false);
-
-            containerElement.scrollTo({ top: distanceToScroll, behavior: 'smooth' });
+            scrollTop(containerElement, distanceToScroll);
         }
     }
 
