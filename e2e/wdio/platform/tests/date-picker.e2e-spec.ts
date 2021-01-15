@@ -1,28 +1,30 @@
 import {
     click,
-    elementArray, getAttributeByName, getValue,
+    elementArray, getAttributeByName, getCSSPropertyByName, getText, getValue,
     refreshPage, scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 import { DatePicker } from '../pages/date-picker.po';
-import datePickerTestData from '../fixtures/testData/date-picker'
+import datePickerTestData from '../fixtures/testData/date-picker';
 
 describe('Date picker suite', function() {
     const datePickerPage: DatePicker = new DatePicker();
 
     beforeAll(() => {
         datePickerPage.open();
+        waitForPresent(datePickerPage.inputDatePicker);
     });
 
     afterEach(() => {
         refreshPage();
+        waitForPresent(datePickerPage.inputDatePicker);
     });
 
     it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
         const buttons = elementArray(datePickerPage.buttonDatePicker);
         const inputs = elementArray(datePickerPage.inputDatePicker);
         expect(buttons.length).toEqual(inputs.length);
-        for (let i = 0; i < buttons.length; i++) {
+        for (let i = 1; i < buttons.length; i++) {
             waitForElDisplayed(datePickerPage.buttonDatePicker);
             waitForElDisplayed(datePickerPage.inputDatePicker);
         }
@@ -30,11 +32,34 @@ describe('Date picker suite', function() {
 
     it('Verify on click on the date picker button', () => {
         const activeButtons = elementArray(datePickerPage.activeButtonDatePicker);
-        for (let i = 0; i < activeButtons.length; i++) {
+        for (let i = 1; i < activeButtons.length; i++) {
             sendKeys(['Escape']);
             scrollIntoView(datePickerPage.activeButtonDatePicker, i);
             click(datePickerPage.activeButtonDatePicker, i);
-            waitForElDisplayed(datePickerPage.calendarExapnded);
+            waitForElDisplayed(datePickerPage.calendarExpanded);
+        }
+    });
+
+    it('Verify By clicking the current year', () => {
+        sendKeys(['Escape']);
+        scrollIntoView(datePickerPage.activeButtonDatePicker, 1);
+        click(datePickerPage.activeButtonDatePicker, 1);
+        expect(waitForElDisplayed(datePickerPage.calendarExpanded)).toBe(true);
+        scrollIntoView(datePickerPage.buttonSelectYear);
+        click(datePickerPage.buttonSelectYear);
+        expect(waitForElDisplayed(datePickerPage.calendarYearsSection)).toBe(true);
+        click(datePickerPage.yearInCalendarByValue(datePickerTestData.year2000));
+        expect(getText(datePickerPage.currentYear)).toBe(datePickerTestData.year2000.toString());
+    });
+
+    it('Verify by default today date is focused', () => {
+        const activeButtons = elementArray(datePickerPage.activeButtonDatePicker);
+        for (let i = 4; i < activeButtons.length; i++) {
+            sendKeys(['Escape']);
+            scrollIntoView(datePickerPage.activeButtonDatePicker, i);
+            click(datePickerPage.activeButtonDatePicker, i);
+            waitForElDisplayed(datePickerPage.calendarExpanded);
+            expect(getText(datePickerPage.currentDay, 0)).toBe(new Date().getDate().toString());
         }
     });
 
@@ -60,107 +85,159 @@ describe('Date picker suite', function() {
     });
 
     it('verify pre-populated single type date-picker', () => {
-        click(datePickerPage.activeButtonDatePicker, 0);
+        click(datePickerPage.activeButtonDatePicker, 1);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('0'), 'ng-reflect-model')).toEqual(datePickerTestData.date);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('0'), 'ng-reflect-model')).toEqual(datePickerTestData.date);
     });
 
     it('verify single type date-picker:', () => {
-        click(datePickerPage.activeButtonDatePicker, 1);
-        click(datePickerPage.dayInCalendarButtonByValue( '1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('1'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
+        click(datePickerPage.activeButtonDatePicker, 2);
+        click(datePickerPage.dayInCalendarButtonByValue('1'));
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('1'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
     });
 
     it('verify pre-populated range type date-picker', () => {
-        click(datePickerPage.activeButtonDatePicker, 2);
-        click(datePickerPage.dayInCalendarButtonByValue('1'));
-        click(datePickerPage.dayInCalendarButtonByValue('15'));
-        click(datePickerPage.activeButtonDatePicker, 2);
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('2'), 'ng-reflect-model')).toEqual(datePickerTestData.date2);
-    });
-
-    it('verify Range type date-picker', () => {
         click(datePickerPage.activeButtonDatePicker, 3);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
         click(datePickerPage.dayInCalendarButtonByValue('15'));
         click(datePickerPage.activeButtonDatePicker, 3);
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('3'), 'ng-reflect-model')).toEqual(datePickerTestData.date3);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('2'), 'ng-reflect-model')).toEqual(datePickerTestData.date2);
     });
 
-    it('verify birth Date date-picker', () => {
+    it('verify range type date-picker', () => {
         click(datePickerPage.activeButtonDatePicker, 4);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('5'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
+        click(datePickerPage.dayInCalendarButtonByValue('15'));
+        click(datePickerPage.activeButtonDatePicker, 4);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('3'), 'ng-reflect-model')).toEqual(datePickerTestData.date3);
+    });
+
+    it('verify birth date date-picker', () => {
+        click(datePickerPage.activeButtonDatePicker, 5);
+        click(datePickerPage.dayInCalendarButtonByValue('1'));
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('5'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
     });
 
     it('verify holiday date-picker', () => {
-        click(datePickerPage.activeButtonDatePicker, 5);
-        click(datePickerPage.dayInCalendarButtonByValue('1'));
-        click(datePickerPage.dayInCalendarButtonByValue('15'));
-        click(datePickerPage.activeButtonDatePicker, 5);
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('6'), 'ng-reflect-model')).toEqual(datePickerTestData.date3);
-    });
-
-    it('verify Date Picker Use Outside Form', () => {
         click(datePickerPage.activeButtonDatePicker, 6);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('8'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
+        click(datePickerPage.dayInCalendarButtonByValue('15'));
+        click(datePickerPage.activeButtonDatePicker, 6);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('6'), 'ng-reflect-model')).toEqual(datePickerTestData.date3);
     });
 
-    it('verify Range Date Picker Outside Form', () => {
+    it('verify date picker use outside Form', () => {
         click(datePickerPage.activeButtonDatePicker, 7);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        click(datePickerPage.dayInCalendarButtonByValue('15'));
-        click(datePickerPage.activeButtonDatePicker, 7);
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('9'), 'ng-reflect-model')).toEqual(datePickerTestData.date3);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('8'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
     });
 
-    it('verify birth Date date-picker:', () => {
+    it('verify range date picker outside form', () => {
         click(datePickerPage.activeButtonDatePicker, 8);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('10'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
+        click(datePickerPage.dayInCalendarButtonByValue('15'));
+        click(datePickerPage.activeButtonDatePicker, 8);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('9'), 'ng-reflect-model')).toEqual(datePickerTestData.date3);
     });
 
     it('verify disable parts of Calender for selection', () => {
-        click(datePickerPage.activeButtonDatePicker, 8);
-        click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('10'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
-    });
-
-    it('verify Date Picker Formatting date picker with custom output format', () => {
         click(datePickerPage.activeButtonDatePicker, 9);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('11'), 'ng-reflect-model')).toEqual(datePickerTestData.date5);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('10'), 'ng-reflect-model')).toEqual(datePickerTestData.date1);
     });
 
-    it('verify Date Picker Formatting range date picker custom format', () => {
+    it('verify date Picker Formatting date picker with custom output format', () => {
         click(datePickerPage.activeButtonDatePicker, 10);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        click(datePickerPage.dayInCalendarButtonByValue('15'));
-        click(datePickerPage.activeButtonDatePicker, 7);
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('12'), 'ng-reflect-model')).toEqual(datePickerTestData.date4);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('11'), 'ng-reflect-model')).toEqual(datePickerTestData.date5);
     });
 
-    it('verify Internationalization of Date Picker', () => {
+    it('verify date Picker Formatting range date picker custom format', () => {
         click(datePickerPage.activeButtonDatePicker, 11);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('13'), 'ng-reflect-model')).toEqual(datePickerTestData.date7);
-        click(datePickerPage.buttonGerman);
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('13'), 'ng-reflect-model')).toEqual(datePickerTestData.date8);
-        click(datePickerPage.buttonBulgarian);
-        expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('13'), 'ng-reflect-model')).toEqual(datePickerTestData.date6);
+        click(datePickerPage.dayInCalendarButtonByValue('15'));
+        click(datePickerPage.activeButtonDatePicker, 11);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('12'), 'ng-reflect-model')).toEqual(datePickerTestData.date4);
     });
 
-    it('Verify by dafault today date is focused', () => {
-        const activeButtons = elementArray(datePickerPage.activeButtonDatePicker);
-        for (let i = 0; i < activeButtons.length; i++) {
-            if (i !== 0 && i !== 4 && i !== 8 && i !== 11) {
-                click(datePickerPage.activeButtonDatePicker, 11);
-                click(datePickerPage.dayInCalendarButtonByValue('1'));
-                expect(getAttributeByName(datePickerPage.datePickerInputsByIndex('13'), 'ng-reflect-model'))
-                    .toEqual(datePickerTestData.date7);
-            }
+    it('verify internationalization of Date Picker', () => {
+        click(datePickerPage.activeButtonDatePicker, 12);
+        click(datePickerPage.dayInCalendarButtonByValue('1'));
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('13'), 'ng-reflect-model')).toEqual(datePickerTestData.date7);
+        click(datePickerPage.buttonGerman);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('13'), 'ng-reflect-model')).toEqual(datePickerTestData.date8);
+        click(datePickerPage.buttonBulgarian);
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('13'), 'ng-reflect-model')).toEqual(datePickerTestData.date6);
+    });
+
+    it('verify with the date picker, the user can see a day view, month view, year view, or year ranges.', () => {
+        const buttons = elementArray(datePickerPage.activeButtonDatePicker);
+        for (let i = 1; i < buttons.length - 1; i++) {
+            click(datePickerPage.activeButtonDatePicker, i);
+            waitForElDisplayed(datePickerPage.filterCaledarValue('day'));
+            click(datePickerPage.buttonSelectMonth);
+            waitForElDisplayed(datePickerPage.filterCaledarValue('month'));
+            click(datePickerPage.buttonSelectYear);
+            waitForElDisplayed(datePickerPage.filterCaledarValue('year'));
+            click(datePickerPage.buttonSelectYear);
+            waitForElDisplayed(datePickerPage.filterCaledarValue('aggregated-year'));
+            click(datePickerPage.activeButtonDatePicker, i);
         }
+    });
+
+    it('verify selected date is showing in blue background', () => {
+        click(datePickerPage.activeButtonDatePicker, 1);
+        click(datePickerPage.dayInCalendarButtonByValue('1'));
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('0'), 'ng-reflect-model')).toEqual(datePickerTestData.date);
+        click(datePickerPage.activeButtonDatePicker, 1);
+        expect(getCSSPropertyByName(datePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value)
+            .toEqual(datePickerTestData.highlightedColor)
+    });
+
+    it('verify selecting a year range navigates back to the year view', () => {
+        const buttons = elementArray(datePickerPage.activeButtonDatePicker);
+        for (let i = 1; i < buttons.length - 1; i++) {
+            click(datePickerPage.activeButtonDatePicker, i);
+            click(datePickerPage.buttonSelectYear);
+            click(datePickerPage.buttonSelectYear);
+            waitForElDisplayed(datePickerPage.filterCaledarValue('aggregated-year'));
+            click(datePickerPage.buttonFirstRangeYear)
+            waitForElDisplayed(datePickerPage.filterCaledarValue('year'));
+            click(datePickerPage.activeButtonDatePicker, i);
+        }
+    });
+
+    it('verify after the user selects a year, the view changes back to the day view. ', () => {
+        const buttons = elementArray(datePickerPage.activeButtonDatePicker);
+        for (let i = 1; i < buttons.length - 1; i++) {
+            click(datePickerPage.activeButtonDatePicker, i);
+            click(datePickerPage.buttonSelectYear);
+            waitForElDisplayed(datePickerPage.filterCaledarValue('year'));
+            click(datePickerPage.buttonFirstYear)
+            waitForElDisplayed(datePickerPage.filterCaledarValue('day'));
+            click(datePickerPage.activeButtonDatePicker, i);
+        }
+    });
+
+    it('verify after the user selects a month, the view changes back to the day view. ', () => {
+        const buttons = elementArray(datePickerPage.activeButtonDatePicker);
+        for (let i = 1; i < buttons.length - 1; i++) {
+            click(datePickerPage.activeButtonDatePicker, i);
+            click(datePickerPage.buttonSelectMonth);
+            waitForElDisplayed(datePickerPage.filterCaledarValue('month'));
+            click(datePickerPage.buttonFirstMonth)
+            waitForElDisplayed(datePickerPage.filterCaledarValue('day'));
+            click(datePickerPage.activeButtonDatePicker, i);
+        }
+    });
+
+    it('verify user is cannot select mutlitple dates', () => {
+        click(datePickerPage.activeButtonDatePicker, 1);
+        click(datePickerPage.dayInCalendarButtonByValue('1'));
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('0'), 'ng-reflect-model')).toEqual(datePickerTestData.date);
+        click(datePickerPage.activeButtonDatePicker, 1);
+        click(datePickerPage.dayInCalendarButtonByValue('2'));
+        expect(getAttributeByName(datePickerPage.datePickerInputByIndex('0'), 'ng-reflect-model')).toEqual(datePickerTestData.date9);
     });
 });
 

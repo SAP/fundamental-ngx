@@ -11,31 +11,35 @@ export class DatePicker extends BaseComponentPo {
     activeButtonDatePicker = '[ng-reflect-is-disabled="false"] + span button';
     activeInputDatePicker = '[ng-reflect-is-disabled="false"][aria-label="Date input"]';
 
-    calendarExapnded = '.fd-popover__popper fd-calendar';
+    calendarExpanded = '.fd-popover__popper fd-calendar';
+    calendarYearsSection = '.fd-calendar__content--years';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
-    prePopulatedSimpleInput = '#fd-popover-0 input';
-    singleTypeInput = '#fd-popover-1 input';
-    prePopulatedRangeInput = '#fd-popover-2 input';
-    rangeTypeInput = '#fd-popover-3 input';
-    birthdateInput = '#fd-popover-4 input';
-    holidayInput = '#fd-popover-6 input';
-    outsideFormInput = '#fd-popover-8 input';
-    outsideFormRangeInput = '#fd-popover-9 input';
-
-    firstDayInCalendarButton = '[id="fd-calendar-0-fd-day-1"]'
+    currentYear = '[aria-label="Select year"]';
+    currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
     buttonGerman = 'button[ng-reflect-label="German"]'
     buttonBulgarian = 'button[ng-reflect-label="Bulgarian"]';
+    buttonSelectYear = '[aria-label="Select year"]';
+    buttonSelectMonth = '[aria-label="Select month"]';
 
-    datePickerInputsByIndex = (index: string) => {
+    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]'
+    buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]'
+    buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]'
+
+    filterCaledarValue = (name: string) => {
+        return `//td[contains(@id,"fd-${name}")]`;
+    };
+
+    datePickerInputByIndex = (index: string) => {
         return `#fd-popover-${index} input`;
     };
 
     dayInCalendarButtonByValue = (index: string) => {
         return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+    };
+
+    yearInCalendarByValue = (year: number) => {
+        return `[aria-label="${year}"]`
     };
 
     open(): void {
