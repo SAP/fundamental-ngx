@@ -5,8 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './slider-ticks-and-labels-example.component.html'
 })
 export class SliderTicksAndLabelsExampleComponent {
-    value = 40;
-    customLabels = [
+    customValues = [
         { value: 0, label: '0' },
         { value: 10, label: '10' },
         { value: 20, label: '20' },
@@ -19,4 +18,6 @@ export class SliderTicksAndLabelsExampleComponent {
         { value: 90, label: '90' },
         { value: 100, label: '100' }
     ];
+
+    value = this.customValues[2];
 }

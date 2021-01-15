@@ -20,6 +20,68 @@ import { Schema } from '../../../schema/models/schema.model';
     templateUrl: './slider-docs.component.html'
 })
 export class SliderDocsComponent {
+    static schema: any = {
+        properties: {
+            properties: {
+                type: 'object',
+                properties: {
+                    range: {
+                        type: 'string',
+                        enum: [
+                            'single',
+                            'range'
+                        ]
+                    },
+                    min: {
+                        type: 'integer'
+                    },
+                    max: {
+                        type: 'integer'
+                    },
+                    step: {
+                        type: 'integer'
+                    },
+                    jump: {
+                        type: 'integer'
+                    },
+                    hideProgressBar: {
+                        type: 'boolean'
+                    },
+                    showTicks: {
+                        type: 'boolean'
+                    },
+                    showTicksLabels: {
+                        type: 'boolean'
+                    },
+                    disabled: {
+                        type: 'boolean'
+                    }
+                }
+            }
+        },
+        type: 'object'
+    };
+
+    schema: Schema;
+
+    data: any = {
+        properties: {
+            min: 0,
+            max: 100,
+            step: 10,
+            jump: 20,
+            hideProgressBar: false,
+            showTicks: true,
+            showTicksLabels: true,
+            range: 'single',
+            disabled: false
+        }
+    };
+
+    value: number | [number, number] = 50;
+    rangeValue: [number, number] = [0, 100];
+    singleValue = 50;
+
     basic: ExampleFile[] = [
         {
             language: 'typescript',
@@ -83,84 +145,6 @@ export class SliderDocsComponent {
             code: sliderDisabledHtml,
             fileName: 'slider-disabled-example'
         }
-    ]; 
-
-    static schema: any = {
-        properties: {
-            properties: {
-                type: 'object',
-                properties: {
-                    range: {
-                        type: 'string',
-                        enum: [
-                            'single',
-                            'range'
-                        ]
-                    },
-                    min: {
-                        type: 'number'
-                    },
-                    max: {
-                        type: 'number'
-                    },
-                    step: {
-                        type: 'number'
-                    },
-                    jump: {
-                        type: 'number'
-                    },
-                    hideProgressBar: {
-                        type: 'boolean'
-                    },
-                    showTicks: {
-                        type: 'boolean'
-                    },
-                    showTicksLabels: {
-                        type: 'boolean'
-                    },
-                    disabled: {
-                        type: 'boolean'
-                    },
-                    width: {
-                        type: 'number'
-                    }
-                }
-            }
-        },
-        type: 'object'
-    };
-
-    schema: Schema;
-
-    data: any = {
-        properties: {
-            width: 50,
-            min: 0,
-            max: 100,
-            step: 10,
-            jump: 20,
-            hideProgressBar: false,
-            showTicks: true,
-            showTicksLabels: true,
-            range: 'single',
-            disabled: false
-        }
-    };
-
-    value: number | [number, number] = 50;
-
-    customLabels = [
-        { value: 0, label: '0' },
-        { value: 10, label: '10' },
-        { value: 20, label: '20' },
-        { value: 30, label: '30' },
-        { value: 40, label: '40' },
-        { value: 50, label: '50' },
-        { value: 60, label: '60' },
-        { value: 70, label: '70' },
-        { value: 80, label: '80' },
-        { value: 90, label: '90' },
-        { value: 100, label: '100' }
     ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
@@ -168,6 +152,14 @@ export class SliderDocsComponent {
     }
 
     onSchemaValues(data): void {
+        if (data.properties.range === 'range') {
+            this.singleValue = this.value as number;
+            this.value = this.rangeValue;
+        } else {
+            this.rangeValue = this.value as [number, number];
+            this.value = this.singleValue;
+        }
+
         this.data = data;
     }
 }
