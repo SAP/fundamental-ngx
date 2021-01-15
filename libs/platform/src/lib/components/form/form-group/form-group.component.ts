@@ -435,7 +435,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     /**
      * @hidden
-     * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise a layout will set on 2 columns
+     * if `columnLayoutType` is given, set those column layouts appropriately. Otherwise a layout will set on 1 column
      */
     private _setUserLayout(): void {
         if (this.columnLayout) {
@@ -458,7 +458,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                 }
             }
         } else {
-            this.xlCol = `fd-col-xl--6 fd-col-md--6 fd-col-lg--6`;
+            this.xlCol = `fd-col-xl--12 fd-col-md--12 fd-col-lg--12`;
         }
     }
 
