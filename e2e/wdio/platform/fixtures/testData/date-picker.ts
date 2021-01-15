@@ -11,6 +11,6 @@ export default
     date8: '1.1.2021',
     date9: '1/2/1990',
     text: 'test',
-    highlightedColor: 'rgb(8,84,160)',
+    highlightedColor: ['rgb(8,84,160)', 'rgba(8,84,160,1)'],
     year2000: 2000
 }
