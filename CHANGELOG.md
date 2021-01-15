@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.79...v0.26.0-rc.80) (2021-01-15)
+
+
+### Bug Fixes
+
+* (Core) make Form's Input Message readable by screen readers ([#4277](https://github.com/SAP/fundamental-ngx/issues/4277)) ([a5505ac](https://github.com/SAP/fundamental-ngx/commit/a5505ac9a79f5fa0cb72a49752393cf1eaee4fb9))
+
 ## [0.26.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.78...v0.26.0-rc.79) (2021-01-15)
 
 ## [0.26.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.77...v0.26.0-rc.78) (2021-01-15)
