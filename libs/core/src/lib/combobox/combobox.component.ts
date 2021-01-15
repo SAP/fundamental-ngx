@@ -39,6 +39,7 @@ import { ListComponent } from '../list/list.component';
 import { FocusEscapeDirection } from '../utils/services/keyboard-support/keyboard-support.service';
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import {
+    BACKSPACE,
     CONTROL,
     DOWN_ARROW,
     ENTER,
@@ -99,7 +100,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** Aria-Labelledby for element describing Combobox. */
     @Input()
     @HostBinding('attr.aria-labelledby')
-    ariaLabelledby: string = null;
+    ariaLabelledBy: string = null;
 
     /** Values to be filtered in the search input. */
     @Input()
@@ -381,6 +382,12 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             event.stopPropagation();
         } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
+            const acceptedKeys = !KeyUtil.isKeyCode(event, BACKSPACE)
+                && !KeyUtil.isKeyType(event, 'alphabetical')
+                && !KeyUtil.isKeyType(event, 'numeric');
+            if (this.isEmptyValue && acceptedKeys) {
+                this.listComponent.setItemActive(0);
+            }
         }
     }
 
@@ -412,6 +419,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     dialogApprove(): void {
         this._propagateChange();
         this.isOpenChangeHandle(false);
+    }
+
+    get isEmptyValue(): boolean {
+        return this.inputText.trim().length === 0;
     }
 
     /** Get the input text of the input. */
@@ -474,6 +485,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
         this.filterHighlight = false;
+        console.log(this.open);
+        if (this.open && this.listComponent) {
+            this.listComponent.setItemActive(0);
+        }
     }
 
     /** @hidden */
@@ -482,7 +497,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         if (this.mobile && !this.open) {
             this._resetDisplayedValues();
         }
-
         if (this.open !== isOpen) {
             this.open = isOpen;
             this.onTouched();
@@ -490,13 +504,9 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         }
 
         
-        if (!this.mobile) {
-            if (this.open) {
-                this.listComponent.setItemActive(0);
-            } else {
-                this.handleBlur();
-                this.searchInputElement.nativeElement.focus();
-            }
+        if (!this.open && !this.mobile) {
+            this.handleBlur();
+            this.searchInputElement.nativeElement.focus();
         }
 
         this._cdRef.detectChanges();
