@@ -134,8 +134,9 @@ describe('Combobox test suite', function() {
         if (!browserIsIE()) {
             for (let i = 0; i < activeTypeNames.length; i++) {
                 comboBoxPage.expandDropdown(activeTypeNames[i]);
-                const firstOptionText = getText(comboBoxPage.optionsArray, 0);
-                const secondOptionText = getText(comboBoxPage.optionsArray, 1);
+                const withGroup = activeTypeNames[i].includes('group');
+                const firstOptionText = getText(comboBoxPage.optionsArray, withGroup ? 1 : 0);
+                const secondOptionText = getText(comboBoxPage.optionsArray, withGroup ? 2 : 1);
                 sendKeys(['ArrowDown']);
                 sendKeys(['Enter']);
                 let inputText = getText(comboBoxPage.comboBoxInput, i);
