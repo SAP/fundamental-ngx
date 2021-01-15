@@ -96,16 +96,28 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** Text displayed in message */
     @Input()
-    message: string = null;
+    set message(message: string) {
+        this._message = message;
+        this._popoverFormMessage.message = message;
+    }
+    _message: string = null;
 
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
-    messageType: FormStates = null;
+    set messageType(messageType: FormStates) {
+        this._messageType = messageType;
+        this._popoverFormMessage.messageType = messageType;
+    }
+    _messageType: FormStates = null;
 
     /** The trigger events that will open/close the message box.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
-    messageTriggers: string[] = ['mouseenter', 'mouseleave'];
+    set messageTriggers(triggers: string[]) {
+        this._messageTriggers = triggers;
+        this._popoverFormMessage.triggers = triggers;
+    }
+    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
 
     /** The currently selected CalendarDay model */
     @Input()
@@ -297,6 +309,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         }
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this.formatInputDate(this.selectedDate);
@@ -304,10 +317,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         });
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
-        this._popoverFormMessage.init(this.inputGroupElement);
-        this._popoverFormMessage.message = this.message;
-        this._popoverFormMessage.messageType = this.messageType;
+        this._InitialiseVariablesInMessageService();
     }
 
     /** @hidden */
@@ -628,5 +640,13 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         const startDate = this._formatDate(dateRange.start);
         const endDate = this._formatDate(dateRange.end);
         return startDate + this.rangeDelimiter + endDate;
+    }
+
+    /** @hidden */
+    private _InitialiseVariablesInMessageService(): void {
+        this._popoverFormMessage.init(this.inputGroupElement);
+        this._popoverFormMessage.message = this._message;
+        this._popoverFormMessage.triggers = this._messageTriggers;
+        this._popoverFormMessage.messageType = this._messageType;
     }
 }
