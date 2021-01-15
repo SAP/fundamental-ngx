@@ -239,15 +239,17 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * set position for tabs and tabbed content's position relative to the tabs on scrolling
      */
     private _setTabsPosition(): void {
-        const tabList: HTMLElement = this._elementRef.nativeElement.querySelector('.fd-tabs');
-        if (tabList) {
-            tabList.style.top = this.header.nativeElement.offsetHeight + 'px';
-            tabList.style.position = 'fixed';
-            tabList.style.left = '0';
-            tabList.style.right = '0';
-            this.tabs.forEach((element) => {
-                element.contentTop = tabList.offsetHeight + 'px';
-            });
+        if (this.contentContainer) {
+            const tabList: HTMLElement = this.contentContainer.nativeElement.querySelector('.fd-tabs');
+            if (tabList) {
+                tabList.style.top = this.header.nativeElement.offsetHeight + 'px';
+                tabList.style.position = 'fixed';
+                tabList.style.left = '0';
+                tabList.style.right = '0';
+                this.tabs.forEach((element) => {
+                    element.contentTop = tabList.offsetHeight + 'px';
+                });
+            }
         }
     }
 
@@ -266,22 +268,24 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * set styles for tab labels
      */
     private _setTabStyles(): void {
-        const tabList = this._elementRef.nativeElement.querySelector('.fd-tabs');
-        if (tabList) {
-            this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabs);
-            this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabsAddShadow);
-            if (this.size) {
-                this._setTabsSize(this.size, tabList);
-            }
-            if (this.headerComponent?.collapsible) {
-                const pinCollapseShadowElement = this._elementRef.nativeElement.querySelector(
-                    '.fd-dynamic-page__collapsible-header-visibility-container'
-                );
-                if (pinCollapseShadowElement) {
-                    this._addClassNameToCustomElement(
-                        pinCollapseShadowElement,
-                        CLASS_NAME.dynamicPageCollapsibleHeaderPinCollapseNoShadow
+        if (this.contentContainer) {
+            const tabList = this.contentContainer.nativeElement.querySelector('.fd-tabs');
+            if (tabList) {
+                this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabs);
+                this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabsAddShadow);
+                if (this.size) {
+                    this._setTabsSize(this.size, tabList);
+                }
+                if (this.headerComponent?.collapsible) {
+                    const pinCollapseShadowElement = this._elementRef.nativeElement.querySelector(
+                        '.fd-dynamic-page__collapsible-header-visibility-container'
                     );
+                    if (pinCollapseShadowElement) {
+                        this._addClassNameToCustomElement(
+                            pinCollapseShadowElement,
+                            CLASS_NAME.dynamicPageCollapsibleHeaderPinCollapseNoShadow
+                        );
+                    }
                 }
             }
         }
