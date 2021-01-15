@@ -1,7 +1,7 @@
 import {
     browserIsIE,
     clearValue,
-    click,
+    click, getAttributeByName,
     getElementArrayLength,
     getText,
     getTextArr,
@@ -134,9 +134,11 @@ describe('Combobox test suite', function() {
         if (!browserIsIE()) {
             for (let i = 0; i < activeTypeNames.length; i++) {
                 comboBoxPage.expandDropdown(activeTypeNames[i]);
-                const withGroup = activeTypeNames[i].includes('group');
-                const firstOptionText = getText(comboBoxPage.optionsArray, withGroup ? 1 : 0);
-                const secondOptionText = getText(comboBoxPage.optionsArray, withGroup ? 2 : 1);
+                const firstOptionText = getText(comboBoxPage.optionsArray, 0);
+                const secondOptionText = getText(comboBoxPage.optionsArray, 1);
+                if (getAttributeByName(comboBoxPage.optionsArray, 'tabindex') === '-1') {
+                    sendKeys(['ArrowDown']);
+                }
                 sendKeys(['ArrowDown']);
                 sendKeys(['Enter']);
                 let inputText = getText(comboBoxPage.comboBoxInput, i);
