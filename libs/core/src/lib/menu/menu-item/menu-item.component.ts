@@ -120,7 +120,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return this.submenu && !this.menuService.menu.mobile;
+        return this.submenu && (!this.menuService.menu || !this.menuService.menu.mobile);
     }
 
     /** Focuses Menu Item interactive element */

@@ -245,17 +245,17 @@ describe('Checkbox test suite', () => {
                 checkIfDisabled(errorCheckboxes, 'ng-reflect-is-disabled', 'false', i);
             }
 
+            scrollIntoView(checkboxPage.submitBtn);
             clickNextElement(presenceCheckbox);
             expect(getCSSPropertyByName(presenceCheckbox, 'border-bottom-color').value)
                 .toContain(checkboxGPData.checkboxErrorState);
-            scrollIntoView(checkboxPage.errorExampleTitle);
-            click(checkboxPage.errorExampleTitle);
-            mouseHoverElement(presenceCheckbox);
+            scrollIntoView(checkboxPage.submitBtn);
+            mouseHoverElement(checkboxPage.submitBtn);
+            waitForElDisplayed(checkboxPage.errorTooltip);
             expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxData.checkboxErrorTooltip);
-
             checkHoverState(errorCheckboxes, 1);
             checkFocusState(errorCheckboxes, 1);
-        });
+        }, 1);
 
         it('should check error handling form submission', () => {
             if (browserIsIEorSafari()) {
@@ -277,6 +277,7 @@ describe('Checkbox test suite', () => {
             click(checkboxPage.submitBtn);
 
             expect(getAlertText()).toEqual('Status: INVALID');
+            acceptAlert();
         });
     });
 
