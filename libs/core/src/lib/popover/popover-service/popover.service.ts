@@ -219,6 +219,22 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** Refresh listeners on trigger element events */
+    _refreshTriggerListeners(): void {
+        if (!this._triggerElement) {
+            return;
+        }
+
+        this._removeTriggerListeners();
+        if (this.triggers?.length) {
+            this.triggers.forEach(trigger => {
+                this._eventRef.push(this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
+                    this.toggle();
+                }));
+            });
+        }
+    }
+
     /** @hidden */
     private _getOverlayConfig(position: FlexibleConnectedPositionStrategy): OverlayConfig {
         const direction = this._getDirection();
@@ -268,25 +284,6 @@ export class PopoverService extends BasePopoverClass {
     private _removeTriggerListeners(): void {
         this._eventRef.forEach(event => event());
         this._eventRef = [];
-    }
-
-    /** Refresh listeners on trigger element events */
-    private _refreshTriggerListeners(): void {
-        if (!this._triggerElement) {
-            if (this.tmp) {
-                console.log(this._triggerElement);
-            }
-            return;
-        }
-
-        this._removeTriggerListeners();
-        if (this.triggers?.length) {
-            this.triggers.forEach(trigger => {
-                this._eventRef.push(this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
-                    this.toggle();
-                }));
-            });
-        }
     }
 
     /** Attach template containing popover body to overlay */
