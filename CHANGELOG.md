@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.77...v0.26.0-rc.78) (2021-01-15)
+
+
+### Bug Fixes
+
+* (Core) add scrollTo IE11 alternative ([#4320](https://github.com/SAP/fundamental-ngx/issues/4320)) ([a372e86](https://github.com/SAP/fundamental-ngx/commit/a372e866565a0e612d66f6057a940e68b615dbc7))
+
 ## [0.26.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.76...v0.26.0-rc.77) (2021-01-15)
 
 
