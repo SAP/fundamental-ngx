@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
 
 export class InfoLabelPO extends BaseComponentPo {
     url = '/info-label';

@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitElementToBePresentInDOM, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
 
 export class MenuPo extends BaseComponentPo {
     url = '/menu';

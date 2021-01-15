@@ -9,7 +9,6 @@ import {
     isEnabled,
     refreshPage,
     setValue,
-    waitElementToBePresentInDOM,
     waitForElDisplayed
 } from '../../driver/wdio';
 import { SearchPo } from '../pages/search.po';
@@ -26,9 +25,7 @@ describe('Search field', function() {
         compactSearchResult,
         cozyWithCategoriesSearch,
         compactWithCategoriesSearch,
-        cozyWithDataSourceSearch,
-        open,
-        checkRtlSwitch
+        cozyWithDataSourceSearch
     } = new SearchPo();
     const searchPage = new SearchPo();
 
@@ -43,7 +40,6 @@ describe('Search field', function() {
     it('should be present and enabled', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
-            waitElementToBePresentInDOM(searchFields, i);
             waitForElDisplayed(searchFields, i);
             expect(isEnabled(searchFields, i)).toBe(true);
         }
@@ -52,7 +48,6 @@ describe('Search field', function() {
     it('should have search icon present and enabled', () => {
         const arrLength = getElementArrayLength(searchIcons);
         for (let i = 0; arrLength > i; i++) {
-            waitElementToBePresentInDOM(searchIcons, i);
             waitForElDisplayed(searchIcons, i);
             expect(isEnabled(searchIcons, i)).toBe(true);
         }
@@ -62,7 +57,6 @@ describe('Search field', function() {
         const arrLength = getElementArrayLength(searchFields);
         const actualPlaceholders = getAttributeByNameArr(searchFields, 'placeholder');
         for (let i = 0; arrLength > i; i++) {
-            waitElementToBePresentInDOM(searchFields, i);
             waitForElDisplayed(searchFields, i);
             expect(actualPlaceholders[i]).toBe(searchPageContent.search_placeholder);
         }
@@ -93,7 +87,6 @@ describe('Search field', function() {
         for (let i = 0; arrLength > i; i++) {
             // value without suggestion
             setValue(searchFields, 'test', i);
-            waitElementToBePresentInDOM(clearSearchIcon);
             waitForElDisplayed(clearSearchIcon);
             click(clearSearchIcon);
         }
@@ -116,7 +109,6 @@ describe('Search field', function() {
         for (let i = 0; arrLength > i; i++) {
             // value without suggestion
             setValue(searchFields, 'ea', i);
-            waitElementToBePresentInDOM(autosuggestionItems);
             waitForElDisplayed(autosuggestionItems);
             getTextArr(autosuggestionItems).forEach((suggestionItemText) => {
                 expect(suggestionItemText).toContain('ea');

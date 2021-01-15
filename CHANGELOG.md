@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.80...v0.26.0-rc.81) (2021-01-15)
+
+## [0.26.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.79...v0.26.0-rc.80) (2021-01-15)
+
+
+### Bug Fixes
+
+* (Core) make Form's Input Message readable by screen readers ([#4277](https://github.com/SAP/fundamental-ngx/issues/4277)) ([a5505ac](https://github.com/SAP/fundamental-ngx/commit/a5505ac9a79f5fa0cb72a49752393cf1eaee4fb9))
+
+## [0.26.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.78...v0.26.0-rc.79) (2021-01-15)
+
+## [0.26.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.77...v0.26.0-rc.78) (2021-01-15)
+
+
+### Bug Fixes
+
+* (Core) add scrollTo IE11 alternative ([#4320](https://github.com/SAP/fundamental-ngx/issues/4320)) ([a372e86](https://github.com/SAP/fundamental-ngx/commit/a372e866565a0e612d66f6057a940e68b615dbc7))
+
+## [0.26.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.76...v0.26.0-rc.77) (2021-01-15)
+
+
+### Features
+
+* (Platform) Introduce Value Help Dialog ([#4184](https://github.com/SAP/fundamental-ngx/issues/4184)) ([4be4739](https://github.com/SAP/fundamental-ngx/commit/4be47391f601e9bdc100471a743e7114363ec0e5))
+
+## [0.26.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.75...v0.26.0-rc.76) (2021-01-15)
+
+
+### Bug Fixes
+
+* (Core) fix Card accessibility issue ([#4330](https://github.com/SAP/fundamental-ngx/issues/4330)) ([6172072](https://github.com/SAP/fundamental-ngx/commit/6172072e2c727e2b65519e40c76369c942ef15a7))
+
+## [0.26.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.74...v0.26.0-rc.75) (2021-01-15)
+
 ## [0.26.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.73...v0.26.0-rc.74) (2021-01-14)
 
 ## [0.26.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.72...v0.26.0-rc.73) (2021-01-14)
