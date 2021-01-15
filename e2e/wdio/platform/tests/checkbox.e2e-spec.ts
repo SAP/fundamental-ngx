@@ -233,27 +233,27 @@ describe('Checkbox test suite', () => {
 
     describe('Checkbox With Form and State Change on Error', () => {
         it('should check error handling examples', () => {
-            if (!browserIsIEorSafari()) {
-                const errorCheckboxesLength = getElementArrayLength(errorCheckboxes);
-
-                for (let i = 0; errorCheckboxesLength > i; i++) {
-                    checkIfDisabled(errorCheckboxes, 'ng-reflect-is-disabled', 'false', i);
-                }
-
-                clickNextElement(presenceCheckbox);
-                expect(getCSSPropertyByName(presenceCheckbox, 'border-bottom-color').value)
-                    .toContain(checkboxGPData.checkboxErrorState);
-                scrollIntoView(checkboxPage.errorExampleTitle);
-                click(checkboxPage.errorExampleTitle);
-                mouseHoverElement(presenceCheckbox);
-                expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxData.checkboxErrorTooltip);
-
-                checkHoverState(errorCheckboxes, 1);
-                checkFocusState(errorCheckboxes, 1);
+            if (browserIsIEorSafari()) {
+                console.log('Skip for Safari and IE');
                 return;
             }
-            console.log('Skip for Safari and IE');
-        });
+            const errorCheckboxesLength = getElementArrayLength(errorCheckboxes);
+
+            for (let i = 0; errorCheckboxesLength > i; i++) {
+                checkIfDisabled(errorCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+            }
+
+            scrollIntoView(checkboxPage.submitBtn);
+            clickNextElement(presenceCheckbox);
+            expect(getCSSPropertyByName(presenceCheckbox, 'border-bottom-color').value)
+                .toContain(checkboxGPData.checkboxErrorState);
+            scrollIntoView(checkboxPage.submitBtn);
+            mouseHoverElement(checkboxPage.submitBtn);
+            waitForElDisplayed(checkboxPage.errorTooltip);
+            expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxData.checkboxErrorTooltip);
+            checkHoverState(errorCheckboxes, 1);
+            checkFocusState(errorCheckboxes, 1);
+        }, 1);
 
         it('should check error handling form submission', () => {
             if (!browserIsIEorSafari()) {
@@ -271,6 +271,7 @@ describe('Checkbox test suite', () => {
                 click(checkboxPage.submitBtn);
 
                 expect(getAlertText()).toEqual('Status: INVALID');
+                acceptAlert();
                 return;
             }
             console.log('Skip for Safari and IE');
