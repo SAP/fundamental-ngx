@@ -22,14 +22,14 @@ export class FormInputMessageGroupComponent {
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      */
     @Input()
-    triggers: string[] = ['click'];
+    triggers: string[] = ['focusin', 'focusout'];
 
     /*
      * Allows the user to decide if he wants to keep the error message after they click outside
      *  Whether the popover should close when a click is made outside its boundaries.
      */
     @Input()
-    closeOnOutsideClick = true;
+    closeOnOutsideClick = false;
 
     /**
      * Preset options for the message body width.
@@ -46,7 +46,7 @@ export class FormInputMessageGroupComponent {
 
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
-    closeOnEscapeKey = true;
+    closeOnEscapeKey = false;
 
     /** The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end. */
