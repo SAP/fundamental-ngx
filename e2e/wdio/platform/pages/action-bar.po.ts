@@ -8,7 +8,7 @@ export class ActionBarPo extends BaseComponentPo {
     pageTitle = 'app-action-bar-header h1';
     actionBtnArr = 'fdp-button button';
     menuItems = 'div fdp-menu-item';
-    backBtnArr = 'fdp-action-bar button[title=\'Go Back\']';
+    backBtnArr = 'fdp-action-bar .fd-action-bar__back button';
     descriptions = 'fdp-action-bar p';
     titles = 'fdp-action-bar h2';
 

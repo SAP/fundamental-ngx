@@ -12,6 +12,23 @@ import {
 import ActionBarContent from '../fixtures/appData/action-bar-contents';
 
 describe('Action Bar Test Suite', function() {
+    const {
+        saveBtnHvrColor,
+        defaultBtnHvrColor,
+        negCancelBtnHvrColor,
+        hoverColorAttr,
+        alertMsg,
+        actionBarTitles,
+        actionBarDescriptions,
+    } = ActionBarContent;
+
+    const {
+        menuItems,
+        actionBtnArr,
+        backBtnArr,
+        descriptions,
+        titles
+    } = new ActionBarPo();
     const actionBarPage = new ActionBarPo();
 
     beforeAll(() => {
@@ -20,42 +37,39 @@ describe('Action Bar Test Suite', function() {
 
     describe('Main checks', function() {
         it('should check action buttons', ()  => {
-            mouseHoverElement(actionBarPage.actionBtnArr);
-            expect(getCSSPropertyByName(actionBarPage.actionBtnArr, ActionBarContent.hoverColorAttr).value)
-                .toContain(ActionBarContent.saveBtnHvrColor);
-            mouseHoverElement(actionBarPage.actionBtnArr, 1);
-            expect(getCSSPropertyByName(actionBarPage.actionBtnArr, ActionBarContent.hoverColorAttr, 1).value)
-                .toContain(ActionBarContent.defaultBtnHvrColor);
-            scrollIntoView(actionBarPage.actionBtnArr, 10);
-            mouseHoverElement(actionBarPage.actionBtnArr, 10);
-            expect(getCSSPropertyByName(actionBarPage.actionBtnArr, ActionBarContent.hoverColorAttr, 10).value)
-                .toContain(ActionBarContent.negCancelBtnHvrColor);
-            checkElArrIsClickable(actionBarPage.actionBtnArr);
-            click(actionBarPage.actionBtnArr, 8);
-            checkElArrIsClickable(actionBarPage.menuItems);
+            mouseHoverElement(actionBtnArr);
+            expect(getCSSPropertyByName(actionBtnArr, hoverColorAttr).value).toContain(saveBtnHvrColor);
+            mouseHoverElement(actionBtnArr, 1);
+            expect(getCSSPropertyByName(actionBtnArr, hoverColorAttr, 1).value).toContain(defaultBtnHvrColor);
+            scrollIntoView(actionBtnArr, 10);
+            mouseHoverElement(actionBtnArr, 10);
+            expect(getCSSPropertyByName(actionBtnArr, hoverColorAttr, 10).value).toContain(negCancelBtnHvrColor);
+            checkElArrIsClickable(actionBtnArr);
+            click(actionBtnArr, 8);
+            checkElArrIsClickable(menuItems);
         });
 
         it('should check back buttons', () => {
-            checkElArrIsClickable(actionBarPage.backBtnArr);
-            click(actionBarPage.backBtnArr);
-            expect(getAlertText()).toBe(ActionBarContent.alertMsg);
+            checkElArrIsClickable(backBtnArr);
+            click(backBtnArr);
+            expect(getAlertText()).toBe(alertMsg);
             acceptAlert();
         });
 
         it('should check titles and descriptions', () => {
-            checkElementTextValue(actionBarPage.titles, ActionBarContent.actionBarTitles);
-            checkElementTextValue(actionBarPage.descriptions, ActionBarContent.actionBarDescriptions);
+            checkElementTextValue(titles, actionBarTitles);
+            checkElementTextValue(descriptions, actionBarDescriptions);
         });
 
         it('should check overflow menu btn', () => {
-            scrollIntoView(actionBarPage.actionBtnArr, 8);
-            click(actionBarPage.actionBtnArr, 8);
-            waitForElDisplayed(actionBarPage.menuItems);
-            click(actionBarPage.actionBtnArr, 8);
-            expect(actionBarPage.menuItems).not.toBeDisplayed();
-            click(actionBarPage.actionBtnArr, 8);
-            click(actionBarPage.menuItems);
-            expect(actionBarPage.menuItems).not.toBeDisplayed();
+            scrollIntoView(actionBtnArr, 8);
+            click(actionBtnArr, 8);
+            waitForElDisplayed(menuItems);
+            click(actionBtnArr, 8);
+            expect(menuItems).not.toBeDisplayed();
+            click(actionBtnArr, 8);
+            click(menuItems);
+            expect(menuItems).not.toBeDisplayed();
         });
     });
 
