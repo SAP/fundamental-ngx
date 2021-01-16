@@ -3,6 +3,7 @@
 <ng-template #desktopTemplate>
     <fd-popover
         additionalBodyClass="fd-popover-custom-list"
+        [class.fd-combobox-full-width]="isSearch"
         [isOpen]="open && displayedValues && displayedValues.length"
         (isOpenChange)="isOpenChangeHandle($event)"
         [fillControlMode]="fillControlMode"
@@ -41,7 +42,7 @@
     <fd-input-group
         [compact]="compact"
         [button]="showDropdownButton"
-        [glyph]="showDropdownButton ? glyph : null"
+        [glyph]="showDropdownButton ? glyphValue : null"
         [state]="state"
         [buttonFocusable]="buttonFocusable"
         [disabled]="disabled || readOnly"
@@ -73,6 +74,21 @@
             (focus)="onTouched()"
             (blur)="handleBlur()"
         />
+        <span 
+            class="fd-input-group__addon fd-input-group__addon--button"
+            [class.fd-input-group__addon--compact]="compact"
+            *ngIf="isSearch && showClearButton && inputText && inputText.length > 0">
+            <button
+                fd-button
+                class="fd-input-group__button"
+                type="button"
+                fdType="transparent"
+                title="Clear input"
+                [class.fd-button--compact]="compact" 
+                (click)="_handleClearSearchTerm()">
+                <fd-icon glyph="decline"></fd-icon>
+            </button>
+        </span>
     </fd-input-group>
 </ng-template>
 
