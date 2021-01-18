@@ -1,4 +1,5 @@
-import { FormField, FormFieldComponent } from '@fundamental-ngx/platform';
+import { FormField } from './form-field';
+import { FormFieldComponent } from './form-group/form-field/form-field.component';
 import { FormFieldGroupComponent } from './form-group/form-field-group/form-field-group.component';
 import { TemplateRef } from '@angular/core';
 
