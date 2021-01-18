@@ -23,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*.e2e-spec.ts'
+        './e2e/wdio/**/carousel.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -62,26 +62,26 @@ exports.config = {
         //         requireWindowFocus: true,
         //     }
         // },
-        {
-            browserName: 'MicrosoftEdge',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'firefox',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1080',
-            }
-        },
+        // {
+        //     browserName: 'MicrosoftEdge',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         screenResolution: '1920x1080',
+        //         name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //     }
+        // },
+        // {
+        //     browserName: 'firefox',
+        //     browserVersion: 'latest',
+        //     platformName: 'Windows 10',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //         screenResolution: '1920x1080',
+        //     }
+        // },
         {
             browserName: 'chrome',
             browserVersion: 'latest',
@@ -92,36 +92,36 @@ exports.config = {
                 name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
             }
         },
-        {
-            browserName: 'chrome',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1440',
-            }
-        },
-        {
-            browserName: 'firefox',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'MicrosoftEdge',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
+        // {
+        //     browserName: 'chrome',
+        //     platformName: 'macOS 10.15',
+        //     browserVersion: 'latest',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //         screenResolution: '1920x1440',
+        //     }
+        // },
+        // {
+        //     browserName: 'firefox',
+        //     platformName: 'macOS 10.15',
+        //     browserVersion: 'latest',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         screenResolution: '1920x1440',
+        //         name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //     }
+        // },
+        // {
+        //     browserName: 'MicrosoftEdge',
+        //     platformName: 'macOS 10.15',
+        //     browserVersion: 'latest',
+        //     acceptInsecureCerts: true,
+        //     'sauce:options': {
+        //         screenResolution: '1920x1440',
+        //         name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        //     }
+        // },
         // {
         //     browserName: 'safari',
         //     browserVersion: '13.1',
