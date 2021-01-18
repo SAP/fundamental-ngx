@@ -9,36 +9,33 @@ export class DatePicker extends BaseComponentPo {
     buttonDatePicker = 'fd-date-picker button';
 
     activeButtonDatePicker = '[ng-reflect-is-disabled="false"] + span button';
-    activeInputDatePicker = '[ng-reflect-is-disabled="false"][aria-label="Date input"]';
+    activeInputDatePicker = 'fd-popover-control input[ng-reflect-is-disabled="false"]';
 
     calendarExpanded = '.fd-popover__popper fd-calendar';
     calendarYearsSection = '.fd-calendar__content--years';
 
-    currentYear = '[aria-label="Select year"]';
+    currentYear = '.fd-calendar__action:nth-child(3) .fd-button';
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
-    buttonGerman = 'button[ng-reflect-label="German"]'
-    buttonBulgarian = 'button[ng-reflect-label="Bulgarian"]';
-    buttonSelectYear = '[aria-label="Select year"]';
-    buttonSelectMonth = '[aria-label="Select month"]';
+    buttonGerman = 'fd-segmented-button button:nth-child(2)';
+    buttonBulgarian = 'fd-segmented-button button:nth-child(3)';
+    buttonSelectYear = '.fd-calendar__action:nth-child(3) .fd-button';
+    buttonSelectMonth = '.fd-calendar__action:nth-child(2) .fd-button';
+    buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
 
-    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]'
-    buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]'
-    buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]'
+    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]';
+    buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
+    buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
 
-    filterCaledarValue = (name: string) => {
+    filterCaledarValue = (name: string): string => {
         return `//td[contains(@id,"fd-${name}")]`;
     };
 
-    datePickerInputByIndex = (index: string) => {
-        return `#fd-popover-${index} input`;
-    };
-
-    dayInCalendarButtonByValue = (index: string) => {
+    dayInCalendarButtonByValue = (index: string): string => {
         return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
     };
 
-    yearInCalendarByValue = (year: number) => {
+    yearInCalendarByValue = (year: number): string => {
         return `[aria-label="${year}"]`
     };
 
@@ -46,5 +43,5 @@ export class DatePicker extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.inputDatePicker);
-    }
+    };
 }
