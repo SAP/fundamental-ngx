@@ -18,15 +18,15 @@
                 <div class="fd-form-group__header" *ngIf="row.value.label">
                     <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
                 </div>
-                <ng-container *ngFor="let r of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
+                <ng-container *ngFor="let fields of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
                     <div class="fd-form-group fd-col__form-group fd-col" [ngClass]="xlCol">
                         <div class="fd-form-item fd-row__form-item fd-row">
                             <div
-                                *ngFor="let f of r.value; trackBy: trackByFieldName"
+                                *ngFor="let field of fields.value; trackBy: trackByFieldName"
                                 class="fd-col fd-col-wrap"
-                                [style.order]="f.rank"
+                                [style.order]="field.rank"
                             >
-                                <ng-container *ngTemplateOutlet="f?.renderer"></ng-container>
+                                <ng-container *ngTemplateOutlet="field?.renderer"></ng-container>
                             </div>
                         </div>
                     </div>

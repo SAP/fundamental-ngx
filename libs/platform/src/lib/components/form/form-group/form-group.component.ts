@@ -34,21 +34,16 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlContainer, Form, FormGroup } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
+import { KeyValue } from '@angular/common';
 import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { FormField } from '../form-field';
 import { FormGroupContainer } from '../form-group';
 import { HintPlacement, LabelLayout } from '../form-options';
-import { FormFieldGroupComponent } from './form-field-group/form-field-group.component';
 import { FormFieldGroup } from '../form-field-group';
-import { FormFieldComponent } from './form-field/form-field.component';
-import { KeyValue } from '@angular/common';
-
-interface FieldColumn {
-    [key: number]: Array<Field>;
-}
+import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -234,7 +229,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     xlCol: string;
 
     /** Packed fields which should be rendered */
-    formRows: { [key: number]: FieldColumn } | { [key: number]: FieldGroup } = {};
+    formRows: { [key: number]: FieldColumn | FieldGroup } = {};
 
     /**
      *  Keep track of added form fields children.
@@ -328,37 +323,35 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * Otherwise the fields set 1 column.
      */
     private _updateFieldByColumn(): void {
-        const rows: { [key: number]: FieldColumn } | { [key: number]: FieldGroup } = {};
+        const rows: { [key: number]: FieldColumn | FieldGroup } = {};
         let rowNumber = 0;
         let columns: FieldColumn = {};
 
         for (const child of this.formChildren) {
-            if (this._isFieldChild(child)) {
-                const f = this._getField(child);
+            if (isFieldChild(child)) {
+                const field = getField(child);
                 const columnNumber = this._validateFieldColumn(child.column);
 
                 if (!columns[columnNumber]) {
-                    columns[columnNumber] = [f];
-                } else {
-                    columns[columnNumber].push(f);
+                    columns[columnNumber] = [];
                 }
+                columns[columnNumber].push(field);
             }
 
-            if (this._isFieldGroupChild(child)) {
+            if (isFieldGroupChild(child)) {
                 const fieldGroupColumns: FieldColumn = {};
                 rows[rowNumber] = columns;
                 columns = {};
                 rowNumber++;
 
-                const group = child.fields.map(f => this._getField(f));
-                group.forEach(field => {
-                    const columnNumber = this._validateFieldColumn(field.column);
+                const groupFields = child.fields.map(field => getField(field));
+                groupFields.forEach(groupField => {
+                    const columnNumber = this._validateFieldColumn(groupField.column);
 
                     if (!fieldGroupColumns[columnNumber]) {
-                        fieldGroupColumns[columnNumber] = [field];
-                    } else {
-                        fieldGroupColumns[columnNumber].push(field);
+                        fieldGroupColumns[columnNumber] = [];
                     }
+                    fieldGroupColumns[columnNumber].push(groupField);
                 });
 
                 rows[rowNumber] = new FieldGroup(child.label, fieldGroupColumns);
@@ -387,34 +380,13 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     /** @hidden */
-    private _getField(field: FormField): Field {
-        return new Field(
-            field.id,
-            field.rank,
-            field.renderer,
-            field.columns,
-            field.column,
-        );
-    }
-
-    /** @hidden */
-    private _isFieldChild(child: unknown): child is FormFieldComponent {
-        return child instanceof FormFieldComponent;
-    }
-
-    /** @hidden */
-    private _isFieldGroupChild(child: unknown): child is FormFieldGroupComponent {
-        return child instanceof FormFieldGroupComponent;
-    }
-
-    /** @hidden */
     private _updateFormFieldsProperties(): void {
         this.formChildren.forEach((formField: FormField | FormFieldGroup) => {
-           if (this._isFieldChild(formField)) {
+           if (isFieldChild(formField)) {
                this.updateFormFieldProperties(formField);
            }
 
-            if (this._isFieldGroupChild(formField)) {
+            if (isFieldGroupChild(formField)) {
                 formField.fields.forEach(field => this.updateFormFieldProperties(field));
             }
         });
@@ -442,20 +414,20 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             this._getColumnNumbers();
             if (isNaN(this.xlColumnsNumber) || isNaN(this.lgColumnsNumber) || isNaN(this.mdColumnsNumber)) {
                 throw new Error('Input a valid number for columns');
-            } else if (this.xlColumnsNumber > 12 || this.lgColumnsNumber > 12 || this.mdColumnsNumber > 12) {
+            }
+            if (this.xlColumnsNumber > 12 || this.lgColumnsNumber > 12 || this.mdColumnsNumber > 12) {
                 throw new Error('Columns cannot be more than 12');
-            } else {
-                const lgColumns = 12 / this.lgColumnsNumber;
-                const mdColumns = 12 / this.mdColumnsNumber;
-                const xlColumns = 12 / this.xlColumnsNumber;
+            }
+            const lgColumns = 12 / this.lgColumnsNumber;
+            const mdColumns = 12 / this.mdColumnsNumber;
+            const xlColumns = 12 / this.xlColumnsNumber;
 
-                // for `lg` single-column layout, Styles does not use any class, and providing `fd-col-lg--12` has unintended side-effects
-                // therefore, we remove the lg class for single-column layout
-                if (lgColumns === 12) {
-                    this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
-                } else {
-                    this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
-                }
+            // for `lg` single-column layout, Styles does not use any class, and providing `fd-col-lg--12` has unintended side-effects
+            // therefore, we remove the lg class for single-column layout
+            if (lgColumns === 12) {
+                this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns}`;
+            } else {
+                this.xlCol = `fd-col-xl--${xlColumns} fd-col-md--${mdColumns} fd-col-lg--${lgColumns}`;
             }
         } else {
             this.xlCol = `fd-col-xl--12 fd-col-md--12 fd-col-lg--12`;
@@ -469,22 +441,4 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.lgColumnsNumber = parseInt(lg.slice(1, lg.length), 10);
         this.mdColumnsNumber = parseInt(md.slice(1, md.length), 10);
     }
-}
-
-export class Field {
-    constructor(
-        public name?: string,
-        public rank?: number,
-        public renderer?: TemplateRef<any>,
-        public columns: number = 6,
-        public column?: number,
-        public styleClass?: string,
-    ) {}
-}
-
-export class FieldGroup {
-    constructor(
-        public label: string,
-        public fields: FieldColumn,
-    ) {}
 }
