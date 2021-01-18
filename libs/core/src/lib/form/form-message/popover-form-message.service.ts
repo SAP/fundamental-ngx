@@ -21,16 +21,19 @@ export class PopoverFormMessageService {
         private _popoverService: PopoverService
     ) {}
 
+    /** @hidden */
     set messageType(type: MessageStates) {
         this._type = type;
         this._updatePopover();
     }
 
+    /** @hidden */
     set message(message: string) {
         this._message = message;
         this._updatePopover();
     }
 
+    /** @hidden */
     set triggers(triggers: string[]) {
         this._popoverService.triggers = triggers;
         this._popoverService._refreshTriggerListeners();
