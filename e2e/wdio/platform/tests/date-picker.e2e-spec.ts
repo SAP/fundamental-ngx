@@ -173,13 +173,13 @@ describe('Date picker suite', function() {
         const buttons = elementArray(datePickerPage.activeButtonDatePicker);
         for (let i = 1; i < buttons.length - 1; i++) {
             click(datePickerPage.activeButtonDatePicker, i);
-            waitForElDisplayed(datePickerPage.filterCaledarValue('day'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('day'));
             click(datePickerPage.buttonSelectMonth);
-            waitForElDisplayed(datePickerPage.filterCaledarValue('month'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('month'));
             click(datePickerPage.buttonSelectYear);
-            waitForElDisplayed(datePickerPage.filterCaledarValue('year'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('year'));
             click(datePickerPage.buttonSelectYearsRange);
-            waitForElDisplayed(datePickerPage.filterCaledarValue('aggregated-year'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('aggregated-year'));
             click(datePickerPage.activeButtonDatePicker, i);
         }
     });
@@ -199,9 +199,9 @@ describe('Date picker suite', function() {
             click(datePickerPage.activeButtonDatePicker, i);
             click(datePickerPage.buttonSelectYear);
             click(datePickerPage.buttonSelectYearsRange);
-            waitForElDisplayed(datePickerPage.filterCaledarValue('aggregated-year'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('aggregated-year'));
             click(datePickerPage.buttonFirstRangeYear)
-            waitForElDisplayed(datePickerPage.filterCaledarValue('year'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('year'));
             click(datePickerPage.activeButtonDatePicker, i);
         }
     });
@@ -211,9 +211,9 @@ describe('Date picker suite', function() {
         for (let i = 1; i < buttons.length - 1; i++) {
             click(datePickerPage.activeButtonDatePicker, i);
             click(datePickerPage.buttonSelectYear);
-            waitForElDisplayed(datePickerPage.filterCaledarValue('year'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('year'));
             click(datePickerPage.buttonFirstYear)
-            waitForElDisplayed(datePickerPage.filterCaledarValue('day'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('day'));
             click(datePickerPage.activeButtonDatePicker, i);
         }
     });
@@ -223,14 +223,14 @@ describe('Date picker suite', function() {
         for (let i = 1; i < buttons.length - 1; i++) {
             click(datePickerPage.activeButtonDatePicker, i);
             click(datePickerPage.buttonSelectMonth);
-            waitForElDisplayed(datePickerPage.filterCaledarValue('month'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('month'));
             click(datePickerPage.buttonFirstMonth)
-            waitForElDisplayed(datePickerPage.filterCaledarValue('day'));
+            waitForElDisplayed(datePickerPage.filterCalendarValue('day'));
             click(datePickerPage.activeButtonDatePicker, i);
         }
     });
 
-    it('verify user is cannot select mutlitple dates', () => {
+    it('verify user is not able select multiple dates', () => {
         click(datePickerPage.activeButtonDatePicker, 1);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model')).toEqual(datePickerTestData.date);

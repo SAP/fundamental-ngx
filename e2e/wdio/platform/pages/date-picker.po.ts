@@ -27,7 +27,7 @@ export class DatePicker extends BaseComponentPo {
     buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
     buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
 
-    filterCaledarValue = (name: string): string => {
+    filterCalendarValue = (name: string): string => {
         return `//td[contains(@id,"fd-${name}")]`;
     };
 
