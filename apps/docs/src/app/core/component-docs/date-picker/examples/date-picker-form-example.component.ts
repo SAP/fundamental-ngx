@@ -12,7 +12,6 @@ import { FdDate } from '@fundamental-ngx/core';
                     <fd-date-picker 
                             [state]="isValid() ? 'success' : 'error'"
                             [message]="isValid() ? 'This is valid(success) DatePicker' : 'This is invalid(error) DatePicker'"
-                            [messageType]="isValid() ? 'success' : 'error'"
                             formControlName="date">
                     </fd-date-picker>
                 </div>
@@ -30,7 +29,6 @@ import { FdDate } from '@fundamental-ngx/core';
                 <label fd-form-label>Disabled Date Picker</label>
                 <fd-date-picker 
                         state="information" 
-                        messageType="information" 
                         message="This is disabled DatePicker" 
                         formControlName="disabledDate">
                 </fd-date-picker>

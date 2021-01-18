@@ -13,7 +13,7 @@ import {
     ViewChild,
     ViewEncapsulation,
     Inject,
-    OnChanges
+    OnChanges, AfterViewInit
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -28,6 +28,8 @@ import { SpecialDayRule } from '../calendar/models/special-day-rule';
 import { FormStates } from '../form/form-control/form-states';
 
 import { createMissingDateImplementationError } from './errors';
+import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
+import { PopoverService } from '../popover/popover-service/popover.service';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -54,12 +56,14 @@ import { createMissingDateImplementationError } from './errors';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
-        }
+        },
+        PopoverFormMessageService,
+        PopoverService
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges, ControlValueAccessor, Validator {
+export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor, Validator {
     /** Placeholder for the inner input element. */
     @Input()
     placeholder = '';
@@ -96,6 +100,25 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      * */
     @Input()
     displaySeconds: boolean;
+
+    /** Text displayed in message */
+    @Input()
+    set message(message: string) {
+        this._message = message;
+        this._popoverFormMessage.message = message;
+    }
+
+    _message: string = null;
+
+    /** The trigger events that will open/close the message box.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    set messageTriggers(triggers: string[]) {
+        this._messageTriggers = triggers;
+        this._popoverFormMessage.triggers = triggers;
+    }
+
+    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
 
     /**
      * Whether the time component shows minutes.
@@ -153,10 +176,20 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /**
      *  The state of the form control - applies css classes.
+     *  Also this is applied to message.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    set state(state: FormStates) {
+        this._state = state;
+        this._popoverFormMessage.messageType = state;
+    }
+
+    get state(): FormStates {
+        return this._state;
+    }
+
+    private _state: FormStates = null;
 
     /**
      * Whether AddOn Button should be focusable, set to true by default
@@ -247,6 +280,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     @ViewChild(CalendarComponent)
     _calendarComponent: CalendarComponent<D>;
 
+    /** @hidden */
+    @ViewChild('inputGroupComponent', { read: ElementRef  })
+    inputGroupElement: ElementRef;
+
     /**
      * @hidden
      * Date of the input field. Internal use.
@@ -279,17 +316,19 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange = (_: D) => {};
+    onChange = (_: D) => {
+    };
 
     /** @hidden */
-    onTouched = () => {};
+    onTouched = () => {
+    };
 
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function (_: D): boolean {
+    disableFunction = function(_: D): boolean {
         return false;
     };
 
@@ -299,7 +338,8 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         private _changeDetRef: ChangeDetectorRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        private _popoverFormMessage: PopoverFormMessageService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -344,6 +384,11 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         this._onDestroy$.complete();
     }
 
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._InitialiseVariablesInMessageService();
+    }
+
     /**
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
@@ -356,10 +401,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         return this.isCurrentModelValid() && !this._isInvalidDateInput
             ? null
             : {
-                  dateValidation: {
-                      valid: false
-                  }
-              };
+                dateValidation: {
+                    valid: false
+                }
+            };
     }
 
     /** Toggles the popover. */
@@ -385,6 +430,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
             this.onTouched();
             this.isOpen = true;
             this.isOpenChange.emit(this.isOpen);
+            this._changeMessageVisibility();
         }
     }
 
@@ -395,6 +441,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
             this.onClose.emit();
             this.isOpen = false;
             this.isOpenChange.emit(this.isOpen);
+            this._changeMessageVisibility();
         }
     }
 
@@ -533,6 +580,15 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         }
     }
 
+    /** @hidden */
+    _changeMessageVisibility(): void {
+        if (this.isOpen) {
+            this._popoverFormMessage.hide();
+        } else {
+            this._popoverFormMessage.show();
+        }
+    }
+
     /** Method that provides information if model selected date/dates have properly types and are valid */
     public isCurrentModelValid(): boolean {
         return this._isModelValid(this.date);
@@ -565,6 +621,14 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
             this._dateTimeFormats.display.dateTimeInput
         );
         return formattedDate || '';
+    }
+
+    /** @hidden */
+    private _InitialiseVariablesInMessageService(): void {
+        this._popoverFormMessage.init(this.inputGroupElement);
+        this._popoverFormMessage.message = this._message;
+        this._popoverFormMessage.triggers = this._messageTriggers;
+        this._popoverFormMessage.messageType = this._state;
     }
 
     /** @hidden */

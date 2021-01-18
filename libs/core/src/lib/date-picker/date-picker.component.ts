@@ -30,7 +30,6 @@ import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats
 import { createMissingDateImplementationError } from './errors';
 import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
 import { PopoverService } from '../popover/popover-service/popover.service';
-import { MessageStates } from '../..';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -69,18 +68,6 @@ import { MessageStates } from '../..';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator {
-    /** @hidden The value of the input */
-    inputFieldDate: string = null;
-
-    /** @hidden Whether the date input is invalid */
-    isInvalidDateInput = false;
-
-    /** @hidden */
-    @ViewChild(CalendarComponent)
-    calendarComponent: CalendarComponent<D>;
-
-    @ViewChild('inputGroupComponent', { read: ElementRef  })
-    inputGroupElement: ElementRef
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -101,14 +88,6 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._popoverFormMessage.message = message;
     }
     _message: string = null;
-
-    /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
-    @Input()
-    set messageType(messageType: FormStates) {
-        this._messageType = messageType;
-        this._popoverFormMessage.messageType = messageType;
-    }
-    _messageType: FormStates = null;
 
     /** The trigger events that will open/close the message box.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
@@ -179,10 +158,19 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /**
      *  The state of the form control - applies css classes.
+     *  Also this is applied to message.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    set state(state: FormStates) {
+        this._state = state;
+        this._popoverFormMessage.messageType = state;
+    }
+
+    get state(): FormStates {
+        return this._state;
+    }
+    private _state: FormStates = null;
 
     /**
      * Whether AddOn Button should be focusable, set to true by default
@@ -251,6 +239,19 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** Event thrown every time calendar active view is changed */
     @Output()
     readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
+
+    /** @hidden */
+    @ViewChild(CalendarComponent)
+    calendarComponent: CalendarComponent<D>;
+
+    @ViewChild('inputGroupComponent', { read: ElementRef  })
+    inputGroupElement: ElementRef
+
+    /** @hidden The value of the input */
+    inputFieldDate: string = null;
+
+    /** @hidden Whether the date input is invalid */
+    isInvalidDateInput = false;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -647,6 +648,6 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._popoverFormMessage.init(this.inputGroupElement);
         this._popoverFormMessage.message = this._message;
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._messageType;
+        this._popoverFormMessage.messageType = this._state;
     }
 }

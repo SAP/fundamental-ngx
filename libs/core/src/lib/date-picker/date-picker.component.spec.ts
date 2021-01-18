@@ -249,4 +249,19 @@ describe('DatePickerComponent', () => {
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
+
+    it('should hide message on open', () => {
+        const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide').and.callThrough();
+        component.openCalendar();
+        fixture.detectChanges();
+        expect(hideSpy).toHaveBeenCalled();
+    })
+
+    it('should show message on close', () => {
+        component.isOpen = true;
+        const showSpy = spyOn((<any>component)._popoverFormMessage, 'show').and.callThrough();
+        component.closeCalendar();
+        fixture.detectChanges();
+        expect(showSpy).toHaveBeenCalled();
+    });
 });

@@ -5,10 +5,7 @@ import { FdDate } from '@fundamental-ngx/core';
     selector: 'fd-date-picker-single-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <fd-date-picker type="single"
-                        message="dsaidojsaoidjsioajdoi"
-                        messageType="success"
-                        [(ngModel)]="date"></fd-date-picker>
+        <fd-date-picker type="single" [(ngModel)]="date"></fd-date-picker>
         <br/>
         <div>Selected Date: {{ date?.toDateString() || 'null' }}</div>
         <br/>

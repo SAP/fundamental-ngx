@@ -15,7 +15,7 @@ class PopoverFormMessageTestComponent  {
         public formService: PopoverFormMessageService
     ) {}
 }
-fdescribe('PopoverFormMessageService', () => {
+describe('PopoverFormMessageService', () => {
     let service: PopoverFormMessageService;
     let fixture: ComponentFixture<PopoverFormMessageTestComponent>;
 

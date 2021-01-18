@@ -38,9 +38,10 @@
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body [style.display]="'block'" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
-        <fd-form-message [embedded]="true" *ngIf="_message" [type]="_messageType">
+        <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
             {{ _message }}
         </fd-form-message>
+        <ng-content></ng-content>
 
         <fd-calendar
             (closeCalendar)="closeFromCalendar()"
