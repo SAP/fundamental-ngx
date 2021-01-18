@@ -13,8 +13,8 @@
         <span class="fd-form-header__text">{{ title }}</span>
     </div>
     <div class="fd-container fd-form-layout-grid-container">
-        <div class="fd-row">
-            <ng-container *ngFor="let row of rows | keyvalue; trackBy: trackByFn">
+        <ng-container *ngFor="let row of rows | keyvalue; trackBy: trackByFn">
+            <div class="fd-row">
                 <div class="fd-form-group__header" *ngIf="row.value.label">
                     <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
                 </div>
@@ -31,8 +31,8 @@
                         </div>
                     </div>
                 </ng-container>
-            </ng-container>
-        </div>
+            </div>
+        </ng-container>
     </div>
 </ng-template>
 

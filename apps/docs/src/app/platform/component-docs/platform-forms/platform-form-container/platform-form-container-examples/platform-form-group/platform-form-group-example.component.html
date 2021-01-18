@@ -22,7 +22,7 @@
     <fdp-form-field
         #f3
         id="basicInput3"
-        label="Basic Textarea 3"
+        label="Basic Input 3"
         placeholder="Start entering detailed description"
         column="3"
     >
@@ -95,4 +95,27 @@
             </fdp-switch>
         </fdp-form-field>
     </fdp-form-field-group>
+
+    <fdp-form-field
+        #f9
+        id="basicInput4"
+        label="Basic Input 4"
+        placeholder="Start entering detailed description"
+        column="1"
+    >
+        <fdp-input name="basicInput222" [formControl]="f9.formControl"></fdp-input>
+    </fdp-form-field>
+
+    <fdp-form-field
+        #f9
+        id="basicInput5"
+        label="Basic Input 5"
+        placeholder="Start entering detailed description"
+        column="2"
+    >
+        <fdp-input name="basicInput5" [formControl]="f9.formControl"></fdp-input>
+    </fdp-form-field>
+
 </fdp-form-group>
+
+

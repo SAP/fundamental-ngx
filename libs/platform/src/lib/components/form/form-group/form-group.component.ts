@@ -340,9 +340,11 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
             if (isFieldGroupChild(child)) {
                 const fieldGroupColumns: FieldColumn = {};
-                rows[rowNumber] = columns;
-                columns = {};
-                rowNumber++;
+                if (Object.keys(columns).length) {
+                    rows[rowNumber] = columns;
+                    columns = {};
+                    rowNumber++;
+                }
 
                 const groupFields = child.fields.map(field => getField(field));
                 groupFields.forEach(groupField => {
@@ -360,6 +362,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         }
         rows[rowNumber] = columns;
         this.formRows = rows;
+        console.log(this.formRows);
     }
 
     /** @hidden Validate column number */
