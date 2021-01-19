@@ -10,6 +10,8 @@ import * as wizardMobileHtml from '!raw-loader!./examples/wizard-mobile-example.
 import * as wizardMobileTs from '!raw-loader!./examples/wizard-mobile-example.component.ts';
 import * as wizardBranchingHtml from '!raw-loader!./examples/wizard-branching-example.component.html';
 import * as wizardBranchingTs from '!raw-loader!./examples/wizard-branching-example.component.ts';
+import * as wizardDialogHtml from '!raw-loader!./examples/wizard-dialog-example.component.html';
+import * as wizardDialogTs from '!raw-loader!./examples/wizard-dialog-example.component.ts';
 import * as wizardNgForHtml from '!raw-loader!./examples/wizard-ngfor-example.component.html';
 import * as wizardNgForTs from '!raw-loader!./examples/wizard-ngfor-example.component.ts';
 
@@ -37,7 +39,8 @@ export class WizardDocsComponent {
         {
             language: 'html',
             code: wizardCustomizableHtml,
-            fileName: 'wizard-customizable-example'
+            fileName: 'wizard-customizable-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',
@@ -51,7 +54,8 @@ export class WizardDocsComponent {
         {
             language: 'html',
             code: wizardMobileHtml,
-            fileName: 'wizard-mobile-example'
+            fileName: 'wizard-mobile-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',
@@ -76,11 +80,27 @@ export class WizardDocsComponent {
         }
     ];
 
+    wizardDialogExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: wizardDialogHtml,
+            fileName: 'wizard-dialog-example',
+            scssFileCode: wizardScss
+        },
+        {
+            language: 'typescript',
+            code: wizardDialogTs,
+            fileName: 'wizard-dialog-example',
+            component: 'WizardDialogExampleComponent'
+        }
+    ];
+
     wizardNgForExample: ExampleFile[] = [
         {
             language: 'html',
             code: wizardNgForHtml,
-            fileName: 'wizard-ngfor-example'
+            fileName: 'wizard-ngfor-example',
+            scssFileCode: wizardScss
         },
         {
             language: 'typescript',
