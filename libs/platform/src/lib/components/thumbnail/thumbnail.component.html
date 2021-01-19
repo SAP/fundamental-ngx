@@ -11,9 +11,12 @@
             [attr.src]="selectedMedia.mediaUrl"
             [attr.alt]="selectedMedia.alt"
             [attr.title]="selectedMedia.label"
+            [attr.ariaLabel]="selectedMedia.label"
         />
-        <video *ngIf="selectedMedia.mediaType === 'video'" [src]="selectedMedia.mediaUrl" controls>
+        <video *ngIf="selectedMedia.mediaType === 'video'" [src]="selectedMedia.mediaUrl" controls  [attr.ariaLabel]="selectedMedia.label">
             {{ selectedMedia.alt }}
+            <track [src]="selectedMedia.captionFile" kind="captions" srclang="en" [label]="selectedMedia.label">
+            <track [src]="selectedMedia.audioDescFile" kind="descriptions" srclang="en" [label]="selectedMedia.label">
         </video>
     </div>
     <fdp-thumbnail-image
