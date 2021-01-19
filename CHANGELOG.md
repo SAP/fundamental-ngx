@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.85...v0.26.0-rc.86) (2021-01-19)
+
+
+### Bug Fixes
+
+* (Core) implement and demonstrate wizard in a dialog ([#4218](https://github.com/SAP/fundamental-ngx/issues/4218)) ([0ffe8be](https://github.com/SAP/fundamental-ngx/commit/0ffe8be7a5fe3e79b5fdcd5d974595d1ae6929b4))
+
 ## [0.26.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.84...v0.26.0-rc.85) (2021-01-19)
 
 ## [0.26.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.83...v0.26.0-rc.84) (2021-01-18)
