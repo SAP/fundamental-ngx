@@ -31,12 +31,12 @@
     </fdp-form-field>
 
     <fdp-form-field #athens id="athens" label="athens: tristateSelectable false" column="1" rank="7">
-        <fdp-checkbox name="athens-cb" value="Yes" [tristate]="true" tristateSelectable="false"
+        <fdp-checkbox name="athens-cb" value="Yes" [tristate]="true" [tristateSelectable]="false"
             [formControl]="athens.formControl"></fdp-checkbox>
     </fdp-form-field>
 
     <fdp-form-field #sydney id="sydney" label="Sydney: tristateSelectable false" column="2" rank="8">
-        <fdp-checkbox name="sydney-cb" [tristate]="true" tristateSelectable="false"
+        <fdp-checkbox name="sydney-cb" [tristate]="true" [tristateSelectable]="false"
             [formControl]="sydney.formControl"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>

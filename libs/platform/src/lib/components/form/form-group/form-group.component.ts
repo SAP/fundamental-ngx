@@ -362,7 +362,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         }
         rows[rowNumber] = columns;
         this.formRows = rows;
-        console.log(this.formRows);
     }
 
     /** @hidden Validate column number */
