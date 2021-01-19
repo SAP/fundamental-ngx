@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { clearValue, sendKeys, setValue, waitElementToBePresentInDOM, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { clearValue, sendKeys, setValue, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class StepInputPo extends BaseComponentPo {
     private url = '/step-input';

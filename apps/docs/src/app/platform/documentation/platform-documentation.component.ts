@@ -56,6 +56,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                     { url: 'platform/object-list-item', name: 'Object List Item' }
                 ]
             },
+            { url: 'platform/value-help-dialog', name: 'Value Help Dialog' },
             { url: 'platform/approval-flow', name: 'Approval Flow' }
         ];
 

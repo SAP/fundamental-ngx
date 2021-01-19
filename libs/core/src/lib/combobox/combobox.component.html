@@ -89,7 +89,7 @@
         <ng-content></ng-content>
         <ng-container *ngIf="groupFn">
             <ng-container *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue">
-                <li fd-list-group-header>
+                <li fd-list-group-header tabindex="0">
                     {{ group.key }}
                 </li>
                 <li
