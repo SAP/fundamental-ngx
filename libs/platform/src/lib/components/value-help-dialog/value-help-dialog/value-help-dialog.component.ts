@@ -19,7 +19,7 @@ import {
 import { Subject, Observable, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DialogService, DialogConfig, DialogRef } from '@fundamental-ngx/core';
+import { DialogService, DialogConfig, DialogRef, RtlService } from '@fundamental-ngx/core';
 import { isDataSource } from '../../../domain/data-source';
 import { ContentDensity } from '../../table/enums';
 import {
@@ -209,6 +209,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden */
   _mainSearch = '';
 
+  /** handles rtl service
+     * @hidden */
+  _dir = 'ltr';
+
   /** @hidden */
   private _destroyed = new Subject<void>();
 
@@ -224,7 +228,8 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   constructor (
     private readonly _elementRef: ElementRef,
     private readonly _changeDetectorRef: ChangeDetectorRef,
-    private readonly _dialogService: DialogService
+    private readonly _dialogService: DialogService,
+    private readonly _rtlService: RtlService,
   ) {
     /** Default display function for define conditions */
     if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
@@ -569,6 +574,13 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       .subscribe(() => {
         this._updateFilters();
       })
+
+    this._dir = this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
+    this._rtlService.rtl
+      .pipe(takeUntil(this._destroyed))
+      .subscribe((isRtl: boolean) => {
+          this._dir = isRtl ? 'rtl' : 'ltr';
+      });
   }
 
   /** @hidden */
