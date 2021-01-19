@@ -29,39 +29,21 @@ import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 
+import { PopperOptions } from 'popper.js';
+
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { DialogConfig } from '../dialog/utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { FD_OPTION_PARENT_COMPONENT, OptionComponent } from './option/option.component';
-import { MatSelectCommonBehaviorCtor, mixinMatSelectCommons } from './commons/select-commons';
-import { MatSelectCommonBehavior } from './iselect-common-behavior';
-import { PopperOptions } from 'popper.js';
+import { MatSelectCommonBehavior,
+        MatSelectCommonBehaviorCtor,
+        mixinMatSelectCommons,
+        _MatSelectMixinCommons } from './commons/select-commons';
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
+
 let selectUniqueId = 0;
 export type SelectControlState = 'error' | 'success' | 'warning' | 'information';
-
-/**
- *
- * Base class for applying Material Select Common behaviors
- *
- * @hidden
- */
-export class MatSelectCommons {
-    constructor(
-        public viewportRuler: ViewportRuler,
-        public elementRef: ElementRef,
-        public ngZone: NgZone,
-        public changeDetectorRef: ChangeDetectorRef,
-        public dir: Directionality,
-        public ngControl: NgControl,
-        public liveAnnouncer: LiveAnnouncer
-    ) {}
-}
-
-const _MatSelectMixinCommons: MatSelectCommonBehaviorCtor & typeof MatSelectCommons = mixinMatSelectCommons(
-    MatSelectCommons
-);
 
 /**
  * Event object that is emitted when selection is changed
@@ -69,23 +51,9 @@ const _MatSelectMixinCommons: MatSelectCommonBehaviorCtor & typeof MatSelectComm
 export class FdSelectChange {
     constructor(readonly source: SelectComponent, readonly value: any) {}
 }
-
 /**
  * A Popup like component rendering list of values for the single selection use-case. This component also features mobile
  * mode which enhances the component with the full screen mode for the Option item list.
- *
- * Note: This is one of the several components that is powered material CDK.
- *
- * @CreditTo: Angular Component library for getting common functionality that was extracted out to mixins and
- * applied over this class.
- *
- * Just like it is described in the select-commons.ts they are going to be several phases:
- *  1) Try to reused as much as we can from established library and attach it to this select using mixins
- *  2) Break down newly created mixins into small pieces so they can be reused also outside of this select.
- *      e.g: HasKeyboardSupport, HasCDKOverlay, UseMatSelectFeatures,....
- *
- *
- *
  */
 @Component({
     selector: 'fd-select',

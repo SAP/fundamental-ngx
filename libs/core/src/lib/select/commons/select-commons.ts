@@ -36,7 +36,6 @@ import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, SPACE, UP_ARROW } from '@
 import { FdOptionSelectionChange, OptionComponent } from '../option/option.component';
 import { FdSelectChange } from '../select.component';
 import { KeyUtil } from '../../utils/functions/key-util';
-import { MatSelectCommonBehavior } from '../iselect-common-behavior';
 
 /**
  * by @Frank:
@@ -66,6 +65,70 @@ const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 export type Constructor<T> = new (...args: any[]) => T;
 
 
+/**
+ * Common Interface to define shareable properties and method
+ *
+ * @hidden
+ */
+export interface MatSelectCommonBehavior {
+    disabled: boolean;
+    readonly: boolean;
+    mobile: boolean;
+    typeaheadDebounceInterval: number;
+    maxHeight: string;
+    readonly valueChange: EventEmitter<FdSelectChange>;
+    readonly isOpenChange: EventEmitter<boolean>;
+    readonly selected: OptionComponent;
+    readonly empty: boolean;
+    readonly panelOpen: boolean;
+    readonly canClose: boolean;
+    readonly canEmitValueChange: boolean;
+    readonly focused: boolean;
+    readonly calculatedMaxHeight: number;
+    _compareWith: (o1: any, o2: any) => boolean;
+    _controlElementRef: ElementRef;
+    _triggerRect: ClientRect;
+    _options: QueryList<OptionComponent>;
+    _overlayDir: CdkConnectedOverlay;
+    _internalValue: any;
+    _offsetY: number;
+    _keyManager: ActiveDescendantKeyManager<OptionComponent>;
+    _selectionModel: SelectionModel<OptionComponent>;
+
+    onTouched: Function;
+
+    onChange: Function;
+
+    toggle(): void;
+
+    open(): void;
+
+    close(forceClose?: boolean): void;
+
+    focus(): void;
+
+    _onBlur(): void;
+
+    _onFocus(): void;
+
+    _getAriaActiveDescendant(): string | null;
+
+    _setSelectionByValue(value: any | any[]): void;
+
+    _updateCalculatedHeight(): void;
+
+    _initializeCommonBehavior(): void;
+
+    _cleanupCommonBehavior(): void;
+
+    _registerEventsAfterContentInit(): void;
+
+    _handleKeydown(event: KeyboardEvent): void;
+
+    _initializeSelection(): void;
+}
+
+
 /** @hidden */
 export type MatSelectCommonBehaviorCtor = Constructor<MatSelectCommonBehavior>;
 
@@ -81,6 +144,29 @@ export interface HasMatCommonBehavior {
     ngControl: NgControl;
     liveAnnouncer: LiveAnnouncer;
 }
+
+/**
+ *
+ * Base class for applying Material Select Common behaviors
+ *
+ * @hidden
+ */
+class MatSelectCommons {
+    constructor(
+        public viewportRuler: ViewportRuler,
+        public elementRef: ElementRef,
+        public ngZone: NgZone,
+        public changeDetectorRef: ChangeDetectorRef,
+        public dir: Directionality,
+        public ngControl: NgControl,
+        public liveAnnouncer: LiveAnnouncer
+    ) {}
+}
+
+
+export const _MatSelectMixinCommons: MatSelectCommonBehaviorCtor & typeof MatSelectCommons = mixinMatSelectCommons(
+    MatSelectCommons
+);
 
 export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior>>(
     base: T
@@ -253,23 +339,6 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             return this._selectionModel.selected[0];
         }
 
-        get positions(): ConnectedPosition[] {
-            return [
-                {
-                    originX: 'start',
-                    originY: 'bottom',
-                    overlayX: 'start',
-                    overlayY: 'top'
-                },
-                {
-                    originX: 'start',
-                    originY: 'top',
-                    overlayX: 'start',
-                    overlayY: 'bottom'
-                }
-            ];
-        }
-
         /** Focuses select control. */
         focus(): void {
             if (this._controlElementRef) {
@@ -296,7 +365,6 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             );
 
             this._keyManager.withHorizontalOrientation(null);
-            this._calculateOverlayPosition();
             this._highlightCorrectOption();
             this.changeDetectorRef.markForCheck();
 
@@ -393,27 +461,6 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
             if (!this.disabled && !this.readonly) {
                 this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
             }
-        }
-
-        /**
-         * Callback that is invoked when the overlay panel has been attached
-         * @hidden
-         */
-        _onAttached(): void {
-            this._overlayDir.positionChange.pipe(take(1)).subscribe(() => {
-                this.changeDetectorRef.detectChanges();
-                this._updateMaxHeight();
-                this._calculateOverlayOffsetX();
-
-                /**
-                 * todo: remove when fd-option-header exists and we dont need to calculate extra headers
-                 *      this._calculateOverlayPosition();
-                 *      this.changeDetectorRef.markForCheck();
-                 */
-                this._calculateOverlayPosition();
-                this.changeDetectorRef.markForCheck();
-                this._optionPanel.nativeElement.scrollTop = this._scrollTop;
-            });
         }
 
         /**
@@ -647,28 +694,6 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
         }
 
         /** @hidden */
-        private _calculateOverlayPosition(): void {
-            const itemHeight = this._getItemHeight();
-            const items = this._getItemCount();
-            const panelHeight = Math.min(items * itemHeight, this._calculatedMaxHeight);
-            const scrollContainerHeight = items * itemHeight;
-
-            // The farthest the panel can be scrolled before it hits the bottom
-            const maxScroll = scrollContainerHeight - panelHeight;
-
-            // If no value is selected we open the popup to the first item.
-            const selectedOptionOffset =
-                // tslint:disable-next-line:no-non-null-assertion
-                this.empty ? 0 : this._getOptionIndex(this.selected)!;
-
-            // We must maintain a scroll buffer so the selected option will be scrolled to the
-            // center of the overlay panel rather than the top.
-            const scrollBuffer = panelHeight / 2;
-            this._scrollTop = this._calculateOverlayScroll(selectedOptionOffset, scrollBuffer, maxScroll);
-            this._offsetY = 0;
-        }
-
-        /** @hidden */
         private _getOptionIndex(option: OptionComponent): number | undefined {
             return this._options.reduce((result: number | undefined, current: OptionComponent, index: number) => {
                 if (result !== undefined) {
@@ -677,138 +702,6 @@ export function mixinMatSelectCommons<T extends Constructor<HasMatCommonBehavior
 
                 return option === current ? index : undefined;
             }, undefined);
-        }
-
-        /**
-         * Calculates the scroll position of the select's overlay panel.
-         *
-         * Attempts to center the selected option in the panel. If the option is
-         * too high or too low in the panel to be scrolled to the center, it clamps the
-         * scroll position to the min or max scroll positions respectively.
-         *
-         *  @hidden
-         */
-        private _calculateOverlayScroll(selectedIndex: number, scrollBuffer: number, maxScroll: number): number {
-            const itemHeight = this._getItemHeight();
-            const optionOffsetFromScrollTop = itemHeight * selectedIndex;
-            const halfOptionHeight = itemHeight / 2;
-
-            // Starts at the optionOffsetFromScrollTop, which scrolls the option to the top of the
-            // scroll container, then subtracts the scroll buffer to scroll the option down to
-            // the center of the overlay panel. Half the option height must be re-added to the
-            // scrollTop so the option is centered based on its middle, not its top edge.
-            const optimalScrollPosition = optionOffsetFromScrollTop - scrollBuffer + halfOptionHeight;
-            return Math.min(Math.max(0, optimalScrollPosition), maxScroll);
-        }
-
-        /**
-         * Sets the x-offset of the overlay panel in relation to the trigger's top start corner.
-         * This must be adjusted to align the selected option text over the trigger text when
-         * the panel opens. Will change based on LTR or RTL text direction. Note that the offset
-         * can't be calculated until the panel has been attached, because we need to know the
-         * content width in order to constrain the panel within the viewport.
-         *
-         * @hidden
-         */
-        private _calculateOverlayOffsetX(): void {
-            const overlayRect = this._overlayDir.overlayRef.overlayElement.getBoundingClientRect();
-            const viewportSize = this.viewportRuler.getViewportSize();
-            const isRtl = this._isRtl();
-            const paddingWidth = 2;
-            let offsetX = -1;
-
-            // Invert the offset in LTR.
-            if (!isRtl) {
-                offsetX *= -1;
-            }
-
-            // Determine how much the select overflows on each side.
-            const leftOverflow = 0 - (overlayRect.left + offsetX - (isRtl ? paddingWidth : 0));
-            const rightOverflow = overlayRect.right + offsetX - viewportSize.width + (isRtl ? 0 : paddingWidth);
-
-            // If the element overflows on either side, reduce the offset to allow it to fit.
-            if (leftOverflow > 0) {
-                offsetX += leftOverflow + SELECT_PANEL_VIEWPORT_PADDING;
-            } else if (rightOverflow > 0) {
-                offsetX -= rightOverflow + SELECT_PANEL_VIEWPORT_PADDING;
-            }
-
-            // Set the offset directly in order to avoid having to go through change detection and
-            // potentially triggering "changed after it was checked" errors. Round the value to avoid
-            // blurry content in some browsers.
-            this._overlayDir.offsetX = Math.round(offsetX);
-            this._overlayDir.overlayRef.updatePosition();
-        }
-
-        /**
-         * Checks that the attempted overlay position will fit within the viewport.
-         * If it will not fit, tries to adjust the scroll position and the associated
-         * y-offset so the panel can open fully on-screen. If it still won't fit,
-         * sets the offset back to 0 to allow the fallback position to take over.
-         *
-         *  @hidden
-         */
-        private _checkOverlayWithinViewport(maxScroll: number): void {
-            const itemHeight = this._getItemHeight();
-            const viewportSize = this.viewportRuler.getViewportSize();
-
-            const topSpaceAvailable = this._triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
-            const bottomSpaceAvailable = viewportSize.height - this._triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
-
-            const panelHeightTop = Math.abs(this._offsetY);
-            const totalPanelHeight = Math.min(this._getItemCount() * itemHeight, this._calculatedMaxHeight);
-            const panelHeightBottom = totalPanelHeight - panelHeightTop - this._triggerRect.height;
-
-            if (panelHeightBottom > bottomSpaceAvailable) {
-                this._adjustPanelUp(panelHeightBottom, bottomSpaceAvailable);
-            } else if (panelHeightTop > topSpaceAvailable) {
-                this._adjustPanelDown(panelHeightTop, topSpaceAvailable, maxScroll);
-            } else {
-                this._transformOrigin = this._getOriginBasedOnOption();
-            }
-        }
-
-        /** @hidden */
-        private _adjustPanelUp(panelHeightBottom: number, bottomSpaceAvailable: number): void {
-            // Browsers ignore fractional scroll offsets, so we need to round.
-            const distanceBelowViewport = Math.round(panelHeightBottom - bottomSpaceAvailable);
-
-            // Scrolls the panel up by the distance it was extending past the boundary, then
-            // adjusts the offset by that amount to move the panel up into the viewport.
-            this._scrollTop -= distanceBelowViewport;
-            this._offsetY -= distanceBelowViewport;
-            this._transformOrigin = this._getOriginBasedOnOption();
-
-            // If the panel is scrolled to the very top, it won't be able to fit the panel
-            // by scrolling, so set the offset to 0 to allow the fallback position to take
-            // effect.
-            if (this._scrollTop <= 0) {
-                this._scrollTop = 0;
-                this._offsetY = 0;
-                this._transformOrigin = `50% bottom 0px`;
-            }
-        }
-
-        /** @hidden */
-        private _adjustPanelDown(panelHeightTop: number, topSpaceAvailable: number, maxScroll: number): void {
-            // Browsers ignore fractional scroll offsets, so we need to round.
-            const distanceAboveViewport = Math.round(panelHeightTop - topSpaceAvailable);
-
-            // Scrolls the panel down by the distance it was extending past the boundary, then
-            // adjusts the offset by that amount to move the panel down into the viewport.
-            this._scrollTop += distanceAboveViewport;
-            this._offsetY += distanceAboveViewport;
-            this._transformOrigin = this._getOriginBasedOnOption();
-
-            // If the panel is scrolled to the very bottom, it won't be able to fit the
-            // panel by scrolling, so set the offset to 0 to allow the fallback position
-            // to take effect.
-            if (this._scrollTop >= maxScroll) {
-                this._scrollTop = maxScroll;
-                this._offsetY = 0;
-                this._transformOrigin = `50% top 0px`;
-                return;
-            }
         }
 
         /**
