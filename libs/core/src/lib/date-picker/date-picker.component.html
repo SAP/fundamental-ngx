@@ -17,9 +17,9 @@
                 [compact]="compact"
                 [disabled]="disabled"
                 [placeholder]="placeholder"
-                [class.is-error]="isInvalidDateInput && useValidation"
+                [class.is-error]="_isInvalidDateInput && useValidation"
                 [attr.aria-label]="dateInputLabel"
-                [(ngModel)]="inputFieldDate"
+                [(ngModel)]="_inputFieldDate"
                 (ngModelChange)="handleInputChange($event)"
             />
             <span fd-input-group-addon [button]="true" [compact]="compact">

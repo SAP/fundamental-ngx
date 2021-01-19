@@ -107,7 +107,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         this._message = message;
         this._popoverFormMessage.message = message;
     }
-
+    /** @hidden */
     _message: string = null;
 
     /** The trigger events that will open/close the message box.
@@ -117,7 +117,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
-
+    /** @hidden */
     _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
 
     /**
@@ -281,8 +281,8 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
-    @ViewChild('inputGroupComponent', { read: ElementRef  })
-    inputGroupElement: ElementRef;
+    @ViewChild('inputGroupComponent', { read: ElementRef })
+    _inputGroupElement: ElementRef;
 
     /**
      * @hidden
@@ -554,7 +554,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     /**
      * @hidden
      * Method, which is responsible for transforming string to datetime, depending on type or
-     * validation the results are different. It also changes to state of isInvalidDateInput.
+     * validation the results are different. It also changes to state of _isInvalidDateInput.
      */
     handleInputChange(inputStr: string): void {
         const date = this._dateTimeAdapter.parse(inputStr, this._dateTimeFormats.parse.dateTimeInput);
@@ -625,7 +625,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
-        this._popoverFormMessage.init(this.inputGroupElement);
+        this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.message = this._message;
         this._popoverFormMessage.triggers = this._messageTriggers;
         this._popoverFormMessage.messageType = this._state;

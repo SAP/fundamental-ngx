@@ -127,6 +127,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
         this._message = message;
         this._popoverFormMessage.message = message;
     }
+    /** @hidden */
     _message: string = null;
 
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
@@ -135,6 +136,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
         this._messageType = messageType;
         this._popoverFormMessage.messageType = messageType;
     }
+    /** @hidden */
     _messageType: FormStates = null;
 
     /** The trigger events that will open/close the message box.
@@ -144,6 +146,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
+    /** @hidden */
     _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
 
     /**
@@ -211,7 +214,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
 
     /** @hidden */
     @ViewChild('inputGroupComponent', { read: ElementRef  })
-    inputGroupElement: ElementRef;
+    _inputGroupElement: ElementRef;
 
     /** @hidden Whether the input time is valid(success). Internal use. */
     isInvalidTimeInput = false;
@@ -489,7 +492,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
 
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
-        this._popoverFormMessage.init(this.inputGroupElement);
+        this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.message = this._message;
         this._popoverFormMessage.triggers = this._messageTriggers;
         this._popoverFormMessage.messageType = this._state;

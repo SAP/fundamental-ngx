@@ -87,6 +87,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._message = message;
         this._popoverFormMessage.message = message;
     }
+    /** @hidden */
     _message: string = null;
 
     /** The trigger events that will open/close the message box.
@@ -96,6 +97,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
+    /** @hidden */
     _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
 
     /** The currently selected CalendarDay model */
@@ -166,10 +168,11 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._state = state;
         this._popoverFormMessage.messageType = state;
     }
-
+    /** @hidden */
     get state(): FormStates {
         return this._state;
     }
+    /** @hidden */
     private _state: FormStates = null;
 
     /**
@@ -242,16 +245,17 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** @hidden */
     @ViewChild(CalendarComponent)
-    calendarComponent: CalendarComponent<D>;
+    _calendarComponent: CalendarComponent<D>;
 
+    /** @hidden */
     @ViewChild('inputGroupComponent', { read: ElementRef  })
-    inputGroupElement: ElementRef
+    _inputGroupElement: ElementRef
 
     /** @hidden The value of the input */
-    inputFieldDate: string = null;
+    _inputFieldDate: string = null;
 
     /** @hidden Whether the date input is invalid */
-    isInvalidDateInput = false;
+    _isInvalidDateInput = false;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -380,7 +384,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             this.selectedDateChange.emit(date);
             this.onChange(date);
             this.formatInputDate(date);
-            this.isInvalidDateInput = !this.isModelValid();
+            this._isInvalidDateInput = !this.isModelValid();
         }
     }
 
@@ -390,7 +394,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      */
     public formatInputDate(date: D): void {
         if (date) {
-            this.inputFieldDate = this._formatDate(date);
+            this._inputFieldDate = this._formatDate(date);
         }
     }
 
@@ -404,11 +408,11 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             (!this._dateTimeAdapter.datesEqual(this.selectedRangeDate.start, dates.start) ||
                 !this._dateTimeAdapter.datesEqual(this.selectedRangeDate.end, dates.end))
         ) {
-            this.inputFieldDate = this._formatDateRange(dates);
+            this._inputFieldDate = this._formatDateRange(dates);
             this.selectedRangeDate = { start: dates.start, end: dates.end };
             this.selectedRangeDateChange.emit(this.selectedRangeDate);
             this.onChange(this.selectedRangeDate);
-            this.isInvalidDateInput = !this.isModelValid();
+            this._isInvalidDateInput = !this.isModelValid();
         }
     }
 
@@ -461,7 +465,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     writeValue(selected: DateRange<D> | D): void {
         /** If written value is not defined, null, empty string */
         if (!selected) {
-            this.inputFieldDate = '';
+            this._inputFieldDate = '';
             this._changeDetectionRef.detectChanges();
             return;
         }
@@ -474,10 +478,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             this.selectedDate = selected;
 
             if (this._isSingleModelValid(this.selectedDate)) {
-                this.inputFieldDate = this._formatDate(selected);
+                this._inputFieldDate = this._formatDate(selected);
                 this._refreshCurrentlyDisplayedCalendarDate(selected);
             } else {
-                this.inputFieldDate = '';
+                this._inputFieldDate = '';
             }
         } else {
             /**
@@ -491,35 +495,35 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
                 if (this._isRangeModelValid(this.selectedRangeDate)) {
                     this._refreshCurrentlyDisplayedCalendarDate(selected.start);
-                    this.inputFieldDate = this._formatDateRange(selected);
+                    this._inputFieldDate = this._formatDateRange(selected);
                 } else {
-                    this.inputFieldDate = '';
+                    this._inputFieldDate = '';
                 }
             } else {
-                this.inputFieldDate = '';
+                this._inputFieldDate = '';
             }
         }
         this._changeDetectionRef.detectChanges();
-        this.isInvalidDateInput = !this.isModelValid();
+        this._isInvalidDateInput = !this.isModelValid();
     }
 
     /**
      * @hidden
      * Method, which is responsible for transforming string to date, depending on type or
-     * validation the results are different. It also changes to state of isInvalidDateInput
+     * validation the results are different. It also changes to state of _isInvalidDateInput
      */
     dateStringUpdate(dateStr: string): void {
-        this.inputFieldDate = dateStr;
+        this._inputFieldDate = dateStr;
         /** Case when there is single mode */
         if (this.type === 'single') {
             const date = this._dateTimeAdapter.parse(dateStr, this._dateTimeFormats.parse.dateInput);
 
             /** Check if dates are equal, if so, there is no need to make any changes */
             if (!this._dateTimeAdapter.datesEqual(date, this.selectedDate)) {
-                this.isInvalidDateInput = !this._isSingleModelValid(date);
+                this._isInvalidDateInput = !this._isSingleModelValid(date);
 
                 /** Check if date is valid, if it's not, there is no need to refresh calendar */
-                if (!this.isInvalidDateInput && dateStr) {
+                if (!this._isInvalidDateInput && dateStr) {
                     this._refreshCurrentlyDisplayedCalendarDate(date);
                 }
 
@@ -558,7 +562,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
                     selectedRangeDate = { start: startDate, end: endDate };
                 }
 
-                this.isInvalidDateInput = !this._isRangeModelValid(selectedRangeDate);
+                this._isInvalidDateInput = !this._isRangeModelValid(selectedRangeDate);
 
                 /** Whole object is changed, even it's invalid */
                 this.selectedRangeDate = selectedRangeDate;
@@ -574,7 +578,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         }
 
         if (!dateStr && this.allowNull) {
-            this.isInvalidDateInput = false;
+            this._isInvalidDateInput = false;
         }
     }
 
@@ -598,14 +602,14 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** Method that returns info if single model given is valid */
     private _isSingleModelValid(date: D): boolean {
-        return (this._isDateValid(date) && !this.disableFunction(date)) || (!this.inputFieldDate && this.allowNull);
+        return (this._isDateValid(date) && !this.disableFunction(date)) || (!this._inputFieldDate && this.allowNull);
     }
 
     /** Method that returns info if range date model given is valid */
     private _isRangeModelValid(fdRangeDate: DateRange<D>): boolean {
         return (
             (fdRangeDate && this._isStartDateValid(fdRangeDate.start) && this._isEndDateValid(fdRangeDate.end)) ||
-            (!this.inputFieldDate && this.allowNull)
+            (!this._inputFieldDate && this.allowNull)
         );
     }
 
@@ -626,8 +630,8 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** @hidden */
     private _refreshCurrentlyDisplayedCalendarDate(date: D): void {
-        if (this.calendarComponent) {
-            this.calendarComponent.setCurrentlyDisplayed(date);
+        if (this._calendarComponent) {
+            this._calendarComponent.setCurrentlyDisplayed(date);
         }
     }
 
@@ -645,7 +649,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
-        this._popoverFormMessage.init(this.inputGroupElement);
+        this._popoverFormMessage.init(this._inputGroupElement);
         this._popoverFormMessage.message = this._message;
         this._popoverFormMessage.triggers = this._messageTriggers;
         this._popoverFormMessage.messageType = this._state;
