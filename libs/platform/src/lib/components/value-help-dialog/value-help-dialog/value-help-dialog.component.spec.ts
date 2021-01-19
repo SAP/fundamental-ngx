@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
 import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
+import { RtlService } from '@fundamental-ngx/core';
 
 @Component({
   template: `
@@ -71,6 +72,9 @@ describe('PlatformValueHelpDialogComponent', () => {
       ],
       declarations: [
         TestWrapperComponent
+      ],
+      providers: [
+        RtlService
       ]
     }).overrideComponent(
       PlatformValueHelpDialogComponent,
