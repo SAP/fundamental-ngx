@@ -26,6 +26,7 @@ import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-d
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
 import { isNodeApproved } from '@fundamental-ngx/platform';
+import { CdkDrag, CdkDragMove } from '@angular/cdk/drag-drop';
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any };
 
@@ -92,6 +93,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _approvalProcess: ApprovalProcess;
 
     /** @hidden */
+    _initialApprovalProcess: ApprovalProcess;
+
+    /** @hidden */
     _graph: ApprovalFlowGraph;
 
     /** @hidden */
@@ -139,6 +143,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /**  @hidden */
     _messages: { text: string; type: 'watchersChangeSuccess' | 'nodeAddSuccess' | 'nodeRemove' | 'error' }[] = [];
 
+    // /**  @hidden */
+    // _draggedNode: ApprovalGraphNode;
+
     private subscriptions = new Subscription();
 
     /** @hidden */
@@ -163,20 +170,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         this.subscriptions.add(this.dataSource.fetch().subscribe(approvalProcess => {
             console.log('Got approval process data from DataSource, nodes count', approvalProcess.nodes.length);
-            this._approvalProcess = approvalProcess;
-            this._nodeParentsMap = {};
-            this._nodeMetaMap = {};
-            this._graph = this._buildNodeTree(approvalProcess.nodes);
-            const graphNodes = this._graph.map(a => a.nodes).reduce((a, b) => a.concat(b));
-            const blankLength = graphNodes.filter(n => n.blank).length;
-            console.log(
-                `graph nodes length ${graphNodes.length}`,
-                graphNodes.length !== approvalProcess.nodes.length && !blankLength ? 'ERROR: rendered more nodes than provided' : `${blankLength} blank nodes`
-            );
-            this._cdr.detectChanges();
-            this._resetCarousel();
-            this._resetAddButtons();
-            this._checkCarouselStatus();
+            this.buildView(approvalProcess);
         }));
         this.subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
             this._dir = isRtl ? 'rtl' : 'ltr';
@@ -184,6 +178,25 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }));
 
         this._listenOnResize();
+    }
+
+    buildView(approvalProcess: ApprovalProcess, options: { resetCarousel: boolean } = { resetCarousel: true }): void {
+        this._approvalProcess = approvalProcess;
+        this._nodeParentsMap = {};
+        this._nodeMetaMap = {};
+        this._graph = this._buildNodeTree(approvalProcess.nodes);
+        const graphNodes = this._graph.map(a => a.nodes).reduce((a, b) => a.concat(b));
+        const blankLength = graphNodes.filter(n => n.blank).length;
+        console.log(
+            `graph nodes length ${graphNodes.length}`,
+            graphNodes.length !== approvalProcess.nodes.length && !blankLength ? 'ERROR: rendered more nodes than provided' : `${blankLength} blank nodes`
+        );
+        this._cdr.detectChanges();
+        if (options.resetCarousel) {
+            this._resetCarousel();
+            this._resetAddButtons();
+            this._checkCarouselStatus();
+        }
     }
 
     onNodeClick(node: ApprovalNode): void {
@@ -333,7 +346,24 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._usersForWatchersList = users;
             this._selectedWatchers = [...this._approvalProcess.watchers];
             this._isEditMode = true;
+            this._initialApprovalProcess = JSON.parse(JSON.stringify(this._approvalProcess));
         });
+    }
+
+    _saveEditModeChanges(): void {
+        this._initialApprovalProcess = null;
+        this._isEditMode = false;
+        this._messages = [];
+        this._checkWatchersUpdates();
+        this.dataSource.updateApprovals(this._approvalProcess.nodes);
+    }
+
+    _exitEditMode(): void {
+        this._approvalProcess = JSON.parse(JSON.stringify(this._initialApprovalProcess));
+        this._initialApprovalProcess = null;
+        this._isEditMode = false;
+        this._messages = [];
+        this.buildView(this._approvalProcess);
     }
 
     _checkWatchersUpdates(): void {
@@ -387,11 +417,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 parent.targets.push(node.id);
                 this._updateNode(parent);
             }
-            this._approvalProcess.nodes.push(node);
-            // console.log('add new node', node);
-            // console.log('saving new graph', this._approvalProcess.nodes);
             this._messages.push({ text: 'Node added', type: 'nodeAddSuccess' });
-            this.updateApprovalsInDS(this._approvalProcess.nodes);
+            this._approvalProcess.nodes.push(node);
+            this.buildView(this._approvalProcess);
         });
     }
 
@@ -408,14 +436,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 ...this._defaultDialogOptions
             }
         });
-        dialog.afterClosed.subscribe((updatedNode: ApprovalGraphNode) => {
+        dialog.afterClosed.subscribe((data: { node }) => {
+            const updatedNode = data.node;
             if (!updatedNode) {
                 return;
             }
-            console.log('updating node', updatedNode);
             this._updateNode(updatedNode);
-            console.log('saving new graph', this._approvalProcess.nodes);
-            this.updateApprovalsInDS(this._approvalProcess.nodes);
+            this.buildView(this._approvalProcess, { resetCarousel: false });
         });
     }
 
@@ -430,8 +457,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const index = _nodes.findIndex(n => n.id === node.id);
         const parent = _nodes.filter(n => n.targets.includes(node.id));
         const targets = _nodes.filter(n => node.targets.includes(n.id));
-        // console.log('parent', parent);
-        // console.log('children', children);
         _nodes.splice(index, 1);
         parent.forEach(n => {
             let newTargets = n.targets.filter(t => t !== node.id);
@@ -447,9 +472,45 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
             n.targets = newTargets;
         });
-        // console.log('saving new graph', _nodes);
         this._messages.push({ text: 'Watchers changed', type: 'nodeRemove' });
-        this.updateApprovalsInDS(_nodes);
+        this._approvalProcess.nodes = _nodes;
+        this.buildView(this._approvalProcess);
+    }
+
+    onNodeDrop(node: ApprovalGraphNode, source: CdkDrag): void {
+        const dropTarget = this.nodeComponents.find(n => n._isDropZoneActive);
+        if (!dropTarget) {
+            return;
+        }
+        console.log('onNodeDrop', node, source);
+        console.log('dropTarget', dropTarget);
+        // this.deleteNode(node);
+        source.reset();
+        if (dropTarget.blank) {
+            const nodeMeta = this._nodeMetaMap[node.id];
+            nodeMeta.prevHNode.targets = [...node.targets];
+            const oldNodeMeta = this._nodeMetaMap[dropTarget.node.id];
+            const targetId = oldNodeMeta.nextHNode?.id || oldNodeMeta.prevHNode?.id;
+            node.targets = [targetId];
+            if (oldNodeMeta.prevHNode.targets.includes(targetId)) {
+                oldNodeMeta.prevHNode.targets = oldNodeMeta.prevHNode.targets.filter(t => t !== targetId);
+                oldNodeMeta.prevHNode.targets.push(node.id);
+            }
+            this.buildView(this._approvalProcess, { resetCarousel: false });
+        }
+        this.nodeComponents.forEach(n => {
+            n._setDragZoneStatus(false);
+        });
+    }
+
+    onNodeDrag(node: ApprovalGraphNode, event: CdkDragMove): void {
+        const draggedNodeComp = this.nodeComponents.find(comp => comp.node === node);
+        const draggedNodeDimensions = draggedNodeComp._nativeElement.getBoundingClientRect();
+        console.log('onNodeDrag', node, event);
+        // console.log('check if dragged node in drop zone');
+        this.nodeComponents.filter(n => Boolean(n.dropZone)).forEach(n => {
+            n._checkIfDrragedNodeInDropZone(draggedNodeDimensions);
+        });
     }
 
     /** @hidden */
@@ -689,7 +750,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             approvalFlowDataSource: this.dataSource,
             userDetailsTemplate: this.userDetailsTemplate,
             rtl: this._isRTL
-        }
+        };
     }
 }
 

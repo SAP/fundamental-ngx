@@ -26,6 +26,7 @@ import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-d
 import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list/approval-flow-user-list.component';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
         ComboboxModule,
         SelectModule,
         DatePickerModule,
-        FormModule
+        FormModule,
+        DragDropModule
     ],
     exports: [
         ApprovalFlowComponent

@@ -276,3 +276,20 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         left: auto;
     }
 }
+
+//.#{$block}--blank {
+.#{$block}__drop-zone {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 4px;
+
+    &.#{$block}__drop-zone--active {
+        background: #E5F0FA;
+        border: 2px solid #0854A0;
+    }
+}
+
+//}

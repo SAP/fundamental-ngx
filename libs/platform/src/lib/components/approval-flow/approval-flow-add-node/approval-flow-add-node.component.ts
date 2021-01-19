@@ -41,7 +41,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     _approverTypes = [SINGLE_USER, ANYONE, EVERYONE];
     _dueDate = FdDate.getNow();
     _selectApproversMode = false;
-    _userDetailsMode = false;
     _approvers: ApprovalUser[] = [];
     _filteredApprovers: ApprovalUser[] = [];
     _selectedApprovers: ApprovalUser[] = [];
@@ -140,7 +139,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
 
     /** @hidden */
     _setFilteredApprovers(users: ApprovalUser[]): void {
-        console.log('_setFilteredApprovers');
         this._filteredApprovers = [...users];
         this._cdr.detectChanges();
     }

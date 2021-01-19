@@ -3,23 +3,36 @@
     <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
     <div *ngIf="renderCarouselEndMarker" class="approval-flow-node__carousel-end-marker"></div>
     <div *ngIf="isEdit" class="approval-flow-node__edit-controls" (click)="$event.stopPropagation()">
-        <fd-checkbox [(ngModel)]="_isSelected" [compact]="true" (ngModelChange)="_onCheck(_isSelected)"></fd-checkbox>
-        <button class="approval-flow-node__menu-button" [compact]="true" fd-button fdType="transparent" glyph="overflow" [fdMenuTrigger]="menu"></button>
+        <fd-checkbox
+            [(ngModel)]="_isSelected"
+            [compact]="true"
+            [disabled]="_isEditActionsAvailable"
+            (ngModelChange)="_onCheck(_isSelected)"
+        ></fd-checkbox>
+        <button
+            class="approval-flow-node__menu-button"
+            fd-button
+            fdType="transparent"
+            glyph="overflow"
+            [compact]="true"
+            [fdMenuTrigger]="menu"
+            [disabled]="_isEditActionsAvailable"
+        ></button>
 
         <fd-menu #menu [compact]="true" placement="bottom-end">
-            <li fd-menu-item (click)="onAdd.emit('before')">
+            <li fd-menu-item (click)="menu.close(); onAdd.emit('before')">
                 <div fd-menu-interactive>Add approvers before</div>
             </li>
-            <li fd-menu-item (click)="onAdd.emit('after')">
+            <li fd-menu-item (click)="menu.close(); onAdd.emit('after')">
                 <div fd-menu-interactive>Add approvers after</div>
             </li>
-            <li fd-menu-item (click)="onAdd.emit('parallel')">
+            <li fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
                 <div fd-menu-interactive>Add parallel approvers</div>
             </li>
-            <li fd-menu-item (click)="onEdit.emit()">
+            <li fd-menu-item (click)="menu.close(); onEdit.emit()" *ngIf="_isNotStarted">
                 <div fd-menu-interactive>Edit</div>
             </li>
-            <li fd-menu-item (click)="onDelete.emit()">
+            <li fd-menu-item (click)="menu.close(); onDelete.emit()">
                 <div fd-menu-interactive>Delete</div>
             </li>
         </fd-menu>
@@ -70,8 +83,10 @@
         [class.approval-flow-node__add--blank]="blank"
         [class.approval-flow-node__add--before]="!blank && canAddNodeBefore"
         [class.approval-flow-node__add--after]="!blank && canAddNodeAfter"
+        [style.visibility]="_isDropZoneActive ? 'hidden' : ''"
         (click)="$event.stopPropagation(); onAdd.emit('after')"
     >
         <fd-icon glyph="add"></fd-icon>
     </button>
+    <div class="approval-flow-node__drop-zone" [class.approval-flow-node__drop-zone--active]="_isDropZoneActive" #dropZone *ngIf="blank"></div>
 </ng-template>

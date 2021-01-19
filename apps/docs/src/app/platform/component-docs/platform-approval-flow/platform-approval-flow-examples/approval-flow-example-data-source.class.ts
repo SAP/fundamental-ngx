@@ -227,7 +227,7 @@ const simpleGraph: ApprovalProcess = {
             name: 'node name',
             description: 'node description',
             approvers: [getRandomUser()],
-            status: 'in progress',
+            status: 'not started',
             targets: [],
             dueDate: new Date(),
             createDate: new Date()

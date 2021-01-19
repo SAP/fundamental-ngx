@@ -234,6 +234,10 @@ $carousel-controls-height--edit-mode: 126px;
     padding: .5rem;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
+
+    .fd-button--emphasized {
+        margin-right: .5rem;
+    }
 }
 
 fd-toolbar {

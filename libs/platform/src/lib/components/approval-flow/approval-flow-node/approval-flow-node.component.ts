@@ -4,11 +4,13 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    HostBinding, HostListener,
+    HostBinding,
+    HostListener,
     Input,
     OnChanges,
     OnInit,
-    Output
+    Output,
+    ViewChild
 } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core';
 
@@ -105,8 +107,10 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
         return Boolean(this.blank && this.meta?.nextHNode);
     }
 
+    _isDropZoneActive = false;
+
     /** @hidden */
-    // make public input?
+        // make public input?
     _isSelected = false;
 
     /** @hidden */
@@ -122,12 +126,34 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     @Output() onDelete = new EventEmitter<void>();
 
+    @ViewChild('dropZone') dropZone: ElementRef;
+
     /** @hidden */
-    constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {}
+    @HostListener('click')
+    _onClick(): void {
+        if (this.node.blank) {
+            return;
+        }
+        this.onNodeClick.emit();
+    }
+
+    /** @hidden */
+    constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {
+    }
 
     /** @hidden */
     get _nativeElement(): HTMLElement {
         return this.elRef.nativeElement;
+    }
+
+    /** @hidden */
+    get _isNotStarted(): boolean {
+        return this.node.status === 'not started';
+    }
+
+    /** @hidden */
+    get _isEditActionsAvailable(): boolean {
+        return this.node.status === 'approved' || this.node.status === 'rejected';
     }
 
     /** @hidden */
@@ -151,12 +177,23 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    @HostListener('click')
-    _onClick(): void {
-        if (this.node.blank) {
+    _setDragZoneStatus(status: boolean): void {
+        this._isDropZoneActive = status;
+        this.cd.detectChanges();
+    }
+
+    /** @hidden */
+    _checkIfDrragedNodeInDropZone(nodeRect: DOMRect): void {
+        const dropZoneRect = this.dropZone.nativeElement.getBoundingClientRect();
+        console.log('dropZoneRect', dropZoneRect);
+        if (dropZoneRect.top + dropZoneRect.height > nodeRect.top
+            && dropZoneRect.left + dropZoneRect.width > nodeRect.left
+            && dropZoneRect.bottom - dropZoneRect.height < nodeRect.bottom
+            && dropZoneRect.right - dropZoneRect.width < nodeRect.right) {
+            this._setDragZoneStatus(true);
             return;
         }
-        this.onNodeClick.emit();
+        this._setDragZoneStatus(false);
     }
 
     /** @hidden */

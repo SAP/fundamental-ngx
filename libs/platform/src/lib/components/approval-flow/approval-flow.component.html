@@ -43,9 +43,9 @@
             [displayFn]="_displayUserFn"
             [showAllButton]="false"
             [(ngModel)]="_selectedWatchers"
-            (openChange)="!$event && _checkWatchersUpdates()"
-            (selectedChange)="_checkWatchersUpdates()"
         ></fd-multi-input>
+<!--        (openChange)="!$event && _checkWatchersUpdates()"-->
+<!--        (selectedChange)="_checkWatchersUpdates()"-->
     </div>
 </div>
 
@@ -76,6 +76,8 @@
                 <ng-container
                     *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last">
                     <fdp-approval-flow-node
+                        cdkDrag
+                        [cdkDragDisabled]="!_isEditMode || node.status !== 'not started'"
                         [attr.dir]="_dir"
                         [attr.tabindex]="node.blank ? -1 : 0"
                         [node]="node"
@@ -97,6 +99,8 @@
                         (onDelete)="deleteNode(node)"
                         (keyup.enter)="onNodeClick(node)"
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
+                        (cdkDragReleased)="onNodeDrop(node, $event.source)"
+                        (cdkDragMoved)="onNodeDrag(node, $event)"
                     ></fdp-approval-flow-node>
                 </ng-container>
             </div>
@@ -104,8 +108,8 @@
     </div>
 </div>
 <div class="approval-flow__edit-mode-footer" *ngIf="_isEditMode">
-    <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_isEditMode = false"></button>
-    <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_isEditMode = false"></button>
+    <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_saveEditModeChanges()"></button>
+    <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_exitEditMode()"></button>
 </div>
 
 <ng-template let-messageToast #reminderTemplate>
