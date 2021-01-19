@@ -4,13 +4,15 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class FormattedTextPo extends CoreBaseComponentPo {
     private url = '/formatted-text';
     root = '#page-content';
-    paragraphWithLink = 'fd-formatted-text p a';
+    convertedLinks = 'fd-formatted-text a';
+    redListItem = 'fd-formatted-text ol li';
 
-    outputTitle = 'h1';
+    inputHtmlText = 'fd-formatted-text-example div';
+    secondInputHtmlText = 'fd-formatted-text-links-example div';
 
     open(): void {
         super.open(this.url);
-        waitForPresent(this.root);
-        waitForElDisplayed(this.root);
+        waitForPresent(this.inputHtmlText);
+        waitForElDisplayed(this.inputHtmlText);
     }
 }

@@ -6,6 +6,10 @@ export function currentPlatformName(): string {
     return browser.capabilities.platformName;
 }
 
+export function getBaseURL(): string {
+    return browser.options.baseUrl;
+}
+
 export function open(path: string = ''): void {
     browser.url(path);
 }
