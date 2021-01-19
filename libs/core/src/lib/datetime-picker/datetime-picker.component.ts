@@ -184,11 +184,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
         this._state = state;
         this._popoverFormMessage.messageType = state;
     }
-
     get state(): FormStates {
         return this._state;
     }
-
+    /** @hidden */
     private _state: FormStates = null;
 
     /**
