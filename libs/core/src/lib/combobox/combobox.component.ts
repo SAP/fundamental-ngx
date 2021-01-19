@@ -485,7 +485,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
         this.filterHighlight = false;
-        console.log(this.open);
         if (this.open && this.listComponent) {
             this.listComponent.setItemActive(0);
         }

@@ -50,7 +50,6 @@
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
             [attr.aria-owns]="autoComplete && !mobile ? (id + '-result') : null"
             [attr.aria-haspopup]="autoComplete && !mobile"
-            [attr.aria-expanded]="!mobile && open && displayedValues.length"
             fd-input-group-input
             tabindex="0"
             [id]="id"
@@ -77,7 +76,7 @@
         class="fdp-combobox__list"
         [id]="id + '-result'"
         role="listbox"
-        [attr.aria-labelledby]="comboboxId + '-search'"
+        [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'">
         <ng-content></ng-content>
