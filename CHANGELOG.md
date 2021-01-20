@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.25.4](https://github.com/SAP/fundamental-ngx/compare/v0.25.3...v0.25.4) (2021-01-20)
+
+
+### Bug Fixes
+
+* (Core) byline list content typo ([#4416](https://github.com/SAP/fundamental-ngx/issues/4416)) ([3c5a927](https://github.com/SAP/fundamental-ngx/commit/3c5a927d44d25ef90d6c37e7b45b1b78f31a11b2))
+
 ### [0.25.3](https://github.com/SAP/fundamental-ngx/compare/v0.25.2...v0.25.3) (2021-01-14)
 
 
