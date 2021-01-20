@@ -1,4 +1,4 @@
-<fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayout="XL2-L2-M2-S1">
+<fdp-form-group #fg1 [formGroup]="form" mainTitle="XL2-L2-M2-S1" columnLayout="XL2-L2-M2-S1">
     <fdp-form-field
         #ff1
         id="basicTextarea"
@@ -11,7 +11,7 @@
     >
         <fdp-textarea name="basicTextarea" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field #ff2 id="seasons0" label="My favourite Seasons:" rank="2">
+    <fdp-form-field #ff2 id="seasons0" label="My favourite Seasons:" column="1" rank="2">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons0"
@@ -56,7 +56,7 @@
 </fdp-form-group>
 <br />
 
-<fdp-form-group #fg2 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L2-M1-S1" columnLayout="XL2-L2-M1-S1">
+<fdp-form-group #fg2 [formGroup]="form" mainTitle="XL2-L2-M1-S1" columnLayout="XL2-L2-M1-S1">
     <fdp-form-field
         #ff1
         id="basicTextarea4"
@@ -95,7 +95,7 @@
         label="Basic Textarea with Platform Forms 5"
         [placeholder]="'Start entering detailed description'"
         hint="This is tooltip help"
-        zone="zRight"
+        column="2"
         rank="5"
     >
         <fdp-textarea name="basicTextarea7" [formControl]="ff5.formControl"></fdp-textarea>
@@ -113,7 +113,7 @@
     </fdp-form-field>
 </fdp-form-group>
 
-<fdp-form-group #fg3 [multiLayout]="true" [formGroup]="form" mainTitle="XL2-L1-M1-S1" columnLayout="XL2-L1-M1-S1">
+<fdp-form-group #fg3 [formGroup]="form" mainTitle="XL2-L1-M1-S1" columnLayout="XL2-L1-M1-S1">
     <fdp-form-field
         #ff1
         id="basicTextarea8"
@@ -126,7 +126,7 @@
     >
         <fdp-textarea name="basicTextarea8" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field #ff2 id="seasons2" label="My favourite Seasons:" rank="2">
+    <fdp-form-field #ff2 id="seasons2" label="My favourite Seasons:" column="1" rank="2">
         <fdp-checkbox-group
             [list]="seasons"
             name="seasons2"

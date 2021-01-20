@@ -1,6 +1,6 @@
 <h3>Template Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in ngModel directive.</p>
-<fdp-form-group multiLayout="true" columnLayout="XL2-L2-M1-S1">
+<fdp-form-group columnLayout="XL2-L2-M1-S1">
     <fdp-form-field id="sirius" label="Sirius" column="1" rank="1">
         <fdp-checkbox name="sirius-cb" value="sirius" title="sirius" [(ngModel)]="field1"></fdp-checkbox>
     </fdp-form-field>
@@ -17,7 +17,7 @@
 <!--Reactive form example-->
 <h3>Reactive/Model Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in form-control array.</p>
-<fdp-form-group #rmsfg multiLayout="true" [formGroup]="form1" [object]="form1Data" columnLayout="XL2-L2-M1-S1">
+<fdp-form-group #rmsfg [formGroup]="form1" [object]="form1Data" columnLayout="XL2-L2-M1-S1">
     <fdp-form-field #rfield1 id="einstein" label="Einstein" column="1" rank="1">
         <fdp-checkbox name="einstein-cb" value="einstein" contentDensity="compact" title="Albert Einstein"
             [formControl]="rfield1.formControl"></fdp-checkbox>

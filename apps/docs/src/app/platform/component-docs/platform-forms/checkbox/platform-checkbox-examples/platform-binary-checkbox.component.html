@@ -1,5 +1,5 @@
 <h3>Binary Checkbox in Template Driven Form</h3>
-<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
+<fdp-form-group [noLabelLayout]="false">
     <fdp-form-field id="yellow" label="Yellow" [noLabelLayout]="true" rank="4" [editable]="true">
         <fdp-checkbox [name]="'yellow-cb'" [isBinary]="true" (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)" (change)="changeFunction($event)"
@@ -23,7 +23,7 @@
 <br />
 
 <h3>Binary Checkbox in Reactive/Model Driven Form</h3>
-<fdp-form-group multiLayout="true" [formGroup]="customForm" [object]="data">
+<fdp-form-group [formGroup]="customForm" [object]="data">
     <fdp-form-field #red id="red" label="Red" rank="4">
         <fdp-checkbox name="red-cb" [isBinary]="true" title="Red" (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)" (change)="changeFunction($event)"

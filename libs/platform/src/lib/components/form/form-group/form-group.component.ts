@@ -63,21 +63,21 @@ export const formGroupProvider: Provider = {
  * Just to get the idea about the structure without actual input components inside
  *
  * ```html
- * <fdp-form-group [hintPlacement]="'inline'" [multiLayout]="true">
- *    <fdp-form-field [id]="'Field A'" [rank]="10" zone="zLeft">
+ * <fdp-form-group [hintPlacement]="'inline'" columnLayout="XL2-L2-M1-S1">
+ *    <fdp-form-field [id]="'Field A'" [rank]="10" column="1">
  *    </fdp-form-field>
  *
- *    <fdp-form-field [id]="'Field B'" [rank]="30" zone="zLeft">
+ *    <fdp-form-field [id]="'Field B'" [rank]="30" column="1">
  *    </fdp-form-field>
  *
- *    <fdp-form-field [id]="'Field C'"  [rank]="20" zone="zLeft">
+ *    <fdp-form-field [id]="'Field C'"  [rank]="20" column="1">
  *    </fdp-form-field>
  *
- *    <fdp-form-field [id]="Field D"  [rank]="20" zone="zRight">
+ *    <fdp-form-field [id]="Field D"  [rank]="20" column="2">
  *    </fdp-form-field>
  *
  *
- *    <fdp-form-field [id]="'Field E'" [rank]="30" zone="zRight">
+ *    <fdp-form-field [id]="'Field E'" [rank]="30" column="2">
  *    </fdp-form-field>
  * </fdp-form-group>
 
@@ -86,11 +86,11 @@ export const formGroupProvider: Provider = {
  *
  *
  * Which can be translated like this
- * [Field A] - Left, rank 10
- * [Field B] - Left, rank 30
- * [Field C] - Left, rank 20
- * [Field D] - Right, rank 20
- * [Field E] - Right, rank 30
+ * [Field A] - First column, rank 10
+ * [Field B] - First column, rank 30
+ * [Field C] - First column, rank 20
+ * [Field D] - Second column, rank 20
+ * [Field E] - Second column, rank 30
  *
  * What we expect that it creates following form with two column layout:
  * [Field A]      [Field D]
@@ -189,15 +189,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     @Input()
-    get multiLayout(): boolean {
-        return this._multiLayout;
-    }
-
-    set multiLayout(value: boolean) {
-        this._multiLayout = coerceBooleanProperty(value);
-    }
-
-    @Input()
     get useForm(): boolean {
         return this._useForm;
     }
@@ -244,7 +235,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     protected formChildren: Array<FormField | FormFieldGroup> = [];
 
     private _useForm = false;
-    private _multiLayout = false;
     private _hintPlacement: HintPlacement = 'right';
 
     protected _destroyed = new Subject<void>();
