@@ -1,16 +1,9 @@
-// Todo: Remove once there is responsive layout in fundamental styles.
-// @import '~flexboxgrid/dist/flexboxgrid.min';
 @import '~fundamental-styles/dist/form-layout-grid';
 @import '~fundamental-styles/dist/section';
 @import '~fundamental-styles/dist/form-group';
 @import '~fundamental-styles/dist/form-header';
 
-
 .fd-form-layout-grid-container {
-    padding: 1rem;
-}
-
-.form-group {
     padding: 1rem;
 }
 
