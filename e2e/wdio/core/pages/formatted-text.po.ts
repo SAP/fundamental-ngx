@@ -3,7 +3,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FormattedTextPo extends CoreBaseComponentPo {
     private url = '/formatted-text';
-    root = '#page-content';
     convertedLinks = 'fd-formatted-text a';
     redListItem = 'fd-formatted-text ol li';
 
