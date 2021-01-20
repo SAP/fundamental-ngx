@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.87...v0.26.0-rc.88) (2021-01-20)
+
+
+### Bug Fixes
+
+* (Core) Add another way to put resize boundaries ([#4388](https://github.com/SAP/fundamental-ngx/issues/4388)) ([7dee901](https://github.com/SAP/fundamental-ngx/commit/7dee901f30f657c8c9f3fe3c769ca46486154167))
+
 ## [0.26.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.26.0-rc.86...v0.26.0-rc.87) (2021-01-20)
 
 
