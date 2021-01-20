@@ -187,16 +187,16 @@ export function executeScript2(selector): string {
     }, selector, attrName);
 }
 
-export function executeScriptBeforeTagAttr(selector, attrName): string {
-    return browser.execute(function(selector, attrName) {
-        return (window.getComputedStyle(document.querySelector(selector), ':before')[attrName]);
-    }, selector, attrName);
+export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
+    return browser.execute(function(selector, attrName, index) {
+        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':before')[attrName]);
+    }, selector, attrName, index);
 }
 
-export function executeScriptAfterTagAttr(selector, attrName): string {
-    return browser.execute(function(selector, attrName) {
-        return (window.getComputedStyle(document.querySelector(selector), ':after')[attrName]);
-    }, selector, attrName);
+export function executeScriptAfterTagAttr(selector: string, attrName: string, index: number = 0): string {
+    return browser.execute(function(selector, attrName, index) {
+        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':after')[attrName]);
+    }, selector, attrName, index);
 }
 
 export function getElementArrayLength(selector: string): number {
@@ -225,8 +225,8 @@ export function isElementClickable(selector: string, index: number = 0): boolean
     return $$(selector)[index].isClickable();
 }
 
-export function doesItExist(selector: string): boolean {
-    return $(selector).isExisting();
+export function doesItExist(selector: string, index: number = 0): boolean {
+    return $$(selector)[index].isExisting();
 }
 
 export function getCurrentUrl(): string {
