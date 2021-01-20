@@ -2,7 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-quick-view-popover-example',
-    templateUrl: './quick-view-popover-example.component.html'
+    templateUrl: './quick-view-popover-example.component.html',
+    styles: [`.fd-docs-flex-display-helper {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                flex-flow: row wrap;
+                width: 100%;
+            }
+    `]
 })
 export class QuickViewPopoverExampleComponent {
     data = {
