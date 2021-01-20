@@ -1,15 +1,15 @@
 import { BaseComponentPo } from './base-component.po';
 import { click, scrollIntoView, sendKeys, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
-
 export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
-    expandedDropdown = '.fd-list'
-    activeDropdownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]'
+    mobileMainInput = '[ng-reflect-id="fdp-id-mobile"] input';
+    expandedDropdown = '.fd-list';
+    activeDropdownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]';
     allDropdownButtons = 'button[ng-reflect-glyph="value-help"]';
-    disabledDropdownButtons = '[ng-reflect-disabled="true"] button[ng-reflect-glyph="value-help"]'
+    disabledDropdownButtons = '[ng-reflect-disabled="true"] button[ng-reflect-glyph="value-help"]';
     activeInputs = '.fd-multi-input-field [ng-reflect-disabled="false"] input';
-    mobileInput = 'div[role="dialog"] input'
+    mobileInput = 'div[role="dialog"] input';
     disabledInputs = '.fdp-multi-input [ng-reflect-disabled="true"] input';
     filledInput = '[ng-reflect-disabled="false"] .fd-tokenizer__inner';
     approveButton = '[fdtype="emphasized"]';
@@ -17,7 +17,7 @@ export class MultiInputPo extends BaseComponentPo {
     groupDropdown = '#fdp-id-grouped button';
     options = 'fdp-standard-list-item';
     dropdownOption = 'ul[role=list] [role="listitem"] li ';
-    selectedToken = 'span[role=\'button\']'
+    selectedToken = 'span[role=\'button\']';
     dropdownOptionText = this.dropdownOption + 'span';
     dropdownOptionTextValueHelp = this.dropdownOption + 'div[class="fd-list__title ng-star-inserted"]';
 
