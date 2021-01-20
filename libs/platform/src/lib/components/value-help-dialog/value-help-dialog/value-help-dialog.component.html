@@ -239,7 +239,7 @@
 
 <ng-template #selectionContent>
     <fdp-select-tab
-        [selected]="value.selected"
+        [selected]="selectedItems"
         [uid]="id"
         [displayedData]="_displayedData"
         [tabTitle]="selectTabTitle"
@@ -258,8 +258,8 @@
 <ng-template #defineConditionsContent>
     <fdp-define-tab
         [strategyLabels]="defineStrategyLabels"
-        [included]="value.included"
-        [excluded]="value.excluded"
+        [included]="includedItems"
+        [excluded]="excludedItems"
         [uid]="id"
         [tabTitle]="defineTabTitle"
         [mobile]="mobile"
