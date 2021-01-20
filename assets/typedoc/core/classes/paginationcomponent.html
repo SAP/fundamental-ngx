@@ -30,35 +30,19 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="currentpage" class="tsd-anchor"></a>
-		<h3>current<wbr>Page</h3>
+		<a name="displaytexttemplate" class="tsd-anchor"></a>
+		<h3>display<wbr>Text<wbr>Template</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">current<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<div class="tsd-signature tsd-kind-icon">display<wbr>Text<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L53">libs/core/src/lib/pagination/pagination.component.ts:53</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L118">libs/core/src/lib/pagination/pagination.component.ts:118</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Represents the current page number.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="displaytext" class="tsd-anchor"></a>
-		<h3>display<wbr>Text</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">display<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;items&quot;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L68">libs/core/src/lib/pagination/pagination.component.ts:68</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The text appended to the total number of items.
-				The default text is set to &#39;items&#39;</p>
+				<p>The template show range of item by current page of items.
+				Default view: Showing {{ from }}-{{ to }} of {{ of }}</p>
 			</div>
 		</div>
 	</section>
@@ -69,7 +53,7 @@
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Total<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L61">libs/core/src/lib/pagination/pagination.component.ts:61</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L111">libs/core/src/lib/pagination/pagination.component.ts:111</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -79,18 +63,35 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="itemsperpage" class="tsd-anchor"></a>
-		<h3>items<wbr>Per<wbr>Page</h3>
+		<a name="itemsperpagelabel" class="tsd-anchor"></a>
+		<h3>items<wbr>Per<wbr>Page<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">items<wbr>Per<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<div class="tsd-signature tsd-kind-icon">items<wbr>Per<wbr>Page<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Results per page&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L57">libs/core/src/lib/pagination/pagination.component.ts:57</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L93">libs/core/src/lib/pagination/pagination.component.ts:93</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Represents the number of items per page.</p>
+				<p>Label for options for items per page.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="itemsperpagetemplate" class="tsd-anchor"></a>
+		<h3>items<wbr>Per<wbr>Page<wbr>Template</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">items<wbr>Per<wbr>Page<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L89">libs/core/src/lib/pagination/pagination.component.ts:89</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The custom template show range of item by current page of items.
+				It has higher priority than <code>itemsPerPageOptions</code> property.</p>
 			</div>
 		</div>
 	</section>
@@ -101,7 +102,7 @@
 		<div class="tsd-signature tsd-kind-icon">next<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Next&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L76">libs/core/src/lib/pagination/pagination.component.ts:76</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L126">libs/core/src/lib/pagination/pagination.component.ts:126</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -117,7 +118,7 @@
 		<div class="tsd-signature tsd-kind-icon">previous<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Previous&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L72">libs/core/src/lib/pagination/pagination.component.ts:72</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L122">libs/core/src/lib/pagination/pagination.component.ts:122</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -133,7 +134,7 @@
 		<div class="tsd-signature tsd-kind-icon">total<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L49">libs/core/src/lib/pagination/pagination.component.ts:49</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L64">libs/core/src/lib/pagination/pagination.component.ts:64</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -141,6 +142,135 @@
 				<p>Represents the total number of items.</p>
 			</div>
 		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="currentpage" class="tsd-anchor"></a>
+		<h3>current<wbr>Page</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> currentPage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> currentPage<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L68">libs/core/src/lib/pagination/pagination.component.ts:68</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents the current page number.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L71">libs/core/src/lib/pagination/pagination.component.ts:71</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents the current page number.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="itemsperpage" class="tsd-anchor"></a>
+		<h3>items<wbr>Per<wbr>Page</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> itemsPerPage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> itemsPerPage<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L77">libs/core/src/lib/pagination/pagination.component.ts:77</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents the number of items per page.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L80">libs/core/src/lib/pagination/pagination.component.ts:80</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents the number of items per page.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="itemsperpageoptions" class="tsd-anchor"></a>
+		<h3>items<wbr>Per<wbr>Page<wbr>Options</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> itemsPerPageOptions<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> itemsPerPageOptions<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L97">libs/core/src/lib/pagination/pagination.component.ts:97</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents the options for items per page.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L100">libs/core/src/lib/pagination/pagination.component.ts:100</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents the options for items per page.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -152,7 +282,7 @@
 		<div class="tsd-signature tsd-kind-icon">page<wbr>Change<wbr>Start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;number&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L80">libs/core/src/lib/pagination/pagination.component.ts:80</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L130">libs/core/src/lib/pagination/pagination.component.ts:130</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -163,17 +293,42 @@
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="islastpage_" class="tsd-anchor"></a>
-		<h3>is<wbr>Last<wbr>Page$</h3>
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+		<a name="currentshowing" class="tsd-anchor"></a>
+		<h3>current<wbr>Showing</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Last<wbr>Page$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new BehaviorSubject(this._isLastPage)</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L93">libs/core/src/lib/pagination/pagination.component.ts:93</a></li>
-			</ul>
-		</aside>
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> currentShowing<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CurrentShowing</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L150">libs/core/src/lib/pagination/pagination.component.ts:150</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CurrentShowing</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+		<a name="islastpage" class="tsd-anchor"></a>
+		<h3>is<wbr>Last<wbr>Page</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isLastPage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L146">libs/core/src/lib/pagination/pagination.component.ts:146</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -189,7 +344,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L160">libs/core/src/lib/pagination/pagination.component.ts:160</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L256">libs/core/src/lib/pagination/pagination.component.ts:256</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -213,7 +368,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L143">libs/core/src/lib/pagination/pagination.component.ts:143</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L226">libs/core/src/lib/pagination/pagination.component.ts:226</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -241,6 +396,29 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="nextpage" class="tsd-anchor"></a>
+		<h3>next<wbr>Page</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">next<wbr>Page<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L248">libs/core/src/lib/pagination/pagination.component.ts:248</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Navigates to a next page.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="onkeypresshandler" class="tsd-anchor"></a>
 		<h3>on<wbr>Keypress<wbr>Handler</h3>
 		<!-- {log decorators} -->
@@ -251,7 +429,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/core/src/lib/pagination/pagination.component.ts#L131">libs/core/src/lib/pagination/pagination.component.ts:131</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L214">libs/core/src/lib/pagination/pagination.component.ts:214</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -274,6 +452,29 @@
 						</div>
 					</li>
 				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="previouspage" class="tsd-anchor"></a>
+		<h3>previous<wbr>Page</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">previous<wbr>Page<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/core/src/lib/pagination/pagination.component.ts#L241">libs/core/src/lib/pagination/pagination.component.ts:241</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Navigates to a previous page.</p>
+					</div>
+				</div>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>

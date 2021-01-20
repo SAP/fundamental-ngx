@@ -2,10 +2,10 @@
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
 * Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.22.20200831071315", "Source": "11.1.22", "Engine": "1.51.0"}}
+* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.24.20201118150206", "Source": "11.1.24", "Engine": "1.51.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.22.20200831071315", "Source": "11.1.22", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.24.20201118150206", "Source": "11.1.24", "Engine": "1.51.0"}}');}
 :root {
   --sapBrandColor: #91c8f6;
   --sapHighlightColor: #91c8f6;
@@ -135,7 +135,9 @@
   --sapContent_SearchHighlightColor: #058088;
   --sapContent_HelpColor: #57b900;
   --sapContent_LabelColor: #d3d7d9;
-  --sapContent_MonospaceFontFamily: lucida console, monospace;
+  --sapContent_MonospaceFontFamily: "72Mono", "72Monofull", lucida console, monospace;
+  --sapContent_MonospaceBoldFontFamily: "72Mono-Bold", "72Mono-Boldfull", lucida console, monospace;
+  --sapContent_IconFontFamily: "SAP-icons";
   --sapContent_DisabledTextColor: rgba(250,250,250,0.6);
   --sapContent_DisabledOpacity: 0.4;
   --sapContent_ContrastTextThreshold: 0.55;
@@ -489,6 +491,14 @@
   --sapFontUrl_72_Bold_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Bold-full.woff');
   --sapFontUrl_72_Light_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Light-full.woff2');
   --sapFontUrl_72_Light_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Light-full.woff');
+  --sapFontUrl_72Mono_Regular_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular.woff2');
+  --sapFontUrl_72Mono_Regular_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular.woff');
+  --sapFontUrl_72Mono_Regular_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular-full.woff2');
+  --sapFontUrl_72Mono_Regular_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular-full.woff');
+  --sapFontUrl_72Mono_Bold_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold.woff2');
+  --sapFontUrl_72Mono_Bold_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold.woff');
+  --sapFontUrl_72Mono_Bold_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold-full.woff2');
+  --sapFontUrl_72Mono_Bold_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold-full.woff');
 }
 .background-image--sapCompanyLogo {
   background-image: var(--sapCompanyLogo);

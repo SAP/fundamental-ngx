@@ -73,6 +73,7 @@
   --fdListBase_Text_Shadow: 0 0 0.125rem #000;
   /* Button */
   --fdButton_Text_Shadow: 0 0 0.125rem #000;
+  --fdButton_Emphasized_Border_Width: 0.125rem;
   /* Input Group */
   --fdInputGroup_Text_Shadow: 0 0 0.125rem #000;
   /* Input */
@@ -84,4 +85,22 @@
   --fdFormHeader_Border_Width: calc(3 * var(--sapList_BorderWidth));
   /** Badge on Button */
   --fdBadgeButton_Border_Color: var(--sapGroup_ContentBorderColor);
+  /* Card */
+  --fdCard_Box_Shadow: none;
+  /* Badge */
+  --fdBadge_Border_Color: var(--sapContent_ForegroundBorderColor);
+  /* Carousel */
+  --fdCarousel_Dot_Size: 0.5rem;
+  --fdCarousel_Dot_Margin: 0 0.25rem;
+  --fdCarousel_Dot_Border: 1px solid var(--sapContent_ForegroundBorderColor);
+  /** Flexible Column Layout */
+  --fdFlexibleColumnLayoutToggleImageColor: var(--sapObjectHeader_BorderColor);
+  --fdFlexibleColumnLayoutBorder: solid 0.0625rem var(--sapGroup_ContentBorderColor);
+  --fdFlexibleColumnBackgroundSolid: var(--sapBackgroundColor);
+  --fdFlexibleColumnBackgroundTranslucent: var(--sapBackgroundColor);
+  --fdFlexibleColumnBackgroundTransparent: var(--sapBackgroundColor);
+  /** Dialog */
+  --fdDialogBackgroundOpacity: 0.8;
+  /* Grid List */
+  --fdGrid_List_Item_Hover_Border_Color: var(--sapTile_Interactive_BorderColor);
 }

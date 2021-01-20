@@ -3,10 +3,14 @@
 	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fdp-split-menu-button&gt;</p>
 	<div class="tsd-comment tsd-typography">
 		<div class="lead">
-			<p>Split Menu Button implementation based on the
-				<a href="https://github.com/SAP/fundamental-ngx/wiki/Platform:-Split-Menu-Button-Component-V1.0-Technical-Design">https://github.com/SAP/fundamental-ngx/wiki/Platform:-Split-Menu-Button-Component-V1.0-Technical-Design</a>
-			documents.</p>
+			<p>&lt;fdp-split-menu-button [menu]=&quot;menu&quot; [buttonLabel]=&quot;Default button&quot; (primaryButtonClick)=&quot;onPrimaryButtonClick1()&quot;&gt;
+			</fdp-split-menu-button></p>
 		</div>
+		<p>&lt;fdp-menu #menu xPosition=&quot;after|before&quot;&gt;
+			&lt;fdp-menu-item (itemSelect)=&quot;onItemSelect1(&#39;Option 1&#39;)&quot;&gt;Option 1</fdp-menu-item>
+			&lt;fdp-menu-item (itemSelect)=&quot;onItemSelect1(&#39;Option 2&#39;)&quot;&gt;Option 2</fdp-menu-item>
+			&lt;fdp-menu-item (itemSelect)=&quot;onItemSelect1(&#39;Option 3&#39;)&quot;&gt;Option 3</fdp-menu-item>
+		</fdp-menu></p>
 	</div>
 </section>
 <section class="tsd-panel tsd-hierarchy">
@@ -40,7 +44,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.ariaDescribedBy</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L26">libs/platform/src/lib/components/base.ts:26</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L26">libs/platform/src/lib/components/base.ts:26</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -57,7 +61,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.ariaLabel</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L18">libs/platform/src/lib/components/base.ts:18</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L18">libs/platform/src/lib/components/base.ts:18</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -74,7 +78,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.ariaLabelledBy</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L22">libs/platform/src/lib/components/base.ts:22</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L22">libs/platform/src/lib/components/base.ts:22</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -90,7 +94,7 @@
 		<div class="tsd-signature tsd-kind-icon">button<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L44">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:44</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L47">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:47</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -107,7 +111,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.contentDensity</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L38">libs/platform/src/lib/components/base.ts:38</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L38">libs/platform/src/lib/components/base.ts:38</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -123,7 +127,7 @@
 		<div class="tsd-signature tsd-kind-icon">fixed<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L32">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:32</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L35">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:35</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -139,7 +143,7 @@
 		<div class="tsd-signature tsd-kind-icon">icon<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L52">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:52</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L55">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:55</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -156,7 +160,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.id</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L30">libs/platform/src/lib/components/base.ts:30</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L30">libs/platform/src/lib/components/base.ts:30</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -172,7 +176,7 @@
 		<div class="tsd-signature tsd-kind-icon">menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MenuComponent</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L48">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:48</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L51">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:51</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -188,7 +192,7 @@
 		<div class="tsd-signature tsd-kind-icon">menu<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L40">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:40</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L43">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:43</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -205,7 +209,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.name</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L34">libs/platform/src/lib/components/base.ts:34</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L34">libs/platform/src/lib/components/base.ts:34</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -221,7 +225,7 @@
 		<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L36">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:36</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L39">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:39</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -237,7 +241,7 @@
 		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ButtonType</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L58">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:58</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L61">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:61</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -256,7 +260,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.width</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L42">libs/platform/src/lib/components/base.ts:42</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L42">libs/platform/src/lib/components/base.ts:42</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -278,7 +282,7 @@
 				<aside class="tsd-sources">
 					<p>Inherited from BaseComponent.disabled</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L46">libs/platform/src/lib/components/base.ts:46</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L46">libs/platform/src/lib/components/base.ts:46</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -292,7 +296,7 @@
 				<aside class="tsd-sources">
 					<p>Inherited from BaseComponent.disabled</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L50">libs/platform/src/lib/components/base.ts:50</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L50">libs/platform/src/lib/components/base.ts:50</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -320,7 +324,7 @@
 		<div class="tsd-signature tsd-kind-icon">primary<wbr>Button<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L62">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:62</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L65">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:65</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -344,7 +348,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides BaseComponent.__constructor</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L85">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L88">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:88</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -371,7 +375,7 @@
 		<aside class="tsd-sources">
 			<p>Overrides BaseComponent._cd</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L87">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:87</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L90">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:90</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -383,7 +387,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent._disabled</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L14">libs/platform/src/lib/components/base.ts:14</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L14">libs/platform/src/lib/components/base.ts:14</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -395,7 +399,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.defaultId</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/base.ts#L13">libs/platform/src/lib/components/base.ts:13</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/base.ts#L13">libs/platform/src/lib/components/base.ts:13</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -406,7 +410,7 @@
 		<div class="tsd-signature tsd-kind-icon">split<wbr>Button<wbr>Max<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;12rem&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L85">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:85</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L88">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:88</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -429,7 +433,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/3913681e1/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L117">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:117</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts#L120">libs/platform/src/lib/components/split-menu-button/split-menu-button.component.ts:120</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
