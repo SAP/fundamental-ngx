@@ -325,5 +325,6 @@ export const API_FILES = {
         'GridListItemFooterBarComponent',
         'GridListItemToolbarComponent',
         'GridListGroupHeaderComponent'
-    ]
+    ],
+    variantManagement: ['VariantManagementComponent']
 };

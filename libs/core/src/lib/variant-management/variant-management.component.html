@@ -1,0 +1,12 @@
+<fd-popover>
+    <fd-popover-control>
+        <button fd-button label="Dropdown Popover" [fdMenu]="true"></button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <ul fd-list>
+            <li fd-list-item *ngFor="let option of list">
+                <span fd-list-title>{{option}}</span>
+            </li>
+        </ul>
+    </fd-popover-body>
+</fd-popover>
