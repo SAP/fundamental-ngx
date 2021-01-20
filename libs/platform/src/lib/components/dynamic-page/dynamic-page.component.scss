@@ -4,11 +4,16 @@
     height: 3rem;
 }
 
-.tab-sticker {
-    left: 0;
-    right: 0;
-    position: relative;
+.header-sticker, .tab-sticker {
+    position: absolute;
+    width: 100%;
     top: 0;
+}
+
+.footer-sticker, .content-sticker{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .fd-dynamic-page__header--not-collapsible {

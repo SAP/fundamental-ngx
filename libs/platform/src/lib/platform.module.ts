@@ -41,6 +41,7 @@ import { PlatformMultiInputMobileModule } from './components/form/multi-input/mu
 import { PlatformFeedInputModule } from './components/feed-input/feed-input.module';
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
+import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -50,6 +51,7 @@ import { PlatformApprovalFlowModule } from './components/approval-flow/approval-
         PlatformCheckboxModule,
         PlatformCheckboxGroupModule,
         PlatformDatePickerModule,
+        PlatformDynamicPageModule,
         PlatformSearchFieldModule,
         PlatformActionBarModule,
         PlatformActionButtonGroupModule,

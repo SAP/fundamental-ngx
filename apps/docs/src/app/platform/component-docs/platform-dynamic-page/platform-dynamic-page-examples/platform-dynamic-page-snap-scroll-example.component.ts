@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ElementRef, ViewChild } from '@angu
 import { DynamicPageCollapseChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-dynamic-page-snap-scroll-example',
+    selector: 'fdp-platform-dynamic-page-snap-scroll-example',
     templateUrl: './platform-dynamic-page-snap-scroll-example.component.html',
     styleUrls: ['./platform-dynamic-page-snap-scroll-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

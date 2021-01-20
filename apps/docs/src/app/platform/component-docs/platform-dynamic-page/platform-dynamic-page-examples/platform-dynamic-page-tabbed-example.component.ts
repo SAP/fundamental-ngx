@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angu
 import { DynamicPageCollapseChangeEvent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-dynamic-page-tabbed-example',
+    selector: 'fdp-platform-dynamic-page-tabbed-example',
     templateUrl: './platform-dynamic-page-tabbed-example.component.html',
     styleUrls: ['./platform-dynamic-page-tabbed-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
