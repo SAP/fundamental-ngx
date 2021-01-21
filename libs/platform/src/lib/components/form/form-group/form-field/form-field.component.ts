@@ -4,7 +4,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChild,
     EventEmitter,
     Input,
     OnDestroy,
@@ -14,7 +13,10 @@ import {
     ViewChild,
     Optional,
     Provider,
-    forwardRef
+    forwardRef,
+    ElementRef,
+    Host,
+    SkipSelf
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
@@ -24,8 +26,9 @@ import { startWith, takeUntil } from 'rxjs/operators';
 
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
-import { FormZone, Column, LabelLayout, HintPlacement } from '../../form-options';
+import { Column, LabelLayout, HintPlacement } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
+import { FormFieldGroup } from '../../form-field-group';
 
 export const formFieldProvider: Provider = {
     provide: FormField,
@@ -54,9 +57,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     id: string;
 
     @Input()
-    zone: FormZone;
-
-    @Input()
     hintPlacement: HintPlacement = 'right';
 
     @Input()
@@ -68,17 +68,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     noLabelLayout = false;
 
-    /**
-     * By default form field does not render any content as it is wrapped inside ng-template and
-     * controlled by parent. This is for cases where FormField is direct child of the form-group.
-     *
-     * In case we have more nested structure and Form-Field is wrapped with some other element
-     * that controls the rendering we need to let go this rendering and render the content
-     * directly
-     */
-    @Input()
-    forceRender = false;
-
     @Input()
     validators: Array<ValidatorFn> = [Validators.nullValidator];
 
@@ -88,8 +77,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     placeholder: string;
 
+    /** Form Container column it belongs to */
     @Input()
-    fluid = false;
+    column: number;
+
     /**
      * This is in most of the cases set from parent container (form-group)
      */
@@ -162,19 +153,20 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, @Optional() readonly formGroupContainer: FormGroupContainer) {
+    constructor(
+        private _cd: ChangeDetectorRef,
+        private _elementRef: ElementRef,
+        @Optional() readonly formGroupContainer: FormGroupContainer,
+        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
+
     }
 
     /** @hidden */
     ngOnInit(): void {
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
-        }
-
-        if (this.fluid) {
-            this.columns = 12;
         }
 
         this.addToFormGroup();
@@ -294,9 +286,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * Add FormField to FormGroup
      */
     private addToFormGroup(): void {
-        if (!this.formGroupContainer) {
+        if (!this.formGroupContainer || this.formFieldGroup) {
             return;
         }
+
         this.formGroupContainer.addFormField(this);
     }
 

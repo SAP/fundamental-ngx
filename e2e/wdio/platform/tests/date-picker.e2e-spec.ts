@@ -90,17 +90,16 @@ describe('Date picker suite', function() {
     });
 
     it('verify single type date-picker:', () => {
+        click(datePickerPage.activeButtonDatePicker, 3);
+        click(datePickerPage.dayInCalendarButtonByValue('1'));
+        expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model', 2)).toEqual(datePickerTestData.date1);
+    });
+    it('verify pre-populated range type date-picker', () => {
         click(datePickerPage.activeButtonDatePicker, 2);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model', 1)).toEqual(datePickerTestData.date1);
-    });
-
-    it('verify pre-populated range type date-picker', () => {
-        click(datePickerPage.activeButtonDatePicker, 3);
-        click(datePickerPage.dayInCalendarButtonByValue('1'));
         click(datePickerPage.dayInCalendarButtonByValue('15'));
-        click(datePickerPage.activeButtonDatePicker, 3);
-        expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model', 2)).toEqual(datePickerTestData.date2);
+        click(datePickerPage.activeButtonDatePicker, 2);
+        expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model', 1)).toEqual(datePickerTestData.date2);
     });
 
     it('verify range type date-picker', () => {

@@ -60,7 +60,10 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/approval-flow', name: 'Approval Flow' }
         ];
 
-        this.layouts = [{ url: 'platform/dynamic-page', name: 'Dynamic Page' }];
+        this.layouts = [
+            { url: 'platform/dynamic-page', name: 'Dynamic Page' },
+            { url: 'platform/form-container', name: 'Form Container' }
+        ];
 
         this.utilities = [];
 

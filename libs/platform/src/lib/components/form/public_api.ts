@@ -8,6 +8,7 @@ export * from './base.input';
 export * from './form-options';
 export * from './form-field';
 export * from './form-group';
+export * from './form-field-group';
 export * from './form-group/fdp-form.module';
 export * from './form-group/form-group.component';
 export * from './form-group/form-field/form-field.component';
