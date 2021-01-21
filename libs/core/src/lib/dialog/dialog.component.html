@@ -4,9 +4,9 @@
     tabindex="-1"
     aria-modal="true"
     fdResize
-    fdResizeBoundary=".fd-dialog"
     cdkDrag
     cdkDragBoundary=".fd-dialog"
+    [fdResizeBoundary]="elementRef()?.nativeElement"
     [class]="dialogConfig.dialogPanelClass"
     [ngClass]="{
         'fd-dialog__content': true,

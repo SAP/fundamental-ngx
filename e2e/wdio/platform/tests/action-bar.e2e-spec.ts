@@ -9,19 +9,16 @@ import {
     scrollIntoView,
     waitForElDisplayed
 } from '../../driver/wdio';
-import ActionBarContent from '../fixtures/appData/action-bar-contents';
+import { saveBtnHvrColor,
+    defaultBtnHvrColor,
+    negCancelBtnHvrColor,
+    hoverColorAttr,
+    alertMsg,
+    actionBarTitles,
+    actionBarDescriptions} from '../fixtures/appData/action-bar-contents';
 
 describe('Action Bar Test Suite', function() {
-    const {
-        saveBtnHvrColor,
-        defaultBtnHvrColor,
-        negCancelBtnHvrColor,
-        hoverColorAttr,
-        alertMsg,
-        actionBarTitles,
-        actionBarDescriptions,
-    } = ActionBarContent;
-
+    const actionBarPage = new ActionBarPo();
     const {
         menuItems,
         actionBtnArr,
@@ -29,7 +26,6 @@ describe('Action Bar Test Suite', function() {
         descriptions,
         titles
     } = new ActionBarPo();
-    const actionBarPage = new ActionBarPo();
 
     beforeAll(() => {
         actionBarPage.open();

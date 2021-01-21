@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { Observer } from 'rxjs';
-import { SortDirection } from '@fundamental-ngx/platform';
 
 import { TableService } from './table.service';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { CollectionStringFilter, TableState } from './interfaces';
+import { CollectionGroup, CollectionStringFilter, TableState } from './interfaces';
 import { GroupChange, SortChange, FilterChange, FreezeChange, SearchChange } from './models';
-import { CollectionStringFilterStrategy } from './enums';
+import { FILTER_STRING_STRATEGY, SortDirection } from './enums';
 import { SearchInput } from './interfaces/search-field.interface';
 
 describe('TableServiceService', () => {
@@ -33,7 +32,7 @@ describe('TableServiceService', () => {
     it('should set table state', () => {
         const newState: TableState = {
             ...DEFAULT_TABLE_STATE,
-            groupBy: [{ field: 'name', direction: SortDirection.ASC }]
+            groupBy: [{ field: 'name', direction: SortDirection.ASC, showAsColumn: true }]
         };
 
         service.setTableState(newState);
@@ -45,12 +44,11 @@ describe('TableServiceService', () => {
         const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
         const sortChangeSpy = spyOn(service.sortChange, 'emit').and.callThrough();
         const field = 'name';
-        const direction = SortDirection.ASC;
-        const newSortBy = [{ field: field, direction: direction }];
+        const newSortBy = [{ field: field, direction: SortDirection.ASC }];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, sortBy: newSortBy };
         const event: SortChange = { current: newSortBy, previous: DEFAULT_TABLE_STATE.sortBy };
 
-        service.sort(field, direction);
+        service.setSort(newSortBy);
 
         expect(sortChangeSpy).toHaveBeenCalledWith(event);
         expect(setTableStateSpy).toHaveBeenCalledWith(newState);
@@ -60,12 +58,11 @@ describe('TableServiceService', () => {
         const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
         const groupChangeSpy = spyOn(service.groupChange, 'emit').and.callThrough();
         const field = 'name';
-        const direction = SortDirection.ASC;
-        const newGroupBy = [{ field: field, direction: direction }];
+        const newGroupBy: CollectionGroup[] = [{ field: field, direction: SortDirection.ASC, showAsColumn: true }];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, groupBy: newGroupBy };
         const event: GroupChange = { current: newGroupBy, previous: DEFAULT_TABLE_STATE.groupBy };
 
-        service.group(field, direction);
+        service.setGroups(newGroupBy);
 
         expect(groupChangeSpy).toHaveBeenCalledWith(event);
         expect(setTableStateSpy).toHaveBeenCalledWith(newState);
@@ -74,14 +71,13 @@ describe('TableServiceService', () => {
     it('should set new filterBy state', () => {
         const setTableStateSpy = spyOn(service, 'setTableState').and.callThrough();
         const filterChangeSpy = spyOn(service.filterChange, 'emit').and.callThrough();
-        const field = 'name';
         const newFilterBy: CollectionStringFilter[] = [
-            { field: field, value: 'Product name', strategy: CollectionStringFilterStrategy.CONTAINS }
+            { field: 'name', value: 'Product name', strategy: FILTER_STRING_STRATEGY.CONTAINS }
         ];
         const newState: TableState = { ...DEFAULT_TABLE_STATE, filterBy: newFilterBy };
         const event: FilterChange = { current: newFilterBy, previous: DEFAULT_TABLE_STATE.filterBy };
 
-        service.filter(newFilterBy);
+        service.setFilters(newFilterBy);
 
         expect(filterChangeSpy).toHaveBeenCalledWith(event);
         expect(setTableStateSpy).toHaveBeenCalledWith(newState);

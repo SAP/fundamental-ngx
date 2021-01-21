@@ -1,13 +1,12 @@
 <main class="fd-page">
     <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group #fg4 [multiLayout]="true" [formGroup]="form">
+        <fdp-form-group #fg4 [formGroup]="form">
             <fdp-form-field
                 #ff1
                 id="growingDisabledTextarea"
                 label="Textarea with growing=false and growingMaxLines=7"
                 placeholder="Start entering something. Growing is not enabled, but growingMaxLines of 7 is given, so it is restricted to a height of 7 lines."
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
                 style="width: auto"
@@ -27,7 +26,6 @@
                 label="Textarea with growing=false and height='80px'"
                 placeholder="Start entering something.  Growing is not enabled, but height is set, so it is restricted to a height of 80px"
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
                 [validators]="textareaValidator"
@@ -53,7 +51,6 @@
                     'Start entering something. It will grow until growingMaxLines number of lines are visible.'
                 "
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
             >
@@ -74,7 +71,6 @@
                 label="Textarea with growing=true and height='80px'"
                 placeholder="Start entering something. It will grow until height is reached."
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
                 [validators]="textareaValidator"
@@ -99,7 +95,6 @@
                 label="Textarea with growingMaxLines and height both set"
                 placeholder="Start entering something. Preference will be given to grow by height."
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
             >
@@ -121,7 +116,6 @@
                 label="Textarea with growing=true neither height nor growingMaxLines set"
                 placeholder="Start entering something. It will keep growing."
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
             >

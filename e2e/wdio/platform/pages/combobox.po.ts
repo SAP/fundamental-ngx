@@ -4,14 +4,14 @@ import {
     pause,
     scrollIntoView,
     sendKeys,
-    waitElementToBePresentInDOM,
-    waitForElDisplayed,
-    waitForPresent
+    waitForPresent,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 export class ComboBoxPo extends BaseComponentPo {
     private url = '/combobox';
     root = '#page-content';
+    pageTitle = 'fd-platform-combobox-header h1';
 
     comboBoxRoot = '.fdp-combobox';
     comboBoxDropdownExpanded = '.fd-list';
@@ -34,19 +34,19 @@ export class ComboBoxPo extends BaseComponentPo {
     };
 
     comboBoxButtons = (name: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//button`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//button`;
     };
 
     comboBoxExpandedButtons = (name: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//button[contains (@class,"is-expanded")]`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//button[contains (@class,"is-expanded")]`;
     };
 
     comboBoxInputs = (name: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//input`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//input`;
     };
 
     filledComboBoxInputs = (name: string, option: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//input[@ng-reflect-model='${option}']`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//input[@ng-reflect-model='${option}']`;
     };
 
     expandDropdown(type: string): void {
@@ -60,7 +60,7 @@ export class ComboBoxPo extends BaseComponentPo {
     }
 
     selectOption(type: string, option: string): void {
-        waitElementToBePresentInDOM(this.dropDownOption(option));
+        waitForPresent(this.dropDownOption(option));
         scrollIntoView(this.dropDownOption(option));
         click(this.dropDownOption(option));
         waitForElDisplayed(this.filledComboBoxInputs(type, option));
@@ -69,5 +69,6 @@ export class ComboBoxPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.pageTitle);
     }
 }

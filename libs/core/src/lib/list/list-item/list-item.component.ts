@@ -16,15 +16,17 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+
 import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
 import { RadioButtonComponent } from '../../radio/radio-button/radio-button.component';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
 import { KeyUtil } from '../../utils/functions';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from './list-item-utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ListFocusItem } from '../list-focus-item.model';
 
 /**
  * The component that represents a list item.
@@ -38,11 +40,17 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
         class: 'fd-list__item',
         role: 'listitem'
     },
-    providers: [{ provide: LIST_ITEM_COMPONENT, useExisting: forwardRef(() => ListItemComponent) }],
+    providers: [{
+        provide: LIST_ITEM_COMPONENT,
+        useExisting: forwardRef(() => ListItemComponent)
+    }, {
+        provide: ListFocusItem,
+        useExisting: forwardRef(() => ListItemComponent)
+    }],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class ListItemComponent implements KeyboardSupportItemInterface, AfterContentInit, OnDestroy, ListItemInterface {
+export class ListItemComponent extends ListFocusItem implements AfterContentInit, OnDestroy, ListItemInterface {
     /** Whether list item is selected */
     @Input()
     @HostBinding('attr.aria-selected')
@@ -52,7 +60,12 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     /** tab index attribute */
     @Input()
     @HostBinding('attr.tabindex')
-    tabIndex = -1;
+    get tabindex(): number {
+        return this._tabIndex;
+    }
+    set tabindex(value: number) {
+        this._tabIndex = coerceNumberProperty(value, -1);
+    };
 
     /** Whether there is no data inside list item */
     @Input()
@@ -90,10 +103,15 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
+    private _tabIndex = -1;
+
     constructor(
         public elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef
-    ) { }
+    ) {
+        super(elementRef);
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -132,16 +150,6 @@ export class ListItemComponent implements KeyboardSupportItemInterface, AfterCon
         if (this.radio && !this.link) {
             this.radio.labelClicked(event);
         }
-    }
-
-    /** @hidden */
-    click(): void {
-        this.elementRef.nativeElement.click();
-    }
-
-    /** @hidden */
-    focus(): void {
-        this.elementRef.nativeElement.focus();
     }
 
     /** @hidden */

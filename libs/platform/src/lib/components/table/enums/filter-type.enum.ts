@@ -5,11 +5,9 @@ export enum FilterType {
     CUSTOM = 'custom'
 }
 
-export enum FilterValueType {
+export enum FilterableColumnDataType {
     STRING = 'string',
     NUMBER = 'number',
     BOOLEAN = 'boolean',
-    DATE = 'date',
-    SELECT = 'select',
-    CUSTOM = 'custom'
+    DATE = 'date'
 }

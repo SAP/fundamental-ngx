@@ -61,6 +61,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'form-container',
+                loadChildren: () =>
+                    import('./component-docs/platform-forms/platform-form-container/platform-form-container-docs.module').then(
+                        (m) => m.PlatformFormContainerDocsModule
+                    )
+            },
+            {
                 path: 'link',
                 loadChildren: () =>
                     import('./component-docs/platform-link/platform-link.module').then((m) => m.PlatformLinkDocsModule)
@@ -233,9 +240,14 @@ export const ROUTES: Routes = [
             {
                 path: 'object-list-item',
                 loadChildren: () =>
-                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then(
-                        (m) => m.PlatformObjectListItemDocsModule
-                    )
+                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then((m) =>
+                        m.PlatformObjectListItemDocsModule)
+            },
+            {
+                path: 'value-help-dialog',
+                loadChildren: () =>
+                    import('./component-docs/platform-vhd/platform-vhd-docs.module').then((m) =>
+                        m.PlatformVhdDocsModule)
             },
             {
                 path: 'multi-input',

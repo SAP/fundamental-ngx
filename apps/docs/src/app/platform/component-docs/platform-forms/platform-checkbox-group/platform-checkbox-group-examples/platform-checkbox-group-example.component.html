@@ -1,6 +1,6 @@
 <h3>Checkbox group created from passed checkboxes and value is required</h3>
-<fdp-form-group [multiLayout]="true" [formGroup]="form1" [object]="favorites">
-    <fdp-form-field #fl1 id="fruitsEx" label="My favorite fruits:" [required]="true" zone="zLeft" rank="1">
+<fdp-form-group [formGroup]="form1" [object]="favorites">
+    <fdp-form-field #fl1 id="fruitsEx" label="My favorite fruits:" [required]="true" rank="1">
         <fdp-checkbox-group [isInline]="true" name="fruits" ariaLabel="My favorite fruits"
             [formControl]="fl1.formControl">
             <fdp-checkbox value="apple" label="Apple"></fdp-checkbox>
@@ -18,8 +18,8 @@
 <span style="margin-left: 2rem;">Favorites: {{ form1.controls.fruitsEx?.value }}</span>
 
 <h3>Checkbox group created from list of values and value is required</h3>
-<fdp-form-group [multiLayout]="true" [formGroup]="form2">
-    <fdp-form-field #fl2 id="fruits1" label="My favorite fruits:" [required]="true" zone="zLeft" rank="1">
+<fdp-form-group [formGroup]="form2">
+    <fdp-form-field #fl2 id="fruits1" label="My favorite fruits:" [required]="true" rank="1">
         <fdp-checkbox-group [isInline]="false" name="fruits" [list]="fruits" ariaLabel="My favorite fruits"
             [formControl]="fl2.formControl"></fdp-checkbox-group>
     </fdp-form-field>
@@ -34,14 +34,14 @@
 
 <h3>Checkboxes with different context</h3>
 <div>Qualification form</div>
-<fdp-form-group #fg hintPlacement="left" [multiLayout]="false" [formGroup]="form1">
-    <fdp-form-field #ffr1 id="education" [validators]="validators" hintPlacement="left" [rank]="1" zone="zLeft"
+<fdp-form-group #fg hintPlacement="left" [formGroup]="form1">
+    <fdp-form-field #ffr1 id="education" [validators]="validators" hintPlacement="left" [rank]="1"
         [i18Strings]="graduation">
         <fdp-checkbox name="education" [isBinary]="true" title="minimum education level"
             [formControl]="ffr1.formControl">Graduated</fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #ffr2 id="engineering" [validators]="validators" hintPlacement="left" [rank]="2" zone="zLeft"
+    <fdp-form-field #ffr2 id="engineering" [validators]="validators" hintPlacement="left" [rank]="2"
         [i18Strings]="engineering">
         <fdp-checkbox name="engineering" [isBinary]="true" title="have engineering degree"
             [formControl]="ffr2.formControl">
@@ -49,7 +49,7 @@
         </fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #ffr3 id="work" [validators]="validators" hintPlacement="left" [rank]="3" zone="zLefts"
+    <fdp-form-field #ffr3 id="work" [validators]="validators" hintPlacement="left" [rank]="3"
         [i18Strings]="work">
         <fdp-checkbox name="work" [isBinary]="true" title="Work experience" [formControl]="ffr3.formControl">
             5 year of work experience
@@ -87,8 +87,8 @@
 </fdp-form-group>
 
 <h3>Checkbox group created from list of SelectItem Objects and value is required</h3>
-<fdp-form-group [multiLayout]="true" [formGroup]="form3">
-    <fdp-form-field #fl3 id="language" label="Languages Known:" [required]="true" zone="zLeft" rank="1">
+<fdp-form-group [formGroup]="form3">
+    <fdp-form-field #fl3 id="language" label="Languages Known:" [required]="true" rank="1">
         <fdp-checkbox-group [isInline]="true" name="language" [list]="languages" ariaLabel="Languages Known"
             [formControl]="fl3.formControl"></fdp-checkbox-group>
     </fdp-form-field>

@@ -20,7 +20,10 @@ import {
     FocusEscapeDirection,
     KeyboardSupportService
 } from '../utils/services/keyboard-support/keyboard-support.service';
+import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
+import { ListFocusItem } from './list-focus-item.model';
 
+type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**
  * The directive that represents a list.
  * It is used to display a list of items with simple information such as scopes, names, etc.
@@ -101,6 +104,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @ContentChildren(ListItemComponent)
     items: QueryList<ListItemComponent>;
 
+    /** @hidden */
+    @ContentChildren(ListFocusItem)
+    private _focusItems: QueryList<FocusItem>;
+
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
@@ -108,7 +115,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _keyboardSupportService: KeyboardSupportService<ListItemComponent>) { }
+    constructor(private _keyboardSupportService: KeyboardSupportService<FocusItem>) { }
 
     /** @hidden */
     ngOnInit(): void {
@@ -117,7 +124,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._keyboardSupportService.setKeyboardService(this.items, false);
+        this._keyboardSupportService.setKeyboardService(this._focusItems, false);
         this._listenOnQueryChange();
     }
 
@@ -159,10 +166,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
         const refreshObs = merge(this._onRefresh$, this._onDestroy$);
-        this.items.forEach(
+        this._focusItems.forEach(
             (item, index) => item.clicked
                 .pipe(takeUntil(refreshObs))
-                .subscribe(event => this.setItemActive(index))
+                .subscribe(() => this.setItemActive(index))
         );
     }
 

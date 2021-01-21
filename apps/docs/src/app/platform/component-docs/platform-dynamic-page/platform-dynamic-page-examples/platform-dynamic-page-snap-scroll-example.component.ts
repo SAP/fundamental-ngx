@@ -26,10 +26,12 @@ export class PlatformDynamicPageSnapScrollExampleComponent {
     openPage(): void {
         this.fullscreen = true;
         this.overlay.nativeElement.style.width = '100%';
+        document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
     }
     closePage(event: Event): void {
         event.stopPropagation();
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
+        document.getElementById('page-content').style.overflowY = 'auto';
     }
 }

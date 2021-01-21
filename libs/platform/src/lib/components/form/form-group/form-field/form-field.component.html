@@ -1,22 +1,20 @@
-<ng-template [ngIf]="forceRender">
-    <ng-container *ngTemplateOutlet="renderer"></ng-container>
-</ng-template>
-
 <ng-template #renderer>
-    <div [horizontal]="labelLayout === 'horizontal'" fd-form-item>
-        <label [attr.for]="id"
-               [required]="editable && required"
-               fd-form-label
-               [inlineHelpTitle]="hint"
-               [inlineHelpBodyPlacement]="hintPlacement">
-            <span *ngIf="!noLabelLayout">{{ label }}</span>
-        </label>
+    <div [horizontal]="labelLayout === 'horizontal'" fd-form-item class="fd-row">
+        <div class="fd-col fd-col-md--2 fd-col-lg--4 fd-col-xl--12">
+            <label [attr.for]="id"
+                   [required]="editable && required"
+                   fd-form-label
+                   [inlineHelpTitle]="hint"
+                   [inlineHelpBodyPlacement]="hintPlacement">
+                <span *ngIf="!noLabelLayout">{{ label }}</span>
+            </label>
+        </div>
         <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
     </div>
 </ng-template>
 
 <ng-template #withFormMessage>
-    <fdp-input-message-group>
+    <fdp-input-message-group class="fd-col fd-col-md--10 fd-col-lg--8 fd-col-xl--12">
         <!--
          Todo: we should extend this on FormGroup Level and have error trigger strategy that will be applied to
          all the field e.g.: [triggers]="['mouseenter', 'mouseleave']"

@@ -4,7 +4,7 @@
         <ng-container *ngFor="let card of column">
             <div class="fd-fixed-card-group--card" cdkDrag [cdkDragStartDelay]="dragStartDelay"
                 cdkDragPreviewClass="fd-fixed-card-group--card-preview" [cdkDragData]="card"
-                (cdkDragDropped)="dragDrop($event)">
+                (cdkDragDropped)="dragDrop($event)" tabindex="0">
                 <ng-container *ngTemplateOutlet="card?.template"> </ng-container>
 
                 <div *cdkDragPlaceholder class="fd-fixed-card-group--card-placeholder">

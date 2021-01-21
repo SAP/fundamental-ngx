@@ -1,4 +1,3 @@
-export * from './selectable-row.interface';
 export * from './table-state.interface';
 export * from './collection-state.interface';
 export * from './collection-filter.interface';

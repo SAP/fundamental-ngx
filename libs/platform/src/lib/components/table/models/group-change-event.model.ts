@@ -1,4 +1,4 @@
-import { TableComponent } from '../table.component';
+import { Table } from '../table';
 import { CollectionGroup } from '../interfaces';
 
 export interface GroupChange {
@@ -7,9 +7,5 @@ export interface GroupChange {
 }
 
 export class TableGroupChangeEvent {
-    constructor(
-        public source: TableComponent,
-        public current: CollectionGroup[],
-        public previous: CollectionGroup[]
-    ) {}
+    constructor(public source: Table, public current: CollectionGroup[], public previous: CollectionGroup[]) {}
 }

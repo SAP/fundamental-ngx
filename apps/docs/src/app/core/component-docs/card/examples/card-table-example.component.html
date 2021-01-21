@@ -4,7 +4,7 @@
         <span fd-card-counter>3 of 10</span>
     </fd-card-header>
     <fd-card-content>
-        <table fd-table [noBorderX]="true">
+        <table fd-table [noBorderX]="true" tabindex="0">
             <thead fd-table-header>
                 <tr fd-table-row>
                     <th fd-table-cell>Name</th>
@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody fd-table-body>
-                <tr fd-table-row [main]="true" [activable]="true">
+                <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                     <td fd-table-cell>
                         Banana
                     </td>
@@ -28,7 +28,7 @@
                         <span fd-object-status status="positive">Available</span>
                     </td>
                 </tr>
-                <tr fd-table-row [main]="true" [activable]="true">
+                <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                     <td fd-table-cell>
                         Pineapple
                     </td>
@@ -42,7 +42,7 @@
                         <span fd-object-status status="negative">Out of stock</span>
                     </td>
                 </tr>
-                <tr fd-table-row [main]="true" [activable]="true">
+                <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
                     <td fd-table-cell>
                         Orange
                     </td>

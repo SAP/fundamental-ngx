@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitElementToBePresentInDOM, waitForElDisplayed } from '../../driver/wdio';
+import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
 
 export class InputGroupPo extends BaseComponentPo {
     readonly url = '/input-group';
@@ -45,7 +45,7 @@ export class InputGroupPo extends BaseComponentPo {
 
     open(): void {
         super.open(this.url);
-        waitElementToBePresentInDOM(this.root);
+        waitForPresent(this.root);
         waitForElDisplayed(this.root);
     }
 }

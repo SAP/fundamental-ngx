@@ -33,40 +33,41 @@ describe('Menu component test suite', function() {
     }, 1);
 
     it('should check menu btn styles', () => {
-        if (!browserIsIEorSafari()) {
-            const basicMenuBtnArrLength = getElementArrayLength(menuPage.menuBtnArr);
-
-            for (let i = 0; basicMenuBtnArrLength > i; i++) {
-                expect(getCSSPropertyByName(menuPage.menuBtnArr, MenuData.borderColorAttribute, i).value)
-                    .toContain(MenuData.menuBtnBorderColor);
-                scrollIntoView(menuPage.menuBtnArr, i);
-                mouseHoverElement(menuPage.menuBtnArr, i);
-                expect(getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
-                    .toContain(MenuData.menuBtnHoverColor);
-            }
-            focusElement(menuPage.firstMenuBtn);
-            sendKeys('Tab');
-
-            const menuBtnBorderStyle = executeScript2(menuPage.secondMenuBtn);
-            expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
+        if (browserIsIEorSafari()) {
+            console.log('Skip for IE and Safari');
             return;
         }
+        const basicMenuBtnArrLength = getElementArrayLength(menuPage.menuBtnArr);
+
+        for (let i = 0; basicMenuBtnArrLength > i; i++) {
+            expect(getCSSPropertyByName(menuPage.menuBtnArr, MenuData.borderColorAttribute, i).value)
+                .toContain(MenuData.menuBtnBorderColor);
+            scrollIntoView(menuPage.menuBtnArr, i);
+            mouseHoverElement(menuPage.menuBtnArr, i);
+            expect(getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
+                .toContain(MenuData.menuBtnHoverColor);
+        }
+        focusElement(menuPage.firstMenuBtn);
+        sendKeys('Tab');
+
+        const menuBtnBorderStyle = executeScript2(menuPage.secondMenuBtn);
+        expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
     });
     // Real issue for FF
     xit('should check avatar menu btn styles', () => {
-        if (!browserIsFirefox()) {
-            doubleClick(menuPage.menuAvatarBtn);
-
-            expect(getCSSPropertyByName(menuPage.menuAvatarBtn, MenuData.menuAvatarFocusAttr).value)
-                .toContain(MenuData.menuAvatarFocusColor);
-            expect(getAttributeByName(menuPage.menuAvatarBtn, 'image')).not.toBe(null);
-            // checks horizontal example.
-            doubleClick(menuPage.menuHorizontalAvatarBtn);
-            // todo: fails because of issue #3734
-            expect(getAttributeByName(menuPage.menuHorizontalAvatarBtn, 'image')).not.toBe(null);
+        if (browserIsFirefox()) {
+            console.log('Skip for FF due #3734');
             return
         }
-        console.log('Skip for FF due #3734');
+        doubleClick(menuPage.menuAvatarBtn);
+
+        expect(getCSSPropertyByName(menuPage.menuAvatarBtn, MenuData.menuAvatarFocusAttr).value)
+            .toContain(MenuData.menuAvatarFocusColor);
+        expect(getAttributeByName(menuPage.menuAvatarBtn, 'image')).not.toBe(null);
+        // checks horizontal example.
+        doubleClick(menuPage.menuHorizontalAvatarBtn);
+        // todo: fails because of issue #3734
+        expect(getAttributeByName(menuPage.menuHorizontalAvatarBtn, 'image')).not.toBe(null);
     });
 
     it('should check menu btn content', () => {
@@ -96,13 +97,13 @@ describe('Menu component test suite', function() {
 
     it('should check menu item styles', () => {
         // Hover doesn't work correctly in Safari
-        if (!browserIsSafari()) {
-            click(menuPage.menuBtnArr);
-            checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
-            checkMenuItemText(menuPage.menuItemTextArr);
+        if (browserIsSafari()) {
+            console.log('Skip for Safari');
             return;
         }
-        console.log('Skip for Safari');
+        click(menuPage.menuBtnArr);
+        checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        checkMenuItemText(menuPage.menuItemTextArr);
     });
 
     xit('should check menu items active state', () => {
@@ -112,38 +113,39 @@ describe('Menu component test suite', function() {
     });
 
     it('should check menu item focus', () => {
-        if (!browserIsIEorSafari()) {
-            click(menuPage.menuBtnArr);
-            checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
+        if (browserIsIEorSafari()) {
+            console.log('Skip for Safari and IE');
             return;
         }
-        console.log('Skip for Safari and IE');
+        click(menuPage.menuBtnArr);
+        checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
     });
 
     it('should check cascading menu', () => {
-        if (!browserIsIEorSafari()) {
-            click(menuPage.cascadingMenuBtn);
-            waitForElDisplayed(menuPage.cascadingMenuItemsArr);
-            checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
-            check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-                MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
-            doubleClick(menuPage.cascadingMenuBtn);
-            check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-                menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        if (browserIsIEorSafari()) {
+            console.log('Skip for Safari and IE');
             return;
         }
-        console.log('Skip for Safari and IE');
+        click(menuPage.cascadingMenuBtn);
+        waitForElDisplayed(menuPage.cascadingMenuItemsArr);
+        checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
+        check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
+            MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
+        doubleClick(menuPage.cascadingMenuBtn);
+        check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
+            menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        return;
     });
 
     it('should check collapsed and expanded states', () => {
-        if (!browserIsIEorSafari()) {
-            click(menuPage.firstMenuBtn);
-            expect(isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
-            click(menuPage.firstMenuBtn);
-            expect(isElementDisplayed(menuPage.menuItemOverlay)).toBe(false);
+        if (browserIsIEorSafari()) {
+            console.log('Skip for Safari and IE');
             return;
         }
-        console.log('Skip for Safari and IE');
+        click(menuPage.firstMenuBtn);
+        expect(isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
+        click(menuPage.firstMenuBtn);
+        expect(isElementDisplayed(menuPage.menuItemOverlay)).toBe(false);
     });
 
     it('should check LTR orientation', () => {

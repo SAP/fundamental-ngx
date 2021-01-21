@@ -1,8 +1,7 @@
-<fdp-form-group [formGroup]="timePickerForm" (onSubmit)="onSubmit()" [multiLayout]="true">
+<fdp-form-group [formGroup]="timePickerForm" (onSubmit)="onSubmit()">
     <fdp-form-field
         #ffl1
         id="24-hour"
-        zone="zLeft"
         rank="1"
         required="true"
         placeholder="hh:mm:ss"
@@ -15,7 +14,6 @@
     <fdp-form-field
         #ffl2
         id="12-hour"
-        zone="zLeft"
         rank="1"
         required="true"
         placeholder="hh:mm:ss"
@@ -28,7 +26,6 @@
     <fdp-form-field
         #ffl3
         id="without-seconds"
-        zone="zLeft"
         rank="1"
         required="true"
         placeholder="hh:mm"
@@ -41,7 +38,6 @@
     <fdp-form-field
         #ffl4
         id="compact"
-        zone="zLeft"
         rank="1"
         required="true"
         placeholder="hh:mm:ss"
@@ -53,7 +49,6 @@
 
     <fdp-form-field
         id="nullValidity"
-        zone="zLeft"
         rank="1"
         required="true"
         placeholder="hh:mm:ss"
@@ -72,7 +67,6 @@
 
     <fdp-form-field
         id="disableExample"
-        zone="zLeft"
         rank="1"
         placeholder="hh:mm:ss"
         label="Disabled Time Picker:"
@@ -80,7 +74,7 @@
         <fdp-time-picker name="disableExample" formControlName="disableExample"></fdp-time-picker>
     </fdp-form-field>
 
-    <fdp-form-field id="submitBtn" rank="8" zone="zLeft">
+    <fdp-form-field id="submitBtn" rank="8">
         <button fd-button name="submitBtn" (click)="onSubmit()">Submit</button>
     </fdp-form-field>
     <ng-template #i18n let-errors>

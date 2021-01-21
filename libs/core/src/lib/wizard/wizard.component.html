@@ -1,7 +1,7 @@
 <section class="fd-wizard">
     <ng-content select="fd-wizard-navigation"></ng-content>
     <div
-        class="fd-wizard-container-wrapper"
+        [class.fd-wizard-container-wrapper]="appendToWizard"
         #wrapperContainer
         fdScrollSpy
         [trackedTags]="['div']"

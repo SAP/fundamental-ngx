@@ -1,7 +1,7 @@
 import {
     browserIsIE,
     clearValue,
-    click,
+    click, getAttributeByName,
     getElementArrayLength,
     getText,
     getTextArr,
@@ -29,12 +29,11 @@ describe('Combobox test suite', function() {
 
     beforeAll(() => {
         comboBoxPage.open();
-        waitForPresent(comboBoxPage.comboBoxButtons(activeTypeNames[0]));
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(comboBoxPage.comboBoxButtons(activeTypeNames[0]));
+        waitForPresent(comboBoxPage.pageTitle);
     }, 1);
 
     it('Verify each combobox consist of input and button', () => {
@@ -65,46 +64,47 @@ describe('Combobox test suite', function() {
     });
 
     it('Verify each input while typing', () => {
-        if (!browserIsIE()) {
-            for (let i = 0; i < activeTypeNames.length - 1; i++) {
-                scrollIntoView(comboBoxPage.comboBoxInputs(activeTypeNames[i]));
-                clearValue(comboBoxPage.comboBoxInputs(activeTypeNames[i]));
-                setValue(comboBoxPage.comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
-                comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-                waitForElDisplayed(comboBoxPage.filledComboBoxInputs(activeTypeNames[i], appleOption));
-            }
+        if (browserIsIE()) {
+
             return;
         }
-        console.log('Skip for IE');
+        for (let i = 0; i < activeTypeNames.length - 1; i++) {
+            scrollIntoView(comboBoxPage.comboBoxInputs(activeTypeNames[i]));
+            clearValue(comboBoxPage.comboBoxInputs(activeTypeNames[i]));
+            setValue(comboBoxPage.comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
+            comboBoxPage.selectOption(activeTypeNames[i], appleOption);
+            waitForElDisplayed(comboBoxPage.filledComboBoxInputs(activeTypeNames[i], appleOption));
+        }
     });
 
     it('Verify dropdown collapsed after selecting an option', () => {
-        if (!browserIsIE()) {
-            for (let i = 0; i < activeTypeNames.length; i++) {
-                comboBoxPage.expandDropdown(activeTypeNames[i]);
-                comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-                checkNotFocused(comboBoxPage.comboBoxInput, i);
-            }
+        if (browserIsIE()) {
+            console.log('Skip for IE');
             return;
+        }
+        for (let i = 0; i < activeTypeNames.length; i++) {
+            comboBoxPage.expandDropdown(activeTypeNames[i]);
+            comboBoxPage.selectOption(activeTypeNames[i], appleOption);
+            checkNotFocused(comboBoxPage.comboBoxInput, i);
         }
     });
 
     it('Verify selected option is highlighted', () => {
-        if (!browserIsIE()) {
-            for (let i = 0; i < activeTypeNames.length; i++) {
-                comboBoxPage.expandDropdown(activeTypeNames[i]);
-                comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-                expect(comboBoxPage.optionsArray).not.toBeVisible();
-                comboBoxPage.expandDropdown(activeTypeNames[i]);
-                waitForElDisplayed(comboBoxPage.selectedDropDownOption(appleOption));
-                comboBoxPage.selectOption(activeTypeNames[i], bananaOption);
-                expect(comboBoxPage.optionsArray).not.toBeVisible();
-                comboBoxPage.expandDropdown(activeTypeNames[i]);
-                waitForElDisplayed(comboBoxPage.selectedDropDownOption(bananaOption));
-            }
+        if (browserIsIE()) {
+            console.log('Skip for IE');
             return;
         }
-        console.log('Skip for IE');
+        for (let i = 0; i < activeTypeNames.length; i++) {
+            comboBoxPage.expandDropdown(activeTypeNames[i]);
+            comboBoxPage.selectOption(activeTypeNames[i], appleOption);
+            expect(comboBoxPage.optionsArray).not.toBeVisible();
+            comboBoxPage.expandDropdown(activeTypeNames[i]);
+            waitForElDisplayed(comboBoxPage.selectedDropDownOption(appleOption));
+            comboBoxPage.selectOption(activeTypeNames[i], bananaOption);
+            expect(comboBoxPage.optionsArray).not.toBeVisible();
+            comboBoxPage.expandDropdown(activeTypeNames[i]);
+            waitForElDisplayed(comboBoxPage.selectedDropDownOption(bananaOption));
+        }
     });
 
     // Need to debug on different browsers
@@ -131,24 +131,27 @@ describe('Combobox test suite', function() {
     });
 
     it('Verify navigation by arrow buttons', () => {
-        if (!browserIsIE()) {
-            for (let i = 0; i < activeTypeNames.length; i++) {
-                comboBoxPage.expandDropdown(activeTypeNames[i]);
-                const firstOptionText = getText(comboBoxPage.optionsArray, 0);
-                const secondOptionText = getText(comboBoxPage.optionsArray, 1);
-                sendKeys(['ArrowDown']);
-                sendKeys(['Enter']);
-                let inputText = getText(comboBoxPage.comboBoxInput, i);
-                checkTextValueContain(firstOptionText, inputText);
-                comboBoxPage.expandDropdown(activeTypeNames[i]);
-                sendKeys(['ArrowDown', 'ArrowDown']);
-                sendKeys(['Enter']);
-                inputText = getText(comboBoxPage.comboBoxInput, i);
-                checkTextValueContain(secondOptionText, inputText);
-            }
+       if (browserIsIE()) {
+            console.log('Skip for IE');
             return;
         }
-        console.log('Skip for IE');
+        for (let i = 0; i < activeTypeNames.length; i++) {
+            comboBoxPage.expandDropdown(activeTypeNames[i]);
+            const firstOptionText = getText(comboBoxPage.optionsArray, 0);
+            const secondOptionText = getText(comboBoxPage.optionsArray, 1);
+            if (getAttributeByName(comboBoxPage.optionsArray, 'tabindex') === '-1') {
+                sendKeys(['ArrowDown']);
+            }
+            sendKeys(['ArrowDown']);
+            sendKeys(['Enter']);
+            let inputText = getText(comboBoxPage.comboBoxInput, i);
+            checkTextValueContain(firstOptionText, inputText);
+            comboBoxPage.expandDropdown(activeTypeNames[i]);
+            sendKeys(['ArrowDown', 'ArrowDown']);
+            sendKeys(['Enter']);
+            inputText = getText(comboBoxPage.comboBoxInput, i);
+            checkTextValueContain(secondOptionText, inputText);
+        }
     });
 
     it('Verify combobox with two columns while typing', () => {
