@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.2...v0.26.1-rc.3) (2021-01-21)
+
+
+### Features
+
+* (Platform) Form Group enhancement phase 1 ([#4213](https://github.com/SAP/fundamental-ngx/issues/4213)) ([064955e](https://github.com/SAP/fundamental-ngx/commit/064955eb5cfab0e0b1407c0258242b1793c1d050))
+
 ### [0.26.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.1...v0.26.1-rc.2) (2021-01-21)
 
 ### [0.26.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.0...v0.26.1-rc.1) (2021-01-20)
