@@ -1,32 +1,29 @@
-<fd-slider
-    mode="range"
-    tooltipMode="editable"
-    [(ngModel)]="value"
-    [min]="0"
-    [max]="100"
-    [step]="1"
-    [jump]="10">
-</fd-slider>
+<div class="base-row">
+    <p>To use Range Slider need to set <code>[mode]</code> as <code>range</code> (by default <code>[mode]</code> as <code>single</code>)</p>
+    <fd-slider [(ngModel)]="value" mode="range" tooltipMode="editable" [showTicks]="true"></fd-slider>
 
-<p>
-    Min value: {{ value[0] }}
-    <br>
-    Max value: {{ value[1] }}
-</p>
+    <p>
+        Min value: {{ value[0] }}
+        <br />
+        Max value: {{ value[1] }}
+    </p>
+    <hr>
+</div>
 
-<fd-slider
-    [(ngModel)]="value2"
-    mode="range"
-    tooltipMode="editable"
-    [min]="0"
-    [max]="100"
-    [step]="1"
-    [jump]="10"
-    [customValues]="customValues">
-</fd-slider>
+<div class="base-row">
+    <p>Range slided with Custom Values.</p>
+    <fd-slider
+        [(ngModel)]="value2"
+        mode="range"
+        [customValues]="customValues"
+        [showTicks]="true"
+        [showTicksLabels]="true"
+    >
+    </fd-slider>
 
-<p>
-    Min value: {{ value2[0] | json }}
-    <br>
-    Max value: {{ value2[1] | json }}
-</p>
+    <p>
+        Min value: {{ value2[0] | json }}
+        <br />
+        Max value: {{ value2[1] | json }}
+    </p>
+</div>

@@ -4,12 +4,14 @@ import * as sliderBasicHtml from '!raw-loader!./examples/base/slider-basic-examp
 import * as sliderBasicTs from '!raw-loader!./examples/base/slider-basic-example.component';
 import * as sliderRangeHtml from '!raw-loader!./examples/range/slider-range-example.component.html';
 import * as sliderRangeTs from '!raw-loader!./examples/range/slider-range-example.component';
-import * as sliderTicksHtml from '!raw-loader!./examples/ticks/slider-ticks-example.component.html';
-import * as sliderTicksTs from '!raw-loader!./examples/ticks/slider-ticks-example.component';
 import * as sliderTicksAndLabelsHtml from '!raw-loader!./examples/ticks-and-labels/slider-ticks-and-labels-example.component.html';
 import * as sliderTicksAndLabelsTs from '!raw-loader!./examples/ticks-and-labels/slider-ticks-and-labels-example.component';
 import * as sliderDisabledHtml from '!raw-loader!./examples/disabled/slider-disabled-example.component.html';
 import * as sliderDisabledTs from '!raw-loader!./examples/disabled/slider-disabled-example.component';
+import * as customValuesHtml from '!raw-loader!./examples/custom-values/slider-custom-values-example.component.html';
+import * as customValuesTs from '!raw-loader!./examples/custom-values/slider-custom-values-example.component';
+import * as sliderTooltipHtml from '!raw-loader!./examples/tooltip/slider-tooltip-example.component.html';
+import * as sliderTooltipTs from '!raw-loader!./examples/tooltip/slider-tooltip-example.component';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
@@ -86,7 +88,8 @@ export class SliderDocsComponent {
         {
             language: 'typescript',
             code: sliderBasicTs,
-            fileName: 'slider-basic-example'
+            fileName: 'slider-basic-example',
+            component: 'SliderBasicExampleComponent'
         },
         {
             language: 'html',
@@ -95,11 +98,26 @@ export class SliderDocsComponent {
         }
     ];
 
+    tooltip: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: sliderTooltipTs,
+            fileName: 'slider-tooltip-example',
+            component: 'SliderTooltipExampleComponent'
+        },
+        {
+            language: 'html',
+            code: sliderTooltipHtml,
+            fileName: 'slider-tooltip-example'
+        }
+    ];
+
     range: ExampleFile[] = [
         {
             language: 'typescript',
             code: sliderRangeTs,
-            fileName: 'slider-range-example'
+            fileName: 'slider-range-example',
+            component: 'SliderRangeExampleComponent'
         },
         {
             language: 'html',
@@ -108,24 +126,12 @@ export class SliderDocsComponent {
         }
     ];
 
-    ticks: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: sliderTicksTs,
-            fileName: 'slider-ticks-example'
-        },
-        {
-            language: 'html',
-            code: sliderTicksHtml,
-            fileName: 'slider-ticks-example'
-        }
-    ];
-
     ticksAndLabels: ExampleFile[] = [
         {
             language: 'typescript',
             code: sliderTicksAndLabelsTs,
-            fileName: 'slider-ticks-and-labels-example'
+            fileName: 'slider-ticks-and-labels-example',
+            component: 'SliderTicksAndLabelsExampleComponent'
         },
         {
             language: 'html',
@@ -138,12 +144,27 @@ export class SliderDocsComponent {
         {
             language: 'typescript',
             code: sliderDisabledTs,
-            fileName: 'slider-disabled-example'
+            fileName: 'slider-disabled-example',
+            component: 'SliderDisabledExampleComponent'
         },
         {
             language: 'html',
             code: sliderDisabledHtml,
             fileName: 'slider-disabled-example'
+        }
+    ];
+
+    customValues: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: customValuesTs,
+            fileName: 'slider-custom-values-example',
+            component: 'SliderCustomValuesExampleComponent'
+        },
+        {
+            language: 'html',
+            code: customValuesHtml,
+            fileName: 'slider-custom-values-example'
         }
     ];
 

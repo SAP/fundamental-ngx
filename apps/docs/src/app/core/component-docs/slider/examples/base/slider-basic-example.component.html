@@ -1,78 +1,26 @@
-<fd-slider
-    [(ngModel)]="value6"
-    [showTicks]="true"
-    [showTicksLabels]="true"
-    [customValues]="customValues"
->
-</fd-slider>
-<p>Value: {{ value6 | json }}</p>
+<div class="base-row">
+    <p>Slider default state: <code>[min]="0" [max]="100" [step]="1"</code></p>
+    <fd-slider [(ngModel)]="value"> </fd-slider>
+    <p>Value: {{ value }}</p>
+    <hr>
+</div>
 
-<fd-slider
-    tooltipMode="editable"
-    [(ngModel)]="value"
-    [min]="1"
-    [max]="10"
-    [step]="0.1"
-    [showTicks]="true"
-    [showTicksLabels]="true"
-    [jump]="2"
->
-</fd-slider>
-<p>Value: {{ value }}</p>
+<div class="base-row">
+    <p>Slider with negative min value <code>[min]="-100"</code></p>
+    <fd-slider [(ngModel)]="value1" [min]="-100"> </fd-slider>
+    <p>Value: {{ value1 }}</p>
+    <hr>
+</div>
 
-<fd-slider
-    [(ngModel)]="value7"
-    [min]="0"
-    [max]="10"
->
-</fd-slider>
-<p>Value: {{ value7 }}</p>
+<div class="base-row">
+    <p>Slider with <code>[min]="-50" [max]="50" [step]="5"</code> values.</p>
+    <fd-slider [(ngModel)]="value2" [min]="-50" [max]="50" [step]="5"> </fd-slider>
+    <p>Value: {{ value2 }}</p>
+    <hr>
+</div>
 
-<fd-slider
-    tooltipMode="editable"
-    [(ngModel)]="value1"
-    [min]="-1000"
-    [max]="1000"
->
-</fd-slider>
-<p>Value: {{ value1 }}</p>
-
-<fd-slider
-    tooltipMode="editable"
-    [(ngModel)]="value2"
-    [min]="0"
-    [max]="500"
->
-</fd-slider>
-<p>Value: {{ value2 }}</p>
-
-<fd-slider
-    tooltipMode="editable"
-    [(ngModel)]="value3"
-    [min]="0"
-    [max]="10"
-    [showTicks]="true"
->
-</fd-slider>
-<p>Value: {{ value3 }}</p>
-
-<fd-slider
-    tooltipMode="editable"
-    [(ngModel)]="value4"
-    [min]="0"
-    [max]="100"
-    [showTicks]="true"
->
-</fd-slider>
-<p>Value: {{ value4 }}</p>
-
-<fd-slider
-    tooltipMode="editable"
-    [(ngModel)]="value5"
-    [min]="-100"
-    [max]="100"
-    [step]="5"
-    [showTicks]="true"
->
-</fd-slider>
-<p>Value: {{ value5 }}</p>
+<div class="base-row">
+    <p>Slider with <code>[min]="-1" [max]="1" [step]="0.2"</code> values.</p>
+    <fd-slider [(ngModel)]="value4" [min]="-1" [max]="1" [step]="0.2"> </fd-slider>
+    <p>Value: {{ value4 }}</p>
+</div>
