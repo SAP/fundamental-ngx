@@ -12,7 +12,6 @@ import { Directive, ElementRef, HostBinding, OnInit, Renderer2 } from '@angular/
 })
 export class FeedInputButtonDirective implements OnInit {
     /** @hidden */
-    @HostBinding('disabled')
     @HostBinding('attr.aria-disabled')
     disabled = true;
 

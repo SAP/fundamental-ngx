@@ -8,7 +8,8 @@ import {
     ChangeDetectionStrategy,
     AfterViewInit,
     Renderer2,
-    ElementRef
+    ElementRef,
+    OnInit
 } from '@angular/core';
 
 @Component({
@@ -18,7 +19,7 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FeedInputComponent implements AfterViewInit {
+export class FeedInputComponent implements OnInit, AfterViewInit {
     /** The user image source, If is not set, then the user image will display placeholder image.  */
     @Input()
     avatarSrc: string;
@@ -41,7 +42,7 @@ export class FeedInputComponent implements AfterViewInit {
 
     /** Set title attribute for accessibility user image */
     @Input()
-    title: string;
+    userTitle: string = null;
 
     /** @hidden Event emitted when user click on send button */
     @Output()
@@ -55,9 +56,17 @@ export class FeedInputComponent implements AfterViewInit {
     value: string | null;
 
     /** @hidden */
+    title: string;
+
+    /** @hidden */
     constructor(
         private _renderer: Renderer2
     ) {
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.title = this._calculateUserTitle();
     }
 
     /** @hidden */
@@ -108,5 +117,10 @@ export class FeedInputComponent implements AfterViewInit {
         return parseInt(computed.getPropertyValue('border-top-width'), 10) +
             this.textarea.nativeElement.scrollHeight +
             parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+    }
+
+    /** @hidden Calculate default title */
+    private _calculateUserTitle(): string {
+       return this.userTitle ? this.userTitle : 'User';
     }
 }

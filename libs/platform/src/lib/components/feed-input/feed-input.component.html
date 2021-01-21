@@ -29,8 +29,7 @@
         glyph="feeder-arrow"
         title="Send"
         ariaLabel="Send"
-        [disabled]="!value"
-        [attr.aria-disabled]="!value || disabled"
+        [ariaDisabled]="!value || disabled"
         (click)="onSubmit()"
     >
     </fdp-button>
