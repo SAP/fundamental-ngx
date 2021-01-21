@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DialogBodyComponent } from './dialog-body.component';
 import { DialogConfig } from '../utils/dialog-config.class';
@@ -9,7 +9,7 @@ describe('DialogBodyComponent', () => {
     let component: DialogBodyComponent;
     let fixture: ComponentFixture<DialogBodyComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [BusyIndicatorModule],
             declarations: [DialogBodyComponent],

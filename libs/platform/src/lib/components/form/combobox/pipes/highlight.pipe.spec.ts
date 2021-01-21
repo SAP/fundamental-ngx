@@ -1,11 +1,11 @@
 import { HighlightPipe } from './highlight.pipe';
 import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('Pipe: Highlight', () => {
     let pipe: HighlightPipe;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             providers: [ComboboxConfig]
         }).compileComponents();

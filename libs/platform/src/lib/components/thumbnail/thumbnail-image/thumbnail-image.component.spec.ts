@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core'
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ThumbnailImageComponent } from './thumbnail-image.component';
@@ -33,7 +33,7 @@ describe('DefaultThumbnailImageComponent', () => {
     let component: DefaultThumbnailImageTestComponent;
     let fixture: ComponentFixture<DefaultThumbnailImageTestComponent>;
     let thumbNailImageComponent: ThumbnailImageComponent;
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
             declarations: [ThumbnailImageComponent, DefaultThumbnailImageTestComponent]
@@ -93,7 +93,7 @@ describe('HorizontalThumbnailImageComponent', () => {
     let component: HorizontalThumbnailImageTestComponent;
     let fixture: ComponentFixture<HorizontalThumbnailImageTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
             declarations: [ThumbnailImageComponent, HorizontalThumbnailImageTestComponent]

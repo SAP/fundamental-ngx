@@ -1,5 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { Component, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
@@ -20,7 +20,7 @@ describe('MenuButtonComponent', () => {
     let component: MenuButtonComponent;
     let fixture: ComponentFixture<MenuButtonComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
             declarations: [MenuButtonComponent]
@@ -70,7 +70,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
     let component: DisabledMenuButtonComponent;
     let fixture: ComponentFixture<DisabledMenuButtonComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
             declarations: [DisabledMenuButtonComponent, MenuButtonComponent]
@@ -157,7 +157,7 @@ describe('Menu Button click on Item select', () => {
     let fixture: ComponentFixture<TestMenuButtonComponent>;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
             declarations: [TestMenuButtonComponent, MenuButtonComponent],

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FormInputMessageGroupComponent } from './form-input-message-group.component';
 import { PopoverModule } from '../../popover/popover.module';
@@ -8,7 +8,7 @@ describe('FormInputMessageGroupComponent', () => {
     let component: FormInputMessageGroupComponent;
     let fixture: ComponentFixture<FormInputMessageGroupComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PopoverModule],
             declarations: [FormInputMessageGroupComponent]

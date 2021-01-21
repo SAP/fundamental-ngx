@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ObjectMarkerComponent } from './object-marker.component';
 
@@ -16,7 +16,7 @@ describe('ObjectMarkerComponent', () => {
     let component: ObjectMarkerComponent;
     let fixture: ComponentFixture<TestObjectMarkerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ObjectMarkerComponent, TestObjectMarkerComponent]
         }).compileComponents();

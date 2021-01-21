@@ -1,11 +1,11 @@
-import { async } from '@angular/core/testing';
+import { waitForAsync } from '@angular/core/testing';
 import { MenuInteractiveDirective } from './menu-interactive.directive';
 import { MockElementRef } from '../../scroll-spy/scroll-spy.directive.spec';
 
 describe('MenuLinkDirective', () => {
     let directive: MenuInteractiveDirective;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         directive = new MenuInteractiveDirective(new MockElementRef())
     }));
 

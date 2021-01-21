@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { whenStable } from './../utils/tests/when-stable';
@@ -125,7 +125,7 @@ describe('CarouselComponent', () => {
     let component: TestCarouselComponent;
     let fixture: ComponentFixture<TestCarouselComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CarouselComponent, CarouselItemComponent, TestCarouselComponent],
             imports: [CarouselModule]
@@ -294,7 +294,7 @@ describe('CarouselComponent Multiple Active Item', () => {
     let component: TestCarouselMultipleActiveItemComponent;
     let fixture: ComponentFixture<TestCarouselMultipleActiveItemComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CarouselComponent, CarouselItemComponent, TestCarouselMultipleActiveItemComponent],
             imports: [CarouselModule]
@@ -506,7 +506,7 @@ describe('CarouselComponent looping navigation', () => {
     let component: TestCarouselLoopingNavigationComponent;
     let fixture: ComponentFixture<TestCarouselLoopingNavigationComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CarouselComponent, CarouselItemComponent, TestCarouselLoopingNavigationComponent],
             imports: [CarouselModule]

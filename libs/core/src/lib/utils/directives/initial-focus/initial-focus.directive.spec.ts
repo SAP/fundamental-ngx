@@ -22,7 +22,7 @@ describe('InitialFocusDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent, InitialFocusDirective]
         }).compileComponents();

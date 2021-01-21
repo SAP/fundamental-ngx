@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ObjectMarkerModule } from '@fundamental-ngx/core';
 import { By } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ describe('PlatformObjectMarkerComponent', () => {
     let host: TestPlatformPlatformObjectMarkerComponent;
     let fixture: ComponentFixture<TestPlatformPlatformObjectMarkerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ObjectMarkerModule],
             declarations: [PlatformObjectMarkerComponent, TestPlatformPlatformObjectMarkerComponent]

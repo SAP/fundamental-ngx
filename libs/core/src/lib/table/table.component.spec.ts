@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TableComponent } from './table.component';
 import { TableService } from './table.service';
@@ -8,7 +8,7 @@ describe('TableComponent', () => {
     let fixture: ComponentFixture<TableComponent>;
     const tableSpy = jasmine.createSpyObj('TableService', ['changeKeys']);
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TableComponent],
             providers: [
