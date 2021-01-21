@@ -286,7 +286,6 @@ exports.config = {
         browser.maximizeWindow();
     }
 
-
 //     const processedConfig = await browser.getProcessedConfig();
 //
 // // Resize the screens if it is a VM
@@ -328,8 +327,6 @@ exports.config = {
      */
     // afterTest: function(test, context, { error, result, duration, passed, retries }) {
     // },
-
-
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details

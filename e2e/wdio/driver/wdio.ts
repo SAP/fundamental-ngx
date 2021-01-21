@@ -179,12 +179,12 @@ export function getElementSize(selector: string, index: number = 0, prop?: 'widt
     return $$(selector)[index].getSize(prop || void 0);
 }
 
-export function executeScript2(selector): string {
-    const attrName = browser.capabilities.browserName === 'firefox' ? 'border-left-style' : 'border';
-    return browser.execute(function(selector, attrName) {
+export function executeScriptAfterTagFF(selector: string, index: number = 0): string {
+    const attrName = browserIsFirefox() ? 'border-left-style' : 'border';
+    return browser.execute(function(selector, attrName, index) {
         return window.getComputedStyle(
-            document.querySelector(selector), ':after')[attrName];
-    }, selector, attrName);
+            document.querySelectorAll(selector)[index], ':after')[attrName];
+    }, selector, attrName, index);
 }
 
 export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
@@ -225,8 +225,8 @@ export function isElementClickable(selector: string, index: number = 0): boolean
     return $$(selector)[index].isClickable();
 }
 
-export function doesItExist(selector: string, index: number = 0): boolean {
-    return $$(selector)[index].isExisting();
+export function doesItExist(selector: string): boolean {
+    return $(selector).isExisting();
 }
 
 export function getCurrentUrl(): string {

@@ -5,7 +5,6 @@ export default {
     line 3
     line 4`,
 
-
     eight_lines_text : `
     line 1 
     line 2 

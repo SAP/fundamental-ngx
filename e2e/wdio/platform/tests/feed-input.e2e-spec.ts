@@ -3,7 +3,7 @@ import {
     clearValue,
     doesItExist,
     elementDisplayed,
-    executeScriptAfterTagAttr,
+    executeScriptAfterTagAttr, executeScriptAfterTagFF,
     getAttributeByName,
     getAttributeByNameArr,
     getCSSPropertyByName,
@@ -24,6 +24,7 @@ import inputPageTestData from '../fixtures/testData/feed-input';
 describe('Verify Feed Input component', function() {
     const { feedInputAvatar, feedInputTextArea, feedInput, feedInputNoAvatar, feedInputButton } = new FeedInputPo();
     const { four_lines_text, eight_lines_text } = inputPageTestData;
+    const { placeholders_array, send_button_tooltip, avatar_tooltip, default_avatar_class } = inputPageContent;
     const feedInputPage = new FeedInputPo();
     beforeAll(() => {
         feedInputPage.open();
@@ -33,11 +34,10 @@ describe('Verify Feed Input component', function() {
     afterEach(() => {
         refreshPage();
         waitForElDisplayed(feedInputAvatar);
-        waitForElDisplayed(feedInputAvatar);
     }, 1);
 
     it('should have correct placeholder assigned', () => {
-        expect(getAttributeByNameArr(feedInputTextArea, 'placeholder')).toEqual(inputPageContent.placeholdersArray);
+        expect(getAttributeByNameArr(feedInputTextArea, 'placeholder')).toEqual(placeholders_array);
     });
 
     it('should have example with avatar image assigned', () => {
@@ -45,28 +45,29 @@ describe('Verify Feed Input component', function() {
         waitForPresent(feedInputAvatar);
         expect(getAttributeByName(feedInput, 'avatarsrc')).not.toBe('');
         expect(getAttributeByName(feedInput, 'avatarsrc')).not.toBeNull();
-        expect(getAttributeByName(feedInputAvatar, 'class')).not.toContain('fd-avatar--placeholder');
+        expect(getAttributeByName(feedInputAvatar, 'class')).not.toContain(default_avatar_class);
 
         waitForPresent(feedInput, 3);
         waitForPresent(feedInputAvatar, 2);
         expect(getAttributeByName(feedInput, 'avatarsrc', 3)).not.toBe('');
         expect(getAttributeByName(feedInput, 'avatarsrc', 3)).not.toBeNull();
-        expect(getAttributeByName(feedInputAvatar, 'class', 2)).not.toContain('fd-avatar--placeholder');
+        expect(getAttributeByName(feedInputAvatar, 'class', 2)).not.toContain(default_avatar_class);
 
         waitForPresent(feedInput, 4);
         waitForPresent(feedInputAvatar, 3);
         expect(getAttributeByName(feedInput, 'avatarsrc', 4)).not.toBe('');
         expect(getAttributeByName(feedInput, 'avatarsrc', 4)).not.toBeNull();
-        expect(getAttributeByName(feedInputAvatar, 'class', 3)).not.toContain('fd-avatar--placeholder');
+        expect(getAttributeByName(feedInputAvatar, 'class', 3)).not.toContain(default_avatar_class);
     });
-
 
     it('should have example with default avatar assigned', () => {
         expect(['', null]).toContain(getAttributeByName(feedInput, 'avatarsrc', 1));
-        expect(getAttributeByName(feedInputAvatar, 'class', 1)).toContain('fd-avatar--placeholder');
+        expect(getAttributeByName(feedInputAvatar, 'class', 1)).toContain(default_avatar_class);
     });
 
     it('should have example with no avatar', () => {
+        waitForElDisplayed(feedInputButton, 2);
+        scrollIntoView(feedInputButton, 2);
         expect(doesItExist(feedInputNoAvatar)).toBe(false);
     });
 
@@ -75,7 +76,6 @@ describe('Verify Feed Input component', function() {
         for (let i = 0; arrLength > i; i++) {
             waitForPresent(feedInputButton, i);
             scrollIntoView(feedInputButton, i);
-            expect(doesItExist(feedInputButton, i)).toBe(true);
             expect(elementDisplayed(feedInputButton, i)).toBe(true);
             expect(isEnabled(feedInputButton, i)).toBe(false);
         }
@@ -141,7 +141,8 @@ describe('Verify Feed Input component', function() {
             setValue(feedInputTextArea, four_lines_text, i);
             const inputFocusStyle = getCSSPropertyByName(feedInputTextArea, 'outline-style', i).value;
             sendKeys('Tab');
-            const sendButtonFocusStyle = executeScriptAfterTagAttr(feedInputButton, 'border', i);
+
+            const sendButtonFocusStyle = executeScriptAfterTagFF(feedInputButton, i);
 
             expect(inputFocusStyle).toBe('dotted');
             expect(sendButtonFocusStyle).toContain('dotted');
@@ -149,13 +150,12 @@ describe('Verify Feed Input component', function() {
     });
 
     it('should avatar and Send button has correct tooltip', () => {
-
+        expect(getAttributeByNameArr(feedInputButton, 'title')).toEqual(send_button_tooltip);
+        // #4399 uncomment after fix
+        // expect(getAttributeByNameArr(feedInputAvatar, 'title')).toEqual(avatar_tooltip);
     });
-
 
     it('should check RTL', () => {
         feedInputPage.checkRtlSwitch();
     });
-
-
 });

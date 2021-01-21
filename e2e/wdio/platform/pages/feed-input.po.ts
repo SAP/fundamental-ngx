@@ -17,3 +17,6 @@ export class FeedInputPo extends BaseComponentPo {
         waitForElDisplayed(this.feedInput);
     }
 }
+
+
+// document.querySelectorAll('.fd-feed-input button')[0]
