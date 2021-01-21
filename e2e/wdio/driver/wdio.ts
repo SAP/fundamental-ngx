@@ -19,7 +19,7 @@ export function isBrowser(browserName: string): boolean {
 }
 
 export function browserIsIEorSafari(): boolean {
-    return browserIsSafari() || browserIsIE() ;
+    return browserIsSafari() || browserIsIE();
 }
 
 export function browserIsFirefox(): boolean {
@@ -270,4 +270,15 @@ export function getElementLocation(selector: string, index: number = 0, prop?: '
 
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
+}
+
+
+// ======================================================================================================
+
+export function saveElement(selector: string, tag: string, index: number = 0): void {
+    browser.saveElement($$(selector)[index], tag);
+}
+
+export function checkElement(selector: string, tag: string, index: number = 0): any {
+   return browser.checkElement($$(selector)[index], tag);
 }
