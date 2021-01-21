@@ -1,8 +1,8 @@
 <h3>Use With Reactive Form</h3>
 <p>Platform radio buttons created with given list of string values and have validation error</p>
 <form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
-    <fdp-form-group multiLayout="true" [formGroup]="form1">
-        <fdp-form-field #fl1 id="radiol1" zone="zLeft" rank="1" [required]="true">
+    <fdp-form-group [formGroup]="form1">
+        <fdp-form-field #fl1 id="radiol1" rank="1" [required]="true">
             <fdp-radio-group name="radiol1" [list]="seasons" [isInline]="true" contentDensity="cozy"
                 [formControl]="fl1.formControl">
             </fdp-radio-group>
@@ -22,8 +22,8 @@
 <br />
 
 <p>Platform radio button with None (No selection) value created as an Option</p>
-<fdp-form-group multiLayout="true" [formGroup]="form2" [object]="form2Data">
-    <fdp-form-field #fl2 id="radiol2" zone="zLeft" rank="1">
+<fdp-form-group [formGroup]="form2" [object]="form2Data">
+    <fdp-form-field #fl2 id="radiol2" rank="1">
         <fdp-radio-group name="radiol2" [list]="seasons" [isInline]="true" contentDensity="compact" hasNoValue="true"
             noValueLabel="(No Selection)" [formControl]="fl2.formControl">
         </fdp-radio-group>
@@ -33,8 +33,8 @@
 <br />
 
 <p>Radio group using FormGroup and FormControl</p>
-<fdp-form-group multiLayout="true" [formGroup]="form3">
-    <fdp-form-field id="radiol3" zone="zLeft" rank="1">
+<fdp-form-group [formGroup]="form3">
+    <fdp-form-field id="radiol3" rank="1">
         <fdp-radio-group name="radiol3" [list]="seasons" [isInline]="true" formControlName="month">
         </fdp-radio-group>
     </fdp-form-field>
@@ -45,8 +45,8 @@
 <h3>Use With Template Driven Form</h3>
 
 <p>Creating platform radio button with list of string values also pre-selection based on control value</p>
-<fdp-form-group multiLayout="true">
-    <fdp-form-field id="radiol4" zone="zLeft" rank="1">
+<fdp-form-group>
+    <fdp-form-field id="radiol4" rank="1">
         <fdp-radio-group name="radiol4" [list]="seasons" [isInline]="true" [(ngModel)]="favoriteOption">
         </fdp-radio-group>
     </fdp-form-field>
@@ -54,8 +54,8 @@
 <p style="margin-left: 2rem;">Selected value: {{ favoriteOption }}</p>
 
 <p>Creating platform radio button with given list of string values</p>
-<fdp-form-group multiLayout="true">
-    <fdp-form-field id="radiol5" zone="zLeft" rank="1">
+<fdp-form-group>
+    <fdp-form-field id="radiol5" rank="1">
         <fdp-radio-group name="radiol5" [list]="seasons" contentDensity="compact" [isInline]="true"
             [(ngModel)]="favoriteOption2">
         </fdp-radio-group>

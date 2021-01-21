@@ -1,31 +1,30 @@
 <h3>Date Picker with Reactive Form.</h3>
-<fdp-form-group #ffg [formGroup]="datePickerForm" [object]="formInitialData" (onSubmit)="onSubmit(ffg)"
-    [multiLayout]="true">
-    <fdp-form-field #ffl1 id="birthday" zone="zLeft" rank="1" required="true" placeholder="Enter your birthday"
+<fdp-form-group #ffg [formGroup]="datePickerForm" [object]="formInitialData" (onSubmit)="onSubmit(ffg)" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field #ffl1 id="birthday" column="1" rank="1" required="true" placeholder="Enter your birthday"
         label="Pre-populated single type date-picker:" [validators]="requiredDateValidator">
         <fdp-date-picker name="birthday" type="single" [allowNull]="false" [formControl]="ffl1.formControl">
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field #ffl2 id="examdate" zone="zRight" rank="1" required="true" label="Single type date-picker:">
+    <fdp-form-field #ffl2 id="examdate" column="2" rank="1" required="true" label="Single type date-picker:">
         <fdp-date-picker name="examdate" type="single" [allowNull]="false" placeholder="Enter your Exam dates"
             [formControl]="ffl2.formControl">
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field #ffl3 id="holiday" zone="zLeft" rank="1" [validators]="rangeDateValidator"
+    <fdp-form-field #ffl3 id="holiday" column="1" rank="1" [validators]="rangeDateValidator"
         label="Pre-populated range type date-picker:">
         <fdp-date-picker name="holiday" type="range" [allowNull]="false" rangeHoverEffect="true"
             contentDensity="compact" placeholder="Holiday in between?" [formControl]="ffl3.formControl">
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field #ffl4 id="journeydate" zone="zRight" rank="2" label="Range type date-picker:">
+    <fdp-form-field #ffl4 id="journeydate" column="2" rank="2" label="Range type date-picker:">
         <fdp-date-picker name="journeydate" type="range" contentDensity="compact" placeholder="Journey dates?"
             [formControl]="ffl4.formControl">
         </fdp-date-picker>
     </fdp-form-field>
-    <fdp-form-field #ffl5 id="disableddate" zone="zLeft" rank="2" required="true" label="Disabled Date Picker:"
+    <fdp-form-field #ffl5 id="disableddate" column="1" rank="2" required="true" label="Disabled Date Picker:"
         disabled="true">
         <fdp-date-picker name="disableddate" type="single" [allowNull]="false"
             placeholder="This is a disabled date picker" [formControl]="ffl5.formControl">
@@ -54,19 +53,19 @@
 
 <h3>Date Picker with Template Driven Form.</h3>
 <!--Template Driven Form-->
-<fdp-form-group [multiLayout]="true">
-    <fdp-form-field id="birthday" zone="zLeft" rank="1" required="true" label="Birth Date:">
+<fdp-form-group columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="birthday" column="1" rank="1" required="true" label="Birth Date:">
         <fdp-date-picker name="birthday" placeholder="mm/dd/yyyy" type="single" [allowNull]="false" [(ngModel)]="birthdayPicker">
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field id="holiday" zone="zLeft" rank="2" required="true" label="Holiday:" [validators]="rangeDateValidator">
+    <fdp-form-field id="holiday" column="1" rank="2" required="true" label="Holiday:" [validators]="rangeDateValidator">
         <fdp-date-picker name="holiday" type="range" [allowNull]="false" contentDensity="compact"
             placeholder="When are you going to holiday?" [(ngModel)]="holidayPicker">
         </fdp-date-picker>
     </fdp-form-field>
 
-    <fdp-form-field id="disableddate" zone="zRight" rank="1" label="Disabled Date Picker:">
+    <fdp-form-field id="disableddate" column="2" rank="1" label="Disabled Date Picker:">
         <fdp-date-picker name="disabledDate" type="single" disabled="true" [(ngModel)]="disabledDate"></fdp-date-picker>
     </fdp-form-field>
 
