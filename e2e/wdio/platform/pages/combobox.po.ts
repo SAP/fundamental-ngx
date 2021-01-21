@@ -22,11 +22,11 @@ export class ComboBoxPo extends BaseComponentPo {
     comboBoxInput = this.comboBoxRoot + ' input';
 
     selectedDropDownOption = (name: string) => {
-        return `//span[contains(.,'${name}')]//ancestor::li[@role="listitem" and contains(@class, "is-selected")]`;
+        return `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;
     };
 
     dropDownOption = (name: string) => {
-        return `//span[contains(.,'${name}')]//ancestor::li[@role="listitem"]`;
+        return `//span[contains(.,'${name}')]//ancestor::li`;
     };
 
     comboBoxOptionHint = (typedCharacters: string, restCharacters: string) => {
