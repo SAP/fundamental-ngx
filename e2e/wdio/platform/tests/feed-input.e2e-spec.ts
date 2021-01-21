@@ -3,7 +3,7 @@ import {
     clearValue,
     doesItExist,
     elementDisplayed,
-    executeScriptAfterTagAttr, executeScriptAfterTagFF,
+    executeScriptAfterTagFF,
     getAttributeByName,
     getAttributeByNameArr,
     getCSSPropertyByName,
@@ -13,22 +13,25 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    setValue, waitForElDisplayed,
+    setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { FeedInputPo } from '../pages/feed-input.po';
-import inputPageContent from '../fixtures/appData/feed-input-page-contents';
-import inputPageTestData from '../fixtures/testData/feed-input';
-
+import {
+    placeholders_array,
+    send_button_tooltip,
+    avatar_tooltip,
+    default_avatar_class
+} from '../fixtures/appData/feed-input-page-contents';
+import { four_lines_text, eight_lines_text } from '../fixtures/testData/feed-input';
 
 describe('Verify Feed Input component', function() {
     const { feedInputAvatar, feedInputTextArea, feedInput, feedInputNoAvatar, feedInputButton } = new FeedInputPo();
-    const { four_lines_text, eight_lines_text } = inputPageTestData;
-    const { placeholders_array, send_button_tooltip, avatar_tooltip, default_avatar_class } = inputPageContent;
     const feedInputPage = new FeedInputPo();
+
     beforeAll(() => {
         feedInputPage.open();
-        waitForElDisplayed(feedInputAvatar);
     }, 1);
 
     afterEach(() => {
