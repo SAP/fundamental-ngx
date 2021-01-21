@@ -23,22 +23,36 @@
     }
 }
 
-.fd-slider__tick-wrapper {
-    .fd-slider__label,
-    .fd-slider__tick {
-        position: absolute;
-    }
-}
+.fd-slider {
+    display: block;
 
-.fd-slider__track {
-    .fd-slider__handle:focus {
-        z-index: 2;
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    &.fd-slider--with-labels {
+        padding-bottom: 2rem;
+    }
+
+    &__tick-wrapper {
+        .fd-slider__label,
+        .fd-slider__tick {
+            position: absolute;
+        }
+    }
+
+    &__track {
+        .fd-slider__handle:focus {
+            z-index: 2;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+        }
+    }
+
+    &__labels {
+        .fd-slider__label {
+            white-space: nowrap;
+        }
     }
 }
 

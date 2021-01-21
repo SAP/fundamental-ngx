@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-slider-range-example',
-    templateUrl: './slider-range-example.component.html'
+    selector: 'fd-slider-custom-values-example',
+    templateUrl: './slider-custom-values-example.component.html'
 })
-export class SliderRangeExampleComponent {
-    value = [20, 70];
-
+export class SliderCustomValuesExampleComponent {
     customValues = [
         { value: 1609452000000, label: 'Jan 1' },
         { value: 1609538400000, label: 'Jan 2' },
@@ -20,5 +18,5 @@ export class SliderRangeExampleComponent {
         { value: 1610229600000, label: 'Jan 10' }
     ];
 
-    value2 = [this.customValues[4], this.customValues[6]];
+    value = this.customValues[4];
 }

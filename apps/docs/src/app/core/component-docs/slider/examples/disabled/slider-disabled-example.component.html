@@ -1,10 +1,4 @@
-<fd-slider
-    [(ngModel)]="value"
-    [min]="0"
-    [max]="100"
-    [step]="10"
-    [disabled]="true"
->
-</fd-slider>
+<p>To make Slider disabled need to set <code>[disable]</code> as <code>true</code>.</p>
+<fd-slider [(ngModel)]="value" [disabled]="true"> </fd-slider>
 
 <p>Value: {{ value }}</p>

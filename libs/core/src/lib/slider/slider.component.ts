@@ -130,6 +130,10 @@ export class SliderComponent
     @Input()
     jump = 10;
 
+    /** Put a label on every N-th tickmark. */
+    @Input()
+    tickmarksBetweenLabels = 1;
+
     /** Slider mode. */
     @Input()
     mode: 'single' | 'range' = 'single';
@@ -148,7 +152,7 @@ export class SliderComponent
 
     /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
     @Input()
-    tooltipMode: 'readonly' | 'editable' = 'readonly';
+    tooltipMode: 'readonly' | 'editable';
 
     /** Hides display of colored progress bar. */
     @Input()
@@ -333,7 +337,12 @@ export class SliderComponent
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return ['fd-slider', this.class];
+        return [
+            'fd-slider',
+            this.disabled ? 'is-disabled' : '',
+            this.showTicks && this.showTicksLabels ? 'fd-slider--with-labels' : '',
+            this.class
+        ];
     }
 
     /** @hidden */
@@ -662,7 +671,7 @@ export class SliderComponent
                 this._tickMarks = Array(tickMarksCount)
                     .fill({})
                     .map((_, i) => {
-                        const value = i * this.step;
+                        const value = Math.round((i * this.step) * 100) / 100;
 
                         return { value: value, label: `${this.min + value}` };
                     });
@@ -719,6 +728,8 @@ export class SliderComponent
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
+        this._isRtl = this._rtlService?.rtl.getValue();
+
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;
             this._cdr.detectChanges();
