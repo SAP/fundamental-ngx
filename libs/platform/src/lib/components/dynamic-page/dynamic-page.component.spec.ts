@@ -178,7 +178,7 @@ describe('DynamicPageComponent default values', () => {
     it('should collapse header on scroll', fakeAsync(() => {
         component.dynamicPage.ngAfterViewInit();
         const throttleTime = 100;
-        document.dispatchEvent(new Event('scroll'));
+        component.dynamicPageContentComponent.getElementRef().nativeElement.dispatchEvent(new Event('scroll'));
         spyOn(component.dynamicPageHeaderComponent, 'collapseHeader');
         fixture.detectChanges();
         tick(throttleTime);

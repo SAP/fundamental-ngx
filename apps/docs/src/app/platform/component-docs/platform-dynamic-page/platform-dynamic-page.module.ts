@@ -1,4 +1,3 @@
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -37,7 +36,6 @@ const routes: Routes = [
         ToolbarModule,
         PlatformButtonModule,
         BarModule,
-        ScrollingModule,
         FlexibleColumnLayoutModule
     ],
     exports: [RouterModule],

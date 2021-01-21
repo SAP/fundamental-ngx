@@ -1,4 +1,3 @@
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
@@ -27,7 +26,7 @@ import { DynamicPageComponent } from './dynamic-page.component';
         DynamicPageTabbedContentComponent,
         DynamicPageFooterComponent
     ],
-    imports: [CommonModule, TabsModule, ScrollingModule, PlatformButtonModule],
+    imports: [CommonModule, TabsModule, PlatformButtonModule],
     exports: [
         DynamicPageComponent,
         DynamicPageTitleComponent,
