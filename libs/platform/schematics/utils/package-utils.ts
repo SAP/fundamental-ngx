@@ -1,7 +1,8 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
-import { WorkspaceProject, WorkspaceSchema, ProjectType } from '@schematics/angular/utility/workspace-models';
-import { getWorkspace } from '@schematics/angular/utility/config';
+import { WorkspaceProject, ProjectType } from '@schematics/angular/utility/workspace-models';
+import {getWorkspace} from '@schematics/angular/utility/workspace';
+
 
 // Gets the ts source file from a path
 export function getSourceFile(host: Tree, path: string): ts.SourceFile {
@@ -56,11 +57,5 @@ export function getDistPath(host: Tree, options: any): any {
 
 // Returns the workspace project for the application
 export function getWorkspaceProject(host: Tree, options: any): any {
-    const workspace: WorkspaceSchema = getWorkspace(host);
-    const projectName = options.project || workspace.defaultProject;
-
-    if (!projectName) {
-        throw Error(`Cant Find project by name ${projectName}`);
-    }
-    return workspace.projects[projectName];
+    return getWorkspace(host, options);
 }
