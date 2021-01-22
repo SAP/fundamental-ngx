@@ -55,7 +55,9 @@ import {
     FdpHeaderCellDef,
     FdpTableCell,
     FdpTableHeader,
-    FdpViewSettingsFilterCustomDef
+    FdpViewSettingsFilterCustomDef,
+    TableScrollable,
+    FdpTableScroller
 } from './directives';
 import { ValueByPathPipe } from './pipes';
 
@@ -114,7 +116,9 @@ import { ValueByPathPipe } from './pipes';
         P13GroupingDialogComponent,
         P13FilteringDialogComponent,
         FilterRuleComponent,
-        P13ColumnsDialogComponent
+        P13ColumnsDialogComponent,
+        TableScrollable,
+        FdpTableScroller
     ],
     exports: [
         TableComponent,

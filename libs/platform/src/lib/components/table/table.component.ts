@@ -17,12 +17,10 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core';
+import { RtlService } from '@fundamental-ngx/core';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
@@ -54,6 +52,7 @@ import { ObservableTableDataSource } from './domain/observable-data-source';
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
 import { Table } from './table';
+import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -103,9 +102,9 @@ interface GroupTableRowValueType {
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TableService, { provide: Table, useExisting: TableComponent }],
+    providers: [{ provide: Table, useExisting: TableComponent }, TableService, TableScrollDispatcherService],
     host: {
-        class: 'fd-table',
+        class: 'fdp-table',
         '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
         '[class.fd-table--condensed]': 'contentDensity === CONTENT_DENSITY.CONDENSED',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
@@ -540,6 +539,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     // Private API
 
+    /** @hidden */
+    _isColumnHasHeaderMenu(column: TableColumn): boolean {
+        return (
+            column.sortable ||
+            column.groupable ||
+            column.freezable ||
+            (column.filterable && !this._isFilteringFromHeaderDisabled)
+        );
+    }
+
     /**
      * @hidden
      * Toggle selectable row
@@ -608,17 +617,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         });
     }
 
-    /** @hidden */
-    _triggerClickOnKeyboardEnter(event: KeyboardEvent): void {
-        event.stopPropagation();
-
-        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            const click = new MouseEvent('click');
-            event.target.dispatchEvent(click);
-            event.preventDefault();
-        }
-    }
-
     /**
      * @hidden
      * Group By triggered from column header
@@ -663,7 +661,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getFreezableSelectionCellStyles(): any {
+    _getFreezableSelectionCellStyles(): { [key: string]: string | number } {
         return { 'min-width.px': this._selectionColumnWidth, 'max-width.px': this._selectionColumnWidth };
     }
 
@@ -678,16 +676,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _toggleGroupRow(groupRow: TableRow): void {
         this._toggleExpandableTableRow(groupRow);
-    }
-
-    /** @hidden */
-    _isColumnHasHeaderMenu(column: TableColumn): boolean {
-        return (
-            column.sortable ||
-            column.groupable ||
-            column.freezable ||
-            (column.filterable && !this._isFilteringFromHeaderDisabled)
-        );
     }
 
     /** @hidden */
