@@ -1,0 +1,43 @@
+<header>Form Container</header>
+<description>
+    Platform Forms' structure can be broken down into 3 groups:
+    <ul>
+        <li>
+            Form Group (actual Form Layout)
+            <ul>
+                <li>Manages global Error handling navigation</li>
+                <li>Responsible for layout (multizone)</li>
+                <li>Can pre-set common properties to be applied for whole forms</li>
+            </ul>
+        </li>
+        <li>
+            Form Field
+            <ul>
+                <li>Aggregates common behavior for input field (Errors, Hints, Labels,..)</li>
+                <li>
+                    If multi zone layout is enabled ability to specify where the field should appear (e.g.: left/right
+                    column)
+                </li>
+                <li>Responsible for change detection and UI updates</li>
+            </ul>
+        </li>
+        <li>
+            Form Control (eg: input widget)
+            <ul>
+                <li>Shares common properties among other input form controls</li>
+                <li>Notify its parent (FormField) about any state change.</li>
+            </ul>
+        </li>
+    </ul>
+
+    Specify the <code>columnLayoutType</code> at the <code>fdp-form-group</code> level to render the layout in that
+    particular form. For example, if you want a 2 column layout in XL, 2 column layout in L, 2 column layout in M, and
+    single-column layout in S, the corresponding <code>columnLayoutType</code> would be <code>XL2-L2-M2-S1</code>.
+    <br />
+    <br />
+
+    <import module="FdpFormGroupModule"></import>
+</description>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>

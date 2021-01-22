@@ -1,8 +1,7 @@
-<fdp-form-group #ffg [formGroup]="datetimePickerForm" [multiLayout]="true">
+<fdp-form-group #ffg [formGroup]="datetimePickerForm">
     <fdp-form-field
         #ffl1
         id="simple"
-        zone="zLeft"
         rank="1"
         required="true"
         [validators]="requiredDateValidator"
@@ -17,7 +16,7 @@
         </fdp-datetime-picker>
     </fdp-form-field>
 
-    <fdp-form-field id="disabledDatetime" zone="zLeft" rank="2" label="Disabled Datetime Picker:">
+    <fdp-form-field id="disabledDatetime" rank="2" label="Disabled Datetime Picker:">
         <fdp-datetime-picker name="disabledDatetime" [disabled]="true" [value]="date"> </fdp-datetime-picker>
     </fdp-form-field>
 

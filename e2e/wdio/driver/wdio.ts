@@ -6,6 +6,10 @@ export function currentPlatformName(): string {
     return browser.capabilities.platformName;
 }
 
+export function getBaseURL(): string {
+    return browser.options.baseUrl;
+}
+
 export function open(path: string = ''): void {
     browser.url(path);
 }
@@ -179,24 +183,24 @@ export function getElementSize(selector: string, index: number = 0, prop?: 'widt
     return $$(selector)[index].getSize(prop || void 0);
 }
 
-export function executeScript2(selector): string {
-    const attrName = browser.capabilities.browserName === 'firefox' ? 'border-left-style' : 'border';
-    return browser.execute(function(selector, attrName) {
+export function executeScriptAfterTagFF(selector: string, index: number = 0): string {
+    const attrName = browserIsFirefox() ? 'border-left-style' : 'border';
+    return browser.execute(function(selector, attrName, index) {
         return window.getComputedStyle(
-            document.querySelector(selector), ':after')[attrName];
-    }, selector, attrName);
+            document.querySelectorAll(selector)[index], ':after')[attrName];
+    }, selector, attrName, index);
 }
 
-export function executeScriptBeforeTagAttr(selector, attrName): string {
-    return browser.execute(function(selector, attrName) {
-        return (window.getComputedStyle(document.querySelector(selector), ':before')[attrName]);
-    }, selector, attrName);
+export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
+    return browser.execute(function(selector, attrName, index) {
+        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':before')[attrName]);
+    }, selector, attrName, index);
 }
 
-export function executeScriptAfterTagAttr(selector, attrName): string {
-    return browser.execute(function(selector, attrName) {
-        return (window.getComputedStyle(document.querySelector(selector), ':after')[attrName]);
-    }, selector, attrName);
+export function executeScriptAfterTagAttr(selector: string, attrName: string, index: number = 0): string {
+    return browser.execute(function(selector, attrName, index) {
+        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':after')[attrName]);
+    }, selector, attrName, index);
 }
 
 export function getElementArrayLength(selector: string): number {

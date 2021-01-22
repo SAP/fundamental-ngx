@@ -24,7 +24,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/approval-flow.e2e-spec.ts'
+        './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -63,36 +63,36 @@ exports.config = {
         //         requireWindowFocus: true,
         //     }
         // },
-        // {
-        //     browserName: 'MicrosoftEdge',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     'sauce:options': {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //     }
-        // },
-        // {
-        //     browserName: 'firefox',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     'sauce:options': {
-        //         name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //         screenResolution: '1920x1080',
-        //     }
-        // },
-        // {
-        //     browserName: 'chrome',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     acceptInsecureCerts: true,
-        //     'sauce:options': {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //     }
-        // },
+        {
+            browserName: 'MicrosoftEdge',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            'sauce:options': {
+                screenResolution: '1920x1080',
+                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            }
+        },
+        {
+            browserName: 'firefox',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            'sauce:options': {
+                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+                screenResolution: '1920x1080',
+            }
+        },
+        {
+            browserName: 'chrome',
+            browserVersion: 'latest',
+            platformName: 'Windows 10',
+            acceptInsecureCerts: true,
+            'sauce:options': {
+                screenResolution: '1920x1080',
+                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            }
+        },
         {
             browserName: 'chrome',
             platformName: 'macOS 10.15',
@@ -103,26 +103,26 @@ exports.config = {
                 screenResolution: '1920x1440',
             }
         },
-        // {
-        //     browserName: 'firefox',
-        //     platformName: 'macOS 10.15',
-        //     browserVersion: 'latest',
-        //     acceptInsecureCerts: true,
-        //     'sauce:options': {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //     }
-        // },
-        // {
-        //     browserName: 'MicrosoftEdge',
-        //     platformName: 'macOS 10.15',
-        //     browserVersion: 'latest',
-        //     acceptInsecureCerts: true,
-        //     'sauce:options': {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //     }
-        // },
+        {
+            browserName: 'firefox',
+            platformName: 'macOS 10.15',
+            browserVersion: 'latest',
+            acceptInsecureCerts: true,
+            'sauce:options': {
+                screenResolution: '1920x1440',
+                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            }
+        },
+        {
+            browserName: 'MicrosoftEdge',
+            platformName: 'macOS 10.15',
+            browserVersion: 'latest',
+            acceptInsecureCerts: true,
+            'sauce:options': {
+                screenResolution: '1920x1440',
+                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            }
+        },
         // {
         //     browserName: 'safari',
         //     browserVersion: '13.1',
@@ -165,7 +165,6 @@ exports.config = {
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
     baseUrl: 'https://sap.dev:4200/',
-    // baseUrl: 'http://localhost:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
@@ -207,13 +206,13 @@ exports.config = {
     framework: 'jasmine',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 2,
+    specFileRetries: 2,
     //
     // Delay in seconds between the spec file retry attempts
-    // specFileRetriesDelay: 0,
+    specFileRetriesDelay: 0,
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
-    // specFileRetriesDeferred: true,
+    specFileRetriesDeferred: true,
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'

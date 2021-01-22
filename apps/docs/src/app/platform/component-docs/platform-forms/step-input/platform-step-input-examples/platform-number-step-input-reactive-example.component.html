@@ -1,14 +1,13 @@
 <main class="fd-page">
     <div class="fd-page__content fd-has-background-color-neutral-2">
         <h4>Enter value between {{ MIN_VALUE }} and {{ MAX_VALUE }}</h4>
-        <fdp-form-group #fg [multiLayout]="true">
+        <fdp-form-group #fg>
             <fdp-form-field
                 #formField
                 id="qty"
                 label="Quantity"
                 placeholder="Things quantity"
                 hint="This is tooltip to help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
                 [validators]="stepInputQtyValidators"
