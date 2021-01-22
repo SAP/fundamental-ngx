@@ -8,42 +8,37 @@ export class DateTimePicker extends BaseComponentPo {
     topPage = 'h1.header';
     bottomPage = '#datetimePickerDisableFunction ~ code-example button';
 
-    inputDatePicker = 'fd-datetime-picker input';
-    buttonDatePicker = 'fd-datetime-picker button';
+    datePickerInput = 'fd-datetime-picker input';
+    datePickerButton = 'fd-datetime-picker button';
 
-    activeButtonDateTimePicker = 'fd-datetime-picker [ng-reflect-is-disabled="false"] + span button';
-    activeInputDateTimePicker = '[ng-reflect-is-disabled="false"][aria-label="Datetime input"]';
+    activeDateTimePickerButton = 'fd-datetime-picker [ng-reflect-is-disabled="false"] + span button';
+    activeDateTimePickerInput = '[ng-reflect-is-disabled="false"][aria-label="Datetime input"]';
 
-    disabledButtonDateTimePicker = '.is-disabled button';
-    disabledInputDateTimePicker = '.is-disabled input';
+    disabledDateTimePickerButton = '.is-disabled button';
+    disabledDateTimePickerInput = '.is-disabled input';
 
-    compactButtonDateTimePicker = '.fd-button--compact';
-    compactInputDateTimePicker = '.fd-input--compact';
+    compactDateTimePickerButton = '.fd-button--compact';
+    compactDateTimePickerInput = '.fd-input--compact';
     changeDateTimeValueButton = 'button[name="changeBtn"]';
 
     calendarExpanded = '.fd-datetime__container';
     calendarYearsSection = '.fd-calendar__content--years';
 
-    currentYear = '[aria-label="Select year"]';
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
-    buttonGerman = 'button[ng-reflect-label="German"]'
-    buttonBulgarian = 'button[ng-reflect-label="Bulgarian"]';
-    buttonSelectYear = '[aria-label="Select year"]';
-    buttonSelectMonth = '[aria-label="Select month"]';
-
-    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]';
-    buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
-    buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
-    buttonNavigationUpArrow = 'button[glyph="navigation-up-arrow"]';
-    buttonNavigationDownArrow = 'button[glyph="navigation-down-arrow"]';
+    selectYearButton = '.fd-calendar__action:nth-child(3) .fd-button';
+    selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';
+    firstYearButton = '(//td[contains(@id,"year")]/child::span)[1]';
+    firstMonthButton = '(//td[contains(@id,"month")]/child::span)[1]';
+    navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
+    navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeItem = 'span.fd-time__item';
-    buttonOk = 'button[fdtype="emphasized"]';
-    buttonCancel = 'button[ng-reflect-label="Cancel"]'
+    okButton = 'button[fdtype="emphasized"]';
+    cancelButton = 'button[ng-reflect-label="Cancel"]';
 
-    selectedHours = '(//div[contains(@class, \'fd-time__wrapper\')]//li[contains(@class, \'fd-time__item\')])[12]';
-    selectedMinutes = '(//div[contains(@class, \'fd-time__wrapper\')]//li[contains(@class, \'fd-time__item\')])[54]';
-    period = '//span[contains(text(), \' PM \')]/parent::li';
+    selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
+    selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
+    period = '//span[contains(text(), " PM ")]/parent::li';
 
 
     filterCaledarValue = (name: string): string => {
@@ -65,6 +60,6 @@ export class DateTimePicker extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.inputDatePicker);
+        waitForPresent(this.datePickerInput);
     }
 }
