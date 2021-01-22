@@ -16,7 +16,7 @@
                 placement="top"
                 [attr.aria-valuemin]="min"
                 [attr.aria-valuemax]="max"
-                [attr.aria-valuenow]="_value"
+                [attr.aria-valuenow]="getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)"
                 [style.left.%]="!_isRtl ? _progress : null"
                 [style.right.%]="_isRtl ? _progress : null"
                 (mousedown)="onHandleClick($event); $event.stopPropagation()"
@@ -51,7 +51,7 @@
                 placement="top"
                 [attr.aria-valuemin]="min"
                 [attr.aria-valuemax]="max"
-                [attr.aria-valuenow]="_handle1Value"
+                [attr.aria-valuenow]="getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)"
                 [style.left.%]="!_isRtl ? _handle1Position : null"
                 [style.right.%]="_isRtl ? _handle1Position : null"
                 (mousedown)="onHandleClick($event); $event.stopPropagation()"
@@ -72,7 +72,7 @@
                 placement="top"
                 [attr.aria-valuemin]="min"
                 [attr.aria-valuemax]="max"
-                [attr.aria-valuenow]="_handle2Value"
+                [attr.aria-valuenow]="getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)"
                 [style.left.%]="!_isRtl ? _handle2Position : null"
                 [style.right.%]="_isRtl ? _handle2Position : null"
                 (mousedown)="onHandleClick($event); $event.stopPropagation()"
@@ -87,8 +87,8 @@
                 <ng-container *ngFor="let tick of _tickMarks; index as i">
                     <div
                         class="fd-slider__tick"
-                        [style.left.%]="!_isRtl ? customValues.length ? (100 / (customValues.length - 1)) * i : (tick.value / (max - min)) * 100 : null"
-                        [style.right.%]="!_isRtl ? customValues.length ? (100 / (customValues.length - 1)) * i : (tick.value / (max - min)) * 100 : null"
+                        [style.left.%]="!_isRtl ? tick.position : null"
+                        [style.right.%]="_isRtl ? tick.position : null"
                         [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
                             (_isRange
@@ -105,8 +105,8 @@
                 <div
                     *ngIf="first || last || i % tickmarksBetweenLabels === 0"
                     class="fd-slider__label"
-                    [style.left.%]="!_isRtl ? customValues.length ? (100 / (customValues.length - 1)) * i : (tick.value / (max - min)) * 100 : null"
-                    [style.right.%]="!_isRtl ? customValues.length ? (100 / (customValues.length - 1)) * i : (tick.value / (max - min)) * 100 : null"
+                    [style.left.%]="!_isRtl ? tick.position : null"
+                    [style.right.%]="_isRtl ? tick.position : null"
                     [innerText]="tick.label"
                 ></div>
             </ng-container>

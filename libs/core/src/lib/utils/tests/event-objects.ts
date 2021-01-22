@@ -89,3 +89,42 @@ export function createKeyboardEvent(
 
     return event;
 }
+
+/**
+ * Creates a browser MouseEvent with the specified options.
+ * @docs-private
+ */
+export function createMouseEvent(type: string, x = 0, y = 0, button = 0): MouseEvent {
+    const event = document.createEvent('MouseEvent');
+    const originalPreventDefault = event.preventDefault.bind(event);
+
+    event.initMouseEvent(
+        type,
+        true /* canBubble */,
+        true /* cancelable */,
+        window /* view */,
+        0 /* detail */,
+        x /* screenX */,
+        y /* screenY */,
+        x /* clientX */,
+        y /* clientY */,
+        false /* ctrlKey */,
+        false /* altKey */,
+        false /* shiftKey */,
+        false /* metaKey */,
+        button /* button */,
+        null /* relatedTarget */
+    );
+
+    // `initMouseEvent` doesn't allow us to pass the `buttons` and
+    // defaults it to 0 which looks like a fake event.
+    Object.defineProperty(event, 'buttons', { get: () => 1 });
+
+    // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
+    event.preventDefault = function (): Event {
+        Object.defineProperty(event, 'defaultPrevented', { get: () => true });
+        return originalPreventDefault();
+    };
+
+    return event;
+}

@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CustomValues } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-slider-range-example',
-    templateUrl: './slider-range-example.component.html'
+    templateUrl: './slider-range-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SliderRangeExampleComponent {
     value = [20, 70];
 
-    customValues = [
+    customValues: CustomValues[] = [
         { value: 1609452000000, label: 'Jan 1' },
         { value: 1609538400000, label: 'Jan 2' },
         { value: 1609624800000, label: 'Jan 3' },

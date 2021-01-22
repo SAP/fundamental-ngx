@@ -44,9 +44,12 @@ export enum RangeHandles {
 }
 
 export interface SliderTickMark {
-    value: number;
+    value: number | string;
     label: string;
+    position?: number;
 }
+
+export type CustomValues = Omit<SliderTickMark, 'position'>;
 
 export type ControlValue = number | number[] | SliderTickMark | SliderTickMark[];
 
@@ -148,7 +151,7 @@ export class SliderComponent
 
     /** Array of custom values to use for Slider. */
     @Input()
-    customValues: SliderTickMark[] = [];
+    customValues: CustomValues[] = [];
 
     /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
     @Input()
@@ -329,6 +332,13 @@ export class SliderComponent
         this._onDestroy$.complete();
     }
 
+    /** @hidden */
+    getValuenow(position: number | number[], sliderValueTarget: SliderValueTargets): string | number {
+        return this.customValues.length > 0
+            ? this.customValues[position as number].label
+            : this._popoverValueRef[sliderValueTarget];
+    }
+
     @applyCssClass
     /**
      * @hidden
@@ -378,7 +388,7 @@ export class SliderComponent
 
     /** @hidden */
     onTrackClick(event: MouseEvent): void {
-        if (this._isRange) {
+        if (this.disabled || this._isRange) {
             return;
         }
 
@@ -388,6 +398,10 @@ export class SliderComponent
 
     /** @hidden */
     onHandleClick(event: MouseEvent): void {
+        if (this.disabled) {
+            return;
+        }
+
         const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
             this._updatePopoversPosition();
 
@@ -421,6 +435,10 @@ export class SliderComponent
 
     /** @hidden */
     onKeyDown(event: KeyboardEvent): void {
+        if (this.disabled) {
+            return;
+        }
+
         const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW];
         if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;
@@ -654,14 +672,18 @@ export class SliderComponent
             this.min = 0;
             this.max = this.customValues.length - 1;
             this.step = 1;
-            this._tickMarks = [...this.customValues];
+            const customValuesLength = this.customValues.length - 1;
+            this._tickMarks = this.customValues.map((item, i) => ({
+                ...item,
+                position: (100 / customValuesLength) * i
+            }));
         } else {
             const total = this.max - this.min;
             const tickMarksCount = total / this.step + 1;
             if (tickMarksCount > this._maxTickMarksNumber) {
                 this._tickMarks = [
-                    { value: 0, label: `${this.min}` },
-                    { value: total, label: `${this.max}` }
+                    { position: 0, value: 0, label: `${this.min}` },
+                    { position: 100, value: total, label: `${this.max}` }
                 ];
 
                 return;
@@ -671,9 +693,10 @@ export class SliderComponent
                 this._tickMarks = Array(tickMarksCount)
                     .fill({})
                     .map((_, i) => {
-                        const value = Math.round((i * this.step) * 100) / 100;
+                        const value = Math.round(i * this.step * 100) / 100;
+                        const position = (value / (this.max - this.min)) * 100;
 
-                        return { value: value, label: `${this.min + value}` };
+                        return { value: value, position: position, label: `${this.min + value}` };
                     });
             }
         }
