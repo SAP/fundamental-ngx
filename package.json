@@ -36,7 +36,7 @@
     "hotfix-release": "./scripts/hotfix-publish-release.sh",
     "hotfix-release-latest": "./scripts/hotfix-publish-release.sh latest",
     "release:create": "create-release",
-    "start": "node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng serve",
+    "start": "ng serve",
     "test": "ng test core --watch false --code-coverage true --browsers=ChromeHeadless",
     "test:platform": "ng test platform --watch false --code-coverage true --browsers=ChromeHeadless",
     "test:core:saucelabs": "node --max_old_space_size=4096  ./node_modules/.bin/ng test core --watch false --code-coverage true --karmaConfig=karma.conf-ci.js",
