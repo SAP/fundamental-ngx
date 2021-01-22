@@ -62,6 +62,12 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @Input()
     size: DynamicPageResponsiveSize = 'extra-large';
 
+    /**
+     * user provided offset in px
+     */
+    @Input()
+    offset = 0;
+
     /** reference to header component  */
     @ContentChild(DynamicPageHeaderComponent)
     headerComponent: DynamicPageHeaderComponent;
@@ -112,6 +118,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * holds the tab content
      */
     tabs: DynamicPageContentComponent[] = [];
+
+    /** @hidden */
+    private _distanceFromTop = 0;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -165,7 +174,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         this._subscriptions.add(
             this.tabbedContent.changes.subscribe(() => {
                 this._setTabStyles();
-                this._setTabContainerPosition();
             })
         );
         if (this.headerComponent?.collapsible) {
@@ -187,7 +195,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     setContainerPositions(): void {
         this._setTabsPosition();
         this._setContainerPosition();
-        this._setTabContainerPosition();
     }
 
     /**
@@ -220,10 +227,15 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     private _setContainerPosition(): void {
         if (this.contentComponent) {
             const contentComponentElement = this.contentComponent.getElementRef().nativeElement;
-
-            contentComponentElement.style.top = this.header.nativeElement.offsetHeight + 'px';
+            this._distanceFromTop = window.pageYOffset + contentComponentElement.getBoundingClientRect().top;
+            contentComponentElement.style.height = this._getCalculatedHeight();
             this._addClassNameToCustomElement(contentComponentElement, 'content-sticker');
         }
+    }
+
+    /**@hidden */
+    private _getCalculatedHeight(): string {
+        return 'calc(100vh - ' + (this._distanceFromTop + this.offset) + 'px)';
     }
 
     /** @hidden */
@@ -251,7 +263,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
             fromEvent(window, 'resize')
                 .pipe(debounceTime(60))
                 .subscribe(() => {
-                    console.log('calling resiize');
                     this.setContainerPositions();
                 })
         );
@@ -270,9 +281,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
             return;
         }
 
-        this._addClassNameToCustomElement(tabList, 'tab-sticker');
-        tabList.style.top = this.header.nativeElement.offsetHeight + 'px';
-
         const tabContent = this.tabContents?.toArray();
         if (tabContent) {
             tabContent.forEach((contentItem) => {
@@ -280,19 +288,12 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
                     .getElementRef()
                     .nativeElement.querySelector('.fd-dynamic-page__content');
                 if (element) {
-                    element.style.top = this.header.nativeElement.offsetHeight + tabList.offsetHeight + 'px';
+                    if (this._distanceFromTop === 0) {
+                        this._distanceFromTop = window.pageYOffset + element.getBoundingClientRect().top;
+                    }
+                    element.style.height = this._getCalculatedHeight();
                 }
             });
-        }
-    }
-
-    /**
-     * @hidden
-     * set top position of tabbed content container on scrolling
-     */
-    private _setTabContainerPosition(): void {
-        if (this.contentContainer) {
-            this.contentContainer.nativeElement.style.top = this.header.nativeElement.offsetHeight + 'px';
         }
     }
 
