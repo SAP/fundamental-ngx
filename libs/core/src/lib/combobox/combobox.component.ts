@@ -101,9 +101,21 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     @Input()
     placeholder: string;
 
+    /**
+     * Whether the Combobox is a Search Field
+     */
+    @Input()
+    isSearch = false;
+
     /** Icon to display in the right-side button. */
     @Input()
     glyph = 'navigation-down-arrow';
+
+    /**
+     * Whether to show the clear search term button when the Combobox is a Search Field
+     */
+    @Input()
+    showClearButton = true;
 
     /**
      *  The trigger events that will open/close the options popover.
@@ -410,6 +422,23 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this._propagateChange();
         }
         this.onTouched();
+    }
+
+    /** Get the glyph value based on whether the combobox is used as a search field or not. */
+    get glyphValue(): string {
+        return this.isSearch ? 'search' : 'navigation-down-arrow';
+    }
+
+    /** @hidden */
+    _handleClearSearchTerm(): void {
+        this.inputTextValue = '';
+        this.inputTextChange.emit('');
+        this.displayedValues = this.dropdownValues;
+        if (!this.mobile) {
+            this._propagateChange();
+        }
+        this.onTouched();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */

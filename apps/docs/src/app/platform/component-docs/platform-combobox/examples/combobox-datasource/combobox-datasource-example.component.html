@@ -1,5 +1,5 @@
-<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
-    <fdp-form-field id="array-of-strings" label="Array of Strings" zone="zLeft"
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="array-of-strings" label="Array of Strings"
                     rank="4">
         <fdp-combobox
             name="array-of-strings"
@@ -10,7 +10,7 @@
         <p>Selected Item: {{ selectedItem1 }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="array-of-objects" label="Array of Objects" zone="zLeft"
+    <fdp-form-field id="array-of-objects" label="Array of Objects"
                     rank="4">
         <fdp-combobox
             name="array-of-objects"
@@ -23,7 +23,7 @@
         <p>Selected Item: {{ selectedItem2 | json }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="observable" label="Observable" zone="zLeft" rank="4">
+    <fdp-form-field id="observable" label="Observable" rank="4">
         <fdp-combobox
             name="observable"
             placeholder="Type some text..."
@@ -35,7 +35,7 @@
         <p>Selected Item: {{ selectedItem3 | json }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="ds" label="Data Source" zone="zLeft" rank="4">
+    <fdp-form-field id="ds" label="Data Source" rank="4">
         <fdp-combobox
             name="ds"
             placeholder="Type some text..."

@@ -6,7 +6,7 @@ import {
     browserIsSafari,
     click,
     doubleClick,
-    executeScript2,
+    executeScriptAfterTagFF,
     focusElement,
     getAttributeByName,
     getCSSPropertyByName,
@@ -50,7 +50,7 @@ describe('Menu component test suite', function() {
         focusElement(menuPage.firstMenuBtn);
         sendKeys('Tab');
 
-        const menuBtnBorderStyle = executeScript2(menuPage.secondMenuBtn);
+        const menuBtnBorderStyle = executeScriptAfterTagFF(menuPage.secondMenuBtn);
         expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
     });
     // Real issue for FF

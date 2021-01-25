@@ -8,12 +8,16 @@
     <div class="fdp-media-container">
         <img
             *ngIf="selectedMedia.mediaType === 'image'"
+            [attr.title]="selectedMedia.label"
+            [attr.aria-label]="selectedMedia.label"
             [attr.src]="selectedMedia.mediaUrl"
             [attr.alt]="selectedMedia.alt"
-            [attr.title]="selectedMedia.label"
+
         />
-        <video *ngIf="selectedMedia.mediaType === 'video'" [src]="selectedMedia.mediaUrl" controls>
+        <video *ngIf="selectedMedia.mediaType === 'video'" [src]="selectedMedia.mediaUrl" controls  [attr.aria-label]="selectedMedia.label">
             {{ selectedMedia.alt }}
+            <track [src]="selectedMedia.captionFile" kind="captions" srclang="en" [label]="selectedMedia.label">
+            <track [src]="selectedMedia.audioDescFile" kind="descriptions" srclang="en" [label]="selectedMedia.label">
         </video>
     </div>
     <fdp-thumbnail-image

@@ -9,6 +9,7 @@ import { ComboboxComponent } from './combobox.component';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { ListModule } from '../list/list.module';
+import { IconModule } from '../icon/icon.module';
 import { AutoCompleteDirective } from './auto-complete.directive';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AutoCompleteDirective } from './auto-complete.directive';
         PipeModule,
         ButtonModule,
         InputGroupModule,
-        ListModule
+        ListModule,
+        IconModule
     ],
     exports: [ComboboxComponent]
 })

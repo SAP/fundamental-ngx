@@ -1,6 +1,6 @@
 <main class="fd-page">
     <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group #fg2 [multiLayout]="true" [formGroup]="form">
+        <fdp-form-group #fg2 [formGroup]="form">
             <fdp-form-field
                 #ff2
                 id="i18nTextarea"
@@ -8,7 +8,6 @@
                 label="Detailed description"
                 i18n-placeholder="@@platformI18nTextareaPlaceholder"
                 placeholder="Start entering detailed description"
-                zone="zLeft"
                 rank="10"
                 [required]="true"
                 [validators]="textareaValidator"

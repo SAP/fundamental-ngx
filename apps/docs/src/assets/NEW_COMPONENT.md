@@ -220,7 +220,7 @@ You should see 'Poster' appear in the side navigation under 'Components'. Clicki
 In the library source, open `poster.component.html`, remove the default code and add an image with a placeholder.
 
 ```HTML
-<img src="https://picsum.photos/400/600"/>
+<img src="http://lorempixel.com/400/600/nature/"/>
 
 ```
 
