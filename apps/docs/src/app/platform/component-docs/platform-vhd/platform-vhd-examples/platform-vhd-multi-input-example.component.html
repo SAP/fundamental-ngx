@@ -9,7 +9,8 @@
         (selectedChange)="multiSelectChange()"
     >
     </fd-multi-input>
-    <button fd-button glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
+    <br />
+    <button fd-button fd-button aria-label="Open value help dialog" title="Open value help dialog" glyph="value-help" (click)="vhd.open()" label="Open value help dialog"></button>
 </div>
 
 <fdp-value-help-dialog #vhd
