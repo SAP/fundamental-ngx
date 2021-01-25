@@ -1,5 +1,13 @@
 import { CarouselPo } from '../pages/carousel.po';
-import { click, getAttributeByName, getElementArrayLength, getText, mouseHoverElement, scrollIntoView } from '../../driver/wdio';
+import {
+    click,
+    getAttributeByName,
+    getElementArrayLength, getElementLocation,
+    getText,
+    mouseHoverElement,
+    scrollIntoView, waitForElDisplayed,
+    clickAndDragElement
+} from '../../driver/wdio';
 import {
     imgSource,
     verticalAttr,
@@ -36,40 +44,42 @@ describe('Carousel test suite', function() {
 
     describe('carousel with one active item example', function() {
         it('should check navigation', () => {
-            const firstImg = getAttributeByName(displayedImg, imgSource);
-
-            click(navBtns, 1);
-            expect(getAttributeByName(displayedImg, imgSource)).not.toBe(firstImg);
-            click(navBtns);
-            expect(getAttributeByName(displayedImg, imgSource)).toBe(firstImg);
+            checkCarouselNavigation(0, 1);
         });
 
-        xit('should check horizontal navigation', () => {
-            // TODO: add check for click and slide
+        it('should check horizontal navigation', () => {
+            scrollIntoView(sectionTitle);
+            const imgLocationX = Math.floor(getElementLocation(displayedImg, 0, 'x'));
+            const imgLocationY = Math.floor(getElementLocation(displayedImg, 0, 'y'));
+            const firstImg = getAttributeByName(displayedImg, imgSource);
+
+            clickAndDragElement(imgLocationX + 10, imgLocationY + 10, imgLocationX - 200, imgLocationY);
+            expect(getAttributeByName(displayedImg, imgSource)).not.toBe(firstImg);
         });
 
         it('should check page indicator dots', () => {
-            expect(getAttributeByName(pageIndicators, classAttr)).toContain(active);
-            expect(getAttributeByName(pageIndicators, classAttr, 1)).not.toContain(active);
-            click(navBtns, 1);
-            expect(getAttributeByName(pageIndicators, classAttr)).not.toContain(active);
             expect(getAttributeByName(pageIndicators, classAttr, 1)).toContain(active);
             expect(getAttributeByName(pageIndicators, classAttr, 2)).not.toContain(active);
+            click(navBtns, 1);
+            expect(getAttributeByName(pageIndicators, classAttr)).not.toContain(active);
+            expect(getAttributeByName(pageIndicators, classAttr, 2)).toContain(active);
+            expect(getAttributeByName(pageIndicators, classAttr, 3)).not.toContain(active);
         });
     });
 
     describe('carousel with vertical direction example', function() {
         it('should check navigation', () => {
-            const firstImg = getAttributeByName(displayedImg, imgSource, 1);
-
-            click(navBtns, 3);
-            expect(getAttributeByName(displayedImg, imgSource, 1)).not.toBe(firstImg);
-            click(navBtns, 2);
-            expect(getAttributeByName(displayedImg, imgSource, 1)).toBe(firstImg);
+            checkCarouselNavigation(1, 3);
         });
 
         it('should scroll vertically', () => {
-            // TODO: add check for click and slide
+            scrollIntoView(sectionTitle, 1);
+            const imgLocationX = Math.floor(getElementLocation(displayedImg, 1, 'x'));
+            const imgLocationY = Math.floor(getElementLocation(displayedImg, 1, 'y'));
+            const firstImg = getAttributeByName(displayedImg, imgSource, 1);
+
+            clickAndDragElement(imgLocationX + 10, imgLocationY + 10, imgLocationX, imgLocationY - 200);
+            expect(getAttributeByName(displayedImg, imgSource, 1)).not.toBe(firstImg);
             expect(getAttributeByName(carouselProperties, verticalAttr, 1)).toBe('true');
         });
     });
@@ -131,11 +141,25 @@ describe('Carousel test suite', function() {
         it('should check the page indicator is hidden', () => {
             expect(hiddenPageIndicator).not.toBeVisible();
         });
+
+        it('should check navigation', () => {
+            checkCarouselNavigation(2, 9);
+        })
     });
 
     describe('carousel with hidden nav buttons example', function() {
         it('should check nav buttons are hidden', () => {
             expect(hiddenNavBtns).not.toBeVisible();
+        });
+
+        it('should check swipe navigation', () => {
+            scrollIntoView(sectionTitle, 5);
+            const imgLocationX = Math.floor(getElementLocation(displayedImg, 3, 'x'));
+            const imgLocationY = Math.floor(getElementLocation(displayedImg, 3, 'y'));
+            const firstImg = getAttributeByName(displayedImg, imgSource, 3);
+
+            clickAndDragElement(imgLocationX + 10, imgLocationY + 10, imgLocationX - 250, imgLocationY);
+            expect(getAttributeByName(displayedImg, imgSource, 3)).not.toBe(firstImg);
         });
     });
 
@@ -145,13 +169,17 @@ describe('Carousel test suite', function() {
             mouseHoverElement(displayedImg, 4);
             expect(contentNavBtns).toBeVisible();
 
-            mouseHoverElement(sectionTitle);
+            mouseHoverElement(sectionTitle, 6);
             expect(contentNavBtns).not.toBeVisible();
         });
 
         it('should check numbered pagination', () => {
-            expect(numberedPagination).toBeVisible();
+            waitForElDisplayed(numberedPagination);
             expect(getText(numberedPagination).trim()).toBe(numberedPages);
+        });
+
+        it('should check navigation', () => {
+           checkCarouselNavigation(4, 13);
         });
     });
 
@@ -176,9 +204,9 @@ describe('Carousel test suite', function() {
 
     describe('carousel item loading indicator examples', function() {
         // TODO: not working
-        xit('should check busy indicator visible', () => {
+        it('should check busy indicator visible', () => {
             scrollIntoView(disableLoadingBtn);
-            expect(busyIndicator).toBeVisible();
+            expect(waitForElDisplayed(busyIndicator)).toBe(true);
         });
 
         it('should check disabling busy indicator', () => {
@@ -187,9 +215,18 @@ describe('Carousel test suite', function() {
         });
     });
 
-    xdescribe('orientation checks', function() {
+    describe('orientation checks', function() {
         it('should check rtl, ltr orientations', () => {
             carouselPage.checkRtlSwitch();
         });
     });
+
+    function checkCarouselNavigation(imgIndex: number, nextImgBtnIndex: number): void {
+        const firstImg = getAttributeByName(displayedImg, imgSource, imgIndex);
+
+        click(navBtns, nextImgBtnIndex);
+        expect(getAttributeByName(displayedImg, imgSource, imgIndex)).not.toBe(firstImg);
+        click(navBtns, nextImgBtnIndex - 1);
+        expect(getAttributeByName(displayedImg, imgSource, imgIndex)).toBe(firstImg);
+    }
 });

@@ -4,27 +4,27 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class CarouselPo extends CoreBaseComponentPo {
     private url = '/carousel';
     root = '#page-content';
-    pageTitle = 'app-carousel-header h1';
 
+    sectionTitle = 'fd-docs-section-title h2';
     carouselProperties = 'div fd-carousel';
-    displayedImg = 'fd-carousel div[style*=visible] img';
+    displayedContent = 'fd-carousel div[style*=visible]';
+    displayedImg = this.displayedContent + ' img';
     navBtns = 'fd-carousel button';
-    pageIndicators = 'li.fd-carousel__page-indicator';
-    displayedCards = 'fd-carousel div[style*=visible] .fd-card__title-area';
-    multiDisplayedCards = 'fd-carousel-multiple-active-item-example fd-carousel div[style*=visible]';
+    pageIndicators = 'fd-carousel .fd-carousel__page-indicator';
+    displayedCards = this.displayedContent + ' .fd-card__title-area';
+    multiDisplayedCards = 'fd-carousel-multiple-active-item-example ' + this.displayedContent;
     hideCardBtns = 'fd-segmented-button button';
     hiddenPageIndicator = 'fd-carousel-no-page-indicator-example fd-carousel ol';
     hiddenNavBtns = 'fd-carousel-hidden-navigation-example ' + this.navBtns;
     numberedPagination = 'fd-carousel .fd-carousel__text';
     errorMsg = 'fd-carousel-error-message-example fd-carousel .fd-carousel-items-horizontal';
-    busyIndicator = 'fd-carousel-loading-content-example fd-busy-indicator';
+    busyIndicator = 'fd-carousel-loading-content-example .fd-busy-indicator';
     disableLoadingBtn = 'fd-carousel-loading-content-example .fd-button--standard';
     contentNavBtns = 'fd-carousel-content-navigation-example ' + this.navBtns;
-    sectionTitle = 'fd-carousel-content-navigation-example h2';
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.pageTitle);
+        waitForPresent(this.sectionTitle);
     }
 }
