@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuickViewTitleComponent {
-    /** Alignment of title. */
+    /**
+     * Alignment of title.
+     * Options include 'left', 'right' and 'middle'. The default is set to 'middle'.
+     * */
     @Input() align: 'left' | 'right' | 'middle' = 'middle';
 }
