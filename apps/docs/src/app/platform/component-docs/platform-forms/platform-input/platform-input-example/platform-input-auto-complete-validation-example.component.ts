@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PopoverComponent } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fdp-platform-input-auto-complete-form-validation-example',
+    selector: 'fdp-platform-input-auto-complete-validation-example',
     templateUrl: './platform-input-auto-complete-validation-example.component.html',
     styleUrls: ['./platform-input-auto-complete-validation-example.component.scss']
 })
