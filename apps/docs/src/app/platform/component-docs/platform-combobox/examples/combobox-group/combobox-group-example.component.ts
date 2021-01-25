@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
+import { ComboboxSelectionChangeEvent, DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-combobox-group-example',
     templateUrl: './combobox-group-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class ComboboxGroupExampleComponent {
     dataSource = [
