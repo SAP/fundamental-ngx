@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.11...v0.26.1-rc.12) (2021-01-25)
+
+
+### Bug Fixes
+
+* (Platform) Value Help Dialog - updates, few minor issues in examples ([#4389](https://github.com/SAP/fundamental-ngx/issues/4389)) ([719b31b](https://github.com/SAP/fundamental-ngx/commit/719b31be3c4ec68a1abd9a76cbe512b1a8e84698))
+
 ### [0.26.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.10...v0.26.1-rc.11) (2021-01-25)
 
 ### [0.26.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.9...v0.26.1-rc.10) (2021-01-25)
