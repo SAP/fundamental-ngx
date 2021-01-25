@@ -14,7 +14,7 @@ export const customPanelConfigProvider = {
 };
 
 @Component({
-    selector: 'fdp-panel-config-example',
+    selector: 'fdp-platform-panel-config-example',
     templateUrl: './platform-panel-config-example.component.html',
     providers: [customPanelConfigProvider]
 })
