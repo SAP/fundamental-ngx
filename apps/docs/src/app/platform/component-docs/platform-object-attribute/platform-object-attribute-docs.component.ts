@@ -37,7 +37,8 @@ export class PlatformObjectAttributeDocsComponent {
         }, {
             language: 'typescript',
             fileName: 'platform-object-attribute-link-example',
-            code: objectAttributeLinkTs
+            code: objectAttributeLinkTs,
+            component: 'PlatformObjectAttributeLinkExampleComponent'
         }
     ];
 }
