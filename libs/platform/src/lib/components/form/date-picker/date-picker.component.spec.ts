@@ -318,8 +318,8 @@ describe('TestDatePickerComponent', () => {
         fixture.detectChanges();
 
         expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.month).toBe(date.month);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.year).toBe(date.year);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.month).toBe(date.month);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.year).toBe(date.year);
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(datepicker.onChange).toHaveBeenCalledWith(date);
     });
@@ -339,8 +339,8 @@ describe('TestDatePickerComponent', () => {
             strDate1 + datepicker.fdDatePickerComponent.rangeDelimiter + strDate2
         );
         expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.month).toBe(date1.month);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.year).toBe(date1.year);
         expect(datepicker.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
         expect(datepicker.onChange).toHaveBeenCalledWith({ start: date1, end: date2 });
     });
@@ -360,8 +360,8 @@ describe('TestDatePickerComponent', () => {
             strDate1 + datepicker.fdDatePickerComponent.rangeDelimiter + strDate2
         );
         expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.month).toBe(date2.month);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.year).toBe(date2.year);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.month).toBe(date2.month);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.year).toBe(date2.year);
         expect(datepicker.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
         expect(datepicker.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
