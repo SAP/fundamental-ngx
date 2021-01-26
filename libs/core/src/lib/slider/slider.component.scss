@@ -2,7 +2,11 @@
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/popover';
 
-.fd-popover-container-custom {
+.fd-popover-custom {
+    display: none !important;
+}
+
+.fd-popover__popper--cdk-custom {
     top: -7px !important;
     overflow: hidden;
 
