@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.8](https://github.com/SAP/fundamental-ngx/compare/v0.21.7...v0.21.8) (2021-01-26)
+
+
+### Bug Fixes
+
+* Add menu service to public api ([8632d05](https://github.com/SAP/fundamental-ngx/commit/8632d057da97bf9ddde233fe846d3493b1f4d12a))
+
 ### [0.21.7](https://github.com/SAP/fundamental-ngx/compare/v0.21.6...v0.21.7) (2021-01-13)
 
 
