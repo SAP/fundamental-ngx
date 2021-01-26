@@ -30,6 +30,7 @@ export const WIZARD_CONTAINER_WRAPPER_CLASS = 'fd-wizard-container-wrapper';
 export const WIZARD_TALL_CONTENT_CLASS = 'fd-wizard-tall-content';
 export const SHELLBAR_CLASS = 'fd-shellbar';
 export const BAR_FOOTER_CLASS = 'fd-bar--footer';
+export const BAR_FLOATING_FOOTER_CLASS = 'fd-bar--floating-footer';
 
 export const ACTIVE_STEP_STATUS = 'active';
 export const CURRENT_STEP_STATUS = 'current';
@@ -151,13 +152,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _calculateContentHeight(): number {
         let shellbarHeight,
             wizardNavHeight = 0,
-            wizardFooterHeight;
+            wizardFooterHeight,
+            dialogOffset;
         shellbarHeight = this._getShellbarHeight();
         if (!this._isCurrentStepSummary()) {
             wizardNavHeight = this._getWizardNavHeight();
         }
         wizardFooterHeight = this._getWizardFooterHeight();
-        return shellbarHeight + wizardNavHeight + wizardFooterHeight;
+        dialogOffset = this._getDialogOffset();
+        return shellbarHeight + wizardNavHeight + wizardFooterHeight + dialogOffset;
     }
 
     /** @hidden */
@@ -188,9 +191,24 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const wizard = this._elRef.nativeElement;
         let retVal;
         if (wizard.querySelector('.' + BAR_FOOTER_CLASS)) {
-            retVal = wizard.querySelector('.' + BAR_FOOTER_CLASS).clientHeight;
+            retVal = wizard.querySelector('.' + BAR_FOOTER_CLASS).offsetHeight;
+        } else if (wizard.querySelector('.' + BAR_FLOATING_FOOTER_CLASS)) {
+            retVal = wizard.querySelector('.' + BAR_FLOATING_FOOTER_CLASS).offsetHeight;
         } else {
             retVal = 0;
+        }
+        return retVal;
+    }
+
+    /** @hidden */
+    private _getDialogOffset(): number {
+        const dialogBody = this._elRef.nativeElement.parentElement;
+        let retVal = 0;
+        if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
+            if (dialogBody.querySelector('.' + 'fd-title--h2')) {
+                retVal = dialogBody.querySelector('.' + 'fd-title--h2').offsetHeight;
+            }
+            retVal = retVal + window.innerHeight - dialogBody.offsetHeight;
         }
         return retVal;
     }
