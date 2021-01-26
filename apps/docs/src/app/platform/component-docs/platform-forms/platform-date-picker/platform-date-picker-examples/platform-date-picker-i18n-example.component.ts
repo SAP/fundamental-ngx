@@ -1,5 +1,6 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
-import { CalendarI18nLabels, FdDate, DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core';
+
+import { CalendarI18nLabels, FdDate, DatetimeAdapter, FdDatetimeAdapter, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
 // Translated aria labels.
 // Please note these labels should be translated for each locale separately
@@ -19,11 +20,14 @@ export class CustomI18nLabels extends CalendarI18nLabels {
 }
 
 @Component({
-    selector: 'fdp-date-picker-i18n-example',
+    selector: 'fdp-platform-date-picker-i18n-example',
     templateUrl: './platform-date-picker-i18n-example.component.html',
 
     // Note that this can be provided in the root of your application.
     providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+
         { provide: LOCALE_ID, useValue: 'fr' },
         {
             provide: DatetimeAdapter,
@@ -32,6 +36,10 @@ export class CustomI18nLabels extends CalendarI18nLabels {
         {
             provide: CalendarI18nLabels,
             useClass: CustomI18nLabels
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
         }
     ]
 })
