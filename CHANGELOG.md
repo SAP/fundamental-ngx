@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.11...v0.26.1-rc.13) (2021-01-26)
+
+
+### Features
+
+* (Core) Custom Messages in pickers ([#4361](https://github.com/SAP/fundamental-ngx/issues/4361)) ([857eba6](https://github.com/SAP/fundamental-ngx/commit/857eba61e106de7d66b2c771e754343c7ce9ba0e))
+
+
+### Bug Fixes
+
+* (Core) Accessibility: Combobox - Few issues with reading due screen reader and minor issues ([#4353](https://github.com/SAP/fundamental-ngx/issues/4353)) ([32b106c](https://github.com/SAP/fundamental-ngx/commit/32b106c3b67735a7b41d959a8b9d2fc440961289))
+* (Platform) Value Help Dialog - updates, few minor issues in examples ([#4389](https://github.com/SAP/fundamental-ngx/issues/4389)) ([719b31b](https://github.com/SAP/fundamental-ngx/commit/719b31be3c4ec68a1abd9a76cbe512b1a8e84698))
+
 ### [0.26.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.11...v0.26.1-rc.12) (2021-01-25)
 
 
