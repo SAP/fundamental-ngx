@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.14...v0.26.1-rc.15) (2021-01-26)
+
+
+### Bug Fixes
+
+* (Platform) fix combobox examples for stackblitz ([#4469](https://github.com/SAP/fundamental-ngx/issues/4469)) ([ecfc125](https://github.com/SAP/fundamental-ngx/commit/ecfc125c89622a7382ce84ca92e8b015c747e715))
+
 ### [0.26.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.13...v0.26.1-rc.14) (2021-01-26)
 
 
