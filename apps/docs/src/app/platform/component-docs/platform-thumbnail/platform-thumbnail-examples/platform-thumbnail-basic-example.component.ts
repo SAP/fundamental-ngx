@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Media } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-thumbnail-basic-example',
+    selector: 'fdp-platform-thumbnail-basic-example',
     templateUrl: './platform-thumbnail-basic-example.component.html'
 })
 export class PlatformThumbnailBasicExampleComponent {
