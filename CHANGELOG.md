@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.13...v0.26.1-rc.14) (2021-01-26)
+
+
+### Bug Fixes
+
+* (Platform) Dynamic Content Page overflow ([#4479](https://github.com/SAP/fundamental-ngx/issues/4479)) ([a58f27e](https://github.com/SAP/fundamental-ngx/commit/a58f27e9db32f62e3fe9b3e9fbd299c94f9e397b))
+
 ### [0.26.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.11...v0.26.1-rc.13) (2021-01-26)
 
 
