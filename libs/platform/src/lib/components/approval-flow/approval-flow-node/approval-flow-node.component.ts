@@ -9,14 +9,15 @@ import {
     Input,
     OnChanges,
     OnInit,
-    Output,
-    ViewChild
+    Output, QueryList,
+    ViewChild, ViewChildren
 } from '@angular/core';
 import { ObjectStatus } from '@fundamental-ngx/core';
 
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata } from '../approval-flow.component';
 import { ApprovalNode, ApprovalStatus } from '../interfaces';
 import { isNodeApproved } from '../helpers';
+import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
 
 const NODE_STATUS_CLASS_MAP = {
     'approved': 'positive',
@@ -107,7 +108,16 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
         return Boolean(this.blank && this.meta?.nextHNode);
     }
 
-    _isDropZoneActive = false;
+    /** @hidden */
+    @HostBinding('class.approval-flow-node--in-parallel')
+    get _isInParallel(): boolean {
+        return Boolean(this.meta?.isParallel);
+    }
+
+    /** @hidden */
+    get _isAnyDropZoneActive(): boolean {
+        return this.dropZones.filter(z => z.active).length > 0
+    }
 
     /** @hidden */
         // make public input?
@@ -125,8 +135,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @Output() onEdit = new EventEmitter<void>();
 
     @Output() onDelete = new EventEmitter<void>();
+    @Output() hh = new EventEmitter<string[]>();
 
-    @ViewChild('dropZone') dropZone: ElementRef;
+    @ViewChildren(ApprovalFlowDropZoneDirective) dropZones: QueryList<ApprovalFlowDropZoneDirective>;
 
     /** @hidden */
     @HostListener('click')
@@ -177,23 +188,19 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    _setDragZoneStatus(status: boolean): void {
-        this._isDropZoneActive = status;
+    _deactivateDropZones(): void {
+        this.dropZones.forEach(dropZone => dropZone.active = false);
         this.cd.detectChanges();
     }
 
     /** @hidden */
-    _checkIfDrragedNodeInDropZone(nodeRect: DOMRect): void {
-        const dropZoneRect = this.dropZone.nativeElement.getBoundingClientRect();
-        console.log('dropZoneRect', dropZoneRect);
-        if (dropZoneRect.top + dropZoneRect.height > nodeRect.top
-            && dropZoneRect.left + dropZoneRect.width > nodeRect.left
-            && dropZoneRect.bottom - dropZoneRect.height < nodeRect.bottom
-            && dropZoneRect.right - dropZoneRect.width < nodeRect.right) {
-            this._setDragZoneStatus(true);
-            return;
-        }
-        this._setDragZoneStatus(false);
+    _checkIfNodeDraggedInDropZone(nodeRect: DOMRect): void {
+        this.dropZones.forEach(dropZone => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
+        this.cd.detectChanges();
+    }
+
+    logMeta(): void {
+        console.log('clicked node meta', this.meta);
     }
 
     /** @hidden */

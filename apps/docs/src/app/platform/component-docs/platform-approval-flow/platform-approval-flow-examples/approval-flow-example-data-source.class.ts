@@ -273,7 +273,7 @@ const mediumGraph: ApprovalProcess = {
             name: 'node name',
             description: 'Marketing team',
             approvers: [getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser()],
-            status: 'in progress',
+            status: 'not started',
             targets: ['ID3'],
             dueDate: new Date(),
             createDate: new Date()
@@ -283,7 +283,7 @@ const mediumGraph: ApprovalProcess = {
             name: 'node name',
             description: 'node description',
             approvers: [getRandomUser()],
-            status: 'in progress',
+            status: 'not started',
             targets: ['ID4'],
             dueDate: new Date(),
             createDate: new Date()

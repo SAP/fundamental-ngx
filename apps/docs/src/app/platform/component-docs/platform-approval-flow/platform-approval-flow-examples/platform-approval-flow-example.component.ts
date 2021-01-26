@@ -36,9 +36,9 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
     `
 })
 export class PlatformApprovalFlowExampleComponent {
-    dataSource = new ApprovalFlowExampleDataSource('complex');
+    dataSource = new ApprovalFlowExampleDataSource('simple');
     examples = ['simple', 'medium', 'complex'];
-    selectedExample = 'complex';
+    selectedExample = 'simple';
 
     nodeClick(node: ApprovalNode): void {
         console.log('Node click handler');

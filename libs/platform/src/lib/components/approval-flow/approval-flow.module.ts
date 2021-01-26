@@ -27,6 +27,7 @@ import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list/approval-flow-user-list.component';
 import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/approval-flow-user-details.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ApprovalFlowDropZoneDirective } from './approval-flow-node/approval-flow-drop-zone.directive';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         ApprovalFlowApproverDetailsComponent,
         ApprovalFlowAddNodeComponent,
         ApprovalFlowUserListComponent,
-        ApprovalFlowUserDetailsComponent
+        ApprovalFlowUserDetailsComponent,
+        ApprovalFlowDropZoneDirective
     ],
     imports: [
         CommonModule,

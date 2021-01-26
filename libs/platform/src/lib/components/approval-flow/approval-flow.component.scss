@@ -255,3 +255,7 @@ fd-toolbar {
         }
     }
 }
+
+.cdk-overlay-container {
+	z-index: 1002 !important;
+}

@@ -26,6 +26,11 @@ export interface ApprovalDataSource {
     fetchWatchers(): Observable<ApprovalUser[]>;
 
     /**
+     * Fetch users list to be used in "edit watchers" flow..
+     */
+    // fetchTeams(): Observable<ApprovalUser[]>;
+
+    /**
      * Update watcher list. Called whenever there is a change
      * to the watcher list.
      */

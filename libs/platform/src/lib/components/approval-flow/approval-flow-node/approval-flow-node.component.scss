@@ -20,6 +20,10 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     height: $node-height;
     cursor: pointer;
 
+    &.highlighted {
+        box-shadow: 0 0 3px 3px #ead012 !important;
+    }
+
     &.#{$block}--blank {
         background: transparent;
         box-shadow: none;
@@ -93,6 +97,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     &.#{$block}--selected {
         background: #E5F0FA;
         //border: 2px solid #0854A0;
+        box-shadow: 0 0 0 2px #0854A0;
     }
 
     &.#{$block}--edit-mode {
@@ -104,6 +109,28 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
             top: $carousel-marker-top--edit-mode;
+        }
+
+        .#{$block}__arrow {
+            display: none;
+        }
+    }
+
+    &.#{$block}--in-parallel {
+        .#{$block}__add--after {
+            right: -1.5rem;
+
+            & + .#{$block}__drop-zone {
+                right: -1.8rem;
+            }
+        }
+
+        .#{$block}__add--before {
+            //right: -1.5rem;
+
+            & + .#{$block}__drop-zone {
+                left: -1.8rem;
+            }
         }
     }
 
@@ -145,6 +172,12 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         .#{$block}__name.#{$block}__name--members-count {
             direction: ltr;
             text-align: right;
+        }
+    }
+
+    &.cdk-drag-dragging {
+        .#{$block}__add, &:before, &:after {
+            visibility: hidden;
         }
     }
 }
@@ -267,29 +300,49 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}__add--before {
-        left: -2.5rem;
+        left: -1.5rem;
+        //left: -2.5rem;
         right: auto;
+
+        & + .#{$block}__drop-zone {
+            left: -1.8rem;
+        }
     }
 
     &.#{$block}__add--after {
+        //right: -1.5rem;
         right: -2.5rem;
         left: auto;
+
+        & + .#{$block}__drop-zone {
+            //right: -1.8rem;
+            right: -2.8rem;
+            left: auto;
+        }
     }
 }
 
-//.#{$block}--blank {
 .#{$block}__drop-zone {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
     border-radius: 4px;
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    //border: 1px solid red;
 
     &.#{$block}__drop-zone--active {
         background: #E5F0FA;
         border: 2px solid #0854A0;
     }
-}
 
-//}
+    &.#{$block}__drop-zone--blank {
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+
+    &.#{$block}__drop-zone--partial {
+        width: 10%;
+        left: 0;
+        top: 0;
+    }
+}

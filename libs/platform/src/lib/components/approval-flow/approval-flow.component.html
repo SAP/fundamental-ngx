@@ -1,8 +1,8 @@
 <div class="approval-flow__messages" *ngIf="_messages.length">
     <fd-message-strip
-        *ngFor="let message of _messages; let i = index"
+        *ngFor="let message of _messages; let i = index; trackBy: trackByFn"
         [type]="'success'"
-        (onDismiss)="_onMessageDismiss(i)">
+        (onDismiss)="_dismissMessage(i)">
         <ng-container [ngTemplateOutlet]="message.type === 'watchersChangeSuccess' ? watchersChangedSuccess : null"></ng-container>
         <ng-container [ngTemplateOutlet]="message.type === 'nodeAddSuccess' ? nodeAddSuccess : null"></ng-container>
         <ng-container [ngTemplateOutlet]="message.type === 'nodeRemove' ? nodeRemove : null"></ng-container>
@@ -26,7 +26,7 @@
     <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
     <ng-container *ngIf="!_isEditMode">
         <fd-avatar
-            *ngFor="let watcher of _approvalProcess?.watchers"
+            *ngFor="let watcher of _approvalProcess?.watchers; trackBy: trackByFn"
             tabindex="0"
             size="xs"
             [image]="watcher.imgUrl"
@@ -41,11 +41,9 @@
             [dropdownValues]="_usersForWatchersList"
             placeholder="Search here..."
             [displayFn]="_displayUserFn"
-            [showAllButton]="false"
+            [showAllButton]="true"
             [(ngModel)]="_selectedWatchers"
         ></fd-multi-input>
-<!--        (openChange)="!$event && _checkWatchersUpdates()"-->
-<!--        (selectedChange)="_checkWatchersUpdates()"-->
     </div>
 </div>
 
@@ -68,13 +66,13 @@
              [class.approval-flow__graph--edit-mode]="_isEditMode"
         >
             <div class="approval-flow__column"
-                 *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last"
+                 *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: trackByFn"
                  [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
                  [class.approval-flow__column--vertical-line-after]="(column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
                  [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
             >
                 <ng-container
-                    *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last">
+                    *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: trackByFn">
                     <fdp-approval-flow-node
                         cdkDrag
                         [cdkDragDisabled]="!_isEditMode || node.status !== 'not started'"
@@ -83,15 +81,15 @@
                         [node]="node"
                         [blank]="node.blank"
                         [parent]="_nodeParentsMap[node.id]"
-                        [meta]="_nodeMetaMap[node.id]"
+                        [meta]="_metaMap[node.id]"
                         [isEdit]="_isEditMode"
                         [renderArrow]="columnIndex > 0"
                         [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
-                        [renderCarouselStartMarker]="(_isCarousel && firstColumn && firstNode)"
-                        [renderCarouselEndMarker]="(_isCarousel && lastColumn && lastNode)"
-                        [canAddNodeBefore]="false"
-                        [canAddNodeAfter]="node.status !== 'approved' && !_nodeMetaMap[node.id]?.nextHNode?.blank"
+                        [renderCarouselStartMarker]="(_isCarousel && _metaMap[node.id].isRoot)"
+                        [renderCarouselEndMarker]="(_isCarousel && _metaMap[node.id].isLast)"
+                        [canAddNodeBefore]="_metaMap[node.id].canAddNodeBefore"
+                        [canAddNodeAfter]="_metaMap[node.id].canAddNodeAfter"
                         (onNodeClick)="onNodeClick(node)"
                         (onNodeCheck)="onNodeCheck(node, $event)"
                         (onAdd)="addNode(node, $event)"
@@ -101,7 +99,9 @@
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
                         (cdkDragReleased)="onNodeDrop(node, $event.source)"
                         (cdkDragMoved)="onNodeDrag(node, $event)"
+                        (hh)="_highlightNodes($event)"
                     ></fdp-approval-flow-node>
+<!--                    && (!_metaMap[_metaMap[node.id]?.prevHNode?.id]?.isParallel && !_metaMap[node.id].parallelEnd) && (_metaMap[node.id].isParallel || _metaMap[node.id].parallelEnd )-->
                 </ng-container>
             </div>
         </div>
@@ -111,6 +111,7 @@
     <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_saveEditModeChanges()"></button>
     <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_exitEditMode()"></button>
 </div>
+<pre *ngIf="_isEditMode">{{ _approvalProcess.nodes | json }}</pre>
 
 <ng-template let-messageToast #reminderTemplate>
     <ng-container i18n="@@platformApprovalFlowReminderMessage">
