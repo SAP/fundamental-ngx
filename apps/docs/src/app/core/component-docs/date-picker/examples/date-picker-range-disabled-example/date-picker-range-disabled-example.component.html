@@ -5,6 +5,7 @@
             style="width: 300px"
             formControlName="dates"
             [state]="isValid() ? 'success' : 'error'"
+            [message]="!isValid() ? 'Format is not valid' : ''"
             [disableRangeEndFunction]="disabledEndFunction"
             [disableRangeStartFunction]="disabledStartFunction"
         ></fd-date-picker>

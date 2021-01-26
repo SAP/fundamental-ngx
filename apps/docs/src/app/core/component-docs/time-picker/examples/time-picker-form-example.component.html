@@ -1,9 +1,10 @@
 <form [formGroup]="customForm" class="flex-form">
     <div fd-form-item>
         <label fd-form-label>TimePicker</label>
-        <fd-time-picker formControlName="time"></fd-time-picker>
-        <fd-form-message [type]="'success'" *ngIf="isValid()">Valid Time</fd-form-message>
-        <fd-form-message [type]="'error'" *ngIf="!isValid()">Invalid Time</fd-form-message>
+        <fd-time-picker formControlName="time"
+                        [state]="isValid() ? 'success' : 'error'"
+                        [message]="isValid() ? 'Valid Time' : 'Invalid Time'">
+        </fd-time-picker>
         <br />
         Selected Time:
         <span *ngIf="customForm.controls.time.value">
@@ -13,8 +14,7 @@
     </div>
     <div fd-form-item>
         <label fd-form-label>Disabled TimePicker</label>
-        <fd-time-picker formControlName="disabledTime"></fd-time-picker>
-        <fd-form-message [type]="'information'">More Information</fd-form-message>
+        <fd-time-picker formControlName="disabledTime" state="information" message="More Information"></fd-time-picker>
         <br />
         Selected Time:
         <span *ngIf="customForm.controls.disabledTime.value">
