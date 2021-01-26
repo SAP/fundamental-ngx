@@ -1,7 +1,27 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable, InjectionToken } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
-import { TableScrollable } from './directives/table-scrollable.directive';
+export interface TableScrollable {
+    /** Returns observable that emits when a scroll event is fired on the host element. */
+    getScrollStream(): Observable<Event>;
+
+    /** Returns scrollTop position of the host element. */
+    getScrollTop(): number;
+
+    /** Returns scrollLeft position of the host element. */
+    getScrollLeft(): number;
+
+    /** Set scrollTop position of the host element. */
+    setScrollTop(scrollTop: number, emitEvent: boolean): void;
+
+    /** Set scrollLeft position of the host element. */
+    setScrollLeft(scrollLeft: number, emitEvent: boolean): void;
+
+    /** Get scrollable ElementRef of. */
+    getElementRef(): ElementRef<HTMLElement>;
+}
+
+export const TABLE_SCROLLABLE = new InjectionToken<TableScrollable>('Table Scrollable');
 
 @Injectable()
 export class TableScrollDispatcherService {

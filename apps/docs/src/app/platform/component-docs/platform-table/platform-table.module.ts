@@ -30,6 +30,7 @@ import { PlatformTableSortableExampleComponent } from './platform-table-examples
 import { PlatformTableFilterableExampleComponent } from './platform-table-examples/platform-table-filterable-example.component';
 import { PlatformTableGroupableExampleComponent } from './platform-table-examples/platform-table-groupable-example.component';
 import { PlatformTableFreezableExampleComponent } from './platform-table-examples/platform-table-freezable-example.component';
+import { PlatformTablePageScrollingExampleComponent } from './platform-table-examples/platform-table-page-scrolling-example.component';
 import { PlatformTableInitialStateExampleComponent } from './platform-table-examples/platform-table-initial-state-example.component';
 import { PlatformTableP13ColumnsExampleComponent } from './platform-table-examples/platform-table-p13-columns-example.component';
 import { PlatformTableP13FilterExampleComponent } from './platform-table-examples/platform-table-p13-filter-example.component';
@@ -73,6 +74,7 @@ const routes: Routes = [
         PlatformTableFilterableExampleComponent,
         PlatformTableGroupableExampleComponent,
         PlatformTableFreezableExampleComponent,
+        PlatformTablePageScrollingExampleComponent,
         PlatformTableInitialStateExampleComponent,
         PlatformTableP13ColumnsExampleComponent,
         PlatformTableP13SortExampleComponent,

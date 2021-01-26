@@ -21,8 +21,13 @@
     <ng-container [ngTemplateOutlet]="tableBodyTemplate"></ng-container>
 </div>
 
+<!-- Table Header Template -->
 <ng-template #tableHeaderTemplate>
-    <div class="fdp-table__header">
+    <div
+        class="fdp-table__header"
+        [style.padding-left.px]="_rtl ? _scrollBarWidth : 0"
+        [style.padding-right.px]="_rtl ? 0 : _scrollBarWidth"
+    >
         <div
             class="fd-table--fixed"
             [ngStyle]="_getFixedTableStyles()"
@@ -37,6 +42,10 @@
                 </thead>
             </table>
         </div>
+        <div
+            class="fdp-table__scrollbar-mock"
+            [style.width.px]="_scrollBarWidth"
+        ></div>
     </div>
 </ng-template>
 
@@ -225,41 +234,59 @@
 
 <!-- Table Body Template -->
 <ng-template #tableBodyTemplate>
-    <div class="fdp-table__body">
+    <fd-busy-indicator
+        [loading]="loading"
+        block="true"
+    >
         <div
-            class="fd-table--fixed"
-            [ngStyle]="_getFixedTableStyles()"
+            class="fdp-table__body"
             fdpTableScrollable
+            #verticalScrollable="tableScrollable"
         >
-            <table
-                fd-table
-                class="fdp-table__body-table"
+            <div
+                class="fd-table--fixed"
+                [ngStyle]="_getFixedTableStyles()"
+                fdpTableScrollable
+                fdpTableScroller="horizontal"
             >
-                <tbody
-                    fd-table-body
-                    [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
-                    [class.fd-table__body--no-vertical-borders]="noBodyBorders"
+                <table
+                    fd-table
+                    class="fdp-table__body-table"
                 >
-                    <ng-container
-                        *ngFor="let row of _tableRowsVisible"
-                        [ngSwitch]="row.type"
+                    <tbody
+                        fd-table-body
+                        [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
+                        [class.fd-table__body--no-vertical-borders]="noBodyBorders"
                     >
                         <ng-container
-                            *ngSwitchCase="'group'"
-                            [ngTemplateOutlet]="groupRowTemplate"
-                            [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible}"
-                        ></ng-container>
+                            *ngFor="let row of _tableRowsVisible"
+                            [ngSwitch]="row.type"
+                        >
+                            <ng-container
+                                *ngSwitchCase="'group'"
+                                [ngTemplateOutlet]="groupRowTemplate"
+                                [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible}"
+                            ></ng-container>
 
-                        <ng-container
-                            *ngSwitchCase="'item'"
-                            [ngTemplateOutlet]="itemRowTemplate"
-                            [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible}"
-                        ></ng-container>
-                    </ng-container>
-                </tbody>
-            </table>
+                            <ng-container
+                                *ngSwitchCase="'item'"
+                                [ngTemplateOutlet]="itemRowTemplate"
+                                [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible}"
+                            ></ng-container>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+        <div
+            class="fdp-table__body-hs"
+            [class.fdp-table__body-hs--empty]="_scrollBarWidth === 0"
+            fdpTableScrollable
+            fdpTableScroller="horizontal"
+        >
+            <div class="fdp-table__body-hs-spacer"></div>
+        </div>
+    </fd-busy-indicator>
 </ng-template>
 
 <!-- Group row Template -->

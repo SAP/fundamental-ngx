@@ -1,26 +1,44 @@
-import { Directive, ElementRef, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Directive, ElementRef, NgZone, OnDestroy, OnInit, forwardRef, Output } from '@angular/core';
 import { Subject, Observable, Observer, fromEvent } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
-import { TableScrollDispatcherService } from '../table-scroll-dispatcher.service';
+import { TableScrollDispatcherService, TableScrollable, TABLE_SCROLLABLE } from '../table-scroll-dispatcher.service';
 
 /**
  * Table Scrollable.
  * That directive should be assigned to table scrollable area.
  * It registers itself in table scroll dispatcher
  * and notify once element scrolled.
- * 
+ *
  * For internal usage.
  */
-@Directive({ selector: '[fdpTableScrollable]' })
-export class TableScrollable implements OnInit, OnDestroy {
+@Directive({
+    selector: '[fdpTableScrollable]',
+    exportAs: 'tableScrollable',
+    providers: [{ provide: TABLE_SCROLLABLE, useExisting: forwardRef(() => TableScrollableDirective) }]
+})
+export class TableScrollableDirective implements TableScrollable, OnInit, OnDestroy {
     /** @hidden */
     private _destroyed = new Subject<void>();
+
+    /** @hidden */
+    private _skipEvent = false;
 
     /** Scroll events stream */
     private _elementScrollStream: Observable<Event> = new Observable((observer: Observer<Event>) =>
         this.ngZone.runOutsideAngular(() =>
-            fromEvent(this.elementRef.nativeElement, 'scroll').pipe(takeUntil(this._destroyed)).subscribe(observer)
+            fromEvent(this.elementRef.nativeElement, 'scroll')
+                .pipe(
+                    filter(() => {
+                        if (this._skipEvent) {
+                            this._skipEvent = false;
+                            return false;
+                        };
+                        return true;
+                    }),
+                    takeUntil(this._destroyed)
+                )
+                .subscribe(observer)
         )
     );
 
@@ -56,6 +74,24 @@ export class TableScrollable implements OnInit, OnDestroy {
     /** Returns scrollLeft position of the host element. */
     getScrollLeft(): number {
         return this.elementRef.nativeElement?.scrollLeft;
+    }
+
+    /** Set scrollTop position of the host element. */
+    setScrollTop(scrollTop: number, emitEvent = true): void {
+        if (!this.elementRef.nativeElement || this.elementRef.nativeElement.scrollTop === scrollTop) {
+            return;
+        }
+        this._skipEvent = !emitEvent;
+        this.elementRef.nativeElement.scrollTop = scrollTop;
+    }
+
+    /** Set scrollLeft position of the host element. */
+    setScrollLeft(scrollLeft: number, emitEvent = true): void {
+        if (!this.elementRef.nativeElement || this.elementRef.nativeElement.scrollLeft === scrollLeft) {
+            return;
+        }
+        this._skipEvent = !emitEvent;
+        this.elementRef.nativeElement.scrollLeft = scrollLeft;
     }
 
     /** Get scrollable ElementRef of. */

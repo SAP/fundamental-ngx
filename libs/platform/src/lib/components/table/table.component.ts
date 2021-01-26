@@ -5,11 +5,12 @@ import {
     Component,
     ContentChild,
     ContentChildren,
-    ElementRef,
     EventEmitter,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
+    OnInit,
     Optional,
     Output,
     QueryList,
@@ -17,8 +18,9 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
+import { finalize, distinctUntilChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
 
@@ -52,7 +54,8 @@ import { ObservableTableDataSource } from './domain/observable-data-source';
 import { TableColumn } from './components/table-column/table-column';
 import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
 import { Table } from './table';
-import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+import { getScrollBarWidth } from './utils';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -111,7 +114,7 @@ interface GroupTableRowValueType {
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
     }
 })
-export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges {
+export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges, OnInit {
     /**
      * Table data source.
      * Can be @type { T[] | Observable<T[]> | TableDataSource<T> }
@@ -153,11 +156,19 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Toggle for page scrolling feature. */
     @Input()
-    pageScrolling: boolean;
+    pageScrolling = false;
 
     /** Number of items per page. */
     @Input()
-    pageSize: number;
+    pageSize: number = null;
+
+    /** Page scrolling threshold in px. */
+    @Input()
+    pageScrollingThreshold = 80;
+
+    /** Loading state */
+    @Input()
+    loading = false;
 
     /** Text displayed when table has no items. */
     @Input()
@@ -222,8 +233,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     readonly columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
 
     /** @hidden */
-    @ViewChild('tableContainer')
-    readonly tableContainer: ElementRef;
+    @ViewChild('verticalScrollable')
+    readonly verticalScrollable: TableScrollable;
 
     /** @hidden */
     @ContentChildren(TableColumn)
@@ -358,10 +369,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    _scrollBarWidth = 0;
+
+    /** @hidden */
     private _ds: FdpTableDataSource<T>;
 
     /** @hidden */
     private _tableDataSource: TableDataSource<T>;
+
+    /** @hidden opened data source stream */
+    private _dsOpenedStream: Observable<T[]> | null;
 
     /** @hidden for data source handling */
     private _dsSubscription: Subscription | null;
@@ -376,6 +393,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     constructor(
         private readonly _tableService: TableService,
         private readonly _cd: ChangeDetectorRef,
+        private readonly _tableScrollDispatcher: TableScrollDispatcherService,
+        @Inject(DOCUMENT) private readonly _document: Document,
         @Optional() private readonly _rtlService: RtlService
     ) {
         super();
@@ -389,6 +408,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         if ('selectionMode' in changes || 'freezeColumnsTo' in changes) {
             this._setFreezableInfo();
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._calculateScrollbarWidth();
     }
 
     /** @hidden */
@@ -414,6 +438,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._constructTableMetadata();
 
         this._listenToTableRowsPipe();
+
+        this._listenToPageScrolling();
 
         this._cd.detectChanges();
     }
@@ -505,6 +531,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Search in table */
     search(searchInput: SearchInput): void {
         this._tableService.search(searchInput);
+        this._cd.markForCheck();
+    }
+
+    /** Search in table */
+    setCurrentPage(currentPage: number): void {
+        this._tableService.setCurrentPage(currentPage);
         this._cd.markForCheck();
     }
 
@@ -682,6 +714,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _setInitialState(): void {
         const prevState = this.getTableState();
         const columns = this.columns.toArray();
+        const page = prevState.page;
         const visibleColumns =
             this.initialVisibleColumns ||
             (prevState.columns.length ? prevState.columns : columns.map(({ name }) => name));
@@ -692,7 +725,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             sortBy: this.initialSortBy || prevState.sortBy,
             filterBy: this.initialFilterBy || prevState.filterBy,
             groupBy: this.initialGroupBy || prevState.groupBy,
-            freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn
+            freezeToColumn: this.freezeColumnsTo || prevState.freezeToColumn,
+            page: {
+                currentPage: page.currentPage || 1,
+                pageSize: this.pageSize || page.pageSize
+            }
         });
     }
 
@@ -726,15 +763,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 // Events that should trigger DataSource.fetch()
                 this._tableService.sortChange,
                 this._tableService.filterChange,
-                this._tableService.searchChange
+                this._tableService.searchChange,
+                this._tableService.pageChange
             )
                 .pipe(
                     map(() => this._tableService.getTableState()),
-                    filter((state) => !!state),
+                    filter((state) => !!state && !!this._tableDataSource),
                     distinctUntilChanged()
                 )
                 .subscribe((state) => {
-                    this._tableDataSource?.fetch(state);
+                    this._tableDataSource.fetch(state);
                 })
         );
 
@@ -1172,9 +1210,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _openDataStream(ds: FdpTableDataSource<T>): TableDataSource<T> {
-        const initDataSource = this._toDataStream(ds);
+        const dataSourceStream = this._toDataStream(ds);
 
-        if (initDataSource === undefined) {
+        if (dataSourceStream === undefined) {
             throw new Error(`[TableDataSource] source did not match an Array, Observable, nor DataSource`);
         }
         /**
@@ -1182,18 +1220,22 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
          * places. If any new data comes in either you do a search and you want to pass initial data
          * its here.
          */
-        this._dsSubscription = initDataSource.open().subscribe((items) => {
+        this._dsOpenedStream = dataSourceStream.open();
+
+        this._dsSubscription = this._dsOpenedStream.subscribe((items) => {
+            this._totalItems = dataSourceStream.dataProvider.totalItems;
+
             this._dataSourceItemsSubject.next(items);
-            this._totalItems = initDataSource.dataProvider.totalItems;
+
             this._cd.markForCheck();
         });
 
         this._subscriptions.add(this._dsSubscription);
 
         // initial data fetch
-        initDataSource.fetch(this.getTableState());
+        dataSourceStream.fetch(this.getTableState());
 
-        return initDataSource;
+        return dataSourceStream;
     }
 
     /** @hidden */
@@ -1209,5 +1251,39 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         return undefined;
+    }
+
+    /** @hidden */
+    private _calculateScrollbarWidth(): void {
+        this._scrollBarWidth = getScrollBarWidth(this._document);
+    }
+
+    /** @hidden */
+    private _listenToPageScrolling(): void {
+        this._subscriptions.add(
+            this._tableScrollDispatcher
+                .scrolled()
+                .pipe(
+                    filter(() => this.pageScrolling),
+                    filter((scrollable) => scrollable === this.verticalScrollable),
+                    map((scrollable) => scrollable.getElementRef().nativeElement),
+                    filter((element) => !!element),
+                    filter(
+                        ({ scrollHeight, clientHeight, scrollTop }) =>
+                            scrollHeight - clientHeight - scrollTop <= this.pageScrollingThreshold
+                    ),
+                    filter(() => {
+                        const {
+                            page: { currentPage, pageSize }
+                        } = this.getTableState();
+                        const lastPage = Math.ceil(this._totalItems / (pageSize || this._totalItems));
+                        return currentPage < lastPage;
+                    })
+                )
+                .subscribe(() => {
+                    const currentPage = this.getTableState().page.currentPage;
+                    this.setCurrentPage(currentPage + 1);
+                })
+        );
     }
 }

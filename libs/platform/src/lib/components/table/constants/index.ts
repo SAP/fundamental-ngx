@@ -5,18 +5,17 @@ export const DEFAULT_TABLE_STATE: TableState = {
     sortBy: [],
     filterBy: [],
     groupBy: [],
-    currentPage: {
+    page: {
         pageSize: null,
-        startIndex: null
+        currentPage: 1
     },
-    pageSize: null,
     columns: [],
     freezeToColumn: null,
     searchInput: {
         text: '',
         category: ''
     }
-};
+}; 
 
 // SIZES
 export const DEFAULT_COLUMN_WIDTH = 200;

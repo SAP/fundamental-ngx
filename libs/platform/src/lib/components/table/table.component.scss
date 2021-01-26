@@ -81,22 +81,20 @@
         background-color: var(--sapList_HeaderBackground, #f2f2f2);
     }
 
-    $scrollSize: 17px;
-
     .fdp-table__header {
         position: relative;
-        padding-right: $scrollSize;
+        margin-bottom: -1px;
+        
         overflow: hidden;
+        
         border: 0.0625rem solid #e4e4e4;
         border: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
-        margin-bottom: -1px;
 
-        &::after {
+        .fdp-table__scrollbar-mock {
             content: '';
             position: absolute;
             top: 0;
             right: 0;
-            width: $scrollSize;
             height: 100%;
 
             @include fdp-empty-scrollbar-block();
@@ -108,10 +106,9 @@
         }
 
         @include fd-rtl() {
-            padding-left: $scrollSize;
             padding-right: 0;
 
-            &::after {
+            .fdp-table__scrollbar-mock {
                 right: auto;
                 left: 0;
             }
@@ -138,15 +135,13 @@
     }
 
     .fdp-table__body {
+        // TODO: For testing only to trigger vertical scroll
+        height: calc(2rem * 8);
+        
         position: relative;
 
         overflow: hidden;
         overflow-y: scroll;
-        // TODO: For testing only to trigger vertical scroll
-        height: calc(2rem * 8);
-
-        border: 0.0625rem solid #e4e4e4;
-        border: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
 
         .fd-table__body {
             border: none;
@@ -167,6 +162,35 @@
             overflow-x: scroll;
 
             @include hide-scrollbar();
+        }
+    }
+
+    .fdp-table__body,
+    .fdp-table__body-hs {
+        border: 0.0625rem solid #e4e4e4;
+        border: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
+    }
+
+    .fdp-table__body-hs {
+        position: relative;
+        margin-top: -0.0625rem;
+        margin-top: calc(-1 * var(--sapList_BorderWidth, 0.0625rem));
+        min-height: 0.5rem;
+        
+        overflow: scroll;
+
+        &.fdp-table__body-hs--empty {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+
+            border-color: transparent;
+        }
+
+        .fdp-table__body-hs-spacer {
+            position: absolute;
+            height: 1px;
+            visibility: hidden;
         }
     }
 
