@@ -24,36 +24,15 @@ import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
-import { PopoverDirective } from '../popover/public_api';
+import { PopoverComponent } from '../popover/public_api';
+import { ControlValue, CustomValues, RangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
+import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SliderComponent),
     multi: true
 };
-
-export enum SliderValueTargets {
-    SINGLE_SLIDER,
-    RANGE_SLIDER1,
-    RANGE_SLIDER2
-}
-
-export enum RangeHandles {
-    First,
-    Second
-}
-
-export interface SliderTickMark {
-    value: number | string;
-    label: string;
-    position?: number;
-}
-
-export type CustomValues = Omit<SliderTickMark, 'position'>;
-
-export type ControlValue = number | number[] | SliderTickMark | SliderTickMark[];
-
-const MIN_DISTANCE_BETWEEN_TICKS = 8;
 
 let sliderId = 0;
 
@@ -137,7 +116,11 @@ export class SliderComponent
     @Input()
     tickmarksBetweenLabels = 1;
 
-    /** Slider mode. */
+    /** 
+     * Slider mode.
+     * Options include: 'single' | 'range'
+     * The default is set to 'single'
+     */
     @Input()
     mode: 'single' | 'range' = 'single';
 
@@ -237,8 +220,8 @@ export class SliderComponent
     rangeHandle2: ElementRef<HTMLDivElement>;
 
     /** @hidden */
-    @ViewChildren(PopoverDirective)
-    _popovers: QueryList<PopoverDirective>;
+    @ViewChildren(PopoverComponent)
+    _popovers: QueryList<PopoverComponent>;
 
     /** @hidden */
     _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
@@ -519,7 +502,7 @@ export class SliderComponent
 
     /** @hidden */
     _updatePopoversPosition(): void {
-        this._popovers.forEach((popover) => popover.updatePopper());
+        this._popovers.forEach((popover) => popover.refreshPosition());
     }
 
     /** @hidden */
