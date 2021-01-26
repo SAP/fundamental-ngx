@@ -12,6 +12,8 @@ import * as customValuesHtml from '!raw-loader!./examples/custom-values/slider-c
 import * as customValuesTs from '!raw-loader!./examples/custom-values/slider-custom-values-example.component';
 import * as sliderTooltipHtml from '!raw-loader!./examples/tooltip/slider-tooltip-example.component.html';
 import * as sliderTooltipTs from '!raw-loader!./examples/tooltip/slider-tooltip-example.component';
+import * as sliderCozyHtml from '!raw-loader!./examples/cozy/slider-cozy-example.component.html';
+import * as sliderCozyTs from '!raw-loader!./examples/cozy/slider-cozy-example.component';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
@@ -165,6 +167,20 @@ export class SliderDocsComponent {
             language: 'html',
             code: customValuesHtml,
             fileName: 'slider-custom-values-example'
+        }
+    ];
+
+    cozy: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: sliderCozyTs,
+            fileName: 'slider-cozy-example',
+            component: 'SliderCozyExampleComponent'
+        },
+        {
+            language: 'html',
+            code: sliderCozyHtml,
+            fileName: 'slider-cozy-example'
         }
     ];
 
