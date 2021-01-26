@@ -119,7 +119,7 @@ export class FeedInputComponent implements OnInit, AfterViewInit {
             parseInt(computed.getPropertyValue('border-bottom-width'), 10);
     }
 
-    /** @hidden Calculate default title */
+    /** @hidden Calculate default user avatar title */
     private _calculateUserTitle(): string {
        return this.userTitle ? this.userTitle : 'User';
     }
