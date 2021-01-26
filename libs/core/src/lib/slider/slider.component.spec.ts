@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { whenStable } from '../utils/tests';
-import { createMouseEvent } from '../utils/tests/event-objects';
 
 import { SliderComponent } from './slider.component';
 import { SliderModule } from './slider.module';
@@ -43,6 +42,7 @@ import { SliderModule } from './slider.module';
         ></fd-slider>
         <fd-slider class="example-4" [(ngModel)]="value4" mode="range"></fd-slider>
         <fd-slider class="example-5" [(ngModel)]="value5" [disabled]="true"> </fd-slider>
+        <fd-slider class="example-6" [(ngModel)]="value6" [cozy]="true"> </fd-slider>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -68,6 +68,7 @@ class TestSliderComponent {
     value3 = this.customValues[4];
     value4 = [20, 70];
     value5 = 50;
+    value6 = 50;
 }
 
 describe('SliderComponent', () => {
@@ -169,34 +170,6 @@ describe('SliderComponent', () => {
         expect(labels[0].nativeElement.innerHTML).toEqual(component.customValues[0].label);
     });
 
-    it('should display tooltip with the text field', async () => {
-        const { handle, _popovers } = sliders[0];
-
-        handle.nativeElement.dispatchEvent(createMouseEvent('mouseenter'));
-
-        await whenStable(fixture);
-
-        const popover = _popovers.toArray()[0];
-        const tooltip = fixture.debugElement.query(By.css('.example-1 .fd-slider--tooltip'));
-
-        expect(popover.isOpen).toEqual(true);
-        expect(tooltip.name).toEqual('div');
-    });
-
-    it('should display tooltip with the input field', async () => {
-        const { handle, _popovers } = sliders[1];
-
-        handle.nativeElement.dispatchEvent(createMouseEvent('mouseenter'));
-
-        await whenStable(fixture);
-
-        const popover = _popovers.toArray()[0];
-        const tooltip = fixture.debugElement.query(By.css('.example-2 .fd-slider--tooltip'));
-
-        expect(popover.isOpen).toEqual(true);
-        expect(tooltip.name).toEqual('input');
-    });
-
     it('range slider should display 2 handles', async () => {
         const handles = fixture.debugElement.queryAll(By.css('.example-4 .fd-slider__handle'));
         const slider = sliders[3];
@@ -227,6 +200,12 @@ describe('SliderComponent', () => {
         const isDisabled = fixture.debugElement.query(By.css('.example-5.is-disabled'));
 
         expect(isDisabled).toBeTruthy();
+    });
+
+    it('should contain fd-slider__handle--lg class', () => {
+        const isCozy = fixture.debugElement.query(By.css('.example-6 .fd-slider__handle--lg'));
+
+        expect(isCozy).toBeTruthy();
     });
 });
 

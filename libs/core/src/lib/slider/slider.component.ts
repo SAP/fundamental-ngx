@@ -148,6 +148,10 @@ export class SliderComponent
     @Input()
     disabled = false;
 
+    /** Whether to apply cozy mode. */
+    @Input()
+    cozy: boolean;
+
     _position: number | number[] = 0;
 
     /** Control value */
