@@ -36,7 +36,7 @@ describe('Carousel test suite', function() {
         disableLoadingBtn,
         contentNavBtns,
         sectionTitle
-    } = new CarouselPo();
+    } = carouselPage;
 
     beforeAll(() => {
         carouselPage.open();
