@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { of } from 'rxjs';
 
-import { ArrayComboBoxDataSource, ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
+import { ArrayComboBoxDataSource, ComboboxSelectionChangeEvent, DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-combobox-datasource-example',
     templateUrl: './combobox-datasource-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class ComboboxDatasourceExampleComponent {
     dataSourceStrings = [

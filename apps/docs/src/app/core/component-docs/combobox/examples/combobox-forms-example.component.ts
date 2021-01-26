@@ -9,7 +9,7 @@ interface ComboboxItem {
 @Component({
     selector: 'fd-combobox-forms-example',
     templateUrl: 'combobox-forms-example.component.html',
-    styleUrls: ['combobox-example.component.scss']
+    styleUrls: ['combobox-forms-example.component.scss']
 })
 export class ComboboxFormsExampleComponent {
     customForm = new FormGroup({
