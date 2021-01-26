@@ -1,7 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VariantManagementComponent } from './variant-management.component';
-import { BarModule, CardModule, ListModule, PopoverModule, SelectModule, ToolbarModule } from '@fundamental-ngx/core';
+import {
+    BarModule,
+    CardModule,
+    CheckboxModule,
+    DialogModule,
+    FormModule, IconModule, InputGroupModule,
+    ListModule,
+    PopoverModule,
+    SelectModule, TableModule,
+    ToolbarModule
+} from '@fundamental-ngx/core';
+import { RadioModule } from '../radio/radio.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -14,7 +26,15 @@ import { BarModule, CardModule, ListModule, PopoverModule, SelectModule, Toolbar
         ListModule,
         ToolbarModule,
         PopoverModule,
-        BarModule
+        BarModule,
+        DialogModule,
+        FormModule,
+        CheckboxModule,
+        InputGroupModule,
+        TableModule,
+        IconModule,
+        RadioModule,
+        FormsModule
     ],
     exports: [
         VariantManagementComponent

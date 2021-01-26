@@ -6,8 +6,16 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { VariantManagementDocsComponent } from './variant-management-docs.component';
 import { VariantManagementExampleComponent } from './examples/variant-management-example/variant-management-example.component';
 import { VariantManagementHeaderComponent } from './variant-management-header/variant-management-header.component';
-import { TableModule, VariantManagementModule, ToolbarModule } from '@fundamental-ngx/core';
+import {
+    TableModule,
+    VariantManagementModule,
+    ToolbarModule,
+    PopoverModule,
+    ListModule,
+    FormModule
+} from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -21,7 +29,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationModule, VariantManagementModule, SharedDocumentationPageModule, TableModule, ToolbarModule],
+    imports: [RouterModule.forChild(routes),
+        SharedDocumentationModule,
+        VariantManagementModule,
+        SharedDocumentationPageModule,
+        TableModule,
+        ToolbarModule,
+        PopoverModule,
+        ListModule,
+        FormModule,
+        FormsModule
+    ],
     exports: [RouterModule],
     declarations: [
         VariantManagementHeaderComponent,

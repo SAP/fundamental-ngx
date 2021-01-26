@@ -1,12 +1,146 @@
-<fd-popover>
+<fd-popover [noArrow]="false" [(isOpen)]="isViewsOpen">
     <fd-popover-control>
-        <button fd-button label="Dropdown Popover" [fdMenu]="true"></button>
+<!--    fd-variant-management-->
+        <div style="display: flex; justify-content: space-between; align-items: center">
+            <h4>{{ appliedView.name }}<span *ngIf="viewChanged">*</span></h4>
+            <button fd-button [fdMenu]="true" [compact]="true" (click)="isViewsOpen = true"></button>
+        </div>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body style="min-width: 400px;">
+        <div fd-popover-body-header>
+            <div fd-bar barDesign="header">
+                <div fd-bar-middle>
+                    <fd-bar-element>My Views</fd-bar-element>
+                </div>
+            </div>
+        </div>
         <ul fd-list>
-            <li fd-list-item *ngFor="let option of list">
-                <span fd-list-title>{{option}}</span>
-            </li>
+            <ng-container *ngFor="let view of views">
+                <li fd-list-item (click)="chooseView(view.id)">
+                    <span fd-list-title>{{ view.name }}</span>
+                </li>
+            </ng-container>
         </ul>
+        <div fd-popover-body-footer>
+            <div fd-bar barDesign="footer" [cozy]="true">
+                <div fd-bar-right>
+                    <fd-button-bar label="Save" (click)="openDialog(saveViewDialog)" fdType="emphasized"></fd-button-bar>
+                    <fd-button-bar label="Save as"></fd-button-bar>
+                    <fd-button-bar label="Manage" (click)="openDialog(manageViewDialog)"></fd-button-bar>
+                </div>
+            </div>
+        </div>
     </fd-popover-body>
 </fd-popover>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #saveViewDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title>Save View</h1>
+            <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <div fd-form-item>
+                <label fd-form-label for="input-4">View:</label>
+                <input
+                    fd-form-control
+                    [compact]="true"
+                    type="text"
+                    [id]="'input-4'"
+                    placeholder="Field placeholder text"
+                    aria-required="true"
+                />
+                <fd-checkbox compact="true" label="Set as Default"></fd-checkbox>
+                <fd-checkbox compact="true" label="Public"></fd-checkbox>
+            </div>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Save"
+                (click)="dialog.close('Continue')">
+            </fd-button-bar>
+            <fd-button-bar
+                fd-initial-focus
+                label="Cancel"
+                (click)="dialog.dismiss('Cancel')">
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #manageViewDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title>Manage Views</h1>
+
+            <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>
+
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <div fd-form-item>
+                <fd-input-group glyph="search"
+                                glyphAriaLabel="Submit"
+                                placement="after"
+                                placeholder="Search"
+                                [compact]="true"
+                                [button]="true">
+                </fd-input-group>
+            </div>
+            <table fd-table>
+                <thead fd-table-header>
+                <tr fd-table-row>
+                    <th fd-table-cell></th>
+                    <th fd-table-cell>View</th>
+                    <th fd-table-cell>Sharing</th>
+                    <th fd-table-cell>Apply Automatically</th>
+                    <th fd-table-cell>Default</th>
+                    <th fd-table-cell>Created by</th>
+                    <th fd-table-cell></th>
+                </tr>
+                </thead>
+                <tbody fd-table-body>
+                <tr *ngFor="let view of views; let index = index" fd-table-row>
+                    <td fd-table-cell>
+                        <button fd-button [compact]="true" [fdType]="'transparent'" [glyph]="'favorite'"></button>
+                    </td>
+                    <td fd-table-cell>{{ view.name }}</td>
+                    <td fd-table-cell>{{ view.sharing }}</td>
+<!--                    <td fd-table-cell>{{ row.default }}</td>-->
+                    <td fd-table-cell>
+                        <fd-radio-button
+                            [value]="index"
+                            [id]="'radio-' + index"
+                            [name]="'radio-name-1'"
+                            [(ngModel)]="view.default"
+                        >Option One
+                        </fd-radio-button>
+                    </td>
+                    <td fd-table-cell>{{ view.autoApply }}</td>
+                    <td fd-table-cell>{{ view.createdBy }}</td>
+                    <td fd-table-cell>
+                        <button fd-button [compact]="true" [fdType]="'transparent'" [glyph]="'error'">
+
+                        </button></td>
+                </tr>
+                </tbody>
+            </table>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="OK"
+                (click)="dialog.close('Continue')">
+            </fd-button-bar>
+            <fd-button-bar
+                fd-initial-focus
+                label="Cancel"
+                (click)="dialog.dismiss('Cancel')">
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
