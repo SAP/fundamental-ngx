@@ -6,7 +6,8 @@ const MIN_VALUE = 10;
 
 @Component({
     selector: 'fdp-platform-number-step-input-reactive-example',
-    templateUrl: './platform-number-step-input-reactive-example.component.html'
+    templateUrl: './platform-number-step-input-reactive-example.component.html',
+    styleUrls: ['./platform-number-step-input-reactive-example.component.scss']
 })
 export class PlatformNumberStepInputFormExampleComponent implements AfterViewInit {
     MIN_VALUE = MIN_VALUE;

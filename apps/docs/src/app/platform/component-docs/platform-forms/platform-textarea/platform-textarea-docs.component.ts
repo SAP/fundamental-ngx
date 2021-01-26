@@ -3,7 +3,6 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
 
 import * as platformBasicTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-basic-example.component.html';
 import * as platformBasicTextareaTsCode from '!raw-loader!./platform-textarea-examples/platform-textarea-basic-example.component.ts';
-import * as platformBasicTextareaScss from '!raw-loader!./platform-textarea-examples/platform-textarea-basic-example.component.scss';
 
 import * as platformCounterTextareaSrc from '!raw-loader!./platform-textarea-examples/platform-textarea-counter-example.component.html';
 import * as platformCounterTextareaTsCode from '!raw-loader!./platform-textarea-examples/platform-textarea-counter-example.component.ts';
@@ -25,8 +24,7 @@ export class PlatformTextareaDocsComponent implements OnInit {
         {
             language: 'html',
             code: platformBasicTextareaSrc,
-            fileName: 'platform-textarea-basic-example',
-            scssFileCode: platformBasicTextareaScss
+            fileName: 'platform-textarea-basic-example'
         },
         {
             language: 'typescript',
@@ -68,12 +66,12 @@ export class PlatformTextareaDocsComponent implements OnInit {
         {
             language: 'html',
             code: platformAutogrowTextareaSrc,
-            fileName: 'platform-textarea-autogrow-template-example'
+            fileName: 'platform-textarea-autogrow-example'
         },
         {
             language: 'typescript',
             code: platformAutogrowTextareaTsCode,
-            fileName: 'platform-textarea-autogrow-template-example',
+            fileName: 'platform-textarea-autogrow-example',
             component: 'PlatformTextareaAutogrowExampleComponent'
         }
     ];

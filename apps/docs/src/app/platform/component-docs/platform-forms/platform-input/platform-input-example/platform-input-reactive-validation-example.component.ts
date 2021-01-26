@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'fdp-platform-input-reactive-form-validation-example',
+    selector: 'fdp-platform-input-reactive-validation-example',
     templateUrl: './platform-input-reactive-validation-example.component.html'
 })
 export class PlatformInputReactiveValidationExampleComponent implements OnInit {
