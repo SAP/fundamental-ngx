@@ -44,8 +44,6 @@ describe('FeedInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        console.log(textareaEl.nativeElement);
-
         expect(textareaEl.nativeElement.getAttribute('aria-disabled')).toEqual('true');
         expect(buttonEl.nativeElement.getAttribute('aria-disabled')).toEqual('true');
     });
@@ -66,7 +64,7 @@ describe('FeedInputComponent', () => {
         expect(buttonEl.nativeElement.getAttribute('ng-reflect-disabled')).toEqual('false');
     });
     // TODO: Unskip after fix
-    xit('should textarea grow by default', () => {
+    it('should textarea grow by default', () => {
         textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4';
         component.resize();
 
