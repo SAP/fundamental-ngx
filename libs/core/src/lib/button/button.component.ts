@@ -1,7 +1,9 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
-    ElementRef, Input,
+    ElementRef,
+    Input,
     OnChanges,
     OnInit,
     ViewEncapsulation
@@ -33,8 +35,7 @@ import { BaseButton } from './base-button';
     }
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit {
-
-    /** The property allows user to pass additional css classes*/
+    /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
 
@@ -69,6 +70,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             this.fdType ? `fd-button--${this.fdType}` : '',
             this.compact ? 'fd-button--compact' : '',
             this.fdMenu ? `fd-button--menu` : '',
+            this._isDisabled() ? `is-disabled` : '',
             this.class
         ];
     }
@@ -82,5 +84,9 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
 
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
+    }
+
+    private _isDisabled(): boolean {
+        return this.elementRef().nativeElement.hasAttribute('disabled') || this.elementRef().nativeElement.getAttribute('aria-disabled');
     }
 }
