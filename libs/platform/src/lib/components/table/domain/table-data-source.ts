@@ -20,14 +20,14 @@ export class TableDataSource<T> implements DataSource<T> {
                     const {
                         page: { currentPage, pageSize }
                     } = tableState;
-                    const currentItems = this.dataChanges.getValue();
+                    const currentItems = this.dataChanges.getValue().slice();
                     /**
                      * Page Scrolling
                      * Insert new page items to a specific position
                      */
                     if (currentPage > 1 && currentItems.length > 0) {
                         const startIndex = (currentPage - 1) * pageSize;
-                        [...currentItems].splice(startIndex, currentItems.length, ...items);
+                        currentItems.splice(startIndex, currentItems.length, ...items);
                         items = currentItems;
                     }
 

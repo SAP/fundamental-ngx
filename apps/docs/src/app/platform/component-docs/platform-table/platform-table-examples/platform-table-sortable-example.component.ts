@@ -5,12 +5,6 @@ import { DatetimeAdapter, FdDatetimeAdapter, FdDate } from '@fundamental-ngx/cor
 import {
     TableDataSource,
     TableSortChangeEvent,
-    CollectionBooleanFilter,
-    CollectionDateFilter,
-    CollectionFilter,
-    CollectionNumberFilter,
-    CollectionSelectFilter,
-    CollectionStringFilter,
     SortDirection,
     TableDataProvider,
     TableState

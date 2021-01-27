@@ -2,7 +2,9 @@
        [dataSource]="source"
        contentDensity="compact"
        [pageScrolling]="true"
-       [pageSize]="25">
+       [pageSize]="50"
+       bodyHeight="20rem"
+       [loading]="loading | async">
 
     <fdp-table-toolbar
         title="Order Items">

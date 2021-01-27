@@ -8,6 +8,7 @@ import {
     EventEmitter,
     Inject,
     Input,
+    NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -20,7 +21,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { finalize, distinctUntilChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
 
@@ -165,6 +166,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Page scrolling threshold in px. */
     @Input()
     pageScrollingThreshold = 80;
+
+    /** Table body height. */
+    @Input()
+    bodyHeight: string;
 
     /** Loading state */
     @Input()
@@ -394,6 +399,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableService: TableService,
         private readonly _cd: ChangeDetectorRef,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
+        private readonly _ngZone: NgZone,
         @Inject(DOCUMENT) private readonly _document: Document,
         @Optional() private readonly _rtlService: RtlService
     ) {
@@ -1265,6 +1271,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .scrolled()
                 .pipe(
                     filter(() => this.pageScrolling),
+                    debounceTime(50),
                     filter((scrollable) => scrollable === this.verticalScrollable),
                     map((scrollable) => scrollable.getElementRef().nativeElement),
                     filter((element) => !!element),
@@ -1282,7 +1289,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 )
                 .subscribe(() => {
                     const currentPage = this.getTableState().page.currentPage;
-                    this.setCurrentPage(currentPage + 1);
+                    this._ngZone.run(() => {
+                        this.setCurrentPage(currentPage + 1);
+                    });
                 })
         );
     }

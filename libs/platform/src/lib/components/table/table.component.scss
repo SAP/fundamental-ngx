@@ -27,6 +27,24 @@
         }
     }
 
+    .fdp-table__body-table,
+    .fdp-table__header-table {
+        // table-layout fixed does not work with absolutely positioned cells
+        // instead we need to keep each cell with defined width
+        table-layout: auto;
+        width: 100%;
+        // need to keep borders separate in order
+        // to align cells which are absolutely positioned
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .fd-table__body,
+    .fd-table__header,
+    .fd-table__row {
+        border: none !important;
+    }
+
     .fd-table__cell {
         box-sizing: border-box;
 
@@ -38,24 +56,16 @@
         min-width: 200px;
     }
 
-    .fdp-table__body-table,
-    .fdp-table__header-table {
-        // table-layout fixed does not work with absolutely positioned cells
-        // instead we need to keep each cell with defined width
-        table-layout: auto;
-        width: 100%;
-    }
-
-    .fd-table__row,
-    .fd-table__cell {
-        height: 2.75rem;
-    }
-
     .fdp-table__cell--selection {
         min-width: 2.8rem;
         max-width: 2.8rem;
 
         padding: 0 !important;
+    }
+
+    .fd-table__row,
+    .fd-table__cell {
+        height: 2.75rem;
     }
 
     &.fd-table--compact,
@@ -83,15 +93,14 @@
 
     .fdp-table__header {
         position: relative;
-        margin-bottom: -1px;
-        
+
         overflow: hidden;
-        
+
         border: 0.0625rem solid #e4e4e4;
         border: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
+        border-bottom: none;
 
         .fdp-table__scrollbar-mock {
-            content: '';
             position: absolute;
             top: 0;
             right: 0;
@@ -116,13 +125,10 @@
 
         .fd-table--fixed {
             overflow: hidden;
-
-            /* @include hide-scrollbar(); */
         }
 
-        .fd-table__header,
-        .fd-table__row {
-            border: none;
+        .fd-table__cell {
+            border-bottom: none;
         }
 
         .fd-table__popover--custom {
@@ -135,33 +141,22 @@
     }
 
     .fdp-table__body {
-        // TODO: For testing only to trigger vertical scroll
-        height: calc(2rem * 8);
-        
         position: relative;
 
         overflow: hidden;
         overflow-y: scroll;
-
-        .fd-table__body {
-            border: none;
-        }
-
-        .fd-table__row {
-            border: none;
-
-            &:last-child {
-                .fd-table__cell {
-                    border-bottom: 0;
-                }
-            }
-        }
 
         .fd-table--fixed {
             overflow: hidden;
             overflow-x: scroll;
 
             @include hide-scrollbar();
+        }
+
+        .fd-table__row:last-of-type {
+            .fd-table__cell {
+                border-bottom: 0;
+            }
         }
     }
 
@@ -173,11 +168,10 @@
 
     .fdp-table__body-hs {
         position: relative;
-        margin-top: -0.0625rem;
-        margin-top: calc(-1 * var(--sapList_BorderWidth, 0.0625rem));
         min-height: 0.5rem;
-        
         overflow: scroll;
+
+        border-top: none;
 
         &.fdp-table__body-hs--empty {
             position: absolute;
@@ -192,11 +186,6 @@
             height: 1px;
             visibility: hidden;
         }
-    }
-
-    .fd-table__cell--fixed {
-        margin-top: 0.0625rem;
-        margin-top: var(--sapList_BorderWidth, 0.0625rem);
     }
 
     .fdp-table__row--group {
@@ -233,6 +222,10 @@
         }
 
         @include fd-table-nested-cell-padding(1.5rem, 20);
+    }
+
+    .fdp-table__empty-table {
+        height: 100%;
     }
 
     .fd-table__empty-table-message {

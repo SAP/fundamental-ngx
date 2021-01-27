@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform';
-import { delay } from 'rxjs/operators';
+import { delay, finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-platform-table-page-scrolling-example',
     templateUrl: './platform-table-page-scrolling-example.component.html'
 })
 export class PlatformTablePageScrollingExampleComponent {
-    source: TableDataSource<ExampleItem>;
+    sourceProvider = new TableDataProviderExample();
+    source = new TableDataSource<ExampleItem>(this.sourceProvider);
 
-    constructor() {
-        this.source = new TableDataSource(new TableDataProviderExample());
+    get loading(): Observable<boolean> {
+        return this.sourceProvider.loading;
     }
 }
 
@@ -50,6 +51,8 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         })
     );
 
+    loading = new BehaviorSubject(false);
+
     items: ExampleItem[] = [];
 
     totalItems = 0;
@@ -68,10 +71,16 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
         // Apply paging
         if (currentPage) {
-            this.items = this.items.slice((currentPage - 1) * pageSize, pageSize);
+            const startIndex = (currentPage - 1) * pageSize;
+            this.items = this.items.slice(startIndex, startIndex + pageSize);
         }
 
-        return of(this.items).pipe(delay(500));
+        this.loading.next(true);
+
+        return of(this.items).pipe(
+            delay(400),
+            finalize(() => (this.loading.next(false)))
+        );
     }
 
     private search({ searchInput, columns }: TableState): ExampleItem[] {
