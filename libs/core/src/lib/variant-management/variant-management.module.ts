@@ -9,7 +9,7 @@ import {
     FormModule, IconModule, InputGroupModule,
     ListModule,
     PopoverModule,
-    SelectModule, TableModule,
+    SelectModule, TableModule, TitleModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
 import { RadioModule } from '../radio/radio.module';
@@ -34,7 +34,8 @@ import { FormsModule } from '@angular/forms';
         TableModule,
         IconModule,
         RadioModule,
-        FormsModule
+        FormsModule,
+        TitleModule
     ],
     exports: [
         VariantManagementComponent

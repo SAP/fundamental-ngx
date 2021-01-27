@@ -36,6 +36,11 @@ export class VariantManagementComponent implements OnInit {
         this.isViewsOpen = false;
     }
 
+    openMyView(): void  {
+        this.isViewsOpen = true;
+        console.log('view open', this.isViewsOpen);
+    }
+
     ngOnInit(): void {
         console.log('activeView', this.activeFilters.subscribe(
             result => {

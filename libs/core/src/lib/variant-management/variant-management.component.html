@@ -1,9 +1,11 @@
 <fd-popover [noArrow]="false" [(isOpen)]="isViewsOpen">
     <fd-popover-control>
 <!--    fd-variant-management-->
-        <div style="display: flex; justify-content: space-between; align-items: center">
-            <h4>{{ appliedView.name }}<span *ngIf="viewChanged">*</span></h4>
-            <button fd-button [fdMenu]="true" [compact]="true" (click)="isViewsOpen = true"></button>
+        <div style="display: flex; justify-content: space-between; align-items: center" (click)="openMyView()">
+            <h4 fd-title style="color: #0854a0">{{ appliedView.name }}
+<!--                <span *ngIf="viewChanged">*</span>-->
+            </h4>
+            <button fd-button fdType="transparent" [fdMenu]="true" [compact]="true"></button>
         </div>
     </fd-popover-control>
     <fd-popover-body style="min-width: 400px;">
