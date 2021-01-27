@@ -381,7 +381,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      * It works only if carousel is not in circular loop.
      */
     private _preventDefaultBtnFocus(): void {
-        console.log('asdsad');
         if (this.loop) {
             return;
         }
