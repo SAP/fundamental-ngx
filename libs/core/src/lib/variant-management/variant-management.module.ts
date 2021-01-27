@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VariantManagementComponent } from './variant-management.component';
 import {
-    BarModule,
+    BarModule, ButtonModule,
     CardModule,
     CheckboxModule,
     DialogModule,
@@ -35,7 +35,8 @@ import { FormsModule } from '@angular/forms';
         IconModule,
         RadioModule,
         FormsModule,
-        TitleModule
+        TitleModule,
+        ButtonModule
     ],
     exports: [
         VariantManagementComponent

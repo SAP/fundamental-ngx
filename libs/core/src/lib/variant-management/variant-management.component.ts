@@ -19,6 +19,7 @@ export class VariantManagementComponent implements OnInit {
     @Output()
     viewsUpdate = new EventEmitter<any>();
 
+    /** @hidden */
     isViewsOpen = false;
     confirmationReason: string;
 
@@ -38,7 +39,6 @@ export class VariantManagementComponent implements OnInit {
 
     openMyView(): void  {
         this.isViewsOpen = true;
-        console.log('view open', this.isViewsOpen);
     }
 
     ngOnInit(): void {
