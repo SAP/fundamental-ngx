@@ -409,6 +409,7 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** @hidden */
     private _focusFirstTabbableElement(): void {
         if (this.focusAutoCapture) {
             this._lastActiveElement = <HTMLElement>document.activeElement;
