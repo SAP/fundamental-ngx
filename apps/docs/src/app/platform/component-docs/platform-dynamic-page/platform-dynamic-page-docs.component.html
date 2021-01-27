@@ -3,7 +3,7 @@
 </fd-docs-section-title>
 <description> </description>
 <component-example>
-    <fdp-dynamic-page-example></fdp-dynamic-page-example>
+    <fdp-platform-dynamic-page-example></fdp-platform-dynamic-page-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageBasic"></code-example>
 
@@ -17,7 +17,7 @@
     Scrolling down will hide the header, and scrolling back up to the top will bring back the header into view.
 </description>
 <component-example>
-    <fdp-dynamic-page-snap-scroll-example></fdp-dynamic-page-snap-scroll-example>
+    <fdp-platform-dynamic-page-snap-scroll-example></fdp-platform-dynamic-page-snap-scroll-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageSnapScroll"></code-example>
 
@@ -29,7 +29,7 @@
 <description> Specify the <code>[tabLabel]</code> option to internally set up tabbed content for the page. 
     Use <code>(tabChange)</code> property to do something on tab change.</description>
 <component-example>
-    <fdp-dynamic-page-tabbed-example></fdp-dynamic-page-tabbed-example>
+    <fdp-platform-dynamic-page-tabbed-example></fdp-platform-dynamic-page-tabbed-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageTabbed"></code-example>
 
@@ -44,7 +44,7 @@
     <code>extra-large</code>
 </description>
 <component-example>
-    <fdp-dynamic-page-responsive-padding-example></fdp-dynamic-page-responsive-padding-example>
+    <fdp-platform-dynamic-page-responsive-padding-example></fdp-platform-dynamic-page-responsive-padding-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageResponsivePadding"></code-example>
 
@@ -56,6 +56,16 @@
     The collapsing header can be disabled by setting <code>[collapsible]</code> and <code>[pinnable]</code> properties to <code>false</code>.
 </description>
 <component-example>
-    <fdp-dynamic-page-non-collapsible-example></fdp-dynamic-page-non-collapsible-example>
+    <fdp-platform-dynamic-page-non-collapsible-example></fdp-platform-dynamic-page-non-collapsible-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageNonCollapsible"></code-example>
+
+<fd-docs-section-title id="dynamicPageFlexibleColumn" componentName="dynamicPage">
+    Tabbed Dynamic Page with a Flexible Column Layout
+</fd-docs-section-title>
+<description> Please note to give <code>position: relative</code> to the container holding the dynamic page, so that the page 
+is contained within the column(or any other container) correctly.</description>
+<component-example>
+    <fdp-platform-dynamic-page-flexible-column-example></fdp-platform-dynamic-page-flexible-column-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageFlexibleColumn"></code-example>

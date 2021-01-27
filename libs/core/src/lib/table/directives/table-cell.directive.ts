@@ -33,6 +33,11 @@ export class TableCellDirective implements AfterContentInit {
     @Input()
     activable = false;
 
+    /** Whether or not the table cell is focusable */
+    @HostBinding('class.fd-table__cell--focusable')
+    @Input()
+    focusable = false;
+
     /** Whether or not the table cell is hoverable */
     @HostBinding('class.fd-table__cell--hoverable')
     @Input()

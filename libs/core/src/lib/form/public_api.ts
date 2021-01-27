@@ -11,6 +11,7 @@ export * from './form-label/form-label.module';
 export * from './form-legend/form-legend.directive';
 export * from './form-legend/form-legend.module';
 export * from './form-message/form-message.component';
+export * from './form-message/popover-form-message.service';
 export * from './form-message/form-message.module';
 export * from './fieldset/fieldset.component';
 export * from './fieldset/fieldset.module';

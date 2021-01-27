@@ -182,3 +182,7 @@ $fd-popover-background-color: #fff;
 	font-size: .75rem;
 	font-size: var(--sapFontSmallSize,.75rem);
 }
+
+.fd-popover__body--hidden {
+	display: none !important;
+}
