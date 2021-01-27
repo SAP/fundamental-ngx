@@ -75,12 +75,6 @@ export class DynamicPageContentComponent implements OnInit {
 
     /**
      * @hidden
-     * used internally to set margin top correctly for tabbed content
-     */
-    contentTop: string;
-
-    /**
-     * @hidden
      * tracking the background value
      */
     private _background: DynamicPageBackgroundType;

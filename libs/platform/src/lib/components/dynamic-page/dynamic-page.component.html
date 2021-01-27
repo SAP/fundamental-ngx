@@ -1,5 +1,5 @@
 <section class="fd-dynamic-page" [attr.aria-label]="ariaLabel">
-    <header class="fd-dynamic-page__header-fixed" [class.fd-dynamic-page__header--not-collapsible]="!headerCollapsible" #header>
+    <header class="fd-dynamic-page__header" [class.fd-dynamic-page__header--not-collapsible]="!headerCollapsible" #header>
         <div>
             <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
                 <ng-content select="fdp-dynamic-page-title"></ng-content>
@@ -8,14 +8,13 @@
         </div>
     </header>
 
-    <div class="fd-dynamic-page__tabs--overflow tab-sticker" *ngIf="isTabbed" #contentContainer>
+    <div class="fd-dynamic-page__tabs--overflow" *ngIf="isTabbed" #contentContainer>
         <fd-tab-list (selectedIndexChange)="_handleTabChange($event)">
             <ng-container *ngFor="let tab of tabs; let i = index">
                 <fd-tab [title]="tab.tabLabel">
                     <fdp-dynamic-page-tabbed-content
                         [background]="background"
                         [size]="size"
-                        [contentTop]="tab.contentTop"
                     >
                         <ng-container *ngTemplateOutlet="tab.contentTemplate"></ng-container>
                         <div class="footer-spacer"></div>
@@ -27,7 +26,7 @@
     <ng-container *ngIf="!isTabbed">
         <ng-content select="fdp-dynamic-page-content"></ng-content>
     </ng-container>
-    <footer class="fd-dynamic-page__footer">
+    <footer>
         <ng-content select="fdp-dynamic-page-footer"></ng-content>
     </footer>
 </section>
