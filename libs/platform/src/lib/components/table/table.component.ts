@@ -100,6 +100,7 @@ interface GroupTableRowValueType {
  * </fdp-table>
  * ```
  */
+/** @dynamic */
 @Component({
     selector: 'fdp-table',
     templateUrl: './table.component.html',
@@ -400,7 +401,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _cd: ChangeDetectorRef,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _ngZone: NgZone,
-        @Inject(DOCUMENT) private readonly _document: Document,
+        @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() private readonly _rtlService: RtlService
     ) {
         super();
@@ -1261,6 +1262,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _calculateScrollbarWidth(): void {
+        if (!this._document) {
+            return;
+        }
         this._scrollBarWidth = getScrollBarWidth(this._document);
     }
 

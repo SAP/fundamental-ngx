@@ -58,7 +58,7 @@ import {
     FdpTableHeader,
     FdpViewSettingsFilterCustomDef,
     TableScrollableDirective,
-    FdpTableScrollerDirective
+    TableScrollerDirective
 } from './directives';
 import { ValueByPathPipe } from './pipes';
 
@@ -120,7 +120,7 @@ import { ValueByPathPipe } from './pipes';
         FilterRuleComponent,
         P13ColumnsDialogComponent,
         TableScrollableDirective,
-        FdpTableScrollerDirective
+        TableScrollerDirective
     ],
     exports: [
         TableComponent,

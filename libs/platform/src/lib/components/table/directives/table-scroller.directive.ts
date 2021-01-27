@@ -11,7 +11,7 @@ import { TableScrollable, TableScrollDispatcherService, TABLE_SCROLLABLE } from 
  *
  */
 @Directive({ selector: '[fdpTableScroller]' })
-export class FdpTableScrollerDirective implements OnInit, OnDestroy {
+export class TableScrollerDirective implements OnInit, OnDestroy {
     /** Scroll type */
     @Input()
     fdpTableScroller: 'horizontal' | 'vertical' | 'both' = 'both';
