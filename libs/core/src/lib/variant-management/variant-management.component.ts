@@ -11,13 +11,13 @@ export class VariantManagementComponent implements OnInit {
     views: any;
 
     @Input()
-    activeFilters: any;
+    currentView: any;
 
     @Output()
-    activeViewChange = new EventEmitter<any>();
+    currentViewChange = new EventEmitter<any>();
 
     @Output()
-    viewsUpdate = new EventEmitter<any>();
+    saveViews = new EventEmitter<any>();
 
     /** @hidden */
     isViewsOpen = false;
@@ -27,13 +27,13 @@ export class VariantManagementComponent implements OnInit {
 
     viewChanged = false;
 
-    appliedView;
+    appliedView: any; // view
 
     constructor(private _dialogService: DialogService) {}
 
-    chooseView(id: number) {
+    selectView(id: number): void {
         this.appliedView = this.views.find(view => view.id === id);
-        this.activeViewChange.emit(this.appliedView.data);
+        this.currentViewChange.emit(this.appliedView.id);
         this.isViewsOpen = false;
     }
 
@@ -42,7 +42,7 @@ export class VariantManagementComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log('activeView', this.activeFilters.subscribe(
+        console.log('activeView', this.currentView.subscribe(
             result => {
                 console.log(result);
                 if (result.name) {
@@ -53,7 +53,7 @@ export class VariantManagementComponent implements OnInit {
             })
         );
         this.appliedView = this.views.find(view => view.default)
-        this.activeViewChange.emit(this.appliedView.data);
+        this.currentViewChange.emit(this.appliedView.id);
     }
 
     openDialog(dialog: TemplateRef<any>): void {
@@ -66,7 +66,7 @@ export class VariantManagementComponent implements OnInit {
 
         dialogRef.afterClosed.subscribe(
             (result) => {
-                this.viewsUpdate.emit([
+                this.saveViews.emit([
                     {
                         id: 2,
                         favorite: false,

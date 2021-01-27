@@ -22,7 +22,7 @@
         </div>
         <ul fd-list>
             <ng-container *ngFor="let view of views">
-                <li fd-list-item (click)="chooseView(view.id)">
+                <li fd-list-item (click)="selectView(view.id)">
                     <span fd-list-title>{{ view.name }}</span>
                 </li>
             </ng-container>

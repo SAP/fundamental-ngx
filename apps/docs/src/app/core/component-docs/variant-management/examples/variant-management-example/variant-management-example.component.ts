@@ -22,7 +22,7 @@ interface View {
     autoApply: boolean,
     default: boolean,
     createdBy: string,
-    data: any;
+    settings: any;
 }
 
 @Component({
@@ -87,15 +87,15 @@ export class VariantManagementExampleComponent implements OnInit {
         // this.viewFilters = this.activeFilters$.getValue();
     }
 
-    activeViewChange(viewData: any) {
+    currentViewChange(viewId: number): void {
         // this.activeFilters$.next(viewData);
-        this.viewFilters = viewData;
+        this.viewFilters = this.views.find(view => view.id === viewId).settings;
         console.log(this.viewFilters);
 
     }
 
-    viewUpdate(viewUpdated: any) {
-        console.log('update view', viewUpdated);
+    saveViews(views: View[]) {
+        console.log('update view', views);
     }
 
     ngOnInit(): void {
@@ -110,7 +110,7 @@ export class VariantManagementExampleComponent implements OnInit {
                 default: true,
                 autoApply: true,
                 createdBy: 'SAP',
-                data: {
+                settings: {
                     filterVal: '',
                     ascending: true
                 }
@@ -123,7 +123,7 @@ export class VariantManagementExampleComponent implements OnInit {
                 default: false,
                 autoApply: true,
                 createdBy: 'Self',
-                data: {
+                settings: {
                     filterVal: '',
                     ascending: false
                 }

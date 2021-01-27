@@ -1,9 +1,9 @@
 <fd-toolbar>
     <fd-variant-management
         [views]="views"
-        (viewsUpdate)="viewUpdate($event)"
-        [activeFilters]="activeFilters$"
-        (activeViewChange)="activeViewChange($event)"
+        (saveViews)="saveViews($event)"
+        [currentView]="activeFilters$"
+        (currentViewChange)="currentViewChange($event)"
     ></fd-variant-management>
 </fd-toolbar>
 <table fd-table>
