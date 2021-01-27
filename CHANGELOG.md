@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.16...v0.26.1-rc.17) (2021-01-27)
+
+
+### Bug Fixes
+
+* (Platform) remove dependency on position: fixed for Dynamic Page ([#4343](https://github.com/SAP/fundamental-ngx/issues/4343)) ([f80c9ad](https://github.com/SAP/fundamental-ngx/commit/f80c9added28b1f08fe64281631187573dd15f06))
+
 ### [0.26.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.15...v0.26.1-rc.16) (2021-01-26)
 
 
