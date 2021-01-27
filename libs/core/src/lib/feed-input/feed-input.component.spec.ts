@@ -74,7 +74,7 @@ describe('FeedInputComponent', () => {
         textareaEl.triggerEventHandler('keyup', { target: { value: 'Feed message' } });
         fixture.detectChanges();
 
-        expect((<any>buttonDirective)._elementRef.nativeElement.disabled).toBeFalse();
+        expect((<any>buttonDirective)._elementRef.nativeElement.getAttribute('aria-disabled')).toBe('false');
     });
 
     it('should button enable when textarea have not a value', () => {
@@ -82,7 +82,7 @@ describe('FeedInputComponent', () => {
         textareaEl.triggerEventHandler('keyup', { target: { value: '' } });
         fixture.detectChanges();
 
-        expect((<any>buttonDirective)._elementRef.nativeElement.disabled).toBeTrue();
+        expect((<any>buttonDirective)._elementRef.nativeElement.getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should emit value properly', () => {
