@@ -18,6 +18,13 @@ export function pause(waitTime: number = defaultWaitTime()): void {
     browser.pause(waitTime);
 }
 
+export function currentBrowser(): string {
+    return  browser.capabilities.browserName;
+}
+export function currentPlatform(): string {
+    return  browser.capabilities.platformName;
+}
+
 export function isBrowser(browserName: string): boolean {
     return browser.capabilities.browserName === browserName;
 }
@@ -129,6 +136,10 @@ export function waitForUnclickable(selector: string, index: number = 0, waitTime
     return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
 }
 
+export function waitForElDisappear(selector: string, waitTime = defaultWaitTime()): boolean {
+    return $(selector).waitForExist({ timeout: waitTime, reverse: true });
+}
+
 export function waitForPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
     return $$(selector)[index].waitForExist({ timeout: waitTime });
 }
@@ -229,6 +240,16 @@ export function isElementClickable(selector: string, index: number = 0): boolean
     return $$(selector)[index].isClickable();
 }
 
+export function isDisplayedInViewport(selector: string, index: number = 0): boolean {
+    return $$(selector)[index].isDisplayedInViewport();
+}
+
+export function waitElementToBeClickable(selector: string, index: number = 0): void {
+    browser.waitUntil((): boolean => {
+        return $$(selector)[index].isClickable();
+    }, { timeout: defaultWaitTime() });
+}
+
 export function doesItExist(selector: string): boolean {
     return $(selector).isExisting();
 }
@@ -271,18 +292,17 @@ export function getElementLocation(selector: string, index: number = 0, prop?: '
     return $$(selector)[index].getLocation(prop || void 0);
 }
 
-
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
 }
 
-
-// ======================================================================================================
-
-export function saveElement(selector: string, tag: string, index: number = 0): void {
-    browser.saveElement($$(selector)[index], tag);
+export function selectOptionByAttribute(selector: string, attribute: string, attributeValue: string, index: number = 0): void {
+    click(selector, index);
+    waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
+    $(`${selector} option[${attribute}="${attributeValue}"]`).click();
+    pause(3000);
 }
 
-export function checkElement(selector: string, tag: string, index: number = 0): any {
-   return browser.checkElement($$(selector)[index], tag);
+export function selectOptionByValueAttribute(selector: string, attributeValue: string, index: number = 0): void {
+    selectOptionByAttribute(selector, 'value', attributeValue, index);
 }
