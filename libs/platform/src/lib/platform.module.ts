@@ -42,6 +42,8 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
 import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
+import { PlatformValueHelpDialogModule } from './components/value-help-dialog/public_api';
+import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, PlatformListModule, StandardListItemModule } from './components/list/public_api';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -84,7 +86,13 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
         PlatformFeedInputModule,
         PlatformFileUploaderModule,
         PlatformAutoCompleteModule,
-        PlatformApprovalFlowModule
+        PlatformApprovalFlowModule,
+        PlatformValueHelpDialogModule,
+        ActionListItemModule,
+        DisplayListItemModule,
+        ObjectListItemModule,
+        PlatformListModule,
+        StandardListItemModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

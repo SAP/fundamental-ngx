@@ -5,8 +5,8 @@ import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 
 const LIST_ELEMENTS: Address[] = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 @Component({
-    selector: 'fdp-borderless-list-example',
-    templateUrl: './platform-borderless-list-example.component.html'
+    selector: 'fdp-platform-list-border-less-example',
+    templateUrl: './platform-list-border-less-example.component.html'
 })
 export class PlatformListBorderLessExampleComponent {
 
