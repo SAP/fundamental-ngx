@@ -3,9 +3,15 @@
         *ngFor="let message of _messages; let i = index; trackBy: trackByFn"
         [type]="'success'"
         (onDismiss)="_dismissMessage(i)">
-        <ng-container [ngTemplateOutlet]="message.type === 'watchersChangeSuccess' ? watchersChangedSuccess : null"></ng-container>
-        <ng-container [ngTemplateOutlet]="message.type === 'nodeAddSuccess' ? nodeAddSuccess : null"></ng-container>
-        <ng-container [ngTemplateOutlet]="message.type === 'nodeRemove' ? nodeRemove : null"></ng-container>
+        <ng-container [ngSwitch]="message.type">
+<!--            <ng-container *ngSwitchCase="'watchersChangeSuccess'" [ngTemplateOutlet]="watchersChangedSuccess"></ng-container>-->
+            <ng-container *ngSwitchCase="'approverAddSuccess'" [ngTemplateOutlet]="approverAddSuccess"></ng-container>
+            <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
+            <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
+            <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
+            <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
+        </ng-container>
+        <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()">Undo</a>
     </fd-message-strip>
 </div>
 
@@ -83,6 +89,7 @@
                         [parent]="_nodeParentsMap[node.id]"
                         [meta]="_metaMap[node.id]"
                         [isEdit]="_isEditMode"
+                        [dueDateThreshold]="dueDateThreshold"
                         [renderArrow]="columnIndex > 0"
                         [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
@@ -111,7 +118,7 @@
     <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_saveEditModeChanges()"></button>
     <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_exitEditMode()"></button>
 </div>
-<pre *ngIf="_isEditMode">{{ _approvalProcess.nodes | json }}</pre>
+<!--<pre *ngIf="_isEditMode">{{ _approvalProcess.nodes | json }}</pre>-->
 
 <ng-template let-messageToast #reminderTemplate>
     <ng-container i18n="@@platformApprovalFlowReminderMessage">
@@ -125,18 +132,33 @@
     </ng-container>
 </ng-template>
 
-<ng-template #watchersChangedSuccess>
-    <ng-container i18n="@@platformApprovalFlowWatchersChangedSuccess">
-        Watchers list has been changed successfully
+<!--<ng-template #watchersChangedSuccess>-->
+<!--    <ng-container i18n="@@platformApprovalFlowWatchersChangedSuccess">-->
+<!--        Watchers list has been changed-->
+<!--    </ng-container>-->
+<!--</ng-template>-->
+<ng-template #approverAddSuccess>
+    <ng-container i18n="@@platformApprovalFlowApproverAddSuccess">
+        1 approver has been added
     </ng-container>
 </ng-template>
-<ng-template #nodeAddSuccess>
-    <ng-container i18n="@@platformApprovalFlowNodeAddSuccess">
-        1 node has been added
+<ng-template #teamAddSuccess>
+    <ng-container i18n="@@platformApprovalFlowTeamAddSuccess">
+        1 team has been added
+    </ng-container>
+</ng-template>
+<ng-template #nodeEdit>
+    <ng-container i18n="@@platformApprovalFlowNodeEdit">
+        1 approver has been edited
     </ng-container>
 </ng-template>
 <ng-template #nodeRemove>
     <ng-container i18n="@@platformApprovalFlowNodeRemove">
         1 approver has been removed
+    </ng-container>
+</ng-template>
+<ng-template #teamRemove>
+    <ng-container i18n="@@platformApprovalFlowTeamRemove">
+        1 team has been removed
     </ng-container>
 </ng-template>

@@ -8,6 +8,7 @@ import { ApprovalUser, BaseListItem, SelectionChangeEvent } from '@fundamental-n
 })
 export class ApprovalFlowUserListComponent {
     @Input() users: ApprovalUser[] = [];
+    @Input() isSelectable = true;
 
     @Output() onUserClick = new EventEmitter<ApprovalUser>();
 

@@ -3,8 +3,8 @@
     {_selectedItems.length, plural, =1 {item} other {items}} selected
 </div>
 <fdp-list
-    selectionMode="multi"
-    [selection]="true"
+    [selectionMode]="isSelectable ? 'multi' : 'none'"
+    [selection]="isSelectable"
     [hasByLine]="true"
     [(ngModel)]="_selectedItems"
     (selectedItemChange)="_onSelect($event)">

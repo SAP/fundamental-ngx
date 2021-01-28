@@ -10,5 +10,6 @@ export interface ApprovalNode {
     targets: string[];
     dueDate?: Date;
     createDate?: Date;
-    // approvalTeam:
+    approvalTeamId?: string;
+    isEveryoneApprovalNeeded?: boolean;
 }

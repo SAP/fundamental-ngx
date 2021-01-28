@@ -12,7 +12,7 @@ import {
     Output, QueryList,
     ViewChild, ViewChildren
 } from '@angular/core';
-import { ObjectStatus } from '@fundamental-ngx/core';
+import { FdDate, ObjectStatus } from '@fundamental-ngx/core';
 
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata } from '../approval-flow.component';
 import { ApprovalNode, ApprovalStatus } from '../interfaces';
@@ -25,6 +25,8 @@ const NODE_STATUS_CLASS_MAP = {
     'in progress': 'informative',
     'not started': ''
 };
+
+const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
 
 @Component({
     selector: 'fdp-approval-flow-node',
@@ -59,6 +61,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     /** Whether to display add node button after in Edit mode */
     @Input() canAddNodeAfter = false;
+
+    /** Number of days before due date when status changes to `warning` with text 'Due in X days' */
+    @Input() dueDateThreshold = 7;
 
     /** Whether node is blank */
     @Input()
@@ -120,11 +125,16 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-        // make public input?
     _isSelected = false;
 
     /** @hidden */
     _objectStatus: ObjectStatus;
+
+    /** @hidden */
+    _showDueDateWarning = false;
+
+    /** @hidden */
+    _dueIn = 0;
 
     @Output() onNodeClick = new EventEmitter<void>();
 
@@ -209,7 +219,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
             return;
         }
 
-        this._objectStatus = getNodeStatusClass(this.node.status);
+        const dueThreshold = Number(new Date(this.node.dueDate)) - (this.dueDateThreshold * DAY_IN_MILISECONDS);
+        const nowAndDueDiff = Date.now() - dueThreshold;
+        this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILISECONDS);
+        this._showDueDateWarning = !isNodeApproved(this.node) && dueThreshold < Date.now();
+        this._objectStatus = this._showDueDateWarning ? 'critical' : getNodeStatusClass(this.node.status);
         this.cd.detectChanges();
     }
 

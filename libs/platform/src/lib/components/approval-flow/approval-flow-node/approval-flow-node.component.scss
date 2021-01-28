@@ -117,13 +117,13 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}--in-parallel {
-        .#{$block}__add--after {
-            right: -1.5rem;
-
-            & + .#{$block}__drop-zone {
-                right: -1.8rem;
-            }
-        }
+        //.#{$block}__add--after {
+        //    right: -1.5rem;
+        //
+        //    & + .#{$block}__drop-zone {
+        //        right: -1.8rem;
+        //    }
+        //}
 
         .#{$block}__add--before {
             //right: -1.5rem;

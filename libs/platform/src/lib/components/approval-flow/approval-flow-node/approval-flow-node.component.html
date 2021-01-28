@@ -64,7 +64,12 @@
             <fdp-object-status
                 [status]="_objectStatus"
                 inverted="true">
-                {{ node.status }}
+                <ng-container *ngIf="!_showDueDateWarning">{{ node.status }}</ng-container>
+                <ng-container *ngIf="_showDueDateWarning">
+                    <ng-container *ngIf="_dueIn === dueDateThreshold">Due today</ng-container>
+                    <ng-container *ngIf="_dueIn < dueDateThreshold">Due in {{ _dueIn }} days</ng-container>
+                    <ng-container *ngIf="_dueIn > dueDateThreshold">{{ _dueIn - dueDateThreshold }} days overdue</ng-container>
+                </ng-container>
             </fdp-object-status>
         </div>
     </div>

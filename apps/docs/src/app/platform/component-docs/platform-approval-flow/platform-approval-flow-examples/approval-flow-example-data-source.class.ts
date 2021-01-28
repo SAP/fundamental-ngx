@@ -1,19 +1,15 @@
-import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalUser } from '@fundamental-ngx/platform';
+import {
+    ApprovalDataSource,
+    ApprovalNode,
+    ApprovalProcess,
+    ApprovalTeam,
+    ApprovalUser
+} from '@fundamental-ngx/platform';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
+const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
+
 const users: ApprovalUser[] = [
-    {
-        id: 'uid38141',
-        name: 'Emma Cole',
-        description: 'Marketing team',
-        imgUrl: 'https://randomuser.me/api/portraits/women/91.jpg'
-    },
-    {
-        id: 'uid37866',
-        name: 'Daniel Sullivan',
-        description: 'Marketing team',
-        imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg'
-    },
     {
         id: 'uid28141',
         name: 'Luis Franklin',
@@ -27,6 +23,24 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/11.jpg'
     },
     {
+        id: 'uid99641',
+        name: 'Elaine Myers',
+        description: 'Legal team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/75.jpg'
+    },
+    {
+        id: 'uid38141',
+        name: 'Emma Cole',
+        description: 'Marketing team',
+        imgUrl: 'https://randomuser.me/api/portraits/women/91.jpg'
+    },
+    {
+        id: 'uid37866',
+        name: 'Daniel Sullivan',
+        description: 'Marketing team',
+        imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg'
+    },
+    {
         id: 'uid09141',
         name: 'Salvador Duncan',
         description: 'Marketing team',
@@ -37,12 +51,6 @@ const users: ApprovalUser[] = [
         name: 'Caleb Taylor',
         description: 'Marketing team',
         imgUrl: 'https://randomuser.me/api/portraits/men/17.jpg'
-    },
-    {
-        id: 'uid99641',
-        name: 'Elaine Myers',
-        description: 'Legal team',
-        imgUrl: 'https://randomuser.me/api/portraits/women/75.jpg'
     },
     {
         id: 'uid99651',
@@ -117,286 +125,236 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
-const ex1: ApprovalProcess = {
+const usersMap = {};
+users.forEach(u => usersMap[u.id] = u);
 
-    watchers: [],
-    nodes: [
-        {
-            id: 'node1id',
-            name: 'node1 name',
-            description: 'Finance Group(node1)',
-            approvers: [
-                {
-                    id: 'ghalas',
-                    name: 'Gene Halas',
-                    description: 'node1user descr',
-                    imgUrl: 'https://randomuser.me/api/portraits/men/0.jpg'
-                }
-            ],
-            targets: [
-                'node2id',
-                'node3id'
-            ],
-            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
-            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
-            status: 'approved'
-        },
-        {
-            id: 'node2id',
-            name: 'node2 name',
-            description: 'Marketing Group(node2)',
-            approvers: [
-                {
-                    id: 'cnoll',
-                    name: 'Chad Noll',
-                    description: 'node2user descr',
-                    imgUrl: 'https://randomuser.me/api/portraits/men/1.jpg'
-                }
-            ],
-            targets: [
-                'node4id'
-            ],
-            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
-            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
-            status: 'in progress'
-        },
-        {
-            id: 'node3id',
-            name: 'node3 name',
-            description: 'Bugdet Group(node3)',
-            approvers: [
-                {
-                    id: 'adavis',
-                    name: 'Arnold Davis',
-                    description: 'node3user descr',
-                    imgUrl: 'https://randomuser.me/api/portraits/men/10.jpg'
-                }
-            ],
-            targets: [
-                'node4id'
-            ],
-            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
-            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
-            status: 'in progress'
-        },
-        {
-            id: 'node4id',
-            name: 'node4 name',
-            description: 'Admin Group(node4)',
-            approvers: [
-                {
+const teams: ApprovalTeam[] = [
+    {
+        id: 'teamId1',
+        name: 'Accounting team',
+        description: '',
+        members: ['uid66171', 'uid66161', 'uid66151', 'uid66141']
+    },
+    {
+        id: 'teamId2',
+        name: 'Sales team',
+        description: '',
+        members: ['uid77111', 'uid77115', 'uid77135', 'uid81955']
+    },
+    {
+        id: 'teamId3',
+        name: 'Legal team',
+        description: '',
+        members: ['uid28141', 'uid08141', 'uid99641']
+    },
+    {
+        id: 'teamId4',
+        name: 'Marketing team',
+        description: '',
+        members: ['uid38141', 'uid37866', 'uid09141', 'uid81353', 'uid81355', 'uid99655', 'uid09641', 'uid99651']
+    }
+];
 
-                    id: 'prozelle',
-                    name: 'Patrick Rozelle',
-                    description: 'node4user descr',
-                    imgUrl: 'https://randomuser.me/api/portraits/men/11.jpg'
-                }
-            ],
-            targets: [],
-            dueDate: new Date('4 Jan 2021 10:21:35 GMT'),
-            createDate: new Date('Mon Jan 04 15:51:35 IST 2021'),
-            status: 'not started'
-        }
-    ]
-};
 const simpleGraph: ApprovalProcess = {
-    watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
+    watchers: [getUser('uid66161')],
     nodes: [
         {
             id: 'ID1',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81955')],
             status: 'approved',
             targets: ['ID2'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID2',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid66171')],
             status: 'in progress',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(10),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID3',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81355')],
             status: 'not started',
             targets: [],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(10),
+            createDate: daysFromNow(-30)
         }
     ]
 };
 
 const mediumGraph: ApprovalProcess = {
-    watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
+    watchers: [getUser('uid66151'), getUser('uid77115')],
     nodes: [
         {
             id: 'ID1',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81955')],
             status: 'approved',
             targets: ['ID2', 'ID22', 'ID222'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID2',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid66171')],
             status: 'in progress',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID22',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid77135')],
             status: 'approved',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID222',
             name: 'node name',
             description: 'Marketing team',
-            approvers: [getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser()],
+            approvers: [getUser('uid77111'), getUser('uid09641'), getUser('uid09141'), getUser('uid37866'), getUser('uid99641'), getUser('uid38141')],
             status: 'not started',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(5),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID3',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81355')],
             status: 'not started',
             targets: ['ID4'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID4',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid99651')],
             status: 'not started',
             targets: [],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         }
     ]
 };
 
 const complexGraph: ApprovalProcess = {
-    watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
+    watchers: [getUser('uid66151'), getUser('uid66141'), getUser('uid99651'), getUser('uid99655')],
     nodes: [
         {
             id: 'ID1',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81955')],
             status: 'approved',
             targets: ['ID2', 'ID22', 'ID222'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID2',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid66171')],
             status: 'in progress',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID22',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid28141')],
             status: 'approved',
             targets: ['ID220'],
-            // targets: [],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID222',
             name: 'node name',
             description: 'Marketing team',
-            approvers: [getRandomUser(), getRandomUser()],
+            approvers: [getUser('uid77111'), getUser('uid09641')],
             status: 'in progress',
             targets: ['ID2220'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(3),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID220',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
-            status: 'in progress',
+            approvers: [getUser('uid08141')],
+            status: 'rejected',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID2220',
             name: 'node name',
             description: 'Marketing',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81353')],
             status: 'not started',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID3',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81355')],
             status: 'not started',
             targets: ['ID4'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID4',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid99651')],
             status: 'not started',
             targets: [],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         }
     ]
 };
 
 const graphs = {
-    // simple: ex1,
     simple: simpleGraph,
     medium: mediumGraph,
     complex: complexGraph
 };
 
-function getRandomUser(): ApprovalUser {
-    return users[Math.floor(Math.random() * users.length)];
+function getUser(id: string): ApprovalUser {
+    return usersMap[id];
+}
+
+function daysFromNow(days: number): Date {
+    return new Date(Date.now() + DAY_IN_MILISECONDS * days);
 }
 
 type GraphTypes = 'simple' | 'medium' | 'complex';
@@ -435,6 +393,10 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
 
     fetchWatchers(): Observable<ApprovalUser[]> {
         return of(users);
+    }
+
+    fetchTeams(): Observable<ApprovalTeam[]> {
+        return of(teams);
     }
 
     updateWatchers(watchers: ApprovalUser[]): void {
