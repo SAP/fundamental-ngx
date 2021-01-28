@@ -28,7 +28,8 @@
     }
 
     .fdp-table__body-table,
-    .fdp-table__header-table {
+    .fdp-table__header-table,
+    .fdp-table__body-hs-table {
         // table-layout fixed does not work with absolutely positioned cells
         // instead we need to keep each cell with defined width
         table-layout: auto;

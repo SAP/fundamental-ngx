@@ -38,17 +38,30 @@ export class TableScrollerDirective implements OnInit, OnDestroy {
 
     /** @hidden */
     private _listenToScroll(): void {
-        this._subscriptions.add(
-            this._tableScrollDispatcher.scrolled().subscribe((trigger) => {
-                const scrollDirection = this.fdpTableScroller;
-                if (scrollDirection === 'vertical' || scrollDirection === 'both') {
+        const scrollDirectionToListen = this.fdpTableScroller;
+
+        if (scrollDirectionToListen === 'vertical') {
+            this._subscriptions.add(
+                this._tableScrollDispatcher.verticallyScrolled().subscribe((trigger) => {
                     this._scrollTop(trigger);
-                }
-                if (scrollDirection === 'horizontal' || scrollDirection === 'both') {
+                })
+            );
+        }
+        if (scrollDirectionToListen === 'horizontal') {
+            this._subscriptions.add(
+                this._tableScrollDispatcher.horizontallyScrolled().subscribe((trigger) => {
                     this._scrollLeft(trigger);
-                }
-            })
-        );
+                })
+            );
+        }
+        if (scrollDirectionToListen === 'both') {
+            this._subscriptions.add(
+                this._tableScrollDispatcher.scrolled().subscribe((trigger) => {
+                    this._scrollTop(trigger);
+                    this._scrollLeft(trigger);
+                })
+            );
+        }
     }
 
     /** @hidden */
