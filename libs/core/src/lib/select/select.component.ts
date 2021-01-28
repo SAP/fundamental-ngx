@@ -555,6 +555,7 @@ export class SelectComponent implements
             }
     }
 
+
     /** @hidden */
     _cleanupCommonBehavior(): void {
         this._destroy.next();

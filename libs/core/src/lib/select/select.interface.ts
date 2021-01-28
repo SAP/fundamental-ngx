@@ -2,7 +2,6 @@ import { EventEmitter, InjectionToken, QueryList, ElementRef } from '@angular/co
 
 import { OptionComponent } from './option/option.component';
 import { FdSelectChange } from './select.component';
-import { DialogConfig } from '../dialog/utils/dialog-config.class';
 import { MobileMode } from '../utils/interfaces/mobile-control.interface';
 import { MobileModeConfig } from '../utils/public_api';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
