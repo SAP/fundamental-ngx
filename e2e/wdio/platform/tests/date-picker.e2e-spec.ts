@@ -189,7 +189,7 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model')).toEqual(datePickerTestData.date);
         click(datePickerPage.activeButtonDatePicker, 1);
         expect(datePickerTestData.highlightedColor)
-            .toContain(getCSSPropertyByName(datePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value as string);
+            .toContain(getCSSPropertyByName(datePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
     it('verify selecting a year range navigates back to the year view', () => {

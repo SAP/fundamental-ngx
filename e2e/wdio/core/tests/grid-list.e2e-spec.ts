@@ -67,10 +67,10 @@ describe('Grid-list test suite', function() {
         }
     });
 
-    it(`Verify states: Text should be in bold if item is on unread state, Error message should be displayed in footer if item is on 'error' state
+    fit(`Verify states: Text should be in bold if item is on unread state, Error message should be displayed in footer if item is on 'error' state
     Locker button should be displayed in footer if item is on 'locked' state, Draft button should be displayed in footer if item is on 'draft' state`, () => {
         expect(getCSSPropertyByName(unreadStateItem, fontWeight).value).toBe(bold);
-        expect(warningColor).toContain(getCSSPropertyByName(errorStateItem, color).value as string);
+        expect(warningColor).toContain(getCSSPropertyByName(errorStateItem, color).value);
         waitForClickable(lockedStateItemButton);
         expect(getText(lockedStateItemText)).toBe(textLocked);
     })
@@ -88,10 +88,10 @@ describe('Grid-list test suite', function() {
     });
 
     it('Verify corresponding indicator color should be displayed for all statuses', () => {
-        expect(successColor).toContain(getCSSPropertyByName(successStatusIndicator, backGroundColor).value as string);
-        expect(warningColor).toContain(getCSSPropertyByName(warningStatusIndicator, backGroundColor).value as string);
-        expect(errorColor).toContain(getCSSPropertyByName(errorStatusIndicator, backGroundColor).value as string);
-        expect(neutralColor).toContain(getCSSPropertyByName(neutralStatusIndicator, backGroundColor).value as string);
+        expect(successColor).toContain(getCSSPropertyByName(successStatusIndicator, backGroundColor).value);
+        expect(warningColor).toContain(getCSSPropertyByName(warningStatusIndicator, backGroundColor).value);
+        expect(errorColor).toContain(getCSSPropertyByName(errorStatusIndicator, backGroundColor).value);
+        expect(neutralColor).toContain(getCSSPropertyByName(neutralStatusIndicator, backGroundColor).value);
     });
 
     it('Verify selecting item in Single select mode component', () => {
