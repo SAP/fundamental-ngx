@@ -179,4 +179,11 @@ describe('Standard List Item test suite:', function() {
             standardListPg.checkRtlSwitch();
         });
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            standardListPg.saveExampleBaselineScreenshot('standard-list-item');
+            expect(standardListPg.compareWithBaseline('standard-list-item')).toEqual(0);
+        });
+    });
 });

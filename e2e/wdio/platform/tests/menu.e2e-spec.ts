@@ -170,6 +170,13 @@ describe('Menu component test suite', function() {
             expect(getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
         }
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            menuPage.saveExampleBaselineScreenshot('menu');
+            expect(menuPage.compareWithBaseline('menu')).toEqual(0);
+        });
+    });
 });
 
 function checkMenuItemsHoverState(itemsArrSelector, attribute, expectation): void {

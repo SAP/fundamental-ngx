@@ -5,6 +5,13 @@ export function defaultWaitTime(): number {
 export function currentPlatformName(): string {
     return browser.capabilities.platformName;
 }
+export function currentBrowserName(): string {
+    return  browser.capabilities.browserName;
+}
+
+export function getImageTagBrowserPlatform(): string {
+    return `${currentBrowserName()}-${currentPlatformName()}`
+}
 
 export function getBaseURL(): string {
     return browser.options.baseUrl;
@@ -163,7 +170,7 @@ export function getAttributeByNameArr(selector: string, attrName: string, sliceS
 }
 
 // Returns object (assertions needs to be adapted)
-export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string | number } {
+export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): WebdriverIO.CSSProperty {
     return $$(selector)[index].getCSSProperty(propertyName);
 }
 
@@ -289,4 +296,13 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
             { 'type': 'pause', 'duration': 500 }
         ]
     }]);
+}
+
+
+export function saveElement(selector: string, tag: string, options?: object, index: number = 0): void {
+    browser.saveElement($$(selector)[index], tag, options);
+}
+
+export function checkElement(selector: string, tag: string, options?: object, index: number = 0): any {
+    return browser.checkElement($$(selector)[index], tag, options);
 }

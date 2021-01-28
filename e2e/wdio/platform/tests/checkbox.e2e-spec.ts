@@ -314,6 +314,13 @@ describe('Checkbox test suite', () => {
             checkboxPage.checkRtlSwitch();
         });
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            checkboxPage.saveExampleBaselineScreenshot('checkbox');
+            expect(checkboxPage.compareWithBaseline('checkbox')).toEqual(0);
+        });
+    });
 });
 
 function checkHoverState(elementSelector, index: number = 0): boolean {

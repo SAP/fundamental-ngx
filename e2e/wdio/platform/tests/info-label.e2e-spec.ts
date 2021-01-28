@@ -8,6 +8,7 @@ import {
     getText,
     waitForElDisplayed
 } from '../../driver/wdio';
+import { experimental } from '@angular-devkit/core';
 
 describe('Info Label component test suite', () => {
     const {
@@ -138,5 +139,10 @@ describe('Info Label component test suite', () => {
 
     it('should check LTR and RTL orientation', () => {
         infoLabelPage.checkRtlSwitch();
+    });
+
+    it('should check examples basic visual regression', () => {
+        infoLabelPage.saveExampleBaselineScreenshot('info-label');
+        expect(infoLabelPage.compareWithBaseline('info-label')).toEqual(0);
     });
 });

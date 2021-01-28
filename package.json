@@ -190,6 +190,7 @@
     "wait-on": "5.2.0",
     "wdio-chromedriver-service": "6.0.4",
     "wdio-html-format-reporter": "0.4.0",
+    "wdio-image-comparison-service": "2.0.0",
     "webdriverio": "6.10.11"
   },
   "pre-commit": {

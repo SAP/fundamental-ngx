@@ -111,6 +111,13 @@ describe('Link component test suite', function() {
     it('should check orientation', () => {
         linkPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            linkPage.saveExampleBaselineScreenshot('link');
+            expect(linkPage.compareWithBaseline('link')).toEqual(0);
+        });
+    });
 });
 
 function checkLinkData(element, index: number = 0): void {

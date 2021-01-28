@@ -161,4 +161,11 @@ describe('Verify Feed Input component', function() {
     it('should check RTL', () => {
         feedInputPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            feedInputPage.saveExampleBaselineScreenshot('feed-input');
+            expect(feedInputPage.compareWithBaseline('feed-input')).toEqual(0);
+        });
+    });
 });
