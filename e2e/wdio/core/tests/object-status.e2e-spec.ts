@@ -1,20 +1,22 @@
 import { ObjectStatusPo } from '../pages/object-status.po';
-import { getAttributeByName, getCSSPropertyByName, getElementArrayLength, getText, waitForElDisplayed } from '../../driver/wdio';
 import {
-    statusAttr,
-    colorAttr,
-    semanticColors,
-    semanticText,
-    indicatorAttr,
-    genericColors, genericColorText, objStatusText, backgroundColorAttr, invertedColor, sizeAttr, invertedSemanticColors
+    getAttributeByName,
+    getCSSPropertyByName,
+    getElementArrayLength,
+    getTextArr,
+    waitForElDisplayed
+} from '../../driver/wdio';
+import {
+    statusAttr, colorAttr, semanticColors, semanticText, indicatorAttr, genericColors, genericColorText,
+    objStatusText, backgroundColorAttr, invertedColor, sizeAttr, invertedSemanticColors
 } from '../fixtures/appData/object-status-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Object Status test suite', function() {
     const objectStatusPage = new ObjectStatusPo();
     const {
-        objIcons, objText, objStatus, iconExamples, textExamples, textAndIconExamples, colorsExamples,
-        clickableExamples, invertedExamples, invertedColorExamples, largeExamples
+        iconExamples, textExamples, textAndIconExamples, colorsExamples, clickableExamples, invertedExamples,
+        invertedColorExamples, largeExamples, status, text, icons
     } = objectStatusPage;
 
     beforeAll(() => {
@@ -23,79 +25,78 @@ describe('Object Status test suite', function() {
 
     describe('object status icon only examples', function() {
         it('should check icons present', () => {
-            const iconCount = getElementArrayLength(objIcons(iconExamples));
+            const iconCount = getElementArrayLength(iconExamples + icons);
 
             for (let i = 0; i < iconCount; i++) {
-                expect(waitForElDisplayed(objIcons(iconExamples), i));
+                expect(waitForElDisplayed(iconExamples + icons, i));
             }
         });
 
         it('should check semantic colors', () => {
-            checkObjectColors(objStatus(iconExamples), objText(iconExamples), statusAttr, colorAttr, semanticColors);
+            checkObjectColors(iconExamples + status, iconExamples + text, statusAttr, colorAttr, semanticColors);
         });
     });
 
     describe('object status text only examples', function() {
         it('should check text value and colors', () => {
-            checkObjectValues(objText(textExamples), semanticText);
-            checkObjectColors(objStatus(textExamples), objText(textExamples), statusAttr, colorAttr, semanticColors);
+            checkObjectValues(textExamples + text, semanticText);
+            checkObjectColors(textExamples + status, textExamples + text, statusAttr, colorAttr, semanticColors);
         });
     });
 
     describe('object status with text and icon examples', function() {
         it('should check text value and colors', () => {
-            checkObjectValues(objText(textAndIconExamples), semanticText);
-            checkObjectColors(objStatus(textAndIconExamples), objText(textAndIconExamples), statusAttr, colorAttr, semanticColors);
+            checkObjectValues(textAndIconExamples + text, semanticText);
+            checkObjectColors(textAndIconExamples + status, textAndIconExamples + text, statusAttr, colorAttr, semanticColors);
             // skip until issue fixed https://github.com/SAP/fundamental-ngx/issues/4493
-            // checkObjectColors(objStatus(textAndIconExamples), objIcons(textAndIconExamples), colorAttr, semanticColors);
+            // checkObjectColors(textAndIconExamples + status, textAndIconExamples + icons, colorAttr, semanticColors);
         });
     });
 
     describe('object status with generic indication colors examples', function() {
         it('should check text value and colors', () => {
-            checkObjectValues(objText(colorsExamples), genericColorText);
-            checkObjectColors(objStatus(colorsExamples), objText(colorsExamples), indicatorAttr, colorAttr, genericColors);
+            checkObjectValues(colorsExamples + text, genericColorText);
+            checkObjectColors(colorsExamples + status, colorsExamples + text, indicatorAttr, colorAttr, genericColors);
         });
     });
 
     describe('clickable object status examples', function() {
         it('should check text value and colors', () => {
             const objTextValues = semanticText.concat(genericColorText);
-            const objectCount = getElementArrayLength(objStatus(clickableExamples));
+            const objectCount = getElementArrayLength(clickableExamples + status);
 
             for (let i = 0; i < objectCount; i++) {
+                checkObjectValues(clickableExamples + text, objTextValues);
                 if (i < 5) {
-                    const objectStatus = getAttributeByName(objStatus(clickableExamples), statusAttr, i);
-                    expect(getCSSPropertyByName(objStatus(clickableExamples), colorAttr, i).value).toContain(semanticColors[objectStatus]);
+                    const objectStatus = getAttributeByName(clickableExamples + status, statusAttr, i);
+                    expect(getCSSPropertyByName(clickableExamples + status, colorAttr, i).value).toContain(semanticColors[objectStatus]);
+                    continue;
                 }
-                if (i >= 5) {
-                    const objectIndicator = getAttributeByName(objStatus(clickableExamples), indicatorAttr, i);
-                    expect(getCSSPropertyByName(objStatus(clickableExamples), colorAttr, i).value).toContain(genericColors[objectIndicator]);
-                }
+                const objectIndicator = getAttributeByName(clickableExamples + status, indicatorAttr, i);
+                expect(getCSSPropertyByName(clickableExamples + status, colorAttr, i).value).toContain(genericColors[objectIndicator]);
             }
-            checkObjectValues(objText(clickableExamples), objTextValues);
         });
 
         it('should check objects are clickable', () => {
-            checkElArrIsClickable(objStatus(clickableExamples));
+            checkElArrIsClickable(clickableExamples + status);
         });
     });
 
     describe('inverted object status examples', function() {
         it('should check text value and colors', () => {
-            checkObjectValues(objText(invertedExamples), objStatusText);
-            checkObjectColors(objStatus(invertedExamples), objStatus(invertedExamples), statusAttr, backgroundColorAttr, invertedSemanticColors);
+            checkObjectValues(invertedExamples + text, objStatusText);
+            checkObjectColors(invertedExamples + status, invertedExamples + status, statusAttr, backgroundColorAttr, invertedSemanticColors);
         });
     });
 
     describe('inverted object status with generic indication colors examples', function() {
         it('should check text value and inverted colors', () => {
-            checkObjectValues(objText(invertedColorExamples), genericColorText);
-            checkObjectColors(objStatus(invertedColorExamples), objStatus(invertedColorExamples), indicatorAttr, backgroundColorAttr, genericColors);
+            checkObjectValues(invertedColorExamples + text, genericColorText);
+            checkObjectColors(invertedColorExamples + status, invertedColorExamples + status, indicatorAttr, backgroundColorAttr, genericColors);
 
             const objectCount = getElementArrayLength(invertedColorExamples);
             for (let i = 0; i < objectCount; i++) {
-                expect(getCSSPropertyByName(objText(invertedColorExamples), colorAttr, i).value).toContain(invertedColor);
+                expect(getCSSPropertyByName(invertedColorExamples + text, colorAttr, i).value).toContain(invertedColor);
             }
         });
     });
@@ -104,7 +105,7 @@ describe('Object Status test suite', function() {
         it('should check object status is large', () => {
             const objectCount = getElementArrayLength(largeExamples);
             for (let i = 0; i < objectCount; i++) {
-                expect(getAttributeByName(objStatus(largeExamples), sizeAttr, i)).toBe('true');
+                expect(getAttributeByName(largeExamples + status, sizeAttr, i)).toBe('true');
             }
         });
 
@@ -112,23 +113,23 @@ describe('Object Status test suite', function() {
             const objectCount = getElementArrayLength(largeExamples);
 
             for (let i = 0; i < objectCount; i++) {
-                const objectStatus = getAttributeByName(objStatus(largeExamples), statusAttr, i);
+                const objectStatus = getAttributeByName(largeExamples + status, statusAttr, i);
                 if (i < 4) {
-                    expect(getCSSPropertyByName(objStatus(largeExamples), backgroundColorAttr, i).value)
+                    expect(getCSSPropertyByName(largeExamples + status, backgroundColorAttr, i).value)
                         .toContain(invertedSemanticColors[objectStatus]);
-                    expect(getCSSPropertyByName(objIcons(largeExamples), colorAttr, i).value).toContain(invertedColor);
+                    expect(getCSSPropertyByName(largeExamples + icons, colorAttr, i).value).toContain(invertedColor);
                 }
                 if (i > 3 && i < 19) {
-                    expect(getCSSPropertyByName(objStatus(largeExamples), colorAttr, i).value)
+                    expect(getCSSPropertyByName(largeExamples + status, colorAttr, i).value)
                         .toContain(semanticColors[objectStatus]);
                 }
                 if (i > 18) {
-                    expect(getCSSPropertyByName(objStatus(largeExamples), backgroundColorAttr, i).value)
+                    expect(getCSSPropertyByName(largeExamples + status, backgroundColorAttr, i).value)
                         .toContain(invertedSemanticColors[objectStatus]);
-                    expect(getCSSPropertyByName(objText(largeExamples), colorAttr, i).value).toContain(invertedColor);
+                    expect(getCSSPropertyByName(largeExamples + text, colorAttr, i).value).toContain(invertedColor);
                 }
             }
-            checkObjectValues(objText(largeExamples), objStatusText);
+            checkObjectValues(largeExamples + text, objStatusText);
         });
     });
 
@@ -140,13 +141,8 @@ describe('Object Status test suite', function() {
 });
 
 function checkObjectValues(selector, dataArr): void {
-    const objectCount = getElementArrayLength(selector);
-
-    for (let i = 0; i < objectCount; i++) {
-        const textValue = getText(selector, i);
-
-        expect(textValue).toEqual(dataArr[i]);
-    }
+    const textValue = getTextArr(selector);
+    expect(textValue).toEqual(dataArr);
 }
 
 function checkObjectColors(attrSelector, textSelector, statAttr, colorsAttr, colorsArr): void {

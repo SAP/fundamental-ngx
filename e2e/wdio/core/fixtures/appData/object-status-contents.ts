@@ -10,16 +10,16 @@ const semanticColors = {
     informative: '5,59,112',
     null: '106,109,112'
 };
-const genericColors = {
-    1: '136,0,0',
-    2: '187,0,0',
-    3: '233,115,12',
-    4: '16,126,62',
-    5: '10,110,209',
-    6: '15,130,143',
-    7: '146,90,206',
-    8: '192,57,159'
-};
+enum genericColors {
+    '136,0,0' = 1,
+    '187,0,0',
+    '233,115,12',
+    '16,126,62',
+    '10,110,209',
+    '15,130,143',
+    '146,90,206',
+    '192,57,159'
+}
 const semanticText = [
     'Negative',
     'Critical',
@@ -60,13 +60,15 @@ const objStatusText = [
     'Default'
 ];
 const invertedSemanticColors = {
-        negative: '187,0,0',
-        critical: '233,115,12',
-        positive: '16,126,62',
-        informative: '10,110,209',
-        null: '106,109,112'
+    negative: '187,0,0',
+    critical: '233,115,12',
+    positive: '16,126,62',
+    informative: '10,110,209',
+    null: '106,109,112'
 };
 const invertedColor = '255,255,255';
 
-export {statusAttr, colorAttr, semanticColors, genericColors, semanticText, indicatorAttr, genericColorText,
-    objStatusText, backgroundColorAttr, invertedColor, sizeAttr, invertedSemanticColors};
+export {
+    statusAttr, colorAttr, semanticColors, genericColors, semanticText, indicatorAttr, genericColorText,
+    objStatusText, backgroundColorAttr, invertedColor, sizeAttr, invertedSemanticColors
+};

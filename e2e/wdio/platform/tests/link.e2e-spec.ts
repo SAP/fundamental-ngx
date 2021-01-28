@@ -101,6 +101,7 @@ describe('Link component test suite', function() {
         checkLinkHover(linkPage.truncatedLink);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
         expect(isElementClickable(linkPage.truncatedLink)).toBe(true);
+        linkPage.open();
     });
 
     it('should check link navigation to new page', () => {
