@@ -184,17 +184,7 @@ exports.config = {
     services: [
         ['sauce', {
             sauceConnect: true
-        }],
-        ['image-comparison',
-            // The options
-            {
-                // Some options, see the docs for more
-                baselineFolder: join(process.cwd(), './e2e/wdio/platform/baselineScreenshot/'),
-                formatImageName: '{tag}-{logName}-{width}x{height}',
-                screenshotPath: join(process.cwd(), '.tmp/'),
-                savePerInstance: true,
-                autoSaveBaseline: true,
-            }],
+        }]
     ],
 
     // Framework you want to run your specs with.

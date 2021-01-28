@@ -194,6 +194,12 @@ describe('Approval flow', function() {
                     .toBe(remainder_text + approvalNodeText);
             }
         });
+
+        describe('check example orientation', () => {
+            it('should check RTL orientation', () => {
+                approvalFlowPage.checkRtlSwitch();
+            });
+        });
     });
 
     function checkApproveNodeDetailsDialogContent(): void {

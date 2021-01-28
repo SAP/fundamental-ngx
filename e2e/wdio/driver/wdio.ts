@@ -18,13 +18,6 @@ export function pause(waitTime: number = defaultWaitTime()): void {
     browser.pause(waitTime);
 }
 
-export function currentBrowser(): string {
-    return  browser.capabilities.browserName;
-}
-export function currentPlatform(): string {
-    return  browser.capabilities.platformName;
-}
-
 export function isBrowser(browserName: string): boolean {
     return browser.capabilities.browserName === browserName;
 }
@@ -316,7 +309,6 @@ export function selectOptionByAttribute(selector: string, attribute: string, att
     click(selector, index);
     waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
     $(`${selector} option[${attribute}="${attributeValue}"]`).click();
-    pause(3000);
 }
 
 export function selectOptionByValueAttribute(selector: string, attributeValue: string, index: number = 0): void {
