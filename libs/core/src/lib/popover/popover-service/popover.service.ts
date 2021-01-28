@@ -64,6 +64,9 @@ export class PopoverService extends BasePopoverClass {
     private _triggerElement: ElementRef;
 
     /** @hidden */
+    private _lastActiveElement: HTMLElement;
+
+    /** @hidden */
     private _templateData: PopoverTemplate;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
@@ -113,6 +116,7 @@ export class PopoverService extends BasePopoverClass {
                 this.isOpenChange.emit(false);
             }
             this.isOpen = false;
+            this._focusLastActiveElementBeforeOpen();
         }
     }
 
@@ -144,6 +148,7 @@ export class PopoverService extends BasePopoverClass {
 
             this._listenOnClose();
             this._listenOnOutClicks();
+            this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
         }
     }
@@ -401,6 +406,21 @@ export class PopoverService extends BasePopoverClass {
     private _detectChanges(): void {
         if (this._getPopoverBody()) {
             this._getPopoverBody().detectChanges();
+        }
+    }
+
+    /** @hidden */
+    private _focusFirstTabbableElement(): void {
+        if (this.focusAutoCapture) {
+            this._lastActiveElement = <HTMLElement>document.activeElement;
+            this._getPopoverBody()?._focusFirstTabbableElement();
+        }
+    }
+
+    /** @hidden */
+    private _focusLastActiveElementBeforeOpen(): void {
+        if (this.focusAutoCapture && this._lastActiveElement) {
+            this._lastActiveElement.focus();
         }
     }
 

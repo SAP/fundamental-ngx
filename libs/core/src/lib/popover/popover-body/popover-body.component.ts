@@ -5,6 +5,7 @@ import {
     ElementRef,
     Renderer2,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -17,6 +18,7 @@ import { ARROW_SIZE, ArrowPosition } from '../popover-position/popover-position'
 import { PopoverFlippedXDirection } from '../popover-position/popover-position';
 import { KeyUtil } from '../../utils/functions/key-util';
 import { PopoverPosition } from '../popover-position/popover-position';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -35,6 +37,10 @@ import { PopoverPosition } from '../popover-position/popover-position';
     styleUrls: ['./popover-body.component.scss']
 })
 export class PopoverBodyComponent {
+
+    /** @hidden */
+    @ViewChild(CdkTrapFocus)
+    _cdkTrapFocus: CdkTrapFocus;
 
     /** Whether the popover should have an arrow. */
     _noArrow = true;
@@ -118,6 +124,13 @@ export class PopoverBodyComponent {
     /** @hidden */
     detectChanges(): void {
         this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden */
+    _focusFirstTabbableElement(): void {
+        if (this._focusAutoCapture) {
+            this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();
+        }
     }
 
     /** @hidden */

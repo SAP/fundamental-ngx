@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.22...v0.26.1-rc.23) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) Popover Focus trap ([#4494](https://github.com/SAP/fundamental-ngx/issues/4494)) ([cbbc790](https://github.com/SAP/fundamental-ngx/commit/cbbc790ced2741e8fdf9be73a25701b6d3c8ce5f))
+
+### [0.26.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.21...v0.26.1-rc.22) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) fix breadcrump overflow menu ([#4490](https://github.com/SAP/fundamental-ngx/issues/4490)) ([0089e1e](https://github.com/SAP/fundamental-ngx/commit/0089e1e70a2427f3bd76e2252dd81f53cad7fe53))
+
+### [0.26.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.20...v0.26.1-rc.21) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) Input Group button focus ([#4492](https://github.com/SAP/fundamental-ngx/issues/4492)) ([d6e839f](https://github.com/SAP/fundamental-ngx/commit/d6e839f1fd210300ac5d7233b7e8b288dff64737))
+
+### [0.26.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.19...v0.26.1-rc.20) (2021-01-27)
+
+
+### Bug Fixes
+
+* (Core) add temporary fixes to table component ([#4480](https://github.com/SAP/fundamental-ngx/issues/4480)) ([49975d2](https://github.com/SAP/fundamental-ngx/commit/49975d24764649adea253f3ced88baf9845983dc))
+
 ### [0.26.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.18...v0.26.1-rc.19) (2021-01-27)
 
 ### [0.26.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.17...v0.26.1-rc.18) (2021-01-27)
