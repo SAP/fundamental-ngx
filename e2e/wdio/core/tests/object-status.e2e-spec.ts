@@ -10,7 +10,7 @@ import {
 } from '../fixtures/appData/object-status-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
-describe('', function() {
+describe('Object Status test suite', function() {
     const objectStatusPage = new ObjectStatusPo();
     const {
         objIcons, objText, objStatus, iconExamples, textExamples, textAndIconExamples, colorsExamples,
