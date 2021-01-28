@@ -144,7 +144,7 @@ export class ListDataProvider extends DataProvider<Product> {
     }
 }
 @Component({
-    selector: 'fdp-object-list-item-with-row-navigation-example',
+    selector: 'fdp-platform-object-list-item-with-row-navigation-example',
     templateUrl: './platform-object-list-item-with-row-navigation-example.component.html'
 })
 export class PlatformObjectListItemWithRowNavigationExampleComponent {
