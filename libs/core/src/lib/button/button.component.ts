@@ -69,8 +69,8 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             'fd-button',
             this.fdType ? `fd-button--${this.fdType}` : '',
             this.compact ? 'fd-button--compact' : '',
-            this.fdMenu ? `fd-button--menu` : '',
-            this._isDisabled() ? `is-disabled` : '',
+            this.fdMenu ? 'fd-button--menu' : '',
+            this._isDisabled() ? 'is-disabled' : '',
             this.class
         ];
     }
@@ -86,6 +86,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         this._changeDetectorRef.detectChanges();
     }
 
+    /** @hidden */
     private _isDisabled(): boolean {
         return this.elementRef().nativeElement.hasAttribute('disabled') || this.elementRef().nativeElement.getAttribute('aria-disabled');
     }
