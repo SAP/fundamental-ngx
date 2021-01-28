@@ -1,6 +1,7 @@
 <div class="fd-datetime">
     <fd-popover
         [(isOpen)]="isOpen"
+        (isOpenChange)="_changeMessageVisibility()"
         [focusTrapped]="true"
         [focusAutoCapture]="true"
         [triggers]="[]"
@@ -10,6 +11,7 @@
     >
         <fd-popover-control>
             <fd-input-group
+                #inputGroupComponent
                 [compact]="compact"
                 [state]="state"
                 [disabled]="disabled"
@@ -51,6 +53,9 @@
             [attr.aria-hidden]="!isOpen"
             [style.display]="'block'"
         >
+            <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+                {{ _message }}
+            </fd-form-message>
             <ng-content></ng-content>
             <div class="fd-datetime__container">
                 <fd-calendar

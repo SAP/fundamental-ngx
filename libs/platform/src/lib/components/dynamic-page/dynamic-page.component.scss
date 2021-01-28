@@ -4,11 +4,8 @@
     height: 3rem;
 }
 
-.tab-sticker {
-    left: 0;
-    right: 0;
-    position: relative;
-    top: 0;
+.content-sticker {
+    position: static;
 }
 
 .fd-dynamic-page__header--not-collapsible {
@@ -23,4 +20,11 @@
         background: inherit;
         cursor: default;
     }
+}
+
+// TODO: remove after migrating 0.15.0 styles
+.fd-dynamic-page {
+	.fd-dynamic-page__content {
+		overflow-y: auto;
+	}
 }

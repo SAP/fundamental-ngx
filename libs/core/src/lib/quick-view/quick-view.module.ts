@@ -16,10 +16,11 @@ import { BarModule } from '../bar/bar.module';
 import { FormGroupModule } from '../form/form-group/form-group.module';
 import { FormItemModule } from '../form/form-item/form-item.module';
 import { FormLabelModule } from '../form/form-label/form-label.module';
+import { PopoverModule } from '../popover/popover.module';
 
 
 @NgModule({
-    imports: [CommonModule, TitleModule, BarModule, FormGroupModule, FormItemModule, FormLabelModule],
+    imports: [CommonModule, TitleModule, BarModule, FormGroupModule, FormItemModule, FormLabelModule, PopoverModule],
     declarations: [
         QuickViewComponent,
         QuickViewTitleComponent,

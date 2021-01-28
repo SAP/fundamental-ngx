@@ -4,7 +4,6 @@ import { FormGroup } from '@angular/forms';
 @Component({
     selector: 'fdp-platform-textarea-basic-example',
     templateUrl: './platform-textarea-basic-example.component.html',
-    styleUrls: ['./platform-textarea-basic-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class PlatformTextareaBasicExampleComponent implements OnInit {

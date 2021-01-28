@@ -131,7 +131,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     @Input()
     get state(): Status {
-        if (this.fdDatePickerComponent?.isInvalidDateInput) {
+        if (this.fdDatePickerComponent?._isInvalidDateInput) {
             return 'error';
         }
         return this.status || this._state;

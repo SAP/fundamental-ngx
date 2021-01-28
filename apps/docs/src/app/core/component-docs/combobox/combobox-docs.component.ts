@@ -229,7 +229,7 @@ export class ComboboxDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'ComboboxincludesExampleComponent',
+            component: 'ComboboxIncludesExampleComponent',
             code: comboboxIncludesT,
             fileName: 'combobox-includes-example'
         }
@@ -243,7 +243,7 @@ export class ComboboxDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'ComboboxExampleComponent',
+            component: 'ComboboxSearchFieldExampleComponent',
             code: comboboxSearchFieldTSSrc,
             fileName: 'combobox-search-field-example'
         }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
+import { ComboboxSelectionChangeEvent, DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-combobox-templates-example',
@@ -9,7 +9,8 @@ import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
     styles: [
         '.fd-template-container-div { display: flex; align-items: center; cursor: pointer;}',
         '.fd-template-text { margin-right: 12px; margin-left: 12px; }'
-    ]
+    ],
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class ComboboxTemplatesExampleComponent {
     dataSource = [

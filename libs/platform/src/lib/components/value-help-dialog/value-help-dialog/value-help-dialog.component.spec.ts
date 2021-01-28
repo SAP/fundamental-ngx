@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
 import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
+import { RtlService } from '@fundamental-ngx/core';
 
 @Component({
   template: `
@@ -71,6 +72,9 @@ describe('PlatformValueHelpDialogComponent', () => {
       ],
       declarations: [
         TestWrapperComponent
+      ],
+      providers: [
+        RtlService
       ]
     }).overrideComponent(
       PlatformValueHelpDialogComponent,
@@ -98,10 +102,10 @@ describe('PlatformValueHelpDialogComponent', () => {
   });
 
   it('should have 1 selected items', async () => {
-    testComponent.vhdComponent.open();
     testComponent.vhdComponent.value = {
       selected: testComponent.data.slice(0, 3)
     };
+    testComponent.vhdComponent.open();
     testComponent.vhdComponent.removeSelected(0);
     expect(testComponent.vhdComponent.selectedItems.length).toEqual(2);
   });
@@ -115,11 +119,19 @@ describe('PlatformValueHelpDialogComponent', () => {
 
   it('should emit value on success', async () => {
     testComponent.vhdComponent.open();
-    testComponent.vhdComponent.value = {
-      selected: testComponent.data.slice(0, 3)
-    };
     spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
+
+    testComponent.vhdComponent.onSelect(testComponent.data.slice(0, 3));
     testComponent.vhdComponent.success();
+    expect(testComponent.vhdComponent.valueChange.emit).toHaveBeenCalled();
+  });
+
+  it('should emit value once on select', async () => {
+    testComponent.vhdComponent.open();
+    spyOn(testComponent.vhdComponent.valueChange, 'emit').and.callThrough();
+
+    testComponent.vhdComponent.searchSelection = 'once';
+    testComponent.vhdComponent.onSelect(testComponent.data.slice(0, 3));
     expect(testComponent.vhdComponent.valueChange.emit).toHaveBeenCalled();
   });
 });

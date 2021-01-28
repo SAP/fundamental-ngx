@@ -296,6 +296,22 @@ export function getParentElementCSSProperty(selector: string, prop: string, inde
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
 }
 
+export function clickAndDragElement(locationX: number, locationY: number, newLocationX: number, newLocationY: number): void {
+    browser.performActions([{
+        'type': 'pointer',
+        'id': 'pointer1',
+        'parameters': { 'pointerType': 'mouse' },
+        'actions': [
+            { 'type': 'pointerMove', 'duration': 200, 'x': locationX, 'y': locationY },
+            { 'type': 'pointerDown', 'button': 0 },
+            { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
+            { 'type': 'pointerMove', 'duration': 1000, 'x': newLocationX, 'y': newLocationY },
+            { 'type': 'pointerUp', 'button': 0 },
+            { 'type': 'pause', 'duration': 500 }
+        ]
+    }]);
+}
+
 export function selectOptionByAttribute(selector: string, attribute: string, attributeValue: string, index: number = 0): void {
     click(selector, index);
     waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
