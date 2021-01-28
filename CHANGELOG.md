@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.21...v0.26.1-rc.22) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) fix breadcrump overflow menu ([#4490](https://github.com/SAP/fundamental-ngx/issues/4490)) ([0089e1e](https://github.com/SAP/fundamental-ngx/commit/0089e1e70a2427f3bd76e2252dd81f53cad7fe53))
+
 ### [0.26.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.20...v0.26.1-rc.21) (2021-01-28)
 
 
