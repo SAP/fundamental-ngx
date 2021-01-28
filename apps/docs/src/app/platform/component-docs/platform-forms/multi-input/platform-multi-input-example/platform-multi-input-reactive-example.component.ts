@@ -1,11 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-multi-input-example',
-    templateUrl: './platform-mulit-input-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'fdp-platform-multi-input-reactive-example',
+    templateUrl: './platform-multi-input-reactive-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
-export class PlatformMulitInputExampleComponent {
+export class PlatformMultiInputReactiveExampleComponent {
     _datasource = [
         { firstName: 'Alabama', lastName: 'Montgomery' },
         { firstName: 'Alaska', lastName: 'Juneau' },
@@ -59,4 +62,23 @@ export class PlatformMulitInputExampleComponent {
         { firstName: 'Wisconsin', lastName: 'Madison' },
         { firstName: 'Wyoming', lastName: 'Cheyenne' }
     ];
+
+    customForm = new FormGroup({});
+    submitted = false;
+    reactiveForm = new FormControl();
+
+    hasError(): boolean {
+        return this.hasValue() && this.reactiveForm.touched;
+    }
+
+    hasValue(): boolean {
+        return !!this.reactiveForm.value?.length;
+    }
+
+    onSubmit(): void {
+        if (!this.hasError()) {
+            return;
+        }
+        alert('form file Uploaded successfully');
+    }
 }
