@@ -42,6 +42,9 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
 import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
+import { PlatformListModule } from './components/list/list.module';
+import { PlatformUploadCollectionModule } from './components/upload-collection';
+import { PlatformValueHelpDialogModule } from './components/value-help-dialog/value-help-dialog.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -58,6 +61,7 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
         PlatformMenuModule,
         PlatformSelectModule,
         PlatformLinkModule,
+        PlatformListModule,
         PlatformRadioGroupModule,
         PlatformMenuButtonModule,
         PlatformSplitMenuButtonModule,
@@ -83,6 +87,8 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
         PlatformMultiInputMobileModule,
         PlatformFeedInputModule,
         PlatformFileUploaderModule,
+        PlatformUploadCollectionModule,
+        PlatformValueHelpDialogModule,
         PlatformAutoCompleteModule,
         PlatformApprovalFlowModule
     ]
