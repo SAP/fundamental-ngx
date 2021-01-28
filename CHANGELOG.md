@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.22...v0.26.1-rc.23) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) Popover Focus trap ([#4494](https://github.com/SAP/fundamental-ngx/issues/4494)) ([cbbc790](https://github.com/SAP/fundamental-ngx/commit/cbbc790ced2741e8fdf9be73a25701b6d3c8ce5f))
+
 ### [0.26.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.21...v0.26.1-rc.22) (2021-01-28)
 
 
