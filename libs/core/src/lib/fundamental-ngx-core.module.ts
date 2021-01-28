@@ -78,7 +78,6 @@ import { ThemesService } from './utils/services/themes.service';
 import { WizardModule } from './wizard/wizard.module';
 import { QuickViewModule } from './quick-view/quick-view.module';
 import { FeedInputModule } from './feed-input/feed-input.module';
-import { GridListModule } from './grid-list/grid-list.module';
 import { ObjectNumberModule } from './object-number/object-number.module';
 import { TitleModule } from './title/title.module';
 
@@ -111,7 +110,6 @@ import { TitleModule } from './title/title.module';
         FlexibleColumnLayoutModule,
         FormModule,
         FormattedTextModule,
-        GridListModule,
         IconModule,
         InfoLabelModule,
         InlineHelpModule,
