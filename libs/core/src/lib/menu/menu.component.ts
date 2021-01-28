@@ -160,7 +160,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     set trigger(trigger: ElementRef) {
         this._externalTrigger = trigger;
-        this._popoverService.initialise(this._externalTrigger, this);
+        this._popoverService.initialise(this._externalTrigger);
         this._destroyEventListeners();
         this._listenOnTriggerRefClicks();
     }
