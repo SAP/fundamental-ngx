@@ -80,6 +80,7 @@ import { QuickViewModule } from './quick-view/quick-view.module';
 import { FeedInputModule } from './feed-input/feed-input.module';
 import { ObjectNumberModule } from './object-number/object-number.module';
 import { TitleModule } from './title/title.module';
+import { SliderModule } from './slider/public_api';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -156,7 +157,12 @@ import { TitleModule } from './title/title.module';
         ToolbarModule,
         TokenModule,
         TreeModule,
-        WizardModule
+        WizardModule,
+        CardModule,
+        MessageBoxModule,
+        MessageToastModule,
+        DynamicSideContentModule,
+        SliderModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })
