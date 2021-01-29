@@ -15,7 +15,7 @@ import {
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    scrollIntoView,
+    scrollIntoView, waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -107,7 +107,8 @@ describe('Link component test suite', function() {
     });
 
     fit('should check link navigation to new page', () => {
-        checkLinkTarget(linkPage.iconLink, googleLink, 'center img');
+        waitForElDisplayed(linkPage.iconLink);
+        checkLinkTarget(linkPage.iconLink, googleLink, 'input[type=\'text\']');
         linkPage.open();
     }, 2);
 
