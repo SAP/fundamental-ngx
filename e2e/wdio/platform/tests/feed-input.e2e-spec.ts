@@ -80,7 +80,7 @@ describe('Verify Feed Input component', function() {
             waitForPresent(feedInputButton, i);
             scrollIntoView(feedInputButton, i);
             expect(elementDisplayed(feedInputButton, i)).toBe(true);
-            expect(isEnabled(feedInputButton, i)).toBe(false);
+            expect(getAttributeByName(feedInputButton, 'aria-disabled', i)).toBe('true');
         }
     });
 
