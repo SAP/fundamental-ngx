@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 interface ExampleRow {
     column1: any,
@@ -22,7 +22,7 @@ interface View {
     autoApply: boolean,
     default: boolean,
     createdBy: string,
-    settings: any;
+    settings?: any;
 }
 
 @Component({
@@ -40,7 +40,9 @@ export class VariantManagementExampleComponent implements OnInit {
     //     { filterVal: this.filterVal, ascending: this.ascending
     // });
 
-    activeFilters$: BehaviorSubject<any>;
+    currentViewChanged$: Subject<any> = new Subject<any>();
+    // currentViewChanged$ = new EventEmitter<any>();
+    currentViewChanged = false;
 
     viewFilters = {
         filterVal: '',
@@ -79,19 +81,13 @@ export class VariantManagementExampleComponent implements OnInit {
     };
 
     _viewChange(): void {
-        this.activeFilters$.next(this.viewFilters);
-        this._setView();
+        // this.currentViewChanged$.emit(true);
+        this.currentViewChanged = true;
     }
 
-    _setView(): void {
-        // this.viewFilters = this.activeFilters$.getValue();
-    }
-
-    currentViewChange(viewId: number): void {
-        // this.activeFilters$.next(viewData);
+    applyViewSettings(viewId: number): void {
+        this.currentViewChanged = false;
         this.viewFilters = this.views.find(view => view.id === viewId).settings;
-        console.log(this.viewFilters);
-
     }
 
     saveViews(views: View[]) {
@@ -99,7 +95,7 @@ export class VariantManagementExampleComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activeFilters$ = new BehaviorSubject<any>(this.viewFilters);
+        // this.activeFilters$ = new BehaviorSubject<any>(this.viewFilters);
 
         this.views = [
             {

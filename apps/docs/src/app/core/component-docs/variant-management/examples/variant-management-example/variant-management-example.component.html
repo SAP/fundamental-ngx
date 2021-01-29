@@ -2,8 +2,8 @@
     <fd-variant-management
         [views]="views"
         (saveViews)="saveViews($event)"
-        [currentView]="activeFilters$"
-        (currentViewChange)="currentViewChange($event)"
+        [currentView]="currentViewChanged"
+        (currentViewChange)="applyViewSettings($event)"
     ></fd-variant-management>
 </fd-toolbar>
 <table fd-table>

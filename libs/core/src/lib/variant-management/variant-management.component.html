@@ -1,7 +1,7 @@
 <fd-popover [noArrow]="false" [(isOpen)]="isViewsOpen">
     <fd-popover-control>
         <div style="display: flex; justify-content: space-between; align-items: center">
-            <h4 fd-title style="color: #0854a0">{{ appliedView.name }}</h4>
+            <h4 fd-title style="color: #0854a0">{{ appliedView.name }}<span *ngIf="_viewChanged">*</span></h4>
             <button
                 fd-button
                 fdType="transparent"

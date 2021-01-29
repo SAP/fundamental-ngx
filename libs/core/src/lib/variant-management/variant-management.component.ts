@@ -1,12 +1,22 @@
-import { Component, Input, OnInit, Output, TemplateRef, EventEmitter } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output, SimpleChanges,
+    TemplateRef
+} from '@angular/core';
 import { DialogService } from '../dialog/dialog-service/dialog.service';
 
 @Component({
-  selector: 'fd-variant-management',
-  templateUrl: './variant-management.component.html',
-  styleUrls: ['./variant-management.component.scss']
+    selector: 'fd-variant-management',
+    templateUrl: './variant-management.component.html',
+    styleUrls: ['./variant-management.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VariantManagementComponent implements OnInit {
+export class VariantManagementComponent implements OnInit, OnChanges {
     @Input()
     views: any;
 
@@ -25,7 +35,7 @@ export class VariantManagementComponent implements OnInit {
 
     viewName: string;
 
-    viewChanged = false;
+    _viewChanged = false;
 
     appliedView: any; // view
 
@@ -41,19 +51,17 @@ export class VariantManagementComponent implements OnInit {
         this.isViewsOpen = true;
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('currentView' in changes) {
+            this._viewChanged = this.currentView;
+        }
+    }
+
     ngOnInit(): void {
-        console.log('activeView', this.currentView.subscribe(
-            result => {
-                console.log(result);
-                if (result.name) {
-                    this.viewName = result.name;
-                } else {
-                    this.viewChanged = true;
-                }
-            })
-        );
         this.appliedView = this.views.find(view => view.default)
         this.currentViewChange.emit(this.appliedView.id);
+
+        console.log(this.appliedView);
     }
 
     openDialog(dialog: TemplateRef<any>): void {
@@ -61,11 +69,12 @@ export class VariantManagementComponent implements OnInit {
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
             draggable: true,
-            width: '1000px'
+            width: '300px'
         });
 
         dialogRef.afterClosed.subscribe(
             (result) => {
+                console.log('result', result);
                 this.saveViews.emit([
                     {
                         id: 2,
