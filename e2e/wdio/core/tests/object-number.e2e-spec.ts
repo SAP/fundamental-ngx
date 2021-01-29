@@ -98,6 +98,12 @@ describe('object number test suite', function() {
             checkStatusColors(decimalObjExamples, objectNumberUnit(decimalObjExamples), statusColors);
         });
     });
+
+    describe('check orientation', function() {
+        it('should check RTL and LTR', () => {
+            objectNumberPage.checkRtlSwitch();
+        });
+    });
 });
 
 function checkObjectValues(selector, dataArr): void {
