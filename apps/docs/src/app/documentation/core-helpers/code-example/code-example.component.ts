@@ -31,10 +31,17 @@ export class CodeExampleComponent implements OnInit {
      */
     @Input()
     exampleFiles: ExampleFile[] = [];
-    smallScreen: boolean;
-    selectedFileIndex = 0;
+
+    /**
+     * @hidden
+     */
+    _displayedFiles: ExampleFile[] = [];
 
     isOpen = false;
+
+    smallScreen: boolean;
+
+    activeIndex = 0;
 
     constructor(
         private element: ElementRef,
@@ -52,12 +59,24 @@ export class CodeExampleComponent implements OnInit {
     }
 
     copyText(): void {
-        this.copyService.copyText(this.exampleFiles[this.selectedFileIndex].code.default);
+        this.copyService.copyText(this.exampleFiles[this.activeIndex].code.default);
         this.alertService.open('Code copied!', { type: 'success', duration: 5000 } as AlertConfig);
     }
 
     ngOnInit(): void {
         this.smallScreen = window.innerWidth <= 768;
+        const scssExamples: ExampleFile[] = [];
+        this.exampleFiles.forEach(file => {
+            if (file.scssFileCode) {
+                scssExamples.push({
+                    code: file.scssFileCode,
+                    language: 'scss',
+                    name: 'Scss'
+                });
+            }
+        });
+
+        this._displayedFiles = this.exampleFiles.concat(scssExamples);
     }
 
     @HostListener('window:resize', ['$event'])

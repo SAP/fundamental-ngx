@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-file-uploadermax-file-size-example',
+    selector: 'fdp-platform-file-uploader-max-file-size-example',
     templateUrl: './platform-file-uploader-max-file-size-example.component.html',
     styleUrls: ['./platform-file-uploader-max-file-size-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

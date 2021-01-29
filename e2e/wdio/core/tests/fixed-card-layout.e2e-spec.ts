@@ -1,214 +1,186 @@
 import { FixedCardLayoutPo } from '../pages/fixed-card-layout.po';
 import fxdCardLytData from '../fixtures/appData/fixed-card-layout-content';
-import { webDriver } from '../../driver/wdio';
+import {
+    browserIsIE,
+    browserIsIEorSafari,
+    click,
+    elementDisplayed,
+    getCSSPropertyByName,
+    getElementArrayLength,
+    getText,
+    refreshPage,
+    scrollIntoView,
+    waitForInvisibilityOf,
+    getElementLocation, waitForPresent
+} from '../../driver/wdio';
 
 describe('Fixed card layout test suite', function() {
     const fxdCardLayoutPg = new FixedCardLayoutPo();
 
     beforeAll(() => {
         fxdCardLayoutPg.open();
-    });
+    }, 1);
 
     afterEach(() => {
-        webDriver.refreshPage();
-    });
+        refreshPage();
+        waitForPresent(fxdCardLayoutPg.pageHeader);
+    }, 1);
 
     describe('main checks', function() {
-        // TODO rework
-        xit('should check spacing between cards', () => {
-            const cardsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardDivArr);
-            const columnsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
+        it('should check spacing between cards', () => {
 
-            for (let i = 0; cardsCount > i; i++) {
-                const cardsMarginValue = webDriver.getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardSpacingValue, i);
-                if (cardsMarginValue.value !== null) {
-                    const arrL = webDriver.getElementArrayLength(cardsMarginValue.value);
-                    expect(arrL).toEqual(cardsCount - columnsCount);
-                }
-            }
-            // kept old protractor version to remember logic for rework:
-            // const cardsMarginValue = fxdCardLayoutPg.cardDivArr.map(async element => {
-            //     return await element.getCssValue(fxdCardLytData.cardSpacingAttr);
-            // });
-            // expect(cardsMarginValue.filter(value => value === fxdCardLytData.cardSpacingValue).length)
-            //     .toEqual(cardsCount - columnsCount);
+            expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardSpacingAttr).value)
+                .toBe(fxdCardLytData.cardSpacingValue);
         });
 
         it('should check card minimum width', () => {
-            const cardsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            const cardsCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
 
             for (let i = 0; cardsCount > i; i++) {
-                expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardWidthAttr, i).value)
+                expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardWidthAttr, i).value)
                     .toBe(fxdCardLytData.cardMinWidth);
             }
         });
 
         it('should check card can be hidden', () => {
-            const cardStartCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            const cardStartCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
 
-            webDriver.click(fxdCardLayoutPg.hideCardBtnArr);
-            const cardEndCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            click(fxdCardLayoutPg.hideCardBtnArr);
+            const cardEndCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
             expect(cardEndCount).toEqual(cardStartCount - 1);
 
-            webDriver.click(fxdCardLayoutPg.hideCardBtnArr);
-            const newCardEndCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            click(fxdCardLayoutPg.hideCardBtnArr);
+            const newCardEndCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
             expect(newCardEndCount).toEqual(cardStartCount);
         });
 
         it('should drag a card from the header', () => {
             // skip Safari for now due to issue where mouse position resets to 0,0
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isIEorSafari()) {
-                const cardHeader = webDriver.elementArray(fxdCardLayoutPg.cardHeaderArr);
-                const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-                const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
-
-                webDriver.scrollIntoView(fxdCardLayoutPg.cardHeaderArr, 0);
-                checkDragAndDrop(cardHeader[0], cardContent[0], cardContent[4]);
-                const newText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-                expect(newText).not.toBe(originalFirstCardText);
+            if (browserIsIEorSafari()) {
+                console.log('Skip for Safari and IE');
                 return;
             }
-            console.log('Skip for Safari and IE');
+            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+
+            scrollIntoView(fxdCardLayoutPg.cardHeaderArr);
+            checkDragAndDrop(fxdCardLayoutPg.cardHeaderArr, fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardContentArr, 4);
+            const newText = getText(fxdCardLayoutPg.cardDivArr);
+            expect(newText).not.toBe(originalFirstCardText);
         });
-        // TODO: Need to be fixed for FF
-        xit('should drag a card from the content area', () => {
-            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isIEorSafari()) {
-                const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
-                const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-                const cardDivArr = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
 
-                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
-                checkDragAndDrop(cardContent[0], cardDivArr[0], cardContent[4]);
-                const newText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-                expect(newText).not.toBe(originalFirstCardText);
+        it('should drag a card from the content area', () => {
+            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
+            if (browserIsIE()) {
+                console.log('Skip IE because of #3882');
                 return;
             }
-            console.log('Skip for Safari and IE');
+            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+
+            scrollIntoView(fxdCardLayoutPg.cardDivArr);
+            checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
+            const newText = getText(fxdCardLayoutPg.cardDivArr);
+            expect(newText).not.toBe(originalFirstCardText);
         });
-        // TODO: Unskip after fix
-        xit('should check drag and drop cards swap locations', () => {
-            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isIEorSafari()) {
-                const cardContent = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
-                const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
-                const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 0);
-                const originalSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
 
-                webDriver.scrollIntoView(fxdCardLayoutPg.cardDivArr, 0);
-                checkDragAndDrop(cardContent[0], cards[0], cardContent[4]);
-                const newFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr);
-                const newSwapCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 4);
-                expect(newFirstCardText).not.toBe(originalFirstCardText);
-                expect(newSwapCardText).not.toBe(originalSwapCardText);
+        it('should check drag and drop cards swap locations', () => {
+            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
+            if (browserIsIE()) {
+                console.log('skip IE because of #3882');
                 return;
             }
-            console.log('Firefox for Safari and IE');
+            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+            const originalSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
+
+            scrollIntoView(fxdCardLayoutPg.cardDivArr);
+            checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
+            const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+            const newSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
+            expect(newFirstCardText).not.toBe(originalFirstCardText);
+            expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
 
         it('should check placeholder exists on drag', () => {
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (!webDriver.isBrowser('internet explorer')) {
-                const clickElement = webDriver.elementArray(fxdCardLayoutPg.cardContentArr);
-                const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
-                const startLocation = cards[0];
-                const endElementLocation = cards[1];
-
-                // tslint:disable:radix
-                const clickXLocation = parseInt(clickElement[0].getLocation('x'));
-                const clickYLocation = parseInt(clickElement[0].getLocation('y'));
-                const startXLocation = parseInt(startLocation.getLocation('x'));
-                const startYLocation = parseInt(startLocation.getLocation('y'));
-                const endXLocation = parseInt(endElementLocation.getLocation('x'));
-                const endYLocation = parseInt(endElementLocation.getLocation('y'));
-
-                browser.performActions([{
-                    'type': 'pointer',
-                    'id': 'pointer1',
-                    'parameters': { 'pointerType': 'mouse' },
-                    'actions': [
-                        { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
-                        { 'type': 'pointerDown', 'button': 0 },
-                        { 'type': 'pause', 'duration': 600 },
-                        { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
-                        { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation, 'y': endYLocation }
-                    ]
-                }]);
-
-                expect(webDriver.elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
-                expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
-                    .toEqual(fxdCardLytData.placeholderBorderStyle);
+            if (browserIsIE()) {
+                console.log('Skip for IE because of #3882');
                 return;
             }
-            console.log('Skip for IE');
+            scrollIntoView(fxdCardLayoutPg.cardDivArr);
+            const clickElement = fxdCardLayoutPg.cardContentArr;
+            const locationElement = fxdCardLayoutPg.cardDivArr;
+
+            // tslint:disable:radix
+            const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
+            const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
+            const startXLocation = Math.floor(getElementLocation(locationElement, 0, 'x'));
+            const startYLocation = Math.floor(getElementLocation(locationElement, 0, 'y'));
+            const endXLocation = Math.floor(getElementLocation(locationElement, 4, 'x'));
+            const endYLocation = Math.floor(getElementLocation(locationElement, 4, 'y'));
+
+            browser.performActions([{
+                'type': 'pointer',
+                'id': 'pointer1',
+                'parameters': { 'pointerType': 'mouse' },
+                'actions': [
+                    { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
+                    { 'type': 'pointerDown', 'button': 0 },
+                    { 'type': 'pause', 'duration': 600 },
+                    { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
+                    { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 30, 'y': endYLocation + 30 }
+                ]
+            }]);
+
+            expect(elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
+            expect(getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
+                .toEqual(fxdCardLytData.placeholderBorderStyle);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
         xit('should check columns are reactive', () => {
-            const originalCardColumnsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
+            const originalCardColumnsCount = getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
 
-            webDriver.click(fxdCardLayoutPg.navigationMenuBtn);
-            webDriver.waitForInvisibilityOf(fxdCardLayoutPg.pageSidebar);
-            const newCardColumnsCount = webDriver.getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
+            click(fxdCardLayoutPg.navigationMenuBtn);
+            waitForInvisibilityOf(fxdCardLayoutPg.pageSidebar);
+            const newCardColumnsCount = getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
             expect(originalCardColumnsCount).not.toEqual(newCardColumnsCount);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
         xit('should check cards are reactive to columns', () => {
-            const originalLastCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 8);
+            const originalLastCardText = getText(fxdCardLayoutPg.cardDivArr, 8);
 
-            webDriver.click(fxdCardLayoutPg.navigationMenuBtn, 0);
-            webDriver.waitForInvisibilityOf(fxdCardLayoutPg.pageSidebar);
-            const newLastCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 8);
+            click(fxdCardLayoutPg.navigationMenuBtn, 0);
+            waitForInvisibilityOf(fxdCardLayoutPg.pageSidebar);
+            const newLastCardText = getText(fxdCardLayoutPg.cardDivArr, 8);
             expect(originalLastCardText).not.toEqual(newLastCardText);
         });
 
         it('should check drag and drop is disabled', () => {
-            const originalFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 9);
-            const clickElement = webDriver.elementArray(fxdCardLayoutPg.disableDragBtn);
-            const cards = webDriver.elementArray(fxdCardLayoutPg.cardDivArr);
+            const originalFirstCardText = getText(fxdCardLayoutPg.disabledCardDiv);
 
-            webDriver.scrollIntoView(fxdCardLayoutPg.disableDragBtn);
-            webDriver.click(fxdCardLayoutPg.disableDragBtn);
-            checkDragAndDrop(clickElement[0], cards[9], cards[13]);
-            const newFirstCardText = webDriver.getText(fxdCardLayoutPg.cardDivArr, 9);
+            scrollIntoView(fxdCardLayoutPg.disableDragBtn);
+            click(fxdCardLayoutPg.disableDragBtn);
+            checkDragAndDrop(fxdCardLayoutPg.disabledCardContent, fxdCardLayoutPg.disabledCardDiv, fxdCardLayoutPg.disabledCardContent, 4);
+            const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
             expect(newFirstCardText).toBe(originalFirstCardText);
         });
 
         describe('Check orientation', function() {
-            it('should check LTR orientation', () => {
-                const arrL = webDriver.getElementArrayLength(fxdCardLayoutPg.exampleAreaContainersArr);
-                for (let i = 0; arrL > i; i++) {
-                    expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.exampleAreaContainersArr, 'direction', i).value)
-                        .toBe('ltr', 'css prop direction ');
-                }
+            it('should check LTR and RTL orientation', () => {
+                fxdCardLayoutPg.checkRtlSwitch();
             });
-        });
-
-        it('should check RTL orientation', () => {
-            const arrL = webDriver.getElementArrayLength(fxdCardLayoutPg.exampleAreaContainersArr);
-            for (let i = 0; arrL > i; i++) {
-                webDriver.scrollIntoView(fxdCardLayoutPg.exampleAreaContainersArr, i);
-                expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.exampleAreaContainersArr, 'direction', i).value)
-                    .toBe('ltr', 'css prop direction ' + i);
-                const dirValueBefore = webDriver.getAttributeByName(fxdCardLayoutPg.exampleAreaContainersArr, 'dir', i);
-                expect([null, '']).toContain(dirValueBefore);
-                webDriver.click(fxdCardLayoutPg.rtlSwitcherArr, i);
-                expect(webDriver.getCSSPropertyByName(fxdCardLayoutPg.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-                expect(webDriver.getAttributeByName(fxdCardLayoutPg.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-            }
         });
     });
 
-    function checkDragAndDrop(clickElement, startLocation, endElementLocation): any {
+    function checkDragAndDrop(clickElement, startLocation, endLocation, endLocationIndex): void {
         // tslint:disable:radix
-        const clickXLocation = parseInt(clickElement.getLocation('x'));
-        const clickYLocation = parseInt(clickElement.getLocation('y'));
-        const startXLocation = parseInt(startLocation.getLocation('x'));
-        const startYLocation = parseInt(startLocation.getLocation('y'));
-        const endXLocation = parseInt(endElementLocation.getLocation('x'));
-        const endYLocation = parseInt(endElementLocation.getLocation('y'));
+        const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
+        const clickYLocation = Math.floor(getElementLocation(clickElement, 0, 'y'));
+        const startXLocation = Math.floor(getElementLocation(startLocation, 0, 'x'));
+        const startYLocation = Math.floor(getElementLocation(startLocation, 0, 'y'));
+        const endXLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'x'));
+        const endYLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'y'));
 
         browser.performActions([{
             'type': 'pointer',
@@ -219,7 +191,7 @@ describe('Fixed card layout test suite', function() {
                 { 'type': 'pointerDown', 'button': 0 },
                 { 'type': 'pause', 'duration': 600 },
                 { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
-                { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 5, 'y': endYLocation + 5 },
+                { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 40, 'y': endYLocation + 40 },
                 { 'type': 'pointerUp', 'button': 0 }
             ]
         }]);

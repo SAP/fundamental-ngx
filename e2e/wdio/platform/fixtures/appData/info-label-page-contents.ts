@@ -21,7 +21,7 @@ export default {
     labelIconAttribute: 'ng-reflect-glyph',
     labelIconAttributeValue: 'hide',
     backgroundColor: 'background-color'
-}
+};
 
 export const semanticColorsArr = [
     { color: 1, value: '253,243,231' },
@@ -33,5 +33,5 @@ export const semanticColorsArr = [
     { color: 7, value: '232,251,253' },
     { color: 8, value: '243,244,239' },
     { color: 9, value: '249,235,246' },
-    { color: 10, value: '241,243,244'},
+    { color: 10, value: '241,243,244' }
 ];

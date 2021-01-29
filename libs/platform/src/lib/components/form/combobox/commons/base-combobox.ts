@@ -26,7 +26,8 @@ import {
     RIGHT_ARROW,
     SHIFT,
     TAB,
-    UP_ARROW
+    UP_ARROW,
+    BACKSPACE
 } from '@angular/cdk/keycodes';
 
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
@@ -213,7 +214,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** Get the input text of the input. */
     get inputText(): string {
-        return this._inputTextValue;
+        return this._inputTextValue || '';
     }
 
     /** Set the input text of the input. */
@@ -339,6 +340,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * */
     abstract setAsSelected(item: OptionItem[]): void;
 
+    /** Is empty search field */
+    get isEmptyValue(): boolean {
+        return this.inputText.trim().length === 0;
+    }
+
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
         if (!value) {
@@ -423,6 +429,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         if (!this.mobile) {
             this.searchInputElement.nativeElement.focus();
         }
+        if (this.isOpen) {
+            this.listComponent.setItemActive(0);
+        }
     }
 
     /**
@@ -456,6 +465,12 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             this.showList(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
+            const acceptedKeys = !KeyUtil.isKeyCode(event, BACKSPACE)
+                && !KeyUtil.isKeyType(event, 'alphabetical')
+                && !KeyUtil.isKeyType(event, 'numeric');
+            if (this.isEmptyValue && acceptedKeys) {
+                this.listComponent?.setItemActive(0);
+            }
         }
     }
 

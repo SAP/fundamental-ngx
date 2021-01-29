@@ -6,6 +6,7 @@
         "styleIncludePaths": ["../../node_modules"]
     },
     "whitelistedNonPeerDependencies": [
+        "@angular/cdk",
         "focus-trap",
         "popper.js",
         "fundamental-styles",

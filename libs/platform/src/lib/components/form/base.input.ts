@@ -48,6 +48,19 @@ export abstract class BaseInput extends BaseComponent
     @Input()
     placeholder: string;
 
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be 'success', 'error', 'warning', 'default', 'information'.
+     */
+    @Input()
+    // state: Status = 'default';
+    get state(): Status {
+        return this._state;
+    }
+    set state(state: Status) {
+        this._state = state || 'default';
+    }
+
     @Input()
     get disabled(): boolean {
         if (this.ngControl && this.ngControl.disabled !== null) {
@@ -129,6 +142,15 @@ export abstract class BaseInput extends BaseComponent
 
     readonly formField: FormField | null = null;
 
+    /** set when input field is mandatory form field */
+    required: boolean;
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
+    _state: Status;
+
     // @formatter:off
     onChange = (_: any) => {};
     onTouched = () => {};
@@ -159,6 +181,7 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnChanges(): void {
+        this._status = this.state;
         this.stateChanges.next('input: ngOnChanges');
     }
 
@@ -272,7 +295,7 @@ export abstract class BaseInput extends BaseComponent
         const newState = !!(control && control.invalid && (control.touched || (parent && parent.submitted)));
 
         if (newState !== oldState) {
-            this._status = newState ? 'error' : undefined;
+            this._status = newState ? 'error' : this.state;
             this.stateChanges.next('updateErrorState');
             this._cd.markForCheck();
         }

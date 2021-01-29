@@ -197,6 +197,18 @@ export const API_FILES = {
     popoverDirective: ['PopoverDirective'],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
+    quickView: [
+        'QuickViewComponent',
+        'QuickViewTitleComponent',
+        'QuickViewSubheaderComponent',
+        'QuickViewSubheaderTitleComponent',
+        'QuickViewSubheaderSubtitleComponent',
+        'QuickViewGroupComponent',
+        'QuickViewGroupTitleComponent',
+        'QuickViewGroupItemComponent',
+        'QuickViewGroupItemLabelComponent',
+        'QuickViewGroupItemContentComponent'
+    ],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],
     shellbar: [
@@ -237,7 +249,6 @@ export const API_FILES = {
         'TabListComponent',
         'TabPanelComponent',
         'TabTitleDirective',
-        'TabLoadTitleDirective',
         'TabNavComponent',
         'TabLinkDirective',
         'TabItemDirective',
@@ -249,7 +260,9 @@ export const API_FILES = {
         'TabHeaderDirective',
         'TabCounterHeaderDirective',
         'TabProcessIconDirective',
-        'TabSeparator'
+        'TabItemExpandComponent',
+        'TabSeparator',
+        'TabInfo',
     ],
     tile: [
         'TileComponent',
@@ -301,5 +314,16 @@ export const API_FILES = {
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
     ratingIndicator: ['RatingIndicatorComponent'],
-    wizard: ['WizardComponent']
+    wizard: ['WizardComponent'],
+    gridList: [
+        'GridListComponent',
+        'GridListItemComponent',
+        'GridListTitleBarComponent',
+        'GridListFilterBarComponent',
+        'GridListMoreBtnComponent',
+        'GridListFooterComponent',
+        'GridListItemFooterBarComponent',
+        'GridListItemToolbarComponent',
+        'GridListGroupHeaderComponent'
+    ]
 };

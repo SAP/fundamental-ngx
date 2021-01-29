@@ -298,8 +298,17 @@ describe('FdDatetimeAdapter', () => {
         expect(adapter.datesEqual(adapter.now(), new FdDate())).toBe(true, `should be equal to now date moment`);
     });
 
-    it('should parse string', () => {
+    it('should parse "en" date string', () => {
         expect(adapter.parse('1/1/2017')).toEqual(new FdDate(2017, 1, 1));
+    });
+
+    it('should parse "en" time string', () => {
+        expect(adapter.parse('10:30 PM', { hour: 'numeric', minute: '2-digit', hour12: true })).toEqual(
+            FdDate.getNow().setTime(22, 30, 0)
+        );
+        expect(adapter.parse('10:30', { hour: 'numeric', minute: '2-digit' })).toEqual(
+            FdDate.getNow().setTime(10, 30, 0)
+        );
     });
 
     it('should parse number', () => {

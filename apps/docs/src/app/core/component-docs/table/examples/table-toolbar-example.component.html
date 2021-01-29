@@ -64,27 +64,17 @@
             </form>
         </fd-dialog-body>
         <fd-dialog-footer>
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fd-dialog-decisive-button
+            <fd-button-bar
                     fdType="emphasized"
                     label="Save"
-                    [compact]="true"
-                    (click)="dialog.close('Save')"
-                    type="submit">
-                </button>
-            </fd-dialog-footer-button>
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fdType="transparent"
+                    type="submit"
+                    (click)="dialog.close('Save')">
+            </fd-button-bar>
+            <fd-button-bar
+                    fd-initial-focus
                     label="Cancel"
-                    fd-dialog-decisive-button
-                    [compact]="true"
                     (click)="dialog.dismiss('Cancel')">
-                </button>
-            </fd-dialog-footer-button>
+            </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

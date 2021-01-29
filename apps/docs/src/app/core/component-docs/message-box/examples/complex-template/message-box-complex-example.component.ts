@@ -28,17 +28,12 @@ import { MessageBoxRef } from '@fundamental-ngx/core';
             <fd-message-box-footer>
                 <ng-template fdTemplate="footer">
                     <div fd-bar-middle>
-                        <fd-bar-element>
-                            <button
-                                fd-button
+                        <fd-button-bar
                                 fd-initial-focus
-                                fd-message-box-decisive-button
-                                fdType="emphasized"
                                 label="Ok"
-                                [compact]="true"
+                                fdType="emphasized"
                                 (click)="messageBoxRef.close('Ok')">
-                            </button>
-                        </fd-bar-element>
+                        </fd-button-bar>
                     </div>
                 </ng-template>
             </fd-message-box-footer>

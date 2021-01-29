@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+
 import * as feedInputH from '!raw-loader!./platform-feed-input-examples/platform-feed-input-example/platform-feed-input-example.component.html';
-import * as feedInputT from '!raw-loader!./platform-feed-input-examples/platform-feed-input-example/platform-feed-input-example.component.ts';
+import * as feedInputT from '!raw-loader!./platform-feed-input-examples/platform-feed-input-example/platform-feed-input-example.component';
 import * as feedInputPlaceholderH from '!raw-loader!./platform-feed-input-examples/platform-feed-input-placeholder-example/platform-feed-input-placeholder-example.component.html';
 import * as feedInputNoAvatarH from '!raw-loader!./platform-feed-input-examples/platform-feed-input-no-avatar-example/platform-feed-input-no-avatar-example.component.html';
 import * as feedInputDisabledH from '!raw-loader!./platform-feed-input-examples/platform-feed-input-disabled-example/platform-feed-input-disabled-example.component.html';
@@ -24,7 +25,8 @@ export class PlatformFeedInputDocsComponent {
         {
             language: 'typescript',
             code: feedInputT,
-            fileName: 'platform-feed-input-example'
+            fileName: 'platform-feed-input-example',
+            component: 'PlatformFeedInputExampleComponent'
         }
     ];
 

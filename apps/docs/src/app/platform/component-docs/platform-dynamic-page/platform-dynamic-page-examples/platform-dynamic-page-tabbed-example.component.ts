@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angu
 import { DynamicPageCollapseChangeEvent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-dynamic-page-tabbed-example',
+    selector: 'fdp-platform-dynamic-page-tabbed-example',
     templateUrl: './platform-dynamic-page-tabbed-example.component.html',
     styleUrls: ['./platform-dynamic-page-tabbed-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,11 +22,13 @@ export class PlatformDynamicPageTabbedExampleComponent {
     openPage(): void {
         this.overlay.nativeElement.style.width = '100%';
         this.fullscreen = true;
+        document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
     }
     closePage(event: Event): void {
         event.stopPropagation();
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
+        document.getElementById('page-content').style.overflowY = 'auto';
     }
 
     onTabChanged(event: DynamicPageTabChangeEvent): void {

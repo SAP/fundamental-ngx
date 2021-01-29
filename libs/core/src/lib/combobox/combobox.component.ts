@@ -7,6 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    HostBinding,
     Injector,
     Input,
     OnChanges,
@@ -38,6 +39,7 @@ import { ListComponent } from '../list/list.component';
 import { FocusEscapeDirection } from '../utils/services/keyboard-support/keyboard-support.service';
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import {
+    BACKSPACE,
     CONTROL,
     DOWN_ARROW,
     ENTER,
@@ -49,6 +51,8 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
+
+let comboboxUniqueId = 0;
 
 /**
  * Allows users to filter through results and select a value.
@@ -84,6 +88,20 @@ import {
 })
 export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
 
+    /** Id for the Combobox. */
+    @Input()
+    comboboxId = `fd-combobox-${comboboxUniqueId++}`;
+
+    /** Aria-label for Combobox. */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: string = null;
+
+    /** Aria-Labelledby for element describing Combobox. */
+    @Input()
+    @HostBinding('attr.aria-labelledby')
+    ariaLabelledBy: string = null;
+
     /** Values to be filtered in the search input. */
     @Input()
     dropdownValues: any[] = [];
@@ -101,9 +119,21 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     @Input()
     placeholder: string;
 
+    /**
+     * Whether the Combobox is a Search Field
+     */
+    @Input()
+    isSearch = false;
+
     /** Icon to display in the right-side button. */
     @Input()
     glyph = 'navigation-down-arrow';
+
+    /**
+     * Whether to show the clear search term button when the Combobox is a Search Field
+     */
+    @Input()
+    showClearButton = true;
 
     /**
      *  The trigger events that will open/close the options popover.
@@ -214,6 +244,13 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** Whether or not to display the addon button. */
     @Input()
     showDropdownButton = true;
+
+    /**
+     * Whether or not to return results where the input matches the entire string. By default, only results that start
+     * with the input search term will be returned.
+     */
+    @Input()
+    includes = false;
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
@@ -357,6 +394,12 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             event.stopPropagation();
         } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
+            const acceptedKeys = !KeyUtil.isKeyCode(event, BACKSPACE)
+                && !KeyUtil.isKeyType(event, 'alphabetical')
+                && !KeyUtil.isKeyType(event, 'numeric');
+            if (this.isEmptyValue && acceptedKeys) {
+                this.listComponent.setItemActive(0);
+            }
         }
     }
 
@@ -390,6 +433,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         this.isOpenChangeHandle(false);
     }
 
+    get isEmptyValue(): boolean {
+        return this.inputText.trim().length === 0;
+    }
+
     /** Get the input text of the input. */
     get inputText(): string {
         return this.inputTextValue;
@@ -403,6 +450,23 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this._propagateChange();
         }
         this.onTouched();
+    }
+
+    /** Get the glyph value based on whether the combobox is used as a search field or not. */
+    get glyphValue(): string {
+        return this.isSearch ? 'search' : 'navigation-down-arrow';
+    }
+
+    /** @hidden */
+    _handleClearSearchTerm(): void {
+        this.inputTextValue = '';
+        this.inputTextChange.emit('');
+        this.displayedValues = this.dropdownValues;
+        if (!this.mobile) {
+            this._propagateChange();
+        }
+        this.onTouched();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -450,6 +514,9 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         this.isOpenChangeHandle(!this.open);
         this.searchInputElement.nativeElement.focus();
         this.filterHighlight = false;
+        if (this.open && this.listComponent) {
+            this.listComponent.setItemActive(0);
+        }
     }
 
     /** @hidden */
@@ -458,13 +525,13 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         if (this.mobile && !this.open) {
             this._resetDisplayedValues();
         }
-
         if (this.open !== isOpen) {
             this.open = isOpen;
             this.onTouched();
             this.openChange.emit(isOpen);
         }
 
+        
         if (!this.open && !this.mobile) {
             this.handleBlur();
             this.searchInputElement.nativeElement.focus();
@@ -536,7 +603,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             const searchLower = searchTerm.toLocaleLowerCase();
             return contentArray.filter((item) => {
                 if (item) {
-                    return this.displayFn(item).toLocaleLowerCase().includes(searchLower);
+                    const term = this.displayFn(item).toLocaleLowerCase();
+                    let retVal;
+                    this.includes ? retVal = term.includes(searchLower) : retVal = term.startsWith(searchLower);
+                    return retVal;
                 }
             });
         } else if (typeof searchTerm === 'object') {

@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PlatformObjectMarkerModule } from '@fundamental-ngx/platform';
-import {
-    ObjectMarkerExampleComponent,
-    ObjectMarkerIconAndTextClickableExampleComponent,
-    ObjectMarkerTextAndIconExampleComponent,
-    ObjectMarkerTextOnlyExampleComponent
-} from './object-marker-example/object-marker-example.component';
-import { ObjectMarkerHeaderComponent } from './object-marker-header/object-marker-header.component';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { PlatformObjectMarkerDocsComponent } from './platform-object-marker-docs.component';
-
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
+
+import { COMPONENTS } from './object-marker-example';
+import { ObjectMarkerHeaderComponent } from './object-marker-header/object-marker-header.component';
+import { PlatformObjectMarkerDocsComponent } from './platform-object-marker-docs.component';
 
 const routes: Routes = [
     {
@@ -29,11 +24,8 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         PlatformObjectMarkerDocsComponent,
-        ObjectMarkerExampleComponent,
         ObjectMarkerHeaderComponent,
-        ObjectMarkerTextAndIconExampleComponent,
-        ObjectMarkerTextOnlyExampleComponent,
-        ObjectMarkerIconAndTextClickableExampleComponent
+        ...COMPONENTS
     ],
     exports: [RouterModule],
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformObjectMarkerModule]

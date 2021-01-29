@@ -155,9 +155,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /** @hidden value of checkbox */
     private _checkboxValue: any;
 
-    /** @hidden state of checkbox, coming from CBG */
-    private _state: Status;
-
     constructor(
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,

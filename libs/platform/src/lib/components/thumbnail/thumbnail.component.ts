@@ -1,10 +1,13 @@
 import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { BaseComponent } from '../base';
 
 export interface Media {
     thumbnailUrl: string;
     mediaType: string;
     mediaUrl: string;
-    alt: string;
+    captionFile?: string;
+    audioDescFile?: string;
+    alt: string;    
     label: string;
     selected?: boolean;
 }
@@ -24,7 +27,7 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
     styleUrls: ['./thumbnail.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ThumbnailComponent implements OnInit {
+export class ThumbnailComponent extends BaseComponent implements OnInit {
 
     /** List of media objects to display. */
     @Input()

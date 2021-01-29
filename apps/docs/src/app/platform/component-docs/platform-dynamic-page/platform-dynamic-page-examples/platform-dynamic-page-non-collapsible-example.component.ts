@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ElementRef, ViewChild } from '@angu
 import { DynamicPageCollapseChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-dynamic-page-non-collapsible-example',
+    selector: 'fdp-platform-dynamic-page-non-collapsible-example',
     templateUrl: './platform-dynamic-page-non-collapsible-example.component.html',
     styleUrls: ['./platform-dynamic-page-non-collapsible-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,10 +24,12 @@ export class PlatformDynamicPageNonCollapsibleExampleComponent {
     openPage(): void {
         this.fullscreen = true;
         this.overlay.nativeElement.style.width = '100%';
+        document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
     }
     closePage(event: Event): void {
         event.stopPropagation();
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
+        document.getElementById('page-content').style.overflowY = 'auto';
     }
 }

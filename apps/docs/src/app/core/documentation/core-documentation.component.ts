@@ -65,6 +65,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/panel', name: 'Panel' },
             { url: 'core/popover', name: 'Popover' },
             { url: 'core/product-switch', name: 'Product Switch' },
+            { url: 'core/quick-view', name: 'Quick View' },
             { url: 'core/radio', name: 'Radio Button' },
             { url: 'core/rating-indicator', name: 'Rating Indicator' },
             { url: 'core/select', name: 'Select' },
@@ -82,7 +83,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/token', name: 'Token' },
             { url: 'core/toolbar', name: 'Toolbar' },
             { url: 'core/object-number', name: 'Object Number' },
-            { url: 'core/wizard', name: 'Wizard' }
+            { url: 'core/wizard', name: 'Wizard' },
+            { url: 'core/grid-list', name: 'Grid List' }
         ];
 
         this.layouts = [

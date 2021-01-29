@@ -1,0 +1,110 @@
+$block: fdp-value-help-dialog;
+
+.#{$block} {
+    .fd-dialog__body {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .fd-toolbar {
+        background: none;
+        border: none;
+    }
+    &__advanced-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .#{$block}-mobile & {
+            justify-content: flex-start;
+        }
+        .fd-toolbar {
+            padding: 0;
+        }
+    }
+    .fd-dialog__header {
+        box-shadow: none;
+        .fd-title {
+            display: flex;
+            align-items: center;
+            padding: .25rem 2rem;
+            min-height: 2.5rem;
+            border-bottom: 1px solid #d9d9d9;
+            border-bottom: 1px solid var(--sapGroup_TitleBorderColor, #d9d9d9);
+
+        }
+        .#{$block}__mobile-title {
+            display: flex;
+            border-bottom: 1px solid #d9d9d9;
+            border-bottom: 1px solid var(--sapGroup_TitleBorderColor, #d9d9d9);
+            .fd-title {
+                flex: 1 1 auto;
+                border: none;
+            }
+        }
+    }
+    &__tabs {
+        box-shadow: 0 .25rem .25rem -.25rem rgba(0,0,0,.15), inset 0 -.0625rem 0 0 #d9d9d9;
+        box-shadow: 0 .25rem .25rem -.25rem rgba(0,0,0,.15), inset 0 -.0625rem 0 0 var(--sapPageHeader_BorderColor, #d9d9d9);
+    }
+    .fd-dialog__header,
+    .fd-dialog__footer {
+        height: auto;
+        flex-direction: column;
+
+        &.fd-bar {
+            padding: 0;
+        }
+    }
+    &__content-holder {
+        padding: 0 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+    &__row {
+        padding: 1rem 2rem;
+        &.#{$block}__selection-row {
+            background-color: #efefef;
+            background-color: var(--sapContent_ForegroundColor, #efefef);
+            padding: .5rem 2rem .5rem 1rem;
+        }
+    }
+    &__tokens-wrapper {
+        margin: 0 0 0 2.75rem;
+    }
+    &__tokens {
+        display: flex;
+        align-items: center;
+        border: 1px solid #89919a;
+        border-color: var(--sapContent_ForegroundBorderColor, #89919a);
+        padding-right: 0.5rem;
+        border-radius: .25rem;
+        border-radius: var(--sapElement_BorderCornerRadius, .25rem);
+        background: none;
+
+        fd-tokenizer,
+        fd-toolbar {
+            flex: 1 1 auto;
+            overflow: hidden;
+            margin-right: .125rem;
+        }
+        &-clear {
+            height: auto;
+            min-width: 2rem;
+            padding: .125rem 0;
+            justify-content: center;
+        }
+    }
+    &__actions-row {
+        padding: .5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .fd-button {
+            margin-left: .5rem;
+        }
+    }
+}

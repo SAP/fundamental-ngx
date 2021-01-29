@@ -1,4 +1,5 @@
-<fd-form-group [isInline]="isInline" role="group" [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy">
+<fd-form-group [isInline]="isInline" role="group" [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy"
+    [attr.aria-required]="required">
     <ng-container *ngIf="!list">
         <ng-container *ngFor="let checkbox of contentCheckboxes; let i = index">
             <ng-container

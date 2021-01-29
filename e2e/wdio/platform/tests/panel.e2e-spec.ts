@@ -1,55 +1,65 @@
 import { PanelPo } from '../pages/panel.po';
 import panelPageContent from '../fixtures/appData/panel-page-content';
-import { webDriver } from '../../driver/wdio';
+import {
+    click,
+    getCSSPropertyByName,
+    getElementSize,
+    getText,
+    pause,
+    waitForClickable,
+    waitForElDisplayed,
+    waitForNotDisplayed,
+    waitForPresent
+} from '../../driver/wdio';
 
 describe('Verify Panel', () => {
     const panelPage = new PanelPo();
 
     beforeEach(() => {
         panelPage.open();
-    });
+    }, 1);
 
     it('should have fixed header', () => {
-        webDriver.waitElementToBePresentInDOM(panelPage.fixedPanelDescription);
+        waitForPresent(panelPage.fixedPanelDescription);
         // Checks that fixed panel has no expand button
-        expect(webDriver.waitForPresent(panelPage.fixedPanelDescription)).toBe(true);
+        expect(waitForPresent(panelPage.fixedPanelDescription)).toBe(true);
     });
 
     xit('should be expandable', () => {
-        const isVisibleContentBefore = webDriver.waitForDisplayed(panelPage.expandablePanelContent);
-        webDriver.click(panelPage.expandablePanelBtn);
-        webDriver.pause(3000);
-        const isInvisibleVisibleContentAfter = webDriver.waitForNotDisplayed(panelPage.expandablePanelContent);
+        const isVisibleContentBefore = waitForElDisplayed(panelPage.expandablePanelContent);
+        click(panelPage.expandablePanelBtn);
+        pause(3000);
+        const isInvisibleVisibleContentAfter = waitForNotDisplayed(panelPage.expandablePanelContent);
 
         expect(isVisibleContentBefore).toBe(true);
         expect(isInvisibleVisibleContentAfter).toBe(true);
-        expect(webDriver.getText(panelPage.expandablePanelTitle)).toBe(panelPageContent.expandable_panel_header);
+        expect(getText(panelPage.expandablePanelTitle)).toBe(panelPageContent.expandable_panel_header);
     });
 
     it('should compact be smaller than basic', () => {
-        const expandableBtnSize = webDriver.getElementSize(panelPage.expandablePanelBtn) as WebdriverIO.SizeReturn;
-        const compactBtnSize = webDriver.getElementSize(panelPage.compactPanelBtn) as WebdriverIO.SizeReturn;
+        const expandableBtnSize = getElementSize(panelPage.expandablePanelBtn);
+        const compactBtnSize = getElementSize(panelPage.compactPanelBtn);
 
         expect(expandableBtnSize.width).toBeGreaterThan(compactBtnSize.width);
         expect(expandableBtnSize.height).toBeGreaterThan(compactBtnSize.height);
     });
 
     it('should scroll content if height is fixed', async () => {
-        const contentRegionHeight = webDriver.getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value;
-        const contentActualHeight = webDriver.getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value;
+        const contentRegionHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value as string;
+        const contentActualHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value as string;
         expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
     });
 
     it('should action panel have clickable buttons example ', () => {
-        expect(webDriver.getText(panelPage.actionPanelBtn, 0).trim())
+        expect(getText(panelPage.actionPanelBtn, 0).trim())
             .toBe(panelPageContent.action_panel_edit_button);
-        expect(webDriver.waitForClickable(panelPage.actionPanelBtn, 0)).toBe(true);
-        expect(webDriver.getText(panelPage.actionPanelBtn, 1).trim())
+        expect(waitForClickable(panelPage.actionPanelBtn, 0)).toBe(true);
+        expect(getText(panelPage.actionPanelBtn, 1).trim())
             .toBe(panelPageContent.action_panel_delete_button);
-        expect(webDriver.waitForClickable(panelPage.actionPanelBtn, 1)).toBe(true);
+        expect(waitForClickable(panelPage.actionPanelBtn, 1)).toBe(true);
     });
 
     it('should be able to switch to rtl', () => {
-        panelPage.checkRtlSwitch(panelPage.rtlSwitcherArr, panelPage.exampleAreaContainersArr);
+        panelPage.checkRtlSwitch();
     });
 });

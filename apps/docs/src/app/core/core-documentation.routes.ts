@@ -298,6 +298,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'quick-view',
+                loadChildren: () =>
+                    import('./component-docs/quick-view/quick-view-docs.module').then(
+                        (m) => m.QuickViewDocsModule
+                    )
+            },
+            {
                 path: 'radio',
                 loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
             },
@@ -403,6 +410,10 @@ export const ROUTES: Routes = [
             {
                 path: 'wizard',
                 loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
+            },
+            {
+                path: 'grid-list',
+                loadChildren: () => import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
             }
         ]
     }

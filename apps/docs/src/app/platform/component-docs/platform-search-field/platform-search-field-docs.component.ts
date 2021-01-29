@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
+import * as platformSearchFieldExampleScss from '!raw-loader!./platform-search-field-examples/platform-search-field-example.component.scss';
 import * as platformBasicSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-basic-example.component.html';
-import * as platformBasicSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-basic-example.component.ts';
+import * as platformBasicSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-basic-example.component';
 import * as platformCategoriesSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-categories-example.component.html';
-import * as platformCategoriesSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-categories-example.component.ts';
+import * as platformCategoriesSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-categories-example.component';
 import * as platformDataSourceSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component.html';
-import * as platformDataSourceSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component.ts';
+import * as platformDataSourceSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component';
+import * as platformDataSourceSearchFieldServiceTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.service';
 
 @Component({
     selector: 'app-search-field',
     templateUrl: './platform-search-field-docs.component.html'
 })
-export class PlatformSearchFieldDocsComponent implements OnInit {
+export class PlatformSearchFieldDocsComponent {
     searchFieldBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -23,7 +26,8 @@ export class PlatformSearchFieldDocsComponent implements OnInit {
             language: 'typescript',
             code: platformBasicSearchFieldTsCode,
             fileName: 'platform-search-field-basic-example',
-            component: 'PlatformSearchFieldBasicExampleComponent'
+            component: 'PlatformSearchFieldBasicExampleComponent',
+            scssFileCode: platformSearchFieldExampleScss
         }
     ];
 
@@ -37,7 +41,8 @@ export class PlatformSearchFieldDocsComponent implements OnInit {
             language: 'typescript',
             code: platformCategoriesSearchFieldTsCode,
             fileName: 'platform-search-field-categories-example',
-            component: 'PlatformSearchFieldCategoriesExampleComponent'
+            component: 'PlatformSearchFieldCategoriesExampleComponent',
+            scssFileCode: platformSearchFieldExampleScss
         }
     ];
 
@@ -51,9 +56,15 @@ export class PlatformSearchFieldDocsComponent implements OnInit {
             language: 'typescript',
             code: platformDataSourceSearchFieldTsCode,
             fileName: 'platform-search-field-data-source-example',
-            component: 'PlatformSearchFieldDataSourceExampleComponent'
+            component: 'PlatformSearchFieldDataSourceExampleComponent',
+            scssFileCode: platformSearchFieldExampleScss
+        },
+        {
+            language: 'typescript',
+            code: platformDataSourceSearchFieldServiceTsCode,
+            fileName: 'platform-search-field-data-source-example',
+            service: true,
+            component: 'SearchFieldDataProvider'
         }
     ];
-
-    ngOnInit(): void {}
 }

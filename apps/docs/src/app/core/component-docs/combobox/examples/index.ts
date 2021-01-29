@@ -11,6 +11,8 @@ import { ComboboxHeightExampleComponent } from './combobox-height-example.compon
 import { ComboboxOpenControlExampleComponent } from './combobox-open-control-example.component';
 import { ComboboxSearchFunctionExampleComponent } from './combobox-search-function-example.component';
 import { ComboboxTemplateExampleComponent } from './combobox-template-example.component';
+import { ComboboxIncludesExampleComponent } from './combobox-includes-example.component';
+import { ComboboxSearchFieldExampleComponent } from './combobox-search-field-example.component'
 
 export * from './combobox-mobile/combobox-mobile-example.component';
 export * from './combobox-async-example.component';
@@ -25,6 +27,7 @@ export * from './combobox-height-example.component';
 export * from './combobox-open-control-example.component';
 export * from './combobox-search-function-example.component';
 export * from './combobox-template-example.component';
+export * from './combobox-search-field-example.component';
 
 export const examples = [
     ComboboxMobileExampleComponent,
@@ -39,5 +42,7 @@ export const examples = [
     ComboboxHeightExampleComponent,
     ComboboxOpenControlExampleComponent,
     ComboboxSearchFunctionExampleComponent,
-    ComboboxTemplateExampleComponent
+    ComboboxTemplateExampleComponent,
+    ComboboxIncludesExampleComponent,
+    ComboboxSearchFieldExampleComponent
 ];

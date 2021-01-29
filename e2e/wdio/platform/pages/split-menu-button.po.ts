@@ -1,6 +1,6 @@
 import { BaseComponentPo } from './base-component.po';
-import { webDriver } from '../../driver/wdio';
 import SMBData from '../fixtures/appData/split-menu-button-page-contents';
+import { getText, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SplitMenuButtonPo extends BaseComponentPo {
     private url = '/split-menu-button';
@@ -19,24 +19,22 @@ export class SplitMenuButtonPo extends BaseComponentPo {
     iconExArrowBtnArr = 'fdp-platform-split-button-icons-example button:nth-of-type(2)';
     iconBtnAttrArr = 'fdp-platform-split-button-icons-example fdp-split-menu-button';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     checkBtnSelectionChange(array, btnArray, expectation): void {
         for (let i = 0; i < array.length; i++) {
             array[i].click();
             const menuItemsArr = browser.$$(this.menuItemArr);
             menuItemsArr[1].click();
-            expect(webDriver.getText(btnArray, i)).toContain(expectation[i]);
+            expect(getText(btnArray, i)).toContain(expectation[i]);
         }
     }
 
     checkSelectionOutput(outputSelector, expectation): void {
-        expect(webDriver.getText(outputSelector)).toEqual(SMBData.outputLabel + expectation);
+        expect(getText(outputSelector)).toEqual(SMBData.outputLabel + expectation);
     }
 
     open(): void {
         super.open(this.url);
-        webDriver.waitForDisplayed(this.root);
+        waitForElDisplayed(this.root);
+        waitForPresent(this.arrowBtnArr);
     }
 }

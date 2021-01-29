@@ -1,4 +1,4 @@
-import { TableComponent } from '../table.component';
+import { Table } from '../table';
 import { CollectionSort } from '../interfaces';
 
 export interface SortChange {
@@ -7,9 +7,5 @@ export interface SortChange {
 }
 
 export class TableSortChangeEvent {
-    constructor(
-        public source: TableComponent,
-        public current: CollectionSort[],
-        public previous: CollectionSort[]
-    ) {}
+    constructor(public source: Table, public current: CollectionSort[], public previous: CollectionSort[]) {}
 }

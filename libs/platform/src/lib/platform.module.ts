@@ -36,10 +36,12 @@ import { PlatformObjectMarkerModule } from './components/object-marker/object-ma
 import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 import { PlatformTableModule } from './components/table/table.module';
 import { PlatformDatetimePickerModule } from './components/form/datetime-picker/datetime-picker.module';
+import { PlatformTimePickerModule } from './components/form/time-picker/time-picker.module';
 import { PlatformMultiInputMobileModule } from './components/form/multi-input/multi-input-mobile/multi-input-mobile.module';
 import { PlatformFeedInputModule } from './components/feed-input/feed-input.module';
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
+import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -49,6 +51,7 @@ import { PlatformApprovalFlowModule } from './components/approval-flow/approval-
         PlatformCheckboxModule,
         PlatformCheckboxGroupModule,
         PlatformDatePickerModule,
+        PlatformDynamicPageModule,
         PlatformSearchFieldModule,
         PlatformActionBarModule,
         PlatformActionButtonGroupModule,
@@ -74,6 +77,7 @@ import { PlatformApprovalFlowModule } from './components/approval-flow/approval-
         PlatformObjectAttributeModule,
         PlatformTableModule,
         PlatformDatetimePickerModule,
+        PlatformTimePickerModule,
         PlatformMultiInputModule,
         PlatformMultiInputModule,
         PlatformMultiInputMobileModule,

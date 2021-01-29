@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ROUTES } from './core-documentation.routes';
@@ -15,7 +16,6 @@ import {
     MULTI_INPUT_MOBILE_CONFIG,
     SELECT_MOBILE_CONFIG
 } from '../documentation/utilities/consts';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DocsThemeService } from '../documentation/services/docs-theme.service';
 
 @NgModule({
