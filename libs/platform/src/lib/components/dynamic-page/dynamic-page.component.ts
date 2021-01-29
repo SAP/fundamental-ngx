@@ -16,6 +16,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { TabPanelComponent } from '@fundamental-ngx/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, startWith, throttleTime } from 'rxjs/operators';
 import { BaseComponent } from '../base';
@@ -441,8 +442,8 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /** @hidden
      * handle tab changes and emit event
      */
-    _handleTabChange(index: number): void {
-        const event = new DynamicPageTabChangeEvent(this.contentComponent, index);
+    _handleTabChange(tabPanel: TabPanelComponent): void {
+        const event = new DynamicPageTabChangeEvent(this.contentComponent, tabPanel);
         this.contentComponent.tabChange.emit(event);
         this._cd.detectChanges();
     }
