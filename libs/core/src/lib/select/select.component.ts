@@ -22,27 +22,26 @@ import {
     Attribute,
     NgZone,
     SimpleChanges,
-    OnChanges
+    OnChanges,
+    Self
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { ControlValueAccessor, NgControl} from '@angular/forms';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
-import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
 import { startWith, takeUntil, switchMap } from 'rxjs/operators';
 import { SelectionModel } from '@angular/cdk/collections';
-
-import { PopperOptions } from 'popper.js';
 
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { DialogConfig } from '../dialog/utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
-import { SelectSelectionModelService } from './select-selection-model.service';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { OptionComponent, FdOptionSelectionChange } from './option/option.component';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
+import { RtlService } from '../utils/services/rtl.service';
 
 let selectUniqueId = 0;
 
@@ -50,10 +49,6 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
 
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 
-export interface OptionStatusChange {
-    option: OptionComponent,
-    controlChange: boolean
-}
 /** The height of the select items in `rem` units. */
 export const SELECT_ITEM_HEIGHT_EM = 3;
 
@@ -82,8 +77,7 @@ export class FdSelectChange {
             provide: SELECT_COMPONENT,
             useExisting: SelectComponent
         },
-        SelectKeyManagerService,
-        SelectSelectionModelService
+        SelectKeyManagerService
     ]
 })
 export class SelectComponent implements
@@ -139,7 +133,10 @@ export class SelectComponent implements
     @Input()
     compact = false;
 
-    /** Whether option components contain more than basic text. */
+    /** @deprecated
+     * it is handled internally by controlTemplate != null|undefined is
+     * Equal as extendedBodyTemplate as true.
+     * Whether option components contain more than basic text. */
     @Input()
     extendedBodyTemplate = false;
 
@@ -196,19 +193,6 @@ export class SelectComponent implements
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
 
-    /** Popper.js options of the popover. */
-    @Input()
-    popperOptions: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: true,
-                escapeWithReference: true,
-                boundariesElement: 'scrollParent'
-            }
-        }
-    };
-
     /** Event emitted when the popover open state changes. */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -247,11 +231,6 @@ export class SelectComponent implements
     @ViewChild('optionPanel', { read: ElementRef })
     _optionPanel: ElementRef;
 
-      /** Text value displayed
-     * @hidden
-     * in select control */
-    _selectViewValue: string;
-
     /** Whether popover is opened
      * @hidden
      */
@@ -270,10 +249,10 @@ export class SelectComponent implements
     _calculatedMaxHeight: number;
 
     /** @hidden */
-    _triggerRect: ClientRect;
+    _rtl = false;
 
     /** @hidden */
-    _ngZone: NgZone;
+    _selectionModel: SelectionModel<OptionComponent>
 
     /** @hidden
     * Triggers when component is destroyed
@@ -314,9 +293,9 @@ export class SelectComponent implements
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         if (this._isOpen) {
-            this._KeySerivce._handleClosedKeydown(event);
+            this._keyManagerService._handleClosedKeydown(event);
         } else {
-            this._KeySerivce._handleOpenKeydown(event);
+            this._keyManagerService._handleOpenKeydown(event);
         }
     }
 
@@ -327,7 +306,7 @@ export class SelectComponent implements
     }
 
     get selected(): OptionComponent {
-        return this._selectionService._selectionModel.selected[0];
+        return this._selectionModel.selected[0];
     }
 
     /**
@@ -335,7 +314,7 @@ export class SelectComponent implements
     */
     get triggerValue(): string {
         const emptyValue = ' ';
-        if (this._selectionService.empty) {
+        if (this._selectionModel.isEmpty()) {
             return this.placeholder || emptyValue;
         }
         return this.selected.viewValue || this.placeholder || emptyValue;
@@ -353,10 +332,6 @@ export class SelectComponent implements
     /** Whether control can be interacted with */
     get isInteractive(): boolean {
         return !(this.readonly || this.disabled);
-    }
-
-    get isCancelableMobileSelect(): boolean {
-        return this.mobile && !!this.mobileConfig.approveButtonText
     }
 
     /**
@@ -378,7 +353,7 @@ export class SelectComponent implements
         );
     }
 
-    /** @hidden */
+    // /** @hidden */
      _compareWith = (o1: any, o2: any) => o1 === o2;
     /**
      * Function to compare the option values with the selected values.
@@ -392,7 +367,7 @@ export class SelectComponent implements
             throw Error('compareWith` must be a function.');
         }
         this._compareWith = fn;
-        if (this._selectionService._selectionModel) {
+        if (this._selectionModel) {
             // A different comparator means the selection could change.
             this._initializeSelection();
         }
@@ -406,19 +381,14 @@ export class SelectComponent implements
         return this._maxHeight || this._calculatedMaxHeight;
     }
 
-
-
     constructor(
-        public viewportRuler: ViewportRuler,
         private _elementRef: ElementRef,
         @Attribute('tabindex') _tabIndex: string,
-        public dir: Directionality,
-        public _KeySerivce: SelectKeyManagerService,
-        public _selectionService: SelectSelectionModelService,
+        @Optional() private _rtlService: RtlService,
+        private _keyManagerService: SelectKeyManagerService,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _dynamicComponentService: DynamicComponentService,
-        @Optional() public dialogConfig: DialogConfig,
-        @Optional() public ngControl: NgControl,
+        @Optional() @Self() private ngControl: NgControl,
         @Optional() private _injector: Injector
 
     ) {
@@ -438,7 +408,7 @@ export class SelectComponent implements
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._KeySerivce._initKeyManager(this);
+        this._keyManagerService._initKeyManager(this);
         this._setupMobileMode();
     }
 
@@ -449,8 +419,8 @@ export class SelectComponent implements
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes['typeaheadDebounceInterval'] && this._KeySerivce._keyManager) {
-            this._KeySerivce._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
+        if (changes['typeaheadDebounceInterval'] && this._keyManagerService._keyManager) {
+            this._keyManagerService._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
         } else if (changes['disabled']) {
             this._tabIndex = this.disabled ? -1 : 0;
         }
@@ -478,7 +448,6 @@ export class SelectComponent implements
         if (this.disabled || this.readonly || !this._options || !this._getItemCount() || this._isOpen) {
             return;
         }
-        this._triggerRect = this._controlElementRef.nativeElement.getBoundingClientRect();
         this._isOpen = true;
 
         this._controlElemFontSize = parseInt(
@@ -486,7 +455,7 @@ export class SelectComponent implements
             10
         );
 
-        this._KeySerivce._keyManager.withHorizontalOrientation(null);
+        this._keyManagerService._keyManager.withHorizontalOrientation(null);
         this._highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
 
@@ -496,7 +465,7 @@ export class SelectComponent implements
     close(forceClose: boolean = false): void {
         if (this._isOpen && (forceClose || this.close)) {
             this._isOpen = false;
-            this._KeySerivce._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
+            this._keyManagerService._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
             this.onTouched();
 
@@ -532,17 +501,17 @@ export class SelectComponent implements
 
     /** @hidden */
     _setSelectionByValue(value: any | any[]): void {
-        this._selectionService._selectionModel.clear();
+        this._selectionModel.clear();
         const correspondingOption = this._selectValue(value);
 
         // Shift focus to the active item. Note that we shouldn't do this in multiple
         // mode, because we don't know what option the user interacted with last.
         if (correspondingOption) {
-            this._KeySerivce._keyManager.setActiveItem(correspondingOption);
+            this._keyManagerService._keyManager.setActiveItem(correspondingOption);
         } else if (!this._isOpen) {
             // Otherwise reset the highlighted option. Note that we only want to do this while
             // closed, because doing it while open can shift the user's focus unnecessarily.
-            this._KeySerivce._keyManager.setActiveItem(-1);
+            this._keyManagerService._keyManager.setActiveItem(-1);
         }
 
         this._changeDetectorRef.markForCheck();
@@ -564,7 +533,7 @@ export class SelectComponent implements
         });
 
         if (correspondingOption) {
-            this._selectionService._selectionModel.select(correspondingOption);
+            this._selectionModel.select(correspondingOption);
         }
 
         return correspondingOption;
@@ -574,6 +543,13 @@ export class SelectComponent implements
     _popoverOpenChangeHandle(isOpen: boolean): void {
         isOpen ? this.open() : this.close();
     }
+
+      /** @hidden
+     * Returns _keyManagerService. */
+    _getKeyService(): SelectKeyManagerService {
+        return this._keyManagerService;
+    }
+
 
     /** @hidden */
     _setDisabledState(isDisabled: boolean): void {
@@ -585,13 +561,11 @@ export class SelectComponent implements
 
     /** @hidden */
     _highlightCorrectOption(): void {
-        if (this._KeySerivce._keyManager) {
-            if (this._selectionService.empty) {
-                this._KeySerivce._keyManager.setFirstItemActive();
-            } else {
-                this._KeySerivce._keyManager.setActiveItem(this.selected);
+        if (this._keyManagerService._keyManager && this._selectionModel.isEmpty()) {
+                this._keyManagerService._keyManager.setFirstItemActive();
+        } else if (this._keyManagerService._keyManager && !this._selectionModel.isEmpty()) {
+                this._keyManagerService._keyManager.setActiveItem(this.selected);
             }
-        }
     }
 
     /** @hidden */
@@ -646,21 +620,27 @@ export class SelectComponent implements
 
     /** @hidden */
     _initializeCommonBehavior(): void {
-        this._selectionService._selectionModel = new SelectionModel<OptionComponent>(false);
-        this._KeySerivce._component = this;
-        // this._selectionService._component = this;
+        this._selectionModel = new SelectionModel<OptionComponent>(false);
+        this._keyManagerService._component = this;
 
         this._updateCalculatedHeight();
     }
 
     /** @hidden */
     _isRtl(): boolean {
-        return this.dir ? this.dir.value === 'rtl' : false;
+        if (this._rtlService) {
+            this._subscriptions.add(
+                this._rtlService.rtl.subscribe(rtl => {
+                    this._rtl = rtl;
+                })
+            );
+        }
+        return this._rtl === true ? true : false;
     }
 
     /** @hidden */
     _registerEventsAfterContentInit(): void {
-        this._selectionService._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
+        this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
             event.added.forEach((option) => option._select());
             event.removed.forEach((option) => option._deselect());
         });
@@ -673,14 +653,14 @@ export class SelectComponent implements
 
     _handleKeydown(event: KeyboardEvent): void {
         if (!this.disabled && !this.readonly) {
-            this._isOpen ? this._KeySerivce._handleOpenKeydown(event) : this._KeySerivce._handleClosedKeydown(event);
+            this._isOpen ? this._keyManagerService._handleOpenKeydown(event) : this._keyManagerService._handleClosedKeydown(event);
         }
     }
 
     _getAriaActiveDescendant(): string | null {
 
-        if (this._isOpen && this._KeySerivce._keyManager && this._KeySerivce._keyManager.activeItem) {
-            return this._KeySerivce._keyManager.activeItem.id;
+        if (this._isOpen && this._keyManagerService._keyManager && this._keyManagerService._keyManager.activeItem) {
+            return this._keyManagerService._keyManager.activeItem.id;
         }
         return null;
     }
@@ -731,24 +711,24 @@ export class SelectComponent implements
      * Invoked when an option is clicked.
      */
     private _onSelect(option: OptionComponent, isUserInput: boolean): void {
-        const wasSelected = this._selectionService._selectionModel.isSelected(option);
+        const wasSelected = this._selectionModel.isSelected(option);
         if ((option.value === null || option.value === undefined) &&
             this.unselectMissingOption) {
             option._deselect();
-            this._selectionService._selectionModel.clear();
+            this._selectionModel.clear();
             this._emitSelectChange(option.value);
         } else {
             if (wasSelected !== option.selected) {
                 option.selected ?
-                this._selectionService._selectionModel.select(option) :
-                this._selectionService._selectionModel.deselect(option);
+                this._selectionModel.select(option) :
+                this._selectionModel.deselect(option);
             }
             if (isUserInput) {
-                this._KeySerivce._keyManager.setActiveItem(option);
+                this._keyManagerService._keyManager.setActiveItem(option);
             }
         }
 
-        if (wasSelected !== this._selectionService._selectionModel.isSelected(option) || this.mobile) {
+        if (wasSelected !== this._selectionModel.isSelected(option) || this.mobile) {
             this._emitSelectChange();
         }
     }
@@ -756,7 +736,7 @@ export class SelectComponent implements
     /** @hidden */
     private _emitSelectChange(defaultVal?: any): void {
         if (this.canEmitValueChange) {
-            this._internalValue = this._selectionService._selectionModel.selected
+            this._internalValue = this._selectionModel.selected
                 ? (this.selected as OptionComponent).value
                 : defaultVal;
             this.valueChange.emit(this._internalValue);

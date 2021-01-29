@@ -6,7 +6,6 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    InjectionToken,
     Input,
     OnDestroy,
     Output,
@@ -24,7 +23,7 @@ import {
 } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '../../utils/functions/key-util';
-import { SelectInterface } from '../select.interface';
+import { OptionsInterface } from '../options.interface';
 
 let optionUniqueId = 0;
 
@@ -40,12 +39,6 @@ export class FdOptionSelectionChange {
         readonly isUserInput = false
     ) { }
 }
-
-/**
- * Injection token used to provide the select component to options.
- */
-export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SELECT_COMPONENT');
-
 
 
 /**
@@ -81,7 +74,7 @@ export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SELECT_COMP
         `
     ]
 })
-export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOption {
+export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {
     /** Option id attribute */
     @Input()
     id = `fd-option-${optionUniqueId++}`;

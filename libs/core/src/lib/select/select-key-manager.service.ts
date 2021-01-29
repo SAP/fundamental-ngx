@@ -4,21 +4,22 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { KeyUtil } from '../utils/functions';
 import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, END, hasModifierKey } from '@angular/cdk/keycodes';
 
-import { OptionComponent } from './option/option.component';
+import { SelectInterface } from './select.interface';
+import { OptionsInterface } from './options.interface';
 
 
 @Injectable()
 export class SelectKeyManagerService {
 
-    _component: any;
-    _keyManager: ActiveDescendantKeyManager<OptionComponent>;
+    _component: SelectInterface;
+    _keyManager: ActiveDescendantKeyManager<OptionsInterface>;
 
     /**
     * Sets up a key manager to listen to keyboard events on the overlay panel.
     * @hidden
     */
-    _initKeyManager(_component: any): void {
-        this._keyManager = new ActiveDescendantKeyManager<OptionComponent>(this._component._options)
+    _initKeyManager(_component: SelectInterface): void {
+        this._keyManager = new ActiveDescendantKeyManager<OptionsInterface>(this._component._options)
             .withTypeAhead(this._component.typeaheadDebounceInterval)
             .withVerticalOrientation()
             .withHorizontalOrientation(this._component._isRtl() ? 'rtl' : 'ltr')
@@ -74,7 +75,7 @@ export class SelectKeyManagerService {
 
             // a11y Since the value has changed, we need to announce it.
             if (selectedOption && previouslySelectedOption !== selectedOption) {
-                this._component._liveAnnouncer.announce((selectedOption as OptionComponent).viewValue, 10000);
+                this._component._liveAnnouncer.announce((selectedOption as OptionsInterface).viewValue, 10000);
             }
         }
     }

@@ -32,9 +32,7 @@ class SelectTestComponent {
         this.isOpen = isOpen;
     }
 
-    constructor(public keyService: SelectKeyManagerService) {
-
-    }
+    constructor(public keyService: SelectKeyManagerService) {}
 }
 
 describe('SelectKeyManagerService', () => {
@@ -51,12 +49,13 @@ describe('SelectKeyManagerService', () => {
         TestBed.configureTestingModule({
             imports: [SelectModule],
             declarations: [SelectTestComponent],
+            providers: [SelectKeyManagerService]
         }).compileComponents();
 
         fixture = TestBed.createComponent(SelectTestComponent);
         _component = fixture.componentInstance;
         fixture.detectChanges();
-        service = _component.selectComponent._KeySerivce;
+        service = _component.selectComponent._getKeyService();
     });
 
     it('should be created', () => {

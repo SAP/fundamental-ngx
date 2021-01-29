@@ -81,7 +81,6 @@ export class SelectPlatformComponent extends CollectionBaseInput implements OnIn
             this._value = newValue;
             this.onChange(newValue);
             this.onTouched();
-           // this.valueChange.emit(newValue);
             this.cd.markForCheck();
         }
     }

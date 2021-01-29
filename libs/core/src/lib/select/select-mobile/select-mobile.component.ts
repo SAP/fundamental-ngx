@@ -48,7 +48,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     constructor(
         _elementRef: ElementRef,
         _dialogService: DialogService,
-        @Inject(SELECT_COMPONENT) public _selectComponent: SelectInterface,
+        @Inject(SELECT_COMPONENT) _selectComponent: SelectInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[],
 
     ) {

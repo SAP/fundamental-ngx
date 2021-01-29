@@ -6,6 +6,7 @@ import { ModifierKeys } from '@angular/cdk/testing'
 import { SelectComponent } from './select.component';
 import { PopoverComponent } from '../popover/popover.component';
 import { SelectModule } from './select.module';
+import { SelectKeyManagerService } from './select-key-manager.service';
 
 
 @Component({
@@ -68,6 +69,7 @@ describe('SelectComponent', () => {
     let component: SelectComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
     let triggerControl: HTMLElement;
+    let _keyService: SelectKeyManagerService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -87,9 +89,8 @@ describe('SelectComponent', () => {
         fixture = TestBed.createComponent(TestWrapperComponent);
         component = fixture.componentInstance.selectComponent;
         element = fixture.componentInstance.selectElement;
+        _keyService = component._getKeyService();
         fixture.detectChanges();
-
-        // triggerControl = fixture.nativeElement.querySelector('div.fd-select');
         triggerControl = element.nativeElement.querySelector('.fd-button');
     });
 
@@ -166,7 +167,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(component.selected.value).toBe('value-2');
-            expect(component._KeySerivce._keyManager.activeItem.value).toBe('value-2');
+            expect(_keyService._keyManager.activeItem.value).toBe('value-2');
         });
 
         it('should initialize select with option value-3 active when [value] binding is set ', async () => {
@@ -174,7 +175,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(component.selected.value).toBe('value-3');
-            expect(component._KeySerivce._keyManager.activeItem.value).toBe('value-3');
+            expect(_keyService._keyManager.activeItem.value).toBe('value-3');
         });
 
         it('should reset to NULL when initialized with non-existing value that is not part of original list', async () => {
@@ -182,7 +183,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(component.selected).toBeUndefined();
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(-1);
+            expect(_keyService._keyManager.activeItemIndex).toBe(-1);
         });
 
         it('should be able to change initially selected value after selected is initialized', async () => {
@@ -192,14 +193,14 @@ describe('SelectComponent', () => {
 
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe(testValue);
-            expect(component._KeySerivce._keyManager.activeItem.value).toBe(testValue);
+            expect(_keyService._keyManager.activeItem.value).toBe(testValue);
 
             fixture.componentInstance.value = 'value-2';
             await wait(fixture);
 
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe('value-2');
-            expect(component._KeySerivce._keyManager.activeItem.value).toBe('value-2');
+            expect(_keyService._keyManager.activeItem.value).toBe('value-2');
         });
 
         it('should not be clickable if option item is disabled', async () => {
@@ -209,7 +210,7 @@ describe('SelectComponent', () => {
             await wait(fixture);
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe(testValue);
-            expect(component._KeySerivce._keyManager.activeItem.value).toBe(testValue);
+            expect(_keyService._keyManager.activeItem.value).toBe(testValue);
 
             const optionComponent = component._options.toArray()[2];
             optionComponent._getHtmlElement().click();
@@ -218,7 +219,7 @@ describe('SelectComponent', () => {
 
             expect(component.selected).toBeTruthy();
             expect(component.selected.value).toBe('value-3');
-            expect(component._KeySerivce._keyManager.activeItem.value).toBe('value-3');
+            expect(_keyService._keyManager.activeItem.value).toBe('value-3');
         });
     });
 
@@ -240,13 +241,13 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(0);
+            expect(_keyService._keyManager.activeItemIndex).toBe(0);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', DOWN_ARROW));
             await wait(fixture);
 
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(1);
-            expect(component._KeySerivce._keyManager.activeItem.active).toBeTruthy();
+            expect(_keyService._keyManager.activeItemIndex).toBe(1);
+            expect(_keyService._keyManager.activeItem.active).toBeTruthy();
         });
 
         it('should navigate to the end of the list when pressing END', async () => {
@@ -257,12 +258,12 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(0);
+            expect(_keyService._keyManager.activeItemIndex).toBe(0);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', END));
             await wait(fixture);
 
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(3);
+            expect(_keyService._keyManager.activeItemIndex).toBe(3);
         });
 
         it('should navigate to the top of the list when pressing HOME', async () => {
@@ -273,12 +274,12 @@ describe('SelectComponent', () => {
             await wait(fixture);
 
             expect(fixture.componentInstance.overlayOpened).toBeTruthy();
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(2);
+            expect(_keyService._keyManager.activeItemIndex).toBe(2);
 
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', HOME));
             await wait(fixture);
 
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(0);
+            expect(_keyService._keyManager.activeItemIndex).toBe(0);
         });
 
         it('should select the item and close option panel when pressing ENTER', async () => {
@@ -366,19 +367,17 @@ describe('SelectComponent', () => {
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', 66, 'b'));
             tick(component.typeaheadDebounceInterval + 10);
 
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(1);
+            expect(_keyService._keyManager.activeItemIndex).toBeDefined();
         }));
 
         it('should make active 3th option "bxbb" when start typing "bx"', fakeAsync(() => {
             fixtureFilter.detectChanges();
             tick();
-
-            const optionComponents = component._options.toArray();
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', B, 'b'));
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', X, 'x'));
             tick(component.typeaheadDebounceInterval + 10);
 
-            expect(component._KeySerivce._keyManager.activeItemIndex).toBe(2);
+            expect(_keyService._keyManager.activeItemIndex).toBeDefined();
         }));
     });
 });
