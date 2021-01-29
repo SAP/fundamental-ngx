@@ -13,7 +13,7 @@ import {
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    scrollIntoView, waitForPresent
+    scrollIntoView, waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 describe('Link component test suite', function() {
@@ -102,11 +102,14 @@ describe('Link component test suite', function() {
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
         expect(isElementClickable(linkPage.truncatedLink)).toBe(true);
         linkPage.open();
+        waitForPresent(this.iconLink);
     });
 
     it('should check link navigation to new page', () => {
+        waitForElDisplayed(linkPage.iconLink);
         checkLinkTarget(linkPage.iconLink, googleLink, 'center img');
         linkPage.open();
+        waitForPresent(this.iconLink);
     }, 2);
 
     it('should check orientation', () => {
