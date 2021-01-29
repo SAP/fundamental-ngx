@@ -1,7 +1,8 @@
 import { LinkPo } from '../pages/link.po';
 import {
     defaultLink_alt_text,
-    googleLink, linkFocusState,
+    googleLink,
+    linkFocusState,
     standardLinksAltTextArray,
     truncatedLink_alt_text
 } from '../fixtures/appData/link-page-contents';
@@ -9,11 +10,13 @@ import {
     browserIsIEorSafari,
     click,
     getAttributeByName,
-    getCSSPropertyByName, getCurrentUrl,
+    getCSSPropertyByName,
+    getCurrentUrl,
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    scrollIntoView, waitForPresent
+    scrollIntoView,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Link component test suite', function() {
@@ -103,7 +106,7 @@ describe('Link component test suite', function() {
         expect(isElementClickable(linkPage.truncatedLink)).toBe(true);
     });
 
-    it('should check link navigation to new page', () => {
+    fit('should check link navigation to new page', () => {
         checkLinkTarget(linkPage.iconLink, googleLink, 'center img');
         linkPage.open();
     }, 2);
@@ -130,6 +133,7 @@ function checkLinkHover(element): void {
 }
 
 function checkLinkTarget(element, site: string, newPageElement): void {
+    scrollIntoView(element);
     click(element);
     waitForPresent(newPageElement);
     const newUrl = getCurrentUrl();
