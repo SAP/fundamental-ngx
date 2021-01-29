@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.25...v0.26.1-rc.26) (2021-01-29)
+
+### [0.26.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.24...v0.26.1-rc.25) (2021-01-29)
+
+
+### Bug Fixes
+
+* (Core) add fix for keeping the focus on the button for Carousel component ([#4496](https://github.com/SAP/fundamental-ngx/issues/4496)) ([72f7a4d](https://github.com/SAP/fundamental-ngx/commit/72f7a4d5fdc51c51764fd9877fdf916a39c7c4b7))
+
+### [0.26.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.23...v0.26.1-rc.24) (2021-01-28)
+
+
+### Bug Fixes
+
+* (platform) fix combobox styles ([f274174](https://github.com/SAP/fundamental-ngx/commit/f274174f1946cc107ed347efa1f43b79b6c2480f))
+
+### [0.26.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.22...v0.26.1-rc.23) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) Popover Focus trap ([#4494](https://github.com/SAP/fundamental-ngx/issues/4494)) ([cbbc790](https://github.com/SAP/fundamental-ngx/commit/cbbc790ced2741e8fdf9be73a25701b6d3c8ce5f))
+
+### [0.26.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.21...v0.26.1-rc.22) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) fix breadcrump overflow menu ([#4490](https://github.com/SAP/fundamental-ngx/issues/4490)) ([0089e1e](https://github.com/SAP/fundamental-ngx/commit/0089e1e70a2427f3bd76e2252dd81f53cad7fe53))
+
+### [0.26.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.20...v0.26.1-rc.21) (2021-01-28)
+
+
+### Bug Fixes
+
+* (Core) Input Group button focus ([#4492](https://github.com/SAP/fundamental-ngx/issues/4492)) ([d6e839f](https://github.com/SAP/fundamental-ngx/commit/d6e839f1fd210300ac5d7233b7e8b288dff64737))
+
 ### [0.26.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.19...v0.26.1-rc.20) (2021-01-27)
 
 
