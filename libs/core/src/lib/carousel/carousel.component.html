@@ -67,14 +67,16 @@
 
 <ng-template #buttonLeft>
     <button class="fd-button fd-carousel__button fd-carousel__button--left" [style.z-index]="1" data-slide="previous"
-        [attr.aria-label]="leftNavigationBtnLabel" (click)="previous()" [disabled]="leftButtonDisabled" [attr.title]="leftNavigationBtnLabel">
+            [attr.aria-label]="leftNavigationBtnLabel" (click)="previous(true); $event.stopPropagation();"
+            [disabled]="leftButtonDisabled" [attr.title]="leftNavigationBtnLabel">
         <i [class]="_isRtl() ? 'sap-icon--slim-arrow-right' : 'sap-icon--slim-arrow-left'"></i>
     </button>
 </ng-template>
 
 <ng-template #buttonRight>
     <button class="fd-button fd-carousel__button fd-carousel__button--right" data-slide="next"
-        [attr.aria-label]="rightNavigationBtnLabel" (click)="next()" [disabled]="rightButtonDisabled" [attr.title]="rightNavigationBtnLabel">
+            [attr.aria-label]="rightNavigationBtnLabel" (click)="next(true); $event.stopPropagation();"
+            [disabled]="rightButtonDisabled" [attr.title]="rightNavigationBtnLabel">
         <i [class]="_isRtl() ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"></i>
     </button>
 </ng-template>
