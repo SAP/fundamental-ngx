@@ -117,7 +117,7 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     private _active = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) { }
+    constructor(private _elementRef: ElementRef<HTMLElement>, private _changeDetectorRef: ChangeDetectorRef) { }
 
     /**@hidden
      *  Since select components could be using the option's label to display the selected values
