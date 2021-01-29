@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.24...v0.26.1-rc.25) (2021-01-29)
+
+
+### Bug Fixes
+
+* (Core) add fix for keeping the focus on the button for Carousel component ([#4496](https://github.com/SAP/fundamental-ngx/issues/4496)) ([72f7a4d](https://github.com/SAP/fundamental-ngx/commit/72f7a4d5fdc51c51764fd9877fdf916a39c7c4b7))
+
 ### [0.26.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.23...v0.26.1-rc.24) (2021-01-28)
 
 
