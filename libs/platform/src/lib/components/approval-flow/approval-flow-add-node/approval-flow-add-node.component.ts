@@ -1,21 +1,17 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-    QueryList,
-    TemplateRef,
-    ViewChild,
-    ViewChildren
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 
 import { DialogRef, FdDate } from '@fundamental-ngx/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { ApprovalDataSource, ApprovalNode, ApprovalTeam, ApprovalUser, displayUserFn } from '../public_api';
-import { ListComponent } from '../../list/public_api';
-import { StandardListItemComponent } from '../../list/standard-list-item/standard-list-item.component';
+import {
+    ApprovalDataSource,
+    ApprovalNode,
+    ApprovalTeam,
+    ApprovalUser,
+    displayUserFn,
+    filterByName
+} from '../public_api';
 import {
     ApprovalFlowAddNodeViewService,
     SELECT_TEAM,
@@ -47,7 +43,7 @@ const EVERYONE = 'Everyone on the team';
     styleUrls: ['./approval-flow-add-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ApprovalFlowAddNodeComponent implements OnInit {
+export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _nodeType = SERIAL;
 
@@ -73,6 +69,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     _filteredApprovers: ApprovalUser[] = [];
 
     /** @hidden */
+    _filteredTeams: ApprovalTeam[] = [];
+
+    /** @hidden */
     _selectedApprovers: ApprovalUser[] = [];
 
     /** @hidden */
@@ -82,16 +81,22 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     _selectedTeamMembers: ApprovalUser[] = [];
 
     /** @hidden */
+    _filteredTeamMembers: ApprovalUser[] = [];
+
+    /** @hidden */
     _userToShowDetails: ApprovalUser;
 
     /** @hidden */
     _userToShowDetailsData$: Observable<any>;
 
     /** @hidden */
+    _searchString = '';
+
+    /** @hidden */
     _displayUserFn = displayUserFn;
 
-    @ViewChild(ListComponent) list: ListComponent;
-    @ViewChildren(StandardListItemComponent) listItems: QueryList<StandardListItemComponent>;
+    /** @hidden */
+    private viewChangeSub: Subscription;
 
     constructor(public dialogRef: DialogRef, public viewService: ApprovalFlowAddNodeViewService, private _cdr: ChangeDetectorRef) {
     }
@@ -113,6 +118,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
+        this._setFilteredTeams(this._data.teams || []);
         this._data.approvalFlowDataSource.fetchApprovers()
             .pipe(take(1))
             .subscribe(approvers => {
@@ -130,23 +136,18 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
                 this._approverType = ANYONE;
             }
         }
+
+        this.viewChangeSub = this.viewService.onViewChange.subscribe(() => {
+            this._onSearchStringChange('');
+            this._cdr.detectChanges();
+        });
     }
 
     /** @hidden */
     _goToSelectMode(): void {
         this._selectMode = true;
-        this.viewService.setCurrentView(this._isSingleUserMode ? SELECT_USER : SELECT_TEAM);
+        this.viewService.setCurrentView(this._isSingleUserMode || this._data.isEdit ? SELECT_USER : SELECT_TEAM);
         this._cdr.detectChanges();
-        if (this._data.isEdit) {
-            setTimeout(() => {
-                const selectedApproversNames = this._selectedApprovers.map(approver => approver.name);
-                this.listItems.forEach(item => {
-                    item._selected = selectedApproversNames.includes(item.avatarTitle);
-                    this.list._onSelectionChanged({ target: item.itemEl.nativeElement } as Event)
-                });
-                this._cdr.detectChanges();
-            });
-        }
     }
 
     /** @hidden */
@@ -167,14 +168,11 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
 
     /** @hidden */
     _setSelectedTeam(team: ApprovalTeam): void {
-        console.log('_setSelectedTeam', team);
         this.viewService.selectTeam(team);
     }
 
     /** @hidden */
     _confirmSelectedTeam(): void {
-        console.log('_confirmSelectedTeam');
-        console.log('this.viewService.team', this.viewService.team);
         this._selectedTeam = this.viewService.team;
         this._data.node.approvalTeamId = this.viewService.team.id;
         this._data.node.isEveryoneApprovalNeeded = this._approverType === EVERYONE;
@@ -203,6 +201,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
         this.viewService.selectTeam(team);
         this.viewService.setCurrentView(VIEW_TEAM_MEMBERS);
         this._selectedTeamMembers = this._approvers.filter(user => team.members.includes(user.id));
+        this._setFilteredTeamMembers(this._selectedTeamMembers);
         this._cdr.detectChanges();
     }
 
@@ -210,6 +209,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     _exitTeamMembersMode(): void {
         this.viewService.setCurrentView(SELECT_TEAM);
         this.viewService.resetTeam();
+        this._setFilteredTeams(this._data.teams || []);
         this._selectedTeamMembers = [];
         this._cdr.detectChanges();
     }
@@ -223,20 +223,47 @@ export class ApprovalFlowAddNodeComponent implements OnInit {
     }
 
     /** @hidden */
-    _onSearchStringChange(searchString: string): void {
+    _onSearchStringChange(searchString = ''): void {
+        this._searchString = searchString;
         if (!searchString) {
             this._setFilteredApprovers(this._approvers);
+            this._setFilteredTeams(this._data.teams || []);
+            this._setFilteredTeamMembers(this._selectedTeamMembers);
             return;
         }
 
-        this._setFilteredApprovers(this._approvers.filter(
-            user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1
-        ));
+        if (this.viewService.isSelectUserMode) {
+            this._setFilteredApprovers(this._approvers.filter(user => filterByName(user, searchString)));
+        }
+
+        if (this.viewService.isSelectTeamMode) {
+            this._setFilteredTeams(this._data.teams.filter(team => filterByName(team, searchString)));
+        }
+
+        if (this.viewService.isTeamMembersMode) {
+            this._setFilteredTeamMembers(this._selectedTeamMembers.filter(user => filterByName(user, searchString)));
+        }
     }
 
     /** @hidden */
     _setFilteredApprovers(users: ApprovalUser[]): void {
         this._filteredApprovers = [...users];
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    _setFilteredTeams(teams: ApprovalTeam[]): void {
+        this._filteredTeams = [...teams];
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    _setFilteredTeamMembers(users: ApprovalUser[]): void {
+        this._filteredTeamMembers = [...users];
+        this._cdr.detectChanges();
+    }
+
+    ngOnDestroy(): void {
+        this.viewChangeSub.unsubscribe();
     }
 }

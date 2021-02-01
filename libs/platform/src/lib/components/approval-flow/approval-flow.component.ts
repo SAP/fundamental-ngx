@@ -85,6 +85,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Number of days before due date when status changes to `warning` with text 'Due in X days' */
     @Input() dueDateThreshold = 7;
 
+    /** A list of approval statuses that allow sending reminders to their approvers */
+    @Input() allowSendRemindersForStatuses: string[] = ['in progress', 'not started'];
+
     /** Whether the approval flow is editable */
     @Input() isEditAvailable = false;
 
@@ -204,6 +207,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const dialog = this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
                 node: node,
+                allowSendReminder: this.allowSendRemindersForStatuses.includes(node.status),
                 ...this._defaultDialogOptions
             }
         });
@@ -446,7 +450,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
         });
         dialog.afterClosed.subscribe((data: { node }) => {
-            const updatedNode = data.node;
+            const updatedNode = data?.node;
             if (!updatedNode) {
                 return;
             }

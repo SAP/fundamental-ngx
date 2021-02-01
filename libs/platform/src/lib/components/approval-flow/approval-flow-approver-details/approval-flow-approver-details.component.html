@@ -11,6 +11,7 @@
             </p>
             <fdp-search-field
                 *ngIf="!_userToShowDetails && _isListMode"
+                i18n-placeholder
                 placeholder="Search"
                 contentDensity="compact"
                 [suggestions]="[]"
@@ -40,9 +41,10 @@
                 fd-button
                 fd-dialog-decisive-button
                 fdType="emphasized"
+                i18n-label="@@platformApprovalFlowDialogButtonSendReminder"
                 label="Send reminder"
                 [compact]="true"
-                [disabled]="_isListMode && !_selectedUsers.length"
+                [disabled]="!_data.allowSendReminder || (_isListMode && !_selectedUsers.length)"
                 (click)="_sendReminder()">
             </button>
         </fd-dialog-footer-button>
@@ -53,6 +55,7 @@
                 fd-initial-focus
                 fd-dialog-decisive-button
                 fdType="transparent"
+                i18n-label="@@platformApprovalFlowDialogButtonCancel"
                 label="Cancel"
                 [compact]="true"
                 (click)="dialogRef.close('Cancel')">

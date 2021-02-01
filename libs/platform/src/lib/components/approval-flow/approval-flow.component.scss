@@ -7,10 +7,6 @@ $carousel-controls-height--edit-mode: 126px;
 .#{$block}__title {
     font-size: 1.125rem;
     font-weight: 400;
-
-    &[dir='rtl'] {
-        padding-right: .5rem;
-    }
 }
 
 .#{$block}__messages {
@@ -238,6 +234,13 @@ $carousel-controls-height--edit-mode: 126px;
     .fd-button--emphasized {
         margin-right: .5rem;
     }
+
+    &[dir='rtl'] {
+        .fd-button--emphasized {
+            margin-left: .5rem;
+            margin-right: auto;
+        }
+    }
 }
 
 fd-toolbar {
@@ -251,6 +254,19 @@ fd-toolbar {
         .#{$block}__toolbar-controls {
             button:not(:last-child) {
                 margin-right: .5rem;
+            }
+        }
+    }
+
+     &[dir='rtl'] {
+         .#{$block}__title {
+            padding-right: .5rem;
+         }
+
+         .#{$block}__toolbar-controls {
+            button:not(:last-child) {
+                margin-left: .5rem;
+                margin-right: auto;
             }
         }
     }

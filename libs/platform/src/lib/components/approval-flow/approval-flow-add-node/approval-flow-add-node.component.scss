@@ -29,18 +29,18 @@
                 padding-bottom: 1rem;
             }
 
-            fd-icon {
-                font-size: .875rem;
-                color: #0854A0;
-                color: var(--sapButton_IconColor, #0854A0);
-                position: relative;
-                cursor: pointer;
-                margin-right: .75rem;
-            }
-
             p {
                 font-size: 1rem;
                 margin: .65rem 0;
+
+                fd-icon {
+                    font-size: .875rem;
+                    color: #0854A0;
+                    color: var(--sapButton_IconColor, #0854A0);
+                    position: relative;
+                    cursor: pointer;
+                    margin-right: .75rem;
+                }
             }
 
             &.show-search {
@@ -57,14 +57,14 @@
             height: 433px;
             padding: 1rem;
 
-            //&.no-top-padding {
-            //    padding-top: 0;
-            //}
-
             fdp-list {
                 display: block;
                 margin-left: -1rem;
                 margin-right: -1rem;
+            }
+
+            &.approval-flow__dialog-body--auto-height {
+                height: auto;
             }
         }
 
@@ -76,6 +76,33 @@
 
             fd-avatar {
                 margin-left: .1875rem;
+            }
+        }
+    }
+
+    &[dir='rtl'] {
+        fd-dialog-header p fd-icon {
+            margin-right: 0;
+            margin-left: .75rem;
+        }
+
+        fd-avatar {
+            margin-right: 0;
+            margin-left: .652rem;
+        }
+
+        fdp-standard-list-item {
+            .fd-checkbox__label {
+                left: auto;
+                right: .3125rem;
+            }
+        }
+
+        fdp-approval-flow-team-list {
+            .fd-list__item {
+                padding-right: 2rem !important;
+                padding-left: 0!important;
+                cursor: pointer;
             }
         }
     }

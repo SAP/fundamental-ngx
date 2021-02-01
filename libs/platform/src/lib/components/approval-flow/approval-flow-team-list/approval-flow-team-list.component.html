@@ -1,4 +1,4 @@
-<fdp-list [hasByLine]="true" class="approval-flow__team-list">
+<fdp-list [hasByLine]="true" class="approval-flow__team-list" [attr.dir]="isRtl ? 'rtl' : 'ltr'">
     <fd-form-group>
         <div *ngFor="let team of teams; let i = index" fd-form-item>
             <fd-radio-button
@@ -19,7 +19,7 @@
                 (click)="showTeamDetails(team)"
             >
             </fdp-standard-list-item>
-            <fd-icon glyph="navigation-right-arrow"></fd-icon>
+            <fd-icon [glyph]="'navigation-' + (isRtl ? 'left' : 'right') + '-arrow'"></fd-icon>
         </div>
     </fd-form-group>
 </fdp-list>

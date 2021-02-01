@@ -21,6 +21,18 @@
             color: var(--sapButton_IconColor, #0854A0);
             cursor: pointer;
         }
+
+        fd-avatar {
+            color: #fff;
+            color: var(--sapBaseColor, #fff);
+        }
+    }
+
+    &[dir="rtl"] {
+        .fd-form-item fd-icon {
+            right: auto;
+            left: 1rem;
+        }
     }
 
 }

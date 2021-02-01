@@ -1,6 +1,7 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { ApprovalUser } from '@fundamental-ngx/platform';
 import { Observable } from 'rxjs';
+
+import { ApprovalUser } from '../interfaces';
 
 @Component({
     selector: 'fdp-approval-flow-user-details',

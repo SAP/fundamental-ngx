@@ -3,20 +3,20 @@
         *ngFor="let message of _messages; let i = index; trackBy: trackByFn"
         [type]="'success'"
         (onDismiss)="_dismissMessage(i)">
-        <ng-container [ngSwitch]="message.type">
+        <span [ngSwitch]="message.type">
 <!--            <ng-container *ngSwitchCase="'watchersChangeSuccess'" [ngTemplateOutlet]="watchersChangedSuccess"></ng-container>-->
             <ng-container *ngSwitchCase="'approverAddSuccess'" [ngTemplateOutlet]="approverAddSuccess"></ng-container>
             <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
             <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
             <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
             <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
-        </ng-container>
+        </span>
         <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()">Undo</a>
     </fd-message-strip>
 </div>
 
-<fd-toolbar [hasTitle]="true">
-    <h3 class="approval-flow__title" [attr.dir]="_dir">{{ title }}</h3>
+<fd-toolbar [hasTitle]="true" [attr.dir]="_dir">
+    <h3 class="approval-flow__title">{{ title }}</h3>
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
         <button *ngIf="!_isEditMode" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
         <ng-container *ngIf="_isEditMode">
@@ -45,6 +45,7 @@
         <fd-multi-input
             [compact]="true"
             [dropdownValues]="_usersForWatchersList"
+            i18n-placeholder
             placeholder="Search here..."
             [displayFn]="_displayUserFn"
             [showAllButton]="true"
@@ -114,7 +115,7 @@
         </div>
     </div>
 </div>
-<div class="approval-flow__edit-mode-footer" *ngIf="_isEditMode">
+<div class="approval-flow__edit-mode-footer" [attr.dir]="_dir" *ngIf="_isEditMode">
     <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_saveEditModeChanges()"></button>
     <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_exitEditMode()"></button>
 </div>

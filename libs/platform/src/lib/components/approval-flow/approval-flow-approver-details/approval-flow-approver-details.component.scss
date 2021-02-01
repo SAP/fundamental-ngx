@@ -19,18 +19,18 @@ $block: approval-flow-user-details;
                 padding-bottom: 1rem;
             }
 
-            fd-icon {
-                font-size: .875rem;
-                color: #0854A0;
-                color: var(--sapButton_IconColor, #0854A0);
-                position: relative;
-                cursor: pointer;
-                margin-right: .75rem;
-            }
-
             p {
                 font-size: 1rem;
                 margin: .65rem 0;
+
+                fd-icon {
+                    font-size: .875rem;
+                    color: #0854A0;
+                    color: var(--sapButton_IconColor, #0854A0);
+                    position: relative;
+                    cursor: pointer;
+                    margin-right: .75rem;
+                }
             }
 
             &.show-search {
@@ -63,24 +63,24 @@ $block: approval-flow-user-details;
                 margin-left: .1875rem;
             }
         }
-    }
-}
 
-[dir='rtl'] {
-    fd-avatar {
-        margin-right: 0;
-        margin-left: .652rem;
-    }
+        &[dir='rtl'] {
+            fd-avatar {
+                margin-right: 0;
+                margin-left: .652rem;
+            }
 
-    fd-icon {
-        margin-right: 0;
-        margin-left: .75rem;
-    }
+            fd-dialog-header p fd-icon {
+                margin-right: 0;
+                margin-left: .75rem;
+            }
 
-    fdp-standard-list-item::ng-deep {
-        .fd-checkbox__label {
-            left: auto;
-            right: .3125rem;
+            fdp-standard-list-item {
+                .fd-checkbox__label {
+                    left: auto;
+                    right: .3125rem;
+                }
+            }
         }
     }
 }

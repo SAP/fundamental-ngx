@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ApprovalTeam } from '@fundamental-ngx/platform';
+import { EventEmitter, Injectable } from '@angular/core';
+import { ApprovalTeam } from '../interfaces';
 
 export const SELECT_TEAM = 'SELECT_TEAM';
 export const SELECT_USER = 'SELECT_USER';
@@ -10,6 +10,8 @@ type ViewModes = 'SELECT_TEAM' | 'SELECT_USER' | 'VIEW_TEAM_MEMBERS' | 'USER_DET
 
 @Injectable()
 export class ApprovalFlowAddNodeViewService {
+    onViewChange = new EventEmitter();
+
     private currentView: ViewModes;
     private selectedTeam: ApprovalTeam;
 
@@ -35,10 +37,12 @@ export class ApprovalFlowAddNodeViewService {
 
     setCurrentView(view: ViewModes): void {
         this.currentView = view;
+        this.onViewChange.emit();
     }
 
     resetView(): void {
         this.currentView = undefined;
+        this.onViewChange.emit();
     }
 
     selectTeam(team: ApprovalTeam): void {

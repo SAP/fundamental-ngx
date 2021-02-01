@@ -173,6 +173,18 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             direction: ltr;
             text-align: right;
         }
+
+        .#{$block}__edit-controls {
+            .#{$block}__menu-button {
+                left: .5rem;
+                right: auto;
+            }
+
+            fd-checkbox {
+                right: .3rem;
+                left: auto;
+            }
+        }
     }
 
     &.cdk-drag-dragging {

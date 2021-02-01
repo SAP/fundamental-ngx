@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { ApprovalTeam } from '@fundamental-ngx/platform';
+import { ApprovalTeam } from '../interfaces';
 
 @Component({
     selector: 'fdp-approval-flow-team-list',
@@ -10,6 +10,7 @@ import { ApprovalTeam } from '@fundamental-ngx/platform';
 })
 export class ApprovalFlowTeamListComponent {
     @Input() teams: ApprovalTeam[] = [];
+    @Input() isRtl = false;
 
     @Output() onTeamClick = new EventEmitter<ApprovalTeam>();
     @Output() onTeamRadioClick = new EventEmitter<ApprovalTeam>();

@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { ApprovalProcess } from './approval-process';
 import { ApprovalNode } from './approval-node';
 import { ApprovalUser } from './approval-user';
-import { ApprovalTeam } from '@fundamental-ngx/platform';
+import { ApprovalTeam } from './approval-team';
 
 export interface ApprovalDataSource {
 

@@ -3,11 +3,12 @@ import { DialogRef } from '@fundamental-ngx/core';
 
 import { Observable } from 'rxjs';
 
-import { ApprovalDataSource, ApprovalNode, ApprovalUser } from '../public_api';
+import { ApprovalDataSource, ApprovalNode, ApprovalUser, filterByName } from '../public_api';
 
 interface DialogRefData {
     node?: ApprovalNode;
     watcher?: ApprovalUser;
+    allowSendReminder?: boolean;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
     rtl: boolean;
@@ -92,8 +93,6 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
             return;
         }
 
-        this._setListItems(this._data.node.approvers.filter(
-            user => user.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1
-        ));
+        this._setListItems(this._data.node.approvers.filter(user => filterByName(user, searchString)));
     }
 }
