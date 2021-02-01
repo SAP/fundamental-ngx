@@ -1,5 +1,4 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -44,8 +43,7 @@ let sliderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [SLIDER_VALUE_ACCESSOR]
 })
-export class SliderComponent
-    implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor, CssClassBuilder {
+export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, CssClassBuilder {
     /** Slider id, it has some default value if not set,  */
     @Input()
     @HostBinding('attr.id')
@@ -116,7 +114,7 @@ export class SliderComponent
     @Input()
     tickmarksBetweenLabels = 1;
 
-    /** 
+    /**
      * Slider mode.
      * Options include: 'single' | 'range'
      * The default is set to 'single'
@@ -199,7 +197,6 @@ export class SliderComponent
         this.onChange(value);
         this.onTouched();
 
-        this._cdr.markForCheck();
     }
 
     /** @hidden */
@@ -264,9 +261,6 @@ export class SliderComponent
     _tickMarks: SliderTickMark[] = [];
 
     /** @hidden */
-    _valuesBySteps: number[] = [];
-
-    /** @hidden */
     _sliderValueTargets = SliderValueTargets;
 
     /** @hidden */
@@ -274,6 +268,9 @@ export class SliderComponent
 
     /** @hidden */
     _isRtl = false;
+
+    /** @hidden */
+    private _valuesBySteps: number[] = [];
 
     /**
      * @hidden
@@ -292,16 +289,12 @@ export class SliderComponent
     /** @hidden */
     ngOnInit(): void {
         this._subscribeToRtl();
-        this.buildComponentCssClass();
-        this._checkIsInRangeMode();
         this._attachResizeListener();
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._constructTickMarks();
-        this._constructValuesBySteps();
         this._onResize();
+
+        if (this._valuesBySteps.length === 0) {
+            this._constructValuesBySteps();
+        }
     }
 
     /** @hidden */
@@ -411,7 +404,6 @@ export class SliderComponent
             this._setRangeHandleValueAndPosition(handleIndex, value);
 
             this.writeValue(this._constructRangeModelValue());
-            this._cdr.detectChanges();
         });
 
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
@@ -465,15 +457,12 @@ export class SliderComponent
 
         if (!this._isRange) {
             this.writeValue(newValue);
-            this._updatePopoversPosition();
-
-            return;
+        } else {
+            this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
+            this.writeValue(this._constructRangeModelValue());
         }
 
-        this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
-        this.writeValue(this._constructRangeModelValue());
         this._updatePopoversPosition();
-        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -505,16 +494,12 @@ export class SliderComponent
     }
 
     /** @hidden */
-    _updatePopoversPosition(): void {
-        this._popovers.forEach((popover) => popover.refreshPosition());
-    }
-
-    /** @hidden */
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
         const newValue = this._processNewValue(+value) as number;
         if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
             this.writeValue(newValue);
             this.handle.nativeElement.focus();
+            this._updatePopoversPosition();
 
             return;
         }
@@ -530,6 +515,15 @@ export class SliderComponent
         }
 
         this.writeValue(this._constructRangeModelValue());
+
+        this._updatePopoversPosition();
+    }
+
+    /** @hidden */
+    private _updatePopoversPosition(): void {
+        this._cdr.detectChanges();
+
+        this._popovers.forEach((popover) => popover.refreshPosition());
     }
 
     private _getCustomValuesPositions(value: SliderTickMark | SliderTickMark[]): number | number[] {
@@ -635,15 +629,15 @@ export class SliderComponent
     /** @hidden */
     private _onResize(): void {
         this._constructTickMarks();
-        this._cdr.detectChanges();
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
     private _constructValuesBySteps(): void {
         try {
-            this._valuesBySteps = Array((this.max - this.min) / this.step + 1)
-                .fill({})
-                .map((_, i) => Number((this.min + i * this.step).toFixed(2)));
+            this._valuesBySteps = Array.from({ length: (this.max - this.min) / this.step + 1 }, (_, i) =>
+                Number((this.min + i * this.step).toFixed(2))
+            );
         } catch (e) {}
     }
 
@@ -677,18 +671,14 @@ export class SliderComponent
             }
 
             if (tickMarksCount % 1 === 0) {
-                this._tickMarks = Array(tickMarksCount)
-                    .fill({})
-                    .map((_, i) => {
-                        const value = Math.round(i * this.step * 100) / 100;
-                        const position = (value / (this.max - this.min)) * 100;
+                this._tickMarks = Array.from({ length: tickMarksCount }, (_, i) => {
+                    const value = Math.round(i * this.step * 100) / 100;
+                    const position = (value / (this.max - this.min)) * 100;
 
-                        return { value: value, position: position, label: `${this.min + value}` };
-                    });
+                    return { value: value, position: position, label: `${this.min + value}` };
+                });
             }
         }
-
-        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -728,7 +718,6 @@ export class SliderComponent
         }
 
         this._progress = this._calcProgress(this._position as number, true);
-        this._cdr.markForCheck();
     }
 
     /** @hidden */
@@ -742,7 +731,7 @@ export class SliderComponent
 
         this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;
-            this._cdr.detectChanges();
+            this._cdr.markForCheck();
         });
     }
 }

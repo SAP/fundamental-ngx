@@ -15,8 +15,8 @@
                 <ng-container *ngFor="let tick of _tickMarks; index as i">
                     <div
                         class="fd-slider__tick"
-                        [style.left.%]="!_isRtl ? tick.position : null"
-                        [style.right.%]="_isRtl ? tick.position : null"
+                        [style.left.%]="tick.position"
+                        [style.transform]="'translateX(' + tick.position + '%)'"
                         [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
                             (_isRange
@@ -167,6 +167,8 @@
             tabindex="-1"
             type="text"
             [disabled]="disabled"
+            fd-only-digits
+            [decimal]="true"
             [style.width.ch]="('' + _popoverValueRef[target]).length + 2"
             class="fd-input fd-slider--tooltip {{ _popoverInputFieldClass }}"
             *ngIf="customValues?.length === 0 && tooltipMode === 'editable'"

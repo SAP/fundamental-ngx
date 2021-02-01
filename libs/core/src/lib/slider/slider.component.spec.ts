@@ -88,7 +88,6 @@ describe('SliderComponent', () => {
         fixture = TestBed.createComponent(TestSliderComponent);
         component = fixture.debugElement.componentInstance;
 
-        fixture.detectChanges();
         await whenStable(fixture);
 
         sliders = component.sliders.toArray();

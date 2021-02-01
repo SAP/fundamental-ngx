@@ -81,6 +81,7 @@ import { FeedInputModule } from './feed-input/feed-input.module';
 import { ObjectNumberModule } from './object-number/object-number.module';
 import { TitleModule } from './title/title.module';
 import { SliderModule } from './slider/public_api';
+import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -162,7 +163,8 @@ import { SliderModule } from './slider/public_api';
         MessageBoxModule,
         MessageToastModule,
         DynamicSideContentModule,
-        SliderModule
+        SliderModule,
+        OnlyDigitsModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })

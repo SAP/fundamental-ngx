@@ -4,13 +4,15 @@ import { FormsModule } from '@angular/forms';
 
 import { SliderComponent } from './slider.component';
 import { PopoverModule } from '../popover/popover.module';
+import { OnlyDigitsModule } from '../utils/public_api';
 
 @NgModule({
     declarations: [SliderComponent],
     imports: [
         CommonModule,
         PopoverModule,
-        FormsModule
+        FormsModule,
+        OnlyDigitsModule
     ],
     exports: [SliderComponent]
 })
