@@ -48,8 +48,8 @@ describe('Grid-list test suite', function() {
     });
 
     it('Verify each grid list contains product counter -> product counter should be displayed for all lists', () => {
-        const arr = getElementArrayLength(gridListsArray);
-        for (let i = 0; i < arr; i++) {
+        const arrLength = getElementArrayLength(gridListsArray);
+        for (let i = 0; i < arrLength; i++) {
             expect(getText(gridListsTitle, i)).toContain(productTitle);
         }
     });
@@ -57,8 +57,9 @@ describe('Grid-list test suite', function() {
     it('Verify grid list contains product counter', () => {
         let productsQuantityFromTitle = getText(deleteModeTitle).replace(/\D/g, '');
         const itemsArray = elementArray(gridListItemsByMode('delete'));
-        expect(productsQuantityFromTitle).toEqual(itemsArray.length.toString());
-        for (let i = 0; i < itemsArray.length; i++) {
+        const itemsArrayLength = itemsArray.length;
+        expect(productsQuantityFromTitle).toEqual(itemsArrayLength.toString());
+        for (let i = 0; i < itemsArrayLength; i++) {
             scrollIntoView(deleteItemButton);
             click(deleteItemButton);
             productsQuantityFromTitle = getText(deleteModeTitle).replace(/\D/g, '');
@@ -95,8 +96,8 @@ describe('Grid-list test suite', function() {
     });
 
     it('Verify selecting item in Single select mode component', () => {
-        const items = getElementArrayLength(singleSelectItems);
-        for (let i = 0; i < items; i++) {
+        const itemsLength = getElementArrayLength(singleSelectItems);
+        for (let i = 0; i < itemsLength; i++) {
             scrollIntoView(singleSelectItems, i);
             click(singleSelectItems, i);
             expect(getAttributeByName(singleSelectItems, classAttribute, i)).toContain(isSelected);
@@ -106,8 +107,8 @@ describe('Grid-list test suite', function() {
 
     // Temporarily skipped due to drag and drop flakiness
     xit('User should be able to replace items order by drag and drop', () => {
-        const itemsArr = getElementArrayLength(dragAndDropItems);
-        for (let i = 0; i < itemsArr - 1; i++) {
+        const itemsArrLength = getElementArrayLength(dragAndDropItems);
+        for (let i = 0; i < itemsArrLength - 1; i++) {
             const firstItemTitle = getText(dragAndDropItems, i);
             const secondItemTitle = getText(dragAndDropItems, i + 1);
             dragAndDrop(dragAndDropItems, i, dragAndDropItems, i + 1);
