@@ -89,7 +89,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
 
     it('button should be disabled', () => {
         const menubuttonElement = fixture.debugElement.query(By.css('button'));
-        expect(menubuttonElement.nativeElement.getAttribute('disabled')).toEqual('');
+        expect(menubuttonElement.nativeElement.hasAttribute('disabled')).toEqual(true);
     });
 
     it('button should be standard and contain Menu', () => {
