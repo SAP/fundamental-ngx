@@ -67,7 +67,7 @@ describe('Grid-list test suite', function() {
         }
     });
 
-    fit(`Verify states: Text should be in bold if item is on unread state, Error message should be displayed in footer if item is on 'error' state
+    it(`Verify states: Text should be in bold if item is on unread state, Error message should be displayed in footer if item is on 'error' state
     Locker button should be displayed in footer if item is on 'locked' state, Draft button should be displayed in footer if item is on 'draft' state`, () => {
         expect(getCSSPropertyByName(unreadStateItem, fontWeight).value).toBe(bold);
         expect(warningColor).toContain(getCSSPropertyByName(errorStateItem, color).value);
