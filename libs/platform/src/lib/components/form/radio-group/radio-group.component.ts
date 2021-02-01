@@ -219,7 +219,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
                 if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
                     firstEnabledButtonIndex = i;
                 }
-                button.click.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
+                button.checked.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
             });
             // accessibility requirement
             if (!this._selected && this.contentRadioButtons && firstEnabledButtonIndex > -1) {
@@ -247,6 +247,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
                 if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
                     firstEnabledButtonIndex = i;
                 }
+                button.checked.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
             });
             // accessibility requirement
             if (!this._selected && this.viewRadioButtons && firstEnabledButtonIndex > -1) {
