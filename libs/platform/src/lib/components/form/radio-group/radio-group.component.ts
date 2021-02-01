@@ -186,7 +186,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             // Need to do only once, when one radio is already selected
             if (this._selected && !this._activeItemSet) {
                 this.keyboardEventsManager.setActiveItem(this._selected);
-                this._activeItemSet = true
+                this._activeItemSet = true;
             }
             if (
                 event.keyCode === DOWN_ARROW ||
@@ -205,14 +205,27 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
      * subscribing to radio button clicked event
      */
     private _initContentRadioButtons(): void {
-        if (this.contentRadioButtons && this.contentRadioButtons.length > 0) {
-            let firstEnabledButtonIndex = -1;
-            this.keyboardEventsManager = new FocusKeyManager(this.contentRadioButtons)
-                .withWrap()
-                .withHorizontalOrientation('ltr');
+        this._initialSetup(this.contentRadioButtons);
+    }
 
-            this.contentRadioButtons.forEach((button, i) => {
-                this._setProperties(button);
+    /**
+     * Select radio button with provided value
+     */
+    private _initViewRadioButtons(): void {
+        this._initialSetup(this.viewRadioButtons);
+    }
+
+    private _initialSetup(radioButtons: QueryList<RadioButtonComponent>): void {
+        if (radioButtons && radioButtons.length > 0) {
+            let firstEnabledButtonIndex = -1;
+            this.keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
+
+            radioButtons.forEach((button, i) => {
+                if (this.list) {
+                    button.stateType = this.status;
+                } else {
+                    this._setProperties(button);
+                }
                 this._selectUnselect(button);
 
                 // finding first enabled button to set tabIndex=0
@@ -222,36 +235,8 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
                 button.checked.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
             });
             // accessibility requirement
-            if (!this._selected && this.contentRadioButtons && firstEnabledButtonIndex > -1) {
-                this.contentRadioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
-            }
-            this.onChange(this.value);
-        }
-    }
-
-    /**
-     * Select radio button with provided value
-     */
-    private _initViewRadioButtons(): void {
-        if (this.viewRadioButtons && this.viewRadioButtons.length > 0) {
-            let firstEnabledButtonIndex = -1;
-            this.keyboardEventsManager = new FocusKeyManager(this.viewRadioButtons)
-                .withWrap()
-                .withHorizontalOrientation('ltr');
-
-            this.viewRadioButtons.forEach((button, i) => {
-                button.stateType = this.status;
-                this._selectUnselect(button);
-
-                // finding first enabled button to set tabindex=0
-                if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
-                    firstEnabledButtonIndex = i;
-                }
-                button.checked.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
-            });
-            // accessibility requirement
-            if (!this._selected && this.viewRadioButtons && firstEnabledButtonIndex > -1) {
-                this.viewRadioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
+            if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
+                radioButtons.toArray()[firstEnabledButtonIndex].setTabIndex(0);
             }
             this.onChange(this.value);
         }
