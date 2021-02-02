@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.27...v0.26.1-rc.28) (2021-02-02)
+
+
+### Features
+
+* (Platform) Table Page Scrolling ([#4497](https://github.com/SAP/fundamental-ngx/issues/4497)) ([67a51c2](https://github.com/SAP/fundamental-ngx/commit/67a51c2d04eecab4c8eb2bbaaf7cf2c42feb3eb6))
+
 ### [0.26.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.26...v0.26.1-rc.27) (2021-01-31)
 
 ### [0.26.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.25...v0.26.1-rc.26) (2021-01-29)
