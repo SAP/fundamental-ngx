@@ -2,14 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VariantManagementComponent } from './variant-management.component';
 import {
-    BarModule, ButtonModule,
+    BarModule,
+    ButtonModule,
     CardModule,
     CheckboxModule,
     DialogModule,
-    FormModule, IconModule, InputGroupModule,
+    FormModule,
+    IconModule,
+    InputGroupModule,
     ListModule,
     PopoverModule,
-    SelectModule, TableModule, TitleModule,
+    SelectModule,
+    TableModule,
+    TitleModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
 import { RadioModule } from '../radio/radio.module';

@@ -1,11 +1,12 @@
 <fd-toolbar>
     <fd-variant-management
         [views]="views"
+        [settingsChanged]="settingsChanged"
         (saveViews)="saveViews($event)"
-        [currentView]="currentViewChanged"
         (currentViewChange)="applyViewSettings($event)"
     ></fd-variant-management>
 </fd-toolbar>
+<!--table with sorting field-->
 <table fd-table>
     <thead fd-table-header>
     <tr fd-table-row>
@@ -57,6 +58,3 @@
     </tr>
     </tbody>
 </table>
-
-
-<!--table with sorting field-->

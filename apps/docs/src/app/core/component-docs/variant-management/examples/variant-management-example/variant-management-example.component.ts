@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 
 interface ExampleRow {
@@ -36,13 +36,7 @@ export class VariantManagementExampleComponent implements OnInit {
     filterVal = '';
     open = false;
 
-    // activeView$: BehaviorSubject<any> = new BehaviorSubject<any>(
-    //     { filterVal: this.filterVal, ascending: this.ascending
-    // });
-
-    currentViewChanged$: Subject<any> = new Subject<any>();
-    // currentViewChanged$ = new EventEmitter<any>();
-    currentViewChanged = false;
+    settingsChanged = false;
 
     viewFilters = {
         filterVal: '',
@@ -81,22 +75,33 @@ export class VariantManagementExampleComponent implements OnInit {
     };
 
     _viewChange(): void {
-        // this.currentViewChanged$.emit(true);
-        this.currentViewChanged = true;
+        this.settingsChanged = true;
     }
 
     applyViewSettings(viewId: number): void {
-        this.currentViewChanged = false;
-        this.viewFilters = this.views.find(view => view.id === viewId).settings;
+        this.settingsChanged = false;
+        const viewToApply = this.views.find(view => view.id === viewId);
+        this.viewFilters = { ...viewToApply.settings };
     }
+    
+    saveViews(updatedViews: View[]): void {
+        const updateExist = this.views
+            .map(view => updatedViews
+                .find(updatedView => view.id === updatedView.id))
+            .filter(Boolean);
 
-    saveViews(views: View[]) {
-        console.log('update view', views);
+        if (updateExist.length) {
+            const updatedView = this.views.find(view => view.id === updatedViews[0].id);
+            updatedView.settings = this.viewFilters;
+        } else {
+            this.views.push({
+                ...updatedViews[0],
+                settings: this.viewFilters
+            });
+        }
     }
 
     ngOnInit(): void {
-        // this.activeFilters$ = new BehaviorSubject<any>(this.viewFilters);
-
         this.views = [
             {
                 id: 1,

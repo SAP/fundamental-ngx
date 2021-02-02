@@ -5,10 +5,22 @@ import {
     Input,
     OnChanges,
     OnInit,
-    Output, SimpleChanges,
+    Output,
+    SimpleChanges,
     TemplateRef
 } from '@angular/core';
 import { DialogService } from '../dialog/dialog-service/dialog.service';
+
+interface View {
+    id: number,
+    favorite: boolean,
+    name: string,
+    sharing: string,
+    autoApply: boolean,
+    default: boolean,
+    createdBy: string,
+    settings?: any;
+}
 
 @Component({
     selector: 'fd-variant-management',
@@ -18,28 +30,43 @@ import { DialogService } from '../dialog/dialog-service/dialog.service';
 })
 export class VariantManagementComponent implements OnInit, OnChanges {
     @Input()
-    views: any;
+    views: View[];
 
     @Input()
-    currentView: any;
+    settingsChanged: boolean;
 
     @Output()
-    currentViewChange = new EventEmitter<any>();
+    currentViewChange = new EventEmitter<number>();
 
     @Output()
-    saveViews = new EventEmitter<any>();
+    saveViews = new EventEmitter<View[]>();
 
-    /** @hidden */
     isViewsOpen = false;
-    confirmationReason: string;
 
     viewName: string;
 
-    _viewChanged = false;
+    viewChanged = false;
 
-    appliedView: any; // view
+    appliedView: View;
+
+    viewModel: any;
+
+    defaultViewId = 1;
 
     constructor(private _dialogService: DialogService) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('settingsChanged' in changes) {
+            this.viewChanged = this.settingsChanged;
+        }
+    }
+
+    ngOnInit(): void {
+        this.appliedView = this.views.find(view => view.default);
+        this.currentViewChange.emit(this.appliedView.id);
+
+        this.viewModel = {...this.appliedView};
+    }
 
     selectView(id: number): void {
         this.appliedView = this.views.find(view => view.id === id);
@@ -51,17 +78,14 @@ export class VariantManagementComponent implements OnInit, OnChanges {
         this.isViewsOpen = true;
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('currentView' in changes) {
-            this._viewChanged = this.currentView;
+    saveCurrentView(): void {
+        if (this.viewChanged) {
+            this.saveViews.emit([
+                this.appliedView
+            ]);
+            this.viewChanged = false;
+            this.isViewsOpen = false;
         }
-    }
-
-    ngOnInit(): void {
-        this.appliedView = this.views.find(view => view.default)
-        this.currentViewChange.emit(this.appliedView.id);
-
-        console.log(this.appliedView);
     }
 
     openDialog(dialog: TemplateRef<any>): void {
@@ -69,24 +93,33 @@ export class VariantManagementComponent implements OnInit, OnChanges {
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
             draggable: true,
-            width: '300px'
+            width: '320px'
+        });
+
+        dialogRef.afterClosed.subscribe(() => {
+            this.saveViews.emit([{
+                ...this.viewModel,
+                id: this.views[this.views.length - 1].id + 1
+            }]);
+                this.viewChanged = false;
+                this.appliedView = {...this.viewModel};
+            },
+            (error) => {
+                throw new Error('Dialog dismissed with result');
+            }
+        );
+    }
+
+    openManageDialog(dialog: TemplateRef<any>): void {
+        this.isViewsOpen = false;
+        const dialogRef = this._dialogService.open(dialog, {
+            responsivePadding: true,
+            draggable: true,
+            width: '1000px'
         });
 
         dialogRef.afterClosed.subscribe(
-            (result) => {
-                console.log('result', result);
-                this.saveViews.emit([
-                    {
-                        id: 2,
-                        favorite: false,
-                        name: 'Second View',
-                        sharing: 'Public',
-                        default: false,
-                        autoApply: true,
-                        createdBy: 'Self'
-                    }]
-                )
-            },
+            (result) => {},
             (error) => {
                 throw new Error('Dialog dismissed with result');
             }
