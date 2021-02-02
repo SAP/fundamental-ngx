@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './segmented-button-default-example.component.html'
 })
 export class SegmentedButtonDefaultExampleComponent {
-    value: string[] = ['first'];
+    value = 'first';
 }

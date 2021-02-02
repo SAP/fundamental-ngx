@@ -1,0 +1,23 @@
+<form [formGroup]="customForm">
+    <div style="margin-bottom: 1rem">
+        <h4>Forms</h4>
+        <fd-segmented-button formControlName="basic">
+            <button fd-button label="Left" value="first"></button>
+            <button fd-button label="Middle" value="second"></button>
+            <button fd-button label="Right" value="third"></button>
+        </fd-segmented-button>
+        <br>
+        <small>value: {{customForm.controls?.basic.value}} </small>
+    </div>
+
+    <div>
+        <h4>Disabled Forms</h4>
+        <fd-segmented-button formControlName="disabled">
+            <button fd-button label="Left" value="first"></button>
+            <button fd-button label="Middle" value="second"></button>
+            <button fd-button label="Right" value="third"></button>
+        </fd-segmented-button>
+        <br>
+        <small>value: {{customForm.controls?.disabled.value}} </small>
+    </div>
+</form>

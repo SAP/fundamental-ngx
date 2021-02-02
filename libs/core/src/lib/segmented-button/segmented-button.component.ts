@@ -1,9 +1,12 @@
 import {
     AfterContentInit,
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
-    ContentChildren, ElementRef, forwardRef,
-    HostBinding, Input,
+    ContentChildren,
+    forwardRef,
+    HostBinding,
+    Input,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -21,8 +24,10 @@ export const isDisabledClass = 'is-disabled';
  * Container for grouped buttons.
  *
  * ```html
- * <fd-segmented-button>
- *     <button fd-button>Button</button>
+ * <fd-segmented-button [(ngModel)]="value">
+ *     <button fd-button value="first">Button</button>
+ *     <button fd-button value="second">Button</button>
+ *     <button fd-button value="third">Button</button>
  * </fd-segmented-button>
  * ```
  */
@@ -44,6 +49,7 @@ export const isDisabledClass = 'is-disabled';
     ],
 })
 export class SegmentedButtonComponent implements AfterContentInit, ControlValueAccessor {
+    /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
     @Input()
     toggle = false;
 
@@ -55,7 +61,9 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     @ContentChildren(ButtonComponent)
     _buttons: QueryList<ButtonComponent>;
 
-    private _currentValue: any;
+    private _currentValue: string | string[];
+
+    private _isDisabled = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$ = new Subject<void>();
@@ -73,11 +81,14 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
        private _changeDetRef: ChangeDetectorRef
     ) {}
 
+    /** @hidden */
     ngAfterContentInit(): void {
         this._listenToButtonChanges();
+        this._setInitialState();
     }
 
-    writeValue(values: string[]): void {
+    /** @hidden */
+    writeValue(values: string[] | string): void {
         this._currentValue = values;
         this._pickButtonsByValues(values);
     }
@@ -103,8 +114,15 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
      * @param isDisabled Sets the value of the *disabled* property of the SegmentedButtons.
      */
     setDisabledState(isDisabled: boolean): void {
+        this._isDisabled = isDisabled;
         this._toggleDisableButtons(isDisabled);
         this._changeDetRef.detectChanges();
+    }
+
+    /** @hidden */
+    private _setInitialState(): void {
+        this._toggleDisableButtons(this._isDisabled);
+        this._pickButtonsByValues(this._currentValue);
     }
 
     /** @hidden */
@@ -117,6 +135,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         ;
     }
 
+    /** @hidden */
     private _listenToTriggerEvents(buttonComponent: ButtonComponent): void {
         const htmlElement = buttonComponent.elementRef().nativeElement;
 
@@ -134,6 +153,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         triggerEvents.pipe(takeUntil(refresh$)).subscribe(_ => this._handleTriggerOnButton(buttonComponent));
     }
 
+    /** @hidden */
     private _handleTriggerOnButton(buttonComponent: ButtonComponent): void {
         if (!this._isButtonDisabled(buttonComponent)) {
 
@@ -151,6 +171,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         }
     }
 
+    /** @hidden */
     private _toggleButton(buttonComponent: ButtonComponent): void {
         if (this._isButtonSelected(buttonComponent)) {
             this._deselectButton(buttonComponent);
@@ -159,7 +180,8 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         }
     }
 
-    private _pickButtonsByValues(values: string[]): void {
+    /** @hidden */
+    private _pickButtonsByValues(values: string | string[]): void {
         if (!this._buttons) {
             return;
         }
@@ -167,32 +189,50 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         this._getButtonsByValues(values).forEach(button => this._selectButton(button));
     }
 
-    private _getButtonsByValues(values: string[]): ButtonComponent[] {
-        return this._buttons
-            .filter(button =>
-                !!values.find(value => this._getButtonValue(button) === value)
-            );
+    /** @hidden */
+    private _getButtonsByValues(values: string | string[]): ButtonComponent[] {
+        if (!values) {
+            return [];
+        }
+
+        if (typeof values === 'string') {
+            return this._buttons.filter(button => this._getButtonValue(button) === values)
+        } else {
+            return this._buttons
+                .filter(button =>
+                    !!values.find(value => this._getButtonValue(button) === value)
+                );
+        }
     }
 
+    /** @hidden */
     private _selectButton(buttonComponent: ButtonComponent): void {
         buttonComponent.elementRef().nativeElement.classList.add(isSelectedClass);
         this._changeDetRef.detectChanges();
     }
 
+    /** @hidden */
     private _deselectButton(buttonComponent: ButtonComponent): void {
         buttonComponent.elementRef().nativeElement.classList.remove(isSelectedClass);
         this._changeDetRef.detectChanges();
     }
 
+    /** @hidden */
     private _isButtonSelected(buttonComponent: ButtonComponent): boolean {
         return buttonComponent.elementRef().nativeElement.classList.contains(isSelectedClass);
     }
 
+    /** @hidden */
     private _isButtonDisabled(buttonComponent: ButtonComponent): boolean {
         return buttonComponent.elementRef().nativeElement.classList.contains(isDisabledClass);
     }
 
+    /** @hidden */
     private _toggleDisableButtons(disable: boolean): void {
+        if (!this._buttons) {
+            return;
+        }
+
         if (disable) {
             this._buttons.forEach(button => button.elementRef().nativeElement.setAttribute('disabled', true));
         } else {
@@ -200,14 +240,28 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         }
     }
 
+    /** @hidden */
     private _getButtonValue(buttonComponent: ButtonComponent): string {
         return buttonComponent.elementRef().nativeElement.value;
     }
 
-    private _getValuesBySelected(): string[] {
-        return this._buttons
+    /** @hidden
+     * Returns values depending on selected state of buttons
+     */
+    private _getValuesBySelected(): string[] | string {
+        if (!this._buttons) {
+            return [];
+        }
+
+        const resButtons = this._buttons
             .filter(button => this._isButtonSelected(button))
             .map(button => this._getButtonValue(button))
         ;
+
+        if (!this.toggle) {
+            return resButtons.length === 1 ? resButtons[0] : null
+        } else {
+            return resButtons
+        }
     }
 }

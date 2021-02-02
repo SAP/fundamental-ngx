@@ -27,7 +27,7 @@ export class TestComponent {
     toggle = false;
 }
 
-fdescribe('SegmentedButtonComponent', () => {
+describe('SegmentedButtonComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -50,7 +50,7 @@ fdescribe('SegmentedButtonComponent', () => {
     });
 
     it('should select button, when value is changed', () => {
-        component.segmentedButton.writeValue(['first']);
+        component.segmentedButton.writeValue('first');
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
     });
@@ -71,19 +71,19 @@ fdescribe('SegmentedButtonComponent', () => {
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
-        expect(changeSpy).toHaveBeenCalledWith(['first']);
+        expect(changeSpy).toHaveBeenCalledWith('first');
     });
 
     it('should select button and deselect other button, when trigger event is performed on non-toggle mode', () => {
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
-        expect(component.segmentedButton['_currentValue']).toEqual(['first']);
+        expect(component.segmentedButton['_currentValue']).toEqual('first');
         component.secondButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeFalse();
         expect(component.secondButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
-        expect(component.segmentedButton['_currentValue']).toEqual(['second']);
+        expect(component.segmentedButton['_currentValue']).toEqual('second');
     });
 
     it('should select buttons, when trigger event is performed on toggle mode', () => {
@@ -100,16 +100,15 @@ fdescribe('SegmentedButtonComponent', () => {
     });
 
     it('should ignore trigger event on disabled', () => {
-        component.segmentedButton.toggle = true;
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
-        expect(component.segmentedButton['_currentValue']).toEqual(['first']);
+        expect(component.segmentedButton['_currentValue']).toEqual('first');
         component.secondButton.nativeElement.setAttribute('disabled', true);
         component.secondButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
-        expect(component.segmentedButton['_currentValue']).toEqual(['first']);
+        expect(component.segmentedButton['_currentValue']).toEqual('first');
     });
 
     it('should handle all trigger events', () => {
