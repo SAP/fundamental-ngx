@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.0...v0.26.2-rc.1) (2021-02-02)
+
+
+### Bug Fixes
+
+* (Core) Remove double mobile menu ([#4509](https://github.com/SAP/fundamental-ngx/issues/4509)) ([168a876](https://github.com/SAP/fundamental-ngx/commit/168a8763d27ba9d3ebe28eb5994a20201c46cb31))
+
 ### [0.26.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.28...v0.26.2-rc.0) (2021-02-02)
 
 ### [0.26.1](https://github.com/SAP/fundamental-ngx/compare/v0.26.1-rc.20...v0.26.1) (2021-01-28)
