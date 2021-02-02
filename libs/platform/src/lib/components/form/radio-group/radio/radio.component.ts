@@ -110,6 +110,10 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** @hidden */
     public valueChange(value: any): void {
+        if (this.disabled) {
+            return;
+        }
+
         this.currentValue = value;
         this.isChecked = this.currentValue === this.getValue();
         if (this.isChecked) {
