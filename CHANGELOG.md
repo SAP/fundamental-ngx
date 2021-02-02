@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.1...v0.26.2-rc.2) (2021-02-02)
+
+
+### Bug Fixes
+
+* (Platform) fix StackBlitz examples part 2 ([#4484](https://github.com/SAP/fundamental-ngx/issues/4484)) ([45a52de](https://github.com/SAP/fundamental-ngx/commit/45a52ded859e6fa3aa27c781cc2a7887ccab70b5))
+
 ### [0.26.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.0...v0.26.2-rc.1) (2021-02-02)
 
 
