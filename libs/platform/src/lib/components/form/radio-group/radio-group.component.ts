@@ -157,8 +157,8 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
      */
     ngAfterViewInit(): void {
         setTimeout(() => {
-            this._initContentRadioButtons();
-            this._initViewRadioButtons();
+            this._initialSetup(this.contentRadioButtons);
+            this._initialSetup(this.viewRadioButtons);
         });
         super.ngAfterViewInit();
     }
@@ -198,21 +198,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
                 this.keyboardEventsManager.onKeydown(event);
             }
         }
-    }
-
-    /**
-     * Initializing all content radio buttons with given properties and
-     * subscribing to radio button clicked event
-     */
-    private _initContentRadioButtons(): void {
-        this._initialSetup(this.contentRadioButtons);
-    }
-
-    /**
-     * Select radio button with provided value
-     */
-    private _initViewRadioButtons(): void {
-        this._initialSetup(this.viewRadioButtons);
     }
 
     private _initialSetup(radioButtons: QueryList<RadioButtonComponent>): void {
