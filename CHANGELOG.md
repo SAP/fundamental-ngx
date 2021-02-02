@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.2...v0.26.2-rc.3) (2021-02-02)
+
+
+### Bug Fixes
+
+* (Core) add fix for incorrect Shellbar overflowed counter position ([#4500](https://github.com/SAP/fundamental-ngx/issues/4500)) ([359cb9a](https://github.com/SAP/fundamental-ngx/commit/359cb9ae768d535e5d01f51f1fa6cb4f743f4eed))
+
 ### [0.26.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.1...v0.26.2-rc.2) (2021-02-02)
 
 
