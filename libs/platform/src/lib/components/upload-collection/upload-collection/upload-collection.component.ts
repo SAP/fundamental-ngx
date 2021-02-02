@@ -10,7 +10,7 @@ import { FilesValidatorService, FilesValidatorOutput } from '../services';
 import {
     UploadCollectionFile,
     UploadCollectionFolder,
-    ItemsPerPage,
+    ItemPerPage,
     UploadCollectionItem,
     UploadCollectionItemStatus,
     Message,
@@ -43,11 +43,11 @@ export class UploadCollectionComponent {
 
     /** Defines the number of items on the page */
     @Input()
-    get itemsPerPage(): number | ItemsPerPage[] {
+    get itemsPerPage(): number | ItemPerPage[] {
         return this._itemsPerPage;
     }
 
-    set itemsPerPage(value: number | ItemsPerPage[]) {
+    set itemsPerPage(value: number | ItemPerPage[]) {
         if (typeof value === 'number') {
             this._itemsPerPage = value;
             this._match();
@@ -188,7 +188,7 @@ export class UploadCollectionComponent {
     _itemsPerPage = 10;
 
     /** @hidden */
-    _itemsPerPageOptions: { label: number; default: boolean }[] = [];
+    _itemsPerPageOptions: ItemPerPage[] = [];
 
     /** @hidden */
     _totalItems = 0;
@@ -385,7 +385,8 @@ export class UploadCollectionComponent {
             backdropClickCloseable: false,
             height: '320px',
             data: {
-                currentFolder: this._getCurrentFolder()
+                currentFolder: this._getCurrentFolder(),
+                maxFilenameLength: this.maxFilenameLength
             }
         } as DialogConfig);
 
@@ -427,6 +428,7 @@ export class UploadCollectionComponent {
 
         const _activeItem = this._activeItem;
         const currentFolder = this._getCurrentFolder();
+        const movableItems = multiple ? this.selectedItems : [_activeItem];
         const dialogRef = this._dialogService.open(MoveToComponent, {
             responsivePadding: true,
             verticalPadding: false,
@@ -434,19 +436,26 @@ export class UploadCollectionComponent {
             height: '350px',
             data: {
                 items: this.dataSource.dataProvider.items,
-                currentFolder: currentFolder
+                currentFolder: currentFolder,
+                movableFolders: movableItems.filter((item) => item.type === 'folder'),
+                maxFilenameLength: this.maxFilenameLength
             }
         } as DialogConfig);
 
         dialogRef.afterClosed.pipe(take(1)).subscribe(
-            (data) => {
-                const items = multiple ? this.selectedItems : [_activeItem];
-
+            ({ selectedFolder, parentFolderId, folderName }) => {
                 const payload: MoveToEvent = {
-                    from: currentFolder || null,
-                    to: data.selectedFolder || null,
-                    items: items
+                    from: currentFolder,
+                    to: selectedFolder,
+                    items: movableItems
                 };
+
+                if (folderName) {
+                    payload.newFolder = {
+                        parentFolderId: parentFolderId,
+                        folderName: folderName
+                    };
+                }
 
                 this.dataSource
                     .moveTo(payload)
@@ -480,6 +489,10 @@ export class UploadCollectionComponent {
 
     /** @hidden */
     _downloadClicked(multiple?: boolean): void {
+        if (this.disabled) {
+            return;
+        }
+
         const _activeItem = { ...this._activeItem };
         const items = (multiple ? this.selectedItems : [_activeItem]) as UploadCollectionFile[];
 
@@ -567,11 +580,6 @@ export class UploadCollectionComponent {
     }
 
     /** @hidden */
-    _menuItemClosed(): void {
-        this._activeItem = null;
-    }
-
-    /** @hidden */
     _onDropzone(event: boolean): void {
         this._showDragDropArea = true;
         this._onDragDropArea = event;
@@ -602,7 +610,7 @@ export class UploadCollectionComponent {
 
     /** @hidden */
     _pageChanged(pageNumber: number): void {
-        if (!this.enablePagination) {
+        if (!this.enablePagination || this._currentPage === pageNumber) {
             return;
         }
 
@@ -619,6 +627,9 @@ export class UploadCollectionComponent {
         }
 
         this._itemsPerPage = value;
+        if (this._currentPage * this._itemsPerPage > this._totalItems) {
+            this._currentPage = Math.ceil(this._totalItems / this._itemsPerPage);
+        }
 
         this._match();
     }

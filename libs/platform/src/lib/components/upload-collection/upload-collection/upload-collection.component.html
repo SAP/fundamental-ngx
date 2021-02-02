@@ -237,7 +237,8 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="action" label="Action" *ngIf="!readonly">
+                <fdp-column name="action" *ngIf="!readonly">
+                    <fdp-table-header *fdpHeaderCellDef>Action</fdp-table-header>
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__actions">
                             <div class="fdp-upload-collection__actions--status">
@@ -269,13 +270,15 @@
                                 ></button>
                             </div>
 
-                            <fdp-button
-                                buttonType="transparent"
-                                glyph="overflow"
+                            <fdp-menu-button
+                                icon="overflow"
                                 contentDensity="compact"
-                                (buttonClicked)="_actionButton(item)"
+                                [disabled]="disabled"
+                                type="transparent"
                                 [fdpMenuTriggerFor]="menuActions"
-                            ></fdp-button>
+                                (buttonClicked)="_actionButton(item)"
+                            >
+                            </fdp-menu-button>
                         </div>
                     </fdp-table-cell>
                 </fdp-column>
@@ -330,15 +333,14 @@
                     <span i18n="@@platformUploadCollection.ResultsPerPage.Title">Results per page</span>
                     <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
                 </span>
-                <fdp-button
+                <fdp-menu-button
                     *ngIf="_itemsPerPageOptions.length > 0"
-                    buttonType="ghost"
-                    glyphPosition="after"
-                    glyph="navigation-down-arrow"
+                    type="ghost"
                     contentDensity="compact"
                     [fdpMenuTriggerFor]="itemsPerPageMenu"
                     [label]="itemsPerPage"
-                ></fdp-button>
+                >
+                </fdp-menu-button>
             </div>
         </div>
     </div>
@@ -352,8 +354,8 @@
     ></fdp-menu-item>
 </fdp-menu>
 
-<fdp-menu #menuActions xPosition="before" contentDensity="compact" (close)="_menuItemClosed()">
-    <fdp-menu-item [class.disabled]="disabled" (itemSelect)="_moveToClicked()">
+<fdp-menu #menuActions xPosition="before" contentDensity="compact">
+    <fdp-menu-item (itemSelect)="_moveToClicked()">
         <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
         <span i18n="@@platformUploadCollection.Btn.MoveTo">Move to</span>
     </fdp-menu-item>
@@ -362,12 +364,12 @@
             <fd-icon class="fdp-upload-collection__fd-icon" glyph="download"></fd-icon>
             <span i18n="@@platformUploadCollection.Btn.Download">Download</span>
         </fdp-menu-item>
-        <fdp-menu-item [class.disabled]="disabled" (itemSelect)="_openUpdateFileVersion()">
+        <fdp-menu-item (itemSelect)="_openUpdateFileVersion()">
             <fd-icon class="fdp-upload-collection__fd-icon" glyph="drill-up"></fd-icon>
             <span i18n="@@platformUploadCollection.Btn.UpdateVersion">Update version</span>
         </fdp-menu-item>
     </ng-container>
-    <fdp-menu-item [class.disabled]="disabled" (itemSelect)="_remove()">
+    <fdp-menu-item (itemSelect)="_remove()">
         <fd-icon class="fdp-upload-collection__fd-icon" glyph="delete"></fd-icon>
         <span i18n="@@platformUploadCollection.Btn.Remove">Remove</span>
     </fdp-menu-item>

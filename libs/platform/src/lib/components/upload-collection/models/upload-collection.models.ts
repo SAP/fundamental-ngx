@@ -35,7 +35,7 @@ export interface UploadCollectionFile {
     file?: File;
 }
 
-export interface ItemsPerPage {
+export interface ItemPerPage {
     label: number;
     default: boolean;
 }
