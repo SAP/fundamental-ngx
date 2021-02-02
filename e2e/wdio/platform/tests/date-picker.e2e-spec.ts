@@ -138,7 +138,8 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model', 7)).toEqual(datePickerTestData.date3);
     });
 
-    it('verify disable parts of Calender for selection', () => {
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/4553
+    xit('verify disable parts of Calender for selection', () => {
         click(datePickerPage.activeButtonDatePicker, 9);
         click(datePickerPage.dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model', 8)).toEqual(datePickerTestData.date1);
@@ -189,7 +190,7 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model')).toEqual(datePickerTestData.date);
         click(datePickerPage.activeButtonDatePicker, 1);
         expect(datePickerTestData.highlightedColor)
-            .toContain(getCSSPropertyByName(datePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value as string);
+            .toContain(getCSSPropertyByName(datePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
     it('verify selecting a year range navigates back to the year view', () => {
