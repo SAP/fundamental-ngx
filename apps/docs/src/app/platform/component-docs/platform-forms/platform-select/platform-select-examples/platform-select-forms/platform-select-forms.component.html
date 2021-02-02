@@ -1,0 +1,8 @@
+<fdp-form-group [multiLayout]="true" [noLabelLayout]="false" [formGroup]="customForm">
+    <fdp-form-field id="field" label="Array of Options" zone="zLeft"
+                    rank="1">
+                    <fdp-select placeholder="Select an option" formControlName="selectControl" [list]="option">
+                    </fdp-select>
+                    </fdp-form-field>
+                    </fdp-form-group>
+<small style="display: block">Value: {{customForm.controls.selectControl.value | json}}</small>

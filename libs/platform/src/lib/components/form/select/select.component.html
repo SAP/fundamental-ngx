@@ -2,7 +2,9 @@
            [glyph]="glyph"
            [compact]="compact"
            [disabled]="disabled"
+           [closeOnOutsideClick]="closeOnOutsideClick"
            [(value)]="value"
+           [controlTemplate]="controlTemplate"
            (valueChange)="onSelection($event)">
 
     <fd-option *ngIf="noSelectionString" [disabled]="false" [value]="null">

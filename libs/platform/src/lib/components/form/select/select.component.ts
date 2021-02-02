@@ -15,24 +15,21 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
 
-import { CollectionBaseInput } from '../form/collection-base.input';
-import { FormField } from '../form/form-field';
-import { FormFieldControl } from '../form/form-control';
+import { CollectionBaseInput } from '../collection-base.input';
+import { FormField } from '../form-field';
+import { FormFieldControl } from '../form-control';
 
 @Component({
     selector: 'fdp-select',
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => SelectPlatformComponent),
-            multi: true
-        }
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{
+        provide: FormFieldControl,
+        useExisting: forwardRef(() => SelectComponent),
+        multi: true }]
 })
-export class SelectPlatformComponent extends CollectionBaseInput implements OnInit, AfterContentInit {
+export class SelectComponent extends CollectionBaseInput implements OnInit, AfterContentInit {
     /**
      * Form element ID.
      * Todo: This should be moved to higher class that will be common to all input fields
@@ -58,6 +55,12 @@ export class SelectPlatformComponent extends CollectionBaseInput implements OnIn
      */
     @Input()
     noSelectionString: string;
+
+    @Input()
+    closeOnOutsideClick: boolean;
+
+    @Input()
+    controlTemplate: TemplateRef<any>;
 
     /**
      * custom option popup item template defined by app.

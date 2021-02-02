@@ -1,0 +1,8 @@
+<div class="example-btn-holder">
+    <button fd-button label="Add Option" (click)="addOption()"></button>
+    <button fd-button label="Remove Option" (click)="removeOption()"></button>
+</div>
+
+<fdp-select placeholder="Select an option" [(value)]="selectedValue" [closeOnOutsideClick]="false" [list]="option">
+</fdp-select>
+<small style="display: block;">Selected value: {{selectedValue | json }} </small>

@@ -1,0 +1,10 @@
+<fdp-select class="fd-select-popover-custom fd-popover-custom" placeholder="Select an option" [(value)]="selectedValue"
+[controlTemplate]="customSelectTemplate" [list]="option">
+</fdp-select>
+<ng-template #customSelectTemplate let-textValue let-selected="selected">
+    <div class="custom-select-trigger-styling">
+        <fd-icon glyph="action-settings"></fd-icon>
+        {{textValue}}
+        <span>{{selected.id}}</span>
+    </div>
+</ng-template>
