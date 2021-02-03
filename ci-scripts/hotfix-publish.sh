@@ -69,6 +69,7 @@ fi
 
 # Increment version on main
 if [[ $latest == "true" ]]; then
+  git stash
   git checkout $MASTER_BRANCH
   npm run std-version
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $MASTER_BRANCH > /dev/null;

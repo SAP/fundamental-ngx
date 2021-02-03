@@ -9,15 +9,8 @@
 }
 
 .fd-dynamic-page__header--not-collapsible {
-
-    .fd-dynamic-page__title-area.is-focus,
-    .fd-dynamic-page__title-area:focus {
-        outline: none;
-    }
-
     .fd-dynamic-page__title-area.is-hover,
     .fd-dynamic-page__title-area:hover {
-        background: inherit;
         cursor: default;
     }
 }

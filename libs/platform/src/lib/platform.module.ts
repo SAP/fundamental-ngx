@@ -42,7 +42,8 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
 import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
-import { PlatformValueHelpDialogModule } from './components/value-help-dialog/public_api';
+import { PlatformUploadCollectionModule } from './components/upload-collection';
+import { PlatformValueHelpDialogModule } from './components/value-help-dialog/value-help-dialog.module';
 import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, PlatformListModule, StandardListItemModule } from './components/list/public_api';
 
 @NgModule({
@@ -60,6 +61,7 @@ import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, Plat
         PlatformMenuModule,
         PlatformSelectModule,
         PlatformLinkModule,
+        PlatformListModule,
         PlatformRadioGroupModule,
         PlatformMenuButtonModule,
         PlatformSplitMenuButtonModule,
@@ -85,6 +87,8 @@ import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, Plat
         PlatformMultiInputMobileModule,
         PlatformFeedInputModule,
         PlatformFileUploaderModule,
+        PlatformUploadCollectionModule,
+        PlatformValueHelpDialogModule,
         PlatformAutoCompleteModule,
         PlatformApprovalFlowModule,
         PlatformValueHelpDialogModule,
