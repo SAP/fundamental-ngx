@@ -15,6 +15,6 @@ export interface SliderTickMark {
     position?: number;
 }
 
-export type CustomValues = Omit<SliderTickMark, 'position'>;
+export type CustomValue = Omit<SliderTickMark, 'position'>;
 
 export type ControlValue = number | number[] | SliderTickMark | SliderTickMark[];

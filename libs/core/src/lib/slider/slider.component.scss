@@ -58,6 +58,13 @@
             white-space: nowrap;
         }
     }
+
+    // IE11 workaround
+    &__alternative-tick-width {
+        .fd-slider__tick {
+            width: 1px;
+        }
+    }
 }
 
 [dir='rtl'] {

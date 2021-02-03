@@ -18,13 +18,15 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { Platform } from '@angular/cdk/platform';
+import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
 import { PopoverComponent } from '../popover/public_api';
-import { ControlValue, CustomValues, RangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
+import { ControlValue, CustomValue, RangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
 
 export const SLIDER_VALUE_ACCESSOR = {
@@ -69,7 +71,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Set Minimum value. */
     set min(value: number) {
-        if (((this.max - value) / this.step) % 1 !== 0) {
+        const newValue = coerceNumberProperty(value, this._min);
+        if (((this.max - newValue) / this.step) % 1 !== 0) {
             return;
         }
 
@@ -84,7 +87,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Set Maximum value. */
     set max(value: number) {
-        if (((value - this.min) / this.step) % 1 !== 0) {
+        const newValue = coerceNumberProperty(value, this._max);
+        if (((newValue - this.min) / this.step) % 1 !== 0) {
             return;
         }
 
@@ -99,7 +103,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Set Step value. */
     set step(value: number) {
-        if (((this.max - this.min) / value) % 1 !== 0) {
+        const newValue = coerceNumberProperty(value, this._step);
+        if (((this.max - this.min) / newValue) % 1 !== 0) {
             return;
         }
 
@@ -108,11 +113,25 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Jump value. */
     @Input()
-    jump = 10;
+    get jump(): number {
+        return this._jump;
+    }
+
+    /** Set Jump value. */
+    set jump(value: number) {
+        this._jump = coerceNumberProperty(value, this._jump);
+    }
 
     /** Put a label on every N-th tickmark. */
     @Input()
-    tickmarksBetweenLabels = 1;
+    get tickmarksBetweenLabels(): number {
+        return this._tickmarksBetweenLabels;
+    }
+
+    /** Set Tickmarks Between Labels value. */
+    set tickmarksBetweenLabels(value: number) {
+        this._tickmarksBetweenLabels = coerceNumberProperty(value, this._tickmarksBetweenLabels);
+    }
 
     /**
      * Slider mode.
@@ -132,7 +151,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Array of custom values to use for Slider. */
     @Input()
-    customValues: CustomValues[] = [];
+    customValues: CustomValue[] = [];
 
     /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
     @Input()
@@ -160,43 +179,20 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Set control value */
     set value(value: ControlValue) {
-        if (value === undefined || value === null) {
+        if (!this._isValidControlValue(value, this.value)) {
             return;
         }
 
-        if (typeof value === 'string') {
-            value = Number(value);
-        }
-
-        if (this.value === value) {
-            return;
-        }
-
-        let _position: number | number[] = value as number | number[];
-
-        if (this.customValues?.length > 0) {
-            this.min = 0;
-            this.max = this.customValues.length - 1;
-            this.step = 1;
-
-            _position = this._getCustomValuesPositions(value as SliderTickMark | SliderTickMark[]);
-        }
-
-        if (!this._isRange && typeof _position === 'number') {
-            this._progress = this._calcProgress(_position, true);
-        }
-
-        if (this._isRange && Array.isArray(_position) && this._handle1Value === 0 && this._handle2Value === 0) {
-            this._setRangeHandleValueAndPosition(RangeHandles.First, _position[0]);
-            this._setRangeHandleValueAndPosition(RangeHandles.Second, _position[1]);
+        if (this._isRange) {
+            this._initRangeMode(value as number[] | SliderTickMark[]);
+        } else {
+            this._initSingeMode(value as number | SliderTickMark);
         }
 
         this._value = value;
-        this._position = _position;
 
         this.onChange(value);
         this.onTouched();
-
     }
 
     /** @hidden */
@@ -226,15 +222,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
-
-    /** @hidden */
-    _min = 0;
-
-    /** @hidden */
-    _max = 100;
-
-    /** @hidden */
-    _step = 1;
 
     /** @hidden */
     _progress = 0;
@@ -270,6 +257,21 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     _isRtl = false;
 
     /** @hidden */
+    private _min = 0;
+
+    /** @hidden */
+    private _max = 100;
+
+    /** @hidden */
+    private _step = 1;
+
+    /** @hidden */
+    private _jump = 10;
+
+    /** @hidden */
+    private _tickmarksBetweenLabels = 1;
+
+    /** @hidden */
     private _valuesBySteps: number[] = [];
 
     /**
@@ -283,6 +285,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         private readonly _elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
+        private readonly _platform: Platform,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -331,7 +334,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             'fd-slider',
             this.disabled ? 'is-disabled' : '',
             this.showTicks && this.showTicksLabels ? 'fd-slider--with-labels' : '',
-            this.class
+            this.class,
+            this._platform.EDGE || this._platform.TRIDENT ? 'fd-slider__alternative-tick-width' : ''
         ];
     }
 
@@ -526,33 +530,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._popovers.forEach((popover) => popover.refreshPosition());
     }
 
-    private _getCustomValuesPositions(value: SliderTickMark | SliderTickMark[]): number | number[] {
-        if (!value) {
-            return;
-        }
-
-        if (Array.isArray(value)) {
-            const indexes = [];
-
-            for (const customValue of value) {
-                let customValueIndex = this.customValues.findIndex((item) => item.value === customValue.value);
-                if (!customValueIndex) {
-                    customValueIndex = indexes.length === 0 ? 0 : this.customValues.length - 1;
-                }
-
-                indexes.push(customValueIndex);
-            }
-
-            return indexes;
-        } else {
-            return this.customValues.findIndex((item) => item.value === value.value) || 0;
-        }
-    }
-
     /** @hidden */
     private _calculateValueFromPointerPosition(event: MouseEvent, takeCustomValue = true): number | SliderTickMark {
-        const { x, width } = this.trackEl.nativeElement.getBoundingClientRect();
-        let percentage = (event.clientX - x) / width;
+        const { left, width } = this.trackEl.nativeElement.getBoundingClientRect();
+        let percentage = (event.clientX - left) / width;
 
         if (this._isRtl) {
             percentage = 1 - percentage;
@@ -733,5 +714,121 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             this._isRtl = isRtl;
             this._cdr.markForCheck();
         });
+    }
+
+    /** @hidden */
+    private _isValidControlValue(currentValue: ControlValue, previousValue: ControlValue): boolean {
+        if (!currentValue && currentValue !== 0) {
+            return false;
+        }
+
+        if (_isNumberValue(currentValue)) {
+            currentValue = coerceNumberProperty(currentValue);
+        }
+
+        return previousValue !== currentValue;
+    }
+
+    /** @hidden */
+    private _initSingeMode(value: number | SliderTickMark): void {
+        if (this.customValues.length > 0) {
+            this._initSingeModeWithCustomValue(value as SliderTickMark);
+
+            return;
+        }
+
+        this._initSingeModeDefault(coerceNumberProperty(value, this.min));
+    }
+
+    /** @hidden */
+    private _initSingeModeDefault(value: number): void {
+        this._position = value;
+
+        this._progress = this._calcProgress(value, true);
+    }
+
+    /** @hidden */
+    private _initSingeModeWithCustomValue(sliderTickMark: SliderTickMark): void {
+        const value = (this._getCustomValuesPosition(sliderTickMark) as number) || this.min;
+
+        this._initSingeModeDefault(value);
+    }
+
+    /** @hidden */
+    private _initRangeMode(value: number[] | SliderTickMark[]): void {
+        if (this.customValues.length > 0) {
+            this._initRangeModeWithCustomValues(value as SliderTickMark[]);
+
+            return;
+        }
+
+        const firstHandle = coerceNumberProperty(value[0], this.min);
+        const secondHandle = coerceNumberProperty(value[1], this.max);
+
+        this._initRangeModeDefault([firstHandle, secondHandle]);
+    }
+
+    /** @hidden */
+    private _initRangeModeDefault([firstHandle, secondHandle]: number[]): void {
+        this._position = [firstHandle, secondHandle];
+
+        this._setRangeHandleValueAndPosition(RangeHandles.First, firstHandle);
+        this._setRangeHandleValueAndPosition(RangeHandles.Second, secondHandle);
+    }
+
+    /** @hidden */
+    private _initRangeModeWithCustomValues([firstHandle, secondHandle]: SliderTickMark[]): void {
+        const value = this._getCustomValuesPosition([firstHandle, secondHandle]) || [this.min, this.max];
+
+        this._initRangeModeDefault(value as number[]);
+    }
+
+    /** @hidden */
+    private _getCustomValuesPosition(value: SliderTickMark | SliderTickMark[]): number | number[] {
+        this.min = 0;
+        this.max = this.customValues.length - 1;
+        this.step = 1;
+
+        return this._getCustomValuesPositions(value);
+    }
+
+    /** @hidden */
+    private _getCustomValuesPositions(value: SliderTickMark | SliderTickMark[]): number | number[] {
+        if (!value || (value as SliderTickMark[]).length === 0) {
+            return this._isRange ? [0, this.customValues.length - 1] : 0;
+        }
+
+        if (Array.isArray(value)) {
+            let [firstHandle, secondHandle] = value;
+            if (!this._instanceOfCustomValue(firstHandle)) {
+                firstHandle = this.customValues[0];
+            }
+    
+            if (!this._instanceOfCustomValue(secondHandle)) {
+                secondHandle = this.customValues[this.customValues.length - 1];
+            }
+
+            const firstHandlePosition = this.customValues.findIndex((item) => item.value === firstHandle.value);
+            const secondHandlePosition = this.customValues.findIndex((item) => item.value === secondHandle.value);
+
+            const indexes = [
+                firstHandlePosition >= 0 ? firstHandlePosition : 0,
+                secondHandlePosition >= 0 ? secondHandlePosition : this.customValues.length - 1
+            ];
+
+            return indexes;
+        } else {
+            let firstHandle = value as SliderTickMark;
+            if (!this._instanceOfCustomValue(firstHandle)) {
+                firstHandle = this.customValues[0];
+            }
+
+            return this.customValues.findIndex((item) => item.value === firstHandle.value) || 0;
+        }
+    }
+
+    /** @hidden */
+    private _instanceOfCustomValue(object: any): object is CustomValue {
+        return !!object && 'value' in object && 'label' in object;
     }
 }

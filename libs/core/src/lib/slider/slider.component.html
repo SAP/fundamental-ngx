@@ -15,8 +15,8 @@
                 <ng-container *ngFor="let tick of _tickMarks; index as i">
                     <div
                         class="fd-slider__tick"
-                        [style.left.%]="tick.position"
-                        [style.transform]="'translateX(' + tick.position + '%)'"
+                        [style.left.%]="!_isRtl ? tick.position : null"
+                        [style.right.%]="_isRtl ? tick.position : null"
                         [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
                             (_isRange
