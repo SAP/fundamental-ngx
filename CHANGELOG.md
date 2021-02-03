@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.6...v0.26.2-rc.7) (2021-02-03)
+
+
+### Bug Fixes
+
+* (Core) set is-disabled class to disabled button ([#4499](https://github.com/SAP/fundamental-ngx/issues/4499)) ([83c2ca1](https://github.com/SAP/fundamental-ngx/commit/83c2ca1a2162b30cade9f2d6167f8f0bad7b1d2c))
+
 ### [0.26.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.5...v0.26.2-rc.6) (2021-02-03)
 
 
