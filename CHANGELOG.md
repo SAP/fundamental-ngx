@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.5...v0.26.2-rc.6) (2021-02-03)
+
+
+### Bug Fixes
+
+* (Core|Platform) Add missing modules in main global module ([#4506](https://github.com/SAP/fundamental-ngx/issues/4506)) ([4deb180](https://github.com/SAP/fundamental-ngx/commit/4deb180ae0f1948be36a5a80b0cf8812700648e9))
+
 ### [0.26.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.4...v0.26.2-rc.5) (2021-02-03)
 
 
