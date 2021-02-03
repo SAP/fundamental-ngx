@@ -17,7 +17,7 @@ import {
     template: '<ng-content></ng-content>',
     host: {
         '[class.fd-message-box__body]': 'true',
-        '[class.fd-message-box__body--no-vertical-padding]': '!messageBoxConfig.verticalPadding'
+        '[class.fd-message-box__body--no-vertical-padding]': '!messageBoxConfig || !messageBoxConfig.verticalPadding'
     },
     providers: [
         { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxBodyComponent, multi: true }

@@ -16,7 +16,7 @@ import { DIALOG_REF, DialogRef } from '../../dialog/utils/dialog-ref.class';
     templateUrl: 'dialog-body.component.html',
     host: {
         '[class.fd-dialog__body]': 'true',
-        '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding'
+        '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig || !dialogConfig.verticalPadding'
     }
 })
 export class DialogBodyComponent {
