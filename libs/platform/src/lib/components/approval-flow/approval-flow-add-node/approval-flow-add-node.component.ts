@@ -10,7 +10,8 @@ import {
     ApprovalTeam,
     ApprovalUser,
     displayUserFn,
-    filterByName
+    filterByName,
+    trackByFn
 } from '../public_api';
 import {
     ApprovalFlowAddNodeViewService,
@@ -25,6 +26,7 @@ interface AddNodeDialogRefData {
     showNodeTypeSelect?: boolean;
     node?: ApprovalNode;
     teams?: ApprovalTeam[];
+    nodeTarget?: string;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
     rtl: boolean;
@@ -40,7 +42,7 @@ const EVERYONE = 'Everyone on the team';
 @Component({
     selector: 'fdp-approval-flow-add-node',
     templateUrl: './approval-flow-add-node.component.html',
-    styleUrls: ['./approval-flow-add-node.component.scss'],
+    styleUrls: ['./approval-flow-add-node.component.scss', '../styles/approval-flow-dialog.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
@@ -96,6 +98,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _displayUserFn = displayUserFn;
 
     /** @hidden */
+    _trackByFn = trackByFn;
+
+    /** @hidden */
     private viewChangeSub: Subscription;
 
     constructor(public dialogRef: DialogRef, public viewService: ApprovalFlowAddNodeViewService, private _cdr: ChangeDetectorRef) {
@@ -109,6 +114,15 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     get _isSingleUserMode(): boolean {
         return this._approverType === SINGLE_USER;
+    }
+
+    /** @hidden */
+    get _isMainSubmitButtonDisabled(): boolean {
+        if (this._isSingleUserMode) {
+            return !this._selectedApprovers.length;
+        }
+
+        return !this._selectedTeam;
     }
 
     /** @hidden */
@@ -141,6 +155,16 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
             this._onSearchStringChange('');
             this._cdr.detectChanges();
         });
+
+        switch (this._data.nodeTarget) {
+            case 'before':
+            case 'after':
+                this._nodeType = SERIAL;
+                break;
+            case 'parallel':
+                this._nodeType = PARALLEL;
+                break;
+        }
     }
 
     /** @hidden */
@@ -263,6 +287,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         this._cdr.detectChanges();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.viewChangeSub.unsubscribe();
     }

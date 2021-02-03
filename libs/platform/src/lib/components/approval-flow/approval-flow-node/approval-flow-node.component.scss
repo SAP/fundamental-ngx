@@ -14,7 +14,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     background: #fff;
     background: var(--sapBaseColor, #fff);
     border-radius: 4px;
-    //border: 2px solid transparent;
     box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
     width: 278px;
     height: $node-height;
@@ -32,8 +31,8 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         &:before {
             content: '';
-            //width: calc(100% + 8rem);
-            width: calc(100% + 5.7rem);
+            //width: calc(100% + 5.7rem);
+            width: calc(100% + 3.7rem);
             height: 0;
             display: block;
             position: absolute;
@@ -43,18 +42,20 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             top: calc(50% - 1px);
         }
 
-        &.#{$block}--blank-top:after {
-            content: '';
-            //width: calc(100% + 8rem);
-            width: 1.6rem;
-            height: 0;
-            display: block;
-            position: absolute;
-            right: -3.7rem;
-            border-top: 2px dashed #89919A;
-            border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-            top: calc(50% - 1px);
-        }
+        //&.#{$block}--blank-top:before {
+        //    width: calc(100% + 4.7rem);
+        //}
+        //&.#{$block}--blank-top:after {
+        //    content: '';
+        //    width: 1.6rem;
+        //    height: 0;
+        //    display: block;
+        //    position: absolute;
+        //    right: -3.7rem;
+        //    border-top: 2px dashed #89919A;
+        //    border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+        //    top: calc(50% - 1px);
+        //}
     }
 
     &.#{$block}--line-before:before, &.#{$block}--line-after:after {
@@ -96,7 +97,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
     &.#{$block}--selected {
         background: #E5F0FA;
-        //border: 2px solid #0854A0;
         box-shadow: 0 0 0 2px #0854A0;
     }
 
@@ -117,22 +117,31 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}--in-parallel {
-        //.#{$block}__add--after {
-        //    right: -1.5rem;
-        //
-        //    & + .#{$block}__drop-zone {
-        //        right: -1.8rem;
-        //    }
-        //}
-
         .#{$block}__add--before {
-            //right: -1.5rem;
-
             & + .#{$block}__drop-zone {
                 left: -1.8rem;
             }
         }
     }
+
+    &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
+        .#{$block}__add--after {
+            right: -1.5rem;
+
+            & + .#{$block}__drop-zone {
+                right: -1.8rem;
+            }
+        }
+
+        &.#{$block}--blank:not(.#{$block}--blank-top):before {
+            width: calc(100% + 5.7rem);
+        }
+
+        &.#{$block}--blank.#{$block}--blank-top:before {
+            width: calc(100% + 7.7rem);
+        }
+    }
+
 
     &[dir='rtl'] {
         .#{$block}__avatar {
@@ -188,7 +197,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.cdk-drag-dragging {
-        .#{$block}__add, &:before, &:after {
+        .#{$block}__add, &:before, &:after, .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
             visibility: hidden;
         }
     }
@@ -313,7 +322,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
     &.#{$block}__add--before {
         left: -1.5rem;
-        //left: -2.5rem;
         right: auto;
 
         & + .#{$block}__drop-zone {
@@ -322,12 +330,10 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}__add--after {
-        //right: -1.5rem;
         right: -2.5rem;
         left: auto;
 
         & + .#{$block}__drop-zone {
-            //right: -1.8rem;
             right: -2.8rem;
             left: auto;
         }
@@ -339,7 +345,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     position: absolute;
     height: 100%;
     z-index: 1;
-    //border: 1px solid red;
 
     &.#{$block}__drop-zone--active {
         background: #E5F0FA;

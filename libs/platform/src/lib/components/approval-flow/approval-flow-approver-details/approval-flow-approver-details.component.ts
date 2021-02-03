@@ -17,7 +17,7 @@ interface DialogRefData {
 @Component({
     selector: 'fdp-approval-flow-approver-details',
     templateUrl: './approval-flow-approver-details.component.html',
-    styleUrls: ['./approval-flow-approver-details.component.scss'],
+    styleUrls: ['../styles/approval-flow-dialog.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApprovalFlowApproverDetailsComponent implements OnInit {
@@ -42,11 +42,6 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
     /** @hidden */
     get _data(): DialogRefData {
         return this.dialogRef.data;
-    }
-
-    /** @hidden */
-    get _isWatcherMode(): boolean {
-        return Boolean(this._data.watcher);
     }
 
     /** @hidden */
@@ -76,6 +71,7 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
         this._userToShowDetails = user;
         this._userToShowDetailsData$ = this._data.approvalFlowDataSource.fetchUser(user.id);
         this._isListMode = false;
+        this._selectedUsers = [];
         this._cdr.detectChanges();
 
     }

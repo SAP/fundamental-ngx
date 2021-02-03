@@ -163,7 +163,7 @@ const simpleGraph: ApprovalProcess = {
             name: 'node name',
             description: 'node description',
             approvers: [getUser('uid81955')],
-            status: 'approved',
+            status: 'not started',
             targets: ['ID2'],
             dueDate: daysFromNow(30),
             createDate: daysFromNow(-30)
@@ -173,7 +173,7 @@ const simpleGraph: ApprovalProcess = {
             name: 'node name',
             description: 'node description',
             approvers: [getUser('uid66171')],
-            status: 'in progress',
+            status: 'not started',
             targets: ['ID3'],
             dueDate: daysFromNow(10),
             createDate: daysFromNow(-30)

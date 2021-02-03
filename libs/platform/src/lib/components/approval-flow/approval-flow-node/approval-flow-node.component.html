@@ -26,14 +26,23 @@
             <li *ngIf="canAddNodeAfter" fd-menu-item (click)="menu.close(); onAdd.emit('after')">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversAfter">Add approvers after</div>
             </li>
-            <li fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
+            <li *ngIf="meta.canAddParallel" fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversParallel">Add parallel approvers</div>
             </li>
             <li fd-menu-item (click)="menu.close(); onEdit.emit()" *ngIf="_isNotStarted">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEdit">Edit</div>
             </li>
-            <li fd-menu-item (click)="menu.close(); onDelete.emit()">
+            <li *ngIf="!(meta.isLast || meta.isRoot && meta.parallelStart)" fd-menu-item (click)="menu.close(); onDelete.emit()">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Delete</div>
+            </li>
+            <li fd-menu-item (click)="menu.close(); onAdd.emit('before:d')">
+                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Add before (dev)</div>
+            </li>
+            <li fd-menu-item (click)="menu.close(); onAdd.emit('parallel:d')">
+                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Add parallel (dev)</div>
+            </li>
+            <li fd-menu-item (click)="menu.close(); onAdd.emit('after:d')">
+                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Add after (dev)</div>
             </li>
         </fd-menu>
     </div>
@@ -91,14 +100,14 @@
         </div>
     </div>
 <!--    TODO Ilya: dev only-->
-    <ng-container *ngIf="false">
+    <ng-container *ngIf="true">
         <span (click)="$event.stopPropagation();logMeta()" style="position: absolute; font-size: 11px; right: 0; top: 0; font-weight: 600; ">{{ node.id }} </span>
         <span (click)="$event.stopPropagation();hh.emit([parent.id])" *ngIf="parent" style="position: absolute; font-size: 11px; left: 0; bottom: 0; color: orangered;"><={{ parent.id }}</span>
         <span (click)="$event.stopPropagation();hh.emit(node.targets)" *ngIf="node.targets.length" style="position: absolute; font-size: 11px; right: 0; bottom: 0; color: orange">=>{{ node.targets }}</span>
     </ng-container>
 </ng-container>
 <ng-container *ngIf="isEdit && blank">
-    <ng-container *ngTemplateOutlet="addNodeButton"></ng-container>
+    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'blank' }"></ng-container>
 </ng-container>
 <ng-container *ngIf="isEdit && (!blank && canAddNodeBefore)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
@@ -113,13 +122,14 @@
         [class.approval-flow-node__add--before]="!blank && placement === 'before'"
         [class.approval-flow-node__add--after]="!blank && placement === 'after'"
         [style.visibility]="dropZone.active ? 'hidden' : ''"
-        (click)="$event.stopPropagation(); onAdd.emit(placement || 'after')"
+        (click)="$event.stopPropagation(); onAdd.emit(placement)"
     >
         <fd-icon glyph="add"></fd-icon>
     </button>
     <div
         #dropZone="fdp-approval-flow-drop-zone"
         fdp-approval-flow-drop-zone
+        [placement]="placement"
         class="approval-flow-node__drop-zone"
         [class.approval-flow-node__drop-zone--active]="dropZone.active"
         [class.approval-flow-node__drop-zone--blank]="blank"

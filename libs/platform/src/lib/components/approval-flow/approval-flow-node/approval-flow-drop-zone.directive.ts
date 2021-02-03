@@ -1,4 +1,4 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 
 
 @Directive({
@@ -7,6 +7,7 @@ import { Directive, ElementRef } from '@angular/core';
     exportAs: 'fdp-approval-flow-drop-zone'
 })
 export class ApprovalFlowDropZoneDirective {
+    @Input() placement: 'before'|'after'|'blank';
     active = false;
 
     constructor(private elRef: ElementRef) {}

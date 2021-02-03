@@ -114,14 +114,21 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
+    @HostBinding('class.approval-flow-node--parallel-start')
+    get _isParallelStart(): boolean {
+        return Boolean(this.meta?.parallelStart);
+    }
+
+    /** @hidden */
     @HostBinding('class.approval-flow-node--in-parallel')
     get _isInParallel(): boolean {
         return Boolean(this.meta?.isParallel);
     }
 
     /** @hidden */
-    get _isAnyDropZoneActive(): boolean {
-        return this.dropZones.filter(z => z.active).length > 0
+    @HostBinding('class.approval-flow-node--last-in-parallel')
+    get _isLastInParallel(): boolean {
+        return Boolean(this.meta?.isLastInParallel);
     }
 
     /** @hidden */
@@ -175,6 +182,16 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     get _isEditActionsAvailable(): boolean {
         return this.node.status === 'approved' || this.node.status === 'rejected';
+    }
+
+    /** @hidden */
+    get _activeDropZones(): ApprovalFlowDropZoneDirective[] {
+        return this.dropZones.filter(z => z.active);
+    }
+
+    /** @hidden */
+    get _isAnyDropZoneActive(): boolean {
+        return this._activeDropZones.length > 0
     }
 
     /** @hidden */

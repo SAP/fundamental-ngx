@@ -157,9 +157,14 @@ $carousel-controls-height--edit-mode: 126px;
 
         &.#{$block}__column--vertical-line-before {
             &:before {
+                border-right: 2px dashed #89919A;
+                border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+                left: -2.2rem;
+            }
+
+            &-solid:before {
                 border-right: 1px solid #89919A;
                 border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
-                left: -2.2rem;
             }
         }
 

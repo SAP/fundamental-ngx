@@ -11,6 +11,7 @@ import {
 import { ApprovalUser } from '../interfaces';
 import { BaseListItem, ListComponent, SelectionChangeEvent } from '../../list/public_api';
 import { StandardListItemComponent } from '../../list/standard-list-item/standard-list-item.component';
+import { trackByFn } from '../helpers';
 
 @Component({
     selector: 'fdp-approval-flow-user-list',
@@ -33,6 +34,9 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
 
     /** @hidden */
     _idPrefix = 'approval-node-user-';
+
+    /** @hidden */
+    _trackByFn = trackByFn;
 
     constructor(private _cdr: ChangeDetectorRef) {}
 

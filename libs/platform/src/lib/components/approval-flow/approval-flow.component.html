@@ -1,6 +1,6 @@
 <div class="approval-flow__messages" *ngIf="_messages.length">
     <fd-message-strip
-        *ngFor="let message of _messages; let i = index; trackBy: trackByFn"
+        *ngFor="let message of _messages; let i = index; trackBy: _trackByFn"
         [type]="'success'"
         (onDismiss)="_dismissMessage(i)">
         <span [ngSwitch]="message.type">
@@ -9,6 +9,7 @@
             <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
             <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
             <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
+            <ng-container *ngSwitchCase="'nodesRemove'" [ngTemplateOutlet]="nodesRemove"></ng-container>
             <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
         </span>
         <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()">Undo</a>
@@ -23,7 +24,7 @@
             <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="addNodeFromToolbar('before')"></button>
             <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="addNodeFromToolbar('after')"></button>
             <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="addNodeFromToolbar('parallel')"></button>
-            <button *ngIf="_isRemoveButtonVisible" fd-button label="Remove" [compact]="true" (click)="_removeCheckedNodes()"></button>
+            <button *ngIf="_isRemoveButtonVisible" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
         </ng-container>
     </div>
 </fd-toolbar>
@@ -32,7 +33,7 @@
     <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
     <ng-container *ngIf="!_isEditMode">
         <fd-avatar
-            *ngFor="let watcher of _approvalProcess?.watchers; trackBy: trackByFn"
+            *ngFor="let watcher of _approvalProcess?.watchers; trackBy: _trackByFn"
             tabindex="0"
             size="xs"
             [image]="watcher.imgUrl"
@@ -73,13 +74,14 @@
              [class.approval-flow__graph--edit-mode]="_isEditMode"
         >
             <div class="approval-flow__column"
-                 *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: trackByFn"
-                 [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial"
+                 *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
+                 [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial && _graph[columnIndex - 1]?.nodes.length === 1"
                  [class.approval-flow__column--vertical-line-after]="(column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
+                 [class.approval-flow__column--vertical-line-before-solid]="_graph[columnIndex - 1]?.allNodesApproved"
                  [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
             >
                 <ng-container
-                    *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: trackByFn">
+                    *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
                     <fdp-approval-flow-node
                         cdkDrag
                         [cdkDragDisabled]="!_isEditMode || node.status !== 'not started'"
@@ -99,14 +101,14 @@
                         [canAddNodeBefore]="_metaMap[node.id].canAddNodeBefore"
                         [canAddNodeAfter]="_metaMap[node.id].canAddNodeAfter"
                         (onNodeClick)="onNodeClick(node)"
-                        (onNodeCheck)="onNodeCheck(node, $event)"
+                        (onNodeCheck)="_onNodeCheck(node)"
                         (onAdd)="addNode(node, $event)"
                         (onEdit)="editNode(node)"
-                        (onDelete)="deleteNode(node)"
+                        (onDelete)="_onNodeDelete(node)"
                         (keyup.enter)="onNodeClick(node)"
                         (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
-                        (cdkDragReleased)="onNodeDrop(node, $event.source)"
-                        (cdkDragMoved)="onNodeDrag(node, $event)"
+                        (cdkDragReleased)="_onNodeDrop(node, $event.source)"
+                        (cdkDragMoved)="_onNodeDrag(node)"
                         (hh)="_highlightNodes($event)"
                     ></fdp-approval-flow-node>
 <!--                    && (!_metaMap[_metaMap[node.id]?.prevHNode?.id]?.isParallel && !_metaMap[node.id].parallelEnd) && (_metaMap[node.id].isParallel || _metaMap[node.id].parallelEnd )-->
@@ -156,6 +158,11 @@
 <ng-template #nodeRemove>
     <ng-container i18n="@@platformApprovalFlowNodeRemove">
         1 approver has been removed
+    </ng-container>
+</ng-template>
+<ng-template #nodesRemove>
+    <ng-container i18n="@@platformApprovalFlowNodesRemove">
+        Approvers has been removed
     </ng-container>
 </ng-template>
 <ng-template #teamRemove>

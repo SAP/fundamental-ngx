@@ -272,7 +272,7 @@ describe('ApprovalFlowComponent', () => {
 
     it('should call node click handler on node click', () => {
         spyOn(component, 'onNodeClick').and.callThrough();
-        component.nodeComponents.first.onNodeClick.emit();
+        component._nodeComponents.first.onNodeClick.emit();
         expect(component.onNodeClick).toHaveBeenCalled();
     });
 

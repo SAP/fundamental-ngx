@@ -39,7 +39,7 @@
                 <label fd-form-label i18n="@@platformApprovalFlowNodeType">Parallel or serial</label>
                 <fd-select [compact]="true" [(value)]="_nodeType">
                     <fd-option
-                        *ngFor="let option of _nodeTypes"
+                        *ngFor="let option of _nodeTypes; trackBy: _trackByFn"
                         [value]="option"
                         [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
                         {{ option }}
@@ -50,7 +50,7 @@
                 <label fd-form-label i18n="@@platformApprovalFlowApproverType">Approver type</label>
                 <fd-select [compact]="true" [(value)]="_approverType">
                     <fd-option
-                        *ngFor="let option of _approverTypes"
+                        *ngFor="let option of _approverTypes; trackBy: _trackByFn"
                         [value]="option"
                         [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
                         {{ option }}
@@ -85,6 +85,7 @@
                 *ngIf="viewService.isSelectTeamMode"
                 [isRtl]="_data.rtl"
                 [teams]="_filteredTeams"
+                [selectedTeamId]="_selectedTeam?.id"
                 (onTeamClick)="_viewTeamMembers($event)"
                 (onTeamRadioClick)="_setSelectedTeam($event)"
             ></fdp-approval-flow-team-list>
@@ -97,7 +98,7 @@
                 (onSelectionChange)="_selectedApprovers = $event"
             ></fdp-approval-flow-user-list>
             <fdp-approval-flow-user-details
-                *ngIf="viewService.isUserDetailsMode"
+                *ngIf="viewService.isUserDetailsMode && _userToShowDetails"
                 [user]="_userToShowDetails"
                 [detailsTemplate]="_data.userDetailsTemplate"
                 [details]="_userToShowDetailsData$"
@@ -115,6 +116,7 @@
                     i18n-label="@@platformApprovalFlowDialogButtonAdd"
                     label="Add"
                     [compact]="true"
+                    [disabled]="_isMainSubmitButtonDisabled"
                     (click)="_submit()">
                 </button>
             </fd-dialog-footer-button>
@@ -141,6 +143,7 @@
                         i18n-label="@@platformApprovalFlowDialogButtonSelect"
                         label="Select"
                         [compact]="true"
+                        [disabled]="!_selectedApprovers.length"
                         (click)="_confirmSelectedApprovers()">
                     </button>
                 </fd-dialog-footer-button>
@@ -165,7 +168,7 @@
                         i18n-label="@@platformApprovalFlowDialogButtonAdd"
                         label="Add"
                         [compact]="true"
-                        [disabled]="!viewService.team"
+                        [disabled]="!_selectedTeam && !viewService.team"
                         (click)="_confirmSelectedTeam()">
                     </button>
                 </fd-dialog-footer-button>

@@ -41,7 +41,6 @@ export class PlatformApprovalFlowExampleComponent {
     selectedExample = 'simple';
 
     nodeClick(node: ApprovalNode): void {
-        console.log('Node click handler');
-        console.log(node);
+        console.log('Node click handler', node);
     }
 }
