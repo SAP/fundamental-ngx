@@ -35,6 +35,12 @@ export class DynamicPageContentComponent implements OnInit {
     tabLabel: string;
 
     /**
+     * a unique identifier for this content
+     */
+    @Input()
+    id: string;
+
+    /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
      */
