@@ -221,13 +221,15 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * marks the dynamic page tab as selected when the id of the tab is passed
      */
     setSelectedTab(id: string): void {
-        if (id && this.dynamicPageTabs) {
-            this.dynamicPageTabs.forEach((element) => {
-                if (element.id === id) {
-                    element.open(true);
-                }
-            });
+        if (!(id && this.dynamicPageTabs)) {
+            return;
         }
+
+        this.dynamicPageTabs.forEach((element) => {
+            if (element.id === id) {
+                element.open(true);
+            }
+        });
     }
 
     /**
