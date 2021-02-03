@@ -315,8 +315,6 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
                     return res;
                 }, {});
 
-                console.log(11111, currentItem.files);
-
                 currentItem.files = currentItem.files.map((item) =>
                     hash[item.documentId] ? hash[item.documentId] : item
                 );

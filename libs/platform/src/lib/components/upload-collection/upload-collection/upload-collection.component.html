@@ -449,6 +449,36 @@
                 count: _message.count
             }"
         ></ng-container>
+
+        <ng-container
+            *ngSwitchCase="_messageType.TYPE_MISMATCH"
+            [ngTemplateOutlet]="messageTypeMismatch"
+            [ngTemplateOutletContext]="{
+                payload: _message.payload,
+                messageStripType: _message.messageStripType,
+                count: _message.count
+            }"
+        ></ng-container>
+
+        <ng-container
+            *ngSwitchCase="_messageType.FILE_SIZE"
+            [ngTemplateOutlet]="messageFileSize"
+            [ngTemplateOutletContext]="{
+                payload: _message.payload,
+                messageStripType: _message.messageStripType,
+                count: _message.count
+            }"
+        ></ng-container>
+
+        <ng-container
+            *ngSwitchCase="_messageType.FILE_NAME_LENGTH"
+            [ngTemplateOutlet]="messageFilenameLength"
+            [ngTemplateOutletContext]="{
+                payload: _message.payload,
+                messageStripType: _message.messageStripType,
+                count: _message.count
+            }"
+        ></ng-container>
     </ng-container>
 </ng-template>
 
@@ -529,5 +559,44 @@
     <ng-container i18n="@@platformUploadCollection.Message.Move.OneItem" *ngIf="payload.items.length === 1">
         {{ payload.items[0].name }} has been { messageStripType, select, error {failed to move to} other {moved to} }
         {{ payload.to ? payload.to.name : 'All files' }}.
+    </ng-container>
+</ng-template>
+
+<ng-template #messageTypeMismatch let-payload="payload" let-messageStripType="messageStripType" let-count="count">
+    <ng-container
+        i18n="@@platformUploadCollection.Message.TypeMismatch.Files"
+        *ngIf="payload.items.length > 1 && count.file && !count.folder"
+    >
+        {{ count.file }} files have the wrong type. Allowed types: {{ fileTypes.join(', ') }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
+    </ng-container>
+
+    <ng-container i18n="@@platformUploadCollection.Message.TypeMismatch.OneItem" *ngIf="payload.items.length === 1">
+        The file "{{ payload.items[0].name }}" has the wrong type. Allowed types: {{ fileTypes.join(', ') }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
+    </ng-container>
+</ng-template>
+
+<ng-template #messageFileSize let-payload="payload" let-messageStripType="messageStripType" let-count="count">
+    <ng-container
+        i18n="@@platformUploadCollection.Message.FileSize.Files"
+        *ngIf="payload.items.length > 1 && count.file && !count.folder"
+    >
+        {{ count.file }} files exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.
+    </ng-container>
+
+    <ng-container i18n="@@platformUploadCollection.Message.FileSize.OneItem" *ngIf="payload.items.length === 1">
+        The file "{{ payload.items[0].name }}" exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.
+    </ng-container>
+</ng-template>
+
+<ng-template #messageFilenameLength let-payload="payload" let-messageStripType="messageStripType" let-count="count">
+    <ng-container
+        i18n="@@platformUploadCollection.Message.FilenameLength.Files"
+        *ngIf="payload.items.length > 1 && count.file && !count.folder"
+    >
+        {{ count.file }} files exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
+    </ng-container>
+
+    <ng-container i18n="@@platformUploadCollection.Message.FilenameLength.OneItem" *ngIf="payload.items.length === 1">
+        The name "{{ payload.items[0].name }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
     </ng-container>
 </ng-template>

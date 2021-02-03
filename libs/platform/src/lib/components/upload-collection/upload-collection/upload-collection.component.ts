@@ -300,9 +300,12 @@ export class UploadCollectionComponent {
                 ...item,
                 name: newName
             };
-            const filenameLengthEvent = new FilenameLengthExceedEvent(this, {
+            const payload = {
                 items: [reanmedItem]
-            });
+            };
+            const filenameLengthEvent = new FilenameLengthExceedEvent(this, payload);
+
+            this.showMessage(MessageType.FILE_NAME_LENGTH, { payload: payload, type: MessageStripType.ERROR });
 
             this.filenameLengthExceed.emit(filenameLengthEvent);
 
@@ -707,17 +710,29 @@ export class UploadCollectionComponent {
         }
 
         if (typeMismatch) {
-            const event = new TypeMismatchEvent(this, { items: typeMismatch });
+            const payload = { items: typeMismatch };
+            const event = new TypeMismatchEvent(this, payload);
+
+            this.showMessage(MessageType.TYPE_MISMATCH, { payload: payload, type: MessageStripType.ERROR });
+
             this.typeMismatch.emit(event);
         }
 
         if (filenameLengthExceed) {
-            const event = new FilenameLengthExceedEvent(this, { items: filenameLengthExceed });
+            const payload = { items: filenameLengthExceed };
+            const event = new FilenameLengthExceedEvent(this, payload);
+
+            this.showMessage(MessageType.FILE_NAME_LENGTH, { payload: payload, type: MessageStripType.ERROR });
+
             this.filenameLengthExceed.emit(event);
         }
 
         if (fileSizeExceed) {
-            const event = new FileSizeExceedEvent(this, { items: fileSizeExceed });
+            const payload = { items: fileSizeExceed };
+            const event = new FileSizeExceedEvent(this, payload);
+
+            this.showMessage(MessageType.FILE_SIZE, { payload: payload, type: MessageStripType.ERROR });
+
             this.fileSizeExceed.emit(event);
         }
     }

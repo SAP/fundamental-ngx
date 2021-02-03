@@ -84,4 +84,7 @@ export type EventPayload =
     | DeleteEvent
     | FileRenamedEvent
     | DownloadEvent
-    | MoveToEvent;
+    | MoveToEvent
+    | FileSizeExceedEventPayload
+    | TypeMismatchEventPayload
+    | FilenameLengthExceedEventPayload;
