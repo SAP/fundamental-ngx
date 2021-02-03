@@ -38,7 +38,7 @@ export class ShellbarComponent implements AfterContentInit {
      * When set to true, the responsive paddings are not applied
      */
     @Input()
-    sideNav: boolean = false;
+    sideNav = false;
 
     /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
