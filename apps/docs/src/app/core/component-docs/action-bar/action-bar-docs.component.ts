@@ -11,7 +11,7 @@ import * as noBackButtonExample from '!raw-loader!./examples/action-bar-no-back-
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
-    selector: 'app-toolbar',
+    selector: 'app-action-bar',
     templateUrl: './action-bar-docs.component.html',
     styleUrls: ['action-bar-docs.component.scss']
 })

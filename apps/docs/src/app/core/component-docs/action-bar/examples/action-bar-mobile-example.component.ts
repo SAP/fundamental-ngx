@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Observable } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/core';
 import { map } from 'rxjs/operators';
+
+import { RtlService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-action-bar-mobile-example',
