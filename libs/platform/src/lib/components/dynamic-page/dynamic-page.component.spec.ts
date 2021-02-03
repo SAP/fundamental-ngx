@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { TabPanelComponent, TabsModule, ToolbarModule } from '@fundamental-ngx/core';
+import { TabsModule, ToolbarModule } from '@fundamental-ngx/core';
 import {
     CLASS_NAME,
     DynamicPageComponent,
@@ -191,8 +191,12 @@ describe('DynamicPageComponent default values', () => {
     template: `<fdp-dynamic-page [size]="size" [background]="background">
         <fdp-dynamic-page-title></fdp-dynamic-page-title>
         <fdp-dynamic-page-header></fdp-dynamic-page-header>
-        <fdp-dynamic-page-content id="tab1" [tabLabel]="tabLabel1">DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content>
-        <fdp-dynamic-page-content id="tab2" [tabLabel]="tabLabel2">DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content>
+        <fdp-dynamic-page-content id="tab1" [tabLabel]="tabLabel1"
+            >DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content
+        >
+        <fdp-dynamic-page-content id="tab2" [tabLabel]="tabLabel2"
+            >DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content
+        >
     </fdp-dynamic-page>`
 })
 class TestTabbedComponent {
@@ -243,15 +247,13 @@ describe('DynamicPageComponent tabbed values', () => {
         fixture.detectChanges();
         const tab2: HTMLElement = fixture.debugElement.query(By.css('#tab2')).nativeElement;
         expect(tab2.getAttribute('aria-expanded')).toBe('true');
-    })
+    });
 });
 
 @Component({
     template: `<fdp-dynamic-page [size]="size" [background]="background">
         <fdp-dynamic-page-title></fdp-dynamic-page-title>
-        <fdp-dynamic-page-header
-            [collapsible]="false"
-            [pinnable]="false"></fdp-dynamic-page-header>
+        <fdp-dynamic-page-header [collapsible]="false" [pinnable]="false"></fdp-dynamic-page-header>
         <fdp-dynamic-page-content>DynamicPage Content</fdp-dynamic-page-content>
     </fdp-dynamic-page>`
 })
@@ -298,5 +300,4 @@ describe('DynamicPageComponent with collapsible set to false', () => {
             .nativeElement;
         expect(contentEl.getAttribute('aria-hidden')).toBe('false');
     });
-
 });
