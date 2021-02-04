@@ -11,10 +11,8 @@ import { API_FILES } from '../../api-files';
 
 import { PlatformDisplayListItemHeaderComponent } from './platform-display-list-item-header/platform-display-list-item-header.component';
 import { PlatformDisplayListItemDocsComponent } from './platform-display-list-item-docs.component';
-import {
-    PlatformDisplayListItemExampleComponent,
-    PlatformDisplayListItemWithNavigationExampleComponent
-} from './platform-display-list-item-examples/platform-display-list-item-example.component';
+import { PlatformDisplayListItemExampleComponent } from './platform-display-list-item-examples/platform-display-list-item-example.component';
+import { PlatformDisplayListItemWithNavigationExampleComponent } from './platform-display-list-item-examples/platform-display-list-item-with-navigation-example.component';
 import { PlatformDisplayListItemBorderLessExampleComponent } from './platform-display-list-item-examples/platform-display-list-item-border-less-example.component';
 const routes: Routes = [
     {

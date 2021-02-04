@@ -5,4 +5,5 @@ export * from './group-change-event.model';
 export * from './column-freeze-event.model';
 export * from './search-change-event.model';
 export * from './columns-change-event.model';
+export * from './page-change-event.model';
 export * from './table-row.model';

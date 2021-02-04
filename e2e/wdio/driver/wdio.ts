@@ -163,7 +163,7 @@ export function getAttributeByNameArr(selector: string, attrName: string, sliceS
 }
 
 // Returns object (assertions needs to be adapted)
-export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string | number } {
+export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): WebdriverIO.CSSProperty {
     return $$(selector)[index].getCSSProperty(propertyName);
 }
 

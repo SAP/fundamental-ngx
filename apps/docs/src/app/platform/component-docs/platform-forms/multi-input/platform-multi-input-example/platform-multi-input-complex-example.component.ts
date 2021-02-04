@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-multi-input-complex-example',
-    templateUrl: './platform-mulit-input-complex-example.component.html'
+    templateUrl: './platform-multi-input-complex-example.component.html',
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
-export class PlatformMulitInputComplexExampleComponent {
+export class PlatformMultiInputComplexExampleComponent {
     list_elements = [
         {
             firstName: 'Alabama',

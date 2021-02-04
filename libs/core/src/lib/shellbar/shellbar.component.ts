@@ -33,6 +33,13 @@ export class ShellbarComponent implements AfterContentInit {
     @Input()
     size: ShellbarSizes = 'm';
 
+    /** 
+     * Whether the Shellbar is used with Side Navigation 
+     * When set to true, the responsive paddings are not applied
+     */
+    @Input()
+    sideNav = false;
+
     /** @hidden */
     @ContentChild(ComboboxComponent, { static: false })
     comboboxComponent: ComboboxComponent;

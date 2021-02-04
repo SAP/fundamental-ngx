@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+
 import * as sliSrc from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-example.component.html';
-import * as borderLessSLISrc from '!raw-loader!./platform-standard-list-item-examples/platform-borderless-standard-list-item-example.component.html';
+import * as borderLessSLISrc from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component.html';
 import * as borderLessSLITs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component.ts';
-import * as groupHeaderSLITs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component.ts';
 import * as sliWithSecondaryType from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-secondary-type-example.component.html';
 import * as sliWithInvertedSecondaryType from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-inverted-secondary-type-example.component.html';
 import * as sliWithFooter from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component.html';
+import * as sliWithFooterTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component';
 import * as sliWithGroupHeader from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component.html';
 import * as sliWithSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.html';
 import * as sliWithSelectionTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component.ts';
 import * as sliWithSingleSelection from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.html';
 import * as sliWithSingleSelectionTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component.ts';
 import * as sliWithNavigation from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component.html';
+import * as sliWithNavigationTs from '!raw-loader!./platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component';
 import * as sli from '!raw-loader!./platform-standard-list-item-examples/platform-non-byline-standard-list-item-example.component.html';
-
 
 @Component({
     selector: 'app-standard-list-item',
@@ -40,13 +42,13 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: borderLessSLISrc,
-            fileName: 'platform-borderless-standard-list-item-example',
+            fileName: 'platform-standard-list-item-border-less-example',
         },
         {
             language: 'typescript',
-            component: 'PlatformListBorderLessExampleComponent',
+            component: 'PlatformStandardListItemBorderLessExampleComponent',
             code: borderLessSLITs,
-            fileName: 'platform-borderless-standard-list-item-example'
+            fileName: 'platform-standard-list-item-border-less-example'
         }
     ];
 
@@ -71,6 +73,12 @@ export class PlatformStandardListItemDocsComponent {
             language: 'html',
             code: sliWithFooter,
             fileName: 'platform-standard-list-item-with-footer-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformStandardListItemWithFooterExampleComponent',
+            code: sliWithFooterTs,
+            fileName: 'platform-standard-list-item-with-footer-example'
         }
     ];
 
@@ -79,12 +87,6 @@ export class PlatformStandardListItemDocsComponent {
             language: 'html',
             code: sliWithGroupHeader,
             fileName: 'platform-standard-list-item-with-group-header-example',
-        },
-        {
-            language: 'typescript',
-            component: 'PlatformListWithGroupHeaderExampleComponent',
-            code: groupHeaderSLITs,
-            fileName: 'platform-standard-list-item-with-group-header-example'
         }
     ];
 
@@ -96,7 +98,7 @@ export class PlatformStandardListItemDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'PlatformListWithSelectExampleComponent',
+            component: 'PlatformStandardListItemWithSelectionExampleComponent',
             code: sliWithSelectionTs,
             fileName: 'platform-standard-list-item-with-selection-example'
         }
@@ -121,6 +123,12 @@ export class PlatformStandardListItemDocsComponent {
             language: 'html',
             code: sliWithNavigation,
             fileName: 'platform-standard-list-item-with-navigation-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PlatformStandardListItemWithNavigationExampleComponent',
+            code: sliWithNavigationTs,
+            fileName: 'platform-standard-list-item-with-navigation-example'
         }
     ];
 

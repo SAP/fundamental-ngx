@@ -27,7 +27,7 @@ export class ListDataProvider extends DataProvider<Address> {
     }
 }
 @Component({
-    selector: 'fdp-list-with-selection-example',
+    selector: 'fdp-platform-list-with-selection-example',
     templateUrl: './platform-list-with-selection-example.component.html'
 })
 export class PlatformListWithSelectionExampleComponent implements AfterViewInit {

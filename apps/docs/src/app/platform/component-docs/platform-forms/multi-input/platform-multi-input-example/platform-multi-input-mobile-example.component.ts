@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MobileModeConfig } from '@fundamental-ngx/core';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 export interface User {
     firstName: string;
@@ -8,10 +9,11 @@ export interface User {
 
 @Component({
     selector: 'fdp-platform-multi-input-mobile-example',
-    templateUrl: './platform-mulit-input-mobile-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './platform-multi-input-mobile-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
-export class PlatformMulitInputMobileExampleComponent {
+export class PlatformMultiInputMobileExampleComponent {
     _dataSource = [
         {
             firstName: 'Alabama',

@@ -6,66 +6,66 @@ export class ListPo extends BaseComponentPo {
     root = '#page-content';
 
     // borderless examples
-    noBorderListItems = 'fdp-borderless-list-example li';
-    noBorderCompactList = 'fdp-borderless-list-example fdp-list:nth-of-type(2)';
-    noBorderList = 'fdp-borderless-list-example fdp-list';
+    noBorderListItems = 'fdp-platform-list-border-less-example li';
+    noBorderCompactList = 'fdp-platform-list-border-less-example fdp-list:nth-of-type(2)';
+    noBorderList = 'fdp-platform-list-border-less-example fdp-list';
     // footer examples
-    footerListItems = 'fdp-list-with-footer-example fdp-standard-list-item li';
-    footerCompactList = 'fdp-list-with-footer-example fdp-list:nth-of-type(2)';
-    footer = 'fdp-list-with-footer-example fdp-list-footer li';
+    footerListItems = 'fdp-platform-list-with-footer-example fdp-standard-list-item li';
+    footerCompactList = 'fdp-platform-list-with-footer-example fdp-list:nth-of-type(2)';
+    footer = 'fdp-platform-list-with-footer-example fdp-list-footer li';
     // group header examples
-    groupHeaderListItems = 'fdp-list-with-group-header-example fdp-list-item li';
-    groupHeader = 'fdp-list-with-group-header-example fdp-list-group-header li';
-    groupCompactList = 'fdp-list-with-group-header-example fdp-list:nth-of-type(2)';
+    groupHeaderListItems = 'fdp-platform-list-with-group-header-example fdp-list-item li';
+    groupHeader = 'fdp-platform-list-with-group-header-example fdp-list-group-header li';
+    groupCompactList = 'fdp-platform-list-with-group-header-example fdp-list:nth-of-type(2)';
     // interactive examples
-    interactiveListItems = 'fdp-list-group-header fdp-standard-list-item li';
+    interactiveListItems = 'fdp-platform-list-with-group-header fdp-standard-list-item li';
     // counter examples
-    counterListItems = 'fdp-list-with-item-counter-example li';
-    counterCompactList = 'fdp-list-with-item-counter-example fdp-list:nth-of-type(2)';
-    counterTitleItems = 'fdp-list-with-item-counter-example li span:first-of-type';
-    counterCounterItem = 'fdp-list-with-item-counter-example li span:nth-of-type(2)';
+    counterListItems = 'fdp-platform-list-with-item-counter-example li';
+    counterCompactList = 'fdp-platform-list-with-item-counter-example fdp-list:nth-of-type(2)';
+    counterTitleItems = 'fdp-platform-list-with-item-counter-example li span:first-of-type';
+    counterCounterItem = 'fdp-platform-list-with-item-counter-example li span:nth-of-type(2)';
     // deletion examples
-    deletionListItems = 'fdp-list-with-delete-button-example li';
-    deletionBtn = 'fdp-list-with-delete-button-example button';
-    deletionIcon = 'fdp-list-with-delete-button-example fd-icon';
+    deletionListItems = 'fdp-platform-list-with-delete-button-example li';
+    deletionBtn = 'fdp-platform-list-with-delete-button-example button';
+    deletionIcon = 'fdp-platform-list-with-delete-button-example fd-icon';
     // multi selection examples
-    multiList = 'fdp-list-with-selection-example fdp-list';
-    multiListItems = 'fdp-list-with-selection-example li';
-    multiToolbar = 'fdp-list-with-selection-example fd-toolbar';
-    multiCheckbox = 'fdp-list-with-selection-example fd-checkbox';
+    multiList = 'fdp-platform-list-with-selection-example fdp-list';
+    multiListItems = 'fdp-platform-list-with-selection-example li';
+    multiToolbar = 'fdp-platform-list-with-selection-example fd-toolbar';
+    multiCheckbox = 'fdp-platform-list-with-selection-example fd-checkbox';
     // single selection examples
-    singleList = 'fdp-list-with-single-selection-example fdp-list';
-    singleListItems = 'fdp-list-with-single-selection-example li';
-    singleToolbar = 'fdp-list-with-single-selection-example fd-toolbar';
-    singleRadioBtn = 'fdp-list-with-single-selection-example fd-radio-button';
+    singleList = 'fdp-platform-list-with-single-selection-example fdp-list';
+    singleListItems = 'fdp-platform-list-with-single-selection-example li';
+    singleToolbar = 'fdp-platform-list-with-single-selection-example fd-toolbar';
+    singleRadioBtn = 'fdp-platform-list-with-single-selection-example fd-radio-button';
     // navigation indicator examples
-    navList = 'fdp-list-with-navigation-example fdp-list';
-    navListItems = 'fdp-list-with-navigation-example li';
-    navListLink = 'fdp-list-with-navigation-example a';
+    navList = 'fdp-platform-list-with-navigation-example fdp-list';
+    navListItems = 'fdp-platform-list-with-navigation-example li';
+    navListLink = 'fdp-platform-list-with-navigation-example a';
     // virtual scroll examples:
-    vScrollList = 'fdp-list-with-infinite-scroll-example fdp-list';
-    vScrollListItems = 'fdp-list-with-infinite-scroll-example fdp-standard-list-item li';
+    vScrollList = 'fdp-platform-list-with-infinite-scroll-example fdp-list';
+    vScrollListItems = 'fdp-platform-list-with-infinite-scroll-example fdp-standard-list-item li';
     vScrollLoadIcon = 'fd-busy-indicator .fd-busy-indicator--circle-0';
     // load on btn click examples
-    loadList = 'fdp-list-with-more-button-example fdp-list';
-    loadListItems = 'fdp-list-with-more-button-example li';
-    loadShowMoreBtn = 'fdp-list-with-more-button-example button';
+    loadList = 'fdp-platform-list-with-more-button-example fdp-list';
+    loadListItems = 'fdp-platform-list-with-more-button-example li';
+    loadShowMoreBtn = 'fdp-platform-list-with-more-button-example button';
     loadIcon = 'fd-busy-indicator .fd-busy-indicator';
     // button examples
-    btnList = 'fdp-list-with-buttons-example fdp-list';
-    btnListItems = 'fdp-list-with-buttons-example li';
-    btnDeleteBtn = 'fdp-list-with-buttons-example button[id^=delete]';
-    btnEditBtn = 'fdp-list-with-buttons-example button[id^=detail]';
+    btnList = 'fdp-platform-list-with-buttons-example fdp-list';
+    btnListItems = 'fdp-platform-list-with-buttons-example li';
+    btnDeleteBtn = 'fdp-platform-list-with-buttons-example button[id^=delete]';
+    btnEditBtn = 'fdp-platform-list-with-buttons-example button[id^=detail]';
     // no data examples
-    noDataListItems = 'fdp-list-with-nodata-example li';
-    noDataCompactList = 'fdp-list-with-nodata-example fdp-list:nth-of-type(2) ul';
+    noDataListItems = 'fdp-platform-list-with-nodata-example li';
+    noDataCompactList = 'fdp-platform-list-with-nodata-example fdp-list:nth-of-type(2) ul';
     // no separator examples
-    noSepList = 'fdp-list-with-no-seperator-example fdp-list';
-    noSepListItems = 'fdp-list-with-no-seperator-example li';
+    noSepList = 'fdp-platform-list-with-no-seperator-example fdp-list';
+    noSepListItems = 'fdp-platform-list-with-no-seperator-example li';
     // unread data examples
-    unreadListAttr = 'fdp-list-with-unread-example fdp-standard-list-item';
-    unreadListItems = 'fdp-list-with-unread-example li';
-    unreadListItemText = 'fdp-list-with-unread-example li span';
+    unreadListAttr = 'fdp-platform-list-with-unread-example fdp-standard-list-item';
+    unreadListItems = 'fdp-platform-list-with-unread-example li';
+    unreadListItemText = 'fdp-platform-list-with-unread-example li span';
 
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';

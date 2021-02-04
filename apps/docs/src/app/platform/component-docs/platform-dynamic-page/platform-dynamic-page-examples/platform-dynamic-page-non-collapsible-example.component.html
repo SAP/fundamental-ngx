@@ -4,7 +4,7 @@
         <div class="overlay-content">
             <fdp-dynamic-page size="large" ariaLabel="Example Dynamic Page">
                 <fdp-dynamic-page-title
-                    title="Balenciaga Tripple S Trainers"
+                    [title]="pageTitle"
                     subtitle="Oversized multimaterial sneakers with quilted effect"
                 >
                     <!-- breadcrumb content -->
@@ -37,6 +37,7 @@
                                 fdType="positive"
                                 (click)="closePage($event)"
                                 label="Accept"
+                                title="Accept"
                             ></button>
                             <button
                                 fd-toolbar-item
@@ -45,6 +46,7 @@
                                 fdType="negative"
                                 (click)="closePage($event)"
                                 label="Reject"
+                                title="Reject"
                             ></button>
                             <fd-toolbar-separator></fd-toolbar-separator>
                         </fd-toolbar>
@@ -52,7 +54,7 @@
                     <fdp-dynamic-page-layout-actions>
                         <!-- layout actions -->
                         <fd-toolbar fdType="transparent" [clearBorder]="true">
-                            <button fd-button fdType="transparent" aria-label="Resize" (click)="resizeClicked($event)">
+                            <button fd-button fdType="transparent" aria-label="Resize" (click)="resizeClicked($event)" title="Resize">
                                 <i class="sap-icon--resize"></i>
                             </button>
                             <button
@@ -60,10 +62,11 @@
                                 fdType="transparent"
                                 aria-label="Exit Fullscreen"
                                 (click)="closePage($event)"
+                                title="Exit Fullscreen"
                             >
                                 <i class="sap-icon--exitfullscreen"></i>
                             </button>
-                            <button fd-button fdType="transparent" aria-label="Close" (click)="closePage($event)">
+                            <button fd-button fdType="transparent" aria-label="Close" (click)="closePage($event)" title="Close">
                                 <i class="sap-icon--decline"></i>
                             </button>
                         </fd-toolbar>

@@ -110,8 +110,8 @@ const list_elements: User[] = [
     { firstName: 'West Virginia', lastName: 'Charleston' },
     { firstName: 'Wisconsin', lastName: 'Madison' },
     { firstName: 'Wyoming', lastName: 'Cheyenne' }
-
 ];
+
 export class ListDataProvider extends DataProvider<User> {
     constructor() {
         super();
@@ -128,7 +128,7 @@ export class ListDataProvider extends DataProvider<User> {
     }
 }
 @Component({
-    selector: 'fdp-list-with-more-button-example',
+    selector: 'fdp-platform-list-with-more-button-example',
     templateUrl: './platform-list-with-more-button-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })

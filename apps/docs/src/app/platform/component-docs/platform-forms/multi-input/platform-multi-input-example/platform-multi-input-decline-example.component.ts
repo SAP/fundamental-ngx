@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-multi-input-decline-example',
-    templateUrl: './platform-mulit-input-decline-example.component.html'
+    templateUrl: './platform-multi-input-decline-example.component.html',
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
-export class PlatformMulitInputDeclineExampleComponent {
+export class PlatformMultiInputDeclineExampleComponent {
     list_elements = [
         { firstName: 'Alabama', lastName: 'Montgomery' },
         { firstName: 'Alaska', lastName: 'Juneau' },

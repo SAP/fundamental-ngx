@@ -5,7 +5,7 @@ import { ActionChangeEvent } from '@fundamental-ngx/platform';
 import { Action } from './platform-action-list-item-border-less-example.component';
 
 @Component({
-    selector: 'fdp-action-list-item-example',
+    selector: 'fdp-platform-action-list-item-example',
     templateUrl: './platform-action-list-item-example.component.html'
 })
 export class PlatformActionListItemExampleComponent {

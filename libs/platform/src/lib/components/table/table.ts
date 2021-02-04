@@ -78,4 +78,7 @@ export abstract class Table {
 
      /** Disable filtering by header column menu */
      abstract setHeaderColumnFilteringDisabled(disabled: boolean): void;
+
+     /** Set current page */
+     abstract setCurrentPage(currentPage: number): void;
 }

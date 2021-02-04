@@ -3,10 +3,7 @@
 
         <fd-dialog-header>
             <h1 *ngIf="mobileConfig.title" fd-title>{{mobileConfig.title}}</h1>
-            <button *ngIf="mobileConfig.hasCloseButton"
-                    fd-dialog-close-button
-                    [mobile]="true"
-                    (click)="cancel()">
+            <button *ngIf="mobileConfig.hasCloseButton" fd-dialog-close-button [mobile]="true" (click)="_cancel()">
             </button>
         </fd-dialog-header>
 
@@ -15,16 +12,11 @@
         </fd-dialog-body>
 
         <fd-dialog-footer *ngIf="mobileConfig.approveButtonText || mobileConfig.cancelButtonText">
-            <fd-button-bar
-                    *ngIf="mobileConfig?.approveButtonText"
-                    fdType="emphasized"
-                    [label]="mobileConfig?.approveButtonText"
-                    (click)="approve()">
+            <fd-button-bar *ngIf="mobileConfig?.approveButtonText" fdType="emphasized"
+                [label]="mobileConfig?.approveButtonText" (click)="_approve()">
             </fd-button-bar>
-            <fd-button-bar
-                    *ngIf="mobileConfig?.cancelButtonText"
-                    [label]="mobileConfig?.cancelButtonText"
-                    (click)="cancel()">
+            <fd-button-bar *ngIf="mobileConfig?.cancelButtonText" [label]="mobileConfig?.cancelButtonText"
+                (click)="_cancel()">
             </fd-button-bar>
         </fd-dialog-footer>
 

@@ -32,7 +32,7 @@ export {
     TableRowSelectionChangeEvent
 } from './models';
 
-export { TableDataSource, TableDataProvider } from './domain';
+export { TableDataSource, TableDataProvider, ArrayTableDataSource, ObservableTableDataSource } from './domain';
 
 export { PlatformTableModule } from './table.module';
 export { TableComponent } from './table.component';

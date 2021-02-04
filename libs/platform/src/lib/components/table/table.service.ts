@@ -3,9 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
 import { SearchInput } from './interfaces/search-field.interface';
-import { CollectionFilter, CollectionGroup, CollectionSort, TableState } from './interfaces';
+import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from './interfaces';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange, ColumnsChange } from './models';
+import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange, ColumnsChange, PageChange } from './models';
 
 @Injectable()
 export class TableService {
@@ -20,6 +20,7 @@ export class TableService {
     readonly groupChange: EventEmitter<GroupChange> = new EventEmitter<GroupChange>();
     readonly freezeChange: EventEmitter<FreezeChange> = new EventEmitter<FreezeChange>();
     readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
+    readonly pageChange: EventEmitter<PageChange> = new EventEmitter<PageChange>();
 
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
@@ -31,6 +32,17 @@ export class TableService {
         this._tableStateSubject$.next(state);
     }
 
+    /** Search */
+    search(searchInput: SearchInput): void {
+        const prevState = this.getTableState();
+
+        const state: TableState = { ...prevState, searchInput: searchInput };
+
+        this.setTableState(this._setCurrentPageToState(state, 1));
+
+        this.searchChange.emit({ current: searchInput, previous: prevState.searchInput });
+    }
+
     /** Set new sort rules */
     setSort(sortRules: CollectionSort[]): void {
         const prevState = this.getTableState();
@@ -39,7 +51,7 @@ export class TableService {
         const newSortRules: CollectionSort[] = [...sortRules];
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        this.setTableState(state);
+        this.setTableState(this._setCurrentPageToState(state, 1));
 
         this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
     }
@@ -56,7 +68,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        this.setTableState(state);
+        this.setTableState(this._setCurrentPageToState(state, 1));
 
         this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
     }
@@ -69,7 +81,7 @@ export class TableService {
         const newFilterRules: CollectionFilter[] = [...filterRules];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        this.setTableState(state);
+        this.setTableState(this._setCurrentPageToState(state, 1));
 
         this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
     }
@@ -86,7 +98,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        this.setTableState(state);
+        this.setTableState(this._setCurrentPageToState(state, 1));
 
         this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
     }
@@ -130,15 +142,6 @@ export class TableService {
         this.freezeChange.emit({ current: columnName, previous: prevState.freezeToColumn });
     }
 
-    /** Search */
-    search(searchInput: SearchInput): void {
-        const prevState = this.getTableState();
-
-        this.setTableState({ ...prevState, searchInput: searchInput });
-
-        this.searchChange.emit({ current: searchInput, previous: prevState.searchInput });
-    }
-
     /** Set table columns */
     setColumns(columns: string[]): void {
         const prevState = this.getTableState();
@@ -150,5 +153,27 @@ export class TableService {
         this.setTableState(state);
 
         this.columnsChange.emit({ current: state.columns, previous: prevColumns });
+    }
+
+    /** Set page */
+    setCurrentPage(currentPage: number): void {
+        const prevState = this.getTableState();
+        const prevPageState = prevState.page;
+
+        if (prevPageState.currentPage === currentPage) {
+            return;
+        }
+
+        const state: TableState = this._setCurrentPageToState(prevState, currentPage);
+        
+        this.setTableState(state);
+        
+        this.pageChange.emit({ current: state.page, previous: prevPageState });
+    }
+
+    /** @hidden */
+    private _setCurrentPageToState(state: TableState, currentPage: number): TableState {
+        const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
+        return { ...state, page: newPageState  };
     }
 }

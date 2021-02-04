@@ -42,6 +42,9 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
 import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
+import { PlatformUploadCollectionModule } from './components/upload-collection';
+import { PlatformValueHelpDialogModule } from './components/value-help-dialog/value-help-dialog.module';
+import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, PlatformListModule, StandardListItemModule } from './components/list/public_api';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -58,6 +61,7 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
         PlatformMenuModule,
         PlatformSelectModule,
         PlatformLinkModule,
+        PlatformListModule,
         PlatformRadioGroupModule,
         PlatformMenuButtonModule,
         PlatformSplitMenuButtonModule,
@@ -83,8 +87,16 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
         PlatformMultiInputMobileModule,
         PlatformFeedInputModule,
         PlatformFileUploaderModule,
+        PlatformUploadCollectionModule,
+        PlatformValueHelpDialogModule,
         PlatformAutoCompleteModule,
-        PlatformApprovalFlowModule
+        PlatformApprovalFlowModule,
+        PlatformValueHelpDialogModule,
+        ActionListItemModule,
+        DisplayListItemModule,
+        ObjectListItemModule,
+        PlatformListModule,
+        StandardListItemModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

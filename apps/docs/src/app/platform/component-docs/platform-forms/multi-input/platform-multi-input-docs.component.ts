@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 
-import * as platformMultiInputSimpleExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-example.component.html';
-import * as platformMultiInputSimpmleExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-example.component.ts';
-import * as platformMultiInputComplexExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-complex-example.component.html';
-import * as platformMultiInputComplexExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-complex-example.component.ts';
-import * as platformMultiInputGroupedExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-grouped-example.component.html';
-import * as platformMultiInputGroupedExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-grouped-example.component.ts';
-import * as platformMultiInputDeclineExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-decline-example.component.html';
-import * as platformMultiInputDeclineExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-decline-example.component.ts';
-import * as platformMultiInputDisableExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-disabled.component.html';
-import * as platformMultiInputDisableExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-disabled.component.ts';
-import * as platformMultiInputMobileExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-mobile-example.component.html';
-import * as platformMultiInputMobileExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-mobile-example.component.ts';
-import * as platformMultiInputReactiveExample from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-reactive-example.component.html';
-import * as platformMultiInputReactiveExampleTs from '!raw-loader!./platform-mulit-input-example/platform-mulit-input-reactive-example.component.ts';
+import * as platformMultiInputSimpleExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-example.component.html';
+import * as platformMultiInputSimpmleExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-example.component.ts';
+import * as platformMultiInputComplexExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-complex-example.component.html';
+import * as platformMultiInputComplexExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-complex-example.component.ts';
+import * as platformMultiInputGroupedExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-grouped-example.component.html';
+import * as platformMultiInputGroupedExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-grouped-example.component.ts';
+import * as platformMultiInputDeclineExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-decline-example.component.html';
+import * as platformMultiInputDeclineExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-decline-example.component.ts';
+import * as platformMultiInputDisableExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-disabled.component.html';
+import * as platformMultiInputDisableExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-disabled.component.ts';
+import * as platformMultiInputMobileExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-mobile-example.component.html';
+import * as platformMultiInputMobileExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-mobile-example.component.ts';
+import * as platformMultiInputReactiveExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-reactive-example.component.html';
+import * as platformMultiInputReactiveExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-reactive-example.component.ts';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
@@ -22,96 +22,96 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
     templateUrl: './platform-multi-input-docs.component.html'
 })
 export class PlatformMultiInputDocsComponent {
-    mulitiInputSimple: ExampleFile[] = [
+    multiInputSimple: ExampleFile[] = [
         {
             language: 'html',
             code: platformMultiInputSimpleExample,
-            fileName: 'platform-mulit-input-example'
+            fileName: 'platform-multi-input-example'
         },
         {
             language: 'typescript',
             code: platformMultiInputSimpmleExampleTs,
-            fileName: 'platform-mulit-input-example',
-            component: 'PlatformMultiInputExample'
+            fileName: 'platform-multi-input-example',
+            component: 'PlatformMultiInputExampleComponent'
         }
     ];
 
-    mulitiInputGrouped: ExampleFile[] = [
+    multiInputGrouped: ExampleFile[] = [
         {
             language: 'html',
             code: platformMultiInputComplexExample,
-            fileName: 'platform-mulit-input-complex-example'
+            fileName: 'platform-multi-input-complex-example'
         },
         {
             language: 'typescript',
             code: platformMultiInputComplexExampleTs,
-            fileName: 'platform-mulit-input-complex-example',
-            component: 'platformMultiInputComplexExample'
+            fileName: 'platform-multi-input-complex-example',
+            component: 'PlatformMultiInputComplexExampleComponent'
         }
     ];
-    mulitiInputValueHelp: ExampleFile[] = [
+    multiInputValueHelp: ExampleFile[] = [
         {
             language: 'html',
             code: platformMultiInputGroupedExample,
-            fileName: 'platform-mulit-input-grouped-example'
+            fileName: 'platform-multi-input-grouped-example'
         },
         {
             language: 'typescript',
             code: platformMultiInputGroupedExampleTs,
-            fileName: 'platform-mulit-input-grouped-example',
-            component: 'platformMultiInputGroupedExample'
+            fileName: 'platform-multi-input-grouped-example',
+            component: 'PlatformMultiInputGroupedExampleComponent'
         }
     ];
-    mulitiInputDecline: ExampleFile[] = [
+    multiInputDecline: ExampleFile[] = [
         {
             language: 'html',
             code: platformMultiInputDeclineExample,
-            fileName: 'platform-mulit-input-decline-example'
+            fileName: 'platform-multi-input-decline-example'
         },
         {
             language: 'typescript',
             code: platformMultiInputDeclineExampleTs,
-            fileName: 'platform-mulit-input-decline-example',
-            component: 'platformMultiInputDeclineExample'
+            fileName: 'platform-multi-input-decline-example',
+            component: 'PlatformMultiInputDeclineExampleComponent'
         }
     ];
-    mulitiInputDisable: ExampleFile[] = [
+    multiInputDisable: ExampleFile[] = [
         {
             language: 'html',
             code: platformMultiInputDisableExample,
-            fileName: 'platform-mulit-input-disabled'
+            fileName: 'platform-multi-input-disabled'
         },
         {
             language: 'typescript',
             code: platformMultiInputDisableExampleTs,
-            fileName: 'platform-mulit-input-disabled',
-            component: 'platformMultiInputDisabledExample'
+            fileName: 'platform-multi-input-disabled',
+            component: 'PlatformMultiInputDisabledExampleComponent'
         }
     ];
-    mulitiInputMobile: ExampleFile[] = [
+    multiInputMobile: ExampleFile[] = [
         {
             language: 'html',
             code: platformMultiInputMobileExample,
-            fileName: 'platform-mulit-input-mobile-example'
+            fileName: 'platform-multi-input-mobile-example'
         },
         {
             language: 'typescript',
             code: platformMultiInputMobileExampleTs,
-            fileName: 'platform-mulit-input-mobile-example',
-            component: 'platformMultiInputMobileExample'
+            fileName: 'platform-multi-input-mobile-example',
+            component: 'PlatformMultiInputMobileExampleComponent'
         }
     ];
-    mulitiInputReactive: ExampleFile[] = [
+    multiInputReactive: ExampleFile[] = [
         {
             language: 'html',
             code: platformMultiInputReactiveExample,
-            fileName: 'platform-mulit-input-reactive-example'
+            fileName: 'platform-multi-input-reactive-example'
         },
         {
             language: 'typescript',
             code: platformMultiInputReactiveExampleTs,
-            fileName: 'platform-mulit-input-reactive-example',
-            component: 'platformMultiInputMobileExample'
+            fileName: 'platform-multi-input-reactive-example',
+            component: 'PlatformMultiInputReactiveExampleComponent'
         }
     ];
 }

@@ -112,7 +112,7 @@ describe('Datetime picker suite', function() {
         click(okButton);
         click(activeDateTimePickerButton, 1);
         expect(highlightedColor)
-            .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value as string);
+            .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
     it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
