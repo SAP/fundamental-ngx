@@ -225,8 +225,15 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             node.style.height = 'auto';
         });
         if (wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS)) {
-            wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).style.height =
-                'calc(100vh - ' + combinedHeight + 'px)';
+            if (
+                wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).offsetHeight <
+                wizard.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).offsetHeight
+            ) {
+                wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).style.height =
+                    'calc(100vh - ' + combinedHeight + 'px)';
+            } else {
+                wizard.querySelector('.' + WIZARD_TALL_CONTENT_CLASS).style.paddingBottom = '24px';
+            }
         }
     }
 
@@ -405,7 +412,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         } else {
             this.progressBar.visible = true;
             this._setContentTemplates();
-            this._shrinkWhileAnyStepIsTooNarrow();
         }
         setTimeout(() => {
             this._cdRef.detectChanges();
@@ -436,7 +442,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _showSummary(): void {
-        const summary = this.steps.find(step => step.isSummary);
+        const summary = this.steps.find((step) => step.isSummary);
         summary.content.tallContent = true;
         this.contentTemplates = [summary.content.contentTemplate];
     }
