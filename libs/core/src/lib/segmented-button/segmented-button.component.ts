@@ -55,14 +55,20 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
     /** @hidden */
     @HostBinding('class.fd-segmented-button')
-    fdSegmentedButtonClass = true;
+    _fdSegmentedButtonClass = true;
 
     /** @hidden */
     @ContentChildren(ButtonComponent)
     _buttons: QueryList<ButtonComponent>;
 
+    /**
+     * Value of segmented button can have 2 types:
+     * - string, when there is no toggle mode and only 1 value can be chosen.
+     * - array of strings, when there is toggle mode and more than 1 value can be chosen.
+     */
     private _currentValue: string | string[];
 
+    /** @hidden */
     private _isDisabled = false;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
