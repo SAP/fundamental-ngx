@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.9...v0.26.2-rc.10) (2021-02-04)
+
+
+### Bug Fixes
+
+* (Core) readable Panel title by screen readers ([#4555](https://github.com/SAP/fundamental-ngx/issues/4555)) ([0f1ef26](https://github.com/SAP/fundamental-ngx/commit/0f1ef26f3874f22d3232b180cff0e7843545fb8e))
+
 ### [0.26.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.8...v0.26.2-rc.9) (2021-02-03)
 
 ### [0.26.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.7...v0.26.2-rc.8) (2021-02-03)
