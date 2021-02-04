@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-multi-input-grouped-example',
-    templateUrl: './platform-mulit-input-grouped-example.component.html'
+    templateUrl: './platform-multi-input-grouped-example.component.html',
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
-export class PlatformMulitInputGroupedExampleComponent {
+export class PlatformMultiInputGroupedExampleComponent {
     list_elements = [
         { name: 'Apple', type: 'Fruits' },
         { name: 'Banana', type: 'Fruits' },
