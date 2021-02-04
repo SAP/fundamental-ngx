@@ -1,4 +1,3 @@
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
@@ -63,7 +62,7 @@ describe('DynamicPageComponent default values', () => {
     beforeEach(async(() => {
         const scrollableSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ScrollingModule],
+            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
             declarations: [TestComponent],
             providers: [{ provide: DynamicPageService, useValue: scrollableSpy }]
         }).compileComponents();
@@ -192,8 +191,12 @@ describe('DynamicPageComponent default values', () => {
     template: `<fdp-dynamic-page [size]="size" [background]="background">
         <fdp-dynamic-page-title></fdp-dynamic-page-title>
         <fdp-dynamic-page-header></fdp-dynamic-page-header>
-        <fdp-dynamic-page-content [tabLabel]="tabLabel1">DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content>
-        <fdp-dynamic-page-content [tabLabel]="tabLabel2">DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content>
+        <fdp-dynamic-page-content id="tab1" [tabLabel]="tabLabel1"
+            >DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content
+        >
+        <fdp-dynamic-page-content id="tab2" [tabLabel]="tabLabel2"
+            >DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content
+        >
     </fdp-dynamic-page>`
 })
 class TestTabbedComponent {
@@ -210,7 +213,7 @@ describe('DynamicPageComponent tabbed values', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, TabsModule, ScrollingModule],
+            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
             declarations: [TestTabbedComponent],
             providers: [{ provide: DynamicPageService }]
         }).compileComponents();
@@ -238,14 +241,19 @@ describe('DynamicPageComponent tabbed values', () => {
         const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs'));
         expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsMedium)).toBeTruthy();
     });
+
+    it('should switch tabs', async () => {
+        dynamicPageComponent.setSelectedTab('tab2');
+        fixture.detectChanges();
+        const tab2: HTMLElement = fixture.debugElement.query(By.css('#tab2')).nativeElement;
+        expect(tab2.getAttribute('aria-expanded')).toBe('true');
+    });
 });
 
 @Component({
     template: `<fdp-dynamic-page [size]="size" [background]="background">
         <fdp-dynamic-page-title></fdp-dynamic-page-title>
-        <fdp-dynamic-page-header
-            [collapsible]="false"
-            [pinnable]="false"></fdp-dynamic-page-header>
+        <fdp-dynamic-page-header [collapsible]="false" [pinnable]="false"></fdp-dynamic-page-header>
         <fdp-dynamic-page-content>DynamicPage Content</fdp-dynamic-page-content>
     </fdp-dynamic-page>`
 })
@@ -261,7 +269,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, TabsModule, ScrollingModule],
+            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
             declarations: [TestNonCollapsibleComponent],
             providers: [{ provide: DynamicPageService }]
         }).compileComponents();
@@ -292,5 +300,4 @@ describe('DynamicPageComponent with collapsible set to false', () => {
             .nativeElement;
         expect(contentEl.getAttribute('aria-hidden')).toBe('false');
     });
-
 });
