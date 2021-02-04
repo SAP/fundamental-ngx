@@ -8,7 +8,7 @@
                         <li
                             fd-wizard-step
                             [status]="step1status"
-                            (statusChange)="step1status = $event"
+                            (statusChange)="statusChanged(1, $event)"
                             label="Product Type"
                         >
                             <fd-wizard-step-indicator>1</fd-wizard-step-indicator>
@@ -34,7 +34,7 @@
                         <li
                             fd-wizard-step
                             [status]="step2status"
-                            (statusChange)="step2status = $event"
+                            (statusChange)="statusChanged(2, $event)"
                             label="Customer Information"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
@@ -99,7 +99,7 @@
                         <li
                             fd-wizard-step
                             [status]="step3status"
-                            (statusChange)="step3status = $event"
+                            (statusChange)="statusChanged(3, $event)"
                             label="Additional Information"
                             optionalText="(Optional)"
                         >
@@ -123,7 +123,7 @@
                         <li
                             fd-wizard-step
                             [status]="step4status"
-                            (statusChange)="step4status = $event"
+                            (statusChange)="statusChanged(4, $event)"
                             label="Pricing and Payment"
                         >
                             <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
@@ -142,7 +142,7 @@
                                     </div>
                             </fd-wizard-content>
                         </li>
-                        <li fd-wizard-step [status]="summaryStatus" [isSummary]="true">
+                        <li fd-wizard-step [status]="summaryStatus" [isSummary]="true" (statusChange)="statusChanged(5, $event)">
                             <fd-wizard-content>
                                 <h4 class="fd-title fd-title--h4">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">

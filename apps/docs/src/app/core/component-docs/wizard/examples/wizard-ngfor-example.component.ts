@@ -43,6 +43,12 @@ export class WizardNgForExampleComponent {
         }
     ];
 
+    statusChanged(stepNumber: number, event: any): void {
+        if (event === 'current') {
+            this.goToStep(stepNumber);
+        }
+    }
+
     goToStep(step: number): void {
         switch (step) {
             case 1: {
