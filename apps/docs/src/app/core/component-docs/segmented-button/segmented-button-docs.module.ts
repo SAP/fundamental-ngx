@@ -9,6 +9,7 @@ import { SegmentedButtonToggleExampleComponent } from './examples/segmented-butt
 import { SegmentedButtonDefaultExampleComponent } from './examples/segmented-button-default-example.component';
 import { SegmentedButtonModule } from '@fundamental-ngx/core';
 import { SegmentedButtonFormExampleComponent } from './examples/segmented-button-form-example/segmented-button-form-example.component';
+import { SegmentedButtonComplexExampleComponent } from './examples/segmented-button-complex-example/segmented-button-complex-example.component';
 
 const routes: Routes = [
     {
@@ -29,7 +30,8 @@ const routes: Routes = [
         SegmentedButtonHeaderComponent,
         SegmentedButtonToggleExampleComponent,
         SegmentedButtonDefaultExampleComponent,
-        SegmentedButtonFormExampleComponent
+        SegmentedButtonFormExampleComponent,
+        SegmentedButtonComplexExampleComponent
     ]
 })
 export class SegmentedButtonDocsModule {}

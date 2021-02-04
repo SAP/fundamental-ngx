@@ -6,6 +6,8 @@ import * as segmentedToggleExample from '!raw-loader!./examples/segmented-button
 import * as segmentedToggleExampleTs from '!raw-loader!./examples/segmented-button-toggle-example.component.ts';
 import * as segmentedButtonFormTs from '!raw-loader!./examples/segmented-button-form-example/segmented-button-form-example.component.ts';
 import * as segmentedButtonFormHtml from '!raw-loader!./examples/segmented-button-form-example/segmented-button-form-example.component.html';
+import * as segmentedButtonCustomTs from '!raw-loader!./examples/segmented-button-complex-example/segmented-button-complex-example.component.ts';
+import * as segmentedButtonCustomHtml from '!raw-loader!./examples/segmented-button-complex-example/segmented-button-complex-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -52,6 +54,20 @@ export class SegmentedButtonDocsComponent {
             language: 'typescript',
             code: segmentedButtonFormTs,
             fileName: 'segmented-button-form-example'
+        }
+    ];
+
+    complexExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: segmentedButtonCustomHtml,
+            fileName: 'segmented-button-complex-example'
+        },
+        {
+            component: 'SegmentedButtonComplexExampleComponent',
+            language: 'typescript',
+            code: segmentedButtonCustomTs,
+            fileName: 'segmented-button-complex-example'
         }
     ];
 }
