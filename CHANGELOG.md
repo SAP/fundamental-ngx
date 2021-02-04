@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.13...v0.26.2-rc.14) (2021-02-04)
+
+
+### Bug Fixes
+
+* (Platform) provide programmatic tab selection for Dynamic Page ([#4569](https://github.com/SAP/fundamental-ngx/issues/4569)) ([d2d7edd](https://github.com/SAP/fundamental-ngx/commit/d2d7edd8107010bed98ba09f0b60ad4f3c06e7f3))
+
 ### [0.26.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.12...v0.26.2-rc.13) (2021-02-04)
 
 
