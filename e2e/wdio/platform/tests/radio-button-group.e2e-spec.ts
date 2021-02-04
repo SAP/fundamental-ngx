@@ -88,7 +88,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Compact radio group with "default" state and with default selection', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultStateAndSelectionIndex));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultStateAndSelectionIndex));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDefaultStateAndSelectionIndex));
         expect(getText(selectedValueLabel)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName()
             , 'aria-checked')).toBe('true');
@@ -96,7 +96,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify Inline cozy radio group', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCozyRadioGroup));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCozyRadioGroup));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonInlineCozyRadioGroup));
         expect(getText(selectedValueLabel, radioButtonInlineCozyRadioGroup)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCozyRadioGroup)
             , 'aria-checked')).toBe('true');
@@ -104,7 +104,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify radio group with default property values', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultPropertyValues));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultPropertyValues));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDefaultPropertyValues));
         expect(getText(selectedValueLabel, radioButtonWithDefaultPropertyValues)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultPropertyValues)
             , 'aria-checked')).toBe('true');
@@ -112,7 +112,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify radio group with disabled button and validation error', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDisabledButtonAndValidationError));
         expect(getText(selectedValueLabel, radioButtonWithDisabledButtonAndValidationError)).toContain(januaryValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError)
             , 'aria-checked')).toBe('true');
@@ -123,7 +123,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify radio group using FormGroup and FormControl', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonUsingFormGroupAndFormControl));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonUsingFormGroupAndFormControl), marchIndex);
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonUsingFormGroupAndFormControl), marchIndex);
         expect(getText(selectedValueLabel, radioButtonUsingFormGroupAndFormControl)).toContain(marchValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonUsingFormGroupAndFormControl)
             , 'ng-reflect-is-disabled')).toBe('true');
@@ -133,7 +133,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify inline compact radio group with default selection', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineWithDefaultSelection));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineWithDefaultSelection));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonInlineWithDefaultSelection));
         expect(getText(selectedValueLabel, radioButtonInlineWithDefaultSelection)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineWithDefaultSelection)
             , 'aria-checked')).toBe('true');
@@ -142,7 +142,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify inline compact radio group', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCompact));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCompact));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonInlineCompact));
         expect(getText(selectedValueLabel, radioButtonInlineCompact)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCompact)
             , 'aria-checked')).toBe('true');
@@ -150,7 +150,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify radio group using FormGroup and FormControl', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItem));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItem), marchIndex);
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDisabledItem), marchIndex);
         expect(getText(selectedValueLabel, radioButtonWithDisabledItem)).toContain(marchValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItem)
             , 'ng-reflect-is-disabled')).toBe('true');
@@ -160,7 +160,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify radio group with disabled button and validation error', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonHaveValidationError));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonHaveValidationError));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonHaveValidationError));
         expect(getText(selectedValueLabel, radioButtonHaveValidationError).toLowerCase()).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonHaveValidationError)
             , 'aria-checked')).toBe('true');
@@ -170,11 +170,11 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify platform radio button with None (No selection) value created as an Option', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithNoSelectionValue));
         expect(getText(selectedValueLabel, radioButtonWithNoSelectionValue).toLowerCase()).toContain(noneValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue)
             , 'aria-checked')).toBe('true');
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue), 1);
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithNoSelectionValue), 1);
         expect(getText(selectedValueLabel, radioButtonWithNoSelectionValue).toLowerCase()).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue)
             , 'aria-checked', 1)).toBe('true');
@@ -182,7 +182,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify radio group using FormGroup and FormControl with List of String Values', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithFormGroupAndFormControl));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithFormGroupAndFormControl));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithFormGroupAndFormControl));
         expect(getText(selectedValueLabel, radioButtonWithFormGroupAndFormControl).toLowerCase()).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithFormGroupAndFormControl)
             , 'aria-checked')).toBe('true');
@@ -190,7 +190,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify Creating platform radio button with list of string values also pre-selection based on control value', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelection));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelection));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithPreSelection));
         expect(getText(selectedValueLabel, radioButtonWithPreSelection).toLowerCase()).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelection)
             , 'aria-checked')).toBe('true');
@@ -198,7 +198,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify Creating platform radio button with given list of string values', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithGivenListOfStringValues));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithGivenListOfStringValues));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithGivenListOfStringValues));
         expect(getText(selectedValueLabel, radioButtonWithGivenListOfStringValues).toLowerCase()).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithGivenListOfStringValues)
             , 'aria-checked')).toBe('true');
@@ -206,7 +206,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify platform radio buttons created with given list of SelectItem objects and have validation error', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithListOfSelectItemObjects));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithListOfSelectItemObjects));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithListOfSelectItemObjects));
         expect(getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithListOfSelectItemObjects)
             , 'aria-checked')).toBe('true');
@@ -216,7 +216,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify Vertical radio group', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonVertical));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonVertical));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonVertical));
         expect(getText(selectedValueLabel, radioButtonVertical)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonVertical)
             , 'aria-checked')).toBe('true');
@@ -229,7 +229,7 @@ describe('Radio button group  Test Suite', function() {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonVerticalQualificationForm));
         for (let i = 0; i < radioButtonsLength; i++) {
-            click(radioButtonGroupPage.radioButtonInputByName(radioButtonVerticalQualificationForm), i);
+            click(radioButtonGroupPage.radioButtonLabelByName(radioButtonVerticalQualificationForm), i);
             expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonVerticalQualificationForm)
                 , 'aria-checked', i)).toBe('true');
         }
@@ -238,7 +238,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify compact platform radio button created with given list of SelectItem objects.Using FormGroup and FormControl', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSelectItemsFormGroupAndFormControl));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSelectItemsFormGroupAndFormControl), autumnIndex);
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithSelectItemsFormGroupAndFormControl), autumnIndex);
         expect(getText(selectedValueLabel, radioButtonWithSelectItemsFormGroupAndFormControl - 4)).toContain(autumnValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSelectItemsFormGroupAndFormControl)
             , 'aria-checked', autumnIndex)).toBe('true');
@@ -249,7 +249,7 @@ describe('Radio button group  Test Suite', function() {
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed)
             , 'aria-checked', springIndex)).toBe('true');
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithPreSelectionOnObjectDataPassed));
         expect(getText(selectedValueLabel, radioButtonWithPreSelectionOnObjectDataPassed - 4)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed)
             , 'aria-checked')).toBe('true');
@@ -257,7 +257,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify platform radio buttons created with given list of SelectItem objects also pre-selection based on control value', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionBasedOnControlValue));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionBasedOnControlValue));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithPreSelectionBasedOnControlValue));
         expect(getText(selectedValueLabel, radioButtonWithPreSelectionBasedOnControlValue - 5)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionBasedOnControlValue)
             , 'aria-checked')).toBe('true');
@@ -265,7 +265,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify platform radio button created with given list of SelectItem objects', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject));
-        click(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject));
+        click(radioButtonGroupPage.radioButtonLabelByName(platformRadioButtonWithSelectiemObject));
         expect(getText(selectedValueLabel, platformRadioButtonWithSelectiemObject - 5)).toContain(winterValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject)
             , 'aria-checked')).toBe('true');
@@ -273,7 +273,7 @@ describe('Radio button group  Test Suite', function() {
 
     it('Verify platform Radio Button created from Invoice objects. Using LookupKey and DisplayKey.', () => {
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithLookupKeyAndDisplayKey));
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithLookupKeyAndDisplayKey));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithLookupKeyAndDisplayKey));
         expect(getText(preferredBrandLabel)).toContain(samsungValue);
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithLookupKeyAndDisplayKey)
             , 'aria-checked')).toBe('true');
@@ -295,7 +295,7 @@ describe('Radio button group  Test Suite', function() {
             , 'ng-reflect-is-disabled', 2)).toBe('true');
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSomeDisabledButtons)
             , 'ng-reflect-is-disabled', 3)).toBe('true');
-        click(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject));
+        click(radioButtonGroupPage.radioButtonLabelByName(platformRadioButtonWithSelectiemObject));
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject)
             , 'aria-checked')).toBe('true');
     });
@@ -314,11 +314,7 @@ describe('Radio button group  Test Suite', function() {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonDisabledWithSelectedItem));
         scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledWithSelectedItem));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledWithSelectedItem)
-            , 'ng-reflect-is-disabled')).toBe('true');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledWithSelectedItem)
-            , 'aria-checked')).toBe('true');
-        for (let i = 1; i < radioButtonsLength; i++) {
+        for (let i = 0; i < radioButtonsLength; i++) {
             expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledWithSelectedItem)
                 , 'ng-reflect-is-disabled', i)).toBe('true');
         }
@@ -362,7 +358,7 @@ describe('Radio button group  Test Suite', function() {
             expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
                 , 'ng-reflect-is-disabled', i)).toBe('true');
         }
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithIndividualButtonDisabled));
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
             , 'aria-checked')).toBe('true');
     });
@@ -399,7 +395,7 @@ describe('Radio button group  Test Suite', function() {
             expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
                 , 'ng-reflect-is-disabled', i)).toBe('true');
         }
-        click(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem));
+        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDisabledItemsCreatedFromSelectItem));
         expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
             , 'aria-checked')).toBe('true');
     });

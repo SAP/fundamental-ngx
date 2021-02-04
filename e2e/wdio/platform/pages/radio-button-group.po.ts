@@ -16,6 +16,10 @@ export class RadioButtonGroupPage extends BaseComponentPo {
         return `[id="fd-popover-${name}"] input`;
     };
 
+    radioButtonLabelByName = (name: number = 0) => {
+        return `[id="fd-popover-${name}"] label`;
+    };
+
     actionButtonByName = (name: number = 8) => {
         return `#fdp-id-${name}`;
     };
