@@ -1,13 +1,8 @@
 <div class="examples-column">
     <div fd-form-item>
-        <label fd-form-label id="standart-combobox">Standard</label>
+        <label fd-form-label for="standard-combobox-search">Standard</label>
         <fd-combobox
-            ariaLabel="Standard"
-            ariaLabelledby="standart-combobox"
-            maxHeight="250px"
-            placeholder="Type some text..."
-            [dropdownValues]="fruits"
-            [(ngModel)]="searchTermOne">
+            comboboxId="standard-combobox">
         </fd-combobox>
     </div>
     <small>Search Term: {{ searchTermOne }}</small>
