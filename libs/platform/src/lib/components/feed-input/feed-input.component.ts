@@ -41,7 +41,7 @@ export class FeedInputComponent implements AfterViewInit {
 
     /** Set title attribute for accessibility user image */
     @Input()
-    title = 'User';
+    userTitle = 'User';
 
     /** @hidden Event emitted when user click on send button */
     @Output()
