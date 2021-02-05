@@ -216,7 +216,7 @@
                     </ul>
                 </fd-wizard-navigation>
             </fd-wizard>
-            <div fd-bar [barDesign]="'floating-footer'">
+            <div fd-bar barDesign="floating-footer">
                 <div fd-bar-right>
                     <fd-button-bar *ngIf="step1status !== 'current'" label="Previous Step" (click)="goToStep(currentStep - 1)"></fd-button-bar>
                     <fd-button-bar *ngIf="summaryStatus !== 'current'" [label]="step4status === 'current' ? 'Review' : 'Next Step'" [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')" (click)="goToStep(currentStep + 1)"></fd-button-bar>
