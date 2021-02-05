@@ -15,8 +15,8 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     private _isRtl = false;
 
-    /** @hidden Navigation icon name based on RTL */
-    private _subscription: Subscription;
+    /** @hidden */
+    private _rtlSubscription: Subscription;
 
     /** @hidden */
     constructor(
@@ -37,8 +37,8 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._subscription) {
-            this._subscription.unsubscribe();
+        if (this._rtlSubscription) {
+            this._rtlSubscription.unsubscribe();
         }
     }
 
@@ -52,7 +52,7 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        this._subscription = this._rtlService?.rtl
+        this._rtlSubscription = this._rtlService?.rtl
             .pipe(startWith(this._rtlService.rtl.getValue()))
             .subscribe((isRtl: boolean) => {
                 this._isRtl = isRtl;
