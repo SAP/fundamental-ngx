@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.14...v0.26.2-rc.15) (2021-02-05)
+
+
+### Bug Fixes
+
+* (Platform) fix Upload Collection issues ([#4567](https://github.com/SAP/fundamental-ngx/issues/4567)) ([2bf80c7](https://github.com/SAP/fundamental-ngx/commit/2bf80c7b432504fd9beef2199b3b174c8b6c1b2e))
+
 ### [0.26.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.13...v0.26.2-rc.14) (2021-02-04)
 
 
