@@ -28,14 +28,20 @@ import { NewFolderComponent } from '../new-folder';
     ]
 })
 export class MoveToComponent implements OnInit {
-    /** 
+    /**
      * List of upload collection items
      */
     readonly items: UploadCollectionItem[] = this.dialogRef.data.items;
-    /** 
+    /**
      * The current folder in what need to create a new one
      */
     originalFolder?: UploadCollectionFolder = this.dialogRef.data.currentFolder;
+
+    /** @hidden */
+    readonly movableFolders?: UploadCollectionFolder[] = this.dialogRef.data.movableFolders;
+
+    /** @hidden */
+    readonly _maxFilenameLength = this.dialogRef.data.maxFilenameLength;
 
     /** @hidden */
     _currentFolder?: UploadCollectionFolder = this.originalFolder ? { ...this.originalFolder } : null;
@@ -103,32 +109,26 @@ export class MoveToComponent implements OnInit {
             height: '350px',
             backdropClass: 'fdp-upload-collection-dialig-no-bg',
             data: {
-                currentFolder: this._currentFolder
+                currentFolder: this._currentFolder,
+                maxFilenameLength: this._maxFilenameLength
             }
         } as DialogConfig);
 
         dialogRef.afterClosed.pipe(take(1)).subscribe((folderName) => {
-            const folder: UploadCollectionFolder = {
-                documentId: null,
-                type: 'folder',
-                name: folderName,
-                uploadedBy: {
-                    id: Date.now(),
-                    name: 'You'
-                },
-                uploadedOn: new Date(),
-                files: []
-            };
-
             this.dialogRef.close({
-                selectedFolder: folder
+                parentFolderId: this._currentFolder?.documentId,
+                selectedFolder: null,
+                folderName: folderName
             });
         });
     }
 
     /** @hidden */
     private _init(items: UploadCollectionItem[]): void {
-        this._foldersList = items.filter((item) => item.type === 'folder') as UploadCollectionFolder[];
+        this._foldersList = items.filter(
+            (item) =>
+                item.type === 'folder' && !this.movableFolders.some((folder) => folder.documentId === item.documentId)
+        ) as UploadCollectionFolder[];
     }
 
     /** @hidden */

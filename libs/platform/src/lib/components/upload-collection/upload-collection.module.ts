@@ -25,6 +25,7 @@ import { NewFolderComponent, MoveToComponent } from './dialogs';
 import { UploadCollectionComponent } from './upload-collection';
 import { UploadCollectionDragnDropDirective } from './directives';
 import { PlatformPipeModule } from '../../utils/pipes/pipe.module';
+import { PlatformMenuButtonModule } from '../menu-button/public_api';
 
 @NgModule({
     declarations: [
@@ -53,7 +54,8 @@ import { PlatformPipeModule } from '../../utils/pipes/pipe.module';
         MessageStripModule,
         FileUploaderModule,
         ListModule,
-        PlatformPipeModule
+        PlatformPipeModule,
+        PlatformMenuButtonModule
     ],
     exports: [UploadCollectionComponent]
 })
