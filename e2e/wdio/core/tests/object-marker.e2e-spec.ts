@@ -51,7 +51,7 @@ describe('Object marker test suite', function() {
         for (let i = 0; i < arr; i++) {
             scrollIntoView(objectMarkerPage.clickableMarkers, i);
             mouseHoverElement(objectMarkerPage.clickableMarkers, i);
-            expect(textDecorationValues).toContain(getCSSPropertyByName(objectMarkerPage.clickableMarkers, textDecorationAttribute, i).value as string);
+            expect(textDecorationValues).toContain(getCSSPropertyByName(objectMarkerPage.clickableMarkers, textDecorationAttribute, i).value);
         }
     });
 });

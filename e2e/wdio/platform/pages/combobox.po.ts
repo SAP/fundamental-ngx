@@ -5,13 +5,13 @@ import {
     scrollIntoView,
     sendKeys,
     waitForPresent,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 export class ComboBoxPo extends BaseComponentPo {
     private url = '/combobox';
     root = '#page-content';
+    pageTitle = 'fd-platform-combobox-header h1';
 
     comboBoxRoot = '.fdp-combobox';
     comboBoxDropdownExpanded = '.fd-list';
@@ -22,11 +22,11 @@ export class ComboBoxPo extends BaseComponentPo {
     comboBoxInput = this.comboBoxRoot + ' input';
 
     selectedDropDownOption = (name: string) => {
-        return `//span[contains(.,'${name}')]//ancestor::li[@role="listitem" and contains(@class, "is-selected")]`;
+        return `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;
     };
 
     dropDownOption = (name: string) => {
-        return `//span[contains(.,'${name}')]//ancestor::li[@role="listitem"]`;
+        return `//span[contains(.,'${name}')]//ancestor::li`;
     };
 
     comboBoxOptionHint = (typedCharacters: string, restCharacters: string) => {
@@ -34,19 +34,19 @@ export class ComboBoxPo extends BaseComponentPo {
     };
 
     comboBoxButtons = (name: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//button`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//button`;
     };
 
     comboBoxExpandedButtons = (name: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//button[contains (@class,"is-expanded")]`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//button[contains (@class,"is-expanded")]`;
     };
 
     comboBoxInputs = (name: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//input`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//input`;
     };
 
     filledComboBoxInputs = (name: string, option: string) => {
-        return `//label[@for='${name}']/following-sibling::fdp-input-message-group//input[@ng-reflect-model='${option}']`;
+        return `//label[@for='${name}']/../../fdp-input-message-group//input[@ng-reflect-model='${option}']`;
     };
 
     expandDropdown(type: string): void {
@@ -69,5 +69,6 @@ export class ComboBoxPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.pageTitle);
     }
 }

@@ -1,13 +1,12 @@
 <main class="fd-page">
     <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group #fg3 [multiLayout]="true">
+        <fdp-form-group #fg3>
             <fdp-form-field
                 #ff3
                 id="templateExample"
                 label="Detailed description"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
                 [validators]="textareaValidator"

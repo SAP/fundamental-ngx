@@ -20,7 +20,7 @@ describe('Multi input test suite', function() {
 
     beforeAll(() => {
         multiInputPage.open();
-        waitForPresent(multiInputPage.mobileInput);
+        waitForPresent(multiInputPage.mobileMainInput);
     }, 1);
 
     afterEach(() => {
@@ -123,9 +123,6 @@ describe('Multi input test suite', function() {
             console.log('Skip for IE and Safari');
             return;
         }
-
-        const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropdownButtons);
-        console.log(activeButtonsQuantity);
         multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, 1);
         const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
         click(multiInputPage.activeDropdownButtons, 1);

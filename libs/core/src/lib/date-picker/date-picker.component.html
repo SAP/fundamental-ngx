@@ -1,6 +1,6 @@
 <fd-popover
     [(isOpen)]="isOpen"
-    (isOpenChange)="isOpenChange.emit($event)"
+    (isOpenChange)="isOpenChange.emit($event); _changeMessageVisibility()"
     [triggers]="[]"
     [placement]="placement"
     [disabled]="disabled"
@@ -9,7 +9,7 @@
     [appendTo]="appendTo"
 >
     <fd-popover-control>
-        <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled">
+        <fd-input-group [compact]="compact" [state]="state" [disabled]="disabled" #inputGroupComponent>
             <input
                 type="text"
                 class="fd-input"
@@ -17,9 +17,9 @@
                 [compact]="compact"
                 [disabled]="disabled"
                 [placeholder]="placeholder"
-                [class.is-error]="isInvalidDateInput && useValidation"
+                [class.is-error]="_isInvalidDateInput && useValidation"
                 [attr.aria-label]="dateInputLabel"
-                [(ngModel)]="inputFieldDate"
+                [(ngModel)]="_inputFieldDate"
                 (ngModelChange)="handleInputChange($event)"
             />
             <span fd-input-group-addon [button]="true" [compact]="compact">
@@ -38,7 +38,11 @@
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body [style.display]="'block'" [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
+        <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+            {{ _message }}
+        </fd-form-message>
         <ng-content></ng-content>
+
         <fd-calendar
             (closeCalendar)="closeFromCalendar()"
             [activeView]="activeView"

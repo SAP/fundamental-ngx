@@ -36,9 +36,10 @@ export interface PopoverTemplate {
 
 @Injectable()
 export class PopoverService extends BasePopoverClass {
-
+    /** String content displayed inside popover body */
     stringContent: string;
 
+    /** Template content displayed inside popover body */
     templateContent: TemplateRef<any>;
 
     /** @hidden */
@@ -61,6 +62,9 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _triggerElement: ElementRef;
+
+    /** @hidden */
+    private _lastActiveElement: HTMLElement;
 
     /** @hidden */
     private _templateData: PopoverTemplate;
@@ -112,6 +116,7 @@ export class PopoverService extends BasePopoverClass {
                 this.isOpenChange.emit(false);
             }
             this.isOpen = false;
+            this._focusLastActiveElementBeforeOpen();
         }
     }
 
@@ -143,6 +148,7 @@ export class PopoverService extends BasePopoverClass {
 
             this._listenOnClose();
             this._listenOnOutClicks();
+            this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
         }
     }
@@ -212,6 +218,22 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** Refresh listeners on trigger element events */
+    _refreshTriggerListeners(): void {
+        if (!this._triggerElement) {
+            return;
+        }
+
+        this._removeTriggerListeners();
+        if (this.triggers?.length) {
+            this.triggers.forEach(trigger => {
+                this._eventRef.push(this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
+                    this.toggle();
+                }));
+            });
+        }
+    }
+
     /** @hidden */
     private _getOverlayConfig(position: FlexibleConnectedPositionStrategy): OverlayConfig {
         const direction = this._getDirection();
@@ -261,22 +283,6 @@ export class PopoverService extends BasePopoverClass {
     private _removeTriggerListeners(): void {
         this._eventRef.forEach(event => event());
         this._eventRef = [];
-    }
-
-    /** Refresh listeners on trigger element events */
-    private _refreshTriggerListeners(): void {
-        if (!this._triggerElement) {
-            return;
-        }
-
-        this._removeTriggerListeners();
-        if (this.triggers?.length) {
-            this.triggers.forEach(trigger => {
-                this._eventRef.push(this._renderer.listen(this._triggerElement.nativeElement, trigger, () => {
-                    this.toggle();
-                }));
-            });
-        }
     }
 
     /** Attach template containing popover body to overlay */
@@ -400,6 +406,21 @@ export class PopoverService extends BasePopoverClass {
     private _detectChanges(): void {
         if (this._getPopoverBody()) {
             this._getPopoverBody().detectChanges();
+        }
+    }
+
+    /** @hidden */
+    private _focusFirstTabbableElement(): void {
+        if (this.focusAutoCapture) {
+            this._lastActiveElement = <HTMLElement>document.activeElement;
+            this._getPopoverBody()?._focusFirstTabbableElement();
+        }
+    }
+
+    /** @hidden */
+    private _focusLastActiveElementBeforeOpen(): void {
+        if (this.focusAutoCapture && this._lastActiveElement) {
+            this._lastActiveElement.focus();
         }
     }
 

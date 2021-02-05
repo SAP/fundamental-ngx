@@ -3,7 +3,6 @@ import checkboxGPData from '../../platform/fixtures/appData/checkbox-page-conten
 import checkboxData from '../fixtures/appData/checkbox-page-contents';
 import {
     acceptAlert,
-    browserIsIE,
     browserIsIEorSafari,
     click,
     clickNextElement,
@@ -15,7 +14,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForPresent,
-    waitForElDisplayed
+    waitForElDisplayed, browserIsFirefox
 } from '../../driver/wdio';
 
 describe('Checkbox test suite', () => {
@@ -81,7 +80,7 @@ describe('Checkbox test suite', () => {
         });
 
         it('should check disabled checkbox', () => {
-            waitForElDisplayed(disabledBinaryCheckbox, 0, 10000);
+            scrollIntoView(disabledBinaryCheckbox);
             checkIfDisabled(disabledBinaryCheckbox, 'ng-reflect-is-disabled', 'true');
         });
     });
@@ -103,7 +102,7 @@ describe('Checkbox test suite', () => {
         });
 
         it('should check binary checkbox without value', () => {
-            if (!browserIsIEorSafari()) {
+            if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
@@ -170,11 +169,13 @@ describe('Checkbox test suite', () => {
             checkHoverState(tristateCheckboxes);
             checkFocusState(tristateCheckboxes);
 
-            for (let j = 0; 6 > j; j++) {
-                checkTristateCheckboxMarking(tristateCheckboxes, j);
+            for (let j = 0; 8 > j; j++) {
+                if (j !== 3 && j !== 7) {
+                    checkTristateCheckboxMarking(tristateCheckboxes, j);
+                }
             }
 
-            checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 6);
+            checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 3);
             checkMarkingCheckbox(tristateCheckboxes, 7);
 
         });
@@ -191,13 +192,13 @@ describe('Checkbox test suite', () => {
             checkHoverState(tristateCheckboxes, 8);
             checkFocusState(tristateCheckboxes, 8);
 
-            for (let j = 8; 14 > j; j++) {
-                checkTristateCheckboxMarking(tristateCheckboxes, j);
+            for (let j = 8; 16 > j; j++) {
+                if (j !== 11 && j !== 15) {
+                    checkTristateCheckboxMarking(tristateCheckboxes, j);
+                }
             }
-
-            for (let k = 14; 16 > k; k++) {
-                checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, k);
-            }
+            checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 11);
+            checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 15);
         });
 
         it('should check tristate checkbox with multiple checkboxes', () => {
@@ -249,12 +250,17 @@ describe('Checkbox test suite', () => {
             clickNextElement(presenceCheckbox);
             expect(getCSSPropertyByName(presenceCheckbox, 'border-bottom-color').value)
                 .toContain(checkboxGPData.checkboxErrorState);
-            scrollIntoView(checkboxPage.submitBtn);
+             scrollIntoView(checkboxPage.submitBtn);
             mouseHoverElement(checkboxPage.submitBtn);
             waitForElDisplayed(checkboxPage.errorTooltip);
             expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxData.checkboxErrorTooltip);
-            checkHoverState(errorCheckboxes, 1);
             checkFocusState(errorCheckboxes, 1);
+            // TODO improve hover check stability for FF
+            if (browserIsFirefox()) {
+                console.log('skip hover check');
+                return;
+            }
+            checkHoverState(errorCheckboxes, 1);
         }, 1);
 
         it('should check error handling form submission', () => {
@@ -304,14 +310,6 @@ describe('Checkbox test suite', () => {
     });
 
     describe('check example orientation', () => {
-        it('should check orientation', () => {
-            if (!browserIsIE()) {
-                console.log('skip for IE');
-                return;
-            }
-            checkboxPage.checkRtlSwitch(checkboxPage.rtlSwitcherArr, checkboxPage.exampleAreaContainersArr);
-        });
-
         it('should check RTL orientation', () => {
             checkboxPage.checkRtlSwitch();
         });

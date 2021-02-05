@@ -6,6 +6,10 @@ export function currentPlatformName(): string {
     return browser.capabilities.platformName;
 }
 
+export function getBaseURL(): string {
+    return browser.options.baseUrl;
+}
+
 export function open(path: string = ''): void {
     browser.url(path);
 }
@@ -159,7 +163,7 @@ export function getAttributeByNameArr(selector: string, attrName: string, sliceS
 }
 
 // Returns object (assertions needs to be adapted)
-export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): { value: string | number } {
+export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): WebdriverIO.CSSProperty {
     return $$(selector)[index].getCSSProperty(propertyName);
 }
 
@@ -179,24 +183,24 @@ export function getElementSize(selector: string, index: number = 0, prop?: 'widt
     return $$(selector)[index].getSize(prop || void 0);
 }
 
-export function executeScript2(selector): string {
-    const attrName = browser.capabilities.browserName === 'firefox' ? 'border-left-style' : 'border';
-    return browser.execute(function(selector, attrName) {
+export function executeScriptAfterTagFF(selector: string, index: number = 0): string {
+    const attrName = browserIsFirefox() ? 'border-left-style' : 'border';
+    return browser.execute(function(selector, attrName, index) {
         return window.getComputedStyle(
-            document.querySelector(selector), ':after')[attrName];
-    }, selector, attrName);
+            document.querySelectorAll(selector)[index], ':after')[attrName];
+    }, selector, attrName, index);
 }
 
-export function executeScriptBeforeTagAttr(selector, attrName): string {
-    return browser.execute(function(selector, attrName) {
-        return (window.getComputedStyle(document.querySelector(selector), ':before')[attrName]);
-    }, selector, attrName);
+export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
+    return browser.execute(function(selector, attrName, index) {
+        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':before')[attrName]);
+    }, selector, attrName, index);
 }
 
-export function executeScriptAfterTagAttr(selector, attrName): string {
-    return browser.execute(function(selector, attrName) {
-        return (window.getComputedStyle(document.querySelector(selector), ':after')[attrName]);
-    }, selector, attrName);
+export function executeScriptAfterTagAttr(selector: string, attrName: string, index: number = 0): string {
+    return browser.execute(function(selector, attrName, index) {
+        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':after')[attrName]);
+    }, selector, attrName, index);
 }
 
 export function getElementArrayLength(selector: string): number {
@@ -267,7 +271,22 @@ export function getElementLocation(selector: string, index: number = 0, prop?: '
     return $$(selector)[index].getLocation(prop || void 0);
 }
 
-
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
+}
+
+export function clickAndDragElement(locationX: number, locationY: number, newLocationX: number, newLocationY: number): void {
+    browser.performActions([{
+        'type': 'pointer',
+        'id': 'pointer1',
+        'parameters': { 'pointerType': 'mouse' },
+        'actions': [
+            { 'type': 'pointerMove', 'duration': 200, 'x': locationX, 'y': locationY },
+            { 'type': 'pointerDown', 'button': 0 },
+            { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
+            { 'type': 'pointerMove', 'duration': 1000, 'x': newLocationX, 'y': newLocationY },
+            { 'type': 'pointerUp', 'button': 0 },
+            { 'type': 'pause', 'duration': 500 }
+        ]
+    }]);
 }

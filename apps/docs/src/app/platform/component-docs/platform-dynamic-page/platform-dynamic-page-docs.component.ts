@@ -22,6 +22,10 @@ import * as dynamicPageNonCollapsibleExample from '!raw-loader!./platform-dynami
 import * as dynamicPageNonCollapsibleExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.scss';
 import * as dynamicPageNonCollapsibleExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component.ts';
 
+import * as dynamicPageFlexibleColumnExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.html';
+import * as dynamicPageFlexibleColumnExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.scss';
+import * as dynamicPageFlexibleColumnExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.ts';
+
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './platform-dynamic-page-docs.component.html'
@@ -52,7 +56,7 @@ export class PlatformDynamicPageDocsComponent {
             language: 'typescript',
             code: dynamicPageSnapScrollExampleTsCode,
             fileName: 'platform-dynamic-page-snap-scroll-example',
-            component: 'PlatformDynamicPageSnapScrollComponent'
+            component: 'PlatformDynamicPageSnapScrollExampleComponent'
         }
     ];
 
@@ -67,7 +71,7 @@ export class PlatformDynamicPageDocsComponent {
             language: 'typescript',
             code: dynamicPageTabbedExampleTsCode,
             fileName: 'platform-dynamic-page-tabbed-example',
-            component: 'PlatformDynamicPageTabbedComponent'
+            component: 'PlatformDynamicPageTabbedExampleComponent'
         }
     ];
 
@@ -82,7 +86,7 @@ export class PlatformDynamicPageDocsComponent {
             language: 'typescript',
             code: dynamicPageResponsivePaddingExampleTsCode,
             fileName: 'platform-dynamic-page-responsive-padding-example',
-            component: 'PlatformDynamicPageResponsivePaddingComponent'
+            component: 'PlatformDynamicPageResponsivePaddingExampleComponent'
         }
     ];
 
@@ -90,14 +94,29 @@ export class PlatformDynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageNonCollapsibleExample,
-            fileName: 'platform-dynamic-page-responsive-padding-example',
+            fileName: 'platform-dynamic-page-non-collapsible-example',
             scssFileCode: dynamicPageNonCollapsibleExampleScss
         },
         {
             language: 'typescript',
             code: dynamicPageNonCollapsibleExampleTsCode,
-            fileName: 'platform-dynamic-page-responsive-padding-example',
-            component: 'PlatformDynamicPageResponsivePaddingComponent'
+            fileName: 'platform-dynamic-page-non-collapsible-example',
+            component: 'PlatformDynamicPageNonCollapsibleExampleComponent'
+        }
+    ];
+
+    dynamicPageFlexibleColumn: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dynamicPageFlexibleColumnExample,
+            fileName: 'platform-dynamic-page-flexible-column-example',
+            scssFileCode: dynamicPageFlexibleColumnExampleScss
+        },
+        {
+            language: 'typescript',
+            code: dynamicPageFlexibleColumnExampleTsCode,
+            fileName: 'platform-dynamic-page-flexible-column-example',
+            component: 'PlatformDynamicPageFlexibleColumnExampleComponent'
         }
     ];
 }

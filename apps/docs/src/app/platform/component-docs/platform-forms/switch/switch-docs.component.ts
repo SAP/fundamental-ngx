@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
+
 import * as switchSizeHtml from '!raw-loader!./switch-examples/switch-sizes-example/switch-sizes-example.component.html';
 import * as switchDisableHtml from '!raw-loader!./switch-examples/disabled-switch-example/disabled-switch-example.component.html';
 import * as switchDisableTs from '!raw-loader!./switch-examples/disabled-switch-example/disabled-switch-example.component';
@@ -9,7 +11,6 @@ import * as switchFormExampleHtml from '!raw-loader!./switch-examples/switch-for
 import * as switchFormExampleTs from '!raw-loader!./switch-examples/switch-form-example/switch-forms-example.component.ts';
 import * as switchConfigExampleHtml from '!raw-loader!./switch-examples/switch-config-example/switch-config-example.component.html';
 import * as switchConfigExampleTs from '!raw-loader!./switch-examples/switch-config-example/switch-config-example.component.ts';
-import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
     selector: 'app-switch',
@@ -33,7 +34,8 @@ export class SwitchDocsComponent {
         {
             language: 'typescript',
             code: switchDisableTs,
-            fileName: 'disabled-switch-example'
+            fileName: 'disabled-switch-example',
+            component: 'DisabledSwitchExampleComponent'
         }
     ];
 
@@ -46,7 +48,8 @@ export class SwitchDocsComponent {
         {
             language: 'typescript',
             code: switchSemanticTs,
-            fileName: 'switch-sizes-example'
+            fileName: 'semantic-switch-example',
+            component: 'SemanticSwitchExampleComponent'
         }
     ];
 
@@ -54,12 +57,13 @@ export class SwitchDocsComponent {
         {
             language: 'html',
             code: switchFormExampleHtml,
-            fileName: 'switch-example-disabled-state'
+            fileName: 'switch-forms-example'
         },
         {
             language: 'typescript',
             code: switchFormExampleTs,
-            fileName: 'switch-sizes-example'
+            fileName: 'switch-forms-example',
+            component: 'SwitchFormsExampleComponent'
         }
     ];
 
@@ -72,7 +76,8 @@ export class SwitchDocsComponent {
         {
             language: 'typescript',
             code: switchConfigExampleTs,
-            fileName: 'switch-config-example'
+            fileName: 'switch-config-example',
+            component: 'SwitchConfigExampleComponent'
         }
     ];
 }

@@ -1,12 +1,12 @@
 <h3>Template Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in ngModel directive.</p>
-<fdp-form-group [multiLayout]="true">
-    <fdp-form-field [id]="'sirius'" [label]="'Sirius'" zone="zLeft" rank="1">
-        <fdp-checkbox [name]="'sirius-cb'" [value]="'sirius'" title="sirius" [(ngModel)]="field1"></fdp-checkbox>
+<fdp-form-group columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="sirius" label="Sirius" column="1" rank="1">
+        <fdp-checkbox name="sirius-cb" value="sirius" title="sirius" [(ngModel)]="field1"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'vega'" [label]="'Vega'" zone="zRight" rank="1">
-        <fdp-checkbox [name]="'vega-cb'" [value]="'vega'" title="Vega" [(ngModel)]="field2"></fdp-checkbox>
+    <fdp-form-field id="vega" label="Vega" column="2" rank="1">
+        <fdp-checkbox name="vega-cb" value="vega" title="Vega" [(ngModel)]="field2"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 <div style="padding-left: 2rem;">field1: {{ field1 }}</div>
@@ -17,14 +17,14 @@
 <!--Reactive form example-->
 <h3>Reactive/Model Driven Form</h3>
 <p>Checkbox can be pre-selected if value of checkbox matches any value in form-control array.</p>
-<fdp-form-group #rmsfg [multiLayout]="true" [formGroup]="form1" [object]="form1Data">
-    <fdp-form-field #rfield1 [id]="'einstein'" [label]="'Einstein'" zone="zLeft" rank="1">
-        <fdp-checkbox [name]="'einstein-cb'" [value]="'einstein'" [contentDensity]="'compact'" title="Albert Einstein"
+<fdp-form-group #rmsfg [formGroup]="form1" [object]="form1Data" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field #rfield1 id="einstein" label="Einstein" column="1" rank="1">
+        <fdp-checkbox name="einstein-cb" value="einstein" contentDensity="compact" title="Albert Einstein"
             [formControl]="rfield1.formControl"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #rfield2 [id]="'newton'" [label]="'Newton'" zone="zRight" rank="1">
-        <fdp-checkbox [name]="'newton-cb'" [value]="'newton'" [contentDensity]="'compact'" title="Issac Newton"
+    <fdp-form-field #rfield2 id="newton" label="Newton" column="2" rank="1">
+        <fdp-checkbox name="newton-cb" value="newton" contentDensity="compact" title="Issac Newton"
             [formControl]="rfield2.formControl"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>

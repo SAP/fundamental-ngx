@@ -1,18 +1,18 @@
 <h3>Checkbox Error Handling</h3>
-<fdp-form-group #fg [hintPlacement]="'left'" [multiLayout]="true" [formGroup]="customForm" [object]="data">
-    <fdp-form-field #ffr1 [id]="'presence'" [validators]="validators" [label]="'Your presence is necessary'"
-        [hint]="'presence is necessary'" [hintPlacement]="'left'" [rank]="10" zone="zLeft">
-        <fdp-checkbox [name]="'presence-cb'" [isBinary]="true" title="Your presence is necessary" [formControl]="ffr1.formControl"></fdp-checkbox>
+<fdp-form-group #fg hintPlacement="left" [formGroup]="customForm" [object]="data" columnLayout="XL2-L1-M1-S1">
+    <fdp-form-field #ffr1 id="presence" [validators]="validators" label="Your presence is necessary"
+        hint="presence is necessary" hintPlacement="left" rank="10" column="1">
+        <fdp-checkbox name="presence-cb" [isBinary]="true" title="Your presence is necessary" [formControl]="ffr1.formControl"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #ffr2 [id]="'aggrement'" [validators]="validators" [hint]="'this selection is mandatory'"
-        [hintPlacement]="'left'" [rank]="15" zone="zRight">
-        <fdp-checkbox [name]="'aggrement-cb'" [isBinary]="true" title="Agree with terms" [formControl]="ffr2.formControl">
+    <fdp-form-field #ffr2 id="aggrement" [validators]="validators" hint="this selection is mandatory"
+        hintPlacement="left" rank="15" column="2">
+        <fdp-checkbox name="aggrement-cb" [isBinary]="true" title="Agree with terms" [formControl]="ffr2.formControl">
             Do you Agree with <a href="#"> Terms and Conditions</a>?
         </fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field id="button-1" [rank]="20" zone="zRight">
+    <fdp-form-field id="button-1" rank="20" column="2">
         <fdp-button buttonType="emphasized" (click)="onSubmit()" label="Submit"></fdp-button>
     </fdp-form-field>
 

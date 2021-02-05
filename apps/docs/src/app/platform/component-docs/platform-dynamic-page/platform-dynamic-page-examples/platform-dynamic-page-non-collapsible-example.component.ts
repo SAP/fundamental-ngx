@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ElementRef, ViewChild } from '@angu
 import { DynamicPageCollapseChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-dynamic-page-non-collapsible-example',
+    selector: 'fdp-platform-dynamic-page-non-collapsible-example',
     templateUrl: './platform-dynamic-page-non-collapsible-example.component.html',
     styleUrls: ['./platform-dynamic-page-non-collapsible-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -12,6 +12,8 @@ export class PlatformDynamicPageNonCollapsibleExampleComponent {
     overlay: ElementRef<HTMLElement>;
 
     fullscreen = false;
+
+    pageTitle = 'Balenciaga Tripple S Trainers';
 
     onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
         console.log('collapse changed');

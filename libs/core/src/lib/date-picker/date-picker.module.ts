@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { DatePickerComponent } from './date-picker.component';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { ButtonModule } from '../button/button.module';
+import { FormMessageModule } from '../form/form-message/form-message.module';
 
 @NgModule({
     declarations: [DatePickerComponent],
-    imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule, InputGroupModule, ButtonModule],
+    imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule, InputGroupModule, ButtonModule, FormMessageModule],
     exports: [DatePickerComponent]
 })
 export class DatePickerModule {}

@@ -29,12 +29,11 @@ describe('Combobox test suite', function() {
 
     beforeAll(() => {
         comboBoxPage.open();
-        waitForPresent(comboBoxPage.comboBoxButtons(activeTypeNames[0]));
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(comboBoxPage.comboBoxButtons(activeTypeNames[0]));
+        waitForPresent(comboBoxPage.pageTitle);
     }, 1);
 
     it('Verify each combobox consist of input and button', () => {
@@ -66,7 +65,7 @@ describe('Combobox test suite', function() {
 
     it('Verify each input while typing', () => {
         if (browserIsIE()) {
-
+            console.log('skip IE');
             return;
         }
         for (let i = 0; i < activeTypeNames.length - 1; i++) {

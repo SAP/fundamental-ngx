@@ -53,6 +53,21 @@
     <fd-wizard-branching-example></fd-wizard-branching-example>
 </component-example>
 <code-example [exampleFiles]="wizardBranchingExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="Wizard-Dialog" componentName="wizard">Dialog Wizard</fd-docs-section-title>
+<description>
+    The wizard can also be placed in a dialog. The <code>[appendToWizard]</code> input must be set to false, and a dialog
+    width and height must be provided to ensure the dialog does not change size as the user progresses through steps and
+    to the summary page.  It is recommended that width and height are set to <code>100%</code> but any value may be
+    provided.
+</description>
+<component-example>
+    <fd-wizard-dialog-example></fd-wizard-dialog-example>
+</component-example>
+<code-example [exampleFiles]="wizardDialogExample"></code-example>
+
 <separator></separator>
 
 <fd-docs-section-title id="Wizard-Ngfor" componentName="wizard">Wizard with steps in ngFor</fd-docs-section-title>
@@ -63,4 +78,3 @@
     <fd-wizard-ngfor-example></fd-wizard-ngfor-example>
 </component-example>
 <code-example [exampleFiles]="wizardNgForExample"></code-example>
-<separator></separator>

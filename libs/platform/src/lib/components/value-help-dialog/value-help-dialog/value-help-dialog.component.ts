@@ -19,7 +19,7 @@ import {
 import { Subject, Observable, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DialogService, DialogConfig, DialogRef } from '@fundamental-ngx/core';
+import { DialogService, DialogConfig, DialogRef, RtlService } from '@fundamental-ngx/core';
 import { isDataSource } from '../../../domain/data-source';
 import { ContentDensity } from '../../table/enums';
 import {
@@ -209,6 +209,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden */
   _mainSearch = '';
 
+  /** handles rtl service
+     * @hidden */
+  _dir = 'ltr';
+
   /** @hidden */
   private _destroyed = new Subject<void>();
 
@@ -218,13 +222,27 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden for data source handling */
   private _dsSubscription: Subscription;
 
+  /** @hidden Previous state */
+  private _prevState: VhdValue<T[]> = {
+    selected: [],
+    included: [],
+    excluded: []
+  };
+  /** @hidden Current data for local manupulation */
+  private _currentValue: VhdValue<T[]> = {
+    selected: [],
+    included: [],
+    excluded: []
+  };
+
   selectedTab: VhdTab = null;
 
   /** @hidden */
   constructor (
     private readonly _elementRef: ElementRef,
     private readonly _changeDetectorRef: ChangeDetectorRef,
-    private readonly _dialogService: DialogService
+    private readonly _dialogService: DialogService,
+    private readonly _rtlService: RtlService,
   ) {
     /** Default display function for define conditions */
     if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
@@ -262,12 +280,12 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   get selectedItems(): T[] {
-    return this.value.selected || [];
+    return this._currentValue.selected || [];
   }
 
   /** @hidden */
   get includedItems(): VhdIncludedEntity[] {
-    return this.value.included || [];
+    return this._currentValue.included || [];
   }
 
   /** @hidden */
@@ -277,7 +295,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   get excludedItems(): VhdExcludedEntity[] {
-    return this.value.excluded || [];
+    return this._currentValue.excluded || [];
   }
 
   /** @hidden */
@@ -327,6 +345,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     if (this.isOpen) {
       return;
     }
+    this._savePreviousState();
     this._updateFilters();
     this._initializeDS();
     this._initializeTab();
@@ -377,8 +396,8 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
    * Clear all selected items
    */
   clearSelectedItems(): void {
-    this.value.selected = [];
-    this.value.included = [];
+    this._currentValue.selected = [];
+    this._currentValue.included = [];
     this._changeDetectorRef.markForCheck();
   }
 
@@ -387,7 +406,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
    */
   clearExcludedItems(): void {
     if (this.validExcludedItems.length) {
-      this.value.excluded = [];
+      this._currentValue.excluded = [];
       this._changeDetectorRef.markForCheck();
     }
   }
@@ -418,7 +437,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** Remove item from selected array */
   removeSelected(index: number): void {
-    this.value.selected = this.selectedItems.filter((_, i) => i !== index);
+    this._currentValue.selected = this.selectedItems.filter((_, i) => i !== index);
     this._changeDetectorRef.markForCheck();
   }
 
@@ -426,7 +445,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
    * Remove included items
    */
   removeIncluded(index: number): void {
-    this.value.included = this.includedItems.filter((_, i) => i !== index);
+    this._currentValue.included = this.includedItems.filter((_, i) => i !== index);
     this._changeDetectorRef.markForCheck();
   }
 
@@ -434,7 +453,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
    * Remove excluded items
    */
   removeExcluded(index: number): void {
-    this.value.excluded = this.excludedItems.filter((_, i) => i !== index);
+    this._currentValue.excluded = this.excludedItems.filter((_, i) => i !== index);
     this._changeDetectorRef.markForCheck();
   }
 
@@ -471,6 +490,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       this.isOpenAdvanced = false;
       this.switchTab(VhdTab.selectFromList);
     } else {
+      this._currentValue = this._prevState;
       if (this.activeDialog) {
         this.activeDialog.close();
       }
@@ -488,7 +508,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   onSelect($event: T[]): void {
-    this.value.selected = $event;
+    this._currentValue.selected = $event;
     this._changeDetectorRef.markForCheck();
     if (this.searchSelection === 'once') {
       this.success();
@@ -497,13 +517,13 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   onIncludeChange($event: VhdIncludedEntity[]): void {
-    this.value.included = $event;
+    this._currentValue.included = $event;
     this._changeDetectorRef.markForCheck();
   }
 
   /** @hidden */
   onExcludeChange($event: VhdExcludedEntity[]): void {
-    this.value.excluded = $event;
+    this._currentValue.excluded = $event;
     this._changeDetectorRef.markForCheck();
   }
 
@@ -536,6 +556,13 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     }
   }
 
+  /** @hidden Save previous state */
+  private _savePreviousState(): void {
+    const value = JSON.parse(JSON.stringify(this.value));
+    this._currentValue = value;
+    this._prevState = value;
+  }
+
   /** @hidden */
   private _initializeTab(): void {
     if (this.mobile) {
@@ -559,6 +586,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       .pipe(takeUntil(this._destroyed))
       .subscribe(value => {
         if (value) {
+          this.value = value;
           this.valueChange.emit(value);
         }
 
@@ -569,6 +597,13 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       .subscribe(() => {
         this._updateFilters();
       })
+
+    this._dir = this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
+    this._rtlService.rtl
+      .pipe(takeUntil(this._destroyed))
+      .subscribe((isRtl: boolean) => {
+          this._dir = isRtl ? 'rtl' : 'ltr';
+      });
   }
 
   /** @hidden */

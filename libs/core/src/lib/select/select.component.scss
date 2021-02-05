@@ -1,17 +1,17 @@
 @import "~fundamental-styles/dist/select";
 
 .fd-popover__body > :first-child {
-	border-radius: 0;
+    border-radius: 0;
 }
 
 // TODO: Remove after issue on styles addressed.
 .fd-select__text-content {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	line-height: 1rem;
-	display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1rem;
+    display: block;
 }
 
 .fd-select-custom-class {
-	display: inline-block;
+    display: inline-block;
 }

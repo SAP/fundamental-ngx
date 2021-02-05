@@ -1,5 +1,5 @@
-<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
-    <fdp-form-field id="optionItemTemplate" label="Option Item Template" zone="zLeft"
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="optionItemTemplate" label="Option Item Template"
                     rank="4">
         <span>Allows to customize display item template</span>
         <fdp-combobox
@@ -18,7 +18,7 @@
         <p>Selected: {{ selectedItem | json }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="groupItemTemplate" label="Group Item Template" zone="zLeft"
+    <fdp-form-field id="groupItemTemplate" label="Group Item Template"
                     rank="4">
         <span>Allows to customize group header item template</span>
         <fdp-combobox
@@ -37,7 +37,7 @@
     </fdp-form-field>
 
     <fdp-form-field id="secondaryItemTemplate" label="Secondary Item Template"
-                    zone="zLeft" rank="4">
+                    rank="4">
         <span>Allows to customize secondary item template</span>
         <fdp-combobox
             name="secondaryItemTemplate"
@@ -54,7 +54,7 @@
     </fdp-form-field>
 
     <fdp-form-field id="selectedItemTemplate" label="Selected Item Template"
-                    zone="zLeft" rank="4">
+                    rank="4">
         <span>Allows to customize selected item template</span>
         <fdp-combobox
             name="secondaryItemTemplate"

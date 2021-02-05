@@ -16,12 +16,12 @@ export class InputPo extends BaseComponentPo {
     messagesComponentsInput = '#input9';
     submitBtn = 'button[type="submit"]';
     errorText = 'fd-form-message span';
-    requiredInputLabel = 'fdp-platform-input-reactive-form-validation-example .fd-form-label--required';
+    requiredInputLabel = 'fdp-platform-input-reactive-validation-example .fd-form-label--required';
     questionMarkSpan = 'span[role="alert"]';
-    inputsLabels = '.fd-section label span.ng-star-inserted';
+    inputsLabels = '.fd-container label span.ng-star-inserted';
     inputsArray = 'input.fd-input';
     autocompleteInput = 'input#form-input-7';
-    autocompleteInputLabel = 'fdp-platform-input-auto-complete-form-validation-example label';
+    autocompleteInputLabel = 'fdp-platform-input-auto-complete-validation-example label';
     autocompleteOptions = '.fd-popover__popper li';
 
     open(): void {

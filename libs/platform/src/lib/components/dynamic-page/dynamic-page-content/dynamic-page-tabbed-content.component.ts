@@ -1,17 +1,29 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Renderer2, Input, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Renderer2,
+    Input,
+    ViewEncapsulation,
+    AfterViewInit,
+    OnDestroy
+} from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, throttleTime } from 'rxjs/operators';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize, CLASS_NAME } from '../constants';
+import { DynamicPageService } from '../dynamic-page.service';
 import { addClassNameToElement } from '../utils';
 
 @Component({
     selector: 'fdp-dynamic-page-tabbed-content',
-    template: `<div class="fd-dynamic-page__content" [style.margin-top]="contentTop">
+    template: `<div class="fd-dynamic-page__content content-sticker">
         <ng-content></ng-content>
     </div>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class DynamicPageTabbedContentComponent {
+export class DynamicPageTabbedContentComponent implements AfterViewInit, OnDestroy {
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.
      * Default is `solid`.
@@ -46,20 +58,6 @@ export class DynamicPageTabbedContentComponent {
 
     /**
      * @hidden
-     * used internally to set margin top correctly for the content
-     */
-    @Input()
-    set contentTop(height: string) {
-        if (height) {
-            this._height = height;
-        }
-    }
-    get contentTop(): string {
-        return this._height;
-    }
-
-    /**
-     * @hidden
      * tracking the background value
      */
     private _background: DynamicPageBackgroundType;
@@ -70,13 +68,35 @@ export class DynamicPageTabbedContentComponent {
      */
     private _size: DynamicPageResponsiveSize;
 
-    /**
-     * @hidden
-     * tracks the height attribute
-     */
-    private _height: string;
+    /** @hidden */
+    private _subscriptions: Subscription = new Subscription();
 
-    constructor(public _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
+    /** @hidden */
+    constructor(
+        public _elementRef: ElementRef<HTMLElement>,
+        public _renderer: Renderer2,
+        private _dynamicPageService: DynamicPageService
+    ) {}
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
+
+        this._subscriptions.add(fromEvent(hostElement, 'scroll')
+            .pipe(debounceTime(20), throttleTime(20))
+            .subscribe(() => {
+                if (hostElement.scrollTop > 0) {
+                    this._dynamicPageService.collapseHeader();
+                } else {
+                    this._dynamicPageService.expandHeader();
+                }
+            }));
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /**
      * get reference to this element

@@ -8,9 +8,9 @@ export class ThumbnailPo extends BaseComponentPo {
 
     mainImage = '.fdp-media-container img';
     mainVideo = '.fdp-media-container video';
-    verticalGalleryImages = 'fdp-thumbnail-basic-example fd-avatar';
-    horizontalGalleryImages = 'fdp-thumbnail-horizontal-example fd-avatar';
-    verticalGalleryVideo = 'fdp-thumbnail-video-media-example fd-avatar';
+    verticalGalleryImages = 'fdp-platform-thumbnail-basic-example fd-avatar';
+    horizontalGalleryImages = 'fdp-platform-thumbnail-horizontal-example fd-avatar';
+    verticalGalleryVideo = 'fdp-platform-thumbnail-video-media-example fd-avatar';
 
     open(): void {
         super.open(this.url);

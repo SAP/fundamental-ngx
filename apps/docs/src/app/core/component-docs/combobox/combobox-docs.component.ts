@@ -30,6 +30,8 @@ import * as comboboxSeaHtml from '!raw-loader!./examples/combobox-search-functio
 import * as comboboxProgramHtml from '!raw-loader!./examples/combobox-open-control-example.component.html';
 import * as comboboxProgramTs from '!raw-loader!./examples/combobox-open-control-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import * as comboboxSearchFieldHTMLSrc from '!raw-loader!./examples/combobox-search-field-example.component.html';
+import * as comboboxSearchFieldTSSrc from '!raw-loader!./examples/combobox-search-field-example.component.ts';
 
 @Component({
     selector: 'fd-combobox-docs',
@@ -227,9 +229,23 @@ export class ComboboxDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'ComboboxincludesExampleComponent',
+            component: 'ComboboxIncludesExampleComponent',
             code: comboboxIncludesT,
             fileName: 'combobox-includes-example'
+        }
+    ];
+
+    comboboxSearchFieldExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: comboboxSearchFieldHTMLSrc,
+            fileName: 'combobox-search-field-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxSearchFieldExampleComponent',
+            code: comboboxSearchFieldTSSrc,
+            fileName: 'combobox-search-field-example'
         }
     ];
 }

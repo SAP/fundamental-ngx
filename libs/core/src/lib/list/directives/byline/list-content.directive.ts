@@ -10,6 +10,6 @@ export class ListContentDirective {
 
     /** Whether or not this is a 2-column content. */
     @Input()
-    @HostBinding('fd-list__content--2-col')
+    @HostBinding('class.fd-list__content--2-col')
     twoCol = false;
 }

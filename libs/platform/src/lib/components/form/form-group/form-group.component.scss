@@ -1,9 +1,17 @@
-// Todo: Remove once there is responsive layout in fundamental styles.
-@import '~flexboxgrid/dist/flexboxgrid.min';
+@import '~fundamental-styles/dist/form-layout-grid';
 @import '~fundamental-styles/dist/section';
+@import '~fundamental-styles/dist/form-group';
+@import '~fundamental-styles/dist/form-header';
 
-.row {
-    .col-xs-12 {
-        padding: 5px;
-    }
+.fd-form-layout-grid-container {
+    padding: 1rem;
+}
+
+// revert core styles overriding the form label styles
+.fd-form-label {
+    overflow: hidden;
+}
+
+.fd-form-group--inline {
+    flex-wrap: wrap;
 }

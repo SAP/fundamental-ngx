@@ -5,9 +5,9 @@ export class ActionListItemPo extends BaseComponentPo {
     url = '/action-list-item';
     root = '#page-content';
 
-    actionBtns = 'fdp-action-list-item button';
-    actionLists = 'fdp-borderless-action-list-item-example fdp-list';
-    actionSections = 'fdp-borderless-action-list-item-example ul';
+    actionBtns = 'fdp-platform-action-list-item-example button';
+    actionLists = 'fdp-platform-action-list-item-border-less-example fdp-list';
+    actionSections = 'fdp-platform-action-list-item-border-less-example ul';
 
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';

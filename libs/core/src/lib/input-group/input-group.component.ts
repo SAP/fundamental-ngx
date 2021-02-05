@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
@@ -223,6 +223,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden */
     private _listenElementEvents(): void {
         fromEvent(this.elementRef.nativeElement, 'focus', { capture: true }).pipe(
+            filter(event => event['target']?.tagName !== 'BUTTON'),
             tap(() => {
                 this._isFocused = true;
                 this.changeDetectorRef.markForCheck();

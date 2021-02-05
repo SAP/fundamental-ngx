@@ -222,4 +222,23 @@ describe('ComboboxComponent', () => {
         expect(component.onChange).toHaveBeenCalled();
         expect(component.inputText).toEqual('test');
     });
+
+    it('should change the addon to search when combobox is used as search field', () => {
+        component.isSearch = true;
+        expect(component.glyphValue).toBe('search');
+    });
+
+    it('should render two buttons when combobox is used as search field and there is input text', () => {
+        let addOns = fixture.nativeElement.querySelectorAll('button');
+        expect(addOns.length).toBe(1);
+        component.isSearch = true;
+        component.communicateByObject = true;
+        component.displayFn = (item: any): string => {
+            return item.displayedValue;
+        };
+        component.inputText = 'displayedValue2';
+        (<any>component)._cdRef.detectChanges();
+        addOns = fixture.nativeElement.querySelectorAll('button');
+        expect(addOns.length).toBe(2);
+    });
 });

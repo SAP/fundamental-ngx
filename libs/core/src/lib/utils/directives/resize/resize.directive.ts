@@ -26,7 +26,7 @@ interface ResizeMove {
 export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** Element limiting resizable container growth */
     // tslint:disable-next-line:no-input-rename
-    @Input('fdResizeBoundary') resizeBoundary = 'body';
+    @Input('fdResizeBoundary') resizeBoundary: string | HTMLElement = 'body';
 
     /** Whether resizable behaviour should be disabled */
     // tslint:disable-next-line:no-input-rename
@@ -155,7 +155,14 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** @hidden Return boundary container */
     private _findResizeContainer(): Element {
-        const resizeContainer = closestElement(this.resizeBoundary, this._elementRef.nativeElement);
+        let resizeContainer: Element | null
+        if (typeof this.resizeBoundary === 'string') {
+            resizeContainer = closestElement(this.resizeBoundary, this._elementRef.nativeElement);
+        } else {
+            resizeContainer = this.resizeBoundary
+        }
+
+
         if (resizeContainer) {
             return resizeContainer;
         } else {
