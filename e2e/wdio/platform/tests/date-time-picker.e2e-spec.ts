@@ -188,7 +188,7 @@ describe('Datetime picker suite', function() {
     xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             dateTimePickerPage.saveExampleBaselineScreenshot('date-time-picker');
-            expect(dateTimePickerPage.compareWithBaseline('date-time-picker')).toEqual(0);
+            expect(dateTimePickerPage.compareWithBaseline('date-time-picker')).toBeLessThan(1);
         });
     });
 

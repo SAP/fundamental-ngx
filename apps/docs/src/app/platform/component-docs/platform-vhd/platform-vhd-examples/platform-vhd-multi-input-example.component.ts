@@ -40,7 +40,7 @@ const exampleDataSource = () => {
 }
 
 @Component({
-  selector: 'fdp-vhd-multi-input-example',
+  selector: 'fdp-platform-vhd-multi-input-example',
   templateUrl: './platform-vhd-multi-input-example.component.html'
 })
 export class PlatformVhdMultiInputExampleComponent implements OnInit {

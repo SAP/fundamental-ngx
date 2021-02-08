@@ -318,7 +318,7 @@ describe('Checkbox test suite', () => {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             checkboxPage.saveExampleBaselineScreenshot('checkbox');
-            expect(checkboxPage.compareWithBaseline('checkbox')).toEqual(0);
+            expect(checkboxPage.compareWithBaseline('checkbox')).toBeLessThan(1);
         });
     });
 });

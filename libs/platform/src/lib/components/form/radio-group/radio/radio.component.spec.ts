@@ -95,14 +95,6 @@ describe('RadioButtonComponent', () => {
         expect(inputElems[1].nativeElement.classList.contains('fd-radio--compact')).toBeTruthy();
     });
 
-    it('radio click should be called', () => {
-        const radioElem = fixture.debugElement.query(By.css('fd-radio-button'));
-
-        spyOn(component.radioButton1, 'onClick');
-        radioElem.triggerEventHandler('click', null);
-        expect(component.radioButton1.onClick).toHaveBeenCalled();
-    });
-
     it('radio click should should change control value', async () => {
         await wait(fixture);
         fixture.detectChanges();

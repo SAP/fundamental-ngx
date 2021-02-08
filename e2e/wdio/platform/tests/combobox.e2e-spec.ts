@@ -172,7 +172,7 @@ describe('Combobox test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             comboBoxPage.saveExampleBaselineScreenshot('combobox');
-            expect(comboBoxPage.compareWithBaseline('combobox')).toEqual(0);
+            expect(comboBoxPage.compareWithBaseline('combobox')).toBeLessThan(1);
         });
     });
 });

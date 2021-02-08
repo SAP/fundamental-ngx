@@ -77,6 +77,11 @@ import { MessageBoxModule } from './message-box/message-box.module';
 import { ThemesService } from './utils/services/themes.service';
 import { WizardModule } from './wizard/wizard.module';
 import { QuickViewModule } from './quick-view/quick-view.module';
+import { FeedInputModule } from './feed-input/feed-input.module';
+import { ObjectNumberModule } from './object-number/object-number.module';
+import { TitleModule } from './title/title.module';
+import { SliderModule } from './slider/public_api';
+import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -90,8 +95,8 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         BreadcrumbModule,
         BusyIndicatorModule,
         ButtonModule,
-        SegmentedButtonModule,
         CalendarModule,
+        CardModule,
         CarouselModule,
         ComboboxModule,
         ComboboxMobileModule,
@@ -99,7 +104,9 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
+        DynamicSideContentModule,
         FeedListItemModule,
+        FeedInputModule,
         FileUploaderModule,
         FixedCardLayoutModule,
         FlexibleColumnLayoutModule,
@@ -116,13 +123,16 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         ListModule,
         MenuModule,
         DialogModule,
+        MessageBoxModule,
         MessageStripModule,
+        MessageToastModule,
         MultiInputModule,
         MultiInputMobileModule,
         NestedListModule,
         NotificationModule,
         ObjectIdentifierModule,
         ObjectMarkerModule,
+        ObjectNumberModule,
         ObjectStatusModule,
         PaginationModule,
         PanelModule,
@@ -137,21 +147,24 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         ShellbarModule,
         SideNavigationModule,
         SplitButtonModule,
+        SwitchModule,
         StepInputModule,
         TableModule,
         TabsModule,
         TileModule,
         TimeModule,
         TimePickerModule,
+        TitleModule,
         ToolbarModule,
-        SwitchModule,
         TokenModule,
         TreeModule,
         WizardModule,
         CardModule,
         MessageBoxModule,
         MessageToastModule,
-        DynamicSideContentModule
+        DynamicSideContentModule,
+        SliderModule,
+        OnlyDigitsModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })

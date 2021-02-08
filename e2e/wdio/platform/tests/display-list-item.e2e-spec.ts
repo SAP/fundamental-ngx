@@ -51,7 +51,7 @@ describe('Display List Item test suite:', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             displayListPg.saveExampleBaselineScreenshot('display-list-item');
-            expect(displayListPg.compareWithBaseline('display-list-item')).toEqual(0);
+            expect(displayListPg.compareWithBaseline('display-list-item')).toBeLessThan(1);
         });
     });
 

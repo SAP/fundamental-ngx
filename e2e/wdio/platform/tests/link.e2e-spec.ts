@@ -13,7 +13,7 @@ import {
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    scrollIntoView, waitForPresent
+    scrollIntoView, waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 describe('Link component test suite', function() {
@@ -101,11 +101,15 @@ describe('Link component test suite', function() {
         checkLinkHover(linkPage.truncatedLink);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
         expect(isElementClickable(linkPage.truncatedLink)).toBe(true);
+        linkPage.open();
+        waitForElDisplayed(linkPage.iconLink);
     });
 
     it('should check link navigation to new page', () => {
-        checkLinkTarget(linkPage.iconLink, googleLink, 'center img');
+        waitForElDisplayed(linkPage.iconLink);
+        checkLinkTarget(linkPage.iconLink, googleLink, 'input[type="text"]');
         linkPage.open();
+        waitForElDisplayed(linkPage.iconLink);
     }, 2);
 
     it('should check orientation', () => {
@@ -115,7 +119,7 @@ describe('Link component test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot('link');
-            expect(linkPage.compareWithBaseline('link')).toEqual(0);
+            expect(linkPage.compareWithBaseline('link')).toBeLessThan(1);
         });
     });
 });
@@ -138,7 +142,7 @@ function checkLinkHover(element): void {
 
 function checkLinkTarget(element, site: string, newPageElement): void {
     click(element);
-    waitForPresent(newPageElement);
+    waitForElDisplayed(newPageElement);
     const newUrl = getCurrentUrl();
     expect(newUrl).toContain(site);
 }

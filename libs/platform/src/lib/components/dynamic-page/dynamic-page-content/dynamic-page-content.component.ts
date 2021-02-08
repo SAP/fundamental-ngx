@@ -11,13 +11,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { TabPanelComponent } from '@fundamental-ngx/core';
 
 import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../constants';
 import { addClassNameToElement } from '../utils';
 
 /** Dynamic Page tab change event */
 export class DynamicPageTabChangeEvent {
-    constructor(public source: DynamicPageContentComponent, public payload: number) {}
+    constructor(public source: DynamicPageContentComponent, public payload: TabPanelComponent) {}
 }
 @Component({
     selector: 'fdp-dynamic-page-content',
@@ -32,6 +33,12 @@ export class DynamicPageContentComponent implements OnInit {
      */
     @Input()
     tabLabel: string;
+
+    /**
+     * a unique identifier for this content
+     */
+    @Input()
+    id: string;
 
     /**
      * sets background for content to `list`, `transparent`, or `solid` background color.

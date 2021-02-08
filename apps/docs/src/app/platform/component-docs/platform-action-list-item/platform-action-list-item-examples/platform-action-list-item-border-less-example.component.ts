@@ -6,8 +6,8 @@ export interface Action {
     title: string;
 }
 @Component({
-    selector: 'fdp-borderless-action-list-item-example',
-    templateUrl: './platform-borderless-action-list-item-example.component.html'
+    selector: 'fdp-platform-action-list-item-border-less-example',
+    templateUrl: './platform-action-list-item-border-less-example.component.html'
 })
 export class PlatformActionListItemBorderLessExampleComponent {
     items: Action[] = [

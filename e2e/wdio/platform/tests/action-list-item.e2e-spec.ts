@@ -41,7 +41,7 @@ describe('Action List Item Test Suite:', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             actionListPg.saveExampleBaselineScreenshot('action-list-item');
-            expect(actionListPg.compareWithBaseline('action-list-item')).toEqual(0);
+            expect(actionListPg.compareWithBaseline('action-list-item')).toBeLessThan(1);
         });
     });
 });

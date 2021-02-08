@@ -22,4 +22,8 @@ export class PanelTitleDirective {
     @Input()
     @HostBinding('attr.id')
     id: string = 'fd-panel-title-' + panelTitleUniqueId++;
+
+    /** Tabindex of the panel title. */
+    @HostBinding('attr.tabindex')
+    tabindex = 0;
 }

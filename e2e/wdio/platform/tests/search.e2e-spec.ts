@@ -156,7 +156,7 @@ describe('Search field', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             searchPage.saveExampleBaselineScreenshot('search');
-            expect(searchPage.compareWithBaseline('search')).toEqual(0);
+            expect(searchPage.compareWithBaseline('search')).toBeLessThan(1);
         });
     });
 });

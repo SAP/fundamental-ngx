@@ -33,7 +33,7 @@ const exampleDataSource = () => {
 }
 
 @Component({
-  selector: 'fdp-vhd-display-token-example',
+  selector: 'fdp-platform-vhd-token-example',
   templateUrl: './platform-vhd-token-example.component.html'
 })
 export class PlatformVhdTokenExampleComponent implements OnInit {

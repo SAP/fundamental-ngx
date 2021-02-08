@@ -40,7 +40,7 @@ const exampleDataSource = () => {
 }
 
 @Component({
-  selector: 'fdp-vhd-strategy-labels-example',
+  selector: 'fdp-platform-vhd-strategy-labels-example',
   templateUrl: './platform-vhd-strategy-labels-example.component.html'
 })
 export class PlatformVhdStrategyLabelExampleComponent implements OnInit {

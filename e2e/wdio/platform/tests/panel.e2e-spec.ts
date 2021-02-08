@@ -45,8 +45,8 @@ describe('Verify Panel', () => {
     });
 
     it('should scroll content if height is fixed', async () => {
-        const contentRegionHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value as string;
-        const contentActualHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value as string;
+        const contentRegionHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value;
+        const contentActualHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value;
         expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
     });
 
@@ -66,7 +66,7 @@ describe('Verify Panel', () => {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             panelPage.saveExampleBaselineScreenshot('panel');
-            expect(panelPage.compareWithBaseline('panel')).toEqual(0);
+            expect(panelPage.compareWithBaseline('panel')).toBeLessThan(1);
         });
     });
 });

@@ -249,10 +249,10 @@ describe('List test suite:', function() {
         });
     });
 
-    fdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             listPg.saveExampleBaselineScreenshot('list');
-            expect(listPg.compareWithBaseline('list')).toEqual(0);
+            expect(listPg.compareWithBaseline('list')).toBeLessThan(1);
         });
     });
 });

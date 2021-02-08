@@ -78,7 +78,7 @@ describe('Action Bar Test Suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             actionBarPage.saveExampleBaselineScreenshot('action-bar');
-            expect(actionBarPage.compareWithBaseline('action-bar')).toEqual(0);
+            expect(actionBarPage.compareWithBaseline('action-bar')).toBeLessThan(1);
         });
     });
 });

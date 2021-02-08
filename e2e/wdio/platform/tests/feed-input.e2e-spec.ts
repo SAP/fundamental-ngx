@@ -19,12 +19,11 @@ import {
 } from '../../driver/wdio';
 import { FeedInputPo } from '../pages/feed-input.po';
 import {
+    default_avatar_class,
     placeholders_array,
-    send_button_tooltip,
-    avatar_tooltip,
-    default_avatar_class
+    send_button_tooltip
 } from '../fixtures/appData/feed-input-page-contents';
-import { four_lines_text, eight_lines_text } from '../fixtures/testData/feed-input';
+import { eight_lines_text, four_lines_text } from '../fixtures/testData/feed-input';
 
 describe('Verify Feed Input component', function() {
     const { feedInputAvatar, feedInputTextArea, feedInput, feedInputNoAvatar, feedInputButton } = new FeedInputPo();
@@ -165,7 +164,7 @@ describe('Verify Feed Input component', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             feedInputPage.saveExampleBaselineScreenshot('feed-input');
-            expect(feedInputPage.compareWithBaseline('feed-input')).toEqual(0);
+            expect(feedInputPage.compareWithBaseline('feed-input')).toBeLessThan(1);
         });
     });
 });

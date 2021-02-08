@@ -266,7 +266,7 @@ describe('Verify Textarea component', function() {
         describe('Check visual regression', function() {
             it('should check examples visual regression', () => {
                 textareaPage.saveExampleBaselineScreenshot('textarea');
-                expect(textareaPage.compareWithBaseline('textarea')).toEqual(0);
+                expect(textareaPage.compareWithBaseline('textarea')).toBeLessThan(1);
             });
         });
     });
