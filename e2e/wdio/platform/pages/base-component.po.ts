@@ -5,7 +5,7 @@ import {
     open,
     saveElement,
     getImageTagBrowserPlatform,
-    checkElement
+    checkElement, waitForElDisplayed
 } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 
@@ -27,24 +27,25 @@ export class BaseComponentPo {
         }
     }
 
-    saveExampleBaselineScreenshot(specName: string, areas: string = this.exampleAreaContainersArr, options: object = {}): void {
+    saveExampleBaselineScreenshot(specName: string, options: object = {}, areas: string = this.exampleAreaContainersArr): void {
         const areasArray = elementArray(areas);
         for (let i = 0; i < areasArray.length; i++) {
+            waitForElDisplayed(areas, i);
             scrollIntoView(areas, i);
             saveElement(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
         }
     }
 
-    compareWithBaseline(specName: string, areas: string = this.exampleAreaContainersArr, options: object = {}): any {
+    compareWithBaseline(specName: string, options: object = {}, areas: string = this.exampleAreaContainersArr): any {
         const areasArray = elementArray(areas);
         let diff = 0;
         for (let i = 0; i < areasArray.length; i++) {
+            waitForElDisplayed(areas, i);
             scrollIntoView(areas, i);
             diff +=  checkElement(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
         }
         return diff;
     }
-
 
     open(url: string): void {
         open('fundamental-ngx#/platform' + url);

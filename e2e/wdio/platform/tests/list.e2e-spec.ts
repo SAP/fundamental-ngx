@@ -249,7 +249,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    fdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             listPg.saveExampleBaselineScreenshot('list');
             expect(listPg.compareWithBaseline('list')).toEqual(0);
