@@ -1,1 +1,8 @@
 @import '~fundamental-styles/dist/title';
+
+.fd-variant-management {
+    .fd-title {
+        color: #0854a0;
+        color: var(--sapButton_TextColor, #0854a0);
+    }
+}

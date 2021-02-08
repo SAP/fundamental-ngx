@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -7,57 +8,53 @@ import {
     OnInit,
     Output,
     SimpleChanges,
-    TemplateRef
+    TemplateRef,
+    ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '../dialog/dialog-service/dialog.service';
 
-interface View {
-    id: number,
-    favorite: boolean,
-    name: string,
-    sharing: string,
-    autoApply: boolean,
-    default: boolean,
-    createdBy: string,
-    settings?: any;
-}
+import { DialogService } from '../dialog/dialog-service/dialog.service';
+import { DialogRef } from '../dialog/public_api';
+import { compareObjects } from '../utils/functions';
+import { View } from './models/view.model';
 
 @Component({
     selector: 'fd-variant-management',
     templateUrl: './variant-management.component.html',
     styleUrls: ['./variant-management.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fd-variant-management'
+    }
 })
 export class VariantManagementComponent implements OnInit, OnChanges {
     @Input()
     views: View[];
 
-    @Input()
-    settingsChanged: boolean;
+    @Output()
+    currentViewChange = new EventEmitter<string>();
 
     @Output()
-    currentViewChange = new EventEmitter<number>();
-
-    @Output()
-    saveViews = new EventEmitter<View[]>();
+    saveView = new EventEmitter<View>();
 
     isViewsOpen = false;
-
-    viewName: string;
 
     viewChanged = false;
 
     appliedView: View;
 
-    viewModel: any;
+    viewModel: Partial<View>;
 
     defaultViewId = 1;
 
-    constructor(private _dialogService: DialogService) {}
+    constructor(
+        private readonly _dialogService: DialogService,
+        private readonly _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        if ('settingsChanged' in changes) {
-            this.viewChanged = this.settingsChanged;
+        if ('views' in changes && !changes.views.firstChange) {
+            this.viewChanged = changes.views.previousValue.some((view: View) => this._compareViewSettings(view, this.views.find(({ id }) => view.id === id)));
         }
     }
 
@@ -68,49 +65,56 @@ export class VariantManagementComponent implements OnInit, OnChanges {
         this.viewModel = {...this.appliedView};
     }
 
-    selectView(id: number): void {
+    updateViews(views: View[]): void {
+        this.viewChanged = views.some(view => this._compareViewSettings(this.views.find(({ id }) => view.id === id), view));
+        if (this.viewChanged) {
+            this.views = views;
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
+
+    /** @hidden */
+    selectView(id: string): void {
         this.appliedView = this.views.find(view => view.id === id);
         this.currentViewChange.emit(this.appliedView.id);
         this.isViewsOpen = false;
     }
 
-    openMyView(): void  {
-        this.isViewsOpen = true;
-    }
-
+    /** @hidden */
     saveCurrentView(): void {
         if (this.viewChanged) {
-            this.saveViews.emit([
-                this.appliedView
-            ]);
+            this.saveView.emit(this.appliedView);
             this.viewChanged = false;
             this.isViewsOpen = false;
         }
     }
 
-    openDialog(dialog: TemplateRef<any>): void {
+    /** @hidden */
+    onSaveAs(dialog: TemplateRef<any>): void {
         this.isViewsOpen = false;
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
             draggable: true,
-            width: '320px'
-        });
-
-        dialogRef.afterClosed.subscribe(() => {
-            this.saveViews.emit([{
-                ...this.viewModel,
-                id: this.views[this.views.length - 1].id + 1
-            }]);
-                this.viewChanged = false;
-                this.appliedView = {...this.viewModel};
-            },
-            (error) => {
-                throw new Error('Dialog dismissed with result');
+            width: '320px',
+            data: {
+                view: new View()
             }
-        );
+        });
+        console.log(dialogRef)
+
+        dialogRef.afterClosed.subscribe((view: View) => {
+            const appliedView = {
+                ...this.viewModel,
+                ...view,
+            };
+            this.saveView.emit(appliedView);
+            this.viewChanged = false;
+        });
     }
 
-    openManageDialog(dialog: TemplateRef<any>): void {
+    /** @hidden */
+    onManageDialog(dialog: TemplateRef<any>): void {
         this.isViewsOpen = false;
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
@@ -119,10 +123,41 @@ export class VariantManagementComponent implements OnInit, OnChanges {
         });
 
         dialogRef.afterClosed.subscribe(
-            (result) => {},
-            (error) => {
-                throw new Error('Dialog dismissed with result');
+            (result) => {
+                console.log(result);
             }
         );
+    }
+
+    /** @hidden */
+    _onSaveView(dialog: DialogRef): void {
+        console.log('save view')
+        console.log(dialog);
+    }
+
+    /** @hidden */
+    _onCancelView(dialog: DialogRef): void {
+        console.log('cancel view')
+        console.log(dialog);
+        dialog.close();
+    }
+
+    /** @hidden */
+    _onSaveManage(dialog: DialogRef): void {
+        console.log('save manager')
+        console.log(dialog);
+    }
+
+    /** @hidden */
+    _onCancelManage(dialog: DialogRef): void {
+        console.log('cancel manager')
+        console.log(dialog);
+        dialog.close();
+    }
+
+    /** @hidden */
+    private _compareViewSettings(origin: View, newView: View): boolean {
+        console.log(compareObjects(origin.settings, newView.settings));
+        return compareObjects(origin.settings, newView.settings);
     }
 }
