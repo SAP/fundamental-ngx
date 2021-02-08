@@ -20,24 +20,24 @@ describe('Quick view  test suite:', function() {
     afterEach(() => {
         refreshPage();
         waitForElDisplayed(openDialogButton);
-    });
+    }, 1);
 
     it('should check basic quick view', () => {
         checkBasicViewInfo();
     });
 
     it('should check quick View in popover with heading', () => {
-        scrollIntoView(popoverWithHeaderButton)
+        scrollIntoView(popoverWithHeaderButton);
         click(popoverWithHeaderButton);
         expect(getText(popoverHeader)).toEqual(popoverHeaderValue);
-        checkPopoverInfo()
+        checkPopoverInfo();
     });
 
     it('should check quick View in popover without heading', () => {
-        scrollIntoView(popoverWithoutHeaderButton)
+        scrollIntoView(popoverWithoutHeaderButton);
         click(popoverWithoutHeaderButton);
         expect(popoverHeader).not.toBeDisplayed();
-        checkPopoverInfo()
+        checkPopoverInfo();
     });
 
     it('should check quick view in dialog', () => {

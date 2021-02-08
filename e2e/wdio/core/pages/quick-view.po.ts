@@ -16,7 +16,7 @@ export class QuickViewPo extends CoreBaseComponentPo {
     companyNameLabel = '(//fd-quick-view-group-item-content//child::div)[1]';
     companyAddressLabel = '(//fd-quick-view-group-item-content//child::div)[2]';
     companyPopoverNameLabel = '(//fd-quick-view-group-item-content//child::div)[3]';
-    companyPopoverAddressLabel = '(//fd-quick-view-group-item-content//child::div)[4]'
+    companyPopoverAddressLabel = '(//fd-quick-view-group-item-content//child::div)[4]';
     subTitle = '[class="fd-quick-view__subtitle"]';
     title = '[bardesign="header-with-subheader"] .fd-title';
     popoverSubTitle = '.fd-popover__popper div.fd-quick-view__subtitle';
@@ -25,7 +25,7 @@ export class QuickViewPo extends CoreBaseComponentPo {
     popoverAvatar = '(//*[contains(@class, "fd-quick-view__content")]//child::fd-avatar)[2]';
     popoverHeader = '.fd-bar--header fd-bar-element';
     popoverWithoutHeaderButton = '.fd-docs-flex-display-helper :nth-child(2) button';
-    popoverWithHeaderButton = '.fd-popover-custom:nth-child(1) button'
+    popoverWithHeaderButton = '.fd-popover-custom:nth-child(1) button';
     popoverSendReminderButton = '.fd-bar__right :nth-child(1) button';
     popoverCancelButton = '.fd-bar__right :nth-child(2) button';
     openDialogButton = '#in-dialog + component-example button';
