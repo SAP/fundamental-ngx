@@ -1,5 +1,6 @@
 import { RadioButtonGroupPage } from '../pages/radio-button-group.po';
 import {
+    browserIsFirefox,
     click, elementArray,
     getAttributeByName,
     getElementArrayLength, getText,
@@ -60,14 +61,16 @@ import {
     radioButtonWithDisabledItemsCreatedFromSelectItem,
     submitDisabledRadioButtonWithValidationErrorIndex,
     submitRadioButtonHaveValidationError,
-    submitRadioButtonWithListOfSelectItemObjects
+    submitRadioButtonWithListOfSelectItemObjects,
+    ariaChecked,
+    ngReflectIsDisabled
 
 } from '../fixtures/testData/radio-button-group';
 
 describe('Radio button group  Test Suite', function() {
     const radioButtonGroupPage: RadioButtonGroupPage = new RadioButtonGroupPage();
     const {
-        formGroup, selectedValueLabel, preferredBrandLabel
+        formGroup, selectedValueLabel, preferredBrandLabel, radioButtonInputByName, radioButtonLabelByName, actionButtonByName
     } = radioButtonGroupPage;
 
     beforeAll(() => {
@@ -76,7 +79,7 @@ describe('Radio button group  Test Suite', function() {
 
     afterEach(() => {
         refreshPage();
-    });
+    }, 1);
 
     it('Verify Radio button buttons can be aligned vertically and horizontally.', () => {
         const groupButtons = elementArray(formGroup);
@@ -87,344 +90,348 @@ describe('Radio button group  Test Suite', function() {
     });
 
     it('Compact radio group with "default" state and with default selection', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultStateAndSelectionIndex));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDefaultStateAndSelectionIndex));
+        scrollIntoView(radioButtonInputByName(radioButtonWithDefaultStateAndSelectionIndex));
+        click(radioButtonLabelByName(radioButtonWithDefaultStateAndSelectionIndex));
         expect(getText(selectedValueLabel)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName()
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName()
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify Inline cozy radio group', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCozyRadioGroup));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonInlineCozyRadioGroup));
+        scrollIntoView(radioButtonInputByName(radioButtonInlineCozyRadioGroup));
+        click(radioButtonLabelByName(radioButtonInlineCozyRadioGroup));
         expect(getText(selectedValueLabel, radioButtonInlineCozyRadioGroup)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCozyRadioGroup)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonInlineCozyRadioGroup)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify radio group with default property values', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultPropertyValues));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDefaultPropertyValues));
+        scrollIntoView(radioButtonInputByName(radioButtonWithDefaultPropertyValues));
+        click(radioButtonLabelByName(radioButtonWithDefaultPropertyValues));
         expect(getText(selectedValueLabel, radioButtonWithDefaultPropertyValues)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDefaultPropertyValues)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDefaultPropertyValues)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDisabledButtonAndValidationError));
+        scrollIntoView(radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError));
+        click(radioButtonLabelByName(radioButtonWithDisabledButtonAndValidationError));
         expect(getText(selectedValueLabel, radioButtonWithDisabledButtonAndValidationError)).toContain(januaryValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError)
-            , 'aria-checked')).toBe('true');
-        click(radioButtonGroupPage.actionButtonByName(resetDisabledValidationGroupButtonIndex));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError)
+            , ariaChecked)).toBe('true');
+        click(actionButtonByName(resetDisabledValidationGroupButtonIndex));
         expect(monthNames).not.toContain(getText(selectedValueLabel, radioButtonWithDisabledButtonAndValidationError));
     });
 
 
     it('Verify radio group using FormGroup and FormControl', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonUsingFormGroupAndFormControl));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonUsingFormGroupAndFormControl), marchIndex);
+        scrollIntoView(radioButtonInputByName(radioButtonUsingFormGroupAndFormControl));
+        click(radioButtonLabelByName(radioButtonUsingFormGroupAndFormControl), marchIndex);
         expect(getText(selectedValueLabel, radioButtonUsingFormGroupAndFormControl)).toContain(marchValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonUsingFormGroupAndFormControl)
-            , 'ng-reflect-is-disabled')).toBe('true');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonUsingFormGroupAndFormControl)
-            , 'aria-checked', marchIndex)).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonUsingFormGroupAndFormControl)
+            , ngReflectIsDisabled)).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonUsingFormGroupAndFormControl)
+            , ariaChecked, marchIndex)).toBe('true');
     });
 
     it('Verify inline compact radio group with default selection', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineWithDefaultSelection));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonInlineWithDefaultSelection));
+        scrollIntoView(radioButtonInputByName(radioButtonInlineWithDefaultSelection));
+        click(radioButtonLabelByName(radioButtonInlineWithDefaultSelection));
         expect(getText(selectedValueLabel, radioButtonInlineWithDefaultSelection)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineWithDefaultSelection)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonInlineWithDefaultSelection)
+            , ariaChecked)).toBe('true');
 
     });
 
     it('Verify inline compact radio group', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCompact));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonInlineCompact));
+        scrollIntoView(radioButtonInputByName(radioButtonInlineCompact));
+        click(radioButtonLabelByName(radioButtonInlineCompact));
         expect(getText(selectedValueLabel, radioButtonInlineCompact)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonInlineCompact)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonInlineCompact)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify radio group using FormGroup and FormControl', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItem));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDisabledItem), marchIndex);
+        scrollIntoView(radioButtonInputByName(radioButtonWithDisabledItem));
+        click(radioButtonLabelByName(radioButtonWithDisabledItem), marchIndex);
         expect(getText(selectedValueLabel, radioButtonWithDisabledItem)).toContain(marchValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItem)
-            , 'ng-reflect-is-disabled')).toBe('true');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItem)
-            , 'aria-checked', marchIndex)).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledItem)
+            , ngReflectIsDisabled)).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledItem)
+            , ariaChecked, marchIndex)).toBe('true');
     });
 
     it('Verify radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonHaveValidationError));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonHaveValidationError));
+        scrollIntoView(radioButtonInputByName(radioButtonHaveValidationError));
+        click(radioButtonLabelByName(radioButtonHaveValidationError));
         expect(getText(selectedValueLabel, radioButtonHaveValidationError).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonHaveValidationError)
-            , 'aria-checked')).toBe('true');
-        click(radioButtonGroupPage.actionButtonByName(resetHaveValidationErrorIndex));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonHaveValidationError)
+            , ariaChecked)).toBe('true');
+        click(actionButtonByName(resetHaveValidationErrorIndex));
         expect(monthNames).not.toContain(getText(selectedValueLabel, radioButtonHaveValidationError));
     });
 
     it('Verify platform radio button with None (No selection) value created as an Option', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithNoSelectionValue));
+        scrollIntoView(radioButtonInputByName(radioButtonWithNoSelectionValue));
+        click(radioButtonLabelByName(radioButtonWithNoSelectionValue));
         expect(getText(selectedValueLabel, radioButtonWithNoSelectionValue).toLowerCase()).toContain(noneValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue)
-            , 'aria-checked')).toBe('true');
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithNoSelectionValue), 1);
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithNoSelectionValue)
+            , ariaChecked)).toBe('true');
+        click(radioButtonLabelByName(radioButtonWithNoSelectionValue), 1);
         expect(getText(selectedValueLabel, radioButtonWithNoSelectionValue).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithNoSelectionValue)
-            , 'aria-checked', 1)).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithNoSelectionValue)
+            , ariaChecked, 1)).toBe('true');
     });
 
     it('Verify radio group using FormGroup and FormControl with List of String Values', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithFormGroupAndFormControl));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithFormGroupAndFormControl));
+        scrollIntoView(radioButtonInputByName(radioButtonWithFormGroupAndFormControl));
+        click(radioButtonLabelByName(radioButtonWithFormGroupAndFormControl));
         expect(getText(selectedValueLabel, radioButtonWithFormGroupAndFormControl).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithFormGroupAndFormControl)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithFormGroupAndFormControl)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify Creating platform radio button with list of string values also pre-selection based on control value', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelection));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithPreSelection));
+        scrollIntoView(radioButtonInputByName(radioButtonWithPreSelection));
+        click(radioButtonLabelByName(radioButtonWithPreSelection));
         expect(getText(selectedValueLabel, radioButtonWithPreSelection).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelection)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithPreSelection)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify Creating platform radio button with given list of string values', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithGivenListOfStringValues));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithGivenListOfStringValues));
+        scrollIntoView(radioButtonInputByName(radioButtonWithGivenListOfStringValues));
+        click(radioButtonLabelByName(radioButtonWithGivenListOfStringValues));
         expect(getText(selectedValueLabel, radioButtonWithGivenListOfStringValues).toLowerCase()).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithGivenListOfStringValues)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithGivenListOfStringValues)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify platform radio buttons created with given list of SelectItem objects and have validation error', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithListOfSelectItemObjects));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithListOfSelectItemObjects));
+        scrollIntoView(radioButtonInputByName(radioButtonWithListOfSelectItemObjects));
+        click(radioButtonLabelByName(radioButtonWithListOfSelectItemObjects));
         expect(getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithListOfSelectItemObjects)
-            , 'aria-checked')).toBe('true');
-        click(radioButtonGroupPage.actionButtonByName(resetListOfSelectitemObjectIndex));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithListOfSelectItemObjects)
+            , ariaChecked)).toBe('true');
+        click(actionButtonByName(resetListOfSelectitemObjectIndex));
         expect(seasonsNames).not.toContain(getText(selectedValueLabel, radioButtonWithListOfSelectItemObjects));
     });
 
     it('Verify Vertical radio group', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonVertical));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonVertical));
+        scrollIntoView(radioButtonInputByName(radioButtonVertical));
+        click(radioButtonLabelByName(radioButtonVertical));
         expect(getText(selectedValueLabel, radioButtonVertical)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonVertical)
-            , 'aria-checked')).toBe('true');
-        click(radioButtonGroupPage.actionButtonByName(resetVerticalRadioGroupButtonIndex));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonVertical)
+            , ariaChecked)).toBe('true');
+        click(actionButtonByName(resetVerticalRadioGroupButtonIndex));
         expect(seasonsNames).not.toContain(getText(selectedValueLabel, radioButtonVertical));
     });
 
     it('Verify qualification form', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonVerticalQualificationForm));
+        scrollIntoView(radioButtonInputByName(radioButtonVerticalQualificationForm));
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonVerticalQualificationForm));
         for (let i = 0; i < radioButtonsLength; i++) {
-            click(radioButtonGroupPage.radioButtonLabelByName(radioButtonVerticalQualificationForm), i);
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonVerticalQualificationForm)
-                , 'aria-checked', i)).toBe('true');
+            click(radioButtonLabelByName(radioButtonVerticalQualificationForm), i);
+            expect(getAttributeByName(radioButtonInputByName(radioButtonVerticalQualificationForm)
+                , ariaChecked, i)).toBe('true');
         }
-        click(radioButtonGroupPage.actionButtonByName(resetQualificationFormButtonIndex));
+        click(actionButtonByName(resetQualificationFormButtonIndex));
     });
 
     it('Verify compact platform radio button created with given list of SelectItem objects.Using FormGroup and FormControl', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSelectItemsFormGroupAndFormControl));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithSelectItemsFormGroupAndFormControl), autumnIndex);
+        scrollIntoView(radioButtonInputByName(radioButtonWithSelectItemsFormGroupAndFormControl));
+        click(radioButtonLabelByName(radioButtonWithSelectItemsFormGroupAndFormControl), autumnIndex);
         expect(getText(selectedValueLabel, radioButtonWithSelectItemsFormGroupAndFormControl - 4)).toContain(autumnValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSelectItemsFormGroupAndFormControl)
-            , 'aria-checked', autumnIndex)).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithSelectItemsFormGroupAndFormControl)
+            , ariaChecked, autumnIndex)).toBe('true');
     });
 
     it('Verify platform radio button creation and pre-selection based on object data passed.', () => {
         expect(getText(selectedValueLabel, 15)).toContain(springValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed)
-            , 'aria-checked', springIndex)).toBe('true');
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithPreSelectionOnObjectDataPassed));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed)
+            , ariaChecked, springIndex)).toBe('true');
+        scrollIntoView(radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed));
+        click(radioButtonLabelByName(radioButtonWithPreSelectionOnObjectDataPassed));
         expect(getText(selectedValueLabel, radioButtonWithPreSelectionOnObjectDataPassed - 4)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithPreSelectionOnObjectDataPassed)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify platform radio buttons created with given list of SelectItem objects also pre-selection based on control value', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionBasedOnControlValue));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithPreSelectionBasedOnControlValue));
+        scrollIntoView(radioButtonInputByName(radioButtonWithPreSelectionBasedOnControlValue));
+        click(radioButtonLabelByName(radioButtonWithPreSelectionBasedOnControlValue));
         expect(getText(selectedValueLabel, radioButtonWithPreSelectionBasedOnControlValue - 5)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithPreSelectionBasedOnControlValue)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithPreSelectionBasedOnControlValue)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify platform radio button created with given list of SelectItem objects', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject));
-        click(radioButtonGroupPage.radioButtonLabelByName(platformRadioButtonWithSelectiemObject));
+        scrollIntoView(radioButtonInputByName(platformRadioButtonWithSelectiemObject));
+        click(radioButtonLabelByName(platformRadioButtonWithSelectiemObject));
         expect(getText(selectedValueLabel, platformRadioButtonWithSelectiemObject - 5)).toContain(winterValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(platformRadioButtonWithSelectiemObject)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify platform Radio Button created from Invoice objects. Using LookupKey and DisplayKey.', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithLookupKeyAndDisplayKey));
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithLookupKeyAndDisplayKey));
+        scrollIntoView(radioButtonInputByName(radioButtonWithLookupKeyAndDisplayKey));
+        click(radioButtonLabelByName(radioButtonWithLookupKeyAndDisplayKey));
         expect(getText(preferredBrandLabel)).toContain(samsungValue);
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithLookupKeyAndDisplayKey)
-            , 'aria-checked')).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithLookupKeyAndDisplayKey)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonWithDisabledContentAndFormcontrol));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledContentAndFormcontrol));
+        scrollIntoView(radioButtonInputByName(radioButtonWithDisabledContentAndFormcontrol));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledContentAndFormcontrol)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledContentAndFormcontrol)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
     });
 
     it('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSomeDisabledButtons));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSomeDisabledButtons)
-            , 'ng-reflect-is-disabled', 2)).toBe('true');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithSomeDisabledButtons)
-            , 'ng-reflect-is-disabled', 3)).toBe('true');
-        click(radioButtonGroupPage.radioButtonLabelByName(platformRadioButtonWithSelectiemObject));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(platformRadioButtonWithSelectiemObject)
-            , 'aria-checked')).toBe('true');
+        scrollIntoView(radioButtonInputByName(radioButtonWithSomeDisabledButtons));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithSomeDisabledButtons)
+            , ngReflectIsDisabled, 2)).toBe('true');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithSomeDisabledButtons)
+            , ngReflectIsDisabled, 3)).toBe('true');
+        click(radioButtonLabelByName(platformRadioButtonWithSelectiemObject));
+        expect(getAttributeByName(radioButtonInputByName(platformRadioButtonWithSelectiemObject)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify platform radio button created from list of string values', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonCreatedFromList));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonCreatedFromList));
+        scrollIntoView(radioButtonInputByName(radioButtonCreatedFromList));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonCreatedFromList)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonCreatedFromList)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
     });
 
     it('Verify platform radio buttons created from list of SelectItem objects and FormContol is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonDisabledWithSelectedItem));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledWithSelectedItem));
+        scrollIntoView(radioButtonInputByName(radioButtonDisabledWithSelectedItem));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledWithSelectedItem)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonDisabledWithSelectedItem)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
     });
 
     it('Verify platform radio buttons created from list of SelectItem objects and some items are disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
-            , 'ng-reflect-is-disabled')).toBe('false');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
-            , 'ng-reflect-is-disabled', 1)).toBe('false');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
-            , 'aria-checked', 1)).toBe('true');
+        scrollIntoView(radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
+            , ngReflectIsDisabled)).toBe('false');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
+            , ngReflectIsDisabled, 1)).toBe('false');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
+            , ariaChecked, 1)).toBe('true');
         for (let i = 2; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledButtonsFromSelectitemObject)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
     });
 
     it('Verify platform radio buttons passed as content projection and group is disabled', () => {
+        if (browserIsFirefox()) {
+            console.log('Skip for FF');
+            return
+        }
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonWithDisabledButtonsDrivenForm));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonsDrivenForm));
+        scrollIntoView(radioButtonInputByName(radioButtonWithDisabledButtonsDrivenForm));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonsDrivenForm)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledButtonsDrivenForm)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
     });
 
     it('Verify platform radio buttons passed as content projection and individual radio button is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonWithIndividualButtonDisabled));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
-            , 'ng-reflect-is-disabled')).toBe('false');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
-            , 'ng-reflect-is-disabled', 1)).toBe('false');
+        scrollIntoView(radioButtonInputByName(radioButtonWithIndividualButtonDisabled));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
+            , ngReflectIsDisabled)).toBe('false');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
+            , ngReflectIsDisabled, 1)).toBe('false');
         for (let i = 2; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithIndividualButtonDisabled));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
-            , 'aria-checked')).toBe('true');
+        click(radioButtonLabelByName(radioButtonWithIndividualButtonDisabled));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithIndividualButtonDisabled)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify platform radio buttons created from list of string values and group is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonDisabledCreatedFromList));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledCreatedFromList));
+        scrollIntoView(radioButtonInputByName(radioButtonDisabledCreatedFromList));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledCreatedFromList)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonDisabledCreatedFromList)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
     });
 
     it('Verify platform radio buttons created from list of SelectItem and group is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonDisabledCreatedFromSelectItem));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledCreatedFromSelectItem));
+        scrollIntoView(radioButtonInputByName(radioButtonDisabledCreatedFromSelectItem));
         for (let i = 0; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonDisabledCreatedFromSelectItem)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonDisabledCreatedFromSelectItem)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
     });
 
     it('Verify platform radio buttons created from list of SelectItem and individual item has disabled property', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem));
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
-            , 'ng-reflect-is-disabled')).toBe('false');
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
-            , 'ng-reflect-is-disabled', 1)).toBe('false');
+        scrollIntoView(radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
+            , ngReflectIsDisabled)).toBe('false');
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
+            , ngReflectIsDisabled, 1)).toBe('false');
         for (let i = 2; i < radioButtonsLength; i++) {
-            expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
-                , 'ng-reflect-is-disabled', i)).toBe('true');
+            expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
+                , ngReflectIsDisabled, i)).toBe('true');
         }
-        click(radioButtonGroupPage.radioButtonLabelByName(radioButtonWithDisabledItemsCreatedFromSelectItem));
-        expect(getAttributeByName(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
-            , 'aria-checked')).toBe('true');
+        click(radioButtonLabelByName(radioButtonWithDisabledItemsCreatedFromSelectItem));
+        expect(getAttributeByName(radioButtonInputByName(radioButtonWithDisabledItemsCreatedFromSelectItem)
+            , ariaChecked)).toBe('true');
     });
 
     it('Verify validation for radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonHaveValidationError));
+        scrollIntoView(radioButtonInputByName(radioButtonHaveValidationError));
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonHaveValidationError));
-        click(radioButtonGroupPage.actionButtonByName(submitRadioButtonHaveValidationError));
+        click(actionButtonByName(submitRadioButtonHaveValidationError));
         for (let i = 0; i < radioButtonsLength; i++) {
             waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
         }
     });
 
     it('Verify validation for radio group with disabled button and validation error', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError));
+        scrollIntoView(radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError));
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonWithDisabledButtonAndValidationError));
-        click(radioButtonGroupPage.actionButtonByName(submitDisabledRadioButtonWithValidationErrorIndex));
+        click(actionButtonByName(submitDisabledRadioButtonWithValidationErrorIndex));
         for (let i = 0; i < radioButtonsLength; i++) {
             waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
         }
     });
 
     it('Verify validation for radio buttons created with given list of SelectItem objects and have validation error', () => {
-        scrollIntoView(radioButtonGroupPage.radioButtonInputByName(radioButtonWithListOfSelectItemObjects));
+        scrollIntoView(radioButtonInputByName(radioButtonWithListOfSelectItemObjects));
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByName(radioButtonWithListOfSelectItemObjects));
-        click(radioButtonGroupPage.actionButtonByName(submitRadioButtonWithListOfSelectItemObjects));
+        click(actionButtonByName(submitRadioButtonWithListOfSelectItemObjects));
         for (let i = 0; i < radioButtonsLength; i++) {
             waitForElDisplayed(radioButtonGroupPage.errorMessage, i);
         }

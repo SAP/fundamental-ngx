@@ -50,6 +50,8 @@ const springValue = 'spring';
 const springIndex = 1;
 const marchIndex = 2;
 const autumnIndex = 3;
+const ariaChecked = 'aria-checked';
+const ngReflectIsDisabled = 'ng-reflect-is-disabled';
 
 export {
     radioButtonWithDefaultStateAndSelectionIndex,
@@ -103,5 +105,7 @@ export {
     radioButtonWithDisabledItemsCreatedFromSelectItem,
     submitDisabledRadioButtonWithValidationErrorIndex,
     submitRadioButtonHaveValidationError,
-    submitRadioButtonWithListOfSelectItemObjects
+    submitRadioButtonWithListOfSelectItemObjects,
+    ariaChecked,
+    ngReflectIsDisabled
 };
