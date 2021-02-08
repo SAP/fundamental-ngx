@@ -28,7 +28,7 @@ export class WizardCustomizableExampleComponent {
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';
 
-    statusChanged(stepNumber: number, event: any): void {
+    statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
             this.goToStep(stepNumber);
         }

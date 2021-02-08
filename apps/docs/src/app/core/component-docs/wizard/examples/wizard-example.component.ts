@@ -34,7 +34,7 @@ export class WizardExampleComponent {
     addressLine1 = '';
     addressLine2 = '';
 
-    statusChanged(stepNumber: number, event: any): void {
+    statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
             this.goToStep(stepNumber);
         }
