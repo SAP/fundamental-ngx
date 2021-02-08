@@ -1,27 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import {
+    DialogModule,
+    ListModule,
+    SelectMobileModule,
+    SelectModule
+} from '@fundamental-ngx/core';
+import {PlatformSelectModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
+
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../../api-files';
 import { PlatformSelectHeaderComponent } from './platform-select-header/platform-select-header.component';
 import { PlatformSelectDocsComponent } from './platform-select-docs.component';
 import { PlatformSelectFormsComponent } from './platform-select-examples/platform-select-forms/platform-select-forms.component';
-import { PlatformSelectNestedOptionsComponent } from './platform-select-examples/platform-select-nested-options/platform-select-nested-options.component';
-import { PlatformSelectAddingExampleComponent } from './platform-select-examples/platform-select-adding-example/platform-select-adding-example.component';
 import { PlatformSelectCustomTriggerComponent } from './platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component';
 import { PlatformSelectMaxHeightExampleComponent } from './platform-select-examples/platform-select-height/platform-select-max-height-example.component';
-import { PlatformSelectProgrammaticExampleComponent } from './platform-select-examples/platform-select-programmatic-example/platform-select-programmatic-example.component';
-import {
-    DialogModule,
-    FormModule,
-    ListModule,
-    SelectMobileModule,
-    SelectModule
-} from '@fundamental-ngx/core';
-import {PlatformSelectModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
 import { PlatformSelectSemanticStateExampleComponent } from './platform-select-examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component';
 import { PlatformSelectModeExampleComponent } from './platform-select-examples/platform-select-mode-example/platform-select-mode-example.component';
 import { PlatformSelectMobileExampleComponent } from './platform-select-examples/platform-select-mobile-example/platform-select-mobile-example.component';
+import { PlatformSelectColumnsExampleComponent } from './platform-select-examples/platform-select-columns/platform-select-columns-example.component';
+import { PlatformSelectNoneExampleComponent } from './platform-select-examples/platform-select-none/platform-select-none-example.component';
+import { PlatformSelectNoWrapExampleComponent } from './platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component';
 
 const routes: Routes = [
     {
@@ -38,13 +40,14 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        SelectMobileModule,
         SelectModule,
+        SelectMobileModule,
         DialogModule,
         ListModule,
-        FormModule,
         FdpFormGroupModule,
-        PlatformSelectModule
+        PlatformSelectModule,
+        ReactiveFormsModule,
+        PlatformButtonModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -52,13 +55,14 @@ const routes: Routes = [
         PlatformSelectFormsComponent,
         PlatformSelectHeaderComponent,
         PlatformSelectModeExampleComponent,
-        PlatformSelectNestedOptionsComponent,
         PlatformSelectMobileExampleComponent,
-        PlatformSelectAddingExampleComponent,
         PlatformSelectCustomTriggerComponent,
         PlatformSelectMaxHeightExampleComponent,
-        PlatformSelectProgrammaticExampleComponent,
-        PlatformSelectSemanticStateExampleComponent
+        PlatformSelectSemanticStateExampleComponent,
+        PlatformSelectColumnsExampleComponent,
+        PlatformSelectNoneExampleComponent,
+        PlatformSelectNoWrapExampleComponent
+
     ]
 })
 export class PlatformSelectDocsModules {}

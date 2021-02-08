@@ -1,13 +1,45 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FdpSelectionChangeEvent, OptionItem } from '@fundamental-ngx/platform';
+
+export class Fruit {
+    id: string;
+    name: string;
+    age: number;
+
+    constructor(id: string, name: string, age: number) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+}
 
 @Component({
     selector: 'fdp-select-semantic-state-example',
-    templateUrl: './platform-select-semantic-state-example.component.html'
+    templateUrl: './platform-select-semantic-state-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSelectSemanticStateExampleComponent {
-    options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
-    selectedValue1: string;
-    selectedValue2: string;
-    selectedValue3: string;
-    selectedValue4: string;
+
+    userList = [
+        new Fruit('A', 'Apple', 10),
+        new Fruit('B', 'orange', 70),
+        new Fruit('C', 'Plums', 10),
+        new Fruit('D', 'pineapple', 11),
+        new Fruit('E', 'watermelon', 10)
+    ];
+    option = this.userList.map<OptionItem>((item) => {
+        return {
+            label: item.name + item.id,
+            value: item,
+            triggerValue: '( ' + item.id + ' )',
+            disabled: item.id === 'B' ? true : false,
+            icon: ''
+        };
+    });
+    
+    selectedState: string = null;
+
+    onSelectState(item: FdpSelectionChangeEvent): void {
+        this.selectedState = item.payload;
+    }
 }

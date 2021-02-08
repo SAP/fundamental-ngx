@@ -100,7 +100,7 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
      * The displayed value of the option. It shows the selected option in the select's trigger.
      */
     get viewValue(): string {
-        return (this._elementRef.nativeElement.textContent || '').trim();
+        return (this.value || '').trim();
     }
 
     /**used in components like autocomplete where focus must remain on the input.*/
@@ -117,7 +117,7 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     private _active = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _changeDetectorRef: ChangeDetectorRef) { }
+    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) { }
 
     /**@hidden
      *  Since select components could be using the option's label to display the selected values

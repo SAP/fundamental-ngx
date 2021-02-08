@@ -1,9 +1,19 @@
 <header>Select</header>
 <description>
-    This component combines the Select and the Option components. It was created to emulate the native Select element as closely as possible while also providing
-    more extended styling options.
+    This is an extension of the Select component present in
+    <a [routerLink]="'/core/select'">ngx-core</a>. <br />
+    Includes usecase of DataSource,form fields with grouping, multi columns, wrapping options.
 </description>
-<import module="PlatformSelectModule, SelectItem"></import>
+
+<h3>Platform specific enhancements:</h3>
+<ul>
+    <li>It can be used with in the FormField component.</li>
+    <li>It accepts an array of objects, an observable array to be able to
+         connect your data as a continuous reactive stream.</li>
+    <li>Support for no selection option</li>
+</ul>
+
+<import module="PlatformSelectModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

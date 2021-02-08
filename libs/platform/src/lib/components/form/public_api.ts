@@ -38,4 +38,4 @@ export * from './multi-input';
 export * from './platform-file-uploader/platform-file-uploader.module';
 export * from './platform-file-uploader/platform-file-uploader.component';
 export * from './auto-complete/auto-complete.module';
-export * from './select/select.module';
+export * from './select';

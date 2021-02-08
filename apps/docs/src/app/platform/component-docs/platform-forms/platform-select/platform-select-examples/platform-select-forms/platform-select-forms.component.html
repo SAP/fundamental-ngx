@@ -1,8 +1,15 @@
-<fdp-form-group [multiLayout]="true" [noLabelLayout]="false" [formGroup]="customForm">
-    <fdp-form-field id="field" label="Array of Options" zone="zLeft"
-                    rank="1">
-                    <fdp-select placeholder="Select an option" formControlName="selectControl" [list]="option">
-                    </fdp-select>
-                    </fdp-form-field>
-                    </fdp-form-group>
-<small style="display: block">Value: {{customForm.controls.selectControl.value | json}}</small>
+<fdp-form-group [noLabelLayout]="false" [formGroup]="customForm">
+        <fdp-form-field id="field" rank="4">
+            <fdp-select
+                width="7rem"
+                name="field"
+                placeholder="Select an option"
+                [list]="fromData"
+                [value]="selectedItem"
+                (selectionChange)="onSelect($event)"
+                formControlName="field"
+            ></fdp-select>
+            <p>Selected Item: {{ selectedItem | json }}</p>
+            <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
+        </fdp-form-field>
+    </fdp-form-group>

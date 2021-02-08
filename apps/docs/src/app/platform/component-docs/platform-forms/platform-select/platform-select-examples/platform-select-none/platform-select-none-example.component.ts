@@ -1,5 +1,5 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { SelectItem } from '@fundamental-ngx/platform';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { FdpSelectionChangeEvent, OptionItem } from '@fundamental-ngx/platform';
 
 export class Fruit {
     id: string;
@@ -14,10 +14,12 @@ export class Fruit {
 }
 
 @Component({
-    selector: 'fdp-select-types-noborder-example',
-    templateUrl: './platform-select-types-noborder-example.component.html'
+    selector: 'fdp-select-none-example',
+    templateUrl: './platform-select-none-example.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformSelectTypesNoBorderExampleComponent implements OnInit {
+export class PlatformSelectNoneExampleComponent {
     selectedValue: string;
 
     userList = [
@@ -27,17 +29,18 @@ export class PlatformSelectTypesNoBorderExampleComponent implements OnInit {
         new Fruit('D', 'pineapple', 11),
         new Fruit('E', 'watermelon', 10)
     ];
-    option = this.userList.map<SelectItem>((item) => {
+    option = this.userList.map<OptionItem>((item) => {
         return {
             label: item.name + item.id,
             value: item,
             triggerValue: '( ' + item.id + ' )',
-            disabled: item.id === 'B' ? true : false,
             icon: ''
         };
     });
 
-    constructor() {}
-
-    ngOnInit(): void {}
-}
+    onSelect(item: FdpSelectionChangeEvent): void {
+        if (item) {
+         this.selectedValue = item.payload;
+        }
+     }
+ }

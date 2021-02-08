@@ -42,7 +42,7 @@ export class SelectKeyManagerService {
     /** @hidden */
     _scrollActiveOptionIntoView(): void {
         const activeOptionIndex = this._keyManager.activeItemIndex || 0;
-
+        
         this._component._optionPanel.nativeElement.scrollTop = this._component._getOptionScrollPosition(
             activeOptionIndex,
             this._component._getItemHeight(),

@@ -5,8 +5,3 @@ export interface OptionsInterface {
     id: string;
     _selectViaInteraction(): void;
 }
-
-
-
-
-
