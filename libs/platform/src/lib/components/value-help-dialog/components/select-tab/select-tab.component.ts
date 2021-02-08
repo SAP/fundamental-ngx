@@ -23,6 +23,10 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
   @Input()
   selected: T[] = [];
 
+  /** Actual filters */
+  @Input()
+  filters: VhdFilter[] = [];
+
   /** Close dialog immediately after select any row from search table. It'll be skipped if multi option is true */
   @Input()
   selection: VdhTableSelection = 'single';
@@ -37,7 +41,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
 
   /** Items per page for pagination below search table */
   @Input()
-  pageSize = 20;
+  pageSize: number;
 
   /** Count of default mobile header from search table */
   @Input()
@@ -130,14 +134,20 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
     if (this.pageSize && this._shownCount !== this.displayedData.length) {
       this._shownCount += this.pageSize;
       this._shownCount = Math.min(this._shownCount, this.displayedData.length);
+    } else {
+      this._shownCount = this.displayedData.length;
     }
   }
 
   /** @hidden Refresh page in desktop view */
   _updatePage(pageNumber = 1): void {
-    this._currentPage = pageNumber;
-    this._shownFrom = (pageNumber - 1) * this.pageSize;
-    this._shownCount = Math.min(this._shownFrom + this.pageSize, this.displayedData.length);
+    if (this.pageSize) {
+      this._currentPage = pageNumber;
+      this._shownFrom = (pageNumber - 1) * this.pageSize;
+      this._shownCount = Math.min(this._shownFrom + this.pageSize, this.displayedData.length);
+    } else {
+      this._shownCount = this.displayedData.length;
+    }
   }
 
   /** @hidden Method toggle selected state for all items  */

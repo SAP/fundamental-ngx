@@ -1,30 +1,33 @@
 
-import { VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineStrategy } from '../models';
+import { VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineIncludeStrategy, VhdDefineExcludeStrategy } from '../models';
 
 export const defaultConditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity, filters?: VhdFilter[]) => {
     const filter = (filters || []).find(f => f.key === item.key);
     let value = (() => {
         switch (item.strategy) {
-        case VhdDefineStrategy.empty:
-            return null;
-        case VhdDefineStrategy.between:
-            return `${item.value}...${item.valueTo}`;
-        case VhdDefineStrategy.contains:
-            return `*${item.value}*`;
-        case VhdDefineStrategy.equalTo:
-            return `=${item.value}`;
-        case VhdDefineStrategy.startsWith:
-            return `${item.value}*`;
-        case VhdDefineStrategy.endsWith:
-            return `*${item.value}`;
-        case VhdDefineStrategy.greaterThan:
-            return `>${item.value}`;
-        case VhdDefineStrategy.greaterThanEqual:
-            return `>=${item.value}`;
-        case VhdDefineStrategy.lessThan:
-            return `<${item.value}`;
-        case VhdDefineStrategy.lessThanEqual:
-            return `<=${item.value}`;
+            case VhdDefineIncludeStrategy.empty:
+            case VhdDefineExcludeStrategy.not_empty:
+                return null;
+            case VhdDefineIncludeStrategy.between:
+                return `${item.value}...${item.valueTo}`;
+            case VhdDefineIncludeStrategy.contains:
+                return `*${item.value}*`;
+            case VhdDefineIncludeStrategy.equalTo:
+                return `=${item.value}`;
+            case VhdDefineIncludeStrategy.startsWith:
+                return `${item.value}*`;
+            case VhdDefineIncludeStrategy.endsWith:
+                return `*${item.value}`;
+            case VhdDefineIncludeStrategy.greaterThan:
+                return `>${item.value}`;
+            case VhdDefineIncludeStrategy.greaterThanEqual:
+                return `>=${item.value}`;
+            case VhdDefineIncludeStrategy.lessThan:
+                return `<${item.value}`;
+            case VhdDefineIncludeStrategy.lessThanEqual:
+                return `<=${item.value}`;
+            case VhdDefineExcludeStrategy.not_equalTo:
+                return `!(=${item.value})`;
         }
     })();
     if (value && item.type === 'exclude') {

@@ -4,12 +4,17 @@ $block: fdp-value-help-dialog;
     fdp-define-tab {
         height: 100%;
         overflow: auto;
+        .define-condition-title {
+            padding: 0.625rem 0 0;
+        }
     }
+
     .vhd-condition-filters {
         fd-popover {
             width: 100%;
         }
     }
+
     .condition-row {
         .main-col {
             min-width: auto;

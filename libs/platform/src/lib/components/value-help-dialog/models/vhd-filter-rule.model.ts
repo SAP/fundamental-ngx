@@ -1,28 +1,28 @@
-import { VhdDefineStrategy } from './vhd-strategy.enum';
+import { VhdDefineExcludeStrategy, VhdDefineIncludeStrategy } from './vhd-strategy.enum';
 import { VhdDefineType } from './vhd-type-condition.enum';
 
 export interface VhdDefineEntityRule {
     type: VhdDefineType;
     key: string;
-    strategy: VhdDefineStrategy;
+    strategy: VhdDefineIncludeStrategy | VhdDefineExcludeStrategy;
     value: string;
     valueTo: string;
 }
 
-class BaseEntity implements VhdDefineEntityRule {
+export class BaseEntity implements VhdDefineEntityRule {
     type: VhdDefineType;
     key = '*';
     label?: string;
-    strategy: VhdDefineStrategy;
+    strategy: (VhdDefineIncludeStrategy | VhdDefineExcludeStrategy);
     value = '';
     valueTo = '';
     valid: boolean;
 
-    constructor(strategy?: VhdDefineStrategy, key?: string) {
+    constructor(strategy?: VhdDefineIncludeStrategy | VhdDefineExcludeStrategy, key?: string) {
         if (key) {
             this.key = key;
         }
-        this.strategy = strategy || VhdDefineStrategy.equalTo;
+        this.strategy = strategy || VhdDefineIncludeStrategy.equalTo;
     }
 }
 export class VhdIncludedEntity extends BaseEntity {
