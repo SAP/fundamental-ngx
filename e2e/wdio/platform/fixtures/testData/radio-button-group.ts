@@ -1,111 +1,54 @@
-const radioButtonWithDefaultStateAndSelectionIndex = 0;
-const radioButtonInlineCozyRadioGroup = 1;
-const radioButtonWithDefaultPropertyValues = 2;
-const radioButtonWithDisabledButtonAndValidationError = 3;
-const radioButtonUsingFormGroupAndFormControl = 4;
-const radioButtonInlineWithDefaultSelection = 5;
-const radioButtonInlineCompact = 6;
-const radioButtonWithDisabledItem = 7;
-const radioButtonHaveValidationError = 8;
-const radioButtonWithNoSelectionValue = 9;
-const radioButtonWithFormGroupAndFormControl = 10;
-const radioButtonWithPreSelection = 11;
-const radioButtonWithGivenListOfStringValues = 12;
-const radioButtonWithListOfSelectItemObjects = 13;
-const radioButtonVertical = 14;
-const radioButtonVerticalQualificationForm = 15;
-const radioButtonWithSelectItemsFormGroupAndFormControl = 18;
-const radioButtonWithPreSelectionOnObjectDataPassed = 19;
-const radioButtonWithPreSelectionBasedOnControlValue = 21;
-const platformRadioButtonWithSelectiemObject = 22;
-const radioButtonWithLookupKeyAndDisplayKey = 23;
-const radioButtonWithDisabledContentAndFormcontrol = 24;
-const radioButtonWithSomeDisabledButtons = 25;
-const radioButtonCreatedFromList = 26;
-const radioButtonDisabledWithSelectedItem = 27;
-const radioButtonWithDisabledButtonsFromSelectitemObject = 28;
-const radioButtonWithDisabledButtonsDrivenForm = 29;
-const radioButtonWithIndividualButtonDisabled = 30;
-const radioButtonDisabledCreatedFromList = 31;
-const radioButtonDisabledCreatedFromSelectItem = 32;
-const radioButtonWithDisabledItemsCreatedFromSelectItem = 33;
-const resetDisabledValidationGroupButtonIndex = 21;
-const resetHaveValidationErrorIndex = 44;
-const resetListOfSelectitemObjectIndex = 51;
-const resetVerticalRadioGroupButtonIndex = 54;
-const resetQualificationFormButtonIndex = 59;
-const submitDisabledRadioButtonWithValidationErrorIndex = 20;
-const submitRadioButtonHaveValidationError = 43;
-const submitRadioButtonWithListOfSelectItemObjects = 50;
-const orientation = ['vertical', 'horizontal'];
-const monthNames = ['january', 'february', 'march', 'april'];
-const seasonsNames = ['winter', 'spring', 'summer', 'autumn'];
-const winterValue = 'winter';
-const januaryValue = 'january';
-const autumnValue = 'autumn';
-const noneValue = 'none';
-const marchValue = 'march';
-const samsungValue = 'samsung';
-const springValue = 'spring';
-const springIndex = 1;
-const marchIndex = 2;
-const autumnIndex = 3;
-const ariaChecked = 'aria-checked';
-const ngReflectIsDisabled = 'ng-reflect-is-disabled';
-
-export {
-    radioButtonWithDefaultStateAndSelectionIndex,
-    orientation,
-    winterValue,
-    radioButtonInlineCozyRadioGroup,
-    radioButtonWithDefaultPropertyValues,
-    radioButtonWithDisabledButtonAndValidationError,
-    januaryValue,
-    monthNames,
-    resetDisabledValidationGroupButtonIndex,
-    marchIndex,
-    radioButtonUsingFormGroupAndFormControl,
-    marchValue,
-    radioButtonInlineWithDefaultSelection,
-    radioButtonInlineCompact,
-    radioButtonWithDisabledItem,
-    radioButtonHaveValidationError,
-    resetHaveValidationErrorIndex,
-    radioButtonWithNoSelectionValue,
-    noneValue,
-    radioButtonWithFormGroupAndFormControl,
-    radioButtonWithPreSelection,
-    radioButtonWithGivenListOfStringValues,
-    radioButtonWithListOfSelectItemObjects,
-    resetListOfSelectitemObjectIndex,
-    seasonsNames,
-    radioButtonVertical,
-    resetVerticalRadioGroupButtonIndex,
-    resetQualificationFormButtonIndex,
-    radioButtonWithSelectItemsFormGroupAndFormControl,
-    radioButtonVerticalQualificationForm,
-    autumnIndex,
-    autumnValue,
-    radioButtonWithPreSelectionOnObjectDataPassed,
-    springIndex,
-    springValue,
-    radioButtonWithPreSelectionBasedOnControlValue,
-    platformRadioButtonWithSelectiemObject,
-    samsungValue,
-    radioButtonWithLookupKeyAndDisplayKey,
-    radioButtonWithDisabledContentAndFormcontrol,
-    radioButtonWithSomeDisabledButtons,
-    radioButtonCreatedFromList,
-    radioButtonDisabledWithSelectedItem,
-    radioButtonWithDisabledButtonsFromSelectitemObject,
-    radioButtonWithDisabledButtonsDrivenForm,
-    radioButtonWithIndividualButtonDisabled,
-    radioButtonDisabledCreatedFromList,
-    radioButtonDisabledCreatedFromSelectItem,
-    radioButtonWithDisabledItemsCreatedFromSelectItem,
-    submitDisabledRadioButtonWithValidationErrorIndex,
-    submitRadioButtonHaveValidationError,
-    submitRadioButtonWithListOfSelectItemObjects,
-    ariaChecked,
-    ngReflectIsDisabled
-};
+export const radioButtonWithDefaultStateAndSelectionIndex = 0;
+export const radioButtonInlineCozyRadioGroup = 1;
+export const radioButtonWithDefaultPropertyValues = 2;
+export const radioButtonWithDisabledButtonAndValidationError = 3;
+export const radioButtonUsingFormGroupAndFormControl = 4;
+export const radioButtonInlineWithDefaultSelection = 5;
+export const radioButtonInlineCompact = 6;
+export const radioButtonWithDisabledItem = 7;
+export const radioButtonHaveValidationError = 8;
+export const radioButtonWithNoSelectionValue = 9;
+export const radioButtonWithFormGroupAndFormControl = 10;
+export const radioButtonWithPreSelection = 11;
+export const radioButtonWithGivenListOfStringValues = 12;
+export const radioButtonWithListOfSelectItemObjects = 13;
+export const radioButtonVertical = 14;
+export const radioButtonVerticalQualificationForm = 15;
+export const radioButtonWithSelectItemsFormGroupAndFormControl = 18;
+export const radioButtonWithPreSelectionOnObjectDataPassed = 19;
+export const radioButtonWithPreSelectionBasedOnControlValue = 21;
+export const platformRadioButtonWithSelectiemObject = 22;
+export const radioButtonWithLookupKeyAndDisplayKey = 23;
+export const radioButtonWithDisabledContentAndFormcontrol = 24;
+export const radioButtonWithSomeDisabledButtons = 25;
+export const radioButtonCreatedFromList = 26;
+export const radioButtonDisabledWithSelectedItem = 27;
+export const radioButtonWithDisabledButtonsFromSelectitemObject = 28;
+export const radioButtonWithDisabledButtonsDrivenForm = 29;
+export const radioButtonWithIndividualButtonDisabled = 30;
+export const radioButtonDisabledCreatedFromList = 31;
+export const radioButtonDisabledCreatedFromSelectItem = 32;
+export const radioButtonWithDisabledItemsCreatedFromSelectItem = 33;
+export const resetDisabledValidationGroupButtonIndex = 21;
+export const resetHaveValidationErrorIndex = 44;
+export const resetListOfSelectitemObjectIndex = 51;
+export const resetVerticalRadioGroupButtonIndex = 54;
+export const resetQualificationFormButtonIndex = 59;
+export const submitDisabledRadioButtonWithValidationErrorIndex = 20;
+export const submitRadioButtonHaveValidationError = 43;
+export const submitRadioButtonWithListOfSelectItemObjects = 50;
+export const orientation = ['vertical', 'horizontal'];
+export const monthNames = ['january', 'february', 'march', 'april'];
+export const seasonsNames = ['winter', 'spring', 'summer', 'autumn'];
+export const winterValue = 'winter';
+export const januaryValue = 'january';
+export const autumnValue = 'autumn';
+export const noneValue = 'none';
+export const marchValue = 'march';
+export const samsungValue = 'samsung';
+export const springValue = 'spring';
+export const springIndex = 1;
+export const marchIndex = 2;
+export const autumnIndex = 3;
+export const ariaChecked = 'aria-checked';
+export const ngReflectIsDisabled = 'ng-reflect-is-disabled';

@@ -12,16 +12,16 @@ export class RadioButtonGroupPage extends BaseComponentPo {
     formGroup = 'fd-form-group[role=radiogroup]';
     errorMessage = '.is-error';
 
-    radioButtonInputByName = (name: number = 0) => {
-        return `[id="fd-popover-${name}"] input`;
+    radioButtonInputByIndex = (index: number = 0) => {
+        return `[id="fd-popover-${index}"] input`;
     };
 
-    radioButtonLabelByName = (name: number = 0) => {
-        return `[id="fd-popover-${name}"] label`;
+    radioButtonLabelByIndex = (index: number = 0) => {
+        return `[id="fd-popover-${index}"] label`;
     };
 
-    actionButtonByName = (name: number = 8) => {
-        return `#fdp-id-${name}`;
+    actionButtonByIndex = (index: number = 8) => {
+        return `#fdp-id-${index}`;
     };
 
     open(): void {
