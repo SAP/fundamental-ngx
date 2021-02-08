@@ -41,21 +41,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
             top: calc(50% - 1px);
         }
-
-        //&.#{$block}--blank-top:before {
-        //    width: calc(100% + 4.7rem);
-        //}
-        //&.#{$block}--blank-top:after {
-        //    content: '';
-        //    width: 1.6rem;
-        //    height: 0;
-        //    display: block;
-        //    position: absolute;
-        //    right: -3.7rem;
-        //    border-top: 2px dashed #89919A;
-        //    border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-        //    top: calc(50% - 1px);
-        //}
     }
 
     &.#{$block}--line-before:before, &.#{$block}--line-after:after {
@@ -69,6 +54,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         top: 0;
         bottom: 0;
         margin: auto;
+        pointer-events: none;
     }
 
     &.#{$block}--line-before:before {

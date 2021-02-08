@@ -32,17 +32,8 @@
             <li fd-menu-item (click)="menu.close(); onEdit.emit()" *ngIf="_isNotStarted">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEdit">Edit</div>
             </li>
-            <li *ngIf="!(meta.isLast || meta.isRoot && meta.parallelStart)" fd-menu-item (click)="menu.close(); onDelete.emit()">
+            <li *ngIf="!(meta.isRoot && meta.parallelStart)" fd-menu-item (click)="menu.close(); onDelete.emit()">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Delete</div>
-            </li>
-            <li fd-menu-item (click)="menu.close(); onAdd.emit('before:d')">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Add before (dev)</div>
-            </li>
-            <li fd-menu-item (click)="menu.close(); onAdd.emit('parallel:d')">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Add parallel (dev)</div>
-            </li>
-            <li fd-menu-item (click)="menu.close(); onAdd.emit('after:d')">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Add after (dev)</div>
             </li>
         </fd-menu>
     </div>

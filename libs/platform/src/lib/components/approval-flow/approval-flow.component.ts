@@ -402,35 +402,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     addNode(source: ApprovalGraphNode, type: 'before' | 'after' | 'parallel' | 'blank'): void {
-        const _source = source.blank ? this._metaMap[source.id].prevHNode : source;
-        console.log(`add ${type}`);
-        if (type.indexOf(':d') > -1) {
-            // TODO Ilya: dev only
-            const _qnType = type.replace(':d', '');
-            console.log('add quick node', _qnType);
-            const _qNode = getBlankNode();
-            _qNode.id = `qNodeId${(Math.random() * 1000).toFixed()}`;
-            _qNode.blank = false;
-            _qNode.approvers = [{
-                id: 'uid99655',
-                name: 'Fred Gibson',
-                description: 'Marketing team',
-                imgUrl: 'https://randomuser.me/api/portraits/men/45.jpg'
-            }];
-            _qNode.targets = _source.targets;
-            if (_qnType === 'after') {
-                _source.targets = [_qNode.id];
-                this._updateNode(_source);
-            }
-            if (_qnType === 'parallel') {
-                const parent = this._metaMap[_source.id].parent;
-                parent.targets.push(_qNode.id);
-                this._updateNode(parent);
-            }
-            this._approvalProcess.nodes.push(_qNode);
-            this._buildView(this._approvalProcess);
-            return;
-        }
+        const _source = source.blank ? this._getPreviousNotBlankNode(source) : source;
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
                 nodeTarget: type,
@@ -520,9 +492,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     _deleteCheckedNodes(): void {
         this._cacheCurrentApprovalProcess();
-        this._nodeComponents.filter(n => n._isSelected).forEach(n => this._deleteNode(n.node));
+        this._nodeComponents.filter(c => c._isSelected).forEach(({ node }) => {
+            this._deleteNode(node);
+            this._buildView(this._approvalProcess);
+        });
         this._showMessage('nodesRemove');
-        this._buildView(this._approvalProcess);
     }
 
     /** @hidden */
@@ -546,28 +520,26 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const placement = dropTarget._activeDropZones[0].placement;
         this._nodeComponents.forEach(n => n._deactivateDropZones());
         const nodeMeta = this._metaMap[nodeToDrop.id];
-        const targetNode = dropTarget.node;
-        const dropTargetMeta = this._metaMap[dropTarget.node.id];
+        const targetNode = dropTarget.node.blank ? this._getPreviousNotBlankNode(dropTarget.node) : dropTarget.node;
 
-        if (placement === 'after' && nodeMeta.prevHNode?.id === dropTarget.node.id) {
+        if (placement === 'after' && nodeMeta.prevHNode?.id === targetNode.id) {
             return;
         }
-        if (placement === 'blank' && dropTargetMeta.prevHNode.id === nodeToDrop.id) {
+        if (placement === 'blank' && targetNode.id === nodeToDrop.id) {
             return;
         }
 
         this._deleteNode(nodeToDrop);
 
-        if (placement === 'blank') {
-            const targetId = dropTargetMeta.nextHNode?.id || dropTargetMeta.prevHNode?.targets[0];
-            nodeToDrop.targets = [targetId];
-            dropTargetMeta.prevHNode.targets = [nodeToDrop.id];
-        }
-
-        if (placement === 'after') {
+        if (placement === 'blank' || placement === 'after') {
             nodeToDrop.targets = [...targetNode.targets];
             targetNode.targets = [nodeToDrop.id];
         }
+
+        // if (placement === 'after') {
+        //     nodeToDrop.targets = [...targetNode.targets];
+        //     targetNode.targets = [nodeToDrop.id];
+        // }
 
         if (placement === 'before') {
             this._replaceTargetsInSourceNodes(targetNode.id, [nodeToDrop.id]);
@@ -692,8 +664,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const nextHNode = meta.nextHNode;
             const parent = meta.parent;
             const isNotApproved = !isNodeApproved(n);
+            const allParentsApproved = findParentNode(n, allNodes).every(_n => isNodeApproved(_n));
             meta.canAddNodeAfter = isNotApproved && !nextHNode?.blank;
-            meta.canAddNodeBefore = n.status === 'not started' && Boolean(parent) && !isNodeApproved(parent) && (_metaMap[parent.id]?.parallelStart || meta.parallelEnd);
+            // meta.canAddNodeBefore = n.status === 'not started' && Boolean(parent) && !isNodeApproved(parent) && ((meta.isParallel && _metaMap[parent.id]?.parallelStart) || (!meta.isParallel && meta.parallelEnd));
+            meta.canAddNodeBefore = n.status === 'not started' && ((meta.isParallel && Boolean(parent) && !isNodeApproved(parent) && _metaMap[parent.id]?.parallelStart) || (!meta.isParallel && meta.parallelEnd && !allParentsApproved));
             meta.canAddParallel = isNotApproved && !meta.parallelEnd && (!meta.isLast && !meta.isRoot);
             meta.isLastInParallel = meta.isParallel && graph[meta.columnIndex + 1]?.nodes.length === 1;
         });
@@ -723,6 +697,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         if (!this._isEditMode) {
             this._resetCarousel();
         }
+        this._cdr.markForCheck();
     }
 
     /** @hidden Listen window resize and distribute cards on column change */
@@ -821,6 +796,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canAddBefore = false;
         this._canAddParallel = false;
         this._isRemoveButtonVisible = false;
+    }
+
+    private _getPreviousNotBlankNode(source: ApprovalNode): ApprovalNode {
+        const prev = this._metaMap[source.id].prevHNode;
+        return prev.blank ? this._getPreviousNotBlankNode(prev) : prev;
     }
 
     /** @hidden */
