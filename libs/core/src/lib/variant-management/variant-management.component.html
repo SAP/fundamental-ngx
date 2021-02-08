@@ -1,14 +1,12 @@
 <fd-popover [noArrow]="false" [(isOpen)]="isViewsOpen">
     <fd-popover-control>
         <div style="display: flex; justify-content: space-between; align-items: center">
-            <h4 fd-title style="color: #0854a0">{{ appliedView.name }}<span *ngIf="viewChanged">*</span></h4>
+            <h4 fd-title>{{ appliedView.name }} {{ viewChanged }} <span *ngIf="viewChanged">*</span></h4>
             <button
                 fd-button
                 fdType="transparent"
-                [attr.aria-selected]="isViewsOpen"
                 [fdMenu]="true"
                 [compact]="true"
-                (click)="isViewsOpen = true"
             ></button>
         </div>
     </fd-popover-control>
@@ -54,18 +52,18 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h1 fd-title>Save View</h1>
-            <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>
+            <button fd-dialog-close-button (click)="_onCancelView(dialog)"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
             <div fd-form-item>
-                <label fd-form-label for="input-4">View:</label>
+                <label fd-form-label [for]="'name' + view.id">View:</label>
                 <input
                     fd-form-control
                     type="text"
-                    placeholder="Field placeholder text"
+                    placeholder="Enter view name"
                     aria-required="true"
-                    [id]="'input-4'"
+                    [id]="'name' + view.id"
                     [compact]="true"
                     [(ngModel)]="viewModel.name"
                 />
@@ -79,12 +77,12 @@
             <fd-button-bar
                 fdType="emphasized"
                 label="Save"
-                (click)="dialog.close('Continue')">
+                (click)="_onSaveView(dialog)">
             </fd-button-bar>
             <fd-button-bar
                 fd-initial-focus
                 label="Cancel"
-                (click)="dialog.dismiss('Cancel')">
+                (click)="_onCancelView(dialog)">
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
@@ -95,7 +93,7 @@
         <fd-dialog-header>
             <h1 fd-title>Manage Views</h1>
 
-            <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>
+            <button fd-dialog-close-button (click)="_onCancelManage(dialog)"></button>
 
         </fd-dialog-header>
 
@@ -124,7 +122,7 @@
                 <tbody fd-table-body>
                 <tr *ngFor="let view of views; let index = index" fd-table-row>
                     <td fd-table-cell>
-                        <button fd-button [compact]="true" [fdType]="'transparent'" [glyph]="'favorite'"></button>
+                        <button fd-button [compact]="true" fdType="transparent" glyph="favorite"></button>
                     </td>
                     <td fd-table-cell>{{ view.name }}</td>
                     <td fd-table-cell>{{ view.sharing }}</td>
@@ -143,7 +141,7 @@
                     </td>
                     <td fd-table-cell>{{ view.createdBy }}</td>
                     <td fd-table-cell>
-                        <button fd-button [compact]="true" [fdType]="'transparent'" [glyph]="'error'">
+                        <button fd-button [compact]="true" fdType="transparent" glyph="error">
                         </button>
                     </td>
                 </tr>
@@ -155,12 +153,12 @@
             <fd-button-bar
                 fdType="emphasized"
                 label="OK"
-                (click)="dialog.close('Continue')">
+                (click)="_onSaveManage(dialog)">
             </fd-button-bar>
             <fd-button-bar
                 fd-initial-focus
                 label="Cancel"
-                (click)="dialog.dismiss('Cancel')">
+                (click)="_onCancelManage(dialog)">
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>

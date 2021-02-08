@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { VariantManagementComponent, View } from '@fundamental-ngx/core';
+import { of } from 'rxjs';
 
 interface ExampleRow {
     column1: any,
@@ -8,23 +9,6 @@ interface ExampleRow {
     date?: any,
     type?: any
 }
-
-enum Sharing {
-    PRIVATE = 1,
-    PUBLIC = 2
-}
-
-interface View {
-    id: number,
-    favorite: boolean,
-    name: string,
-    sharing: string,
-    autoApply: boolean,
-    default: boolean,
-    createdBy: string,
-    settings?: any;
-}
-
 @Component({
     selector: 'fd-variant-management-example',
     templateUrl: './variant-management-example.component.html'
@@ -32,101 +16,102 @@ interface View {
 export class VariantManagementExampleComponent implements OnInit {
     tableRows: ExampleRow[];
     displayedRows: ExampleRow[];
-    ascending = true;
-    filterVal = '';
-    open = false;
 
-    settingsChanged = false;
-
-    viewFilters = {
-        filterVal: '',
-        ascending: false
-    }
-
-    defaultView = {
-        id: 1,
-        favorite: true,
-        name: 'Standard',
-        sharing: 'Private',
-        default: true,
-        autoApply: true,
-        createdBy: 'SAP',
-        data: {
-            filterVal: '',
-            ascending: true
-        }
-    };
+    currentView: View;
 
     views: View[];
+    @ViewChild(VariantManagementComponent) viewManager: VariantManagementComponent;
 
-    sortColumn1(asc: boolean): void {
-        this.ascending = asc;
-        this.open = false;
-        this.viewFilters.ascending = asc;
-
-        this._viewChange();
+    sortColumn1(): void {
+        this.views = this.views.map(view => {
+            if (view.id === this.currentView.id) {
+                view.settings = this.currentView.settings;
+            }
+            return view;
+        });
     }
 
-    inputKeyup(event: KeyboardEvent): void {
-        if (event.key === 'Enter' || event.key === 'Esc') {
-            this.open = false;
+    applyViewSettings(viewId: string): void {
+        const viewToApply = this.views.find(view => view.id === viewId) || this.views.find(view => view.default);
+        if (viewToApply) {
+            this.currentView = viewToApply;
         }
-        this._viewChange();
-    };
-
-    _viewChange(): void {
-        this.settingsChanged = true;
-    }
-
-    applyViewSettings(viewId: number): void {
-        this.settingsChanged = false;
-        const viewToApply = this.views.find(view => view.id === viewId);
-        this.viewFilters = { ...viewToApply.settings };
     }
     
-    saveViews(updatedViews: View[]): void {
-        const updateExist = this.views
-            .map(view => updatedViews
-                .find(updatedView => view.id === updatedView.id))
-            .filter(Boolean);
+    saveView(updatedView: View): void {
+        console.log(updatedView);
 
-        if (updateExist.length) {
-            const updatedView = this.views.find(view => view.id === updatedViews[0].id);
-            updatedView.settings = this.viewFilters;
-        } else {
-            this.views.push({
-                ...updatedViews[0],
-                settings: this.viewFilters
-            });
+        const index = this.views.findIndex(v => v.id === updatedView.id)
+        if (index !== -1) {
+            this.views.splice(index, 1, updatedView);
         }
+        
+        // const updateExist = this.views
+        //     .map(view => updatedViews
+        //         .find(updatedView => view.id === updatedView.id))
+        //     .filter(Boolean);
+
+        // if (updateExist.length) {
+        //     const updatedView = this.views.find(view => view.id === updatedViews[0].id);
+        //     updatedView.settings = this.viewFilters;
+        // } else {
+        //     this.views.push({
+        //         ...updatedViews[0],
+        //         settings: this.viewFilters
+        //     });
+        // }
+    }
+
+    updateViewsDueCurrent(): void {
+        this.views = this.views.map(view => {
+            if (view.id === this.currentView.id) {
+                view.settings = this.currentView.settings;
+            }
+            return view;
+        });
+    }
+
+    manualUpdateViews(): void {
+        this.viewManager?.updateViews(this.views.map(view => {
+            if (view.settings.column1) {
+                view.settings.column1.filterVal = this.tableRows[0].column1.substring(0, Math.floor(Math.random() * this.tableRows[0].column1.length));
+            }
+            return view;
+        }));
     }
 
     ngOnInit(): void {
         this.views = [
             {
-                id: 1,
+                id: '1',
                 favorite: true,
                 name: 'Standard',
-                sharing: 'Private',
+                access: 'private',
                 default: true,
+                readonly: true,
                 autoApply: true,
                 createdBy: 'SAP',
                 settings: {
-                    filterVal: '',
-                    ascending: true
+                    column1: {
+                        filterVal: '',
+                        ascending: true
+                    }
                 }
             },
             {
-                id: 2,
+                id: '2',
                 favorite: false,
                 name: 'Second View',
-                sharing: 'Public',
+                access: 'public',
+                readonly: false,
                 default: false,
                 autoApply: true,
                 createdBy: 'Self',
                 settings: {
-                    filterVal: '',
-                    ascending: false
+                    column1: {
+                        filterVal: '',
+                        ascending: false
+                    }
                 }
             }
         ];
