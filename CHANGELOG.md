@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.17...v0.26.2-rc.18) (2021-02-08)
+
+
+### Features
+
+* (Core) introduce Slider component ([#4517](https://github.com/SAP/fundamental-ngx/issues/4517)) ([54ebb59](https://github.com/SAP/fundamental-ngx/commit/54ebb59cabc3e097300b272acd48ae5b88395e2a))
+
 ### [0.26.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.16...v0.26.2-rc.17) (2021-02-07)
 
 ### [0.26.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.15...v0.26.2-rc.16) (2021-02-07)
