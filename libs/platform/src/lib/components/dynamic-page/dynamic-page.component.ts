@@ -89,6 +89,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     @ViewChildren(DynamicPageTabbedContentComponent)
     tabContents: QueryList<DynamicPageTabbedContentComponent>;
 
+    @ViewChildren(TabPanelComponent)
+    dynamicPageTabs: QueryList<TabPanelComponent>;
+
     /**
      * @hidden
      * reference to header container
@@ -212,6 +215,21 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         if (this.headerCollapsible) {
             this._dynamicPageService.toggleHeader();
         }
+    }
+
+    /**
+     * marks the dynamic page tab as selected when the id of the tab is passed
+     */
+    setSelectedTab(id: string): void {
+        if (!(id && this.dynamicPageTabs)) {
+            return;
+        }
+
+        this.dynamicPageTabs.forEach((element) => {
+            if (element.id === id) {
+                element.open(true);
+            }
+        });
     }
 
     /**

@@ -1,23 +1,45 @@
 import {
+    AfterViewChecked,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
     HostBinding,
-    HostListener,
     Input,
     OnDestroy,
-    OnInit,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
-import { filter, map } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
-import { KeyUtil } from '../../utils/functions';
-import { SelectProxy } from '../select-proxy.service';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { Subject } from 'rxjs';
+import {
+    FocusableOption,
+    FocusOrigin
+} from '@angular/cdk/a11y';
+import {
+    ENTER,
+    hasModifierKey,
+    SPACE
+} from '@angular/cdk/keycodes';
+
+import { KeyUtil } from '../../utils/functions/key-util';
+import { OptionsInterface } from '../options.interface';
 
 let optionUniqueId = 0;
+
+/**
+ * Event object emitted by OptionComponent when
+ * selected or deselected. *
+ */
+export class FdOptionSelectionChange {
+    constructor(
+        /** Reference to the option that emitted the event. */
+        readonly source: OptionComponent,
+        /** Whether the change in the option's value was a result of a user action. */
+        readonly isUserInput = false
+    ) { }
+}
+
 
 /**
  * Used to represent an option of the select component.
@@ -28,29 +50,31 @@ let optionUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        'class': 'fd-list__item',
+        class: 'fd-list__item',
         '[attr.aria-disabled]': 'disabled',
         '[attr.aria-selected]': 'selected',
+        '[class.is-focus]': 'active',
         '[attr.id]': 'id',
         '[tabindex]': 'disabled ? -1 : 0',
-        role: 'option'
+        role: 'option',
+        '(click)': '_selectViaInteraction()',
+        '(keydown)': '_handleKeydown($event)'
     },
     styles: [`
-        .fd-list__item[aria-disabled="true"],
-        .fd-list__item.is-disabled,
-        .fd-list__item:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
+            .fd-list__item[aria-disabled='true'],
+            .fd-list__item.is-disabled,
+            .fd-list__item:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
 
-        .fd-list__item:disabled:focus {
-            outline: none;
-        }
-    `]
-
+            .fd-list__item:disabled:focus {
+                outline: none;
+            }
+        `
+    ]
 })
-export class OptionComponent implements OnInit, OnDestroy {
-
+export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {
     /** Option id attribute */
     @Input()
     id = `fd-option-${optionUniqueId++}`;
@@ -63,97 +87,147 @@ export class OptionComponent implements OnInit, OnDestroy {
     @Input()
     disabled = false;
 
-    /** @hidden */
+    /**
+     * Emits event when option is selected or deselected.
+     */
+    @Output()
+    readonly selectionChange = new EventEmitter<FdOptionSelectionChange>();
+
     @HostBinding('class.is-selected')
     selected = false;
 
-    /** @hidden */
-    selectionEvent = new EventEmitter<KeyboardEvent>()
-
-    /** @hidden Whether option contains more than basic text. */
-    _extendedTemplate = false;
-
-    /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
-
-    /** @hidden */
-    @HostListener('click')
-    @HostListener('keydown', ['$event'])
-    selectionHandler(event?: KeyboardEvent): void {
-        if (!event || (event && KeyUtil.isKeyCode(event, [SPACE, ENTER]))) {
-            if (!this.disabled) {
-                this.setSelected(true, true);
-            }
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-                return;
-            }
-        }
-        this.selectionEvent.emit(event);
+    /**
+     * The displayed value of the option. It shows the selected option in the select's trigger.
+     */
+    get viewValue(): string {
+        return (this._elementRef.nativeElement.textContent || '').trim();
     }
 
-    /** @hidden */
-    constructor(
-        private _elementRef: ElementRef,
-        private _selectProxy: SelectProxy,
-        private _changeDetRef: ChangeDetectorRef
-    ) {}
+    /**used in components like autocomplete where focus must remain on the input.*/
+    get active(): boolean {
+        return this._active;
+    }
+
+    readonly _stateChanges = new Subject<void>();
 
     /** @hidden */
-    ngOnInit(): void {
-        this._observeValue();
+    private _mostRecentViewValue = '';
+
+    /** @hidden */
+    private _active = false;
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) { }
+
+    /**@hidden
+     *  Since select components could be using the option's label to display the selected values
+     *  and they don't have a way of knowing if the option's label has changed
+     * we have to check for changes in the DOM ourselves and dispatch an event
+     */
+    ngAfterViewChecked(): void {
+        if (this.selected) {
+            const viewValue = this.viewValue;
+
+            if (viewValue !== this._mostRecentViewValue) {
+                this._mostRecentViewValue = viewValue;
+                this._stateChanges.next();
+            }
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
+        this._stateChanges.complete();
     }
 
-    /** Returns the view value text of the option, or the viewValue input if it exists. */
-    get viewValueText(): string {
-        return (this._elementRef.nativeElement.textContent || '').trim();
-    }
-
-    /** Set control selected state
-     * @param value - whether is selected
-     * @param controlChange - whether is a change initially coming from OptionComponent
-     * */
-    setSelected(value: boolean, controlChange: boolean): void {
-        this.selected = value;
-
-        if (value) {
-            this._selectProxy.optionStateChange$.next({option: this, controlChange: controlChange})
+    /** @hidden
+ * This method sets display styles on the option to make it appear
+ * active. This is used by the ActiveDescendantKeyManager so key
+ * events will display the proper options as active on arrow key events.
+ */
+    setActiveStyles(): void {
+        if (!this._active) {
+            this._active = true;
+            this._changeDetectorRef.markForCheck();
         }
-        this._changeDetRef.markForCheck();
     }
 
-    /** Focuses the element. */
-    focus(): void {
-        (this._elementRef.nativeElement as HTMLElement).focus();
+    /** @hidden
+     * This method removes display styles on the option that made it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     */
+    setInactiveStyles(): void {
+        if (this._active) {
+            this._active = false;
+            this._changeDetectorRef.markForCheck();
+        }
     }
 
-    /** Returns HTMLElement representation of the component. */
-    getHtmlElement(): HTMLElement {
+    /** @hidden
+     * Focuses the element. */
+    focus(_origin?: FocusOrigin, options?: FocusOptions): void {
+
+        const element = this._elementRef.nativeElement;
+
+        if (typeof element.focus === 'function') {
+            element.focus(options);
+        }
+    }
+
+    /** @hidden
+   * option value
+   */
+    getLabel(): string {
+        return this.viewValue;
+    }
+
+    /** @hidden
+     * Returns HTMLElement representation of the component. */
+    _getHtmlElement(): HTMLElement {
         return this._elementRef.nativeElement as HTMLElement;
     }
 
-    /** Change extended template property */
-    setExtendedTemplate(extendedTemplate: boolean): void {
-        if (this._extendedTemplate !== extendedTemplate) {
-            this._extendedTemplate = extendedTemplate;
-            this._changeDetRef.detectChanges();
+    /** Selects the option.
+     * * @hidden
+     */
+    _select(): void {
+        if (!this.selected) {
+            this.selected = true;
+            this._changeDetectorRef.markForCheck();
+            this.selectionChange.emit(new FdOptionSelectionChange(this, false));
+        }
+    }
+
+    /** @hidden
+     * Deselects the option.
+     */
+    _deselect(): void {
+        if (this.selected) {
+            this.selected = false;
+            this._changeDetectorRef.markForCheck();
+            this.selectionChange.emit(new FdOptionSelectionChange(this, false));
+        }
+    }
+
+    /**
+     * Ensures the option is selected when activated from the keyboard.
+     *
+     * @hidden
+     */
+    _handleKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ENTER, SPACE]) && !hasModifierKey(event)) {
+            this._selectViaInteraction();
+            event.preventDefault();
         }
     }
 
     /** @hidden */
-    private _observeValue(): void {
-        this._subscriptions.add(
-            this._selectProxy.value$.asObservable()
-                .pipe(
-                    filter(value => value !== undefined),
-                    map(value => value === this.value)
-                ).subscribe(isSelected => this.setSelected(isSelected, false))
-        );
+    _selectViaInteraction(): void {
+        if (!this.disabled) {
+            this.selected = true;
+            this._changeDetectorRef.markForCheck();
+            this.selectionChange.emit(new FdOptionSelectionChange(this, true));
+        }
     }
 }

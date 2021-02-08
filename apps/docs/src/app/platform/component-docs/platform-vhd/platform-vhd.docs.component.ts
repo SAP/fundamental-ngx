@@ -4,6 +4,9 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import * as basicVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-basic-example.component.html';
 import * as basicVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-basic-example.component.ts';
 
+import * as strategyLabelsVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-strategy-labels-example.component.html';
+import * as strategyLabelsVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-strategy-labels-example.component.ts';
+
 import * as tokenVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-token-example.component.html';
 import * as tokenVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-token-example.component.ts';
 
@@ -43,14 +46,14 @@ export class PlatformVhdDocsComponent {
     strategyLabelValueHelpDialog: ExampleFile[] = [
         {
             language: 'html',
-            code: basicVhdHtml,
-            fileName: 'platform-vhd-strategy-label-example'
+            code: strategyLabelsVhdHtml,
+            fileName: 'platform-vhd-strategy-labels-example'
         },
         {
             language: 'typescript',
             component: 'PlatformVhdStrategyLabelExampleComponent',
-            code: basicVhdTs,
-            fileName: 'platform-vhd-strategy-label-example'
+            code: strategyLabelsVhdTs,
+            fileName: 'platform-vhd-strategy-labels-example'
         }
     ];
 
@@ -86,13 +89,13 @@ export class PlatformVhdDocsComponent {
         {
             language: 'html',
             code: inputVhdHtml,
-            fileName: 'platform-vhd-multi-input-example'
+            fileName: 'platform-vhd-input-example'
         },
         {
             language: 'typescript',
-            component: 'PlatformVhdMultiInputExampleComponent',
+            component: 'PlatformVhdInputExampleComponent',
             code: inputVhdTs,
-            fileName: 'platform-vhd-multi-input-example'
+            fileName: 'platform-vhd-input-example'
         }
     ];
 
@@ -114,13 +117,13 @@ export class PlatformVhdDocsComponent {
         {
             language: 'html',
             code: mobileVhdHtml,
-            fileName: 'platform-vhd-multi-input-example'
+            fileName: 'platform-vhd-mobile-example'
         },
         {
             language: 'typescript',
-            component: 'PlatformVhdMultiInputExampleComponent',
+            component: 'PlatformVhdMobileExampleComponent',
             code: mobileVhdTs,
-            fileName: 'platform-vhd-multi-input-example'
+            fileName: 'platform-vhd-mobile-example'
         }
     ];
 }

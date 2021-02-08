@@ -34,7 +34,7 @@ export class ActionSheetDocsComponent {
             fileName: 'action-sheet-cosy-example',
         },
         {
-            language: 'html',
+            language: 'typescript',
             code: actionSheetCosySrcTs,
             fileName: 'action-sheet-cosy-example',
             component: 'ActionSheetCosyExampleComponent'
@@ -48,7 +48,7 @@ export class ActionSheetDocsComponent {
             fileName: 'action-sheet-mobile-example',
         },
         {
-            language: 'html',
+            language: 'typescript',
             code: actionSheetMobileSrcTs,
             fileName: 'action-sheet-mobile-example',
             component: 'ActionSheetMobileExampleComponent'

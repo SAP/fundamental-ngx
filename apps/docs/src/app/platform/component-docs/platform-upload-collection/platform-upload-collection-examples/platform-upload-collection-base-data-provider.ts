@@ -11,6 +11,7 @@ import {
     UpdateVersionEvent,
     UploadCollectionDataProvider,
     UploadCollectionFile,
+    UploadCollectionFolder,
     UploadCollectionItem,
     UploadCollectionItemStatus,
     UploadCollectionNewItem,
@@ -19,6 +20,7 @@ import {
 
 import { generateUploadCollectionItems } from './platform-upload-collection-items-generator';
 import { HttpClient } from '@angular/common/http';
+import { uuidv4 } from '@fundamental-ngx/core';
 
 export class PlatformUploadCollectionDataProviderExample extends UploadCollectionDataProvider {
     items: UploadCollectionItem[] = generateUploadCollectionItems(50, 4, 2);
@@ -95,15 +97,22 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
      * The method is triggered when Move to button is pressed and folder to move is selected in the dialog modal.
      * Should return full dataSource
      * */
-    moveTo(data: MoveToEvent): Observable<UploadCollectionItem[]> {
-        console.log('moveTo', data);
+    moveTo({ from, to, items, newFolder }: MoveToEvent): Observable<UploadCollectionItem[]> {
+        console.log('moveTo', from, to, items, newFolder);
 
-        const ids = data.items.map((item) => item.documentId);
+        const ids = items.map((item) => item.documentId);
 
-        this._findParentFolderAndRemoveItemsByIds(data.from ? data.from.documentId : null, ids);
-        this._findParentFolderAndAddFiles(data.to ? data.to.documentId : null, data.items);
+        this._findParentFolderAndRemoveItemsByIds(from ? from.documentId : null, ids);
+        if (newFolder) {
+            const folder = this._generateNewFolder(newFolder.folderName);
 
-        return of(null);
+            this._findParentFolderAndAddFiles(newFolder.parentFolderId, [folder]);
+            this._findParentFolderAndAddFiles(folder.documentId, items);
+        } else {
+            this._findParentFolderAndAddFiles(to ? to.documentId : null, items);
+        }
+
+        return of(this.items);
     }
 
     /** The method is triggered when an uploaded attachment is selected and the Delete button is pressed. */
@@ -386,5 +395,21 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
                 this._findParentFolderAndRemoveItemsByIds(parentFolderId, documentsIds, currentItem.files);
             }
         }
+    }
+
+    /** @hidden */
+    private _generateNewFolder(folderName: string): UploadCollectionFolder {
+        return {
+            documentId: uuidv4(),
+            type: 'folder',
+            name: folderName,
+            uploadedBy: {
+                id: uuidv4(),
+                name: 'You'
+            },
+            uploadedOn: new Date(),
+            files: [],
+            status: UploadCollectionItemStatus.SUCCESSFUL
+        };
     }
 }

@@ -40,7 +40,7 @@ const exampleDataSource = () => {
 }
 
 @Component({
-  selector: 'fdp-vhd-mobile-example',
+  selector: 'fdp-platform-vhd-mobile-example',
   templateUrl: './platform-vhd-mobile-example.component.html'
 })
 export class PlatformVhdMobileExampleComponent implements OnInit {

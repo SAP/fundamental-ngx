@@ -3,10 +3,9 @@ import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 import * as aliSrc from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-example.component.html';
-import * as aliSrcTs from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-example.component.ts';
-import * as borderLessALISrc from '!raw-loader!./platform-action-list-item-examples/platform-borderless-action-list-item-example.component.html';
-import * as borderLessALITs from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-border-less-example.component.ts';
-
+import * as aliSrcTs from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-example.component';
+import * as borderLessALISrc from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-border-less-example.component.html';
+import * as borderLessALITs from '!raw-loader!./platform-action-list-item-examples/platform-action-list-item-border-less-example.component';
 
 @Component({
     selector: 'app-action-list-item',
@@ -23,7 +22,7 @@ export class PlatformActionListItemDocsComponent {
             language: 'typescript',
             component: 'PlatformActionListItemExampleComponent',
             code: aliSrcTs,
-            fileName: 'platform-borderless-action-list-item-example'
+            fileName: 'platform-action-list-item-example'
         }
     ];
 
@@ -31,13 +30,13 @@ export class PlatformActionListItemDocsComponent {
         {
             language: 'html',
             code: borderLessALISrc,
-            fileName: 'platform-borderless-action-list-item-example',
+            fileName: 'platform-action-list-item-border-less-example',
         },
         {
             language: 'typescript',
             component: 'PlatformActionListItemBorderLessExampleComponent',
             code: borderLessALITs,
-            fileName: 'platform-borderless-action-list-item-example'
+            fileName: 'platform-action-list-item-border-less-example'
         }
     ];
 
