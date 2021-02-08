@@ -21,6 +21,8 @@ import { GridListSelectionActions, GridListSelectionService } from '../../servic
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar';
 import { GridListSelectionMode } from '../grid-list';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar';
+import { KeyUtil } from '../../../utils/functions';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 let gridListItemUniqueId = 0;
 
@@ -255,14 +257,18 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    _singleSelect(event: MouseEvent): void {
+    _singleSelect(event: Event): void {
         this._preventDefault(event);
+
+        if (typeof this._selectedItem !== 'undefined') {
+            return;
+        }
 
         this._gridListSelectionService.setSelectedItem(this.value, this._index);
     }
 
     /** @hidden */
-    _selectionItem(value: number | T): void {
+    _selectionItem(value: boolean | number | T): void {
         const action =
             this.selectionMode !== 'multiSelect'
                 ? null
@@ -303,8 +309,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
 
     /** @hidden */
     _clickOnLocked(event: MouseEvent): void {
-        event.stopPropagation();
-        event.preventDefault();
+        this._preventDefault(event);
 
         this.locked.emit(this._outputEventValue);
     }
@@ -319,7 +324,32 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    private _preventDefault(event: MouseEvent | Event): void {
+    _onKeyDown(event: KeyboardEvent): void {
+        const target = event.target as HTMLDivElement;
+
+        if (
+            !KeyUtil.isKeyCode(event, [ENTER, SPACE]) ||
+            this.selectionMode === 'none' ||
+            !target.classList.contains('fd-grid-list__item')
+        ) {
+            return;
+        }
+
+        this._preventDefault(event);
+
+        if (this.selectionMode === 'multiSelect') {
+            this._selectionItem(!this._selectedItem);
+
+            return;
+        }
+
+        if (typeof this._selectedItem === 'undefined') {
+            this._singleSelect(event);
+        }
+    }
+
+    /** @hidden */
+    private _preventDefault(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
     }
@@ -327,10 +357,10 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     /** @hidden */
     private get _outputEventValue(): GridListItemOutputEvent<T> {
         return {
-             value: this.value,
-             index: this._index
-         }
-     }
+            value: this.value,
+            index: this._index
+        };
+    }
 
     /** @hidden */
     private _addClassesNames(classesNames: string[]): void {

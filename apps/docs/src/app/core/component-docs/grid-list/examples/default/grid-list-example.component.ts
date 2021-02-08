@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { GridListItemOutputEvent } from '@fundamental-ngx/core';
 
 interface GridListItem {
@@ -13,7 +13,8 @@ interface GridListItem {
     selector: 'fd-grid-list-default-example',
     templateUrl: './grid-list-example.component.html',
     styleUrls: ['./grid-list-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class GridListDefaultExampleComponent {
     list: GridListItem[] = [

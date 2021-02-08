@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 interface GridListItem {
     title: string;
@@ -9,7 +9,8 @@ interface GridListItem {
     selector: 'fd-grid-list-footer-example',
     templateUrl: './grid-list-footer-example.component.html',
     styleUrls: ['./grid-list-footer-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class GridListFooterExampleComponent {
     list: GridListItem[] = Array(5).fill({
