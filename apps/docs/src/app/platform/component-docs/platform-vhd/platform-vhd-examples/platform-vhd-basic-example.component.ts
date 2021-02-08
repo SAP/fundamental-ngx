@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource, VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineStrategy } from '@fundamental-ngx/platform';
 
@@ -39,13 +39,15 @@ const exampleDataSource = () => {
   }
 }
 
+const data = exampleDataSource();
+
 @Component({
-  selector: 'fdp-vhd-basic-example',
+  selector: 'fdp-platform-vhd-basic-example',
   templateUrl: './platform-vhd-basic-example.component.html'
 })
-export class PlatformVhdBasicExampleComponent implements OnInit {
-  filters: any;
-  dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
+export class PlatformVhdBasicExampleComponent {
+  filters = data.filters;
+  dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
 
   actualValue: VhdValue<ExampleTestModel[]> = {};
 
@@ -88,12 +90,6 @@ export class PlatformVhdBasicExampleComponent implements OnInit {
 
     return value;
   };
-
-  ngOnInit(): void {
-    const data = exampleDataSource();
-    this.filters = data.filters;
-    this.dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
-  }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
     this.actualValue = {...$event};

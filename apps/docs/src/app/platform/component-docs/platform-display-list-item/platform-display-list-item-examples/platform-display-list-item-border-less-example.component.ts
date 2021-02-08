@@ -9,8 +9,8 @@ export interface Movie {
 }
 
 @Component({
-    selector: 'fdp-borderless-display-list-item-example',
-    templateUrl: './platform-borderless-display-list-item-example.component.html'
+    selector: 'fdp-platform-display-list-item-border-less-example',
+    templateUrl: './platform-display-list-item-border-less-example.component.html'
 })
 export class PlatformDisplayListItemBorderLessExampleComponent {
     items: Movie[] = [

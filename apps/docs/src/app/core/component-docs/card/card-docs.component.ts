@@ -9,7 +9,9 @@ import * as cardFooterExampleHtml from '!raw-loader!./examples/card-footer-examp
 import * as cardKpiExampleHtml from '!raw-loader!./examples/card-kpi-example.component.html';
 import * as cardKpiExampleScss from '!raw-loader!./examples/card-kpi-example.component.scss';
 import * as cardKpiExampleTs from '!raw-loader!./examples/card-kpi-example.component.ts';
+import * as googleChartServiceTs from '!raw-loader!./examples/card-kpi-google-charts.service.ts';
 import * as cardTableExampleHtml from '!raw-loader!./examples/card-table-example.component.html';
+import * as cardBarChartListExampleTs from '!raw-loader!./examples/bar-chart-list-card/bar-chart-list-card-example.component.ts';
 import * as cardBarChartListExampleHtml from '!raw-loader!./examples/bar-chart-list-card/bar-chart-list-card-example.component.html';
 import * as cardBarChartListExampleScss from '!raw-loader!./examples/bar-chart-list-card/bar-chart-list-card-example.component.scss';
 import * as cardBarTs from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.ts';
@@ -56,7 +58,8 @@ export class CardDocsComponent {
         {
             language: 'typescript',
             code: cardKpiExampleTs,
-            fileName: 'card-kpi-example'
+            fileName: 'card-kpi-example',
+            component: 'CardKpiExampleComponent'
         },
         {
             language: 'html',
@@ -67,7 +70,15 @@ export class CardDocsComponent {
             language: 'scss',
             code: cardKpiExampleScss,
             fileName: 'card-kpi-example'
-        }
+        },
+        {
+            language: 'typescript',
+            name: 'card-kpi-google-charts.service.ts',
+            code: googleChartServiceTs,
+            fileName: 'card-kpi-google-charts',
+            component: 'GoogleChartService',
+            service: true
+        },
     ];
 
     table: ExampleFile[] = [
@@ -80,22 +91,30 @@ export class CardDocsComponent {
 
     barChartList: ExampleFile[] = [
         {
+            language: 'typescript',
+            name: 'bar-chart-list-card-example.component.ts',
+            code: cardBarChartListExampleTs,
+            fileName: 'bar-chart-list-card-example',
+            component: 'BarChartListCardExampleComponent'
+        },
+        {
             language: 'html',
-            name: 'card-bar-chart-list.component.html',
+            name: 'bar-chart-list-card-example.component.html',
             code: cardBarChartListExampleHtml,
-            fileName: 'card-chart-example'
+            fileName: 'bar-chart-list-card-example'
         },
         {
             language: 'scss',
-            name: 'card-bar-chart-list.component.scss',
+            name: 'bar-chart-list-card-example.component.scss',
             code: cardBarChartListExampleScss,
-            fileName: 'card-chart-example'
+            fileName: 'bar-chart-list-card-example'
         },
         {
             language: 'typescript',
             name: 'card-bar.component.ts',
             code: cardBarTs,
-            fileName: 'card-bar'
+            fileName: 'card-bar',
+            component: 'CardBarComponent'
         },
         {
             language: 'html',

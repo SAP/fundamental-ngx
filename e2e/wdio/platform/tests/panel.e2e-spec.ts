@@ -45,8 +45,8 @@ describe('Verify Panel', () => {
     });
 
     it('should scroll content if height is fixed', async () => {
-        const contentRegionHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value as string;
-        const contentActualHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value as string;
+        const contentRegionHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value;
+        const contentActualHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value;
         expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
     });
 

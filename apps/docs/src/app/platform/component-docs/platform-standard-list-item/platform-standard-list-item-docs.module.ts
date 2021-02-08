@@ -10,14 +10,14 @@ import { PlatformStandardListItemDocsComponent } from './platform-standard-list-
 import {
     PlatformStandardListItemExampleComponent,
     PlatformStandardListItemWithSecondaryTypeExampleComponent,
-    PlatformStandardListItemWithFooterExampleComponent,
-    PlatformStandardListItemWithNavigationExampleComponent,
+    PlatformStandardListItemtWithGroupHeaderExampleComponent,
     PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent,
     PlatformNonByLineStandardListItemExampleComponent
 } from './platform-standard-list-item-examples/platform-standard-list-item-example.component';
+import { PlatformStandardListItemWithFooterExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-footer-example.component';
 
 import { PlatformStandardListItemBorderLessExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-border-less-example.component';
-import { PlatformStandardListItemtWithGroupHeaderExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-group-header-example.component';
+import { PlatformStandardListItemWithNavigationExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-navigation-example.component';
 import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-single-selection-example.component';
 import { PlatformStandardListItemWithSelectionExampleComponent } from './platform-standard-list-item-examples/platform-standard-list-item-with-selection-example.component';
 const routes: Routes = [

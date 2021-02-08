@@ -16,6 +16,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { TabPanelComponent } from '@fundamental-ngx/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, startWith, throttleTime } from 'rxjs/operators';
 import { BaseComponent } from '../base';
@@ -87,6 +88,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /** reference to content component to filter tabs */
     @ViewChildren(DynamicPageTabbedContentComponent)
     tabContents: QueryList<DynamicPageTabbedContentComponent>;
+
+    @ViewChildren(TabPanelComponent)
+    dynamicPageTabs: QueryList<TabPanelComponent>;
 
     /**
      * @hidden
@@ -211,6 +215,21 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         if (this.headerCollapsible) {
             this._dynamicPageService.toggleHeader();
         }
+    }
+
+    /**
+     * marks the dynamic page tab as selected when the id of the tab is passed
+     */
+    setSelectedTab(id: string): void {
+        if (!(id && this.dynamicPageTabs)) {
+            return;
+        }
+
+        this.dynamicPageTabs.forEach((element) => {
+            if (element.id === id) {
+                element.open(true);
+            }
+        });
     }
 
     /**
@@ -441,8 +460,8 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /** @hidden
      * handle tab changes and emit event
      */
-    _handleTabChange(index: number): void {
-        const event = new DynamicPageTabChangeEvent(this.contentComponent, index);
+    _handleTabChange(tabPanel: TabPanelComponent): void {
+        const event = new DynamicPageTabChangeEvent(this.contentComponent, tabPanel);
         this.contentComponent.tabChange.emit(event);
         this._cd.detectChanges();
     }

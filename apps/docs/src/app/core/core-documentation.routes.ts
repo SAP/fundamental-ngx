@@ -414,6 +414,10 @@ export const ROUTES: Routes = [
             {
                 path: 'grid-list',
                 loadChildren: () => import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
+            },
+            {
+                path: 'slider',
+                loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
             }
         ]
     }

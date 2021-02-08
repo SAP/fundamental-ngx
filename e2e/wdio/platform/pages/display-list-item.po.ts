@@ -6,14 +6,14 @@ export class DisplayListItemPo extends BaseComponentPo {
     root = '#page-content';
 
     // partial navigation examples
-    displayLinks = 'fdp-borderless-display-list-item-example a';
-    cozyDisplayTitles = 'fdp-borderless-display-list-item-example fdp-list:first-of-type a span';
-    comfyDisplayTitles = 'fdp-borderless-display-list-item-example fdp-list:nth-of-type(2) a span';
-    sections = 'fdp-borderless-display-list-item-example ul';
+    displayLinks = 'fdp-platform-display-list-item-border-less-example a';
+    cozyDisplayTitles = 'fdp-platform-display-list-item-border-less-example fdp-list:first-of-type a span';
+    comfyDisplayTitles = 'fdp-platform-display-list-item-border-less-example fdp-list:nth-of-type(2) a span';
+    sections = 'fdp-platform-display-list-item-border-less-example ul';
 
-    declarativeDisplayLinks = 'fdp-display-list-item-with-navigation-example a';
-    declarativeDisplayTitles = 'fdp-display-list-item-with-navigation-example a span:first-of-type';
-    declarativeSection = 'fdp-display-list-item-with-navigation-example ul';
+    declarativeDisplayLinks = 'fdp-platform-display-list-item-with-navigation-example a';
+    declarativeDisplayTitles = 'fdp-platform-display-list-item-with-navigation-example a span:first-of-type';
+    declarativeSection = 'fdp-platform-display-list-item-with-navigation-example ul';
 
     open(): void {
         super.open(this.url);

@@ -9,7 +9,6 @@ export interface CollectionState {
     sortBy: CollectionSort[];
     filterBy: CollectionFilter[];
     groupBy: CollectionGroup[];
-    currentPage: CollectionPage;
-    pageSize: number;
+    page: CollectionPage;
     searchInput: SearchInput;
 }

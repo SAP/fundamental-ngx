@@ -1,10 +1,29 @@
 import { Component } from '@angular/core';
 import { FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
-import { FdDate } from '@fundamental-ngx/core';
+
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-platform-date-picker-example',
-    templateUrl: './platform-date-picker-example.component.html'
+    templateUrl: './platform-date-picker-example.component.html',
+    providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class PlatformDatePickerExampleComponent {
     birthday: FdDate = new FdDate(1990, 1, 2);
@@ -36,6 +55,6 @@ export function dateRangeNullValidator(control: AbstractControl): { [key: string
     if (startDate) {
         return null;
     } else {
-        return { 'nullRangeDate': 'Range date is not valid' };
+        return { nullRangeDate: 'Range date is not valid' };
     }
 }

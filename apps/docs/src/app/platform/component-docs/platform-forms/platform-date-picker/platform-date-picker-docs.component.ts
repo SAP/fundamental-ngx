@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+
 import * as datepickerHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-example.component.html';
-import * as datepickerts from '!raw-loader!./platform-date-picker-examples/platform-date-picker-example.component.ts';
-import * as datepickeri18n from '!raw-loader!./platform-date-picker-examples/platform-date-picker-i18n-example.component.ts';
-import * as datepickerDisabledFnCodeTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disable-func-example.component.ts';
+import * as datepickerts from '!raw-loader!./platform-date-picker-examples/platform-date-picker-example.component';
+import * as datepickeri18nHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-i18n-example.component.html';
+import * as datepickeri18nTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-i18n-example.component';
+import * as datepickerDisabledFnCodeTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disable-func-example.component';
 import * as datepickerDisabledFnHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-disable-func-example.component.html';
-import * as datepickerFormatTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-format-example.component.ts';
+import * as datepickerFormatTs from '!raw-loader!./platform-date-picker-examples/platform-date-picker-format-example.component';
 import * as datepickerFormatHtml from '!raw-loader!./platform-date-picker-examples/platform-date-picker-format-example.component.html';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
@@ -30,8 +32,13 @@ export class PlatformDatePickerDocsComponent {
 
     datePickeri18nExample: ExampleFile[] = [
         {
+            language: 'html',
+            code: datepickeri18nHtml,
+            fileName: 'platform-date-picker-i18n-example'
+        },
+        {
             language: 'typescript',
-            code: datepickeri18n,
+            code: datepickeri18nTs,
             fileName: 'platform-date-picker-i18n-example',
             component: 'PlatformDatePickeri18nExampleComponent'
         }
@@ -47,7 +54,7 @@ export class PlatformDatePickerDocsComponent {
             language: 'typescript',
             code: datepickerDisabledFnCodeTs,
             fileName: 'platform-date-picker-disable-func-example',
-            component: 'DatePickerDisableFuncExampleComponent'
+            component: 'PlatformDatePickerDisableFuncExampleComponent'
         }
     ];
 

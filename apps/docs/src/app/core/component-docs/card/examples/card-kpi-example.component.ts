@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { delay, tap } from 'rxjs/operators';
 
-import { GoogleChartService, Visualization } from './charts/google-charts.service';
+import { GoogleChartService, Visualization } from './card-kpi-google-charts.service';
 
 @Component({
     selector: 'fd-card-kpi-example',
