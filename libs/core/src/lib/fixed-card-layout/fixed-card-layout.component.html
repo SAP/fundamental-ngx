@@ -5,7 +5,7 @@
             <div class="fd-fixed-card-group--card" cdkDrag [cdkDragStartDelay]="dragStartDelay"
                 cdkDragPreviewClass="fd-fixed-card-group--card-preview" [cdkDragData]="card"
                 (cdkDragDropped)="dragDrop($event)" tabindex="0">
-                <ng-container *ngTemplateOutlet="card?.template"> </ng-container>
+                <fd-fixed-card-layout-item [item]="card"></fd-fixed-card-layout-item>
 
                 <div *cdkDragPlaceholder class="fd-fixed-card-group--card-placeholder">
                     <ng-container *ngTemplateOutlet="card?.template"></ng-container>

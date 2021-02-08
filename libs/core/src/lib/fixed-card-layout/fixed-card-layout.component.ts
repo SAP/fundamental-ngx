@@ -9,6 +9,7 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    HostListener,
     Input,
     OnDestroy,
     OnInit,
@@ -17,12 +18,16 @@ import {
     QueryList,
     TemplateRef,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+
 import { RtlService } from '../utils/services/rtl.service';
+import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
@@ -54,6 +59,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     @ContentChildren(CardDefinitionDirective)
     cards: QueryList<CardDefinitionDirective>;
+
+    @ViewChildren(FixedCardLayoutItemComponent)
+    cardContainers: QueryList<FixedCardLayoutItemComponent>;
 
     /** @hidden */
     @ViewChild('layout')
@@ -91,6 +99,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    // FocusKeyManager instance
+    private keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
+
     constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
@@ -108,6 +119,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     ngAfterViewInit(): void {
         /** Create column layout when view is initialized */
         this.updateLayout();
+        this.accessibilitySetup();
     }
 
     /** @hidden */
@@ -123,6 +135,17 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    public handleKeydown(event: KeyboardEvent): void {
+        event.stopImmediatePropagation();
+        if (this.keyboardEventsManager) {
+            console.log('card items: ', this.cardContainers);
+            // passing the event to key manager so we get a change fired
+            this.keyboardEventsManager.onKeydown(event);
+        }
     }
 
     /** @hidden Arranges cards on drop of dragged card */
@@ -151,10 +174,14 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         return this.layout.nativeElement.getBoundingClientRect().width;
     }
 
+    accessibilitySetup(): void {
+        this.keyboardEventsManager = new FocusKeyManager(this.cardContainers).withWrap();
+    }
+
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
         if (!this._rtlService) {
-            this.dir = 'ltr'
+            this.dir = 'ltr';
         }
         this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this.dir = isRtl ? 'rtl' : 'ltr';
