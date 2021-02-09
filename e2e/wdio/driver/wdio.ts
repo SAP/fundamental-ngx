@@ -299,10 +299,10 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
 }
 
 
-export function saveElement(selector: string, tag: string, options?: object, index: number = 0): void {
+export function saveElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): void {
     browser.saveElement($$(selector)[index], tag, options);
 }
 
-export function checkElement(selector: string, tag: string, options?: object, index: number = 0): any {
+export function checkElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): any {
     return browser.checkElement($$(selector)[index], tag, options);
 }

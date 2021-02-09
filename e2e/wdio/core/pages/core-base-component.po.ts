@@ -1,10 +1,10 @@
 import {
-    checkElement,
+    checkElementScreenshot,
     click,
     elementArray,
     getImageTagBrowserPlatform,
     open,
-    saveElement,
+    saveElementScreenshot,
     scrollIntoView
 } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
@@ -31,7 +31,7 @@ export class CoreBaseComponentPo {
         const areasArray = elementArray(areas);
         for (let i = 0; i < areasArray.length; i++) {
             scrollIntoView(areas, i);
-            saveElement(areas, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
+            saveElementScreenshot(areas, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
         }
     }
 
@@ -40,7 +40,7 @@ export class CoreBaseComponentPo {
         let diff = 0;
         for (let i = 0; i < areasArray.length; i++) {
             scrollIntoView(areas, i);
-            diff +=  checkElement(areas, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
+            diff +=  checkElementScreenshot(areas, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
         }
         return diff;
     }

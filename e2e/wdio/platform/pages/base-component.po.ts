@@ -3,9 +3,9 @@ import {
     elementArray,
     scrollIntoView,
     open,
-    saveElement,
+    saveElementScreenshot,
     getImageTagBrowserPlatform,
-    checkElement, waitForElDisplayed
+    checkElementScreenshot, waitForElDisplayed
 } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 
@@ -32,7 +32,7 @@ export class BaseComponentPo {
         for (let i = 0; i < areasArray.length; i++) {
             waitForElDisplayed(areas, i);
             scrollIntoView(areas, i);
-            saveElement(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
+            saveElementScreenshot(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
         }
     }
 
@@ -42,7 +42,7 @@ export class BaseComponentPo {
         for (let i = 0; i < areasArray.length; i++) {
             waitForElDisplayed(areas, i);
             scrollIntoView(areas, i);
-            diff +=  checkElement(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
+            diff +=  checkElementScreenshot(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
         }
         return diff;
     }

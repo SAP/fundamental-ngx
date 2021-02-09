@@ -117,7 +117,7 @@ describe('Thumbnail field', function() {
     });
 
     xdescribe('Check visual regression', function() {
-        fit('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             thumbnailPage.saveExampleBaselineScreenshot('thumbnail');
             expect(thumbnailPage.compareWithBaseline('thumbnail')).toBeLessThan(2);
         });
