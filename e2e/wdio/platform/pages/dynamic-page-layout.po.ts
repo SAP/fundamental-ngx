@@ -1,9 +1,8 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class DynamicPageLayoutPo extends BaseComponentPo {
     private url = '/dynamic-page';
-    root = '#page-content';
     basicExampleButton = 'fdp-platform-dynamic-page-example button';
     snapsExampleButton = 'fdp-platform-dynamic-page-snap-scroll-example button';
     tabbesExampleButton = 'fdp-platform-dynamic-page-tabbed-example button';
@@ -31,6 +30,5 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.title);
-        waitForPresent(this.title);
     }
 }
