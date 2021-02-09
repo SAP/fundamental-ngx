@@ -119,7 +119,6 @@
     <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_saveEditModeChanges()"></button>
     <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_exitEditMode()"></button>
 </div>
-<!--<pre *ngIf="_isEditMode">{{ _approvalProcess.nodes | json }}</pre>-->
 
 <ng-template let-messageToast #reminderTemplate>
     <ng-container i18n="@@platformApprovalFlowReminderMessage">
@@ -133,11 +132,6 @@
     </ng-container>
 </ng-template>
 
-<!--<ng-template #watchersChangedSuccess>-->
-<!--    <ng-container i18n="@@platformApprovalFlowWatchersChangedSuccess">-->
-<!--        Watchers list has been changed-->
-<!--    </ng-container>-->
-<!--</ng-template>-->
 <ng-template #approverAddSuccess>
     <ng-container i18n="@@platformApprovalFlowApproverAddSuccess">
         1 approver has been added

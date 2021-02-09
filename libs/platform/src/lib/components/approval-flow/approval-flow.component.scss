@@ -227,6 +227,7 @@ $carousel-controls-height--edit-mode: 126px;
     display: flex;
     justify-content: flex-end;
     background-color: #fff;
+    background: var(--sapBaseColor, #fff);
     padding: .5rem;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
