@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { WizardStepStatus } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-wizard-ngfor-example',
