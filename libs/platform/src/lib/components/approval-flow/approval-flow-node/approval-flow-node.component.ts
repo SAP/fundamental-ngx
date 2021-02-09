@@ -5,14 +5,14 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    HostListener,
     Input,
     OnChanges,
     OnInit,
-    Output, QueryList,
-    ViewChild, ViewChildren
+    Output,
+    QueryList, ViewChild,
+    ViewChildren
 } from '@angular/core';
-import { FdDate, ObjectStatus } from '@fundamental-ngx/core';
+import { MenuComponent, ObjectStatus } from '@fundamental-ngx/core';
 
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata } from '../approval-flow.component';
 import { ApprovalNode, ApprovalStatus } from '../interfaces';
@@ -62,7 +62,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** Whether to display add node button after in Edit mode */
     @Input() canAddNodeAfter = false;
 
-    /** Number of days before due date when status changes to `warning` with text 'Due in X days' */
+    /** Whether to display due date warning in status */
+    @Input() checkDueDate = false;
+
+    /** Number of days before due date when status changes to `warning` with text 'Due in X days'.
+     *  Not used if 'checkDueDate' equals false */
     @Input() dueDateThreshold = 7;
 
     /** Whether node is blank */
@@ -154,16 +158,8 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @Output() onDelete = new EventEmitter<void>();
     @Output() hh = new EventEmitter<string[]>();
 
+    @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChildren(ApprovalFlowDropZoneDirective) dropZones: QueryList<ApprovalFlowDropZoneDirective>;
-
-    /** @hidden */
-    @HostListener('click')
-    _onClick(): void {
-        if (this.node.blank) {
-            return;
-        }
-        this.onNodeClick.emit();
-    }
 
     /** @hidden */
     constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {
@@ -191,7 +187,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     /** @hidden */
     get _isAnyDropZoneActive(): boolean {
-        return this._activeDropZones.length > 0
+        return this._activeDropZones.length > 0;
     }
 
     /** @hidden */
@@ -202,6 +198,14 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     ngOnChanges(): void {
         this._checkNodeStatus();
+    }
+
+    /** @hidden */
+    _onClick(): void {
+        if (this.node.blank) {
+            return;
+        }
+        this.onNodeClick.emit();
     }
 
     /** @hidden */
@@ -226,6 +230,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
         this.cd.detectChanges();
     }
 
+    /** @hidden */
+    _onMenuOpen(): void {
+        this.menu.refreshPosition();
+    }
+
     logMeta(): void {
         console.log('clicked node meta', this.meta);
     }
@@ -236,11 +245,17 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
             return;
         }
 
-        const dueThreshold = Number(new Date(this.node.dueDate)) - (this.dueDateThreshold * DAY_IN_MILISECONDS);
-        const nowAndDueDiff = Date.now() - dueThreshold;
-        this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILISECONDS);
-        this._showDueDateWarning = !isNodeApproved(this.node) && dueThreshold < Date.now();
-        this._objectStatus = this._showDueDateWarning ? 'critical' : getNodeStatusClass(this.node.status);
+        if (this.checkDueDate) {
+            const dueThreshold = Number(new Date(this.node.dueDate)) - (this.dueDateThreshold * DAY_IN_MILISECONDS);
+            const nowAndDueDiff = Date.now() - dueThreshold;
+            this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILISECONDS);
+            this._showDueDateWarning = !isNodeApproved(this.node) && dueThreshold < Date.now();
+            this._objectStatus = this._showDueDateWarning ? 'critical' : getNodeStatusClass(this.node.status);
+            this.cd.detectChanges();
+            return;
+        }
+
+        this._objectStatus = getNodeStatusClass(this.node.status);
         this.cd.detectChanges();
     }
 

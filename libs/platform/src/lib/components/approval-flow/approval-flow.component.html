@@ -1,10 +1,9 @@
 <div class="approval-flow__messages" *ngIf="_messages.length">
     <fd-message-strip
         *ngFor="let message of _messages; let i = index; trackBy: _trackByFn"
-        [type]="'success'"
+        type="success"
         (onDismiss)="_dismissMessage(i)">
         <span [ngSwitch]="message.type">
-<!--            <ng-container *ngSwitchCase="'watchersChangeSuccess'" [ngTemplateOutlet]="watchersChangedSuccess"></ng-container>-->
             <ng-container *ngSwitchCase="'approverAddSuccess'" [ngTemplateOutlet]="approverAddSuccess"></ng-container>
             <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
             <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
@@ -21,9 +20,9 @@
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
         <button *ngIf="!_isEditMode" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
         <ng-container *ngIf="_isEditMode">
-            <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="addNodeFromToolbar('before')"></button>
-            <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="addNodeFromToolbar('after')"></button>
-            <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="addNodeFromToolbar('parallel')"></button>
+            <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="_addNodeFromToolbar('before')"></button>
+            <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="_addNodeFromToolbar('after')"></button>
+            <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_addNodeFromToolbar('parallel')"></button>
             <button *ngIf="_isRemoveButtonVisible" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
         </ng-container>
     </div>
@@ -39,8 +38,8 @@
             [image]="watcher.imgUrl"
             [label]="watcher.name"
             [circle]="true"
-            (keyup.enter)="$event.stopPropagation(); onWatcherClick(watcher)"
-            (click)="onWatcherClick(watcher)"></fd-avatar>
+            (keyup.enter)="$event.stopPropagation(); _onWatcherClick(watcher)"
+            (click)="_onWatcherClick(watcher)"></fd-avatar>
     </ng-container>
     <div class="approval-flow__watchers-input-container" *ngIf="_isEditMode">
         <fd-multi-input
@@ -92,6 +91,7 @@
                         [parent]="_nodeParentsMap[node.id]"
                         [meta]="_metaMap[node.id]"
                         [isEdit]="_isEditMode"
+                        [checkDueDate]="checkDueDate"
                         [dueDateThreshold]="dueDateThreshold"
                         [renderArrow]="columnIndex > 0"
                         [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
@@ -100,18 +100,17 @@
                         [renderCarouselEndMarker]="(_isCarousel && _metaMap[node.id].isLast)"
                         [canAddNodeBefore]="_metaMap[node.id].canAddNodeBefore"
                         [canAddNodeAfter]="_metaMap[node.id].canAddNodeAfter"
-                        (onNodeClick)="onNodeClick(node)"
+                        (onNodeClick)="_onNodeClick(node)"
                         (onNodeCheck)="_onNodeCheck(node)"
-                        (onAdd)="addNode(node, $event)"
-                        (onEdit)="editNode(node)"
+                        (onAdd)="_addNode(node, $event)"
+                        (onEdit)="_editNode(node)"
                         (onDelete)="_onNodeDelete(node)"
-                        (keyup.enter)="onNodeClick(node)"
-                        (keydown)="onNodeKeyDown($event, node, nodeIndex, columnIndex, firstColumn, firstNode, lastColumn, lastNode)"
+                        (keyup.enter)="_onNodeClick(node)"
+                        (keydown)="_onNodeKeyDown($event, node, firstColumn, firstNode, lastColumn, lastNode)"
                         (cdkDragReleased)="_onNodeDrop(node, $event.source)"
-                        (cdkDragMoved)="_onNodeDrag(node)"
+                        (cdkDragMoved)="_onNodeDragMoved(node)"
                         (hh)="_highlightNodes($event)"
                     ></fdp-approval-flow-node>
-<!--                    && (!_metaMap[_metaMap[node.id]?.prevHNode?.id]?.isParallel && !_metaMap[node.id].parallelEnd) && (_metaMap[node.id].isParallel || _metaMap[node.id].parallelEnd )-->
                 </ng-container>
             </div>
         </div>

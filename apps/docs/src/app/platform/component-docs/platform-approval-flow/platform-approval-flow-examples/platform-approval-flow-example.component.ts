@@ -11,6 +11,7 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
             title="Basic Approval Flow Demo"
             [dataSource]="dataSource"
             [userDetailsTemplate]="userDetailsTemplate"
+            [checkDueDate]="false"
             (nodeClick)="nodeClick($event)"
             [isEditAvailable]="true"
         >

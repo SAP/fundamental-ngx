@@ -10,7 +10,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     display: block;
     position: relative;
     margin-bottom: 1rem;
-    padding: 1rem;
     background: #fff;
     background: var(--sapBaseColor, #fff);
     border-radius: 4px;
@@ -31,7 +30,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         &:before {
             content: '';
-            //width: calc(100% + 5.7rem);
             width: calc(100% + 3.7rem);
             height: 0;
             display: block;
@@ -191,6 +189,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
 .#{$block}__inner {
     display: flex;
+    padding: 1rem;
 }
 
 .#{$block}__edit-controls {
@@ -199,7 +198,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     justify-content: space-between;
     align-items: center;
     height: 2rem;
-    margin: -1rem -1rem 1rem -1rem;
     padding: 0 1rem;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .15);
 

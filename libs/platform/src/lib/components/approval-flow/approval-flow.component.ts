@@ -85,7 +85,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** A reference to the user details template */
     @Input() userDetailsTemplate: TemplateRef<any>;
 
-    /** Number of days before due date when status changes to `warning` with text 'Due in X days' */
+    /** Whether to display due date warning in status */
+    @Input() checkDueDate = false;
+
+    /** Number of days before due date when status changes to `warning` with text 'Due in X days'.
+     *  Not used if 'checkDueDate' equals false */
     @Input() dueDateThreshold = 7;
 
     /** A list of approval statuses that allow sending reminders to their approvers */
@@ -210,7 +214,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._listenOnResize();
     }
 
-    onNodeClick(node: ApprovalNode): void {
+    /** @hidden Node click handler*/
+    _onNodeClick(node: ApprovalNode): void {
         const dialog = this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
                 node: node,
@@ -220,13 +225,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
         dialog.afterClosed.subscribe((reminderTargets) => {
             if (Array.isArray(reminderTargets)) {
-                this.sendReminders(reminderTargets, node);
+                this._sendReminders(reminderTargets, node);
             }
         });
         this.nodeClick.emit(node);
     }
 
-    /** @hidden */
+    /** @hidden Node edit mode checkbox change handler */
     _onNodeCheck(node: ApprovalNode): void {
         const checked = this._nodeComponents.filter(n => n._isSelected);
         const checkedNodesCount = checked.length;
@@ -237,18 +242,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canAddParallel = canAdd && this._metaMap[node.id].canAddParallel;
     }
 
-    onWatcherClick(watcher: ApprovalUser): void {
+    /** @hidden Watcher's avatar click handler*/
+    _onWatcherClick(watcher: ApprovalUser): void {
         this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
                 watcher: watcher,
                 ...this._defaultDialogOptions
             }
         });
-
-
     }
 
-    sendReminders(targets: ApprovalUser[], node: ApprovalNode): void {
+    /** @hidden Send approval reminders to selected users */
+    _sendReminders(targets: ApprovalUser[], node: ApprovalNode): void {
         this.dataSource.sendReminders(targets, node).pipe(take(1)).subscribe(() => {
             this._messageToastService.open(this._reminderTemplate, {
                 data: {
@@ -289,11 +294,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._cdr.detectChanges();
     }
 
-    onNodeKeyDown(
+    /** @hidden Handle node keydown and focus other node based on which key is pressed*/
+    _onNodeKeyDown(
         event: KeyboardEvent,
         node: ApprovalGraphNode,
-        nodeIndex: number,
-        columnIndex: number,
         firstColumn: boolean,
         firstNode: boolean,
         lastColumn: boolean,
@@ -303,6 +307,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return;
         }
 
+        const { nodeIndex, columnIndex } = this._metaMap[node.id];
         const isTab = KeyUtil.isKeyCode(event, TAB);
         const isShift = event.shiftKey;
 
@@ -352,7 +357,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @hidden Fetch all necessary data and enter edit mode */
     _enterEditMode(): void {
         forkJoin([this.dataSource.fetchWatchers(), this.dataSource.fetchTeams()])
             .subscribe(([users, teams]) => {
@@ -364,7 +369,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             });
     }
 
-    /** @hidden */
+    /** @hidden Send update approval process calls to DataSource and exit edit mode*/
     _saveEditModeChanges(): void {
         this._initialApprovalProcess = null;
         this._isEditMode = false;
@@ -375,12 +380,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @hidden Restore initial approval flow state and exit edit mode */
     _exitEditMode(): void {
         this._approvalProcess = JSON.parse(JSON.stringify(this._initialApprovalProcess));
         this._initialApprovalProcess = null;
         this._isEditMode = false;
         this._messages = [];
+        this._buildView(this._approvalProcess);
+    }
+
+    /** @hidden Restore previously saved approval process state */
+    _undoLastAction(): void {
+        this._approvalProcess = JSON.parse(JSON.stringify(this._previousApprovalProcess));
         this._buildView(this._approvalProcess);
     }
 
@@ -394,19 +405,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._messages.splice(index, 1);
     }
 
-    /** @hidden */
-    _undoLastAction(): void {
-        console.log('undo');
-        this._approvalProcess = JSON.parse(JSON.stringify(this._previousApprovalProcess));
-        this._buildView(this._approvalProcess);
-    }
-
-    addNode(source: ApprovalGraphNode, type: 'before' | 'after' | 'parallel' | 'blank'): void {
+    /** @hidden Open add node dialog */
+    _addNode(source: ApprovalGraphNode, type: 'before' | 'after' | 'parallel' | 'blank'): void {
         const _source = source.blank ? this._getPreviousNotBlankNode(source) : source;
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
                 nodeTarget: type,
-                showNodeTypeSelect: true,
+                showNodeTypeSelect: this._metaMap[source.id].canAddParallel,
                 teams: this._teams,
                 node: Object.assign({}, getBlankNode(), { blank: false }),
                 ...this._defaultDialogOptions
@@ -424,26 +429,23 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             console.log(`dialog closed, adding node, button target ${type}, dialog type ${nodeType}`);
             if (node.approvalTeamId) {
                 const team = this._teams.find(t => t.id === node.approvalTeamId);
-                console.log('add approvers from team', team, node);
                 node.description = team.name;
-                // return;
             }
             node.id = `tempId${(Math.random() * 1000).toFixed()}`;
             node.description = node.description || node.approvers[0].description;
             node.targets = _source.targets;
             if (nodeType === 'Serial') {
-                if (type === 'after' || type === 'blank') {
-                    _source.targets = [node.id];
-                    this._updateNode(_source);
-                }
-
                 if (type === 'before') {
                     node.targets = [_source.id];
                     const parent = this._metaMap[_source.id].parent;
                     parent.targets = [node.id];
                     this._replaceTargetsInSourceNodes(_source.id, [node.id]);
                     this._updateNode(parent);
+                } else {
+                    _source.targets = [node.id];
+                    this._updateNode(_source);
                 }
+
             }
             if (nodeType === 'Parallel') {
                 const parent = this._metaMap[_source.id].parent;
@@ -456,12 +458,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
     }
 
-    addNodeFromToolbar(type: 'before' | 'after' | 'parallel'): void {
+    /** @hidden */
+    _addNodeFromToolbar(type: 'before' | 'after' | 'parallel'): void {
         const node = this._nodeComponents.filter(n => n._isSelected)[0].node;
-        this.addNode(node, type);
+        this._addNode(node, type);
     }
 
-    editNode(node: ApprovalNode): void {
+    /** @hidden Open edit node dialog */
+    _editNode(node: ApprovalNode): void {
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
                 isEdit: true,
@@ -481,7 +485,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @hidden "Delete" button click handler */
     _onNodeDelete(nodeToDelete: ApprovalNode): void {
         this._cacheCurrentApprovalProcess();
         this._deleteNode(nodeToDelete);
@@ -499,8 +503,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._showMessage('nodesRemove');
     }
 
-    /** @hidden */
-    _onNodeDrag(node: ApprovalGraphNode): void {
+    /** @hidden Node drag move handler, used to check if need to highlight a drop zone rectangle */
+    _onNodeDragMoved(node: ApprovalGraphNode): void {
         const draggedNodeDimensions = this._nodeComponents
             .find(comp => comp.node === node)._nativeElement.getBoundingClientRect();
         this._nodeComponents
@@ -510,7 +514,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             });
     }
 
-    /** @hidden */
+    /** @hidden Node drop handler */
     _onNodeDrop(nodeToDrop: ApprovalGraphNode, drag: CdkDrag): void {
         drag.reset();
         const dropTarget = this._nodeComponents.find(n => n._isAnyDropZoneActive);
@@ -536,11 +540,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             targetNode.targets = [nodeToDrop.id];
         }
 
-        // if (placement === 'after') {
-        //     nodeToDrop.targets = [...targetNode.targets];
-        //     targetNode.targets = [nodeToDrop.id];
-        // }
-
         if (placement === 'before') {
             this._replaceTargetsInSourceNodes(targetNode.id, [nodeToDrop.id]);
             nodeToDrop.targets = [targetNode.id];
@@ -562,7 +561,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         setTimeout(() => comps.forEach(c => c._nativeElement.classList.remove('highlighted')), 3000);
     }
 
-    /** @hidden */
+    /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
         const rootNode = findRootNode(nodes);
@@ -607,9 +606,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
 
             const parallelNodes = columnNodes.filter(node => _metaMap[node.id].isParallel);
-            // const isMixed = columnNodes.length > 1 && parallelNodes.length && parallelNodes.length !== columnNodes.length;
-            // const isMixed = parallelNodes.length && previousColumnNodes.filter(_n => _n.blank).length;
-            // if (isMixed && previousColumnNodes.length > 1) {
             if (previousColumnNodes.length > 1 && parallelNodes.length > 0) {
                 const parallelColumn: ApprovalGraphNode[] = [...previousColumnNodes];
                 parallelColumn.forEach((node, i) => {
@@ -663,12 +659,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const meta = _metaMap[n.id];
             const nextHNode = meta.nextHNode;
             const parent = meta.parent;
+            const parentMeta = parent && _metaMap[parent.id];
             const isNotApproved = !isNodeApproved(n);
             const allParentsApproved = findParentNode(n, allNodes).every(_n => isNodeApproved(_n));
             meta.canAddNodeAfter = isNotApproved && !nextHNode?.blank;
-            // meta.canAddNodeBefore = n.status === 'not started' && Boolean(parent) && !isNodeApproved(parent) && ((meta.isParallel && _metaMap[parent.id]?.parallelStart) || (!meta.isParallel && meta.parallelEnd));
-            meta.canAddNodeBefore = n.status === 'not started' && ((meta.isParallel && Boolean(parent) && !isNodeApproved(parent) && _metaMap[parent.id]?.parallelStart) || (!meta.isParallel && meta.parallelEnd && !allParentsApproved));
-            meta.canAddParallel = isNotApproved && !meta.parallelEnd && (!meta.isLast && !meta.isRoot);
+            meta.canAddNodeBefore = n.status === 'not started' && ((meta.isParallel && Boolean(parent) && !isNodeApproved(parent) && parentMeta?.parallelStart) || (!meta.isParallel && meta.parallelEnd && !allParentsApproved));
+            meta.canAddParallel = isNotApproved && !meta.parallelEnd && (!meta.isLast && !meta.isRoot) && ((meta.isParallel && parentMeta?.parallelStart) || !meta.isParallel);
             meta.isLastInParallel = meta.isParallel && graph[meta.columnIndex + 1]?.nodes.length === 1;
         });
         this._metaMap = _metaMap;
@@ -679,7 +675,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         return graph;
     }
 
-    /** @hidden */
+    /** @hidden Build Approval Flow graph and render it */
     private _buildView(approvalProcess: ApprovalProcess): void {
         this._approvalProcess = approvalProcess;
         this._nodeParentsMap = {};
@@ -694,10 +690,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._resetCheckedNodes();
         this._cdr.detectChanges();
         this._checkCarouselStatus();
+        console.log('_buildView call done, re-render');
         if (!this._isEditMode) {
             this._resetCarousel();
         }
-        this._cdr.markForCheck();
     }
 
     /** @hidden Listen window resize and distribute cards on column change */
@@ -738,7 +734,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @hidden Update node object in local approval process data structure */
     private _updateNode(node: ApprovalNode): void {
         const nodeIndex = this._approvalProcess.nodes.findIndex(n => n.id === node.id);
         if (nodeIndex > -1) {
@@ -746,7 +742,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
     }
 
-    /** @hidden */
+    /** @hidden Delete node object in local approval process data structure */
     private _deleteNode(nodeToDelete: ApprovalNode): void {
         const _nodes = [...this._approvalProcess.nodes];
         const meta = this._metaMap[nodeToDelete.id];
@@ -761,7 +757,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._approvalProcess.nodes = _nodes;
     }
 
-    /** @hidden */
+    /** @hidden Replace all occurrences of "idToReplace" in all nodes' "targets" with ones in "replaceWith" array */
     private _replaceTargetsInSourceNodes(idToReplace: string, replaceWith: string[]): void {
         this._approvalProcess.nodes.forEach(n => {
             if (isNodeTargetsIncludeId(n, idToReplace)) {
@@ -771,25 +767,25 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
     }
 
-    /** @hidden */
+    /** @hidden Save current state of approval process data to be able to undo an action made in edit mode */
     private _cacheCurrentApprovalProcess(): void {
         this._previousApprovalProcess = JSON.parse(JSON.stringify(this._approvalProcess));
     }
 
-    /** @hidden */
+    /** @hidden Check if need to add carousel controls */
     private _checkCarouselStatus(): void {
         this._isCarousel = this._graphEl.nativeElement.scrollWidth > this._graphEl.nativeElement.clientWidth;
         this._maxCarouselStep = Math.ceil(this._scrollDiff / this._carouselStepSize);
         this._cdr.detectChanges();
     }
 
-    /** @hidden */
+    /** @hidden Reset the current state of carousel */
     private _resetCarousel(): void {
         this._carouselStep = 0;
         this._carouselScrollX = 0;
     }
 
-    /** @hidden */
+    /** @hidden Reset node selection */
     private _resetCheckedNodes(): void {
         this._nodeComponents?.forEach(c => c._isSelected = false);
         this._canAddAfter = false;
@@ -798,6 +794,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._isRemoveButtonVisible = false;
     }
 
+    /** @hidden */
     private _getPreviousNotBlankNode(source: ApprovalNode): ApprovalNode {
         const prev = this._metaMap[source.id].prevHNode;
         return prev.blank ? this._getPreviousNotBlankNode(prev) : prev;

@@ -2,7 +2,7 @@
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
     <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
     <div *ngIf="renderCarouselEndMarker" class="approval-flow-node__carousel-end-marker"></div>
-    <div *ngIf="isEdit" class="approval-flow-node__edit-controls" (click)="$event.stopPropagation()">
+    <div *ngIf="isEdit" class="approval-flow-node__edit-controls">
         <fd-checkbox
             [(ngModel)]="_isSelected"
             [compact]="true"
@@ -19,7 +19,7 @@
             [disabled]="_isEditActionsAvailable"
         ></button>
 
-        <fd-menu #menu [compact]="true" placement="bottom-end">
+        <fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
             <li *ngIf="canAddNodeBefore" fd-menu-item (click)="menu.close(); onAdd.emit('before')">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversBefore">Add approvers before</div>
             </li>
@@ -37,7 +37,7 @@
             </li>
         </fd-menu>
     </div>
-    <div class="approval-flow-node__inner">
+    <div class="approval-flow-node__inner" (click)="_onClick()">
         <div class="approval-flow-node__avatar">
             <ng-container *ngIf="node.approvers.length === 1">
                 <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
@@ -113,7 +113,7 @@
         [class.approval-flow-node__add--before]="!blank && placement === 'before'"
         [class.approval-flow-node__add--after]="!blank && placement === 'after'"
         [style.visibility]="dropZone.active ? 'hidden' : ''"
-        (click)="$event.stopPropagation(); onAdd.emit(placement)"
+        (click)="onAdd.emit(placement)"
     >
         <fd-icon glyph="add"></fd-icon>
     </button>

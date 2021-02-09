@@ -11,10 +11,11 @@ import {
     ApprovalProcess,
     PlatformApprovalFlowModule,
     ApprovalFlowComponent,
-    ApprovalUser
+    ApprovalUser, ApprovalTeam
 } from '@fundamental-ngx/platform';
 import { createKeyboardEvent } from '../../testing/event-objects';
 
+const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
 const users: ApprovalUser[] = [
     {
         id: 'uid38141',
@@ -132,54 +133,78 @@ const users: ApprovalUser[] = [
     }
 ];
 
+const usersMap = {};
+users.forEach(u => usersMap[u.id] = u);
+
+const teams: ApprovalTeam[] = [
+    {
+        id: 'teamId1',
+        name: 'Accounting team',
+        description: '',
+        members: ['uid66171', 'uid66161', 'uid66151', 'uid66141']
+    },
+    {
+        id: 'teamId2',
+        name: 'Sales team',
+        description: '',
+        members: ['uid77111', 'uid77115', 'uid77135', 'uid81955']
+    },
+    {
+        id: 'teamId3',
+        name: 'Legal team',
+        description: '',
+        members: ['uid28141', 'uid08141', 'uid99641']
+    },
+    {
+        id: 'teamId4',
+        name: 'Marketing team',
+        description: '',
+        members: ['uid38141', 'uid37866', 'uid09141', 'uid81353', 'uid81355', 'uid99655', 'uid09641', 'uid99651']
+    }
+];
+
 const simpleGraph: ApprovalProcess = {
-    watchers: [getRandomUser(), getRandomUser(), getRandomUser()],
+    watchers: [getUser('uid66161')],
     nodes: [
         {
             id: 'ID1',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81955')],
             status: 'approved',
             targets: ['ID2'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(30),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID2',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid66171')],
             status: 'in progress',
             targets: ['ID3'],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(10),
+            createDate: daysFromNow(-30)
         },
         {
             id: 'ID3',
             name: 'node name',
             description: 'node description',
-            approvers: [getRandomUser()],
-            status: 'in progress',
-            targets: ['ID4'],
-            dueDate: new Date(),
-            createDate: new Date()
-        },
-        {
-            id: 'ID4',
-            name: 'node name',
-            description: 'node description',
-            approvers: [getRandomUser()],
+            approvers: [getUser('uid81355')],
             status: 'not started',
             targets: [],
-            dueDate: new Date(),
-            createDate: new Date()
+            dueDate: daysFromNow(10),
+            createDate: daysFromNow(-30)
         }
     ]
 };
 
-function getRandomUser(): ApprovalUser {
-    return users[Math.floor(Math.random() * users.length)];
+function getUser(id: string): ApprovalUser {
+    return usersMap[id];
+}
+
+function daysFromNow(days: number): Date {
+    return new Date(Date.now() + DAY_IN_MILISECONDS * days);
 }
 
 export class TestApprovalFlowDataSource implements ApprovalDataSource {
@@ -199,6 +224,18 @@ export class TestApprovalFlowDataSource implements ApprovalDataSource {
     updateApprovals(approvals: ApprovalNode[]): void {}
     sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {
         return of(null)
+    }
+
+    fetchApprovers(): Observable<ApprovalUser[]> {
+        return of(users);
+    }
+
+    fetchWatchers(): Observable<ApprovalUser[]> {
+        return of(users);
+    }
+
+    fetchTeams(): Observable<ApprovalTeam[]> {
+        return of(teams);
     }
 }
 
@@ -256,12 +293,12 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should call watcher click handler on watcher click', () => {
-        spyOn(component, 'onWatcherClick').and.callThrough();
+        spyOn(component, '_onWatcherClick').and.callThrough();
         const watchersContainer = fixture.nativeElement.querySelector('.approval-flow__watchers');
         const watcher = watchersContainer.querySelector('fd-avatar');
         expect(watcher).toBeTruthy();
         watcher.click();
-        expect(component.onWatcherClick).toHaveBeenCalled();
+        expect(component._onWatcherClick).toHaveBeenCalled();
     });
 
     it('should render nodes', () => {
@@ -271,19 +308,19 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should call node click handler on node click', () => {
-        spyOn(component, 'onNodeClick').and.callThrough();
+        spyOn(component, '_onNodeClick').and.callThrough();
         component._nodeComponents.first.onNodeClick.emit();
-        expect(component.onNodeClick).toHaveBeenCalled();
+        expect(component._onNodeClick).toHaveBeenCalled();
     });
 
     it('should send reminders', () => {
         spyOn(component.dataSource, 'sendReminders').and.callThrough();
-        component.sendReminders(simpleGraph.nodes[0].approvers, simpleGraph.nodes[0]);
+        component._sendReminders(simpleGraph.nodes[0].approvers, simpleGraph.nodes[0]);
         expect(component.dataSource.sendReminders).toHaveBeenCalled();
     });
 
     it('should call keydown handler if arrow key was pressed', () => {
-        spyOn(component, 'onNodeKeyDown').and.callThrough();
+        spyOn(component, '_onNodeKeyDown').and.callThrough();
         const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
         expect(nodesContainer).toBeTruthy();
         const nodes = nodesContainer.querySelectorAll('fdp-approval-flow-node');
@@ -291,7 +328,7 @@ describe('ApprovalFlowComponent', () => {
         firstNode.focus();
         const keyboardEvent = createKeyboardEvent('keydown', RIGHT_ARROW, 'ArrowRight');
         firstNode.dispatchEvent(keyboardEvent);
-        expect(component.onNodeKeyDown).toHaveBeenCalled();
+        expect(component._onNodeKeyDown).toHaveBeenCalled();
     });
 
     it('should increment step count after nextSlide call', () => {
