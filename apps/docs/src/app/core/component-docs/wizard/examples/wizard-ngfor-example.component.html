@@ -15,7 +15,7 @@
                             fd-wizard-step
                             *ngFor="let step of steps; let i = index"
                             [status]="step.status"
-                            (statusChange)="statusChanged(i, $event)"
+                            (statusChange)="step.status = $event"
                             [label]="step.label"
                         >
                             <fd-wizard-step-indicator [glyph]="step.glyph"></fd-wizard-step-indicator>
