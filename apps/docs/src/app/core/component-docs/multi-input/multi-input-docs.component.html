@@ -124,7 +124,8 @@
     Set <code>[allowNewTokens]</code> to "true" to allow the creation of new tokens in the multi-input. Note that if you
     are populating the multi-input with objects and using a custom <code>displayFn</code>, you will also need to
     implement your own <code>newTokenParseFn</code> so your multi-input knows how to format a new object. This function
-    is not required if your collection is simply an array of strings.
+    is not required if your collection is simply an array of strings. To customise validation function, you can pass
+    <code>[newTokenValidateFn]</code>, which by default doesn't allow empty strings.
 </description>
 <component-example>
     <fd-multi-input-new-tokens-example></fd-multi-input-new-tokens-example>
