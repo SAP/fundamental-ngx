@@ -178,6 +178,45 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
                 left: auto;
             }
         }
+
+        .#{$block}__add--before {
+            right: -1.5rem;
+            left: auto;
+
+            & + .#{$block}__drop-zone {
+                right: -1.8rem;
+            }
+        }
+
+        .#{$block}__add--after {
+            left: -2.5rem;
+            right: auto;
+
+            & + .#{$block}__drop-zone {
+                left: -2.8rem;
+                right: auto;
+            }
+        }
+
+        &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
+            .#{$block}__add--after {
+                left: -1.5rem;
+
+                & + .#{$block}__drop-zone {
+                    left: -1.8rem;
+                }
+            }
+
+            &.#{$block}--blank:not(.#{$block}--blank-top):before {
+                width: calc(100% + 5.7rem);
+                left: -2rem;
+            }
+
+        }
+        &.#{$block}--blank.#{$block}--blank-top:before {
+            width: calc(100% + 5.7rem);
+            left: -2rem;
+        }
     }
 
     &.cdk-drag-dragging {
