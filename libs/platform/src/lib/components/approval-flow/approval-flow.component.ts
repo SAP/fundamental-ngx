@@ -26,28 +26,14 @@ import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-d
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';
 import { displayUserFn, isNodeApproved, trackByFn } from './helpers';
-import { ApprovalDataSource, ApprovalNode, ApprovalProcess, ApprovalTeam, ApprovalUser } from './interfaces';
-
-export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any };
-
-export interface ApprovalGraphNodeMetadata {
-    parent: ApprovalGraphNode;
-    isRoot: boolean;
-    isLast: boolean;
-    parallelStart: boolean;
-    parallelEnd: boolean;
-    isParallel: boolean;
-    isLastInParallel?: boolean;
-    columnIndex?: number;
-    nodeIndex?: number;
-    prevVNode?: ApprovalGraphNode;
-    nextVNode?: ApprovalGraphNode;
-    prevHNode?: ApprovalGraphNode;
-    nextHNode?: ApprovalGraphNode;
-    canAddNodeBefore?: boolean;
-    canAddNodeAfter?: boolean;
-    canAddParallel?: boolean;
-}
+import {
+    ApprovalDataSource,
+    ApprovalGraphNode, ApprovalGraphNodeMetadata,
+    ApprovalNode,
+    ApprovalProcess,
+    ApprovalTeam,
+    ApprovalUser
+} from './interfaces';
 
 interface ApprovalGraphColumn {
     nodes: ApprovalGraphNode[];
@@ -202,7 +188,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         this.subscriptions.add(this.dataSource.fetch().subscribe(approvalProcess => {
-            console.log('Got approval process data from DataSource, nodes count', approvalProcess.nodes.length);
             this._initialApprovalProcess = JSON.parse(JSON.stringify(approvalProcess));
             this._buildView(approvalProcess);
         }));
@@ -426,7 +411,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 return;
             }
             this._cacheCurrentApprovalProcess();
-            console.log(`dialog closed, adding node, button target ${type}, dialog type ${nodeType}`);
             if (node.approvalTeamId) {
                 const team = this._teams.find(t => t.id === node.approvalTeamId);
                 node.description = team.name;
@@ -470,6 +454,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             data: {
                 isEdit: true,
                 node: Object.assign({}, node),
+                teams: this._teams,
                 ...this._defaultDialogOptions
             }
         });
@@ -554,13 +539,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this.subscriptions.unsubscribe();
     }
 
-    // TODO Ilya: dev only
-    _highlightNodes(ids: string[]): void {
-        const comps = this._nodeComponents.filter(c => ids.includes(c.node.id));
-        comps.forEach(c => c._nativeElement.classList.add('highlighted'));
-        setTimeout(() => comps.forEach(c => c._nativeElement.classList.remove('highlighted')), 3000);
-    }
-
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
@@ -637,6 +615,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         allNodes.forEach(n => {
             const columnIndex = graph.findIndex(c => c.nodes.includes(n));
             if (columnIndex === -1) {
+                // used to catch errors in graph rendering
+                // will be removed after implementing nested parallel approvals in Phase 3
                 console.warn('ERROR: node not found in graph', n);
                 return;
             }
@@ -663,14 +643,20 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const isNotApproved = !isNodeApproved(n);
             const allParentsApproved = findParentNode(n, allNodes).every(_n => isNodeApproved(_n));
             meta.canAddNodeAfter = isNotApproved && !nextHNode?.blank;
-            meta.canAddNodeBefore = n.status === 'not started' && ((meta.isParallel && Boolean(parent) && !isNodeApproved(parent) && parentMeta?.parallelStart) || (!meta.isParallel && meta.parallelEnd && !allParentsApproved));
-            meta.canAddParallel = isNotApproved && !meta.parallelEnd && (!meta.isLast && !meta.isRoot) && ((meta.isParallel && parentMeta?.parallelStart) || !meta.isParallel);
+            meta.canAddNodeBefore =
+                n.status === 'not started' &&
+                (
+                    (meta.isParallel && Boolean(parent) && !isNodeApproved(parent) && parentMeta?.parallelStart) ||
+                    (!meta.isParallel && meta.parallelEnd && !allParentsApproved)
+                );
+            meta.canAddParallel =
+                isNotApproved && !meta.parallelEnd &&
+                (!meta.isLast && !meta.isRoot) &&
+                ((meta.isParallel && parentMeta?.parallelStart) || !meta.isParallel);
             meta.isLastInParallel = meta.isParallel && graph[meta.columnIndex + 1]?.nodes.length === 1;
         });
         this._metaMap = _metaMap;
         graph.forEach(col => col.allNodesApproved = col.nodes.every(isNodeApproved));
-        console.log('nodes metadata', this._metaMap);
-        console.log('graph to display', graph);
 
         return graph;
     }
@@ -681,16 +667,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._nodeParentsMap = {};
         this._metaMap = {};
         this._graph = this._buildNodeTree(approvalProcess.nodes);
-        const graphNodes = this._graph.map(a => a.nodes).reduce((a, b) => a.concat(b));
-        const blankLength = graphNodes.filter(n => n.blank).length;
-        console.log(
-            `graph nodes length ${graphNodes.length}`,
-            graphNodes.length !== approvalProcess.nodes.length && !blankLength ? 'ERROR: rendered more nodes than provided' : `${blankLength} blank nodes`
-        );
         this._resetCheckedNodes();
         this._cdr.detectChanges();
         this._checkCarouselStatus();
-        console.log('_buildView call done, re-render');
         if (!this._isEditMode) {
             this._resetCarousel();
         }

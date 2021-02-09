@@ -90,12 +90,6 @@
             </fdp-object-status>
         </div>
     </div>
-<!--    TODO Ilya: dev only-->
-    <ng-container *ngIf="true">
-        <span (click)="$event.stopPropagation();logMeta()" style="position: absolute; font-size: 11px; right: 0; top: 0; font-weight: 600; ">{{ node.id }} </span>
-        <span (click)="$event.stopPropagation();hh.emit([parent.id])" *ngIf="parent" style="position: absolute; font-size: 11px; left: 0; bottom: 0; color: orangered;"><={{ parent.id }}</span>
-        <span (click)="$event.stopPropagation();hh.emit(node.targets)" *ngIf="node.targets.length" style="position: absolute; font-size: 11px; right: 0; bottom: 0; color: orange">=>{{ node.targets }}</span>
-    </ng-container>
 </ng-container>
 <ng-container *ngIf="isEdit && blank">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'blank' }"></ng-container>

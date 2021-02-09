@@ -142,13 +142,12 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         if (this._data.isEdit) {
             this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
             this._selectedApprovers = [...this._data.node.approvers];
-            if (this._data.node.approvers.length === 1) {
-                this._approverType = SINGLE_USER;
+            if (this._data.node.approvalTeamId) {
+                this.viewService.selectTeam(this._data.teams.find(t => t.id === this._data.node.approvalTeamId));
+                this._selectedTeam = this.viewService.team;
+                this._approverType = this._data.node.isEveryoneApprovalNeeded ? EVERYONE : ANYONE;
             }
-
-            if (this._data.node.approvers.length > 1) {
-                this._approverType = ANYONE;
-            }
+            this._cdr.detectChanges();
         }
 
         this.viewChangeSub = this.viewService.onViewChange.subscribe(() => {
@@ -170,15 +169,20 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _goToSelectMode(): void {
         this._selectMode = true;
-        this.viewService.setCurrentView(this._isSingleUserMode || this._data.isEdit ? SELECT_USER : SELECT_TEAM);
+        this.viewService.setCurrentView(this._isSingleUserMode ? SELECT_USER : SELECT_TEAM);
         this._cdr.detectChanges();
     }
 
     /** @hidden */
     _exitSelectMode(): void {
+        if (this._selectedApprovers.length && !this._data.node.approvers.length) {
+            this._selectedApprovers = [];
+        }
+        if (!this._data.isEdit && !this._data.node.approvalTeamId) {
+            this.viewService.resetTeam();
+        }
         this._selectMode = false;
         this.viewService.resetView();
-        this.viewService.resetTeam();
         this._cdr.detectChanges();
     }
 
@@ -243,6 +247,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         if (!this._isSingleUserMode && this._selectedTeam) {
             this._data.node.approvers = this._selectedTeam.members.map(memberId => this._approvers.find(a => a.id === memberId));
         }
+        this._data.node.dueDate = this._dueDate.toDate();
         this.dialogRef.close({ node: this._data.node, nodeType: this._nodeType });
     }
 

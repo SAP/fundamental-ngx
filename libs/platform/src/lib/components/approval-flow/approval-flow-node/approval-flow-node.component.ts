@@ -9,15 +9,15 @@ import {
     OnChanges,
     OnInit,
     Output,
-    QueryList, ViewChild,
+    QueryList,
+    ViewChild,
     ViewChildren
 } from '@angular/core';
 import { MenuComponent, ObjectStatus } from '@fundamental-ngx/core';
 
-import { ApprovalGraphNode, ApprovalGraphNodeMetadata } from '../approval-flow.component';
-import { ApprovalNode, ApprovalStatus } from '../interfaces';
-import { isNodeApproved } from '../helpers';
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
+import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalNode, ApprovalStatus } from '../interfaces';
+import { isNodeApproved } from '../helpers';
 
 const NODE_STATUS_CLASS_MAP = {
     'approved': 'positive',
@@ -156,7 +156,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @Output() onEdit = new EventEmitter<void>();
 
     @Output() onDelete = new EventEmitter<void>();
-    @Output() hh = new EventEmitter<string[]>();
 
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChildren(ApprovalFlowDropZoneDirective) dropZones: QueryList<ApprovalFlowDropZoneDirective>;
@@ -202,20 +201,22 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     /** @hidden */
     _onClick(): void {
-        if (this.node.blank) {
-            return;
-        }
         this.onNodeClick.emit();
-    }
-
-    /** @hidden */
-    _focus(): void {
-        this._nativeElement.focus({ preventScroll: true });
     }
 
     /** @hidden */
     _onCheck(isChecked: boolean): void {
         this.onNodeCheck.emit(isChecked);
+    }
+
+    /** @hidden */
+    _onMenuOpen(): void {
+        this.menu.refreshPosition();
+    }
+
+    /** @hidden */
+    _focus(): void {
+        this._nativeElement.focus({ preventScroll: true });
     }
 
     /** @hidden */
@@ -228,15 +229,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     _checkIfNodeDraggedInDropZone(nodeRect: DOMRect): void {
         this.dropZones.forEach(dropZone => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
         this.cd.detectChanges();
-    }
-
-    /** @hidden */
-    _onMenuOpen(): void {
-        this.menu.refreshPosition();
-    }
-
-    logMeta(): void {
-        console.log('clicked node meta', this.meta);
     }
 
     /** @hidden */

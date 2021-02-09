@@ -5,7 +5,8 @@ import {
     EventEmitter,
     Input,
     Output,
-    QueryList, ViewChild,
+    QueryList,
+    ViewChild,
     ViewChildren
 } from '@angular/core';
 import { ApprovalUser } from '../interfaces';
@@ -43,22 +44,13 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.selectedUsers.length) {
-            console.log('select corresponding list items');
-            console.log('list items length', this.listItems.length);
             const selectedApproversNames = this.selectedUsers.map(approver => approver.name);
-            this._selectedItems = this.listItems.filter(item => {
-                return selectedApproversNames.includes(item.avatarTitle);
-            });
+            this._selectedItems = this.listItems.filter(item => selectedApproversNames.includes(item.avatarTitle));
             this._selectedItems.forEach(item => {
                 item._selected = true;
+                this.list._selectItem(item);
             });
-            console.log('selected items length', this._selectedItems.length);
             this._cdr.detectChanges();
-            this._selectedItems.forEach(item => {
-                // looks horrible but seems to be the only option at this point, list doesn't support pre-selected items correctly
-                this.list['_selectionModel'].select(item);
-                this.list.stateChanges.next(item);
-            });
         }
     }
 

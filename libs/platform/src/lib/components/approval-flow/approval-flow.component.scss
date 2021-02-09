@@ -45,10 +45,6 @@ $carousel-controls-height--edit-mode: 126px;
     .#{$block}__watchers-input-container {
         width: 278px;
     }
-
-    fd-multi-input .fd-input-group__input {
-        //display: none;
-    }
 }
 
 .#{$block}__watchers-title {
@@ -94,7 +90,6 @@ $carousel-controls-height--edit-mode: 126px;
         cursor: pointer;
 
         &:focus {
-            //outline: none;
             outline-offset: 0.0625rem;
             outline-width: 0.0625rem;
             outline-style: dotted;

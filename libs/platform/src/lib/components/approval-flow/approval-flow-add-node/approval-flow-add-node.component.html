@@ -75,8 +75,7 @@
                     type="single"
                     compact="true"
                     [attr.dir]="_data.rtl ? 'rtl' : 'ltr'"
-                    [(ngModel)]="_dueDate"
-                    (ngModelChange)="_data.node.dueDate = _dueDate.toDate()">
+                    [(ngModel)]="_dueDate">
                 </fd-date-picker>
             </div>
         </ng-container>
