@@ -12,7 +12,15 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     selector: 'fd-shellbar-actions-mobile',
     templateUrl: './shellbar-actions-mobile.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // TODO: remove hardcoded styles
+    styles: [`
+        .fd-shellbar__counter--overflowed {
+            position: absolute;
+            right: 0.25rem;
+            top: -0.25rem;
+        }
+    `]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */

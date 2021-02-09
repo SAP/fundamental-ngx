@@ -9,16 +9,16 @@ export class StandardListItemPo extends BaseComponentPo {
     sNoBorderList = 'fdp-non-byline-standard-list-item-example li';
     sNoBorderAttr = 'fdp-non-byline-standard-list-item-example fdp-list';
     // noBorder ByLine examples
-    sNoBorderByLineList = 'fdp-borderless-standard-list-item-example li';
-    sNoBorderByLineAttr = 'fdp-borderless-standard-list-item-example fdp-list';
-    sNoBorderAvatar = 'fdp-borderless-standard-list-item-example fd-avatar';
-    sNoBorderByLineSection = 'fdp-borderless-standard-list-item-example ul';
+    sNoBorderByLineList = 'fdp-platform-standard-list-item-border-less-example li';
+    sNoBorderByLineAttr = 'fdp-platform-standard-list-item-border-less-example fdp-list';
+    sNoBorderAvatar = 'fdp-platform-standard-list-item-border-less-example fd-avatar';
+    sNoBorderByLineSection = 'fdp-platform-standard-list-item-border-less-example ul';
     // footer examples
-    sFooterByLineList = 'fdp-standard-list-item-with-footer-example fdp-standard-list-item li';
-    sFooterByLineAvatar = 'fdp-standard-list-item-with-footer-example fd-avatar';
-    sFooter = 'fdp-standard-list-item-with-footer-example fdp-list-footer';
-    sFooterList = 'fdp-standard-list-item-with-footer-example fdp-list-footer li';
-    sFooterAttr = 'fdp-standard-list-item-with-footer-example ul';
+    sFooterByLineList = 'fdp-platform-standard-list-item-with-footer-example fdp-standard-list-item li';
+    sFooterByLineAvatar = 'fdp-platform-standard-list-item-with-footer-example fd-avatar';
+    sFooter = 'fdp-platform-standard-list-item-with-footer-example fdp-list-footer';
+    sFooterList = 'fdp-platform-standard-list-item-with-footer-example fdp-list-footer li';
+    sFooterAttr = 'fdp-platform-standard-list-item-with-footer-example ul';
     // group header examples
     sGroupHeaderList = 'fdp-standard-list-item-with-group-header-example li';
     sGroupHeaderAttr = 'fdp-standard-list-item-with-group-header-example ul';
@@ -34,11 +34,11 @@ export class StandardListItemPo extends BaseComponentPo {
     sSecTypeAvatar = 'fdp-standard-list-item-with-secondary-type-example fd-avatar';
     sSecTypeListItem = 'fdp-standard-list-item-with-secondary-type-example fdp-standard-list-item';
     // multi select with toolbar examples
-    sMultiAttr = 'fdp-standard-list-item-with-selection-example fdp-list';
-    sMultiList = 'fdp-standard-list-item-with-selection-example li';
-    sMultiAvatar = 'fdp-standard-list-item-with-selection-example fd-avatar';
-    sMultiToolbar = 'fdp-standard-list-item-with-selection-example fd-toolbar';
-    sMultiCheckbox = 'fdp-standard-list-item-with-selection-example fd-checkbox';
+    sMultiAttr = 'fdp-platform-standard-list-item-with-selection-example fdp-list';
+    sMultiList = 'fdp-platform-standard-list-item-with-selection-example li';
+    sMultiAvatar = 'fdp-platform-standard-list-item-with-selection-example fd-avatar';
+    sMultiToolbar = 'fdp-platform-standard-list-item-with-selection-example fd-toolbar';
+    sMultiCheckbox = 'fdp-platform-standard-list-item-with-selection-example fd-checkbox';
     // inverted secondary types examples
     sInvtAttr = 'fdp-standard-list-item-with-inverted-secondary-type-example fdp-list';
     sInvtList = 'fdp-standard-list-item-with-inverted-secondary-type-example li';

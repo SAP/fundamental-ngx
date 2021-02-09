@@ -237,7 +237,8 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="action" label="Action" *ngIf="!readonly">
+                <fdp-column name="action" *ngIf="!readonly">
+                    <fdp-table-header *fdpHeaderCellDef>Action</fdp-table-header>
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__actions">
                             <div class="fdp-upload-collection__actions--status">
@@ -269,13 +270,15 @@
                                 ></button>
                             </div>
 
-                            <fdp-button
-                                buttonType="transparent"
-                                glyph="overflow"
+                            <fdp-menu-button
+                                icon="overflow"
                                 contentDensity="compact"
-                                (buttonClicked)="_actionButton(item)"
+                                [disabled]="disabled"
+                                type="transparent"
                                 [fdpMenuTriggerFor]="menuActions"
-                            ></fdp-button>
+                                (buttonClicked)="_actionButton(item)"
+                            >
+                            </fdp-menu-button>
                         </div>
                     </fdp-table-cell>
                 </fdp-column>
@@ -330,15 +333,14 @@
                     <span i18n="@@platformUploadCollection.ResultsPerPage.Title">Results per page</span>
                     <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
                 </span>
-                <fdp-button
+                <fdp-menu-button
                     *ngIf="_itemsPerPageOptions.length > 0"
-                    buttonType="ghost"
-                    glyphPosition="after"
-                    glyph="navigation-down-arrow"
+                    type="ghost"
                     contentDensity="compact"
                     [fdpMenuTriggerFor]="itemsPerPageMenu"
                     [label]="itemsPerPage"
-                ></fdp-button>
+                >
+                </fdp-menu-button>
             </div>
         </div>
     </div>
@@ -352,8 +354,8 @@
     ></fdp-menu-item>
 </fdp-menu>
 
-<fdp-menu #menuActions xPosition="before" contentDensity="compact" (close)="_menuItemClosed()">
-    <fdp-menu-item [class.disabled]="disabled" (itemSelect)="_moveToClicked()">
+<fdp-menu #menuActions xPosition="before" contentDensity="compact">
+    <fdp-menu-item (itemSelect)="_moveToClicked()">
         <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
         <span i18n="@@platformUploadCollection.Btn.MoveTo">Move to</span>
     </fdp-menu-item>
@@ -362,12 +364,12 @@
             <fd-icon class="fdp-upload-collection__fd-icon" glyph="download"></fd-icon>
             <span i18n="@@platformUploadCollection.Btn.Download">Download</span>
         </fdp-menu-item>
-        <fdp-menu-item [class.disabled]="disabled" (itemSelect)="_openUpdateFileVersion()">
+        <fdp-menu-item (itemSelect)="_openUpdateFileVersion()">
             <fd-icon class="fdp-upload-collection__fd-icon" glyph="drill-up"></fd-icon>
             <span i18n="@@platformUploadCollection.Btn.UpdateVersion">Update version</span>
         </fdp-menu-item>
     </ng-container>
-    <fdp-menu-item [class.disabled]="disabled" (itemSelect)="_remove()">
+    <fdp-menu-item (itemSelect)="_remove()">
         <fd-icon class="fdp-upload-collection__fd-icon" glyph="delete"></fd-icon>
         <span i18n="@@platformUploadCollection.Btn.Remove">Remove</span>
     </fdp-menu-item>
@@ -441,6 +443,36 @@
         <ng-container
             *ngSwitchCase="_messageType.MOVE"
             [ngTemplateOutlet]="messageMove"
+            [ngTemplateOutletContext]="{
+                payload: _message.payload,
+                messageStripType: _message.messageStripType,
+                count: _message.count
+            }"
+        ></ng-container>
+
+        <ng-container
+            *ngSwitchCase="_messageType.TYPE_MISMATCH"
+            [ngTemplateOutlet]="messageTypeMismatch"
+            [ngTemplateOutletContext]="{
+                payload: _message.payload,
+                messageStripType: _message.messageStripType,
+                count: _message.count
+            }"
+        ></ng-container>
+
+        <ng-container
+            *ngSwitchCase="_messageType.FILE_SIZE"
+            [ngTemplateOutlet]="messageFileSize"
+            [ngTemplateOutletContext]="{
+                payload: _message.payload,
+                messageStripType: _message.messageStripType,
+                count: _message.count
+            }"
+        ></ng-container>
+
+        <ng-container
+            *ngSwitchCase="_messageType.FILE_NAME_LENGTH"
+            [ngTemplateOutlet]="messageFilenameLength"
             [ngTemplateOutletContext]="{
                 payload: _message.payload,
                 messageStripType: _message.messageStripType,
@@ -527,5 +559,44 @@
     <ng-container i18n="@@platformUploadCollection.Message.Move.OneItem" *ngIf="payload.items.length === 1">
         {{ payload.items[0].name }} has been { messageStripType, select, error {failed to move to} other {moved to} }
         {{ payload.to ? payload.to.name : 'All files' }}.
+    </ng-container>
+</ng-template>
+
+<ng-template #messageTypeMismatch let-payload="payload" let-messageStripType="messageStripType" let-count="count">
+    <ng-container
+        i18n="@@platformUploadCollection.Message.TypeMismatch.Files"
+        *ngIf="payload.items.length > 1 && count.file && !count.folder"
+    >
+        {{ count.file }} files have the wrong type. Allowed types: {{ fileTypes.join(', ') }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
+    </ng-container>
+
+    <ng-container i18n="@@platformUploadCollection.Message.TypeMismatch.OneItem" *ngIf="payload.items.length === 1">
+        The file "{{ payload.items[0].name }}" has the wrong type. Allowed types: {{ fileTypes.join(', ') }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
+    </ng-container>
+</ng-template>
+
+<ng-template #messageFileSize let-payload="payload" let-messageStripType="messageStripType" let-count="count">
+    <ng-container
+        i18n="@@platformUploadCollection.Message.FileSize.Files"
+        *ngIf="payload.items.length > 1 && count.file && !count.folder"
+    >
+        {{ count.file }} files exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.
+    </ng-container>
+
+    <ng-container i18n="@@platformUploadCollection.Message.FileSize.OneItem" *ngIf="payload.items.length === 1">
+        The file "{{ payload.items[0].name }}" exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.
+    </ng-container>
+</ng-template>
+
+<ng-template #messageFilenameLength let-payload="payload" let-messageStripType="messageStripType" let-count="count">
+    <ng-container
+        i18n="@@platformUploadCollection.Message.FilenameLength.Files"
+        *ngIf="payload.items.length > 1 && count.file && !count.folder"
+    >
+        {{ count.file }} files exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
+    </ng-container>
+
+    <ng-container i18n="@@platformUploadCollection.Message.FilenameLength.OneItem" *ngIf="payload.items.length === 1">
+        The name "{{ payload.items[0].name }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
     </ng-container>
 </ng-template>

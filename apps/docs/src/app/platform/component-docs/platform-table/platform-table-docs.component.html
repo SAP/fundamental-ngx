@@ -137,6 +137,34 @@
 <separator></separator>
 
 <fd-docs-section-title
+    id="page-scrolling-table"
+    componentName="Table"
+>
+    Page Scrolling
+</fd-docs-section-title>
+<description>
+    In order to get table page scrolling use the next options:
+    <ul>
+        <li>
+            Add <code>[pageScrolling]="true"</code> to trigger a fetch once the table is scrolled to the bottom.
+        </li>
+        <li>
+            Add <code>[bodyHeight]="tableBodyHeight"</code> to restrict a table body height so the vertical scrollbar
+            can appear.
+        </li>
+        <li>
+            Add <code>[pageSize]="itemsPerPage"</code> to specify how many items there are per page.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-page-scrolling-example></fdp-platform-table-page-scrolling-example>
+</component-example>
+<code-example [exampleFiles]="pageScrollingTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
     id="table-initial-state"
     componentName="Table"
 >
@@ -166,7 +194,6 @@
 
 <separator></separator>
 
-<!-- P13 dialogs -->
 <fd-docs-section-title
     id="table-P13"
     componentName="Table"
@@ -293,7 +320,6 @@
 
 <separator></separator>
 
-<!-- Playground -->
 <playground
     [schema]="schema"
     [schemaInitialValues]="data"

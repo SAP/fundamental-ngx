@@ -2,14 +2,9 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component, DebugElement, ViewChild } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
-import {
-    ListModule,
-    PopoverModule,
-    RtlService,
-    TableModule,
-    CheckboxModule,
-} from '@fundamental-ngx/core';
+import { ListModule, PopoverModule, RtlService, TableModule, CheckboxModule } from '@fundamental-ngx/core';
 
 import { PlatformTableModule } from './table.module';
 import { TableComponent } from './table.component';
@@ -18,8 +13,8 @@ import { TableDataProvider, TableDataSource } from './domain';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableService } from './table.service';
 import { PlatformButtonModule } from '../button/public_api';
-import { By } from '@angular/platform-browser';
 import { TableRowSelectionChangeEvent } from './models';
+import {TableScrollerDirective, TableScrollableDirective} from './directives';
 
 interface SourceItem {
     id: string;
@@ -66,7 +61,7 @@ describe('TableComponent internal', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule, ReactiveFormsModule, TableModule, CheckboxModule, PopoverModule, ListModule],
-                declarations: [TableComponent],
+                declarations: [TableComponent, TableScrollerDirective, TableScrollableDirective],
                 providers: [RtlService]
             }).compileComponents();
         })
@@ -264,8 +259,8 @@ describe('TableComponent internal', () => {
         let tableRowCells2DArray: DebugElement[][] = [];
 
         const calculateTableElementsMetaData = () => {
-            tableHeaderCells = fixture.debugElement.queryAll(By.css('.fd-table thead .fd-table__row .fd-table__cell'));
-            tableBodyRows = fixture.debugElement.queryAll(By.css('.fd-table tbody .fd-table__row'));
+            tableHeaderCells = fixture.debugElement.queryAll(By.css('.fdp-table__header .fd-table__row .fd-table__cell'));
+            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
         };
 
@@ -557,7 +552,6 @@ describe('TableComponent internal', () => {
                     tableComponent.group(groupBy);
 
                     expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
-
                 });
             });
 
@@ -632,9 +626,7 @@ describe('TableComponent internal', () => {
 
             describe('data source', () => {
                 it('fetch should be triggered when call table.sort()', () => {
-                    const sortBy: CollectionSort[] = [
-                        { field: 'status', direction: SortDirection.ASC }
-                    ];
+                    const sortBy: CollectionSort[] = [{ field: 'status', direction: SortDirection.ASC }];
 
                     tableComponent.sort(sortBy);
 
@@ -669,7 +661,7 @@ describe('TableComponent internal', () => {
                     tableComponent.filter(filterBy);
 
                     expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
-                    
+
                     expect(dataSourceLastFetchState.filterBy).toEqual(filterBy);
                 });
             });
@@ -680,7 +672,7 @@ describe('TableComponent internal', () => {
                 it('fetch should not be triggered when call table.setColumns()', () => {
                     tableComponent.setColumns(['name', 'price', 'status']);
 
-                    expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);                    
+                    expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
                 });
             });
 
@@ -690,9 +682,9 @@ describe('TableComponent internal', () => {
                 fixture.detectChanges();
                 calculateTableElementsMetaData();
 
-                expect(tableHeaderCells.length).toBe(2); 
-                expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');                    
-                expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');                    
+                expect(tableHeaderCells.length).toBe(2);
+                expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');
+                expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');
             });
         });
     });
@@ -772,6 +764,164 @@ describe('TableComponent internal', () => {
         it('should apply initial options to table state and pass it to data source', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
             expect(hostComponent.source.fetch).toHaveBeenCalledWith(tableComponent.getTableState());
+        });
+    });
+})();
+
+(function (): void {
+    class TableDataProviderWithPaging extends TableDataProvider<SourceItem> {
+        private readonly ALL_ITEMS = generateItems(200);
+
+        items = [];
+        totalItems = 0;
+
+        fetch(state: TableState): Observable<SourceItem[]> {
+            const { currentPage, pageSize } = state.page;
+
+            const items = [...this.ALL_ITEMS];
+
+            this.totalItems = items.length;
+
+            const startIndex = (currentPage - 1) * pageSize;
+            this.items = items.slice(startIndex, startIndex + pageSize);
+
+            return of(this.items);
+        }
+    }
+
+    @Component({
+        template: `
+            <fdp-table
+                [dataSource]="source"
+                contentDensity="compact"
+                [pageScrolling]="true"
+                [pageSize]="50"
+                bodyHeight="20rem"
+            >
+                <fdp-column name="name" key="name" label="Name"></fdp-column>
+                <fdp-column name="description" key="description" label="Description"></fdp-column>
+                <fdp-column name="status" key="status" label="Status"></fdp-column>
+            </fdp-table>
+        `
+    })
+    class TableHostComponent {
+        @ViewChild(TableComponent) table: TableComponent;
+
+        source = new TableDataSource(new TableDataProviderWithPaging());
+    }
+
+    describe('TableComponent Page Scrolling', async () => {
+        let hostComponent: TableHostComponent;
+        let fixture: ComponentFixture<TableHostComponent>;
+        let tableComponent: TableComponent<SourceItem>;
+        let dataSourceLastFetchState: TableState;
+
+        beforeEach(
+            waitForAsync(() => {
+                TestBed.configureTestingModule({
+                    imports: [PlatformTableModule],
+                    declarations: [TableHostComponent],
+                    providers: [RtlService]
+                }).compileComponents();
+            })
+        );
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(TableHostComponent);
+            hostComponent = fixture.componentInstance;
+            
+            const originFetch = hostComponent.source.fetch;
+            spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) => {
+                dataSourceLastFetchState = state;
+                return originFetch.call(hostComponent.source, state);
+            });
+
+            fixture.detectChanges();
+
+            tableComponent = hostComponent.table;
+        });
+
+        let tableHeaderCells: DebugElement[] = [];
+        let tableBodyRows: DebugElement[] = [];
+        let tableRowCells2DArray: DebugElement[][] = [];
+        let tableBodyContainer: DebugElement;
+
+        const calculateTableElementsMetaData = () => {
+            tableHeaderCells = fixture.debugElement.queryAll(By.css('.fdp-table__header .fd-table__row .fd-table__cell'));
+            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
+            tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
+            tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
+        };
+
+        const tableBodyScrollTop = async (scrollTop) => {
+            const container = tableBodyContainer.nativeElement as HTMLElement;
+            container.scrollTop = scrollTop;
+            await new Promise(resolve => setTimeout(() => resolve(null), 100));
+            fixture.detectChanges();
+            calculateTableElementsMetaData();
+        }; 
+
+        beforeEach(() => {
+            calculateTableElementsMetaData();
+        });
+
+        it('should load first page at initial phase', () => {
+            expect(tableBodyRows.length).toBe(50);
+        });
+
+        it('should apply "pageSize"=50 to table state', () => {
+            expect(tableComponent.getTableState().page.pageSize).toEqual(50);
+        });
+
+        it('should have currentPage = 1 as default', () => {
+            expect(tableComponent.getTableState().page.currentPage).toEqual(1);
+        });
+
+        it('should have table body height = 20rem', () => {
+            expect(tableBodyContainer.styles.height).toBe('20rem');
+            const container = tableBodyContainer.nativeElement as HTMLElement;
+            expect(container.scrollHeight).toBeGreaterThan(container.clientHeight);
+        });
+
+        it('should not trigger fetch if scrolled not to the bottom', () => {
+            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1); // 1 means initial fetch
+            const container = tableBodyContainer.nativeElement as HTMLElement;
+            container.scrollTop = 100;
+            fixture.detectChanges();
+            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
+        });
+
+        it('should trigger fetch when scrolled to the bottom', async() => {
+            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1); // 1 means initial fetch
+            const container = tableBodyContainer.nativeElement as HTMLElement;
+            await tableBodyScrollTop(container.scrollHeight);
+            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
+        });
+
+        it('should get new 50 items per each request', async() => {            
+            await tableBodyScrollTop(999999);
+
+            expect(tableBodyRows.length).toBe(100);
+
+            await tableBodyScrollTop(999999);
+
+            expect(tableBodyRows.length).toBe(150);
+        });
+
+        it('should stop fetching on scroll if currentPage is the last one', async() => {            
+            await tableBodyScrollTop(999999); // 100
+            await tableBodyScrollTop(999999); // 150
+            await tableBodyScrollTop(999999); // 200
+
+            expect(tableBodyRows.length).toBe(200);
+            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(4);
+
+            // try one more
+            await tableBodyScrollTop(0);
+            await tableBodyScrollTop(999999);
+            
+            expect(tableBodyRows.length).toBe(200);
+            expect(hostComponent.source.fetch).toHaveBeenCalledTimes(4);
         });
     });
 })();

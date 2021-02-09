@@ -139,7 +139,7 @@ export class ListDataProvider extends DataProvider<Product> {
     }
 }
 @Component({
-    selector: 'fdp-object-list-item-with-row-selection-and-navigation-example',
+    selector: 'fdp-platform-object-list-item-with-row-selection-and-navigation-example',
     templateUrl: './platform-object-list-item-with-row-selection-and-navigation-example.component.html'
 })
 export class PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent implements AfterViewInit {

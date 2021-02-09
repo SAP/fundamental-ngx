@@ -8,10 +8,16 @@ import {
     ContentChild,
     TemplateRef,
     AfterContentInit,
-    ElementRef
+    Optional,
+    SkipSelf,
+    Self,
+    Host
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DynamicComponentService, SelectComponent as fdSelect, SelectProxy } from '@fundamental-ngx/core';
+import { NG_VALUE_ACCESSOR, NgControl, NgForm } from '@angular/forms';
+
+import { CollectionBaseInput } from '../form/collection-base.input';
+import { FormField } from '../form/form-field';
+import { FormFieldControl } from '../form/form-control';
 
 @Component({
     selector: 'fdp-select',
@@ -26,7 +32,7 @@ import { DynamicComponentService, SelectComponent as fdSelect, SelectProxy } fro
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectPlatformComponent extends fdSelect implements OnInit, AfterContentInit {
+export class SelectPlatformComponent extends CollectionBaseInput implements OnInit, AfterContentInit {
     /**
      * Form element ID.
      * Todo: This should be moved to higher class that will be common to all input fields
@@ -37,6 +43,13 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
     /** variable to input any type of object. */
     @Input()
     list: Array<any>;
+
+    @Input()
+    glyph: string;
+
+     /** Whether the select is in compact mode. */
+     @Input()
+     compact = false;
 
     /**
      * String rendered as first value in the popup which let the user to make 'no selection' from
@@ -68,7 +81,6 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
             this._value = newValue;
             this.onChange(newValue);
             this.onTouched();
-            this.valueChange.emit(newValue);
             this.cd.markForCheck();
         }
     }
@@ -76,11 +88,17 @@ export class SelectPlatformComponent extends fdSelect implements OnInit, AfterCo
     /**
      * @internal
      */
-    private _value: any;
+     _value: any;
 
-    constructor(private cd: ChangeDetectorRef, elementRef: ElementRef, dynamicComponentService: DynamicComponentService
+     constructor(
+        protected cd: ChangeDetectorRef,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(elementRef, new SelectProxy(), cd, dynamicComponentService, null);
+        super(cd, ngControl, ngForm, formField, formControl);
+
     }
 
     onSelection(value: any): void {

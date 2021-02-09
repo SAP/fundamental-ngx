@@ -13,6 +13,7 @@ import { MessageStripDocsComponent } from './message-strip/message-strip-docs.co
 import { TableDocsComponent } from './table/table-docs.component';
 import { TimeDocsComponent } from './time/time-docs.component';
 import { SwitchDocsComponent } from './switch/switch-docs.component';
+import { SliderDocsComponent } from './slider/slider-docs.component';
 
 export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     button: ButtonDocsComponent.schema,
@@ -36,5 +37,6 @@ export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
             }
         },
         type: 'object'
-    }
+    },
+    slider: SliderDocsComponent.schema
 };

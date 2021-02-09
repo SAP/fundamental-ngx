@@ -41,7 +41,7 @@ const exampleDataSource = () => {
 }
 
 @Component({
-  selector: 'fdp-vhd-display-filters-example',
+  selector: 'fdp-platform-vhd-filters-example',
   templateUrl: './platform-vhd-filters-example.component.html'
 })
 export class PlatformVhdFiltersExampleComponent implements OnInit {

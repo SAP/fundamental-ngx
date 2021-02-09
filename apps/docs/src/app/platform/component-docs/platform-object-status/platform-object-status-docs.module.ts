@@ -9,11 +9,11 @@ import {
     PlatformObjectStatusTextExampleComponent,
     PlatformObjectStatusGenericExampleComponent,
     PlatformObjectStatusTextIconExampleComponent,
-    PlatformObjectStatusClickableAndIconExampleComponent,
     PlatformObjectStatusInvertedTextExampleComponent,
-    PlatformObjectStatusInvertedGenericTextExampleComponent,
-    PlatformObjectStatusLargeExampleComponent
+    PlatformObjectStatusInvertedGenericTextExampleComponent
 } from './platform-object-status-example/platform-object-status-example.component';
+import { PlatformObjectStatusClickableAndIconExampleComponent, } from './platform-object-status-example/platform-object-status-clickable-and-icon-example.component';
+import { PlatformObjectStatusLargeExampleComponent, } from './platform-object-status-example/platform-object-status-large-example.component';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 

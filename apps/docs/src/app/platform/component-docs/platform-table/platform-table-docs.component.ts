@@ -30,6 +30,8 @@ import * as platformTableFilterableSrc from '!raw-loader!./platform-table-exampl
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
+import * as platformTablePageScrollingSrc from '!raw-loader!./platform-table-examples/platform-table-page-scrolling-example.component.html';
+import * as platformTablePageScrollingTsSrc from '!raw-loader!./platform-table-examples/platform-table-page-scrolling-example.component.ts';
 import * as platformTableInitialStateSrc from '!raw-loader!./platform-table-examples/platform-table-initial-state-example.component.html';
 import * as platformTableInitialStateTsSrc from '!raw-loader!./platform-table-examples/platform-table-initial-state-example.component.ts';
 import * as platformTableP13ColumnSrc from '!raw-loader!./platform-table-examples/platform-table-p13-columns-example.component.html';
@@ -262,6 +264,22 @@ export class PlatformTableDocsComponent {
             code: platformTableFreezableTsSrc,
             fileName: 'platform-table-freezable-example',
             component: 'PlatformTableFreezableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    pageScrollingTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTablePageScrollingSrc,
+            fileName: 'platform-table-page-scrolling-example',
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTablePageScrollingTsSrc,
+            fileName: 'platform-table-page-scrolling-example',
+            component: 'PlatformTablePageScrollingExampleComponent',
             name: 'platform-table-example.component.ts'
         }
     ];
