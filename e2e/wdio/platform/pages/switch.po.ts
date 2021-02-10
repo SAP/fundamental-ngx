@@ -5,26 +5,32 @@ export class SwitchPo extends BaseComponentPo {
     private url = '/switch';
 
     root = '#page-content';
-    defaultSwitch = '#default-switch-input';
+    defaultSwitchLabel = '#default-switch .fd-switch';
+    defaultSwitchInput = '#default-switch-input';
     defaultSwitchSize = '#default-switch .fd-switch span';
     defaultSwitchHandel = '#default-switch .fd-switch__handle';
 
-    defaultCompactSwitch = '#default-compact-switch-input';
+    defaultCompactSwitchLabel = '#default-compact-switch .fd-switch';
+    defaultCompactSwitchInput = '#default-compact-switch-input';
     defaultCompactSwitchSize = '#default-compact-switch .fd-switch--compact span';
     defaultCompactSwitchHandel = '#default-compact-switch .fd-switch__handle';
 
-    disabledSwitch = '#switch-disabled-input';
+    disabledSwitchLabel = '#switch-disabled .fd-switch';
+    disabledSwitchInput = '#switch-disabled-input';
     disabledSwitchHandel = '#switch-disabled .fd-switch__handle';
 
-    formDisabledSwitch = '#form-switch-disabled-input';
+    formDisabledSwitchLabel = '#form-switch-disabled .fd-switch';
+    formDisabledSwitchInput = '#form-switch-disabled-input';
     formDisabledSwitchHandel = '#form-switch-disabled .fd-switch__handle';
 
-    semanticSwitch = '#semantic-switch-input';
+    semanticSwitchLabel = '#semantic-switch .fd-switch';
+    semanticSwitchInput = '#semantic-switch-input';
     semanticSwitchHandel = '#semantic-switch .fd-switch__handle';
     semanticSwitchIconOff = '#semantic-switch .fd-switch__icon--off';
     semanticSwitchIconOn = '#semantic-switch .fd-switch__icon--on';
 
-    semanticCompactSwitch = '#semantic-switch-compact-input';
+    semanticCompactSwitchLabel = '#semantic-switch-compact .fd-switch';
+    semanticCompactSwitchInput = '#semantic-switch-compact-input';
     semanticCompactSwitchHandel = '#semantic-switch-compact .fd-switch__handle';
     semanticCompactSwitchIconOff = '#semantic-switch-compact .fd-switch__icon--off';
     semanticCompactSwitchIconOn = '#semantic-switch-compact .fd-switch__icon--on';
