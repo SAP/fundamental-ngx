@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.27...v0.26.2-rc.28) (2021-02-10)
+
+
+### Bug Fixes
+
+* (Core) add description to the Themes in Themes service ([#4587](https://github.com/SAP/fundamental-ngx/issues/4587)) ([14f0997](https://github.com/SAP/fundamental-ngx/commit/14f099772cb374a8634db245ecc9c2c4bfd2699c))
+
 ### [0.26.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.26...v0.26.2-rc.27) (2021-02-10)
 
 ### [0.26.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.25...v0.26.2-rc.26) (2021-02-10)
