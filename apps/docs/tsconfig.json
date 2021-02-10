@@ -10,6 +10,9 @@
             ],
             "@fundamental-ngx/platform": [
                 "libs/platform/src/index.ts"
+            ],
+            "@fundamental-ngx/store": [
+              "libs/store/src/index.ts"
             ]
         }
     },

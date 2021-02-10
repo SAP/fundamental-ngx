@@ -20,6 +20,16 @@
         },
         "platform": {
             "tags": ["fdp"]
+        },
+        "store": {
+            "tags": []
+        },
+        "store-app": {
+            "tags": []
+        },
+        "store-app-e2e": {
+            "tags": [],
+            "implicitDependencies": ["store-app"]
         }
     }
 }

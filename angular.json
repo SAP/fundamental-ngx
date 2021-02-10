@@ -42,16 +42,14 @@
                             "apps/docs/src/fd-typedoc/assets/css/main.scss",
                             "apps/docs/src/styles.scss"
                         ],
-                        "scripts": [
-                            "node_modules/marked/lib/marked.js"
-                        ],
+                        "scripts": ["node_modules/marked/lib/marked.js"],
                         "showCircularDependencies": false,
                         "allowedCommonJsDependencies": [
-                          "moment",
-                          "highlight.js",
-                          "focus-trap",
-                          "@angularclass/hmr",
-                          "hammerjs"
+                            "moment",
+                            "highlight.js",
+                            "focus-trap",
+                            "@angularclass/hmr",
+                            "hammerjs"
                         ]
                     },
                     "configurations": {
@@ -164,13 +162,8 @@
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
-                        "tsConfig": [
-                            "apps/docs/tsconfig.app.json",
-                            "apps/docs/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "!apps/docs/**"
-                        ]
+                        "tsConfig": ["apps/docs/tsconfig.app.json", "apps/docs/tsconfig.spec.json"],
+                        "exclude": ["!apps/docs/**"]
                     }
                 },
                 "test": {
@@ -185,10 +178,7 @@
                             "apps/docs/src/styles.scss"
                         ],
                         "scripts": [],
-                        "assets": [
-                            "apps/docs/src/favicon.ico",
-                            "apps/docs/src/assets"
-                        ]
+                        "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"]
                     }
                 }
             }
@@ -214,9 +204,7 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": "apps/docs-e2e/tsconfig.e2e.json",
-                        "exclude": [
-                            "!apps/docs-e2e/**"
-                        ]
+                        "exclude": ["!apps/docs-e2e/**"]
                     }
                 }
             }
@@ -242,13 +230,8 @@
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/core/tsconfig.lib.json",
-                            "libs/core/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "!libs/core/**"
-                        ]
+                        "tsConfig": ["libs/core/tsconfig.lib.json", "libs/core/tsconfig.spec.json"],
+                        "exclude": ["!libs/core/**"]
                     }
                 },
                 "test": {
@@ -287,13 +270,8 @@
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
-                        "tsConfig": [
-                            "libs/platform/tsconfig.lib.json",
-                            "libs/platform/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "!libs/platform/**"
-                        ]
+                        "tsConfig": ["libs/platform/tsconfig.lib.json", "libs/platform/tsconfig.spec.json"],
+                        "exclude": ["!libs/platform/**"]
                     }
                 },
                 "test": {
@@ -310,6 +288,152 @@
                     "styleext": "scss"
                 }
             }
+        },
+        "store": {
+            "projectType": "library",
+            "root": "libs/store",
+            "sourceRoot": "libs/store/src",
+            "prefix": "fundamental-ngx",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["libs/store/tsconfig.lib.json", "libs/store/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**", "!libs/store/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/store/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            },
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            }
+        },
+        "store-app": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "apps/store-app",
+            "sourceRoot": "apps/store-app/src",
+            "prefix": "fundamental-ngx",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/store-app",
+                        "index": "apps/store-app/src/index.html",
+                        "main": "apps/store-app/src/main.ts",
+                        "polyfills": "apps/store-app/src/polyfills.ts",
+                        "tsConfig": "apps/store-app/tsconfig.app.json",
+                        "aot": true,
+                        "assets": ["apps/store-app/src/favicon.ico", "apps/store-app/src/assets"],
+                        "styles": ["apps/store-app/src/styles.scss"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/store-app/src/environments/environment.ts",
+                                    "with": "apps/store-app/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "store-app:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "store-app:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "store-app:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/store-app/tsconfig.app.json",
+                            "apps/store-app/tsconfig.spec.json",
+                            "apps/store-app/tsconfig.editor.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!apps/store-app/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/store-app/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "store-app-e2e": {
+            "root": "apps/store-app-e2e",
+            "sourceRoot": "apps/store-app-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/store-app-e2e/cypress.json",
+                        "tsConfig": "apps/store-app-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "store-app:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "store-app:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["apps/store-app-e2e/tsconfig.e2e.json"],
+                        "exclude": ["**/node_modules/**", "!apps/store-app-e2e/**/*"]
+                    }
+                }
+            }
         }
     },
     "defaultProject": "docs",
@@ -320,6 +444,13 @@
         },
         "@schematics/angular:directive": {
             "prefix": "fd"
+        },
+        "@nrwl/angular:application": {
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "unitTestRunner": "jest"
         }
     },
     "cli": {
