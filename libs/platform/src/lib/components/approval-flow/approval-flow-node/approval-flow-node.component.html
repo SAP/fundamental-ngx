@@ -32,7 +32,7 @@
             <li fd-menu-item (click)="menu.close(); onEdit.emit()" *ngIf="_isNotStarted">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEdit">Edit</div>
             </li>
-            <li *ngIf="!(meta.isRoot && meta.parallelStart)" fd-menu-item (click)="menu.close(); onDelete.emit()">
+            <li *ngIf="meta.canDelete" fd-menu-item (click)="menu.close(); onDelete.emit()">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Delete</div>
             </li>
         </fd-menu>
@@ -64,8 +64,8 @@
             <fdp-object-status
                 [status]="_objectStatus"
                 inverted="true">
-                <ng-container *ngIf="!_showDueDateWarning">{{ node.status }}</ng-container>
-                <ng-container *ngIf="_showDueDateWarning">
+                <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">{{ node.status }}</ng-container>
+                <ng-container *ngIf="checkDueDate && _showDueDateWarning">
                     <ng-container *ngIf="_dueIn === dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueToday">Due today</ng-container>
                     <ng-container *ngIf="_dueIn < dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueInXDays">
                         Due in

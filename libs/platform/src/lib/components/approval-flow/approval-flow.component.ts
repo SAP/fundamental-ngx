@@ -30,7 +30,7 @@ import {
     ApprovalDataSource,
     ApprovalGraphNode, ApprovalGraphNodeMetadata,
     ApprovalNode,
-    ApprovalProcess,
+    ApprovalProcess, ApprovalStatus,
     ApprovalTeam,
     ApprovalUser
 } from './interfaces';
@@ -79,7 +79,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     @Input() dueDateThreshold = 7;
 
     /** A list of approval statuses that allow sending reminders to their approvers */
-    @Input() allowSendRemindersForStatuses: string[] = ['in progress', 'not started'];
+    @Input() allowSendRemindersForStatuses: ApprovalStatus[] = ['in progress', 'not started'];
 
     /** Whether the approval flow is editable */
     @Input() isEditAvailable = false;
@@ -145,7 +145,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _canAddParallel = false;
 
     /**  @hidden */
-    _isRemoveButtonVisible = false;
+    _canDelete = false;
 
     /**  @hidden */
     _teams: ApprovalTeam[] = [];
@@ -220,11 +220,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _onNodeCheck(node: ApprovalNode): void {
         const checked = this._nodeComponents.filter(n => n._isSelected);
         const checkedNodesCount = checked.length;
-        this._isRemoveButtonVisible = checkedNodesCount > 0;
         const canAdd = checkedNodesCount === 1 && !isNodeApproved(checked[0].node);
         this._canAddBefore = canAdd && this._metaMap[node.id].canAddNodeBefore;
         this._canAddAfter = canAdd && this._metaMap[node.id].canAddNodeAfter;
         this._canAddParallel = canAdd && this._metaMap[node.id].canAddParallel;
+        this._canDelete = checked.every(c => c.meta.canDelete);
     }
 
     /** @hidden Watcher's avatar click handler*/
@@ -554,20 +554,26 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         // meta 1st run
         nodes.forEach(n => {
-            const parents = findParentNode(n, nodes);
+            const parents = findParentNodes(n, nodes);
             _metaMap[n.id] = {
                 parent: parents[0],
                 isRoot: !parents.length,
                 isLast: !n.targets.length,
                 parallelStart: n.targets.length > 1,
                 parallelEnd: parents.length > 1,
-                isParallel: nodes.filter(_n => findParentNode(_n, nodes).includes(parents[0])).length > 1
+                isParallel: parents.length === 1 && parents[0].targets.length > 1
             };
         });
-        Object.keys(_metaMap).forEach(id => {
-            const meta = _metaMap[id];
-            meta.isParallel = meta.isParallel || (_metaMap[meta.parent?.id]?.isParallel && !meta.parallelEnd);
+
+        nodes.forEach(n => {
+            const meta = _metaMap[n.id];
+            if (meta.parallelStart) {
+                const nextParallelNodes = this._findNextParallelNodes(n);
+                nextParallelNodes.forEach(pn => _metaMap[pn.id].isParallel = true);
+            }
         });
+
+        // build graph column structure
         let _nodes = [...nodes];
         do {
             const columnNodes: ApprovalGraphNode[] = [];
@@ -641,7 +647,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const parent = meta.parent;
             const parentMeta = parent && _metaMap[parent.id];
             const isNotApproved = !isNodeApproved(n);
-            const allParentsApproved = findParentNode(n, allNodes).every(_n => isNodeApproved(_n));
+            const allParentsApproved = findParentNodes(n, allNodes).every(_n => isNodeApproved(_n));
             meta.canAddNodeAfter = isNotApproved && !nextHNode?.blank;
             meta.canAddNodeBefore =
                 n.status === 'not started' &&
@@ -654,6 +660,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 (!meta.isLast && !meta.isRoot) &&
                 ((meta.isParallel && parentMeta?.parallelStart) || !meta.isParallel);
             meta.isLastInParallel = meta.isParallel && graph[meta.columnIndex + 1]?.nodes.length === 1;
+            meta.canDelete = !(meta.isRoot && meta.parallelStart) && !(meta.isLast && meta.parallelEnd);
         });
         this._metaMap = _metaMap;
         graph.forEach(col => col.allNodesApproved = col.nodes.every(isNodeApproved));
@@ -727,9 +734,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const meta = this._metaMap[nodeToDelete.id];
         const prevNodeInParallel = this._metaMap[meta.prevHNode?.id]?.isParallel;
         const nextNodeBlank = meta.nextHNode?.blank;
+        const isLastNodeInParallel =
+            (meta.isLastInParallel && !prevNodeInParallel) ||
+            (!meta.isLastInParallel && !prevNodeInParallel && nextNodeBlank);
         this._replaceTargetsInSourceNodes(
             nodeToDelete.id,
-            (meta.isLastInParallel && !prevNodeInParallel) || (!meta.isLastInParallel && nextNodeBlank) ? [] : nodeToDelete.targets
+             isLastNodeInParallel ? [] : nodeToDelete.targets
         );
 
         _nodes.splice(_nodes.findIndex(n => n.id === nodeToDelete.id), 1);
@@ -770,13 +780,43 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canAddAfter = false;
         this._canAddBefore = false;
         this._canAddParallel = false;
-        this._isRemoveButtonVisible = false;
+        this._canDelete = false;
     }
 
     /** @hidden */
     private _getPreviousNotBlankNode(source: ApprovalNode): ApprovalNode {
         const prev = this._metaMap[source.id].prevHNode;
         return prev.blank ? this._getPreviousNotBlankNode(prev) : prev;
+    }
+
+    /** @hidden Find descendant tree of parallel nodes */
+    private _findNextParallelNodes(node: ApprovalNode): ApprovalNode[] {
+        const parallelNodes = [];
+        node.targets.forEach(targetId => {
+            const targetNode = this._getNode(targetId);
+            const parents = findParentNodes(targetNode, this._approvalProcess.nodes);
+            if (parents.length > 1) {
+                return [];
+            }
+            parallelNodes.push(targetNode);
+            if (targetNode.targets.length) {
+                targetNode.targets.forEach(_targetId => {
+                    const _targetNode = this._getNode(_targetId);
+                    const _parents = findParentNodes(_targetNode, this._approvalProcess.nodes);
+                    if (_parents.length === 1) {
+                        parallelNodes.push(_targetNode);
+                        parallelNodes.push(...this._findNextParallelNodes(_targetNode));
+                    }
+                });
+            }
+        });
+
+        return parallelNodes;
+    }
+
+    /** @hidden */
+    private _getNode(id: string): ApprovalNode {
+        return this._approvalProcess.nodes.find(_n => _n.id === id)
     }
 
     /** @hidden */
@@ -838,7 +878,7 @@ function findRootNode(nodes: ApprovalNode[]): ApprovalNode {
     return nodes.find(node => nodes.every(n => !isNodeTargetsIncludeId(n, node.id)));
 }
 
-function findParentNode(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
+function findParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
     return nodes.filter(_node => isNodeTargetsIncludeId(_node, node.id));
 }
 

@@ -23,7 +23,7 @@
             <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="_addNodeFromToolbar('before')"></button>
             <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="_addNodeFromToolbar('after')"></button>
             <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_addNodeFromToolbar('parallel')"></button>
-            <button *ngIf="_isRemoveButtonVisible" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
+            <button *ngIf="_canDelete" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
         </ng-container>
     </div>
 </fd-toolbar>
@@ -83,7 +83,7 @@
                     *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
                     <fdp-approval-flow-node
                         cdkDrag
-                        [cdkDragDisabled]="!_isEditMode || node.status !== 'not started'"
+                        [cdkDragDisabled]="!_isEditMode || node.status !== 'not started' || (_metaMap[node.id].isLast && _metaMap[node.id].parallelEnd)"
                         [attr.dir]="_dir"
                         [attr.tabindex]="node.blank ? -1 : 0"
                         [node]="node"

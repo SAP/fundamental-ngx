@@ -33,4 +33,5 @@ export interface ApprovalGraphNodeMetadata {
     canAddNodeBefore?: boolean;
     canAddNodeAfter?: boolean;
     canAddParallel?: boolean;
+    canDelete?: boolean;
 }
