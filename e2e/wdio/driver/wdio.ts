@@ -242,6 +242,11 @@ export function dragAndDrop(elementToDragSelector: string, index: number = 0, ta
     $$(elementToDragSelector)[index].dragAndDrop($$(targetElementSelector)[targetIndex]);
 }
 
+export function clickAndMoveElement(selector: string, offsetX: number, offsetY: number, index: number = 0): void {
+    $$(selector)[index].scrollIntoView();
+    $$(selector)[index].dragAndDrop({x: offsetX, y: offsetY});
+}
+
 export function isElementDisplayed(selector: string, index: number = 0): boolean {
     $$(selector)[index].scrollIntoView();
     return $$(selector)[index].isDisplayed();
@@ -290,3 +295,4 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
         ]
     }]);
 }
+
