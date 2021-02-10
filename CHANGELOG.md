@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.24...v0.26.2-rc.25) (2021-02-10)
+
+
+### Bug Fixes
+
+* (Core) Switch accessibility ([#4586](https://github.com/SAP/fundamental-ngx/issues/4586)) ([3158d7a](https://github.com/SAP/fundamental-ngx/commit/3158d7afc18e22f501fd77cddaa492198ace108e))
+
 ### [0.26.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.23...v0.26.2-rc.24) (2021-02-10)
 
 ### [0.26.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.22...v0.26.2-rc.23) (2021-02-10)
