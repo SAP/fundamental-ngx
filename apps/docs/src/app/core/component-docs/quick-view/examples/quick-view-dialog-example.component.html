@@ -1,7 +1,13 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #quickViewDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 fd-title>Details</h1>
+            <ng-template fdTemplate="header">
+                <div fd-bar-middle>
+                    <fd-bar-element>
+                        <h1 fd-title>Details</h1>
+                    </fd-bar-element>
+                </div>
+            </ng-template>
         </fd-dialog-header>
 
         <fd-dialog-body>
@@ -42,18 +48,18 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                    fdType="emphasized"
-                    label="Send reminder"
-                    [compact]="true"
-                    (click)="dialog.close('Continue')">
+                fdType="emphasized"
+                label="Send reminder"
+                [compact]="true"
+                (click)="dialog.close('Continue')">
             </fd-button-bar>
 
             <fd-button-bar
-                    fd-initial-focus
-                    fdType="transparent"
-                    label="Cancel"
-                    [compact]="true"
-                    (click)="dialog.dismiss('backdrop')">
+                fd-initial-focus
+                fdType="transparent"
+                label="Cancel"
+                [compact]="true"
+                (click)="dialog.dismiss('backdrop')">
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
