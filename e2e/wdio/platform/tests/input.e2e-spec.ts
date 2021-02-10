@@ -171,4 +171,11 @@ describe('Input should ', function() {
     it('should check RTL', () => {
         inputPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            inputPage.saveExampleBaselineScreenshot('input');
+            expect(inputPage.compareWithBaseline('input')).toBeLessThan(1);
+        });
+    });
 });

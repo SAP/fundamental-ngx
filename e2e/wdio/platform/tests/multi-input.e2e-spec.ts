@@ -187,4 +187,11 @@ describe('Multi input test suite', function() {
             (multiInputPage.activeInputs, 'placeholder', i));
         }
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            multiInputPage.saveExampleBaselineScreenshot('multi-input');
+            expect(multiInputPage.compareWithBaseline('multi-input')).toBeLessThan(1);
+        });
+    });
 });

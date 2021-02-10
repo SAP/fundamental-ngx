@@ -45,7 +45,7 @@
 <div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>
 
 <h3>Disabled Checkbox</h3>
-<fdp-form-group multiLayout="true">
+<fdp-form-group>
     <fdp-form-field #disabled id="disabled" label="Red" rank="1">
         <fdp-checkbox name="disabled-cb" [isBinary]="true" title="Red"
             (checkedChange)="checkedChangeFunction($event)" (indeterminateChange)="indeterminateChangeFunction($event)"

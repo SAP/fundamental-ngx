@@ -185,6 +185,13 @@ describe('Datetime picker suite', function() {
             .toEqual(date);
     });
 
+    xdescribe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            dateTimePickerPage.saveExampleBaselineScreenshot('date-time-picker');
+            expect(dateTimePickerPage.compareWithBaseline('date-time-picker')).toBeLessThan(1);
+        });
+    });
+
 });
 
 function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {

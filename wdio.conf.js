@@ -1,5 +1,6 @@
 /*require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
+const {join} = require('path');
 require('ts-node').register({ transpileOnly: true });
 exports.config = {
     //
@@ -45,7 +46,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 15,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -183,7 +184,17 @@ exports.config = {
     services: [
         ['sauce', {
             sauceConnect: true
-        }]
+        }],
+        ['image-comparison',
+            // The options
+            {
+                // Some options, see the docs for more
+                baselineFolder: join(process.cwd(), './e2e/wdio/baselineScreenshot/'),
+                formatImageName: '{tag}-{logName}-{width}x{height}',
+                screenshotPath: join(process.cwd(), '.tmp/'),
+                savePerInstance: true,
+                autoSaveBaseline: true,
+            }],
     ],
 
     // Framework you want to run your specs with.

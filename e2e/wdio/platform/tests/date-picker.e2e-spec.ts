@@ -238,5 +238,12 @@ describe('Date picker suite', function() {
         click(datePickerPage.dayInCalendarButtonByValue('2'));
         expect(getAttributeByName(datePickerPage.activeInputDatePicker, 'ng-reflect-model')).toEqual(datePickerTestData.date9);
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            datePickerPage.saveExampleBaselineScreenshot('date-picker');
+            expect(datePickerPage.compareWithBaseline('date-picker')).toBeLessThan(1);
+        });
+    });
 });
 
