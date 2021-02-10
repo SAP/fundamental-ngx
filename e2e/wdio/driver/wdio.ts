@@ -5,6 +5,13 @@ export function defaultWaitTime(): number {
 export function currentPlatformName(): string {
     return browser.capabilities.platformName;
 }
+export function currentBrowserName(): string {
+    return  browser.capabilities.browserName;
+}
+
+export function getImageTagBrowserPlatform(): string {
+    return `${currentBrowserName()}-${currentPlatformName()}`
+}
 
 export function getBaseURL(): string {
     return browser.options.baseUrl;
@@ -289,4 +296,13 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
             { 'type': 'pause', 'duration': 500 }
         ]
     }]);
+}
+
+
+export function saveElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): void {
+    browser.saveElement($$(selector)[index], tag, options);
+}
+
+export function checkElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): any {
+    return browser.checkElement($$(selector)[index], tag, options);
 }

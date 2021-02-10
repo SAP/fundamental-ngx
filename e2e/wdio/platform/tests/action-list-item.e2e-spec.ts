@@ -37,4 +37,11 @@ describe('Action List Item Test Suite:', function() {
             actionListPg.checkRtlSwitch(actionListPg.rtlSwitcherArr, actionListPg.exampleAreaContainersArr);
         });
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            actionListPg.saveExampleBaselineScreenshot('action-list-item');
+            expect(actionListPg.compareWithBaseline('action-list-item')).toBeLessThan(1);
+        });
+    });
 });

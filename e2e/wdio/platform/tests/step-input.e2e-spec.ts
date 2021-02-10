@@ -164,4 +164,11 @@ describe('Step input test suite', function() {
     it('Check LTR/RTL orientation', () => {
         stepInputPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            stepInputPage.saveExampleBaselineScreenshot('step-input');
+            expect(stepInputPage.compareWithBaseline('step-input')).toBeLessThan(1);
+        });
+    });
 });

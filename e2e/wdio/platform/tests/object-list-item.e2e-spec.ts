@@ -115,4 +115,11 @@ describe('Object list item suite:', function() {
             objListPg.checkRtlSwitch();
         });
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            objListPg.saveExampleBaselineScreenshot('object-list-item');
+            expect(objListPg.compareWithBaseline('object-list-item')).toBeLessThan(1);
+        });
+    });
 });

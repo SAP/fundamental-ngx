@@ -8,7 +8,8 @@
     "types": [
       "node",
       "@wdio/sync",
-      "@wdio/jasmine-framework"
+      "@wdio/jasmine-framework",
+      "wdio-image-comparison-service"
     ]
   },
   "includes": [

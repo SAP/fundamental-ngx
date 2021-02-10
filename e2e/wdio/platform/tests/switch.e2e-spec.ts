@@ -268,6 +268,15 @@ describe('Verify Switch component', function() {
         /*        xit('should be able to display 2-3 letters', async () => {
         });*/
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            switchPage.saveExampleBaselineScreenshot('switch');
+            expect(switchPage.compareWithBaseline('switch')).toBeLessThan(1);
+        });
+    });
+
+
     /*xdescribe('has correct page content', function() {
          // TODO: add page content checks
     });*/

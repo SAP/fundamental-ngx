@@ -161,4 +161,11 @@ describe('Input Group should', function() {
     it('should check RTL', () => {
         inputGroupPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            inputGroupPage.saveExampleBaselineScreenshot('input-group');
+            expect(inputGroupPage.compareWithBaseline('input-group')).toBeLessThan(1);
+        });
+    });
 });

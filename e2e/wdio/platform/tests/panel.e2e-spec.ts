@@ -62,4 +62,11 @@ describe('Verify Panel', () => {
     it('should be able to switch to rtl', () => {
         panelPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            panelPage.saveExampleBaselineScreenshot('panel');
+            expect(panelPage.compareWithBaseline('panel')).toBeLessThan(1);
+        });
+    });
 });

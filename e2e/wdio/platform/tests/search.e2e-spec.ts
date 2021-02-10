@@ -152,4 +152,11 @@ describe('Search field', function() {
     it('should check rtl switch', () => {
         searchPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            searchPage.saveExampleBaselineScreenshot('search');
+            expect(searchPage.compareWithBaseline('search')).toBeLessThan(1);
+        });
+    });
 });

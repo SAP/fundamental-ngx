@@ -199,5 +199,12 @@ describe('Split menu button test suite', () => {
     it('should check RTL orientation', () => {
         spMenuBtnPage.checkRtlSwitch();
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            spMenuBtnPage.saveExampleBaselineScreenshot('split-menu-button');
+            expect(spMenuBtnPage.compareWithBaseline('split-menu-button')).toBeLessThan(1);
+        });
+    });
 });
 
