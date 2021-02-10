@@ -12,7 +12,7 @@ import { By } from '@angular/platform-browser';
 @Component({
     selector: 'fdp-cbg-reactive-test',
     template: `
-        <fdp-form-group [multiLayout]="true" [formGroup]="form1" [object]="formData">
+        <fdp-form-group [formGroup]="form1" [object]="formData">
             <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group
                     [list]="phoneslist"
@@ -271,7 +271,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
 @Component({
     selector: 'fdp-cbg-template-driven-test',
     template: `
-        <fdp-form-group [multiLayout]="true">
+        <fdp-form-group>
             <fdp-form-field [id]="'phonest'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" [(ngModel)]="phones"></fdp-checkbox-group>
             </fdp-form-field>
@@ -545,7 +545,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
 @Component({
     selector: 'fdp-cbg-reactive-formgroup-data',
     template: `
-        <fdp-form-group [multiLayout]="true" [formGroup]="form2">
+        <fdp-form-group [formGroup]="form2">
             <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" formControlName="phones"></fdp-checkbox-group>
             </fdp-form-field>

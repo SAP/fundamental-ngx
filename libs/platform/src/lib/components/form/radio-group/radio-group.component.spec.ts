@@ -12,7 +12,7 @@ import { SelectItem } from '../../../domain/data-model';
 @Component({
     selector: 'fdp-test-reative-fdp-form-group',
     template: `
-        <fdp-form-group [multiLayout]="true" [formGroup]="form1" [object]="formData">
+        <fdp-form-group [formGroup]="form1" [object]="formData">
             <fdp-form-field #fl1 [id]="'pizzaBrand'" [label]="'Select Pizza Store:'" zone="zLeft" rank="1">
                 <fdp-radio-group
                     [list]="pizzaBrands"
@@ -248,7 +248,7 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
 @Component({
     selector: 'fdp-test-template-driven-fdp-form-group',
     template: `
-        <fdp-form-group [multiLayout]="true">
+        <fdp-form-group>
             <fdp-form-field [id]="'pizzaBrandt'" [label]="'Select Pizza Store:'" zone="zLeft" rank="1">
                 <fdp-radio-group
                     [list]="pizzaBrands"

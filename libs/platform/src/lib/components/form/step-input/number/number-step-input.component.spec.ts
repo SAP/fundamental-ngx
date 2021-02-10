@@ -412,7 +412,7 @@ describe('NumberStepInputComponent main functionality', () => {
 @Component({
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-            <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" [object]="initialFormModel">
+            <fdp-form-group #fg1 [formGroup]="form" [object]="initialFormModel">
                 <fdp-form-field
                     #ff
                     id="qty"
