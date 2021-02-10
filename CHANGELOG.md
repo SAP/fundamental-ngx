@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.29...v0.26.2-rc.30) (2021-02-10)
+
+
+### Bug Fixes
+
+* (Core) add fix for content text in Feed Tile truncation ([#4627](https://github.com/SAP/fundamental-ngx/issues/4627)) ([63cf5eb](https://github.com/SAP/fundamental-ngx/commit/63cf5eb3abadaa318cb610474c3e23cfff120595))
+
 ### [0.26.2-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.28...v0.26.2-rc.29) (2021-02-10)
 
 ### [0.26.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.27...v0.26.2-rc.28) (2021-02-10)
