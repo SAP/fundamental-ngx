@@ -20,7 +20,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*.e2e-spec.ts'
+        './e2e/wdio/**/*.acs-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -283,7 +283,6 @@ exports.config = {
         }, true);
 
         browser.resetUrl = 'about:blank';
-        browser.maximizeWindow();
     }
 
 //     const processedConfig = await browser.getProcessedConfig();

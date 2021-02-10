@@ -153,6 +153,8 @@
     "@wdio/sync": "6.9.1",
     "angular-cli-ghpages": "0.6.2",
     "autoprefixer": "9.8.6",
+    "axe-core": "4.1.2",
+    "axe-html-reporter": "2.2.0",
     "babel-loader": "8.2.2",
     "chromedriver": "88.0.0",
     "codelyzer": "6.0.1",
@@ -188,6 +190,7 @@
     "typedoc": "0.19.2",
     "typescript": "3.9.7",
     "wait-on": "5.2.0",
+    "wdio-axe": "2.2.2",
     "wdio-chromedriver-service": "6.0.4",
     "wdio-html-format-reporter": "0.4.0",
     "webdriverio": "6.10.11"
