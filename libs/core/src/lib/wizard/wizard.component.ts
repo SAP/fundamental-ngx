@@ -373,7 +373,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             } else if (stepsArray.indexOf(stepToHide) > currentStepIndex) {
                 this.stackedStepsRight.unshift(stepToHide);
             }
-            this._setStackedTop(currentStep);
+            if (this.stackedStepsLeft.length) {
+                this._setStackedTop(currentStep);
+            }
         }
     }
 
@@ -412,6 +414,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         } else {
             this.progressBar.visible = true;
             this._setContentTemplates();
+            this._shrinkWhileAnyStepIsTooNarrow();
         }
         setTimeout(() => {
             this._cdRef.detectChanges();

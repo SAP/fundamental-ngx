@@ -36,6 +36,12 @@ export class WizardCustomizableExampleComponent {
 
     goToStep(step: number): void {
         switch (step) {
+            case 1: {
+                this.step1status = 'current';
+                this.step2status = 'upcoming';
+                this.step3status = 'upcoming';
+                break;
+            }
             case 2: {
                 this.step1status = 'completed';
                 this.step2status = 'current';
