@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.2...v0.27.0-rc.3) (2021-02-11)
+
+
+### Bug Fixes
+
+* improvements to the wizard in dialog ([#4580](https://github.com/SAP/fundamental-ngx/issues/4580)) ([faf00ce](https://github.com/SAP/fundamental-ngx/commit/faf00cef2a617d81bd3c8384829992c25515e8a4))
+
 ## [0.27.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.1...v0.27.0-rc.2) (2021-02-11)
 
 
