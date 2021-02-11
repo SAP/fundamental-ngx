@@ -63,4 +63,10 @@
             }
         }
     }
+
+    &__btn-navigation {
+        @include fd-rtl() {
+            transform: rotate(180deg);
+        }
+    }
 }

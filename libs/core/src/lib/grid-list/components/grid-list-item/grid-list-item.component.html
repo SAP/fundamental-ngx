@@ -61,7 +61,6 @@
                 class="fd-grid-list__item-counter"
                 i18n-aria-label="@@coreGridList.Item.Counter"
                 [attr.aria-label]="'Item has ' + counter + ' children'"
-                tabindex="0"
                 [innerText]="counter"
             ></span>
 
@@ -100,6 +99,7 @@
                 aria-label="Navigation"
                 i18n-title="@@coreGridList.Item.Btn.Navigation"
                 title="Navigation"
+                class="fd-grid-list__btn-navigation"
                 [compact]="true"
                 (click)="_onNavigate($event)"
             ></button>
