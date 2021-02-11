@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.0...v0.27.0-rc.1) (2021-02-11)
+
+
+### Bug Fixes
+
+* (Platform) Empty table filtering options ([0f695c9](https://github.com/SAP/fundamental-ngx/commit/0f695c9899dcf9100e714195c0274abdc5200b1a))
+
 ## [0.27.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.34...v0.27.0-rc.0) (2021-02-11)
 
 
