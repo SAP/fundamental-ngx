@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.30...v0.26.2-rc.31) (2021-02-11)
+
+
+### Bug Fixes
+
+* (Core) Add setTimeout for IE11 on InitialFocusDirective ([#4623](https://github.com/SAP/fundamental-ngx/issues/4623)) ([d7aecee](https://github.com/SAP/fundamental-ngx/commit/d7aeceee9646e2a43aeabaf5af3d537726c19f4a))
+
 ### [0.26.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.29...v0.26.2-rc.30) (2021-02-10)
 
 
