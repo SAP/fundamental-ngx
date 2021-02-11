@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.34...v0.27.0-rc.0) (2021-02-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* The avatar in card header needs to set size
+
+### Bug Fixes
+
+* expose avatar inputs as part of card header ([#4638](https://github.com/SAP/fundamental-ngx/issues/4638)) ([29a31ea](https://github.com/SAP/fundamental-ngx/commit/29a31eaa61bb273340d2ed5d85458a200c75ee56))
+
 ### [0.26.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.33...v0.26.2-rc.34) (2021-02-11)
 
 
