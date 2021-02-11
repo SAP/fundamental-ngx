@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.1...v0.27.0-rc.2) (2021-02-11)
+
+
+### Bug Fixes
+
+* (Core) Add token validate function to MultiInput ([#4621](https://github.com/SAP/fundamental-ngx/issues/4621)) ([d55fc97](https://github.com/SAP/fundamental-ngx/commit/d55fc97c6a6ddff59efa9e9fed38d93d52d19ce7))
+
 ## [0.27.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.0...v0.27.0-rc.1) (2021-02-11)
 
 
