@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.32...v0.26.2-rc.33) (2021-02-11)
+
+
+### Bug Fixes
+
+* (Platform) Step Input only numbers ([#4630](https://github.com/SAP/fundamental-ngx/issues/4630)) ([ee47bfc](https://github.com/SAP/fundamental-ngx/commit/ee47bfca093fc323d1f5cafd68962417e89c1f1b))
+
+### [0.26.2-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.31...v0.26.2-rc.32) (2021-02-11)
+
+### [0.26.2-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.30...v0.26.2-rc.31) (2021-02-11)
+
+
+### Bug Fixes
+
+* (Core) Add setTimeout for IE11 on InitialFocusDirective ([#4623](https://github.com/SAP/fundamental-ngx/issues/4623)) ([d7aecee](https://github.com/SAP/fundamental-ngx/commit/d7aeceee9646e2a43aeabaf5af3d537726c19f4a))
+
+### [0.26.2-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.29...v0.26.2-rc.30) (2021-02-10)
+
+
+### Bug Fixes
+
+* (Core) add fix for content text in Feed Tile truncation ([#4627](https://github.com/SAP/fundamental-ngx/issues/4627)) ([63cf5eb](https://github.com/SAP/fundamental-ngx/commit/63cf5eb3abadaa318cb610474c3e23cfff120595))
+
+### [0.26.2-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.28...v0.26.2-rc.29) (2021-02-10)
+
+### [0.26.2-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.27...v0.26.2-rc.28) (2021-02-10)
+
+
+### Bug Fixes
+
+* (Core) add description to the Themes in Themes service ([#4587](https://github.com/SAP/fundamental-ngx/issues/4587)) ([14f0997](https://github.com/SAP/fundamental-ngx/commit/14f099772cb374a8634db245ecc9c2c4bfd2699c))
+
 ### [0.26.2-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.26...v0.26.2-rc.27) (2021-02-10)
 
 ### [0.26.2-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.25...v0.26.2-rc.26) (2021-02-10)
