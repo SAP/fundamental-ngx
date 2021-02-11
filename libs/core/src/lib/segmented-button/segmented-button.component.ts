@@ -239,11 +239,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
             return;
         }
 
+        this._buttons.forEach(button => button.disabled = disable)
         if (disable) {
             this._buttons.forEach(button => button.elementRef().nativeElement.setAttribute('disabled', true));
         } else {
             this._buttons.forEach(button => button.elementRef().nativeElement.removeAttribute('disabled'));
         }
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
