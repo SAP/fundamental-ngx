@@ -5,6 +5,11 @@ import { acceptAlert, click, getAttributeByName, getElementArrayLength, refreshP
 
 describe('Action List Item Test Suite:', function() {
     const actionListPg = new ActionListItemPo();
+    const {
+        actionBtns,
+        actionLists,
+        actionSections
+    } = actionListPg;
 
     beforeAll(() => {
         actionListPg.open();
@@ -12,29 +17,29 @@ describe('Action List Item Test Suite:', function() {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(actionListPg.actionBtns);
+        waitForPresent(actionBtns);
     }, 1);
 
     describe('Main checks:', function() {
         it('should check actions on click', () => {
-            const actionBtnCount = getElementArrayLength(actionListPg.actionBtns);
+            const actionBtnCount = getElementArrayLength(actionBtns);
             for (let i = 0; actionBtnCount > i; i++) {
-                click(actionListPg.actionBtns, i);
+                click(actionBtns, i);
                 acceptAlert();
             }
         });
 
         it('should check styles', () => {
-            checkAttributeValueTrue(actionListPg.actionLists, 'noBorder');
-            checkElementTextValue(actionListPg.actionBtns, ActionData.btnText);
-            expect(getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 0)).toBe('false');
-            expect(getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 1)).toBe('true');
+            checkAttributeValueTrue(actionLists, 'noBorder');
+            checkElementTextValue(actionBtns, ActionData.btnText);
+            expect(getAttributeByName(actionSections, 'ng-reflect-compact', 0)).toBe('false');
+            expect(getAttributeByName(actionSections, 'ng-reflect-compact', 1)).toBe('true');
         });
     });
 
     describe('Orientation check:', function() {
         it('should check RTL and LTR orientation', () => {
-            actionListPg.checkRtlSwitch(actionListPg.rtlSwitcherArr, actionListPg.exampleAreaContainersArr);
+            actionListPg.checkRtlSwitch();
         });
     });
 

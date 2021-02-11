@@ -5,6 +5,15 @@ import DisplayListData from '../fixtures/appData/display-list-item-contents';
 
 describe('Display List Item test suite:', function() {
     const displayListPg = new DisplayListItemPo();
+    const {
+        displayLinks,
+        cozyDisplayTitles,
+        comfyDisplayTitles,
+        sections,
+        declarativeDisplayLinks,
+        declarativeDisplayTitles,
+        declarativeSection
+    } = displayListPg;
 
     beforeAll(() => {
         displayListPg.open();
@@ -12,21 +21,21 @@ describe('Display List Item test suite:', function() {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(displayListPg.displayLinks);
+        waitForPresent(displayLinks);
     }, 1);
 
     describe('Display List Item - cozy and comfy examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(displayListPg.displayLinks);
-            checkElementText(displayListPg.cozyDisplayTitles);
-            checkElementText(displayListPg.comfyDisplayTitles);
-            expect(getAttributeByName(displayListPg.sections, DisplayListData.compactAttr, 0)).toBe('false');
-            expect(getAttributeByName(displayListPg.sections, DisplayListData.compactAttr, 1)).toBe('true');
-            expect(getAttributeByName(displayListPg.sections, DisplayListData.borderAttr)).toBe('true');
+            checkElArrIsClickable(displayLinks);
+            checkElementText(cozyDisplayTitles);
+            checkElementText(comfyDisplayTitles);
+            expect(getAttributeByName(sections, DisplayListData.compactAttr, 0)).toBe('false');
+            expect(getAttributeByName(sections, DisplayListData.compactAttr, 1)).toBe('true');
+            expect(getAttributeByName(sections, DisplayListData.borderAttr)).toBe('true');
         });
 
         it('should check navigation', () => {
-            click(displayListPg.displayLinks, 0);
+            click(displayLinks, 0);
             const newUrl = getCurrentUrl();
             expect(newUrl).toContain(DisplayListData.navUrl);
             displayListPg.open();
@@ -35,10 +44,10 @@ describe('Display List Item test suite:', function() {
 
     describe('Display List Item - declarative examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(displayListPg.declarativeDisplayLinks);
-            checkElementTextValue(displayListPg.declarativeDisplayTitles, DisplayListData.navTitlesArr);
-            expect(getAttributeByName(displayListPg.declarativeSection, DisplayListData.borderAttr)).toBe('false');
-            expect(getAttributeByName(displayListPg.declarativeSection, DisplayListData.compactAttr)).toBe('false');
+            checkElArrIsClickable(declarativeDisplayLinks);
+            checkElementTextValue(declarativeDisplayTitles, DisplayListData.navTitlesArr);
+            expect(getAttributeByName(declarativeSection, DisplayListData.borderAttr)).toBe('false');
+            expect(getAttributeByName(declarativeSection, DisplayListData.compactAttr)).toBe('false');
         });
     });
 

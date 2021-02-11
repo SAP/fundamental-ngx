@@ -10,6 +10,13 @@ import {
 
 describe('Standard List Item test suite:', function() {
     const standardListPg = new StandardListItemPo();
+    const {
+        sNoBorderList, sNoBorderAttr, sNoBorderByLineList, sNoBorderByLineAttr, sNoBorderAvatar, sNoBorderByLineSection,
+        sFooterByLineList, sFooterByLineAvatar, sFooter, sFooterList, sFooterAttr, sGroupHeaderList, sGroupHeaderAttr,
+        sGroupHeaderAvatar, sInteractiveAttr, sInteractiveList, sInteractiveLink, sInteractiveAvatar, sSecTypeAttr,
+        sSecTypeList, sSecTypeAvatar, sSecTypeListItem, sMultiAttr, sMultiList, sMultiAvatar, sMultiToolbar,
+        sMultiCheckbox, sInvtAttr, sInvtList, sInvtAvatar, sInvtListItem
+    } = standardListPg;
 
     beforeAll(() => {
         standardListPg.open();
@@ -17,104 +24,104 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item - Border Less examples:', function() {
         it('should check border and interactions', () => {
-            expect(getAttributeByName(standardListPg.sNoBorderAttr, StandardLinkData.noBorderAttr)).toBe('true');
-            expect(getCSSPropertyByName(standardListPg.sNoBorderList, StandardLinkData.borderAttr).value)
+            expect(getAttributeByName(sNoBorderAttr, StandardLinkData.noBorderAttr)).toBe('true');
+            expect(getCSSPropertyByName(sNoBorderList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.noStyle);
-            checkElArrIsClickable(standardListPg.sNoBorderList);
+            checkElArrIsClickable(sNoBorderList);
         });
     });
 
     describe('Standard List Item (ByLine)- Border Less examples:', function() {
         it('should check border and styles', () => {
-            expect(getAttributeByName(standardListPg.sNoBorderByLineAttr, StandardLinkData.noBorderAttr))
+            expect(getAttributeByName(sNoBorderByLineAttr, StandardLinkData.noBorderAttr))
                 .toBe('true');
-            expect(getCSSPropertyByName(standardListPg.sNoBorderByLineList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(sNoBorderByLineList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.noStyle);
-            expect(getAttributeByName(standardListPg.sNoBorderByLineSection, StandardLinkData.compactAttr, 0))
+            expect(getAttributeByName(sNoBorderByLineSection, StandardLinkData.compactAttr, 0))
                 .toBe('false');
-            expect(getAttributeByName(standardListPg.sNoBorderByLineSection, StandardLinkData.compactAttr, 1))
+            expect(getAttributeByName(sNoBorderByLineSection, StandardLinkData.compactAttr, 1))
                 .toBe('true');
-            checkAttributeValueTrue(standardListPg.sNoBorderByLineAttr, StandardLinkData.byLineAltAttr);
+            checkAttributeValueTrue(sNoBorderByLineAttr, StandardLinkData.byLineAltAttr);
         });
 
         it('should check interaction and content', () => {
-            checkElArrIsClickable(standardListPg.sNoBorderByLineList);
-            checkElementText(standardListPg.sNoBorderByLineList);
-            checkElementDisplayed(standardListPg.sNoBorderAvatar);
+            checkElArrIsClickable(sNoBorderByLineList);
+            checkElementText(sNoBorderByLineList);
+            checkElementDisplayed(sNoBorderAvatar);
         });
     });
 
     describe('Standard List Item (ByLine)- Footer examples:', function() {
         it('should check border, styles, and footer', () => {
-            expect(getCSSPropertyByName(standardListPg.sFooterByLineList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(sFooterByLineList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
-            checkAttributeValueTrue(standardListPg.sFooterAttr, StandardLinkData.byLineAttr);
-            checkElementDisplayed(standardListPg.sFooter);
-            checkElementText(standardListPg.sFooterList);
+            checkAttributeValueTrue(sFooterAttr, StandardLinkData.byLineAttr);
+            checkElementDisplayed(sFooter);
+            checkElementText(sFooterList);
         });
 
         it('should check content and interaction', () => {
-            checkElementText(standardListPg.sFooterByLineList);
-            checkElementDisplayed(standardListPg.sFooterByLineAvatar);
-            checkElArrIsClickable(standardListPg.sFooterByLineList);
+            checkElementText(sFooterByLineList);
+            checkElementDisplayed(sFooterByLineAvatar);
+            checkElArrIsClickable(sFooterByLineList);
         });
     });
 
     describe('Standard List Item (ByLine)- Group header examples:', function() {
         it('should check border and styles', () => {
-            expect(getCSSPropertyByName(standardListPg.sGroupHeaderList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(sGroupHeaderList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
-            checkAttributeValueTrue(standardListPg.sGroupHeaderAttr, StandardLinkData.byLineAttr);
+            checkAttributeValueTrue(sGroupHeaderAttr, StandardLinkData.byLineAttr);
         });
 
         it('should check content and interactions', () => {
-            checkElementText(standardListPg.sGroupHeaderList);
-            checkElementDisplayed(standardListPg.sGroupHeaderAvatar);
-            checkElArrIsClickable(standardListPg.sGroupHeaderList);
+            checkElementText(sGroupHeaderList);
+            checkElementDisplayed(sGroupHeaderAvatar);
+            checkElArrIsClickable(sGroupHeaderList);
         });
     });
 
     describe('Standard List Item- Interactive state examples:', function() {
         it('should check border and styles', () => {
-            expect(getCSSPropertyByName(standardListPg.sInteractiveList, StandardLinkData.borderAttr).value)
+            expect(getCSSPropertyByName(sInteractiveList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
-            checkAttributeValueTrue(standardListPg.sInteractiveAttr, StandardLinkData.byLineAltAttr);
-            const linkCount = getElementArrayLength(standardListPg.sInteractiveLink);
+            checkAttributeValueTrue(sInteractiveAttr, StandardLinkData.byLineAltAttr);
+            const linkCount = getElementArrayLength(sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
-                expect(getAttributeByName(standardListPg.sInteractiveLink, StandardLinkData.linkAttr, i))
+                expect(getAttributeByName(sInteractiveLink, StandardLinkData.linkAttr, i))
                     .not.toBe(null, '');
             }
         });
 
         it('should check content and interactions', () => {
-            checkElementDisplayed(standardListPg.sInteractiveList);
-            checkElementDisplayed(standardListPg.sInteractiveLink);
-            checkElementDisplayed(standardListPg.sInteractiveAvatar);
-            checkElArrIsClickable(standardListPg.sInteractiveList);
-            checkElArrIsClickable(standardListPg.sInteractiveLink);
-            checkElementText(standardListPg.sInteractiveList);
+            checkElementDisplayed(sInteractiveList);
+            checkElementDisplayed(sInteractiveLink);
+            checkElementDisplayed(sInteractiveAvatar);
+            checkElArrIsClickable(sInteractiveList);
+            checkElArrIsClickable(sInteractiveLink);
+            checkElementText(sInteractiveList);
         });
     });
 
     describe('Standard List Item (ByLine)- Secondary text types examples:', function() {
         it('should check border and styles', () => {
-            checkAttributeValueTrue(standardListPg.sSecTypeAttr, StandardLinkData.byLineAltAttr);
-            expect(getCSSPropertyByName(standardListPg.sSecTypeList, StandardLinkData.borderAttr).value)
+            checkAttributeValueTrue(sSecTypeAttr, StandardLinkData.byLineAltAttr);
+            expect(getCSSPropertyByName(sSecTypeList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
 
         });
 
         it('should check content and interactions', () => {
-            checkElementDisplayed(standardListPg.sSecTypeAvatar);
-            checkElementDisplayed(standardListPg.sSecTypeList);
-            checkElArrIsClickable(standardListPg.sSecTypeList);
-            checkElementText(standardListPg.sSecTypeList);
+            checkElementDisplayed(sSecTypeAvatar);
+            checkElementDisplayed(sSecTypeList);
+            checkElArrIsClickable(sSecTypeList);
+            checkElementText(sSecTypeList);
         });
 
         it('should check secondary text types', () => {
-            const elCount = getElementArrayLength(standardListPg.sSecTypeListItem);
+            const elCount = getElementArrayLength(sSecTypeListItem);
             for (let i = 0; elCount > i; i++) {
-                expect(getAttributeByName(standardListPg.sSecTypeListItem, StandardLinkData.secondaryAttr, i))
+                expect(getAttributeByName(sSecTypeListItem, StandardLinkData.secondaryAttr, i))
                     .toBe(StandardLinkData.secondaryTypes[i]);
             }
         });
@@ -122,26 +129,26 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Multi Selection examples:', function() {
         it('should check border and styles', () => {
-            checkAttributeValueTrue(standardListPg.sMultiAttr, StandardLinkData.byLineAltAttr);
-            expect(getCSSPropertyByName(standardListPg.sMultiList, StandardLinkData.borderAttr).value)
+            checkAttributeValueTrue(sMultiAttr, StandardLinkData.byLineAltAttr);
+            expect(getCSSPropertyByName(sMultiList, StandardLinkData.borderAttr).value)
                 .toBe(StandardLinkData.solidStyle);
         });
 
         it('should check content and basic interactions', () => {
-            checkElementDisplayed(standardListPg.sMultiAvatar);
-            checkElementDisplayed(standardListPg.sMultiList);
-            checkElementText(standardListPg.sMultiList);
-            checkElementDisplayed(standardListPg.sMultiToolbar);
-            checkElementText(standardListPg.sMultiToolbar);
-            checkElArrIsClickable(standardListPg.sMultiList);
-            checkElArrIsClickable(standardListPg.sMultiCheckbox);
+            checkElementDisplayed(sMultiAvatar);
+            checkElementDisplayed(sMultiList);
+            checkElementText(sMultiList);
+            checkElementDisplayed(sMultiToolbar);
+            checkElementText(sMultiToolbar);
+            checkElArrIsClickable(sMultiList);
+            checkElArrIsClickable(sMultiCheckbox);
         });
 
         it('should check selected item count is displayed in the toolbar', () => {
-            expect(getText(standardListPg.sMultiToolbar)).toContain('0 : Items selected');
-            click(standardListPg.sMultiCheckbox, 0);
-            expect(getAttributeByName(standardListPg.sMultiCheckbox, 'aria-selected')).toBe('true');
-            expect(getText(standardListPg.sMultiToolbar)).toContain('1 : Items selected');
+            expect(getText(sMultiToolbar)).toContain('0 : Items selected');
+            click(sMultiCheckbox, 0);
+            expect(getAttributeByName(sMultiCheckbox, 'aria-selected')).toBe('true');
+            expect(getText(sMultiToolbar)).toContain('1 : Items selected');
         });
     });
 
@@ -150,25 +157,25 @@ describe('Standard List Item test suite:', function() {
             if (browser.capabilities.browserName === 'internet explorer') {
                 console.log('skip');
             } else {
-                checkAttributeValueTrue(standardListPg.sInvtAttr, StandardLinkData.byLineAltAttr);
-                expect(getCSSPropertyByName(standardListPg.sInvtList, StandardLinkData.borderAttr).value)
+                checkAttributeValueTrue(sInvtAttr, StandardLinkData.byLineAltAttr);
+                expect(getCSSPropertyByName(sInvtList, StandardLinkData.borderAttr).value)
                     .toBe(StandardLinkData.solidStyle);
             }
         });
 
         it('should check content and interactions', () => {
-            checkElementDisplayed(standardListPg.sInvtAvatar);
-            checkElementDisplayed(standardListPg.sInvtList);
-            checkElArrIsClickable(standardListPg.sInvtList);
-            checkElementText(standardListPg.sInvtList);
+            checkElementDisplayed(sInvtAvatar);
+            checkElementDisplayed(sInvtList);
+            checkElArrIsClickable(sInvtList);
+            checkElementText(sInvtList);
         });
 
         it('should check secondary text types', () => {
-            const elCount = getElementArrayLength(standardListPg.sInvtListItem);
+            const elCount = getElementArrayLength(sInvtListItem);
             for (let i = 0; elCount > i; i++) {
-                expect(getAttributeByName(standardListPg.sInvtListItem, StandardLinkData.secondaryAttr, i))
+                expect(getAttributeByName(sInvtListItem, StandardLinkData.secondaryAttr, i))
                     .not.toBe(null, '');
-                expect(getAttributeByName(standardListPg.sInvtListItem, StandardLinkData.secondaryAttr, i))
+                expect(getAttributeByName(sInvtListItem, StandardLinkData.secondaryAttr, i))
                     .toBe(StandardLinkData.secondaryTypes[i]);
             }
         });
