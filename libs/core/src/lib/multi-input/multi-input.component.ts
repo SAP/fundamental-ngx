@@ -120,20 +120,20 @@ export class MultiInputComponent implements
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    displayFn: Function = this.defaultDisplay;
+    displayFn: Function = this._defaultDisplay;
 
     /** Parse function. Used for submitting new tokens. Accepts a string by default.
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    newTokenParseFn: Function = this.defaultParse;
+    newTokenParseFn: Function = this._defaultParse;
 
     /**
      * Validate function. Used to check if new token can be added into list.
      * Works only, when `allowNewTokens` option is enabled.
      */
     @Input()
-    newTokenValidateFn: Function = this.defaultTokenValidate;
+    newTokenValidateFn: Function = this._defaultTokenValidate;
 
     /** Aria label for the multi input body. */
     @Input()
@@ -489,17 +489,17 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    private defaultDisplay(str: string): string {
+    private _defaultDisplay(str: string): string {
         return str;
     }
 
     /** @hidden */
-    private defaultParse(str: string): string {
+    private _defaultParse(str: string): string {
         return str;
     }
 
     /** @hidden */
-    private defaultTokenValidate(str: string): boolean {
+    private _defaultTokenValidate(str: string): boolean {
         return !!str;
     }
 
