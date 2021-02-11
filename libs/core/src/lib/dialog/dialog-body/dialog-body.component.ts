@@ -39,6 +39,7 @@ export class DialogBodyComponent implements AfterContentInit {
             const style = this._elRef.nativeElement.style;
             style.paddingTop = '0';
             style.paddingBottom = '0';
+            style.overflowY = 'hidden';
         }
     }
 }
