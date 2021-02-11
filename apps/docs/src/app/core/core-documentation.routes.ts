@@ -355,6 +355,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
             },
             {
+                path: 'text',
+                loadChildren: () => import('./component-docs/text/text-docs.module').then((m) => m.TextDocsModule)
+            },
+            {
                 path: 'textarea',
                 loadChildren: () =>
                     import('./component-docs/textarea/textarea-docs.module').then((m) => m.TextareaDocsModule)

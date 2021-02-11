@@ -1,0 +1,9 @@
+@import '~fundamental-styles/dist/text';
+
+$block: fd-text;
+
+.#{$block} {
+    &__lineclamp {
+        display: block;
+    }
+}
