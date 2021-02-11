@@ -12,7 +12,8 @@ import {
     OnDestroy,
     Output,
     Renderer2,
-    SimpleChanges
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -39,7 +40,8 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
     selector: 'fd-grid-list-item',
     templateUrl: './grid-list-item.component.html',
     styleUrls: ['./grid-list-item.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDestroy {
     /** id for the Element */
