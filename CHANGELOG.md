@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.26.2-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.33...v0.26.2-rc.34) (2021-02-11)
+
+
+### Bug Fixes
+
+* (Core) fix grid list ([#4610](https://github.com/SAP/fundamental-ngx/issues/4610)) ([a8c4bf1](https://github.com/SAP/fundamental-ngx/commit/a8c4bf100826f34bb001103306c76625d71eaefb))
+
 ### [0.26.2-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.26.2-rc.32...v0.26.2-rc.33) (2021-02-11)
 
 
