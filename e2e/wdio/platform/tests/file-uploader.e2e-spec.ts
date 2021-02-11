@@ -25,7 +25,7 @@ describe('File uploader test suite', function() {
     it('Verify placeholders', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.fileUploaderInput);
         for (let i = 0; i < arrLength; i++) {
-            expect(placeholderValue).toContain(getAttributeByName
+            expect(fileUploaderPO.fileSelectedText).toContain(getAttributeByName
             (fileUploaderPO.fileUploaderInput, 'placeholder', i));
         }
     });
@@ -58,7 +58,7 @@ describe('File uploader test suite', function() {
         }
     });
 
-    it('should check LTR and RTL orientation', () => {
+    xit('should check LTR and RTL orientation', () => {
         fileUploaderPO.checkRtlSwitch();
     });
 

@@ -11,9 +11,9 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     // runner: 'local',
-    // user: process.env.SAUCE_USERNAME,
-    // key: process.env.SAUCE_ACCESS_KEY,
-    // region: 'eu',
+    user: process.env.SAUCE_USERNAME,
+    key: process.env.SAUCE_ACCESS_KEY,
+    region: 'eu',
     //
     // ==================
     // Specify Test Files
@@ -24,12 +24,11 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/info-label.e2e-spec.ts'
+        './e2e/wdio/**/file-uploader.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
         './e2e/wdio/**/checkbox-group.e2e-spec.ts',
-        './e2e/wdio/**/link.e2e-spec.ts', // Skip because of page loading issue.
     ],
     //
     // ============
@@ -47,7 +46,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 20,
+    maxInstances: 15,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -165,57 +164,67 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'localhost:4200/',
+    baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 200000,
     //
     // Default request retries count
     connectionRetryCount: 3,
-    //
-    // Test runner services
-    // Services take over a specific job you don't want to take care of. They enhance
-    // your test setup with almost no effort. Unlike plugins, they don't add new
-    // commands. Instead, they hook themselves up into the test process.
-    // services: ['chromedriver'],
-    // services: [
-    //     ['sauce', {
-    //         sauceConnect: true
-    //     }]
-    // ],
+//
+// Test runner services
+// Services take over a specific job you don't want to take care of. They enhance
+// your test setup with almost no effort. Unlike plugins, they don't add new
+// commands. Instead, they hook themselves up into the test process.
+// services: ['chromedriver'],
+services: [
+    ['sauce', {
+        sauceConnect: true
+    }],
+    ['image-comparison',
+        // The options
+        {
+            // Some options, see the docs for more
+            baselineFolder: join(process.cwd(), './e2e/wdio/baselineScreenshot/'),
+            formatImageName: '{tag}-{logName}-{width}x{height}',
+            screenshotPath: join(process.cwd(), '.tmp/'),
+            savePerInstance: true,
+            autoSaveBaseline: true,
+        }],
+],
 
-    // Framework you want to run your specs with.
-    // The following are supported: Mocha, Jasmine, and Cucumber
-    // see also: https://webdriver.io/docs/frameworks.html
-    //
-    // Make sure you have the wdio adapter package for the specific framework installed
-    // before running any tests.
-    framework: 'jasmine',
+// Framework you want to run your specs with.
+// The following are supported: Mocha, Jasmine, and Cucumber
+// see also: https://webdriver.io/docs/frameworks.html
+//
+// Make sure you have the wdio adapter package for the specific framework installed
+// before running any tests.
+framework: 'jasmine',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 1,
+    specFileRetries: 0,
     //
     // Delay in seconds between the spec file retry attempts
-    // specFileRetriesDelay: 0,
+    specFileRetriesDelay: 0,
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
-    // specFileRetriesDeferred: false,
-    //
-    // Test reporter for stdout.
-    // The only one supported by default is 'dot'
-    // see also: https://webdriver.io/docs/dot-reporter.html
-    // reporters: ['spec' , []],
+    specFileRetriesDeferred: true,
+//
+// Test reporter for stdout.
+// The only one supported by default is 'dot'
+// see also: https://webdriver.io/docs/dot-reporter.html
+// reporters: ['spec' , []],
 
     jasmineNodeOpts: {
         isVerbose: true,
-        showColors: true,
-        defaultTimeoutInterval: 700000,
-        grep: null,
-        invertGrep: null
+            showColors: true,
+            defaultTimeoutInterval: 700000,
+            grep: null,
+            invertGrep: null
     },
 
     reporters: [
@@ -347,53 +356,53 @@ exports.config = {
     },
 
 
-    /**
-     * Hook that gets executed after the suite has ended
-     * @param {Object} suite suite details
-     */
-    // afterSuite: function (suite) {
-    // },
-    /**
-     * Runs after a WebdriverIO command gets executed
-     * @param {String} commandName hook command name
-     * @param {Array} args arguments that command would receive
-     * @param {Number} result 0 - command success, 1 - command error
-     * @param {Object} error error object if any
-     */
-    // afterCommand: function (commandName, args, result, error) {
-    // },
-    /**
-     * Gets executed after all tests are done. You still have access to all global variables from
-     * the test.
-     * @param {Number} result 0 - test pass, 1 - test fail
-     * @param {Array.<Object>} capabilities list of capabilities details
-     * @param {Array.<String>} specs List of spec file paths that ran
-     */
-    // after: function (result, capabilities, specs) {
-    // },
-    /**
-     * Gets executed right after terminating the webdriver session.
-     * @param {Object} config wdio configuration object
-     * @param {Array.<Object>} capabilities list of capabilities details
-     * @param {Array.<String>} specs List of spec file paths that ran
-     */
-    // afterSession: function (config, capabilities, specs) {
-    // },
-    /**
-     * Gets executed after all workers got shut down and the process is about to exit. An error
-     * thrown in the onComplete hook will result in the test run failing.
-     * @param {Object} exitCode 0 - success, 1 - fail
-     * @param {Object} config wdio configuration object
-     * @param {Array.<Object>} capabilities list of capabilities details
-     * @param {<Object>} results object containing test results
-     */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
-    /**
-     * Gets executed when a refresh happens.
-     * @param {String} oldSessionId session ID of the old session
-     * @param {String} newSessionId session ID of the new session
-     */
-    //onReload: function(oldSessionId, newSessionId) {
-    //}
+/**
+ * Hook that gets executed after the suite has ended
+ * @param {Object} suite suite details
+ */
+// afterSuite: function (suite) {
+// },
+/**
+ * Runs after a WebdriverIO command gets executed
+ * @param {String} commandName hook command name
+ * @param {Array} args arguments that command would receive
+ * @param {Number} result 0 - command success, 1 - command error
+ * @param {Object} error error object if any
+ */
+// afterCommand: function (commandName, args, result, error) {
+// },
+/**
+ * Gets executed after all tests are done. You still have access to all global variables from
+ * the test.
+ * @param {Number} result 0 - test pass, 1 - test fail
+ * @param {Array.<Object>} capabilities list of capabilities details
+ * @param {Array.<String>} specs List of spec file paths that ran
+ */
+// after: function (result, capabilities, specs) {
+// },
+/**
+ * Gets executed right after terminating the webdriver session.
+ * @param {Object} config wdio configuration object
+ * @param {Array.<Object>} capabilities list of capabilities details
+ * @param {Array.<String>} specs List of spec file paths that ran
+ */
+// afterSession: function (config, capabilities, specs) {
+// },
+/**
+ * Gets executed after all workers got shut down and the process is about to exit. An error
+ * thrown in the onComplete hook will result in the test run failing.
+ * @param {Object} exitCode 0 - success, 1 - fail
+ * @param {Object} config wdio configuration object
+ * @param {Array.<Object>} capabilities list of capabilities details
+ * @param {<Object>} results object containing test results
+ */
+// onComplete: function(exitCode, config, capabilities, results) {
+// },
+/**
+ * Gets executed when a refresh happens.
+ * @param {String} oldSessionId session ID of the old session
+ * @param {String} newSessionId session ID of the new session
+ */
+//onReload: function(oldSessionId, newSessionId) {
+//}
 };
