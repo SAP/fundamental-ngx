@@ -33,7 +33,7 @@
                     *ngFor="let strategy of rule.strategies"
                     [value]="strategy"
                 >
-                    <ng-container i18n="@@platformTableP13FilterStrategyLabel">
+                    <span i18n="@@platformTableP13FilterStrategyLabel">
                         { strategy, select,
                         between {between}
                         contains {contains}
@@ -50,7 +50,7 @@
                         beforeOrOn {before or on}
                         other {Not defined}
                         }
-                    </ng-container>
+                    </span>
                 </fd-option>
             </fd-select>
         </div>
