@@ -32,21 +32,12 @@ jobs:
       - JOB_URL=$TRAVIS_JOB_WEB_UR
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-    script: npm run e2e:ci
-  - stage: "Test"
-    name: Sauce Labs - unit tests platform
-    if: type = pull_request
-    env:
-      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-      - BUILD_ID=$TRAVIS_BUILD_ID
-      - JOB_URL=$TRAVIS_JOB_WEB_UR
-      - SAUCE_USERNAME=$SAUCE_USERNAME
-      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-    script: npm run test:platform:saucelabs
-  - stage: "Test"
-    name: Sauce Labs - unit tests core
-    if: type = pull_request
-    script: npm run test:core:saucelabs
+      - FIREBASE_TOKEN=$FIREBASE_TOKEN
+    script:
+      - npm run e2e:ci
+      - npm run e2e-generate-report
+      - npm install -g firebase-tools
+      - firebase deploy --token "$FIREBASE_TOKEN"
   - stage: "Pre-release"
     if: branch = main AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
