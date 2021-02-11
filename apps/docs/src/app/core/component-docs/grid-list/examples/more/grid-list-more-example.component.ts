@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 interface GridListItem {
     title: string;
@@ -9,7 +9,8 @@ interface GridListItem {
     selector: 'fd-grid-list-more-example',
     templateUrl: './grid-list-more-example.component.html',
     styleUrls: ['./grid-list-more-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class GridListMoreExampleComponent {
     totalItems = 50;
