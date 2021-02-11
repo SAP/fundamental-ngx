@@ -6,7 +6,7 @@ import {
     getElementArrayLength,
     getText,
     refreshPage, sendKeys,
-    uploadFile, waitForPresent
+    uploadFile
 } from '../../driver/wdio';
 import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';
@@ -16,29 +16,26 @@ describe('File uploader test suite', function() {
 
     beforeAll(() => {
         fileUploaderPO.open();
-    }, 1);
+    });
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(fileUploaderPO.fileUploaderRoot);
-    }, 1);
+    });
 
     it('Verify placeholders', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.fileUploaderInput);
         for (let i = 0; i < arrLength; i++) {
-            expect(placeholderValue).toContain(getAttributeByName
+            expect(fileUploaderPO.fileSelectedText).toContain(getAttributeByName
             (fileUploaderPO.fileUploaderInput, 'placeholder', i));
         }
     });
 
     it('Verify browser button', () => {
-        if (browserIsIEorSafari()) {
-            console.log('Skip for IE and Safari');
-            return;
-        }
-        const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
-        for (let i = 0; i < arrLength; i++) {
-            click(fileUploaderPO.browseButton, i);
+        if (!browserIsIEorSafari()) {
+            const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
+            for (let i = 0; i < arrLength; i++) {
+                click(fileUploaderPO.browseButton, i);
+            }
         }
     });
 
@@ -61,15 +58,8 @@ describe('File uploader test suite', function() {
         }
     });
 
-    it('should check LTR and RTL orientation', () => {
+    xit('should check LTR and RTL orientation', () => {
         fileUploaderPO.checkRtlSwitch();
-    });
-
-    describe('Check visual regression', function() {
-        it('should check examples visual regression', () => {
-            fileUploaderPO.saveExampleBaselineScreenshot('file-uploader');
-            expect(fileUploaderPO.compareWithBaseline('file-uploader')).toBeLessThan(1);
-        });
     });
 
 });
