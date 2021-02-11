@@ -1,5 +1,6 @@
 import { SwitchPo } from '../pages/switch.po';
-import switchPageContent from '../fixtures/appData/swich-page-content';
+import {semantic_compact_switch_alternative_text, default_compact_switch_alternative_text, default_switch_alternative_text,
+semantic_switch_alternative_text, disabled_switch_alternative_text, form_disabled_switch_alternative_text} from '../fixtures/appData/swich-page-content';
 import {
     browserIsIE,
     browserIsIEorSafari,
@@ -161,12 +162,12 @@ describe('Verify Switch component', function() {
         const alternativeTextSemanticSwitch = getAttributeByName(switchPage.semanticSwitch, 'aria-label');
         const alternativeTextSemanticCompactFormDisabledSwitch = getAttributeByName(switchPage.semanticCompactSwitch, 'aria-label');
 
-        expect(alternativeTextDefaultSwitch).toBe(switchPageContent.default_switch_alternative_text);
-        expect(alternativeTextDefaultCompactSwitch).toBe(switchPageContent.default_compact_switch_alternative_text);
-        expect(alternativeTextDisabledSwitch).toBe(switchPageContent.disabled_switch_alternative_text);
-        expect(alternativeTextFormDisabledSwitch).toBe(switchPageContent.form_disabled_switch_alternative_text);
-        expect(alternativeTextSemanticSwitch).toBe(switchPageContent.semantic_switch_alternative_text);
-        expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(switchPageContent.semantic_compact_switch_alternative_text);
+        expect(alternativeTextDefaultSwitch).toBe(default_switch_alternative_text);
+        expect(alternativeTextDefaultCompactSwitch).toBe(default_compact_switch_alternative_text);
+        expect(alternativeTextDisabledSwitch).toBe(disabled_switch_alternative_text);
+        expect(alternativeTextFormDisabledSwitch).toBe(form_disabled_switch_alternative_text);
+        expect(alternativeTextSemanticSwitch).toBe(semantic_switch_alternative_text);
+        expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(semantic_compact_switch_alternative_text);
     });
     /*
     xit('test accessibility', async ()=> {

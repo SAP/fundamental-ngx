@@ -13,7 +13,7 @@ import {
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    scrollIntoView, waitForElDisplayed, waitForPresent
+    scrollIntoView, waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Link component test suite', function() {

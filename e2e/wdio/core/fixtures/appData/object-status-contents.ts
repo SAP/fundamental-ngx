@@ -1,16 +1,16 @@
-const statusAttr = 'status';
-const colorAttr = 'color';
-const backgroundColorAttr = 'background-color';
-const indicatorAttr = 'ng-reflect-indication-color';
-const sizeAttr = 'ng-reflect-large';
-const semanticColors = {
+export const statusAttr = 'status';
+export const colorAttr = 'color';
+export const backgroundColorAttr = 'background-color';
+export const indicatorAttr = 'ng-reflect-indication-color';
+export const sizeAttr = 'ng-reflect-large';
+export const semanticColors = {
     negative: '187,0,0',
     critical: '233,115,12',
     positive: '16,126,62',
     informative: '5,59,112',
     null: '106,109,112'
 };
-enum genericColors {
+export enum genericColors {
     '136,0,0' = 1,
     '187,0,0',
     '233,115,12',
@@ -20,14 +20,14 @@ enum genericColors {
     '146,90,206',
     '192,57,159'
 }
-const semanticText = [
+export const semanticText = [
     'Negative',
     'Critical',
     'Positive',
     'Informative',
     'Default'
 ];
-const genericColorText = [
+export const genericColorText = [
     'Indication Color',
     'Indication Color',
     'Indication Color',
@@ -37,7 +37,7 @@ const genericColorText = [
     'Indication Color',
     'Indication Color'
 ];
-const objStatusText = [
+export const objStatusText = [
     'Negative',
     'Critical',
     'Positive',
@@ -59,16 +59,11 @@ const objStatusText = [
     'Informative',
     'Default'
 ];
-const invertedSemanticColors = {
+export const invertedSemanticColors = {
     negative: '187,0,0',
     critical: '233,115,12',
     positive: '16,126,62',
     informative: '10,110,209',
     null: '106,109,112'
 };
-const invertedColor = '255,255,255';
-
-export {
-    statusAttr, colorAttr, semanticColors, genericColors, semanticText, indicatorAttr, genericColorText,
-    objStatusText, backgroundColorAttr, invertedColor, sizeAttr, invertedSemanticColors
-};
+export const invertedColor = '255,255,255';

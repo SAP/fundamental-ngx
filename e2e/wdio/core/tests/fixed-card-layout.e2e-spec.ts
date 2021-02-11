@@ -1,5 +1,4 @@
 import { FixedCardLayoutPo } from '../pages/fixed-card-layout.po';
-import fxdCardLytData from '../fixtures/appData/fixed-card-layout-content';
 import {
     browserIsIE,
     browserIsIEorSafari,
@@ -13,6 +12,8 @@ import {
     waitForInvisibilityOf,
     getElementLocation, waitForPresent
 } from '../../driver/wdio';
+
+import {cardSpacingAttr, cardMinWidth, cardSpacingValue, cardWidthAttr, placeholderBorderAttr, placeholderBorderStyle} from '../fixtures/appData/fixed-card-layout-content';
 
 describe('Fixed card layout test suite', function() {
     const fxdCardLayoutPg = new FixedCardLayoutPo();
@@ -29,16 +30,16 @@ describe('Fixed card layout test suite', function() {
     describe('main checks', function() {
         it('should check spacing between cards', () => {
 
-            expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardSpacingAttr).value)
-                .toBe(fxdCardLytData.cardSpacingValue);
+            expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, cardSpacingAttr).value)
+                .toBe(cardSpacingValue);
         });
 
         it('should check card minimum width', () => {
             const cardsCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
 
             for (let i = 0; cardsCount > i; i++) {
-                expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, fxdCardLytData.cardWidthAttr, i).value)
-                    .toBe(fxdCardLytData.cardMinWidth);
+                expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, cardWidthAttr, i).value)
+                    .toBe(cardMinWidth);
             }
         });
 
@@ -132,8 +133,8 @@ describe('Fixed card layout test suite', function() {
             }]);
 
             expect(elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
-            expect(getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
-                .toEqual(fxdCardLytData.placeholderBorderStyle);
+            expect(getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, placeholderBorderAttr).value)
+                .toEqual(placeholderBorderStyle);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910

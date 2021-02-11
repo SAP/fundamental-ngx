@@ -1,6 +1,8 @@
 import { CheckboxPO } from '../pages/checkbox.po';
-import checkboxGPData from '../../platform/fixtures/appData/checkbox-page-contents';
-import checkboxData from '../fixtures/appData/checkbox-page-contents';
+import {
+    markingDisplayStyle, disabledCheckboxTitle, a11yCheckboxAriaLabel,
+    a11yCheckboxAriaLabelledBy, checkboxErrorTooltip, checkboxHoverState, checkboxFocusStyle
+} from '../fixtures/appData/checkbox-page-contents';
 import {
     acceptAlert,
     browserIsIEorSafari,
@@ -230,7 +232,7 @@ describe('Checkbox test suite', () => {
 
         it('should check checkbox markings are centered', () => {
             const checkboxMarkDisplayStyle = executeScriptBeforeTagAttr(tristateCheckboxParis, 'display');
-            expect(checkboxMarkDisplayStyle).toContain(checkboxData.markingDisplayStyle);
+            expect(checkboxMarkDisplayStyle).toContain(markingDisplayStyle);
         });
     });
 
@@ -253,7 +255,7 @@ describe('Checkbox test suite', () => {
              scrollIntoView(checkboxPage.submitBtn);
             mouseHoverElement(checkboxPage.submitBtn);
             waitForElDisplayed(checkboxPage.errorTooltip);
-            expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxData.checkboxErrorTooltip);
+            expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxErrorTooltip);
             checkFocusState(errorCheckboxes, 1);
             // TODO improve hover check stability for FF
             if (browserIsFirefox()) {
@@ -293,11 +295,11 @@ describe('Checkbox test suite', () => {
             checkMarkingCheckbox(accessibilityCheckboxes, 1);
 
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-label'))
-                .toEqual(checkboxData.a11yCheckboxAriaLabel);
+                .toEqual(a11yCheckboxAriaLabel);
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled')).toBe('false');
 
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-labelledby', 1))
-                .toEqual(checkboxData.a11yCheckboxAriaLabelledBy);
+                .toEqual(a11yCheckboxAriaLabelledBy);
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled', 1)).toBe('false');
         });
 
@@ -305,7 +307,7 @@ describe('Checkbox test suite', () => {
             checkIfDisabled(checkboxPage.disabledAccessibilityCheckbox, 'ng-reflect-is-disabled', 'true');
             expect(getAttributeByName(checkboxPage.disabledAccessibilityCheckbox, 'aria-disabled')).toBe('true');
             expect(getAttributeByName(checkboxPage.disabledAccessibilityCheckboxLabel, 'title'))
-                .toEqual(checkboxData.disabledCheckboxTitle);
+                .toEqual(disabledCheckboxTitle);
         });
     });
 
@@ -319,13 +321,13 @@ describe('Checkbox test suite', () => {
 function checkHoverState(elementSelector, index: number = 0): boolean {
     scrollIntoView(elementSelector, index);
     mouseHoverElement(elementSelector, index);
-    return expect(getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value).toContain(checkboxGPData.checkboxHoverState);
+    return expect(getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value).toContain(checkboxHoverState);
 }
 
 function checkFocusState(elementSelector, index: number = 0): boolean {
     // clickNextElement(elementSelector, index);
     focusElement(elementSelector, index);
-    return expect(getCSSPropertyByName(elementSelector, 'outline-style', index).value).toContain(checkboxGPData.checkboxFocusStyle);
+    return expect(getCSSPropertyByName(elementSelector, 'outline-style', index).value).toContain(checkboxFocusStyle);
 }
 
 function checkMarkingCheckbox(selector: string, index: number = 0): void {
