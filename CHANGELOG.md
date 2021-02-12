@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.4...v0.27.0-rc.5) (2021-02-12)
+
+
+### Bug Fixes
+
+* Readonly select and arrow down fix ([#4631](https://github.com/SAP/fundamental-ngx/issues/4631)) ([a92d96e](https://github.com/SAP/fundamental-ngx/commit/a92d96ef0d8da1eff5f64cc94e8bb5e082ced395))
+
 ## [0.27.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.3...v0.27.0-rc.4) (2021-02-12)
 
 ## [0.27.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.2...v0.27.0-rc.3) (2021-02-11)
