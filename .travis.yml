@@ -33,11 +33,7 @@ jobs:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       - FIREBASE_TOKEN=$FIREBASE_TOKEN
-    script:
-      - npm run e2e:ci
-      - npm run e2e-generate-report
-      - npm install -g firebase-tools
-      - firebase deploy --token "$FIREBASE_TOKEN"
+    script: npm run e2e:ci
   - stage: "Pre-release"
     if: branch = main AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
@@ -78,6 +74,17 @@ jobs:
       skip_cleanup: true
       on:
         all_branches: true
+  - stage: "Deploy to firebase preview channel"
+    name: "Deploy to firebase preview channel"
+    if: branch = development AND type = pull_request
+    skip_cleanup: true
+    provider: firebase
+    project: allure-results
+    before_script:
+      - sudo apt-get install jq
+      - npm install firebase-tools -g
+      - npm run e2e-generate-report
+    script: ./ci-scripts/deploy-to-preview-channel.sh
 notifications:
   email:
     on_failure: always
