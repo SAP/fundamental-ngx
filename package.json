@@ -26,7 +26,7 @@
     "e2e:wdio:local": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-local.conf.js",
     "e2e:wdio:a11y": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-a11y.conf.js",
     "e2e:ci": "ng serve --disable-host-check --ssl --no-watch & wait-on https://localhost:4200 && npm run e2e:wdio:saucelabs",
-    "e2e:a11y": "npm run start & wait-on http://localhost:4200 && npm run e2e:wdio:saucelabs",
+    "e2e:a11y": "ng serve & wait-on http://localhost:4200 && npm run e2e:wdio:a11y",
     "hmr": "ng serve --hmr -e=hmr",
     "lint": "npm run lint:docs && npm run lint:core && npm run lint:platform",
     "lint:core": "ng lint core",

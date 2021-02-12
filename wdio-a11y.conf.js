@@ -211,7 +211,7 @@ exports.config = {
                 domElement.focus();
             }, this);
         }, true);
-
+        console.log(browser.capabilities.browserVersion);
         browser.resetUrl = 'about:blank';
     }
 
