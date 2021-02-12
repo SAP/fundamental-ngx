@@ -32,7 +32,6 @@ jobs:
       - JOB_URL=$TRAVIS_JOB_WEB_UR
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-      - FIREBASE_TOKEN=$FIREBASE_TOKEN
     script: npm run e2e:ci
   - stage: "Pre-release"
     if: branch = main AND type = push
@@ -75,8 +74,14 @@ jobs:
       on:
         all_branches: true
   - stage: "Deploy to firebase preview channel"
-    name: "Deploy to firebase preview channel"
-    if: branch = development AND type = pull_request
+    if: type = pull_request
+    env:
+      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+      - BUILD_ID=$TRAVIS_BUILD_ID
+      - JOB_URL=$TRAVIS_JOB_WEB_UR
+      - SAUCE_USERNAME=$SAUCE_USERNAME
+      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+      - FIREBASE_TOKEN=$FIREBASE_TOKEN
     skip_cleanup: true
     provider: firebase
     project: allure-results
