@@ -262,6 +262,13 @@ describe('Verify Textarea component', function() {
                 expect(popoverText).toContain(textAreaPageContent.basic_text_area_popover);
             });
         });
+
+        describe('Check visual regression', function() {
+            it('should check examples visual regression', () => {
+                textareaPage.saveExampleBaselineScreenshot('textarea');
+                expect(textareaPage.compareWithBaseline('textarea')).toBeLessThan(1);
+            });
+        });
     });
 
 });

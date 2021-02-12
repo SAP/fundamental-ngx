@@ -31,12 +31,12 @@ describe('Verify Switch component', function() {
     describe('has default and compact switch and', function() {
         it('should default change something to active or inactive', () => {
             // capture before state
-            waitForPresent(switchPage.defaultSwitch);
-            const isCheckedBefore = getAttributeByName(switchPage.defaultSwitch, 'aria-checked');
+            waitForPresent(switchPage.defaultSwitchInput);
+            const isCheckedBefore = getAttributeByName(switchPage.defaultSwitchInput, 'aria-checked');
             const handelColorBefore = getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
             click(switchPage.defaultSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.defaultSwitch, 'aria-checked');
+            const isCheckedAfter = getAttributeByName(switchPage.defaultSwitchInput, 'aria-checked');
             const handelColorAfter = getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
 
             expect(isCheckedBefore).toBe('false', 'Default switch has incorrect state before click');
@@ -47,11 +47,11 @@ describe('Verify Switch component', function() {
 
         it('should compact change something to active or inactive', () => {
             // capture before state
-            const isCheckedBefore = getAttributeByName(switchPage.defaultCompactSwitch, 'aria-checked');
+            const isCheckedBefore = getAttributeByName(switchPage.defaultCompactSwitchInput, 'aria-checked');
             const handelColorBefore = getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
             click(switchPage.defaultCompactSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.defaultCompactSwitch, 'aria-checked');
+            const isCheckedAfter = getAttributeByName(switchPage.defaultCompactSwitchInput, 'aria-checked');
             const handelColorAfter = getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
 
             expect(isCheckedBefore).toBe('false', 'Default compact switch has incorrect state before click');
@@ -104,8 +104,8 @@ describe('Verify Switch component', function() {
 
     describe('has disabled and disabled-form switch and ', function() {
         it('should not be able to interact with disabled switch', () => {
-            scrollIntoView(switchPage.disabledSwitch);
-            const isClickable = isElementClickable(switchPage.disabledSwitch);
+            scrollIntoView(switchPage.disabledSwitchInput);
+            const isClickable = isElementClickable(switchPage.disabledSwitchInput);
             expect(isClickable).toBe(false);
         });
 
@@ -115,9 +115,9 @@ describe('Verify Switch component', function() {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            waitForPresent(switchPage.formDisabledSwitch);
-            scrollIntoView(switchPage.formDisabledSwitch);
-            const isClickable = isElementClickable(switchPage.formDisabledSwitch);
+            waitForPresent(switchPage.formDisabledSwitchInput);
+            scrollIntoView(switchPage.formDisabledSwitchInput);
+            const isClickable = isElementClickable(switchPage.formDisabledSwitchInput);
             expect(isClickable).toBe(false);
         });
 
@@ -153,13 +153,13 @@ describe('Verify Switch component', function() {
 
 
     it('should have alternative title or aria-label for all switches', () => {
-        waitForPresent(switchPage.defaultSwitch);
-        const alternativeTextDefaultSwitch = getAttributeByName(switchPage.defaultSwitch, 'aria-label');
-        const alternativeTextDefaultCompactSwitch = getAttributeByName(switchPage.defaultCompactSwitch, 'aria-label');
-        const alternativeTextDisabledSwitch = getAttributeByName(switchPage.disabledSwitch, 'aria-label');
-        const alternativeTextFormDisabledSwitch = getAttributeByName(switchPage.formDisabledSwitch, 'aria-label');
-        const alternativeTextSemanticSwitch = getAttributeByName(switchPage.semanticSwitch, 'aria-label');
-        const alternativeTextSemanticCompactFormDisabledSwitch = getAttributeByName(switchPage.semanticCompactSwitch, 'aria-label');
+        waitForPresent(switchPage.defaultSwitchInput);
+        const alternativeTextDefaultSwitch = getAttributeByName(switchPage.defaultSwitchLabel, 'aria-label');
+        const alternativeTextDefaultCompactSwitch = getAttributeByName(switchPage.defaultCompactSwitchLabel, 'aria-label');
+        const alternativeTextDisabledSwitch = getAttributeByName(switchPage.disabledSwitchLabel, 'aria-label');
+        const alternativeTextFormDisabledSwitch = getAttributeByName(switchPage.formDisabledSwitchLabel, 'aria-label');
+        const alternativeTextSemanticSwitch = getAttributeByName(switchPage.semanticSwitchLabel, 'aria-label');
+        const alternativeTextSemanticCompactFormDisabledSwitch = getAttributeByName(switchPage.semanticCompactSwitchLabel, 'aria-label');
 
         expect(alternativeTextDefaultSwitch).toBe(switchPageContent.default_switch_alternative_text);
         expect(alternativeTextDefaultCompactSwitch).toBe(switchPageContent.default_compact_switch_alternative_text);
@@ -197,12 +197,12 @@ describe('Verify Switch component', function() {
             }
 
             // capture before state
-            const isCheckedBefore = getAttributeByName(switchPage.semanticSwitch, 'aria-checked');
+            const isCheckedBefore = getAttributeByName(switchPage.semanticSwitchInput, 'aria-checked');
             const onIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
             const offIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
             click(switchPage.semanticSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.semanticSwitch, 'aria-checked');
+            const isCheckedAfter = getAttributeByName(switchPage.semanticSwitchInput, 'aria-checked');
             const onIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
             const offIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
 
@@ -216,12 +216,12 @@ describe('Verify Switch component', function() {
 
         it('compact should change something from positive to negative', () => {
             // capture before state
-            const isCheckedBefore = getAttributeByName(switchPage.semanticCompactSwitch, 'aria-checked');
+            const isCheckedBefore = getAttributeByName(switchPage.semanticCompactSwitchInput, 'aria-checked');
             const onIconStateBefore = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOn, 'visibility');
             const offIconStateBefore = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOff, 'visibility');
             click(switchPage.semanticCompactSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.semanticCompactSwitch, 'aria-checked');
+            const isCheckedAfter = getAttributeByName(switchPage.semanticCompactSwitchInput, 'aria-checked');
             const onIconStateAfter = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOn, 'visibility');
             const offIconStateAfter = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOff, 'visibility');
 
@@ -268,6 +268,15 @@ describe('Verify Switch component', function() {
         /*        xit('should be able to display 2-3 letters', async () => {
         });*/
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            switchPage.saveExampleBaselineScreenshot('switch');
+            expect(switchPage.compareWithBaseline('switch')).toBeLessThan(1);
+        });
+    });
+
+
     /*xdescribe('has correct page content', function() {
          // TODO: add page content checks
     });*/

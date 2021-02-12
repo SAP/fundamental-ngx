@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.26.2-rc.21",
+  "version": "0.27.0-rc.5",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -176,7 +176,7 @@
     "karma-jasmine-html-reporter": "1.5.4",
     "karma-parallel": "0.3.1",
     "karma-sauce-launcher": "4.3.4",
-    "karma-sourcemap-loader": "0.3.7",
+    "karma-sourcemap-loader": "0.3.8",
     "karma-spec-reporter": "0.0.32",
     "karma-typescript": "5.0.3",
     "karma-typescript-angular2-transform": "latest",
@@ -195,6 +195,7 @@
     "wdio-axe": "2.2.2",
     "wdio-chromedriver-service": "6.0.4",
     "wdio-html-format-reporter": "0.4.0",
+    "wdio-image-comparison-service": "2.0.0",
     "webdriverio": "6.10.11"
   },
   "pre-commit": {

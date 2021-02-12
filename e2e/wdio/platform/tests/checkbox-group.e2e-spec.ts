@@ -344,6 +344,13 @@ xdescribe('Checkbox group test suite', () => {
             }
         });
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            checkboxGroupPage.saveExampleBaselineScreenshot('checkbox-group');
+            expect(checkboxGroupPage.compareWithBaseline('checkbox-group')).toBeLessThan(1);
+        });
+    });
 });
 
 function checkHoverState(elementSelector, index: number = 0): boolean {

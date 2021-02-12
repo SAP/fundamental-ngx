@@ -1,4 +1,12 @@
-import { click, elementArray, open, scrollIntoView } from '../../driver/wdio';
+import {
+    checkElementScreenshot,
+    click,
+    elementArray,
+    getImageTagBrowserPlatform,
+    open,
+    saveElementScreenshot,
+    scrollIntoView
+} from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 export class CoreBaseComponentPo {
 
@@ -17,6 +25,24 @@ export class CoreBaseComponentPo {
             click(switchers, i);
             checkLtrOrientation(areas, i);
         }
+    }
+
+    saveExampleBaselineScreenshot(specName: string, areas: string = this.exampleAreaContainersArr, options: object = {}): void {
+        const areasArray = elementArray(areas);
+        for (let i = 0; i < areasArray.length; i++) {
+            scrollIntoView(areas, i);
+            saveElementScreenshot(areas, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
+        }
+    }
+
+    compareWithBaseline(specName: string, areas: string = this.exampleAreaContainersArr, options: object = {}): any {
+        const areasArray = elementArray(areas);
+        let diff = 0;
+        for (let i = 0; i < areasArray.length; i++) {
+            scrollIntoView(areas, i);
+            diff +=  checkElementScreenshot(areas, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
+        }
+        return diff;
     }
 
     open(url: string): void {

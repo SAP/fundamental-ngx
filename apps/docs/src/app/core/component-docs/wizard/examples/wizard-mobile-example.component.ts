@@ -26,6 +26,16 @@ export class WizardMobileExampleComponent {
     example2step2status: WizardStepStatus = 'upcoming';
     example2step3status: WizardStepStatus = 'upcoming';
 
+    statusChanged(exampleNumber: number, stepNumber: number, event: WizardStepStatus): void {
+        if (event === 'current') {
+            if (exampleNumber === 1) {
+                this.example1goToStep(stepNumber);
+            } else if (exampleNumber === 2) {
+                this.example2goToStep(stepNumber);
+            }
+        }
+    }
+
     example1goToStep(step: number): void {
         switch (step) {
             case 2: {

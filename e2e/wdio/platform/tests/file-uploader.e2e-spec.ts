@@ -65,4 +65,11 @@ describe('File uploader test suite', function() {
         fileUploaderPO.checkRtlSwitch();
     });
 
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            fileUploaderPO.saveExampleBaselineScreenshot('file-uploader');
+            expect(fileUploaderPO.compareWithBaseline('file-uploader')).toBeLessThan(1);
+        });
+    });
+
 });

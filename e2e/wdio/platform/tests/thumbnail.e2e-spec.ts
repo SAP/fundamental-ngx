@@ -110,10 +110,16 @@ describe('Thumbnail field', function() {
             mouseHoverElement(thumbnailPage.verticalGalleryVideo, i);
             expect(getParentElementCSSProperty(thumbnailPage.verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
         }
-
     });
 
     it('should have rtl orientation', () => {
         thumbnailPage.checkRtlSwitch();
+    });
+
+    xdescribe('Check visual regression', function() {
+        xit('should check examples visual regression', () => {
+            thumbnailPage.saveExampleBaselineScreenshot('thumbnail');
+            expect(thumbnailPage.compareWithBaseline('thumbnail')).toBeLessThan(2);
+        });
     });
 });

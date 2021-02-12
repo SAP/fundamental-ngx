@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { GridListItemOutputEvent } from '@fundamental-ngx/core';
 
 interface GridListItem {
@@ -11,7 +11,8 @@ interface GridListItem {
     selector: 'fd-grid-list-delete-example',
     templateUrl: './grid-list-delete-example.component.html',
     styleUrls: ['./grid-list-delete-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class GridListDeleteExampleComponent {
     list: GridListItem[] = [

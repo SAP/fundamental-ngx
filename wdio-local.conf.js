@@ -1,5 +1,6 @@
 /*require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
+const {join} = require('path');
 require('ts-node').register({ transpileOnly: true });
 exports.config = {
     //
@@ -177,11 +178,19 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     // services: ['chromedriver'],
-    // services: [
-    //     ['sauce', {
-    //         sauceConnect: true
-    //     }]
-    // ],
+    services: [
+        ['image-comparison',
+            // The options
+            {
+                // For local run/debug separate folder for screenshots
+                // will be created as soon as screen resolutions can differ a lot between local systems
+                baselineFolder: join(process.cwd(), './e2e/wdio/tmp/baselineScreenshot/'),
+                formatImageName: '{tag}-{logName}-{width}x{height}',
+                screenshotPath: join(process.cwd(), '.tmp/'),
+                savePerInstance: true,
+                autoSaveBaseline: true,
+            }],
+    ],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber

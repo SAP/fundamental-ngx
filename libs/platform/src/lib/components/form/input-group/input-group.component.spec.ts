@@ -86,7 +86,7 @@ describe('InputGroup component', () => {
 /** Usage with form */
 @Component({
     template: `
-        <fdp-form-group #fg [multiLayout]="true" [formGroup]="form" [object]="initialFormModel">
+        <fdp-form-group #fg [formGroup]="form" [object]="initialFormModel">
             <fdp-form-field
                 #ff
                 id="qty"

@@ -9,6 +9,7 @@
       "node",
       "@wdio/sync",
       "@wdio/jasmine-framework",
+      "wdio-image-comparison-service",
       "axe-core"
     ]
   },
