@@ -2,33 +2,10 @@
 <section class="tsd-panel tsd-comment">
 	<p class="lead"><strong>Selector:&nbsp;</strong>&lt;fdp-table&gt;</p>
 	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>The component that represents a table.
-			A table is a set of tabular data. Line items can support data, images and actions.</p>
-			<p>```html
-				&lt;fdp-table
-				[dataSource]=&quot;source&quot;
-				contentDensity=&quot;compact&quot;
-				selectionMode=&quot;multiple&quot;
-			emptyTableMessage=&quot;No data found&quot;&gt;</p>
-		</div>
-		<p> &lt;fdp-table-toolbar
-			title=&quot;Order Line Items&quot;
-			[hideItemCount]=&quot;false&quot;&gt;
-		</fdp-table-toolbar></p>
-		<p> <fdp-column
-			name="name"
-			key="name"
-			label="Name"
-			align="start">
-		</fdp-column></p>
-		<p> <fdp-column
-			name="description"
-			key="description"
-			label="Description">
-			</fdp-column>
-		</fdp-table></p>
-		<pre><code></code></pre>
+		<dl class="tsd-comment-tags">
+			<dt class="fd-tsd-comment-tag-pill">dynamic</dt>
+			<dd></dd>
+		</dl>
 	</div>
 </section>
 <section class="tsd-panel tsd-type-parameters">
@@ -58,10 +35,27 @@
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 		<li><span class="tsd-signature-type">OnChanges</span></li>
+		<li><span class="tsd-signature-type">OnInit</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="bodyheight" class="tsd-anchor"></a>
+		<h3>body<wbr>Height</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">body<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L173">libs/platform/src/lib/components/table/table.component.ts:173</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Table body height.</p>
+			</div>
+		</div>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="contentdensity" class="tsd-anchor"></a>
 		<h3>content<wbr>Density</h3>
@@ -69,7 +63,7 @@
 		<div class="tsd-signature tsd-kind-icon">content<wbr>Density<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensity</span><span class="tsd-signature-symbol"> = ContentDensity.COZY</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L149">libs/platform/src/lib/components/table/table.component.ts:149</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L153">libs/platform/src/lib/components/table/table.component.ts:153</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -85,7 +79,7 @@
 		<div class="tsd-signature tsd-kind-icon">empty<wbr>Table<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;No data found&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L165">libs/platform/src/lib/components/table/table.component.ts:165</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L181">libs/platform/src/lib/components/table/table.component.ts:181</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -101,7 +95,7 @@
 		<div class="tsd-signature tsd-kind-icon">freeze<wbr>Columns<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L145">libs/platform/src/lib/components/table/table.component.ts:145</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L149">libs/platform/src/lib/components/table/table.component.ts:149</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -117,7 +111,7 @@
 		<div class="tsd-signature tsd-kind-icon">initial<wbr>Filter<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionFilter</span><span class="tsd-signature-symbol">[]</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L193">libs/platform/src/lib/components/table/table.component.ts:193</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L209">libs/platform/src/lib/components/table/table.component.ts:209</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -133,7 +127,7 @@
 		<div class="tsd-signature tsd-kind-icon">initial<wbr>Group<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">[]</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L197">libs/platform/src/lib/components/table/table.component.ts:197</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L213">libs/platform/src/lib/components/table/table.component.ts:213</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -149,7 +143,7 @@
 		<div class="tsd-signature tsd-kind-icon">initial<wbr>Sort<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionSort</span><span class="tsd-signature-symbol">[]</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L189">libs/platform/src/lib/components/table/table.component.ts:189</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L205">libs/platform/src/lib/components/table/table.component.ts:205</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -165,12 +159,28 @@
 		<div class="tsd-signature tsd-kind-icon">initial<wbr>Visible<wbr>Columns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L185">libs/platform/src/lib/components/table/table.component.ts:185</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L201">libs/platform/src/lib/components/table/table.component.ts:201</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Initial visible columns. Consist of a list of unique column names</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="loading" class="tsd-anchor"></a>
+		<h3>loading</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L177">libs/platform/src/lib/components/table/table.component.ts:177</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Loading state</p>
 			</div>
 		</div>
 	</section>
@@ -181,7 +191,7 @@
 		<div class="tsd-signature tsd-kind-icon">no<wbr>Body<wbr>Borders<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L181">libs/platform/src/lib/components/table/table.component.ts:181</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L197">libs/platform/src/lib/components/table/table.component.ts:197</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -197,7 +207,7 @@
 		<div class="tsd-signature tsd-kind-icon">no<wbr>Borders<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L177">libs/platform/src/lib/components/table/table.component.ts:177</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L193">libs/platform/src/lib/components/table/table.component.ts:193</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -213,7 +223,7 @@
 		<div class="tsd-signature tsd-kind-icon">no<wbr>Horizontal<wbr>Borders<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L169">libs/platform/src/lib/components/table/table.component.ts:169</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L185">libs/platform/src/lib/components/table/table.component.ts:185</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -229,7 +239,7 @@
 		<div class="tsd-signature tsd-kind-icon">no<wbr>Vertical<wbr>Borders<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L173">libs/platform/src/lib/components/table/table.component.ts:173</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L189">libs/platform/src/lib/components/table/table.component.ts:189</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -242,10 +252,10 @@
 		<a name="pagescrolling" class="tsd-anchor"></a>
 		<h3>page<wbr>Scrolling</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">page<wbr>Scrolling<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<div class="tsd-signature tsd-kind-icon">page<wbr>Scrolling<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L157">libs/platform/src/lib/components/table/table.component.ts:157</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L161">libs/platform/src/lib/components/table/table.component.ts:161</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -255,13 +265,29 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="pagescrollingthreshold" class="tsd-anchor"></a>
+		<h3>page<wbr>Scrolling<wbr>Threshold</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">page<wbr>Scrolling<wbr>Threshold<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 80</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L169">libs/platform/src/lib/components/table/table.component.ts:169</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Page scrolling threshold in px.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="pagesize" class="tsd-anchor"></a>
 		<h3>page<wbr>Size</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">page<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<div class="tsd-signature tsd-kind-icon">page<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = null</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L161">libs/platform/src/lib/components/table/table.component.ts:161</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L165">libs/platform/src/lib/components/table/table.component.ts:165</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -277,7 +303,7 @@
 		<div class="tsd-signature tsd-kind-icon">selection<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectionMode</span><span class="tsd-signature-symbol"> = SelectionMode.NONE</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L153">libs/platform/src/lib/components/table/table.component.ts:153</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L157">libs/platform/src/lib/components/table/table.component.ts:157</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -298,7 +324,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L128">libs/platform/src/lib/components/table/table.component.ts:128</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L132">libs/platform/src/lib/components/table/table.component.ts:132</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -312,7 +338,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L122">libs/platform/src/lib/components/table/table.component.ts:122</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L126">libs/platform/src/lib/components/table/table.component.ts:126</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -343,7 +369,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L139">libs/platform/src/lib/components/table/table.component.ts:139</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L143">libs/platform/src/lib/components/table/table.component.ts:143</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -356,7 +382,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L136">libs/platform/src/lib/components/table/table.component.ts:136</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L140">libs/platform/src/lib/components/table/table.component.ts:140</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -384,7 +410,7 @@
 		<div class="tsd-signature tsd-kind-icon">column<wbr>Freeze<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableColumnFreezeEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;TableColumnFreezeEvent&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L223">libs/platform/src/lib/components/table/table.component.ts:223</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L239">libs/platform/src/lib/components/table/table.component.ts:239</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -400,7 +426,7 @@
 		<div class="tsd-signature tsd-kind-icon">columns<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableColumnsChangeEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;TableColumnsChangeEvent&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L219">libs/platform/src/lib/components/table/table.component.ts:219</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L235">libs/platform/src/lib/components/table/table.component.ts:235</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -416,7 +442,7 @@
 		<div class="tsd-signature tsd-kind-icon">filter<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableFilterChangeEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;TableFilterChangeEvent&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L211">libs/platform/src/lib/components/table/table.component.ts:211</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L227">libs/platform/src/lib/components/table/table.component.ts:227</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -432,7 +458,7 @@
 		<div class="tsd-signature tsd-kind-icon">group<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableGroupChangeEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;TableGroupChangeEvent&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L215">libs/platform/src/lib/components/table/table.component.ts:215</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L231">libs/platform/src/lib/components/table/table.component.ts:231</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -448,7 +474,7 @@
 		<div class="tsd-signature tsd-kind-icon">row<wbr>Selection<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRowSelectionChangeEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;TableRowSelectionChangeEvent&lt;T&gt;&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L201">libs/platform/src/lib/components/table/table.component.ts:201</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L217">libs/platform/src/lib/components/table/table.component.ts:217</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -464,7 +490,7 @@
 		<div class="tsd-signature tsd-kind-icon">sort<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableSortChangeEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;TableSortChangeEvent&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L207">libs/platform/src/lib/components/table/table.component.ts:207</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L223">libs/platform/src/lib/components/table/table.component.ts:223</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -484,7 +510,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from <span>Table</span>.<span>openTableColumnSettings</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.ts#L26">libs/platform/src/lib/components/table/table.ts:26</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.ts#L26">libs/platform/src/lib/components/table/table.ts:26</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -501,7 +527,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from <span>Table</span>.<span>openTableFilterSettings</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.ts#L20">libs/platform/src/lib/components/table/table.ts:20</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.ts#L20">libs/platform/src/lib/components/table/table.ts:20</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -518,7 +544,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from <span>Table</span>.<span>openTableGroupSettings</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.ts#L23">libs/platform/src/lib/components/table/table.ts:23</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.ts#L23">libs/platform/src/lib/components/table/table.ts:23</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -535,7 +561,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from <span>Table</span>.<span>openTableSortSettings</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.ts#L17">libs/platform/src/lib/components/table/table.ts:17</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.ts#L17">libs/platform/src/lib/components/table/table.ts:17</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -559,7 +585,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>addFilter</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L461">libs/platform/src/lib/components/table/table.component.ts:461</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L493">libs/platform/src/lib/components/table/table.component.ts:493</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -589,7 +615,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>addGroup</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L473">libs/platform/src/lib/components/table/table.component.ts:473</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L505">libs/platform/src/lib/components/table/table.component.ts:505</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -619,7 +645,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>addSort</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L449">libs/platform/src/lib/components/table/table.component.ts:449</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L481">libs/platform/src/lib/components/table/table.component.ts:481</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -649,7 +675,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>filter</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L455">libs/platform/src/lib/components/table/table.component.ts:455</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L487">libs/platform/src/lib/components/table/table.component.ts:487</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -679,7 +705,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>freezeToColumn</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L489">libs/platform/src/lib/components/table/table.component.ts:489</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L521">libs/platform/src/lib/components/table/table.component.ts:521</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -709,7 +735,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>getTableColumns</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L438">libs/platform/src/lib/components/table/table.component.ts:438</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L470">libs/platform/src/lib/components/table/table.component.ts:470</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -728,7 +754,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>getTableState</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L428">libs/platform/src/lib/components/table/table.component.ts:428</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L460">libs/platform/src/lib/components/table/table.component.ts:460</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -752,7 +778,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>group</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L467">libs/platform/src/lib/components/table/table.component.ts:467</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L499">libs/platform/src/lib/components/table/table.component.ts:499</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -782,7 +808,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>search</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L507">libs/platform/src/lib/components/table/table.component.ts:507</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L539">libs/platform/src/lib/components/table/table.component.ts:539</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -812,7 +838,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>setColumns</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L483">libs/platform/src/lib/components/table/table.component.ts:483</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L515">libs/platform/src/lib/components/table/table.component.ts:515</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -835,6 +861,36 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="setcurrentpage" class="tsd-anchor"></a>
+		<h3>set<wbr>Current<wbr>Page</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Current<wbr>Page<span class="tsd-signature-symbol">(</span>currentPage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides <span>Table</span>.<span>setCurrentPage</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L545">libs/platform/src/lib/components/table/table.component.ts:545</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Search in table</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>currentPage: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 		<a name="setheadercolumnfilteringdisabled" class="tsd-anchor"></a>
 		<h3>set<wbr>Header<wbr>Column<wbr>Filtering<wbr>Disabled</h3>
 		<!-- {log decorators} -->
@@ -846,7 +902,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>setHeaderColumnFilteringDisabled</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L537">libs/platform/src/lib/components/table/table.component.ts:537</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L575">libs/platform/src/lib/components/table/table.component.ts:575</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -876,7 +932,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>setTableState</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L433">libs/platform/src/lib/components/table/table.component.ts:433</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L465">libs/platform/src/lib/components/table/table.component.ts:465</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -906,7 +962,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>showColumnSettingsInToolbar</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L531">libs/platform/src/lib/components/table/table.component.ts:531</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L569">libs/platform/src/lib/components/table/table.component.ts:569</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -936,7 +992,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>showFilterSettingsInToolbar</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L519">libs/platform/src/lib/components/table/table.component.ts:519</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L557">libs/platform/src/lib/components/table/table.component.ts:557</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -966,7 +1022,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>showGroupSettingsInToolbar</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L525">libs/platform/src/lib/components/table/table.component.ts:525</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L563">libs/platform/src/lib/components/table/table.component.ts:563</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -996,7 +1052,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>showSortSettingsInToolbar</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L513">libs/platform/src/lib/components/table/table.component.ts:513</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L551">libs/platform/src/lib/components/table/table.component.ts:551</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1026,7 +1082,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>sort</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L443">libs/platform/src/lib/components/table/table.component.ts:443</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L475">libs/platform/src/lib/components/table/table.component.ts:475</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1056,7 +1112,7 @@
 				<aside class="tsd-sources">
 					<p>Overrides <span>Table</span>.<span>unfreeze</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/table/table.component.ts#L497">libs/platform/src/lib/components/table/table.component.ts:497</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/table/table.component.ts#L529">libs/platform/src/lib/components/table/table.component.ts:529</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

@@ -11,31 +11,31 @@
 		<p>Well behaved form that has information side by side in multiple
 		columns needs to also know how to merge properly.</p>
 		<p>Just to get the idea about the structure without actual input components inside</p>
-		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-group</span> [<span class="hljs-attr">hintPlacement</span>]=<span class="hljs-string">&quot;&#x27;inline&#x27;&quot;</span> [<span class="hljs-attr">multiLayout</span>]=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field A&#x27;&quot;</span> [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;10&quot;</span> <span class="hljs-attr">zone</span>=<span class="hljs-string">&quot;zLeft&quot;</span>&gt;</span>
+		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-group</span> [<span class="hljs-attr">hintPlacement</span>]=<span class="hljs-string">&quot;&#x27;inline&#x27;&quot;</span> <span class="hljs-attr">columnLayout</span>=<span class="hljs-string">&quot;XL2-L2-M1-S1&quot;</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field A&#x27;&quot;</span> [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;10&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span>
    <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-form-field</span>&gt;</span>
 
-   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field B&#x27;&quot;</span> [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;30&quot;</span> <span class="hljs-attr">zone</span>=<span class="hljs-string">&quot;zLeft&quot;</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field B&#x27;&quot;</span> [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;30&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span>
    <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-form-field</span>&gt;</span>
 
-   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field C&#x27;&quot;</span>  [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">zone</span>=<span class="hljs-string">&quot;zLeft&quot;</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field C&#x27;&quot;</span>  [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span>
    <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-form-field</span>&gt;</span>
 
-   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;Field D&quot;</span>  [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">zone</span>=<span class="hljs-string">&quot;zRight&quot;</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;Field D&quot;</span>  [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>
    <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-form-field</span>&gt;</span>
 
 
-   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field E&#x27;&quot;</span> [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;30&quot;</span> <span class="hljs-attr">zone</span>=<span class="hljs-string">&quot;zRight&quot;</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">fdp-form-field</span> [<span class="hljs-attr">id</span>]=<span class="hljs-string">&quot;&#x27;Field E&#x27;&quot;</span> [<span class="hljs-attr">rank</span>]=<span class="hljs-string">&quot;30&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>
    <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-form-field</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">fdp-form-group</span>&gt;</span>
 
 </code></pre>
 		<p>Which can be translated like this
-			[Field A] - Left, rank 10
-			[Field B] - Left, rank 30
-			[Field C] - Left, rank 20
-			[Field D] - Right, rank 20
-		[Field E] - Right, rank 30</p>
+			[Field A] - First column, rank 10
+			[Field B] - First column, rank 30
+			[Field C] - First column, rank 20
+			[Field D] - Second column, rank 20
+		[Field E] - Second column, rank 30</p>
 		<p>What we expect that it creates following form with two column layout:
 			[Field A]      [Field D]
 			[Field C]      [Field E]
@@ -86,9 +86,26 @@
 		<div class="tsd-signature tsd-kind-icon">bottom<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L163">libs/platform/src/lib/components/form/form-group/form-group.component.ts:163</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L166">libs/platform/src/lib/components/form/form-group/form-group.component.ts:166</a></li>
 			</ul>
 		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="columnlayout" class="tsd-anchor"></a>
+		<h3>column<wbr>Layout</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L205">libs/platform/src/lib/components/form/form-group/form-group.component.ts:205</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>specify the column layout in the format <code>XLn-Ln-Mn-Sn</code> where n is the number of columns and can be different for each size.
+				eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L, and M sizes and single-column layout for S size.</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="compact" class="tsd-anchor"></a>
@@ -97,7 +114,7 @@
 		<div class="tsd-signature tsd-kind-icon">compact<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L146">libs/platform/src/lib/components/form/form-group/form-group.component.ts:146</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L149">libs/platform/src/lib/components/form/form-group/form-group.component.ts:149</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -108,7 +125,7 @@
 		<div class="tsd-signature tsd-kind-icon">editable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L140">libs/platform/src/lib/components/form/form-group/form-group.component.ts:140</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L143">libs/platform/src/lib/components/form/form-group/form-group.component.ts:143</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -119,7 +136,7 @@
 		<div class="tsd-signature tsd-kind-icon">form<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormGroup</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L152">libs/platform/src/lib/components/form/form-group/form-group.component.ts:152</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L155">libs/platform/src/lib/components/form/form-group/form-group.component.ts:155</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -130,7 +147,7 @@
 		<div class="tsd-signature tsd-kind-icon">i18<wbr>Strings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L176">libs/platform/src/lib/components/form/form-group/form-group.component.ts:176</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L179">libs/platform/src/lib/components/form/form-group/form-group.component.ts:179</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -148,7 +165,7 @@
 		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L134">libs/platform/src/lib/components/form/form-group/form-group.component.ts:134</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L137">libs/platform/src/lib/components/form/form-group/form-group.component.ts:137</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -156,10 +173,10 @@
 		<a name="labellayout" class="tsd-anchor"></a>
 		<h3>label<wbr>Layout</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">label<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LabelLayout</span><span class="tsd-signature-symbol"> = &quot;vertical&quot;</span></div>
+		<div class="tsd-signature tsd-kind-icon">label<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LabelLayout</span><span class="tsd-signature-symbol"> = &quot;horizontal&quot;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L149">libs/platform/src/lib/components/form/form-group/form-group.component.ts:149</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L152">libs/platform/src/lib/components/form/form-group/form-group.component.ts:152</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -170,7 +187,7 @@
 		<div class="tsd-signature tsd-kind-icon">main<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L160">libs/platform/src/lib/components/form/form-group/form-group.component.ts:160</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L163">libs/platform/src/lib/components/form/form-group/form-group.component.ts:163</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -181,7 +198,7 @@
 		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L137">libs/platform/src/lib/components/form/form-group/form-group.component.ts:137</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L140">libs/platform/src/lib/components/form/form-group/form-group.component.ts:140</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -192,7 +209,7 @@
 		<div class="tsd-signature tsd-kind-icon">no<wbr>Label<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L143">libs/platform/src/lib/components/form/form-group/form-group.component.ts:143</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L146">libs/platform/src/lib/components/form/form-group/form-group.component.ts:146</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -203,7 +220,7 @@
 		<div class="tsd-signature tsd-kind-icon">object<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L168">libs/platform/src/lib/components/form/form-group/form-group.component.ts:168</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L171">libs/platform/src/lib/components/form/form-group/form-group.component.ts:171</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -219,7 +236,7 @@
 		<div class="tsd-signature tsd-kind-icon">top<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L157">libs/platform/src/lib/components/form/form-group/form-group.component.ts:157</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L160">libs/platform/src/lib/components/form/form-group/form-group.component.ts:160</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -240,7 +257,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L179">libs/platform/src/lib/components/form/form-group/form-group.component.ts:179</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L182">libs/platform/src/lib/components/form/form-group/form-group.component.ts:182</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HintPlacement</span></h4>
@@ -248,46 +265,13 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L183">libs/platform/src/lib/components/form/form-group/form-group.component.ts:183</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L186">libs/platform/src/lib/components/form/form-group/form-group.component.ts:186</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
 						<h5>value: <span class="tsd-signature-type">HintPlacement</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="multilayout" class="tsd-anchor"></a>
-		<h3>multi<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> multiLayout<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> multiLayout<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L189">libs/platform/src/lib/components/form/form-group/form-group.component.ts:189</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L193">libs/platform/src/lib/components/form/form-group/form-group.component.ts:193</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -306,7 +290,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L198">libs/platform/src/lib/components/form/form-group/form-group.component.ts:198</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L192">libs/platform/src/lib/components/form/form-group/form-group.component.ts:192</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -314,7 +298,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L202">libs/platform/src/lib/components/form/form-group/form-group.component.ts:202</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L196">libs/platform/src/lib/components/form/form-group/form-group.component.ts:196</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -337,7 +321,7 @@
 		<div class="tsd-signature tsd-kind-icon">on<wbr>Submit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter&lt;any&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L210">libs/platform/src/lib/components/form/form-group/form-group.component.ts:210</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L211">libs/platform/src/lib/components/form/form-group/form-group.component.ts:211</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -355,7 +339,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L235">libs/platform/src/lib/components/form/form-group/form-group.component.ts:235</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L240">libs/platform/src/lib/components/form/form-group/form-group.component.ts:240</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -381,29 +365,18 @@
 		<div class="tsd-signature tsd-kind-icon">_destroyed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Subject&lt;void&gt;()</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L235">libs/platform/src/lib/components/form/form-group/form-group.component.ts:235</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="bzone" class="tsd-anchor"></a>
-		<h3>b<wbr>Zone</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">b<wbr>Zone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GroupField</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L217">libs/platform/src/lib/components/form/form-group/form-group.component.ts:217</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L240">libs/platform/src/lib/components/form/form-group/form-group.component.ts:240</a></li>
 			</ul>
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-		<a name="formfieldchildren" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> form<wbr>Field<wbr>Children</h3>
+		<a name="formchildren" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> form<wbr>Children</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Field<wbr>Children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormField</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormFieldGroup</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = []</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L229">libs/platform/src/lib/components/form/form-group/form-group.component.ts:229</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L235">libs/platform/src/lib/components/form/form-group/form-group.component.ts:235</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -418,42 +391,93 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="formrows" class="tsd-anchor"></a>
+		<h3>form<wbr>Rows</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L223">libs/platform/src/lib/components/form/form-group/form-group.component.ts:223</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Packed fields which should be rendered</p>
+			</div>
+		</div>
+		<div class="tsd-type-declaration">
+			<h4>Type declaration</h4>
+			<ul class="tsd-parameters">
+				<li class="tsd-parameter-index-signature">
+					<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">FieldColumn</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FieldGroup</span></h5>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="i18template" class="tsd-anchor"></a>
 		<h3>i18<wbr>Template</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">i18<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L207">libs/platform/src/lib/components/form/form-group/form-group.component.ts:207</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L208">libs/platform/src/lib/components/form/form-group/form-group.component.ts:208</a></li>
 			</ul>
 		</aside>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="mzone" class="tsd-anchor"></a>
-		<h3>m<wbr>Zone</h3>
+		<a name="lgcolumnsnumber" class="tsd-anchor"></a>
+		<h3>lg<wbr>Columns<wbr>Number</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">m<wbr>Zone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GroupField</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">lg<wbr>Columns<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L215">libs/platform/src/lib/components/form/form-group/form-group.component.ts:215</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L216">libs/platform/src/lib/components/form/form-group/form-group.component.ts:216</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="mdcolumnsnumber" class="tsd-anchor"></a>
+		<h3>md<wbr>Columns<wbr>Number</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">md<wbr>Columns<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L217">libs/platform/src/lib/components/form/form-group/form-group.component.ts:217</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="xlcol" class="tsd-anchor"></a>
+		<h3>xl<wbr>Col</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">xl<wbr>Col<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L220">libs/platform/src/lib/components/form/form-group/form-group.component.ts:220</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Cached fields so we don&#39;t have recalculate them every time</p>
+				<p>User responsive layout</p>
 			</div>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="tzone" class="tsd-anchor"></a>
-		<h3>t<wbr>Zone</h3>
+		<a name="xlcolumnsnumber" class="tsd-anchor"></a>
+		<h3>xl<wbr>Columns<wbr>Number</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">t<wbr>Zone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GroupField</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<div class="tsd-signature tsd-kind-icon">xl<wbr>Columns<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L216">libs/platform/src/lib/components/form/form-group/form-group.component.ts:216</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L215">libs/platform/src/lib/components/form/form-group/form-group.component.ts:215</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>User specific</p>
+			</div>
+		</div>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -469,7 +493,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L273">libs/platform/src/lib/components/form/form-group/form-group.component.ts:273</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L285">libs/platform/src/lib/components/form/form-group/form-group.component.ts:285</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -496,7 +520,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L263">libs/platform/src/lib/components/form/form-group/form-group.component.ts:263</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L271">libs/platform/src/lib/components/form/form-group/form-group.component.ts:271</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -506,6 +530,54 @@
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="addformfieldgroup" class="tsd-anchor"></a>
+		<h3>add<wbr>Form<wbr>Field<wbr>Group</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">add<wbr>Form<wbr>Field<wbr>Group<span class="tsd-signature-symbol">(</span>formFieldGroup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormFieldGroup</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L276">libs/platform/src/lib/components/form/form-group/form-group.component.ts:276</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>formFieldGroup: <span class="tsd-signature-type">FormFieldGroup</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="isfieldgrouprow" class="tsd-anchor"></a>
+		<h3>is<wbr>Field<wbr>Group<wbr>Row</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">is<wbr>Field<wbr>Group<wbr>Row<span class="tsd-signature-symbol">(</span>row<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">KeyValue</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FieldColumn</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">FieldGroup</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FieldColumn</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L305">libs/platform/src/lib/components/form/form-group/form-group.component.ts:305</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>row: <span class="tsd-signature-type">KeyValue</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FieldColumn</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">FieldGroup</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FieldColumn</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -520,7 +592,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L247">libs/platform/src/lib/components/form/form-group/form-group.component.ts:247</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L252">libs/platform/src/lib/components/form/form-group/form-group.component.ts:252</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -538,7 +610,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L254">libs/platform/src/lib/components/form/form-group/form-group.component.ts:254</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L262">libs/platform/src/lib/components/form/form-group/form-group.component.ts:262</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -556,7 +628,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L258">libs/platform/src/lib/components/form/form-group/form-group.component.ts:258</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L266">libs/platform/src/lib/components/form/form-group/form-group.component.ts:266</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -574,7 +646,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L241">libs/platform/src/lib/components/form/form-group/form-group.component.ts:241</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L246">libs/platform/src/lib/components/form/form-group/form-group.component.ts:246</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -592,7 +664,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L281">libs/platform/src/lib/components/form/form-group/form-group.component.ts:281</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L293">libs/platform/src/lib/components/form/form-group/form-group.component.ts:293</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -616,7 +688,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L268">libs/platform/src/lib/components/form/form-group/form-group.component.ts:268</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L280">libs/platform/src/lib/components/form/form-group/form-group.component.ts:280</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -634,13 +706,13 @@
 		<h3>track<wbr>ByField<wbr>Name</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">track<wbr>ByField<wbr>Name<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, zoneField<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">GroupField</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+			<li class="tsd-signature tsd-kind-icon">track<wbr>ByField<wbr>Name<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, field<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Field</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/d9d95a5ed/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L285">libs/platform/src/lib/components/form/form-group/form-group.component.ts:285</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L301">libs/platform/src/lib/components/form/form-group/form-group.component.ts:301</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -649,10 +721,34 @@
 						<h5>index: <span class="tsd-signature-type">number</span></h5>
 					</li>
 					<li>
-						<h5>zoneField: <span class="tsd-signature-type">GroupField</span></h5>
+						<h5>field: <span class="tsd-signature-type">Field</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="trackbyfn" class="tsd-anchor"></a>
+		<h3>track<wbr>ByFn</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">track<wbr>ByFn<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7de6ae608/libs/platform/src/lib/components/form/form-group/form-group.component.ts#L297">libs/platform/src/lib/components/form/form-group/form-group.component.ts:297</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>index: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 			</li>
 		</ul>
 	</section>
