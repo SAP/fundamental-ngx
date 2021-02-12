@@ -1,4 +1,4 @@
-import { source } from 'axe-core';
+import { default as axe, source } from 'axe-core';
 
 export function defaultWaitTime(): number {
     return browser.options.waitforTimeout;
@@ -279,6 +279,17 @@ export function getElementLocation(selector: string, index: number = 0, prop?: '
 
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
+}
+
+export function runAxeReport(options: string): object {
+    return browser.executeAsync((options, done) => {
+        axe.run(options, function(err, results) {
+            if (err) {
+                done(err);
+            }
+            done(results);
+        });
+    }, options);
 }
 
 export function clickAndDragElement(locationX: number, locationY: number, newLocationX: number, newLocationY: number): void {

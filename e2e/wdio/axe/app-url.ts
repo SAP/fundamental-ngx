@@ -1,6 +1,5 @@
 export const appURLs  = {
     platform: {
-        root: '/platform',
         actionBar: '/action-bar',
         approvalFlow: '/approval-flow',
         button: '/button',
@@ -42,7 +41,6 @@ export const appURLs  = {
     },
 
     core: {
-        root: '/core',
         actionBar: '/action-bar',
         actionSheet: '/action-sheet',
         alert: '/alert',
