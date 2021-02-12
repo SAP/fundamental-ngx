@@ -34,14 +34,15 @@ jobs:
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       - FIREBASE_TOKEN=$FIREBASE_TOKEN
     before_script:
-    - sudo apt-get install jq
-    - npm install firebase-tools -g
-    - npm run e2e:ci
+      - sudo apt-get install jq
+      - npm install firebase-tools -g
+    script: npm run e2e:ci
     after_success:
-    - npm run e2e-generate-report
+      - npm run e2e-generate-report
+      - ./deploy-to-preview-channel.sh
     after_failure:
-    - npm run e2e-generate-report
-    script: ./deploy-to-preview-channel.sh
+      - npm run e2e-generate-report
+      - ./deploy-to-preview-channel.sh
   - stage: "Pre-release"
     if: branch = main AND type = push
     before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
