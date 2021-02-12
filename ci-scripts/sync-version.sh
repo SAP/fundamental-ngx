@@ -17,6 +17,7 @@ FDSTYLES_VERSION=$(node -p "require('./package.json').dependencies['fundamental-
 FOCUSTRAP_VERSION=$(node -p "require('./package.json').dependencies['focus-trap']")
 HAMMERJS_VERSION=$(node -p "require('./package.json').dependencies['hammerjs']")
 THEMING_VERSION=$(node -p "require('./package.json').dependencies['@sap-theming/theming-base-content']")
+STORE_APP_VERSION=$(node -p "require('./libs/store/package.json').version")
 
 cd ./dist
 
@@ -29,5 +30,6 @@ grep -rl 'FDSTYLES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FDSTYLES_VER_
 grep -rl 'FOCUSTRAP_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FOCUSTRAP_VER_PLACEHOLDER/${FOCUSTRAP_VERSION}/g"
 grep -rl 'THEMING_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/THEMING_VER_PLACEHOLDER/${THEMING_VERSION}/g"
 grep -rl 'HAMMERJS_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/HAMMERJS_VER_PLACEHOLDER/${HAMMERJS_VERSION}/g"
+grep -rl 'STORE_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/STORE_VER_PLACEHOLDER/${STORE_APP_VERSION}/g"
 
 cd ../

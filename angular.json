@@ -295,6 +295,18 @@
             "sourceRoot": "libs/store/src",
             "prefix": "fundamental-ngx",
             "architect": {
+              "build": {
+                "builder": "@nrwl/angular:package",
+                "options": {
+                  "tsConfig": "libs/store/tsconfig.lib.json",
+                  "project": "libs/store/ng-package.json"
+                },
+                "configurations": {
+                  "production": {
+                    "tsConfig": "libs/store/tsconfig.lib.prod.json"
+                  }
+                }
+              },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
