@@ -182,8 +182,9 @@ exports.config = {
         ['image-comparison',
             // The options
             {
-                // Some options, see the docs for more
-                baselineFolder: join(process.cwd(), './e2e/wdio/platform/baselineScreenshot/'),
+                // For local run/debug separate folder for screenshots
+                // will be created as soon as screen resolutions can differ a lot between local systems
+                baselineFolder: join(process.cwd(), './e2e/wdio/tmp/baselineScreenshot/'),
                 formatImageName: '{tag}-{logName}-{width}x{height}',
                 screenshotPath: join(process.cwd(), '.tmp/'),
                 savePerInstance: true,

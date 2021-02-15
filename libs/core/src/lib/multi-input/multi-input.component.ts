@@ -30,7 +30,7 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 import { ListComponent } from '../list/list.component';
-import { BACKSPACE, DELETE, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -120,13 +120,20 @@ export class MultiInputComponent implements
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    displayFn: Function = this.defaultDisplay;
+    displayFn: Function = this._defaultDisplay;
 
     /** Parse function. Used for submitting new tokens. Accepts a string by default.
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    newTokenParseFn: Function = this.defaultParse;
+    newTokenParseFn: Function = this._defaultParse;
+
+    /**
+     * Validate function. Used to check if new token can be added into list.
+     * Works only, when `allowNewTokens` option is enabled.
+     */
+    @Input()
+    newTokenValidateFn: Function = this._defaultTokenValidate;
 
     /** Aria label for the multi input body. */
     @Input()
@@ -415,7 +422,7 @@ export class MultiInputComponent implements
 
     /** @hidden */
     onSubmit(): void {
-        if (this.allowNewTokens) {
+        if (this.allowNewTokens && this.newTokenValidateFn(this.searchTerm)) {
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
             this.handleSelect(true, newToken);
@@ -481,12 +488,19 @@ export class MultiInputComponent implements
         });
     }
 
-    private defaultDisplay(str: string): string {
+    /** @hidden */
+    private _defaultDisplay(str: string): string {
         return str;
     }
 
-    private defaultParse(str: string): string {
+    /** @hidden */
+    private _defaultParse(str: string): string {
         return str;
+    }
+
+    /** @hidden */
+    private _defaultTokenValidate(str: string): boolean {
+        return !!str;
     }
 
     /**

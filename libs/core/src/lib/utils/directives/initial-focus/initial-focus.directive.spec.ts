@@ -1,6 +1,6 @@
 import { InitialFocusDirective } from './initial-focus.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 @Component({
     template: `
@@ -33,14 +33,16 @@ describe('InitialFocusDirective', () => {
         component = fixture.componentInstance;
     });
 
-    it('should focus element', () => {
+    it('should focus element', fakeAsync(() => {
         fixture.detectChanges();
+        tick(10);
         expect(document.activeElement).toBe(component.elementToFocus.nativeElement);
-    });
+    }));
 
-    it('should focus nested element', () => {
+    it('should focus nested element', fakeAsync(() => {
         component.rootElementTabIndex = -1;
         fixture.detectChanges();
+        tick(10);
         expect(document.activeElement).toBe(component.nestedElementToFocus.nativeElement);
-    });
+    }));
 });

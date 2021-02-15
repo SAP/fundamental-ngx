@@ -47,6 +47,7 @@ report.*.json
 allure-report
 allure-results
 .tmp
+e2e/tmp
 
 # System Files
 .DS_Store
