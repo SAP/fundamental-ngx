@@ -4,15 +4,15 @@ import ActionData from '../fixtures/appData/action-list-item-contents';
 import { acceptAlert, click, getAttributeByName, getElementArrayLength, refreshPage, waitForPresent } from '../../driver/wdio';
 
 describe('Action List Item Test Suite:', function() {
-    const actionListPg = new ActionListItemPo();
+    const actionListPage = new ActionListItemPo();
     const {
         actionBtns,
         actionLists,
         actionSections
-    } = actionListPg;
+    } = actionListPage;
 
     beforeAll(() => {
-        actionListPg.open();
+        actionListPage.open();
     }, 1);
 
     afterEach(() => {
@@ -39,14 +39,14 @@ describe('Action List Item Test Suite:', function() {
 
     describe('Orientation check:', function() {
         it('should check RTL and LTR orientation', () => {
-            actionListPg.checkRtlSwitch();
+            actionListPage.checkRtlSwitch();
         });
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            actionListPg.saveExampleBaselineScreenshot('action-list-item');
-            expect(actionListPg.compareWithBaseline('action-list-item')).toBeLessThan(1);
+            actionListPage.saveExampleBaselineScreenshot('action-list-item');
+            expect(actionListPage.compareWithBaseline('action-list-item')).toBeLessThan(1);
         });
     });
 });

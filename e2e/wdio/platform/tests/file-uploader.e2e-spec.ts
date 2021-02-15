@@ -12,17 +12,17 @@ import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';
 
 describe('File uploader test suite', function() {
-    const fileUploaderPO: FileUploaderPo = new FileUploaderPo();
+    const fileUploaderPage: FileUploaderPo = new FileUploaderPo();
     const {
         fileUploaderRoot,
         fileUploaderInput,
         fileUploaderInputFile,
         browseButton,
         fileSelectedText
-    } = fileUploaderPO;
+    } = fileUploaderPage;
 
     beforeAll(() => {
-        fileUploaderPO.open();
+        fileUploaderPage.open();
     }, 1);
 
     afterEach(() => {
@@ -69,13 +69,13 @@ describe('File uploader test suite', function() {
     });
 
     it('should check LTR and RTL orientation', () => {
-        fileUploaderPO.checkRtlSwitch();
+        fileUploaderPage.checkRtlSwitch();
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            fileUploaderPO.saveExampleBaselineScreenshot('file-uploader');
-            expect(fileUploaderPO.compareWithBaseline('file-uploader')).toBeLessThan(1);
+            fileUploaderPage.saveExampleBaselineScreenshot('file-uploader');
+            expect(fileUploaderPage.compareWithBaseline('file-uploader')).toBeLessThan(1);
         });
     });
 

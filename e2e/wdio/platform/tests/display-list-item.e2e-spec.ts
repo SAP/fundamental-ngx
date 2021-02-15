@@ -4,7 +4,7 @@ import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '
 import DisplayListData from '../fixtures/appData/display-list-item-contents';
 
 describe('Display List Item test suite:', function() {
-    const displayListPg = new DisplayListItemPo();
+    const displayListPage = new DisplayListItemPo();
     const {
         displayLinks,
         cozyDisplayTitles,
@@ -13,10 +13,10 @@ describe('Display List Item test suite:', function() {
         declarativeDisplayLinks,
         declarativeDisplayTitles,
         declarativeSection
-    } = displayListPg;
+    } = displayListPage;
 
     beforeAll(() => {
-        displayListPg.open();
+        displayListPage.open();
     }, 1);
 
     afterEach(() => {
@@ -38,7 +38,7 @@ describe('Display List Item test suite:', function() {
             click(displayLinks, 0);
             const newUrl = getCurrentUrl();
             expect(newUrl).toContain(DisplayListData.navUrl);
-            displayListPg.open();
+            displayListPage.open();
         });
     });
 
@@ -53,14 +53,14 @@ describe('Display List Item test suite:', function() {
 
     describe('Orientation check:', function() {
         it('should check RTL and LTR orientation', () => {
-            displayListPg.checkRtlSwitch();
+            displayListPage.checkRtlSwitch();
         });
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            displayListPg.saveExampleBaselineScreenshot('display-list-item');
-            expect(displayListPg.compareWithBaseline('display-list-item')).toBeLessThan(1);
+            displayListPage.saveExampleBaselineScreenshot('display-list-item');
+            expect(displayListPage.compareWithBaseline('display-list-item')).toBeLessThan(1);
         });
     });
 

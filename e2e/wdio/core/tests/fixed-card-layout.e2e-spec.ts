@@ -15,7 +15,7 @@ import {
 } from '../../driver/wdio';
 
 describe('Fixed card layout test suite', function() {
-    const fxdCardLayoutPg = new FixedCardLayoutPo();
+    const fxdCardLayoutPage = new FixedCardLayoutPo();
     const {
         hideCardBtnArr,
         cardDivArr,
@@ -29,10 +29,10 @@ describe('Fixed card layout test suite', function() {
         disabledCardContent,
         disabledCardDiv,
         pageHeader
-    } = fxdCardLayoutPg;
+    } = fxdCardLayoutPage;
 
     beforeAll(() => {
-        fxdCardLayoutPg.open();
+        fxdCardLayoutPage.open();
     }, 1);
 
     afterEach(() => {
@@ -182,7 +182,7 @@ describe('Fixed card layout test suite', function() {
 
         describe('Check orientation', function() {
             it('should check LTR and RTL orientation', () => {
-                fxdCardLayoutPg.checkRtlSwitch();
+                fxdCardLayoutPage.checkRtlSwitch();
             });
         });
     });

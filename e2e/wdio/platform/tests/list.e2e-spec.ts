@@ -25,7 +25,7 @@ import {
 } from '../../driver/wdio';
 
 describe('List test suite:', function() {
-    const listPg = new ListPo();
+    const listPage = new ListPo();
     const {
         noBorderListItems, noBorderCompactList, noBorderList, footerListItems, footerCompactList, footer, groupHeader,
         groupHeaderListItems, groupCompactList, interactiveListItems, counterListItems, counterCompactList,
@@ -34,10 +34,10 @@ describe('List test suite:', function() {
         navListLink, vScrollList, vScrollListItems, vScrollLoadIcon, loadList, loadListItems, loadShowMoreBtn,
         loadIcon, btnList, btnListItems, btnDeleteBtn, btnEditBtn, noDataListItems, noDataCompactList, noSepList,
         noSepListItems, unreadListAttr, unreadListItems, unreadListItemText
-    } = listPg;
+    } = listPage;
 
     beforeAll(() => {
-        listPg.open();
+        listPage.open();
     }, 1);
 
     describe('Borderless examples:', function() {
@@ -143,7 +143,7 @@ describe('List test suite:', function() {
             click(navListLink);
             const newUrl = getCurrentUrl();
             expect(newUrl).toContain(ListData.navUrl);
-            listPg.open();
+            listPage.open();
         });
     });
 
@@ -254,14 +254,14 @@ describe('List test suite:', function() {
 
     describe('check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            listPg.checkRtlSwitch();
+            listPage.checkRtlSwitch();
         });
     });
     // TODO: Failed. Unable to debug at the moment.
     xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            listPg.saveExampleBaselineScreenshot('list');
-            expect(listPg.compareWithBaseline('list')).toBeLessThan(1);
+            listPage.saveExampleBaselineScreenshot('list');
+            expect(listPage.compareWithBaseline('list')).toBeLessThan(1);
         });
     });
 });

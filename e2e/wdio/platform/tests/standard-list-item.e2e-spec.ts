@@ -9,17 +9,17 @@ import {
 } from '../../helper/assertion-helper';
 
 describe('Standard List Item test suite:', function() {
-    const standardListPg = new StandardListItemPo();
+    const standardListPage = new StandardListItemPo();
     const {
         sNoBorderList, sNoBorderAttr, sNoBorderByLineList, sNoBorderByLineAttr, sNoBorderAvatar, sNoBorderByLineSection,
         sFooterByLineList, sFooterByLineAvatar, sFooter, sFooterList, sFooterAttr, sGroupHeaderList, sGroupHeaderAttr,
         sGroupHeaderAvatar, sInteractiveAttr, sInteractiveList, sInteractiveLink, sInteractiveAvatar, sSecTypeAttr,
         sSecTypeList, sSecTypeAvatar, sSecTypeListItem, sMultiAttr, sMultiList, sMultiAvatar, sMultiToolbar,
         sMultiCheckbox, sInvtAttr, sInvtList, sInvtAvatar, sInvtListItem
-    } = standardListPg;
+    } = standardListPage;
 
     beforeAll(() => {
-        standardListPg.open();
+        standardListPage.open();
     }, 1);
 
     describe('Standard List Item - Border Less examples:', function() {
@@ -183,14 +183,14 @@ describe('Standard List Item test suite:', function() {
 
     describe('Check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            standardListPg.checkRtlSwitch();
+            standardListPage.checkRtlSwitch();
         });
     });
 
     xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            standardListPg.saveExampleBaselineScreenshot('standard-list-item', {removeElements: $(standardListPg.sFooterByLineAvatar)});
-            expect(standardListPg.compareWithBaseline('standard-list-item', {removeElements: $(standardListPg.sFooterByLineAvatar)})).toEqual(0);
+            standardListPage.saveExampleBaselineScreenshot('standard-list-item', {removeElements: $(standardListPage.sFooterByLineAvatar)});
+            expect(standardListPage.compareWithBaseline('standard-list-item', {removeElements: $(standardListPage.sFooterByLineAvatar)})).toEqual(0);
         });
     });
 });

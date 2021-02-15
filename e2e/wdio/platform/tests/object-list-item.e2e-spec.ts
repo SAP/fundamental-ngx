@@ -14,17 +14,17 @@ import { checkElArrIsClickable, checkElementDisplayed, checkElementText } from '
 import ObjListData from '../fixtures/appData/object-list-item-contents';
 
 describe('Object list item suite:', function() {
-    const objListPg = new ObjectListItemPo();
+    const objListPage = new ObjectListItemPo();
     const {
         allObjsList, allObjAvatars, allObjNumbers, allObjIcons, allObjTitles, allObjAttrStatusRows, objListAttr, objListItem,
         obJListIntro, objListAttributes, objListStatuses, objListSelItem, obJListSelIntro, objListSelAttributes,
         objListSelStatuses, objSelToolbar, objNavLink, objNavList, objNavAttributes, objNavStatuses, objRowNavLink,
         objRowNavList, objRowNavAttributes, objRowNavStatuses, objRowNavToolbar, objDecIntro, objDecAttributes,
         objDecStatuses
-    } = objListPg;
+    } = objListPage;
 
     beforeAll(() => {
-        objListPg.open();
+        objListPage.open();
     }, 1);
 
     afterEach(() => {
@@ -88,7 +88,7 @@ describe('Object list item suite:', function() {
             click(objNavList);
             const currentUrl = getCurrentUrl();
             expect(currentUrl).toContain(ObjListData.navUrl);
-            objListPg.open();
+            objListPage.open();
         });
     });
 
@@ -119,14 +119,14 @@ describe('Object list item suite:', function() {
 
     describe('check orientation', function() {
         it('should check RTL and LTR orientation', () => {
-            objListPg.checkRtlSwitch();
+            objListPage.checkRtlSwitch();
         });
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            objListPg.saveExampleBaselineScreenshot('object-list-item');
-            expect(objListPg.compareWithBaseline('object-list-item')).toBeLessThan(1);
+            objListPage.saveExampleBaselineScreenshot('object-list-item');
+            expect(objListPage.compareWithBaseline('object-list-item')).toBeLessThan(1);
         });
     });
 });
