@@ -51,11 +51,13 @@ $block: fdp-value-help-dialog;
     .fd-dialog__header {
         box-shadow: none;
 
+        $side-padding: 2rem;
+
         .fd-title {
             display: flex;
             align-items: center;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding-left: $side-padding;
+            padding-right: $side-padding;
             min-height: 2.5rem;
             box-shadow: none;
             border-bottom: none;
@@ -118,6 +120,7 @@ $block: fdp-value-help-dialog;
     &__tokens {
         display: flex;
         flex: 1 1 auto;
+        overflow: hidden;
         align-items: center;
         border: 1px solid #89919a;
         border-color: var(--sapContent_ForegroundBorderColor, #89919a);
@@ -126,7 +129,6 @@ $block: fdp-value-help-dialog;
         border-radius: var(--sapElement_BorderCornerRadius, .25rem);
         background: none;
 
-        fd-tokenizer,
         fd-toolbar {
             flex: 1 1 auto;
             overflow: hidden;

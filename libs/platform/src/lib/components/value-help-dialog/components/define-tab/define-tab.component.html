@@ -1,12 +1,13 @@
 <h5 fd-title class="define-condition-title" i18n="@@platformI18nValueHelpDialog.Define.Condition.Title">Product</h5>
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
-    <fd-layout-grid class="condition-row">
+    <fd-layout-grid class="condition-row" [noGap]="true">
         <div fdLayoutGridCol="5">
-            <div fdLayoutGridRow>
+            <!-- <div fdLayoutGridRow> -->
                 <fd-select
                     class="vhd-condition-filters"
                     fdLayoutGridCol
                     colGrow
+                    [class.fd-select-custom-class]="false"
                     i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.StrategyPlaceholder"
                     placeholder="Select a strategy"
                     #sttr
@@ -34,7 +35,7 @@
                         </fd-option>
                     </ng-container>
                 </fd-select>
-            </div>
+            <!-- </div> -->
         </div>
         <div fdLayoutGridCol colGrow *ngIf="item.strategy !== _strategyIncludeValues.empty && item.strategy !== _strategyExcludeValues.not_empty">
             <div fdLayoutGridRow>
@@ -116,17 +117,19 @@
 </ng-container>
 
 
-<fd-layout-grid class="condition-row">
-    <div fdLayoutGridCol colGrow>&nbsp;</div>
-    <div fdLayoutGridCol class="action-col">
-        <button
-            fd-button
-            i18n-label="@@platformI18nValueHelpDialog.AddLabelDefineCondition"
-            i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
-            aria-label="Add new define condition"
-            label="Add"
-            [compact]="true"
-            (click)="addEmptyCondition()"></button>
+<fd-layout-grid class="condition-row new-condition-row" [noGap]="true">
+    <div fdLayoutGridRow>
+        <div fdLayoutGridCol colGrow>&nbsp;</div>
+        <div fdLayoutGridCol class="action-col">
+            <button
+                fd-button
+                i18n-label="@@platformI18nValueHelpDialog.AddLabelDefineCondition"
+                i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
+                aria-label="Add new define condition"
+                label="Add"
+                [compact]="true"
+                (click)="addEmptyCondition()"></button>
+        </div>
     </div>
 </fd-layout-grid>
 

@@ -111,6 +111,7 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
     return undefined;
   }
 
+  /** @hidden */
   _onSelectStrategy(): void {
     this._filterChanged();
   }
