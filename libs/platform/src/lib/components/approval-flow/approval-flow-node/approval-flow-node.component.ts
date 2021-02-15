@@ -56,12 +56,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** Whether node element has carousel end marker. Should be set to 'true' for the last node */
     @Input() renderCarouselEndMarker = false;
 
-    /** Whether to display add node button before in Edit mode */
-    @Input() canAddNodeBefore = false;
-
-    /** Whether to display add node button after in Edit mode */
-    @Input() canAddNodeAfter = false;
-
     /** Whether to display due date warning in status */
     @Input() checkDueDate = false;
 

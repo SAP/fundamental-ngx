@@ -98,8 +98,6 @@
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                         [renderCarouselStartMarker]="(_isCarousel && _metaMap[node.id].isRoot)"
                         [renderCarouselEndMarker]="(_isCarousel && _metaMap[node.id].isLast)"
-                        [canAddNodeBefore]="_metaMap[node.id].canAddNodeBefore"
-                        [canAddNodeAfter]="_metaMap[node.id].canAddNodeAfter"
                         (onNodeClick)="_onNodeClick(node)"
                         (onNodeCheck)="_onNodeCheck(node)"
                         (onAdd)="_addNode(node, $event)"

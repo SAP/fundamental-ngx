@@ -20,10 +20,10 @@
         ></button>
 
         <fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
-            <li *ngIf="canAddNodeBefore" fd-menu-item (click)="menu.close(); onAdd.emit('before')">
+            <li *ngIf="meta.canAddNodeBefore" fd-menu-item (click)="menu.close(); onAdd.emit('before')">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversBefore">Add approvers before</div>
             </li>
-            <li *ngIf="canAddNodeAfter" fd-menu-item (click)="menu.close(); onAdd.emit('after')">
+            <li *ngIf="meta.canAddNodeAfter" fd-menu-item (click)="menu.close(); onAdd.emit('after')">
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversAfter">Add approvers after</div>
             </li>
             <li *ngIf="meta.canAddParallel" fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
@@ -94,10 +94,10 @@
 <ng-container *ngIf="isEdit && blank">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'blank' }"></ng-container>
 </ng-container>
-<ng-container *ngIf="isEdit && (!blank && canAddNodeBefore)">
+<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeBefore)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
-<ng-container *ngIf="isEdit && (!blank && canAddNodeAfter)">
+<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeAfter)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 <ng-template #addNodeButton let-placement="placement">
