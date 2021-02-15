@@ -9,7 +9,9 @@ exports.config = {
     //
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
-    runner: 'local',
+    user: process.env.SAUCE_USERNAME,
+    key: process.env.SAUCE_ACCESS_KEY,
+    region: 'eu',
     //
     // ==================
     // Specify Test Files
@@ -21,10 +23,6 @@ exports.config = {
     //
     specs: [
         './e2e/wdio/**/*.acs-spec.ts'
-    ],
-    // Patterns to exclude.
-    exclude: [
-        './e2e/wdio/**/checkbox-group.e2e-spec.ts',
     ],
     //
     // ============
@@ -54,9 +52,10 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            'goog:chromeOptions': {
-                args: ['--headless'],
-            },
+            'sauce:options': {
+                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+                screenResolution: '1920x1440',
+            }
         },
     ],
     //
@@ -90,7 +89,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost:4200/',
+    baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
@@ -107,11 +106,11 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     // services: ['chromedriver'],
-    // services: [
-    //     ['sauce', {
-    //         sauceConnect: true
-    //     }]
-    // ],
+    services: [
+        ['sauce', {
+            sauceConnect: true
+        }]
+    ],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -211,7 +210,6 @@ exports.config = {
                 domElement.focus();
             }, this);
         }, true);
-        console.log(browser.capabilities.browserVersion);
         browser.resetUrl = 'about:blank';
     }
 

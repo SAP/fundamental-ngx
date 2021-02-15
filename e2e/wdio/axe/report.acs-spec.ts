@@ -12,7 +12,6 @@ describe('Accessibility test', () => {
         for (const pageUrl in appURLs) {
             for (const urls in appURLs[pageUrl]) {
                 open(`/fundamental-ngx#/${pageUrl}${appURLs[pageUrl][urls]}`);
-                pause(800);
                 waitForPresent(title);
                 execute(axe.source);
 
