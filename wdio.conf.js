@@ -230,7 +230,7 @@ exports.config = {
     jasmineNodeOpts: {
         isVerbose: true,
         showColors: true,
-        defaultTimeoutInterval: 700000,
+        defaultTimeoutInterval: 1200000,
         grep: null,
         invertGrep: null
     },
