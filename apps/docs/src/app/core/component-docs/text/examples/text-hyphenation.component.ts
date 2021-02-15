@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./text-hyphenation.component.scss']
 })
 export class TextHyphenationComponent {
-    text = `Lorem ipsum dolor sit amet, con\u00ADsectetur adip\u00ADiscing el\u00ADit, sed do eiusmod tempor incididunt ut labore et do\u00ADlore magna aliqua. Ut enim ad mi\u00ADnim veniam, quis nostrud exer\u00ADcitation ullamco laboris nisi ut aliquip ex ea commodo conse\u00ADquat. Duis aute irure dolor in repre\u00ADhenderit in vo\u00ADluptate velit esse cillum dolore eu fu\u00ADgiat nulla pari\u00ADatur. Excepteur sint occaecat cupidatat non pro\u00ADident, sunt in culpa qui officia deserunt mollit anim id est la\u00ADbo\u00ADrum.`;
+    text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+    textSoftHyphens = 'Lorem ipsum dolor sit amet, con\u00ADsectetur adip\u00ADiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ali\u00ADqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco la\u00ADboris nisi ut aliquip ex ea commodo consequat.';
 }

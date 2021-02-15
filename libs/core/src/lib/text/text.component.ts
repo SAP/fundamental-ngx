@@ -6,6 +6,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+/** Type of hyphenation */
+export type HyphenationType = 'none' | 'manual' | 'auto';
+
 @Component({
     selector: 'fd-text',
     templateUrl: './text.component.html',
@@ -30,19 +33,19 @@ export class TextComponent {
      * Property allowing browsers to render whitespace and tabs
      */
     @Input()
-    whitespaces?: boolean;
+    whitespaces = false;
 
     /**
-     * Property for managing hyphenation, using css rule hyphens. Values: none | manual | auto
+     * Property for managing hyphenation, using css rule hyphens.
      */
     @Input()
-    hyphenation?: string;
+    hyphenation: HyphenationType = 'manual';
 
     /**
      * Option that adds more and less buttons to expand/collapse text
      */
     @Input()
-    expandable?: boolean;
+    expandable = false;
 
     /**
      * Text for more button
