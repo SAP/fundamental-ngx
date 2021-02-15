@@ -20,7 +20,7 @@ export const btnColorArr = [
 export const textColorAttr = 'color';
 export const textAlignmentAttr = 'align-items';
 export const alignmentCenter = 'center';
-export const selectedItem = 'Item Selected = First Item';
+export const selectedItem = 'Item Selected: First Item';
 export const compactAttr = 'ng-reflect-compact';
 export const iconAttr = 'ng-reflect-glyph';
 export const icon = 'world';

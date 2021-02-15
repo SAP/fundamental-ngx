@@ -1,7 +1,7 @@
 import { CheckboxPO } from '../pages/checkbox.po';
 import {
     markingDisplayStyle, disabledCheckboxTitle, a11yCheckboxAriaLabel,
-    a11yCheckboxAriaLabelledBy, checkboxErrorTooltip, checkboxHoverState, checkboxFocusStyle
+    a11yCheckboxAriaLabelledBy, checkboxErrorTooltip, checkboxHoverState, checkboxFocusStyle, checkboxErrorState
 } from '../fixtures/appData/checkbox-page-contents';
 import {
     acceptAlert,
@@ -251,7 +251,7 @@ describe('Checkbox test suite', () => {
             scrollIntoView(checkboxPage.submitBtn);
             clickNextElement(presenceCheckbox);
             expect(getCSSPropertyByName(presenceCheckbox, 'border-bottom-color').value)
-                .toContain(checkboxGPData.checkboxErrorState);
+                .toContain(checkboxErrorState);
              scrollIntoView(checkboxPage.submitBtn);
             mouseHoverElement(checkboxPage.submitBtn);
             waitForElDisplayed(checkboxPage.errorTooltip);
