@@ -78,13 +78,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: Function = () => {};
 
     constructor(
-       private _changeDetRef: ChangeDetectorRef
+       private readonly _changeDetRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
@@ -103,7 +103,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
      * @hidden
      * @param fn User defined function that handles the *onChange* event of the SegmentedButtons.
      */
-    registerOnChange(fn): void {
+    registerOnChange(fn: Function): void {
         this.onChange = fn;
     }
 
@@ -111,7 +111,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
      * @hidden
      * @param fn User defined function that handles the *onTouch* event of the SegmentedButtons.
      */
-    registerOnTouched(fn): void {
+    registerOnTouched(fn: Function): void {
         this.onTouched = fn;
     }
 
@@ -162,19 +162,33 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     /** @hidden */
     private _handleTriggerOnButton(buttonComponent: ButtonComponent): void {
         if (!this._isButtonDisabled(buttonComponent)) {
+            this.onTouched();
 
             if (!this._isButtonSelected(buttonComponent) && !this.toggle) {
                 this._buttons.forEach(button => this._deselectButton(button));
                 this._selectButton(buttonComponent)
+                this._propagateChange();
+                this._detectChanges();
             }
 
             if (this.toggle) {
                 this._toggleButton(buttonComponent);
+                this._propagateChange();
+                this._detectChanges();
             }
-
-            this.onChange(this._getValuesBySelected());
-            this._currentValue = this._getValuesBySelected();
         }
+    }
+
+    /** @hidden */
+    private _propagateChange(): void {
+        this.onChange(this._getValuesBySelected());
+        this._currentValue = this._getValuesBySelected();
+    }
+
+    /** @hidden */
+    private _detectChanges(): void {
+        this._buttons.forEach(button => button.detectChanges());
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
@@ -201,13 +215,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
             return [];
         }
 
-        if (typeof values === 'string') {
-            return this._buttons.filter(button => this._getButtonValue(button) === values)
-        } else {
+        if (Array.isArray(values)) {
             return this._buttons
                 .filter(button =>
                     !!values.find(value => this._getButtonValue(button) === value)
                 );
+        } else {
+            return this._buttons.filter(button => this._getButtonValue(button) === values);
         }
     }
 
@@ -245,7 +259,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         } else {
             this._buttons.forEach(button => button.elementRef().nativeElement.removeAttribute('disabled'));
         }
-        this._changeDetRef.detectChanges();
+        this._detectChanges();
     }
 
     /** @hidden */

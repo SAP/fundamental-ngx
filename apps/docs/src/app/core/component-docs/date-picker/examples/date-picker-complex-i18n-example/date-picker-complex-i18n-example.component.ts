@@ -35,8 +35,4 @@ export class DatePickerComplexI18nExampleComponent {
         this.actualLocale = locale;
         this.datetimeAdapter.setLocale(locale);
     }
-
-    isSelected(locale: string): string {
-        return this.actualLocale === locale ? 'is-selected' : '';
-    }
 }
