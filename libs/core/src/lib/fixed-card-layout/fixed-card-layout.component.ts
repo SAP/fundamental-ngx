@@ -32,9 +32,17 @@ import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-car
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
 const CARD_GAP_WIDTH = 16; // gap=1rem==16px
 const DRAG_START_DELAY = 200;
+let cardRank = 1;
 
 @Directive({ selector: '[fdCardDef]' })
 export class CardDefinitionDirective {
+    /**
+     * Behaves like rank of card.
+     * Useful in creating layout again after drag and drop.
+     */
+    @Input()
+    fdCardDef: number = cardRank++;
+
     constructor(public template: TemplateRef<any>) {}
 }
 
@@ -43,7 +51,14 @@ class Layout {
 }
 
 class CardDropped {
-    constructor(public container: CdkDropList, public previousIndex: number, public currentIndex: number) {}
+    constructor(
+        public container: CdkDropList,
+        public prevContainer: CdkDropList,
+        public previousIndex: number,
+        public currentIndex: number,
+        public layoutColumns: number,
+        public items: CardDefinitionDirective[]
+    ) {}
 }
 
 type CardColumn = CardDefinitionDirective[];
@@ -96,6 +111,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     private _previousNumberOfColumns: number;
 
+    private _cardsArray: Array<CardDefinitionDirective>;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -142,8 +159,6 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     public handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
         if (this.keyboardEventsManager) {
-            console.log('card items: ', this.cardContainers);
-            // passing the event to key manager so we get a change fired
             this.keyboardEventsManager.onKeydown(event);
         }
     }
@@ -157,7 +172,21 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
             event.container.data[event.currentIndex] = event.previousContainer.data[event.previousIndex];
             event.previousContainer.data[event.previousIndex] = targetData;
         }
-        this.cardDraggedDropped.emit(new CardDropped(event.container, event.previousIndex, event.currentIndex));
+        this._adjustCardRank(
+            event.container.data[event.currentIndex],
+            event.previousContainer.data[event.previousIndex]
+        );
+
+        this.cardDraggedDropped.emit(
+            new CardDropped(
+                event.container,
+                event.previousContainer,
+                event.previousIndex,
+                event.currentIndex,
+                this._numberOfColumns,
+                this._cardsArray
+            )
+        );
     }
 
     /** Distribute cards on window resize */
@@ -176,6 +205,13 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     accessibilitySetup(): void {
         this.keyboardEventsManager = new FocusKeyManager(this.cardContainers).withWrap();
+    }
+
+    /** @hidden Method to update rank after cards are dragged */
+    private _adjustCardRank(draggedCard: CardDefinitionDirective, replacedCard: CardDefinitionDirective): void {
+        const draggedCardRank = draggedCard.fdCardDef;
+        draggedCard.fdCardDef = replacedCard.fdCardDef;
+        replacedCard.fdCardDef = draggedCardRank;
     }
 
     /** @hidden Rtl change subscription */
@@ -227,8 +263,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
      * @hidden Renders layout on column changes.
      */
     private _renderLayout(): void {
+        // convert latest cards queryList to Array of cards
+        this._cardsArray = this.cards.toArray();
         this._initializeColumns(this._numberOfColumns);
-        this._distributeCards(this.cards, this.columns);
+        this._distributeCards(this.columns);
         this._changeDetector.detectChanges();
     }
 
@@ -245,11 +283,16 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /**
      * @hidden Redistribute cards among columns
      */
-    private _distributeCards(cards: QueryList<CardDefinitionDirective>, columns: CardColumn[]): void {
+    private _distributeCards(columns: CardColumn[]): void {
         const numberOfColumns = columns.length;
-        cards?.forEach((card, i) => {
+        this._cardsArray?.sort(comparator);
+        this._cardsArray?.forEach((card, i) => {
             const index = i % numberOfColumns;
             columns[index].push(card);
         });
+
+        function comparator(firstCard: CardDefinitionDirective, secondCard: CardDefinitionDirective): number {
+            return firstCard.fdCardDef - secondCard.fdCardDef;
+        }
     }
 }

@@ -14,9 +14,9 @@
 </fd-segmented-button>
 
 <div style="padding: 1rem; overflow: auto;">
-    <fd-fixed-card-layout>
+    <fd-fixed-card-layout (cardDraggedDropped)="cardDraggedDropped($event)">
         <ng-container *ngIf="!isHidden('card1')">
-            <fd-card *fdCardDef>
+            <fd-card *fdCardDef="1">
                 <fd-card-header>
                     <h2 fd-card-title>Card Title</h2>
                 </fd-card-header>
@@ -42,7 +42,7 @@
             </fd-card>
         </ng-container>
         <ng-container *ngIf="!isHidden('card2')">
-            <fd-card *fdCardDef>
+            <fd-card *fdCardDef="2">
                 <fd-card-header>
                     <h2 fd-card-title>Projected revenue</h2>
                     <h3 fd-card-subtitle>Values include taxes | USD</h3>
@@ -88,7 +88,7 @@
             </fd-card>
         </ng-container>
         <ng-container *ngIf="!isHidden('card3')">
-            <fd-card *fdCardDef>
+            <fd-card *fdCardDef="3">
                 <fd-card-header>
                     <h2 fd-card-title>Table card</h2>
                     <span fd-card-counter>3 of 10</span>
@@ -151,7 +151,7 @@
                 </fd-card-content>
             </fd-card>
         </ng-container>
-        <fd-card *fdCardDef badge="New" cardType="list">
+        <fd-card *fdCardDef="4" badge="New" cardType="list">
             <fd-card-header>
                 <fd-avatar image="http://picsum.photos/id/1018/400" circle="true" size="s" ariaLabel="avatar image" title="avatar image">
                 </fd-avatar>
@@ -184,7 +184,7 @@
                 </ul>
             </fd-card-content>
         </fd-card>
-        <fd-card *fdCardDef [compact]="true" cardType="list">
+        <fd-card *fdCardDef="5" [compact]="true" cardType="list">
             <fd-card-header>
                 <h2 fd-card-title>Card Title</h2>
                 <h3 fd-card-subtitle>Card Subtitle</h3>
@@ -220,7 +220,7 @@
                 </ul>
             </fd-card-content>
         </fd-card>
-        <fd-card *fdCardDef>
+        <fd-card *fdCardDef="6">
             <fd-card-header>
                 <h2 fd-card-title>Card Title</h2>
             </fd-card-header>
@@ -244,7 +244,7 @@
                 </ul>
             </fd-card-content>
         </fd-card>
-        <fd-card *fdCardDef>
+        <fd-card *fdCardDef="7">
             <fd-card-header>
                 <h2 fd-card-title>Table card</h2>
                 <span fd-card-counter>3 of 10</span>
@@ -306,7 +306,7 @@
                 </table>
             </fd-card-content>
         </fd-card>
-        <fd-card *fdCardDef badge="New" cardType="list">
+        <fd-card *fdCardDef="8" badge="New" cardType="list">
             <fd-card-header>
                 <fd-avatar image="http://picsum.photos/id/1018/400" ariaLabel="avatar image" title="avatar image">
                 </fd-avatar>
@@ -339,7 +339,7 @@
                 </ul>
             </fd-card-content>
         </fd-card>
-        <fd-card *fdCardDef [compact]="true" cardType="list">
+        <fd-card *fdCardDef="9" [compact]="true" cardType="list">
             <fd-card-header>
                 <h2 fd-card-title>Card Title</h2>
                 <h3 fd-card-subtitle>Card Subtitle</h3>
