@@ -1,41 +1,41 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { ApprovalTeam } from '../interfaces';
 
-export const SELECT_TEAM = 'SELECT_TEAM';
-export const SELECT_USER = 'SELECT_USER';
-export const VIEW_TEAM_MEMBERS = 'VIEW_TEAM_MEMBERS';
-export const USER_DETAILS = 'USER_DETAILS';
-
-type ViewModes = 'SELECT_TEAM' | 'SELECT_USER' | 'VIEW_TEAM_MEMBERS' | 'USER_DETAILS';
+export enum VIEW_MODES {
+    SELECT_TEAM = 'SELECT_TEAM',
+    SELECT_USER = 'SELECT_USER',
+    VIEW_TEAM_MEMBERS = 'VIEW_TEAM_MEMBERS',
+    USER_DETAILS = 'USER_DETAILS'
+}
 
 @Injectable()
 export class ApprovalFlowAddNodeViewService {
     onViewChange = new EventEmitter();
 
-    private currentView: ViewModes;
+    private currentView: VIEW_MODES;
     private selectedTeam: ApprovalTeam;
 
     get isUserDetailsMode(): boolean {
-        return this.currentView === USER_DETAILS;
+        return this.currentView === VIEW_MODES.USER_DETAILS;
     }
 
     get isSelectUserMode(): boolean {
-        return this.currentView === SELECT_USER;
+        return this.currentView === VIEW_MODES.SELECT_USER;
     }
 
     get isSelectTeamMode(): boolean {
-        return this.currentView === SELECT_TEAM;
+        return this.currentView === VIEW_MODES.SELECT_TEAM;
     }
 
     get isTeamMembersMode(): boolean {
-        return this.currentView === VIEW_TEAM_MEMBERS;
+        return this.currentView === VIEW_MODES.VIEW_TEAM_MEMBERS;
     }
 
     get team(): ApprovalTeam {
         return this.selectedTeam;
     }
 
-    setCurrentView(view: ViewModes): void {
+    setCurrentView(view: VIEW_MODES): void {
         this.currentView = view;
         this.onViewChange.emit();
     }

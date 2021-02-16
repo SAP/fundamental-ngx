@@ -33,6 +33,11 @@
             right: auto;
             left: 1rem;
         }
+
+        .fd-list__item {
+            padding-right: 2rem !important;
+            padding-left: 0 !important;
+        }
     }
 
 }

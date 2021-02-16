@@ -1,29 +1,20 @@
 $block: approval-flow;
 
-:host ::ng-deep {
-    fd-dialog {
-        fd-dialog-body {
-            height: 433px;
 
-            .fd-list__item {
-                cursor: pointer;
-            }
+fd-dialog {
+    fd-dialog-body {
+        height: 433px;
 
-            &.#{$block}__dialog-body--auto-height {
-                height: auto;
-            }
+        .fd-list__item {
+            cursor: pointer;
         }
-    }
 
-    &[dir='rtl'] {
-        fdp-approval-flow-team-list {
-            .fd-list__item {
-                padding-right: 2rem !important;
-                padding-left: 0!important;
-            }
+        &.#{$block}__dialog-body--auto-height {
+            height: auto;
         }
     }
 }
+
 
 .#{$block}__select-approvers-container {
     width: 288px;

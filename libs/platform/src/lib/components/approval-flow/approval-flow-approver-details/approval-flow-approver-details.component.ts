@@ -3,7 +3,8 @@ import { DialogRef } from '@fundamental-ngx/core';
 
 import { Observable } from 'rxjs';
 
-import { ApprovalDataSource, ApprovalNode, ApprovalUser, filterByName } from '../public_api';
+import { ApprovalDataSource, ApprovalNode, ApprovalUser } from '../public_api';
+import { filterByName } from '../helpers';
 
 interface DialogRefData {
     node?: ApprovalNode;

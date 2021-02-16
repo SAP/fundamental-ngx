@@ -8,18 +8,13 @@ import {
     ApprovalDataSource,
     ApprovalNode,
     ApprovalTeam,
-    ApprovalUser,
-    displayUserFn,
-    filterByName,
-    trackByFn
+    ApprovalUser
 } from '../public_api';
 import {
     ApprovalFlowAddNodeViewService,
-    SELECT_TEAM,
-    SELECT_USER,
-    USER_DETAILS,
-    VIEW_TEAM_MEMBERS
+    VIEW_MODES
 } from '../services/approval-flow-add-node-view.service';
+import { displayUserFn, filterByName, trackByFn } from '../helpers';
 
 interface AddNodeDialogRefData {
     isEdit?: boolean;
@@ -169,7 +164,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _goToSelectMode(): void {
         this._selectMode = true;
-        this.viewService.setCurrentView(this._isSingleUserMode ? SELECT_USER : SELECT_TEAM);
+        this.viewService.setCurrentView(this._isSingleUserMode ? VIEW_MODES.SELECT_USER : VIEW_MODES.SELECT_TEAM);
         this._cdr.detectChanges();
     }
 
@@ -209,7 +204,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _seeUserDetails(user: ApprovalUser): void {
-        this.viewService.setCurrentView(USER_DETAILS);
+        this.viewService.setCurrentView(VIEW_MODES.USER_DETAILS);
         this._userToShowDetails = user;
         this._userToShowDetailsData$ = this._data.approvalFlowDataSource.fetchUser(user.id);
         this._cdr.detectChanges();
@@ -217,7 +212,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _exitUserDetailsMode(): void {
-        this.viewService.setCurrentView(this.viewService.team ? VIEW_TEAM_MEMBERS : SELECT_USER);
+        this.viewService.setCurrentView(this.viewService.team ? VIEW_MODES.VIEW_TEAM_MEMBERS : VIEW_MODES.SELECT_USER);
         this._userToShowDetails = undefined;
         this._userToShowDetailsData$ = undefined;
         this._setFilteredApprovers(this._approvers);
@@ -227,7 +222,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _viewTeamMembers(team: ApprovalTeam): void {
         this.viewService.selectTeam(team);
-        this.viewService.setCurrentView(VIEW_TEAM_MEMBERS);
+        this.viewService.setCurrentView(VIEW_MODES.VIEW_TEAM_MEMBERS);
         this._selectedTeamMembers = this._approvers.filter(user => team.members.includes(user.id));
         this._setFilteredTeamMembers(this._selectedTeamMembers);
         this._cdr.detectChanges();
@@ -235,7 +230,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _exitTeamMembersMode(): void {
-        this.viewService.setCurrentView(SELECT_TEAM);
+        this.viewService.setCurrentView(VIEW_MODES.SELECT_TEAM);
         this.viewService.resetTeam();
         this._setFilteredTeams(this._data.teams || []);
         this._selectedTeamMembers = [];
