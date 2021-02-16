@@ -70,6 +70,21 @@ export class LtPredicate < TModel, TProperty extends keyof TModel, TPropertyValu
         }
     }
 
+export class GePredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
+    extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
+
+        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+            super(property, value);
+        }
+    }
+
+export class LePredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
+    extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
+
+        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+            super(property, value);
+        }
+    }
 
 export abstract class BinaryPredicate < TModel > extends BasePredicate < TModel > {
 

@@ -1,7 +1,9 @@
 import {
     AndPredicate,
     EqPredicate,
+    GePredicate,
     GtPredicate,
+    LePredicate,
     LtPredicate,
     OrPredicate,
     Predicate
@@ -36,6 +38,22 @@ export function lt < TModel,
 TProperty extends keyof TModel,
 TPropertyValue extends TModel[TProperty] > (property: TProperty, value: TPropertyValue): EqPredicate < TModel, TProperty, TPropertyValue > {
     return new LtPredicate < TModel,
+    TProperty,
+    TPropertyValue > (property, value);
+}
+
+export function ge < TModel,
+TProperty extends keyof TModel,
+TPropertyValue extends TModel[TProperty] > (property: TProperty, value: TPropertyValue): EqPredicate < TModel, TProperty, TPropertyValue > {
+    return new GePredicate < TModel,
+    TProperty,
+    TPropertyValue > (property, value);
+}
+
+export function le < TModel,
+TProperty extends keyof TModel,
+TPropertyValue extends TModel[TProperty] > (property: TProperty, value: TPropertyValue): EqPredicate < TModel, TProperty, TPropertyValue > {
+    return new LePredicate < TModel,
     TProperty,
     TPropertyValue > (property, value);
 }

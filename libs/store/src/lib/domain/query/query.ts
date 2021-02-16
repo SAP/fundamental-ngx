@@ -5,19 +5,20 @@ import {
     Observable,
     of
 } from 'rxjs';
+import { Predicate } from './grammer/predicate';
 
-export interface OrderBy < TModel, TProperty extends keyof TModel > {
+export interface OrderBy <TModel, TProperty extends keyof TModel> {
     field: TProperty;
     order?: 'ASCENDING' | 'DESCENDING';
 }
 
 
-export class Query < TModel > {
+export class Query <TModel> {
     // we definitely replace this with some OrderBy object
     orderByFields: Array < string > ;
 
 
-    constructor(private resultType: Type < TModel > ) {}
+    constructor(private resultType: Type<TModel> ) {}
 
     orderBy < TProperty extends keyof TModel > (...segments: Array < OrderBy < TModel, TProperty >> ): Query < TModel > {
         return this;

@@ -315,10 +315,11 @@
                     }
                 },
                 "test": {
-                    "builder": "@nrwl/jest:jest",
+                    "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "jestConfig": "libs/store/jest.config.js",
-                        "passWithNoTests": true
+                        "main": "libs/store/src/test.ts",
+                        "tsConfig": "libs/store/tsconfig.spec.json",
+                        "karmaConfig": "libs/platform/karma.conf.js"
                     }
                 }
             },

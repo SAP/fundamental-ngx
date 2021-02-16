@@ -6,7 +6,7 @@ import {
 } from './query';
 import {
     Predicate
-} from './predicate';
+} from './grammer/predicate';
 import { Observable, of } from 'rxjs';
 
 
