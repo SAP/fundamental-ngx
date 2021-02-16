@@ -2,40 +2,38 @@
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
         <div fdLayoutGridCol="5">
-            <!-- <div fdLayoutGridRow> -->
-                <fd-select
-                    class="vhd-condition-filters"
-                    fdLayoutGridCol
-                    colGrow
-                    [class.fd-select-custom-class]="false"
-                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.StrategyPlaceholder"
-                    placeholder="Select a strategy"
-                    #sttr
-                    [compact]="true"
-                    [controlTemplate]="customSelectTemplate"
-                    [name]="uid + '-' + type + '-strategy-' + item.id"
-                    [(ngModel)]="item.strategy"
-                    (valueChange)="_filterChanged()">
-                    <ng-container *ngIf="_includeStrategy.length">
-                        <li fd-list-group-header>Include</li>
-                        <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
-                            <ng-container
-                                [ngTemplateOutlet]="conditionStrategyOption"
-                                [ngTemplateOutletContext]="{ type: _defineTypes.include, strategy: strategy }"
-                            ></ng-container>
-                        </fd-option>
-                    </ng-container>
-                    <ng-container *ngIf="_excludeStrategy.length">
-                        <li fd-list-group-header>Exclude</li>
-                        <fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
-                            <ng-container
-                                [ngTemplateOutlet]="conditionStrategyOption"
-                                [ngTemplateOutletContext]="{ type: _defineTypes.exclude, strategy: strategy }"
-                            ></ng-container>
-                        </fd-option>
-                    </ng-container>
-                </fd-select>
-            <!-- </div> -->
+            <fd-select
+                class="vhd-condition-filters"
+                fdLayoutGridCol
+                colGrow
+                [class.fd-select-custom-class]="false"
+                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.StrategyPlaceholder"
+                placeholder="Select a strategy"
+                #sttr
+                [compact]="true"
+                [controlTemplate]="customSelectTemplate"
+                [name]="uid + '-' + type + '-strategy-' + item.id"
+                [(ngModel)]="item.strategy"
+                (valueChange)="_filterChanged()">
+                <ng-container *ngIf="_includeStrategy.length">
+                    <li fd-list-group-header>Include</li>
+                    <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
+                        <ng-container
+                            [ngTemplateOutlet]="conditionStrategyOption"
+                            [ngTemplateOutletContext]="{ type: _defineTypes.include, strategy: strategy }"
+                        ></ng-container>
+                    </fd-option>
+                </ng-container>
+                <ng-container *ngIf="_excludeStrategy.length">
+                    <li fd-list-group-header>Exclude</li>
+                    <fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
+                        <ng-container
+                            [ngTemplateOutlet]="conditionStrategyOption"
+                            [ngTemplateOutletContext]="{ type: _defineTypes.exclude, strategy: strategy }"
+                        ></ng-container>
+                    </fd-option>
+                </ng-container>
+            </fd-select>
         </div>
         <div fdLayoutGridCol colGrow *ngIf="item.strategy !== _strategyIncludeValues.empty && item.strategy !== _strategyExcludeValues.not_empty">
             <div fdLayoutGridRow>
