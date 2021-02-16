@@ -32,5 +32,7 @@ describe('Accessibility test', () => {
                 // No expect added for now. Only an audit.
             }
         }
+        console.log(`All report are generated successfully`);
+        expect(true).toBe(true);
     });
 });
