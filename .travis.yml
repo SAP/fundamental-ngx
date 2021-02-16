@@ -33,6 +33,7 @@ jobs:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       - FIREBASE_TOKEN=$FIREBASE_TOKEN
+      - GITHUB_TOKEN=$GITHUB_TOKEN
     before_script:
       - sudo apt-get install jq
       - npm install firebase-tools -g
@@ -92,6 +93,7 @@ jobs:
       - SAUCE_USERNAME=$SAUCE_USERNAME
       - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       - FIREBASE_TOKEN=$FIREBASE_TOKEN
+      - GITHUB_TOKEN=$GITHUB_TOKEN
     skip_cleanup: true
     provider: firebase
     project: allure-results
