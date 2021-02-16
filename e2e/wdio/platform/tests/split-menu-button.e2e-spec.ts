@@ -3,6 +3,7 @@ import {standardBtnText, iconAttr, textColorAttr, tooltipAttr, compactAttr, comp
     typesBtnHvrColorArr, typesBtnColorArr, standardBtnText2, defaultHvrColor, iconLabel, behaviorBtnTextArr,
     iconBtnTextArr, typesBtnTextArr} from '../fixtures/appData/split-menu-button-page-contents';
 import {
+    acceptAlert,
     browserIsIEorSafari,
     click,
     elementArray,
@@ -72,6 +73,7 @@ describe('Split menu button test suite', () => {
 
     it('should check btn selections', () => {
         click(spMenuBtnPage.typesExSelectionBtnArr);
+        acceptAlert();
         spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, standardBtnText);
 
         click(spMenuBtnPage.typesExArrowBtnArr);
