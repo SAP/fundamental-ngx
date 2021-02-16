@@ -62,6 +62,14 @@ export class GtPredicate < TModel, TProperty extends keyof TModel, TPropertyValu
         }
     }
 
+export class LtPredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
+    extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
+
+        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+            super(property, value);
+        }
+    }
+
 
 export abstract class BinaryPredicate < TModel > extends BasePredicate < TModel > {
 
@@ -71,6 +79,13 @@ export abstract class BinaryPredicate < TModel > extends BasePredicate < TModel 
 }
 
 export class AndPredicate < TModel > extends BinaryPredicate < TModel > {
+
+    constructor(public readonly operands: Array < Predicate < TModel >> ) {
+        super(operands);
+    }
+}
+
+export class OrPredicate < TModel > extends BinaryPredicate < TModel > {
 
     constructor(public readonly operands: Array < Predicate < TModel >> ) {
         super(operands);

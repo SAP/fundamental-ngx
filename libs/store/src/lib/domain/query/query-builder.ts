@@ -7,6 +7,7 @@ import {
 import {
     Predicate
 } from './predicate';
+import { Observable, of } from 'rxjs';
 
 
 /**
@@ -38,27 +39,20 @@ export class QueryBuilder < TModel > {
     }
 
 
-    newSubQuery < TSubModel > (withId: string, resultType: Type < TSubModel > ): QueryBuilder < TModel > {
+    // newSubQuery < TSubModel > (withId: string, resultType: Type < TSubModel > ): QueryBuilder < TModel > {
 
-        return this;
+    //     return this;
+    // }
+
+    // newQuery(): Query < TModel > {
+    //     return null;
+    // }
+
+    /**
+     * Returns observable of query result
+     */
+    select(): Observable<TModel[]> {
+        return of([]);
     }
-
-    newQuery(): Query < TModel > {
-        return null;
-    }
-
 
 }
-
-/*
-const query = this.entityStore.queryBuilder.where(
-    and(
-        eq('currency', 'USD')
-        gt('amount.value', 300)
-    )
-);
-
-this.req$ = this.query.orderBy(..).firstResult(15).maxResult(100).select();
-
-this.query.next();
- */
