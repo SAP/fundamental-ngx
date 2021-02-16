@@ -1,31 +1,35 @@
 import { ActionBarPo } from '../pages/action-bar.po';
 import {
     addIsActiveClass,
-    checkElementScreenshot, click, focusElement, getElementArrayLength,
-    mouseHoverElement, refreshPage,
-    saveElementScreenshot, scrollIntoView,
+    checkElementScreenshot,
+    click,
+    getElementArrayLength,
+    mouseHoverElement,
+    refreshPage,
+    saveElementScreenshot,
+    scrollIntoView,
     waitForElDisplayed
 } from '../../driver/wdio';
 import {
+    backButtonExample,
     backButtonFocusState,
     backButtonHoverState,
     cancelButtonFocusState,
     cancelButtonHoverState,
-    saveButtonFocusState,
-    saveButtonHoverState,
-    menuButtonHoverState,
+    contextualMenuExample,
+    longTitleExample,
     menuButtonFocusState,
-    menuItemHoverState,
+    menuButtonHoverState,
     menuItemActiveState,
     menuItemFocusState,
-    backButtonExample,
-    longTitleExample,
+    menuItemHoverState,
+    mobileViewExample,
     noBackButtonExample,
-    contextualMenuExample,
-    mobileViewExample
+    saveButtonFocusState,
+    saveButtonHoverState
 } from '../fixtures/testData/action-bar-tags';
 
-fdescribe('Action Bar Test Suite', function() {
+describe('Action Bar Test Suite', function() {
     const actionBarPage = new ActionBarPo();
     const {
         actionBarBackButtonBackButton,
@@ -51,7 +55,6 @@ fdescribe('Action Bar Test Suite', function() {
         actionBarPage.open();
         waitForElDisplayed(actionBarBackButtonBackButton);
     }, 1);
-
 
     describe('verify Back button example', function() {
         it('should check back button hover state', () => {
@@ -281,7 +284,6 @@ fdescribe('Action Bar Test Suite', function() {
         });
     });
 });
-
 
 function checkButtonHoverState(selector: string, tag: string, btnName: string, index: number = 0): void {
     mouseHoverElement(selector, index);
