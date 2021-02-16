@@ -25,7 +25,7 @@ describe('File uploader test suite', function() {
     it('Verify placeholders', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.fileUploaderInput);
         for (let i = 0; i < arrLength; i++) {
-            expect(fileUploaderPO.fileSelectedText).toContain(getAttributeByName
+            expect(placeholderValue).toContain(getAttributeByName
             (fileUploaderPO.fileUploaderInput, 'placeholder', i));
         }
     });
@@ -40,7 +40,7 @@ describe('File uploader test suite', function() {
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('Verify file upload', () => {
+    it('Verify file upload', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderPO.fileUploaderInputFile, imagePath);
@@ -50,7 +50,7 @@ describe('File uploader test suite', function() {
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('Verify file uploaded message', () => {
+    it('Verify file uploaded message', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderPO.fileUploaderInputFile, imagePath, i);
@@ -58,7 +58,7 @@ describe('File uploader test suite', function() {
         }
     });
 
-    xit('should check LTR and RTL orientation', () => {
+    it('should check LTR and RTL orientation', () => {
         fileUploaderPO.checkRtlSwitch();
     });
 
