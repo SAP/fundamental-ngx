@@ -84,24 +84,6 @@ jobs:
       skip_cleanup: true
       on:
         all_branches: true
-  - stage: "Deploy to firebase preview channel"
-    if: type = pull_request
-    env:
-      - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-      - BUILD_ID=$TRAVIS_BUILD_ID
-      - JOB_URL=$TRAVIS_JOB_WEB_UR
-      - SAUCE_USERNAME=$SAUCE_USERNAME
-      - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-      - FIREBASE_TOKEN=$FIREBASE_TOKEN
-      - GITHUB_TOKEN=$GITHUB_TOKEN
-    skip_cleanup: true
-    provider: firebase
-    project: allure-results
-    before_script:
-      - sudo apt-get install jq
-      - npm install firebase-tools -g
-      - npm run e2e-generate-report
-    script: ./ci-scripts/deploy-to-preview-channel.sh
 notifications:
   email:
     on_failure: always
