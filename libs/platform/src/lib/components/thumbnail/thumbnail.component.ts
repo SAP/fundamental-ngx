@@ -1,15 +1,18 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { BaseComponent } from '../base';
-
+import {DialogService, RtlService} from '@fundamental-ngx/core'
+import { ThumbnailDetailsComponent} from './thumbnail-details/thumbnail-details.component';
 export interface Media {
+    title: string;
     thumbnailUrl: string;
     mediaType: string;
     mediaUrl: string;
     captionFile?: string;
     audioDescFile?: string;
-    alt: string;    
+    alt: string;
     label: string;
     selected?: boolean;
+    overlayRequired?: boolean;
 }
 
 export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailComponent, K = Media> {
@@ -29,6 +32,12 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
 })
 export class ThumbnailComponent extends BaseComponent implements OnInit {
 
+    constructor(protected _changeDetectorRef: ChangeDetectorRef,
+         private _dialogService: DialogService,
+           private readonly _rtlService: RtlService) {
+        super(_changeDetectorRef);
+    }
+
     /** List of media objects to display. */
     @Input()
     mediaList: Media[];
@@ -36,6 +45,9 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     /** Display orientation of Thumnail component. */
     @Input()
     isHorizontal = false;
+
+    @Input()
+    maxImagesDisplay = 5;
 
     /** Event emitted upon click of a thumbnail. */
     @Output()
@@ -57,11 +69,31 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         this.thumbnailClicked.emit(this.createClickEvent(this.selectedMedia));
     }
 
+    openDialog(selectedMedia: Media, mediaList: Media[], ): void {
+        this.mediaList.forEach(item => item.overlayRequired = false);
+        const dialogRef =  this._dialogService.open(ThumbnailDetailsComponent, {
+            backdropClickCloseable: false,
+            escKeyCloseable: false,
+            data: {
+                selectedMedia: selectedMedia,
+                mediaList: mediaList,
+                rtl:  this._isRtl(),
+                maxImages: this.maxImagesDisplay
+            }
+        });
+    }
+
+    _isRtl(): boolean {
+        return this._rtlService?.rtl.getValue();
+    }
+
     /** @hidden
      * Create Thumbnail click event instance
      */
     createClickEvent(value: Media): ThumbnailClickedEvent {
         return new ThumbnailClickedEvent(this, value);
     }
+
+
 
 }

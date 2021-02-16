@@ -8,40 +8,70 @@ import { Media } from '@fundamental-ngx/platform';
 export class PlatformThumbnailBasicExampleComponent {
 
     data: Media[] = [{
-        thumbnailUrl: '//picsum.photos/id/320/640/480',
+        title: 'Nature Details',
+        thumbnailUrl: 'http://picsum.photos/id/320/640/480',
         mediaType: 'image',
-        mediaUrl: '//picsum.photos/id/320/640/480',
-        alt: 'Failed to load //picsum.photos/id/320/640/480',
+        mediaUrl: 'http://picsum.photos/id/320/640/480',
+        alt: 'Failed to load http://picsum.photos/id/320/640/480',
         label: 'nature'
     },
     {
-        thumbnailUrl: '//picsum.photos/id/315/640/480',
+        title: 'Animal Details',
+        thumbnailUrl: 'http://picsum.photos/id/315/640/480',
         mediaType: 'image',
-        mediaUrl: '//picsum.photos/id/315/640/480',
-        alt: 'Failed to load //picsum.photos/id/315/640/480',
+        mediaUrl: 'http://picsum.photos/id/315/640/480',
+        alt: 'Failed to load http://picsum.photos/id/315/640/480',
         label: 'animal'
     },
     {
-        thumbnailUrl: '//picsum.photos/id/316/600',
+        title: 'Culture Details',
+        thumbnailUrl: 'http://picsum.photos/id/316/600',
         mediaType: 'image',
-        mediaUrl: '//picsum.photos/id/316/600',
-        alt: 'Failed to load //picsum.photos/id/316/600',
+        mediaUrl: 'http://picsum.photos/id/316/600',
+        alt: 'Failed to load http://picsum.photos/id/316/600',
         label: 'culture'
     },
     {
-        thumbnailUrl: '//picsum.photos/id/316/600',
-        mediaType: 'image',
-        mediaUrl: '//picsum.photos/id/316/600',
-        alt: 'Failed to load //picsum.photos/id/316/600',
-        label: 'sports'
+        title: 'Nature Details',
+        thumbnailUrl: 'http://picsum.photos/id/1008/400',
+        mediaType: 'video',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://picsum.photos/id/1008/400',
+        label: 'nature'
     },
     {
-        thumbnailUrl: '//picsum.photos/id/317/600',
+        title: 'Art Details',
+        thumbnailUrl: 'http://picsum.photos/id/317/600',
         mediaType: 'image',
-        mediaUrl: '//picsum.photos/id/317/600',
-        alt: 'Failed to load //picsum.photos/id/317/600',
+        mediaUrl: 'http://picsum.photos/id/316/600',
+        alt: 'Failed to load http://picsum.photos/id/316/600',
+        label: 'art'
+    },
+    {
+        title: 'Culture Details',
+        thumbnailUrl: 'http://picsum.photos/id/316/600',
+        mediaType: 'image',
+        mediaUrl: 'http://picsum.photos/id/316/600',
+        alt: 'Failed to load http://picsum.photos/id/316/600',
+        label: 'culture'
+    },
+    {
+        title: 'Nature Details',
+        thumbnailUrl: 'http://picsum.photos/id/1008/400',
+        mediaType: 'video',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://picsum.photos/id/1008/400',
+        label: 'nature'
+    },
+    {
+        title: 'Art Details',
+        thumbnailUrl: 'http://picsum.photos/id/317/600',
+        mediaType: 'image',
+        mediaUrl: 'http://picsum.photos/id/316/600',
+        alt: 'Failed to load http://picsum.photos/id/316/600',
         label: 'art'
     }
     ];
+
 
 }

@@ -11,12 +11,14 @@ import { Media } from '../thumbnail.component';
 })
 class DefaultThumbnailImageTestComponent {
     mediaList: Media[] = [{
+        title: 'Nature Details',
         thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
         alt: 'Failed to load https://picsum.photos/400/400',
         label: 'nature'
     }, {
+        title: 'Nature2 Details',
         thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
@@ -76,6 +78,7 @@ describe('DefaultThumbnailImageComponent', () => {
 })
 class HorizontalThumbnailImageTestComponent {
     mediaList: Media[] = [{
+        title: 'Nature Details',
         thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',

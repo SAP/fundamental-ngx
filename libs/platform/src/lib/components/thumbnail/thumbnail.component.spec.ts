@@ -10,6 +10,7 @@ import { Media, ThumbnailComponent } from './thumbnail.component';
 })
 class DefaultThumbnailTestComponent {
     mediaList: Media[] = [{
+        title: 'Nature Details',
         thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'video',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
@@ -61,6 +62,7 @@ describe('DefaultThumbnailComponent', () => {
 class HorizontalThumbnailTestComponent {
 
     mediaList: Media[] = [{
+        title: 'Nature Details',
         thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'video',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
