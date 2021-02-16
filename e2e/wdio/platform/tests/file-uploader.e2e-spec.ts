@@ -40,7 +40,7 @@ describe('File uploader test suite', function() {
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    it('Verify file upload', () => {
+    xit('Verify file upload', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderPO.fileUploaderInputFile, imagePath);
@@ -50,7 +50,7 @@ describe('File uploader test suite', function() {
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    it('Verify file uploaded message', () => {
+    xit('Verify file uploaded message', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderPO.fileUploaderInputFile, imagePath, i);
@@ -61,5 +61,6 @@ describe('File uploader test suite', function() {
     it('should check LTR and RTL orientation', () => {
         fileUploaderPO.checkRtlSwitch();
     });
-
 });
+
+
