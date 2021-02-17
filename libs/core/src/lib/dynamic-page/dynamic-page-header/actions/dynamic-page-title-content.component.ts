@@ -14,6 +14,7 @@ import { ToolbarComponent } from '../../../toolbar/toolbar.component';
     template: `
         <ng-container *ngIf="_size === 'small'">
             <fd-toolbar fdType="transparent" 
+                        class="dynamicPageLayoutContentToolbar"
                         [clearBorder]="true" 
                         [forceOverflow]="true" 
                         [shouldOverflow]="true" 
@@ -37,9 +38,9 @@ import { ToolbarComponent } from '../../../toolbar/toolbar.component';
 })
 export class DynamicPageTitleContentComponent {
 
+    /** Whether should be on compact mode */
     @Input()
     compact = false;
-
 
     /** @hidden */
     @ContentChild(ToolbarComponent)
@@ -48,18 +49,14 @@ export class DynamicPageTitleContentComponent {
     /** @hidden */
     _size: DynamicPageResponsiveSize;
 
+    /** @hidden */
     constructor(
         private _changeDetRef: ChangeDetectorRef
     ) {}
 
     /** @hidden */
-    setSize(size: DynamicPageResponsiveSize): void {
+    _setSize(size: DynamicPageResponsiveSize): void {
         this._size = size;
         this._changeDetRef.detectChanges();
-    }
-
-    /** @hidden */
-    stopPropagation(event: MouseEvent): void {
-        event.stopPropagation();
     }
 }

@@ -8,16 +8,11 @@ import {
     ElementRef,
     HostBinding,
     Input,
-    OnDestroy, Optional,
-    QueryList,
+    OnDestroy,
+    Optional,
     Renderer2,
-    ViewChild,
-    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { TabPanelComponent } from '@fundamental-ngx/core';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import {
     DynamicPageContentComponent
@@ -28,6 +23,9 @@ import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '../tabs/tab-list.component';
 import { FlexibleColumnLayoutComponent } from '../flexible-column-layout/flexible-column-layout.component';
+
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-dynamic-page',
@@ -97,13 +95,9 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
     @ContentChild(DynamicPageContentComponent)
     contentComponent: DynamicPageContentComponent;
 
-    /** @hidden */
+    /** @hidden reference to tab component */
     @ContentChild(TabListComponent)
     tabComponent: TabListComponent;
-
-    /** @hidden */
-    @ViewChildren(TabPanelComponent)
-    dynamicPageTabs: QueryList<TabPanelComponent>;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -140,7 +134,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /**@hidden */
     ngAfterViewInit(): void {
-        this.setContainerPositions();
+        this._setContainerPositions();
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
         if (this.pageSubheaderComponent?.collapsible) {
@@ -155,17 +149,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         this._subscriptions.unsubscribe();
     }
 
-    /**
-     * Set the positions of the tabs and content with respect to the window
-     */
-    setContainerPositions(): void {
-        this._setTabsPosition();
-        this._setContainerPosition();
-    }
-
-    /**
-     * toggle the visibility of the header on click of title area.
-     */
+    /** toggle the visibility of the header on click of title area. */
     toggleCollapse(): void {
         if (this._headerCollapsible) {
             this._dynamicPageService.toggleCollapsed();
@@ -173,15 +157,17 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
     }
 
     /**
-     * get reference to this element
+     * Triggers recheck for spacing and sizing of elements inside DynamicPage.
      */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
+    refreshSize(): void {
+        this._setContainerPositions();
+        this._sizeChangeHandle();
     }
 
-    /** TODO */
-    refreshSize(): void {
-        this.setContainerPositions();
+    /** Set the positions of the tabs and content with respect to the window */
+    private _setContainerPositions(): void {
+        this._setTabsPosition();
+        this._setContainerPosition();
     }
 
     /** @hidden */
@@ -190,6 +176,11 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         this._propagateSizeToChildren();
     }
 
+    /** @hidden
+     * Functionality handling column layout changes,
+     * - recalculate height of content element
+     * - recheck size depending on width of DynamicPage
+     */
     private _listenToLayoutChange(): void {
         this._columnLayout.layoutChange
             .pipe(
@@ -208,15 +199,16 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         if (this.headerComponent) {
             this.headerComponent.size = this.size;
         }
-        this.setContainerPositions();
+        this._setContainerPositions();
     }
 
+    /** @hidden */
     private _listenOnCollapse(): void {
         this._dynamicPageService.subheaderVisibilityChange
             .pipe(
                 takeUntil(this._onDestroy$)
             )
-            .subscribe(_ => this.setContainerPositions())
+            .subscribe(_ => this._setContainerPositions())
         ;
     }
 
@@ -229,6 +221,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         return 'calc(100vh - ' + (distanceFromTop + this.offset) + 'px)';
     }
 
+    /** @hidden */
     private _sizeChangeHandle(): void {
         if (!this._elementRef || !this.autoResponsive) {
             return;
@@ -236,8 +229,6 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         const dynamicPageWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
         this._dynamicPageService.pixelsSizeChanged.next(dynamicPageWidth);
         const size = dynamicPageWidthToSize(dynamicPageWidth);
-
-        console.log(size);
 
         if (size !== this.size) {
             this.size = size;
@@ -276,7 +267,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
             fromEvent(window, 'resize')
                 .pipe(debounceTime(100))
                 .subscribe(_ => {
-                    this.setContainerPositions();
+                    this._setContainerPositions();
                     this._sizeChangeHandle();
                 })
         );
@@ -313,6 +304,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         );
     }
 
+    /** @hidden */
     private _removeShadowWhenTabComponent(): void {
         if (!this.pageSubheaderComponent?.collapsible || !this.tabComponent) {
             return;

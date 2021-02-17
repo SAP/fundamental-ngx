@@ -23,6 +23,7 @@ export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions im
     @ContentChild(ToolbarComponent)
     _toolbarComponent: ToolbarComponent;
 
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _renderer: Renderer2,
@@ -36,12 +37,11 @@ export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions im
         this.addClassToToolbar(CLASS_NAME.dynamicPageToolbar, this._elementRef);
     }
 
-    setSize(size: DynamicPageResponsiveSize): void {
-        if (!this._toolbarComponent) {
-            return;
+    /** @hidden */
+    _setSize(size: DynamicPageResponsiveSize): void {
+        if (this._toolbarComponent) {
+            this._handleOverflow(size === 'small');
         }
-
-        this._handleOverflow(size === 'small');
     }
 
     /** @hidden */

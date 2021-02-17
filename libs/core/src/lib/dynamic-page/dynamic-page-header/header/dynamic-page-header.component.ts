@@ -1,12 +1,13 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
-
 import {
     AfterViewInit,
-    ChangeDetectionStrategy, ChangeDetectorRef,
-    Component, ContentChild,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChild,
     ElementRef,
     Input,
     NgZone,
+    OnDestroy,
     OnInit,
     Renderer2,
     ViewEncapsulation
@@ -16,9 +17,15 @@ import { CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
 import { BreadcrumbComponent } from '../../../breadcrumb/breadcrumb.component';
-import { DynamicPageLayoutActionsComponent } from '../../public_api';
-import { DynamicPageGlobalActionsComponent } from '../../public_api';
+import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
+import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { FocusMonitor } from '@angular/cdk/a11y';
+
+const ActionSquashBreakpointPx = 1280;
 
 @Component({
     selector: 'fd-dynamic-page-header',
@@ -30,17 +37,15 @@ import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-
         '[attr.tabindex]': '0'
     }
 })
-export class DynamicPageHeaderComponent implements OnInit, AfterViewInit {
+export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    /**  */
+    /** Title property for dynamic page */
     @Input()
     title: string;
 
+    /** Subtitle property for dynamic page */
     @Input()
     subtitle: string;
-
-    @Input()
-    keyInfo: string;
 
     /** @hidden */
     @ContentChild(BreadcrumbComponent)
@@ -64,6 +69,9 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit {
     /** @hidden */
     _size: DynamicPageResponsiveSize;
 
+    /** @hidden **/
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
@@ -72,7 +80,8 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit {
         private _dynamicPageService: DynamicPageService,
         private _ngZone: NgZone,
         private _changeDetRef: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -86,6 +95,12 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit {
         this._addCustomClassToBreadcrumb();
     }
 
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
+
     /**
      * sets size which in turn adds corresponding padding for the size type.
      * size can be `small`, `medium`, `large`, or `extra-large`.
@@ -93,13 +108,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit {
     set size(sizeType: DynamicPageResponsiveSize) {
         this._setSize(sizeType);
         this._size = sizeType;
-    }
-
-    /**
-     * get reference to this element
-     */
-    elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
     }
 
     /** @hidden */
@@ -125,11 +133,11 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit {
      */
     private _setSize(sizeType: DynamicPageResponsiveSize): void {
         setTimeout(() => {
-            this._breadcrumbComponent.onResize();
-            this._globalActions.setSize(sizeType);
-            this._contentToolbar.setSize(sizeType);
+            this._breadcrumbComponent?.onResize();
+            this._globalActions?._setSize(sizeType);
+            this._contentToolbar?._setSize(sizeType);
             this._changeDetRef.detectChanges();
-        })
+        });
     }
 
     /**@hidden */
@@ -154,12 +162,15 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     private _listenToPageChanges(): void {
-        this._dynamicPageService.pixelsSizeChanged.subscribe(pixels => {
-            const actionsSquashed: boolean = pixels < 1280;
-            if (actionsSquashed !== this._actionsSquashed) {
-                this._actionsSquashed = actionsSquashed;
-                this._changeDetRef.detectChanges();
-            }
-        });
+        this._dynamicPageService.pixelsSizeChanged
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(pixels => {
+                const actionsSquashed: boolean = pixels < ActionSquashBreakpointPx;
+                if (actionsSquashed !== this._actionsSquashed) {
+                    this._actionsSquashed = actionsSquashed;
+                    this._changeDetRef.detectChanges();
+                }
+            })
+        ;
     }
 }
