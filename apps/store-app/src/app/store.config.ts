@@ -1,4 +1,4 @@
-import { Entity, RESTResource, ENTITY, REST_RESOURCE} from '@fundamental-ngx/store';
+import { Entity, RESTResource, ENTITY_KEY, REST_RESOURCE_KEY} from '@fundamental-ngx/store';
 interface EntityComposite {
     getTypes();
 }
@@ -44,7 +44,8 @@ class LineItem {
 // URI with endpoints for different actions
 @RESTResource({
     path: {
-        create: '/cart',
+        default: 'requisitioning',
+        add: '/cart',
         getAll: '/requisitions',
         update: ['PATCH', '/requisition']
     }
@@ -66,8 +67,8 @@ export const storeConfig = {
 
 function getEntityMetaData(Entity) {
     return {
-        entity: Entity[ENTITY].metadata,
-        resource: Entity[REST_RESOURCE].metadata
+        entity: Entity[ENTITY_KEY].metadata,
+        resource: Entity[REST_RESOURCE_KEY].metadata
     }
 }
 
@@ -83,8 +84,8 @@ function entityComposite(Entity) {
     }
 
     const parent = entityTypes.parent;
-    parent[ENTITY].metadata;
-    parent[REST_RESOURCE].metadata;
+    parent[ENTITY_KEY].metadata;
+    parent[REST_RESOURCE_KEY].metadata;
 
 }
 
