@@ -218,7 +218,8 @@ exports.config = {
     // services: ['chromedriver'],
     services: [
         ['sauce', {
-            sauceConnect: true
+            sauceConnect: true,
+            connectRetries: 2,
         }],
         ['image-comparison',
             // The options
