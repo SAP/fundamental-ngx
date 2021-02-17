@@ -25,7 +25,11 @@ module.exports = () => {
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
-    reporters: ['progress', 'kjhtml'],
+      reporters: ['progress', 'kjhtml', 'allure'],
+      allureReport: {
+          reportDir: 'reports',
+          useBrowserName: true
+      },
     port: 9876,
     colors: true,
     logLevel: constants.LOG_INFO,

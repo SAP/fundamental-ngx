@@ -48,6 +48,8 @@ allure-report
 allure-results
 .tmp
 e2e/tmp
+unit-tests-allure-report
+libs/core/reports
 
 # System Files
 .DS_Store

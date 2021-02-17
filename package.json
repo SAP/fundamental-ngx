@@ -79,7 +79,9 @@
     "build-storybook": "build-storybook",
     "nx": "nx",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test"
+    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test",
+    "e2e-generate-report": "allure generate ./allure-results --clean && allure open",
+    "unit-tests-generate-report": "allure generate ./libs/core/reports -o unit-tests-allure-report"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -100,6 +102,8 @@
     "@stackblitz/sdk": "1.5.2",
     "@types/google.visualization": "0.0.59",
     "@types/node": "14.14.10",
+    "@wdio/devtools-service": "7.0.5",
+    "allure-commandline": "2.13.8",
     "classlist.js": "1.1.20150312",
     "core-js": "3.7.0",
     "focus-trap": "6.1.4",
@@ -108,6 +112,7 @@
     "highlight.js": "10.4.1",
     "intl": "1.2.5",
     "jasminewd2": "2.2.0",
+    "karma-allure-reporter": "1.4.6",
     "karma-viewport": "1.0.7",
     "moment": "2.29.1",
     "ngx-markdown": "10.1.1",
