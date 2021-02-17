@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.27.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.3...v0.27.1-rc.4) (2021-02-17)
+
+
+### Bug Fixes
+
+* (Platform) Input Group accessibility ([#4652](https://github.com/SAP/fundamental-ngx/issues/4652)) ([cbed46f](https://github.com/SAP/fundamental-ngx/commit/cbed46f5eccff811fa8b3909eb67602174f57b7d))
+
 ### [0.27.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.2...v0.27.1-rc.3) (2021-02-17)
 
 
