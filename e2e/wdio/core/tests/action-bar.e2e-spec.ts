@@ -28,6 +28,7 @@ import {
     saveButtonFocusState,
     saveButtonHoverState
 } from '../fixtures/testData/action-bar-tags';
+import { saveButton, backButton, cancelButton, menuButton, menuItem } from '../fixtures/appData/action-bar-contents';
 
 describe('Action Bar Test Suite', function() {
     const actionBarPage = new ActionBarPo();
@@ -49,7 +50,7 @@ describe('Action Bar Test Suite', function() {
         actionBarContextualMenuButton,
         actionBarContextualMenuOptionList,
         actionBarContextualMenuOptionListItem
-    } = new ActionBarPo();
+    } = actionBarPage;
 
     beforeAll(() => {
         actionBarPage.open();
@@ -58,27 +59,27 @@ describe('Action Bar Test Suite', function() {
 
     describe('verify Back button example', function() {
         it('should check back button hover state', () => {
-            checkButtonHoverState(actionBarBackButtonBackButton, backButtonExample + backButtonHoverState, 'Back');
+            checkButtonHoverState(actionBarBackButtonBackButton, backButtonExample + backButtonHoverState, backButton);
         });
 
         it('should check Back button focus state', () => {
-            checkButtonFocusState(actionBarBackButtonBackButton, backButtonExample + backButtonFocusState, 'Back');
+            checkButtonFocusState(actionBarBackButtonBackButton, backButtonExample + backButtonFocusState, backButton);
         });
 
         it('should check Cancel hover state', () => {
-            checkButtonHoverState(actionBarBackButtonCancelButton, backButtonExample + cancelButtonHoverState, 'Cancel');
+            checkButtonHoverState(actionBarBackButtonCancelButton, backButtonExample + cancelButtonHoverState, cancelButton);
         });
 
         it('should check Cancel button focus state', () => {
-            checkButtonFocusState(actionBarBackButtonCancelButton, backButtonExample + cancelButtonFocusState, 'Cancel');
+            checkButtonFocusState(actionBarBackButtonCancelButton, backButtonExample + cancelButtonFocusState, cancelButton);
         });
 
         it('should check Save hover state', () => {
-            checkButtonHoverState(actionBarBackButtonSaveButton, backButtonExample + saveButtonHoverState, 'Save');
+            checkButtonHoverState(actionBarBackButtonSaveButton, backButtonExample + saveButtonHoverState, saveButton);
         });
 
         it('should check Save button focus state', () => {
-            checkButtonFocusState(actionBarBackButtonSaveButton, backButtonExample + saveButtonFocusState, 'Save');
+            checkButtonFocusState(actionBarBackButtonSaveButton, backButtonExample + saveButtonFocusState, saveButton);
         });
     });
 
@@ -87,27 +88,27 @@ describe('Action Bar Test Suite', function() {
             scrollIntoView(actionBarLongPageTitle);
         }, 1);
         it('should check Back button hover state', () => {
-            checkButtonHoverState(actionBarLongPageTitleBackButton, longTitleExample + backButtonHoverState, 'Back');
+            checkButtonHoverState(actionBarLongPageTitleBackButton, longTitleExample + backButtonHoverState, backButton);
         });
 
         it('should check Back button focus state', () => {
-            checkButtonFocusState(actionBarLongPageTitleBackButton, longTitleExample + backButtonFocusState, 'Back');
+            checkButtonFocusState(actionBarLongPageTitleBackButton, longTitleExample + backButtonFocusState, backButton);
         });
 
         it('should check Cancel hover state', () => {
-            checkButtonHoverState(actionBarLongPageTitleCancelButton, longTitleExample + cancelButtonHoverState, 'Cancel');
+            checkButtonHoverState(actionBarLongPageTitleCancelButton, longTitleExample + cancelButtonHoverState, cancelButton);
         });
 
         it('should check Cancel button focus state', () => {
-            checkButtonFocusState(actionBarLongPageTitleCancelButton, longTitleExample + cancelButtonFocusState, 'Cancel');
+            checkButtonFocusState(actionBarLongPageTitleCancelButton, longTitleExample + cancelButtonFocusState, cancelButton);
         });
 
         it('should check Save button hover state', () => {
-            checkButtonHoverState(actionBarLongPageTitleSaveButton, longTitleExample + saveButtonHoverState, 'Save');
+            checkButtonHoverState(actionBarLongPageTitleSaveButton, longTitleExample + saveButtonHoverState, saveButton);
         });
 
         it('should check Save button focus state', () => {
-            checkButtonFocusState(actionBarLongPageTitleSaveButton, longTitleExample + saveButtonFocusState, 'Save');
+            checkButtonFocusState(actionBarLongPageTitleSaveButton, longTitleExample + saveButtonFocusState, saveButton);
         });
     });
 
@@ -117,19 +118,19 @@ describe('Action Bar Test Suite', function() {
         }, 1);
 
         it('should check Cancel hover state', () => {
-            checkButtonHoverState(actionBarNoBackButtonCancelButton, noBackButtonExample + cancelButtonHoverState, 'Cancel');
+            checkButtonHoverState(actionBarNoBackButtonCancelButton, noBackButtonExample + cancelButtonHoverState, cancelButton);
         });
 
         it('should check Cancel button focus state', () => {
-            checkButtonFocusState(actionBarNoBackButtonCancelButton, noBackButtonExample + cancelButtonFocusState, 'Cancel');
+            checkButtonFocusState(actionBarNoBackButtonCancelButton, noBackButtonExample + cancelButtonFocusState, cancelButton);
         });
 
         it('should check Save button hover state', () => {
-            checkButtonHoverState(actionBarNoBackButtonSaveButton, noBackButtonExample + saveButtonHoverState, 'Save');
+            checkButtonHoverState(actionBarNoBackButtonSaveButton, noBackButtonExample + saveButtonHoverState, saveButton);
         });
 
         it('should check Save button focus state', () => {
-            checkButtonFocusState(actionBarNoBackButtonSaveButton, noBackButtonExample + saveButtonFocusState, 'Save');
+            checkButtonFocusState(actionBarNoBackButtonSaveButton, noBackButtonExample + saveButtonFocusState, saveButton);
         });
     });
 
@@ -141,11 +142,11 @@ describe('Action Bar Test Suite', function() {
         }, 1);
 
         it('should check Menu button hover state', () => {
-            checkButtonHoverState(actionBarContextualMenuButton, contextualMenuExample + menuButtonHoverState, 'Menu');
+            checkButtonHoverState(actionBarContextualMenuButton, contextualMenuExample + menuButtonHoverState, menuButton);
         });
 
         it('should check Menu button focus state', () => {
-            checkButtonFocusState(actionBarContextualMenuButton, contextualMenuExample + menuButtonFocusState, 'Menu');
+            checkButtonFocusState(actionBarContextualMenuButton, contextualMenuExample + menuButtonFocusState, menuButton);
         });
 
         it('should check Menu items hover state', () => {
@@ -155,7 +156,7 @@ describe('Action Bar Test Suite', function() {
             const menuItemsArrLength = getElementArrayLength(actionBarContextualMenuOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
                 checkButtonHoverState(actionBarContextualMenuOptionListItem,
-                    contextualMenuExample + menuItemHoverState + '-' + i, 'Menu Item', i);
+                    contextualMenuExample + menuItemHoverState + '-' + i, menuItem, i);
             }
         });
 
@@ -166,7 +167,7 @@ describe('Action Bar Test Suite', function() {
             const menuItemsArrLength = getElementArrayLength(actionBarContextualMenuOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
                 checkButtonFocusState(actionBarContextualMenuOptionListItem,
-                    contextualMenuExample + menuItemFocusState + '-' + i, 'Menu Item', i);
+                    contextualMenuExample + menuItemFocusState + '-' + i, menuItem, i);
             }
         });
 
@@ -177,7 +178,7 @@ describe('Action Bar Test Suite', function() {
             const menuItemsArrLength = getElementArrayLength(actionBarContextualMenuOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
                 checkButtonActiveState(actionBarContextualMenuOptionListItem,
-                    contextualMenuExample + menuItemActiveState + '-' + i, 'Menu Item', i);
+                    contextualMenuExample + menuItemActiveState + '-' + i, menuItem, i);
             }
         });
     });
@@ -190,19 +191,19 @@ describe('Action Bar Test Suite', function() {
         }, 1);
 
         it('should check Back button hover state', () => {
-            checkButtonHoverState(actionBarMobileViewBackButton, mobileViewExample + backButtonHoverState, 'Back');
+            checkButtonHoverState(actionBarMobileViewBackButton, mobileViewExample + backButtonHoverState, backButton);
         });
 
         it('should check Back button focus state', () => {
-            checkButtonFocusState(actionBarMobileViewBackButton, mobileViewExample + backButtonFocusState, 'Back');
+            checkButtonFocusState(actionBarMobileViewBackButton, mobileViewExample + backButtonFocusState, backButton);
         });
 
         it('should check first Menu button hover state', () => {
-            checkButtonHoverState(actionBarMobileViewMenuButton, mobileViewExample + menuButtonHoverState, 'Menu');
+            checkButtonHoverState(actionBarMobileViewMenuButton, mobileViewExample + menuButtonHoverState, menuButton);
         });
 
         it('should check first Menu button focus state', () => {
-            checkButtonFocusState(actionBarMobileViewMenuButton, mobileViewExample + menuButtonFocusState, 'Menu');
+            checkButtonFocusState(actionBarMobileViewMenuButton, mobileViewExample + menuButtonFocusState, menuButton);
         });
 
         it('should check first Menu items hover state', () => {
@@ -211,7 +212,7 @@ describe('Action Bar Test Suite', function() {
 
             const menuItemsArrLength = getElementArrayLength(actionBarMobileViewOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
-                checkButtonHoverState(actionBarMobileViewOptionListItem, mobileViewExample + menuItemHoverState + '-' + i, 'Menu Item', i);
+                checkButtonHoverState(actionBarMobileViewOptionListItem, mobileViewExample + menuItemHoverState + '-' + i, menuItem, i);
             }
         });
 
@@ -221,7 +222,7 @@ describe('Action Bar Test Suite', function() {
 
             const menuItemsArrLength = getElementArrayLength(actionBarMobileViewOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
-                checkButtonFocusState(actionBarMobileViewOptionListItem, mobileViewExample + menuItemFocusState + '-' + i, 'Menu Item', i);
+                checkButtonFocusState(actionBarMobileViewOptionListItem, mobileViewExample + menuItemFocusState + '-' + i, menuItem, i);
             }
         });
 
@@ -232,7 +233,7 @@ describe('Action Bar Test Suite', function() {
             const menuItemsArrLength = getElementArrayLength(actionBarMobileViewOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
                 checkButtonActiveState(actionBarMobileViewOptionListItem,
-                    mobileViewExample + menuItemActiveState + '-' + i, 'First Menu Item', i);
+                    mobileViewExample + menuItemActiveState + '-' + i, 'First ' + menuItem, i);
             }
         });
 
@@ -243,7 +244,7 @@ describe('Action Bar Test Suite', function() {
             const menuItemsArrLength = getElementArrayLength(actionBarMobileViewOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
                 checkButtonHoverState(actionBarMobileViewOptionListItem,
-                    mobileViewExample + 'second-' + menuItemHoverState + '-' + i, 'Second Menu Item', i);
+                    mobileViewExample + 'second-' + menuItemHoverState + '-' + i, 'Second ' + menuItem, i);
             }
         });
 
@@ -255,7 +256,7 @@ describe('Action Bar Test Suite', function() {
             for (let i = 0; menuItemsArrLength > i; i++) {
                 checkButtonFocusState(actionBarMobileViewOptionListItem,
                     mobileViewExample + 'second-' + menuItemFocusState + '-' + i,
-                    'Second Menu Item', i);
+                    'Second ' + menuItem, i);
             }
         });
 
@@ -266,7 +267,7 @@ describe('Action Bar Test Suite', function() {
             const menuItemsArrLength = getElementArrayLength(actionBarMobileViewOptionListItem);
             for (let i = 0; menuItemsArrLength > i; i++) {
                 checkButtonActiveState(actionBarMobileViewOptionListItem,
-                    mobileViewExample + 'second-' + menuItemActiveState + '-' + i, 'Second Menu Item', i);
+                    mobileViewExample + 'second-' + menuItemActiveState + '-' + i, 'Second ' + menuItem, i);
             }
         });
     });
