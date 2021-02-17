@@ -14,7 +14,7 @@
                         <li
                             fd-wizard-step
                             [status]="step1status"
-                            (statusChange)="step1status = $event"
+                            (statusChange)="statusChanged(1, $event)"
                             label="Step 1: One Line"
                         >
                             <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
@@ -30,7 +30,7 @@
                         <li
                             fd-wizard-step
                             [status]="step2status"
-                            (statusChange)="step2status = $event"
+                            (statusChange)="statusChanged(2, $event)"
                             label="Step 2: Another Step"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
@@ -46,7 +46,7 @@
                         <li
                             fd-wizard-step
                             [status]="step3status"
-                            (statusChange)="step3status = $event"
+                            (statusChange)="statusChanged(3, $event)"
                             label="Step 3: One line truncates"
                             optionalText="(Optional)"
                         >

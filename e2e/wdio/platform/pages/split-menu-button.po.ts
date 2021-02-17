@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import SMBData from '../fixtures/appData/split-menu-button-page-contents';
+import { outputLabel } from '../fixtures/appData/split-menu-button-page-contents';
 import { getText, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SplitMenuButtonPo extends BaseComponentPo {
@@ -29,7 +29,7 @@ export class SplitMenuButtonPo extends BaseComponentPo {
     }
 
     checkSelectionOutput(outputSelector, expectation): void {
-        expect(getText(outputSelector)).toEqual(SMBData.outputLabel + expectation);
+        expect(getText(outputSelector)).toEqual(outputLabel + expectation);
     }
 
     open(): void {

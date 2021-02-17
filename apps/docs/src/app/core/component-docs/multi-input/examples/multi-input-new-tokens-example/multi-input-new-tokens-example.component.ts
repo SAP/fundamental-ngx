@@ -23,8 +23,10 @@ export class MultiInputNewTokensExampleComponent {
     }
 
     parseFunc(value: string): object {
-        if (value && value.length) {
-            return { name: value };
-        }
+        return { name: value };
+    }
+
+    validateFunc(value: string): boolean {
+        return value?.length >= 3
     }
 }

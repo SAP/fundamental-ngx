@@ -20,14 +20,12 @@ import {
     ViewEncapsulation,
     isDevMode,
     Attribute,
-    NgZone,
     SimpleChanges,
     OnChanges,
     Self
 } from '@angular/core';
 import { ControlValueAccessor, NgControl} from '@angular/forms';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Directionality } from '@angular/cdk/bidi';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
 import { startWith, takeUntil, switchMap } from 'rxjs/operators';
@@ -35,7 +33,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { DialogConfig } from '../dialog/utils/dialog-config.class';
 import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 import { SelectKeyManagerService } from './select-key-manager.service';
@@ -288,16 +285,6 @@ export class SelectComponent implements
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    keydownHandler(event: KeyboardEvent): void {
-        if (this._isOpen) {
-            this._keyManagerService._handleClosedKeydown(event);
-        } else {
-            this._keyManagerService._handleOpenKeydown(event);
-        }
-    }
 
     /** @hidden */
     @HostListener('window:resize')
@@ -658,7 +645,6 @@ export class SelectComponent implements
     }
 
     _getAriaActiveDescendant(): string | null {
-
         if (this._isOpen && this._keyManagerService._keyManager && this._keyManagerService._keyManager.activeItem) {
             return this._keyManagerService._keyManager.activeItem.id;
         }

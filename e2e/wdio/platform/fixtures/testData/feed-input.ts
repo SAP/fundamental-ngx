@@ -1,13 +1,11 @@
-export const
-    four_lines_text = `
-    line 1 
-    line 2 
+export const four_lines_text = `
+    line 1
+    line 2
     line 3
-    line 4`,
-
-    eight_lines_text = `
-    line 1 
-    line 2 
+    line 4`;
+export const eight_lines_text = `
+    line 1
+    line 2
     line 3
     line 4
     line 5

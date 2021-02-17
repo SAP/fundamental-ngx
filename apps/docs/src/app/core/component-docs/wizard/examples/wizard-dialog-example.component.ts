@@ -23,6 +23,12 @@ export class WizardDialogExampleComponent {
 
     constructor(private _dialogService: DialogService) {}
 
+    statusChanged(stepNumber: number, event: WizardStepStatus): void {
+        if (event === 'current') {
+            this.goToStep(stepNumber);
+        }
+    }
+
     openDialog(dialog: TemplateRef<any>): void {
         this._dialogService.open(dialog, {
             width: '100%',

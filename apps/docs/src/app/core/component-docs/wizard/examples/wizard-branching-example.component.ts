@@ -40,6 +40,12 @@ export class WizardBranchingExampleComponent implements OnInit {
         this.oldPayment = this.paymentSelection;
     }
 
+    statusChanged(stepNumber: number, event: WizardStepStatus): void {
+        if (event === 'current') {
+            this.goToStep(stepNumber);
+        }
+    }
+
     paymentSelectionChanged(dialog: TemplateRef<any>): void {
         if (this.oldPayment !== this.paymentSelection) {
             if (!this.init) {
