@@ -18,8 +18,7 @@ import {
     QueryList,
     TemplateRef,
     ViewChild,
-    ViewChildren,
-    ViewEncapsulation
+    ViewChildren
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -67,8 +66,7 @@ type CardColumn = CardDefinitionDirective[];
     selector: 'fd-fixed-card-layout',
     templateUrl: './fixed-card-layout.component.html',
     styleUrls: ['./fixed-card-layout.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** @hidden */
@@ -172,6 +170,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
             event.container.data[event.currentIndex] = event.previousContainer.data[event.previousIndex];
             event.previousContainer.data[event.previousIndex] = targetData;
         }
+
+        // Need to adjust rank after drag and drop
         this._adjustCardRank(
             event.container.data[event.currentIndex],
             event.previousContainer.data[event.previousIndex]
@@ -285,6 +285,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
      */
     private _distributeCards(columns: CardColumn[]): void {
         const numberOfColumns = columns.length;
+        // sort cards based on rank then create layout
         this._cardsArray?.sort(comparator);
         this._cardsArray?.forEach((card, i) => {
             const index = i % numberOfColumns;
