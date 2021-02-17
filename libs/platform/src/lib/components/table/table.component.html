@@ -64,7 +64,7 @@
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
         >
             <fd-checkbox
-                *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
+                *ngIf="selectionMode === SELECTION_MODE.MULTIPLE; else emptyTHTemplate"
                 [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                 [ngModel]="_checkedAll"
                 (ngModelChange)="_toggleAllSelectableRows($event)"
@@ -359,7 +359,6 @@
     <tr
         fd-table-row
         scope="row"
-        [attr.aria-selected]="row.checked"
     >
 
         <!-- Row Selection Cell -->
@@ -368,8 +367,9 @@
                 <td
                     class="fd-table__cell--fixed fd-table__cell--focusable fdp-table__cell--selection"
                     tabindex="0"
-                    role="checkbox"
+                    role="rowheader"
                     fd-table-cell
+                    [attr.aria-selected]="row.checked"
                     (click)="_toggleSelectableRow(row)"
                 ></td>
             </ng-container>
@@ -430,3 +430,6 @@
         </tbody>
     </table>
 </ng-template>
+
+<!-- Empty TH Message -->
+<ng-template #emptyTHTemplate>&nbsp;</ng-template>
