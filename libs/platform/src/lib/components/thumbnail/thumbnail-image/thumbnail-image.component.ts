@@ -1,39 +1,43 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnChanges, SimpleChanges, OnInit } from '@angular/core';
-import { Media } from '../thumbnail.component';
-import { ThumbnailDetailsComponent} from '../thumbnail-details/thumbnail-details.component';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnChanges, SimpleChanges, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DialogService, RtlService } from '@fundamental-ngx/core';
+import { Media } from '../thumbnail.component';
+import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
 @Component({
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',
-    styleUrls: ['./thumbnail-image.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./thumbnail-image.component.scss']
+  //  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThumbnailImageComponent implements OnChanges, OnInit {
 
-    constructor(private _dialogService: DialogService,  private  _rtlService: RtlService) {}
-
+    /** media list obejct contains group of Media object.*/
     @Input()
     mediaList: Media[];
 
+    /** Boolean to set the orientaiton of thumbnail images.*/
     @Input()
     isHorizontal = false;
 
+    /**Maximum limit for the thumbnail images to display */
     @Input()
     maxImages = 5;
 
-
+    /** Output event for thumbnail image click */
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
-    ngOnInit(): void {
+    /** @hidden */
+    constructor(private _dialogService: DialogService, private _rtlService: RtlService) { }
 
+    /** @hidden */
+    ngOnInit(): void {
         if (this.mediaList.length > this.maxImages) {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
         }
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        // Select first image by default, if none has been selected
         if (changes.mediaList && Array.isArray(this.mediaList)) {
             const alreadySelected: boolean = this.mediaList.some(image => image.selected);
             if (!alreadySelected) {
@@ -45,26 +49,21 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         }
     }
 
-
-
-    openDialog(selectedMedia: Media, mediaList: Media[], ): void {
+    /** Opens the Dialog when the imgaes croses the maximum number of images to display */
+    openDialog(selectedMedia: Media, mediaList: Media[]): void {
         this.mediaList.forEach(item => item.selected = false);
         this.mediaList.forEach(item => item.overlayRequired = false);
         selectedMedia.selected = true;
-        const dialogRef =  this._dialogService.open(ThumbnailDetailsComponent, {
+        const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
             data: {
-                selectedMedia:  selectedMedia,
+                selectedMedia: selectedMedia,
                 mediaList: mediaList,
-                rtl:  this._isRtl(),
+                rtl: this._isRtl(),
                 maxImages: this.maxImages
             }
         });
-    }
-
-    _isRtl(): boolean {
-        return this._rtlService?.rtl.getValue();
     }
 
     /** @hidden */
@@ -72,6 +71,11 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         this.mediaList.forEach(item => item.selected = false);
         selectedMedia.selected = true;
         this.thumbnailClicked.emit(selectedMedia);
+    }
+
+    /** @hidden  returns boolean value for rtl */
+    private _isRtl(): boolean {
+        return this._rtlService?.rtl.getValue();
     }
 
 

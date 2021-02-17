@@ -36,9 +36,6 @@
           border-color: $fdp-thumbnail-image-border-color;
           border-radius: $fdp-thumbnail-image-border-radius;
       }
-      [dir='rtl'] & {
-          margin: 0.688rem;
-      }
     }
     fd-avatar {
       width: $fdp-thumbnail-image-size;

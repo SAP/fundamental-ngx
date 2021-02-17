@@ -7,6 +7,7 @@ describe('ThumbnailDetailsComponent', () => {
   let component: ThumbnailDetailsComponent;
   let fixture: ComponentFixture<ThumbnailDetailsComponent>;
   const dialogRef = new DialogRef();
+  
   const selectedMedia: Media = {
     title: 'Nature Deetails',
     thumbnailUrl: 'http://lorempixel.com/400/400/nature',

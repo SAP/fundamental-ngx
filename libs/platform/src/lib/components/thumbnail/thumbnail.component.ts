@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { DialogService, RtlService } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
-import {DialogService, RtlService} from '@fundamental-ngx/core'
-import { ThumbnailDetailsComponent} from './thumbnail-details/thumbnail-details.component';
+import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 export interface Media {
     title: string;
     thumbnailUrl: string;
@@ -32,11 +32,6 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
 })
 export class ThumbnailComponent extends BaseComponent implements OnInit {
 
-    constructor(protected _changeDetectorRef: ChangeDetectorRef,
-         private _dialogService: DialogService,
-           private readonly _rtlService: RtlService) {
-        super(_changeDetectorRef);
-    }
 
     /** List of media objects to display. */
     @Input()
@@ -56,6 +51,13 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     /** @hidden Currently selected media. */
     public selectedMedia: Media;
 
+    /** @hidden */
+    constructor(protected _changeDetectorRef: ChangeDetectorRef,
+        private _dialogService: DialogService,
+        private readonly _rtlService: RtlService) {
+        super(_changeDetectorRef);
+    }
+
     /** @hidden Select first media object on init. */
     ngOnInit(): void {
         if (Array.isArray(this.mediaList) && this.mediaList.length > 0) {
@@ -63,37 +65,33 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         }
     }
 
-    /** @hidden */
     thumbnailClickHandle(selectedMedia: Media): void {
         this.selectedMedia = selectedMedia;
-        this.thumbnailClicked.emit(this.createClickEvent(this.selectedMedia));
+        this.thumbnailClicked.emit(this._createClickEvent(this.selectedMedia));
     }
 
-    openDialog(selectedMedia: Media, mediaList: Media[], ): void {
+    openDialog(selectedMedia: Media, mediaList: Media[]): void {
         this.mediaList.forEach(item => item.overlayRequired = false);
-        const dialogRef =  this._dialogService.open(ThumbnailDetailsComponent, {
+        const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
             data: {
                 selectedMedia: selectedMedia,
                 mediaList: mediaList,
-                rtl:  this._isRtl(),
+                rtl: this._isRtl(),
                 maxImages: this.maxImagesDisplay
             }
         });
     }
 
+    /** @hidden returns rtl value */
     _isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
 
-    /** @hidden
-     * Create Thumbnail click event instance
-     */
-    createClickEvent(value: Media): ThumbnailClickedEvent {
+    /** @hidden Create Thumbnail click event instance */
+    private _createClickEvent(value: Media): ThumbnailClickedEvent {
         return new ThumbnailClickedEvent(this, value);
     }
-
-
 
 }

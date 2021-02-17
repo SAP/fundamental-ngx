@@ -15,16 +15,14 @@
             height: 45.5rem;
         }
 
-        fd-dialog-body{
-
-            width: 84rem;
-            height: 45.5rem;
+        fd-dialog-body {
 
         .fdp-thumbnail-button--left {
             cursor: pointer;
             position: absolute;
             top: 50%;
             left: 2rem;
+            border-radius: 50%;
         }
 
         .fdp-thumbnail-button--right {
@@ -32,14 +30,15 @@
             cursor: pointer;
             position: absolute;
             top: 50%;
+            border-radius: 50%;
+
         }
 
         .fdp-media-container {
             position: relative;
             width: $fdp-media-player-size;
             height: $fdp-media-player-size;
-            margin-left: 25.438rem;
-            margin-right: 25.438rem;
+            margin: 0 25.438rem;
             img {
                 max-width: $fdp-media-player-size;
                 max-height: $fdp-media-player-size;
