@@ -31,7 +31,7 @@ exports.config = {
         './e2e/wdio/**/checkbox-group.e2e-spec.ts',
     ],
     suites: {
-        platformA_L: [
+        platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/action-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/checkbox.e2e-spec.ts',
@@ -49,7 +49,7 @@ exports.config = {
             './e2e/wdio/platform/**/link.e2e-spec.ts',
             './e2e/wdio/platform/**/list.e2e-spec.ts',
         ],
-        platformM_Z: [
+        platformB: [
             './e2e/wdio/platform/**/menu.e2e-spec.ts',
             './e2e/wdio/platform/**/menu-button.e2e-spec.ts',
             './e2e/wdio/platform/**/multi-input.e2e-spec.ts',
