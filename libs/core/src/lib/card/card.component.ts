@@ -8,6 +8,7 @@ import {
     Input,
     HostBinding
 } from '@angular/core';
+
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 import { CLASS_NAME, CardType } from './constants';
@@ -22,7 +23,7 @@ let cardId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnChanges, OnInit, CssClassBuilder  {
+export class CardComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Badge */
     @Input() badge: string;
 
@@ -82,9 +83,5 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder  {
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
-    }
-
-    focus(): void {
-        this._elementRef.nativeElement.focus();
     }
 }
