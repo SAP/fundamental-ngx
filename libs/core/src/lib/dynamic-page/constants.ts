@@ -3,7 +3,7 @@ export const CLASS_NAME = {
     dynamicPageTitleArea: 'fd-dynamic-page__title-area',
     dynamicPageMainContainer: 'fd-dynamic-page__main-container',
     dynamicPageBreadcrumbTitleContainer: 'fd-dynamic-page__breadcrumb-title-container',
-    dynamicPageTitleAreaCollapsed: 'fd-dynamic-page__title-area--collapsed', // need to use thiis TODO
+    dynamicPageTitleAreaCollapsed: 'fd-dynamic-page__title-area--collapsed',
     dynamicPageTitleContainer: 'fd-dynamic-page__title-container',
     dynamicPageTitle: 'fd-dynamic-page__title',
     dynamicPageBreadcrumb: 'fd-dynamic-page__breadcrumb',

@@ -83,21 +83,21 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     offset = 0;
 
-    /** reference to header component  */
+    /** @hidden reference to header component  */
     @ContentChild(DynamicPageSubheaderComponent)
-    pageSubheaderComponent: DynamicPageSubheaderComponent;
+    _pageSubheaderComponent: DynamicPageSubheaderComponent;
 
-    /** reference to title component  */
+    /** @hidden reference to title component  */
     @ContentChild(DynamicPageHeaderComponent)
-    headerComponent: DynamicPageHeaderComponent;
+    _headerComponent: DynamicPageHeaderComponent;
 
-    /** reference to content component  */
+    /** @hidden reference to content component  */
     @ContentChild(DynamicPageContentComponent)
-    contentComponent: DynamicPageContentComponent;
+    _contentComponent: DynamicPageContentComponent;
 
     /** @hidden reference to tab component */
     @ContentChild(TabListComponent)
-    tabComponent: TabListComponent;
+    _tabComponent: TabListComponent;
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
@@ -137,7 +137,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         this._setContainerPositions();
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
-        if (this.pageSubheaderComponent?.collapsible) {
+        if (this._pageSubheaderComponent?.collapsible) {
             this._addScrollListeners();
             this._listenOnResize();
         }
@@ -172,7 +172,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _propagatePropertiesToChildren(): void {
-        this._headerCollapsible = this.pageSubheaderComponent.collapsible;
+        this._headerCollapsible = this._pageSubheaderComponent.collapsible;
         this._propagateSizeToChildren();
     }
 
@@ -196,8 +196,8 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _propagateSizeToChildren(): void {
-        if (this.headerComponent) {
-            this.headerComponent.size = this.size;
+        if (this._headerComponent) {
+            this._headerComponent.size = this.size;
         }
         this._setContainerPositions();
     }
@@ -238,12 +238,12 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _addScrollListeners(): void {
-        const contentElement = this.contentComponent?.elementRef?.nativeElement;
+        const contentElement = this._contentComponent?.elementRef?.nativeElement;
         if (contentElement) {
             this._listenOnScroll(contentElement);
         }
 
-        const tabElement = this.tabComponent?.contentContainer?.nativeElement
+        const tabElement = this._tabComponent?.contentContainer?.nativeElement
         if (tabElement) {
             this._listenOnScroll(tabElement);
         }
@@ -278,8 +278,8 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
      * set top position of normal content on scrolling
      */
     private _setContainerPosition(): void {
-        if (this.contentComponent) {
-            const contentComponentElement = this.contentComponent.elementRef.nativeElement;
+        if (this._contentComponent) {
+            const contentComponentElement = this._contentComponent.elementRef.nativeElement;
             this._renderer.setStyle(
                 contentComponentElement,
                 'height',
@@ -293,10 +293,10 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
      * set position for tabs and tabbed content's position relative to the tabs on scrolling
      */
     private _setTabsPosition(): void {
-        if (!this.tabComponent || !this.tabComponent.contentContainer) {
+        if (!this._tabComponent || !this._tabComponent.contentContainer) {
             return;
         }
-        const element = this.tabComponent.contentContainer.nativeElement;
+        const element = this._tabComponent.contentContainer.nativeElement;
         this._renderer.setStyle(
             element,
             'height',
@@ -306,11 +306,11 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _removeShadowWhenTabComponent(): void {
-        if (!this.pageSubheaderComponent?.collapsible || !this.tabComponent) {
+        if (!this._pageSubheaderComponent?.collapsible || !this._tabComponent) {
             return;
         }
 
-        const pinCollapseShadowElement = this.pageSubheaderComponent?.pinCollapseContainer;
+        const pinCollapseShadowElement = this._pageSubheaderComponent?.pinCollapseContainer;
 
         if (pinCollapseShadowElement) {
             addClassNameToElement(

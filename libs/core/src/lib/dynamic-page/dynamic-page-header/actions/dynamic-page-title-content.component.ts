@@ -2,12 +2,10 @@ import {
     Component,
     ChangeDetectionStrategy,
     ViewEncapsulation,
-    ContentChild,
     ChangeDetectorRef,
     Input
 } from '@angular/core';
 import { DynamicPageResponsiveSize } from '../../constants';
-import { ToolbarComponent } from '../../../toolbar/toolbar.component';
 
 @Component({
     selector: 'fd-dynamic-page-title-content',
@@ -41,10 +39,6 @@ export class DynamicPageTitleContentComponent {
     /** Whether should be on compact mode */
     @Input()
     compact = false;
-
-    /** @hidden */
-    @ContentChild(ToolbarComponent)
-    _toolbarComponent: ToolbarComponent;
 
     /** @hidden */
     _size: DynamicPageResponsiveSize;

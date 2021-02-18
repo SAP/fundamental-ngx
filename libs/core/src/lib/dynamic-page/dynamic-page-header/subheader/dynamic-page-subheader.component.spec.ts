@@ -2,48 +2,34 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { DynamicPageService } from '../../dynamic-page.service';
-import { By } from '@angular/platform-browser';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageSubheaderComponent } from './dynamic-page-subheader.component';
 
 @Component({
     template: `
-        <fd-dynamic-page-subheader
-                [collapsible]="collapsible"
-                [pinnable]="pinnable"
-                [collapsed]="collapsed"
-                [expandLabel]="expandLabel"
-                [collapseLabel]="collapseLabel"
-                [pinAriaLabel]="pinAriaLabel"
-                [unpinAriaLabel]="unpinAriaLabel"
-                [size]="size"
-                [background]="background"
-        ></fd-dynamic-page-subheader>`
+        <fd-dynamic-page-subheader></fd-dynamic-page-subheader>`,
+    providers: [
+        DynamicPageService
+    ]
 })
 class TestComponent {
-    collapsible = true;
-    pinnable = false;
-    collapsed = false;
-    expandLabel = 'Collapse';
-    collapseLabel = 'Expand';
-    pinAriaLabel = 'Pinned';
-    unpinAriaLabel = 'Unpinned';
-    size = 'medium';
-    background = '';
 
-    @ViewChild(DynamicPageSubheaderComponent) dynamicPageTitleComponent: DynamicPageSubheaderComponent;
+    @ViewChild(DynamicPageSubheaderComponent) subHeader: DynamicPageSubheaderComponent;
+
+    constructor(
+        public dynamicPageService: DynamicPageService
+    ) {}
 }
 
 describe('DynamicPageHeaderComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
-    let pageHeaderComponent: DynamicPageSubheaderComponent;
+    let subHeader: DynamicPageSubheaderComponent;
     let component: TestComponent;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, DynamicPageModule],
-            declarations: [TestComponent],
-            providers: [DynamicPageService]
+            declarations: [TestComponent]
         }).compileComponents();
     }));
 
@@ -51,107 +37,36 @@ describe('DynamicPageHeaderComponent', () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        pageHeaderComponent = component.dynamicPageTitleComponent;
+        subHeader = component.subHeader
     });
-    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
+
 
     it('should create', () => {
         expect(fixture).toBeTruthy();
     });
 
-    it('Should not be able to see expand/collapse or pin button if collapsible is "false"', async () => {
-        let expandCollapseButton = fixture.debugElement.queryAll(
-            By.css('.fd-dynamic-page__collapsible-header-visibility-container--button-group')
-        );
-        expect(expandCollapseButton.length).toBe(1);
-        component.collapsible = false;
-        await wait(fixture);
-        expandCollapseButton = fixture.debugElement.queryAll(
-            By.css('.fd-dynamic-page__collapsible-header-visibility-container--button-group')
-        );
-        expect(expandCollapseButton.length).toBe(0);
+    it('should toggle pinned', () => {
+        subHeader._pinned = false;
+        subHeader.togglePinned();
+        fixture.detectChanges();
+        expect(component.dynamicPageService.pinned.value).toBeTrue();
     });
 
-    describe('expand actions', async () => {
-        it('should be able to expand the header', async () => {
-            component.collapsed = false;
-            await wait(fixture);
-            const contentEl = fixture.debugElement.queryAll(By.css('.fd-dynamic-page__collapsible-header'));
-            expect(contentEl.length).toBe(1);
-        });
+    it('should toggle collapse', () => {
+        let visibilityChanged = false;
+        component.dynamicPageService.subheaderVisibilityChange.subscribe(() => visibilityChanged = true);
+        subHeader.collapsed = false;
+        subHeader.collapsed = true;
 
-        it('should set aria labels correctly', async () => {
-            component.collapsed = false;
-            component.collapseLabel = 'Expand';
-            await wait(fixture);
-            const collapseBtn: HTMLButtonElement = fixture.debugElement.query(
-                By.css('.fd-dynamic-page__collapse-button')
-            ).nativeElement;
-            expect(collapseBtn.getAttribute('aria-label')).toBe(component.collapseLabel);
-        });
+        expect(visibilityChanged).toBeTrue();
+        expect(component.dynamicPageService.collapsed.value).toBeTrue();
     });
-    describe('collapse actions', async () => {
-        it('should be able to collapse the header', async () => {
-            component.collapsed = true;
-            fixture.detectChanges();
-            const contentEl: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'))
-                .nativeElement;
-            expect(contentEl.getAttribute('aria-hidden')).toBeTruthy();
-        });
 
-        it('should set aria labels correctly', async () => {
-            component.collapsed = true;
-            fixture.detectChanges();
-            const collapseBtn: HTMLButtonElement = fixture.debugElement.query(
-                By.css('.fd-dynamic-page__collapse-button')
-            ).nativeElement;
-            expect(collapseBtn.getAttribute('aria-label')).toBe(component.collapseLabel);
-        });
-    });
-    describe('pin actions', async () => {
-        it('should be able to pin the header', async () => {
-            component.pinnable = true;
-            await wait(fixture);
+    it('should handle collapse from service', () => {
+        subHeader.collapsed = false;
+        component.dynamicPageService.collapsed.next(true);
 
-            const pinBtn: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-dynamic-page__pin-button'))
-                .nativeElement;
-            pinBtn.click();
-            const contentEl = fixture.debugElement.queryAll(By.css('.fd-dynamic-page__collapsible-header'));
-            expect(contentEl.length).toBe(1);
-        });
+        expect(subHeader.collapsed).toBeTrue();
     });
-    describe('page header area', () => {
-        it('should set size', async () => {
-            const headerElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'));
-            expect(
-                headerElement.nativeElement.classList.contains('fd-dynamic-page__collapsible-header--md')
-            ).toBeTruthy();
-            component.size = 'large';
-            fixture.detectChanges();
-            expect(
-                headerElement.nativeElement.classList.contains('fd-dynamic-page__collapsible-header--lg')
-            ).toBeTruthy();
-            component.size = 'small';
-            fixture.detectChanges();
-            expect(
-                headerElement.nativeElement.classList.contains('fd-dynamic-page__collapsible-header--sm')
-            ).toBeTruthy();
-        });
-        it('should set background styles', async () => {
-            const headerElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'));
-            component.background = 'transparent';
-            fixture.detectChanges();
-            expect(
-                headerElement.nativeElement.classList.contains('fd-dynamic-page__collapsible-header--transparent-bg')
-            ).toBeTruthy();
-            component.background = 'solid';
-            fixture.detectChanges();
-            expect(
-                headerElement.nativeElement.classList.contains('fd-dynamic-page__collapsible-header--transparent-bg')
-            ).toBeFalsy();
-        });
-    });
+
 });

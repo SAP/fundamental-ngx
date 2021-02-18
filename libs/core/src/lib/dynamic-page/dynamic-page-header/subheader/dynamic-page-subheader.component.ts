@@ -97,10 +97,6 @@ export class DynamicPageSubheaderComponent {
     collapsedChange = new EventEmitter<boolean>();
 
     /** Reference to page header content */
-    @ViewChild('headerContent')
-    headerContent: ElementRef<HTMLElement>;
-
-    /** Reference to page header content */
     @ViewChild('pincollapseContainer')
     pinCollapseContainer: ElementRef<HTMLElement>;
 
@@ -135,13 +131,6 @@ export class DynamicPageSubheaderComponent {
     toggleCollapse(): void {
         this._pinned = false;
         this._handleCollapsedChange(!this._collapsed)
-    }
-
-    /**
-     * return the element reference.
-     */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
     }
 
     /**

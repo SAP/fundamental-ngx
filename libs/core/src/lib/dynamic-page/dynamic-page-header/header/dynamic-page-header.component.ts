@@ -17,7 +17,6 @@ import { CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
 import { BreadcrumbComponent } from '../../../breadcrumb/breadcrumb.component';
-import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
 
@@ -25,7 +24,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-const ActionSquashBreakpointPx = 1280;
+export const ActionSquashBreakpointPx = 1280;
 
 @Component({
     selector: 'fd-dynamic-page-header',
@@ -58,10 +57,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     @ContentChild(DynamicPageTitleContentComponent)
     _contentToolbar: DynamicPageTitleContentComponent;
-
-    /** @hidden */
-    @ContentChild(DynamicPageLayoutActionsComponent)
-    _layoutActions: DynamicPageLayoutActionsComponent;
 
     /** @hidden */
     _actionsSquashed = false;

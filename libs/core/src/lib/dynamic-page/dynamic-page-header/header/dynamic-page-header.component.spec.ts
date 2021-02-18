@@ -1,19 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { BreadcrumbModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
-import { CLASS_NAME } from '../../constants';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageService } from '../../dynamic-page.service';
-import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
-import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
-import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
-import { DynamicPageHeaderComponent } from './dynamic-page-header.component';
+import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-page-header.component';
 
 @Component({
     template: `
-        <fd-dynamic-page-header [title]="title" [subtitle]="subtitle" [size]="size" [background]="background">
+        <fd-dynamic-page-header [title]="title" [subtitle]="subtitle" >
             <fd-breadcrumb>
                 <fd-breadcrumb-item>
                     <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
@@ -22,25 +17,31 @@ import { DynamicPageHeaderComponent } from './dynamic-page-header.component';
                     <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
                 </fd-breadcrumb-item>
             </fd-breadcrumb>
+            
+            <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
+            <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
 
             <fd-dynamic-page-key-info></fd-dynamic-page-key-info>
-        </fd-dynamic-page-header>`
+        </fd-dynamic-page-header>`,
+    providers: [
+        DynamicPageService
+    ]
 })
 class TestComponent {
     title = 'Some title ';
     subtitle: string;
-    size = 'medium';
-    background = '';
-    @ViewChild(DynamicPageHeaderComponent) dynamicPageTitleComponent: DynamicPageHeaderComponent;
-    @ViewChild(DynamicPageKeyInfoComponent) dynamicPageKeyInfoComponent: DynamicPageKeyInfoComponent;
-    @ViewChild(DynamicPageGlobalActionsComponent) dynamicPageGlobalActionsComponent: DynamicPageGlobalActionsComponent;
-    @ViewChild(DynamicPageLayoutActionsComponent) dynamicPageLayoutActionsComponent: DynamicPageLayoutActionsComponent;
+
+    @ViewChild(DynamicPageHeaderComponent)
+    header: DynamicPageHeaderComponent;
+
+    constructor(
+        public dynamicPageService: DynamicPageService
+    ) {}
 }
 
 describe('DynamicPageTitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
-    let pageTitleComponent: DynamicPageHeaderComponent;
-    let pageTitleKeyInfoComponent: DynamicPageKeyInfoComponent;
+    let header: DynamicPageHeaderComponent;
     let component: TestComponent;
 
     beforeEach(async(() => {
@@ -55,88 +56,37 @@ describe('DynamicPageTitleComponent', () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        pageTitleComponent = component.dynamicPageTitleComponent;
+        header = component.header;
     });
 
     it('should create', () => {
         expect(fixture).toBeTruthy();
     });
 
-    it('should add correct classes to host', async () => {
+    it('should call set size on depended components', fakeAsync(()  => {
         fixture.detectChanges();
-        expect(
-            pageTitleComponent.elementRef().nativeElement.classList.contains(CLASS_NAME.dynamicPageTitleArea)
-        ).toBeTruthy();
-    });
+        const breadcrumbSpy = spyOn(header._breadcrumbComponent, 'onResize').and.callThrough();
+        const contentToolbarSpy = spyOn(header._contentToolbar, '_setSize').and.callThrough();
+        const globalActionsSpy = spyOn(header._globalActions, '_setSize').and.callThrough();
 
-    it('should add tabindex to host', async () => {
+        header.size = 'small';
+
+        tick(5)
+
+        expect(breadcrumbSpy).toHaveBeenCalled();
+        expect(contentToolbarSpy).toHaveBeenCalledWith('small');
+        expect(globalActionsSpy).toHaveBeenCalledWith('small');
+    }));
+
+    it('should squash actions, when pixels are below breakpoint', () => {
         fixture.detectChanges();
-        expect(pageTitleComponent.elementRef().nativeElement.getAttribute('tabindex')).toEqual('0');
-    });
-
-    describe('title text', () => {
-        it('should bind to title', () => {
-            component.title = 'Sample';
-            fixture.detectChanges();
-            expect(pageTitleComponent.title).toBe('Sample');
-        });
-
-        it('should render it in view', () => {
-            component.title = 'Sample';
-            fixture.detectChanges();
-            const titleElement: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__title'))
-                .nativeElement;
-            expect(titleElement?.innerText).toBe('Sample');
-        });
-    });
-    describe('subtitle text', () => {
-        it('should bind to title', () => {
-            component.subtitle = 'Some subtitle';
-            fixture.detectChanges();
-            expect(pageTitleComponent.subtitle).toBe('Some subtitle');
-        });
-
-        it('should render it in view', () => {
-            component.subtitle = 'Some subtitle';
-            fixture.detectChanges();
-            const titleElement: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__subtitle'))
-                .nativeElement;
-            expect(titleElement?.innerText).toBe('Some subtitle');
-        });
-    });
-    describe('page title area', () => {
-        it('should set size', async () => {
-            const titleElement = fixture.debugElement.query(By.css('.fd-dynamic-page__title-area'));
-            expect(titleElement.nativeElement.classList.contains('fd-dynamic-page__title-area--md')).toBeTruthy();
-            component.size = 'large';
-            fixture.detectChanges();
-            expect(titleElement.nativeElement.classList.contains('fd-dynamic-page__title-area--lg')).toBeTruthy();
-            component.size = 'small';
-            fixture.detectChanges();
-            expect(titleElement.nativeElement.classList.contains('fd-dynamic-page__title-area--sm')).toBeTruthy();
-        });
-        it('should set background styles', async () => {
-            const titleElement = fixture.debugElement.query(By.css('.fd-dynamic-page__title-area'));
-            component.background = 'transparent';
-            fixture.detectChanges();
-            expect(
-                titleElement.nativeElement.classList.contains('fd-dynamic-page__title-area--transparent-bg')
-            ).toBeTruthy();
-            component.background = 'solid';
-            fixture.detectChanges();
-            expect(
-                titleElement.nativeElement.classList.contains('fd-dynamic-page__title-area--transparent-bg')
-            ).toBeFalsy();
-        });
-    });
-
-    it('should set key info class', async () => {
-        pageTitleKeyInfoComponent = component.dynamicPageKeyInfoComponent;
+        header.ngOnInit();
+        component.dynamicPageService.pixelsSizeChanged.next(ActionSquashBreakpointPx - 10);
         fixture.detectChanges();
-        expect(
-            fixture.debugElement
-                .query(By.directive(DynamicPageKeyInfoComponent))
-                .nativeElement.classList.contains(CLASS_NAME.dynamicPageKeyInfo)
-        ).toBeTruthy();
-    });
+        expect((<any>header)._actionsSquashed).toBeTrue();
+
+        component.dynamicPageService.pixelsSizeChanged.next(ActionSquashBreakpointPx + 10);
+        fixture.detectChanges();
+        expect((<any>header)._actionsSquashed).toBeFalse();
+    })
 });
