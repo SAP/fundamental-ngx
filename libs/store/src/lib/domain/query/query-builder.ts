@@ -30,6 +30,9 @@ import { QueryAdapter } from './query-adapter';
 
 export class QueryBuilder <TModel> {
 
+    /**
+     * Predicate which defines filter criteria
+     */
     predicate: Predicate<TModel>;
 
     constructor(
@@ -42,6 +45,10 @@ export class QueryBuilder <TModel> {
         return this;
     }
 
+    /**
+     * Add predicate to builder.
+     * @param predicate Predicate which defines filter
+     */
     where < TP extends keyof TModel,
     TPT extends TModel[TP] > (predicate: Predicate <TModel> ): QueryBuilder <TModel> {
         this.predicate = predicate;
@@ -53,6 +60,9 @@ export class QueryBuilder <TModel> {
         return this;
     }
 
+    /**
+     * Create new Query object
+     */
     newQuery(): Query < TModel > {
         const query = new Query<TModel>(this.resultType, this.service, this.adapter);
         query.predicate = this.predicate;

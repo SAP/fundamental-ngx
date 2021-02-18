@@ -10,8 +10,13 @@ import {
     OrPredicate,
 } from './grammer/predicate';
 
+export interface QueryParams {
+    [name: string]: string | string[];
+}
+
 export abstract class QueryAdapter<T> {
     abstract parsePredicate(predicate?: Predicate<T>): string;
+    abstract createQueryString(params?: QueryParams): string;
 }
 
 @Injectable()
@@ -46,5 +51,23 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
             return value.toString();
         }
         return '\'' + value + '\'';
+    }
+
+    createQueryString(params: QueryParams): string {
+        const parts: string[] = [];
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                if (key === 'filter') {
+                    parts.push('$filter=' + params[key]);
+                } else if (key === 'pageSize') {
+                    parts.push('$skip=' + params[key]);
+                } else if (key === 'offset') {
+                    parts.push('$top=' + params[key]);
+                } else {
+                    parts.push(key + '=' + params[key]);
+                }
+            }
+        }
+        return parts.join('&');
     }
 }

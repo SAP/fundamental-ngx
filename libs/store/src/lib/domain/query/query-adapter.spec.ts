@@ -3,7 +3,11 @@ import {
 } from './grammer/predicate';
 import { and, eq, ge, gt, le, lt, or } from './grammer/query-expressions';
 
-import { DefaultQueryAdapter, QueryAdapter } from './query-adapter';
+import {
+    DefaultQueryAdapter,
+    QueryAdapter,
+    QueryParams
+} from './query-adapter';
 
 class Fruit {
     name: string;
@@ -12,12 +16,9 @@ class Fruit {
     price: number;
 }
 
-describe('DefaultQueryAdapter: Predicate parsing', () => {
-    let adapter: QueryAdapter<Fruit>;
+const adapter: QueryAdapter<Fruit> = new DefaultQueryAdapter<Fruit>();
 
-    beforeEach(() => {
-        adapter = new DefaultQueryAdapter<Fruit>();
-    });
+describe('DefaultQueryAdapter: Predicate parsing', () => {
 
     it('should return empty string if no argument is passed', () => {
         expect(adapter.parsePredicate()).toBe('');
@@ -108,4 +109,45 @@ describe('DefaultQueryAdapter: Predicate parsing', () => {
         expect(adapter.parsePredicate(p1)).toBe('((name eq \'apple\' and price lt 5.25) or (name eq \'banana\' and price gt 11.73))');
 
     });
+});
+
+describe('DefaultQueryAdapter: Query string generation', () => {
+
+    it('should return empty string if no arguments are passed', () => {
+        expect(adapter.createQueryString()).toBe('');
+    });
+
+    it('should return empty string if an empty parameter object is passed', () => {
+        expect(adapter.createQueryString({})).toBe('');
+    });
+
+    it('should be able to process query parameters with "filter"', () => {
+        const params: QueryParams = {
+            filter: 'name eq \'apple\''
+        };
+        expect(adapter.createQueryString(params)).toBe('$filter=name eq \'apple\'');
+    });
+
+    it('should be able to process query parameters with "pageSize"', () => {
+        const params: QueryParams = {
+            pageSize: '42'
+        };
+        expect(adapter.createQueryString(params)).toBe('$skip=42');
+    });
+
+    it('should be able to process query parameters with "top"', () => {
+        const params: QueryParams = {
+            offset: '100'
+        };
+        expect(adapter.createQueryString(params)).toBe('$top=100');
+    });
+
+    it('should be able to process query parameters with any properties', () => {
+        const params: QueryParams = {
+            foo: 'hello',
+            bar: 'world'
+        };
+        expect(adapter.createQueryString(params)).toBe('foo=hello&bar=world');
+    });
+
 });

@@ -59,21 +59,29 @@ describe('Store: Query', () => {
     it('should call "getWithQuery" with correct filter parameters', () => {
         let query = qb.where(eq('name', 'apple')).newQuery();
         query.select();
-        expect(service.getWithQuery).toHaveBeenCalledWith({
-            filter: 'name eq \'apple\''
-        });
+        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'apple\'');
 
         query = qb.where(eq('variety', 'pippen')).newQuery();
         query.select();
-        expect(service.getWithQuery).toHaveBeenCalledWith({
-            filter: 'variety eq \'pippen\''
-        });
+        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=variety eq \'pippen\'');
 
         query = qb.where(and(eq('variety', 'pippen'), eq('price', 3.03))).newQuery();
         query.select();
-        expect(service.getWithQuery).toHaveBeenCalledWith({
-            filter: '(variety eq \'pippen\' and price eq 3.03)'
-        });
+        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=(variety eq \'pippen\' and price eq 3.03)');
+    });
+
+    it('should call "getWithQuery" with the correct pagination parameters', () => {
+        let query = qb.newQuery();
+        query.maxResults(10).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=10');
+
+        query = qb.newQuery();
+        query.firstResult(100).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$top=100');
+
+        query = qb.newQuery();
+        query.maxResults(20).firstResult(100).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=100');
     });
 
 });
