@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <style>
+            .violationCard {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            .violationCardLine {
+                display: flex;
+                justify-content: space-between;
+                align-items: start;
+            }
+            .learnMore {
+                margin-bottom: 0.75rem;
+                white-space: nowrap;
+                color: #2557a7;
+            }
+            .card-link {
+                color: #2557a7;
+            }
+            .violationNode {
+                font-size: 0.75rem;
+            }
+            .wrapBreakWord {
+                word-break: break-word;
+            }
+            .summary {
+                font-size: 1rem;
+            }
+            .summarySection {
+                margin: 0.5rem 0;
+            }
+            .hljs {
+                white-space: pre-wrap;
+                width: 100%;
+                background: #f0f0f0;
+            }
+            p {
+                margin-top: 0.3rem;
+            }
+            li {
+                line-height: 1.618;
+            }
+        </style>
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/stackoverflow-light.min.css"
+        />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <link
+            rel="icon"
+            href="https://www.deque.com/wp-content/uploads/2018/03/cropped-DQ_SecondaryLogo_HeroBlue_RGB-1-32x32.png"
+            sizes="32x32"
+        />
+        <title>AXE Accessibility Results</title>
+    </head>
+    <body>
+        <div style="padding: 2rem">
+            <h3>
+                AXE Accessibility Results
+            </h3>
+            <div class="summarySection">
+                <div class="summary">
+                    Page URL:
+                    <a href="http:&#x2F;&#x2F;localhost:4200&#x2F;fundamental-ngx#&#x2F;core&#x2F;icon" target="_blank" class="card-link">http:&#x2F;&#x2F;localhost:4200&#x2F;fundamental-ngx#&#x2F;core&#x2F;icon</a>
+                    <br />
+                </div>
+            </div>
+            <h5>axe-core found <span class="badge badge-warning">12</span> violations</h5>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">#</th>
+                        <th style="width: 45%">Description</th>
+                        <th style="width: 15%">Axe rule ID</th>
+                        <th style="width: 23%">WCAG</th>
+                        <th style="width: 7%">Impact</th>
+                        <th style="width: 5%">Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><a href="#1" class="card-link">1</a></th>
+                        <td>Certain ARIA roles must be contained by particular parents</td>
+                        <td>aria-required-parent</td>
+                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                        <td>critical</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><a href="#2" class="card-link">2</a></th>
+                        <td>ARIA attributes must conform to valid values</td>
+                        <td>aria-valid-attr-value</td>
+                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                        <td>critical</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><a href="#3" class="card-link">3</a></th>
+                        <td>Buttons must have discernible text</td>
+                        <td>button-name</td>
+                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                        <td>critical</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><a href="#4" class="card-link">4</a></th>
+                        <td>Form elements must have labels</td>
+                        <td>label</td>
+                        <td>WCAG 2 Level A, WCAG 4.1.2, WCAG 1.3.1</td>
+                        <td>critical</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Failed</h3>
+            <div class="card violationCard">
+                <div class="card-body">
+                    <div class="violationCardLine">
+                        <h5 class="card-title violationCardTitleItem">
+                            <a id="1">1.</a> Certain ARIA roles must be contained by particular parents
+                        </h5>
+                        <a
+                            href="https:&#x2F;&#x2F;dequeuniversity.com&#x2F;rules&#x2F;axe&#x2F;4.1&#x2F;aria-required-parent?application&#x3D;axeAPI"
+                            target="_blank"
+                            class="card-link violationCardTitleItem learnMore"
+                            >Learn more</a
+                        >
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted">aria-required-parent</h6>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            WCAG 2 Level A, WCAG 1.3.1
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <p class="card-text">Ensures elements with an ARIA role that require parent roles are contained by them</p>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            critical
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            Issue Tags: 
+                            <span class="badge bg-light text-dark"> cat.aria </span>
+
+                            <span class="badge bg-light text-dark"> wcag2a </span>
+
+                            <span class="badge bg-light text-dark"> wcag131 </span>
+                        </h6>
+                    </div>
+                    <div class="violationNode">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 2%">#</th>
+                                    <th style="width: 49%">Issue Description</th>
+                                    <th style="width: 49%">
+                                        To solve this violation, you need to...
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">a[routerlink&#x3D;&quot;\.\&#x2F;&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;a _ngcontent-gln-c696&#x3D;&quot;&quot; role&#x3D;&quot;tab&quot; tabindex&#x3D;&quot;0&quot; fd-tab-link&#x3D;&quot;&quot; routerlink&#x3D;&quot;.&#x2F;&quot; routerlinkactive&#x3D;&quot;&quot; ng-reflect-router-link&#x3D;&quot;.&#x2F;&quot; class&#x3D;&quot;fd-tabs__link is-selected&quot; ng-reflect-router-link-active&#x3D;&quot;&quot; ng-reflect-active&#x3D;&quot;true&quot; ng-reflect-router-link-active-options&#x3D;&quot;[object Object]&quot; href&#x3D;&quot;#&#x2F;core&#x2F;icon&quot; aria-selected&#x3D;&quot;true&quot;&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Required ARIA parent role not present: tablist</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">a[routerlink&#x3D;&quot;\.\&#x2F;api&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;a _ngcontent-gln-c696&#x3D;&quot;&quot; role&#x3D;&quot;tab&quot; tabindex&#x3D;&quot;0&quot; fd-tab-link&#x3D;&quot;&quot; routerlink&#x3D;&quot;.&#x2F;api&quot; routerlinkactive&#x3D;&quot;&quot; ng-reflect-router-link&#x3D;&quot;.&#x2F;api&quot; class&#x3D;&quot;fd-tabs__link&quot; ng-reflect-router-link-active&#x3D;&quot;&quot; ng-reflect-active&#x3D;&quot;false&quot; href&#x3D;&quot;#&#x2F;core&#x2F;icon&#x2F;api&quot; aria-selected&#x3D;&quot;false&quot;&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Required ARIA parent role not present: tablist</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card violationCard">
+                <div class="card-body">
+                    <div class="violationCardLine">
+                        <h5 class="card-title violationCardTitleItem">
+                            <a id="2">2.</a> ARIA attributes must conform to valid values
+                        </h5>
+                        <a
+                            href="https:&#x2F;&#x2F;dequeuniversity.com&#x2F;rules&#x2F;axe&#x2F;4.1&#x2F;aria-valid-attr-value?application&#x3D;axeAPI"
+                            target="_blank"
+                            class="card-link violationCardTitleItem learnMore"
+                            >Learn more</a
+                        >
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted">aria-valid-attr-value</h6>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            WCAG 2 Level A, WCAG 4.1.2
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <p class="card-text">Ensures all ARIA attributes have valid values</p>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            critical
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            Issue Tags: 
+                            <span class="badge bg-light text-dark"> cat.aria </span>
+
+                            <span class="badge bg-light text-dark"> wcag2a </span>
+
+                            <span class="badge bg-light text-dark"> wcag412 </span>
+                        </h6>
+                    </div>
+                    <div class="violationNode">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 2%">#</th>
+                                    <th style="width: 49%">Issue Description</th>
+                                    <th style="width: 49%">
+                                        To solve this violation, you need to...
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">#fd-switch-708-input</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;input type&#x3D;&quot;checkbox&quot; role&#x3D;&quot;switch&quot; class&#x3D;&quot;fd-switch__input ng-untouched ng-pristine ng-valid&quot; id&#x3D;&quot;fd-switch-708-input&quot; ng-reflect-is-disabled&#x3D;&quot;false&quot; aria-labelledby&#x3D;&quot;null &quot; ng-reflect-model&#x3D;&quot;false&quot; aria-checked&#x3D;&quot;false&quot;&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix all of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Invalid ARIA attribute value: aria-labelledby&#x3D;&quot;null &quot;</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">#fd-switch-709-input</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;input type&#x3D;&quot;checkbox&quot; role&#x3D;&quot;switch&quot; class&#x3D;&quot;fd-switch__input ng-untouched ng-pristine ng-valid&quot; id&#x3D;&quot;fd-switch-709-input&quot; ng-reflect-is-disabled&#x3D;&quot;false&quot; ng-reflect-model&#x3D;&quot;false&quot; aria-checked&#x3D;&quot;false&quot; aria-labelledby&#x3D;&quot;null &quot;&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix all of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Invalid ARIA attribute value: aria-labelledby&#x3D;&quot;null &quot;</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card violationCard">
+                <div class="card-body">
+                    <div class="violationCardLine">
+                        <h5 class="card-title violationCardTitleItem">
+                            <a id="3">3.</a> Buttons must have discernible text
+                        </h5>
+                        <a
+                            href="https:&#x2F;&#x2F;dequeuniversity.com&#x2F;rules&#x2F;axe&#x2F;4.1&#x2F;button-name?application&#x3D;axeAPI"
+                            target="_blank"
+                            class="card-link violationCardTitleItem learnMore"
+                            >Learn more</a
+                        >
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted">button-name</h6>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            WCAG 2 Level A, WCAG 4.1.2
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <p class="card-text">Ensures buttons have discernible text</p>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            critical
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            Issue Tags: 
+                            <span class="badge bg-light text-dark"> cat.name-role-value </span>
+
+                            <span class="badge bg-light text-dark"> wcag2a </span>
+
+                            <span class="badge bg-light text-dark"> wcag412 </span>
+
+                            <span class="badge bg-light text-dark"> section508 </span>
+
+                            <span class="badge bg-light text-dark"> section508.22.a </span>
+
+                            <span class="badge bg-light text-dark"> ACT </span>
+                        </h6>
+                    </div>
+                    <div class="violationNode">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 2%">#</th>
+                                    <th style="width: 49%">Issue Description</th>
+                                    <th style="width: 49%">
+                                        To solve this violation, you need to...
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">button[glyph&#x3D;&quot;palette&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;button _ngcontent-gln-c667&#x3D;&quot;&quot; fd-button&#x3D;&quot;&quot; glyph&#x3D;&quot;palette&quot; fdtype&#x3D;&quot;transparent&quot; class&#x3D;&quot;fd-button fd-button--transparent fd-button--menu fd-shellbar__button--menu fd-docs--theme-menu&quot; ng-reflect-glyph&#x3D;&quot;palette&quot; ng-reflect-fd-type&#x3D;&quot;transparent&quot; ng-reflect-fd-menu&#x3D;&quot;true&quot; ng-reflect-menu&#x3D;&quot;[object Object]&quot; type&#x3D;&quot;button&quot; aria-haspopup&#x3D;&quot;true&quot; aria-controls&#x3D;&quot;fd-menu-205&quot; aria-expanded&#x3D;&quot;false&quot;&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Element does not have inner text that is visible to screen readers</li>
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                                <li>  Element has no title attribute</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">.fd-nested-list__item[ng-reflect-expanded&#x3D;&quot;true&quot;][fd-nested-list-item&#x3D;&quot;&quot;]:nth-child(1) &gt; .fd-nested-list__content.has-child[fd-nested-list-content&#x3D;&quot;&quot;] &gt; .fd-nested-list__button.is-expanded[fd-nested-list-expand-icon&#x3D;&quot;&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;button _ngcontent-gln-c666&#x3D;&quot;&quot; aria-haspopup&#x3D;&quot;true&quot; tabindex&#x3D;&quot;-1&quot; fd-nested-list-expand-icon&#x3D;&quot;&quot; aria-expanded&#x3D;&quot;true&quot; class&#x3D;&quot;fd-nested-list__button fd-button is-expanded&quot;&gt;&lt;fd-icon role&#x3D;&quot;presentation&quot; ng-reflect-glyph&#x3D;&quot;navigation-down-arrow&quot; class&#x3D;&quot;sap-icon--navigation-down-arrow&quot;&gt;&lt;&#x2F;fd-icon&gt;&lt;&#x2F;button&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Element does not have inner text that is visible to screen readers</li>
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                                <li>  Element has no title attribute</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">.fd-nested-list__item[ng-reflect-expanded&#x3D;&quot;true&quot;][fd-nested-list-item&#x3D;&quot;&quot;]:nth-child(2) &gt; .fd-nested-list__content.has-child[fd-nested-list-content&#x3D;&quot;&quot;] &gt; .fd-nested-list__button.is-expanded[fd-nested-list-expand-icon&#x3D;&quot;&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;button _ngcontent-gln-c666&#x3D;&quot;&quot; aria-haspopup&#x3D;&quot;true&quot; tabindex&#x3D;&quot;-1&quot; fd-nested-list-expand-icon&#x3D;&quot;&quot; aria-expanded&#x3D;&quot;true&quot; class&#x3D;&quot;fd-nested-list__button fd-button is-expanded&quot;&gt;&lt;fd-icon role&#x3D;&quot;presentation&quot; ng-reflect-glyph&#x3D;&quot;navigation-down-arrow&quot; class&#x3D;&quot;sap-icon--navigation-down-arrow&quot;&gt;&lt;&#x2F;fd-icon&gt;&lt;&#x2F;button&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Element does not have inner text that is visible to screen readers</li>
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                                <li>  Element has no title attribute</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">.level-2.fd-nested-list[fd-nested-list&#x3D;&quot;&quot;] &gt; .fd-nested-list__item[ng-reflect-expanded&#x3D;&quot;true&quot;][fd-nested-list-item&#x3D;&quot;&quot;] &gt; .fd-nested-list__content.has-child[fd-nested-list-content&#x3D;&quot;&quot;] &gt; .fd-nested-list__button.is-expanded[fd-nested-list-expand-icon&#x3D;&quot;&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;button _ngcontent-gln-c666&#x3D;&quot;&quot; aria-haspopup&#x3D;&quot;true&quot; tabindex&#x3D;&quot;-1&quot; fd-nested-list-expand-icon&#x3D;&quot;&quot; aria-expanded&#x3D;&quot;true&quot; class&#x3D;&quot;fd-nested-list__button fd-button is-expanded&quot;&gt;&lt;fd-icon role&#x3D;&quot;presentation&quot; ng-reflect-glyph&#x3D;&quot;navigation-down-arrow&quot; class&#x3D;&quot;sap-icon--navigation-down-arrow&quot;&gt;&lt;&#x2F;fd-icon&gt;&lt;&#x2F;button&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Element does not have inner text that is visible to screen readers</li>
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                                <li>  Element has no title attribute</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">.fd-nested-list__item[ng-reflect-expanded&#x3D;&quot;true&quot;][fd-nested-list-item&#x3D;&quot;&quot;]:nth-child(3) &gt; .fd-nested-list__content.has-child[fd-nested-list-content&#x3D;&quot;&quot;] &gt; .fd-nested-list__button.is-expanded[fd-nested-list-expand-icon&#x3D;&quot;&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;button _ngcontent-gln-c666&#x3D;&quot;&quot; aria-haspopup&#x3D;&quot;true&quot; tabindex&#x3D;&quot;-1&quot; fd-nested-list-expand-icon&#x3D;&quot;&quot; aria-expanded&#x3D;&quot;true&quot; class&#x3D;&quot;fd-nested-list__button fd-button is-expanded&quot;&gt;&lt;fd-icon role&#x3D;&quot;presentation&quot; ng-reflect-glyph&#x3D;&quot;navigation-down-arrow&quot; class&#x3D;&quot;sap-icon--navigation-down-arrow&quot;&gt;&lt;&#x2F;fd-icon&gt;&lt;&#x2F;button&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Element does not have inner text that is visible to screen readers</li>
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                                <li>  Element has no title attribute</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">.fd-nested-list__item[ng-reflect-expanded&#x3D;&quot;true&quot;][fd-nested-list-item&#x3D;&quot;&quot;]:nth-child(4) &gt; .fd-nested-list__content.has-child[fd-nested-list-content&#x3D;&quot;&quot;] &gt; .fd-nested-list__button.is-expanded[fd-nested-list-expand-icon&#x3D;&quot;&quot;]</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;button _ngcontent-gln-c666&#x3D;&quot;&quot; aria-haspopup&#x3D;&quot;true&quot; tabindex&#x3D;&quot;-1&quot; fd-nested-list-expand-icon&#x3D;&quot;&quot; aria-expanded&#x3D;&quot;true&quot; class&#x3D;&quot;fd-nested-list__button fd-button is-expanded&quot;&gt;&lt;fd-icon role&#x3D;&quot;presentation&quot; ng-reflect-glyph&#x3D;&quot;navigation-down-arrow&quot; class&#x3D;&quot;sap-icon--navigation-down-arrow&quot;&gt;&lt;&#x2F;fd-icon&gt;&lt;&#x2F;button&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  Element does not have inner text that is visible to screen readers</li>
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                                <li>  Element has no title attribute</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card violationCard">
+                <div class="card-body">
+                    <div class="violationCardLine">
+                        <h5 class="card-title violationCardTitleItem">
+                            <a id="4">4.</a> Form elements must have labels
+                        </h5>
+                        <a
+                            href="https:&#x2F;&#x2F;dequeuniversity.com&#x2F;rules&#x2F;axe&#x2F;4.1&#x2F;label?application&#x3D;axeAPI"
+                            target="_blank"
+                            class="card-link violationCardTitleItem learnMore"
+                            >Learn more</a
+                        >
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted">label</h6>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            WCAG 2 Level A, WCAG 4.1.2, WCAG 1.3.1
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <p class="card-text">Ensures every form element has a label</p>
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            critical
+                        </h6>
+                    </div>
+                    <div class="violationCardLine">
+                        <h6 class="card-subtitle mb-2 text-muted violationCardTitleItem">
+                            Issue Tags: 
+                            <span class="badge bg-light text-dark"> cat.forms </span>
+
+                            <span class="badge bg-light text-dark"> wcag2a </span>
+
+                            <span class="badge bg-light text-dark"> wcag412 </span>
+
+                            <span class="badge bg-light text-dark"> wcag131 </span>
+
+                            <span class="badge bg-light text-dark"> section508 </span>
+
+                            <span class="badge bg-light text-dark"> section508.22.n </span>
+
+                            <span class="badge bg-light text-dark"> ACT </span>
+                        </h6>
+                    </div>
+                    <div class="violationNode">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 2%">#</th>
+                                    <th style="width: 49%">Issue Description</th>
+                                    <th style="width: 49%">
+                                        To solve this violation, you need to...
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">#fd-switch-708-input</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;input type&#x3D;&quot;checkbox&quot; role&#x3D;&quot;switch&quot; class&#x3D;&quot;fd-switch__input ng-untouched ng-pristine ng-valid&quot; id&#x3D;&quot;fd-switch-708-input&quot; ng-reflect-is-disabled&#x3D;&quot;false&quot; aria-labelledby&#x3D;&quot;null &quot; ng-reflect-model&#x3D;&quot;false&quot; aria-checked&#x3D;&quot;false&quot;&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Form element does not have an implicit (wrapped) &lt;label&gt;</li>
+                                                <li>  Form element does not have an explicit &lt;label&gt;</li>
+                                                <li>  Element has no title attribute</li>
+                                                <li>  Element has no placeholder attribute</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <p><strong>Element location</strong></p>
+                                        <pre><code class="css">#fd-switch-709-input</code></pre>
+                                        <p><strong>Element source</strong></p>
+                                        <pre><code class="html">&lt;input type&#x3D;&quot;checkbox&quot; role&#x3D;&quot;switch&quot; class&#x3D;&quot;fd-switch__input ng-untouched ng-pristine ng-valid&quot; id&#x3D;&quot;fd-switch-709-input&quot; ng-reflect-is-disabled&#x3D;&quot;false&quot; ng-reflect-model&#x3D;&quot;false&quot; aria-checked&#x3D;&quot;false&quot; aria-labelledby&#x3D;&quot;null &quot;&gt;</code></pre>
+                                    </td>
+                                    <td>
+                                        <div class="wrapBreakWord">
+                                            <p>Fix any of the following:</p>
+                                            <ul class="text-muted">
+                                                <li>  aria-label attribute does not exist or is empty</li>
+                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
+                                                <li>  Form element does not have an implicit (wrapped) &lt;label&gt;</li>
+                                                <li>  Form element does not have an explicit &lt;label&gt;</li>
+                                                <li>  Element has no title attribute</li>
+                                                <li>  Element has no placeholder attribute</li>
+                                                <li>  Element&#39;s default semantics were not overridden with role&#x3D;&quot;none&quot; or role&#x3D;&quot;presentation&quot;</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="accordionPasses">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button
+                                class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#passes"
+                                aria-expanded="false"
+                                aria-controls="passes"
+                            >
+                                axe returned 23 passed axe
+                                checks. Expand details on
+                                click
+                            </button>
+                        </h5>
+                    </div>
+                    <div
+                        id="passes"
+                        class="collapse"
+                        aria-labelledby="headingOne"
+                        data-parent="#accordionPasses"
+                    >
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">#</th>
+                                        <th style="width: 40%">Description</th>
+                                        <th style="width: 5%">Axe rule ID</th>
+                                        <th style="width: 15%">WCAG</th>
+                                        <th style="width: 5%">Nodes passed check</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Elements must only use allowed ARIA attributes</td>
+                                        <td>aria-allowed-attr</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                        <td>29</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>aria-hidden&#x3D;&#39;true&#39; must not be present on the document body</td>
+                                        <td>aria-hidden-body</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Required ARIA attributes must be provided</td>
+                                        <td>aria-required-attr</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                        <td>721</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Certain ARIA roles must contain particular children</td>
+                                        <td>aria-required-children</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                        <td>721</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Certain ARIA roles must be contained by particular parents</td>
+                                        <td>aria-required-parent</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                        <td>719</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>ARIA roles used must conform to valid values</td>
+                                        <td>aria-roles</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                        <td>721</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>ARIA attributes must conform to valid values</td>
+                                        <td>aria-valid-attr-value</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                        <td>27</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <td>ARIA attributes must conform to valid names</td>
+                                        <td>aria-valid-attr</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                        <td>29</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">9</th>
+                                        <td>Buttons must have discernible text</td>
+                                        <td>button-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                        <td>6</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">10</th>
+                                        <td>Page must have means to bypass repeated blocks</td>
+                                        <td>bypass</td>
+                                        <td>WCAG 2 Level A, WCAG 2.4.1</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">11</th>
+                                        <td>Elements must have sufficient color contrast</td>
+                                        <td>color-contrast</td>
+                                        <td>WCAG 2 Level AA, WCAG 1.4.3</td>
+                                        <td>721</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">12</th>
+                                        <td>Documents must have &lt;title&gt; element to aid in navigation</td>
+                                        <td>document-title</td>
+                                        <td>WCAG 2 Level A, WCAG 2.4.2</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">13</th>
+                                        <td>IDs of active elements must be unique</td>
+                                        <td>duplicate-id-active</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.1</td>
+                                        <td>3</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">14</th>
+                                        <td>IDs used in ARIA and labels must be unique</td>
+                                        <td>duplicate-id-aria</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.1</td>
+                                        <td>3</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">15</th>
+                                        <td>id attribute value must be unique</td>
+                                        <td>duplicate-id</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.1</td>
+                                        <td>7</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">16</th>
+                                        <td>Form field should not have multiple label elements</td>
+                                        <td>form-field-multiple-labels</td>
+                                        <td>WCAG 2 Level A, WCAG 3.3.2</td>
+                                        <td>3</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">17</th>
+                                        <td>&lt;html&gt; element must have a lang attribute</td>
+                                        <td>html-has-lang</td>
+                                        <td>WCAG 2 Level A, WCAG 3.1.1</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">18</th>
+                                        <td>&lt;html&gt; element must have a valid value for the lang attribute</td>
+                                        <td>html-lang-valid</td>
+                                        <td>WCAG 2 Level A, WCAG 3.1.1</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">19</th>
+                                        <td>Form elements must have labels</td>
+                                        <td>label</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2, WCAG 1.3.1</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">20</th>
+                                        <td>Links must have discernible text</td>
+                                        <td>link-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2, WCAG 2.4.4</td>
+                                        <td>81</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">21</th>
+                                        <td>&lt;ul&gt; and &lt;ol&gt; must only directly contain &lt;li&gt;, &lt;script&gt; or &lt;template&gt; elements</td>
+                                        <td>list</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                        <td>7</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">22</th>
+                                        <td>&lt;li&gt; elements must be contained in a &lt;ul&gt; or &lt;ol&gt;</td>
+                                        <td>listitem</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                        <td>84</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">23</th>
+                                        <td>Ensure that scrollable region has keyboard access</td>
+                                        <td>scrollable-region-focusable</td>
+                                        <td>WCAG 2 Level A, WCAG 2.1.1</td>
+                                        <td>2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="accordionIncomplete">
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button
+                                class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#incomplete"
+                                aria-expanded="false"
+                                aria-controls="incomplete"
+                            >
+                                axe returned 1 incomplete checks. Expand
+                                details on click
+                            </button>
+                        </h5>
+                    </div>
+                    <div
+                        id="incomplete"
+                        class="collapse"
+                        aria-labelledby="headingTwo"
+                        data-parent="#accordionIncomplete"
+                    >
+                        <div class="card-body">
+                            <p><em>What 'incomplete' axe checks means?</em></p>
+                            <p>
+                                Incomplete results were aborted and require further testing. This
+                                can happen either because of technical restrictions to what the rule
+                                can test, or because a javascript error occurred.
+                            </p>
+                            <p>
+                                <a
+                                    href="https://www.deque.com/axe/core-documentation/api-documentation/#results-object"
+                                    >Visit axe API Documentation</a
+                                >
+                                to learn more.
+                            </p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">#</th>
+                                        <th style="width: 50%">Description</th>
+                                        <th style="width: 20%">Axe rule ID</th>
+                                        <th style="width: 15%">WCAG</th>
+                                        <th style="width: 10%">Nodes with incomplete check</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Elements must have sufficient color contrast</td>
+                                        <td>color-contrast</td>
+                                        <td>WCAG 2 Level AA, WCAG 1.4.3</td>
+                                        <td>21</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="accordionInapplicable">
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button
+                                class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#inapplicable"
+                                aria-expanded="false"
+                                aria-controls="inapplicable"
+                            >
+                                axe returned 29 inapplicable checks.
+                                Expand details on click
+                            </button>
+                        </h5>
+                    </div>
+                    <div
+                        id="inapplicable"
+                        class="collapse"
+                        aria-labelledby="headingThree"
+                        data-parent="#accordionInapplicable"
+                    >
+                        <div class="card-body">
+                            <p><em>What 'inapplicable' axe checks means?</em></p>
+                            <p>
+                                The inapplicable array lists all the rules for which no matching
+                                elements were found on the page.
+                            </p>
+                            <p>
+                                <a
+                                    href="https://www.deque.com/axe/core-documentation/api-documentation/#results-object"
+                                    >Visit axe API Documentation</a
+                                >
+                                to learn more.
+                            </p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">#</th>
+                                        <th style="width: 50%">Description</th>
+                                        <th style="width: 20%">Axe rule ID</th>
+                                        <th style="width: 15%">WCAG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Active &lt;area&gt; elements must have alternate text</td>
+                                        <td>area-alt</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1, WCAG 2.4.4, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>ARIA commands must have an accessible name</td>
+                                        <td>aria-command-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>ARIA hidden element must not contain focusable elements</td>
+                                        <td>aria-hidden-focus</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2, WCAG 1.3.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>ARIA input fields must have an accessible name</td>
+                                        <td>aria-input-field-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>ARIA meter nodes must have an accessible name</td>
+                                        <td>aria-meter-name</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>ARIA progressbar nodes must have an accessible name</td>
+                                        <td>aria-progressbar-name</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>Use aria-roledescription on elements with a semantic role</td>
+                                        <td>aria-roledescription</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <td>ARIA toggle fields have an accessible name</td>
+                                        <td>aria-toggle-field-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">9</th>
+                                        <td>ARIA tooltip nodes must have an accessible name</td>
+                                        <td>aria-tooltip-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">10</th>
+                                        <td>&lt;audio&gt; elements must have a captions track</td>
+                                        <td>audio-caption</td>
+                                        <td>WCAG 2 Level A, WCAG 1.2.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">11</th>
+                                        <td>&lt;blink&gt; elements are deprecated and must not be used</td>
+                                        <td>blink</td>
+                                        <td>WCAG 2 Level A, WCAG 2.2.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">12</th>
+                                        <td>&lt;dl&gt; elements must only directly contain properly-ordered &lt;dt&gt; and &lt;dd&gt; groups, &lt;script&gt;, &lt;template&gt; or &lt;div&gt; elements</td>
+                                        <td>definition-list</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">13</th>
+                                        <td>&lt;dt&gt; and &lt;dd&gt; elements must be contained by a &lt;dl&gt;</td>
+                                        <td>dlitem</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">14</th>
+                                        <td>Frames must have title attribute</td>
+                                        <td>frame-title</td>
+                                        <td>WCAG 2 Level A, WCAG 2.4.1, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">15</th>
+                                        <td>HTML elements with lang and xml:lang must have the same base language</td>
+                                        <td>html-xml-lang-mismatch</td>
+                                        <td>WCAG 2 Level A, WCAG 3.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">16</th>
+                                        <td>Images must have alternate text</td>
+                                        <td>image-alt</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">17</th>
+                                        <td>Input buttons must have discernible text</td>
+                                        <td>input-button-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">18</th>
+                                        <td>Image buttons must have alternate text</td>
+                                        <td>input-image-alt</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">19</th>
+                                        <td>&lt;marquee&gt; elements are deprecated and must not be used</td>
+                                        <td>marquee</td>
+                                        <td>WCAG 2 Level A, WCAG 2.2.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">20</th>
+                                        <td>Timed refresh must not exist</td>
+                                        <td>meta-refresh</td>
+                                        <td>WCAG 2 Level A, WCAG 2 Level AAA, WCAG 2.2.1, WCAG 2.2.4, WCAG 3.2.5</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">21</th>
+                                        <td>&lt;object&gt; elements must have alternate text</td>
+                                        <td>object-alt</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">22</th>
+                                        <td>[role&#x3D;&#39;img&#39;] elements have an alternative text</td>
+                                        <td>role-img-alt</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">23</th>
+                                        <td>Select element must have and accessible name</td>
+                                        <td>select-name</td>
+                                        <td>WCAG 2 Level A, WCAG 4.1.2, WCAG 1.3.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">24</th>
+                                        <td>Server-side image maps must not be used</td>
+                                        <td>server-side-image-map</td>
+                                        <td>WCAG 2 Level A, WCAG 2.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">25</th>
+                                        <td>svg elements with an img role have an alternative text</td>
+                                        <td>svg-img-alt</td>
+                                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">26</th>
+                                        <td>All cells in a table element that use the headers attribute must only refer to other cells of that same table</td>
+                                        <td>td-headers-attr</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">27</th>
+                                        <td>All th elements and elements with role&#x3D;columnheader&#x2F;rowheader must have data cells they describe</td>
+                                        <td>th-has-data-cells</td>
+                                        <td>WCAG 2 Level A, WCAG 1.3.1</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">28</th>
+                                        <td>lang attribute must have a valid value</td>
+                                        <td>valid-lang</td>
+                                        <td>WCAG 2 Level AA, WCAG 3.1.2</td>
+                                    </tr>
+                                </tbody>
+                                    <tr>
+                                        <th scope="row">29</th>
+                                        <td>&lt;video&gt; elements must have captions</td>
+                                        <td>video-caption</td>
+                                        <td>WCAG 2 Level A, WCAG 1.2.2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="rulesSection">
+                <div class="card">
+                    <div class="card-header" id="ruleSection">
+                        <h5 class="mb-0">
+                            <button
+                                class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#rules"
+                                aria-expanded="false"
+                                aria-controls="inapplicable"
+                            >
+                                axe was running with 0 rules. Expand details on click
+                            </button>
+                        </h5>
+                    </div>
+                    <div
+                        id="rules"
+                        class="collapse"
+                        aria-labelledby="ruleSection"
+                        data-parent="#rules"
+                    >
+                        <div class="card-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </body>
+</html>
