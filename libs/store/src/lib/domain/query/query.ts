@@ -31,7 +31,7 @@ export class Query<TModel> {
     offset: number;
 
     // we definitely replace this with some OrderBy object
-    orderByFields: Array<string>;
+    orderByFields: Array<OrderBy<TModel, keyof TModel>>;
 
     constructor(
         private resultType: Type<TModel>,
@@ -40,6 +40,7 @@ export class Query<TModel> {
     ) {}
 
     orderBy<TProperty extends keyof TModel> (...segments: Array < OrderBy < TModel, TProperty >> ): Query < TModel > {
+        this.orderByFields = segments;
         return this;
     }
 
@@ -47,13 +48,21 @@ export class Query<TModel> {
         return this;
     }
 
+    /**
+     * Set first index of result set for paging.
+     * @param offset Index number of first result.
+     */
     firstResult(offset: number): Query<TModel> {
         this.offset = offset;
         return this;
     }
 
-    maxResults(limit: number): Query<TModel> {
-        this.pageSize = limit;
+    /**
+     * Set page size for result set.
+     * @param pageSize Number of items returned per page
+     */
+    maxResults(pageSize: number): Query<TModel> {
+        this.pageSize = pageSize;
         return this;
     }
 
@@ -61,6 +70,9 @@ export class Query<TModel> {
         return of(null);
     }
 
+    /**
+     * Initiate query and return observable
+     */
     select(): Observable < TModel | Array < TModel >> {
         const params = this._createQueryParams();
         const query = this.adapter.createQueryString(params);
@@ -97,6 +109,12 @@ export class Query<TModel> {
             params = {
                 ...params,
                 offset: this.offset.toString()
+            };
+        }
+        if (this.orderByFields) {
+            params = {
+                ...params,
+                orderby: this.adapter.parseOrderBys(this.orderByFields)
             };
         }
         return params;

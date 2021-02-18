@@ -2,6 +2,7 @@ import {
     Predicate
 } from './grammer/predicate';
 import { and, eq, ge, gt, le, lt, or } from './grammer/query-expressions';
+import { OrderBy } from './query';
 
 import {
     DefaultQueryAdapter,
@@ -111,6 +112,56 @@ describe('DefaultQueryAdapter: Predicate parsing', () => {
     });
 });
 
+describe('DefaultQueryAdapter: Order By Parsing', () => {
+    it('should return an empty string if no arguments are passed', () => {
+        expect(adapter.parseOrderBys()).toBe('')
+    });
+
+    it('should return correct string if single OrderBy is passed without direction', () => {
+        const orderBy: OrderBy<Fruit, keyof Fruit> = {
+            field: 'name'
+        };
+        expect(adapter.parseOrderBys(orderBy)).toBe('name');
+    });
+
+    it('should return correct string if single OrderBy is passed with direction', () => {
+        let orderBy: OrderBy<Fruit, keyof Fruit> = {
+            field: 'variety',
+            order: 'ASCENDING'
+        };
+        expect(adapter.parseOrderBys(orderBy)).toBe('variety:asc');
+        orderBy = {
+            field: 'origin',
+            order: 'DESCENDING'
+        };
+        expect(adapter.parseOrderBys(orderBy)).toBe('origin:desc');
+    });
+
+    it('should return a correct query string for an array of OrderBys', () => {
+
+        let orderBys: OrderBy<Fruit, keyof Fruit>[] = [{
+            field: 'variety'
+        }, {
+            field: 'name',
+            order: 'DESCENDING'
+        }];
+        expect(adapter.parseOrderBys(orderBys)).toBe('variety,name:desc');
+
+        orderBys = [{
+            field: 'variety',
+            order: 'ASCENDING'
+        }, {
+            field: 'name',
+            order: 'DESCENDING'
+        }, {
+            field: 'price',
+            order: 'ASCENDING'
+        }];
+        expect(adapter.parseOrderBys(orderBys)).toBe('variety:asc,name:desc,price:asc');
+
+    });
+});
+
 describe('DefaultQueryAdapter: Query string generation', () => {
 
     it('should return empty string if no arguments are passed', () => {
@@ -135,11 +186,18 @@ describe('DefaultQueryAdapter: Query string generation', () => {
         expect(adapter.createQueryString(params)).toBe('$skip=42');
     });
 
-    it('should be able to process query parameters with "top"', () => {
+    it('should be able to process query parameters with "offset"', () => {
         const params: QueryParams = {
             offset: '100'
         };
         expect(adapter.createQueryString(params)).toBe('$top=100');
+    });
+
+    it('should be able to process query parameters with "orderby"', () => {
+        const params: QueryParams = {
+            orderby: 'name'
+        };
+        expect(adapter.createQueryString(params)).toBe('$orderby=name');
     });
 
     it('should be able to process query parameters with any properties', () => {

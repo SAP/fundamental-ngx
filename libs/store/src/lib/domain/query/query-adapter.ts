@@ -9,6 +9,7 @@ import {
     AndPredicate,
     OrPredicate,
 } from './grammer/predicate';
+import { OrderBy } from './query';
 
 export interface QueryParams {
     [name: string]: string | string[];
@@ -16,11 +17,13 @@ export interface QueryParams {
 
 export abstract class QueryAdapter<T> {
     abstract parsePredicate(predicate?: Predicate<T>): string;
+    abstract parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string
     abstract createQueryString(params?: QueryParams): string;
 }
 
 @Injectable()
 export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
+
     parsePredicate(predicate?: Predicate<T>): string {
         if (predicate instanceof EqPredicate) {
             return predicate.property + ' eq ' + this._prepareValue(predicate.value);
@@ -46,11 +49,18 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return '';
     }
 
-    _prepareValue(value: string | number): string {
-        if (typeof value === 'number') {
-            return value.toString();
+    parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string {
+        if (!orderBys) {
+            return '';
         }
-        return '\'' + value + '\'';
+        if (Array.isArray(orderBys)) {
+            const parts: string[] = orderBys.map(order => {
+                return this._prepareOrderBy(order);
+            });
+            return parts.join(',');
+        } else {
+            return this._prepareOrderBy(orderBys);
+        }
     }
 
     createQueryString(params: QueryParams): string {
@@ -63,6 +73,8 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
                     parts.push('$skip=' + params[key]);
                 } else if (key === 'offset') {
                     parts.push('$top=' + params[key]);
+                } else if (key === 'orderby') {
+                    parts.push('$orderby=' + params[key]);
                 } else {
                     parts.push(key + '=' + params[key]);
                 }
@@ -70,4 +82,23 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         }
         return parts.join('&');
     }
+
+    _prepareOrderBy(orderBy: OrderBy<T, keyof T>): string {
+        if (!orderBy || !orderBy.field) {
+            return '';
+        }
+        const field = orderBy.field as string;
+        if (!orderBy.order) {
+            return field;
+        }
+        return field + ((orderBy.order === 'DESCENDING') ? ':desc' : ':asc');
+    }
+
+    _prepareValue(value: string | number): string {
+        if (typeof value === 'number') {
+            return value.toString();
+        }
+        return '\'' + value + '\'';
+    }
+
 }

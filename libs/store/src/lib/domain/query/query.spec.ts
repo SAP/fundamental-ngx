@@ -70,6 +70,16 @@ describe('Store: Query', () => {
         expect(service.getWithQuery).toHaveBeenCalledWith('$filter=(variety eq \'pippen\' and price eq 3.03)');
     });
 
+    it('should call "getWithQuery" with the correct order by parameters', () => {
+        let query = qb.newQuery();
+        query.orderBy({ field: 'name'}).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$orderby=name');
+
+        query = qb.newQuery();
+        query.orderBy({ field: 'name'}, { field: 'price', order: 'DESCENDING'}).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$orderby=name,price:desc');
+    });
+
     it('should call "getWithQuery" with the correct pagination parameters', () => {
         let query = qb.newQuery();
         query.maxResults(10).select();
