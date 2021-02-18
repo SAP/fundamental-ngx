@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { BreadcrumbModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '../../../button/button.module';
+import { BreadcrumbModule } from '../../../breadcrumb/breadcrumb.module';
+import { ToolbarModule } from '../../../toolbar/toolbar.module';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-page-header.component';

@@ -77,8 +77,8 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     _size: DynamicPageResponsiveSize = 'extra-large';
 
-    /**
-     * user provided offset in px
+    /** Offset in PX
+     * Should be added, when there is something else at the bottom and dynamic page is not expanded to bottom's corners
      */
     @Input()
     offset = 0;
