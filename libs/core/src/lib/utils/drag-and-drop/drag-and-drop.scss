@@ -51,6 +51,7 @@
 
 .fd-dnd-item {
     position: relative;
+    cursor: grab;
 
     &.fd-dnd-on-drag {
         background-color: #fff;
