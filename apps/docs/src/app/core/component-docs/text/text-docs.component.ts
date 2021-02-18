@@ -7,6 +7,7 @@ import * as textMaxLinesHtml from '!raw-loader!./examples/text-max-lines.compone
 import * as textMaxLinesTs from '!raw-loader!./examples/text-max-lines.component.ts';
 import * as textHyphenationHtml from '!raw-loader!./examples/text-hyphenation.component.html';
 import * as textHyphenationTs from '!raw-loader!./examples/text-hyphenation.component.ts';
+import * as textHyphenationScss from '!raw-loader!./examples/text-hyphenation.component.scss';
 import * as textExpandableHtml from '!raw-loader!./examples/text-expandable.component.html';
 import * as textExpandableTs from '!raw-loader!./examples/text-expandable.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -62,6 +63,11 @@ export class TextDocsComponent {
             language: 'typescript',
             code: textHyphenationTs,
             component: 'TextHyphenationComponent',
+            fileName: 'text-hyphenation'
+        },
+        {
+            language: 'scss',
+            code: textHyphenationScss,
             fileName: 'text-hyphenation'
         }
     ];

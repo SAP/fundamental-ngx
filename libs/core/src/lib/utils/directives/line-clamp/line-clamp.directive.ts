@@ -92,8 +92,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     constructor(
         private readonly _elementRef: ElementRef,
         private readonly _renderer: Renderer2
-    ) {
-    }
+    ) {}
 
     /**
      * Root native element of clamping box
@@ -163,10 +162,10 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         if (!this._lineClampTarget) {
             return;
         }
-        const lineClampeHeight = this.getLineHeight() * this._lineCount;
+        const lineClampHeight = Math.ceil(this.getLineHeight() * this._lineCount);
         const ellipsisTextArray = this._originalText.split(' ');
         const ellipsisText = () => {
-            if (this.rootElement.scrollHeight > lineClampeHeight) {
+            if (this.rootElement.scrollHeight > lineClampHeight) {
                 ellipsisTextArray.pop();
                 this._lineClampTarget.innerText = ellipsisTextArray.join(' ') + '...';
                 ellipsisText.call(this);

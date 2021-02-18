@@ -3,7 +3,7 @@
           class="fd-text__lineclamp"
           #lineClamp="fdLineClamp"
           [fdLineclampState]="_isCollapsed"
-          [fdLineClampLines]="maxLines!"
+          [fdLineClampLines]="maxLines"
           (lineCountUpdate)="checkLineCount($event)"
     >
         <span fd-lineclamp-target [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 /** Type of hyphenation */
-export type HyphenationType = 'none' | 'manual' | 'auto';
+export type HyphenationType = 'none' | 'manual' | 'auto' | null;
 
 @Component({
     selector: 'fd-text',
@@ -39,7 +39,7 @@ export class TextComponent {
      * Property for managing hyphenation, using css rule hyphens.
      */
     @Input()
-    hyphenation: HyphenationType = 'manual';
+    hyphenation: HyphenationType = null;
 
     /**
      * Option that adds more and less buttons to expand/collapse text
