@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ApprovalNode } from '@fundamental-ngx/platform';
+import { ApprovalNode, ApprovalStatus } from '@fundamental-ngx/platform';
 
 import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-source.class';
 
@@ -11,6 +11,9 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
             title="Basic Approval Flow Demo"
             [dataSource]="dataSource"
             [userDetailsTemplate]="userDetailsTemplate"
+            [checkDueDate]="checkDueDate"
+            [allowSendRemindersForStatuses]="sendReminderStatuses"
+            [isEditAvailable]="editModeEnabled"
             (nodeClick)="nodeClick($event)"
         >
         </fdp-approval-flow>
@@ -32,15 +35,28 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
                 <option *ngFor="let example of examples" [value]="example">{{ example | titlecase }}</option>
             </select>
         </p>
+        <p>Enable "Edit mode": <input type="checkbox" [(ngModel)]="editModeEnabled"></p>
+        <p>Show due date warnings: <input type="checkbox" [(ngModel)]="checkDueDate"></p>
+        <p style="display: flex;align-items: center;">Allow sending reminders to approvers with statuses: 
+            <fd-multi-input 
+                style="margin-left: .5rem;"
+                [compact]="true"
+                [dropdownValues]="allStatuses"
+                [(ngModel)]="sendReminderStatuses"
+            ></fd-multi-input>
+        </p>
     `
 })
 export class PlatformApprovalFlowExampleComponent {
     dataSource = new ApprovalFlowExampleDataSource('complex');
     examples = ['simple', 'medium', 'complex'];
     selectedExample = 'complex';
+    checkDueDate = false;
+    editModeEnabled = true;
+    allStatuses = ['in progress', 'not started', 'approved', 'rejected'];
+    sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
 
     nodeClick(node: ApprovalNode): void {
-        console.log('Node click handler');
-        console.log(node);
+        console.log('Node click handler', node);
     }
 }

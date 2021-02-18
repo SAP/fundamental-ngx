@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.27.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.5...v0.27.1-rc.6) (2021-02-18)
+
+### [0.27.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.4...v0.27.1-rc.5) (2021-02-17)
+
+
+### Bug Fixes
+
+* (Core) proper alignment of the Split Button text ([#4691](https://github.com/SAP/fundamental-ngx/issues/4691)) ([e1952c6](https://github.com/SAP/fundamental-ngx/commit/e1952c6152835163860dc71f0acbf2b7f14d93c8))
+
+### [0.27.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.3...v0.27.1-rc.4) (2021-02-17)
+
+
+### Bug Fixes
+
+* (Platform) Input Group accessibility ([#4652](https://github.com/SAP/fundamental-ngx/issues/4652)) ([cbed46f](https://github.com/SAP/fundamental-ngx/commit/cbed46f5eccff811fa8b3909eb67602174f57b7d))
+
+### [0.27.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.2...v0.27.1-rc.3) (2021-02-17)
+
+
+### Features
+
+* (Platform) Approval Flow - Phase 2 ([#4626](https://github.com/SAP/fundamental-ngx/issues/4626)) ([4a9c611](https://github.com/SAP/fundamental-ngx/commit/4a9c6113c365bb2dce43f6566dceac48ed2ecef5))
+
+### [0.27.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.1...v0.27.1-rc.2) (2021-02-16)
+
+### [0.27.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.0...v0.27.1-rc.1) (2021-02-16)
+
 ### [0.27.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.27.0...v0.27.1-rc.0) (2021-02-15)
 
 ## [0.27.0](https://github.com/SAP/fundamental-ngx/compare/v0.27.0-rc.5...v0.27.0) (2021-02-12)

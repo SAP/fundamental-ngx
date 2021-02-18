@@ -5,7 +5,8 @@ import {
     checkElementText,
     checkElementTextValue
 } from '../../helper/assertion-helper';
-import ListData from '../fixtures/appData/list-contents';
+import {lazyLoadAttr, navUrl, compactAttr, altCompactAttribute, altSelectionAttr, borderStyleAttr, compactValue, fontWeightAttr, itemUnreadStatus, listTypeAttr, loadMoreAttr, multiSelect, navIndicator,
+noBorderAttr, noDataText, scrollLoadAttr, selectionAttr, separatorAttr, singleSelect} from '../fixtures/appData/list-contents';
 import {
     acceptAlert,
     browserIsIE,
@@ -35,12 +36,12 @@ describe('List test suite:', function() {
         it('should do basic checks', () => {
             checkElArrIsClickable(listPg.noBorderListItems);
             checkElementText(listPg.noBorderListItems);
-            expect(getAttributeByName(listPg.noBorderCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.noBorderCompactList, compactAttr)).toBe(compactValue);
         });
 
         it('should check border', () => {
-            checkAttributeValueTrue(listPg.noBorderList, ListData.noBorderAttr);
-            getCSSPropertyByName(listPg.noBorderListItems, ListData.borderStyleAttr);
+            checkAttributeValueTrue(listPg.noBorderList, noBorderAttr);
+            getCSSPropertyByName(listPg.noBorderListItems, borderStyleAttr);
         });
     });
 
@@ -49,7 +50,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.footerListItems);
             checkElementText(listPg.footerListItems);
             checkElementText(listPg.footer);
-            expect(getAttributeByName(listPg.footerCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.footerCompactList, compactAttr)).toBe(compactValue);
         });
     });
 
@@ -58,7 +59,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.groupHeaderListItems);
             checkElementText(listPg.groupHeaderListItems);
             checkElementText(listPg.groupHeader);
-            expect(getAttributeByName(listPg.groupCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.groupCompactList, compactAttr)).toBe(compactValue);
         });
     });
 
@@ -74,7 +75,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.counterListItems);
             checkElementText(listPg.counterTitleItems);
             checkElementText(listPg.counterCounterItem);
-            expect(getAttributeByName(listPg.counterCompactList, ListData.compactAttr)).toBe(ListData.compactValue);
+            expect(getAttributeByName(listPg.counterCompactList, compactAttr)).toBe(compactValue);
         });
     });
 
@@ -98,7 +99,7 @@ describe('List test suite:', function() {
         });
 
         it('should check selection', () => {
-            expect(getAttributeByName(listPg.multiList, ListData.selectionAttr)).toBe(ListData.multiSelect);
+            expect(getAttributeByName(listPg.multiList, selectionAttr)).toBe(multiSelect);
             expect(getText(listPg.multiToolbar)).toBe('0 : Items selected');
             click(listPg.multiCheckbox);
             expect(getText(listPg.multiToolbar)).toBe('1 : Items selected');
@@ -116,7 +117,7 @@ describe('List test suite:', function() {
         it('should check selection', () => {
             const listItemId = getAttributeByName(listPg.singleListItems, 'id');
 
-            expect(getAttributeByName(listPg.singleList, ListData.altSelectionAttr)).toBe(ListData.singleSelect);
+            expect(getAttributeByName(listPg.singleList, altSelectionAttr)).toBe(singleSelect);
             expect(getText(listPg.singleToolbar)).toContain(': selected');
             click(listPg.singleRadioBtn);
             expect(getText(listPg.singleToolbar)).toContain(listItemId + ' : selected');
@@ -127,13 +128,13 @@ describe('List test suite:', function() {
         it('should do basic checks', () => {
             checkElementText(listPg.navListItems);
             checkElArrIsClickable(listPg.navListItems);
-            checkAttributeValueTrue(listPg.navList, ListData.navIndicator);
+            checkAttributeValueTrue(listPg.navList, navIndicator);
         });
 
         it('should check navigation', () => {
             click(listPg.navListLink);
             const newUrl = getCurrentUrl();
-            expect(newUrl).toContain(ListData.navUrl);
+            expect(newUrl).toContain(navUrl);
             listPg.open();
         });
     });
@@ -142,8 +143,8 @@ describe('List test suite:', function() {
         it('should do basic checks', () => {
             isElementClickable(listPg.vScrollListItems);
             checkElementText(listPg.vScrollListItems);
-            checkAttributeValueTrue(listPg.vScrollList, ListData.scrollLoadAttr);
-            checkAttributeValueTrue(listPg.vScrollList, ListData.lazyLoadAttr);
+            checkAttributeValueTrue(listPg.vScrollList, scrollLoadAttr);
+            checkAttributeValueTrue(listPg.vScrollList, lazyLoadAttr);
             refreshPage();
         });
 
@@ -168,7 +169,7 @@ describe('List test suite:', function() {
         it('should do basic checks', () => {
             checkElArrIsClickable(listPg.loadListItems);
             checkElementText(listPg.loadListItems);
-            checkAttributeValueTrue(listPg.loadList, ListData.loadMoreAttr);
+            checkAttributeValueTrue(listPg.loadList, loadMoreAttr);
         });
 
         it('should check loading on click', () => {
@@ -186,8 +187,8 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.btnDeleteBtn);
             checkElArrIsClickable(listPg.btnEditBtn);
             checkElementText(listPg.btnListItems);
-            expect(getAttributeByName(listPg.btnList, ListData.listTypeAttr)).toBe('detail');
-            expect(getAttributeByName(listPg.btnList, ListData.selectionAttr)).toBe('delete');
+            expect(getAttributeByName(listPg.btnList, listTypeAttr)).toBe('detail');
+            expect(getAttributeByName(listPg.btnList, selectionAttr)).toBe('delete');
         });
 
         it('should check delete action', () => {
@@ -214,8 +215,8 @@ describe('List test suite:', function() {
     describe('With No Data examples:', function() {
         it('should do basic checks and check no data text', () => {
             checkElArrIsClickable(listPg.noDataListItems);
-            checkAttributeValueTrue(listPg.noDataCompactList, ListData.altCompactAttribute);
-            checkElementTextValue(listPg.noDataListItems, ListData.noDataText);
+            checkAttributeValueTrue(listPg.noDataCompactList, altCompactAttribute);
+            checkElementTextValue(listPg.noDataListItems, noDataText);
         });
     });
 
@@ -223,7 +224,7 @@ describe('List test suite:', function() {
         it('should do basic checks and check separator', () => {
             checkElArrIsClickable(listPg.noSepListItems);
             checkElementText(listPg.noSepListItems);
-            checkAttributeValueTrue(listPg.noSepList, ListData.separatorAttr);
+            checkAttributeValueTrue(listPg.noSepList, separatorAttr);
         });
     });
 
@@ -232,13 +233,13 @@ describe('List test suite:', function() {
             checkElArrIsClickable(listPg.unreadListItems);
             checkElementText(listPg.unreadListItems);
             if (browserIsSafari()) {
-                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 0).value).toBe('normal');
-                expect(getAttributeByName(listPg.unreadListAttr, ListData.itemUnreadStatus, 1)).toBe('true');
-                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 1).value).toBe('bold');
+                expect(getCSSPropertyByName(listPg.unreadListItemText, fontWeightAttr, 0).value).toBe('normal');
+                expect(getAttributeByName(listPg.unreadListAttr, itemUnreadStatus, 1)).toBe('true');
+                expect(getCSSPropertyByName(listPg.unreadListItemText, fontWeightAttr, 1).value).toBe('bold');
             } else {
-                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 0).value).toBe(400);
-                expect(getAttributeByName(listPg.unreadListAttr, ListData.itemUnreadStatus, 1)).toBe('true');
-                expect(getCSSPropertyByName(listPg.unreadListItemText, ListData.fontWeightAttr, 1).value).toBe(700);
+                expect(getCSSPropertyByName(listPg.unreadListItemText, fontWeightAttr, 0).value).toBe(400);
+                expect(getAttributeByName(listPg.unreadListAttr, itemUnreadStatus, 1)).toBe('true');
+                expect(getCSSPropertyByName(listPg.unreadListItemText, fontWeightAttr, 1).value).toBe(700);
             }
         });
     });

@@ -1,0 +1,43 @@
+.approval-flow__team-list {
+    .fd-form-item {
+        position: relative;
+
+        fd-radio-button {
+            position: absolute;
+            z-index: 1;
+            top: 1.4rem;
+        }
+
+        .fd-list__item {
+            padding-left: 2rem !important;
+            cursor: pointer;
+        }
+
+        fd-icon {
+            position: absolute;
+            right: 1rem;
+            top: 2rem;
+            color: #0854A0;
+            color: var(--sapButton_IconColor, #0854A0);
+            cursor: pointer;
+        }
+
+        fd-avatar {
+            color: #fff;
+            color: var(--sapBaseColor, #fff);
+        }
+    }
+
+    &[dir="rtl"] {
+        .fd-form-item fd-icon {
+            right: auto;
+            left: 1rem;
+        }
+
+        .fd-list__item {
+            padding-right: 2rem !important;
+            padding-left: 0 !important;
+        }
+    }
+
+}

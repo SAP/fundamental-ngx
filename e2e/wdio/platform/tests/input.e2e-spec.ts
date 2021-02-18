@@ -24,8 +24,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import inputPContent from '../fixtures/appData/input-page-contents';
-import inputTestData from '../fixtures/testData/input';
+import {favoriteColor, errorBorderColor, errorText, labelsArray, placeholdersArray} from '../fixtures/appData/input-page-contents';
+import {autocompleteOption, text, longLine, number, special_characters} from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
 
 describe('Input should ', function() {
@@ -47,51 +47,51 @@ describe('Input should ', function() {
 
     it('be able to type something with keyboard', () => {
         waitForElDisplayed(inputPage.defaultInput);
-        setValue(inputPage.defaultInput, inputTestData.text);
+        setValue(inputPage.defaultInput, text);
 
-        expect(getValue(inputPage.defaultInput)).toBe(inputTestData.text);
+        expect(getValue(inputPage.defaultInput)).toBe(text);
     });
 
     it('have associated label element to describe its purpose', () => {
-        expect(getTextArr(inputPage.inputsLabels, 0, -2)).toEqual(inputPContent.labelsArray);
-        expect(getText(inputPage.inputsLabels, 7)).toContain(inputPContent.favoriteColor);
+        expect(getTextArr(inputPage.inputsLabels, 0, -2)).toEqual(labelsArray);
+        expect(getText(inputPage.inputsLabels, 7)).toContain(favoriteColor);
     });
 
     it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {
         waitForElDisplayed(inputPage.defaultInput);
-        setValue(inputPage.defaultInput, inputTestData.text);
-        addValue(inputPage.defaultInput, inputTestData.number);
-        addValue(inputPage.defaultInput, inputTestData.special_characters);
+        setValue(inputPage.defaultInput, text);
+        addValue(inputPage.defaultInput, number);
+        addValue(inputPage.defaultInput, special_characters);
 
         expect(getValue(inputPage.defaultInput))
-            .toEqual(inputTestData.text + inputTestData.number + inputTestData.special_characters);
+            .toEqual(text + number + special_characters);
     });
 
     it('impose any filters on the kind of input values the component receives (text)', () => {
         waitForElDisplayed(inputPage.textInput);
-        addValue(inputPage.textInput, inputTestData.number);
-        addValue(inputPage.textInput, inputTestData.special_characters);
-        addValue(inputPage.textInput, inputTestData.text);
+        addValue(inputPage.textInput, number);
+        addValue(inputPage.textInput, special_characters);
+        addValue(inputPage.textInput, text);
 
         expect(getValue(inputPage.textInput))
-            .toEqual(inputTestData.number + inputTestData.special_characters + inputTestData.text); // ???
+            .toEqual(number + special_characters + text); // ???
     });
     // TODO: it is not working the same for manual and automation.
     xit('impose any filters on the kind of input values the component receives (number)', () => {
         waitForElDisplayed(inputPage.numberInput);
         click(inputPage.numberInput);
 
-        sendKeys(inputTestData.number);
-        sendKeys(inputTestData.special_characters);
-        sendKeys(inputTestData.text);
+        sendKeys(number);
+        sendKeys(special_characters);
+        sendKeys(text);
 
-        expect(getText(inputPage.numberInput)).toEqual(inputTestData.number);
+        expect(getText(inputPage.numberInput)).toEqual(number);
     });
 
     it('wrap the input characters to the next line', () => {
         waitForElDisplayed(inputPage.defaultInput);
         const heightBefore = getElementSize(inputPage.defaultInput, 0, 'height') ;
-        setValue(inputPage.defaultInput, inputTestData.longLine);
+        setValue(inputPage.defaultInput, longLine);
         const heightAfter = getElementSize(inputPage.defaultInput, 0, 'height');
 
         expect(heightBefore).toBeLessThanOrEqual(heightAfter);
@@ -99,10 +99,10 @@ describe('Input should ', function() {
 
     it('enable editing the entered characters', () => {
         waitForElDisplayed(inputPage.defaultInput);
-        setValue(inputPage.defaultInput, inputTestData.text);
+        setValue(inputPage.defaultInput, text);
         sendKeys('Backspace');
 
-        expect(getValue(inputPage.defaultInput)).toBe(inputTestData.text.slice(0, -1));
+        expect(getValue(inputPage.defaultInput)).toBe(text.slice(0, -1));
         clearValue(inputPage.defaultInput);
         expect(getValue(inputPage.defaultInput)).toBe('');
     });
@@ -116,7 +116,7 @@ describe('Input should ', function() {
 
     it('have placeholder', () => {
         expect(getAttributeByNameArr(inputPage.inputsArray, 'placeholder', 1))
-            .toEqual(inputPContent.placeholdersArray);
+            .toEqual(placeholdersArray);
     });
 
     it('should have error border color', () => {
@@ -129,11 +129,11 @@ describe('Input should ', function() {
         waitForElDisplayed(inputPage.messagesComponentsInput);
         click(inputPage.submitBtn);
         const errorBackgroundColor = getCSSPropertyByName(inputPage.messagesComponentsInput, 'border-bottom-color').value;
-        expect(errorBackgroundColor).toContain(inputPContent.errorBorderColor);
+        expect(errorBackgroundColor).toContain(errorBorderColor);
         mouseHoverElement(inputPage.messagesComponentsInput);
         pause(300);
         waitForElDisplayed(inputPage.errorText);
-        expect(getText(inputPage.errorText).trim()).toBe(inputPContent.errorText);
+        expect(getText(inputPage.errorText).trim()).toBe(errorText);
     });
 
     it('should have visual cue for require input', () => {
@@ -149,16 +149,16 @@ describe('Input should ', function() {
 
     it('should implement autosuggestion', () => {
         waitForElDisplayed(inputPage.autocompleteInput);
-        addValue(inputPage.autocompleteInput, inputTestData.autocompleteOption);
+        addValue(inputPage.autocompleteInput, autocompleteOption);
 
         expect(getElementArrayLength(inputPage.autocompleteOptions)).toBeGreaterThanOrEqual(2);
         const autocompleteOptionText = getTextArr(inputPage.autocompleteOptions);
         autocompleteOptionText.forEach((option) => {
-            expect(option.toLowerCase()).toContain(inputTestData.autocompleteOption);
+            expect(option.toLowerCase()).toContain(autocompleteOption);
         });
         pause(3000);
         click(inputPage.autocompleteOptions);
-        expect((getValue(inputPage.autocompleteInput)).toLowerCase()).toContain(inputTestData.autocompleteOption);
+        expect((getValue(inputPage.autocompleteInput)).toLowerCase()).toContain(autocompleteOption);
     });
 
     it('should compact be smaller than the default', () => {

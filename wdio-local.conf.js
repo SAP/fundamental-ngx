@@ -292,7 +292,6 @@ exports.config = {
         }, true);
 
         browser.resetUrl = 'about:blank';
-        browser.maximizeWindow();
     }
 
 //     const processedConfig = await browser.getProcessedConfig();

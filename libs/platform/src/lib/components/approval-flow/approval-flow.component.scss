@@ -1,11 +1,19 @@
 $block: approval-flow;
+$column-line-top-offset: 48px;
+$column-line-top-offset--edit-mode: 64px;
+$carousel-controls-height: 94px;
+$carousel-controls-height--edit-mode: 126px;
 
 .#{$block}__title {
     font-size: 1.125rem;
     font-weight: 400;
+}
 
-    &[dir='rtl'] {
-        padding-right: .5rem;
+.#{$block}__messages {
+    margin-bottom: 1rem;
+
+    fd-message-strip:not(:last-child) {
+        margin-bottom: 1rem;
     }
 }
 
@@ -33,6 +41,10 @@ $block: approval-flow;
             margin-right: 0;
         }
     }
+
+    .#{$block}__watchers-input-container {
+        width: 278px;
+    }
 }
 
 .#{$block}__watchers-title {
@@ -53,6 +65,7 @@ $block: approval-flow;
     overflow: hidden;
     padding-left: 2rem;
     padding-top: .5rem;
+    padding-bottom: 3.5rem;
 }
 
 .#{$block}__carousel-controls {
@@ -60,7 +73,7 @@ $block: approval-flow;
     display: flex;
     align-items: center;
     width: 100%;
-    height: 94px;
+    height: $carousel-controls-height;
     padding-top: .5rem;
     left: 0;
 
@@ -77,7 +90,10 @@ $block: approval-flow;
         cursor: pointer;
 
         &:focus {
-            outline: none;
+            outline-offset: 0.0625rem;
+            outline-width: 0.0625rem;
+            outline-style: dotted;
+            outline-color: var(--sapContent_FocusColor, #0854A0);
         }
 
         fd-icon {
@@ -89,11 +105,8 @@ $block: approval-flow;
         }
     }
 
-    button:focus {
-        outline-offset: 0.0625rem;
-        outline-width: 0.0625rem;
-        outline-style: dotted;
-        outline-color: var(--sapContent_FocusColor, #0854A0);
+    &.#{$block}__carousel-controls--edit-mode {
+        height: $carousel-controls-height--edit-mode;
     }
 
     &[dir='rtl'] {
@@ -121,26 +134,32 @@ $block: approval-flow;
 
 .#{$block}__graph {
     display: flex;
+    align-items: flex-start;
     position: relative;
     left: 0;
     transition: left .3s;
 
-    .#{$block}__column:not(:last-child) {
+    .#{$block}__column {
         margin-right: 4rem;
         position: relative;
 
         &.#{$block}__column--vertical-line-before:before, &.#{$block}__column--vertical-line-after:after {
             content: '';
             position: absolute;
-            top: 48px;
+            top: $column-line-top-offset;
             height: calc(100% - 111px);
         }
 
         &.#{$block}__column--vertical-line-before {
             &:before {
+                border-right: 2px dashed #89919A;
+                border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+                left: -2.2rem;
+            }
+
+            &-solid:before {
                 border-right: 1px solid #89919A;
                 border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
-                left: -2.2rem;
             }
         }
 
@@ -155,6 +174,13 @@ $block: approval-flow;
                 border-right: 1px solid #89919A;
                 border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
             }
+        }
+    }
+
+    &.#{$block}__graph--edit-mode {
+        .#{$block}__column--vertical-line-before:before, .#{$block}__column--vertical-line-after:after {
+            top: $column-line-top-offset--edit-mode !important;
+            height: calc(100% - 142px) !important;
         }
     }
 
@@ -195,4 +221,58 @@ $block: approval-flow;
         outline-style: dotted;
         outline-color: var(--sapContent_FocusColor, #0854A0);
     }
+}
+
+.#{$block}__edit-mode-footer {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #fff;
+    background: var(--sapBaseColor, #fff);
+    padding: .5rem;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+
+    .fd-button--emphasized {
+        margin-right: .5rem;
+    }
+
+    &[dir='rtl'] {
+        .fd-button--emphasized {
+            margin-left: .5rem;
+            margin-right: auto;
+        }
+    }
+}
+
+fd-toolbar {
+    display: block;
+    margin-bottom: .5rem;
+
+    .fd-toolbar {
+        display: flex;
+        justify-content: space-between;
+
+        .#{$block}__toolbar-controls {
+            button:not(:last-child) {
+                margin-right: .5rem;
+            }
+        }
+    }
+
+     &[dir='rtl'] {
+         .#{$block}__title {
+            padding-right: .5rem;
+         }
+
+         .#{$block}__toolbar-controls {
+            button:not(:last-child) {
+                margin-left: .5rem;
+                margin-right: auto;
+            }
+        }
+    }
+}
+
+.cdk-overlay-container {
+	z-index: 1002 !important;
 }
