@@ -20,11 +20,11 @@ describe('Object marker test suite', function() {
     beforeAll(() => {
         objectMarkerPage.open();
         waitForPresent(objectMarkerPage.marker);
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+    }, 1);
 
     it('Verify each marker is clickable', () => {
         const arr = getElementArrayLength(objectMarkerPage.marker);
