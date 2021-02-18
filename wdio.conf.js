@@ -54,6 +54,7 @@ exports.config = {
             './e2e/wdio/platform/**/menu-button.e2e-spec.ts',
             './e2e/wdio/platform/**/multi-input.e2e-spec.ts',
             './e2e/wdio/platform/**/object-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-marker.e2e-spec.ts',
             './e2e/wdio/platform/**/panel.e2e-spec.ts',
             './e2e/wdio/platform/**/radio-button-group.e2e-spec.ts',
             './e2e/wdio/platform/**/search.e2e-spec.ts',
