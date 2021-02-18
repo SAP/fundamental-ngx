@@ -5,7 +5,13 @@ import {
     Observable,
     of
 } from 'rxjs';
+import {
+    EntityCollectionService,
+    QueryParams
+} from '@ngrx/data';
+
 import { Predicate } from './grammer/predicate';
+import { QueryAdapter } from './query-adapter';
 
 export interface OrderBy <TModel, TProperty extends keyof TModel> {
     field: TProperty;
@@ -14,18 +20,23 @@ export interface OrderBy <TModel, TProperty extends keyof TModel> {
 
 
 export class Query <TModel> {
+
+    predicate: Predicate<TModel>;
+
     // we definitely replace this with some OrderBy object
     orderByFields: Array < string > ;
 
-
-    constructor(private resultType: Type<TModel> ) {}
+    constructor(
+        private resultType: Type<TModel>,
+        private service: EntityCollectionService<TModel>,
+        private adapter: QueryAdapter<TModel>
+    ) {}
 
     orderBy < TProperty extends keyof TModel > (...segments: Array < OrderBy < TModel, TProperty >> ): Query < TModel > {
         return this;
     }
 
     project < TP extends keyof TModel > (...property: Array < TP > ): Query < TModel > {
-
         return this;
     }
 
@@ -42,7 +53,8 @@ export class Query <TModel> {
     }
 
     select(): Observable < TModel | Array < TModel >> {
-        return of(null);
+        const params = this._createQueryParams();
+        return this.service.getWithQuery(params);
     }
 
     count(): number {
@@ -55,5 +67,10 @@ export class Query <TModel> {
 
     next(): void {
 
+    }
+
+    private _createQueryParams(): QueryParams {
+        const filter = this.adapter.parsePredicate(this.predicate);
+        return { filter: filter };
     }
 }

@@ -2,12 +2,16 @@ import {
     Type
 } from '@angular/core';
 import {
+    EntityCollectionService
+} from '@ngrx/data';
+import {
     Query
 } from './query';
 import {
     Predicate
 } from './grammer/predicate';
 import { Observable, of } from 'rxjs';
+import { QueryAdapter } from './query-adapter';
 
 
 /**
@@ -19,40 +23,40 @@ import { Observable, of } from 'rxjs';
  *
  *
  */
-export function newQueryBuilder < TModel > (resultType: Type < TModel > ): QueryBuilder < TModel > {
-    return new QueryBuilder < TModel > (resultType);
-}
+// export function newQueryBuilder < TModel > (resultType: Type < TModel > ): QueryBuilder < TModel > {
+//     return new QueryBuilder < TModel > (resultType);
+// }
 
 
-export class QueryBuilder < TModel > {
+export class QueryBuilder <TModel> {
 
-    constructor(private resultType: Type < TModel > ) {}
+    predicate: Predicate<TModel>;
 
-    byId(id: string): QueryBuilder < TModel > {
+    constructor(
+        private resultType: Type<TModel>,
+        private service: EntityCollectionService<TModel>,
+        private adapter: QueryAdapter<TModel>
+    ) { }
 
+    byId(id: string): QueryBuilder<TModel> {
         return this;
     }
 
     where < TP extends keyof TModel,
-    TPT extends TModel[TP] > (predicate: Predicate < TModel > ): QueryBuilder < TModel > {
+    TPT extends TModel[TP] > (predicate: Predicate <TModel> ): QueryBuilder <TModel> {
+        this.predicate = predicate;
         return this;
     }
 
 
-    // newSubQuery < TSubModel > (withId: string, resultType: Type < TSubModel > ): QueryBuilder < TModel > {
+    newSubQuery <TSubModel> (withId: string, resultType: Type < TSubModel > ): QueryBuilder < TModel > {
+        return this;
+    }
 
-    //     return this;
-    // }
-
-    // newQuery(): Query < TModel > {
-    //     return null;
-    // }
-
-    /**
-     * Returns observable of query result
-     */
-    select(): Observable<TModel[]> {
-        return of([]);
+    newQuery(): Query < TModel > {
+        const query = new Query<TModel>(this.resultType, this.service, this.adapter);
+        query.predicate = this.predicate;
+        return query;
     }
 
 }

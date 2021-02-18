@@ -1,118 +1,79 @@
-/*
-const query = this.entityStore.queryBuilder.where(
-    and(
-        eq('currency', 'USD')
-        gt('amount.value', 300)
-    )
-);
 
-this.req$ = this.query.orderBy(..).firstResult(15).maxResult(100).select();
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-this.query.next();
- */
+import { QueryBuilder } from './query-builder';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import {
+    EntityCollectionService,
+    EntityCollectionServiceFactory,
+    EntityDataModule,
+    EntityMetadataMap,
+} from '@ngrx/data';
+import { TestBed } from '@angular/core/testing';
+import { and, eq } from './grammer/query-expressions';
+import { DefaultQueryAdapter } from './query-adapter';
+
+class Fruit {
+    name: string;
+    variety: string;
+    origin: string;
+    price: number;
+}
 
 describe('Store: Query', () => {
 
-    it('should work', () => {
-        expect(true).toBeTruthy();
+    let qb: QueryBuilder<Fruit>;
+    let service: EntityCollectionService<Fruit>;
+
+    beforeEach(() => {
+        const entityMetadata: EntityMetadataMap = { Fruit: {} };
+        const pluralNames = {};
+        TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule,
+                EffectsModule.forRoot([]),
+                StoreModule.forRoot({}, {}),
+                EntityDataModule.forRoot({
+                    entityMetadata: entityMetadata,
+                    pluralNames: pluralNames
+                }),
+            ],
+        });
+    });
+
+    beforeEach(() => {
+        const factory = TestBed.inject(EntityCollectionServiceFactory);
+        const adapter = new DefaultQueryAdapter<Fruit>();
+        service = factory.create<Fruit>('Fruit');
+        spyOn(service, 'getWithQuery');
+        qb = new QueryBuilder(Fruit, service, adapter);
+    });
+
+    it('should call "getWithQuery" from EntityCollectionService', () => {
+        const query = qb.newQuery();
+        query.select();
+        expect(service.getWithQuery).toHaveBeenCalled();
+    });
+
+    it('should call "getWithQuery" with correct filter parameters', () => {
+        let query = qb.where(eq('name', 'apple')).newQuery();
+        query.select();
+        expect(service.getWithQuery).toHaveBeenCalledWith({
+            filter: 'name eq \'apple\''
+        });
+
+        query = qb.where(eq('variety', 'pippen')).newQuery();
+        query.select();
+        expect(service.getWithQuery).toHaveBeenCalledWith({
+            filter: 'variety eq \'pippen\''
+        });
+
+        query = qb.where(and(eq('variety', 'pippen'), eq('price', 3.03))).newQuery();
+        query.select();
+        expect(service.getWithQuery).toHaveBeenCalledWith({
+            filter: '(variety eq \'pippen\' and price eq 3.03)'
+        });
     });
 
 });
-/*
-
-  private String processWhereSpecification( StringBuilder queryBuilder,
-                                                        Predicate<Composite> spec)
-        {
-            if( spec == null )
-            {
-                return matchAllQuery();
-            }
-            if( spec instanceof QuerySpecification )
-            {
-                return wrapperQuery( ( (QuerySpecification) spec ).query() );
-            }
-            processSpecification( queryBuilder, spec, variables );
-            return matchAllQuery();
-        }
-    }
-
-    private void processSpecification( StringBuilder queryBuilder,
-                                           Predicate<Composite> spec)
-            throws EntityFinderException
-        {
-            if( spec instanceof BinaryPredicate )
-            {
-                BinaryPredicate binSpec = (BinaryPredicate) spec;
-                processBinarySpecification( queryBuilder, binSpec, variables );
-            }
-            else if( spec instanceof Notpredicate )
-            {
-                Notpredicate notSpec = (Notpredicate) spec;
-                processNotSpecification( queryBuilder, notSpec, variables );
-            }
-            else if( spec instanceof ComparisonPredicate )
-            {
-                ComparisonPredicate<?> compSpec = (ComparisonPredicate<?>) spec;
-                processComparisonSpecification( queryBuilder, compSpec, variables );
-            }
-            else if( spec instanceof ContainsAllPredicate )
-            {
-                ContainsAllPredicate<?> contAllSpec = (ContainsAllPredicate) spec;
-                processContainsAllSpecification( queryBuilder, contAllSpec, variables );
-            else
-            {
-                throw new UnsupportedOperationException( "Query specification unsupported by Elastic Search "
-                                                         + "(New Query API support missing?): "
-                                                         + spec.getClass() + ": " + spec );
-            }
-        }
-
-        private void processBinarySpecification( StringBuilder c,
-                                                 BinaryPredicate spec )
-            throws EntityFinderException {}
-            Iterable<Predicate<Composite>> operands = spec.operands();
-            if( spec instanceof AndPredicate )
-            {
-                BoolQueryBuilder andBuilder = boolQuery();
-                for( Predicate<Composite> operand : operands )
-                {
-                    processSpecification( andBuilder, operand, variables );
-                }
-                queryBuilder.add( andBuilder );
-            }
-            else if( spec instanceof OrPredicate )
-            {
-                BoolQueryBuilder orBuilder = boolQuery();
-                for( Predicate<Composite> operand : operands )
-                {
-                    BoolQueryBuilder shouldBuilder = boolQuery();
-                    processSpecification( shouldBuilder, operand, variables );
-                    orBuilder.should( shouldBuilder );
-                }
-                orBuilder.minimumShouldMatch( 1 );
-                queryBuilder.add( orBuilder );
-            }
-            else
-            {
-                throw new UnsupportedOperationException( "Binary Query specification is nor an AndSpecification "
-                                                         + "nor an OrSpecification, cannot continue." );
-            }
-        }
- private void processComparisonSpecification( String queryBuilder,
-                                                     ComparisonPredicate<?> spec ) {
-                // Query by simple property value
-                String name = spec.property().toString();
-                Object value = resolveVariable( spec.value(), variables );
-                if( spec instanceof EqPredicate )
-                {
-                    queryBuilder.add( eqQuery( name, value ) );
-                }
-                else if( spec instanceof NePredicate )
-                {
-                    queryBuilder.add( neQuery( name, value ) );
-                }
-               ....
-        }
-
-
-*/

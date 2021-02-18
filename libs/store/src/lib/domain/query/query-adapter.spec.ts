@@ -1,11 +1,4 @@
 import {
-    AndPredicate,
-    EqPredicate,
-    GePredicate,
-    GtPredicate,
-    LePredicate,
-    LtPredicate,
-    OrPredicate,
     Predicate
 } from './grammer/predicate';
 import { and, eq, ge, gt, le, lt, or } from './grammer/query-expressions';
@@ -39,6 +32,9 @@ describe('DefaultQueryAdapter: Predicate parsing', () => {
 
         const p3: Predicate<Fruit> = eq('variety', 'braeburn');
         expect(adapter.parsePredicate(p3)).toBe('variety eq \'braeburn\'');
+
+        const p4: Predicate<Fruit> = eq('price', 6.22);
+        expect(adapter.parsePredicate(p4)).toBe('price eq 6.22');
     });
 
     it('should be able to construct filter query for GtPredicate', () => {
@@ -47,6 +43,9 @@ describe('DefaultQueryAdapter: Predicate parsing', () => {
 
         const p2: Predicate<Fruit> = gt('price', 10);
         expect(adapter.parsePredicate(p2)).toBe('price gt 10');
+
+        const p3: Predicate<Fruit> = gt('name', 'pear');
+        expect(adapter.parsePredicate(p3)).toBe('name gt \'pear\'');
     });
 
     it('should be able to construct filter query for LtPredicate', () => {
