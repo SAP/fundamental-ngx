@@ -2,7 +2,7 @@
 placeholder="Select an option"
 width="7rem"
 (selectionChange)="onSelect($event)"
-[noValueLabel]="'None'"
+noValueLabel="None"
 [list]="option">
 </fdp-select>
 <small style="display: block;">Selected value: {{selectedValue | json }}</small>

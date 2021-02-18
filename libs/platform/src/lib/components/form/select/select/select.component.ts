@@ -5,30 +5,23 @@ import {
     Component,
     ElementRef,
     Host,
-    Inject,
     OnInit,
     Optional,
     Self,
     SkipSelf,
-    TemplateRef,
     ViewChild,
     ViewEncapsulation,
     Input,
     EventEmitter,
     Output,
-    AfterViewChecked,
-    Renderer2,
-    AfterContentInit,
-    ContentChildren,
-    QueryList
+    AfterViewChecked
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
 
 import { SelectComponent as CoreSelect } from '@fundamental-ngx/core';
 
-import { DynamicComponentService, FdSelectChange, MobileModeConfig, SelectControlState, PopoverFillMode, OptionComponent } from '@fundamental-ngx/core';
-import { SelectDataSource, DATA_PROVIDERS, DataProvider } from '../../../../domain/data-source';
+import { DynamicComponentService, FdSelectChange, SelectControlState } from '@fundamental-ngx/core';
 import { OptionItem } from '../../../../domain';
 import { FormField } from '../../form-field';
 import { FormFieldControl } from '../../form-control';
@@ -82,11 +75,9 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     constructor(
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
-        private _render: Renderer2,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         readonly _dynamicComponentService: DynamicComponentService,
-        @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _selectConfig: SelectConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
@@ -95,6 +86,7 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     }
 
     /** @hidden
+     * extended by super class
      */
     ngOnInit(): void {}
 
@@ -122,11 +114,11 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
             }
             // by default text will be overlapped, below it will help to truncate
             if (this.noWrapText) {
-                optionItem.querySelector('.fd-list__title').setAttribute(
-                    'title', optionItem.querySelector('.fd-list__title').innerHTML);
-                optionItem.querySelector('.fd-list__title').setAttribute(
-                    'aria-label', optionItem.querySelector('.fd-list__title').innerHTML);
-                optionItem.querySelector('.fd-list__title').classList.add('fd-list__title--no-wrap');
+                const listTitle = optionItem.querySelector('.fd-list__title');
+                const listTitleInnerHTML = optionItem.querySelector('.fd-list__title').innerHTML;
+                listTitle.setAttribute('title', listTitleInnerHTML);
+                listTitle.setAttribute('aria-label', listTitleInnerHTML);
+                listTitle.classList.add('fd-list__title--no-wrap');
             }
         });
 
@@ -168,7 +160,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
      */
     _emitChangeEvent<T>(modelValue: T): void {
         const event = new FdpSelectionChangeEvent(this, modelValue);
-
         this.selectionChange.emit(event);
     }
 
@@ -203,6 +194,7 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
 
         this.selected = selectedItem;
         this.value = this.displayValue(this.selected);
+      
     }
 
     /**

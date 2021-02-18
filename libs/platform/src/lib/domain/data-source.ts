@@ -230,8 +230,3 @@ export class ListDataSource<T> extends ComboBoxDataSource<T> {
     }
 }
 
-export class SelectDataSource<T> extends ComboBoxDataSource<T> {
-    constructor(public dataProvider: DataProvider<any>) {
-        super(dataProvider);
-    }
-}

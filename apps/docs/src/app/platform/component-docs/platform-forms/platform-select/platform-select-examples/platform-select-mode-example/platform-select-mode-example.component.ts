@@ -31,8 +31,8 @@ export class PlatformSelectModeExampleComponent {
         return {
             label: item.name + item.id,
             value: item,
-            triggerValue: '( ' + item.id + ' )',
-            disabled: item.id === 'B' ? true : false,
+            triggerValue: `(${item.id})`,
+            disabled: item.id === 'B',
             icon: ''
         };
     });
@@ -50,5 +50,3 @@ export class PlatformSelectModeExampleComponent {
         this.selectedValue2 = item.payload;
      }
 }
-
-

@@ -1,15 +1,9 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    EventEmitter,
     Input,
-    Output,
-    ViewEncapsulation,
-    AfterViewInit
+    ViewEncapsulation
 } from '@angular/core';
-
-import { FdpSelectionChangeEvent } from '../commons/base-select';
 
 
 // Increasing integer for generating unique ids for radio components.
@@ -40,23 +34,4 @@ export class OptionComponent {
     /** Whether to disable this option specifically. */
     @Input()
     disabled = false;
-
-    /**
-     * Emits event when option is selected or deselected.
-     */
-    @Output()
-    readonly selectionUpdatedChange = new EventEmitter<FdpSelectionChangeEvent>();
-
-    /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) { }
-
-    /** Selects the option.
-     * * @hidden
-     */
-    _selectionChanged(item: FdpSelectionChangeEvent): void {
-            this._changeDetectorRef.markForCheck();
-            this.selectionUpdatedChange.emit(item);
-    }
-
-    
 }

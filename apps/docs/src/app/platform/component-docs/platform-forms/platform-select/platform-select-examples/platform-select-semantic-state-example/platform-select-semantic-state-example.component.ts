@@ -31,7 +31,7 @@ export class PlatformSelectSemanticStateExampleComponent {
         return {
             label: item.name + item.id,
             value: item,
-            triggerValue: '( ' + item.id + ' )',
+            triggerValue: `(${item.id})`,
             disabled: item.id === 'B' ? true : false,
             icon: ''
         };

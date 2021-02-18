@@ -42,19 +42,14 @@ import {
     PopoverFillMode
 } from '@fundamental-ngx/core';
 import {
-    ArraySelectDataSource,
-    SelectDataSource,
-    isDataSource,
     isOptionItem,
-    MatchingBy,
-    ObservableSelectDataSource,
     OptionItem
 } from '../../../../domain';
 
-import { isFunction, isJsObject, isString } from '../../../../utils/lang';
+import { isJsObject, isString } from '../../../../utils/lang';
 import { CollectionBaseInput } from '../../collection-base.input';
 import { SelectComponent } from '../select/select.component';
-import { SelectConfig, MatchingStrategy } from '../select.config';
+import { SelectConfig } from '../select.config';
 import { ContentDensity, FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
 import { TextAlignment } from '../../combobox';
@@ -206,9 +201,8 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     }
 
     /** Data for suggestion list */
-    @Input()
     get list(): any {
-        return this._listData;
+        return this._optionItems;
     }
 
     set list(value: any) {
@@ -259,12 +253,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     _contentDensity: ContentDensity = this.selectConfig.contentDensity;
 
     /**
-      * @hidden
-      * Used to define if contentDensity value is 'compact' or not.
-    */
-   _isCompact = this._contentDensity === 'compact';
-
-    /**
      * @hidden
      * Whether "contentDensity" is "compact"
      */
@@ -289,8 +277,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
      * @hidden
      */
     openChange = new Subject<boolean>();
-
-    protected _listData: FdpSelectData<any>;
 
     /** @hidden */
     private _dsSubscription?: Subscription;

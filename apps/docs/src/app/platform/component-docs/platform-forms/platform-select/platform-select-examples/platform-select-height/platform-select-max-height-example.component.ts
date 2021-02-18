@@ -53,7 +53,7 @@ export class PlatformSelectMaxHeightExampleComponent {
         return {
             label: item.name + item.id,
             value: item,
-            triggerValue: '( ' + item.id + ' )',
+            triggerValue: `(${item.id})`,
             icon: ''
         };
     });
