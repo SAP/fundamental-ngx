@@ -7,9 +7,9 @@ describe('ThumbnailDetailsComponent', () => {
   let component: ThumbnailDetailsComponent;
   let fixture: ComponentFixture<ThumbnailDetailsComponent>;
   const dialogRef = new DialogRef();
-  
+
   const selectedMedia: Media = {
-    title: 'Nature Deetails',
+    title: 'Nature Details',
     thumbnailUrl: 'http://lorempixel.com/400/400/nature',
     mediaType: 'image',
     mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
@@ -17,7 +17,7 @@ describe('ThumbnailDetailsComponent', () => {
     label: 'nature2'
 }
 const mediaList: Media[] = [{
-    title: 'Nature Deetails',
+    title: 'Nature Details',
     thumbnailUrl: 'http://lorempixel.com/400/400/nature',
     mediaType: 'image',
     mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
