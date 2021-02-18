@@ -99,7 +99,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         this.utilities = [
             { url: 'core/global-config', name: 'Global Configuration' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
-            { url: 'core/popover-directive', name: 'Popover Helper' },
             { url: 'core/scroll-spy', name: 'Scroll Spy' },
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];
