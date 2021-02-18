@@ -7,6 +7,7 @@ addons:
   chrome: stable
   hosts:
     - sap.dev
+  sauce_connect: true
 git:
   depth: false
 script:
