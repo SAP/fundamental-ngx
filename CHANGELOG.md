@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.9...v0.28.0-rc.0) (2021-02-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove the Popover Directive
+
+### Bug Fixes
+
+* (Core) remove Popover Directive ([#4701](https://github.com/SAP/fundamental-ngx/issues/4701)) ([c077686](https://github.com/SAP/fundamental-ngx/commit/c07768650ec80cd3d64c0c2f41ced57ae9ebe9a7))
+
 ### [0.27.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.8...v0.27.1-rc.9) (2021-02-18)
 
 ### [0.27.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.7...v0.27.1-rc.8) (2021-02-18)
