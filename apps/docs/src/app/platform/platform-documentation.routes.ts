@@ -282,6 +282,12 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-approval-flow/platform-approval-flow-docs.module').then((m) =>
                         m.PlatformApprovalFlowDocsModule)
+            },
+            {
+                path: 'slider',
+                loadChildren: () =>
+                    import('./component-docs/platform-slider/slider-docs.module').then((m) =>
+                        m.PlatformSliderDocsModule)
             }
         ]
     }

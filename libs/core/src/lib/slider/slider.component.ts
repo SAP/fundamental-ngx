@@ -756,6 +756,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     private _initRangeMode(value: number[] | SliderTickMark[]): void {
+        if (!(this._handle1Value === 0 && this._handle2Value === 0)) {
+            return;
+        }
+
         if (this.customValues.length > 0) {
             this._initRangeModeWithCustomValues(value as SliderTickMark[]);
 
