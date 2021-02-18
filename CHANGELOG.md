@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.2...v0.28.0-rc.3) (2021-02-18)
+
+
+### Bug Fixes
+
+* (Core) hide Shellbar custom elements in mobile mode ([#4655](https://github.com/SAP/fundamental-ngx/issues/4655)) ([fcc3ee7](https://github.com/SAP/fundamental-ngx/commit/fcc3ee7d9dd8a43bd189da43f40de6135ce9b56e))
+
 ## [0.28.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.1...v0.28.0-rc.2) (2021-02-18)
 
 
