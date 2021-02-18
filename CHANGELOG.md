@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.1...v0.28.0-rc.2) (2021-02-18)
+
+
+### Bug Fixes
+
+* (Platform) accessibility fixes for Table ([#4708](https://github.com/SAP/fundamental-ngx/issues/4708)) ([8963451](https://github.com/SAP/fundamental-ngx/commit/8963451549fa81b201d6df60ec804d27f46e0776))
+
 ## [0.28.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.0...v0.28.0-rc.1) (2021-02-18)
 
 
