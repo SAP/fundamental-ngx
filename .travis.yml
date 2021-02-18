@@ -85,7 +85,7 @@ jobs:
         - ./deploy-to-preview-channel.sh
       after_failure:
         - npm run e2e-generate-report
-        -./deploy-to-preview-channel.sh
+        - ./deploy-to-preview-channel.sh
     - stage: "Test"
       name: Sauce Labs - unit tests platform
       if: type = pull_request
