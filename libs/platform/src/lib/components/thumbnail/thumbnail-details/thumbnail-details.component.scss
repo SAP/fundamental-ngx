@@ -18,20 +18,30 @@
         fd-dialog-body {
 
         .fdp-thumbnail-button--left {
-            cursor: pointer;
             position: absolute;
             top: 50%;
             left: 2rem;
             border-radius: 50%;
+            &:hover {
+                cursor: pointer;
+            }
+            &:disabled {
+                cursor: default;
+            }
         }
 
         .fdp-thumbnail-button--right {
             right: 2rem;
-            cursor: pointer;
             position: absolute;
             top: 50%;
             border-radius: 50%;
-
+            &:hover {
+                cursor: pointer;
+            }
+            &:disabled {
+                cursor: default;
+                
+            }
         }
 
         .fdp-media-container {
@@ -49,8 +59,7 @@
                 bottom: 0;
                 left: 0;
               }
-
-              video {
+            video {
                 max-width: $fdp-media-player-size;
                 max-height: $fdp-media-player-size;
                 width: $fdp-media-player-size;
@@ -60,16 +69,14 @@
                 bottom: 0;
                 left: 0;
               }
+          }
         }
-
-        }
-        .fdp-thumbnail-image-container{
+        .fdp-thumbnail-image-container {
             text-align: center;
             .fdp-thumbnail-image {
                 width: $fdp-thumbnail-image-size;
                 height: $fdp-thumbnail-image-size;
             }
-
          fd-avatar {
                 width: $fdp-thumbnail-image-size;
                 height: $fdp-thumbnail-image-size;
@@ -78,15 +85,14 @@
             fd-avatar {
                 width: $fdp-thumbnail-selected-width;
                 height: $fdp-thumbnail-selected-height;
-              }
+            }
             width: $fdp-thumbnail-selected-width;
             height: $fdp-thumbnail-selected-height;
             border: $fdp-thumbnail-image-border;
             border-radius: $fdp-thumbnail-image-border-radius;
             border-color: $fdp-thumbnail-image-border-color-default;
             border-color: $fdp-thumbnail-image-border-color;
-          }
-    }
-}
-
+        }
+     }
+  }
 }

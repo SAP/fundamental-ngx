@@ -6,7 +6,7 @@ import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-detail
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',
     styleUrls: ['./thumbnail-image.component.scss']
-  //  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class ThumbnailImageComponent implements OnChanges, OnInit {
 

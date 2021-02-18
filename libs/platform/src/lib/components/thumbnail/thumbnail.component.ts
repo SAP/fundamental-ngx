@@ -28,7 +28,7 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
     selector: 'fdp-thumbnail',
     templateUrl: './thumbnail.component.html',
     styleUrls: ['./thumbnail.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class ThumbnailComponent extends BaseComponent implements OnInit {
 

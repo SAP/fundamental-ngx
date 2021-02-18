@@ -21,8 +21,7 @@ interface DialogRefData {
 @Component({
     selector: 'fdp-thumbnail-details',
     templateUrl: './thumbnail-details.component.html',
-    styleUrls: ['./thumbnail-details.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./thumbnail-details.component.scss']
 })
 export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
 
@@ -39,10 +38,10 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
     /** @hidden Make right navigation button disabled */
     rightButtonDisabled = false;
 
+    /** @hidden */
     constructor(private readonly _elementRef: ElementRef, public dialogRef: DialogRef,
         private _cdr: ChangeDetectorRef
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
