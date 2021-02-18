@@ -47,7 +47,7 @@ describe('File uploader test suite', function() {
         const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderPO.fileUploaderInputFile, imagePath);
-            expect(imagePath).toContain(getText(fileUploaderPO.fileSelectedText, i));
+            expect(fileUploaderPO.fileUploaderInputFile).toContain(getText(fileUploaderPO.fileSelectedText, i));
             expect(imagePath).toContain(getAttributeByName(fileUploaderPO.fileUploaderInput, 'title', i).slice(1));
         }
     });
