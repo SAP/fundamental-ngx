@@ -1,72 +1,70 @@
-export default {
-    cardTitleArr: [
-        'Card Title',
-        'Card Title',
-        'Card Title',
-        'Card Title'
-    ],
-    cardSubtitle: 'Card Subtitle',
-    badgeText: 'New',
-    cardTypeAttr: 'cardtype',
-    compactAttr: 'ng-reflect-compact',
-    fontSizeAttr: 'font-size',
-    compactFont: '14px',
-    loaderAttr: 'ng-reflect-is-loading',
-    cardListItemText: [
-        'item 1',
-        'item 2',
-        'item 3',
-        'item 4'
-    ],
-    btnText: [
-        'Approve',
-        'Reject'
-    ],
-    analyticsTitle: 'Failure Breakdown',
-    tableHeaderText: [
-        'Name',
-        'Price',
-        'Country',
-        'Status'
-    ],
-    tableContentsText: [
-        'Banana India 5 EUR Available',
-        'Pineapple Mexico 2 EUR Out of stock',
-        'Orange Spain 6 EUR Temporary unavailable'
-    ],
-    tableCardNames: [
-        'Banana',
-        'Pineapple',
-        'Orange'
-    ],
-    tableCardCountries: [
-        'India',
-        'Mexico',
-        'Spain'
-    ],
-    tableCardPrices: [
-        '5 EUR',
-        '2 EUR',
-        '6 EUR'
-    ],
-    tableCardStatuses: [
-        'Available',
-        'Out of stock',
-        'Temporary unavailable'
-    ],
-    statusColors: [
-        '16,126,62',
-        '187,0,0',
-        '5,59,112'
-    ],
-    tableCardTitle: 'Table card',
-    barChartTitle: 'Bar Chart List Card',
-    barChartCounter: '4 of 10',
-    colorAttr: 'color',
-    barChartItems: [
-        'Contract A',
-        'Contract B',
-        'Contract C',
-        'Contract D'
-    ]
-};
+export const cardTitleArr = [
+    'Card Title',
+    'Card Title',
+    'Card Title',
+    'Card Title'
+];
+export const cardSubtitle = 'Card Subtitle';
+export const badgeText = 'New';
+export const cardTypeAttr = 'cardtype';
+export const compactAttr = 'ng-reflect-compact';
+export const fontSizeAttr = 'font-size';
+export const compactFont = '14px';
+export const loaderAttr = 'ng-reflect-is-loading';
+export const cardListItemText = [
+    'item 1',
+    'item 2',
+    'item 3',
+    'item 4'
+];
+export const btnText = [
+    'Approve',
+    'Reject'
+];
+export const analyticsTitle = 'Failure Breakdown';
+export const tableHeaderText = [
+    'Name',
+    'Price',
+    'Country',
+    'Status'
+];
+export const tableContentsText = [
+    'Banana India 5 EUR Available',
+    'Pineapple Mexico 2 EUR Out of stock',
+    'Orange Spain 6 EUR Temporary unavailable'
+];
+export const tableCardNames = [
+    'Banana',
+    'Pineapple',
+    'Orange'
+];
+export const tableCardCountries = [
+    'India',
+    'Mexico',
+    'Spain'
+];
+export const tableCardPrices = [
+    '5 EUR',
+    '2 EUR',
+    '6 EUR'
+];
+export const tableCardStatuses = [
+    'Available',
+    'Out of stock',
+    'Temporary unavailable'
+];
+export const statusColors = [
+    '16,126,62',
+    '187,0,0',
+    '5,59,112'
+];
+export const tableCardTitle = 'Table card';
+export const barChartTitle = 'Bar Chart List Card';
+export const barChartCounter = '4 of 10';
+export const colorAttr = 'color';
+export const barChartItems = [
+    'Contract A',
+    'Contract B',
+    'Contract C',
+    'Contract D'
+];
