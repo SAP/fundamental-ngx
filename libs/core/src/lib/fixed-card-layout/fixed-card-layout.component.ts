@@ -115,7 +115,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     // FocusKeyManager instance
-    private keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
+    private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
 
     constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
 
@@ -133,8 +133,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     ngAfterViewInit(): void {
         /** Create column layout when view is initialized */
-        this.updateLayout();
-        this.accessibilitySetup();
+        this._updateLayout();
+        this._accessibilitySetup();
     }
 
     /** @hidden */
@@ -143,7 +143,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
          * Update column layout when orientation of screen changes.
          * actual width is returned when view is stable. In AfterViewInit, correct value does not come.
          */
-        this.updateLayout();
+        this._updateLayout();
     }
 
     /** @hidden */
@@ -154,15 +154,15 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    public handleKeydown(event: KeyboardEvent): void {
+    handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
-        if (this.keyboardEventsManager) {
-            this.keyboardEventsManager.onKeydown(event);
+        if (this._keyboardEventsManager) {
+            this._keyboardEventsManager.onKeydown(event);
         }
     }
 
-    /** @hidden Arranges cards on drop of dragged card */
-    public dragDrop(event: CdkDragDrop<CardDefinitionDirective[]>): void {
+    /** Arranges cards on drop of dragged card */
+    dragDrop(event: CdkDragDrop<CardDefinitionDirective[]>): void {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
@@ -189,8 +189,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         );
     }
 
-    /** Distribute cards on window resize */
-    public updateLayout(): void {
+    /** @hidden Distribute cards on window resize */
+    private _updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -198,13 +198,13 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         }
     }
 
-    /** Return available width for fd-card-layout */
-    public getWidthAvailable(): number {
+    /** @hidden Return available width for fd-card-layout */
+    private _getWidthAvailable(): number {
         return this.layout.nativeElement.getBoundingClientRect().width;
     }
 
-    accessibilitySetup(): void {
-        this.keyboardEventsManager = new FocusKeyManager(this.cardContainers).withWrap();
+    private _accessibilitySetup(): void {
+        this._keyboardEventsManager = new FocusKeyManager(this.cardContainers).withWrap();
     }
 
     /** @hidden Method to update rank after cards are dragged */
@@ -229,7 +229,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private _listenOnResize(): void {
         fromEvent(window, 'resize')
             .pipe(debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => this.updateLayout());
+            .subscribe(() => this._updateLayout());
     }
 
     /** @hidden Listen card change and distribute cards on column change */
@@ -242,7 +242,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         let columnCount: number;
 
         // get fd-card-layout width and calculate how many cards can fit into it
-        const availableLayoutWidth = this.getWidthAvailable();
+        const availableLayoutWidth = this._getWidthAvailable();
         const numberOfCardsWithNoGap = Math.floor(availableLayoutWidth / CARD_MINIMUM_WIDTH);
         const requiredWidthWithGap =
             numberOfCardsWithNoGap * CARD_MINIMUM_WIDTH + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
