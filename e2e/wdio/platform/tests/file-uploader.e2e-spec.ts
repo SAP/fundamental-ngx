@@ -26,7 +26,7 @@ describe('File uploader test suite', function() {
     it('Verify placeholders', () => {
         const arrLength = getElementArrayLength(fileUploaderPO.fileUploaderInput);
         for (let i = 0; i < arrLength; i++) {
-            expect(placeholderValue).toContain(getAttributeByName
+            expect(placeholderValue).not.toContain(getAttributeByName
             (fileUploaderPO.fileUploaderInput, 'placeholder', i));
         }
     });
