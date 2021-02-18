@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.0...v0.28.0-rc.1) (2021-02-18)
+
+
+### Bug Fixes
+
+* (Core) add fix for checkbox focus inside Multi Input ([#4700](https://github.com/SAP/fundamental-ngx/issues/4700)) ([87e915c](https://github.com/SAP/fundamental-ngx/commit/87e915cd02687b00a2eefeec1777c344f294f3b7))
+
 ## [0.28.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.27.1-rc.9...v0.28.0-rc.0) (2021-02-18)
 
 
