@@ -16,7 +16,7 @@ export class PlatformThumbnailHorizontalExampleComponent {
         label: 'nature'
     },
     {
-        title: 'Annimal Details',
+        title: 'Animal Details',
         thumbnailUrl: '//picsum.photos/id/317/600',
         mediaType: 'image',
         mediaUrl: '//picsum.photos/id/317/600',
