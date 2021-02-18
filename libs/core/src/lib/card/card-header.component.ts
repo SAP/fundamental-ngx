@@ -7,7 +7,9 @@ import {
     ContentChild,
     Input,
     HostBinding,
-    Renderer2
+    Renderer2,
+    OnChanges,
+    SimpleChanges
 } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
@@ -21,11 +23,15 @@ import { CardSubtitleDirective } from './card-subtitle.directive';
     templateUrl: './card-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardHeaderComponent implements OnInit, CssClassBuilder, AfterContentInit {
+export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
+    /** Whether card header is interactive */
+    @Input()
+    interactive = true;
+
     /** @hidden */
     @Input()
     @HostBinding('attr.tabindex')
-    tabindex = '0';
+    tabindex = this.interactive ? '0' : '-1';
 
     /** @hidden */
     class: string;
@@ -55,10 +61,21 @@ export class CardHeaderComponent implements OnInit, CssClassBuilder, AfterConten
         }
     }
 
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('interactive' in changes) {
+            this.tabindex = this.interactive ? '0' : '-1' ;
+        }
+        this.buildComponentCssClass();
+    }
+
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardHeader];
+        return [
+            CLASS_NAME.cardHeader,
+            !this.interactive ? CLASS_NAME.cardHeaderNonInteractive : ''
+        ];
     }
 
     /** @hidden */

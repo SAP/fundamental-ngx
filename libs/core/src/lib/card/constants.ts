@@ -3,6 +3,7 @@ export const CLASS_NAME = {
     cardCompact: 'fd-card--compact',
 
     cardHeader: 'fd-card__header',
+    cardHeaderNonInteractive: 'fd-card__header--non-interactive',
     cardTitle: 'fd-card__title',
     cardSubtitle: 'fd-card__subtitle',
     cardSecondSubtitle: 'fd-card__second-subtitle',
