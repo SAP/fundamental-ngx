@@ -53,8 +53,8 @@ describe('Input should ', function() {
     });
 
     it('have associated label element to describe its purpose', () => {
-        expect(getTextArr(inputPage.inputsLabels, 0, -2)).toEqual(inputPContent.labelsArray);
-        expect(getText(inputPage.inputsLabels, 8)).toContain(inputPContent.favoriteColor);
+        expect(getTextArr(inputPage.inputsLabels, 0, -2)).toEqual(labelsArray);
+        expect(getText(inputPage.inputsLabels, 8)).toContain(favoriteColor);
     });
 
     it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {
