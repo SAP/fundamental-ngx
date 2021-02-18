@@ -53,6 +53,11 @@ jobs:
         - JOB_URL=$TRAVIS_JOB_WEB_UR
         - SAUCE_USERNAME=$SAUCE_USERNAME
         - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+        - FIREBASE_TOKEN=$FIREBASE_TOKEN
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+      before_script:
+        - sudo apt-get install jq
+        - npm install firebase-tools -g
       script: npm run e2e:platformB:ci
       after_success:
         - npm run e2e-generate-report
@@ -69,6 +74,11 @@ jobs:
         - JOB_URL=$TRAVIS_JOB_WEB_UR
         - SAUCE_USERNAME=$SAUCE_USERNAME
         - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+        - FIREBASE_TOKEN=$FIREBASE_TOKEN
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+      before_script:
+        - sudo apt-get install jq
+        - npm install firebase-tools -g
       script: npm run e2e:core:ci
       after_success:
         - npm run e2e-generate-report
