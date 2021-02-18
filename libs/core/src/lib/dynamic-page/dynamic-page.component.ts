@@ -278,7 +278,9 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
      * set top position of normal content on scrolling
      */
     private _setContainerPosition(): void {
+        console.log('first');
         if (this._contentComponent) {
+            console.log('second');
             const contentComponentElement = this._contentComponent.elementRef.nativeElement;
             this._renderer.setStyle(
                 contentComponentElement,

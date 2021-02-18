@@ -75,31 +75,6 @@ describe('DynamicPageComponent default values', () => {
         expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBeFalse();
     }));
 
-    fit('should collapse on scroll tabs', fakeAsync (() => {
-        component.tabs = true;
-        fixture.detectChanges();
-        (<any>dynamicPageComponent)._addScrollListeners();
-        const element = dynamicPageComponent._tabComponent.contentContainer.nativeElement;
-        element.scrollTop = 1000;
-        fixture.detectChanges()
-        element.dispatchEvent(new Event('scroll'));
-        tick(15);
-        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBeTrue();
-    }));
-
-    it('should not collapse on scroll tabs, when pinned', fakeAsync (() => {
-        component.tabs = true;
-        fixture.detectChanges();
-        (<any>dynamicPageComponent)._addScrollListeners();
-        (<any>dynamicPageComponent)._dynamicPageService.pinned.next(true);
-        const element = dynamicPageComponent._tabComponent.contentContainer.nativeElement;
-        element.scrollTop = 1000;
-        fixture.detectChanges()
-        element.dispatchEvent(new Event('scroll'));
-        tick(15);
-        expect((<any>dynamicPageComponent)._dynamicPageService.collapsed.value).toBeFalse();
-    }));
-
     it('should handle collapse', () => {
         const spy = spyOn(<any>dynamicPageComponent, '_setContainerPositions');
 
@@ -119,7 +94,37 @@ describe('DynamicPageComponent default values', () => {
 
         expect(sizeChangeSpy).toHaveBeenCalled();
         expect(containerPositionSpy).toHaveBeenCalled();
-
     }));
+
+    it('should propagate sizes', () => {
+        const propagateSizeSpy = spyOn(<any>dynamicPageComponent, '_propagateSizeToChildren');
+        dynamicPageComponent.size = 'small';
+        expect(propagateSizeSpy).toHaveBeenCalled();
+    });
+
+    fit('should apply valid height on content', () => {
+        const size = '150px';
+        fixture.detectChanges();
+        (<any>dynamicPageComponent)._getCalculatedFullHeight = (_element: HTMLElement): string => size;
+        (<any>dynamicPageComponent)._setContainerPositions();
+        fixture.detectChanges();
+
+        const element = dynamicPageComponent._contentComponent.elementRef.nativeElement;
+        const styles = window.getComputedStyle(element);
+        expect(styles.height).toBe(size);
+    });
+
+    it('should apply valid height on tabs', () => {
+        component.tabs = true;
+        fixture.detectChanges();
+        const size = '150px';
+        (<any>dynamicPageComponent)._getCalculatedFullHeight = (_element: HTMLElement): string => size;
+        (<any>dynamicPageComponent)._setTabsPosition();
+        fixture.detectChanges();
+
+        const element = dynamicPageComponent._tabComponent.contentContainer.nativeElement
+        const styles = window.getComputedStyle(element);
+        expect(styles.height).toBe(size);
+    });
 
 });
