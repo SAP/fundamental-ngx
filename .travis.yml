@@ -89,7 +89,7 @@ jobs:
     - stage: "Test"
       name: Sauce Labs - unit tests core
       if: type = pull_request
-      cript: npm run test:core:saucelabs
+      script: npm run test:core:saucelabs
     - stage: "Pre-release"
       if: branch = main AND type = push
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
