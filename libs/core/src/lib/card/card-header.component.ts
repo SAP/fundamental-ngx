@@ -1,11 +1,13 @@
 import {
     Component,
     OnInit,
+    AfterContentInit,
     ChangeDetectionStrategy,
     ElementRef,
     ContentChild,
     Input,
-    HostBinding
+    HostBinding,
+    Renderer2
 } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
@@ -19,7 +21,7 @@ import { CardSubtitleDirective } from './card-subtitle.directive';
     templateUrl: './card-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardHeaderComponent implements OnInit, CssClassBuilder {
+export class CardHeaderComponent implements OnInit, CssClassBuilder, AfterContentInit {
     /** @hidden */
     @Input()
     @HostBinding('attr.tabindex')
@@ -37,11 +39,20 @@ export class CardHeaderComponent implements OnInit, CssClassBuilder {
     _subtitle: CardSubtitleDirective;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
 
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        /** Add fd-card__avatar class to fd-avatar */
+        const avatar = this.elementRef().nativeElement.querySelector('fd-avatar');
+        if (avatar) {
+            this.renderer.addClass(avatar, 'fd-card__avatar');
+        }
     }
 
     @applyCssClass

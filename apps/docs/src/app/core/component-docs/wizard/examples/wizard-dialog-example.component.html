@@ -1,17 +1,14 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" class="fd-wizard-example">
-        <fd-dialog-header>
-            <h1 fd-title>Checkout</h1>
-        </fd-dialog-header>
-
         <fd-dialog-body>
+            <h2 fd-title>Checkout</h2>
             <fd-wizard [appendToWizard]="false">
                 <fd-wizard-navigation>
                     <ul fd-wizard-progress-bar>
                         <li
                             fd-wizard-step
                             [status]="step1status"
-                            (statusChange)="step1status = $event"
+                            (statusChange)="statusChanged(1, $event)"
                             label="Product Type"
                         >
                             <fd-wizard-step-indicator>1</fd-wizard-step-indicator>
@@ -37,7 +34,7 @@
                         <li
                             fd-wizard-step
                             [status]="step2status"
-                            (statusChange)="step2status = $event"
+                            (statusChange)="statusChanged(2, $event)"
                             label="Customer Information"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
@@ -102,7 +99,7 @@
                         <li
                             fd-wizard-step
                             [status]="step3status"
-                            (statusChange)="step3status = $event"
+                            (statusChange)="statusChanged(3, $event)"
                             label="Additional Information"
                             optionalText="(Optional)"
                         >
@@ -126,7 +123,7 @@
                         <li
                             fd-wizard-step
                             [status]="step4status"
-                            (statusChange)="step4status = $event"
+                            (statusChange)="statusChanged(4, $event)"
                             label="Pricing and Payment"
                         >
                             <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
@@ -145,7 +142,7 @@
                                     </div>
                             </fd-wizard-content>
                         </li>
-                        <li fd-wizard-step [status]="summaryStatus" [isSummary]="true">
+                        <li fd-wizard-step [status]="summaryStatus" [isSummary]="true" (statusChange)="statusChanged(5, $event)">
                             <fd-wizard-content>
                                 <h4 class="fd-title fd-title--h4">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">
@@ -219,52 +216,15 @@
                     </ul>
                 </fd-wizard-navigation>
             </fd-wizard>
+            <div fd-bar barDesign="floating-footer">
+                <div fd-bar-right>
+                    <fd-button-bar *ngIf="step1status !== 'current'" label="Previous Step" (click)="goToStep(currentStep - 1)"></fd-button-bar>
+                    <fd-button-bar *ngIf="summaryStatus !== 'current'" [label]="step4status === 'current' ? 'Review' : 'Next Step'" [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')" (click)="goToStep(currentStep + 1)"></fd-button-bar>
+                    <fd-button-bar *ngIf="summaryStatus === 'current'" label="Finish" [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')" (click)="dialog.close('Continue')"></fd-button-bar>
+                    <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')"></fd-button-bar>
+                </div>
+            </div>
         </fd-dialog-body>
-
-        <fd-dialog-footer>
-            <fd-dialog-footer-button *ngIf="step1status !== 'current'">
-                <button
-                        fd-button
-                        fd-dialog-decisive-button
-                        label="Previous Step"
-                        [compact]="true"
-                        (click)="goToStep(currentStep - 1)">
-                </button>
-            </fd-dialog-footer-button>
-            <fd-dialog-footer-button *ngIf="summaryStatus !== 'current'">
-                <button
-                    fd-button
-                    fd-dialog-decisive-button
-                    fdType="emphasized"
-                    [label]="step4status === 'current' ? 'Review' : 'Next Step'"
-                    [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
-                    [compact]="true"
-                    (click)="goToStep(currentStep + 1)">
-                </button>
-            </fd-dialog-footer-button>
-            <fd-dialog-footer-button *ngIf="summaryStatus === 'current'">
-                <button
-                    fd-button
-                    fd-dialog-decisive-button
-                    fdType="emphasized"
-                    label="Finish"
-                    [compact]="true"
-                    (click)="dialog.close('Continue')">
-                </button>
-            </fd-dialog-footer-button>
-
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fd-initial-focus
-                    fd-dialog-decisive-button
-                    fdType="transparent"
-                    label="Cancel"
-                    [compact]="true"
-                    (click)="dialog.dismiss('Cancel')">
-                </button>
-            </fd-dialog-footer-button>
-        </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
 

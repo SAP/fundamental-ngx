@@ -56,11 +56,11 @@ export class SelectKeyManagerService {
     * @hidden
     */
     _handleClosedKeydown(event: KeyboardEvent): void {
-        const isArrowKey = KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW]);
         const isOpenKey = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
         const manager = this._keyManager;
+
         // Open the select on ALT + arrow key to match the native <select>
-        if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event)) || (event.altKey && isArrowKey)) {
+        if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event))) {
             // prevents the page from scrolling down when pressing space
             event.preventDefault();
             this._component.open();
@@ -71,12 +71,15 @@ export class SelectKeyManagerService {
                 KeyUtil.isKeyCode(event, HOME) ? manager.setFirstItemActive() : manager.setLastItemActive();
                 event.preventDefault();
             }
+
             const selectedOption = this._component.selected;
 
             // a11y Since the value has changed, we need to announce it.
             if (selectedOption && previouslySelectedOption !== selectedOption) {
                 this._component._liveAnnouncer.announce((selectedOption as OptionsInterface).viewValue, 10000);
             }
+            manager.onKeydown(event);
+
         }
     }
 

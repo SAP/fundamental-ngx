@@ -1,3 +1,5 @@
+import { default as axe, source } from 'axe-core';
+
 export function defaultWaitTime(): number {
     return browser.options.waitforTimeout;
 }
@@ -23,6 +25,10 @@ export function open(path: string = ''): void {
 
 export function pause(waitTime: number = defaultWaitTime()): void {
     browser.pause(waitTime);
+}
+// tslint:disable-next-line:no-shadowed-variable
+export function execute(source): void {
+    browser.execute(source);
 }
 
 export function isBrowser(browserName: string): boolean {
@@ -320,6 +326,17 @@ export function getElementLocation(selector: string, index: number = 0, prop?: '
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     checkSelectorExists(selector, index);
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
+}
+
+export function runAxeReport(options: string): object {
+    return browser.executeAsync((options, done) => {
+        axe.run(options, function(err, results) {
+            if (err) {
+                done(err);
+            }
+            done(results);
+        });
+    }, options);
 }
 
 export function clickAndDragElement(locationX: number, locationY: number, newLocationX: number, newLocationY: number): void {

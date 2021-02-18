@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 interface GridListItem {
     id: number;
@@ -11,7 +11,8 @@ interface GridListItem {
     selector: 'fd-grid-list-layout-example',
     templateUrl: './grid-list-layout-example.component.html',
     styleUrls: ['./grid-list-layout-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class GridListLayoutExampleComponent {
     layoutPattern = 'XL4-L3-M2-S1';

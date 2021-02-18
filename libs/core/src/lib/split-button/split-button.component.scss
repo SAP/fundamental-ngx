@@ -5,6 +5,7 @@
     .fd-button {
         display: flex;
         align-items: center;
+        justify-content: flex-start;
 
         &__text {
             display: inline-block;

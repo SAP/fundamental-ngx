@@ -590,6 +590,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     }
 
     /** @hidden */
+    _selectItem(item: BaseListItem): void {
+        this._selectionModel.select(item);
+        this.stateChanges.next(item);
+    }
+
+    /** @hidden */
     private _initializeDS(ds: FdpListDataSource<any>): void {
         this._dsItems = [];
         if (isDataSource(this.dataSource)) {
@@ -666,8 +672,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             if (item.listItem.nativeElement.getAttribute('id') === selectedItemId) {
                 item.listItem.nativeElement.setAttribute('_selected', true);
                 item.listItem.nativeElement.setAttribute('aria-checked', true);
-                this._selectionModel.select(item);
-                this.stateChanges.next(item);
+                this._selectItem(item);
             }
         });
 
@@ -705,8 +710,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                     if (item.anchor !== undefined) {
                         item.anchor.nativeElement.classList.add('is-selected');
                     }
-                    this._selectionModel.select(item);
-                    this.stateChanges.next(item);
+                    this._selectItem(item);
                 }
             });
             selectedItemId = '0';

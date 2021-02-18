@@ -188,6 +188,11 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
         this.isOpen ? this.close() : this.open();
     }
 
+    /** Method called to refresh position of opened popover */
+    refreshPosition(): void {
+        this._popoverService.refreshPosition();
+    }
+
     /** @hidden Select and instantiate menu view mode */
     private _setupView(): void {
         if (this.mobile) {
