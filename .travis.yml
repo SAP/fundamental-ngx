@@ -24,7 +24,7 @@ jobs:
         - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
     - stage: "Test"
-      name: "Sauce Labs - e2e tests - platformA"
+      name: Sauce Labs - e2e tests - platformA
       if: type = pull_request
       env:
         - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
