@@ -69,9 +69,6 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if ('interactive' in changes) {
-            this.tabindex = this.interactive ? '0' : '-1' ;
-        }
         this.buildComponentCssClass();
     }
 
