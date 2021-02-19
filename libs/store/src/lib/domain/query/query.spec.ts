@@ -94,4 +94,31 @@ describe('Store: Query', () => {
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=100');
     });
 
+    it('should be able to modify query to get next page of results', () => {
+        const query = qb.newQuery();
+        query.maxResults(20).firstResult(20).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=20');
+
+        query.next();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
+    });
+
+    it('should be able to modify query to get previous page of results', () => {
+        const query = qb.newQuery();
+        query.maxResults(20).firstResult(80).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=80');
+
+        query.previous();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=60');
+    });
+
+    it('should default the top to 0 if previous results in a negative index', () => {
+        const query = qb.newQuery();
+        query.maxResults(20).firstResult(10).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=10');
+
+        query.previous();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=0');
+    });
+
 });

@@ -30,7 +30,7 @@ export class Query<TModel> {
     /** @hidden - stores current index offset */
     offset: number;
 
-    // we definitely replace this with some OrderBy object
+    /** @hidden - stores curernt order bys */
     orderByFields: Array<OrderBy<TModel, keyof TModel>>;
 
     constructor(
@@ -39,8 +39,12 @@ export class Query<TModel> {
         private adapter: QueryAdapter<TModel>
     ) {}
 
-    orderBy<TProperty extends keyof TModel> (...segments: Array < OrderBy < TModel, TProperty >> ): Query < TModel > {
-        this.orderByFields = segments;
+    /**
+     * Set order by rules for query.
+     * @param orderBys Set of OrderBy objects.
+     */
+    orderBy<TProperty extends keyof TModel> (...orderBys: Array < OrderBy < TModel, TProperty >> ): Query < TModel > {
+        this.orderByFields = orderBys;
         return this;
     }
 
@@ -83,15 +87,23 @@ export class Query<TModel> {
         return 0;
     }
 
+    /**
+     * Get previous page of collection
+     */
     previous(): void {
-
+        this.offset = (this.offset > this.pageSize) ? this.offset - this.pageSize : 0;
+        this.select();
     }
 
+    /**
+     * Get next page of collection
+     */
     next(): void {
-
+        this.offset = this.offset + this.pageSize;
+        this.select();
     }
 
-    _createQueryParams(): QueryParams {
+    private _createQueryParams(): QueryParams {
         let params: QueryParams = {};
         if (this.predicate) {
             params = {
@@ -105,7 +117,7 @@ export class Query<TModel> {
                 pageSize: this.pageSize.toString()
             };
         }
-        if (this.offset) {
+        if (this.offset !== undefined) {
             params = {
                 ...params,
                 offset: this.offset.toString()
