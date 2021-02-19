@@ -1,5 +1,5 @@
 import { PanelPo } from '../pages/panel.po';
-import panelPageContent from '../fixtures/appData/panel-page-content';
+import {action_panel_delete_button, action_panel_edit_button, expandable_panel_header} from '../fixtures/appData/panel-page-content';
 import {
     click,
     getCSSPropertyByName,
@@ -38,7 +38,7 @@ describe('Verify Panel', () => {
 
         expect(isVisibleContentBefore).toBe(true);
         expect(isInvisibleVisibleContentAfter).toBe(true);
-        expect(getText(expandablePanelTitle)).toBe(panelPageContent.expandable_panel_header);
+        expect(getText(expandablePanelTitle)).toBe(expandable_panel_header);
     });
 
     it('should compact be smaller than basic', () => {
@@ -57,10 +57,10 @@ describe('Verify Panel', () => {
 
     it('should action panel have clickable buttons example ', () => {
         expect(getText(actionPanelBtn, 0).trim())
-            .toBe(panelPageContent.action_panel_edit_button);
+            .toBe(action_panel_edit_button);
         expect(waitForClickable(actionPanelBtn, 0)).toBe(true);
         expect(getText(actionPanelBtn, 1).trim())
-            .toBe(panelPageContent.action_panel_delete_button);
+            .toBe(action_panel_delete_button);
         expect(waitForClickable(actionPanelBtn, 1)).toBe(true);
     });
 

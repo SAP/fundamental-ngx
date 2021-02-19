@@ -1,6 +1,9 @@
 import { SplitMenuButtonPo } from '../pages/split-menu-button.po';
-import SMBData from '../fixtures/appData/split-menu-button-page-contents';
+import {standardBtnText, iconAttr, textColorAttr, tooltipAttr, compactAttr, compactValue, bgColorAttr,
+    typesBtnHvrColorArr, typesBtnColorArr, standardBtnText2, defaultHvrColor, iconLabel, behaviorBtnTextArr,
+    iconBtnTextArr, typesBtnTextArr} from '../fixtures/appData/split-menu-button-page-contents';
 import {
+    acceptAlert,
     browserIsIEorSafari,
     click,
     elementArray,
@@ -63,36 +66,36 @@ describe('Split menu button test suite', () => {
 
     it('should check split menu button behaviors examples', () => {
         const behaviorArrowBtnArr = elementArray(behaviorsExArrowBtnArr);
-        spMenuBtnPage.checkBtnSelectionChange(behaviorArrowBtnArr, behaviorsExSelectionBtnArr, SMBData.behaviorBtnTextArr);
+        spMenuBtnPage.checkBtnSelectionChange(behaviorArrowBtnArr, behaviorsExSelectionBtnArr, behaviorBtnTextArr);
     });
 
     it('should check split menu button type examples', () => {
         const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
 
-        spMenuBtnPage.checkBtnSelectionChange(typesArrowBtnArr, typesExSelectionBtnArr, SMBData.typesBtnTextArr);
+        spMenuBtnPage.checkBtnSelectionChange(typesArrowBtnArr, typesExSelectionBtnArr, typesBtnTextArr);
     });
 
     it('should check btn selections', () => {
         click(typesExSelectionBtnArr);
-        spMenuBtnPage.checkSelectionOutput(typesOutput, SMBData.standardBtnText);
+        spMenuBtnPage.checkSelectionOutput(typesOutput, standardBtnText);
 
         click(typesExArrowBtnArr);
         click(menuItemArr, 1);
-        spMenuBtnPage.checkSelectionOutput(typesOutput, SMBData.standardBtnText2);
+        spMenuBtnPage.checkSelectionOutput(typesOutput, standardBtnText2);
     });
 
     it('should check split menu buttons with icon examples', () => {
         const iconArrowBtnArr = elementArray(iconExArrowBtnArr);
         const iconBtnArr = elementArray(iconBtnAttrArr);
 
-        spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, iconExSelectionBtnArr, SMBData.iconBtnTextArr);
+        spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, iconExSelectionBtnArr, iconBtnTextArr);
         for (let i = 0; i < iconBtnArr.length; i++) {
-            expect(getAttributeByName(iconBtnAttrArr, SMBData.iconAttr, i)).toContain(SMBData.iconLabel);
+            expect(getAttributeByName(iconBtnAttrArr, iconAttr, i)).toContain(iconLabel);
         }
     });
 
     it('should check compact btn styles', () => {
-        expect(getAttributeByName(iconBtnAttrArr, SMBData.compactAttr, 1)).toContain(SMBData.compactValue);
+        expect(getAttributeByName(iconBtnAttrArr, compactAttr, 1)).toContain(compactValue);
     });
 
     it('should check default hover state', () => {
@@ -102,15 +105,15 @@ describe('Split menu button test suite', () => {
         for (let i = 0; i < behaviorBtnArr.length; i++) {
             scrollIntoView(behaviorsExSelectionBtnArr, i);
             mouseHoverElement(behaviorsExSelectionBtnArr, i);
-            expect(getCSSPropertyByName(behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
-                .toContain(SMBData.defaultHvrColor);
+            expect(getCSSPropertyByName(behaviorsExSelectionBtnArr, bgColorAttr, i).value)
+                .toContain(defaultHvrColor);
         }
 
         for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
             scrollIntoView(behaviorsExArrowBtnArr, i);
             mouseHoverElement(behaviorsExArrowBtnArr, i);
-            expect(getCSSPropertyByName(behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
-                .toContain(SMBData.defaultHvrColor);
+            expect(getCSSPropertyByName(behaviorsExArrowBtnArr, bgColorAttr, i).value)
+                .toContain(defaultHvrColor);
         }
     });
 
@@ -121,16 +124,16 @@ describe('Split menu button test suite', () => {
         // for (let i = 0; i < behaviorBtnArr.length; i++) {
         //     mouseHoverElement(behaviorsExSelectionBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.defaultBtnColor);
+        //     expect(getCSSPropertyByName(behaviorsExSelectionBtnArr, bgColorAttr, i).value)
+        //         .toContain(defaultBtnColor);
         //     mouseButtonUp();
         // }
         //
         // for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
         //     mouseHoverElement(behaviorsExArrowBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.defaultBtnColor);
+        //     expect(getCSSPropertyByName(behaviorsExArrowBtnArr, bgColorAttr, i).value)
+        //         .toContain(defaultBtnColor);
         //     mouseButtonUp();
         // }
     });
@@ -140,13 +143,13 @@ describe('Split menu button test suite', () => {
         const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
-            expect(getCSSPropertyByName(typesExSelectionBtnArr, SMBData.textColorAttr, i).value)
-                .toContain(SMBData.typesBtnColorArr[i]);
+            expect(getCSSPropertyByName(typesExSelectionBtnArr, textColorAttr, i).value)
+                .toContain(typesBtnColorArr[i]);
         }
 
         for (let i = 0; i < typesArrowBtnArr.length; i++) {
-            expect(getCSSPropertyByName(typesExArrowBtnArr, SMBData.textColorAttr, i).value)
-                .toContain(SMBData.typesBtnColorArr[i]);
+            expect(getCSSPropertyByName(typesExArrowBtnArr, textColorAttr, i).value)
+                .toContain(typesBtnColorArr[i]);
         }
     });
 
@@ -157,35 +160,35 @@ describe('Split menu button test suite', () => {
         for (let i = 0; i < typesBtnArr.length; i++) {
             scrollIntoView(typesExSelectionBtnArr, i);
             mouseHoverElement(typesExSelectionBtnArr, i);
-            expect(getCSSPropertyByName(typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
-                .toContain(SMBData.typesBtnHvrColorArr[i]);
+            expect(getCSSPropertyByName(typesExSelectionBtnArr, bgColorAttr, i).value)
+                .toContain(typesBtnHvrColorArr[i]);
         }
 
         for (let i = 0; i < typesArrowBtnArr.length; i++) {
             scrollIntoView(typesExArrowBtnArr, i);
             mouseHoverElement(typesExArrowBtnArr, i);
-            expect(getCSSPropertyByName(typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
-                .toContain(SMBData.typesBtnHvrColorArr[i]);
+            expect(getCSSPropertyByName(typesExArrowBtnArr, bgColorAttr, i).value)
+                .toContain(typesBtnHvrColorArr[i]);
         }
     });
 
     xit('should check split btn type examples active state', () => {
-        // const typesBtnArr = elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-        // const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
+        // const typesBtnArr = elementArray(typesExSelectionBtnArr);
+        // const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
         //
         // for (let i = 0; i < typesBtnArr.length; i++) {
         //     mouseHoverElement(typesExSelectionBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.typesBtnActiveColorArr[i]);
+        //     expect(getCSSPropertyByName(typesExSelectionBtnArr, bgColorAttr, i).value)
+        //         .toContain(typesBtnActiveColorArr[i]);
         //     mouseButtonUp();
         // }
         //
         // for (let i = 0; i < typesArrowBtnArr.length; i++) {
         //     mouseHoverElement(typesExArrowBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.typesBtnActiveColorArr[i]);
+        //     expect(getCSSPropertyByName(typesExArrowBtnArr, bgColorAttr, i).value)
+        //         .toContain(typesBtnActiveColorArr[i]);
         //     mouseButtonUp();
         // }
 
@@ -195,7 +198,7 @@ describe('Split menu button test suite', () => {
         const menuBtnArr = elementArray(mainBtnArr);
 
         for (let i = 0; i < menuBtnArr.length; i++) {
-            expect(getAttributeByName(mainBtnArr, SMBData.tooltipAttr, i))
+            expect(getAttributeByName(mainBtnArr, tooltipAttr, i))
                 .not.toEqual(null);
         }
     });

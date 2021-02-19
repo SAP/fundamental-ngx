@@ -284,13 +284,6 @@ export const ROUTES: Routes = [
                     import('./component-docs/popover/popover-docs.module').then((m) => m.PopoverDocsModule)
             },
             {
-                path: 'popover-directive',
-                loadChildren: () =>
-                    import('./component-docs/popover-directive/popover-directive-docs.module').then(
-                        (m) => m.PopoverDirectiveDocsModule
-                    )
-            },
-            {
                 path: 'product-switch',
                 loadChildren: () =>
                     import('./component-docs/product-switch/product-switch-docs.module').then(

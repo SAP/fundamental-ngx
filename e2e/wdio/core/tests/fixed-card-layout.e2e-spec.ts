@@ -1,5 +1,4 @@
 import { FixedCardLayoutPo } from '../pages/fixed-card-layout.po';
-import fxdCardLytData from '../fixtures/appData/fixed-card-layout-content';
 import {
     browserIsIE,
     browserIsIEorSafari,
@@ -13,6 +12,8 @@ import {
     waitForInvisibilityOf,
     getElementLocation, waitForPresent
 } from '../../driver/wdio';
+
+import {cardSpacingAttr, cardMinWidth, cardSpacingValue, cardWidthAttr, placeholderBorderAttr, placeholderBorderStyle} from '../fixtures/appData/fixed-card-layout-content';
 
 describe('Fixed card layout test suite', function() {
     const fxdCardLayoutPage = new FixedCardLayoutPo();
@@ -43,16 +44,16 @@ describe('Fixed card layout test suite', function() {
     describe('main checks', function() {
         it('should check spacing between cards', () => {
 
-            expect(getCSSPropertyByName(cardDivArr, fxdCardLytData.cardSpacingAttr).value)
-                .toBe(fxdCardLytData.cardSpacingValue);
+            expect(getCSSPropertyByName(cardDivArr, cardSpacingAttr).value)
+                .toBe(cardSpacingValue);
         });
 
         it('should check card minimum width', () => {
             const cardsCount = getElementArrayLength(cardDivArr);
 
             for (let i = 0; cardsCount > i; i++) {
-                expect(getCSSPropertyByName(cardDivArr, fxdCardLytData.cardWidthAttr, i).value)
-                    .toBe(fxdCardLytData.cardMinWidth);
+                expect(getCSSPropertyByName(cardDivArr, cardWidthAttr, i).value)
+                    .toBe(cardMinWidth);
             }
         });
 
@@ -146,8 +147,8 @@ describe('Fixed card layout test suite', function() {
             }]);
 
             expect(elementDisplayed(placeholderCard)).toBe(true);
-            expect(getCSSPropertyByName(placeholderCard, fxdCardLytData.placeholderBorderAttr).value)
-                .toEqual(fxdCardLytData.placeholderBorderStyle);
+            expect(getCSSPropertyByName(placeholderCard, placeholderBorderAttr).value)
+                .toEqual(placeholderBorderStyle);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910

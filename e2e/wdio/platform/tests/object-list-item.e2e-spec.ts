@@ -11,7 +11,7 @@ import {
 } from '../../driver/wdio';
 import { ObjectListItemPo } from '../pages/object-list-item.po';
 import { checkElArrIsClickable, checkElementDisplayed, checkElementText } from '../../helper/assertion-helper';
-import ObjListData from '../fixtures/appData/object-list-item-contents';
+import {noBorderAttr, navUrl, altNoBorderStyle, noBorderStyle} from '../fixtures/appData/object-list-item-contents';
 
 describe('Object list item suite:', function() {
     const objListPage = new ObjectListItemPo();
@@ -47,14 +47,14 @@ describe('Object list item suite:', function() {
 
     describe('Object List Item examples:', function() {
         it('should check styles and content', () => {
-           expect(getAttributeByName(objListAttr, ObjListData.noBorderAttr)).toBe('true');
+           expect(getAttributeByName(objListAttr, noBorderAttr)).toBe('true');
            checkElementDisplayed(obJListIntro);
            checkElementDisplayed(objListAttributes);
            checkElementDisplayed(objListStatuses);
            if (browserIsFirefox()) {
-               expect(getCSSPropertyByName(objListItem, ObjListData.altNoBorderStyle).value).toBe('none');
+               expect(getCSSPropertyByName(objListItem, altNoBorderStyle).value).toBe('none');
            } else {
-               expect(getCSSPropertyByName(objListItem, ObjListData.noBorderStyle).value).toBe('none');
+               expect(getCSSPropertyByName(objListItem, noBorderStyle).value).toBe('none');
            }
         });
     });
@@ -87,7 +87,7 @@ describe('Object list item suite:', function() {
         it('should check navigation', () => {
             click(objNavList);
             const currentUrl = getCurrentUrl();
-            expect(currentUrl).toContain(ObjListData.navUrl);
+            expect(currentUrl).toContain(navUrl);
             objListPage.open();
         });
     });

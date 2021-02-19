@@ -1,6 +1,7 @@
 import { TextareaPo } from '../pages/textarea.po';
-import textAreaPageContent from '../fixtures/appData/textarea-page-content';
-import testData from '../fixtures/testData/textarea';
+import {readonly_text_area_label, basic_text_area_label, basic_text_area_placeholder, basic_text_area_popover, compact_text_area_label,
+disabled_text_area_label, no_platforms_form_text_area_label} from '../fixtures/appData/textarea-page-content';
+import {multiple_lines_text, fifty_character_string, forty_nine_character_string, multiple_lines_text_8_lines} from '../fixtures/testData/textarea';
 import {
     addValue,
     browserIsIEorSafari,
@@ -51,9 +52,9 @@ describe('Verify Textarea component', function() {
     }
     describe('has Textarea and', function() {
         it('should allow the user to enter multiple lines of text', () => {
-            setValue(basicTextArea, testData.multiple_lines_text);
+            setValue(basicTextArea, multiple_lines_text);
             const textareaText = getValue(basicTextArea);
-            expect(textareaText).toEqual(testData.multiple_lines_text);
+            expect(textareaText).toEqual(multiple_lines_text);
         });
 
         it('should have appropriate label', () => {
@@ -63,11 +64,11 @@ describe('Verify Textarea component', function() {
             const compactTextareaLabel = getText(compactTextAreaLabel);
             const noPlatformsFormAreaLabelText = getText(noPlatformsFormTextAreaLabel);
 
-            expect(basicTextareaLabel).toBe(textAreaPageContent.basic_text_area_label);
-            expect(readonlyTextareaLabel).toBe(textAreaPageContent.readonly_text_area_label);
-            expect(disabledTextareaLabel).toBe(textAreaPageContent.disabled_text_area_label);
-            expect(compactTextareaLabel).toBe(textAreaPageContent.compact_text_area_label);
-            expect(noPlatformsFormAreaLabelText).toBe(textAreaPageContent.no_platforms_form_text_area_label);
+            expect(basicTextareaLabel).toBe(basic_text_area_label);
+            expect(readonlyTextareaLabel).toBe(readonly_text_area_label);
+            expect(disabledTextareaLabel).toBe(disabled_text_area_label);
+            expect(compactTextareaLabel).toBe(compact_text_area_label);
+            expect(noPlatformsFormAreaLabelText).toBe(no_platforms_form_text_area_label);
         });
         // No example or no restriction
         /*        xit('should be able enter maximum characters (50)', async () => {
@@ -84,9 +85,9 @@ describe('Verify Textarea component', function() {
         });*/
 
         xit('should be able to copy paste the content into textarea', () => {
-            setValue(basicTextArea, testData.fifty_character_string);
+            setValue(basicTextArea, fifty_character_string);
             // await textareaPage.basicTextArea.sendKeys(testData.fifty_character_string);
-            waitTextToBePresentInValue(basicTextArea, testData.fifty_character_string);
+            waitTextToBePresentInValue(basicTextArea, fifty_character_string);
             sendKeys([copyPasteBtn, 'a']);
             sendKeys([copyPasteBtn, 'c']);
             sendKeys('DELETE');
@@ -96,14 +97,14 @@ describe('Verify Textarea component', function() {
             const textareaText = getValue(basicTextArea);
 
             expect(textareaTextBefore).toBe('');
-            expect(textareaText).toBe(testData.fifty_character_string);
+            expect(textareaText).toBe(fifty_character_string);
         });
 
         it('should allow alphabets, numerical, special characters or combination of these (maybe postponed)', () => {
-            setValue(basicTextArea, testData.fifty_character_string);
+            setValue(basicTextArea, fifty_character_string);
             const textareaText = getValue(basicTextArea);
 
-            expect(textareaText).toBe(testData.fifty_character_string);
+            expect(textareaText).toBe(fifty_character_string);
         });
         // No example
         /*        xit('should not accept restricted characters (maybe postponed)', async () => {});*/
@@ -114,13 +115,13 @@ describe('Verify Textarea component', function() {
             it('should appear as hint text and remain as long as text area is empty', () => {
                 const textAriaPlaceholderBefore = getAttributeByName(basicTextArea, 'placeholder');
 
-                expect(textAriaPlaceholderBefore).toBe(textAreaPageContent.basic_text_area_placeholder);
+                expect(textAriaPlaceholderBefore).toBe(basic_text_area_placeholder);
             });
         });
 
         describe('if textarea is enabled', function() {
             xit('should be able to perform cut', () => {
-                setValue(basicTextArea, testData.fifty_character_string);
+                setValue(basicTextArea, fifty_character_string);
                 sendKeys([copyPasteBtn, 'a']);
                 pause();
                 sendKeys([copyPasteBtn, 'x']);
@@ -132,7 +133,7 @@ describe('Verify Textarea component', function() {
                 const textareaText = getValue(basicTextArea);
 
                 expect(textareaTextBefore).toBe('');
-                expect(textareaText).toBe(testData.fifty_character_string);
+                expect(textareaText).toBe(fifty_character_string);
             });
         });
 
@@ -207,7 +208,7 @@ describe('Verify Textarea component', function() {
 
         it('should not change size if growing is disabled', () => {
             const textareaSizeBefore = getElementSize(growingDisabledTextarea);
-            addValue(growingDisabledTextarea, testData.multiple_lines_text_8_lines);
+            addValue(growingDisabledTextarea, multiple_lines_text_8_lines);
             const textareaSizeAfter = getElementSize(growingDisabledTextarea);
 
             expect(textareaSizeBefore.height).toBe(textareaSizeAfter.height);
@@ -216,9 +217,9 @@ describe('Verify Textarea component', function() {
         it('should grow if growing option is enabled (growing up to 5 lines)', () => {
             clearValue(growingMaxLinesTextarea);
             const textareaSize1 = getElementSize(growingMaxLinesTextarea);
-            setValue(growingMaxLinesTextarea, testData.multiple_lines_text);
+            setValue(growingMaxLinesTextarea, multiple_lines_text);
             const textareaSize2 = getElementSize(growingMaxLinesTextarea);
-            addValue(growingMaxLinesTextarea, testData.multiple_lines_text);
+            addValue(growingMaxLinesTextarea, multiple_lines_text);
             const textareaSize3 = getElementSize(growingMaxLinesTextarea);
 
             expect(textareaSize1.height).toBeLessThan(textareaSize2.height);
@@ -228,7 +229,7 @@ describe('Verify Textarea component', function() {
         it('should grow if growing option is enabled (growing up to 80px)', () => {
             clearValue(growingHeightTextarea);
             const textareaSize1 = getElementSize(growingHeightTextarea);
-            setValue(growingHeightTextarea, testData.multiple_lines_text_8_lines);
+            setValue(growingHeightTextarea, multiple_lines_text_8_lines);
             const textareaSize2 = getElementSize(growingHeightTextarea);
 
             expect(textareaSize1.height).toBeLessThanOrEqual(textareaSize2.height);
@@ -239,9 +240,9 @@ describe('Verify Textarea component', function() {
             // TODO: Check if clearValue can be removed setValue clears bu default
             clearValue(withGrowingAndNoLimitsTextarea);
             const textareaSize1 = getElementSize(withGrowingAndNoLimitsTextarea);
-            setValue(withGrowingAndNoLimitsTextarea, testData.multiple_lines_text_8_lines);
+            setValue(withGrowingAndNoLimitsTextarea, multiple_lines_text_8_lines);
             const textareaSize2 = getElementSize(withGrowingAndNoLimitsTextarea);
-            addValue(withGrowingAndNoLimitsTextarea, testData.multiple_lines_text_8_lines);
+            addValue(withGrowingAndNoLimitsTextarea, multiple_lines_text_8_lines);
             const textareaSize3 = getElementSize(withGrowingAndNoLimitsTextarea);
 
             expect(textareaSize1.height).toBeLessThan(textareaSize2.height);
@@ -249,7 +250,7 @@ describe('Verify Textarea component', function() {
         });
 
         it('should not accept more than 10 characters ', () => {
-            setValue(withCharactersMaxNumberTextarea, testData.forty_nine_character_string);
+            setValue(withCharactersMaxNumberTextarea, forty_nine_character_string);
             const currentText = getValue(withCharactersMaxNumberTextarea);
 
             expect(currentText.length).toBe(10);
@@ -266,7 +267,7 @@ describe('Verify Textarea component', function() {
                 mouseHoverElement(basicTextAreaPopoverIcon);
                 waitForElDisplayed(basicTextAreaPopoverBody);
                 const popoverText = getText(basicTextAreaPopoverBody);
-                expect(popoverText).toContain(textAreaPageContent.basic_text_area_popover);
+                expect(popoverText).toContain(basic_text_area_popover);
             });
         });
 

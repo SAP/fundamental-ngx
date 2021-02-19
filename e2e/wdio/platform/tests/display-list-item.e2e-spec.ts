@@ -1,7 +1,7 @@
 import { DisplayListItemPo } from '../pages/display-list-item.po';
 import { click, getAttributeByName, getCurrentUrl, refreshPage, waitForPresent } from '../../driver/wdio';
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
-import DisplayListData from '../fixtures/appData/display-list-item-contents';
+import {navTitlesArr, compactAttr, borderAttr, navUrl} from '../fixtures/appData/display-list-item-contents';
 
 describe('Display List Item test suite:', function() {
     const displayListPage = new DisplayListItemPo();
@@ -29,15 +29,15 @@ describe('Display List Item test suite:', function() {
             checkElArrIsClickable(displayLinks);
             checkElementText(cozyDisplayTitles);
             checkElementText(comfyDisplayTitles);
-            expect(getAttributeByName(sections, DisplayListData.compactAttr, 0)).toBe('false');
-            expect(getAttributeByName(sections, DisplayListData.compactAttr, 1)).toBe('true');
-            expect(getAttributeByName(sections, DisplayListData.borderAttr)).toBe('true');
+            expect(getAttributeByName(sections, compactAttr, 0)).toBe('false');
+            expect(getAttributeByName(sections, compactAttr, 1)).toBe('true');
+            expect(getAttributeByName(sections, borderAttr)).toBe('true');
         });
 
         it('should check navigation', () => {
             click(displayLinks, 0);
             const newUrl = getCurrentUrl();
-            expect(newUrl).toContain(DisplayListData.navUrl);
+            expect(newUrl).toContain(navUrl);
             displayListPage.open();
         });
     });
@@ -45,9 +45,9 @@ describe('Display List Item test suite:', function() {
     describe('Display List Item - declarative examples:', function() {
         it('should do basic checks', () => {
             checkElArrIsClickable(declarativeDisplayLinks);
-            checkElementTextValue(declarativeDisplayTitles, DisplayListData.navTitlesArr);
-            expect(getAttributeByName(declarativeSection, DisplayListData.borderAttr)).toBe('false');
-            expect(getAttributeByName(declarativeSection, DisplayListData.compactAttr)).toBe('false');
+            checkElementTextValue(declarativeDisplayTitles, navTitlesArr);
+            expect(getAttributeByName(declarativeSection, borderAttr)).toBe('false');
+            expect(getAttributeByName(declarativeSection, compactAttr)).toBe('false');
         });
     });
 

@@ -1,6 +1,7 @@
 import { StandardListItemPo } from '../pages/standard-list-item.po';
 import { click, getAttributeByName, getCSSPropertyByName, getElementArrayLength, getText } from '../../driver/wdio';
-import StandardLinkData from '../fixtures/appData/standard-link-item-contents';
+import {secondaryAttr, compactAttr, noBorderAttr, borderAttr, byLineAltAttr, byLineAttr, linkAttr,
+secondaryTypes, noStyle, solidStyle} from '../fixtures/appData/standard-link-item-contents';
 import {
     checkAttributeValueTrue,
     checkElArrIsClickable,
@@ -24,24 +25,24 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item - Border Less examples:', function() {
         it('should check border and interactions', () => {
-            expect(getAttributeByName(sNoBorderAttr, StandardLinkData.noBorderAttr)).toBe('true');
-            expect(getCSSPropertyByName(sNoBorderList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.noStyle);
+            expect(getAttributeByName(sNoBorderAttr, noBorderAttr)).toBe('true');
+            expect(getCSSPropertyByName(sNoBorderList, borderAttr).value)
+                .toBe(noStyle);
             checkElArrIsClickable(sNoBorderList);
         });
     });
 
     describe('Standard List Item (ByLine)- Border Less examples:', function() {
         it('should check border and styles', () => {
-            expect(getAttributeByName(sNoBorderByLineAttr, StandardLinkData.noBorderAttr))
+            expect(getAttributeByName(sNoBorderByLineAttr, noBorderAttr))
                 .toBe('true');
-            expect(getCSSPropertyByName(sNoBorderByLineList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.noStyle);
-            expect(getAttributeByName(sNoBorderByLineSection, StandardLinkData.compactAttr, 0))
+            expect(getCSSPropertyByName(sNoBorderByLineList, borderAttr).value)
+                .toBe(noStyle);
+            expect(getAttributeByName(sNoBorderByLineSection, compactAttr, 0))
                 .toBe('false');
-            expect(getAttributeByName(sNoBorderByLineSection, StandardLinkData.compactAttr, 1))
+            expect(getAttributeByName(sNoBorderByLineSection, compactAttr, 1))
                 .toBe('true');
-            checkAttributeValueTrue(sNoBorderByLineAttr, StandardLinkData.byLineAltAttr);
+            checkAttributeValueTrue(sNoBorderByLineAttr, byLineAltAttr);
         });
 
         it('should check interaction and content', () => {
@@ -53,9 +54,9 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Footer examples:', function() {
         it('should check border, styles, and footer', () => {
-            expect(getCSSPropertyByName(sFooterByLineList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.solidStyle);
-            checkAttributeValueTrue(sFooterAttr, StandardLinkData.byLineAttr);
+            expect(getCSSPropertyByName(sFooterByLineList, borderAttr).value)
+                .toBe(solidStyle);
+            checkAttributeValueTrue(sFooterAttr, byLineAttr);
             checkElementDisplayed(sFooter);
             checkElementText(sFooterList);
         });
@@ -69,9 +70,9 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Group header examples:', function() {
         it('should check border and styles', () => {
-            expect(getCSSPropertyByName(sGroupHeaderList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.solidStyle);
-            checkAttributeValueTrue(sGroupHeaderAttr, StandardLinkData.byLineAttr);
+            expect(getCSSPropertyByName(sGroupHeaderList, borderAttr).value)
+                .toBe(solidStyle);
+            checkAttributeValueTrue(sGroupHeaderAttr, byLineAttr);
         });
 
         it('should check content and interactions', () => {
@@ -83,12 +84,12 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item- Interactive state examples:', function() {
         it('should check border and styles', () => {
-            expect(getCSSPropertyByName(sInteractiveList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.solidStyle);
-            checkAttributeValueTrue(sInteractiveAttr, StandardLinkData.byLineAltAttr);
+            expect(getCSSPropertyByName(sInteractiveList, borderAttr).value)
+                .toBe(solidStyle);
+            checkAttributeValueTrue(sInteractiveAttr, byLineAltAttr);
             const linkCount = getElementArrayLength(sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
-                expect(getAttributeByName(sInteractiveLink, StandardLinkData.linkAttr, i))
+                expect(getAttributeByName(sInteractiveLink, linkAttr, i))
                     .not.toBe(null, '');
             }
         });
@@ -105,9 +106,9 @@ describe('Standard List Item test suite:', function() {
 
     describe('Standard List Item (ByLine)- Secondary text types examples:', function() {
         it('should check border and styles', () => {
-            checkAttributeValueTrue(sSecTypeAttr, StandardLinkData.byLineAltAttr);
-            expect(getCSSPropertyByName(sSecTypeList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.solidStyle);
+            checkAttributeValueTrue(sSecTypeAttr, byLineAltAttr);
+            expect(getCSSPropertyByName(sSecTypeList, borderAttr).value)
+                .toBe(solidStyle);
 
         });
 
@@ -121,17 +122,17 @@ describe('Standard List Item test suite:', function() {
         it('should check secondary text types', () => {
             const elCount = getElementArrayLength(sSecTypeListItem);
             for (let i = 0; elCount > i; i++) {
-                expect(getAttributeByName(sSecTypeListItem, StandardLinkData.secondaryAttr, i))
-                    .toBe(StandardLinkData.secondaryTypes[i]);
+                expect(getAttributeByName(sSecTypeListItem, secondaryAttr, i))
+                    .toBe(secondaryTypes[i]);
             }
         });
     });
 
     describe('Standard List Item (ByLine)- Multi Selection examples:', function() {
         it('should check border and styles', () => {
-            checkAttributeValueTrue(sMultiAttr, StandardLinkData.byLineAltAttr);
-            expect(getCSSPropertyByName(sMultiList, StandardLinkData.borderAttr).value)
-                .toBe(StandardLinkData.solidStyle);
+            checkAttributeValueTrue(sMultiAttr, byLineAltAttr);
+            expect(getCSSPropertyByName(sMultiList, borderAttr).value)
+                .toBe(solidStyle);
         });
 
         it('should check content and basic interactions', () => {
@@ -157,9 +158,9 @@ describe('Standard List Item test suite:', function() {
             if (browser.capabilities.browserName === 'internet explorer') {
                 console.log('skip');
             } else {
-                checkAttributeValueTrue(sInvtAttr, StandardLinkData.byLineAltAttr);
-                expect(getCSSPropertyByName(sInvtList, StandardLinkData.borderAttr).value)
-                    .toBe(StandardLinkData.solidStyle);
+                checkAttributeValueTrue(sInvtAttr, byLineAltAttr);
+                expect(getCSSPropertyByName(sInvtList, borderAttr).value)
+                    .toBe(solidStyle);
             }
         });
 
@@ -173,10 +174,10 @@ describe('Standard List Item test suite:', function() {
         it('should check secondary text types', () => {
             const elCount = getElementArrayLength(sInvtListItem);
             for (let i = 0; elCount > i; i++) {
-                expect(getAttributeByName(sInvtListItem, StandardLinkData.secondaryAttr, i))
+                expect(getAttributeByName(sInvtListItem, secondaryAttr, i))
                     .not.toBe(null, '');
-                expect(getAttributeByName(sInvtListItem, StandardLinkData.secondaryAttr, i))
-                    .toBe(StandardLinkData.secondaryTypes[i]);
+                expect(getAttributeByName(sInvtListItem, secondaryAttr, i))
+                    .toBe(secondaryTypes[i]);
             }
         });
     });

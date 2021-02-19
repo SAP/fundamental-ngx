@@ -19,8 +19,8 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
-import inputGroupPContent from '../fixtures/appData/input-group-page-contents';
-import inputGroupTestData from '../fixtures/testData/input-group';
+import {inputWithFormLabel, inputWithFormPlaceholder, standardInputLabels, standardInputPlaceholders} from '../fixtures/appData/input-group-page-contents';
+import {string_value, email_value, numeric_value} from '../fixtures/testData/input-group';
 
 describe('Input Group should', function() {
     const inputGroupPage = new InputGroupPo();
@@ -44,68 +44,68 @@ describe('Input Group should', function() {
     }, 1);
 
     it('have associated label element to describe its purpose', () => {
-        expect(getTextArr(standartInputLabelsArr)).toEqual(inputGroupPContent.standardInputLabels);
-        expect(getText(withFormInputLabel)).toEqual(inputGroupPContent.inputWithFormLabel);
+        expect(getTextArr(standartInputLabelsArr)).toEqual(standardInputLabels);
+        expect(getText(withFormInputLabel)).toEqual(inputWithFormLabel);
     });
 
     it('have correct placeholder text', () => {
         expect(getAttributeByNameArr(standartInputArr, 'placeholder'))
-            .toEqual(inputGroupPContent.standardInputPlaceholders);
+            .toEqual(standardInputPlaceholders);
         expect(getAttributeByName(withFormInput, 'placeholder'))
-            .toEqual(inputGroupPContent.inputWithFormPlaceholder);
+            .toEqual(inputWithFormPlaceholder);
     });
 
     it('have left text addon and accept values', () => {
         waitForElDisplayed(leftAlignedTextInputTextAddon);
-        setValue(leftAlignedTextInput, inputGroupTestData.numeric_value);
+        setValue(leftAlignedTextInput, numeric_value);
 
         expect(getText(leftAlignedTextInputTextAddon)).toContain('$');
-        expect(getValue(leftAlignedTextInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getValue(leftAlignedTextInput)).toBe(numeric_value);
     });
 
     it('have right text addon and accept values', () => {
         waitForElDisplayed(rightAlignedTextInputTextAddon);
-        setValue(rightAlignedTextInput, inputGroupTestData.numeric_value);
+        setValue(rightAlignedTextInput, numeric_value);
 
         expect(getText(rightAlignedTextInputTextAddon)).toContain('0.00');
-        expect(getValue(rightAlignedTextInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getValue(rightAlignedTextInput)).toBe(numeric_value);
     });
 
     it('have right and left text addons and accept values', () => {
         waitForElDisplayed(rightLeftAlignedTextInputTextAddon);
-        setValue(leftAndRightAlignedTextInput, inputGroupTestData.numeric_value);
+        setValue(leftAndRightAlignedTextInput, numeric_value);
 
         expect(getText(rightLeftAlignedTextInputTextAddon)).toContain('$');
         expect(getText(rightLeftAlignedTextInputTextAddon, 1)).toContain('0.00');
-        expect(getValue(leftAndRightAlignedTextInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getValue(leftAndRightAlignedTextInput)).toBe(numeric_value);
     });
 
     it('have button, text addons and accept values', () => {
         waitForElDisplayed(buttonInputSubmitButton);
-        setValue(buttonInput, inputGroupTestData.numeric_value);
+        setValue(buttonInput, numeric_value);
 
         // Check if clickable. No logic behind the click
         expect(getText(buttonInputLeftAndRightTextAddon)).toContain('$');
         expect(getText(buttonInputLeftAndRightTextAddon, 1)).toContain('0.00');
         expect(isElementClickable(buttonInputSubmitButton)).toBe(true);
-        expect(getValue(buttonInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getValue(buttonInput)).toBe(numeric_value);
     });
 
     it('have icon addon and accept values', () => {
         waitForElDisplayed(iconInputEmailIcon);
-        setValue(iconInput, inputGroupTestData.email_value);
+        setValue(iconInput, email_value);
 
-        expect(getValue(iconInput)).toBe(inputGroupTestData.email_value);
+        expect(getValue(iconInput)).toBe(email_value);
     });
 
     it('compact have button and text addon', () => {
         waitForElDisplayed(compactGroupInput);
-        setValue(compactGroupInput, inputGroupTestData.string_value);
+        setValue(compactGroupInput, string_value);
 
         expect(getText(compactGroupLeftTextAddon)).toContain('$');
         expect(getText(compactGroupButtonAddon)).toContain('Submit');
         expect(isElementClickable(compactGroupButtonAddon)).toBe(true);
-        expect(getValue(compactGroupInput)).toBe(inputGroupTestData.string_value);
+        expect(getValue(compactGroupInput)).toBe(string_value);
     });
 
     it('compact be smaller than the default', () => {
@@ -130,12 +130,12 @@ describe('Input Group should', function() {
 
     it('with Form input have text and button addons', () => {
         waitForElDisplayed(withFormInput);
-        setValue(withFormInput, inputGroupTestData.numeric_value);
+        setValue(withFormInput, numeric_value);
 
         expect(getText(withFormInputTextAddon)).toContain('$');
         expect(getText(withFormInputTextAddon, 1)).toContain('0.00');
         expect(getText(withFormInputButtonAddon)).toContain('Submit');
-        expect(getValue(withFormInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getValue(withFormInput)).toBe(numeric_value);
     });
 
     xit('with form input have error tooltip and visual que if empty', () => {

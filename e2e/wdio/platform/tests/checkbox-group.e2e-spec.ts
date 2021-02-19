@@ -1,7 +1,9 @@
 import { CheckboxGroupPO } from '../pages/checkbox-group.po';
 import { checkIfDisabled, checkLabels, checkMarkingCheckbox } from '../../helper/assertion-helper';
-import checkboxGPData from '../fixtures/appData/checkbox-group-page-content';
-import checkboxGPData2 from '../fixtures/appData/checkbox-page-contents';
+import {seasonsArr, countriesArr, errorBorderStyle, errorTooltipMessage, europeanCountriesArr, seasonsOutputLabel, fourFruitsArr,
+    hobbiesArr, itemsArr, markingsStyle, phonesArr, programmingLanguagesArr, reptilesArr,
+    sportsArr, threeFruitsArr} from '../fixtures/appData/checkbox-group-page-content';
+import {checkboxHoverState, checkboxFocusStyle} from '../fixtures/appData/checkbox-page-contents';
 import {
     click,
     clickNextElement,
@@ -43,62 +45,62 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check checkbox markings are centered', () => {
             const checkboxMarkDisplayStyle = executeScriptBeforeTagAttr(winterCheckbox, 'display');
-            expect(checkboxMarkDisplayStyle).toContain(checkboxGPData.markingsStyle);
+            expect(checkboxMarkDisplayStyle).toContain(markingsStyle);
         });
 
         it('should check outputs1', () => {
             clickNextElement(stringValueCheckboxesArr, 1);
-            checkOutputLabel(stringValueoutputLabelsArr, checkboxGPData.seasonsOutputLabel, checkboxGPData.seasonsArr[1]);
+            checkOutputLabel(stringValueoutputLabelsArr, seasonsOutputLabel, seasonsArr[1]);
 
             clickNextElement(stringValueCheckboxesArr, 0);
-            checkOutputLabel(stringValueoutputLabelsArr, checkboxGPData.seasonsOutputLabel,
-                checkboxGPData.seasonsArr[1] + ',' + checkboxGPData.seasonsArr[0]);
+            checkOutputLabel(stringValueoutputLabelsArr, seasonsOutputLabel,
+                seasonsArr[1] + ',' + seasonsArr[0]);
         });
 
         it('should check reactive inline checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, checkboxGPData.seasonsArr, 0, 4);
+            checkLabels(stringValueCheckboxLabelArr, seasonsArr, 0, 4);
             checkFocusState(stringValueCheckboxesArr, 0);
             checkHoverState(stringValueCheckboxesArr, 0);
             checkMarkingCheckbox(stringValueCheckboxesArr, 0, 4);
         });
 
         it('should check reactive pre-selection based on value passed checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, checkboxGPData.phonesArr, 4, 8);
+            checkLabels(stringValueCheckboxLabelArr, phonesArr, 4, 8);
             checkFocusState(stringValueCheckboxesArr, 4);
             checkHoverState(stringValueCheckboxesArr, 4);
             checkMarkingCheckbox(stringValueCheckboxesArr, 4, 8);
         });
 
         it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 8, 12);
+            checkLabels(stringValueCheckboxLabelArr, sportsArr, 8, 12);
             checkFocusState(stringValueCheckboxesArr, 8);
             checkHoverState(stringValueCheckboxesArr, 8);
             checkMarkingCheckbox(stringValueCheckboxesArr, 8, 12);
         });
 
         it('should check reactive disabled checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 12, 16);
+            checkLabels(stringValueCheckboxLabelArr, sportsArr, 12, 16);
             for (let i = 12; 16 > i; i++) {
                 checkIfDisabled(stringValueCheckboxesArr, 'aria-disabled', 'true', i);
             }
         });
 
         it('should check template inline checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, checkboxGPData.seasonsArr, 16, 20);
+            checkLabels(stringValueCheckboxLabelArr, seasonsArr, 16, 20);
             checkFocusState(stringValueCheckboxesArr, 16);
             checkHoverState(stringValueCheckboxesArr, 16);
             checkMarkingCheckbox(stringValueCheckboxesArr, 16, 20);
         });
 
         it('should check template pre-selection based on value passed checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 20, 24);
+            checkLabels(stringValueCheckboxLabelArr, sportsArr, 20, 24);
             checkFocusState(stringValueCheckboxesArr, 20);
             checkHoverState(stringValueCheckboxesArr, 20);
             checkMarkingCheckbox(stringValueCheckboxesArr, 20, 24);
         });
 
         it('should check reactive disabled checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, checkboxGPData.sportsArr, 24, 28);
+            checkLabels(stringValueCheckboxLabelArr, sportsArr, 24, 28);
             for (let i = 24; 28 > i; i++) {
                 checkIfDisabled(stringValueCheckboxesArr, 'aria-disabled', 'true', i);
             }
@@ -117,7 +119,7 @@ xdescribe('Checkbox group test suite', () => {
         });
 
         it('should check reactive inline checkboxes2', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.programmingLanguagesArr, 0, 4);
+            checkLabels(objectValueCheckboxLabelArr, programmingLanguagesArr, 0, 4);
             checkFocusState(objectValueCheckboxesArr, 0);
             checkHoverState(objectValueCheckboxesArr, 0);
             checkMarkingCheckbox(objectValueCheckboxesArr, 0, 4);
@@ -126,35 +128,35 @@ xdescribe('Checkbox group test suite', () => {
         });
 
         it('should check reactive pre-selection based on value passed checkboxes', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 4, 7);
+            checkLabels(objectValueCheckboxLabelArr, countriesArr, 4, 7);
             checkFocusState(objectValueCheckboxesArr, 4);
             checkHoverState(objectValueCheckboxesArr, 4);
             checkMarkingCheckbox(objectValueCheckboxesArr, 4, 7);
         });
 
         it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 7, 10);
+            checkLabels(objectValueCheckboxLabelArr, countriesArr, 7, 10);
             checkFocusState(objectValueCheckboxesArr, 7);
             checkHoverState(objectValueCheckboxesArr, 7);
             checkMarkingCheckbox(objectValueCheckboxesArr, 7, 10);
         });
 
         it('should check reactive lookup key and display key usages checkboxes', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.itemsArr, 10, 13);
+            checkLabels(objectValueCheckboxLabelArr, itemsArr, 10, 13);
             checkFocusState(objectValueCheckboxesArr, 10);
             checkHoverState(objectValueCheckboxesArr, 10);
             checkMarkingCheckbox(objectValueCheckboxesArr, 10, 13);
         });
 
         it('should check reactive disabled checkboxes', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 13, 16);
+            checkLabels(objectValueCheckboxLabelArr, countriesArr, 13, 16);
             for (let i = 13; 16 > i; i++) {
                 checkIfDisabled(objectValueCheckboxesArr, 'aria-disabled', 'true', i);
             }
         });
 
         it('should check template inline checkboxes', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.programmingLanguagesArr, 16, 20);
+            checkLabels(objectValueCheckboxLabelArr, programmingLanguagesArr, 16, 20);
             checkFocusState(objectValueCheckboxesArr, 16);
             checkHoverState(objectValueCheckboxesArr, 16);
             checkMarkingCheckbox(objectValueCheckboxesArr, 16, 20);
@@ -166,21 +168,21 @@ xdescribe('Checkbox group test suite', () => {
             const preselectionCheckboxes = (objectValueCheckboxesArr).slice(20, 23);
             const checkboxLabels = (objectValueCheckboxLabelArr).slice(20, 23);
 
-            checkLabels(checkboxLabels, checkboxGPData.countriesArr, 20, 23);
+            checkLabels(checkboxLabels, countriesArr, 20, 23);
             checkFocusState(preselectionCheckboxes[0]);
             checkHoverState(preselectionCheckboxes[0]);
             checkMarkingCheckbox(preselectionCheckboxes);
         });
 
         it('should check template lookup key and display key usages checkboxes', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.itemsArr, 23, 26);
+            checkLabels(objectValueCheckboxLabelArr, itemsArr, 23, 26);
             checkFocusState(objectValueCheckboxesArr, 23);
             checkHoverState(objectValueCheckboxesArr, 23);
             checkMarkingCheckbox(objectValueCheckboxesArr, 23, 26);
         });
 
         it('should check reactive disabled checkboxes', () => {
-            checkLabels(objectValueCheckboxLabelArr, checkboxGPData.countriesArr, 26, 29);
+            checkLabels(objectValueCheckboxLabelArr, countriesArr, 26, 29);
             for (let i = 26; 29 > i; i++) {
                 checkIfDisabled(objectValueCheckboxesArr, 'aria-disabled', 'true', i);
             }
@@ -199,7 +201,7 @@ xdescribe('Checkbox group test suite', () => {
         });
 
         it('should check reactive checkboxes', () => {
-            checkLabels(projectedValueCheckboxLabelArr, checkboxGPData.fourFruitsArr, 0, 4);
+            checkLabels(projectedValueCheckboxLabelArr, fourFruitsArr, 0, 4);
             checkFocusState(projectedValueCheckboxesArr, 1);
             checkHoverState(projectedValueCheckboxesArr, 1);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 0, 4);
@@ -208,7 +210,7 @@ xdescribe('Checkbox group test suite', () => {
         });
 
         it('should check reactive pre-selection based on value passed checkboxes', () => {
-            checkLabels(projectedValueCheckboxLabelArr, checkboxGPData.hobbiesArr, 4, 8);
+            checkLabels(projectedValueCheckboxLabelArr, hobbiesArr, 4, 8);
             checkFocusState(projectedValueCheckboxesArr, 4);
             checkHoverState(projectedValueCheckboxesArr, 4);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 4, 8);
@@ -216,21 +218,21 @@ xdescribe('Checkbox group test suite', () => {
         });
 
         it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
-            checkLabels(projectedValueCheckboxLabelArr, checkboxGPData.europeanCountriesArr, 8, 12);
+            checkLabels(projectedValueCheckboxLabelArr, europeanCountriesArr, 8, 12);
             checkFocusState(projectedValueCheckboxesArr, 8);
             checkHoverState(projectedValueCheckboxesArr, 8);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 8, 12);
         });
 
         it('should check reactive disabled checkboxes', () => {
-            checkLabels(projectedValueCheckboxLabelArr, checkboxGPData.europeanCountriesArr, 12, 16);
+            checkLabels(projectedValueCheckboxLabelArr, europeanCountriesArr, 12, 16);
             for (let i = 12; 16 > i; i++) {
                 checkIfDisabled(projectedValueCheckboxesArr, 'aria-disabled', 'true', i);
             }
         });
         // Ask Sean
         xit('should check template inline checkboxes 555', () => {
-            // checkLabels(projectedValueCheckboxLabelArr, checkboxGPData.subjectsArr, 16, 20);
+            // checkLabels(projectedValueCheckboxLabelArr, subjectsArr, 16, 20);
             // checkFocusState(projectedValueCheckboxesArr, 17);
             // checkHoverState(projectedValueCheckboxesArr, 17);
 
@@ -240,14 +242,14 @@ xdescribe('Checkbox group test suite', () => {
         });
 
         it('should check template pre-selection based on value passed checkboxes', () => {
-            checkLabels(projectedValueCheckboxLabelArr, checkboxGPData.reptilesArr, 20, 24);
+            checkLabels(projectedValueCheckboxLabelArr, reptilesArr, 20, 24);
             checkFocusState(projectedValueCheckboxesArr, 20);
             checkHoverState(projectedValueCheckboxesArr, 20);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 20, 24);
         });
 
         it('should check template disabled checkboxes', () => {
-            checkLabels(projectedValueCheckboxLabelArr, checkboxGPData.europeanCountriesArr, 24, 28);
+            checkLabels(projectedValueCheckboxLabelArr, europeanCountriesArr, 24, 28);
             for (let i = 24; 28 > i; i++) {
                 checkIfDisabled(projectedValueCheckboxesArr, 'aria-disabled', 'true', i);
             }
@@ -269,16 +271,16 @@ xdescribe('Checkbox group test suite', () => {
             clickNextElement(formValidationCheckboxesArr, 1);
             for (let i = 0; 3 > i; i++) {
                 expect(getCSSPropertyByName(formValidationCheckboxesArr, 'border-color', i).value)
-                    .toContain(checkboxGPData.errorBorderStyle);
+                    .toContain(errorBorderStyle);
             }
 
             click(sectiontitle, 2);
 
             // clickNextElement(formValidationCheckboxesArr, 2);
             mouseHoverElement(formValidationCheckboxesArr, 0);
-            expect(getText(errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            expect(getText(errorTooltip)).toEqual(errorTooltipMessage);
 
-            checkLabels(formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 0, 3);
+            checkLabels(formValidationCheckboxLabelArr, threeFruitsArr, 0, 3);
             checkFocusState(formValidationCheckboxesArr, 0);
             checkHoverState(formValidationCheckboxesArr, 0);
             checkMarkingCheckbox(formValidationCheckboxesArr, 0, 3);
@@ -291,14 +293,14 @@ xdescribe('Checkbox group test suite', () => {
             clickNextElement(formValidationCheckboxesArr, 4);
             for (let i = 3; 6 > i; i++) {
                 expect(getCSSPropertyByName(formValidationCheckboxesArr, 'border-color', i).value)
-                    .toContain(checkboxGPData.errorBorderStyle);
+                    .toContain(errorBorderStyle);
             }
             // needed for getting the tooltip in next line
             click(sectiontitle, 1);
             mouseHoverElement(formValidationCheckboxesArr, 3);
-            expect(getText(errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            expect(getText(errorTooltip)).toEqual(errorTooltipMessage);
 
-            checkLabels(formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 3, 6);
+            checkLabels(formValidationCheckboxLabelArr, threeFruitsArr, 3, 6);
             checkFocusState(formValidationCheckboxesArr, 4);
             checkHoverState(formValidationCheckboxesArr, 3);
             checkMarkingCheckbox(formValidationCheckboxesArr, 3, 6);
@@ -312,13 +314,13 @@ xdescribe('Checkbox group test suite', () => {
 
             for (let i = 6; 10 > i; i++) {
                 expect(getCSSPropertyByName(formValidationCheckboxesArr, 'border-color', i).value)
-                    .toContain(checkboxGPData.errorBorderStyle);
+                    .toContain(errorBorderStyle);
             }
             click(sectiontitle, 1);
             mouseHoverElement(formValidationCheckboxesArr, 6);
-            expect(getText(errorTooltip)).toEqual(checkboxGPData.errorTooltipMessage);
+            expect(getText(errorTooltip)).toEqual(errorTooltipMessage);
 
-            checkLabels(formValidationCheckboxLabelArr, checkboxGPData.threeFruitsArr, 6, 10);
+            checkLabels(formValidationCheckboxLabelArr, threeFruitsArr, 6, 10);
             checkFocusState(formValidationCheckboxLabelArr, 6);
             checkHoverState(formValidationCheckboxLabelArr, 6);
             checkMarkingCheckbox(formValidationCheckboxesArr, 6, 10);
@@ -346,14 +348,14 @@ function checkHoverState(elementSelector, index: number = 0): boolean {
     scrollIntoView(elementSelector, index);
     mouseHoverElement(elementSelector, index);
     return expect(getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value)
-        .toContain(checkboxGPData2.checkboxHoverState);
+        .toContain(checkboxHoverState);
 }
 
 function checkFocusState(elementSelector, index: number = 0): boolean {
     // clickNextElement(elementSelector, index);
     focusElement(elementSelector, index);
     return expect(getCSSPropertyByName(elementSelector, 'outline-style', index).value)
-        .toContain(checkboxGPData2.checkboxFocusStyle);
+        .toContain(checkboxFocusStyle);
 }
 
 function checkOutputLabel(array, label, selections): void {

@@ -1,5 +1,6 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
-import MenuBtnData from '../fixtures/appData/menu-button-contents';
+import {compactAttr, tooltipAttr, textColorAttr, iconAttr, alignmentCenter, btnColorArr, cozyAndCompactBtnTextArr,
+icon, disabledState, selectedItem, textAlignmentAttr, truncatedBtnNoIconTooltipText, truncatedBtnText, truncatedBtnTooltipText} from '../fixtures/appData/menu-button-contents';
 import {
     browserIsIE,
     browserIsIEorSafari,
@@ -10,7 +11,7 @@ import {
     getElementArrayLength,
     getText,
     isElementDisplayed,
-    refreshPage, scrollIntoView,
+    refreshPage,
     waitForPresent,
     waitForElDisplayed
 } from '../../driver/wdio';
@@ -49,7 +50,7 @@ describe('Menu button test suite', function() {
             click(cozyBtnArr);
             click(menuItemArr);
 
-            expect(getText(cozySelectedItemLabel)).toEqual(MenuBtnData.selectedItem);
+            expect(getText(cozySelectedItemLabel)).toEqual(selectedItem);
             expect(isElementDisplayed(menuItemOverlay)).toBe(false);
         });
 
@@ -113,14 +114,14 @@ describe('Menu button test suite', function() {
             const cozyBtnArrLength = getElementArrayLength(cozyBtnArr);
 
             for (let i = 0; cozyBtnTextArrLength > i; i++) {
-                expect(getText(cozyBtnAttrArr, i).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[i]);
+                expect(getText(cozyBtnAttrArr, i).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
             }
 
             for (let j = 0; cozyBtnArrLength > j; j++) {
-                expect(getCSSPropertyByName(cozyBtnArr, MenuBtnData.textColorAttr, j).value)
-                    .toContain(MenuBtnData.btnColorArr[j]);
-                expect(getCSSPropertyByName(cozyBtnArr, MenuBtnData.textAlignmentAttr, j).value)
-                    .toEqual(MenuBtnData.alignmentCenter);
+                expect(getCSSPropertyByName(cozyBtnArr, textColorAttr, j).value)
+                    .toContain(btnColorArr[j]);
+                expect(getCSSPropertyByName(cozyBtnArr, textAlignmentAttr, j).value)
+                    .toEqual(alignmentCenter);
             }
         });
 
@@ -130,15 +131,15 @@ describe('Menu button test suite', function() {
 
             for (let i = 0; compactBtnTextArrLength > i; i++) {
                 expect(getText(compactBtnAttrArr, i).trim())
-                    .toEqual(MenuBtnData.cozyAndCompactBtnTextArr[i]);
+                    .toEqual(cozyAndCompactBtnTextArr[i]);
             }
 
             for (let j = 0; compactBtnArrLength > j; j++) {
-                expect(getCSSPropertyByName(compactBtnArr, MenuBtnData.textColorAttr, j).value)
-                    .toContain(MenuBtnData.btnColorArr[j]);
-                expect(getCSSPropertyByName(compactBtnArr, MenuBtnData.textAlignmentAttr, j).value)
-                    .toEqual(MenuBtnData.alignmentCenter);
-                expect(getAttributeByName(compactBtnArr, MenuBtnData.compactAttr)).toEqual('true');
+                expect(getCSSPropertyByName(compactBtnArr, textColorAttr, j).value)
+                    .toContain(btnColorArr[j]);
+                expect(getCSSPropertyByName(compactBtnArr, textAlignmentAttr, j).value)
+                    .toEqual(alignmentCenter);
+                expect(getAttributeByName(compactBtnArr, compactAttr)).toEqual('true');
             }
         });
     });
@@ -148,42 +149,42 @@ describe('Menu button test suite', function() {
         it('should check disabled buttons', () => {
             // https://github.com/SAP/fundamental-ngx/issues/3757 first btn is enabled, start from 0 after fix
             for (let i = 1; 6 > i; i++) {
-                expect(getAttributeByName(menuTypeBtnAttrArr, MenuBtnData.disabledState, i)).toEqual('true');
+                expect(getAttributeByName(menuTypeBtnAttrArr, disabledState, i)).toEqual('true');
             }
         });
 
         it('should check btn with and without icon', () => {
             waitForElDisplayed(menuTypeBtnArr, 0);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 6)).toBe(MenuBtnData.icon);
-            expect(getText(menuTypeBtnArr, 6).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 7)).toBe(null);
-            expect(getText(menuTypeBtnArr, 7).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 8)).toBe(MenuBtnData.icon);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 6)).toBe(icon);
+            expect(getText(menuTypeBtnArr, 6).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 7)).toBe(null);
+            expect(getText(menuTypeBtnArr, 7).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 8)).toBe(icon);
             expect(getText(menuTypeBtnArr, 8).trim()).toBe('');
         });
 
         it('should check compact btn with and without icon', () => {
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 9)).toBe(MenuBtnData.icon);
-            expect(getText(menuTypeBtnArr, 9).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 10)).toBe(null);
-            expect(getText(menuTypeBtnArr, 10).trim()).toEqual(MenuBtnData.cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 11)).toBe(MenuBtnData.icon);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 9)).toBe(icon);
+            expect(getText(menuTypeBtnArr, 9).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 10)).toBe(null);
+            expect(getText(menuTypeBtnArr, 10).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 11)).toBe(icon);
             expect(getText(menuTypeBtnArr, 11).trim()).toBe('');
 
             for (let i = 9; 12 > i; i++) {
-                expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.compactAttr, i)).toBe('true');
+                expect(getAttributeByName(menuTypeBtnArr, compactAttr, i)).toBe('true');
             }
         });
 
         it('should check long text menu btn with and without icon', () => {
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 12)).toContain(MenuBtnData.icon);
-            expect(getText(menuTypeBtnArr, 12).trim()).toEqual(MenuBtnData.truncatedBtnText);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.tooltipAttr, 12))
-                .toContain(MenuBtnData.truncatedBtnTooltipText);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.iconAttr, 13)).toBe(null);
-            expect(getText(menuTypeBtnArr, 13).trim()).toEqual(MenuBtnData.truncatedBtnText);
-            expect(getAttributeByName(menuTypeBtnArr, MenuBtnData.tooltipAttr, 13))
-                .toBe(MenuBtnData.truncatedBtnNoIconTooltipText);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 12)).toContain(icon);
+            expect(getText(menuTypeBtnArr, 12).trim()).toEqual(truncatedBtnText);
+            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 12))
+                .toContain(truncatedBtnTooltipText);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 13)).toBe(null);
+            expect(getText(menuTypeBtnArr, 13).trim()).toEqual(truncatedBtnText);
+            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 13))
+                .toBe(truncatedBtnNoIconTooltipText);
         });
     });
 
