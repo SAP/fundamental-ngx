@@ -27,6 +27,7 @@ import { KeyUtil } from '../../utils/functions';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from './list-item-utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ListFocusItem } from '../list-focus-item.model';
+import { ButtonComponent } from '../../button/button.component';
 
 /**
  * The component that represents a list item.
@@ -102,6 +103,10 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @ContentChildren(ListLinkDirective)
     linkDirectives: QueryList<ListLinkDirective>;
 
+    /** @hidden */
+    @ContentChildren(ButtonComponent, { descendants: true })
+    buttons: QueryList<ButtonComponent>;
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     clicked = new EventEmitter<MouseEvent>();
 
@@ -121,6 +126,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     /** @hidden */
     ngAfterContentInit(): void {
         this._listenOnLinkQueryChange();
+        this._listenOnButtonQueryChange();
     }
 
     /** @hidden */
@@ -166,6 +172,23 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
             this.link = this.linkDirectives.length > 0;
             this._changeDetectorRef.detectChanges();
         });
+    }
+
+    /** @hidden */
+    private _listenOnButtonQueryChange(): void {
+        this.buttons.changes.pipe(
+            takeUntil(this._onDestroy$),
+            startWith(0)
+        ).subscribe(_ => {
+            this.buttons.forEach(this._addClassToButtons);
+        });
+    }
+
+    /** @hidden */
+    private _addClassToButtons(button: ButtonComponent): void {
+        button.class += 'fd-list__button';
+        button.buildComponentCssClass();
+        button.detectChanges();
     }
 
     /** @hidden */
