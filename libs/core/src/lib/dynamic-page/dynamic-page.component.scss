@@ -16,6 +16,14 @@
 .fd-dynamic-page__header--not-collapsible {
     .fd-dynamic-page__title-area.is-hover,
     .fd-dynamic-page__title-area:hover {
-        cursor: default;
+		background-color: var(--sapObjectHeader_Background, #fff);
+		cursor: default;
     }
+}
+
+.fd-tabs {
+	.fd-dynamic-page__content {
+		display: block;
+		height: auto !important;
+	}
 }

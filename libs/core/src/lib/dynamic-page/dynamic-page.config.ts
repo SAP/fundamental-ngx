@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 
 /**
- * Default options for platform dynamic-page
+ * Default options for core dynamic-page
  */
 @Injectable({ providedIn: 'root' })
 export class DynamicPageConfig {

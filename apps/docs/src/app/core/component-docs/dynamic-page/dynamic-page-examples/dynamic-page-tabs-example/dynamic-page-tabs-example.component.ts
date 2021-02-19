@@ -14,6 +14,9 @@ import { Component } from '@angular/core';
                 left: 0;
                 background-color: rgb(255, 255, 255);
             }
+            .fd-dynamic-page-section-example {
+                min-height: 20vh
+            }
         `
     ]
 })

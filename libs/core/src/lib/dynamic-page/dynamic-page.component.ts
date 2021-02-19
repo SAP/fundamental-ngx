@@ -166,8 +166,11 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** Set the positions of the tabs and content with respect to the window */
     private _setContainerPositions(): void {
-        this._setTabsPosition();
-        this._setContainerPosition();
+        if (this._tabComponent) {
+            this._setTabsPosition();
+        } else {
+            this._setContainerPosition();
+        }
     }
 
     /** @hidden */
@@ -238,14 +241,14 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _addScrollListeners(): void {
-        const contentElement = this._contentComponent?.elementRef?.nativeElement;
-        if (contentElement) {
-            this._listenOnScroll(contentElement);
-        }
-
         const tabElement = this._tabComponent?.contentContainer?.nativeElement
         if (tabElement) {
             this._listenOnScroll(tabElement);
+        }
+
+        const contentElement = this._contentComponent?.elementRef?.nativeElement;
+        if (contentElement) {
+            this._listenOnScroll(contentElement);
         }
     }
 
@@ -278,9 +281,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
      * set top position of normal content on scrolling
      */
     private _setContainerPosition(): void {
-        console.log('first');
         if (this._contentComponent) {
-            console.log('second');
             const contentComponentElement = this._contentComponent.elementRef.nativeElement;
             this._renderer.setStyle(
                 contentComponentElement,

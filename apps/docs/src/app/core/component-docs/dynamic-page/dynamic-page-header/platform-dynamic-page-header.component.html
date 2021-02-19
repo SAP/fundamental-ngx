@@ -13,15 +13,29 @@
     <br />
     <ul>
         <li>
-            <b>Title+Header</b> - comprises of Title and Header area where Header is collapsible.
-            <br />
-            The Title area(<code>fdp-dynamic-page-title</code>) allows user to input title and subtitle, and in turn can
-            hold user-specified content in breadcrumbs(through
-            <code>fd-breadcrumb</code>), KPI content(<code>fdp-dynamic-page-key-info</code>), global actions(through
-            <code>fdp-dynamic-page-global-actions</code>), layout actions(through
-            <code>fdp-dynamic-page-layout-actions</code>).
-            <br />
-            The header content is projected through <code>fdp-dynamic-page-header</code> and allows user to specify the
+            <b>Header</b> - <code>fd-dynamic-page-header</code> Header area allows user to put
+            <ul>
+                <li>
+                    title - <code>@Input() [title]</code>,
+                </li>
+                <li>
+                    subtitle - <code>@Input() [subtitle]</code>,
+                </li>
+                <li>
+                    <code>fd-breadcrumb</code>,
+                </li>
+                <li>
+                    Title/KPI content(through<code>fd-dynamic-page-title-content</code>),
+                </li>
+                <li>
+                    global actions(through<code>fd-dynamic-page-global-actions</code>),
+                </li>
+                <li>
+                    layout actions(through<code>fd-dynamic-page-layout-actions</code>).
+                </li>
+            </ul>
+            <br/>
+            <b>Subheader</b> - <code>fd-dynamic-page-subheader</code> - Subheader area. Allowing user to specify the
             options:
             <ul>
                 <li>
@@ -37,17 +51,15 @@
             </ul>
         </li>
         <li>
-            <b> Content</b> - Content is projected through <code>fdp-dynamic-page-content</code>. User can use multiple
-            <code>fdp-dynamic-page-content</code>s with
-            <code>tabLabel</code>
-            specified to hook a tab navigation internally and provide tabbed content.
+            <b> Content</b> - Content is projected through <code>fd-dynamic-page-content</code>. User can also use multiple
+            <code>fd-dynamic-page-content</code>s with<code>TabComponent</code>
         </li>
         <li>
-            <b> Footer</b> - Content is projected through <code>fdp-dynamic-page-footer</code>. Use a floating footer
+            <b> Footer</b> - Content is projected through <code>fd-dynamic-page-footer</code>. Use a floating footer
             from the Bar component.
         </li>
-        <br />
     </ul>
+    <br/>
     Other features of the header are:
     <ul>
         <li>
@@ -74,15 +86,22 @@
             off if it is not useful for your application.
         </li>
     </ul>
-    <h3>Platform specific enhancements:</h3>
+    <h3>Enhancements:</h3>
     <ul>
         <li>
-            Automatic generation of tab navigation and control of multiple content panels.
+            Auto height expand for content - just to make content scrollable.
+        </li>
+        <li>
+            Optional AutoResponsive mode that will change size of dynamic page depending on DynamicPage width.
+        </li>
+        <li>
+            <code>fd-dynamic-page-title-content</code> and <code>fd-dynamic-page-global-actions</code> elements will
+            be wrapped inside overflow toolbar, when size of DynamicPage is set to <code>small</code>.
         </li>
     </ul>
 </description>
 <br />
-<import module="PlatformDynamicPageModule"></import>
+<import module="DynamicPageModule"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>
