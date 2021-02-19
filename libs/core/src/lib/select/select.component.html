@@ -43,7 +43,7 @@
 
 <ng-template #selectOptionsListTemplate>
     <ul #optionPanel fd-list class="fd-select-options" role="listbox" tabindex="-1" [compact]="compact"
-        [dropdownMode]="true" [hasMessage]="!!stateMessage" [attr.id]="controlId + '-list-box'"
+        [mobileMode]="mobile" [dropdownMode]="true" [hasMessage]="!!stateMessage" [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'">
         <li *ngIf="stateMessage" fd-list-message tabindex="-1" role="presentation" [type]="state">
             {{stateMessage}}

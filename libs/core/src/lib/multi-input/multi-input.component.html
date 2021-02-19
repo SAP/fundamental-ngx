@@ -80,6 +80,7 @@
         fd-list
         class="fd-multi-input-menu-overflow"
         [selection]="true"
+        [mobileMode]="mobile"
         [compact]="compact"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
         (focusEscapeList)="handleListFocusEscape($event)"
