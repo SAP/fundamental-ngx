@@ -28,10 +28,16 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     @Input()
     interactive = true;
 
-    /** @hidden */
+    /** Tab Index attribute for card header */
     @Input()
     @HostBinding('attr.tabindex')
-    tabindex = this.interactive ? '0' : '-1';
+    set tabindex(tabindex: string) {
+        this._tabindex = tabindex;
+    }
+    get tabindex(): string {
+        return !this.interactive ? '-1' : this._tabindex;
+    }
+    private _tabindex = '0';
 
     /** @hidden */
     class: string;
