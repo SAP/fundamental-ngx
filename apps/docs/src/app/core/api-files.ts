@@ -1,3 +1,9 @@
+import {
+    AvatarGroupItemDirective,
+    AvatarGroupOverflowBodyDirective, AvatarGroupOverflowButtonDirective, AvatarGroupOverflowButtonTextDirective,
+    AvatarGroupOverflowItemDirective
+} from '@fundamental-ngx/core';
+
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -22,6 +28,14 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
+    avatarGroup: [
+        'AvatarGroupComponent',
+        'AvatarGroupItemDirective',
+        'AvatarGroupOverflowBodyDirective',
+        'AvatarGroupOverflowItemDirective',
+        'AvatarGroupOverflowButtonDirective',
+        'AvatarGroupOverflowButtonTextDirective'
+    ],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     card: [
         'CardComponent',

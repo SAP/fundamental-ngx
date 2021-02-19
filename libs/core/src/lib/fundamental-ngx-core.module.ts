@@ -7,6 +7,7 @@ import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
+import { AvatarGroupModule } from './avatar-group/avatar-group.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -95,6 +96,7 @@ import { StatusIndicatorModule } from './status-indicator/status-indicator.modul
         ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
+        AvatarGroupModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,
