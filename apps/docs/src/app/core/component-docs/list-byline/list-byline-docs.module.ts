@@ -12,6 +12,7 @@ import { ListBylineBorderlessExampleComponent } from './examples/list-byline-bor
 import { ListBylineNavigationExampleComponent } from './examples/list-byline-navigation-example/list-byline-navigation-example.component';
 import { ListBylineStandardExampleComponent } from './examples/list-byline-standard-example/list-byline-standard-example.component';
 import { ListBylineButtonExampleComponent } from './examples/list-byline-button-example/list-byline-button-example.component';
+import { ListBylineInteractiveExampleComponent } from './examples/list-byline-interactive-example/list-byline-interactive-example.component';
 
 const routes: Routes = [
     {
@@ -42,7 +43,8 @@ const routes: Routes = [
         ListBylineBorderlessExampleComponent,
         ListBylineNavigationExampleComponent,
         ListBylineStandardExampleComponent,
-        ListBylineButtonExampleComponent
+        ListBylineButtonExampleComponent,
+        ListBylineInteractiveExampleComponent
     ]
 })
 export class ListDocsModule {}

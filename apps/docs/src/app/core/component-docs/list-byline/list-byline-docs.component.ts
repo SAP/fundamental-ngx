@@ -6,6 +6,7 @@ import * as bylineBorderlessSrcHtml from '!raw-loader!./examples/list-byline-bor
 import * as bylineSelectionSrcHtml from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.html';
 import * as bylineSelectionSrcTs from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.ts';
 import * as bylineButtonsHtml from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.html'
+import * as bylineInteractiveHtml from '!raw-loader!./examples/list-byline-interactive-example/list-byline-interactive-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -57,6 +58,15 @@ export class ListBylineDocsComponent {
             code: bylineButtonsHtml,
             fileName: 'list-byline-button-example',
             component: 'ListBylineButtonExampleComponent',
+        },
+    ];
+
+    interactiveList: ExampleFile[] = [
+        {
+            language: 'html',
+            code: bylineInteractiveHtml,
+            fileName: 'list-byline-interactive-example',
+            component: 'ListBylineInteractiveExampleComponent',
         },
     ];
 }

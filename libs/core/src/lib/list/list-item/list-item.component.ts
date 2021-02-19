@@ -78,6 +78,11 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @HostBinding('class.fd-list__item--action')
     action = false;
 
+    /** Whether there is item performs some action */
+    @Input()
+    @HostBinding('class.fd-list__item--interractive')
+    interactive = false;
+
     /** Whether list item contains busy indicator */
     @Input()
     @HostBinding('class.fd-list__item--growing')

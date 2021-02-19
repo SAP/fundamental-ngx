@@ -20,6 +20,7 @@ import * as listFilterH from '!raw-loader!./examples/list-data-example/list-data
 import * as listSortPipe from '!raw-loader!../../../documentation/core-helpers/pipes/sort.pipe.ts';
 import * as infiniteScrollSrcHtml from '!raw-loader!./examples/list-infinite-scroll-example.component.html';
 import * as infiniteScrollSrcTs from '!raw-loader!./examples/list-infinite-scroll-example.component.ts';
+import * as listInteractiveHtml from '!raw-loader!./examples/list-interactive-example/list-interactive-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -159,6 +160,14 @@ export class ListDocsComponent {
             language: 'html',
             code: listNavH,
             fileName: 'list-navigation-example'
+        }
+    ];
+
+    listInteractive: ExampleFile[] = [
+        {
+            language: 'html',
+            code: listInteractiveHtml,
+            fileName: 'list-interactive-example'
         }
     ];
 
