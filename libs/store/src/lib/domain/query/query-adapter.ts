@@ -75,6 +75,8 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
                     parts.push('$top=' + params[key]);
                 } else if (key === 'orderby') {
                     parts.push('$orderby=' + params[key]);
+                } else if (key === 'count') {
+                    parts.push('$count=' + params[key]);
                 } else {
                     parts.push(key + '=' + params[key]);
                 }

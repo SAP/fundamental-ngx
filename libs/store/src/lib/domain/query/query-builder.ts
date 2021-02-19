@@ -65,7 +65,7 @@ export class QueryBuilder <TModel> {
      */
     newQuery(): Query < TModel > {
         const query = new Query<TModel>(this.resultType, this.service, this.adapter);
-        query.predicate = this.predicate;
+        query._predicate = this.predicate;
         return query;
     }
 

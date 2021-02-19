@@ -21,17 +21,23 @@ export interface OrderBy <TModel, TProperty extends keyof TModel> {
 
 export class Query<TModel> {
 
+    /** @hidden - stores current keyword */
+    _keyword: string;
+
     /** @hidden - stores current predicate */
-    predicate: Predicate<TModel>;
+    _predicate: Predicate<TModel>;
 
     /** @hidden - stores current page size */
-    pageSize: number;
+    _pageSize: number;
 
     /** @hidden - stores current index offset */
-    offset: number;
+    _offset: number;
 
     /** @hidden - stores curernt order bys */
-    orderByFields: Array<OrderBy<TModel, keyof TModel>>;
+    _orderByFields: Array<OrderBy<TModel, keyof TModel>>;
+
+    /** @hidden - stores current enable count flag */
+    _includeCount: boolean;
 
     constructor(
         private resultType: Type<TModel>,
@@ -40,15 +46,20 @@ export class Query<TModel> {
     ) {}
 
     /**
+     * Replace current filter settings.
+     * @param predicate Predicate object which contains new filter criteria.
+     */
+    where(predicate: Predicate<TModel>): Query<TModel> {
+        this._predicate = predicate;
+        return this;
+    }
+
+    /**
      * Set order by rules for query.
      * @param orderBys Set of OrderBy objects.
      */
     orderBy<TProperty extends keyof TModel> (...orderBys: Array < OrderBy < TModel, TProperty >> ): Query < TModel > {
-        this.orderByFields = orderBys;
-        return this;
-    }
-
-    project<TP extends keyof TModel> (...property: Array < TP > ): Query < TModel > {
+        this._orderByFields = orderBys;
         return this;
     }
 
@@ -57,7 +68,7 @@ export class Query<TModel> {
      * @param offset Index number of first result.
      */
     firstResult(offset: number): Query<TModel> {
-        this.offset = offset;
+        this._offset = offset;
         return this;
     }
 
@@ -66,7 +77,22 @@ export class Query<TModel> {
      * @param pageSize Number of items returned per page
      */
     maxResults(pageSize: number): Query<TModel> {
-        this.pageSize = pageSize;
+        this._pageSize = pageSize;
+        return this;
+    }
+
+    /**
+     * Set flag to include "count" in response.
+     * If "true" the query string will include parameter "$count=true".
+     * If "false" the parameter will not be included.
+     * @param flag
+     */
+    includeCount(flag: boolean): Query<TModel> {
+        this._includeCount = flag;
+        return this;
+    }
+
+    project<TP extends keyof TModel> (...property: Array < TP > ): Query < TModel > {
         return this;
     }
 
@@ -83,15 +109,20 @@ export class Query<TModel> {
         return this.service.getWithQuery(query);
     }
 
-    count(): number {
-        return 0;
+    /**
+     * Count of items in collection
+     *
+     * @todo Will this work with paging?
+     */
+    count(): Observable<number> {
+        return this.service.count$;
     }
 
     /**
      * Get previous page of collection
      */
     previous(): void {
-        this.offset = (this.offset > this.pageSize) ? this.offset - this.pageSize : 0;
+        this._offset = (this._offset > this._pageSize) ? this._offset - this._pageSize : 0;
         this.select();
     }
 
@@ -99,34 +130,44 @@ export class Query<TModel> {
      * Get next page of collection
      */
     next(): void {
-        this.offset = this.offset + this.pageSize;
+        this._offset = this._offset + this._pageSize;
         this.select();
     }
 
+    /**
+     * Create QueryParams from current Query properties.
+     * @hidden
+     */
     private _createQueryParams(): QueryParams {
         let params: QueryParams = {};
-        if (this.predicate) {
+        if (this._predicate) {
             params = {
                 ...params,
-                filter: this.adapter.parsePredicate(this.predicate)
+                filter: this.adapter.parsePredicate(this._predicate)
             };
         }
-        if (this.pageSize) {
+        if (this._pageSize) {
             params = {
                 ...params,
-                pageSize: this.pageSize.toString()
+                pageSize: this._pageSize.toString()
             };
         }
-        if (this.offset !== undefined) {
+        if (this._offset !== undefined) {
             params = {
                 ...params,
-                offset: this.offset.toString()
+                offset: this._offset.toString()
             };
         }
-        if (this.orderByFields) {
+        if (this._orderByFields) {
             params = {
                 ...params,
-                orderby: this.adapter.parseOrderBys(this.orderByFields)
+                orderby: this.adapter.parseOrderBys(this._orderByFields)
+            };
+        }
+        if (this._includeCount) {
+            params = {
+                ...params,
+                count: 'true'
             };
         }
         return params;

@@ -121,4 +121,10 @@ describe('Store: Query', () => {
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=0');
     });
 
+    it('should add "count" to query string if includeCount is set to true', () => {
+        const query = qb.newQuery();
+        query.includeCount(true).select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$count=true');
+    });
+
 });

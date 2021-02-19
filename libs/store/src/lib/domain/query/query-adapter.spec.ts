@@ -200,6 +200,13 @@ describe('DefaultQueryAdapter: Query string generation', () => {
         expect(adapter.createQueryString(params)).toBe('$orderby=name');
     });
 
+    it('should be able to handle the "count" query parameter', () => {
+        const params: QueryParams = {
+            count: 'true'
+        };
+        expect(adapter.createQueryString(params)).toBe('$count=true');
+    });
+
     it('should be able to process query parameters with any properties', () => {
         const params: QueryParams = {
             foo: 'hello',
