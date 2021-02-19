@@ -12,6 +12,7 @@ import { DynamicPageResponsiveSize } from '../../constants';
     template: `
         <ng-container *ngIf="_size === 'small'">
             <fd-toolbar fdType="transparent" 
+                        (click)="$event.stopPropagation()"
                         class="dynamicPageLayoutContentToolbar"
                         [clearBorder]="true" 
                         [forceOverflow]="true" 

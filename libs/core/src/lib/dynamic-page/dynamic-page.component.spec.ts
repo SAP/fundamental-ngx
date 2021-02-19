@@ -102,7 +102,7 @@ describe('DynamicPageComponent default values', () => {
         expect(propagateSizeSpy).toHaveBeenCalled();
     });
 
-    fit('should apply valid height on content', () => {
+    it('should apply valid height on content', () => {
         const size = '150px';
         fixture.detectChanges();
         (<any>dynamicPageComponent)._getCalculatedFullHeight = (_element: HTMLElement): string => size;
