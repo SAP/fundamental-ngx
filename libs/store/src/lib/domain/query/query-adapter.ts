@@ -69,6 +69,8 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
             if (params.hasOwnProperty(key)) {
                 if (key === 'filter') {
                     parts.push('$filter=' + params[key]);
+                } else if (key === 'search') {
+                    parts.push('$search=' + params[key]);
                 } else if (key === 'pageSize') {
                     parts.push('$skip=' + params[key]);
                 } else if (key === 'offset') {

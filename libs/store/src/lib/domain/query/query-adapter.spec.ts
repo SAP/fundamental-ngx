@@ -172,6 +172,13 @@ describe('DefaultQueryAdapter: Query string generation', () => {
         expect(adapter.createQueryString({})).toBe('');
     });
 
+    it('should be able to process query parameters with "search"', () => {
+        const params: QueryParams = {
+            search: 'red'
+        };
+        expect(adapter.createQueryString(params)).toBe('$search=red');
+    });
+
     it('should be able to process query parameters with "filter"', () => {
         const params: QueryParams = {
             filter: 'name eq \'apple\''

@@ -54,6 +54,16 @@ export class Query<TModel> {
         return this;
     }
 
+
+    /**
+     * Set keyword for search term.
+     * @param keyword
+     */
+    keyword(keyword: string): Query<TModel> {
+        this._keyword = keyword;
+        return this;
+    }
+
     /**
      * Set order by rules for query.
      * @param orderBys Set of OrderBy objects.
@@ -110,16 +120,17 @@ export class Query<TModel> {
     }
 
     /**
-     * Count of items in collection
+     * Get observable for count of items in collection.
      *
-     * @todo Will this work with paging?
+     * @todo Need to parse count and item data from returned JSON data.
+     * @todo Do we need to throw exception if "_includeCount" is not true?
      */
     count(): Observable<number> {
         return this.service.count$;
     }
 
     /**
-     * Get previous page of collection
+     * Get previous page of collection.
      */
     previous(): void {
         this._offset = (this._offset > this._pageSize) ? this._offset - this._pageSize : 0;
@@ -140,6 +151,12 @@ export class Query<TModel> {
      */
     private _createQueryParams(): QueryParams {
         let params: QueryParams = {};
+        if (this._keyword) {
+            params = {
+                ...params,
+                search: this._keyword
+            };
+        }
         if (this._predicate) {
             params = {
                 ...params,

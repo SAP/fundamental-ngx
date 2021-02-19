@@ -70,6 +70,12 @@ describe('Store: Query', () => {
         expect(service.getWithQuery).toHaveBeenCalledWith('$filter=(variety eq \'pippen\' and price eq 3.03)');
     });
 
+    it('should call "getWithQuery" with the correct keyword parameter', () => {
+        let query = qb.keyword('red').newQuery();
+        query.select();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$search=red');
+    });
+
     it('should call "getWithQuery" with the correct order by parameters', () => {
         let query = qb.newQuery();
         query.orderBy({ field: 'name'}).select();

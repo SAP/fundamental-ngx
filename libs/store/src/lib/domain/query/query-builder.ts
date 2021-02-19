@@ -31,9 +31,14 @@ import { QueryAdapter } from './query-adapter';
 export class QueryBuilder <TModel> {
 
     /**
-     * Predicate which defines filter criteria
+     * Predicate which defines filter criteria.
      */
-    predicate: Predicate<TModel>;
+    _predicate: Predicate<TModel>;
+
+    /**
+     * Keyword for search.
+     */
+    _keyword: string;
 
     constructor(
         private resultType: Type<TModel>,
@@ -51,7 +56,16 @@ export class QueryBuilder <TModel> {
      */
     where < TP extends keyof TModel,
     TPT extends TModel[TP] > (predicate: Predicate <TModel> ): QueryBuilder <TModel> {
-        this.predicate = predicate;
+        this._predicate = predicate;
+        return this;
+    }
+
+    /**
+     * Add keyword to builder.
+     * @param keyword Keyword for search
+     */
+    keyword(keyword: string): QueryBuilder<TModel> {
+        this._keyword = keyword;
         return this;
     }
 
@@ -65,7 +79,8 @@ export class QueryBuilder <TModel> {
      */
     newQuery(): Query < TModel > {
         const query = new Query<TModel>(this.resultType, this.service, this.adapter);
-        query._predicate = this.predicate;
+        query._predicate = this._predicate;
+        query._keyword = this._keyword;
         return query;
     }
 
