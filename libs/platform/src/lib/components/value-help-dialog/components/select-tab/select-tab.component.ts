@@ -6,8 +6,12 @@ import {
   ChangeDetectionStrategy,
   SimpleChanges,
   ViewEncapsulation,
-  OnChanges
+  OnChanges,
+  AfterViewInit,
+  ViewChild
 } from '@angular/core';
+
+import { InfiniteScrollDirective } from '@fundamental-ngx/core';
 
 import { ContentDensity } from '../../../table/enums';
 import { VhdFilter, VdhTableSelection } from '../../models';
@@ -19,7 +23,7 @@ import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
+export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
   @Input()
   selected: T[] = [];
 
@@ -58,6 +62,8 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
   /** Event emitted when row was selected. */
   @Output()
   select = new EventEmitter<T[]>();
+
+  @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
 
   /** @hidden */
   _contentDensityOptions = ContentDensity;
@@ -100,6 +106,10 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
     return this.selection === 'multi';
   }
 
+  ngAfterViewInit(): void {
+    Promise.resolve(true).then(() => this._checkScrollAndShowMore());
+  }
+
   /** @hidden  */
   ngOnChanges(changes: SimpleChanges): void {
     if ('filters' in changes) {
@@ -137,6 +147,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
     } else {
       this._shownCount = this.displayedData.length;
     }
+    this._changeDetectorRef.markForCheck();
   }
 
   /** @hidden Refresh page in desktop view */
@@ -180,12 +191,24 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges {
     this._refreshTristate();
   }
 
+  private _checkScrollAndShowMore(): void {
+    if (this.mobile) {
+      return;
+    }
+    if (this.displayedData.length && this._shownCount !== this.displayedData.length && this.infiniteScrollTable?.shouldTriggerAction()) {
+      this._showMoreElements();
+      setTimeout(() => {
+        this._checkScrollAndShowMore();
+      }, 100);
+    }
+  }
+
   /** @hidden */
   private _resetShown(): void {
     if (this.mobile) {
       this._showMoreElements();
     } else {
-      this._updatePage();
+      this._checkScrollAndShowMore();
     }
   }
 

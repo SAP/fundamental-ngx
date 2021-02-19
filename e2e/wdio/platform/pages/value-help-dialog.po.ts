@@ -19,15 +19,12 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     advSearchLabels = 'fd-layout-grid .fd-form-label';
     advSearchOptions = 'form .fdp-value-help-dialog__advanced-filters';
     advSearchToggle = '.fd-toolbar button:first-of-type';
-    currentDisplayedPage = '.fd-pagination-direction-override-display a[aria-selected="true"]';
     dialogContainer = 'div[role="dialog"]';
     dialogHeader = 'fd-dialog-header .fd-title';
     footerBtns = 'footer button';
     formTabs = 'nav a[role="tab"]';
     goBtn = 'button[type="submit"]';
     inputFields = 'form input';
-    nextPageBtn = 'a.fd-pagination__link--next';
-    previousPageBtn = 'a.fd-pagination__link--previous';
     productAddressColumn = 'table td:nth-of-type(7)';
     productCityColumn = 'table td:nth-of-type(5)';
     productCodeColumn = 'table td:nth-of-type(4)';

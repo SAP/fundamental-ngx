@@ -2,13 +2,17 @@
 <div class="table-header">
     <h5 fd-title><ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{ displayedData.length }})</h5>
 </div>
-<div class="fdp-value-help-dialog__table-holder table-content">
+<div class="fdp-value-help-dialog__table-holder table-content"
+    fdInfiniteScroll
+    (onScrollAction)="_showMoreElements()"
+    [scrollPercent]="80"
+>
     <table fd-table
         [compact]="contentTableDensity === _contentDensityOptions.COMPACT"
         [condensed]="contentTableDensity === _contentDensityOptions.CONDENSED"
         [popIn]="mobile"
         [noBorderX]="mobile"
-        [noBorderY]="mobile"
+        [noBorderY]="false"
     >
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
@@ -81,16 +85,3 @@
         </tbody>
     </table>
 </div>
-
-<ng-container *ngIf="pageSize && displayedData.length as _itemCount">
-    <div fd-bar *ngIf="!mobile && _itemCount">
-        <div fd-bar-left>
-            <fd-pagination
-                [totalItems]="_itemCount"
-                (pageChangeStart)="_updatePage($event)"
-                [itemsPerPage]="pageSize"
-                [currentPage]="_currentPage"
-            ></fd-pagination>
-        </div>
-    </div>
-</ng-container>

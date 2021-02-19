@@ -23,8 +23,7 @@ describe('Value help dialog test suite', function() {
         productCodeColumn, productCityColumn, productZipcodeColumn, productAddressColumn, productNicknameColumn,
         conditionSelectors, conditionsInputField, dropdownOptions, selectedItemID, miniOpenDialogBtn,
         menuDialogBtn, menuCheckboxes, inputToken, menuItemNames, advSearchLabels, tableColumn,
-        currentDisplayedPage, nextPageBtn, previousPageBtn, advSearchOptions,
-        advSearchToggle, tableCheckboxesFF, mobileExampleDialog, xBtn, showAllBtn
+        advSearchOptions, advSearchToggle, tableCheckboxesFF, mobileExampleDialog, xBtn, showAllBtn
     } = valueHelpDialogPage;
 
     beforeAll(() => {
@@ -106,15 +105,6 @@ describe('Value help dialog test suite', function() {
             waitForPresent(dialogContainer);
             click(footerBtns, 1);
             waitForPresent(openDialogBtn);
-        });
-
-        it('should check the table pagination', () => {
-            click(openDialogBtn);
-            expect(getText(currentDisplayedPage)).toEqual('1');
-            click(nextPageBtn);
-            expect(getText(currentDisplayedPage)).toEqual('2');
-            click(previousPageBtn);
-            expect(getText(currentDisplayedPage)).toEqual('1');
         });
 
         xit('should check advanced search options appear for each table column', () => {

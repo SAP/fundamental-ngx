@@ -39,7 +39,7 @@
                     
                     <div class="fdp-value-help-dialog__tokens-wrapper">
                         <div class="fdp-value-help-dialog__tokens">
-                            <fd-toolbar [shouldOverflow]="true">
+                            <fd-toolbar size="compact" [shouldOverflow]="true">
                                 <!-- Selected items -->
                                 <fd-token
                                     fd-toolbar-item
@@ -65,6 +65,7 @@
                         <button
                             (click)="clearSelectedAndConditionItems()"
                             class="fdp-value-help-dialog__tokens-clear"
+                            [compact]="true"
                             fd-button
                             [disabled]="!hasSelectedAndConditions"
                             fdType="transparent"
@@ -174,7 +175,7 @@
                         </ng-container>
                     </ng-container>
                     
-                    <div fdLayoutGridCol="12" colMd="12" colLg="6" colXl="3" *ngIf="filters.length > maxShownInitialFilters" class="fdp-value-help-dialog__toggle-filters">
+                    <div colGrow fdLayoutGridCol="12" colMd="12" colLg="6" colXl="3" *ngIf="filters.length > maxShownInitialFilters" class="fdp-value-help-dialog__toggle-filters">
                         <button
                             fd-button
                             fdType="transparent"
