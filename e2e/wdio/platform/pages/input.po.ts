@@ -16,7 +16,7 @@ export class InputPo extends BaseComponentPo {
     inlineHelpInput = '#input7';
     messagesComponentsInput = '#input9';
     submitBtn = 'button[type="submit"]';
-    errorText = 'fd-form-message span';
+    errorTextAttr = 'fd-form-message span';
     requiredInputLabel = 'fdp-platform-input-reactive-validation-example .fd-form-label--required';
     questionMarkSpan = 'span[role="alert"]';
     inputsLabels = '.fd-container label span.ng-star-inserted';
