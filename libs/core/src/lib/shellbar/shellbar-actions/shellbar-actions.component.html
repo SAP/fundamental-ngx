@@ -9,7 +9,10 @@
     ></fd-shellbar-actions-mobile>
 </div>
 
-<ng-content></ng-content>
+<div class="fd-shellbar__action fd-shellbar__action--desktop">
+    <ng-content></ng-content>
+</div>
+
 <ng-content select="fd-shellbar-action"></ng-content>
 <ng-container *ngIf="userItem">
     <ng-container *ngIf="!userComponent">

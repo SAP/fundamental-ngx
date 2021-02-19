@@ -1,15 +1,16 @@
-export default {
-    labelsArray: [
+
+export const labelsArray= [
         'Default Input Field',
         'Text Input Field',
         'Number Input Field',
         'Compact Input Field',
         'ReadOnly Input Field',
         'Disabled Input Field',
-        'Inline Help Input Field'
+        'Inline Help Input Field',
+        'Password Input Field'
     ],
-    favoriteColor: 'My',
-    placeholdersArray: [
+export const favoriteColor= 'My',
+export const placeholdersArray= [
         'Field placeholder text',
         'Field placeholder text',
         'Field placeholder text',
@@ -17,9 +18,10 @@ export default {
         'Field placeholder text',
         'Field placeholder text',
         'Field placeholder text',
-        'Field placeholder text',
+		'Field placeholder text',
+		'Field placeholder text',
         'Enter the sport name'
     ],
-    errorText: 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc',
-    errorBorderColor: '187,0,0'
-};
+export const errorText= 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc',
+export const errorBorderColor= '187,0,0'
+

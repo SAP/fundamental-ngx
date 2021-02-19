@@ -11,8 +11,9 @@ export class InputPo extends BaseComponentPo {
     compactInput = '#input4';
     readonlyInput = '#input5';
     disabledInput = '#input6';
+    passwordInput = '#input8';
     // TODO: same Id create accessibility issue
-    inlineHelpInput = '#input6';
+    inlineHelpInput = '#input7';
     messagesComponentsInput = '#input9';
     submitBtn = 'button[type="submit"]';
     errorText = 'fd-form-message span';
@@ -20,7 +21,7 @@ export class InputPo extends BaseComponentPo {
     questionMarkSpan = 'span[role="alert"]';
     inputsLabels = '.fd-container label span.ng-star-inserted';
     inputsArray = 'input.fd-input';
-    autocompleteInput = 'input#form-input-7';
+    autocompleteInput = 'input#form-input-10';
     autocompleteInputLabel = 'fdp-platform-input-auto-complete-validation-example label';
     autocompleteOptions = '.fd-popover__popper li';
 

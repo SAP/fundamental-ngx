@@ -1,5 +1,7 @@
 import { MenuPo } from '../pages/menu.po';
-import MenuData from '../fixtures/appData/menu-contents';
+import {menuAvatarFocusAttr, bgColorAttribute, borderColorAttribute, menuAvatarFocusColor, menuBtnActiveColor, menuBtnBorderColor,
+menuBtnFocusStyle, menuBtnHoverColor, menuItemFocusStyle, menuItemFocusStyleAttr,
+menuItemHoverColor, subMenuHoverColor} from '../fixtures/appData/menu-contents';
 import {
     browserIsFirefox,
     browserIsIEorSafari,
@@ -40,18 +42,18 @@ describe('Menu component test suite', function() {
         const basicMenuBtnArrLength = getElementArrayLength(menuPage.menuBtnArr);
 
         for (let i = 0; basicMenuBtnArrLength > i; i++) {
-            expect(getCSSPropertyByName(menuPage.menuBtnArr, MenuData.borderColorAttribute, i).value)
-                .toContain(MenuData.menuBtnBorderColor);
+            expect(getCSSPropertyByName(menuPage.menuBtnArr, borderColorAttribute, i).value)
+                .toContain(menuBtnBorderColor);
             scrollIntoView(menuPage.menuBtnArr, i);
             mouseHoverElement(menuPage.menuBtnArr, i);
-            expect(getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
-                .toContain(MenuData.menuBtnHoverColor);
+            expect(getCSSPropertyByName(menuPage.menuBtnArr, bgColorAttribute, i).value)
+                .toContain(menuBtnHoverColor);
         }
         focusElement(menuPage.firstMenuBtn);
         sendKeys('Tab');
 
         const menuBtnBorderStyle = executeScriptAfterTagFF(menuPage.secondMenuBtn);
-        expect(menuBtnBorderStyle).toContain(MenuData.menuBtnFocusStyle);
+        expect(menuBtnBorderStyle).toContain(menuBtnFocusStyle);
     });
     // Real issue for FF
     xit('should check avatar menu btn styles', () => {
@@ -61,8 +63,8 @@ describe('Menu component test suite', function() {
         }
         doubleClick(menuPage.menuAvatarBtn);
 
-        expect(getCSSPropertyByName(menuPage.menuAvatarBtn, MenuData.menuAvatarFocusAttr).value)
-            .toContain(MenuData.menuAvatarFocusColor);
+        expect(getCSSPropertyByName(menuPage.menuAvatarBtn, menuAvatarFocusAttr).value)
+            .toContain(menuAvatarFocusColor);
         expect(getAttributeByName(menuPage.menuAvatarBtn, 'image')).not.toBe(null);
         // checks horizontal example.
         doubleClick(menuPage.menuHorizontalAvatarBtn);
@@ -89,8 +91,8 @@ describe('Menu component test suite', function() {
         // for (let i = 0; arrLength > i; i++) {
         //     mouseHoverElement(menuPage.menuBtnArr, i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(menuPage.menuBtnArr, MenuData.bgColorAttribute, i).value)
-        //         .toContain(MenuData.menuBtnActiveColor);
+        //     expect(getCSSPropertyByName(menuPage.menuBtnArr, bgColorAttribute, i).value)
+        //         .toContain(menuBtnActiveColor);
         //     mouseButtonUp();
         // }
     });
@@ -102,14 +104,14 @@ describe('Menu component test suite', function() {
             return;
         }
         click(menuPage.menuBtnArr);
-        checkMenuItemsHoverState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+        checkMenuItemsHoverState(menuPage.menuItemArr, bgColorAttribute, menuItemHoverColor);
         checkMenuItemText(menuPage.menuItemTextArr);
     });
 
     xit('should check menu items active state', () => {
         click(menuPage.menuBtnArr);
         waitForElDisplayed(menuPage.menuItemArr);
-        checkMenuItemsActiveState(menuPage.menuItemArr, MenuData.bgColorAttribute, MenuData.menuBtnActiveColor);
+        checkMenuItemsActiveState(menuPage.menuItemArr, bgColorAttribute, menuBtnActiveColor);
     });
 
     it('should check menu item focus', () => {
@@ -118,7 +120,7 @@ describe('Menu component test suite', function() {
             return;
         }
         click(menuPage.menuBtnArr);
-        checkMenuItemFocus(menuPage.menuItemArr, MenuData.menuItemFocusStyleAttr, MenuData.menuItemFocusStyle);
+        checkMenuItemFocus(menuPage.menuItemArr, menuItemFocusStyleAttr, menuItemFocusStyle);
     });
 
     it('should check cascading menu', () => {
@@ -128,12 +130,12 @@ describe('Menu component test suite', function() {
         }
         click(menuPage.cascadingMenuBtn);
         waitForElDisplayed(menuPage.cascadingMenuItemsArr);
-        checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
+        checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, bgColorAttribute, subMenuHoverColor);
         check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-            MenuData.bgColorAttribute, MenuData.subMenuHoverColor);
+            bgColorAttribute, subMenuHoverColor);
         doubleClick(menuPage.cascadingMenuBtn);
         check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-            menuPage.cascadingLettuceItemsArr, MenuData.bgColorAttribute, MenuData.menuItemHoverColor);
+            menuPage.cascadingLettuceItemsArr, bgColorAttribute, menuItemHoverColor);
         return;
     });
 

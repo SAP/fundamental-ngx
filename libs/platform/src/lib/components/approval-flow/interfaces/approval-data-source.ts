@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { ApprovalProcess } from './approval-process';
 import { ApprovalNode } from './approval-node';
 import { ApprovalUser } from './approval-user';
+import { ApprovalTeam } from './approval-team';
 
 export interface ApprovalDataSource {
 
@@ -14,6 +15,21 @@ export interface ApprovalDataSource {
      * Fetch of user data.
      */
     fetchUser(id: string): Observable<any>;
+
+    /**
+     * Fetch users list to be used in "edit approvers" flow.
+     */
+    fetchApprovers(): Observable<ApprovalUser[]>;
+
+    /**
+     * Fetch users list to be used in "edit watchers" flow.
+     */
+    fetchWatchers(): Observable<ApprovalUser[]>;
+
+    /**
+     * Fetch teams list to be used in "add node" flow.
+     */
+    fetchTeams(): Observable<ApprovalTeam[]>;
 
     /**
      * Update watcher list. Called whenever there is a change
