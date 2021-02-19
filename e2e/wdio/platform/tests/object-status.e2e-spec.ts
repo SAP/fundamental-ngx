@@ -4,8 +4,8 @@ import {
     click,
     getCSSPropertyByName,
     getElementArrayLength,
-    getText,
-    scrollIntoView
+    getText, refreshPage,
+    scrollIntoView, waitForPresent
 } from '../../driver/wdio';
 import {
     backgroundColorAttribute,
@@ -113,6 +113,21 @@ describe('object status test suite', function() {
     describe('object status large design example', function() {
         it('should check large status', () => {
             checkAttributeValueTrue(largeExamples + status, largeStatusAttribute);
+        });
+    });
+
+    describe('orientation check', function() {
+        it('should check RTL/LTR', () => {
+            objectStatusPage.checkRtlSwitch();
+        })
+    });
+
+    describe('visual regression', function() {
+        it('should check examples visual regression', () => {
+            refreshPage();
+            waitForPresent(defaultExamples + status);
+            objectStatusPage.saveExampleBaselineScreenshot('platform-object-status');
+            expect(objectStatusPage.compareWithBaseline('platform-object-status')).toBeLessThan(1);
         });
     });
 });
