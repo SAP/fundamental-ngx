@@ -77,6 +77,11 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @HostBinding('class.fd-list__item--action')
     action = false;
 
+    /** Whether list item contains busy indicator */
+    @Input()
+    @HostBinding('class.fd-list__item--growing')
+    growing = false;
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
