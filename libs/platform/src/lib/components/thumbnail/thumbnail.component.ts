@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component,
+     OnInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef,     ChangeDetectionStrategy } from '@angular/core';
 import { DialogService, RtlService } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';

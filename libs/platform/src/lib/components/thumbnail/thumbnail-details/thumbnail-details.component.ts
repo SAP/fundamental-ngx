@@ -3,13 +3,12 @@ import { Component,
          ChangeDetectorRef,
          HostListener,
          AfterContentInit,
-         ElementRef,
-         ViewChild,
-         ChangeDetectionStrategy
+         ViewChild
          } from '@angular/core';
 import { Media } from '../../thumbnail/thumbnail.component'
 import { DialogRef } from '@fundamental-ngx/core';
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
+
 
 interface DialogRefData {
     selectedMedia: Media;
@@ -38,21 +37,30 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
     /** @hidden Make right navigation button disabled */
     rightButtonDisabled = false;
 
+    /** selected media value */
+    selectedMedia = this.dialogRef.data.selectedMedia;
+
+    /** medialist to display */
+    mediaList = this.dialogRef.data.mediaList;
+    /** max limit  */
+    maxImages = this.dialogRef.data.maxImages;
+
+
     /** @hidden */
-    constructor(private readonly _elementRef: ElementRef, public dialogRef: DialogRef,
+    constructor(public dialogRef: DialogRef,
         private _cdr: ChangeDetectorRef
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this.dialogRef.data.selectedMedia.selected = true;
-        this.currentActiveSlidesStartIndex = this.dialogRef.data.mediaList.indexOf(this.dialogRef.data.selectedMedia);
+        this.selectedMedia.selected = true;
+        this.currentActiveSlidesStartIndex = this.mediaList.indexOf(this.selectedMedia);
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.currentActiveSlidesStartIndex = this.dialogRef.data.mediaList.indexOf(this.dialogRef.data.selectedMedia);
-        if (this.dialogRef.data.mediaList.length > 0) {
+        this.currentActiveSlidesStartIndex = this.mediaList.indexOf(this.selectedMedia);
+        if (this.mediaList.length > 0) {
             this._buttonVisibility();
         } else {
             this.leftButtonDisabled = true;
@@ -65,40 +73,37 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
     previous(): void {
         if (this.currentActiveSlidesStartIndex <= 0) {
             return;
-        } else {
-            this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex - 1;
-            this.dialogRef.data.selectedMedia = this.dialogRef.data.mediaList[this.currentActiveSlidesStartIndex];
-            this.dialogRef.data.mediaList.forEach(item => item.selected = false);
-            this.dialogRef.data.mediaList[this.currentActiveSlidesStartIndex].selected = true;
         }
-        this._buttonVisibility();
+            this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex - 1;
+            this.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
+            this.mediaList.forEach(item => item.selected = false);
+            this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
+            this._buttonVisibility();
     }
 
     /** Transitions to the next image in the thumbnail. */
     next(): void {
         if (this.currentActiveSlidesStartIndex >= this.dialogRef.data.mediaList.length - 1) {
             return;
-        } else {
-            this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + 1;
-            this.dialogRef.data.selectedMedia = this.dialogRef.data.mediaList[this.currentActiveSlidesStartIndex];
-            this.dialogRef.data.mediaList.forEach(item => item.selected = false);
-            this.dialogRef.data.mediaList[this.currentActiveSlidesStartIndex].selected = true;
         }
-        this._buttonVisibility();
-
+            this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + 1;
+            this.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
+            this.mediaList.forEach(item => item.selected = false);
+            this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
+            this._buttonVisibility();
     }
 
     /** handles click on thumbnail images  */
-    thumbnailClickHandle(selectedMedia: Media): void {
-        this.dialogRef.data.selectedMedia = selectedMedia;
-        this.currentActiveSlidesStartIndex = this.dialogRef.data.mediaList.indexOf(this.dialogRef.data.selectedMedia);
+    thumbnailClickHandle(selectedmedia: Media): void {
+        this.selectedMedia = selectedmedia;
+        this.currentActiveSlidesStartIndex = this.mediaList.indexOf(this.selectedMedia);
         this._buttonVisibility();
     }
 
     /**Close dialog */
     closeDialog(): void {
-        if (this.dialogRef.data.mediaList.length > this.dialogRef.data.maxImages) {
-            this.dialogRef.data.mediaList[this.dialogRef.data.maxImages - 1].overlayRequired = true;
+        if (this.mediaList.length > this.maxImages) {
+            this.dialogRef.data.mediaList[this.maxImages - 1].overlayRequired = true;
         }
         this.dialogRef.close();
     }
@@ -125,21 +130,31 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
     /** @hidden Handles navigation button visibility */
     private _buttonVisibility(): void {
 
-        if (this.currentActiveSlidesStartIndex === 0) {
-            this.leftButtonDisabled = true;
-            this.rightButtonDisabled = false;
-        } else if (this.currentActiveSlidesStartIndex === this.dialogRef.data.mediaList.length - 1) {
-            this.rightButtonDisabled = true;
-            this.leftButtonDisabled = false;
+        if (this.currentActiveSlidesStartIndex === 0 ) {
+            if (this.dialogRef.data.rtl) {
+                this.leftButtonDisabled = false;
+                this.rightButtonDisabled = true;
+            } else {
+                this.leftButtonDisabled = true;
+                this.rightButtonDisabled = false;
+            }
+
+        } else if (this.currentActiveSlidesStartIndex === this.mediaList.length - 1) {
+            if (this.dialogRef.data.rtl) {
+                this.leftButtonDisabled = true;
+                this.rightButtonDisabled = false;
+            } else {
+                this.leftButtonDisabled = false;
+                this.rightButtonDisabled = true;
+            }
         } else {
             this.leftButtonDisabled = false;
             this.rightButtonDisabled = false;
         }
-        if (this.dialogRef.data.mediaList.length === 1) {
+        if (this.mediaList.length === 1) {
             this.leftButtonDisabled = true;
             this.rightButtonDisabled = true;
         }
     }
-
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation, OnChanges, SimpleChanges, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DialogService, RtlService } from '@fundamental-ngx/core';
 import { Media } from '../thumbnail.component';
 import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
@@ -6,7 +6,6 @@ import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-detail
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',
     styleUrls: ['./thumbnail-image.component.scss']
-
 })
 export class ThumbnailImageComponent implements OnChanges, OnInit {
 
@@ -31,9 +30,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.mediaList.length > this.maxImages) {
-            this.mediaList[this.maxImages - 1].overlayRequired = true;
-        }
+       this._setOverlay();
     }
 
     /** @hidden */
@@ -43,9 +40,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
             if (!alreadySelected) {
                 this.mediaList[0].selected = true;
             }
-            if (this.mediaList.length > this.maxImages) {
-                this.mediaList[this.maxImages - 1].overlayRequired = true;
-            }
+            this._setOverlay();
         }
     }
 
@@ -78,5 +73,10 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         return this._rtlService?.rtl.getValue();
     }
 
+    private _setOverlay(): void {
+        if (this.mediaList.length > this.maxImages) {
+            this.mediaList[this.maxImages - 1].overlayRequired = true;
+        }
+    }
 
 }
