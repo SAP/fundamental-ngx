@@ -15,6 +15,7 @@ export class FixedCardLayoutItemComponent implements FocusableOption {
 
     constructor(private _elementRef: ElementRef) {}
 
+    /** Set focus on the element. */
     focus(): void {
         this._elementRef.nativeElement.focus();
     }

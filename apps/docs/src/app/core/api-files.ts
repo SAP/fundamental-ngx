@@ -75,7 +75,7 @@ export const API_FILES = {
         'FileUploaderDragndropDirective',
         'FileUploaderService'
     ],
-    fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective'],
+    fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective', 'FixedCardLayoutItemComponent'],
     flexibleColumnLayout: ['FlexibleColumnLayoutComponent'],
     form: [
         'FormControlComponent',
