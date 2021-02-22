@@ -384,7 +384,9 @@ export class MultiInputComponent implements
 
         this._resetSearchTerm();
 
-        this.popoverRef.close();
+        if (this.popoverRef) {
+            this.popoverRef.close();
+        }
 
         this.searchInputElement.nativeElement.focus();
 
