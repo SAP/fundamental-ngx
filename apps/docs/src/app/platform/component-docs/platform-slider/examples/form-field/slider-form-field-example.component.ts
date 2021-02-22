@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
     styles: [
         `
             .slider-example .fd-container.fd-form-layout-grid-container .fd-row .fd-col {
-                overflow: initial !important;
+                overflow: visible;
             }
         `
     ]
