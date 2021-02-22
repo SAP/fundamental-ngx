@@ -19,13 +19,19 @@ export abstract class QueryAdapter<T> {
     abstract parsePredicate(predicate?: Predicate<T>): string;
     abstract parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string
     abstract parseSelect(select?: string[]): string;
-    abstract parseExtend(select?: string[]): string;
+    abstract parseExpand(select?: string[]): string;
     abstract createQueryString(params?: QueryParams): string;
 }
 
 @Injectable()
 export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
 
+    /**
+     * Parses a Predicate object and forms the query value for the "$filter"
+     * property.
+     *
+     * @param predicate Predicate tree object.
+     */
     parsePredicate(predicate?: Predicate<T>): string {
         if (predicate instanceof EqPredicate) {
             return predicate.property + ' eq ' + this._prepareValue(predicate.value);
@@ -72,11 +78,11 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return selects.join(',');
     }
 
-    parseExtend(extend?: string[]): string {
-        if (!Array.isArray(extend)) {
+    parseExpand(expands?: string[]): string {
+        if (!Array.isArray(expands)) {
             return '';
         }
-        return extend.join(',');
+        return expands.join(',');
     }
 
     createQueryString(params: QueryParams): string {
@@ -89,8 +95,8 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
                     parts.push('$search=' + params[key]);
                 } else if (key === 'select') {
                     parts.push('$select=' + params[key]);
-                } else if (key === 'extend') {
-                    parts.push('$extend=' + params[key]);
+                } else if (key === 'expand') {
+                    parts.push('$expand=' + params[key]);
                 } else if (key === 'pageSize') {
                     parts.push('$skip=' + params[key]);
                 } else if (key === 'offset') {
@@ -107,6 +113,7 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return parts.join('&');
     }
 
+    /** @hidden */
     _prepareOrderBy(orderBy: OrderBy<T, keyof T>): string {
         if (!orderBy || !orderBy.field) {
             return '';
@@ -118,6 +125,7 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return field + ((orderBy.order === 'DESCENDING') ? ':desc' : ':asc');
     }
 
+    /** @hidden */
     _prepareValue(value: string | number): string {
         if (typeof value === 'number') {
             return value.toString();

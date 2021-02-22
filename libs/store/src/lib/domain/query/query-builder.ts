@@ -10,7 +10,7 @@ import {
 import {
     Predicate
 } from './grammer/predicate';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { QueryAdapter } from './query-adapter';
 
 
@@ -28,15 +28,15 @@ import { QueryAdapter } from './query-adapter';
 // }
 
 
-export class QueryBuilder <TModel> {
+export class QueryBuilder<TModel> {
 
     /**
-     * Predicate which defines filter criteria.
+     * @hidden - predicate which defines filter criteria.
      */
     _predicate: Predicate<TModel>;
 
     /**
-     * Keyword for search.
+     * @hidden - keyword for search.
      */
     _keyword: string;
 
@@ -46,8 +46,8 @@ export class QueryBuilder <TModel> {
         private adapter: QueryAdapter<TModel>
     ) { }
 
-    byId(id: string): QueryBuilder<TModel> {
-        return this;
+    byId(id: string): Observable<TModel> {
+        return this.service.getByKey(id);
     }
 
     /**
@@ -55,7 +55,7 @@ export class QueryBuilder <TModel> {
      * @param predicate Predicate which defines filter
      */
     where < TP extends keyof TModel,
-    TPT extends TModel[TP] > (predicate: Predicate <TModel> ): QueryBuilder <TModel> {
+    TPT extends TModel[TP] > (predicate: Predicate<TModel> ): QueryBuilder<TModel> {
         this._predicate = predicate;
         return this;
     }
@@ -69,15 +69,16 @@ export class QueryBuilder <TModel> {
         return this;
     }
 
-
+    /*
     newSubQuery <TSubModel> (withId: string, resultType: Type < TSubModel > ): QueryBuilder < TModel > {
         return this;
     }
+    */
 
     /**
      * Create new Query object
      */
-    newQuery(): Query < TModel > {
+    build(): Query<TModel> {
         const query = new Query<TModel>(this.resultType, this.service, this.adapter);
         query._predicate = this._predicate;
         query._keyword = this._keyword;

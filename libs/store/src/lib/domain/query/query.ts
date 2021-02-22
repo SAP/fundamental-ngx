@@ -18,7 +18,9 @@ export interface OrderBy <TModel, TProperty extends keyof TModel> {
     order?: 'ASCENDING' | 'DESCENDING';
 }
 
-
+/**
+ * @todo We may need a method for end-users to add custom query parameters.
+ */
 export class Query<TModel> {
 
     /** @hidden - stores current keyword */
@@ -42,8 +44,8 @@ export class Query<TModel> {
     /** @hidden - stores current selection of properties */
     _select: string[];
 
-    /** @hidden - stores current extend properties */
-    _extend: string[];
+    /** @hidden - stores current expand properties */
+    _expand: string[];
 
     constructor(
         private resultType: Type<TModel>,
@@ -73,7 +75,7 @@ export class Query<TModel> {
      * Set order by rules for query.
      * @param orderBys Set of OrderBy objects.
      */
-    orderBy<TProperty extends keyof TModel> (...orderBys: Array < OrderBy < TModel, TProperty >> ): Query < TModel > {
+    orderBy<TProperty extends keyof TModel> (...orderBys: Array<OrderBy<TModel, TProperty>> ): Query < TModel > {
         this._orderByFields = orderBys;
         return this;
     }
@@ -108,29 +110,29 @@ export class Query<TModel> {
     }
 
     /**
-     * Set list of select parameters.
+     * Set list of select parameters. Select parameters are used to limit
+     * the enitity properties included in the return data.
      * @param select List of properties to include in response data
      */
-    select<TP extends keyof TModel> (...select: Array <TP> ): Query <TModel> {
+    select<TP extends keyof TModel> (...select: Array<TP> ): Query<TModel> {
         this._select = select as string[];
         return this;
     }
 
     /**
-     * Set list of extend parameters.
-     * @param extend List of extended properties to include in response data
+     * Set list of expand parameters. Expand parameters are used to ask the server
+     * to include relational data.
+     * @param extend List of expanded properties to include in response data
      */
-    extend<TP extends keyof TModel> (...extend: Array <TP> ): Query <TModel> {
-        this._extend = extend as string[];
+    expand<TP extends keyof TModel> (...expand: Array<TP> ): Query<TModel> {
+        this._expand = expand as string[];
         return this;
     }
-
-    // customQueryPArams()
 
     /**
      * Initiate query and return observable
      */
-    find(): Observable < TModel | Array < TModel >> {
+    fetch(): Observable<TModel | Array<TModel>> {
         const params = this._createQueryParams();
         const query = this.adapter.createQueryString(params);
         return this.service.getWithQuery(query);
@@ -151,7 +153,7 @@ export class Query<TModel> {
      */
     previous(): void {
         this._offset = (this._offset > this._pageSize) ? this._offset - this._pageSize : 0;
-        this.find();
+        this.fetch();
     }
 
     /**
@@ -159,7 +161,7 @@ export class Query<TModel> {
      */
     next(): void {
         this._offset = this._offset + this._pageSize;
-        this.find();
+        this.fetch();
     }
 
     /**
@@ -186,7 +188,7 @@ export class Query<TModel> {
                 pageSize: this._pageSize.toString()
             };
         }
-        if (this._offset !== undefined) {
+        if (this._pageSize && this._offset !== undefined) {
             params = {
                 ...params,
                 offset: this._offset.toString()
@@ -210,10 +212,10 @@ export class Query<TModel> {
                 select: this.adapter.parseSelect(this._select)
             };
         }
-        if (this._extend) {
+        if (this._expand) {
             params = {
                 ...params,
-                extend: this.adapter.parseExtend(this._extend)
+                expand: this.adapter.parseExpand(this._expand)
             };
         }
         return params;

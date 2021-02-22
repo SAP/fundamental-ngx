@@ -174,14 +174,14 @@ describe('DefaultQueryAdapter: Select Parsing', () => {
 
 });
 
-describe('DefaultQueryAdapter: Extend Parsing', () => {
+describe('DefaultQueryAdapter: Expand Parsing', () => {
 
     it('should return an empty string if no arguments are passed', () => {
-        expect(adapter.parseExtend()).toBe('')
+        expect(adapter.parseExpand()).toBe('')
     });
 
-    it('should be able to process select parameters', () => {
-        expect(adapter.parseExtend(['name', 'age', 'color'])).toBe('name,age,color');
+    it('should be able to process expand parameters', () => {
+        expect(adapter.parseExpand(['name', 'age', 'color'])).toBe('name,age,color');
     });
 
 });
@@ -257,11 +257,11 @@ describe('DefaultQueryAdapter: Query string generation', () => {
         expect(adapter.createQueryString(params)).toBe('$select=name,price');
     });
 
-    it('should be able to handle the "extend" query parameter', () => {
+    it('should be able to handle the "expand" query parameter', () => {
         const params: QueryParams = {
-            extend: 'supplier,distributor'
+            expand: 'supplier,distributor'
         };
-        expect(adapter.createQueryString(params)).toBe('$extend=supplier,distributor');
+        expect(adapter.createQueryString(params)).toBe('$expand=supplier,distributor');
     });
 
     it('should be able to process query parameters with any properties', () => {
