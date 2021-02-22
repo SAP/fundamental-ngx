@@ -1,19 +1,12 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable, Optional } from '@angular/core';
-import {
-    DefaultDataServiceConfig,
-    EntityCollectionDataService,
-    QueryParams,
-    DataServiceError
-} from '@ngrx/data';
-import { Update } from '@ngrx/entity';
 import { Observable, of, throwError } from 'rxjs';
 import { timeout, delay, catchError, map } from 'rxjs/operators';
+import { Update } from '@ngrx/entity';
+import { DefaultDataServiceConfig, EntityCollectionDataService, QueryParams, DataServiceError } from '@ngrx/data';
 
-import { EntityOperation } from '../../../../domain/rest-resource';
-import { EntityMetaOptions } from '../../../../domain/entity';
-import { EntityPath, EntityResourceMetaOptions } from '../../../../domain/public_api';
-import { EntityMetaOptionsService } from '../../entity-options.service';
+import { EntityPath, EntityOperation } from '../../../../domain/public_api';
+import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../../entity-options.service';
 
 import { HttpUrlGenerator } from './http-url-generator';
 
@@ -237,7 +230,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         const pathOperation = pathOptions[operation];
         if (Array.isArray(pathOperation)) {
             return pathOperation[0];
-        } 
+        }
     }
 }
 
@@ -246,26 +239,26 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
  */
 @Injectable()
 export class EntityStoreServerServiceFactory {
-  constructor(
-    protected http: HttpClient,
-    protected httpUrlGenerator: HttpUrlGenerator,
-    protected entityMetaOptionsService: EntityMetaOptionsService,
-    @Optional() protected config?: DefaultDataServiceConfig
-  ) {
-    config = config || {};
-  }
+    constructor(
+        protected http: HttpClient,
+        protected httpUrlGenerator: HttpUrlGenerator,
+        protected entityMetaOptionsService: EntityMetaOptionsService,
+        @Optional() protected config?: DefaultDataServiceConfig
+    ) {
+        config = config || {};
+    }
 
-  /**
-   * Create a default {EntityCollectionDataService} for the given entity type
-   * @param entityName {string} Name of the entity type for this data service
-   */
-  create<T>(entityName: string): EntityCollectionDataService<T> {
-    return new EntityStoreServerService<T>(
-      entityName,
-      this.http,
-      this.httpUrlGenerator,
-      this.entityMetaOptionsService,
-      this.config
-    );
-  }
+    /**
+     * Create a default {EntityCollectionDataService} for the given entity type
+     * @param entityName {string} Name of the entity type for this data service
+     */
+    create<T>(entityName: string): EntityCollectionDataService<T> {
+        return new EntityStoreServerService<T>(
+            entityName,
+            this.http,
+            this.httpUrlGenerator,
+            this.entityMetaOptionsService,
+            this.config
+        );
+    }
 }

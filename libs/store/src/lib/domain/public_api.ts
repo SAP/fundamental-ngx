@@ -1,5 +1,5 @@
 export { IdentityKey, EntityMetaOptions } from './entity';
-export { EntityComplexPath, EntityResourceMetaOptions, EntityPath, HttpMethod } from './rest-resource';
+export { EntityComplexPath, EntityResourceMetaOptions, EntityPath, HttpMethod, EntityOperation } from './rest-resource';
 export { FetchPolicy, FetchPolicyStrategy } from './fetch-policy';
 export { CachePolicy, CachePolicyStrategy } from './cache-policy';
 export { Entity, RESTResource } from './decorators';

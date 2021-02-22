@@ -26,6 +26,11 @@ class MockPluralizer extends Pluralizer {
     }
 }
 
+class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
+    getEntityMetadata = () => null;
+    getEntityResourceMetadata = () => null;
+}
+
 describe('EntityStoreServerServiceFactory', () => {
     let http: any;
     let httpUrlGenerator: HttpUrlGenerator;
@@ -33,7 +38,8 @@ describe('EntityStoreServerServiceFactory', () => {
 
     beforeEach(() => {
         httpUrlGenerator = new DefaultHttpUrlGenerator(new MockPluralizer());
-        entityMetaOptionsService = new EntityMetaOptionsService();
+
+        entityMetaOptionsService = new EmptyEntityMetaOptionsService();
 
         spyOn(entityMetaOptionsService, 'getEntityResourceMetadata').and.callFake(
             (entityName: any): EntityResourceMetaOptions => {
@@ -44,7 +50,6 @@ describe('EntityStoreServerServiceFactory', () => {
                 };
             }
         );
-
         spyOn(entityMetaOptionsService, 'getEntityMetadata').and.callFake(
             (entityName: any): EntityMetaOptions => {
                 return { name: 'Hero' };
@@ -111,15 +116,18 @@ describe('EntityStoreServerService', () => {
 
         httpUrlGenerator = new DefaultHttpUrlGenerator(new MockPluralizer());
 
-        entityMetaOptionsService = new EntityMetaOptionsService();
-
         heroResourceMetaOptions = {
             root: 'api',
+            // we need to keep this object for right reference
+            // so we can override path options during testing
             path: {}
         };
         heroEntityMetaOptions = {
             name: 'Hero'
         };
+
+        entityMetaOptionsService = new EmptyEntityMetaOptionsService();
+
         spyOn(entityMetaOptionsService, 'getEntityResourceMetadata').and.callFake(
             (entityName: any): EntityResourceMetaOptions => {
                 return heroResourceMetaOptions;
@@ -277,6 +285,19 @@ describe('EntityStoreServerService', () => {
             req.flush(expectedHero);
         });
 
+        it('should use method and url from ResourceMetaOptions', () => {
+            (<EntityOperationComplexPath>heroResourceMetaOptions.path).getById = ['POST', 'get-hero-by-id'];
+
+            service.getById(1).subscribe();
+
+            // HeroService should have made one request to GET heroes from expected URL
+            const req = httpTestingController.expectOne('api/get-hero-by-id/1');
+            expect(req.request.method).toEqual('POST');
+
+            // Respond with the mock heroes
+            req.flush(null);
+        });
+
         it('should turn 404 when id not found', () => {
             service.getById(1).subscribe(
                 (heroes) => fail('getById succeeded when expected it to fail with a 404'),
@@ -297,19 +318,6 @@ describe('EntityStoreServerService', () => {
                     expect(err.error).toMatch(/No "Hero" key/);
                 }
             );
-        });
-
-        it('should use method and url from ResourceMetaOptions', () => {
-            (<EntityOperationComplexPath>heroResourceMetaOptions.path).getById = ['POST', 'get-hero-by-id'];
-
-            service.getById(1).subscribe();
-
-            // HeroService should have made one request to GET heroes from expected URL
-            const req = httpTestingController.expectOne('api/get-hero-by-id/1');
-            expect(req.request.method).toEqual('POST');
-
-            // Respond with the mock heroes
-            req.flush(null);
         });
     });
 
