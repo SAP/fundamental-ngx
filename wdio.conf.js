@@ -1,8 +1,5 @@
 /*require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
-import { command } from '@wdio/cli/build/commands/config';
-import { FileWriter as travisLogs, FileWriter as travis } from 'istanbul-lib-report';
-
 const {join} = require('path');
 require('ts-node').register({ transpileOnly: true });
 exports.config = {
@@ -339,9 +336,9 @@ exports.config = {
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
 
-        let travisLogs = travis.getOutput();
+        let travisLogs = this.logs();
         if (travisLogs.message.includes('ENOENT') && this.connectionRetryCount < 3) {
-            travis.restart();
+            console.log('!!!!!! TEST TEST TEST TEST !!!!!!');
         }
     },
 

@@ -124,6 +124,7 @@
     "raw-loader": "4.0.2",
     "rxjs": "6.6.3",
     "sauce-connect-launcher": "1.3.2",
+    "travis-cli": "1.0.9",
     "tslib": "2.1.0",
     "wait-on": "5.2.0",
     "web-animations-js": "2.3.2",
