@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.10...v0.28.0-rc.11) (2021-02-22)
+
+
+### Bug Fixes
+
+* (platform) fix combobox list compact ([54bb9c2](https://github.com/SAP/fundamental-ngx/commit/54bb9c28b4d8421af29172f7eedebe66d9596def))
+
 ## [0.28.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.9...v0.28.0-rc.10) (2021-02-22)
 
 
