@@ -13,7 +13,8 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { ControlValue, CustomValue } from '@fundamental-ngx/core';
+import { SliderControlValue, SliderCustomValue } from '@fundamental-ngx/core';
+export { SliderControlValue, SliderCustomValue } from '@fundamental-ngx/core';
 
 import { BaseInput } from '../form/base.input';
 import { ContentDensity, FormField, FormFieldControl } from '../form/public_api';
@@ -76,7 +77,7 @@ export class SliderComponent extends BaseInput {
 
     /** Array of custom values to use for Slider. */
     @Input()
-    customValues: CustomValue[] = [];
+    customValues: SliderCustomValue[] = [];
 
     /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
     @Input()
@@ -105,8 +106,8 @@ export class SliderComponent extends BaseInput {
      * *$event* can be used to retrieve the new state of the slider.
      */
     @Output()
-    readonly sliderChange: EventEmitter<SliderChangeEvent<ControlValue>> = new EventEmitter<
-        SliderChangeEvent<ControlValue>
+    readonly sliderChange: EventEmitter<SliderChangeEvent<SliderControlValue>> = new EventEmitter<
+        SliderChangeEvent<SliderControlValue>
     >();
 
     constructor(
@@ -120,7 +121,7 @@ export class SliderComponent extends BaseInput {
     }
 
     /** @hidden */
-    _onModelChange(modelValue: ControlValue): void {
+    _onModelChange(modelValue: SliderControlValue): void {
         this._emitChangeEvent(modelValue);
         this.onTouched();
         this.stateChanges.next('Slider: onValueChange');
@@ -129,8 +130,8 @@ export class SliderComponent extends BaseInput {
     /** @hidden
      * Method to emit change event
      */
-    private _emitChangeEvent(modelValue: ControlValue): void {
-        const event = new SliderChangeEvent<ControlValue>();
+    private _emitChangeEvent(modelValue: SliderControlValue): void {
+        const event = new SliderChangeEvent<SliderControlValue>();
         event.source = this;
         event.payload = modelValue;
 

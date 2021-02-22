@@ -14,12 +14,12 @@ export class SliderBasicExampleComponent {
     value4 = 0;
 
     onSliderChange1(event: SliderChangeEvent<number>): void {
-        console.log('Basic exapmle 1: ', event);
+        console.log('Basic example 1: ', event);
         this.value1 = event.payload;
     }
 
     onSliderChange2(event: SliderChangeEvent<number>): void {
-        console.log('Basic exapmle 2: ', event);
+        console.log('Basic example 2: ', event);
         this.value2 = event.payload;
     }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { CustomValue } from '@fundamental-ngx/core';
+import { SliderCustomValue } from '@fundamental-ngx/platform';
 @Component({
     selector: 'fdp-slider-custom-values-example',
     templateUrl: './slider-custom-values-example.component.html',
@@ -7,7 +7,7 @@ import { CustomValue } from '@fundamental-ngx/core';
     encapsulation: ViewEncapsulation.None
 })
 export class SliderCustomValuesExampleComponent {
-    customValues: CustomValue[] = [
+    customValues: SliderCustomValue[] = [
         { value: 1609452000000, label: 'Jan 1' },
         { value: 1609538400000, label: 'Jan 2' },
         { value: 1609624800000, label: 'Jan 3' },
