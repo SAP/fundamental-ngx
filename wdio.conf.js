@@ -335,11 +335,6 @@ exports.config = {
 
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
-
-        let travisLogs = this.logs;
-        if (travisLogs.message.includes('ENOENT') && this.connectionRetryCount < 3) {
-            console.log('!!!!!! TEST TEST TEST TEST !!!!!!');
-        }
     },
 
 //     const processedConfig = await browser.getProcessedConfig();
@@ -425,8 +420,37 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+    onComplete: function(exitCode, config, capabilities, results) {
+        require('travis');
+        //
+        // console.log('1 ' + `$TRAVIS_JOB_ID`);
+        // console.log('2 ' + Travis.jobs.env.$TRAVIS_BUILD_ID);
+        // console.log('3 ' + Travis.jobs.env.$TRAVIS_JOB_ID);
+
+        function checkForENOENT() {
+            if (onmessage('ENOENT')) {
+                console.log('results have ENOENT');
+            }
+            if (!onmessage('ENOENT')) {
+                console.log('results are good');
+            }
+        }
+        checkForENOENT();
+
+        // const travisJob = Travis.get(Travis.build.job_id);
+        // console.log(travisJob);
+        // const travisLogs = travisJob.getOutput();
+        // const travisLogs2 = Travis.getLogs();
+
+        // if (travisLogs.message().includes('ENOENT')) {
+        //     console.log('log1 !!!!!! TEST TEST TEST TEST !!!!!!');
+        //     Travis.restart(travisJob);
+        // }
+        // if (travisLogs2.message().includes('ENOENT')) {
+        //     console.log('log2 !!!!!! TEST TEST TEST TEST !!!!!!');
+        //     Travis.restart(travisJob);
+        // }
+    },
     /**
      * Gets executed when a refresh happens.
      * @param {String} oldSessionId session ID of the old session
