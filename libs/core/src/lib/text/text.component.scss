@@ -7,4 +7,11 @@ $block: fd-text;
     &__lineclamp {
         display: block;
     }
+
+    &__link {
+        &--more {
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+    }
 }
