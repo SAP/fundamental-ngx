@@ -10,6 +10,8 @@ export class PaginationPerPageExampleComponent {
     currentPage2 = 1;
     currentPage3 = 1;
 
+    customItemsPerPage = 5;
+
     pageChanged1(event: number): void {
         this.currentPage1 = event;
     }
