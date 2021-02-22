@@ -27,3 +27,22 @@
 		height: auto !important;
 	}
 }
+
+.fd-dynamic-page--xl {
+	.fd-bar--floating-footer {
+		margin: 1rem 3rem;
+	}
+}
+
+.fd-dynamic-page--lg,
+.fd-dynamic-page--md {
+	.fd-bar--floating-footer {
+		margin: 1rem 2rem;
+	}
+}
+
+.fd-dynamic-page--sm {
+	.fd-bar--floating-footer {
+		margin: 1rem 0.5rem;
+	}
+}

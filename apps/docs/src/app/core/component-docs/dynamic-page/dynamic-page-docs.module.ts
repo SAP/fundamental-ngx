@@ -26,7 +26,7 @@ const routes: Routes = [
         component: DynamicPageDocsHeaderComponent,
         children: [
             { path: '', component: DynamicPageDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.actionBar } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.dynamicPage } }
         ]
     }
 ];

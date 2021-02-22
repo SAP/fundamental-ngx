@@ -24,7 +24,7 @@ import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 import { TabListComponent } from '../tabs/tab-list.component';
 import { FlexibleColumnLayoutComponent } from '../flexible-column-layout/flexible-column-layout.component';
 
-import { fromEvent, Subject, Subscription } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -72,7 +72,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
     }
 
     get size(): DynamicPageResponsiveSize {
-       return this._size;
+        return this._size;
     }
 
     _size: DynamicPageResponsiveSize = 'extra-large';
@@ -98,14 +98,6 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden reference to tab component */
     @ContentChild(TabListComponent)
     _tabComponent: TabListComponent;
-
-    /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
-
-    /**
-     * subscription for when collapse value has changed
-     */
-    private _collapseValSubscription: Subscription = new Subscription();
 
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -137,16 +129,16 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         this._setContainerPositions();
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
+        this._listenOnResize();
         if (this._pageSubheaderComponent?.collapsible) {
             this._addScrollListeners();
-            this._listenOnResize();
         }
     }
 
     /**@hidden */
     ngOnDestroy(): void {
-        this._collapseValSubscription.unsubscribe();
-        this._subscriptions.unsubscribe();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** toggle the visibility of the header on click of title area. */
@@ -241,7 +233,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _addScrollListeners(): void {
-        const tabElement = this._tabComponent?.contentContainer?.nativeElement
+        const tabElement = this._tabComponent?.contentContainer?.nativeElement;
         if (tabElement) {
             this._listenOnScroll(tabElement);
         }
@@ -266,14 +258,14 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden Listen for window resize and adjust tab and content positions accordingly */
     private _listenOnResize(): void {
-        this._subscriptions.add(
-            fromEvent(window, 'resize')
-                .pipe(debounceTime(100))
-                .subscribe(_ => {
-                    this._setContainerPositions();
-                    this._sizeChangeHandle();
-                })
-        );
+        fromEvent(window, 'resize')
+            .pipe(
+                debounceTime(100),
+                takeUntil(this._onDestroy$)
+            ).subscribe(_ => {
+                this._setContainerPositions();
+                this._sizeChangeHandle();
+            });
     }
 
     /**
