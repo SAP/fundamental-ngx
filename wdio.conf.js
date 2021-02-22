@@ -336,7 +336,7 @@ exports.config = {
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
 
-        let travisLogs = this.logs();
+        let travisLogs = this.logs;
         if (travisLogs.message.includes('ENOENT') && this.connectionRetryCount < 3) {
             console.log('!!!!!! TEST TEST TEST TEST !!!!!!');
         }
