@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.8...v0.28.0-rc.9) (2021-02-22)
+
+
+### Bug Fixes
+
+* (Platform) Dynamic page non-collapsible background ([#4717](https://github.com/SAP/fundamental-ngx/issues/4717)) ([985b09e](https://github.com/SAP/fundamental-ngx/commit/985b09eee5f1c1b893f1472f7b8ac68f6c34e8ad))
+
 ## [0.28.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.7...v0.28.0-rc.8) (2021-02-22)
 
 ## [0.28.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.6...v0.28.0-rc.7) (2021-02-21)
