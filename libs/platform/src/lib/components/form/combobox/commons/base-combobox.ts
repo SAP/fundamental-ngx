@@ -40,7 +40,8 @@ import {
     ListComponent,
     MobileModeConfig,
     TemplateDirective,
-    FormStates
+    FormStates,
+    closestElement
 } from '@fundamental-ngx/core';
 import {
     ArrayComboBoxDataSource,
@@ -265,8 +266,15 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     private _element: HTMLElement = this.elementRef.nativeElement;
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly _nonOpeningKeys: number[] = [
-        ESCAPE, ENTER, CONTROL, TAB, SHIFT,
-        UP_ARROW, RIGHT_ARROW, DOWN_ARROW, LEFT_ARROW
+        ESCAPE,
+        ENTER,
+        CONTROL,
+        TAB,
+        SHIFT,
+        UP_ARROW,
+        RIGHT_ARROW,
+        DOWN_ARROW,
+        LEFT_ARROW
     ];
 
     /** @hidden */
@@ -359,20 +367,18 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden
      * Close list
      * */
-    close(event: MouseEvent = null, forceClose: boolean = false): void {
-        if (event) {
-            const target = event.target as HTMLInputElement;
-            if (target && target.id === this.id) {
-                return;
-            }
+    close(event: MouseEvent): void {
+        const target = event.target as HTMLInputElement;
+        if (target && target.id === this.id) {
+            return;
         }
 
-        if (this.isOpen && (forceClose || this.canClose)) {
-            this.isOpen = false;
-            this.openChange.next(this.isOpen);
-            this.cd.markForCheck();
-            this.onTouched();
+        if (!!closestElement(`#${this.id}-input-group-container`, event.target)) {
+            event.preventDefault();
+            event.stopPropagation();
         }
+
+        this.showList(false);
     }
 
     /** @hidden */
@@ -425,13 +431,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
 
         this.showList(!isOpen);
-
-        if (!this.mobile) {
-            this.searchInputElement.nativeElement.focus();
-        }
-        if (this.isOpen) {
-            this.listComponent.setItemActive(0);
-        }
     }
 
     /**
@@ -465,9 +464,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             this.showList(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
-            const acceptedKeys = !KeyUtil.isKeyCode(event, BACKSPACE)
-                && !KeyUtil.isKeyType(event, 'alphabetical')
-                && !KeyUtil.isKeyType(event, 'numeric');
+            const acceptedKeys =
+                !KeyUtil.isKeyCode(event, BACKSPACE) &&
+                !KeyUtil.isKeyType(event, 'alphabetical') &&
+                !KeyUtil.isKeyType(event, 'numeric');
             if (this.isEmptyValue && acceptedKeys) {
                 this.listComponent?.setItemActive(0);
             }
@@ -483,14 +483,14 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
-        return (<ComboBoxDataSource<any>>this.dataSource);
+        return <ComboBoxDataSource<any>>this.dataSource;
     }
 
     /** @hidden
      * Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: OptionItem = this._getSelectItemByValue(this.inputText);
-        const index: number = this._suggestions.findIndex(value => value === activeValue);
+        const index: number = this._suggestions.findIndex((value) => value === activeValue);
 
         if (this._suggestions[index + offset]) {
             this.handleOptionItem(this._suggestions[index + offset]);
@@ -499,7 +499,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     private _getSelectItemByValue(displayValue: string): OptionItem {
-        return this._suggestions.find(value => value.label === displayValue);
+        return this._suggestions.find((value) => value.label === displayValue);
     }
 
     /** @hidden */
@@ -533,7 +533,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         this._dsSubscription = initDataSource
             .open()
             .pipe(takeUntil(this._destroyed))
-            .subscribe(data => {
+            .subscribe((data) => {
                 this._suggestions = this._convertToOptionItems(data);
 
                 this.stateChanges.next('initDataSource.open().');
@@ -580,10 +580,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
-        if (!this.autoResize) {
-            return;
-        }
-
         fromEvent(window, 'resize')
             .pipe(takeUntil(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
@@ -592,11 +588,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     private _getOptionsListWidth(): void {
         const body = document.body;
-        const rect = (this._element.querySelector('fd-input-group') as HTMLElement)
-            .getBoundingClientRect();
+        const rect = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
-        this.maxWidth = (window.innerWidth - scrollBarWidth) - rect.left;
+        this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
         this.minWidth = rect.width - 2;
+        this._cd.detectChanges();
     }
 
     /**
@@ -659,7 +655,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             group[keyValue].push(item);
         }
 
-        return Object.keys(group).map(key => {
+        return Object.keys(group).map((key) => {
             const selectItem: OptionItem = {
                 label: key,
                 value: null,
@@ -734,7 +730,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * Assign custom templates
      * */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach(template => {
+        this.customTemplates.forEach((template) => {
             switch (template.getName()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;

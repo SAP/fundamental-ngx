@@ -1,5 +1,5 @@
-<fdp-form-group [noLabelLayout]="false">
-    <fdp-form-field id="group" label="Group with Key" rank="4">
+<fdp-form-group [noLabelLayout]="false" columnLayout="XL2-L2-M1-S1">
+    <fdp-form-field id="group" label="Group with Key" column="1">
         <fdp-combobox
             name="group"
             placeholder="Type some text..."
@@ -12,8 +12,7 @@
         <p>Selected: {{ selectedItem | json }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="group-without-key" label="Group without Key"
-                    rank="4">
+    <fdp-form-field id="group-without-key" label="Group without Key" column="2">
         <fdp-combobox
             name="group-without-key"
             placeholder="Type some text..."
