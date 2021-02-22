@@ -1,4 +1,4 @@
-import { Entity, RESTResource, ENTITY_KEY, REST_RESOURCE_KEY} from '@fundamental-ngx/store';
+import { Entity, RESTResource} from '@fundamental-ngx/store';
 interface EntityComposite {
     getTypes();
 }
@@ -41,6 +41,10 @@ class LineItem {
     reqId: string;
 }
 
+export class Dependency {
+    name: 'Dependency';
+}
+
 // URI with endpoints for different actions
 @RESTResource({
     path: {
@@ -54,40 +58,17 @@ class LineItem {
     domain: 'Requisitioning',
     name: 'Requisition',
 })
-class Requisition extends BaseEntity {
+export class Requisition extends BaseEntity {
     id: string;
-}
 
+    constructor(public dep: Dependency) {
+        super();
+    }
+}
 
 // Set the default URL root for all entities registered
 export const storeConfig = {
     root: 'http://www.example.com/v0/',
     entities: { Requisition, LineItem }
 };
-
-function getEntityMetaData(Entity) {
-    return {
-        entity: Entity[ENTITY_KEY].metadata,
-        resource: Entity[REST_RESOURCE_KEY].metadata
-    }
-}
-
-function entityComposite(Entity) {
-    const metaData = getEntityMetaData(Entity);
-
-    let entityTypes: EntityTypes = {}
-
-    if (metaData.entity.aggregateOf) {
-        const AggregateEntity = storeConfig.entities[metaData.entity.aggregateOf];
-        entityTypes.parent = AggregateEntity;
-        entityTypes.child = Entity;
-    }
-
-    const parent = entityTypes.parent;
-    parent[ENTITY_KEY].metadata;
-    parent[REST_RESOURCE_KEY].metadata;
-
-}
-
-entityComposite(LineItem);
 

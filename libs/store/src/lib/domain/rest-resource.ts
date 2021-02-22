@@ -1,5 +1,5 @@
 /** REST Resource Options */
-export interface RESTResourceMetaOptions {
+export interface EntityResourceMetaOptions {
     // Base URI
     root?: string;
     // Resource Path
@@ -8,15 +8,20 @@ export interface RESTResourceMetaOptions {
 
 export type EntityPath = string | EntityComplexPath;
 
-/** Entity Path Details */
-export interface EntityComplexPath {
-    default: string;
-    add?: string | [HttpMethod, string];
-    delete?: string | [HttpMethod, string];
-    getAll?: string | [HttpMethod, string];
-    getById?: string | [HttpMethod, string];
-    update?: string | [HttpMethod, string];
-    upsert?: string | [HttpMethod, string];
+// All allowed HTTP methods
+export const HTTP_METHODS = ['GET', 'DELETE', 'POST', 'PUT', 'PATCH'] as const;
+export type HttpMethod = typeof HTTP_METHODS[number];
+
+// All allowed operations
+export const ENTITY_OPERATIONS = ['add', 'delete', 'getAll', 'getById', 'update', 'upsert'] as const;
+export type EntityOperation = typeof ENTITY_OPERATIONS[number];
+
+export type EntityOperationComplexPath = {
+    [key in EntityOperation]?: string | [HttpMethod, string];
 }
 
-export type HttpMethod = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
+/** Entity Path Details */
+export type EntityComplexPath = {
+    default?: string;
+} & EntityOperationComplexPath;
+
