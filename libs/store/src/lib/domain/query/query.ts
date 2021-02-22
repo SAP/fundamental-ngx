@@ -39,8 +39,11 @@ export class Query<TModel> {
     /** @hidden - stores current enable count flag */
     _includeCount: boolean;
 
-    /** @hidden - stores current selection of properties to return */
+    /** @hidden - stores current selection of properties */
     _select: string[];
+
+    /** @hidden - stores current extend properties */
+    _extend: string[];
 
     constructor(
         private resultType: Type<TModel>,
@@ -104,13 +107,23 @@ export class Query<TModel> {
         return this;
     }
 
+    /**
+     * Set list of select parameters.
+     * @param select List of properties to include in response data
+     */
     select<TP extends keyof TModel> (...select: Array <TP> ): Query <TModel> {
         this._select = select as string[];
         return this;
     }
 
-    // extends()
-
+    /**
+     * Set list of extend parameters.
+     * @param extend List of extended properties to include in response data
+     */
+    extend<TP extends keyof TModel> (...extend: Array <TP> ): Query <TModel> {
+        this._extend = extend as string[];
+        return this;
+    }
 
     // customQueryPArams()
 
@@ -195,6 +208,12 @@ export class Query<TModel> {
             params = {
                 ...params,
                 select: this.adapter.parseSelect(this._select)
+            };
+        }
+        if (this._extend) {
+            params = {
+                ...params,
+                extend: this.adapter.parseExtend(this._extend)
             };
         }
         return params;

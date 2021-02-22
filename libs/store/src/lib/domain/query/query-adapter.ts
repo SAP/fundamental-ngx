@@ -19,6 +19,7 @@ export abstract class QueryAdapter<T> {
     abstract parsePredicate(predicate?: Predicate<T>): string;
     abstract parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string
     abstract parseSelect(select?: string[]): string;
+    abstract parseExtend(select?: string[]): string;
     abstract createQueryString(params?: QueryParams): string;
 }
 
@@ -71,6 +72,13 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return selects.join(',');
     }
 
+    parseExtend(extend?: string[]): string {
+        if (!Array.isArray(extend)) {
+            return '';
+        }
+        return extend.join(',');
+    }
+
     createQueryString(params: QueryParams): string {
         const parts: string[] = [];
         for (const key in params) {
@@ -81,6 +89,8 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
                     parts.push('$search=' + params[key]);
                 } else if (key === 'select') {
                     parts.push('$select=' + params[key]);
+                } else if (key === 'extend') {
+                    parts.push('$extend=' + params[key]);
                 } else if (key === 'pageSize') {
                     parts.push('$skip=' + params[key]);
                 } else if (key === 'offset') {

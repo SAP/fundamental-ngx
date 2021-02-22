@@ -14,11 +14,21 @@ import { TestBed } from '@angular/core/testing';
 import { and, eq } from './grammer/query-expressions';
 import { DefaultQueryAdapter } from './query-adapter';
 
+class Supplier {
+    name: string;
+}
+
+class Distributor {
+    name: string;
+}
+
 class Fruit {
     name: string;
     variety: string;
     origin: string;
     price: number;
+    supplier: Supplier;
+    distributor: Distributor;
 }
 
 describe('Store: Query', () => {
@@ -80,6 +90,12 @@ describe('Store: Query', () => {
         const query = qb.newQuery();
         query.select('name', 'price').find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$select=name,price');
+    });
+
+    it('should call "getWithQuery" with the correct extend parameters', () => {
+        const query = qb.newQuery();
+        query.extend('supplier', 'distributor').find();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$extend=supplier,distributor');
     });
 
     it('should call "getWithQuery" with the correct order by parameters', () => {
