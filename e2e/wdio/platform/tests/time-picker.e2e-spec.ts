@@ -1,7 +1,6 @@
 import {
     click,
     doesItExist,
-    elementArray,
     getAttributeByName,
     getElementArrayLength,
     getText,
@@ -14,18 +13,17 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import { time, text, defaultValidTime } from '../fixtures/testData/time-picker';
-import { TimePicker } from '../pages/time-picker.po';
-
-let timePickerPage: TimePicker;
-const {
-    activeTimePickerInput, timePickerButton, timePickerInput, timerExpanded,
-    activeTimePickerButton, errorBorder,
-    selectedHours, selectedMinutes, period,
-    navigationDownArrowButton, timeItem, setToNullButton, setValidTimeButton
-} = new TimePicker();
+import { TimePickerPO } from '../pages/time-picker.po';
 
 describe('Time picker suite', function() {
-    timePickerPage = new TimePicker();
+    let timePickerPage: TimePickerPO;
+    timePickerPage = new TimePickerPO();
+    const {
+        activeTimePickerInput, timePickerButton, timePickerInput, timerExpanded,
+        activeTimePickerButton, errorBorder,
+        selectedHours, selectedMinutes, period,
+        navigationDownArrowButton, timeItem, setToNullButton, setValidTimeButton
+    } = timePickerPage;
 
     beforeAll(() => {
         timePickerPage.open();
@@ -37,18 +35,18 @@ describe('Time picker suite', function() {
     }, 1);
 
     it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
-        const buttons = elementArray(timePickerButton);
-        const inputs = elementArray(timePickerInput);
-        expect(buttons.length).toEqual(inputs.length);
-        for (let i = 1; i < buttons.length; i++) {
+        const buttonsCount = getElementArrayLength(timePickerButton);
+        const inputsCount = getElementArrayLength(timePickerInput);
+        expect(buttonsCount).toEqual(inputsCount);
+        for (let i = 1; i < buttonsCount; i++) {
             waitForElDisplayed(timePickerButton, i);
             waitForElDisplayed(timePickerInput, i);
         }
     });
 
     it('Verify on click on the time picker button', () => {
-        const activeButtons = elementArray(activeTimePickerButton);
-        for (let i = 1; i < activeButtons.length; i++) {
+        const activeButtonsCount = getElementArrayLength(activeTimePickerButton);
+        for (let i = 1; i < activeButtonsCount; i++) {
             sendKeys(['Escape']);
             scrollIntoView(activeTimePickerButton, i);
             click(activeTimePickerButton, i);
@@ -57,15 +55,15 @@ describe('Time picker suite', function() {
     });
 
     it('Verify input field have placeholder', () => {
-        const inputs = elementArray(activeTimePickerInput);
-        for (let i = 0; i < inputs.length; i++) {
+        const inputsCount = getElementArrayLength(activeTimePickerInput);
+        for (let i = 0; i < inputsCount; i++) {
             expect(['', null]).not.toContain(getAttributeByName(activeTimePickerInput, 'placeholder', i));
         }
     });
 
     it('Verify on click on the input field ', () => {
-        const activeInputs = elementArray(activeTimePickerInput);
-        for (let i = 0; i < activeInputs.length; i++) {
+        const activeInputsCount = getElementArrayLength(activeTimePickerInput);
+        for (let i = 0; i < activeInputsCount; i++) {
             sendKeys(['Escape']);
             scrollIntoView(activeTimePickerInput, i);
             setValue(activeTimePickerInput, text, i);

@@ -1,7 +1,7 @@
 import { BaseComponentPo } from './base-component.po';
 import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
-export class TimePicker extends BaseComponentPo {
+export class TimePickerPO extends BaseComponentPo {
     url = '/time-picker';
     root = '#page-content';
     errorBorder = '.is-error';
