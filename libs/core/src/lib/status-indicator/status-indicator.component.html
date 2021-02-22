@@ -1,0 +1,98 @@
+<div
+    class="fd-status-indicator"
+    [ngClass]="['fd-status-indicator--' + status]"
+    [class.fd-status-indicator--htext]="labelPosition === 'left' || labelPosition === 'right'"
+    [attr.tabindex]="clickable ? 0 : -1"
+>
+    <span
+        *ngIf="hasLabel && (labelPosition === 'left' || labelPosition === 'top')"
+        [ngClass]="'fd-status-indicator--' + size + '__text' + ' ' + 'fd-status-indicator--' + status + '__text'"
+        >{{ statusLabel }}
+    </span>
+    <svg
+        [attr.id]="id"
+        data-sap-ui="__shape0-__box21-24"
+        version="1.1"
+        [attr.viewBox]="viewBox"
+        xlmns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+        [ngClass]="['fd-status-indicator--' + size]"
+    >
+        <ng-container [ngTemplateOutlet]="svgTemplate"></ng-container>
+    </svg>
+    <span
+        *ngIf="hasLabel && (labelPosition === 'right' || labelPosition === 'bottom')"
+        [ngClass]="'fd-status-indicator--' + size + '__text' + ' ' + 'fd-status-indicator--' + status + '__text'"
+        >{{ statusLabel }}
+    </span>
+</div>
+<ng-template #svgTemplate>
+    <svg
+        xlmns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+        overflow="visible"
+        [attr.id]="id + i"
+        data-sap-ui="id"
+        *ngFor="let path of path; let i = index"
+    >
+        <defs>
+            <linearGradient
+                *ngIf="!(fillCalculator - i > 0 && fillCalculator - i < 1) || fillingType !== 'radial'"
+                id="{{ id + i }}-gradient"
+                [attr.x1]="x1"
+                [attr.y1]="y1"
+                [attr.x2]="x2"
+                [attr.y2]="y2"
+            >
+                <stop [attr.offset]="fillCalculator - i" stop-color="white">
+                    <animate
+                        attributeName="offset"
+                        attr.values="0, {{ fillCalculator - i }}"
+                        repeatCount="1"
+                        dur="1s"
+                        begin="0s"
+                    />
+                </stop>
+                <stop [attr.offset]="fillCalculator - i" stop-color="transparent">
+                    <animate
+                        attributeName="offset"
+                        attr.values="0, {{ fillCalculator - i }}"
+                        repeatCount="1"
+                        dur="1s"
+                        begin="0s"
+                    />
+                </stop>
+            </linearGradient>
+            <mask #maskTemplate id="{{ id + i }}-mask">
+                <path
+                    *ngIf="!(fillCalculator - i > 0 && fillCalculator - i < 1) || fillingType !== 'radial'"
+                    id="{{ id + i }}-mask-shape"
+                    [attr.d]="path"
+                    stroke-width="0"
+                    stroke="white"
+                    attr.fill="url(#{{ id + i }}-gradient)"
+                ></path>
+                <polygon
+                    *ngIf="fillingType === 'radial' && fillCalculator - i > 0 && fillCalculator - i < 1"
+                    id="{{ id + i }}-mask-shape"
+                    fill="white"
+                    [attr.points]="pointsArray[i]"
+                ></polygon>
+            </mask>
+        </defs>
+        <path
+            id="{{ id + i }}-shape"
+            [attr.d]="path"
+            stroke-width="0"
+            stroke="#89919A"
+            attr.mask="url(#{{ id + i }}-mask)"
+        ></path>
+        <path
+            id="{{ id + i }}-shape-border"
+            [attr.d]="path"
+            stroke-width="0.25"
+            stroke="#89919A"
+            fill="transparent"
+        ></path>
+    </svg>
+</ng-template>
