@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.9...v0.28.0-rc.10) (2021-02-22)
+
+
+### Bug Fixes
+
+* (Core) Non interactive cards ([#4716](https://github.com/SAP/fundamental-ngx/issues/4716)) ([b21cf19](https://github.com/SAP/fundamental-ngx/commit/b21cf19951b2accbbfa8bf5903170aea10321618))
+
 ## [0.28.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.8...v0.28.0-rc.9) (2021-02-22)
 
 
