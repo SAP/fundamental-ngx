@@ -52,75 +52,93 @@ describe('Store: Query', () => {
 
     it('should call "getWithQuery" from EntityCollectionService', () => {
         const query = qb.newQuery();
-        query.select();
+        query.find();
         expect(service.getWithQuery).toHaveBeenCalled();
     });
 
     it('should call "getWithQuery" with correct filter parameters', () => {
         let query = qb.where(eq('name', 'apple')).newQuery();
-        query.select();
+        query.find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'apple\'');
 
         query = qb.where(eq('variety', 'pippen')).newQuery();
-        query.select();
+        query.find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$filter=variety eq \'pippen\'');
 
         query = qb.where(and(eq('variety', 'pippen'), eq('price', 3.03))).newQuery();
-        query.select();
+        query.find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$filter=(variety eq \'pippen\' and price eq 3.03)');
     });
 
     it('should call "getWithQuery" with the correct keyword parameter', () => {
-        let query = qb.keyword('red').newQuery();
-        query.select();
+        const query = qb.keyword('red').newQuery();
+        query.find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=red');
+    });
+
+    it('should call "getWithQuery" with the correct select parameters', () => {
+        const query = qb.newQuery();
+        query.select('name', 'price').find();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$select=name,price');
     });
 
     it('should call "getWithQuery" with the correct order by parameters', () => {
         let query = qb.newQuery();
-        query.orderBy({ field: 'name'}).select();
+        query.orderBy({ field: 'name'}).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$orderby=name');
 
         query = qb.newQuery();
-        query.orderBy({ field: 'name'}, { field: 'price', order: 'DESCENDING'}).select();
+        query.orderBy({ field: 'name'}, { field: 'price', order: 'DESCENDING'}).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$orderby=name,price:desc');
     });
 
     it('should call "getWithQuery" with the correct pagination parameters', () => {
         let query = qb.newQuery();
-        query.maxResults(10).select();
+        query.maxResults(10).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=10');
 
         query = qb.newQuery();
-        query.firstResult(100).select();
+        query.firstResult(100).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$top=100');
 
         query = qb.newQuery();
-        query.maxResults(20).firstResult(100).select();
+        query.maxResults(20).firstResult(100).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=100');
     });
 
     it('should be able to modify query to get next page of results', () => {
         const query = qb.newQuery();
-        query.maxResults(20).firstResult(20).select();
+        query.maxResults(20).firstResult(20).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=20');
 
         query.next();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
+
+        query.next();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=60');
+
+        query.next();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=80');
     });
 
     it('should be able to modify query to get previous page of results', () => {
         const query = qb.newQuery();
-        query.maxResults(20).firstResult(80).select();
+        query.maxResults(20).firstResult(80).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=80');
 
         query.previous();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=60');
+
+        query.previous();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
+
+        query.previous();
+        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=20');
     });
 
     it('should default the top to 0 if previous results in a negative index', () => {
         const query = qb.newQuery();
-        query.maxResults(20).firstResult(10).select();
+        query.maxResults(20).firstResult(10).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=10');
 
         query.previous();
@@ -129,7 +147,7 @@ describe('Store: Query', () => {
 
     it('should add "count" to query string if includeCount is set to true', () => {
         const query = qb.newQuery();
-        query.includeCount(true).select();
+        query.includeCount(true).find();
         expect(service.getWithQuery).toHaveBeenCalledWith('$count=true');
     });
 

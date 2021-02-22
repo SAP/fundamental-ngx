@@ -162,6 +162,18 @@ describe('DefaultQueryAdapter: Order By Parsing', () => {
     });
 });
 
+describe('DefaultQueryAdapter: Select Parsing', () => {
+
+    it('should return an empty string if no arguments are passed', () => {
+        expect(adapter.parseSelect()).toBe('')
+    });
+
+    it('should be able to process select parameters', () => {
+        expect(adapter.parseSelect(['name', 'age', 'color'])).toBe('name,age,color');
+    });
+
+});
+
 describe('DefaultQueryAdapter: Query string generation', () => {
 
     it('should return empty string if no arguments are passed', () => {
@@ -177,6 +189,18 @@ describe('DefaultQueryAdapter: Query string generation', () => {
             search: 'red'
         };
         expect(adapter.createQueryString(params)).toBe('$search=red');
+    });
+
+    it('should not include query parameters if they are empty', () => {
+        const params: QueryParams = {
+            search: '',
+            filter: '',
+            pageSize: '',
+            offset: '',
+            orderby: '',
+            count: '',
+        };
+        expect(adapter.createQueryString(params)).toBe('');
     });
 
     it('should be able to process query parameters with "filter"', () => {
@@ -212,6 +236,13 @@ describe('DefaultQueryAdapter: Query string generation', () => {
             count: 'true'
         };
         expect(adapter.createQueryString(params)).toBe('$count=true');
+    });
+
+    it('should be able to handle the "select" query parameter', () => {
+        const params: QueryParams = {
+            select: 'name,price'
+        };
+        expect(adapter.createQueryString(params)).toBe('$select=name,price');
     });
 
     it('should be able to process query parameters with any properties', () => {

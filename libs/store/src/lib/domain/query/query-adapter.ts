@@ -18,6 +18,7 @@ export interface QueryParams {
 export abstract class QueryAdapter<T> {
     abstract parsePredicate(predicate?: Predicate<T>): string;
     abstract parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string
+    abstract parseSelect(select?: string[]): string;
     abstract createQueryString(params?: QueryParams): string;
 }
 
@@ -63,14 +64,23 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         }
     }
 
+    parseSelect(selects?: string[]): string {
+        if (!Array.isArray(selects)) {
+            return '';
+        }
+        return selects.join(',');
+    }
+
     createQueryString(params: QueryParams): string {
         const parts: string[] = [];
         for (const key in params) {
-            if (params.hasOwnProperty(key)) {
+            if (params.hasOwnProperty(key) && params[key]) {
                 if (key === 'filter') {
                     parts.push('$filter=' + params[key]);
                 } else if (key === 'search') {
                     parts.push('$search=' + params[key]);
+                } else if (key === 'select') {
+                    parts.push('$select=' + params[key]);
                 } else if (key === 'pageSize') {
                     parts.push('$skip=' + params[key]);
                 } else if (key === 'offset') {

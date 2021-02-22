@@ -39,6 +39,9 @@ export class Query<TModel> {
     /** @hidden - stores current enable count flag */
     _includeCount: boolean;
 
+    /** @hidden - stores current selection of properties to return */
+    _select: string[];
+
     constructor(
         private resultType: Type<TModel>,
         private service: EntityCollectionService<TModel>,
@@ -53,7 +56,6 @@ export class Query<TModel> {
         this._predicate = predicate;
         return this;
     }
-
 
     /**
      * Set keyword for search term.
@@ -102,18 +104,20 @@ export class Query<TModel> {
         return this;
     }
 
-    project<TP extends keyof TModel> (...property: Array < TP > ): Query < TModel > {
+    select<TP extends keyof TModel> (...select: Array <TP> ): Query <TModel> {
+        this._select = select as string[];
         return this;
     }
 
-    find(): Observable < TModel | Array < TModel >> {
-        return of(null);
-    }
+    // extends()
+
+
+    // customQueryPArams()
 
     /**
      * Initiate query and return observable
      */
-    select(): Observable < TModel | Array < TModel >> {
+    find(): Observable < TModel | Array < TModel >> {
         const params = this._createQueryParams();
         const query = this.adapter.createQueryString(params);
         return this.service.getWithQuery(query);
@@ -134,7 +138,7 @@ export class Query<TModel> {
      */
     previous(): void {
         this._offset = (this._offset > this._pageSize) ? this._offset - this._pageSize : 0;
-        this.select();
+        this.find();
     }
 
     /**
@@ -142,7 +146,7 @@ export class Query<TModel> {
      */
     next(): void {
         this._offset = this._offset + this._pageSize;
-        this.select();
+        this.find();
     }
 
     /**
@@ -185,6 +189,12 @@ export class Query<TModel> {
             params = {
                 ...params,
                 count: 'true'
+            };
+        }
+        if (this._select) {
+            params = {
+                ...params,
+                select: this.adapter.parseSelect(this._select)
             };
         }
         return params;
