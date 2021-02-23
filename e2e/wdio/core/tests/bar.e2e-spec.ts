@@ -61,4 +61,11 @@ describe('Bar test suite:', function() {
             click(saveCancelButtons, i);
         }
     });
+
+    fdescribe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            barPage.saveExampleBaselineScreenshot('bar');
+            expect(barPage.compareWithBaseline('bar')).toBeLessThan(1);
+        });
+    });
 });
