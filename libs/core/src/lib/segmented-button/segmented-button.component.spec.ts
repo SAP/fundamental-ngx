@@ -67,11 +67,9 @@ describe('SegmentedButtonComponent', () => {
     });
 
     it('should select button, when trigger event is performed', () => {
-        const changeSpy = spyOn(component.segmentedButton, 'onChange').and.callThrough();
         component.firstButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
-        expect(changeSpy).toHaveBeenCalledWith('first');
     });
 
     it('should select button and deselect other button, when trigger event is performed on non-toggle mode', () => {
