@@ -36,4 +36,16 @@ describe('Breadcrumb test suite:', function() {
             expect(isElementDisplayed(disableLinks, i)).toBe(true);
         }
     });
+
+    describe('Check visual regression', function() {
+        beforeAll(() => {
+            breadcrumbPage.open();
+            waitForPresent(links);
+        }, 1);
+
+        it('should check examples visual regression', () => {
+            breadcrumbPage.saveExampleBaselineScreenshot('breadcrumb');
+            expect(breadcrumbPage.compareWithBaseline('breadcrumb')).toBeLessThan(1);
+        });
+    });
 });

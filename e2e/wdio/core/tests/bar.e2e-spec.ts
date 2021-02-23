@@ -62,7 +62,7 @@ describe('Bar test suite:', function() {
         }
     });
 
-    fdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
         beforeAll(() => {
             barPage.open();
             waitForPresent(componentExample);

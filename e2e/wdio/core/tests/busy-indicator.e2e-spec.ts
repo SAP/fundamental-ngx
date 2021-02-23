@@ -64,4 +64,16 @@ describe('Busy Indicator test suite:', function() {
         expect(isElementDisplayed(saveIndicator)).toBe(true);
         expect(isElementDisplayed(formIndicator)).toBe(true);
     });
+
+    describe('Check visual regression', function() {
+        beforeAll(() => {
+            busyIndicatorPage.open();
+            waitForPresent(disableButton);
+        }, 1);
+
+        it('should check examples visual regression', () => {
+            busyIndicatorPage.saveExampleBaselineScreenshot('busy-indicator');
+            expect(busyIndicatorPage.compareWithBaseline('busy-indicator')).toBeLessThan(1);
+        });
+    });
 });
