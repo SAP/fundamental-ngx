@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DialogService, RtlService } from '@fundamental-ngx/core';
 import { Media } from '../thumbnail.component';
 import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
@@ -26,23 +26,27 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
     /** @hidden */
-    constructor(private _dialogService: DialogService, private _rtlService: RtlService) { }
+    constructor(protected _changeDetectorRef: ChangeDetectorRef, private _dialogService: DialogService, private _rtlService: RtlService) { }
 
     /** @hidden */
     ngOnInit(): void {
-       this._setOverlay();
+        this._setOverlay();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
+
         if (changes.mediaList && Array.isArray(this.mediaList)) {
             const alreadySelected: boolean = this.mediaList.some(image => image.selected);
             if (!alreadySelected) {
                 this.mediaList[0].selected = true;
             }
-            this._setOverlay();
         }
+        this._changeDetectorRef.detectChanges();
     }
+
+
+
 
     /** Opens the Dialog when the imgaes croses the maximum number of images to display */
     openDialog(selectedMedia: Media, mediaList: Media[]): void {
@@ -60,6 +64,8 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
             }
         });
     }
+
+
 
     /** @hidden */
     thumbnailClick(selectedMedia: Media): void {

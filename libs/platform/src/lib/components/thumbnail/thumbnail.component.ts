@@ -1,5 +1,7 @@
-import { Component,
-     OnInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef
+} from '@angular/core';
 import { DialogService, RtlService } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
@@ -30,6 +32,7 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
     templateUrl: './thumbnail.component.html',
     styleUrls: ['./thumbnail.component.scss'],
     encapsulation: ViewEncapsulation.None
+
 })
 export class ThumbnailComponent extends BaseComponent implements OnInit {
 
@@ -64,6 +67,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         if (Array.isArray(this.mediaList) && this.mediaList.length > 0) {
             this.selectedMedia = this.mediaList[0];
         }
+        this._setOverlay()
     }
 
     thumbnailClickHandle(selectedMedia: Media): void {
@@ -72,7 +76,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     }
 
     openDialog(selectedMedia: Media, mediaList: Media[]): void {
-        this.mediaList.forEach(item => item.overlayRequired = false);
+        mediaList.forEach(item => item.overlayRequired = false);
         const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
@@ -93,6 +97,12 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     /** @hidden Create Thumbnail click event instance */
     private _createClickEvent(value: Media): ThumbnailClickedEvent {
         return new ThumbnailClickedEvent(this, value);
+    }
+
+    private _setOverlay(): void {
+        if (this.mediaList.length > this.maxImagesDisplay) {
+            this.mediaList[this.maxImagesDisplay - 1].overlayRequired = true;
+        }
     }
 
 }

@@ -1,10 +1,11 @@
-import { Component,
-         OnInit,
-         ChangeDetectorRef,
-         HostListener,
-         AfterContentInit,
-         ViewChild
-         } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectorRef,
+    HostListener,
+    AfterViewInit,
+    ViewChild
+} from '@angular/core';
 import { Media } from '../../thumbnail/thumbnail.component'
 import { DialogRef } from '@fundamental-ngx/core';
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
@@ -22,7 +23,7 @@ interface DialogRefData {
     templateUrl: './thumbnail-details.component.html',
     styleUrls: ['./thumbnail-details.component.scss']
 })
-export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
+export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
 
     /** @hidden Start index of currently active items */
     @ViewChild(ThumbnailImageComponent)
@@ -47,17 +48,18 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
     /** @hidden */
     constructor(public dialogRef: DialogRef,
         private _cdr: ChangeDetectorRef
-    ) {}
+    ) { }
 
     /** @hidden */
     ngOnInit(): void {
         this.dialogRef.data.selectedMedia.selected = true;
-        this.currentActiveSlidesStartIndex = this.mediaList.indexOf( this.dialogRef.data.selectedMedia);
+        this.currentActiveSlidesStartIndex = this.mediaList.indexOf(this.dialogRef.data.selectedMedia);
+        this._buttonVisibility();
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
-        this.currentActiveSlidesStartIndex = this.mediaList.indexOf( this.dialogRef.data.selectedMedia);
+    ngAfterViewInit(): void {
+        this.currentActiveSlidesStartIndex = this.mediaList.indexOf(this.dialogRef.data.selectedMedia);
         if (this.mediaList.length > 0) {
             this._buttonVisibility();
         } else {
@@ -72,11 +74,13 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
         if (this.currentActiveSlidesStartIndex <= 0) {
             return;
         }
-            this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex - 1;
-            this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
-            this.mediaList.forEach(item => item.selected = false);
-            this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
-            this._buttonVisibility();
+        this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex - 1;
+        this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
+        this.mediaList.forEach(item => item.selected = false);
+        this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
+        this._cdr.detectChanges();
+        this._buttonVisibility();
+
     }
 
     /** Transitions to the next image in the thumbnail. */
@@ -84,17 +88,18 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
         if (this.currentActiveSlidesStartIndex >= this.dialogRef.data.mediaList.length - 1) {
             return;
         }
-            this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + 1;
-            this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
-            this.mediaList.forEach(item => item.selected = false);
-            this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
-            this._buttonVisibility();
+        this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + 1;
+        this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
+        this.mediaList.forEach(item => item.selected = false);
+        this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
+        this._cdr.detectChanges();
+        this._buttonVisibility();
     }
 
     /** handles click on thumbnail images  */
     thumbnailClickHandle(selectedmedia: Media): void {
         this.dialogRef.data.selectedMedia = selectedmedia;
-        this.currentActiveSlidesStartIndex = this.mediaList.indexOf( this.dialogRef.data.selectedMedia);
+        this.currentActiveSlidesStartIndex = this.mediaList.indexOf(this.dialogRef.data.selectedMedia);
         this._buttonVisibility();
     }
 
@@ -128,7 +133,7 @@ export class ThumbnailDetailsComponent implements OnInit, AfterContentInit {
     /** @hidden Handles navigation button visibility */
     private _buttonVisibility(): void {
 
-        if (this.currentActiveSlidesStartIndex === 0 ) {
+        if (this.currentActiveSlidesStartIndex === 0) {
             if (this.dialogRef.data.rtl) {
                 this.leftButtonDisabled = false;
                 this.rightButtonDisabled = true;
