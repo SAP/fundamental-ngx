@@ -57,6 +57,10 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return '';
     }
 
+    /**
+     * Creates value string for "$orderby" query parameter from set of OrderBy objects.
+     * @param orderBys Set of OrderBy objects
+     */
     parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string {
         if (!orderBys) {
             return '';
@@ -71,6 +75,10 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         }
     }
 
+    /**
+     * Creates value string for "$select" query parameter from a list of select strings.
+     * @param selects List of select fields
+     */
     parseSelect(selects?: string[]): string {
         if (!Array.isArray(selects)) {
             return '';
@@ -78,6 +86,10 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return selects.join(',');
     }
 
+    /**
+     * Creates value string for "$expand" query parameter from a list of expand strings.
+     * @param expands List of expand fields
+     */
     parseExpand(expands?: string[]): string {
         if (!Array.isArray(expands)) {
             return '';
@@ -85,6 +97,10 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return expands.join(',');
     }
 
+    /**
+     * Composes final query string.
+     * @param params QueryParams object composed of key-value pairs.
+     */
     createQueryString(params: QueryParams): string {
         const parts: string[] = [];
         for (const key in params) {
@@ -96,7 +112,7 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
                 } else if (key === 'select') {
                     parts.push('$select=' + params[key]);
                 } else if (key === 'expand') {
-                    parts.push('$expand=' + params[key]);
+                    parts.push('$expand=' + params[key])
                 } else if (key === 'pageSize') {
                     parts.push('$skip=' + params[key]);
                 } else if (key === 'offset') {
