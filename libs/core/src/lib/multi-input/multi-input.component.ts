@@ -384,10 +384,6 @@ export class MultiInputComponent implements
 
         this._resetSearchTerm();
 
-        if (this.popoverRef) {
-            this.popoverRef.close();
-        }
-
         this.searchInputElement.nativeElement.focus();
 
         // On Mobile mode changes are propagated only on approve.

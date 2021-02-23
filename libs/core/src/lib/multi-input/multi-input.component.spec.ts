@@ -195,6 +195,19 @@ describe('MultiInputComponent', () => {
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 
+    it('should focus the input and clear the search term after selection', async() => {
+        const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
+
+        await fixture.whenStable();
+
+        component.searchTerm = 'search';
+
+        component.handleSelect(true, component.dropdownValues[0]);
+
+        expect(inputFocusSpy).toHaveBeenCalled();
+        expect(component.searchTerm).toBe('');
+    });
+
     it('should handle showAll button', async () => {
         await fixture.whenStable();
         const event = new MouseEvent('click');
