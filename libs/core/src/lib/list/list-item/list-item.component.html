@@ -7,3 +7,6 @@
 
 <ng-content></ng-content>
 
+<span *ngIf="counter || counter === 0">
+    {{ counter.toString() | slice:0: 5 }}
+</span>

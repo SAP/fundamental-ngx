@@ -52,7 +52,7 @@ export class ListBylineDocsComponent {
         }
     ];
 
-    listBylineButtons: ExampleFile[] = [
+    listBylineComplex: ExampleFile[] = [
         {
             language: 'html',
             code: bylineButtonsHtml,

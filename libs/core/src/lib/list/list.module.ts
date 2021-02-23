@@ -16,6 +16,7 @@ import { ListBylineRightDirective } from './directives/byline/list-byline-right.
 import { ListContentDirective } from './directives/byline/list-content.directive';
 import { ListThumbnailDirective } from './directives/byline/list-thumbnail.directive';
 import { ListTitleTextDirective } from './directives/list-title-text.directive';
+
 @NgModule({
     declarations: [
         ListComponent,

@@ -88,6 +88,10 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @HostBinding('class.fd-list__item--growing')
     growing = false;
 
+    /** Counter on list item */
+    @Input()
+    counter: number;
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
