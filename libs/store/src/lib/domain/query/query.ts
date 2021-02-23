@@ -35,6 +35,9 @@ export class Query<TModel> {
     /** @hidden - stores current index offset */
     _offset: number;
 
+    /** @hidden - stores flag for suspending page reset on query change */
+    _suppressPageReset: boolean;
+
     /** @hidden - stores curernt order bys */
     _orderByFields: Array<OrderBy<TModel, keyof TModel>>;
 
@@ -86,6 +89,7 @@ export class Query<TModel> {
      */
     firstResult(offset: number): Query<TModel> {
         this._offset = offset;
+        this._suppressPageReset = true;
         return this;
     }
 
@@ -95,6 +99,15 @@ export class Query<TModel> {
      */
     maxResults(pageSize: number): Query<TModel> {
         this._pageSize = pageSize;
+        return this;
+    }
+
+    /**
+     * Suspends resetting of page index when query keyword, where, or
+     * order by clauses have been changed.
+     */
+    suppressPageReset(): Query<TModel> {
+        this._suppressPageReset = true;
         return this;
     }
 
@@ -133,6 +146,11 @@ export class Query<TModel> {
      * Initiate query and return observable
      */
     fetch(): Observable<TModel | Array<TModel>> {
+        if (!this._suppressPageReset) {
+            this._offset = 0;
+        }
+        this._suppressPageReset = false;
+
         const params = this._createQueryParams();
         const query = this.adapter.createQueryString(params);
         return this.service.getWithQuery(query);
@@ -153,6 +171,7 @@ export class Query<TModel> {
      */
     previous(): void {
         this._offset = (this._offset > this._pageSize) ? this._offset - this._pageSize : 0;
+        this._suppressPageReset = true;
         this.fetch();
     }
 
@@ -161,6 +180,7 @@ export class Query<TModel> {
      */
     next(): void {
         this._offset = this._offset + this._pageSize;
+        this._suppressPageReset = true;
         this.fetch();
     }
 
