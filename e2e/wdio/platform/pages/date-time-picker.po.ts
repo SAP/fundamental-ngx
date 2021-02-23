@@ -47,7 +47,7 @@ export class DateTimePicker extends BaseComponentPo {
 
     dayInDisabledFunctionsCalendarByIndex = (index: string): string => {
         return `#fd-calendar-9-fd-day-${index}`;
-    }
+    };
 
     dayInCalendarButtonByValue = (index: string): string => {
         return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;

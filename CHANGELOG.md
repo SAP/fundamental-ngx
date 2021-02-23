@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.13...v0.28.0-rc.14) (2021-02-23)
+
+
+### Features
+
+* (Core) introduce ControlValueAccessor to SegmentedButton  ([#4579](https://github.com/SAP/fundamental-ngx/issues/4579)) ([94bf239](https://github.com/SAP/fundamental-ngx/commit/94bf2399b98b3ac787837d9baab13aedf6cdf320))
+
+## [0.28.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.12...v0.28.0-rc.13) (2021-02-23)
+
+## [0.28.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.11...v0.28.0-rc.12) (2021-02-22)
+
+## [0.28.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.10...v0.28.0-rc.11) (2021-02-22)
+
+
+### Bug Fixes
+
+* (platform) fix combobox list compact ([54bb9c2](https://github.com/SAP/fundamental-ngx/commit/54bb9c28b4d8421af29172f7eedebe66d9596def))
+
+## [0.28.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.9...v0.28.0-rc.10) (2021-02-22)
+
+
+### Bug Fixes
+
+* (Core) Non interactive cards ([#4716](https://github.com/SAP/fundamental-ngx/issues/4716)) ([b21cf19](https://github.com/SAP/fundamental-ngx/commit/b21cf19951b2accbbfa8bf5903170aea10321618))
+
+## [0.28.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.8...v0.28.0-rc.9) (2021-02-22)
+
+
+### Bug Fixes
+
+* (Platform) Dynamic page non-collapsible background ([#4717](https://github.com/SAP/fundamental-ngx/issues/4717)) ([985b09e](https://github.com/SAP/fundamental-ngx/commit/985b09eee5f1c1b893f1472f7b8ac68f6c34e8ad))
+
+## [0.28.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.7...v0.28.0-rc.8) (2021-02-22)
+
+## [0.28.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.6...v0.28.0-rc.7) (2021-02-21)
+
+## [0.28.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.5...v0.28.0-rc.6) (2021-02-21)
+
+## [0.28.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.4...v0.28.0-rc.5) (2021-02-19)
+
 ## [0.28.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.3...v0.28.0-rc.4) (2021-02-19)
 
 ## [0.28.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.2...v0.28.0-rc.3) (2021-02-18)

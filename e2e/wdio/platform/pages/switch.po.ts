@@ -7,12 +7,12 @@ export class SwitchPo extends BaseComponentPo {
     root = '#page-content';
     defaultSwitchLabel = '#default-switch .fd-switch';
     defaultSwitchInput = '#default-switch-input';
-    defaultSwitchSize = '#default-switch .fd-switch span';
+    defaultSwitchSizeAttr = '#default-switch .fd-switch span';
     defaultSwitchHandel = '#default-switch .fd-switch__handle';
 
     defaultCompactSwitchLabel = '#default-compact-switch .fd-switch';
     defaultCompactSwitchInput = '#default-compact-switch-input';
-    defaultCompactSwitchSize = '#default-compact-switch .fd-switch--compact span';
+    defaultCompactSwitchSizeAttr = '#default-compact-switch .fd-switch--compact span';
     defaultCompactSwitchHandel = '#default-compact-switch .fd-switch__handle';
 
     disabledSwitchLabel = '#switch-disabled .fd-switch';
@@ -34,9 +34,6 @@ export class SwitchPo extends BaseComponentPo {
     semanticCompactSwitchHandel = '#semantic-switch-compact .fd-switch__handle';
     semanticCompactSwitchIconOff = '#semantic-switch-compact .fd-switch__icon--off';
     semanticCompactSwitchIconOn = '#semantic-switch-compact .fd-switch__icon--on';
-
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
 
     open(): void {
         super.open(this.url);

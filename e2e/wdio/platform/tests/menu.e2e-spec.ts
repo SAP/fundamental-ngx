@@ -24,6 +24,11 @@ import {
 
 describe('Menu component test suite', function() {
     const menuPage = new MenuPo();
+    const {
+        menuBtnArr, firstMenuBtn, secondMenuBtn, menuBtnTextArr, menuAvatarBtn, menuHorizontalAvatarBtn, menuItemArr,
+        menuItemTextArr, iconMenuIconArr, menuItemOverlay, cascadingMenuBtn, cascadingMenuItemsArr, cascadingVegMenuItemsArr,
+        cascadingLettuceItemsArr
+    } = menuPage;
 
     beforeAll(() => {
         menuPage.open();
@@ -31,7 +36,7 @@ describe('Menu component test suite', function() {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(menuPage.menuBtnArr);
+        waitForPresent(menuBtnArr);
     }, 1);
 
     it('should check menu btn styles', () => {
@@ -39,20 +44,20 @@ describe('Menu component test suite', function() {
             console.log('Skip for IE and Safari');
             return;
         }
-        const basicMenuBtnArrLength = getElementArrayLength(menuPage.menuBtnArr);
+        const basicMenuBtnArrLength = getElementArrayLength(menuBtnArr);
 
         for (let i = 0; basicMenuBtnArrLength > i; i++) {
-            expect(getCSSPropertyByName(menuPage.menuBtnArr, borderColorAttribute, i).value)
+            expect(getCSSPropertyByName(menuBtnArr, borderColorAttribute, i).value)
                 .toContain(menuBtnBorderColor);
-            scrollIntoView(menuPage.menuBtnArr, i);
-            mouseHoverElement(menuPage.menuBtnArr, i);
-            expect(getCSSPropertyByName(menuPage.menuBtnArr, bgColorAttribute, i).value)
+            scrollIntoView(menuBtnArr, i);
+            mouseHoverElement(menuBtnArr, i);
+            expect(getCSSPropertyByName(menuBtnArr, bgColorAttribute, i).value)
                 .toContain(menuBtnHoverColor);
         }
-        focusElement(menuPage.firstMenuBtn);
+        focusElement(firstMenuBtn);
         sendKeys('Tab');
 
-        const menuBtnBorderStyle = executeScriptAfterTagFF(menuPage.secondMenuBtn);
+        const menuBtnBorderStyle = executeScriptAfterTagFF(secondMenuBtn);
         expect(menuBtnBorderStyle).toContain(menuBtnFocusStyle);
     });
     // Real issue for FF
@@ -61,27 +66,27 @@ describe('Menu component test suite', function() {
             console.log('Skip for FF due #3734');
             return
         }
-        doubleClick(menuPage.menuAvatarBtn);
+        doubleClick(menuAvatarBtn);
 
-        expect(getCSSPropertyByName(menuPage.menuAvatarBtn, menuAvatarFocusAttr).value)
+        expect(getCSSPropertyByName(menuAvatarBtn, menuAvatarFocusAttr).value)
             .toContain(menuAvatarFocusColor);
-        expect(getAttributeByName(menuPage.menuAvatarBtn, 'image')).not.toBe(null);
+        expect(getAttributeByName(menuAvatarBtn, 'image')).not.toBe(null);
         // checks horizontal example.
-        doubleClick(menuPage.menuHorizontalAvatarBtn);
+        doubleClick(menuHorizontalAvatarBtn);
         // todo: fails because of issue #3734
-        expect(getAttributeByName(menuPage.menuHorizontalAvatarBtn, 'image')).not.toBe(null);
+        expect(getAttributeByName(menuHorizontalAvatarBtn, 'image')).not.toBe(null);
     });
 
     it('should check menu btn content', () => {
-        const iconMenuBtnIconsArr = getElementArrayLength(menuPage.iconMenuIconArr);
-        const basicMenuBtnTextArr = getElementArrayLength(menuPage.menuBtnTextArr);
+        const iconMenuBtnIconsArr = getElementArrayLength(iconMenuIconArr);
+        const basicMenuBtnTextArr = getElementArrayLength(menuBtnTextArr);
 
         for (let i = 0; iconMenuBtnIconsArr > i; i++) {
-            expect(getText(menuPage.iconMenuIconArr, i)).not.toBe(null);
+            expect(getText(iconMenuIconArr, i)).not.toBe(null);
         }
 
         for (let i = 0; basicMenuBtnTextArr > i; i++) {
-            expect(isElementDisplayed(menuPage.menuBtnTextArr, i)).toBe(true);
+            expect(isElementDisplayed(menuBtnTextArr, i)).toBe(true);
         }
     });
 
@@ -89,9 +94,9 @@ describe('Menu component test suite', function() {
         // const arrLength = getElementArrayLength(menuPage.menuBtnArr);
         //
         // for (let i = 0; arrLength > i; i++) {
-        //     mouseHoverElement(menuPage.menuBtnArr, i);
+        //     mouseHoverElement(menuBtnArr, i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(menuPage.menuBtnArr, bgColorAttribute, i).value)
+        //     expect(getCSSPropertyByName(menuBtnArr, bgColorAttribute, i).value)
         //         .toContain(menuBtnActiveColor);
         //     mouseButtonUp();
         // }
@@ -103,15 +108,15 @@ describe('Menu component test suite', function() {
             console.log('Skip for Safari');
             return;
         }
-        click(menuPage.menuBtnArr);
-        checkMenuItemsHoverState(menuPage.menuItemArr, bgColorAttribute, menuItemHoverColor);
-        checkMenuItemText(menuPage.menuItemTextArr);
+        click(menuBtnArr);
+        checkMenuItemsHoverState(menuItemArr, bgColorAttribute, menuItemHoverColor);
+        checkMenuItemText(menuItemTextArr);
     });
 
     xit('should check menu items active state', () => {
-        click(menuPage.menuBtnArr);
-        waitForElDisplayed(menuPage.menuItemArr);
-        checkMenuItemsActiveState(menuPage.menuItemArr, bgColorAttribute, menuBtnActiveColor);
+        click(menuBtnArr);
+        waitForElDisplayed(menuItemArr);
+        checkMenuItemsActiveState(menuItemArr, bgColorAttribute, menuBtnActiveColor);
     });
 
     it('should check menu item focus', () => {
@@ -119,8 +124,8 @@ describe('Menu component test suite', function() {
             console.log('Skip for Safari and IE');
             return;
         }
-        click(menuPage.menuBtnArr);
-        checkMenuItemFocus(menuPage.menuItemArr, menuItemFocusStyleAttr, menuItemFocusStyle);
+        click(menuBtnArr);
+        checkMenuItemFocus(menuItemArr, menuItemFocusStyleAttr, menuItemFocusStyle);
     });
 
     it('should check cascading menu', () => {
@@ -128,14 +133,14 @@ describe('Menu component test suite', function() {
             console.log('Skip for Safari and IE');
             return;
         }
-        click(menuPage.cascadingMenuBtn);
-        waitForElDisplayed(menuPage.cascadingMenuItemsArr);
-        checkMenuItemsHoverState(menuPage.cascadingMenuItemsArr, bgColorAttribute, subMenuHoverColor);
-        check2ndLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-            bgColorAttribute, subMenuHoverColor);
-        doubleClick(menuPage.cascadingMenuBtn);
-        check3rdLvlMenuItemsHvrState(menuPage.cascadingMenuItemsArr, menuPage.cascadingVegMenuItemsArr,
-            menuPage.cascadingLettuceItemsArr, bgColorAttribute, menuItemHoverColor);
+        click(cascadingMenuBtn);
+        waitForElDisplayed(cascadingMenuItemsArr);
+        checkMenuItemsHoverState(cascadingMenuItemsArr, bgColorAttribute, subMenuHoverColor);
+        check2ndLvlMenuItemsHvrState(cascadingMenuItemsArr, cascadingVegMenuItemsArr, bgColorAttribute,
+            subMenuHoverColor);
+        doubleClick(cascadingMenuBtn);
+        check3rdLvlMenuItemsHvrState(cascadingMenuItemsArr, cascadingVegMenuItemsArr,
+            cascadingLettuceItemsArr, bgColorAttribute, menuItemHoverColor);
         return;
     });
 
@@ -144,33 +149,14 @@ describe('Menu component test suite', function() {
             console.log('Skip for Safari and IE');
             return;
         }
-        click(menuPage.firstMenuBtn);
-        expect(isElementDisplayed(menuPage.menuItemOverlay)).toBe(true);
-        click(menuPage.firstMenuBtn);
-        expect(isElementDisplayed(menuPage.menuItemOverlay)).toBe(false);
+        click(firstMenuBtn);
+        expect(isElementDisplayed(menuItemOverlay)).toBe(true);
+        click(firstMenuBtn);
+        expect(isElementDisplayed(menuItemOverlay)).toBe(false);
     });
 
-    it('should check LTR orientation', () => {
-        const areaContainersArrayLength = getElementArrayLength(menuPage.exampleAreaContainersArr);
-
-        for (let i = 0; areaContainersArrayLength > i; i++) {
-            expect(getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value)
-                .toBe('ltr', 'css prop direction ');
-        }
-    });
-
-    it('should check RTL orientation', () => {
-        const arrL = getElementArrayLength(menuPage.exampleAreaContainersArr);
-
-        for (let i = 0; arrL > i; i++) {
-            scrollIntoView(menuPage.exampleAreaContainersArr, i);
-            expect(getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-            const dirValueBefore = getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i);
-            expect([null, '']).toContain(dirValueBefore);
-            click(menuPage.rtlSwitcherArr, i);
-            expect(getCSSPropertyByName(menuPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-            expect(getAttributeByName(menuPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-        }
+    it('should check RTL/LTR orientation', () => {
+        menuPage.checkRtlSwitch();
     });
 
     describe('Check visual regression', function() {

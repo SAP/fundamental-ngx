@@ -1,8 +1,8 @@
-<fd-segmented-button>
-    <button fd-button (click)="changeSize('s')" [class]="isSelected('s')">S</button>
-    <button fd-button (click)="changeSize('m')" [class]="isSelected('m')">M</button>
-    <button fd-button (click)="changeSize('l')" [class]="isSelected('l')">L</button>
-    <button fd-button (click)="changeSize('xl')" [class]="isSelected('xl')">XL</button>
+<fd-segmented-button [(ngModel)]="currentSize">
+    <button fd-button value="s">S</button>
+    <button fd-button value="m">M</button>
+    <button fd-button value="l">L</button>
+    <button fd-button value="xl">XL</button>
 </fd-segmented-button>
 
 <div style="margin-top: 60px" [style.maxWidth]="sizesWidth[currentSize] + 'px'">

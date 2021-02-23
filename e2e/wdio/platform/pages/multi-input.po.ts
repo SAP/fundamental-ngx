@@ -16,15 +16,15 @@ export class MultiInputPo extends BaseComponentPo {
     groupHeader = '.fd-list__group-header';
     groupDropdown = '#fdp-id-grouped button';
     options = 'fdp-standard-list-item';
-    dropdownOption = 'ul[role=list] [role="listitem"] li ';
+    dropdownOptions = 'ul[role=list] [role="listitem"] li ';
     selectedToken = 'span[role=\'button\']';
-    dropdownOptionText = this.dropdownOption + 'span';
-    dropdownOptionTextValueHelp = this.dropdownOption + 'div[class="fd-list__title ng-star-inserted"]';
+    dropdownOptionText = this.dropdownOptions + 'span';
+    dropdownOptionTextValueHelp = this.dropdownOptions + 'div[class="fd-list__title ng-star-inserted"]';
 
 
     crossButton = (option: string) => {
         return `//span[text() = '${option}']/following-sibling::span`;
-    }
+    };
 
     selectedDropDownOption = (name: string) => {
         return `//span[text()='${name}']`;

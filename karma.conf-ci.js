@@ -87,7 +87,7 @@ module.exports = function (config) {
             // leave Jasmine Spec Runner output visible in browser
             clearContext: false,
             jasmine: {
-                timeoutInterval: 20000
+                timeoutInterval: 120000
             }
         },
         coverageIstanbulReporter: {
@@ -112,7 +112,7 @@ module.exports = function (config) {
                 scVersion: '4.6.2',
             },
             public: 'public',
-            idleTimeout: 10000,
+            idleTimeout: 20000,
             screenResolution: '1920x1080',
             customData: {
                 branch,
@@ -121,12 +121,13 @@ module.exports = function (config) {
         },
         logLevel: config.LOG_DISABLE,
         autoWatch: false,
-        browserDisconnectTimeout: 20000, // default 2000
-        browserDisconnectTolerance: 1, // default 0
+        browserDisconnectTimeout: 60000, // default 2000
+        browserDisconnectTolerance: 2, // default 0
         browserNoActivityTimeout: 4 * 60 * 1000, //default 10000
         captureTimeout: 4 * 60 * 1000, //default 60000
         customLaunchers: customLaunchers,
         browsers: Object.keys(customLaunchers),
-        singleRun: true
+        singleRun: true,
+        retryLimit: 3 // default 2
     });
 };
