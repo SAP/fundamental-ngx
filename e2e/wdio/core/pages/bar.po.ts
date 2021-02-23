@@ -4,6 +4,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class BarPo extends CoreBaseComponentPo {
     private url = '/bar';
     root = '#page-content';
+    componentExample = '.docs-tile-content-example';
     arrowButtons = '.fd-bar__left button';
     leftSections = '.fd-bar__left fd-bar-element';
     middleSections = '.fd-bar__middle fd-bar-element';

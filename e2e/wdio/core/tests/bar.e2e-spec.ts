@@ -6,7 +6,7 @@ import {
 
 describe('Bar test suite:', function() {
     const barPage: BarPo = new BarPo();
-    const {arrowButtons, leftSections, saveCancelButtons, pictures, subMiddleSection, rightSections, middleSections} = barPage;
+    const {arrowButtons, leftSections, saveCancelButtons, pictures, subMiddleSection, rightSections, middleSections, componentExample} = barPage;
 
     beforeAll(() => {
         barPage.open();
@@ -63,9 +63,14 @@ describe('Bar test suite:', function() {
     });
 
     fdescribe('Check visual regression', function() {
+        beforeAll(() => {
+            barPage.open();
+            waitForPresent(componentExample);
+        }, 1);
+
         it('should check examples visual regression', () => {
-            barPage.saveExampleBaselineScreenshot('bar');
-            expect(barPage.compareWithBaseline('bar')).toBeLessThan(1);
+            barPage.saveExampleBaselineScreenshot('bar', componentExample);
+            expect(barPage.compareWithBaseline('bar', componentExample)).toBeLessThan(1);
         });
     });
 });
