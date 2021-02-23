@@ -1,18 +1,21 @@
-<fd-segmented-button style="margin-bottom: 1rem;">
-    <button fd-button (click)="showHideCard('card1')">
-        {{ card1Visibility ? 'Hide Card1' : 'Show Card1' }}
+<fd-segmented-button style="margin-bottom: 1rem;"
+                     [toggle]="true"
+                     [(ngModel)]="cardsHidden"
+                     (ngModelChange)="update()">
+    <button fd-button value="card1">
+        {{ !isHidden('card1') ? 'Hide Card1' : 'Show Card1' }}
     </button>
-    <button fd-button (click)="showHideCard('card2')">
-        {{ card2Visibility ? 'Hide Card2' : 'Show Card2' }}
+    <button fd-button value="card2">
+        {{ !isHidden('card2') ? 'Hide Card2' : 'Show Card2' }}
     </button>
-    <button fd-button (click)="showHideCard('card3')">
-        {{ card3Visibility ? 'Hide Card3' : 'Show Card3' }}
+    <button fd-button value="card3">
+        {{ !isHidden('card3') ? 'Hide Card3' : 'Show Card3' }}
     </button>
 </fd-segmented-button>
 
 <div style="padding: 1rem; overflow: auto;">
     <fd-fixed-card-layout>
-        <ng-container *ngIf="card1Visibility">
+        <ng-container *ngIf="!isHidden('card1')">
             <fd-card *fdCardDef>
                 <fd-card-header>
                     <h2 fd-card-title>Card Title</h2>
@@ -38,7 +41,7 @@
                 </fd-card-content>
             </fd-card>
         </ng-container>
-        <ng-container *ngIf="card2Visibility">
+        <ng-container *ngIf="!isHidden('card2')">
             <fd-card *fdCardDef>
                 <fd-card-header>
                     <h2 fd-card-title>Projected revenue</h2>
@@ -84,7 +87,7 @@
                 </fd-card-content>
             </fd-card>
         </ng-container>
-        <ng-container *ngIf="card3Visibility">
+        <ng-container *ngIf="!isHidden('card3')">
             <fd-card *fdCardDef>
                 <fd-card-header>
                     <h2 fd-card-title>Table card</h2>
