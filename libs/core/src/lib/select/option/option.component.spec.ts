@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { OptionComponent } from './option.component';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 
 import { OptionComponent } from './option.component';

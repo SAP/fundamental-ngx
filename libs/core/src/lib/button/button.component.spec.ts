@@ -67,7 +67,7 @@ describe('ButtonComponent – Disabled', () => {
 
     let component, componentInstance: ButtonComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ButtonComponent, DisabledTestComponent, AriaDisabledTestComponent]
         });
