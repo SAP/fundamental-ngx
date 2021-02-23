@@ -17,7 +17,7 @@ import { KeyUtil } from '../utils/functions';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export const isSelectedClass = 'is-selected';
+export const isSelectedClass = 'fd-button--toggled';
 export const isDisabledClass = 'is-disabled';
 
 /**
@@ -256,8 +256,6 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         this._buttons.forEach(button => button.disabled = disable)
         if (disable) {
             this._buttons.forEach(button => button.elementRef().nativeElement.setAttribute('disabled', true));
-        } else {
-            this._buttons.forEach(button => button.elementRef().nativeElement.removeAttribute('disabled'));
         }
         this._detectChanges();
     }

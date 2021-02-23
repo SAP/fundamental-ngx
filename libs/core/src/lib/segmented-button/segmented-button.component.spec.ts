@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SegmentedButtonComponent, isSelectedClass } from './segmented-button.component';
+import { SegmentedButtonComponent, isSelectedClass, isDisabledClass } from './segmented-button.component';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 
@@ -103,6 +103,7 @@ describe('SegmentedButtonComponent', () => {
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
         expect(component.segmentedButton['_currentValue']).toEqual('first');
         component.secondButton.nativeElement.setAttribute('disabled', true);
+        component.secondButton.nativeElement.classList.add(isDisabledClass);
         component.secondButton.nativeElement.dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
