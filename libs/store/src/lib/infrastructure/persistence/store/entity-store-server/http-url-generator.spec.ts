@@ -4,7 +4,7 @@ import {ENTITY_OPERATIONS} from '../../../../domain/rest-resource';
 import { DefaultHttpUrlGenerator } from './http-url-generator';
 
 describe('HTTP URL Generator', () => {
-    class MockPluralizer extends Pluralizer {
+    class MockPluralizer implements Pluralizer {
         pluralize(name: string): string {
             return name === 'hero' ? 'heroes' : name + 's';
         }

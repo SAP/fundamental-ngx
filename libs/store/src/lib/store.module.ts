@@ -18,6 +18,10 @@ import {
 } from './infrastructure/persistence/store/entity-store-server/http-url-generator';
 import { EntityStoreServerServiceFactory } from './infrastructure/persistence/store/entity-store-server/entity-store-server';
 import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
+import {
+    DefaultEntityStoreBuilderFactory,
+    EntityStoreBuilderFactory
+} from './infrastructure/persistence/store/entity-store-server/entity-store-builder';
 
 function mapFundamentalConfigToNgrxConfig(conf: FundamentalStoreConfig): EntityDataModuleConfig {
     const entityMetadata: EntityMetadataMap = {};
@@ -72,6 +76,8 @@ export class FundamentalStoreModule {
 
             { provide: ENTITY_MODEL_MAP, useValue: conf.entities },
             { provide: EntityMetaOptionsService, useClass: DefaultEntityMetaOptionsService },
+            { provide: EntityStoreBuilderFactory, useClass: DefaultEntityStoreBuilderFactory },
+
             { provide: HttpUrlGenerator, useClass: DefaultHttpUrlGenerator },
             { provide: DefaultDataServiceFactory, useClass: EntityStoreServerServiceFactory }
         ];
@@ -83,6 +89,11 @@ export class FundamentalStoreModule {
     }
 
     static forFeature(conf: FundamentalStoreConfig): ModuleWithProviders<FundamentalStoreModule> {
-        throw Error('FundamentalStoreModule.forFeature() is not implemented yet');
+        throw Error('FundamentalStoreModule.forFeature() is not implement yet');
+
+        return {
+            ngModule: FundamentalStoreModuleForFeature,
+            providers: []
+        };
     }
 }
