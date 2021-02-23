@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.15...v0.28.0-rc.16) (2021-02-23)
+
+
+### Features
+
+* (Core) introduce text component ([#4654](https://github.com/SAP/fundamental-ngx/issues/4654)) ([d9a795a](https://github.com/SAP/fundamental-ngx/commit/d9a795a8015a3aab72ab4dc2ad18c334778b7bfc))
+
 ## [0.28.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.14...v0.28.0-rc.15) (2021-02-23)
 
 ## [0.28.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.13...v0.28.0-rc.14) (2021-02-23)
