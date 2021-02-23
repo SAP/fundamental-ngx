@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.13...v0.28.0-rc.14) (2021-02-23)
+
+
+### Features
+
+* (Core) introduce ControlValueAccessor to SegmentedButton  ([#4579](https://github.com/SAP/fundamental-ngx/issues/4579)) ([94bf239](https://github.com/SAP/fundamental-ngx/commit/94bf2399b98b3ac787837d9baab13aedf6cdf320))
+
 ## [0.28.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.12...v0.28.0-rc.13) (2021-02-23)
 
 ## [0.28.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.11...v0.28.0-rc.12) (2021-02-22)
