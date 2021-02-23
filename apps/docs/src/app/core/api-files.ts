@@ -263,6 +263,7 @@ export const API_FILES = {
         'TabSeparator',
         'TabInfo',
     ],
+    text: ['TextComponent'],
     tile: [
         'TileComponent',
         'TileHeaderDirective',
