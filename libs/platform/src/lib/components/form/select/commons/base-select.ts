@@ -17,20 +17,9 @@ import {
     ViewChild
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import {
-    CONTROL,
-    DOWN_ARROW,
-    ENTER,
-    ESCAPE,
-    LEFT_ARROW,
-    RIGHT_ARROW,
-    SHIFT,
-    TAB,
-    UP_ARROW,
-    BACKSPACE
-} from '@angular/cdk/keycodes';
+import { ENTER } from '@angular/cdk/keycodes';
 
-import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import {
@@ -227,12 +216,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
      * * @hidden
      * */
     _optionItemTemplate: TemplateRef<any>;
-
-    /**
-     * Custom Group Header item Template
-     * @hidden
-     * */
-    _groupItemTemplate: TemplateRef<any>;
 
     /**
      * Custom Secondary item Template
