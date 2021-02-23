@@ -1,15 +1,14 @@
 import { ObjectAttributePo } from '../pages/object-attribute.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
-import { getAttributeByName } from '../../driver/wdio';
+import { getAttributeByName, refreshPage, waitForElDisplayed } from '../../driver/wdio';
 import { disabledAttribute, labelAttribute, linkAttribute, linkText, standaloneText } from '../fixtures/appData/object-attribute-contents';
 
 describe('object attribute test suite', function() {
     const objectAttributePage = new ObjectAttributePo();
     const {
-        textExample,
-        linkExample,
-        objectAttribute,
-        objectLinkAttribute
+        standaloneTextObject,
+        externalLinkObject,
+        linkObject
     } = objectAttributePage;
 
     beforeAll(() => {
@@ -17,19 +16,19 @@ describe('object attribute test suite', function() {
     }, 1);
 
     it('should check standalone text attribute', () => {
-        expect(getAttributeByName(textExample + objectAttribute, labelAttribute)).toBe(standaloneText);
+        expect(getAttributeByName(standaloneTextObject, labelAttribute)).toBe(standaloneText);
     });
 
     it('should check link attribute', () => {
-        checkAttributeValueTrue(linkExample + objectAttribute, linkAttribute);
+        checkAttributeValueTrue(linkObject, linkAttribute);
     });
 
     it('should check link text', () => {
-        checkElementTextValue(linkExample + objectLinkAttribute, linkText);
+        checkElementTextValue(externalLinkObject, linkText);
     });
 
     it('check disabled link', () => {
-        expect(getAttributeByName(linkExample + objectAttribute, disabledAttribute, 2)).toBe('true');
+        expect(getAttributeByName(linkObject, disabledAttribute, 2)).toBe('true');
     });
 
     it('should check orientation', () => {
@@ -37,6 +36,8 @@ describe('object attribute test suite', function() {
     });
 
     it('check visual regression', () => {
+        refreshPage();
+        waitForElDisplayed(standaloneTextObject);
         objectAttributePage.saveExampleBaselineScreenshot('object-attribute');
         expect(objectAttributePage.compareWithBaseline('object-attribute')).toBeLessThan(1);
     });
