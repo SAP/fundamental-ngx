@@ -1,5 +1,6 @@
 import { SwitchPo } from '../pages/switch.po';
-import switchPageContent from '../fixtures/appData/swich-page-content';
+import {semantic_compact_switch_alternative_text, default_compact_switch_alternative_text, default_switch_alternative_text,
+semantic_switch_alternative_text, disabled_switch_alternative_text, form_disabled_switch_alternative_text} from '../fixtures/appData/swich-page-content';
 import {
     browserIsIE,
     browserIsIEorSafari,
@@ -19,25 +20,33 @@ import {
 
 describe('Verify Switch component', function() {
     const switchPage = new SwitchPo();
+    const {
+        defaultSwitchLabel, defaultSwitchInput, defaultSwitchSizeAttr, defaultSwitchHandel, defaultCompactSwitchLabel,
+        defaultCompactSwitchInput, defaultCompactSwitchSizeAttr, defaultCompactSwitchHandel, disabledSwitchLabel, disabledSwitchInput,
+        disabledSwitchHandel, formDisabledSwitchLabel, formDisabledSwitchInput, formDisabledSwitchHandel, semanticSwitchLabel,
+        semanticSwitchInput, semanticSwitchHandel, semanticSwitchIconOff, semanticSwitchIconOn, semanticCompactSwitchLabel,
+        semanticCompactSwitchInput, semanticCompactSwitchHandel, semanticCompactSwitchIconOff, semanticCompactSwitchIconOn
+    } = switchPage;
+
     beforeAll(() => {
         switchPage.open();
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(switchPage.root, 0, 20000);
+        waitForElDisplayed(switchPage.title);
     }, 1);
 
     describe('has default and compact switch and', function() {
         it('should default change something to active or inactive', () => {
             // capture before state
-            waitForPresent(switchPage.defaultSwitchInput);
-            const isCheckedBefore = getAttributeByName(switchPage.defaultSwitchInput, 'aria-checked');
-            const handelColorBefore = getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
-            click(switchPage.defaultSwitchHandel);
+            waitForPresent(defaultSwitchInput);
+            const isCheckedBefore = getAttributeByName(defaultSwitchInput, 'aria-checked');
+            const handelColorBefore = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
+            click(defaultSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.defaultSwitchInput, 'aria-checked');
-            const handelColorAfter = getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
+            const isCheckedAfter = getAttributeByName(defaultSwitchInput, 'aria-checked');
+            const handelColorAfter = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
 
             expect(isCheckedBefore).toBe('false', 'Default switch has incorrect state before click');
             expect(handelColorBefore.value).toContain('255,255,255');
@@ -47,12 +56,12 @@ describe('Verify Switch component', function() {
 
         it('should compact change something to active or inactive', () => {
             // capture before state
-            const isCheckedBefore = getAttributeByName(switchPage.defaultCompactSwitchInput, 'aria-checked');
-            const handelColorBefore = getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
-            click(switchPage.defaultCompactSwitchHandel);
+            const isCheckedBefore = getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
+            const handelColorBefore = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
+            click(defaultCompactSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.defaultCompactSwitchInput, 'aria-checked');
-            const handelColorAfter = getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
+            const isCheckedAfter = getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
+            const handelColorAfter = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
 
             expect(isCheckedBefore).toBe('false', 'Default compact switch has incorrect state before click');
             expect(handelColorBefore.value).toContain('255,255,255');
@@ -61,41 +70,41 @@ describe('Verify Switch component', function() {
         });
 
         it('should default change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
+            const handelColorBefore = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
 
-            mouseHoverElement(switchPage.defaultSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(switchPage.defaultSwitchHandel, 'background-color');
+            mouseHoverElement(defaultSwitchHandel);
+            const handelColorAfter = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
 
             expect(handelColorBefore.value).toContain('255,255,255');
             expect(handelColorAfter.value).toContain('235,245,254');
         });
 
         it('should compact default change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
+            const handelColorBefore = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            mouseHoverElement(switchPage.defaultCompactSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(switchPage.defaultCompactSwitchHandel, 'background-color');
+            mouseHoverElement(defaultCompactSwitchHandel);
+            const handelColorAfter = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
 
             expect(handelColorBefore.value).toContain('255,255,255');
             expect(handelColorAfter.value).toContain('235,245,254');
         });
 
         it('compact switch should be smaller than default', () => {
-            waitForPresent(switchPage.defaultSwitchSize);
-            waitForElDisplayed(switchPage.defaultSwitchSize);
-            waitForPresent(switchPage.defaultCompactSwitchSize);
-            waitForElDisplayed(switchPage.defaultCompactSwitchSize);
-            const defaultSwitchSize = getElementSize(switchPage.defaultSwitchSize);
-            const defaultCompactSwitchSize = getElementSize(switchPage.defaultCompactSwitchSize);
+            waitForPresent(defaultSwitchSizeAttr);
+            waitForElDisplayed(defaultSwitchSizeAttr);
+            waitForPresent(defaultCompactSwitchSizeAttr);
+            waitForElDisplayed(defaultCompactSwitchSizeAttr);
+            const defaultSwitchSize = getElementSize(defaultSwitchSizeAttr);
+            const defaultCompactSwitchSize = getElementSize(defaultCompactSwitchSizeAttr);
 
             expect(defaultSwitchSize.height).toBeGreaterThan(defaultCompactSwitchSize.height, 'height');
             expect(defaultSwitchSize.width).toBeGreaterThan(defaultCompactSwitchSize.width, 'width');
@@ -104,8 +113,8 @@ describe('Verify Switch component', function() {
 
     describe('has disabled and disabled-form switch and ', function() {
         it('should not be able to interact with disabled switch', () => {
-            scrollIntoView(switchPage.disabledSwitchInput);
-            const isClickable = isElementClickable(switchPage.disabledSwitchInput);
+            scrollIntoView(disabledSwitchInput);
+            const isClickable = isElementClickable(disabledSwitchInput);
             expect(isClickable).toBe(false);
         });
 
@@ -115,37 +124,37 @@ describe('Verify Switch component', function() {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            waitForPresent(switchPage.formDisabledSwitchInput);
-            scrollIntoView(switchPage.formDisabledSwitchInput);
-            const isClickable = isElementClickable(switchPage.formDisabledSwitchInput);
+            waitForPresent(formDisabledSwitchInput);
+            scrollIntoView(formDisabledSwitchInput);
+            const isClickable = isElementClickable(formDisabledSwitchInput);
             expect(isClickable).toBe(false);
         });
 
         it('should not change state on hover', () => {
-            waitForPresent(switchPage.disabledSwitchHandel);
-            const handelColorBefore = getCSSPropertyByName(switchPage.disabledSwitchHandel, 'background-color');
+            waitForPresent(disabledSwitchHandel);
+            const handelColorBefore = getCSSPropertyByName(disabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (browserIsSafari()) {
                 console.log('Skip for Safari');
                 return;
             }
-            scrollIntoView(switchPage.disabledSwitchHandel);
-            mouseHoverElement(switchPage.disabledSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(switchPage.disabledSwitchHandel, 'background-color');
+            scrollIntoView(disabledSwitchHandel);
+            mouseHoverElement(disabledSwitchHandel);
+            const handelColorAfter = getCSSPropertyByName(disabledSwitchHandel, 'background-color');
 
             expect(handelColorBefore.value).toBe(handelColorAfter.value);
         });
 
         it('form should not change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(switchPage.formDisabledSwitchHandel, 'background-color');
+            const handelColorBefore = getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (browserIsSafari()) {
                 console.log('Skip for Safari');
                 return;
             }
-            scrollIntoView(switchPage.formDisabledSwitchHandel);
-            mouseHoverElement(switchPage.formDisabledSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(switchPage.formDisabledSwitchHandel, 'background-color');
+            scrollIntoView(formDisabledSwitchHandel);
+            mouseHoverElement(formDisabledSwitchHandel);
+            const handelColorAfter = getCSSPropertyByName(formDisabledSwitchHandel, 'background-color');
 
             expect(handelColorBefore.value).toBe(handelColorAfter.value);
         });
@@ -153,20 +162,20 @@ describe('Verify Switch component', function() {
 
 
     it('should have alternative title or aria-label for all switches', () => {
-        waitForPresent(switchPage.defaultSwitchInput);
-        const alternativeTextDefaultSwitch = getAttributeByName(switchPage.defaultSwitchLabel, 'aria-label');
-        const alternativeTextDefaultCompactSwitch = getAttributeByName(switchPage.defaultCompactSwitchLabel, 'aria-label');
-        const alternativeTextDisabledSwitch = getAttributeByName(switchPage.disabledSwitchLabel, 'aria-label');
-        const alternativeTextFormDisabledSwitch = getAttributeByName(switchPage.formDisabledSwitchLabel, 'aria-label');
-        const alternativeTextSemanticSwitch = getAttributeByName(switchPage.semanticSwitchLabel, 'aria-label');
-        const alternativeTextSemanticCompactFormDisabledSwitch = getAttributeByName(switchPage.semanticCompactSwitchLabel, 'aria-label');
+        waitForPresent(defaultSwitchInput);
+        const alternativeTextDefaultSwitch = getAttributeByName(defaultSwitchLabel, 'aria-label');
+        const alternativeTextDefaultCompactSwitch = getAttributeByName(defaultCompactSwitchLabel, 'aria-label');
+        const alternativeTextDisabledSwitch = getAttributeByName(disabledSwitchLabel, 'aria-label');
+        const alternativeTextFormDisabledSwitch = getAttributeByName(formDisabledSwitchLabel, 'aria-label');
+        const alternativeTextSemanticSwitch = getAttributeByName(semanticSwitchLabel, 'aria-label');
+        const alternativeTextSemanticCompactFormDisabledSwitch = getAttributeByName(semanticCompactSwitchLabel, 'aria-label');
 
-        expect(alternativeTextDefaultSwitch).toBe(switchPageContent.default_switch_alternative_text);
-        expect(alternativeTextDefaultCompactSwitch).toBe(switchPageContent.default_compact_switch_alternative_text);
-        expect(alternativeTextDisabledSwitch).toBe(switchPageContent.disabled_switch_alternative_text);
-        expect(alternativeTextFormDisabledSwitch).toBe(switchPageContent.form_disabled_switch_alternative_text);
-        expect(alternativeTextSemanticSwitch).toBe(switchPageContent.semantic_switch_alternative_text);
-        expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(switchPageContent.semantic_compact_switch_alternative_text);
+        expect(alternativeTextDefaultSwitch).toBe(default_switch_alternative_text);
+        expect(alternativeTextDefaultCompactSwitch).toBe(default_compact_switch_alternative_text);
+        expect(alternativeTextDisabledSwitch).toBe(disabled_switch_alternative_text);
+        expect(alternativeTextFormDisabledSwitch).toBe(form_disabled_switch_alternative_text);
+        expect(alternativeTextSemanticSwitch).toBe(semantic_switch_alternative_text);
+        expect(alternativeTextSemanticCompactFormDisabledSwitch).toBe(semantic_compact_switch_alternative_text);
     });
     /*
     xit('test accessibility', async ()=> {
@@ -177,16 +186,7 @@ describe('Verify Switch component', function() {
 
 
     it('should have RTL orientation', () => {
-        const arrL = getElementArrayLength(switchPage.exampleAreaContainersArr);
-        for (let i = 0; arrL > i; i++) {
-            scrollIntoView(switchPage.exampleAreaContainersArr, i);
-            expect(getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction', i).value).toBe('ltr', 'css prop direction ' + i);
-            const dirValueBefore = getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', i);
-            expect([null, '']).toContain(dirValueBefore);
-            click(switchPage.rtlSwitcherArr, i);
-            expect(getCSSPropertyByName(switchPage.exampleAreaContainersArr, 'direction', i).value).toBe('rtl');
-            expect(getAttributeByName(switchPage.exampleAreaContainersArr, 'dir', i)).toBe('rtl');
-        }
+        switchPage.checkRtlSwitch();
     });
 
     describe('has semantic switch and', function() {
@@ -197,14 +197,14 @@ describe('Verify Switch component', function() {
             }
 
             // capture before state
-            const isCheckedBefore = getAttributeByName(switchPage.semanticSwitchInput, 'aria-checked');
-            const onIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
-            const offIconStateBefore = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
-            click(switchPage.semanticSwitchHandel);
+            const isCheckedBefore = getAttributeByName(semanticSwitchInput, 'aria-checked');
+            const onIconStateBefore = getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
+            const offIconStateBefore = getCSSPropertyByName(semanticSwitchIconOff, 'visibility');
+            click(semanticSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.semanticSwitchInput, 'aria-checked');
-            const onIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOn, 'visibility');
-            const offIconStateAfter = getCSSPropertyByName(switchPage.semanticSwitchIconOff, 'visibility');
+            const isCheckedAfter = getAttributeByName(semanticSwitchInput, 'aria-checked');
+            const onIconStateAfter = getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
+            const offIconStateAfter = getCSSPropertyByName(semanticSwitchIconOff, 'visibility');
 
             expect(isCheckedBefore).toBe('false', 'Semantic switch has incorrect state before click');
             expect(isCheckedAfter).toBe('true', 'Semantic switch has incorrect state after click');
@@ -216,14 +216,14 @@ describe('Verify Switch component', function() {
 
         it('compact should change something from positive to negative', () => {
             // capture before state
-            const isCheckedBefore = getAttributeByName(switchPage.semanticCompactSwitchInput, 'aria-checked');
-            const onIconStateBefore = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOn, 'visibility');
-            const offIconStateBefore = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOff, 'visibility');
-            click(switchPage.semanticCompactSwitchHandel);
+            const isCheckedBefore = getAttributeByName(semanticCompactSwitchInput, 'aria-checked');
+            const onIconStateBefore = getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');
+            const offIconStateBefore = getCSSPropertyByName(semanticCompactSwitchIconOff, 'visibility');
+            click(semanticCompactSwitchHandel);
             // capture after state
-            const isCheckedAfter = getAttributeByName(switchPage.semanticCompactSwitchInput, 'aria-checked');
-            const onIconStateAfter = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOn, 'visibility');
-            const offIconStateAfter = getCSSPropertyByName(switchPage.semanticCompactSwitchIconOff, 'visibility');
+            const isCheckedAfter = getAttributeByName(semanticCompactSwitchInput, 'aria-checked');
+            const onIconStateAfter = getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');
+            const offIconStateAfter = getCSSPropertyByName(semanticCompactSwitchIconOff, 'visibility');
 
             expect(isCheckedBefore).toBe('true', 'Semantic compact switch has incorrect state before click');
             expect(isCheckedAfter).toBe('false', 'Semantic compact switch has incorrect state after click');
@@ -234,12 +234,12 @@ describe('Verify Switch component', function() {
         });
 
         it('should semantic change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(switchPage.semanticSwitchHandel, 'background-color');
+            const handelColorBefore = getCSSPropertyByName(semanticSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (!browserIsIEorSafari()) {
-                scrollIntoView(switchPage.semanticSwitchHandel);
-                mouseHoverElement(switchPage.semanticSwitchHandel);
-                const handelColorAfter = getCSSPropertyByName(switchPage.semanticSwitchHandel, 'background-color');
+                scrollIntoView(semanticSwitchHandel);
+                mouseHoverElement(semanticSwitchHandel);
+                const handelColorAfter = getCSSPropertyByName(semanticSwitchHandel, 'background-color');
 
                 expect(handelColorBefore.value).toContain('255,255,255');
                 expect(handelColorAfter.value).toContain('255,235,235');
@@ -249,15 +249,15 @@ describe('Verify Switch component', function() {
         });
 
         it('should semantic compact change state on hover', () => {
-            const handelColorBefore = getCSSPropertyByName(switchPage.semanticCompactSwitchHandel, 'background-color');
+            const handelColorBefore = getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
             // capture handel color on Mouse hover
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            scrollIntoView(switchPage.semanticCompactSwitchHandel);
-            mouseHoverElement(switchPage.semanticCompactSwitchHandel);
-            const handelColorAfter = getCSSPropertyByName(switchPage.semanticCompactSwitchHandel, 'background-color');
+            scrollIntoView(semanticCompactSwitchHandel);
+            mouseHoverElement(semanticCompactSwitchHandel);
+            const handelColorAfter = getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
 
             expect(handelColorBefore.value).toContain('255,255,255');
             expect(handelColorAfter.value).toContain('241,253,246');
@@ -280,4 +280,5 @@ describe('Verify Switch component', function() {
     /*xdescribe('has correct page content', function() {
          // TODO: add page content checks
     });*/
-});
+})
+;

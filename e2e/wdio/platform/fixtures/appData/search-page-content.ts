@@ -1,4 +1,2 @@
-export default {
-    search_placeholder: 'Search',
-    expected_category: 'red'
-};
+export const search_placeholder = 'Search';
+export const expected_category = 'red';

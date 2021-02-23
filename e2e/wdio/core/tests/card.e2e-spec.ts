@@ -9,10 +9,20 @@ import {
     getElementArrayLength
 } from '../../driver/wdio';
 import { checkAttributeValueTrue, checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
-import CardData from '../fixtures/appData/card-content';
+import {cardTitleArr, compactAttr, analyticsTitle, badgeText, barChartCounterText, barChartItemsText, barChartTitleText, btnText,
+cardListItemText, cardSubtitleText, cardTypeAttr, colorAttr, compactFont, fontSizeAttr, loaderAttr, statusColors,
+tableCardCountries, tableCardNames, tableCardPrices, tableCardStatuses, tableCardTitle, tableContentsText, tableHeaderText} from '../fixtures/appData/card-content';
 
 describe('Card test suite:', function() {
     const cardPage = new CardPo();
+    const {
+        cardTitle, cardHeader, cardListItems, cardAvatar, cardSubtitle, cardCounter, cardBadge, cardAttr,
+        compactCardHeader, compactCardListItems, compactCardAttr, loaderCardAttr, loaderIcon, ftCardHeader,
+        ftCardListItems, ftFooter, ftButtons, kpiCardHeader, kpiCardTitle, kpiAnalyticsHeaderIcons, kpiAnalyticsHeader,
+        kpiHeaderSubtitle, kpiCardContent, kpiCardChart, tableCardHeader, tableCardTableHeader, tableCardItems,
+        tableCardItemNames, tableCardItemCountries, tableCardItemPrices, tableCardItemStatuses, barChartHeader,
+        barChartTitle, barChartCounter, barChartItems, barCharBars
+    } = cardPage;
 
     beforeAll(() => {
         cardPage.open();
@@ -20,34 +30,34 @@ describe('Card test suite:', function() {
 
     describe('Standard card examples:', function() {
         it('should check card header', () => {
-            checkElArrIsClickable(cardPage.cardHeader);
-            checkElementTextValue(cardPage.cardTitle, CardData.cardTitleArr);
-            expect(isElementDisplayed(cardPage.cardAvatar)).toBe(true);
-            expect(isElementDisplayed(cardPage.cardCounter)).toBe(true);
-            expect(isElementDisplayed(cardPage.cardSubtitle)).toBe(true);
-            expect(isElementDisplayed(cardPage.cardBadge)).toBe(true);
-            expect(getText(cardPage.cardSubtitle)).toBe(CardData.cardSubtitle);
-            expect(getText(cardPage.cardBadge)).toBe(CardData.badgeText);
+            checkElArrIsClickable(cardHeader);
+            checkElementTextValue(cardTitle, cardTitleArr);
+            expect(isElementDisplayed(cardAvatar)).toBe(true);
+            expect(isElementDisplayed(cardCounter)).toBe(true);
+            expect(isElementDisplayed(cardSubtitle)).toBe(true);
+            expect(isElementDisplayed(cardBadge)).toBe(true);
+            expect(getText(cardSubtitle)).toBe(cardSubtitleText);
+            expect(getText(cardBadge)).toBe(badgeText);
         });
 
         it('should check card content', () => {
-            checkElArrIsClickable(cardPage.cardListItems);
-            checkElementText(cardPage.cardListItems);
-            expect(getAttributeByName(cardPage.cardAttr, CardData.cardTypeAttr, 2)).toBe('list');
+            checkElArrIsClickable(cardListItems);
+            checkElementText(cardListItems);
+            expect(getAttributeByName(cardAttr, cardTypeAttr, 2)).toBe('list');
         });
     });
 
     describe('Compact examples:', function() {
         it('should check its compact and do basic checks', () => {
-            checkAttributeValueTrue(cardPage.compactCardAttr, CardData.compactAttr);
-            checkElementText(cardPage.compactCardHeader);
-            checkElementTextValue(cardPage.compactCardListItems, CardData.cardListItemText);
-            checkElArrIsClickable(cardPage.compactCardHeader);
-            checkElArrIsClickable(cardPage.compactCardListItems);
+            checkAttributeValueTrue(compactCardAttr, compactAttr);
+            checkElementText(compactCardHeader);
+            checkElementTextValue(compactCardListItems, cardListItemText);
+            checkElArrIsClickable(compactCardHeader);
+            checkElArrIsClickable(compactCardListItems);
             // skip IE due to https://github.com/SAP/fundamental-ngx/issues/4310
             if (!browserIsIE()) {
-                expect(getCSSPropertyByName(cardPage.compactCardListItems, CardData.fontSizeAttr).value)
-                    .toBe(CardData.compactFont);
+                expect(getCSSPropertyByName(compactCardListItems, fontSizeAttr).value)
+                    .toBe(compactFont);
                 return;
             }
             console.log('skip IE due to issue #4310');
@@ -56,75 +66,75 @@ describe('Card test suite:', function() {
 
     describe('Card loader examples:', function() {
         it('should check loading icon and attributes', () => {
-            checkAttributeValueTrue(cardPage.loaderCardAttr, CardData.loaderAttr);
-            expect(isElementDisplayed(cardPage.loaderIcon)).toBe(true);
+            checkAttributeValueTrue(loaderCardAttr, loaderAttr);
+            expect(isElementDisplayed(loaderIcon)).toBe(true);
         });
     });
 
     describe('Card footer examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(cardPage.ftCardHeader);
-            checkElArrIsClickable(cardPage.ftCardListItems);
-            checkElementTextValue(cardPage.ftCardListItems, CardData.cardListItemText);
-            expect(getText(cardPage.ftCardHeader)).toBe(CardData.cardTitleArr[0]);
+            checkElArrIsClickable(ftCardHeader);
+            checkElArrIsClickable(ftCardListItems);
+            checkElementTextValue(ftCardListItems, cardListItemText);
+            expect(getText(ftCardHeader)).toBe(cardTitleArr[0]);
         });
 
         it('should check footer', () => {
-            expect(isElementDisplayed(cardPage.ftFooter)).toBe(true);
-            checkElArrIsClickable(cardPage.ftButtons);
-            checkElementTextValue(cardPage.ftButtons, CardData.btnText);
+            expect(isElementDisplayed(ftFooter)).toBe(true);
+            checkElArrIsClickable(ftButtons);
+            checkElementTextValue(ftButtons, btnText);
         });
     });
 
     describe('Analytical card examples:', function() {
         it('should check header', () => {
-            checkElArrIsClickable(cardPage.kpiAnalyticsHeader);
-            checkElementText(cardPage.kpiCardHeader);
-            expect(getText(cardPage.kpiCardTitle)).toBe(CardData.analyticsTitle);
-            checkElementText(cardPage.kpiAnalyticsHeaderIcons);
-            checkElementText(cardPage.kpiHeaderSubtitle);
+            checkElArrIsClickable(kpiAnalyticsHeader);
+            checkElementText(kpiCardHeader);
+            expect(getText(kpiCardTitle)).toBe(analyticsTitle);
+            checkElementText(kpiAnalyticsHeaderIcons);
+            checkElementText(kpiHeaderSubtitle);
         });
 
         it('should check content', () => {
-            expect(isElementDisplayed(cardPage.kpiCardContent)).toBe(true);
-            expect(waitForElDisplayed(cardPage.kpiCardChart)).toBe(true);
+            expect(isElementDisplayed(kpiCardContent)).toBe(true);
+            expect(waitForElDisplayed(kpiCardChart)).toBe(true);
         });
     });
 
     describe('Table card examples:', function() {
         it('should check header', () => {
-            checkElArrIsClickable(cardPage.tableCardHeader);
-            expect(getText(cardPage.tableCardHeader)).toBe(CardData.tableCardTitle);
+            checkElArrIsClickable(tableCardHeader);
+            expect(getText(tableCardHeader)).toBe(tableCardTitle);
         });
 
         it('should check table content', () => {
-            checkElementTextValue(cardPage.tableCardTableHeader, CardData.tableHeaderText);
-            checkElementTextValue(cardPage.tableCardItemNames, CardData.tableCardNames);
-            checkElementTextValue(cardPage.tableCardItemCountries, CardData.tableCardCountries);
-            checkElementTextValue(cardPage.tableCardItemPrices, CardData.tableCardPrices);
-            checkElementTextValue(cardPage.tableCardItemStatuses, CardData.tableCardStatuses);
-            checkElArrIsClickable(cardPage.tableCardItems);
+            checkElementTextValue(tableCardTableHeader, tableHeaderText);
+            checkElementTextValue(tableCardItemNames, tableCardNames);
+            checkElementTextValue(tableCardItemCountries, tableCardCountries);
+            checkElementTextValue(tableCardItemPrices, tableCardPrices);
+            checkElementTextValue(tableCardItemStatuses, tableCardStatuses);
+            checkElArrIsClickable(tableCardItems);
         });
 
         it('should check status colors', () => {
-            const statusesCount = getElementArrayLength(cardPage.tableCardItemStatuses);
+            const statusesCount = getElementArrayLength(tableCardItemStatuses);
             for (let i = 0; statusesCount > i; i++) {
-                expect(getCSSPropertyByName(cardPage.tableCardItemStatuses, CardData.colorAttr, i).value)
-                    .toContain(CardData.statusColors[i]);
+                expect(getCSSPropertyByName(tableCardItemStatuses, colorAttr, i).value)
+                    .toContain(statusColors[i]);
             }
         });
     });
 
     describe('Bar chart list examples:', function() {
         it('should check header', () => {
-            checkElArrIsClickable(cardPage.barChartHeader);
-            expect(getText(cardPage.barChartTitle)).toBe(CardData.barChartTitle);
-            expect(getText(cardPage.barChartCounter)).toBe(CardData.barChartCounter);
+            checkElArrIsClickable(barChartHeader);
+            expect(getText(barChartTitle)).toBe(barChartTitleText);
+            expect(getText(barChartCounter)).toBe(barChartCounterText);
         });
 
         it('should check chart content', () => {
-            checkElementTextValue(cardPage.barChartItems, CardData.barChartItems);
-            expect(isElementDisplayed(cardPage.barCharBars)).toBe(true);
+            checkElementTextValue(barChartItems, barChartItemsText);
+            expect(isElementDisplayed(barCharBars)).toBe(true);
         });
     });
 

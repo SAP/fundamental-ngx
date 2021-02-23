@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ObjectMarkerPo extends CoreBaseComponentPo {
     private url = '/object-marker';
@@ -12,5 +12,6 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
+        waitForPresent(this.marker);
     }
 }
