@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CustomValue } from '@fundamental-ngx/core';
+import { SliderCustomValue } from '@fundamental-ngx/core';
 
 import { SliderComponent } from './slider.component';
 import { FdpFormGroupModule } from '../form/public_api';
@@ -70,7 +70,7 @@ import { PlatformSliderModule } from './slider.module';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestSliderComponent {
-    customValues: CustomValue[] = [
+    customValues: SliderCustomValue[] = [
         { value: 1609452000000, label: 'Jan 1' },
         { value: 1609538400000, label: 'Jan 2' },
         { value: 1609624800000, label: 'Jan 3' },
@@ -100,7 +100,7 @@ class TestSliderComponent {
         return this.customForm.controls['value2'].value;
     }
 
-    get value3(): CustomValue {
+    get value3(): SliderCustomValue {
         return this.customForm.controls['value3'].value;
     }
 
