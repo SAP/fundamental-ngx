@@ -5,7 +5,7 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     private url = '/busyIndicator';
     componentExample = '.docs-tile-content-example';
     root = '#page-content';
-    ableButton = 'fd-busy-indicator ~ button';
+    enableDisableButton = 'fd-busy-indicator ~ button';
     formName = 'input[id="name"]';
     formSurname = 'input[id="surname"]';
     formPassword = 'input[id="password"]';
@@ -19,6 +19,6 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.ableButton);
+        waitForPresent(this.enableDisableButton);
     }
 }

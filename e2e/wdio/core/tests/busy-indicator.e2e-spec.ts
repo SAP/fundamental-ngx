@@ -7,7 +7,7 @@ import {
 
 describe('Busy Indicator test suite:', function() {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
-    const {formName, formSurname, formPassword, saveButton, ableButton,
+    const {formName, formSurname, formPassword, saveButton, enableDisableButton,
         saveIndicator, formIndicator, smallIndicator, middleIndicator, largeIndicator, componentExample} = busyIndicatorPage;
     const text = 'test';
 
@@ -35,11 +35,11 @@ describe('Busy Indicator test suite:', function() {
     });
 
     it('Verify elements are interactable after clicking on disable button', () => {
-        scrollIntoView(ableButton);
+        scrollIntoView(enableDisableButton);
         expect(isElementClickable(formName)).toBe(false);
         expect(isElementClickable(formSurname)).toBe(false);
         expect(isElementClickable(formPassword)).toBe(false);
-        click(ableButton);
+        click(enableDisableButton);
         expect(isElementClickable(formName)).toBe(true);
         expect(isElementClickable(formSurname)).toBe(true);
         expect(isElementClickable(formPassword)).toBe(true);
@@ -47,15 +47,15 @@ describe('Busy Indicator test suite:', function() {
     });
 
     it('Verify busy indicator appears after clicking on enable loading button', () => {
-        scrollIntoView(ableButton);
-        click(ableButton);
+        scrollIntoView(enableDisableButton);
+        click(enableDisableButton);
         addValue(formName, text);
         addValue(formSurname, text);
         addValue(formPassword, text);
         scrollIntoView(saveButton);
         click(saveButton);
-        scrollIntoView(ableButton);
-        click(ableButton);
+        scrollIntoView(enableDisableButton);
+        click(enableDisableButton);
         expect(isElementClickable(formName)).toBe(false);
         expect(isElementClickable(formSurname)).toBe(false);
         expect(isElementClickable(formPassword)).toBe(false);
