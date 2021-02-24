@@ -6,7 +6,6 @@ export class AlertPo extends CoreBaseComponentPo {
     root = '#page-content';
 
     button = ' button'
-
     alerts = 'fd-alert-example .fd-alert';
     closeAlertButton = 'fd-alert-example .fd-alert' + this.button;
     openOverlayButton = 'fd-alert-component-as-content-example' + this.button;

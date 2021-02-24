@@ -39,13 +39,11 @@ describe('alert test suite', function() {
 
         it('should check popup alerts', () => {
             const openOverlayButtonCount = 3;
-
             checkPopupAlert(openOverlayButton, openOverlayButtonCount);
         });
 
         it('should check custom popup alerts', () => {
             const customAlertCount = getElementArrayLength(openCustomAlertButton);
-
             checkPopupAlert(openCustomAlertButton, customAlertCount);
         });
 
@@ -68,7 +66,7 @@ describe('alert test suite', function() {
                 scrollIntoView(popupAlert);
                 saveElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`);
                 expect(checkElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`))
-                    .toBeLessThan(1)
+                    .toBeLessThan(1);
                 if (doesItExist(popupAlert + button) === false) {
                     waitForInvisibilityOf(popupAlert);
                     continue;
