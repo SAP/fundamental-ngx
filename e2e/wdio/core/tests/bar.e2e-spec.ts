@@ -63,10 +63,6 @@ describe('Bar test suite:', function() {
     });
 
     describe('Check visual regression', function() {
-        beforeAll(() => {
-            barPage.open();
-            waitForPresent(componentExample);
-        }, 1);
 
         it('should check examples visual regression', () => {
             barPage.saveExampleBaselineScreenshot('bar', componentExample);

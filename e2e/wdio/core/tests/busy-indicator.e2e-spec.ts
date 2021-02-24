@@ -8,7 +8,7 @@ import {
 describe('Busy Indicator test suite:', function() {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
     const {disableButton, formName, formSurname, formPassword, saveButton, enableLoadButton,
-        saveIndicator, formIndicator, smallIndicator, middleIndicator, largeIndicator} = busyIndicatorPage;
+        saveIndicator, formIndicator, smallIndicator, middleIndicator, largeIndicator, componentExample} = busyIndicatorPage;
     const text = 'test';
 
     beforeAll(() => {
@@ -66,14 +66,10 @@ describe('Busy Indicator test suite:', function() {
     });
 
     describe('Check visual regression', function() {
-        beforeAll(() => {
-            busyIndicatorPage.open();
-            waitForPresent(disableButton);
-        }, 1);
 
         it('should check examples visual regression', () => {
-            busyIndicatorPage.saveExampleBaselineScreenshot('busy-indicator');
-            expect(busyIndicatorPage.compareWithBaseline('busy-indicator')).toBeLessThan(1);
+            busyIndicatorPage.saveExampleBaselineScreenshot('busy-indicator', componentExample);
+            expect(busyIndicatorPage.compareWithBaseline('busy-indicator', componentExample)).toBeLessThan(1);
         });
     });
 });

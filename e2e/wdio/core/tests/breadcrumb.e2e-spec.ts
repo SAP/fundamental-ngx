@@ -38,10 +38,6 @@ describe('Breadcrumb test suite:', function() {
     });
 
     describe('Check visual regression', function() {
-        beforeAll(() => {
-            breadcrumbPage.open();
-            waitForPresent(links);
-        }, 1);
 
         it('should check examples visual regression', () => {
             breadcrumbPage.saveExampleBaselineScreenshot('breadcrumb');

@@ -3,6 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class BusyIndicatorPo extends CoreBaseComponentPo {
     private url = '/busyIndicator';
+    componentExample = '.docs-tile-content-example';
     root = '#page-content';
     disableButton = 'br~br~button';
     formName = 'input[id="name"]';
