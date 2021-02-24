@@ -26,7 +26,8 @@ export class IllustratedMessageDocsComponent {
         {
             language: 'typescript',
             code: illustratedMessageTsCode,
-            fileName: 'illustrated-message-example'
+            fileName: 'illustrated-message-example',
+            component: 'IllustratedMessageExampleComponent'
         }
     ];
 
@@ -39,7 +40,8 @@ export class IllustratedMessageDocsComponent {
         {
             language: 'typescript',
             code: illustratedMessageDialogTsCode,
-            fileName: 'illustrated-message-dialog-example'
+            fileName: 'illustrated-message-dialog-example',
+            component: 'IllustratedMessageDialogExampleComponent'
         }
     ];
 
@@ -52,7 +54,8 @@ export class IllustratedMessageDocsComponent {
         {
             language: 'typescript',
             code: illustratedMessageSpotTsCode,
-            fileName: 'illustrated-message-spot-example'
+            fileName: 'illustrated-message-spot-example',
+            component: 'IllustratedMessageSpotExampleComponent'
         }
     ];
 }
