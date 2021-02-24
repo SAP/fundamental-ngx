@@ -1,0 +1,139 @@
+<fd-docs-section-title id="mode" componentName="select">
+    Select Modes
+</fd-docs-section-title>
+<description>
+    Following examples presents different modes of the Select control.
+</description>
+<component-example>
+    <fdp-select-mode-example></fdp-select-mode-example>
+</component-example>
+<code-example [exampleFiles]="selectMode"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="columns" componentName="select">Select with Two Columns</fd-docs-section-title>
+<description>
+    Select with two columns of information.
+    Note that a <code>secondaryKey</code> and <code>ShowSecondaryText</code> is required.
+    <code>firstColumnRatio</code> and <code>SecondColoumnRatio</code> will help to set required width
+     ratio for each columns by default ratio is 3:2 which is equal to 60%:40%.
+</description>
+<component-example>
+    <fdp-select-columns-example></fdp-select-columns-example>
+</component-example>
+<code-example [exampleFiles]="selectColumns"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="semantic" componentName="select">
+    Select Semantic States
+</fd-docs-section-title>
+<description>
+    Use semantic states to visually highlight current <code>state</code> of the Select.
+</description>
+<component-example>
+    <fdp-select-semantic-state-example></fdp-select-semantic-state-example>
+</component-example>
+<code-example [exampleFiles]="selectSemantic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-select-template" componentName="select">
+    Custom Control Content With AutoResize
+</fd-docs-section-title>
+<description>
+    The content of the Select control can be customized using a custom template which needs to be referenced in the
+    <code>[controlTemplate]</code> input. Select provides the following context values to the template:
+    <ul>
+        <li>Text value of selected option - <code>implicit</code></li>
+        <li>Reference to selected option - <code>selected</code></li>
+    </ul>
+    Selected option as a context to custom template. Setting <code>[AutoResize]=true</code> with
+     no specific width helps to resize the select control based on option selected. 
+</description>
+<component-example>
+    <fdp-select-custom-trigger></fdp-select-custom-trigger>
+</component-example>
+<code-example [exampleFiles]="customSelectTemplate"></code-example>
+
+<separator></separator>
+
+
+<fd-docs-section-title id="select-mobile" componentName="select">
+    Select In Mobile Mode
+</fd-docs-section-title>
+<description>
+    To use Select in mobile mode:
+    <ul>
+        <li>import <code>SelectMobileModule</code></li>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+            look of the control
+        </li>
+    </ul>
+
+    Select Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
+    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more information.
+</description>
+<component-example>
+    <fdp-select-mobile-example></fdp-select-mobile-example>
+</component-example>
+<code-example [exampleFiles]="selectMobile"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="select-max-height" componentName="select">
+    Select Max Height
+</fd-docs-section-title>
+<description>
+    The Select component allows you to define the <code>[maxHeight]</code>. It can be useful when there are a lot of
+    options given that
+    the select body is be scrollable. By default the maximum height of the Select body is 45% of the browser's inner
+    window height.
+</description>
+<component-example>
+    <fdp-select-max-height-example></fdp-select-max-height-example>
+</component-example>
+<code-example [exampleFiles]="selectMaxHeight"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="select-none" componentName="select">
+    No Value Select
+</fd-docs-section-title>
+<description>
+    The Select component with<code>[noValueLabel]</code> helps
+    user to move to no value selected state.
+</description>
+<component-example>
+    <fdp-select-none-example></fdp-select-none-example>
+</component-example>
+<code-example [exampleFiles]="selectNone"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="select-nowrap" componentName="select">
+   Do not Wrap the Options
+</fd-docs-section-title>
+<description>
+    We use <code>noWrapText= true</code> by which 
+    long text in options won't get wrapped on overflow.
+    They get truncated with ellipsis.
+</description>
+<component-example>
+    <fdp-select-nowrap-example></fdp-select-nowrap-example>
+</component-example>
+<code-example [exampleFiles]="selectNoWrap"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="reactive-form" componentName="select">
+    Select In A Reactive Form
+</fd-docs-section-title>
+<description>
+    The Select component can be used inside Angular reactive forms.
+</description>
+<component-example>
+    <fdp-select-forms></fdp-select-forms>
+</component-example>
+<code-example [exampleFiles]="selectForm"></code-example>

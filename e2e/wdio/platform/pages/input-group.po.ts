@@ -5,7 +5,7 @@ export class InputGroupPo extends BaseComponentPo {
     readonly url = '/input-group';
     readonly root = '#page-content';
 
-    standartInputLabelsArr = 'fdp-input-group-standard-example p';
+    standartInputLabelsArr = 'fdp-input-group-standard-example label';
     standartInputArr = 'fdp-input-group-standard-example input';
 
     leftAlignedTextInput = 'fdp-input-group-standard-example [name="leftTextAddon"] input';

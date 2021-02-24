@@ -194,7 +194,6 @@ export const API_FILES = {
         'PopoverBodySubheaderDirective',
         'PopoverBodyFooterDirective'
     ],
-    popoverDirective: ['PopoverDirective'],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
     quickView: [
@@ -264,6 +263,7 @@ export const API_FILES = {
         'TabSeparator',
         'TabInfo',
     ],
+    text: ['TextComponent'],
     tile: [
         'TileComponent',
         'TileHeaderDirective',

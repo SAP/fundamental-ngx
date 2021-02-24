@@ -30,8 +30,8 @@
     ></fd-pagination>
 
     <ng-template #itemsPerPageCustom let-onSelect="onSelect">
-        <fd-segmented-button>
-            <button fd-button [label]="count" [class.is-selected]="pagination.itemsPerPage === count" *ngFor="let count of [2,5,100]" (click)="onSelect(count)"></button>
+        <fd-segmented-button [ngModel]="customItemsPerPage" (ngModelChange)="onSelect($event); customItemsPerPage = $event">
+            <button fd-button [label]="count" [attr.value]="count" *ngFor="let count of [2,5,100]" ></button>
         </fd-segmented-button>
     </ng-template>
 </div>

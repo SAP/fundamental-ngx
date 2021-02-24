@@ -16,42 +16,56 @@ import {
 import {cardSpacingAttr, cardMinWidth, cardSpacingValue, cardWidthAttr, placeholderBorderAttr, placeholderBorderStyle} from '../fixtures/appData/fixed-card-layout-content';
 
 describe('Fixed card layout test suite', function() {
-    const fxdCardLayoutPg = new FixedCardLayoutPo();
+    const fxdCardLayoutPage = new FixedCardLayoutPo();
+    const {
+        hideCardBtnArr,
+        cardDivArr,
+        cardHeaderArr,
+        cardContentArr,
+        cardColumnArr,
+        disableDragBtn,
+        placeholderCard,
+        navigationMenuBtn,
+        pageSidebar,
+        disabledCardContent,
+        disabledCardDiv,
+        pageHeader
+    } = fxdCardLayoutPage;
 
     beforeAll(() => {
-        fxdCardLayoutPg.open();
+        fxdCardLayoutPage.open();
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(fxdCardLayoutPg.pageHeader);
+        waitForPresent(pageHeader);
     }, 1);
 
     describe('main checks', function() {
         it('should check spacing between cards', () => {
 
-            expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, cardSpacingAttr).value)
+            expect(getCSSPropertyByName(cardDivArr, cardSpacingAttr).value)
                 .toBe(cardSpacingValue);
         });
 
         it('should check card minimum width', () => {
-            const cardsCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            const cardsCount = getElementArrayLength(cardDivArr);
 
             for (let i = 0; cardsCount > i; i++) {
-                expect(getCSSPropertyByName(fxdCardLayoutPg.cardDivArr, cardWidthAttr, i).value)
+                expect(getCSSPropertyByName(cardDivArr, cardWidthAttr, i).value)
                     .toBe(cardMinWidth);
             }
         });
 
         it('should check card can be hidden', () => {
-            const cardStartCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            const cardStartCount = getElementArrayLength(cardDivArr);
 
-            click(fxdCardLayoutPg.hideCardBtnArr);
-            const cardEndCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            click(hideCardBtnArr);
+            const cardEndCount = getElementArrayLength(cardDivArr);
             expect(cardEndCount).toEqual(cardStartCount - 1);
 
-            click(fxdCardLayoutPg.hideCardBtnArr);
-            const newCardEndCount = getElementArrayLength(fxdCardLayoutPg.cardDivArr);
+            click(hideCardBtnArr);
+            const newCardEndCount = getElementArrayLength(cardDivArr);
             expect(newCardEndCount).toEqual(cardStartCount);
         });
 
@@ -62,11 +76,11 @@ describe('Fixed card layout test suite', function() {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+            const originalFirstCardText = getText(cardDivArr);
 
-            scrollIntoView(fxdCardLayoutPg.cardHeaderArr);
-            checkDragAndDrop(fxdCardLayoutPg.cardHeaderArr, fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardContentArr, 4);
-            const newText = getText(fxdCardLayoutPg.cardDivArr);
+            scrollIntoView(cardHeaderArr);
+            checkDragAndDrop(cardHeaderArr, cardContentArr, cardContentArr, 4);
+            const newText = getText(cardDivArr);
             expect(newText).not.toBe(originalFirstCardText);
         });
 
@@ -76,11 +90,11 @@ describe('Fixed card layout test suite', function() {
                 console.log('Skip IE because of #3882');
                 return;
             }
-            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+            const originalFirstCardText = getText(cardDivArr);
 
-            scrollIntoView(fxdCardLayoutPg.cardDivArr);
-            checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
-            const newText = getText(fxdCardLayoutPg.cardDivArr);
+            scrollIntoView(cardDivArr);
+            checkDragAndDrop(cardContentArr, cardDivArr, cardContentArr, 4);
+            const newText = getText(cardDivArr);
             expect(newText).not.toBe(originalFirstCardText);
         });
 
@@ -90,13 +104,13 @@ describe('Fixed card layout test suite', function() {
                 console.log('skip IE because of #3882');
                 return;
             }
-            const originalFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
-            const originalSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
+            const originalFirstCardText = getText(cardDivArr);
+            const originalSwapCardText = getText(cardDivArr, 4);
 
-            scrollIntoView(fxdCardLayoutPg.cardDivArr);
-            checkDragAndDrop(fxdCardLayoutPg.cardContentArr, fxdCardLayoutPg.cardDivArr, fxdCardLayoutPg.cardContentArr, 4);
-            const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
-            const newSwapCardText = getText(fxdCardLayoutPg.cardDivArr, 4);
+            scrollIntoView(cardDivArr);
+            checkDragAndDrop(cardContentArr, cardDivArr, cardContentArr, 4);
+            const newFirstCardText = getText(cardDivArr);
+            const newSwapCardText = getText(cardDivArr, 4);
             expect(newFirstCardText).not.toBe(originalFirstCardText);
             expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
@@ -107,9 +121,9 @@ describe('Fixed card layout test suite', function() {
                 console.log('Skip for IE because of #3882');
                 return;
             }
-            scrollIntoView(fxdCardLayoutPg.cardDivArr);
-            const clickElement = fxdCardLayoutPg.cardContentArr;
-            const locationElement = fxdCardLayoutPg.cardDivArr;
+            scrollIntoView(cardDivArr);
+            const clickElement = cardContentArr;
+            const locationElement = cardDivArr;
 
             // tslint:disable:radix
             const clickXLocation = Math.floor(getElementLocation(clickElement, 0, 'x'));
@@ -132,44 +146,44 @@ describe('Fixed card layout test suite', function() {
                 ]
             }]);
 
-            expect(elementDisplayed(fxdCardLayoutPg.placeholderCard)).toBe(true);
-            expect(getCSSPropertyByName(fxdCardLayoutPg.placeholderCard, placeholderBorderAttr).value)
+            expect(elementDisplayed(placeholderCard)).toBe(true);
+            expect(getCSSPropertyByName(placeholderCard, placeholderBorderAttr).value)
                 .toEqual(placeholderBorderStyle);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
         xit('should check columns are reactive', () => {
-            const originalCardColumnsCount = getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
+            const originalCardColumnsCount = getElementArrayLength(cardColumnArr);
 
-            click(fxdCardLayoutPg.navigationMenuBtn);
-            waitForInvisibilityOf(fxdCardLayoutPg.pageSidebar);
-            const newCardColumnsCount = getElementArrayLength(fxdCardLayoutPg.cardColumnArr);
+            click(navigationMenuBtn);
+            waitForInvisibilityOf(pageSidebar);
+            const newCardColumnsCount = getElementArrayLength(cardColumnArr);
             expect(originalCardColumnsCount).not.toEqual(newCardColumnsCount);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
         xit('should check cards are reactive to columns', () => {
-            const originalLastCardText = getText(fxdCardLayoutPg.cardDivArr, 8);
+            const originalLastCardText = getText(cardDivArr, 8);
 
-            click(fxdCardLayoutPg.navigationMenuBtn, 0);
-            waitForInvisibilityOf(fxdCardLayoutPg.pageSidebar);
-            const newLastCardText = getText(fxdCardLayoutPg.cardDivArr, 8);
+            click(navigationMenuBtn, 0);
+            waitForInvisibilityOf(pageSidebar);
+            const newLastCardText = getText(cardDivArr, 8);
             expect(originalLastCardText).not.toEqual(newLastCardText);
         });
 
         it('should check drag and drop is disabled', () => {
-            const originalFirstCardText = getText(fxdCardLayoutPg.disabledCardDiv);
+            const originalFirstCardText = getText(disabledCardDiv);
 
-            scrollIntoView(fxdCardLayoutPg.disableDragBtn);
-            click(fxdCardLayoutPg.disableDragBtn);
-            checkDragAndDrop(fxdCardLayoutPg.disabledCardContent, fxdCardLayoutPg.disabledCardDiv, fxdCardLayoutPg.disabledCardContent, 4);
-            const newFirstCardText = getText(fxdCardLayoutPg.cardDivArr);
+            scrollIntoView(disableDragBtn);
+            click(disableDragBtn);
+            checkDragAndDrop(disabledCardContent, disabledCardDiv, disabledCardContent, 4);
+            const newFirstCardText = getText(cardDivArr);
             expect(newFirstCardText).toBe(originalFirstCardText);
         });
 
         describe('Check orientation', function() {
             it('should check LTR and RTL orientation', () => {
-                fxdCardLayoutPg.checkRtlSwitch();
+                fxdCardLayoutPage.checkRtlSwitch();
             });
         });
     });
