@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.18...v0.28.0-rc.19) (2021-02-24)
+
+
+### Bug Fixes
+
+* (Core) change touched state on focus for Datepickers ([#4720](https://github.com/SAP/fundamental-ngx/issues/4720)) ([904f731](https://github.com/SAP/fundamental-ngx/commit/904f731eb6aa7cca610e1f2be00f2a3ba2753b36))
+
 ## [0.28.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.17...v0.28.0-rc.18) (2021-02-24)
 
 
