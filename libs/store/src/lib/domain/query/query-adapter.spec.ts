@@ -118,14 +118,14 @@ describe('DefaultQueryAdapter: Order By Parsing', () => {
     });
 
     it('should return correct string if single OrderBy is passed without direction', () => {
-        const orderBy: OrderBy<Fruit, keyof Fruit> = {
+        const orderBy: OrderBy<Fruit> = {
             field: 'name'
         };
         expect(adapter.parseOrderBys(orderBy)).toBe('name');
     });
 
     it('should return correct string if single OrderBy is passed with direction', () => {
-        let orderBy: OrderBy<Fruit, keyof Fruit> = {
+        let orderBy: OrderBy<Fruit> = {
             field: 'variety',
             order: 'ASCENDING'
         };
@@ -139,7 +139,7 @@ describe('DefaultQueryAdapter: Order By Parsing', () => {
 
     it('should return a correct query string for an array of OrderBys', () => {
 
-        let orderBys: OrderBy<Fruit, keyof Fruit>[] = [{
+        let orderBys: OrderBy<Fruit>[] = [{
             field: 'variety'
         }, {
             field: 'name',

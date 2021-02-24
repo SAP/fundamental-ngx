@@ -13,8 +13,8 @@ import {
 import { Predicate } from './grammer/predicate';
 import { QueryAdapter } from './query-adapter';
 
-export interface OrderBy <TModel, TProperty extends keyof TModel> {
-    field: TProperty;
+export interface OrderBy <TModel> {
+    field: keyof TModel;
     order?: 'ASCENDING' | 'DESCENDING';
 }
 
@@ -39,7 +39,7 @@ export class Query<TModel> {
     _suppressPageReset: boolean;
 
     /** @hidden - stores curernt order bys */
-    _orderByFields: Array<OrderBy<TModel, keyof TModel>>;
+    _orderByFields: Array<OrderBy<TModel>>;
 
     /** @hidden - stores current enable count flag */
     _includeCount: boolean;
@@ -78,7 +78,7 @@ export class Query<TModel> {
      * Set order by rules for query.
      * @param orderBys Set of OrderBy objects.
      */
-    orderBy<TProperty extends keyof TModel> (...orderBys: Array<OrderBy<TModel, TProperty>> ): Query < TModel > {
+    orderBy<TProperty extends keyof TModel> (...orderBys: Array<OrderBy<TModel>> ): Query < TModel > {
         this._orderByFields = orderBys;
         return this;
     }

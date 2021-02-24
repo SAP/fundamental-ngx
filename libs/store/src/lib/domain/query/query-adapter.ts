@@ -17,7 +17,7 @@ export interface QueryParams {
 
 export abstract class QueryAdapter<T> {
     abstract parsePredicate(predicate?: Predicate<T>): string;
-    abstract parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string
+    abstract parseOrderBys(orderBys?: OrderBy<T> | OrderBy<T>[]): string
     abstract parseSelect(select?: string[]): string;
     abstract parseExpand(select?: string[]): string;
     abstract createQueryString(params?: QueryParams): string;
@@ -61,7 +61,7 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
      * Creates value string for "$orderby" query parameter from set of OrderBy objects.
      * @param orderBys Set of OrderBy objects
      */
-    parseOrderBys(orderBys?: OrderBy<T, keyof T> | OrderBy<T, keyof T>[]): string {
+    parseOrderBys(orderBys?: OrderBy<T> | OrderBy<T>[]): string {
         if (!orderBys) {
             return '';
         }
@@ -130,7 +130,7 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
     }
 
     /** @hidden */
-    _prepareOrderBy(orderBy: OrderBy<T, keyof T>): string {
+    _prepareOrderBy(orderBy: OrderBy<T>): string {
         if (!orderBy || !orderBy.field) {
             return '';
         }

@@ -13,21 +13,6 @@ import {
 import { Observable } from 'rxjs';
 import { QueryAdapter } from './query-adapter';
 
-
-/**
- * This could be part of some common functionality shared with EntityStore where we
- * create entity store out of type.
- *
- * This is where my original unitof works could jump in. a usecase  => unitof work untill its completed.
- * all is cached as part of this.
- *
- *
- */
-// export function newQueryBuilder < TModel > (resultType: Type < TModel > ): QueryBuilder < TModel > {
-//     return new QueryBuilder < TModel > (resultType);
-// }
-
-
 export class QueryBuilder<TModel> {
 
     /**
@@ -68,12 +53,6 @@ export class QueryBuilder<TModel> {
         this._keyword = keyword;
         return this;
     }
-
-    /*
-    newSubQuery <TSubModel> (withId: string, resultType: Type < TSubModel > ): QueryBuilder < TModel > {
-        return this;
-    }
-    */
 
     /**
      * Create new Query object
