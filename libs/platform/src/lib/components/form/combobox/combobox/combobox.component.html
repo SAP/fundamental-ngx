@@ -76,6 +76,7 @@
         class="fdp-combobox__list"
         [id]="id + '-result'"
         role="listbox"
+        [compact]="isCompact"
         [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'">

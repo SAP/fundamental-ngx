@@ -1,5 +1,5 @@
 
-export const labelsArray= [
+export const labelsArray = [
         'Default Input Field',
         'Text Input Field',
         'Number Input Field',
@@ -8,9 +8,9 @@ export const labelsArray= [
         'Disabled Input Field',
         'Inline Help Input Field',
         'Password Input Field'
-    ],
-export const favoriteColor= 'My',
-export const placeholdersArray= [
+    ];
+export const favoriteColor = 'My';
+export const placeholdersArray = [
         'Field placeholder text',
         'Field placeholder text',
         'Field placeholder text',
@@ -21,7 +21,7 @@ export const placeholdersArray= [
 		'Field placeholder text',
 		'Field placeholder text',
         'Enter the sport name'
-    ],
-export const errorText= 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc',
-export const errorBorderColor= '187,0,0'
+    ];
+export const errorText = 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc';
+export const errorBorderColor = '187,0,0';
 

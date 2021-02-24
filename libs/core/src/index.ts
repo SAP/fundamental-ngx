@@ -72,3 +72,4 @@ export * from './lib/feed-input/public_api';
 export * from './lib/grid-list';
 export * from './lib/slider/public_api';
 export * from './lib/illustrated-message/public_api';
+export * from './lib/text/public_api';

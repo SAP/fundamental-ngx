@@ -4,44 +4,49 @@ import { acceptAlert, click, getAttributeByName, getElementArrayLength, refreshP
 import {btnText} from '../fixtures/appData/action-list-item-contents';
 
 describe('Action List Item Test Suite:', function() {
-    const actionListPg = new ActionListItemPo();
+    const actionListPage = new ActionListItemPo();
+    const {
+        actionBtns,
+        actionLists,
+        actionSections
+    } = actionListPage;
 
     beforeAll(() => {
-        actionListPg.open();
+        actionListPage.open();
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(actionListPg.actionBtns);
+        waitForPresent(actionBtns);
     }, 1);
 
     describe('Main checks:', function() {
         it('should check actions on click', () => {
-            const actionBtnCount = getElementArrayLength(actionListPg.actionBtns);
+            const actionBtnCount = getElementArrayLength(actionBtns);
             for (let i = 0; actionBtnCount > i; i++) {
-                click(actionListPg.actionBtns, i);
+                click(actionBtns, i);
                 acceptAlert();
             }
         });
 
         it('should check styles', () => {
-            checkAttributeValueTrue(actionListPg.actionLists, 'noBorder');
-            checkElementTextValue(actionListPg.actionBtns, btnText);
-            expect(getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 0)).toBe('false');
-            expect(getAttributeByName(actionListPg.actionSections, 'ng-reflect-compact', 1)).toBe('true');
+            checkAttributeValueTrue(actionLists, 'noBorder');
+            checkElementTextValue(actionBtns, btnText);
+            expect(getAttributeByName(actionSections, 'ng-reflect-compact', 0)).toBe('false');
+            expect(getAttributeByName(actionSections, 'ng-reflect-compact', 1)).toBe('true');
         });
     });
 
     describe('Orientation check:', function() {
         it('should check RTL and LTR orientation', () => {
-            actionListPg.checkRtlSwitch(actionListPg.rtlSwitcherArr, actionListPg.exampleAreaContainersArr);
+            actionListPage.checkRtlSwitch();
         });
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            actionListPg.saveExampleBaselineScreenshot('action-list-item');
-            expect(actionListPg.compareWithBaseline('action-list-item')).toBeLessThan(1);
+            actionListPage.saveExampleBaselineScreenshot('action-list-item');
+            expect(actionListPage.compareWithBaseline('action-list-item')).toBeLessThan(1);
         });
     });
 });

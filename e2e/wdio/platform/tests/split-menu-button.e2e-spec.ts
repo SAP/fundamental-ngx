@@ -19,6 +19,10 @@ import {
 
 describe('Split menu button test suite', () => {
     const spMenuBtnPage = new SplitMenuButtonPo();
+    const {
+        arrowBtnArr, mainBtnArr, menuOverlay, menuItemArr, behaviorsExSelectionBtnArr, behaviorsExArrowBtnArr,
+        typesExSelectionBtnArr, typesExArrowBtnArr, typesOutput, iconExSelectionBtnArr, iconExArrowBtnArr, iconBtnAttrArr
+    } = spMenuBtnPage;
 
     beforeAll(() => {
         spMenuBtnPage.open();
@@ -26,7 +30,7 @@ describe('Split menu button test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(spMenuBtnPage.arrowBtnArr);
+        waitForPresent(arrowBtnArr);
     }, 1);
 
     // Wasn't debuged yet in IE and Safari
@@ -36,155 +40,154 @@ describe('Split menu button test suite', () => {
     }
 
     it('should check drop-down arrow menu functionality', () => {
-        const dropdownArrowBtnArr = getElementArrayLength(spMenuBtnPage.arrowBtnArr);
+        const dropdownArrowBtnArr = getElementArrayLength(arrowBtnArr);
 
         for (let i = 0; i < dropdownArrowBtnArr; i++) {
-            click(spMenuBtnPage.arrowBtnArr, i);
-            expect(waitForElDisplayed(spMenuBtnPage.menuOverlay));
-            click(spMenuBtnPage.arrowBtnArr, i);
+            click(arrowBtnArr, i);
+            expect(waitForElDisplayed(menuOverlay));
+            click(arrowBtnArr, i);
         }
     });
 
     it('should check each split btn has main and arrow btns', () => {
-        const dropdownArrowBtnCount = getElementArrayLength(spMenuBtnPage.arrowBtnArr);
-        const mainBtnCount = getElementArrayLength(spMenuBtnPage.mainBtnArr);
+        const dropdownArrowBtnCount = getElementArrayLength(arrowBtnArr);
+        const mainBtnCount = getElementArrayLength(mainBtnArr);
 
         expect(dropdownArrowBtnCount).toEqual(mainBtnCount);
     });
 
     it('should check that menu closed after making one selection', () => {
-        click(spMenuBtnPage.behaviorsExArrowBtnArr);
-        waitForElDisplayed(spMenuBtnPage.menuOverlay);
+        click(behaviorsExArrowBtnArr);
+        waitForElDisplayed(menuOverlay);
 
-        click(spMenuBtnPage.behaviorsExArrowBtnArr);
-        waitForNotDisplayed(spMenuBtnPage.menuOverlay);
+        click(behaviorsExArrowBtnArr);
+        waitForNotDisplayed(menuOverlay);
     });
 
     it('should check split menu button behaviors examples', () => {
-        const behaviorArrowBtnArr = elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
-        spMenuBtnPage.checkBtnSelectionChange(behaviorArrowBtnArr, spMenuBtnPage.behaviorsExSelectionBtnArr, behaviorBtnTextArr);
+        const behaviorArrowBtnArr = elementArray(behaviorsExArrowBtnArr);
+        spMenuBtnPage.checkBtnSelectionChange(behaviorArrowBtnArr, behaviorsExSelectionBtnArr, behaviorBtnTextArr);
     });
 
     it('should check split menu button type examples', () => {
-        const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
+        const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
 
-        spMenuBtnPage.checkBtnSelectionChange(typesArrowBtnArr, spMenuBtnPage.typesExSelectionBtnArr, typesBtnTextArr);
+        spMenuBtnPage.checkBtnSelectionChange(typesArrowBtnArr, typesExSelectionBtnArr, typesBtnTextArr);
     });
 
     it('should check btn selections', () => {
-        click(spMenuBtnPage.typesExSelectionBtnArr);
-        acceptAlert();
-        spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, standardBtnText);
+        click(typesExSelectionBtnArr);
+        spMenuBtnPage.checkSelectionOutput(typesOutput, standardBtnText);
 
-        click(spMenuBtnPage.typesExArrowBtnArr);
-        click(spMenuBtnPage.menuItemArr, 1);
-        spMenuBtnPage.checkSelectionOutput(spMenuBtnPage.typesOutput, standardBtnText2);
+        click(typesExArrowBtnArr);
+        click(menuItemArr, 1);
+        spMenuBtnPage.checkSelectionOutput(typesOutput, standardBtnText2);
     });
 
     it('should check split menu buttons with icon examples', () => {
-        const iconArrowBtnArr = elementArray(spMenuBtnPage.iconExArrowBtnArr);
-        const iconBtnArr = elementArray(spMenuBtnPage.iconBtnAttrArr);
+        const iconArrowBtnArr = elementArray(iconExArrowBtnArr);
+        const iconBtnArr = elementArray(iconBtnAttrArr);
 
-        spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, spMenuBtnPage.iconExSelectionBtnArr, iconBtnTextArr);
+        spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, iconExSelectionBtnArr, iconBtnTextArr);
         for (let i = 0; i < iconBtnArr.length; i++) {
-            expect(getAttributeByName(spMenuBtnPage.iconBtnAttrArr, iconAttr, i)).toContain(iconLabel);
+            expect(getAttributeByName(iconBtnAttrArr, iconAttr, i)).toContain(iconLabel);
         }
     });
 
     it('should check compact btn styles', () => {
-        expect(getAttributeByName(spMenuBtnPage.iconBtnAttrArr, compactAttr, 1)).toContain(compactValue);
+        expect(getAttributeByName(iconBtnAttrArr, compactAttr, 1)).toContain(compactValue);
     });
 
     it('should check default hover state', () => {
-        const behaviorBtnArr = elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
-        const behaviorArrowBtnArr = elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
+        const behaviorBtnArr = elementArray(behaviorsExSelectionBtnArr);
+        const behaviorArrowBtnArr = elementArray(behaviorsExArrowBtnArr);
 
         for (let i = 0; i < behaviorBtnArr.length; i++) {
-            scrollIntoView(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
-            mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
-            expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, bgColorAttr, i).value)
+            scrollIntoView(behaviorsExSelectionBtnArr, i);
+            mouseHoverElement(behaviorsExSelectionBtnArr, i);
+            expect(getCSSPropertyByName(behaviorsExSelectionBtnArr, bgColorAttr, i).value)
                 .toContain(defaultHvrColor);
         }
 
         for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
-            scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, bgColorAttr, i).value)
+            scrollIntoView(behaviorsExArrowBtnArr, i);
+            mouseHoverElement(behaviorsExArrowBtnArr, i);
+            expect(getCSSPropertyByName(behaviorsExArrowBtnArr, bgColorAttr, i).value)
                 .toContain(defaultHvrColor);
         }
     });
 
     xit('should check default active state', () => {
-        // const behaviorBtnArr = elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
-        // const behaviorArrowBtnArr = elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
+        // const behaviorBtnArr = elementArray(behaviorsExSelectionBtnArr);
+        // const behaviorArrowBtnArr = elementArray(behaviorsExArrowBtnArr);
         //
         // for (let i = 0; i < behaviorBtnArr.length; i++) {
-        //     mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
+        //     mouseHoverElement(behaviorsExSelectionBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, bgColorAttr, i).value)
+        //     expect(getCSSPropertyByName(behaviorsExSelectionBtnArr, bgColorAttr, i).value)
         //         .toContain(defaultBtnColor);
         //     mouseButtonUp();
         // }
         //
         // for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
-        //     mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
+        //     mouseHoverElement(behaviorsExArrowBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, bgColorAttr, i).value)
+        //     expect(getCSSPropertyByName(behaviorsExArrowBtnArr, bgColorAttr, i).value)
         //         .toContain(defaultBtnColor);
         //     mouseButtonUp();
         // }
     });
 
     it('should check split btn types example colors', () => {
-        const typesBtnArr = elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-        const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
+        const typesBtnArr = elementArray(typesExSelectionBtnArr);
+        const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
-            expect(getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, textColorAttr, i).value)
+            expect(getCSSPropertyByName(typesExSelectionBtnArr, textColorAttr, i).value)
                 .toContain(typesBtnColorArr[i]);
         }
 
         for (let i = 0; i < typesArrowBtnArr.length; i++) {
-            expect(getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, textColorAttr, i).value)
+            expect(getCSSPropertyByName(typesExArrowBtnArr, textColorAttr, i).value)
                 .toContain(typesBtnColorArr[i]);
         }
     });
 
     it('should check split btn type examples hover colors', () => {
-        const typesBtnArr = elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-        const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
+        const typesBtnArr = elementArray(typesExSelectionBtnArr);
+        const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
-            scrollIntoView(spMenuBtnPage.typesExSelectionBtnArr, i);
-            mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr, i);
-            expect(getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, bgColorAttr, i).value)
+            scrollIntoView(typesExSelectionBtnArr, i);
+            mouseHoverElement(typesExSelectionBtnArr, i);
+            expect(getCSSPropertyByName(typesExSelectionBtnArr, bgColorAttr, i).value)
                 .toContain(typesBtnHvrColorArr[i]);
         }
 
         for (let i = 0; i < typesArrowBtnArr.length; i++) {
-            scrollIntoView(spMenuBtnPage.typesExArrowBtnArr, i);
-            mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr, i);
-            expect(getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, bgColorAttr, i).value)
+            scrollIntoView(typesExArrowBtnArr, i);
+            mouseHoverElement(typesExArrowBtnArr, i);
+            expect(getCSSPropertyByName(typesExArrowBtnArr, bgColorAttr, i).value)
                 .toContain(typesBtnHvrColorArr[i]);
         }
     });
 
     xit('should check split btn type examples active state', () => {
-        // const typesBtnArr = elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-        // const typesArrowBtnArr = elementArray(spMenuBtnPage.typesExArrowBtnArr);
+        // const typesBtnArr = elementArray(typesExSelectionBtnArr);
+        // const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
         //
         // for (let i = 0; i < typesBtnArr.length; i++) {
-        //     mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
+        //     mouseHoverElement(typesExSelectionBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, bgColorAttr, i).value)
+        //     expect(getCSSPropertyByName(typesExSelectionBtnArr, bgColorAttr, i).value)
         //         .toContain(typesBtnActiveColorArr[i]);
         //     mouseButtonUp();
         // }
         //
         // for (let i = 0; i < typesArrowBtnArr.length; i++) {
-        //     mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
+        //     mouseHoverElement(typesExArrowBtnArr,  i);
         //     mouseButtonDown();
-        //     expect(getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, bgColorAttr, i).value)
+        //     expect(getCSSPropertyByName(typesExArrowBtnArr, bgColorAttr, i).value)
         //         .toContain(typesBtnActiveColorArr[i]);
         //     mouseButtonUp();
         // }
@@ -192,10 +195,10 @@ describe('Split menu button test suite', () => {
     });
 
     it('should check tooltips', () => {
-        const menuBtnArr = elementArray(spMenuBtnPage.mainBtnArr);
+        const menuBtnArr = elementArray(mainBtnArr);
 
         for (let i = 0; i < menuBtnArr.length; i++) {
-            expect(getAttributeByName(spMenuBtnPage.mainBtnArr, tooltipAttr, i))
+            expect(getAttributeByName(mainBtnArr, tooltipAttr, i))
                 .not.toEqual(null);
         }
     });
