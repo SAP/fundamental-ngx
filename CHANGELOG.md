@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.16...v0.28.0-rc.17) (2021-02-24)
+
+
+### Features
+
+* (Platform) Select component creation ([#4635](https://github.com/SAP/fundamental-ngx/issues/4635)) ([d9e24ea](https://github.com/SAP/fundamental-ngx/commit/d9e24ea76d2e274d8e3e54507ebf169292f01653))
+
 ## [0.28.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.15...v0.28.0-rc.16) (2021-02-23)
 
 
