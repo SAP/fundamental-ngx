@@ -9,12 +9,3 @@
 .fd-list__secondary {
     pointer-events: all;
 }
-
-// REMOVE AFTER CLOSING https://github.com/SAP/fundamental-styles/issues/1588
-.fd-list .fd-list__item {
-    &[aria-selected="true"],
-    &.is-selected {
-        background: var(--sapList_SelectionBackgroundColor, #e5f0fa);
-        border-bottom: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_SelectionBorderColor, #0854a0);
-    }
-}
