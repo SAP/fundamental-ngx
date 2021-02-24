@@ -37,7 +37,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
     protected entityResourcePathOptions: EntityPath | undefined;
     protected root: string;
 
-    get name() {
+    get name(): string {
         return this._name;
     }
 
@@ -102,7 +102,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         const params = new HttpParams(qParams);
         const entitiesUrl = this.getCollectionUrl('getAll');
         const method = this.getOperationMethod('getAll') || 'GET';
-        return this.execute(method, entitiesUrl, undefined, { params });
+        return this.execute(method, entitiesUrl, undefined, { params: params });
     }
 
     update(update: Update<T>): Observable<T> {
@@ -127,7 +127,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         data?: any, // data, error, or undefined/null
         options?: any
     ): Observable<any> {
-        const req: RequestData = { method, url, data, options };
+        const req: RequestData = { method: method, url: url, data: data, options: options };
 
         if (data instanceof Error) {
             return this.handleError(req)(data);
@@ -183,7 +183,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         return result$.pipe(catchError(this.handleError(req)));
     }
 
-    private handleError(reqData: RequestData) {
+    private handleError(reqData: RequestData): (err: any) => Observable<{}> {
         return (err: any) => {
             const ok = this.handleDelete404(err, reqData);
             if (ok) {
@@ -194,7 +194,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         };
     }
 
-    private handleDelete404(error: HttpErrorResponse, reqData: RequestData) {
+    private handleDelete404(error: HttpErrorResponse, reqData: RequestData): Observable<{}> {
         if (error.status === 404 && reqData.method === 'DELETE' && this.delete404OK) {
             return of({});
         }

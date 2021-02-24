@@ -33,18 +33,16 @@ function mapFundamentalConfigToNgrxConfig(conf: FundamentalStoreConfig): EntityD
         }
     }
 
-    return { entityMetadata, pluralNames };
+    return { entityMetadata: entityMetadata, pluralNames: pluralNames };
 }
 
 @NgModule({
-    imports: [StoreRootModule, EffectsRootModule],
-    exports: [StoreRootModule, EffectsRootModule]
+    imports: [StoreRootModule, EffectsRootModule, EntityDataModule]
 })
 export class FundamentalRootStoreModule {}
 
 @NgModule({
-    imports: [StoreFeatureModule, EffectsFeatureModule],
-    exports: [StoreFeatureModule, EffectsFeatureModule]
+    imports: [StoreFeatureModule, EffectsFeatureModule, EntityDataModule]
 })
 export class FundamentalStoreModuleForFeature {}
 
@@ -56,11 +54,10 @@ export class FundamentalStoreModule {
         const entityDataModule = EntityDataModule.forRoot(entityDataModuleConfig);
         const defaultDataServiceConfig: DefaultDataServiceConfig = {
             root: conf.root,
-            timeout: conf.serviceTimeout || 3000
+            timeout: conf.serviceTimeout
         };
 
         const providers: Provider[] = [
-            ...entityDataModule.providers,
             ...EffectsModule.forRoot([]).providers,
             ...StoreModule.forRoot({}, {}).providers,
             ...(conf.enableDevtools
@@ -71,6 +68,7 @@ export class FundamentalStoreModule {
                       }).providers
                   ]
                 : []),
+            ...entityDataModule.providers,
 
             { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
 
@@ -84,7 +82,7 @@ export class FundamentalStoreModule {
 
         return {
             ngModule: FundamentalRootStoreModule,
-            providers
+            providers: providers
         };
     }
 

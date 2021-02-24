@@ -1,6 +1,6 @@
-import { InjectionToken } from "@angular/core";
+import { InjectionToken } from '@angular/core';
 
-import { Type } from "../../domain/decorators";
+import { Type } from '../../domain/decorators';
 
 export interface FundamentalStoreConfig {
     root: string;

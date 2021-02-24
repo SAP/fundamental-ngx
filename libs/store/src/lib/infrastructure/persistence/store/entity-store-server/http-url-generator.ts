@@ -63,7 +63,7 @@ export class DefaultHttpUrlGenerator implements HttpUrlGenerator {
     protected getEntityOperationPath(path: EntityPath, operation: EntityOperation): string | null {
         if (typeof path === 'string') {
             return path;
-        } 
+        }
         const pathOperation = path[operation];
         if (!pathOperation && path.default) {
             return path.default;
@@ -74,8 +74,8 @@ export class DefaultHttpUrlGenerator implements HttpUrlGenerator {
         if (Array.isArray(pathOperation)) {
             return pathOperation[1];
         }
-        return null; 
-    } 
+        return null;
+    }
 }
 
 /** Remove leading & trailing spaces or slashes */

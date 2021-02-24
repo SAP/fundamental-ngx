@@ -10,9 +10,14 @@ export { EntityResourceMetaOptions };
  * Service to retrieve Entity meta options
  */
 export abstract class EntityMetaOptionsService {
-    abstract getEntityResourceMetadata<T>(entity: string): EntityResourceMetaOptions;
-    abstract getEntityResourceMetadata<T>(entity: Type<T>): EntityResourceMetaOptions;
-
-    abstract getEntityMetadata(entity: string): EntityMetaOptions;
-    abstract getEntityMetadata<T>(entity: Type<T>): EntityMetaOptions;
+    /**
+     * Get Entity Resource Options
+     * @param entity Entity name or Entity class
+     */
+    abstract getEntityResourceMetadata<T>(entity: string | Type<T>): EntityResourceMetaOptions;
+    /**
+     * Get Entity Meta Options
+     * @param entity Entity name or Entity class
+     */
+    abstract getEntityMetadata<T>(entity: string | Type<T>): EntityMetaOptions;
 }

@@ -8,9 +8,7 @@ export const REST_RESOURCE_KEY = Symbol('REST_Resource');
 
 const entitiesSet = new Set();
 
-export type Type<T> = {
-    new (...args: any[]): T;
-};
+export type Type<T> = new (...args: any[]) => T;
 
 export function Entity(config: EntityMetaOptions) {
     // TODO: Add entity name uniqueness validation
@@ -27,7 +25,7 @@ export function RESTResource(config: EntityResourceMetaOptions) {
         if (!entitiesSet.has(target)) {
             entitiesSet.add(target);
         }
-        Reflect.defineMetadata(ENTITY_KEY, config, target);
+        Reflect.defineMetadata(REST_RESOURCE_KEY, config, target);
     };
 }
 

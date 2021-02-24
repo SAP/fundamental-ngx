@@ -1,10 +1,7 @@
 import { EntityCollectionServiceFactory } from '@ngrx/data';
 
 import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../../entity-options.service';
-import {
-    DefaultEntityStoreBuilder,
-    DefaultEntityStoreBuilderFactory
-} from './entity-store-builder';
+import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
 
 class User {

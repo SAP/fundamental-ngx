@@ -58,23 +58,23 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
         this.reset();
     }
 
-    reset() {
+    reset(): void {
         this.cachePolicy = null;
         this.fetchPolicy = null;
         this.transient = false;
     }
 
-    useCachePolicy(policy: CachePolicy) {
+    useCachePolicy(policy: CachePolicy): this {
         this.cachePolicy = policy;
         return this;
     }
 
-    useFetchPolicy(policy: FetchPolicy) {
+    useFetchPolicy(policy: FetchPolicy): this {
         this.fetchPolicy = policy;
         return this;
     }
 
-    isTransient() {
+    isTransient(): this {
         this.transient = true;
         return this;
     }
