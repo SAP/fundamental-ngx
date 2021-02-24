@@ -78,10 +78,6 @@ $block: fd-illustrated-message;
     margin-top: 5rem;
     text-align: center;
     
-    // to be removed
-    border: 2px solid chocolate;
-    
-
     &__illustration {
         @include fd-reset();
 
@@ -136,12 +132,12 @@ $block: fd-illustrated-message;
         }
     }
 
-    &--sm {
+    @media screen and (max-width: 599px) {
         max-width: 20rem;
 
         .#{$block}__illustration {
-            height: 11.25rem;
-            width: 15rem;
+            height: 10rem;
+            width: 10rem;
         }
     }
 
@@ -170,7 +166,7 @@ $block: fd-illustrated-message;
             color: var(--sapTile_TextColor);
         }
 
-        &.#{$block}--sm {
+        @media screen and (max-width: 599px) {
             .#{$block}__title {
                 max-width: 18rem;
             }
@@ -219,7 +215,7 @@ $block: fd-illustrated-message;
             margin-bottom: 1rem;
         }
 
-        &.#{$block}--sm {
+        @media screen and (max-width: 599px) {
             .#{$block}__title {
                 max-width: 18rem;
             }

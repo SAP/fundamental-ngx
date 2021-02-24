@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 
-import * as illustratedMessageSrc from '!raw-loader!./examples/illustrated-message-example.component.html';
+
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import * as illustratedMessageSrc from '!raw-loader!./examples/illustrated-message-example.component.html';
 import * as illustratedMessageTsCode from '!raw-loader!./examples/illustrated-message-example.component.ts';
-import * as illustratedMessageScssCode from '!raw-loader!./examples/illustrated-message-example.component.scss';
+
+import * as illustratedMessageDialogSrc from '!raw-loader!./examples/illustrated-message-dialog-example.component.html';
+import * as illustratedMessageDialogTsCode from '!raw-loader!./examples/illustrated-message-dialog-example.component.ts';
+
+import * as illustratedMessageSpotSrc from '!raw-loader!./examples/illustrated-message-spot-example.component.html';
+import * as illustratedMessageSpotTsCode from '!raw-loader!./examples/illustrated-message-spot-example.component.ts';
 
 @Component({
     selector: 'app-illustrated-message',
@@ -24,10 +30,38 @@ export class IllustratedMessageDocsComponent {
         {
             language: 'html',
             code: illustratedMessageSrc,
-            fileName: 'illustrated-message-example',
-            typescriptFileCode: illustratedMessageTsCode,
-            component: 'illustrated-messageExampleComponent',
-            scssFileCode: illustratedMessageScssCode
+            fileName: 'illustrated-message-example'
+        },
+        {
+            language: 'typescript',
+            code: illustratedMessageTsCode,
+            fileName: 'illustrated-message-example'
+        }
+    ];
+
+    illustratedMessageDialogExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: illustratedMessageDialogSrc,
+            fileName: 'illustrated-message-dialog-example'
+        },
+        {
+            language: 'typescript',
+            code: illustratedMessageDialogTsCode,
+            fileName: 'illustrated-message-dialog-example'
+        }
+    ];
+
+    illustratedMessageSpotExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: illustratedMessageSpotSrc,
+            fileName: 'illustrated-message-spot-example'
+        },
+        {
+            language: 'typescript',
+            code: illustratedMessageSpotTsCode,
+            fileName: 'illustrated-message-spot-example'
         }
     ];
 }
