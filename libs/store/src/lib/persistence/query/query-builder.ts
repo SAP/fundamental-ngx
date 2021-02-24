@@ -2,9 +2,6 @@ import {
     Type
 } from '@angular/core';
 import {
-    EntityCollectionService
-} from '@ngrx/data';
-import {
     Query
 } from './query';
 import {
@@ -12,6 +9,7 @@ import {
 } from './grammer/predicate';
 import { Observable } from 'rxjs';
 import { QueryAdapter } from './query-adapter';
+import { QueryService } from './query.service';
 
 export class QueryBuilder<TModel> {
 
@@ -27,7 +25,7 @@ export class QueryBuilder<TModel> {
 
     constructor(
         private resultType: Type<TModel>,
-        private service: EntityCollectionService<TModel>,
+        private service: QueryService<TModel>,
         private adapter: QueryAdapter<TModel>
     ) { }
 

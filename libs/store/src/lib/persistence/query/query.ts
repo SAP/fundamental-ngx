@@ -5,12 +5,12 @@ import {
     Observable
 } from 'rxjs';
 import {
-    EntityCollectionService,
     QueryParams
 } from '@ngrx/data';
 
 import { Predicate } from './grammer/predicate';
 import { QueryAdapter } from './query-adapter';
+import { QueryService } from './query.service';
 
 export interface OrderBy <TModel> {
     field: keyof TModel;
@@ -29,10 +29,10 @@ export class Query<TModel> {
     _predicate: Predicate<TModel>;
 
     /** @hidden - stores current page size */
-    _pageSize: number;
+    _skip: number;
 
     /** @hidden - stores current index offset */
-    _offset: number;
+    _top: number;
 
     /** @hidden - stores flag for suspending page reset on query change */
     _suppressPageReset: boolean;
@@ -51,7 +51,7 @@ export class Query<TModel> {
 
     constructor(
         private resultType: Type<TModel>,
-        private service: EntityCollectionService<TModel>,
+        private service: QueryService<TModel>,
         private adapter: QueryAdapter<TModel>
     ) {}
 
@@ -84,20 +84,20 @@ export class Query<TModel> {
 
     /**
      * Set first index of result set for paging.
-     * @param offset Index number of first result.
+     * @param top Index number of first result.
      */
-    withFirstResult(offset: number): this {
-        this._offset = offset;
+    withFirstResult(top: number): this {
+        this._top = top;
         this._suppressPageReset = true;
         return this;
     }
 
     /**
      * Set page size for result set.
-     * @param pageSize Number of items returned per page
+     * @param skip Number of items returned per page
      */
-    withMaxResults(pageSize: number): this {
-        this._pageSize = pageSize;
+    withMaxResults(skip: number): this {
+        this._skip = skip;
         return this;
     }
 
@@ -146,7 +146,7 @@ export class Query<TModel> {
      */
     fetch(): Observable<Array<TModel>> {
         if (!this._suppressPageReset) {
-            this._offset = 0;
+            this._top = 0;
         }
         this._suppressPageReset = false;
 
@@ -162,14 +162,14 @@ export class Query<TModel> {
      * @todo Do we need to throw exception if "_includeCount" is not true?
      */
     count(): Observable<number> {
-        return this.service.count$;
+        return this.service.count();
     }
 
     /**
      * Get previous page of collection.
      */
     previous(): void {
-        this._offset = (this._offset > this._pageSize) ? this._offset - this._pageSize : 0;
+        this._top = (this._top > this._skip) ? this._top - this._skip : 0;
         this._suppressPageReset = true;
         this.fetch();
     }
@@ -178,7 +178,7 @@ export class Query<TModel> {
      * Get next page of collection
      */
     next(): void {
-        this._offset = this._offset + this._pageSize;
+        this._top = this._top + this._skip;
         this._suppressPageReset = true;
         this.fetch();
     }
@@ -201,16 +201,16 @@ export class Query<TModel> {
                 filter: this.adapter.parsePredicate(this._predicate)
             };
         }
-        if (this._pageSize) {
+        if (this._skip) {
             params = {
                 ...params,
-                pageSize: this._pageSize.toString()
+                skip: this._skip.toString()
             };
         }
-        if (this._pageSize && this._offset !== undefined) {
+        if (this._skip && this._top !== undefined) {
             params = {
                 ...params,
-                offset: this._offset.toString()
+                top: this._top.toString()
             };
         }
         if (this._orderByFields) {

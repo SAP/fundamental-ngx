@@ -13,6 +13,8 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { and, eq } from './grammer/query-expressions';
 import { DefaultQueryAdapter } from './query-adapter';
+import { QueryService } from './query.service';
+import { Observable, of } from 'rxjs';
 
 class Supplier {
     name: string;
@@ -31,31 +33,32 @@ class Fruit {
     distributor: Distributor;
 }
 
+class MockQueryService<TModel> extends QueryService<TModel> {
+    constructor() {
+        super();
+    }
+
+    getByKey(id: string): Observable<TModel> {
+        return of(null);
+    }
+
+    getWithQuery(query: string): Observable<TModel[]> {
+        return of([]);
+    }
+
+    count(): Observable<number> {
+        return of(0);
+    }
+}
+
 describe('Store: Query', () => {
 
     let qb: QueryBuilder<Fruit>;
-    let service: EntityCollectionService<Fruit>;
+    let service: QueryService<Fruit>;
 
     beforeEach(() => {
-        const entityMetadata: EntityMetadataMap = { Fruit: {} };
-        const pluralNames = {};
-        TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                EffectsModule.forRoot([]),
-                StoreModule.forRoot({}, {}),
-                EntityDataModule.forRoot({
-                    entityMetadata: entityMetadata,
-                    pluralNames: pluralNames
-                }),
-            ],
-        });
-    });
-
-    beforeEach(() => {
-        const factory = TestBed.inject(EntityCollectionServiceFactory);
         const adapter = new DefaultQueryAdapter<Fruit>();
-        service = factory.create<Fruit>('Fruit');
+        service = new MockQueryService<Fruit>();
         spyOn(service, 'getWithQuery');
         spyOn(service, 'getByKey');
         qb = new QueryBuilder(Fruit, service, adapter);

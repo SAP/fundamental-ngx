@@ -224,14 +224,14 @@ describe('DefaultQueryAdapter: Query string generation', () => {
 
     it('should be able to process query parameters with "pageSize"', () => {
         const params: QueryParams = {
-            pageSize: '42'
+            skip: '42'
         };
         expect(adapter.createQueryString(params)).toBe('$skip=42');
     });
 
     it('should be able to process query parameters with "offset"', () => {
         const params: QueryParams = {
-            offset: '100'
+            top: '100'
         };
         expect(adapter.createQueryString(params)).toBe('$top=100');
     });

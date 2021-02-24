@@ -117,9 +117,9 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
                     parts.push('$select=' + params[key]);
                 } else if (key === 'expand') {
                     parts.push('$expand=' + params[key])
-                } else if (key === 'pageSize') {
+                } else if (key === 'skip') {
                     parts.push('$skip=' + params[key]);
-                } else if (key === 'offset') {
+                } else if (key === 'top') {
                     parts.push('$top=' + params[key]);
                 } else if (key === 'orderby') {
                     parts.push('$orderby=' + params[key]);

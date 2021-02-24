@@ -48,7 +48,7 @@ export class ComparisonPredicate <TModel, TProperty extends keyof TModel, TPrope
 export class EqPredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
     extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
 
-        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+        constructor(property: TProperty, value: TPropertyValue) {
             super(property, value);
         }
     }
@@ -56,7 +56,7 @@ export class EqPredicate < TModel, TProperty extends keyof TModel, TPropertyValu
 export class GtPredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
     extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
 
-        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+        constructor(property: TProperty, value: TPropertyValue) {
             super(property, value);
         }
     }
@@ -64,7 +64,7 @@ export class GtPredicate < TModel, TProperty extends keyof TModel, TPropertyValu
 export class LtPredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
     extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
 
-        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+        constructor(property: TProperty, value: TPropertyValue) {
             super(property, value);
         }
     }
@@ -72,7 +72,7 @@ export class LtPredicate < TModel, TProperty extends keyof TModel, TPropertyValu
 export class GePredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
     extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
 
-        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+        constructor(property: TProperty, value: TPropertyValue) {
             super(property, value);
         }
     }
@@ -80,7 +80,7 @@ export class GePredicate < TModel, TProperty extends keyof TModel, TPropertyValu
 export class LePredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
     extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
 
-        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
+        constructor(property: TProperty, value: TPropertyValue) {
             super(property, value);
         }
     }
@@ -94,14 +94,14 @@ export abstract class BinaryPredicate < TModel > extends BasePredicate < TModel 
 
 export class AndPredicate < TModel > extends BinaryPredicate < TModel > {
 
-    constructor(public readonly operands: Array < Predicate < TModel >> ) {
+    constructor(operands: Array < Predicate < TModel >> ) {
         super(operands);
     }
 }
 
 export class OrPredicate < TModel > extends BinaryPredicate < TModel > {
 
-    constructor(public readonly operands: Array < Predicate < TModel >> ) {
+    constructor(operands: Array < Predicate < TModel >> ) {
         super(operands);
     }
 }
