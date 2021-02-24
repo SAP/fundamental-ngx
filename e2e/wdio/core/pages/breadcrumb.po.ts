@@ -5,7 +5,7 @@ export class BreadcrumbPo extends CoreBaseComponentPo {
     private url = '/breadcrumb';
     root = '#page-content';
     links = '.fd-breadcrumb__link';
-    disableLinks = '.fd-breadcrumb__item:nth-child(5)';
+    disableLinks = '.fd-breadcrumb__item span';
 
     open(): void {
         super.open(this.url);

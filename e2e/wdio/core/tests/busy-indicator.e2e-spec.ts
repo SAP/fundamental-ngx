@@ -7,7 +7,7 @@ import {
 
 describe('Busy Indicator test suite:', function() {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
-    const {disableButton, formName, formSurname, formPassword, saveButton, enableLoadButton,
+    const {formName, formSurname, formPassword, saveButton, ableButton,
         saveIndicator, formIndicator, smallIndicator, middleIndicator, largeIndicator, componentExample} = busyIndicatorPage;
     const text = 'test';
 
@@ -35,11 +35,11 @@ describe('Busy Indicator test suite:', function() {
     });
 
     it('Verify elements are interactable after clicking on disable button', () => {
-        scrollIntoView(disableButton);
+        scrollIntoView(ableButton);
         expect(isElementClickable(formName)).toBe(false);
         expect(isElementClickable(formSurname)).toBe(false);
         expect(isElementClickable(formPassword)).toBe(false);
-        click(disableButton);
+        click(ableButton);
         expect(isElementClickable(formName)).toBe(true);
         expect(isElementClickable(formSurname)).toBe(true);
         expect(isElementClickable(formPassword)).toBe(true);
@@ -47,20 +47,18 @@ describe('Busy Indicator test suite:', function() {
     });
 
     it('Verify busy indicator appears after clicking on enable loading button', () => {
-        scrollIntoView(disableButton);
-        click(disableButton);
+        scrollIntoView(ableButton);
+        click(ableButton);
         addValue(formName, text);
         addValue(formSurname, text);
         addValue(formPassword, text);
         scrollIntoView(saveButton);
         click(saveButton);
-        scrollIntoView(enableLoadButton);
-        click(enableLoadButton);
-
+        scrollIntoView(ableButton);
+        click(ableButton);
         expect(isElementClickable(formName)).toBe(false);
         expect(isElementClickable(formSurname)).toBe(false);
         expect(isElementClickable(formPassword)).toBe(false);
-
         expect(isElementDisplayed(saveIndicator)).toBe(true);
         expect(isElementDisplayed(formIndicator)).toBe(true);
     });
