@@ -4,8 +4,3 @@
 .fd-panel__title:focus {
     outline: none;
 }
-
-/* TODO: remove it after https://github.com/SAP/fundamental-styles/pull/1861 will be merged */
-.fd-panel__button[dir=rtl]:before, [dir=rtl] .fd-panel__button:before {
-    content: '';
-}

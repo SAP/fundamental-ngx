@@ -15,10 +15,3 @@
         cursor: default;
     }
 }
-
-// TODO: remove after migrating 0.15.0 styles
-.fd-dynamic-page {
-	.fd-dynamic-page__content {
-		overflow-y: auto;
-	}
-}

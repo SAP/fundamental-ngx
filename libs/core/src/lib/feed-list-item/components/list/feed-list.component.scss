@@ -1,14 +1,1 @@
-/*
-* IMPORTANT:
-* Implemented original styles from fundamental styles
-* Will update after fundamental-styles will be released.
-* @import '~fundamental-styles/dist/feed-list';
-*/
-
-$block: fd-feed-list;
-
-.#{$block} {
-    &__footer {
-        display: block;
-    }
-}
+@import "~fundamental-styles/dist/feed-input";
