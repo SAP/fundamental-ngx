@@ -14,49 +14,54 @@ import {
 
 describe('Verify Panel', () => {
     const panelPage = new PanelPo();
+    const {
+        expandablePanelRoot, expandablePanelBtn, expandablePanelTitle, expandablePanelContent, fixedPanelSection,
+        fixedPanelDescription, compactPanelRoot, compactPanelBtn, fixedHeightPanelRoot, fixedHeightPanelContentRegion,
+        fixedHeightPanelContent, actionPanelRoot, actionPanelBtn
+    } = panelPage;
 
     beforeEach(() => {
         panelPage.open();
     }, 1);
 
     it('should have fixed header', () => {
-        waitForPresent(panelPage.fixedPanelDescription);
+        waitForPresent(fixedPanelDescription);
         // Checks that fixed panel has no expand button
-        expect(waitForPresent(panelPage.fixedPanelDescription)).toBe(true);
+        expect(waitForPresent(fixedPanelDescription)).toBe(true);
     });
 
     xit('should be expandable', () => {
-        const isVisibleContentBefore = waitForElDisplayed(panelPage.expandablePanelContent);
-        click(panelPage.expandablePanelBtn);
+        const isVisibleContentBefore = waitForElDisplayed(expandablePanelContent);
+        click(expandablePanelBtn);
         pause(3000);
-        const isInvisibleVisibleContentAfter = waitForNotDisplayed(panelPage.expandablePanelContent);
+        const isInvisibleVisibleContentAfter = waitForNotDisplayed(expandablePanelContent);
 
         expect(isVisibleContentBefore).toBe(true);
         expect(isInvisibleVisibleContentAfter).toBe(true);
-        expect(getText(panelPage.expandablePanelTitle)).toBe(expandable_panel_header);
+        expect(getText(expandablePanelTitle)).toBe(expandable_panel_header);
     });
 
     it('should compact be smaller than basic', () => {
-        const expandableBtnSize = getElementSize(panelPage.expandablePanelBtn);
-        const compactBtnSize = getElementSize(panelPage.compactPanelBtn);
+        const expandableBtnSize = getElementSize(expandablePanelBtn);
+        const compactBtnSize = getElementSize(compactPanelBtn);
 
         expect(expandableBtnSize.width).toBeGreaterThan(compactBtnSize.width);
         expect(expandableBtnSize.height).toBeGreaterThan(compactBtnSize.height);
     });
 
     it('should scroll content if height is fixed', async () => {
-        const contentRegionHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContentRegion, 'height').value;
-        const contentActualHeight = getCSSPropertyByName(panelPage.fixedHeightPanelContent, 'height').value;
+        const contentRegionHeight = getCSSPropertyByName(fixedHeightPanelContentRegion, 'height').value;
+        const contentActualHeight = getCSSPropertyByName(fixedHeightPanelContent, 'height').value;
         expect(parseInt(contentRegionHeight, 10)).toBeLessThan(parseInt(contentActualHeight, 10));
     });
 
     it('should action panel have clickable buttons example ', () => {
-        expect(getText(panelPage.actionPanelBtn, 0).trim())
+        expect(getText(actionPanelBtn, 0).trim())
             .toBe(action_panel_edit_button);
-        expect(waitForClickable(panelPage.actionPanelBtn, 0)).toBe(true);
-        expect(getText(panelPage.actionPanelBtn, 1).trim())
+        expect(waitForClickable(actionPanelBtn, 0)).toBe(true);
+        expect(getText(actionPanelBtn, 1).trim())
             .toBe(action_panel_delete_button);
-        expect(waitForClickable(panelPage.actionPanelBtn, 1)).toBe(true);
+        expect(waitForClickable(actionPanelBtn, 1)).toBe(true);
     });
 
     it('should be able to switch to rtl', () => {

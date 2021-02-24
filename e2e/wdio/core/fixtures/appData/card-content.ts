@@ -4,7 +4,7 @@ export const cardTitleArr = [
     'Card Title',
     'Card Title'
 ];
-export const cardSubtitle = 'Card Subtitle';
+export const cardSubtitleText = 'Card Subtitle';
 export const badgeText = 'New';
 export const cardTypeAttr = 'cardtype';
 export const compactAttr = 'ng-reflect-compact';
@@ -59,10 +59,10 @@ export const statusColors = [
     '5,59,112'
 ];
 export const tableCardTitle = 'Table card';
-export const barChartTitle = 'Bar Chart List Card';
-export const barChartCounter = '4 of 10';
+export const barChartTitleText = 'Bar Chart List Card';
+export const barChartCounterText = '4 of 10';
 export const colorAttr = 'color';
-export const barChartItems = [
+export const barChartItemsText = [
     'Contract A',
     'Contract B',
     'Contract C',

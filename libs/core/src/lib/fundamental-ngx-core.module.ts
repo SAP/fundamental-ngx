@@ -44,6 +44,7 @@ import { SelectModule } from './select/select.module';
 import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
+import { TextModule } from './text/text.module';
 import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
@@ -151,6 +152,7 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         StepInputModule,
         TableModule,
         TabsModule,
+        TextModule,
         TileModule,
         TimeModule,
         TimePickerModule,
