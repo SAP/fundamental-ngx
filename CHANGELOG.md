@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.19...v0.28.0-rc.20) (2021-02-24)
+
+
+### Features
+
+* (Platform)Thumbnail component v2 enhancements ([#4702](https://github.com/SAP/fundamental-ngx/issues/4702)) ([ee85a23](https://github.com/SAP/fundamental-ngx/commit/ee85a23793fb3d8e6bb2195d292545249d17b856))
+
 ## [0.28.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.18...v0.28.0-rc.19) (2021-02-24)
 
 
