@@ -35,6 +35,14 @@
     }
 }
 
+.cdk-drag {
+    cursor: grab;
+
+    &.cdk-drag-dragging {
+        cursor: grabbing;
+    }
+}
+
 .cdk-drag-dragging {
     outline: none;
     cursor: grabbing;
@@ -57,6 +65,7 @@
         background-color: #fff;
         background-color: var(--sapList_Background, #fff);
         z-index: 15;
+        cursor: grabbing;
     }
 }
 
