@@ -1,4 +1,5 @@
 import { Entity, RESTResource, FundamentalStoreConfig } from '@fundamental-ngx/store';
+
 interface EntityComposite {
     getTypes();
 }
@@ -39,10 +40,6 @@ class LineItem {
     reqId: string;
 }
 
-export class Dependency {
-    name: 'Dependency';
-}
-
 // URI with endpoints for different actions
 @RESTResource({
     path: {
@@ -58,10 +55,6 @@ export class Dependency {
 })
 export class Requisition extends BaseEntity {
     id: string;
-
-    constructor(public dep: Dependency) {
-        super();
-    }
 }
 
 // Set the default URL root for all entities registered
