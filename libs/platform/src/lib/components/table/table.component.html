@@ -41,6 +41,7 @@
             <table
                 class="fdp-table__header-table"
                 fd-table
+                role="table"
             >
                 <thead fd-table-header>
                     <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
@@ -72,8 +73,9 @@
         </th>
         <ng-container *ngFor="let column of _visibleColumns; let colIdx = index">
             <th
-                scope="columnheader"
                 fd-table-cell
+                role="columnheader"
+                scope="col"
                 [id]="id+'__'+column.name"
                 [attr.aria-colindex]="colIdx"
                 [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
@@ -256,6 +258,7 @@
         >
             <table
                 fd-table
+                role="table"
                 class="fdp-table__body-table"
             >
                 <tbody
@@ -295,18 +298,21 @@
             <table
                 *ngIf="_tableRowsVisible.length"
                 fd-table
+                role="table"
                 class="fdp-table__body-hs-table"
             >
                 <tbody fd-table-body>
-                    <tr fd-table-row>
+                    <tr fd-table-row role="row">
                         <td
                             *ngIf="_isShownSelectionColumn"
                             fd-table-cell
+                            role="cell"
                             class="fdp-table__cell--selection"
                         ></td>
                         <td
                             *ngFor="let column of _visibleColumns"
                             fd-table-cell
+                            role="cell"
                         ></td>
                     </tr>
                 </tbody>
@@ -323,7 +329,7 @@
 >
     <tr
         fd-table-row
-        scope="row"
+        role="row"
         class="fdp-table__row--group"
         [attr.aria-rowindex]="rowIdx"
     >
@@ -364,7 +370,7 @@
 >
     <tr
         fd-table-row
-        scope="row"
+        role="row"
         [attr.aria-rowindex]="rowIdx"
         [attr.aria-selected]="row.checked"
     >
@@ -402,6 +408,7 @@
         <td
             *ngFor="let column of _visibleColumns; let colIdx = index"
             fd-table-cell
+            role="cell"
             [headers]="id+'__'+column.name"
             [style.textAlign]="column.align"
             [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
@@ -425,7 +432,7 @@
         <tbody fd-table-body>
             <tr
                 fd-table-row
-                scope="row"
+                role="row"
             >
                 <td
                     fd-table-cell
