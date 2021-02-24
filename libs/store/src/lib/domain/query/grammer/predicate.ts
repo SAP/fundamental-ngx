@@ -14,32 +14,31 @@ export interface Predicate < TModel > {
 export class BasePredicate < TModel > implements Predicate < TModel > {
     operands: Predicate < TModel > | Array < Predicate < TModel >> ;
 
-    and(...operands: Array < Predicate < TModel >> ): Predicate < TModel > {
-        return undefined;
+    and(...operands: Array < Predicate < TModel >> ): this {
+        return this;
     }
 
-    not(operand: Predicate < TModel > ): Predicate < TModel > {
-        return undefined;
+    not(operand: Predicate < TModel > ): this {
+        return this;
     }
 
-    or(...operands: Array < Predicate < TModel >> ): Predicate < TModel > {
-        return undefined;
+    or(...operands: Array < Predicate < TModel >> ): this {
+        return this;
     }
 
     test(target: TModel): boolean {
         return false;
     }
 
-
     get query(): string {
         return '';
     }
 }
 
-export class NotPredicate < TModel > extends BasePredicate < TModel > {}
+export class NotPredicate<TModel> extends BasePredicate<TModel> {}
 
-export class ComparisonPredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
-    extends BasePredicate < TModel > {
+export class ComparisonPredicate <TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty]>
+    extends BasePredicate <TModel> {
 
         constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
             super();

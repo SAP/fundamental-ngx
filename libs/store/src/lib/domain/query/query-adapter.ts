@@ -16,22 +16,42 @@ export interface QueryParams {
 }
 
 export abstract class QueryAdapter<T> {
-    abstract parsePredicate(predicate?: Predicate<T>): string;
-    abstract parseOrderBys(orderBys?: OrderBy<T> | OrderBy<T>[]): string
-    abstract parseSelect(select?: string[]): string;
-    abstract parseExpand(select?: string[]): string;
-    abstract createQueryString(params?: QueryParams): string;
-}
-
-@Injectable()
-export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
-
     /**
      * Parses a Predicate object and forms the query value for the "$filter"
      * property.
      *
      * @param predicate Predicate tree object.
      */
+    abstract parsePredicate(predicate?: Predicate<T>): string;
+
+    /**
+     * Creates value string for "$orderby" query parameter from set of OrderBy objects.
+     * @param orderBys Set of OrderBy objects
+     */
+    abstract parseOrderBys(orderBys?: OrderBy<T> | OrderBy<T>[]): string
+
+    /**
+     * Creates value string for "$select" query parameter from a list of select strings.
+     * @param selects List of select fields
+     */
+    abstract parseSelect(selects?: Array<keyof T>): string;
+
+    /**
+     * Creates value string for "$expand" query parameter from a list of expand strings.
+     * @param expands List of expand fields
+     */
+    abstract parseExpand(expands?: Array<keyof T>): string;
+
+    /**
+     * Composes final query string.
+     * @param params QueryParams object composed of key-value pairs.
+     */
+    abstract createQueryString(params?: QueryParams): string;
+}
+
+@Injectable()
+export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
+
     parsePredicate(predicate?: Predicate<T>): string {
         if (predicate instanceof EqPredicate) {
             return predicate.property + ' eq ' + this._prepareValue(predicate.value);
@@ -57,10 +77,6 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return '';
     }
 
-    /**
-     * Creates value string for "$orderby" query parameter from set of OrderBy objects.
-     * @param orderBys Set of OrderBy objects
-     */
     parseOrderBys(orderBys?: OrderBy<T> | OrderBy<T>[]): string {
         if (!orderBys) {
             return '';
@@ -75,32 +91,20 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         }
     }
 
-    /**
-     * Creates value string for "$select" query parameter from a list of select strings.
-     * @param selects List of select fields
-     */
-    parseSelect(selects?: string[]): string {
+    parseSelect(selects?: Array<keyof T>): string {
         if (!Array.isArray(selects)) {
             return '';
         }
         return selects.join(',');
     }
 
-    /**
-     * Creates value string for "$expand" query parameter from a list of expand strings.
-     * @param expands List of expand fields
-     */
-    parseExpand(expands?: string[]): string {
+    parseExpand(expands?: Array<keyof T>): string {
         if (!Array.isArray(expands)) {
             return '';
         }
         return expands.join(',');
     }
 
-    /**
-     * Composes final query string.
-     * @param params QueryParams object composed of key-value pairs.
-     */
     createQueryString(params: QueryParams): string {
         const parts: string[] = [];
         for (const key in params) {

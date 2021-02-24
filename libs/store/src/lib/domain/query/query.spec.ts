@@ -116,27 +116,27 @@ describe('Store: Query', () => {
 
     it('should call "getWithQuery" with the correct pagination parameters', () => {
         let query = qb.build();
-        query.maxResults(10).fetch();
+        query.withMaxResults(10).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=10&$top=0');
 
         query = qb.build();
-        query.maxResults(20).firstResult(100).fetch();
+        query.withMaxResults(20).withFirstResult(100).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=100');
 
         query = qb.build();
-        query.maxResults(20).firstResult(0).fetch();
+        query.withMaxResults(20).withFirstResult(0).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=0');
     });
 
     it('should not include "$top" without "$skip"', () => {
         const query = qb.build();
-        query.firstResult(100).fetch();
+        query.withFirstResult(100).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('');
     });
 
     it('should be able to modify query to get next page of results', () => {
         const query = qb.build();
-        query.maxResults(20).firstResult(20).fetch();
+        query.withMaxResults(20).withFirstResult(20).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=20');
 
         query.next();
@@ -151,7 +151,7 @@ describe('Store: Query', () => {
 
     it('should be able to modify query to get previous page of results', () => {
         const query = qb.build();
-        query.maxResults(20).firstResult(80).fetch();
+        query.withMaxResults(20).withFirstResult(80).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=80');
 
         query.previous();
@@ -166,7 +166,7 @@ describe('Store: Query', () => {
 
     it('should default the top to 0 if previous results in a negative index', () => {
         const query = qb.build();
-        query.maxResults(20).firstResult(10).fetch();
+        query.withMaxResults(20).withFirstResult(10).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=10');
 
         query.previous();
@@ -181,7 +181,7 @@ describe('Store: Query', () => {
 
     it('should reset the paging index by default when orderBy is called', () => {
         const query = qb.build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
 
         query.orderBy({field: 'name'}).fetch();
@@ -190,7 +190,7 @@ describe('Store: Query', () => {
 
     it('should suppress resetting of the paging index if "suppressPageReset" is invoked when orderBy is called', () => {
         const query = qb.build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
 
         query.suppressPageReset().orderBy({field: 'name'}).fetch();
@@ -199,7 +199,7 @@ describe('Store: Query', () => {
 
     it('should reset the paging index by default when predicate has changed', () => {
         const query = qb.where(eq('name', 'orange')).build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'orange\'&$skip=20&$top=40');
 
         query.where(eq('name', 'peach')).fetch();
@@ -208,7 +208,7 @@ describe('Store: Query', () => {
 
     it('should suppress resetting of the paging index if "suppressPageReset" is invoked when predicate has changed', () => {
         const query = qb.where(eq('name', 'orange')).build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'orange\'&$skip=20&$top=40');
 
         query.suppressPageReset().where(eq('name', 'peach')).fetch();
@@ -217,7 +217,7 @@ describe('Store: Query', () => {
 
     it('should reset the paging index by default when keyword is changed', () => {
         const query = qb.keyword('apple').build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
 
         query.keyword('banana').fetch();
@@ -226,7 +226,7 @@ describe('Store: Query', () => {
 
     it('should suppress resetting the paging index if "suppressPageReset" is invoked when keyword is changed', () => {
         const query = qb.keyword('apple').build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
 
         query.suppressPageReset().keyword('banana').fetch();
@@ -235,28 +235,28 @@ describe('Store: Query', () => {
 
     it('should reset the paging index by default when page size is changed', () => {
         const query = qb.keyword('apple').build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
 
-        query.maxResults(100).fetch();
+        query.withMaxResults(100).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=100&$top=0');
     });
 
     it('should suppress resetting the paging index if "suppressPageReset" is invoked when page size is changed', () => {
         const query = qb.keyword('apple').build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
 
-        query.suppressPageReset().maxResults(100).fetch();
+        query.suppressPageReset().withMaxResults(100).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=100&$top=40');
     });
 
     it('should suppress resetting the paging index if setting the paging index is part of the query update', () => {
         const query = qb.keyword('apple').build();
-        query.maxResults(20).firstResult(40).fetch();
+        query.withMaxResults(20).withFirstResult(40).fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
 
-        query.maxResults(100).firstResult(40).keyword('banana').fetch();
+        query.withMaxResults(100).withFirstResult(40).keyword('banana').fetch();
         expect(service.getWithQuery).toHaveBeenCalledWith('$search=banana&$skip=100&$top=40');
     });
 });

@@ -2,8 +2,7 @@ import {
     Type
 } from '@angular/core';
 import {
-    Observable,
-    of
+    Observable
 } from 'rxjs';
 import {
     EntityCollectionService,
@@ -45,10 +44,10 @@ export class Query<TModel> {
     _includeCount: boolean;
 
     /** @hidden - stores current selection of properties */
-    _select: string[];
+    _select: Array<keyof TModel>;
 
     /** @hidden - stores current expand properties */
-    _expand: string[];
+    _expand: Array<keyof TModel>;
 
     constructor(
         private resultType: Type<TModel>,
@@ -60,7 +59,7 @@ export class Query<TModel> {
      * Replace current filter settings.
      * @param predicate Predicate object which contains new filter criteria.
      */
-    where(predicate: Predicate<TModel>): Query<TModel> {
+    where(predicate: Predicate<TModel>): this {
         this._predicate = predicate;
         return this;
     }
@@ -69,7 +68,7 @@ export class Query<TModel> {
      * Set keyword for search term.
      * @param keyword
      */
-    keyword(keyword: string): Query<TModel> {
+    keyword(keyword: string): this {
         this._keyword = keyword;
         return this;
     }
@@ -78,7 +77,7 @@ export class Query<TModel> {
      * Set order by rules for query.
      * @param orderBys Set of OrderBy objects.
      */
-    orderBy<TProperty extends keyof TModel> (...orderBys: Array<OrderBy<TModel>> ): Query < TModel > {
+    orderBy<TProperty extends keyof TModel> (...orderBys: Array<OrderBy<TModel>>): this {
         this._orderByFields = orderBys;
         return this;
     }
@@ -87,7 +86,7 @@ export class Query<TModel> {
      * Set first index of result set for paging.
      * @param offset Index number of first result.
      */
-    firstResult(offset: number): Query<TModel> {
+    withFirstResult(offset: number): this {
         this._offset = offset;
         this._suppressPageReset = true;
         return this;
@@ -97,7 +96,7 @@ export class Query<TModel> {
      * Set page size for result set.
      * @param pageSize Number of items returned per page
      */
-    maxResults(pageSize: number): Query<TModel> {
+    withMaxResults(pageSize: number): this {
         this._pageSize = pageSize;
         return this;
     }
@@ -106,7 +105,7 @@ export class Query<TModel> {
      * Suspends resetting of page index when query keyword, where, or
      * order by clauses have been changed.
      */
-    suppressPageReset(): Query<TModel> {
+    suppressPageReset(): this {
         this._suppressPageReset = true;
         return this;
     }
@@ -117,7 +116,7 @@ export class Query<TModel> {
      * If "false" the parameter will not be included.
      * @param flag
      */
-    includeCount(flag: boolean): Query<TModel> {
+    includeCount(flag: boolean): this {
         this._includeCount = flag;
         return this;
     }
@@ -127,8 +126,8 @@ export class Query<TModel> {
      * the enitity properties included in the return data.
      * @param select List of properties to include in response data
      */
-    select<TP extends keyof TModel> (...select: Array<TP> ): Query<TModel> {
-        this._select = select as string[];
+    select<TP extends keyof TModel> (...select: Array<TP> ): this {
+        this._select = select;
         return this;
     }
 
@@ -137,15 +136,15 @@ export class Query<TModel> {
      * to include relational data.
      * @param extend List of expanded properties to include in response data
      */
-    expand<TP extends keyof TModel> (...expand: Array<TP> ): Query<TModel> {
-        this._expand = expand as string[];
+    expand<TP extends keyof TModel> (...expand: Array<TP> ): this {
+        this._expand = expand;
         return this;
     }
 
     /**
      * Initiate query and return observable
      */
-    fetch(): Observable<TModel | Array<TModel>> {
+    fetch(): Observable<Array<TModel>> {
         if (!this._suppressPageReset) {
             this._offset = 0;
         }

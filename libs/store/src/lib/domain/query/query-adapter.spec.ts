@@ -169,7 +169,7 @@ describe('DefaultQueryAdapter: Select Parsing', () => {
     });
 
     it('should be able to process select parameters', () => {
-        expect(adapter.parseSelect(['name', 'age', 'color'])).toBe('name,age,color');
+        expect(adapter.parseSelect(['name', 'variety', 'origin'])).toBe('name,variety,origin');
     });
 
 });
@@ -181,7 +181,7 @@ describe('DefaultQueryAdapter: Expand Parsing', () => {
     });
 
     it('should be able to process expand parameters', () => {
-        expect(adapter.parseExpand(['name', 'age', 'color'])).toBe('name,age,color');
+        expect(adapter.parseExpand(['name', 'variety', 'origin'])).toBe('name,variety,origin');
     });
 
 });
