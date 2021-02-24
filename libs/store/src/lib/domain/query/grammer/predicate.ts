@@ -41,7 +41,7 @@ export class NotPredicate < TModel > extends BasePredicate < TModel > {}
 export class ComparisonPredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
     extends BasePredicate < TModel > {
 
-        constructor(public readonly property: TProperty, value: TPropertyValue) {
+        constructor(public readonly property: TProperty, public readonly value: TPropertyValue) {
             super();
         }
     }
