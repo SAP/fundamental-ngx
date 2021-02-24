@@ -431,6 +431,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
 
         this.showList(!isOpen);
+
+        if (this.isOpen) {	
+            this.listComponent.setItemActive(0);	
+        }
     }
 
     /**
@@ -490,7 +494,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: OptionItem = this._getSelectItemByValue(this.inputText);
-        const index: number = this._suggestions.findIndex((value) => value === activeValue);
+        const index: number = this._suggestions.findIndex(value => value === activeValue);
 
         if (this._suggestions[index + offset]) {
             this.handleOptionItem(this._suggestions[index + offset]);
@@ -499,7 +503,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     private _getSelectItemByValue(displayValue: string): OptionItem {
-        return this._suggestions.find((value) => value.label === displayValue);
+        return this._suggestions.find(value => value.label === displayValue);
     }
 
     /** @hidden */
@@ -533,7 +537,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         this._dsSubscription = initDataSource
             .open()
             .pipe(takeUntil(this._destroyed))
-            .subscribe((data) => {
+            .subscribe(data => {
                 this._suggestions = this._convertToOptionItems(data);
 
                 this.stateChanges.next('initDataSource.open().');
@@ -655,7 +659,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             group[keyValue].push(item);
         }
 
-        return Object.keys(group).map((key) => {
+        return Object.keys(group).map(key => {
             const selectItem: OptionItem = {
                 label: key,
                 value: null,
@@ -730,7 +734,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * Assign custom templates
      * */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach((template) => {
+        this.customTemplates.forEach(template => {
             switch (template.getName()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
