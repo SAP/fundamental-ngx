@@ -28,7 +28,7 @@ export const API_FILES = {
     objectMarker: ['PlatformObjectMarkerComponent'],
     radioGroup: ['RadioGroupComponent'],
     searchField: ['SearchFieldComponent'],
-    select: ['SelectPlatformComponent'],
+    select: ['SelectComponent', 'BaseSelect', 'SelectConfig'],
     splitMenuButton: ['SplitMenuButtonComponent'],
     table: [
         'TableComponent',

@@ -94,8 +94,8 @@ export const ROUTES: Routes = [
             {
                 path: 'select',
                 loadChildren: () =>
-                    import('./component-docs/platform-select/platform-select.module').then(
-                        (m) => m.PlatformSelectDocsModule
+                    import('./component-docs/platform-forms/platform-select/platform-select-docs.module').then(
+                        (m) => m.PlatformSelectDocsModules
                     )
             },
             {
