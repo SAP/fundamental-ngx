@@ -17,15 +17,6 @@ import * as illustratedMessageSpotTsCode from '!raw-loader!./examples/illustrate
 })
 export class IllustratedMessageDocsComponent {
 
-    data: any = {
-        properties: {
-            glyphs: 'accelerated'
-        },
-        modifier: {
-            block: 'default'
-        }
-    };
-
     illustratedMessageExample: ExampleFile[] = [
         {
             language: 'html',
