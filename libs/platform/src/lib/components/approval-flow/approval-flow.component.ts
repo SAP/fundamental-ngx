@@ -28,9 +28,11 @@ import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-
 import { displayUserFn, isNodeApproved, trackByFn } from './helpers';
 import {
     ApprovalDataSource,
-    ApprovalGraphNode, ApprovalGraphNodeMetadata,
+    ApprovalGraphNode,
+    ApprovalGraphNodeMetadata,
     ApprovalNode,
-    ApprovalProcess, ApprovalStatus,
+    ApprovalProcess,
+    ApprovalStatus,
     ApprovalTeam,
     ApprovalUser
 } from './interfaces';
@@ -200,7 +202,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._listenOnResize();
     }
 
-    /** @hidden Node click handler*/
+    /** @hidden Node click handler */
     _onNodeClick(node: ApprovalNode): void {
         const dialog = this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
