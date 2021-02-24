@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.20...v0.28.0-rc.21) (2021-02-24)
+
+
+### Features
+
+* (Core) add custom item template option to Multi Input ([#4709](https://github.com/SAP/fundamental-ngx/issues/4709)) ([9003f4e](https://github.com/SAP/fundamental-ngx/commit/9003f4e70ca7db0450c8ae7321fca1d59781b474))
+
 ## [0.28.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.19...v0.28.0-rc.20) (2021-02-24)
 
 
