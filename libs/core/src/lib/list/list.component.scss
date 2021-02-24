@@ -5,6 +5,10 @@
     pointer-events: none;
 }
 
+.fd-list.fd-list--byline .fd-list__item.is-focus, .fd-list.fd-list--byline .fd-list__item:focus {
+	pointer-events: all;
+}
+
 .fd-list__title,
 .fd-list__secondary {
     pointer-events: all;

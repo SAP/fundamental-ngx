@@ -13,6 +13,7 @@ import { ListBylineNavigationExampleComponent } from './examples/list-byline-nav
 import { ListBylineStandardExampleComponent } from './examples/list-byline-standard-example/list-byline-standard-example.component';
 import { ListBylineButtonExampleComponent } from './examples/list-byline-button-example/list-byline-button-example.component';
 import { ListBylineInteractiveExampleComponent } from './examples/list-byline-interactive-example/list-byline-interactive-example.component';
+import { ListBylineWrapExampleComponent } from './examples/list-byline-wrap-example/list-byline-wrap-example.component';
 
 const routes: Routes = [
     {
@@ -44,7 +45,8 @@ const routes: Routes = [
         ListBylineNavigationExampleComponent,
         ListBylineStandardExampleComponent,
         ListBylineButtonExampleComponent,
-        ListBylineInteractiveExampleComponent
+        ListBylineInteractiveExampleComponent,
+        ListBylineWrapExampleComponent
     ]
 })
 export class ListDocsModule {}
