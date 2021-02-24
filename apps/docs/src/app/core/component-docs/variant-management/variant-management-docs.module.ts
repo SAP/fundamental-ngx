@@ -12,7 +12,8 @@ import {
     ToolbarModule,
     PopoverModule,
     ListModule,
-    FormModule
+    FormModule,
+    MessageToastModule
 } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { FormsModule } from '@angular/forms';
@@ -36,6 +37,7 @@ const routes: Routes = [
         TableModule,
         ToolbarModule,
         PopoverModule,
+        MessageToastModule,
         ListModule,
         FormModule,
         FormsModule

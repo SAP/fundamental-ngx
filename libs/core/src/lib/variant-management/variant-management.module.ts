@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { VariantManagementComponent } from './variant-management.component';
 import {
     BarModule,
@@ -15,10 +17,11 @@ import {
     SelectModule,
     TableModule,
     TitleModule,
-    ToolbarModule
+    ToolbarModule,
+    RadioModule,
+    PipeModule,
+    MessageStripModule
 } from '@fundamental-ngx/core';
-import { RadioModule } from '../radio/radio.module';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -41,7 +44,9 @@ import { FormsModule } from '@angular/forms';
         RadioModule,
         FormsModule,
         TitleModule,
-        ButtonModule
+        ButtonModule,
+        PipeModule,
+        MessageStripModule
     ],
     exports: [
         VariantManagementComponent

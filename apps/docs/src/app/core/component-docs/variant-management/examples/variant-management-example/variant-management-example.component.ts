@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { VariantManagementComponent, View } from '@fundamental-ngx/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { MessageToastService, VariantManagementComponent, View } from '@fundamental-ngx/core';
 
 interface ExampleRow {
     column1: any,
@@ -14,73 +14,12 @@ interface ExampleRow {
 })
 export class VariantManagementExampleComponent implements OnInit {
     tableRows: ExampleRow[];
-    displayedRows: ExampleRow[];
-
-    currentView: View;
-
+    displayedRows: ExampleRow[] = [];
+    activeView: View;
     views: View[];
-    @ViewChild(VariantManagementComponent) viewManager: VariantManagementComponent;
+    @ViewChildren(VariantManagementComponent) viewManagers: QueryList<VariantManagementComponent>;
 
-    sortColumn1(): void {
-        this.views = this.views.map(view => {
-            if (view.id === this.currentView.id) {
-                view.settings = this.currentView.settings;
-            }
-            return view;
-        });
-    }
-
-    applyViewSettings(viewId: string): void {
-        const viewToApply = this.views.find(view => view.id === viewId) || this.views.find(view => view.default);
-        if (viewToApply) {
-            this.currentView = viewToApply;
-        }
-    }
-    
-    saveView(updatedView: View): void {
-        console.log(updatedView);
-
-        const index = this.views.findIndex(v => v.id === updatedView.id)
-        if (index !== -1) {
-            this.views.splice(index, 1, updatedView);
-        } else {
-            this.views = [...this.views, updatedView];
-        }
-        
-        // const updateExist = this.views
-        //     .map(view => updatedViews
-        //         .find(updatedView => view.id === updatedView.id))
-        //     .filter(Boolean);
-
-        // if (updateExist.length) {
-        //     const updatedView = this.views.find(view => view.id === updatedViews[0].id);
-        //     updatedView.settings = this.viewFilters;
-        // } else {
-        //     this.views.push({
-        //         ...updatedViews[0],
-        //         settings: this.viewFilters
-        //     });
-        // }
-    }
-
-    updateViewsDueCurrent(): void {
-        this.views = this.views.map(view => {
-            if (view.id === this.currentView.id) {
-                view.settings = this.currentView.settings;
-            }
-            return view;
-        });
-    }
-
-    manualUpdateViews(): void {
-        // Randomize update for column1
-        this.viewManager?.updateViews(this.views.map(view => {
-            if (view.settings.column1) {
-                view.settings.column1.filterVal = this.tableRows[0].column1.substring(0, Math.floor(Math.random() * this.tableRows[0].column1.length));
-            }
-            return view;
-        }));
-    }
+    constructor (public messageToastService: MessageToastService) {}
 
     ngOnInit(): void {
         this.views = [
@@ -91,7 +30,6 @@ export class VariantManagementExampleComponent implements OnInit {
                 access: 'private',
                 default: true,
                 readonly: true,
-                autoApply: true,
                 createdBy: 'SAP',
                 settings: {
                     column1: {
@@ -103,58 +41,172 @@ export class VariantManagementExampleComponent implements OnInit {
             {
                 id: '2',
                 favorite: false,
-                name: 'Second View',
+                name: '2 View',
                 access: 'public',
-                readonly: false,
                 default: false,
-                autoApply: true,
                 createdBy: 'Self',
                 settings: {
                     column1: {
-                        filterVal: '',
                         ascending: false
+                    },
+                    column2: {
+                        filterVal: 'sa'
+                    }
+                }
+            },
+            {
+                id: '3',
+                favorite: false,
+                name: '3 View',
+                access: 'private',
+                default: false,
+                createdBy: 'Someone',
+                settings: {
+                    column1: {
+                        filterVal: 'an'
                     }
                 }
             }
         ];
 
+        this.activeView = {...this.views[0]};
+
         this.tableRows = [
             {
-                column1: 'Apple',
-                column2: 'Row 1',
+                column1: 'Analyst',
+                column2: 'Auto Loan Account',
                 column3: 'Row 1',
                 date: '09-07-18',
                 type: 'search'
             },
             {
-                column1: 'Banana',
-                column2: 'Row 2',
+                column1: 'Consultant',
+                column2: 'Checking Account',
                 column3: 'Row 2',
-                date: '09-08-18',
+                date: '09-07-18',
+                type: 'search'
+            },
+            {
+                column1: 'Representative',
+                column2: 'Investment Account',
+                column3: 'Row 3',
+                date: '09-07-18',
+                type: 'search'
+            },
+            {
+                column1: 'Architect',
+                column2: 'Savings Account',
+                column3: 'Row 4',
+                date: '09-07-18',
+                type: 'search'
+            },
+            {
+                column1: 'Developer',
+                column2: 'Credit Card Account',
+                column3: 'Row 5',
+                date: '09-07-18',
+                type: 'search'
+            },
+            {
+                column1: 'Supervisor',
+                column2: 'Savings Account',
+                column3: 'Row 6',
+                date: '09-07-18',
                 type: 'cart'
             },
             {
-                column1: 'Kiwi',
-                column2: 'Row 3',
-                column3: 'Row 3',
-                date: '02-14-18',
+                column1: 'Manager',
+                column2: 'Checking Account',
+                column3: 'Row 7',
+                date: '09-07-18',
                 type: 'calendar'
             },
             {
-                column1: 'Peach',
-                column2: 'Row 4',
-                column3: 'Row 4',
-                date: '12-30-17',
+                column1: 'Director',
+                column2: 'Money Market Account',
+                column3: 'Row 8',
+                date: '09-07-18',
                 type: 'search'
             },
             {
-                column1: 'Strawberry',
-                column2: 'Row 5',
-                column3: 'Row 5',
-                date: '11-12-18',
+                column1: 'Administrator',
+                column2: 'Investment Account',
+                column3: 'Row 10',
+                date: '09-07-18',
                 type: 'search'
             }
         ];
-        this.displayedRows = this.tableRows;
+
+        this.displayedRows = this.tableRows.slice();
+    }
+
+    manageViews(views: View[]): void {
+        this.views = views.slice();
+        if (!this.views.some(v => v.id === this.activeView.id)) {
+            this.selectView(Object.assign({}, this.views[0]));
+        }
+
+        this.messageToastService.open('Views were updated!', {
+            duration: 1000
+        });
+    }
+
+    selectView(view: View): void {
+        this.activeView = this.views.find(({ id }) => id === view.id);
+        this.filterRows();
+    }
+
+    filterColumn(columnName: string, value: string): void {
+        this.activeView.settings[columnName].filterVal = value;
+        this.updateViewsDueCurrent();
+
+        this.filterRows();
+    }
+
+    saveView(data: { view: View; autoApply: boolean; }): void {
+        data.view.createdBy = 'Self';
+        this.views = [...this.views, data.view];
+
+        let content = 'View was added!';
+        if (data.autoApply) {
+            this.selectView(data.view);
+            content = 'View was added and applied!';
+        }
+
+        this.messageToastService.open(content, {
+            duration: 1000
+        });
+    }
+    
+    updateView(updatedView: View): void {
+        this.views = this.views.map(view => {
+            if (view.id === updatedView.id) {
+                return updatedView;
+            }
+
+            return view;
+        });
+        this.activeView = {...updatedView};
+        this.messageToastService.open('View was updated', {
+            duration: 1000
+        });
+    }
+
+    updateViewsDueCurrent(): void {
+        this.viewManagers.forEach(viewManager => {
+            viewManager?.updateDraftView(this.activeView);
+        })
+    }
+
+    private filterRows(): void {
+        const keys = Object.keys(this.activeView.settings).filter(key => !!this.activeView.settings[key].filterVal);
+        this.displayedRows = this.tableRows.filter(row => {
+            const flag = keys.every(key => {
+                const str = this.activeView.settings[key].filterVal.toLocaleLowerCase();
+                return row[key].toLocaleLowerCase().includes(str);
+            });
+
+            return keys.length ? flag : true;
+        });
     }
 }

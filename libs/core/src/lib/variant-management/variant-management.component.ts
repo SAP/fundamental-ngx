@@ -14,6 +14,7 @@ import {
 
 import { DialogService } from '../dialog/dialog-service/dialog.service';
 import { DialogRef } from '../dialog/public_api';
+import { HeaderSizes } from '../title/public_api';
 import { compareObjects } from '../utils/functions';
 import { View } from './models/view.model';
 
@@ -31,21 +32,40 @@ export class VariantManagementComponent implements OnInit, OnChanges {
     @Input()
     views: View[];
 
-    @Output()
-    currentViewChange = new EventEmitter<string>();
+    @Input()
+    activeView: View;
+
+    @Input()
+    disabled: boolean;
+
+    @Input()
+    headerSize: HeaderSizes = 4;
+
+    @Input()
+    dirtyIndicator: string;
 
     @Output()
-    saveView = new EventEmitter<View>();
+    updateView = new EventEmitter<View>();
+
+    @Output()
+    manageViews = new EventEmitter<View[]>();
+
+    @Output()
+    selectView = new EventEmitter<View>();
+
+    @Output()
+    saveView = new EventEmitter<{ view: View; autoApply: boolean }>();
 
     isViewsOpen = false;
-
     viewChanged = false;
+    selectedView: View;
+    draftView: View;
 
-    appliedView: View;
+    defaultView: string = null;
 
     viewModel: Partial<View>;
 
-    defaultViewId = 1;
+    manageSearchValue = '';
 
     constructor(
         private readonly _dialogService: DialogService,
@@ -53,38 +73,36 @@ export class VariantManagementComponent implements OnInit, OnChanges {
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        if ('views' in changes && !changes.views.firstChange) {
-            this.viewChanged = changes.views.previousValue.some((view: View) => this._compareViewSettings(view, this.views.find(({ id }) => view.id === id)));
+        if ('views' in changes || 'activeView' in changes) {
+            this._initActiveView();
         }
     }
 
     ngOnInit(): void {
-        this.appliedView = this.views.find(view => view.default);
-        this.currentViewChange.emit(this.appliedView.id);
-
-        this.viewModel = {...this.appliedView};
+        this._initActiveView();
     }
 
-    updateViews(views: View[]): void {
-        this.viewChanged = views.some(view => this._compareViewSettings(this.views.find(({ id }) => view.id === id), view));
+    updateDraftView(view: View): void {
+        const currentView = this.views.find(v => v.id === view.id);
+        this.viewChanged = !compareObjects(currentView, view);
+
         if (this.viewChanged) {
-            this.views = views;
-            this._changeDetectorRef.markForCheck();
+            this.selectedView = view;
         }
+        this._changeDetectorRef.markForCheck();
     }
-
 
     /** @hidden */
-    selectView(id: string): void {
-        this.appliedView = this.views.find(view => view.id === id);
-        this.currentViewChange.emit(this.appliedView.id);
+    onSelectView(view: View): void {
+        this.viewChanged = false;
+        this.selectView.emit(view);
         this.isViewsOpen = false;
     }
 
     /** @hidden */
-    saveCurrentView(): void {
+    onUpdate(): void {
         if (this.viewChanged) {
-            this.saveView.emit(this.appliedView);
+            this.updateView.emit(this.selectedView);
             this.viewChanged = false;
             this.isViewsOpen = false;
         }
@@ -98,66 +116,72 @@ export class VariantManagementComponent implements OnInit, OnChanges {
             draggable: true,
             width: '320px',
             data: {
+                autoApply: false,
                 view: new View()
             }
         });
-        console.log(dialogRef)
 
-        dialogRef.afterClosed.subscribe((view: View) => {
-            const appliedView = {
-                ...this.viewModel,
-                ...view,
-            };
-            this.saveView.emit(appliedView);
-            this.viewChanged = false;
+        dialogRef.afterClosed.subscribe((data: { autoApply: boolean; view: View }) => {
+            if (data) {
+                const selectedView = {
+                    ...Object.assign({}, this.selectedView),
+                    ...data.view
+                };
+                if (data.autoApply) {
+                    this.viewChanged = false;
+                }
+                this.saveView.emit({
+                    view: selectedView,
+                    autoApply: data.autoApply
+                });
+            }
         });
     }
 
     /** @hidden */
     onManageDialog(dialog: TemplateRef<any>): void {
         this.isViewsOpen = false;
+        this.defaultView = this.views.find((view) => view.default)?.id;
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
             draggable: true,
-            width: '1000px'
+            width: '1000px',
+            data: {
+                views: this.views.map((view) => Object.assign({}, { ...view }))
+            }
         });
 
-        dialogRef.afterClosed.subscribe(
-            (result) => {
-                console.log(result);
+        dialogRef.afterClosed.subscribe((result: View[]) => {
+            if (result) {
+                this.manageViews.emit(result);
             }
-        );
-    }
-
-    /** @hidden */
-    _onSaveView(dialog: DialogRef): void {
-        console.log('save view')
-        console.log(dialog);
+        });
     }
 
     /** @hidden */
     _onCancelView(dialog: DialogRef): void {
-        console.log('cancel view')
-        console.log(dialog);
-        dialog.close();
+        dialog.close(false);
     }
 
     /** @hidden */
     _onSaveManage(dialog: DialogRef): void {
-        console.log('save manager')
-        console.log(dialog);
+        dialog.close(dialog.data.views);
     }
 
     /** @hidden */
     _onCancelManage(dialog: DialogRef): void {
-        console.log('cancel manager')
-        console.log(dialog);
-        dialog.close();
+        dialog.dismiss();
     }
 
     /** @hidden */
-    private _compareViewSettings(origin: View, newView: View): boolean {
-        console.log(compareObjects(origin.settings, newView.settings));
-        return compareObjects(origin.settings, newView.settings);
+    _onRemoveView(data: { views: View[] }, view: View): void {
+        data.views = data.views.filter(v => v.id !== view.id);
+    }
+
+    /** @hidden */
+    private _initActiveView(): void {
+        this.selectedView = {
+            ...JSON.parse(JSON.stringify(this.activeView || this.views.find((view) => view.default)))
+        };
     }
 }

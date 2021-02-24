@@ -1,8 +1,35 @@
 @import '~fundamental-styles/dist/title';
 
-.fd-variant-management {
+$block: fd-variant-management;
+
+.#{$block} {
     .fd-title {
         color: #0854a0;
         color: var(--sapButton_TextColor, #0854a0);
+        .fd-popover-custom--disabled & {
+            color: #32363a;
+            color: var(--sapGroup_TitleTextColor, #32363a);
+        }
+    }
+    &__default-dirty-indicator {
+        font-weight: bold;
+    }
+    &__default-dirty-indicator,
+    &__dirty-indicator {
+        padding: 0 0.125rem;
+        vertical-align: super;
+        color: #32363A;
+        color: var(--sapGroup_TitleTextColor, #32363A);
+    }
+    &__dirty-indicator {
+        font-size: 0.75rem;
+        font-size: var(--sapFontSmallSize, 0.75rem);
+    }
+    &__popover-body {
+        min-width: 400px;
+
+        .fd-table__cell:first-child {
+            padding-left: 0;
+        }
     }
 }
