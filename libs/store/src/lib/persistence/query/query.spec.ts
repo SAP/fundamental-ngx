@@ -1,16 +1,4 @@
-
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-
 import { QueryBuilder } from './query-builder';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import {
-    EntityCollectionService,
-    EntityCollectionServiceFactory,
-    EntityDataModule,
-    EntityMetadataMap,
-} from '@ngrx/data';
-import { TestBed } from '@angular/core/testing';
 import { and, eq } from './grammer/query-expressions';
 import { DefaultQueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
