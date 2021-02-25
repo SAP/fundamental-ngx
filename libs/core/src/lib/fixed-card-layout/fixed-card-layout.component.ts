@@ -113,10 +113,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     private _cardsArray: Array<CardDefinitionDirective>;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    // FocusKeyManager instance
+    /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
 
     constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
@@ -191,8 +191,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         );
     }
 
-    /** @hidden Distribute cards on window resize */
-    updateLayout(): void {
+    /** Distribute cards on window resize */
+    public updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -200,11 +200,12 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         }
     }
 
-    /** @hidden Return available width for fd-card-layout */
-    getWidthAvailable(): number {
+    /** Return available width for fd-card-layout */
+    public getWidthAvailable(): number {
         return this.layout.nativeElement.getBoundingClientRect().width;
     }
 
+    /** @hidden */
     private _accessibilitySetup(): void {
         this._keyboardEventsManager = new FocusKeyManager(this.cardContainers).withWrap();
     }
