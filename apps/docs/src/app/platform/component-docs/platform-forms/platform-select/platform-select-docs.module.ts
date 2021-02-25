@@ -6,7 +6,8 @@ import {
     DialogModule,
     ListModule,
     SelectMobileModule,
-    SelectModule
+    SelectModule,
+    FormItemModule
 } from '@fundamental-ngx/core';
 import {PlatformSelectModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 
@@ -47,7 +48,8 @@ const routes: Routes = [
         FdpFormGroupModule,
         PlatformSelectModule,
         ReactiveFormsModule,
-        PlatformButtonModule
+        PlatformButtonModule,
+        FormItemModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
+
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
+
 
 import { DialogComponent } from './dialog.component';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
@@ -47,7 +50,8 @@ const declarations = [
         TemplateModule,
         DragDropModule,
         InitialFocusModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        A11yModule
     ],
     exports: [
         declarations,
