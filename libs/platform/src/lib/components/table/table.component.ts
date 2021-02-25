@@ -121,7 +121,7 @@ let tableUniqueId = 0;
     }
 })
 export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges, OnInit {
-    /** Id for the Carousel. */
+    /** Id for the Table. */
     @Input()
     @HostBinding('attr.id')
     id = `fdp-table-${tableUniqueId++}`;
@@ -593,7 +593,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     keyDownHandler(event: KeyboardEvent): void {
         if (this.loading) {
             event.preventDefault();
-            event.stopPropagation();
         }
     }
 

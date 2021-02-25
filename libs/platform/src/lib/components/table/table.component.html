@@ -17,7 +17,7 @@
     block="true"
 >
     <!-- Table Container -->
-    <div class="fdp-table__container">
+    <div class="fdp-table__container" role="table">
         <!-- Table header outlet -->
         <ng-container [ngTemplateOutlet]="tableHeaderTemplate"></ng-container>
 
@@ -41,7 +41,7 @@
             <table
                 class="fdp-table__header-table"
                 fd-table
-                role="table"
+                role="prsentation"
             >
                 <thead fd-table-header>
                     <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
@@ -258,7 +258,7 @@
         >
             <table
                 fd-table
-                role="table"
+                role="presentation"
                 class="fdp-table__body-table"
             >
                 <tbody
@@ -298,7 +298,7 @@
             <table
                 *ngIf="_tableRowsVisible.length"
                 fd-table
-                role="table"
+                role="presentation"
                 class="fdp-table__body-hs-table"
             >
                 <tbody fd-table-body>
