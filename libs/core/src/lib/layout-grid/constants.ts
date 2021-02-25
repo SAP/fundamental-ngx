@@ -3,6 +3,8 @@ export const GRID_COLUMNS_NUMBER = 12;
 
 export const CSS_CLASS_NAME = {
     layoutGrid: 'fd-container',
+    layoutGridNoHorizontalGap: 'fd-container--no-horizontal-gap',
+    layoutGridNoVerticalGap: 'fd-container--no-vertical-gap',
     layoutGridNoGap: 'fd-container--no-gap',
 
     col: 'fd-col',
