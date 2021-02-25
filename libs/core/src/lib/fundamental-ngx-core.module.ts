@@ -83,6 +83,7 @@ import { ObjectNumberModule } from './object-number/object-number.module';
 import { TitleModule } from './title/title.module';
 import { SliderModule } from './slider/public_api';
 import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
+import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -166,7 +167,8 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         MessageToastModule,
         DynamicSideContentModule,
         SliderModule,
-        OnlyDigitsModule
+        OnlyDigitsModule,
+        IllustratedMessageModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })
