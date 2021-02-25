@@ -18,15 +18,7 @@ export class SelectProgrammaticExampleComponent {
     }
 
     getPosition(selectedValue: string): number {
-        this.options.forEach((item, index) => {
-            if (selectedValue === item) {
-                if (this.selectedPosition < this.options.length) {
-                    this.selectedPosition = index;
-                }
-                return this.selectedPosition;
-            }
-        });
-        return this.selectedPosition;
+        return this.options.findIndex(item => selectedValue === item);
     }
 
     getNewValue(): string {
