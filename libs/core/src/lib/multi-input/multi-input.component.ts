@@ -357,6 +357,9 @@ export class MultiInputComponent implements
         if (!this.mobile) {
             this._popoverOpenHandle(open);
         }
+        if (!this.open) {
+            this._resetSearchTerm();
+        }
         this._changeDetRef.detectChanges();
     }
 
@@ -385,6 +388,10 @@ export class MultiInputComponent implements
         if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
             this.popoverRef.refreshPosition();
         }
+
+        this._resetSearchTerm();
+
+        this.searchInputElement.nativeElement.focus();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
