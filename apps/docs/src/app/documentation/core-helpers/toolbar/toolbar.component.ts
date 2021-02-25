@@ -13,7 +13,7 @@ import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
-    providers: [MenuKeyboardService, ThemesService],
+    providers: [MenuKeyboardService, ThemesService]
 })
 export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @Output()
@@ -120,13 +120,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     private _getShellbarSize(): ShellbarSizes {
         const width = window.innerWidth;
-        if (width < 599) {
-            return 's';
-        } else if (width < 1023) {
-            return 'm';
-        } else if (width < 1439) {
-            return 'l';
-        }
-        return 'xl';
+        return width < 599 ? 's' : 'm';
     }
 }
