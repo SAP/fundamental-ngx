@@ -42,7 +42,7 @@ export class VariantManagementComponent implements OnInit, OnChanges {
     headerSize: HeaderSizes = 4;
 
     @Input()
-    dirtyIndicator: string;
+    dirtyLabel: string;
 
     @Output()
     updateView = new EventEmitter<View>();
@@ -75,6 +75,10 @@ export class VariantManagementComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         if ('views' in changes || 'activeView' in changes) {
             this._initActiveView();
+        }
+
+        if ('disabled' in changes && this.disabled) {
+            this.isViewsOpen = false;
         }
     }
 

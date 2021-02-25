@@ -1,22 +1,19 @@
 <fd-popover placement="bottom-end" [disabled]="disabled" [noArrow]="false" [(isOpen)]="isViewsOpen" additionalBodyClass="fd-variant-management__popover-body">
     <fd-popover-control>
-        <div style="display: flex; justify-content: space-between; align-items: center">
-            <h4 fd-title [headerSize]="headerSize">{{ activeView.name }}
-                <ng-container *ngIf="viewChanged">
-                    <span class="fd-variant-management__dirty-indicator" *ngIf="dirtyIndicator; else defaultIndicator" [innerHTML]="dirtyIndicator"></span>
-                    <ng-template #defaultIndicator>
-                        <span class="fd-variant-management__default-dirty-indicator">*</span>
-                    </ng-template>
-                </ng-container>
-            </h4>
-            <button
-                [disabled]="disabled"
-                fd-button
-                fdType="transparent"
-                [fdMenu]="true"
-                [compact]="true"
-            ></button>
-        </div>
+        <h4 fd-title [headerSize]="headerSize">{{ activeView.name }}</h4>
+        <ng-container *ngIf="viewChanged">
+            <span class="fd-variant-management__dirty-indicator" *ngIf="dirtyLabel; else defaultIndicator" [innerHTML]="dirtyLabel"></span>
+            <ng-template #defaultIndicator>
+                <span class="fd-variant-management__default-dirty-indicator">*</span>
+            </ng-template>
+        </ng-container>
+        <button
+            [disabled]="disabled"
+            fd-button
+            fdType="transparent"
+            [fdMenu]="true"
+            [compact]="true"
+        ></button>
     </fd-popover-control>
     <fd-popover-body>
         <div fd-popover-body-header>

@@ -1,12 +1,16 @@
-@import '~fundamental-styles/dist/title';
-
 $block: fd-variant-management;
 
 .#{$block} {
+    fd-popover-control {
+        display: flex;
+        align-items: center;
+    }
     .fd-title {
         color: #0854a0;
         color: var(--sapButton_TextColor, #0854a0);
-        .fd-popover-custom--disabled & {
+    }
+    .fd-popover-custom--disabled {
+        .fd-title {
             color: #32363a;
             color: var(--sapGroup_TitleTextColor, #32363a);
         }
@@ -16,8 +20,8 @@ $block: fd-variant-management;
     }
     &__default-dirty-indicator,
     &__dirty-indicator {
+        align-self: flex-start;
         padding: 0 0.125rem;
-        vertical-align: super;
         color: #32363A;
         color: var(--sapGroup_TitleTextColor, #32363A);
     }

@@ -1,7 +1,7 @@
 <fd-toolbar [hasTitle]="true">
+    <h3>Custom dirty state label</h3>
     <fd-variant-management
-        fd-toolbar-item
-        [disabled]="isDisabled"
+        dirtyLabel="changed"
         [views]="views"
         [activeView]="activeView"
         (selectView)="selectView($event)"
@@ -9,10 +9,6 @@
         (saveView)="saveView($event)"
         (manageViews)="manageViews($event)"
     ></fd-variant-management>
-
-    <div fd-toolbar-item>
-        <fd-checkbox label="is disabled" [(ngModel)]="isDisabled"></fd-checkbox>
-    </div>
 </fd-toolbar>
 <br />
 <table fd-table>

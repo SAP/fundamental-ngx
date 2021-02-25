@@ -1,5 +1,5 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { MessageToastService, VariantManagementComponent, View } from '@fundamental-ngx/core';
+import { Component, OnInit } from '@angular/core';
+import { View } from '@fundamental-ngx/core';
 
 interface ExampleRow {
     column1: any,
@@ -9,18 +9,14 @@ interface ExampleRow {
     type?: any
 }
 @Component({
-    selector: 'fd-variant-management-example',
-    templateUrl: './variant-management-example.component.html'
+    selector: 'fd-variant-management-header-size-example',
+    templateUrl: './variant-management-header-size-example.component.html'
 })
-export class VariantManagementExampleComponent implements OnInit {
+export class VariantManagementHeaderSizeExampleComponent implements OnInit {
     tableRows: ExampleRow[];
     displayedRows: ExampleRow[] = [];
     activeView: View;
     views: View[];
-    isDisabled = false;
-    @ViewChildren(VariantManagementComponent) viewManagers: QueryList<VariantManagementComponent>;
-
-    constructor (public messageToastService: MessageToastService) {}
 
     ngOnInit(): void {
         this.views = [
@@ -70,7 +66,7 @@ export class VariantManagementExampleComponent implements OnInit {
             }
         ];
 
-        this.activeView = {...JSON.parse(JSON.stringify(this.views[0]))};
+        this.activeView = this.views[0];
 
         this.tableRows = [
             {
@@ -139,75 +135,5 @@ export class VariantManagementExampleComponent implements OnInit {
         ];
 
         this.displayedRows = this.tableRows.slice();
-    }
-
-    manageViews(views: View[]): void {
-        this.views = views.slice();
-        if (!this.views.some(v => v.id === this.activeView.id)) {
-            this.selectView(Object.assign({}, this.views[0]));
-        }
-
-        this.messageToastService.open('Views were updated!', {
-            duration: 1000
-        });
-    }
-
-    selectView(view: View): void {
-        this.activeView = {...JSON.parse(JSON.stringify(this.views.find(({ id }) => id === view.id)))};
-        this.filterRows();
-    }
-
-    filterColumn(columnName: string, value: string): void {
-        this.activeView.settings[columnName].filterVal = value;
-        this.updateViewsDueCurrent();
-
-        this.filterRows();
-    }
-
-    saveView(data: { view: View; autoApply: boolean; }): void {
-        data.view.createdBy = 'Self';
-        this.views = [...this.views, data.view];
-
-        let content = 'View was added!';
-        if (data.autoApply) {
-            this.selectView(data.view);
-            content = 'View was added and applied!';
-        }
-
-        this.messageToastService.open(content, {
-            duration: 1000
-        });
-    }
-    
-    updateView(updatedView: View): void {
-        this.views = this.views.map(view => {
-            if (view.id === updatedView.id) {
-                return updatedView;
-            }
-
-            return view;
-        });
-        this.activeView = {...JSON.parse(JSON.stringify(updatedView))};
-        this.messageToastService.open('View was updated', {
-            duration: 1000
-        });
-    }
-
-    updateViewsDueCurrent(): void {
-        this.viewManagers.forEach(viewManager => {
-            viewManager?.updateDraftView(this.activeView);
-        })
-    }
-
-    private filterRows(): void {
-        const keys = Object.keys(this.activeView.settings).filter(key => !!this.activeView.settings[key].filterVal);
-        this.displayedRows = this.tableRows.filter(row => {
-            const flag = keys.every(key => {
-                const str = this.activeView.settings[key].filterVal.toLocaleLowerCase();
-                return row[key].toLocaleLowerCase().includes(str);
-            });
-
-            return keys.length ? flag : true;
-        });
     }
 }

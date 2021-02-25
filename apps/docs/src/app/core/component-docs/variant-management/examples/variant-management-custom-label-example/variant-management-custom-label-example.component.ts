@@ -9,15 +9,14 @@ interface ExampleRow {
     type?: any
 }
 @Component({
-    selector: 'fd-variant-management-example',
-    templateUrl: './variant-management-example.component.html'
+    selector: 'fd-variant-management-custom-label-example',
+    templateUrl: './variant-management-custom-label-example.component.html'
 })
-export class VariantManagementExampleComponent implements OnInit {
+export class VariantManagementCustomLabelExampleComponent implements OnInit {
     tableRows: ExampleRow[];
     displayedRows: ExampleRow[] = [];
     activeView: View;
     views: View[];
-    isDisabled = false;
     @ViewChildren(VariantManagementComponent) viewManagers: QueryList<VariantManagementComponent>;
 
     constructor (public messageToastService: MessageToastService) {}

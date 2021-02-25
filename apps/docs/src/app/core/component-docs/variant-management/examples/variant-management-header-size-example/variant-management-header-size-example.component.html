@@ -1,0 +1,8 @@
+<fd-toolbar *ngFor="let size of [1,2,3,4,5,6]" [hasTitle]="true">
+    <h3>Variant title size {{ size }}</h3>
+    <fd-variant-management
+        [headerSize]="size"
+        [views]="views"
+        [activeView]="activeView"
+    ></fd-variant-management>
+</fd-toolbar>
