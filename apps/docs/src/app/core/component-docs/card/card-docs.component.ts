@@ -146,14 +146,12 @@ export class CardDocsComponent {
     objectCard: ExampleFile[] = [
         {
             language: 'typescript',
-            name: 'card-object-example.component.ts',
             code: cardObjectTs,
             fileName: 'card-object-example',
             component: 'CardObjectExampleComponent'
         },
         {
             language: 'html',
-            name: 'card-object-example.component.html',
             code: cardObjectHtml,
             fileName: 'card-object-example'
         }
@@ -162,14 +160,12 @@ export class CardDocsComponent {
     calendarCard: ExampleFile[] = [
         {
             language: 'typescript',
-            name: 'card-calendar-example.component.ts',
             code: cardCalendarTs,
             fileName: 'card-calendar-example',
             component: 'CardCalendarExampleComponent'
         },
         {
             language: 'html',
-            name: 'card-calendar-example.component.html',
             code: cardCalendarHtml,
             fileName: 'card-calendar-example'
         }
@@ -178,14 +174,12 @@ export class CardDocsComponent {
     quickViewCard: ExampleFile[] = [
         {
             language: 'typescript',
-            name: 'card-quick-view-example.component.ts',
             code: cardQuickViewTs,
             fileName: 'card-quick-view-example',
             component: 'CardQuickViewExampleComponent'
         },
         {
             language: 'html',
-            name: 'card-quick-view-example.component.html',
             code: cardQuickViewHtml,
             fileName: 'card-quick-view-example'
         }
@@ -194,14 +188,12 @@ export class CardDocsComponent {
     listCard: ExampleFile[] = [
         {
             language: 'typescript',
-            name: 'card-list-example.component.ts',
             code: cardListTs,
             fileName: 'card-list-example',
             component: 'CardListExampleComponent'
         },
         {
             language: 'html',
-            name: 'card-list-example.component.html',
             code: cardListHtml,
             fileName: 'card-list-example'
         }
@@ -210,14 +202,12 @@ export class CardDocsComponent {
     linkListCard: ExampleFile[] = [
         {
             language: 'typescript',
-            name: 'card-link-list-example.component.ts',
             code: cardLinkListTs,
             fileName: 'card-link-list-example',
             component: 'CardLinkListExampleComponent'
         },
         {
             language: 'html',
-            name: 'card-link-list-example.component.html',
             code: cardLinkListHtml,
             fileName: 'card-link-list-example'
         }
