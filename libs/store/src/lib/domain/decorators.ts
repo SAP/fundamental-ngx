@@ -1,54 +1,63 @@
 import 'reflect-metadata';
 
-export const ENTITY = Symbol('ENTITY');
-export const REST_RESOURCE = Symbol('RESTResource');
+import { EntityMetaOptions } from './entity';
+import { EntityResourceMetaOptions } from './rest-resource';
 
-export interface EntityConfig {
-    // plural?: string;
-    name: string;
-    domain: string
-}
+export const ENTITY_KEY = Symbol('ENTITY');
+export const REST_RESOURCE_KEY = Symbol('REST_Resource');
 
-export interface ResourceConfig {
+const entitiesSet = new Set();
 
-}
+export type Type<T> = new (...args: any[]) => T;
 
-// export function Entity(config?: EntityConfig): (target) => void {
-//     return (target): void => {
-//         if (config) {
-//             Reflect.defineMetadata(ENTITY, config, target);
-//         }
-//     };
-// }
-
-// export function RESTResource(config?: ResourceConfig): (target) => void {
-//     return (target): void => {
-//         if (config) {
-//             Reflect.defineMetadata(REST_RESOURCE, config, target);
-//         }
-//     };
-// }
-
-export function Entity(config: any) {
-    return (target) => {
-        if (!target[ENTITY]) {
-            target[ENTITY] = {};
+export function Entity(config: EntityMetaOptions) {
+    // TODO: Add entity name uniqueness validation
+    return <T>(target: Type<T>) => {
+        if (!entitiesSet.has(target)) {
+            entitiesSet.add(target);
         }
-
-        target[ENTITY].metadata = config;
-
-        return target;
+        Reflect.defineMetadata(ENTITY_KEY, config, target);
     };
 }
 
-export function RESTResource(config: any) {
-    return (target) => {
-        if (!target[REST_RESOURCE]) {
-            target[REST_RESOURCE] = {};
+export function RESTResource(config: EntityResourceMetaOptions) {
+    return <T>(target: Type<T>) => {
+        if (!entitiesSet.has(target)) {
+            entitiesSet.add(target);
         }
-
-        target[REST_RESOURCE].metadata = config;
-
-        return target;
+        Reflect.defineMetadata(REST_RESOURCE_KEY, config, target);
     };
 }
+
+export function getEntityMetadata<T>(target: Type<T>): EntityMetaOptions | undefined {
+    return Reflect.getOwnMetadata(ENTITY_KEY, target);
+}
+
+export function getResourceMetadata<T>(target: Type<T>): EntityResourceMetaOptions | undefined {
+    return Reflect.getOwnMetadata(REST_RESOURCE_KEY, target);
+}
+
+export function getEntityMetadataByEntityName(entityName: string): EntityMetaOptions | undefined {
+    const entity: Type<any> = getEntityByName(entityName);
+    if (entity) {
+        return getEntityMetadata(entity);
+    }
+    return undefined;
+}
+
+export function getEntityResourceMetadataByEntityName(entityName: string): EntityResourceMetaOptions | undefined {
+    const entity: Type<any> = getEntityByName(entityName);
+    if (entity) {
+        return getResourceMetadata(entity);
+    }
+    return undefined;
+}
+
+const getEntityByName = (entityName: string) => {
+    for (const target of Array.from(entitiesSet)) {
+        const options = getEntityMetadata(target as Type<any>);
+        if (options.name === entityName) {
+            return target as Type<any>;
+        }
+    }
+};

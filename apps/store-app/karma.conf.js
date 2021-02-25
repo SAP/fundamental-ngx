@@ -10,7 +10,7 @@ module.exports = function (config) {
         ...baseConfig,
         coverageIstanbulReporter: {
             ...baseConfig.coverageIstanbulReporter,
-            dir: join(__dirname, '../../coverage/libs/store')
+            dir: join(__dirname, '../../coverage/apps/docs/')
         }
     });
 };

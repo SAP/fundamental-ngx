@@ -49,7 +49,7 @@ describe('Store: Query', () => {
         service = new MockQueryService<Fruit>();
         spyOn(service, 'getWithQuery');
         spyOn(service, 'getByKey');
-        qb = new QueryBuilder(Fruit, service, adapter);
+        qb = new QueryBuilder(service, adapter);
     });
 
     it('should be able to create a query by ID', () => {
