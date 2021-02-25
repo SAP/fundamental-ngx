@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.26...v0.28.0-rc.27) (2021-02-25)
+
+
+### Bug Fixes
+
+* (Core) add grab cursor to drag and drop Grid List items ([#4719](https://github.com/SAP/fundamental-ngx/issues/4719)) ([dba6cab](https://github.com/SAP/fundamental-ngx/commit/dba6cabadba96c03fa0292f6ac8bbebab3052958))
+
 ## [0.28.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.25...v0.28.0-rc.26) (2021-02-25)
 
 
