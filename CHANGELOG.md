@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.21...v0.28.0-rc.22) (2021-02-25)
+
+
+### Bug Fixes
+
+* (core) fix Slider tooltip RTL ([9718b0a](https://github.com/SAP/fundamental-ngx/commit/9718b0a6c0bc5b89d29c10b8ce602c4212f31a82))
+
 ## [0.28.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.20...v0.28.0-rc.21) (2021-02-24)
 
 
