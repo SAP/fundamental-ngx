@@ -2,6 +2,7 @@ import { of } from 'rxjs';
 import { EntityCollectionService } from '@ngrx/data';
 
 import { DefaultEntityStore } from './entity-store';
+import { QueryBuilder } from '../query/query-builder';
 
 class User {
     constructor(public id: string | string, public name: string, public age: number) {}
@@ -33,13 +34,17 @@ class UserCollectionServiceMock implements Partial<EntityCollectionService<User>
     }
 }
 
+class QueryBuilderMock extends QueryBuilder<User> {}
+
 describe('Default Entity Store', () => {
     let store: DefaultEntityStore<User>;
     let collectionService: EntityCollectionService<User>;
+    let queryBuilder: QueryBuilder<User>;
 
     beforeEach(() => {
         collectionService = new UserCollectionServiceMock() as EntityCollectionService<User>;
-        store = new DefaultEntityStore(collectionService);
+        queryBuilder = new QueryBuilderMock(null, null);
+        store = new DefaultEntityStore(collectionService, queryBuilder);
     });
 
     it('should be created', () => {
@@ -89,5 +94,9 @@ describe('Default Entity Store', () => {
         store.delete(user).subscribe((data) => expect(data).toBe(user));
 
         expect(collectionService.delete).toHaveBeenCalledOnceWith(user);
+    });
+
+    it('should has queryBuilder reference', () => {
+        expect(store.queryBuilder instanceof QueryBuilder).toBeTrue();
     });
 });

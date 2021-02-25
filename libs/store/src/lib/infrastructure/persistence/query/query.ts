@@ -1,7 +1,4 @@
 import {
-    Type
-} from '@angular/core';
-import {
     Observable
 } from 'rxjs';
 import {
@@ -50,7 +47,6 @@ export class Query<TModel> {
     _expand: Array<keyof TModel>;
 
     constructor(
-        private resultType: Type<TModel>,
         private service: QueryService<TModel>,
         private adapter: QueryAdapter<TModel>
     ) {}
@@ -77,7 +73,7 @@ export class Query<TModel> {
      * Set order by rules for query.
      * @param orderBys Set of OrderBy objects.
      */
-    orderBy<TProperty extends keyof TModel> (...orderBys: Array<OrderBy<TModel>>): this {
+    orderBy(...orderBys: Array<OrderBy<TModel>>): this {
         this._orderByFields = orderBys;
         return this;
     }

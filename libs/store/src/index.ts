@@ -5,7 +5,9 @@ export {
     EntityStoreBuilder,
     EntityStoreBuilderFactory,
     HttpUrlGenerator
-} from './lib/infrastructure/persistence';
+} from './lib/infrastructure/persistence/store';
+export { QueryParams, QueryAdapter, DefaultQueryAdapter } from './lib/infrastructure/persistence/query/query-adapter';
+export { Query } from './lib/infrastructure/persistence/query/query';
 export {
     FundamentalRootStoreModule,
     FundamentalStoreModule,

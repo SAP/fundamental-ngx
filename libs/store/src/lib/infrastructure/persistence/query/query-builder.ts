@@ -1,13 +1,10 @@
-import {
-    Type
-} from '@angular/core';
+import { Observable } from 'rxjs';
 import {
     Query
 } from './query';
 import {
     Predicate
 } from './grammer/predicate';
-import { Observable } from 'rxjs';
 import { QueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
 
@@ -24,7 +21,6 @@ export class QueryBuilder<TModel> {
     _keyword: string;
 
     constructor(
-        private resultType: Type<TModel>,
         private service: QueryService<TModel>,
         private adapter: QueryAdapter<TModel>
     ) { }
@@ -37,8 +33,7 @@ export class QueryBuilder<TModel> {
      * Add predicate to builder.
      * @param predicate Predicate which defines filter
      */
-    where < TP extends keyof TModel,
-    TPT extends TModel[TP] > (predicate: Predicate<TModel> ): QueryBuilder<TModel> {
+    where(predicate: Predicate<TModel> ): QueryBuilder<TModel> {
         this._predicate = predicate;
         return this;
     }
@@ -56,7 +51,7 @@ export class QueryBuilder<TModel> {
      * Create new Query object
      */
     build(): Query<TModel> {
-        const query = new Query<TModel>(this.resultType, this.service, this.adapter);
+        const query = new Query<TModel>(this.service, this.adapter);
         query._predicate = this._predicate;
         query._keyword = this._keyword;
         return query;

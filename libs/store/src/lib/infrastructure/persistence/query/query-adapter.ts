@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Type } from '../../../domain/public_api';
 import {
     Predicate,
     EqPredicate,
@@ -49,7 +50,6 @@ export abstract class QueryAdapter<T> {
     abstract createQueryString(params?: QueryParams): string;
 }
 
-@Injectable()
 export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
 
     parsePredicate(predicate?: Predicate<T>): string {
@@ -153,4 +153,14 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
         return '\'' + value + '\'';
     }
 
+}
+
+/**
+ * Query Adapter Factory
+ */
+@Injectable()
+export class QueryAdapterFactory {
+    create<T>(entity: Type<T>): QueryAdapter<T> {
+        return new DefaultQueryAdapter();
+    }
 }

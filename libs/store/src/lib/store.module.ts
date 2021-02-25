@@ -11,13 +11,15 @@ import { EffectsModule, EffectsFeatureModule, EffectsRootModule } from '@ngrx/ef
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { EntityMetaOptionsService, DefaultEntityMetaOptionsService } from './infrastructure/persistence/utils';
-import { DefaultHttpUrlGenerator, HttpUrlGenerator } from './infrastructure/persistence/store/http-url-generator';
-import { EntityStoreServerServiceFactory } from './infrastructure/persistence/store/entity-store-server';
-import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
 import {
+    EntityStoreServerServiceFactory,
+    DefaultHttpUrlGenerator,
+    HttpUrlGenerator,
     DefaultEntityStoreBuilderFactory,
     EntityStoreBuilderFactory
-} from './infrastructure/persistence/store/entity-store-builder';
+} from './infrastructure/persistence/store';
+import { QueryAdapterFactory } from './infrastructure/persistence/query/query-adapter';
+import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
 
 function mapFundamentalConfigToNgrxConfig(conf: FundamentalStoreConfig): EntityDataModuleConfig {
     const entityMetadata: EntityMetadataMap = {};
@@ -71,6 +73,8 @@ export class FundamentalStoreModule {
             { provide: ENTITY_MODEL_MAP, useValue: conf.entities },
             { provide: EntityMetaOptionsService, useClass: DefaultEntityMetaOptionsService },
             { provide: EntityStoreBuilderFactory, useClass: DefaultEntityStoreBuilderFactory },
+
+            QueryAdapterFactory,
 
             { provide: HttpUrlGenerator, useClass: DefaultHttpUrlGenerator },
             { provide: DefaultDataServiceFactory, useClass: EntityStoreServerServiceFactory }

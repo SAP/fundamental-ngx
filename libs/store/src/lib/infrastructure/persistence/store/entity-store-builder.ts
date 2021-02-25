@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { EntityCollectionServiceFactory } from '@ngrx/data';
 
 import { FetchPolicy, CachePolicy, Type } from '../../../domain/public_api';
-import { DefaultEntityStore, EntityStore } from './entity-store';
+import { DefaultEntityStore, DefaultQueryService, EntityStore } from './entity-store';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
+import { QueryAdapter, QueryAdapterFactory } from '../query/query-adapter';
+import { QueryBuilder } from '../query/query-builder';
 
 //#region Interfaces
 
@@ -48,6 +50,7 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
     constructor(
         protected readonly entity: Type<T>,
         protected readonly entityCollectionServiceFactory: EntityCollectionServiceFactory,
+        protected readonly queryAdapterFactory: QueryAdapterFactory,
         protected readonly entityMetaOptionsService: EntityMetaOptionsService
     ) {
         this.reset();
@@ -70,10 +73,15 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
 
     create(): EntityStore<T> {
         const { name } = this.entityMetaOptionsService.getEntityMetadata(this.entity);
+        const entityCollectionService = this.entityCollectionServiceFactory.create<T>(name);
+        const queryBuilder = new QueryBuilder(
+            new DefaultQueryService(entityCollectionService),
+            this.queryAdapterFactory.create(this.entity)
+        );
 
-        const result = new DefaultEntityStore<T>(this.entityCollectionServiceFactory.create(name), {
+        const result = new DefaultEntityStore<T>(entityCollectionService, queryBuilder, {
             cachePolicy: this.cachePolicy,
-            fetchPolicy: this.fetchPolicy,
+            fetchPolicy: this.fetchPolicy
         });
 
         this.reset();
@@ -89,6 +97,7 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
 export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFactory {
     constructor(
         private entityCollectionServiceFactory: EntityCollectionServiceFactory,
+        private queryAdapterFactory: QueryAdapterFactory,
         private entityMetaOptionsService: EntityMetaOptionsService
     ) {}
 
@@ -96,6 +105,7 @@ export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFacto
         return new DefaultEntityStoreBuilder(
             entity,
             this.entityCollectionServiceFactory,
+            this.queryAdapterFactory,
             this.entityMetaOptionsService
         );
     }
