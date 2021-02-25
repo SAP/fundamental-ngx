@@ -37,6 +37,7 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
         </p>
         <p>Enable "Edit mode": <input type="checkbox" [(ngModel)]="editModeEnabled"></p>
         <p>Show due date warnings: <input type="checkbox" [(ngModel)]="checkDueDate"></p>
+        <p>Set all statuses to "Not Started": <input type="checkbox" [(ngModel)]="setNotStartedStatuses" (ngModelChange)="setNotStarted()"></p>
         <p style="display: flex;align-items: center;">Allow sending reminders to approvers with statuses: 
             <fd-multi-input 
                 style="margin-left: .5rem;"
@@ -52,11 +53,16 @@ export class PlatformApprovalFlowExampleComponent {
     examples = ['simple', 'medium', 'complex'];
     selectedExample = 'complex';
     checkDueDate = false;
+    setNotStartedStatuses = false;
     editModeEnabled = true;
     allStatuses = ['in progress', 'not started', 'approved', 'rejected'];
     sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
 
     nodeClick(node: ApprovalNode): void {
         console.log('Node click handler', node);
+    }
+
+    setNotStarted(): void {
+        this.dataSource.setDefaultStatus(this.setNotStartedStatuses ? 'not started' : null);
     }
 }
