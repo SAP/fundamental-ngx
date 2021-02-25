@@ -117,7 +117,7 @@
         <ng-container *ngIf="groupFn">
             <ng-container *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue">
                 <li role="group" fd-list-group-header tabindex="0">
-                    {{ group.key }}
+                    <span fd-list-title>{{ group.key }}</span>
                 </li>
                 <li
                     role="option"

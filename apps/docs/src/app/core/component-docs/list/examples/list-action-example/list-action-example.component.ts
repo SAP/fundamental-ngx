@@ -4,8 +4,7 @@ import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-list-action-example',
-    templateUrl: './list-action-example.component.html',
-    styleUrls: ['./list-action-example.component.scss']
+    templateUrl: './list-action-example.component.html'
 })
 export class ListActionExampleComponent {
     readonly ITEMS_AMOUNT_ON_LOAD = 5;

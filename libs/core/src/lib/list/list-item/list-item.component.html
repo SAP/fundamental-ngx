@@ -7,3 +7,6 @@
 
 <ng-content></ng-content>
 
+<span *ngIf="counter || counter === 0" class="fd-list__item-counter">
+    {{ counter.toString() | slice:0: 5 }}
+</span>
