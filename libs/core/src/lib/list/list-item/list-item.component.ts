@@ -92,6 +92,11 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @Input()
     counter: number;
 
+    /** Whether list item should contain additional unRead styles */
+    @Input()
+    @HostBinding('class.fd-list__item--unread')
+    unread = false;
+
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
