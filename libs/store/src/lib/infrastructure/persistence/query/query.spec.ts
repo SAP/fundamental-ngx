@@ -1,5 +1,5 @@
 import { QueryBuilder } from './query-builder';
-import { and, eq } from './grammer/query-expressions';
+import { and, eq } from './grammar/query-expressions';
 import { DefaultQueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
 import { Observable, of } from 'rxjs';

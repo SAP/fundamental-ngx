@@ -5,7 +5,7 @@ import {
     QueryParams
 } from '@ngrx/data';
 
-import { Predicate } from './grammer/predicate';
+import { Predicate } from './grammar/predicate';
 import { QueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
 

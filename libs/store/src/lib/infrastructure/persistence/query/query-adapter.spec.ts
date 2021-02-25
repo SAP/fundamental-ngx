@@ -1,7 +1,7 @@
 import {
     Predicate
-} from './grammer/predicate';
-import { and, eq, ge, gt, le, lt, or } from './grammer/query-expressions';
+} from './grammar/predicate';
+import { and, eq, ge, gt, le, lt, or } from './grammar/query-expressions';
 import { OrderBy } from './query';
 
 import {

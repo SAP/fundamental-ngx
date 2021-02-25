@@ -4,7 +4,7 @@ import {
 } from './query';
 import {
     Predicate
-} from './grammer/predicate';
+} from './grammar/predicate';
 import { QueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
 

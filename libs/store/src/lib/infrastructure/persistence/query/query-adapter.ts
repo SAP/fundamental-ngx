@@ -9,7 +9,7 @@ import {
     LtPredicate,
     AndPredicate,
     OrPredicate,
-} from './grammer/predicate';
+} from './grammar/predicate';
 import { OrderBy } from './query';
 
 export interface QueryParams {
