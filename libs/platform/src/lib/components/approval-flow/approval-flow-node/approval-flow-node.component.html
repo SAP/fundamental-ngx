@@ -30,10 +30,10 @@
                 <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversParallel">Add parallel approvers</div>
             </li>
             <li fd-menu-item (click)="menu.close(); onEdit.emit()" *ngIf="_isNotStarted">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEdit">Edit</div>
+                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEdit">Edit approver</div>
             </li>
             <li *ngIf="meta.canDelete" fd-menu-item (click)="menu.close(); onDelete.emit()">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeDelete">Delete</div>
+                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeRemove">Remove</div>
             </li>
         </fd-menu>
     </div>

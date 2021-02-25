@@ -74,6 +74,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/step-input', name: 'Step Input' },
             { url: 'core/table', name: 'Table' },
             { url: 'core/tabs', name: 'Tabs' },
+            { url: 'core/text', name: 'Text' },
             { url: 'core/textarea', name: 'Textarea' },
             { url: 'core/tile', name: 'Tile' },
             { url: 'core/time', name: 'Time' },

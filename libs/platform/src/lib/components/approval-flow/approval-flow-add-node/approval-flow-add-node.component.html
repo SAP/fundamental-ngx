@@ -75,6 +75,7 @@
                     type="single"
                     compact="true"
                     [attr.dir]="_data.rtl ? 'rtl' : 'ltr'"
+                    [state]="_isDateNull() ? 'error' : ''"
                     [(ngModel)]="_dueDate">
                 </fd-date-picker>
             </div>

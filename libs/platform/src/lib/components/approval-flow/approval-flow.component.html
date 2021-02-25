@@ -3,15 +3,17 @@
         *ngFor="let message of _messages; let i = index; trackBy: _trackByFn"
         type="success"
         (onDismiss)="_dismissMessage(i)">
-        <span [ngSwitch]="message.type">
-            <ng-container *ngSwitchCase="'approverAddSuccess'" [ngTemplateOutlet]="approverAddSuccess"></ng-container>
-            <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
-            <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
-            <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
-            <ng-container *ngSwitchCase="'nodesRemove'" [ngTemplateOutlet]="nodesRemove"></ng-container>
-            <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
-        </span>
-        <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()">Undo</a>
+        <bdi>
+            <span [ngSwitch]="message.type">
+                <ng-container *ngSwitchCase="'approverAddSuccess'" [ngTemplateOutlet]="approverAddSuccess"></ng-container>
+                <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
+                <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
+                <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
+                <ng-container *ngSwitchCase="'nodesRemove'" [ngTemplateOutlet]="nodesRemove"></ng-container>
+                <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
+            </span>
+            <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()">Undo</a>
+        </bdi>
     </fd-message-strip>
 </div>
 

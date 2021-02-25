@@ -2,6 +2,73 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.22...v0.28.0-rc.23) (2021-02-25)
+
+
+### Features
+
+* (Platform) introduce Slider component ([#4714](https://github.com/SAP/fundamental-ngx/issues/4714)) ([bd4e123](https://github.com/SAP/fundamental-ngx/commit/bd4e12353f389ed3c79bdfbeb295722408797eee))
+
+## [0.28.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.21...v0.28.0-rc.22) (2021-02-25)
+
+
+### Bug Fixes
+
+* (core) fix Slider tooltip RTL ([9718b0a](https://github.com/SAP/fundamental-ngx/commit/9718b0a6c0bc5b89d29c10b8ce602c4212f31a82))
+
+## [0.28.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.20...v0.28.0-rc.21) (2021-02-24)
+
+
+### Features
+
+* (Core) add custom item template option to Multi Input ([#4709](https://github.com/SAP/fundamental-ngx/issues/4709)) ([9003f4e](https://github.com/SAP/fundamental-ngx/commit/9003f4e70ca7db0450c8ae7321fca1d59781b474))
+
+## [0.28.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.19...v0.28.0-rc.20) (2021-02-24)
+
+
+### Features
+
+* (Platform)Thumbnail component v2 enhancements ([#4702](https://github.com/SAP/fundamental-ngx/issues/4702)) ([ee85a23](https://github.com/SAP/fundamental-ngx/commit/ee85a23793fb3d8e6bb2195d292545249d17b856))
+
+## [0.28.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.18...v0.28.0-rc.19) (2021-02-24)
+
+
+### Bug Fixes
+
+* (Core) change touched state on focus for Datepickers ([#4720](https://github.com/SAP/fundamental-ngx/issues/4720)) ([904f731](https://github.com/SAP/fundamental-ngx/commit/904f731eb6aa7cca610e1f2be00f2a3ba2753b36))
+
+## [0.28.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.17...v0.28.0-rc.18) (2021-02-24)
+
+
+### Bug Fixes
+
+* (Platform) defect hunting issues in approval flow ([#4753](https://github.com/SAP/fundamental-ngx/issues/4753)) ([0b935ab](https://github.com/SAP/fundamental-ngx/commit/0b935ab78f2d3322533e38ef4100b1c743e9c654))
+
+## [0.28.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.16...v0.28.0-rc.17) (2021-02-24)
+
+
+### Features
+
+* (Platform) Select component creation ([#4635](https://github.com/SAP/fundamental-ngx/issues/4635)) ([d9e24ea](https://github.com/SAP/fundamental-ngx/commit/d9e24ea76d2e274d8e3e54507ebf169292f01653))
+
+## [0.28.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.15...v0.28.0-rc.16) (2021-02-23)
+
+
+### Features
+
+* (Core) introduce text component ([#4654](https://github.com/SAP/fundamental-ngx/issues/4654)) ([d9a795a](https://github.com/SAP/fundamental-ngx/commit/d9a795a8015a3aab72ab4dc2ad18c334778b7bfc))
+
+## [0.28.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.14...v0.28.0-rc.15) (2021-02-23)
+
+## [0.28.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.13...v0.28.0-rc.14) (2021-02-23)
+
+
+### Features
+
+* (Core) introduce ControlValueAccessor to SegmentedButton  ([#4579](https://github.com/SAP/fundamental-ngx/issues/4579)) ([94bf239](https://github.com/SAP/fundamental-ngx/commit/94bf2399b98b3ac787837d9baab13aedf6cdf320))
+
+## [0.28.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.12...v0.28.0-rc.13) (2021-02-23)
+
 ## [0.28.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.11...v0.28.0-rc.12) (2021-02-22)
 
 ## [0.28.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.10...v0.28.0-rc.11) (2021-02-22)

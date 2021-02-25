@@ -26,8 +26,11 @@ export class SelectKeyManagerService {
             .withAllowedModifierKeys(['shiftKey']);
 
         this._keyManager.tabOut.pipe(takeUntil(this._component._destroy)).subscribe(() => {
+          // tab focus fix for mobile
+            if (!this._component.mobile) {
             this._component.focus();
             this._component.close();
+            }
         });
 
         this._keyManager.change.pipe(takeUntil(this._component._destroy)).subscribe(() => {
@@ -42,7 +45,6 @@ export class SelectKeyManagerService {
     /** @hidden */
     _scrollActiveOptionIntoView(): void {
         const activeOptionIndex = this._keyManager.activeItemIndex || 0;
-
         this._component._optionPanel.nativeElement.scrollTop = this._component._getOptionScrollPosition(
             activeOptionIndex,
             this._component._getItemHeight(),

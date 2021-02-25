@@ -44,6 +44,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/time-picker', name: 'Time Picker' },
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
+            { url: 'platform/select', name: 'Select' },
             { url: 'platform/combobox', name: 'Combobox' },
             { url: 'platform/upload-collection', name: 'Upload Collection' },
             {
@@ -57,7 +58,8 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                 ]
             },
             { url: 'platform/value-help-dialog', name: 'Value Help Dialog' },
-            { url: 'platform/approval-flow', name: 'Approval Flow' }
+            { url: 'platform/approval-flow', name: 'Approval Flow' },
+            { url: 'platform/slider', name: 'Slider' }
         ];
 
         this.layouts = [

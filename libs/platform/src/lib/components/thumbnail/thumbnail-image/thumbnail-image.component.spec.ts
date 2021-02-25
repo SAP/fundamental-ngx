@@ -11,16 +11,18 @@ import { Media } from '../thumbnail.component';
 })
 class DefaultThumbnailImageTestComponent {
     mediaList: Media[] = [{
-        thumbnailUrl: 'https://picsum.photos/400/400',
+        title: 'Nature Deetails',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load https://picsum.photos/400/400',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
         label: 'nature'
     }, {
-        thumbnailUrl: 'https://picsum.photos/400/400',
+        title: 'Nature Deetails',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load https://picsum.photos/400/400',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
         label: 'nature2'
     }];
     @ViewChild(ThumbnailImageComponent, { static: true })
@@ -76,10 +78,11 @@ describe('DefaultThumbnailImageComponent', () => {
 })
 class HorizontalThumbnailImageTestComponent {
     mediaList: Media[] = [{
-        thumbnailUrl: 'https://picsum.photos/400/400',
+        title: 'Nature Details',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load https://picsum.photos/400/400',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
         label: 'nature'
     }];
 
@@ -110,6 +113,99 @@ describe('HorizontalThumbnailImageComponent', () => {
     it('check for horizonntal orientation thumbnail load', () => {
         const divElement = fixture.debugElement.query(By.css('div'));
         expect(divElement.nativeElement.children[0].classList.contains('fdp-thumbnail-image--horizontal')).toBe(true);
+    });
+
+
+});
+
+@Component({
+    template: `<fdp-thumbnail-image [mediaList]="mediaList" [maxImages]="5" ></fdp-thumbnail-image>`
+})
+class MoreImagesThumbnailImageTestComponent {
+    mediaList: Media[] = [{
+        title: 'Nature Details',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        mediaType: 'image',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        label: 'nature'
+    },
+    {
+        title: 'Sports Details',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        mediaType: 'image',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        label: 'sports'
+    },
+    {
+        title: 'Culture Details',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        mediaType: 'image',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        label: 'culature'
+    },
+    {
+        title: 'Bank Details',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        mediaType: 'image',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        label: 'bank'
+    },
+    {
+        title: 'Garden Details',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        mediaType: 'image',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        label: 'garden'
+    },
+    {
+        title: 'Rose Details',
+        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        mediaType: 'image',
+        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        label: 'rose'
+    }
+
+    ];
+
+}
+
+describe('MoreImagesThumbnailImageTestComponent', () => {
+    let component: MoreImagesThumbnailImageTestComponent;
+    let fixture: ComponentFixture<MoreImagesThumbnailImageTestComponent>;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [PlatformThumbnailModule],
+            declarations: [ThumbnailImageComponent, MoreImagesThumbnailImageTestComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(MoreImagesThumbnailImageTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should display overlay after list crosses the max limit', () => {
+        const thumbnails = fixture.debugElement.queryAll(By.css('.fdp-thumbnail-image'));
+        expect(thumbnails[4].classes['fdp-thumbnail-image--overlay']).toBeTruthy();
+        expect(thumbnails[1].classes['fdp-thumbnail-image--overlay']).toBeFalsy();
+    });
+    it('should display overflow text after list crosses the max limit', () => {
+
+        const overlay = fixture.debugElement.query(By.css('.fdp-thumbnail-overflow'));
+        expect(overlay.nativeElement.innerHTML).toEqual('+1');
+
     });
 
 });
