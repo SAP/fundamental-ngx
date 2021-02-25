@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Inject, Output, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import { ShellbarMenuItem, MenuKeyboardService, MenuComponent, ThemesService } from '@fundamental-ngx/core';
+import { MenuComponent, MenuKeyboardService, ShellbarMenuItem, ShellbarSizes, ThemesService } from '@fundamental-ngx/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
 
 @Component({
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
-    providers: [MenuKeyboardService, ThemesService]
+    providers: [MenuKeyboardService, ThemesService],
 })
 export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @Output()
@@ -26,6 +26,8 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     customCssUrl: SafeResourceUrl;
 
     library: string;
+
+    size: ShellbarSizes = 'm';
 
     version = {
         id: environment.version,
@@ -96,6 +98,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         if (!(this.cssUrl && this.customCssUrl)) {
             this.selectTheme(this.themes[0].id);
         }
+
+        fromEvent(window, 'resize')
+            .pipe(startWith(1), debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => this.size = this._getShellbarSize());
     }
 
     ngOnDestroy(): void {
@@ -110,5 +116,17 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     selectVersion(version: any): void {
         window.open(version.url, '_blank');
+    }
+
+    private _getShellbarSize(): ShellbarSizes {
+        const width = window.innerWidth;
+        if (width < 599) {
+            return 's';
+        } else if (width < 1023) {
+            return 'm';
+        } else if (width < 1439) {
+            return 'l';
+        }
+        return 'xl';
     }
 }
