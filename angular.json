@@ -387,7 +387,8 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "store-app:build"
+                        "browserTarget": "store-app:build",
+                        "proxyConfig": "apps/store-app/src/proxy.conf.json"
                     },
                     "configurations": {
                         "production": {
