@@ -2,12 +2,12 @@
     <fd-card cardType="calendar">
         <fd-card-header>
             <h2 fd-card-title>My calendar</h2>
-            <h3 fd-card-subtitle>For Today</h3>
+            <h3 fd-card-subtitle>{{ calendarViewSubTitle }}</h3>
             <span fd-card-counter>4 of 10</span>
         </fd-card-header>
 
         <fd-card-content>
-            <fd-calendar [calType]="'single'"></fd-calendar>
+            <fd-calendar #calendar [calType]="'single'" (activeViewChange)="calendarViewChange($event)"></fd-calendar>
         </fd-card-content>
     </fd-card>
 </div>
