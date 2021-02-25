@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.25...v0.28.0-rc.26) (2021-02-25)
+
+
+### Features
+
+* (Core) introduce Illustrated Message component ([#4750](https://github.com/SAP/fundamental-ngx/issues/4750)) ([daecc19](https://github.com/SAP/fundamental-ngx/commit/daecc19ea6cbcbb2ed5fb0faebfe503c1a721a7f))
+
 ## [0.28.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.24...v0.28.0-rc.25) (2021-02-25)
 
 
