@@ -73,6 +73,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @ContentChildren(CardDefinitionDirective)
     cards: QueryList<CardDefinitionDirective>;
 
+    /** @hidden */
     @ViewChildren(FixedCardLayoutItemComponent)
     cardContainers: QueryList<FixedCardLayoutItemComponent>;
 
@@ -109,6 +110,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     private _previousNumberOfColumns: number;
 
+    /** @hidden */
     private _cardsArray: Array<CardDefinitionDirective>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
