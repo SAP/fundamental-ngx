@@ -135,7 +135,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     ngAfterViewInit(): void {
         /** Create column layout when view is initialized */
-        this._updateLayout();
+        this.updateLayout();
         this._accessibilitySetup();
     }
 
@@ -145,7 +145,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
          * Update column layout when orientation of screen changes.
          * actual width is returned when view is stable. In AfterViewInit, correct value does not come.
          */
-        this._updateLayout();
+        this.updateLayout();
     }
 
     /** @hidden */
@@ -192,7 +192,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden Distribute cards on window resize */
-    private _updateLayout(): void {
+    updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -201,7 +201,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** @hidden Return available width for fd-card-layout */
-    private _getWidthAvailable(): number {
+    getWidthAvailable(): number {
         return this.layout.nativeElement.getBoundingClientRect().width;
     }
 
@@ -231,7 +231,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private _listenOnResize(): void {
         fromEvent(window, 'resize')
             .pipe(debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => this._updateLayout());
+            .subscribe(() => this.updateLayout());
     }
 
     /** @hidden Listen card change and distribute cards on column change */
@@ -244,7 +244,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         let columnCount: number;
 
         // get fd-card-layout width and calculate how many cards can fit into it
-        const availableLayoutWidth = this._getWidthAvailable();
+        const availableLayoutWidth = this.getWidthAvailable();
         const numberOfCardsWithNoGap = Math.floor(availableLayoutWidth / CARD_MINIMUM_WIDTH);
         const requiredWidthWithGap =
             numberOfCardsWithNoGap * CARD_MINIMUM_WIDTH + (numberOfCardsWithNoGap - 1) * CARD_GAP_WIDTH;
