@@ -91,7 +91,7 @@
                     label="Set as Default"></fd-checkbox>
                 <fd-checkbox
                     compact="true"
-                    [(ngModel)]="dialog.data.view.sharing"
+                    [(ngModel)]="dialog.data.isPublic"
                     i18n-label="@@coreI18nViewManager.ViewStatePublicLabel"
                     label="Public"></fd-checkbox>
                 <fd-checkbox compact="true"
@@ -122,7 +122,7 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #manageViewDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 fd-title>Manage Views</h1>
+            <h1 fd-title i18n="@@coreI18nViewManager.Manage.Title">Manage Views</h1>
             <button fd-dialog-close-button (click)="_onCancelManage(dialog)"></button>
         </fd-dialog-header>
 
@@ -142,10 +142,10 @@
                 <thead fd-table-header>
                     <tr fd-table-row>
                         <th fd-table-cell [fitContent]="true"></th>
-                        <th fd-table-cell>View</th>
-                        <th fd-table-cell>Sharing</th>
-                        <th fd-table-cell>Default</th>
-                        <th fd-table-cell>Created by</th>
+                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.View">View</th>
+                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.Sharing">Sharing</th>
+                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.Default">Default</th>
+                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.CraetedBy">Created by</th>
                         <th fd-table-cell [fitContent]="true"></th>
                     </tr>
                 </thead>
@@ -161,10 +161,9 @@
                         </td>
                         <td fd-table-cell>{{ view.name }}</td>
                         <td fd-table-cell>
-                            {{ view.sharing }}
-                            <ng-container [ngSwitch]="view.sharing">
-                                <ng-container i18n="@@coreI18nViewManager.Manage.PublicLabel" *ngSwitchCase="public">Public</ng-container>
-                                <ng-container i18n="@@coreI18nViewManager.Manage.PrivateLabel" *ngSwitchCase="private">Private</ng-container>
+                            <ng-container [ngSwitch]="view.access">
+                                <ng-container i18n="@@coreI18nViewManager.Manage.PublicLabel" *ngSwitchCase="'public'">Public</ng-container>
+                                <ng-container i18n="@@coreI18nViewManager.Manage.PrivateLabel" *ngSwitchCase="'private'">Private</ng-container>
                             </ng-container>
                         </td>
                         <td fd-table-cell>

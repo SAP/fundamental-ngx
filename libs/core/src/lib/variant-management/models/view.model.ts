@@ -1,5 +1,7 @@
 import { uuidv4 } from '../../utils/functions';
 
+
+export type ViewAccess = 'private' | 'public';
 export class View {
     id?: string;
     name: string;
@@ -8,8 +10,7 @@ export class View {
 
     readonly?: boolean;
     favorite = false;
-    access: 'private' | 'public' = 'public';
-    // autoApply = false;
+    access: ViewAccess = 'public';
     default = false;
 
     constructor() {

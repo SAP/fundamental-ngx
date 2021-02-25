@@ -16,7 +16,7 @@ import { DialogService } from '../dialog/dialog-service/dialog.service';
 import { DialogRef } from '../dialog/public_api';
 import { HeaderSizes } from '../title/public_api';
 import { compareObjects } from '../utils/functions';
-import { View } from './models/view.model';
+import { View, ViewAccess } from './models/view.model';
 
 @Component({
     selector: 'fd-variant-management',
@@ -43,6 +43,9 @@ export class VariantManagementComponent implements OnInit, OnChanges {
 
     @Input()
     dirtyLabel: string;
+
+    @Input()
+    mobile: boolean;
 
     @Output()
     updateView = new EventEmitter<View>();
@@ -121,15 +124,17 @@ export class VariantManagementComponent implements OnInit, OnChanges {
             width: '320px',
             data: {
                 autoApply: false,
+                isPublic: true,
                 view: new View()
             }
         });
 
-        dialogRef.afterClosed.subscribe((data: { autoApply: boolean; view: View }) => {
+        dialogRef.afterClosed.subscribe((data: { autoApply: boolean; isPublic: boolean; view: View }) => {
             if (data) {
                 const selectedView = {
                     ...Object.assign({}, this.selectedView),
-                    ...data.view
+                    ...data.view,
+                    access: data.isPublic ? 'public' : 'private' as ViewAccess
                 };
                 if (data.autoApply) {
                     this.viewChanged = false;
@@ -147,6 +152,7 @@ export class VariantManagementComponent implements OnInit, OnChanges {
         this.isViewsOpen = false;
         this.defaultView = this.views.find((view) => view.default)?.id;
         const dialogRef = this._dialogService.open(dialog, {
+            mobile: this.mobile,
             responsivePadding: true,
             draggable: true,
             width: '1000px',
@@ -174,7 +180,7 @@ export class VariantManagementComponent implements OnInit, OnChanges {
 
     /** @hidden */
     _onCancelManage(dialog: DialogRef): void {
-        dialog.dismiss();
+        dialog.close();
     }
 
     /** @hidden */
