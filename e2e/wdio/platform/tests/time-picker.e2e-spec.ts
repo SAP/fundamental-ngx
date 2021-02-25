@@ -97,6 +97,20 @@ describe('Time picker suite', function() {
         timePickerPage.checkRtlSwitch();
     })
 
+    fdescribe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            timePickerPage.saveExampleBaselineScreenshot('time-picker');
+            expect(timePickerPage.compareWithBaseline('time-picker')).toBeLessThan(1);
+        });
+
+        fit('should check examples visual regression', () => {
+            scrollIntoView(activeTimePickerButton, 0);
+            click(activeTimePickerButton, 0);
+            timePickerPage.saveExampleBaselineScreenshot('time-picker-expanded', {}, timerExpanded);
+            expect(timePickerPage.compareWithBaseline('time-picker-expanded')).toBeLessThan(1);
+        });
+    });
+
     function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {
         while (getText(selectedHours) !== hour.toString()) {
             click(navigationDownArrowButton);

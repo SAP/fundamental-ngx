@@ -11,7 +11,7 @@ export class TimePickerPO extends BaseComponentPo {
     timePickerButton = 'fd-time-picker button';
     activeTimePickerInput = 'fd-time-picker[ng-reflect-is-disabled="false"] input';
     activeTimePickerButton = 'fd-time-picker[ng-reflect-is-disabled="false"] button';
-    timerExpanded = '.fd-time';
+    timerExpanded = 'div.fd-time';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeItem = 'span.fd-time__item';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
