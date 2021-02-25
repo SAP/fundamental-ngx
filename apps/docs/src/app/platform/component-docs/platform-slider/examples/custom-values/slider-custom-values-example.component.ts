@@ -1,14 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SliderCustomValue } from '@fundamental-ngx/core';
-
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { SliderCustomValue } from '@fundamental-ngx/platform';
 @Component({
-    selector: 'fd-slider-range-example',
-    templateUrl: './slider-range-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'fdp-slider-custom-values-example',
+    templateUrl: './slider-custom-values-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
-export class SliderRangeExampleComponent {
-    value = [20, 70];
-
+export class SliderCustomValuesExampleComponent {
     customValues: SliderCustomValue[] = [
         { value: 1609452000000, label: 'Jan 1' },
         { value: 1609538400000, label: 'Jan 2' },
@@ -22,5 +20,5 @@ export class SliderRangeExampleComponent {
         { value: 1610229600000, label: 'Jan 10' }
     ];
 
-    value2 = [this.customValues[4], this.customValues[6]];
+    value = this.customValues[4];
 }

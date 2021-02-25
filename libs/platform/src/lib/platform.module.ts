@@ -45,6 +45,7 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
 import { PlatformUploadCollectionModule } from './components/upload-collection';
 import { PlatformValueHelpDialogModule } from './components/value-help-dialog/value-help-dialog.module';
 import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, PlatformListModule, StandardListItemModule } from './components/list/public_api';
+import { PlatformSliderModule } from './components/slider';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -96,7 +97,8 @@ import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, Plat
         DisplayListItemModule,
         ObjectListItemModule,
         PlatformListModule,
-        StandardListItemModule
+        StandardListItemModule,
+        PlatformSliderModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

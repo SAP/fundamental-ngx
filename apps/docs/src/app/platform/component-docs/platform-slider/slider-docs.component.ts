@@ -4,6 +4,8 @@ import * as sliderBasicHtml from '!raw-loader!./examples/base/slider-basic-examp
 import * as sliderBasicTs from '!raw-loader!./examples/base/slider-basic-example.component';
 import * as sliderRangeHtml from '!raw-loader!./examples/range/slider-range-example.component.html';
 import * as sliderRangeTs from '!raw-loader!./examples/range/slider-range-example.component';
+import * as sliderFormFieldHtml from '!raw-loader!./examples/form-field/slider-form-field-example.component.html';
+import * as sliderFormFieldTs from '!raw-loader!./examples/form-field/slider-form-field-example.component';
 import * as sliderTicksAndLabelsHtml from '!raw-loader!./examples/ticks-and-labels/slider-ticks-and-labels-example.component.html';
 import * as sliderTicksAndLabelsTs from '!raw-loader!./examples/ticks-and-labels/slider-ticks-and-labels-example.component';
 import * as sliderDisabledHtml from '!raw-loader!./examples/disabled/slider-disabled-example.component.html';
@@ -23,18 +25,15 @@ import { Schema } from '../../../schema/models/schema.model';
     selector: 'app-slider',
     templateUrl: './slider-docs.component.html'
 })
-export class SliderDocsComponent {
-    static schema: any = {
+export class PlatformSliderDocsComponent {
+    static schema: Schema = {
         properties: {
             properties: {
                 type: 'object',
                 properties: {
                     mode: {
                         type: 'string',
-                        enum: [
-                            'single',
-                            'range'
-                        ]
+                        enum: ['single', 'range']
                     },
                     min: {
                         type: 'integer'
@@ -129,6 +128,20 @@ export class SliderDocsComponent {
         }
     ];
 
+    formField: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: sliderFormFieldTs,
+            fileName: 'slider-form-field-example',
+            component: 'SliderFormFieldExampleComponent'
+        },
+        {
+            language: 'html',
+            code: sliderFormFieldHtml,
+            fileName: 'slider-form-field-example'
+        }
+    ];
+
     ticksAndLabels: ExampleFile[] = [
         {
             language: 'typescript',
@@ -186,7 +199,7 @@ export class SliderDocsComponent {
     ];
 
     constructor(private schemaFactory: SchemaFactoryService) {
-        this.schema = this.schemaFactory.getComponent('slider');
+        this.schema = this.schemaFactory.getComponent('fdp-slider');
     }
 
     onSchemaValues(data): void {
