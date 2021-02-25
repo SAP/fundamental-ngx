@@ -10,18 +10,14 @@ import { StoreModule, StoreFeatureModule, StoreRootModule } from '@ngrx/store';
 import { EffectsModule, EffectsFeatureModule, EffectsRootModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { EntityMetaOptionsService } from './infrastructure/persistence/entity-options.service';
-import { DefaultEntityMetaOptionsService } from './infrastructure/persistence/default-entity-options.service';
-import {
-    DefaultHttpUrlGenerator,
-    HttpUrlGenerator
-} from './infrastructure/persistence/store/entity-store-server/http-url-generator';
-import { EntityStoreServerServiceFactory } from './infrastructure/persistence/store/entity-store-server/entity-store-server';
+import { EntityMetaOptionsService, DefaultEntityMetaOptionsService } from './infrastructure/persistence/utils';
+import { DefaultHttpUrlGenerator, HttpUrlGenerator } from './infrastructure/persistence/store/http-url-generator';
+import { EntityStoreServerServiceFactory } from './infrastructure/persistence/store/entity-store-server';
 import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
 import {
     DefaultEntityStoreBuilderFactory,
     EntityStoreBuilderFactory
-} from './infrastructure/persistence/store/entity-store-server/entity-store-builder';
+} from './infrastructure/persistence/store/entity-store-builder';
 
 function mapFundamentalConfigToNgrxConfig(conf: FundamentalStoreConfig): EntityDataModuleConfig {
     const entityMetadata: EntityMetadataMap = {};

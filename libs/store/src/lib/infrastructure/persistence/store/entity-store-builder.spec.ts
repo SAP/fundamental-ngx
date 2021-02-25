@@ -1,6 +1,6 @@
 import { EntityCollectionServiceFactory } from '@ngrx/data';
 
-import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../../entity-options.service';
+import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../utils/entity-options.service';
 import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
 
@@ -20,6 +20,7 @@ class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
 
 class EntityCollectionServiceFactoryMock implements EntityCollectionServiceFactory {
     entityCollectionServiceElementsFactory = null;
+
     create() {
         return null;
     }
@@ -87,12 +88,6 @@ describe('Default EntityStoreBuilder', () => {
 
     it('should has "useFetchPolicy" method defined', () => {
         const returnedValue = builder.useFetchPolicy({ strategy: null });
-        // return builder instance
-        expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
-    });
-
-    it('should has "isTransient" method defined', () => {
-        const returnedValue = builder.isTransient();
         // return builder instance
         expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
     });

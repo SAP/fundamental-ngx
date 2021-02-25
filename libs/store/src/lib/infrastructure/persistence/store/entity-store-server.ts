@@ -5,8 +5,8 @@ import { timeout, delay, catchError, map } from 'rxjs/operators';
 import { Update } from '@ngrx/entity';
 import { DefaultDataServiceConfig, EntityCollectionDataService, QueryParams, DataServiceError } from '@ngrx/data';
 
-import { EntityPath, EntityOperation } from '../../../../domain/public_api';
-import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../../entity-options.service';
+import { EntityPath, EntityOperation } from '../../../domain/public_api';
+import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../utils/entity-options.service';
 
 import { HttpUrlGenerator } from './http-url-generator';
 

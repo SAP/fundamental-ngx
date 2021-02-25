@@ -1,6 +1,6 @@
 import { Pluralizer } from '@ngrx/data';
 
-import {ENTITY_OPERATIONS} from '../../../../domain/rest-resource';
+import { ENTITY_OPERATIONS } from '../../../domain/rest-resource';
 import { DefaultHttpUrlGenerator } from './http-url-generator';
 
 describe('HTTP URL Generator', () => {
@@ -24,26 +24,36 @@ describe('HTTP URL Generator', () => {
     it('should generate entity url based on operation and entity meta options', () => {
         ENTITY_OPERATIONS.forEach((operation) => {
             expect(urlGenerator.entityResource('hero', 'api', operation)).toBe('api/hero/');
-            expect(urlGenerator.entityResource('hero', 'api', operation, 'hero-custom-path')).toBe('api/hero-custom-path/');
+            expect(urlGenerator.entityResource('hero', 'api', operation, 'hero-custom-path')).toBe(
+                'api/hero-custom-path/'
+            );
             expect(urlGenerator.entityResource('hero', 'api', operation, { default: 'default-hero' })).toBe(
                 'api/default-hero/'
             );
-            expect(urlGenerator.entityResource('hero', 'api', operation, { default: 'default-hero', [operation]: `${operation}-hero` })).toBe(
-                `api/${operation}-hero/`.toLowerCase()
-            );
+            expect(
+                urlGenerator.entityResource('hero', 'api', operation, {
+                    default: 'default-hero',
+                    [operation]: `${operation}-hero`
+                })
+            ).toBe(`api/${operation}-hero/`.toLowerCase());
         });
     });
 
     it('should generate collection url based on operation and entity meta options', () => {
         ENTITY_OPERATIONS.forEach((operation) => {
             expect(urlGenerator.collectionResource('hero', 'api', operation)).toBe('api/heroes/');
-            expect(urlGenerator.collectionResource('hero', 'api', operation, 'hero-custom-path')).toBe('api/hero-custom-path/');
+            expect(urlGenerator.collectionResource('hero', 'api', operation, 'hero-custom-path')).toBe(
+                'api/hero-custom-path/'
+            );
             expect(urlGenerator.collectionResource('hero', 'api', operation, { default: 'default-hero' })).toBe(
                 'api/default-hero/'
             );
-            expect(urlGenerator.collectionResource('hero', 'api', operation, { default: 'default-hero', [operation]: `${operation}-hero` })).toBe(
-                `api/${operation}-hero/`.toLowerCase()
-            );
+            expect(
+                urlGenerator.collectionResource('hero', 'api', operation, {
+                    default: 'default-hero',
+                    [operation]: `${operation}-hero`
+                })
+            ).toBe(`api/${operation}-hero/`.toLowerCase());
         });
     });
 });

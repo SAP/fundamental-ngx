@@ -10,8 +10,8 @@ import { DefaultDataServiceConfig, DataServiceError, Pluralizer } from '@ngrx/da
 
 import { EntityStoreServerServiceFactory, EntityStoreServerService } from './entity-store-server';
 import { HttpUrlGenerator, DefaultHttpUrlGenerator } from './http-url-generator';
-import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../../entity-options.service';
-import { EntityOperationComplexPath } from '../../../../domain/rest-resource';
+import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../utils/entity-options.service';
+import { EntityOperationComplexPath } from '../../../domain/rest-resource';
 
 class Hero {
     id!: number;

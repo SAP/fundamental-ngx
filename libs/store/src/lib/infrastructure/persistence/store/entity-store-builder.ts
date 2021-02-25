@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { EntityCollectionServiceFactory } from '@ngrx/data';
 
-import { FetchPolicy, CachePolicy, Type } from '../../../../domain/public_api';
-import { DefaultEntityStore, EntityStore, EntityStoreOptions } from './entity-store';
-import { EntityMetaOptionsService } from '../../entity-options.service';
+import { FetchPolicy, CachePolicy, Type } from '../../../domain/public_api';
+import { DefaultEntityStore, EntityStore } from './entity-store';
+import { EntityMetaOptionsService } from '../utils/entity-options.service';
 
 //#region Interfaces
 
@@ -21,10 +21,6 @@ export interface EntityStoreBuilder<T> {
      * @param policy FetchPolicy settings
      */
     useFetchPolicy(policy: FetchPolicy): this;
-    /**
-     * Created store will not be persisted
-     */
-    isTransient(): this;
     /**
      * Create new store
      */
@@ -48,7 +44,6 @@ export abstract class EntityStoreBuilderFactory {
 export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
     private cachePolicy: CachePolicy | null;
     private fetchPolicy: FetchPolicy | null;
-    private transient: boolean;
 
     constructor(
         protected readonly entity: Type<T>,
@@ -61,7 +56,6 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
     reset(): void {
         this.cachePolicy = null;
         this.fetchPolicy = null;
-        this.transient = false;
     }
 
     useCachePolicy(policy: CachePolicy): this {
@@ -74,18 +68,12 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
         return this;
     }
 
-    isTransient(): this {
-        this.transient = true;
-        return this;
-    }
-
     create(): EntityStore<T> {
         const { name } = this.entityMetaOptionsService.getEntityMetadata(this.entity);
 
         const result = new DefaultEntityStore<T>(this.entityCollectionServiceFactory.create(name), {
             cachePolicy: this.cachePolicy,
             fetchPolicy: this.fetchPolicy,
-            transient: this.transient
         });
 
         this.reset();

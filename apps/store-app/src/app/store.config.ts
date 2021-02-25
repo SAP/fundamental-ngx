@@ -26,7 +26,6 @@ export interface EntityTypes {
 }
 
 @RESTResource({
-    root: 'http://www.example.com/v1/',
     path: '/requisitions/:reqId/lineItems'
 })
 @Entity({
@@ -42,6 +41,7 @@ class LineItem {
 
 // URI with endpoints for different actions
 @RESTResource({
+    root: 'http://www.example.com/v1/',
     path: {
         default: 'requisitioning',
         add: '/cart',

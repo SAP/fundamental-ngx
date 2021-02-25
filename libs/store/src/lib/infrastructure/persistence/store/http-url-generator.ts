@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Pluralizer } from '@ngrx/data';
 
-import { EntityOperation, EntityPath } from '../../../../domain/rest-resource';
+import { EntityOperation, EntityPath } from '../../../domain/rest-resource';
 
 /**
  * Generate the base part of an HTTP URL for

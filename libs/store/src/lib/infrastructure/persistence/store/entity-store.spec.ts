@@ -46,16 +46,6 @@ describe('Default Entity Store', () => {
         expect(store).toBeTruthy();
     });
 
-    it('should delegate getAll to entityService.getAll() method', () => {
-        const result = [];
-        spyOn(collectionService, 'getAll').and.callFake(() => of(result));
-
-        // check returned result
-        store.getAll().subscribe((data) => expect(data).toBe(result));
-
-        expect(collectionService.getAll).toHaveBeenCalled();
-    });
-
     it('should delegate getBy to entityService.getByKey() method', () => {
         const id = '27';
         const result = new User(id, 'John', 35);
@@ -63,21 +53,9 @@ describe('Default Entity Store', () => {
         spyOn(collectionService, 'getByKey').and.callFake(() => of(result));
 
         // check returned result
-        store.getBy(id).subscribe((data) => expect(data).toBe(result));
+        store.get(id).subscribe((data) => expect(data).toBe(result));
 
         expect(collectionService.getByKey).toHaveBeenCalledOnceWith(id);
-    });
-
-    it('should delegate getWithQuery to entityService.getWithQuery() method', () => {
-        const query = '?name=Sam';
-        const result = [];
-
-        // check returned result
-        spyOn(collectionService, 'getWithQuery').and.callFake(() => of(result));
-
-        store.getWithQuery(query).subscribe((data) => expect(data).toBe(result));
-
-        expect(collectionService.getWithQuery).toHaveBeenCalledOnceWith(query);
     });
 
     it('should delegate save to entityService.update() method if entity id exists', () => {

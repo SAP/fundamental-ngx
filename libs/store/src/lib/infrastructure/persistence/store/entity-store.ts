@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EntityCollectionService } from '@ngrx/data';
 
-import { CachePolicy, FetchPolicy, IdentityKey } from '../../../../domain/public_api';
+import { CachePolicy, FetchPolicy, IdentityKey } from '../../../domain/public_api';
 
 //#region Interfaces
 
@@ -18,19 +18,10 @@ export interface EntityStore<T> {
      */
     readonly queryBuilder: any;
     /**
-     * Get collection of entities
-     */
-    getAll(): Observable<T[]>;
-
-    /**
-     * Get collection of entities that match given query
-     */
-    getWithQuery(query: QueryParams): Observable<T[]>;
-    /**
      * Get entity by id
      * @param id identity key
      */
-    getBy(id: IdentityKey): Observable<T>;
+    get(id: IdentityKey): Observable<T>;
     /**
      * Save or Create Entity.
      * @param entity If entity has identity key it will update entity otherwise create new one
@@ -50,7 +41,6 @@ export interface EntityStore<T> {
 export interface EntityStoreOptions {
     cachePolicy: CachePolicy;
     fetchPolicy: FetchPolicy;
-    transient: boolean;
 }
 
 /**
@@ -66,15 +56,7 @@ export class DefaultEntityStore<T> implements EntityStore<T> {
         // TODO: do something with options
     }
 
-    getAll(): Observable<T[]> {
-        return this.entityService.getAll();
-    }
-
-    getWithQuery(query: QueryParams): Observable<T[]> {
-        return this.entityService.getWithQuery(query);
-    }
-
-    getBy(id: IdentityKey): Observable<T> {
+    get(id: IdentityKey): Observable<T> {
         return this.entityService.getByKey(id);
     }
 

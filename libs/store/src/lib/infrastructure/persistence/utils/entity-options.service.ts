@@ -1,15 +1,32 @@
 import { Injectable, Type } from '@angular/core';
 
-import { EntityMetaOptions } from '../../domain/entity';
-import { EntityResourceMetaOptions } from '../../domain/rest-resource';
 import {
     getEntityMetadata,
     getResourceMetadata,
     getEntityMetadataByEntityName,
     getEntityResourceMetadataByEntityName
-} from '../../domain/decorators';
+} from '../../../domain/decorators';
+import { EntityMetaOptions } from '../../../domain/entity';
+import { EntityResourceMetaOptions } from '../../../domain/rest-resource';
 
-import { EntityMetaOptionsService } from './entity-options.service';
+export { EntityMetaOptions };
+export { EntityResourceMetaOptions };
+
+/**
+ * Service to retrieve Entity meta options
+ */
+export abstract class EntityMetaOptionsService {
+    /**
+     * Get Entity Resource Options
+     * @param entity Entity name or Entity class
+     */
+    abstract getEntityResourceMetadata<T>(entity: string | Type<T>): EntityResourceMetaOptions;
+    /**
+     * Get Entity Meta Options
+     * @param entity Entity name or Entity class
+     */
+    abstract getEntityMetadata<T>(entity: string | Type<T>): EntityMetaOptions;
+}
 
 /**
  * Default implementation of EntityMetaOptionsService
