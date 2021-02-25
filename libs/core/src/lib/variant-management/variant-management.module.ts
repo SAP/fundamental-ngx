@@ -3,25 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { VariantManagementComponent } from './variant-management.component';
-import {
-    BarModule,
-    ButtonModule,
-    CardModule,
-    CheckboxModule,
-    DialogModule,
-    FormModule,
-    IconModule,
-    InputGroupModule,
-    ListModule,
-    PopoverModule,
-    SelectModule,
-    TableModule,
-    TitleModule,
-    ToolbarModule,
-    RadioModule,
-    PipeModule,
-    MessageStripModule
-} from '@fundamental-ngx/core';
+import { ListModule } from '../list/public_api';
+import { PopoverModule } from '../popover/public_api';
+import { BarModule } from '../bar/bar.module';
+import { DialogModule } from '../dialog/public_api';
+import { FormModule } from '../form/public_api';
+import { CheckboxModule } from '../checkbox/public_api';
+import { InputGroupModule } from '../input-group/public_api';
+import { TableModule } from '../table/public_api';
+import { IconModule } from '../icon/public_api';
+import { RadioModule } from '../radio/public_api';
+import { TitleModule } from '../title/public_api';
+import { ButtonModule } from '../button/public_api';
+import { PipeModule } from '../utils/public_api';
 
 @NgModule({
     declarations: [
@@ -29,10 +23,7 @@ import {
     ],
     imports: [
         CommonModule,
-        SelectModule,
-        CardModule,
         ListModule,
-        ToolbarModule,
         PopoverModule,
         BarModule,
         DialogModule,
@@ -45,8 +36,7 @@ import {
         FormsModule,
         TitleModule,
         ButtonModule,
-        PipeModule,
-        MessageStripModule
+        PipeModule
     ],
     exports: [
         VariantManagementComponent

@@ -35,22 +35,21 @@
         <div fd-popover-body-footer>
             <div fd-bar barDesign="footer" [cozy]="true">
                 <div fd-bar-right>
-                    <ng-container *ngIf="viewChanged">
-                        <fd-button-bar
-                            *ngIf="viewChanged"
-                            fdType="emphasized"
-                            label="Save"
-                            (click)="onUpdate()"
-                        >
-                        </fd-button-bar>
-                        <fd-button-bar
-                            *ngIf="viewChanged"
-                            fdType="emphasized"
-                            label="Save as"
-                            (click)="onSaveAs(saveAsViewDialog)"
-                        ></fd-button-bar>
-                    </ng-container>
                     <fd-button-bar
+                        fdType="emphasized"
+                        i18n.label="@@coreI18nViewManager.Control.Save"
+                        label="Save"
+                        [disabled]="!viewChanged"
+                        (click)="onUpdate()"
+                    >
+                    </fd-button-bar>
+                    <fd-button-bar
+                        i18n.label="@@coreI18nViewManager.Control.SaveAs"
+                        label="Save as"
+                        (click)="onSaveAs(saveAsViewDialog)"
+                    ></fd-button-bar>
+                    <fd-button-bar
+                        i18n.label="@@coreI18nViewManager.Control.Manage"
                         label="Manage"
                         (click)="onManageDialog(manageViewDialog)"></fd-button-bar>
                 </div>
@@ -62,7 +61,7 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #saveAsViewDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 fd-title>Save as View</h1>
+            <h1 fd-title i18n="@@coreI18nViewManager.SaveAs.Title">Save as View</h1>
             <button fd-dialog-close-button (click)="_onCancelView(dialog)"></button>
         </fd-dialog-header>
 
@@ -138,57 +137,71 @@
                                 [button]="true">
                 </fd-input-group>
             </div>
-            <table fd-table *ngIf="(dialog.data.views | filterBy: manageSearchValue : 'name').length !== 0; else noResults">
-                <thead fd-table-header>
-                    <tr fd-table-row>
-                        <th fd-table-cell [fitContent]="true"></th>
-                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.View">View</th>
-                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.Sharing">Sharing</th>
-                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.Default">Default</th>
-                        <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.CraetedBy">Created by</th>
-                        <th fd-table-cell [fitContent]="true"></th>
-                    </tr>
-                </thead>
-                <tbody fd-table-body>
-                    <tr *ngFor="let view of dialog.data.views | filterBy: manageSearchValue : 'name'; let index = index" fd-table-row>
-                        <td fd-table-cell [fitContent]="true">
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                [glyph]="view.favorite ? 'favorite' : 'unfavorite'"
-                                [compact]="true"
-                                (click)="view.favorite = !view.favorite"></button>
-                        </td>
-                        <td fd-table-cell>{{ view.name }}</td>
-                        <td fd-table-cell>
-                            <ng-container [ngSwitch]="view.access">
-                                <ng-container i18n="@@coreI18nViewManager.Manage.PublicLabel" *ngSwitchCase="'public'">Public</ng-container>
-                                <ng-container i18n="@@coreI18nViewManager.Manage.PrivateLabel" *ngSwitchCase="'private'">Private</ng-container>
-                            </ng-container>
-                        </td>
-                        <td fd-table-cell>
-                            <fd-radio-button
-                                name="default-view"
-                                [id]="'radio-' + view.id"
-                                [value]="view.id"
-                                [(ngModel)]="defaultView"
-                            >
-                            </fd-radio-button>
-                        </td>
-                        <td fd-table-cell>{{ view.createdBy }}</td>
-                        <td fd-table-cell [fitContent]="true">
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                glyph="error"
-                                [compact]="true"
-                                [disabled]="view.readonly"
-                                (click)="_onRemoveView(dialog.data, view)">
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <form #viewList="ngForm">
+                <table fd-table *ngIf="(dialog.data.views | filterBy: manageSearchValue : 'name').length !== 0; else noResults">
+                    <thead fd-table-header>
+                        <tr fd-table-row>
+                            <th fd-table-cell [fitContent]="true"></th>
+                            <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.View">View</th>
+                            <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.Sharing">Sharing</th>
+                            <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.Default">Default</th>
+                            <th fd-table-cell i18n="@@coreI18nViewManager.Manage.Table.CraetedBy">Created by</th>
+                            <th fd-table-cell [fitContent]="true"></th>
+                        </tr>
+                    </thead>
+                    <tbody fd-table-body>
+                        <tr *ngFor="let view of dialog.data.views | filterBy: manageSearchValue : 'name'; let index = index" fd-table-row>
+                            <td fd-table-cell [fitContent]="true">
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    [glyph]="view.favorite ? 'favorite' : 'unfavorite'"
+                                    [compact]="true"
+                                    (click)="view.favorite = !view.favorite"></button>
+                            </td>
+                            <td fd-table-cell>
+                                <input
+                                    *ngIf="!view.readonly; else staticName"
+                                    fd-form-control
+                                    type="text"
+                                    [ngModel]="view.name"
+                                    [name]="view.id"
+                                    required
+                                    placeholder="Enter view name" />
+                                <ng-template #staticName>
+                                    {{ view.name }}
+                                </ng-template>
+                            </td>
+                            <td fd-table-cell>
+                                <ng-container [ngSwitch]="view.access">
+                                    <ng-container i18n="@@coreI18nViewManager.Manage.PublicLabel" *ngSwitchCase="'public'">Public</ng-container>
+                                    <ng-container i18n="@@coreI18nViewManager.Manage.PrivateLabel" *ngSwitchCase="'private'">Private</ng-container>
+                                </ng-container>
+                            </td>
+                            <td fd-table-cell>
+                                <fd-radio-button
+                                    name="default-view"
+                                    [id]="'radio-' + view.id"
+                                    [value]="view.id"
+                                    [(ngModel)]="defaultView"
+                                >
+                                </fd-radio-button>
+                            </td>
+                            <td fd-table-cell>{{ view.createdBy }}</td>
+                            <td fd-table-cell [fitContent]="true">
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    glyph="error"
+                                    [compact]="true"
+                                    [disabled]="view.readonly"
+                                    (click)="_onRemoveView(dialog.data, view)">
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
             <ng-template #noResults>
                 <h5 i18n="@@coreI18nViewManager.Manage.NoResults">No results</h5>
             </ng-template>
@@ -198,6 +211,7 @@
             <fd-button-bar
                 fdType="emphasized"
                 label="OK"
+                [disabled]="viewList.invalid"
                 (click)="_onSaveManage(dialog)">
             </fd-button-bar>
             <fd-button-bar
