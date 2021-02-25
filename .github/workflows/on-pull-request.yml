@@ -1,0 +1,64 @@
+name: on-pull-request
+# Controls when the action will run.
+on: pull_request
+
+  # Triggers the workflow on push or pull request events but only for the main branch
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+#  workflow_dispatch:
+# NOTE: not sure if ENV should be here or in the test run section
+env:
+  SAUCE_USERNAME: $SAUCE_USERNAME
+  SAUCE_ACCESS_KEY: $SAUCE_ACCESS_KEY
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+jobs:
+  # This workflow contains a single job called "build" (name)
+  build_and_cache:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # installs node
+      - uses: actions/cache@v2
+        with:
+           path: ~/.npm
+           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: build and cache app
+        run: npm run build-all
+      - name: install dependencies
+        run: npm ci
+
+# runs the PlatformA e2e tests
+  run_platformA_e2e_tests:
+      needs: build_and_cache
+      runs-on: ubuntu-latest
+      steps:
+          - name: Run platformA e2e tests
+            run: npm run e2e:platformA:ci
+
+
+  # runs the PlatformB e2e tests
+  run_platformB_e2e_tests:
+    needs: build_and_cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run platformB e2e tests
+        run: npm run e2e:platformB:ci
+
+#      # Runs a single command using the runners shell
+#      - name: Run a one-line script
+#        run: echo Hello, world!
+#
+#      # Runs a set of commands using the runners shell
+#      - name: Run a multi-line script
+#        run: |
+#          echo Add other actions to build,
+#          echo test, and deploy your project.
