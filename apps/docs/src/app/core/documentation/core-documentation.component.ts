@@ -74,6 +74,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/step-input', name: 'Step Input' },
             { url: 'core/table', name: 'Table' },
             { url: 'core/tabs', name: 'Tabs' },
+            { url: 'core/text', name: 'Text' },
             { url: 'core/textarea', name: 'Textarea' },
             { url: 'core/tile', name: 'Tile' },
             { url: 'core/time', name: 'Time' },
@@ -85,7 +86,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/object-number', name: 'Object Number' },
             { url: 'core/wizard', name: 'Wizard' },
             { url: 'core/grid-list', name: 'Grid List' },
-            { url: 'core/variant-management', name: 'Variant Management' }
+            { url: 'core/variant-management', name: 'Variant Management' },
+            { url: 'core/slider', name: 'Slider' }
         ];
 
         this.layouts = [
@@ -99,7 +101,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         this.utilities = [
             { url: 'core/global-config', name: 'Global Configuration' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
-            { url: 'core/popover-directive', name: 'Popover Helper' },
             { url: 'core/scroll-spy', name: 'Scroll Spy' },
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];

@@ -284,13 +284,6 @@ export const ROUTES: Routes = [
                     import('./component-docs/popover/popover-docs.module').then((m) => m.PopoverDocsModule)
             },
             {
-                path: 'popover-directive',
-                loadChildren: () =>
-                    import('./component-docs/popover-directive/popover-directive-docs.module').then(
-                        (m) => m.PopoverDirectiveDocsModule
-                    )
-            },
-            {
                 path: 'product-switch',
                 loadChildren: () =>
                     import('./component-docs/product-switch/product-switch-docs.module').then(
@@ -362,6 +355,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
             },
             {
+                path: 'text',
+                loadChildren: () => import('./component-docs/text/text-docs.module').then((m) => m.TextDocsModule)
+            },
+            {
                 path: 'textarea',
                 loadChildren: () =>
                     import('./component-docs/textarea/textarea-docs.module').then((m) => m.TextareaDocsModule)
@@ -418,6 +415,10 @@ export const ROUTES: Routes = [
             {
                 path: 'variant-management',
                 loadChildren: () => import('./component-docs/variant-management/variant-management-docs.module').then((m) => m.VariantManagementDocsModule)
+            },
+            {
+                path: 'slider',
+                loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
             }
         ]
     }

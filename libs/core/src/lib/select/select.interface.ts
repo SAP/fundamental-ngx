@@ -38,7 +38,3 @@ export interface SelectInterface extends MobileMode {
         currentScrollPosition: number,
         panelHeight: number): void;
 }
-
-
-
-

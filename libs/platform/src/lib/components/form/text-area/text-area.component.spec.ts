@@ -14,7 +14,7 @@ import '@angular/localize/init';
     selector: 'fdp-test-textarea',
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form">
+            <fdp-form-group #fg1 [formGroup]="form">
                 <fdp-form-field
                     #basicTextareaField
                     [id]="'basicTextarea'"

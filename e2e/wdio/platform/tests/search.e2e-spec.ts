@@ -12,7 +12,7 @@ import {
     waitForElDisplayed
 } from '../../driver/wdio';
 import { SearchPo } from '../pages/search.po';
-import searchPageContent from '../fixtures/appData/search-page-content';
+import {expected_category, search_placeholder} from '../fixtures/appData/search-page-content';
 
 describe('Search field', function() {
     const {
@@ -58,7 +58,7 @@ describe('Search field', function() {
         const actualPlaceholders = getAttributeByNameArr(searchFields, 'placeholder');
         for (let i = 0; arrLength > i; i++) {
             waitForElDisplayed(searchFields, i);
-            expect(actualPlaceholders[i]).toBe(searchPageContent.search_placeholder);
+            expect(actualPlaceholders[i]).toBe(search_placeholder);
         }
     });
 
@@ -139,17 +139,24 @@ describe('Search field', function() {
             click(autosuggestionItems);
             click(searchIcons, i + 2);
         }
-        expect(getText(cozyWithCategoriesSearch, 1)).toContain(searchPageContent.expected_category);
-        expect(getText(cozyWithCategoriesSearch, 3)).toContain(searchPageContent.expected_category);
+        expect(getText(cozyWithCategoriesSearch, 1)).toContain(expected_category);
+        expect(getText(cozyWithCategoriesSearch, 3)).toContain(expected_category);
 
-        expect(getText(compactWithCategoriesSearch, 1)).toContain(searchPageContent.expected_category);
-        expect(getText(compactWithCategoriesSearch, 3)).toContain(searchPageContent.expected_category);
+        expect(getText(compactWithCategoriesSearch, 1)).toContain(expected_category);
+        expect(getText(compactWithCategoriesSearch, 3)).toContain(expected_category);
 
-        expect(getText(cozyWithDataSourceSearch, 1)).toContain(searchPageContent.expected_category);
-        expect(getText(cozyWithDataSourceSearch, 3)).toContain(searchPageContent.expected_category);
+        expect(getText(cozyWithDataSourceSearch, 1)).toContain(expected_category);
+        expect(getText(cozyWithDataSourceSearch, 3)).toContain(expected_category);
     });
 
     it('should check rtl switch', () => {
         searchPage.checkRtlSwitch();
+    });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            searchPage.saveExampleBaselineScreenshot('search');
+            expect(searchPage.compareWithBaseline('search')).toBeLessThan(1);
+        });
     });
 });

@@ -20,9 +20,6 @@ export class MenuPo extends BaseComponentPo {
     cascadingVegMenuItemsArr = '#fdp-menu-vegetable-menu fdp-menu-item';
     cascadingLettuceItemsArr = '#fdp-menu-lettuce-menu fdp-menu-item';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

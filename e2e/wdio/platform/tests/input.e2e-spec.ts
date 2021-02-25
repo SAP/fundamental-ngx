@@ -24,12 +24,17 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import inputPContent from '../fixtures/appData/input-page-contents';
-import inputTestData from '../fixtures/testData/input';
+import {favoriteColor, errorBorderColor, errorText, labelsArray, placeholdersArray} from '../fixtures/appData/input-page-contents';
+import {autocompleteOption, text, longLine, number, special_characters} from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
 
 describe('Input should ', function() {
     const inputPage = new InputPo();
+    const {
+        defaultInput, textInput, numberInput, compactInput, readonlyInput, disabledInput, inlineHelpInput,
+        messagesComponentsInput, submitBtn, errorTextAttr, requiredInputLabel, questionMarkSpan, inputsLabels, inputsArray,
+        autocompleteInput, autocompleteInputLabel, autocompleteOptions
+    } = inputPage;
 
     beforeAll(() => {
         inputPage.open();
@@ -37,86 +42,86 @@ describe('Input should ', function() {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(inputPage.defaultInput);
+        waitForPresent(defaultInput);
     }, 1);
 
     it('have input without label', () => {
-        waitForElDisplayed(inputPage.defaultInput);
-        expect(doesItExist(inputPage.autocompleteInputLabel)).toBe(false);
+        waitForElDisplayed(defaultInput);
+        expect(doesItExist(autocompleteInputLabel)).toBe(false);
     });
 
     it('be able to type something with keyboard', () => {
-        waitForElDisplayed(inputPage.defaultInput);
-        setValue(inputPage.defaultInput, inputTestData.text);
+        waitForElDisplayed(defaultInput);
+        setValue(defaultInput, text);
 
-        expect(getValue(inputPage.defaultInput)).toBe(inputTestData.text);
+        expect(getValue(defaultInput)).toBe(text);
     });
 
     it('have associated label element to describe its purpose', () => {
-        expect(getTextArr(inputPage.inputsLabels, 0, -2)).toEqual(inputPContent.labelsArray);
-        expect(getText(inputPage.inputsLabels, 7)).toContain(inputPContent.favoriteColor);
+        expect(getTextArr(inputsLabels, 0, -2)).toEqual(labelsArray);
+        expect(getText(inputsLabels, 8)).toContain(favoriteColor);
     });
 
     it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {
-        waitForElDisplayed(inputPage.defaultInput);
-        setValue(inputPage.defaultInput, inputTestData.text);
-        addValue(inputPage.defaultInput, inputTestData.number);
-        addValue(inputPage.defaultInput, inputTestData.special_characters);
+        waitForElDisplayed(defaultInput);
+        setValue(defaultInput, text);
+        addValue(defaultInput, number);
+        addValue(defaultInput, special_characters);
 
-        expect(getValue(inputPage.defaultInput))
-            .toEqual(inputTestData.text + inputTestData.number + inputTestData.special_characters);
+        expect(getValue(defaultInput))
+            .toEqual(text + number + special_characters);
     });
 
     it('impose any filters on the kind of input values the component receives (text)', () => {
-        waitForElDisplayed(inputPage.textInput);
-        addValue(inputPage.textInput, inputTestData.number);
-        addValue(inputPage.textInput, inputTestData.special_characters);
-        addValue(inputPage.textInput, inputTestData.text);
+        waitForElDisplayed(textInput);
+        addValue(textInput, number);
+        addValue(textInput, special_characters);
+        addValue(textInput, text);
 
-        expect(getValue(inputPage.textInput))
-            .toEqual(inputTestData.number + inputTestData.special_characters + inputTestData.text); // ???
+        expect(getValue(textInput))
+            .toEqual(number + special_characters + text); // ???
     });
     // TODO: it is not working the same for manual and automation.
     xit('impose any filters on the kind of input values the component receives (number)', () => {
-        waitForElDisplayed(inputPage.numberInput);
-        click(inputPage.numberInput);
+        waitForElDisplayed(numberInput);
+        click(numberInput);
 
-        sendKeys(inputTestData.number);
-        sendKeys(inputTestData.special_characters);
-        sendKeys(inputTestData.text);
+        sendKeys(number);
+        sendKeys(special_characters);
+        sendKeys(text);
 
-        expect(getText(inputPage.numberInput)).toEqual(inputTestData.number);
+        expect(getText(numberInput)).toEqual(number);
     });
 
     it('wrap the input characters to the next line', () => {
-        waitForElDisplayed(inputPage.defaultInput);
-        const heightBefore = getElementSize(inputPage.defaultInput, 0, 'height') ;
-        setValue(inputPage.defaultInput, inputTestData.longLine);
-        const heightAfter = getElementSize(inputPage.defaultInput, 0, 'height');
+        waitForElDisplayed(defaultInput);
+        const heightBefore = getElementSize(defaultInput, 0, 'height') ;
+        setValue(defaultInput, longLine);
+        const heightAfter = getElementSize(defaultInput, 0, 'height');
 
         expect(heightBefore).toBeLessThanOrEqual(heightAfter);
     });
 
     it('enable editing the entered characters', () => {
-        waitForElDisplayed(inputPage.defaultInput);
-        setValue(inputPage.defaultInput, inputTestData.text);
+        waitForElDisplayed(defaultInput);
+        setValue(defaultInput, text);
         sendKeys('Backspace');
 
-        expect(getValue(inputPage.defaultInput)).toBe(inputTestData.text.slice(0, -1));
-        clearValue(inputPage.defaultInput);
-        expect(getValue(inputPage.defaultInput)).toBe('');
+        expect(getValue(defaultInput)).toBe(text.slice(0, -1));
+        clearValue(defaultInput);
+        expect(getValue(defaultInput)).toBe('');
     });
 
     it('check have disabled attr assigned', () => {
-        waitForElDisplayed(inputPage.disabledInput);
+        waitForElDisplayed(disabledInput);
 
-        expect(getAttributeByName(inputPage.disabledInput, 'ng-reflect-is-disabled')).toBe('true');
-        expect(isEnabled(inputPage.disabledInput)).toBe(false);
+        expect(getAttributeByName(disabledInput, 'ng-reflect-is-disabled')).toBe('true');
+        expect(isEnabled(disabledInput)).toBe(false);
     });
 
     it('have placeholder', () => {
-        expect(getAttributeByNameArr(inputPage.inputsArray, 'placeholder', 1))
-            .toEqual(inputPContent.placeholdersArray);
+        expect(getAttributeByNameArr(inputsArray, 'placeholder', 1))
+            .toEqual(placeholdersArray);
     });
 
     it('should have error border color', () => {
@@ -124,51 +129,58 @@ describe('Input should ', function() {
             console.log('Skip for IE and Safari');
             return;
         }
-        waitForPresent(inputPage.messagesComponentsInput);
-        scrollIntoView(inputPage.messagesComponentsInput);
-        waitForElDisplayed(inputPage.messagesComponentsInput);
-        click(inputPage.submitBtn);
-        const errorBackgroundColor = getCSSPropertyByName(inputPage.messagesComponentsInput, 'border-bottom-color').value;
-        expect(errorBackgroundColor).toContain(inputPContent.errorBorderColor);
-        mouseHoverElement(inputPage.messagesComponentsInput);
+        waitForPresent(messagesComponentsInput);
+        scrollIntoView(messagesComponentsInput);
+        waitForElDisplayed(messagesComponentsInput);
+        click(submitBtn);
+        const errorBackgroundColor = getCSSPropertyByName(messagesComponentsInput, 'border-bottom-color').value;
+        expect(errorBackgroundColor).toContain(errorBorderColor);
+        mouseHoverElement(messagesComponentsInput);
         pause(300);
-        waitForElDisplayed(inputPage.errorText);
-        expect(getText(inputPage.errorText).trim()).toBe(inputPContent.errorText);
+        waitForElDisplayed(errorTextAttr);
+        expect(getText(errorTextAttr).trim()).toBe(errorText);
     });
 
     it('should have visual cue for require input', () => {
-        waitForPresent(inputPage.requiredInputLabel);
-        scrollIntoView(inputPage.requiredInputLabel);
+        waitForPresent(requiredInputLabel);
+        scrollIntoView(requiredInputLabel);
         pause(2000);
-        expect(executeScriptAfterTagAttr(inputPage.requiredInputLabel, 'content')).toBe('"*"');
+        expect(executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*"');
     });
 
     xit('should have visual cue for information', () => {
-        expect(executeScriptBeforeTagAttr(inputPage.questionMarkSpan, 'content')).toBe('"?"');
+        expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('"?"');
     });
 
     it('should implement autosuggestion', () => {
-        waitForElDisplayed(inputPage.autocompleteInput);
-        addValue(inputPage.autocompleteInput, inputTestData.autocompleteOption);
+        waitForElDisplayed(autocompleteInput);
+        addValue(autocompleteInput, autocompleteOption);
 
-        expect(getElementArrayLength(inputPage.autocompleteOptions)).toBeGreaterThanOrEqual(2);
-        const autocompleteOptionText = getTextArr(inputPage.autocompleteOptions);
+        expect(getElementArrayLength(autocompleteOptions)).toBeGreaterThanOrEqual(2);
+        const autocompleteOptionText = getTextArr(autocompleteOptions);
         autocompleteOptionText.forEach((option) => {
-            expect(option.toLowerCase()).toContain(inputTestData.autocompleteOption);
+            expect(option.toLowerCase()).toContain(autocompleteOption);
         });
         pause(3000);
-        click(inputPage.autocompleteOptions);
-        expect((getValue(inputPage.autocompleteInput)).toLowerCase()).toContain(inputTestData.autocompleteOption);
+        click(autocompleteOptions);
+        expect((getValue(autocompleteInput)).toLowerCase()).toContain(autocompleteOption);
     });
 
     it('should compact be smaller than the default', () => {
-        const defaultHeight = getElementSize(inputPage.defaultInput);
-        const compactHeight = getElementSize(inputPage.compactInput);
+        const defaultHeight = getElementSize(defaultInput);
+        const compactHeight = getElementSize(compactInput);
 
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
     it('should check RTL', () => {
         inputPage.checkRtlSwitch();
+    });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            inputPage.saveExampleBaselineScreenshot('input');
+            expect(inputPage.compareWithBaseline('input')).toBeLessThan(1);
+        });
     });
 });

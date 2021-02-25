@@ -44,6 +44,7 @@ import { SelectModule } from './select/select.module';
 import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
+import { TextModule } from './text/text.module';
 import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
@@ -80,6 +81,8 @@ import { QuickViewModule } from './quick-view/quick-view.module';
 import { FeedInputModule } from './feed-input/feed-input.module';
 import { ObjectNumberModule } from './object-number/object-number.module';
 import { TitleModule } from './title/title.module';
+import { SliderModule } from './slider/public_api';
+import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -149,6 +152,7 @@ import { TitleModule } from './title/title.module';
         StepInputModule,
         TableModule,
         TabsModule,
+        TextModule,
         TileModule,
         TimeModule,
         TimePickerModule,
@@ -156,7 +160,13 @@ import { TitleModule } from './title/title.module';
         ToolbarModule,
         TokenModule,
         TreeModule,
-        WizardModule
+        WizardModule,
+        CardModule,
+        MessageBoxModule,
+        MessageToastModule,
+        DynamicSideContentModule,
+        SliderModule,
+        OnlyDigitsModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })

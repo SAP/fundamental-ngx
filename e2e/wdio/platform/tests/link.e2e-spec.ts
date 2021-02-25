@@ -13,107 +13,117 @@ import {
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    scrollIntoView, waitForElDisplayed, waitForPresent
+    scrollIntoView, waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Link component test suite', function() {
     const linkPage = new LinkPo();
+    const {
+        iconLink, standardLinks, emphasizedLink, disabledLink, emphasizedDisabledLink, invertedLink, truncatedLink
+    } = linkPage;
 
     beforeAll(() => {
         linkPage.open();
     }, 1);
 
     it('should check icon link', () => {
-        const iconLinkAltText = getAttributeByName(linkPage.iconLink, 'aria-label');
+        const iconLinkAltText = getAttributeByName(iconLink, 'aria-label');
 
-        mouseHoverElement(linkPage.iconLink);
-        checkLinkData(linkPage.iconLink);
-        checkLinkHover(linkPage.iconLink);
+        mouseHoverElement(iconLink);
+        checkLinkData(iconLink);
+        checkLinkHover(iconLink);
         expect(iconLinkAltText).toBe(defaultLink_alt_text);
-        expect(isElementClickable(linkPage.iconLink)).toBe(true);
+        expect(isElementClickable(iconLink)).toBe(true);
     });
 
     it('should check standard links', () => {
-        mouseHoverElement(linkPage.standardLinks);
+        mouseHoverElement(standardLinks);
 
-        const arrL = getElementArrayLength(linkPage.standardLinks);
+        const arrL = getElementArrayLength(standardLinks);
         for (let i = 0; arrL > i; i++) {
             // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement index 9
             if (i !== 9) {
-                expect(getAttributeByName(linkPage.standardLinks, 'aria-label', i)).toBe(standardLinksAltTextArray[i]);
-                checkLinkData(linkPage.standardLinks, i);
-                expect(isElementClickable(linkPage.standardLinks, i)).toBe(true);
+                expect(getAttributeByName(standardLinks, 'aria-label', i)).toBe(standardLinksAltTextArray[i]);
+                checkLinkData(standardLinks, i);
+                expect(isElementClickable(standardLinks, i)).toBe(true);
             }
         }
     });
 
     it('should check emphasized link', () => {
-        const emphasizedLinkAltText = getAttributeByName(linkPage.emphasizedLink, 'aria-label');
+        const emphasizedLinkAltText = getAttributeByName(emphasizedLink, 'aria-label');
 
-        scrollIntoView(linkPage.emphasizedLink);
-        mouseHoverElement(linkPage.emphasizedLink);
+        scrollIntoView(emphasizedLink);
+        mouseHoverElement(emphasizedLink);
 
-        expect(getAttributeByName(linkPage.emphasizedLink, 'class')).toContain('emphasized');
-        checkLinkData(linkPage.emphasizedLink);
-        checkLinkHover(linkPage.emphasizedLink);
+        expect(getAttributeByName(emphasizedLink, 'class')).toContain('emphasized');
+        checkLinkData(emphasizedLink);
+        checkLinkHover(emphasizedLink);
         expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
-        expect(isElementClickable(linkPage.emphasizedLink)).toBe(true);
+        expect(isElementClickable(emphasizedLink)).toBe(true);
     });
 
     it('should check disabled link', () => {
-        const disabledLinkAltText = getAttributeByName(linkPage.disabledLink, 'aria-label');
+        const disabledLinkAltText = getAttributeByName(disabledLink, 'aria-label');
 
-        expect(getAttributeByName(linkPage.disabledLink, 'class')).toContain('disabled');
-        checkDisabledLinkData(linkPage.disabledLink);
+        expect(getAttributeByName(disabledLink, 'class')).toContain('disabled');
+        checkDisabledLinkData(disabledLink);
         expect(disabledLinkAltText).toEqual(defaultLink_alt_text);
-        expect(isElementClickable(linkPage.disabledLink)).toBe(false);
+        expect(isElementClickable(disabledLink)).toBe(false);
     });
 
     it('should check disabled emphasized link', () => {
-        const disabledEmphasizedLinkAltText = getAttributeByName(linkPage.emphasizedDisabledLink, 'aria-label');
+        const disabledEmphasizedLinkAltText = getAttributeByName(emphasizedDisabledLink, 'aria-label');
 
-        expect(getAttributeByName(linkPage.emphasizedDisabledLink, 'class'))
+        expect(getAttributeByName(emphasizedDisabledLink, 'class'))
             .toContain('disabled', 'emphasized');
-        checkDisabledLinkData(linkPage.emphasizedDisabledLink);
+        checkDisabledLinkData(emphasizedDisabledLink);
         expect(disabledEmphasizedLinkAltText).toEqual(defaultLink_alt_text);
-        expect(isElementClickable(linkPage.emphasizedDisabledLink)).toBe(false);
+        expect(isElementClickable(emphasizedDisabledLink)).toBe(false);
     });
 
     it('should check inverted link', () => {
-        const invertedLinkAltText = getAttributeByName(linkPage.invertedLink, 'aria-label');
+        const invertedLinkAltText = getAttributeByName(invertedLink, 'aria-label');
 
-        scrollIntoView(linkPage.invertedLink);
-        mouseHoverElement(linkPage.invertedLink);
-        expect(getAttributeByName(linkPage.invertedLink, 'class')).toContain('inverted');
-        checkLinkData(linkPage.invertedLink);
-        checkLinkHover(linkPage.invertedLink);
+        scrollIntoView(invertedLink);
+        mouseHoverElement(invertedLink);
+        expect(getAttributeByName(invertedLink, 'class')).toContain('inverted');
+        checkLinkData(invertedLink);
+        checkLinkHover(invertedLink);
         expect(invertedLinkAltText).toBe(defaultLink_alt_text);
-        expect(isElementClickable(linkPage.invertedLink)).toBe(true);
+        expect(isElementClickable(invertedLink)).toBe(true);
     });
 
     it('should check truncated link', () => {
-        const truncatedLinkAltText = getAttributeByName(linkPage.truncatedLink, 'aria-label');
+        const truncatedLinkAltText = getAttributeByName(truncatedLink, 'aria-label');
 
-        scrollIntoView(linkPage.truncatedLink);
-        mouseHoverElement(linkPage.truncatedLink);
-        expect(getAttributeByName(linkPage.truncatedLink, 'class')).toContain('truncate');
-        checkLinkData(linkPage.truncatedLink);
-        checkLinkHover(linkPage.truncatedLink);
+        scrollIntoView(truncatedLink);
+        mouseHoverElement(truncatedLink);
+        expect(getAttributeByName(truncatedLink, 'class')).toContain('truncate');
+        checkLinkData(truncatedLink);
+        checkLinkHover(truncatedLink);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
-        expect(isElementClickable(linkPage.truncatedLink)).toBe(true);
+        expect(isElementClickable(truncatedLink)).toBe(true);
         linkPage.open();
-        waitForElDisplayed(linkPage.iconLink);
+        waitForElDisplayed(iconLink);
     });
 
     it('should check link navigation to new page', () => {
-        waitForElDisplayed(linkPage.iconLink);
-        checkLinkTarget(linkPage.iconLink, googleLink, 'input[type="text"]');
+        waitForElDisplayed(iconLink);
+        checkLinkTarget(iconLink, googleLink, 'input[type="text"]');
         linkPage.open();
-        waitForElDisplayed(linkPage.iconLink);
+        waitForElDisplayed(iconLink);
     }, 2);
 
     it('should check orientation', () => {
         linkPage.checkRtlSwitch();
+    });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            linkPage.saveExampleBaselineScreenshot('link');
+            expect(linkPage.compareWithBaseline('link')).toBeLessThan(1);
+        });
     });
 });
 

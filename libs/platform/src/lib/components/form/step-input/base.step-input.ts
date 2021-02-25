@@ -132,18 +132,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     @Input()
     decrementLabel: string = this.config.decrementLabel;
 
-    /**
-     * ARIA label for input element
-     */
-    @Input()
-    ariaLabel = 'Step input';
-
-    /**
-     * ARIA labelledby for input element
-     */
-    @Input()
-    ariaLabelledby: string;
-
     /** Emits new value when control value has changed */
     @Output()
     valueChange: EventEmitter<StepInputChangeEvent> = new EventEmitter<StepInputChangeEvent>();

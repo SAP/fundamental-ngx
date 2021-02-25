@@ -1,22 +1,25 @@
-<fd-segmented-button style="margin-bottom: 1rem;">
-    <button fd-button (click)="showHideCard('card1')">
-        {{ card1Visibility ? 'Hide Card1' : 'Show Card1' }}
+<fd-segmented-button style="margin-bottom: 1rem;"
+                     [toggle]="true"
+                     [(ngModel)]="cardsHidden"
+                     (ngModelChange)="update()">
+    <button fd-button value="card1">
+        {{ !isHidden('card1') ? 'Hide Card1' : 'Show Card1' }}
     </button>
-    <button fd-button (click)="showHideCard('card2')">
-        {{ card2Visibility ? 'Hide Card2' : 'Show Card2' }}
+    <button fd-button value="card2">
+        {{ !isHidden('card2') ? 'Hide Card2' : 'Show Card2' }}
     </button>
-    <button fd-button (click)="showHideCard('card3')">
-        {{ card3Visibility ? 'Hide Card3' : 'Show Card3' }}
+    <button fd-button value="card3">
+        {{ !isHidden('card3') ? 'Hide Card3' : 'Show Card3' }}
     </button>
 </fd-segmented-button>
 
 <div #carousel style="display: flex; justify-content: center;">
     <fd-carousel [visibleSlidesCount]="visibleSlidesCount" [width]="width">
-        <fd-carousel-item *ngIf="card1Visibility">
+        <fd-carousel-item *ngIf="!isHidden('card1')">
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://placeimg.com/400/400/nature/4/"></fd-avatar>
+                        <fd-avatar image="http://placeimg.com/400/400/nature/4/" circle="true" size="s"></fd-avatar>
                         <h2 fd-card-title>Card One</h2>
                         <h3 fd-card-subtitle>Card One Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -49,11 +52,11 @@
             </div>
         </fd-carousel-item>
 
-        <fd-carousel-item *ngIf="card2Visibility">
+        <fd-carousel-item *ngIf="!isHidden('card2')">
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://placeimg.com/400/400/nature/4/"></fd-avatar>
+                        <fd-avatar image="http://placeimg.com/400/400/nature/4/" circle="true" size="s"></fd-avatar>
                         <h2 fd-card-title>Card Two Title</h2>
                         <h3 fd-card-subtitle>Card Two Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -86,11 +89,11 @@
             </div>
         </fd-carousel-item>
 
-        <fd-carousel-item *ngIf="card3Visibility">
+        <fd-carousel-item *ngIf="!isHidden('card3')">
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://placeimg.com/400/400/nature/4/"></fd-avatar>
+                        <fd-avatar image="http://placeimg.com/400/400/nature/4/" circle="true" size="s"></fd-avatar>
                         <h2 fd-card-title>Card Three Title</h2>
                         <h3 fd-card-subtitle>Card Three Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -127,7 +130,7 @@
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://placeimg.com/400/400/nature/4/"></fd-avatar>
+                        <fd-avatar image="http://placeimg.com/400/400/nature/4/" circle="true" size="s"></fd-avatar>
                         <h2 fd-card-title>Card Four Title</h2>
                         <h3 fd-card-subtitle>Card Four Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -201,7 +204,7 @@
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://placeimg.com/400/400/nature/4/"></fd-avatar>
+                        <fd-avatar image="http://placeimg.com/400/400/nature/4/" circle="true" size="s"></fd-avatar>
                         <h2 fd-card-title>Card Six Title</h2>
                         <h3 fd-card-subtitle>Card Six Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -238,7 +241,7 @@
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://placeimg.com/400/400/nature/4/"></fd-avatar>
+                        <fd-avatar image="http://placeimg.com/400/400/nature/4/" circle="true" size="s"></fd-avatar>
                         <h2 fd-card-title>Card Seven Title</h2>
                         <h3 fd-card-subtitle>Card Seven Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -275,7 +278,7 @@
             <div style="width: 300px; padding: 1rem;">
                 <fd-card badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://placeimg.com/400/400/nature/4/"></fd-avatar>
+                        <fd-avatar image="http://placeimg.com/400/400/nature/4/" circle="true" size="s"></fd-avatar>
                         <h2 fd-card-title>Card Eight Title</h2>
                         <h3 fd-card-subtitle>Card Eight Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>

@@ -18,7 +18,7 @@ export class InitialFocusDirective implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.enabled) {
-            this._focusFirstTabbableElement();
+            setTimeout(() => this._focusFirstTabbableElement())
         }
     }
 

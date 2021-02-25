@@ -8,6 +8,7 @@ import { Media } from '@fundamental-ngx/platform';
 export class PlatformThumbnailHorizontalExampleComponent {
 
     data: Media[] = [{
+        title: 'Nature Details',
         thumbnailUrl: '//picsum.photos/id/316/600',
         mediaType: 'image',
         mediaUrl: '//picsum.photos/id/316/600',
@@ -15,6 +16,7 @@ export class PlatformThumbnailHorizontalExampleComponent {
         label: 'nature'
     },
     {
+        title: 'Animal Details',
         thumbnailUrl: '//picsum.photos/id/317/600',
         mediaType: 'image',
         mediaUrl: '//picsum.photos/id/317/600',
@@ -22,6 +24,7 @@ export class PlatformThumbnailHorizontalExampleComponent {
         label: 'animal'
     },
     {
+        title: 'Culture Details',
         thumbnailUrl: '//picsum.photos/id/318/600',
         mediaType: 'image',
         mediaUrl: '//picsum.photos/id/318/600',
@@ -29,6 +32,7 @@ export class PlatformThumbnailHorizontalExampleComponent {
         label: 'culture'
     },
     {
+        title: 'Sports Details',
         thumbnailUrl: '//picsum.photos/id/319/600',
         mediaType: 'image',
         mediaUrl: '//picsum.photos/id/319/600',
@@ -36,6 +40,7 @@ export class PlatformThumbnailHorizontalExampleComponent {
         label: 'sports'
     },
     {
+        title: 'Art Details',
         thumbnailUrl: '//picsum.photos/id/321/600',
         mediaType: 'image',
         mediaUrl: '//picsum.photos/id/321/600',

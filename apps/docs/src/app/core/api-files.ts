@@ -194,7 +194,6 @@ export const API_FILES = {
         'PopoverBodySubheaderDirective',
         'PopoverBodyFooterDirective'
     ],
-    popoverDirective: ['PopoverDirective'],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
     quickView: [
@@ -264,6 +263,7 @@ export const API_FILES = {
         'TabSeparator',
         'TabInfo',
     ],
+    text: ['TextComponent'],
     tile: [
         'TileComponent',
         'TileHeaderDirective',
@@ -304,6 +304,7 @@ export const API_FILES = {
     title: ['TitleComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
+    slider: ['SliderComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',

@@ -7,8 +7,8 @@
         <div fd-form-item>
             <label fd-form-label for="name">
                 <span i18n="@@platformUploadCollection.NewFolder.InputLabel"> Name of new folder inside of </span>
-                <span *ngIf="currentFolder">"{{ currentFolder.name }}"</span>
-                <span *ngIf="!currentFolder" i18n="@@platformUploadCollection.NewFolder.InputLabel.AllFiles">
+                <span *ngIf="_currentFolder">"{{ _currentFolder.name }}"</span>
+                <span *ngIf="!_currentFolder" i18n="@@platformUploadCollection.NewFolder.InputLabel.AllFiles">
                     All files
                 </span>:
             </label>
@@ -21,21 +21,23 @@
                 i18n-placeholder
                 placeholder="Type here..."
             />
+            <span
+                *ngIf="_newFolderName.length > _maxFilenameLength"
+                fd-object-status
+                status="negative"
+                i18n-label="@@platformUploadCollection.NewFolder.Input.Error.Label"
+                [label]="'Maximum ' + _maxFilenameLength + ' characters allowed'"
+                i18n-title="@@platformUploadCollection.NewFolder.Input.Error.Title"
+                [attr.title]="'Maximum ' + _maxFilenameLength + ' characters allowed'"
+                i18n-aria-label="@@platformUploadCollection.NewFolder.Input.Error.AriaLabel"
+                [attr.aria-label]="'Maximum ' + _maxFilenameLength + ' characters allowed'"
+            ></span>
         </div>
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-button-bar
-                fdType="emphasized"
-                i18n-label
-                label="Create"
-                (click)="dialogRef.close(_newFolderName)">
+        <fd-button-bar fdType="emphasized" i18n-label label="Create" [disabled]="_newFolderName.length > _maxFilenameLength" (click)="dialogRef.close(_newFolderName)">
         </fd-button-bar>
-        <fd-button-bar
-                fd-initial-focus
-                i18n-label
-                label="Cancel"
-                (click)="dialogRef.dismiss()">
-        </fd-button-bar>
+        <fd-button-bar fd-initial-focus i18n-label label="Cancel" (click)="dialogRef.dismiss()"> </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

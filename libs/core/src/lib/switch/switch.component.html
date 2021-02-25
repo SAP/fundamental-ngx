@@ -1,26 +1,26 @@
-<label 
-    class="fd-switch" 
-    (click)="focus()" 
-    [ngStyle]="{ cursor: disabled ? 'auto' : 'pointer'}"
+<label
+    class="fd-switch"
+    (click)="focus()"
+    [style.cursor]="disabled ? 'auto' : 'pointer'"
     [class.fd-switch--compact]="compact"
     [class.fd-switch--semantic]="semantic"
     [class.is-disabled]="disabled"
+    [attr.aria-label]="ariaLabel"
 >
     <span *ngIf="activeText || inactiveText" class="fd-switch__text">
-        {{isChecked ? activeText : inactiveText}}
+        {{ isChecked ? activeText : inactiveText }}
     </span>
     <span class="fd-switch__control">
         <input
             #switchInput
             class="fd-switch__input"
             type="checkbox"
-            role="checkbox"
+            role="switch"
             [id]="innerInputId"
             [name]="name"
             [disabled]="disabled"
             [attr.aria-checked]="checked"
-            [attr.aria-label]="ariaLabel"
-            [attr.aria-labelledby]="ariaLabelledby"
+            [attr.aria-labelledby]="ariaLabelledby + ' ' + (semantic ? _semanticLabelId : '')"
             [(ngModel)]="isChecked"
         />
         <div class="fd-switch__slider">
@@ -28,13 +28,24 @@
                 <i
                     *ngIf="semantic"
                     role="presentation"
-                    class="fd-switch__icon fd-switch__icon--on sap-icon--accept"></i>
+                    class="fd-switch__icon fd-switch__icon--on sap-icon--accept"
+                ></i>
                 <span class="fd-switch__handle" role="presentation"></span>
                 <i
                     *ngIf="semantic"
                     role="presentation"
-                    class="fd-switch__icon--off fd-switch__icon sap-icon--decline"></i>
+                    class="fd-switch__icon--off fd-switch__icon sap-icon--decline"
+                ></i>
             </div>
+
+            <span
+                *ngIf="semantic"
+                [id]="_semanticLabelId"
+                aria-hidden="true"
+                class="fd-switch__invisible-text"
+            >
+                {{ checked ? semanticAcceptLabel : semanticDeclineLabel }}
+            </span>
         </div>
     </span>
 </label>

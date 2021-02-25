@@ -17,15 +17,20 @@ import { MultiInputPo } from '../pages/multi-input.po';
 
 describe('Multi input test suite', function() {
     const multiInputPage: MultiInputPo = new MultiInputPo();
+    const {
+        mobileMainInput, expandedDropdown, activeDropdownButtons, allDropdownButtons, disabledDropdownButtons,
+        activeInputs, mobileInput, disabledInputs, filledInput, approveButton, groupHeader, groupDropdown, options,
+        dropdownOptions, selectedToken, crossButton, dropdownOptionText, dropdownOptionTextValueHelp
+    } = multiInputPage;
 
     beforeAll(() => {
         multiInputPage.open();
-        waitForPresent(multiInputPage.mobileMainInput);
+        waitForPresent(mobileMainInput);
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(multiInputPage.allDropdownButtons);
+        waitForPresent(allDropdownButtons);
     }, 1);
 
     it('Verify multi input allows user to enter multiple values', () => {
@@ -34,28 +39,28 @@ describe('Multi input test suite', function() {
             return;
         }
 
-        const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropdownButtons);
+        const activeButtonsQuantity = getElementArrayLength(activeDropdownButtons);
         for (let i = 0; i < activeButtonsQuantity; i++) {
             if (i !== activeButtonsQuantity - 2) {
-                multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
                 multiInputPage.selectOption(optionsArr[0]);
-                multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
+                multiInputPage.expandDropdown(activeDropdownButtons, i);
                 multiInputPage.selectOption(optionsArr[1]);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
+                expect(getText(filledInput, i)).toContain(optionsArr[0]);
+                expect(getText(filledInput, i)).toContain(optionsArr[1]);
+                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             } else {
-                multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
                 multiInputPage.selectOption(optionsArr[0]);
                 multiInputPage.selectOption(optionsArr[1]);
-                click(multiInputPage.approveButton);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[1]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
+                click(approveButton);
+                expect(getText(filledInput, i)).toContain(optionsArr[0]);
+                expect(getText(filledInput, i)).toContain(optionsArr[1]);
+                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                expect(getText(filledInput, i).split('\n')[1]).toBe(optionsArr[1]);
             }
         }
     });
@@ -65,12 +70,12 @@ describe('Multi input test suite', function() {
     });
 
     it('Verify group headers are not interactive', () => {
-        const headersQuantity = getElementArrayLength(multiInputPage.groupHeader);
-        multiInputPage.expandDropdown(multiInputPage.groupDropdown);
+        const headersQuantity = getElementArrayLength(groupHeader);
+        multiInputPage.expandDropdown(groupDropdown);
         for (let i = 0; i < headersQuantity; i++) {
-            scrollIntoView(multiInputPage.groupHeader, i);
-            click(multiInputPage.groupHeader, i);
-            waitForElDisplayed(multiInputPage.expandedDropdown);
+            scrollIntoView(groupHeader, i);
+            click(groupHeader, i);
+            waitForElDisplayed(expandedDropdown);
         }
     });
 
@@ -79,13 +84,13 @@ describe('Multi input test suite', function() {
             console.log('Skip for IE and Safari');
             return;
         }
-        const inputQuantity = getElementArrayLength(multiInputPage.activeInputs);
+        const inputQuantity = getElementArrayLength(activeInputs);
         for (let i = 0; i < inputQuantity - 2; i++) {
-            multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
-            const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
-            setValue(multiInputPage.activeInputs, optionsArr[0].substring(0, 2), i);
+            multiInputPage.expandDropdown(activeDropdownButtons, i);
+            const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
+            setValue(activeInputs, optionsArr[0].substring(0, 2), i);
             multiInputPage.selectOption(optionsArr[0]);
-            expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
+            expect(getText(filledInput, i)).toContain(optionsArr[0]);
         }
     });
 
@@ -95,25 +100,25 @@ describe('Multi input test suite', function() {
             return;
         }
 
-        const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropdownButtons);
+        const activeButtonsQuantity = getElementArrayLength(activeDropdownButtons);
         for (let i = 0; i < activeButtonsQuantity; i++) {
             if (i !== activeButtonsQuantity - 2) {
-                multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
                 multiInputPage.selectOption(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                scrollIntoView(multiInputPage.crossButton(optionsArr[0]));
-                click(multiInputPage.crossButton(optionsArr[0]));
-                expect(multiInputPage.crossButton(optionsArr[0])).not.toBeDisplayed();
+                expect(getText(filledInput, i)).toContain(optionsArr[0]);
+                scrollIntoView(crossButton(optionsArr[0]));
+                click(crossButton(optionsArr[0]));
+                expect(crossButton(optionsArr[0])).not.toBeDisplayed();
             } else {
-                multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
                 multiInputPage.selectOption(optionsArr[0]);
-                click(multiInputPage.approveButton);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                scrollIntoView(multiInputPage.crossButton(optionsArr[0]));
-                click(multiInputPage.crossButton(optionsArr[0]));
-                expect(multiInputPage.crossButton(optionsArr[0])).not.toBeDisplayed();
+                click(approveButton);
+                expect(getText(filledInput, i)).toContain(optionsArr[0]);
+                scrollIntoView(crossButton(optionsArr[0]));
+                click(crossButton(optionsArr[0]));
+                expect(crossButton(optionsArr[0])).not.toBeDisplayed();
             }
         }
     });
@@ -123,28 +128,28 @@ describe('Multi input test suite', function() {
             console.log('Skip for IE and Safari');
             return;
         }
-        multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, 1);
-        const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
-        click(multiInputPage.activeDropdownButtons, 1);
-        setValue(multiInputPage.activeInputs, optionsArr[1].substring(0, 3), 1);
-        let filteredOptions = getElementArrayLength(multiInputPage.dropdownOption);
+        multiInputPage.expandDropdown(activeDropdownButtons, 1);
+        const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
+        click(activeDropdownButtons, 1);
+        setValue(activeInputs, optionsArr[1].substring(0, 3), 1);
+        let filteredOptions = getElementArrayLength(dropdownOptions);
         for (let j = 0; j < filteredOptions; j++) {
-            const dropdownOption = getText(multiInputPage.dropdownOptionTextValueHelp, j);
+            const dropdownOption = getText(dropdownOptionTextValueHelp, j);
             expect(dropdownOption).toContain(optionsArr[1].substring(0, 3));
         }
         scrollIntoView(multiInputPage.activeInputs, 0);
-        multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, 0);
-        setValue(multiInputPage.activeInputs, optionsArr[0].substring(0, 3), 0);
-        filteredOptions = getElementArrayLength(multiInputPage.dropdownOption);
+        multiInputPage.expandDropdown(activeDropdownButtons, 0);
+        setValue(activeInputs, optionsArr[0].substring(0, 3), 0);
+        filteredOptions = getElementArrayLength(dropdownOptions);
         for (let j = 0; j < filteredOptions; j++) {
-            const dropdownOption = getText(multiInputPage.dropdownOptionText, j);
+            const dropdownOption = getText(dropdownOptionText, j);
             expect(dropdownOption).toContain(optionsArr[0].substring(0, 3));
         }
-        multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, 4);
-        setValue(multiInputPage.mobileInput, optionsArr[4].substring(0, 3));
-        filteredOptions = getElementArrayLength(multiInputPage.dropdownOption);
+        multiInputPage.expandDropdown(activeDropdownButtons, 4);
+        setValue(mobileInput, optionsArr[4].substring(0, 3));
+        filteredOptions = getElementArrayLength(dropdownOptions);
         for (let j = 0; j < filteredOptions; j++) {
-            const dropdownOption = getText(multiInputPage.dropdownOptionTextValueHelp, j);
+            const dropdownOption = getText(dropdownOptionTextValueHelp, j);
             expect(dropdownOption).toContain(optionsArr[4].substring(0, 3));
         }
     });
@@ -155,36 +160,43 @@ describe('Multi input test suite', function() {
             return;
         }
 
-        const activeButtonsQuantity = getElementArrayLength(multiInputPage.activeDropdownButtons);
+        const activeButtonsQuantity = getElementArrayLength(activeDropdownButtons);
         for (let i = 0; i < activeButtonsQuantity; i++) {
             if (i !== activeButtonsQuantity - 2) {
-                multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
                 multiInputPage.selectOption(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                click(multiInputPage.selectedToken);
+                expect(getText(filledInput, i)).toContain(optionsArr[0]);
+                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                click(selectedToken);
                 sendKeys(['Backspace', 'Backspace']);
-                expect(multiInputPage.selectedToken).not.toBeDisplayed();
+                expect(selectedToken).not.toBeDisplayed();
             } else {
-                multiInputPage.expandDropdown(multiInputPage.activeDropdownButtons, i);
-                const optionsArr = getAttributeByNameArr(multiInputPage.options, 'ng-reflect-title');
+                multiInputPage.expandDropdown(activeDropdownButtons, i);
+                const optionsArr = getAttributeByNameArr(options, 'ng-reflect-title');
                 multiInputPage.selectOption(optionsArr[0]);
-                click(multiInputPage.approveButton);
-                expect(getText(multiInputPage.filledInput, i)).toContain(optionsArr[0]);
-                expect(getText(multiInputPage.filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
-                click(multiInputPage.selectedToken);
+                click(approveButton);
+                expect(getText(filledInput, i)).toContain(optionsArr[0]);
+                expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
+                click(selectedToken);
                 sendKeys(['Backspace', 'Backspace']);
-                expect(multiInputPage.selectedToken).not.toBeDisplayed();
+                expect(selectedToken).not.toBeDisplayed();
             }
         }
     });
 
     it('Verify inputs should have placeholder', () => {
-        const activeInputsQuantity = getElementArrayLength(multiInputPage.activeInputs);
+        const activeInputsQuantity = getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsQuantity; i++) {
             expect(placeholderValue).toContain(getAttributeByName
-            (multiInputPage.activeInputs, 'placeholder', i));
+            (activeInputs, 'placeholder', i));
         }
+    });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            multiInputPage.saveExampleBaselineScreenshot('multi-input');
+            expect(multiInputPage.compareWithBaseline('multi-input')).toBeLessThan(1);
+        });
     });
 });

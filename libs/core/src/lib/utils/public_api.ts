@@ -1,6 +1,7 @@
 export * from './directives/template/template.directive';
 export * from './directives/template/template.module';
 export * from './directives/only-digits/only-digits.directive';
+export * from './directives/only-digits/only-digits.module';
 export * from './directives/resize/resize.directive';
 export * from './directives/resize/resize-handle.directive';
 export * from './directives/resize/resize.module';

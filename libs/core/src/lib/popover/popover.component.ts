@@ -144,6 +144,8 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     triggerKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
             this.open();
+            event.preventDefault();
+            event.stopPropagation();
         }
     }
 }

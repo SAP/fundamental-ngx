@@ -1,0 +1,21 @@
+$block: approval-flow;
+
+
+fd-dialog {
+    fd-dialog-body {
+        height: 433px;
+
+        .fd-list__item {
+            cursor: pointer;
+        }
+
+        &.#{$block}__dialog-body--auto-height {
+            height: auto;
+        }
+    }
+}
+
+
+.#{$block}__select-approvers-container {
+    width: 288px;
+}

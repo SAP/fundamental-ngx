@@ -15,105 +15,114 @@ import { ThumbnailPo } from '../pages/thumbnail.po';
 
 describe('Thumbnail field', function() {
     const thumbnailPage: ThumbnailPo = new ThumbnailPo();
+    const {
+        mainImage, mainVideo, verticalGalleryImages, horizontalGalleryImages, verticalGalleryVideo
+    } = thumbnailPage;
 
     beforeAll(() => {
         thumbnailPage.open();
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(thumbnailPage.mainImage);
-    });
+        waitForPresent(mainImage);
+    }, 1);
 
     it('should be able to view all thumbnail images', () => {
-        waitForPresent(thumbnailPage.mainImage);
-        waitForElDisplayed(thumbnailPage.mainImage);
-        expect(isElementDisplayed(thumbnailPage.mainImage)).toBeTrue();
-        expect(isElementDisplayed(thumbnailPage.mainImage, 1)).toBeTrue();
-        expect(isElementDisplayed(thumbnailPage.mainVideo)).toBeTrue();
+        waitForPresent(mainImage);
+        waitForElDisplayed(mainImage);
+        expect(isElementDisplayed(mainImage)).toBeTrue();
+        expect(isElementDisplayed(mainImage, 1)).toBeTrue();
+        expect(isElementDisplayed(mainVideo)).toBeTrue();
     });
 
     it('should be able to display images vertical', () => {
-        scrollIntoView(thumbnailPage.verticalGalleryImages);
-        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
+        scrollIntoView(verticalGalleryImages);
+        const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength - 1 > i; i++) {
-            expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).x)
-                .toEqual(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).x);
-            expect(getElementLocation(thumbnailPage.verticalGalleryImages, i).y)
-                .toBeLessThan(getElementLocation(thumbnailPage.verticalGalleryImages, i + 1).y);
+            expect(getElementLocation(verticalGalleryImages, i).x)
+                .toEqual(getElementLocation(verticalGalleryImages, i + 1).x);
+            expect(getElementLocation(verticalGalleryImages, i).y)
+                .toBeLessThan(getElementLocation(verticalGalleryImages, i + 1).y);
         }
     });
 
     it('should be able to display images horizontal', () => {
-        scrollIntoView(thumbnailPage.horizontalGalleryImages);
-        const arrLength = getElementArrayLength(thumbnailPage.horizontalGalleryImages);
+        scrollIntoView(horizontalGalleryImages);
+        const arrLength = getElementArrayLength(horizontalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
             if (i !== arrLength - 1) {
-                expect(getElementLocation(thumbnailPage.horizontalGalleryImages, i).y)
-                    .toEqual(getElementLocation(thumbnailPage.horizontalGalleryImages, i + 1).y);
-                expect(getElementLocation(thumbnailPage.horizontalGalleryImages, i).x)
-                    .toBeLessThan(getElementLocation(thumbnailPage.horizontalGalleryImages, i + 1).x);
+                expect(getElementLocation(horizontalGalleryImages, i).y)
+                    .toEqual(getElementLocation(horizontalGalleryImages, i + 1).y);
+                expect(getElementLocation(horizontalGalleryImages, i).x)
+                    .toBeLessThan(getElementLocation(horizontalGalleryImages, i + 1).x);
             }
         }
     });
 
     it('should be able to display vertical for video gallery', () => {
-        scrollIntoView(thumbnailPage.verticalGalleryVideo);
-        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryVideo);
+        scrollIntoView(verticalGalleryVideo);
+        const arrLength = getElementArrayLength(verticalGalleryVideo);
         for (let i = 0; arrLength > i; i++) {
             if (i !== arrLength - 1) {
-                expect(getElementLocation(thumbnailPage.verticalGalleryVideo, i).x)
-                    .toEqual(getElementLocation(thumbnailPage.verticalGalleryVideo, i + 1).x);
-                expect(getElementLocation(thumbnailPage.verticalGalleryVideo, i).y)
-                    .toBeLessThan(getElementLocation(thumbnailPage.verticalGalleryVideo, i + 1).y);
+                expect(getElementLocation(verticalGalleryVideo, i).x)
+                    .toEqual(getElementLocation(verticalGalleryVideo, i + 1).x);
+                expect(getElementLocation(verticalGalleryVideo, i).y)
+                    .toBeLessThan(getElementLocation(verticalGalleryVideo, i + 1).y);
             }
         }
     });
 
     it('should on click display image for vertical', () => {
-        scrollIntoView(thumbnailPage.verticalGalleryImages);
-        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
+        scrollIntoView(verticalGalleryImages);
+        const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
-            const imageUrl = getAttributeByName(thumbnailPage.verticalGalleryImages, 'ng-reflect-image', i);
-            click(thumbnailPage.verticalGalleryImages, i);
-            expect(getAttributeByName(thumbnailPage.mainImage, 'src', 0)).toContain(imageUrl);
+            const imageUrl = getAttributeByName(verticalGalleryImages, 'ng-reflect-image', i);
+            click(verticalGalleryImages, i);
+            expect(getAttributeByName(mainImage, 'src', 0)).toContain(imageUrl);
         }
     });
 
     it('should on click display image for horizontal', () => {
-        scrollIntoView(thumbnailPage.horizontalGalleryImages);
-        const arrLength = getElementArrayLength(thumbnailPage.horizontalGalleryImages);
+        scrollIntoView(horizontalGalleryImages);
+        const arrLength = getElementArrayLength(horizontalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
-            const imageUrl = getAttributeByName(thumbnailPage.horizontalGalleryImages, 'ng-reflect-image', i);
-            click(thumbnailPage.horizontalGalleryImages, i);
-            expect(getAttributeByName(thumbnailPage.mainImage, 'src', 1)).toContain(imageUrl);
+            const imageUrl = getAttributeByName(horizontalGalleryImages, 'ng-reflect-image', i);
+            click(horizontalGalleryImages, i);
+            expect(getAttributeByName(mainImage, 'src', 1)).toContain(imageUrl);
         }
     });
 
     it('should highlight on hover', () => {
-        scrollIntoView(thumbnailPage.verticalGalleryImages);
-        const arrLength = getElementArrayLength(thumbnailPage.verticalGalleryImages);
+        scrollIntoView(verticalGalleryImages);
+        const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
-            scrollIntoView(thumbnailPage.verticalGalleryImages, i);
-            mouseHoverElement(thumbnailPage.verticalGalleryImages, i);
-            expect(getParentElementCSSProperty(thumbnailPage.verticalGalleryImages, 'border-bottom-color', i)).toContain('8,84,160');
+            scrollIntoView(verticalGalleryImages, i);
+            mouseHoverElement(verticalGalleryImages, i);
+            expect(getParentElementCSSProperty(verticalGalleryImages, 'border-bottom-color', i)).toContain('8,84,160');
         }
 
         for (let i = 0; arrLength > i; i++) {
-            scrollIntoView(thumbnailPage.horizontalGalleryImages, i);
-            mouseHoverElement(thumbnailPage.horizontalGalleryImages, i);
-            expect(getParentElementCSSProperty(thumbnailPage.horizontalGalleryImages, 'border-bottom-color', i)).toContain('8,92,175');
+            scrollIntoView(horizontalGalleryImages, i);
+            mouseHoverElement(horizontalGalleryImages, i);
+            expect(getParentElementCSSProperty(horizontalGalleryImages, 'border-bottom-color', i)).toContain('8,92,175');
         }
 
         for (let i = 0; arrLength > i; i++) {
-            scrollIntoView(thumbnailPage.verticalGalleryVideo, i);
-            mouseHoverElement(thumbnailPage.verticalGalleryVideo, i);
-            expect(getParentElementCSSProperty(thumbnailPage.verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
+            scrollIntoView(verticalGalleryVideo, i);
+            mouseHoverElement(verticalGalleryVideo, i);
+            expect(getParentElementCSSProperty(verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
         }
-
     });
 
     it('should have rtl orientation', () => {
         thumbnailPage.checkRtlSwitch();
+    });
+
+    xdescribe('Check visual regression', function() {
+        xit('should check examples visual regression', () => {
+            thumbnailPage.saveExampleBaselineScreenshot('thumbnail');
+            expect(thumbnailPage.compareWithBaseline('thumbnail')).toBeLessThan(2);
+        });
     });
 });
