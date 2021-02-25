@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.24...v0.28.0-rc.25) (2021-02-25)
+
+
+### Bug Fixes
+
+* selecting multi-input option should clear search term ([#4749](https://github.com/SAP/fundamental-ngx/issues/4749)) ([76de40d](https://github.com/SAP/fundamental-ngx/commit/76de40d9dafe2383c0237af83a35c8eae76a1716))
+
 ## [0.28.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.28.0-rc.23...v0.28.0-rc.24) (2021-02-25)
 
 
