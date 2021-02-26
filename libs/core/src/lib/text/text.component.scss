@@ -1,0 +1,17 @@
+@import '~fundamental-styles/dist/text';
+
+// ToDo: replace these styles to the styles library
+$block: fd-text;
+
+.#{$block} {
+    &__lineclamp {
+        display: block;
+    }
+
+    &__link {
+        &--more {
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+    }
+}

@@ -8,24 +8,12 @@ import {
     refreshPage,
     waitForElDisplayed
 } from '../../driver/wdio';
-import formattedTextData from '../fixtures/appData/formatted-text-content';
+import {anchor_href, custom_style_1, custom_style_2, custom_style_2_FF, google_link_href,
+html_input_second, html_input_text, loripsum_link_href, sap_link_href, target_blank, target_self} from '../fixtures/appData/formatted-text-content';
 
 describe('Formatted text component', function() {
     const formattedTextPage = new FormattedTextPo();
     const { redListItem, convertedLinks, inputHtmlText, secondInputHtmlText } = new FormattedTextPo();
-    const {
-        html_input_text,
-        html_input_second,
-        loripsum_link_href,
-        target_blank,
-        custom_style_1,
-        custom_style_2,
-        sap_link_href,
-        target_self,
-        anchor_href,
-        google_link_href,
-        custom_style_2_FF
-    } = formattedTextData;
 
     beforeAll(() => {
         formattedTextPage.open();

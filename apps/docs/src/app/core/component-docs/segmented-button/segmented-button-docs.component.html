@@ -1,65 +1,46 @@
-<fd-docs-section-title [id]="'Button-l'" [componentName]="'segmentedButton'">
-    Default Size with selected</fd-docs-section-title
->
+<fd-docs-section-title id="basic" componentName="segmentedButton">
+    Default
+</fd-docs-section-title>
+<description>
+    With default SegmentedButton you can communicate by <code>[(ngModel)]</code> with string value.
+    Which means that only one button can be toggled at once
+</description>
 <component-example>
     <fd-segmented-button-default-example></fd-segmented-button-default-example>
 </component-example>
 <code-example [exampleFiles]="defaultSizeHtml"></code-example>
 <separator></separator>
 
-<fd-docs-section-title [id]="'Button-2'" [componentName]="'segmentedButton'">
-    Default Size with toggle</fd-docs-section-title
->
+<fd-docs-section-title id="toggle" componentName="segmentedButton">
+    Toggle
+</fd-docs-section-title>
+<description>
+    With Toggle SegmentedButton you can communicate by <code>[(ngModel)]</code> with array of strings value.
+    So more than one button can be toggled at once.
+</description>
 <component-example>
     <fd-segmented-button-toggle-example></fd-segmented-button-toggle-example>
 </component-example>
 <code-example [exampleFiles]="defaultToggleHtml"></code-example>
 <separator></separator>
 
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fd-segmented-button>
-        <button
-            *ngIf="data.properties.label1.length > 0"
-            fd-button
-            [compact]="data.properties.compact"
-            [class]="data.properties.state1"
-        >
-            {{ data.properties.label1 }}
-        </button>
-        <button
-            *ngIf="data.properties.label2.length > 0"
-            fd-button
-            [label]="data.properties.label2"
-            [compact]="data.properties.compact"
-            [class]="data.properties.state2">
-        </button>
-        <button
-            *ngIf="data.properties.label3.length > 0"
-            fd-button
-            [label]="data.properties.label3"
-            [compact]="data.properties.compact"
-            [class]="data.properties.state3">
-        </button>
-        <button
-            *ngIf="data.properties.icon4.length > 0"
-            fd-button
-            [glyph]="data.properties.icon4"
-            [compact]="data.properties.compact"
-            [class]="data.properties.state4"
-        ></button>
-        <button
-            *ngIf="data.properties.icon5.length > 0"
-            fd-button
-            [glyph]="data.properties.icon5"
-            [compact]="data.properties.compact"
-            [class]="data.properties.state5"
-        ></button>
-        <button
-            *ngIf="data.properties.icon6.length > 0"
-            fd-button
-            [glyph]="data.properties.icon6"
-            [compact]="data.properties.compact"
-            [class]="data.properties.state6"
-        ></button>
-    </fd-segmented-button>
-</playground>
+<fd-docs-section-title id="complex" componentName="segmentedButton">
+    Complex
+</fd-docs-section-title>
+<description>
+    Change of value can be detected by handling the <code>(ngModelChange)</code> event.
+</description>
+<component-example>
+    <fd-segmented-button-complex-example></fd-segmented-button-complex-example>
+</component-example>
+<code-example [exampleFiles]="complexExample"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="form" componentName="segmentedButton">
+    Segmented Button in Reactive Form
+</fd-docs-section-title>
+<component-example>
+    <fd-segmented-button-form-example></fd-segmented-button-form-example>
+</component-example>
+<code-example [exampleFiles]="formExample"></code-example>
+<separator></separator>

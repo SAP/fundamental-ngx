@@ -11,8 +11,6 @@ export class LinkPo extends BaseComponentPo {
     readonly emphasizedDisabledLink = 'fdp-platform-link-disabled-emphasized-example a';
     readonly invertedLink = 'fdp-platform-link-inverted-example a';
     readonly truncatedLink = 'fdp-platform-link-truncated-example a';
-    readonly rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-    readonly exampleAreaContainersArr = '.fd-doc-component';
 
     open(): void {
         super.open(this.url);

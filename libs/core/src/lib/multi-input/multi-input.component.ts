@@ -182,6 +182,13 @@ export class MultiInputComponent implements
     @Input()
     includes = false;
 
+    /**
+     * The template with which to display the individual listed items.
+     * Use it by passing an ng-template with implicit content. See examples for more info.
+     */
+    @Input()
+    itemTemplate: TemplateRef<any>;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -350,6 +357,9 @@ export class MultiInputComponent implements
         if (!this.mobile) {
             this._popoverOpenHandle(open);
         }
+        if (!this.open) {
+            this._resetSearchTerm();
+        }
         this._changeDetRef.detectChanges();
     }
 
@@ -378,6 +388,10 @@ export class MultiInputComponent implements
         if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
             this.popoverRef.refreshPosition();
         }
+
+        this._resetSearchTerm();
+
+        this.searchInputElement.nativeElement.focus();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();

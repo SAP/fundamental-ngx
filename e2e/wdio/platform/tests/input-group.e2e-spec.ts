@@ -19,126 +19,134 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
-import inputGroupPContent from '../fixtures/appData/input-group-page-contents';
-import inputGroupTestData from '../fixtures/testData/input-group';
+import {inputWithFormLabel, inputWithFormPlaceholder, standardInputLabels, standardInputPlaceholders} from '../fixtures/appData/input-group-page-contents';
+import {string_value, email_value, numeric_value} from '../fixtures/testData/input-group';
 
 describe('Input Group should', function() {
     const inputGroupPage = new InputGroupPo();
+    const {
+        standartInputLabelsArr, standartInputArr, leftAlignedTextInput, leftAlignedTextInputTextAddon, rightAlignedTextInput,
+        rightAlignedTextInputTextAddon, leftAndRightAlignedTextInput, rightLeftAlignedTextInputTextAddon, buttonInput,
+        buttonInputLeftAndRightTextAddon, buttonInputSubmitButton, iconInput, iconInputEmailIcon, compactGroupInput,
+        compactGroupButtonAddon, compactGroupLeftTextAddon, disabledInput, disabledInputButton, withFormInput,
+        withFormInputTextAddon, withFormInputButtonAddon, withFormInputLabel, withFormInputQuestionMark,
+        withFormInputAsterixMark, withFormInputErrorTooltip, withFormInputInfoTooltip
+    } = inputGroupPage;
 
     beforeAll(() => {
         inputGroupPage.open();
-        waitForPresent(inputGroupPage.leftAlignedTextInput);
+        waitForPresent(leftAlignedTextInput);
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(inputGroupPage.leftAlignedTextInput);
+        waitForPresent(leftAlignedTextInput);
     }, 1);
 
     it('have associated label element to describe its purpose', () => {
-        expect(getTextArr(inputGroupPage.standartInputLabelsArr)).toEqual(inputGroupPContent.standardInputLabels);
-        expect(getText(inputGroupPage.withFormInputLabel)).toEqual(inputGroupPContent.inputWithFormLabel);
+        expect(getTextArr(standartInputLabelsArr)).toEqual(standardInputLabels);
+        expect(getText(withFormInputLabel)).toEqual(inputWithFormLabel);
     });
 
     it('have correct placeholder text', () => {
-        expect(getAttributeByNameArr(inputGroupPage.standartInputArr, 'placeholder'))
-            .toEqual(inputGroupPContent.standardInputPlaceholders);
-        expect(getAttributeByName(inputGroupPage.withFormInput, 'placeholder'))
-            .toEqual(inputGroupPContent.inputWithFormPlaceholder);
+        expect(getAttributeByNameArr(standartInputArr, 'placeholder'))
+            .toEqual(standardInputPlaceholders);
+        expect(getAttributeByName(withFormInput, 'placeholder'))
+            .toEqual(inputWithFormPlaceholder);
     });
 
     it('have left text addon and accept values', () => {
-        waitForElDisplayed(inputGroupPage.leftAlignedTextInputTextAddon);
-        setValue(inputGroupPage.leftAlignedTextInput, inputGroupTestData.numeric_value);
+        waitForElDisplayed(leftAlignedTextInputTextAddon);
+        setValue(leftAlignedTextInput, numeric_value);
 
-        expect(getText(inputGroupPage.leftAlignedTextInputTextAddon)).toContain('$');
-        expect(getValue(inputGroupPage.leftAlignedTextInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getText(leftAlignedTextInputTextAddon)).toContain('$');
+        expect(getValue(leftAlignedTextInput)).toBe(numeric_value);
     });
 
     it('have right text addon and accept values', () => {
-        waitForElDisplayed(inputGroupPage.rightAlignedTextInputTextAddon);
-        setValue(inputGroupPage.rightAlignedTextInput, inputGroupTestData.numeric_value);
+        waitForElDisplayed(rightAlignedTextInputTextAddon);
+        setValue(rightAlignedTextInput, numeric_value);
 
-        expect(getText(inputGroupPage.rightAlignedTextInputTextAddon)).toContain('0.00');
-        expect(getValue(inputGroupPage.rightAlignedTextInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getText(rightAlignedTextInputTextAddon)).toContain('0.00');
+        expect(getValue(rightAlignedTextInput)).toBe(numeric_value);
     });
 
     it('have right and left text addons and accept values', () => {
-        waitForElDisplayed(inputGroupPage.rightLeftAlignedTextInputTextAddon);
-        setValue(inputGroupPage.leftAndRightAlignedTextInput, inputGroupTestData.numeric_value);
+        waitForElDisplayed(rightLeftAlignedTextInputTextAddon);
+        setValue(leftAndRightAlignedTextInput, numeric_value);
 
-        expect(getText(inputGroupPage.rightLeftAlignedTextInputTextAddon)).toContain('$');
-        expect(getText(inputGroupPage.rightLeftAlignedTextInputTextAddon, 1)).toContain('0.00');
-        expect(getValue(inputGroupPage.leftAndRightAlignedTextInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getText(rightLeftAlignedTextInputTextAddon)).toContain('$');
+        expect(getText(rightLeftAlignedTextInputTextAddon, 1)).toContain('0.00');
+        expect(getValue(leftAndRightAlignedTextInput)).toBe(numeric_value);
     });
 
     it('have button, text addons and accept values', () => {
-        waitForElDisplayed(inputGroupPage.buttonInputSubmitButton);
-        setValue(inputGroupPage.buttonInput, inputGroupTestData.numeric_value);
+        waitForElDisplayed(buttonInputSubmitButton);
+        setValue(buttonInput, numeric_value);
 
         // Check if clickable. No logic behind the click
-        expect(getText(inputGroupPage.buttonInputLeftAndRightTextAddon)).toContain('$');
-        expect(getText(inputGroupPage.buttonInputLeftAndRightTextAddon, 1)).toContain('0.00');
-        expect(isElementClickable(inputGroupPage.buttonInputSubmitButton)).toBe(true);
-        expect(getValue(inputGroupPage.buttonInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getText(buttonInputLeftAndRightTextAddon)).toContain('$');
+        expect(getText(buttonInputLeftAndRightTextAddon, 1)).toContain('0.00');
+        expect(isElementClickable(buttonInputSubmitButton)).toBe(true);
+        expect(getValue(buttonInput)).toBe(numeric_value);
     });
 
     it('have icon addon and accept values', () => {
-        waitForElDisplayed(inputGroupPage.iconInputEmailIcon);
-        setValue(inputGroupPage.iconInput, inputGroupTestData.email_value);
+        waitForElDisplayed(iconInputEmailIcon);
+        setValue(iconInput, email_value);
 
-        expect(getValue(inputGroupPage.iconInput)).toBe(inputGroupTestData.email_value);
+        expect(getValue(iconInput)).toBe(email_value);
     });
 
     it('compact have button and text addon', () => {
-        waitForElDisplayed(inputGroupPage.compactGroupInput);
-        setValue(inputGroupPage.compactGroupInput, inputGroupTestData.string_value);
+        waitForElDisplayed(compactGroupInput);
+        setValue(compactGroupInput, string_value);
 
-        expect(getText(inputGroupPage.compactGroupLeftTextAddon)).toContain('$');
-        expect(getText(inputGroupPage.compactGroupButtonAddon)).toContain('Submit');
-        expect(isElementClickable(inputGroupPage.compactGroupButtonAddon)).toBe(true);
-        expect(getValue(inputGroupPage.compactGroupInput)).toBe(inputGroupTestData.string_value);
+        expect(getText(compactGroupLeftTextAddon)).toContain('$');
+        expect(getText(compactGroupButtonAddon)).toContain('Submit');
+        expect(isElementClickable(compactGroupButtonAddon)).toBe(true);
+        expect(getValue(compactGroupInput)).toBe(string_value);
     });
 
     it('compact be smaller than the default', () => {
-        const defaultHeight = getElementSize(inputGroupPage.leftAlignedTextInput);
-        const compactHeight = getElementSize(inputGroupPage.compactGroupInput);
+        const defaultHeight = getElementSize(leftAlignedTextInput);
+        const compactHeight = getElementSize(compactGroupInput);
 
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
     it('check have disabled attr assigned', () => {
-        waitForPresent(inputGroupPage.disabledInput);
-        waitForElDisplayed(inputGroupPage.disabledInput);
+        waitForPresent(disabledInput);
+        waitForElDisplayed(disabledInput);
 
-        expect(getAttributeByName(inputGroupPage.disabledInput, 'ng-reflect-is-disabled')).toBe('true');
-        expect(isEnabled(inputGroupPage.disabledInput)).toBe(false);
+        expect(getAttributeByName(disabledInput, 'ng-reflect-is-disabled')).toBe('true');
+        expect(isEnabled(disabledInput)).toBe(false);
     });
 
     it('check disabled attr has disabled button', () => {
-        waitForElDisplayed(inputGroupPage.disabledInput);
-        expect(isElementClickable(inputGroupPage.disabledInputButton)).toBe(false);
+        waitForElDisplayed(disabledInput);
+        expect(isElementClickable(disabledInputButton)).toBe(false);
     });
 
     it('with Form input have text and button addons', () => {
-        waitForElDisplayed(inputGroupPage.withFormInput);
-        setValue(inputGroupPage.withFormInput, inputGroupTestData.numeric_value);
+        waitForElDisplayed(withFormInput);
+        setValue(withFormInput, numeric_value);
 
-        expect(getText(inputGroupPage.withFormInputTextAddon)).toContain('$');
-        expect(getText(inputGroupPage.withFormInputTextAddon, 1)).toContain('0.00');
-        expect(getText(inputGroupPage.withFormInputButtonAddon)).toContain('Submit');
-        expect(getValue(inputGroupPage.withFormInput)).toBe(inputGroupTestData.numeric_value);
+        expect(getText(withFormInputTextAddon)).toContain('$');
+        expect(getText(withFormInputTextAddon, 1)).toContain('0.00');
+        expect(getText(withFormInputButtonAddon)).toContain('Submit');
+        expect(getValue(withFormInput)).toBe(numeric_value);
     });
 
     xit('with form input have error tooltip and visual que if empty', () => {
-        waitForElDisplayed(inputGroupPage.withFormInput);
-        scrollIntoView(inputGroupPage.withFormInput);
-        click(inputGroupPage.withFormInput);
-        click(inputGroupPage.withFormInputButtonAddon);
-        mouseHoverElement(inputGroupPage.withFormInput);
+        waitForElDisplayed(withFormInput);
+        scrollIntoView(withFormInput);
+        click(withFormInput);
+        click(withFormInputButtonAddon);
+        mouseHoverElement(withFormInput);
 
-        expect(executeScriptBeforeTagAttr(inputGroupPage.withFormInputQuestionMark, 'content')).toBe('"?"');
-        expect(executeScriptAfterTagAttr(inputGroupPage.withFormInputAsterixMark, 'content')).toBe('"*"');
+        expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('"?"');
+        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
         // TODO: Uncomment after merge
         /*        if (browserIsSafari()) {
             expect(getText(inputGroupPage.withFormInputErrorTooltip)).toEqual('Value is required');
@@ -152,10 +160,10 @@ describe('Input Group should', function() {
             console.log('Skip for IE and Safari');
             return;
         }
-        waitForElDisplayed(inputGroupPage.withFormInput);
-        scrollIntoView(inputGroupPage.withFormInput);
-        mouseHoverElement(inputGroupPage.withFormInputQuestionMark);
-        expect(getText(inputGroupPage.withFormInputInfoTooltip)).toBe('This is tooltip to help');
+        waitForElDisplayed(withFormInput);
+        scrollIntoView(withFormInput);
+        mouseHoverElement(withFormInputQuestionMark);
+        expect(getText(withFormInputInfoTooltip)).toBe('This is tooltip to help');
     });
 
     it('should check RTL', () => {

@@ -21,12 +21,10 @@ export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewIn
 
     width = '900px';
     visibleSlidesCount = 3;
+    cardsHidden = [];
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-    card1Visibility = true;
-    card2Visibility = true;
-    card3Visibility = true;
 
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
@@ -38,6 +36,14 @@ export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewIn
 
     ngAfterViewInit(): void {
         this.updateLayout();
+    }
+
+    isHidden(card: string): boolean {
+        return this.cardsHidden.some(_card => _card === card);
+    }
+
+    update(): void {
+        this._changeDetectorRef.detectChanges();
     }
 
     updateLayout(): void {
@@ -53,15 +59,5 @@ export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewIn
             this.width = '900px';
         }
         this._changeDetectorRef.detectChanges();
-    }
-
-    public showHideCard(card: string): void {
-        if (card === 'card1') {
-            this.card1Visibility = !this.card1Visibility;
-        } else if (card === 'card2') {
-            this.card2Visibility = !this.card2Visibility;
-        } else if (card === 'card3') {
-            this.card3Visibility = !this.card3Visibility;
-        }
     }
 }

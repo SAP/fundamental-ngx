@@ -1,10 +1,8 @@
-export default {
-    navTitlesArr: [
-        'Corona',
-        'Fever',
-        'Sneeze'
-    ],
-    compactAttr: 'ng-reflect-compact',
-    borderAttr: 'ng-reflect-no-border',
-    navUrl: '/platform/home'
-};
+export const navTitlesArr = [
+    'Corona',
+    'Fever',
+    'Sneeze'
+];
+export const compactAttr = 'ng-reflect-compact';
+export const borderAttr = 'ng-reflect-no-border';
+export const navUrl = '/platform/home';

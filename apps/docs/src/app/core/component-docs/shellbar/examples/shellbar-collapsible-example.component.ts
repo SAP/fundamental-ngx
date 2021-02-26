@@ -138,14 +138,6 @@ export class ShellbarCollapsibleExampleComponent {
         }
     ];
 
-    changeSize(size: ShellbarSizes): void {
-        this.currentSize = size;
-    }
-
-    isSelected(size: ShellbarSizes): string {
-        return this.currentSize === size ? 'is-selected' : '';
-    }
-
     settingsCallback($event): void {
         console.log($event);
         alert('Settings Clicked');

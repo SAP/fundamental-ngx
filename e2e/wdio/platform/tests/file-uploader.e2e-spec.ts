@@ -12,22 +12,29 @@ import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';
 
 describe('File uploader test suite', function() {
-    const fileUploaderPO: FileUploaderPo = new FileUploaderPo();
+    const fileUploaderPage: FileUploaderPo = new FileUploaderPo();
+    const {
+        fileUploaderRoot,
+        fileUploaderInput,
+        fileUploaderInputFile,
+        browseButton,
+        fileSelectedText
+    } = fileUploaderPage;
 
     beforeAll(() => {
-        fileUploaderPO.open();
+        fileUploaderPage.open();
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(fileUploaderPO.fileUploaderRoot);
+        waitForPresent(fileUploaderRoot);
     }, 1);
 
     it('Verify placeholders', () => {
-        const arrLength = getElementArrayLength(fileUploaderPO.fileUploaderInput);
+        const arrLength = getElementArrayLength(fileUploaderInput);
         for (let i = 0; i < arrLength; i++) {
             expect(placeholderValue).toContain(getAttributeByName
-            (fileUploaderPO.fileUploaderInput, 'placeholder', i));
+            (fileUploaderInput, 'placeholder', i));
         }
     });
 
@@ -36,39 +43,39 @@ describe('File uploader test suite', function() {
             console.log('Skip for IE and Safari');
             return;
         }
-        const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
+        const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
-            click(fileUploaderPO.browseButton, i);
+            click(browseButton, i);
         }
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
     xit('Verify file upload', () => {
-        const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
+        const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
-            uploadFile(fileUploaderPO.fileUploaderInputFile, imagePath);
-            expect(imagePath).toContain(getText(fileUploaderPO.fileSelectedText, i));
-            expect(imagePath).toContain(getAttributeByName(fileUploaderPO.fileUploaderInput, 'title', i).slice(1));
+            uploadFile(fileUploaderInputFile, imagePath);
+            expect(imagePath).toContain(getText(fileSelectedText, i));
+            expect(imagePath).toContain(getAttributeByName(fileUploaderInput, 'title', i).slice(1));
         }
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
     xit('Verify file uploaded message', () => {
-        const arrLength = getElementArrayLength(fileUploaderPO.browseButton);
+        const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
-            uploadFile(fileUploaderPO.fileUploaderInputFile, imagePath, i);
+            uploadFile(fileUploaderInputFile, imagePath, i);
             expect(titleValue).toContain(getAlertText());
         }
     });
 
     it('should check LTR and RTL orientation', () => {
-        fileUploaderPO.checkRtlSwitch();
+        fileUploaderPage.checkRtlSwitch();
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            fileUploaderPO.saveExampleBaselineScreenshot('file-uploader');
-            expect(fileUploaderPO.compareWithBaseline('file-uploader')).toBeLessThan(1);
+            fileUploaderPage.saveExampleBaselineScreenshot('file-uploader');
+            expect(fileUploaderPage.compareWithBaseline('file-uploader')).toBeLessThan(1);
         });
     });
 

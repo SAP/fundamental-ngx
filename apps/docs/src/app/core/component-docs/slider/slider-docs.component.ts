@@ -29,7 +29,7 @@ export class SliderDocsComponent {
             properties: {
                 type: 'object',
                 properties: {
-                    range: {
+                    mode: {
                         type: 'string',
                         enum: [
                             'single',
@@ -77,11 +77,12 @@ export class SliderDocsComponent {
             hideProgressBar: false,
             showTicks: true,
             showTicksLabels: true,
-            range: 'single',
+            mode: 'single',
             disabled: false
         }
     };
 
+    currentMode = 'single';
     value: number | [number, number] = 50;
     rangeValue: [number, number] = [0, 100];
     singleValue = 50;
@@ -189,14 +190,20 @@ export class SliderDocsComponent {
     }
 
     onSchemaValues(data): void {
-        if (data.properties.range === 'range') {
-            this.singleValue = this.value as number;
-            this.value = this.rangeValue;
-        } else {
-            this.rangeValue = this.value as [number, number];
-            this.value = this.singleValue;
+        this.data = data;
+
+        if (this.currentMode === data.properties.mode) {
+            return;
         }
 
-        this.data = data;
+        this.currentMode = data.properties.mode;
+
+        if (this.currentMode === 'range') {
+            this.singleValue = this.value as number;
+            this.value = [...this.rangeValue];
+        } else {
+            this.rangeValue = [...(this.value as [number, number])];
+            this.value = this.singleValue;
+        }
     }
 }
