@@ -2,6 +2,7 @@ import { MessageStripComponent } from './message-strip.component';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
+import { ButtonModule } from '../button/button.module';
 
 @Component({
     template: `
@@ -21,6 +22,7 @@ describe('MessageStripComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
+            imports: [ButtonModule],
             declarations: [MessageStripComponent, ButtonComponent, TestMessageStripComponent]
         }).compileComponents();
     }));

@@ -7,6 +7,7 @@ import { ListModule } from '../list/list.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { ButtonModule } from '../button/button.module';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -15,7 +16,7 @@ describe('ComboboxComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ComboboxComponent],
-            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule],
+            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule, ButtonModule],
             providers: [DynamicComponentService]
         }).compileComponents();
     }));

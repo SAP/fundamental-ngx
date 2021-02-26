@@ -5,6 +5,7 @@ import { whenStable } from './../utils/tests/when-stable';
 import { CarouselModule } from '../utils/directives/carousel/carousel.module';
 import { CarouselComponent } from './carousel.component';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
+import { ButtonModule } from '../button/button.module';
 
 @Component({
     selector: 'fd-test-carousel',
@@ -128,7 +129,7 @@ describe('CarouselComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CarouselComponent, CarouselItemComponent, TestCarouselComponent],
-            imports: [CarouselModule]
+            imports: [CarouselModule, ButtonModule]
         }).compileComponents();
     }));
 
