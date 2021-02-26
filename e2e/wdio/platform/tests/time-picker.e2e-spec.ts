@@ -52,6 +52,7 @@ describe('Time picker suite', function() {
             scrollIntoView(activeTimePickerButton, i);
             click(activeTimePickerButton, i);
             waitForElDisplayed(timerExpanded);
+            click(activeTimePickerButton, i);
         }
     });
 
@@ -80,6 +81,7 @@ describe('Time picker suite', function() {
             click(activeTimePickerButton, i);
             selectHoursAndMinutes(11);
             sendKeys(['Escape']);
+            expect(doesItExist(timerExpanded)).toBe(false);
             expect(getValue(activeTimePickerInput, i)).toBe(time);
         }
     });
