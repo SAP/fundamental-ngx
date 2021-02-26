@@ -1,6 +1,6 @@
 import { FormControlComponent } from './form-control.component';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
@@ -17,7 +17,7 @@ describe('FormControlComponent', () => {
 
     let directive, componentInstance;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [FormControlComponent, TestComponent]
         });

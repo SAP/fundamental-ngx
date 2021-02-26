@@ -1,6 +1,6 @@
 import { TabItemDirective } from './tab-item.directive';
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 @Component({
     template: ` <li fd-tab-item #directiveElement></li> `
@@ -15,7 +15,7 @@ describe('TabItemDirective', () => {
     let directiveElement: TabItemDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestNestedContainerComponent, TabItemDirective]
         }).compileComponents();

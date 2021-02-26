@@ -1,5 +1,5 @@
 import { Component, Directive, OnChanges, OnInit, ElementRef, ViewChild, ContentChild, Renderer2 } from '@angular/core';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
 import { ButtonComponent } from '../../button/public_api';
@@ -76,7 +76,7 @@ describe('ButtonComponent', () => {
 
     let testDirectiveInstance: TestDirective, buttonInstance: ButtonComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule],
             declarations: [TestDirective, ButtonComponent, TestComponent, TestProxyComponent]

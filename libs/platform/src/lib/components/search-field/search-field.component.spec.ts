@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import {
     SearchFieldComponent,
     SearchInput,
@@ -123,7 +123,7 @@ describe('SearchFieldComponent', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
             imports: [PlatformSearchFieldModule],
@@ -801,7 +801,7 @@ describe('SearchFieldComponent with DataSource', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [DataSourceTestComponent],
             imports: [PlatformSearchFieldModule],

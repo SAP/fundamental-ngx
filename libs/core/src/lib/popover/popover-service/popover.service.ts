@@ -52,7 +52,7 @@ export class PopoverService extends BasePopoverClass {
     private _overlayRef: OverlayRef;
 
     /** @hidden */
-    private _refresh$: Observable<void>;
+    private _refresh$: Observable<boolean | void>;
 
     /** @hidden */
     private readonly _placementRefresh$ = new Subject<void>();

@@ -115,9 +115,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
                     allowOutsideClick: (event: MouseEvent) => true
                 });
                 this._focusTrap.activate();
-            } catch (e) {
-                console.warn('Attempted to focus trap the dialog, but no tabbable elements were found.', e);
-            }
+            } catch (e) {}
         }
     }
 

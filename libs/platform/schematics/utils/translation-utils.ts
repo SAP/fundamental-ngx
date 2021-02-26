@@ -4,8 +4,8 @@ import {
     getSourceTreePath,
     getDistPath,
     hasPackage,
-    getWorkspaceProject,
-    getPackageVersionFromPackageJson
+    getPackageVersionFromPackageJson,
+    getDefaultProject
 } from './package-utils';
 import { SchematicContext, Rule, externalSchematic, chain } from '@angular-devkit/schematics';
 import { NodeDependency, addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
@@ -49,8 +49,8 @@ export function addLocalizeLib(_options: any): Rule {
  * installs `@angular/localize` lib and makes call to the localize schematic
  * @param options options passed for this schematic
  */
-export function callLocalizeSchematic(_options: any): Rule {
-    return (_tree: Tree, context: SchematicContext) => {
+export function callLocalizeSchematic(_options: any): any {
+    return async (_tree: Tree, context: SchematicContext) => {
         context.logger.info('Adding localize schematic to tasks');
         const installTaskId = context.addTask(
             new NodePackageInstallTask({
@@ -60,7 +60,7 @@ export function callLocalizeSchematic(_options: any): Rule {
 
         // check if project name is available
         if (!_options.project) {
-            _options.name = getWorkspaceProject(_tree, _options);
+            _options.name = await getDefaultProject(_tree, _options);
         }
 
         // Calling only chain won't work here since we need the external lib to be actually installed before we call their schemas.
@@ -88,9 +88,15 @@ export function addLocalizeSchematic(options: any): Rule {
  * @param angularJsonFileObject the angular.json file
  * @param language the language that will be added to the build and serve configurations
  */
-export function writeToAngularConfig(tree: Tree, options: any, angularJsonFileObject: any, language: string): void {
-    const srcPath = getSourceTreePath(tree, options);
-    const distPath = getDistPath(tree, options);
+export async function writeToAngularConfig(
+    tree: Tree,
+    options: any,
+    angularJsonFileObject: any,
+    language: string
+): Promise<void> {
+    const srcPath = await getSourceTreePath(tree, options);
+    const distPath = await getDistPath(tree, options);
+
     const project = options.project ? options.project : Object.keys(angularJsonFileObject['projects'])[0];
     const projectObject = angularJsonFileObject.projects[project];
     if (projectObject) {
@@ -135,8 +141,8 @@ export function writeToAngularConfig(tree: Tree, options: any, angularJsonFileOb
  * @param options options passed for this schematic
  * @param language the language for which translations from lib will be applied to
  */
-export function createExtractionFiles(tree: Tree, options: any, language: string): void {
-    const srcPath = getSourceTreePath(tree, options);
+export async function createExtractionFiles(tree: Tree, options: any, language: string): Promise<void> {
+    const srcPath = await getSourceTreePath(tree, options);
     const libXlfFileContent = tree.read(
         'node_modules/@fundamental-ngx/platform/schematics/locale/' + language + '/messages.' + language + '.xlf'
     );

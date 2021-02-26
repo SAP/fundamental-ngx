@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DialogFooterComponent, DialogButtonClass } from './dialog-footer.component';
 import { Component, Type, ViewChild } from '@angular/core';
@@ -33,7 +33,7 @@ class DefaultFooterTestComponent {
 }
 
 describe('DialogFooterComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 DialogFooterComponent,
