@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { whenStable } from '../utils/tests/when-stable';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
+import { ContentDensityService } from '../utils/public_api';
 
 const initialValue = 100;
 
@@ -67,7 +68,8 @@ describe('StepInputComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [StepInputModule]
+            imports: [StepInputModule],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -81,6 +83,11 @@ describe('StepInputComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBeFalse();
     });
 
     it('should increment on button click', async () => {

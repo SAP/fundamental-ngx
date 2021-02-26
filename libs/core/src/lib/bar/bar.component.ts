@@ -3,11 +3,12 @@ import {
     Component,
     ElementRef,
     Input,
-    OnChanges,
-    OnInit,
+    OnChanges, OnDestroy,
+    OnInit, Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
+import { Subscription } from 'rxjs';
 
 export type SizeType = '' | 's' | 'm_l' | 'xl';
 export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer';
@@ -25,7 +26,7 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
+export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
     /** user's custom classes */
     @Input()
     class: string;
@@ -52,14 +53,28 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** Whether to apply cozy mode to the Bar. */
     @Input()
-    cozy: boolean;
+    cozy: boolean = null;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef, @Optional() private _contentDensityService: ContentDensityService) {}
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.cozy === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.cozy = density === 'cozy';
+                this.buildComponentCssClass();
+            }));
+        }
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

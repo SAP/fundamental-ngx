@@ -6,6 +6,7 @@ import { TokenizerInputDirective } from './token-input.directive';
 import { whenStable } from '../utils/tests/when-stable';
 import { FormControlComponent } from '../form/form-control/form-control.component';
 import { TokenComponent, TokenizerComponent } from './public_api';
+import { ContentDensityService } from '../utils/public_api';
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
@@ -38,7 +39,7 @@ describe('TokenizerComponent', () => {
                 FormControlComponent,
                 TokenizerInputDirective
             ],
-            providers: [RtlService]
+            providers: [RtlService, ContentDensityService]
         }).compileComponents();
     }));
 
@@ -53,6 +54,13 @@ describe('TokenizerComponent', () => {
         expect(component).toBeTruthy();
         expect(component._tokenizerHasFocus).toBeFalsy();
         expect(component.compact).toBeFalsy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(component, 'buildComponentCssClass');
+        component.ngOnInit();
+        expect(component.compact).toBeFalse();
+        expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should addEventListener to input during ngAfterViewChecked and handle keydown', async () => {

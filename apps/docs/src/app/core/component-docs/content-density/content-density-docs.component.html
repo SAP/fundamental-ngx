@@ -1,0 +1,18 @@
+<description>
+    Content Density can be maintained app-wide using the <code>ContentDensityService</code>, and components can
+    subscribe to a <code>BehaviorSubject</code> managed by the service and use that to handle changes to the content
+    density. See the example below.
+    <br />
+    Note that many components only come in one size, and others (such as the button below) only have
+    <code>compact</code> and <code>cozy</code> sizes, so setting the size to <code>condensed</code> will have no effect.
+    <br />
+    All components that have content density options will first check to see if the developer has provided a
+    <code>compact</code> input value, and if not, it will then refer to the value set in the
+    <code>ContentDensityService</code>.
+</description>
+<component-example>
+    <fd-content-density-example></fd-content-density-example>
+</component-example>
+<code-example [exampleFiles]="contentDensityExample"></code-example>
+
+<separator></separator>

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TableComponent } from './table.component';
 import { TableService } from './table.service';
+import { ContentDensityService } from '../utils/public_api';
 
 describe('TableComponent', () => {
     let component: TableComponent;
@@ -12,7 +13,8 @@ describe('TableComponent', () => {
         TestBed.configureTestingModule({
             declarations: [TableComponent],
             providers: [
-                {provide: TableService, useValue: tableSpy}
+                {provide: TableService, useValue: tableSpy},
+                ContentDensityService
             ]
         }).compileComponents();
 
@@ -26,5 +28,10 @@ describe('TableComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBeFalse();
     });
 });

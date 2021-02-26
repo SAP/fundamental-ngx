@@ -6,7 +6,7 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
-    Input,
+    Input, OnDestroy, OnInit, Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -14,8 +14,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '../radio/radio-button/radio-button.component';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
-import { applyCssClass } from '../utils/public_api';
+import { applyCssClass, ContentDensityService } from '../utils/public_api';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
+import { Subscription } from 'rxjs';
 
 let fileUploaderInputUniqueId = 0;
 
@@ -41,7 +42,7 @@ let fileUploaderInputUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileUploaderComponent implements ControlValueAccessor {
+export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-file-uploader')
     fdFileInputClass = true;
@@ -103,7 +104,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
 
     /** boolean value to enable compact mode */
     @Input()
-    compact: boolean;
+    compact: boolean = null;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
@@ -138,7 +139,29 @@ export class FileUploaderComponent implements ControlValueAccessor {
     @Output()
     readonly onDragLeave = new EventEmitter<void>();
 
-    constructor(private _fileUploadService: FileUploaderService, private _changeDetRef: ChangeDetectorRef) {}
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    constructor(
+        private _fileUploadService: FileUploaderService,
+        private _changeDetRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this._changeDetRef.detectChanges();
+            }));
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /** @hidden */
     onChange: Function = () => {};

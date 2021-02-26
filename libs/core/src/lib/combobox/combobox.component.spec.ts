@@ -8,6 +8,7 @@ import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { ButtonModule } from '../button/button.module';
+import { ContentDensityService } from '../utils/public_api';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -17,7 +18,7 @@ describe('ComboboxComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ComboboxComponent],
             imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule, ButtonModule],
-            providers: [DynamicComponentService]
+            providers: [DynamicComponentService, ContentDensityService]
         }).compileComponents();
     }));
 
@@ -59,6 +60,11 @@ describe('ComboboxComponent', () => {
         component.inputText = 'someValue';
         expect(component.onChange).toHaveBeenCalledWith('someValue');
         expect(component.onTouched).toHaveBeenCalled();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBeFalse();
     });
 
     it('should write value not on dropdown mode', () => {

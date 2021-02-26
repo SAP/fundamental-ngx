@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { applyCssClass, CssClassBuilder, RtlService } from '../utils/public_api';
+import { applyCssClass, ContentDensityService, CssClassBuilder, RtlService } from '../utils/public_api';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 
 let panelUniqueId = 0;
@@ -46,7 +46,7 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** Whether to apply compact mode to the Panel */
     @Input()
-    compact: boolean;
+    compact: boolean = null;
 
     /** Id of the panel element. */
     @Input()
@@ -86,10 +86,17 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     /** @hidden */
     constructor(private _cdRef: ChangeDetectorRef,
                 private _elementRef: ElementRef,
+                @Optional() private _contentDensityService: ContentDensityService,
                 @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.compact === null && this._contentDensityService) {
+            this._subscription.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this.buildComponentCssClass();
+            }))
+        }
         this._listenRtl();
         this.buildComponentCssClass();
     }

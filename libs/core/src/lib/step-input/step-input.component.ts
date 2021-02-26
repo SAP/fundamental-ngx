@@ -11,7 +11,7 @@ import {
     isDevMode,
     LOCALE_ID,
     OnDestroy,
-    OnInit,
+    OnInit, Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -23,6 +23,7 @@ import { defer, fromEvent, interval, merge, Observable, Subscription, timer } fr
 import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { ContentDensityService } from '../utils/public_api';
 
 let stepInputUniqueId = 0;
 
@@ -44,10 +45,9 @@ let stepInputUniqueId = 0;
     }
 })
 export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
-
     /** Sets compact mode */
     @Input()
-    compact: boolean;
+    compact: boolean = null;
 
     /** Sets control in readonly mode */
     @Input()
@@ -186,15 +186,15 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     valueChange: EventEmitter<number> = new EventEmitter<number>();
 
     /** @hidden */
-    @ViewChild('incrementBtn', {read: ElementRef})
+    @ViewChild('incrementBtn', { read: ElementRef })
     incrementButton: ElementRef;
 
     /** @hidden */
-    @ViewChild('decrementBtn', {read: ElementRef})
+    @ViewChild('decrementBtn', { read: ElementRef })
     decrementButton: ElementRef;
 
     /** @hidden */
-    @ViewChild('inputElement', {read: ElementRef, static: true})
+    @ViewChild('inputElement', { read: ElementRef, static: true })
     inputElement: ElementRef;
 
     /** @hidden */
@@ -242,7 +242,11 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     onTouched: Function = () => {};
 
-    constructor(@Inject(LOCALE_ID) locale, private _changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        @Inject(LOCALE_ID) locale,
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {
         this.locale = locale;
     }
 
@@ -250,6 +254,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     ngOnInit(): void {
         this._numberFormat = this._getNumberFormat();
         this._buildRegExps();
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this._changeDetectorRef.detectChanges();
+            }));
+        }
     }
 
     /** @hidden */
@@ -323,7 +333,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         };
 
         if (!this._canChangeValue) {
-            return
+            return;
         }
 
         if (KeyUtil.isKeyCode(event, UP_ARROW)) {
@@ -372,14 +382,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden Track parsed value when user changes value of the input control. */
     trackInputValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
-        this._value = parsedValue !== null
-            ? this._checkValueLimits(parsedValue)
-            : null;
+        this._value = parsedValue !== null ? this._checkValueLimits(parsedValue) : null;
     }
 
     /** @hidden */
     private get _canChangeValue(): boolean {
-        return !(this.disabled || this.readonly)
+        return !(this.disabled || this.readonly);
     }
 
     /** @hidden */
@@ -436,22 +444,19 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     private _listenOnButtonsClick(): void {
         if (this.hasStepButtons) {
             this._subscriptions.add(
-                this._setupButtonListener(this.incrementButton)
-                    .subscribe(() => {
-                        this.increment();
-                        this._changeDetectorRef.detectChanges();
-                    })
+                this._setupButtonListener(this.incrementButton).subscribe(() => {
+                    this.increment();
+                    this._changeDetectorRef.detectChanges();
+                })
             );
 
             this._subscriptions.add(
-                this._setupButtonListener(this.decrementButton)
-                    .subscribe(() => {
-                        this.decrement();
-                        this._changeDetectorRef.detectChanges();
-                    })
-            )
+                this._setupButtonListener(this.decrementButton).subscribe(() => {
+                    this.decrement();
+                    this._changeDetectorRef.detectChanges();
+                })
+            );
         }
-
     }
 
     /** @hidden */
@@ -460,11 +465,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         const onMouseUp$ = fromEvent(window, 'mouseup');
 
         const timerFactory$ = defer(() => {
-            return timer(500)
-                .pipe(
-                    switchMap(() => interval(40)),
-                    takeUntil(onMouseUp$)
-                )
+            return timer(500).pipe(
+                switchMap(() => interval(40)),
+                takeUntil(onMouseUp$)
+            );
         });
 
         return merge(onMouseDown$, onMouseDown$.pipe(switchMap(() => timerFactory$)));
@@ -508,33 +512,35 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
             useGrouping: this.useGrouping,
             minimumFractionDigits: this.minFractionDigits,
             maximumFractionDigits: this.maxFractionDigits
-        })
+        });
     }
 
     /** @hidden */
     private _getNumeralsExpressions(): RegExp {
-        const numerals = [...new NumberFormat(this.locale, {useGrouping: false}).format(9876543210).split('')].reverse();
+        const numerals = [
+            ...new NumberFormat(this.locale, { useGrouping: false }).format(9876543210).split('')
+        ].reverse();
         const index = new Map(numerals.map((d, i) => [d, i]));
-        this._index = d => index.get(d);
+        this._index = (d) => index.get(d);
 
         return new RegExp(`[${numerals.join('')}]`, 'g');
     }
 
     /** @hidden */
     private _getDecimalSeparator(): RegExp {
-        const formatter = new NumberFormat(this.locale, {useGrouping: false});
+        const formatter = new NumberFormat(this.locale, { useGrouping: false });
         return new RegExp(`[${formatter.format(1.1).trim().replace(this._numerals, '')}]`, 'g');
     }
 
     /** @hidden */
     private _getGroupingSeparator(): RegExp {
-        const formatter = new NumberFormat(this.locale, {useGrouping: true});
+        const formatter = new NumberFormat(this.locale, { useGrouping: true });
         return new RegExp(`[${formatter.format(1000).trim().replace(this._numerals, '')}]`, 'g');
     }
 
     /** @hidden */
     private _getMinusSignExpression(): RegExp {
-        const formatter = new NumberFormat(this.locale, {useGrouping: false});
+        const formatter = new NumberFormat(this.locale, { useGrouping: false });
         return new RegExp(`[${formatter.format(-1).trim().replace(this._numerals, '')}]`, 'g');
     }
 
@@ -546,7 +552,8 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
                 currency: this.currency,
                 currencyDisplay: this.currencyDisplay
             });
-            this.currencySign = `${formatter.format(1)
+            this.currencySign = `${formatter
+                .format(1)
                 .replace(/\s/g, '')
                 .replace(this._numerals, '')
                 .replace(this._decimalSeparator, '')
@@ -574,7 +581,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         } else {
             return this.currency
                 ? this._numberFormat.format(number).replace(this._currency, '')
-                : this._numberFormat.format(number)
+                : this._numberFormat.format(number);
         }
     }
 }

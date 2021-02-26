@@ -25,8 +25,8 @@ import {
 import { FormControlComponent } from '../form/form-control/form-control.component';
 import { TokenComponent } from './token.component';
 import { RtlService } from '../utils/services/rtl.service';
+import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
 import { fromEvent, Subject, Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { KeyUtil } from '../utils/functions';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { filter, takeUntil, tap } from 'rxjs/operators';
@@ -74,7 +74,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Whether the tokenizer is compact */
     @Input()
-    compact = false;
+    compact: boolean = null;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -127,6 +127,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden Used to add focus to tokenizer element */
     _tokenizerHasFocus = false;
+
+    /** @hidden */
+    private _contentDensitySubscription = new Subscription();
 
     /** @hidden */
     /*Variable which will keep the index of the first token pressed in the tokenizer*/
@@ -190,10 +193,18 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this._onDestroy$.next();
         this._onDestroy$.complete();
         this._unsubscribeClicks();
+        this._contentDensitySubscription.unsubscribe();
     }
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.compact === null && this._contentDensityService) {
+            this._contentDensitySubscription.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this._cdRef.detectChanges();
+                this.buildComponentCssClass();
+            }))
+        }
         this.buildComponentCssClass();
     }
 
@@ -203,6 +214,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     constructor(private _elementRef: ElementRef,
+        @Optional() private _contentDensityService: ContentDensityService,
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
         private _renderer: Renderer2) {

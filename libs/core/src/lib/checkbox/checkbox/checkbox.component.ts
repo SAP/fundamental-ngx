@@ -8,6 +8,8 @@ import {
     HostBinding,
     Inject,
     Input,
+    OnDestroy,
+    OnInit,
     Optional,
     ViewChild,
     ViewEncapsulation
@@ -18,6 +20,8 @@ import { compareObjects, KeyUtil } from '../../utils/functions';
 import { Platform } from '@angular/cdk/platform';
 import { LIST_ITEM_COMPONENT, ListItemInterface } from '../../list/list-item/list-item-utils';
 import { SPACE } from '@angular/cdk/keycodes';
+import { ContentDensityService } from '../../utils/public_api';
+import { Subscription } from 'rxjs';
 
 let checkboxUniqueId = 0;
 
@@ -37,7 +41,7 @@ export type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
         }
     ]
 })
-export class CheckboxComponent implements ControlValueAccessor {
+export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
     @ViewChild('inputLabel')
     inputLabel: ElementRef;
@@ -84,7 +88,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     /** Allows to minimize control to compact mode. */
     @Input()
-    compact: boolean;
+    compact: boolean = null;
 
     /** Enables controls third state. */
     @Input()
@@ -97,6 +101,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     /** Assigns given class to checkbox label element */
     @Input()
     labelClass: string;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
     /** Sets values returned by control. */
     @Input('values')
@@ -130,9 +137,25 @@ export class CheckboxComponent implements ControlValueAccessor {
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _platform: Platform,
         private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService,
         @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface
     ) {
         this.tabIndexValue = tabIndexValue;
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this._changeDetectorRef.detectChanges();
+            }));
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden Used to define if control is in 'indeterminate' state.*/

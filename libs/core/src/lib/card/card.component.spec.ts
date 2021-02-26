@@ -7,6 +7,7 @@ import { CardModule } from './card.module';
 import { CardComponent } from './card.component';
 import { CardType, CLASS_NAME } from './constants';
 import { getCardModifierClassNameByCardType } from './utils';
+import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     template: `
@@ -42,7 +43,8 @@ describe('CardComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, CardModule],
-            declarations: [CardHostTestComponent]
+            declarations: [CardHostTestComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -55,6 +57,13 @@ describe('CardComponent', () => {
 
     it('should create', () => {
         expect(host).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(card, 'buildComponentCssClass');
+        card.ngOnInit();
+        expect(card.compact).toBeFalse();
+        expect(card.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should add card className to host', () => {

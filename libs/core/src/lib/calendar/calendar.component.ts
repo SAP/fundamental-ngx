@@ -7,6 +7,7 @@ import {
     HostBinding,
     Inject,
     Input,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -31,6 +32,8 @@ import {
     CalendarAggregatedYearViewComponent
     // Comment to fix max-line-length error
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import { ContentDensityService } from '../utils/public_api';
+import { Subscription } from 'rxjs';
 
 let calendarUniqueId = 0;
 
@@ -78,7 +81,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator {
+export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator, OnDestroy {
     /** @hidden */
     @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent<D>;
 
@@ -106,7 +109,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** Whether compact mode should be included into calendar */
     @Input()
     @HostBinding('class.fd-calendar--compact')
-    compact = false;
+    compact: boolean = null;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
@@ -212,6 +215,9 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     onChange: (_: D | DateRange<D>) => void = () => {};
 
     /** @hidden */
@@ -255,6 +261,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
@@ -273,6 +280,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** @hidden */
     ngOnInit(): void {
         this._prepareDisplayedView();
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+            }));
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /**

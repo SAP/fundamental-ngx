@@ -1,5 +1,15 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    Input, OnDestroy,
+    OnInit, Optional,
+    ViewEncapsulation
+} from '@angular/core';
 import { TableService } from './table.service';
+import { Subscription } from 'rxjs';
+import { ContentDensityService } from '../utils/public_api';
 
 /**
  * The component that represents a table.
@@ -18,7 +28,7 @@ import { TableService } from './table.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ TableService ]
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-table')
     fdTableClass = true;
@@ -36,7 +46,7 @@ export class TableComponent implements AfterViewInit {
     /** Whether or not to display the table in compact mode */
     @HostBinding('class.fd-table--compact')
     @Input()
-    compact = false;
+    compact: boolean = null;
 
     /** Whether or not to display the table in condensed mode */
     @HostBinding('class.fd-table--condensed')
@@ -57,9 +67,27 @@ export class TableComponent implements AfterViewInit {
     @Input()
     keys: string[];
 
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     constructor (
-        private _tableService: TableService
+        private _tableService: TableService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+            }))
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {

@@ -19,7 +19,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Placement } from '../popover/popover-position/popover-position';
 
@@ -31,6 +31,7 @@ import { TimeComponent } from '../time/time.component';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
 import { PopoverService } from '../popover/popover-service/popover.service';
+import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     selector: 'fd-time-picker',
@@ -70,7 +71,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
 
     /** @Input Uses compact time picker. */
     @Input()
-    compact = false;
+    compact: boolean = null;
 
     /** @Input Disables the component. */
     @Input()
@@ -246,6 +247,9 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     onChange: (_: D) => void = () => {};
     /** @hidden */
     onTouched: Function = () => {};
@@ -262,6 +266,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _popoverFormMessage: PopoverFormMessageService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -278,6 +283,13 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
         });
 
         this._calculateTimeOptions();
+
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this._changeDetectorRef.detectChanges();
+            }))
+        }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -292,6 +304,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }

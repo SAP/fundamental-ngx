@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { WizardModule } from '../wizard.module';
 import { WizardStepIndicatorComponent } from './wizard-step-indicator.component';
+import { ContentDensityService } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-test-indicator',
     template: ` <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator> `
 })
-class TestWrapperComponent {}
+class TestWrapperComponent {
+
+    @ViewChild(WizardStepIndicatorComponent)
+    indicator: WizardStepIndicatorComponent;
+
+}
 
 describe('WizardStepIndicatorComponent', () => {
     let component: TestWrapperComponent;
@@ -17,7 +23,8 @@ describe('WizardStepIndicatorComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [WizardModule]
+            imports: [WizardModule],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -29,6 +36,11 @@ describe('WizardStepIndicatorComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.indicator.ngOnInit();
+        expect(component.indicator.compact).toBeFalse();
     });
 
     it('Should Add icon class with glyph on input', () => {

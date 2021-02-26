@@ -9,6 +9,7 @@ import {
 } from './input-group-directives';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
+import { ContentDensityService } from '../utils/public_api';
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
@@ -22,7 +23,8 @@ describe('InputGroupComponent', () => {
                 InputGroupAddOnDirective,
                 InputGroupTextareaDirective,
                 InputGroupComponent
-            ]
+            ],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -39,5 +41,10 @@ describe('InputGroupComponent', () => {
     it('should get an ID and handle the close event for that ID', () => {
         component.addOnButtonClicked.subscribe(($event) => expect($event).toBeDefined());
         component.buttonClicked({});
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBeFalse();
     });
 });

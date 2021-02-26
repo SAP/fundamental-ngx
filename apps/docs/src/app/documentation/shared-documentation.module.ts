@@ -9,6 +9,7 @@ import { ToolbarDocsComponent } from './core-helpers/toolbar/toolbar.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
 import {
     ButtonModule,
+    ContentDensityService,
     InputGroupModule,
     MenuModule,
     ShellbarModule,
@@ -43,6 +44,7 @@ import { FilterPipe } from './core-helpers/pipes/filter.pipe';
         SectionsToolbarComponent,
         SortByPipe,
         FilterPipe
-    ]
+    ],
+    providers: [ContentDensityService]
 })
 export class SharedDocumentationModule {}

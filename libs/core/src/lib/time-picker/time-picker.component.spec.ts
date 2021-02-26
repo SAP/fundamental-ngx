@@ -8,6 +8,7 @@ import { TimeModule } from '../time/time.module';
 import { ButtonModule } from '../button/button.module';
 
 import { TimePickerComponent } from './time-picker.component';
+import { ContentDensityService } from '../utils/public_api';
 
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent<FdDate>;
@@ -17,7 +18,8 @@ describe('TimePickerComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule, PopoverModule, InputGroupModule, ButtonModule, FdDatetimeModule, TimeModule],
-                declarations: [TimePickerComponent]
+                declarations: [TimePickerComponent],
+                providers: [ContentDensityService]
             }).compileComponents();
         })
     );
@@ -30,6 +32,11 @@ describe('TimePickerComponent', () => {
 
     it('should create with default values', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBeFalse();
     });
 
     it('should use displayFormat and set to true _displayHours, _displayMinutes, _meridian', () => {

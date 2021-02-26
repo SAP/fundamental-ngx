@@ -7,7 +7,7 @@ import { SelectComponent } from './select.component';
 import { PopoverComponent } from '../popover/popover.component';
 import { SelectModule } from './select.module';
 import { SelectKeyManagerService } from './select-key-manager.service';
-
+import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     template: `
@@ -74,7 +74,8 @@ describe('SelectComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
-            imports: [SelectModule]
+            imports: [SelectModule],
+            providers: [ContentDensityService]
         })
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -102,6 +103,11 @@ describe('SelectComponent', () => {
     describe('basic behavior', () => {
         it('should create so that componennt instance is non null', () => {
             expect(component).toBeTruthy();
+        });
+
+        it('should handle content density when compact input is not provided', () => {
+            component.ngOnInit();
+            expect(component.compact).toBeFalse();
         });
 
         it('should have default state closed when component is initialized', () => {

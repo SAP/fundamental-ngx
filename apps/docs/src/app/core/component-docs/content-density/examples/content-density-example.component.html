@@ -1,0 +1,14 @@
+<div style="display: flex">
+    <fd-select
+        [(ngModel)]="selectedDensity"
+        (ngModelChange)="onChange()"
+        style="margin-right: 8px"
+        [compact]="compact$ | async"
+    >
+        <fd-option value="cozy">Cozy</fd-option>
+        <fd-option value="condensed">Condensed</fd-option>
+        <fd-option value="compact">Compact</fd-option>
+    </fd-select>
+
+    <button [compact]="compact$ | async" fd-button>My size changes when "Compact" is selected</button>
+</div>

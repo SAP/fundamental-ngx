@@ -39,6 +39,7 @@ import { SelectKeyManagerService } from './select-key-manager.service';
 import { OptionComponent, FdOptionSelectionChange } from './option/option.component';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { RtlService } from '../utils/services/rtl.service';
+import { ContentDensityService } from '../utils/public_api';
 
 let selectUniqueId = 0;
 
@@ -128,7 +129,7 @@ export class SelectComponent implements
 
     /** Whether the select is in compact mode. */
     @Input()
-    compact = false;
+    compact: boolean = null;
 
     /** @deprecated
      * it is handled internally by controlTemplate != null|undefined is
@@ -249,7 +250,7 @@ export class SelectComponent implements
     _rtl = false;
 
     /** @hidden */
-    _selectionModel: SelectionModel<OptionComponent>
+    _selectionModel: SelectionModel<OptionComponent>;
 
     /** @hidden
     * Triggers when component is destroyed
@@ -376,7 +377,8 @@ export class SelectComponent implements
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _dynamicComponentService: DynamicComponentService,
         @Optional() @Self() private ngControl: NgControl,
-        @Optional() private _injector: Injector
+        @Optional() private _injector: Injector,
+        @Optional() private _contentDensityService: ContentDensityService
 
     ) {
         if (this.ngControl) {
@@ -391,6 +393,13 @@ export class SelectComponent implements
         this.ariaLabelledBy = this.ariaLabelledBy || this.placeholder;
 
         this._initializeCommonBehavior();
+
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this._changeDetectorRef.detectChanges();
+            }))
+        }
     }
 
     /** @hidden */

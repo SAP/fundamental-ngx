@@ -4,6 +4,7 @@ import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
+import { ContentDensityService } from '../utils/public_api';
 
 describe('SwitchComponent', () => {
     let component: SwitchComponent;
@@ -14,7 +15,8 @@ describe('SwitchComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, FormsModule],
-            declarations: [SwitchComponent]
+            declarations: [SwitchComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -35,6 +37,11 @@ describe('SwitchComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBeFalse();
+    });
+
     it('should accept custom id', () => {
         const id = 'custom-id';
         component.id = id;
@@ -52,6 +59,8 @@ describe('SwitchComponent', () => {
 
         expect(input.getAttribute('ng-reflect-name')).toEqual(component.name);
     });
+
+
 
     it('should auto-generate id', () => {
         expect(component.id).toBeTruthy();

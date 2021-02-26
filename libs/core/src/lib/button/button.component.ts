@@ -6,10 +6,12 @@ import {
     Input,
     OnChanges,
     OnInit,
+    Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
 import { BaseButton } from './base-button';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -41,9 +43,13 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     class = '';
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     constructor(
         private _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {
         super()
     }
@@ -57,6 +63,12 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     }
 
     public ngOnInit(): void {
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this.buildComponentCssClass();
+            }));
+        }
         this.buildComponentCssClass();
     }
 

@@ -5,6 +5,7 @@ import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angu
 import { MenuModule } from './menu.module';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
+import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     selector: 'fd-menu-test',
@@ -26,7 +27,7 @@ import { MenuService } from './services/menu.service';
                 </a>
             </li>
         </fd-menu>
-        
+
         <button #trigger [fdMenuTrigger]="menu"></button>
     `
 })
@@ -51,7 +52,8 @@ describe('MenuComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [MenuModule],
-            declarations: [TestMenuComponent]
+            declarations: [TestMenuComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -66,6 +68,11 @@ describe('MenuComponent', () => {
     it('should properly initialize menu', () => {
         expect(menu).toBeTruthy();
         expect(menuService.menuMap).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        menu.ngOnInit();
+        expect(menu.compact).toBeFalse();
     });
 
     it('should open/close popover', fakeAsync(() => {

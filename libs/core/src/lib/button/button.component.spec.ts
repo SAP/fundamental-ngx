@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ButtonComponent } from './button.component';
+import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     selector: 'fd-test-component',
@@ -17,7 +18,8 @@ describe('ButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonComponent, TestComponent]
+            declarations: [ButtonComponent, TestComponent],
+            providers: [ContentDensityService]
         });
     }));
 
@@ -44,6 +46,13 @@ describe('ButtonComponent', () => {
         expect(cssClass).toContain('standard');
         expect(cssClass).toContain('fd-button--menu');
         expect(cssClass).toContain('compact');
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(componentInstance, 'buildComponentCssClass');
+        componentInstance.ngOnInit();
+        expect(componentInstance.compact).toBeFalse();
+        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 });
 

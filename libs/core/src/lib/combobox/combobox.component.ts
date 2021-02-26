@@ -12,7 +12,7 @@ import {
     Input,
     OnChanges,
     OnDestroy,
-    OnInit,
+    OnInit, Optional,
     Output,
     QueryList,
     SimpleChanges,
@@ -24,7 +24,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListMessageDirective } from '../list/list-message.directive';
 import { ComboboxItem } from './combobox-item';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { FormStates } from '../form/form-control/form-states';
 import { PopoverComponent } from '../popover/popover.component';
 import { GroupFunction } from '../utils/pipes/list-group.pipe';
@@ -51,6 +51,7 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
+import { ContentDensityService } from '../utils/public_api';
 
 let comboboxUniqueId = 0;
 
@@ -186,7 +187,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** Whether the search input should be displayed in compact mode. */
     @Input()
-    compact = false;
+    compact: boolean = null;
 
     /** Whether the matching string should be highlighted during filtration. */
     @Input()
@@ -331,6 +332,9 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     onChange: any = () => {};
 
     /** @hidden */
@@ -340,12 +344,19 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     constructor(
         private _elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService
+        private _dynamicComponentService: DynamicComponentService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._refreshDisplayedValues();
+        if (this.compact === null && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.compact = density === 'compact';
+                this._cdRef.detectChanges();
+            }));
+        }
     }
 
     /** @hidden */
@@ -357,6 +368,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
@@ -535,7 +547,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this.openChange.emit(isOpen);
         }
 
-        
+
         if (!this.open && !this.mobile) {
             this.handleBlur();
             this.searchInputElement.nativeElement.focus();
