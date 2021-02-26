@@ -161,6 +161,10 @@ export function waitForPresent(selector: string, index: number = 0, waitTime = d
     return $$(selector)[index].waitForExist({ timeout: waitTime });
 }
 
+export function waitForNotPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
+    return $$(selector)[index].waitForExist({ timeout: waitTime, reverse: true });
+}
+
 export function isEnabled(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
@@ -367,4 +371,9 @@ function checkSelectorExists (selector: string, index: number = 0): void {
     if ($$(selector)[index] === undefined) {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }
+}
+
+export function addIsActiveClass(selector: string, index: number = 0): void {
+    // @ts-ignore
+    $$(selector)[index].addIsActiveClass();
 }

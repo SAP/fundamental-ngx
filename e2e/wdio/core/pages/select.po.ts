@@ -4,20 +4,30 @@ import { waitForElDisplayed } from '../../driver/wdio';
 export class SelectPo extends CoreBaseComponentPo {
     url = '/select';
 
-    selectModesExapmle = 'fd-select-mode-example';
-    selectSemanticStatesExapmle = 'fd-select-mode-example';
-    customControlExapmle = 'fd-select-mode-example';
-    extendetOptionsExapmle = 'fd-select-mode-example';
-    mobileModeExapmle = 'fd-select-mode-example';
-    maxHeightExapmle = 'fd-select-mode-example';
-    addRemoveOptionExapmle = 'fd-select-mode-example';
-    programmaticControlExapmle = 'fd-select-mode-example';
-    reactiveExapmle = 'fd-select-mode-example';
+    selectModesExample = 'fd-select-mode-example';
+
+    displayedText = ' .fd-select__text-content';
+    buttons = ' button';
+    listBox = ' [role="listbox"]';
+    option = '[role="option"]';
+    overlayContainer = '.cdk-overlay-container';
+
+    selectSemanticStatesExample = 'fd-select-semantic-state-example';
+    customControlExample = 'fd-select-custom-trigger';
+    extendetOptionsExample = 'fd-select-nested-options';
+    mobileModeExample = 'fd-select-mobile-example';
+    maxHeightExample = 'fd-select-max-height-example';
+    addRemoveOptionExample = 'fd-select-adding-example';
+
+    programmaticControlExample = 'fd-select-programmatic-example';
+    reactiveExample = 'fd-select-mode-example';
+
+    options = (id) => { return `#fd-option-${id}` };
 
     open(): void {
         super.open(this.url);
 
-        waitForElDisplayed(this.selectModesExapmle);
+        waitForElDisplayed(this.selectModesExample);
     };
 
 }

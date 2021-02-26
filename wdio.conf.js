@@ -24,7 +24,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*.e2e-spec.ts'
+        './e2e/wdio/**/select.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -332,6 +332,13 @@ exports.config = {
         browser.addCommand('focus', function() {
             browser.execute(function(domElement) {
                 domElement.focus();
+            }, this);
+        }, true);
+
+        browser.addCommand('addIsActiveClass', function() {
+            browser.execute(function(domElement) {
+                domElement.classList.add('is-active');
+
             }, this);
         }, true);
 
