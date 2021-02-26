@@ -5,7 +5,7 @@ import {
     open,
     saveElementScreenshot,
     getImageTagBrowserPlatform,
-    checkElementScreenshot, waitForElDisplayed, getElementArrayLength
+    checkElementScreenshot, waitForElDisplayed
 } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 
@@ -30,7 +30,6 @@ export class BaseComponentPo {
     saveExampleBaselineScreenshot(specName: string, options: object = {}, areas: string = this.exampleAreaContainersArr): void {
         const areasArray = elementArray(areas);
         for (let i = 0; i < areasArray.length; i++) {
-            console.log(`Total elements by locator ${areas} = ${getElementArrayLength(areas)}`);
             waitForElDisplayed(areas, i);
             scrollIntoView(areas, i);
             saveElementScreenshot(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);

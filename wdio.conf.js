@@ -48,6 +48,7 @@ exports.config = {
             './e2e/wdio/platform/**/input-group.e2e-spec.ts',
             './e2e/wdio/platform/**/link.e2e-spec.ts',
             './e2e/wdio/platform/**/list.e2e-spec.ts',
+            './e2e/wdio/platform/**/time-picker.e2e-spec.ts'
         ],
         platformB: [
             './e2e/wdio/platform/**/menu.e2e-spec.ts',

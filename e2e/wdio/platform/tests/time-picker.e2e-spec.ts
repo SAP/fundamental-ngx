@@ -1,11 +1,12 @@
 import {
+    checkElementScreenshot,
     click,
     doesItExist,
     getAttributeByName,
-    getElementArrayLength,
+    getElementArrayLength, getImageTagBrowserPlatform,
     getText,
     getValue,
-    refreshPage,
+    refreshPage, saveElementScreenshot,
     scrollIntoView,
     sendKeys,
     setValue,
@@ -97,17 +98,18 @@ describe('Time picker suite', function() {
         timePickerPage.checkRtlSwitch();
     })
 
-    fdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             timePickerPage.saveExampleBaselineScreenshot('time-picker');
             expect(timePickerPage.compareWithBaseline('time-picker')).toBeLessThan(1);
         });
 
-        fit('should check examples visual regression', () => {
+        it('should check examples visual regression', () => {
             scrollIntoView(activeTimePickerButton, 0);
             click(activeTimePickerButton, 0);
-            timePickerPage.saveExampleBaselineScreenshot('time-picker-expanded', {}, timerExpanded);
-            expect(timePickerPage.compareWithBaseline('time-picker-expanded')).toBeLessThan(1);
+            waitForElDisplayed(timerExpanded);
+            saveElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, {}, 0);
+            checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, {}, 0)
         });
     });
 
