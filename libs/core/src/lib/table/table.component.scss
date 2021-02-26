@@ -37,3 +37,9 @@
 		text-shadow: none;
 	}
 }
+
+.fd-table__cell--checkbox {
+	.fd-checkbox__label {
+		margin: 0;
+	}
+}

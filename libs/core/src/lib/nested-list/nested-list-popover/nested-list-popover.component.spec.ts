@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NestedListPopoverComponent } from './nested-list-popover.component';
 import { PopoverModule } from '../../popover/popover.module';
@@ -9,7 +9,7 @@ describe('NestedListPopoverComponent', () => {
     let component: NestedListPopoverComponent;
     let fixture: ComponentFixture<NestedListPopoverComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PopoverModule],
             declarations: [NestedListPopoverComponent],

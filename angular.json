@@ -1,329 +1,341 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "version": 1,
-    "newProjectRoot": "",
-    "projects": {
-        "docs": {
-            "root": "apps/docs/",
-            "sourceRoot": "apps/docs/src",
-            "projectType": "application",
-            "prefix": "fundamental-ngx",
-            "schematics": {
-                "@nrwl/schematics:component": {
-                    "style": "scss"
-                }
-            },
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
-                    "options": {
-                        "aot": true,
-                        "outputPath": "dist/apps/docs",
-                        "index": "apps/docs/src/index.html",
-                        "main": "apps/docs/src/main.ts",
-                        "polyfills": "apps/docs/src/polyfills.ts",
-                        "tsConfig": "apps/docs/tsconfig.app.json",
-                        "assets": [
-                            "apps/docs/src/favicon.ico",
-                            "apps/docs/src/assets",
-                            {
-                                "glob": "**/css_variables.css",
-                                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
-                                "output": "./assets/theming-base/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "./node_modules/fundamental-styles/dist/theming/",
-                                "output": "./assets/fundamental-styles-theming/"
-                            }
-                        ],
-                        "styles": [
-                            "node_modules/fundamental-styles/dist/icon.css",
-                            "apps/docs/src/fd-typedoc/assets/css/main.scss",
-                            "apps/docs/src/styles.scss"
-                        ],
-                        "scripts": [
-                            "node_modules/marked/lib/marked.js"
-                        ],
-                        "showCircularDependencies": false,
-                        "allowedCommonJsDependencies": [
-                          "moment",
-                          "highlight.js",
-                          "focus-trap",
-                          "@angularclass/hmr",
-                          "hammerjs"
-                        ]
-                    },
-                    "configurations": {
-                        "production": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "apps/docs/src/environments/environment.ts",
-                                    "with": "apps/docs/src/environments/environment.prod.ts"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "aot": true,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                }
-                            ]
-                        },
-                        "production-unoptimized": {
-                            "tsConfig": "apps/docs/tsconfig.netlify.json",
-                            "fileReplacements": [
-                                {
-                                    "replace": "apps/docs/src/environments/environment.ts",
-                                    "with": "apps/docs/src/environments/environment.prod.ts"
-                                }
-                            ],
-                            "aot": true,
-                            "extractCss": true,
-                            "sourceMap": false,
-                            "namedChunks": false,
-                            "vendorChunk": false,
-                            "optimization": false
-                        },
-                        "hmr": {
-                            "budgets": [
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "aot": true,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "fileReplacements": [
-                                {
-                                    "replace": "apps/docs/src/environments/environment.ts",
-                                    "with": "apps/docs/src/environments/environment.prod.ts"
-                                }
-                            ]
-                        },
-                        "fr": {
-                            "aot": true,
-                            "outputPath": "dist/libs/platform/locale/fr",
-                            "i18nFile": "apps/docs/src/app/platform/locale/fr/messages.fr.xlf",
-                            "i18nFormat": "xlf",
-                            "i18nLocale": "fr",
-                            "i18nMissingTranslation": "error"
-                        },
-                        "ar": {
-                            "aot": true,
-                            "outputPath": "dist/libs/platform/locale/ar",
-                            "i18nFile": "apps/docs/src/app/platform/locale/ar/messages.ar.xlf",
-                            "i18nFormat": "xlf",
-                            "i18nLocale": "ar",
-                            "i18nMissingTranslation": "error"
-                        }
-                    }
-                },
-                "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": {
-                        "browserTarget": "docs:build"
-                    },
-                    "configurations": {
-                        "production": {
-                            "browserTarget": "docs:build:production"
-                        },
-                        "hmr": {
-                            "browserTarget": "docs:build:hmr"
-                        },
-                        "fr": {
-                            "browserTarget": "docs:build:fr"
-                        },
-                        "ar": {
-                            "browserTarget": "docs:build:ar"
-                        }
-                    }
-                },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "docs:build"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "apps/docs/tsconfig.app.json",
-                            "apps/docs/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "!apps/docs/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "apps/docs/src/test.ts",
-                        "tsConfig": "apps/docs/tsconfig.spec.json",
-                        "karmaConfig": "apps/docs/karma.conf.js",
-                        "polyfills": "apps/docs/src/polyfills.ts",
-                        "styles": [
-                            "node_modules/fundamental-styles/dist/fundamental-styles.css",
-                            "apps/docs/src/styles.scss"
-                        ],
-                        "scripts": [],
-                        "assets": [
-                            "apps/docs/src/favicon.ico",
-                            "apps/docs/src/assets"
-                        ]
-                    }
-                }
-            }
-        },
-        "docs-e2e": {
-            "root": "apps/docs-e2e",
-            "projectType": "application",
-            "prefix": "",
-            "architect": {
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "options": {
-                        "protractorConfig": "apps/docs-e2e/protractor.conf.js",
-                        "devServerTarget": "docs:serve"
-                    },
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "docs:serve:production"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": "apps/docs-e2e/tsconfig.e2e.json",
-                        "exclude": [
-                            "!apps/docs-e2e/**"
-                        ]
-                    }
-                }
-            }
-        },
-        "core": {
-            "root": "libs/core",
-            "sourceRoot": "libs/core/src",
-            "projectType": "library",
-            "prefix": "fundamental-ngx",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "options": {
-                        "tsConfig": "libs/core/tsconfig.lib.json",
-                        "project": "libs/core/ng-package.json"
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/core/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/core/tsconfig.lib.json",
-                            "libs/core/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "!libs/core/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/core/src/test.ts",
-                        "tsConfig": "libs/core/tsconfig.spec.json",
-                        "karmaConfig": "libs/core/karma.conf.js"
-                    }
-                }
-            },
-            "schematics": {
-                "@nrwl/schematics:component": {
-                    "styleext": "scss"
-                }
-            }
-        },
-        "platform": {
-            "root": "libs/platform",
-            "sourceRoot": "libs/platform/src",
-            "projectType": "library",
-            "prefix": "fdp",
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
-                    "options": {
-                        "tsConfig": "libs/platform/tsconfig.lib.json",
-                        "project": "libs/platform/ng-package.json"
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/platform/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/platform/tsconfig.lib.json",
-                            "libs/platform/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "!libs/platform/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/platform/src/test.ts",
-                        "tsConfig": "libs/platform/tsconfig.spec.json",
-                        "karmaConfig": "libs/platform/karma.conf.js"
-                    }
-                }
-            },
-            "schematics": {
-                "@nrwl/schematics:component": {
-                    "styleext": "scss"
-                }
-            }
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "docs": {
+      "root": "apps/docs/",
+      "sourceRoot": "apps/docs/src",
+      "projectType": "application",
+      "prefix": "fundamental-ngx",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "scss"
         }
-    },
-    "defaultProject": "docs",
-    "schematics": {
-        "@schematics/angular:component": {
-            "prefix": "fd",
-            "style": "scss"
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/apps/docs",
+            "index": "apps/docs/src/index.html",
+            "main": "apps/docs/src/main.ts",
+            "polyfills": "apps/docs/src/polyfills.ts",
+            "tsConfig": "apps/docs/tsconfig.app.json",
+            "assets": [
+              "apps/docs/src/favicon.ico",
+              "apps/docs/src/assets",
+              {
+                "glob": "**/css_variables.css",
+                "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
+                "output": "./assets/theming-base/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/fundamental-styles/dist/theming/",
+                "output": "./assets/fundamental-styles-theming/"
+              }
+            ],
+            "styles": [
+              "node_modules/fundamental-styles/dist/icon.css",
+              "apps/docs/src/fd-typedoc/assets/css/main.scss",
+              "apps/docs/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/marked/lib/marked.js"
+            ],
+            "showCircularDependencies": false,
+            "allowedCommonJsDependencies": [
+              "moment",
+              "highlight.js",
+              "focus-trap",
+              "@angularclass/hmr",
+              "hammerjs"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/docs/src/environments/environment.ts",
+                  "with": "apps/docs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "production-unoptimized": {
+              "tsConfig": "apps/docs/tsconfig.netlify.json",
+              "fileReplacements": [
+                {
+                  "replace": "apps/docs/src/environments/environment.ts",
+                  "with": "apps/docs/src/environments/environment.prod.ts"
+                }
+              ],
+              "aot": true,
+              "extractCss": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "vendorChunk": false,
+              "optimization": false
+            },
+            "hmr": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/docs/src/environments/environment.ts",
+                  "with": "apps/docs/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "fr": {
+              "aot": true,
+              "outputPath": "dist/libs/platform/locale/fr",
+              "i18nFile": "apps/docs/src/app/platform/locale/fr/messages.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr",
+              "i18nMissingTranslation": "error"
+            },
+            "ar": {
+              "aot": true,
+              "outputPath": "dist/libs/platform/locale/ar",
+              "i18nFile": "apps/docs/src/app/platform/locale/ar/messages.ar.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "ar",
+              "i18nMissingTranslation": "error"
+            }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
-        "@schematics/angular:directive": {
-            "prefix": "fd"
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "docs:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "docs:build:production"
+            },
+            "hmr": {
+              "browserTarget": "docs:build:hmr"
+            },
+            "fr": {
+              "browserTarget": "docs:build:fr"
+            },
+            "ar": {
+              "browserTarget": "docs:build:ar"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "docs:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/docs/tsconfig.app.json",
+              "apps/docs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "!apps/docs/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/docs/src/test.ts",
+            "tsConfig": "apps/docs/tsconfig.spec.json",
+            "karmaConfig": "apps/docs/karma.conf.js",
+            "polyfills": "apps/docs/src/polyfills.ts",
+            "styles": [
+              "node_modules/fundamental-styles/dist/fundamental-styles.css",
+              "apps/docs/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/docs/src/favicon.ico",
+              "apps/docs/src/assets"
+            ]
+          },
+          "outputs": [
+            "coverage/apps/docs/"
+          ]
         }
+      }
     },
-    "cli": {
-        "defaultCollection": "@nrwl/angular",
-        "analytics": false
+    "docs-e2e": {
+      "root": "apps/docs-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/docs-e2e/protractor.conf.js",
+            "devServerTarget": "docs:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "docs:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/docs-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "!apps/docs-e2e/**"
+            ]
+          }
+        }
+      }
+    },
+    "core": {
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "projectType": "library",
+      "prefix": "fundamental-ngx",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/core/tsconfig.lib.json",
+            "project": "libs/core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/core/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/tsconfig.lib.json",
+              "libs/core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "!libs/core/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/test.ts",
+            "tsConfig": "libs/core/tsconfig.spec.json",
+            "karmaConfig": "libs/core/karma.conf.js"
+          },
+          "outputs": [
+            "coverage/libs/core"
+          ]
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "platform": {
+      "root": "libs/platform",
+      "sourceRoot": "libs/platform/src",
+      "projectType": "library",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/platform/tsconfig.lib.json",
+            "project": "libs/platform/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/tsconfig.lib.json",
+              "libs/platform/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "!libs/platform/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/test.ts",
+            "tsConfig": "libs/platform/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/karma.conf.js"
+          },
+          "outputs": [
+            "coverage/libs/platform"
+          ]
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
     }
+  },
+  "defaultProject": "docs",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "fd",
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "fd"
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  }
 }

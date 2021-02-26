@@ -4,7 +4,7 @@ export enum SliderValueTargets {
     RANGE_SLIDER2
 }
 
-export enum RangeHandles {
+export enum SliderRangeHandles {
     First,
     Second
 }
@@ -15,6 +15,6 @@ export interface SliderTickMark {
     position?: number;
 }
 
-export type CustomValue = Omit<SliderTickMark, 'position'>;
+export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
 
-export type ControlValue = number | number[] | SliderTickMark | SliderTickMark[];
+export type SliderControlValue = number | number[] | SliderTickMark | SliderTickMark[];

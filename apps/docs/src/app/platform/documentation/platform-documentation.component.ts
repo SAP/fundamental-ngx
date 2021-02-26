@@ -58,7 +58,8 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                 ]
             },
             { url: 'platform/value-help-dialog', name: 'Value Help Dialog' },
-            { url: 'platform/approval-flow', name: 'Approval Flow' }
+            { url: 'platform/approval-flow', name: 'Approval Flow' },
+            { url: 'platform/slider', name: 'Slider' }
         ];
 
         this.layouts = [

@@ -56,7 +56,7 @@ import { isFunction, isJsObject, isString } from '../../../../utils/lang';
 import { CollectionBaseInput } from '../../collection-base.input';
 import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
-import { ContentDensity, FormFieldControl } from '../../form-control';
+import { ContentDensity, FormFieldControl, Status } from '../../form-control';
 import { FormField } from '../../form-field';
 
 export type TextAlignment = 'left' | 'right';
@@ -77,10 +77,16 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /**
      *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     *  Can be 'success', 'error', 'warning', 'default', 'information'.
      */
     @Input()
-    state: FormStates;
+    // state: Status = 'default';
+    get state(): Status {
+        return this._state;
+    }
+    set state(state: Status) {
+        this._state = state;
+    }
 
     /** Datasource for suggestion list */
     @Input()

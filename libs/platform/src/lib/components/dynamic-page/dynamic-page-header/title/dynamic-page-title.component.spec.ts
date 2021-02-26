@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BreadcrumbModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
 import { CLASS_NAME } from '../../constants';
@@ -42,7 +42,7 @@ describe('DynamicPageTitleComponent', () => {
     let pageTitleKeyInfoComponent: DynamicPageKeyInfoComponent;
     let component: TestComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
             declarations: [TestComponent],

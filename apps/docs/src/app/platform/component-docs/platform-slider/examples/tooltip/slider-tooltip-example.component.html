@@ -1,0 +1,29 @@
+<div class="base-row">
+    <p>
+        The slider can display tooltip with the text field. In this case, the value of the grip is displayed.
+        <br />
+        To use it set <code>[tooltipMode]</code> as <code>readonly</code>
+    </p>
+    <fdp-slider id="slider-tooltip-text" name="slider-tooltip-text" [(ngModel)]="value" tooltipMode="readonly">
+    </fdp-slider>
+    <p>Value: {{ value }}</p>
+    <hr />
+</div>
+
+<div class="base-row">
+    <p>
+        The slider can display tooltip with the input field instead of the text field. This allows entering a specific
+        value.
+        <br />
+        To use it set <code>[tooltipMode]</code> as <code>editable</code>
+    </p>
+    <fdp-slider
+        id="slider-tooltip-editable"
+        name="slider-tooltip-editable"
+        [(ngModel)]="value1"
+        [min]="-50"
+        [max]="50"
+        tooltipMode="editable"
+    ></fdp-slider>
+    <p>Value: {{ value1 }}</p>
+</div>

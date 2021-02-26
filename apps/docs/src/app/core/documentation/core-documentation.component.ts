@@ -45,6 +45,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/input', name: 'Input' },
             { url: 'core/inputGroup', name: 'Input Group' },
             { url: 'core/link', name: 'Link' },
+            { url: 'core/illustrated-message', name: 'Illustrated Message' },
             {
                 name: 'List',
                 subItems: [

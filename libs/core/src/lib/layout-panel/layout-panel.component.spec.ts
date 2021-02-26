@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LayoutPanelComponent } from './layout-panel.component';
 
@@ -6,7 +6,7 @@ describe('LayoutPanelComponent', () => {
     let component: LayoutPanelComponent;
     let fixture: ComponentFixture<LayoutPanelComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [LayoutPanelComponent]
         }).compileComponents();

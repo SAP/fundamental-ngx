@@ -59,7 +59,7 @@ export class TokenComponent {
 
     /** Emitted when a token is clicked. */
     @Output()
-    onTokenClick: EventEmitter<void> = new EventEmitter<void>();
+    onTokenClick: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
     /** @hidden */
     closeClickHandler(event?): void {

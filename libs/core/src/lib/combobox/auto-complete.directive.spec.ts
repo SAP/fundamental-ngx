@@ -1,6 +1,6 @@
 import { AutoCompleteDirective } from './auto-complete.directive';
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 @Component({
     template: ` <input [options]="values" fd-auto-complete>`
@@ -16,7 +16,7 @@ describe('AutoCompleteDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let directive: AutoCompleteDirective;
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [AutoCompleteDirective, TestComponent]
         }).compileComponents();

@@ -4,6 +4,7 @@ import { FdDatetimeModule, FdDate } from '../datetime';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
+import { ButtonModule } from '../button/button.module';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;
@@ -12,7 +13,7 @@ describe('CalendarComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdDatetimeModule, CalendarModule]
+                imports: [FdDatetimeModule, CalendarModule, ButtonModule]
             }).compileComponents();
         })
     );

@@ -162,6 +162,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
             },
             {
+                path: 'illustrated-message',
+                loadChildren: () => import('./component-docs/illustrated-message/illustrated-message-docs.module').then((m) => m.IllustratedMessageDocsModule)
+            },
+            {
                 path: 'info-label',
                 loadChildren: () =>
                     import('./component-docs/info-label/info-label-docs.module').then((m) => m.InfoLabelDocsModule)
