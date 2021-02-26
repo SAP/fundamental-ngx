@@ -2,5 +2,90 @@
   "requisitions": [{
     "id": "1",
     "name": "First Requisition"
+  }],
+  "items": [{
+    "id": "ITEM_0100",
+    "name": "Braeburn Apple",
+    "category": "Fruit",
+    "price": 0.45,
+    "weight": 80,
+    "supplier": "Northstar Produce"
+  }, {
+    "id": "ITEM_0110",
+    "name": "Pippen Apple",
+    "category": "Fruit",
+    "price": 0.35,
+    "weight": 70,
+    "supplier": "Northstar Produce"
+  }, {
+    "id": "ITEM_0120",
+    "name": "Fuji Apple",
+    "category": "Fruit",
+    "price": 0.39,
+    "weight": 75,
+    "supplier": "Green Valley Produce"
+  }, {
+    "id": "ITEM_0200",
+    "name": "Blue Java Banana",
+    "category": "Fruit",
+    "price": 0.35,
+    "weight": 85,
+    "supplier": "Tropic Island"
+  }, {
+    "id": "ITEM_0220",
+    "name": "Cavendish Banana",
+    "category": "Fruit",
+    "price": 0.25,
+    "weight": 90,
+    "supplier": "Tropic Island"
+  }, {
+    "id": "ITEM_0300",
+    "name": "Nantes Carrot",
+    "category": "Vegetable",
+    "price": 0.10,
+    "weight": 32,
+    "supplier": "Earthroot Farms"
+  }, {
+    "id": "ITEM_0310",
+    "name": "Yaya Carrot",
+    "category": "Vegetable",
+    "price": 0.15,
+    "weight": 35,
+    "supplier": "Earthroot Farms"
+  }, {
+    "id": "ITEM_0320",
+    "name": "Touchon Carrot",
+    "category": "Vegetable",
+    "price": 0.21,
+    "weight": 45,
+    "supplier": "Green Valley Produce"
+  }, {
+    "id": "ITEM_0400",
+    "name": "Gouda Cheese",
+    "category": "Dairy",
+    "price": 4.97,
+    "weight": 400,
+    "supplier": "Sunflower Dairy"
+  }, {
+    "id": "ITEM_0410",
+    "name": "Swiss Cheese",
+    "category": "Dairy",
+    "price": 3.64,
+    "weight": 450,
+    "supplier": "Two Cows Farm"
+  }, {
+    "id": "ITEM_0411",
+    "name": "Swiss Cheese",
+    "category": "Dairy",
+    "price": 3.02,
+    "weight": 450,
+    "supplier": "Sunflower Dairy"
+  }, {
+    "id": "ITEM_0420",
+    "name": "Provolone Cheese",
+    "category": "Dairy",
+    "price": 4.05,
+    "weight": 450,
+    "supplier": "Two Cows Farm"
   }]
 }

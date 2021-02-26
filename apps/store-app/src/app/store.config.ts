@@ -24,6 +24,20 @@ export type Class<T> = new (...args: any[]) => T;
 export interface EntityTypes {
     [index: string]: Class<BaseEntity>;
 }
+@RESTResource({})
+@Entity({
+    domain: 'Requisitioning',
+    name: 'Item'
+})
+export class Item {
+    id: string;
+    name: string;
+    description: string;
+    category: string;
+    price: number;
+    weight: number;
+    supplier: string;
+}
 
 @RESTResource({
     path: '/requisitions/:reqId/lineItems'
@@ -61,6 +75,6 @@ export class Requisition extends BaseEntity {
 // Set the default URL root for all entities registered
 export const storeConfig: FundamentalStoreConfig = {
     root: 'api/',
-    entities: { Requisition: Requisition, LineItem: LineItem },
+    entities: { Requisition: Requisition, LineItem: LineItem, Item: Item },
     enableDevtools: true
 };
