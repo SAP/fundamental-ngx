@@ -365,7 +365,7 @@ export class SelectComponent implements
     }
 
     get calculatedMaxHeight(): number {
-        return  this._calculatedMaxHeight;
+        return this._maxHeight || this._calculatedMaxHeight;
     }
 
     constructor(

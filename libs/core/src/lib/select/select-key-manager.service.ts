@@ -27,10 +27,10 @@ export class SelectKeyManagerService {
 
         this._keyManager.tabOut.pipe(takeUntil(this._component._destroy)).subscribe(() => {
           // tab focus fix for mobile
-            if (!this._component.mobile) {
+        if (!this._component.mobile) {
             this._component.focus();
             this._component.close();
-            }
+             }
         });
 
         this._keyManager.change.pipe(takeUntil(this._component._destroy)).subscribe(() => {

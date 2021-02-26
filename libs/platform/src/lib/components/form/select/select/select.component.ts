@@ -201,7 +201,7 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
 
         this.selected = selectedItem;
         this.value = this.displayValue(this.selected);
-      
+        
     }
 
     /**
