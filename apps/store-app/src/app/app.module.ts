@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import 'reflect-metadata';
+
+import { ShellbarModule } from '@fundamental-ngx/core';
 import { FundamentalStoreModule, QueryAdapterFactory } from '@fundamental-ngx/store';
 
 import { AppComponent } from './app.component';
 import { storeConfig } from './store.config';
 import { DemoQueryAdapterFactory } from './customizations/demo-query-adapter';
+import { CommonService } from './service/common.service';
 
 const routes: Routes = [{
     path: 'home',
@@ -29,10 +32,12 @@ const routes: Routes = [{
         HttpClientModule,
         RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
         FundamentalStoreModule.forRoot(storeConfig),
+        ShellbarModule,
     ],
-    providers: [{
-        provide: QueryAdapterFactory, useClass: DemoQueryAdapterFactory
-    }],
+    providers: [
+        { provide: QueryAdapterFactory, useClass: DemoQueryAdapterFactory },
+        CommonService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
