@@ -5,8 +5,10 @@
 		<div class="lead">
 			<p>Container for grouped buttons.</p>
 		</div>
-		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-segmented-button</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-segmented-button</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">&quot;value&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;first&quot;</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;second&quot;</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;third&quot;</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">fd-segmented-button</span>&gt;</span></code></pre>
 	</div>
 </section>
@@ -17,5 +19,58 @@
 			<span class="target">SegmentedButtonComponent</span>
 		</li>
 	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">AfterContentInit</span></li>
+		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Inputs</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="toggle" class="tsd-anchor"></a>
+		<h3>toggle</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">toggle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/segmented-button/segmented-button.component.ts#L54">libs/core/src/lib/segmented-button/segmented-button.component.ts:54</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether segmented button is on toggle mode, which allows to toggle more than 1 button</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Constructors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+		<a name="constructor" class="tsd-anchor"></a>
+		<h3>constructor</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Segmented<wbr>Button<wbr>Component<span class="tsd-signature-symbol">(</span>_changeDetRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SegmentedButtonComponent</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/segmented-button/segmented-button.component.ts#L84">libs/core/src/lib/segmented-button/segmented-button.component.ts:84</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>_changeDetRef: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SegmentedButtonComponent</span></h4>
+			</li>
+		</ul>
+	</section>
 </section>
 </div>
