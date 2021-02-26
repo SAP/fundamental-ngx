@@ -6,10 +6,13 @@ export {
     EntityStoreBuilderFactory,
     HttpUrlGenerator
 } from './lib/infrastructure/persistence/store';
-export { QueryParams, QueryAdapter, DefaultQueryAdapter } from './lib/infrastructure/persistence/query/query-adapter';
-export { Query } from './lib/infrastructure/persistence/query/query';
+export { QueryParams, QueryAdapter, DefaultQueryAdapter, QueryAdapterFactory } from './lib/infrastructure/persistence/query/query-adapter';
+export { OrderBy, Query } from './lib/infrastructure/persistence/query/query';
 export {
     FundamentalRootStoreModule,
     FundamentalStoreModule,
     FundamentalStoreModuleForFeature
 } from './lib/store.module';
+
+export * from './lib/infrastructure/persistence/query/grammer/predicate';
+export * from './lib/infrastructure/persistence/query/grammer/query-expressions';

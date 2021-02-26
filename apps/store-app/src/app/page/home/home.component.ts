@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { EntityStore, EntityStoreBuilderFactory } from '@fundamental-ngx/store';
+import { EntityStore, EntityStoreBuilderFactory, eq } from '@fundamental-ngx/store';
 import { Observable } from 'rxjs';
 
-import { Item, Requisition } from '../../store.config';
+import { Item } from '../../store.config';
 @Component({
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
@@ -16,6 +16,8 @@ export class HomeComponent {
         this.itemStore = builder.create();
 
         const query = this.itemStore.queryBuilder.build();
-        this.items$ = query.fetch();
+        this.items$ = query.where(eq('category', 'Dairy'))
+            .orderBy({field: 'name'}, {field: 'price'})
+            .fetch();
     }
 }
