@@ -179,7 +179,7 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
     let component: MoreImagesThumbnailImageTestComponent;
     let fixture: ComponentFixture<MoreImagesThumbnailImageTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
             declarations: [ThumbnailImageComponent, MoreImagesThumbnailImageTestComponent]
