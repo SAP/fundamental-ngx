@@ -530,6 +530,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
         if (this.showFooter) {
             this.closePopover();
+            this._changeDetRef.detectChanges();
         }
     }
 
