@@ -28,6 +28,12 @@
 	}
 }
 
+.fd-dynamic-page {
+	 .fd-bar--floating-footer {
+		 z-index: 2;
+	 }
+ }
+
 // TODO: Remove after addressing and migrating styles library
 .fd-dynamic-page--xl {
 	.fd-bar--floating-footer {
@@ -45,5 +51,9 @@
 .fd-dynamic-page--sm {
 	.fd-bar--floating-footer {
 		margin: 1rem 0.5rem;
+	}
+
+	.fd-dynamic-page__title-container {
+		align-items: center;
 	}
 }

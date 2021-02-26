@@ -17,7 +17,7 @@ import { DynamicPageResponsiveSize } from '../../constants';
                         [clearBorder]="true" 
                         [forceOverflow]="true" 
                         [shouldOverflow]="true" 
-                        [size]="compact ? 'compact' : 'cozy'">
+                        [size]="!compact ? 'cozy' : 'compact'">
                 <div fd-toolbar-item>
                     <ng-container *ngTemplateOutlet="templateContentRef"></ng-container>
                 </div>
