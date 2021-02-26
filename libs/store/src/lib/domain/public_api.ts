@@ -6,3 +6,5 @@ export { CachePolicy, CachePolicyStrategy } from './cache-policy';
 export { ChainingStrategy, ChainingPolicy, ChainingStrategyFieldsMap } from './chaining-policy';
 export { Entity, RESTResource, EntityType } from './decorators';
 export { Type } from './utility';
+export * from './base-classes/base-entity';
+export * from './base-classes/base-value';
