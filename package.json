@@ -94,7 +94,7 @@
   },
   "dependencies": {
     "@angular/animations": "~11.1.0",
-    "@angular/cdk": "~11.1.0",
+    "@angular/cdk": "~11.2.2",
     "@angular/common": "~11.1.0",
     "@angular/compiler": "~11.1.0",
     "@angular/core": "~11.1.0",
