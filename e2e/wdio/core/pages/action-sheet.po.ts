@@ -7,6 +7,7 @@ export class ActionSheetPo extends CoreBaseComponentPo {
 
     actionSheetMenuButton = 'fd-action-sheet-control button';
     actionSheetList = 'fd-action-sheet-body ul';
+    actionSheetListItems = 'fd-action-sheet-body li'
     actionSheetListItemButtons = 'fd-action-sheet-body button'
     alertMessage = 'fd-message-toast'
 
@@ -15,5 +16,4 @@ export class ActionSheetPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.title);
     }
-
 }
