@@ -8,9 +8,8 @@ import {
     saveElementScreenshot,
     waitForElDisplayed,
     waitForInvisibilityOf,
-    checkElementScreenshot, scrollIntoView
+    checkElementScreenshot, scrollIntoView, isElementDisplayed, pause
 } from '../../driver/wdio';
-import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('alert test suite', function() {
     const alertPage = new AlertPo();
@@ -34,15 +33,20 @@ describe('alert test suite', function() {
 
     describe('main checks', function() {
         it('should check ability to dismiss alert', () => {
-            checkElArrIsClickable(closeAlertButton);
+            const dismissableAlertCount = getElementArrayLength(closeAlertButton);
+
+            for (let i = 0; dismissableAlertCount > i; i++) {
+                click(closeAlertButton, i);
+                expect(isElementDisplayed(closeAlertButton, i)).toBe(false);
+            }
         });
 
-        it('should check popup alerts', () => {
+        it('should check popup alerts appear and disappear', () => {
             const openOverlayButtonCount = 3;
             checkPopupAlert(openOverlayButton, openOverlayButtonCount);
         });
 
-        it('should check custom popup alerts', () => {
+        it('should check custom popup alerts appear and disappear', () => {
             const customAlertCount = getElementArrayLength(openCustomAlertButton);
             checkPopupAlert(openCustomAlertButton, customAlertCount);
         });
@@ -80,11 +84,15 @@ describe('alert test suite', function() {
         for (let i = 0; count > i; i++) {
             click(selector, i);
             expect(waitForElDisplayed(popupAlert)).toBe(true);
+
             if (doesItExist(popupAlert + button) === false) {
                 waitForInvisibilityOf(popupAlert);
                 continue;
             }
             click(popupAlert + button);
+            // the pause gives the alert time to close before checking if it still exists
+            pause(250);
+            expect(doesItExist(popupAlert)).toBe(false);
         }
     }
 });
