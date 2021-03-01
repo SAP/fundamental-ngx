@@ -45,12 +45,12 @@ describe('DynamicPageComponent default values', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(fakeAsync(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         dynamicPageComponent = component.dynamicPage;
-    });
+    }));
 
     it('should create', () => {
         fixture.detectChanges()
@@ -85,19 +85,6 @@ describe('DynamicPageComponent default values', () => {
 
         expect(spy).toHaveBeenCalled();
     })
-
-    it('should handle window resize', fakeAsync(() => {
-        (<any>dynamicPageComponent)._listenOnResize();
-        const sizeChangeSpy = spyOn(<any>dynamicPageComponent, '_sizeChangeHandle');
-        const containerPositionSpy = spyOn(<any>dynamicPageComponent, '_setContainerPositions');
-
-        window.dispatchEvent(new Event('resize'));
-
-        tick(150);
-
-        expect(sizeChangeSpy).toHaveBeenCalled();
-        expect(containerPositionSpy).toHaveBeenCalled();
-    }));
 
     it('should propagate sizes', () => {
         const propagateSizeSpy = spyOn(<any>dynamicPageComponent, '_propagateSizeToChildren');
