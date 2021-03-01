@@ -8,7 +8,11 @@ import {
     ObjectStatusModule,
     ToolbarModule,
     ListModule,
-    TableModule
+    TableModule,
+    CalendarModule,
+    FdDatetimeModule,
+    QuickViewModule,
+    InfoLabelModule
 } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -25,6 +29,11 @@ import { CardKpiExampleComponent } from './examples/card-kpi-example.component';
 import { CardTableExampleComponent } from './examples/card-table-example.component';
 import { BarChartListCardExampleComponent } from './examples/bar-chart-list-card/bar-chart-list-card-example.component';
 import { CardBarComponent } from './examples/bar-chart-list-card/card-bar.component';
+import { CardObjectExampleComponent } from './examples/object-card/card-object-example.component';
+import { CardCalendarExampleComponent } from './examples/calendar-card/card-calendar-example.component';
+import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
+import { CardListExampleComponent } from './examples/list-card/card-list-example.component';
+import { CardLinkListExampleComponent } from './examples/link-list-card/card-link-list-example.component';
 
 const routes: Routes = [
     {
@@ -47,7 +56,11 @@ const routes: Routes = [
         ObjectStatusModule,
         ToolbarModule,
         ListModule,
-        TableModule
+        TableModule,
+        CalendarModule,
+        FdDatetimeModule,
+        QuickViewModule,
+        InfoLabelModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -60,7 +73,12 @@ const routes: Routes = [
         CardKpiExampleComponent,
         CardTableExampleComponent,
         BarChartListCardExampleComponent,
-        CardBarComponent
+        CardBarComponent,
+        CardObjectExampleComponent,
+        CardCalendarExampleComponent,
+        CardQuickViewExampleComponent,
+        CardListExampleComponent,
+        CardLinkListExampleComponent
     ]
 })
 export class CardDocsModule {}
