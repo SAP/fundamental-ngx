@@ -13,3 +13,9 @@
 .fd-list__secondary {
     pointer-events: all;
 }
+
+.fd-list.fd-list--byline {
+	 .fd-list__byline-left {
+		align-self: flex-start;
+	}
+}
