@@ -722,7 +722,7 @@ export class SelectComponent implements
     /** @hidden */
     private _emitSelectChange(defaultVal?: any): void {
         if (this.canEmitValueChange) {
-            this._internalValue = this._selectionModel.selected
+            this._internalValue = (this._selectionModel.selected && this._selectionModel.selected.length !== 0)
                 ? (this.selected as OptionComponent).value
                 : defaultVal;
             this.valueChange.emit(this._internalValue);

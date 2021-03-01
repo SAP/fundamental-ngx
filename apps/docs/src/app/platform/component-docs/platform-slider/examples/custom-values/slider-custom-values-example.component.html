@@ -1,0 +1,9 @@
+<div class="base-row">
+    <p>
+        You can define custom values as labels. This can be useful if your scenario requires descriptive intervals, such
+        as dates. Always keep the values as short and meaningful as possible.
+    </p>
+    <fdp-slider id="slider-custom-values" name="slider-custom-values" [(ngModel)]="value" [showTicks]="true" [showTicksLabels]="true" [customValues]="customValues">
+    </fdp-slider>
+    <p>Value: {{ value | json }}</p>
+</div>

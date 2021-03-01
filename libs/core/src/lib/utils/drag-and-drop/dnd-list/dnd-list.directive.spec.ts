@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DndListDirective, ElementChord } from './dnd-list.directive';
 import { Component, ViewChild } from '@angular/core';
 import { DndItemDirective } from '../dnd-item/dnd-item.directive';
@@ -26,7 +26,7 @@ describe('DndListDirective', () => {
     let directive: DndListDirective<string>;
     let elementCoordinates: ElementChord[];
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [DragDropModule],
             declarations: [DndListDirective, TestDndListComponent, DndItemDirective]

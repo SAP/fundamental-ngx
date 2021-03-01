@@ -7,12 +7,13 @@ export function defaultWaitTime(): number {
 export function currentPlatformName(): string {
     return browser.capabilities.platformName;
 }
+
 export function currentBrowserName(): string {
-    return  browser.capabilities.browserName;
+    return browser.capabilities.browserName;
 }
 
 export function getImageTagBrowserPlatform(): string {
-    return `${currentBrowserName()}-${currentPlatformName()}`
+    return `${currentBrowserName()}-${currentPlatformName()}`;
 }
 
 export function getBaseURL(): string {
@@ -36,7 +37,7 @@ export function isBrowser(browserName: string): boolean {
 }
 
 export function browserIsIEorSafari(): boolean {
-    return browserIsSafari() || browserIsIE() ;
+    return browserIsSafari() || browserIsIE();
 }
 
 export function browserIsFirefox(): boolean {

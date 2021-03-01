@@ -27,6 +27,7 @@
                     [ngClass]="{ 'is-error': _isInvalidDateInput && useValidation }"
                     [disabled]="disabled"
                     (ngModelChange)="handleInputChange($event)"
+                    (focus)="onTouched()"
                 />
                 <span
                     fd-input-group-addon

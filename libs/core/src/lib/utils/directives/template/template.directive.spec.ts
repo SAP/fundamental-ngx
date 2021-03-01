@@ -1,6 +1,6 @@
 import { TemplateDirective } from './template.directive';
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TemplateModule } from './template.module';
 
 @Component({
@@ -14,7 +14,7 @@ describe('TemplateDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [TemplateModule],
             declarations: [TestComponent]

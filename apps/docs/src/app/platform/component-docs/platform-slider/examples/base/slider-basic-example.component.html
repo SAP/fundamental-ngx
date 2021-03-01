@@ -1,0 +1,56 @@
+<div class="base-row">
+    <p>Slider default state: <code>[min]="0" [max]="100" [step]="1"</code></p>
+    <fdp-slider
+        id="slider-default-state"
+        name="slider-default-state"
+        [value]="value1"
+        (sliderChange)="onSliderChange1($event)"
+    >
+    </fdp-slider>
+    <p>Value: {{ value1 }}</p>
+    <hr />
+</div>
+
+<div class="base-row">
+    <p>Slider with negative min value <code>[min]="-100"</code></p>
+    <fdp-slider
+        id="slider-negative-value"
+        name="slider-negative-value"
+        [value]="value2"
+        [min]="-100"
+        (sliderChange)="onSliderChange2($event)"
+    >
+    </fdp-slider>
+    <p>Value: {{ value2 }}</p>
+    <hr />
+</div>
+
+<div class="base-row">
+    <p>Slider with <code>[min]="-50" [max]="50" [step]="5"</code> values.</p>
+    <fdp-slider
+        id="slider-negative-value-step-5"
+        name="slider-negative-value-step-5"
+        [(ngModel)]="value3"
+        [min]="-50"
+        [max]="50"
+        [step]="5"
+    >
+    </fdp-slider>
+    <p>Value: {{ value3 }}</p>
+    <hr />
+</div>
+
+<div class="base-row">
+    <p>Slider with <code>[min]="-1" [max]="1" [step]="0.2"</code> values.</p>
+    <fdp-slider
+        id="slider-negative-value-step-0.2"
+        name="slider-negative-value-step-0.2"
+        [(ngModel)]="value4"
+        [min]="-1"
+        [max]="1"
+        [step]="0.2"
+    >
+    </fdp-slider>
+    <p>Value: {{ value4 }}</p>
+    <hr />
+</div>

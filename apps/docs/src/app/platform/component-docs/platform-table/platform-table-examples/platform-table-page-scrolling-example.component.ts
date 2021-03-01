@@ -51,7 +51,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
         })
     );
 
-    loading = new BehaviorSubject(false);
+    loading = new BehaviorSubject(true);
 
     items: ExampleItem[] = [];
 

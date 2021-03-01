@@ -1,7 +1,9 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" class="fd-wizard-example">
+        <fd-dialog-header>
+            <h2 fd-title headerSize="2">Checkout</h2>
+        </fd-dialog-header>
         <fd-dialog-body>
-            <h2 fd-title>Checkout</h2>
             <fd-wizard [appendToWizard]="false">
                 <fd-wizard-navigation>
                     <ul fd-wizard-progress-bar>

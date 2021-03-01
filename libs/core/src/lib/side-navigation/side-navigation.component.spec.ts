@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
 
 import { SideNavigationComponent } from './side-navigation.component';
 import { Component, ViewChild } from '@angular/core';
@@ -99,7 +99,7 @@ describe('SideNavigationComponent', () => {
     let component: TestNestedContainerComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [NestedListModule],
             declarations: [SideNavigationComponent, SideNavigationMainDirective, TestNestedContainerComponent],

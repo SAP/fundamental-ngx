@@ -1,5 +1,5 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CarouselDirective } from './carousel.directive';
 import { CarouselItemDirective } from './carousel-item.directive';
 import { CommonModule } from '@angular/common';
@@ -82,7 +82,7 @@ describe('CarouselDirective', () => {
     let verticalFixture: ComponentFixture<VerticalCarouselComponent>;
     let horizontalFixture: ComponentFixture<HorizontalCarouselComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule],
             declarations: [HorizontalCarouselComponent, VerticalCarouselComponent, CarouselItemDirective, CarouselDirective],

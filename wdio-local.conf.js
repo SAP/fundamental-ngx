@@ -184,7 +184,7 @@ exports.config = {
             {
                 // For local run/debug separate folder for screenshots
                 // will be created as soon as screen resolutions can differ a lot between local systems
-                baselineFolder: join(process.cwd(), './e2e/wdio/tmp/baselineScreenshot/'),
+                baselineFolder: join(process.cwd(), '.tmp/baselineScreenshot/'),
                 formatImageName: '{tag}-{logName}-{width}x{height}',
                 screenshotPath: join(process.cwd(), '.tmp/'),
                 savePerInstance: true,
@@ -294,7 +294,6 @@ exports.config = {
         browser.addCommand('addIsActiveClass', function() {
             browser.execute(function(domElement) {
                 domElement.classList.add('is-active');
-
             }, this);
         }, true);
 

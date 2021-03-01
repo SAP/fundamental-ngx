@@ -26,7 +26,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
 import { PopoverComponent } from '../popover/public_api';
-import { ControlValue, CustomValue, RangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
+import { SliderControlValue, SliderCustomValue, SliderRangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
 
 export const SLIDER_VALUE_ACCESSOR = {
@@ -151,7 +151,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Array of custom values to use for Slider. */
     @Input()
-    customValues: CustomValue[] = [];
+    customValues: SliderCustomValue[] = [];
 
     /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
     @Input()
@@ -173,12 +173,12 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Control value */
     @Input()
-    get value(): ControlValue {
+    get value(): SliderControlValue {
         return this._value;
     }
 
     /** Set control value */
-    set value(value: ControlValue) {
+    set value(value: SliderControlValue) {
         if (!this._isValidControlValue(value, this.value)) {
             return;
         }
@@ -366,7 +366,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    writeValue(value: ControlValue): void {
+    writeValue(value: SliderControlValue): void {
         this.value = value;
     }
 
@@ -395,13 +395,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
                 return;
             }
 
-            let handleIndex: RangeHandles;
+            let handleIndex: SliderRangeHandles;
             if (event.target === this.rangeHandle1.nativeElement) {
-                handleIndex = RangeHandles.First;
+                handleIndex = SliderRangeHandles.First;
             }
 
             if (event.target === this.rangeHandle2.nativeElement) {
-                handleIndex = RangeHandles.Second;
+                handleIndex = SliderRangeHandles.Second;
             }
 
             const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
@@ -432,16 +432,16 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
         let prevValue = this._position as number;
-        let handleIndex: RangeHandles;
+        let handleIndex: SliderRangeHandles;
         if (this._isRange) {
             if (event.target === this.rangeHandle1.nativeElement) {
                 prevValue = this._handle1Value;
-                handleIndex = RangeHandles.First;
+                handleIndex = SliderRangeHandles.First;
             }
 
             if (event.target === this.rangeHandle2.nativeElement) {
                 prevValue = this._handle2Value;
-                handleIndex = RangeHandles.Second;
+                handleIndex = SliderRangeHandles.Second;
             }
         }
 
@@ -509,12 +509,12 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         }
 
         if (target === SliderValueTargets.RANGE_SLIDER1) {
-            this._setRangeHandleValueAndPosition(RangeHandles.First, newValue);
+            this._setRangeHandleValueAndPosition(SliderRangeHandles.First, newValue);
             this.rangeHandle1.nativeElement.focus();
         }
 
         if (target === SliderValueTargets.RANGE_SLIDER2) {
-            this._setRangeHandleValueAndPosition(RangeHandles.Second, newValue);
+            this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, newValue);
             this.rangeHandle2.nativeElement.focus();
         }
 
@@ -567,15 +567,15 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    private _setRangeHandleValueAndPosition(handleIndex: RangeHandles, value: number): void {
+    private _setRangeHandleValueAndPosition(handleIndex: SliderRangeHandles, value: number): void {
         const position = this._calcProgress(value, true);
 
-        if (handleIndex === RangeHandles.First) {
+        if (handleIndex === SliderRangeHandles.First) {
             this._handle1Value = value;
             this._handle1Position = position;
         }
 
-        if (handleIndex === RangeHandles.Second) {
+        if (handleIndex === SliderRangeHandles.Second) {
             this._handle2Value = value;
             this._handle2Position = position;
         }
@@ -717,7 +717,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    private _isValidControlValue(currentValue: ControlValue, previousValue: ControlValue): boolean {
+    private _isValidControlValue(currentValue: SliderControlValue, previousValue: SliderControlValue): boolean {
         if (!currentValue && currentValue !== 0) {
             return false;
         }
@@ -756,6 +756,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     private _initRangeMode(value: number[] | SliderTickMark[]): void {
+        if (!(this._handle1Value === 0 && this._handle2Value === 0)) {
+            return;
+        }
+
         if (this.customValues.length > 0) {
             this._initRangeModeWithCustomValues(value as SliderTickMark[]);
 
@@ -772,8 +776,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     private _initRangeModeDefault([firstHandle, secondHandle]: number[]): void {
         this._position = [firstHandle, secondHandle];
 
-        this._setRangeHandleValueAndPosition(RangeHandles.First, firstHandle);
-        this._setRangeHandleValueAndPosition(RangeHandles.Second, secondHandle);
+        this._setRangeHandleValueAndPosition(SliderRangeHandles.First, firstHandle);
+        this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, secondHandle);
     }
 
     /** @hidden */
@@ -828,7 +832,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    private _instanceOfCustomValue(object: any): object is CustomValue {
+    private _instanceOfCustomValue(object: any): object is SliderCustomValue {
         return !!object && 'value' in object && 'label' in object;
     }
 }

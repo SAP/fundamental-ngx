@@ -1,0 +1,41 @@
+<div class="base-row">
+    <p>
+        To use Range Slider need to set <code>[mode]</code> as <code>range</code> (by default <code>[mode]</code> as
+        <code>single</code>)
+    </p>
+    <fdp-slider
+        id="slider-range"
+        name="slider-range"
+        [(ngModel)]="value"
+        mode="range"
+        tooltipMode="editable"
+        [showTicks]="true"
+    ></fdp-slider>
+
+    <p>
+        Min value: {{ value[0] }}
+        <br />
+        Max value: {{ value[1] }}
+    </p>
+    <hr />
+</div>
+
+<div class="base-row">
+    <p>Range slided with Custom Values.</p>
+    <fdp-slider
+        id="slider-range-and-custom-values"
+        name="slider-range-and-custom-values"
+        [(ngModel)]="value2"
+        mode="range"
+        [customValues]="customValues"
+        [showTicks]="true"
+        [showTicksLabels]="true"
+    >
+    </fdp-slider>
+
+    <p>
+        Min value: {{ value2[0] | json }}
+        <br />
+        Max value: {{ value2[1] | json }}
+    </p>
+</div>

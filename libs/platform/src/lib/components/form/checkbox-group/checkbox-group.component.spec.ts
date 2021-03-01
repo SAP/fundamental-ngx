@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { FormModule } from '@fundamental-ngx/core';
@@ -95,7 +95,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
     let host: TestReactiveCheckboxGroupComponnet;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupComponnet>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestReactiveCheckboxGroupComponnet, CheckboxGroupComponent, CheckboxComponent]
@@ -347,7 +347,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     let host: TestTemplateDrivenCheckboxGroupComponnet;
     let fixture: ComponentFixture<TestTemplateDrivenCheckboxGroupComponnet>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule],
             declarations: [TestTemplateDrivenCheckboxGroupComponnet, CheckboxGroupComponent, CheckboxComponent]
@@ -613,7 +613,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
     let host: TestReactiveCheckboxGroupWithData;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupWithData>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestReactiveCheckboxGroupWithData, CheckboxGroupComponent, CheckboxComponent]

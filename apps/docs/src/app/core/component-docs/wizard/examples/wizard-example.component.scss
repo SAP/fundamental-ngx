@@ -4,12 +4,16 @@
         margin-bottom: 12px !important;
     }
 
+    .fd-dialog__header .fd-bar, .fd-bar--header {
+        box-shadow: none;
+    }
+
     .fd-title--h3 {
         margin-bottom: 12px !important;
     }
 
     .fd-title--h2 {
-        padding: 8px 0 8px 32px;
+        padding: 16px 0 8px 16px;
     }
 
     .fd-wizard__content {

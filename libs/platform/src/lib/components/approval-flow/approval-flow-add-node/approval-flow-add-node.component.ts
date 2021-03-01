@@ -114,7 +114,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     get _isMainSubmitButtonDisabled(): boolean {
         if (this._isSingleUserMode) {
-            return !this._selectedApprovers.length;
+            return !this._selectedApprovers.length || !this._dueDate;
         }
 
         return !this._selectedTeam;
@@ -285,6 +285,11 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _setFilteredTeamMembers(users: ApprovalUser[]): void {
         this._filteredTeamMembers = [...users];
         this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    _isDateNull(): boolean {
+        return !this._dueDate;
     }
 
     /** @hidden */

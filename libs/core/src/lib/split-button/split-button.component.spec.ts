@@ -1,6 +1,6 @@
 import { SplitButtonComponent } from './split-button.component';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MenuModule } from '../menu/menu.module';
 import createSpy = jasmine.createSpy;
@@ -31,7 +31,7 @@ describe('SplitButtonComponent', () => {
 
     let component, componentInstance: SplitButtonComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [MenuModule],
             declarations: [SplitButtonComponent, TestComponent]

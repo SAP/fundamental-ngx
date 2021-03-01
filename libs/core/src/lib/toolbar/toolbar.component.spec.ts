@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ViewChild, Component, ViewChildren, QueryList } from '@angular/core';
 
 import { whenStable } from '../utils/tests/when-stable';
@@ -14,7 +14,7 @@ describe('ToolbarComponent', () => {
     let component: ToolbarTestComponent;
     let fixture: ComponentFixture<ToolbarTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 ToolbarComponent,
@@ -54,7 +54,7 @@ describe('ToolbarComponent - Prioritization', () => {
     let component: ToolbarOverflowPriorityTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowPriorityTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 ToolbarComponent,
@@ -100,7 +100,7 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     let component: ToolbarOverflowGroupingTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowGroupingTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 ToolbarComponent,
