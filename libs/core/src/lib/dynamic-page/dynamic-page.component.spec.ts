@@ -45,12 +45,12 @@ describe('DynamicPageComponent default values', () => {
         }).compileComponents();
     }));
 
-    beforeEach(fakeAsync(() => {
+    beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         dynamicPageComponent = component.dynamicPage;
-    }));
+    });
 
     it('should create', () => {
         fixture.detectChanges()
