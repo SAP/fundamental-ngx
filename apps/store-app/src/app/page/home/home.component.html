@@ -1,4 +1,32 @@
-<h1>Home</h1>
+<fd-dynamic-side-content>
+    <fd-dynamic-side-content-side>
+        <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" style="padding-right: 1rem; padding-top: 1rem;">
+            <div fd-form-item>
+                <label fd-form-label for="category">Category</label>
+                <input fd-form-control type="text" name="category" formControlName="category"/>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label for="name">Name</label>
+                <input fd-form-control type="text" name="name" formControlName="name"/>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label for="supplier">Supplier</label>
+                <input fd-form-control type="text" name="supplier" formControlName="supplier"/>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label for="price">Price</label>
+                <input fd-form-control type="number" name="price" formControlName="price"/>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label for="uom">Unit of Measure</label>
+                <input fd-form-control type="text" name="uom" formControlName="uom"/>
+            </div>
+            <button fd-button type="submit">Submit</button>
+        </form>
+    </fd-dynamic-side-content-side>
+    <fd-dynamic-side-content-main>
 <pre style="height: 30rem; overflow-y: auto;">
 {{items$ | async | json}}
 </pre>
+    </fd-dynamic-side-content-main>
+</fd-dynamic-side-content>

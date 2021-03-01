@@ -36,6 +36,7 @@ export class Item {
     category: string;
     price: number;
     weight: number;
+    uom: string;
     supplier: string;
 }
 
