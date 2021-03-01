@@ -7,7 +7,7 @@ import {
     isElementClickable,
     isElementDisplayed,
     refreshPage,
-    selectOptionByValueAttribute,
+    selectOptionByValueAttribute, sendKeys,
     waitElementToBeClickable,
     waitForElDisappear,
     waitForElDisplayed,
@@ -20,7 +20,9 @@ import {
     details_dialog_send_reminder_btn,
     node_statuses,
     remainder_text,
-    watchers_block_title
+    watchers_block_title,
+    approved_node_status,
+    rejected_node_status
 } from '../fixtures/appData/approval-flow-contents';
 
 describe('Approval flow', function() {
@@ -46,7 +48,16 @@ describe('Approval flow', function() {
         toastMessageDialog,
         detailsDialogTeamMemberCheckBox,
         detailsDialogTeamMemberName,
-        approvalFlowTeamNode
+        approvalFlowTeamNode,
+        remaindersSendToInput,
+        selectItem,
+        editExampleButton,
+        addWhatchersInput,
+        bottomMenuItems,
+        addNode,
+        detailsDialogParallelSerialSelect,
+        detailsDialogUserTeamButton,
+        detailsDialogParallelSerialSelectOption
     } = approvalFlowPage;
 
     beforeAll(() => {
@@ -60,7 +71,7 @@ describe('Approval flow', function() {
 
     it('should have watchers section with watchers details displayed', () => {
         expect(isElementDisplayed(watchersAvatar)).toBe(true);
-        expect(getElementArrayLength(watchersAvatar)).toBe(3);
+        expect(getElementArrayLength(watchersAvatar)).toBe(4);
     });
 
     it('should have watchers section has correct title', () => {
@@ -133,7 +144,14 @@ describe('Approval flow', function() {
         }
     });
 
-    it('should be able send remainder to approver', () => {
+    it('should be able send remainder to approved and rejected', () => {
+        click(remaindersSendToInput);
+        sendKeys(approved_node_status);
+        waitForElDisplayed(selectItem);
+        click(selectItem);
+        sendKeys(rejected_node_status);
+        click(selectItem);
+
         const arrLength = getElementArrayLength(approvalFlowNode);
         for (let i = 0; arrLength > i; i++) {
             while (!isElementClickable(approvalFlowNode, i)) {
@@ -153,6 +171,82 @@ describe('Approval flow', function() {
             expect(getTextArr(toastMessageDialog))
                 .toContain(remainder_text + approvalNodeText);
         }
+    });
+
+
+    describe('Edit mode', function() {
+        it('should be able to add watchers', () => {
+            const watchersCountBefore = getElementArrayLength(watchersAvatar);
+            click(editExampleButton);
+            waitForElDisplayed(addWhatchersInput);
+            click(addWhatchersInput);
+            sendKeys('Alvin');
+            click(selectItem);
+            click(bottomMenuItems);
+            const watchersCountAfter = getElementArrayLength(watchersAvatar);
+
+            expect(watchersCountBefore).toBe(watchersCountAfter - 1);
+        });
+
+        it('should be able to remove watchers', () => {
+            const watchersCountBefore = getElementArrayLength(watchersAvatar);
+            click(editExampleButton);
+            waitForElDisplayed(addWhatchersInput);
+            click(addWhatchersInput);
+            sendKeys('Julie');
+            click(selectItem);
+            click(bottomMenuItems);
+            const watchersCountAfter = getElementArrayLength(watchersAvatar);
+
+            expect(watchersCountBefore).toBe(watchersCountAfter + 1);
+        });
+
+        it('should be able to add node in parallel', () => {
+            const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
+
+            click(editExampleButton);
+            waitForElDisplayed(addNode);
+            click(addNode);
+            click(detailsDialogUserTeamButton);
+            waitForElDisplayed(detailsDialogTeamMemberCheckBox);
+            click(detailsDialogTeamMemberCheckBox);
+            click(detailsDialogSendReminderBtn);
+            waitForElDisplayed(detailsDialogSendReminderBtn);
+            click(detailsDialogSendReminderBtn);
+            click(bottomMenuItems);
+            const approvalFlowNodeCountAfter = getElementArrayLength(approvalFlowNode);
+
+            expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
+        });
+
+        fit('should be able to add node in serial', () => {
+            const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
+
+            click(editExampleButton);
+            waitForElDisplayed(addNode);
+            click(addNode);
+            click(detailsDialogParallelSerialSelect);
+            click(detailsDialogParallelSerialSelectOption);
+            click(detailsDialogUserTeamButton);
+            waitForElDisplayed(detailsDialogTeamMemberCheckBox);
+            click(detailsDialogTeamMemberCheckBox , 4);
+            click(detailsDialogSendReminderBtn);
+            waitForElDisplayed(detailsDialogSendReminderBtn);
+            click(detailsDialogSendReminderBtn);
+            click(bottomMenuItems);
+            const approvalFlowNodeCountAfter = getElementArrayLength(approvalFlowNode);
+
+            expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
+        });
+
+        it('should be able to remove node', () => {
+
+        });
+
+        it('should be able to undo added approval node', () => {
+
+        });
+
     });
 
     describe('should be able send remainder to approving team', function() {
@@ -217,6 +311,4 @@ describe('Approval flow', function() {
         expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
     }
 });
-
-
 

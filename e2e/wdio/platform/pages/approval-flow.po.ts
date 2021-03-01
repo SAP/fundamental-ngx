@@ -20,6 +20,10 @@ export class ApprovalFlowPo extends BaseComponentPo {
     detailsDialogSearchlBtn = this.detailsDialog + ' button.fdp-search-field__submit';
     detailsDialogSendReminderBtn = this.detailsDialog + ' button.fd-button--emphasized';
 
+    detailsDialogUserTeamButton = this.detailsDialog + ' fd-multi-input button';
+    detailsDialogParallelSerialSelect = this.detailsDialog + ' fd-select';
+    detailsDialogParallelSerialSelectOption = 'fd-option';
+
     approvalFlow = 'fdp-approval-flow .approval-flow__container';
     selectExample = 'select';
     approvalFlowNode = '.approval-flow-node__inner';
@@ -28,6 +32,14 @@ export class ApprovalFlowPo extends BaseComponentPo {
     approvalFlowNodeStatus = this.approvalFlowNode + ' fdp-object-status';
     approvalFlowNodeName = this.approvalFlowNode + ' .approval-flow-node__name';
     approvalFlowNodeDescription = this.approvalFlowNode + ' .approval-flow-node__description';
+
+    remaindersSendToInput = 'fd-multi-input fd-tokenizer input';
+    selectItem = '[role="listitem"]';
+    bottomMenuItems = '.approval-flow__edit-mode-footer button';
+
+    addNode = '.approval-flow-node__add';
+    editExampleButton = '.approval-flow__toolbar-controls';
+    addWhatchersInput = '.approval-flow__watchers-input-container input';
 
     toastMessageDialog = 'fd-message-toast';
     flowNavigationArrow = 'button.approval-flow__control--next-slide fd-icon[role="presentation"]';
