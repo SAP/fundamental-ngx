@@ -9,7 +9,6 @@ import { PlatformSearchFieldModule } from './components/search-field/search-fiel
 import { PlatformActionBarModule } from './components/action-bar/action-bar.module';
 import { PlatformActionButtonGroupModule } from './components/action-button-group/action-button-group.module';
 import { PlatformMenuModule } from './components/menu/menu.module';
-import { PlatformSelectModule } from './components/select/select.module';
 import { PlatformLinkModule } from './components/link/link.module';
 import { PlatformRadioGroupModule } from './components/form/radio-group/radio-group.module';
 import { PlatformMenuButtonModule } from './components/menu-button/menu-button.module';
@@ -27,7 +26,8 @@ import {
     PlatformInputGroupModule,
     PlatformMultiInputModule,
     PlatformFileUploaderModule,
-    PlatformAutoCompleteModule
+    PlatformAutoCompleteModule,
+    PlatformSelectModule
 } from './components/form/public_api';
 import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
 import { PlatformComboboxModule } from './components/form/combobox';
@@ -42,6 +42,10 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
 import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
+import { PlatformUploadCollectionModule } from './components/upload-collection';
+import { PlatformValueHelpDialogModule } from './components/value-help-dialog/value-help-dialog.module';
+import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, PlatformListModule, StandardListItemModule } from './components/list/public_api';
+import { PlatformSliderModule } from './components/slider';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -58,6 +62,7 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
         PlatformMenuModule,
         PlatformSelectModule,
         PlatformLinkModule,
+        PlatformListModule,
         PlatformRadioGroupModule,
         PlatformMenuButtonModule,
         PlatformSplitMenuButtonModule,
@@ -83,8 +88,17 @@ import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-pag
         PlatformMultiInputMobileModule,
         PlatformFeedInputModule,
         PlatformFileUploaderModule,
+        PlatformUploadCollectionModule,
+        PlatformValueHelpDialogModule,
         PlatformAutoCompleteModule,
-        PlatformApprovalFlowModule
+        PlatformApprovalFlowModule,
+        PlatformValueHelpDialogModule,
+        ActionListItemModule,
+        DisplayListItemModule,
+        ObjectListItemModule,
+        PlatformListModule,
+        StandardListItemModule,
+        PlatformSliderModule
     ]
 })
 export class FundamentalNgxPlatformModule {}

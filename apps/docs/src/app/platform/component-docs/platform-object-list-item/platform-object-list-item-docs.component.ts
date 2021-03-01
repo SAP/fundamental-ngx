@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as borderLessOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-borderless-object-list-item-example.component.html';
+import * as borderLessOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-border-less-example.component.html';
 import * as borderLessOLITs from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-border-less-example.component.ts';
 import * as rowSelectionOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component.html';
 import * as rowSelectionOLITs from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component.ts';
@@ -12,25 +12,22 @@ import * as rowNavigationOLITs from '!raw-loader!./platform-object-list-item-exa
 import * as rowNavigationAndSelectionOLISrc from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component.html';
 import * as rowNavigationAndSelectionOLITs from '!raw-loader!./platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component.ts';
 
-
-
 @Component({
     selector: 'app-object-list-item',
     templateUrl: './platform-object-list-item-docs.component.html'
 })
 export class PlatformObjectListItemDocsComponent {
-
     borderLessOLI: ExampleFile[] = [
         {
             language: 'html',
             code: borderLessOLISrc,
-            fileName: 'platform-borderless-object-list-item-example',
+            fileName: 'platform-object-list-item-border-less-example',
         },
         {
             language: 'typescript',
             component: 'PlatformObjectListItemBorderLessExampleComponent',
             code: borderLessOLITs,
-            fileName: 'platform-borderless-object-list-item-example'
+            fileName: 'platform-object-list-item-border-less-example'
         }
     ];
 
@@ -65,13 +62,13 @@ export class PlatformObjectListItemDocsComponent {
         {
             language: 'html',
             code: rowNavigationAndSelectionOLISrc,
-            fileName: 'platform-object-list-item-with-row-navigation-and-selection-example',
+            fileName: 'platform-object-list-item-with-row-selection-and-navigation-example',
         },
         {
             language: 'typescript',
-            component: 'PlatformObjectListItemWithRowNavigationAndSelectionExampleComponent',
+            component: 'PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent',
             code: rowNavigationAndSelectionOLITs,
-            fileName: 'platform-object-list-item-with-row-navigation-and-selection-example'
+            fileName: 'platform-object-list-item-with-row-selection-and-navigation-example'
         }
     ];
 

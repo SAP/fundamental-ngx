@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InfoLabelComponent } from './info-label.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
@@ -29,7 +29,7 @@ describe('InfoLabelComponent', () => {
     let testComponent: TestInfoLabelComponent;
     let fixture: ComponentFixture<TestInfoLabelComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [InfoLabelComponent, TestInfoLabelComponent]
         }).compileComponents();

@@ -1,10 +1,22 @@
 import { Component } from '@angular/core';
 
-import { FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fdp-time-picker-basic-example',
-    templateUrl: './platform-time-picker-basic-example.component.html'
+    selector: 'fdp-platform-time-picker-basic-example',
+    templateUrl: './platform-time-picker-basic-example.component.html',
+    providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class PlatformTimePickerBasicExampleComponent {
     allowNullTimeObject: FdDate = new FdDate().setTime(12, 0, 0);

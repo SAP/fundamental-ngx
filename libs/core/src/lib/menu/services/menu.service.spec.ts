@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { MenuService } from './menu.service';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
@@ -50,7 +50,7 @@ describe('MenuService', () => {
     let menuItems: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [MenuModule],
             declarations: [TestMenuComponent]

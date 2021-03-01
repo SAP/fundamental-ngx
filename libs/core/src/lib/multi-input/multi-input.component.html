@@ -95,7 +95,10 @@
                 (ngModelChange)="handleSelect($event, value)"
                 [ngModel]="selected.indexOf(value) !== -1">
             </fd-checkbox>
-            <span fd-list-title [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight"></span>
+            <ng-container
+                [ngTemplateOutlet]="itemSource"
+                [ngTemplateOutletContext]="{ value: value }"
+            ></ng-container>
         </li>
         <li *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)"
             fd-list-item
@@ -104,4 +107,16 @@
             <a fd-link href>Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>
+</ng-template>
+
+<ng-template let-value="value" #itemSource>
+    <span 
+        *ngIf="!itemTemplate" 
+        fd-list-title 
+        [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight">
+    </span>
+
+    <ng-container *ngIf="itemTemplate">
+        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: value }"></ng-container>
+    </ng-container>
 </ng-template>

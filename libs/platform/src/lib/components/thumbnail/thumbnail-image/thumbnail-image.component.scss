@@ -1,20 +1,24 @@
 .fdp-thumbnail-image-container {
-
-  $fdp-thumbnail-image-size: 6rem;
+  $fdp-thumbnail-image-size: 4.625rem;
+  $fdp-thumbnail-selected-width: 5.75rem;
+  $fdp-thumbnail-selected-height: 5.5rem;
   $fdp-thumbnail-image-margin-size: 1rem;
   $fdp-thumbnail-image-border: 0.015rem solid;
   $fdp-thumbnail-image-border-radius: 0.25rem;
   $fdp-thumbnail-image-border-color-default: #085caf;
-  $fdp-thumbnail-image-border-color: var(--sapButton_Emphasized_Hover_BorderColor, #085caf);
-
+  $fdp-thumbnail-image-border-color: var(
+    --sapButton_Emphasized_Hover_BorderColor,
+    #085caf
+  );
   display: block;
 
   .fdp-thumbnail-image {
     width: $fdp-thumbnail-image-size;
     height: $fdp-thumbnail-image-size;
-    margin-top: $fdp-thumbnail-image-margin-size;
     border: $fdp-thumbnail-image-border transparent;
     border-radius: $fdp-thumbnail-image-border-radius;
+    margin: 0.688rem;
+    position: relative;
     &:hover {
       cursor: pointer;
       border-color: var(--sapLink_Hover_Color);
@@ -25,16 +29,13 @@
     display: inline-block;
     border: $fdp-thumbnail-image-border transparent;
     background-clip: border-box;
-    margin-right: $fdp-thumbnail-image-margin-size;
+    margin: 0.688rem;
+    position: relative;
     &:hover {
-        cursor: pointer;
-        border-color: $fdp-thumbnail-image-border-color-default;
-        border-color: $fdp-thumbnail-image-border-color;
-        border-radius: $fdp-thumbnail-image-border-radius;
-    }
-    [dir='rtl'] & {
-      margin-left: $fdp-thumbnail-image-margin-size;
-      margin-right: 0;
+      cursor: pointer;
+      border-color: $fdp-thumbnail-image-border-color-default;
+      border-color: $fdp-thumbnail-image-border-color;
+      border-radius: $fdp-thumbnail-image-border-radius;
     }
   }
   fd-avatar {
@@ -44,11 +45,35 @@
     max-height: $fdp-thumbnail-image-size;
   }
 
-  .fdp-thumbnail-image--selected, .fdp-thumbnail-image--horizontal.fdp-thumbnail-image--selected {
+  .fdp-thumbnail-image--selected,
+  .fdp-thumbnail-image--horizontal.fdp-thumbnail-image--selected {
+    fd-avatar {
+      width: $fdp-thumbnail-selected-width;
+      height: $fdp-thumbnail-selected-height;
+      max-width: $fdp-thumbnail-selected-width;
+      max-height: $fdp-thumbnail-selected-height;
+    }
+
+    margin: 0;
+    width: $fdp-thumbnail-selected-width;
+    height: $fdp-thumbnail-selected-height;
     border: $fdp-thumbnail-image-border;
     border-radius: $fdp-thumbnail-image-border-radius;
     border-color: $fdp-thumbnail-image-border-color-default;
     border-color: $fdp-thumbnail-image-border-color;
   }
 
+  .fdp-thumbnail-image--overlay,
+  .fdp-thumbnail-image--horizontal.fdp-thumbnail-image--overlay {
+    opacity: 0.5;
+  }
+
+  .fdp-thumbnail-overflow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    color: var(--sapShell_TextColor, #fff);
+  }
 }

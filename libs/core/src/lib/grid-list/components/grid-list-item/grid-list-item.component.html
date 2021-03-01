@@ -9,6 +9,7 @@
     [class.fd-grid-list__item--locked]="state === 'locked'"
     [class.fd-grid-list__item--draft]="state === 'draft'"
     [class.fd-grid-list__item--error]="state === 'error'"
+    (keydown)="_onKeyDown($event)"
     (click)="selectionMode === 'singleSelect' && _singleSelect($event); _onClick()"
     [attr.aria-label]="ariaLabel"
 >
@@ -60,7 +61,6 @@
                 class="fd-grid-list__item-counter"
                 i18n-aria-label="@@coreGridList.Item.Counter"
                 [attr.aria-label]="'Item has ' + counter + ' children'"
-                tabindex="0"
                 [innerText]="counter"
             ></span>
 
@@ -99,6 +99,7 @@
                 aria-label="Navigation"
                 i18n-title="@@coreGridList.Item.Btn.Navigation"
                 title="Navigation"
+                class="fd-grid-list__btn-navigation"
                 [compact]="true"
                 (click)="_onNavigate($event)"
             ></button>

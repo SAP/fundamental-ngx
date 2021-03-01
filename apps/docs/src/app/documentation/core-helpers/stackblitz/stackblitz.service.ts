@@ -57,6 +57,8 @@ export class StackblitzService {
                 generatedFiles = this.handleHtmlFile(exampleFiles, example);
             } else if (example.language === 'typescript') {
                 generatedFiles = this.handleTsFile(example);
+            } else if (example.language === 'scss') {
+                generatedFiles = this.handleScssFile(example);
             }
 
             if (generatedFiles.html) {
@@ -208,6 +210,17 @@ import { Component } from '@angular/core';
 
         generatedFile.ts = {
             path: this.getFilePath(file, 'ts'),
+            code: file.code.default
+        };
+
+        return generatedFile;
+    }
+
+    private handleScssFile(file: ExampleFile): GeneratedFiles {
+        const generatedFile: GeneratedFiles = {};
+
+        generatedFile.scss = {
+            path: this.getFilePath(file, 'scss'),
             code: file.code.default
         };
 

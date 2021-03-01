@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+
+import { KeyUtil } from '../../../utils/functions';
 
 @Component({
     selector: 'fd-grid-list-more-btn',
@@ -24,4 +27,15 @@ export class GridListMoreBtnComponent {
     /** Event is thrown, when the control button is clicked */
     @Output()
     showMore = new EventEmitter<void>();
+
+    /** @hidden */
+    _onKeyDown(event: KeyboardEvent): void {
+        if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            return;
+        }
+
+        event.preventDefault();
+
+        this.showMore.emit();
+    }
 }

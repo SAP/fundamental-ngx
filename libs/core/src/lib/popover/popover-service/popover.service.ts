@@ -52,7 +52,7 @@ export class PopoverService extends BasePopoverClass {
     private _overlayRef: OverlayRef;
 
     /** @hidden */
-    private _refresh$: Observable<void>;
+    private _refresh$: Observable<boolean | void>;
 
     /** @hidden */
     private readonly _placementRefresh$ = new Subject<void>();
@@ -62,6 +62,9 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _triggerElement: ElementRef;
+
+    /** @hidden */
+    private _lastActiveElement: HTMLElement;
 
     /** @hidden */
     private _templateData: PopoverTemplate;
@@ -113,6 +116,7 @@ export class PopoverService extends BasePopoverClass {
                 this.isOpenChange.emit(false);
             }
             this.isOpen = false;
+            this._focusLastActiveElementBeforeOpen();
         }
     }
 
@@ -144,6 +148,7 @@ export class PopoverService extends BasePopoverClass {
 
             this._listenOnClose();
             this._listenOnOutClicks();
+            this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
         }
     }
@@ -401,6 +406,21 @@ export class PopoverService extends BasePopoverClass {
     private _detectChanges(): void {
         if (this._getPopoverBody()) {
             this._getPopoverBody().detectChanges();
+        }
+    }
+
+    /** @hidden */
+    private _focusFirstTabbableElement(): void {
+        if (this.focusAutoCapture) {
+            this._lastActiveElement = <HTMLElement>document.activeElement;
+            this._getPopoverBody()?._focusFirstTabbableElement();
+        }
+    }
+
+    /** @hidden */
+    private _focusLastActiveElementBeforeOpen(): void {
+        if (this.focusAutoCapture && this._lastActiveElement) {
+            this._lastActiveElement.focus();
         }
     }
 

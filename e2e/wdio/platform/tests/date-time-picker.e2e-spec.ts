@@ -112,7 +112,7 @@ describe('Datetime picker suite', function() {
         click(okButton);
         click(activeDateTimePickerButton, 1);
         expect(highlightedColor)
-            .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value as string);
+            .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
     it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
@@ -183,6 +183,13 @@ describe('Datetime picker suite', function() {
         click(okButton);
         expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model'))
             .toEqual(date);
+    });
+
+    xdescribe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            dateTimePickerPage.saveExampleBaselineScreenshot('date-time-picker');
+            expect(dateTimePickerPage.compareWithBaseline('date-time-picker')).toBeLessThan(1);
+        });
     });
 
 });

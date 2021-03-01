@@ -1,10 +1,10 @@
 <div>
     <label fd-form-label>Origin X</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
+                         [ngModel]="originX" (ngModelChange)="originX = $event; refresh()">
         <button fd-button
                 *ngFor="let option of xPositions"
-                (click)="originX = option; refresh()"
-                [class.is-selected]="originX === option"
+                [attr.value]="option"
                 [label]="option">
         </button>
     </fd-segmented-button>
@@ -12,11 +12,11 @@
     <br>
 
     <label fd-form-label>Origin Y</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
+                         [ngModel]="originY" (ngModelChange)="originY = $event; refresh()">
         <button fd-button
                 *ngFor="let option of yPositions"
-                (click)="originY = option; refresh()"
-                [class.is-selected]="originY === option"
+                [attr.value]="option"
                 [label]="option">
         </button>
     </fd-segmented-button>
@@ -24,11 +24,11 @@
     <br>
 
     <label fd-form-label>Overlay X</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
-        <button fd-button
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
+                         [ngModel]="overlayX" (ngModelChange)="overlayX = $event; refresh()">
+    <button fd-button
                 *ngFor="let option of xPositions"
-                (click)="overlayX = option; refresh()"
-                [class.is-selected]="overlayX === option"
+                [attr.value]="option"
                 [label]="option">
         </button>
     </fd-segmented-button>
@@ -36,11 +36,11 @@
     <br>
 
     <label fd-form-label>Overlay Y</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
+    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
+                         [ngModel]="overlayY" (ngModelChange)="overlayY = $event; refresh()">
         <button fd-button
                 *ngFor="let option of yPositions"
-                (click)="overlayY = option; refresh()"
-                [class.is-selected]="overlayY === option"
+                [attr.value]="option"
                 [label]="option">
         </button>
     </fd-segmented-button>

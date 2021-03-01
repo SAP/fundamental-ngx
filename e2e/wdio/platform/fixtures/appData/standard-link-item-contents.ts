@@ -1,18 +1,16 @@
-export default {
-    noBorderAttr: 'noBorder',
-    borderAttr: 'border-bottom-style',
-    compactAttr: 'ng-reflect-compact',
-    byLineAttr: 'ng-reflect-byline',
-    byLineAltAttr: 'ng-reflect-has-by-line',
-    solidStyle: 'solid',
-    noStyle: 'none',
-    linkAttr: 'href',
-    secondaryAttr: 'secondary',
-    secondaryTypes: [
-        'positive',
-        'negative',
-        'neutral',
-        'informative',
-        'critical'
-    ]
-};
+export const noBorderAttr = 'noBorder';
+export const borderAttr = 'border-bottom-style';
+export const compactAttr = 'ng-reflect-compact';
+export const byLineAttr = 'ng-reflect-byline';
+export const byLineAltAttr = 'ng-reflect-has-by-line';
+export const solidStyle = 'solid';
+export const noStyle = 'none';
+export const linkAttr = 'href';
+export const secondaryAttr = 'secondary';
+export const secondaryTypes = [
+    'positive',
+    'negative',
+    'neutral',
+    'informative',
+    'critical'
+];

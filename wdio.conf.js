@@ -30,7 +30,45 @@ exports.config = {
     exclude: [
         './e2e/wdio/**/checkbox-group.e2e-spec.ts',
     ],
-    //
+    suites: {
+        platformA: [
+            './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
+            './e2e/wdio/platform/**/action-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/checkbox.e2e-spec.ts',
+            './e2e/wdio/platform/**/checkbox-group.e2e-spec.ts',
+            './e2e/wdio/platform/**/combobox.e2e-spec.ts',
+            './e2e/wdio/platform/**/date-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/date-time-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/display-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/dynamic-page-layout.e2e-spec.ts',
+            './e2e/wdio/platform/**/feed-input.e2e-spec.ts',
+            './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
+            './e2e/wdio/platform/**/info-label.e2e-spec.ts',
+            './e2e/wdio/platform/**/input.e2e-spec.ts',
+            './e2e/wdio/platform/**/input-group.e2e-spec.ts',
+            './e2e/wdio/platform/**/link.e2e-spec.ts',
+            './e2e/wdio/platform/**/list.e2e-spec.ts',
+        ],
+        platformB: [
+            './e2e/wdio/platform/**/menu.e2e-spec.ts',
+            './e2e/wdio/platform/**/menu-button.e2e-spec.ts',
+            './e2e/wdio/platform/**/multi-input.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-marker.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-status.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-attribute.e2e-spec.ts',
+            './e2e/wdio/platform/**/panel.e2e-spec.ts',
+            './e2e/wdio/platform/**/radio-button-group.e2e-spec.ts',
+            './e2e/wdio/platform/**/search.e2e-spec.ts',
+            './e2e/wdio/platform/**/split-menu-button.e2e-spec.ts',
+            './e2e/wdio/platform/**/standard-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/step-input.e2e-spec.ts',
+            './e2e/wdio/platform/**/switch.e2e-spec.ts',
+            './e2e/wdio/platform/**/textarea.e2e-spec.ts',
+         //   './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
+            './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
+        ]
+    },
     // ============
     // Capabilities
     // ============
@@ -46,7 +84,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 20,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -183,8 +221,19 @@ exports.config = {
     // services: ['chromedriver'],
     services: [
         ['sauce', {
-            sauceConnect: true
-        }]
+            sauceConnect: true,
+            connectRetries: 2,
+        }],
+        ['image-comparison',
+            // The options
+            {
+                // Some options, see the docs for more
+                baselineFolder: join(process.cwd(), './e2e/wdio/baselineScreenshot/'),
+                formatImageName: '{tag}-{logName}-{width}x{height}',
+                screenshotPath: join(process.cwd(), '.tmp/'),
+                savePerInstance: true,
+                autoSaveBaseline: true,
+            }],
     ],
 
     // Framework you want to run your specs with.
@@ -220,7 +269,7 @@ exports.config = {
     jasmineNodeOpts: {
         isVerbose: true,
         showColors: true,
-        defaultTimeoutInterval: 700000,
+        defaultTimeoutInterval: 1200000,
         grep: null,
         invertGrep: null
     },
@@ -283,6 +332,12 @@ exports.config = {
         browser.addCommand('focus', function() {
             browser.execute(function(domElement) {
                 domElement.focus();
+            }, this);
+        }, true);
+
+        browser.addCommand('addIsActiveClass', function() {
+            browser.execute(function(domElement) {
+                domElement.classList.add('is-active');
             }, this);
         }, true);
 

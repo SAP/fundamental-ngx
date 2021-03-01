@@ -44,6 +44,7 @@ import { SelectModule } from './select/select.module';
 import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
+import { TextModule } from './text/text.module';
 import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
@@ -77,6 +78,12 @@ import { MessageBoxModule } from './message-box/message-box.module';
 import { ThemesService } from './utils/services/themes.service';
 import { WizardModule } from './wizard/wizard.module';
 import { QuickViewModule } from './quick-view/quick-view.module';
+import { FeedInputModule } from './feed-input/feed-input.module';
+import { ObjectNumberModule } from './object-number/object-number.module';
+import { TitleModule } from './title/title.module';
+import { SliderModule } from './slider/public_api';
+import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
+import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -90,8 +97,8 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         BreadcrumbModule,
         BusyIndicatorModule,
         ButtonModule,
-        SegmentedButtonModule,
         CalendarModule,
+        CardModule,
         CarouselModule,
         ComboboxModule,
         ComboboxMobileModule,
@@ -99,7 +106,9 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
+        DynamicSideContentModule,
         FeedListItemModule,
+        FeedInputModule,
         FileUploaderModule,
         FixedCardLayoutModule,
         FlexibleColumnLayoutModule,
@@ -116,13 +125,16 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         ListModule,
         MenuModule,
         DialogModule,
+        MessageBoxModule,
         MessageStripModule,
+        MessageToastModule,
         MultiInputModule,
         MultiInputMobileModule,
         NestedListModule,
         NotificationModule,
         ObjectIdentifierModule,
         ObjectMarkerModule,
+        ObjectNumberModule,
         ObjectStatusModule,
         PaginationModule,
         PanelModule,
@@ -137,21 +149,26 @@ import { QuickViewModule } from './quick-view/quick-view.module';
         ShellbarModule,
         SideNavigationModule,
         SplitButtonModule,
+        SwitchModule,
         StepInputModule,
         TableModule,
         TabsModule,
+        TextModule,
         TileModule,
         TimeModule,
         TimePickerModule,
+        TitleModule,
         ToolbarModule,
-        SwitchModule,
         TokenModule,
         TreeModule,
         WizardModule,
         CardModule,
         MessageBoxModule,
         MessageToastModule,
-        DynamicSideContentModule
+        DynamicSideContentModule,
+        SliderModule,
+        OnlyDigitsModule,
+        IllustratedMessageModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })

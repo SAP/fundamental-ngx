@@ -16,29 +16,34 @@ import {
 
 describe('Object marker test suite', function() {
     const objectMarkerPage = new ObjectMarkerPo();
+    const {
+        marker,
+        iconOnlyMarkers,
+        clickableMarkers
+    } = objectMarkerPage;
 
     beforeAll(() => {
         objectMarkerPage.open();
-        waitForPresent(objectMarkerPage.marker);
-    });
+    }, 1);
 
     afterEach(() => {
         refreshPage();
-    });
+        waitForPresent(marker);
+    }, 1);
 
     it('Verify each marker is clickable', () => {
-        const arr = getElementArrayLength(objectMarkerPage.marker);
+        const arr = getElementArrayLength(marker);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(objectMarkerPage.marker, i);
-            click(objectMarkerPage.marker, i);
+            scrollIntoView(marker, i);
+            click(marker, i);
         }
     });
 
     it('Verify technical statuses', () => {
-        const arr = getElementArrayLength(objectMarkerPage.iconOnlyMarkers);
+        const arr = getElementArrayLength(iconOnlyMarkers);
         for (let i = 0; i < arr; i++) {
-            expect(getAttributeByName(objectMarkerPage.iconOnlyMarkers, 'title', i)).toBe(iconStatusesList[i][0]);
-            expect(getAttributeByName(objectMarkerPage.iconOnlyMarkers, 'aria-label', i)).toBe(iconStatusesList[i][1]);
+            expect(getAttributeByName(iconOnlyMarkers, 'title', i)).toBe(iconStatusesList[i][0]);
+            expect(getAttributeByName(iconOnlyMarkers, 'aria-label', i)).toBe(iconStatusesList[i][1]);
         }
     });
 
@@ -47,11 +52,11 @@ describe('Object marker test suite', function() {
     });
 
     it('Verify marker hover state', () => {
-        const arr = getElementArrayLength(objectMarkerPage.clickableMarkers);
+        const arr = getElementArrayLength(clickableMarkers);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(objectMarkerPage.clickableMarkers, i);
-            mouseHoverElement(objectMarkerPage.clickableMarkers, i);
-            expect(textDecorationValues).toContain(getCSSPropertyByName(objectMarkerPage.clickableMarkers, textDecorationAttribute, i).value as string);
+            scrollIntoView(clickableMarkers, i);
+            mouseHoverElement(clickableMarkers, i);
+            expect(textDecorationValues).toContain(getCSSPropertyByName(clickableMarkers, textDecorationAttribute, i).value);
         }
     });
 });

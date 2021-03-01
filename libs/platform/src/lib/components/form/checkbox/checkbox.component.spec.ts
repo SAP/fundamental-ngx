@@ -1,6 +1,6 @@
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CheckboxComponent } from './checkbox.component';
 import { Component, ViewChildren, QueryList } from '@angular/core';
@@ -109,7 +109,7 @@ describe('Checkbox test Component', () => {
     let host: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestCheckboxComponent, CheckboxComponent]
@@ -406,7 +406,7 @@ describe('Checkbox test Component with Template driven form', () => {
     let host: TestCheckboxComponentTemplateDriven;
     let fixture: ComponentFixture<TestCheckboxComponentTemplateDriven>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestCheckboxComponentTemplateDriven, CheckboxComponent]

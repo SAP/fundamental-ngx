@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild, ContentChildren, QueryList } from '@angular/core';
 import { RtlService } from '../utils/services/rtl.service';
 import { TokenizerInputDirective } from './token-input.directive';
@@ -29,7 +29,7 @@ describe('TokenizerComponent', () => {
     let component: TokenizerComponent;
     let fixture: ComponentFixture<TokenizerWrapperComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TokenizerComponent,

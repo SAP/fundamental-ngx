@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TextAreaComponent } from './text-area.component';
 import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators, FormControl } from '@angular/forms';
@@ -14,7 +14,7 @@ import '@angular/localize/init';
     selector: 'fdp-test-textarea',
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form">
+            <fdp-form-group #fg1 [formGroup]="form">
                 <fdp-form-field
                     #basicTextareaField
                     [id]="'basicTextarea'"
@@ -75,7 +75,7 @@ describe('Basic Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
             declarations: [BasicTextareaTestWrapperComponent]
@@ -145,7 +145,7 @@ describe('Advanced Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
             declarations: [BasicTextareaTestWrapperComponent]

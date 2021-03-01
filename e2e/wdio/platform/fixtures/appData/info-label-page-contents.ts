@@ -1,27 +1,25 @@
-export default {
+export const defaultLabelText = 'DEFAULT LABEL';
+export const safariDefaultLabelText = 'Default Label';
+export const infoLabelText = 'INFO LABEL';
+export const safariInfoLabelText = 'Info Label';
+export const iconInfoLabelText = 'INFO LABEL';
+export const safariIconInfoLabelText = 'Info label';
+export const numberLabel = '6';
+export const largeNumberLabel = '42K';
+export const safariLargeNumberLabel = '42k';
+export const decimalLabel = '14.7';
+export const ariaLabelAttribute = 'aria-label';
+export const ariaLabelledByAttribute = 'aria-labelledby';
+export const ariaLabelExample = 'ARIA LABEL';
+export const safariAriaLabelExample = 'Aria Label';
+export const ariaSuccessLabel = 'SUCCESS';
+export const safariAriaSuccessLabel = 'Success';
+export const labelContentAlignment = 'center';
+export const cssAlignmentAttribute = 'text-align';
+export const labelIconAttribute = 'ng-reflect-glyph';
+export const labelIconAttributeValue = 'hide';
+export const backgroundColor = 'background-color';
 
-    defaultLabelText: 'DEFAULT LABEL',
-    safariDefaultLabelText: 'Default Label',
-    infoLabelText: 'INFO LABEL',
-    safariInfoLabelText: 'Info Label',
-    iconInfoLabelText: 'INFO LABEL',
-    safariIconInfoLabelText: 'Info label',
-    numberLabel: '6',
-    largeNumberLabel: '42K',
-    safariLargeNumberLabel: '42k',
-    decimalLabel: '14.7',
-    ariaLabelAttribute: 'aria-label',
-    ariaLabelledByAttribute: 'aria-labelledby',
-    ariaLabelExample: 'ARIA LABEL',
-    safariAriaLabelExample: 'Aria Label',
-    ariaSuccessLabel: 'SUCCESS',
-    safariAriaSuccessLabel: 'Success',
-    labelContentAlignment: 'center',
-    cssAlignmentAttribute: 'text-align',
-    labelIconAttribute: 'ng-reflect-glyph',
-    labelIconAttributeValue: 'hide',
-    backgroundColor: 'background-color'
-};
 
 export const semanticColorsArr = [
     { color: 1, value: '253,243,231' },

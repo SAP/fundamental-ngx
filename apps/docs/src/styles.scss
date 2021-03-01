@@ -278,3 +278,23 @@ body {
 .fd-info-label + .fd-info-label {
     margin-left: 0.3rem;
 }
+
+.fd-docs--toolbar {
+	.fd-shellbar__product {
+		margin: 0 0.5rem;
+	}
+
+	.fd-shellbar--s {
+		.fd-shellbar__product {
+			margin: 0;
+		}
+	}
+
+	.fd-shellbar__action--mobile {
+		display: none !important;
+	}
+
+	.fd-shellbar__action--desktop {
+		display: flex !important;
+	}
+}

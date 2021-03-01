@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 interface GridListItem {
     id: number;
@@ -10,7 +10,8 @@ interface GridListItem {
     selector: 'fd-grid-list-group-example',
     templateUrl: './grid-list-group-example.component.html',
     styleUrls: ['./grid-list-group-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class GridListGroupExampleComponent {
     group1: GridListItem[] = [

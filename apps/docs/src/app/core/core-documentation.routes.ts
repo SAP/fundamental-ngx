@@ -162,6 +162,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
             },
             {
+                path: 'illustrated-message',
+                loadChildren: () => import('./component-docs/illustrated-message/illustrated-message-docs.module').then((m) => m.IllustratedMessageDocsModule)
+            },
+            {
                 path: 'info-label',
                 loadChildren: () =>
                     import('./component-docs/info-label/info-label-docs.module').then((m) => m.InfoLabelDocsModule)
@@ -284,13 +288,6 @@ export const ROUTES: Routes = [
                     import('./component-docs/popover/popover-docs.module').then((m) => m.PopoverDocsModule)
             },
             {
-                path: 'popover-directive',
-                loadChildren: () =>
-                    import('./component-docs/popover-directive/popover-directive-docs.module').then(
-                        (m) => m.PopoverDirectiveDocsModule
-                    )
-            },
-            {
                 path: 'product-switch',
                 loadChildren: () =>
                     import('./component-docs/product-switch/product-switch-docs.module').then(
@@ -362,6 +359,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
             },
             {
+                path: 'text',
+                loadChildren: () => import('./component-docs/text/text-docs.module').then((m) => m.TextDocsModule)
+            },
+            {
                 path: 'textarea',
                 loadChildren: () =>
                     import('./component-docs/textarea/textarea-docs.module').then((m) => m.TextareaDocsModule)
@@ -414,6 +415,10 @@ export const ROUTES: Routes = [
             {
                 path: 'grid-list',
                 loadChildren: () => import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
+            },
+            {
+                path: 'slider',
+                loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
             }
         ]
     }

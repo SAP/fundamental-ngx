@@ -53,7 +53,7 @@
     </div>
 </div>
 <ng-template #suggestionMenuTemplate>
-    <div class="fdp-search-field__dropdown fd-popover__body fd-popover__body--no-arrow" [attr.dir]='dir'
+    <div class="fdp-search-field__suggestion-dropdown fd-popover__body fd-popover__body--no-arrow" [attr.dir]='dir'
         *ngIf="(dropdownValues$ | async | suggestionMatches:inputText)?.length > 0">
         <nav class="fd-menu" tabindex="-1" [ngClass]="{ 'fd-menu--compact': contentDensity === 'compact'}"
             [attr.id]="menuId" (keydown)="onKeydown($event)">

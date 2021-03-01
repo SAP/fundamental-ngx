@@ -94,7 +94,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * the exceeded count is displayed.
      */
     @Input()
-    maxLength: number;
+    maxLength = 0;
 
     /**
      * Whether counter message should be shown.

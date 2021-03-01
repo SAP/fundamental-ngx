@@ -1,0 +1,99 @@
+$fdp-media-player-size: 33.125rem;
+$fdp-thumbnail-image-size: 4.625rem;
+$fdp-thumbnail-selected-width: 5.7rem;
+$fdp-thumbnail-selected-height: 5.5rem;
+$fdp-thumbnail-image-margin-size: 1rem;
+$fdp-thumbnail-image-border: 0.015rem solid;
+$fdp-thumbnail-image-border-radius: 0.25rem;
+$fdp-thumbnail-image-border-color-default: #085caf;
+$fdp-thumbnail-image-border-color: var(
+  --sapButton_Emphasized_Hover_BorderColor,
+  #085caf
+);
+:host ::ng-deep {
+  fd-dialog {
+    ::after {
+      width: 84rem;
+      height: 45.5rem;
+    }
+
+    fd-dialog-body {
+      .fdp-thumbnail-button--left {
+        position: absolute;
+        top: 50%;
+        left: 2rem;
+        border-radius: 50%;
+        &:hover {
+          cursor: pointer;
+        }
+        &:disabled {
+          cursor: default;
+        }
+      }
+
+      .fdp-thumbnail-button--right {
+        right: 2rem;
+        position: absolute;
+        top: 50%;
+        border-radius: 50%;
+        &:hover {
+          cursor: pointer;
+        }
+        &:disabled {
+          cursor: default;
+        }
+      }
+
+      .fdp-media-container {
+        position: relative;
+        width: $fdp-media-player-size;
+        height: $fdp-media-player-size;
+        margin: 0 25.438rem;
+        img {
+          max-width: $fdp-media-player-size;
+          max-height: $fdp-media-player-size;
+          width: $fdp-media-player-size;
+          height: $fdp-media-player-size;
+          position: absolute;
+          padding: 0.688rem;
+          bottom: 0;
+          left: 0;
+        }
+        video {
+          max-width: $fdp-media-player-size;
+          max-height: $fdp-media-player-size;
+          width: $fdp-media-player-size;
+          height: $fdp-media-player-size;
+          position: absolute;
+          padding: 0.688rem;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+    .fdp-thumbnail-image-container {
+      text-align: center;
+      .fdp-thumbnail-image {
+        width: $fdp-thumbnail-image-size;
+        height: $fdp-thumbnail-image-size;
+      }
+      fd-avatar {
+        width: $fdp-thumbnail-image-size;
+        height: $fdp-thumbnail-image-size;
+      }
+      .fdp-thumbnail-image--selected,
+      .fdp-thumbnail-image--horizontal.fdp-thumbnail-image--selected {
+        fd-avatar {
+          width: $fdp-thumbnail-selected-width;
+          height: $fdp-thumbnail-selected-height;
+        }
+        width: $fdp-thumbnail-selected-width;
+        height: $fdp-thumbnail-selected-height;
+        border: $fdp-thumbnail-image-border;
+        border-radius: $fdp-thumbnail-image-border-radius;
+        border-color: $fdp-thumbnail-image-border-color-default;
+        border-color: $fdp-thumbnail-image-border-color;
+      }
+    }
+  }
+}

@@ -18,9 +18,6 @@ export class MenuButtonPo extends BaseComponentPo {
     menuTypeBtnAttrArr = 'fdp-platform-menu-button-example fdp-menu-button';
     menuTypeBtnArr = 'fdp-platform-menu-button-example button';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

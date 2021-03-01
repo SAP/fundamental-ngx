@@ -1,7 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component, ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, MessageToastService } from '@fundamental-ngx/core';
 
 @Component({

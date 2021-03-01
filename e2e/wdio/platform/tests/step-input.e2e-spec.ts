@@ -18,6 +18,11 @@ import {
 
 describe('Step input test suite', function() {
     const stepInputPage: StepInputPo = new StepInputPo();
+    const {
+        stepInputRoot, activeButtonIncrement, activeButtonDecrement, allInput, allButtonIncrement, allButtonDecrement,
+        activeInput, reactiveFormInput, formInput, inputInTemplateDriverForm, errorMessage, minMaxButtonDecrement,
+        minMaxButtonIncrement, inputWithoutForm, quantityText, formStatusText, fillInput
+    } = stepInputPage;
 
     beforeAll(() => {
         stepInputPage.open();
@@ -25,143 +30,150 @@ describe('Step input test suite', function() {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(stepInputPage.stepInputRoot);
+        waitForPresent(stepInputRoot);
     }, 1);
 
     it('Verify increment and decrement buttons', () => {
-        const arr = getElementArrayLength(stepInputPage.activeInput);
+        const arr = getElementArrayLength(activeInput);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(stepInputPage.activeInput, i);
-            let value = getValue(stepInputPage.activeInput, i);
-            click(stepInputPage.activeButtonIncrement, i);
-            checkValueChanged(value, getValue(stepInputPage.activeInput, i));
-            value = getValue(stepInputPage.activeInput, i);
-            click(stepInputPage.activeButtonDecrement, i);
-            checkValueChanged(value, getValue(stepInputPage.activeInput, i));
+            scrollIntoView(activeInput, i);
+            let value = getValue(activeInput, i);
+            click(activeButtonIncrement, i);
+            checkValueChanged(value, getValue(activeInput, i));
+            value = getValue(activeInput, i);
+            click(activeButtonDecrement, i);
+            checkValueChanged(value, getValue(activeInput, i));
         }
     });
 
     it('Verify The step input consists of an input field and buttons with icons to decrease or increase the value.', () => {
-        const arr = getElementArrayLength(stepInputPage.allInput);
+        const arr = getElementArrayLength(allInput);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(stepInputPage.allInput, i);
-            waitForElDisplayed(stepInputPage.allButtonIncrement, i);
-            waitForElDisplayed(stepInputPage.allButtonDecrement, i);
-            waitForElDisplayed(stepInputPage.allInput, i);
+            scrollIntoView(allInput, i);
+            waitForElDisplayed(allButtonIncrement, i);
+            waitForElDisplayed(allButtonDecrement, i);
+            waitForElDisplayed(allInput, i);
         }
     });
 
     it('Verify The user changes the value: By typing a number', () => {
-        const arr = getElementArrayLength(stepInputPage.activeInput);
+        const arr = getElementArrayLength(activeInput);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(stepInputPage.activeInput, i);
-            let value = getValue(stepInputPage.activeInput, i);
-            setValue(stepInputPage.activeInput, '2', i);
-            checkValueChanged(value, getValue(stepInputPage.activeInput, i));
-            value = getValue(stepInputPage.activeInput, i);
-            setValue(stepInputPage.activeInput, '1', i);
-            checkValueChanged(value, getValue(stepInputPage.activeInput, i));
+            scrollIntoView(activeInput, i);
+            let value = getValue(activeInput, i);
+            setValue(activeInput, '2', i);
+            checkValueChanged(value, getValue(activeInput, i));
+            value = getValue(activeInput, i);
+            setValue(activeInput, '1', i);
+            checkValueChanged(value, getValue(activeInput, i));
         }
     });
 
     it('Verify The user changes the value: With keyboard shortcuts (up/down, page up/down)', () => {
-        const arr = getElementArrayLength(stepInputPage.activeInput);
+        const arr = getElementArrayLength(activeInput);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(stepInputPage.activeInput, i);
-            let value = getValue(stepInputPage.activeInput, i);
-            click(stepInputPage.activeInput, i);
+            scrollIntoView(activeInput, i);
+            let value = getValue(activeInput, i);
+            click(activeInput, i);
             sendKeys(['ArrowDown']);
             sendKeys(['Enter']);
-            checkValueChanged(value, getValue(stepInputPage.activeInput, i));
-            value = getValue(stepInputPage.activeInput, i);
-            click(stepInputPage.activeInput, i);
+            checkValueChanged(value, getValue(activeInput, i));
+            value = getValue(activeInput, i);
+            click(activeInput, i);
             sendKeys(['ArrowUp']);
             sendKeys(['Enter']);
-            checkValueChanged(value, getValue(stepInputPage.activeInput, i));
+            checkValueChanged(value, getValue(activeInput, i));
         }
     });
 
     xit('Verify error message when entering invalid value', () => {
-        scrollIntoView(stepInputPage.reactiveFormInput);
-        stepInputPage.fillInput(stepInputPage.reactiveFormInput, 'invalid');
-        waitForElDisplayed(stepInputPage.errorMessage);
-        let formStatusText = getText(stepInputPage.formStatusText);
-        checkTextValueContain(formStatusText, 'INVALID');
+        scrollIntoView(reactiveFormInput);
+        fillInput(reactiveFormInput, 'invalid');
+        waitForElDisplayed(errorMessage);
+        let statusText = getText(formStatusText);
+        checkTextValueContain(statusText, 'INVALID');
 
-        stepInputPage.fillInput(stepInputPage.reactiveFormInput, '10');
-        expect(stepInputPage.errorMessage).not.toBeVisible();
-        formStatusText = getText(stepInputPage.formStatusText);
-        checkTextValueContain(formStatusText, 'VALID');
+        fillInput(reactiveFormInput, '10');
+        expect(errorMessage).not.toBeVisible();
+        statusText = getText(formStatusText);
+        checkTextValueContain(statusText, 'VALID');
 
-        stepInputPage.fillInput(stepInputPage.reactiveFormInput, '5');
-        waitForElDisplayed(stepInputPage.errorMessage);
-        formStatusText = getText(stepInputPage.formStatusText);
-        checkTextValueContain(formStatusText, 'INVALID');
+        fillInput(reactiveFormInput, '5');
+        waitForElDisplayed(errorMessage);
+        statusText = getText(formStatusText);
+        checkTextValueContain(statusText, 'INVALID');
 
-        stepInputPage.fillInput(stepInputPage.reactiveFormInput, '25');
+        fillInput(reactiveFormInput, '25');
         browser.pause(500);
-        waitForElDisplayed(stepInputPage.errorMessage);
-        formStatusText = getText(stepInputPage.formStatusText);
-        checkTextValueContain(formStatusText, 'INVALID');
+        waitForElDisplayed(errorMessage);
+        statusText = getText(stepInputPage.formStatusText);
+        checkTextValueContain(statusText, 'INVALID');
     });
 
     it('Verify clicking the buttons does not place the caret in the input field.', () => {
-        const arr = getElementArrayLength(stepInputPage.activeInput);
+        const arr = getElementArrayLength(activeInput);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(stepInputPage.activeInput, i);
-            click(stepInputPage.activeButtonIncrement, i);
-            checkNotFocused(stepInputPage.activeInput, i);
+            scrollIntoView(activeInput, i);
+            click(activeButtonIncrement, i);
+            checkNotFocused(activeInput, i);
         }
     });
 
     // Need to debug on different browsers
     xit('Verify the value in the field becomes 0 or the minimum if the minimum is larger than 0.', () => {
-        const arr = getElementArrayLength(stepInputPage.activeInput);
+        const arr = getElementArrayLength(activeInput);
         for (let i = 0; i < arr; i++) {
-            scrollIntoView(stepInputPage.activeInput, i);
-            click(stepInputPage.activeInput, i);
-            clearValue(stepInputPage.activeInput, i);
-            const value = getValue(stepInputPage.activeInput, i);
+            scrollIntoView(activeInput, i);
+            click(activeInput, i);
+            clearValue(activeInput, i);
+            const value = getValue(activeInput, i);
             expect(value).toEqual('0');
         }
     });
 
     it('Verify when the maximum/minimum values are reached, the Increase/Decrease button and up/down keyboard navigation are disabled.', () => {
-        scrollIntoView(stepInputPage.minMaxButtonIncrement);
+        scrollIntoView(minMaxButtonIncrement);
         for (let i = 0; i < 20; i++) {
-            click(stepInputPage.minMaxButtonIncrement);
+            click(minMaxButtonIncrement);
         }
-        checkIfDisabled(stepInputPage.minMaxButtonIncrement, 'aria-disabled', 'true');
+        checkIfDisabled(minMaxButtonIncrement, 'aria-disabled', 'true');
 
         for (let i = 0; i < 40; i++) {
-            click(stepInputPage.minMaxButtonDecrement);
+            click(minMaxButtonDecrement);
         }
-        checkIfDisabled(stepInputPage.minMaxButtonDecrement, 'aria-disabled', 'true');
+        checkIfDisabled(minMaxButtonDecrement, 'aria-disabled', 'true');
     });
 
     xit('Verify when user enter the tap step input field should be highlighted or focused ', () => {
-        const arr = getElementArrayLength(stepInputPage.inputWithoutForm);
-        click(stepInputPage.inputWithoutForm);
-        checkFocused(stepInputPage.inputWithoutForm);
+        const arr = getElementArrayLength(inputWithoutForm);
+        click(inputWithoutForm);
+        checkFocused(inputWithoutForm);
         for (let i = 1; i < arr; i++) {
-            scrollIntoView(stepInputPage.inputWithoutForm, i);
+            scrollIntoView(inputWithoutForm, i);
             sendKeys(['Tab']);
-            checkFocused(stepInputPage.inputWithoutForm, i);
+            checkFocused(inputWithoutForm, i);
         }
     });
 
     it('Verify you can show a descriptive reference or unit of measurement after the field (property: description).', () => {
-        const arr = getElementArrayLength(stepInputPage.formInput);
+        const arr = getElementArrayLength(formInput);
         for (let i = 1; i < arr; i++) {
-            scrollIntoView(stepInputPage.formInput, i);
-            clearValue(stepInputPage.formInput, i);
-            setValue(stepInputPage.formInput, '10', i);
-            const quantity = getText(stepInputPage.quantityText, i);
+            scrollIntoView(formInput, i);
+            clearValue(formInput, i);
+            setValue(formInput, '10', i);
+            const quantity = getText(quantityText, i);
             checkTextValueContain(quantity, '10');
         }
     });
 
     it('Check LTR/RTL orientation', () => {
         stepInputPage.checkRtlSwitch();
+    });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            stepInputPage.saveExampleBaselineScreenshot('step-input');
+            expect(stepInputPage.compareWithBaseline('step-input')).toBeLessThan(1);
+        });
     });
 });

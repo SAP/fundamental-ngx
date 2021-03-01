@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThumbnailComponent } from './thumbnail.component';
-import { AvatarModule } from '@fundamental-ngx/core';
+import { AvatarModule, CarouselModule, DialogModule , ButtonModule ,  RtlService, DialogRef} from '@fundamental-ngx/core';
 import { ThumbnailImageComponent } from './thumbnail-image/thumbnail-image.component';
-
-
+import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 
 @NgModule({
-    declarations: [ThumbnailComponent, ThumbnailImageComponent],
+    declarations: [ThumbnailComponent, ThumbnailImageComponent, ThumbnailDetailsComponent],
+    providers: [RtlService, DialogRef],
     imports: [
         CommonModule,
-        AvatarModule
+        AvatarModule,
+        DialogModule,
+        CarouselModule,
+        ButtonModule
     ],
     exports: [ThumbnailComponent]
 })

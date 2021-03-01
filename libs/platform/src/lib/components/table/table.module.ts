@@ -17,7 +17,8 @@ import {
     ToolbarModule,
     LayoutGridModule,
     PanelModule,
-    DatePickerModule
+    DatePickerModule,
+    BusyIndicatorModule
 } from '@fundamental-ngx/core';
 
 import { PlatformInputModule } from '../form/input/fdp-input.module';
@@ -52,10 +53,13 @@ import { P13ColumnsDialogComponent } from './components/table-p13-dialog/columns
 
 import {
     FdpCellDef,
+    FdpCellSelectableDirective,
     FdpHeaderCellDef,
     FdpTableCell,
     FdpTableHeader,
-    FdpViewSettingsFilterCustomDef
+    FdpViewSettingsFilterCustomDef,
+    TableScrollableDirective,
+    TableScrollerDirective
 } from './directives';
 import { ValueByPathPipe } from './pipes';
 
@@ -81,7 +85,8 @@ import { ValueByPathPipe } from './pipes';
         SelectModule,
         LayoutGridModule,
         PanelModule,
-        DatePickerModule
+        DatePickerModule,
+        BusyIndicatorModule
     ],
     declarations: [
         TableComponent,
@@ -90,6 +95,7 @@ import { ValueByPathPipe } from './pipes';
         TableToolbarActionsComponent,
         FdpTableCell,
         FdpCellDef,
+        FdpCellSelectableDirective,
         FdpTableHeader,
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,
@@ -114,7 +120,9 @@ import { ValueByPathPipe } from './pipes';
         P13GroupingDialogComponent,
         P13FilteringDialogComponent,
         FilterRuleComponent,
-        P13ColumnsDialogComponent
+        P13ColumnsDialogComponent,
+        TableScrollableDirective,
+        TableScrollerDirective
     ],
     exports: [
         TableComponent,

@@ -18,7 +18,6 @@ import { ColumnAlign, FilterableColumnDataType } from '../../enums';
 import { FdpCellDef, FdpHeaderCellDef } from '../../directives';
 
 import { TableColumn } from './table-column';
-import { strict } from 'assert';
 
 enum ColumnAlignEnum {
     Start = 'left',

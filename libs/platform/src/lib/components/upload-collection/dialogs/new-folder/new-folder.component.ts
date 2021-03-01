@@ -18,7 +18,10 @@ export class NewFolderComponent implements AfterViewInit {
      * @hidden
      * The current folder in what need to create a new one
      */
-    currentFolder?: UploadCollectionFolder = this.dialogRef.data.currentFolder;
+    readonly _currentFolder?: UploadCollectionFolder = this.dialogRef.data.currentFolder;
+
+    /** @hidden */
+    readonly _maxFilenameLength = this.dialogRef.data.maxFilenameLength;
 
     /** @hidden */
     _newFolderName = 'New Folder';

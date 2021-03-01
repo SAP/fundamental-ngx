@@ -42,7 +42,6 @@
                 [stateType]="status"
                 [disabled]="disabled"
                 [forceRender]="true"
-                (click)="selected($event)"
             >
                 {{ noValueLabel }}
             </fdp-radio-button>
@@ -57,7 +56,6 @@
                 [stateType]="status"
                 [disabled]="getListItemDisabledValue(item)"
                 [forceRender]="true"
-                (click)="selected($event)"
             >
                 {{ getDisplayValue(item) }}
             </fdp-radio-button>

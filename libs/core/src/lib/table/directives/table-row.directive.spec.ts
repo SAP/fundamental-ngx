@@ -1,6 +1,6 @@
 import { HIDDEN_CLASS_NAME, TableRowDirective } from './table-row.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
 import { TableService } from '../table.service';
 
@@ -55,7 +55,7 @@ describe('TableRowDirective', () => {
         ;
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
             imports: [TableModule],

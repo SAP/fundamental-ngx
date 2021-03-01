@@ -138,7 +138,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
-        @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
+        @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _listConfig: ListConfig,
         private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
@@ -149,7 +149,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     ngOnInit(): void {
-        const providers = this.providers.size === 0 ? this._listConfig.providers : this.providers;
+        const providers = this.providers?.size === 0 ? this._listConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
             this.dataSource = new ListDataSource(providers.get(this.entityClass));

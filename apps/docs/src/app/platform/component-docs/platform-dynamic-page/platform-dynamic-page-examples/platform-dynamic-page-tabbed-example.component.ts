@@ -1,5 +1,9 @@
 import { Component, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
-import { DynamicPageCollapseChangeEvent, DynamicPageTabChangeEvent } from '@fundamental-ngx/platform';
+import {
+    DynamicPageCollapseChangeEvent,
+    DynamicPageComponent,
+    DynamicPageTabChangeEvent
+} from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-tabbed-example',
@@ -10,6 +14,9 @@ import { DynamicPageCollapseChangeEvent, DynamicPageTabChangeEvent } from '@fund
 export class PlatformDynamicPageTabbedExampleComponent {
     @ViewChild('overlay')
     overlay: ElementRef<HTMLElement>;
+
+    @ViewChild(DynamicPageComponent)
+    dynamicPageComponent: DynamicPageComponent;
 
     fullscreen = false;
 
@@ -32,6 +39,10 @@ export class PlatformDynamicPageTabbedExampleComponent {
     }
 
     onTabChanged(event: DynamicPageTabChangeEvent): void {
-        console.log('tab changed to ' + event.payload);
+        console.log('tab changed to ' + event.payload.id);
+    }
+
+    switchTab(id: string): void {
+        this.dynamicPageComponent.setSelectedTab(id);
     }
 }

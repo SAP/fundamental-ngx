@@ -160,6 +160,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     set trigger(trigger: ElementRef) {
         this._externalTrigger = trigger;
+        this._popoverService.initialise(this._externalTrigger);
         this._destroyEventListeners();
         this._listenOnTriggerRefClicks();
     }
@@ -185,6 +186,11 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     /** Toggles menu open/close state */
     toggle(): void {
         this.isOpen ? this.close() : this.open();
+    }
+
+    /** Method called to refresh position of opened popover */
+    refreshPosition(): void {
+        this._popoverService.refreshPosition();
     }
 
     /** @hidden Select and instantiate menu view mode */
