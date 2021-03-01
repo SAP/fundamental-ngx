@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ObjectStatusComponent } from './object-status.component';
 import { Component, ViewChild } from '@angular/core';
@@ -33,7 +33,7 @@ describe('ObjectStatusComponent', () => {
     let host: TestPlatformObjectStatusComponent;
     let fixture: ComponentFixture<TestPlatformObjectStatusComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ObjectStatusModule],
             declarations: [ObjectStatusComponent, TestPlatformObjectStatusComponent]

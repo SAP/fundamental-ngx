@@ -1,0 +1,75 @@
+<fd-dialog [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
+    <fd-dialog-header>
+        <h5 [headerSize]="5" fd-title>{{ _data.selectedMedia.title }}</h5>
+    </fd-dialog-header>
+    <fd-dialog-body>
+        <button
+            class="fd-button fdp-thumbnail-button--left"
+            title="Previous"
+            i18n-title="@@platformThumbnailDetailsTitle"
+            aria-label="Go to Previous"
+            i18n-aria-label="@@platformThumbnailDetailsGotoPrevious"
+            (click)="_data.rtl ? next() : previous()"
+            [disabled]="leftButtonDisabled"
+            [style.z-index]="1"
+            data-slide="previous"
+        >
+            <i class="sap-icon--slim-arrow-left"></i>
+        </button>
+        <div class="fdp-media-container">
+            <img
+                *ngIf="_data.selectedMedia.mediaType === 'image'"
+                class="fdp-dialog-media-thumbnail-img"
+                [attr.aria-label]="_data.selectedMedia.label"
+                [src]="_data.selectedMedia.thumbnailUrl"
+                alt="first image"
+            />
+
+            <video
+                *ngIf="_data.selectedMedia.mediaType === 'video'"
+                [attr.aria-label]="_data.selectedMedia.label"
+                [src]="_data.selectedMedia.mediaUrl"
+                controls
+            >
+                {{ _data.selectedMedia.alt }}
+                <track
+                    [src]="_data.selectedMedia.captionFile"
+                    kind="captions"
+                    srclang="en"
+                    [label]="_data.selectedMedia.label"
+                />
+                <track
+                    [src]="_data.selectedMedia.audioDescFile"
+                    kind="descriptions"
+                    srclang="en"
+                    [label]="_data.selectedMedia.label"
+                />
+            </video>
+        </div>
+        <button
+            class="fd-button fdp-thumbnail-button--right"
+            title="Next"
+            i18n-title="@@platformThumbnailDetailsTitle"
+            aria-label="Go to Next"
+            i18n-aria-label="@@platformThumbnailDetailsGotoNext"
+            (click)="_data.rtl ? previous() : next()"
+            [disabled]="rightButtonDisabled"
+            [style.z-index]="1"
+            data-slide="next"
+        >
+            <i class="sap-icon--slim-arrow-right"></i>
+        </button>
+        <fdp-thumbnail-image
+            [mediaList]="_data.mediaList"
+            [isHorizontal]="true"
+            [maxImages]="_data.mediaList.length"
+            (thumbnailClicked)="thumbnailClickHandle($event)"
+        ></fdp-thumbnail-image>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button fd-button label="Close" title="close" fdType="transparent" (click)="closeDialog()"></button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

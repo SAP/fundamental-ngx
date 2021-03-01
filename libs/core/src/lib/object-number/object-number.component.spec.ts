@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 
 import { ObjectNumberComponent } from './object-number.component';
@@ -23,7 +23,7 @@ describe('ObjectNumberComponent', () => {
     let fixture: ComponentFixture<TestObjectNumberComponent>;
     const numberTextEl = '.fd-object-number__text';
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ObjectNumberComponent, TestObjectNumberComponent]
         })

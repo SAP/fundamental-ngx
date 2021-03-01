@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
@@ -14,7 +14,7 @@ describe('CardSecondSubtitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let debugElement: DebugElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent, CardSecondSubtitleDirective]
         }).compileComponents();

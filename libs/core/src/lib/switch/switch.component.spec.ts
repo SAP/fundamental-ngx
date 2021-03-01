@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ describe('SwitchComponent', () => {
     let changeDetectorRef: ChangeDetectorRef;
     let input;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, FormsModule],
             declarations: [SwitchComponent]

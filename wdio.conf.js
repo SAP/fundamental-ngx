@@ -55,6 +55,8 @@ exports.config = {
             './e2e/wdio/platform/**/multi-input.e2e-spec.ts',
             './e2e/wdio/platform/**/object-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/object-marker.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-status.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-attribute.e2e-spec.ts',
             './e2e/wdio/platform/**/panel.e2e-spec.ts',
             './e2e/wdio/platform/**/radio-button-group.e2e-spec.ts',
             './e2e/wdio/platform/**/search.e2e-spec.ts',
@@ -63,7 +65,7 @@ exports.config = {
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
-            './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
+         //   './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
         ]
     },
@@ -336,7 +338,6 @@ exports.config = {
         browser.addCommand('addIsActiveClass', function() {
             browser.execute(function(domElement) {
                 domElement.classList.add('is-active');
-
             }, this);
         }, true);
 

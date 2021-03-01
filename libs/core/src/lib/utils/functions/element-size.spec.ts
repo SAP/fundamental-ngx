@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { getElementCapacity, getElementWidth } from './element-size';
 
 const ELEMENT_DIMENSIONS = { width: 100, margin: 2, padding: 5 };
@@ -23,7 +23,7 @@ describe('Element size utils', () => {
     let elementRef: ElementRef;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent]
         }).compileComponents();

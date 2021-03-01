@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
@@ -8,7 +8,7 @@ describe('DynamicSideContentSideComponent', () => {
     let fixture: ComponentFixture<DynamicSideContentSideComponent>;
     let component: DynamicSideContentSideComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule],
             declarations: [DynamicSideContentSideComponent]

@@ -5,13 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './segmented-button-toggle-example.component.html'
 })
 export class SegmentedButtonToggleExampleComponent {
-    lmr: boolean[] = [false, false, false];
-
-    isSelectedLMR(x: number): string {
-        return this.lmr[x] ? 'is-selected' : '';
-    }
-
-    toggleLMR(x: number): void {
-        this.lmr[x] = !this.lmr[x];
-    }
+    value: string[] = ['first'];
 }

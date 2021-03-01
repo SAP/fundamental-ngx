@@ -4,10 +4,6 @@ $block: approval-flow-user-details;
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-
-    fd-avatar {
-        margin-right: .652rem;
-    }
 }
 
 .#{$block}__name {

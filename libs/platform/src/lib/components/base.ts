@@ -35,7 +35,14 @@ export abstract class BaseComponent {
 
     /** content Density of element. cozy | compact */
     @Input()
-    contentDensity: ContentDensity = 'cozy';
+    set contentDensity(contentDensity: ContentDensity) {
+        this._contentDensity = contentDensity;
+    }
+    get contentDensity(): ContentDensity {
+        return this._contentDensity;
+    }
+    /** @hidden - Avoiding private property name collision */
+    _contentDensity: ContentDensity;
 
     /** width of the element */
     @Input()

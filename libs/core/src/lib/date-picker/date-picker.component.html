@@ -21,6 +21,7 @@
                 [attr.aria-label]="dateInputLabel"
                 [(ngModel)]="_inputFieldDate"
                 (ngModelChange)="handleInputChange($event)"
+                (focus)="onTouched()"
             />
             <span fd-input-group-addon [button]="true" [compact]="compact">
                 <button

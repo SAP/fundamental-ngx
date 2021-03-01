@@ -6,8 +6,10 @@ import { hasModuleImport } from '../utils/ng-module-utils';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 import { defaultFontStyle } from './styles';
-import { addModuleImportToModule, getProjectFromWorkspace, getProjectMainFile, getAppModulePath } from '@angular/cdk/schematics';
-import { getWorkspace } from '@schematics/angular/utility/config';
+import {
+    addModuleImportToModule,
+    findModuleFromOptions
+} from '@angular/cdk/schematics';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
@@ -63,11 +65,9 @@ function addDependencies(): Rule {
 }
 
 // Configures browser animations.
-function addAnimations(options: any): Rule {
-    return (tree: Tree) => {
-        const workspace = getWorkspace(tree);
-        const project = getProjectFromWorkspace(workspace);
-        const modulePath = getAppModulePath(tree, getProjectMainFile(project));
+function addAnimations(options: any): any {
+    return async (tree: Tree) => {
+        const modulePath = (await findModuleFromOptions(tree, options));
 
         if (options.animations) {
 

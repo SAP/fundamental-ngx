@@ -1,5 +1,5 @@
 import { MenuTriggerDirective } from './menu-trigger.directive';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { MenuComponent } from '../menu.component';
 import { Component, EventEmitter, ViewChild } from '@angular/core';
 
@@ -13,7 +13,7 @@ describe('MenuTriggerDirective', () => {
     let directive: MenuTriggerDirective;
     let menu: Partial<MenuComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent, MenuTriggerDirective]
         }).compileComponents();

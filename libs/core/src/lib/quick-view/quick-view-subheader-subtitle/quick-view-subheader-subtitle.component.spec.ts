@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { QuickViewSubheaderSubtitleComponent } from './quick-view-subheader-subtitle.component';
 
@@ -6,7 +6,7 @@ describe('QuickViewSubheaderSubtitleComponent', () => {
     let component: QuickViewSubheaderSubtitleComponent;
     let fixture: ComponentFixture<QuickViewSubheaderSubtitleComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [QuickViewSubheaderSubtitleComponent]
         }).compileComponents();

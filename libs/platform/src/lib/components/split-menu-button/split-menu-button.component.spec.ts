@@ -1,6 +1,6 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
-import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { ElementRef, ViewChild, Component } from '@angular/core';
 import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
 import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
@@ -59,7 +59,7 @@ describe('SplitMenuButtonComponent', () => {
     let fixture: ComponentFixture<TestWrapperComponent>;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
             declarations: [TestWrapperComponent, SplitMenuButtonComponent],
