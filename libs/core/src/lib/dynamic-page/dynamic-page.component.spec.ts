@@ -52,7 +52,7 @@ describe('DynamicPageComponent default values', () => {
         dynamicPageComponent = component.dynamicPage;
     });
 
-    fit('should create', () => {
+    it('should create', () => {
         fixture.detectChanges()
         expect(fixture).toBeTruthy();
     });
