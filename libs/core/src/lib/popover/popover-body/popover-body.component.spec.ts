@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PopoverBodyComponent } from './popover-body.component';
 import { ESCAPE } from '@angular/cdk/keycodes';
@@ -11,7 +11,7 @@ describe('PopoverBodyComponent', () => {
     let component: PopoverBodyComponent;
     let fixture: ComponentFixture<PopoverBodyComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PopoverModule, OverlayModule, A11yModule]
         }).compileComponents();

@@ -6,6 +6,8 @@ import {
     ContentChild,
     ContentChildren,
     EventEmitter,
+    HostBinding,
+    HostListener,
     Inject,
     Input,
     NgZone,
@@ -21,7 +23,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core';
 
@@ -70,6 +72,8 @@ interface GroupTableRowValueType {
     count: number;
 }
 
+let tableUniqueId = 0;
+
 /**
  * The component that represents a table.
  * A table is a set of tabular data. Line items can support data, images and actions.
@@ -117,6 +121,11 @@ interface GroupTableRowValueType {
     }
 })
 export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges, OnInit {
+    /** Id for the Table. */
+    @Input()
+    @HostBinding('attr.id')
+    id = `fdp-table-${tableUniqueId++}`;
+
     /**
      * Table data source.
      * Can be @type { T[] | Observable<T[]> | TableDataSource<T> }
@@ -574,6 +583,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Disable filter from column heder menu */
     setHeaderColumnFilteringDisabled(disabled: boolean): void {
         this._isFilteringFromHeaderDisabled = disabled;
+    }
+
+    /** @hidden
+     *  Needs to prevent scrolling and other events on loading.
+     *  TODO: refactor it on keyboard navigation implementation
+     * */
+    @HostListener('keydown', ['$event'])
+    keyDownHandler(event: KeyboardEvent): void {
+        if (this.loading) {
+            event.preventDefault();
+        }
     }
 
     // Private API

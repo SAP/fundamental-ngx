@@ -1,14 +1,17 @@
 <div class="fdp-thumbnail-image-container">
     <div
+        *ngFor="let image of mediaList | slice: 0:maxImages; let i = index"
         [class]="isHorizontal ? 'fdp-thumbnail-image--horizontal' : 'fdp-thumbnail-image'"
-        [class.fdp-thumbnail-image--selected]="image.selected"
-        *ngFor="let image of mediaList"
-        (click)="thumbnailClick(image)"
-        (keydown.enter)="thumbnailClick(image)"
+        [class.fdp-thumbnail-image--selected]="image.selected "
+        [class.fdp-thumbnail-image--overlay]="image.overlayRequired"
+        (click)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick(image)"
+        (keydown.enter)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick(image)"
         tabindex="0"
+        role="button"
         [attr.title]="image.label"
         [attr.aria-label]="image.label"
     >
         <fd-avatar [image]="image.thumbnailUrl" size="m"></fd-avatar>
+        <div class="fdp-thumbnail-overflow" *ngIf="image.overlayRequired">+{{ mediaList.length - maxImages }}</div>
     </div>
 </div>

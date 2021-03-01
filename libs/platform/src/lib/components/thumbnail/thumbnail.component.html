@@ -2,27 +2,40 @@
     <fdp-thumbnail-image
         *ngIf="!isHorizontal"
         [mediaList]="mediaList"
+        [maxImages]="maxImagesDisplay"
         [isHorizontal]="isHorizontal"
         (thumbnailClicked)="thumbnailClickHandle($event)"
     ></fdp-thumbnail-image>
     <div class="fdp-media-container">
         <img
+            tabindex="0"
+            role="button"
             *ngIf="selectedMedia.mediaType === 'image'"
             [attr.title]="selectedMedia.label"
             [attr.aria-label]="selectedMedia.label"
             [attr.src]="selectedMedia.mediaUrl"
             [attr.alt]="selectedMedia.alt"
-
+            (click)="openDialog(selectedMedia, mediaList)"
+            (keydown.enter)="openDialog(selectedMedia, mediaList)"
         />
-        <video *ngIf="selectedMedia.mediaType === 'video'" [src]="selectedMedia.mediaUrl" controls  [attr.aria-label]="selectedMedia.label">
+        <video
+            tabindex="0"
+            role="button"
+            *ngIf="selectedMedia.mediaType === 'video'"
+            [src]="selectedMedia.mediaUrl"
+            (click)="openDialog(selectedMedia, mediaList)"
+            (keydown.enter)="openDialog(selectedMedia, mediaList)"
+            [attr.aria-label]="selectedMedia.label"
+        >
             {{ selectedMedia.alt }}
-            <track [src]="selectedMedia.captionFile" kind="captions" srclang="en" [label]="selectedMedia.label">
-            <track [src]="selectedMedia.audioDescFile" kind="descriptions" srclang="en" [label]="selectedMedia.label">
+            <track [src]="selectedMedia.captionFile" kind="captions" srclang="en" [label]="selectedMedia.label" />
+            <track [src]="selectedMedia.audioDescFile" kind="descriptions" srclang="en" [label]="selectedMedia.label" />
         </video>
     </div>
     <fdp-thumbnail-image
         *ngIf="isHorizontal"
         [mediaList]="mediaList"
+        [maxImages]="maxImagesDisplay"
         [isHorizontal]="isHorizontal"
         (thumbnailClicked)="thumbnailClickHandle($event)"
     ></fdp-thumbnail-image>

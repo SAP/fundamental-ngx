@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async, tick, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 
@@ -30,7 +30,7 @@ describe('CheckboxComponent', () => {
     let hostComponent: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
             declarations: [CheckboxComponent, TestCheckboxComponent]

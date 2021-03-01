@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MenuKeyboardService } from '../../menu/menu-keyboard.service';
 import { NestedListModule } from '../nested-list.module';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListDirective } from './nested-list.directive';
@@ -56,7 +56,7 @@ describe('NestedListDirective', () => {
     let level3List: NestedListDirective;
     let level4List: NestedListDirective;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [NestedListModule],
             declarations: [TestNestedContainerComponent],

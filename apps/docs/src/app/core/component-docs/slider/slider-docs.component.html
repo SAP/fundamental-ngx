@@ -50,9 +50,9 @@
         [disabled]="data.properties.disabled"
         [showTicks]="data.properties.showTicks"
         [showTicksLabels]="data.properties.showTicksLabels"
-        [mode]="data.properties.range"
+        [mode]="data.properties.mode"
         [hideProgressBar]="data.properties.hideProgressBar"
     ></fd-slider>
 
-    <p>Value: {{ value }}</p>
+    <p>Value: {{ value | json }}</p>
 </playground>

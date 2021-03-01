@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ElementRef, ViewChild, Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -50,7 +50,7 @@ describe('StandardListItemComponent', () => {
     let component: StandardListItemComponentTest;
     let fixture: ComponentFixture<StandardListItemComponentTest>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [StandardListItemComponentTest, StandardListItemComponent, ListComponent],
             imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
@@ -106,7 +106,7 @@ describe('Standard  List Item Component with DataSource', () => {
     let host: StandardListItemDataSourceTestComponent;
     let fixture: ComponentFixture<StandardListItemDataSourceTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [StandardListItemDataSourceTestComponent, StandardListItemComponent, ListComponent],
             imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]

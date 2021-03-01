@@ -8,7 +8,7 @@ import {
     ChangeDetectionStrategy,
     AfterViewInit,
     Renderer2,
-    ElementRef
+    ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -41,7 +41,7 @@ export class FeedInputComponent implements AfterViewInit {
 
     /** Set title attribute for accessibility user image */
     @Input()
-    title: string;
+    userTitle = 'User';
 
     /** @hidden Event emitted when user click on send button */
     @Output()

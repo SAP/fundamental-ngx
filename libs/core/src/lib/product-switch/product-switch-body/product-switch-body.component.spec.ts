@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProductSwitchBodyComponent } from './product-switch-body.component';
 import { ButtonModule } from '../../button/button.module';
@@ -51,7 +51,7 @@ describe('ProductSwitchBodyComponent', () => {
 
     let component, componentInstance: ProductSwitchBodyComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
             declarations: [ProductSwitchBodyComponent, TestComponent]

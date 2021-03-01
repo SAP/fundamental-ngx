@@ -8,6 +8,7 @@ import { Media } from '@fundamental-ngx/platform';
 export class PlatformThumbnailVideoMediaExampleComponent {
 
     data: Media[] = [{
+        title: 'Nature Details',
         thumbnailUrl: '//picsum.photos/id/1008/400',
         mediaType: 'video',
         mediaUrl: '//www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
@@ -17,7 +18,7 @@ export class PlatformThumbnailVideoMediaExampleComponent {
         label: 'nature',
 
     },
-    {
+    {   title: 'Animal Details',
         thumbnailUrl: '//picsum.photos/id/1004/400',
         mediaType: 'video',
         mediaUrl: '//cdn.bitdegree.org/learn/Pexels%20Videos%203373.mp4?raw=true',
@@ -28,6 +29,7 @@ export class PlatformThumbnailVideoMediaExampleComponent {
 
     },
     {
+        title: 'Culture Details',
         thumbnailUrl: '//picsum.photos/id/1001/400',
         mediaType: 'video',
         mediaUrl: '//cdn.bitdegree.org/learn/Pexels%20Videos%203373.mp4?raw=true',
@@ -38,6 +40,7 @@ export class PlatformThumbnailVideoMediaExampleComponent {
 
     },
     {
+        title: 'Dance Details',
         thumbnailUrl: '//picsum.photos/id/1002/400',
         mediaType: 'video',
         mediaUrl: '//www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
@@ -45,9 +48,10 @@ export class PlatformThumbnailVideoMediaExampleComponent {
         audioDescFile: '//gist.github.com/samdutton/ca37f3adaf4e23679957b8083e061177',
         alt: 'Failed to load //picsum.photos/id/1002/400',
         label: 'dance',
-        selected: false
+
     },
     {
+        title: 'Nature Details',
         thumbnailUrl: '//picsum.photos/id/1019/400',
         mediaType: 'video',
         mediaUrl: '//cdn.bitdegree.org/learn/Pexels%20Videos%203373.mp4?raw=true',
@@ -55,7 +59,7 @@ export class PlatformThumbnailVideoMediaExampleComponent {
         audioDescFile: '//gist.github.com/samdutton/ca37f3adaf4e23679957b8083e061177',
         alt: 'Failed to load //picsum.photos/id/1019/400',
         label: 'nature',
-        selected: false
+
     }
     ];
 

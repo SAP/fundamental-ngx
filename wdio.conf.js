@@ -65,7 +65,7 @@ exports.config = {
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
-            './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
+         //   './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
         ]
     },
@@ -212,7 +212,7 @@ exports.config = {
     connectionRetryTimeout: 200000,
     //
     // Default request retries count
-    connectionRetryCount: 0,
+    connectionRetryCount: 3,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
@@ -245,7 +245,7 @@ exports.config = {
     framework: 'jasmine',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    specFileRetries: 0,
+    specFileRetries: 2,
     //
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,
@@ -338,7 +338,6 @@ exports.config = {
         browser.addCommand('addIsActiveClass', function() {
             browser.execute(function(domElement) {
                 domElement.classList.add('is-active');
-
             }, this);
         }, true);
 

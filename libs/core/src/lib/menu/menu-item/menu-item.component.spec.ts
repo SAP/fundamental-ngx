@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { MenuItemComponent, SubmenuComponent } from './menu-item.component';
 import { Component, ViewChild } from '@angular/core';
@@ -30,7 +30,7 @@ describe('MenuItemComponent', () => {
     let menuItem: MenuItemComponent;
     let menuInteractive: MenuInteractiveDirective;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestMenuItemComponent, MenuComponent, MenuItemComponent, MenuInteractiveDirective],
             imports: [CommonModule, PopoverModule]
@@ -165,7 +165,7 @@ describe('MenuItemComponent nested', () => {
     let menuNestedItem: MenuItemComponent;
     let menuInteractive: MenuInteractiveDirective;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TesNestedMenuItemComponent,

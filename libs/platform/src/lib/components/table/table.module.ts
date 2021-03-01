@@ -53,6 +53,7 @@ import { P13ColumnsDialogComponent } from './components/table-p13-dialog/columns
 
 import {
     FdpCellDef,
+    FdpCellSelectableDirective,
     FdpHeaderCellDef,
     FdpTableCell,
     FdpTableHeader,
@@ -94,6 +95,7 @@ import { ValueByPathPipe } from './pipes';
         TableToolbarActionsComponent,
         FdpTableCell,
         FdpCellDef,
+        FdpCellSelectableDirective,
         FdpTableHeader,
         FdpHeaderCellDef,
         TableViewSettingsDialogComponent,

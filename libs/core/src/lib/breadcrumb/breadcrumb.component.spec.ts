@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverModule } from '../popover/popover.module';
 import { IconModule } from '../icon/icon.module';
 import { MenuModule } from '../menu/menu.module';
@@ -34,7 +34,7 @@ describe('BreadcrumbComponent', () => {
     let component: BreadcrumbComponent;
     let fixture: ComponentFixture<BreadcrumbWrapperComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 BreadcrumbComponent,

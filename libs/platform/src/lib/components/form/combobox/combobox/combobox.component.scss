@@ -1,10 +1,9 @@
-@import "~@angular/cdk/overlay-prebuilt";
+@import '~@angular/cdk/overlay-prebuilt';
 @import '~fundamental-styles/dist/popover';
 
 .fdp-combobox {
     &__list-container {
         &.fd-popover__popper {
-            width: 100% !important;
             position: absolute !important;
             overflow: hidden;
 
@@ -17,8 +16,8 @@
     &__list {
         overflow: auto;
         .fd-list__item {
-            display: grid;
-            grid-template-columns: 1fr auto;
+            justify-content: space-between;
+
             span {
                 overflow: hidden;
                 text-overflow: ellipsis;
