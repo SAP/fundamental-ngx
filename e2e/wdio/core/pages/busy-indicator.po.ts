@@ -15,6 +15,7 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     smallIndicator = '.fd-busy-indicator--s';
     middleIndicator = '.fd-busy-indicator.fd-busy-indicator--m';
     largeIndicator = '.fd-busy-indicator.fd-busy-indicator--l';
+    indicatorBlockWrapper = 'fd-busy-indicator-wrapper-example  fd-busy-indicator:nth-child(2)';
 
     open(): void {
         super.open(this.url);

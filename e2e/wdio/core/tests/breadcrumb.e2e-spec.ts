@@ -1,16 +1,22 @@
 import { BreadcrumbPo } from '../pages/breadcrumb.po';
 import {
+    checkElementScreenshot,
     getElementArrayLength,
     isElementClickable,
-    isElementDisplayed,
-    refreshPage,
+    mouseHoverElement,
+    refreshPage, saveElementScreenshot,
     scrollIntoView, waitForPresent
 } from '../../driver/wdio';
+
+import {
+    linksExample, linksHoverState
+} from '../fixtures/testData/breadcrumb.tags';
+
 
 describe('Breadcrumb test suite:', function() {
 
     const breadcrumbPage: BreadcrumbPo = new BreadcrumbPo();
-    const {links, disableLinks} = breadcrumbPage;
+    const { links, disabledLinks } = breadcrumbPage;
 
     beforeAll(() => {
         breadcrumbPage.open();
@@ -26,14 +32,15 @@ describe('Breadcrumb test suite:', function() {
         for (let i = 0; i < linksLength; i++) {
             scrollIntoView(links, i);
             expect(isElementClickable(links, i)).toBe(true);
+            checkLinkHoverState(links, linksExample + linksHoverState + '-' + i, 'breadcrumb-links', i);
         }
     });
 
     it('should check disable links', () => {
-        const disableLinksLength = getElementArrayLength(disableLinks);
-        for (let i = 0; i < disableLinksLength; i++) {
-            scrollIntoView(disableLinks, i);
-            expect(isElementDisplayed(disableLinks, i)).toBe(true);
+        const disabledLinksLength = getElementArrayLength(disabledLinks);
+        for (let i = 0; i < disabledLinksLength; i++) {
+            scrollIntoView(disabledLinks, i);
+            expect(isElementClickable(disabledLinks, i)).toBe(false);
         }
     });
 
@@ -45,3 +52,12 @@ describe('Breadcrumb test suite:', function() {
         });
     });
 });
+
+function checkLinkHoverState(selector: string, tag: string, linkName: string, index: number = 0): void {
+    mouseHoverElement(selector, index);
+    saveElementScreenshot(selector, tag);
+    expect(checkElementScreenshot(selector, tag, {}, index))
+        .toBeLessThan(2, `${linkName} link hover state mismatch`);
+}
+
+
