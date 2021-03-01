@@ -21,7 +21,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/select.e2e-spec.ts'
+        './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -184,7 +184,7 @@ exports.config = {
             {
                 // For local run/debug separate folder for screenshots
                 // will be created as soon as screen resolutions can differ a lot between local systems
-                baselineFolder: join(process.cwd(), './e2e/wdio/tmp/baselineScreenshot/'),
+                baselineFolder: join(process.cwd(), '.tmp/baselineScreenshot/'),
                 formatImageName: '{tag}-{logName}-{width}x{height}',
                 screenshotPath: join(process.cwd(), '.tmp/'),
                 savePerInstance: true,

@@ -24,7 +24,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/select.e2e-spec.ts'
+        './e2e/wdio/**/*.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -212,7 +212,7 @@ exports.config = {
     connectionRetryTimeout: 200000,
     //
     // Default request retries count
-    connectionRetryCount: 3,
+    connectionRetryCount: 0,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
@@ -245,7 +245,7 @@ exports.config = {
     framework: 'jasmine',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    specFileRetries: 2,
+    specFileRetries: 0,
     //
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,
