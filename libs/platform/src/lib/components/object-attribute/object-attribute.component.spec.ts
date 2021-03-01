@@ -1,5 +1,5 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ObjectAttributeComponent } from './object-attribute.component';
@@ -15,7 +15,7 @@ describe('ObjectAttributeComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ObjectAttributeComponent, TestComponent],
             providers: []
@@ -64,7 +64,7 @@ describe('Content projection', () => {
     let component: ObjectAttributeContentProjectionTesterComponent;
     let fixture: ComponentFixture<ObjectAttributeContentProjectionTesterComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ObjectAttributeComponent, ObjectAttributeContentProjectionTesterComponent],
             schemas: [NO_ERRORS_SCHEMA]
@@ -96,7 +96,7 @@ describe('ObjectAttributeComponent With Link', () => {
     let component: TestComponentLink;
     let fixture: ComponentFixture<TestComponentLink>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ObjectAttributeComponent, TestComponentLink],
             providers: []

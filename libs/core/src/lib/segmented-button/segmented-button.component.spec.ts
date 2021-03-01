@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SegmentedButtonComponent, isSelectedClass, isDisabledClass } from './segmented-button.component';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
@@ -31,7 +31,7 @@ describe('SegmentedButtonComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [SegmentedButtonComponent, TestComponent, ButtonComponent]
         }).overrideComponent(ButtonComponent, {

@@ -47,7 +47,9 @@ report.*.json
 allure-report
 allure-results
 .tmp
+e2e/tmp
 axe-reports
+
 # System Files
 .DS_Store
 Thumbs.db

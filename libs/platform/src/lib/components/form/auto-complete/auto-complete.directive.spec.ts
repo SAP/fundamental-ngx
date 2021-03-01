@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OptionItem } from '@fundamental-ngx/platform';
 import { AutoCompleteDirective } from './auto-complete.directive';
@@ -34,7 +34,7 @@ describe('AutoCompleteDirective', () => {
     let fixture: ComponentFixture<TestComponent>;
     let directive: AutoCompleteDirective;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [AutoCompleteDirective, TestComponent]
         }).compileComponents();

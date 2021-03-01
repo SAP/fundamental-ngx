@@ -92,64 +92,71 @@ function addCoreLib(_options: any): Rule {
         return tree;
     };
 }
-
 /**
  * adds/updates translations to host app if host app opts to have translations added to their app
  * @param options options passed for this schematic
  */
-function readTranslationFiles(options: any): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        if (options.translations) {
-            try {
-                const angularJsonFile = tree.read('angular.json');
-                if (angularJsonFile) {
-                    const angularJsonFileObject = JSON.parse(angularJsonFile.toString('utf-8'));
-                    const project = options.project
-                        ? options.project
-                        : Object.keys(angularJsonFileObject['projects'])[0];
-                    // set default project path
-                    if (!options.project) {
-                        options.name = project;
-                    }
-                    const projectObject = angularJsonFileObject.projects[project];
-                    // todo get the languages supported from platform, and fetch from a separate file probably
-                    const languages = supportedLanguages;
+export function readTranslationFiles(options: any): any {
+    return async (_tree: Tree, _context: SchematicContext) => {
+        const translationPromise = new Promise<Tree>((resolve, reject) => {
+            if (options.translations) {
+                try {
+                    const angularJsonFile = _tree.read('angular.json');
 
-                    let availableLanguages = 0;
-                    languages.forEach((language) => {
-                        if (projectObject.architect.build.configurations[language]) {
-                            availableLanguages++;
+                    if (angularJsonFile) {
+                        const angularJsonFileObject = JSON.parse(angularJsonFile.toString('utf-8'));
+                        const project = options.project
+                            ? options.project
+                            : Object.keys(angularJsonFileObject['projects'])[0];
+                        // set default project path
+                        if (!options.project) {
+                            options.name = project;
                         }
-                    });
-                    languages.forEach((language) => {
-                        if (availableLanguages === 0 || languages.length > availableLanguages) {
-                            if (!projectObject.architect.build.configurations[language]) {
-                                context.logger.info(
-                                    'Adding translations for language "' +
-                                        language +
-                                        '" from ngx/platform to ' +
-                                        project
-                                );
-                                // not present, add the language settings to serve and build configurations in angular.json
-                                writeToAngularConfig(tree, options, angularJsonFileObject, language);
-                                // create the extraction .xlf files from the platform lib and place in host app's locale folder
-                                createExtractionFiles(tree, options, language);
+                        const projectObject = angularJsonFileObject.projects[project];
+                        // todo get the languages supported from platform, and fetch from a separate file probably
+                        const languages = supportedLanguages;
+
+                        let availableLanguages = 0;
+                        languages.forEach((language) => {
+                            if (projectObject.architect.build.configurations[language]) {
+                                availableLanguages++;
                             }
-                        } else {
-                            const languageObject = projectObject.architect.build.configurations[language].i18nFile;
-                            const hostAppXlfContent = tree.read(languageObject.toString());
-                            if (hostAppXlfContent) {
-                                // merge the extraction .xlf files from the platform lib into the host app's files
-                                updateExtractionFiles(tree, options, hostAppXlfContent, language);
+                        });
+                        languages.forEach(async (language) => {
+                            if (availableLanguages === 0 || languages.length > availableLanguages) {
+                                if (!projectObject.architect.build.configurations[language]) {
+                                    _context.logger.info(
+                                        'Adding translations for language "' +
+                                            language +
+                                            '" from ngx/platform to ' +
+                                            project
+                                    );
+                                    // not present, add the language settings to serve and build configurations in angular.json
+                                    await writeToAngularConfig(_tree, options, angularJsonFileObject, language);
+                                    // create the extraction .xlf files from the platform lib and place in host app's locale folder
+                                    await createExtractionFiles(_tree, options, language);
+                                }
+                            } else {
+                                const languageObject = projectObject.architect.build.configurations[language].i18nFile;
+
+                                const hostAppXlfContent = _tree.read(languageObject.toString());
+                                if (hostAppXlfContent) {
+                                    // merge the extraction .xlf files from the platform lib into the host app's files
+                                    await updateExtractionFiles(_tree, options, hostAppXlfContent, language);
+                                }
                             }
-                        }
-                    });
+                            resolve(_tree);
+                        });
+                    } else {
+                        reject('error in promise');
+                    }
+                } catch (e) {
+                    _context.logger.log('info', e + '\n🚫 Failed to add translations correctly.');
                 }
-            } catch (e) {
-                context.logger.log('info', e + '\n🚫 Failed to add translations correctly.');
             }
-        }
-        return tree;
+        });
+        _tree = await translationPromise;
+        return _tree;
     };
 }
 
@@ -160,8 +167,8 @@ function readTranslationFiles(options: any): Rule {
  * @param fileContent the host applications language .xlf file
  * @param language the language for which translations from lib will be applied to
  */
-function updateExtractionFiles(tree: Tree, options: any, fileContent: any, language: string): void {
-    const srcPath = getSourceTreePath(tree, options);
+async function updateExtractionFiles(tree: Tree, options: any, fileContent: any, language: string): Promise<Tree> {
+    const srcPath = await getSourceTreePath(tree, options);
     const libXlfFileContent = tree.read(
         'node_modules/@fundamental-ngx/platform/schematics/locale/' + language + '/messages.' + language + '.xlf'
     );
@@ -213,6 +220,7 @@ function updateExtractionFiles(tree: Tree, options: any, fileContent: any, langu
             }
         });
     }
+    return tree;
 }
 
 /**

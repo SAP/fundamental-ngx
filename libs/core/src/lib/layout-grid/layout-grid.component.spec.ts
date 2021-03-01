@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { LayoutGridComponent } from './layout-grid.component';
 import { CSS_CLASS_NAME } from './constants';
 
@@ -16,7 +16,7 @@ describe('LayoutGridComponent', () => {
     let componentElement: LayoutGridComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestNestedContainerComponent, LayoutGridComponent]
         }).compileComponents();

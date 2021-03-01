@@ -19,7 +19,15 @@ export abstract class CollectionBaseInput extends BaseInput {
      * list of values, it can be of type SelectItem or String.
      */
     @Input()
-    list: Array<SelectItem | string>;
+    get list(): Array<SelectItem | string> {
+        return this._list;
+    }
+
+    set list(value: Array<SelectItem | string>) {
+        this._list = value;
+    }
+    private _list: Array<SelectItem | string>;
+
     /**
      * Used in filters and any kind of comparators when we work with objects and this identify
      * unique field name based on which we are going to do the job

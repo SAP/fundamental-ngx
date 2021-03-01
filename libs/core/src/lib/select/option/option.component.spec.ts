@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 
 import { OptionComponent } from './option.component';
@@ -13,7 +13,7 @@ describe('OptionComponent', () => {
     const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
     const elementRef = new ElementRef(null);
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [OptionComponent],
             providers: [

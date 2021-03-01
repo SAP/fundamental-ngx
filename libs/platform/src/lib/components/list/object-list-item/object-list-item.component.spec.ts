@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
@@ -44,7 +44,7 @@ describe('ObjectListItemComponent', () => {
     let component: ObjectListItemComponentTest;
     let fixture: ComponentFixture<ObjectListItemComponentTest>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
             declarations: [ObjectListItemComponentTest, ObjectListItemComponent, ListComponent, ObjectListItemRowComponent]
@@ -316,8 +316,8 @@ export class ListDataProvider extends DataProvider<Product> {
     }
     fetch(params: Map<string, string>): Observable<Product[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get(name)) {
-            const keyword = params.get(name).toLowerCase();
+        if (!!params.get('name')) {
+            const keyword = params.get('name').toLowerCase();
             data = data.filter((item) => item.title.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);
@@ -357,7 +357,7 @@ describe('Object  List Item Component with DataSource', () => {
     let component: ObjectListItemDataSourceTestComponent;
     let fixture: ComponentFixture<ObjectListItemDataSourceTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
             declarations: [ObjectListItemDataSourceTestComponent, ObjectListItemComponent, ListComponent, ObjectListItemRowComponent]

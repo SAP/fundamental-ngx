@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, ViewChild } from '@angular/core';
@@ -29,7 +29,7 @@ describe('FixedCardLayoutComponent', () => {
     let component: TestFixedCardLayoutComponent;
     let fixture: ComponentFixture<TestFixedCardLayoutComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [FixedCardLayoutComponent, CardDefinitionDirective, TestFixedCardLayoutComponent],
             imports: [CommonModule, DragDropModule, CardModule],

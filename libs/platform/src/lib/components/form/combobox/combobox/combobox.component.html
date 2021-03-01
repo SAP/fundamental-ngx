@@ -10,8 +10,13 @@
         cdk-connected-overlay
         [cdkConnectedOverlayOrigin]="selectTrigger"
         [cdkConnectedOverlayOpen]="isOpen && _suggestions.length > 0"
-        [cdkConnectedOverlayMinWidth]="minWidth">
-        <div class="fdp-combobox__list-container fd-popover__popper fd-popover__body--no-arrow">
+        (overlayOutsideClick)="close($event)"
+        [cdkConnectedOverlayMinWidth]="minWidth"
+    >
+        <div
+            class="fdp-combobox__list-container fd-popover__popper fd-popover__body--no-arrow"
+            [style.width.%]="!autoResize && 100"
+        >
             <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
         </div>
     </ng-template>
@@ -23,6 +28,7 @@
 
 <ng-template #controlTemplate>
     <fd-input-group
+        [id]="id + '-input-group-container'"
         [compact]="isCompact"
         [button]="!readonly"
         [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
@@ -35,7 +41,8 @@
         [attr.aria-disabled]="disabled || readonly"
         [attr.aria-readonly]="readonly"
         [glyphAriaLabel]="ariaLabel"
-        (click)="mobile && onPrimaryButtonClick(false)">
+        (click)="mobile && onPrimaryButtonClick(false)"
+    >
         <ng-container></ng-container>
         <input
             #searchInputElement
@@ -47,8 +54,9 @@
             role="combobox"
             autocomplete="off"
             [attr.aria-label]="ariaLabel"
+            [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-            [attr.aria-owns]="autoComplete && !mobile ? (id + '-result') : null"
+            [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
             [attr.aria-haspopup]="autoComplete && !mobile"
             fd-input-group-input
             tabindex="0"
@@ -70,7 +78,8 @@
 </ng-template>
 
 <ng-template #listTemplate>
-    <ul fd-list
+    <ul
+        fd-list
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fdp-combobox__list"
@@ -79,7 +88,9 @@
         [compact]="isCompact"
         [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
-        [style.maxWidth]="autoResize && maxWidth + 'px'">
+        [style.minWidth]="!mobile && minWidth + 'px'"
+        [style.maxWidth]="autoResize && maxWidth + 'px'"
+    >
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
@@ -88,72 +99,97 @@
                 </ng-container>
 
                 <ng-container *ngIf="groupItemTemplate">
-                    <ng-container [ngTemplateOutlet]="groupItemTemplate"
-                                  [ngTemplateOutletContext]="{$implicit: {label: group.label}}"></ng-container>
+                    <ng-container
+                        [ngTemplateOutlet]="groupItemTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
+                    ></ng-container>
                 </ng-container>
 
-                <li *ngFor="let optionItem of group.children; let i = index;"
+                <li
+                    *ngFor="let optionItem of group.children; let i = index"
                     (click)="handleOptionItem(optionItem)"
                     fd-list-item
                     role="option"
                     tabindex="0"
                     (keyDown)="handlePressEnter($event, optionItem)"
-                    [selected]="isSelectedOptionItem(optionItem)">
-                    <ng-container [ngTemplateOutlet]="listItem"
-                                  [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"></ng-container>
+                    [selected]="isSelectedOptionItem(optionItem)"
+                >
+                    <ng-container
+                        [ngTemplateOutlet]="listItem"
+                        [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
+                    ></ng-container>
                 </li>
             </ng-container>
         </ng-container>
 
         <ng-container *ngIf="!isGroup">
-            <li *ngFor="let optionItem of _suggestions; let i = index;"
+            <li
+                *ngFor="let optionItem of _suggestions; let i = index"
                 (click)="handleOptionItem(optionItem)"
                 fd-list-item
                 role="option"
                 tabindex="0"
                 (keyDown)="handlePressEnter($event, optionItem)"
-                [selected]="isSelectedOptionItem(optionItem)">
-                <ng-container [ngTemplateOutlet]="listItem"
-                              [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"></ng-container>
+                [selected]="isSelectedOptionItem(optionItem)"
+            >
+                <ng-container
+                    [ngTemplateOutlet]="listItem"
+                    [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
+                ></ng-container>
             </li>
         </ng-container>
     </ul>
 </ng-template>
 
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>
-    <ng-container *ngIf="isSelectedOptionItem(optionItem) && !!selectedItemTemplate"
-                  [ngTemplateOutlet]="selectedItemTemplate"
-                  [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"></ng-container>
+    <ng-container
+        *ngIf="isSelectedOptionItem(optionItem) && !!selectedItemTemplate"
+        [ngTemplateOutlet]="selectedItemTemplate"
+        [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
+    ></ng-container>
 
     <ng-container *ngIf="!(isSelectedOptionItem(optionItem) && selectedItemTemplate)">
-        <ng-container [ngTemplateOutlet]="optionItemSource"
-                      [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"></ng-container>
+        <ng-container
+            [ngTemplateOutlet]="optionItemSource"
+            [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
+        ></ng-container>
 
-        <ng-container [ngTemplateOutlet]="secondaryTextSource"
-                      [ngTemplateOutletContext]="{ optionItem: optionItem }"></ng-container>
+        <ng-container
+            [ngTemplateOutlet]="secondaryTextSource"
+            [ngTemplateOutletContext]="{ optionItem: optionItem }"
+        ></ng-container>
     </ng-container>
 </ng-template>
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     <ng-container *ngIf="!optionItemTemplate">
-        <span [innerHTML]="optionItem.label | highlight: inputText"></span>
+        <span [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight: inputText"></span>
     </ng-container>
 
     <ng-container *ngIf="optionItemTemplate">
-        <ng-container [ngTemplateOutlet]="optionItemTemplate"
-                      [ngTemplateOutletContext]="{$implicit: optionItem.value, index: index}"></ng-container>
+        <ng-container
+            [ngTemplateOutlet]="optionItemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
+        ></ng-container>
     </ng-container>
 </ng-template>
 
 <ng-template let-optionItem="optionItem" #secondaryTextSource>
     <ng-container *ngIf="showSecondaryText">
         <ng-container *ngIf="!secondaryItemTemplate">
-            <span [style.text-align]="secondaryTextAlignment" fd-list-secondary [innerHTML]="optionItem.secondaryText | highlight: inputText"></span>
+            <span
+                [style.text-align]="secondaryTextAlignment"
+                fd-list-secondary
+                [attr.title]="optionItem.secondaryText"
+                [innerHTML]="optionItem.secondaryText | highlight: inputText"
+            ></span>
         </ng-container>
 
         <ng-container *ngIf="secondaryItemTemplate">
-            <ng-container [ngTemplateOutlet]="secondaryItemTemplate"
-                          [ngTemplateOutletContext]="{$implicit: optionItem.value}"></ng-container>
+            <ng-container
+                [ngTemplateOutlet]="secondaryItemTemplate"
+                [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
+            ></ng-container>
         </ng-container>
     </ng-container>
 </ng-template>

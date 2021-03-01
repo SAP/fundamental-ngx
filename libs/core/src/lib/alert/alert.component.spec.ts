@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
 import { AlertService } from './alert-service/alert.service';
@@ -35,7 +35,7 @@ describe('AlertComponent', () => {
     let fixture: ComponentFixture<AlertComponent>;
     let service: AlertService;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [TestModule]
         }).compileComponents();

@@ -3,8 +3,8 @@
         class="fd-feed-input__thumb"
         size="s"
         role="img"
-        [attr.aria-label]="title"
-        [title]="title"
+        [attr.aria-label]="userTitle"
+        [title]="userTitle"
         [image]="avatarSrc"
         [class.fd-avatar--placeholder]="!avatarSrc"
         [class.sap-icon]="!avatarSrc"
@@ -29,8 +29,7 @@
         glyph="feeder-arrow"
         title="Send"
         ariaLabel="Send"
-        [disabled]="!value"
-        [attr.aria-disabled]="!value || disabled"
+        [ariaDisabled]="!value || disabled"
         (click)="onSubmit()"
     >
     </fdp-button>
