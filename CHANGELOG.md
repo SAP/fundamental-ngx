@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.11...v0.28.1-rc.12) (2021-03-01)
+
+### [0.28.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.10...v0.28.1-rc.11) (2021-03-01)
+
+### [0.28.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.9...v0.28.1-rc.10) (2021-03-01)
+
+### [0.28.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.8...v0.28.1-rc.9) (2021-02-28)
+
+### [0.28.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.7...v0.28.1-rc.8) (2021-02-28)
+
+### [0.28.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.6...v0.28.1-rc.7) (2021-02-28)
+
+### [0.28.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.5...v0.28.1-rc.6) (2021-02-28)
+
+### [0.28.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.4...v0.28.1-rc.5) (2021-02-28)
+
+### [0.28.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.3...v0.28.1-rc.4) (2021-02-26)
+
+
+### Bug Fixes
+
+* (Core | Platform) feed input accessibility issues ([#4488](https://github.com/SAP/fundamental-ngx/issues/4488)) ([072458f](https://github.com/SAP/fundamental-ngx/commit/072458f46e263b1ef7047817d0abdafdc9e5bd0d))
+
+### [0.28.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.2...v0.28.1-rc.3) (2021-02-26)
+
+
+### Bug Fixes
+
+* (Platform) fix combobox resize ([#4741](https://github.com/SAP/fundamental-ngx/issues/4741)) ([c10958d](https://github.com/SAP/fundamental-ngx/commit/c10958d602901c84bec063b4ba7378390174b2ca))
+
 ### [0.28.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.1...v0.28.1-rc.2) (2021-02-26)
 
 ### [0.28.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.0...v0.28.1-rc.1) (2021-02-26)

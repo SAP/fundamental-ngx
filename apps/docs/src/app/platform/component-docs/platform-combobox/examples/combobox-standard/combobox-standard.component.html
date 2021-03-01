@@ -1,5 +1,5 @@
-<fdp-form-group [noLabelLayout]="false">
-    <fdp-form-field id="standard" label="Standard" rank="4">
+<fdp-form-group [noLabelLayout]="false" columnLayout="XL3-L2-M1-S1">
+    <fdp-form-field id="standard" label="Standard" column="1">
         <fdp-combobox
             name="standard"
             placeholder="Type some text..."
@@ -9,7 +9,7 @@
         <p>Selected: {{ selectedItem1 }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="compact" label="Compact" rank="4">
+    <fdp-form-field id="compact" label="Compact" column="1">
         <fdp-combobox
             name="compact"
             placeholder="Type some text..."
@@ -20,7 +20,7 @@
         <p>Selected: {{ selectedItem2 }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="readonly" label="ReadOnly" rank="4">
+    <fdp-form-field id="readonly" label="ReadOnly" column="3">
         <fdp-combobox
             name="readonly"
             placeholder="Type some text..."
@@ -32,7 +32,7 @@
         <p>Selected: {{ selectedItem3 }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="disabled" label="Disabled" rank="4">
+    <fdp-form-field id="disabled" label="Disabled" column="3">
         <fdp-combobox
             name="disabled"
             placeholder="Type some text..."
@@ -44,7 +44,7 @@
         <p>Selected: {{ selectedItem4 }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="max-height" label="Max Height" rank="4">
+    <fdp-form-field id="max-height" label="Max Height" column="2">
         <fdp-combobox
             name="disabled"
             placeholder="Type some text..."
@@ -55,11 +55,7 @@
         <p>Selected: {{ selectedItem5 }}</p>
     </fdp-form-field>
 
-    <fdp-form-field id="auto-resize" rank="4">
-        <h3>Auto-Resize</h3>
-
-        <p>The width of the option list adapts to its content. The minimum width is the
-            input field plus the dropdown arrow.</p>
+    <fdp-form-field id="auto-resize" label="Auto-Resize" column="2" hint="The width of the option list adapts to its content. The minimum width is the input field plus the dropdown arrow.">
         <fdp-combobox
             name="auto-Resize"
             placeholder="Type some text..."

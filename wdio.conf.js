@@ -335,6 +335,14 @@ exports.config = {
             }, this);
         }, true);
 
+
+        browser.addCommand('addIsActiveClass', function() {
+            browser.execute(function(domElement) {
+                domElement.classList.add('is-active');
+
+            }, this);
+        }, true);
+
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
     }
