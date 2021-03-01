@@ -112,12 +112,11 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         private _renderer: Renderer2,
         private _dynamicPageService: DynamicPageService,
         @Optional() private _columnLayout: FlexibleColumnLayoutComponent
-    ) {
-        this._listenOnCollapse();
-    }
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._listenOnCollapse();
         this._propagatePropertiesToChildren();
         if (this._columnLayout && this.autoResponsive) {
             this._listenToLayoutChange();

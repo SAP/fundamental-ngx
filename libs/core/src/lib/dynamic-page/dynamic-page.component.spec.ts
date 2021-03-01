@@ -31,7 +31,7 @@ class TestComponent {
     @ViewChild(DynamicPageComponent)
     dynamicPage: DynamicPageComponent;
 }
-fdescribe('DynamicPageComponent default values', () => {
+describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let dynamicPageComponent: DynamicPageComponent;
@@ -52,12 +52,13 @@ fdescribe('DynamicPageComponent default values', () => {
         dynamicPageComponent = component.dynamicPage;
     });
 
-    it('should create', () => {
+    fit('should create', () => {
         fixture.detectChanges()
         expect(fixture).toBeTruthy();
     });
 
     it('should collapse on scroll content', fakeAsync (() => {
+        fixture.detectChanges()
         const element = dynamicPageComponent._contentComponent.elementRef.nativeElement;
         element.scrollTop = 1000;
         fixture.detectChanges()
@@ -67,6 +68,7 @@ fdescribe('DynamicPageComponent default values', () => {
     }));
 
     it('should not collapse on scroll content, when pinned', fakeAsync (() => {
+        fixture.detectChanges();
         (<any>dynamicPageComponent)._dynamicPageService.pinned.next(true);
         const element = dynamicPageComponent._contentComponent.elementRef.nativeElement;
         element.scrollTop = 1000;

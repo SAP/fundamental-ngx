@@ -71,7 +71,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
-        private _focusMonitor: FocusMonitor,
         private _dynamicPageService: DynamicPageService,
         private _ngZone: NgZone,
         private _changeDetRef: ChangeDetectorRef
@@ -81,7 +80,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleArea);
-        this._listenForFocusInToExpand();
         this._listenToPageChanges();
     }
 
@@ -108,17 +106,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     stopPropagation(event: MouseEvent): void {
         event.stopPropagation();
-    }
-
-    /** @hidden */
-    private _listenForFocusInToExpand(): void {
-        this._focusMonitor.monitor(this._elementRef).subscribe((origin) =>
-            this._ngZone.run(() => {
-                if (origin === 'keyboard') {
-                    this._dynamicPageService.collapsed.next(false);
-                }
-            })
-        );
     }
 
     /**
