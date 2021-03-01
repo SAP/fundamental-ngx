@@ -1,6 +1,6 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" *ngIf="visible">
-    <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page">
+    <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page" [autoResponsive]="false">
         <fd-dynamic-page-header
             title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua">

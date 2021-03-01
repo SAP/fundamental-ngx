@@ -59,7 +59,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
      * min-width: 1440px                        - extra large
      */
     @Input()
-    autoResponsive = false;
+    autoResponsive = true;
 
     /**
      * sets size which in turn adds corresponding padding for the size type.
@@ -166,7 +166,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _propagatePropertiesToChildren(): void {
-        this._headerCollapsible = this._pageSubheaderComponent.collapsible;
+        this._headerCollapsible = this._pageSubheaderComponent?.collapsible;
         this._propagateSizeToChildren();
     }
 
