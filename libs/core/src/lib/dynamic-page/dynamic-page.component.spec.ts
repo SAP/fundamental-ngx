@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { TabsModule } from '../tabs/tabs.module';
 import {DynamicPageModule} from './dynamic-page.module';
@@ -31,12 +31,12 @@ class TestComponent {
     @ViewChild(DynamicPageComponent)
     dynamicPage: DynamicPageComponent;
 }
-describe('DynamicPageComponent default values', () => {
+fdescribe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let dynamicPageComponent: DynamicPageComponent;
 
-    beforeEach(async(() => {
+    beforeEach(fakeAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, DynamicPageModule, TabsModule],
             declarations: [TestComponent]
@@ -53,6 +53,7 @@ describe('DynamicPageComponent default values', () => {
     });
 
     it('should create', () => {
+        fixture.detectChanges()
         expect(fixture).toBeTruthy();
     });
 
