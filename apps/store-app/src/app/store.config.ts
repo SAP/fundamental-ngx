@@ -24,7 +24,9 @@ export type Class<T> = new (...args: any[]) => T;
 export interface EntityTypes {
     [index: string]: Class<BaseEntity>;
 }
-@RESTResource({})
+@RESTResource({
+    path: '/items'
+})
 @Entity({
     domain: 'Requisitioning',
     name: 'Item'
