@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.14...v0.28.1-rc.15) (2021-03-01)
+
+
+### Bug Fixes
+
+* export option component ([#4805](https://github.com/SAP/fundamental-ngx/issues/4805)) ([182dd8e](https://github.com/SAP/fundamental-ngx/commit/182dd8ec47f0fa258a670ca311f084c603f85bd5))
+
 ### [0.28.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.13...v0.28.1-rc.14) (2021-03-01)
 
 ### [0.28.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.12...v0.28.1-rc.13) (2021-03-01)
