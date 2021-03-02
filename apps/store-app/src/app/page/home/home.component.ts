@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { EntityStore, EntityStoreBuilderFactory, eq } from '@fundamental-ngx/store';
+import { TabListComponent } from '@fundamental-ngx/core';
+import { EntityStore, EntityStoreBuilderFactory, eq, Query } from '@fundamental-ngx/store';
 import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { CommonService } from '../../service/common.service';
 
 import { Item } from '../../store.config';
@@ -12,6 +14,7 @@ import { Item } from '../../store.config';
 })
 export class HomeComponent implements OnInit {
     itemStore: EntityStore<Item>;
+    query: Query<Item>;
     items$: Observable<Item[]>;
 
     itemForm: FormGroup = new FormGroup({
@@ -34,12 +37,13 @@ export class HomeComponent implements OnInit {
         this.commonService.setTitle('Home');
 
         // create query
-        const query = this.itemStore.queryBuilder
+        this.query = this.itemStore.queryBuilder
             .where(eq('category', 'Dairy'))
             .build();
 
         // invoke query
-        this.items$ = query
+        this.items$ = this.query
+            .withMaxResults(5)
             .orderBy({field: 'name'}, {field: 'price'})
             .fetch();
     }
@@ -51,6 +55,17 @@ export class HomeComponent implements OnInit {
         item.price = this.itemForm.value.price;
         item.supplier = this.itemForm.value.supplier;
         item.uom = this.itemForm.value.uom;
-        this.itemStore.save(item);
+
+        this.itemStore.save(item).subscribe(() => {
+            this.items$ = this.query.fetch();
+        });
+    }
+
+    onPrevClick(): void {
+        this.query.previous();
+    }
+
+    onNextClick(): void {
+        this.query.next();
     }
 }

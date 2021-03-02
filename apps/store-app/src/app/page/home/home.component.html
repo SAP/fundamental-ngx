@@ -28,5 +28,7 @@
 <pre style="height: 30rem; overflow-y: auto;">
 {{items$ | async | json}}
 </pre>
+    <button fd-button (click)="onPrevClick()">Previous</button>
+    <button fd-button (click)="onNextClick()">Next</button>
     </fd-dynamic-side-content-main>
 </fd-dynamic-side-content>

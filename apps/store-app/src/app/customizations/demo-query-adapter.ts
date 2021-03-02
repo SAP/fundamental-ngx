@@ -63,7 +63,7 @@ export class DemoQueryAdapter<T> extends QueryAdapter<T> {
                         : params[key] as string;
                     parts.push(filter);
                 } else if (key === 'search') {
-                    // do nothing - not implemented
+                    parts.push('q=' + params[key]);
                 } else if (key === 'select') {
                     // do nothing - not implemented
                 } else if (key === 'expand') {
@@ -71,7 +71,7 @@ export class DemoQueryAdapter<T> extends QueryAdapter<T> {
                 } else if (key === 'skip') {
                     parts.push('_limit=' + params[key]);
                 } else if (key === 'top') {
-                    parts.push('_page=' + params[key]);
+                    parts.push('_start=' + params[key]);
                 } else if (key === 'orderby') {
                     parts.push(params[key] as string);
                 } else if (key === 'count') {
