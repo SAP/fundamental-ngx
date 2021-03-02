@@ -552,6 +552,7 @@ export class MultiInputComponent implements
     /** @hidden */
     private _resetSearchTerm(): void {
         this.searchTerm = '';
+        this._applySearchTermChange(this.searchTerm);
         this._changeDetRef.detectChanges();
     }
 
