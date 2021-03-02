@@ -2,6 +2,7 @@
 module.exports = require('./wdio.conf.ts');*/
 const {join} = require('path');
 require('ts-node').register({ transpileOnly: true });
+AllureReporter = require('@wdio/allure-reporter').default;
 exports.config = {
     //
     // ====================
@@ -343,7 +344,7 @@ exports.config = {
 
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
-    }
+    },
 
 
 //     const processedConfig = await browser.getProcessedConfig();
@@ -385,9 +386,15 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
 
+    afterTest: async function (test, context, {error, result, duration, passed, retries}) {
+        if (error !== undefined) {
+            await browser.takeScreenshot();
+            const html = await browser.getPageSource();
+            AllureReporter.addAttachment('page.html', html, 'text/html');
+        }
+        await browser.reloadSession();
+    },
 
     /**
      * Hook that gets executed after the suite has ended
