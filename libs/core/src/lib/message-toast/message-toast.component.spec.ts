@@ -1,5 +1,5 @@
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { MessageToastComponent } from './message-toast.component';
@@ -32,7 +32,7 @@ describe('MessageToastComponent', () => {
     let fixture: ComponentFixture<MessageToastComponent>;
     let service: MessageToastService;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [TestModule]
         }).compileComponents();

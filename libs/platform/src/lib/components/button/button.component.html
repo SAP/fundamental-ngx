@@ -1,6 +1,6 @@
 <button #fdButton fd-button [attr.id]="id" [attr.title]="title" [attr.name]="name" [attr.aria-label]="title"
     [glyphPosition]="glyphPosition" [label]="label" [type]="type" [attr.value]="value"
     [attr.aria-selected]="ariaSelected" [attr.aria-disabled]="ariaDisabled" [compact]="contentDensity === 'compact'"
-    [glyph]="glyph" [disabled]="disabled" (click)="onBtnClick($event)" [fdType]="buttonType"
+    [glyph]="glyph" [disabled]="disabled" (click)="onBtnClick($event)" [fdType]="buttonType" [class.is-disabled]="ariaDisabled"
     [ngStyle]="{ width: width }">
 </button>

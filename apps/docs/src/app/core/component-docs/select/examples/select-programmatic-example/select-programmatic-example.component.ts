@@ -8,17 +8,32 @@ import { Component } from '@angular/core';
 export class SelectProgrammaticExampleComponent {
 
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
+    selectedPosition = 0;
 
     selectedValue: string = this.options[0];
+    newValue = this.options[0];
 
     changeValue(): void {
         this.selectedValue = this.getNewValue();
     }
 
+    getPosition(selectedValue: string): number {
+        return this.options.findIndex(item => selectedValue === item);
+    }
+
     getNewValue(): string {
-        const newValue = this.options[Date.now() % this.options.length];
-        return this.selectedValue === newValue
+
+        this.selectedPosition = this.getPosition(this.selectedValue);
+
+        if (this.selectedPosition < this.options.length - 1) {
+            this.selectedPosition++;
+        } else {
+            this.selectedPosition = 0;
+        }
+
+        this.newValue = this.options[this.selectedPosition];
+        return this.selectedValue === this.newValue
             ? this.getNewValue()
-            : newValue;
+            : this.newValue;
     }
 }

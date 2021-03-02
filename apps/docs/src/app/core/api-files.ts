@@ -62,6 +62,16 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent'],
     datetimePicker: ['DatetimePickerComponent'],
+    dynamicPage: [
+        'DynamicPageComponent',
+        'DynamicPageSubheaderComponent',
+        'DynamicPageHeaderComponent',
+        'DynamicPageTitleContentComponent',
+        'DynamicPageLayoutActionsComponent',
+        'DynamicPageGlobalActionsComponent',
+        'DynamicPageFooterComponent',
+        'DynamicPageContentComponent'
+    ],
     feedInput: [
         'FeedInputComponent',
         'FeedInputTextareaDirective',
@@ -75,7 +85,7 @@ export const API_FILES = {
         'FileUploaderDragndropDirective',
         'FileUploaderService'
     ],
-    fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective'],
+    fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective', 'FixedCardLayoutItemComponent'],
     flexibleColumnLayout: ['FlexibleColumnLayoutComponent'],
     form: [
         'FormControlComponent',
@@ -92,6 +102,7 @@ export const API_FILES = {
     formMessage: ['FormInputMessageGroupComponent'],
     globalConfig: [],
     icon: ['IconComponent'],
+    illustratedMessage: ['IllustratedMessageComponent'],
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpComponent'],
@@ -194,7 +205,6 @@ export const API_FILES = {
         'PopoverBodySubheaderDirective',
         'PopoverBodyFooterDirective'
     ],
-    popoverDirective: ['PopoverDirective'],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
     quickView: [
@@ -264,6 +274,7 @@ export const API_FILES = {
         'TabSeparator',
         'TabInfo',
     ],
+    text: ['TextComponent'],
     tile: [
         'TileComponent',
         'TileHeaderDirective',

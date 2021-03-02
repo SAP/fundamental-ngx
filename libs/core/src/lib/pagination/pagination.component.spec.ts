@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { PaginationComponent } from './pagination.component';
@@ -10,7 +10,7 @@ describe('Pagination Test', () => {
     let fixture: ComponentFixture<PaginationComponent>;
     let paginationServiceSpy: jasmine.SpyObj<PaginationService>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         const paginationSpy = jasmine.createSpyObj('PaginationService', ['getTotalPages', 'getPages']);
 
         TestBed.configureTestingModule({

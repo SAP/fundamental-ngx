@@ -97,6 +97,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
+                path: 'dynamic-page',
+                loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
+            },
+            {
               path: 'feed-list-item',
                 loadChildren: () =>
                     import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
@@ -160,6 +164,10 @@ export const ROUTES: Routes = [
             {
                 path: 'icon',
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
+            },
+            {
+                path: 'illustrated-message',
+                loadChildren: () => import('./component-docs/illustrated-message/illustrated-message-docs.module').then((m) => m.IllustratedMessageDocsModule)
             },
             {
                 path: 'info-label',
@@ -284,13 +292,6 @@ export const ROUTES: Routes = [
                     import('./component-docs/popover/popover-docs.module').then((m) => m.PopoverDocsModule)
             },
             {
-                path: 'popover-directive',
-                loadChildren: () =>
-                    import('./component-docs/popover-directive/popover-directive-docs.module').then(
-                        (m) => m.PopoverDirectiveDocsModule
-                    )
-            },
-            {
                 path: 'product-switch',
                 loadChildren: () =>
                     import('./component-docs/product-switch/product-switch-docs.module').then(
@@ -360,6 +361,10 @@ export const ROUTES: Routes = [
             {
                 path: 'tabs',
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
+            },
+            {
+                path: 'text',
+                loadChildren: () => import('./component-docs/text/text-docs.module').then((m) => m.TextDocsModule)
             },
             {
                 path: 'textarea',

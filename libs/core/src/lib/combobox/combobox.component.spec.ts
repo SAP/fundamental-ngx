@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ComboboxComponent } from './combobox.component';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from '../popover/popover.module';
@@ -7,15 +7,16 @@ import { ListModule } from '../list/list.module';
 import { PipeModule } from '../utils/pipes/pipe.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { ButtonModule } from '../button/button.module';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
     let fixture: ComponentFixture<ComboboxComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ComboboxComponent],
-            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule],
+            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule, ButtonModule],
             providers: [DynamicComponentService]
         }).compileComponents();
     }));

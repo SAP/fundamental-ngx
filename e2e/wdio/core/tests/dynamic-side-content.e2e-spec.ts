@@ -22,7 +22,7 @@ describe('dynamic side content test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             dynamicSideContentPage.saveExampleBaselineScreenshot('dynamic-side-content');
-            expect(dynamicSideContentPage.compareWithBaseline('dynamic-side-content')).toEqual(0);
+            expect(dynamicSideContentPage.compareWithBaseline('dynamic-side-content')).toBeLessThan(1);
         });
     });
 });

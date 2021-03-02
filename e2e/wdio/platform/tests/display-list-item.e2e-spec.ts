@@ -4,54 +4,63 @@ import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '
 import {navTitlesArr, compactAttr, borderAttr, navUrl} from '../fixtures/appData/display-list-item-contents';
 
 describe('Display List Item test suite:', function() {
-    const displayListPg = new DisplayListItemPo();
+    const displayListPage = new DisplayListItemPo();
+    const {
+        displayLinks,
+        cozyDisplayTitles,
+        comfyDisplayTitles,
+        sections,
+        declarativeDisplayLinks,
+        declarativeDisplayTitles,
+        declarativeSection
+    } = displayListPage;
 
     beforeAll(() => {
-        displayListPg.open();
+        displayListPage.open();
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(displayListPg.displayLinks);
+        waitForPresent(displayLinks);
     }, 1);
 
     describe('Display List Item - cozy and comfy examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(displayListPg.displayLinks);
-            checkElementText(displayListPg.cozyDisplayTitles);
-            checkElementText(displayListPg.comfyDisplayTitles);
-            expect(getAttributeByName(displayListPg.sections, compactAttr, 0)).toBe('false');
-            expect(getAttributeByName(displayListPg.sections, compactAttr, 1)).toBe('true');
-            expect(getAttributeByName(displayListPg.sections, borderAttr)).toBe('true');
+            checkElArrIsClickable(displayLinks);
+            checkElementText(cozyDisplayTitles);
+            checkElementText(comfyDisplayTitles);
+            expect(getAttributeByName(sections, compactAttr, 0)).toBe('false');
+            expect(getAttributeByName(sections, compactAttr, 1)).toBe('true');
+            expect(getAttributeByName(sections, borderAttr)).toBe('true');
         });
 
         it('should check navigation', () => {
-            click(displayListPg.displayLinks, 0);
+            click(displayLinks, 0);
             const newUrl = getCurrentUrl();
             expect(newUrl).toContain(navUrl);
-            displayListPg.open();
+            displayListPage.open();
         });
     });
 
     describe('Display List Item - declarative examples:', function() {
         it('should do basic checks', () => {
-            checkElArrIsClickable(displayListPg.declarativeDisplayLinks);
-            checkElementTextValue(displayListPg.declarativeDisplayTitles, navTitlesArr);
-            expect(getAttributeByName(displayListPg.declarativeSection, borderAttr)).toBe('false');
-            expect(getAttributeByName(displayListPg.declarativeSection, compactAttr)).toBe('false');
+            checkElArrIsClickable(declarativeDisplayLinks);
+            checkElementTextValue(declarativeDisplayTitles, navTitlesArr);
+            expect(getAttributeByName(declarativeSection, borderAttr)).toBe('false');
+            expect(getAttributeByName(declarativeSection, compactAttr)).toBe('false');
         });
     });
 
     describe('Orientation check:', function() {
         it('should check RTL and LTR orientation', () => {
-            displayListPg.checkRtlSwitch();
+            displayListPage.checkRtlSwitch();
         });
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            displayListPg.saveExampleBaselineScreenshot('display-list-item');
-            expect(displayListPg.compareWithBaseline('display-list-item')).toBeLessThan(1);
+            displayListPage.saveExampleBaselineScreenshot('display-list-item');
+            expect(displayListPage.compareWithBaseline('display-list-item')).toBeLessThan(1);
         });
     });
 

@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -98,6 +99,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
             this.expandBreadcrumbs();
         }
         this.previousContainerWidth = this.containerBoundary;
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -194,7 +196,11 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
         }
     }
 
-    constructor(public elementRef: ElementRef, @Optional() private rtlService: RtlService) {}
+    constructor(
+        public elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef,
+        @Optional() private rtlService: RtlService
+    ) {}
 
     private fitInBoundries(): boolean {
         return this.elementRef.nativeElement.getBoundingClientRect().width < this.getContainerBoundary();

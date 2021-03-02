@@ -44,6 +44,7 @@ import { SelectModule } from './select/select.module';
 import { SplitButtonModule } from './split-button/split-button.module';
 import { TableModule } from './table/table.module';
 import { TabsModule } from './tabs/tabs.module';
+import { TextModule } from './text/text.module';
 import { TileModule } from './tile/tile.module';
 import { TreeModule } from './tree/tree.module';
 import { TimeModule } from './time/time.module';
@@ -82,6 +83,8 @@ import { ObjectNumberModule } from './object-number/object-number.module';
 import { TitleModule } from './title/title.module';
 import { SliderModule } from './slider/public_api';
 import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
+import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
+import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -104,6 +107,7 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
+        DynamicPageModule,
         DynamicSideContentModule,
         FeedListItemModule,
         FeedInputModule,
@@ -151,6 +155,7 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         StepInputModule,
         TableModule,
         TabsModule,
+        TextModule,
         TileModule,
         TimeModule,
         TimePickerModule,
@@ -164,7 +169,8 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         MessageToastModule,
         DynamicSideContentModule,
         SliderModule,
-        OnlyDigitsModule
+        OnlyDigitsModule,
+        IllustratedMessageModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
 })

@@ -49,7 +49,9 @@ allure-results
 unit-tests-allure-report
 libs/core/reports
 .tmp
+e2e/tmp
 axe-reports
+
 # System Files
 .DS_Store
 Thumbs.db

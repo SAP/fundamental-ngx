@@ -1,0 +1,11 @@
+<fdp-form-group class="slider-example" [formGroup]="customForm">
+    <fdp-form-field id="value1" label="Single mode">
+        <fdp-slider name="value5" formControlName="value1"> </fdp-slider>
+        <p style="margin-bottom: 2rem;">Single mode slider value: {{ value1 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="value2" label="Range mode">
+        <fdp-slider name="value2" mode="range" formControlName="value2"> </fdp-slider>
+        <p style="margin-bottom: 0;">Range mode slider value: {{ value2 | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>

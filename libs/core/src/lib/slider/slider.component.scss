@@ -2,10 +2,6 @@
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/popover';
 
-.fd-popover-custom {
-    display: none !important;
-}
-
 .fd-popover__popper--cdk-custom {
     top: -7px !important;
     overflow: hidden;
@@ -16,6 +12,7 @@
         text-align: center;
         height: 1.375rem;
         line-height: 1;
+        direction: ltr;
 
         margin: 0 !important;
         border: 0;
@@ -50,6 +47,10 @@
             -moz-user-select: none; /* Old versions of Firefox */
             -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+        }
+
+        .fd-popover-custom {
+            display: none;
         }
     }
 

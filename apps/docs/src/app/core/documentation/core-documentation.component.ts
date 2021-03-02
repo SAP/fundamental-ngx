@@ -45,6 +45,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/input', name: 'Input' },
             { url: 'core/inputGroup', name: 'Input Group' },
             { url: 'core/link', name: 'Link' },
+            { url: 'core/illustrated-message', name: 'Illustrated Message' },
             {
                 name: 'List',
                 subItems: [
@@ -74,6 +75,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/step-input', name: 'Step Input' },
             { url: 'core/table', name: 'Table' },
             { url: 'core/tabs', name: 'Tabs' },
+            { url: 'core/text', name: 'Text' },
             { url: 'core/textarea', name: 'Textarea' },
             { url: 'core/tile', name: 'Tile' },
             { url: 'core/time', name: 'Time' },
@@ -89,6 +91,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
+            { url: 'core/dynamic-page', name: 'Dynamic Page' },
             { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
@@ -99,7 +102,6 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         this.utilities = [
             { url: 'core/global-config', name: 'Global Configuration' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
-            { url: 'core/popover-directive', name: 'Popover Helper' },
             { url: 'core/scroll-spy', name: 'Scroll Spy' },
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];

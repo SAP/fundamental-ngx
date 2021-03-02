@@ -6,6 +6,7 @@ import { PipeModule } from '../utils/pipes/pipe.module';
 import { ButtonModule } from '../button/button.module';
 import { TimeComponent } from './time.component';
 import { Meridian } from './models';
+import { TimeModule } from '../time/time.module';
 
 describe('TimeComponent', () => {
     let component: TimeComponent<FdDate>;
@@ -14,7 +15,7 @@ describe('TimeComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, ButtonModule, PipeModule, FdDatetimeModule],
+                imports: [FormsModule, ButtonModule, PipeModule, FdDatetimeModule, TimeModule],
                 declarations: [TimeComponent]
             }).compileComponents();
         })
