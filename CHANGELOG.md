@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.16...v0.28.1-rc.17) (2021-03-02)
+
+
+### Features
+
+* (Core) Introduce dynamic page ([#4722](https://github.com/SAP/fundamental-ngx/issues/4722)) ([b61eb7c](https://github.com/SAP/fundamental-ngx/commit/b61eb7c49d90574f86dc32e71d5efce3022402a0))
+
 ### [0.28.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.15...v0.28.1-rc.16) (2021-03-02)
 
 ### [0.28.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.14...v0.28.1-rc.15) (2021-03-01)
