@@ -12,7 +12,7 @@ import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 
-describe('MultiInputComponent', () => {
+fdescribe('MultiInputComponent', () => {
     let component: MultiInputComponent;
     let fixture: ComponentFixture<MultiInputComponent>;
 
@@ -40,8 +40,8 @@ describe('MultiInputComponent', () => {
         fixture = TestBed.createComponent(MultiInputComponent);
         component = fixture.componentInstance;
         component.dropdownValues = [
-            { value: 'value', displayedValue: 'displayedValue' },
-            { value: 'value2', displayedValue: 'displayedValue2' }
+            'displayedValue',
+            'displayedValue2'
         ];
         fixture.detectChanges();
     });
