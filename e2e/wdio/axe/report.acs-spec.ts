@@ -1,6 +1,6 @@
 import * as axe from 'axe-core';
 import { createHtmlReport } from 'axe-html-reporter';
-import { execute, open, pause, runAxeReport, waitForPresent } from '../driver/wdio';
+import { execute, open, waitForPresent } from '../driver/wdio';
 import { appURLs } from './app-url';
 import { BaseComponentPo } from '../platform/pages/base-component.po';
 

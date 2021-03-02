@@ -1,5 +1,3 @@
-import { default as axe, source } from 'axe-core';
-
 export function defaultWaitTime(): number {
     return browser.options.waitforTimeout;
 }
@@ -333,17 +331,6 @@ export function getParentElementCSSProperty(selector: string, prop: string, inde
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
 }
 
-export function runAxeReport(options: string): object {
-    return browser.executeAsync((options, done) => {
-        axe.run(options, function(err, results) {
-            if (err) {
-                done(err);
-            }
-            done(results);
-        });
-    }, options);
-}
-
 export function addIsActiveClass(selector: string, index: number = 0): void {
     // @ts-ignore
     $$(selector)[index].addIsActiveClass();
@@ -377,9 +364,4 @@ function checkSelectorExists (selector: string, index: number = 0): void {
     if ($$(selector)[index] === undefined) {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }
-}
-
-export function addIsActiveClass(selector: string, index: number = 0): void {
-    // @ts-ignore
-    $$(selector)[index].addIsActiveClass();
 }

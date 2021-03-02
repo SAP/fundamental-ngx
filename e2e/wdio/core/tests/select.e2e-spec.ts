@@ -7,8 +7,8 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getImageTagBrowserPlatform,
-    getText, isElementClickable,
-    isElementDisplayed,
+    getText,
+    isElementClickable,
     mouseHoverElement,
     refreshPage,
     saveElementScreenshot,
@@ -32,16 +32,12 @@ import {
 } from '../fixtures/testData/select-tags';
 
 describe('Select component:', function() {
-    beforeEach(() => {
-        refreshPage();
-    });
-
     const selectPage = new SelectPo();
     const {
         selectModesExample,
         selectSemanticStatesExample,
         customControlExample,
-        extendetOptionsExample,
+        extendedOptionsExample,
         mobileModeExample,
         maxHeightExample,
         addRemoveOptionExample,
@@ -49,28 +45,30 @@ describe('Select component:', function() {
         overlayContainer,
         buttons,
         option,
-        listBox,
         options,
         displayedText
     } = selectPage;
-
 
     beforeAll(() => {
         selectPage.open();
     }, 1);
 
+    afterEach(() => {
+        refreshPage();
+    }, 2);
+
     describe('Select modes', function() {
         it('should be able to select the option for default select', () => {
-            const textBefore = getText(selectModesExample + displayedText, 0);
-            click(selectModesExample + buttons, 0);
+            const textBefore = getText(selectModesExample + displayedText);
+            click(selectModesExample + buttons);
             waitForElDisplayed(option, 4);
             click(options(2));
-            const textAfter = getText(selectModesExample + displayedText, 0);
+            const textAfter = getText(selectModesExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
 
         it('should have visual check for default select', () => {
-            click(selectModesExample + buttons, 0);
+            click(selectModesExample + buttons);
             waitForElDisplayed(option, 4);
             const arrLength = getElementArrayLength(option);
 
@@ -106,16 +104,16 @@ describe('Select component:', function() {
 
     describe('Semantic state', function() {
         it('should be able to select the option Success state', () => {
-            const textBefore = getText(selectSemanticStatesExample + displayedText, 0);
-            click(selectSemanticStatesExample + buttons, 0);
+            const textBefore = getText(selectSemanticStatesExample + displayedText);
+            click(selectSemanticStatesExample + buttons);
             waitForElDisplayed(option, 4);
             click(options(18));
-            const textAfter = getText(selectSemanticStatesExample + displayedText, 0);
+            const textAfter = getText(selectSemanticStatesExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
 
         it('should have visual check Success', () => {
-            click(selectSemanticStatesExample + buttons, 0);
+            click(selectSemanticStatesExample + buttons);
             waitForElDisplayed(option, 4);
             const arrLength = getElementArrayLength(option);
 
@@ -185,7 +183,7 @@ describe('Select component:', function() {
     describe('Custom Control Content', function() {
         it('should be able to select the option', () => {
             const textBefore = getText(customControlExample + displayedText);
-            click(customControlExample + buttons, 0);
+            click(customControlExample + buttons);
             waitForElDisplayed(option, 4);
             click(options(34));
             const textAfter = getText(customControlExample + displayedText);
@@ -193,7 +191,7 @@ describe('Select component:', function() {
         });
 
         it('should have visual check', () => {
-            click(customControlExample + buttons, 0);
+            click(customControlExample + buttons);
             waitForElDisplayed(option, 4);
             const arrLength = getElementArrayLength(option);
 
@@ -205,16 +203,16 @@ describe('Select component:', function() {
 
     describe('Extended Options', function() {
         it('should be able to select the option', () => {
-            const textBefore = getText(extendetOptionsExample + displayedText);
-            click(extendetOptionsExample + buttons, 0);
+            const textBefore = getText(extendedOptionsExample + displayedText);
+            click(extendedOptionsExample + buttons);
             waitForElDisplayed(option, 4);
             click(options(38));
-            const textAfter = getText(extendetOptionsExample + displayedText);
+            const textAfter = getText(extendedOptionsExample + displayedText);
             expect(textBefore).not.toEqual(textAfter);
         });
 
         it('should have visual check', () => {
-            click(extendetOptionsExample + buttons, 0);
+            click(extendedOptionsExample + buttons);
             waitForElDisplayed(option, 4);
             const arrLength = getElementArrayLength(option);
 
@@ -227,7 +225,7 @@ describe('Select component:', function() {
     describe('Mobile Mode', function() {
         it('should be able to select the option', () => {
             const textBefore = getText(mobileModeExample + displayedText);
-            click(mobileModeExample + buttons, 0);
+            click(mobileModeExample + buttons);
             waitForElDisplayed(option);
             click(options(44));
             const textAfter = getText(mobileModeExample + displayedText);
@@ -235,7 +233,7 @@ describe('Select component:', function() {
         });
 
         it('should have visual check', () => {
-            click(mobileModeExample + buttons, 0);
+            click(mobileModeExample + buttons);
             waitForElDisplayed(option);
             const arrLength = getElementArrayLength(option);
 
@@ -248,7 +246,7 @@ describe('Select component:', function() {
     describe('Max Height', function() {
         it('should be able to select the option', () => {
             const textBefore = getText(maxHeightExample + displayedText);
-            click(maxHeightExample + buttons, 0);
+            click(maxHeightExample + buttons);
             waitForElDisplayed(option, 4);
             click(options(47));
             const textAfter = getText(maxHeightExample + displayedText);
@@ -256,7 +254,7 @@ describe('Select component:', function() {
         });
 
         it('should have visual check', () => {
-            click(maxHeightExample + buttons, 0);
+            click(maxHeightExample + buttons);
             waitForElDisplayed(option, 4);
             const arrLength = getElementArrayLength(option);
 
@@ -267,10 +265,6 @@ describe('Select component:', function() {
     });
 
     describe('Adding and Removing Options', function() {
-        beforeEach(() => {
-            refreshPage();
-        });
-
         it('should be able to select the option', () => {
             const textBefore = getText(addRemoveOptionExample + displayedText);
             click(addRemoveOptionExample + buttons, 2);
@@ -285,7 +279,7 @@ describe('Select component:', function() {
             waitForElDisplayed(option, 4);
             const optionsCountBefore = getElementArrayLength(option);
             click(addRemoveOptionExample + buttons, 2);
-            click(addRemoveOptionExample + buttons, 0);
+            click(addRemoveOptionExample + buttons);
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
             const optionsCountAfterAdding = getElementArrayLength(option);
@@ -301,9 +295,9 @@ describe('Select component:', function() {
             click(addRemoveOptionExample + buttons, 1);
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
-            const optionsCountAfterAdding = getElementArrayLength(option);
+            const optionsCountAfterRemoving = getElementArrayLength(option);
 
-            expect(optionsCountBefore).toEqual(optionsCountAfterAdding + 1);
+            expect(optionsCountBefore).toEqual(optionsCountAfterRemoving + 1);
         });
 
         it('should have visual check', () => {
@@ -329,7 +323,7 @@ describe('Select component:', function() {
 
         it('should be able to control select by buttons', () => {
             const textBefore = getText(programmaticControlExample + displayedText);
-            click(programmaticControlExample + buttons, 0);
+            click(programmaticControlExample + buttons);
             const textAfter = getText(programmaticControlExample + displayedText);
 
             click(programmaticControlExample + buttons, 1);
@@ -358,13 +352,9 @@ describe('Select component:', function() {
     });
 
     describe('Check visual regression', function() {
-        beforeEach(() => {
-            refreshPage();
-        });
-
         it('should check examples visual regression', () => {
             selectPage.saveExampleBaselineScreenshot('select-core');
-            expect(selectPage.compareWithBaseline('select-core')).toEqual(0);
+            expect(selectPage.compareWithBaseline('select-core')).toBeLessThan(2);
         });
     });
 

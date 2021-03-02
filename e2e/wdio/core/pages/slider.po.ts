@@ -27,7 +27,7 @@ export class SliderPo extends CoreBaseComponentPo {
     sliderLabel = '.fd-slider__label';
 
     // playground selectors
-    sliderTypeMenu = this.playgroundExamples + 'select-tags.ts';
+    sliderTypeMenu = this.playgroundExamples + 'select';
     sliderTypeOptions = this.playgroundExamples + 'option';
     sliderInput = this.playgroundExamples + 'input';
     firstSliderLabel = this.playgroundExamples + this.sliderLabel + ':first-of-type';
