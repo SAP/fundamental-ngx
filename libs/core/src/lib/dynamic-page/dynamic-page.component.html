@@ -1,0 +1,23 @@
+<section class="fd-dynamic-page"
+         [class.fd-dynamic-page--sm]="size === 'small'"
+         [class.fd-dynamic-page--md]="size === 'medium'"
+         [class.fd-dynamic-page--lg]="size === 'large'"
+         [class.fd-dynamic-page--xl]="size === 'extra-large'"
+         [class.fd-dynamic-page--transparent-bg]="background === 'transparent'"
+         [class.fd-dynamic-page--list-bg]="background === 'list'"
+         [attr.aria-label]="ariaLabel">
+    <header class="fd-dynamic-page__header" [class.fd-dynamic-page__header--not-collapsible]="!_headerCollapsible">
+        <div>
+            <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
+                <ng-content select="fd-dynamic-page-header"></ng-content>
+            </div>
+            <ng-content select="fd-dynamic-page-subheader"></ng-content>
+        </div>
+    </header>
+
+    <ng-content select="fd-tab-list"></ng-content>
+    <ng-content select="fd-dynamic-page-content"></ng-content>
+    <footer>
+        <ng-content select="fd-dynamic-page-footer"></ng-content>
+    </footer>
+</section>

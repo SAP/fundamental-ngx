@@ -1,0 +1,107 @@
+<header>Dynamic Page</header>
+<description>
+    The dynamic page is the foundation for all pages in SAP Fiori. It is a generic layout designed to support various
+    use cases; there, the content of both the header and page can vary.
+    <br />
+    <br />
+    The header of the dynamic page is collapsible, which helps the users focus on the actual page content but still
+    ensures that important header information and actions are readily available.
+    <br />
+    <br />
+    <br />
+    The basic structure of Dynamic Page is:
+    <br />
+    <ul>
+        <li>
+            <b>Header</b> - <code>fd-dynamic-page-header</code> Header area allows user to put
+            <ul>
+                <li>
+                    title - <code>@Input() [title]</code>,
+                </li>
+                <li>
+                    subtitle - <code>@Input() [subtitle]</code>,
+                </li>
+                <li>
+                    <code>fd-breadcrumb</code>,
+                </li>
+                <li>
+                    Title/KPI content (through <code>fd-dynamic-page-title-content</code>),
+                </li>
+                <li>
+                    global actions (through <code>fd-dynamic-page-global-actions</code>),
+                </li>
+                <li>
+                    layout actions (through <code>fd-dynamic-page-layout-actions</code>).
+                </li>
+            </ul>
+            <br/>
+            <b>Subheader</b> - <code>fd-dynamic-page-subheader</code> - Subheader area. Allowing user to specify the
+            options:
+            <ul>
+                <li>
+                    collapsible- whether the header can be collapsed. True by default. If set to false, both
+                    pin/collapse buttons disappear and the header stays visible.
+                </li>
+                <li>collapsed- the initial state of the header. Set to true if header should be collapsed.</li>
+                <li>
+                    pinnable- whether the header should be allowed to be pinned or unpinned. When set, the pin button
+                    shows up. Pinning the header will make the header stay visible and the collapse button(if present)
+                    will disappear until unpinned.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <b> Content</b> - Content is projected through <code>fd-dynamic-page-content</code>. User can also use multiple
+            <code>fd-dynamic-page-content</code>s with<code>TabComponent</code>
+        </li>
+        <li>
+            <b> Footer</b> - Content is projected through <code>fd-dynamic-page-footer</code>. Use a floating footer
+            from the Bar component.
+        </li>
+    </ul>
+    <br/>
+    Other features of the header are:
+    <ul>
+        <li>
+            <b>Expand/Collapse Header Feature</b>
+            - The expand/collapse header feature is a small icon button directly below the header content that enables
+            the user to expand or collapse the header content. When the pin is active, the expand/collapse header
+            feature is still available and overrules the pin.
+        </li>
+        <li>
+            <b>Snap on Scroll</b>
+            - Scrolling is the typical trigger for collapsing the header content. When the user scrolls down the page,
+            the header content scrolls away. The header title switches to collapsed mode, and stays fixed. When the user
+            scrolls up the page, the header content expands again.
+        </li>
+        <li>
+            <b>Snap on Click</b>
+            - In addition to the “snap on scroll” function, the user can also expand and collapse the header content by
+            clicking anywhere on the header title bar that has no active elements (such as links or active buttons).
+        </li>
+        <li>
+            <b>Pinning the Header Content</b>
+            - Activating the pin feature keeps the header expanded while the user scrolls through the page content. This
+            mode remains fixed until the user clicks the pin icon again. This feature is optional and can be switched
+            off if it is not useful for your application.
+        </li>
+    </ul>
+    <h3>Enhancements:</h3>
+    <ul>
+        <li>
+            Auto height expand for content - just to make content scrollable.
+        </li>
+        <li>
+            Optional AutoResponsive mode that will change size of dynamic page depending on DynamicPage width.
+        </li>
+        <li>
+            <code>fd-dynamic-page-title-content</code> and <code>fd-dynamic-page-global-actions</code> elements will
+            be wrapped inside overflow toolbar, when size of DynamicPage is set to <code>small</code>.
+        </li>
+    </ul>
+</description>
+<br />
+<import module="DynamicPageModule"></import>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>

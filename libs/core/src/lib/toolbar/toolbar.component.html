@@ -1,7 +1,7 @@
 <div #toolbar>
     <ng-content></ng-content>
+    <span #overflowSpacer></span>
     <ng-container *ngIf="shouldOverflow">
-        <span #overflowSpacer></span>
         <fd-popover
                 placement="bottom-end"
                 [noArrow]="true"
@@ -13,7 +13,7 @@
                     title="More"
                     aria-label="More"
                     aria-haspopup="true"
-                    [compact]="true"
+                    [compact]="size === 'compact'"
                     [fdType]="'transparent'"
                     [glyph]="'overflow'"
                 ></button>
