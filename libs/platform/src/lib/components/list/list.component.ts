@@ -208,14 +208,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         }
     }
 
-    /**
-   * content Density of element. 'cozy' | 'compact'
-   */
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this._isCompact = contentDensity === 'compact';
-    }
-
     /** @hidden */
     @Output()
     selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();

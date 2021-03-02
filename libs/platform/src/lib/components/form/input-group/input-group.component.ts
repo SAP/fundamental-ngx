@@ -53,18 +53,6 @@ import { InputGroupInputComponent } from './input.component';
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => InputGroupComponent), multi: true }]
 })
 export class InputGroupComponent extends BaseInput implements OnInit, AfterContentInit, AfterViewInit {
-    /**
-     * content Density of element: 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-
-        this._setAddonsOptions();
-    }
-    get contentDensity(): ContentDensity {
-        return this._contentDensity;
-    }
 
     /** Input value */
     @Input()

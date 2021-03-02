@@ -75,13 +75,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     maxHeight = '250px';
 
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    @Input()
-    state: FormStates;
-
     /** Datasource for suggestion list */
     @Input()
     get dataSource(): FdpComboBoxDataSource<any> {
@@ -97,15 +90,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
     autoComplete = true;
-
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
-    }
 
     /**
      * Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of

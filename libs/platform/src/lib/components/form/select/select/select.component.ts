@@ -38,10 +38,6 @@ import { SelectConfig } from '../select.config';
 })
 export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit, AfterViewChecked {
 
-    /** Whether the select component is disabled. */
-    @Input()
-    state: SelectControlState = null;
-
     /**
     * Directly sets value to the component that at the ends up at writeValue as well fires
     * change detections

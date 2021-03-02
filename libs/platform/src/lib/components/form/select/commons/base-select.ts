@@ -107,10 +107,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     @Input()
     stateMessage: string;
 
-    /** Whether the select component is disabled. */
-    @Input()
-    disabled = false;
-
     /** Whether the select component is readonly. */
     @Input()
     readonly = false;
@@ -179,26 +175,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     * */
     @Input()
     maxWidth?: number;
-
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
-    }
-
-    /** Data for suggestion list */
-    get list(): any {
-        return this._optionItems;
-    }
-
-    set list(value: any) {
-        if (value) {
-            this._optionItems = this._convertToOptionItems(value);
-        }
-    }
 
     /** Event emitted when item is selected. */
     @Output()
