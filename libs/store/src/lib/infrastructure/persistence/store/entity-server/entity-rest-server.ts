@@ -3,12 +3,17 @@ import { Injectable, Optional } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { timeout, delay, catchError, map } from 'rxjs/operators';
 import { Update } from '@ngrx/entity';
-import { DefaultDataServiceConfig, EntityCollectionDataService, QueryParams, DataServiceError } from '@ngrx/data';
+import { DefaultDataServiceConfig, QueryParams, DataServiceError } from '@ngrx/data';
 
-import { EntityPath, EntityOperation } from '../../../domain/public_api';
-import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../utils/entity-options.service';
+import { EntityPath, EntityOperation } from '../../../../domain/public_api';
+import {
+    EntityMetaOptionsService,
+    EntityResourceMetaOptions,
+    EntityMetaOptions
+} from '../../utils/entity-options.service';
 
-import { HttpUrlGenerator } from './http-url-generator';
+import { HttpUrlGenerator } from '../http-url-generator';
+import { Entity, EntityServerService } from './interfaces';
 
 export declare type HttpMethods = 'DELETE' | 'GET' | 'POST' | 'PUT' | 'PATCH';
 
@@ -25,7 +30,7 @@ export interface RequestData {
  * This should be provided instead of ngrx DefaultDataService.
  *
  */
-export class EntityStoreServerService<T> implements EntityCollectionDataService<T> {
+export class EntityRestServerService<T extends Entity> implements EntityServerService<T> {
     protected _name: string;
     protected delete404OK: boolean;
     protected entityName: string;
@@ -48,7 +53,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         entityMetaOptionsService: EntityMetaOptionsService,
         config?: DefaultDataServiceConfig
     ) {
-        this._name = `${entityName} EntityStoreServerService`;
+        this._name = `${entityName} EntityRestServerService`;
         this.entityName = entityName;
         const { root = 'api', delete404OK = true, getDelay = 0, saveDelay = 0, timeout: to = 0 } = config || {};
         this.delete404OK = delete404OK;
@@ -238,7 +243,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
  * Create a basic, generic entity data service
  */
 @Injectable()
-export class EntityStoreServerServiceFactory {
+export class EntityRestServerServiceFactory {
     constructor(
         protected http: HttpClient,
         protected httpUrlGenerator: HttpUrlGenerator,
@@ -249,11 +254,11 @@ export class EntityStoreServerServiceFactory {
     }
 
     /**
-     * Create a default {EntityCollectionDataService} for the given entity type
-     * @param entityName {string} Name of the entity type for this data service
+     * Create REST EntityServerService for the given entity type
+     * @param entityName {string} Name of the entity
      */
-    create<T>(entityName: string): EntityCollectionDataService<T> {
-        return new EntityStoreServerService<T>(
+    create<T extends Entity>(entityName: string): EntityServerService<T> {
+        return new EntityRestServerService<T>(
             entityName,
             this.http,
             this.httpUrlGenerator,

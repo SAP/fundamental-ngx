@@ -12,11 +12,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { EntityMetaOptionsService, DefaultEntityMetaOptionsService } from './infrastructure/persistence/utils';
 import {
-    EntityStoreServerServiceFactory,
+    DefaultEntityServerServiceFactory,
     DefaultHttpUrlGenerator,
     HttpUrlGenerator,
     DefaultEntityStoreBuilderFactory,
-    EntityStoreBuilderFactory
+    EntityStoreBuilderFactory,
+    EntityServerServiceFactoryResolver,
+    EntityRestServerServiceFactory,
+    EntityInMemoryServerServiceFactory,
+    EntityLocalStorageServerServiceFactory
 } from './infrastructure/persistence/store';
 import { QueryAdapterFactory } from './infrastructure/persistence/query/query-adapter';
 import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
@@ -76,8 +80,12 @@ export class FundamentalStoreModule {
 
             QueryAdapterFactory,
 
-            { provide: HttpUrlGenerator, useClass: DefaultHttpUrlGenerator },
-            { provide: DefaultDataServiceFactory, useClass: EntityStoreServerServiceFactory }
+            EntityServerServiceFactoryResolver,
+            EntityRestServerServiceFactory,
+            EntityInMemoryServerServiceFactory,
+            EntityLocalStorageServerServiceFactory,
+            { provide: DefaultDataServiceFactory, useClass: DefaultEntityServerServiceFactory },
+            { provide: HttpUrlGenerator, useClass: DefaultHttpUrlGenerator }
         ];
 
         return {

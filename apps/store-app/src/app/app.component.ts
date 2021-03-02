@@ -11,12 +11,12 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
     requisitionStore: EntityStore<Requisition>;
-    requisitions: Observable<Requisition[]>;
+    requisition: Observable<Requisition>;
 
     constructor(esFactory: EntityStoreBuilderFactory) {
         const builder = esFactory.create(Requisition);
         this.requisitionStore = builder.create();
 
-        this.requisitions = this.requisitionStore.getAll();
+        this.requisition = this.requisitionStore.get('requisition_id');
     }
 }

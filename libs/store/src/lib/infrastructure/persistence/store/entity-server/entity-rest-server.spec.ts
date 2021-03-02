@@ -8,12 +8,17 @@ import { of } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { DefaultDataServiceConfig, DataServiceError, Pluralizer } from '@ngrx/data';
 
-import { EntityStoreServerServiceFactory, EntityStoreServerService } from './entity-store-server';
-import { HttpUrlGenerator, DefaultHttpUrlGenerator } from './http-url-generator';
-import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../utils/entity-options.service';
-import { EntityOperationComplexPath } from '../../../domain/rest-resource';
+import { EntityOperationComplexPath } from '../../../../domain/rest-resource';
+import { EntityRestServerServiceFactory, EntityRestServerService } from './entity-rest-server';
+import { HttpUrlGenerator, DefaultHttpUrlGenerator } from '../http-url-generator';
+import {
+    EntityMetaOptionsService,
+    EntityResourceMetaOptions,
+    EntityMetaOptions
+} from '../../utils/entity-options.service';
+import { Entity } from './interfaces';
 
-class Hero {
+class Hero extends Entity {
     id!: number;
     name!: string;
     version?: number;
@@ -31,7 +36,7 @@ class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
     getEntityResourceMetadata = () => null;
 }
 
-describe('EntityStoreServerServiceFactory', () => {
+describe('EntityRestServerServiceFactory', () => {
     let http: any;
     let httpUrlGenerator: HttpUrlGenerator;
     let entityMetaOptionsService: EntityMetaOptionsService;
@@ -67,13 +72,13 @@ describe('EntityStoreServerServiceFactory', () => {
 
     describe('(no config)', () => {
         it('can create factory', () => {
-            const factory = new EntityStoreServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService);
+            const factory = new EntityRestServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService);
             const heroDS = factory.create<Hero>('Hero');
-            expect(heroDS.name).toBe('Hero EntityStoreServerService');
+            expect(heroDS.name).toBe('Hero EntityRestServerService');
         });
 
         it('should produce hero data service that gets all heroes with expected URL', () => {
-            const factory = new EntityStoreServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService);
+            const factory = new EntityRestServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService);
             const heroDS = factory.create<Hero>('Hero');
             heroDS.getAll();
             expect(http.get).toHaveBeenCalledWith('api/heroes/', undefined);
@@ -83,23 +88,23 @@ describe('EntityStoreServerServiceFactory', () => {
     describe('(with config)', () => {
         it('can create factory', () => {
             const config: DefaultDataServiceConfig = { root: 'api' };
-            const factory = new EntityStoreServerServiceFactory(
+            const factory = new EntityRestServerServiceFactory(
                 http,
                 httpUrlGenerator,
                 entityMetaOptionsService,
                 config
             );
             const heroDS = factory.create<Hero>('Hero');
-            expect(heroDS.name).toBe('Hero EntityStoreServerService');
+            expect(heroDS.name).toBe('Hero EntityRestServerService');
         });
     });
 });
 
-describe('EntityStoreServerService', () => {
+describe('EntityRestServerService', () => {
     let httpClient: HttpClient;
     let httpTestingController: HttpTestingController;
     let httpUrlGenerator: HttpUrlGenerator;
-    let service: EntityStoreServerService<Hero>;
+    let service: EntityRestServerService<Hero>;
     let entityMetaOptionsService: EntityMetaOptionsService;
     let heroResourceMetaOptions: EntityResourceMetaOptions;
     let heroEntityMetaOptions: EntityMetaOptions;
@@ -139,7 +144,7 @@ describe('EntityStoreServerService', () => {
             }
         );
 
-        service = new EntityStoreServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService);
+        service = new EntityRestServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService);
     });
 
     afterEach(() => {
@@ -150,7 +155,7 @@ describe('EntityStoreServerService', () => {
 
     describe('property inspection', () => {
         // Test wrapper exposes protected properties
-        class TestService<T> extends EntityStoreServerService<T> {
+        class HeroRestServerService extends EntityRestServerService<Hero> {
             properties = {
                 entityMetaOptions: this.entityMetaOptions,
                 entityResourceMetaOptions: this.entityResourceMetaOptions,
@@ -161,15 +166,15 @@ describe('EntityStoreServerService', () => {
         }
 
         // tslint:disable-next-line:no-shadowed-variable
-        let service: TestService<Hero>;
+        let service: HeroRestServerService;
 
         beforeEach(() => {
             // use test wrapper class to get to protected properties
-            service = new TestService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService);
+            service = new HeroRestServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService);
         });
 
         it('has expected name', () => {
-            expect(service.name).toBe('Hero EntityStoreServerService');
+            expect(service.name).toBe('Hero EntityRestServerService');
         });
 
         it('has expected single-entity url', () => {
@@ -258,7 +263,7 @@ describe('EntityStoreServerService', () => {
                 message: msg,
 
                 // The rest of this is optional and not used. Just showing that you could.
-                filename: 'EntityStoreServerService.ts',
+                filename: 'EntityRestServerService.ts',
                 lineno: 42,
                 colno: 21
             } as ErrorEvent;
@@ -482,7 +487,7 @@ describe('EntityStoreServerService', () => {
         });
 
         it('should return 404 when id not found and delete404OK is false', () => {
-            service = new EntityStoreServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService, {
+            service = new EntityRestServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService, {
                 delete404OK: false
             });
             service.delete(1).subscribe(
