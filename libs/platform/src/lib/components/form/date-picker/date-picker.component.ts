@@ -26,9 +26,9 @@ import {
     DateRange,
     DaysOfWeek,
     FdCalendarView,
+    Placement,
     SpecialDayRule
 } from '@fundamental-ngx/core';
-import { Placement } from 'popper.js';
 import { FormFieldControl, Status } from '../form-control';
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';

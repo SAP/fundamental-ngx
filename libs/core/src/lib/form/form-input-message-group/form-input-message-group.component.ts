@@ -6,8 +6,8 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { PopoverFillMode } from '../../popover/popover-position/popover-position';
-import { Placement } from 'popper.js';
+import { Placement, PopoverFillMode } from '../../popover/popover-position/popover-position';
+
 
 @Component({
     selector: 'fd-form-input-message-group',
