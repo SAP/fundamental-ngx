@@ -17,8 +17,8 @@
 -   [5. Known Issues](#5)
 -   [6. Support](#6)
 -   [7. Contributing](#7)
--   [8. License](#8)
--   [9. Similar Projects](#9)
+-   [8. License](https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt)
+-   [9. Similar Projects](#8)
 
 ## <a name="1"></a>1. Description
 
