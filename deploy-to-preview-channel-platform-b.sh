@@ -5,7 +5,7 @@ DEPLOY_TO_PREVIEW_CHANNEL_RESULT=$(firebase hosting:channel:deploy pr-$TRAVIS_PU
 RESULT=`echo ${DEPLOY_TO_PREVIEW_CHANNEL_RESULT} | jq -r '.result'`
 ALLURE_RESULTS=`echo ${RESULT} | jq -r '."allure-results"'`
 SITE=`echo ${ALLURE_RESULTS} | jq -r .site`
-URL=`echo ${ALLURE_RESULTS} | jq -r .url`
+URL=`echo ${ALLURE_RESULTS} | jq -r .url '.platform-a'`
 EXPIRE_TIME_UTC=`echo ${ALLURE_RESULTS} | jq -r .expireTime`
 EXPIRE_TIME=$(TZ='GMT' date -d $EXPIRE_TIME_UTC +%c)
 
