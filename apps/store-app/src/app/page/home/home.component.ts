@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
-import { TabListComponent } from '@fundamental-ngx/core';
 import { EntityStore, EntityStoreBuilderFactory, eq, Query } from '@fundamental-ngx/store';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { CommonService } from '../../service/common.service';
 
 import { Item } from '../../store.config';
@@ -29,7 +26,7 @@ export class HomeComponent implements OnInit {
         private commonService: CommonService,
         private esFactory: EntityStoreBuilderFactory
     ) {
-        const builder = esFactory.create(Item);
+        const builder = this.esFactory.create(Item);
         this.itemStore = builder.create();
     }
 
@@ -41,9 +38,11 @@ export class HomeComponent implements OnInit {
             .where(eq('category', 'Dairy'))
             .build();
 
+        this.items$ = this.query.result$;
+
         // invoke query
-        this.items$ = this.query
-            .withMaxResults(5)
+        this.query
+            .withMaxResults(2)
             .orderBy({field: 'name'}, {field: 'price'})
             .fetch();
     }

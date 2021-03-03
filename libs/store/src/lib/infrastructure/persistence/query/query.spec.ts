@@ -47,7 +47,9 @@ describe('Store: Query', () => {
     beforeEach(() => {
         const adapter = new DefaultQueryAdapter<Fruit>();
         service = new MockQueryService<Fruit>();
-        spyOn(service, 'getWithQuery');
+        spyOn(service, 'getWithQuery').and.callFake(query => {
+            return of([]);
+        });
         spyOn(service, 'getByKey');
         qb = new QueryBuilder(service, adapter);
     });

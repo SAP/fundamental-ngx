@@ -78,6 +78,10 @@ export class Requisition extends BaseEntity {
 // Set the default URL root for all entities registered
 export const storeConfig: FundamentalStoreConfig = {
     root: 'api/',
-    entities: { Requisition: Requisition, LineItem: LineItem, Item: Item },
+    entities: {
+        Requisition: Requisition,
+        LineItem: LineItem,
+        Item: Item
+    },
     enableDevtools: true
 };

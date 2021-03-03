@@ -1,5 +1,5 @@
 import {
-    Observable
+    Observable, Subject
 } from 'rxjs';
 import {
     QueryParams
@@ -8,6 +8,7 @@ import {
 import { Predicate } from './grammar/predicate';
 import { QueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
+import { take } from 'rxjs/operators';
 
 export interface OrderBy <TModel> {
     field: keyof TModel;
@@ -18,6 +19,8 @@ export interface OrderBy <TModel> {
  * @todo We may need a method for end-users to add custom query parameters.
  */
 export class Query<TModel> {
+
+    result$: Subject<Array<TModel>>;
 
     /** @hidden - stores current keyword */
     _keyword: string;
@@ -49,7 +52,9 @@ export class Query<TModel> {
     constructor(
         private service: QueryService<TModel>,
         private adapter: QueryAdapter<TModel>
-    ) {}
+    ) {
+        this.result$ = new Subject<Array<TModel>>();
+    }
 
     /**
      * Replace current filter settings.
@@ -148,7 +153,10 @@ export class Query<TModel> {
 
         const params = this._createQueryParams();
         const query = this.adapter.createQueryString(params);
-        return this.service.getWithQuery(query);
+        this.service.getWithQuery(query).pipe(take(1)).subscribe(entities => {
+            this.result$.next(entities);
+        });
+        return this.result$;
     }
 
     /**
