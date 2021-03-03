@@ -19,7 +19,7 @@ import { RtlService } from '../utils/services/rtl.service';
 import { BehaviorSubject } from 'rxjs';
 import { KeyUtil } from '../utils/functions';
 import { MenuComponent } from '../menu/menu.component';
-import { Placement } from 'popper.js';
+import { Placement } from '../popover/popover-position/popover-position';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 /**

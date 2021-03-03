@@ -9,10 +9,9 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import { Placement } from 'popper.js';
 
 import { BaseInput } from '../base.input';
-import { TimePickerComponent } from '@fundamental-ngx/core';
+import { Placement, TimePickerComponent } from '@fundamental-ngx/core';
 import { FormFieldControl, Status } from '../form-control';
 
 @Component({

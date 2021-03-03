@@ -22,9 +22,9 @@ import {
     DATE_TIME_FORMATS,
     DaysOfWeek,
     FdCalendarView,
+    Placement,
     SpecialDayRule
 } from '@fundamental-ngx/core';
-import { Placement } from 'popper.js';
 
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
