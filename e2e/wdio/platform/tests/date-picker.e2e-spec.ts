@@ -247,8 +247,8 @@ describe('Date picker suite', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            datePickerPage.saveExampleBaselineScreenshot('date-picker');
-            expect(datePickerPage.compareWithBaseline('date-picker')).toBeLessThan(1);
+            datePickerPage.saveExampleBaselineScreenshot();
+            expect(datePickerPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

@@ -20,7 +20,7 @@ describe('Step input test suite', function() {
     const stepInputPage: StepInputPo = new StepInputPo();
     const {
         stepInputRoot, activeButtonIncrement, activeButtonDecrement, allInput, allButtonIncrement, allButtonDecrement,
-        activeInput, reactiveFormInput, formInput, inputInTemplateDriverForm, errorMessage, minMaxButtonDecrement,
+        activeInput, reactiveFormInput, formInput, errorMessage, minMaxButtonDecrement,
         minMaxButtonIncrement, inputWithoutForm, quantityText, formStatusText, fillInput
     } = stepInputPage;
 
@@ -172,8 +172,8 @@ describe('Step input test suite', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            stepInputPage.saveExampleBaselineScreenshot('step-input');
-            expect(stepInputPage.compareWithBaseline('step-input')).toBeLessThan(1);
+            stepInputPage.saveExampleBaselineScreenshot();
+            expect(stepInputPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

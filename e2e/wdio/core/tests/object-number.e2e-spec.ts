@@ -104,6 +104,13 @@ describe('object number test suite', function() {
             objectNumberPage.checkRtlSwitch();
         });
     });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            objectNumberPage.saveExampleBaselineScreenshot();
+            expect(objectNumberPage.compareWithBaseline()).toBeLessThan(1);
+        });
+    });
 });
 
 function checkObjectValues(selector, dataArr): void {

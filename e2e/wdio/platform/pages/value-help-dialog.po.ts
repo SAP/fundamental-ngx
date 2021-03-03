@@ -60,4 +60,16 @@ export class ValueHelpDialogPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.pageHeader);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'checkbox'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'checkbox'): any {
+        super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

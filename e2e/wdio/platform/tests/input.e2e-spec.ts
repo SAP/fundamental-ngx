@@ -179,8 +179,8 @@ describe('Input should ', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            inputPage.saveExampleBaselineScreenshot('input');
-            expect(inputPage.compareWithBaseline('input')).toBeLessThan(1);
+            inputPage.saveExampleBaselineScreenshot();
+            expect(inputPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

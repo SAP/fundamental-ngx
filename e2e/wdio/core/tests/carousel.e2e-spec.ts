@@ -221,6 +221,13 @@ describe('Carousel test suite', function() {
         });
     });
 
+    describe('visual regression', function() {
+        it('should check example blocks visual regression', () => {
+            carouselPage.saveExampleBaselineScreenshot();
+            expect(carouselPage.compareWithBaseline()).toBeLessThan(4);
+        });
+    });
+
     function checkCarouselNavigation(imgIndex: number, nextImgBtnIndex: number): void {
         const firstImg = getAttributeByName(displayedImg, imgSource, imgIndex);
 

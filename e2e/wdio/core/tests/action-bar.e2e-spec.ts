@@ -280,8 +280,8 @@ describe('Action Bar Test Suite', function() {
 
     describe('Check visual regression basic', function() {
         it('should check examples visual regression', () => {
-            actionBarPage.saveExampleBaselineScreenshot('action-bar');
-            expect(actionBarPage.compareWithBaseline('action-bar')).toBeLessThan(1);
+            actionBarPage.saveExampleBaselineScreenshot();
+            expect(actionBarPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

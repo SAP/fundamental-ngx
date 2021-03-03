@@ -23,4 +23,16 @@ export class SelectPo extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.selectModesExample);
     };
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'select'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'select'): any {
+        super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

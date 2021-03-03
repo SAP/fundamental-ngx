@@ -45,4 +45,16 @@ export class GridListPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.layoutPattern);
     };
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'grid-list'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'grid-list'): any {
+        super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }
