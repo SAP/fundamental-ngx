@@ -4,7 +4,7 @@
         <fd-popover
             additionalBodyClass="fd-popover-custom-list"
             *ngIf="!mobile"
-            [isOpen]="open && displayedValues && displayedValues.length"
+            [isOpen]="open"
             (isOpenChange)="openChangeHandle($event)"
             [triggers]="[]"
             [maxWidth]="600"
@@ -20,7 +20,7 @@
                     </ng-container>
                 </form>
             </fd-popover-control>
-            <fd-popover-body [attr.aria-hidden]="!open">
+            <fd-popover-body [attr.aria-hidden]="!open" [class.fd-popover__body--hidden]="!displayedValues || !displayedValues.length">
                 <ng-container *ngTemplateOutlet="list"></ng-container>
                 <ng-content></ng-content>
             </fd-popover-body>

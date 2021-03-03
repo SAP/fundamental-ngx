@@ -8,7 +8,6 @@
     "whitelistedNonPeerDependencies": [
         "@angular/cdk",
         "focus-trap",
-        "popper.js",
         "fundamental-styles",
         "@sap-theming/theming-base-content",
         "hammerjs"

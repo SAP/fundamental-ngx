@@ -340,6 +340,11 @@ export function runAxeReport(options: string): object {
     }, options);
 }
 
+export function addIsActiveClass(selector: string, index: number = 0): void {
+    // @ts-ignore
+    $$(selector)[index].addIsActiveClass();
+}
+
 export function clickAndDragElement(locationX: number, locationY: number, newLocationX: number, newLocationY: number): void {
     browser.performActions([{
         'type': 'pointer',
@@ -355,12 +360,6 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
         ]
     }]);
 }
-
-export function addIsActiveClass(selector: string, index: number = 0): void {
-    // @ts-ignore
-    $$(selector)[index].addIsActiveClass();
-}
-
 
 export function saveElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): void {
     browser.saveElement($$(selector)[index], tag, options);

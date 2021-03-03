@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import {Placement} from 'popper.js';
+import { Placement } from '../../popover/popover-position/popover-position';
 import { BasePopoverClass } from '../../popover/base/base-popover.class';
 
 @Component({

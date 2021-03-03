@@ -294,7 +294,6 @@ exports.config = {
         browser.addCommand('addIsActiveClass', function() {
             browser.execute(function(domElement) {
                 domElement.classList.add('is-active');
-
             }, this);
         }, true);
 
