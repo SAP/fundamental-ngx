@@ -97,6 +97,10 @@ export class MultiInputComponent implements
     @Input()
     searchTerm = '';
 
+    /** Id attribute for input element inside MultiInput component */
+    @Input()
+    inputId = '';
+
     /** Whether the search term should be highlighted in results. */
     @Input()
     highlight = true;

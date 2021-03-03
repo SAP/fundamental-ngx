@@ -68,6 +68,7 @@
                    (ngModelChange)="handleSearchTermChange($event)"
                    (keydown)="handleInputKeydown($event)"
                    [ngModelOptions]="{standalone: true}"
+                   [attr.id]="inputId"
             />
         </fd-tokenizer>
     </fd-input-group>
