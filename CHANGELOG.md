@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.2...v0.28.2-rc.3) (2021-03-03)
+
+
+### Bug Fixes
+
+* (Core) Fix hide bug for multi input ([#4821](https://github.com/SAP/fundamental-ngx/issues/4821)) ([be9d56b](https://github.com/SAP/fundamental-ngx/commit/be9d56b3b16b31a7ccede3450e8687efa685b620))
+
 ### [0.28.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.1...v0.28.2-rc.2) (2021-03-03)
 
 
