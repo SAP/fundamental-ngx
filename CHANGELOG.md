@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.1...v0.28.2-rc.2) (2021-03-03)
+
+
+### Bug Fixes
+
+* (Core) Remove popper.js dependency ([#4814](https://github.com/SAP/fundamental-ngx/issues/4814)) ([2dae2fb](https://github.com/SAP/fundamental-ngx/commit/2dae2fb3fdb8c06e05f49091cea5d62b8e3b2540))
+
 ### [0.28.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.0...v0.28.2-rc.1) (2021-03-03)
 
 ### [0.28.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.28.1-rc.17...v0.28.2-rc.0) (2021-03-03)
