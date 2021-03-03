@@ -1,6 +1,6 @@
 /*require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
-const {join} = require('path');
+const { join } = require('path');
 require('ts-node').register({ transpileOnly: true });
 AllureReporter = require('@wdio/allure-reporter').default;
 exports.config = {
@@ -66,7 +66,7 @@ exports.config = {
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
-         //   './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
+            //   './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
         ]
     },
@@ -264,7 +264,7 @@ exports.config = {
     }], ['allure', {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true
+        disableWebdriverScreenshotsReporting: false
     }]],
 
     jasmineNodeOpts: {
@@ -386,13 +386,12 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    afterTest: async function (test, context, {error, result, duration, passed, retries}) {
+    afterTest: function(test, context, { error, result, duration, passed, retries }) {
         if (error !== undefined) {
-            await browser.takeScreenshot();
-            const html = await browser.getPageSource();
+            browser.takeScreenshot();
+            const html = browser.getPageSource();
             AllureReporter.addAttachment('page.html', html, 'text/html');
         }
-        await browser.reloadSession();
     },
 
     /**
