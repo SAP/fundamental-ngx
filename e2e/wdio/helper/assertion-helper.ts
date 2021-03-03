@@ -112,13 +112,13 @@ export function checkElementHoverState(selector: string, tag: string, elementNam
 export function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
     click(selector, index);
     saveElementScreenshot(selector, tag, {}, index);
-    expect(checkElementScreenshot(selector, tag))
+    expect(checkElementScreenshot(selector, tag, {}, index))
         .toBeLessThan(2, `${elementName} element focus state mismatch`);
 }
 
 export function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
     addIsActiveClass(selector, index);
     saveElementScreenshot(selector, tag, {}, index);
-    expect(checkElementScreenshot(selector, tag))
+    expect(checkElementScreenshot(selector, tag, {}, index))
         .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
 }

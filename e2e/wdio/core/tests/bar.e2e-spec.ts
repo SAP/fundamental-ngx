@@ -14,6 +14,7 @@ import {
     saveCancelButtonHover
 } from '../fixtures/testData/bar.tags';
 import { checkElementActiveState, checkElementFocusState, checkElementHoverState } from '../../helper/assertion-helper';
+import { leftArrowButton, saveCancelButton } from '../fixtures/appData/bar-contents';
 
 describe('Bar test suite:', function() {
     const barPage: BarPo = new BarPo();
@@ -39,54 +40,6 @@ describe('Bar test suite:', function() {
         }
     });
 
-    it('Check arrow button focus state', () => {
-        const buttonsLength = getElementArrayLength(arrowButtons);
-        for (let i = 0; i < buttonsLength; i++) {
-            scrollIntoView(arrowButtons, i);
-            checkElementFocusState(arrowButtons, leftArrowButtonExample + leftArrowButtonFocus + '-' + i, 'left-arrow-button', i);
-        }
-    });
-
-    it('Check Save and Cancel buttons focus state', () => {
-        const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
-        for (let i = 0; i < saveCancelButtonsLength; i++) {
-            scrollIntoView(saveCancelButtons, i);
-            checkElementFocusState(saveCancelButtons, saveCancelButtonExample + saveCancelButtonFocus + '-' + i, 'save-cancel-button', i);
-        }
-    });
-
-
-    it('Check arrow button active state', () => {
-        const buttonsLength = getElementArrayLength(arrowButtons);
-        for (let i = 0; i < buttonsLength; i++) {
-            scrollIntoView(arrowButtons, i);
-            checkElementActiveState(arrowButtons, leftArrowButtonExample + leftArrowButtonActive + '-' + i, 'left-arrow-button', i);
-        }
-    });
-
-    it('Check Save and Cancel buttons active state', () => {
-        const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
-        for (let i = 0; i < saveCancelButtonsLength; i++) {
-            scrollIntoView(saveCancelButtons, i);
-            checkElementActiveState(saveCancelButtons, saveCancelButtonExample + saveCancelButtonActive + '-' + i, 'save-cancel-button', i);
-        }
-    });
-
-    it('Check arrow button hover state', () => {
-        const buttonsLength = getElementArrayLength(arrowButtons);
-        for (let i = 0; i < buttonsLength; i++) {
-            scrollIntoView(arrowButtons, i);
-            checkElementHoverState(arrowButtons, leftArrowButtonExample + leftArrowButtonHover + '-' + i, 'left-arrow-button', i);
-        }
-    });
-
-    it('Check Save and Cancel buttons hover state', () => {
-        const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
-        for (let i = 0; i < saveCancelButtonsLength; i++) {
-            scrollIntoView(saveCancelButtons, i);
-            checkElementHoverState(saveCancelButtons, saveCancelButtonExample + saveCancelButtonHover + '-' + i, 'save-cancel-button', i);
-        }
-    });
 
     it('Verify bar contains 3 header sections', () => {
         const leftBarSectionLength = getElementArrayLength(leftSections);
@@ -130,6 +83,54 @@ describe('Bar test suite:', function() {
         it('should check examples visual regression', () => {
             barPage.saveExampleBaselineScreenshot('bar', componentExample);
             expect(barPage.compareWithBaseline('bar', componentExample)).toBeLessThan(1);
+        });
+
+        it('Check arrow button focus state', () => {
+            const buttonsLength = getElementArrayLength(arrowButtons);
+            for (let i = 0; i < buttonsLength; i++) {
+                scrollIntoView(arrowButtons, i);
+                checkElementFocusState(arrowButtons, leftArrowButtonExample + leftArrowButtonFocus + '-' + i, leftArrowButton, i);
+            }
+        });
+
+        it('Check Save and Cancel buttons focus state', () => {
+            const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
+            for (let i = 0; i < saveCancelButtonsLength; i++) {
+                scrollIntoView(saveCancelButtons, i);
+                checkElementFocusState(saveCancelButtons, saveCancelButtonExample + saveCancelButtonFocus + '-' + i, saveCancelButton, i);
+            }
+        });
+
+        it('Check arrow button active state', () => {
+            const buttonsLength = getElementArrayLength(arrowButtons);
+            for (let i = 0; i < buttonsLength; i++) {
+                scrollIntoView(arrowButtons, i);
+                checkElementActiveState(arrowButtons, leftArrowButtonExample + leftArrowButtonActive + '-' + i, leftArrowButton, i);
+            }
+        });
+
+        it('Check Save and Cancel buttons active state', () => {
+            const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
+            for (let i = 0; i < saveCancelButtonsLength; i++) {
+                scrollIntoView(saveCancelButtons, i);
+                checkElementActiveState(saveCancelButtons, saveCancelButtonExample + saveCancelButtonActive + '-' + i, saveCancelButton, i);
+            }
+        });
+
+        it('Check arrow button hover state', () => {
+            const buttonsLength = getElementArrayLength(arrowButtons);
+            for (let i = 0; i < buttonsLength; i++) {
+                scrollIntoView(arrowButtons, i);
+                checkElementHoverState(arrowButtons, leftArrowButtonExample + leftArrowButtonHover + '-' + i, leftArrowButton, i);
+            }
+        });
+
+        it('Check Save and Cancel buttons hover state', () => {
+            const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
+            for (let i = 0; i < saveCancelButtonsLength; i++) {
+                scrollIntoView(saveCancelButtons, i);
+                checkElementHoverState(saveCancelButtons, saveCancelButtonExample + saveCancelButtonHover + '-' + i, saveCancelButton, i);
+            }
         });
     });
 });

@@ -23,6 +23,7 @@ import {
     indicatorBlockFocus
 } from '../fixtures/testData/busy-indicator.tags';
 import { checkElementActiveState, checkElementFocusState, checkElementHoverState } from '../../helper/assertion-helper';
+import { disableButtonContent, indicatorBlock, saveButtonContent } from '../fixtures/appData/busy-indicator-contents';
 
 describe('Busy Indicator test suite:', function() {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
@@ -91,58 +92,58 @@ describe('Busy Indicator test suite:', function() {
 
         it('Check disable button hover state', () => {
             scrollIntoView(enableDisableButton);
-            checkElementHoverState(enableDisableButton, disableButtonExample + disableButtonHover + '-', 'disable-button');
+            checkElementHoverState(enableDisableButton, disableButtonExample + disableButtonHover + '-', disableButtonContent);
         });
 
         it('Check disable button active state', () => {
             scrollIntoView(enableDisableButton);
-            checkElementActiveState(enableDisableButton, disableButtonExample + disableButtonActive + '-', 'disable-button');
+            checkElementActiveState(enableDisableButton, disableButtonExample + disableButtonActive + '-', disableButtonContent);
         });
 
         it('Check disable button focus state', () => {
             scrollIntoView(enableDisableButton);
-            checkElementFocusState(enableDisableButton, disableButtonExample + disableButtonFocus + '-', 'disable-button');
+            checkElementFocusState(enableDisableButton, disableButtonExample + disableButtonFocus + '-', disableButtonContent);
         });
 
         it('Check save button hover state', () => {
             scrollIntoView(saveButton);
             click(enableDisableButton);
-            checkElementHoverState(saveButton, saveButtonExample + saveButtonHover + '-', 'save-button');
+            checkElementHoverState(saveButton, saveButtonExample + saveButtonHover + '-', saveButtonContent);
         });
 
         it('Check save button active state', () => {
             scrollIntoView(saveButton);
             click(enableDisableButton);
-            checkElementActiveState(saveButton, saveButtonExample + saveButtonActive + '-', 'save-button');
+            checkElementActiveState(saveButton, saveButtonExample + saveButtonActive + '-', saveButtonContent);
         });
 
         it('Check save button focus state', () => {
             scrollIntoView(saveButton);
             click(enableDisableButton);
-            checkElementFocusState(saveButton, saveButtonExample + saveButtonFocus + '-', 'save-button');
+            checkElementFocusState(saveButton, saveButtonExample + saveButtonFocus + '-', saveButtonContent);
         });
 
         it('Check enable loading button hover state', () => {
             scrollIntoView(enableDisableButton);
             click(enableDisableButton);
-            checkElementHoverState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonHover + '-', 'save-button');
+            checkElementHoverState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonHover + '-', saveButtonContent);
         });
 
         it('Check enable loading button active state', () => {
             scrollIntoView(enableDisableButton);
             click(enableDisableButton);
-            checkElementActiveState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonActive + '-', 'save-button');
+            checkElementActiveState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonActive + '-', saveButtonContent);
         });
 
         it('Check enable loading button focus state', () => {
             scrollIntoView(enableDisableButton);
             click(enableDisableButton);
-            checkElementFocusState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonFocus + '-', 'save-button');
+            checkElementFocusState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonFocus + '-', saveButton);
         });
 
         it('Check indicator for block focus state', () => {
             scrollIntoView(enableDisableButton);
-            checkElementFocusState(indicatorBlockWrapper, indicatorBlockExample + indicatorBlockFocus + '-', 'indicator-block');
+            checkElementFocusState(indicatorBlockWrapper, indicatorBlockExample + indicatorBlockFocus + '-', indicatorBlock);
         });
     });
 });

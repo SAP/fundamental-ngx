@@ -3,13 +3,16 @@ import {
     getElementArrayLength,
     isElementClickable,
     refreshPage,
-    scrollIntoView, waitForPresent
+    scrollIntoView, waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
 import {
+    disabledLinksState,
+    linksActiveState,
     linksExample, linksHoverState
 } from '../fixtures/testData/breadcrumb.tags';
-import { checkElementHoverState } from '../../helper/assertion-helper';
+import { checkElementActiveState, checkElementHoverState } from '../../helper/assertion-helper';
+import { breadcrumbDisabledLinks, breadcrumbLinks } from '../fixtures/appData/breadcrumb-contents';
 
 
 describe('Breadcrumb test suite:', function() {
@@ -31,15 +34,14 @@ describe('Breadcrumb test suite:', function() {
         for (let i = 0; i < linksLength; i++) {
             scrollIntoView(links, i);
             expect(isElementClickable(links, i)).toBe(true);
-            checkElementHoverState(links, linksExample + linksHoverState + '-' + i, 'breadcrumb-links', i);
         }
     });
 
-    it('should check disable links', () => {
+    it('should check disabled links', () => {
         const disabledLinksLength = getElementArrayLength(disabledLinks);
         for (let i = 0; i < disabledLinksLength; i++) {
             scrollIntoView(disabledLinks, i);
-            expect(isElementClickable(disabledLinks, i)).toBe(false);
+            waitForElDisplayed(disabledLinks, i);
         }
     });
 
@@ -48,6 +50,30 @@ describe('Breadcrumb test suite:', function() {
         it('should check examples visual regression', () => {
             breadcrumbPage.saveExampleBaselineScreenshot('breadcrumb');
             expect(breadcrumbPage.compareWithBaseline('breadcrumb')).toBeLessThan(1);
+        });
+
+        it('should check hover state for links', () => {
+            const linksLength = getElementArrayLength(links);
+            for (let i = 0; i < linksLength; i++) {
+                scrollIntoView(links, i);
+                checkElementHoverState(links, linksExample + linksHoverState + '-' + i, breadcrumbLinks, i);
+            }
+        });
+
+        it('should check hover state for disabled links', () => {
+            const disabledLinksLength = getElementArrayLength(disabledLinks);
+            for (let i = 0; i < disabledLinksLength; i++) {
+                scrollIntoView(disabledLinks, i);
+                checkElementHoverState(disabledLinks, linksExample + disabledLinksState + '-' + i, breadcrumbDisabledLinks, i);
+            }
+        });
+
+        it('should check active state for links', () => {
+            const linksLength = getElementArrayLength(links);
+            for (let i = 0; i < linksLength; i++) {
+                scrollIntoView(links, i);
+                checkElementActiveState(links, linksExample + linksActiveState + '-' + i, breadcrumbLinks, i);
+            }
         });
     });
 });
