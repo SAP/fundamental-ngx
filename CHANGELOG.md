@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.3...v0.28.2-rc.4) (2021-03-03)
+
+
+### Bug Fixes
+
+* (Core) Remove small shellbar unnecessary styles ([#4799](https://github.com/SAP/fundamental-ngx/issues/4799)) ([fa84af0](https://github.com/SAP/fundamental-ngx/commit/fa84af084d65952885fda2d67dc8e32da8d67fb2))
+
 ### [0.28.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.2...v0.28.2-rc.3) (2021-03-03)
 
 
