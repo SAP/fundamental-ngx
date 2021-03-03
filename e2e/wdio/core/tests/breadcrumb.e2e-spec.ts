@@ -1,16 +1,15 @@
 import { BreadcrumbPo } from '../pages/breadcrumb.po';
 import {
-    checkElementScreenshot,
     getElementArrayLength,
     isElementClickable,
-    mouseHoverElement,
-    refreshPage, saveElementScreenshot,
+    refreshPage,
     scrollIntoView, waitForPresent
 } from '../../driver/wdio';
 
 import {
     linksExample, linksHoverState
 } from '../fixtures/testData/breadcrumb.tags';
+import { checkElementHoverState } from '../../helper/assertion-helper';
 
 
 describe('Breadcrumb test suite:', function() {
@@ -32,7 +31,7 @@ describe('Breadcrumb test suite:', function() {
         for (let i = 0; i < linksLength; i++) {
             scrollIntoView(links, i);
             expect(isElementClickable(links, i)).toBe(true);
-            checkLinkHoverState(links, linksExample + linksHoverState + '-' + i, 'breadcrumb-links', i);
+            checkElementHoverState(links, linksExample + linksHoverState + '-' + i, 'breadcrumb-links', i);
         }
     });
 
@@ -52,12 +51,5 @@ describe('Breadcrumb test suite:', function() {
         });
     });
 });
-
-function checkLinkHoverState(selector: string, tag: string, linkName: string, index: number = 0): void {
-    mouseHoverElement(selector, index);
-    saveElementScreenshot(selector, tag);
-    expect(checkElementScreenshot(selector, tag, {}, index))
-        .toBeLessThan(2, `${linkName} link hover state mismatch`);
-}
 
 

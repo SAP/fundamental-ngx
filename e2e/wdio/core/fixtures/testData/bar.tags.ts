@@ -9,7 +9,3 @@ export const leftArrowButtonActive = 'left-arrow-active-state-' + getImageTagBro
 export const saveCancelButtonActive = 'save-cancel-button-active-state-' + getImageTagBrowserPlatform();
 export const leftArrowButtonFocus = 'left-arrow-focus-state-' + getImageTagBrowserPlatform();
 export const saveCancelButtonFocus = 'save-cancel-button-focus-state-' + getImageTagBrowserPlatform();
-
-
-
-
