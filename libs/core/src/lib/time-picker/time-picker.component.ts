@@ -21,7 +21,7 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Placement } from 'popper.js';
+import { Placement } from '../popover/popover-position/popover-position';
 
 import { DATE_TIME_FORMATS, DateTimeFormats } from '../datetime/datetime-formats';
 import { DatetimeAdapter } from '../datetime/datetime-adapter';

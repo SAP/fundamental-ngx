@@ -84,6 +84,7 @@ import { TitleModule } from './title/title.module';
 import { SliderModule } from './slider/public_api';
 import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
 import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
+import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -106,6 +107,7 @@ import { IllustratedMessageModule } from './illustrated-message/illustrated-mess
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
+        DynamicPageModule,
         DynamicSideContentModule,
         FeedListItemModule,
         FeedInputModule,

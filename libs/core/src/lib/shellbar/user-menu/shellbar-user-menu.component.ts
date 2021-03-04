@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewCh
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { MenuComponent } from '../../menu/menu.component';
-import { Placement, PopperOptions } from 'popper.js';
+import { Placement } from '../../popover/popover-position/popover-position';
 import { PopoverFillMode } from '../../popover/popover-position/popover-position';
 
 /**
@@ -57,20 +57,6 @@ export class ShellbarUserMenuComponent {
     /** Whether the popover is disabled. */
     @Input()
     disabled = false;
-
-    /** The Popper.js options to attach to this popover.
-     * See the [Popper.js Documentation](https://popper.js.org/popper-documentation.html) for details. */
-    @Input()
-    options: PopperOptions = {
-        placement: 'bottom-start',
-        modifiers: {
-            preventOverflow: {
-                enabled: true,
-                escapeWithReference: true,
-                boundariesElement: 'scrollParent'
-            }
-        }
-    };
 
     /** Whether or not to show the popover arrow */
     @Input()
