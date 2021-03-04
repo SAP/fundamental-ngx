@@ -181,7 +181,7 @@ describe('Time picker suite', function() {
             checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, {}, );
         });
 
-        fit('should check expand button hover state', () => {
+        it('should check expand button hover state', () => {
             const expandButtonLength = getElementArrayLength(activeTimePickerButton);
             for (let i = 0; i < expandButtonLength; i++) {
                 scrollIntoView(activeTimePickerButton, i);
@@ -189,7 +189,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check expand button focus state', () => {
+        it('should check expand button focus state', () => {
             const expandButtonLength = getElementArrayLength(activeTimePickerButton);
             for (let i = 0; i < expandButtonLength; i++) {
                 scrollIntoView(activeTimePickerButton, i);
@@ -198,7 +198,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check expand button active state', () => {
+        it('should check expand button active state', () => {
             const expandButtonLength = getElementArrayLength(activeTimePickerButton);
             for (let i = 0; i < expandButtonLength; i++) {
                 scrollIntoView(activeTimePickerButton, i);
@@ -206,7 +206,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check input field hover state', () => {
+        it('should check input field hover state', () => {
             const inputFieldLength = getElementArrayLength(activeTimePickerInput);
             for (let i = 0; i < inputFieldLength; i++) {
                 scrollIntoView(activeTimePickerInput, i);
@@ -214,7 +214,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check input field focus state', () => {
+        it('should check input field focus state', () => {
             const inputFieldLength = getElementArrayLength(activeTimePickerInput);
             for (let i = 0; i < inputFieldLength; i++) {
                 scrollIntoView(activeTimePickerInput, i);
@@ -222,7 +222,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check input field active state', () => {
+        it('should check input field active state', () => {
             const inputFieldLength = getElementArrayLength(activeTimePickerInput);
             for (let i = 0; i < inputFieldLength; i++) {
                 scrollIntoView(activeTimePickerInput, i);
@@ -230,7 +230,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check set to null button hover state', () => {
+        it('should check set to null button hover state', () => {
             const setToNullButtonsLength = getElementArrayLength(setToNullButton);
             for (let i = 0; i < setToNullButtonsLength; i++) {
                 scrollIntoView(setToNullButton, i);
@@ -238,7 +238,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check set to null button focus state', () => {
+        it('should check set to null button focus state', () => {
             const setToNullButtonsLength = getElementArrayLength(setToNullButton);
             for (let i = 0; i < setToNullButtonsLength; i++) {
                 scrollIntoView(setToNullButton, i);
@@ -246,7 +246,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check set to null button active state', () => {
+        it('should check set to null button active state', () => {
             const setToNullButtonsLength = getElementArrayLength(setToNullButton);
             for (let i = 0; i < setToNullButtonsLength; i++) {
                 scrollIntoView(setToNullButton, i);
@@ -254,7 +254,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check set valid button hover state', () => {
+        it('should check set valid button hover state', () => {
             const setValidTimeButtonsLength = getElementArrayLength(setValidTimeButton);
             for (let i = 0; i < setValidTimeButtonsLength; i++) {
                 scrollIntoView(setValidTimeButton, i);
@@ -263,7 +263,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check set valid button focus state', () => {
+        it('should check set valid button focus state', () => {
             const setValidTimeButtonsLength = getElementArrayLength(setValidTimeButton);
             for (let i = 0; i < setValidTimeButtonsLength; i++) {
                 scrollIntoView(setValidTimeButton, i);
@@ -272,7 +272,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check set valid button active state', () => {
+        it('should check set valid button active state', () => {
             const setValidTimeButtonsLength = getElementArrayLength(setValidTimeButton);
             for (let i = 0; i < setValidTimeButtonsLength; i++) {
                 scrollIntoView(setValidTimeButton, i);
@@ -281,7 +281,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check not valid input field for basic time picker', () => {
+        it('should check not valid input field for basic time picker', () => {
             scrollIntoView(setToNullButton);
             click(setToNullButton);
             expect(doesItExist(errorBorder)).toBe(true);
@@ -300,7 +300,7 @@ describe('Time picker suite', function() {
             checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', {});
         });
 
-        fit('should check not valid input field state for time picker with template form', () => {
+        it('should check not valid input field state for time picker with template form', () => {
             scrollIntoView(setToNullButton);
             click(setToNullButton, 2);
             expect(doesItExist(errorBorder)).toBe(true);
@@ -309,7 +309,7 @@ describe('Time picker suite', function() {
             checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', {});
         });
 
-        fit('should check disabled time picker hover state', () => {
+        it('should check disabled time picker hover state', () => {
             const disabledTimePickersLength = getElementArrayLength(disabledTimePicker);
             for (let i = 0; i < disabledTimePickersLength; i++) {
                 scrollIntoView(disabledTimePicker, i);
@@ -318,7 +318,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check disabled time picker focus state', () => {
+        it('should check disabled time picker focus state', () => {
             const disabledTimePickersLength = getElementArrayLength(disabledTimePicker);
             for (let i = 0; i < disabledTimePickersLength; i++) {
                 scrollIntoView(disabledTimePicker, i);
@@ -327,7 +327,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        fit('should check disabled time picker active state', () => {
+        it('should check disabled time picker active state', () => {
             const disabledTimePickersLength = getElementArrayLength(disabledTimePicker);
             for (let i = 0; i < disabledTimePickersLength; i++) {
                 scrollIntoView(disabledTimePicker, i);
@@ -335,8 +335,6 @@ describe('Time picker suite', function() {
                     disabledPicker, i);
             }
         });
-
-
 
     });
 
