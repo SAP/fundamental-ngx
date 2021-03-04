@@ -72,6 +72,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/select', name: 'Select' },
             { url: 'core/shellbar', name: 'Shellbar' },
             { url: 'core/sideNavigation', name: 'Side Navigation' },
+            { url: 'core/status-indicator', name: 'Status Indicator' },
             { url: 'core/step-input', name: 'Step Input' },
             { url: 'core/table', name: 'Table' },
             { url: 'core/tabs', name: 'Tabs' },
