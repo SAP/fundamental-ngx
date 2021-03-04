@@ -11,29 +11,16 @@ export class TimePickerPO extends BaseComponentPo {
     timePickerButton = 'fd-time-picker button';
     activeTimePickerInput = 'fd-time-picker[ng-reflect-is-disabled="false"] input';
     activeTimePickerButton = 'fd-time-picker[ng-reflect-is-disabled="false"] button';
+    invalidTimePickerInput = '[name="null-validity"] fd-time-picker.ng-invalid'
     timerExpanded = 'div.fd-time';
+    disabledTimePicker = 'fd-input-group[ng-reflect-disabled="true"]';
+    disabledInput = this.disabledTimePicker + ' input'
+    disabledButton = this.disabledTimePicker + ' button'
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeItem = 'span.fd-time__item';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
-    period = '//span[contains(text(), " PM ")]/parent::li';
-
-
-    filterCaledarValue = (name: string): string => {
-        return `//td[contains(@id,"fd-${name}")]`;
-    };
-
-    dayInDisabledFunctionsCalendarByIndex = (index: string): string => {
-        return `#fd-calendar-9-fd-day-${index}`;
-    }
-
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
-    };
-
-    yearInCalendarByValue = (year: number): string => {
-        return `[aria-label="${year}"]`;
-    };
+    selectedPeriod = '.fd-time__current-indicator ~ span.fd-time-column-custom-hidden'
 
     open(): void {
         super.open(this.url);
