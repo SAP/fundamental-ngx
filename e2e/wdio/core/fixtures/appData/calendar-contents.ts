@@ -1,0 +1,20 @@
+export const currentDayBorderColor = '192, 57, 159';
+export const currentDayBorderColorFF = '192,57,159';
+export const borderAttribute = 'border';
+export const borderAttributeFF = 'border-bottom-color';
+export const classAttribute = 'class';
+export const disabledAttribute = 'aria-disabled';
+export const activeClass = 'is-active';
+export const markedBox = 'box-shadow';
+export const markedWeekendColor = '207, 93, 179';
+export const markedWeekColor = '137, 41, 113';
+export const markedMondayColor = '96, 97, 144';
+export const markedPastDaysColor = '188, 27, 102';
+export const customYearLabel = 'Year';
+export const customYearRangeLabel = 'Aggr. Year.';
+export const landscapeAttribute = 'landscape';
+export const portraitAttribute = 'portrait';
+export const compactAttribute = 'compact';
+export const mondayStartDate = 'M';
+export const currentDayClass = 'current';
+

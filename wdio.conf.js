@@ -245,7 +245,7 @@ exports.config = {
     framework: 'jasmine',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    specFileRetries: 2,
+    specFileRetries: 0,
     //
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,
