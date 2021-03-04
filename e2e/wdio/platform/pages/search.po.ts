@@ -31,6 +31,6 @@ export class SearchPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'search'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

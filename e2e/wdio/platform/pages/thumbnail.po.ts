@@ -26,6 +26,6 @@ export class ThumbnailPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'thumbnail'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

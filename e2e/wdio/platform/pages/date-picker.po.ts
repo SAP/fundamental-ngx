@@ -54,6 +54,6 @@ export class DatePicker extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'date-picker'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

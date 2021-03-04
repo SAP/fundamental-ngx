@@ -61,6 +61,6 @@ export class MultiInputPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'multi-input'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

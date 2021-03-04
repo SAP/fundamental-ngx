@@ -45,6 +45,6 @@ export class QuickViewPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'quick-view'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

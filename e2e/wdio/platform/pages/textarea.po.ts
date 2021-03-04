@@ -45,6 +45,6 @@ export class TextareaPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'textarea'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

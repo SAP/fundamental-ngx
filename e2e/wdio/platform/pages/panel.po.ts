@@ -39,6 +39,6 @@ export class PanelPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'panel'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

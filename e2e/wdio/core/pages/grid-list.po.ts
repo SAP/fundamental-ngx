@@ -55,6 +55,6 @@ export class GridListPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'grid-list'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

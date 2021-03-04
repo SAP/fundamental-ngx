@@ -82,6 +82,6 @@ export class ListPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'list'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

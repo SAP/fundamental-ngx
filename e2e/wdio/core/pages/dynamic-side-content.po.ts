@@ -21,6 +21,6 @@ export class DynamicSideContentPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'dynamic-side-content'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

@@ -41,6 +41,6 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'object-number'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

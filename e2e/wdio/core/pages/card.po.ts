@@ -64,6 +64,6 @@ export class CardPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'card'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

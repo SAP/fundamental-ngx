@@ -37,6 +37,6 @@ export class CarouselPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'card'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

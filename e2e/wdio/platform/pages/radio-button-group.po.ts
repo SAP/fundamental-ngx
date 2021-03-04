@@ -39,6 +39,6 @@ export class RadioButtonGroupPage extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'checkbox'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

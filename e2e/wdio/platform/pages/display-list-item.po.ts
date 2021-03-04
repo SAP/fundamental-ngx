@@ -30,6 +30,6 @@ export class DisplayListItemPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'display-list-item'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

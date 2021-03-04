@@ -26,6 +26,6 @@ export class ActionSheetPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'action-sheet'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

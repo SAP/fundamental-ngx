@@ -34,6 +34,6 @@ export class ObjectStatusPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'object-status'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

@@ -47,6 +47,6 @@ export class SplitMenuButtonPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'split-menu-button'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

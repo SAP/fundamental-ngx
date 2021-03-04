@@ -24,6 +24,6 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'object-marker'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

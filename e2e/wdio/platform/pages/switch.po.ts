@@ -49,6 +49,6 @@ export class SwitchPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'switch'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

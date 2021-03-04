@@ -42,7 +42,7 @@ export class StepInputPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'step-input'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }
 

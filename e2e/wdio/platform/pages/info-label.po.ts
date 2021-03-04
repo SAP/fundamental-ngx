@@ -31,6 +31,6 @@ export class InfoLabelPO extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'info-label'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

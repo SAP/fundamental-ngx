@@ -26,6 +26,6 @@ export class FeedInputPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'feed-input'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

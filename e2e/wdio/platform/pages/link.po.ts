@@ -27,6 +27,6 @@ export class LinkPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'link'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

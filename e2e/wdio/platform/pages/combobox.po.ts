@@ -81,6 +81,6 @@ export class ComboBoxPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'combobox'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

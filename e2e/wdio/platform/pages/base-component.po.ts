@@ -54,6 +54,6 @@ export class BaseComponentPo {
     };
 
     open(url: string): void {
-        open('fundamental-ngx#/platform' + url);
+        return open('fundamental-ngx#/platform' + url);
     };
 }

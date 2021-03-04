@@ -55,6 +55,6 @@ export class ObjectListItemPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'object-list-item'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

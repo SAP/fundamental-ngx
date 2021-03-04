@@ -33,6 +33,6 @@ export class FixedCardLayoutPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'fixed-card-layout'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

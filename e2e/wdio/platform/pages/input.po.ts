@@ -40,6 +40,6 @@ export class InputPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'input'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+       return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

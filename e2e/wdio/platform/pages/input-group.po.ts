@@ -58,6 +58,6 @@ export class InputGroupPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'input-group'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

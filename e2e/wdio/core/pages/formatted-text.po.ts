@@ -24,6 +24,6 @@ export class FormattedTextPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'formatted-text'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

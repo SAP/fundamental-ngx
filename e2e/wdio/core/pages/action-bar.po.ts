@@ -51,6 +51,6 @@ export class ActionBarPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'action-bar'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

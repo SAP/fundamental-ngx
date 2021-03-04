@@ -27,6 +27,6 @@ export class AlertPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'alert'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

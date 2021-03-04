@@ -35,6 +35,6 @@ export class MenuPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'menu'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

@@ -33,6 +33,6 @@ export class SelectPo extends CoreBaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'select'): any {
-        super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }
