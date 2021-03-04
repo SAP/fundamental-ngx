@@ -47,8 +47,6 @@ describe('Menu component test suite', function() {
         const basicMenuBtnArrLength = getElementArrayLength(menuBtnArr);
 
         for (let i = 0; basicMenuBtnArrLength > i; i++) {
-            expect(getCSSPropertyByName(menuBtnArr, borderColorAttribute, i).value)
-                .toContain(menuBtnBorderColor);
             scrollIntoView(menuBtnArr, i);
             mouseHoverElement(menuBtnArr, i);
             expect(getCSSPropertyByName(menuBtnArr, bgColorAttribute, i).value)
