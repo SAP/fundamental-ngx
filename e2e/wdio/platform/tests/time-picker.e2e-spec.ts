@@ -17,6 +17,10 @@ import { time, text, defaultValidTime} from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
 import { checkElementActiveState, checkElementFocusState, checkElementHoverState } from '../../helper/assertion-helper';
 import {
+    disabledTimePickerActiveState,
+    disabledTimePickerExample,
+    disabledTimePickerFocusState,
+    disabledTimePickerHoverState,
     expandButtonActiveState,
     expandButtonExample,
     expandButtonFocusState,
@@ -24,15 +28,25 @@ import {
     inputFieldActiveState,
     inputFieldExample,
     inputFieldFocusState,
-    inputFieldHoverState, notValidInputFieldExample, notValidInputFieldState,
+    inputFieldHoverState,
+    notValidInputFieldExample,
+    notValidInputFieldState,
     setToNullButtonActiveState,
     setToNullButtonExample,
     setToNullButtonFocusState,
-    setToNullButtonHoverState, setValidTimeButtonActiveState,
-    setValidTimeButtonExample, setValidTimeButtonFocusState,
+    setToNullButtonHoverState,
+    setValidTimeButtonActiveState,
+    setValidTimeButtonExample,
+    setValidTimeButtonFocusState,
     setValidTimeButtonHoverState
 } from '../fixtures/testData/time-picker-tags';
-import { expandButton, inputField, setNullButton, setValidButton } from '../fixtures/appData/time-picker-contents';
+import {
+    disabledPicker,
+    expandButton,
+    inputField,
+    setNullButton,
+    setValidButton
+} from '../fixtures/appData/time-picker-contents';
 
 describe('Time picker suite', function() {
     const timePickerPage = new TimePickerPO();
@@ -41,7 +55,7 @@ describe('Time picker suite', function() {
         activeTimePickerButton, errorBorder, selectedPeriod,
         selectedHours, selectedMinutes, disabledInput, disabledButton,
         navigationDownArrowButton, timeItem, setToNullButton, setValidTimeButton,
-        timePickerButton, invalidTimePickerInput
+        invalidTimePickerInput, disabledTimePicker
     } = timePickerPage;
 
     beforeAll(() => {
@@ -167,56 +181,56 @@ describe('Time picker suite', function() {
             checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, {}, );
         });
 
-        it('should check expand button hover state', () => {
-            const expandButtonLength = getElementArrayLength(timePickerButton);
+        fit('should check expand button hover state', () => {
+            const expandButtonLength = getElementArrayLength(activeTimePickerButton);
             for (let i = 0; i < expandButtonLength; i++) {
-                scrollIntoView(timePickerButton, i);
-                checkElementHoverState(timePickerButton, expandButtonExample + expandButtonHoverState, expandButton, i);
+                scrollIntoView(activeTimePickerButton, i);
+                checkElementHoverState(activeTimePickerButton, expandButtonExample + expandButtonHoverState + '-' + i, expandButton, i);
             }
         });
 
-        it('should check expand button focus state', () => {
-            const expandButtonLength = getElementArrayLength(timePickerButton);
+        fit('should check expand button focus state', () => {
+            const expandButtonLength = getElementArrayLength(activeTimePickerButton);
             for (let i = 0; i < expandButtonLength; i++) {
-                scrollIntoView(timePickerButton, i);
-                checkElementFocusState(timePickerButton, expandButtonExample + expandButtonFocusState + '-' + i, expandButton, i);
-                click(timePickerButton, i);
+                scrollIntoView(activeTimePickerButton, i);
+                checkElementFocusState(activeTimePickerButton, expandButtonExample + expandButtonFocusState + '-' + i, expandButton, i);
+                click(activeTimePickerButton, i);
             }
         });
 
-        it('should check expand button active state', () => {
-            const expandButtonLength = getElementArrayLength(timePickerButton);
+        fit('should check expand button active state', () => {
+            const expandButtonLength = getElementArrayLength(activeTimePickerButton);
             for (let i = 0; i < expandButtonLength; i++) {
-                scrollIntoView(timePickerButton, i);
-                checkElementActiveState(timePickerButton, expandButtonExample + expandButtonActiveState + '-' + i, expandButton , i);
+                scrollIntoView(activeTimePickerButton, i);
+                checkElementActiveState(activeTimePickerButton, expandButtonExample + expandButtonActiveState + '-' + i, expandButton , i);
             }
         });
 
-        it('should check input field hover state', () => {
-            const inputFieldLength = getElementArrayLength(timePickerInput);
+        fit('should check input field hover state', () => {
+            const inputFieldLength = getElementArrayLength(activeTimePickerInput);
             for (let i = 0; i < inputFieldLength; i++) {
-                scrollIntoView(timePickerInput, i);
-                checkElementHoverState(timePickerInput, inputFieldExample + inputFieldHoverState + '-' + i, inputField, i);
+                scrollIntoView(activeTimePickerInput, i);
+                checkElementHoverState(activeTimePickerInput, inputFieldExample + inputFieldHoverState + '-' + i, inputField, i);
             }
         });
 
-        it('should check input field focus state', () => {
-            const inputFieldLength = getElementArrayLength(timePickerInput);
+        fit('should check input field focus state', () => {
+            const inputFieldLength = getElementArrayLength(activeTimePickerInput);
             for (let i = 0; i < inputFieldLength; i++) {
-                scrollIntoView(timePickerInput, i);
-                checkElementFocusState(timePickerInput, inputFieldExample + inputFieldFocusState + '-' + i, inputField, i);
+                scrollIntoView(activeTimePickerInput, i);
+                checkElementFocusState(activeTimePickerInput, inputFieldExample + inputFieldFocusState + '-' + i, inputField, i);
             }
         });
 
-        it('should check input field active state', () => {
-            const inputFieldLength = getElementArrayLength(timePickerInput);
+        fit('should check input field active state', () => {
+            const inputFieldLength = getElementArrayLength(activeTimePickerInput);
             for (let i = 0; i < inputFieldLength; i++) {
-                scrollIntoView(timePickerInput, i);
-                checkElementActiveState(timePickerInput, inputFieldExample + inputFieldActiveState + '-' + i, inputField, i);
+                scrollIntoView(activeTimePickerInput, i);
+                checkElementActiveState(activeTimePickerInput, inputFieldExample + inputFieldActiveState + '-' + i, inputField, i);
             }
         });
 
-        it('should check set to null button hover state', () => {
+        fit('should check set to null button hover state', () => {
             const setToNullButtonsLength = getElementArrayLength(setToNullButton);
             for (let i = 0; i < setToNullButtonsLength; i++) {
                 scrollIntoView(setToNullButton, i);
@@ -224,7 +238,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        it('should check set to null button focus state', () => {
+        fit('should check set to null button focus state', () => {
             const setToNullButtonsLength = getElementArrayLength(setToNullButton);
             for (let i = 0; i < setToNullButtonsLength; i++) {
                 scrollIntoView(setToNullButton, i);
@@ -232,7 +246,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        it('should check set to null button active state', () => {
+        fit('should check set to null button active state', () => {
             const setToNullButtonsLength = getElementArrayLength(setToNullButton);
             for (let i = 0; i < setToNullButtonsLength; i++) {
                 scrollIntoView(setToNullButton, i);
@@ -240,7 +254,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        it('should check set valid button hover state', () => {
+        fit('should check set valid button hover state', () => {
             const setValidTimeButtonsLength = getElementArrayLength(setValidTimeButton);
             for (let i = 0; i < setValidTimeButtonsLength; i++) {
                 scrollIntoView(setValidTimeButton, i);
@@ -249,7 +263,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        it('should check set valid button focus state', () => {
+        fit('should check set valid button focus state', () => {
             const setValidTimeButtonsLength = getElementArrayLength(setValidTimeButton);
             for (let i = 0; i < setValidTimeButtonsLength; i++) {
                 scrollIntoView(setValidTimeButton, i);
@@ -258,7 +272,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        it('should check set valid button active state', () => {
+        fit('should check set valid button active state', () => {
             const setValidTimeButtonsLength = getElementArrayLength(setValidTimeButton);
             for (let i = 0; i < setValidTimeButtonsLength; i++) {
                 scrollIntoView(setValidTimeButton, i);
@@ -267,7 +281,7 @@ describe('Time picker suite', function() {
             }
         });
 
-        it('should check not valid input field for basic time picker', () => {
+        fit('should check not valid input field for basic time picker', () => {
             scrollIntoView(setToNullButton);
             click(setToNullButton);
             expect(doesItExist(errorBorder)).toBe(true);
@@ -286,7 +300,7 @@ describe('Time picker suite', function() {
             checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', {});
         });
 
-        it('should check not valid input field state for time picker with template form', () => {
+        fit('should check not valid input field state for time picker with template form', () => {
             scrollIntoView(setToNullButton);
             click(setToNullButton, 2);
             expect(doesItExist(errorBorder)).toBe(true);
@@ -294,6 +308,35 @@ describe('Time picker suite', function() {
             saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', {});
             checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', {});
         });
+
+        fit('should check disabled time picker hover state', () => {
+            const disabledTimePickersLength = getElementArrayLength(disabledTimePicker);
+            for (let i = 0; i < disabledTimePickersLength; i++) {
+                scrollIntoView(disabledTimePicker, i);
+                checkElementHoverState(disabledTimePicker, disabledTimePickerExample + disabledTimePickerHoverState + '-' + i,
+                    disabledPicker, i);
+            }
+        });
+
+        fit('should check disabled time picker focus state', () => {
+            const disabledTimePickersLength = getElementArrayLength(disabledTimePicker);
+            for (let i = 0; i < disabledTimePickersLength; i++) {
+                scrollIntoView(disabledTimePicker, i);
+                checkElementFocusState(disabledTimePicker, disabledTimePickerExample + disabledTimePickerFocusState + '-' + i,
+                    disabledPicker, i);
+            }
+        });
+
+        fit('should check disabled time picker active state', () => {
+            const disabledTimePickersLength = getElementArrayLength(disabledTimePicker);
+            for (let i = 0; i < disabledTimePickersLength; i++) {
+                scrollIntoView(disabledTimePicker, i);
+                checkElementActiveState(disabledTimePicker, disabledTimePickerExample + disabledTimePickerActiveState + '-' + i,
+                    disabledPicker, i);
+            }
+        });
+
+
 
     });
 
