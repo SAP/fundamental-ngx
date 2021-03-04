@@ -13,7 +13,7 @@ export type Size = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
 export type LablePosition = 'left' | 'right' | 'top' | 'bottom';
 export type FillingType = 'radial' | 'angled' | 'linearup' | 'lineardown' | 'linearleft';
-export type FillingDirection = 'clock' | 'anticlock';
+export type FillingDirection = 'clockwise' | 'counterclockwise';
 
 export interface Point {
     x: number;
@@ -121,7 +121,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit {
      * value to define fill direction
      */
     @Input()
-    fillDirection: FillingDirection = 'clock';
+    fillDirection: FillingDirection = 'clockwise';
 
     get _fillDirection(): FillingDirection {
         return this.fillDirection;
@@ -279,7 +279,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit {
         function _adjustIfCounterClockwise(oPoint: Point): Point {
             const oResult = Object.assign({}, oPoint);
 
-            if (that._fillDirection === 'anticlock') {
+            if (that._fillDirection === 'counterclockwise') {
                 const iXDistanceFromCentre = oPoint.x - oCentrePoint.x;
                 oResult.x = oCentrePoint.x - iXDistanceFromCentre;
             }

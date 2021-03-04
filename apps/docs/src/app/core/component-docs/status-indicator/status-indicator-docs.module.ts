@@ -16,6 +16,7 @@ import { StatusIndicatorAngeledFillingComponent } from './example/status-indicat
 import { StatusIndicatorCircularFillClockComponent } from './example/status-indicator-cirular-fill-clockwise.component';
 import { StatusIndicatorCircularFillAntiClockComponent } from './example/status-indicator-cirular-fill-anti-clockwise.component';
 import { StatusIndicatorLinearFillTypeComponent } from './example/status-indicator-linear-fill-type.component';
+import { StatusIndicatorClickableTypeComponent } from './example/status-indicator-clickable-type.component';
 
 const routes: Routes = [
     {
@@ -41,7 +42,8 @@ const routes: Routes = [
         StatusIndicatorAngeledFillingComponent,
         StatusIndicatorCircularFillClockComponent,
         StatusIndicatorCircularFillAntiClockComponent,
-        StatusIndicatorLinearFillTypeComponent
+        StatusIndicatorLinearFillTypeComponent,
+        StatusIndicatorClickableTypeComponent
     ]
 })
 export class StatusIndicatorDocsModule {}

@@ -17,6 +17,9 @@ import * as StatusIndicatorAngledFillingComponentTs from '!raw-loader!./example/
 import * as StatusIndicatorCircularFillingClockComponentTs from '!raw-loader!./example/status-indicator-cirular-fill-clockwise.component.ts';
 import * as StatusIndicatorCircularFillingAntiClockComponentTs from '!raw-loader!./example/status-indicator-cirular-fill-anti-clockwise.component.ts';
 import * as StatusIndicatorlinearFillingComponentTs from '!raw-loader!./example/status-indicator-linear-fill-type.component.ts';
+import * as StatusIndicatorClickAbleFillingComponent from '!raw-loader!./example/status-indicator-clickable-type.component.html';
+import * as StatusIndicatorClickAbleFillingComponentTs from '!raw-loader!./example/status-indicator-clickable-type.component.ts';
+
 @Component({
     selector: 'fd-status-indicator-docs',
     templateUrl: './status-indicator-docs.component.html',
@@ -124,6 +127,19 @@ export class StatusIndicatorDocsComponent {
             language: 'typescript',
             code: StatusIndicatorlinearFillingComponentTs,
             fileName: 'status-indicator-linear-fill-type',
+            component: 'StatusIndicatorlinearFillingComponent'
+        }
+    ];
+    clickAbleFillingStatusIndicatorHtmlType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: StatusIndicatorClickAbleFillingComponent,
+            fileName: 'status-indicator-clickable-type'
+        },
+        {
+            language: 'typescript',
+            code: StatusIndicatorClickAbleFillingComponentTs,
+            fileName: 'status-indicator-clickable-type',
             component: 'StatusIndicatorlinearFillingComponent'
         }
     ];

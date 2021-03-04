@@ -95,8 +95,9 @@
     Use the <code class="code-snippet">[fillingDirection]="" [fillingType]=""</code> property to set filling Color from
     a specifc point of angle.
     <code class="code-snippet">[fillingType]="'radial'"></code>
-    radial defines the filling type. <code class="code-snippet">[fillingDirection]="'clock' | 'anticlock'"></code>clock
-    represent the filling from the clock wise direction.
+    radial defines the filling type.
+    <code class="code-snippet">[fillingDirection]="'clockwise' | 'counterclockwise'"></code>clock represent the filling
+    from the clock wise direction.
 </description>
 <component-example>
     <fd-status-indicator-circular-fill-clock></fd-status-indicator-circular-fill-clock>
@@ -112,11 +113,24 @@
     a specifc point of angle.
     <code class="code-snippet">[fillingType]="'radial'"></code>
     radial defines the filling type.
-    <code class="code-snippet">[fillingDirection]="'clock' | 'anticlock'"</code>anticlock represent the filling from the
-    anti clock wise direction.
+    <code class="code-snippet">[fillingDirection]="'clockwise' | 'counterclockwise'"</code>anticlock represent the
+    filling from the anti clock wise direction.
 </description>
 <component-example>
     <fd-status-indicator-circular-fill-anti-clock></fd-status-indicator-circular-fill-anti-clock>
 </component-example>
 <code-example [exampleFiles]="circularAntiClockFillingStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="circularFillingAntiClockwise" componentName="StatusIndicator">
+    Status Indicator Clickable
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[clickable]="" </code> property is set clickable as true to make it focusable
+    from the keyboard tabbing.
+</description>
+<component-example>
+    <fd-status-indicator-linear-clickable-type></fd-status-indicator-linear-clickable-type>
+</component-example>
+<code-example [exampleFiles]="clickAbleFillingStatusIndicatorHtmlType"></code-example>
 <separator></separator>
