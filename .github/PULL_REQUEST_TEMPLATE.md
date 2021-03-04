@@ -9,6 +9,7 @@ https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md
 - [ ] tests for the changes that have been done
 - [ ] all items on the PR Review Checklist are addressed :
 https://github.com/SAP/fundamental-ngx/wiki/PR-Review-Checklist
+- [ ] Run npm run build-pack-library and test in external application
 
 Documentation checklist:
 - [ ] update `README.md`

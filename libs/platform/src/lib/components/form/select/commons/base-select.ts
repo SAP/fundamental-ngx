@@ -107,10 +107,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     @Input()
     stateMessage: string;
 
-    /** Whether the select component is disabled. */
-    @Input()
-    disabled = false;
-
     /** Whether the select component is readonly. */
     @Input()
     readonly = false;

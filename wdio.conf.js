@@ -61,6 +61,7 @@ exports.config = {
             './e2e/wdio/platform/**/panel.e2e-spec.ts',
             './e2e/wdio/platform/**/radio-button-group.e2e-spec.ts',
             './e2e/wdio/platform/**/search.e2e-spec.ts',
+            './e2e/wdio/platform/**/slider.e2e-spec.ts',
             './e2e/wdio/platform/**/split-menu-button.e2e-spec.ts',
             './e2e/wdio/platform/**/standard-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
@@ -336,10 +337,15 @@ exports.config = {
             }, this);
         }, true);
 
+        browser.addCommand('addIsActiveClass', function() {
+            browser.execute(function(domElement) {
+                domElement.classList.add('is-active');
+            }, this);
+        }, true);
+
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
     }
-
 
 //     const processedConfig = await browser.getProcessedConfig();
 //

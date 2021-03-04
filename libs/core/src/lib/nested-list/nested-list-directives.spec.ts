@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NestedListExpandIconComponent, NestedListTitleDirective, NestedListIconDirective } from './nested-list-directives';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedItemService } from './nested-item/nested-item.service';
 
 @Component({
@@ -28,7 +28,7 @@ describe('NestedListDirectives', () => {
     let titleElement: NestedListTitleDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 NestedListExpandIconComponent,

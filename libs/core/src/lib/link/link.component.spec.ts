@@ -1,5 +1,5 @@
 import { LinkComponent } from './link.component';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 
 @Component({
@@ -15,7 +15,7 @@ describe('LinkComponent', () => {
     let component: LinkComponent;
     let fixture: ComponentFixture<TestLinkComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [LinkComponent, TestLinkComponent]
         }).compileComponents();

@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { AvatarModule } from '../../../avatar/public_api';
 import { GridListModule } from '../../grid-list.module';
 import { GridListComponent, GridListSelectionMode } from './grid-list.component';
+import { ButtonModule } from '../../../button/button.module';
 
 @Component({
     selector: 'fd-test-grid-list',
@@ -108,7 +109,7 @@ describe('GridListComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent, GridListComponent],
-            imports: [GridListModule, AvatarModule]
+            imports: [GridListModule, AvatarModule, ButtonModule]
         }).compileComponents();
     });
 

@@ -62,6 +62,16 @@ export const API_FILES = {
     checkbox: ['CheckboxComponent'],
     datePicker: ['DatePickerComponent'],
     datetimePicker: ['DatetimePickerComponent'],
+    dynamicPage: [
+        'DynamicPageComponent',
+        'DynamicPageSubheaderComponent',
+        'DynamicPageHeaderComponent',
+        'DynamicPageTitleContentComponent',
+        'DynamicPageLayoutActionsComponent',
+        'DynamicPageGlobalActionsComponent',
+        'DynamicPageFooterComponent',
+        'DynamicPageContentComponent'
+    ],
     feedInput: [
         'FeedInputComponent',
         'FeedInputTextareaDirective',

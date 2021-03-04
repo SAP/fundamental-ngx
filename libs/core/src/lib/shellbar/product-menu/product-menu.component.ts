@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MenuComponent } from '../../menu/menu.component';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
-import { Placement } from 'popper.js';
-import { PopoverFillMode } from '../../popover/popover-position/popover-position';
+import { Placement, PopoverFillMode } from '../../popover/popover-position/popover-position';
 
 /**
  * The component that represents a product menu.

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ShellbarActionsComponent } from './shellbar-actions.component';
 
@@ -14,7 +14,7 @@ describe('ShellbarActionsComponent', () => {
     let component: ShellbarActionsComponent;
     let fixture: ComponentFixture<ShellbarActionsComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ShellbarActionsComponent, ShellbarActionsMobileComponent, ShellbarUserMenuComponent],
             imports: [MenuModule, PopoverModule, ButtonModule, IconModule, ProductSwitchModule],

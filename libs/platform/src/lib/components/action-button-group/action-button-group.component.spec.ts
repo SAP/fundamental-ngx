@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActionButtonGroupComponent } from './action-button-group.component';
 import { Component, ViewChild } from '@angular/core';
@@ -26,7 +26,7 @@ describe('ActionButtonGroupComponent', () => {
     let fixture: ComponentFixture<ActionButtonGroupTestComponent>;
     let actionbuttongroup: ActionButtonGroupComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
             imports: [ActionBarModule]

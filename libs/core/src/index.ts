@@ -13,6 +13,7 @@ export * from './lib/checkbox/public_api';
 export * from './lib/combobox/public_api';
 export * from './lib/date-picker/public_api';
 export * from './lib/datetime-picker/public_api';
+export * from './lib/dynamic-page/public_api';
 export * from './lib/file-uploader/public_api';
 export * from './lib/fixed-card-layout/public_api';
 export * from './lib/flexible-column-layout/public_api';

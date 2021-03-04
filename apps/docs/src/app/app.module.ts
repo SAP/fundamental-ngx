@@ -24,7 +24,7 @@ const routes: Routes = [
     imports: [
         BrowserAnimationsModule,
         HttpClientModule,
-        RouterModule.forRoot(routes, { useHash: true }),
+        RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
         MarkdownModule.forRoot({ loader: HttpClient })
     ],
     bootstrap: [AppComponent]

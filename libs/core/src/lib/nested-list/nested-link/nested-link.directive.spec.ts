@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NestedLinkDirective } from './nested-link.directive';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListModule } from '../nested-list.module';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemService } from '../nested-item/nested-item.service';
@@ -23,7 +23,7 @@ describe('NestedLinkDirective', () => {
     let directiveElement: NestedLinkDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [NestedListModule],
             declarations: [TestNestedContainerComponent],

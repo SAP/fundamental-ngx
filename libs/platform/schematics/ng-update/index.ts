@@ -12,7 +12,7 @@ import {
  * ng update schematic that will overwrite existing lib translations
  * or add new ones to the host app's translation files
  * Most apps that have an older version of platform lib will not do `ng add` to get the translations, this should
- * ideally be coming from `ng update`. Therefore we mostly do the same thiings as `ng add` except that we overwrite any
+ * ideally be coming from `ng update`. Therefore we mostly do the same things as `ng add` except that we overwrite any
  * existing trans units coming from the lib
  * @param _options options passed for this schematic
  */
@@ -26,8 +26,9 @@ export function ngUpdate(_options: any): Rule {
  * adds/updates translations, including existing ones, to host application's translation files
  * @param options options passed for this schematic
  */
-function readTranslationFiles(options: any): Rule {
-    return (tree: Tree, context: SchematicContext) => {
+function readTranslationFiles(options: any): any {
+    return async (tree: Tree, context: SchematicContext) => {
+      const readFilePromise = new Promise<Tree>((resolve, reject) => {
         if (options.translations) {
             try {
                 const angularJsonFile = tree.read('angular.json');
@@ -50,7 +51,7 @@ function readTranslationFiles(options: any): Rule {
                             availableLanguages++;
                         }
                     });
-                    languages.forEach((language) => {
+                    languages.forEach(async (language) => {
                         if (availableLanguages === 0 || languages.length > availableLanguages) {
                             if (!projectObject.architect.build.configurations[language]) {
                                 context.logger.info(
@@ -60,25 +61,29 @@ function readTranslationFiles(options: any): Rule {
                                         project
                                 );
                                 // not present, add the language settings to serve and build configurations in angular.json
-                                writeToAngularConfig(tree, options, angularJsonFileObject, language);
+                                await writeToAngularConfig(tree, options, angularJsonFileObject, language);
                                 // create the extraction .xlf files from the platform lib and place in host app's locale folder
-                                createExtractionFiles(tree, options, language);
+                                await createExtractionFiles(tree, options, language);
                             }
                         } else {
                             const languageObject = projectObject.architect.build.configurations[language].i18nFile;
                             const hostAppXlfContent = tree.read(languageObject.toString());
                             if (hostAppXlfContent) {
                                 // merge the extraction .xlf files from the platform lib into the host app's files
-                                updateExtractionFiles(tree, options, hostAppXlfContent, language);
+                                await updateExtractionFiles(tree, options, hostAppXlfContent, language);
                             }
                         }
+                        resolve(tree);
                     });
                 }
             } catch (e) {
                 context.logger.log('info', e + '\n🚫 Failed to add translations correctly.');
+                reject('failed');
             }
         }
-        return tree;
+      });
+      tree = await readFilePromise;
+      return tree;
     };
 }
 
@@ -90,8 +95,8 @@ function readTranslationFiles(options: any): Rule {
  * @param fileContent the host applications language .xlf file
  * @param language the language for which translations from lib will be applied to
  */
-function updateExtractionFiles(tree: Tree, options: any, fileContent: any, language: string): void {
-    const srcPath = getSourceTreePath(tree, options);
+async function updateExtractionFiles(tree: Tree, options: any, fileContent: any, language: string): Promise<void> {
+    const srcPath = await getSourceTreePath(tree, options);
     const libXlfFileContent = tree.read(
         'node_modules/@fundamental-ngx/platform/schematics/locale/' + language + '/messages.' + language + '.xlf'
     );
