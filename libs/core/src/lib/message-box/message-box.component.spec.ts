@@ -97,7 +97,9 @@ describe('MessageBoxComponent', () => {
     });
 
     it('should close after backdrop clicked', () => {
-        setup();
+        const customDialogConfig = { ...new MessageBoxConfig(), backdropClickCloseable: true };
+
+        setup([{ token: MessageBoxConfig, provider: { useValue: customDialogConfig } }]);
 
         const dismissSpy = spyOn(messageBoxRef, 'dismiss');
         fixture.detectChanges();
