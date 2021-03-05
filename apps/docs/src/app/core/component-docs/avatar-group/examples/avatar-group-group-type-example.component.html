@@ -1,31 +1,29 @@
 <fd-avatar-group #avatarGroup_GroupType type="group" [size]="size">
     <fd-popover [noArrow]="false" placement="bottom">
         <fd-popover-control>
-            <ng-container *ngFor="let person of people">
-                <div fd-avatar-group-item>
-                    <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
-                               [label]="person.firstName + ' ' + person.lastName"
-                               [circle]="true"
-                               [border]="true"
-                               [size]="size"></fd-avatar>
+            <div *ngFor="let person of people" fd-avatar-group-item>
+                <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                           [label]="person.firstName + ' ' + person.lastName"
+                           [circle]="true"
+                           [border]="true"
+                           [size]="size"></fd-avatar>
 
-                    <fd-avatar *ngIf="person.imageUrl" [circle]="true"
-                               [border]="true"
-                               [size]="size"
-                               [image]="person.imageUrl"></fd-avatar>
+                <fd-avatar *ngIf="person.imageUrl" [circle]="true"
+                           [border]="true"
+                           [size]="size"
+                           [image]="person.imageUrl"></fd-avatar>
 
-                    <fd-avatar *ngIf="person.glyph" [circle]="true"
-                               [border]="true"
-                               [size]="size"
-                               [glyph]="person.glyph"></fd-avatar>
-                </div>
-            </ng-container>
-            <button *ngIf="(avatarGroup_GroupType.overflowItemsCount$ | async) > 0"
+                <fd-avatar *ngIf="person.glyph" [circle]="true"
+                           [border]="true"
+                           [size]="size"
+                           [glyph]="person.glyph"></fd-avatar>
+            </div>
+            <button *ngIf="(avatarGroup_GroupType.overflowItemsCount) > 0"
                     fd-button
                     fd-avatar-group-overflow-button
                     [size]="size">
                 <bdi fd-avatar-group-overflow-button-text>
-                    +{{ avatarGroup_GroupType.overflowItemsCount$ | async }}
+                    +{{ avatarGroup_GroupType.overflowItemsCount }}
                 </bdi>
             </button>
         </fd-popover-control>
@@ -39,7 +37,7 @@
                                            glyph="navigation-left-arrow"
                                            fdType="standard"></fd-button-bar>
                             <fd-bar-element>
-                                Team Members ({{ avatarGroup_GroupType.allItemsCount$ | async }})
+                                Team Members ({{ avatarGroup_GroupType.allItemsCount }})
                             </fd-bar-element>
                         </div>
                     </div>

@@ -1,9 +1,3 @@
-import {
-    AvatarGroupItemDirective,
-    AvatarGroupOverflowBodyDirective, AvatarGroupOverflowButtonDirective, AvatarGroupOverflowButtonTextDirective,
-    AvatarGroupOverflowItemDirective
-} from '@fundamental-ngx/core';
-
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.

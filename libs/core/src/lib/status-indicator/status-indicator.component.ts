@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
-export type Size = 'sm' | 'md' | 'lg' | 'xl';
+export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
 export type LablePosition = 'left' | 'right' | 'top' | 'bottom';
 export type FillingType = 'radial' | 'angled' | 'linearup' | 'lineardown' | 'linearleft';
@@ -51,7 +51,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
      * Default size is Medium(md).
      */
     @Input()
-    size: Size = 'md';
+    size: StatusIndicatorSize = 'md';
 
     /**
      * The status represented by the Status Indicator.

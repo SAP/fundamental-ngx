@@ -1,51 +1,67 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AvatarModule } from './avatar.module';
-import { AvatarComponent } from './avatar.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+
+import { Size } from '../utils/public_api';
+import { AvatarGroupModule } from './avatar-group.module';
+import { AvatarGroupComponent, AvatarGroupType } from './avatar-group.component';
+
+const NUMBER_OF_ITEMS = 20;
 
 @Component({
-    selector: 'fd-test-object-status',
-    template:  `<fd-avatar
-                    [size]="size"
-                    [glyph]="glyph"
-                    [circle]="circle"
-                    [transparent]="transparent"
-                    [placeholder]="placeholder"
-                    [tile]="tile"
-                    [colorAccent]="colorAccent"
-                    [zoomGlyph]="zoomGlyph"
-                    [border]="border"
-                    [label]="label">
-                </fd-avatar>`
+    template: `
+        <fd-avatar-group #avatarGroup [type]="type" [size]="size">
+            <div>
+                <div *ngFor="let item of items" fd-avatar-group-item>
+                    <fd-avatar [circle]="true" [border]="true" [size]="size" [label]="item"></fd-avatar>
+                </div>
+            </div>
+
+            <fd-popover [noArrow]="false" placement="bottom">
+                <fd-popover-control>
+                    <button *ngIf="avatarGroup.overflowItemsCount > 0"
+                            fd-button
+                            fd-avatar-group-overflow-button
+                            [size]="size">
+                        <bdi fd-avatar-group-overflow-button-text>
+                            +{{ avatarGroup.overflowItemsCount }}
+                        </bdi>
+                    </button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <div class="fd-popover__wrapper">
+                        <div fd-avatar-group-overflow-body>
+                            <div *ngFor="let item of items; let idx = index;" fd-avatar-group-overflow-item>
+                                <fd-avatar [circle]="true" [border]="true" size="s" [label]="item"></fd-avatar>
+                            </div>
+                        </div>
+                    </div>
+                </fd-popover-body>
+            </fd-popover>
+        </fd-avatar-group>
+    `
 })
-class TestComponent {
-    size: 'xs' |'s' | 'm' | 'l' | 'xl' = 'm';
-    glyph: string = null;
-    circle = false;
-    transparent = false;
-    placeholder = false;
-    tile = false;
-    colorAccent: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = null;
-    zoomGlyph: string = null;
-    border = false;
-    label: string = null;
+class AvatarGroupTestComponent {
+    @ViewChild('avatarGroup') avatarGroup: AvatarGroupComponent;
+    items = Array.from(Array(NUMBER_OF_ITEMS).keys());
+    type: AvatarGroupType = 'group';
+    size: Size = 's';
 }
+describe('AvatarGroupComponent', () => {
+    let component: AvatarGroupTestComponent;
+    let fixture: ComponentFixture<AvatarGroupTestComponent>;
 
-describe('AvatarComponent', () => {
-    let component: TestComponent;
-    let fixture: ComponentFixture<TestComponent>;
-
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, AvatarComponent],
-            imports: [AvatarModule]
-        }).overrideComponent(AvatarComponent, {
-            set: {changeDetection: ChangeDetectionStrategy.Default}
+            declarations: [AvatarGroupTestComponent, AvatarGroupComponent],
+            imports: [AvatarGroupModule],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).overrideComponent(AvatarGroupComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestComponent);
+        fixture = TestBed.createComponent(AvatarGroupTestComponent);
         component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
     });
@@ -54,91 +70,50 @@ describe('AvatarComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Change Size', () => {
-        expect(fixture.nativeElement.querySelector('.fd-avatar--m')).toBeTruthy();
+    it('should assign type class', () => {
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--group-type');
+
+        component.type = 'individual';
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--individual-type');
+    });
+
+    it('should assign size class', () => {
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--s');
 
         component.size = 'xs';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--xs')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--xs');
 
-        component.size = 's';
+        component.size = 'm';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--s')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--m');
 
         component.size = 'l';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--l')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--l');
 
         component.size = 'xl';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--xl')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--xl');
     });
 
-    it('Should Add Glyph', () => {
-        component.glyph = 'group';
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.sap-icon--group')).toBeTruthy();
-    });
+    // TODO: figure out why the avatar components have no width
+    xit('should hide part of items and display overflow button', () => {
+        spyOnProperty(component.avatarGroup.avatarGroupContainer.nativeElement, 'offsetWidth').and.returnValue(500);
+        const resetSpy = spyOn(<any>component.avatarGroup, '_reset').and.callThrough();
+        const collapseSpy = spyOn(<any>component.avatarGroup, '_collapseItems').and.callThrough();
 
-    it('Should Add Circle Design', () => {
-        component.circle = true;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--circle')).toBeTruthy();
-    });
+        (<any>component.avatarGroup)._onResize();
 
-    it('Should Add Transparent Background', () => {
-        component.transparent = true;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--transparent')).toBeTruthy();
-    });
-
-    it('Should Add Placeholder Background', () => {
-        component.placeholder = true;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--placeholder')).toBeTruthy();
-    });
-
-    it('Should Add Tile Background', () => {
-        component.tile = true;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--tile')).toBeTruthy();
-    });
-
-    it('Should Add Accent Color', () => {
-        component.colorAccent = 1;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-1')).toBeTruthy();
-
-        component.colorAccent = 5;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-5')).toBeTruthy();
-
-        component.colorAccent = 10;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-10')).toBeTruthy();
-    });
-
-    it('Should Add Border', () => {
-        component.border = true;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar--border')).toBeTruthy();
-    });
-
-    it('Should Add Zoom Icon', () => {
-        component.zoomGlyph = 'edit';
-        fixture.detectChanges();
-        const zoomElement = fixture.debugElement.nativeElement;
-        expect(zoomElement.querySelector('.fd-avatar__zoom-icon')).toBeTruthy();
-        expect(zoomElement.querySelector('.sap-icon--edit')).toBeTruthy();
-    });
-
-    it('Should Add Abbreviate', () => {
-        component.label = 'Jane Doe';
-        fixture.detectChanges();
-        expect(fixture.debugElement.nativeElement.innerText).toEqual('JD');
-
-        component.label = 'Marjolein van Veen';
-        fixture.detectChanges();
-        expect(fixture.debugElement.nativeElement.innerText).toEqual('MvV');
+        expect(resetSpy).toHaveBeenCalled();
+        expect(collapseSpy).toHaveBeenCalled();
+        expect(component.avatarGroup.mainItems.first.elementRef.nativeElement.offsetWidth).toBeGreaterThan(0);
+        expect(component.avatarGroup.allItemsCount).toEqual(NUMBER_OF_ITEMS);
+        expect(component.avatarGroup.visibleItemsCount).toBeGreaterThan(0);
+        expect(component.avatarGroup.visibleItemsCount).toBeLessThan(NUMBER_OF_ITEMS);
+        expect(component.avatarGroup.overflowItemsCount).toBeGreaterThan(0);
+        expect(component.avatarGroup.overflowItemsCount).toBeLessThan(NUMBER_OF_ITEMS);
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group__more-button')).toBeTruthy();
     });
 });

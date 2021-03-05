@@ -8,7 +8,7 @@ import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
     selector: '[fd-avatar-group-overflow-button]'
 })
 export class AvatarGroupOverflowButtonDirective implements OnInit, OnChanges, CssClassBuilder {
-    /** Apply user custom styles */
+    /** User's custom classes. */
     @Input()
     class: string;
 

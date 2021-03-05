@@ -26,7 +26,7 @@ const routes: Routes = [
         component: AvatarGroupHeaderComponent,
         children: [
             { path: '', component: AvatarGroupDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.avatar } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.avatarGroup } }
         ]
     }
 ];

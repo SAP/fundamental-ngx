@@ -2,7 +2,6 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
     ContentChildren,
     ElementRef,
     forwardRef,
@@ -16,13 +15,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { BehaviorSubject, fromEvent, of, Subscription } from 'rxjs';
+import { fromEvent, of, Subscription } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged } from 'rxjs/operators';
 
 import { ColorAccent, Size } from '../utils/public_api';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
-import { AvatarGroupOverflowItemDirective } from './directives/avatar-group-overflow-item.directive';
-import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-overflow-button.directive';
 
 export type AvatarGroupType = 'group' | 'individual';
 export type AvatarGroupOverflowButtonColor = 'neutral' | 'random' | ColorAccent;
@@ -30,7 +27,6 @@ export type AvatarGroupOverflowButtonColor = 'neutral' | 'random' | ColorAccent;
 let avatarGroupUniqueId = 0;
 
 @Component({
-    // tslint:disable-next-line:component-selector
     selector: 'fd-avatar-group',
     templateUrl: './avatar-group.component.html',
     styleUrls: ['./avatar-group.component.scss'],
@@ -56,25 +52,17 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     ariaLabel: string = null;
 
     /** Counter for all avatars. */
-    allItemsCount$ = new BehaviorSubject(0);
+    allItemsCount = 0;
 
     /** Counter for visible in main content avatars. */
-    visibleItemsCount$ = new BehaviorSubject(0);
+    visibleItemsCount = 0;
 
     /** Counter for visible in overflow popover avatars. */
-    overflowItemsCount$ = new BehaviorSubject(0);
+    overflowItemsCount = 0;
 
     /** @hidden Avatar Group items. */
     @ContentChildren(forwardRef(() => AvatarGroupItemDirective), { descendants: true })
     mainItems: QueryList<AvatarGroupItemDirective>;
-
-    /** @hidden Avatar Group items. */
-    @ContentChildren(forwardRef(() => AvatarGroupOverflowItemDirective), { descendants: true })
-    overflowItems: QueryList<AvatarGroupOverflowItemDirective>;
-
-    /** @hidden Avatar Group overflow button. */
-    @ContentChild(forwardRef(() => AvatarGroupOverflowButtonDirective))
-    overflowButton: QueryList<AvatarGroupOverflowButtonDirective>;
 
     /** @hidden */
     @ViewChild('avatarGroupContainer')
@@ -112,7 +100,7 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     /** @hidden */
     ngOnInit(): void {
         const sub = fromEvent(window, 'resize')
-            .pipe(debounceTime(25), distinctUntilChanged())
+            .pipe(distinctUntilChanged())
             .subscribe(_ => this._onResize());
 
         this._subscription.add(sub);
@@ -142,19 +130,16 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** @hidden */
     private _reset(): void {
-        this.allItemsCount$.next(this.mainItems.length);
-        this.visibleItemsCount$.next(this.mainItems.length);
-        this.overflowItemsCount$.next(0);
+        this.allItemsCount = this.mainItems.length;
+        this.visibleItemsCount = this.mainItems.length;
+        this.overflowItemsCount = 0;
 
         this.mainItems.forEach(it => (it.elementRef.nativeElement.style.display = 'inline-block'));
-        this.overflowItems.forEach(it => (it.elementRef.nativeElement.style.display = 'inline-block'));
     }
 
     /** @hidden */
     private _collapseItems(): void {
         const allItemsCounter = this.mainItems?.length || 0;
-        this.allItemsCount$.next(allItemsCounter);
-
         let contentWidth = 0;
         let idx = 0;
 
@@ -167,14 +152,11 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
                 // -1 because the last element in the loop will be replaced by the overflow button
                 const newIdx = idx - 1;
 
-                this.visibleItemsCount$.next(newIdx);
-                this.overflowItemsCount$.next(allItemsCounter - newIdx);
+                this.visibleItemsCount = newIdx;
+                this.overflowItemsCount = allItemsCounter - newIdx;
 
                 const mainItemsToHide = this.mainItems.toArray().slice(newIdx);
-                const overflowItemsToHide = this.isGroupType || newIdx === -1 ? [] : this.overflowItems.toArray().slice(0, newIdx);
-
                 mainItemsToHide.forEach(it => (it.elementRef.nativeElement.style.display = 'none'));
-                overflowItemsToHide.forEach(it => (it.elementRef.nativeElement.style.display = 'none'));
 
                 break;
             }

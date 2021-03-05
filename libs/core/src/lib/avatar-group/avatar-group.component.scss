@@ -3,7 +3,7 @@
 // TODO: remove after release styles with Avatar Group
 
 /*!
- * Fundamental Library Styles v0.17.0-rc.2
+ * Fundamental Library Styles v0.17.0-rc.12
  * Copyright (c) 2021 SAP SE or an SAP affiliate company.
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
  */
@@ -441,8 +441,6 @@
     font-size: var(--sapFontSize,.875rem);
     line-height: 1.4;
     line-height: var(--sapContent_LineHeight,1.4);
-    color: #32363a;
-    color: var(--sapTextColor,#32363a);
     font-family: "72", "72full", Arial, Helvetica, sans-serif;
     font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
     font-weight: 400;
@@ -450,7 +448,12 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+
+    /* TODO: resolve issue with text color and border width
+    color: #32363a;
+    color: var(--sapTextColor,#32363a);
     border: 0
+    */
 }
 .fd-avatar-group__more-button::after,
 .fd-avatar-group__more-button::before {
