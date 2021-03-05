@@ -16,9 +16,10 @@ import {
     EntityResourceMetaOptions,
     EntityMetaOptions
 } from '../../utils/entity-options.service';
-import { Entity } from './interfaces';
+import { BaseEntity } from './interfaces';
+import { DefaultQueryAdapter, QueryAdapter, DefaultQueryAdapterService, QueryAdapterService } from '../../query/query-adapter';
 
-class Hero extends Entity {
+class Hero extends BaseEntity {
     id!: number;
     name!: string;
     version?: number;
@@ -36,15 +37,28 @@ class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
     getEntityResourceMetadata = () => null;
 }
 
+class QueryAdapterServiceMock implements QueryAdapterService {
+    getAdapter<K>(entity: string): QueryAdapter<K> {
+        return null;
+    }
+    registerAdapter<K>(): void {
+        //
+    }
+}
+
 describe('EntityRestServerServiceFactory', () => {
     let http: any;
     let httpUrlGenerator: HttpUrlGenerator;
     let entityMetaOptionsService: EntityMetaOptionsService;
+    let queryAdapterService: QueryAdapterService;
+
 
     beforeEach(() => {
         httpUrlGenerator = new DefaultHttpUrlGenerator(new MockPluralizer());
 
         entityMetaOptionsService = new EmptyEntityMetaOptionsService();
+
+        queryAdapterService = new QueryAdapterServiceMock();
 
         spyOn(entityMetaOptionsService, 'getEntityResourceMetadata').and.callFake(
             (entityName: any): EntityResourceMetaOptions => {
@@ -91,6 +105,7 @@ describe('EntityRestServerServiceFactory', () => {
             const factory = new EntityRestServerServiceFactory(
                 http,
                 httpUrlGenerator,
+                queryAdapter,
                 entityMetaOptionsService,
                 config
             );
@@ -170,7 +185,7 @@ describe('EntityRestServerService', () => {
 
         beforeEach(() => {
             // use test wrapper class to get to protected properties
-            service = new HeroRestServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService);
+            service = new HeroRestServerService('Hero', httpClient, httpUrlGenerator, null, entityMetaOptionsService);
         });
 
         it('has expected name', () => {

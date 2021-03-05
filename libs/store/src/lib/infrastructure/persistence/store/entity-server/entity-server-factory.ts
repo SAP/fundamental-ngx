@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Entity, EntityServerService, EntityServerServiceFactory } from './interfaces';
+import { BaseEntity, EntityServerService, EntityServerServiceFactory } from './interfaces';
 import { EntityServerServiceFactoryResolver } from './entity-server-service-resolver';
 
 /**
@@ -16,7 +16,7 @@ export class DefaultEntityServerServiceFactory implements EntityServerServiceFac
      * Create EntityServerService for the given entity type
      * @param entityName {string} Name of the entity type for this data service
      */
-    create<T extends Entity>(entityName: string): EntityServerService<T> {
+    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
         const entityServerFactory = this.entityServerServiceFactoryResolver.resolve(entityName);
         return entityServerFactory.create<T>(entityName);
     }

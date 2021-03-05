@@ -41,7 +41,6 @@ class LineItem {
 
 // URI with endpoints for different actions
 @RESTResource({
-    root: 'http://www.example.com/v1/',
     path: {
         default: 'requisitioning',
         add: '/cart',
@@ -55,6 +54,8 @@ class LineItem {
 })
 export class Requisition extends BaseEntity {
     id: string;
+    title: string;
+    totalAmount: number;
 }
 
 // Set the default URL root for all entities registered

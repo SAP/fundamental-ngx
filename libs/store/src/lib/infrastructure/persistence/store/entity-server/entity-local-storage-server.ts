@@ -3,14 +3,14 @@ import { DefaultDataServiceConfig } from '@ngrx/data';
 
 import { EntityMetaOptionsService } from '../../utils/entity-options.service';
 import { EntityLocalServerBaseService } from './entity-local-server-base';
-import { Entity, EntityServerService, EntityServerServiceFactory, EntityStorageService } from './interfaces';
+import { BaseEntity, EntityServerService, EntityServerServiceFactory, EntityStorageService } from './interfaces';
 
 /**
  * Entity LocalStorage Server
  *
  * Persist entity collection in memory (mimic API responses)
  */
-export class EntityLocalStorageServerService<T extends Entity> extends EntityLocalServerBaseService<T> {
+export class EntityLocalStorageServerService<T extends BaseEntity> extends EntityLocalServerBaseService<T> {
     get name(): string {
         return `${this.entityName} EntityLocalStorageServerService`;
     }
@@ -32,7 +32,7 @@ export class EntityLocalStorageServerServiceFactory implements EntityServerServi
      * Create EntityServerService for the given entity type
      * @param entityName {string} Name of the entity type for this data service
      */
-    create<T extends Entity>(entityName: string): EntityServerService<T> {
+    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
         return new EntityLocalStorageServerService<T>(
             entityName,
             new LocalStorageService(this.getEntityStorageKey(entityName)),
@@ -49,7 +49,7 @@ export class EntityLocalStorageServerServiceFactory implements EntityServerServi
 /**
  * Local Storage Service
  */
-export class LocalStorageService<TModel extends Entity> implements EntityStorageService<TModel> {
+export class LocalStorageService<TModel extends BaseEntity> implements EntityStorageService<TModel> {
     private key: string;
 
     constructor(entityKey: string, private storage: Storage = localStorage) {

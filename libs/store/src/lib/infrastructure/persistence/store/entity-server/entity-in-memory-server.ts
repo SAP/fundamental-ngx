@@ -3,7 +3,7 @@ import { DefaultDataServiceConfig } from '@ngrx/data';
 
 import { EntityMetaOptionsService } from '../../utils/entity-options.service';
 import { EntityLocalServerBaseService } from './entity-local-server-base';
-import { EntityStorageService, EntityServerServiceFactory, EntityServerService, Entity } from './interfaces';
+import { EntityStorageService, EntityServerServiceFactory, EntityServerService, BaseEntity } from './interfaces';
 
 /**
  * Entity In Memory Server
@@ -11,7 +11,7 @@ import { EntityStorageService, EntityServerServiceFactory, EntityServerService, 
  * Persist entity collection in memory (mimic API responses)
  *
  */
-export class EntityInMemoryServerService<T extends Entity> extends EntityLocalServerBaseService<T> {
+export class EntityInMemoryServerService<T extends BaseEntity> extends EntityLocalServerBaseService<T> {
     get name(): string {
         return `${this.entityName} EntityInMemoryServerService`;
     }
@@ -33,7 +33,7 @@ export class EntityInMemoryServerServiceFactory implements EntityServerServiceFa
      * Create EntityServerService for the given entity type
      * @param entityName {string} Name of the entity type for this data service
      */
-    create<T extends Entity>(entityName: string): EntityServerService<T> {
+    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
         return new EntityInMemoryServerService<T>(
             entityName,
             new ImMemoryStorageService(),
@@ -46,7 +46,7 @@ export class EntityInMemoryServerServiceFactory implements EntityServerServiceFa
 /**
  * Im Memory Storage Service
  */
-export class ImMemoryStorageService<TModel extends Entity> implements EntityStorageService<TModel> {
+export class ImMemoryStorageService<TModel extends BaseEntity> implements EntityStorageService<TModel> {
     private collection: TModel[] = [];
 
     getAll(): Promise<TModel[]> {

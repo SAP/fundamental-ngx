@@ -7,13 +7,13 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { EntityMetaOptionsService, EntityMetaOptions } from '../../utils/entity-options.service';
 import { RequestData } from './entity-rest-server';
-import { EntityStorageService, EntityServerService, Entity, IdentityKey } from './interfaces';
+import { EntityStorageService, EntityServerService, BaseEntity, IdentityKey } from './interfaces';
 
 /**
  * The Base for Entity Local Sever Service
  *
  */
-export abstract class EntityLocalServerBaseService<T extends Entity> implements EntityServerService<T> {
+export abstract class EntityLocalServerBaseService<T extends BaseEntity> implements EntityServerService<T> {
     protected _name: string;
     protected delete404OK: boolean;
     protected getDelay = 0;

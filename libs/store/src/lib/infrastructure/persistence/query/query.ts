@@ -1,24 +1,28 @@
-import {
-    Observable
-} from 'rxjs';
-import {
-    QueryParams
-} from '@ngrx/data';
+import { Observable } from 'rxjs';
 
 import { Predicate } from './grammar/predicate';
-import { QueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
 
-export interface OrderBy <TModel> {
+export interface OrderBy<TModel> {
     field: keyof TModel;
     order?: 'ASCENDING' | 'DESCENDING';
+}
+
+export interface QuerySnapshot<T> {
+    keyword: string;
+    predicate: Predicate<T>;
+    skip: number;
+    top: number;
+    orderby: Array<OrderBy<T>>;
+    includeCount: boolean;
+    select: Array<keyof T>;
+    expand: Array<keyof T>;
 }
 
 /**
  * @todo We may need a method for end-users to add custom query parameters.
  */
 export class Query<TModel> {
-
     /** @hidden - stores current keyword */
     _keyword: string;
 
@@ -46,10 +50,7 @@ export class Query<TModel> {
     /** @hidden - stores current expand properties */
     _expand: Array<keyof TModel>;
 
-    constructor(
-        private service: QueryService<TModel>,
-        private adapter: QueryAdapter<TModel>
-    ) {}
+    constructor(private service: QueryService<TModel>) {}
 
     /**
      * Replace current filter settings.
@@ -122,7 +123,7 @@ export class Query<TModel> {
      * the enitity properties included in the return data.
      * @param select List of properties to include in response data
      */
-    select<TP extends keyof TModel> (...select: Array<TP> ): this {
+    select<TP extends keyof TModel>(...select: Array<TP>): this {
         this._select = select;
         return this;
     }
@@ -132,7 +133,7 @@ export class Query<TModel> {
      * to include relational data.
      * @param extend List of expanded properties to include in response data
      */
-    expand<TP extends keyof TModel> (...expand: Array<TP> ): this {
+    expand<TP extends keyof TModel>(...expand: Array<TP>): this {
         this._expand = expand;
         return this;
     }
@@ -146,9 +147,7 @@ export class Query<TModel> {
         }
         this._suppressPageReset = false;
 
-        const params = this._createQueryParams();
-        const query = this.adapter.createQueryString(params);
-        return this.service.getWithQuery(query);
+        return this.service.getWithQuery(this._createSnapshot());
     }
 
     /**
@@ -165,7 +164,7 @@ export class Query<TModel> {
      * Get previous page of collection.
      */
     previous(): void {
-        this._top = (this._top > this._skip) ? this._top - this._skip : 0;
+        this._top = this._top > this._skip ? this._top - this._skip : 0;
         this._suppressPageReset = true;
         this.fetch();
     }
@@ -180,59 +179,18 @@ export class Query<TModel> {
     }
 
     /**
-     * Create QueryParams from current Query properties.
-     * @hidden
+     * Create current query state snapshot
      */
-    private _createQueryParams(): QueryParams {
-        let params: QueryParams = {};
-        if (this._keyword) {
-            params = {
-                ...params,
-                search: this._keyword
-            };
-        }
-        if (this._predicate) {
-            params = {
-                ...params,
-                filter: this.adapter.parsePredicate(this._predicate)
-            };
-        }
-        if (this._skip) {
-            params = {
-                ...params,
-                skip: this._skip.toString()
-            };
-        }
-        if (this._skip && this._top !== undefined) {
-            params = {
-                ...params,
-                top: this._top.toString()
-            };
-        }
-        if (this._orderByFields) {
-            params = {
-                ...params,
-                orderby: this.adapter.parseOrderBys(this._orderByFields)
-            };
-        }
-        if (this._includeCount) {
-            params = {
-                ...params,
-                count: 'true'
-            };
-        }
-        if (this._select) {
-            params = {
-                ...params,
-                select: this.adapter.parseSelect(this._select)
-            };
-        }
-        if (this._expand) {
-            params = {
-                ...params,
-                expand: this.adapter.parseExpand(this._expand)
-            };
-        }
-        return params;
+    private _createSnapshot(): Readonly<QuerySnapshot<TModel>> {
+        return {
+            keyword: this._keyword,
+            predicate: this._predicate,
+            skip: this._skip,
+            top: this._top,
+            orderby: this._orderByFields,
+            includeCount: this._includeCount,
+            select: this._select,
+            expand: this._expand
+        };
     }
 }

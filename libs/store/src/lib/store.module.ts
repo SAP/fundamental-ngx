@@ -22,7 +22,7 @@ import {
     EntityInMemoryServerServiceFactory,
     EntityLocalStorageServerServiceFactory
 } from './infrastructure/persistence/store';
-import { QueryAdapterFactory } from './infrastructure/persistence/query/query-adapter';
+import { QueryAdapterFactory, DefaultQueryAdapterService } from './infrastructure/persistence/query/query-adapter';
 import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
 
 function mapFundamentalConfigToNgrxConfig(conf: FundamentalStoreConfig): EntityDataModuleConfig {
@@ -79,6 +79,7 @@ export class FundamentalStoreModule {
             { provide: EntityStoreBuilderFactory, useClass: DefaultEntityStoreBuilderFactory },
 
             QueryAdapterFactory,
+            DefaultQueryAdapterService,
 
             EntityServerServiceFactoryResolver,
             EntityRestServerServiceFactory,

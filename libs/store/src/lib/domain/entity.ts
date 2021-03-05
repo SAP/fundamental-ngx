@@ -1,6 +1,6 @@
 export type IdentityKey = string | number;
 
-export abstract class Entity {
+export abstract class BaseEntity {
     id: IdentityKey;
 }
 

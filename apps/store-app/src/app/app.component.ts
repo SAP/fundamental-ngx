@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Requisition } from './store.config';
-
-import { EntityStore, EntityStoreBuilderFactory } from '@fundamental-ngx/store';
 import { Observable } from 'rxjs';
+
+import { and, EntityStore, EntityStoreBuilderFactory, eq, gt } from '@fundamental-ngx/store';
+
+import { Requisition } from './store.config';
 
 @Component({
     selector: 'fundamental-ngx-root',
@@ -13,10 +14,23 @@ export class AppComponent {
     requisitionStore: EntityStore<Requisition>;
     requisition: Observable<Requisition>;
 
-    constructor(esFactory: EntityStoreBuilderFactory) {
-        const builder = esFactory.create(Requisition);
+    constructor(esBuilderFactory: EntityStoreBuilderFactory) {
+        const builder = esBuilderFactory.create(Requisition);
         this.requisitionStore = builder.create();
 
-        this.requisition = this.requisitionStore.get('requisition_id');
+        const queryAll = this.requisitionStore.queryBuilder
+            .where(and(eq('title', 'Last Req'), gt('totalAmount', 50)))
+            .build();
+
+        queryAll.fetch().subscribe(
+            (result) => {
+                console.log(result);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+        
+        //this.requisition = this.requisitionStore.get('requisition_id');
     }
 }

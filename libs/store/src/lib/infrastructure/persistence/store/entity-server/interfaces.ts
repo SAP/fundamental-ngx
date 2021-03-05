@@ -1,15 +1,15 @@
 import { EntityCollectionDataService as EntityServerService } from '@ngrx/data';
 
-import { Entity, IdentityKey } from '../../../../domain/entity';
+import { BaseEntity, IdentityKey } from '../../../../domain/entity';
 
-export { EntityServerService, Entity, IdentityKey };
+export { EntityServerService, BaseEntity, IdentityKey };
 
 /**
  * Entity Collection Storage
  *
  * Used to retrieve / update entity collection
  */
-export interface EntityStorageService<TModel extends Entity> {
+export interface EntityStorageService<TModel extends BaseEntity> {
     /**
      * Get all available items
      */
@@ -25,5 +25,5 @@ export interface EntityStorageService<TModel extends Entity> {
 }
 
 export abstract class EntityServerServiceFactory {
-    abstract create<T extends Entity>(entityName: string): EntityServerService<T>;
+    abstract create<T extends BaseEntity>(entityName: string): EntityServerService<T>;
 }

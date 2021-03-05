@@ -19,8 +19,14 @@ export {
     EntityServerServiceFactory,
     DefaultEntityServerServiceFactory
 } from './lib/infrastructure/persistence/store';
-export { QueryParams, QueryAdapter, DefaultQueryAdapter } from './lib/infrastructure/persistence/query/query-adapter';
+export {
+    QueryParams,
+    QueryAdapter,
+    DefaultQueryAdapter,
+    DefaultQueryAdapterService as QueryAdapterService
+} from './lib/infrastructure/persistence/query/query-adapter';
 export { Query } from './lib/infrastructure/persistence/query/query';
+export * from './lib/infrastructure/persistence/query/grammar/query-expressions';
 export {
     FundamentalRootStoreModule,
     FundamentalStoreModule,

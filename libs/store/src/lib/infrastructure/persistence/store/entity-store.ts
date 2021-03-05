@@ -2,7 +2,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EntityCollectionService } from '@ngrx/data';
 
-import { CachePolicy, FetchPolicy, IdentityKey } from '../../../domain/public_api';
+import { CachePolicy, FetchPolicy, IdentityKey, BaseEntity } from '../../../domain/public_api';
+import { QuerySnapshot } from '../query/query';
 import { QueryService } from '../query/query.service';
 import { QueryBuilder } from '../query/query-builder';
 
@@ -46,7 +47,7 @@ export interface EntityStoreOptions {
 /**
  * Entity Store default implementation
  */
-export class DefaultEntityStore<T> implements EntityStore<T> {
+export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> {
     get queryBuilder(): QueryBuilder<T> {
         return this._queryBuilder;
     }
@@ -64,8 +65,7 @@ export class DefaultEntityStore<T> implements EntityStore<T> {
     }
 
     save(entity: T): Observable<T> {
-        if (entity['id']) {
-            // TODO: Should check if entity has id based on primary key settings
+        if (entity.id) {
             return this._entityService.update(entity);
         }
         return this._entityService.add(entity);
@@ -85,8 +85,10 @@ export class DefaultQueryService<TModel> extends QueryService<TModel> {
         return this.service.getByKey(id);
     }
 
-    getWithQuery(query: string): Observable<TModel[]> {
-        return this.service.getWithQuery(query);
+    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
+        // Pass query payload instead of QueryParams
+        // TODO: Should we override EntityCollectionService interface for that? 
+        return this.service.getWithQuery(query as any);
     }
 
     count(): Observable<number> {

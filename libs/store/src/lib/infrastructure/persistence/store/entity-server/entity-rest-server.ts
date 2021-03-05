@@ -11,9 +11,10 @@ import {
     EntityResourceMetaOptions,
     EntityMetaOptions
 } from '../../utils/entity-options.service';
+import { QueryAdapter, DefaultQueryAdapterService, QueryPayload } from '../../query/query-adapter';
 
 import { HttpUrlGenerator } from '../http-url-generator';
-import { Entity, EntityServerService } from './interfaces';
+import { BaseEntity, EntityServerService } from './interfaces';
 
 export declare type HttpMethods = 'DELETE' | 'GET' | 'POST' | 'PUT' | 'PATCH';
 
@@ -30,17 +31,18 @@ export interface RequestData {
  * This should be provided instead of ngrx DefaultDataService.
  *
  */
-export class EntityRestServerService<T extends Entity> implements EntityServerService<T> {
+export class EntityRestServerService<T extends BaseEntity> implements EntityServerService<T> {
     protected _name: string;
     protected delete404OK: boolean;
     protected entityName: string;
     protected getDelay = 0;
     protected saveDelay = 0;
     protected timeout = 0;
+    protected root: string;
+    protected queryAdapter: QueryAdapter<T>;
     protected entityMetaOptions: EntityMetaOptions;
     protected entityResourceMetaOptions: EntityResourceMetaOptions | undefined;
     protected entityResourcePathOptions: EntityPath | undefined;
-    protected root: string;
 
     get name(): string {
         return this._name;
@@ -50,6 +52,7 @@ export class EntityRestServerService<T extends Entity> implements EntityServerSe
         entityName: string,
         protected http: HttpClient,
         protected httpUrlGenerator: HttpUrlGenerator,
+        queryAdapterService: DefaultQueryAdapterService,
         entityMetaOptionsService: EntityMetaOptionsService,
         config?: DefaultDataServiceConfig
     ) {
@@ -64,6 +67,7 @@ export class EntityRestServerService<T extends Entity> implements EntityServerSe
         this.entityResourceMetaOptions = entityMetaOptionsService.getEntityResourceMetadata(entityName);
         this.entityResourcePathOptions = this.entityResourceMetaOptions?.path;
         this.root = this.entityResourceMetaOptions?.root || root;
+        this.queryAdapter = queryAdapterService.getAdapter(entityName);
     }
 
     add(entity: T): Observable<T> {
@@ -102,8 +106,12 @@ export class EntityRestServerService<T extends Entity> implements EntityServerSe
         return this.execute(method, entityUrl + key, err);
     }
 
-    getWithQuery(queryParams: QueryParams | string): Observable<T[]> {
-        const qParams = typeof queryParams === 'string' ? { fromString: queryParams } : { fromObject: queryParams };
+    getWithQuery(query: QueryPayload<T> | QueryParams | string): Observable<T[]> {
+        // Check if query is QueryPayload instance and convert it to query string
+        if (QueryAdapter.isQueryPayload<T>(query)) {
+            query = this.queryAdapter.createQueryStringFromQuery(query);
+        }
+        const qParams = typeof query === 'string' ? { fromString: query } : { fromObject: query };
         const params = new HttpParams(qParams);
         const entitiesUrl = this.getCollectionUrl('getAll');
         const method = this.getOperationMethod('getAll') || 'GET';
@@ -248,6 +256,7 @@ export class EntityRestServerServiceFactory {
         protected http: HttpClient,
         protected httpUrlGenerator: HttpUrlGenerator,
         protected entityMetaOptionsService: EntityMetaOptionsService,
+        protected queryAdapterService: DefaultQueryAdapterService,
         @Optional() protected config?: DefaultDataServiceConfig
     ) {
         config = config || {};
@@ -257,11 +266,12 @@ export class EntityRestServerServiceFactory {
      * Create REST EntityServerService for the given entity type
      * @param entityName {string} Name of the entity
      */
-    create<T extends Entity>(entityName: string): EntityServerService<T> {
+    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
         return new EntityRestServerService<T>(
             entityName,
             this.http,
             this.httpUrlGenerator,
+            this.queryAdapterService,
             this.entityMetaOptionsService,
             this.config
         );

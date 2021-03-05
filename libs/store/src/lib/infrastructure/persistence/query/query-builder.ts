@@ -5,7 +5,6 @@ import {
 import {
     Predicate
 } from './grammar/predicate';
-import { QueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
 
 export class QueryBuilder<TModel> {
@@ -22,7 +21,6 @@ export class QueryBuilder<TModel> {
 
     constructor(
         private service: QueryService<TModel>,
-        private adapter: QueryAdapter<TModel>
     ) { }
 
     byId(id: string): Observable<TModel> {
@@ -51,7 +49,7 @@ export class QueryBuilder<TModel> {
      * Create new Query object
      */
     build(): Query<TModel> {
-        const query = new Query<TModel>(this.service, this.adapter);
+        const query = new Query<TModel>(this.service);
         query._predicate = this._predicate;
         query._keyword = this._keyword;
         return query;
