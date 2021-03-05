@@ -1,46 +1,43 @@
 import { ENTITY, REST_RESOURCE } from '../decorators';
 import { ID } from './id.value-object';
 
-export interface BaseEntityProps {
-    id: ID;
+export interface BaseEntityDTO {
+    id: number;
     createdAt: string;
     updatedAt: string;
 }
 
-export abstract class BaseEntity<EntityProps> {
-    constructor(id: number, props: EntityProps) {
-        this._props = props;
-        this._id = id;
-        this._createdAt = Date.now();
-        this._updatedAt = 0;
+export abstract class BaseEntity<EntityProps extends BaseEntityDTO> {
+    constructor(dto: EntityProps) {
+        this._dto = dto;
+        this._id = 123;
+        this._createdAt = '123';
+        this._updatedAt = '456';
     }
 
-    private readonly _id: number;
-    protected readonly _props: EntityProps;
-    protected readonly _createdAt: number;
-    protected readonly _updatedAt: number;
+    _dto: EntityProps;
+    readonly _id: number;
+    readonly _createdAt: string;
+    readonly _updatedAt: string;
 
     get id(): number { // value object
         return this._id;
     }
 
-    get updatedAt(): number {
+    get updatedAt(): string {
         return this._updatedAt;
     }
 
-    get createdAt(): number {
+    get createdAt(): string {
         return this._createdAt;
     }
 
-    get metadata() {
-        return {
-            // entity: this[ENTITY].metadata,
-            // resource: this[REST_RESOURCE].metadata
-        }
+    get dto(): EntityProps {
+        return this._dto;
     }
 
-    get props(): EntityProps {
-        return this._props;
+    set dto(value) {
+        this._dto = value;
     }
 
     static isEntity(entity: unknown): entity is BaseEntity<unknown> {
@@ -64,6 +61,7 @@ export abstract class BaseEntity<EntityProps> {
             return false;
         }
 
-        return this.id ? this.id.equals(object.id) : false;
+        // return this.id ? this.id.equals(object.id) : false;
+        return false;
     }
 }

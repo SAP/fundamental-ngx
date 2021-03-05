@@ -1,13 +1,13 @@
 export abstract class BaseValue<T> {
-    protected readonly props: T;
+    readonly dto: T;
 
-    constructor(props: T) {
-        this.props = Object.freeze(props);
+    constructor(dto: T) {
+        this.dto = Object.freeze(dto);
     }
 
     clone() {
-        const propsCopy = { ...this.props };
-        return Object.freeze(propsCopy);
+        const copyValue = { ...this.dto };
+        return Object.freeze(copyValue);
     }
 
     /**

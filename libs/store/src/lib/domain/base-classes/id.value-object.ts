@@ -6,6 +6,6 @@ export class ID extends BaseValue<any> {
     }
 
     get value (): string {
-        return this.props.value;
+        return this.dto.value;
     }
 }

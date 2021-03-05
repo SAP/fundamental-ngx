@@ -17,20 +17,20 @@ export interface LineItem {
     aggregateOf: 'Requisition',
 })
 export class LineItems extends BaseValue<LineItem> {
-    constructor(props) {
-        super(props);
+    constructor(dto) {
+        super(dto);
     }
 
     get title() {
-        return this.props.title;
+        return this.dto.title;
     }
 
     get price() {
-        return this.props.price;
+        return this.dto.price;
     }
 
     get amount() {
-        return this.props.amount;
+        return this.dto.amount;
     }
 }
 
