@@ -14,5 +14,5 @@ export {
     FundamentalStoreModuleForFeature
 } from './lib/store.module';
 
-export * from './lib/infrastructure/persistence/query/grammer/predicate';
-export * from './lib/infrastructure/persistence/query/grammer/query-expressions';
+export * from './lib/infrastructure/persistence/query/grammar/predicate';
+export * from './lib/infrastructure/persistence/query/grammar/query-expressions';
