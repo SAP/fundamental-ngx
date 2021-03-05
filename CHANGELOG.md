@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.1...v0.29.0-rc.2) (2021-03-04)
+
+
+### Features
+
+* (Core) introduce the status Indicator component ([#4746](https://github.com/SAP/fundamental-ngx/issues/4746)) ([8f5bc1f](https://github.com/SAP/fundamental-ngx/commit/8f5bc1f77c9cab494d2fa7045e546386956da25a))
+
+## [0.29.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.0...v0.29.0-rc.1) (2021-03-04)
+
+## [0.29.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.5...v0.29.0-rc.0) (2021-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Changed dialog default behaviour closeOnBackdrop to false - Now it won't close when user clicks outside of dialog
+
+* fix: (Core) Change default dialog behaviour to not close on backdrop click
+
+* Add inputId to associate with label, add z-index to button in flexible column layout
+
+* Add examples with inputId and labels for pickers
+
+* BREAKING CHANGE: Portal issues - dialog default behaviour, inputIds for pickers  (#4839) ([b7c4d2e](https://github.com/SAP/fundamental-ngx/commit/b7c4d2e56cf29dc33b5ffc5f99670d2ac6823ce1)), closes [#4839](https://github.com/SAP/fundamental-ngx/issues/4839)
+
+### [0.28.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.4...v0.28.2-rc.5) (2021-03-04)
+
 ### [0.28.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.3...v0.28.2-rc.4) (2021-03-03)
 
 

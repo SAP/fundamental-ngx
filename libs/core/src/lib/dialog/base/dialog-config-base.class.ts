@@ -41,7 +41,7 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
     hasBackdrop?: boolean = true;
 
     /** Whether clicking on the backdrop should close the dialog. Only works if hasBackdrop is true. */
-    backdropClickCloseable?: boolean = true;
+    backdropClickCloseable?: boolean = false;
 
     /** Global classes to apply to the backdrop. */
     backdropClass?: string;

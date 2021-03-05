@@ -92,6 +92,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     @Input()
     comboboxId = `fd-combobox-${comboboxUniqueId++}`;
 
+    /** Id attribute for input element inside Combobox component */
+    @Input()
+    inputId = '';
+
     /** Aria-label for Combobox. */
     @Input()
     @HostBinding('attr.aria-label')

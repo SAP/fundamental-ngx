@@ -81,6 +81,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     compact = false;
 
+    /** Id attribute for input element inside DatePicker component */
+    @Input()
+    inputId = '';
+
     /** Text displayed in message */
     @Input()
     set message(message: string) {

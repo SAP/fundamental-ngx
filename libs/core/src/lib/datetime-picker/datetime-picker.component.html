@@ -22,6 +22,7 @@
                     fd-input-group-input
                     [(ngModel)]="_inputFieldDate"
                     [attr.aria-label]="datetimeInputLabel"
+                    [attr.id]="inputId"
                     [placeholder]="placeholder"
                     [compact]="compact"
                     [ngClass]="{ 'is-error': _isInvalidDateInput && useValidation }"

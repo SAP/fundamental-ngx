@@ -1,2 +1,6 @@
 @import '~fundamental-styles/dist/button';
 @import '~fundamental-styles/dist/flexible-column-layout';
+
+.fd-button.fd-flexible-column-layout__button {
+	z-index: 1;
+}
