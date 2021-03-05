@@ -124,11 +124,4 @@ describe('Grid-list test suite', function() {
             gridListPage.checkRtlSwitch();
         });
     });
-
-    describe('Check visual regression', function() {
-        it('should check examples visual regression', () => {
-            gridListPage.saveExampleBaselineScreenshot();
-            expect(gridListPage.compareWithBaseline()).toBeLessThan(1);
-        });
-    });
 });

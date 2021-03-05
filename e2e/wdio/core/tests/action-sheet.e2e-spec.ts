@@ -97,7 +97,7 @@ describe('Action sheet test suite', function() {
     describe('Check visual regression', function() {
         it('should check basic visual regression', () => {
             actionSheetPage.saveExampleBaselineScreenshot();
-            expect(actionSheetPage.compareWithBaseline().toBeLessThan(1);
+            expect(actionSheetPage.compareWithBaseline()).toBeLessThan(1);
         });
 
         it('should check action sheet items visual regression', () => {

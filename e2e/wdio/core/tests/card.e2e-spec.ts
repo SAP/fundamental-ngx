@@ -143,11 +143,4 @@ describe('Card test suite:', function() {
             cardPage.checkRtlSwitch();
         });
     });
-
-    describe('visual regression', function() {
-        it('should check example blocks visual regression', () => {
-            cardPage.saveExampleBaselineScreenshot();
-            expect(cardPage.compareWithBaseline()).toBeLessThan(4);
-        });
-    });
 });
