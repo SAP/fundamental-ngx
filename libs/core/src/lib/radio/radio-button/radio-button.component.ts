@@ -66,7 +66,7 @@ export class RadioButtonComponent
      * By default field is set to false
      */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
@@ -134,7 +134,7 @@ export class RadioButtonComponent
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService.contentDensity.subscribe((density) => {
                     this.compact = density === 'compact';

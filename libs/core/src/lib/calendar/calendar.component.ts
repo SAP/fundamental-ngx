@@ -109,7 +109,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** Whether compact mode should be included into calendar */
     @Input()
     @HostBinding('class.fd-calendar--compact')
-    compact: boolean = null;
+    compact?: boolean;
 
     /**
      * Whether user wants to mark sunday/saturday with `fd-calendar__item--weekend` class
@@ -280,7 +280,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** @hidden */
     ngOnInit(): void {
         this._prepareDisplayedView();
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
             }));

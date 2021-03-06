@@ -71,7 +71,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /** Whether the component should be in compact mode. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -385,10 +385,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
             this._changeDetRef.detectChanges();
         });
 
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetRef.detectChanges();
+                this._changeDetRef.markForCheck();
             }));
         }
     }

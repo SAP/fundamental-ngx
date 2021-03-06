@@ -39,7 +39,7 @@ export class BaseButton {
 
     /** Whether to apply compact mode to the button. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** The type of the button. Types include:
      * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.

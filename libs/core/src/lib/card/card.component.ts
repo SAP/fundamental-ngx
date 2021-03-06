@@ -34,7 +34,7 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
      * Whether to apply compact mode
      */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Indicates when card should show a loader  */
     @Input()
@@ -77,7 +77,7 @@ export class CardComponent implements OnChanges, OnInit, CssClassBuilder, OnDest
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService.contentDensity.subscribe((density) => {
                     this.compact = density === 'compact';

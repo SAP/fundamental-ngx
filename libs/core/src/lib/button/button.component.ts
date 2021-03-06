@@ -63,7 +63,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     }
 
     public ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
                 this.buildComponentCssClass();

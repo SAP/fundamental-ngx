@@ -1,5 +1,9 @@
-import { Input, ChangeDetectorRef, Directive } from '@angular/core';
-import { ContentDensity } from './form/form-control';
+import { Input, ChangeDetectorRef, Directive, OnInit, OnDestroy } from '@angular/core';
+import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core';
+// tslint:disable-next-line:nx-enforce-module-boundaries
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { PlatformConfig } from '@fundamental-ngx/platform';
 
 let randomId = 0;
 
@@ -9,7 +13,7 @@ let randomId = 0;
  * @hidden for form related Base , see BaseInput.
  */
 @Directive()
-export abstract class BaseComponent {
+export abstract class BaseComponent implements OnInit, OnDestroy {
     protected defaultId = `fdp-id-${randomId++}`;
     protected _disabled = false;
 
@@ -43,6 +47,13 @@ export abstract class BaseComponent {
     }
     /** @hidden - Avoiding private property name collision */
     _contentDensity: ContentDensity;
+    protected _contentDensityService: ContentDensityService;
+
+    /** @hidden */
+    protected _subscriptions = new Subscription();
+
+    /** @hidden */
+    protected _router: Router;
 
     /** width of the element */
     @Input()
@@ -58,7 +69,36 @@ export abstract class BaseComponent {
         this._disabled = disabled;
     }
 
-    constructor(protected _cd: ChangeDetectorRef) {}
+    constructor(protected _cd: ChangeDetectorRef) {
+        const injector = PlatformConfig.getInjector();
+        this._contentDensityService = injector.get(ContentDensityService);
+        this._router = injector.get(Router);
+        this._router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this._setupDensitySubscriptions();
+            }
+        })
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._setupDensitySubscriptions();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    private _setupDensitySubscriptions(): void {
+        if (this._contentDensity === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+                this.contentDensity = density;
+                this.markForCheck();
+            }));
+        }
+    }
 
     /**
      * @hidden

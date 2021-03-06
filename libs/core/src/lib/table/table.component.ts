@@ -46,7 +46,7 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
     /** Whether or not to display the table in compact mode */
     @HostBinding('class.fd-table--compact')
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Whether or not to display the table in condensed mode */
     @HostBinding('class.fd-table--condensed')
@@ -77,7 +77,7 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
             }))

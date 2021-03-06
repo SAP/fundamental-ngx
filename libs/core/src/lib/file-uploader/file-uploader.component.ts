@@ -104,7 +104,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** boolean value to enable compact mode */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
@@ -150,10 +150,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetRef.detectChanges();
+                this._changeDetRef.markForCheck();
             }));
         }
     }

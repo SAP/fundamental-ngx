@@ -71,7 +71,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
 
     /** @Input Uses compact time picker. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @Input Disables the component. */
     @Input()
@@ -284,10 +284,10 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
 
         this._calculateTimeOptions();
 
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetectorRef.detectChanges();
+                this._changeDetectorRef.markForCheck();
             }))
         }
     }

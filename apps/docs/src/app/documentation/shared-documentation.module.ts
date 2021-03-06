@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 // services
@@ -47,4 +47,5 @@ import { FilterPipe } from './core-helpers/pipes/filter.pipe';
     ],
     providers: [ContentDensityService]
 })
-export class SharedDocumentationModule {}
+export class SharedDocumentationModule {
+}

@@ -134,13 +134,13 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (this.mobile) {
             this._setUpMobileMode();
         }
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this._compact = density === 'compact';
                 this.actionSheetBody.compact = density === 'compact';
                 this.actionSheetItems.forEach(item => {
                     item.compact = density === 'compact';
-                    this._changeDetectionRef.detectChanges();
+                    this._changeDetectionRef.markForCheck();
                 });
             }));
         }

@@ -46,7 +46,7 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** Whether to apply compact mode to the Panel */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Id of the panel element. */
     @Input()
@@ -91,7 +91,7 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscription.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
                 this.buildComponentCssClass();

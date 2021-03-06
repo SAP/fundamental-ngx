@@ -30,7 +30,7 @@ export class TokenComponent implements OnInit, OnDestroy {
 
     /** Whether the token is compact. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @hidden */
     @ViewChild('tokenWrapperElement')
@@ -74,7 +74,7 @@ export class TokenComponent implements OnInit, OnDestroy {
     /** @hidden */
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
                 this._cdRef.markForCheck();

@@ -65,7 +65,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     /** Display menu in compact mode */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Whether the popover should be focusTrapped. */
     @Input()
@@ -139,7 +139,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService.contentDensity.subscribe((density) => {
                     this.compact = density === 'compact';

@@ -50,7 +50,7 @@ import { Placement } from '../popover/popover-position/popover-position';
 export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy {
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
@@ -99,10 +99,10 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
         if (this.rtlService) {
             this.rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
         }
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._cdRef.detectChanges();
+                this._cdRef.markForCheck();
             }));
         }
     }

@@ -80,7 +80,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** Whether this is the compact input date picker */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Id attribute for input element inside DatePicker component */
     @Input()
@@ -329,10 +329,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();
         });
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetectionRef.detectChanges();
+                this._changeDetectionRef.markForCheck();
             }));
         }
     }

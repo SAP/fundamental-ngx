@@ -81,7 +81,7 @@ export class MultiInputComponent implements
 
     /** Whether the input is in compact mode. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -271,11 +271,11 @@ export class MultiInputComponent implements
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
                 this.buildComponentCssClass();
-                this._changeDetRef.detectChanges();
+                this._changeDetRef.markForCheck();
             }))
         }
         this.buildComponentCssClass();

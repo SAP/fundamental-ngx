@@ -98,7 +98,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @Input Defines if time component should be used in compact mode */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @Input Defines if time component should be used in tablet mode */
     @Input()
@@ -196,10 +196,10 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
         this._setUpViewGrid();
 
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetectorRef.detectChanges();
+                this._changeDetectorRef.markForCheck();
             }))
         }
     }

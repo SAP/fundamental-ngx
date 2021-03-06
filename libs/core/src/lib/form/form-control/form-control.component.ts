@@ -40,7 +40,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
      * Whether form is in compact mode
      */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     @Input()
     type: string;
@@ -81,7 +81,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
                 this.buildComponentCssClass();

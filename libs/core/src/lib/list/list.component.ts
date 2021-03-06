@@ -62,7 +62,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** Whether compact mode is included to component */
     @Input()
     @HostBinding('class.fd-list--compact')
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Whether list component contains message */
     @Input()
@@ -126,7 +126,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService.contentDensity.subscribe((density) => {
                     this.compact = density === 'compact';

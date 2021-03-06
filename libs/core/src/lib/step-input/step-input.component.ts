@@ -47,7 +47,7 @@ let stepInputUniqueId = 0;
 export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
     /** Sets compact mode */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Sets control in readonly mode */
     @Input()
@@ -254,10 +254,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     ngOnInit(): void {
         this._numberFormat = this._getNumberFormat();
         this._buildRegExps();
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetectorRef.detectChanges();
+                this._changeDetectorRef.markForCheck();
             }));
         }
     }

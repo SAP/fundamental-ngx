@@ -52,7 +52,7 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy, OnInit {
     /** Whether user wants to use tab component in compact mode */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
@@ -153,10 +153,10 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetectorRef.detectChanges();
+                this._changeDetectorRef.markForCheck();
             }))
         }
     }

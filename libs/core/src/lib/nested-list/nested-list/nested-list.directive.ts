@@ -31,7 +31,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** In case the user wants put compact mode in this list */
     @Input()
     @HostBinding('class.fd-nested-list--compact')
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @hidden */
     @HostBinding('class.fd-nested-list')
@@ -68,7 +68,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
             }));

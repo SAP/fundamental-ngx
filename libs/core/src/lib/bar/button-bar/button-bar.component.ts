@@ -45,7 +45,7 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
 
     /** Whether or not the button is compact. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @hidden */
     @HostBinding('class.fd-bar__element')
@@ -64,10 +64,10 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._cdRef.detectChanges();
+                this._cdRef.markForCheck();
             }))
         }
     }

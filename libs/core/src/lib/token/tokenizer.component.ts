@@ -74,7 +74,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Whether the tokenizer is compact */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -198,10 +198,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._contentDensitySubscription.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._cdRef.detectChanges();
+                this._cdRef.markForCheck();
                 this.buildComponentCssClass();
             }))
         }

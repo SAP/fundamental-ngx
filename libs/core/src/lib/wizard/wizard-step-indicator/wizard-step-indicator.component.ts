@@ -28,7 +28,7 @@ export class WizardStepIndicatorComponent implements OnInit, OnDestroy {
      * Whether or not the step indicator (specifically, the action sheet) is compact.
      */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /**
      * Event emitted when this step indicator is clicked.
@@ -49,10 +49,10 @@ export class WizardStepIndicatorComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._cdRef.detectChanges();
+                this._cdRef.markForCheck();
             }))
         }
     }

@@ -25,7 +25,7 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     class: string;
 
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -35,7 +35,7 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
                 this.buildComponentCssClass();
@@ -95,7 +95,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** Whether to apply compact mode to the AddOn. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /**
      * The placement of the add-on. Options include *before* and *after*
@@ -128,7 +128,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService.contentDensity.subscribe((density) => {
                     this.compact = density === 'compact';

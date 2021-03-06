@@ -46,7 +46,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** Whether user wants to use tab component in compact mode */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** @hidden */
     @ContentChildren(TabLinkDirective)
@@ -86,7 +86,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
                 this.buildComponentCssClass();

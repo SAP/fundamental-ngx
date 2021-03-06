@@ -88,7 +88,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** Allows to minimize control to compact mode. */
     @Input()
-    compact: boolean = null;
+    compact?: boolean;
 
     /** Enables controls third state. */
     @Input()
@@ -145,10 +145,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === null && this._contentDensityService) {
+        if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
                 this.compact = density === 'compact';
-                this._changeDetectorRef.detectChanges();
+                this._changeDetectorRef.markForCheck();
             }));
         }
     }
