@@ -1,5 +1,6 @@
 import {
     AndPredicate,
+    ContainsPredicate,
     EqPredicate,
     GePredicate,
     GtPredicate,
@@ -61,4 +62,13 @@ TPropertyValue extends TModel[TProperty] > (property: TProperty, value: TPropert
     return new LePredicate < TModel,
     TProperty,
     TPropertyValue > (property, value);
+}
+
+export function contains < TModel,
+TProperty extends keyof TModel,
+TPropertyValue extends TModel[TProperty] >
+(property: TProperty, value: TPropertyValue, caseSensitive?: boolean): EqPredicate < TModel, TProperty, TPropertyValue > {
+    return new ContainsPredicate < TModel,
+    TProperty,
+    TPropertyValue > (property, value, caseSensitive);
 }

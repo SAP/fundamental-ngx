@@ -1,5 +1,5 @@
 import { Predicate } from './predicate';
-import { and, or, not, eq, ge, gt, le, lt } from './query-expressions';
+import { and, or, not, eq, ge, gt, le, lt, contains } from './query-expressions';
 
 interface Animal {
     name: string;
@@ -14,49 +14,49 @@ interface Animals {
 }
 const animals: Animals = {
     'lion': {
-        name: 'lion',
+        name: 'Lion',
         category: 'mammal',
         weight: 220000,
         lifeSpan: 14,
         lastSeen: new Date('2010-12-25')
     },
     'snake': {
-        name: 'snake',
+        name: 'Snake',
         category: 'reptile',
         weight: 27000,
         lifeSpan: 25,
         lastSeen: new Date('2011-02-05')
     },
     'tiger': {
-        name: 'tiger',
+        name: 'Tiger',
         category: 'mammal',
         weight: 250000,
         lifeSpan: 10,
         lastSeen: new Date('2011-01-22')
     },
     'iguana': {
-        name: 'iguana',
+        name: 'Iguana',
         category: 'reptile',
         weight: 4000,
         lifeSpan: 20,
         lastSeen: new Date('2010-11-22')
     },
     'elephant': {
-        name: 'elephant',
+        name: 'Elephant',
         category: 'mammal',
         weight: 5000000,
         lifeSpan: 70,
         lastSeen: new Date('2011-01-01')
     },
     'mouse': {
-        name: 'mouse',
+        name: 'Mouse',
         category: 'mammal',
         weight: 30,
         lifeSpan: 2,
         lastSeen: new Date('2010-07-18')
     },
     'turtle': {
-        name: 'turtle',
+        name: 'Turtle',
         category: 'reptile',
         weight: 400000,
         lifeSpan: 30,
@@ -67,7 +67,7 @@ const animals: Animals = {
 describe('Predicate', () => {
 
     it('should be able to test with EqPredicate', () => {
-        let predicate: Predicate<Animal> = eq('name', 'lion');
+        let predicate: Predicate<Animal> = eq('name', 'Lion');
         expect(predicate.test(animals.lion)).toBeTruthy();
         expect(predicate.test(animals.turtle)).toBeFalsy();
 
@@ -81,7 +81,7 @@ describe('Predicate', () => {
     });
 
     it('should be able to test with GtPredicate', () => {
-        let predicate: Predicate<Animal> = gt('name', 'lion');
+        let predicate: Predicate<Animal> = gt('name', 'Lion');
         expect(predicate.test(animals.tiger)).toBeTruthy();
         expect(predicate.test(animals.elephant)).toBeFalsy();
         expect(predicate.test(animals.lion)).toBeFalsy();
@@ -98,7 +98,7 @@ describe('Predicate', () => {
     });
 
     it('should be able to test with LtPredicate', () => {
-        let predicate: Predicate<Animal> = lt('name', 'mouse');
+        let predicate: Predicate<Animal> = lt('name', 'Mouse');
         expect(predicate.test(animals.iguana)).toBeTruthy();
         expect(predicate.test(animals.turtle)).toBeFalsy();
         expect(predicate.test(animals.mouse)).toBeFalsy();
@@ -115,7 +115,7 @@ describe('Predicate', () => {
     });
 
     it('should be able to test with GePredicate', () => {
-        let predicate: Predicate<Animal> = ge('name', 'lion');
+        let predicate: Predicate<Animal> = ge('name', 'Lion');
         expect(predicate.test(animals.tiger)).toBeTruthy();
         expect(predicate.test(animals.elephant)).toBeFalsy();
         expect(predicate.test(animals.lion)).toBeTruthy();
@@ -132,7 +132,7 @@ describe('Predicate', () => {
     });
 
     it('should be able to test with LePredicate', () => {
-        let predicate: Predicate<Animal> = le('name', 'mouse');
+        let predicate: Predicate<Animal> = le('name', 'Mouse');
         expect(predicate.test(animals.iguana)).toBeTruthy();
         expect(predicate.test(animals.turtle)).toBeFalsy();
         expect(predicate.test(animals.mouse)).toBeTruthy();
@@ -146,6 +146,35 @@ describe('Predicate', () => {
         expect(predicate.test(animals.iguana)).toBeTruthy();
         expect(predicate.test(animals.elephant)).toBeTruthy();
         expect(predicate.test(animals.tiger)).toBeFalsy();
+    });
+
+    it('should be able to test with ContainsPredicate (case insensitive)', () => {
+        let predicate: Predicate<Animal> = contains('name', 'Na');
+        expect(predicate.test(animals.iguana)).toBeTruthy();
+        expect(predicate.test(animals.turtle)).toBeFalsy();
+        expect(predicate.test(animals.snake)).toBeTruthy();
+
+        // numbers will always return false ???
+        predicate = contains('weight', 27000);
+        expect(predicate.test(animals.iguana)).toBeFalsy();
+        expect(predicate.test(animals.turtle)).toBeFalsy();
+        expect(predicate.test(animals.snake)).toBeFalsy();
+
+        // Dates will always return false ???
+        predicate = contains('lastSeen', new Date('2011-01-01'));
+        expect(predicate.test(animals.iguana)).toBeFalsy();
+        expect(predicate.test(animals.elephant)).toBeFalsy();
+        expect(predicate.test(animals.tiger)).toBeFalsy();
+    });
+
+    it('should be able to test with ContainsPredicate (case sensitive)', () => {
+        let predicate: Predicate<Animal> = contains('name', 'Ig', true);
+        expect(predicate.test(animals.iguana)).toBeTruthy();
+        expect(predicate.test(animals.turtle)).toBeFalsy();
+        expect(predicate.test(animals.snake)).toBeFalsy();
+
+        predicate = contains('name', 'ig', true);
+        expect(predicate.test(animals.iguana)).toBeFalsy();
     });
 
     it('should be able to test with AndPredicate', () => {

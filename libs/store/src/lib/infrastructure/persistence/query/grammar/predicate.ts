@@ -117,6 +117,24 @@ export class LePredicate < TModel, TProperty extends keyof TModel, TPropertyValu
         }
     }
 
+export class ContainsPredicate < TModel, TProperty extends keyof TModel, TPropertyValue extends TModel[TProperty] >
+    extends ComparisonPredicate < TModel, TProperty, TPropertyValue > {
+
+        constructor(property: TProperty, value: TPropertyValue, private caseSensitive: boolean) {
+            super(property, value);
+        }
+
+        test(target: TModel): boolean {
+            const value = target[this.property];
+            if (typeof value === 'string' && typeof this.value === 'string') {
+                const full = (this.caseSensitive) ? value : value.toLowerCase();
+                const part = (this.caseSensitive) ? this.value : this.value.toLowerCase();
+                return full.includes(part);
+            }
+            return false;
+        }
+    }
+
 export abstract class BinaryPredicate < TModel > extends BasePredicate < TModel > {
 
     constructor(public readonly operands: Array < Predicate < TModel >> ) {
