@@ -5,6 +5,7 @@ import {
     GtPredicate,
     LePredicate,
     LtPredicate,
+    NotPredicate,
     OrPredicate,
     Predicate
 } from './predicate';
@@ -16,6 +17,10 @@ export function and < TModel > (...args: Predicate < TModel >[]): AndPredicate <
 
 export function or < TModel > (...args: Predicate < TModel >[]): OrPredicate < TModel > {
     return new OrPredicate < TModel > (args);
+}
+
+export function not < TModel > (predicate: Predicate<TModel>): NotPredicate<TModel> {
+    return new NotPredicate<TModel>(predicate);
 }
 
 export function eq < TModel,
