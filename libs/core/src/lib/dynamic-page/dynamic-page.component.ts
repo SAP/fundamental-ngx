@@ -125,13 +125,14 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /**@hidden */
     ngAfterViewInit(): void {
-        this._setContainerPositions();
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
         this._listenOnResize();
         if (this._pageSubheaderComponent?.collapsible) {
             this._addScrollListeners();
         }
+
+        setTimeout(() => this._setContainerPositions())
     }
 
     /**@hidden */
