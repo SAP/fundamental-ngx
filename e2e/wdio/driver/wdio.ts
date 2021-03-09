@@ -76,6 +76,12 @@ export function click(selector: string, index: number = 0, waitTime: number = de
     return $$(selector)[index].click();
 }
 
+export function clickWithOption(selector: string, index: number = 0, waitTime: number = defaultWaitTime(), options: object): void {
+    checkSelectorExists(selector, index);
+    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+    return $$(selector)[index].click(options);
+}
+
 export function doubleClick(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
