@@ -195,8 +195,8 @@ describe('Multi input test suite', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            multiInputPage.saveExampleBaselineScreenshot('multi-input');
-            expect(multiInputPage.compareWithBaseline('multi-input')).toBeLessThan(1);
+            multiInputPage.saveExampleBaselineScreenshot();
+            expect(multiInputPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

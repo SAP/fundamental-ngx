@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class ThumbnailPo extends BaseComponentPo {
 
@@ -15,5 +15,17 @@ export class ThumbnailPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.mainImage);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'thumbnail'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'thumbnail'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

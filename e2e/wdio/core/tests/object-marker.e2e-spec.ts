@@ -1,4 +1,4 @@
-import {ObjectMarkerPo} from '../pages/object-marker.po';
+import { ObjectMarkerPo } from '../pages/object-marker.po';
 import {
     click,
     getAttributeByName,
@@ -47,8 +47,10 @@ describe('Object marker test suite', function() {
         }
     });
 
-    it('Verify RTL and LTR orientation', () => {
-        objectMarkerPage.checkRtlSwitch();
+    describe('Check orientation', function() {
+        it('Verify RTL and LTR orientation', () => {
+            objectMarkerPage.checkRtlSwitch();
+        });
     });
 
     it('Verify marker hover state', () => {
@@ -58,5 +60,12 @@ describe('Object marker test suite', function() {
             mouseHoverElement(clickableMarkers, i);
             expect(textDecorationValues).toContain(getCSSPropertyByName(clickableMarkers, textDecorationAttribute, i).value);
         }
+    });
+
+    fdescribe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            objectMarkerPage.saveExampleBaselineScreenshot();
+            expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(1);
+        });
     });
 });

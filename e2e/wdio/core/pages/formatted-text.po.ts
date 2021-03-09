@@ -14,4 +14,16 @@ export class FormattedTextPo extends CoreBaseComponentPo {
         waitForPresent(this.inputHtmlText);
         waitForElDisplayed(this.inputHtmlText);
     }
+    
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'formatted-text'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'formatted-text'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SliderPo extends CoreBaseComponentPo {
     private url = '/slider';
-    root = '#page-content';
+
     pageHeader = 'fd-slider-header h1';
 
     // example blocks
@@ -41,5 +41,17 @@ export class SliderPo extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.pageHeader);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'slider'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'slider'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

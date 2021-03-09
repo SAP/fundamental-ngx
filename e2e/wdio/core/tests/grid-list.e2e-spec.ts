@@ -8,8 +8,10 @@ import {
     scrollIntoView, waitForClickable, waitForElDisplayed
 } from '../../driver/wdio';
 
-import { text, productTitle, textLocked, warningColor, successColor, neutralColor, errorColor, color, backGroundColor,
-    fontWeight, bold, classAttribute, isSelected } from '../fixtures/appData/grid-list-content';
+import {
+    text, productTitle, textLocked, warningColor, successColor, neutralColor, errorColor, color, backGroundColor,
+    fontWeight, bold, classAttribute, isSelected
+} from '../fixtures/appData/grid-list-content';
 
 describe('Grid-list test suite', function() {
     const gridListPage: GridListPo = new GridListPo();
@@ -74,18 +76,18 @@ describe('Grid-list test suite', function() {
         expect(warningColor).toContain(getCSSPropertyByName(errorStateItem, color).value);
         waitForClickable(lockedStateItemButton);
         expect(getText(lockedStateItemText)).toBe(textLocked);
-    })
+    });
 
     it('Verify selecting multiple items in "Multi select mode" component -> Multiple items can be selected. Checkbox should be checked when item is selected', () => {
         const arrayLength = getElementArrayLength(gridListItemsByMode('multiSelect'));
-        let selectedArrayLength = getElementArrayLength(multiSelectModeSelectedItems)
+        let selectedArrayLength = getElementArrayLength(multiSelectModeSelectedItems);
         expect(selectedArrayLength).toEqual(1);
         for (let i = 0; i < arrayLength; i++) {
             scrollIntoView(multiSelectModeCheckboxes, i);
             click(multiSelectModeCheckboxes, i);
         }
-        selectedArrayLength = getElementArrayLength(multiSelectModeSelectedItems)
-        expect(selectedArrayLength).toEqual(arrayLength - 1)
+        selectedArrayLength = getElementArrayLength(multiSelectModeSelectedItems);
+        expect(selectedArrayLength).toEqual(arrayLength - 1);
     });
 
     it('Verify corresponding indicator color should be displayed for all statuses', () => {
@@ -117,7 +119,9 @@ describe('Grid-list test suite', function() {
         }
     });
 
-    it('Verify LTR / RTL orientation', () => {
-        gridListPage.checkRtlSwitch();
+    describe('Check orientation', function() {
+        it('Verify LTR / RTL orientation', () => {
+            gridListPage.checkRtlSwitch();
+        });
     });
 });

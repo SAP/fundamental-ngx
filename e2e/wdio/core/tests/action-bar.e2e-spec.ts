@@ -280,29 +280,30 @@ describe('Action Bar Test Suite', function() {
 
     describe('Check visual regression basic', function() {
         it('should check examples visual regression', () => {
-            actionBarPage.saveExampleBaselineScreenshot('action-bar');
-            expect(actionBarPage.compareWithBaseline('action-bar')).toBeLessThan(1);
+            actionBarPage.saveExampleBaselineScreenshot();
+            expect(actionBarPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
+
+    function checkButtonHoverState(selector: string, tag: string, btnName: string, index: number = 0): void {
+        mouseHoverElement(selector, index);
+        saveElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${btnName} button hover state mismatch`);
+    }
+
+    function checkButtonFocusState(selector: string, tag: string, btnName: string, index: number = 0): void {
+        click(selector, index);
+        saveElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${btnName} button focus state mismatch`);
+    }
+
+    function checkButtonActiveState(selector: string, tag: string, btnName: string, index: number = 0): void {
+        addIsActiveClass(selector, index);
+        saveElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${btnName} button item ${index} active state mismatch`);
+    }
 });
 
-function checkButtonHoverState(selector: string, tag: string, btnName: string, index: number = 0): void {
-    mouseHoverElement(selector, index);
-    saveElementScreenshot(selector, tag);
-    expect(checkElementScreenshot(selector, tag, {}, index))
-        .toBeLessThan(2, `${btnName} button hover state mismatch`);
-}
-
-function checkButtonFocusState(selector: string, tag: string, btnName: string, index: number = 0): void {
-    click(selector, index);
-    saveElementScreenshot(selector, tag, {}, index);
-    expect(checkElementScreenshot(selector, tag))
-        .toBeLessThan(2, `${btnName} button focus state mismatch`);
-}
-
-function checkButtonActiveState(selector: string, tag: string, btnName: string, index: number = 0): void {
-    addIsActiveClass(selector, index);
-    saveElementScreenshot(selector, tag, {}, index);
-    expect(checkElementScreenshot(selector, tag))
-        .toBeLessThan(2, `${btnName} button item ${index} active state mismatch`);
-}

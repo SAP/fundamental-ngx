@@ -20,4 +20,16 @@ export class DisplayListItemPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.displayLinks);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'display-list-item'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'display-list-item'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

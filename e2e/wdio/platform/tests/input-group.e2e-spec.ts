@@ -172,8 +172,8 @@ describe('Input Group should', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            inputGroupPage.saveExampleBaselineScreenshot('input-group');
-            expect(inputGroupPage.compareWithBaseline('input-group')).toBeLessThan(1);
+            inputGroupPage.saveExampleBaselineScreenshot();
+            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

@@ -163,8 +163,8 @@ describe('Verify Feed Input component', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            feedInputPage.saveExampleBaselineScreenshot('feed-input');
-            expect(feedInputPage.compareWithBaseline('feed-input')).toBeLessThan(1);
+            feedInputPage.saveExampleBaselineScreenshot();
+            expect(feedInputPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

@@ -44,4 +44,16 @@ export class DatePicker extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.inputDatePicker);
     };
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'date-picker'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'date-picker'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

@@ -138,6 +138,14 @@ describe('Object Status test suite', function() {
             objectStatusPage.checkRtlSwitch();
         });
     });
+
+    fdescribe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            objectStatusPage.saveExampleBaselineScreenshot();
+            expect(objectStatusPage.compareWithBaseline()).toBeLessThan(1);
+        });
+    });
+
 });
 
 function checkObjectValues(selector, dataArr): void {

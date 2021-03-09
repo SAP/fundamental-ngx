@@ -21,4 +21,16 @@ export class InfoLabelPO extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.defaultLabel);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'info-label'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'info-label'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

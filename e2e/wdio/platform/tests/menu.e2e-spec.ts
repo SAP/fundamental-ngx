@@ -161,8 +161,8 @@ describe('Menu component test suite', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            menuPage.saveExampleBaselineScreenshot('menu');
-            expect(menuPage.compareWithBaseline('menu')).toBeLessThan(1);
+            menuPage.saveExampleBaselineScreenshot();
+            expect(menuPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });
