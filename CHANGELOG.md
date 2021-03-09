@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.3...v0.29.0-rc.4) (2021-03-09)
+
+
+### Bug Fixes
+
+* (Core) Dynamic page init content resize ([#4886](https://github.com/SAP/fundamental-ngx/issues/4886)) ([edce21f](https://github.com/SAP/fundamental-ngx/commit/edce21fdb3e22b8544393feaeeb13c1047aacaac))
+
+## [0.29.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.2...v0.29.0-rc.3) (2021-03-07)
+
 ## [0.29.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.1...v0.29.0-rc.2) (2021-03-04)
 
 
