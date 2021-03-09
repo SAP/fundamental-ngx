@@ -1,5 +1,5 @@
 import { Directive, ElementRef, NgZone, OnDestroy, OnInit, forwardRef } from '@angular/core';
-import { Subject, Observable, Observer, fromEvent, Subscription } from 'rxjs';
+import { Subject, Observable, Observer, fromEvent } from 'rxjs';
 import { filter, share, takeUntil, tap } from 'rxjs/operators';
 
 import { TableScrollDispatcherService, TableScrollable, TABLE_SCROLLABLE } from '../table-scroll-dispatcher.service';

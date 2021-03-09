@@ -13,9 +13,12 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { BaseInput } from '../form/base.input';
-import { ContentDensity, FormField, FormFieldControl } from '../form/public_api';
 import { SliderTickMark } from '@fundamental-ngx/core';
+
+import { BaseInput } from '../form/base.input';
+import { ContentDensity } from '../form/form-control';
+import { FormField } from '../form/form-field';
+import { FormFieldControl } from '../form/form-control';
 
 export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
 
