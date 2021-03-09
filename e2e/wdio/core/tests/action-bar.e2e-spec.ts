@@ -295,7 +295,7 @@ describe('Action Bar Test Suite', function() {
     function checkButtonFocusState(selector: string, tag: string, btnName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder()))
+        expect(checkElementScreenshot(selector, tag, actionBarPage.getScreenshotFolder(), index))
             .toBeLessThan(2, `${btnName} button focus state mismatch`);
     }
 
