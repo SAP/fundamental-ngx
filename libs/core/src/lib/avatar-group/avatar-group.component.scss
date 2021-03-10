@@ -376,7 +376,10 @@
     border: 0;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex
+    display: flex;
+
+    overflow: hidden;
+    white-space: nowrap;
 }
 .fd-avatar-group::after,
 .fd-avatar-group::before {

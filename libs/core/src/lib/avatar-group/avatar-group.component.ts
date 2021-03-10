@@ -14,11 +14,12 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { ViewportRuler } from '@angular/cdk/overlay';
 
-import { fromEvent, of, Subscription } from 'rxjs';
-import { delay, distinctUntilChanged } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
-import { ColorAccent, Size } from '../utils/public_api';
+import { ColorAccent, Size } from '../utils/datatypes';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 
 export type AvatarGroupType = 'group' | 'individual';
@@ -95,12 +96,11 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     private _subscription = new Subscription();
 
     /** @hidden */
-    ngOnInit(): void {
-        const sub = fromEvent(window, 'resize')
-            .pipe(distinctUntilChanged())
-            .subscribe(_ => this._onResize());
+    constructor(private _viewportRuler: ViewportRuler) {}
 
-        this._subscription.add(sub);
+    /** @hidden */
+    ngOnInit(): void {
+        this._subscription.add(this._viewportRuler.change().subscribe(() => this._onResize()));
     }
 
     /** @hidden */
@@ -138,11 +138,13 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
         const allItemsCounter = this.mainItems?.length || 0;
         let contentWidth = 0;
         let idx = 0;
+        const avatarGroupItemWidth = this._avatarGroupItemWidth;
+        const avatarGroupItemWithMarginsWidth = this._avatarGroupItemWithMarginsWidth;
 
         while (idx < allItemsCounter) {
             const newContentWidth = idx === 0 && this.isGroupType
-                ? contentWidth + this._avatarGroupItemWidth
-                : contentWidth + this._avatarGroupItemWithMarginsWidth;
+                ? contentWidth + avatarGroupItemWidth
+                : contentWidth + avatarGroupItemWithMarginsWidth;
 
             if (newContentWidth >= this._avatarGroupWidth) {
                 // -1 because the last element in the loop will be replaced by the overflow button
