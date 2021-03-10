@@ -97,6 +97,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
+                path: 'dynamic-page',
+                loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
+            },
+            {
               path: 'feed-list-item',
                 loadChildren: () =>
                     import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
@@ -340,6 +344,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/split-button/split-button-docs.module').then(
                         (m) => m.SplitButtonDocsModule
                     )
+            },
+            {
+                path: 'status-indicator',
+                loadChildren: () =>
+                    import('./component-docs/status-indicator/status-indicator-docs.module').then((m) => m.StatusIndicatorDocsModule)
             },
             {
                 path: 'step-input',

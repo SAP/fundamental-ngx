@@ -14,4 +14,16 @@ export class ObjectAttributePo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.title);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'object-attribute'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'object-attribute'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

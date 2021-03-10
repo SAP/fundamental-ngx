@@ -1,7 +1,17 @@
 import { StandardListItemPo } from '../pages/standard-list-item.po';
 import { click, getAttributeByName, getCSSPropertyByName, getElementArrayLength, getText } from '../../driver/wdio';
-import {secondaryAttr, compactAttr, noBorderAttr, borderAttr, byLineAltAttr, byLineAttr, linkAttr,
-secondaryTypes, noStyle, solidStyle} from '../fixtures/appData/standard-link-item-contents';
+import {
+    borderAttr,
+    byLineAltAttr,
+    byLineAttr,
+    compactAttr,
+    linkAttr,
+    noBorderAttr,
+    noStyle,
+    secondaryAttr,
+    secondaryTypes,
+    solidStyle
+} from '../fixtures/appData/standard-link-item-contents';
 import {
     checkAttributeValueTrue,
     checkElArrIsClickable,

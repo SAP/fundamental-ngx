@@ -12,7 +12,8 @@ export class DialogConfigurationExample {
         this._dialogService.open(template, {
             width: '300px',
             draggable: true,
-            responsivePadding: true
+            responsivePadding: true,
+            backdropClickCloseable: true
         });
     }
 
@@ -20,7 +21,8 @@ export class DialogConfigurationExample {
         this._dialogService.open(template, {
             width: '300px',
             resizable: true,
-            responsivePadding: true
+            responsivePadding: true,
+            backdropClickCloseable: true
         });
     }
 
@@ -28,8 +30,7 @@ export class DialogConfigurationExample {
         this._dialogService.open(template, {
             width: '300px',
             escKeyCloseable: false,
-            responsivePadding: true,
-            backdropClickCloseable: false
+            responsivePadding: true
         });
     }
 }

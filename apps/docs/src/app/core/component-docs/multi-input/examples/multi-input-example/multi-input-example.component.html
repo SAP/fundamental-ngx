@@ -1,4 +1,6 @@
+<label fd-label for="multiInput">Multi Input</label>
 <fd-multi-input
+    inputId="multiInput"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
     [placeholder]="'Search here...'"
     [(ngModel)]="selected"
@@ -10,10 +12,10 @@ Selected: [{{ selected.toLocaleString() }}]
 
 <label fd-label for="disabledMultiInput1">Disabled Multi Input</label>
 <fd-multi-input
+    inputId="disabledMultiInput1"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
     [placeholder]="'Search here...'"
     [disabled]="true"
-    id="disabledMultiInput1"
     [(ngModel)]="secondSelected"
 ></fd-multi-input>
 
@@ -23,9 +25,9 @@ Selected: [{{ secondSelected.toLocaleString() }}]
 
 <label fd-label for="noAddonMultiInput1">Hidden Addon Button</label>
 <fd-multi-input
+    inputId="noAddonMultiInput1"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
     [placeholder]="'Search here...'"
-    id="noAddonMultiInput1"
     [(ngModel)]="thirdSelected"
     [displayAddonButton]="false"
 ></fd-multi-input>

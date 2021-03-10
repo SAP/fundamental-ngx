@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.28.1-rc.13",
+  "version": "0.29.0-rc.7",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -87,7 +87,8 @@
     "build-storybook": "build-storybook",
     "nx": "nx",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test"
+    "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test",
+    "e2e-generate-report": "allure generate allure-results --clean -o allure-report"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -108,6 +109,7 @@
     "@stackblitz/sdk": "1.5.2",
     "@types/google.visualization": "0.0.59",
     "@types/node": "14.14.10",
+    "allure-commandline": "2.13.8",
     "classlist.js": "1.1.20150312",
     "core-js": "3.7.0",
     "focus-trap": "6.1.4",
@@ -120,7 +122,6 @@
     "moment": "2.29.1",
     "ngx-markdown": "10.1.1",
     "npm": "7.5.4",
-    "popper.js": "1.16.1",
     "raw-loader": "4.0.2",
     "rxjs": "6.6.6",
     "sauce-connect-launcher": "1.3.2",
@@ -162,7 +163,7 @@
     "@wdio/sync": "6.9.1",
     "angular-cli-ghpages": "0.6.2",
     "autoprefixer": "9.8.6",
-    "axe-core": "4.1.2",
+    "axe-core": "4.1.3",
     "axe-html-reporter": "2.2.0",
     "babel-loader": "8.2.2",
     "chromedriver": "88.0.0",
@@ -203,7 +204,7 @@
     "wdio-chromedriver-service": "6.0.4",
     "wdio-html-format-reporter": "0.4.0",
     "wdio-image-comparison-service": "2.0.0",
-    "webdriverio": "6.10.11"
+    "webdriverio": "6.12.1"
   },
   "pre-commit": {
     "color": true,

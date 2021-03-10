@@ -84,6 +84,8 @@ import { TitleModule } from './title/title.module';
 import { SliderModule } from './slider/public_api';
 import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
 import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
+import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
+import { StatusIndicatorModule } from './status-indicator/status-indicator.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -106,6 +108,7 @@ import { IllustratedMessageModule } from './illustrated-message/illustrated-mess
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
+        DynamicPageModule,
         DynamicSideContentModule,
         FeedListItemModule,
         FeedInputModule,
@@ -168,8 +171,9 @@ import { IllustratedMessageModule } from './illustrated-message/illustrated-mess
         DynamicSideContentModule,
         SliderModule,
         OnlyDigitsModule,
-        IllustratedMessageModule
+        IllustratedMessageModule,
+        StatusIndicatorModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
+    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })
-export class FundamentalNgxCoreModule { }
+export class FundamentalNgxCoreModule {}

@@ -18,4 +18,15 @@ export class LinkPo extends BaseComponentPo {
         waitForPresent(this.iconLink);
     }
 
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'link'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'link'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

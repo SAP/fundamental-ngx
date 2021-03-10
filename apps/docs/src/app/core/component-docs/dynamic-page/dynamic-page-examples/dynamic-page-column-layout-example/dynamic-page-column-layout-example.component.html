@@ -1,0 +1,180 @@
+<button fd-button (click)="openPage()">Click to open full screen</button>
+<div class="overlay" *ngIf="visible">
+    <fd-flexible-column-layout [layout]="localLayout" (layoutChange)="changeLayout($event)">
+        <ng-template #startColumn>
+            <fd-dynamic-page [autoResponsive]="true" ariaLabel="Example Dynamic Page">
+                <fd-dynamic-page-header
+                        title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                        subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua">
+                    <!-- breadcrumb content -->
+                    <fd-breadcrumb>
+                        <fd-breadcrumb-item>
+                            <a fd-breadcrumb-link href="#">Men</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-breadcrumb-link href="#">Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <a fd-breadcrumb-link href="#">Running Shoes</a>
+                        </fd-breadcrumb-item>
+                        <fd-breadcrumb-item>
+                            <span>Jogging</span>
+                        </fd-breadcrumb-item>
+                    </fd-breadcrumb>
+
+                    <fd-dynamic-page-title-content [compact]="true">
+                        Key Info
+                    </fd-dynamic-page-title-content>
+
+                    <fd-dynamic-page-global-actions>
+                        <!-- global actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                    fd-toolbar-item
+                                    fd-button
+                                    [compact]="true"
+                                    fdType="positive"
+                                    (click)="closePage()"
+                                    label="Accept"
+                                    title="Accept"
+                            ></button>
+                            <button
+                                    fd-toolbar-item
+                                    fd-button
+                                    [compact]="true"
+                                    fdType="negative"
+                                    (click)="closePage()"
+                                    label="Reject"
+                                    title="Reject"
+                            ></button>
+                            <fd-toolbar-separator></fd-toolbar-separator>
+                        </fd-toolbar>
+                    </fd-dynamic-page-global-actions>
+                    <fd-dynamic-page-layout-actions>
+                        <!-- layout actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                    fd-button
+                                    fdType="transparent"
+                                    aria-label="Resize"
+                                    title="Resize"
+                            >
+                                <i class="sap-icon--resize"></i>
+                            </button>
+                            <button
+                                    fd-button
+                                    fdType="transparent"
+                                    aria-label="Exit Fullscreen"
+                                    (click)="closePage()"
+                                    title="Exit Fullscreen">
+                                <i class="sap-icon--exitfullscreen"></i>
+                            </button>
+                            <button
+                                    fd-button
+                                    fdType="transparent"
+                                    aria-label="Close"
+                                    (click)="closePage()"
+                                    title="Close">
+                                <i class="sap-icon--decline"></i>
+                            </button>
+                        </fd-toolbar>
+                    </fd-dynamic-page-layout-actions>
+                </fd-dynamic-page-header>
+                <fd-dynamic-page-subheader
+                        [collapsible]="true"
+                        [pinnable]="true"
+                        [collapsed]="false">
+                    <!-- collapsible header content goes here -->
+                    <span>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
+                        perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur
+                        impedit repellendus esse, facere autem optio consequatur nobis?
+                            </span>
+                </fd-dynamic-page-subheader>
+                <fd-dynamic-page-content>
+                    <div class="fd-dynamic-page-section-example" style="display: flex; align-items: center; justify-content: center;">
+                        <button class="fd-button" (click)="changeLayout('TwoColumnsStartExpanded')">
+                            Open Column 2
+                        </button>
+                    </div>
+                    <div class="fd-dynamic-page-section-example">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="fd-dynamic-page-section-example">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="fd-dynamic-page-section-example">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="fd-dynamic-page-section-example">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="fd-dynamic-page-section-example">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                </fd-dynamic-page-content>
+                <fd-dynamic-page-footer>
+                    <!-- page footer content goes here -->
+                    <div fd-bar barDesign="floating-footer">
+                        <div fd-bar-right>
+                            <fd-button-bar label="Save" fdType="emphasized" (click)="closePage()"></fd-button-bar>
+                            <fd-button-bar label="Cancel" (click)="closePage()"></fd-button-bar>
+                        </div>
+                    </div>
+                </fd-dynamic-page-footer>
+            </fd-dynamic-page>
+        </ng-template>
+        <ng-template #midColumn>
+            <div class="docs-fcl-example-section">
+                <h2>Mid Column</h2>
+                <div>
+                    <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
+                        Open Column 3
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #endColumn>
+            <div class="docs-fcl-example-section">
+                <h2>End Column</h2>
+                <div>
+                    <button
+                            *ngIf="localLayout !== 'OneColumnEndFullScreen'"
+                            class="fd-button"
+                            (click)="changeLayout('OneColumnEndFullScreen')">Expand Column 3
+                    </button>
+                    <button
+                            *ngIf="localLayout !== 'OneColumnEndFullScreen'"
+                            class="fd-button"
+                            (click)="changeLayout('TwoColumnsMidExpanded')">Close Column 3
+                    </button>
+                    <button
+                            class="fd-button"
+                            *ngIf="localLayout === 'OneColumnEndFullScreen'"
+                            (click)="changeLayout('ThreeColumnsMidExpanded')">Exit Full Screen Column 3
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+    </fd-flexible-column-layout>
+</div>

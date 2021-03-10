@@ -37,4 +37,16 @@ export class SplitMenuButtonPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.arrowBtnArr);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'split-menu-button'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'split-menu-button'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }
