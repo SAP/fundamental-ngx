@@ -19,7 +19,19 @@ export class TimePickerPO extends BaseComponentPo {
     timeItem = 'span.fd-time__item';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
-    selectedPeriod = '.fd-time__current-indicator ~ span.fd-time-column-custom-hidden'
+    selectedPeriod = '.fd-time__current-indicator ~ span.fd-time-column-custom-hidden';
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'time-picker'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'time-picker'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 
     open(): void {
         super.open(this.url);

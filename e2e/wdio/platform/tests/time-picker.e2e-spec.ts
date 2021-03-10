@@ -11,11 +11,10 @@ import {
     sendKeys, isEnabled,
     setValue,
     waitForElDisplayed,
-    waitForPresent
+    waitForPresent, mouseHoverElement, addIsActiveClass
 } from '../../driver/wdio';
 import { time, text, defaultValidTime} from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
-import { checkElementActiveState, checkElementFocusState, checkElementHoverState } from '../../helper/assertion-helper';
 import {
     disabledTimePickerActiveState,
     disabledTimePickerExample,
@@ -161,8 +160,8 @@ describe('Time picker suite', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            timePickerPage.saveExampleBaselineScreenshot('time-picker');
-            expect(timePickerPage.compareWithBaseline('time-picker')).toBeLessThan(1);
+            timePickerPage.saveExampleBaselineScreenshot();
+            expect(timePickerPage.compareWithBaseline()).toBeLessThan(1);
         });
 
         it('should check examples visual regression', () => {
@@ -337,6 +336,27 @@ describe('Time picker suite', function() {
         });
 
     });
+
+    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        mouseHoverElement(selector, index);
+        saveElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} hover state mismatch`);
+    }
+
+    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        click(selector, index);
+        saveElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} focus state mismatch`);
+    }
+
+    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        addIsActiveClass(selector, index);
+        saveElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} item ${index} active state mismatch`);
+    }
 
     function selectHoursAndMinutes(hour: number = 1, minute: number = 1, day_time: string = ' PM '): void {
         while (getText(selectedHours) !== hour.toString()) {
