@@ -46,3 +46,8 @@ export const objDecimalExamplesText = [
     '100.88',
     '999.00'
 ];
+export const objTruncationText = [
+    '-2,000.00',
+    '3000',
+    '500000234.0'
+];

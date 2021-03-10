@@ -18,6 +18,7 @@ import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { Subscription } from 'rxjs';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 import { scrollTop } from '../utils/functions/scroll';
+import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -31,11 +32,6 @@ export const WIZARD_TALL_CONTENT_CLASS = 'fd-wizard-tall-content';
 export const SHELLBAR_CLASS = 'fd-shellbar';
 export const BAR_FOOTER_CLASS = 'fd-bar--footer';
 export const BAR_FLOATING_FOOTER_CLASS = 'fd-bar--floating-footer';
-
-export const ACTIVE_STEP_STATUS = 'active';
-export const CURRENT_STEP_STATUS = 'current';
-export const UPCOMING_STEP_STATUS = 'upcoming';
-export const COMPLETED_STEP_STATUS = 'completed';
 
 export let _fromScrollToCurrentStep;
 export let timer = null;

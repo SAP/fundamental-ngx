@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DialogService, RtlService } from '@fundamental-ngx/core';
-import { Media } from '../thumbnail.component';
+import { Media } from '../thumbnail.interfaces';
 import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
+
 @Component({
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',

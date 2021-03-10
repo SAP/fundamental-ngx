@@ -18,14 +18,16 @@ import {
     FileUploaderModule
 } from '@fundamental-ngx/core';
 
-import { PlatformTableModule } from '../table/public_api';
-import { PlatformMenuModule } from '../menu/public_api';
-import { PlatformButtonModule } from '../button/public_api';
-import { NewFolderComponent, MoveToComponent } from './dialogs';
-import { UploadCollectionComponent } from './upload-collection';
-import { UploadCollectionDragnDropDirective } from './directives';
+import { PlatformTableModule } from '../table/table.module';
+import { PlatformMenuModule } from '../menu/menu.module';
+import { PlatformButtonModule } from '../button/button.module';
+import { PlatformMenuButtonModule } from '../menu-button/menu-button.module';
 import { PlatformPipeModule } from '../../utils/pipes/pipe.module';
-import { PlatformMenuButtonModule } from '../menu-button/public_api';
+
+import { UploadCollectionDragnDropDirective } from './directives/upload-collection-dragndrop.directive';
+import { UploadCollectionComponent } from './upload-collection/upload-collection.component';
+import { NewFolderComponent } from './dialogs/new-folder/new-folder.component';
+import { MoveToComponent } from './dialogs/move-to/move-to.component';
 
 @NgModule({
     declarations: [

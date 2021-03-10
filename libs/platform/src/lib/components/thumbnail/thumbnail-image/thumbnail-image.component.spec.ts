@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { ThumbnailImageComponent } from './thumbnail-image.component';
 import { PlatformThumbnailModule } from '../thumbnail.module';
-import { Media } from '../thumbnail.component';
+import { Media } from '../thumbnail.interfaces';
 
 @Component({
     template: `<fdp-thumbnail-image [mediaList]="mediaList"></fdp-thumbnail-image>`

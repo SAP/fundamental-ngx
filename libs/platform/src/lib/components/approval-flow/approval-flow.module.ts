@@ -21,10 +21,12 @@ import {
     SelectModule,
     ToolbarModule
 } from '@fundamental-ngx/core';
-import { PlatformObjectStatusModule } from '../object-status/public_api';
-import { PlatformSearchFieldModule } from '../search-field/public_api';
+import { PlatformObjectStatusModule } from '../object-status/object-status.module';
+import { PlatformSearchFieldModule } from '../search-field/search-field.module';
+import { PlatformListModule } from '../list/list.module';
+import { StandardListItemModule } from '../list/standard-list-item/standard-list-item.module';
+
 import { ApprovalFlowComponent } from './approval-flow.component';
-import { PlatformListModule, StandardListItemModule } from '../list/public_api';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-details/approval-flow-approver-details.component';
 import { ApprovalFlowAddNodeComponent } from './approval-flow-add-node/approval-flow-add-node.component';

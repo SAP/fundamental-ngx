@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ThumbnailDetailsComponent } from './thumbnail-details.component';
 import { DialogRef } from '@fundamental-ngx/core';
-import { Media } from '../thumbnail.component';
-import { By } from '@angular/platform-browser';
+import { Media } from '../thumbnail.interfaces';
+
 describe('ThumbnailDetailsComponent', () => {
   let component: ThumbnailDetailsComponent;
   let fixture: ComponentFixture<ThumbnailDetailsComponent>;

@@ -11,7 +11,7 @@ import { debounceTime } from 'rxjs/operators';
 
 import { DialogRef } from '@fundamental-ngx/core';
 
-import { SearchInput } from '../../../../search-field/public_api';
+import { SearchInput } from '../../../../search-field/search-field.component';
 
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
