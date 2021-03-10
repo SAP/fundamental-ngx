@@ -1,4 +1,6 @@
 import {
+    addIsActiveClass,
+    checkElementScreenshot,
     clickNextElement,
     elementDisplayed,
     getAttributeByName,
@@ -7,8 +9,8 @@ import {
     getElementArrayLength,
     getText,
     getTextArr,
-    isElementClickable,
-    scrollIntoView
+    isElementClickable, mouseHoverElement, saveElementScreenshot,
+    scrollIntoView, click
 } from '../driver/wdio';
 
 export function checkRtlOrientation(element: string, index: number): void {
