@@ -97,6 +97,10 @@ export class MultiInputComponent implements
     @Input()
     searchTerm = '';
 
+    /** Id attribute for input element inside MultiInput component */
+    @Input()
+    inputId = '';
+
     /** Whether the search term should be highlighted in results. */
     @Input()
     highlight = true;
@@ -113,7 +117,7 @@ export class MultiInputComponent implements
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    filterFn: Function = this.defaultFilter;
+    filterFn: Function = this._defaultFilter;
 
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
@@ -490,7 +494,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    private defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
+    private _defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
@@ -552,6 +556,7 @@ export class MultiInputComponent implements
     /** @hidden */
     private _resetSearchTerm(): void {
         this.searchTerm = '';
+        this._applySearchTermChange(this.searchTerm);
         this._changeDetRef.detectChanges();
     }
 

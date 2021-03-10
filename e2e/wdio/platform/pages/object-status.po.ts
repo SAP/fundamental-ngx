@@ -24,4 +24,16 @@ export class ObjectStatusPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.pageHeader);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'platform-object-status'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'platform-object-status'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

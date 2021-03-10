@@ -144,7 +144,7 @@ describe('Info Label component test suite', () => {
     });
 
     it('should check examples basic visual regression', () => {
-        infoLabelPage.saveExampleBaselineScreenshot('info-label');
-        expect(infoLabelPage.compareWithBaseline('info-label')).toBeLessThan(1);
+        infoLabelPage.saveExampleBaselineScreenshot();
+        expect(infoLabelPage.compareWithBaseline()).toBeLessThan(1);
     });
 });

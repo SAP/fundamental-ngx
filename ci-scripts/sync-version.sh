@@ -12,7 +12,6 @@ echo "Updating packages.json under dist/libs with version ${NEW_VERSION}"
 ANGULAR_VERSION=$(node -p "require('./package.json').dependencies['@angular/core']")
 RXJS_VERSION=$(node -p "require('./package.json').dependencies['rxjs']")
 CDK_VERSION=$(node -p "require('./package.json').dependencies['@angular/cdk']")
-POPPER_VERSION=$(node -p "require('./package.json').dependencies['popper.js']")
 FDSTYLES_VERSION=$(node -p "require('./package.json').dependencies['fundamental-styles']")
 FOCUSTRAP_VERSION=$(node -p "require('./package.json').dependencies['focus-trap']")
 HAMMERJS_VERSION=$(node -p "require('./package.json').dependencies['hammerjs']")
@@ -24,7 +23,6 @@ grep -rl 'VERSION_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/VERSION_PLACEHOLDE
 grep -rl 'ANGULAR_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/ANGULAR_VER_PLACEHOLDER/${ANGULAR_VERSION}/g"
 grep -rl 'RXJS_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/RXJS_VER_PLACEHOLDER/${RXJS_VERSION}/g"
 grep -rl 'CDK_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/CDK_VER_PLACEHOLDER/${CDK_VERSION}/g"
-grep -rl 'POPPER_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/POPPER_VER_PLACEHOLDER/${POPPER_VERSION}/g"
 grep -rl 'FDSTYLES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FDSTYLES_VER_PLACEHOLDER/${FDSTYLES_VERSION}/g"
 grep -rl 'FOCUSTRAP_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FOCUSTRAP_VER_PLACEHOLDER/${FOCUSTRAP_VERSION}/g"
 grep -rl 'THEMING_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/THEMING_VER_PLACEHOLDER/${THEMING_VERSION}/g"

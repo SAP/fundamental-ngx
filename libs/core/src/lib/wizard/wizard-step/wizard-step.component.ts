@@ -20,7 +20,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
-import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../wizard.component';
+import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
 
 @Component({
     // tslint:disable-next-line:component-selector

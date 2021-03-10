@@ -14,4 +14,16 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.marker);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'object-marker'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'object-marker'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

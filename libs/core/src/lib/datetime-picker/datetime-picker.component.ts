@@ -18,7 +18,7 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Placement } from 'popper.js';
+import { Placement } from '../popover/popover-position/popover-position';
 
 import { DatetimeAdapter } from '../datetime/datetime-adapter';
 import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
@@ -86,6 +86,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     /** Whether the component is disabled. */
     @Input()
     disabled: boolean;
+
+    /** Id attribute for input element inside DateTimePicker component */
+    @Input()
+    inputId = '';
 
     /**
      * Whether the time component should be meridian (am/pm).

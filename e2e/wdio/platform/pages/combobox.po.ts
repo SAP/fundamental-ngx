@@ -71,4 +71,16 @@ export class ComboBoxPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.pageTitle);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'combobox'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'combobox'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

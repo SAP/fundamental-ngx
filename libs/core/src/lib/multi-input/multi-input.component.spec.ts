@@ -40,8 +40,8 @@ describe('MultiInputComponent', () => {
         fixture = TestBed.createComponent(MultiInputComponent);
         component = fixture.componentInstance;
         component.dropdownValues = [
-            { value: 'value', displayedValue: 'displayedValue' },
-            { value: 'value2', displayedValue: 'displayedValue2' }
+            'displayedValue',
+            'displayedValue2'
         ];
         fixture.detectChanges();
     });

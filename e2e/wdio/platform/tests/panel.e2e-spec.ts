@@ -1,5 +1,9 @@
 import { PanelPo } from '../pages/panel.po';
-import {action_panel_delete_button, action_panel_edit_button, expandable_panel_header} from '../fixtures/appData/panel-page-content';
+import {
+    action_panel_delete_button,
+    action_panel_edit_button,
+    expandable_panel_header
+} from '../fixtures/appData/panel-page-content';
 import {
     click,
     getCSSPropertyByName,
@@ -63,15 +67,16 @@ describe('Verify Panel', () => {
             .toBe(action_panel_delete_button);
         expect(waitForClickable(actionPanelBtn, 1)).toBe(true);
     });
-
-    it('should be able to switch to rtl', () => {
-        panelPage.checkRtlSwitch();
+    describe('orientation check', function() {
+        it('should be able to switch to rtl', () => {
+            panelPage.checkRtlSwitch();
+        });
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            panelPage.saveExampleBaselineScreenshot('panel');
-            expect(panelPage.compareWithBaseline('panel')).toBeLessThan(1);
+            panelPage.saveExampleBaselineScreenshot();
+            expect(panelPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

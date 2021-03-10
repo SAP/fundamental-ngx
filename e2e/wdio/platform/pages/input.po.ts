@@ -30,4 +30,16 @@ export class InputPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.defaultInput);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'input'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'input'): any {
+       return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

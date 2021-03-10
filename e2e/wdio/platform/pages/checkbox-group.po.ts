@@ -27,10 +27,19 @@ export class CheckboxGroupPO extends BaseComponentPo {
     errorTooltip = 'span.fd-form-message span';
     sectiontitle = 'fdp-platform-checkbox-group-examples h3';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
+    open(): void {
+        super.open(this.url);
+    }
 
-     open(): void {
-         super.open(this.url)
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'checkbox-group'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'checkbox-group'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

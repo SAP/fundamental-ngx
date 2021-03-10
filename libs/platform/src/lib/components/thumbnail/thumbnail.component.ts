@@ -5,18 +5,7 @@ import {
 import { DialogService, RtlService } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
-export interface Media {
-    title: string;
-    thumbnailUrl: string;
-    mediaType: string;
-    mediaUrl: string;
-    captionFile?: string;
-    audioDescFile?: string;
-    alt: string;
-    label: string;
-    selected?: boolean;
-    overlayRequired?: boolean;
-}
+import { Media } from './thumbnail.interfaces';
 
 export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailComponent, K = Media> {
     constructor(

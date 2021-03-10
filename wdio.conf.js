@@ -1,7 +1,8 @@
 /*require('ts-node').register({ transpileOnly: true });
 module.exports = require('./wdio.conf.ts');*/
-const {join} = require('path');
+const { join } = require('path');
 require('ts-node').register({ transpileOnly: true });
+AllureReporter = require('@wdio/allure-reporter').default;
 exports.config = {
     //
     // ====================
@@ -61,12 +62,13 @@ exports.config = {
             './e2e/wdio/platform/**/panel.e2e-spec.ts',
             './e2e/wdio/platform/**/radio-button-group.e2e-spec.ts',
             './e2e/wdio/platform/**/search.e2e-spec.ts',
+            './e2e/wdio/platform/**/slider.e2e-spec.ts',
             './e2e/wdio/platform/**/split-menu-button.e2e-spec.ts',
             './e2e/wdio/platform/**/standard-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
-         //   './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
+            //   './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
         ]
     },
@@ -264,7 +266,7 @@ exports.config = {
     }], ['allure', {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true
+        disableWebdriverScreenshotsReporting: false
     }]],
 
     jasmineNodeOpts: {
@@ -344,8 +346,7 @@ exports.config = {
 
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
-    }
-
+    },
 
 //     const processedConfig = await browser.getProcessedConfig();
 //
@@ -386,9 +387,13 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
-
+    afterTest: function(test, context, { error, result, duration, passed, retries }) {
+        if (error !== undefined) {
+            browser.takeScreenshot();
+            const html = browser.getPageSource();
+            AllureReporter.addAttachment('page.html', html, 'text/html');
+        }
+    },
 
     /**
      * Hook that gets executed after the suite has ended

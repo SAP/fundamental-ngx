@@ -1,7 +1,7 @@
 <h3>Use With Reactive Form</h3>
 
 <p>Platform radio buttons created with given list of SelectItem objects and have validation error</p>
-<form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
+<form #listform1="ngForm" (ngSubmit)="onSubmit(listform1)">
     <fdp-form-group [formGroup]="form1">
         <fdp-form-field id="radiolo1" rank="1" [required]="true">
             <fdp-radio-group name="radiolo1" [list]="items" [isInline]="true" formControlName="example1">
@@ -15,13 +15,13 @@
     </fdp-form-group>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
     <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
-        (click)="onResetForm1(listform)"></fdp-button>
+        (click)="onResetForm1(listform1)"></fdp-button>
 </form>
 <p style="margin-left: 2rem;">Selected value: {{ form1.controls.example1?.value }}</p>
 <br />
 
 <div>Vertical radio group</div>
-<form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
+<form #listform2="ngForm" (ngSubmit)="onSubmit(listform2)">
     <fdp-form-group [formGroup]="form5">
 
         <fdp-form-field id="radio-lo2" rank="2" [required]="true">
@@ -37,13 +37,13 @@
     </fdp-form-group>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
     <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
-        (click)="onResetForm5(listform)"></fdp-button>
+        (click)="onResetForm5(listform2)"></fdp-button>
 </form>
 <br />
 <br />
 
 <h3>Vertical radios with different contexts</h3>
-<form #listform="ngForm" (ngSubmit)="onSubmit(listform)">
+<form #listform3="ngForm" (ngSubmit)="onSubmit(listform3)">
     <div>Qualification form</div>
     <fdp-form-group #fg hintPlacement="left" [formGroup]="form6">
         <fdp-form-field #ffr1 id="education" [required]="true" hintPlacement="left" rank="1"
@@ -96,7 +96,7 @@
     </fdp-form-group>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
     <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
-        (click)="onResetForm6(listform)"></fdp-button>
+        (click)="onResetForm6(listform3)"></fdp-button>
 </form>
 <br />
 <br />

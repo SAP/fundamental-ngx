@@ -38,7 +38,7 @@ describe('object attribute test suite', function() {
     it('check visual regression', () => {
         refreshPage();
         waitForElDisplayed(standaloneTextObject);
-        objectAttributePage.saveExampleBaselineScreenshot('object-attribute');
-        expect(objectAttributePage.compareWithBaseline('object-attribute')).toBeLessThan(1);
+        objectAttributePage.saveExampleBaselineScreenshot();
+        expect(objectAttributePage.compareWithBaseline()).toBeLessThan(1);
     });
 });

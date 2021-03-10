@@ -11,4 +11,16 @@ export class DynamicSideContentPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.pageHeader);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'dynamic-side-content'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'dynamic-side-content'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

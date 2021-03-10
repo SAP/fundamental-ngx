@@ -72,6 +72,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/select', name: 'Select' },
             { url: 'core/shellbar', name: 'Shellbar' },
             { url: 'core/sideNavigation', name: 'Side Navigation' },
+            { url: 'core/status-indicator', name: 'Status Indicator' },
             { url: 'core/step-input', name: 'Step Input' },
             { url: 'core/table', name: 'Table' },
             { url: 'core/tabs', name: 'Tabs' },
@@ -91,6 +92,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
+            { url: 'core/dynamic-page', name: 'Dynamic Page' },
             { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
