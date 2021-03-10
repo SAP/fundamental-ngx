@@ -44,11 +44,13 @@ export class WizardStepIndicatorComponent {
 
     /** @hidden */
     stepItemClicked(step?: WizardStepComponent, event?: MouseEvent): void {
-        if (this.actionSheet) {
-            this.actionSheet.close();
+        if (step && step.visited) {
+            if (this.actionSheet) {
+                this.actionSheet.close();
+            }
+            event.preventDefault();
+            this.stepIndicatorItemClicked.emit(step);
         }
-        event.preventDefault();
-        this.stepIndicatorItemClicked.emit(step);
     }
 
     /** @hidden */

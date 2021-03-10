@@ -282,7 +282,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             }
             step._stepId = _stepId;
             _stepId++;
-            step.finalStep = false;
+            step.setFinalStep(false);
             /*
              If the step is completed and appendToWizard is true, hide the nextStep button, unless it's the last step,
              or if there's a summary and it is the second to last step
@@ -317,7 +317,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         if (lastVisibleTemplate && lastVisibleTemplate.content) {
             lastVisibleTemplate.content.tallContent = true;
         }
-        this.steps.last.finalStep = true;
+        this._setFinalStep();
     }
 
     /** @hidden */
@@ -427,20 +427,24 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _setFinalStep(): void {
         const lastNonSummaryStep = this._getLastNonSummaryStep();
-        if (this.steps.last.isSummary && lastNonSummaryStep) {
-            lastNonSummaryStep.content.tallContent = true;
-            lastNonSummaryStep.finalStep = true;
-            this.steps.last.removeFromDom();
-        } else if (lastNonSummaryStep) {
+        if (lastNonSummaryStep) {
+            if (this.steps.last.isSummary) {
+                this.steps.last.removeFromDom();
+            }
             if (lastNonSummaryStep.content) {
                 lastNonSummaryStep.content.tallContent = true;
             }
-            lastNonSummaryStep.finalStep = true;
+            lastNonSummaryStep.setFinalStep(true);
         }
     }
 
     /** @hidden */
     private _showSummary(): void {
+        this.steps.forEach(step => {
+            if (!step.isSummary) {
+                step.completed = true;
+            }
+        });
         const summary = this.steps.find((step) => step.isSummary);
         summary.content.tallContent = true;
         this.contentTemplates = [summary.content.contentTemplate];
