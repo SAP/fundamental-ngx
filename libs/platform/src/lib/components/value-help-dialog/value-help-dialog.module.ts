@@ -31,6 +31,7 @@ import { VhdBaseTab } from './components/base-tab/vhd-base-tab.component';
 import { SelectTabComponent } from './components/select-tab/select-tab.component';
 import { DefineTabComponent } from './components/define-tab/define-tab.component';
 import { ConditionCountMessageDirective } from './directives/condition-count-message.directive';
+
 @NgModule({
   declarations: [
     PlatformValueHelpDialogComponent,

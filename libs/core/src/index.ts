@@ -70,7 +70,7 @@ export * from './lib/feed-list-item/public_api';
 export * from './lib/dynamic-side-content/public_api';
 export * from './lib/title/public_api';
 export * from './lib/feed-input/public_api';
-export * from './lib/grid-list';
+export * from './lib/grid-list/public_api';
 export * from './lib/slider/public_api';
 export * from './lib/illustrated-message/public_api';
 export * from './lib/text/public_api';

@@ -33,17 +33,18 @@ import {
 
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DATA_PROVIDERS, DataProvider, ListDataSource } from '../../../domain';
+import { DATA_PROVIDERS, DataProvider, ListDataSource } from '../../../domain/data-source';
 import { MultiInputOption } from '../../../domain/data-model';
 import { ListComponent, SelectionType } from '../../list/list.component';
-import { ListConfig } from '../../list/public_api';
+import { ListConfig } from '../../list/list.config';
 import { FormFieldControl, Status } from '../form-control';
 import { FormField } from '../form-field';
-import { InputGroupAddonComponent } from '../input-group/public_api';
+import { InputGroupAddonComponent } from '../input-group/addon.component';
 import { InputType } from '../input/input.component';
 import { BaseMultiInput } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
+
 @Component({
     selector: 'fdp-multi-input',
     templateUrl: './multi-input.component.html',

@@ -56,7 +56,7 @@ import { FdpListDataSource, ListConfig, MatchingStrategy } from '../../list/publ
 import { isFunction, isJsObject, isString } from '../../../utils/lang';
 import { ContentDensity, FormFieldControl, Status } from '../form-control';
 import { FormField } from '../form-field';
-import { TextAlignment } from '../public_api';
+import { TextAlignment } from '../combobox';
 
 export class MultiInputSelectionChangeEvent {
     constructor(
