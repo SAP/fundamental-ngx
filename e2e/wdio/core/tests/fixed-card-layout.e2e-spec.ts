@@ -186,6 +186,13 @@ describe('Fixed card layout test suite', function() {
                 fxdCardLayoutPage.checkRtlSwitch();
             });
         });
+
+        fdescribe('Check visual regression', function() {
+            it('should check examples visual regression', () => {
+                fxdCardLayoutPage.saveExampleBaselineScreenshot();
+                expect(fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(1);
+            });
+        });
     });
 
     function checkDragAndDrop(clickElement, startLocation, endLocation, endLocationIndex): void {

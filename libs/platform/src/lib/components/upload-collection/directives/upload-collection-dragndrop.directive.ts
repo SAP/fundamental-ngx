@@ -2,7 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 
 import { closestElement } from '@fundamental-ngx/core';
 
-import { FilesValidatorService, FilesValidatorOutput } from '../services';
+import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
 
 /**
  * Directive that handles the drag and drop feature of the file input.

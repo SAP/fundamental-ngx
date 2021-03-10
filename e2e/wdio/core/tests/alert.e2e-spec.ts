@@ -58,8 +58,8 @@ describe('alert test suite', function() {
 
     describe('visual regression', function() {
         it('should check example blocks visual regression', () => {
-            alertPage.saveExampleBaselineScreenshot('alert');
-            expect(alertPage.compareWithBaseline('alert')).toBeLessThan(4);
+            alertPage.saveExampleBaselineScreenshot();
+            expect(alertPage.compareWithBaseline()).toBeLessThan(4);
         });
 
         it('should check custom alerts visual regression', () => {
@@ -68,8 +68,8 @@ describe('alert test suite', function() {
             for (let i = 0; customAlertCount > i; i++) {
                 click(openCustomAlertButton, i);
                 scrollIntoView(popupAlert);
-                saveElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`);
-                expect(checkElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`))
+                saveElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder());
+                expect(checkElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder()))
                     .toBeLessThan(1);
                 if (doesItExist(popupAlert + button) === false) {
                     waitForInvisibilityOf(popupAlert);

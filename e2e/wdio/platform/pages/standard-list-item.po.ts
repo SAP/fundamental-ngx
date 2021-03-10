@@ -50,4 +50,16 @@ export class StandardListItemPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.sNoBorderList);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'checkbox'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'checkbox'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

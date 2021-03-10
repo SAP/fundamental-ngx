@@ -4,7 +4,8 @@ import '@angular/localize/init';
 import { By } from '@angular/platform-browser';
 import { AvatarModule } from '../../../avatar/public_api';
 import { GridListModule } from '../../grid-list.module';
-import { GridListComponent, GridListSelectionMode } from './grid-list.component';
+import { GridListComponent } from './grid-list.component';
+import { GridListSelectionMode } from './grid-list-selection-mode';
 import { ButtonModule } from '../../../button/button.module';
 
 @Component({

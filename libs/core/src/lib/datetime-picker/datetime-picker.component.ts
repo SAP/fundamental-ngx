@@ -87,6 +87,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     @Input()
     disabled: boolean;
 
+    /** Id attribute for input element inside DateTimePicker component */
+    @Input()
+    inputId = '';
+
     /**
      * Whether the time component should be meridian (am/pm).
      * Default value is based on the current locale format option

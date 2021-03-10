@@ -116,18 +116,18 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('orientation check', function() {
+    describe('Orientation check', function() {
         it('should check RTL/LTR', () => {
             objectStatusPage.checkRtlSwitch();
         })
     });
 
-    describe('visual regression', function() {
+    describe('Visual regression', function() {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForPresent(defaultExamples + status);
-            objectStatusPage.saveExampleBaselineScreenshot('platform-object-status');
-            expect(objectStatusPage.compareWithBaseline('platform-object-status')).toBeLessThan(1);
+            objectStatusPage.saveExampleBaselineScreenshot();
+            expect(objectStatusPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

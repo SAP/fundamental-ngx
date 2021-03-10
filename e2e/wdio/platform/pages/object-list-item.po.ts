@@ -45,4 +45,16 @@ export class ObjectListItemPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.allObjsList);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'object-list-item'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'object-list-item'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

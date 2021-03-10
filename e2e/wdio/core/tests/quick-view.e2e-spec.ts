@@ -5,11 +5,14 @@ import {
 } from '../../driver/wdio';
 import { QuickViewPo } from '../pages/quick-view.po';
 import { mobile, phone, email, address, companyName, popoverHeaderValue } from '../fixtures/appData/quick-view-content';
+
 const quickViewPage: QuickViewPo = new QuickViewPo();
-const {openDialogButton, popoverWithHeaderButton, popoverHeader, companyAddressLabel, companyPopoverNameLabel,
+const {
+    openDialogButton, popoverWithHeaderButton, popoverHeader, companyAddressLabel, companyPopoverNameLabel,
     popoverSendReminderButton, popoverWithoutHeaderButton, companyNameLabel, emailLabel, phoneLabel, mobileLabel,
     avatar, emailPopoverLabel, phonePopoverLabel, popoverAvatar, popoverCancelButton,
-    mobilePopoverLabel, companyPopoverAddressLabel} = new QuickViewPo();
+    mobilePopoverLabel, companyPopoverAddressLabel
+} = new QuickViewPo();
 
 describe('Quick view  test suite:', function() {
 
@@ -47,8 +50,17 @@ describe('Quick view  test suite:', function() {
         click(popoverSendReminderButton);
     });
 
-    it('should check RTL orientation', () => {
-        quickViewPage.checkRtlSwitch();
+    describe('check orientation', function() {
+        it('should check RTL orientation', () => {
+            quickViewPage.checkRtlSwitch();
+        });
+    });
+
+    fdescribe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            quickViewPage.saveExampleBaselineScreenshot();
+            expect(quickViewPage.compareWithBaseline()).toBeLessThan(1);
+        });
     });
 });
 

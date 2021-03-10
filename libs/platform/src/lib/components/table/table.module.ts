@@ -51,17 +51,14 @@ import { P13FilteringDialogComponent } from './components/table-p13-dialog/filte
 import { FilterRuleComponent } from './components/table-p13-dialog/filtering/filter-rule.component';
 import { P13ColumnsDialogComponent } from './components/table-p13-dialog/columns/columns.component';
 
-import {
-    FdpCellDef,
-    FdpCellSelectableDirective,
-    FdpHeaderCellDef,
-    FdpTableCell,
-    FdpTableHeader,
-    FdpViewSettingsFilterCustomDef,
-    TableScrollableDirective,
-    TableScrollerDirective
-} from './directives';
-import { ValueByPathPipe } from './pipes';
+import { ValueByPathPipe } from './pipes/value-by-path.pipe';
+
+import { FdpCellDef, FdpTableCell } from './directives/table-cell.directive';
+import { FdpHeaderCellDef, FdpTableHeader } from './directives/table-header.directive';
+import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings-filter-custom.directive';
+import { TableScrollableDirective } from './directives/table-scrollable.directive';
+import { TableScrollerDirective } from './directives/table-scroller.directive';
+import { FdpCellSelectableDirective } from './directives/table-cell-selectable.directive';
 
 @NgModule({
     imports: [

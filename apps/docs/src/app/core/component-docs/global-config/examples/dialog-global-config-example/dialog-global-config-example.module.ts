@@ -3,8 +3,7 @@ import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '@fundamental-ngx/core';
 
 const DEFAULT_CONFIG: DialogConfig = {
     draggable: true,
-    escKeyCloseable: false,
-    backdropClickCloseable: false
+    escKeyCloseable: false
 };
 
 @NgModule({
