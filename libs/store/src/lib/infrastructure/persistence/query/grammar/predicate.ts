@@ -149,11 +149,7 @@ export class AndPredicate < TModel > extends BinaryPredicate < TModel > {
     }
 
     test(target: TModel): boolean {
-        let flag = true;
-        this.operands.forEach(op => {
-            flag = flag && op.test(target);
-        });
-        return flag;
+        return this.operands.every(op => op.test(target));
     }
 }
 
@@ -164,10 +160,6 @@ export class OrPredicate < TModel > extends BinaryPredicate < TModel > {
     }
 
     test(target: TModel): boolean {
-        let flag = false;
-        this.operands.forEach(op => {
-            flag = flag || op.test(target);
-        });
-        return flag;
+        return this.operands.some(op => op.test(target));
     }
 }
