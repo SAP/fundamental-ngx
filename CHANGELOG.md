@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.7...v0.29.0-rc.8) (2021-03-10)
+
+
+### Bug Fixes
+
+* (Core|Platform) ng xi18n command running on angular/cli@10 fails ([#4889](https://github.com/SAP/fundamental-ngx/issues/4889)) ([11a961f](https://github.com/SAP/fundamental-ngx/commit/11a961ff26d36cf403d1d7f3132c87d1404f4be2))
+
 ## [0.29.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.6...v0.29.0-rc.7) (2021-03-10)
 
 
