@@ -44,6 +44,11 @@
 	}
 }
 
+// Remove after bringing it from styles
 .fd-table__cell--no-data {
 	text-align: center;
+}
+
+.fd-table__cell {
+	word-break: break-all;
 }
