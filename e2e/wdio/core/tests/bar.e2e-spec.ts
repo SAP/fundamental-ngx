@@ -1,8 +1,10 @@
 import { BarPo } from '../pages/bar.po';
 import {
+    addIsActiveClass,
+    checkElementScreenshot, click,
     getElementArrayLength, isElementClickable,
-    isElementDisplayed,
-    refreshPage,
+    isElementDisplayed, mouseHoverElement,
+    refreshPage, saveElementScreenshot,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
@@ -13,7 +15,6 @@ import {
     saveCancelButtonExample, saveCancelButtonFocus,
     saveCancelButtonHover
 } from '../fixtures/testData/bar.tags';
-import { checkElementActiveState, checkElementFocusState, checkElementHoverState } from '../../helper/assertion-helper';
 import { leftArrowButton, saveCancelButton } from '../fixtures/appData/bar-contents';
 
 describe('Bar test suite:', function() {
@@ -81,8 +82,8 @@ describe('Bar test suite:', function() {
     describe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
-            barPage.saveExampleBaselineScreenshot('bar', componentExample);
-            expect(barPage.compareWithBaseline('bar', componentExample)).toBeLessThan(1);
+            barPage.saveExampleBaselineScreenshot();
+            expect(barPage.compareWithBaseline()).toBeLessThan(1);
         });
 
         it('Check arrow button focus state', () => {
@@ -133,5 +134,26 @@ describe('Bar test suite:', function() {
             }
         });
     });
+
+    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        mouseHoverElement(selector, index);
+        saveElementScreenshot(selector, tag, barPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, barPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button hover state mismatch`);
+    }
+
+    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        click(selector, index);
+        saveElementScreenshot(selector, tag, barPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, barPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button focus state mismatch`);
+    }
+
+    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        addIsActiveClass(selector, index);
+        saveElementScreenshot(selector, tag, barPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, barPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button item ${index} active state mismatch`);
+    }
 });
 

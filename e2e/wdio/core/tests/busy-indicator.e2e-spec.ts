@@ -1,11 +1,12 @@
 import { BusyIndicatorPo } from '../pages/busy-indicator.po';
 import {
-    addValue,
+    addIsActiveClass,
+    addValue, checkElementScreenshot,
     click,
     getElementArrayLength,
     isElementClickable,
-    isElementDisplayed,
-    refreshPage,
+    isElementDisplayed, mouseHoverElement,
+    refreshPage, saveElementScreenshot,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
@@ -22,7 +23,6 @@ import {
     indicatorBlockExample,
     indicatorBlockFocus
 } from '../fixtures/testData/busy-indicator.tags';
-import { checkElementActiveState, checkElementFocusState, checkElementHoverState } from '../../helper/assertion-helper';
 import { disableButtonContent, indicatorBlock, saveButtonContent } from '../fixtures/appData/busy-indicator-contents';
 
 describe('Busy Indicator test suite:', function() {
@@ -86,8 +86,8 @@ describe('Busy Indicator test suite:', function() {
     describe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
-            busyIndicatorPage.saveExampleBaselineScreenshot('busy-indicator', componentExample);
-            expect(busyIndicatorPage.compareWithBaseline('busy-indicator', componentExample)).toBeLessThan(1);
+            busyIndicatorPage.saveExampleBaselineScreenshot();
+            expect(busyIndicatorPage.compareWithBaseline()).toBeLessThan(1);
         });
 
         it('Check disable button hover state', () => {
@@ -146,4 +146,25 @@ describe('Busy Indicator test suite:', function() {
             checkElementFocusState(indicatorBlockWrapper, indicatorBlockExample + indicatorBlockFocus + '-', indicatorBlock);
         });
     });
+
+    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        mouseHoverElement(selector, index);
+        saveElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button hover state mismatch`);
+    }
+
+    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        click(selector, index);
+        saveElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button focus state mismatch`);
+    }
+
+    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        addIsActiveClass(selector, index);
+        saveElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button item ${index} active state mismatch`);
+    }
 });

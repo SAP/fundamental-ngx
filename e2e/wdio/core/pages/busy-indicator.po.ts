@@ -17,6 +17,18 @@ export class BusyIndicatorPo extends CoreBaseComponentPo {
     largeIndicator = '.fd-busy-indicator.fd-busy-indicator--l';
     indicatorBlockWrapper = 'fd-busy-indicator-wrapper-example  fd-busy-indicator:nth-child(2)';
 
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'busy-indicator'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'busy-indicator'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

@@ -1,8 +1,10 @@
 import { BreadcrumbPo } from '../pages/breadcrumb.po';
 import {
+    addIsActiveClass,
+    checkElementScreenshot, click,
     getElementArrayLength,
-    isElementClickable,
-    refreshPage,
+    isElementClickable, mouseHoverElement,
+    refreshPage, saveElementScreenshot,
     scrollIntoView, waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 
@@ -11,7 +13,6 @@ import {
     linksActiveState,
     linksExample, linksHoverState
 } from '../fixtures/testData/breadcrumb.tags';
-import { checkElementActiveState, checkElementHoverState } from '../../helper/assertion-helper';
 import { breadcrumbDisabledLinks, breadcrumbLinks } from '../fixtures/appData/breadcrumb-contents';
 
 
@@ -48,8 +49,8 @@ describe('Breadcrumb test suite:', function() {
     describe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
-            breadcrumbPage.saveExampleBaselineScreenshot('breadcrumb');
-            expect(breadcrumbPage.compareWithBaseline('breadcrumb')).toBeLessThan(1);
+            breadcrumbPage.saveExampleBaselineScreenshot();
+            expect(breadcrumbPage.compareWithBaseline()).toBeLessThan(1);
         });
 
         it('should check hover state for links', () => {
@@ -76,6 +77,27 @@ describe('Breadcrumb test suite:', function() {
             }
         });
     });
+
+    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        mouseHoverElement(selector, index);
+        saveElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button hover state mismatch`);
+    }
+
+    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        click(selector, index);
+        saveElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button focus state mismatch`);
+    }
+
+    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
+        addIsActiveClass(selector, index);
+        saveElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index))
+            .toBeLessThan(2, `${elementName} button item ${index} active state mismatch`);
+    }
 });
 
 
