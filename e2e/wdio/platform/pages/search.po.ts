@@ -21,4 +21,16 @@ export class SearchPo extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.searchFields);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'search'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'search'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

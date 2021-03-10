@@ -1,0 +1,136 @@
+<fd-docs-section-title id="defaultStatusIndicator" componentName="StatusIndicator">
+    Status Indicator default
+</fd-docs-section-title>
+<description>
+    The Status Indicator component follows fundamental-styles for Status Indicator guidelines. Use the
+    <code class="code-snippet">[path]=""</code> property to set the path/image to be loaded into the component.
+    <code class="code-snippet">[viewBox]=""</code> property value given from the svg image HTML .
+    <code class="code-snippet">[fillPercentage]=""</code> property number value defines the filling color percentage of
+    the image.
+</description>
+<component-example>
+    <fd-status-indicator-default></fd-status-indicator-default>
+</component-example>
+<code-example [exampleFiles]="defaultStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="sizeStatusIndicator'" componentName="StatusIndicator">
+    Status Indicator Size
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[size]=""</code> property to set image size to the SVG. this property accepts the
+    following values<code class="code-snippet">[status]="'sm' | 'md(default)'|,'lg' | 'xl'" </code></description
+>
+<component-example>
+    <fd-status-indicator-size></fd-status-indicator-size>
+</component-example>
+<code-example [exampleFiles]="sizeStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="fillTypeStatusIndicator" componentName="StatusIndicator">
+    Status Indicator Fill Color Type.
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[status]=""</code> property to set filling Color into the SVG.
+    <code class="code-snippet">[status]="'negative' | 'critical' | 'positive'"</code> type object which accepts the
+    defined set of values for the coloured fill.
+</description>
+<component-example>
+    <fd-status-indicator-fill-type></fd-status-indicator-fill-type>
+</component-example>
+<code-example [exampleFiles]="fillTypeStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="LabelledStatusIndicator" componentName="StatusIndicator">
+    Status Indicator with label
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[hasLabel]="" [labelPosition]="" [statusLabel]=""</code> properties to add label
+    to the SVG. <code class="code-snippet">[hasLabel]="" ></code> boolean value to accept the Label.
+    <code class="code-snippet">[labelPosition]="'left' | 'right' | 'top' | 'bottom'" </code> type object which accepts
+    the defined set of values. the Label. <code class="code-snippet">[statusLabel]="" </code> any string value to
+    display the Label String.
+</description>
+<component-example>
+    <fd-status-indicator-label class="status-label"></fd-status-indicator-label>
+</component-example>
+<code-example [exampleFiles]="labelStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="linearStatusIndicator" componentName="StatusIndicator">
+    Status Indicator with Linear Filling
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet"> [fillingType]=""</code> property to set filling Color from a specifc point of
+    angle.
+    <code class="code-snippet">[fillingType]="'linearup' | 'lineardown' | 'linearleft'"</code>
+    type object which accepts the defined set of values for representing the fill direction from top,bottom and left.
+</description>
+<component-example>
+    <fd-status-indicator-linear-fill-type></fd-status-indicator-linear-fill-type>
+</component-example>
+<code-example [exampleFiles]="angeledFillingStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="angledStatusIndicator" componentName="StatusIndicator">
+    Status Indicator with Angled Filling
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[angle]="" [fillingType]=""</code> property to set filling Color from a specifc
+    point of angle.
+    <code class="code-snippet">[fillingType]="'angled'"></code>
+    type object which accepts the defined set of values. <code class="code-snippet">[angle]="0-360"</code>accepts the
+    degree of angle from 0-360.
+</description>
+<component-example>
+    <fd-status-indicator-angled-filling></fd-status-indicator-angled-filling>
+</component-example>
+<code-example [exampleFiles]="angeledFillingStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="circularFillingClockwise" componentName="StatusIndicator">
+    Status Indicator Circular Filling Clock Wise
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[fillingDirection]="" [fillingType]=""</code> property to set filling Color from
+    a specifc point of angle.
+    <code class="code-snippet">[fillingType]="'radial'"></code>
+    radial defines the filling type.
+    <code class="code-snippet">[fillingDirection]="'clockwise' | 'counterclockwise'"></code>clock represent the filling
+    from the clock wise direction.
+</description>
+<component-example>
+    <fd-status-indicator-circular-fill-clock></fd-status-indicator-circular-fill-clock>
+</component-example>
+<code-example [exampleFiles]="circularClockFillingStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="circularFillingAntiClockwise" componentName="StatusIndicator">
+    Status Indicator Circular Filling Anti Clock Wise
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[fillingDirection]="" [fillingType]=""</code> property to set filling Color from
+    a specifc point of angle.
+    <code class="code-snippet">[fillingType]="'radial'"></code>
+    radial defines the filling type.
+    <code class="code-snippet">[fillingDirection]="'clockwise' | 'counterclockwise'"</code>anticlock represent the
+    filling from the anti clock wise direction.
+</description>
+<component-example>
+    <fd-status-indicator-circular-fill-anti-clock></fd-status-indicator-circular-fill-anti-clock>
+</component-example>
+<code-example [exampleFiles]="circularAntiClockFillingStatusIndicatorHtmlType"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="circularFillingAntiClockwise" componentName="StatusIndicator">
+    Status Indicator Clickable
+</fd-docs-section-title>
+<description>
+    Use the <code class="code-snippet">[clickable]="" </code> property is set clickable as true to make it focusable
+    from the keyboard tabbing.
+</description>
+<component-example>
+    <fd-status-indicator-linear-clickable-type></fd-status-indicator-linear-clickable-type>
+</component-example>
+<code-example [exampleFiles]="clickAbleFillingStatusIndicatorHtmlType"></code-example>
+<separator></separator>

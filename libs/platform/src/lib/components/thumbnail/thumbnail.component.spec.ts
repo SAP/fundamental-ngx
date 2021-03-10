@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { PlatformThumbnailModule } from './thumbnail.module';
-import { Media, ThumbnailComponent } from './thumbnail.component';
+import { Media } from './thumbnail.interfaces';
+import { ThumbnailComponent } from './thumbnail.component';
 
 @Component({
     template: `<fdp-thumbnail [mediaList]="mediaList"></fdp-thumbnail>`

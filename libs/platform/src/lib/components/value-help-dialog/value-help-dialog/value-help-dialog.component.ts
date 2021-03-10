@@ -36,7 +36,8 @@ import {
   ObservableValueHelpDialogDataSource
 } from '../models';
 
-import { VhdFilterComponent, VhdSearchComponent } from '../components';
+import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
+import { VhdSearchComponent } from '../components/value-help-dialog-search/value-help-dialog-search.component';
 import { defaultConditionDisplayFn } from '../constans/condition-display.function';
 
 export type FdpValueHelpDialogDataSource<T> = ValueHelpDialogDataSource<T>

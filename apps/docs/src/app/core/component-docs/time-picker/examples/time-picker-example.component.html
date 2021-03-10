@@ -1,4 +1,5 @@
-<fd-time-picker [(ngModel)]="timeObject"></fd-time-picker>
+<label fd-form-label for="timePicker">Time Picker</label>
+<fd-time-picker inputId="timePicker" [(ngModel)]="timeObject"></fd-time-picker>
 <br/>
 Selected Time:
 <ng-container *ngIf="timeObject">{{ timeObject.hour }}h {{ timeObject.minute }}m {{ timeObject.second }}s</ng-container>

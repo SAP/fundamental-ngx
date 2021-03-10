@@ -39,4 +39,16 @@ export class SwitchPo extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'switch'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'switch'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

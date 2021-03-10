@@ -20,18 +20,16 @@ import { PlatformCheckboxGroupModule } from './components/form/checkbox-group/ch
 import { PlatformPanelModule } from './components/panel/panel.module';
 import { PlatformSwitchModule } from './components/form/switch/switch.module';
 import { PlatformObjectStatusModule } from './components/object-status/object-status.module';
-import {
-    PlatformInputModule,
-    PlatformStepInputModule,
-    PlatformInputGroupModule,
-    PlatformMultiInputModule,
-    PlatformFileUploaderModule,
-    PlatformAutoCompleteModule,
-    PlatformSelectModule
-} from './components/form/public_api';
+import { PlatformInputModule } from './components/form/input/fdp-input.module';
+import { PlatformStepInputModule } from './components/form/step-input/step-input.module';
+import { PlatformInputGroupModule } from './components/form/input-group/input-group.module';
+import { PlatformMultiInputModule } from './components/form/multi-input/multi-input.module';
+import { PlatformFileUploaderModule } from './components/form/platform-file-uploader/platform-file-uploader.module';
+import { PlatformAutoCompleteModule } from './components/form/auto-complete/auto-complete.module';
 import { PlatformComboboxMobileModule } from './components/form/combobox/combobox-mobile/combobox-mobile.module';
-import { PlatformComboboxModule } from './components/form/combobox';
-import { PlatformThumbnailModule } from './components/thumbnail/public_api';
+import { PlatformComboboxModule } from './components/form/combobox/combobox.module';
+import { PlatformSelectModule } from './components/form/select/select.module';
+import { PlatformThumbnailModule } from './components/thumbnail/thumbnail.module';
 import { PlatformObjectMarkerModule } from './components/object-marker/object-marker.module';
 import { PlatformObjectAttributeModule } from './components/object-attribute/object-attribute.module';
 import { PlatformTableModule } from './components/table/table.module';
@@ -42,10 +40,14 @@ import { PlatformFeedInputModule } from './components/feed-input/feed-input.modu
 import { PlatformDatePickerModule } from './components/form/date-picker/date-picker.module';
 import { PlatformApprovalFlowModule } from './components/approval-flow/approval-flow.module';
 import { PlatformDynamicPageModule } from './components/dynamic-page/dynamic-page.module';
-import { PlatformUploadCollectionModule } from './components/upload-collection';
+import { PlatformUploadCollectionModule } from './components/upload-collection/upload-collection.module';
 import { PlatformValueHelpDialogModule } from './components/value-help-dialog/value-help-dialog.module';
-import { ActionListItemModule, DisplayListItemModule, ObjectListItemModule, PlatformListModule, StandardListItemModule } from './components/list/public_api';
-import { PlatformSliderModule } from './components/slider';
+import { ActionListItemModule } from './components/list/action-list-item/action-list-item.module';
+import { DisplayListItemModule } from './components/list/display-list-item/display-list-item.module';
+import { ObjectListItemModule } from './components/list/object-list-item/object-list-item.module';
+import { StandardListItemModule } from './components/list/standard-list-item/standard-list-item.module';
+import { PlatformListModule } from './components/list/list.module';
+import { PlatformSliderModule } from './components/slider/slider.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],

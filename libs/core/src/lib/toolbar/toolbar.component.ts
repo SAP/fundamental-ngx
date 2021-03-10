@@ -19,7 +19,7 @@ import {
 import { Observable, of, fromEvent } from 'rxjs';
 import { delay, debounceTime, takeWhile, distinctUntilChanged, filter } from 'rxjs/operators';
 
-import { ToolbarItemDirective } from './public_api';
+import { ToolbarItemDirective } from './toolbar-item.directive';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { OVERFLOW_PRIORITY_SCORE } from '../utils/consts';
 

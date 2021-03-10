@@ -25,4 +25,16 @@ export class MenuPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.menuBtnArr);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'menu'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'menu'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

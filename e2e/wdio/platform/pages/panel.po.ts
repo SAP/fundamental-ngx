@@ -24,10 +24,21 @@ export class PanelPo extends BaseComponentPo {
     actionPanelRoot = '#panel-actions-id';
     actionPanelBtn = this.actionPanelRoot + ' button.fd-ellipsis';
 
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.expandablePanelBtn);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'panel'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'panel'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

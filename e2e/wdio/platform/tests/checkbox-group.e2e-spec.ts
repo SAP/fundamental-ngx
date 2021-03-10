@@ -338,8 +338,8 @@ xdescribe('Checkbox group test suite', () => {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            checkboxGroupPage.saveExampleBaselineScreenshot('checkbox-group');
-            expect(checkboxGroupPage.compareWithBaseline('checkbox-group')).toBeLessThan(1);
+            checkboxGroupPage.saveExampleBaselineScreenshot();
+            expect(checkboxGroupPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

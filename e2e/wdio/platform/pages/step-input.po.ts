@@ -14,7 +14,6 @@ export class StepInputPo extends BaseComponentPo {
     activeInput = '//input[contains(@class, "fd-step-input__input") and not(ancestor::div[contains(@class, "is-disabled")]) and not (ancestor::div[contains(@class, "is-readonly")])]';
     reactiveFormInput = 'input#qty';
     formInput = 'input[name=qty]';
-    inputInTemplateDriverForm = 'input#number';
     errorMessage = '.is-error';
     minMaxButtonDecrement = '[ng-reflect-name="minMaxLimits"] button[title="Decrement"]';
     minMaxButtonIncrement = '[ng-reflect-name="minMaxLimits"] button[title="Increment"]';
@@ -32,6 +31,18 @@ export class StepInputPo extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.stepInputRoot);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'step-input'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'step-input'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }
 
