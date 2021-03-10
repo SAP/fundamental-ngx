@@ -1,12 +1,13 @@
 <div
     class="fd-status-indicator"
     [ngClass]="['fd-status-indicator--' + status]"
+    [class.fd-status-indicator--link]="clickable"
     [class.fd-status-indicator--htext]="labelPosition === 'left' || labelPosition === 'right'"
-    [attr.tabindex]="clickable ? 0 : -1"
+    [attr.tabindex]="focusable ? 0 : -1"
 >
     <span
         *ngIf="hasLabel && (labelPosition === 'left' || labelPosition === 'top')"
-        [ngClass]="'fd-status-indicator--' + size + '__text' + ' ' + 'fd-status-indicator--' + status + '__text'"
+        [ngClass]="'fd-status-indicator__text--' + size + ' ' + 'fd-status-indicator__text--' + status"
         >{{ statusLabel }}
     </span>
     <svg
@@ -22,7 +23,7 @@
     </svg>
     <span
         *ngIf="hasLabel && (labelPosition === 'right' || labelPosition === 'bottom')"
-        [ngClass]="'fd-status-indicator--' + size + '__text' + ' ' + 'fd-status-indicator--' + status + '__text'"
+        [ngClass]="'fd-status-indicator__text--' + size + ' ' + 'fd-status-indicator__text--' + status"
         >{{ statusLabel }}
     </span>
 </div>

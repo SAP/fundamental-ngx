@@ -1,5 +1,5 @@
 /*!
- * Fundamental Library Styles v0.15.1-rc.8
+ * Fundamental Library Styles v0.17.0-rc.12
  * Copyright (c) 2021 SAP SE or an SAP affiliate company.
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
  */
@@ -14,7 +14,6 @@
   font-family: "72", "72full", Arial, Helvetica, sans-serif;
   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
@@ -34,9 +33,7 @@
   text-align: center;
   text-decoration: inherit;
   text-transform: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+  text-rendering: optimizeLegibility
 }
 .sap-icon--accidental-leave::before {
   content: ""
@@ -2039,7 +2036,6 @@
   font-family: "72", "72full", Arial, Helvetica, sans-serif;
   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
@@ -2066,7 +2062,6 @@
   font-family: "72", "72full", Arial, Helvetica, sans-serif;
   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
@@ -2083,11 +2078,14 @@
   box-sizing: inherit;
   font-size: inherit
 }
+.fd-status-indicator--link {
+  cursor: pointer
+}
 .fd-status-indicator--positive {
   fill: #107e3e;
   fill: var(--sapPositiveElementColor,#107e3e)
 }
-.fd-status-indicator--positive__text {
+.fd-status-indicator__text--positive {
   color: #107e3e;
   color: var(--sapPositiveElementColor,#107e3e)
 }
@@ -2095,7 +2093,7 @@
   fill: #e9730c;
   fill: var(--sapCriticalElementColor,#e9730c)
 }
-.fd-status-indicator--critical__text {
+.fd-status-indicator__text--critical {
   color: #e9730c;
   color: var(--sapCriticalElementColor,#e9730c)
 }
@@ -2103,7 +2101,7 @@
   fill: #b00;
   fill: var(--sapNegativeElementColor,#b00)
 }
-.fd-status-indicator--negative__text {
+.fd-status-indicator__text--negative {
   color: #b00;
   color: var(--sapNegativeElementColor,#b00)
 }
@@ -2113,7 +2111,7 @@
   width: 1.875rem;
   height: 1.375rem
 }
-.fd-status-indicator--sm__text {
+.fd-status-indicator__text--sm {
   font-size: .75rem;
   font-size: var(--sapFontSmallSize,.75rem);
   margin: .375rem
@@ -2124,7 +2122,7 @@
   width: 2.8125rem;
   height: 1.875rem
 }
-.fd-status-indicator--md__text {
+.fd-status-indicator__text--md {
   font-size: .875rem;
   font-size: var(--sapFontSize,.875rem);
   margin: .5rem
@@ -2135,7 +2133,7 @@
   width: 5rem;
   height: 3.4375rem
 }
-.fd-status-indicator--lg__text {
+.fd-status-indicator__text--lg {
   font-size: 1.125rem;
   margin: .75rem
 }
@@ -2145,7 +2143,7 @@
   width: 9.0625rem;
   height: 6.25rem
 }
-.fd-status-indicator--xl__text {
+.fd-status-indicator__text--xl {
   font-size: 1.875rem;
   margin: 1rem
 }
