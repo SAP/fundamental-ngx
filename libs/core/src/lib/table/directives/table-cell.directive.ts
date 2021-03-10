@@ -14,9 +14,6 @@ import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
     selector: '[fdTableCell], [fd-table-cell]'
 })
 export class TableCellDirective implements AfterContentInit {
-    /** @hidden */
-    @HostBinding('class.fd-table__cell')
-    fdTableCellClass = true;
 
     /** Whether or not to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
@@ -53,13 +50,22 @@ export class TableCellDirective implements AfterContentInit {
     @Input()
     noPadding = false;
 
-    /** @hidden */
-    @ContentChildren(forwardRef(() => CheckboxComponent))
-    checkboxes: QueryList<CheckboxComponent>;
+    /** Whether or not the table cell indicates that there is no data */
+    @HostBinding('class.fd-table__cell--no-data')
+    @Input()
+    noData = false;
 
     /** Key of cell element, it's used to identify this cell with certain column */
     @Input()
     key: string;
+
+    /** @hidden */
+    @ContentChildren(forwardRef(() => CheckboxComponent))
+    checkboxes: QueryList<CheckboxComponent>;
+
+    /** @hidden */
+    @HostBinding('class.fd-table__cell')
+    _fdTableCellClass = true;
 
     constructor (
         public elementRef: ElementRef
@@ -70,5 +76,14 @@ export class TableCellDirective implements AfterContentInit {
         if (this.checkboxes && this.checkboxes.length) {
             this.elementRef.nativeElement.classList.add('fd-table__cell--checkbox');
         }
+
+        if (this.noData) {
+            this._setFullColSpan();
+        }
+    }
+
+    /** @hidden */
+    private _setFullColSpan(): void {
+        this.elementRef.nativeElement.setAttribute('colspan', '100%');
     }
 }
