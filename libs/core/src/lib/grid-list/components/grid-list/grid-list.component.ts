@@ -17,17 +17,10 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { parseLayoutPattern } from '../../helpers';
 import { GridListSelectionEvent, GridListSelectionService } from '../../services/grid-list-selection.service';
-import { GridListItemComponent } from '../grid-list-item';
+import { GridListItemComponent } from '../grid-list-item/grid-list-item.component';
+import { GridListSelectionMode } from './grid-list-selection-mode';
 
 let gridListUniqueId = 0;
-
-export type GridListSelectionMode =
-    | 'none'
-    | 'delete'
-    | 'singleSelect'
-    | 'singleSelectLeft'
-    | 'singleSelectRight'
-    | 'multiSelect';
 
 @Component({
     selector: 'fd-grid-list',

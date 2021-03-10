@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef } 
 
 import { TableFilterSelectOption } from '../../interfaces';
 import { FilterType } from '../../enums';
-import { FdpViewSettingsFilterCustomDef } from '../../directives';
+import { FdpViewSettingsFilterCustomDef } from '../../directives/table-view-settings-filter-custom.directive';
 
 /**
  * View settings dialog filter component.

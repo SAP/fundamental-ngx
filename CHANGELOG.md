@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.12...v0.29.0-rc.13) (2021-03-10)
+
+## [0.29.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.11...v0.29.0-rc.12) (2021-03-10)
+
+
+### Bug Fixes
+
+* (Core) updating the example for the truncation behaviour ([#4857](https://github.com/SAP/fundamental-ngx/issues/4857)) ([0ba46fa](https://github.com/SAP/fundamental-ngx/commit/0ba46fab4f7b2c1db05cc961b4baf0cf00e5bfc4))
+
+## [0.29.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.10...v0.29.0-rc.11) (2021-03-10)
+
+## [0.29.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.9...v0.29.0-rc.10) (2021-03-10)
+
+## [0.29.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.8...v0.29.0-rc.9) (2021-03-10)
+
+## [0.29.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.7...v0.29.0-rc.8) (2021-03-10)
+
+
+### Bug Fixes
+
+* (Core|Platform) ng xi18n command running on angular/cli@10 fails ([#4889](https://github.com/SAP/fundamental-ngx/issues/4889)) ([11a961f](https://github.com/SAP/fundamental-ngx/commit/11a961ff26d36cf403d1d7f3132c87d1404f4be2))
+
 ## [0.29.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.6...v0.29.0-rc.7) (2021-03-10)
 
 
