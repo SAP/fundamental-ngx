@@ -32,6 +32,9 @@ export class ApprovalFlowPo extends BaseComponentPo {
     approvalFlowNodeStatus = this.approvalFlowNode + ' fdp-object-status';
     approvalFlowNodeName = this.approvalFlowNode + ' .approval-flow-node__name';
     approvalFlowNodeDescription = this.approvalFlowNode + ' .approval-flow-node__description';
+    approvalFlowNodeCheckbox = 'fd-checkbox';
+    approvalFlowNodeActionMenu = '.approval-flow-node__edit-controls button';
+    approvalFlowNodeActionMenuItem = '[role="menuitem"]';
 
     remaindersSendToInput = 'fd-multi-input fd-tokenizer input';
     selectItem = '[role="listitem"]';
@@ -44,9 +47,26 @@ export class ApprovalFlowPo extends BaseComponentPo {
     toastMessageDialog = 'fd-message-toast';
     flowNavigationArrow = 'button.approval-flow__control--next-slide fd-icon[role="presentation"]';
 
+    topActionButtons = 'button.fd-button--standard.fd-button--compact';
+    messageStrip = 'fd-message-strip';
+    messageStripUndoLink = 'fd-message-strip a';
+    messageStripCancelUndoMessage = 'fd-message-strip button';
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.watchers);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'action-bar'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'action-bar'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }
