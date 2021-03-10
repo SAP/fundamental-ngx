@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 
 import { fromEvent, of, Subscription } from 'rxjs';
-import { debounceTime, delay, distinctUntilChanged } from 'rxjs/operators';
+import { delay, distinctUntilChanged } from 'rxjs/operators';
 
 import { ColorAccent, Size } from '../utils/public_api';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
@@ -31,7 +31,7 @@ let avatarGroupUniqueId = 0;
     templateUrl: './avatar-group.component.html',
     styleUrls: ['./avatar-group.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.Default
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */
@@ -53,9 +53,6 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** Counter for all avatars. */
     allItemsCount = 0;
-
-    /** Counter for visible in main content avatars. */
-    visibleItemsCount = 0;
 
     /** Counter for visible in overflow popover avatars. */
     overflowItemsCount = 0;
@@ -131,7 +128,6 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     /** @hidden */
     private _reset(): void {
         this.allItemsCount = this.mainItems.length;
-        this.visibleItemsCount = this.mainItems.length;
         this.overflowItemsCount = 0;
 
         this.mainItems.forEach(it => (it.elementRef.nativeElement.style.display = 'inline-block'));
@@ -152,7 +148,6 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
                 // -1 because the last element in the loop will be replaced by the overflow button
                 const newIdx = idx - 1;
 
-                this.visibleItemsCount = newIdx;
                 this.overflowItemsCount = allItemsCounter - newIdx;
 
                 const mainItemsToHide = this.mainItems.toArray().slice(newIdx);
