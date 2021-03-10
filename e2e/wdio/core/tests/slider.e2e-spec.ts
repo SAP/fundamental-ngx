@@ -214,7 +214,7 @@ describe('slider test suite', function() {
         });
     });
 
-    fdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             sliderPage.saveExampleBaselineScreenshot();
             expect(sliderPage.compareWithBaseline()).toBeLessThan(2);
