@@ -6,6 +6,7 @@ import * as largeHtml from '!raw-loader!./examples/object-number-large-example.c
 import * as unitsHtml from '!raw-loader!./examples/object-number-units-example.component.html';
 import * as statusHtml from '!raw-loader!./examples/object-number-status-example.component.html';
 import * as decimalHtml from '!raw-loader!./examples/object-number-decimal-example.component.html';
+import * as truncationHtml from '!raw-loader!./examples/object-number-truncation-example.component.html';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -59,6 +60,13 @@ export class ObjectNumberDocsComponent {
             language: 'html',
             code: decimalHtml,
             fileName: 'core-object-number-decimal-example'
+        }
+    ];
+    truncation: ExampleFile[] = [
+        {
+            language: 'html',
+            code: truncationHtml,
+            fileName: 'core-object-number-truncation-example'
         }
     ];
 }
