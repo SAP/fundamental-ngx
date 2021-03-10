@@ -1,5 +1,5 @@
 import {
-    Observable, Subject
+    Observable, Subject, Subscription
 } from 'rxjs';
 import {
     QueryParams
@@ -20,7 +20,8 @@ export interface OrderBy <TModel> {
  */
 export class Query<TModel> {
 
-    result$: Subject<Array<TModel>>;
+    _resultSubject$: Subject<Array<TModel>>;
+    result$: Observable<Array<TModel>>;
 
     /** @hidden - stores current keyword */
     _keyword: string;
@@ -49,11 +50,15 @@ export class Query<TModel> {
     /** @hidden - stores current expand properties */
     _expand: Array<keyof TModel>;
 
+    /** @hidden - stores active subscription to get */
+    _subscription: Subscription = new Subscription();
+
     constructor(
         private service: QueryService<TModel>,
         private adapter: QueryAdapter<TModel>
     ) {
-        this.result$ = new Subject<Array<TModel>>();
+        this._resultSubject$ = new Subject<Array<TModel>>();
+        this.result$ = this._resultSubject$.asObservable();
     }
 
     /**
@@ -153,8 +158,11 @@ export class Query<TModel> {
 
         const params = this._createQueryParams();
         const query = this.adapter.createQueryString(params);
-        this.service.getWithQuery(query).pipe(take(1)).subscribe(entities => {
-            this.result$.next(entities);
+        if (this._subscription) {
+            this._subscription.unsubscribe();
+        }
+        this._subscription = this.service.getWithQuery(query).pipe(take(1)).subscribe(entities => {
+            this._resultSubject$.next(entities);
         });
         return this.result$;
     }

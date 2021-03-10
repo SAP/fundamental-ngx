@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { CommonService } from './service/common.service';
@@ -14,7 +13,6 @@ export class AppComponent {
 
     constructor(
         private commonService: CommonService,
-        private titleService: Title,
     ) {
         this.title$ = this.commonService.$title.pipe(delay(0));
     }
