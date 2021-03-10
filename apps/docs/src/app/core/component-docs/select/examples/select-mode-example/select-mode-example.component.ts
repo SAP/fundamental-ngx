@@ -9,6 +9,6 @@ export class SelectModeExampleComponent {
     selectedValue1: string;
     selectedValue2: string;
     selectedValue3: string;
-    selectedValue4: string;
-    selectedValue5: string = this.options[0];
+    selectedValue4 = this.options[2];
+    selectedValue5 = this.options[0];
 }
