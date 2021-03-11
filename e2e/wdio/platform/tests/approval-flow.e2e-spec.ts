@@ -8,7 +8,7 @@ import {
     isElementClickable,
     isElementDisplayed,
     refreshPage, saveElementScreenshot,
-    selectOptionByValueAttribute, sendKeys,
+    selectOptionByValueAttribute, sendKeys, setValue,
     waitElementToBeClickable,
     waitForElDisappear,
     waitForElDisplayed,
@@ -67,7 +67,7 @@ describe('Approval flow', function() {
         messageStripCancelUndoMessage,
         topActionButtons,
         approvalFlowNodeActionMenu,
-        approvalFlowNodeActionMenuItem,
+        approvalFlowNodeActionMenuItem
     } = approvalFlowPage;
 
     beforeAll(() => {
@@ -183,6 +183,21 @@ describe('Approval flow', function() {
         }
     });
 
+    it('should be able to search users', () => {
+        waitForElDisplayed(editExampleButton);
+        click(editExampleButton);
+        waitForElDisplayed(approvalFlowNode, 3);
+        click(approvalFlowNode, 3);
+        waitForElDisplayed(detailsDialogSearchInput);
+        click(approvalFlowNode);
+        const usersCountBeforeSearch = getElementArrayLength(detailsDialogTeamMemberName);
+        setValue(approvalFlowNode, 'Caleb');
+        const usersCountAfterSearch = getElementArrayLength(detailsDialogTeamMemberName);
+
+        expect(usersCountAfterSearch).toBeLessThan(usersCountBeforeSearch);
+        expect(usersCountAfterSearch).toEqual(1);
+    });
+
     describe('Edit mode', function() {
         it('should be able to add watchers', () => {
             const watchersCountBefore = getElementArrayLength(watchersAvatar);
@@ -237,10 +252,10 @@ describe('Approval flow', function() {
             waitForElDisplayed(addNode);
             click(addNode);
             click(detailsDialogParallelSerialSelect);
-            click(detailsDialogParallelSerialSelectOption , 1);
+            click(detailsDialogParallelSerialSelectOption, 1);
             click(detailsDialogUserTeamButton);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            click(detailsDialogTeamMemberCheckBox , 4);
+            click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
             waitForElDisplayed(detailsDialogSendReminderBtn);
             click(detailsDialogSendReminderBtn);
@@ -260,7 +275,7 @@ describe('Approval flow', function() {
             click(topActionButtons);
             click(detailsDialogUserTeamButton);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            click(detailsDialogTeamMemberCheckBox , 4);
+            click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
             waitForElDisplayed(detailsDialogSendReminderBtn);
             click(detailsDialogSendReminderBtn);
@@ -269,17 +284,16 @@ describe('Approval flow', function() {
             expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdding - 1);
         });
 
-
         it('should be able to add node in serial using node action menu', () => {
             const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
             click(editExampleButton);
             waitForElDisplayed(approvalFlowNodeActionMenu);
-            click(approvalFlowNodeActionMenu , 3);
+            click(approvalFlowNodeActionMenu, 3);
             waitForElDisplayed(approvalFlowNodeActionMenuItem);
             click(approvalFlowNodeActionMenuItem);
             click(detailsDialogUserTeamButton);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            click(detailsDialogTeamMemberCheckBox , 4);
+            click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
             waitForElDisplayed(detailsDialogSendReminderBtn);
             click(detailsDialogSendReminderBtn);
@@ -315,7 +329,7 @@ describe('Approval flow', function() {
             waitForElDisplayed(editExampleButton);
             click(editExampleButton);
             waitForElDisplayed(approvalFlowNodeActionMenu);
-            click(approvalFlowNodeActionMenu , 1);
+            click(approvalFlowNodeActionMenu, 1);
             waitForElDisplayed(approvalFlowNodeActionMenuItem, 1);
             click(approvalFlowNodeActionMenuItem, 1);
 
@@ -333,7 +347,7 @@ describe('Approval flow', function() {
             click(addNode);
             click(detailsDialogUserTeamButton);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            click(detailsDialogTeamMemberCheckBox , 4);
+            click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
             waitForElDisplayed(detailsDialogSendReminderBtn);
             click(detailsDialogSendReminderBtn);
@@ -353,7 +367,7 @@ describe('Approval flow', function() {
             click(addNode);
             click(detailsDialogUserTeamButton);
             waitForElDisplayed(detailsDialogTeamMemberCheckBox);
-            click(detailsDialogTeamMemberCheckBox , 4);
+            click(detailsDialogTeamMemberCheckBox, 4);
             click(detailsDialogSendReminderBtn);
             waitForElDisplayed(detailsDialogSendReminderBtn);
             click(detailsDialogSendReminderBtn);
