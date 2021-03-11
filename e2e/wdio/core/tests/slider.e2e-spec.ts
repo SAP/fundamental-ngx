@@ -9,7 +9,7 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getText,
-    mouseHoverElement,
+    mouseHoverElement, refreshPage,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed
@@ -216,6 +216,8 @@ describe('slider test suite', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
+            refreshPage();
+            waitForElDisplayed(basicExamples);
             sliderPage.saveExampleBaselineScreenshot();
             expect(sliderPage.compareWithBaseline()).toBeLessThan(2);
         });
