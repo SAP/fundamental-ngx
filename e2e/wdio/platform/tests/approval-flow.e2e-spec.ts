@@ -189,7 +189,6 @@ describe('Approval flow', function() {
         waitForElDisplayed(approvalFlowNode, 3);
         click(approvalFlowNode, 3);
         waitForElDisplayed(detailsDialogSearchInput);
-        click(approvalFlowNode);
         const usersCountBeforeSearch = getElementArrayLength(detailsDialogTeamMemberName);
         setValue(approvalFlowNode, 'Caleb');
         const usersCountAfterSearch = getElementArrayLength(detailsDialogTeamMemberName);
