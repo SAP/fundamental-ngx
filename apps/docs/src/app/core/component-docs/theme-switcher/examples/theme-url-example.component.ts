@@ -27,8 +27,6 @@ export class ThemeUrlExampleComponent implements OnDestroy {
         private _themesService: ThemesService,
         private _router: Router
     ) {
-        _themesService.setThemeByRoute(this.themeQueryParamName);
-
         _themesService.onThemeQueryParamChange.pipe(
             takeUntil(this._onDestroy$)
         ).subscribe(theme => {
@@ -40,6 +38,8 @@ export class ThemeUrlExampleComponent implements OnDestroy {
                 customThemeUrl: this.cssUrl
             })
         })
+
+        _themesService.setThemeByRoute(this.themeQueryParamName);
    }
 
     ngOnDestroy(): void {

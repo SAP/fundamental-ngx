@@ -81,11 +81,12 @@ export class ThemesService {
                 takeUntil(this._onDestroy$),
                 filter(param => param && param[paramName])
             )
-            .subscribe(param => this.onThemeQueryParamChange.next({
-                    themeUrl: this.setTheme(param[paramName]),
-                    customThemeUrl: this.setCustomTheme(param[paramName])
-                })
-            );
+            .subscribe(param => this._propagateThemes(param[paramName]));
+
+        const nativeTheme = this._getNativeParameterByName(paramName);
+        if (nativeTheme) {
+            this._propagateThemes(nativeTheme)
+        }
     };
 
     /** Assign css file corresponding to chosen theme from @sap-theming **/
@@ -96,5 +97,24 @@ export class ThemesService {
     /** Assign css file corresponding to chosen theme fundamental-styles **/
     setCustomTheme(theme: string): SafeResourceUrl {
         return this._sanitizer.bypassSecurityTrustResourceUrl('assets/fundamental-styles-theming/' + theme + '.css');
+    }
+
+    /** @hidden */
+    private _getNativeParameterByName(paramName: string): string {
+        paramName = paramName.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + paramName + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(window.location.href);
+        if (!results || !results[2]) {
+            return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    /** @hidden */
+    private _propagateThemes(theme: string): void {
+        this.onThemeQueryParamChange.next({
+            themeUrl: this.setTheme(theme),
+            customThemeUrl: this.setCustomTheme(theme)
+        })
     }
 }
