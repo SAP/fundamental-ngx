@@ -85,13 +85,6 @@ describe('Breadcrumb test suite:', function() {
             .toBeLessThan(2, `${elementName} button hover state mismatch`);
     }
 
-    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        click(selector, index);
-        saveElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button focus state mismatch`);
-    }
-
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag, breadcrumbPage.getScreenshotFolder(), index);
