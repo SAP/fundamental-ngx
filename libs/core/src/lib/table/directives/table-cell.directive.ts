@@ -61,7 +61,7 @@ export class TableCellDirective implements AfterContentInit {
 
     /** @hidden */
     @ContentChildren(forwardRef(() => CheckboxComponent))
-    checkboxes: QueryList<CheckboxComponent>;
+    _checkboxes: QueryList<CheckboxComponent>;
 
     /** @hidden */
     @HostBinding('class.fd-table__cell')
@@ -73,17 +73,12 @@ export class TableCellDirective implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.checkboxes && this.checkboxes.length) {
+        if (this._checkboxes && this._checkboxes.length) {
             this.elementRef.nativeElement.classList.add('fd-table__cell--checkbox');
         }
 
         if (this.noData) {
-            this._setFullColSpan();
+            this.elementRef.nativeElement.setAttribute('colspan', '100%');
         }
-    }
-
-    /** @hidden */
-    private _setFullColSpan(): void {
-        this.elementRef.nativeElement.setAttribute('colspan', '100%');
     }
 }
