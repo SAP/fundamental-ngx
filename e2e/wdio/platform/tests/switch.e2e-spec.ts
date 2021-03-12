@@ -277,7 +277,7 @@ describe('Verify Switch component', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             switchPage.saveExampleBaselineScreenshot();
-            expect(switchPage.compareWithBaseline()).toBeLessThan(1);
+            expect(switchPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 

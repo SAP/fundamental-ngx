@@ -262,7 +262,7 @@ describe('List test suite:', function() {
     xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             listPage.saveExampleBaselineScreenshot();
-            expect(listPage.compareWithBaseline()).toBeLessThan(1);
+            expect(listPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });

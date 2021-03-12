@@ -120,7 +120,7 @@ describe('Thumbnail field', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             thumbnailPage.saveExampleBaselineScreenshot();
-            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(2);
+            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });

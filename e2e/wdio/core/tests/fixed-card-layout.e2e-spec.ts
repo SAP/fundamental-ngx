@@ -190,7 +190,7 @@ describe('Fixed card layout test suite', function() {
         describe('Check visual regression', function() {
             it('should check examples visual regression', () => {
                 fxdCardLayoutPage.saveExampleBaselineScreenshot();
-                expect(fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(1);
+                expect(fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(3);
             });
         });
     });

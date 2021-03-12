@@ -65,7 +65,7 @@ describe('Object marker test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             objectMarkerPage.saveExampleBaselineScreenshot();
-            expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(1);
+            expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });
