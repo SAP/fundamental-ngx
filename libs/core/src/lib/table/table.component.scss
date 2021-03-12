@@ -44,11 +44,17 @@
 	}
 }
 
-// Remove after bringing it from styles
+// Remove after merging and migrate https://github.com/SAP/fundamental-styles/pull/2192
 .fd-table__cell--no-data {
 	text-align: center;
 }
 
-.fd-table__cell {
-	word-break: break-all;
+.fd-table__text {
+	word-break: break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	&--no-wrap {
+		white-space: nowrap;
+	}
 }
