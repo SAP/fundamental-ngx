@@ -26,8 +26,8 @@
                     >
                         All files
                     </a>
-                    <span *ngIf="_breadcrumbList.length === 0">
-                        <span i18n="@@platformUploadCollection.Breadcrumb.Label.AllFiles">All files</span>
+                    <span *ngIf="_breadcrumbList.length === 0" i18n="@@platformUploadCollection.Breadcrumb.Label.AllFilesWithTotal">
+                        <span>All files</span>
                         (<span [innerText]="_totalItems"></span>)
                     </span>
                 </fd-breadcrumb-item>

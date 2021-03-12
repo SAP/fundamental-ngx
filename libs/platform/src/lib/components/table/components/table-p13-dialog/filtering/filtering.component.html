@@ -45,9 +45,9 @@
                             fdType="transparent"
                             glyph="sys-cancel"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogRemoveFilter"
+                            i18n-aria-label="platformTableP13FilterDialogRemoveFilter|Button aria-label attribute"
                             aria-label="Remove Filter"
-                            i18n-title="@@platformTableP13FilterDialogRemoveFilter"
+                            i18n-title="platformTableP13FilterDialogRemoveFilter|Button title attribute"
                             title="Remove Filter"
                             (click)="_removeRule(rule, _includeRules)"
                         ></button>
@@ -58,9 +58,9 @@
                             fdType="transparent"
                             glyph="add"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogAddFilter"
+                            i18n-aria-label="platformTableP13FilterDialogAddFilter|Button arial-label attribute"
                             aria-label="Add Filter"
-                            i18n-title="@@platformTableP13FilterDialogAddFilter"
+                            i18n-title="platformTableP13FilterDialogAddFilter|Button title attribute"
                             title="Add Filter"
                             (click)="_addNewRule(_includeRules)"
                         ></button>
@@ -94,9 +94,9 @@
                             fdType="transparent"
                             glyph="sys-cancel"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogRemoveFilter"
+                            i18n-aria-label="platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute"
                             aria-label="Remove Filter"
-                            i18n-title="@@platformTableP13FilterDialogRemoveFilter"
+                            i18n-title="platformTableP13FilterDialogRemoveFilterFromExclude|Button title attribute"
                             title="Remove Filter"
                             (click)="_removeRule(rule, _excludeRules)"
                         ></button>
@@ -107,9 +107,9 @@
                             fdType="transparent"
                             glyph="add"
                             [compact]="true"
-                            i18n-aria-label="@@platformTableP13FilterDialogAddFilter"
+                            i18n-aria-label="platformTableP13FilterDialogAddFilterToExclude|Button aria-label attribute"
                             aria-label="Add Filter"
-                            i18n-title="@@platformTableP13FilterDialogAddFilter"
+                            i18n-title="platformTableP13FilterDialogAddFilterToExclude|Button title attribute"
                             title="Add Filter"
                             (click)="_addNewRule(_excludeRules)"
                         ></button>
@@ -126,7 +126,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableDialogButtonOK"
+                i18n-label="@@platformTableP13FilterDialogConfirmationBtn"
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
@@ -140,7 +140,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableDialogButtonCancel"
+                i18n-label="@@platformTableP13FilterDialogCancelBtn"
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"
