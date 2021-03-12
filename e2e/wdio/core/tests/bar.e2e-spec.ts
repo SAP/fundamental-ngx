@@ -21,7 +21,7 @@ describe('Bar test suite:', function() {
     const barPage: BarPo = new BarPo();
     const {
         arrowButtons, leftSections, saveCancelButtons, pictures,
-        subMiddleSection, rightSections, middleSections, componentExample
+        subMiddleSection, rightSections, middleSections,
     } = barPage;
 
     beforeAll(() => {
