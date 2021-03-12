@@ -1,14 +1,18 @@
 import {
     checkElementScreenshot,
-    click, currentPlatformName,
+    click,
+    currentPlatformName,
     doesItExist,
     getElementArrayLength,
     getText,
     getTextArr,
     isElementClickable,
     isElementDisplayed,
-    refreshPage, saveElementScreenshot,
-    selectOptionByValueAttribute, sendKeys, setValue,
+    refreshPage,
+    saveElementScreenshot,
+    selectOptionByValueAttribute,
+    sendKeys,
+    setValue,
     waitElementToBeClickable,
     waitForElDisappear,
     waitForElDisplayed,
@@ -16,16 +20,15 @@ import {
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
 import {
+    approved_node_status,
     details_dialog_cancel_btn,
     details_dialog_header,
     details_dialog_send_reminder_btn,
     node_statuses,
+    rejected_node_status,
     remainder_text,
-    watchers_block_title,
-    approved_node_status,
-    rejected_node_status
+    watchers_block_title
 } from '../fixtures/appData/approval-flow-contents';
-import exp = require('constants');
 
 describe('Approval flow', function() {
     const approvalFlowPage = new ApprovalFlowPo();
@@ -190,7 +193,7 @@ describe('Approval flow', function() {
         click(approvalFlowNode, 3);
         waitForElDisplayed(detailsDialogSearchInput);
         const usersCountBeforeSearch = getElementArrayLength(detailsDialogTeamMemberName);
-        setValue(approvalFlowNode, 'Caleb');
+        setValue(detailsDialogSearchInput, 'Caleb');
         const usersCountAfterSearch = getElementArrayLength(detailsDialogTeamMemberName);
 
         expect(usersCountAfterSearch).toBeLessThan(usersCountBeforeSearch);
