@@ -5,6 +5,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
+import { Platform } from '@angular/cdk/platform';
 
 export interface ThemeServiceOutput {
     themeUrl: SafeResourceUrl;
@@ -60,6 +61,7 @@ export class ThemesService {
 
     constructor(
         @Optional() private _activatedRoute: ActivatedRoute,
+        private _platform: Platform,
         private _sanitizer: DomSanitizer
     ) {}
 
@@ -101,13 +103,11 @@ export class ThemesService {
 
     /** @hidden */
     private _getNativeParameterByName(paramName: string): string {
-        paramName = paramName.replace(/[\[\]]/g, '\\$&');
-        const regex = new RegExp('[?&]' + paramName + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(window.location.href);
-        if (!results || !results[2]) {
-            return '';
+        if (this._platform.TRIDENT) {
+            return null;
         }
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(paramName);
     }
 
     /** @hidden */
