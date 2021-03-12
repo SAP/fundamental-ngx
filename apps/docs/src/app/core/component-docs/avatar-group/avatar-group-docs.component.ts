@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 
 import * as avatarGroupIndividualTs from '!raw-loader!./examples/avatar-group-individual-type-example.component.ts';
 import * as avatarGroupIndividualHtml from '!raw-loader!./examples/avatar-group-individual-type-example.component.html';
+import * as avatarGroupIndividualScss from '!raw-loader!./examples/avatar-group-individual-type-example.component.scss';
 import * as avatarGroupGroupTs from '!raw-loader!./examples/avatar-group-group-type-example.component.ts';
 import * as avatarGroupGroupHtml from '!raw-loader!./examples/avatar-group-group-type-example.component.html';
+import * as avatarGroupGroupScss from '!raw-loader!./examples/avatar-group-group-type-example.component.scss';
 import * as avatarGroupDataServiceTs from '!raw-loader!./examples/avatar-group-data-example.service.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -18,6 +20,11 @@ export class AvatarGroupDocsComponent {
             language: 'html',
             fileName: 'avatar-group-individual-type-example',
             code: avatarGroupIndividualHtml
+        },
+        {
+            language: 'scss',
+            fileName: 'avatar-group-individual-type-example',
+            code: avatarGroupIndividualScss
         },
         {
             language: 'typescript',
@@ -40,6 +47,11 @@ export class AvatarGroupDocsComponent {
             language: 'html',
             fileName: 'avatar-group-group-type-example',
             code: avatarGroupGroupHtml
+        },
+        {
+            language: 'scss',
+            fileName: 'avatar-group-group-type-example',
+            code: avatarGroupGroupScss
         },
         {
             language: 'typescript',

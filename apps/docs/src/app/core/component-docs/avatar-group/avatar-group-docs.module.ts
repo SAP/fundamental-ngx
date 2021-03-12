@@ -10,7 +10,6 @@ import {
     AvatarModule,
     BarModule,
     ButtonModule,
-    LayoutGridModule,
     PopoverModule,
     QuickViewModule,
     TitleModule
@@ -41,7 +40,6 @@ const routes: Routes = [
         PopoverModule,
         QuickViewModule,
         BarModule,
-        LayoutGridModule,
         TitleModule
     ],
     exports: [RouterModule],

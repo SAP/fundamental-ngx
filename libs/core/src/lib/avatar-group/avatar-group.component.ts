@@ -40,6 +40,10 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     @HostBinding('attr.id')
     id = `fd-avatar-group-${avatarGroupUniqueId++}`;
 
+    /** Apply user custom class. */
+    @Input()
+    class: string;
+
     /** The size of the Avatar Group. Options include: *xs*, *s*, *m*, *l* and *xl* (default: *s*). */
     @Input()
     size: Size = 's';
@@ -149,9 +153,7 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
             if (newContentWidth >= this._avatarGroupWidth) {
                 // -1 because the last element in the loop will be replaced by the overflow button
                 const newIdx = idx - 1;
-
                 this.overflowItemsCount = allItemsCounter - newIdx;
-
                 const mainItemsToHide = this.mainItems.toArray().slice(newIdx);
                 mainItemsToHide.forEach(it => (it.elementRef.nativeElement.style.display = 'none'));
 
@@ -173,7 +175,8 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
         this.rootClassNames = {
             'fd-avatar-group': true,
             [`fd-avatar-group--${this.type}-type`]: true,
-            [`fd-avatar-group--${this.size}`]: true
+            [`fd-avatar-group--${this.size}`]: true,
+            [this.class]: true
         };
     }
 }

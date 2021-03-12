@@ -1,5 +1,10 @@
 <fd-avatar-group #avatarGroup_GroupType type="group" [size]="size">
-    <fd-popover [noArrow]="false" placement="bottom">
+    <fd-popover [noArrow]="false"
+                [focusTrapped]="true"
+                [focusAutoCapture]="true"
+                [closeOnEscapeKey]="true"
+                placement="bottom"
+                additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class">
         <fd-popover-control>
             <div *ngFor="let person of people" fd-avatar-group-item>
                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
@@ -27,18 +32,24 @@
                 </bdi>
             </button>
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body #overflowPopoverBody>
             <div class="fd-popover__wrapper">
                 <div fd-popover-body-header>
                     <div fd-bar barDesign="header">
-                        <div fd-bar-left>
-                            <fd-button-bar *ngIf="overflowPopoverStage === 'detail'"
+                        <div fd-bar-middle
+                             [style.justify-content]="isDetailStage ? 'space-between' : 'center'"
+                             dir="ltr">
+                            <fd-button-bar *ngIf="isDetailStage"
                                            (click)="openOverflowMain()"
                                            glyph="navigation-left-arrow"
-                                           fdType="standard"></fd-button-bar>
+                                           fdType="transparent"
+                                           aria-label="Back"
+                                           title="Back"
+                            ></fd-button-bar>
                             <fd-bar-element>
                                 Team Members ({{ avatarGroup_GroupType.allItemsCount }})
                             </fd-bar-element>
+                            <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>
                         </div>
                     </div>
                 </div>
@@ -47,12 +58,30 @@
                     <ng-container *ngIf="overflowPopoverStage === 'main'">
                         <ng-container *ngFor="let person of people; let idx = index;">
                             <div fd-avatar-group-overflow-item (click)="openOverflowDetails(idx)">
-                                <fd-avatar *ngIf="!person.imageUrl && !person.glyph" [circle]="true" size="s"
-                                           [label]="person.firstName + ' ' + person.lastName"></fd-avatar>
-                                <fd-avatar *ngIf="person.imageUrl" [circle]="true" size="s"
-                                           [image]="person.imageUrl"></fd-avatar>
-                                <fd-avatar *ngIf="person.glyph" [circle]="true" size="s"
-                                           [glyph]="person.glyph"></fd-avatar>
+                                <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           [label]="person.firstName + ' ' + person.lastName"
+                                           (click)="openOverflowDetails(idx)"
+                                           (keydown.enter)="openOverflowDetails(idx)"
+                                           (keydown.space)="openOverflowDetails(idx)"
+                                           tabindex="0"></fd-avatar>
+                                <fd-avatar *ngIf="person.imageUrl"
+                                           [circle]="true"
+                                           size="s"
+                                           [image]="person.imageUrl"
+                                           (click)="openOverflowDetails(idx)"
+                                           (keydown.enter)="openOverflowDetails(idx)"
+                                           (keydown.space)="openOverflowDetails(idx)"
+                                           tabindex="0"></fd-avatar>
+                                <fd-avatar *ngIf="person.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           [glyph]="person.glyph"
+                                           (click)="openOverflowDetails(idx)"
+                                           (keydown.enter)="openOverflowDetails(idx)"
+                                           (keydown.space)="openOverflowDetails(idx)"
+                                           tabindex="0"></fd-avatar>
                             </div>
                         </ng-container>
                     </ng-container>

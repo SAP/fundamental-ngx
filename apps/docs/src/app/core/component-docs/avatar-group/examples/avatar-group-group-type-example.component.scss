@@ -1,0 +1,24 @@
+.fd-avatar-group--group-type__overflow-popover-body--custom-class {
+    .fd-popover__wrapper {
+        max-width: 312px;
+    }
+
+    .fd-avatar-group__item {
+        fd-avatar {
+            cursor: pointer;
+
+            &:focus {
+                outline-offset: 0.0625rem;
+                outline-width: 0.0625rem;
+                outline-color: #000;
+                outline-style: dotted;
+            }
+        }
+    }
+
+    fd-quick-view {
+        .fd-quick-view__content {
+            padding: 0;
+        }
+    }
+}
