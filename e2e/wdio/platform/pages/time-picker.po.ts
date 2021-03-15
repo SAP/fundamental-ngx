@@ -17,9 +17,7 @@ export class TimePickerPO extends BaseComponentPo {
     disabledButton = this.disabledTimePicker + ' button';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeItem = 'span.fd-time__item';
-    selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
-    selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
-    selectedPeriod = '.fd-time__current-indicator ~ span.fd-time-column-custom-hidden';
+    selectedValue = 'div.fd-time__current-indicator ~ span';
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);
