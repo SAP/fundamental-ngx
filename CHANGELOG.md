@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.24...v0.29.0-rc.25) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Fixed Card Layout Change focus target to header ([#4922](https://github.com/SAP/fundamental-ngx/issues/4922)) ([8d18858](https://github.com/SAP/fundamental-ngx/commit/8d18858d02e234b5e5e50619fc89db2a3646d2bd))
+
 ## [0.29.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.23...v0.29.0-rc.24) (2021-03-15)
 
 
