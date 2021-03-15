@@ -258,14 +258,16 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _wizardShrinking(): void {
-        this.steps.forEach((step) => {
-            if (!step.isSummary && (step.status === ACTIVE_STEP_STATUS || step.status === CURRENT_STEP_STATUS)) {
-                const currentStep = step;
-                if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
-                    this._hideSomeStep(currentStep);
-                }
-            }
-        });
+        const currentStep = this._getCurrentStep();
+        if (
+            currentStep &&
+            !currentStep.isSummary &&
+            currentStep.wizardLabel &&
+            currentStep.getStepClientWidth() < STEP_MIN_WIDTH
+        ) {
+            this._hideSomeStep(currentStep);
+            this._setStackedTop();
+        }
     }
 
     /** @hidden */
@@ -365,25 +367,28 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             stepToHide.getClassList().add(STEP_NO_LABEL_CLASS);
             stepToHide.getClassList().add(STEP_STACKED_CLASS);
             if (stepsArray.indexOf(stepToHide) < currentStepIndex && !this.stackedStepsLeft.includes(stepToHide)) {
-                this.stackedStepsLeft.push(stepToHide);
-            } else if (stepsArray.indexOf(stepToHide) > currentStepIndex && !this.stackedStepsRight.includes(stepToHide)) {
+                this.stackedStepsLeft.splice(this.steps.toArray().indexOf(stepToHide), 0, stepToHide);
+            } else if (
+                stepsArray.indexOf(stepToHide) > currentStepIndex &&
+                !this.stackedStepsRight.includes(stepToHide)
+            ) {
                 this.stackedStepsRight.unshift(stepToHide);
             }
             this._cdRef.detectChanges();
-            this._setStackedTop(currentStep);
         }
     }
 
     /** @hidden */
-    private _setStackedTop(currentStep: WizardStepComponent): void {
+    private _setStackedTop(): void {
+        const currentStep = this._getCurrentStep();
         this.steps.forEach((step, index) => {
             if (step.stepIndicator) {
                 step.getClassList().remove(STEP_STACKED_TOP_CLASS);
                 if (this.steps.toArray()[index + 1] === currentStep) {
                     if (this.steps.length > 1) {
                         step.getClassList().add(STEP_STACKED_TOP_CLASS);
-                        if (!this.stackedStepsLeft.includes(step) && this.stackedStepsLeft.length > 1) {
-                            this.stackedStepsLeft.push(step);
+                        if (!this.stackedStepsLeft.includes(step) && this.stackedStepsLeft.length >= 1) {
+                            this.stackedStepsLeft.splice(index, 0, step);
                         }
                     }
                     step.stepIndicator.setStackedItems(this.stackedStepsLeft);
@@ -440,7 +445,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _showSummary(): void {
-        this.steps.forEach(step => {
+        this.steps.forEach((step) => {
             if (!step.isSummary) {
                 step.completed = true;
             }
@@ -453,6 +458,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _isCurrentStepSummary(): boolean {
         return this.steps.some((step) => step.status === CURRENT_STEP_STATUS && step.isSummary);
+    }
+
+    /** @hidden */
+    private _getCurrentStep(): WizardStepComponent {
+        return this.steps.filter(
+            (step) => step.status === CURRENT_STEP_STATUS || step.status === ACTIVE_STEP_STATUS
+        )[0];
     }
 
     /** @hidden */
