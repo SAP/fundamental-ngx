@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.21...v0.29.0-rc.22) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Break word in every component under fixed card layout ([#4900](https://github.com/SAP/fundamental-ngx/issues/4900)) ([e2e7030](https://github.com/SAP/fundamental-ngx/commit/e2e7030cf64fbb47cd467f16878b3cfe700ea592))
+
 ## [0.29.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.20...v0.29.0-rc.21) (2021-03-14)
 
 ## [0.29.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.19...v0.29.0-rc.20) (2021-03-13)
