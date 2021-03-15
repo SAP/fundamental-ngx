@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable, isDevMode, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -89,7 +89,23 @@ export class ThemesService {
         if (nativeTheme) {
             this._propagateThemes(nativeTheme)
         }
-    };
+    }
+
+    /** Method to get once theme object directly from url. */
+    getThemeFromRoute(param: string): ThemeServiceOutput {
+        const paramName = param || 'theme';
+
+        const nativeTheme = this._getNativeParameterByName(paramName);
+        if (!nativeTheme && isDevMode()) {
+            console.warn('There is no theme param set named: ' + param);
+            return;
+        }
+
+        return {
+            themeUrl: this.setTheme(nativeTheme),
+            customThemeUrl: this.setCustomTheme(nativeTheme)
+        }
+    }
 
     /** Assign css file corresponding to chosen theme from @sap-theming **/
     setTheme(theme: string): SafeResourceUrl {

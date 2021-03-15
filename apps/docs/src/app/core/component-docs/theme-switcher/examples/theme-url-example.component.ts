@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { ThemeServiceOutput, ThemesService } from '@fundamental-ngx/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'fd-theme-url-example',
     templateUrl: './theme-url-example.component.html'
 })
-export class ThemeUrlExampleComponent implements OnDestroy {
+export class ThemeUrlExampleComponent implements OnDestroy, AfterViewInit {
     /** This is for internal usage, can be removed, when used in standalone application */
     @Output()
     themeChanged = new EventEmitter<ThemeServiceOutput>();
@@ -40,7 +40,8 @@ export class ThemeUrlExampleComponent implements OnDestroy {
         })
 
         _themesService.setThemeByRoute(this.themeQueryParamName);
-   }
+        console.log(this._themesService.getThemeFromRoute(this.themeQueryParamName));
+    }
 
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -49,6 +50,10 @@ export class ThemeUrlExampleComponent implements OnDestroy {
 
     changeQueryUrl(param: string): void {
         this._router.navigate( [], { queryParams: { customQueryParam: param } });
+    }
+
+    ngAfterViewInit(): void {
+        console.log(this._themesService.getThemeFromRoute(this.themeQueryParamName));
     }
 
 }
