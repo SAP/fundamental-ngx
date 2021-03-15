@@ -139,7 +139,7 @@ describe('Object Status test suite', function() {
         });
     });
 
-    fdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             objectStatusPage.saveExampleBaselineScreenshot();
             expect(objectStatusPage.compareWithBaseline()).toBeLessThan(1);

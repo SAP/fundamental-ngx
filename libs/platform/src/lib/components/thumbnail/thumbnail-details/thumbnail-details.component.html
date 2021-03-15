@@ -6,9 +6,9 @@
         <button
             class="fd-button fdp-thumbnail-button--left"
             title="Previous"
-            i18n-title="@@platformThumbnailDetailsTitle"
+            i18n-title="@@platformThumbnailDetailsGotoPreviousTitle"
             aria-label="Go to Previous"
-            i18n-aria-label="@@platformThumbnailDetailsGotoPrevious"
+            i18n-aria-label="@@platformThumbnailDetailsGotoPreviousLabel"
             (click)="_data.rtl ? next() : previous()"
             [disabled]="leftButtonDisabled"
             [style.z-index]="1"
@@ -49,9 +49,9 @@
         <button
             class="fd-button fdp-thumbnail-button--right"
             title="Next"
-            i18n-title="@@platformThumbnailDetailsTitle"
+            i18n-title="@@platformThumbnailDetailsGotoNextTitle"
             aria-label="Go to Next"
-            i18n-aria-label="@@platformThumbnailDetailsGotoNext"
+            i18n-aria-label="@@platformThumbnailDetailsGotoNextLabel"
             (click)="_data.rtl ? previous() : next()"
             [disabled]="rightButtonDisabled"
             [style.z-index]="1"

@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.22...v0.29.0-rc.23) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Add no-data mode and text wrap to table cell ([#4899](https://github.com/SAP/fundamental-ngx/issues/4899)) ([28e7633](https://github.com/SAP/fundamental-ngx/commit/28e76331547cbf0527f1e7a447abdf33eaded814))
+
+## [0.29.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.21...v0.29.0-rc.22) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Break word in every component under fixed card layout ([#4900](https://github.com/SAP/fundamental-ngx/issues/4900)) ([e2e7030](https://github.com/SAP/fundamental-ngx/commit/e2e7030cf64fbb47cd467f16878b3cfe700ea592))
+
+## [0.29.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.20...v0.29.0-rc.21) (2021-03-14)
+
+## [0.29.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.19...v0.29.0-rc.20) (2021-03-13)
+
+## [0.29.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.18...v0.29.0-rc.19) (2021-03-13)
+
+## [0.29.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.17...v0.29.0-rc.18) (2021-03-12)
+
+## [0.29.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.16...v0.29.0-rc.17) (2021-03-12)
+
+## [0.29.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.15...v0.29.0-rc.16) (2021-03-12)
+
+## [0.29.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.14...v0.29.0-rc.15) (2021-03-11)
+
+## [0.29.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.13...v0.29.0-rc.14) (2021-03-11)
+
+## [0.29.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.12...v0.29.0-rc.13) (2021-03-10)
+
+## [0.29.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.11...v0.29.0-rc.12) (2021-03-10)
+
+
+### Bug Fixes
+
+* (Core) updating the example for the truncation behaviour ([#4857](https://github.com/SAP/fundamental-ngx/issues/4857)) ([0ba46fa](https://github.com/SAP/fundamental-ngx/commit/0ba46fab4f7b2c1db05cc961b4baf0cf00e5bfc4))
+
+## [0.29.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.10...v0.29.0-rc.11) (2021-03-10)
+
 ## [0.29.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.9...v0.29.0-rc.10) (2021-03-10)
 
 ## [0.29.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.8...v0.29.0-rc.9) (2021-03-10)
