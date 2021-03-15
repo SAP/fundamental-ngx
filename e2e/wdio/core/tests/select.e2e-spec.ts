@@ -354,7 +354,7 @@ describe('Select component:', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             selectPage.saveExampleBaselineScreenshot();
-            expect(selectPage.compareWithBaseline()).toBeLessThan(2);
+            expect(selectPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
@@ -362,21 +362,21 @@ describe('Select component:', function() {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + '-' + getImageTagBrowserPlatform(), selectPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + '-' + getImageTagBrowserPlatform(), selectPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button item ${index} hover state mismatch`);
+            .toBeLessThan(5, `${elementName} button item ${index} hover state mismatch`);
     }
 
     function checkFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         focusElement(selector, index);
         saveElementScreenshot(selector, tag + '-' + getImageTagBrowserPlatform(), selectPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + '-' + getImageTagBrowserPlatform(), selectPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button item ${index} focus state mismatch`);
+            .toBeLessThan(5, `${elementName} button item ${index} focus state mismatch`);
     }
 
     function checkActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + '-' + getImageTagBrowserPlatform(), selectPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + '-' + getImageTagBrowserPlatform(), selectPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} button item ${index} active state mismatch`);
     }
 
     function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {

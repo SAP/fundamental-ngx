@@ -1,14 +1,22 @@
 import { MenuPo } from '../pages/menu.po';
-import {menuAvatarFocusAttr, bgColorAttribute, borderColorAttribute, menuAvatarFocusColor, menuBtnActiveColor, menuBtnBorderColor,
-menuBtnFocusStyle, menuBtnHoverColor, menuItemFocusStyle, menuItemFocusStyleAttr,
-menuItemHoverColor, subMenuHoverColor} from '../fixtures/appData/menu-contents';
+import {
+    bgColorAttribute,
+    menuAvatarFocusAttr,
+    menuAvatarFocusColor,
+    menuBtnActiveColor,
+    menuBtnFocusStyle,
+    menuBtnHoverColor,
+    menuItemFocusStyle,
+    menuItemFocusStyleAttr,
+    menuItemHoverColor,
+    subMenuHoverColor
+} from '../fixtures/appData/menu-contents';
 import {
     browserIsFirefox,
     browserIsIEorSafari,
     browserIsSafari,
     click,
     doubleClick,
-    executeScriptAfterTagFF,
     focusElement,
     getAttributeByName,
     getCSSPropertyByName,
@@ -19,7 +27,8 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed, waitForPresent
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Menu component test suite', function() {
@@ -55,7 +64,7 @@ describe('Menu component test suite', function() {
         focusElement(firstMenuBtn);
         sendKeys('Tab');
 
-        const menuBtnBorderStyle = executeScriptAfterTagFF(secondMenuBtn);
+        const menuBtnBorderStyle = getCSSPropertyByName(secondMenuBtn, 'outline-style').value;
         expect(menuBtnBorderStyle).toContain(menuBtnFocusStyle);
     });
     // Real issue for FF
