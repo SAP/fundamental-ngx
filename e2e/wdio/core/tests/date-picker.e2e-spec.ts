@@ -11,7 +11,6 @@ import {
     text,
     year2021,
     firstSimpleDatePickerIndex,
-    firstSimpleDatePickerDate,
     secondSimpleDatePickerIndex,
     secondSimpleDatePickerDate,
     rangeDatePickerIndex,
@@ -25,16 +24,13 @@ import {
     secondFormatterIndex,
     secondFormatterDate,
     nullValidityIndex,
-    nullValidityDate,
     reactiveFormIndex,
-    reactiveFormDate,
     reactiveFormRoDIndex,
     reactiveFormRoDDate,
     reactiveFormDisableIndex,
     reactiveFormDisableDate,
     reactiveFormDisableRoDIndex,
     reactiveFormDisableRoDDate,
-    positionDate,
     positionIndex,
     date,
     highlightedColor,
@@ -72,7 +68,7 @@ describe('Date picker suite', function() {
     const {
         buttonDatePicker, buttonBulgarian, buttonGerman,
         inputDatePicker, activeButtonDatePicker, activeInputDatePicker, calendarExpanded, calendarYearsSection, buttonSelectMonth,
-        buttonSelectYear, buttonSelectYearsRange, yearInCalendarByValue, currentDay, dayInCalendarButtonByValue, activeDivDatePicker,
+        buttonSelectYear, buttonSelectYearsRange, yearInCalendarByValue, currentDay, dayInCalendarButtonByValue, activeDatePicker,
         filterCalendarValue, buttonFirstYear, buttonFirstRangeYear, buttonFirstMonth, selectedDate, disabledDivDatePicker,
         disableButtonDatePicker, buttonFrench
     } = datePickerPage;
@@ -154,7 +150,7 @@ describe('Date picker suite', function() {
     it('verify simple date-picker', () => {
         click(activeButtonDatePicker, firstSimpleDatePickerIndex);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(firstSimpleDatePickerDate);
+        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
         expect(getText(selectedDate)).toEqual('Selected Date: 2021-03-01');
     });
     it('verify compact date-picker', () => {
@@ -197,13 +193,13 @@ describe('Date picker suite', function() {
     it('verify null validity date-picker', () => {
         click(activeButtonDatePicker, nullValidityIndex);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 6)).toEqual(nullValidityDate);
+        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 6)).toEqual(date);
     });
 
     it('verify date picker in reactive form', () => {
         click(activeButtonDatePicker, reactiveFormIndex);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 7)).toEqual(reactiveFormDate);
+        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 7)).toEqual(date);
     });
 
     it('verify date picker in reactive form with a range of dates', () => {
@@ -221,8 +217,7 @@ describe('Date picker suite', function() {
 
     it('verify date picker range in reactive form with disable functions.', () => {
         click(activeButtonDatePicker, reactiveFormDisableRoDIndex);
-        click(dayInCalendarButtonByValue('10'));
-        click(dayInCalendarButtonByValue('24'));
+        click(dayInCalendarButtonByValue(new Date().getDate().toString()));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 10)).toEqual(reactiveFormDisableRoDDate);
 
     });
@@ -230,7 +225,7 @@ describe('Date picker suite', function() {
     it('verify date picker position', () => {
         click(activeButtonDatePicker, positionIndex);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 11)).toEqual(positionDate);
+        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 11)).toEqual(date);
     });
 
     it('verify with the date picker, the user can see a day view, month view, year view, or year ranges.', () => {
@@ -259,7 +254,7 @@ describe('Date picker suite', function() {
 
     it('verify selecting a year range navigates back to the year view', () => {
         const buttonsLength = getElementArrayLength(activeButtonDatePicker);
-        for (let i = 1; i <  buttonsLength; i++) {
+        for (let i = 1; i < buttonsLength; i++) {
             click(activeButtonDatePicker, i);
             click(buttonSelectYear);
             click(buttonSelectYearsRange);
@@ -271,8 +266,8 @@ describe('Date picker suite', function() {
     });
 
     it('verify after the user selects a year, the view changes back to the day view. ', () => {
-        const  buttonsLength = getElementArrayLength(activeButtonDatePicker);
-        for (let i = 1; i <  buttonsLength; i++) {
+        const buttonsLength = getElementArrayLength(activeButtonDatePicker);
+        for (let i = 1; i < buttonsLength; i++) {
             click(activeButtonDatePicker, i);
             click(buttonSelectYear);
             waitForElDisplayed(filterCalendarValue('year'));
@@ -284,7 +279,7 @@ describe('Date picker suite', function() {
 
     it('verify after the user selects a month, the view changes back to the day view. ', () => {
         const buttonsLength = getElementArrayLength(activeButtonDatePicker);
-        for (let i = 1; i <  buttonsLength; i++) {
+        for (let i = 1; i < buttonsLength; i++) {
             click(activeButtonDatePicker, i);
             click(buttonSelectMonth);
             waitForElDisplayed(filterCalendarValue('month'));
@@ -319,28 +314,28 @@ describe('Date picker suite', function() {
         });
 
         it('should check active input hover state', () => {
-            const activeDivDatePickerLength = getElementArrayLength(activeDivDatePicker);
-            for (let i = 0; i < activeDivDatePickerLength; i++) {
-                scrollIntoView(activeDivDatePicker, i);
-                checkElementHoverState(activeDivDatePicker, activeDivDatePickerExample + activeDivDatePickerHoverState
+            const activeDatePickerLength = getElementArrayLength(activeDatePicker);
+            for (let i = 0; i < activeDatePickerLength; i++) {
+                scrollIntoView(activeDatePicker, i)
+                checkElementHoverState(activeDatePicker, activeDivDatePickerExample + activeDivDatePickerHoverState
                     + '-' + i, input, i);
             }
         });
 
         it('should check active input active state', () => {
-            const activeDivDatePickerLength = getElementArrayLength(activeDivDatePicker);
-            for (let i = 0; i < activeDivDatePickerLength; i++) {
-                scrollIntoView(activeDivDatePicker, i);
-                checkElementActiveState(activeDivDatePicker, activeDivDatePickerExample + activeDivDatePickerActiveState
+            const activeDatePickerLength = getElementArrayLength(activeDatePicker);
+            for (let i = 0; i < activeDatePickerLength; i++) {
+                scrollIntoView(activeDatePicker, i);
+                checkElementActiveState(activeDatePicker, activeDivDatePickerExample + activeDivDatePickerActiveState
                     + '-' + i, input, i);
             }
         });
 
         it('should check focus input active state', () => {
-            const activeDivDatePickerLength = getElementArrayLength(activeDivDatePicker);
-            for (let i = 0; i < activeDivDatePickerLength; i++) {
-                scrollIntoView(activeDivDatePicker, i);
-                checkElementFocusState(activeDivDatePicker, activeDivDatePickerExample + activeDivDatePickerFocusState
+            const activeDatePickerLength = getElementArrayLength(activeDatePicker);
+            for (let i = 0; i < activeDatePickerLength; i++) {
+                scrollIntoView(activeDatePicker, i);
+                checkElementFocusState(activeDatePicker, activeDivDatePickerExample + activeDivDatePickerFocusState
                     + '-' + i, input, i);
             }
         });
@@ -370,6 +365,7 @@ describe('Date picker suite', function() {
                 checkElementFocusState(activeButtonDatePicker, activeButtonDatePickerExample + activeButtonDatePickerFocusState
                     + '-' + i, button, i);
                 click(activeButtonDatePicker, i);
+                sendKeys(['Escape']);
             }
         });
 
@@ -392,82 +388,46 @@ describe('Date picker suite', function() {
         });
 
         it('should check french button hover state', () => {
-            const buttonFrenchLength = getElementArrayLength(buttonFrench);
-            for (let i = 0; i < buttonFrenchLength; i++) {
-                scrollIntoView(buttonFrench, i);
-                checkElementHoverState(buttonFrench, buttonFrenchExample + buttonFrenchHoverState
-                    + '-' + i, button, i);
-            }
+                scrollIntoView(buttonFrench);
+                checkElementHoverState(buttonFrench, buttonFrenchExample + buttonFrenchHoverState, button);
         });
 
         it('should check french button active state', () => {
-            const buttonFrenchLength = getElementArrayLength(buttonFrench);
-            for (let i = 0; i < buttonFrenchLength; i++) {
-                scrollIntoView(buttonFrench, i);
-                checkElementActiveState(buttonFrench, buttonFrenchExample + buttonFrenchActiveState
-                    + '-' + i, button, i);
-            }
+                scrollIntoView(buttonFrench);
+                checkElementActiveState(buttonFrench, buttonFrenchExample + buttonFrenchActiveState, button);
         });
 
         it('should check french button focus state', () => {
-            const buttonFrenchLength = getElementArrayLength(buttonFrench);
-            for (let i = 0; i < buttonFrenchLength; i++) {
-                scrollIntoView(buttonFrench, i);
-                checkElementFocusState(buttonFrench, buttonFrenchExample + buttonFrenchFocusState
-                    + '-' + i, button, i);
-            }
+            scrollIntoView(buttonFrench);
+            checkElementFocusState(buttonFrench, buttonFrenchExample + buttonFrenchFocusState, button);
         });
 
         it('should check german button hover state', () => {
-            const buttonGermanLength = getElementArrayLength(buttonGerman);
-            for (let i = 0; i < buttonGermanLength; i++) {
-                scrollIntoView(buttonGerman, i);
-                checkElementHoverState(buttonGerman, buttonGermanExample + buttonGermanHoverState
-                    + '-' + i, button, i);
-            }
+            scrollIntoView(buttonGerman);
+            checkElementHoverState(buttonGerman, buttonGermanExample + buttonGermanHoverState, button);
         });
         it('should check german button active state', () => {
-            const buttonGermanLength = getElementArrayLength(buttonGerman);
-            for (let i = 0; i < buttonGermanLength; i++) {
-                scrollIntoView(buttonGerman, i);
-                checkElementActiveState(buttonGerman, buttonGermanExample + buttonGermanActiveState
-                    + '-' + i, button, i);
-            }
+            scrollIntoView(buttonGerman);
+            checkElementActiveState(buttonGerman, buttonGermanExample + buttonGermanActiveState, button);
         });
 
         it('should check german button focus state', () => {
-            const buttonGermanLength = getElementArrayLength(buttonGerman);
-            for (let i = 0; i < buttonGermanLength; i++) {
-                scrollIntoView(buttonGerman, i);
-                checkElementFocusState(buttonGerman, buttonGermanExample + buttonGermanFocusState
-                    + '-' + i, button, i);
-            }
+            scrollIntoView(buttonGerman);
+            checkElementFocusState(buttonGerman, buttonGermanExample + buttonGermanFocusState, button);
         });
 
         it('should check bulgarian button hover state', () => {
-            const buttonBulgarianLength = getElementArrayLength(buttonBulgarian);
-            for (let i = 0; i < buttonBulgarianLength; i++) {
-                scrollIntoView(buttonBulgarian, i);
-                checkElementHoverState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianHoverState
-                    + '-' + i, button, i);
-            }
+            scrollIntoView(buttonBulgarian);
+            checkElementHoverState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianHoverState, button);
         });
         it('should check bulgarian button active state', () => {
-            const buttonBulgarianLength = getElementArrayLength(buttonBulgarian);
-            for (let i = 0; i < buttonBulgarianLength; i++) {
-                scrollIntoView(buttonBulgarian, i);
-                checkElementActiveState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianActiveState
-                    + '-' + i, button, i);
-            }
+            scrollIntoView(buttonBulgarian);
+            checkElementActiveState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianActiveState, button);
         });
 
         it('should check bulgarian button focus state', () => {
-            const buttonBulgarianLength = getElementArrayLength(buttonBulgarian);
-            for (let i = 0; i < buttonBulgarianLength; i++) {
-                scrollIntoView(buttonBulgarian, i);
-                checkElementFocusState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianFocusState
-                    + '-' + i, button, i);
-            }
+            scrollIntoView(buttonBulgarian);
+            checkElementFocusState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianFocusState, button);
         });
     });
 

@@ -7,7 +7,7 @@ export class DatePicker extends CoreBaseComponentPo {
     inputDatePicker = 'fd-date-picker input';
     buttonDatePicker = 'fd-date-picker button';
     activeButtonDatePicker = '//fd-date-picker//button[contains(@class, \'fd-button\') and not (contains(@class, \'is-disabled\'))]';
-    activeDivDatePicker = '//fd-date-picker//div[contains(@class, \'fd-input-group\') and not (contains(@class, \'is-disabled\'))]';
+    activeDatePicker = '//div[contains(@class, \'fd-input-group\') and not (contains(@class, \'is-disabled\'))]//ancestor::fd-date-picker';
     activeInputDatePicker = '//fd-date-picker//input[contains(@class, \'fd-input-group\') and not (contains(@ng-reflect-is-disabled, "true"))]';
     disabledDivDatePicker = 'div.is-disabled';
     disableButtonDatePicker = 'span button.is-disabled';
