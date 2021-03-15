@@ -18,8 +18,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import { FeedInputPo } from '../../core/pages/feed-input.po';
-import { four_lines_text, eight_lines_text } from '../fixtures/testData/feed-input';
+import { FeedInputPo } from '../pages/feed-input.po';
+import { four_lines_text, eight_lines_text} from '../fixtures/testData/feed-input';
 
 import {
     activeInputTextAreasHoverState,
@@ -36,15 +36,16 @@ import {
 } from '../fixtures/testData/feed-input-tags';
 
 import {
-    placeholder_array, default_avatar, send_button_tooltip
+    placeholder_array, default_avatar, send_button_tooltip,
+    button, textArea
 } from '../fixtures/appData/feed-input-page-contents';
 
 describe('Verify Feed Input component', function() {
-    const {  feedInputTextArea, feedInput, feedInputAvatar, feedInputButton, feedInputNoAvatar, disableInputTextArea,
-        disableInputButton, activeInputTextAreas, activeInputButtons} = new FeedInputPo();
+    const {
+        feedInputTextArea, feedInputAvatar, feedInputButton, feedInputNoAvatar, disableInputTextArea,
+        disableInputButton, activeInputTextAreas
+    } = new FeedInputPo();
     const feedInputPage = new FeedInputPo();
-
-
 
     beforeAll(() => {
         feedInputPage.open();
@@ -52,7 +53,7 @@ describe('Verify Feed Input component', function() {
 
     afterEach(() => {
         refreshPage();
-       // waitForElDisplayed(feedInputAvatar);
+        waitForElDisplayed(feedInputAvatar);
     }, 1);
 
     it('should have correct placeholder assigned', () => {
@@ -94,6 +95,9 @@ describe('Verify Feed Input component', function() {
     it('should have Send button enabled if value is set in the input', () => {
         const inputButtonLength = getElementArrayLength(feedInputButton);
         for (let i = 0; i < inputButtonLength; i++) {
+            if (i === 3) {
+                continue;
+            }
             waitForPresent(feedInputTextArea, i);
             scrollIntoView(feedInputTextArea, i);
             setValue(feedInputTextArea, four_lines_text, i);
@@ -111,15 +115,12 @@ describe('Verify Feed Input component', function() {
             if (i === 3) {
                 continue;
             }
-
             clearValue(feedInputTextArea);
             const feedInputSize1 = getElementSize(feedInputTextArea, i, 'height');
             setValue(feedInputTextArea, eight_lines_text, i);
             const feedInputSize2 = getElementSize(feedInputTextArea, i, 'height');
-
             addValue(feedInputTextArea, eight_lines_text, i);
             const feedInputSize3 = getElementSize(feedInputTextArea, i, 'height');
-
             expect(feedInputSize1).toBeLessThan(feedInputSize2);
             expect(feedInputSize2).toBeLessThan(feedInputSize3);
             expect(feedInputSize2).toEqual(183);
@@ -138,9 +139,7 @@ describe('Verify Feed Input component', function() {
             setValue(feedInputTextArea, four_lines_text, i);
             const inputFocusStyle = getCSSPropertyByName(feedInputTextArea, 'outline-style', i).value;
             sendKeys('Tab');
-
             const sendButtonFocusStyle = executeScriptAfterTagFF(feedInputButton, i);
-
             expect(inputFocusStyle).toBe('dotted');
             expect(sendButtonFocusStyle).toContain('dotted');
         }
@@ -164,50 +163,65 @@ describe('Verify Feed Input component', function() {
     });
 
     it('should check disable input text area hover state', () => {
-        checkButtonHoverState(disableInputTextArea, disableInputTextAreasExample + disableInputTextAreasHoverState, 'textArea')
+        scrollIntoView(disableInputTextArea);
+        checkElementHoverState(disableInputTextArea, disableInputTextAreasExample + disableInputTextAreasHoverState, textArea);
     });
 
     it('should check disable input button hover state', () => {
-        checkButtonHoverState(disableInputButton, disableInputButtonsExample + disableInputButtonsHoverState, 'button')
+        scrollIntoView(disableInputButton);
+        checkElementHoverState(disableInputButton, disableInputButtonsExample + disableInputButtonsHoverState, button);
     });
 
     it('should check active input text areas hover state', () => {
         const activeInputTextAreasLength = getElementArrayLength(activeInputTextAreas);
-         for (let i = 0; i < activeInputTextAreasLength; i ++) {
-             checkButtonHoverState(activeInputTextAreas, activeInputTextAreasExample + activeInputTextAreasHoverState + '-' + i,
-                 'textArea', i)
-         }
+        for (let i = 0; i < activeInputTextAreasLength; i++) {
+            scrollIntoView(activeInputTextAreas, i);
+            checkElementHoverState(activeInputTextAreas, activeInputTextAreasExample + activeInputTextAreasHoverState + '-' + i,
+                textArea, i);
+        }
     });
 
     it('should check active input text areas focus state', () => {
         const activeInputTextAreasLength = getElementArrayLength(activeInputTextAreas);
-        for (let i = 0; i < activeInputTextAreasLength; i ++) {
-            checkButtonHoverState(activeInputTextAreas, activeInputTextAreasExample + activeInputTextAreasFocusState + '-' + i,
-                'textArea', i)
+        for (let i = 0; i < activeInputTextAreasLength; i++) {
+            scrollIntoView(activeInputTextAreas, i);
+            checkElementFocusState(activeInputTextAreas, activeInputTextAreasExample + activeInputTextAreasFocusState + '-' + i,
+                textArea, i);
         }
     });
 
     it('should check active input buttons hover state', () => {
-        const activeInputButtonsLength = getElementArrayLength(activeInputButtons);
-        for (let i = 0; i < activeInputButtonsLength; i ++) {
-            checkButtonHoverState(activeInputButtons, activeInputButtonsExample + activeInputButtonsHoverState + '-' + i,
-                'button', i)
+        const inputButtonsLength = getElementArrayLength(feedInputButton);
+        for (let i = 0; i < inputButtonsLength; i++) {
+            if (i === 3) {
+                continue;
+            }
+            scrollIntoView(feedInputTextArea, i);
+            setValue(feedInputTextArea, four_lines_text, i);
+            checkElementHoverState(feedInputButton, activeInputButtonsExample + activeInputButtonsHoverState + '-' + i,
+                button, i);
         }
     });
 
     it('should check active input buttons focus state', () => {
-        const activeInputButtonsLength = getElementArrayLength(activeInputButtons);
-        for (let i = 0; i < activeInputButtonsLength; i ++) {
-            checkButtonHoverState(activeInputButtons, activeInputButtonsExample + activeInputButtonsFocusState + '-' + i,
-                'button', i)
+        const inputButtonsLength = getElementArrayLength(feedInputButton);
+        for (let i = 0; i < inputButtonsLength; i++) {
+            if (i === 3) {
+                continue;
+            }
+            scrollIntoView(feedInputTextArea, i);
+            setValue(feedInputTextArea, four_lines_text, i);
+            checkElementFocusState(feedInputButton, activeInputButtonsExample + activeInputButtonsFocusState + '-' + i,
+                button, i);
         }
     });
 
     it('should check active input buttons active state', () => {
-        const activeInputButtonsLength = getElementArrayLength(activeInputButtons);
-        for (let i = 0; i < activeInputButtonsLength; i ++) {
-            checkButtonHoverState(activeInputButtons, activeInputButtonsExample + activeInputButtonsActiveState + '-' + i,
-                'button', i)
+        const inputButtonsLength = getElementArrayLength(feedInputButton);
+        for (let i = 0; i < inputButtonsLength; i++) {
+            scrollIntoView(feedInputTextArea, i);
+            checkElementActiveState(feedInputButton, activeInputButtonsExample + activeInputButtonsActiveState + '-' + i,
+                button, i);
         }
     });
 
@@ -217,6 +231,7 @@ describe('Verify Feed Input component', function() {
         expect(checkElementScreenshot(selector, tag, feedInputPage.getScreenshotFolder(), index))
             .toBeLessThan(2, `${elementName} hover state mismatch`);
     }
+
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag, feedInputPage.getScreenshotFolder(), index);

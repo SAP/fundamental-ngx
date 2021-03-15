@@ -4,17 +4,15 @@ import { waitForElDisplayed } from '../../driver/wdio';
 export class FeedInputPo extends CoreBaseComponentPo {
     private url = '/feed-input';
     root = '#page-content';
-
     feedInput = 'fd-feed-input div';
     feedInputTextArea = 'textarea.fd-feed-input__textarea';
     feedInputButton = '.fd-feed-input button';
     feedInputAvatar = 'fd-avatar.fd-feed-input__thumb';
     feedInputNoAvatar = 'fd-feed-input-no-avatar-example ';
-
     disableInputTextArea = 'textarea[aria-disabled="true"]';
     disableInputButton = '.fd-feed-input.is-disabled button';
     activeInputTextAreas = '//textarea[not(contains(@aria-disabled, \'true\'))]';
-    activeInputButtons = '//button[contains(@class, \'fd-feed-input__submit-button\') and not(contains(@aria-disabled, \'false\'))]';
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
