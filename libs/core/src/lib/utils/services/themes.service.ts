@@ -5,7 +5,6 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
-import { Platform } from '@angular/cdk/platform';
 
 export interface ThemeServiceOutput {
     themeUrl: SafeResourceUrl;
@@ -61,7 +60,6 @@ export class ThemesService {
 
     constructor(
         @Optional() private _activatedRoute: ActivatedRoute,
-        private _platform: Platform,
         private _sanitizer: DomSanitizer
     ) {}
 
