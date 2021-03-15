@@ -43,3 +43,18 @@
 		margin: 0;
 	}
 }
+
+// Remove after merging and migrate https://github.com/SAP/fundamental-styles/pull/2192
+.fd-table__cell--no-data {
+	text-align: center;
+}
+
+.fd-table__text {
+	word-break: break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	&--no-wrap {
+		white-space: nowrap;
+	}
+}

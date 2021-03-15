@@ -36,6 +36,12 @@
         <td fd-table-cell>{{ row.column2 }}</td>
         <td fd-table-cell>{{ row.region }}</td>
     </tr>
+
+    <tr *ngIf="!displayedRows || !displayedRows.length" fd-table-row>
+        <td fd-table-cell [noData]="true">
+            No Results Found!
+        </td>
+    </tr>
     </tbody>
 </table>
 
