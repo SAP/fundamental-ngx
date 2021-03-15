@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.22...v0.29.0-rc.23) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Add no-data mode and text wrap to table cell ([#4899](https://github.com/SAP/fundamental-ngx/issues/4899)) ([28e7633](https://github.com/SAP/fundamental-ngx/commit/28e76331547cbf0527f1e7a447abdf33eaded814))
+
 ## [0.29.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.21...v0.29.0-rc.22) (2021-03-15)
 
 
