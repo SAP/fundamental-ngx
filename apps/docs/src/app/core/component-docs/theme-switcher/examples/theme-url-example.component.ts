@@ -28,19 +28,8 @@ export class ThemeUrlExampleComponent implements OnDestroy {
         private _themesService: ThemesService,
         private _router: Router
     ) {
-        _themesService.onThemeQueryParamChange.pipe(
-            takeUntil(this._onDestroy$)
-        ).subscribe(theme => {
-            this.cssCustomUrl = theme.customThemeUrl;
-            this.cssUrl = theme.themeUrl;
-
-            this.themeChanged.emit({
-                themeUrl: this.cssCustomUrl,
-                customThemeUrl: this.cssUrl
-            })
-        })
-
-        _themesService.setThemeByRoute(this.themeQueryParamName);
+        this._listenForThemeChange();
+        this._themesService.setThemeByRoute(this.themeQueryParamName);
 
         this._handleThemesFromUrl();
     }
@@ -52,6 +41,20 @@ export class ThemeUrlExampleComponent implements OnDestroy {
 
     changeQueryUrl(param: string): void {
         this._router.navigate( [], { queryParams: { customQueryParam: param } });
+    }
+
+    private _listenForThemeChange(): void {
+        this._themesService.onThemeQueryParamChange.pipe(
+            takeUntil(this._onDestroy$)
+        ).subscribe(theme => {
+            this.cssCustomUrl = theme.customThemeUrl;
+            this.cssUrl = theme.themeUrl;
+
+            this.themeChanged.emit({
+                themeUrl: this.cssCustomUrl,
+                customThemeUrl: this.cssUrl
+            })
+        })
     }
 
     // Method used to directly fetch themes, after page is being loaded. No subscriptions are added there.
