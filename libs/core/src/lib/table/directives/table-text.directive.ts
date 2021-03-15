@@ -17,4 +17,9 @@ export class TableTextDirective {
     @HostBinding('class.fd-table__text--title')
     @Input()
     title = false;
+
+    /** Maximum width of text element */
+    @HostBinding('style.max-width')
+    @Input()
+    maxWidth: string;
 }
