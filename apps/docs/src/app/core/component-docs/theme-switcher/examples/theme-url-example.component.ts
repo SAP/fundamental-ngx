@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { ThemeServiceOutput, ThemesService } from '@fundamental-ngx/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'fd-theme-url-example',
     templateUrl: './theme-url-example.component.html'
 })
-export class ThemeUrlExampleComponent implements OnDestroy, AfterViewInit {
+export class ThemeUrlExampleComponent implements OnDestroy {
     /** This is for internal usage, can be removed, when used in standalone application */
     @Output()
     themeChanged = new EventEmitter<ThemeServiceOutput>();
@@ -17,6 +17,7 @@ export class ThemeUrlExampleComponent implements OnDestroy, AfterViewInit {
     themes = this._themesService.themes;
     cssUrl: SafeResourceUrl;
     cssCustomUrl: SafeResourceUrl;
+    themeFromUrl: ThemeServiceOutput;
 
     readonly themeQueryParamName = 'customQueryParam'
 
@@ -40,7 +41,8 @@ export class ThemeUrlExampleComponent implements OnDestroy, AfterViewInit {
         })
 
         _themesService.setThemeByRoute(this.themeQueryParamName);
-        console.log(this._themesService.getThemeFromRoute(this.themeQueryParamName));
+
+        this._handleThemesFromUrl();
     }
 
     ngOnDestroy(): void {
@@ -52,8 +54,18 @@ export class ThemeUrlExampleComponent implements OnDestroy, AfterViewInit {
         this._router.navigate( [], { queryParams: { customQueryParam: param } });
     }
 
-    ngAfterViewInit(): void {
-        console.log(this._themesService.getThemeFromRoute(this.themeQueryParamName));
-    }
+    // Method used to directly fetch themes, after page is being loaded. No subscriptions are added there.
+    private _handleThemesFromUrl(): void {
+        this.themeFromUrl = this._themesService.getThemesFromURL(this.themeQueryParamName);
 
+        if (this.themeFromUrl) {
+            this.cssCustomUrl = this.themeFromUrl.customThemeUrl;
+            this.cssUrl = this.themeFromUrl.themeUrl;
+
+            this.themeChanged.emit({
+                themeUrl: this.cssCustomUrl,
+                customThemeUrl: this.cssUrl
+            })
+        }
+    }
 }

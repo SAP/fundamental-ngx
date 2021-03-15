@@ -92,7 +92,7 @@ export class ThemesService {
     }
 
     /** Method to get once theme object directly from url. */
-    getThemeFromRoute(param: string): ThemeServiceOutput {
+    getThemesFromURL(param?: string): ThemeServiceOutput {
         const paramName = param || 'theme';
 
         const nativeTheme = this._getNativeParameterByName(paramName);
@@ -119,11 +119,13 @@ export class ThemesService {
 
     /** @hidden */
     private _getNativeParameterByName(paramName: string): string {
-        if (this._platform.TRIDENT) {
-            return null;
+        paramName = paramName.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + paramName + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(window.location.href);
+        if (!results || !results[2]) {
+            return '';
         }
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(paramName);
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
     /** @hidden */
