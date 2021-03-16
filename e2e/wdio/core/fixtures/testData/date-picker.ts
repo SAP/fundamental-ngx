@@ -1,4 +1,5 @@
-const currentMonth = new Date().getMonth() + 1;
+export const currentMonth = new Date().getMonth() + 1;
+export const currentYear = new Date().getFullYear().toString();
 export const firstSimpleDatePickerIndex = 0;
 export const secondSimpleDatePickerIndex = 1;
 export const rangeDatePickerIndex = 2;

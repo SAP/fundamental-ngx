@@ -3,16 +3,12 @@ import { getImageTagBrowserPlatform } from '../../../driver/wdio';
 const prefix = 'date-picker-core-';
 export const activeDivDatePickerExample = prefix + 'active-input-example-';
 export const activeButtonDatePickerExample = prefix + 'active-button-example-';
-export const disabledDivDatePickerExample = prefix + 'disable-input-example-';
-export const disableButtonDatePickerExample = prefix + 'disable-button-example-';
 export const buttonFrenchExample = prefix + 'button-french-example';
 export const buttonGermanExample = prefix + 'button-german-example-';
 export const buttonBulgarianExample = prefix + 'button-bulgarian-example-';
 
 export const activeDivDatePickerHoverState = 'active-input-hover-state-' + getImageTagBrowserPlatform();
 export const activeButtonDatePickerHoverState = 'active-button-hover-state-' + getImageTagBrowserPlatform();
-export const disabledDivDatePickerHoverState = 'disable-input-hover-state-' + getImageTagBrowserPlatform();
-export const disableButtonDatePickerHoverState = 'disable-button-hover-state-' + getImageTagBrowserPlatform();
 export const buttonFrenchHoverState = 'button-french-hover-State-' + getImageTagBrowserPlatform();
 export const buttonGermanHoverState = 'button-german-hover-state-' + getImageTagBrowserPlatform();
 export const buttonBulgarianHoverState = 'button-bulgarian-hover-state-' + getImageTagBrowserPlatform();

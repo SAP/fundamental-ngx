@@ -10,7 +10,6 @@ export class DatePicker extends CoreBaseComponentPo {
     activeDatePicker = '//div[contains(@class, \'fd-input-group\') and not (contains(@class, \'is-disabled\'))]//ancestor::fd-date-picker';
     activeInputDatePicker = '//fd-date-picker//input[contains(@class, \'fd-input-group\') and not (contains(@ng-reflect-is-disabled, "true"))]';
     disabledDivDatePicker = 'div.is-disabled';
-    disableButtonDatePicker = 'span button.is-disabled';
     calendarExpanded = '.fd-popover__popper fd-calendar';
     calendarYearsSection = '.fd-calendar__content--years';
     currentDay = 'td.fd-calendar__item--current.is-active';
