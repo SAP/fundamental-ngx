@@ -11,7 +11,7 @@ export class ButtonPo extends CoreBaseComponentPo {
     iconButtons = 'fd-button-icons-example button';
     stateButton = 'fd-button-state-example button:nth-child(1)';
     disableStateButtons = 'fd-button-state-example button.is-disabled';
-    playgroundButton = '.row.playground-wrap button';
+    playgroundButton = 'playground button';
     inputLabel = '.fd-input.form-control';
     dropDownMenu = 'select.form-control.ng-valid';
     checkboxCompact = 'label[for="playgroundcompact"]';
@@ -20,6 +20,17 @@ export class ButtonPo extends CoreBaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-      //  waitForPresent(this.cardTitle);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'button'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'button'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

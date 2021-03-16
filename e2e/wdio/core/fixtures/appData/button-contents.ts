@@ -1,4 +1,5 @@
 export const text = 'test';
+export const button = 'button';
 export const option = [
     'standard',
     'positive',
