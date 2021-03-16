@@ -301,6 +301,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 step.visited ||
                 ((step.status === CURRENT_STEP_STATUS || step.status === COMPLETED_STEP_STATUS) && step.content)
             ) {
+                step.visited = true;
                 if (step.status === CURRENT_STEP_STATUS && (!step.completed || !this.appendToWizard)) {
                     step.content.tallContent = true;
                 }
@@ -312,7 +313,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
-                step.visited = true;
             }
         }
         const lastVisibleTemplate = this.steps.toArray()[this.contentTemplates.length - 1];
