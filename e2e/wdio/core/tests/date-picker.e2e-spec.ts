@@ -57,7 +57,7 @@ import {
     buttonFrenchHoverState,
     buttonGermanActiveState,
     buttonGermanExample, buttonGermanFocusState,
-    buttonGermanHoverState,
+    buttonGermanHoverState
 } from '../fixtures/testData/date-picker-tags';
 
 describe('Date picker suite', function() {
@@ -67,7 +67,7 @@ describe('Date picker suite', function() {
         inputDatePicker, activeButtonDatePicker, activeInputDatePicker, calendarExpanded, calendarYearsSection, buttonSelectMonth,
         buttonSelectYear, buttonSelectYearsRange, yearInCalendarByValue, currentDay, dayInCalendarButtonByValue, activeDatePicker,
         filterCalendarValue, buttonFirstYear, buttonFirstRangeYear, buttonFirstMonth, selectedDate, disabledDivDatePicker,
-        buttonFrench,
+        buttonFrench
     } = datePickerPage;
 
     beforeAll(() => {
@@ -352,7 +352,6 @@ describe('Date picker suite', function() {
             const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
             for (let i = 0; i < activeButtonDatePickerLength; i++) {
                 scrollIntoView(activeButtonDatePicker, i);
-                clearValue(activeInputDatePicker, i);
                 checkElementHoverState(activeButtonDatePicker, activeButtonDatePickerExample + activeButtonDatePickerHoverState
                     + '-' + i, button, i);
             }
@@ -362,7 +361,6 @@ describe('Date picker suite', function() {
             const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
             for (let i = 0; i < activeButtonDatePickerLength; i++) {
                 scrollIntoView(activeButtonDatePicker, i);
-                clearValue(activeInputDatePicker, i);
                 checkElementActiveState(activeButtonDatePicker, activeButtonDatePickerExample + activeButtonDatePickerActiveState
                     + '-' + i, button, i);
             }
@@ -372,11 +370,9 @@ describe('Date picker suite', function() {
             const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
             for (let i = 0; i < activeButtonDatePickerLength; i++) {
                 scrollIntoView(activeButtonDatePicker, i);
-                clearValue(activeInputDatePicker, i);
                 checkElementFocusState(activeButtonDatePicker, activeButtonDatePickerExample + activeButtonDatePickerFocusState
                     + '-' + i, button, i);
                 click(activeButtonDatePicker, i);
-                sendKeys(['Escape']);
             }
         });
 

@@ -21,7 +21,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*.e2e-spec.ts'
+        './e2e/wdio/core/tests/date-picker.e2e-spec.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -95,9 +95,9 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            'goog:chromeOptions': {
-                args: ['--window-size=1920,1417', '--headless']
-            },
+            // 'goog:chromeOptions': {
+            //     args: ['--window-size=1920,1417', '--headless']
+            // },
         },
         // {
         //     browserName: 'firefox',
