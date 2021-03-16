@@ -58,3 +58,20 @@
 		white-space: nowrap;
 	}
 }
+
+
+// Remove after migrating https://github.com/SAP/fundamental-styles/pull/2192 to NGX
+.fd-table--responsive {
+	.fd-table__body,
+	.fd-table__header {
+		border: none;
+	}
+
+	.fd-table__row {
+		&:last-child {
+			.fd-table__cell {
+				border-bottom: none;
+			}
+		}
+	}
+}
