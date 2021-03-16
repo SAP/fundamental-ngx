@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.26...v0.29.0-rc.27) (2021-03-16)
+
+
+### Bug Fixes
+
+* (Core) wizard step indicator stacking bugs on narrow screens ([#4901](https://github.com/SAP/fundamental-ngx/issues/4901)) ([29c8864](https://github.com/SAP/fundamental-ngx/commit/29c88645413885adcc4a7f2da62d09f27bad5118))
+
 ## [0.29.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.25...v0.29.0-rc.26) (2021-03-16)
 
 
