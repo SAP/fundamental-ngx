@@ -55,6 +55,9 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
     constructor(
         protected readonly _entityService: EntityCollectionService<T>,
         protected readonly _queryBuilder: QueryBuilder<T>,
+        // How can we use these cache options from here?
+        // Looks like it;s better keep it on @Entity layer
+        // So it can be easily accessible from any place
         protected readonly _options?: EntityStoreOptions
     ) {
         // TODO: do something with options

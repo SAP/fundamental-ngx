@@ -1,8 +1,9 @@
 import { QueryBuilder } from './query-builder';
 import { and, eq } from './grammar/query-expressions';
-import { DefaultQueryAdapter } from './query-adapter';
+import { QuerySnapshot } from './query-adapter';
 import { QueryService } from './query.service';
 import { Observable, of } from 'rxjs';
+import { QuerySnapshotModel } from './query';
 
 class Supplier {
     name: string;
@@ -30,7 +31,7 @@ class MockQueryService<TModel> extends QueryService<TModel> {
         return of(null);
     }
 
-    getWithQuery(query: string): Observable<TModel[]> {
+    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
         return of([]);
     }
 
@@ -40,214 +41,224 @@ class MockQueryService<TModel> extends QueryService<TModel> {
 }
 
 describe('Store: Query', () => {
-
     let qb: QueryBuilder<Fruit>;
     let service: QueryService<Fruit>;
+    let getWithQuerySnapshotParam: QuerySnapshot<Fruit>;
 
     beforeEach(() => {
-        const adapter = new DefaultQueryAdapter<Fruit>();
         service = new MockQueryService<Fruit>();
-        spyOn(service, 'getWithQuery');
+        spyOn(service, 'getWithQuery').and.callFake((snapshot): any => {
+            getWithQuerySnapshotParam = snapshot;
+        });
         spyOn(service, 'getByKey');
-        qb = new QueryBuilder(service, adapter);
+        qb = new QueryBuilder(service);
     });
 
     it('should be able to create a query by ID', () => {
         const query = qb.byId('123');
         expect(service.getByKey).toHaveBeenCalled();
+        expect(service.getByKey).toHaveBeenCalledWith('123');
     });
 
-    it('should call "getWithQuery" from EntityCollectionService', () => {
+    it('should call "getWithQuery" once "fetch" is called', () => {
         const query = qb.build();
         query.fetch();
         expect(service.getWithQuery).toHaveBeenCalled();
+        expect(getWithQuerySnapshotParam).toBeInstanceOf(QuerySnapshotModel);
     });
 
-    it('should call "getWithQuery" with correct filter parameters', () => {
-        let query = qb.where(eq('name', 'apple')).build();
-        query.fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'apple\'');
+    it('should call "getWithQuery" with the current query snapshot', () => {
+        const query = qb.build();
 
-        query = qb.where(eq('variety', 'pippen')).build();
-        query.fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=variety eq \'pippen\'');
+        query.where(eq('name', 'apple'));
+        query.keyword('keyword_text');
+        query.select('name', 'distributor');
+        query.expand('distributor');
+        query.includeCount(true);
+        query.orderBy({ field: 'name', order: 'ASCENDING' });
+        query.withFirstResult(20);
+        query.withMaxResults(10);
 
-        query = qb.where(and(eq('variety', 'pippen'), eq('price', 3.03))).build();
         query.fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=(variety eq \'pippen\' and price eq 3.03)');
+
+        expect(getWithQuerySnapshotParam.predicate).toEqual(eq('name', 'apple'));
+        expect(getWithQuerySnapshotParam.keyword).toEqual('keyword_text');
+        expect(getWithQuerySnapshotParam.select).toEqual(['name', 'distributor']);
+        expect(getWithQuerySnapshotParam.expand).toEqual(['distributor']);
+        expect(getWithQuerySnapshotParam.includeCount).toBe(true);
+        expect(getWithQuerySnapshotParam.orderby).toEqual([{ field: 'name', order: 'ASCENDING' }]);
+        expect(getWithQuerySnapshotParam.skip).toEqual(20);
+        expect(getWithQuerySnapshotParam.top).toEqual(10);
     });
 
-    it('should call "getWithQuery" with the correct keyword parameter', () => {
-        const query = qb.keyword('red').build();
-        query.fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=red');
+    it('should keep "keyword" option', () => {
+        const query = qb.build();
+        query.keyword('red').fetch();
+        expect(query.createSnapshot().keyword).toEqual('red');
     });
 
-    it('should call "getWithQuery" with the correct select parameters', () => {
+    it('should keep "select" option', () => {
         const query = qb.build();
         query.select('name', 'price').fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$select=name,price');
+        expect(query.createSnapshot().select).toEqual(['name', 'price']);
     });
 
-    it('should call "getWithQuery" with the correct extend parameters', () => {
+    it('should keep "expand" option', () => {
         const query = qb.build();
         query.expand('supplier', 'distributor').fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$expand=supplier,distributor');
+        expect(query.createSnapshot().expand).toEqual(['supplier', 'distributor']);
     });
 
-    it('should call "getWithQuery" with the correct order by parameters', () => {
-        let query = qb.build();
-        query.orderBy({ field: 'name'}).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$orderby=name');
-
-        query = qb.build();
-        query.orderBy({ field: 'name'}, { field: 'price', order: 'DESCENDING'}).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$orderby=name,price:desc');
+    it('should handle "orderBy" option', () => {
+        const query = qb.build();
+        query.orderBy({ field: 'name' }, { field: 'price', order: 'DESCENDING' }).fetch();
+        expect(query.createSnapshot().orderby).toEqual([{ field: 'name' }, { field: 'price', order: 'DESCENDING' }]);
     });
 
-    it('should call "getWithQuery" with the correct pagination parameters', () => {
+    it('should handle pagination parameters', () => {
         let query = qb.build();
         query.withMaxResults(10).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=10&$top=0');
+        expect(query.createSnapshot().top).toEqual(10);
 
         query = qb.build();
         query.withMaxResults(20).withFirstResult(100).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=100');
+        expect(query.createSnapshot().top).toEqual(20);
+        expect(query.createSnapshot().skip).toEqual(100);
 
         query = qb.build();
         query.withMaxResults(20).withFirstResult(0).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=0');
+        expect(query.createSnapshot().top).toEqual(20);
+        expect(query.createSnapshot().skip).toEqual(0);
     });
 
-    it('should not include "$top" without "$skip"', () => {
+    it('should not include "$skip" without "$top"', () => {
         const query = qb.build();
         query.withFirstResult(100).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('');
+        expect(query.createSnapshot().skip).toEqual(undefined);
     });
 
     it('should be able to modify query to get next page of results', () => {
         const query = qb.build();
-        query.withMaxResults(20).withFirstResult(20).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=20');
+        let snapshot: QuerySnapshot<Fruit>;
+
+        query.withMaxResults(20).withFirstResult(10).fetch();
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(10);
+        expect(snapshot.top).toEqual(20);
 
         query.next();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(30);
+        expect(snapshot.top).toEqual(20);
 
         query.next();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=60');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(50);
+        expect(snapshot.top).toEqual(20);
 
         query.next();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=80');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(70);
+        expect(snapshot.top).toEqual(20);
     });
 
     it('should be able to modify query to get previous page of results', () => {
         const query = qb.build();
+        let snapshot: QuerySnapshot<Fruit>;
+
         query.withMaxResults(20).withFirstResult(80).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=80');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(80);
+        expect(snapshot.top).toEqual(20);
 
         query.previous();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=60');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(60);
+        expect(snapshot.top).toEqual(20);
 
         query.previous();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(40);
+        expect(snapshot.top).toEqual(20);
 
         query.previous();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=20');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(20);
+        expect(snapshot.top).toEqual(20);
     });
 
     it('should default the top to 0 if previous results in a negative index', () => {
         const query = qb.build();
+        let snapshot: QuerySnapshot<Fruit>;
+
         query.withMaxResults(20).withFirstResult(10).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=10');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(10);
+        expect(snapshot.top).toEqual(20);
 
         query.previous();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=0');
+        snapshot = query.createSnapshot();
+        expect(snapshot.skip).toEqual(0);
+        expect(snapshot.top).toEqual(20);
     });
 
     it('should add "count" to query string if includeCount is set to true', () => {
         const query = qb.build();
         query.includeCount(true).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$count=true');
+        expect(query.createSnapshot().includeCount).toEqual(true);
     });
 
     it('should reset the paging index by default when orderBy is called', () => {
         const query = qb.build();
         query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
+        expect(query.createSnapshot().skip).toEqual(40);
 
-        query.orderBy({field: 'name'}).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=0&$orderby=name');
-    });
-
-    it('should suppress resetting of the paging index if "suppressPageReset" is invoked when orderBy is called', () => {
-        const query = qb.build();
-        query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40');
-
-        query.suppressPageReset().orderBy({field: 'name'}).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$skip=20&$top=40&$orderby=name');
+        query.orderBy({ field: 'name' }).fetch();
+        expect(query.createSnapshot().skip).toEqual(0);
     });
 
     it('should reset the paging index by default when predicate has changed', () => {
-        const query = qb.where(eq('name', 'orange')).build();
+        const query = qb.build();
         query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'orange\'&$skip=20&$top=40');
+        expect(query.createSnapshot().skip).toEqual(40);
 
         query.where(eq('name', 'peach')).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'peach\'&$skip=20&$top=0');
-    });
-
-    it('should suppress resetting of the paging index if "suppressPageReset" is invoked when predicate has changed', () => {
-        const query = qb.where(eq('name', 'orange')).build();
-        query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'orange\'&$skip=20&$top=40');
-
-        query.suppressPageReset().where(eq('name', 'peach')).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$filter=name eq \'peach\'&$skip=20&$top=40');
+        expect(query.createSnapshot().skip).toEqual(0);
     });
 
     it('should reset the paging index by default when keyword is changed', () => {
         const query = qb.keyword('apple').build();
         query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
+        expect(query.createSnapshot().skip).toEqual(40);
 
         query.keyword('banana').fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=banana&$skip=20&$top=0');
-    });
-
-    it('should suppress resetting the paging index if "suppressPageReset" is invoked when keyword is changed', () => {
-        const query = qb.keyword('apple').build();
-        query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
-
-        query.suppressPageReset().keyword('banana').fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=banana&$skip=20&$top=40');
+        expect(query.createSnapshot().skip).toEqual(0);
     });
 
     it('should reset the paging index by default when page size is changed', () => {
         const query = qb.keyword('apple').build();
         query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
+        expect(query.createSnapshot().skip).toEqual(40);
 
         query.withMaxResults(100).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=100&$top=0');
-    });
-
-    it('should suppress resetting the paging index if "suppressPageReset" is invoked when page size is changed', () => {
-        const query = qb.keyword('apple').build();
-        query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
-
-        query.suppressPageReset().withMaxResults(100).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=100&$top=40');
+        expect(query.createSnapshot().skip).toEqual(0);
     });
 
     it('should suppress resetting the paging index if setting the paging index is part of the query update', () => {
         const query = qb.keyword('apple').build();
         query.withMaxResults(20).withFirstResult(40).fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=apple&$skip=20&$top=40');
+        expect(query.createSnapshot().skip).toEqual(40);
 
-        query.withMaxResults(100).withFirstResult(40).keyword('banana').fetch();
-        expect(service.getWithQuery).toHaveBeenCalledWith('$search=banana&$skip=100&$top=40');
+        query.withMaxResults(100).withFirstResult(60).keyword('banana').fetch();
+        expect(query.createSnapshot().skip).toEqual(60);
+    });
+
+    it('should suppress resetting of the paging index if "suppressPageReset" is called during update', () => {
+        const query = qb.build();
+        query.withMaxResults(20).withFirstResult(40).fetch();
+        expect(query.createSnapshot().skip).toEqual(40);
+
+        query.orderBy({ field: 'name' }).where(eq('name', 'test')).suppressPageReset().fetch();
+        expect(query.createSnapshot().skip).toEqual(40);
     });
 });

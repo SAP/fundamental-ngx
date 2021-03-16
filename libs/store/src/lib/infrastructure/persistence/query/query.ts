@@ -8,7 +8,7 @@ export interface OrderBy<TModel> {
     order?: 'ASCENDING' | 'DESCENDING';
 }
 
-export interface QuerySnapshot<T> {
+export class QuerySnapshotModel<T> {
     keyword: string;
     predicate: Predicate<T>;
     skip: number;
@@ -19,36 +19,42 @@ export interface QuerySnapshot<T> {
     expand: Array<keyof T>;
 }
 
+export type QuerySnapshot<T> = Readonly<QuerySnapshotModel<T>>;
+
+export const isQuerySnapshot = <K>(data: any): data is QuerySnapshot<K> => {
+    return data instanceof QuerySnapshotModel;
+};
+
 /**
  * @todo We may need a method for end-users to add custom query parameters.
  */
 export class Query<TModel> {
     /** @hidden - stores current keyword */
-    _keyword: string;
+    protected _keyword: string;
 
     /** @hidden - stores current predicate */
-    _predicate: Predicate<TModel>;
+    protected _predicate: Predicate<TModel>;
+
+    /** @hidden - stores current offset */
+    protected _skip: number;
 
     /** @hidden - stores current page size */
-    _skip: number;
-
-    /** @hidden - stores current index offset */
-    _top: number;
+    protected _top: number;
 
     /** @hidden - stores flag for suspending page reset on query change */
-    _suppressPageReset: boolean;
+    protected _suppressPageReset: boolean;
 
-    /** @hidden - stores curernt order bys */
-    _orderByFields: Array<OrderBy<TModel>>;
+    /** @hidden - stores current order bys */
+    protected _orderByFields: Array<OrderBy<TModel>>;
 
     /** @hidden - stores current enable count flag */
-    _includeCount: boolean;
+    protected _includeCount: boolean;
 
     /** @hidden - stores current selection of properties */
-    _select: Array<keyof TModel>;
+    protected _select: Array<keyof TModel>;
 
     /** @hidden - stores current expand properties */
-    _expand: Array<keyof TModel>;
+    protected _expand: Array<keyof TModel>;
 
     constructor(private service: QueryService<TModel>) {}
 
@@ -81,20 +87,20 @@ export class Query<TModel> {
 
     /**
      * Set first index of result set for paging.
-     * @param top Index number of first result.
+     * @param skip Index number of first result.
      */
-    withFirstResult(top: number): this {
-        this._top = top;
+    withFirstResult(skip: number): this {
+        this._skip = skip;
         this._suppressPageReset = true;
         return this;
     }
 
     /**
      * Set page size for result set.
-     * @param skip Number of items returned per page
+     * @param top Number of items returned per page
      */
-    withMaxResults(skip: number): this {
-        this._skip = skip;
+    withMaxResults(top: number): this {
+        this._top = top;
         return this;
     }
 
@@ -120,7 +126,7 @@ export class Query<TModel> {
 
     /**
      * Set list of select parameters. Select parameters are used to limit
-     * the enitity properties included in the return data.
+     * the entity properties included in the return data.
      * @param select List of properties to include in response data
      */
     select<TP extends keyof TModel>(...select: Array<TP>): this {
@@ -143,11 +149,13 @@ export class Query<TModel> {
      */
     fetch(): Observable<Array<TModel>> {
         if (!this._suppressPageReset) {
-            this._top = 0;
+            this._skip = 0;
         }
         this._suppressPageReset = false;
 
-        return this.service.getWithQuery(this._createSnapshot());
+        const snapshot = this.createSnapshot();
+
+        return this.service.getWithQuery(snapshot);
     }
 
     /**
@@ -164,7 +172,7 @@ export class Query<TModel> {
      * Get previous page of collection.
      */
     previous(): void {
-        this._top = this._top > this._skip ? this._top - this._skip : 0;
+        this._skip = Math.max(this._skip - this._top, 0);
         this._suppressPageReset = true;
         this.fetch();
     }
@@ -173,7 +181,7 @@ export class Query<TModel> {
      * Get next page of collection
      */
     next(): void {
-        this._top = this._top + this._skip;
+        this._skip = this._skip + this._top;
         this._suppressPageReset = true;
         this.fetch();
     }
@@ -181,16 +189,18 @@ export class Query<TModel> {
     /**
      * Create current query state snapshot
      */
-    private _createSnapshot(): Readonly<QuerySnapshot<TModel>> {
-        return {
-            keyword: this._keyword,
-            predicate: this._predicate,
-            skip: this._skip,
-            top: this._top,
-            orderby: this._orderByFields,
-            includeCount: this._includeCount,
-            select: this._select,
-            expand: this._expand
-        };
+    createSnapshot(): QuerySnapshot<TModel> {
+        const snapshot = new QuerySnapshotModel<TModel>();
+
+        snapshot.keyword = this._keyword;
+        snapshot.predicate = this._predicate;
+        snapshot.top = this._top;
+        snapshot.skip = this._top != null ? this._skip : undefined;
+        snapshot.orderby = this._orderByFields;
+        snapshot.includeCount = this._includeCount;
+        snapshot.select = this._select;
+        snapshot.expand = this._expand;
+
+        return Object.freeze(snapshot);
     }
 }

@@ -10,9 +10,9 @@ import {
     AndPredicate,
     OrPredicate
 } from './grammar/predicate';
-import { OrderBy, QuerySnapshot } from './query';
+import { isQuerySnapshot, OrderBy, QuerySnapshot } from './query';
 
-export { QuerySnapshot as QueryPayload };
+export { QuerySnapshot };
 
 export interface QueryParams {
     [name: string]: string | string[];
@@ -25,11 +25,11 @@ export interface QueryParams {
  */
 export abstract class QueryAdapter<T> {
     /**
-     * Check if passed data is query payload
-     * @param payload Possible Query Payload to check
+     * Check if passed data is query snapshot
+     * @param payload Possible Query Snapshot to check
      */
-    static isQueryPayload<K>(payload: any): payload is QuerySnapshot<K> {
-        return 'predicate' in payload;
+    static isQuerySnapshot<K>(payload: any): payload is QuerySnapshot<K> {
+        return isQuerySnapshot(payload);
     }
 
     /**
@@ -65,7 +65,7 @@ export abstract class QueryAdapter<T> {
     abstract createQueryStringFromQueryParams(params?: QueryParams): string;
 
     /**
-     * Composes final query string from Query payload.
+     * Composes final query string from Query snapshot object.
      * @param params Query snapshot object.
      */
     abstract createQueryStringFromQuery(query: QuerySnapshot<T>): string;
@@ -139,16 +139,16 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
                 filter: this.parsePredicate(query.predicate)
             };
         }
-        if (query.skip) {
-            params = {
-                ...params,
-                skip: query.skip.toString()
-            };
-        }
-        if (query.skip && query.top !== undefined) {
+        if (!isNaN(query.top)) {
             params = {
                 ...params,
                 top: query.top.toString()
+            };
+        }
+        if (!isNaN(query.skip)) {
+            params = {
+                ...params,
+                skip: query.skip.toString()
             };
         }
         if (query.orderby) {
@@ -237,9 +237,9 @@ export class QueryAdapterFactory {
     }
 }
 
-export interface QueryAdapterService {
-    getAdapter<T>(entityName: string): QueryAdapter<T>;
-    registerAdapter<T>(entityName: string, adapter: QueryAdapter<T>): void;
+export abstract class QueryAdapterService {
+    abstract getAdapter<T>(entityName: string): QueryAdapter<T>;
+    abstract registerAdapter<T>(entityName: string, adapter: QueryAdapter<T>): void;
 }
 
 /**

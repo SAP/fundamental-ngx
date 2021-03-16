@@ -17,7 +17,8 @@ import {
     EntityMetaOptions
 } from '../../utils/entity-options.service';
 import { BaseEntity } from './interfaces';
-import { DefaultQueryAdapter, QueryAdapter, DefaultQueryAdapterService, QueryAdapterService } from '../../query/query-adapter';
+import { DefaultQueryAdapter, QueryAdapter, QueryAdapterService } from '../../query/query-adapter';
+import { QuerySnapshotModel } from '../../query/query';
 
 class Hero extends BaseEntity {
     id!: number;
@@ -39,10 +40,11 @@ class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
 
 class QueryAdapterServiceMock implements QueryAdapterService {
     getAdapter<K>(entity: string): QueryAdapter<K> {
+        // not implemented
         return null;
     }
     registerAdapter<K>(): void {
-        //
+        // not implemented
     }
 }
 
@@ -81,18 +83,19 @@ describe('EntityRestServerServiceFactory', () => {
             post: jasmine.createSpy('post'),
             put: jasmine.createSpy('put')
         };
+
         http.get.and.returnValue(of([]));
     });
 
     describe('(no config)', () => {
         it('can create factory', () => {
-            const factory = new EntityRestServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService);
+            const factory = new EntityRestServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService, queryAdapterService);
             const heroDS = factory.create<Hero>('Hero');
             expect(heroDS.name).toBe('Hero EntityRestServerService');
         });
 
         it('should produce hero data service that gets all heroes with expected URL', () => {
-            const factory = new EntityRestServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService);
+            const factory = new EntityRestServerServiceFactory(http, httpUrlGenerator, entityMetaOptionsService, queryAdapterService);
             const heroDS = factory.create<Hero>('Hero');
             heroDS.getAll();
             expect(http.get).toHaveBeenCalledWith('api/heroes/', undefined);
@@ -105,8 +108,8 @@ describe('EntityRestServerServiceFactory', () => {
             const factory = new EntityRestServerServiceFactory(
                 http,
                 httpUrlGenerator,
-                queryAdapter,
                 entityMetaOptionsService,
+                queryAdapterService,
                 config
             );
             const heroDS = factory.create<Hero>('Hero');
@@ -123,6 +126,8 @@ describe('EntityRestServerService', () => {
     let entityMetaOptionsService: EntityMetaOptionsService;
     let heroResourceMetaOptions: EntityResourceMetaOptions;
     let heroEntityMetaOptions: EntityMetaOptions;
+    let queryAdapterService: QueryAdapterService;
+    let queryAdapter: QueryAdapter<Hero>;
     const defaultHeroUrl = 'api/hero/';
     const defaultHeroesUrl = 'api/heroes/';
 
@@ -159,7 +164,16 @@ describe('EntityRestServerService', () => {
             }
         );
 
-        service = new EntityRestServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService);
+        queryAdapterService = new QueryAdapterServiceMock();
+        queryAdapter = new DefaultQueryAdapter<Hero>();
+
+        spyOn(queryAdapterService, 'getAdapter').and.callFake(
+            (entityName: string): QueryAdapter<any> => {
+                return queryAdapter;
+            }
+        );
+
+        service = new EntityRestServerService('Hero', httpClient, httpUrlGenerator, queryAdapterService, entityMetaOptionsService);
     });
 
     afterEach(() => {
@@ -176,7 +190,8 @@ describe('EntityRestServerService', () => {
                 entityResourceMetaOptions: this.entityResourceMetaOptions,
                 getDelay: this.getDelay,
                 saveDelay: this.saveDelay,
-                timeout: this.timeout
+                timeout: this.timeout,
+                queryAdapter: this.queryAdapter
             };
         }
 
@@ -185,7 +200,7 @@ describe('EntityRestServerService', () => {
 
         beforeEach(() => {
             // use test wrapper class to get to protected properties
-            service = new HeroRestServerService('Hero', httpClient, httpUrlGenerator, null, entityMetaOptionsService);
+            service = new HeroRestServerService('Hero', httpClient, httpUrlGenerator, queryAdapterService, entityMetaOptionsService);
         });
 
         it('has expected name', () => {
@@ -198,6 +213,10 @@ describe('EntityRestServerService', () => {
 
         it('has expected multiple-entities url', () => {
             expect(service.properties.entityResourceMetaOptions).toBe(heroResourceMetaOptions);
+        });
+
+        it('has expected queryAdapter', () => {
+            expect(service.properties.queryAdapter).toBe(queryAdapter);
         });
     });
 
@@ -351,7 +370,7 @@ describe('EntityRestServerService', () => {
             ] as Hero[];
         });
 
-        it('should return expected selected heroes w/ object params', () => {
+        it('should return expected selected heroes by object params', () => {
             service.getWithQuery({ name: 'B' }).subscribe((heroes) => expect(heroes).toEqual(expectedHeroes), fail);
 
             // HeroService should have made one request to GET heroes
@@ -365,13 +384,30 @@ describe('EntityRestServerService', () => {
             req.flush(expectedHeroes);
         });
 
-        it('should return expected selected heroes w/ string params', () => {
+        it('should return expected selected heroes by string params', () => {
             service.getWithQuery('name=B').subscribe((heroes) => expect(heroes).toEqual(expectedHeroes), fail);
 
             // HeroService should have made one request to GET heroes
             // from expected URL with query params
             const req = httpTestingController.expectOne(defaultHeroesUrl + '?name=B');
             expect(req.request.method).toEqual('GET');
+
+            // Respond with the mock heroes
+            req.flush(expectedHeroes);
+        });
+
+        it('should return expected selected heroes by query snapshot object', () => {
+            const querySnapshot = new QuerySnapshotModel();
+            querySnapshot.keyword = 'keyword';
+
+            service.getWithQuery(querySnapshot).subscribe((heroes) => expect(heroes).toEqual(expectedHeroes), fail);
+
+            // HeroService should have made one request to GET heroes
+            // from expected URL with query params
+            const req = httpTestingController.expectOne(defaultHeroesUrl + '?$search=keyword');
+            expect(req.request.method).toEqual('GET');
+
+            expect(req.request.body).toBeNull();
 
             // Respond with the mock heroes
             req.flush(expectedHeroes);
@@ -502,7 +538,7 @@ describe('EntityRestServerService', () => {
         });
 
         it('should return 404 when id not found and delete404OK is false', () => {
-            service = new EntityRestServerService('Hero', httpClient, httpUrlGenerator, entityMetaOptionsService, {
+            service = new EntityRestServerService('Hero', httpClient, httpUrlGenerator, queryAdapterService, entityMetaOptionsService, {
                 delete404OK: false
             });
             service.delete(1).subscribe(

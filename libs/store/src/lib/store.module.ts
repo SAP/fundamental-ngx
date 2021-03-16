@@ -17,12 +17,13 @@ import {
     HttpUrlGenerator,
     DefaultEntityStoreBuilderFactory,
     EntityStoreBuilderFactory,
-    EntityServerServiceFactoryResolver,
-    EntityRestServerServiceFactory,
-    EntityInMemoryServerServiceFactory,
-    EntityLocalStorageServerServiceFactory
+    EntityRestServerServiceFactory
 } from './infrastructure/persistence/store';
-import { QueryAdapterFactory, DefaultQueryAdapterService } from './infrastructure/persistence/query/query-adapter';
+import {
+    QueryAdapterFactory,
+    DefaultQueryAdapterService,
+    QueryAdapterService
+} from './infrastructure/persistence/query/query-adapter';
 import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
 
 function mapFundamentalConfigToNgrxConfig(conf: FundamentalStoreConfig): EntityDataModuleConfig {
@@ -79,12 +80,9 @@ export class FundamentalStoreModule {
             { provide: EntityStoreBuilderFactory, useClass: DefaultEntityStoreBuilderFactory },
 
             QueryAdapterFactory,
-            DefaultQueryAdapterService,
+            { provide: QueryAdapterService, useClass: DefaultQueryAdapterService },
 
-            EntityServerServiceFactoryResolver,
             EntityRestServerServiceFactory,
-            EntityInMemoryServerServiceFactory,
-            EntityLocalStorageServerServiceFactory,
             { provide: DefaultDataServiceFactory, useClass: DefaultEntityServerServiceFactory },
             { provide: HttpUrlGenerator, useClass: DefaultHttpUrlGenerator }
         ];

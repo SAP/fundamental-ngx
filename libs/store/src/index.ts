@@ -12,8 +12,6 @@ export {
     EntityServerService,
     EntityRestServerService,
     EntityRestServerServiceFactory,
-    EntityInMemoryServerService,
-    EntityInMemoryServerServiceFactory,
     EntityLocalStorageServerService,
     EntityLocalStorageServerServiceFactory,
     EntityServerServiceFactory,
@@ -23,7 +21,8 @@ export {
     QueryParams,
     QueryAdapter,
     DefaultQueryAdapter,
-    DefaultQueryAdapterService as QueryAdapterService
+    QueryAdapterService,
+    DefaultQueryAdapterService
 } from './lib/infrastructure/persistence/query/query-adapter';
 export { Query } from './lib/infrastructure/persistence/query/query';
 export * from './lib/infrastructure/persistence/query/grammar/query-expressions';

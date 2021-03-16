@@ -11,7 +11,7 @@ import {
     EntityResourceMetaOptions,
     EntityMetaOptions
 } from '../../utils/entity-options.service';
-import { QueryAdapter, DefaultQueryAdapterService, QueryPayload } from '../../query/query-adapter';
+import { QueryAdapter, QueryAdapterService, QuerySnapshot } from '../../query/query-adapter';
 
 import { HttpUrlGenerator } from '../http-url-generator';
 import { BaseEntity, EntityServerService } from './interfaces';
@@ -52,7 +52,7 @@ export class EntityRestServerService<T extends BaseEntity> implements EntityServ
         entityName: string,
         protected http: HttpClient,
         protected httpUrlGenerator: HttpUrlGenerator,
-        queryAdapterService: DefaultQueryAdapterService,
+        queryAdapterService: QueryAdapterService,
         entityMetaOptionsService: EntityMetaOptionsService,
         config?: DefaultDataServiceConfig
     ) {
@@ -106,9 +106,8 @@ export class EntityRestServerService<T extends BaseEntity> implements EntityServ
         return this.execute(method, entityUrl + key, err);
     }
 
-    getWithQuery(query: QueryPayload<T> | QueryParams | string): Observable<T[]> {
-        // Check if query is QueryPayload instance and convert it to query string
-        if (QueryAdapter.isQueryPayload<T>(query)) {
+    getWithQuery(query: QuerySnapshot<T> | QueryParams | string): Observable<T[]> {
+        if (QueryAdapter.isQuerySnapshot<T>(query)) {
             query = this.queryAdapter.createQueryStringFromQuery(query);
         }
         const qParams = typeof query === 'string' ? { fromString: query } : { fromObject: query };
@@ -256,7 +255,7 @@ export class EntityRestServerServiceFactory {
         protected http: HttpClient,
         protected httpUrlGenerator: HttpUrlGenerator,
         protected entityMetaOptionsService: EntityMetaOptionsService,
-        protected queryAdapterService: DefaultQueryAdapterService,
+        protected queryAdapterService: QueryAdapterService,
         @Optional() protected config?: DefaultDataServiceConfig
     ) {
         config = config || {};
