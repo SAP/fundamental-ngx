@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-import { EntityCollectionDataService } from '@ngrx/data';
 
 import { BaseEntity, IdentityKey } from '../../../../domain/entity';
 import { QueryParams, QuerySnapshot } from '../../query/query-adapter';
@@ -22,11 +21,11 @@ export interface EntityServerService<T extends BaseEntity> {
 }
 
 /**
- * Entity Collection Storage
+ * Entity Cache Storage
  *
  * Used to retrieve / update entity collection
  */
-export interface EntityStorageService<TModel extends BaseEntity> {
+export interface EntityCacheStorageService<TModel extends BaseEntity> {
     /**
      * Get all available items
      */

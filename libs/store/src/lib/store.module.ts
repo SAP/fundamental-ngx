@@ -17,7 +17,8 @@ import {
     HttpUrlGenerator,
     DefaultEntityStoreBuilderFactory,
     EntityStoreBuilderFactory,
-    EntityRestServerServiceFactory
+    EntityRestServerServiceFactory,
+    EntityCacheStorageServiceFactory
 } from './infrastructure/persistence/store';
 import {
     QueryAdapterFactory,
@@ -81,7 +82,7 @@ export class FundamentalStoreModule {
 
             QueryAdapterFactory,
             { provide: QueryAdapterService, useClass: DefaultQueryAdapterService },
-
+            EntityCacheStorageServiceFactory,
             EntityRestServerServiceFactory,
             { provide: DefaultDataServiceFactory, useClass: DefaultEntityServerServiceFactory },
             { provide: HttpUrlGenerator, useClass: DefaultHttpUrlGenerator }

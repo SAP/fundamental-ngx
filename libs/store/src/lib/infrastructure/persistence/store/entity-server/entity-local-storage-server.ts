@@ -11,12 +11,12 @@ import { QueryAdapter } from '../../query/query-adapter';
 
 import { EntityMetaOptions, EntityMetaOptionsService } from '../../utils/entity-options.service';
 import { RequestData } from './entity-rest-server';
-import {CacheStorageService} from './cache-storage';
+import { EntityCacheStorageServiceBase } from './cache-storage';
 import {
     BaseEntity,
     EntityServerService,
     EntityServerServiceFactory,
-    EntityStorageService,
+    EntityCacheStorageService,
     IdentityKey,
     PaginatedEntitiesResponse
 } from './interfaces';
@@ -40,7 +40,7 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
 
     constructor(
         protected entityName: string,
-        protected storageService: EntityStorageService<T>,
+        protected storageService: EntityCacheStorageService<T>,
         protected entityMetaOptionsService: EntityMetaOptionsService,
         protected config?: DefaultDataServiceConfig
     ) {
@@ -262,13 +262,13 @@ export class EntityLocalStorageServerServiceFactory implements EntityServerServi
     create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
         return new EntityLocalStorageServerService<T>(
             entityName,
-            new CacheStorageService(this.getEntityStorageKey(entityName)),
+            new EntityCacheStorageServiceBase(this.getEntityStorageKey(entityName), localStorage),
             this.entityMetaOptionsService,
             this.config
         );
     }
 
     private getEntityStorageKey(entityName: string): string {
-        return `fdp-entity-store-storage-${entityName}`;
+        return `fdp-store-cache-entity-${entityName}`.toLowerCase();
     }
 }

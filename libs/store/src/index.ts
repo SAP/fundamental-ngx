@@ -1,6 +1,7 @@
 export * from './lib/domain/public_api';
 export { FundamentalStoreConfig } from './lib/infrastructure/configuration';
 export {
+    DefaultQueryService,
     EntityStore,
     DefaultEntityStore,
     EntityStoreBuilder,
@@ -15,7 +16,10 @@ export {
     EntityLocalStorageServerService,
     EntityLocalStorageServerServiceFactory,
     EntityServerServiceFactory,
-    DefaultEntityServerServiceFactory
+    DefaultEntityServerServiceFactory,
+    EntityCacheStorageService,
+    EntityCacheStorageServiceFactory,
+    EntityCacheStorageServiceBase,
 } from './lib/infrastructure/persistence/store';
 export {
     QueryParams,

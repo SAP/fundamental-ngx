@@ -5,21 +5,22 @@ import { EntityMetaOptionsService } from '../../utils/entity-options.service';
 import { QueryAdapterService } from '../../query/query-adapter';
 import { BaseEntity, EntityServerService, EntityServerServiceFactory } from './interfaces';
 import { EntityRestServerServiceFactory } from './entity-rest-server';
-import { CacheStorageService } from './cache-storage';
+import { EntityCacheStorageServiceFactory } from './cache-storage';
 import { EntityCacheServerService } from './entity-cache-server';
 
 /**
  * Entity Server Service Factory
  *
  * This factory adds cache policy layer.
- * 
+ *
  */
 @Injectable()
 export class DefaultEntityServerServiceFactory implements EntityServerServiceFactory {
     constructor(
         protected entityMetaOptionsService: EntityMetaOptionsService,
         protected queryAdapterService: QueryAdapterService,
-        private entityServerServiceFactory: EntityRestServerServiceFactory
+        private entityServerServiceFactory: EntityRestServerServiceFactory,
+        private entityCacheStorageServiceFactory: EntityCacheStorageServiceFactory
     ) {}
 
     /**
@@ -36,15 +37,18 @@ export class DefaultEntityServerServiceFactory implements EntityServerServiceFac
         }
 
         const cachedServer = new EntityCacheServerService(
-            server,
             entityName,
-            new CacheStorageService(
-                entityName,
+            server,
+            this.entityCacheStorageServiceFactory.create(
+                this.getStorageKey(entityName),
                 cache.strategy === CachePolicyStrategy.LocaleStorage ? localStorage : sessionStorage
-            ),
-            this.entityMetaOptionsService
+            )
         );
 
         return cachedServer;
+    }
+
+    private getStorageKey(entityName: string): string {
+        return `fdp-store-cache-entity-${entityName}`.toLowerCase();
     }
 }

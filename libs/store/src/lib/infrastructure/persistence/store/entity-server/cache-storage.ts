@@ -1,12 +1,15 @@
-import { BaseEntity, EntityStorageService } from './interfaces';
+import { Injectable } from '@angular/core';
+
+import { BaseEntity, EntityCacheStorageService } from './interfaces';
 
 /**
- * Cache Storage Service
+ * Entity Cache Storage Service
+ * Default implementation
  */
-export class CacheStorageService<TModel extends BaseEntity> implements EntityStorageService<TModel> {
+export class EntityCacheStorageServiceBase<TModel extends BaseEntity> implements EntityCacheStorageService<TModel> {
     private key: string;
 
-    constructor(entityKey: string, private storage: Storage = sessionStorage) {
+    constructor(entityKey: string, private storage: Storage) {
         this.key = entityKey;
     }
 
@@ -21,7 +24,9 @@ export class CacheStorageService<TModel extends BaseEntity> implements EntitySto
     }
 
     clearAll(): Promise<void> {
-        this.saveListToStorage([]);
+        try {
+            this.storage.setItem(this.key, undefined);
+        } catch (error) {}
         return Promise.resolve();
     }
 
@@ -40,5 +45,22 @@ export class CacheStorageService<TModel extends BaseEntity> implements EntitySto
             const stringified = JSON.stringify(collection);
             this.storage.setItem(this.key, stringified);
         } catch (error) {}
+    }
+}
+
+/**
+ * Entity Cache Storage Service Factory
+ */
+@Injectable()
+export class EntityCacheStorageServiceFactory {
+    /**
+     * Create Entity Cache Storage Service
+     *
+     * @param storageKey Unique storage key
+     * @param storage Optional storage type (sessionStorage or localStorage)
+     * @returns EntityCacheStorageService
+     */
+    create<T extends BaseEntity>(storageKey: string, storage?: Storage): EntityCacheStorageService<T> {
+        return new EntityCacheStorageServiceBase<T>(storageKey, storage || sessionStorage);
     }
 }
