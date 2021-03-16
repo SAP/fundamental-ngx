@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.25...v0.29.0-rc.26) (2021-03-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* - now it's required to add `[responsive]="true"` to the table, to achieve responsive mode.
+
+* BREAKING CHANGE: Remove borders from responsvie table (#4923) ([8ba4584](https://github.com/SAP/fundamental-ngx/commit/8ba45841f63c7368aa1481e14c0e2636047c5190)), closes [#4923](https://github.com/SAP/fundamental-ngx/issues/4923)
+
 ## [0.29.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.24...v0.29.0-rc.25) (2021-03-15)
 
 
