@@ -94,7 +94,8 @@ describe('Button test suite:', function() {
         expect(getAttributeByName(playgroundButton, 'ng-reflect-label')).toEqual(text);
     });
 
-    it('verify type of dropdown menu', () => {
+    //skipped due to https://github.com/webdriverio/webdriverio/issues/3605
+    xit('verify type of dropdown menu', () => {
         scrollIntoView(dropDownMenu);
         click(dropDownMenu);
         for (let i = 0; i < option.length; i++) {
@@ -108,7 +109,8 @@ describe('Button test suite:', function() {
         }
     });
 
-    it('verify icon of dropdown menu', () => {
+    //skipped due to https://github.com/webdriverio/webdriverio/issues/3605
+    xit('verify icon of dropdown menu', () => {
         scrollIntoView(dropDownMenu, 1);
         click(dropDownMenu, 1);
         for (let i = 0; i < option2.length; i++) {
@@ -150,7 +152,7 @@ describe('Button test suite:', function() {
             .toBeLessThan(2, `Playground button mismatch`);
     });
 
-    xdescribe('Check visual regression basic', function() {
+    describe('Check visual regression basic', function() {
 
         it('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();
@@ -164,6 +166,7 @@ describe('Button test suite:', function() {
                 checkButtonHoverState(typeButtons, typeButtonsExample + typeButtonsHoverState + '-' + i, button, i);
             }
         });
+
         it('should check buttons type active state', () => {
             const typeButtonsLength = getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
@@ -171,6 +174,7 @@ describe('Button test suite:', function() {
                 checkButtonActiveState(typeButtons, typeButtonsExample + typeButtonsActiveState + '-' + i, button, i);
             }
         });
+
         it('should check buttons type focus state', () => {
             const typeButtonsLength = getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
