@@ -1,11 +1,12 @@
 import {
+    checkElementScreenshot,
     click,
     elementArray,
-    scrollIntoView,
+    getImageTagBrowserPlatform,
     open,
     saveElementScreenshot,
-    getImageTagBrowserPlatform,
-    checkElementScreenshot, waitForElDisplayed
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 
@@ -14,6 +15,7 @@ export class BaseComponentPo {
     title = 'header .header';
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
+    defaultScreenshotFolder = '/e2e/wdio/baselineScreenshot/platform';
 
     checkRtlSwitch(switchers: string = this.rtlSwitcherArr, areas: string = this.exampleAreaContainersArr): void {
         const areasArray = elementArray(areas);
@@ -25,29 +27,33 @@ export class BaseComponentPo {
             click(switchers, i);
             checkLtrOrientation(areas, i);
         }
-    }
+    };
 
-    saveExampleBaselineScreenshot(specName: string, options: object = {}, areas: string = this.exampleAreaContainersArr): void {
-        const areasArray = elementArray(areas);
+    saveExampleBaselineScreenshot(specName: string, options: object = {}): void {
+        const areasArray = elementArray(this.exampleAreaContainersArr);
         for (let i = 0; i < areasArray.length; i++) {
-            waitForElDisplayed(areas, i);
-            scrollIntoView(areas, i);
-            saveElementScreenshot(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
+            waitForElDisplayed(this.exampleAreaContainersArr, i);
+            scrollIntoView(this.exampleAreaContainersArr, i);
+            saveElementScreenshot(this.exampleAreaContainersArr, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
         }
-    }
+    };
 
-    compareWithBaseline(specName: string, options: object = {}, areas: string = this.exampleAreaContainersArr): any {
-        const areasArray = elementArray(areas);
+    compareWithBaseline(specName: string, options: object = {}): any {
+        const areasArray = elementArray(this.exampleAreaContainersArr);
         let diff = 0;
         for (let i = 0; i < areasArray.length; i++) {
-            waitForElDisplayed(areas, i);
-            scrollIntoView(areas, i);
-            diff +=  checkElementScreenshot(areas, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
+            waitForElDisplayed(this.exampleAreaContainersArr, i);
+            scrollIntoView(this.exampleAreaContainersArr, i);
+            diff += checkElementScreenshot(this.exampleAreaContainersArr, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
         }
         return diff;
-    }
+    };
+
+    getScreenshotFolder(componentFolder: string): object {
+        return { baselineFolder: `${process.cwd()}${this.defaultScreenshotFolder}${componentFolder}` };
+    };
 
     open(url: string): void {
-        open('fundamental-ngx#/platform' + url);
+        return open('fundamental-ngx#/platform' + url);
     };
 }

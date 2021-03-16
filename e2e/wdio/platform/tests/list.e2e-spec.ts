@@ -261,8 +261,8 @@ describe('List test suite:', function() {
     // TODO: Failed. Unable to debug at the moment.
     xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            listPage.saveExampleBaselineScreenshot('list');
-            expect(listPage.compareWithBaseline('list')).toBeLessThan(1);
+            listPage.saveExampleBaselineScreenshot();
+            expect(listPage.compareWithBaseline()).toBeLessThan(1);
         });
     });
 });

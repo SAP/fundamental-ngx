@@ -95,10 +95,9 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1440',
-            }
+            'goog:chromeOptions': {
+                args: ['--window-size=1920,1417', '--headless']
+            },
         },
         // {
         //     browserName: 'firefox',

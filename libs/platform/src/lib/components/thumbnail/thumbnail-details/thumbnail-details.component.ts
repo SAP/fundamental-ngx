@@ -6,7 +6,7 @@ import {
     AfterViewInit,
     ViewChild
 } from '@angular/core';
-import { Media } from '../../thumbnail/thumbnail.component'
+import { Media } from '../thumbnail.interfaces';
 import { DialogRef } from '@fundamental-ngx/core';
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
 
@@ -24,11 +24,6 @@ interface DialogRefData {
     styleUrls: ['./thumbnail-details.component.scss']
 })
 export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
-
-    /** @hidden Start index of currently active items */
-    @ViewChild(ThumbnailImageComponent)
-    thumbnailImage: ThumbnailImageComponent;
-
     /** @hidden Start index of currently active items */
     currentActiveSlidesStartIndex = 0;
 

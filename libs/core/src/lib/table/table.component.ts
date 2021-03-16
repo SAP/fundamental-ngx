@@ -48,6 +48,11 @@ export class TableComponent implements AfterViewInit {
     @Input()
     popIn = false;
 
+    /** Whether or not to display the table in responsive mode. */
+    @HostBinding('class.fd-table--responsive')
+    @Input()
+    responsive = false;
+
     /** List of keys that identifies single columns */
     @Input()
     keys: string[];

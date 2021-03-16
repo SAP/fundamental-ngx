@@ -2,6 +2,132 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.26...v0.29.0-rc.27) (2021-03-16)
+
+
+### Bug Fixes
+
+* (Core) wizard step indicator stacking bugs on narrow screens ([#4901](https://github.com/SAP/fundamental-ngx/issues/4901)) ([29c8864](https://github.com/SAP/fundamental-ngx/commit/29c88645413885adcc4a7f2da62d09f27bad5118))
+
+## [0.29.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.25...v0.29.0-rc.26) (2021-03-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* - now it's required to add `[responsive]="true"` to the table, to achieve responsive mode.
+
+* BREAKING CHANGE: Remove borders from responsvie table (#4923) ([8ba4584](https://github.com/SAP/fundamental-ngx/commit/8ba45841f63c7368aa1481e14c0e2636047c5190)), closes [#4923](https://github.com/SAP/fundamental-ngx/issues/4923)
+
+## [0.29.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.24...v0.29.0-rc.25) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Fixed Card Layout Change focus target to header ([#4922](https://github.com/SAP/fundamental-ngx/issues/4922)) ([8d18858](https://github.com/SAP/fundamental-ngx/commit/8d18858d02e234b5e5e50619fc89db2a3646d2bd))
+
+## [0.29.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.23...v0.29.0-rc.24) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Add handler for real query string ([#4905](https://github.com/SAP/fundamental-ngx/issues/4905)) ([7bb9628](https://github.com/SAP/fundamental-ngx/commit/7bb96288d579be7658c09c407fa2d991c29ee6d2))
+
+## [0.29.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.22...v0.29.0-rc.23) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Add no-data mode and text wrap to table cell ([#4899](https://github.com/SAP/fundamental-ngx/issues/4899)) ([28e7633](https://github.com/SAP/fundamental-ngx/commit/28e76331547cbf0527f1e7a447abdf33eaded814))
+
+## [0.29.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.21...v0.29.0-rc.22) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Break word in every component under fixed card layout ([#4900](https://github.com/SAP/fundamental-ngx/issues/4900)) ([e2e7030](https://github.com/SAP/fundamental-ngx/commit/e2e7030cf64fbb47cd467f16878b3cfe700ea592))
+
+## [0.29.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.20...v0.29.0-rc.21) (2021-03-14)
+
+## [0.29.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.19...v0.29.0-rc.20) (2021-03-13)
+
+## [0.29.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.18...v0.29.0-rc.19) (2021-03-13)
+
+## [0.29.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.17...v0.29.0-rc.18) (2021-03-12)
+
+## [0.29.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.16...v0.29.0-rc.17) (2021-03-12)
+
+## [0.29.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.15...v0.29.0-rc.16) (2021-03-12)
+
+## [0.29.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.14...v0.29.0-rc.15) (2021-03-11)
+
+## [0.29.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.13...v0.29.0-rc.14) (2021-03-11)
+
+## [0.29.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.12...v0.29.0-rc.13) (2021-03-10)
+
+## [0.29.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.11...v0.29.0-rc.12) (2021-03-10)
+
+
+### Bug Fixes
+
+* (Core) updating the example for the truncation behaviour ([#4857](https://github.com/SAP/fundamental-ngx/issues/4857)) ([0ba46fa](https://github.com/SAP/fundamental-ngx/commit/0ba46fab4f7b2c1db05cc961b4baf0cf00e5bfc4))
+
+## [0.29.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.10...v0.29.0-rc.11) (2021-03-10)
+
+## [0.29.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.9...v0.29.0-rc.10) (2021-03-10)
+
+## [0.29.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.8...v0.29.0-rc.9) (2021-03-10)
+
+## [0.29.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.7...v0.29.0-rc.8) (2021-03-10)
+
+
+### Bug Fixes
+
+* (Core|Platform) ng xi18n command running on angular/cli@10 fails ([#4889](https://github.com/SAP/fundamental-ngx/issues/4889)) ([11a961f](https://github.com/SAP/fundamental-ngx/commit/11a961ff26d36cf403d1d7f3132c87d1404f4be2))
+
+## [0.29.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.6...v0.29.0-rc.7) (2021-03-10)
+
+
+### Bug Fixes
+
+* (Core|Platform) select general issues ([#4852](https://github.com/SAP/fundamental-ngx/issues/4852)) ([d970cdc](https://github.com/SAP/fundamental-ngx/commit/d970cdc9a91a68c0f0709368e8bd6bd0c80e5401))
+
+## [0.29.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.5...v0.29.0-rc.6) (2021-03-10)
+
+## [0.29.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.4...v0.29.0-rc.5) (2021-03-09)
+
+## [0.29.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.3...v0.29.0-rc.4) (2021-03-09)
+
+
+### Bug Fixes
+
+* (Core) Dynamic page init content resize ([#4886](https://github.com/SAP/fundamental-ngx/issues/4886)) ([edce21f](https://github.com/SAP/fundamental-ngx/commit/edce21fdb3e22b8544393feaeeb13c1047aacaac))
+
+## [0.29.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.2...v0.29.0-rc.3) (2021-03-07)
+
+## [0.29.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.1...v0.29.0-rc.2) (2021-03-04)
+
+
+### Features
+
+* (Core) introduce the status Indicator component ([#4746](https://github.com/SAP/fundamental-ngx/issues/4746)) ([8f5bc1f](https://github.com/SAP/fundamental-ngx/commit/8f5bc1f77c9cab494d2fa7045e546386956da25a))
+
+## [0.29.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.0...v0.29.0-rc.1) (2021-03-04)
+
+## [0.29.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.5...v0.29.0-rc.0) (2021-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Changed dialog default behaviour closeOnBackdrop to false - Now it won't close when user clicks outside of dialog
+
+* fix: (Core) Change default dialog behaviour to not close on backdrop click
+
+* Add inputId to associate with label, add z-index to button in flexible column layout
+
+* Add examples with inputId and labels for pickers
+
+* BREAKING CHANGE: Portal issues - dialog default behaviour, inputIds for pickers  (#4839) ([b7c4d2e](https://github.com/SAP/fundamental-ngx/commit/b7c4d2e56cf29dc33b5ffc5f99670d2ac6823ce1)), closes [#4839](https://github.com/SAP/fundamental-ngx/issues/4839)
+
 ### [0.28.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.4...v0.28.2-rc.5) (2021-03-04)
 
 ### [0.28.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.28.2-rc.3...v0.28.2-rc.4) (2021-03-03)

@@ -1,22 +1,28 @@
 import {
-    click,
+    checkElementScreenshot,
+    click, clickWithOption,
+    currentPlatformName,
+    doesItExist,
     getAttributeByName,
     getElementArrayLength,
-    getElementLocation,
     getParentElementCSSProperty,
     isElementDisplayed,
     mouseHoverElement,
     refreshPage,
+    saveElementScreenshot,
     scrollIntoView,
-    waitForPresent,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { ThumbnailPo } from '../pages/thumbnail.po';
 
 describe('Thumbnail field', function() {
     const thumbnailPage: ThumbnailPo = new ThumbnailPo();
     const {
-        mainImage, mainVideo, verticalGalleryImages, horizontalGalleryImages, verticalGalleryVideo
+        mainImage, mainVideo, verticalGalleryImages, horizontalGalleryImages, verticalGalleryVideo, galleryDialog,
+        galleryDialogCloseButton,
+        galleryDialogLeftArrowButton,
+        galleryDialogRightArrowButton
     } = thumbnailPage;
 
     beforeAll(() => {
@@ -36,47 +42,11 @@ describe('Thumbnail field', function() {
         expect(isElementDisplayed(mainVideo)).toBeTrue();
     });
 
-    it('should be able to display images vertical', () => {
+    // Skipped due https://github.com/SAP/fundamental-ngx/issues/4896
+    xit('should on click display image for vertical', () => {
         scrollIntoView(verticalGalleryImages);
         const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength - 1 > i; i++) {
-            expect(getElementLocation(verticalGalleryImages, i).x)
-                .toEqual(getElementLocation(verticalGalleryImages, i + 1).x);
-            expect(getElementLocation(verticalGalleryImages, i).y)
-                .toBeLessThan(getElementLocation(verticalGalleryImages, i + 1).y);
-        }
-    });
-
-    it('should be able to display images horizontal', () => {
-        scrollIntoView(horizontalGalleryImages);
-        const arrLength = getElementArrayLength(horizontalGalleryImages);
-        for (let i = 0; arrLength > i; i++) {
-            if (i !== arrLength - 1) {
-                expect(getElementLocation(horizontalGalleryImages, i).y)
-                    .toEqual(getElementLocation(horizontalGalleryImages, i + 1).y);
-                expect(getElementLocation(horizontalGalleryImages, i).x)
-                    .toBeLessThan(getElementLocation(horizontalGalleryImages, i + 1).x);
-            }
-        }
-    });
-
-    it('should be able to display vertical for video gallery', () => {
-        scrollIntoView(verticalGalleryVideo);
-        const arrLength = getElementArrayLength(verticalGalleryVideo);
-        for (let i = 0; arrLength > i; i++) {
-            if (i !== arrLength - 1) {
-                expect(getElementLocation(verticalGalleryVideo, i).x)
-                    .toEqual(getElementLocation(verticalGalleryVideo, i + 1).x);
-                expect(getElementLocation(verticalGalleryVideo, i).y)
-                    .toBeLessThan(getElementLocation(verticalGalleryVideo, i + 1).y);
-            }
-        }
-    });
-
-    it('should on click display image for vertical', () => {
-        scrollIntoView(verticalGalleryImages);
-        const arrLength = getElementArrayLength(verticalGalleryImages);
-        for (let i = 0; arrLength > i; i++) {
             const imageUrl = getAttributeByName(verticalGalleryImages, 'ng-reflect-image', i);
             click(verticalGalleryImages, i);
             expect(getAttributeByName(mainImage, 'src', 0)).toContain(imageUrl);
@@ -115,14 +85,42 @@ describe('Thumbnail field', function() {
         }
     });
 
+    it('should be able to close gallery popup', () => {
+        waitForElDisplayed(verticalGalleryImages, 4);
+        clickWithOption(verticalGalleryImages, 4, 5000, {x: 10});
+        waitForElDisplayed(galleryDialog);
+        click(galleryDialogCloseButton);
+
+        expect(doesItExist(galleryDialog)).toBe(false);
+    });
+
+    it('should be able to switch image in gallery popup', () => {
+        waitForElDisplayed(verticalGalleryImages, 4);
+        clickWithOption(verticalGalleryImages, 4, 5000, {x: 20});
+        waitForElDisplayed(galleryDialog);
+        saveElementScreenshot(galleryDialog, 'thumbnail-dialog-on-open-' + currentPlatformName(), thumbnailPage.getScreenshotFolder());
+        let diff = checkElementScreenshot(galleryDialog, 'thumbnail-dialog-on-open-' + currentPlatformName(), thumbnailPage.getScreenshotFolder());
+        click(galleryDialogLeftArrowButton);
+
+        saveElementScreenshot(galleryDialog, 'thumbnail-dialog-previous-' + currentPlatformName(), thumbnailPage.getScreenshotFolder());
+        diff += checkElementScreenshot(galleryDialog, 'thumbnail-dialog-previous-' + currentPlatformName(), thumbnailPage.getScreenshotFolder());
+
+        click(galleryDialogRightArrowButton);
+        click(galleryDialogRightArrowButton);
+        saveElementScreenshot(galleryDialog, 'thumbnail-dialog-next-' + currentPlatformName(), thumbnailPage.getScreenshotFolder());
+        diff += checkElementScreenshot(galleryDialog, 'thumbnail-dialog-next-' + currentPlatformName(), thumbnailPage.getScreenshotFolder());
+
+        expect(diff).toBeLessThan(5);
+    });
+
     it('should have rtl orientation', () => {
         thumbnailPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
-        xit('should check examples visual regression', () => {
-            thumbnailPage.saveExampleBaselineScreenshot('thumbnail');
-            expect(thumbnailPage.compareWithBaseline('thumbnail')).toBeLessThan(2);
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            thumbnailPage.saveExampleBaselineScreenshot();
+            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(2);
         });
     });
 });

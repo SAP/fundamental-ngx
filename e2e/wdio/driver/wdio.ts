@@ -1,5 +1,3 @@
-import { default as axe, source } from 'axe-core';
-
 export function defaultWaitTime(): number {
     return browser.options.waitforTimeout;
 }
@@ -76,6 +74,12 @@ export function click(selector: string, index: number = 0, waitTime: number = de
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     return $$(selector)[index].click();
+}
+
+export function clickWithOption(selector: string, index: number = 0, waitTime: number = defaultWaitTime(), options: object): void {
+    checkSelectorExists(selector, index);
+    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+    return $$(selector)[index].click(options);
 }
 
 export function doubleClick(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
@@ -160,6 +164,10 @@ export function waitForUnclickable(selector: string, index: number = 0, waitTime
 export function waitForPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
     checkSelectorExists(selector, index);
     return $$(selector)[index].waitForExist({ timeout: waitTime });
+}
+
+export function waitForNotPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
+    return $$(selector)[index].waitForExist({ timeout: waitTime, reverse: true });
 }
 
 export function isEnabled(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
@@ -327,17 +335,6 @@ export function getElementLocation(selector: string, index: number = 0, prop?: '
 export function getParentElementCSSProperty(selector: string, prop: string, index: number): string {
     checkSelectorExists(selector, index);
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
-}
-
-export function runAxeReport(options: string): object {
-    return browser.executeAsync((options, done) => {
-        axe.run(options, function(err, results) {
-            if (err) {
-                done(err);
-            }
-            done(results);
-        });
-    }, options);
 }
 
 export function addIsActiveClass(selector: string, index: number = 0): void {

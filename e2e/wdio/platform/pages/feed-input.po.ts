@@ -16,4 +16,16 @@ export class FeedInputPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.feedInput);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'feed-input'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'feed-input'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

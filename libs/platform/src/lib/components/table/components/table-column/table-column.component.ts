@@ -15,7 +15,8 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/core';
 
 import { ColumnAlign, FilterableColumnDataType } from '../../enums';
-import { FdpCellDef, FdpHeaderCellDef } from '../../directives';
+import { FdpCellDef } from '../../directives/table-cell.directive';
+import { FdpHeaderCellDef } from '../../directives/table-header.directive';
 
 import { TableColumn } from './table-column';
 
