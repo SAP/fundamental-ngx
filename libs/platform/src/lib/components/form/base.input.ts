@@ -37,12 +37,18 @@ let randomId = 0;
  * that e.g. placeholder will change after component is created
  */
 @Directive()
-export abstract class BaseInput extends BaseComponent
+export abstract class BaseInput
+    extends BaseComponent
     implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
+    /** @hidden */
     protected defaultId = `fdp-input-id-${randomId++}`;
+    /** @hidden */
     protected _disabled: boolean;
+    /** @hidden */
     protected _value: any;
+    /** @hidden */
     protected _editable = true;
+    /** @hidden */
     protected _destroyed = new Subject<void>();
 
     @Input()
@@ -135,14 +141,15 @@ export abstract class BaseInput extends BaseComponent
      */
     _status: Status;
 
-    /**
+    /** @hidden
      * See @FormFieldControl
      */
     readonly stateChanges: Subject<any> = new Subject<any>();
 
     readonly formField: FormField | null = null;
 
-    /** set when input field is mandatory form field */
+    /** @hidden
+     * set when input field is mandatory form field */
     required: boolean;
 
     /**
@@ -247,7 +254,7 @@ export abstract class BaseInput extends BaseComponent
         return this._status;
     }
 
-    /**
+    /** @hidden
      *
      * Keeps track of element focus
      */
@@ -267,7 +274,7 @@ export abstract class BaseInput extends BaseComponent
         this.focus(event);
     }
 
-    /**
+    /** @hidden
      * In most of the cases when working with input element directly you should be just find to assing
      * variable to this element
      *
@@ -284,7 +291,7 @@ export abstract class BaseInput extends BaseComponent
         }
     }
 
-    /**
+    /** @hidden
      *  Need re-validates errors on every CD iteration to make sure we are also
      *  covering non-control errors, errors that happens outside of this control
      */
@@ -300,14 +307,14 @@ export abstract class BaseInput extends BaseComponent
             this._cd.markForCheck();
         }
     }
-
+    /** @hidden */
     protected setValue(value: any): void {
         if (value !== this._value) {
             this.writeValue(value);
             this._cd.markForCheck();
         }
     }
-
+    /** @hidden */
     protected getValue(): any {
         return this._value;
     }

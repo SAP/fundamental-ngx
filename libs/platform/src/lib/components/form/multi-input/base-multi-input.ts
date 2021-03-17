@@ -54,7 +54,7 @@ import { CollectionBaseInput } from '../collection-base.input';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { FdpListDataSource, ListConfig, MatchingStrategy } from '../../list/public_api';
 import { isFunction, isJsObject, isString } from '../../../utils/lang';
-import { ContentDensity, FormFieldControl, Status } from '../form-control';
+import { ContentDensity, FormFieldControl } from '../form-control';
 import { FormField } from '../form-field';
 import { TextAlignment } from '../combobox';
 
@@ -86,15 +86,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
     autoComplete = true;
-
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
-    }
 
     /**
      * Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of
@@ -135,10 +126,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** Horizontally align text inside the second column (Applicable for two columns layout) */
     @Input()
     secondaryTextAlignment: TextAlignment = 'right';
-
-    /** Turns on/off Adjustable Width feature */
-    @Input()
-    autoResize = false;
 
     @Input()
     get value(): any {
@@ -210,19 +197,19 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     listTemplate: TemplateRef<any>;
 
-    /** Get the input text of the input. */
+    /** @hidden Get the input text of the input. */
     get inputText(): string {
         return this._inputTextValue;
     }
 
-    /** Set the input text of the input. */
+    /** @hidden Set the input text of the input. */
     set inputText(value: string) {
         this._inputTextValue = value;
 
         this.onTouched();
     }
 
-    /** Whether the Multi Input is opened. */
+    /** @hidden Whether the Multi Input is opened. */
     isOpen = false;
 
     get canClose(): boolean {
@@ -256,6 +243,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      */
     openChange = new Subject<boolean>();
 
+    /** @hidden */
     protected _dataSource: FdpListDataSource<any>;
 
     /** @hidden */
@@ -298,13 +286,21 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     };
 
     constructor(
+        /** @hidden */
         readonly cd: ChangeDetectorRef,
+        /** @hidden */
         protected readonly elementRef: ElementRef,
+        /** @hidden */
         @Optional() @Self() readonly ngControl: NgControl,
+        /** @hidden */
         @Optional() @Self() readonly ngForm: NgForm,
+        /** @hidden */
         @Optional() readonly dialogConfig: DialogConfig,
+        /** @hidden */
         protected listConfig: ListConfig,
+        /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
+        /** @hidden */
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(cd, ngControl, ngForm, formField, formControl);
@@ -463,7 +459,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
-    /** Method passed to list component */
+    /** @hidden Method passed to list component */
     handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
             this.searchInputElement.nativeElement.focus();
@@ -568,10 +564,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** @hidden */
     private _initWindowResize(): void {
         this._getOptionsListWidth();
-
-        if (!this.autoResize) {
-            return;
-        }
 
         fromEvent(window, 'resize')
             .pipe(takeUntil(this._destroyed))

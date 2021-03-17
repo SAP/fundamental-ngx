@@ -73,11 +73,11 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
         const injector = PlatformConfig.getInjector();
         this._contentDensityService = injector?.get(ContentDensityService, undefined, InjectFlags.Optional);
         this._router = injector?.get(Router);
-        this._router?.events.subscribe(event => {
+        this._router?.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this._setupDensitySubscriptions();
             }
-        })
+        });
     }
 
     /** @hidden */
@@ -93,10 +93,12 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _setupDensitySubscriptions(): void {
         if (this._contentDensity === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.contentDensity = density;
-                this.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.contentDensity = density;
+                    this.markForCheck();
+                })
+            );
         }
     }
 

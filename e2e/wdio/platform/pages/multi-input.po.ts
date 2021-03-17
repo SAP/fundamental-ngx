@@ -19,7 +19,7 @@ export class MultiInputPo extends BaseComponentPo {
     dropdownOptions = 'ul[role=list] [role="listitem"] li ';
     selectedToken = 'span[role=\'button\']';
     dropdownOptionText = this.dropdownOptions + 'span';
-    dropdownOptionTextValueHelp = this.dropdownOptions + 'div[class="fd-list__title ng-star-inserted"]';
+    dropdownOptionTextValueHelp = '[role="option"]';
 
     crossButton = (option: string) => {
         return `//span[text() = '${option}']/following-sibling::span`;

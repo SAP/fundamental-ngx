@@ -2,7 +2,7 @@
     <fdp-form-field
         #ffl1
         label="Default Multi Input Field"
-        id="input-simple"
+        id="input-compact"
         name="reactiveFormInput"
         rank="1"
         placeholder="Field placeholder text"
@@ -11,12 +11,11 @@
             [formControl]="ffl1.formControl"
             placeholder="Field placeholder text"
             type="text"
-            id="fdp-id-default"
+            id="fdp-id-compact"
             name="input1"
             [dataSource]="_datasource"
-            (selectionChange)="showValues($event)"
             displayKey="firstName"
-			[autofocus]="true"
+            contentDensity="compact"
         >
         </fdp-multi-input>
     </fdp-form-field>
