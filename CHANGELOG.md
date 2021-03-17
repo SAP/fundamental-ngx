@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.29...v0.29.0-rc.30) (2021-03-17)
+
+
+### Bug Fixes
+
+* (Core) fix the accessibility bug in file uploader component. ([#4845](https://github.com/SAP/fundamental-ngx/issues/4845)) ([5943e79](https://github.com/SAP/fundamental-ngx/commit/5943e792eafc9909cec0940083099742963e55d4)), closes [#3497](https://github.com/SAP/fundamental-ngx/issues/3497) [#3498](https://github.com/SAP/fundamental-ngx/issues/3498)
+
 ## [0.29.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.28...v0.29.0-rc.29) (2021-03-17)
 
 ## [0.29.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.27...v0.29.0-rc.28) (2021-03-16)
