@@ -218,4 +218,38 @@ describe('EntityCacheServerService', () => {
             }, fail);
         });
     });
+
+    describe('#getWithQuery', () => {
+        it('should not cache data and delegate request to the primary server', (done) => {
+            spyOn(cacheStorageService, 'getAll');
+            spyOn(cacheStorageService, 'setAll');
+            spyOn(primaryServer, 'getWithQuery').and.callFake((query) => of([]));
+
+            const querySnapshot = new QuerySnapshotModel();
+
+            service.getWithQuery(querySnapshot).subscribe(() => {
+                expect(primaryServer.getWithQuery).toHaveBeenCalledWith(querySnapshot);
+                expect(cacheStorageService.getAll).not.toHaveBeenCalled();
+                expect(cacheStorageService.setAll).not.toHaveBeenCalled();
+                done();
+            }, fail);
+        });
+    });
+
+    describe('#upsert', () => {
+        it('should not cache data and delegate request to the primary server', (done) => {
+            spyOn(cacheStorageService, 'getAll');
+            spyOn(cacheStorageService, 'setAll');
+            spyOn(primaryServer, 'upsert').and.callFake((entity) => of(null));
+
+            const entityToUpdate: Hero = { id: 4, name: 'Hero' };
+
+            service.upsert(entityToUpdate).subscribe(() => {
+                expect(primaryServer.upsert).toHaveBeenCalledWith(entityToUpdate);
+                expect(cacheStorageService.getAll).not.toHaveBeenCalled();
+                expect(cacheStorageService.setAll).not.toHaveBeenCalled();
+                done();
+            }, fail);
+        });
+    });
 });

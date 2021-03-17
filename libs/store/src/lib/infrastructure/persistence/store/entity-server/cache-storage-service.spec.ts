@@ -59,7 +59,7 @@ describe('EntityCacheStorageServiceBase', () => {
             expect(storage.getItem).toHaveBeenCalledOnceWith(storageKey);
         });
 
-        it('should return data list from storage.getKey method', async () => {
+        it('should return heroes list from storage', async () => {
             spyOn(storage, 'getItem').and.returnValue(JSON.stringify(heroes));
             const result = await service.getAll();
             expect(result).toEqual(heroes);

@@ -7,7 +7,6 @@ import {
 } from '../utils/entity-options.service';
 import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
-import { QueryAdapterFactory } from '../query/query-adapter';
 
 class User {
     constructor(public id: string | string, public name: string, public age: number) {}
