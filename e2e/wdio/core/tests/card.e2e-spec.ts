@@ -116,7 +116,7 @@ describe('Card test suite:', function() {
             checkElArrIsClickable(tableCardItems);
         });
 
-        it('should check status colors', () => {
+        xit('should check status colors', () => {
             const statusesCount = getElementArrayLength(tableCardItemStatuses);
             for (let i = 0; statusesCount > i; i++) {
                 expect(getCSSPropertyByName(tableCardItemStatuses, colorAttr, i).value)
