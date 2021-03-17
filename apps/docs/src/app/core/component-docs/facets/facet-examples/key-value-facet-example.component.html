@@ -1,0 +1,42 @@
+<fd-facet-group ariaLabel="Key-Value Facets">
+    <fd-facet type="key-value" [title]="'Status'" id="kvFacet10">
+        <span
+            fd-object-status
+            status="positive"
+            label="Delivery"
+            [large]="true"
+            title="Delivery"
+            aria-label="Delivery"
+        ></span>
+    </fd-facet>
+    <fd-facet type="key-value" [title]="'Delivery Time'" id="kvFacet12">
+        <span
+            fd-object-status
+            status="critical"
+            label="12 days"
+            glyph="shipping-status"
+            [large]="true"
+            title="12 days"
+            aria-label="12 days"
+        ></span>
+    </fd-facet>
+    <fd-facet type="key-value" [title]="'Assembly Option'" id="kvFacet13">
+        <span
+            fd-object-status
+            status="negative"
+            label="To be selected"
+            [large]="true"
+            title="To be selected"
+            aria-label="To be selected"
+        ></span>
+    </fd-facet>
+    <fd-facet type="key-value" [title]="'Pricing'" id="kvFacet14">
+        <fd-object-number
+            [number]="100.88"
+            [large]="true"
+            unit="EUR"
+            status="informative"
+            [decimal]="2"
+        ></fd-object-number>
+    </fd-facet>
+</fd-facet-group>

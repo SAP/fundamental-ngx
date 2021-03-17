@@ -1,0 +1,32 @@
+<ng-container *ngIf="type === 'image'">
+    <ng-container *ngTemplateOutlet="image"></ng-container>
+</ng-container>
+
+<ng-container *ngIf="type !== 'image'">
+    <ng-container *ngTemplateOutlet="nonImage"></ng-container>
+</ng-container>
+<ng-template #image>
+    <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
+</ng-template>
+
+<ng-template #nonImage>
+    <h1 *ngIf="title" fd-title headerSize="5" class="fd-margin-bottom--sm" [id]="titleId">{{ title }}</h1>
+    <ng-container *ngIf="type === 'form'">
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="type === 'key-value' || 'custom'">
+        <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="type === 'rating-indicator'">
+        <h2 class="fd-form-label">{{ subtitle }}</h2>
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #contentTemplate>
+    <ng-content select="fd-facet-content"></ng-content>
+</ng-template>
+
+<ng-template #customContentTemplate>
+    <ng-content></ng-content>
+</ng-template>

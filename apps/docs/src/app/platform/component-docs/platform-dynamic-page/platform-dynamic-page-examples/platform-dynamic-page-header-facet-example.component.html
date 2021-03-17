@@ -1,0 +1,211 @@
+<button fd-button (click)="openPage()">Click to open full screen</button>
+<div class="overlay" *ngIf="visible">
+    <fdp-dynamic-page size="large" ariaLabel="Example Dynamic Page">
+        <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
+            <!-- breadcrumb content -->
+            <fd-breadcrumb [compact]="compact">
+                <fd-breadcrumb-item>
+                    <a fd-breadcrumb-link href="#">Men</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-breadcrumb-link href="#">Shoes</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-breadcrumb-link href="#">Running Shoes</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <span>Jogging</span>
+                </fd-breadcrumb-item>
+            </fd-breadcrumb>
+            <fd-facet type="image">
+                <fd-avatar image="http://picsum.photos/id/1018/400" size="s"></fd-avatar>
+                <!-- <fd-avatar size="l" glyph="money-bills"></fd-avatar> -->
+            </fd-facet>
+            <fdp-dynamic-page-key-info>
+                <!-- key information content -->
+                LAST DAY OF SALE
+            </fdp-dynamic-page-key-info>
+            <fdp-dynamic-page-global-actions>
+                <!-- global actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        fdType="positive"
+                        (click)="closePage($event)"
+                        label="Accept"
+                        title="Accept"
+                    ></button>
+                    <button
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        fdType="negative"
+                        (click)="closePage($event)"
+                        label="Reject"
+                        title="Reject"
+                    ></button>
+                    <fd-toolbar-separator></fd-toolbar-separator>
+                </fd-toolbar>
+            </fdp-dynamic-page-global-actions>
+            <fdp-dynamic-page-layout-actions>
+                <!-- layout actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        aria-label="Resize"
+                        (click)="resizeClicked($event)"
+                        title="Resize"
+                    >
+                        <i class="sap-icon--resize"></i>
+                    </button>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        aria-label="Exit Fullscreen"
+                        (click)="closePage($event)"
+                        title="Exit Fullscreen"
+                    >
+                        <i class="sap-icon--exitfullscreen"></i>
+                    </button>
+                    <button fd-button fdType="transparent" aria-label="Close" (click)="closePage($event)" title="Close">
+                        <i class="sap-icon--decline"></i>
+                    </button>
+                </fd-toolbar>
+            </fdp-dynamic-page-layout-actions>
+        </fdp-dynamic-page-title>
+        <fdp-dynamic-page-header
+            [collapsible]="true"
+            [pinnable]="true"
+            [collapsed]="false"
+            (collapseChange)="onCollapseChange($event)"
+        >
+            <!-- collapsible header content goes here -->
+            <fd-facet-group>
+                <!-- all different facets shoould come under <fd-facet> curreently not happeninig -->
+                <fd-facet type="form" title="Technical Data" id="formFacetTitle4">
+                    <!-- <h1 fd-title headerSize="5" class="fd-margin-bottom--sm" id="formFacetTitle4">Technical Data</h1> -->
+                    <fd-facet-content>
+                        <label class="fd-form-label" for="form-value-10">Base unit:</label>
+                        <div class="fd-text" id="form-value-10">Each</div>
+                    </fd-facet-content>
+                    <fd-facet-content>
+                        <label class="fd-form-label" for="form-value-11">Length:</label>
+                        <div class="fd-text" id="form-value-11">23.24 Centimeter</div>
+                    </fd-facet-content>
+                    <fd-facet-content>
+                        <label class="fd-form-label" for="form-value-12">Width:</label>
+                        <div class="fd-text" id="form-value-12">86.1 Centimeter</div>
+                    </fd-facet-content>
+                    <fd-facet-content>
+                        <label class="fd-form-label" for="form-value-13">Height:</label>
+                        <div class="fd-text" id="form-value-13">20.8 Centimeter</div>
+                    </fd-facet-content>
+                    <!-- to pass as array of values? i18n? -->
+                </fd-facet>
+                <fd-facet type="rating-indicator" title="Rating Indicator" subtitle="6 reviews" id="ratingFacetTitle3">
+                    <!-- <h1 fd-title headerSize="5" class="fd-margin-bottom--sm" id="ratingFacetTitle3">Rating Indicator</h1> -->
+                    <fd-facet-content>
+                        <fd-rating-indicator size="md" dynamicTextIndicator="of" value="2.51"></fd-rating-indicator>
+                    </fd-facet-content>
+                </fd-facet>
+                <fd-facet type="image">
+                    <fd-avatar image="http://picsum.photos/id/1018/400" size="l"></fd-avatar>
+                </fd-facet>
+                <fd-facet type="key-value" title="Status" id="kvFacetTitle1">
+                    <span
+                        fd-object-status
+                        status="positive"
+                        label="Delivery"
+                        [large]="true"
+                        title="Delivery"
+                        aria-label="Delivery"
+                    ></span>
+                </fd-facet>
+                <fd-facet type="key-value" title="Delivery Time" id="kvFacetTitle2">
+                    <span
+                        fd-object-status
+                        status="critical"
+                        label="12 days"
+                        glyph="shipping-status"
+                        [large]="true"
+                        title="12 days"
+                        aria-label="12 days"
+                    ></span>
+                </fd-facet>
+                <fd-facet type="key-value" title="Assembly Option" id="kvFacetTitle3">
+                    <span
+                        fd-object-status
+                        status="negative"
+                        label="To be selected"
+                        [large]="true"
+                        title="To be selected"
+                        aria-label="To be selected"
+                    ></span>
+                </fd-facet>
+                <fd-facet type="key-value" title="Pricing" id="kvFacetTitle4">
+                    <fd-object-number
+                        [number]="100.88"
+                        [large]="true"
+                        unit="EUR"
+                        status="informative"
+                        [decimal]="2"
+                    ></fd-object-number>
+                </fd-facet>
+            </fd-facet-group>
+        </fdp-dynamic-page-header>
+        <fdp-dynamic-page-content id="basic">
+            <!-- page content goes here -->
+            Normal Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam maiores.
+            Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis,
+            nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique,
+            voluptatibus obcaecati perferendis excepturi.
+            <br />
+            <br />
+            <br />
+            Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora
+            aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto dignissimos
+            reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel
+            ipsam debitis fuga sequi eveniet perspiciatis?
+            <br />
+            <br />
+            <br />
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit?
+            Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto
+            sed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit sunt laboriosam totam maiores.
+            Unde quas quis soluta adipisci mollitia distinctio. Natus nam repellat, aut ad et tempore cum. Corporis,
+            nobis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ad provident similique,
+            voluptatibus obcaecati perferendis excepturi.
+            <br />
+            <br />
+            <br />
+            Velit officiis sunt, debitis eum perspiciatis consectetur? Consequatur consequuntur quia nisi iste tempora
+            aspernatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto dignissimos
+            reprehenderit perspiciatis excepturi voluptate. Vel enim eius doloribus amet vitae debitis. Similique vel
+            ipsam debitis fuga sequi eveniet perspiciatis?
+            <br />
+            <br />
+            <br />
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo sed odit?
+            Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus inventore, eos iusto
+            sed.
+            <br />
+            <br />
+            <br />
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus eligendi dolore omnis veritatis! Et
+            voluptatibus error, commodi, dignissimos nostrum nemo deleniti est cumque fuga reiciendis, fugiat impedit
+            explicabo voluptates at? Normal
+        </fdp-dynamic-page-content>
+        <fdp-dynamic-page-footer>
+            <!-- page footer content goes here -->
+            <div fd-bar barDesign="floating-footer">
+                <div fd-bar-right>
+                    <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
+                    <fd-button-bar label="Cancel" (click)="closePage($event)"></fd-button-bar>
+                </div>
+            </div>
+        </fdp-dynamic-page-footer>
+    </fdp-dynamic-page>
+</div>
