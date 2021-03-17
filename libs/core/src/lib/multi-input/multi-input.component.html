@@ -7,7 +7,7 @@
             [isOpen]="open"
             (isOpenChange)="openChangeHandle($event)"
             [triggers]="[]"
-            [maxWidth]="600"
+            [maxWidth]="bodyMaxWidth"
             [focusTrapped]="true"
             [disabled]="disabled"
             [fillControlMode]="fillControlMode"
@@ -43,6 +43,7 @@
         <fd-tokenizer [compactCollapse]="compactCollapse"
                       [compact]="compact"
                       [open]="open"
+                      [tokenizerFocusable]="false"
                       (moreClickedEvent)="moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"
@@ -55,7 +56,7 @@
             >
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
-            <input type="text" (focusin)="tokenizer.inputFocused = true;" (focusout)="tokenizer.inputFocused = false;"
+            <input type="text"
                    class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                    fd-form-control
                    fd-input-group-input

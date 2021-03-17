@@ -25,10 +25,11 @@ import {
 import { FormControlComponent } from '../form/form-control/form-control.component';
 import { TokenComponent } from './token.component';
 import { RtlService } from '../utils/services/rtl.service';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 import { KeyUtil } from '../utils/functions';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -71,10 +72,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     inputGroupAddonEl: ElementRef;
 
-    /** Used to add focus class to the tokenizer-example */
-    @Input()
-    tokenizerHasFocus = false;
-
     /** Whether the tokenizer is compact */
     @Input()
     compact = false;
@@ -82,6 +79,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
     compactCollapse = false;
+
+    /** Whether tokenizer should have fake focus indicator, when input is focused inside*/
+    @Input()
+    tokenizerFocusable = true;
 
     /** The value for the tokenizer input */
     @Input()
@@ -98,9 +99,6 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     @Input()
     open: boolean;
-
-    /** @hidden */
-    inputFocused = false;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -127,6 +125,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     hiddenCozyTokenCount = 0;
 
+    /** @hidden Used to add focus to tokenizer element */
+    _tokenizerHasFocus = false;
+
     /** @hidden */
     /*Variable which will keep the index of the first token pressed in the tokenizer*/
     private _firstElementInSelection: number;
@@ -142,6 +143,9 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     /*Flag which will say if they held shift and clicked highlighting elements before or*/
     private _directionShiftIsRight: boolean;
+
+    /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -173,6 +177,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._listenElementEvents();
         this.previousElementWidth = this._elementRef.nativeElement.getBoundingClientRect().width;
         this.onResize();
     }
@@ -182,6 +187,8 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         if (this.tokenListChangesSubscription) {
             this.tokenListChangesSubscription.unsubscribe();
         }
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
         this._unsubscribeClicks();
     }
 
@@ -659,5 +666,24 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     private _isControlKey(keyboardEvent: KeyboardEvent): boolean {
         return keyboardEvent.ctrlKey || keyboardEvent.metaKey;
+    }
+
+    /** @hidden */
+    private _listenElementEvents(): void {
+        fromEvent(this.elementRef().nativeElement, 'focus', { capture: true }).pipe(
+            filter(event => event['target']?.tagName === 'INPUT' && this.tokenizerFocusable),
+            tap(() => {
+                this._tokenizerHasFocus = true;
+                this._cdRef.markForCheck();
+            }),
+            takeUntil(this._onDestroy$)
+        ).subscribe();
+        fromEvent(this.elementRef().nativeElement, 'blur', { capture: true }).pipe(
+            tap(() => {
+                this._tokenizerHasFocus = false;
+                this._cdRef.markForCheck();
+            }),
+            takeUntil(this._onDestroy$)
+        ).subscribe();
     }
 }

@@ -175,6 +175,10 @@ export class MultiInputComponent implements
     @Input()
     showAllButton = true;
 
+    /** Max width of multi input body in PX */
+    @Input()
+    bodyMaxWidth: number = null;
+
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true, approveButtonText: 'Select' };
