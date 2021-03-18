@@ -5,8 +5,8 @@ import { Composite } from './composite';
  * */
 export interface BaseEntityDTO {
     id?: number;
-    createdAt?: string;
-    updatedAt?: string;
+    // createdAt?: string;
+    // updatedAt?: string;
 }
 
 /**

@@ -7,14 +7,14 @@ import { BaseEntity } from '../../../../../libs/store/src/lib/infrastructure/per
 
 export interface ReqDTO extends BaseEntityDTO {
     title: string;
-    amount: number;
+    totalAmount: number;
     lineItems: Array<LineItem>;
 }
 
 @RESTResource({
     path: {
-        getAll: '/requisitions',
-        update: ['PATCH', '/requisition']
+        default: 'requisitioning',
+        add: '/cart'
     }
 })
 @Entity({
@@ -23,5 +23,6 @@ export interface ReqDTO extends BaseEntityDTO {
 })
 export class Requisition extends BaseEntity<ReqDTO> {
     title: string;
+    totalAmount: number;
     lineItems: Array<LineItem>;
 }
