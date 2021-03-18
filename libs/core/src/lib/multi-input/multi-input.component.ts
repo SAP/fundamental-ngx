@@ -30,7 +30,7 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 import { ListComponent } from '../list/list.component';
-import { DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -436,10 +436,18 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    showAllClicked(event: MouseEvent): void {
+    showAllClicked(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
         this._applySearchTermChange('');
+        this.searchInputElement.nativeElement.focus();
+    }
+
+    /** @hidden */
+    showAllKeyDown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            this.showAllClicked(event);
+        }
     }
 
     /** @hidden */

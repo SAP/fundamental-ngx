@@ -105,8 +105,9 @@
         <li *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)"
             fd-list-item
             class="fd-multi-input-show-all"
+            (keyDown)="showAllKeyDown($event)"
             (click)="showAllClicked($event)">
-            <a fd-link href>Show All ({{ dropdownValues.length }})</a>
+            <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>
 </ng-template>
