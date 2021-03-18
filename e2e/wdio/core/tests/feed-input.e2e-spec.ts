@@ -36,16 +36,16 @@ import {
 } from '../fixtures/testData/feed-input-tags';
 
 import {
-    placeholder_array, default_avatar, send_button_tooltip,
+    default_placeholder, default_avatar, send_button_tooltip,
     button, textArea
 } from '../fixtures/appData/feed-input-page-contents';
 
 describe('Verify Feed Input component', function() {
+    const feedInputPage = new FeedInputPo();
     const {
         feedInputTextArea, feedInputAvatar, feedInputButton, feedInputNoAvatar, disableInputTextArea,
         disableInputButton, activeInputTextAreas
     } = new FeedInputPo();
-    const feedInputPage = new FeedInputPo();
 
     beforeAll(() => {
         feedInputPage.open();
@@ -59,7 +59,7 @@ describe('Verify Feed Input component', function() {
     it('should have correct placeholder assigned', () => {
         const feedInputLength = getElementArrayLength(feedInputTextArea);
         for (let i = 0; i < feedInputLength; i++) {
-            expect(getAttributeByNameArr(feedInputTextArea, 'placeholder')).toEqual(placeholder_array);
+            expect(getAttributeByNameArr(feedInputTextArea, 'placeholder', i)).toEqual(default_placeholder);
         }
     });
 
@@ -67,8 +67,8 @@ describe('Verify Feed Input component', function() {
         const inputAvatarLength = getElementArrayLength(feedInputAvatar);
         for (let i = 0; i < inputAvatarLength; i++) {
             waitForPresent(feedInputAvatar, i);
-            expect(getAttributeByName(feedInputAvatar, 'image')).not.toBe('');
-            expect(getAttributeByName(feedInputAvatar, 'image')).not.toBeNull();
+            expect(getAttributeByName(feedInputAvatar, 'image', i)).not.toBe('');
+            expect(getAttributeByName(feedInputAvatar, 'image', i)).not.toBeNull();
         }
     });
 
@@ -148,7 +148,7 @@ describe('Verify Feed Input component', function() {
     it('should avatar and Send button has correct tooltip', () => {
         const inputButtonLength = getElementArrayLength(feedInputButton);
         for (let i = 0; i < inputButtonLength; i++) {
-            expect(getAttributeByNameArr(feedInputButton, 'title')).toEqual(send_button_tooltip);
+            expect(getAttributeByNameArr(feedInputButton, 'title', i)).toEqual(send_button_tooltip);
 
         }
     });
