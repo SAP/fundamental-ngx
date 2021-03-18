@@ -43,7 +43,7 @@ describe('Default Entity Store', () => {
 
     beforeEach(() => {
         collectionService = new UserCollectionServiceMock() as EntityCollectionService<User>;
-        queryBuilder = new QueryBuilderMock(null, null);
+        queryBuilder = new QueryBuilderMock(null);
         store = new DefaultEntityStore(collectionService, queryBuilder);
     });
 

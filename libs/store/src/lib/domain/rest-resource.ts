@@ -1,9 +1,13 @@
+import { CachePolicy } from './cache-policy';
+
 /** REST Resource Options */
 export interface EntityResourceMetaOptions {
     // Base URI
     root?: string;
     // Resource Path
     path?: EntityPath;
+    // Cache policy
+    cache?: CachePolicy;
 }
 
 export type EntityPath = string | EntityComplexPath;

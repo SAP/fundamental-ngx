@@ -3,12 +3,18 @@ import { Injectable, Optional } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { timeout, delay, catchError, map } from 'rxjs/operators';
 import { Update } from '@ngrx/entity';
-import { DefaultDataServiceConfig, EntityCollectionDataService, QueryParams, DataServiceError } from '@ngrx/data';
+import { DefaultDataServiceConfig, QueryParams, DataServiceError } from '@ngrx/data';
 
-import { EntityPath, EntityOperation } from '../../../domain/public_api';
-import { EntityMetaOptionsService, EntityResourceMetaOptions, EntityMetaOptions } from '../utils/entity-options.service';
+import { EntityPath, EntityOperation } from '../../../../domain/public_api';
+import {
+    EntityMetaOptionsService,
+    EntityResourceMetaOptions,
+    EntityMetaOptions
+} from '../../utils/entity-options.service';
+import { QueryAdapter, QueryAdapterService, QuerySnapshot } from '../../query/query-adapter';
 
-import { HttpUrlGenerator } from './http-url-generator';
+import { HttpUrlGenerator } from '../http-url-generator';
+import { BaseEntity, EntityServerService } from './interfaces';
 
 export declare type HttpMethods = 'DELETE' | 'GET' | 'POST' | 'PUT' | 'PATCH';
 
@@ -25,17 +31,18 @@ export interface RequestData {
  * This should be provided instead of ngrx DefaultDataService.
  *
  */
-export class EntityStoreServerService<T> implements EntityCollectionDataService<T> {
+export class EntityRestServerService<T extends BaseEntity> implements EntityServerService<T> {
     protected _name: string;
     protected delete404OK: boolean;
     protected entityName: string;
     protected getDelay = 0;
     protected saveDelay = 0;
     protected timeout = 0;
+    protected root: string;
+    protected queryAdapter: QueryAdapter<T>;
     protected entityMetaOptions: EntityMetaOptions;
     protected entityResourceMetaOptions: EntityResourceMetaOptions | undefined;
     protected entityResourcePathOptions: EntityPath | undefined;
-    protected root: string;
 
     get name(): string {
         return this._name;
@@ -45,10 +52,11 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         entityName: string,
         protected http: HttpClient,
         protected httpUrlGenerator: HttpUrlGenerator,
+        queryAdapterService: QueryAdapterService,
         entityMetaOptionsService: EntityMetaOptionsService,
         config?: DefaultDataServiceConfig
     ) {
-        this._name = `${entityName} EntityStoreServerService`;
+        this._name = `${entityName} EntityRestServerService`;
         this.entityName = entityName;
         const { root = 'api', delete404OK = true, getDelay = 0, saveDelay = 0, timeout: to = 0 } = config || {};
         this.delete404OK = delete404OK;
@@ -59,6 +67,7 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         this.entityResourceMetaOptions = entityMetaOptionsService.getEntityResourceMetadata(entityName);
         this.entityResourcePathOptions = this.entityResourceMetaOptions?.path;
         this.root = this.entityResourceMetaOptions?.root || root;
+        this.queryAdapter = queryAdapterService.getAdapter(entityName);
     }
 
     add(entity: T): Observable<T> {
@@ -97,8 +106,11 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
         return this.execute(method, entityUrl + key, err);
     }
 
-    getWithQuery(queryParams: QueryParams | string): Observable<T[]> {
-        const qParams = typeof queryParams === 'string' ? { fromString: queryParams } : { fromObject: queryParams };
+    getWithQuery(query: QuerySnapshot<T> | QueryParams | string): Observable<T[]> {
+        if (QueryAdapter.isQuerySnapshot<T>(query)) {
+            query = this.queryAdapter.createQueryStringFromQuery(query);
+        }
+        const qParams = typeof query === 'string' ? { fromString: query } : { fromObject: query };
         const params = new HttpParams(qParams);
         const entitiesUrl = this.getCollectionUrl('getAll');
         const method = this.getOperationMethod('getAll') || 'GET';
@@ -238,25 +250,27 @@ export class EntityStoreServerService<T> implements EntityCollectionDataService<
  * Create a basic, generic entity data service
  */
 @Injectable()
-export class EntityStoreServerServiceFactory {
+export class EntityRestServerServiceFactory {
     constructor(
         protected http: HttpClient,
         protected httpUrlGenerator: HttpUrlGenerator,
         protected entityMetaOptionsService: EntityMetaOptionsService,
+        protected queryAdapterService: QueryAdapterService,
         @Optional() protected config?: DefaultDataServiceConfig
     ) {
         config = config || {};
     }
 
     /**
-     * Create a default {EntityCollectionDataService} for the given entity type
-     * @param entityName {string} Name of the entity type for this data service
+     * Create REST EntityServerService for the given entity type
+     * @param entityName {string} Name of the entity
      */
-    create<T>(entityName: string): EntityCollectionDataService<T> {
-        return new EntityStoreServerService<T>(
+    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
+        return new EntityRestServerService<T>(
             entityName,
             this.http,
             this.httpUrlGenerator,
+            this.queryAdapterService,
             this.entityMetaOptionsService,
             this.config
         );

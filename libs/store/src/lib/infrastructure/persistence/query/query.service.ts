@@ -1,5 +1,7 @@
 import { Observable } from 'rxjs';
 
+import { QuerySnapshot } from './query';
+
 export abstract class QueryService<TModel> {
     /**
      * Request entity by ID and return observable for entity.
@@ -13,7 +15,7 @@ export abstract class QueryService<TModel> {
      *
      * @param query URL query string
      */
-    abstract getWithQuery(query: string): Observable<TModel[]>;
+    abstract getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]>;
 
     /**
      * Request count of entities in collection and return observable

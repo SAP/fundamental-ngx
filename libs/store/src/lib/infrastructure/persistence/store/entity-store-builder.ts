@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { EntityCollectionServiceFactory } from '@ngrx/data';
 
-import { FetchPolicy, CachePolicy, Type } from '../../../domain/public_api';
+import { FetchPolicy, CachePolicy, Type, BaseEntity } from '../../../domain/public_api';
 import { DefaultEntityStore, DefaultQueryService, EntityStore } from './entity-store';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
-import { QueryAdapter, QueryAdapterFactory } from '../query/query-adapter';
 import { QueryBuilder } from '../query/query-builder';
 
 //#region Interfaces
@@ -33,7 +32,7 @@ export interface EntityStoreBuilder<T> {
  * Entity Store Builder Factory interface
  */
 export abstract class EntityStoreBuilderFactory {
-    abstract create<T>(entity: Type<T>): EntityStoreBuilder<T>;
+    abstract create<T extends BaseEntity>(entity: Type<T>): EntityStoreBuilder<T>;
 }
 
 //#endregion
@@ -43,14 +42,13 @@ export abstract class EntityStoreBuilderFactory {
 /**
  * Entity Store Builder default implementation
  */
-export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
+export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntityStoreBuilder<T> {
     private cachePolicy: CachePolicy | null;
     private fetchPolicy: FetchPolicy | null;
 
     constructor(
         protected readonly entity: Type<T>,
         protected readonly entityCollectionServiceFactory: EntityCollectionServiceFactory,
-        protected readonly queryAdapterFactory: QueryAdapterFactory,
         protected readonly entityMetaOptionsService: EntityMetaOptionsService
     ) {
         this.reset();
@@ -74,10 +72,7 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
     create(): EntityStore<T> {
         const { name } = this.entityMetaOptionsService.getEntityMetadata(this.entity);
         const entityCollectionService = this.entityCollectionServiceFactory.create<T>(name);
-        const queryBuilder = new QueryBuilder(
-            new DefaultQueryService(entityCollectionService),
-            this.queryAdapterFactory.create(this.entity)
-        );
+        const queryBuilder = new QueryBuilder(new DefaultQueryService(entityCollectionService));
 
         const result = new DefaultEntityStore<T>(entityCollectionService, queryBuilder, {
             cachePolicy: this.cachePolicy,
@@ -97,15 +92,13 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
 export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFactory {
     constructor(
         private entityCollectionServiceFactory: EntityCollectionServiceFactory,
-        private queryAdapterFactory: QueryAdapterFactory,
         private entityMetaOptionsService: EntityMetaOptionsService
     ) {}
 
-    create<T>(entity: Type<T>): EntityStoreBuilder<T> {
+    create<T extends BaseEntity>(entity: Type<T>): EntityStoreBuilder<T> {
         return new DefaultEntityStoreBuilder(
             entity,
             this.entityCollectionServiceFactory,
-            this.queryAdapterFactory,
             this.entityMetaOptionsService
         );
     }

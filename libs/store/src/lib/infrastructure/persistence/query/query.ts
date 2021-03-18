@@ -1,55 +1,62 @@
-import {
-    Observable
-} from 'rxjs';
-import {
-    QueryParams
-} from '@ngrx/data';
+import { Observable } from 'rxjs';
 
 import { Predicate } from './grammar/predicate';
-import { QueryAdapter } from './query-adapter';
 import { QueryService } from './query.service';
 
-export interface OrderBy <TModel> {
+export interface OrderBy<TModel> {
     field: keyof TModel;
     order?: 'ASCENDING' | 'DESCENDING';
 }
+
+export class QuerySnapshotModel<T> {
+    keyword: string;
+    predicate: Predicate<T>;
+    skip: number;
+    top: number;
+    orderby: Array<OrderBy<T>>;
+    includeCount: boolean;
+    select: Array<keyof T>;
+    expand: Array<keyof T>;
+}
+
+export type QuerySnapshot<T> = Readonly<QuerySnapshotModel<T>>;
+
+export const isQuerySnapshot = <K>(data: any): data is QuerySnapshot<K> => {
+    return data instanceof QuerySnapshotModel;
+};
 
 /**
  * @todo We may need a method for end-users to add custom query parameters.
  */
 export class Query<TModel> {
-
     /** @hidden - stores current keyword */
-    _keyword: string;
+    protected _keyword: string;
 
     /** @hidden - stores current predicate */
-    _predicate: Predicate<TModel>;
+    protected _predicate: Predicate<TModel>;
+
+    /** @hidden - stores current offset */
+    protected _skip: number;
 
     /** @hidden - stores current page size */
-    _skip: number;
-
-    /** @hidden - stores current index offset */
-    _top: number;
+    protected _top: number;
 
     /** @hidden - stores flag for suspending page reset on query change */
-    _suppressPageReset: boolean;
+    protected _suppressPageReset: boolean;
 
-    /** @hidden - stores curernt order bys */
-    _orderByFields: Array<OrderBy<TModel>>;
+    /** @hidden - stores current order bys */
+    protected _orderByFields: Array<OrderBy<TModel>>;
 
     /** @hidden - stores current enable count flag */
-    _includeCount: boolean;
+    protected _includeCount: boolean;
 
     /** @hidden - stores current selection of properties */
-    _select: Array<keyof TModel>;
+    protected _select: Array<keyof TModel>;
 
     /** @hidden - stores current expand properties */
-    _expand: Array<keyof TModel>;
+    protected _expand: Array<keyof TModel>;
 
-    constructor(
-        private service: QueryService<TModel>,
-        private adapter: QueryAdapter<TModel>
-    ) {}
+    constructor(private service: QueryService<TModel>) {}
 
     /**
      * Replace current filter settings.
@@ -80,20 +87,20 @@ export class Query<TModel> {
 
     /**
      * Set first index of result set for paging.
-     * @param top Index number of first result.
+     * @param skip Index number of first result.
      */
-    withFirstResult(top: number): this {
-        this._top = top;
+    withFirstResult(skip: number): this {
+        this._skip = skip;
         this._suppressPageReset = true;
         return this;
     }
 
     /**
      * Set page size for result set.
-     * @param skip Number of items returned per page
+     * @param top Number of items returned per page
      */
-    withMaxResults(skip: number): this {
-        this._skip = skip;
+    withMaxResults(top: number): this {
+        this._top = top;
         return this;
     }
 
@@ -119,10 +126,10 @@ export class Query<TModel> {
 
     /**
      * Set list of select parameters. Select parameters are used to limit
-     * the enitity properties included in the return data.
+     * the entity properties included in the return data.
      * @param select List of properties to include in response data
      */
-    select<TP extends keyof TModel> (...select: Array<TP> ): this {
+    select<TP extends keyof TModel>(...select: Array<TP>): this {
         this._select = select;
         return this;
     }
@@ -132,7 +139,7 @@ export class Query<TModel> {
      * to include relational data.
      * @param extend List of expanded properties to include in response data
      */
-    expand<TP extends keyof TModel> (...expand: Array<TP> ): this {
+    expand<TP extends keyof TModel>(...expand: Array<TP>): this {
         this._expand = expand;
         return this;
     }
@@ -142,13 +149,13 @@ export class Query<TModel> {
      */
     fetch(): Observable<Array<TModel>> {
         if (!this._suppressPageReset) {
-            this._top = 0;
+            this._skip = 0;
         }
         this._suppressPageReset = false;
 
-        const params = this._createQueryParams();
-        const query = this.adapter.createQueryString(params);
-        return this.service.getWithQuery(query);
+        const snapshot = this.createSnapshot();
+
+        return this.service.getWithQuery(snapshot);
     }
 
     /**
@@ -165,7 +172,7 @@ export class Query<TModel> {
      * Get previous page of collection.
      */
     previous(): void {
-        this._top = (this._top > this._skip) ? this._top - this._skip : 0;
+        this._skip = Math.max(this._skip - this._top, 0);
         this._suppressPageReset = true;
         this.fetch();
     }
@@ -174,65 +181,26 @@ export class Query<TModel> {
      * Get next page of collection
      */
     next(): void {
-        this._top = this._top + this._skip;
+        this._skip = this._skip + this._top;
         this._suppressPageReset = true;
         this.fetch();
     }
 
     /**
-     * Create QueryParams from current Query properties.
-     * @hidden
+     * Create current query state snapshot
      */
-    private _createQueryParams(): QueryParams {
-        let params: QueryParams = {};
-        if (this._keyword) {
-            params = {
-                ...params,
-                search: this._keyword
-            };
-        }
-        if (this._predicate) {
-            params = {
-                ...params,
-                filter: this.adapter.parsePredicate(this._predicate)
-            };
-        }
-        if (this._skip) {
-            params = {
-                ...params,
-                skip: this._skip.toString()
-            };
-        }
-        if (this._skip && this._top !== undefined) {
-            params = {
-                ...params,
-                top: this._top.toString()
-            };
-        }
-        if (this._orderByFields) {
-            params = {
-                ...params,
-                orderby: this.adapter.parseOrderBys(this._orderByFields)
-            };
-        }
-        if (this._includeCount) {
-            params = {
-                ...params,
-                count: 'true'
-            };
-        }
-        if (this._select) {
-            params = {
-                ...params,
-                select: this.adapter.parseSelect(this._select)
-            };
-        }
-        if (this._expand) {
-            params = {
-                ...params,
-                expand: this.adapter.parseExpand(this._expand)
-            };
-        }
-        return params;
+    createSnapshot(): QuerySnapshot<TModel> {
+        const snapshot = new QuerySnapshotModel<TModel>();
+
+        snapshot.keyword = this._keyword;
+        snapshot.predicate = this._predicate;
+        snapshot.top = this._top;
+        snapshot.skip = this._top != null ? this._skip : undefined;
+        snapshot.orderby = this._orderByFields;
+        snapshot.includeCount = this._includeCount;
+        snapshot.select = this._select;
+        snapshot.expand = this._expand;
+
+        return Object.freeze(snapshot);
     }
 }

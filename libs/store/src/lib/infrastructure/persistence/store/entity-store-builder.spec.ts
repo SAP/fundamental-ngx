@@ -7,7 +7,6 @@ import {
 } from '../utils/entity-options.service';
 import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
-import { QueryAdapterFactory } from '../query/query-adapter';
 
 class User {
     constructor(public id: string | string, public name: string, public age: number) {}
@@ -31,25 +30,16 @@ class EntityCollectionServiceFactoryMock implements EntityCollectionServiceFacto
     }
 }
 
-class QueryAdapterFactoryMock extends QueryAdapterFactory {
-    create() {
-        return null;
-    }
-}
-
 describe('Default DefaultEntityStoreBuilderFactory', () => {
     let entityStoreBuilderFactory: DefaultEntityStoreBuilderFactory;
     let entityServiceFactory: EntityCollectionServiceFactory;
-    let queryAdapterFactory: QueryAdapterFactory;
     let entityMetaOptionsService: EntityMetaOptionsService;
 
     beforeEach(() => {
         entityServiceFactory = new EntityCollectionServiceFactoryMock();
-        queryAdapterFactory = new QueryAdapterFactoryMock();
         entityMetaOptionsService = new EntityMetaOptionsServiceMock();
         entityStoreBuilderFactory = new DefaultEntityStoreBuilderFactory(
             entityServiceFactory,
-            queryAdapterFactory,
             entityMetaOptionsService
         );
     });
@@ -68,17 +58,14 @@ describe('Default DefaultEntityStoreBuilderFactory', () => {
 describe('Default EntityStoreBuilder', () => {
     let builder: DefaultEntityStoreBuilder<User>;
     let entityServiceFactory: EntityCollectionServiceFactory;
-    let queryAdapterFactory: QueryAdapterFactory;
     let entityMetaOptionsService: EntityMetaOptionsService;
 
     beforeEach(() => {
         entityServiceFactory = new EntityCollectionServiceFactoryMock();
-        queryAdapterFactory = new QueryAdapterFactoryMock();
         entityMetaOptionsService = new EntityMetaOptionsServiceMock();
         builder = new DefaultEntityStoreBuilder(
             User,
             entityServiceFactory,
-            queryAdapterFactory,
             entityMetaOptionsService
         );
     });
@@ -89,7 +76,6 @@ describe('Default EntityStoreBuilder', () => {
 
     it('should create new store', () => {
         spyOn(entityServiceFactory, 'create');
-        spyOn(queryAdapterFactory, 'create');
         spyOn(entityMetaOptionsService, 'getEntityMetadata').and.returnValue({ name: 'User' });
         spyOn(builder, 'reset');
 
@@ -98,8 +84,6 @@ describe('Default EntityStoreBuilder', () => {
         expect(store instanceof DefaultEntityStore).toBeTruthy();
 
         expect(entityServiceFactory.create).toHaveBeenCalledOnceWith('User');
-
-        expect(queryAdapterFactory.create).toHaveBeenCalled();
 
         expect(builder.reset).toHaveBeenCalled();
     });
