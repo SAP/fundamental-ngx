@@ -107,8 +107,8 @@ describe('Time picker suite', function() {
         });
 
         it('should check examples visual regression', () => {
-            scrollIntoView(activeTimePickerButton, 0);
-            click(activeTimePickerButton, 0);
+            scrollIntoView(activeTimePickerButton);
+            click(activeTimePickerButton);
             waitForElDisplayed(timerExpanded);
             saveElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, {}, 0);
             checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, {}, 0)
