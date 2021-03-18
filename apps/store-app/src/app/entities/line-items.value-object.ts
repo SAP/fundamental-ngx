@@ -1,36 +1,22 @@
-import { BaseValue, ENTITY, Entity, REST_RESOURCE, RESTResource } from '@fundamental-ngx/store';
+import { BaseValue, RESTResource } from '@fundamental-ngx/store';
+import { Money } from './money.value-object';
 
-export interface LineItem {
-    title: string;
-    price: number;
-    amount: number;
+export interface Item {
+    title?: string;
+    price?: number;
+    amount?: Money;
 }
 
 @RESTResource({
     root: 'http://www.example.com/v1/',
     path: '/requisitions/:reqId/lineItems',
 })
-@Entity({
-    domain: 'Requisitioning',
-    name: 'LineItem',
-    primaryKey: 'lineItemId', // if not provided 'id' is assumed to be primaryKey
-    aggregateOf: 'Requisition',
-})
-export class LineItems extends BaseValue<LineItem> {
-    constructor(dto) {
+export class LineItem extends BaseValue<Item> {
+    amount: Money;
+    title: string;
+
+    constructor(dto?) {
         super(dto);
-    }
-
-    get title() {
-        return this.dto.title;
-    }
-
-    get price() {
-        return this.dto.price;
-    }
-
-    get amount() {
-        return this.dto.amount;
     }
 }
 

@@ -1,13 +1,16 @@
-export abstract class BaseValue<T> {
-    readonly dto: T;
+import { Composite } from './composite';
 
-    constructor(dto: T) {
+export abstract class BaseValue<T> extends Composite<T>{
+    dto: T;
+
+    protected constructor(dto: T) {
+        super();
         this.dto = Object.freeze(dto);
     }
 
     clone() {
         const copyValue = { ...this.dto };
-        return Object.freeze(copyValue);
+        return copyValue;
     }
 
     /**
