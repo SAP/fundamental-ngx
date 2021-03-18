@@ -132,7 +132,7 @@ describe('object number test suite', function () {
     });
 
     describe('Check visual regression', function() {
-        it('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             objectNumberPage.saveExampleBaselineScreenshot();
             expect(objectNumberPage.compareWithBaseline()).toBeLessThan(1);
         });
