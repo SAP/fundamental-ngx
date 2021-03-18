@@ -11,7 +11,7 @@ import {
     mouseHoverElement, saveElementScreenshot, addIsActiveClass
 } from '../../driver/wdio';
 import {
-    text, option, option2, button
+    text, fdTypeOptions, iconOptions, button
 } from '../fixtures/appData/button-contents';
 import {
     disableStateButtonsExample, disableStateButtonsHoverState,
@@ -98,13 +98,13 @@ describe('Button test suite:', function() {
     xit('verify type of dropdown menu', () => {
         scrollIntoView(dropDownMenu);
         click(dropDownMenu);
-        for (let i = 0; i < option.length; i++) {
-            setValue(dropDownMenu, option[i]);
+        for (let i = 0; i < fdTypeOptions.length; i++) {
+            setValue(dropDownMenu, fdTypeOptions[i]);
             sendKeys(['Enter']);
             click(playgroundButton);
-            expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-type')).toEqual(option[i]);
-            saveElementScreenshot(playgroundButton, playgroundButtonExample + `${option[i]}`, buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, playgroundButtonExample + `${option[i]}`, buttonPage.getScreenshotFolder()))
+            expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-type')).toEqual(fdTypeOptions[i]);
+            saveElementScreenshot(playgroundButton, playgroundButtonExample + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder());
+            expect(checkElementScreenshot(playgroundButton, playgroundButtonExample + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder()))
                 .toBeLessThan(2, `Playground button mismatch`);
         }
     });
@@ -113,13 +113,13 @@ describe('Button test suite:', function() {
     xit('verify icon of dropdown menu', () => {
         scrollIntoView(dropDownMenu, 1);
         click(dropDownMenu, 1);
-        for (let i = 0; i < option2.length; i++) {
-            setValue(dropDownMenu, option2[i], 1);
+        for (let i = 0; i < iconOptions.length; i++) {
+            setValue(dropDownMenu, iconOptions[i], 1);
             sendKeys(['Enter']);
             click(playgroundButton);
-            expect(getAttributeByName(playgroundButton, 'ng-reflect-glyph')).toEqual(option2[i]);
-            saveElementScreenshot(playgroundButton, playgroundButtonExample + `${option2[i]}`, buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, playgroundButtonExample + `${option2[i]}`, buttonPage.getScreenshotFolder()))
+            expect(getAttributeByName(playgroundButton, 'ng-reflect-glyph')).toEqual(iconOptions[i]);
+            saveElementScreenshot(playgroundButton, playgroundButtonExample + `${iconOptions[i]}`, buttonPage.getScreenshotFolder());
+            expect(checkElementScreenshot(playgroundButton, playgroundButtonExample + `${iconOptions[i]}`, buttonPage.getScreenshotFolder()))
                 .toBeLessThan(2, `Playground button mismatch`);
         }
     });

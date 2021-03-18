@@ -12,7 +12,6 @@ export const inputLabelExample = prefix + 'input-label-example-';
 export const checkboxCompactExample = prefix + 'checkbox-compact-example-';
 export const checkboxMenuExample = prefix + 'checkbox-menu-example-';
 export const dropDownMenuExample = prefix + 'dropdown-menu-example-';
-export const playgroundButtonExample = prefix + 'playground-button-example-';
 export const typeButtonsHoverState = 'type-buttons-hover-state-' + getImageTagBrowserPlatform();
 export const menuButtonsHoverState = 'menu-buttons-hover-state-' + getImageTagBrowserPlatform();
 export const sizeButtonsHoverState = 'size-buttons-hover-state-' + getImageTagBrowserPlatform();
@@ -44,8 +43,5 @@ export const inputLabelFocusState = 'input-label-focus-state-' + getImageTagBrow
 export const checkboxCompactFocusState = 'checkbox-compact-focus-state-' + getImageTagBrowserPlatform();
 export const checkboxMenuFocusState = 'checkbox-menu-focus-state-' + getImageTagBrowserPlatform();
 export const dropDownMenuFocusState = 'dropdown-menu-focus-state-' + getImageTagBrowserPlatform();
-
-
-
 
 

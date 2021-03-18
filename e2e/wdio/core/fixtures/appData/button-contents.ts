@@ -1,6 +1,6 @@
 export const text = 'test';
 export const button = 'button';
-export const option = [
+export const fdTypeOptions = [
     'standard',
     'positive',
     'negative',
@@ -12,7 +12,7 @@ export const option = [
     'menu'
 ];
 
-export const option2 = [
+export const iconOptions = [
     'accelerated',
     'accept',
     'accidental-leave',
