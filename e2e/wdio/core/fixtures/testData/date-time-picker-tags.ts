@@ -1,0 +1,20 @@
+import { getImageTagBrowserPlatform } from '../../../driver/wdio';
+
+const prefix = 'date-time-picker-core-';
+export const inputFieldExample = prefix + 'input-field-example-';
+export const buttonExample = prefix + 'button-example-';
+export const buttonChangeExample = prefix + 'button-change-example-';
+export const optionButtonExample = prefix + 'option-button-example-';
+export const countryOptionExample = prefix + 'country-option-example-';
+export const inputFieldHoverState = 'input-field-hover-state-' + getImageTagBrowserPlatform();
+export const buttonHoverState = 'button-hover-state-' + getImageTagBrowserPlatform();
+export const buttonChangeHoverState = 'button-change-hover-state-' + getImageTagBrowserPlatform();
+export const optionButtonHoverState = 'button-option-hover-state-' + getImageTagBrowserPlatform();
+export const inputFieldActiveState = 'input-field-active-state-' + getImageTagBrowserPlatform();
+export const buttonActiveState = 'button-active-state-' + getImageTagBrowserPlatform();
+export const buttonChangeActiveState = 'button-change-active-state-' + getImageTagBrowserPlatform();
+export const optionButtonActiveState = 'button-option-active-state-' + getImageTagBrowserPlatform();
+export const inputFieldFocusState = 'input-field-focus-state-' + getImageTagBrowserPlatform();
+export const buttonFocusState = 'button-focus-state-' + getImageTagBrowserPlatform();
+export const buttonChangeFocusState = 'button-change-focus-state-' + getImageTagBrowserPlatform();
+export const optionButtonFocusState = 'button-option-focus-state-' + getImageTagBrowserPlatform();
