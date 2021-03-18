@@ -2,6 +2,13 @@
     <button fd-button (click)="changeQueryUrl(theme.id)" [label]="theme.name"></button>
 </div>
 
+<br><br>
+<label fd-form-label>
+    Theming detected by <code>getThemeFromURL</code> method:
+</label>
+{{ themeFromUrl | json }}
+
+
 <!--Uncomment if used standalone-->
 <!--<link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl"/>-->
 <!--<link rel="stylesheet" *ngIf="cssCustomUrl" [href]="cssCustomUrl"/>-->

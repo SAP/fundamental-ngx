@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.33...v0.29.0-rc.34) (2021-03-18)
+
+## [0.29.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.32...v0.29.0-rc.33) (2021-03-18)
+
+## [0.29.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.31...v0.29.0-rc.32) (2021-03-18)
+
+## [0.29.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.30...v0.29.0-rc.31) (2021-03-17)
+
+## [0.29.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.29...v0.29.0-rc.30) (2021-03-17)
+
+
+### Bug Fixes
+
+* (Core) fix the accessibility bug in file uploader component. ([#4845](https://github.com/SAP/fundamental-ngx/issues/4845)) ([5943e79](https://github.com/SAP/fundamental-ngx/commit/5943e792eafc9909cec0940083099742963e55d4)), closes [#3497](https://github.com/SAP/fundamental-ngx/issues/3497) [#3498](https://github.com/SAP/fundamental-ngx/issues/3498)
+
+## [0.29.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.28...v0.29.0-rc.29) (2021-03-17)
+
+## [0.29.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.27...v0.29.0-rc.28) (2021-03-16)
+
+## [0.29.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.26...v0.29.0-rc.27) (2021-03-16)
+
+
+### Bug Fixes
+
+* (Core) wizard step indicator stacking bugs on narrow screens ([#4901](https://github.com/SAP/fundamental-ngx/issues/4901)) ([29c8864](https://github.com/SAP/fundamental-ngx/commit/29c88645413885adcc4a7f2da62d09f27bad5118))
+
+## [0.29.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.25...v0.29.0-rc.26) (2021-03-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* - now it's required to add `[responsive]="true"` to the table, to achieve responsive mode.
+
+* BREAKING CHANGE: Remove borders from responsvie table (#4923) ([8ba4584](https://github.com/SAP/fundamental-ngx/commit/8ba45841f63c7368aa1481e14c0e2636047c5190)), closes [#4923](https://github.com/SAP/fundamental-ngx/issues/4923)
+
+## [0.29.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.24...v0.29.0-rc.25) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Fixed Card Layout Change focus target to header ([#4922](https://github.com/SAP/fundamental-ngx/issues/4922)) ([8d18858](https://github.com/SAP/fundamental-ngx/commit/8d18858d02e234b5e5e50619fc89db2a3646d2bd))
+
+## [0.29.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.23...v0.29.0-rc.24) (2021-03-15)
+
+
+### Bug Fixes
+
+* (Core) Add handler for real query string ([#4905](https://github.com/SAP/fundamental-ngx/issues/4905)) ([7bb9628](https://github.com/SAP/fundamental-ngx/commit/7bb96288d579be7658c09c407fa2d991c29ee6d2))
+
 ## [0.29.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.22...v0.29.0-rc.23) (2021-03-15)
 
 
