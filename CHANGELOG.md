@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.37...v0.29.0-rc.38) (2021-03-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* add list title as part of group header and list with busy indicator
+
+### Features
+
+* (Core|Platform) migrate to 0.16 ([#4773](https://github.com/SAP/fundamental-ngx/issues/4773)) ([97dd1fb](https://github.com/SAP/fundamental-ngx/commit/97dd1fb44366c194c8ae7de8e7727a1e0521497c))
+
 ## [0.29.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.36...v0.29.0-rc.37) (2021-03-18)
 
 
