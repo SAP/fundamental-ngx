@@ -14,7 +14,7 @@
             class="fd-multi-input-popover-custom"
         >
             <fd-popover-control>
-                <form (submit)="onSubmit()">
+                <form (submit)="_onSubmit()">
                     <ng-container>
                         <ng-container *ngTemplateOutlet="control"></ng-container>
                     </ng-container>
@@ -39,12 +39,12 @@
         [isExpanded]="open && !mobile && displayedValues && displayedValues.length"
         [isControl]="true"
         [glyph]="displayAddonButton ? glyph : ''"
-        (addOnButtonClicked)="addOnButtonClicked()">
+        (addOnButtonClicked)="_addOnButtonClicked()">
         <fd-tokenizer [compactCollapse]="compactCollapse"
                       [compact]="compact"
                       [open]="open"
                       [tokenizerFocusable]="false"
-                      (moreClickedEvent)="moreClicked()"
+                      (moreClickedEvent)="_moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"
         >
@@ -66,8 +66,8 @@
                    [compact]="compact"
                    [disabled]="disabled"
                    [ngClass]="{ 'fd-input--compact': compact }"
-                   (ngModelChange)="handleSearchTermChange($event)"
-                   (keydown)="handleInputKeydown($event)"
+                   (ngModelChange)="_handleSearchTermChange($event)"
+                   (keydown)="_handleInputKeydown($event)"
                    [ngModelOptions]="{standalone: true}"
                    [attr.id]="inputId"
             />
@@ -105,8 +105,8 @@
         <li *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)"
             fd-list-item
             class="fd-multi-input-show-all"
-            (keyDown)="showAllKeyDown($event)"
-            (click)="showAllClicked($event)">
+            (keyDown)="_showAllKeyDown($event)"
+            (click)="_showAllClicked($event)">
             <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>

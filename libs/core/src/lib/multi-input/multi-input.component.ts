@@ -406,7 +406,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleInputKeydown(event: KeyboardEvent): void {
+    _handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
                 this.openChangeHandle(true);
@@ -426,7 +426,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSearchTermChange(searchTerm: string): void {
+    _handleSearchTermChange(searchTerm: string): void {
         if (this.searchTerm !== searchTerm) {
             this._applySearchTermChange(searchTerm);
             if (!this.open) {
@@ -436,7 +436,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    showAllClicked(event: Event): void {
+    _showAllClicked(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
         this._applySearchTermChange('');
@@ -444,14 +444,14 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    showAllKeyDown(event: KeyboardEvent): void {
+    _showAllKeyDown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            this.showAllClicked(event);
+            this._showAllClicked(event);
         }
     }
 
     /** @hidden */
-    onSubmit(): void {
+    _onSubmit(): void {
         if (this.allowNewTokens && this.newTokenValidateFn(this.searchTerm)) {
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
@@ -480,7 +480,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    moreClicked(): void {
+    _moreClicked(): void {
         this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
         this.displayedValues.forEach(value => {
@@ -493,7 +493,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    addOnButtonClicked(): void {
+    _addOnButtonClicked(): void {
         this.openChangeHandle(!this.open);
     }
 

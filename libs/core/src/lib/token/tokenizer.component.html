@@ -1,7 +1,7 @@
 <div
     class="fd-tokenizer fd-tokenizer--scrollable"
-    [ngClass]="{ 'is-focus': _tokenizerHasFocus, 'fd-tokenizer--compact': compact }"
->
+    [class.is-focus]="_tokenizerHasFocus"
+    [class.fd-tokenizer--compact]="compact">
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
         <span (click)="moreClicked()"
