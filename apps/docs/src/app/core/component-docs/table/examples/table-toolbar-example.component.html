@@ -4,13 +4,13 @@
     </label>
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <fd-input-group
+            glyph="decline"
+            placeholder="Search"
             [compact]="true"
             [disabled]="false"
+            [button]="true"
             [(ngModel)]="searchTerm"
             (ngModelChange)="searchInputChanged($event)"
-            [glyph]="'decline'"
-            [placeholder]="'Search'"
-            [button]="true"
             (addOnButtonClicked)="resetSearch()"
     >
     </fd-input-group>
