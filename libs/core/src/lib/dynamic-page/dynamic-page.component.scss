@@ -29,9 +29,19 @@
 }
 
 .fd-dynamic-page {
+	height: 100%;
+
 	 .fd-bar--floating-footer {
 		 z-index: 2;
 	 }
+
+	.fd-tabs-custom {
+		overflow: auto;
+	}
+
+	.fd-dynamic-page__content {
+		flex: 1;
+	}
  }
 
 // TODO: Remove after addressing and migrating styles library
