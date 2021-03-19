@@ -1,41 +1,11 @@
 @import '~fundamental-styles/dist/table';
 
-@mixin fd-active {
-	&:active,
-	&.is-active {
-		&.fd-table__row--focusable,
-		&.fd-table__cell--focusable {
-			&:focus,
-			&.is-focus {
-				outline-color: #fff;
-				outline-color: var(--sapContent_ContrastFocusColor);
-			}
-		}
-		@content;
-	}
-}
-
 .fd-table__popover--custom {
     width: 100%;
 }
 
 .fd-table-hidden {
     display: none;
-}
-
-// Remove after addressing https://github.com/SAP/fundamental-styles/issues/2085
-.fd-table__row--activable {
-	@include fd-active() {
-		.fd-table__cell {
-			text-shadow: none;
-		}
-	}
-}
-
-.fd-table__cell--activable {
-	@include fd-active() {
-		text-shadow: none;
-	}
 }
 
 .fd-table__cell--checkbox {

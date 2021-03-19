@@ -127,7 +127,7 @@ describe('object status test suite', function() {
             refreshPage();
             waitForPresent(defaultExamples + status);
             objectStatusPage.saveExampleBaselineScreenshot();
-            expect(objectStatusPage.compareWithBaseline()).toBeLessThan(1);
+            expect(objectStatusPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });

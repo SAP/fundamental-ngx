@@ -1,14 +1,9 @@
 @import '~fundamental-styles/dist/button-split';
 
-// TODO: Remove after fix on styles https://github.com/SAP/fundamental-styles/issues/1721
-.fd-button-split {
-    .fd-button {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-
-        &__text {
-            display: inline-block;
-        }
-    }
+// Remove after merging https://github.com/SAP/fundamental-styles/issues/2163
+.fd-button-split,
+.fd-button-split > :first-child:hover {
+	.fd-button-split__text {
+		color: inherit;
+	}
 }

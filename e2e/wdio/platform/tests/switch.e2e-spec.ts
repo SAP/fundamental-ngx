@@ -56,7 +56,7 @@ describe('Verify Switch component', function() {
             expect(isCheckedBefore).toBe('false', 'Default switch has incorrect state before click');
             expect(handelColorBefore.value).toContain('255,255,255');
             expect(isCheckedAfter).toBe('true', 'Default switch has incorrect state after click');
-            expect(handelColorAfter.value).toContain('8,84,160');
+            expect(handelColorAfter.value).toContain('9,92,175');
         });
 
         it('should compact change something to active or inactive', () => {
@@ -71,7 +71,7 @@ describe('Verify Switch component', function() {
             expect(isCheckedBefore).toBe('false', 'Default compact switch has incorrect state before click');
             expect(handelColorBefore.value).toContain('255,255,255');
             expect(isCheckedAfter).toBe('true', 'Default compact switch has incorrect state after click');
-            expect(handelColorAfter.value).toContain('8,84,160');
+            expect(handelColorAfter.value).toContain('9,92,175');
         });
 
         it('should default change state on hover', () => {
@@ -277,7 +277,7 @@ describe('Verify Switch component', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             switchPage.saveExampleBaselineScreenshot();
-            expect(switchPage.compareWithBaseline()).toBeLessThan(1);
+            expect(switchPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 
