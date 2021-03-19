@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.40...v0.29.0-rc.41) (2021-03-19)
+
+
+### Bug Fixes
+
+* (Core) Improve height calculations in dynamic page ([#4966](https://github.com/SAP/fundamental-ngx/issues/4966)) ([e6998bb](https://github.com/SAP/fundamental-ngx/commit/e6998bb621752b1a0c456d7dc17f9d89ade85e48))
+
 ## [0.29.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.39...v0.29.0-rc.40) (2021-03-19)
 
 
