@@ -282,7 +282,7 @@
       "prefix": "fdp",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:build",
           "options": {
             "tsConfig": "libs/platform/tsconfig.lib.json",
             "project": "libs/platform/ng-package.json"
