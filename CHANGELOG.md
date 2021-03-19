@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.39...v0.29.0-rc.40) (2021-03-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* * Tokenizer `tokenizerHasFocus` input removed
+
+* fix: (Core) Remove redundant tabbable item on multi input, remove default width limit, Add show all button support
+
+* BREAKING CHANGE: (Core) Remove redundant tabbable item on multi input, remove default width limit, improve ShowAll button (#4946) ([bd14960](https://github.com/SAP/fundamental-ngx/commit/bd14960ad91265c5b87444e411aa7cbb99e8ae51)), closes [#4946](https://github.com/SAP/fundamental-ngx/issues/4946)
+
 ## [0.29.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.38...v0.29.0-rc.39) (2021-03-19)
 
 ## [0.29.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.37...v0.29.0-rc.38) (2021-03-19)
