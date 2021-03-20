@@ -141,7 +141,7 @@
     "@babel/core": "7.12.10",
     "@nrwl/cli": "11.1.5",
     "@nrwl/schematics": "8.12.11",
-    "@nrwl/tao": "11.1.5",
+    "@nrwl/tao": "11.5.1",
     "@nrwl/workspace": "11.1.5",
     "@schematics/angular": "~11.2.4",
     "@storybook/addon-a11y": "6.1.20",
