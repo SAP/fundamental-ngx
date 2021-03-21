@@ -187,7 +187,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-typescript": "5.0.3",
     "karma-typescript-angular2-transform": "latest",
-    "karma-webpack": "4.0.2",
+    "karma-webpack": "5.0.0",
     "nan": "2.14.2",
     "ng-packagr": "11.1.2",
     "pre-commit": "1.2.2",
