@@ -125,8 +125,8 @@ describe('Object list item suite:', function() {
 
     describe('Check visual regression', function() {
         xit('should check examples visual regression', () => {
-            // objListPage.saveExampleBaselineScreenshot();
-            // expect(objListPage.compareWithBaseline()).toBeLessThan(3);
+            objListPage.saveExampleBaselineScreenshot();
+            expect(objListPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });
