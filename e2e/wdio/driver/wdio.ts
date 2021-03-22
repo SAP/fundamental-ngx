@@ -76,6 +76,12 @@ export function click(selector: string, index: number = 0, waitTime: number = de
     return $$(selector)[index].click();
 }
 
+export function clickWithOption(selector: string, index: number = 0, waitTime: number = defaultWaitTime(), options: object): void {
+    checkSelectorExists(selector, index);
+    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+    return $$(selector)[index].click(options);
+}
+
 export function doubleClick(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
@@ -225,14 +231,6 @@ export function getElementSize(selector: string, index: number, prop: 'width' | 
 export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number | WebdriverIO.SizeReturn {
     checkSelectorExists(selector, index);
     return $$(selector)[index].getSize(prop || void 0);
-}
-
-export function executeScriptAfterTagFF(selector: string, index: number = 0): string {
-    const attrName = browserIsFirefox() ? 'border-left-style' : 'border';
-    return browser.execute(function(selector, attrName, index) {
-        return window.getComputedStyle(
-            document.querySelectorAll(selector)[index], ':after')[attrName];
-    }, selector, attrName, index);
 }
 
 export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {

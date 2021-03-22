@@ -1,6 +1,7 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -106,9 +107,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     wizardLabel: ElementRef;
 
     /** @hidden */
-    finalStep = false;
-
-    /** @hidden */
     visited = false;
 
     /** @hidden */
@@ -121,7 +119,10 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _stepId: number;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef) {}
+    _finalStep = false;
+
+    /** @hidden */
+    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -148,6 +149,12 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    setFinalStep(val: boolean): void {
+        this._finalStep = val;
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */

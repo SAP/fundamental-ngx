@@ -127,7 +127,7 @@ describe('WizardComponent', () => {
         expect(component.steps.last._stepId).toBe(3);
         expect(component.steps.first.content.wizardContentId).toBe('0');
         expect(component.steps.first.visited).toBeTruthy();
-        expect(component.steps.last.finalStep).toBeTruthy();
+        expect(component.steps.last._finalStep).toBeTruthy();
     });
 
     it('should handleStepOrStatusChanges', fakeAsync(() => {

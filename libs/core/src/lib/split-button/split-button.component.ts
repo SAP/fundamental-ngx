@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -10,6 +11,7 @@ import {
     OnChanges,
     OnDestroy,
     Output,
+    Renderer2,
     SimpleChanges,
     TemplateRef,
     ViewChild,
@@ -22,6 +24,13 @@ import { MenuItemComponent } from '../menu/menu-item/menu-item.component';
 import { Subscription } from 'rxjs';
 import { MainAction } from './main-action';
 import { first } from 'rxjs/operators';
+
+export const splitButtonTextClass = 'fd-button-split__text';
+export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
+const splitButtonTextClasses = [
+    splitButtonTextClass,
+    splitButtonTextCompactClass
+]
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -51,7 +60,7 @@ import { first } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy {
+export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -119,7 +128,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _menuSubscription = new Subscription();
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
+    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef, private _renderer: Renderer2) {}
 
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
@@ -146,11 +155,20 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     }
 
     /** @hidden */
+    ngAfterViewInit(): void {
+        this._addButtonTextClass();
+    }
+
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes.selected) {
+        if ('selected' in changes) {
             this.selectMenuItem(this.selected);
-        } else if (changes && changes.mainAction) {
+        }
+        if ('mainAction' in changes) {
             this._handleMainActionObject();
+        }
+        if ('compact' in changes) {
+            this._addButtonTextClass();
         }
     }
 
@@ -215,6 +233,20 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
             this.mainActionTitle = this.mainAction.mainActionTitle;
         } else if (this.mainAction && this.mainAction.mainActionTitle instanceof TemplateRef) {
             this.titleTemplate = this.mainAction.mainActionTitle;
+        }
+    }
+
+    /** @hidden */
+    private _addButtonTextClass(): void {
+        const textSpanElement = this.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
+        if (!textSpanElement) {
+            return;
+        }
+        splitButtonTextClasses.forEach(_class => this._renderer.removeClass(textSpanElement, _class));
+        if (this.compact) {
+            this._renderer.addClass(textSpanElement, splitButtonTextCompactClass)
+        } else {
+            this._renderer.addClass(textSpanElement, splitButtonTextClass)
         }
     }
 }

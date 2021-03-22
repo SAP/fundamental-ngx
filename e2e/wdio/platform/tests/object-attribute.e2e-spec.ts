@@ -39,6 +39,6 @@ describe('object attribute test suite', function() {
         refreshPage();
         waitForElDisplayed(standaloneTextObject);
         objectAttributePage.saveExampleBaselineScreenshot();
-        expect(objectAttributePage.compareWithBaseline()).toBeLessThan(1);
+        expect(objectAttributePage.compareWithBaseline()).toBeLessThan(3);
     });
 });
