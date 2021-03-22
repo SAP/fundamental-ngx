@@ -6,7 +6,6 @@ import {
     ElementRef,
     Renderer2,
     AfterViewInit,
-    ChangeDetectorRef,
     HostBinding
 } from '@angular/core';
 import { FacetType, FACET_CLASS_NAME } from '../constants';
@@ -25,50 +24,57 @@ let randomTitleId = 0;
     }
 })
 export class FacetComponent implements AfterViewInit {
+    /** the type of Facet: form, key-value, image, rating-indicator */
     @Input()
     type: FacetType;
 
+    /** The facet title.
+     * For eg: for key-value facet, title is the key and the underlying object status or object number
+     * component is the value.
+     */
     @Input()
     title: string;
 
+    /** An optional subtitle to display in the rating-indicator facet */
     @Input()
     subtitle: string;
 
+    /**
+     * id for the facet
+     */
     @Input()
     @HostBinding('attr.role')
     id = `fd-facet-id-${randomId++}`;
 
+    /**
+     * property that allows the facet to be aligned to the end of the facet group, right-aligned.
+     */
     @Input()
     alignEnd = false;
 
-    /** @hidden */
+    /** @hidden
+     * the appropriate role for each facet type
+     */
     @HostBinding('attr.role')
     get role(): string {
         return this.type !== 'image' ? 'group' : '';
     }
 
-    /** @hidden */
+    /** @hidden
+     * the appropriate aria-labelledby to associate with the role
+     */
     @HostBinding('attr.aria-labelledby')
     get ariaLabelledby(): string {
         return this.type !== 'image' ? this.titleId : '';
     }
 
-    /** @hidden */
+    /** @hidden
+     * the internal id for the title to be associated with the aria-labelledby
+     */
     titleId = `fd-facet-title-id-${randomTitleId++}`;
 
-    /** if image is part of dynamic page header
-     * @hidden
-     */
-    isInHeader = false;
-
-    isInMobileRes = false;
-
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
-        private _cd: ChangeDetectorRef
-    ) {}
+    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -76,28 +82,17 @@ export class FacetComponent implements AfterViewInit {
         this._addAlignmentModifier();
     }
 
-    isFacetInCollapsedHeader(inHeader: boolean): void {
-        this.isInHeader = inHeader;
-        if (this.isInHeader) {
-            addClassNameToFacetElement(
-                this._renderer,
-                this._elementRef.nativeElement,
-                FACET_CLASS_NAME.facetImageHeaderTitleAlignment
-            );
-        }
-        this._cd.detectChanges();
-    }
-
-    isFacetInMobileResolution(mobileRes: boolean): void {
-        this.isInMobileRes = mobileRes;
-        this._cd.detectChanges();
-    }
     /**
      * get reference to this element
      */
     elementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
     }
+
+    /**
+     * @hidden
+     * set up common styles and specific styles based on each facet type
+     */
     private _setupAdditionalStyles(): void {
         if (!this.type) {
             return;
@@ -193,6 +188,9 @@ export class FacetComponent implements AfterViewInit {
         }
     }
 
+    /** @hidden
+     * adds the logic for `alignEnd` modifier
+     */
     private _addAlignmentModifier(): void {
         if (!this.alignEnd) {
             return;

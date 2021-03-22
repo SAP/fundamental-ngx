@@ -1,14 +1,13 @@
 <ng-container *ngIf="type === 'image'">
     <ng-container *ngTemplateOutlet="image"></ng-container>
 </ng-container>
-
-<ng-container *ngIf="type !== 'image'">
-    <ng-container *ngTemplateOutlet="nonImage"></ng-container>
-</ng-container>
 <ng-template #image>
     <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
 </ng-template>
 
+<ng-container *ngIf="type !== 'image'">
+    <ng-container *ngTemplateOutlet="nonImage"></ng-container>
+</ng-container>
 <ng-template #nonImage>
     <h1 *ngIf="title" fd-title headerSize="5" class="fd-margin-bottom--sm" [id]="titleId">{{ title }}</h1>
     <ng-container *ngIf="type === 'form'">

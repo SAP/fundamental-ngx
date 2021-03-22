@@ -17,13 +17,15 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { API_FILES } from '../../api-files';
 import { FacetDocsComponent } from './facet-docs.component';
 import { CustomFacetExampleComponent } from './facet-examples/custom-facet-example.component';
-import { FacetGroupExampleComponent } from './facet-examples/facet-group-example.component';
-import { FormFacetExampleComponent } from './facet-examples/form-facet-example.component';
-import { FormLinkFacetExampleComponent } from './facet-examples/form-link-facet-example.component';
-import { ImageFacetExampleComponent } from './facet-examples/image-facet-example.component';
-import { KeyValueFacetAlignmentExampleComponent } from './facet-examples/key-value-facet-alignment-example.component';
-import { KeyValueFacetExampleComponent } from './facet-examples/key-value-facet-example.component';
-import { RatingIndicatorFacetExampleComponent } from './facet-examples/rating-indicator-facet-example.component';
+import {
+    FacetGroupExampleComponent,
+    FormFacetExampleComponent,
+    FormLinkFacetExampleComponent,
+    ImageFacetExampleComponent,
+    KeyValueFacetAlignmentExampleComponent,
+    KeyValueFacetExampleComponent,
+    RatingIndicatorFacetExampleComponent
+} from './facet-examples/facet-examples.component';
 import { FacetDocsHeaderComponent } from './facet-header/facet-docs-header.component';
 
 const routes: Routes = [

@@ -8,6 +8,9 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@a
     encapsulation: ViewEncapsulation.None
 })
 export class FacetGroupComponent {
-  @Input()
-  ariaLabel: string;
+    /**
+     * the aria label for the facet group
+     */
+    @Input()
+    ariaLabel: string;
 }
