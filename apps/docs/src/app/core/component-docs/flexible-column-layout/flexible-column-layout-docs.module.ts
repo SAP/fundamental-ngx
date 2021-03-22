@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core';
+import { FlexibleColumnLayoutModule, DynamicPageModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -11,6 +11,7 @@ import { FlexibleColumnLayoutDocsHeaderComponent } from './flexible-column-layou
 
 
 import { FlexibleColumnLayoutExampleComponent } from './examples/default/flexible-column-layout-example.component';
+import { FlexibleColumnLayoutDynamicPageExampleComponent } from './examples/dynamic-page/flexible-column-layout-dynamic-page-example.component';
 
 const routes: Routes = [
     {
@@ -27,12 +28,16 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        FlexibleColumnLayoutModule
+        FlexibleColumnLayoutModule,
+        DynamicPageModule,
+        ToolbarModule, 
+        ButtonModule
     ],
     exports: [RouterModule],
     declarations: [
         FlexibleColumnLayoutDocsComponent,
         FlexibleColumnLayoutExampleComponent,
+        FlexibleColumnLayoutDynamicPageExampleComponent,
         FlexibleColumnLayoutDocsHeaderComponent
     ]
 })
