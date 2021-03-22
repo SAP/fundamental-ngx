@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { AvatarModule } from '../avatar/avatar.module';
 import { ButtonModule } from '../button/button.module';
 import { FacetGroupComponent } from './facet-group.component';
-import { TitleModule } from '../title/public_api';
 import { FacetContentComponent } from './content/facet-content.component';
 import { FacetComponent } from './facet/facet.component';
+import { TitleModule } from '../title/title.module';
 
 @NgModule({
     declarations: [
