@@ -1,0 +1,27 @@
+import { getImageTagBrowserPlatform } from '../../../driver/wdio';
+
+const prefix = 'grid-list-core-';
+export const buttonExample = prefix + 'button-example-';
+export const itemExample = prefix + 'item-example-';
+export const linkExample = prefix + 'link-example-';
+export const toolbarExample = prefix + 'toolbar-example-';
+export const radioButtonExample = prefix + 'radio-button-example-';
+export const checkboxExample = prefix + 'checkbox-example-';
+export const buttonHoverState = 'button-hover-state-' + getImageTagBrowserPlatform();
+export const itemHoverState = 'item-hover-state-' + getImageTagBrowserPlatform();
+export const linkHoverState = 'link-hover-state-' + getImageTagBrowserPlatform();
+export const toolbarHoverState = 'toolbar-hover-state-' + getImageTagBrowserPlatform();
+export const radioButtonHoverState = 'radio-button-hover-state-' + getImageTagBrowserPlatform();
+export const checkboxHoverState = 'checkbox-hover-state-' + getImageTagBrowserPlatform();
+export const buttonActiveState = 'button-active-state-' + getImageTagBrowserPlatform();
+export const itemActiveState = 'item-active-state-' + getImageTagBrowserPlatform();
+export const linkActiveState = 'link-active-state-' + getImageTagBrowserPlatform();
+export const toolbarActiveState = 'toolbar-active-state-' + getImageTagBrowserPlatform();
+export const radioButtonActiveState = 'radio-button-active-state-' + getImageTagBrowserPlatform();
+export const checkboxActiveState = 'checkbox-active-state-' + getImageTagBrowserPlatform();
+export const buttonFocusState = 'button-focus-state-' + getImageTagBrowserPlatform();
+export const itemFocusState = 'item-focus-state-' + getImageTagBrowserPlatform();
+export const linkFocusState = 'link-focus-state-' + getImageTagBrowserPlatform();
+export const toolbarFocusState = 'toolbar-focus-state-' + getImageTagBrowserPlatform();
+export const radioButtonFocusState = 'radio-button-focus-state-' + getImageTagBrowserPlatform();
+export const checkboxFocusState = 'checkbox-focus-state-' + getImageTagBrowserPlatform();
