@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.45...v0.29.0-rc.46) (2021-03-22)
+
+
+### Bug Fixes
+
+* add fix for FCL animation and example with Dynamic Page usage and layout controls ([#4960](https://github.com/SAP/fundamental-ngx/issues/4960)) ([2ed1b99](https://github.com/SAP/fundamental-ngx/commit/2ed1b9903614f0be401cb9394442e006b9cd667b))
+
 ## [0.29.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.44...v0.29.0-rc.45) (2021-03-21)
 
 ## [0.29.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.43...v0.29.0-rc.44) (2021-03-21)
