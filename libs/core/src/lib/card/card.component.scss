@@ -17,6 +17,9 @@
     justify-content: flex-end;
     border-top: 0.0625rem solid #ccc;
     border-top: 0.0625rem solid var(--sapTile_SeparatorColor, #ccc);
+    min-height: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
 }
 
 .fd-card {
@@ -43,4 +46,8 @@
 
 .fd-numeric-content__kpi {
     font-size: 2.25rem !important;
+}
+
+.fd-card--table {
+    border: inherit;
 }
