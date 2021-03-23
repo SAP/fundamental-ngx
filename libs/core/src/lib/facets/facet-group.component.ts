@@ -2,10 +2,15 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@a
 
 @Component({
     selector: 'fd-facet-group',
-    templateUrl: './facet-group.component.html',
+    template: ` <ng-content select="fd-facet"></ng-content> `,
     styleUrls: ['./facet-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        '[class.fd-facet-group]': 'true',
+        '[attr.aria-label]': 'ariaLabel',
+        role: 'group'
+    }
 })
 export class FacetGroupComponent {
     /**
