@@ -1,6 +1,7 @@
 <span
     *ngIf="hasLabel && (labelPosition === 'left' || labelPosition === 'top')"
     [ngClass]="'fd-status-indicator__label--' + labelSize"
+    class="fd-status-indicator__label"
     >{{ statusLabel }}
 </span>
 <svg
@@ -17,6 +18,7 @@
 <span
     *ngIf="hasLabel && (labelPosition === 'right' || labelPosition === 'bottom')"
     [ngClass]="'fd-status-indicator__label--' + size"
+    class="fd-status-indicator__label"
     >{{ statusLabel }}
 </span>
 
