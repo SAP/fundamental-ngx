@@ -12,8 +12,8 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     // runner: 'local',
-    user: process.env.SAUCE_USERNAME,
-    key: process.env.SAUCE_ACCESS_KEY,
+    user: 'sso-sap-C5317551',
+    key: '5d744ca1-5770-4952-976b-c4bd898ae7cc',
     region: 'eu',
     //
     // ==================
@@ -25,7 +25,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-         './e2e/wdio/**/*.e2e-spec.ts',
+         './e2e/wdio/core/tests/form-message.e2e-spec.ts',
     ],
     // Patterns to exclude.
     exclude: [
@@ -204,7 +204,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://sap.dev:4200/',
+    baseUrl: 'https://nikita.local:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
@@ -214,7 +214,7 @@ exports.config = {
     connectionRetryTimeout: 200000,
     //
     // Default request retries count
-    connectionRetryCount: 3,
+    connectionRetryCount: 0,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
@@ -247,7 +247,8 @@ exports.config = {
     framework: 'jasmine',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    specFileRetries: 2,
+    specFileRetries: 0
+    ,
     //
     // Delay in seconds between the spec file retry attempts
     specFileRetriesDelay: 0,
