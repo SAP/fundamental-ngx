@@ -13,7 +13,6 @@ import {
     ObjectStatusModule,
     RatingIndicatorModule,
     TextModule,
-    FacetType
 } from '@fundamental-ngx/core';
 import { FACET_CLASS_NAME } from '../constants';
 

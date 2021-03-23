@@ -11,7 +11,7 @@
         <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
     </ng-container>
     <ng-container *ngIf="type === 'rating-indicator'">
-        <h2 class="fd-form-label">{{ subtitle }}</h2>
+        <span fd-form-label>{{ subtitle }}</span>
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </ng-container>
 </ng-container>

@@ -81,7 +81,8 @@ export const API_FILES = {
         'DynamicPageContentComponent'
     ],
     facets: [
-      'FacetComponent'
+      'FacetComponent',
+      'FacetGroupComponent'
     ],
     feedInput: [
         'FeedInputComponent',
