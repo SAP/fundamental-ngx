@@ -5,6 +5,7 @@ import { DynamicPageService } from '../../dynamic-page.service';
 import { By } from '@angular/platform-browser';
 import { DynamicPageHeaderInternalComponent } from './dynamic-page-header-internal.component';
 import { DynamicPageConfig } from '../../dynamic-page.config';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 
 @Component({
     template: `
@@ -35,6 +36,7 @@ class TestComponent {
     background = '';
 
     @ViewChild(DynamicPageHeaderInternalComponent) dynamicPageHeaderComponent: DynamicPageHeaderInternalComponent;
+    constructor(public dynamicPageService: DynamicPageService, public ruler: ViewportRuler) {}
 }
 
 describe('DynamicPageHeaderInternalComponent', () => {
@@ -116,6 +118,14 @@ describe('DynamicPageHeaderInternalComponent', () => {
                 By.css('.fd-dynamic-page__collapse-button')
             ).nativeElement;
             expect(collapseBtn.getAttribute('aria-label')).toBe(component.collapseLabel);
+        });
+
+        it('should handle collapse from service', () => {
+            component.collapsed = false;
+            component.dynamicPageService.collapseHeader();
+
+            fixture.detectChanges();
+            expect(pageHeaderComponent.collapsed).toBeTrue();
         });
     });
 

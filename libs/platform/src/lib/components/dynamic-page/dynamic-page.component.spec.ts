@@ -171,7 +171,7 @@ describe('DynamicPageComponent default values', () => {
 })
 class TestTabbedComponent {
     size = 'medium';
-    background = '';
+    background = 'list';
     tabLabel1 = 'Tab 1';
     tabLabel2 = 'Tab 2';
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
@@ -209,16 +209,18 @@ describe('DynamicPageComponent tabbed values', () => {
         expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsAddShadow)).toBeTruthy();
     });
 
-    it('should set default tab size', async () => {
-        const tabsContainer = fixture.debugElement.query(By.css('.fd-tabs'));
-        expect(tabsContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageTabsMedium)).toBeTruthy();
-    });
-
     it('should switch tabs', async () => {
         dynamicPageComponent.setSelectedTab('tab2');
         fixture.detectChanges();
         const tab2: HTMLElement = fixture.debugElement.query(By.css('#tab2')).nativeElement;
         expect(tab2.getAttribute('aria-expanded')).toBe('true');
+    });
+    it('should set list background styles', async () => {
+        fixture.detectChanges();
+        expect(component.dynamicPage.background).toBe('list');
+
+        const pageElement: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page')).nativeElement;
+        expect(pageElement.classList.contains('fd-dynamic-page--list-bg')).toBeTruthy();
     });
 });
 
@@ -233,7 +235,7 @@ describe('DynamicPageComponent tabbed values', () => {
 })
 class TestNonCollapsibleComponent {
     size = 'medium';
-    background = '';
+    background = 'transparent';
     @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
 }
 describe('DynamicPageComponent with collapsible set to false', () => {
@@ -382,5 +384,12 @@ describe('DynamicPageComponent Content Projection', () => {
 
     it('should project footer content', () => {
         expect(fixture.debugElement.query(By.css('#test-footer'))).toBeTruthy();
+    });
+
+    it('should set transparent background styles', async () => {
+        fixture.detectChanges();
+        expect(component.dynamicPage.background).toBe('transparent');
+        const pageElement: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page')).nativeElement;
+        expect(pageElement.classList.contains('fd-dynamic-page--transparent-bg')).toBeTruthy();
     });
 });

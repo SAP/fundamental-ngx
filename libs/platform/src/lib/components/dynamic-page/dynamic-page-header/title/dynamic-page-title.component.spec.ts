@@ -1,8 +1,16 @@
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BreadcrumbModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
+import {
+    BreadcrumbModule,
+    ToolbarModule,
+    ButtonModule,
+    FacetModule,
+    FacetComponent,
+    AvatarModule
+} from '@fundamental-ngx/core';
 import { CLASS_NAME } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -67,7 +75,7 @@ class TestComponent implements AfterViewInit {
     @ViewChild('outlet')
     outlet: ElementRef<HTMLElement>;
 
-    constructor(private cd: ChangeDetectorRef) {}
+    constructor(private cd: ChangeDetectorRef,public dynamicPageService: DynamicPageService, public ruler: ViewportRuler) {}
 
     ngAfterViewInit(): void {
         this.cd.detectChanges();
@@ -202,5 +210,32 @@ describe('DynamicPageTitleComponent', () => {
             );
             expect(layoutActionsContainer.classes[CLASS_NAME.dynamicPageLayoutActionsToolbarMedium]).toBeTruthy();
         });
+    });
+
+    it('should add facet classes', () => {
+        const facetComponent = component.facetComponent;
+        fixture.detectChanges();
+        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-end--sm')).toBeTruthy();
+        expect(facetComponent.elementRef().nativeElement.classList.contains('fd-margin-end--md')).toBeFalsy();
+        expect(
+            facetComponent.elementRef().nativeElement.classList.contains('fd-facet--image-header-title')
+        ).toBeTruthy();
+    });
+
+    it('should handle collapse from service', () => {
+        component.dynamicPageTitleComponent._isHeaderCollapsed = false;
+        component.dynamicPageService.setCollapseValue(true);
+        expect(component.dynamicPageTitleComponent._isHeaderCollapsed).toBeTrue();
+    });
+
+    it('should squash toolbar actions when the window is resized', () => {
+        const spy = jasmine.createSpy('_squashActions');
+        const subscription = component.ruler.change(0).subscribe(spy);
+        spyOn(component.dynamicPageTitleComponent.elementRef().nativeElement, 'getBoundingClientRect')
+        .and.returnValue({ top: 1, height: 100, left: 2, width: 200, right: 202, x: 0, y: 0, bottom: 0, toJSON: null });
+        window.dispatchEvent(new Event('resize'));
+        fixture.detectChanges();
+        expect(spy).toHaveBeenCalled();
+        subscription.unsubscribe();
     });
 });

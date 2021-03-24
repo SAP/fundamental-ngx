@@ -64,3 +64,26 @@
 }
 
 
+/* #region do not remove these styles */
+.fd-dynamic-page {
+	height: 100%;
+
+	 .fd-bar--floating-footer {
+		 z-index: 2;
+	 }
+
+	&--transparent-bg {
+		.fd-dynamic-page__tabs {
+			background-color: transparent;
+			background-color: var(--fdDynamicPage_Content_Transparent_Background, transparent);
+		}
+	}
+
+	&--list-bg {
+		.fd-dynamic-page__tabs {
+			background-color: #fff;
+			background-color: var(--fdDynamicPage_Content_List_Background, var(--sapGroup_ContentBackground, #fff));
+		}
+	}
+ }
+ /* #endregion */

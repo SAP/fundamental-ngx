@@ -26,6 +26,10 @@ import * as dynamicPageFlexibleColumnExample from '!raw-loader!./platform-dynami
 import * as dynamicPageFlexibleColumnExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.scss';
 import * as dynamicPageFlexibleColumnExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.ts';
 
+import * as dynamicPageHeaderFacetExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-header-facet-example.component.html';
+import * as dynamicPageHeaderFacetExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-header-facet-example.component.scss';
+import * as dynamicPageHeaderFacetExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-header-facet-example.component.ts';
+
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './platform-dynamic-page-docs.component.html'
@@ -117,6 +121,21 @@ export class PlatformDynamicPageDocsComponent {
             code: dynamicPageFlexibleColumnExampleTsCode,
             fileName: 'platform-dynamic-page-flexible-column-example',
             component: 'PlatformDynamicPageFlexibleColumnExampleComponent'
+        }
+    ];
+
+    dynamicPageHeaderFacets: ExampleFile[] = [
+        {
+            language: 'html',
+            code: dynamicPageHeaderFacetExample,
+            fileName: 'platform-dynamic-page-header-facet-example',
+            scssFileCode: dynamicPageHeaderFacetExampleScss
+        },
+        {
+            language: 'typescript',
+            code: dynamicPageHeaderFacetExampleTsCode,
+            fileName: 'platform-dynamic-page-header-facet-example',
+            component: 'PlatformDynamicPageHeaderFacetExampleComponent'
         }
     ];
 }

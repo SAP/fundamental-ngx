@@ -40,7 +40,8 @@
     Page Responsive Behavior
 </fd-docs-section-title>
 <description>
-    The left and right paddings of the Dynamic Page can be adjusted according to the width of the container with the
+    By default, Dynamic Page is auto responsive. To disable this and explictly enforce a different container left and right padding, 
+    use <code>[autoResponsive]="false"</code> and specify a
     <code>[size]</code> property. Available values are: <code>small</code>, <code>medium</code>, <code>large</code> and
     <code>extra-large</code>
 </description>
@@ -70,3 +71,15 @@ is contained within the column(or any other container) correctly.</description>
     <fdp-platform-dynamic-page-flexible-column-example></fdp-platform-dynamic-page-flexible-column-example>
 </component-example>
 <code-example [exampleFiles]="dynamicPageFlexibleColumn"></code-example>
+
+<fd-docs-section-title id="dynamicPageHeaderFacets" componentName="dynamicPage">
+    Dynamic Page with Header Facets
+</fd-docs-section-title>
+<description> The Dynamic Page header can consist of various facet types, such as Form facet, Key-value facet,
+    Image facet, and Rating Indicator facet. When an Image facet is used in the header content, collapsing the 
+    header will bring the image facet next to the title. Expanding the header will place it back to its original place.
+</description>
+<component-example>
+    <fdp-platform-dynamic-page-header-facet-example></fdp-platform-dynamic-page-header-facet-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageHeaderFacets"></code-example>

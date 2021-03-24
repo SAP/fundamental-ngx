@@ -1,7 +1,9 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     Input,
     TemplateRef,
@@ -9,6 +11,9 @@ import {
     ContentChild,
     ViewEncapsulation
 } from '@angular/core';
+import { BreadcrumbComponent, FacetComponent } from '@fundamental-ngx/core';
+import { Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
@@ -38,9 +43,13 @@ export class DynamicPageTitleComponent {
     @Input()
     subtitle: string;
 
+    /** Whether should be on compact mode */
+    @Input()
+    compact = false;
+
     /**
-     * sets background for content to `list`, `transparent`, or `solid` background color.
-     * Default is `solid`.
+     * @hidden
+     * the reference to breadcrumb title container
      */
     @Input()
     background: DynamicPageBackgroundType;

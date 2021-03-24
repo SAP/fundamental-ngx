@@ -1,3 +1,4 @@
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -10,13 +11,14 @@ import {
     HostBinding,
     Input,
     OnDestroy,
+    Optional,
     QueryList,
     Renderer2,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { TabPanelComponent } from '@fundamental-ngx/core';
+import { FlexibleColumnLayoutComponent, TabPanelComponent } from '@fundamental-ngx/core';
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, throttleTime } from 'rxjs/operators';
 
@@ -64,6 +66,15 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      */
     @Input()
     size: DynamicPageResponsiveSize = 'extra-large';
+
+    /** Whether DynamicPage should have responsive sides spacing changing with Page window width.
+     * max-width: 599px                         - small
+     * min-width: 600px and max-width: 1023px   - medium
+     * min-width: 1024px and max-width: 1439px  - large
+     * min-width: 1440px                        - extra large
+     */
+    @Input()
+    autoResponsive = true;
 
     /**
      * user provided offset in px
@@ -144,7 +155,9 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         protected _cd: ChangeDetectorRef,
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
-        private _dynamicPageService: DynamicPageService
+        private _dynamicPageService: DynamicPageService,
+        private _ruler: ViewportRuler,
+        @Optional() private _columnLayout: FlexibleColumnLayoutComponent
     ) {
         super(_cd);
     }
@@ -165,7 +178,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     }
 
     /**
-     * Snap the header to expand or collapse based on scrolling. Uses CDKScrollable.
+     * Snap the header to expand or collapse based on scrolling.
      */
     snapOnScroll(): void {
         // TODO: Do we really need it? Who uses it?

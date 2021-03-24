@@ -44,8 +44,7 @@ export class DynamicPageContentComponent {
     id: string;
 
     /**
-     * sets background for content to `list`, `transparent`, or `solid` background color.
-     * Default is `solid`.
+     * event for tab changes
      */
     @Input()
     background: DynamicPageBackgroundType;
