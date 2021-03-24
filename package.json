@@ -105,7 +105,7 @@
     "@angular/platform-browser-dynamic": "~11.2.5",
     "@angular/router": "~11.2.5",
     "@nrwl/angular": "~11.5.2",
-    "@sap-theming/theming-base-content": "11.1.27",
+    "@sap-theming/theming-base-content": "11.1.28",
     "@stackblitz/sdk": "1.5.2",
     "@types/google.visualization": "0.0.60",
     "@types/node": "14.14.10",
