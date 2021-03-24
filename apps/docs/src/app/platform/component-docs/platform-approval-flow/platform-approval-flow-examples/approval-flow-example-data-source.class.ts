@@ -2,6 +2,7 @@ import {
     ApprovalDataSource,
     ApprovalNode,
     ApprovalProcess,
+    ApprovalStatus,
     ApprovalTeam,
     ApprovalUser
 } from '@fundamental-ngx/platform';
@@ -361,6 +362,7 @@ type GraphTypes = 'simple' | 'medium' | 'complex';
 
 export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
     selectedGraph: GraphTypes;
+    defaultStatus: ApprovalStatus | null = null;
 
     readonly state: BehaviorSubject<ApprovalProcess>;
 
@@ -369,9 +371,23 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         this.state = new BehaviorSubject<ApprovalProcess>(graphs[this.selectedGraph]);
     }
 
+    setDefaultStatus(status: ApprovalStatus | null): void {
+        this.defaultStatus = status;
+        this.selectGraph(this.selectedGraph);
+    }
+
     selectGraph(selectedGraph: string = 'complex'): void {
         this.selectedGraph = selectedGraph as GraphTypes;
-        this.state.next(graphs[this.selectedGraph]);
+        const graph = { ...graphs[this.selectedGraph] };
+        graph.nodes = graph.nodes.map(n => {
+            const nodeCopy = { ...n };
+            if (this.defaultStatus) {
+                nodeCopy.status = this.defaultStatus;
+            }
+
+            return nodeCopy;
+        });
+        this.state.next(graph);
     }
 
     fetch(): Observable<ApprovalProcess> {
