@@ -340,7 +340,7 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
         'id': 'pointer1',
         'parameters': { 'pointerType': 'mouse' },
         'actions': [
-            { 'type': 'pointerMove', 'duration': 200, 'x': locationX, 'y': locationY },
+            { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
             { 'type': 'pointerDown', 'button': 0 },
             { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
             { 'type': 'pointerMove', 'duration': 1000, 'x': newLocationX, 'y': newLocationY },
