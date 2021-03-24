@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.51...v0.29.0-rc.52) (2021-03-24)
+
+## [0.29.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.50...v0.29.0-rc.51) (2021-03-24)
+
+## [0.29.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.49...v0.29.0-rc.50) (2021-03-24)
+
+
+### Features
+
+* (Platform) approval flow adjustments ([#4774](https://github.com/SAP/fundamental-ngx/issues/4774)) ([c10cbc3](https://github.com/SAP/fundamental-ngx/commit/c10cbc39fa059518de000b2fde3e284fdc6db1cf))
+
+## [0.29.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.48...v0.29.0-rc.49) (2021-03-24)
+
+## [0.29.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.47...v0.29.0-rc.48) (2021-03-24)
+
+## [0.29.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.46...v0.29.0-rc.47) (2021-03-24)
+
+
+### Bug Fixes
+
+* (Core) updating the focusable object of status indicator and adding clickable ([#4942](https://github.com/SAP/fundamental-ngx/issues/4942)) ([a092cbc](https://github.com/SAP/fundamental-ngx/commit/a092cbcea130ca9d155c9784875ac3de67a52b41))
+
 ## [0.29.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.45...v0.29.0-rc.46) (2021-03-22)
 
 
