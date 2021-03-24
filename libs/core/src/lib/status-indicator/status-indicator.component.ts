@@ -6,8 +6,10 @@ import {
     ViewEncapsulation,
     ChangeDetectionStrategy,
     AfterViewInit,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    OnInit
 } from '@angular/core';
+import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 
 export type Size = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
@@ -30,12 +32,13 @@ export interface Point {
         '[attr.focusable]': 'focusable',
         '[attr.title]': 'title',
         '[attr.role]': 'role',
-        '[attr.aria-valuetext]': 'ariaValueText'
+        '[attr.aria-valuetext]': 'ariaValueText',
+        '[attr.tabindex]': 'focusable ? 0 : -1'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StatusIndicatorComponent implements OnChanges, AfterViewInit {
+export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssClassBuilder, OnInit {
     /**
      * value id defines the id of the object.
      */
@@ -79,6 +82,13 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit {
      */
     @Input()
     clickable: boolean;
+
+    /**
+     * defines the size of the status indicator.
+     * Can be one of the following: 'sm' | 'md' | 'lg' | 'xl'
+     */
+    @Input()
+    labelSize: Size = 'sm';
 
     /** Aria label for the Status Indicator. */
     @Input()
@@ -158,6 +168,8 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit {
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>, private _cd: ChangeDetectorRef) {}
+    class: string;
+
     ngAfterViewInit(): void {
         this._angleCalculation();
         this._cd.detectChanges();
@@ -166,6 +178,33 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit {
     /** @hidden */
     ngOnChanges(): void {
         this._calculateFilling();
+        this.buildComponentCssClass();
+    }
+
+    public ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-status-indicator',
+            this.size ? `fd-status-indicator--${this.size}` : '',
+            this.status ? `fd-status-indicator--${this.status}` : '',
+            this.clickable ? `fd-status-indicator--link` : '',
+            this.labelPosition === 'right' || this.labelPosition === 'left'
+                ? `fd-status-indicator--horizontal-label`
+                : '',
+            this.class
+        ];
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 
     /** @hidden */

@@ -71,6 +71,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             border-top-style: solid;
             border-top-width: 1px;
             left: -2.2rem;
+            width: 2.2rem;
         }
     }
 
@@ -158,6 +159,12 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             right: auto;
             left: -2rem;
             width: 2rem;
+        }
+
+        &.#{$block}--parent-approved {
+            &.#{$block}--line-before:before {
+                width: 2rem;
+            }
         }
 
         .#{$block}__name.#{$block}__name--members-count {
