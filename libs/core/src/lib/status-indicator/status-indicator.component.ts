@@ -88,7 +88,7 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
      * Can be one of the following: 'sm' | 'md' | 'lg' | 'xl'
      */
     @Input()
-    labelSize: Size = 'sm';
+    labelSize: StatusIndicatorSize = 'sm';
 
     /** Aria label for the Status Indicator. */
     @Input()
