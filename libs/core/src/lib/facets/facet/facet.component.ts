@@ -29,11 +29,11 @@ export class FacetComponent implements AfterViewInit {
     type: FacetType;
 
     /** The facet title.
-     * For eg: for key-value facet, title is the key and the underlying object status or object number
+     * For eg: for key-value facet, facetTitle is the key and the underlying object status or object number
      * component is the value.
      */
     @Input()
-    title: string;
+    facetTitle: string;
 
     /** An optional subtitle to display in the rating-indicator facet */
     @Input()

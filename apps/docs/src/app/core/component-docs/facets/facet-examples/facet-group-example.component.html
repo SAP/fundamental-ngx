@@ -1,5 +1,5 @@
 <fd-facet-group ariaLabel="Facet Group">
-    <fd-facet type="form" [title]="'Technical Data'" id="facet1">
+    <fd-facet type="form" facetTitle="Technical Data" id="facet1">
         <fd-facet-content>
             <label class="fd-form-label" for="form-value-10">Base unit:</label>
             <div class="fd-text" id="form-value-10">Each</div>
@@ -17,7 +17,7 @@
             <div class="fd-text" id="form-value-13">20.8 Centimeter</div>
         </fd-facet-content>
     </fd-facet>
-    <fd-facet type="rating-indicator" [title]="'Rating Indicator'" subtitle="6 reviews" id="facet2">
+    <fd-facet type="rating-indicator" facetTitle="Rating Indicator" subtitle="6 reviews" id="facet2">
         <fd-facet-content>
             <fd-rating-indicator size="md" dynamicTextIndicator="of" value="2.51"></fd-rating-indicator>
         </fd-facet-content>
@@ -25,7 +25,7 @@
     <fd-facet type="image" id="facet3">
         <fd-avatar image="http://picsum.photos/id/1018/400" size="l"></fd-avatar>
     </fd-facet>
-    <fd-facet type="key-value" [title]="'Status'" id="facet4">
+    <fd-facet type="key-value" facetTitle="Status" id="facet4">
         <span
             fd-object-status
             status="positive"
@@ -35,7 +35,7 @@
             aria-label="Delivery"
         ></span>
     </fd-facet>
-    <fd-facet type="key-value" [title]="'Delivery Time'" id="facet5">
+    <fd-facet type="key-value" facetTitle="Delivery Time" id="facet5">
         <span
             fd-object-status
             status="critical"
@@ -46,7 +46,7 @@
             aria-label="12 days"
         ></span>
     </fd-facet>
-    <fd-facet type="key-value" [title]="'Assembly Option'" id="facet6">
+    <fd-facet type="key-value" facetTitle="Assembly Option" id="facet6">
         <span
             fd-object-status
             status="negative"
@@ -56,7 +56,7 @@
             aria-label="To be selected"
         ></span>
     </fd-facet>
-    <fd-facet type="key-value" [title]="'Pricing'" id="facet7">
+    <fd-facet type="key-value" facetTitle="Pricing" id="facet7">
         <fd-object-number
             [number]="100.88"
             [large]="true"

@@ -18,7 +18,7 @@ import { FACET_CLASS_NAME } from '../constants';
 
 @Component({
     template: `
-        <fd-facet type="form" [title]="'Technical Data'" id="formFacetExample">
+        <fd-facet type="form" facetTitle="Technical Data" id="formFacetExample">
             <fd-facet-content>
                 <label class="fd-form-label" for="form-value-1">Base unit:</label>
                 <fd-text text="Each" id="form-value-1"></fd-text>
@@ -137,7 +137,7 @@ describe('Image Facet Component', () => {
 
 @Component({
     template: `
-        <fd-facet type="rating-indicator" [title]="'Rating Indicator'" subtitle="6 reviews" id="facet12">
+        <fd-facet type="rating-indicator" facetTitle="Rating Indicator" subtitle="6 reviews" id="facet12">
             <fd-facet-content>
                 <fd-rating-indicator size="md" dynamicTextIndicator="of" value="2.51"></fd-rating-indicator>
             </fd-facet-content>
@@ -205,7 +205,7 @@ describe('Rating Indicator Facet Component', () => {
 
 @Component({
     template: `
-        <fd-facet type="key-value" [title]="'Status'" id="kvFacet10">
+        <fd-facet type="key-value" facetTitle="Status" id="kvFacet10">
             <span
                 fd-object-status
                 status="critical"
@@ -274,7 +274,7 @@ describe('Key Value Facet Component', () => {
 
 @Component({
     template: `
-        <fd-facet type="key-value" [title]="'Pricing'" id="kvFacet24" [alignEnd]="true">
+        <fd-facet type="key-value" facetTitle="Pricing" id="kvFacet24" [alignEnd]="true">
             <fd-object-number
                 [number]="100.88"
                 [large]="true"

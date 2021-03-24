@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-container *ngIf="type !== 'image'">
-    <h1 *ngIf="title" fd-title headerSize="5" class="fd-margin-bottom--sm" [id]="titleId">{{ title }}</h1>
+    <h1 *ngIf="facetTitle" fd-title headerSize="5" class="fd-margin-bottom--sm" [id]="titleId">{{ facetTitle }}</h1>
     <ng-container *ngIf="type === 'form'">
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </ng-container>
