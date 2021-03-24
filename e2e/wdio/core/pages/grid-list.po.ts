@@ -30,12 +30,11 @@ export class GridListPo extends CoreBaseComponentPo {
     dragAndDropItems = '#dnd + component-example fd-grid-list-item';
     dragAndDropItemTitles = '#dnd + component-example fd-grid-list-item .fd-title';
     gridListButtons =  '.docs-tile-content-example button';
-    filterBarButton = 'fd-grid-list-filter-bar button';
     gridListItem = 'fd-grid-list-item.ng-star-inserted div.fd-grid-list__item';
     gridListLink = 'a.fd-link';
     gridListToolbar = '.fd-toolbar.fd-toolbar--info';
-    gridListRadioButton = '.fd-grid-list__item-toolbar .fd-grid-list__radio-input';
-    gridListCheckbox = '.fd-grid-list__checkbox-input';
+    gridListRadioButton = '.fd-grid-list__item-toolbar .fd-grid-list__radio-label';
+    gridListCheckbox = '.fd-grid-list__checkbox-label';
 
     gridListItemsByMode = (name: string) => {
         return ` [selectionmode="${name}"] fd-grid-list-item`;

@@ -1,5 +1,4 @@
 import { getImageTagBrowserPlatform } from '../../../driver/wdio';
-
 const prefix = 'grid-list-core-';
 export const buttonExample = prefix + 'button-example-';
 export const itemExample = prefix + 'item-example-';

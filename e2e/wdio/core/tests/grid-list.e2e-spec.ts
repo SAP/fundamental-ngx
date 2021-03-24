@@ -152,7 +152,7 @@ describe('Grid-list test suite', function() {
 
     describe('Check visual regression', function() {
 
-        fit('should check examples visual regression', () => {
+        it('should check examples visual regression', () => {
             gridListPage.saveExampleBaselineScreenshot();
             expect(gridListPage.compareWithBaseline()).toBeLessThan(1);
         });
@@ -170,14 +170,6 @@ describe('Grid-list test suite', function() {
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(gridListButtons, i);
                 checkElementActiveState(gridListButtons, buttonExample + buttonActiveState + '-' + i, button, i);
-            }
-        });
-
-        xit('verify buttons focus state', () => {
-            const buttonsLength = getElementArrayLength(gridListButtons);
-            for (let i = 0; i < buttonsLength; i++) {
-                scrollIntoView(gridListButtons, i);
-                checkElementFocusState(gridListButtons, buttonExample + buttonFocusState + '-' + i, button, i);
             }
         });
 
