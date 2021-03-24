@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.49...v0.29.0-rc.50) (2021-03-24)
+
+
+### Features
+
+* (Platform) approval flow adjustments ([#4774](https://github.com/SAP/fundamental-ngx/issues/4774)) ([c10cbc3](https://github.com/SAP/fundamental-ngx/commit/c10cbc39fa059518de000b2fde3e284fdc6db1cf))
+
 ## [0.29.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.48...v0.29.0-rc.49) (2021-03-24)
 
 ## [0.29.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.47...v0.29.0-rc.48) (2021-03-24)
