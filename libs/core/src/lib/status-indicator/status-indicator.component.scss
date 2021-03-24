@@ -1,5 +1,5 @@
 /*!
- * Fundamental Library Styles v0.15.1-rc.8
+ * Fundamental Library Styles v0.17.0-rc.26
  * Copyright (c) 2021 SAP SE or an SAP affiliate company.
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
  */
@@ -14,7 +14,6 @@
   font-family: "72", "72full", Arial, Helvetica, sans-serif;
   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
@@ -34,9 +33,7 @@
   text-align: center;
   text-decoration: inherit;
   text-transform: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+  text-rendering: optimizeLegibility
 }
 .sap-icon--accidental-leave::before {
   content: ""
@@ -2039,16 +2036,19 @@
   font-family: "72", "72full", Arial, Helvetica, sans-serif;
   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   border: 0
 }
+.fd-status-indicator.is-focus,
 .fd-status-indicator:focus {
-  outline: 1px dotted #000;
-  outline-offset: 1px
+  z-index: 5;
+  outline: .0625rem dotted #000;
+  outline: var(--sapContent_FocusWidth,.0625rem) var(--sapContent_FocusStyle,dotted) var(--sapContent_FocusColor,#000);
+  outline-offset: .0625rem;
+  outline-offset: var(--sapContent_FocusWidth,.0625rem)
 }
 .fd-status-indicator::after,
 .fd-status-indicator::before {
@@ -2056,7 +2056,7 @@
   box-sizing: inherit;
   font-size: inherit
 }
-.fd-status-indicator--htext {
+.fd-status-indicator--horizontal-label {
   font-size: .875rem;
   font-size: var(--sapFontSize,.875rem);
   line-height: 1.4;
@@ -2066,7 +2066,6 @@
   font-family: "72", "72full", Arial, Helvetica, sans-serif;
   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
@@ -2077,75 +2076,69 @@
   -ms-flex-direction: unset;
   flex-direction: unset
 }
-.fd-status-indicator--htext::after,
-.fd-status-indicator--htext::before {
+.fd-status-indicator--horizontal-label::after,
+.fd-status-indicator--horizontal-label::before {
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
   font-size: inherit
 }
+.fd-status-indicator--link {
+  cursor: pointer
+}
+.fd-status-indicator__label {
+  font-size: .75rem;
+  font-size: var(--sapFontSmallSize,.75rem);
+  margin: .375rem
+}
+.fd-status-indicator__label--sm {
+  font-size: .75rem;
+  font-size: var(--sapFontSmallSize,.75rem);
+  margin: .375rem
+}
+.fd-status-indicator__label--md {
+  font-size: .875rem;
+  font-size: var(--sapFontSize,.875rem);
+  margin: .5rem
+}
+.fd-status-indicator__label--lg {
+  font-size: 1.125rem;
+  margin: .75rem
+}
+.fd-status-indicator__label--xl {
+  font-size: 1.875rem;
+  margin: 1rem
+}
 .fd-status-indicator--positive {
   fill: #107e3e;
-  fill: var(--sapPositiveElementColor,#107e3e)
-}
-.fd-status-indicator--positive__text {
+  fill: var(--sapPositiveElementColor,#107e3e);
   color: #107e3e;
   color: var(--sapPositiveElementColor,#107e3e)
 }
 .fd-status-indicator--critical {
   fill: #e9730c;
-  fill: var(--sapCriticalElementColor,#e9730c)
-}
-.fd-status-indicator--critical__text {
+  fill: var(--sapCriticalElementColor,#e9730c);
   color: #e9730c;
   color: var(--sapCriticalElementColor,#e9730c)
 }
 .fd-status-indicator--negative {
   fill: #b00;
-  fill: var(--sapNegativeElementColor,#b00)
-}
-.fd-status-indicator--negative__text {
+  fill: var(--sapNegativeElementColor,#b00);
   color: #b00;
   color: var(--sapNegativeElementColor,#b00)
 }
-.fd-status-indicator--sm {
-  padding: 0;
-  margin: 0;
+.fd-status-indicator--sm .fd-status-indicator__svg {
   width: 1.875rem;
   height: 1.375rem
 }
-.fd-status-indicator--sm__text {
-  font-size: .75rem;
-  font-size: var(--sapFontSmallSize,.75rem);
-  margin: .375rem
-}
-.fd-status-indicator--md {
-  padding: 0;
-  margin: 0;
+.fd-status-indicator--md .fd-status-indicator__svg {
   width: 2.8125rem;
   height: 1.875rem
 }
-.fd-status-indicator--md__text {
-  font-size: .875rem;
-  font-size: var(--sapFontSize,.875rem);
-  margin: .5rem
-}
-.fd-status-indicator--lg {
-  padding: 0;
-  margin: 0;
+.fd-status-indicator--lg .fd-status-indicator__svg {
   width: 5rem;
   height: 3.4375rem
 }
-.fd-status-indicator--lg__text {
-  font-size: 1.125rem;
-  margin: .75rem
-}
-.fd-status-indicator--xl {
-  padding: 0;
-  margin: 0;
+.fd-status-indicator--xl .fd-status-indicator__svg {
   width: 9.0625rem;
   height: 6.25rem
-}
-.fd-status-indicator--xl__text {
-  font-size: 1.875rem;
-  margin: 1rem
 }
