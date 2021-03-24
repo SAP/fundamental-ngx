@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.46...v0.29.0-rc.47) (2021-03-24)
+
+
+### Bug Fixes
+
+* (Core) updating the focusable object of status indicator and adding clickable ([#4942](https://github.com/SAP/fundamental-ngx/issues/4942)) ([a092cbc](https://github.com/SAP/fundamental-ngx/commit/a092cbcea130ca9d155c9784875ac3de67a52b41))
+
 ## [0.29.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.45...v0.29.0-rc.46) (2021-03-22)
 
 
