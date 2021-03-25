@@ -11,6 +11,7 @@ import { InputGroupModule } from '../input-group/input-group.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { RtlService } from '../utils/services/rtl.service';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -31,7 +32,8 @@ describe('MultiInputComponent', () => {
                 InputGroupModule
             ],
             providers: [
-                DynamicComponentService
+                DynamicComponentService,
+                RtlService
             ]
         }).compileComponents();
     }));
