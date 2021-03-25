@@ -8,10 +8,10 @@ import { ContentDensity } from './components/form/form-control';
 @Injectable({ providedIn: 'root' })
 export class PlatformConfig {
 
-    private static injector: Injector;
+    private static injector: Injector = null;
 
     /**
-     * Content Density of element. 'cozy' | 'compact'
+     * Content Density of element. 'cozy' | 'compact' | 'condensed'
      */
     contentDensity: ContentDensity;
 

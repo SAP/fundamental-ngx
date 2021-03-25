@@ -9,7 +9,7 @@ import {
 } from './input-group-directives';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
@@ -45,6 +45,6 @@ describe('InputGroupComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

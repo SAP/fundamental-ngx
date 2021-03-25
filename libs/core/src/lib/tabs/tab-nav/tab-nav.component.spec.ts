@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
-import { ContentDensityService } from '../../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-test-tabs',
@@ -63,7 +63,7 @@ describe('TabNavDirective', () => {
     it('should handle content density when compact input is not provided', () => {
         spyOn(component, 'buildComponentCssClass');
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 

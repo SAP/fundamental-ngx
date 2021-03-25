@@ -723,7 +723,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden ContentDensity change subscription */
     private _subscribeToContentDensity(): void {
-        this._contentDensityService?.contentDensity.pipe(takeUntil(this._onDestroy$)).subscribe((density) => {
+        this._contentDensityService?._contentDensityListener.pipe(takeUntil(this._onDestroy$)).subscribe((density) => {
             this.cozy = density === 'cozy';
             this.buildComponentCssClass();
             this._cdr.detectChanges();

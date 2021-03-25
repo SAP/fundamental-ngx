@@ -9,7 +9,7 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { DateRange } from '../calendar/models/date-range';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;
@@ -73,7 +73,7 @@ describe('DatePickerComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('Should handle single date change and update input', () => {

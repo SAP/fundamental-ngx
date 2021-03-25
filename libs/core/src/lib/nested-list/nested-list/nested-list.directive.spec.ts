@@ -5,11 +5,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListDirective } from './nested-list.directive';
-import { ContentDensityService } from '../../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 @Component({
     template: `
-        <ul fd-nested-list [textOnly]="true" [compact]="true" #level1List>
+        <ul fd-nested-list [textOnly]="true" [compact]="compact" #level1List>
             <li fd-nested-list-item>
                 <a fd-nested-list-link>
                     <span fd-nested-list-title>Link 1</span>
@@ -40,6 +40,8 @@ import { ContentDensityService } from '../../utils/public_api';
     `
 })
 class TestNestedContainerComponent {
+    compact = undefined;
+
     @ViewChild('level4List', { static: true, read: NestedListDirective })
     level4List: NestedListDirective;
 
@@ -76,6 +78,8 @@ describe('NestedListDirective', () => {
     });
 
     it('Should add classes', () => {
+        component.compact = true;
+        fixture.detectChanges();
         expect((level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list')).toBeTruthy();
         expect(
             (level1List as any)._elementRef.nativeElement.classList.contains('fd-nested-list--text-only')
@@ -89,8 +93,8 @@ describe('NestedListDirective', () => {
     });
 
     it('should handle content density when compact input is not provided', () => {
-        level1List.compact = null;
-        level1List.ngOnInit();
-        expect(level1List.compact).toBeFalse();
+        level1List.compact = undefined;
+        level1List.ngOnInit()
+        expect(level1List.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

@@ -6,11 +6,11 @@ import { TokenizerInputDirective } from './token-input.directive';
 import { whenStable } from '../utils/tests/when-stable';
 import { FormControlComponent } from '../form/form-control/form-control.component';
 import { TokenComponent, TokenizerComponent } from './public_api';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
-        <fd-tokenizer>
+        <fd-tokenizer [compact]="compact">
             <fd-token>Token 1</fd-token>
             <fd-token>Token 2</fd-token>
             <fd-token>Token 3</fd-token>
@@ -19,6 +19,8 @@ import { ContentDensityService } from '../utils/public_api';
     `
 })
 class TokenizerWrapperComponent {
+    compact = undefined;
+
     @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
     @ViewChild(FormControlComponent) formControl: FormControlComponent;
 
@@ -53,13 +55,12 @@ describe('TokenizerComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
         expect(component._tokenizerHasFocus).toBeFalsy();
-        expect(component.compact).toBeFalsy();
     });
 
     it('should handle content density when compact input is not provided', () => {
         spyOn(component, 'buildComponentCssClass');
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
@@ -262,6 +263,8 @@ describe('TokenizerComponent', () => {
     });
 
     it('should get the hidden cozy token count AfterViewChecked', async () => {
+        fixture.componentInstance.compact = false;
+
         spyOn(component.elementRef().nativeElement, 'getBoundingClientRect').and.returnValue({ left: 1 });
         component.tokenList.forEach((token) => {
             spyOn(token.tokenWrapperElement.nativeElement, 'getBoundingClientRect').and.returnValue({ right: 0 });

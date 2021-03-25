@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { whenStable } from '../utils/tests/when-stable';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 const initialValue = 100;
 
@@ -36,7 +36,7 @@ class TestWrapperComponent {
 
     value: number = initialValue;
 
-    compact = false;
+    compact = undefined;
 
     unit: string = null;
 
@@ -87,7 +87,7 @@ describe('StepInputComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should increment on button click', async () => {

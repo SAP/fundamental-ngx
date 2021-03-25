@@ -156,8 +156,8 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
             this._contentDensitySubscription.add(
-                this._contentDensityService.contentDensity.subscribe((density) => {
-                    this.compact = density === 'compact';
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
                     this._cdRef.markForCheck();
                 })
             );

@@ -165,7 +165,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     ngOnInit(): void {
         if (this.size === null && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService.contentDensity.subscribe((density) => {
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
                     this.size = density;
                 })
             );

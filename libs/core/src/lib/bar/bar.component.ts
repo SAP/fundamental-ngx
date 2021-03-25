@@ -64,7 +64,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     /** @hidden */
     ngOnInit(): void {
         if (this.cozy === null && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
                 this.cozy = density === 'cozy';
                 this.buildComponentCssClass();
             }));

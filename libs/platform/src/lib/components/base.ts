@@ -3,7 +3,7 @@ import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core';
 // tslint:disable-next-line:nx-enforce-module-boundaries
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { PlatformConfig } from '@fundamental-ngx/platform';
+import { PlatformConfig } from '../platform.config';
 
 let randomId = 0;
 
@@ -93,7 +93,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _setupDensitySubscriptions(): void {
         if (this._contentDensity === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
                 this.contentDensity = density;
                 this.markForCheck();
             }));

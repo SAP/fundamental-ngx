@@ -5,7 +5,7 @@ import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass
 import { MenuModule } from '../menu/menu.module';
 import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     selector: 'fd-test-component',
@@ -57,7 +57,7 @@ describe('SplitButtonComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         componentInstance.ngOnInit();
-        expect(componentInstance.compact).toBeFalse();
+        expect(componentInstance.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should handle content init - no selected item', () => {

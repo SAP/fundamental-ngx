@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TableComponent } from './table.component';
 import { TableService } from './table.service';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('TableComponent', () => {
     let component: TableComponent;
@@ -32,6 +32,6 @@ describe('TableComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

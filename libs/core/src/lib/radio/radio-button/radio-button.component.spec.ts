@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RadioButtonComponent } from './radio-button.component';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ContentDensityService } from '../../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 @Component({
     template: `
@@ -56,7 +56,7 @@ describe('RadioButtonComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         component.radioButton1.ngOnInit();
-        expect(component.radioButton1.compact).toBeFalse();
+        expect(component.radioButton1.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should have the value', async () => {

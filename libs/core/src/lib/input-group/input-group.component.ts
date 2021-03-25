@@ -179,8 +179,8 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     ngOnInit(): void {
         this._listenElementEvents();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
-                this.compact = density === 'compact';
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
                 this.changeDetectorRef.markForCheck();
             }));
         }

@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '../../utils/tests/when-stable';
-import { ContentDensityService } from '../../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): any {
     return fixture.nativeElement.querySelector('input');
@@ -64,7 +64,7 @@ describe('CheckboxComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         checkbox.ngOnInit();
-        expect(checkbox.compact).toBeFalse();
+        expect(checkbox.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should be checked on click', async () => {

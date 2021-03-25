@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FileUploaderSelectDirective } from './directives/file-uploader-select.directive';
 import { FileUploaderDragndropDirective } from './directives/file-uploader-dragndrop.directive';
 import { ButtonModule } from '../button/button.module';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 interface MockFile extends File {
     size: number;
@@ -41,7 +41,7 @@ describe('FileUploaderComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should selectHandler with no maxFileSize', () => {

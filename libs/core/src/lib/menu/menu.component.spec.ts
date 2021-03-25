@@ -5,7 +5,7 @@ import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angu
 import { MenuModule } from './menu.module';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     selector: 'fd-menu-test',
@@ -72,7 +72,7 @@ describe('MenuComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         menu.ngOnInit();
-        expect(menu.compact).toBeFalse();
+        expect(menu.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should open/close popover', fakeAsync(() => {

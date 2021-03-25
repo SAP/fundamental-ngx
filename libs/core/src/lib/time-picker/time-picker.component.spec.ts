@@ -8,7 +8,7 @@ import { TimeModule } from '../time/time.module';
 import { ButtonModule } from '../button/button.module';
 
 import { TimePickerComponent } from './time-picker.component';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent<FdDate>;
@@ -36,7 +36,7 @@ describe('TimePickerComponent', () => {
 
     it('should handle content density when compact input is not provided', () => {
         component.ngOnInit();
-        expect(component.compact).toBeFalse();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should use displayFormat and set to true _displayHours, _displayMinutes, _meridian', () => {

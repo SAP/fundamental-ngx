@@ -36,8 +36,8 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService.contentDensity.subscribe(density => {
-                this.compact = density === 'compact';
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
                 this.buildComponentCssClass();
             }));
         }
@@ -130,8 +130,8 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
-                this._contentDensityService.contentDensity.subscribe((density) => {
-                    this.compact = density === 'compact';
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
                     this.buildComponentCssClass();
                 })
             );
