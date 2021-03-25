@@ -1,4 +1,4 @@
-import { Component, ElementRef, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 
 @Component({
@@ -10,14 +10,13 @@ import { FocusableOption } from '@angular/cdk/a11y';
     }
 })
 export class FixedCardLayoutItemComponent implements FocusableOption {
-    /** @hidden */
-    @HostBinding()
-    tabindex = 0;
-
     constructor(private _elementRef: ElementRef) {}
 
     /** Set focus on the element. */
     focus(): void {
-        this._elementRef.nativeElement.focus();
+        const header = this._elementRef.nativeElement.querySelector('.fd-card__header')
+        if (header) {
+            header.focus();
+        }
     }
 }

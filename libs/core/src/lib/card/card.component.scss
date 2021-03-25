@@ -20,18 +20,6 @@
 }
 
 .fd-card {
-    /* Should be removed once https://github.com/SAP/fundamental-styles/issues/1715 is resolved */
-    .fd-card__avatar {
-        margin-right: 0.75rem;
-
-        @at-root {
-            [dir='rtl'] & {
-                margin-right: 0;
-                margin-left: 0.75rem;
-            }
-        }
-    }
-
     /* Should be removed once https://github.com/SAP/fundamental-styles/issues/1729 is resolved */
     .fd-card__analytics-content,
     .fd-numeric-content__kpi {
@@ -51,24 +39,6 @@
 
 .fd-numeric-content__scale-container {
     flex: auto;
-}
-
-// Remove once NGX is migrated to styles@0.16.0
-.fd-card__header--non-interactive {
-	cursor: auto;
-
-	$fd-card-default-body-background-color: var(--sapTile_Background) !default;
-
-	&:hover,
-	&.is-hover {
-		background: $fd-card-default-body-background-color;
-	}
-
-	&:active,
-	&.is-active {
-		background: $fd-card-default-body-background-color;
-	}
-
 }
 
 .fd-numeric-content__kpi {

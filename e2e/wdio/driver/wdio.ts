@@ -229,14 +229,6 @@ export function getElementSize(selector: string, index: number = 0, prop?: 'widt
     return $$(selector)[index].getSize(prop || void 0);
 }
 
-export function executeScriptAfterTagFF(selector: string, index: number = 0): string {
-    const attrName = browserIsFirefox() ? 'border-left-style' : 'border';
-    return browser.execute(function(selector, attrName, index) {
-        return window.getComputedStyle(
-            document.querySelectorAll(selector)[index], ':after')[attrName];
-    }, selector, attrName, index);
-}
-
 export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
     return browser.execute(function(selector, attrName, index) {
         return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':before')[attrName]);

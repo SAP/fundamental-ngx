@@ -64,9 +64,9 @@
                     [compact]="true"
                     fdType="ghost"
                     [disabled]="disabled"
-                    i18n-label="@@platformUploadCollection.Btn.Add"
+                    i18n-label="platformUploadCollection.Btn.Add"
                     label="Add"
-                    i18n-title="@@platformUploadCollection.Btn.Add"
+                    i18n-title="platformUploadCollection.Btn.Add|Title"
                     title="Add"
                 ></button>
 
@@ -78,9 +78,9 @@
                     *ngIf="hierarchy"
                     [disabled]="disabled"
                     fdType="transparent"
-                    i18n-label="@@platformUploadCollection.Btn.NewFolder"
+                    i18n-label="platformUploadCollection.Btn.NewFolder"
                     label="New Folder"
-                    i18n-title="@@platformUploadCollection.Btn.NewFolder"
+                    i18n-title="platformUploadCollection.Btn.NewFolder|Title attribute"
                     title="New Folder"
                 ></button>
             </ng-container>
@@ -94,9 +94,9 @@
                 [compact]="true"
                 fdType="ghost"
                 [disabled]="disabled"
-                i18n-label="@@platformUploadCollection.Btn.MoveTo"
+                i18n-label="platformUploadCollection.Btn.MoveTo"
                 label="Move to"
-                i18n-title="@@platformUploadCollection.Btn.MoveTo"
+                i18n-title="platformUploadCollection.Btn.MoveTo|Title attribute"
                 title="Move to"
             ></button>
             <button
@@ -107,9 +107,9 @@
                 [compact]="true"
                 [disabled]="disabled"
                 *ngIf="_showIfSelectedOnlyFiles()"
-                i18n-label="@@platformUploadCollection.Btn.Download"
+                i18n-label="platformUploadCollection.Btn.Download"
                 label="Download"
-                i18n-title="@@platformUploadCollection.Btn.Download"
+                i18n-title="platformUploadCollection.Btn.Download|Title attribute"
                 title="Download"
             ></button>
             <button
@@ -119,9 +119,9 @@
                 [compact]="true"
                 fdType="ghost"
                 [disabled]="disabled"
-                i18n-label="@@platformUploadCollection.Btn.Remove"
+                i18n-label="platformUploadCollection.Btn.Remove"
                 label="Remove"
-                i18n-title="@@platformUploadCollection.Btn.Remove"
+                i18n-title="platformUploadCollection.Btn.Remove|Title attribute"
                 title="Remove"
             ></button>
         </ng-container>
@@ -244,9 +244,9 @@
                             <div class="fdp-upload-collection__actions--status">
                                 <button
                                     fd-button
-                                    i18n-label="@@platformUploadCollection.Btn.Run"
+                                    i18n-label="platformUploadCollection.Btn.Run"
                                     label="Run"
-                                    i18n-title="@@platformUploadCollection.Btn.Run"
+                                    i18n-title="platformUploadCollection.Btn.Run|Title attribute"
                                     title="Run"
                                     (click)="_runUploadNewFileAfterFail(item)"
                                     [compact]="true"
@@ -257,9 +257,9 @@
 
                                 <button
                                     fd-button
-                                    i18n-label="@@platformUploadCollection.Btn.Cancel"
+                                    i18n-label="platformUploadCollection.Btn.Cancel"
                                     label="Cancel"
-                                    i18n-title="@@platformUploadCollection.Btn.Cancel"
+                                    i18n-title="platformUploadCollection.Btn.Cancel|Title attribute"
                                     title="Cancel"
                                     fdType="negative"
                                     [compact]="true"
@@ -357,21 +357,21 @@
 <fdp-menu #menuActions xPosition="before" contentDensity="compact">
     <fdp-menu-item (itemSelect)="_moveToClicked()">
         <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
-        <span i18n="@@platformUploadCollection.Btn.MoveTo">Move to</span>
+        <span i18n="platformUploadCollection.Btn.MoveTo|Menu Action">Move to</span>
     </fdp-menu-item>
     <ng-container *ngIf="_activeItem?.type === 'file'">
         <fdp-menu-item (itemSelect)="_downloadClicked()">
             <fd-icon class="fdp-upload-collection__fd-icon" glyph="download"></fd-icon>
-            <span i18n="@@platformUploadCollection.Btn.Download">Download</span>
+            <span i18n="platformUploadCollection.Btn.Download|Menu Action">Download</span>
         </fdp-menu-item>
         <fdp-menu-item (itemSelect)="_openUpdateFileVersion()">
             <fd-icon class="fdp-upload-collection__fd-icon" glyph="drill-up"></fd-icon>
-            <span i18n="@@platformUploadCollection.Btn.UpdateVersion">Update version</span>
+            <span i18n="platformUploadCollection.Btn.UpdateVersion|Menu Action">Update version</span>
         </fdp-menu-item>
     </ng-container>
     <fdp-menu-item (itemSelect)="_remove()">
         <fd-icon class="fdp-upload-collection__fd-icon" glyph="delete"></fd-icon>
-        <span i18n="@@platformUploadCollection.Btn.Remove">Remove</span>
+        <span i18n="platformUploadCollection.Btn.Remove|Menu Action">Remove</span>
     </fdp-menu-item>
 </fdp-menu>
 

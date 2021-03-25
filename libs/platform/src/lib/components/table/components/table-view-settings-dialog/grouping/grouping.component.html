@@ -24,11 +24,9 @@
             selection="true"
             compact="true"
         >
-            <li
-                fd-list-group-header
-                i18n="@@platformTableGroupDialogGroupOrderHeader"
-            >Group Order</li>
-
+            <li fd-list-group-header>
+                <span fd-list-title i18n="@@platformTableGroupDialogGroupOrderHeader">Group Order</span>
+            </li>
             <li
                 fd-list-item
                 [selected]="direction === SORT_DIRECTION.ASC"
@@ -70,10 +68,9 @@
             selection="true"
             compact="true"
         >
-            <li
-                fd-list-group-header
-                i18n="@@platformTableGroupDialogGroupByHeader"
-            >Group By</li>
+            <li fd-list-group-header>
+                <span fd-list-title i18n="@@platformTableGroupDialogGroupByHeader">Group By</span>
+            </li>
             <li
                 fd-list-item
                 [selected]="NOT_GROUPED_OPTION_VALUE === field"
