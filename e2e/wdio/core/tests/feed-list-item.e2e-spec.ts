@@ -45,10 +45,12 @@ import {
     overflowOptionFocusState, optionCancelExample, optionCancelHoverState, optionCancelActiveState,
 
 } from '../fixtures/testData/feed-list-item.tags';
+
 import { box, button, link, option, text, alertText } from '../fixtures/appData/feed-list-item-contents';
+
 describe('Feed list item test suite:', function() {
 
-    const feedListItemPage: FeedListItemPo = new FeedListItemPo();
+    const feedListItemPage = new FeedListItemPo();
     const { paragraphs, checkbox, linkMore, links, actionSettingsButton, menuButton, menuOption, overflowButton,
         overflowOption, optionCancel} = feedListItemPage;
 
@@ -61,7 +63,7 @@ describe('Feed list item test suite:', function() {
         waitForPresent(paragraphs);
     }, 1);
 
-        it('verify text ', () => {
+        it('verify alert text', () => {
             scrollIntoView(actionSettingsButton);
             click(actionSettingsButton);
             expect(alertText).toContain(getAlertText());
@@ -69,15 +71,20 @@ describe('Feed list item test suite:', function() {
 
     describe('Check visual regression', function() {
 
-        it('should check paragraphs visual regression', () => {
-            const paragraphsLength = getElementArrayLength(paragraphs)
+        it('should check basic visual regression', () => {
+            feedListItemPage.saveExampleBaselineScreenshot();
+            expect(feedListItemPage.compareWithBaseline()).toBeLessThan(1);
+        });
+
+        it('should check all paragraphs visual regression', () => {
+            const paragraphsLength = getElementArrayLength(paragraphs);
             for (let i = 0; i < paragraphsLength; i++) {
                     scrollIntoView(paragraphs, i);
                     checkElementHoverState(paragraphs, paragraphExample + paragraphHoverState + '-' + i, text, i);
             }
         });
 
-        it('should check visual regression', () => {
+        it('should check paragraphs with link more visual regression', () => {
 
             for (let i = 0; i < 5; i++) {
                 if (i === 3) {
@@ -138,15 +145,17 @@ describe('Feed list item test suite:', function() {
         it('should check links more and less hover state', () => {
             for (let i = 0; i < 5; i++) {
                 if (i === 3) {
-                    scrollIntoView(linkMore, i);
                     click(checkbox);
+                    scrollIntoView(linkMore, i);
                     checkElementHoverState(linkMore, linkMoreExample + linkMoreHoverState + '-' + i, link, i);
                     click(linkMore, i);
+                    scrollIntoView(linkMore, i);
                     checkElementHoverState(linkMore, linkLessExample + linkLessHoverState + '-' + i, link, i);
                 } else {
                     scrollIntoView(linkMore, i);
                     checkElementHoverState(linkMore, linkMoreExample + linkMoreHoverState + '-' + i, link, i);
                     click(linkMore, i);
+                    scrollIntoView(linkMore, i);
                     checkElementHoverState(linkMore, linkLessExample + linkLessHoverState + '-' + i, link, i);
                 }
             }
@@ -322,13 +331,13 @@ describe('Feed list item test suite:', function() {
 
         it('should check option cancel hover state', () => {
             scrollIntoView(overflowButton);
-            click(overflowButton)
+            click(overflowButton);
             checkElementHoverState(optionCancel, optionCancelExample + optionCancelHoverState + '0' , option);
         });
 
         it('should check option cancel active state', () => {
             scrollIntoView(overflowButton);
-            click(overflowButton)
+            click(overflowButton);
             checkElementActiveState(optionCancel, optionCancelExample + optionCancelActiveState + '1' , option);
         });
 
@@ -339,21 +348,21 @@ describe('Feed list item test suite:', function() {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag, feedListItemPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag, feedListItemPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button hover state mismatch`);
+            .toBeLessThan(2, `${elementName} element hover state mismatch`);
     }
 
-    function checkElementFocusState(selector: string, tag: string, btnName: string, index: number = 0): void {
+    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag, feedListItemPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag, feedListItemPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${btnName} button focus state mismatch`);
+            .toBeLessThan(2, `${elementName} element focus state mismatch`);
     }
 
-    function checkElementActiveState(selector: string, tag: string, btnName: string, index: number = 0): void {
+    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag, feedListItemPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag, feedListItemPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${btnName} button item ${index} active state mismatch`);
+            .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
     }
 });
 

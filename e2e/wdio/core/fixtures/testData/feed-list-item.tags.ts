@@ -1,9 +1,7 @@
 import { getImageTagBrowserPlatform } from '../../../driver/wdio';
-
 const prefix = 'feed-list-item-core-';
-export const paragraphExample = prefix + 'paragraph-example-'
-export const paragraphExtendsExample = prefix + 'paragraph-extends-example-'
-export const linkExample = prefix + 'link-example-'
+export const paragraphExample = prefix + 'paragraph-example-';
+export const linkExample = prefix + 'link-example-';
 export const linkMoreExample = prefix + 'link-more-example-';
 export const linkLessExample = prefix + 'link-less-example-';
 export const checkboxExample = prefix + 'checkbox-example-';
@@ -21,7 +19,7 @@ export const linkLessHoverState = 'link-less-hover-state-' + getImageTagBrowserP
 export const checkboxHoverState = 'checkbox-hover-state-' + getImageTagBrowserPlatform();
 export const actionSettingsButtonHoverState = 'action-settings-button-hover-state-' + getImageTagBrowserPlatform();
 export const menuButtonHoverState = 'menu-button-hover-state-' + getImageTagBrowserPlatform();
-export const menuOptionHoverState = 'menu-option-hover-state-' + getImageTagBrowserPlatform()
+export const menuOptionHoverState = 'menu-option-hover-state-' + getImageTagBrowserPlatform();
 export const overflowButtonHoverState = 'overflow-button-hover-state-' + getImageTagBrowserPlatform();
 export const overflowOptionHoverState = 'overflow-option-hover-state-' + getImageTagBrowserPlatform();
 export const optionCancelHoverState = 'option-cancel-hover-state' + getImageTagBrowserPlatform();
@@ -36,9 +34,6 @@ export const overflowButtonActiveState = 'overflow-button-active-state-' + getIm
 export const overflowOptionActiveState = 'overflow-option-active-state-' + getImageTagBrowserPlatform();
 export const optionCancelActiveState = 'option-cancel-active-state' + getImageTagBrowserPlatform();
 export const linkFocusState = 'link-focus-state-' + getImageTagBrowserPlatform();
-export const actionSettingsButtonFocusState = 'action-settings-button-focus-state-' + getImageTagBrowserPlatform();
 export const menuButtonFocusState = 'menu-button-focus-state' + getImageTagBrowserPlatform();
-export const menuOptionFocusState = 'menu-option-focus-state-' + getImageTagBrowserPlatform();
 export const overflowButtonFocusState = 'overflow-button-focus-state-' + getImageTagBrowserPlatform();
 export const overflowOptionFocusState = 'overflow-option-focus-state-' + getImageTagBrowserPlatform();
-export const optionCancelFocusState = 'option-cancel-focus-state' + getImageTagBrowserPlatform();

@@ -12,8 +12,9 @@ export class FeedListItemPo extends CoreBaseComponentPo {
     menuButton = 'button[glyph="menu"]';
     menuOption = '.fd-menu__link';
     overflowButton = '.fd-button--standard.fd-button--compact';
-    overflowOption = '.fd-button--transparent.fd-button--text-alignment-left'
+    overflowOption = '.fd-button--transparent.fd-button--text-alignment-left';
     optionCancel = '.fd-button--negative';
+
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);
     }
