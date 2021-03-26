@@ -22,4 +22,15 @@
             }
         }
     }
+
+    .change-value {
+        padding-left: 10%;
+
+        @at-root {
+            [dir='rtl'] & {
+                padding-left: inherit;
+                padding-right: 10%;
+            }
+        }
+    }
 }
