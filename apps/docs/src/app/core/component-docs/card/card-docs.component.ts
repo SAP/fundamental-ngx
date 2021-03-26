@@ -19,17 +19,23 @@ import * as cardBarHtml from '!raw-loader!./examples/bar-chart-list-card/card-ba
 import * as cardBarScss from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.scss';
 import * as cardObjectTs from '!raw-loader!./examples/object-card/card-object-example.component.ts';
 import * as cardObjectHtml from '!raw-loader!./examples/object-card/card-object-example.component.html';
-import * as cardCalendarTs from '!raw-loader!./examples/calendar-card/card-calendar-example.component.html';
+import * as cardCalendarTs from '!raw-loader!./examples/calendar-card/card-calendar-example.component.ts';
 import * as cardCalendarHtml from '!raw-loader!./examples/calendar-card/card-calendar-example.component.html';
 
-import * as cardQuickViewTs from '!raw-loader!./examples/quick-view-card/card-quick-view-example.component.html';
+import * as cardQuickViewTs from '!raw-loader!./examples/quick-view-card/card-quick-view-example.component.ts';
 import * as cardQuickViewHtml from '!raw-loader!./examples/quick-view-card/card-quick-view-example.component.html';
 
-import * as cardListTs from '!raw-loader!./examples/list-card/card-list-example.component.html';
+import * as cardListTs from '!raw-loader!./examples/list-card/card-list-example.component.ts';
 import * as cardListHtml from '!raw-loader!./examples/list-card/card-list-example.component.html';
 
-import * as cardLinkListTs from '!raw-loader!./examples/link-list-card/card-link-list-example.component.html';
+import * as cardLinkListTs from '!raw-loader!./examples/link-list-card/card-link-list-example.component.ts';
 import * as cardLinkListHtml from '!raw-loader!./examples/link-list-card/card-link-list-example.component.html';
+
+import * as cardLinkListCarouselTs from '!raw-loader!./examples/link-list-card/card-link-list-carousel-example.component.ts';
+import * as cardLinkListCarouselHtml from '!raw-loader!./examples/link-list-card/card-link-list-carousel-example.component.html';
+
+import * as cardQuickLinkListTs from '!raw-loader!./examples/link-list-card/card-quick-link-list-example.component.ts';
+import * as cardQuickLinkListHtml from '!raw-loader!./examples/link-list-card/card-quick-link-list-example.component.html';
 
 @Component({
     templateUrl: './card-docs.component.html'
@@ -210,6 +216,34 @@ export class CardDocsComponent {
             language: 'html',
             code: cardLinkListHtml,
             fileName: 'card-link-list-example'
+        }
+    ];
+
+    linkListCarouselCard: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: cardLinkListCarouselTs,
+            fileName: 'card-link-list-carousel-example',
+            component: 'CardLinkListCarouselExampleComponent'
+        },
+        {
+            language: 'html',
+            code: cardLinkListCarouselHtml,
+            fileName: 'card-link-list-carousel-example'
+        }
+    ];
+
+    quickLnkListCard: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: cardQuickLinkListTs,
+            fileName: 'card-quick-link-list-carousel-example',
+            component: 'CardQuickLinkListCarouselExampleComponent'
+        },
+        {
+            language: 'html',
+            code: cardQuickLinkListHtml,
+            fileName: 'card-quick-link-list-carousel-example'
         }
     ];
 }

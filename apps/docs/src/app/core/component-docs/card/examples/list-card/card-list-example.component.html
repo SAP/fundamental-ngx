@@ -47,3 +47,49 @@
         </ul>
     </fd-card-content>
 </fd-card>
+
+<br />
+<br />
+
+<fd-card>
+    <fd-card-header>
+        <h2 fd-card-title>Spend Year-to-Date</h2>
+        <h3 fd-card-subtitle>Percentage change compared to last year</h3>
+        <span fd-card-counter>4 of 7</span>
+    </fd-card-header>
+    <fd-card-content>
+        <ul fd-list>
+            <li fd-list-item>
+                <fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue">
+                    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
+                </fd-select>
+            </li>
+        </ul>
+        <ul class="fd-list fd-list--byline" tabindex="0">
+            <li fd-list-item>
+                <div fd-list-content>
+                    <div fd-list-title>Delbont Industries</div>
+                    <fd-card-bar [value]="91" [displayChange]="true" [change]="4"></fd-card-bar>
+                </div>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <span fd-list-title> Anav Ideon </span>
+                    <fd-card-bar [value]="52" color="#da5a1b" [displayChange]="true" [change]="3"></fd-card-bar>
+                </div>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <span fd-list-title> Brazil Technologies </span>
+                    <fd-card-bar [value]="23" color="#c67a0c" [displayChange]="true" [change]="2"></fd-card-bar>
+                </div>
+            </li>
+            <li fd-list-item>
+                <div fd-list-content>
+                    <span fd-list-title> Lorent </span>
+                    <fd-card-bar [value]="21" color="#358a4d" [displayChange]="true" [change]="1"></fd-card-bar>
+                </div>
+            </li>
+        </ul>
+    </fd-card-content>
+</fd-card>
