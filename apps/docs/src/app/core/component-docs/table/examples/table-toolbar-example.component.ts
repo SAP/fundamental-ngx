@@ -12,6 +12,7 @@ export class TableToolbarExampleComponent implements OnInit {
     searchTerm = '';
     confirmationReason: string;
     myForm: FormGroup;
+    loading = false;
 
     constructor(private _dialogService: DialogService, private _fb: FormBuilder) {}
 

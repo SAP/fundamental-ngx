@@ -57,17 +57,13 @@ export class TextDocsComponent {
         {
             language: 'html',
             code: textHyphenationHtml,
-            fileName: 'text-hyphenation'
+            fileName: 'text-hyphenation',
+            scssFileCode: textHyphenationScss
         },
         {
             language: 'typescript',
             code: textHyphenationTs,
             component: 'TextHyphenationComponent',
-            fileName: 'text-hyphenation'
-        },
-        {
-            language: 'scss',
-            code: textHyphenationScss,
             fileName: 'text-hyphenation'
         }
     ];

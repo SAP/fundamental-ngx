@@ -11,7 +11,7 @@ export class SliderPo extends BaseComponentPo {
     ticksAndLabelsExamples = 'fdp-slider-ticks-and-labels-example ';
     customExamples = 'fdp-slider-custom-values-example ';
     rangeExamples = 'fdp-slider-range-example ';
-    formFieldExamples = 'fdp-slider-form-field-example '
+    formFieldExamples = 'fdp-slider-form-field-example ';
     disabledExamples = 'fdp-slider-disabled-example ';
     cozyExamples = 'fdp-slider-cozy-example ';
     playgroundExamples = 'playground ';
@@ -42,5 +42,17 @@ export class SliderPo extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.title);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'slider'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'slider'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

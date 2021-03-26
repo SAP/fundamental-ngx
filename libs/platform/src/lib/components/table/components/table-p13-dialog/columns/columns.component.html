@@ -53,9 +53,9 @@
                 [compact]="true"
                 [disabled]="_moveUpDisabled"
                 aria-label="Move to Top"
-                i18n-aria-label="@@platformTableP13ColumnsDialogMoveToTop"
+                i18n-aria-label="platformTableP13ColumnsDialogMoveToTopBtn|Button aria-label attribute"
                 title="Move to Top"
-                i18n-title="@@platformTableP13ColumnsDialogMoveToTop"
+                i18n-title="platformTableP13ColumnsDialogMoveToTopBtn|Button title attribute"
                 (click)="_moveActiveToTop()"
             ></button>
 
@@ -67,9 +67,9 @@
                 [compact]="true"
                 [disabled]="_moveUpDisabled"
                 aria-label="Move Up"
-                i18n-aria-label="@@platformTableP13ColumnsDialogMoveUp"
+                i18n-aria-label="platformTableP13ColumnsDialogMoveUpBtn|Button title attribute"
                 title="Move Up"
-                i18n-title="@@platformTableP13ColumnsDialogMoveUp"
+                i18n-title="platformTableP13ColumnsDialogMoveUpBtn|Button title attribute"
                 (click)="_moveActiveUp()"
             ></button>
 
@@ -81,9 +81,9 @@
                 [compact]="true"
                 [disabled]="_moveDownDisabled"
                 aria-label="Move Down"
-                i18n-aria-label="@@platformTableP13ColumnsDialogMoveDown"
+                i18n-aria-label="platformTableP13ColumnsDialogMoveDownBtn|Button aria-label attribute"
                 title="Move Down"
-                i18n-title="@@platformTableP13ColumnsDialogMoveDown"
+                i18n-title="platformTableP13ColumnsDialogMoveDownBtn|Button title attribute"
                 (click)="_moveActiveDown()"
             ></button>
 
@@ -95,9 +95,9 @@
                 [compact]="true"
                 [disabled]="_moveDownDisabled"
                 aria-label="Move to Bottom"
-                i18n-aria-label="@@platformTableP13ColumnsDialogMoveToBottom"
+                i18n-aria-label="platformTableP13ColumnsDialogMoveToBottomBtn|Button aria-label attribute"
                 title="Move to Bottom"
-                i18n-title="@@platformTableP13ColumnsDialogMoveToBottom"
+                i18n-title="platformTableP13ColumnsDialogMoveToBottomBtn|Btn title attribute"
                 (click)="_moveActiveToBottom()"
             ></button>
         </fd-toolbar>
@@ -115,7 +115,7 @@
                 ></fd-checkbox>
                 <span
                     fd-list-title
-                    i18n="@@platformTableP13ColumnsDialogSelectAll"
+                    i18n="@@platformTableP13ColumnsDialogSelectAll|Select All checkbox"
                 >
                     Select All ({{_selectedColumnsCount}}/{{_selectableColumns.length}})
                 </span>
@@ -146,7 +146,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableDialogButtonOK"
+                i18n-label="@@platformTableP13ColumnsDialogConfirmationBtn"
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
@@ -160,7 +160,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableDialogButtonCancel"
+                i18n-label="@@platformTableP13ColumnsDialogCancelBtn"
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"

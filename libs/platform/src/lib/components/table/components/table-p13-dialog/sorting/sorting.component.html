@@ -30,7 +30,7 @@
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
                 [compact]="true"
                 placeholder="(none)"
-                i18n-placeholder="@@platformTableP13SortDialogNoneSelected"
+                i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >
                 <fd-option
                     *ngFor="let column of columns"
@@ -46,17 +46,17 @@
                 (valueChange)="_onRuleDirectionChange(rule, $event)"
                 [compact]="true"
                 placeholder="(none)"
-                i18n-placeholder="@@platformTableP13SortDialogNoneSelected"
+                i18n-placeholder="@@platformTableP13SortDialogNoneSelectedSorting|Sorting select placeholder"
             >
                 <fd-option
                     [value]="SORT_DIRECTION.ASC"
-                    i18n="@@platformTableSortDialogSortOrderAsc"
+                    i18n="@@platformTableP13SortDialogSortOrderAsc"
                 >
                     Ascending
                 </fd-option>
                 <fd-option
                     [value]="SORT_DIRECTION.DESC"
-                    i18n="@@platformTableSortDialogSortOrderDesc"
+                    i18n="@@platformTableP13SortDialogSortOrderDesc"
                 >
                     Descending
                 </fd-option>
@@ -68,9 +68,9 @@
                     fdType="transparent"
                     glyph="sys-cancel"
                     [compact]="true"
-                    i18n-aria-label="@@platformTableP13SortDialogRemoveSort"
+                    i18n-aria-label="platformTableP13SortDialogRemoveSort|Remove btn aria-label attribute"
                     aria-label="Remove"
-                    i18n-title="@@platformTableP13SortDialogRemoveSort"
+                    i18n-title="platformTableP13SortDialogRemoveSort|Remove btn title attribute"
                     title="Remove"
                     (click)="_removeRule(rule)"
                 ></button>
@@ -80,9 +80,9 @@
                     fdType="transparent"
                     glyph="add"
                     [compact]="true"
-                    i18n-aria-label="@@platformTableP13SortDialogAddNewSort"
+                    i18n-aria-label="platformTableP13SortDialogAddNewSort|Add New btn aria-label attribute"
                     aria-label="Add new"
-                    i18n-title="@@platformTableP13SortDialogAddNewSort"
+                    i18n-title="platformTableP13SortDialogAddNewSort|Add New btn title attribute"
                     title="Add new"
                     (click)="_addNew(i)"
                 ></button>
@@ -98,7 +98,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableDialogButtonOK"
+                i18n-label="@@platformTableP13SortDialogConfirmationBtn"
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
@@ -112,7 +112,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableDialogButtonCancel"
+                i18n-label="@@platformTableP13SortDialogCancelBtn"
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"
