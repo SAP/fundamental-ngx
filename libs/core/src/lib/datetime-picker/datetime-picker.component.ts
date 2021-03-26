@@ -89,7 +89,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /** Id attribute for input element inside DateTimePicker component */
     @Input()
-    inputId = '';
+    inputId: string;
 
     /**
      * Whether the time component should be meridian (am/pm).
