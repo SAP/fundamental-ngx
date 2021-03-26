@@ -42,21 +42,21 @@ import {
 
 import {
     activeButtonDatePickerActiveState,
-    activeButtonDatePickerExample,
+    activeBtnDatePicker,
     activeButtonDatePickerFocusState,
     activeButtonDatePickerHoverState,
     activeDivDatePickerActiveState,
-    activeDivDatePickerExample,
+    activeDivDatePicker,
     activeDivDatePickerFocusState,
     activeDivDatePickerHoverState, buttonBulgarianActiveState,
-    buttonBulgarianExample, buttonBulgarianFocusState,
+    bulgarianButton, buttonBulgarianFocusState,
     buttonBulgarianHoverState,
     buttonFrenchActiveState,
-    buttonFrenchExample,
+    frenchButton,
     buttonFrenchFocusState,
     buttonFrenchHoverState,
     buttonGermanActiveState,
-    buttonGermanExample, buttonGermanFocusState,
+    germanButton, buttonGermanFocusState,
     buttonGermanHoverState
 } from '../fixtures/testData/date-picker-tags';
 
@@ -82,11 +82,11 @@ describe('Date picker suite', function() {
     it('Verify in all the form factor user is able to see the date picker button and input field ', () => {
         const buttonsLength = getElementArrayLength(buttonDatePicker);
         const inputsLength = getElementArrayLength(inputDatePicker);
-        expect(buttonsLength).toEqual(inputsLength);
         for (let i = 1; i < buttonsLength; i++) {
             waitForElDisplayed(buttonDatePicker);
             waitForElDisplayed(inputDatePicker);
         }
+        expect(buttonsLength).toEqual(inputsLength);
     });
 
     it('Verify on click on the date picker button date-picker', () => {
@@ -116,13 +116,12 @@ describe('Date picker suite', function() {
         for (let i = 0; i < activeButtonsLength; i++) {
             if (i === 8) {
                 continue;
-            } else {
+            }
                 sendKeys(['Escape']);
                 scrollIntoView(activeButtonDatePicker, i);
                 click(activeButtonDatePicker, i);
                 waitForElDisplayed(calendarExpanded);
                 expect(getText(currentDay)).toBe(new Date().getDate().toString());
-            }
         }
     });
 
@@ -310,7 +309,7 @@ describe('Date picker suite', function() {
         }
     });
 
-    describe('Check visual regression', function() {
+    fdescribe('Check visual regression', function() {
 
         // skipped for now due to the issue with selected date for disabled components
         xit('should check examples visual regression', () => {
@@ -318,12 +317,21 @@ describe('Date picker suite', function() {
             expect(datePickerPage.compareWithBaseline()).toBeLessThan(1);
         });
 
+        it('should check active button active state', () => {
+            const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
+            for (let i = 0; i < activeButtonDatePickerLength; i++) {
+                scrollIntoView(activeButtonDatePicker, i);
+                checkElementActiveState(activeButtonDatePicker, activeBtnDatePicker + activeButtonDatePickerActiveState
+                    + '-' + i, button, i);
+            }
+        });
+
         it('should check active input hover state', () => {
             const activeDatePickerLength = getElementArrayLength(activeDatePicker);
             for (let i = 0; i < activeDatePickerLength; i++) {
                 scrollIntoView(activeDatePicker, i);
                 clearValue(activeInputDatePicker, i);
-                checkElementHoverState(activeDatePicker, activeDivDatePickerExample + activeDivDatePickerHoverState
+                checkElementHoverState(activeDatePicker, activeDivDatePicker + activeDivDatePickerHoverState
                     + '-' + i, input, i);
             }
         });
@@ -333,7 +341,7 @@ describe('Date picker suite', function() {
             for (let i = 0; i < activeDatePickerLength; i++) {
                 scrollIntoView(activeDatePicker, i);
                 clearValue(activeInputDatePicker, i);
-                checkElementActiveState(activeDatePicker, activeDivDatePickerExample + activeDivDatePickerActiveState
+                checkElementActiveState(activeDatePicker, activeDivDatePicker + activeDivDatePickerActiveState
                     + '-' + i, input, i);
             }
         });
@@ -343,7 +351,7 @@ describe('Date picker suite', function() {
             for (let i = 0; i < activeDatePickerLength; i++) {
                 scrollIntoView(activeDatePicker, i);
                 clearValue(activeInputDatePicker, i);
-                checkElementFocusState(activeDatePicker, activeDivDatePickerExample + activeDivDatePickerFocusState
+                checkElementFocusState(activeDatePicker, activeDivDatePicker + activeDivDatePickerFocusState
                     + '-' + i, input, i);
             }
         });
@@ -352,25 +360,17 @@ describe('Date picker suite', function() {
             const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
             for (let i = 0; i < activeButtonDatePickerLength; i++) {
                 scrollIntoView(activeButtonDatePicker, i);
-                checkElementHoverState(activeButtonDatePicker, activeButtonDatePickerExample + activeButtonDatePickerHoverState
+                checkElementHoverState(activeButtonDatePicker, activeBtnDatePicker + activeButtonDatePickerHoverState
                     + '-' + i, button, i);
             }
         });
 
-        it('should check active button active state', () => {
-            const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
-            for (let i = 0; i < activeButtonDatePickerLength; i++) {
-                scrollIntoView(activeButtonDatePicker, i);
-                checkElementActiveState(activeButtonDatePicker, activeButtonDatePickerExample + activeButtonDatePickerActiveState
-                    + '-' + i, button, i);
-            }
-        });
 
         it('should check active button focus state', () => {
             const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
             for (let i = 0; i < activeButtonDatePickerLength; i++) {
                 scrollIntoView(activeButtonDatePicker, i);
-                checkElementFocusState(activeButtonDatePicker, activeButtonDatePickerExample + activeButtonDatePickerFocusState
+                checkElementFocusState(activeButtonDatePicker, activeBtnDatePicker + activeButtonDatePickerFocusState
                     + '-' + i, button, i);
                 click(activeButtonDatePicker, i);
             }
@@ -378,47 +378,47 @@ describe('Date picker suite', function() {
 
         it('should check french button hover state', () => {
                 scrollIntoView(buttonFrench);
-                checkElementHoverState(buttonFrench, buttonFrenchExample + buttonFrenchHoverState, button);
+                checkElementHoverState(buttonFrench, frenchButton + buttonFrenchHoverState, button);
         });
 
         it('should check french button active state', () => {
                 scrollIntoView(buttonFrench);
-                checkElementActiveState(buttonFrench, buttonFrenchExample + buttonFrenchActiveState, button);
+                checkElementActiveState(buttonFrench, frenchButton + buttonFrenchActiveState, button);
         });
 
         it('should check french button focus state', () => {
             scrollIntoView(buttonFrench);
-            checkElementFocusState(buttonFrench, buttonFrenchExample + buttonFrenchFocusState, button);
+            checkElementFocusState(buttonFrench, frenchButton + buttonFrenchFocusState, button);
         });
 
         it('should check german button hover state', () => {
             scrollIntoView(buttonGerman);
-            checkElementHoverState(buttonGerman, buttonGermanExample + buttonGermanHoverState, button);
+            checkElementHoverState(buttonGerman, germanButton + buttonGermanHoverState, button);
         });
 
         it('should check german button active state', () => {
             scrollIntoView(buttonGerman);
-            checkElementActiveState(buttonGerman, buttonGermanExample + buttonGermanActiveState, button);
+            checkElementActiveState(buttonGerman, germanButton + buttonGermanActiveState, button);
         });
 
         it('should check german button focus state', () => {
             scrollIntoView(buttonGerman);
-            checkElementFocusState(buttonGerman, buttonGermanExample + buttonGermanFocusState, button);
+            checkElementFocusState(buttonGerman, germanButton + buttonGermanFocusState, button);
         });
 
         it('should check bulgarian button hover state', () => {
             scrollIntoView(buttonBulgarian);
-            checkElementHoverState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianHoverState, button);
+            checkElementHoverState(buttonBulgarian, bulgarianButton + buttonBulgarianHoverState, button);
         });
 
         it('should check bulgarian button active state', () => {
             scrollIntoView(buttonBulgarian);
-            checkElementActiveState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianActiveState, button);
+            checkElementActiveState(buttonBulgarian, bulgarianButton + buttonBulgarianActiveState, button);
         });
 
         it('should check bulgarian button focus state', () => {
             scrollIntoView(buttonBulgarian);
-            checkElementFocusState(buttonBulgarian, buttonBulgarianExample + buttonBulgarianFocusState, button);
+            checkElementFocusState(buttonBulgarian, bulgarianButton + buttonBulgarianFocusState, button);
         });
     });
 
