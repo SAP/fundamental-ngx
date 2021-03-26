@@ -153,30 +153,31 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
 
     /** Method called, when element is released */
     dragEnd(draggedItemIndex: number): void {
+        const items = this.items.slice();
         const replacedItemIndex = this._closestItemIndex;
-        const draggedItem = this.items[draggedItemIndex];
+        const draggedItem = items[draggedItemIndex];
 
         if (draggedItemIndex !== replacedItemIndex) {
             if (draggedItemIndex < replacedItemIndex) {
                 for (let i = draggedItemIndex; i < replacedItemIndex; i++) {
-                    this.items[i] = this.items[i + 1];
+                    items[i] = items[i + 1];
                 }
             } else {
                 for (let i = draggedItemIndex; i > replacedItemIndex; i--) {
-                    this.items[i] = this.items[i - 1];
+                    items[i] = items[i - 1];
                 }
             }
 
             /** Replacing items */
-            this.items[replacedItemIndex] = draggedItem;
+            items[replacedItemIndex] = draggedItem;
 
-            this.itemsChange.emit(this.items);
+            this.itemsChange.emit(items);
         }
 
         this.itemDropped.emit({
             replacedItemIndex: replacedItemIndex,
             draggedItemIndex: draggedItemIndex,
-            items: this.items
+            items: items
         });
 
         this._removeAllLines();

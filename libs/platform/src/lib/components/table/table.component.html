@@ -260,7 +260,7 @@
                     [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
                     [class.fd-table__body--no-vertical-borders]="noBodyBorders"
                     [tabIndex]="pageScrolling ? 0 : -1"
-                    [items]="_tableRows.slice()"
+                    [items]="_tableRows"
                     [draggable]="_rowsDraggable"
                     [replaceMode]="true"
                     (itemDropped)="_dragDropItemDrop($event)"

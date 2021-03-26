@@ -2,11 +2,15 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
+    forwardRef,
+    Host,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     SimpleChanges,
+    SkipSelf,
     TemplateRef
 } from '@angular/core';
 
@@ -52,7 +56,7 @@ enum ColumnAlignEnum {
     selector: 'fdp-column',
     template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: TableColumn, useExisting: TableColumnComponent }, TableService]
+    providers: [{ provide: TableColumn, useExisting: TableColumnComponent }]
 })
 export class TableColumnComponent extends TableColumn implements OnInit, OnChanges, OnDestroy {
     /** Column unique identifier. */
@@ -138,7 +142,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     private _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private readonly _rtlService: RtlService, private readonly _tableService: TableService) {
+    constructor(
+        private readonly _rtlService: RtlService,
+        @Optional() @SkipSelf() @Host() private readonly _tableService: TableService
+    ) {
         super();
     }
 
@@ -152,10 +159,11 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Table won't know about column properties update so notify about it manually
      * @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.sortable?.currentValue !== changes.sortable?.previousValue
+        if (this._tableService
+            && (changes.sortable?.currentValue !== changes.sortable?.previousValue
             || changes.filterable?.currentValue !== changes.filterable?.previousValue
             || changes.groupable?.currentValue !== changes.groupable?.previousValue
-            || changes.freezable?.currentValue !== changes.freezable?.previousValue
+            || changes.freezable?.currentValue !== changes.freezable?.previousValue)
         ) {
             this._tableService.markForCheck();
         }
@@ -198,7 +206,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
             )
             .subscribe((align) => {
                 this._align = align;
-                this._tableService.markForCheck();
+
+                if (this._tableService) {
+                    this._tableService.markForCheck();
+                }
             });
     }
 }

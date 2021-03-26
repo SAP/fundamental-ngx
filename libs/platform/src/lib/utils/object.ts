@@ -4,9 +4,10 @@ export function getNestedValue(key: string, object: any): any {
         .reduce((a, b, i, arr) => {
             // Break loop if we cannot dive inside
             if (!a[b]) {
-                arr.splice(1);
+                // Mutating original array will break reduce
+                arr.pop();
             }
 
-            return (a = a[b])
+            return (a = a[b]);
         }, object);
 }
