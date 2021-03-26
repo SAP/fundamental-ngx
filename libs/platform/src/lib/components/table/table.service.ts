@@ -23,7 +23,7 @@ export class TableService {
     readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
     readonly pageChange: EventEmitter<PageChange> = new EventEmitter<PageChange>();
 
-    /** @hidden */
+    /** Listen for changes in table subcomponents (mostly table column) */
     get markForCheck$(): Subject<void> {
         return this._markForCheck$;
     }
@@ -38,7 +38,7 @@ export class TableService {
         this._tableStateSubject$.next(state);
     }
 
-    /** @hidden */
+    /** Notify about changes in table subcomponents (mostly table column) */
     markForCheck(): void {
         this._markForCheck$.next();
     }

@@ -29,7 +29,8 @@ export {
     TableFilterChangeEvent,
     TableColumnsChangeEvent,
     TableSearchChangeEvent,
-    TableRowSelectionChangeEvent
+    TableRowSelectionChangeEvent,
+    TableRowToggleOpenStateEvent
 } from './models';
 
 export { TableDataSource, TableDataProvider, ArrayTableDataSource, ObservableTableDataSource } from './domain';

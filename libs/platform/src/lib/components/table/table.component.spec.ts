@@ -14,7 +14,7 @@ import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilt
 import { TableService } from './table.service';
 import { PlatformButtonModule } from '../button/public_api';
 import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
-import {TableScrollerDirective, TableScrollableDirective} from './directives';
+import { TableScrollerDirective, TableScrollableDirective} from './directives';
 
 interface SourceItem {
     id: string;
