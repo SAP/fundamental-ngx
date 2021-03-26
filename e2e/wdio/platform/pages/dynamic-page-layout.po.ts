@@ -16,6 +16,7 @@ export class DynamicPageLayoutPo extends BaseComponentPo {
     dynamicPageContentEnd = 'fdp-dynamic-page-content-host .footer-spacer';
     dynamicPageTitle = '.fd-dynamic-page__title-container';
     dynamicPageToolBar = '.fd-dynamic-page__toolbar';
+    dynamicPageToolBarContainer = '.fd-dynamic-page__toolbar-container';
     dynamicPageTabs = '.fd-dynamic-page__tabs--overflow .fd-tabs__item';
     dynamicPageTabsContent = 'fdp-dynamic-page-content-host';
     dynamicPageToolBarAccept = this.dynamicPageToolBar + ' .fd-button--positive';

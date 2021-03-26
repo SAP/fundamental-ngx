@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 import { BreadcrumbComponent, FacetComponent } from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';

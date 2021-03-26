@@ -85,5 +85,9 @@
 			background-color: var(--fdDynamicPage_Content_List_Background, var(--sapGroup_ContentBackground, #fff));
 		}
 	}
+
+  .fd-dynamic-page__title-subtitle-container {
+    flex: 1;
+  }
  }
  /* #endregion */

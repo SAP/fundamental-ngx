@@ -6,6 +6,7 @@ import { By } from '@angular/platform-browser';
 import { DynamicPageHeaderInternalComponent } from './dynamic-page-header-internal.component';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { ViewportRuler } from '@angular/cdk/scrolling';
+import { AvatarModule, FacetModule } from '@fundamental-ngx/core';
 
 @Component({
     template: `
