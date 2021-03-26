@@ -6,3 +6,6 @@
     ></div>
 </div>
 <div class="value">{{ value }}%</div>
+<ng-container *ngIf="displayChange">
+    <div class="change-value">{{ change }}%</div>
+</ng-container>
