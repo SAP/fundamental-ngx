@@ -44,8 +44,7 @@ import { FilterPipe } from './core-helpers/pipes/filter.pipe';
         SectionsToolbarComponent,
         SortByPipe,
         FilterPipe
-    ],
-    providers: [ContentDensityService]
+    ]
 })
 export class SharedDocumentationModule {
 }

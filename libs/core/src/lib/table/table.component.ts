@@ -1,6 +1,7 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     HostBinding,
     Input, OnDestroy,
@@ -9,7 +10,7 @@ import {
 } from '@angular/core';
 import { TableService } from './table.service';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '../utils/services/content-density.service';
 
 /**
  * The component that represents a table.
@@ -51,7 +52,7 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
     /** Whether or not to display the table in condensed mode */
     @HostBinding('class.fd-table--condensed')
     @Input()
-    condensed = false;
+    condensed?: boolean;
 
     /** Whether or not to display the table in pop in mode, it also require change of markup */
     @HostBinding('class.fd-table--pop-in')
@@ -72,15 +73,18 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
 
     constructor (
         private _tableService: TableService,
+        private _cdr: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
+        if (this.compact === undefined && this.condensed === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-            }))
+                this.compact = density === 'compact';
+                this.condensed = density === 'condensed';
+                this._cdr.detectChanges();
+            }));
         }
     }
 

@@ -71,9 +71,9 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
     constructor(protected _cd: ChangeDetectorRef) {
         const injector = PlatformConfig.getInjector();
-        this._contentDensityService = injector.get(ContentDensityService);
-        this._router = injector.get(Router);
-        this._router.events.subscribe(event => {
+        this._contentDensityService = injector?.get(ContentDensityService);
+        this._router = injector?.get(Router);
+        this._router?.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this._setupDensitySubscriptions();
             }
