@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.55) (2021-03-26)
+
+
+### Features
+
+* (Core) Avatar Group component ([#4859](https://github.com/SAP/fundamental-ngx/issues/4859)) ([bce277f](https://github.com/SAP/fundamental-ngx/commit/bce277f2552c3fadb8879d5c510b470f9b751b98))
+
+
+### Bug Fixes
+
+* (core) added text component fixes for ie11 ([#4999](https://github.com/SAP/fundamental-ngx/issues/4999)) ([707ce45](https://github.com/SAP/fundamental-ngx/commit/707ce452e3fe47241439172f6e1424dfa648a61b))
+* (core) chaged text examples selectors to fix stackblitz ([#5000](https://github.com/SAP/fundamental-ngx/issues/5000)) ([1b0e83e](https://github.com/SAP/fundamental-ngx/commit/1b0e83e17529f30b93f6aefbea29c7c015e397ce))
+
 ## [0.29.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.54) (2021-03-25)
 
 
