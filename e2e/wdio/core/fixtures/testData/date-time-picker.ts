@@ -1,10 +1,10 @@
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
-export const currentDay = new Date().getDate();
 const monthName = new Date().toLocaleString('default', { month: 'short' });
 const currentMonthWithZero = ('0' + `${currentMonth}`).slice(-2);
+export const currentDay = new Date().getDate();
 export const text = 'test';
-export const button = 'button';
+export const btn = 'button';
 export const input = 'input';
 export const i18n = [
     'en-ca',
@@ -15,8 +15,8 @@ export const i18n = [
 ];
 export const year2030 = 2030;
 export const highlightedColor = ['rgb(8,84,160)', 'rgba(8,84,160,1)'];
-export const date = `${currentMonth}/1/${currentYear}, 11:01 PM`;
-export const date2 = `${currentMonth}/${currentDay}/${currentYear}, 11:01 PM`;
+export const date = `${currentMonth}/1/${currentYear}, 1:01 PM`;
+export const date2 = `${currentMonth}/${currentDay}/${currentYear}, 1:01 PM`;
 export const date3 = '10/5/2018, 3:30 PM';
 export const date4 = `${monthName} ${currentDay}, ${currentYear}, 01:01`;
 export const dates = [

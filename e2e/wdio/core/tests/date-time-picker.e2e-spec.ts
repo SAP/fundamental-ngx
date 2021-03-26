@@ -18,22 +18,22 @@ import {
 } from '../../driver/wdio';
 import {
     buttonActiveState,
-    buttonExample,
+    button,
     buttonFocusState,
     buttonHoverState,
     inputFieldActiveState,
-    inputFieldExample,
+    inputField,
     inputFieldFocusState,
     inputFieldHoverState,
-    buttonChangeExample,
+    changeButton,
     buttonChangeHoverState,
     buttonChangeActiveState,
     buttonChangeFocusState,
-    optionButtonExample,
+    buttonOption,
     optionButtonHoverState,
     optionButtonActiveState,
     optionButtonFocusState,
-    countryOptionExample
+    optionCountry
 } from '../fixtures/testData/date-time-picker-tags';
 import { DateTimePicker } from '../pages/date-time-picker.po';
 import {
@@ -47,7 +47,7 @@ import {
     dates,
     i18n,
     currentDay,
-    button,
+    btn,
     input
 } from '../fixtures/testData/date-time-picker';
 
@@ -81,7 +81,7 @@ describe('Datetime picker suite', function() {
         }
     });
 
-    it('verify on click on the date picker button', () => {
+    it('verify calendar by clicking on the date time picker button', () => {
         const activeButtonsLength = getElementArrayLength(activeDateTimePickerButton);
         for (let i = 1; i < activeButtonsLength; i++) {
             sendKeys(['Escape']);
@@ -162,8 +162,8 @@ describe('Datetime picker suite', function() {
     it('verify disabled date time picker', () => {
         const disabledButtonsArr = elementArray(disabledDateTimePickerButton);
         for (let i = 0; i < disabledButtonsArr.length; i++) {
-            expect(isElementClickable(disabledDateTimePickerButton)).toBe(false);
-            expect(isElementClickable(disabledDateTimePickerInput)).toBe(false);
+            expect(isElementClickable(disabledDateTimePickerButton, i)).toBe(false);
+            expect(isElementClickable(disabledDateTimePickerInput, i)).toBe(false);
         }
     });
 
@@ -204,7 +204,7 @@ describe('Datetime picker suite', function() {
         }
     });
 
-    it('verify simple datetime picker', () => {
+    it('verify simple datetime picker has correct default date', () => {
         click(activeDateTimePickerButton, 1);
         click(dayInCalendarButtonByValue(currentDay.toString()));
         selectHoursMinutesAndPeriod();
@@ -213,7 +213,7 @@ describe('Datetime picker suite', function() {
             .toEqual(date2);
     });
 
-    it('verify programmatic change datetime picker', () => {
+    it('verify programmatic change datetime picker has correct default date', () => {
         scrollIntoView(activeDateTimePickerButton, 2);
         click(activeDateTimePickerButton, 2);
         click(dayInCalendarButtonByValue(currentDay.toString()));
@@ -226,7 +226,7 @@ describe('Datetime picker suite', function() {
             .toEqual(date3);
     });
 
-    it('verify null validity datetime picker', () => {
+    it('verify null validity datetime picker has correct default date', () => {
         scrollIntoView(activeDateTimePickerButton, 3);
         click(activeDateTimePickerButton, 3);
         click(dayInCalendarButtonByValue(currentDay.toString()));
@@ -236,7 +236,7 @@ describe('Datetime picker suite', function() {
             .toEqual(date2);
     });
 
-    it('verify formatting datetime picker', () => {
+    it('verify formatting datetime picker has correct default date', () => {
         scrollIntoView(activeDateTimePickerButton, 4);
         click(activeDateTimePickerButton, 4);
         click(dayInCalendarButtonByValue(currentDay.toString()));
@@ -246,7 +246,7 @@ describe('Datetime picker suite', function() {
             .toEqual(date4);
     });
 
-    it('verify date time picker in reactive form', () => {
+    it('verify date time picker in reactive form has correct default date', () => {
         scrollIntoView(activeDateTimePickerButton, 5);
         click(activeDateTimePickerButton, 5);
         click(dayInCalendarButtonByValue(currentDay.toString()));
@@ -277,11 +277,11 @@ describe('Datetime picker suite', function() {
     });
 
 
-    describe('Check visual regression basic', function() {
+    describe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
             dateTimePickerPage.saveExampleBaselineScreenshot();
-            expect(dateTimePickerPage.compareWithBaseline()).toBeLessThan(1);
+            expect(dateTimePickerPage.compareWithBaseline()).toBeLessThan(4);
         });
 
         it('should check input fields hover state', () => {
@@ -289,7 +289,7 @@ describe('Datetime picker suite', function() {
             for (let i = 0; i < inputsLength; i++) {
                 scrollIntoView(activeDateTimePickerInput, i);
                 clearValue(activeDateTimePickerInput, i);
-                checkButtonHoverState(activeDateTimePickerInput, inputFieldExample + inputFieldHoverState + '-' + i,
+                checkButtonHoverState(activeDateTimePickerInput, inputField + inputFieldHoverState + '-' + i,
                     input, i);
             }
         });
@@ -299,7 +299,7 @@ describe('Datetime picker suite', function() {
             for (let i = 0; i < inputsLength; i++) {
                 scrollIntoView(activeDateTimePickerInput, i);
                 clearValue(activeDateTimePickerInput, i);
-                checkButtonActiveState(activeDateTimePickerInput, inputFieldExample + inputFieldActiveState + '-' + i,
+                checkButtonActiveState(activeDateTimePickerInput, inputField + inputFieldActiveState + '-' + i,
                     input, i);
             }
         });
@@ -309,7 +309,7 @@ describe('Datetime picker suite', function() {
             for (let i = 0; i < inputsLength; i++) {
                 scrollIntoView(activeDateTimePickerInput, i);
                 clearValue(activeDateTimePickerInput, i);
-                checkButtonFocusState(activeDateTimePickerInput, inputFieldExample + inputFieldFocusState + '-' + i,
+                checkButtonFocusState(activeDateTimePickerInput, inputField + inputFieldFocusState + '-' + i,
                     input, i);
             }
         });
@@ -318,8 +318,8 @@ describe('Datetime picker suite', function() {
             const buttonsLength = getElementArrayLength(activeDateTimePickerButton);
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(activeDateTimePickerButton, i);
-                checkButtonHoverState(activeDateTimePickerButton, buttonExample + buttonHoverState + '-' + i,
-                    button, i);
+                checkButtonHoverState(activeDateTimePickerButton, button + buttonHoverState + '-' + i,
+                    btn, i);
             }
         });
 
@@ -327,8 +327,8 @@ describe('Datetime picker suite', function() {
             const buttonsLength = getElementArrayLength(activeDateTimePickerButton);
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(activeDateTimePickerButton, i);
-                checkButtonActiveState(activeDateTimePickerButton, buttonExample + buttonActiveState + '-' + i,
-                    button, i);
+                checkButtonActiveState(activeDateTimePickerButton, button + buttonActiveState + '-' + i,
+                    btn, i);
             }
         });
 
@@ -336,48 +336,48 @@ describe('Datetime picker suite', function() {
             const buttonsLength = getElementArrayLength(activeDateTimePickerButton);
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(activeDateTimePickerButton, i);
-                checkButtonFocusState(activeDateTimePickerButton, buttonExample + buttonFocusState + '-' + i,
-                    button, i);
+                checkButtonFocusState(activeDateTimePickerButton, button + buttonFocusState + '-' + i,
+                    btn, i);
                 click(activeDateTimePickerButton, i);
             }
         });
 
         it('should check change button hover state', () => {
             scrollIntoView(buttonChange);
-            checkButtonHoverState(buttonChange, buttonChangeExample + buttonChangeHoverState, button);
+            checkButtonHoverState(buttonChange, changeButton + buttonChangeHoverState, btn);
         });
 
         it('should check change button active state', () => {
             scrollIntoView(buttonChange);
-            checkButtonActiveState(buttonChange, buttonChangeExample + buttonChangeActiveState, button);
+            checkButtonActiveState(buttonChange, changeButton + buttonChangeActiveState, btn);
         });
 
         it('should check change button focus state', () => {
             scrollIntoView(buttonChange);
-            checkButtonFocusState(buttonChange, buttonChangeExample + buttonChangeFocusState, button);
+            checkButtonFocusState(buttonChange, changeButton + buttonChangeFocusState, btn);
         });
 
         it('should check option button hover state', () => {
             scrollIntoView(optionButton);
-            checkButtonHoverState(optionButton, optionButtonExample + optionButtonHoverState, button);
+            checkButtonHoverState(optionButton, buttonOption + optionButtonHoverState, btn);
         });
 
         it('should check option button active state', () => {
             scrollIntoView(optionButton);
-            checkButtonActiveState(optionButton, optionButtonExample + optionButtonActiveState, button);
+            checkButtonActiveState(optionButton, buttonOption + optionButtonActiveState, btn);
         });
 
         it('should check option button focus state', () => {
             scrollIntoView(optionButton);
-            checkButtonFocusState(optionButton, optionButtonExample + optionButtonFocusState, button);
+            checkButtonFocusState(optionButton, buttonOption + optionButtonFocusState, btn);
         });
 
 
         it('should check country option focus state', () => {
             scrollIntoView(optionButton);
             click(optionButton);
-            saveElementScreenshot(countryOption, countryOptionExample, dateTimePickerPage.getScreenshotFolder());
-            expect(checkElementScreenshot(countryOption, countryOptionExample, dateTimePickerPage.getScreenshotFolder()))
+            saveElementScreenshot(countryOption, optionCountry, dateTimePickerPage.getScreenshotFolder());
+            expect(checkElementScreenshot(countryOption, optionCountry, dateTimePickerPage.getScreenshotFolder()))
                 .toBeLessThan(2, `Country option state mismatch`);
         });
 

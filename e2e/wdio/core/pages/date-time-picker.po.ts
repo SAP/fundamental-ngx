@@ -33,7 +33,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     countryOption = 'ul.fd-select-options';
 
     filterCalendarValue = (name: string): string => {
-        return `//td[contains(@id,"fd-${name}")]`;
+        return `[id*="${name}"]`;
     };
 
     getOptionByName = (name: string): string => {
