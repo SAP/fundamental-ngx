@@ -256,6 +256,12 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     @Input()
     includes = false;
 
+    /**
+     * The tooltip for the multi-input icon.
+     */
+    @Input()
+    title: string;
+
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
     readonly itemClicked: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
@@ -535,7 +541,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this.openChange.emit(isOpen);
         }
 
-        
+
         if (!this.open && !this.mobile) {
             this.handleBlur();
             this.searchInputElement.nativeElement.focus();
