@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.56...v0.29.0-rc.57) (2021-03-26)
+
+
+### Bug Fixes
+
+* add GridListModule to the exports ([#5020](https://github.com/SAP/fundamental-ngx/issues/5020)) ([cd7485b](https://github.com/SAP/fundamental-ngx/commit/cd7485b997befdc00a83f924d6f97c84e3b53c41))
+
 ## [0.29.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.55...v0.29.0-rc.56) (2021-03-26)
 
 
