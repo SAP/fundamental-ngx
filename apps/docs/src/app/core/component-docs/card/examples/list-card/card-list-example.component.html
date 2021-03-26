@@ -60,36 +60,20 @@
     <fd-card-content>
         <ul fd-list>
             <li fd-list-item>
-                <fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue">
+                <fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue" (valueChange)="onValueChange($event)">
                     <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
                 </fd-select>
             </li>
         </ul>
         <ul class="fd-list fd-list--byline" tabindex="0">
-            <li fd-list-item>
-                <div fd-list-content>
-                    <div fd-list-title>Delbont Industries</div>
-                    <fd-card-bar [value]="91" [displayChange]="true" [change]="4"></fd-card-bar>
-                </div>
-            </li>
-            <li fd-list-item>
-                <div fd-list-content>
-                    <span fd-list-title> Anav Ideon </span>
-                    <fd-card-bar [value]="52" color="#da5a1b" [displayChange]="true" [change]="3"></fd-card-bar>
-                </div>
-            </li>
-            <li fd-list-item>
-                <div fd-list-content>
-                    <span fd-list-title> Brazil Technologies </span>
-                    <fd-card-bar [value]="23" color="#c67a0c" [displayChange]="true" [change]="2"></fd-card-bar>
-                </div>
-            </li>
-            <li fd-list-item>
-                <div fd-list-content>
-                    <span fd-list-title> Lorent </span>
-                    <fd-card-bar [value]="21" color="#358a4d" [displayChange]="true" [change]="1"></fd-card-bar>
-                </div>
-            </li>
+            <ng-container *ngFor="let data of showData">
+                <li fd-list-item>
+                    <div fd-list-content>
+                        <div fd-list-title>{{data?.title}}</div>
+                        <fd-card-bar [value]="data?.value" [displayChange]="true" [change]="data?.change"></fd-card-bar>
+                    </div>
+                </li>
+            </ng-container>
         </ul>
     </fd-card-content>
 </fd-card>
