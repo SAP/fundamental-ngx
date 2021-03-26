@@ -24,6 +24,12 @@ export class AvatarGroupGroupTypeExampleComponent {
 
     constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}
 
+    isOpenChanged(isOpened: boolean): void {
+        if (isOpened) {
+            this.openOverflowMain();
+        }
+    }
+
     openOverflowDetails(idx: number): void {
         this.personDetails = this.people[idx];
         this.overflowPopoverStage = 'detail';

@@ -1,6 +1,7 @@
 .fd-avatar-group--group-type__overflow-popover-body--custom-class {
     .fd-popover__wrapper {
         max-width: 312px;
+        overflow-x: hidden;
     }
 
     .fd-avatar-group__item {

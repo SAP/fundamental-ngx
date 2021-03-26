@@ -3,6 +3,7 @@
                 [focusTrapped]="true"
                 [focusAutoCapture]="true"
                 [closeOnEscapeKey]="true"
+                (isOpenChange)="isOpenChanged($event)"
                 placement="bottom"
                 additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class">
         <fd-popover-control>
