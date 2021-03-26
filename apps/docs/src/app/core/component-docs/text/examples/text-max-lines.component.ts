@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'text-max-lines',
+    selector: 'fd-text-max-lines',
     templateUrl: './text-max-lines.component.html'
 })
 export class TextMaxLinesComponent {
