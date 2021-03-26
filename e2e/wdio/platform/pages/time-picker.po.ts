@@ -8,32 +8,28 @@ export class TimePickerPO extends BaseComponentPo {
     setToNullButton = '[label="Set To Null"]';
     setValidTimeButton = '[label="Set Valid Time"]';
     timePickerInput = 'fd-time-picker input';
-    timePickerButton = 'fd-time-picker button';
     activeTimePickerInput = 'fd-time-picker[ng-reflect-is-disabled="false"] input';
     activeTimePickerButton = 'fd-time-picker[ng-reflect-is-disabled="false"] button';
+    invalidTimePickerInput = '[name="null-validity"] fd-time-picker.ng-invalid';
     timerExpanded = 'div.fd-time';
+    disabledTimePicker = 'fd-time-picker[ng-reflect-is-disabled="true"]';
+    disabledInput = this.disabledTimePicker + ' input';
+    disabledButton = this.disabledTimePicker + ' button';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeItem = 'span.fd-time__item';
-    selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
-    selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
-    period = '//span[contains(text(), " PM ")]/parent::li';
+    selectedValue = 'div.fd-time__current-indicator ~ span';
 
-
-    filterCaledarValue = (name: string): string => {
-        return `//td[contains(@id,"fd-${name}")]`;
-    };
-
-    dayInDisabledFunctionsCalendarByIndex = (index: string): string => {
-        return `#fd-calendar-9-fd-day-${index}`;
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
     }
 
-    dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
-    };
+    saveExampleBaselineScreenshot(specName: string = 'time-picker'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
 
-    yearInCalendarByValue = (year: number): string => {
-        return `[aria-label="${year}"]`;
-    };
+    compareWithBaseline(specName: string = 'time-picker'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 
     open(): void {
         super.open(this.url);

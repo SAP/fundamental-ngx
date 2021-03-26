@@ -20,6 +20,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/action-sheet', name: 'Action Sheet' },
             { url: 'core/alert', name: 'Alert' },
             { url: 'core/avatar', name: 'Avatar' },
+            { url: 'core/avatar-group', name: 'Avatar Group' },
             { url: 'core/bar', name: 'Bar' },
             { url: 'core/breadcrumb', name: 'Breadcrumb' },
             { url: 'core/busyIndicator', name: 'Busy Indicator' },

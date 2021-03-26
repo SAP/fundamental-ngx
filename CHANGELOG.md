@@ -2,6 +2,113 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.55) (2021-03-26)
+
+
+### Features
+
+* (Core) Avatar Group component ([#4859](https://github.com/SAP/fundamental-ngx/issues/4859)) ([bce277f](https://github.com/SAP/fundamental-ngx/commit/bce277f2552c3fadb8879d5c510b470f9b751b98))
+
+
+### Bug Fixes
+
+* (core) added text component fixes for ie11 ([#4999](https://github.com/SAP/fundamental-ngx/issues/4999)) ([707ce45](https://github.com/SAP/fundamental-ngx/commit/707ce452e3fe47241439172f6e1424dfa648a61b))
+* (core) chaged text examples selectors to fix stackblitz ([#5000](https://github.com/SAP/fundamental-ngx/issues/5000)) ([1b0e83e](https://github.com/SAP/fundamental-ngx/commit/1b0e83e17529f30b93f6aefbea29c7c015e397ce))
+
+## [0.29.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.54) (2021-03-25)
+
+
+### Bug Fixes
+
+* (core) added text component fixes for ie11 ([#4999](https://github.com/SAP/fundamental-ngx/issues/4999)) ([707ce45](https://github.com/SAP/fundamental-ngx/commit/707ce452e3fe47241439172f6e1424dfa648a61b))
+* (core) chaged text examples selectors to fix stackblitz ([#5000](https://github.com/SAP/fundamental-ngx/issues/5000)) ([1b0e83e](https://github.com/SAP/fundamental-ngx/commit/1b0e83e17529f30b93f6aefbea29c7c015e397ce))
+
+## [0.29.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.51...v0.29.0-rc.53) (2021-03-25)
+
+## [0.29.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.51...v0.29.0-rc.52) (2021-03-24)
+
+## [0.29.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.50...v0.29.0-rc.51) (2021-03-24)
+
+## [0.29.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.49...v0.29.0-rc.50) (2021-03-24)
+
+
+### Features
+
+* (Platform) approval flow adjustments ([#4774](https://github.com/SAP/fundamental-ngx/issues/4774)) ([c10cbc3](https://github.com/SAP/fundamental-ngx/commit/c10cbc39fa059518de000b2fde3e284fdc6db1cf))
+
+## [0.29.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.48...v0.29.0-rc.49) (2021-03-24)
+
+## [0.29.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.47...v0.29.0-rc.48) (2021-03-24)
+
+## [0.29.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.46...v0.29.0-rc.47) (2021-03-24)
+
+
+### Bug Fixes
+
+* (Core) updating the focusable object of status indicator and adding clickable ([#4942](https://github.com/SAP/fundamental-ngx/issues/4942)) ([a092cbc](https://github.com/SAP/fundamental-ngx/commit/a092cbcea130ca9d155c9784875ac3de67a52b41))
+
+## [0.29.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.45...v0.29.0-rc.46) (2021-03-22)
+
+
+### Bug Fixes
+
+* add fix for FCL animation and example with Dynamic Page usage and layout controls ([#4960](https://github.com/SAP/fundamental-ngx/issues/4960)) ([2ed1b99](https://github.com/SAP/fundamental-ngx/commit/2ed1b9903614f0be401cb9394442e006b9cd667b))
+
+## [0.29.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.44...v0.29.0-rc.45) (2021-03-21)
+
+## [0.29.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.43...v0.29.0-rc.44) (2021-03-21)
+
+## [0.29.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.42...v0.29.0-rc.43) (2021-03-21)
+
+## [0.29.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.41...v0.29.0-rc.42) (2021-03-20)
+
+## [0.29.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.40...v0.29.0-rc.41) (2021-03-19)
+
+
+### Bug Fixes
+
+* (Core) Improve height calculations in dynamic page ([#4966](https://github.com/SAP/fundamental-ngx/issues/4966)) ([e6998bb](https://github.com/SAP/fundamental-ngx/commit/e6998bb621752b1a0c456d7dc17f9d89ade85e48))
+
+## [0.29.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.39...v0.29.0-rc.40) (2021-03-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* * Tokenizer `tokenizerHasFocus` input removed
+
+* fix: (Core) Remove redundant tabbable item on multi input, remove default width limit, Add show all button support
+
+* BREAKING CHANGE: (Core) Remove redundant tabbable item on multi input, remove default width limit, improve ShowAll button (#4946) ([bd14960](https://github.com/SAP/fundamental-ngx/commit/bd14960ad91265c5b87444e411aa7cbb99e8ae51)), closes [#4946](https://github.com/SAP/fundamental-ngx/issues/4946)
+
+## [0.29.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.38...v0.29.0-rc.39) (2021-03-19)
+
+## [0.29.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.37...v0.29.0-rc.38) (2021-03-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* add list title as part of group header and list with busy indicator
+
+### Features
+
+* (Core|Platform) migrate to 0.16 ([#4773](https://github.com/SAP/fundamental-ngx/issues/4773)) ([97dd1fb](https://github.com/SAP/fundamental-ngx/commit/97dd1fb44366c194c8ae7de8e7727a1e0521497c))
+
+## [0.29.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.36...v0.29.0-rc.37) (2021-03-18)
+
+
+### Bug Fixes
+
+* (Core|Platform) skip posting allure report to PRs ([#4943](https://github.com/SAP/fundamental-ngx/issues/4943)) ([1778dc6](https://github.com/SAP/fundamental-ngx/commit/1778dc6152fd5ba0ea7c4c3ef76782ac37ae17c8))
+
+## [0.29.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.35...v0.29.0-rc.36) (2021-03-18)
+
+
+### Bug Fixes
+
+* (Platform) drop not unique i18n ids ([#4952](https://github.com/SAP/fundamental-ngx/issues/4952)) ([ca5c970](https://github.com/SAP/fundamental-ngx/commit/ca5c970c0bd55f4d6f73fd309bd6c7b9ca2629d9))
+
+## [0.29.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.34...v0.29.0-rc.35) (2021-03-18)
+
 ## [0.29.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.33...v0.29.0-rc.34) (2021-03-18)
 
 ## [0.29.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.32...v0.29.0-rc.33) (2021-03-18)

@@ -1,31 +1,27 @@
-<div
-    class="fd-status-indicator"
-    [ngClass]="['fd-status-indicator--' + status]"
-    [class.fd-status-indicator--htext]="labelPosition === 'left' || labelPosition === 'right'"
-    [attr.tabindex]="clickable ? 0 : -1"
+<span
+    *ngIf="hasLabel && (labelPosition === 'left' || labelPosition === 'top')"
+    [ngClass]="'fd-status-indicator__label--' + labelSize"
+    class="fd-status-indicator__label"
+    >{{ statusLabel }}
+</span>
+<svg
+    [attr.id]="id"
+    data-sap-ui="__shape0-__box21-24"
+    version="1.1"
+    [attr.viewBox]="viewBox"
+    xlmns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid meet"
+    class="fd-status-indicator__svg"
 >
-    <span
-        *ngIf="hasLabel && (labelPosition === 'left' || labelPosition === 'top')"
-        [ngClass]="'fd-status-indicator--' + size + '__text' + ' ' + 'fd-status-indicator--' + status + '__text'"
-        >{{ statusLabel }}
-    </span>
-    <svg
-        [attr.id]="id"
-        data-sap-ui="__shape0-__box21-24"
-        version="1.1"
-        [attr.viewBox]="viewBox"
-        xlmns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid meet"
-        [ngClass]="['fd-status-indicator--' + size]"
-    >
-        <ng-container [ngTemplateOutlet]="svgTemplate"></ng-container>
-    </svg>
-    <span
-        *ngIf="hasLabel && (labelPosition === 'right' || labelPosition === 'bottom')"
-        [ngClass]="'fd-status-indicator--' + size + '__text' + ' ' + 'fd-status-indicator--' + status + '__text'"
-        >{{ statusLabel }}
-    </span>
-</div>
+    <ng-container [ngTemplateOutlet]="svgTemplate"></ng-container>
+</svg>
+<span
+    *ngIf="hasLabel && (labelPosition === 'right' || labelPosition === 'bottom')"
+    [ngClass]="'fd-status-indicator__label--' + size"
+    class="fd-status-indicator__label"
+    >{{ statusLabel }}
+</span>
+
 <ng-template #svgTemplate>
     <svg
         xlmns="http://www.w3.org/2000/svg"

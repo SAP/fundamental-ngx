@@ -216,7 +216,7 @@ describe('MultiInputComponent', () => {
         spyOn(event, 'preventDefault');
         spyOn(event, 'stopPropagation');
         spyOn(<any>component, '_applySearchTermChange').and.callThrough();
-        component.showAllClicked(event);
+        component._showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');

@@ -59,6 +59,6 @@ describe('Object marker test suite', function() {
         refreshPage();
         waitForPresent(marker);
         objectMarkerPage.saveExampleBaselineScreenshot();
-        expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(1);
+        expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(3);
     });
 });

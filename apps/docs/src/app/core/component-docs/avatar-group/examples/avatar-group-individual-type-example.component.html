@@ -1,0 +1,212 @@
+<fd-avatar-group #avatarGroup_IndividualType
+                 type="individual"
+                 [size]="size"
+                 class="fd-avatar-group--custom-class">
+    <!-- AVATARS -->
+    <ng-container *ngFor="let person of people" >
+        <fd-popover [noArrow]="false" placement="bottom" [triggers]="['focusin', 'focusout']">
+            <fd-popover-control>
+                <div fd-avatar-group-item tabindex="0">
+                    <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                               [circle]="true"
+                               [border]="true"
+                               [size]="size"
+                               [label]="person.firstName + ' ' + person.lastName"></fd-avatar>
+
+                    <fd-avatar *ngIf="person.imageUrl"
+                               [circle]="true"
+                               [border]="true"
+                               [size]="size"
+                               [image]="person.imageUrl"></fd-avatar>
+
+                    <fd-avatar *ngIf="person.glyph"
+                               [circle]="true"
+                               [border]="true"
+                               [size]="size"
+                               [glyph]="person.glyph"></fd-avatar>
+                </div>
+            </fd-popover-control>
+
+            <fd-popover-body>
+                <fd-quick-view [id]="person.id">
+                    <fd-quick-view-title align="middle">Business card</fd-quick-view-title>
+                    <fd-quick-view-subheader>
+                        <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                                   [circle]="true"
+                                   size="s"
+                                   [label]="person.firstName + ' ' + person.lastName"></fd-avatar>
+
+                        <fd-avatar *ngIf="person.imageUrl"
+                                   [circle]="true"
+                                   size="s"
+                                   [image]="person.imageUrl"></fd-avatar>
+
+                        <fd-avatar *ngIf="person.glyph"
+                                   [circle]="true"
+                                   size="s"
+                                   [glyph]="person.glyph"></fd-avatar>
+                        <fd-quick-view-subheader-title>{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title>
+                        <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
+                    </fd-quick-view-subheader>
+
+                    <fd-quick-view-group>
+                        <fd-quick-view-group-title>Contact Details</fd-quick-view-group-title>
+                        <fd-quick-view-group-item>
+                            <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
+                            <fd-quick-view-group-item-content>
+                                <span [innerText]="person.phone"></span>
+                            </fd-quick-view-group-item-content>
+                        </fd-quick-view-group-item>
+
+                        <fd-quick-view-group-item>
+                            <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
+                            <fd-quick-view-group-item-content>
+                                <span [innerText]="person.mobile"></span>
+                            </fd-quick-view-group-item-content>
+                        </fd-quick-view-group-item>
+
+                        <fd-quick-view-group-item>
+                            <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
+                            <fd-quick-view-group-item-content>
+                                <span [innerText]="person.email"></span>
+                            </fd-quick-view-group-item-content>
+                        </fd-quick-view-group-item>
+                    </fd-quick-view-group>
+                </fd-quick-view>
+            </fd-popover-body>
+        </fd-popover>
+    </ng-container>
+
+    <!-- OVERFLOW -->
+    <fd-popover *ngIf="avatarGroup_IndividualType.overflowItemsCount > 0"
+                additionalBodyClass="fd-avatar-group--individual-type__overflow-popover-body--custom-class"
+                [noArrow]="false"
+                [focusTrapped]="true"
+                [focusAutoCapture]="true"
+                [closeOnEscapeKey]="true"
+                placement="bottom">
+        <fd-popover-control>
+            <button fd-button
+                    fd-avatar-group-overflow-button
+                    [size]="size"
+                    (click)="openOverflowMain()">
+
+                <bdi fd-avatar-group-overflow-button-text>
+                    +{{ avatarGroup_IndividualType.overflowItemsCount }}
+                </bdi>
+            </button>
+        </fd-popover-control>
+        <fd-popover-body #overflowPopoverBody>
+            <div class="fd-popover__wrapper">
+                <div fd-popover-body-header>
+                    <div fd-bar barDesign="header">
+                        <div fd-bar-middle
+                             [style.justify-content]="isDetailStage ? 'space-between' : 'center'"
+                             dir="ltr">
+                            <fd-button-bar *ngIf="isDetailStage"
+                                           (click)="openOverflowMain()"
+                                           glyph="navigation-left-arrow"
+                                           fdType="transparent"
+                                           aria-label="Back"
+                                           title="Back"
+                            ></fd-button-bar>
+                            <fd-bar-element>
+                                Team Members ({{ avatarGroup_IndividualType.overflowItemsCount }})
+                            </fd-bar-element>
+                            <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>
+                        </div>
+                    </div>
+                </div>
+
+                <div fd-avatar-group-overflow-body>
+                    <ng-container *ngIf="overflowPopoverStage === 'main'">
+                        <div class="fd-avatar-group__overflow-items-wrapper">
+                            <div *ngFor="let person of people | slice: -1 * avatarGroup_IndividualType.overflowItemsCount; let idx = index;"
+                                 fd-avatar-group-overflow-item
+                                 class="fd-avatar-group__overflow-item--custom-class">
+
+                                <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           [label]="person.firstName + ' ' + person.lastName"
+                                           (click)="openOverflowDetails(idx)"
+                                           (keydown.enter)="openOverflowDetails(idx)"
+                                           (keydown.space)="openOverflowDetails(idx)"
+                                           tabindex="0"></fd-avatar>
+
+                                <fd-avatar *ngIf="person.imageUrl"
+                                           [circle]="true"
+                                           size="s"
+                                           [image]="person.imageUrl"
+                                           (click)="openOverflowDetails(idx)"
+                                           (keydown.enter)="openOverflowDetails(idx)"
+                                           (keydown.space)="openOverflowDetails(idx)"
+                                           tabindex="0"></fd-avatar>
+
+                                <fd-avatar *ngIf="person.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           [glyph]="person.glyph"
+                                           (click)="openOverflowDetails(idx)"
+                                           (keydown.enter)="openOverflowDetails(idx)"
+                                           (keydown.space)="openOverflowDetails(idx)"
+                                           tabindex="0"></fd-avatar>
+                                <div class="fd-avatar-group__overflow-item__text">
+                                    <h5 fd-title [headerSize]="5">{{ person.firstName }} {{ person.lastName }}</h5>
+                                    <div>{{ person.position }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="overflowPopoverStage === 'detail'">
+                        <fd-quick-view [id]="personDetails.id">
+                            <fd-quick-view-subheader>
+                                <fd-avatar *ngIf="!personDetails.imageUrl && !personDetails.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           [label]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
+
+                                <fd-avatar *ngIf="personDetails.imageUrl"
+                                           [circle]="true"
+                                           size="s"
+                                           [image]="personDetails.imageUrl"></fd-avatar>
+
+                                <fd-avatar *ngIf="personDetails.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           [glyph]="personDetails.glyph"></fd-avatar>
+                                <fd-quick-view-subheader-title>{{ personDetails.firstName }} {{ personDetails.lastName }}</fd-quick-view-subheader-title>
+                                <fd-quick-view-subheader-subtitle>{{ personDetails.position }}</fd-quick-view-subheader-subtitle>
+                            </fd-quick-view-subheader>
+
+                            <fd-quick-view-group>
+                                <fd-quick-view-group-title>Contact Details</fd-quick-view-group-title>
+                                <fd-quick-view-group-item>
+                                    <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
+                                    <fd-quick-view-group-item-content>
+                                        <span [innerText]="personDetails.phone"></span>
+                                    </fd-quick-view-group-item-content>
+                                </fd-quick-view-group-item>
+
+                                <fd-quick-view-group-item>
+                                    <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
+                                    <fd-quick-view-group-item-content>
+                                        <span [innerText]="personDetails.mobile"></span>
+                                    </fd-quick-view-group-item-content>
+                                </fd-quick-view-group-item>
+
+                                <fd-quick-view-group-item>
+                                    <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
+                                    <fd-quick-view-group-item-content>
+                                        <span [innerText]="personDetails.email"></span>
+                                    </fd-quick-view-group-item-content>
+                                </fd-quick-view-group-item>
+                            </fd-quick-view-group>
+                        </fd-quick-view>
+                    </ng-container>
+                </div>
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+</fd-avatar-group>

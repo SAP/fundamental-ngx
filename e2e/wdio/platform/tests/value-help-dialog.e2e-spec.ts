@@ -77,7 +77,8 @@ describe('Value help dialog test suite', function() {
             expect(getText(selectedTokens)).toEqual(selectedItem);
         });
 
-        it('should check define conditions inclusions', () => {
+        // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
+        xit('should check define conditions inclusions', () => {
             click(openDialogBtn);
             click(formTabs, 1);
             click(addBtn);
@@ -87,7 +88,8 @@ describe('Value help dialog test suite', function() {
             checkConditionalTokens(tableInclusions);
         });
 
-        it('should check the inclusion conditional statements', () => {
+        // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
+        xit('should check the inclusion conditional statements', () => {
             click(openDialogBtn);
             click(formTabs, 1);
             click(addBtn);
@@ -121,7 +123,8 @@ describe('Value help dialog test suite', function() {
             checkConditionalTokens(tableExclusions);
         });
 
-        it('should check the exclusion conditional statements', () => {
+        // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
+        xit('should check the exclusion conditional statements', () => {
             click(openDialogBtn);
             click(formTabs, 1);
             click(addBtn, 1);
@@ -178,7 +181,7 @@ describe('Value help dialog test suite', function() {
     });
 
     describe('custom strategy labels examples', function() {
-        it('should check define conditions custom inclusions', () => {
+        xit('should check define conditions custom inclusions', () => {
             scrollIntoView(openDialogBtn, 1);
             click(openDialogBtn, 1);
             click(addBtn);
@@ -204,7 +207,8 @@ describe('Value help dialog test suite', function() {
             }
         });
 
-        it('should check define conditions custom exclusions', () => {
+        // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
+        xit('should check define conditions custom exclusions', () => {
             scrollIntoView(openDialogBtn, 1);
             click(openDialogBtn, 1);
             click(addBtn, 1);
