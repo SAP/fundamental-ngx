@@ -1,12 +1,14 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
     getEntityMetadata,
     getResourceMetadata,
     getEntityMetadataByEntityName,
-    getEntityResourceMetadataByEntityName
+    getEntityResourceMetadataByEntityName,
+    EntityType
 } from '../../../domain/decorators';
-import { EntityMetaOptions } from '../../../domain/entity';
+import { BaseEntity } from '../../../domain/entity';
+import { EntityMetaOptions } from '../../../domain/entity-meta-options';
 import { EntityResourceMetaOptions } from '../../../domain/rest-resource';
 
 export { EntityMetaOptions };
@@ -20,12 +22,12 @@ export abstract class EntityMetaOptionsService {
      * Get Entity Resource Options
      * @param entity Entity name or Entity class
      */
-    abstract getEntityResourceMetadata<T>(entity: string | Type<T>): EntityResourceMetaOptions;
+    abstract getEntityResourceMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityResourceMetaOptions;
     /**
      * Get Entity Meta Options
      * @param entity Entity name or Entity class
      */
-    abstract getEntityMetadata<T>(entity: string | Type<T>): EntityMetaOptions;
+    abstract getEntityMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityMetaOptions<T>;
 }
 
 /**
@@ -33,7 +35,7 @@ export abstract class EntityMetaOptionsService {
  */
 @Injectable()
 export class DefaultEntityMetaOptionsService implements EntityMetaOptionsService {
-    getEntityResourceMetadata<T>(entityOrName: string | Type<T>): EntityResourceMetaOptions {
+    getEntityResourceMetadata<T extends BaseEntity>(entityOrName: string | EntityType<T>): EntityResourceMetaOptions {
         const options =
             typeof entityOrName === 'string'
                 ? getEntityResourceMetadataByEntityName(entityOrName)
@@ -46,10 +48,10 @@ export class DefaultEntityMetaOptionsService implements EntityMetaOptionsService
         return options;
     }
 
-    getEntityMetadata<T>(entityOrName: string | Type<T>): EntityMetaOptions {
-        const options =
+    getEntityMetadata<T extends BaseEntity>(entityOrName: string | EntityType<T>): EntityMetaOptions<T> {
+        const options: EntityMetaOptions<T>  =
             typeof entityOrName === 'string'
-                ? getEntityMetadataByEntityName(entityOrName)
+                ? getEntityMetadataByEntityName(entityOrName) as EntityMetaOptions<T>
                 : getEntityMetadata(entityOrName);
 
         if (!options) {

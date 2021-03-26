@@ -7,18 +7,25 @@ import {
 } from '../utils/entity-options.service';
 import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
+import { BaseEntity } from './entity-server/interfaces';
+import { Type } from '../../../domain/utility';
 
-class User {
-    constructor(public id: string | string, public name: string, public age: number) {}
+class ChildEntity extends BaseEntity {
+    name: 'child entity';
+}
+class User extends BaseEntity {
+    id: string;
+    name: string;
+    age: number;
+    child: ChildEntity;
 }
 
 class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
-    getEntityMetadata(): EntityMetaOptions {
-        return null;
+    getEntityResourceMetadata<T extends BaseEntity>(entity: string | Type<T>): EntityResourceMetaOptions {
+        throw new Error('Method not implemented.');
     }
-
-    getEntityResourceMetadata(): EntityResourceMetaOptions {
-        return null;
+    getEntityMetadata<T extends BaseEntity>(entity: string | Type<T>): EntityMetaOptions<BaseEntity> {
+        throw new Error('Method not implemented.');
     }
 }
 
@@ -38,6 +45,9 @@ describe('Default DefaultEntityStoreBuilderFactory', () => {
     beforeEach(() => {
         entityServiceFactory = new EntityCollectionServiceFactoryMock();
         entityMetaOptionsService = new EntityMetaOptionsServiceMock();
+        spyOn(entityMetaOptionsService, 'getEntityMetadata').and.returnValue({
+            name: 'User'
+        });
         entityStoreBuilderFactory = new DefaultEntityStoreBuilderFactory(
             entityServiceFactory,
             entityMetaOptionsService
@@ -63,11 +73,7 @@ describe('Default EntityStoreBuilder', () => {
     beforeEach(() => {
         entityServiceFactory = new EntityCollectionServiceFactoryMock();
         entityMetaOptionsService = new EntityMetaOptionsServiceMock();
-        builder = new DefaultEntityStoreBuilder(
-            User,
-            entityServiceFactory,
-            entityMetaOptionsService
-        );
+        builder = new DefaultEntityStoreBuilder(User, entityServiceFactory, entityMetaOptionsService);
     });
 
     it('should be created', () => {
@@ -96,6 +102,12 @@ describe('Default EntityStoreBuilder', () => {
 
     it('should has "useFetchPolicy" method defined', () => {
         const returnedValue = builder.useFetchPolicy({ strategy: null });
+        // return builder instance
+        expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
+    });
+
+    it('should has "withChainingStrategy" method defined', () => {
+        const returnedValue = builder.withChainingStrategy({ child: 'non-block' });
         // return builder instance
         expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
     });

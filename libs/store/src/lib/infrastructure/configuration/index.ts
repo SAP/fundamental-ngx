@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
-import { Type } from '../../domain/decorators';
+import { EntityType } from '../../domain/decorators';
 
 export interface FundamentalStoreConfig {
     root: string;
@@ -10,7 +10,7 @@ export interface FundamentalStoreConfig {
 }
 
 export interface FundamentalEntityModelMap {
-    [index: string]: Type<any>;
+    [index: string]: EntityType<any>;
 }
 
 export const ENTITY_MODEL_MAP = new InjectionToken<FundamentalEntityModelMap>('ENTITY MODEL MAP');

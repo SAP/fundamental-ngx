@@ -1,4 +1,4 @@
-import { Entity, RESTResource, FundamentalStoreConfig } from '@fundamental-ngx/store';
+import { Entity, RESTResource, FundamentalStoreConfig, BaseEntity, ChainingPolicy } from '@fundamental-ngx/store';
 
 interface EntityComposite {
     getTypes();
@@ -6,12 +6,6 @@ interface EntityComposite {
 
 interface Field<T> {
     [key: string]: T;
-}
-
-export class BaseEntity {
-    identity: number;
-    created: number;
-    updated: number;
 }
 
 export class BaseValue {
@@ -28,13 +22,13 @@ export interface EntityTypes {
 @RESTResource({
     path: '/requisitions/:reqId/lineItems'
 })
-@Entity({
+@Entity<LineItem>({
     domain: 'Requisitioning',
     name: 'LineItem',
     primaryKey: 'lineItemId', // if not provided 'id' is assumed to be primaryKey
     aggregateOf: 'Requisition'
 })
-class LineItem {
+class LineItem extends BaseEntity {
     lineItemId: string;
     reqId: string;
 }
@@ -48,14 +42,23 @@ class LineItem {
         update: ['PATCH', '/requisition']
     }
 })
-@Entity({
+@Entity<Requisition>({
     domain: 'Requisitioning',
-    name: 'Requisition'
+    name: 'Requisition',
+    chainingPolicy: {
+        fields: {
+            lineItems: {
+                strategy: 'non-block',
+                type: Array(LineItem)
+            }
+        }
+    }
 })
 export class Requisition extends BaseEntity {
     id: string;
     title: string;
     totalAmount: number;
+    lineItems: LineItem[];
 }
 
 // Set the default URL root for all entities registered

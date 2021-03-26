@@ -23,20 +23,14 @@ class Fruit {
 }
 
 class MockQueryService<TModel> extends QueryService<TModel> {
-    constructor() {
-        super();
-    }
-
     getByKey(id: string): Observable<TModel> {
-        return of(null);
+        throw new Error('Method not implemented.');
     }
-
-    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
-        return of([]);
+    getWithQuery(query: Readonly<QuerySnapshotModel<TModel>>): Observable<TModel[]> {
+        throw new Error('Method not implemented.');
     }
-
     count(): Observable<number> {
-        return of(0);
+        throw new Error('Method not implemented.');
     }
 }
 
@@ -52,12 +46,6 @@ describe('Store: Query', () => {
         });
         spyOn(service, 'getByKey');
         qb = new QueryBuilder(service);
-    });
-
-    it('should be able to create a query by ID', () => {
-        const query = qb.byId('123');
-        expect(service.getByKey).toHaveBeenCalled();
-        expect(service.getByKey).toHaveBeenCalledWith('123');
     });
 
     it('should call "getWithQuery" once "fetch" is called', () => {

@@ -1,18 +1,20 @@
 import 'reflect-metadata';
 
-import { EntityMetaOptions } from './entity';
+import { BaseEntity } from './entity';
+import { EntityMetaOptions } from './entity-meta-options';
 import { EntityResourceMetaOptions } from './rest-resource';
+import { Type } from './utility';
 
 export const ENTITY_KEY = Symbol('ENTITY');
 export const REST_RESOURCE_KEY = Symbol('REST_Resource');
 
 const entitiesSet = new Set();
 
-export type Type<T> = new (...args: any[]) => T;
+export type EntityType<T extends BaseEntity> = Type<T>;
 
-export function Entity(config: EntityMetaOptions) {
+export function Entity<T extends BaseEntity>(config: EntityMetaOptions<T>) {
     // TODO: Add entity name uniqueness validation
-    return <T>(target: Type<T>) => {
+    return (target: EntityType<T>) => {
         if (!entitiesSet.has(target)) {
             entitiesSet.add(target);
         }
@@ -20,8 +22,8 @@ export function Entity(config: EntityMetaOptions) {
     };
 }
 
-export function RESTResource(config: EntityResourceMetaOptions) {
-    return <T>(target: Type<T>) => {
+export function RESTResource<T extends BaseEntity>(config: EntityResourceMetaOptions) {
+    return (target: EntityType<T>) => {
         if (!entitiesSet.has(target)) {
             entitiesSet.add(target);
         }
@@ -29,16 +31,16 @@ export function RESTResource(config: EntityResourceMetaOptions) {
     };
 }
 
-export function getEntityMetadata<T>(target: Type<T>): EntityMetaOptions | undefined {
+export function getEntityMetadata<T extends BaseEntity>(target: EntityType<T>): EntityMetaOptions<T> | undefined {
     return Reflect.getOwnMetadata(ENTITY_KEY, target);
 }
 
-export function getResourceMetadata<T>(target: Type<T>): EntityResourceMetaOptions | undefined {
+export function getResourceMetadata<T extends BaseEntity>(target: EntityType<T>): EntityResourceMetaOptions | undefined {
     return Reflect.getOwnMetadata(REST_RESOURCE_KEY, target);
 }
 
 export function getEntityMetadataByEntityName(entityName: string): EntityMetaOptions | undefined {
-    const entity: Type<any> = getEntityByName(entityName);
+    const entity: EntityType<any> = getEntityByName(entityName);
     if (entity) {
         return getEntityMetadata(entity);
     }
@@ -46,7 +48,7 @@ export function getEntityMetadataByEntityName(entityName: string): EntityMetaOpt
 }
 
 export function getEntityResourceMetadataByEntityName(entityName: string): EntityResourceMetaOptions | undefined {
-    const entity: Type<any> = getEntityByName(entityName);
+    const entity: EntityType<any> = getEntityByName(entityName);
     if (entity) {
         return getResourceMetadata(entity);
     }
@@ -55,9 +57,9 @@ export function getEntityResourceMetadataByEntityName(entityName: string): Entit
 
 const getEntityByName = (entityName: string) => {
     for (const target of Array.from(entitiesSet)) {
-        const options = getEntityMetadata(target as Type<any>);
+        const options = getEntityMetadata(target as EntityType<any>);
         if (options.name === entityName) {
-            return target as Type<any>;
+            return target as EntityType<any>;
         }
     }
 };

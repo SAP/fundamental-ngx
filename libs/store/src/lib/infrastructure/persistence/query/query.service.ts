@@ -1,8 +1,9 @@
 import { Observable } from 'rxjs';
+import { BaseEntity } from '../store/entity-server/interfaces';
 
 import { QuerySnapshot } from './query';
 
-export abstract class QueryService<TModel> {
+export abstract class QueryService<TModel extends {}> {
     /**
      * Request entity by ID and return observable for entity.
      * @param id Identifier of entity
