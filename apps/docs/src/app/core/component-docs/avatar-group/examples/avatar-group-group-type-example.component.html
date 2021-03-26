@@ -106,24 +106,21 @@
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'tel:' + personDetails.phone" [innerText]="personDetails.phone"
-                                           fd-link></a>
+                                        <span [innerText]="personDetails.phone"></span>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'tel:' + personDetails.mobile" [innerText]="personDetails.mobile"
-                                           fd-link></a>
+                                        <span [innerText]="personDetails.mobile"></span>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'mailto:' + personDetails.email" [innerText]="personDetails.email"
-                                           fd-link></a>
+                                        <span [innerText]="personDetails.email"></span>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
                             </fd-quick-view-group>
