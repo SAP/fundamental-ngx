@@ -53,7 +53,6 @@ export class FdOptionSelectionChange {
         class: 'fd-list__item',
         '[attr.aria-disabled]': 'disabled',
         '[attr.aria-selected]': 'selected',
-        '[attr.aria-label]': '"item"',
         '[class.is-focus]': 'active',
         '[attr.id]': 'id',
         '[tabindex]': 'disabled ? -1 : 0',
