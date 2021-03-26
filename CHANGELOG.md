@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.55...v0.29.0-rc.56) (2021-03-26)
+
+
+### Bug Fixes
+
+* (Core) add input for tooltip for multi-input / input group ([#5009](https://github.com/SAP/fundamental-ngx/issues/5009)) ([2399254](https://github.com/SAP/fundamental-ngx/commit/2399254d138adac97c127d5689ade98c7c7bf7de))
+
 ## [0.29.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.55) (2021-03-26)
 
 
