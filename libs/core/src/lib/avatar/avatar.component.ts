@@ -8,11 +8,9 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, ColorAccent, CssClassBuilder, Size } from '../utils/public_api';
 import { ANY_LANGUAGE_LETTERS_REGEX } from '../utils/consts';
 
-export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
-export type ColorAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 let avatarUniqueId = 0;
 
 @Component({
@@ -52,7 +50,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** The size of the Avatar. Options include: *xs*, *s*, *m*, *l* and *xl*. */
-    @Input() size: AvatarSize = 'l';
+    @Input() size: Size = 'l';
 
     /** The glyph name. */
     @Input() glyph: string = null;

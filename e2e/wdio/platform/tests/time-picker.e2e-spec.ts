@@ -169,23 +169,16 @@ describe('Time picker suite', function() {
 
         it('should check examples visual regression', () => {
             timePickerPage.saveExampleBaselineScreenshot();
-            expect(timePickerPage.compareWithBaseline()).toBeLessThan(1);
+            expect(timePickerPage.compareWithBaseline()).toBeLessThan(3);
         });
 
-        it('should check examples visual regression', () => {
+        it('should check time picker visual regression', () => {
             scrollIntoView(activeTimePickerButton);
             click(activeTimePickerButton);
             waitForElDisplayed(timerExpanded);
             saveElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder());
-            checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder());
-        });
-
-        it('should check examples visual regression', () => {
-            scrollIntoView(activeTimePickerButton);
-            click(activeTimePickerButton);
-            waitForElDisplayed(timerExpanded);
-            saveElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder());
-            checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder());
+            expect(checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder()))
+                .toBeLessThan(3);
         });
 
         it('should check expand button hover state', () => {
@@ -195,8 +188,8 @@ describe('Time picker suite', function() {
                 checkElementHoverState(activeTimePickerButton, expandButtonExample + expandButtonHoverState + '-' + i, expandButton, i);
             }
         });
-
-        it('should check expand button focus state', () => {
+        // skip due to https://github.com/SAP/fundamental-ngx/issues/5001
+        xit('should check expand button focus state', () => {
             const expandButtonLength = getElementArrayLength(activeTimePickerButton);
             for (let i = 0; i < expandButtonLength; i++) {
                 scrollIntoView(activeTimePickerButton, i);
@@ -294,17 +287,19 @@ describe('Time picker suite', function() {
             expect(doesItExist(errorBorder)).toBe(true);
             scrollIntoView(invalidTimePickerInput);
             saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-basic-time-picker', timePickerPage.getScreenshotFolder());
-            checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-basic-time-picker', timePickerPage.getScreenshotFolder());
+            expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-basic-time-picker', timePickerPage.getScreenshotFolder()))
+                .toBeLessThan(3);
         });
 
-        //skipped due to https://github.com/SAP/fundamental-ngx/issues/4853
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/4853
         xit('should check not valid input field for time picker with reactive form', () => {
             scrollIntoView(setToNullButton);
             click(setToNullButton, 1);
             expect(doesItExist(errorBorder)).toBe(true);
             scrollIntoView(invalidTimePickerInput);
             saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', timePickerPage.getScreenshotFolder());
-            checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', timePickerPage.getScreenshotFolder());
+            expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', timePickerPage.getScreenshotFolder()))
+                .toBeLessThan(3);
         });
 
         it('should check not valid input field state for time picker with template form', () => {
@@ -313,7 +308,8 @@ describe('Time picker suite', function() {
             expect(doesItExist(errorBorder)).toBe(true);
             scrollIntoView(invalidTimePickerInput);
             saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', timePickerPage.getScreenshotFolder());
-            checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', timePickerPage.getScreenshotFolder());
+            expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', timePickerPage.getScreenshotFolder()))
+                .toBeLessThan(3);
         });
 
         it('should check disabled time picker hover state', () => {
@@ -342,7 +338,6 @@ describe('Time picker suite', function() {
                     disabledPicker, i);
             }
         });
-
     });
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {

@@ -3,6 +3,7 @@ export * from './lib/action-bar/public_api';
 export * from './lib/action-sheet/public_api';
 export * from './lib/alert/public_api';
 export * from './lib/avatar/public_api';
+export * from './lib/avatar-group/public_api';
 export * from './lib/bar/public_api';
 export * from './lib/breadcrumb/public_api';
 export * from './lib/busy-indicator/public_api';
