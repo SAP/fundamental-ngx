@@ -33,6 +33,8 @@ import {
 } from './api/error/error-notifier';
 import { DefaultErrorHandlerService } from './api/error/default-error-handler.service';
 
+import { UrlOverriderPipe } from './api/urls/url-overrider.pipe';
+
 export type Constructor<T> = new (...args: any[]) => T
 
 @NgModule({
@@ -42,8 +44,12 @@ export type Constructor<T> = new (...args: any[]) => T
         MessagingModule,
         PluginLauncherModule
     ],
+    declarations: [
+        UrlOverriderPipe,
+    ],
     exports: [
-        PluginLauncherModule
+        PluginLauncherModule,
+        UrlOverriderPipe
     ]
 })
 export class AppShellModule {
