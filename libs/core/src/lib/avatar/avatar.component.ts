@@ -104,7 +104,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     @HostBinding('attr.role')
     get role(): string {
-        return this.zoomGlyph ? 'button' : 'presentation';
+        return this.zoomGlyph ? 'button' : 'img';
     }
 
     /** @hidden */
