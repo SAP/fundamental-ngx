@@ -23,9 +23,7 @@ export const isAbsoluteUrl = (uri: string): boolean => {
 }
 
 /**
- *
- * @param elements
- * @param fn
+ * Recursive DOM tree traversal function
  */
 export const walkDomTree = (elements: HTMLElement[], fn: Function) => {
     elements.forEach((element) => {

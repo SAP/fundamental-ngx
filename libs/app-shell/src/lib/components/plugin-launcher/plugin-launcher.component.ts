@@ -233,8 +233,6 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             this._ngComponent = remoteModule[pluginComponentName];
         }
 
-        this.injectBaseUrlToComponent();
-
         // check if component is a function
         const isComponentDefined = typeof this._ngComponent === 'function';
 
@@ -244,6 +242,7 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
             );
         }
 
+        this.injectBaseUrlToComponent();
         this.overrideElementUrls();
         this._cd.detectChanges();
     }
@@ -264,6 +263,10 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         );
     }
 
+    /**
+     * Injects the domain name to dynamically created component
+     * To be used for UrlOverriderPipe
+     */
     private injectBaseUrlToComponent() {
         this._ngComponentInjector = Injector.create({
             providers: [
