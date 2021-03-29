@@ -11,7 +11,8 @@ import {
     isDevMode,
     LOCALE_ID,
     OnDestroy,
-    OnInit, Optional,
+    OnInit,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation

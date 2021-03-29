@@ -6,15 +6,17 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
-    Input, OnDestroy, OnInit, Optional,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { stateType } from '../radio/radio-button/radio-button.component';
-import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
-import { applyCssClass, ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '../utils/public_api';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 import { Subscription } from 'rxjs';
 

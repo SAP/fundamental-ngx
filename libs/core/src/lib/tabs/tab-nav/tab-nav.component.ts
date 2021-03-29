@@ -9,7 +9,8 @@ import {
     QueryList,
     ViewEncapsulation,
     OnChanges,
-    OnInit, Optional
+    OnInit,
+    Optional
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';

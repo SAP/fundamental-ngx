@@ -1,4 +1,4 @@
-import { Input, ChangeDetectorRef, Directive, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Directive, InjectFlags, Input, OnDestroy, OnInit } from '@angular/core';
 import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core';
 // tslint:disable-next-line:nx-enforce-module-boundaries
 import { NavigationEnd, Router } from '@angular/router';
@@ -71,7 +71,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
     constructor(protected _cd: ChangeDetectorRef) {
         const injector = PlatformConfig.getInjector();
-        this._contentDensityService = injector?.get(ContentDensityService);
+        this._contentDensityService = injector?.get(ContentDensityService, undefined, InjectFlags.Optional);
         this._router = injector?.get(Router);
         this._router?.events.subscribe(event => {
             if (event instanceof NavigationEnd) {

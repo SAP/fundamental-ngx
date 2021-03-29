@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     EventEmitter,
@@ -8,7 +9,8 @@ import {
     HostListener,
     Input,
     OnDestroy,
-    OnInit, Optional,
+    OnInit,
+    Optional,
     Output,
     QueryList,
     ViewEncapsulation
@@ -121,6 +123,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** @hidden */
     constructor(
         private _keyboardSupportService: KeyboardSupportService<FocusItem>,
+        private _cdr: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
@@ -130,6 +133,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
             this._subscriptions.add(
                 this._contentDensityService._contentDensityListener.subscribe((density) => {
                     this.compact = density !== 'cozy';
+                    this._cdr.detectChanges();
                 })
             );
         }
