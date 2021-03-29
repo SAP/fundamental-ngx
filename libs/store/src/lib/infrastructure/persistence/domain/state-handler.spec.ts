@@ -10,9 +10,9 @@ interface MoneyDTO {
 }
 
 interface Item {
-    title?: string;
-    price?: number;
-    amount?: Money;
+    title: string;
+    price: number;
+    amount: Money;
 }
 
 interface ReqDTO extends BaseEntityDTO {

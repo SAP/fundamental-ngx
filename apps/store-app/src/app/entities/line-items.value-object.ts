@@ -2,9 +2,9 @@ import { BaseValue, RESTResource } from '@fundamental-ngx/store';
 import { Money } from './money.value-object';
 
 export interface Item {
-    title?: string;
-    price?: number;
-    amount?: Money;
+    title: string;
+    price: number;
+    amount: Money;
 }
 
 @RESTResource({

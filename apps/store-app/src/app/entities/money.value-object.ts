@@ -1,4 +1,4 @@
-import { BaseValue } from '../../../../../libs/store/src/lib/infrastructure/persistence/domain/base-classes/base-value';
+import { BaseValue } from '@fundamental-ngx/store';
 
 interface MoneyDTO {
     amount: number;
