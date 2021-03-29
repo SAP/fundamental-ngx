@@ -88,6 +88,7 @@ import { IllustratedMessageModule } from './illustrated-message/illustrated-mess
 import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
 import { StatusIndicatorModule } from './status-indicator/status-indicator.module';
 import { GridListModule } from './grid-list/grid-list.module';
+import { FacetModule } from './facets/facet.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -113,6 +114,7 @@ import { GridListModule } from './grid-list/grid-list.module';
         DragAndDropModule,
         DynamicPageModule,
         DynamicSideContentModule,
+        FacetModule,
         FeedListItemModule,
         FeedInputModule,
         FileUploaderModule,
