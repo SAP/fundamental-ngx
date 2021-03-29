@@ -82,7 +82,7 @@ export class TablePopinExampleComponent implements OnInit {
 
     ngOnInit(): void {
         this.navigationArrow$ = this._rtlService.rtl.pipe(
-            map((isRtl) => (isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow'))
+            map((isRtl) => (isRtl ? 'slim-arrow-left' : 'slim-arrow-right'))
         );
     }
 

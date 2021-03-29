@@ -115,6 +115,10 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     glyphAriaLabel: string;
 
+    /** The tooltip for the input group icon. */
+    @Input()
+    iconTitle: string;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();

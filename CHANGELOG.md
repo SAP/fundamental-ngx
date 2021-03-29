@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.64...v0.29.0-rc.65) (2021-03-29)
+
+## [0.29.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.63...v0.29.0-rc.64) (2021-03-29)
+
+## [0.29.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.62...v0.29.0-rc.63) (2021-03-29)
+
+## [0.29.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.61...v0.29.0-rc.62) (2021-03-29)
+
+
+### Features
+
+* (Core) introduce Facets component ([#4977](https://github.com/SAP/fundamental-ngx/issues/4977)) ([ccf7c4b](https://github.com/SAP/fundamental-ngx/commit/ccf7c4b6f2854311f30454652da3cc075a47b196))
+
+## [0.29.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.60...v0.29.0-rc.61) (2021-03-28)
+
+## [0.29.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.59...v0.29.0-rc.60) (2021-03-28)
+
+## [0.29.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.58...v0.29.0-rc.59) (2021-03-28)
+
+## [0.29.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.57...v0.29.0-rc.58) (2021-03-27)
+
+## [0.29.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.56...v0.29.0-rc.57) (2021-03-26)
+
+
+### Bug Fixes
+
+* add GridListModule to the exports ([#5020](https://github.com/SAP/fundamental-ngx/issues/5020)) ([cd7485b](https://github.com/SAP/fundamental-ngx/commit/cd7485b997befdc00a83f924d6f97c84e3b53c41))
+
+## [0.29.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.55...v0.29.0-rc.56) (2021-03-26)
+
+
+### Bug Fixes
+
+* (Core) add input for tooltip for multi-input / input group ([#5009](https://github.com/SAP/fundamental-ngx/issues/5009)) ([2399254](https://github.com/SAP/fundamental-ngx/commit/2399254d138adac97c127d5689ade98c7c7bf7de))
+
 ## [0.29.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.55) (2021-03-26)
 
 
