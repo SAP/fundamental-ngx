@@ -204,6 +204,12 @@ export class MultiInputComponent implements
     @Input()
     itemTemplate: TemplateRef<any>;
 
+    /**
+     * The tooltip for the multi-input icon.
+     */
+    @Input()
+    title: string;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
