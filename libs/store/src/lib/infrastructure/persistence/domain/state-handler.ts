@@ -1,29 +1,23 @@
 import 'reflect-metadata';
 import { BaseValue } from '../../persistence/domain/base-classes/base-value';
+import { Type } from '../../../domain/public_api';
 
-type Class<T> = new(...args: any[]) => T;
-type ArrayClass<T> = Array<Class<T>>;
-export function instanceForType<T>(Type: Class<T>, fromState?: any) {
+export function instanceForType<T>(Type: Type<T>, fromState = {}) {
     const newState = new Type();
 
-    return new Proxy(newState, new StateHandler(
-        {
-            title: 'Req 1',
-            lineItems: [
-                { title: 'Line1', price: 100, amount: { currency: 'EUR', amount: 200 }},
-                { title: 'Line1', price: 200, amount: { currency: 'USD', amount: 200 }}
-            ]
-        }
-        )); // <--- this.internalState ?? fromState
+    return new Proxy(newState, new StateHandler(fromState));
 }
-
+/**
+ *  Proxy wrapper
+ */
 class StateHandler<TModel> {
     constructor(
         private targetState?: TModel
     ) {
     }
 
-    get(target: any, prop: PropertyKey, r: any): any {
+    get(target: any, prop: PropertyKey): any {
+        // Check is an array and wraps a new one proxy
         if (['[object Object]', '[object Array]']
             .indexOf(Object.prototype.toString.call(this.targetState[prop])) > -1) {
             return new Proxy(this.targetState[prop], this);
@@ -31,7 +25,7 @@ class StateHandler<TModel> {
         return target[prop] || this.targetState[prop];
     }
 
-    set<T>(target: TModel, key: PropertyKey, value: Class<T> | ArrayClass<T>, receiver: any): boolean {
+    set<T>(target: TModel, key: PropertyKey, value: Type<T> | Array<Type<T>>): boolean {
         if (value instanceof BaseValue) {
             if (!value.dto) {
                 this.targetState[key] = value;
@@ -42,8 +36,8 @@ class StateHandler<TModel> {
 
             let clonedVO = target[key] && value.clone();
             if (!isEqual) {
-                target[key] = new (Object.getPrototypeOf(value).constructor)(value.dto);
-                this.targetState[key] = target[key];
+                clonedVO = new (Object.getPrototypeOf(value).constructor)(value.dto);
+                this.targetState[key] = clonedVO;
                 return true;
             }
         } else {

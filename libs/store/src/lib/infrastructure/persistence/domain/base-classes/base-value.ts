@@ -1,16 +1,18 @@
 import { Composite } from './composite';
 
 export abstract class BaseValue<T> extends Composite<T>{
-    dto: T;
+    readonly dto: T;
 
     protected constructor(dto: T) {
         super();
         this.dto = Object.freeze(dto);
     }
 
+    /**
+     * Clone Value Object since they are immutable
+     */
     clone() {
-        const copyValue = { ...this.dto };
-        return copyValue;
+        return { ...this.dto };
     }
 
     /**

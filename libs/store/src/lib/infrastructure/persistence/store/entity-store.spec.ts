@@ -2,6 +2,7 @@ import { of } from 'rxjs';
 
 import { DefaultEntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
+import { Type } from '../../../domain/public_api';
 import { EntityCollectionService } from './entity-collection-service';
 
 class User {
@@ -37,6 +38,7 @@ class UserCollectionServiceMock implements Partial<EntityCollectionService<User>
 class QueryBuilderMock extends QueryBuilder<User> {}
 
 describe('Default Entity Store', () => {
+    let entity: Type<User>;
     let store: DefaultEntityStore<User>;
     let collectionService: EntityCollectionService<User>;
     let queryBuilder: QueryBuilder<User>;
@@ -44,7 +46,7 @@ describe('Default Entity Store', () => {
     beforeEach(() => {
         collectionService = new UserCollectionServiceMock() as EntityCollectionService<User>;
         queryBuilder = new QueryBuilderMock(null);
-        store = new DefaultEntityStore(collectionService, queryBuilder);
+        store = new DefaultEntityStore(entity, collectionService, queryBuilder);
     });
 
     it('should be created', () => {

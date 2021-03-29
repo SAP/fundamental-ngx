@@ -93,7 +93,10 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
         const entityCollectionService = this.entityCollectionsService.getEntityCollectionService<T>(this.entity);
         const queryBuilder = new QueryBuilder(new DefaultQueryService(entityCollectionService));
 
-        const result = new DefaultEntityStore<T>(entityCollectionService, queryBuilder, {
+        const result = new DefaultEntityStore<T>(
+            this.entity,
+            entityCollectionService,
+            queryBuilder, {
             cachePolicy: this.cachePolicy,
             fetchPolicy: this.fetchPolicy,
             chainingStrategy: this.chainingStrategyMap

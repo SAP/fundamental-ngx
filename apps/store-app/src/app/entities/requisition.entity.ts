@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-
 import { Entity, RESTResource } from '@fundamental-ngx/store';
 import { LineItem } from './line-items.value-object';
 import { BaseEntityDTO } from '../../../../../libs/store/src/lib/infrastructure/persistence/domain/base-classes/base-entity';

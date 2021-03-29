@@ -5,10 +5,14 @@ import {
     CachePolicy,
     FetchPolicy,
     IdentityKey,
-    BaseEntity,
     ChainingStrategyFieldsMap
 } from '../../../domain/public_api';
+import { Type } from '../../../domain/public_api';
+import { QueryService } from '../query/query.service';
 import { QueryBuilder } from '../query/query-builder';
+import { QuerySnapshot } from '../query/query';
+import { instanceForType } from '../domain/state-handler';
+import { BaseEntity } from '../../../domain/entity';
 import { EntityCollectionService } from './entity-collection-service';
 
 //#region Interfaces
@@ -37,6 +41,12 @@ export interface EntityStore<T> {
      * @param entity Entity to be deleted
      */
     delete(entity: T): Observable<T>;
+
+    /**
+     * Create new entity instance wrapped Proxy
+     * @param fromState initial state
+     */
+    createEntityInstance(fromState?: any): T;
 }
 
 //#endregion
@@ -58,6 +68,7 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
     }
 
     constructor(
+        protected readonly _entity: Type<T>,
         protected readonly _entityService: EntityCollectionService<T>,
         protected readonly _queryBuilder: QueryBuilder<T>,
         protected readonly _options?: EntityStoreOptions<T>
@@ -78,6 +89,30 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
 
     delete(entity: T): Observable<T> {
         return this._entityService.delete(entity).pipe(map(() => entity));
+    }
+
+    createEntityInstance(fromState?: T): T {
+        return instanceForType(this._entity, fromState);
+    }
+}
+
+export class DefaultQueryService<TModel> extends QueryService<TModel> {
+    constructor(private service: EntityCollectionService<TModel>) {
+        super();
+    }
+
+    getByKey(id: string): Observable<TModel> {
+        return this.service.getByKey(id);
+    }
+
+    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
+        // Pass query payload instead of QueryParams
+        // TODO: Should we override EntityCollectionService interface for that?
+        return this.service.getWithQuery(query as any);
+    }
+
+    count(): Observable<number> {
+        return this.service.count$;
     }
 }
 
