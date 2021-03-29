@@ -6,7 +6,9 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
-    Input, OnDestroy, OnInit,
+    Input,
+    OnDestroy,
+    OnInit,
     Optional,
     QueryList
 } from '@angular/core';

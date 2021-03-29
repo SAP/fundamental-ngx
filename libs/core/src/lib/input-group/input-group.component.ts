@@ -11,7 +11,8 @@ import {
     ChangeDetectorRef,
     ElementRef,
     OnDestroy,
-    OnInit, Optional
+    OnInit,
+    Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';

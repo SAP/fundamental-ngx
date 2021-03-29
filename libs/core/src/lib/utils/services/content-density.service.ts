@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, startWith } from 'rxjs/operators';
 
 export type ContentDensity = 'cozy' | 'condensed' | 'compact';
@@ -20,6 +20,7 @@ export class ContentDensityService {
         );
     }
 
+    /** Content Density BehaviourSubject */
     get contentDensity(): BehaviorSubject<ContentDensity> {
         return this._contentDensity;
     }

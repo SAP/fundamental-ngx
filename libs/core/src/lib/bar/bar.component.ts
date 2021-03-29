@@ -3,8 +3,10 @@ import {
     Component,
     ElementRef,
     Input,
-    OnChanges, OnDestroy,
-    OnInit, Optional,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
@@ -53,7 +55,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
 
     /** Whether to apply cozy mode to the Bar. */
     @Input()
-    cozy: boolean = null;
+    cozy?: boolean;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -63,7 +65,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.cozy === null && this._contentDensityService) {
+        if (this.cozy === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
                 this.cozy = density === 'cozy';
                 this.buildComponentCssClass();

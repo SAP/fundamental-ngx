@@ -3,7 +3,10 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    Input, OnDestroy, OnInit, Optional,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
     Output,
     ViewChild
 } from '@angular/core';
