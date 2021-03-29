@@ -1,10 +1,22 @@
 import {
     addIsActiveClass,
-    checkElementScreenshot, clearValue,
+    checkElementScreenshot,
+    clearValue,
     click,
-    getAttributeByName, getCSSPropertyByName, getElementArrayLength, getText, getValue, mouseHoverElement,
-    refreshPage, saveElementScreenshot, scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed, waitForPresent
+    getAttributeByName,
+    getCSSPropertyByName,
+    getElementArrayLength,
+    getImageTagBrowserPlatform,
+    getText,
+    getValue,
+    mouseHoverElement,
+    refreshPage,
+    saveElementScreenshot,
+    scrollIntoView,
+    sendKeys,
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { DatePicker } from '../pages/date-picker.po';
 import {
@@ -38,26 +50,14 @@ import {
     input,
     currentYear,
     currentMonth
-} from '../fixtures/testData/date-picker';
+} from '../fixtures/appData/date-picker-contents';
 
 import {
-    activeButtonDatePickerActiveState,
     activeBtnDatePicker,
-    activeButtonDatePickerFocusState,
-    activeButtonDatePickerHoverState,
-    activeDivDatePickerActiveState,
     activeDivDatePicker,
-    activeDivDatePickerFocusState,
-    activeDivDatePickerHoverState, buttonBulgarianActiveState,
-    bulgarianButton, buttonBulgarianFocusState,
-    buttonBulgarianHoverState,
-    buttonFrenchActiveState,
+    bulgarianButton,
     frenchButton,
-    buttonFrenchFocusState,
-    buttonFrenchHoverState,
-    buttonGermanActiveState,
-    germanButton, buttonGermanFocusState,
-    buttonGermanHoverState
+    germanButton,
 } from '../fixtures/testData/date-picker-tags';
 
 describe('Date picker suite', function() {
@@ -83,8 +83,8 @@ describe('Date picker suite', function() {
         const buttonsLength = getElementArrayLength(buttonDatePicker);
         const inputsLength = getElementArrayLength(inputDatePicker);
         for (let i = 1; i < buttonsLength; i++) {
-            waitForElDisplayed(buttonDatePicker);
-            waitForElDisplayed(inputDatePicker);
+            waitForElDisplayed(buttonDatePicker, i);
+            waitForElDisplayed(inputDatePicker, i);
         }
         expect(buttonsLength).toEqual(inputsLength);
     });
@@ -309,7 +309,7 @@ describe('Date picker suite', function() {
         }
     });
 
-    fdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
 
         // skipped for now due to the issue with selected date for disabled components
         xit('should check examples visual regression', () => {
@@ -317,130 +317,70 @@ describe('Date picker suite', function() {
             expect(datePickerPage.compareWithBaseline()).toBeLessThan(1);
         });
 
-        it('should check active button active state', () => {
-            const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
-            for (let i = 0; i < activeButtonDatePickerLength; i++) {
-                scrollIntoView(activeButtonDatePicker, i);
-                checkElementActiveState(activeButtonDatePicker, activeBtnDatePicker + activeButtonDatePickerActiveState
-                    + '-' + i, button, i);
-            }
-        });
-
-        it('should check active input hover state', () => {
+        it('should check active input visual regression', () => {
             const activeDatePickerLength = getElementArrayLength(activeDatePicker);
             for (let i = 0; i < activeDatePickerLength; i++) {
                 scrollIntoView(activeDatePicker, i);
                 clearValue(activeInputDatePicker, i);
-                checkElementHoverState(activeDatePicker, activeDivDatePicker + activeDivDatePickerHoverState
-                    + '-' + i, input, i);
+                checkElementStates(activeDatePicker, activeDivDatePicker + i + '-', input, i);
             }
         });
 
-        it('should check active input active state', () => {
-            const activeDatePickerLength = getElementArrayLength(activeDatePicker);
-            for (let i = 0; i < activeDatePickerLength; i++) {
-                scrollIntoView(activeDatePicker, i);
-                clearValue(activeInputDatePicker, i);
-                checkElementActiveState(activeDatePicker, activeDivDatePicker + activeDivDatePickerActiveState
-                    + '-' + i, input, i);
-            }
-        });
-
-        it('should check focus input active state', () => {
-            const activeDatePickerLength = getElementArrayLength(activeDatePicker);
-            for (let i = 0; i < activeDatePickerLength; i++) {
-                scrollIntoView(activeDatePicker, i);
-                clearValue(activeInputDatePicker, i);
-                checkElementFocusState(activeDatePicker, activeDivDatePicker + activeDivDatePickerFocusState
-                    + '-' + i, input, i);
-            }
-        });
-
-        it('should check active button hover state', () => {
-            const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
-            for (let i = 0; i < activeButtonDatePickerLength; i++) {
-                scrollIntoView(activeButtonDatePicker, i);
-                checkElementHoverState(activeButtonDatePicker, activeBtnDatePicker + activeButtonDatePickerHoverState
-                    + '-' + i, button, i);
+        it('should check active button visual regression', () => {
+            const activeButtonDatePickerLength = getElementArrayLength(buttonDatePicker);
+            for (let i = 0; i < activeButtonDatePickerLength - 1; i++) {
+                sendKeys(['Escape']);
+                if (i === 8) {
+                    continue;
+                }
+                scrollIntoView(buttonDatePicker, i);
+                checkElementStates(buttonDatePicker, activeBtnDatePicker + i + '-', button, i);
             }
         });
 
 
-        it('should check active button focus state', () => {
-            const activeButtonDatePickerLength = getElementArrayLength(activeButtonDatePicker);
-            for (let i = 0; i < activeButtonDatePickerLength; i++) {
-                scrollIntoView(activeButtonDatePicker, i);
-                checkElementFocusState(activeButtonDatePicker, activeBtnDatePicker + activeButtonDatePickerFocusState
-                    + '-' + i, button, i);
-                click(activeButtonDatePicker, i);
-            }
-        });
-
-        it('should check french button hover state', () => {
-                scrollIntoView(buttonFrench);
-                checkElementHoverState(buttonFrench, frenchButton + buttonFrenchHoverState, button);
-        });
-
-        it('should check french button active state', () => {
-                scrollIntoView(buttonFrench);
-                checkElementActiveState(buttonFrench, frenchButton + buttonFrenchActiveState, button);
-        });
-
-        it('should check french button focus state', () => {
+        it('should check french button visual regression', () => {
             scrollIntoView(buttonFrench);
-            checkElementFocusState(buttonFrench, frenchButton + buttonFrenchFocusState, button);
+            checkElementStates(buttonFrench, frenchButton, button);
         });
 
-        it('should check german button hover state', () => {
+
+        it('should check german button visual regression', () => {
             scrollIntoView(buttonGerman);
-            checkElementHoverState(buttonGerman, germanButton + buttonGermanHoverState, button);
+            checkElementStates(buttonGerman, germanButton, button);
         });
 
-        it('should check german button active state', () => {
-            scrollIntoView(buttonGerman);
-            checkElementActiveState(buttonGerman, germanButton + buttonGermanActiveState, button);
-        });
-
-        it('should check german button focus state', () => {
-            scrollIntoView(buttonGerman);
-            checkElementFocusState(buttonGerman, germanButton + buttonGermanFocusState, button);
-        });
-
-        it('should check bulgarian button hover state', () => {
+        it('should check bulgarian button visual regression', () => {
             scrollIntoView(buttonBulgarian);
-            checkElementHoverState(buttonBulgarian, bulgarianButton + buttonBulgarianHoverState, button);
-        });
-
-        it('should check bulgarian button active state', () => {
-            scrollIntoView(buttonBulgarian);
-            checkElementActiveState(buttonBulgarian, bulgarianButton + buttonBulgarianActiveState, button);
-        });
-
-        it('should check bulgarian button focus state', () => {
-            scrollIntoView(buttonBulgarian);
-            checkElementFocusState(buttonBulgarian, bulgarianButton + buttonBulgarianFocusState, button);
+            checkElementStates(buttonBulgarian, bulgarianButton, button);
         });
     });
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
         mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag, datePickerPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, datePickerPage.getScreenshotFolder(), index))
+        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index))
             .toBeLessThan(2, `${elementName} element hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
-        saveElementScreenshot(selector, tag, datePickerPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, datePickerPage.getScreenshotFolder(), index))
+        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index))
             .toBeLessThan(2, `${elementName} element focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
-        saveElementScreenshot(selector, tag, datePickerPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, datePickerPage.getScreenshotFolder(), index))
+        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index);
+        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index))
             .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
+    }
+
+    function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
+        checkElementHoverState(selector, tag + 'hover-state-', elementName, index);
+        checkElementFocusState(selector, tag + 'focus-state-', elementName, index);
+        checkElementActiveState(selector, tag + 'active-state-', elementName, index);
     }
 
 });
