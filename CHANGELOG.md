@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.64...v0.29.0-rc.65) (2021-03-29)
+
+## [0.29.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.63...v0.29.0-rc.64) (2021-03-29)
+
+## [0.29.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.62...v0.29.0-rc.63) (2021-03-29)
+
+## [0.29.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.61...v0.29.0-rc.62) (2021-03-29)
+
+
+### Features
+
+* (Core) introduce Facets component ([#4977](https://github.com/SAP/fundamental-ngx/issues/4977)) ([ccf7c4b](https://github.com/SAP/fundamental-ngx/commit/ccf7c4b6f2854311f30454652da3cc075a47b196))
+
 ## [0.29.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.60...v0.29.0-rc.61) (2021-03-28)
 
 ## [0.29.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.59...v0.29.0-rc.60) (2021-03-28)
