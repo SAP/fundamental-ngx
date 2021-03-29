@@ -87,6 +87,8 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
 import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
 import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
 import { StatusIndicatorModule } from './status-indicator/status-indicator.module';
+import { GridListModule } from './grid-list/grid-list.module';
+import { FacetModule } from './facets/facet.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -112,6 +114,7 @@ import { StatusIndicatorModule } from './status-indicator/status-indicator.modul
         DragAndDropModule,
         DynamicPageModule,
         DynamicSideContentModule,
+        FacetModule,
         FeedListItemModule,
         FeedInputModule,
         FileUploaderModule,
@@ -174,7 +177,8 @@ import { StatusIndicatorModule } from './status-indicator/status-indicator.modul
         SliderModule,
         OnlyDigitsModule,
         IllustratedMessageModule,
-        StatusIndicatorModule
+        StatusIndicatorModule,
+        GridListModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })

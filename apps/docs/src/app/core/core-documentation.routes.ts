@@ -105,6 +105,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
             },
             {
+              path: 'facets',
+              loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
+            },
+            {
               path: 'feed-list-item',
                 loadChildren: () =>
                     import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)

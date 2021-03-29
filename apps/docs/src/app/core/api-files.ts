@@ -80,6 +80,10 @@ export const API_FILES = {
         'DynamicPageFooterComponent',
         'DynamicPageContentComponent'
     ],
+    facets: [
+      'FacetComponent',
+      'FacetGroupComponent'
+    ],
     feedInput: [
         'FeedInputComponent',
         'FeedInputTextareaDirective',
