@@ -52,7 +52,7 @@
     "active-test": "ng test core --watch true --browsers=ChromeHeadless",
     "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
     "compile-typedoc-all": "npm run compile-typedoc-core && npm run compile-typedoc-platform",
-    "compile-typedoc-core": "rm -rf apps/docs/src/assets/typedoc/core && typedoc --out apps/docs/src/assets/typedoc/core libs/core/src/lib --hideGenerator --theme apps/docs/src/fd-typedoc --entryPoints libs/core/src/index.ts",
+    "compile-typedoc-core": "rm -rf apps/docs/src/assets/typedoc/core && typedoc --out apps/docs/src/assets/typedoc/core libs/core/src/lib --hideGenerator --theme apps/docs/src/fd-typedoc",
     "compile-typedoc-platform": "rm -rf apps/docs/src/assets/typedoc/platform && typedoc --out apps/docs/src/assets/typedoc/platform libs/platform/src/lib --hideGenerator --theme apps/docs/src/fd-typedoc",
     "compile-typedoc-json": "typedoc --json apps/docs/src/assets/typedoc/typedoc.json --hideGenerator --theme apps/docs/src/fd-typedoc libs/core/src/lib",
     "build:schematics": "./node_modules/.bin/tsc -p libs/core/tsconfig.schematics.json && npm run copy:schemas && npm run copy:collection",
