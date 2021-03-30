@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { isAbsoluteUrl, resolveUrl, walkDomTree } from './url-utils';
 
 /**
- *  UrlDomOverriderService is responsible to traverse the whole component's DOM tree
+ *  Service is responsible to traverse the whole component's DOM tree
  *  with prepending a base URL prefix to an every element with a relative URL source
  */
 @Injectable({
@@ -45,7 +45,7 @@ export class UrlDomOverriderService {
     }
 
     /**
-     * Prepends a base url to an element
+     * Prepends a base url to an element attr
      */
     private overrideElementSource(element: HTMLElement, attr: string, url: string, baseUrl: string) {
         if (!isAbsoluteUrl(url)) {

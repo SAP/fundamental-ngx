@@ -2,8 +2,8 @@
  *
  * Get 'http://localhost:4203/'  from 'http://localhost:4203/remoteEntry.js'
  */
-export const getBaseUrl = (uri: string): string => {
-    return new URL('/', uri).href;
+export const getBaseUrl = (url: string): string => {
+    return new URL('/', url).href;
 }
 
 /**
@@ -17,9 +17,9 @@ export const resolveUrl = (baseUrl: string, url: string) => {
  * Simplified version
  * This could be used: https://github.com/sindresorhus/is-absolute-url
  */
-export const isAbsoluteUrl = (uri: string): boolean => {
+export const isAbsoluteUrl = (url: string): boolean => {
     // checks http(s):// only
-    return /^https?:\/\//i.test(uri);
+    return /^https?:\/\//i.test(url);
 }
 
 /**
