@@ -1,5 +1,5 @@
-export const text = 'test';
-export const button = 'button';
+export const testText = 'test';
+export const buttonTag = 'button';
 export const fdTypeOptions = [
     'standard',
     'positive',
@@ -11,7 +11,6 @@ export const fdTypeOptions = [
     'emphasized',
     'menu'
 ];
-
 export const iconOptions = [
     'accelerated',
     'accept',
