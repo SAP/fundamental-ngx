@@ -30,7 +30,7 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 import { ListComponent } from '../list/list.component';
-import { DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -175,6 +175,10 @@ export class MultiInputComponent implements
     @Input()
     showAllButton = true;
 
+    /** Max width of multi input body in PX */
+    @Input()
+    bodyMaxWidth: number = null;
+
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true, approveButtonText: 'Select' };
@@ -192,6 +196,12 @@ export class MultiInputComponent implements
      */
     @Input()
     itemTemplate: TemplateRef<any>;
+
+    /**
+     * The tooltip for the multi-input icon.
+     */
+    @Input()
+    title: string;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -402,7 +412,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleInputKeydown(event: KeyboardEvent): void {
+    _handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
                 this.openChangeHandle(true);
@@ -422,7 +432,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSearchTermChange(searchTerm: string): void {
+    _handleSearchTermChange(searchTerm: string): void {
         if (this.searchTerm !== searchTerm) {
             this._applySearchTermChange(searchTerm);
             if (!this.open) {
@@ -432,14 +442,22 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    showAllClicked(event: MouseEvent): void {
+    _showAllClicked(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
         this._applySearchTermChange('');
+        this.searchInputElement.nativeElement.focus();
     }
 
     /** @hidden */
-    onSubmit(): void {
+    _showAllKeyDown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            this._showAllClicked(event);
+        }
+    }
+
+    /** @hidden */
+    _onSubmit(): void {
         if (this.allowNewTokens && this.newTokenValidateFn(this.searchTerm)) {
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
@@ -468,7 +486,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    moreClicked(): void {
+    _moreClicked(): void {
         this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
         this.displayedValues.forEach(value => {
@@ -481,7 +499,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    addOnButtonClicked(): void {
+    _addOnButtonClicked(): void {
         this.openChangeHandle(!this.open);
     }
 

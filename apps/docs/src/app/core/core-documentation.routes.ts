@@ -30,6 +30,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
             },
             {
+                path: 'avatar-group',
+                loadChildren: () => import('./component-docs/avatar-group/avatar-group-docs.module').then((m) => m.AvatarGroupDocsModule)
+            },
+            {
                 path: 'bar',
                 loadChildren: () => import('./component-docs/bar/bar-docs.module').then((m) => m.BarDocsModule)
             },
@@ -99,6 +103,10 @@ export const ROUTES: Routes = [
             {
                 path: 'dynamic-page',
                 loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
+            },
+            {
+              path: 'facets',
+              loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
             },
             {
               path: 'feed-list-item',

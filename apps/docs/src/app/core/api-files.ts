@@ -22,6 +22,14 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
+    avatarGroup: [
+        'AvatarGroupComponent',
+        'AvatarGroupItemDirective',
+        'AvatarGroupOverflowBodyDirective',
+        'AvatarGroupOverflowItemDirective',
+        'AvatarGroupOverflowButtonDirective',
+        'AvatarGroupOverflowButtonTextDirective'
+    ],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     card: [
         'CardComponent',
@@ -71,6 +79,10 @@ export const API_FILES = {
         'DynamicPageGlobalActionsComponent',
         'DynamicPageFooterComponent',
         'DynamicPageContentComponent'
+    ],
+    facets: [
+      'FacetComponent',
+      'FacetGroupComponent'
     ],
     feedInput: [
         'FeedInputComponent',

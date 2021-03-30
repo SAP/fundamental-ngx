@@ -40,6 +40,8 @@ export * from './dynamic-component/dynamic-component-injector';
 export * from './dynamic-component/dynamic-component.service';
 
 export * from './datatypes/hash.datatype';
+export * from './datatypes/size.datatype';
+export * from './datatypes/color-accent.datatype';
 export * from './services/rtl.service';
 export * from './services/themes.service';
 export * from './services/carousel.service';

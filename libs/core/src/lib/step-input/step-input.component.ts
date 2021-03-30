@@ -171,7 +171,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** Hint displayed inside input before user writes value */
     @Input()
-    placeholder: string;
+    placeholder = '';
 
     /** Emits event when input gets focused */
     @Output()

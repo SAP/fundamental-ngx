@@ -41,6 +41,7 @@
         <fd-tokenizer
             *ngIf="selected"
             [compact]="contentDensity === 'compact'"
+            [tokenizerFocusable]="false"
             class="fd-multi-input-tokenizer-custom"
             [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
@@ -51,8 +52,6 @@
             <input
                 #searchInputElement
                 type="text"
-                (focusin)="tokenizer.inputFocused = true"
-                (focusout)="tokenizer.inputFocused = false"
                 class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                 fdp-auto-complete
                 [inputText]="inputText"

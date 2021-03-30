@@ -173,7 +173,7 @@ describe('Step input test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             stepInputPage.saveExampleBaselineScreenshot();
-            expect(stepInputPage.compareWithBaseline()).toBeLessThan(1);
+            expect(stepInputPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });
