@@ -25,6 +25,7 @@ export class BaseComponentPo {
             checkRtlOrientation(areas, i);
             scrollIntoView(switchers, i);
             click(switchers, i);
+            waitForElDisplayed(areas, i);
             checkLtrOrientation(areas, i);
         }
     };

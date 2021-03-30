@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DEPLOY_TO_PREVIEW_CHANNEL_RESULT=$(firebase hosting:channel:deploy platform-b-pr-$TRAVIS_PULL_REQUEST --expires 30d --token $FIREBASE_TOKEN --json)
+DEPLOY_TO_PREVIEW_CHANNEL_RESULT=$(firebase hosting:channel:deploy platform-b-pr-$TRAVIS_PULL_REQUEST --expires 1.5d --token $FIREBASE_TOKEN --json)
 
 RESULT=`echo ${DEPLOY_TO_PREVIEW_CHANNEL_RESULT} | jq -r '.result'`
 ALLURE_RESULTS=`echo ${RESULT} | jq -r '."allure-results"'`

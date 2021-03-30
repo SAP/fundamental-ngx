@@ -13,8 +13,16 @@
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
             </td>
-            <td fd-table-cell>{{ row.column2 }}</td>
-            <td fd-table-cell>{{ row.column3 }}</td>
+            <td fd-table-cell>
+                <p fd-table-text maxWidth="250px" [noWrap]="true">
+                    {{ row.column2 }}
+                </p>
+            </td>
+            <td fd-table-cell>
+                <p fd-table-text maxWidth="250px">
+                    {{ row.column3 }}
+                </p>
+            </td>
             <td fd-table-cell>{{ row.date }}</td>
             <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>

@@ -164,7 +164,7 @@ let profileTileUniqueId = 0;
 @Directive({
     selector: '[fdTileProfileImg], [fd-tile-profile-img]',
     host: {
-        'attr.role': 'presentation'
+        'attr.role': 'img'
     }
 })
 export class TileProfileImgDirective {

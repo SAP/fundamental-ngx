@@ -58,6 +58,11 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @HostBinding('class.fd-list--multi-input')
     multiInputMode = false;
 
+    /** Whether list is used in mobile mode*/
+    @Input()
+    @HostBinding('class.fd-list--mobile')
+    mobileMode = false;
+
     /** Whether compact mode is included to component */
     @Input()
     @HostBinding('class.fd-list--compact')

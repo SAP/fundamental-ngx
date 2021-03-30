@@ -2,10 +2,15 @@ $fd-namespace: 'fd';
 $fixedCardGroup: #{$fd-namespace}-fixed-card-group;
 
 .#{$fixedCardGroup} {
+
     &--card-layout {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+
+		* {
+			word-break: break-all;
+		}
     }
 
     &--card-layout-column {

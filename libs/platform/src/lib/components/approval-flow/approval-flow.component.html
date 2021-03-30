@@ -12,7 +12,7 @@
                 <ng-container *ngSwitchCase="'nodesRemove'" [ngTemplateOutlet]="nodesRemove"></ng-container>
                 <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
             </span>
-            <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()">Undo</a>
+            <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()" i18n="@@platformApprovalFlowUndo">Undo</a>
         </bdi>
     </fd-message-strip>
 </div>
@@ -30,8 +30,8 @@
     </div>
 </fd-toolbar>
 
-<div class="approval-flow__watchers" [attr.dir]="_dir" *ngIf=" _approvalProcess?.watchers.length">
-    <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">Watchers</p>
+<div class="approval-flow__watchers" [attr.dir]="_dir" *ngIf="_approvalProcess?.watchers.length || _isEditMode">
+    <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
     <ng-container *ngIf="!_isEditMode">
         <fd-avatar
             *ngFor="let watcher of _approvalProcess?.watchers; trackBy: _trackByFn"
@@ -96,7 +96,7 @@
                         [checkDueDate]="checkDueDate"
                         [dueDateThreshold]="dueDateThreshold"
                         [renderArrow]="columnIndex > 0"
-                        [renderLineBefore]="(_isCarousel && firstColumn && firstNode) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
+                        [renderLineBefore]="(_isCarousel && firstColumn) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
                         [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                         [renderCarouselStartMarker]="(_isCarousel && _metaMap[node.id].isRoot)"
                         [renderCarouselEndMarker]="(_isCarousel && _metaMap[node.id].isLast)"
@@ -133,32 +133,32 @@
 </ng-template>
 
 <ng-template #approverAddSuccess>
-    <ng-container i18n="@@platformApprovalFlowApproverAddSuccess">
+    <ng-container i18n="@@platformApprovalFlowApproverAddedAlert">
         1 approver has been added
     </ng-container>
 </ng-template>
 <ng-template #teamAddSuccess>
-    <ng-container i18n="@@platformApprovalFlowTeamAddSuccess">
+    <ng-container i18n="@@platformApprovalFlowTeamAddedAlert">
         1 team has been added
     </ng-container>
 </ng-template>
 <ng-template #nodeEdit>
-    <ng-container i18n="@@platformApprovalFlowNodeEdit">
+    <ng-container i18n="@@platformApprovalFlowNodeEditedAlert">
         1 approver has been edited
     </ng-container>
 </ng-template>
 <ng-template #nodeRemove>
-    <ng-container i18n="@@platformApprovalFlowNodeRemove">
+    <ng-container i18n="@@platformApprovalFlowNodeRemovedAlert">
         1 approver has been removed
     </ng-container>
 </ng-template>
 <ng-template #nodesRemove>
-    <ng-container i18n="@@platformApprovalFlowNodesRemove">
+    <ng-container i18n="@@platformApprovalFlowNodesRemovedAlert">
         Approvers has been removed
     </ng-container>
 </ng-template>
 <ng-template #teamRemove>
-    <ng-container i18n="@@platformApprovalFlowTeamRemove">
+    <ng-container i18n="@@platformApprovalFlowTeamRemovedAlert">
         1 team has been removed
     </ng-container>
 </ng-template>

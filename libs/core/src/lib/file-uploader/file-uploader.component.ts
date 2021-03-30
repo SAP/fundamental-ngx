@@ -201,6 +201,7 @@ export class FileUploaderComponent implements ControlValueAccessor {
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName;
+        this.inputRefText.nativeElement.placeholder = fileName;
     }
 
     /**

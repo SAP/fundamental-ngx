@@ -1,8 +1,9 @@
-import { SplitButtonComponent } from './split-button.component';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass } from './split-button.component';
 import { MenuModule } from '../menu/menu.module';
+import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
 
 @Component({
@@ -33,7 +34,7 @@ describe('SplitButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule],
+            imports: [MenuModule, ButtonModule],
             declarations: [SplitButtonComponent, TestComponent]
         });
     }));
@@ -101,4 +102,15 @@ describe('SplitButtonComponent', () => {
         expect(mouseEvent.stopPropagation).toHaveBeenCalled();
         expect(componentInstance.selected.elementRef.nativeElement.click).toHaveBeenCalled();
     });
+
+    it('should add button text class', () => {
+        fixture.detectChanges();
+        componentInstance.ngAfterViewInit();
+        const textElement = componentInstance.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
+        expect(textElement.classList.contains(splitButtonTextClass));
+        componentInstance.compact = true;
+        componentInstance.ngOnChanges(<any>{'compact': true});
+        expect(textElement.classList.contains(splitButtonTextCompactClass));
+
+    })
 });
