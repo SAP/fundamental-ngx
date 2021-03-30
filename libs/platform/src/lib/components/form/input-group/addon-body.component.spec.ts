@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { ContentDensity } from '../form-options';
+import { ContentDensity } from '@fundamental-ngx/core';
 import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupAddonBodyComponent } from './addon-body.component';
 

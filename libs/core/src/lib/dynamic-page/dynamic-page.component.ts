@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -11,6 +10,7 @@ import {
     OnDestroy,
     Optional,
     Renderer2,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
@@ -35,7 +35,7 @@ import { debounceTime, delay, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     providers: [DynamicPageService]
 })
-export class DynamicPageComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** Page role  */
     @Input()
     @HostBinding('attr.role')
@@ -83,6 +83,12 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     offset = 0;
 
+    /**
+     * Whether dynamic page should be expanded in whole page.
+     */
+    @Input()
+    expandContent = true;
+
     /** @hidden reference to header component  */
     @ContentChild(DynamicPageSubheaderComponent)
     _pageSubheaderComponent: DynamicPageSubheaderComponent;
@@ -99,11 +105,15 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
     @ContentChild(TabListComponent)
     _tabComponent: TabListComponent;
 
-    /** @hidden **/
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    @ViewChild('dynamicPageElement')
+    _dynamicPageElement: ElementRef;
 
     /** @hidden */
     _headerCollapsible = true;
+
+    /** @hidden **/
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     constructor(
@@ -114,22 +124,19 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
         @Optional() private _columnLayout: FlexibleColumnLayoutComponent
     ) {}
 
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this._listenOnCollapse();
-        this._propagatePropertiesToChildren();
-        if (this._columnLayout && this.autoResponsive) {
-            this._listenToLayoutChange();
-        }
-    }
-
     /**@hidden */
     ngAfterViewInit(): void {
         this._sizeChangeHandle();
         this._removeShadowWhenTabComponent();
         this._listenOnResize();
+        this._listenOnCollapse();
+        this._propagatePropertiesToChildren();
         if (this._pageSubheaderComponent?.collapsible) {
             this._addScrollListeners();
+        }
+
+        if (this._columnLayout && this.autoResponsive) {
+            this._listenToLayoutChange();
         }
 
         setTimeout(() => this._setContainerPositions())
@@ -158,11 +165,7 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
 
     /** Set the positions of the tabs and content with respect to the window */
     private _setContainerPositions(): void {
-        if (this._tabComponent) {
-            this._setTabsPosition();
-        } else {
-            this._setContainerPosition();
-        }
+        this._setDynamicPageHeight();
     }
 
     /** @hidden */
@@ -268,30 +271,14 @@ export class DynamicPageComponent implements AfterContentInit, AfterViewInit, On
             });
     }
 
-    /**
-     * @hidden
-     * set top position of normal content on scrolling
+    /** @hidden
+     * set top position of DynamicPage on scrolling
      */
-    private _setContainerPosition(): void {
-        if (this._contentComponent) {
-            const contentComponentElement = this._contentComponent.elementRef.nativeElement;
-            this._renderer.setStyle(
-                contentComponentElement,
-                'height',
-                this._getCalculatedFullHeight(contentComponentElement)
-            );
-        }
-    }
-
-    /**
-     * @hidden
-     * set position for tabs and tabbed content's position relative to the tabs on scrolling
-     */
-    private _setTabsPosition(): void {
-        if (!this._tabComponent || !this._tabComponent.contentContainer) {
+    private _setDynamicPageHeight(): void {
+        if (!this._dynamicPageElement || !this.expandContent) {
             return;
         }
-        const element = this._tabComponent.contentContainer.nativeElement;
+        const element = this._dynamicPageElement.nativeElement;
         this._renderer.setStyle(
             element,
             'height',

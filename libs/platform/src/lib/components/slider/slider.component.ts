@@ -102,17 +102,6 @@ export class SliderComponent extends BaseInput {
         this.setValue(selectValue);
     }
 
-    /** content Density of element. cozy | compact */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-    }
-    get contentDensity(): ContentDensity {
-        return this._contentDensity;
-    }
-    /** @hidden - Avoiding private property name collision */
-    _contentDensity: ContentDensity = 'compact';
-
     /**
      * Event fired when the state of the slider changes.
      * *$event* can be used to retrieve the new state of the slider.

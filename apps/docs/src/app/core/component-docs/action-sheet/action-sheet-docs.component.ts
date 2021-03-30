@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import * as actionSheetCompactSrc from '!raw-loader!./examples/action-sheet-compact/action-sheet-compact-example.component.html';
 import * as actionSheetCompactSrcTs from '!raw-loader!./examples/action-sheet-compact/action-sheet-compact-example.component.ts';
-import * as actionSheetCosySrc from '!raw-loader!./examples/action-sheet-cosy/action-sheet-cosy-example.component.html';
-import * as actionSheetCosySrcTs from '!raw-loader!./examples/action-sheet-cosy/action-sheet-cosy-example.component.ts';
+import * as actionSheetDefaultSrc from '!raw-loader!./examples/action-sheet-default/action-sheet-default-example.component.html';
+import * as actionSheetDefaultSrcTs from '!raw-loader!./examples/action-sheet-default/action-sheet-default-example.component.ts';
 import * as actionSheetMobileSrc from '!raw-loader!./examples/action-sheet-mobile/action-sheet-mobile-example.component.html';
 import * as actionSheetMobileSrcTs from '!raw-loader!./examples/action-sheet-mobile/action-sheet-mobile-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -27,17 +27,17 @@ export class ActionSheetDocsComponent {
         }
     ];
 
-    actionSheetCosyExample: ExampleFile[] = [
+    actionSheetDefaultExample: ExampleFile[] = [
         {
             language: 'html',
-            code: actionSheetCosySrc,
-            fileName: 'action-sheet-cosy-example',
+            code: actionSheetDefaultSrc,
+            fileName: 'action-sheet-default-example',
         },
         {
             language: 'typescript',
-            code: actionSheetCosySrcTs,
-            fileName: 'action-sheet-cosy-example',
-            component: 'ActionSheetCosyExampleComponent'
+            code: actionSheetDefaultSrcTs,
+            fileName: 'action-sheet-default-example',
+            component: 'ActionSheetDefaultExampleComponent'
         }
     ];
 

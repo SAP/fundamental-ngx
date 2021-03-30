@@ -1,0 +1,450 @@
+/*!
+ * Fundamental Library Styles v0.17.0-rc.11
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
+ */
+ @charset "UTF-8";
+ .fd-facet {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0
+ }
+ .fd-facet::after,
+ .fd-facet::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-facet-group {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: row;
+   flex-direction: row;
+   -ms-flex-wrap: wrap;
+   flex-wrap: wrap;
+   -webkit-box-align: start;
+   -ms-flex-align: start;
+   align-items: flex-start
+ }
+ .fd-facet-group::after,
+ .fd-facet-group::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-facet--image {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: row;
+   flex-direction: row
+ }
+ .fd-facet--image-header-title {
+   -ms-flex-item-align: end;
+   align-self: flex-end
+ }
+ .fd-facet--form {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column
+ }
+ .fd-facet--key-value .fd-facet__object-status .fd-facet__object-status-text {
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif)
+ }
+ .fd-facet--rating-indicator {
+   display: -webkit-inline-box;
+   display: -ms-inline-flexbox;
+   display: inline-flex;
+   -webkit-box-pack: start;
+   -ms-flex-pack: start;
+   justify-content: flex-start;
+   -webkit-box-align: start;
+   -ms-flex-align: start;
+   align-items: flex-start;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column
+ }
+ .fd-facet--rating-indicator .fd-facet__container {
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column
+ }
+ .fd-facet--rating-indicator .fd-facet__rating-container {
+   -ms-flex-item-align: start;
+   align-self: flex-start
+ }
+ .fd-facet--rating-indicator .fd-facet__rating-dynamic-text {
+   -ms-flex-item-align: end;
+   align-self: flex-end
+ }
+ .fd-facet__container {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: horizontal;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: row;
+   flex-direction: row
+ }
+ .fd-facet__container::after,
+ .fd-facet__container::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+ .fd-facet__form-value {
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   line-height: 1.4;
+   line-height: var(--sapContent_LineHeight,1.4);
+   color: #32363a;
+   color: var(--sapTextColor,#32363a);
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-weight: 400;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   font-family: "72", "72full", Arial, Helvetica, sans-serif;
+   font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+   font-size: .875rem;
+   font-size: var(--sapFontSize,.875rem);
+   font-weight: 400;
+   color: #32363a;
+   color: var(--sapGroup_TitleTextColor,#32363a)
+ }
+ .fd-facet__form-value::after,
+ .fd-facet__form-value::before {
+   -webkit-box-sizing: inherit;
+   box-sizing: inherit;
+   font-size: inherit
+ }
+
+
+
+
+
+
+
+ /*!
+ * Fundamental Library Styles v0.17.0-rc.9
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
+ */
+// @charset "UTF-8";
+.fd-margin--tiny {
+  margin: .5rem!important
+}
+.fd-margin--sm {
+  margin: 1rem!important
+}
+.fd-margin--md {
+  margin: 2rem!important
+}
+.fd-margin--lg {
+  margin: 3rem!important
+}
+.fd-margin--none {
+  margin: 0!important
+}
+.fd-margin-top--tiny {
+  margin-top: .5rem!important
+}
+.fd-margin-top--sm {
+  margin-top: 1rem!important
+}
+.fd-margin-top--md {
+  margin-top: 2rem!important
+}
+.fd-margin-top--lg {
+  margin-top: 3rem!important
+}
+.fd-margin-top--none {
+  margin-top: 0!important
+}
+.fd-margin-end--tiny {
+  margin-right: .5rem!important
+}
+.fd-margin-end--tiny[dir=rtl],
+[dir=rtl] .fd-margin-end--tiny {
+  margin-left: .5rem!important;
+  margin-right: 0!important
+}
+.fd-margin-end--sm {
+  margin-right: 1rem!important
+}
+.fd-margin-end--sm[dir=rtl],
+[dir=rtl] .fd-margin-end--sm {
+  margin-left: 1rem!important;
+  margin-right: 0!important
+}
+.fd-margin-end--md {
+  margin-right: 2rem!important
+}
+.fd-margin-end--md[dir=rtl],
+[dir=rtl] .fd-margin-end--md {
+  margin-left: 2rem!important;
+  margin-right: 0!important
+}
+.fd-margin-end--lg {
+  margin-right: 3rem!important
+}
+.fd-margin-end--lg[dir=rtl],
+[dir=rtl] .fd-margin-end--lg {
+  margin-left: 3rem!important;
+  margin-right: 0!important
+}
+.fd-margin-end--none {
+  margin-right: 0
+}
+.fd-margin-end--none[dir=rtl],
+[dir=rtl] .fd-margin-end--none {
+  margin-left: 0!important
+}
+.fd-margin-bottom--tiny {
+  margin-bottom: .5rem!important
+}
+.fd-margin-bottom--sm {
+  margin-bottom: 1rem!important
+}
+.fd-margin-bottom--md {
+  margin-bottom: 2rem!important
+}
+.fd-margin-bottom--lg {
+  margin-bottom: 3rem!important
+}
+.fd-margin-bottom--none {
+  margin-bottom: 0!important
+}
+.fd-margin-begin--tiny {
+  margin-left: .5rem!important
+}
+.fd-margin-begin--tiny[dir=rtl],
+[dir=rtl] .fd-margin-begin--tiny {
+  margin-right: .5rem!important;
+  margin-left: 0!important
+}
+.fd-margin-begin--sm {
+  margin-left: 1rem!important
+}
+.fd-margin-begin--sm[dir=rtl],
+[dir=rtl] .fd-margin-begin--sm {
+  margin-right: 1rem!important;
+  margin-left: 0!important
+}
+.fd-margin-begin--md {
+  margin-left: 2rem!important
+}
+.fd-margin-begin--md[dir=rtl],
+[dir=rtl] .fd-margin-begin--md {
+  margin-right: 2rem!important;
+  margin-left: 0!important
+}
+.fd-margin-begin--lg {
+  margin-left: 3rem!important
+}
+.fd-margin-begin--lg[dir=rtl],
+[dir=rtl] .fd-margin-begin--lg {
+  margin-right: 3rem!important;
+  margin-left: 0!important
+}
+.fd-margin-begin--none {
+  margin-left: 0
+}
+.fd-margin-begin--none[dir=rtl],
+[dir=rtl] .fd-margin-begin--none {
+  margin-right: 0!important
+}
+.fd-margin-top-bottom--tiny {
+  margin-top: .5rem!important;
+  margin-bottom: .5rem!important
+}
+.fd-margin-top-bottom--sm {
+  margin-top: 1rem!important;
+  margin-bottom: 1rem!important
+}
+.fd-margin-top-bottom--md {
+  margin-top: 2rem!important;
+  margin-bottom: 2rem!important
+}
+.fd-margin-top-bottom--lg {
+  margin-top: 3rem!important;
+  margin-bottom: 3rem!important
+}
+.fd-margin-begin-end--tiny {
+  margin-left: .5rem!important;
+  margin-right: .5rem!important
+}
+.fd-margin-begin-end--sm {
+  margin-left: 1rem!important;
+  margin-right: 1rem!important
+}
+.fd-margin-begin-end--md {
+  margin-left: 2rem!important;
+  margin-right: 2rem!important
+}
+.fd-margin-begin-end--lg {
+  margin-left: 3rem!important;
+  margin-right: 3rem!important
+}
+.fd-margin-responsive--sm {
+  margin: 0 0 1rem 0!important
+}
+.fd-margin-responsive--md {
+  margin: 1rem!important
+}
+.fd-margin-responsive--lg {
+  margin: 1rem 2rem!important
+}
+.fd-margin-responsive--xl {
+  margin: 1rem 3rem!important
+}
+.fd-margin-negative-begin-end--tiny {
+  margin: 0 -.5rem!important
+}
+.fd-margin-negative-begin-end--sm {
+  margin: 0 -1rem!important
+}
+.fd-margin-negative-begin-end--md {
+  margin: 0 -2rem!important
+}
+.fd-margin-negative-begin-end--lg {
+  margin: 0 -3rem!important
+}
+
+.fd-padding {
+  padding: 1rem!important
+}
+.fd-padding-begin-end--tiny {
+  padding-left: .5rem!important;
+  padding-right: .5rem!important
+}
+.fd-padding-begin-end--sm {
+  padding-left: 1rem!important;
+  padding-right: 1rem!important
+}
+.fd-padding-begin-end--md {
+  padding-left: 2rem!important;
+  padding-right: 2rem!important
+}
+.fd-padding-begin-end--lg {
+  padding-left: 3rem!important;
+  padding-right: 3rem!important
+}
+.fd-padding--none {
+  padding: 0!important
+}
+.fd-padding-responsive--sm {
+  padding: 0 1rem!important
+}
+.fd-padding-responsive--lg,
+.fd-padding-responsive--md {
+  padding: 0 2rem!important
+}
+.fd-padding-responsive--xl {
+  padding: 0 3rem!important
+}
+
+.fd-facet .fd-object-number__text,
+.fd-facet .fd-object-number__unit {
+  font-size: .875rem;
+  font-size: var(--sapFontSize,.875rem);
+  line-height: 1.4;
+  line-height: var(--sapContent_LineHeight,1.4);
+  color: #32363a;
+  color: var(--sapTextColor,#32363a);
+  font-family: "72", "72full", Arial, Helvetica, sans-serif;
+  font-family: var(--sapFontFamily, "72", "72full", Arial, Helvetica, sans-serif);
+  font-weight: 400;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1
+}
+
+
+.fd-object-status--large {
+  font-size: 1.5rem
+}
+.fd-object-status--large .fd-object-status__text {
+  font-family: "72-Light", "72-Lightfull", "72", "72full", Arial, Helvetica, sans-serif;
+  font-family: var(--sapFontLightFamily, "72-Light", "72-Lightfull", "72", "72full", Arial, Helvetica, sans-serif)
+}
+.fd-object-status--large .fd-object-status__icon [class*=sap-icon],
+.fd-object-status--large .fd-object-status__icon[class*=sap-icon] {
+  font-size: 1.5rem
+}
+
+
+
+
+// DO NOT REMOVE THESE STYLES
+.fd-facet-align-end {
+  order: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+}

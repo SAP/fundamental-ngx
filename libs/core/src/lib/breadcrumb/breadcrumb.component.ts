@@ -8,6 +8,7 @@ import {
     forwardRef,
     HostListener,
     Input,
+    OnDestroy,
     OnInit,
     Optional,
     QueryList,
@@ -16,11 +17,12 @@ import {
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { RtlService } from '../utils/services/rtl.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { KeyUtil } from '../utils/functions';
 import { MenuComponent } from '../menu/menu.component';
-import { Placement } from '../popover/popover-position/popover-position';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ContentDensityService } from '../utils/public_api';
+import { Placement } from '../popover/popover-position/popover-position';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -45,11 +47,10 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BreadcrumbComponent implements AfterContentInit, OnInit {
-
+export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy {
     /** Whenever links wrapped inside overflow should be displayed in compact mode  */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** @hidden */
     @ContentChildren(forwardRef(() => BreadcrumbItemDirective))
@@ -79,6 +80,39 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
     containerBoundary: number;
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    constructor(
+        public elementRef: ElementRef,
+        @Optional() private rtlService: RtlService,
+        @Optional() private _contentDensityService: ContentDensityService,
+        private _cdRef: ChangeDetectorRef
+    ) {}
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        this.onResize();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.rtlService) {
+            this.rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
+        }
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._cdRef.markForCheck();
+            }));
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
         this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
@@ -99,7 +133,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
             this.expandBreadcrumbs();
         }
         this.previousContainerWidth = this.containerBoundary;
-        this._cdr.detectChanges();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -183,24 +217,6 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit {
             i++;
         }
     }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        this.onResize();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.rtlService) {
-            this.rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
-        }
-    }
-
-    constructor(
-        public elementRef: ElementRef,
-        private _cdr: ChangeDetectorRef,
-        @Optional() private rtlService: RtlService
-    ) {}
 
     private fitInBoundries(): boolean {
         return this.elementRef.nativeElement.getBoundingClientRect().width < this.getContainerBoundary();
