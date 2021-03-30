@@ -1,18 +1,8 @@
 import { Observable } from 'rxjs';
-import {
-    EntityActionOptions,
-    EntityCollection,
-    EntityCollectionService as NgrxEntityCollectionService,
-    EntityCollectionServiceFactory as NgrxEntityCollectionServiceFactory,
-    EntityServices
-} from '@ngrx/data';
-
-import { QuerySnapshot, QuerySnapshotModel } from '../query/query';
-import { BaseEntity } from './entity-server/interfaces';
-import { EntityMetaOptions, EntityType, IdentityKey } from '../../../domain/public_api';
-import { EntityMetaOptionsService } from '../utils/entity-options.service';
-import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { EntityCollection } from '@ngrx/data';
+
+import { QuerySnapshot } from '../query/query';
 
 /**
  * EntityCollectionService is intendant to generate actions
@@ -65,84 +55,4 @@ export interface EntityCollectionService<T> {
      * @param entity entity to upsert
      */
     upsert(entity: T): Observable<T>;
-}
-
-/**
- * Default EntityCollectionService implementation.
- *
- * The main idea of this service
- *
- * That is a wrapper for NgRx EntityCollectionService
- * it delegates all heavy work to ngrx-data
- *
- */
-export class DefaultEntityCollectionService<T extends BaseEntity> implements EntityCollectionService<T> {
-    readonly name: string;
-
-    get collection$(): Observable<EntityCollection<T>> | Store<EntityCollection<T>> {
-        return this.entityCollectionService.collection$;
-    }
-
-    get count$(): Observable<number> | Store<number> {
-        return this.entityCollectionService.count$;
-    }
-
-    get entities$(): Observable<T[]> | Store<T[]> {
-        return this.entityCollectionService.entities$;
-    }
-
-    protected readonly entityCollectionService: NgrxEntityCollectionService<T>;
-    
-    protected readonly entityMetaOptions: EntityMetaOptions<T>;
-
-    constructor(
-        protected readonly entity: EntityType<T>,
-        protected readonly entityServices: EntityServices,
-        protected readonly entityMetaOptionsService: EntityMetaOptionsService
-    ) {
-        this.entityMetaOptions = entityMetaOptionsService.getEntityMetadata(entity);
-        const { name } = this.entityMetaOptions;
-        this.name = `${name} DefaultEntityCollectionService`;
-        this.entityCollectionService = entityServices.getEntityCollectionService(name);
-    }
-
-    add(entity: T): Observable<T> {
-        return this.entityCollectionService.add(entity);
-    }
-    
-    delete(entity: T): Observable<string | number> {
-        return this.delete(entity);
-    }
-    
-    getAll(): Observable<T[]> {
-        return this.entityCollectionService.getAll();
-    }
-    
-    getByKey(key: IdentityKey): Observable<T> {
-        return this.entityCollectionService.getByKey(key);
-    }
-    
-    getWithQuery(querySnapshot: Readonly<QuerySnapshotModel<T>>): Observable<T[]> {
-        return this.entityCollectionService.getWithQuery(querySnapshot as any);
-    }
-    
-    update(entity: Partial<T>): Observable<T> {
-        return this.entityCollectionService.update(entity);
-    }
-
-    upsert(entity: T): Observable<T> {
-        return this.entityCollectionService.upsert(entity);
-    }
-}
-
-@Injectable()
-export class EntityCollectionServiceFactory {
-    constructor(
-        protected readonly entityServices: EntityServices,
-        protected readonly entityMetaOptionsService: EntityMetaOptionsService
-    ) {}
-
-    create<T extends BaseEntity>(entity: EntityType<T>): EntityCollectionService<T> {
-        return new DefaultEntityCollectionService(entity, this.entityServices, this.entityMetaOptionsService);
-    }
 }

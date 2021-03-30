@@ -3,3 +3,7 @@ export * from './entity-server';
 export * from './entity-store-builder';
 export * from './http-url-generator';
 export * from './entity-collection-service';
+export * from './entity-collection-service-base';
+export * from './entity-collection-service-factory';
+export * from './entity-collections-service';
+export * from './entity-collections-service-base';

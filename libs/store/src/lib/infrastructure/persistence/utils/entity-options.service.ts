@@ -51,7 +51,7 @@ export class DefaultEntityMetaOptionsService implements EntityMetaOptionsService
     getEntityMetadata<T extends BaseEntity>(entityOrName: string | EntityType<T>): EntityMetaOptions<T> {
         const options: EntityMetaOptions<T>  =
             typeof entityOrName === 'string'
-                ? getEntityMetadataByEntityName(entityOrName) as EntityMetaOptions<T>
+                ? getEntityMetadataByEntityName<T>(entityOrName)
                 : getEntityMetadata(entityOrName);
 
         if (!options) {

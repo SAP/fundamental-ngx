@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import {
     FetchPolicy,
@@ -10,9 +11,9 @@ import {
 import { DefaultEntityStore, EntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
 import { QueryService } from '../query/query.service';
-import { Observable } from 'rxjs';
 import { QuerySnapshot } from '../query/query';
-import { EntityCollectionService, EntityCollectionServiceFactory } from './entity-collection-service';
+import { EntityCollectionService } from './entity-collection-service';
+import { EntityCollectionsService } from './entity-collections-service';
 
 //#region Interfaces
 
@@ -62,7 +63,7 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
 
     constructor(
         protected readonly entity: EntityType<T>,
-        protected readonly entityCollectionServiceFactory: EntityCollectionServiceFactory
+        protected readonly entityCollectionsService: EntityCollectionsService
     ) {
         this.reset();
     }
@@ -89,7 +90,7 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
     }
 
     create(): EntityStore<T> {
-        const entityCollectionService = this.entityCollectionServiceFactory.create<T>(this.entity);
+        const entityCollectionService = this.entityCollectionsService.getEntityCollectionService<T>(this.entity);
         const queryBuilder = new QueryBuilder(new DefaultQueryService(entityCollectionService));
 
         const result = new DefaultEntityStore<T>(entityCollectionService, queryBuilder, {
@@ -109,10 +110,10 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
  */
 @Injectable()
 export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFactory {
-    constructor(protected entityCollectionServiceFactory: EntityCollectionServiceFactory) {}
+    constructor(protected readonly entityCollectionsService: EntityCollectionsService) {}
 
     create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T> {
-        return new DefaultEntityStoreBuilder(entity, this.entityCollectionServiceFactory);
+        return new DefaultEntityStoreBuilder(entity, this.entityCollectionsService);
     }
 }
 

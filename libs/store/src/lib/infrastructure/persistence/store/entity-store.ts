@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EntityCollectionService } from '@ngrx/data';
 
 import {
     CachePolicy,
@@ -9,9 +8,8 @@ import {
     BaseEntity,
     ChainingStrategyFieldsMap
 } from '../../../domain/public_api';
-import { QuerySnapshot } from '../query/query';
-import { QueryService } from '../query/query.service';
 import { QueryBuilder } from '../query/query-builder';
+import { EntityCollectionService } from './entity-collection-service';
 
 //#region Interfaces
 

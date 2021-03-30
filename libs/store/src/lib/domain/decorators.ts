@@ -39,7 +39,7 @@ export function getResourceMetadata<T extends BaseEntity>(target: EntityType<T>)
     return Reflect.getOwnMetadata(REST_RESOURCE_KEY, target);
 }
 
-export function getEntityMetadataByEntityName(entityName: string): EntityMetaOptions | undefined {
+export function getEntityMetadataByEntityName<T extends BaseEntity = BaseEntity>(entityName: string): EntityMetaOptions<T> | undefined {
     const entity: EntityType<any> = getEntityByName(entityName);
     if (entity) {
         return getEntityMetadata(entity);
