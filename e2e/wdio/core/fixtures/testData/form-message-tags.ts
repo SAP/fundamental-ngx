@@ -1,12 +1,5 @@
-import { getImageTagBrowserPlatform } from '../../../driver/wdio';
-const prefix = 'form-message-core-';
-export const inputFieldExample = prefix + 'input-field-example-';
-export const buttonExample = prefix + 'button-example-';
-export const messageExample = prefix + 'message-example-';
-export const inputFieldHoverSTate = 'input-field-hover-state-' + getImageTagBrowserPlatform();
-export const buttonHoverState = 'button-hover-state-' + getImageTagBrowserPlatform();
-export const messageHoverState = 'message-hover-state-' + getImageTagBrowserPlatform();
-export const inputFieldActiveState = 'input-field-active-state-'  + getImageTagBrowserPlatform();
-export const buttonActiveState = 'button-active-state-' + getImageTagBrowserPlatform();
-export const inputFieldFocusState = 'input-field-focus-state-' + getImageTagBrowserPlatform();
-export const buttonFocusState = 'button-focus-state-' + getImageTagBrowserPlatform();
+const prefix = 'form-message-';
+export const inputField = prefix + 'input-field-';
+export const button = prefix + 'button-';
+export const message = prefix + 'message-';
+
