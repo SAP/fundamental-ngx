@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.68...v0.29.0-rc.69) (2021-03-30)
+
+
+### Features
+
+* (Core|Platform) add content density switcher service to fundamental-ngx core module ([#4782](https://github.com/SAP/fundamental-ngx/issues/4782)) ([18f7190](https://github.com/SAP/fundamental-ngx/commit/18f719005bf2cbf059f73c56dcd80e07f1659d87))
+
 ## [0.29.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.67...v0.29.0-rc.68) (2021-03-30)
 
 ## [0.29.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.66...v0.29.0-rc.67) (2021-03-30)
