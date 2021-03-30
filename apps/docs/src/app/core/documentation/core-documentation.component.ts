@@ -104,6 +104,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
 
         this.utilities = [
             { url: 'core/global-config', name: 'Global Configuration' },
+            { url: 'core/content-density', name: 'Content Density' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
             { url: 'core/scroll-spy', name: 'Scroll Spy' },
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }

@@ -1,9 +1,4 @@
-<fd-docs-section-title
-    id="calendar-standard"
-    componentName="calendar"
->
-    Standard Calendar
-</fd-docs-section-title>
+<fd-docs-section-title id="calendar-standard" componentName="calendar"> Standard Calendar </fd-docs-section-title>
 <description>
     This example also features <strong>blocked</strong> and <strong>disabled</strong> days. <br /><br />
     You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars
@@ -23,19 +18,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="calendar-mobile"
-    componentName="calendar"
->
-    Mobile Calendar
-</fd-docs-section-title>
+<fd-docs-section-title id="calendar-mobile" componentName="calendar"> Mobile Calendar </fd-docs-section-title>
 <description>
     Calendar component has a dedicated mode for mobile devices. When used in mobile mode, the calendar should be wrapped
     inside a dialog component. Examples of various dialog usages can be found
-    <a
-        fd-link
-        [routerLink]="'/core/dialog'"
-    >here</a>. The mobile calendar can be used in landscape or portrait mode.
+    <a fd-link [routerLink]="'/core/dialog'">here</a>. The mobile calendar can be used in landscape or portrait mode.
 </description>
 <component-example>
     <fd-calendar-mobile-example></fd-calendar-mobile-example>
@@ -44,15 +31,12 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="calendar-options"
-    componentName="calendar"
->
-    Calendar Options
-</fd-docs-section-title>
+<fd-docs-section-title id="calendar-options" componentName="calendar"> Calendar Options </fd-docs-section-title>
 <description>
     Calendar has an extensive set of customization options, such as displaying the week number or applying compact mode
-    for desktop devices. Weekends also can be marked with additional styling classes.
+    for desktop devices. By default the calendar will look to the <code>ContentDensityService</code> for compact mode
+    but this can be overridden using the <code>compact</code> input. Weekends also can be marked with additional styling
+    classes.
 </description>
 <component-example>
     <fd-calendar-options-example></fd-calendar-options-example>
@@ -61,10 +45,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="calendar-range-hover"
-    componentName="calendar"
->
+<fd-docs-section-title id="calendar-range-hover" componentName="calendar">
     Mark Range Days on Hover
 </fd-docs-section-title>
 <description>
@@ -78,19 +59,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="calendar-special"
-    componentName="calendar"
->
+<fd-docs-section-title id="calendar-special" componentName="calendar">
     Calendar with Special Days
 </fd-docs-section-title>
 <description>
     Special coloring classes can be applied to grid days by passing an object to <code>[specialDaysRules]</code>. A list
     of special day numbers can be found
-    <a
-        fd-link
-        href="https://sap.github.io/fundamental-styles/components/calendar.html"
-    > here </a>. Similar to the block
+    <a fd-link href="https://sap.github.io/fundamental-styles/components/calendar.html"> here </a>. Similar to the block
     function, <code>[specialDaysRules]</code> takes an FdDate object as a parameter and returns true/false.
 </description>
 <component-example>
@@ -100,12 +75,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="calendar-grid"
-    componentName="calendar"
->
-    Calendar Years Grid
-</fd-docs-section-title>
+<fd-docs-section-title id="calendar-grid" componentName="calendar"> Calendar Years Grid </fd-docs-section-title>
 <description>
     Year Grid and Aggregated Year Grid can be customized by passing <code>[yearGrid]</code> and
     <code>[aggregatedYearGrid]</code>
@@ -118,12 +88,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="calendar-range"
-    componentName="calendar"
->
-    Range Selection Calendar
-</fd-docs-section-title>
+<fd-docs-section-title id="calendar-range" componentName="calendar"> Range Selection Calendar </fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.
     <br /><br />
@@ -138,10 +103,7 @@
 <code-example [exampleFiles]="calendarRangeSource"></code-example>
 
 <separator></separator>
-<fd-docs-section-title
-    id="calendar-prog-dateChange"
-    componentName="calendar"
->
+<fd-docs-section-title id="calendar-prog-dateChange" componentName="calendar">
     Programmatic Date Change
 </fd-docs-section-title>
 <description>
@@ -155,10 +117,7 @@
 <code-example [exampleFiles]="calendarProgrammaticallySource"></code-example>
 
 <separator></separator>
-<fd-docs-section-title
-    id="calendar-mondayStart"
-    componentName="calendar"
->
+<fd-docs-section-title id="calendar-mondayStart" componentName="calendar">
     Monday Start Calendar
 </fd-docs-section-title>
 <description>
@@ -172,16 +131,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="calendar-internationalization"
-    componentName="calendar"
->
+<fd-docs-section-title id="calendar-internationalization" componentName="calendar">
     Internationalization
 </fd-docs-section-title>
 <description>
     The calendar relies on a DatetimeAdapter to retrieve any date info including data to populate the month names, week
-    days, etc. It also uses a
-    separate service called CalendarI18nLabels to populate specific aria labels in the component itself.
+    days, etc. It also uses a separate service called CalendarI18nLabels to populate specific aria labels in the
+    component itself.
 </description>
 <component-example>
     <fd-calendar-i18n-example></fd-calendar-i18n-example>
@@ -210,10 +166,7 @@
 
 <separator></separator> -->
 
-<fd-docs-section-title
-    id="calendar-reactiveForm"
-    componentName="calendar"
->
+<fd-docs-section-title id="calendar-reactiveForm" componentName="calendar">
     Calendar in Reactive Form
 </fd-docs-section-title>
 <description>The Calendar component may also be used within Angular Reactive Forms.</description>
