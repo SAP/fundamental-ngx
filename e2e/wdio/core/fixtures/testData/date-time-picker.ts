@@ -15,10 +15,10 @@ export const i18n = [
 ];
 export const year2030 = 2030;
 export const highlightedColor = ['rgb(8,84,160)', 'rgba(8,84,160,1)'];
-export const date = `${currentMonth}/1/${currentYear}, 1:01 PM`;
-export const date2 = `${currentMonth}/${currentDay}/${currentYear}, 1:01 PM`;
+export const date = `${currentMonth}/1/${currentYear}, 11:01 PM`;
+export const date2 = `${currentMonth}/${currentDay}/${currentYear}, 11:01 PM`;
 export const date3 = '10/5/2018, 3:30 PM';
-export const date4 = `${monthName} ${currentDay}, ${currentYear}, 01:01`;
+export const date4 = `${monthName} ${currentDay}, ${currentYear}, 11:01`;
 export const dates = [
     `${currentYear}-${currentMonthWithZero}-${currentDay}`,
     `${currentDay}/${currentMonthWithZero}/${currentYear}`,

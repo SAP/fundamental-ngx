@@ -1,20 +1,6 @@
-import { getImageTagBrowserPlatform } from '../../../driver/wdio';
-
 const prefix = 'date-time-picker-';
 export const inputField = prefix + 'input-field-';
 export const button = prefix + 'button-';
 export const changeButton = prefix + 'button-change-';
 export const buttonOption = prefix + 'option-button-';
 export const optionCountry = prefix + 'country-option-';
-export const inputFieldHoverState = 'hover-state-' + getImageTagBrowserPlatform();
-export const buttonHoverState = 'hover-state-' + getImageTagBrowserPlatform();
-export const buttonChangeHoverState = 'hover-state-' + getImageTagBrowserPlatform();
-export const optionButtonHoverState = 'hover-state-' + getImageTagBrowserPlatform();
-export const inputFieldActiveState = 'active-state-' + getImageTagBrowserPlatform();
-export const buttonActiveState = 'active-state-' + getImageTagBrowserPlatform();
-export const buttonChangeActiveState = 'active-state-' + getImageTagBrowserPlatform();
-export const optionButtonActiveState = 'active-state-' + getImageTagBrowserPlatform();
-export const inputFieldFocusState = 'focus-state-' + getImageTagBrowserPlatform();
-export const buttonFocusState = 'focus-state-' + getImageTagBrowserPlatform();
-export const buttonChangeFocusState = 'focus-state-' + getImageTagBrowserPlatform();
-export const optionButtonFocusState = 'focus-state-' + getImageTagBrowserPlatform();
