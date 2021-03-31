@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.72...v0.29.0-rc.73) (2021-03-31)
+
+
+### Bug Fixes
+
+* (Core) combobox minor tweaks for defect hunting ([#5013](https://github.com/SAP/fundamental-ngx/issues/5013)) ([b4cbe64](https://github.com/SAP/fundamental-ngx/commit/b4cbe64a60753a768dbf4cdcbc94e0a3c5524fb2))
+
 ## [0.29.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.71...v0.29.0-rc.72) (2021-03-31)
 
 ## [0.29.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.70...v0.29.0-rc.71) (2021-03-31)
