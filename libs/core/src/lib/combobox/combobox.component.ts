@@ -357,6 +357,9 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.mobile) {
+            this.showDropdownButton = false;
+        }
         this._refreshDisplayedValues();
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
