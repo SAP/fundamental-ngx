@@ -121,8 +121,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     public checkboxValue: any;
     /** Stores current checkbox state. */
     public checkboxState: fdCheckboxTypes;
-    /** Returns checkbox state for aria-checked attribute. */
-    public ariaChecked: 'true' | 'false' | 'mixed';
     /** @hidden */
     private _previousState: fdCheckboxTypes;
 
@@ -256,13 +254,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     private _setState(): void {
         if (this._compare(this.checkboxValue, this.values.trueValue)) {
             this.checkboxState = 'checked';
-            this.ariaChecked = 'true';
         } else if (this._compare(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
-            this.ariaChecked = 'false';
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
-            this.ariaChecked = 'mixed';
         }
         this._previousState = this.checkboxState;
     }
