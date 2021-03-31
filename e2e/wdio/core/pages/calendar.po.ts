@@ -47,10 +47,6 @@ export class CalendarPo extends CoreBaseComponentPo {
     markedDays = 'td[class*="fd-calendar__special-day"] span';
     rangeHoverItems = '.fd-calendar__item--range';
 
-    calendarYear = (year: number): string => {
-        return `[aria-label="${year}"]`
-    };
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

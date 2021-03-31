@@ -151,17 +151,26 @@ describe('calendar test suite', function() {
         });
 
         it('should check ability to enable week count', () => {
+            expect(doesItExist(calendarWithOptions + weekCount)).toBe(false);
+
             click(calendarWithOptions + calendarOptions);
+
             expect(isElementDisplayed(calendarWithOptions + weekCount)).toBe(true);
         });
 
-        it('should check ability to enable compact mode', () => {
-            click(calendarWithOptions + calendarOptions, 1);
+        it('should check ability to enable/disable compact mode', () => {
             expect(getAttributeByName(calendarWithOptions + calendarAttributes, classAttribute)).toContain(compactAttribute);
+
+            click(calendarWithOptions + calendarOptions, 1);
+
+            expect(getAttributeByName(calendarWithOptions + calendarAttributes, classAttribute)).not.toContain(compactAttribute);
         });
 
         it('should check ability to mark weekends', () => {
+            expect(doesItExist(calendarWithOptions + markedWeekendDays)).toBe(false);
+
             click(calendarWithOptions + calendarOptions, 2);
+
             expect(isElementDisplayed(calendarWithOptions + markedWeekendDays)).toBe(true);
         });
     });
