@@ -8,7 +8,7 @@ export class FeedInputPo extends CoreBaseComponentPo {
     feedInputTextArea = 'textarea.fd-feed-input__textarea';
     feedInputButton = '.fd-feed-input button';
     feedInputAvatar = 'fd-avatar.fd-feed-input__thumb';
-    feedInputNoAvatar = 'fd-feed-input-no-avatar-example ';
+    feedInputNoAvatar = 'fd-feed-input-no-avatar-example fd-avatar';
     disableInputTextArea = 'textarea[aria-disabled="true"]';
     disableInputButton = '.fd-feed-input.is-disabled button';
     activeInputTextAreas = '//textarea[not(contains(@aria-disabled, \'true\'))]';
