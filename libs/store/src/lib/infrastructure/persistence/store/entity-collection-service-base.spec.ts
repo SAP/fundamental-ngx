@@ -1,36 +1,40 @@
-import { EntityCollectionService, EntityServices } from '@ngrx/data';
+import { EntityServices, EntityCollectionService as NgrxEntityCollectionService } from '@ngrx/data';
+import { fail } from 'assert';
+import { Observable, of } from 'rxjs';
 import { EntityMetaOptions, EntityMetaOptionsService } from '../utils/entity-options.service';
+import { EntityCollectionService } from './entity-collection-service';
 import { DefaultEntityCollectionService } from './entity-collection-service-base';
 import { EntityCollectionsService } from './entity-collections-service';
 import { BaseEntity } from './entity-server/interfaces';
 
-class SubEntity extends BaseEntity {
-    id: string;
-    title: string;
+class Advantage extends BaseEntity {
+    constructor(public id: string, public title: string) {
+        super();
+    }
 }
 
 class Hero extends BaseEntity {
     id: string;
     name: string;
-    childEntity: SubEntity;
+    advantages: Advantage[];
 }
 
 describe('EntityCollectionService', function () {
     let service: DefaultEntityCollectionService<Hero>;
     let entityServices: jasmine.SpyObj<EntityServices>;
     let entityMetaOptionsService: jasmine.SpyObj<EntityMetaOptionsService>;
-    let ngrxEntityCollectionService: jasmine.SpyObj<EntityCollectionService<Hero>>;
+    let ngrxHeroCollectionService: jasmine.SpyObj<NgrxEntityCollectionService<Hero>>;
     let entityCollectionsService: jasmine.SpyObj<EntityCollectionsService>;
 
     beforeEach(() => {
-        ngrxEntityCollectionService = jasmine.createSpyObj<EntityCollectionService<Hero>>(
+        ngrxHeroCollectionService = jasmine.createSpyObj<NgrxEntityCollectionService<Hero>>(
             'EntityCollectionService',
             ['add', 'delete', 'getAll', 'getByKey', 'getWithQuery', 'update', 'upsert'],
             ['collection$', 'entities$', 'count$']
         );
 
         entityServices = jasmine.createSpyObj<EntityServices>('EntityServices', ['getEntityCollectionService']);
-        entityServices.getEntityCollectionService.and.returnValue(ngrxEntityCollectionService);
+        entityServices.getEntityCollectionService.and.returnValue(ngrxHeroCollectionService);
 
         entityMetaOptionsService = jasmine.createSpyObj<EntityMetaOptionsService>('EntityMetaOptionsService', [
             'getEntityMetadata'
@@ -41,9 +45,9 @@ describe('EntityCollectionService', function () {
                     name: 'Hero',
                     chainingPolicy: {
                         fields: {
-                            childEntity: {
+                            advantages: {
                                 strategy: 'non-block',
-                                type: SubEntity
+                                type: Array(Advantage)
                             }
                         }
                     }
@@ -71,7 +75,7 @@ describe('EntityCollectionService', function () {
     describe('#getAll()', () => {
         it('should delegate request to the ngrx service', () => {
             service.getAll();
-            expect(ngrxEntityCollectionService.getAll).toHaveBeenCalled();
+            expect(ngrxHeroCollectionService.getAll).toHaveBeenCalled();
         });
     });
 
@@ -79,14 +83,48 @@ describe('EntityCollectionService', function () {
         it('should delegate request to the ngrx service', () => {
             const query = {};
             service.getWithQuery(query as any);
-            expect(ngrxEntityCollectionService.getWithQuery).toHaveBeenCalledWith(query as any);
+            expect(ngrxHeroCollectionService.getWithQuery).toHaveBeenCalledWith(query as any);
         });
     });
 
     describe('#getBeKy()', () => {
         it('should delegate request to the ngrx service', () => {
             service.getByKey('123');
-            expect(ngrxEntityCollectionService.getByKey).toHaveBeenCalledWith('123');
+            expect(ngrxHeroCollectionService.getByKey).toHaveBeenCalledWith('123');
+        });
+
+        it('should make subsequent call to retrieve sub entity data', (done) => {
+            const hero: Hero = {
+                id: '123',
+                name: 'Hero',
+                advantages: []
+            };
+            const advantages: Advantage[] = [new Advantage('1', 'smart'), new Advantage('1', 'quick')];
+
+            const advantageCollectionService = jasmine.createSpyObj<EntityCollectionService<Advantage>>(
+                'AdvantageCollectionService',
+                ['getAll']
+            );
+            advantageCollectionService.getAll.and.callFake(() => {
+                return of(advantages);
+            });
+
+            ngrxHeroCollectionService.getByKey.and.callFake(() => {
+                return of(hero);
+            });
+
+            entityCollectionsService.getEntityCollectionService.and.returnValue(advantageCollectionService);
+
+            service.getByKey('123').subscribe((result) => {
+                expect(advantageCollectionService.getAll).toHaveBeenCalled();
+                expect(result).toEqual({
+                    ...hero,
+                    advantages: advantages
+                });
+                done();
+            }, fail);
+
+            expect(ngrxHeroCollectionService.getByKey).toHaveBeenCalledWith('123');
         });
     });
 
@@ -94,7 +132,7 @@ describe('EntityCollectionService', function () {
         it('should delegate request to the ngrx service', () => {
             const entity = new Hero();
             service.add(entity);
-            expect(ngrxEntityCollectionService.add).toHaveBeenCalledWith(entity);
+            expect(ngrxHeroCollectionService.add).toHaveBeenCalledWith(entity);
         });
     });
 
@@ -102,7 +140,7 @@ describe('EntityCollectionService', function () {
         it('should delegate request to the ngrx service', () => {
             const entity = new Hero();
             service.delete(entity);
-            expect(ngrxEntityCollectionService.delete).toHaveBeenCalledWith(entity as any);
+            expect(ngrxHeroCollectionService.delete).toHaveBeenCalledWith(entity as any);
         });
     });
 
@@ -110,7 +148,7 @@ describe('EntityCollectionService', function () {
         it('should delegate request to the ngrx service', () => {
             const entity = new Hero();
             service.update(entity);
-            expect(ngrxEntityCollectionService.update).toHaveBeenCalledWith(entity);
+            expect(ngrxHeroCollectionService.update).toHaveBeenCalledWith(entity);
         });
     });
 
@@ -118,32 +156,32 @@ describe('EntityCollectionService', function () {
         it('should delegate request to the ngrx service', () => {
             const entity = new Hero();
             service.upsert(entity);
-            expect(ngrxEntityCollectionService.upsert).toHaveBeenCalledWith(entity);
+            expect(ngrxHeroCollectionService.upsert).toHaveBeenCalledWith(entity);
         });
     });
 
     describe('#count$', () => {
         it('should delegate to the appropriate ngrx service property', () => {
-            (Object.getOwnPropertyDescriptor(ngrxEntityCollectionService, 'count$').get as jasmine.Spy).and.returnValue(
+            (Object.getOwnPropertyDescriptor(ngrxHeroCollectionService, 'count$').get as jasmine.Spy).and.returnValue(
                 'count observable'
             );
-            expect(ngrxEntityCollectionService.count$).toBe('count observable' as any);
+            expect(ngrxHeroCollectionService.count$).toBe('count observable' as any);
         });
     });
 
     describe('#collection$', () => {
         it('should delegate to the appropriate ngrx service property', () => {
-            (Object.getOwnPropertyDescriptor(ngrxEntityCollectionService, 'collection$')
+            (Object.getOwnPropertyDescriptor(ngrxHeroCollectionService, 'collection$')
                 .get as jasmine.Spy).and.returnValue('collection observable');
-            expect(ngrxEntityCollectionService.collection$).toBe('collection observable' as any);
+            expect(ngrxHeroCollectionService.collection$).toBe('collection observable' as any);
         });
     });
 
     describe('#entities$', () => {
         it('should delegate to the appropriate ngrx service property', () => {
-            (Object.getOwnPropertyDescriptor(ngrxEntityCollectionService, 'entities$')
+            (Object.getOwnPropertyDescriptor(ngrxHeroCollectionService, 'entities$')
                 .get as jasmine.Spy).and.returnValue('entities observable');
-            expect(ngrxEntityCollectionService.entities$).toBe('entities observable' as any);
+            expect(ngrxHeroCollectionService.entities$).toBe('entities observable' as any);
         });
     });
 });

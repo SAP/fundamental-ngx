@@ -29,7 +29,7 @@ type ChainingPolicyFieldsOption<Entity extends {}> = {
 };
 
 // tslint:disable-next-line: interface-over-type-literal
-type ChainingPolicyFieldOptions<ParentEntity extends {}, ChildEntity extends BaseEntity | Array<BaseEntity>> = {
+export type ChainingPolicyFieldOptions<ParentEntity extends {}, ChildEntity extends BaseEntity | Array<BaseEntity>> = {
     type: ChildEntity extends any[] ? Array<Type<ChildEntity[number]>> : Type<ChildEntity>;
     strategy: ChainingStrategy;
     key?: AllowedFields<ParentEntity, IdentityKey> | ((parent: ParentEntity) => IdentityKey);

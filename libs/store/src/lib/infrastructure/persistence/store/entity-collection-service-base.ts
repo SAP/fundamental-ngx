@@ -1,13 +1,15 @@
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { EntityCollection, EntityCollectionService as NgrxEntityCollectionService, EntityServices } from '@ngrx/data';
 import { Store } from '@ngrx/store';
 
 import { QuerySnapshotModel } from '../query/query';
 import { BaseEntity } from './entity-server/interfaces';
-import { EntityMetaOptions, EntityType, IdentityKey } from '../../../domain/public_api';
+import { EntityMetaOptions, EntityType, IdentityKey, Type } from '../../../domain/public_api';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
+import { ChainingPolicyFieldOptions } from '../../../domain/chaining-policy';
+import { map, switchMap } from 'rxjs/operators';
 
 /**
  * Default EntityCollectionService implementation.
@@ -16,6 +18,8 @@ import { EntityCollectionsService } from './entity-collections-service';
  *
  * That is a wrapper for NgRx EntityCollectionService
  * it delegates all heavy work to ngrx-data.
+ *
+ * Also this service is responsible to perform request chaining
  *
  * Also this service is responsible to chain requests for sub resources
  *
@@ -64,7 +68,29 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
     }
 
     getByKey(key: IdentityKey): Observable<T> {
-        return this.entityCollectionService.getByKey(key);
+        let source = this.entityCollectionService.getByKey(key);
+        if (this.entityMetaOptions.chainingPolicy?.fields) {
+            const fieldsEntries: [string, ChainingPolicyFieldOptions<T, any>][] = Object.entries(
+                this.entityMetaOptions.chainingPolicy?.fields
+            );
+            source = source.pipe(
+                switchMap((entity) => {
+                    const inners = fieldsEntries.map(([key, chainingOptions]) => {
+                        const SubEntityClass = Array.isArray(chainingOptions.type)
+                            ? chainingOptions.type[0]
+                            : chainingOptions.type;
+                        const;
+                        if (!Array.isArray(chainingOptions.type)) {
+                            // One entity needed, so should use getByKey
+                        } else {
+                            // If it's array we have to use getAll or getWithQuery
+                        }
+                    });
+                    return forkJoin([]);
+                })
+            );
+        }
+        return source;
     }
 
     getWithQuery(querySnapshot: Readonly<QuerySnapshotModel<T>>): Observable<T[]> {
@@ -77,5 +103,11 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
 
     upsert(entity: T): Observable<T> {
         return this.entityCollectionService.upsert(entity);
+    }
+
+    private getEntityCollectionServiceByEntityType<K extends BaseEntity>(
+        entityType: EntityType<K>
+    ): EntityCollectionService<K> | null {
+        return null;
     }
 }
