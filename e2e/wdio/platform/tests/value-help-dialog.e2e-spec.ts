@@ -78,7 +78,7 @@ describe('Value help dialog test suite', function() {
         });
 
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
-        xit('should check define conditions inclusions', () => {
+        it('should check define conditions inclusions', () => {
             click(openDialogBtn);
             click(formTabs, 1);
             click(addBtn);
@@ -89,7 +89,7 @@ describe('Value help dialog test suite', function() {
         });
 
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
-        xit('should check the inclusion conditional statements', () => {
+        it('should check the inclusion conditional statements', () => {
             click(openDialogBtn);
             click(formTabs, 1);
             click(addBtn);
@@ -124,7 +124,7 @@ describe('Value help dialog test suite', function() {
         });
 
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
-        xit('should check the exclusion conditional statements', () => {
+        it('should check the exclusion conditional statements', () => {
             click(openDialogBtn);
             click(formTabs, 1);
             click(addBtn, 1);
@@ -208,7 +208,7 @@ describe('Value help dialog test suite', function() {
         });
 
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
-        xit('should check define conditions custom exclusions', () => {
+        it('should check define conditions custom exclusions', () => {
             scrollIntoView(openDialogBtn, 1);
             click(openDialogBtn, 1);
             click(addBtn, 1);

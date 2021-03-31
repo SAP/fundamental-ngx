@@ -69,18 +69,21 @@ describe('Thumbnail field', function() {
         for (let i = 0; arrLength > i; i++) {
             scrollIntoView(verticalGalleryImages, i);
             mouseHoverElement(verticalGalleryImages, i);
+            waitForElDisplayed(verticalGalleryImages, i);
             expect(getParentElementCSSProperty(verticalGalleryImages, 'border-bottom-color', i)).toContain('8,84,160');
         }
 
         for (let i = 0; arrLength > i; i++) {
             scrollIntoView(horizontalGalleryImages, i);
             mouseHoverElement(horizontalGalleryImages, i);
+            waitForElDisplayed(horizontalGalleryImages, i);
             expect(getParentElementCSSProperty(horizontalGalleryImages, 'border-bottom-color', i)).toContain('8,92,175');
         }
 
         for (let i = 0; arrLength > i; i++) {
             scrollIntoView(verticalGalleryVideo, i);
             mouseHoverElement(verticalGalleryVideo, i);
+            waitForElDisplayed(verticalGalleryVideo, i);
             expect(getParentElementCSSProperty(verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
         }
     });
@@ -94,7 +97,7 @@ describe('Thumbnail field', function() {
         expect(doesItExist(galleryDialog)).toBe(false);
     });
 
-    xit('should be able to switch image in gallery popup', () => {
+    it('should be able to switch image in gallery popup', () => {
         waitForElDisplayed(verticalGalleryImages, 4);
         clickWithOption(verticalGalleryImages, 4, 5000, {x: 20});
         waitForElDisplayed(galleryDialog);
