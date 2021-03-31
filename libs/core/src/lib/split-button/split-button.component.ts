@@ -10,6 +10,8 @@ import {
     Input,
     OnChanges,
     OnDestroy,
+    OnInit,
+    Optional,
     Output,
     Renderer2,
     SimpleChanges,
@@ -24,6 +26,7 @@ import { MenuItemComponent } from '../menu/menu-item/menu-item.component';
 import { Subscription } from 'rxjs';
 import { MainAction } from './main-action';
 import { first } from 'rxjs/operators';
+import { ContentDensityService } from '../utils/public_api';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
@@ -60,11 +63,11 @@ const splitButtonTextClasses = [
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {
+export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, OnInit, AfterViewInit {
 
     /** Whether to apply compact mode to the button. */
     @Input()
-    compact: boolean;
+    compact?: boolean;
 
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input()
@@ -128,7 +131,15 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _menuSubscription = new Subscription();
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef, private _renderer: Renderer2) {}
+    private _contentDensitySubscription = new Subscription();
+
+    /** @hidden */
+    constructor(
+        private _cdRef: ChangeDetectorRef,
+        private _elRef: ElementRef,
+        @Optional() private _contentDensityService: ContentDensityService,
+        private _renderer: Renderer2
+    ) {}
 
     /** @hidden Emits event when main button is clicked */
     onMainButtonClick(event: MouseEvent): void {
@@ -139,6 +150,18 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
             this.mainAction.callback();
         }
         event.stopPropagation();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._contentDensitySubscription.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
+        }
     }
 
     /** @hidden */
@@ -176,6 +199,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     ngOnDestroy(): void {
         this._menuItemSubscriptions.unsubscribe();
         this._menuSubscription.unsubscribe();
+        this._contentDensitySubscription.unsubscribe();
     }
 
     /** Function called to select a menu item for the split button. */
@@ -194,7 +218,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     private _setupMenuItemSubscriptions(): void {
-        this.menu.menuItems.forEach(menuItem => {
+        this.menu.menuItems.forEach((menuItem) => {
             menuItem.onSelect.pipe(first()).subscribe(() => {
                 if (this.fixedWidth) {
                     this._getMainButtonWidth();

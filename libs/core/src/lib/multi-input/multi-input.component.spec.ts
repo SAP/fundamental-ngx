@@ -12,6 +12,7 @@ import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { RtlService } from '../utils/services/rtl.service';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -33,7 +34,8 @@ describe('MultiInputComponent', () => {
             ],
             providers: [
                 DynamicComponentService,
-                RtlService
+                RtlService,
+                ContentDensityService
             ]
         }).compileComponents();
     }));
@@ -50,6 +52,13 @@ describe('MultiInputComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(component, 'buildComponentCssClass');
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should set placeholder', async () => {

@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.70...v0.29.0-rc.71) (2021-03-31)
+
+
+### Bug Fixes
+
+* (Core) aria checked removed from native checkbox input ([#5006](https://github.com/SAP/fundamental-ngx/issues/5006)) ([d6ed4b9](https://github.com/SAP/fundamental-ngx/commit/d6ed4b9a225350bc4952560dfa6b01bb7a9da766))
+
+## [0.29.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.69...v0.29.0-rc.70) (2021-03-30)
+
+## [0.29.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.68...v0.29.0-rc.69) (2021-03-30)
+
+
+### Features
+
+* (Core|Platform) add content density switcher service to fundamental-ngx core module ([#4782](https://github.com/SAP/fundamental-ngx/issues/4782)) ([18f7190](https://github.com/SAP/fundamental-ngx/commit/18f719005bf2cbf059f73c56dcd80e07f1659d87))
+
+## [0.29.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.67...v0.29.0-rc.68) (2021-03-30)
+
+## [0.29.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.66...v0.29.0-rc.67) (2021-03-30)
+
+## [0.29.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.64...v0.29.0-rc.66) (2021-03-30)
+
+## [0.29.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.64...v0.29.0-rc.65) (2021-03-29)
+
+## [0.29.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.63...v0.29.0-rc.64) (2021-03-29)
+
+## [0.29.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.62...v0.29.0-rc.63) (2021-03-29)
+
+## [0.29.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.61...v0.29.0-rc.62) (2021-03-29)
+
+
+### Features
+
+* (Core) introduce Facets component ([#4977](https://github.com/SAP/fundamental-ngx/issues/4977)) ([ccf7c4b](https://github.com/SAP/fundamental-ngx/commit/ccf7c4b6f2854311f30454652da3cc075a47b196))
+
+## [0.29.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.60...v0.29.0-rc.61) (2021-03-28)
+
+## [0.29.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.59...v0.29.0-rc.60) (2021-03-28)
+
+## [0.29.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.58...v0.29.0-rc.59) (2021-03-28)
+
+## [0.29.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.57...v0.29.0-rc.58) (2021-03-27)
+
+## [0.29.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.56...v0.29.0-rc.57) (2021-03-26)
+
+
+### Bug Fixes
+
+* add GridListModule to the exports ([#5020](https://github.com/SAP/fundamental-ngx/issues/5020)) ([cd7485b](https://github.com/SAP/fundamental-ngx/commit/cd7485b997befdc00a83f924d6f97c84e3b53c41))
+
+## [0.29.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.55...v0.29.0-rc.56) (2021-03-26)
+
+
+### Bug Fixes
+
+* (Core) add input for tooltip for multi-input / input group ([#5009](https://github.com/SAP/fundamental-ngx/issues/5009)) ([2399254](https://github.com/SAP/fundamental-ngx/commit/2399254d138adac97c127d5689ade98c7c7bf7de))
+
+## [0.29.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.55) (2021-03-26)
+
+
+### Features
+
+* (Core) Avatar Group component ([#4859](https://github.com/SAP/fundamental-ngx/issues/4859)) ([bce277f](https://github.com/SAP/fundamental-ngx/commit/bce277f2552c3fadb8879d5c510b470f9b751b98))
+
+
+### Bug Fixes
+
+* (core) added text component fixes for ie11 ([#4999](https://github.com/SAP/fundamental-ngx/issues/4999)) ([707ce45](https://github.com/SAP/fundamental-ngx/commit/707ce452e3fe47241439172f6e1424dfa648a61b))
+* (core) chaged text examples selectors to fix stackblitz ([#5000](https://github.com/SAP/fundamental-ngx/issues/5000)) ([1b0e83e](https://github.com/SAP/fundamental-ngx/commit/1b0e83e17529f30b93f6aefbea29c7c015e397ce))
+
+## [0.29.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.53...v0.29.0-rc.54) (2021-03-25)
+
+
+### Bug Fixes
+
+* (core) added text component fixes for ie11 ([#4999](https://github.com/SAP/fundamental-ngx/issues/4999)) ([707ce45](https://github.com/SAP/fundamental-ngx/commit/707ce452e3fe47241439172f6e1424dfa648a61b))
+* (core) chaged text examples selectors to fix stackblitz ([#5000](https://github.com/SAP/fundamental-ngx/issues/5000)) ([1b0e83e](https://github.com/SAP/fundamental-ngx/commit/1b0e83e17529f30b93f6aefbea29c7c015e397ce))
+
 ## [0.29.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.51...v0.29.0-rc.53) (2021-03-25)
 
 ## [0.29.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.51...v0.29.0-rc.52) (2021-03-24)

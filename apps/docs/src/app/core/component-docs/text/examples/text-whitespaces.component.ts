@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'text-whitespaces',
+    selector: 'fd-text-whitespaces',
     templateUrl: './text-whitespaces.component.html'
 })
 export class TextWhitespacesComponent {

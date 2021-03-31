@@ -12,6 +12,7 @@ import {
     Injector,
     Input,
     OnDestroy,
+    OnInit,
     Optional,
     Output,
     QueryList,
@@ -31,6 +32,7 @@ import { RtlService } from '../utils/services/rtl.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 import { BasePopoverClass } from '../popover/base/base-popover.class';
 import { PopoverService } from '../popover/popover-service/popover.service';
+import { ContentDensityService } from '../utils/public_api';
 
 let menuUniqueId = 0;
 
@@ -48,7 +50,7 @@ let menuUniqueId = 0;
         PopoverService
     ],
 })
-export class MenuComponent extends BasePopoverClass implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy {
+export class MenuComponent extends BasePopoverClass implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy, OnInit {
 
     /** Set menu in mobile mode */
     @Input('mobile')
@@ -63,7 +65,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     /** Display menu in compact mode */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Whether the popover should be focusTrapped. */
     @Input()
@@ -129,9 +131,21 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
                 private _menuService: MenuService,
                 private _changeDetectorRef: ChangeDetectorRef,
                 private _popoverService: PopoverService,
+                @Optional() private _contentDensityService: ContentDensityService,
                 @Optional() private _rtlService: RtlService,
                 @Optional() private _dynamicComponentService: DynamicComponentService) {
         super();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                })
+            );
+        }
     }
 
     /** @hidden */

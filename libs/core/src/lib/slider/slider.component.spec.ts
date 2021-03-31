@@ -98,6 +98,11 @@ describe('SliderComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should handle content density when compact input is not provided', () => {
+        sliders[0].ngOnInit();
+        expect(sliders[0].cozy).toBeNull();
+    });
+
     it('handle should be on the center of slider', () => {
         const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
 
