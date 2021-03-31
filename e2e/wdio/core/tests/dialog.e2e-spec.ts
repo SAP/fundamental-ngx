@@ -188,6 +188,7 @@ describe('dialog test suite', function() {
         it('should check dialog selections', () => {
             openDialog(complexDialog);
             waitForNotDisplayed(busyIndicator);
+            waitForElDisplayed(dialogItems);
             const startingPrice = getText(dialogCartOutput);
 
             click(dialogItems, 1);
@@ -482,7 +483,7 @@ describe('dialog test suite', function() {
 
         it('should check examples visual regression', () => {
             dialogPage.saveExampleBaselineScreenshot();
-            expect(dialogPage.compareWithBaseline()).toBeLessThan(2);
+            expect(dialogPage.compareWithBaseline()).toBeLessThan(3);
         });
 
         it('should check each dialog', () => {
@@ -500,7 +501,7 @@ describe('dialog test suite', function() {
                     waitForElDisplayed(dialogItems);
                     saveElementScreenshot(dialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
                     expect(checkElementScreenshot(dialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                        .toBeLessThan(4, `dialog ${i} screenshot doesn't match baseline`);
+                        .toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
                     click(dialog + button, 2);
                     continue;
                 }
@@ -509,12 +510,12 @@ describe('dialog test suite', function() {
                     waitForElDisplayed(dialog);
                     saveElementScreenshot(dialogContainer, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
                     expect(checkElementScreenshot(dialogContainer, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                        .toBeLessThan(4, `dialog ${i}a screenshot doesn't match baseline`);
+                        .toBeLessThan(5, `dialog ${i}a screenshot doesn't match baseline`);
                     click(dialog + button, 1);
                     waitForElDisplayed(dialog, 1);
                     saveElementScreenshot(dialogContainer, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1);
                     expect(checkElementScreenshot(dialogContainer, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1))
-                        .toBeLessThan(4, `dialog ${i}b screenshot doesn't match baseline`);
+                        .toBeLessThan(5, `dialog ${i}b screenshot doesn't match baseline`);
                     click(dialog + button, 3);
                     closeDialog();
                     continue;
@@ -523,7 +524,7 @@ describe('dialog test suite', function() {
                 waitForElDisplayed(dialog);
                 saveElementScreenshot(dialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
                 expect(checkElementScreenshot(dialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                    .toBeLessThan(4, `dialog ${i} screenshot doesn't match baseline`);
+                    .toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
                 if (doesItExist(dialog) === false) {
                     continue;
                 }
@@ -539,7 +540,7 @@ describe('dialog test suite', function() {
                 mouseHoverElement(dialogExamples + button, i);
                 saveElementScreenshot(dialogExamples + button, `dialog-${i}-example-hover-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i);
                 expect(checkElementScreenshot(dialogExamples + button, `dialog-${i}-example-hover-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i))
-                    .toBeLessThan(4, `dialog ${i} hover state screenshot doesn't match baseline`);
+                    .toBeLessThan(5, `dialog ${i} hover state screenshot doesn't match baseline`);
             }
         }, 1);
 
@@ -551,7 +552,7 @@ describe('dialog test suite', function() {
                 focusElement(dialogExamples + button, i);
                 saveElementScreenshot(dialogExamples + button, `dialog-${i}-example-focus-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i);
                 expect(checkElementScreenshot(dialogExamples + button, `dialog-${i}-example-focus-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i))
-                    .toBeLessThan(4, `dialog ${i} focus state screenshot doesn't match baseline`);
+                    .toBeLessThan(5, `dialog ${i} focus state screenshot doesn't match baseline`);
             }
         }, 1);
 
@@ -563,7 +564,7 @@ describe('dialog test suite', function() {
                 addIsActiveClass(dialogExamples + button, i);
                 saveElementScreenshot(dialogExamples + button, `dialog-${i}-example-active-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i);
                 expect(checkElementScreenshot(dialogExamples + button, `dialog-${i}-example-active-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i))
-                    .toBeLessThan(4, `dialog ${i} active state screenshot doesn't match baseline`);
+                    .toBeLessThan(5, `dialog ${i} active state screenshot doesn't match baseline`);
             }
         }, 1);
 
@@ -606,7 +607,7 @@ describe('dialog test suite', function() {
                     applyStateFunction(dialog + button, j);
                     saveElementScreenshot(dialog + button, `dialog-${i}-button-${j}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), j);
                     expect(checkElementScreenshot(dialog + button, `dialog-${i}-button-${j}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), j))
-                        .toBeLessThan(4, `dialog ${i} button ${j} ${stateCheck} state screenshot doesn't match baseline`);
+                        .toBeLessThan(5, `dialog ${i} button ${j} ${stateCheck} state screenshot doesn't match baseline`);
                 }
                 if (i === complexExample) {
                     click(dialog + button, 2);
@@ -620,7 +621,7 @@ describe('dialog test suite', function() {
                         applyStateFunction(dialog + button, k);
                         saveElementScreenshot(dialog + button, `dialog-${i}-button-${k}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), k);
                         expect(checkElementScreenshot(dialog + button, `dialog-${i}-button-${k}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), k))
-                            .toBeLessThan(4, `dialog ${i} button ${k} ${stateCheck} state screenshot doesn't match baseline`);
+                            .toBeLessThan(5, `dialog ${i} button ${k} ${stateCheck} state screenshot doesn't match baseline`);
                     }
                     click(dialog + button, 3);
                 }
