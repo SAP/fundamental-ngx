@@ -7,6 +7,8 @@ import {
     forwardRef,
     HostBinding,
     Input,
+    OnDestroy,
+    OnInit,
     Optional,
     QueryList
 } from '@angular/core';
@@ -15,11 +17,13 @@ import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
+import { Subscription } from 'rxjs';
+import { ContentDensityService } from '../../utils/public_api';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]'
 })
-export class NestedListDirective implements AfterContentInit, NestedListInterface {
+export class NestedListDirective implements AfterContentInit, NestedListInterface, OnInit, OnDestroy {
 
     /** In case the user wants to no use icons for items in this list */
     @Input()
@@ -29,7 +33,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** In case the user wants put compact mode in this list */
     @Input()
     @HostBinding('class.fd-nested-list--compact')
-    compact = false;
+    compact?: boolean;
 
     /** @hidden */
     @HostBinding('class.fd-nested-list')
@@ -48,16 +52,34 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     nestedItems: QueryList<NestedItemDirective>;
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     constructor(
         @Optional() private _nestedItemService: NestedItemService,
         private _nestedListStateService: NestedListStateService,
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
-        private _changeDetectionRef: ChangeDetectorRef
+        private _changeDetectionRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {
         if (this._nestedItemService) {
             this._nestedItemService.list = this;
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+            }));
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

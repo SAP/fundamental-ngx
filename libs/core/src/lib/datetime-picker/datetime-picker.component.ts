@@ -16,7 +16,7 @@ import {
     OnChanges, AfterViewInit
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Placement } from '../popover/popover-position/popover-position';
 
@@ -30,6 +30,7 @@ import { FormStates } from '../form/form-control/form-states';
 import { createMissingDateImplementationError } from './errors';
 import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
 import { PopoverService } from '../popover/popover-service/popover.service';
+import { ContentDensityService } from '../utils/public_api';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -70,7 +71,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
     /** Whether the component should be in compact mode. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -319,6 +320,9 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     onChange = (_: D) => {
     };
 
@@ -339,6 +343,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     constructor(
         private _elRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
@@ -379,10 +384,18 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
             this._calculateTimeOptions();
             this._changeDetRef.detectChanges();
         });
+
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._changeDetRef.markForCheck();
+            }));
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }

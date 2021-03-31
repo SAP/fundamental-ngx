@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, MessageToastService } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fd-action-sheet-cosy-example',
-    templateUrl: './action-sheet-cosy-example.component.html',
+    selector: 'fd-action-sheet-default-example',
+    templateUrl: './action-sheet-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionSheetCosyExampleComponent {
+export class ActionSheetDefaultExampleComponent {
 
     @ViewChild(ActionSheetComponent)
     actionSheetComponent: ActionSheetComponent;
