@@ -11,6 +11,7 @@ import { InputGroupModule } from '../input-group/input-group.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -31,7 +32,8 @@ describe('MultiInputComponent', () => {
                 InputGroupModule
             ],
             providers: [
-                DynamicComponentService
+                DynamicComponentService,
+                ContentDensityService
             ]
         }).compileComponents();
     }));
@@ -48,6 +50,13 @@ describe('MultiInputComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(component, 'buildComponentCssClass');
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should set placeholder', async () => {
@@ -216,7 +225,7 @@ describe('MultiInputComponent', () => {
         spyOn(event, 'preventDefault');
         spyOn(event, 'stopPropagation');
         spyOn(<any>component, '_applySearchTermChange').and.callThrough();
-        component.showAllClicked(event);
+        component._showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');

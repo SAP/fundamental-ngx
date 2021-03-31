@@ -62,6 +62,10 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     @Input()
     isCloseButton = false;
 
+    /** Whether or not the action sheet item is disabled. */
+    @Input()
+    disabled = false;
+
     /** @hidden */
     @ViewChild(ButtonComponent)
     buttonComponent: ButtonComponent;

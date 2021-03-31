@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
 
-import { ContentDensity, Status } from './form-options';
+import { Status } from './form-options';
+import { ContentDensity } from '@fundamental-ngx/core';
 
 export abstract class FormFieldControl<T> {
     /**

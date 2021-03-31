@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ListModule } from '../list.module';
+import { ButtonModule } from '../../button/button.module';
 
 @Component({
     template: ` <li #directiveElement
@@ -9,12 +10,16 @@ import { ListModule } from '../list.module';
                     [action]="action"
                     [selected]="selected">
         <a *ngIf="link" fd-list-link>link</a>
+        <button fd-button #button></button>
         List Item Test Text
     </li> `
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })
     ref: ElementRef;
+
+    @ViewChild('button', { read: ElementRef })
+    buttonRef: ElementRef;
 
     selected = false;
     link = false;
@@ -29,7 +34,7 @@ describe('ListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [ListModule]
+            imports: [ListModule, ButtonModule]
         }).compileComponents();
     }));
 
@@ -61,5 +66,10 @@ describe('ListItemComponent', () => {
         component.link = true;
         fixture.detectChanges();
         expect(component.ref.nativeElement.classList).toContain('fd-list__item--link');
+    });
+
+    it('should assign button class', () => {
+        fixture.detectChanges();
+        expect(component.buttonRef.nativeElement.classList).toContain('fd-list__button');
     });
 });

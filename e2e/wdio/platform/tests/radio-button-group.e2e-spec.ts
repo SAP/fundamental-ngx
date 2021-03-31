@@ -342,7 +342,7 @@ describe('Radio button group  Test Suite', function() {
     it('Verify platform radio buttons passed as content projection and group is disabled', () => {
         if (browserIsFirefox()) {
             console.log('Skip for FF');
-            return
+            return;
         }
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonWithDisabledButtonsDrivenForm));
@@ -437,7 +437,11 @@ describe('Radio button group  Test Suite', function() {
         }
     });
 
-    it('should be able to switch to rtl', () => {
-        radioButtonGroupPage.checkRtlSwitch();
+    describe('orientation check', function() {
+        it('should be able to switch to rtl', () => {
+            radioButtonGroupPage.checkRtlSwitch();
+        });
     });
+
+
 });

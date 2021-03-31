@@ -50,6 +50,7 @@
         [isExpanded]="!mobile && open && displayedValues.length"
         [attr.aria-readonly]="readOnly"
         [glyphAriaLabel]="ariaLabel"
+        [iconTitle]="title"
         (addOnButtonClicked)="onPrimaryButtonClick()"
         (click)="mobile && isOpenChangeHandle(true)"
     >
@@ -74,7 +75,7 @@
             [readonly]="readOnly"
             [attr.aria-readonly]="readOnly"
             [placeholder]="placeholder"
-            [id]="comboboxId + '-search'"
+            [id]="inputId"
             [(ngModel)]="inputText"
             (onComplete)="handleAutoComplete($event)"
             (keydown)="onInputKeydownHandler($event)"
@@ -82,7 +83,7 @@
             (focus)="onTouched()"
             (blur)="handleBlur()"
         />
-        <span 
+        <span
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="compact"
             *ngIf="isSearch && showClearButton && inputText && inputText.length > 0">
@@ -92,7 +93,7 @@
                 type="button"
                 fdType="transparent"
                 title="Clear input"
-                [class.fd-button--compact]="compact" 
+                [class.fd-button--compact]="compact"
                 (click)="_handleClearSearchTerm()">
                 <fd-icon glyph="decline"></fd-icon>
             </button>
@@ -117,7 +118,7 @@
         <ng-container *ngIf="groupFn">
             <ng-container *ngFor="let group of displayedValues | listGroupPipe: groupFn | keyvalue">
                 <li role="group" fd-list-group-header tabindex="0">
-                    {{ group.key }}
+                    <span fd-list-title>{{ group.key }}</span>
                 </li>
                 <li
                     role="option"

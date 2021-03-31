@@ -105,7 +105,9 @@ describe('DialogComponent', () => {
     });
 
     it('should close after backdrop clicked', () => {
-        setup();
+        const customDialogConfig = { ...new DialogConfig(), backdropClickCloseable: true };
+
+        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         const dismissSpy = spyOn(dialogRef, 'dismiss');
         fixture.detectChanges();

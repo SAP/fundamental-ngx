@@ -95,7 +95,9 @@
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
                 <ng-container *ngIf="!groupItemTemplate">
-                    <li fd-list-group-header role="group" [innerText]="group.label"></li>
+                    <li fd-list-group-header role="group">
+                        <span fd-list-title>{{group.label}}</span>
+                    </li>
                 </ng-container>
 
                 <ng-container *ngIf="groupItemTemplate">

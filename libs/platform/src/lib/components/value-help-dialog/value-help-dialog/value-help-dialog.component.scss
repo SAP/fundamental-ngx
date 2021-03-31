@@ -21,6 +21,9 @@ $block: fdp-value-help-dialog;
             padding: 0;
         }
     }
+	.fd-bar.fd-bar--cozy {
+		height: auto;
+	}
     .fd-dialog__header {
         box-shadow: none;
         .fd-title {

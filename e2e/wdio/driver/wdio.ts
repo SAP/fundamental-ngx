@@ -1,5 +1,3 @@
-import { default as axe, source } from 'axe-core';
-
 export function defaultWaitTime(): number {
     return browser.options.waitforTimeout;
 }
@@ -76,6 +74,12 @@ export function click(selector: string, index: number = 0, waitTime: number = de
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     return $$(selector)[index].click();
+}
+
+export function clickWithOption(selector: string, index: number = 0, waitTime: number = defaultWaitTime(), options: object): void {
+    checkSelectorExists(selector, index);
+    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+    return $$(selector)[index].click(options);
 }
 
 export function doubleClick(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
@@ -157,9 +161,17 @@ export function waitForUnclickable(selector: string, index: number = 0, waitTime
     return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
 }
 
+export function waitForElDisappear(selector: string, waitTime = defaultWaitTime()): boolean {
+    return $(selector).waitForExist({ timeout: waitTime, reverse: true });
+}
+
 export function waitForPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
     checkSelectorExists(selector, index);
     return $$(selector)[index].waitForExist({ timeout: waitTime });
+}
+
+export function waitForNotPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
+    return $$(selector)[index].waitForExist({ timeout: waitTime, reverse: true });
 }
 
 export function isEnabled(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
@@ -221,14 +233,6 @@ export function getElementSize(selector: string, index: number = 0, prop?: 'widt
     return $$(selector)[index].getSize(prop || void 0);
 }
 
-export function executeScriptAfterTagFF(selector: string, index: number = 0): string {
-    const attrName = browserIsFirefox() ? 'border-left-style' : 'border';
-    return browser.execute(function(selector, attrName, index) {
-        return window.getComputedStyle(
-            document.querySelectorAll(selector)[index], ':after')[attrName];
-    }, selector, attrName, index);
-}
-
 export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
     return browser.execute(function(selector, attrName, index) {
         return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':before')[attrName]);
@@ -269,6 +273,16 @@ export function scrollIntoView(selector: string, index: number = 0): void {
 export function isElementClickable(selector: string, index: number = 0): boolean {
     checkSelectorExists(selector, index);
     return $$(selector)[index].isClickable();
+}
+
+export function isDisplayedInViewport(selector: string, index: number = 0): boolean {
+    return $$(selector)[index].isDisplayedInViewport();
+}
+
+export function waitElementToBeClickable(selector: string, index: number = 0): void {
+    browser.waitUntil((): boolean => {
+        return $$(selector)[index].isClickable();
+    }, { timeout: defaultWaitTime() });
 }
 
 export function doesItExist(selector: string): boolean {
@@ -329,17 +343,6 @@ export function getParentElementCSSProperty(selector: string, prop: string, inde
     return $$(selector)[index].parentElement().getCSSProperty(prop).value;
 }
 
-export function runAxeReport(options: string): object {
-    return browser.executeAsync((options, done) => {
-        axe.run(options, function(err, results) {
-            if (err) {
-                done(err);
-            }
-            done(results);
-        });
-    }, options);
-}
-
 export function addIsActiveClass(selector: string, index: number = 0): void {
     // @ts-ignore
     $$(selector)[index].addIsActiveClass();
@@ -359,6 +362,16 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
             { 'type': 'pause', 'duration': 500 }
         ]
     }]);
+}
+
+export function selectOptionByAttribute(selector: string, attribute: string, attributeValue: string, index: number = 0): void {
+    click(selector, index);
+    waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
+    $(`${selector} option[${attribute}="${attributeValue}"]`).click();
+}
+
+export function selectOptionByValueAttribute(selector: string, attributeValue: string, index: number = 0): void {
+    selectOptionByAttribute(selector, 'value', attributeValue, index);
 }
 
 export function saveElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): void {

@@ -7,6 +7,7 @@ import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
+import { AvatarGroupModule } from './avatar-group/avatar-group.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -85,6 +86,9 @@ import { SliderModule } from './slider/public_api';
 import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
 import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
 import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
+import { StatusIndicatorModule } from './status-indicator/status-indicator.module';
+import { GridListModule } from './grid-list/grid-list.module';
+import { FacetModule } from './facets/facet.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -94,6 +98,7 @@ import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
         ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
+        AvatarGroupModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,
@@ -109,6 +114,7 @@ import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
         DragAndDropModule,
         DynamicPageModule,
         DynamicSideContentModule,
+        FacetModule,
         FeedListItemModule,
         FeedInputModule,
         FileUploaderModule,
@@ -170,8 +176,10 @@ import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
         DynamicSideContentModule,
         SliderModule,
         OnlyDigitsModule,
-        IllustratedMessageModule
+        IllustratedMessageModule,
+        StatusIndicatorModule,
+        GridListModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
+    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })
-export class FundamentalNgxCoreModule { }
+export class FundamentalNgxCoreModule {}

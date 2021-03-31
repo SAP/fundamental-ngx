@@ -21,7 +21,6 @@ export class MultiInputPo extends BaseComponentPo {
     dropdownOptionText = this.dropdownOptions + 'span';
     dropdownOptionTextValueHelp = this.dropdownOptions + 'div[class="fd-list__title ng-star-inserted"]';
 
-
     crossButton = (option: string) => {
         return `//span[text() = '${option}']/following-sibling::span`;
     };
@@ -51,5 +50,17 @@ export class MultiInputPo extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.allDropdownButtons);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'multi-input'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'multi-input'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

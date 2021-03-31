@@ -34,7 +34,6 @@ export {
 
 export { TableDataSource, TableDataProvider, ArrayTableDataSource, ObservableTableDataSource } from './domain';
 
-export { PlatformTableModule } from './table.module';
 export { TableComponent } from './table.component';
 export { TableColumnComponent } from './components/table-column/table-column.component';
 
@@ -57,3 +56,5 @@ export { TableP13SortComponent } from './components/table-p13-dialog/table-p13-s
 export { TableP13GroupComponent } from './components/table-p13-dialog/table-p13-group.component';
 export { TableP13FilterComponent } from './components/table-p13-dialog/table-p13-filter.component';
 export { TableP13ColumnsComponent } from './components/table-p13-dialog/table-p13-columns.component';
+
+export { PlatformTableModule } from './table.module';

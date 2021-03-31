@@ -48,4 +48,16 @@ export class InputGroupPo extends BaseComponentPo {
         waitForPresent(this.root);
         waitForElDisplayed(this.root);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'input-group'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'input-group'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

@@ -8,8 +8,10 @@ import {
     refreshPage,
     waitForElDisplayed
 } from '../../driver/wdio';
-import {anchor_href, custom_style_1, custom_style_2, custom_style_2_FF, google_link_href,
-html_input_second, html_input_text, loripsum_link_href, sap_link_href, target_blank, target_self} from '../fixtures/appData/formatted-text-content';
+import {
+    anchor_href, custom_style_1, custom_style_2, custom_style_2_FF, google_link_href,
+    html_input_second, html_input_text, loripsum_link_href, sap_link_href, target_blank, target_self
+} from '../fixtures/appData/formatted-text-content';
 
 describe('Formatted text component', function() {
     const formattedTextPage = new FormattedTextPo();
@@ -59,7 +61,16 @@ describe('Formatted text component', function() {
         expect(true).toBe(false, 'Alert is present on the screen ');
     });
 
-    it('Verify RTL and LTR orientation', () => {
-        formattedTextPage.checkRtlSwitch();
+    describe('Check orientation', function() {
+        it('Verify RTL and LTR orientation', () => {
+            formattedTextPage.checkRtlSwitch();
+        });
+    });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            formattedTextPage.saveExampleBaselineScreenshot();
+            expect(formattedTextPage.compareWithBaseline()).toBeLessThan(3);
+        });
     });
 });

@@ -22,6 +22,14 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
+    avatarGroup: [
+        'AvatarGroupComponent',
+        'AvatarGroupItemDirective',
+        'AvatarGroupOverflowBodyDirective',
+        'AvatarGroupOverflowItemDirective',
+        'AvatarGroupOverflowButtonDirective',
+        'AvatarGroupOverflowButtonTextDirective'
+    ],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     card: [
         'CardComponent',
@@ -60,6 +68,7 @@ export const API_FILES = {
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
+    contentDensity: [],
     datePicker: ['DatePickerComponent'],
     datetimePicker: ['DatetimePickerComponent'],
     dynamicPage: [
@@ -71,6 +80,10 @@ export const API_FILES = {
         'DynamicPageGlobalActionsComponent',
         'DynamicPageFooterComponent',
         'DynamicPageContentComponent'
+    ],
+    facets: [
+      'FacetComponent',
+      'FacetGroupComponent'
     ],
     feedInput: [
         'FeedInputComponent',
@@ -170,7 +183,7 @@ export const API_FILES = {
         'MessageBoxDefaultComponent',
         'MessageBoxSemanticIconComponent',
         'MessageBoxContainerComponent',
-        'MessageBoxFooterButtonComponent',
+        'MessageBoxFooterButtonComponent'
     ],
     notification: [
         'NotificationComponent',
@@ -272,7 +285,7 @@ export const API_FILES = {
         'TabProcessIconDirective',
         'TabItemExpandComponent',
         'TabSeparator',
-        'TabInfo',
+        'TabInfo'
     ],
     text: ['TextComponent'],
     tile: [
@@ -337,5 +350,6 @@ export const API_FILES = {
         'GridListItemFooterBarComponent',
         'GridListItemToolbarComponent',
         'GridListGroupHeaderComponent'
-    ]
+    ],
+    statusIndicator: ['StatusIndicatorComponent']
 };

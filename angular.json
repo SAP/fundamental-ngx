@@ -65,7 +65,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -88,7 +87,6 @@
                 }
               ],
               "aot": true,
-              "extractCss": true,
               "sourceMap": false,
               "namedChunks": false,
               "vendorChunk": false,
@@ -104,7 +102,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,

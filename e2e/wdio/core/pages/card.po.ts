@@ -54,4 +54,16 @@ export class CardPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.cardTitle);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'card'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'card'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

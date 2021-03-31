@@ -1,17 +1,1 @@
 @import '~fundamental-styles/dist/object-identifier';
-
-/**
-* TODO: Remove after https://github.com/SAP/fundamental-styles/issues/1742 is addressed
-*/
-$block: fd-object-identifier;
-
-.fd-link.#{$block}__link {
-    font-size: var(--sapFontLargeSize);
-}
-
-.#{$block}--medium {
-    .#{$block}__title,
-    .fd-link.#{$block}__link {
-        font-size: var(--sapFontSize);
-    }
-}

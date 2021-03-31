@@ -8,10 +8,14 @@ import {
     ChangeDetectionStrategy,
     OnChanges,
     ViewEncapsulation,
-    AfterViewInit
+    AfterViewInit,
+    OnInit,
+    OnDestroy,
+    Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { applyCssClass, ContentDensityService, CssClassBuilder } from '../../utils/public_api';
+import { Subscription } from 'rxjs';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -29,7 +33,8 @@ let uniqueId = 0;
         }
     ]
 })
-export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor {
+export class RadioButtonComponent
+    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef;
@@ -61,7 +66,7 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
      * By default field is set to false
      */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** The field to set state of radio button using:
      * 'success' | 'error' | 'warning' | 'default' | 'information'
@@ -119,7 +124,30 @@ export class RadioButtonComponent implements OnChanges, AfterViewInit, CssClassB
     currentValue: any;
 
     /** @hidden */
-    constructor(private changeDetectionRef: ChangeDetectorRef) {}
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
+    constructor(
+        private changeDetectionRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this.buildComponentCssClass();
+                })
+            );
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /** @hidden */
     ngOnChanges(): void {
