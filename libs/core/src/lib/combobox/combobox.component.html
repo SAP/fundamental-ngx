@@ -10,6 +10,7 @@
         [focusTrapped]="true"
         [triggers]="triggers"
         [disabled]="disabled || readOnly"
+        [maxWidth]="640"
         [closeOnOutsideClick]="closeOnOutsideClick">
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
@@ -81,7 +82,7 @@
             (focus)="onTouched()"
             (blur)="handleBlur()"
         />
-        <span 
+        <span
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="compact"
             *ngIf="isSearch && showClearButton && inputText && inputText.length > 0">
@@ -91,7 +92,7 @@
                 type="button"
                 fdType="transparent"
                 title="Clear input"
-                [class.fd-button--compact]="compact" 
+                [class.fd-button--compact]="compact"
                 (click)="_handleClearSearchTerm()">
                 <fd-icon glyph="decline"></fd-icon>
             </button>
