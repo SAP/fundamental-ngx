@@ -75,7 +75,6 @@ describe('Button test suite:', function() {
             scrollIntoView(playgroundButton);
             expect(isElementClickable(playgroundButton)).toBe(true);
         });
-
     });
 
     it('verify disable state buttons', () => {
@@ -149,16 +148,14 @@ describe('Button test suite:', function() {
             saveElementScreenshot(playgroundButton, buttonPlayground + 'not-compact', buttonPage.getScreenshotFolder());
             expect(checkElementScreenshot(playgroundButton, buttonPlayground + 'not-compact', buttonPage.getScreenshotFolder()))
                 .toBeLessThan(2, `Playground button mismatch`);
-    });
-
-
+        });
     });
 
     describe('Check visual regression basic', function() {
 
         it('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();
-            expect(buttonPage.compareWithBaseline()).toBeLessThan(1);
+            expect(buttonPage.compareWithBaseline()).toBeLessThan(3);
         });
 
         it('should check buttons type states', () => {
