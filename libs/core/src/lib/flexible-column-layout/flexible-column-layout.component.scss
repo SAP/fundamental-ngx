@@ -4,3 +4,12 @@
 .fd-button.fd-flexible-column-layout__button {
 	z-index: 1;
 }
+
+
+.fd-flexible-column-layout__column {
+	transition: width 0.56s cubic-bezier(0.1, 0, 0.05, 1), visibility 0.1s ease-in;
+}
+
+.fd-flexible-column-layout__column {
+	min-width: 0;
+}

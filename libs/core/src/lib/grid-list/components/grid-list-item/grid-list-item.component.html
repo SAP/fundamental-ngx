@@ -20,7 +20,7 @@
         [class.fd-grid-list__highlight--negative]="status === 'warning'"
         [class.fd-grid-list__highlight--critical]="status === 'error'"
         [class.fd-grid-list__highlight--neutral]="status === 'neutral'"
-        i18n-aria-label="@@coreGridList.Item.Status|Status aria-label attribute"
+        i18n-aria-label="coreGridList.Item.Status|Status aria-label attribute"
         [attr.aria-label]="'Item has status. Status: ' + status + '.'"
     ></span>
 
@@ -130,6 +130,7 @@
 
 <ng-template #radio>
     <input
+        [attr.tabindex]="selectionMode === 'singleSelect' ? -1 : 0"
         type="radio"
         class="fd-radio fd-radio--compact fd-grid-list__radio-input"
         [id]="id + '-radio'"

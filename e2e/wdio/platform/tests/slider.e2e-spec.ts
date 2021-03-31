@@ -237,8 +237,8 @@ describe('slider test suite', function() {
         }, 1);
 
         it('should check examples visual regression', () => {
-            sliderPage.saveExampleBaselineScreenshot('slider');
-            expect(sliderPage.compareWithBaseline('slider')).toBeLessThan(1);
+            sliderPage.saveExampleBaselineScreenshot();
+            expect(sliderPage.compareWithBaseline()).toBeLessThan(3);
         });
 
         it('should check slider handle hover state', () => {
@@ -247,8 +247,8 @@ describe('slider test suite', function() {
             for (let i = 0; elementCount > i; i++) {
                 scrollIntoView(sliderHandles, i);
                 mouseHoverElement(sliderHandles, i);
-                saveElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-hover-state-${getImageTagBrowserPlatform()}`, {}, i);
-                expect(checkElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-hover-state-${getImageTagBrowserPlatform()}`, {}, i))
+                saveElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-hover-state-${getImageTagBrowserPlatform()}`, sliderPage.getScreenshotFolder(), i);
+                expect(checkElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-hover-state-${getImageTagBrowserPlatform()}`, sliderPage.getScreenshotFolder(), i))
                     .toBeLessThan(1, `slider handle ${i} hover state mismatch`);
             }
         });
@@ -259,8 +259,8 @@ describe('slider test suite', function() {
             for (let i = 0; elementCount > i; i++) {
                 scrollIntoView(sliderHandles, i);
                 addIsActiveClass(sliderHandles, i);
-                saveElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-active-state-${getImageTagBrowserPlatform()}`, {}, i);
-                expect(checkElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-active-state-${getImageTagBrowserPlatform()}`, {}, i))
+                saveElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-active-state-${getImageTagBrowserPlatform()}`, sliderPage.getScreenshotFolder(), i);
+                expect(checkElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-active-state-${getImageTagBrowserPlatform()}`, sliderPage.getScreenshotFolder(), i))
                     .toBeLessThan(1, `slider handle ${i} active state mismatch`);
             }
         });
@@ -270,8 +270,8 @@ describe('slider test suite', function() {
 
             for (let i = 0; elementCount > i; i++) {
                 focusElement(sliderHandles, i);
-                saveElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-focus-state-${getImageTagBrowserPlatform()}`, {}, i);
-                expect(checkElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-focus-state-${getImageTagBrowserPlatform()}`, {}, i))
+                saveElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-focus-state-${getImageTagBrowserPlatform()}`, sliderPage.getScreenshotFolder(), i);
+                expect(checkElementScreenshot(sliderHandles, `slider-example-slider-handle-${i}-focus-state-${getImageTagBrowserPlatform()}`, sliderPage.getScreenshotFolder(), i))
                     .toBeLessThan(1, `slider handle ${i} focus state mismatch`);
             }
         });

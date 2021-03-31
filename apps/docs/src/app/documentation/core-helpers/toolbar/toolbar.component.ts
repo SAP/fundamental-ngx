@@ -2,7 +2,15 @@ import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild, 
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import { MenuComponent, MenuKeyboardService, ShellbarMenuItem, ShellbarSizes, ThemesService } from '@fundamental-ngx/core';
+import {
+    ContentDensity,
+    ContentDensityService,
+    MenuComponent,
+    MenuKeyboardService,
+    ShellbarMenuItem,
+    ShellbarSizes,
+    ThemesService
+} from '@fundamental-ngx/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
 import { fromEvent, Subject } from 'rxjs';
@@ -60,6 +68,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _routerService: Router,
         private _themesService: ThemesService,
         private _docsThemeService: DocsThemeService,
+        private _contentDensityService: ContentDensityService,
         @Inject('CURRENT_LIB') private _currentLib: Libraries,
     ) {
         this.library = _routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
@@ -116,6 +125,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     selectVersion(version: any): void {
         window.open(version.url, '_blank');
+    }
+
+    selectDensity(density: ContentDensity): void {
+        this._contentDensityService.contentDensity.next(density);
     }
 
     private _getShellbarSize(): ShellbarSizes {

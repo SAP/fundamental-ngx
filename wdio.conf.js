@@ -25,7 +25,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*.e2e-spec.ts'
+         './e2e/wdio/**/*.e2e-spec.ts',
     ],
     // Patterns to exclude.
     exclude: [
@@ -35,6 +35,7 @@ exports.config = {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/action-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/approval-flow.e2e-spec.ts',
             './e2e/wdio/platform/**/checkbox.e2e-spec.ts',
             './e2e/wdio/platform/**/checkbox-group.e2e-spec.ts',
             './e2e/wdio/platform/**/combobox.e2e-spec.ts',
@@ -69,6 +70,7 @@ exports.config = {
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
+            './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
         ]
     },
     // ============

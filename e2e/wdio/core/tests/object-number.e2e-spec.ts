@@ -54,7 +54,7 @@ describe('object number test suite', function () {
     });
 
     describe('basic object number examples', function () {
-        it('should check colors and values', () => {
+        xit('should check colors and values', () => {
             checkObjectValues(basicExamples, basicExamplesText);
             checkStatusColors(basicExamples, objectNumberText(basicExamples), statusColors);
             checkStatusColors(basicExamples, objectNumberUnit(basicExamples), statusColors);
@@ -62,7 +62,7 @@ describe('object number test suite', function () {
     });
 
     describe('object number status examples', function () {
-        it('should check object number status examples', () => {
+        xit('should check object number status examples', () => {
             checkObjectValues(objStatusExamples, objStatusExamplesText);
             checkStatusColors(objStatusExamples, objectNumberText(objStatusExamples), statusColors);
             checkStatusColors(objStatusExamples, objectNumberUnit(objStatusExamples), statusColors);
@@ -70,7 +70,7 @@ describe('object number test suite', function () {
     });
 
     describe('large object number examples', function () {
-        it('should check colors and values', () => {
+        xit('should check colors and values', () => {
             checkObjectValues(largeObjExamples, styledObjExampleText);
             checkStatusColors(largeObjExamples, objectNumberText(largeObjExamples), statusColors);
             checkStatusColors(largeObjExamples, objectNumberUnit(largeObjExamples), statusColors);
@@ -86,7 +86,7 @@ describe('object number test suite', function () {
     });
 
     describe('bold object number examples', function () {
-        it('should check colors and values', () => {
+        xit('should check colors and values', () => {
             checkObjectValues(boldObjExamples, styledObjExampleText);
             checkStatusColors(boldObjExamples, objectNumberText(boldObjExamples), statusColors);
             checkStatusColors(boldObjExamples, objectNumberUnit(boldObjExamples), statusColors);
@@ -102,7 +102,7 @@ describe('object number test suite', function () {
     });
 
     describe('object number units examples', function () {
-        it('should check colors and values', () => {
+        xit('should check colors and values', () => {
             checkObjectValues(unitObjExamples, objUnitExamplesText);
             checkStatusColors(unitObjExamples, objectNumberText(unitObjExamples), statusColors);
             checkStatusColors(unitObjExamples, objectNumberUnit(unitObjExamples), statusColors);
@@ -110,7 +110,7 @@ describe('object number test suite', function () {
     });
 
     describe('object number decimal examples', function () {
-        it('should check colors and values', () => {
+        xit('should check colors and values', () => {
             checkObjectValues(decimalObjExamples, objDecimalExamplesText);
             checkStatusColors(decimalObjExamples, objectNumberText(decimalObjExamples), statusColors);
             checkStatusColors(decimalObjExamples, objectNumberUnit(decimalObjExamples), statusColors);
@@ -118,7 +118,7 @@ describe('object number test suite', function () {
     });
 
     describe('object number decimal examples', function () {
-        it('should check colors and values', () => {
+        xit('should check colors and values', () => {
             checkObjectValues(truncationObjExample, objTruncationText);
             checkStatusColors(truncationObjExample, objectNumberText(truncationObjExample), statusColors);
             checkStatusColors(truncationObjExample, objectNumberUnit(truncationObjExample), statusColors);
@@ -132,9 +132,9 @@ describe('object number test suite', function () {
     });
 
     describe('Check visual regression', function() {
-        it('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             objectNumberPage.saveExampleBaselineScreenshot();
-            expect(objectNumberPage.compareWithBaseline()).toBeLessThan(1);
+            expect(objectNumberPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });
