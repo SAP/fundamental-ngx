@@ -17,15 +17,14 @@ class StateHandler<TModel> {
     }
 
     get(target: any, prop: PropertyKey): any {
-        // Check is an array and wraps a new one proxy
-        if (['[object Object]', '[object Array]']
-            .indexOf(Object.prototype.toString.call(this.targetState[prop])) > -1) {
+        // Check is nested object and wraps a new one proxy
+        if (this.targetState[prop] && typeof this.targetState[prop] === 'object') {
             return new Proxy(this.targetState[prop], this);
         }
         return target[prop] || this.targetState[prop];
     }
 
-    set<T>(target: TModel, key: PropertyKey, value: Type<T> | Array<Type<T>>): boolean {
+    set(target: TModel, key: PropertyKey, value: unknown): boolean {
         if (value instanceof BaseValue) {
             if (!value.dto) {
                 this.targetState[key] = value;
@@ -34,15 +33,12 @@ class StateHandler<TModel> {
             const isEqual = Array.isArray(target) && target.some(elem => value.equals(elem)
                 || value.equals(target[key]));
 
-            let clonedVO = target[key] && value.clone();
             if (!isEqual) {
-                clonedVO = new (Object.getPrototypeOf(value).constructor)(value.dto);
-                this.targetState[key] = clonedVO;
+                target[key] = new (Object.getPrototypeOf(value).constructor)(value.dto);
                 return true;
             }
         } else {
-            this.targetState[key] = value;
-            return true;
+            return Reflect.set(this.targetState as any, key, value);
         }
 
         return true;

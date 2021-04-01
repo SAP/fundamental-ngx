@@ -15,7 +15,7 @@ export class LineItem extends BaseValue<Item> {
     amount: Money;
     title: string;
 
-    constructor(dto?) {
+    constructor(dto?: Item) {
         super(dto);
     }
 }

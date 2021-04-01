@@ -5,6 +5,7 @@ import { Composite } from './composite';
  * */
 export interface BaseEntityDTO {
     id: number;
+    primaryKey?: string;
 }
 
 /**
@@ -16,6 +17,7 @@ export abstract class BaseEntity<EntityProps extends BaseEntityDTO> extends Comp
          this._dto = dto;
      }
      _dto: EntityProps;
+
 
     /**
      * Check if Entity has proper instance

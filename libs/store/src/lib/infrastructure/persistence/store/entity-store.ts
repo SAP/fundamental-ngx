@@ -46,7 +46,7 @@ export interface EntityStore<T> {
      * Create new entity instance wrapped Proxy
      * @param fromState initial state
      */
-    createEntityInstance(fromState?: any): T;
+    createEntityInstance(fromState?: T): T;
 }
 
 //#endregion
@@ -97,18 +97,24 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
 }
 
 export class DefaultQueryService<TModel> extends QueryService<TModel> {
-    constructor(private service: EntityCollectionService<TModel>) {
+    constructor(
+        private entity: Type<TModel>,
+        private service: EntityCollectionService<TModel>) {
         super();
     }
 
     getByKey(id: string): Observable<TModel> {
-        return this.service.getByKey(id);
+        return this.service.getByKey(id).pipe(
+            map((data) => instanceForType(this.entity, data))
+        );
     }
 
     getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
         // Pass query payload instead of QueryParams
         // TODO: Should we override EntityCollectionService interface for that?
-        return this.service.getWithQuery(query as any);
+        return this.service.getWithQuery(query as any).pipe(
+            map((data) => instanceForType(this.entity, data))
+        );
     }
 
     count(): Observable<number> {

@@ -58,8 +58,10 @@ const fromState = {
     id: 1,
     title: 'Req 1',
     amount: 10,
-    lineItems: []
-} as Requisition
+    lineItems: [
+        new LineItem({ title: 'Line1' })
+    ]
+} as Requisition;
 
 describe('should create proxy', () => {
     let entity: Type<Requisition>;
@@ -89,9 +91,23 @@ describe('should create proxy', () => {
     });
 
     it('can create new instance Value Object', () => {
-        entityInstance.lineItems[0] = new LineItem();
-
         expect(entityInstance.lineItems[0]).toBeInstanceOf(LineItem);
+    });
+
+    it('cannot change VO directly', () => {
+        expect(Object.isFrozen(entityInstance.lineItems[0].dto)).toBeTrue();
+    });
+
+    it('can change VO through clone method', () => {
+        const defaultValue = 'Line1';
+        const changedValue = 'changedTitle';
+
+        expect(entityInstance.lineItems[0].dto.title).toEqual(defaultValue);
+        const lineToEdit = entityInstance.lineItems[0].clone();
+        lineToEdit.title = changedValue;
+        entityInstance.lineItems[0] = new LineItem(lineToEdit);
+
+        expect(entityInstance.lineItems[0].dto.title).toEqual(changedValue);
     });
 
     it('can assign array with several items', () => {
