@@ -30,8 +30,6 @@ describe('Checkbox test suite', () => {
         tristateCheckboxes,
         acceptAllCheckbox,
         termsAndConditionsCheckbox,
-        marketingCheckbox,
-        newsletterCheckbox,
         tristateCheckboxParis,
         errorCheckboxes,
         presenceCheckbox,
@@ -56,7 +54,6 @@ describe('Checkbox test suite', () => {
             // check checkbox labels
             for (let i = 0; 3 > i; i++) {
                 checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(binaryTempCheckbox, i);
             }
             if (browserIsIEorSafari()) {
                 console.log('Skip check for Safari and IE');
@@ -74,7 +71,6 @@ describe('Checkbox test suite', () => {
 
             for (let i = 3; 6 > i; i++) {
                 checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(binaryTempCheckbox, i);
             }
 
             checkHoverState(binaryTempCheckbox, 3);
@@ -96,7 +92,6 @@ describe('Checkbox test suite', () => {
 
             for (let i = 0; 2 > i; i++) {
                 checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(checkboxWithoutForm, i);
             }
 
             checkHoverState(checkboxWithoutForm);
@@ -110,7 +105,6 @@ describe('Checkbox test suite', () => {
             }
             for (let i = 2; 4 > i; i++) {
                 checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(checkboxWithoutForm, i);
             }
             checkFocusState(checkboxWithoutForm, 2);
             checkHoverState(checkboxWithoutForm, 2);
@@ -137,7 +131,6 @@ describe('Checkbox test suite', () => {
             }
             for (let i = 0; 2 > i; i++) {
                 checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(checkboxWithValue, i);
             }
             checkHoverState(checkboxWithValue);
             checkFocusState(checkboxWithValue);
@@ -150,9 +143,7 @@ describe('Checkbox test suite', () => {
             }
             for (let i = 2; 4 > i; i++) {
                 checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
-                checkMarkingCheckbox(checkboxWithValue, i);
             }
-
             checkHoverState(checkboxWithValue, 2);
             checkFocusState(checkboxWithValue, 2);
         });
@@ -167,19 +158,8 @@ describe('Checkbox test suite', () => {
             for (let i = 0; 8 > i; i++) {
                 checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
             }
-
             checkHoverState(tristateCheckboxes);
             checkFocusState(tristateCheckboxes);
-
-            for (let j = 0; 8 > j; j++) {
-                if (j !== 3 && j !== 7) {
-                    checkTristateCheckboxMarking(tristateCheckboxes, j);
-                }
-            }
-
-            checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 3);
-            checkMarkingCheckbox(tristateCheckboxes, 7);
-
         });
 
         it('should check template form', () => {
@@ -193,14 +173,6 @@ describe('Checkbox test suite', () => {
             }
             checkHoverState(tristateCheckboxes, 8);
             checkFocusState(tristateCheckboxes, 8);
-
-            for (let j = 8; 16 > j; j++) {
-                if (j !== 11 && j !== 15) {
-                    checkTristateCheckboxMarking(tristateCheckboxes, j);
-                }
-            }
-            checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 11);
-            checkTriStateTwoStateCheckboxMarking(tristateCheckboxes, 15);
         });
 
         it('should check tristate checkbox with multiple checkboxes', () => {
@@ -215,19 +187,6 @@ describe('Checkbox test suite', () => {
             checkFocusState(acceptAllCheckbox);
             checkHoverState(termsAndConditionsCheckbox);
             checkFocusState(termsAndConditionsCheckbox);
-
-            clickNextElement(acceptAllCheckbox);
-            for (let j = 17; 20 > j; j++) {
-                expect(getAttributeByName(tristateCheckboxes, 'aria-checked', j)).toBe('true');
-            }
-
-            clickNextElement(acceptAllCheckbox);
-            for (let k = 17; 20 > k; k++) {
-                expect(getAttributeByName(tristateCheckboxes, 'aria-checked', k)).toBe('false');
-            }
-            clickNextElement(marketingCheckbox);
-            clickNextElement(newsletterCheckbox);
-            expect(getAttributeByName(acceptAllCheckbox, 'aria-checked')).toBe('mixed');
         });
 
         it('should check checkbox markings are centered', () => {
@@ -252,7 +211,7 @@ describe('Checkbox test suite', () => {
             clickNextElement(presenceCheckbox);
             expect(getCSSPropertyByName(presenceCheckbox, 'border-bottom-color').value)
                 .toContain(checkboxErrorState);
-             scrollIntoView(checkboxPage.submitBtn);
+            scrollIntoView(checkboxPage.submitBtn);
             mouseHoverElement(checkboxPage.submitBtn);
             waitForElDisplayed(checkboxPage.errorTooltip);
             expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxErrorTooltip);
@@ -291,9 +250,6 @@ describe('Checkbox test suite', () => {
 
     xdescribe('Check Accessibility on checkbox examples', () => {
         it('should check a11y checkboxes', () => {
-            checkMarkingCheckbox(accessibilityCheckboxes, 0);
-            checkMarkingCheckbox(accessibilityCheckboxes, 1);
-
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-label'))
                 .toEqual(a11yCheckboxAriaLabel);
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled')).toBe('false');
@@ -335,48 +291,6 @@ function checkFocusState(elementSelector, index: number = 0): boolean {
     // clickNextElement(elementSelector, index);
     focusElement(elementSelector, index);
     return expect(getCSSPropertyByName(elementSelector, 'outline-style', index).value).toContain(checkboxFocusStyle);
-}
-
-function checkMarkingCheckbox(selector: string, index: number = 0): void {
-    const beforeClicking = getAttributeByName(selector, 'aria-checked', index);
-    clickNextElement(selector, index);
-    const afterClickingOnce = getAttributeByName(selector, 'aria-checked', index);
-    clickNextElement(selector, index);
-    const afterClickingTwice = getAttributeByName(selector, 'aria-checked', index);
-
-    expect(beforeClicking).not.toEqual(afterClickingOnce);
-    expect(afterClickingTwice).toEqual(beforeClicking);
-}
-
-
-function checkTristateCheckboxMarking(checkboxSelector: string, index: number = 0): void {
-    const beforeClicking = getAttributeByName(checkboxSelector, 'aria-checked', index);
-    clickNextElement(checkboxSelector, index);
-    const afterClickingOnce = getAttributeByName(checkboxSelector, 'aria-checked', index);
-    clickNextElement(checkboxSelector, index);
-    const afterClickingTwice = getAttributeByName(checkboxSelector, 'aria-checked', index);
-    clickNextElement(checkboxSelector, index);
-    const afterThirdClick = getAttributeByName(checkboxSelector, 'aria-checked', index);
-
-    expect(afterClickingOnce).not.toEqual(beforeClicking);
-    expect(afterClickingTwice).not.toEqual(afterClickingOnce);
-    expect(afterThirdClick).not.toEqual(afterClickingTwice);
-    expect(afterThirdClick).toEqual(beforeClicking);
-}
-
-function checkTriStateTwoStateCheckboxMarking(checkboxSelector: string, index: number = 0): void {
-    const firstState = getAttributeByName(checkboxSelector, 'aria-checked', index);
-    clickNextElement(checkboxSelector, index);
-    const secondState = getAttributeByName(checkboxSelector, 'aria-checked', index);
-    clickNextElement(checkboxSelector, index);
-    const thirdState = getAttributeByName(checkboxSelector, 'aria-checked', index);
-    clickNextElement(checkboxSelector, index);
-    const fourthState = getAttributeByName(checkboxSelector, 'aria-checked', index);
-
-    expect(secondState).not.toEqual(firstState);
-    expect(thirdState).not.toEqual(firstState);
-    expect(fourthState).not.toEqual(firstState);
-    expect(fourthState).toEqual(secondState);
 }
 
 function checkIfDisabled(element, attribute: string, value: string, index: number = 0): void {

@@ -132,7 +132,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     reset(): void {
         if (this._lineClampTarget && this._originalText) {
-            this._lineClampTarget.innerText = this._originalText;
+            this._lineClampTarget.textContent = this._originalText;
         }
         if (this._isNativeSupport) {
             this._resetNative();
@@ -167,7 +167,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         const ellipsisText = () => {
             if (this.rootElement.scrollHeight > lineClampHeight) {
                 ellipsisTextArray.pop();
-                this._lineClampTarget.innerText = ellipsisTextArray.join(' ') + '...';
+                this._lineClampTarget.textContent = ellipsisTextArray.join(' ') + '...';
                 ellipsisText.call(this);
             }
         };
@@ -218,7 +218,9 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
             return;
         }
         const style = window.getComputedStyle(this.rootElement, null);
-        this._resetNative();
+
+        this.reset();
+
         const fontSize = parseInt(style.getPropertyValue('font-size'), 10);
         const boxSizing = style.getPropertyValue('box-sizing');
         let height = parseInt(style.getPropertyValue('height'), 10);

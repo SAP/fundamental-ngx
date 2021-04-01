@@ -37,7 +37,7 @@ export class ActionListItemComponent extends BaseListItem {
 
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-        protected _listConfig: ListConfig, private _router: Router) {
+        protected _listConfig: ListConfig, protected _router: Router) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
     /**
