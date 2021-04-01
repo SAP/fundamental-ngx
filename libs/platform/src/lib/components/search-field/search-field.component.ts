@@ -150,6 +150,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Input() isLoading = false;
 
     /**
+     * ARIA label to specify what the search field is
+     * Not shown in the UI, only visible by the screen-readers.
+     */
+    @Input() ariaLabel: string;
+
+    /**
      * Input change event.
      */
     @Output() inputChange: EventEmitter<SearchInput> = new EventEmitter();

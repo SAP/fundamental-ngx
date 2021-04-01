@@ -96,4 +96,9 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     _getCozyCompactSize(size: ContentDensity): CompactCozyContentDensity {
         return size !== 'cozy' ? 'compact' : 'cozy';
     }
+
+    /** @hidden */
+    _getSearchAriaLabel(count: number): string {
+        return this.title + (!this.hideItemCount ? ` (${count})` : '');
+    }
 }

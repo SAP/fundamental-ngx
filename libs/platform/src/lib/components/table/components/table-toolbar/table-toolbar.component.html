@@ -23,6 +23,7 @@
             placeholder="Search"
             [contentDensity]="_getCozyCompactSize(size)"
             [suggestions]="searchSuggestions"
+            [ariaLabel]="_getSearchAriaLabel(counter)"
             (searchSubmit)="submitSearch($event)"
         ></fdp-search-field>
 
