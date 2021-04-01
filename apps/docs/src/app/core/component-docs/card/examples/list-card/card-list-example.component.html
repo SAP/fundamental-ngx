@@ -60,7 +60,8 @@
     <fd-card-content>
         <ul fd-list>
             <li fd-list-item>
-                <fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue" (valueChange)="onValueChange($event)">
+                <fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue"
+                    (valueChange)="onValueChange($event)">
                     <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
                 </fd-select>
             </li>
@@ -70,7 +71,8 @@
                 <li fd-list-item>
                     <div fd-list-content>
                         <div fd-list-title>{{data?.title}}</div>
-                        <fd-card-bar [value]="data?.value" [displayChange]="true" [change]="data?.change"></fd-card-bar>
+                        <fd-card-bar [value]="data?.value" [displayChange]="true" [change]="data?.change"
+                            [color]="data?.color"></fd-card-bar>
                     </div>
                 </li>
             </ng-container>
