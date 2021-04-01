@@ -30,7 +30,8 @@ export {
     TableColumnsChangeEvent,
     TableSearchChangeEvent,
     TableRowSelectionChangeEvent,
-    TableRowToggleOpenStateEvent
+    TableRowToggleOpenStateEvent,
+    TableRowsRearrangeEvent
 } from './models';
 
 export { TableDataSource, TableDataProvider, ArrayTableDataSource, ObservableTableDataSource } from './domain';

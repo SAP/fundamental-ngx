@@ -47,7 +47,8 @@ import {
     TableRowSelectionChangeEvent,
     TableSortChangeEvent,
     TableRow,
-    TableRowToggleOpenStateEvent
+    TableRowToggleOpenStateEvent,
+    TableRowsRearrangeEvent
 } from './models';
 import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
@@ -258,6 +259,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Event fired when group/tree row collapsed/expanded. */
     @Output()
     readonly rowToggleOpenState = new EventEmitter<TableRowToggleOpenStateEvent<T>>();
+
+    /*
+     * Event fired when tree rows rearranged through drag & drop
+     * Consider that rows rearranged with their children rows
+     */
+    @Output()
+    readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -715,6 +723,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /**
      * @hidden
+     * Create table rows rearrange event
+     */
+    _emitRowsRearrangeEvent(row: TableRow, previousIndex: number, newIndex: number): void {
+        const rows = this._tableRows.map(({ value }) => value);
+
+        this.rowsRearrange.emit(
+            new TableRowsRearrangeEvent(row.value, previousIndex, newIndex, rows)
+        );
+    }
+
+    /**
+     * @hidden
      * Group By triggered from column header
      */
     _columnHeaderGroupBy(field: string): void {
@@ -837,6 +857,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             } else {
                 this._onTableRowsChanged();
             }
+
+            this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
         }
     }
 

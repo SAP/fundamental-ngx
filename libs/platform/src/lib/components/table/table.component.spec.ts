@@ -1124,6 +1124,22 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 );
             });
 
+            it('should emit event after rearranging rows', () => {
+                const emitSpy = spyOn(tableComponent.rowsRearrange, 'emit').and.callThrough();
+
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+                
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 0,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();
+
+                expect(emitSpy).toHaveBeenCalled();
+            });
+
             it('should update dragged rows attributes', () => {
                 tableComponent._dragDropItemDrop({
                     items: [],

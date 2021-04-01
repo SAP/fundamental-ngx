@@ -6,7 +6,9 @@ import {
     TableDataSource,
     TableDataProvider,
     TableState,
-    TableRowSelectionChangeEvent
+    TableRowSelectionChangeEvent,
+    TableRowToggleOpenStateEvent,
+    TableRowsRearrangeEvent
 } from '@fundamental-ngx/platform';
 
 @Component({
@@ -24,7 +26,11 @@ export class PlatformTableTreeExampleComponent {
         alert(message);
     }
 
-    onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
+    onRowToggleOpenState(event: TableRowToggleOpenStateEvent<ExampleItem>): void {
+        console.log(event);
+    }
+
+    onRowsRearrange(event: TableRowsRearrangeEvent<ExampleItem>): void {
         console.log(event);
     }
 }
