@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.73...v0.29.0-rc.74) (2021-04-01)
+
+
+### Bug Fixes
+
+* (core) remove non-existent method ([e59db11](https://github.com/SAP/fundamental-ngx/commit/e59db117320c95ba1160a48ff4621e7769af19b4))
+* **checkbox:** uncheck on null and undefined ([#5007](https://github.com/SAP/fundamental-ngx/issues/5007)) ([901155a](https://github.com/SAP/fundamental-ngx/commit/901155a7a14be072afa1c709982a857223b4f7db))
+
 ## [0.29.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.72...v0.29.0-rc.73) (2021-03-31)
 
 
