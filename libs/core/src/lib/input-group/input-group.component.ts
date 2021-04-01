@@ -11,14 +11,16 @@ import {
     ChangeDetectorRef,
     ElementRef,
     OnDestroy,
-    OnInit
+    OnInit,
+    Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
+import { ContentDensityService } from '../utils/public_api';
 
 export type InputGroupPlacement = 'before' | 'after';
 
@@ -60,7 +62,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** Whether the input group is in compact mode. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Whether the input group is inline. */
     @Input()
@@ -115,6 +117,10 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     glyphAriaLabel: string;
 
+    /** The tooltip for the input group icon. */
+    @Input()
+    iconTitle: string;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
@@ -140,7 +146,8 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden */
     constructor (
         private readonly elementRef: ElementRef,
-        private readonly changeDetectorRef: ChangeDetectorRef
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
@@ -151,6 +158,9 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
      * @hidden
      */
     inShellbar = false;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
     /** @hidden */
     onChange: any = () => {};
@@ -173,10 +183,17 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden */
     ngOnInit(): void {
         this._listenElementEvents();
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.changeDetectorRef.markForCheck();
+            }));
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }

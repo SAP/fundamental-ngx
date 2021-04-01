@@ -9,13 +9,15 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
+    OnInit,
+    Optional,
     Output,
     QueryList,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, merge, Observable, Subject } from 'rxjs';
+import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { getElementCapacity, getElementWidth, KeyUtil } from '../utils/functions';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
@@ -27,6 +29,7 @@ import { TabsService } from './tabs.service';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '../menu/menu.component';
 import { scrollTop } from '../utils/functions/scroll';
+import { ContentDensityService } from '../utils/public_api';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -46,10 +49,10 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TabsService]
 })
-export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class TabListComponent implements AfterContentInit, AfterViewInit, OnDestroy, OnInit {
     /** Whether user wants to use tab component in compact mode */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Size of tab, it's mostly about adding spacing on tab container, available sizes 's' | 'm' | 'l' | 'xl' | 'xxl' */
     @Input()
@@ -137,9 +140,26 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _numbOfVisibleTabs: number;
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(private _tabsService: TabsService, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private _tabsService: TabsService,
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._changeDetectorRef.markForCheck();
+            }))
+        }
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -154,6 +174,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
@@ -182,13 +203,13 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this._tabsService.tabHeaderKeyHandler(
             index,
             event,
-            this.tabHeaderLinks.map(tab => tab.elementRef.nativeElement)
+            this.tabHeaderLinks.map((tab) => tab.elementRef.nativeElement)
         );
     }
 
     /** @hidden */
     _highlightActiveTab({ id }: HTMLElement): void {
-        const tab = this._tabArray.find(_tab => _tab.id === id);
+        const tab = this._tabArray.find((_tab) => _tab.id === id);
         this._activateStackedTab(tab.panel, false);
         this.selectedTabChange.emit(tab.panel);
     }
@@ -206,7 +227,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         return this.tabPanels.changes.pipe(
             startWith(this.tabPanels),
             takeUntil(this._onDestroy$),
-            map(tabPanels => tabPanels.toArray())
+            map((tabPanels) => tabPanels.toArray())
         );
     }
 
@@ -240,20 +261,17 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     /** @hidden Setup mechanisms required for handling the stacked content behavior */
     private _listenOnTabPanelsAndSetupStackedContent(): void {
         if (this.stackContent) {
-            this._tabPanelsChange$.pipe(delay(0))
-                .subscribe(() => this._tabArray
-                    .filter(tab => !tab.panel.disabled)
-                    .forEach(tab => tab.panel._expand(true)
-                    )
+            this._tabPanelsChange$
+                .pipe(delay(0))
+                .subscribe(() =>
+                    this._tabArray.filter((tab) => !tab.panel.disabled).forEach((tab) => tab.panel._expand(true))
                 );
         }
     }
 
     /** @hidden */
     private _listenOnTabPanelsAndUpdateStorageStructures(): void {
-        this._tabPanelsChange$.pipe(
-            map(tabPanels => tabPanels.map(el => new TabInfo(el)))
-        ).subscribe(tabs => {
+        this._tabPanelsChange$.pipe(map((tabPanels) => tabPanels.map((el) => new TabInfo(el)))).subscribe((tabs) => {
             this._tabArray = tabs;
             this._numbOfVisibleTabs = tabs.length;
             this._resetVisualOrder();
@@ -262,20 +280,24 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     private _listenOnTabPanelsExpandedChange(): void {
-        this._tabPanelsChange$.pipe(
-            map(tabPanels => tabPanels.map(el => el._expandedStateChange.asObservable())),
-            switchMap(tabPanels => merge(...tabPanels))
-        ).subscribe(event => this._expandTab(event.target, event.state));
+        this._tabPanelsChange$
+            .pipe(
+                map((tabPanels) => tabPanels.map((el) => el._expandedStateChange.asObservable())),
+                switchMap((tabPanels) => merge(...tabPanels))
+            )
+            .subscribe((event) => this._expandTab(event.target, event.state));
     }
 
     /** @hidden */
     private _listenOnTabPanelsAndInitiallyExpandTabPanel(): void {
-        this._tabPanelsChange$.pipe(
-            filter(_ => !this._tabArray.some(tab => tab.active)),
-            map(_ => this._tabArray.find(tab => !tab.disabled)),
-            filter(tab => !!tab),
-            delay(0)
-        ).subscribe(tab => this._expandTab(tab.panel, true));
+        this._tabPanelsChange$
+            .pipe(
+                filter((_) => !this._tabArray.some((tab) => tab.active)),
+                map((_) => this._tabArray.find((tab) => !tab.disabled)),
+                filter((tab) => !!tab),
+                delay(0)
+            )
+            .subscribe((tab) => this._expandTab(tab.panel, true));
     }
 
     /** @hidden */
@@ -290,36 +312,38 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this._tabsService.tabSelected
             .pipe(
                 takeUntil(this._onDestroy$),
-                map(index => this._visualOrder.visible[index].panel)
-            ).subscribe(tabPanel => this._expandTab(tabPanel, !tabPanel.expanded));
+                map((index) => this._visualOrder.visible[index].panel)
+            )
+            .subscribe((tabPanel) => this._expandTab(tabPanel, !tabPanel.expanded));
     }
 
     /** @hidden */
     private _listenOnResizeAndHideItems(): void {
-        fromEvent(window, 'resize').pipe(
-            debounceTime(100),
-            takeUntil(this._onDestroy$)
-        ).subscribe(_ => {
-            this.refreshOverflow();
-            this._detectChanges();
-        })
+        fromEvent(window, 'resize')
+            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
+            .subscribe((_) => {
+                this.refreshOverflow();
+                this._detectChanges();
+            });
     }
 
     /** @hidden */
     private _listenOnTabPanelsChangeAndCollapse(): void {
         const $tabHeadersSource = this.tabHeaders.changes.pipe(
-            map(tabHeaders => tabHeaders.toArray()),
+            map((tabHeaders) => tabHeaders.toArray()),
             first()
         );
 
-        this.tabPanels.changes.pipe(
-            takeUntil(this._onDestroy$),
-            switchMap(() => $tabHeadersSource)
-        ).subscribe(tabHeaders => {
-            this._cacheTabsWidth(tabHeaders);
-            this.refreshOverflow();
-            this._detectChanges();
-        });
+        this.tabPanels.changes
+            .pipe(
+                takeUntil(this._onDestroy$),
+                switchMap(() => $tabHeadersSource)
+            )
+            .subscribe((tabHeaders) => {
+                this._cacheTabsWidth(tabHeaders);
+                this.refreshOverflow();
+                this._detectChanges();
+            });
     }
 
     /** @hidden */
@@ -327,13 +351,13 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         if (scroll) {
             this._scrollToPanel(tabPanel);
         }
-        this._tabArray.forEach(tab => tab.active = tab.panel === tabPanel);
+        this._tabArray.forEach((tab) => (tab.active = tab.panel === tabPanel));
     }
 
     /** @hidden */
     private _activateExpandableTab(tabPanel: TabPanelComponent, expand: boolean): void {
         const collapse = this.collapsibleTabs && !expand;
-        this._tabArray.forEach(tab => {
+        this._tabArray.forEach((tab) => {
             const isActive = tab.panel === tabPanel && !collapse;
             tab.panel._expand(isActive);
             tab.active = isActive;
@@ -379,11 +403,11 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
             capacityLeft -= width;
         }
         this._resetVisualOrder();
-    };
+    }
 
     /** @hidden Check whether the active tab is visible */
     private _keepActiveTabVisible(): void {
-        const activeTab = this._visualOrder.overflowing.find(tab => tab.active);
+        const activeTab = this._visualOrder.overflowing.find((tab) => tab.active);
 
         if (activeTab) {
             this._moveToVisible(activeTab);
@@ -405,7 +429,11 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
          * - There is not enough space for tab to move
          * - There are other tabs to move from visible to overflow
          * - Number of visible tabs is larger than the limit */
-        for (let i = numOfVisibleTabs - 1; (widthRequired > 0 && i >= 0) || tabsLimit < numOfVisibleTabs + 1 - numOfTabsToMove; i--) {
+        for (
+            let i = numOfVisibleTabs - 1;
+            (widthRequired > 0 && i >= 0) || tabsLimit < numOfVisibleTabs + 1 - numOfTabsToMove;
+            i--
+        ) {
             widthRequired -= this._tabArray[i].headerWidth;
             numOfTabsToMove++;
         }
@@ -447,21 +475,16 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         const currentScrollPosition = Math.ceil(containerElement.scrollTop);
 
         if (!(currentScrollPosition === maximumScrollTop && distanceToScroll > maximumScrollTop)) {
-            !this._init ? this._disableScrollSpy = true : this._init = false;
+            !this._init ? (this._disableScrollSpy = true) : (this._init = false);
             fromEvent(containerElement, 'scroll')
-                .pipe(
-                    takeUntil(this._onDestroy$),
-                    debounceTime(100),
-                    first()
-                ).subscribe(() => this._disableScrollSpy = false);
+                .pipe(takeUntil(this._onDestroy$), debounceTime(100), first())
+                .subscribe(() => (this._disableScrollSpy = false));
             scrollTop(containerElement, distanceToScroll);
         }
     }
 
     /** @hidden Whether tab can be expanded/collapsed */
     private _canChangeExpandState(tabPanel: TabPanelComponent, expand: boolean): boolean {
-        return !tabPanel.disabled
-        && expand !== tabPanel.expanded
-        && expand === false ? this.collapsibleTabs : true;
+        return !tabPanel.disabled && expand !== tabPanel.expanded && expand === false ? this.collapsibleTabs : true;
     }
 }

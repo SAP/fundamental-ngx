@@ -105,6 +105,10 @@ For an existing Angular CLI application,
 1. **Provide the RtlService.**
    In your main application module, add `RtlService` to the list of providers. This service is needed to ensure proper right-to-left functionality for
    users with their browser set to an RTL language.
+   
+1. **Provide the ContentDensityService.**
+   In your main application module, you will also need to add `ContentDensityService` to the list of providers if you wish to manage the content density of
+   you application from a single point.
 
 1. **Add the component to your HTML.**
 
