@@ -29,11 +29,7 @@ export class PlatformTableTreeExampleComponent {
     }
 }
 
-interface BaseItem {
-    name: string;
-}
-
-export interface ExampleItem extends BaseItem {
+export interface ExampleItem {
     name: string;
     description?: string;
     price?: {

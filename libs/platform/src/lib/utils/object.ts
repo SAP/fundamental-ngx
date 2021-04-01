@@ -1,13 +1,11 @@
 export function getNestedValue(key: string, object: any): any {
-    return key
-        .split('.')
-        .reduce((a, b, i, arr) => {
-            // Break loop if we cannot dive inside
-            if (!a[b]) {
-                // Mutating original array will break reduce
-                arr.pop();
-            }
+    const path = key.split('.');
+    const pathLength = path.length;
+    let index = 0;
 
-            return (a = a[b]);
-        }, object);
+    while (object != null && index < pathLength) {
+        object = object[path[index++]];
+    }
+
+    return index && index === pathLength ? object : undefined;
 }
