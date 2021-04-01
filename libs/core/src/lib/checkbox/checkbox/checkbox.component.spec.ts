@@ -62,6 +62,22 @@ describe('CheckboxComponent', () => {
         expect(checkbox.checkboxValue).toBe(true);
     });
 
+    it('should be unchecked on null', async () => {
+        hostComponent.value = null;
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(checkbox.isChecked).toBe(false);
+    });
+
+    it('should be unchecked on undefined', async () => {
+        hostComponent.value = undefined;
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(checkbox.isChecked).toBe(false);
+    });
+
     it('should handle content density when compact input is not provided', () => {
         checkbox.ngOnInit();
         expect(checkbox.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');

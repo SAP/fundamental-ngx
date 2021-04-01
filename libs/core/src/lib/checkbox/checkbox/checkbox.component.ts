@@ -258,6 +258,9 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
             this.checkboxState = 'unchecked';
         } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
             this.checkboxState = 'indeterminate';
+            this.ariaChecked = 'mixed';
+        } else if (!this.checkboxValue) {
+            this.checkboxState = 'unchecked';
         }
         this._previousState = this.checkboxState;
     }
