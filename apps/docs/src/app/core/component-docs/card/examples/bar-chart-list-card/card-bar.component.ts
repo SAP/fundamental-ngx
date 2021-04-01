@@ -16,7 +16,7 @@ export class CardBarComponent {
     @Input() color = '#1866b4';
 
     /** Change percentage value */
-    @Input() displayChange: false;
+    @Input() displayChange = false;
 
     /** Change value. minimum 0, maximum 100 */
     @Input() change = 0;

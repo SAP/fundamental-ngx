@@ -36,8 +36,6 @@ import { CardCalendarExampleComponent } from './examples/calendar-card/card-cale
 import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
 import { CardListExampleComponent } from './examples/list-card/card-list-example.component';
 import { CardLinkListExampleComponent } from './examples/link-list-card/card-link-list-example.component';
-import { CardLinkListCarouselExampleComponent } from './examples/link-list-card/card-link-list-carousel-example.component';
-import { CardQuickLinkListExampleComponent } from './examples/link-list-card/card-quick-link-list-example.component';
 
 const routes: Routes = [
     {
@@ -85,8 +83,6 @@ const routes: Routes = [
         CardQuickViewExampleComponent,
         CardListExampleComponent,
         CardLinkListExampleComponent,
-        CardLinkListCarouselExampleComponent,
-        CardQuickLinkListExampleComponent
     ]
 })
 export class CardDocsModule {}

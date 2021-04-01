@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FdSelectChange } from '@fundamental-ngx/core';
 
 interface ListData {
     title?: string;
     value?: number;
     change?: number;
+    color?: string;
 }
 
 @Component({
     selector: 'fd-card-list-example',
-    templateUrl: 'card-list-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: 'card-list-example.component.html'
 })
 export class CardListExampleComponent implements OnInit {
     selectedValue = 'By Supplier';
@@ -18,20 +18,18 @@ export class CardListExampleComponent implements OnInit {
     showData: ListData[] = [];
 
     bySupplierData: ListData[] = [
-        { title: 'Delbont Industries', value: 91, change: 4 },
-        { title: 'Brazil Technologies', value: 52, change: 3 },
-        { title: 'Anav Ideon', value: 23, change: 1 },
-        { title: 'Loremt', value: 21, change: 1 }
+        { title: 'Delbont Industries', value: 91, change: 4, color: '#1866b4' },
+        { title: 'Brazil Technologies', value: 52, change: 3, color: '#da5a1b' },
+        { title: 'Anav Ideon', value: 23, change: 1, color: '#c67a0c' },
+        { title: 'Loremt', value: 21, change: 1, color: '#358a4d' }
     ];
 
     byZoneData: ListData[] = [
-        { title: 'North Zone', value: 91, change: 14 },
-        { title: 'West Zone', value: 80, change: 9 },
-        { title: 'South Zone', value: 45, change: 12 },
-        { title: 'east Zone', value: 21, change: 9 }
+        { title: 'North Zone', value: 91, change: 14, color: '#1866b4' },
+        { title: 'West Zone', value: 80, change: 9, color: '#358a4d' },
+        { title: 'South Zone', value: 45, change: 12, color: '#da5a1b' },
+        { title: 'east Zone', value: 21, change: 9, color: '#c67a0c' }
     ];
-
-    constructor(private _cd: ChangeDetectorRef) {}
 
     ngOnInit(): void {
         this.showData = this.bySupplierData;
@@ -39,6 +37,5 @@ export class CardListExampleComponent implements OnInit {
 
     onValueChange(event: FdSelectChange): void {
         this.showData = this.selectedValue === this.options[0] ? this.bySupplierData : this.byZoneData;
-        this._cd.markForCheck();
     }
 }

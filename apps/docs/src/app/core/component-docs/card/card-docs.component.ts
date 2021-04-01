@@ -218,32 +218,4 @@ export class CardDocsComponent {
             fileName: 'card-link-list-example'
         }
     ];
-
-    linkListCarouselCard: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: cardLinkListCarouselTs,
-            fileName: 'card-link-list-carousel-example',
-            component: 'CardLinkListCarouselExampleComponent'
-        },
-        {
-            language: 'html',
-            code: cardLinkListCarouselHtml,
-            fileName: 'card-link-list-carousel-example'
-        }
-    ];
-
-    quickLnkListCard: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: cardQuickLinkListTs,
-            fileName: 'card-quick-link-list-carousel-example',
-            component: 'CardQuickLinkListCarouselExampleComponent'
-        },
-        {
-            language: 'html',
-            code: cardQuickLinkListHtml,
-            fileName: 'card-quick-link-list-carousel-example'
-        }
-    ];
 }
