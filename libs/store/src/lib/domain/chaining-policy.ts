@@ -32,5 +32,7 @@ type ChainingPolicyFieldsOption<Entity extends {}> = {
 export type ChainingPolicyFieldOptions<ParentEntity extends {}, ChildEntity extends BaseEntity | Array<BaseEntity>> = {
     type: ChildEntity extends any[] ? Array<Type<ChildEntity[number]>> : Type<ChildEntity>;
     strategy: ChainingStrategy;
-    key?: AllowedFields<ParentEntity, IdentityKey> | ((parent: ParentEntity) => IdentityKey);
+    key?: ChainingPolicyPrimaryKey<ParentEntity>;
 };
+
+export type ChainingPolicyPrimaryKey<Entity> = AllowedFields<Entity, IdentityKey> | ((entity: Entity) => IdentityKey);
