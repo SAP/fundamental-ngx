@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.74...v0.29.0-rc.75) (2021-04-02)
+
+
+### Bug Fixes
+
+* (Platform) Value help dialog - styles mismatching ([#4661](https://github.com/SAP/fundamental-ngx/issues/4661)) ([7f1434f](https://github.com/SAP/fundamental-ngx/commit/7f1434f9cf3024071b6d24b45a2f780348db1595))
+
 ## [0.29.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.73...v0.29.0-rc.74) (2021-04-01)
 
 
