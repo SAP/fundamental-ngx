@@ -1,6 +1,7 @@
 import { EntityServices, EntityCollectionService as NgrxEntityCollectionService } from '@ngrx/data';
 import { fail } from 'assert';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { delay, take } from 'rxjs/operators';
 import { EntityMetaOptions, EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { DefaultEntityCollectionService } from './entity-collection-service-base';
@@ -13,18 +14,27 @@ class Advantage extends BaseEntity {
     }
 }
 
+class User extends BaseEntity {
+    constructor(public id: string, public name: string) {
+        super();
+    }
+}
+
 class Hero extends BaseEntity {
     id: string;
     name: string;
     advantages: Advantage[];
+    owner: User;
+    ownerId: string;
 }
 
-describe('EntityCollectionService', function () {
+describe('EntityCollectionService', () => {
     let service: DefaultEntityCollectionService<Hero>;
     let entityServices: jasmine.SpyObj<EntityServices>;
     let entityMetaOptionsService: jasmine.SpyObj<EntityMetaOptionsService>;
     let ngrxHeroCollectionService: jasmine.SpyObj<NgrxEntityCollectionService<Hero>>;
     let entityCollectionsService: jasmine.SpyObj<EntityCollectionsService>;
+    let entityMetaOptions: EntityMetaOptions<Hero>;
 
     beforeEach(() => {
         ngrxHeroCollectionService = jasmine.createSpyObj<NgrxEntityCollectionService<Hero>>(
@@ -36,25 +46,13 @@ describe('EntityCollectionService', function () {
         entityServices = jasmine.createSpyObj<EntityServices>('EntityServices', ['getEntityCollectionService']);
         entityServices.getEntityCollectionService.and.returnValue(ngrxHeroCollectionService);
 
+        entityMetaOptions = {
+            name: 'Hero'
+        };
         entityMetaOptionsService = jasmine.createSpyObj<EntityMetaOptionsService>('EntityMetaOptionsService', [
             'getEntityMetadata'
         ]);
-        entityMetaOptionsService.getEntityMetadata.and.callFake(
-            <T extends BaseEntity>(entity: any): EntityMetaOptions<T> => {
-                const result: EntityMetaOptions<Hero> = {
-                    name: 'Hero',
-                    chainingPolicy: {
-                        fields: {
-                            advantages: {
-                                strategy: 'non-block',
-                                type: Array(Advantage)
-                            }
-                        }
-                    }
-                };
-                return result as any;
-            }
-        );
+        entityMetaOptionsService.getEntityMetadata.and.returnValue(entityMetaOptions as any);
 
         entityCollectionsService = jasmine.createSpyObj<EntityCollectionsService>('EntityCollectionsService', [
             'getEntityCollectionService'
@@ -88,43 +86,294 @@ describe('EntityCollectionService', function () {
     });
 
     describe('#getBeKy()', () => {
-        it('should delegate request to the ngrx service', () => {
+        it('should delegate request to the ngrx service using "block" strategy', () => {
             service.getByKey('123');
             expect(ngrxHeroCollectionService.getByKey).toHaveBeenCalledWith('123');
         });
 
-        it('should make subsequent call to retrieve sub entity data', (done) => {
-            const hero: Hero = {
-                id: '123',
-                name: 'Hero',
-                advantages: []
-            };
-            const advantages: Advantage[] = [new Advantage('1', 'smart'), new Advantage('1', 'quick')];
+        describe('requests chaining', () => {
+            describe('"strategy" option', () => {
+                let hero: Hero;
+                let owner: User;
+                let userCollectionService: jasmine.SpyObj<EntityCollectionService<User>>;
+                let heroSubject: Subject<Hero>;
+                let ownerSubject: Subject<User>;
 
-            const advantageCollectionService = jasmine.createSpyObj<EntityCollectionService<Advantage>>(
-                'AdvantageCollectionService',
-                ['getAll']
-            );
-            advantageCollectionService.getAll.and.callFake(() => {
-                return of(advantages);
-            });
+                beforeEach(() => {
+                    hero = {
+                        id: '123',
+                        name: 'Hero',
+                        advantages: [],
+                        owner: null,
+                        ownerId: '456'
+                    };
+                    owner = new User('456', 'Lord');
+                    heroSubject = new Subject<Hero>();
 
-            ngrxHeroCollectionService.getByKey.and.callFake(() => {
-                return of(hero);
-            });
+                    userCollectionService = jasmine.createSpyObj<EntityCollectionService<User>>(
+                        'UserCollectionService',
+                        ['getByKey']
+                    );
+                    ownerSubject = new Subject<User>();
+                    userCollectionService.getByKey.and.callFake(() => {
+                        return ownerSubject.asObservable();
+                    });
+                    entityCollectionsService.getEntityCollectionService.and.returnValue(userCollectionService);
 
-            entityCollectionsService.getEntityCollectionService.and.returnValue(advantageCollectionService);
-
-            service.getByKey('123').subscribe((result) => {
-                expect(advantageCollectionService.getAll).toHaveBeenCalled();
-                expect(result).toEqual({
-                    ...hero,
-                    advantages: advantages
+                    ngrxHeroCollectionService.getByKey.and.callFake(() => {
+                        return heroSubject.asObservable();
+                    });
                 });
-                done();
-            }, fail);
 
-            expect(ngrxHeroCollectionService.getByKey).toHaveBeenCalledWith('123');
+                afterEach(() => {
+                    heroSubject.complete();
+                    ownerSubject.complete();
+                });
+
+                describe('"non-block"', () => {
+                    it("should return primary entity once it's ready and push sub entity as the next update", () => {
+                        // Override Entity Meta Options adding chainingPolicy options
+                        entityMetaOptions.chainingPolicy = {
+                            fields: {
+                                owner: {
+                                    strategy: 'non-block', // Non-block strategy
+                                    type: User
+                                }
+                            }
+                        };
+
+                        const results: Hero[] = [];
+
+                        service.getByKey('123').subscribe((result) => {
+                            results.push(result);
+                        }, fail);
+
+                        expect(results.length).toEqual(0);
+
+                        heroSubject.next(hero);
+
+                        expect(results.length).toEqual(1);
+                        expect(results[0]).toEqual(hero);
+
+                        ownerSubject.next(owner);
+
+                        expect(results.length).toEqual(2);
+                        expect(results[1]).toEqual({
+                            ...hero,
+                            owner: owner
+                        });
+                    });
+                });
+
+                describe('"block"', () => {
+                    it('should wait for sub entity response and return entity including sub data', () => {
+                        // Override Entity Meta Options adding chainingPolicy options
+                        entityMetaOptions.chainingPolicy = {
+                            fields: {
+                                owner: {
+                                    strategy: 'block', // Non-block strategy
+                                    type: User
+                                }
+                            }
+                        };
+
+                        const results: Hero[] = [];
+
+                        service.getByKey('123').subscribe((result) => {
+                            results.push(result);
+                        }, fail);
+
+                        expect(results.length).toEqual(0);
+
+                        heroSubject.next(hero);
+
+                        // No results cause waiting for "owner" response
+                        expect(results.length).toEqual(0);
+
+                        // "owner" response
+                        ownerSubject.next(owner);
+
+                        // one event and hero is already extended by owner
+                        expect(results.length).toEqual(1);
+                        expect(results[0]).toEqual({
+                            ...hero,
+                            owner: owner
+                        });
+                    });
+                });
+            });
+
+            describe('"type" option', () => {
+                describe('for entity collection', () => {
+                    it('should make sub call to retrieve sub entity as collection', () => {
+                        const hero: Hero = {
+                            id: '123',
+                            name: 'Hero',
+                            advantages: [],
+                            owner: null,
+                            ownerId: '456'
+                        };
+                        const advantages: Advantage[] = [new Advantage('1', 'smart'), new Advantage('1', 'quick')];
+
+                        const advantageCollectionService = jasmine.createSpyObj<EntityCollectionService<Advantage>>(
+                            'AdvantageCollectionService',
+                            ['getAll']
+                        );
+                        advantageCollectionService.getAll.and.callFake(() => {
+                            return of(advantages);
+                        });
+                        entityCollectionsService.getEntityCollectionService.and.returnValue(advantageCollectionService);
+
+                        ngrxHeroCollectionService.getByKey.and.callFake(() => {
+                            return of(hero);
+                        });
+
+                        // Override Entity Meta Options adding chainingPolicy options
+                        entityMetaOptions.chainingPolicy = {
+                            fields: {
+                                advantages: {
+                                    strategy: 'block',
+                                    type: Array(Advantage)
+                                }
+                            }
+                        };
+
+                        const results = [];
+                        service.getByKey('123').subscribe((result) => {
+                            results.push(result);
+                        }, fail);
+
+                        expect(results.length).toEqual(1);
+
+                        // "Hero" model should be extended by "advantages" collection
+                        expect(results[0]).toEqual({
+                            ...hero,
+                            advantages: advantages
+                        });
+                    });
+                });
+
+                describe('for single tone entity', () => {
+                    let hero: Hero;
+                    let owner: User;
+                    let userCollectionService: jasmine.SpyObj<EntityCollectionService<User>>;
+
+                    beforeEach(() => {
+                        hero = {
+                            id: '123',
+                            name: 'Hero',
+                            advantages: [],
+                            owner: null,
+                            ownerId: '456'
+                        };
+                        owner = new User('456', 'Lord');
+
+                        userCollectionService = jasmine.createSpyObj<EntityCollectionService<User>>(
+                            'UserCollectionService',
+                            ['getByKey']
+                        );
+                        userCollectionService.getByKey.and.callFake(() => {
+                            return of(owner);
+                        });
+                        entityCollectionsService.getEntityCollectionService.and.returnValue(userCollectionService);
+
+                        ngrxHeroCollectionService.getByKey.and.callFake(() => {
+                            return of(hero);
+                        });
+                    });
+
+                    it('should make subsequent call to retrieve sub entity as single object', () => {
+                        // Override Entity Meta Options adding chainingPolicy options
+                        entityMetaOptions.chainingPolicy = {
+                            fields: {
+                                owner: {
+                                    strategy: 'block',
+                                    type: User,
+                                    key: 'ownerId'
+                                }
+                            }
+                        };
+
+                        const results = [];
+
+                        service.getByKey('123').subscribe((result) => {
+                            results.push(result);
+                        }, fail);
+
+                        expect(results.length).toEqual(1);
+
+                        // "Hero" model should be extended by "owner" model
+                        expect(results[0]).toEqual({
+                            ...hero,
+                            owner: owner
+                        });
+                    });
+                });
+            });
+
+            describe('"key" option', () => {
+                let hero: Hero;
+                let owner: User;
+                let userCollectionService: jasmine.SpyObj<EntityCollectionService<User>>;
+
+                beforeEach(() => {
+                    hero = {
+                        id: '123',
+                        name: 'Hero',
+                        advantages: [],
+                        owner: null,
+                        ownerId: '456'
+                    };
+                    owner = new User('456', 'Lord');
+
+                    userCollectionService = jasmine.createSpyObj<EntityCollectionService<User>>(
+                        'UserCollectionService',
+                        ['getByKey']
+                    );
+                    userCollectionService.getByKey.and.callFake(() => {
+                        return of(owner);
+                    });
+                    entityCollectionsService.getEntityCollectionService.and.returnValue(userCollectionService);
+
+                    ngrxHeroCollectionService.getByKey.and.callFake(() => {
+                        return of(hero);
+                    });
+                });
+
+                it('should be able to handle it as a string', () => {
+                    // Override Entity Meta Options adding chainingPolicy options
+                    entityMetaOptions.chainingPolicy = {
+                        fields: {
+                            owner: {
+                                strategy: 'block',
+                                type: User,
+                                key: 'ownerId'
+                            }
+                        }
+                    };
+
+                    service.getByKey('123').subscribe();
+
+                    expect(userCollectionService.getByKey).toHaveBeenCalledOnceWith('456');
+                });
+
+                it('should be able to handle it as a function', () => {
+                    // Override Entity Meta Options adding chainingPolicy options
+                    entityMetaOptions.chainingPolicy = {
+                        fields: {
+                            owner: {
+                                strategy: 'block',
+                                type: User,
+                                key: (entity: Hero) => entity.ownerId
+                            }
+                        }
+                    };
+
+                    service.getByKey('123').subscribe();
+
+                    expect(userCollectionService.getByKey).toHaveBeenCalledOnceWith('456');
+                });
+            });
         });
     });
 

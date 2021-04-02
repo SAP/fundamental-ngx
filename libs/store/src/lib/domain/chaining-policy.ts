@@ -3,6 +3,7 @@ import { AllowedFields, Type, IfTargetIncludeConditionType } from './utility';
 
 export type ChainingStrategy =
     | 'non-block' // call immediately and non-block (default)
+    | 'block' // call immediately and block
     | 'suppress'; // don't call
 
 export type ChainingStrategyFieldsMap<Entity extends {}> = IfTargetIncludeConditionType<
@@ -22,7 +23,7 @@ export type ChainingPolicy<Entity extends {}> = {
 };
 
 type ChainingPolicyFieldsOption<Entity extends {}> = {
-    [EntityField in AllowedFields<Entity, BaseEntity | Array<BaseEntity>>]: ChainingPolicyFieldOptions<
+    [EntityField in AllowedFields<Entity, BaseEntity | Array<BaseEntity>>]?: ChainingPolicyFieldOptions<
         Entity,
         Entity[EntityField]
     >;
