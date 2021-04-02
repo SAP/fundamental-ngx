@@ -27,13 +27,13 @@ import {
   VhdValue,
   VhdValueChangeEvent,
   VhdFilter,
-  VhdIncludedEntity,
-  VhdExcludedEntity,
-  VhdDefineStrategy,
+  BaseEntity,
   VdhTableSelection,
   ValueHelpDialogDataSource,
   ArrayValueHelpDialogDataSource,
-  ObservableValueHelpDialogDataSource
+  ObservableValueHelpDialogDataSource,
+  VhdDefineIncludeStrategy,
+  VhdDefineExcludeStrategy
 } from '../models';
 
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
@@ -61,8 +61,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   @Input()
   value: VhdValue<T[]> = {
     selected: [],
-    included: [],
-    excluded: []
+    conditions: []
   };
 
   /** Dialog title */
@@ -118,7 +117,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   @Input()
   formatToken: Function;
 
-  /** Tokenizer function for include/exclude token render */
+  /** Tokenizer function for condition's token render */
   @Input()
   conditionDisplayFn: Function = defaultConditionDisplayFn;
 
@@ -144,6 +143,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   @Input()
   searchTableMobileHeaders = 2;
 
+  /** Max shown initial filters on open. Desktop only */
+  @Input()
+  maxShownInitialFilters = 4;
+
   /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
   @Input()
   searchTableDensity: ContentDensity = ContentDensity.COMPACT;
@@ -156,7 +159,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
    * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
    */
   @Input()
-  defineStrategyLabels: {[key in keyof typeof VhdDefineStrategy]?: string} = {
+  defineStrategyLabels: {[key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string} = {
     contains: 'contains',
     equalTo: 'equal to',
     between: 'between',
@@ -166,7 +169,9 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     lessThanEqual: 'less than or equal to',
     greaterThan: 'greater than',
     greaterThanEqual: 'greater than or equal to',
-    empty: 'empty'
+    empty: 'empty',
+    not_equalTo: 'not equal to',
+    not_empty: 'not empty'
   };
 
   /** Dialog outputs */
@@ -199,9 +204,6 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   _hasDefineFilters = true;
 
   /** @hidden */
-  _selectedExpandState = true;
-
-  /** @hidden */
   _displayedFilters: VhdFilter[] = [];
 
   /** @hidden */
@@ -226,17 +228,17 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /** @hidden Previous state */
   private _prevState: VhdValue<T[]> = {
     selected: [],
-    included: [],
-    excluded: []
+    conditions: []
   };
   /** @hidden Current data for local manupulation */
   private _currentValue: VhdValue<T[]> = {
     selected: [],
-    included: [],
-    excluded: []
+    conditions: []
   };
 
   selectedTab: VhdTab = null;
+
+  shownFilterCount = Infinity;
 
   /** @hidden */
   constructor (
@@ -271,7 +273,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** @hidden */
   get showDefineTab(): boolean {
-    return this._hasDefineFilters && this.tabs !== 'select';
+    return this.tabs !== 'select';
   }
 
   /** @hidden */
@@ -285,38 +287,26 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /** @hidden */
-  get includedItems(): VhdIncludedEntity[] {
-    return this._currentValue.included || [];
+  get conditionItems(): BaseEntity[] {
+    return this._currentValue.conditions || [];
   }
 
-  /** @hidden */
-  get validIncludedItems(): VhdIncludedEntity[] {
-    return this._getValidCondition(this.includedItems);
-  }
-
-  /** @hidden */
-  get excludedItems(): VhdExcludedEntity[] {
-    return this._currentValue.excluded || [];
-  }
-
-  /** @hidden */
-  get validExcludedItems(): VhdExcludedEntity[] {
-    return this._getValidCondition(this.excludedItems);
-  }
-
-  /** @hidden */
-  get selectedAndIncluded(): number {
-    return this.selectedItems.length + this.validIncludedItems.length;
+  get validConditions(): BaseEntity[] {
+    return this._getValidCondition(this.conditionItems);
   }
 
   /** @hidden */
   get hasSelectedAndConditions(): boolean {
-    return Boolean(this.validExcludedItems.length || this.selectedItems.length || this.includedItems.length);
+    return Boolean(this.selectedItems.length + this.validConditions.length);
   }
 
   /** @hidden */
   get elementRef(): ElementRef<any> {
       return this._elementRef;
+  }
+
+  get isShowAllFilters(): boolean {
+    return this.filters.length > this.maxShownInitialFilters && this.shownFilterCount > this.maxShownInitialFilters;
   }
 
   /** @hidden */
@@ -367,18 +357,6 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /**
-   * Toggle panel with selected and excluded items
-   */
-  toggleSelectedPanel(): void {
-    const selectedCount = this.selectedAndIncluded !== 0;
-    const excludedCount = this.validExcludedItems.length !== 0;
-
-    if (selectedCount || excludedCount) {
-      this._selectedExpandState = !this._selectedExpandState;
-    }
-  }
-
-  /**
    * Toggle advanced search panel
    */
   toggleAdvancedSearch(state?: boolean): void {
@@ -396,20 +374,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   /**
    * Clear all selected items
    */
-  clearSelectedItems(): void {
+  clearSelectedAndConditionItems(): void {
     this._currentValue.selected = [];
-    this._currentValue.included = [];
+    this._currentValue.conditions = [];
     this._changeDetectorRef.markForCheck();
-  }
-
-  /**
-   * Clear all excluded items
-   */
-  clearExcludedItems(): void {
-    if (this.validExcludedItems.length) {
-      this._currentValue.excluded = [];
-      this._changeDetectorRef.markForCheck();
-    }
   }
 
   /**
@@ -443,18 +411,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /**
-   * Remove included items
+   * Remove condition item
    */
-  removeIncluded(index: number): void {
-    this._currentValue.included = this.includedItems.filter((_, i) => i !== index);
-    this._changeDetectorRef.markForCheck();
-  }
-
-  /**
-   * Remove excluded items
-   */
-  removeExcluded(index: number): void {
-    this._currentValue.excluded = this.excludedItems.filter((_, i) => i !== index);
+  removeCondition(index: number): void {
+    this._currentValue.conditions = this.conditionItems.filter((_, i) => i !== index);
     this._changeDetectorRef.markForCheck();
   }
 
@@ -472,8 +432,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     if (this.activeDialog) {
       const value: VhdValueChangeEvent = {
         selected: this.selectedItems,
-        included: this.validIncludedItems,
-        excluded: this.validExcludedItems
+        conditions: this.validConditions
       };
       if (this.formatToken && typeof this.formatToken === 'function') {
         return this.activeDialog.close(this.formatToken(value));
@@ -499,11 +458,17 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /** @hidden */
+  _trackBySelectedFn(_index: number, item: T): number | string {
+    return item && item[this.uniqueKey];
+  }
+
+  /** @hidden */
   _trackByFilterFn(_index: number, item: VhdFilter): number | string {
     return item && item.key;
   }
+
   /** @hidden */
-  _trackByConditionFn(_index: number, item: VhdIncludedEntity | VhdExcludedEntity): number | string | undefined {
+  _trackByConditionFn(_index: number, item: BaseEntity): number | string | undefined {
     return item ? item.value + item.valueTo + item.strategy + item.key : undefined;
   }
 
@@ -517,28 +482,31 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   }
 
   /** @hidden */
-  onIncludeChange($event: VhdIncludedEntity[]): void {
-    this._currentValue.included = $event;
+  onConditionChange($event: BaseEntity[]): void {
+    this._currentValue.conditions = $event;
     this._changeDetectorRef.markForCheck();
   }
 
-  /** @hidden */
-  onExcludeChange($event: VhdExcludedEntity[]): void {
-    this._currentValue.excluded = $event;
-    this._changeDetectorRef.markForCheck();
+  toggleShownFilters(): void {
+    this.shownFilterCount = this.maxShownInitialFilters === this.shownFilterCount ? Infinity : this.maxShownInitialFilters;
   }
 
   /** @hidden */
-  private _getValidCondition(items: VhdIncludedEntity[] | VhdExcludedEntity[] = []): VhdIncludedEntity[] {
+  private _initShownFilters(): void {
+    this.shownFilterCount = this.maxShownInitialFilters || Infinity;
+  }
+
+  /** @hidden */
+  private _getValidCondition(items: BaseEntity[] = []): BaseEntity[] {
     return items.filter(item => {
-      if (item.strategy === VhdDefineStrategy.empty) {
+      if (item.strategy === VhdDefineIncludeStrategy.empty || item.strategy === VhdDefineExcludeStrategy.not_empty) {
         return true;
+      }
+      if (item.strategy === VhdDefineIncludeStrategy.between) {
+        return Boolean(item.value.length && item.valueTo.length);
       }
       if (!item.valid) {
         return false;
-      }
-      if (item.strategy === VhdDefineStrategy.between) {
-        return Boolean(item.value.length && item.valueTo.length);
       }
       return Boolean(item.value.length);
     });
@@ -576,6 +544,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     } else if (this.showDefineTab) {
       this.switchTab(VhdTab.defineConditions);
     }
+    this._initShownFilters();
   }
 
   /** @hidden */
@@ -624,9 +593,6 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
     this._hasAdvanced = this._displayedFilters.some((filter: VhdFilter) => {
       return !!filter.advanced;
-    });
-    this._hasDefineFilters = this._displayedFilters.some((filter: VhdFilter) => {
-      return !!filter.include || !!filter.exclude;
     });
   }
 
