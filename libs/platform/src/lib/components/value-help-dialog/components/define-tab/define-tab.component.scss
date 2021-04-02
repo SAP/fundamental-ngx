@@ -15,6 +15,10 @@ $block: fdp-value-help-dialog;
         .define-condition-title {
             padding: 0.625rem 0 0;
         }
+
+        .fd-container--no-gap {
+            margin: 0 !important;
+        }
     }
 
     .vhd-condition-filters {
