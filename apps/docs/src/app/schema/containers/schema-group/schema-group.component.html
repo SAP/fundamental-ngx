@@ -62,11 +62,13 @@
             </ng-container>
         </ng-container>
         <ng-template #formGroup>
-            <div class="schema--sub-header">{{ control.key }}</div>
-            <schema-group
-                [schemaGroup]="control.control"
-                [properties]="properties[control.key].properties"
-            ></schema-group>
+            <fieldset fd-fieldset class="schema--inner-group">
+                <legend fd-form-legend class="schema--sub-header">{{ control.key }}</legend>
+                <schema-group
+                    [schemaGroup]="control.control"
+                    [properties]="properties[control.key].properties"
+                ></schema-group>
+            </fieldset>
         </ng-template>
     </ng-container>
 </div>
