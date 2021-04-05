@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultiInputMobileComponent } from './multi-input-mobile.component';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
@@ -29,7 +29,7 @@ describe('MultiInputMobileComponent', () => {
         openChange: new EventEmitter<boolean>()
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ DialogModule, BrowserAnimationsModule ],
             declarations: [MultiInputMobileComponent],

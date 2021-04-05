@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     EventEmitter,
@@ -9,12 +10,13 @@ import {
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
 import { ListItemComponent } from './list-item/list-item.component';
-import { merge, Subject } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import {
     FocusEscapeDirection,
@@ -22,6 +24,7 @@ import {
 } from '../utils/services/keyboard-support/keyboard-support.service';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
+import { ContentDensityService } from '../utils/public_api';
 
 type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**
@@ -37,15 +40,10 @@ type FocusItem = ListGroupHeaderDirective | ListItemComponent;
         role: 'list',
         tabindex: '0'
     },
-    styleUrls: [
-        './list.component.scss',
-        '../utils/drag-and-drop/drag-and-drop.scss'
-    ],
+    styleUrls: ['./list.component.scss', '../utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        KeyboardSupportService
-    ]
+    providers: [KeyboardSupportService]
 })
 export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** Whether dropdown mode is included to component, used for Select and Combobox */
@@ -58,10 +56,15 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @HostBinding('class.fd-list--multi-input')
     multiInputMode = false;
 
+    /** Whether list is used in mobile mode*/
+    @Input()
+    @HostBinding('class.fd-list--mobile')
+    mobileMode = false;
+
     /** Whether compact mode is included to component */
     @Input()
     @HostBinding('class.fd-list--compact')
-    compact = false;
+    compact?: boolean;
 
     /** Whether list component contains message */
     @Input()
@@ -108,6 +111,9 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @ContentChildren(ListFocusItem)
     private _focusItems: QueryList<FocusItem>;
 
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
@@ -115,10 +121,22 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _keyboardSupportService: KeyboardSupportService<FocusItem>) { }
+    constructor(
+        private _keyboardSupportService: KeyboardSupportService<FocusItem>,
+        private _cdr: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdr.detectChanges();
+                })
+            );
+        }
         this._listenOnListFocusEscape();
     }
 
@@ -138,7 +156,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this.keyboardSupport) {
-            this._keyboardSupportService.onKeyDown(event)
+            this._keyboardSupportService.onKeyDown(event);
         }
     }
 
@@ -149,15 +167,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _listenOnQueryChange(): void {
-        this.items.changes
-            .pipe(
-                startWith(0),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe(() => {
-                this._recheckLinks();
-                this._listenOnItemsClick();
-            });
+        this.items.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
+            this._recheckLinks();
+            this._listenOnItemsClick();
+        });
     }
 
     /** @hidden */
@@ -166,10 +179,8 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
         const refreshObs = merge(this._onRefresh$, this._onDestroy$);
-        this._focusItems.forEach(
-            (item, index) => item.clicked
-                .pipe(takeUntil(refreshObs))
-                .subscribe(() => this.setItemActive(index))
+        this._focusItems.forEach((item, index) =>
+            item.clicked.pipe(takeUntil(refreshObs)).subscribe(() => this.setItemActive(index))
         );
     }
 
@@ -183,6 +194,6 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     private _listenOnListFocusEscape(): void {
         this._keyboardSupportService.focusEscapeList
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(direction => this.focusEscapeList.emit(direction))
+            .subscribe((direction) => this.focusEscapeList.emit(direction));
     }
 }

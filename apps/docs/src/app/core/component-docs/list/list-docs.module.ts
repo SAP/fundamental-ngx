@@ -32,6 +32,7 @@ import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/l
 import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { ListInteractiveExampleComponent } from './examples/list-interactive-example/list-interactive-example.component';
 
 const routes: Routes = [
     {
@@ -75,7 +76,8 @@ const routes: Routes = [
         ListNavigationExampleComponent,
         ListKeyboardExampleComponent,
         ListNavIndicatorExampleComponent,
-        ListDataExampleComponent
+        ListDataExampleComponent,
+        ListInteractiveExampleComponent
     ]
 })
 export class ListDocsModule {}

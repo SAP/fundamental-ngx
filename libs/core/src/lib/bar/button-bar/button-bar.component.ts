@@ -1,6 +1,17 @@
-import { Component, HostBinding, Input, ViewChild } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    HostBinding,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
+    ViewChild
+} from '@angular/core';
 import { BaseButton, ButtonType } from '../../button/base-button';
 import { ButtonComponent } from '../../button/button.component';
+import { ContentDensityService } from '../../utils/public_api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fd-button-bar',
@@ -19,24 +30,11 @@ import { ButtonComponent } from '../../button/button.component';
       </button>
   `
 })
-export class ButtonBarComponent extends BaseButton {
+export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy {
     /** Whether the element should take the whole width of the container. */
     @Input()
     @HostBinding('class.fd-bar__element--full-width')
     fullWidth = false;
-
-    /** Whether to apply compact mode to the button.
-     * Default value is set to true
-     */
-    @Input()
-    compact = true;
-
-    /**
-     * Whether to apply disabled state to the button.
-     * Default value is set to false
-     */
-    @Input()
-    disabled = false;
 
     /** The type of the button. Types include:
      * 'standard' | 'positive' | 'negative' | 'attention' | 'half' | 'ghost' | 'transparent' | 'emphasized' | 'menu'.
@@ -45,6 +43,10 @@ export class ButtonBarComponent extends BaseButton {
     @Input()
     fdType: ButtonType = 'transparent';
 
+    /** Whether or not the button is compact. */
+    @Input()
+    compact?: boolean;
+
     /** @hidden */
     @HostBinding('class.fd-bar__element')
     _barElement = true;
@@ -52,4 +54,26 @@ export class ButtonBarComponent extends BaseButton {
     /** @hidden */
     @ViewChild(ButtonComponent)
     _buttonComponent: ButtonComponent;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    constructor(@Optional() private _contentDensityService: ContentDensityService, private _cdRef: ChangeDetectorRef) {
+        super();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._cdRef.markForCheck();
+            }))
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 }

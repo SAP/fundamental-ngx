@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RadioButtonComponent } from './radio-button.component';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
@@ -37,7 +37,7 @@ describe('RadioButtonComponent reactive forms', () => {
     let fixture: ComponentFixture<TestRadioButtonComponentReactiveForms>;
     let changeDetectorRef: ChangeDetectorRef;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule, ReactiveFormsModule],
             declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveForms]

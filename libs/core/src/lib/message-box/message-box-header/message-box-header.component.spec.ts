@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Type, ViewChild } from '@angular/core';
 
 import { TemplateModule } from '../../utils/directives/template/template.module';
@@ -44,7 +44,7 @@ class DefaultHeaderTestComponent {
 }
 
 describe('MessageBoxHeaderComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MessageBoxHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
             imports: [BarModule, TemplateModule],

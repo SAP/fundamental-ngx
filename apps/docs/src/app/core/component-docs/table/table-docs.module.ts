@@ -12,6 +12,7 @@ import { TableResponsiveExampleComponent } from './examples/table-responsive-exa
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
 import { TableCustomColumnsExampleComponent } from './examples/table-custom-columns-example/table-custom-columns-example.component';
 import {
+    BusyIndicatorModule,
     CheckboxModule,
     DialogModule,
     FormModule,
@@ -63,7 +64,8 @@ const routes: Routes = [
         ObjectStatusModule,
         SharedDocumentationPageModule,
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        BusyIndicatorModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -41,3 +41,10 @@ export class ObjectNumberStatusExampleComponent {}
     styleUrls: ['./object-number-examples.component.scss']
 })
 export class ObjectNumberDecimalExampleComponent {}
+
+@Component({
+    selector: 'fd-object-number-truncation-example',
+    templateUrl: './object-number-truncation-example.component.html',
+    styleUrls: ['./object-number-examples.component.scss']
+})
+export class ObjectNumberTruncationExampleComponent {}

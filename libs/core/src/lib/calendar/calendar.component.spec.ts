@@ -4,6 +4,8 @@ import { FdDatetimeModule, FdDate } from '../datetime';
 
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
+import { ButtonModule } from '../button/button.module';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;
@@ -12,7 +14,8 @@ describe('CalendarComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdDatetimeModule, CalendarModule]
+                imports: [FdDatetimeModule, CalendarModule, ButtonModule],
+                providers: [ContentDensityService]
             }).compileComponents();
         })
     );
@@ -164,5 +167,10 @@ describe('CalendarComponent', () => {
         component.activeView = 'year';
         component.handlePreviousArrowClick();
         expect(component.displayPreviousYearList).toHaveBeenCalled();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

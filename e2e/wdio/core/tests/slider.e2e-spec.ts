@@ -3,14 +3,23 @@ import {
     browserIsFirefox,
     clearValue,
     click,
-    clickAndMoveElement, doesItExist, elementDisplayed,
-    getAttributeByName, getElementArrayLength,
+    clickAndMoveElement,
+    doesItExist,
+    elementDisplayed,
+    getAttributeByName,
+    getElementArrayLength,
     getText,
-    mouseHoverElement,
-    scrollIntoView, sendKeys,
+    mouseHoverElement, refreshPage,
+    scrollIntoView,
+    sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { cozyAttribute, disabledAttribute, tickAttribute, tickLabelAttribute } from '../fixtures/appData/slider-contents';
+import {
+    cozyAttribute,
+    disabledAttribute,
+    tickAttribute,
+    tickLabelAttribute
+} from '../fixtures/appData/slider-contents';
 
 describe('slider test suite', function() {
     const sliderPage = new SliderPo();
@@ -202,6 +211,15 @@ describe('slider test suite', function() {
     describe('orientation check', function() {
         it('should check RTL/LTR orientations', () => {
             sliderPage.checkRtlSwitch();
+        });
+    });
+
+    describe('Check visual regression', function() {
+        it('should check examples visual regression', () => {
+            refreshPage();
+            waitForElDisplayed(basicExamples);
+            sliderPage.saveExampleBaselineScreenshot();
+            expect(sliderPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 

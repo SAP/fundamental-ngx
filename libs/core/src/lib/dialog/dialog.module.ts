@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 
@@ -12,7 +15,6 @@ import { DialogService } from './dialog-service/dialog.service';
 import { DialogContainerComponent } from './dialog-container/dialog-container.component';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { BarModule } from '../bar/bar.module';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizeModule } from '../utils/directives/resize/resize.module';
 import { TemplateModule } from '../utils/directives/template/template.module';
 import { BusyIndicatorModule } from '../busy-indicator/busy-indicator.module';
@@ -47,7 +49,8 @@ const declarations = [
         TemplateModule,
         DragDropModule,
         InitialFocusModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        A11yModule
     ],
     exports: [
         declarations,

@@ -35,4 +35,16 @@ export class TextareaPo extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'textarea'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'textarea'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

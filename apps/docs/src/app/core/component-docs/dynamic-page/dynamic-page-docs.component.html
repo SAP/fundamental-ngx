@@ -1,0 +1,48 @@
+<fd-docs-section-title id="basic" componentName="dynamicPage">
+    Basic Dynamic Page
+</fd-docs-section-title>
+<description>
+    There is example with basic DynamicPage, without collapsible subheader.
+</description>
+<component-example>
+    <fd-dynamic-page-basic-example></fd-dynamic-page-basic-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageBasic"></code-example>
+
+<fd-docs-section-title id="tabbed" componentName="dynamicPage">
+    Dynamic Page with Tabs
+</fd-docs-section-title>
+<description>
+    There is used tab component inside DynamicPage - Content should be wrapped in <code>tab-items</code>
+</description>
+<component-example>
+    <fd-dynamic-page-tabs-example></fd-dynamic-page-tabs-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageTabs"></code-example>
+
+<fd-docs-section-title id="layout" componentName="dynamicPage">
+    Dynamic Page inside Column Layout
+</fd-docs-section-title>
+<component-example>
+    <fd-dynamic-page-column-layout-example></fd-dynamic-page-column-layout-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageColumn"></code-example>
+
+<fd-docs-section-title id="reponsive" componentName="dynamicPage">
+    Responsive Dynamic Page
+</fd-docs-section-title>
+<description>
+    AutoResponsive DynamicPage is enabled by default and can be disabled by passing <code>[autoResponsive]="false"</code>.
+    This will auto apply certain sizes for breakpoints:
+    <ul>
+        <li>max-width: 599px                         - small</li>
+        <li>min-width: 600px and max-width: 1023px   - medium</li>
+        <li>min-width: 1024px and max-width: 1439px  - large</li>
+        <li>min-width: 1440px                        - extra large</li>
+    </ul>
+
+</description>
+<component-example>
+    <fd-dynamic-page-responsive-example></fd-dynamic-page-responsive-example>
+</component-example>
+<code-example [exampleFiles]="dynamicPageResponsive"></code-example>

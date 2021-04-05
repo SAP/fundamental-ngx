@@ -30,6 +30,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/avatar/avatar-docs.module').then((m) => m.AvatarDocsModule)
             },
             {
+                path: 'avatar-group',
+                loadChildren: () => import('./component-docs/avatar-group/avatar-group-docs.module').then((m) => m.AvatarGroupDocsModule)
+            },
+            {
                 path: 'bar',
                 loadChildren: () => import('./component-docs/bar/bar-docs.module').then((m) => m.BarDocsModule)
             },
@@ -97,6 +101,14 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dialog/dialog-docs.module').then((m) => m.DialogDocsModule)
             },
             {
+                path: 'dynamic-page',
+                loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
+            },
+            {
+              path: 'facets',
+              loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
+            },
+            {
               path: 'feed-list-item',
                 loadChildren: () =>
                     import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
@@ -158,8 +170,19 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'content-density',
+                loadChildren: () =>
+                    import('./component-docs/content-density/content-density-docs.module').then(
+                        (m) => m.ContentDensityDocsModule
+                    )
+            },
+            {
                 path: 'icon',
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
+            },
+            {
+                path: 'illustrated-message',
+                loadChildren: () => import('./component-docs/illustrated-message/illustrated-message-docs.module').then((m) => m.IllustratedMessageDocsModule)
             },
             {
                 path: 'info-label',
@@ -336,6 +359,11 @@ export const ROUTES: Routes = [
                     import('./component-docs/split-button/split-button-docs.module').then(
                         (m) => m.SplitButtonDocsModule
                     )
+            },
+            {
+                path: 'status-indicator',
+                loadChildren: () =>
+                    import('./component-docs/status-indicator/status-indicator-docs.module').then((m) => m.StatusIndicatorDocsModule)
             },
             {
                 path: 'step-input',

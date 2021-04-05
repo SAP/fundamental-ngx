@@ -13,4 +13,16 @@ export class ObjectMarkerPo extends BaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'object-marker'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'object-marker'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

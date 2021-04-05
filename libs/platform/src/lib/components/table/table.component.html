@@ -17,7 +17,7 @@
     block="true"
 >
     <!-- Table Container -->
-    <div class="fdp-table__container">
+    <div class="fdp-table__container" role="table">
         <!-- Table header outlet -->
         <ng-container [ngTemplateOutlet]="tableHeaderTemplate"></ng-container>
 
@@ -41,6 +41,7 @@
             <table
                 class="fdp-table__header-table"
                 fd-table
+                role="prsentation"
             >
                 <thead fd-table-header>
                     <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
@@ -72,8 +73,11 @@
         </th>
         <ng-container *ngFor="let column of _visibleColumns; let colIdx = index">
             <th
-                scope="col"
                 fd-table-cell
+                role="columnheader"
+                scope="col"
+                [id]="id+'__'+column.name"
+                [attr.aria-colindex]="colIdx"
                 [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
                 [ngStyle]="_freezableColumns?.includes(column.name) ? _getFreezableCellStyles(colIdx) : null"
                 [fdPopoverTrigger]="columnHeaderPopover"
@@ -254,27 +258,29 @@
         >
             <table
                 fd-table
+                role="presentation"
                 class="fdp-table__body-table"
             >
                 <tbody
                     fd-table-body
                     [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
                     [class.fd-table__body--no-vertical-borders]="noBodyBorders"
+                    [tabIndex]="pageScrolling ? 0 : -1"
                 >
                     <ng-container
-                        *ngFor="let row of _tableRowsVisible"
+                        *ngFor="let row of _tableRowsVisible; let rowIdx = index;"
                         [ngSwitch]="row.type"
                     >
                         <ng-container
                             *ngSwitchCase="'group'"
                             [ngTemplateOutlet]="groupRowTemplate"
-                            [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible}"
+                            [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible, rowIdx: rowIdx}"
                         ></ng-container>
 
                         <ng-container
                             *ngSwitchCase="'item'"
                             [ngTemplateOutlet]="itemRowTemplate"
-                            [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible}"
+                            [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible, rowIdx: rowIdx}"
                         ></ng-container>
                     </ng-container>
                 </tbody>
@@ -292,18 +298,21 @@
             <table
                 *ngIf="_tableRowsVisible.length"
                 fd-table
+                role="presentation"
                 class="fdp-table__body-hs-table"
             >
                 <tbody fd-table-body>
-                    <tr fd-table-row>
+                    <tr fd-table-row role="row">
                         <td
                             *ngIf="_isShownSelectionColumn"
                             fd-table-cell
+                            role="cell"
                             class="fdp-table__cell--selection"
                         ></td>
                         <td
                             *ngFor="let column of _visibleColumns"
                             fd-table-cell
+                            role="cell"
                         ></td>
                     </tr>
                 </tbody>
@@ -316,11 +325,13 @@
 <ng-template
     #groupRowTemplate
     let-row="row"
+    let-rowIdx="rowIdx"
 >
     <tr
         fd-table-row
-        scope="row"
+        role="row"
         class="fdp-table__row--group"
+        [attr.aria-rowindex]="rowIdx"
     >
         <td
             fd-table-cell
@@ -355,10 +366,13 @@
 <ng-template
     #itemRowTemplate
     let-row="row"
+    let-rowIdx="rowIdx"
 >
     <tr
         fd-table-row
-        scope="row"
+        role="row"
+        [attr.aria-rowindex]="rowIdx"
+        [attr.aria-selected]="row.checked"
     >
 
         <!-- Row Selection Cell -->
@@ -369,8 +383,11 @@
                     tabindex="0"
                     role="rowheader"
                     fd-table-cell
+                    fd-table-cell-selectable
                     [attr.aria-selected]="row.checked"
                     (click)="_toggleSelectableRow(row)"
+                    (keydown.enter)="_toggleSelectableRow(row)"
+                    (keydown.space)="_toggleSelectableRow(row)"
                 ></td>
             </ng-container>
             <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
@@ -391,6 +408,8 @@
         <td
             *ngFor="let column of _visibleColumns; let colIdx = index"
             fd-table-cell
+            role="cell"
+            [headers]="id+'__'+column.name"
             [style.textAlign]="column.align"
             [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
             [ngStyle]="_freezableColumns?.includes(column.name) ? _getFreezableCellStyles(colIdx) : null"
@@ -413,7 +432,7 @@
         <tbody fd-table-body>
             <tr
                 fd-table-row
-                scope="row"
+                role="row"
             >
                 <td
                     fd-table-cell

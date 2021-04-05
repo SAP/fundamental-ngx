@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RadioButtonComponent } from './radio-button.component';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 @Component({
     template: `
@@ -29,10 +30,11 @@ describe('RadioButtonComponent', () => {
     let component: TestRadioButtonComponent;
     let fixture: ComponentFixture<TestRadioButtonComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
-            declarations: [RadioButtonComponent, TestRadioButtonComponent]
+            declarations: [RadioButtonComponent, TestRadioButtonComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -50,6 +52,11 @@ describe('RadioButtonComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
         expect(component.radioButton1.name).toContain('radio');
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.radioButton1.ngOnInit();
+        expect(component.radioButton1.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should have the value', async () => {

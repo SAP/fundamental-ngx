@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable, isDevMode, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -81,12 +81,29 @@ export class ThemesService {
                 takeUntil(this._onDestroy$),
                 filter(param => param && param[paramName])
             )
-            .subscribe(param => this.onThemeQueryParamChange.next({
-                    themeUrl: this.setTheme(param[paramName]),
-                    customThemeUrl: this.setCustomTheme(param[paramName])
-                })
-            );
-    };
+            .subscribe(param => this._propagateThemes(param[paramName]));
+
+        const nativeTheme = this._getNativeParameterByName(paramName);
+        if (nativeTheme) {
+            this._propagateThemes(nativeTheme)
+        }
+    }
+
+    /** Method to get once theme object directly from url. */
+    getThemesFromURL(param?: string): ThemeServiceOutput {
+        const paramName = param || 'theme';
+
+        const nativeTheme = this._getNativeParameterByName(paramName);
+        if (!nativeTheme && isDevMode()) {
+            console.warn('There is no theme param set named: ' + param);
+            return;
+        }
+
+        return {
+            themeUrl: this.setTheme(nativeTheme),
+            customThemeUrl: this.setCustomTheme(nativeTheme)
+        }
+    }
 
     /** Assign css file corresponding to chosen theme from @sap-theming **/
     setTheme(theme: string): SafeResourceUrl {
@@ -96,5 +113,24 @@ export class ThemesService {
     /** Assign css file corresponding to chosen theme fundamental-styles **/
     setCustomTheme(theme: string): SafeResourceUrl {
         return this._sanitizer.bypassSecurityTrustResourceUrl('assets/fundamental-styles-theming/' + theme + '.css');
+    }
+
+    /** @hidden */
+    private _getNativeParameterByName(paramName: string): string {
+        paramName = paramName.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + paramName + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(window.location.href);
+        if (!results || !results[2]) {
+            return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    /** @hidden */
+    private _propagateThemes(theme: string): void {
+        this.onThemeQueryParamChange.next({
+            themeUrl: this.setTheme(theme),
+            customThemeUrl: this.setCustomTheme(theme)
+        })
     }
 }

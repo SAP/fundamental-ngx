@@ -30,10 +30,21 @@ export class QuickViewPo extends CoreBaseComponentPo {
     popoverCancelButton = '.fd-bar__right :nth-child(2) button';
     openDialogButton = '#in-dialog + component-example button';
 
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.pageHeader);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'quick-view'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'quick-view'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

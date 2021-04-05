@@ -1,14 +1,18 @@
 
 <div class="table-header">
-    <h4><ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{ displayedData.length }})</h4>
+    <h5 fd-title><ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{ displayedData.length }})</h5>
 </div>
-<div class="fdp-value-help-dialog__table-holder table-content">
+<div class="fdp-value-help-dialog__table-holder table-content"
+    fdInfiniteScroll
+    (onScrollAction)="_showMoreElements()"
+    [scrollPercent]="80"
+>
     <table fd-table
         [compact]="contentTableDensity === _contentDensityOptions.COMPACT"
         [condensed]="contentTableDensity === _contentDensityOptions.CONDENSED"
         [popIn]="mobile"
         [noBorderX]="mobile"
-        [noBorderY]="mobile"
+        [noBorderY]="false"
     >
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
@@ -49,7 +53,7 @@
                     </td>
                     <td fd-table-cell *ngFor="let filter of _tableFilters.main">{{ row[filter.key] || '' }}</td>
                 </tr>
-                <!-- Only for mobile view if exist -->
+
                 <tr fd-table-row *ngIf="mobile && _tableFilters.secondary.length" [secondary]="true" [attr.aria-selected]="_selectedMap[row[uniqueKey]]">
                     <td fd-table-cell></td>
                     <td fd-table-cell colspan="100%" [fitContent]="true">
@@ -81,16 +85,3 @@
         </tbody>
     </table>
 </div>
-
-<ng-container *ngIf="displayedData.length as _itemCount">
-    <div fd-bar *ngIf="!mobile && _itemCount">
-        <div fd-bar-left>
-            <fd-pagination
-                [totalItems]="_itemCount"
-                (pageChangeStart)="_updatePage($event)"
-                [itemsPerPage]="pageSize"
-                [currentPage]="_currentPage"
-            ></fd-pagination>
-        </div>
-    </div>
-</ng-container>

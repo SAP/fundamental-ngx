@@ -2,9 +2,9 @@
     <fd-dialog-header [class.show-search]="_selectMode && !_userToShowDetails">
         <ng-template fdTemplate="header">
             <p>
-                <ng-container *ngIf="!_selectMode && !_data.isEdit" i18n="@@platformApprovalFlowAddApprovers">Add approvers</ng-container>
-                <ng-container *ngIf="!_selectMode && _data.isEdit" i18n="@@platformApprovalFlowEditApprover">Edit approver</ng-container>
-                <ng-container *ngIf="viewService.isSelectUserMode || viewService.isSelectTeamMode" i18n="@@platformApprovalFlowAddApproverTeam">User/Team
+                <ng-container *ngIf="!_selectMode && !_data.isEdit" i18n="@@platformApprovalFlowAddNodeDialogAddApprovers">Add approvers</ng-container>
+                <ng-container *ngIf="!_selectMode && _data.isEdit" i18n="@@platformApprovalFlowAddNodeDialogEditApprover">Edit approver</ng-container>
+                <ng-container *ngIf="viewService.isSelectUserMode || viewService.isSelectTeamMode" i18n="@@platformApprovalFlowAddNodeDialogAddApproverTeam">User/Team
                 </ng-container>
                 <ng-container *ngIf="viewService.isTeamMembersMode">
                     <fd-icon
@@ -18,7 +18,7 @@
                         [glyph]="_headerArrowGlyph"
                         (click)="_exitUserDetailsMode()"
                     ></fd-icon>
-                    <ng-container i18n="@@platformApprovalFlowUserDetailHeader">Detail</ng-container>
+                    <ng-container i18n="@@platformApprovalFlowAddNodeDialogUserDetailHeader">Detail</ng-container>
                 </ng-container>
             </p>
             <fdp-search-field
@@ -36,7 +36,7 @@
     <fd-dialog-body [class.approval-flow__dialog-body--auto-height]="viewService.isUserDetailsMode">
         <ng-container *ngIf="!_selectMode">
             <div fd-form-item *ngIf="_data.showNodeTypeSelect">
-                <label fd-form-label i18n="@@platformApprovalFlowNodeType">Parallel or serial</label>
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogNodeType">Parallel or serial</label>
                 <fd-select [compact]="true" [(value)]="_nodeType">
                     <fd-option
                         *ngFor="let option of _nodeTypes; trackBy: _trackByFn"
@@ -47,7 +47,7 @@
                 </fd-select>
             </div>
             <div fd-form-item>
-                <label fd-form-label i18n="@@platformApprovalFlowApproverType">Approver type</label>
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogApproverType">Approver type</label>
                 <fd-select [compact]="true" [(value)]="_approverType">
                     <fd-option
                         *ngFor="let option of _approverTypes; trackBy: _trackByFn"
@@ -58,7 +58,7 @@
                 </fd-select>
             </div>
             <div fd-form-item>
-                <label fd-form-label i18n="@@platformApprovalFlowUserOrTeam">User/Team</label>
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogUserOrTeam">User/Team</label>
                 <div class="approval-flow__select-approvers-container">
                     <fd-multi-input
                         [compact]="true"
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div fd-form-item>
-                <label fd-form-label i18n="@@platformApprovalFlowDueDate">Due date</label>
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogDueDate">Due date</label>
                 <fd-date-picker
                     type="single"
                     compact="true"
@@ -113,7 +113,7 @@
                     fd-button
                     fd-dialog-decisive-button
                     fdType="emphasized"
-                    i18n-label="@@platformApprovalFlowDialogButtonAdd"
+                    i18n-label="platformApprovalFlowDialogButtonAdd"
                     label="Add"
                     [compact]="true"
                     [disabled]="_isMainSubmitButtonDisabled"
@@ -127,7 +127,7 @@
                     fd-initial-focus
                     fd-dialog-decisive-button
                     fdType="transparent"
-                    i18n-label="@@platformApprovalFlowDialogButtonCancel"
+                    i18n-label="platformApprovalFlowDialogButtonCancel"
                     label="Cancel"
                     [compact]="true"
                     (click)="dialogRef.close()">
@@ -140,7 +140,7 @@
                     <button
                         fd-button
                         fdType="emphasized"
-                        i18n-label="@@platformApprovalFlowDialogButtonSelect"
+                        i18n-label="platformApprovalFlowAddNodeDialogSelectButton"
                         label="Select"
                         [compact]="true"
                         [disabled]="!_selectedApprovers.length"
@@ -153,7 +153,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="@@platformApprovalFlowDialogButtonCancel"
+                        i18n-label="platformApprovalFlowDialogButtonCancel"
                         label="Cancel"
                         [compact]="true"
                         (click)="_exitSelectMode()">
@@ -165,7 +165,7 @@
                     <button
                         fd-button
                         fdType="emphasized"
-                        i18n-label="@@platformApprovalFlowDialogButtonAdd"
+                        i18n-label="platformApprovalFlowDialogButtonAdd"
                         label="Add"
                         [compact]="true"
                         [disabled]="!_selectedTeam && !viewService.team"
@@ -178,7 +178,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="@@platformApprovalFlowDialogButtonCancel"
+                        i18n-label="platformApprovalFlowDialogButtonCancel"
                         label="Cancel"
                         [compact]="true"
                         (click)="_exitSelectMode()">
@@ -191,7 +191,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="@@platformApprovalFlowDialogButtonClose"
+                        i18n-label="platformApprovalFlowDialogButtonClose"
                         label="Close"
                         [compact]="true"
                         (click)="_exitTeamMembersMode()">
@@ -204,7 +204,7 @@
                         fd-button
                         fd-initial-focus
                         fdType="transparent"
-                        i18n-label="@@platformApprovalFlowDialogButtonClose"
+                        i18n-label="platformApprovalFlowDialogButtonClose"
                         label="Close"
                         [compact]="true"
                         (click)="_exitUserDetailsMode()">

@@ -7,6 +7,7 @@ import { ActionSheetModule } from './action-sheet/action-sheet.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertService } from './alert/alert-service/alert.service';
 import { AvatarModule } from './avatar/avatar.module';
+import { AvatarGroupModule } from './avatar-group/avatar-group.module';
 import { BarModule } from './bar/bar.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { BusyIndicatorModule } from './busy-indicator/busy-indicator.module';
@@ -83,6 +84,11 @@ import { ObjectNumberModule } from './object-number/object-number.module';
 import { TitleModule } from './title/title.module';
 import { SliderModule } from './slider/public_api';
 import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.module';
+import { IllustratedMessageModule } from './illustrated-message/illustrated-message.module';
+import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
+import { StatusIndicatorModule } from './status-indicator/status-indicator.module';
+import { GridListModule } from './grid-list/grid-list.module';
+import { FacetModule } from './facets/facet.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -92,6 +98,7 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         ActionSheetMobileModule,
         AlertModule,
         AvatarModule,
+        AvatarGroupModule,
         BarModule,
         BreadcrumbModule,
         BusyIndicatorModule,
@@ -105,7 +112,9 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         DatePickerModule,
         DatetimePickerModule,
         DragAndDropModule,
+        DynamicPageModule,
         DynamicSideContentModule,
+        FacetModule,
         FeedListItemModule,
         FeedInputModule,
         FileUploaderModule,
@@ -166,8 +175,11 @@ import { OnlyDigitsModule } from './utils/directives/only-digits/only-digits.mod
         MessageToastModule,
         DynamicSideContentModule,
         SliderModule,
-        OnlyDigitsModule
+        OnlyDigitsModule,
+        IllustratedMessageModule,
+        StatusIndicatorModule,
+        GridListModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService],
+    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })
-export class FundamentalNgxCoreModule { }
+export class FundamentalNgxCoreModule {}

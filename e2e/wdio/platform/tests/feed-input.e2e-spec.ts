@@ -3,7 +3,6 @@ import {
     clearValue,
     doesItExist,
     elementDisplayed,
-    executeScriptAfterTagFF,
     getAttributeByName,
     getAttributeByNameArr,
     getCSSPropertyByName,
@@ -79,7 +78,7 @@ describe('Verify Feed Input component', function() {
             waitForPresent(feedInputButton, i);
             scrollIntoView(feedInputButton, i);
             expect(elementDisplayed(feedInputButton, i)).toBe(true);
-            expect(isEnabled(feedInputButton, i)).toBe(false);
+            expect(getAttributeByName(feedInputButton, 'aria-disabled', i)).toBe('true');
         }
     });
 
@@ -144,7 +143,7 @@ describe('Verify Feed Input component', function() {
             const inputFocusStyle = getCSSPropertyByName(feedInputTextArea, 'outline-style', i).value;
             sendKeys('Tab');
 
-            const sendButtonFocusStyle = executeScriptAfterTagFF(feedInputButton, i);
+            const sendButtonFocusStyle = getCSSPropertyByName(feedInputButton, 'outline-style', i).value;
 
             expect(inputFocusStyle).toBe('dotted');
             expect(sendButtonFocusStyle).toContain('dotted');
@@ -163,8 +162,8 @@ describe('Verify Feed Input component', function() {
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
-            feedInputPage.saveExampleBaselineScreenshot('feed-input');
-            expect(feedInputPage.compareWithBaseline('feed-input')).toBeLessThan(1);
+            feedInputPage.saveExampleBaselineScreenshot();
+            expect(feedInputPage.compareWithBaseline()).toBeLessThan(3);
         });
     });
 });

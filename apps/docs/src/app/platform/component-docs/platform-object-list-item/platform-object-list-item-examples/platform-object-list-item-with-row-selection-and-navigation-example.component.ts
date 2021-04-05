@@ -131,8 +131,8 @@ export class ListDataProvider extends DataProvider<Product> {
     }
     fetch(params: Map<string, string>): Observable<Product[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get(name)) {
-            const keyword = params.get(name).toLowerCase();
+        if (!!params.get('name')) {
+            const keyword = params.get('name').toLowerCase();
             data = data.filter((item) => item.title.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);

@@ -14,6 +14,7 @@ import {
     ObjectNumberDecimalExampleComponent,
     ObjectNumberLargeExampleComponent,
     ObjectNumberStatusExampleComponent,
+    ObjectNumberTruncationExampleComponent,
     ObjectNumberUnitsExampleComponent
 } from './examples/object-number-examples.component';
 import { ObjectNumberHeaderComponent } from './object-number-header/object-number-header.component';
@@ -45,9 +46,9 @@ const routes: Routes = [
         ObjectNumberLargeExampleComponent,
         ObjectNumberUnitsExampleComponent,
         ObjectNumberStatusExampleComponent,
-        ObjectNumberDecimalExampleComponent
+        ObjectNumberDecimalExampleComponent,
+        ObjectNumberTruncationExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ObjectNumberDocsModule {
-}
+export class ObjectNumberDocsModule {}

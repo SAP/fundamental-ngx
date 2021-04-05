@@ -1,8 +1,3 @@
 @import '~fundamental-styles/dist/tile';
 @import '~fundamental-styles/dist/numeric-content';
 @import '~fundamental-styles/dist/badge';
-
-// temp fix until the new version of fundamental-styles is released
-.fd-tile--feed .fd-tile__content-text {
-    max-height: 2.125rem;
-}

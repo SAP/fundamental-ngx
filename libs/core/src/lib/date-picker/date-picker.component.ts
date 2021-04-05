@@ -16,7 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Placement } from '../popover/popover-position/popover-position';
@@ -30,6 +30,7 @@ import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats
 import { createMissingDateImplementationError } from './errors';
 import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
 import { PopoverService } from '../popover/popover-service/popover.service';
+import { ContentDensityService } from '../utils/public_api';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and
@@ -79,7 +80,11 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** Whether this is the compact input date picker */
     @Input()
-    compact = false;
+    compact?: boolean;
+
+    /** Id attribute for input element inside DatePicker component */
+    @Input()
+    inputId: string;
 
     /** Text displayed in message */
     @Input()
@@ -260,6 +265,9 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     /**
      * Function used to disable certain dates in the calendar.
      * @param date date representation
@@ -305,6 +313,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
         private _popoverFormMessage: PopoverFormMessageService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -320,6 +329,12 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             this.formatInputDate(this.selectedDate);
             this._changeDetectionRef.detectChanges();
         });
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._changeDetectionRef.markForCheck();
+            }));
+        }
     }
 
     /** @hidden */
@@ -329,6 +344,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }

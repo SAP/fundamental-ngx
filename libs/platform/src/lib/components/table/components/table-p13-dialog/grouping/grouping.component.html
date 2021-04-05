@@ -30,7 +30,7 @@
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
                 [compact]="true"
                 placeholder="(none)"
-                i18n-placeholder="@@platformTableP13GroupDialogNoneSelected"
+                i18n-placeholder="@@platformTableP13GroupDialogNoneSelectedColumn|Table column select placeholder"
             >
                 <fd-option
                     *ngFor="let column of columns"
@@ -55,9 +55,9 @@
                     fdType="transparent"
                     glyph="sys-cancel"
                     [compact]="true"
-                    i18n-aria-label="@@platformTableP13GroupDialogRemoveGroup"
+                    i18n-aria-label="platformTableP13GroupDialogRemoveGroup|Remove line aria-label attribute"
                     aria-label="Remove"
-                    i18n-title="@@platformTableP13GroupDialogRemoveGroup"
+                    i18n-title="@@platformTableP13GroupDialogRemoveGroup|Remove line title attribute"
                     title="Remove"
                     (click)="_removeRule(rule)"
                 ></button>
@@ -67,9 +67,9 @@
                     fdType="transparent"
                     glyph="add"
                     [compact]="true"
-                    i18n-aria-label="@@platformTableP13GroupDialogAddNewGroup"
+                    i18n-aria-label="@@platformTableP13GroupDialogAddNewGroup|Add new line aria-label attribute"
                     aria-label="Add new"
-                    i18n-title="@@platformTableP13GroupDialogAddNewGroup"
+                    i18n-title="@@platformTableP13GroupDialogAddNewGroup|Add new line title attribute"
                     title="Add new"
                     (click)="_addNew(i)"
                 ></button>
@@ -85,7 +85,7 @@
                 fd-button
                 fdType="emphasized"
                 fd-dialog-decisive-button
-                i18n-label="@@platformTableDialogButtonOK"
+                i18n-label="@@platformTableP13GroupDialogConfirmationBtn"
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
@@ -99,7 +99,7 @@
                 fdType="transparent"
                 fd-dialog-decisive-button
                 fd-initial-focus
-                i18n-label="@@platformTableDialogButtonCancel"
+                i18n-label="@@platformTableP13GroupDialogCancelBtn"
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"

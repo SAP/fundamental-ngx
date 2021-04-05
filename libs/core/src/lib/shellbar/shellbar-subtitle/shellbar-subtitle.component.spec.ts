@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ShellbarSubtitleComponent } from './shellbar-subtitle.component';
 
@@ -6,7 +6,7 @@ describe('ShellbarSubtitleComponent', () => {
     let component: ShellbarSubtitleComponent;
     let fixture: ComponentFixture<ShellbarSubtitleComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ShellbarSubtitleComponent]
         }).compileComponents();

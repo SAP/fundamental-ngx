@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -25,7 +25,7 @@ describe('NumberStepInputComponent default values', () => {
     let fixture: ComponentFixture<NumberStepInputDefaultValuesHostComponent>;
     let stepInputComponent: NumberStepInputComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformStepInputModule],
             declarations: [NumberStepInputDefaultValuesHostComponent],
@@ -109,7 +109,7 @@ describe('NumberStepInputComponent main functionality', () => {
         return fixture.debugElement.query(By.css('.fd-step-input__input'));
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformStepInputModule],
             declarations: [NumberStepInputMainFunctionalityHostComponent],
@@ -458,7 +458,7 @@ describe('Basic number Step Input withing platforms form', () => {
     let fixture: ComponentFixture<NumberStepInputFormTestWrapperComponent>;
     let host: NumberStepInputFormTestWrapperComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
             declarations: [NumberStepInputFormTestWrapperComponent],

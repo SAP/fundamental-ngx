@@ -1,7 +1,4 @@
-<fd-docs-section-title
-    id="standard"
-    componentName="card"
->
+<fd-docs-section-title id="standard" componentName="card">
     Standard Card
 </fd-docs-section-title>
 <description>
@@ -15,10 +12,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="compact"
-    componentName="card"
->
+<fd-docs-section-title id="compact" componentName="card">
     Compact mode
 </fd-docs-section-title>
 <description> Use <code>[compact]="true"</code> option to make the card compact </description>
@@ -30,10 +24,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="loader"
-    componentName="card"
->
+<fd-docs-section-title id="loader" componentName="card">
     Card loader
 </fd-docs-section-title>
 <description>
@@ -48,10 +39,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="footer"
-    componentName="card"
->
+<fd-docs-section-title id="footer" componentName="card">
     Card footer
 </fd-docs-section-title>
 <description> Use <code>fd-card-footer</code> component to put actions in the card footer </description>
@@ -63,10 +51,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="kpi"
-    componentName="card"
->
+<fd-docs-section-title id="kpi" componentName="card">
     Analytical Card
 </fd-docs-section-title>
 <description>
@@ -82,10 +67,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="table"
-    componentName="card"
->
+<fd-docs-section-title id="table" componentName="card">
     Table Card
 </fd-docs-section-title>
 <description> Use <code>[cardType]="table"</code> to display table card </description>
@@ -97,10 +79,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="chartBar"
-    componentName="card"
->
+<fd-docs-section-title id="chartBar" componentName="card">
     Bar Chart List
 </fd-docs-section-title>
 <description>
@@ -114,3 +93,55 @@
     <fd-bar-chart-list-card-example></fd-bar-chart-list-card-example>
 </component-example>
 <code-example [exampleFiles]="barChartList"></code-example>
+
+<fd-docs-section-title id="cardObject" componentName="card">Object card</fd-docs-section-title>
+<description>
+    The object card can display a single object or a group of objects.
+</description>
+
+<component-example>
+    <fd-card-object-example></fd-card-object-example>
+</component-example>
+<code-example [exampleFiles]="objectCard"></code-example>
+
+<fd-docs-section-title id="cardCalendar" componentName="card">Calendar card</fd-docs-section-title>
+<description>
+    The calendar card displays calendar within card.
+</description>
+
+<component-example>
+    <fd-card-calendar-example></fd-card-calendar-example>
+</component-example>
+<code-example [exampleFiles]="calendarCard"></code-example>
+
+<fd-docs-section-title id="cardQuickView" componentName="card">Quick view card</fd-docs-section-title>
+<description>
+    Quick view cards are single-object cards. They display the basic details for one object, such as the name, address,
+    and phone numbers for a contact.
+</description>
+
+<component-example>
+    <fd-card-quick-view-example></fd-card-quick-view-example>
+</component-example>
+<code-example [exampleFiles]="quickViewCard"></code-example>
+
+<fd-docs-section-title id="list" componentName="card">List card</fd-docs-section-title>
+<description>
+    List cards display a set of items or links in a list format.
+</description>
+
+<component-example>
+    <fd-card-list-example></fd-card-list-example>
+</component-example>
+<code-example [exampleFiles]="listCard"></code-example>
+
+<fd-docs-section-title id="linkList" componentName="card">Link List card</fd-docs-section-title>
+<description>
+    Link list cards allow you to display a collection of links or images that can reference both internal and external
+    targets.Links and images are handled as two separate variants: list and image.
+</description>
+
+<component-example>
+    <fd-card-link-list-example></fd-card-link-list-example>
+</component-example>
+<code-example [exampleFiles]="linkListCard"></code-example>

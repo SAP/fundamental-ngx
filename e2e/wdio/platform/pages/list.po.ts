@@ -72,4 +72,16 @@ export class ListPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.noBorderList);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'list'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'list'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

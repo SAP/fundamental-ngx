@@ -1,9 +1,11 @@
-import { SplitButtonComponent } from './split-button.component';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { SplitButtonComponent, splitButtonTextClass, splitButtonTextCompactClass } from './split-button.component';
 import { MenuModule } from '../menu/menu.module';
+import { ButtonModule } from '../button/button.module';
 import createSpy = jasmine.createSpy;
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     selector: 'fd-test-component',
@@ -31,10 +33,11 @@ describe('SplitButtonComponent', () => {
 
     let component, componentInstance: SplitButtonComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule],
-            declarations: [SplitButtonComponent, TestComponent]
+            imports: [MenuModule, ButtonModule],
+            declarations: [SplitButtonComponent, TestComponent],
+            providers: [ContentDensityService]
         });
     }));
 
@@ -50,6 +53,11 @@ describe('SplitButtonComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
         expect(componentInstance).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        componentInstance.ngOnInit();
+        expect(componentInstance.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should handle content init - no selected item', () => {
@@ -101,4 +109,15 @@ describe('SplitButtonComponent', () => {
         expect(mouseEvent.stopPropagation).toHaveBeenCalled();
         expect(componentInstance.selected.elementRef.nativeElement.click).toHaveBeenCalled();
     });
+
+    it('should add button text class', () => {
+        fixture.detectChanges();
+        componentInstance.ngAfterViewInit();
+        const textElement = componentInstance.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
+        expect(textElement.classList.contains(splitButtonTextClass));
+        componentInstance.compact = true;
+        componentInstance.ngOnChanges(<any>{'compact': true});
+        expect(textElement.classList.contains(splitButtonTextCompactClass));
+
+    })
 });

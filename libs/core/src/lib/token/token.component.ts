@@ -4,11 +4,13 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    Input,
+    Input, OnDestroy, OnInit, Optional,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ContentDensityService } from '../utils/public_api';
 
 /**
  * A token is used to represent contextualizing information.
@@ -21,14 +23,14 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenComponent {
+export class TokenComponent implements OnInit, OnDestroy {
     /** Whether the token is disabled. */
     @Input()
     disabled = false;
 
     /** Whether the token is compact. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** @hidden */
     @ViewChild('tokenWrapperElement')
@@ -36,11 +38,13 @@ export class TokenComponent {
 
     private _selected = false;
 
+    private _subscriptions = new Subscription();
+
     /** Whether the token is selected. */
     @Input()
     get selected(): boolean {
         return this._selected;
-    };
+    }
 
     set selected(val: boolean) {
         if (this._selected !== val) {
@@ -59,7 +63,29 @@ export class TokenComponent {
 
     /** Emitted when a token is clicked. */
     @Output()
-    onTokenClick: EventEmitter<void> = new EventEmitter<void>();
+    onTokenClick: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+
+    constructor(
+        public elementRef: ElementRef,
+        private _cdRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
+
+    /** @hidden */
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._cdRef.markForCheck();
+            }))
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /** @hidden */
     closeClickHandler(event?): void {
@@ -75,6 +101,4 @@ export class TokenComponent {
     tokenClickHandler(event): void {
         this.onTokenClick.emit(event);
     }
-
-    constructor(public elementRef: ElementRef, private _cdRef: ChangeDetectorRef) { }
 }

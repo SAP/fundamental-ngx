@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AvatarModule } from './avatar.module';
 import { AvatarComponent } from './avatar.component';
@@ -35,7 +35,7 @@ describe('AvatarComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent, AvatarComponent],
             imports: [AvatarModule]

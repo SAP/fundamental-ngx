@@ -1,10 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { whenStable } from './../utils/tests/when-stable';
 import { CarouselModule } from '../utils/directives/carousel/carousel.module';
 import { CarouselComponent } from './carousel.component';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
+import { ButtonModule } from '../button/button.module';
 
 @Component({
     selector: 'fd-test-carousel',
@@ -125,10 +126,10 @@ describe('CarouselComponent', () => {
     let component: TestCarouselComponent;
     let fixture: ComponentFixture<TestCarouselComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CarouselComponent, CarouselItemComponent, TestCarouselComponent],
-            imports: [CarouselModule]
+            imports: [CarouselModule, ButtonModule]
         }).compileComponents();
     }));
 
@@ -294,7 +295,7 @@ describe('CarouselComponent Multiple Active Item', () => {
     let component: TestCarouselMultipleActiveItemComponent;
     let fixture: ComponentFixture<TestCarouselMultipleActiveItemComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CarouselComponent, CarouselItemComponent, TestCarouselMultipleActiveItemComponent],
             imports: [CarouselModule]
@@ -506,7 +507,7 @@ describe('CarouselComponent looping navigation', () => {
     let component: TestCarouselLoopingNavigationComponent;
     let fixture: ComponentFixture<TestCarouselLoopingNavigationComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CarouselComponent, CarouselItemComponent, TestCarouselLoopingNavigationComponent],
             imports: [CarouselModule]

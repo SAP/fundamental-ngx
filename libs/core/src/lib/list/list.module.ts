@@ -15,6 +15,8 @@ import { ListBylineLeftDirective } from './directives/byline/list-byline-left.di
 import { ListBylineRightDirective } from './directives/byline/list-byline-right.directive';
 import { ListContentDirective } from './directives/byline/list-content.directive';
 import { ListThumbnailDirective } from './directives/byline/list-thumbnail.directive';
+import { ListTitleTextDirective } from './directives/list-title-text.directive';
+
 @NgModule({
     declarations: [
         ListComponent,
@@ -30,7 +32,8 @@ import { ListThumbnailDirective } from './directives/byline/list-thumbnail.direc
         ListBylineLeftDirective,
         ListBylineRightDirective,
         ListContentDirective,
-        ListThumbnailDirective
+        ListThumbnailDirective,
+        ListTitleTextDirective
     ],
     imports: [CommonModule, FormModule],
     exports: [
@@ -47,7 +50,8 @@ import { ListThumbnailDirective } from './directives/byline/list-thumbnail.direc
         ListBylineLeftDirective,
         ListBylineRightDirective,
         ListContentDirective,
-        ListThumbnailDirective
+        ListThumbnailDirective,
+        ListTitleTextDirective
     ]
 })
 export class ListModule {}

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, X } from '@angular/cdk/keycodes';
 import { ModifierKeys } from '@angular/cdk/testing'
@@ -7,7 +7,7 @@ import { SelectComponent } from './select.component';
 import { PopoverComponent } from '../popover/popover.component';
 import { SelectModule } from './select.module';
 import { SelectKeyManagerService } from './select-key-manager.service';
-
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     template: `
@@ -71,10 +71,11 @@ describe('SelectComponent', () => {
     let triggerControl: HTMLElement;
     let _keyService: SelectKeyManagerService;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
-            imports: [SelectModule]
+            imports: [SelectModule],
+            providers: [ContentDensityService]
         })
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -102,6 +103,11 @@ describe('SelectComponent', () => {
     describe('basic behavior', () => {
         it('should create so that componennt instance is non null', () => {
             expect(component).toBeTruthy();
+        });
+
+        it('should handle content density when compact input is not provided', () => {
+            component.ngOnInit();
+            expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         });
 
         it('should have default state closed when component is initialized', () => {

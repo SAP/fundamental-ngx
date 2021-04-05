@@ -1,8 +1,9 @@
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ButtonComponent } from './button.component';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     selector: 'fd-test-component',
@@ -15,9 +16,10 @@ describe('ButtonComponent', () => {
 
     let component, componentInstance: ButtonComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonComponent, TestComponent]
+            declarations: [ButtonComponent, TestComponent],
+            providers: [ContentDensityService]
         });
     }));
 
@@ -45,6 +47,13 @@ describe('ButtonComponent', () => {
         expect(cssClass).toContain('fd-button--menu');
         expect(cssClass).toContain('compact');
     });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(componentInstance, 'buildComponentCssClass').and.callThrough();
+        componentInstance.ngOnInit();
+        expect(componentInstance.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
+    });
 });
 
 @Component({
@@ -67,7 +76,7 @@ describe('ButtonComponent – Disabled', () => {
 
     let component, componentInstance: ButtonComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ButtonComponent, DisabledTestComponent, AriaDisabledTestComponent]
         });
