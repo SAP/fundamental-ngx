@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 
 import { ContentDensity } from './components/form/form-control';
 
@@ -7,8 +7,19 @@ import { ContentDensity } from './components/form/form-control';
  */
 @Injectable({ providedIn: 'root' })
 export class PlatformConfig {
+
+    private static injector: Injector = null;
+
     /**
-     * Content Density of element. 'cozy' | 'compact'
+     * Content Density of element. 'cozy' | 'compact' | 'condensed'
      */
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensity;
+
+    static setInjector(injector: Injector): void {
+        PlatformConfig.injector = injector;
+    }
+
+    static getInjector(): Injector {
+        return PlatformConfig.injector;
+    }
 }

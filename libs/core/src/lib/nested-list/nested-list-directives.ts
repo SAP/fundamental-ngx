@@ -8,7 +8,8 @@ import {
     HostListener,
     Input,
     OnChanges,
-    OnInit, Optional,
+    OnInit,
+    Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { NestedItemService } from './nested-item/nested-item.service';
