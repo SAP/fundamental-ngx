@@ -1,8 +1,9 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-test-tabs',
@@ -41,10 +42,11 @@ describe('TabNavDirective', () => {
     let component: TabNavComponent;
     let fixture: ComponentFixture<TestNavWrapperComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestNavWrapperComponent],
-            imports: [TabsModule]
+            imports: [TabsModule],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -56,6 +58,13 @@ describe('TabNavDirective', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(component, 'buildComponentCssClass');
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should handle ngAfterContentInit', () => {

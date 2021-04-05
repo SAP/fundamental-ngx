@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultiInputComponent } from './multi-input.component';
 import { CommonModule } from '@angular/common';
@@ -11,12 +11,13 @@ import { InputGroupModule } from '../input-group/input-group.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ListModule } from '../list/list.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
     let fixture: ComponentFixture<MultiInputComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MultiInputComponent],
             imports: [
@@ -31,7 +32,8 @@ describe('MultiInputComponent', () => {
                 InputGroupModule
             ],
             providers: [
-                DynamicComponentService
+                DynamicComponentService,
+                ContentDensityService
             ]
         }).compileComponents();
     }));
@@ -40,14 +42,21 @@ describe('MultiInputComponent', () => {
         fixture = TestBed.createComponent(MultiInputComponent);
         component = fixture.componentInstance;
         component.dropdownValues = [
-            { value: 'value', displayedValue: 'displayedValue' },
-            { value: 'value2', displayedValue: 'displayedValue2' }
+            'displayedValue',
+            'displayedValue2'
         ];
         fixture.detectChanges();
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(component, 'buildComponentCssClass');
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(component.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should set placeholder', async () => {
@@ -195,6 +204,19 @@ describe('MultiInputComponent', () => {
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 
+    it('should focus the input and clear the search term after selection', async() => {
+        const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
+
+        await fixture.whenStable();
+
+        component.searchTerm = 'search';
+
+        component.handleSelect(true, component.dropdownValues[0]);
+
+        expect(inputFocusSpy).toHaveBeenCalled();
+        expect(component.searchTerm).toBe('');
+    });
+
     it('should handle showAll button', async () => {
         await fixture.whenStable();
         const event = new MouseEvent('click');
@@ -203,7 +225,7 @@ describe('MultiInputComponent', () => {
         spyOn(event, 'preventDefault');
         spyOn(event, 'stopPropagation');
         spyOn(<any>component, '_applySearchTermChange').and.callThrough();
-        component.showAllClicked(event);
+        component._showAllClicked(event);
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');

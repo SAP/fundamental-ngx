@@ -13,11 +13,16 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { SliderControlValue, SliderCustomValue } from '@fundamental-ngx/core';
-export { SliderControlValue, SliderCustomValue } from '@fundamental-ngx/core';
+import { SliderTickMark } from '@fundamental-ngx/core';
 
 import { BaseInput } from '../form/base.input';
-import { ContentDensity, FormField, FormFieldControl } from '../form/public_api';
+import { ContentDensity } from '../form/form-control';
+import { FormField } from '../form/form-field';
+import { FormFieldControl } from '../form/form-control';
+
+export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
+
+export type SliderControlValue = number | number[] | SliderTickMark | SliderTickMark[];
 
 /** Switch change event instance */
 export class SliderChangeEvent<T> {
@@ -96,10 +101,6 @@ export class SliderComponent extends BaseInput {
     set value(selectValue: any) {
         this.setValue(selectValue);
     }
-
-    /** content Density of element. cozy | compact */
-    @Input()
-    contentDensity: ContentDensity = 'compact';
 
     /**
      * Event fired when the state of the slider changes.

@@ -4,23 +4,23 @@
         <fd-popover
             additionalBodyClass="fd-popover-custom-list"
             *ngIf="!mobile"
-            [isOpen]="open && displayedValues && displayedValues.length"
+            [isOpen]="open"
             (isOpenChange)="openChangeHandle($event)"
             [triggers]="[]"
-            [maxWidth]="600"
+            [maxWidth]="bodyMaxWidth"
             [focusTrapped]="true"
             [disabled]="disabled"
             [fillControlMode]="fillControlMode"
             class="fd-multi-input-popover-custom"
         >
             <fd-popover-control>
-                <form (submit)="onSubmit()">
+                <form (submit)="_onSubmit()">
                     <ng-container>
                         <ng-container *ngTemplateOutlet="control"></ng-container>
                     </ng-container>
                 </form>
             </fd-popover-control>
-            <fd-popover-body [attr.aria-hidden]="!open">
+            <fd-popover-body [attr.aria-hidden]="!open" [class.fd-popover__body--hidden]="!displayedValues || !displayedValues.length">
                 <ng-container *ngTemplateOutlet="list"></ng-container>
                 <ng-content></ng-content>
             </fd-popover-body>
@@ -39,11 +39,13 @@
         [isExpanded]="open && !mobile && displayedValues && displayedValues.length"
         [isControl]="true"
         [glyph]="displayAddonButton ? glyph : ''"
-        (addOnButtonClicked)="addOnButtonClicked()">
+        [iconTitle]="title"
+        (addOnButtonClicked)="_addOnButtonClicked()">
         <fd-tokenizer [compactCollapse]="compactCollapse"
                       [compact]="compact"
                       [open]="open"
-                      (moreClickedEvent)="moreClicked()"
+                      [tokenizerFocusable]="false"
+                      (moreClickedEvent)="_moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"
         >
@@ -55,7 +57,7 @@
             >
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
-            <input type="text" (focusin)="tokenizer.inputFocused = true;" (focusout)="tokenizer.inputFocused = false;"
+            <input type="text"
                    class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                    fd-form-control
                    fd-input-group-input
@@ -65,9 +67,10 @@
                    [compact]="compact"
                    [disabled]="disabled"
                    [ngClass]="{ 'fd-input--compact': compact }"
-                   (ngModelChange)="handleSearchTermChange($event)"
-                   (keydown)="handleInputKeydown($event)"
+                   (ngModelChange)="_handleSearchTermChange($event)"
+                   (keydown)="_handleInputKeydown($event)"
                    [ngModelOptions]="{standalone: true}"
+                   [attr.id]="inputId"
             />
         </fd-tokenizer>
     </fd-input-group>
@@ -80,6 +83,7 @@
         fd-list
         class="fd-multi-input-menu-overflow"
         [selection]="true"
+        [mobileMode]="mobile"
         [compact]="compact"
         [style.maxHeight]="!mobile ? maxHeight : 'auto'"
         (focusEscapeList)="handleListFocusEscape($event)"
@@ -103,16 +107,17 @@
         <li *ngIf="showAllButton && (displayedValues.length < dropdownValues.length)"
             fd-list-item
             class="fd-multi-input-show-all"
-            (click)="showAllClicked($event)">
-            <a fd-link href>Show All ({{ dropdownValues.length }})</a>
+            (keyDown)="_showAllKeyDown($event)"
+            (click)="_showAllClicked($event)">
+            <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>
 </ng-template>
 
 <ng-template let-value="value" #itemSource>
-    <span 
-        *ngIf="!itemTemplate" 
-        fd-list-title 
+    <span
+        *ngIf="!itemTemplate"
+        fd-list-title
         [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight">
     </span>
 

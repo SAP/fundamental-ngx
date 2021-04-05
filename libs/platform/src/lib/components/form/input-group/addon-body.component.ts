@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit, ElementRef, Renderer2, Input } from '@angular/core';
 
-import { ContentDensity } from '../form-options';
+import { ContentDensity } from '@fundamental-ngx/core';
 
 import { CSS_CLASS_NAME } from './constants';
 

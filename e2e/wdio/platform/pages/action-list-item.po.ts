@@ -9,12 +9,21 @@ export class ActionListItemPo extends BaseComponentPo {
     actionLists = 'fdp-platform-action-list-item-border-less-example fdp-list';
     actionSections = 'fdp-platform-action-list-item-border-less-example ul';
 
-    exampleAreaContainersArr = '.fd-doc-component';
-    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.actionBtns);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'action-list-item'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'action-list-item'): any {
+       return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

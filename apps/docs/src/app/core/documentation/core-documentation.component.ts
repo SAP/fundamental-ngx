@@ -20,6 +20,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/action-sheet', name: 'Action Sheet' },
             { url: 'core/alert', name: 'Alert' },
             { url: 'core/avatar', name: 'Avatar' },
+            { url: 'core/avatar-group', name: 'Avatar Group' },
             { url: 'core/bar', name: 'Bar' },
             { url: 'core/breadcrumb', name: 'Breadcrumb' },
             { url: 'core/busyIndicator', name: 'Busy Indicator' },
@@ -35,6 +36,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/datetime-picker', name: 'Datetime Picker' },
             { url: 'core/dialog', name: 'Dialog' },
             { url: 'core/icon', name: 'Icon' },
+            { url: 'core/facets', name: 'Facets' },
             { url: 'core/feed-list-item', name: 'Feed List Item' },
             { url: 'core/feed-input', name: 'Feed Input' },
             { url: 'core/file-uploader', name: 'File Uploader' },
@@ -45,6 +47,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/input', name: 'Input' },
             { url: 'core/inputGroup', name: 'Input Group' },
             { url: 'core/link', name: 'Link' },
+            { url: 'core/illustrated-message', name: 'Illustrated Message' },
             {
                 name: 'List',
                 subItems: [
@@ -71,6 +74,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/select', name: 'Select' },
             { url: 'core/shellbar', name: 'Shellbar' },
             { url: 'core/sideNavigation', name: 'Side Navigation' },
+            { url: 'core/status-indicator', name: 'Status Indicator' },
             { url: 'core/step-input', name: 'Step Input' },
             { url: 'core/table', name: 'Table' },
             { url: 'core/tabs', name: 'Tabs' },
@@ -91,6 +95,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.layouts = [
+            { url: 'core/dynamic-page', name: 'Dynamic Page' },
             { url: 'core/dynamic-side-content', name: 'Dynamic Side Content' },
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
@@ -100,6 +105,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
 
         this.utilities = [
             { url: 'core/global-config', name: 'Global Configuration' },
+            { url: 'core/content-density', name: 'Content Density' },
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
             { url: 'core/scroll-spy', name: 'Scroll Spy' },
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }

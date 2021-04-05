@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -23,7 +23,7 @@ describe('PanelComponent default values', () => {
     let fixture: ComponentFixture<PanelWithDefaultValuesComponent>;
     let panelComponent: PanelComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformPanelModule],
             declarations: [PanelWithDefaultValuesComponent]
@@ -95,7 +95,7 @@ describe('Simple PanelComponent', () => {
     let fixture: ComponentFixture<SimplePanelComponent>;
     let panelContentComponent: PanelContentComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
             declarations: [SimplePanelComponent]

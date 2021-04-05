@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { SwitchModule } from '@fundamental-ngx/core';
-import { SwitchComponent } from './switch';
+
+import { SwitchComponent } from './switch/switch.component';
 
 @NgModule({
     declarations: [SwitchComponent],

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
@@ -57,7 +57,7 @@ describe('FlexibleColumnLayoutComponent', () => {
     let testComponent: TestFlexibleColumnLayoutComponent;
     let fixture: ComponentFixture<TestFlexibleColumnLayoutComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [FlexibleColumnLayoutComponent, TestFlexibleColumnLayoutComponent]
         }).compileComponents();
@@ -83,7 +83,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         whenStable(fixture);
 
         // checks the columns width
-        const startColumn: HTMLElement = fixture.debugElement.query(By.css('.fd-flexible-column-layout__column')).nativeElement;
+        const startColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0].nativeElement;
         expect(startColumn.style.width).toBe('100%');
 
         // checks the number of separators
@@ -98,14 +98,14 @@ describe('FlexibleColumnLayoutComponent', () => {
         fixture.detectChanges();
 
          // checks the columns width
-        const midColumn: HTMLElement = fixture.debugElement.query(By.css('.fd-flexible-column-layout__column')).nativeElement;
+        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
         expect(midColumn.style.width).toBe('100%');
 
          // checks the number of separators
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(0);
     });
-
+    // TODO: Unskip after fix
     it('ONE_COLUMN_END_FULL_SCREEN should render one column', async () => {
         whenStable(fixture);
 
@@ -113,7 +113,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         fixture.detectChanges();
 
          // checks the columns width
-        const endColumn: HTMLElement = fixture.debugElement.query(By.css('.fd-flexible-column-layout__column')).nativeElement;
+        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[2].nativeElement;
         expect(endColumn.style.width).toBe('100%');
 
          // checks the number of separators

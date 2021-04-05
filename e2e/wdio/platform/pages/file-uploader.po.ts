@@ -16,4 +16,16 @@ export class FileUploaderPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.fileUploaderRoot);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'file-uploader'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'file-uploader'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }

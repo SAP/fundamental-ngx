@@ -18,7 +18,6 @@ export class StackblitzDependencies {
         'core-js',
         'fundamental-styles',
         'moment',
-        'popper.js',
         'hammerjs',
         'tslib',
         'typescript'
@@ -90,7 +89,6 @@ export class StackblitzDependencies {
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,

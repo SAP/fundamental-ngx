@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TextAreaComponent } from './text-area.component';
 import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators, FormControl } from '@angular/forms';
@@ -75,7 +75,7 @@ describe('Basic Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
             declarations: [BasicTextareaTestWrapperComponent]
@@ -145,7 +145,7 @@ describe('Advanced Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
             declarations: [BasicTextareaTestWrapperComponent]

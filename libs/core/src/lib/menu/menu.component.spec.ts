@@ -1,10 +1,11 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { MenuComponent } from './menu.component';
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MenuModule } from './menu.module';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     selector: 'fd-menu-test',
@@ -26,7 +27,7 @@ import { MenuService } from './services/menu.service';
                 </a>
             </li>
         </fd-menu>
-        
+
         <button #trigger [fdMenuTrigger]="menu"></button>
     `
 })
@@ -48,10 +49,11 @@ describe('MenuComponent', () => {
     let menuItems: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [MenuModule],
-            declarations: [TestMenuComponent]
+            declarations: [TestMenuComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -66,6 +68,11 @@ describe('MenuComponent', () => {
     it('should properly initialize menu', () => {
         expect(menu).toBeTruthy();
         expect(menuService.menuMap).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        menu.ngOnInit();
+        expect(menu.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should open/close popover', fakeAsync(() => {

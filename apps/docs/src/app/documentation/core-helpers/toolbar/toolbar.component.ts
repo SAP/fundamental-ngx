@@ -1,12 +1,20 @@
-import { Component, EventEmitter, Inject, Output, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import { ShellbarMenuItem, MenuKeyboardService, MenuComponent, ThemesService } from '@fundamental-ngx/core';
+import {
+    ContentDensity,
+    ContentDensityService,
+    MenuComponent,
+    MenuKeyboardService,
+    ShellbarMenuItem,
+    ShellbarSizes,
+    ThemesService
+} from '@fundamental-ngx/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -26,6 +34,8 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     customCssUrl: SafeResourceUrl;
 
     library: string;
+
+    size: ShellbarSizes = 'm';
 
     version = {
         id: environment.version,
@@ -58,6 +68,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _routerService: Router,
         private _themesService: ThemesService,
         private _docsThemeService: DocsThemeService,
+        private _contentDensityService: ContentDensityService,
         @Inject('CURRENT_LIB') private _currentLib: Libraries,
     ) {
         this.library = _routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
@@ -96,6 +107,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         if (!(this.cssUrl && this.customCssUrl)) {
             this.selectTheme(this.themes[0].id);
         }
+
+        fromEvent(window, 'resize')
+            .pipe(startWith(1), debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => this.size = this._getShellbarSize());
     }
 
     ngOnDestroy(): void {
@@ -110,5 +125,14 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     selectVersion(version: any): void {
         window.open(version.url, '_blank');
+    }
+
+    selectDensity(density: ContentDensity): void {
+        this._contentDensityService.contentDensity.next(density);
+    }
+
+    private _getShellbarSize(): ShellbarSizes {
+        const width = window.innerWidth;
+        return width < 599 ? 's' : 'm';
     }
 }

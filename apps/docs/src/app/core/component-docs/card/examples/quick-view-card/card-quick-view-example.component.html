@@ -1,0 +1,45 @@
+<div class="resize-quick-view">
+    <fd-card cardType="quickView">
+        <fd-card-header>
+            <h2 fd-card-title>Contact Card</h2>
+        </fd-card-header>
+        <fd-card-content>
+            <fd-quick-view [id]="data.id">
+                <fd-quick-view-subheader>
+                    <fd-avatar [image]="data.subHeader.avatar" size="s"></fd-avatar>
+                    <fd-quick-view-subheader-title>
+                        {{ data.subHeader.title }}
+                    </fd-quick-view-subheader-title>
+                    <fd-quick-view-subheader-subtitle>
+                        {{ data.subHeader.subtitle }}
+                    </fd-quick-view-subheader-subtitle>
+                </fd-quick-view-subheader>
+
+                <fd-quick-view-group *ngFor="let group of data.groups">
+                    <fd-quick-view-group-title>
+                        {{ group.title }}
+                    </fd-quick-view-group-title>
+                    <fd-quick-view-group-item *ngFor="let item of group.items">
+                        <fd-quick-view-group-item-label>
+                            {{ item.label }}
+                        </fd-quick-view-group-item-label>
+                        <fd-quick-view-group-item-content>
+                            <ng-container [ngSwitch]="item.label">
+                                <a *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
+                                    [href]="'tel:' + item.value" [innerText]="item.value" fd-link></a>
+                                <a *ngSwitchCase="'Email'" [href]="'mailto:' + item.value" [innerText]="item.value"
+                                    fd-link></a>
+                                <div *ngSwitchDefault [innerText]="item.value"></div>
+                            </ng-container>
+                        </fd-quick-view-group-item-content>
+                    </fd-quick-view-group-item>
+                </fd-quick-view-group>
+            </fd-quick-view>
+        </fd-card-content>
+        <fd-card-footer>
+            <fd-toolbar size="compact" fdType="transparent" [clearBorder]="true">
+                <button fd-toolbar-item fd-button [compact]="true">Assign to Project</button>
+            </fd-toolbar>
+        </fd-card-footer>
+    </fd-card>
+</div>

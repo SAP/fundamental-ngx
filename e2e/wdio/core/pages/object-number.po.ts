@@ -17,6 +17,7 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     boldObjExamples = 'fd-object-number-bold-example ' + this.objectNumbers;
     unitObjExamples = 'fd-object-number-units-example ' + this.objectNumbers;
     decimalObjExamples = 'fd-object-number-decimal-example ' + this.objectNumbers;
+    truncationObjExample = 'fd-object-number-truncation-example' + this.objectNumbers;
 
     objectNumberText = (exampleBlock: string) => {
         return exampleBlock + ' ' + this.objText;
@@ -30,5 +31,17 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.pageHeader);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'object-number'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'object-number'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

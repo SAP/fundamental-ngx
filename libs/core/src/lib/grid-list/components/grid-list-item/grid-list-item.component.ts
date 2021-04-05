@@ -16,14 +16,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
+import { KeyUtil } from '../../../utils/functions';
 import { parseLayoutPattern } from '../../helpers';
 import { GridListSelectionActions, GridListSelectionService } from '../../services/grid-list-selection.service';
-import { GridListItemToolbarComponent } from '../grid-list-item-toolbar';
-import { GridListSelectionMode } from '../grid-list';
-import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar';
-import { KeyUtil } from '../../../utils/functions';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
+import { GridListSelectionMode } from '../grid-list/grid-list-selection-mode';
+import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
 
 let gridListItemUniqueId = 0;
 

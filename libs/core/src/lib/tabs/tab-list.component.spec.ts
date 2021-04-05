@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
@@ -35,7 +35,7 @@ describe('TabListComponent', () => {
     let testComponent: TestTabsComponent;
     let fixture: ComponentFixture<TestTabsComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestTabsComponent],
             imports: [TabsModule]
@@ -148,7 +148,7 @@ describe('TabListComponent', () => {
     let fixture: ComponentFixture<TestCollapsibleTabsComponent>;
     const groupedTabs = tabList => [tabList._visualOrder.visible, tabList._visualOrder.overflowing];
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestCollapsibleTabsComponent],
             imports: [TabsModule]

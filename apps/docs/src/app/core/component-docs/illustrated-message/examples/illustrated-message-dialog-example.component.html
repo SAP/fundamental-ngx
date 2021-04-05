@@ -1,0 +1,31 @@
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #messageDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title>Header</h1>
+            <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <figure fd-illustrated-message type="dialog" [svgConfig]="dialogSvgConfig">
+                <figcaption fd-illustrated-message-figcaption>
+                    <h3 fd-illustrated-message-title>Unable to load data</h3>
+                    <p fd-illustrated-message-text>Check your internet connection. If that's not it, try refreshing the page. If that still doesn't help, check with your administrator.</p>
+                </figcaption>
+            </figure>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                    fdType="emphasized"
+                    label="Reload">
+            </fd-button-bar>
+            <fd-button-bar
+                    fd-initial-focus
+                    label="Close" (click)="dialog.dismiss('Close button')">
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open Dialog Illustrated Message" (click)="openDialog(messageDialog)"></button>

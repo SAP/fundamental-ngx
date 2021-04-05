@@ -5,8 +5,10 @@ import { take, tap } from 'rxjs/operators';
 import { DialogService, DialogConfig, uuidv4 } from '@fundamental-ngx/core';
 
 import { TableRowSelectionChangeEvent } from '../../table/public_api';
-import { NewFolderComponent, MoveToComponent } from '../dialogs';
-import { FilesValidatorService, FilesValidatorOutput } from '../services';
+
+import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
+import {  MoveToComponent } from '../dialogs/move-to/move-to.component';
+import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
 import {
     UploadCollectionFile,
     UploadCollectionFolder,

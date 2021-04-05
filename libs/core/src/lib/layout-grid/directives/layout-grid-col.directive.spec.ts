@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CSS_CLASS_NAME } from '../constants';
 import { LayoutGridComponent } from '../layout-grid.component';
 import { LayoutGridColDirective } from './layout-grid-col.directive';
@@ -31,7 +31,7 @@ describe('LayoutGridColDirective', () => {
     let directiveElement: LayoutGridColDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestNestedContainerComponent, LayoutGridColDirective, LayoutGridComponent]
         }).compileComponents();

@@ -18,4 +18,7 @@ export class FixedCardLayoutExampleComponent {
         this._changeDetectorRef.detectChanges();
     }
 
+    cardDraggedDropped(dropEvent: any): void {
+        console.log('Items after drag abd drop: ', dropEvent.items);
+    }
 }

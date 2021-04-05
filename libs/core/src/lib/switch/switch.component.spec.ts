@@ -1,9 +1,10 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('SwitchComponent', () => {
     let component: SwitchComponent;
@@ -11,10 +12,11 @@ describe('SwitchComponent', () => {
     let changeDetectorRef: ChangeDetectorRef;
     let input;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, FormsModule],
-            declarations: [SwitchComponent]
+            declarations: [SwitchComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -35,6 +37,11 @@ describe('SwitchComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+    });
+
     it('should accept custom id', () => {
         const id = 'custom-id';
         component.id = id;
@@ -52,6 +59,8 @@ describe('SwitchComponent', () => {
 
         expect(input.getAttribute('ng-reflect-name')).toEqual(component.name);
     });
+
+
 
     it('should auto-generate id', () => {
         expect(component.id).toBeTruthy();

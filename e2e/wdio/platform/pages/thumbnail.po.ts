@@ -1,5 +1,5 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForPresent, waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
 export class ThumbnailPo extends BaseComponentPo {
 
@@ -11,9 +11,25 @@ export class ThumbnailPo extends BaseComponentPo {
     verticalGalleryImages = 'fdp-platform-thumbnail-basic-example fd-avatar';
     horizontalGalleryImages = 'fdp-platform-thumbnail-horizontal-example fd-avatar';
     verticalGalleryVideo = 'fdp-platform-thumbnail-video-media-example fd-avatar';
+    galleryDialog = '[role="dialog"]';
+    galleryDialogCloseButton = this.galleryDialog + ' button.fd-button--transparent';
+    galleryDialogLeftArrowButton = this.galleryDialog + ' button.fdp-thumbnail-button--left';
+    galleryDialogRightArrowButton = this.galleryDialog + ' button.fdp-thumbnail-button--right';
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.mainImage);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'thumbnail'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'thumbnail'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

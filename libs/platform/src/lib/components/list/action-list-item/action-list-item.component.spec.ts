@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -48,7 +48,7 @@ describe('ActionListItemComponent', () => {
     let component: ActionListItemComponentTest;
     let fixture: ComponentFixture<ActionListItemComponentTest>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, RouterTestingModule],
             declarations: [ActionListItemComponentTest, ActionListItemComponent, ListComponent]
@@ -130,7 +130,7 @@ describe('ActionListItemComponent functions', () => {
     let component: ActionListItemComponent;
     let fixture: ComponentFixture<ActionListItemComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, RouterTestingModule],
             declarations: [ActionListItemComponent, ListComponent]
@@ -173,7 +173,7 @@ describe('ActionListItemComponent Imperative', () => {
     let component: ActionListItemComponent;
     let fixture: ComponentFixture<TestComponentContent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, RouterTestingModule],
             declarations: [TestComponentContent, ActionListItemComponent]

@@ -7,6 +7,6 @@ import { SpecialDayRule } from '@fundamental-ngx/core';
 })
 export class CalendarOptionsExampleComponent {
     showWeekCount = false;
-    compact = false;
+    compact = true;
     markWeekends = false;
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FormGroupComponent } from '@fundamental-ngx/platform';
@@ -93,7 +93,7 @@ describe('Simple Form', () => {
     let fixture: ComponentFixture<SimpleFormTestComponent>;
     let host: SimpleFormTestComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
             declarations: [SimpleFormTestComponent]
@@ -229,7 +229,7 @@ describe('Nested Form Groups', () => {
     let fixture: ComponentFixture<NestedFormGroupsTestComponent>;
     let host: NestedFormGroupsTestComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
             declarations: [NestedFormGroupsTestComponent]

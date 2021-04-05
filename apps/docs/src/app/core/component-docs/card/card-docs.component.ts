@@ -17,6 +17,19 @@ import * as cardBarChartListExampleScss from '!raw-loader!./examples/bar-chart-l
 import * as cardBarTs from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.ts';
 import * as cardBarHtml from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.html';
 import * as cardBarScss from '!raw-loader!./examples/bar-chart-list-card/card-bar.component.scss';
+import * as cardObjectTs from '!raw-loader!./examples/object-card/card-object-example.component.ts';
+import * as cardObjectHtml from '!raw-loader!./examples/object-card/card-object-example.component.html';
+import * as cardCalendarTs from '!raw-loader!./examples/calendar-card/card-calendar-example.component.html';
+import * as cardCalendarHtml from '!raw-loader!./examples/calendar-card/card-calendar-example.component.html';
+
+import * as cardQuickViewTs from '!raw-loader!./examples/quick-view-card/card-quick-view-example.component.html';
+import * as cardQuickViewHtml from '!raw-loader!./examples/quick-view-card/card-quick-view-example.component.html';
+
+import * as cardListTs from '!raw-loader!./examples/list-card/card-list-example.component.html';
+import * as cardListHtml from '!raw-loader!./examples/list-card/card-list-example.component.html';
+
+import * as cardLinkListTs from '!raw-loader!./examples/link-list-card/card-link-list-example.component.html';
+import * as cardLinkListHtml from '!raw-loader!./examples/link-list-card/card-link-list-example.component.html';
 
 @Component({
     templateUrl: './card-docs.component.html'
@@ -78,7 +91,7 @@ export class CardDocsComponent {
             fileName: 'card-kpi-google-charts',
             component: 'GoogleChartService',
             service: true
-        },
+        }
     ];
 
     table: ExampleFile[] = [
@@ -127,6 +140,76 @@ export class CardDocsComponent {
             name: 'card-bar.component.scss',
             code: cardBarScss,
             fileName: 'card-bar'
+        }
+    ];
+
+    objectCard: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: cardObjectTs,
+            fileName: 'card-object-example',
+            component: 'CardObjectExampleComponent'
+        },
+        {
+            language: 'html',
+            code: cardObjectHtml,
+            fileName: 'card-object-example'
+        }
+    ];
+
+    calendarCard: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: cardCalendarTs,
+            fileName: 'card-calendar-example',
+            component: 'CardCalendarExampleComponent'
+        },
+        {
+            language: 'html',
+            code: cardCalendarHtml,
+            fileName: 'card-calendar-example'
+        }
+    ];
+
+    quickViewCard: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: cardQuickViewTs,
+            fileName: 'card-quick-view-example',
+            component: 'CardQuickViewExampleComponent'
+        },
+        {
+            language: 'html',
+            code: cardQuickViewHtml,
+            fileName: 'card-quick-view-example'
+        }
+    ];
+
+    listCard: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: cardListTs,
+            fileName: 'card-list-example',
+            component: 'CardListExampleComponent'
+        },
+        {
+            language: 'html',
+            code: cardListHtml,
+            fileName: 'card-list-example'
+        }
+    ];
+
+    linkListCard: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: cardLinkListTs,
+            fileName: 'card-link-list-example',
+            component: 'CardLinkListExampleComponent'
+        },
+        {
+            language: 'html',
+            code: cardLinkListHtml,
+            fileName: 'card-link-list-example'
         }
     ];
 }

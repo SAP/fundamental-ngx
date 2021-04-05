@@ -11,6 +11,7 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     SimpleChanges,
     TemplateRef,
@@ -21,7 +22,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { FormStates } from '../form/form-control/form-states';
-import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection } from '../utils/public_api';
+import {
+    applyCssClass,
+    ContentDensityService,
+    CssClassBuilder,
+    DynamicComponentService,
+    FocusEscapeDirection
+} from '../utils/public_api';
 import { KeyUtil } from '../utils/functions';
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
@@ -30,7 +37,7 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
 import { Subscription } from 'rxjs';
 import { TokenizerComponent } from '../token/tokenizer.component';
 import { ListComponent } from '../list/list.component';
-import { DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -75,7 +82,7 @@ export class MultiInputComponent implements
 
     /** Whether the input is in compact mode. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -97,6 +104,10 @@ export class MultiInputComponent implements
     @Input()
     searchTerm = '';
 
+    /** Id attribute for input element inside MultiInput component */
+    @Input()
+    inputId = '';
+
     /** Whether the search term should be highlighted in results. */
     @Input()
     highlight = true;
@@ -113,7 +124,7 @@ export class MultiInputComponent implements
      * An arrow function can be used to access the *this* keyword in the calling component.
      * See multi input examples for details. */
     @Input()
-    filterFn: Function = this.defaultFilter;
+    filterFn: Function = this._defaultFilter;
 
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
@@ -171,6 +182,10 @@ export class MultiInputComponent implements
     @Input()
     showAllButton = true;
 
+    /** Max width of multi input body in PX */
+    @Input()
+    bodyMaxWidth: number = null;
+
     /** Multi Input Mobile Configuration, it's applied only, when mobile is enabled */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true, approveButtonText: 'Select' };
@@ -188,6 +203,12 @@ export class MultiInputComponent implements
      */
     @Input()
     itemTemplate: TemplateRef<any>;
+
+    /**
+     * The tooltip for the multi-input icon.
+     */
+    @Input()
+    title: string;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -251,11 +272,19 @@ export class MultiInputComponent implements
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService
+        private _dynamicComponentService: DynamicComponentService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) { }
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.buildComponentCssClass();
+                this._changeDetRef.markForCheck();
+            }))
+        }
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
@@ -357,6 +386,9 @@ export class MultiInputComponent implements
         if (!this.mobile) {
             this._popoverOpenHandle(open);
         }
+        if (!this.open) {
+            this._resetSearchTerm();
+        }
         this._changeDetRef.detectChanges();
     }
 
@@ -386,12 +418,16 @@ export class MultiInputComponent implements
             this.popoverRef.refreshPosition();
         }
 
+        this._resetSearchTerm();
+
+        this.searchInputElement.nativeElement.focus();
+
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
     }
 
     /** @hidden */
-    handleInputKeydown(event: KeyboardEvent): void {
+    _handleInputKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && !this.mobile) {
             if (event.altKey) {
                 this.openChangeHandle(true);
@@ -411,7 +447,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSearchTermChange(searchTerm: string): void {
+    _handleSearchTermChange(searchTerm: string): void {
         if (this.searchTerm !== searchTerm) {
             this._applySearchTermChange(searchTerm);
             if (!this.open) {
@@ -421,14 +457,22 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    showAllClicked(event: MouseEvent): void {
+    _showAllClicked(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
         this._applySearchTermChange('');
+        this.searchInputElement.nativeElement.focus();
     }
 
     /** @hidden */
-    onSubmit(): void {
+    _showAllKeyDown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            this._showAllClicked(event);
+        }
+    }
+
+    /** @hidden */
+    _onSubmit(): void {
         if (this.allowNewTokens && this.newTokenValidateFn(this.searchTerm)) {
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
@@ -457,7 +501,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    moreClicked(): void {
+    _moreClicked(): void {
         this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
         this.displayedValues.forEach(value => {
@@ -470,7 +514,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    addOnButtonClicked(): void {
+    _addOnButtonClicked(): void {
         this.openChangeHandle(!this.open);
     }
 
@@ -483,7 +527,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    private defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
+    private _defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
@@ -545,6 +589,7 @@ export class MultiInputComponent implements
     /** @hidden */
     private _resetSearchTerm(): void {
         this.searchTerm = '';
+        this._applySearchTermChange(this.searchTerm);
         this._changeDetRef.detectChanges();
     }
 

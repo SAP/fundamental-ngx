@@ -1,6 +1,7 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -20,7 +21,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
-import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../wizard.component';
+import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -106,9 +107,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     wizardLabel: ElementRef;
 
     /** @hidden */
-    finalStep = false;
-
-    /** @hidden */
     visited = false;
 
     /** @hidden */
@@ -121,7 +119,10 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _stepId: number;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef) {}
+    _finalStep = false;
+
+    /** @hidden */
+    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -148,6 +149,12 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    setFinalStep(val: boolean): void {
+        this._finalStep = val;
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */

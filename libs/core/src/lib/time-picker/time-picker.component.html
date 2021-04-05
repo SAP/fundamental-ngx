@@ -28,6 +28,7 @@
                 [compact]="compact"
                 (focusout)="timeInputChanged(inputElement.value)"
                 [disabled]="disabled"
+                [attr.id]="inputId"
                 [placeholder]="_placeholder"
                 [attr.aria-label]="timePickerInputLabel"
                 (keyup.enter)="timeInputChanged($event.currentTarget.value)"

@@ -1,6 +1,6 @@
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CheckboxComponent } from './checkbox.component';
 import { Component, ViewChildren, QueryList } from '@angular/core';
@@ -109,7 +109,7 @@ describe('Checkbox test Component', () => {
     let host: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestCheckboxComponent, CheckboxComponent]
@@ -303,29 +303,24 @@ describe('Checkbox test Component', () => {
 
         const checkboxes = host.fdpCheckboxes.toArray();
         const checkboxLables = fixture.debugElement.queryAll(By.css('.fd-checkbox__label'));
-        const inputElem = fixture.debugElement.queryAll(By.css('input'));
-        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('true');
 
         // fisrt click to unchecked state
         checkboxLables[7].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example5').value).toBeFalsy();
         expect(checkboxes[7].checkboxCurrentValue).toEqual(false);
-        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('false');
 
         // second click to intermediate state
         checkboxLables[7].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example5').value).toBeFalsy();
         expect(checkboxes[7].checkboxCurrentValue).toEqual(null);
-        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('mixed');
 
         // third click to checked state
         checkboxLables[7].nativeElement.click();
         fixture.detectChanges();
         expect(host.customForm.get('example5').value).toBeTruthy();
         expect(checkboxes[7].checkboxCurrentValue).toEqual(true);
-        expect(inputElem[7].nativeElement.getAttribute('aria-checked')).toEqual('true');
     });
 });
 
@@ -406,7 +401,7 @@ describe('Checkbox test Component with Template driven form', () => {
     let host: TestCheckboxComponentTemplateDriven;
     let fixture: ComponentFixture<TestCheckboxComponentTemplateDriven>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestCheckboxComponentTemplateDriven, CheckboxComponent]

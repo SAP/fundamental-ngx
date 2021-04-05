@@ -14,7 +14,6 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import {
     PlatformVhdBasicExampleComponent,
     PlatformVhdTokenExampleComponent,
-    PlatformVhdFiltersExampleComponent,
     PlatformVhdMultiInputExampleComponent,
     PlatformVhdInputExampleComponent,
     PlatformVhdMobileExampleComponent,
@@ -52,7 +51,6 @@ const routes: Routes = [
 
         PlatformVhdBasicExampleComponent,
         PlatformVhdTokenExampleComponent,
-        PlatformVhdFiltersExampleComponent,
         PlatformVhdMultiInputExampleComponent,
         PlatformVhdInputExampleComponent,
         PlatformVhdMobileExampleComponent,

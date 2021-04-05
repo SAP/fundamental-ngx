@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { whenStable } from '../utils/tests/when-stable';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 const initialValue = 100;
 
@@ -35,7 +36,7 @@ class TestWrapperComponent {
 
     value: number = initialValue;
 
-    compact = false;
+    compact = undefined;
 
     unit: string = null;
 
@@ -64,10 +65,11 @@ describe('StepInputComponent', () => {
     let testComponent: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [StepInputModule]
+            imports: [StepInputModule],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -81,6 +83,11 @@ describe('StepInputComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should increment on button click', async () => {

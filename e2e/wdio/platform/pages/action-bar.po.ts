@@ -17,4 +17,16 @@ export class ActionBarPo extends BaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.pageTitle);
     }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'action-bar'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'action-bar'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
 }
