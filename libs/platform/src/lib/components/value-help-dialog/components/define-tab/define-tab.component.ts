@@ -6,20 +6,23 @@ import {
   SimpleChanges,
   OnChanges,
   Output,
-  EventEmitter,
-  OnInit
+  EventEmitter
 } from '@angular/core';
 
 import {
   VhdIncludedEntity,
   VhdExcludedEntity,
-  VhdFilter,
-  VhdDefineStrategy,
+  BaseEntity,
+  VhdDefineIncludeStrategy,
+  VhdDefineExcludeStrategy,
   VhdDefineType
 } from '../../models';
 import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
+class ExtendedBaseEntity extends BaseEntity {
+  id: number;
+}
 class ExtendedIncludedEntity extends VhdIncludedEntity {
   id: number;
 }
@@ -34,67 +37,65 @@ class ExtendedExcludedEntity extends VhdExcludedEntity {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChanges {
+export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
   @Input()
   fullBodyLabel = 'Product';
 
   @Input()
+  conditions: ExtendedBaseEntity[] = [];
+
+  /** depricated */
+  @Input()
   included: ExtendedIncludedEntity[] = [];
 
+  /** depricated */
   @Input()
   excluded: ExtendedExcludedEntity[] = [];
 
   @Input()
-  strategyLabels: {[key in keyof typeof VhdDefineStrategy]?: string} = {};
+  strategyLabels: {[key in keyof (typeof VhdDefineIncludeStrategy | typeof VhdDefineExcludeStrategy)]?: string} = {};
 
   @Output()
   includeChange: EventEmitter<ExtendedIncludedEntity[]> = new EventEmitter<ExtendedIncludedEntity[]>();
+
   @Output()
   excludeChange: EventEmitter<ExtendedExcludedEntity[]> = new EventEmitter<ExtendedExcludedEntity[]>();
 
-  /** @hidden */
-  _includeFilters: VhdFilter[] = [];
-  /** @hidden */
-  _excludeFilters: VhdFilter[] = [];
-  /** @hidden */
-  _included: ExtendedIncludedEntity[] = [];
-  /** @hidden */
-  _excluded: ExtendedExcludedEntity[] = [];
+  @Output()
+  conditionChange: EventEmitter<BaseEntity[]> = new EventEmitter<BaseEntity[]>();
+
+  _conditions: ExtendedBaseEntity[] = [];
+
   /** @hidden */
   _definePanelState = {
     included: false,
     excluded: false
-  }
+  };
+
   /** @hidden */
   _rules = {
     maxCharactersHintCount: MAX_CHARACTER_HINT_COUNT
-  }
+  };
   /** @hidden */
-  _strategyValues = VhdDefineStrategy;
+  _strategyIncludeValues = VhdDefineIncludeStrategy;
+
+  /** @hidden */
+  _strategyExcludeValues = VhdDefineExcludeStrategy;
+
   /** @hidden */
   _defineTypes = VhdDefineType;
+
   /** @hidden */
   _includeStrategy = [];
+
   /** @hidden */
   _excludeStrategy = [];
 
   /** @hidden */
-  ngOnInit(): void {
-    this._included = this.included as ExtendedIncludedEntity[] || [];
-    this._excluded = this.excluded as ExtendedExcludedEntity[] || [];
-    this._initializeFilters();
-  }
-
-  /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
-    if ('filters' in changes) {
-      this._initializeFilters();
-    }
-    if ('included' in changes) {
-      this._included = this.included as ExtendedIncludedEntity[] || [];
-    }
-    if ('excluded' in changes) {
-      this._excluded = this.excluded as ExtendedExcludedEntity[] || [];
+    if ('conditions' in changes) {
+      this._conditions = this.conditions as ExtendedIncludedEntity[] || [];
+      this._initializeConditions();
     }
     if ('strategyLabels' in changes) {
       this._refreshStrategies();
@@ -111,90 +112,53 @@ export class DefineTabComponent<T> extends VhdBaseTab implements OnInit, OnChang
   }
 
   /** @hidden */
+  _onSelectStrategy(): void {
+    this._filterChanged();
+  }
+
+  /** @hidden */
   _filterChanged(): void {
-    this.includeChange.emit(this._included);
-    this.excludeChange.emit(this._excluded);
+    this.conditionChange.emit(this._conditions);
     this._changeDetectorRef.markForCheck();
   }
-
   /** @hidden */
-  addEmptyCondition(type: VhdDefineType): void {
-    if (type === VhdDefineType.include) {
-      this._addEmptyIncluded();
-    }
-    if (type === VhdDefineType.exclude) {
-      this._addEmptyExcluded();
-    }
+  addEmptyCondition(): void {
+    const item = new ExtendedBaseEntity();
+    item.value = '';
+    this._conditions.push(item);
     this._filterChanged();
   }
 
   /** @hidden */
-  removeCondition(items: ExtendedIncludedEntity[] | ExtendedExcludedEntity[], index: number): void {
-    items.splice(index, 1);
+  removeCondition(index: number): void {
+    this._conditions.splice(index, 1);
+    this._initializeConditions();
     this._filterChanged();
     this._changeDetectorRef.markForCheck();
   }
 
   /** @hidden */
-  _checkConditionValue(item: ExtendedIncludedEntity | ExtendedExcludedEntity, valid: boolean | boolean[]): void {
+  _validateConditionValue(item: ExtendedIncludedEntity | ExtendedExcludedEntity, valid: boolean | boolean[]): void {
     item.valid = Array.isArray(valid) ? valid.every(Boolean) : valid;
-    if (item.valid) {
-      this._filterChanged();
-    }
+    this._filterChanged();
   }
 
   /** @hidden */
   private _refreshStrategies(): void {
-    this._includeStrategy = this._allStrategies();
-    this._excludeStrategy = this._includeStrategy
-      .filter(({label}) => {
-        switch (label) {
-          case VhdDefineStrategy.equalTo:
-          case VhdDefineStrategy.empty:
-            return true;
-        };
-        return false;
-      });
-  }
-
-  /** @hidden */
-  private _addEmptyIncluded(): void {
-    if (this._includeFilters.length) {
-      const key = this._included.length ? this._included[this._included.length - 1].key : this._includeFilters[0].key;
-      const strategy = this._included.length ? this._included[this._included.length - 1].strategy : null;
-      const item = new ExtendedIncludedEntity(strategy, key);
-      item.id = Date.now() + this._included.length;
-      this._included.push(item);
-      this._definePanelState.included = true;
-    }
-  }
-
-  /** @hidden */
-  private _addEmptyExcluded(): void {
-    if (this._excludeFilters.length) {
-      const key = this._excluded.length ? this._excluded[this._excluded.length - 1].key : this._excludeFilters[0].key;
-      const strategy = this._excluded.length ? this._excluded[this._excluded.length - 1].strategy : null;
-      const item = new ExtendedExcludedEntity(strategy, key);
-      item.id = Date.now() + this._excluded.length;
-      this._excluded.push(item);
-      this._definePanelState.excluded = true;
-    }
-  }
-
-  /** @hidden */
-  private _initializeFilters(): void {
-    this._includeFilters = this.filters.filter(f => f.include);
-    this._excludeFilters = this.filters.filter(f => f.exclude);
-
-    this._definePanelState.included = !!this._included.length;
-    this._definePanelState.excluded = !!this._excluded.length;
-  }
-
-  /** @hidden */
-  private _allStrategies(): { label: VhdDefineStrategy; key: string; }[] {
-    return Object.entries(VhdDefineStrategy).map(([key, label]) => ({
+    this._includeStrategy = Object.keys(VhdDefineIncludeStrategy).map(key => ({
       key: key,
-      label: label
+      type: VhdDefineType.include
     }));
-  };
+    this._excludeStrategy = Object.keys(VhdDefineExcludeStrategy).map(key => ({
+      key: key,
+      type: VhdDefineType.exclude
+    }));
+  }
+
+  /** @hidden */
+  private _initializeConditions(): void {
+    if (this._conditions.length === 0) {
+      this.addEmptyCondition();
+    }
+  }
 }
