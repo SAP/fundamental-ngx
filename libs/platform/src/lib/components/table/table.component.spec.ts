@@ -1179,6 +1179,26 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 expect(tableComponent._tableRowsVisible[0].level).toEqual(0);
             });
+
+            it('should change type for row with 0 children to "item"', () => {
+                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 2,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount - 1);
+            });
         });
     });
 })();

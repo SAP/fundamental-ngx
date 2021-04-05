@@ -849,8 +849,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 return;
             }
 
+            this._dragDropUpdateDragParentRowAttributes(dragRow);
             this._dragDropRearrangeTreeRows(dragRow, dropRow);
-            this._dragDropUpdateTreRowAttributes(dragRow, dropRow);
+            this._dragDropUpdateDropRowAttributes(dragRow, dropRow);
 
             if (!dropRow.expanded) {
                 this._toggleExpandableTableRow(dropRow);
@@ -858,6 +859,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 this._onTableRowsChanged();
             }
 
+            this._cd.markForCheck();
             this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
         }
     }
@@ -869,7 +871,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    private _dragDropUpdateTreRowAttributes(dragRow: TableRow, dropRow: TableRow): void {
+    private _dragDropUpdateDragParentRowAttributes(dragRow: TableRow): void {
+        const parentRow = dragRow.parent;
+
+        if (!parentRow) {
+            return;
+        }
+
+        const parentRowChildren = this._findRowChildren(parentRow);
+        const dragRowChildren = this._findRowChildren(dragRow);
+
+        if (parentRowChildren.length - (dragRowChildren.length + 1) === 0) {
+            parentRow.type = 'item';
+        }
+    }
+
+    /** @hidden */
+    private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow): void {
         dragRow.parent = dropRow;
         dragRow.level = dropRow.level + 1;
 
@@ -1033,10 +1051,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         const rows: TableRow<T>[] = [];
         source.forEach((item: T, index: number) => {
-            const hasChildren = item.hasOwnProperty(this.relationKey) && Array.isArray(item[this.relationKey]);
+            const hasChildren = item.hasOwnProperty(this.relationKey)
+                && Array.isArray(item[this.relationKey])
+                && item[this.relationKey].length;
             const row = new TableRow(hasChildren ? 'tree' : 'item', false, index, item);
+
             row.expanded = false;
             rows.push(row);
+
             if (hasChildren) {
                 const children = this._createTreeTableRowsByDataSourceItems(item[this.relationKey]);
                 children.forEach(c => {
