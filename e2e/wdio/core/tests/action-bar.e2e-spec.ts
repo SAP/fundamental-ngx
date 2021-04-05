@@ -171,7 +171,7 @@ describe('Action Bar Test Suite', function() {
             }
         });
 
-        it('should check Menu items active state', () => {
+        xit('should check Menu items active state', () => {
             click(actionBarContextualMenuButton);
             waitForElDisplayed(actionBarContextualMenuOptionList);
 
@@ -226,7 +226,7 @@ describe('Action Bar Test Suite', function() {
             }
         });
 
-        it('should check first Menu items active state', () => {
+        xit('should check first Menu items active state', () => {
             click(actionBarMobileViewMenuButton);
             waitForElDisplayed(actionBarMobileViewMenuButton);
 
@@ -260,7 +260,7 @@ describe('Action Bar Test Suite', function() {
             }
         });
 
-        it('should check second Menu items active state', () => {
+        xit('should check second Menu items active state', () => {
             click(actionBarMobileViewMenuButton, 1);
             waitForElDisplayed(actionBarMobileViewOptionListItem);
 

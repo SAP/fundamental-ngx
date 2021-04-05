@@ -126,9 +126,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /** @hidden */
     private _distanceFromTop = 0;
 
-    /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
-
     /**
      * subscription for when collapse value has changed
      */

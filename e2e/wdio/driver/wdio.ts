@@ -161,6 +161,10 @@ export function waitForUnclickable(selector: string, index: number = 0, waitTime
     return $$(selector)[index].waitForClickable({ timeout: waitTime, reverse: true });
 }
 
+export function waitForElDisappear(selector: string, waitTime = defaultWaitTime()): boolean {
+    return $(selector).waitForExist({ timeout: waitTime, reverse: true });
+}
+
 export function waitForPresent(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
     checkSelectorExists(selector, index);
     return $$(selector)[index].waitForExist({ timeout: waitTime });
@@ -271,6 +275,16 @@ export function isElementClickable(selector: string, index: number = 0): boolean
     return $$(selector)[index].isClickable();
 }
 
+export function isDisplayedInViewport(selector: string, index: number = 0): boolean {
+    return $$(selector)[index].isDisplayedInViewport();
+}
+
+export function waitElementToBeClickable(selector: string, index: number = 0): void {
+    browser.waitUntil((): boolean => {
+        return $$(selector)[index].isClickable();
+    }, { timeout: defaultWaitTime() });
+}
+
 export function doesItExist(selector: string): boolean {
     return $(selector).isExisting();
 }
@@ -348,6 +362,16 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
             { 'type': 'pause', 'duration': 500 }
         ]
     }]);
+}
+
+export function selectOptionByAttribute(selector: string, attribute: string, attributeValue: string, index: number = 0): void {
+    click(selector, index);
+    waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
+    $(`${selector} option[${attribute}="${attributeValue}"]`).click();
+}
+
+export function selectOptionByValueAttribute(selector: string, attributeValue: string, index: number = 0): void {
+    selectOptionByAttribute(selector, 'value', attributeValue, index);
 }
 
 export function saveElementScreenshot(selector: string, tag: string, options?: object, index: number = 0): void {

@@ -21,10 +21,6 @@ export class VhdBaseTab {
   @Input()
   mobile = false;
 
-  /** Actual filters */
-  @Input()
-  filters: VhdFilter[] = [];
-
   /** @hidden */
   get type(): VhdTab {
     return VhdTab.defineConditions
