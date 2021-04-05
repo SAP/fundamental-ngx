@@ -137,7 +137,7 @@
     "@angular/compiler-cli": "~11.2.8",
     "@angular/language-service": "~11.2.7",
     "@angularclass/hmr": "3.0.0",
-    "@babel/core": "7.12.10",
+    "@babel/core": "7.13.14",
     "@nrwl/cli": "11.1.5",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "11.5.1",
