@@ -49,7 +49,7 @@ import {
     button,
     input,
     currentYear,
-    currentMonth
+    currentMonthWithZero
 } from '../fixtures/appData/date-picker-contents';
 
 import {
@@ -150,14 +150,14 @@ describe('Date picker suite', function() {
         click(activeButtonDatePicker, firstSimpleDatePickerIndex);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
-        expect(getText(selectedDate)).toEqual(`Selected Date: ${currentYear}-0${currentMonth}-01`);
+        expect(getText(selectedDate)).toEqual(`Selected Date: ${currentYear}-${currentMonthWithZero}-01`);
     });
 
     it('verify compact date-picker', () => {
         click(activeButtonDatePicker, secondSimpleDatePickerIndex);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(secondSimpleDatePickerDate);
-        expect(getText(selectedDate, 1)).toEqual(`Selected Date: ${currentYear}-0${currentMonth}-01`);
+        expect(getText(selectedDate, 1)).toEqual(`Selected Date: ${currentYear}-${currentMonthWithZero}-01`);
 
     });
 
@@ -166,8 +166,8 @@ describe('Date picker suite', function() {
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', rangeDatePickerIndex)).toEqual(rangeDatePicker);
-        expect(getText(selectedDate, 2)).toEqual(`Selected First Date: ${currentYear}-0${currentMonth}-01`);
-        expect(getText(selectedDate, 3)).toEqual(`Selected Last Date: ${currentYear}-0${currentMonth}-15`);
+        expect(getText(selectedDate, 2)).toEqual(`Selected First Date: ${currentYear}-${currentMonthWithZero}-01`);
+        expect(getText(selectedDate, 3)).toEqual(`Selected Last Date: ${currentYear}-${currentMonthWithZero}-15`);
     });
 
     it('verify internationalization date-picker', () => {
@@ -184,7 +184,7 @@ describe('Date picker suite', function() {
         click(activeButtonDatePicker, firstFormatterIndex);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 4)).toEqual(firstFormatterDate);
-        expect(getText(selectedDate, 4)).toEqual(`Selected Date: ${currentYear}-0${currentMonth}-01`);
+        expect(getText(selectedDate, 4)).toEqual(`Selected Date: ${currentYear}-${currentMonthWithZero}-01`);
 
         click(activeButtonDatePicker, secondFormatterIndex);
         click(dayInCalendarButtonByValue('1'));
