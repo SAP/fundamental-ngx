@@ -1,4 +1,4 @@
-import { BehaviorSubject, forkJoin, merge, Observable, Subject, zip } from 'rxjs';
+import { BehaviorSubject, merge, Observable, Subject, ReplaySubject, zip } from 'rxjs';
 import { EntityCollection, EntityCollectionService as NgrxEntityCollectionService, EntityServices } from '@ngrx/data';
 import { Store } from '@ngrx/store';
 
@@ -9,7 +9,7 @@ import { EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
 import { ChainingPolicy, ChainingPolicyFieldOptions, ChainingStrategy } from '../../../domain/chaining-policy';
-import { map, skip, switchMap, takeUntil } from 'rxjs/operators';
+import { catchError, map, skip, switchMap, take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 
 /**
  * Default EntityCollectionService implementation.
@@ -99,71 +99,78 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
         const fieldsForChaining: [string, ChainingPolicyFieldOptions<T, any>][] = Object.entries<any>(
             chainingPolicy?.fields || {}
         );
-
-        if (!fieldsForChaining.length) {
-            return entitySource;
-        }
-        /**
-         *
-         * It's needed to treat two strategies:
-         * 1. 'block'
-         * 2. 'non-block
-         *
-         * --------------------
-         * NGRX EntityCollectionService returns live entity stream which is
-         * connected to the store and listen for entity changes.
-         * So once an entity changed in the store this stream
-         * will push updated "entity" instance.
-         *
-         * We do not want to trigger "chaining request" every time when primary entity
-         * is changed in the store. Since so need to hit sub entity request only once
-         * and keep stream of this.
-         *
-         *
-         */
-
         // Blocked chaining
         const blockedChainingEntries = fieldsForChaining.filter(([_, { strategy }]) => strategy === 'block');
         // Non-blocked chaining
         const nonBlockedChainingEntries = fieldsForChaining.filter(([_, { strategy }]) => strategy === 'non-block');
 
+        if (!blockedChainingEntries.length && !nonBlockedChainingEntries.length) {
+            return entitySource;
+        }
+        /**
+         *
+         * It's needed to treat two strategies:
+         * 1. block
+         * 2. non-block
+         *
+         * entitySource is a stream retrieved from ngRxEntityCollectionService
+         * this stream is not alive, that means it gets completed once entity is retrieved
+         * from remote server.
+         * Since so we can safely append new pipe logic to get sub resources
+         * without side effects
+         *
+         */
+
+        // Data that should block entity response until it's resolved
         if (blockedChainingEntries.length) {
             entitySource = entitySource.pipe(
                 switchMap((entity) => {
                     const innerRequests = this.createChainingRequests(blockedChainingEntries, entity);
                     // Load all sub resources and extend the entity with retrieved sub entities
-                    // Can't use forkJoin since innerRequests is alive stream that listens for entity store changes 
                     return zip(...innerRequests).pipe(
+                        take(1),
                         map(
                             (extensions) =>
-                                extensions.reduce((entity, extension) => ({ ...entity, ...extension }), entity) as T
+                                extensions.reduce((extended, extension) => ({ ...extended, ...extension }), entity) as T
                         )
                     );
                 })
             );
         }
 
+        // Non-block sub resources
         if (nonBlockedChainingEntries.length) {
             entitySource = entitySource.pipe(
+                // Not sure if we really need SwitchMap as it looks like
+                // entitySource can not be fired more than once.
+                // use it to keep it safe
                 switchMap((entity) => {
-                    // SubEntity subject to inject sub entity payload later once we get it loaded
-                    const subEntitiesSubject = new BehaviorSubject(entity);
+                    // Use a dedicated subject to inject extended entity model once we get sub-entity loaded
+                    const entitySubject = new BehaviorSubject(entity);
                     // Since we are in switchMap previous subject will be completed automatically
-                    // so need to listed for complete event to terminate "innerRequests"
+                    // so it's needed to listen for complete event to terminate "innerRequests"
                     const subRequestCompletedSubject = new Subject<void>();
 
                     const innerRequests = this.createChainingRequests(nonBlockedChainingEntries, entity);
 
-                    merge(...innerRequests)
+                    merge(...innerRequests.map((request) => request.pipe(take(1))))
                         .pipe(takeUntil(subRequestCompletedSubject))
-                        .subscribe((keyRequestResultMap) => {
-                            subEntitiesSubject.next({
-                                ...subEntitiesSubject.getValue(),
-                                ...keyRequestResultMap
-                            });
+                        .subscribe({
+                            next: (keyRequestResultMap) => {
+                                entitySubject.next({
+                                    ...entitySubject.getValue(),
+                                    ...keyRequestResultMap
+                                });
+                            },
+                            error: (error) => {
+                                // How should we react on it?
+                                // entitySubject.error(error)
+                            },
+                            complete: () => entitySubject.complete()
                         });
 
-                    subEntitiesSubject.subscribe({
+                    // Listen to complete event in order to unsubscribe from "merge" stream above
+                    entitySubject.subscribe({
                         complete: () => {
                             subRequestCompletedSubject.next();
                             subRequestCompletedSubject.complete();
@@ -171,12 +178,20 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
                     });
 
                     // Return subject so we are able to inject required data later
-                    return subEntitiesSubject;
+                    return entitySubject;
                 })
             );
         }
 
-        return entitySource;
+        // Proxy result subject.
+        const resultSubject$ = new ReplaySubject<T>(1);
+
+        // In order to run Request Chaining pipe it's needed to subscribe to it
+        // and push values in proxy subject.
+        // Once all sub entities are loaded this subscription will be completed automatically
+        entitySource.subscribe(resultSubject$);
+
+        return resultSubject$.asObservable();
     }
 
     /** @hidden */
@@ -191,8 +206,8 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
     }
 
     /**
-     * Make request to Sub Entity and get back alive stream of this entity 
-     * 
+     * Make request to Sub Entity and get back alive stream of this entity
+     *
      * @param chainingEntries [keyToSubEntity: string, SubEntityChainingPolicy]
      * @param entity Primary entity instance
      * @returns sub entity alive stream
@@ -208,7 +223,7 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
 
             const subEntityService = this.entityCollectionsService.getEntityCollectionService(SubEntityClass);
 
-            // One entity is needed so use getByKey()
+            // One entity requires using getByKey()
             if (!Array.isArray(chainingOptions.type)) {
                 // get primary key
                 const subEntityKey = this.getSubEntityPrimaryKey(chainingOptions, entity);
@@ -219,7 +234,7 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
                 );
             }
             // If it's array we have to request collection of entities
-            // TODO: how distinguish which one use getAll() or getWithQuery()?
+            // TODO: how distinguish which one to use: getAll() or getWithQuery()?
             // For now I use getAll() for simplicity
             if (Array.isArray(chainingOptions.type)) {
                 return subEntityService.getAll().pipe(

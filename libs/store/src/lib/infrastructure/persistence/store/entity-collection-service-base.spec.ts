@@ -1,5 +1,5 @@
 import { EntityServices, EntityCollectionService as NgrxEntityCollectionService } from '@ngrx/data';
-import { fail } from 'assert';
+import { doesNotMatch, fail } from 'assert';
 import { Observable, of, Subject } from 'rxjs';
 import { delay, take } from 'rxjs/operators';
 import { EntityMetaOptions, EntityMetaOptionsService } from '../utils/entity-options.service';
@@ -130,6 +130,24 @@ describe('EntityCollectionService', () => {
                     ownerSubject.complete();
                 });
 
+                it('should call chaining even without subscribing to result', () => {
+                    // Override Entity Meta Options adding chainingPolicy options
+                    entityMetaOptions.chainingPolicy = {
+                        fields: {
+                            owner: {
+                                strategy: 'block',
+                                type: User
+                            }
+                        }
+                    };
+
+                    service.getByKey('123');
+
+                    heroSubject.next(hero);
+
+                    expect(userCollectionService.getByKey).toHaveBeenCalledTimes(1);
+                });
+
                 describe('"non-block"', () => {
                     it("should return primary entity once it's ready and push sub entity as the next update", () => {
                         // Override Entity Meta Options adding chainingPolicy options
@@ -162,6 +180,40 @@ describe('EntityCollectionService', () => {
                             ...hero,
                             owner: owner
                         });
+
+                        // if sub data is loaded extra push event wont change the result
+                        ownerSubject.next(owner);
+                        expect(results.length).toEqual(2);
+                    });
+
+                    it('should forgive sub entity error', () => {
+                        // Override Entity Meta Options adding chainingPolicy options
+                        entityMetaOptions.chainingPolicy = {
+                            fields: {
+                                owner: {
+                                    strategy: 'non-block',
+                                    type: User
+                                }
+                            }
+                        };
+
+                        const results: Hero[] = [];
+
+                        service.getByKey('123').subscribe((result) => {
+                            results.push(result);
+                        }, fail);
+
+                        expect(results.length).toEqual(0);
+
+                        heroSubject.next(hero);
+
+                        expect(results.length).toEqual(1);
+                        expect(results[0]).toEqual(hero);
+
+                        ownerSubject.error('Get Owner Error!');
+
+                        expect(results.length).toEqual(1);
+                        expect(results[0]).toEqual(hero);
                     });
                 });
 
@@ -199,12 +251,43 @@ describe('EntityCollectionService', () => {
                             ...hero,
                             owner: owner
                         });
+
+                        // if sub data is loaded extra push event wont change the result
+                        ownerSubject.next(owner);
+                        expect(results.length).toEqual(1);
+                    });
+
+                    it('should fail when sub entity error', (done) => {
+                        // Override Entity Meta Options adding chainingPolicy options
+                        entityMetaOptions.chainingPolicy = {
+                            fields: {
+                                owner: {
+                                    strategy: 'block',
+                                    type: User
+                                }
+                            }
+                        };
+
+                        const results: Hero[] = [];
+
+                        service.getByKey('123').subscribe({
+                            next: (result) => {
+                                results.push(result);
+                            },
+                            error: () => {
+                                done();
+                            }
+                        });
+
+                        heroSubject.next(hero);
+
+                        ownerSubject.error('Get Owner Error!');
                     });
                 });
             });
 
             describe('"type" option', () => {
-                describe('for entity collection', () => {
+                describe('for collection', () => {
                     it('should make sub call to retrieve sub entity as collection', () => {
                         const hero: Hero = {
                             id: '123',
@@ -241,7 +324,7 @@ describe('EntityCollectionService', () => {
                         const results = [];
                         service.getByKey('123').subscribe((result) => {
                             results.push(result);
-                        }, fail);
+                        });
 
                         expect(results.length).toEqual(1);
 
@@ -253,7 +336,7 @@ describe('EntityCollectionService', () => {
                     });
                 });
 
-                describe('for single tone entity', () => {
+                describe('for single entity', () => {
                     let hero: Hero;
                     let owner: User;
                     let userCollectionService: jasmine.SpyObj<EntityCollectionService<User>>;
