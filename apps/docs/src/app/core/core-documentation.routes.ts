@@ -170,6 +170,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'content-density',
+                loadChildren: () =>
+                    import('./component-docs/content-density/content-density-docs.module').then(
+                        (m) => m.ContentDensityDocsModule
+                    )
+            },
+            {
                 path: 'icon',
                 loadChildren: () => import('./component-docs/icon/icon-docs.module').then((m) => m.IconDocsModule)
             },

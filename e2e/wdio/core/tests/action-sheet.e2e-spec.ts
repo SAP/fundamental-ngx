@@ -46,11 +46,9 @@ describe('Action sheet test suite', function() {
         }
     });
 
-    it('should check comfy and cozy properties', () => {
-        click(actionSheetMenuButton);
-        expect(getAttributeByName(actionSheetList, classAttribute)).toContain(compactValue);
+    it('should check compact', () => {
         click(actionSheetMenuButton, 1);
-        expect(getAttributeByName(actionSheetList, classAttribute)).not.toContain(compactValue);
+        expect(getAttributeByName(actionSheetListItemButtons, classAttribute)).toContain(compactValue);
     });
 
     it('should check alert appears after selection', () => {

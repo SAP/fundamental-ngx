@@ -7,6 +7,7 @@ const COLLAPSED_BREAKPOINT = 576;
 const SMALL_SCREEN_BREAKPOINT = 992;
 @Directive()
 export class DocumentationBaseComponent implements OnInit {
+
     @ViewChild('content') contentElRef: ElementRef;
 
     @ViewChild(SectionsToolbarComponent, { read: SectionsToolbarComponent })
