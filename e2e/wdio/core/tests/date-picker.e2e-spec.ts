@@ -49,7 +49,7 @@ import {
     button,
     input,
     currentYear,
-    currentMonthWithZero
+    currentMonthWithZero, currentMonth
 } from '../fixtures/appData/date-picker-contents';
 
 import {
@@ -295,10 +295,10 @@ describe('Date picker suite', function() {
     it('verify user is not able select multiple dates', () => {
         click(activeButtonDatePicker);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual('3/1/2021');
+        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(`${currentMonth}/1/2021`);
         click(activeButtonDatePicker);
         click(dayInCalendarButtonByValue('2'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual('3/2/2021');
+        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(`${currentMonth}/2/2021`);
     });
 
     it('verify disabled date-picker pickers', () => {
