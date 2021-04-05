@@ -4,7 +4,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class FeedListItemPo extends CoreBaseComponentPo {
     private url = '/feed-list-item';
     root = '#page-content';
-    paragraphs = 'fd-feed-list-item.fd-feed-list__body';
+    paragraphs = '.fd-feed-list__text';
     linkMore = '.fd-link.fd-feed-list__link--more';
     checkbox = 'input[id="toggle-text-righ1"]';
     links = 'a[target="_blank"]';
