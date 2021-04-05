@@ -24,9 +24,7 @@ const exampleDataSource = () => {
       return {
         key: value,
         label: `Product ${value}`,
-        advanced: index > 0,
-        include: index >= 0,
-        exclude: index >= 0
+        advanced: index > 0
       }
     })
   }
@@ -40,9 +38,8 @@ export class PlatformVhdTokenExampleComponent implements OnInit {
   filters: any;
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
   hasAdvanced = false;
-
   selectedValue = [];
-  currentValue: VhdValue = {};
+  currentValue: Partial<VhdValue> = {};
 
   ngOnInit(): void {
     const data = exampleDataSource();

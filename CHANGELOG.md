@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.76...v0.29.0-rc.77) (2021-04-04)
+
+## [0.29.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.75...v0.29.0-rc.76) (2021-04-04)
+
+## [0.29.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.74...v0.29.0-rc.75) (2021-04-02)
+
+
+### Bug Fixes
+
+* (Platform) Value help dialog - styles mismatching ([#4661](https://github.com/SAP/fundamental-ngx/issues/4661)) ([7f1434f](https://github.com/SAP/fundamental-ngx/commit/7f1434f9cf3024071b6d24b45a2f780348db1595))
+
+## [0.29.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.73...v0.29.0-rc.74) (2021-04-01)
+
+
+### Bug Fixes
+
+* (core) remove non-existent method ([e59db11](https://github.com/SAP/fundamental-ngx/commit/e59db117320c95ba1160a48ff4621e7769af19b4))
+* **checkbox:** uncheck on null and undefined ([#5007](https://github.com/SAP/fundamental-ngx/issues/5007)) ([901155a](https://github.com/SAP/fundamental-ngx/commit/901155a7a14be072afa1c709982a857223b4f7db))
+
+## [0.29.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.72...v0.29.0-rc.73) (2021-03-31)
+
+
+### Bug Fixes
+
+* (Core) combobox minor tweaks for defect hunting ([#5013](https://github.com/SAP/fundamental-ngx/issues/5013)) ([b4cbe64](https://github.com/SAP/fundamental-ngx/commit/b4cbe64a60753a768dbf4cdcbc94e0a3c5524fb2))
+
+## [0.29.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.71...v0.29.0-rc.72) (2021-03-31)
+
 ## [0.29.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.70...v0.29.0-rc.71) (2021-03-31)
 
 

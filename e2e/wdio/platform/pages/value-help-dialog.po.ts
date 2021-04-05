@@ -7,7 +7,6 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     pageHeader = 'app-vhd-header h1';
 
     // Example block selectors
-    disableCheckboxes = 'fdp-platform-vhd-filters-example input[type="checkbox"]';
     inputToken = 'fd-token .fd-token';
     menuCheckboxes = 'fd-popover-body fd-checkbox';
     menuDialogBtn = 'fd-popover button';
@@ -17,18 +16,15 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     openDialogBtn = 'button[class="fd-button fd-button--standard"]';
 
     // Dialog form selectors
-    advSearchLabels = 'fd-form-group .fd-form-label';
-    advSearchOptions = '.fd-container.fdp-value-help-dialog__advanced-filters';
+    advSearchLabels = 'fd-layout-grid .fd-form-label';
+    advSearchOptions = 'form .fdp-value-help-dialog__advanced-filters';
     advSearchToggle = '.fd-toolbar button:first-of-type';
-    currentDisplayedPage = '.fd-pagination-direction-override-display a[aria-selected="true"]';
     dialogContainer = 'div[role="dialog"]';
     dialogHeader = 'fd-dialog-header .fd-title';
     footerBtns = 'footer button';
     formTabs = 'nav a[role="tab"]';
     goBtn = 'button[type="submit"]';
     inputFields = 'form input';
-    nextPageBtn = 'a.fd-pagination__link--next';
-    previousPageBtn = 'a.fd-pagination__link--previous';
     productAddressColumn = 'table td:nth-of-type(7)';
     productCityColumn = 'table td:nth-of-type(5)';
     productCodeColumn = 'table td:nth-of-type(4)';
@@ -42,13 +38,13 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     selectedItemID = 'tr[aria-selected="true"] td:nth-of-type(2)';
     selectedItemName = 'tr[aria-selected="true"] td:nth-of-type(3)';
     selectedTokens = '.fd-toolbar fd-token';
+    showAllBtn = '.fdp-value-help-dialog__toggle-filters button';
 
     // define conditions form selectors
-    addBtn = 'button[glyph="add"]';
+    addBtn = 'button[label="Add"]';
     conditionsInputField = '.fd-popover__control.ng-star-inserted input';
     conditionSelectors = 'fd-popover .fd-select__text-content';
     dropdownOptions = 'ul fd-option';
-    sectionLabels = 'fd-panel .fd-panel__title';
     xBtn = 'button[glyph="decline"]';
 
     formInputField = (id: string) => {
