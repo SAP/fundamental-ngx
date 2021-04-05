@@ -11,6 +11,7 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     SimpleChanges,
     TemplateRef,
@@ -21,7 +22,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { FormStates } from '../form/form-control/form-states';
-import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection } from '../utils/public_api';
+import {
+    applyCssClass,
+    ContentDensityService,
+    CssClassBuilder,
+    DynamicComponentService,
+    FocusEscapeDirection
+} from '../utils/public_api';
 import { KeyUtil } from '../utils/functions';
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
@@ -75,7 +82,7 @@ export class MultiInputComponent implements
 
     /** Whether the input is in compact mode. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -265,11 +272,19 @@ export class MultiInputComponent implements
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService
+        private _dynamicComponentService: DynamicComponentService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) { }
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.buildComponentCssClass();
+                this._changeDetRef.markForCheck();
+            }))
+        }
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;

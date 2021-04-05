@@ -120,7 +120,7 @@ describe('Link component test suite', function() {
     });
 
     describe('Check visual regression', function() {
-        it('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(3);
         });

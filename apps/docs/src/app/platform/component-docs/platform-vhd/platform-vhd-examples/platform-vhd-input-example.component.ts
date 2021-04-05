@@ -31,9 +31,7 @@ const exampleDataSource = () => {
         key: value,
         name: `${value}`,
         label: `Product ${value}`,
-        advanced: index > 0,
-        include: index >= 0,
-        exclude: index >= 0
+        advanced: index > 0
       }
     })
   }
