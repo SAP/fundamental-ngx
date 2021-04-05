@@ -14,12 +14,14 @@
                                [label]="person.firstName + ' ' + person.lastName"></fd-avatar>
 
                     <fd-avatar *ngIf="person.imageUrl"
+                               [ariaLabel]="person.firstName + ' ' + person.lastName"
                                [circle]="true"
                                [border]="true"
                                [size]="size"
                                [image]="person.imageUrl"></fd-avatar>
 
                     <fd-avatar *ngIf="person.glyph"
+                               [ariaLabel]="person.firstName + ' ' + person.lastName"
                                [circle]="true"
                                [border]="true"
                                [size]="size"
@@ -37,11 +39,13 @@
                                    [label]="person.firstName + ' ' + person.lastName"></fd-avatar>
 
                         <fd-avatar *ngIf="person.imageUrl"
+                                   [ariaLabel]="person.firstName + ' ' + person.lastName"
                                    [circle]="true"
                                    size="s"
                                    [image]="person.imageUrl"></fd-avatar>
 
                         <fd-avatar *ngIf="person.glyph"
+                                   [ariaLabel]="person.firstName + ' ' + person.lastName"
                                    [circle]="true"
                                    size="s"
                                    [glyph]="person.glyph"></fd-avatar>
@@ -133,6 +137,7 @@
                                            tabindex="0"></fd-avatar>
 
                                 <fd-avatar *ngIf="person.imageUrl"
+                                           [ariaLabel]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
                                            [image]="person.imageUrl"
@@ -142,6 +147,7 @@
                                            tabindex="0"></fd-avatar>
 
                                 <fd-avatar *ngIf="person.glyph"
+                                           [ariaLabel]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
                                            [glyph]="person.glyph"
@@ -166,11 +172,13 @@
                                            [label]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
 
                                 <fd-avatar *ngIf="personDetails.imageUrl"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName"
                                            [circle]="true"
                                            size="s"
                                            [image]="personDetails.imageUrl"></fd-avatar>
 
                                 <fd-avatar *ngIf="personDetails.glyph"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName"
                                            [circle]="true"
                                            size="s"
                                            [glyph]="personDetails.glyph"></fd-avatar>

@@ -18,12 +18,17 @@ export class AvatarGroupGroupTypeExampleComponent {
     people = this.avatarGroupDataExampleService.generate();
     personDetails: any = null;
     overflowPopoverStage: 'main' | 'detail' = 'main';
+    isOpen = false;  
 
     get isDetailStage(): boolean {
         return this.overflowPopoverStage === 'detail';
     }
 
     constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}
+
+    toggleOverflow(): void {
+        this.isOpen = !this.isOpen;
+    }
 
     isOpenChanged(isOpened: boolean): void {
         if (isOpened) {
