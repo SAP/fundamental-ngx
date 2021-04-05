@@ -49,7 +49,9 @@
 }
 
 .fd-multi-input-show-all {
-    float: right;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
     background-color: transparent;
     .fd-link:active {
         color: inherit;

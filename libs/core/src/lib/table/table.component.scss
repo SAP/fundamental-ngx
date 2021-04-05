@@ -1,20 +1,5 @@
 @import '~fundamental-styles/dist/table';
 
-@mixin fd-active {
-	&:active,
-	&.is-active {
-		&.fd-table__row--focusable,
-		&.fd-table__cell--focusable {
-			&:focus,
-			&.is-focus {
-				outline-color: #fff;
-				outline-color: var(--sapContent_ContrastFocusColor);
-			}
-		}
-		@content;
-	}
-}
-
 .fd-table__popover--custom {
     width: 100%;
 }
@@ -23,30 +8,10 @@
     display: none;
 }
 
-// Remove after addressing https://github.com/SAP/fundamental-styles/issues/2085
-.fd-table__row--activable {
-	@include fd-active() {
-		.fd-table__cell {
-			text-shadow: none;
-		}
-	}
-}
-
-.fd-table__cell--activable {
-	@include fd-active() {
-		text-shadow: none;
-	}
-}
-
 .fd-table__cell--checkbox {
 	.fd-checkbox__label {
 		margin: 0;
 	}
-}
-
-// Remove after merging and migrate https://github.com/SAP/fundamental-styles/pull/2192
-.fd-table__cell--no-data {
-	text-align: center;
 }
 
 .fd-table__text {
@@ -56,22 +21,5 @@
 
 	&--no-wrap {
 		white-space: nowrap;
-	}
-}
-
-
-// Remove after migrating https://github.com/SAP/fundamental-styles/pull/2192 to NGX
-.fd-table--responsive {
-	.fd-table__body,
-	.fd-table__header {
-		border: none;
-	}
-
-	.fd-table__row {
-		&:last-child {
-			.fd-table__cell {
-				border-bottom: none;
-			}
-		}
 	}
 }

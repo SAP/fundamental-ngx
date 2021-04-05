@@ -86,6 +86,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** Whether the approval flow is editable */
     @Input() isEditAvailable = false;
 
+    /** Text label for watchers list */
+    @Input() watchersLabel = 'Watchers';
+
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
 
@@ -441,8 +444,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
             if (nodeType === 'Parallel') {
                 const parent = this._metaMap[_source.id].parent;
-                parent.targets.push(node.id);
-                this._updateNode(parent);
+                if (parent) {
+                    parent.targets.push(node.id);
+                    this._updateNode(parent);
+                }
             }
             this._showMessage(node.approvalTeamId ? 'teamAddSuccess' : 'approverAddSuccess');
             this._approvalProcess.nodes.push(node);
@@ -550,12 +555,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
-        const rootNode = findRootNode(nodes);
-        if (!rootNode) {
+        const rootNodes = findRootNodes(nodes);
+        if (!rootNodes.length) {
             return graph;
         }
 
-        graph[0] = { nodes: [rootNode] };
+        graph[0] = { nodes: rootNodes };
         let index = 1;
         let foundLastStep = false;
         const metaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
@@ -569,13 +574,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 isLast: !n.targets.length,
                 parallelStart: n.targets.length > 1,
                 parallelEnd: parents.length > 1,
-                isParallel: parents.length === 1 && parents[0].targets.length > 1
+                isParallel:
+                    (parents.length === 1 && parents[0].targets.length > 1) ||
+                    rootNodes.length > 1 && rootNodes.includes(n)
             };
         });
 
         nodes.forEach(n => {
             const meta = metaMap[n.id];
-            if (meta.parallelStart) {
+            if (meta.parallelStart || (rootNodes.length > 1 && rootNodes.includes(n))) {
                 const nextParallelNodes = this._findNextParallelNodes(n);
                 nextParallelNodes.forEach(pn => metaMap[pn.id].isParallel = true);
             }
@@ -678,11 +685,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     (!meta.isParallel && meta.parallelEnd && !allParentsApproved)
                 );
             meta.canAddParallel =
-                isNotApproved && !meta.parallelEnd &&
-                (!meta.isLast && !meta.isRoot) &&
-                ((meta.isParallel && parentMeta?.parallelStart) || !meta.isParallel);
+                isNotApproved &&
+                !meta.isLast && !meta.parallelEnd && !meta.parallelStart &&
+                (!meta.isParallel || (meta.isParallel && (parentMeta?.parallelStart || !parent && meta.isRoot)));
             meta.isLastInParallel = meta.isParallel && graph[meta.columnIndex + 1]?.nodes.length === 1;
-            meta.canDelete = !(meta.isRoot && meta.parallelStart) && !(meta.isLast && meta.parallelEnd);
+            meta.canDelete = !(meta.isLast && meta.parallelEnd);
         });
         this._metaMap = metaMap;
     }
@@ -893,8 +900,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 }
 
-function findRootNode(nodes: ApprovalNode[]): ApprovalNode {
-    return nodes.find(node => nodes.every(n => !isNodeTargetsIncludeId(n, node.id)));
+function findRootNodes(nodes: ApprovalNode[]): ApprovalNode[] {
+    return nodes.filter(node => nodes.every(n => !isNodeTargetsIncludeId(n, node.id)));
 }
 
 function findParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {

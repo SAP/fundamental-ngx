@@ -5,7 +5,8 @@ import {
     Directive,
     HostBinding,
     Input,
-    OnDestroy, OnInit,
+    OnDestroy,
+    OnInit,
     QueryList
 } from '@angular/core';
 import { TableCellDirective } from './table-cell.directive';

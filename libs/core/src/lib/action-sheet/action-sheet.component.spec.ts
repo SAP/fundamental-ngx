@@ -31,5 +31,4 @@ describe('Action Sheet Parent Component', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-    
 });

@@ -8,6 +8,7 @@ export * from './directives/list-icon.directive';
 export * from './directives/list-link.directive';
 export * from './directives/list-secondary.directive';
 export * from './directives/list-title.directive';
+export * from './directives/list-title-text.directive';
 export * from './directives/byline/list-byline.directive';
 export * from './directives/byline/list-byline-left.directive';
 export * from './directives/byline/list-byline-right.directive';

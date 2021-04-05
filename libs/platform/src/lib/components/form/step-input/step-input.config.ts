@@ -21,5 +21,5 @@ export class StepInputConfig {
     /**
      * Content Density of element. 'cozy' | 'compact'
      */
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensity;
 }

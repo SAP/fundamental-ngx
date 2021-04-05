@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 
-import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource, VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineStrategy } from '@fundamental-ngx/platform';
+import {
+  VhdDataProvider,
+  VhdValue,
+  VhdValueChangeEvent,
+  ValueHelpDialogDataSource,
+  VhdIncludedEntity,
+  VhdExcludedEntity,
+  VhdDefineIncludeStrategy,
+  VhdDefineExcludeStrategy
+} from '@fundamental-ngx/platform';
 
 interface ExampleTestModel {
   id: number;
@@ -31,9 +40,7 @@ const exampleDataSource = () => {
         key: value,
         name: `${value}`,
         label: `Product ${value}`,
-        advanced: index > 0,
-        include: true,
-        exclude: true
+        advanced: index > 0
       }
     })
   }
@@ -49,39 +56,41 @@ export class PlatformVhdBasicExampleComponent {
   filters = data.filters;
   dataSource = new ValueHelpDialogDataSource(new VhdDataProvider(data.dataSource));
 
-  actualValue: VhdValue<ExampleTestModel[]> = {};
+  actualValue: Partial<VhdValue<ExampleTestModel[]>> = {};
 
   actualItems = [];
-  formatTokenFn = ((value: VhdValue<ExampleTestModel[]>) => {
+  formatTokenFn = ((value: Partial<VhdValue<ExampleTestModel[]>>) => {
     this.actualItems = [
       ...(value.selected || []).map(item => item.name),
-      ...(value.included || []).map(item => this.conditionDisplayFn(item)),
-      ...(value.excluded || []).map(item => this.conditionDisplayFn(item))
+      ...(value.conditions || []).map(item => this.conditionDisplayFn(item))
     ];
   }).bind(this);
   conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity) => {
     let value = (() => {
       switch (item.strategy) {
-        case VhdDefineStrategy.empty:
+        case VhdDefineIncludeStrategy.empty:
+        case VhdDefineExcludeStrategy.not_empty:
           return null;
-        case VhdDefineStrategy.between:
+        case VhdDefineIncludeStrategy.between:
           return `${item.value}...${item.valueTo}`;
-        case VhdDefineStrategy.contains:
+        case VhdDefineIncludeStrategy.contains:
           return `*${item.value}*`;
-        case VhdDefineStrategy.equalTo:
+        case VhdDefineIncludeStrategy.equalTo:
           return `=${item.value}`;
-        case VhdDefineStrategy.startsWith:
+        case VhdDefineIncludeStrategy.startsWith:
           return `${item.value}*`;
-        case VhdDefineStrategy.endsWith:
+        case VhdDefineIncludeStrategy.endsWith:
           return `*${item.value}`;
-        case VhdDefineStrategy.greaterThan:
+        case VhdDefineIncludeStrategy.greaterThan:
           return `>${item.value}`;
-        case VhdDefineStrategy.greaterThanEqual:
+        case VhdDefineIncludeStrategy.greaterThanEqual:
           return `>=${item.value}`;
-        case VhdDefineStrategy.lessThan:
+        case VhdDefineIncludeStrategy.lessThan:
           return `<${item.value}`;
-        case VhdDefineStrategy.lessThanEqual:
+        case VhdDefineIncludeStrategy.lessThanEqual:
           return `<=${item.value}`;
+        case VhdDefineExcludeStrategy.not_equalTo:
+          return `!(=${item.value})`;
       }
     })();
     if (value && item.type === 'exclude') {
@@ -89,7 +98,7 @@ export class PlatformVhdBasicExampleComponent {
     }
 
     return value;
-  };
+  }
 
   valueChange($event: VhdValueChangeEvent<ExampleTestModel[]>): void {
     this.actualValue = {...$event};
