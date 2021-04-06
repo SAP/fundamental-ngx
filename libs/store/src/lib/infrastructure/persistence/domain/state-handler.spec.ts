@@ -121,8 +121,11 @@ describe('should create proxy', () => {
 
         expect(entityInstance.lineItems[3].dto.title).toEqual('Line4');
 
-        entityInstance.lineItems.push(new LineItem({ title: 'Line1' }));
+        // push the same VO
+        expect(() => entityInstance.lineItems[4] = new LineItem({ title: 'Line1' })).toThrow();
+    });
 
-        expect(entityInstance.lineItems[4]).toEqual(undefined);
+    it('can treat dto', () => {
+        expect(entityInstance._dto).toEqual(fromState);
     });
 })
