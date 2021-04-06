@@ -1,5 +1,5 @@
 export const testText = 'test';
-export const buttonTag = 'button';
+export const button = 'button';
 export const fdTypeOptions = [
     'standard',
     'positive',

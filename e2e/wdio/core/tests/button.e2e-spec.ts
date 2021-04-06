@@ -11,14 +11,14 @@ import {
     mouseHoverElement, saveElementScreenshot, addIsActiveClass, getImageTagBrowserPlatform
 } from '../../driver/wdio';
 import {
-    testText, fdTypeOptions, iconOptions, buttonTag
+    testText, fdTypeOptions, iconOptions, button
 } from '../fixtures/appData/button-contents';
 import {
-    stateButtonsDisable,
-    buttonsIcon,
-    buttonsMenu, buttonPlayground,
-    buttonsSize,
-    buttonsType, buttonState
+    stateButtonsDisableTag,
+    buttonsIconTag,
+    buttonsMenuTag, buttonPlaygroundTag,
+    buttonsSizeTag,
+    buttonsTypeTag, buttonStateTag
 } from '../fixtures/testData/button-tags';
 
 describe('Button test suite:', function() {
@@ -99,9 +99,9 @@ describe('Button test suite:', function() {
                 sendKeys(['Enter']);
                 click(playgroundButton);
                 expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-type')).toEqual(fdTypeOptions[i]);
-                saveElementScreenshot(playgroundButton, buttonPlayground + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder());
-                expect(checkElementScreenshot(playgroundButton, buttonPlayground + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder()))
-                    .toBeLessThan(2, `Playground button mismatch`);
+                saveElementScreenshot(playgroundButton, buttonPlaygroundTag + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder());
+                expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder()))
+                    .toBeLessThan(5, `Playground button mismatch`);
             }
         });
 
@@ -114,11 +114,11 @@ describe('Button test suite:', function() {
                 sendKeys(['Enter']);
                 click(playgroundButton);
                 expect(getAttributeByName(playgroundButton, 'ng-reflect-glyph')).toEqual(iconOptions[i]);
-                saveElementScreenshot(playgroundButton, buttonPlayground + `${iconOptions[i]}`,
+                saveElementScreenshot(playgroundButton, buttonPlaygroundTag + `${iconOptions[i]}`,
                     buttonPage.getScreenshotFolder());
-                expect(checkElementScreenshot(playgroundButton, buttonPlayground + `${iconOptions[i]}`,
+                expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + `${iconOptions[i]}`,
                     buttonPage.getScreenshotFolder()))
-                    .toBeLessThan(2, `Playground button mismatch`);
+                    .toBeLessThan(5, `Playground button mismatch`);
             }
         });
 
@@ -126,28 +126,28 @@ describe('Button test suite:', function() {
             scrollIntoView(checkboxMenu);
             click(checkboxMenu);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('true');
-            saveElementScreenshot(playgroundButton, buttonPlayground + 'menu', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlayground + 'menu', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(2, `Playground button mismatch`);
+            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'menu', buttonPage.getScreenshotFolder());
+            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'menu', buttonPage.getScreenshotFolder()))
+                .toBeLessThan(5, `Playground button mismatch`);
             click(checkboxMenu);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('false');
-            saveElementScreenshot(playgroundButton, buttonPlayground + 'not-menu', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlayground + 'not-menu', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(2, `Playground button mismatch`);
+            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-menu', buttonPage.getScreenshotFolder());
+            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-menu', buttonPage.getScreenshotFolder()))
+                .toBeLessThan(5, `Playground button mismatch`);
         });
 
         it('verify compact checkbox visual regression', () => {
             scrollIntoView(checkboxCompact);
             click(checkboxCompact);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('true');
-            saveElementScreenshot(playgroundButton, buttonPlayground + 'compact', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlayground + 'compact', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(2, `Playground button mismatch`);
+            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'compact', buttonPage.getScreenshotFolder());
+            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'compact', buttonPage.getScreenshotFolder()))
+                .toBeLessThan(5, `Playground button mismatch`);
             click(checkboxCompact);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('false');
-            saveElementScreenshot(playgroundButton, buttonPlayground + 'not-compact', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlayground + 'not-compact', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(2, `Playground button mismatch`);
+            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-compact', buttonPage.getScreenshotFolder());
+            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-compact', buttonPage.getScreenshotFolder()))
+                .toBeLessThan(5, `Playground button mismatch`);
         });
     });
 
@@ -155,27 +155,27 @@ describe('Button test suite:', function() {
 
         it('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();
-            expect(buttonPage.compareWithBaseline()).toBeLessThan(3);
+            expect(buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         it('should check buttons type states', () => {
             const typeButtonsLength = getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
                 scrollIntoView(typeButtons, i);
-                checkElementStates(typeButtons, buttonsType + i + '-', buttonTag, i);
+                checkElementStates(typeButtons, buttonsTypeTag + i + '-', button, i);
             }
         });
 
-        it('should check state buttons states', () => {
+        it('should check state button states', () => {
             scrollIntoView(stateButton);
-            checkElementStates(stateButton, buttonState, buttonTag);
+            checkElementStates(stateButton, buttonStateTag, button);
         });
 
         it('verify disable state buttons hover state', () => {
             const disableStateButtonsLength = getElementArrayLength(disableStateButtons);
             for (let i = 0; i < disableStateButtonsLength; i++) {
                 scrollIntoView(disableStateButtons, i);
-                checkDisableButtonHoverState(disableStateButtons, stateButtonsDisable + i + '-', buttonTag, i);
+                checkElementHoverState(disableStateButtons, stateButtonsDisableTag + i + '-hover-state-', button, i);
             }
         });
 
@@ -183,7 +183,7 @@ describe('Button test suite:', function() {
             const iconButtonsLength = getElementArrayLength(iconButtons);
             for (let i = 0; i < iconButtonsLength; i++) {
                 scrollIntoView(iconButtons, i);
-                checkElementStates(iconButtons, buttonsIcon + i + '-', buttonTag, i);
+                checkElementStates(iconButtons, buttonsIconTag + i + '-', button, i);
             }
         });
 
@@ -191,7 +191,7 @@ describe('Button test suite:', function() {
             const sizeButtonsLength = getElementArrayLength(sizeButtons);
             for (let i = 0; i < sizeButtonsLength; i++) {
                 scrollIntoView(sizeButtons, i);
-                checkElementStates(sizeButtons, buttonsSize + i + '-', buttonTag, i);
+                checkElementStates(sizeButtons, buttonsSizeTag + i + '-', button, i);
             }
         });
 
@@ -199,39 +199,30 @@ describe('Button test suite:', function() {
             const menuButtonsLength = getElementArrayLength(menuButtons);
             for (let i = 0; i < menuButtonsLength; i++) {
                 scrollIntoView(menuButtons, i);
-                checkElementStates(menuButtons, buttonsMenu + i + '-', buttonTag, i);
+                checkElementStates(menuButtons, buttonsMenuTag + i + '-', button, i);
             }
         });
     });
-
-    function checkDisableButtonHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform() + 'hover-state-',
-            buttonPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform() + 'hover-state-',
-            buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
-    }
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
+            .toBeLessThan(5, `${elementName} element hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element focus state mismatch`);
+            .toBeLessThan(5, `${elementName} element focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} element item ${index} active state mismatch`);
     }
 
     function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
