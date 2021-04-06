@@ -1,5 +1,4 @@
 const prefix = 'form-message-';
-export const inputField = prefix + 'input-field-';
-export const button = prefix + 'button-';
-export const message = prefix + 'message-';
-
+export const inputFieldTag = prefix + 'input-field-';
+export const buttonTag = prefix + 'button-';
+export const messageTag = prefix + 'message-';

@@ -13,19 +13,19 @@ import {
     testText,
     testMultilineText,
     input,
-    btn,
-    msg,
-    text,
-    clickEventMessage1,
-    clickEventMessage2,
-    clickEventMessage3,
-    clickEventMessage4
+    button,
+    message,
+    placeholderText,
+    hoverEventMessageInput,
+    hoverEventMessageInputGroup,
+    clickEventMessage,
+    eventMessageTextArea
 } from '../fixtures/appData/form-message-contents';
 
 import {
-    inputField,
-    button,
-    message,
+    inputFieldTag,
+    buttonTag,
+    messageTag
 } from '../fixtures/testData/form-message-tags';
 
 describe('Form Message test suite:', function() {
@@ -42,50 +42,54 @@ describe('Form Message test suite:', function() {
         waitForPresent(messageWithInput);
     }, 1);
 
-    fit('should check message with input field', () => {
+    it('should check message with input has placeholder', () => {
         scrollIntoView(messageWithInput);
-        expect(getAttributeByName(messageWithInput, 'placeholder')).toBe(text);
-        setValue(messageWithInput, testText);
-        expect(getValue(messageWithInput)).toBe(testText);
-        expect(getText(messageInformation)).toBe(clickEventMessage1);
+        expect(getAttributeByName(messageWithInput, 'placeholder')).toBe(placeholderText);
     });
 
-    fit('should check message with input group field', () => {
+    it('should check message with input field', () => {
+        scrollIntoView(messageWithInput);
+        setValue(messageWithInput, testText);
+        expect(getValue(messageWithInput)).toBe(testText);
+        expect(getText(messageInformation)).toBe(hoverEventMessageInput);
+    });
+
+    it('should check message with input group field', () => {
         scrollIntoView(messageWithInputGroup, 1);
         setValue(messageWithInputGroup, testText, 1);
         expect(getValue(messageWithInputGroup, 1)).toBe(testText);
         click(buttons, 1);
-        expect(getText(messageInformation)).toBe(clickEventMessage2);
+        expect(getText(messageInformation)).toBe(clickEventMessage);
     });
 
-    fit('should check message with input group field - hover', () => {
+    it('should check message with input group field - hover', () => {
         scrollIntoView(messageWithInputGroup, 2);
         mouseHoverElement(messageWithInputGroup, 2);
-        expect(getText(messageInformation)).toBe(clickEventMessage3);
+        expect(getText(messageInformation)).toBe(hoverEventMessageInputGroup);
         setValue(messageWithInputGroup, testText, 2);
         expect(getValue(messageWithInputGroup, 2)).toBe(testText);
         expect(isElementClickable(buttons, 2)).toBe(true);
     });
 
-    fit('should check message with textarea', () => {
+    it('should check message with textarea', () => {
         scrollIntoView(messageWithTextArea);
         setValue(messageWithTextArea, testMultilineText);
         expect(getValue(messageWithTextArea)).toBe(testMultilineText);
-        expect(getText(messageInformation)).toBe(clickEventMessage4);
+        expect(getText(messageInformation)).toBe(eventMessageTextArea);
     });
 
     describe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
             formMessagePage.saveExampleBaselineScreenshot();
-            expect(formMessagePage.compareWithBaseline()).toBeLessThan(1);
+            expect(formMessagePage.compareWithBaseline()).toBeLessThan(2);
         });
 
         it('verify input fields states', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 0; i < inputLength; i++) {
                 scrollIntoView(inputFields, i);
-                checkElementStates(inputFields, inputField + i + '-', input, i);
+                checkElementStates(inputFields, inputFieldTag + i + '-', input, i);
             }
         });
 
@@ -93,35 +97,28 @@ describe('Form Message test suite:', function() {
             const buttonsLength = getElementArrayLength(buttons);
             for (let i = 1; i < buttonsLength; i++) {
                 scrollIntoView(buttons, i);
-                checkElementStates(buttons, button + i + '-', btn, i);
+                checkElementStates(buttons, buttonTag + i + '-', button, i);
             }
         });
 
         it('verify message information 1st input field hover state', () => {
             scrollIntoView(messageWithInput);
             click(messageWithInput);
-            checkMessageHoverState(messageInformation, message + '-0', msg);
+            checkElementHoverState(messageInformation, messageTag + '0-hover-state-', message);
         });
 
         it('verify message information 2nd input field hover state', () => {
             scrollIntoView(buttons, 1);
             click(buttons, 1);
-            checkMessageHoverState(messageInformation, message + '-1', msg);
+            checkElementHoverState(messageInformation, messageTag + '1-hover-state-', message);
         });
 
         it('verify message information textarea field hover state', () => {
             scrollIntoView(messageWithTextArea);
             click(messageWithTextArea);
-            checkMessageHoverState(messageInformation, message + '-2', msg);
+            checkElementHoverState(messageInformation, messageTag + '2-hover-state-', message);
         });
     });
-
-    function checkMessageHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + 'hover-state-' + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
-    }
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
         mouseHoverElement(selector, index);
