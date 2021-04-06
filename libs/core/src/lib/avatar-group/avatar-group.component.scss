@@ -767,3 +767,14 @@
     color: #fff;
     color: var(--fdAvatar_Accent_Color,var(--sapContent_ContrastTextColor,#fff))
 }
+
+// Keep it here after removing styles
+.fd-avatar-group--group-type {
+    fd-popover-control:focus,
+    .fd-popover__control:focus {
+        outline-offset: 0.0625rem;
+        outline-width: 0.0625rem;
+        outline-color: #000;
+        outline-style: dotted;
+    }
+}
