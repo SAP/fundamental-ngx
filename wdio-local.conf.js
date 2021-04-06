@@ -95,9 +95,9 @@ exports.config = {
             platformName: 'macOS 10.15',
             browserVersion: 'latest',
             acceptInsecureCerts: true,
-            // 'goog:chromeOptions': {
-            //     args: ['--window-size=1920,1417', '--headless']
-            // },
+            'goog:chromeOptions': {
+                args: ['--window-size=1920,1417', '--headless']
+            },
         },
         // {
         //     browserName: 'firefox',
