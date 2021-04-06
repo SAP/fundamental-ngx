@@ -16,12 +16,12 @@ import {
     itemTag,
     linkTag,
     radioButtonTag,
-    toolbarTag,
+    toolbarTag
 } from '../fixtures/testData/grid-list-tags';
 
 import {
     text, productTitle, textLocked, warningColor, successColor, neutralColor, errorColor, color, backGroundColor,
-    fontWeight, bold, classAttribute, isSelected, button, item, link, toolbar, radioBtn, checkbox
+    fontWeight, bold, classAttribute, isSelected, button, item, link, toolbar, radioButton, checkbox
 } from '../fixtures/appData/grid-list-content';
 
 describe('Grid-list test suite', function() {
@@ -141,7 +141,7 @@ describe('Grid-list test suite', function() {
 
         it('should check examples visual regression', () => {
             gridListPage.saveExampleBaselineScreenshot();
-            expect(gridListPage.compareWithBaseline()).toBeLessThan(1);
+            expect(gridListPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         it('verify buttons states', () => {
@@ -177,7 +177,7 @@ describe('Grid-list test suite', function() {
             const radioButtonLength = getElementArrayLength(gridListRadioButton);
             for (let i = 0; i < radioButtonLength; i++) {
                 scrollIntoView(gridListRadioButton, i);
-                checkElementStates(gridListRadioButton, radioButtonTag + i + '-', radioBtn, i);
+                checkElementStates(gridListRadioButton, radioButtonTag + i + '-', radioButton, i);
             }
         });
 

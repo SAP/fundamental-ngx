@@ -15,5 +15,5 @@ export const button = 'button';
 export const item = 'item';
 export const link = 'link';
 export const toolbar = 'toolbar';
-export const radioBtn = 'radio-button';
+export const radioButton = 'radio-button';
 export const checkbox = 'checkbox';
