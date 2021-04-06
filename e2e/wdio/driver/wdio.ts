@@ -388,14 +388,13 @@ function checkSelectorExists (selector: string, index: number = 0): void {
     }
 }
 
-export function applyState(state: 'hover' | 'active' | 'focus', selector: string, index: number = 0): any {
-    if (state === 'hover') {
-        return mouseHoverElement(selector, index);
-    }
-    if (state === 'active') {
-        return addIsActiveClass(selector, index);
-    }
-    if (state === 'focus') {
-        return focusElement(selector, index);
+export function applyState(state: 'hover' | 'active' | 'focus', selector: string, index: number = 0): void {
+    switch (state) {
+        case 'hover':
+            return mouseHoverElement(selector, index);
+        case 'active':
+            return addIsActiveClass(selector, index);
+        case 'focus':
+            return focusElement(selector, index);
     }
 }

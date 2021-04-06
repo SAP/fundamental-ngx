@@ -24,7 +24,7 @@ export class StandardListPo extends CoreBaseComponentPo {
     dragAndDropList = 'fd-list-dnd-example ';
     infiniteList = 'fd-list-infinite-scroll-example ';
 
-    // main selectors
+    // common selectors
     listItems = '.fd-list__item';
     button = 'button';
     busyIndicator = '.fd-busy-indicator';

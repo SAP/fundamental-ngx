@@ -54,6 +54,7 @@ describe('Standard List test suite', function() {
         checkboxFocusElement,
         radioBtnFocusElement
     } = standardListPage;
+    const statesToCheckArr = ['hover', 'focus', 'active'];
 
     beforeAll(() => {
         standardListPage.open();
@@ -61,33 +62,29 @@ describe('Standard List test suite', function() {
 
     describe('simple list examples', function() {
         it('check list item states', () => {
-            checkElementStates(simpleList + listItems, 'hover', 'simple list item');
-            checkElementStates(simpleList + listItems, 'focus', 'simple list item');
-            checkElementStates(simpleList + listItems, 'active', 'simple list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(simpleList + listItems, element, 'simple list item'));
         });
     });
 
     describe('navigation list examples', function() {
         it('check list item states', () => {
-            checkElementStates(navigationList + listItems, 'hover', 'navigation list item');
-            checkElementStates(navigationList + listItems, 'focus', 'navigation list item');
-            checkElementStates(navigationList + listItems, 'active', 'navigation list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(navigationList + listItems, element, 'navigation list item'));
         });
     });
 
     describe('navigation indicator list examples', function() {
         it('check list item states', () => {
-            checkElementStates(navigationIndicatorList + listItems, 'hover', 'navigation indicator list item');
-            checkElementStates(navigationIndicatorList + listItems, 'focus', 'navigation indicator list item');
-            checkElementStates(navigationIndicatorList + listItems, 'active', 'navigation indicator list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(navigationIndicatorList + listItems, element, 'navigation indicator list item'));
         });
     });
 
     describe('action list examples', function() {
         it('check list item states', () => {
-            checkElementStates(actionList + listItems, 'hover', 'action list item');
-            checkElementStates(actionList + listItems, 'focus', 'action list item');
-            checkElementStates(actionList + listItems, 'active', 'action list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(actionList + listItems, element, 'action list item'));
         });
 
         it('should check show more button functionality', () => {
@@ -107,9 +104,8 @@ describe('Standard List test suite', function() {
         }, 1);
 
         it('check list item states', () => {
-            checkElementStates(filterAndSortList + listItems, 'hover', 'filter and sort list item');
-            checkElementStates(filterAndSortList + listItems, 'focus', 'filter and sort list item');
-            checkElementStates(filterAndSortList + listItems, 'active', 'filter and sort list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(filterAndSortList + listItems, element, 'filter and sort list item'));
         });
 
         it('should check ability to search', () => {
@@ -163,41 +159,36 @@ describe('Standard List test suite', function() {
 
     describe('secondary item on list example ', function() {
         it('check list item states', () => {
-            checkElementStates(secondaryItemList + listItems, 'hover', 'secondary item list item');
-            checkElementStates(secondaryItemList + listItems, 'focus', 'secondary item list item');
-            checkElementStates(secondaryItemList + listItems, 'active', 'secondary item list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(secondaryItemList + listItems, element, 'secondary item list item'));
         });
     });
 
     describe('list with icons example', function() {
         it('check list item states', () => {
-            checkElementStates(iconList + listItems, 'hover', 'list with icons list item');
-            checkElementStates(iconList + listItems, 'focus', 'list with icons list item');
-            checkElementStates(iconList + listItems, 'active', 'list with icons list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(iconList + listItems, element, 'list with icons list item'));
         });
     });
 
     describe('borderless list example', function() {
         it('check list item states', () => {
-            checkElementStates(borderlessList + listItems, 'hover', 'borderless list item');
-            checkElementStates(borderlessList + listItems, 'focus', 'borderless list item');
-            checkElementStates(borderlessList + listItems, 'active', 'borderless list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(borderlessList + listItems, element, 'borderless list item'));
         });
     });
 
     describe('interactive list example', function() {
         it('check list item states', () => {
-            checkElementStates(interactiveList + listItems, 'hover', 'interactive list item');
-            checkElementStates(interactiveList + listItems, 'focus', 'interactive list item');
-            checkElementStates(interactiveList + listItems, 'active', 'interactive list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(interactiveList + listItems, element, 'interactive list item'));
         });
     });
 
     describe('complex list example', function() {
         it('check list item states', () => {
-            checkElementStates(complexList + listItems, 'hover', 'complex list item');
-            checkElementStates(complexList + listItems, 'focus', 'complex list item');
-            checkElementStates(complexList + listItems, 'active', 'complex list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(complexList + listItems, element, 'complex list item'));
         });
     });
 
@@ -297,15 +288,13 @@ describe('Standard List test suite', function() {
 
     describe('keyboard support example', function() {
         it('should check list item states', () => {
-            checkElementStates(keyboardSupportList + listItems, 'hover', 'keyboard support list item');
-            checkElementStates(keyboardSupportList + listItems, 'focus', 'keyboard support list item');
-            checkElementStates(keyboardSupportList + listItems, 'active', 'keyboard support list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(keyboardSupportList + listItems, element, 'keyboard support list item'));
         });
 
         it('should check button states', () => {
-            checkElementStates(keyboardSupportList + button, 'hover', 'keyboard support list button');
-            checkElementStates(keyboardSupportList + button, 'focus', 'keyboard support list button');
-            checkElementStates(keyboardSupportList + button, 'active', 'keyboard support list button');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(keyboardSupportList + button, element, 'keyboard support list button'));
         });
 
         it('should check keyboard navigation', () => {
@@ -325,9 +314,8 @@ describe('Standard List test suite', function() {
 
     describe('drag and drop examples', function() {
         it('should check element states', () => {
-            checkElementStates(dragAndDropList + listItems, 'hover', 'drag and drop list item');
-            checkElementStates(dragAndDropList + listItems, 'focus', 'drag and drop list item');
-            checkElementStates(dragAndDropList + listItems, 'active', 'drag and drop list item');
+            statesToCheckArr.forEach(element =>
+                checkElementStates(dragAndDropList + listItems, element, 'drag and drop list item'));
         });
 
         it('check drag and drop ability', () => {
@@ -374,7 +362,7 @@ describe('Standard List test suite', function() {
         });
     });
 
-    describe('visual regression', function() {
+    describe('example block visual regression', function() {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForElDisplayed(standardListPage.title);
