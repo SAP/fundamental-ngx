@@ -25,9 +25,9 @@ export class DialogPo extends CoreBaseComponentPo {
     dialogOutput = 'p';
     busyIndicator = 'fd-busy-indicator';
     dialogContainer = this.dialog + '.cdk-drag';
-    resizeHandle = '.fd-dialog__resize-handle';
+    resizeHandle = this.dialog + '.fd-dialog__resize-handle';
     dialogItems = this.dialog + 'li';
-    searchBar = 'input';
+    searchBar = this.dialog + 'input';
     dialogCartOutput = this.dialog + 'footer .fd-bar__element';
     checkboxes = 'fd-checkbox label';
     inputFields = '.form-group input';

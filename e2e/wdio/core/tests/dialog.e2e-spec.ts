@@ -18,13 +18,12 @@ import {
     getText,
     isElementDisplayed,
     mouseHoverElement,
-    pause,
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed,
-    waitForNotDisplayed
+    waitForNotDisplayed, waitForNotPresent
 } from '../../driver/wdio';
 import {
     approvedStatus,
@@ -103,9 +102,8 @@ describe('dialog test suite', function() {
 
             for (let i = 0; i < selfDismissingDialogCount; i++) {
                 openDialog(stateDialog, i);
-                pause(4500);
-
-                expect(doesItExist(dialog)).toBe(false);
+                // expect the dialog to close automatically in 4 seconds
+                expect(waitForNotPresent(dialog)).toBe(true, 'dialog did not close automatically');
             }
         });
 
@@ -116,14 +114,14 @@ describe('dialog test suite', function() {
                 openDialog(stateDialog, i);
                 closeDialog();
 
-                expect(doesItExist(dialog)).toBe(false);
+                expect(doesItExist(dialog)).toBe(false, 'dialog did not close');
             }
         });
 
         it('check the loading icon', () => {
             openDialog(stateDialog, 3);
 
-            expect(isElementDisplayed(dialog + busyIndicator)).toBe(true);
+            expect(isElementDisplayed(dialog + busyIndicator)).toBe(true, 'busy Indicator is not displayed');
             closeDialog();
         });
     });
@@ -135,7 +133,6 @@ describe('dialog test suite', function() {
                 return;
             }
 
-            scrollIntoView(configurationDialog);
             openDialog(configurationDialog);
             const dialogStartLocationX = Math.floor(getElementLocation(dialogContainer, 0, 'x'));
             const dialogStartLocationY = Math.floor(getElementLocation(dialogContainer, 0, 'y'));
@@ -159,10 +156,10 @@ describe('dialog test suite', function() {
             openDialog(configurationDialog, 2);
             clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
 
-            expect(doesItExist(dialog)).toBe(true);
+            expect(doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
             closeDialog();
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
     });
 
@@ -213,7 +210,7 @@ describe('dialog test suite', function() {
             openDialog(complexDialog);
             waitForNotDisplayed(busyIndicator);
 
-            click(dialog + searchBar);
+            click(searchBar);
             sendKeys(papayaFruit);
 
             expect(getText(dialogItems).toLowerCase()).toContain(papayaFruit);
@@ -243,7 +240,7 @@ describe('dialog test suite', function() {
             click(dialog + button, 3);
             closeDialog();
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
     });
 
@@ -253,12 +250,12 @@ describe('dialog test suite', function() {
 
             click(dialog + button);
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
             openDialog(customDialog);
 
             click(dialog + button, 1);
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
 
         it('should check custom backdrop class', () => {
@@ -274,13 +271,13 @@ describe('dialog test suite', function() {
             waitForElDisplayed(dialog);
             click(dialog + button);
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
             click(customDialog + button, 1);
             waitForElDisplayed(dialog);
             click(dialog + button, 1);
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
 
         it('should check static dialog dismissal', () => {
@@ -288,13 +285,13 @@ describe('dialog test suite', function() {
             waitForElDisplayed(dialog);
             click(dialog + button);
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
             click(customDialog + button, 2);
             waitForElDisplayed(dialog);
             click(dialog + button, 1);
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
         });
     });
 
@@ -317,26 +314,26 @@ describe('dialog test suite', function() {
             openDialog(playgroundDialog);
             clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
 
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
             click(playgroundDialog + checkboxes, 1);
             openDialog(playgroundDialog);
             clickWithOption(dialog, 0, 5000, { x: -100, y: -100 });
 
-            expect(doesItExist(dialog)).toBe(true);
+            expect(doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
         });
 
         it('should check dialog escKeyCloseable option', () => {
             openDialog(playgroundDialog);
             sendKeys('Escape');
-            expect(doesItExist(dialog)).toBe(false);
+            expect(doesItExist(dialog)).toBe(false, 'dialog is open when it should be closed');
 
             scrollIntoView(playgroundDialog + checkboxes, 2);
             click(playgroundDialog + checkboxes, 2);
             openDialog(playgroundDialog);
             sendKeys('Escape');
 
-            expect(doesItExist(dialog)).toBe(true);
+            expect(doesItExist(dialog)).toBe(true, 'dialog is closed when it should be open');
         });
 
         it('should check dialog focusTrapped option', () => {
@@ -412,7 +409,7 @@ describe('dialog test suite', function() {
         it('should check dialog resizable option', () => {
             openDialog(playgroundDialog);
 
-            expect(doesItExist(dialog + resizeHandle)).toBe(false);
+            expect(doesItExist(resizeHandle)).toBe(false, 'resize handle exists when it should not');
 
             closeDialog();
             click(playgroundDialog + checkboxes, 8);
@@ -423,14 +420,18 @@ describe('dialog test suite', function() {
 
         it('should check dialog verticalPadding option', () => {
             openDialog(playgroundDialog);
+            // tslint:disable-next-line:radix
+            const dialogPaddingValue = parseInt(getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', ''));
 
-            expect(getCSSPropertyByName(dialogBody, topPaddingProperty).value).toBe('16px');
+            expect(dialogPaddingValue).toBeGreaterThan(0);
 
             closeDialog();
             click(playgroundDialog + checkboxes, 9);
             openDialog(playgroundDialog);
+            // tslint:disable-next-line:radix
+            const newDialogPaddingValue = parseInt(getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', ''));
 
-            expect(getCSSPropertyByName(dialogBody, topPaddingProperty).value).toBe('0px');
+            expect(newDialogPaddingValue).toBe(0);
         });
 
         it('should check dialog width and height options', () => {
@@ -455,16 +456,16 @@ describe('dialog test suite', function() {
             click(playgroundDialog + inputFields, 5);
             sendKeys('600px');
             openDialog(playgroundDialog);
-            const handleXLocation = Math.floor(getElementLocation(dialog + resizeHandle, 0, 'x'));
-            const handleYLocation = Math.floor(getElementLocation(dialog + resizeHandle, 0, 'y'));
+            const handleXLocation = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
+            const handleYLocation = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
 
             clickAndDragElement(handleXLocation + 1, handleYLocation + 1, handleXLocation + 250, handleYLocation + 250);
 
             expect(getElementSize(dialogContainer, 0, 'width')).toBe(600);
             expect(getElementSize(dialogContainer, 0, 'height')).toBe(600);
 
-            const newHandleXLocation = Math.floor(getElementLocation(dialog + resizeHandle, 0, 'x'));
-            const newHandleYLocation = Math.floor(getElementLocation(dialog + resizeHandle, 0, 'y'));
+            const newHandleXLocation = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
+            const newHandleYLocation = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
 
             clickAndDragElement(newHandleXLocation + 1, newHandleYLocation + 1, newHandleXLocation - 300, newHandleYLocation - 300);
 
@@ -495,8 +496,7 @@ describe('dialog test suite', function() {
                     continue;
                 }
                 if (i === complexExample) {
-                    click(dialogExamples + button, i);
-                    waitForElDisplayed(dialog);
+                    openDialog(dialogExamples, i);
                     waitForNotDisplayed(busyIndicator);
                     waitForElDisplayed(dialogItems);
                     saveElementScreenshot(dialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
@@ -506,8 +506,7 @@ describe('dialog test suite', function() {
                     continue;
                 }
                 if (i === stackedExample) {
-                    click(dialogExamples + button, i);
-                    waitForElDisplayed(dialog);
+                    openDialog(dialogExamples, i);
                     saveElementScreenshot(dialogContainer, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
                     expect(checkElementScreenshot(dialogContainer, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
                         .toBeLessThan(5, `dialog ${i}a screenshot doesn't match baseline`);
@@ -520,8 +519,7 @@ describe('dialog test suite', function() {
                     closeDialog();
                     continue;
                 }
-                click(dialogExamples + button, i);
-                waitForElDisplayed(dialog);
+                openDialog(dialogExamples, i);
                 saveElementScreenshot(dialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
                 expect(checkElementScreenshot(dialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
                     .toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
@@ -649,12 +647,15 @@ describe('dialog test suite', function() {
     }
 
     function openDialog(dialogSelector: string, index: number = 0): void {
+        scrollIntoView(dialogSelector + button, index);
         click(dialogSelector + button, index);
         waitForElDisplayed(dialog);
     }
 
     function clearAndCloseDialog(): void {
+        // clicks on clear btn
         click(dialog + button);
+        // clicks to close dialog
         click(dialog + button, 2);
     }
 
@@ -665,8 +666,8 @@ describe('dialog test suite', function() {
     function checkResizingDialog(): void {
         const elementStartWidth = getElementSize(dialogContainer, 0, 'width');
         const elementStartHeight = getElementSize(dialogContainer, 0, 'height');
-        const handleLocationX = Math.floor(getElementLocation(dialog + resizeHandle, 0, 'x'));
-        const handleLocationY = Math.floor(getElementLocation(dialog + resizeHandle, 0, 'y'));
+        const handleLocationX = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
+        const handleLocationY = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
 
         clickAndDragElement(handleLocationX + 1, handleLocationY + 1, handleLocationX + 110, handleLocationY + 100);
 
