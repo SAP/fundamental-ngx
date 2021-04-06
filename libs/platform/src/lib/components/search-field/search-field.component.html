@@ -35,6 +35,7 @@
             [attr.id]="inputId"
             [attr.disabled]="disabled ? '' : null"
             [attr.aria-label]="ariaLabel"
+            [attr.aria-labelledby]="ariaLabelledBy"
             [class.fd-input--compact]="contentDensity === 'compact'"
             (keydown)="onKeydown($event)"
             (keydown.enter)="onSearchSubmit()"
