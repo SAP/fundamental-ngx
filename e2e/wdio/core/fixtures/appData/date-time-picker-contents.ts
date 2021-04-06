@@ -3,8 +3,8 @@ const currentYear = new Date().getFullYear();
 const monthName = new Date().toLocaleString('default', { month: 'short' });
 const currentMonthWithZero = ('0' + `${currentMonth}`).slice(-2);
 export const currentDay = new Date().getDate();
-export const text = 'test';
-export const btn = 'button';
+export const testText = 'test';
+export const button = 'button';
 export const input = 'input';
 export const i18n = [
     'en-ca',

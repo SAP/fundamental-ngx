@@ -64,5 +64,4 @@ export class DateTimePicker extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
     }
-
 }
