@@ -1,11 +1,11 @@
 import { Composite } from './composite';
+import { IdentityKey } from '../../../../domain/entity';
 
 /**
  * BaseEntityDTO that extends passed Entity DTO
  * */
 export interface BaseEntityDTO {
-    id: number;
-    primaryKey?: string;
+    id: IdentityKey;
 }
 
 /**
@@ -13,11 +13,8 @@ export interface BaseEntityDTO {
  */
 export abstract class BaseEntity<EntityProps extends BaseEntityDTO> extends Composite<EntityProps> {
      constructor(dto: EntityProps) {
-         super();
-         this._dto = dto;
+         super(dto);
      }
-     _dto: EntityProps;
-
 
     /**
      * Check if Entity has proper instance
@@ -44,6 +41,6 @@ export abstract class BaseEntity<EntityProps extends BaseEntityDTO> extends Comp
             return false;
         }
 
-        return this._dto.id === object._dto.id;
+        return this.value.id === object.value.id;
     }
 }

@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { Entity, RESTResource } from '@fundamental-ngx/store';
 import { BaseEntityDTO } from '@fundamental-ngx/store';
 import { BaseEntity } from '@fundamental-ngx/store';

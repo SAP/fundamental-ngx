@@ -95,19 +95,19 @@ describe('should create proxy', () => {
     });
 
     it('cannot change VO directly', () => {
-        expect(Object.isFrozen(entityInstance.lineItems[0].dto)).toBeTrue();
+        expect(Object.isFrozen(entityInstance.lineItems[0].value)).toBeTrue();
     });
 
     it('can change VO through clone method', () => {
         const defaultValue = 'Line1';
         const changedValue = 'changedTitle';
 
-        expect(entityInstance.lineItems[0].dto.title).toEqual(defaultValue);
+        expect(entityInstance.lineItems[0].value.title).toEqual(defaultValue);
         const lineToEdit = entityInstance.lineItems[0].clone();
         lineToEdit.title = changedValue;
         entityInstance.lineItems[0] = new LineItem(lineToEdit);
 
-        expect(entityInstance.lineItems[0].dto.title).toEqual(changedValue);
+        expect(entityInstance.lineItems[0].value.title).toEqual(changedValue);
     });
 
     it('can assign array with several items', () => {
@@ -119,13 +119,13 @@ describe('should create proxy', () => {
 
         entityInstance.lineItems.push(new LineItem({ title: 'Line4' }));
 
-        expect(entityInstance.lineItems[3].dto.title).toEqual('Line4');
+        expect(entityInstance.lineItems[3].value.title).toEqual('Line4');
 
         // push the same VO
         expect(() => entityInstance.lineItems[4] = new LineItem({ title: 'Line1' })).toThrow();
     });
 
     it('can treat dto', () => {
-        expect(entityInstance._dto).toEqual(fromState);
+        expect(entityInstance.value).toEqual(fromState);
     });
 })
