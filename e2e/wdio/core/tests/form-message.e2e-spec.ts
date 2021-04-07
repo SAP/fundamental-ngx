@@ -124,21 +124,21 @@ describe('Form Message test suite:', function() {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
+            .toBeLessThan(5, `${elementName} element with index ${index} hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element focus state mismatch`);
+            .toBeLessThan(5, `${elementName} element with index ${index} focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), formMessagePage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with index ${index} active state mismatch`);
     }
 
     function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
