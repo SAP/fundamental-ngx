@@ -244,6 +244,7 @@ describe('Datetime picker suite', function() {
                 .toEqual(date2);
         });
 
+        //skipped due to https://github.com/SAP/fundamental-ngx/issues/5088
         xit('verify date time picker i18n example', () => {
             scrollIntoView(activeDateTimePickerButton, 6);
             for (let i = 0; i < i18n.length; i++) {
