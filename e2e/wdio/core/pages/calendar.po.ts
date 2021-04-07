@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { click, scrollIntoView, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class CalendarPo extends CoreBaseComponentPo {
     url = '/calendar';
@@ -24,7 +24,6 @@ export class CalendarPo extends CoreBaseComponentPo {
     // main selectors
     button = ' button';
     calendarOptionsBtn = '.fd-button--standard';
-    isDisabled = '.is-disabled';
     leftArrowBtn = '.fd-calendar__action--arrow-left' + this.button;
     rightArrowBtn = '.fd-calendar__action--arrow-right' + this.button;
     yearRangeBtn = '.fd-calendar__action.ng-star-inserted' + this.button;
@@ -33,8 +32,8 @@ export class CalendarPo extends CoreBaseComponentPo {
     currentDay = '.fd-calendar__item--current';
     selectedDays = '.fd-calendar__item.is-active';
     weekendDays  = '.fd-calendar__item--weekend';
-    disabledDays = '.fd-calendar__item' + this.isDisabled;
-    disabledWeekendDays = this.weekendDays + this.isDisabled;
+    disabledDays = '.fd-calendar__item.is-disabled';
+    disabledWeekendDays = this.weekendDays + '.is-disabled';
     calendarItem = 'td.fd-calendar__item';
     selectionOutput = '> div';
     calendarOptions = 'fd-checkbox label';
@@ -51,5 +50,11 @@ export class CalendarPo extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.title);
+    }
+
+    setCalendarRange(selector: string, startDateIndex: number, stopDateIndex: number): void {
+        scrollIntoView(selector);
+        click(selector, startDateIndex);
+        click(selector, stopDateIndex);
     }
 }

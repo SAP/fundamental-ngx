@@ -17,4 +17,4 @@ export const portraitAttribute = 'portrait';
 export const compactAttribute = 'compact';
 export const mondayStartDate = 'M';
 export const currentDayClass = 'current';
-
+export const otherMonth = 'fd-calendar__item ng-star-inserted fd-calendar__item--other-month';

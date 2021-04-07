@@ -34,7 +34,8 @@ import {
     markedWeekColor,
     markedWeekendColor,
     mondayStartDate,
-    portraitAttribute
+    portraitAttribute,
+    otherMonth
 } from '../fixtures/appData/calendar-contents';
 
 describe('calendar test suite', function() {
@@ -45,7 +46,7 @@ describe('calendar test suite', function() {
         calendarItem, yearBtn, yearRangeBtn, okBtn, calendarOptions, weekCount, calendarAttributes, rangeHoverCalendar,
         specialDaysCalendar, markedWeekendDays, markedMondays, gridCalendar, rangeCalendar,
         programmaticCalendar, mondayCalendar, calendarDays, internationalCalendar, singleReactiveCalendar,
-        rangeReactiveCalendar, reactiveCalendarExamples, markedDays, rangeHoverItems
+        rangeReactiveCalendar, reactiveCalendarExamples, markedDays, rangeHoverItems, setCalendarRange
     } = calendarPage;
 
     beforeAll(() => {
@@ -151,11 +152,13 @@ describe('calendar test suite', function() {
         });
 
         it('should check ability to enable week count', () => {
-            expect(doesItExist(calendarWithOptions + weekCount)).toBe(false);
+            expect(doesItExist(calendarWithOptions + weekCount))
+                .toBe(false, 'calendar week count present when it should not be');
 
             click(calendarWithOptions + calendarOptions);
 
-            expect(isElementDisplayed(calendarWithOptions + weekCount)).toBe(true);
+            expect(isElementDisplayed(calendarWithOptions + weekCount))
+                .toBe(true, 'calendat week count not present when it should be');
         });
 
         it('should check ability to enable/disable compact mode', () => {
@@ -167,24 +170,27 @@ describe('calendar test suite', function() {
         });
 
         it('should check ability to mark weekends', () => {
-            expect(doesItExist(calendarWithOptions + markedWeekendDays)).toBe(false);
+            expect(doesItExist(calendarWithOptions + markedWeekendDays))
+                .toBe(false, 'weekends marked when they should not be');
 
             click(calendarWithOptions + calendarOptions, 2);
 
-            expect(isElementDisplayed(calendarWithOptions + markedWeekendDays)).toBe(true);
+            expect(isElementDisplayed(calendarWithOptions + markedWeekendDays))
+                .toBe(true, 'weekends not marked when they should be');
         });
     });
 
     describe('mark range days on hover example', function() {
         it('should check range selection', () => {
-            checkRangeSelection(rangeHoverCalendar);
+            checkRangeSelection(rangeHoverCalendar + calendarItem);
         });
 
         it('should highlight options after marking start day', () => {
             scrollIntoView(rangeHoverCalendar);
             click(rangeHoverCalendar + calendarItem, 3);
             mouseHoverElement(rangeHoverCalendar + calendarItem, 23);
-            expect(doesItExist(rangeHoverCalendar + rangeHoverItems)).toBe(true);
+            expect(doesItExist(rangeHoverCalendar + rangeHoverItems))
+                .toBe(true, 'range hover not highlighting days');
         });
     });
 
@@ -301,12 +307,14 @@ describe('calendar test suite', function() {
         });
 
         it('should check range reactive calendar selections', () => {
-            checkRangeSelection(rangeReactiveCalendar);
+            checkRangeSelection(rangeReactiveCalendar + calendarItem);
         });
 
         it('should check invalid date buttons', () => {
-            expect(isElementClickable(reactiveCalendarExamples + button, 4)).toBe(true);
-            expect(isElementClickable(reactiveCalendarExamples + button, 9)).toBe(true);
+            expect(isElementClickable(reactiveCalendarExamples + button, 4))
+                .toBe(true, 'button not clickable');
+            expect(isElementClickable(reactiveCalendarExamples + button, 9))
+                .toBe(true, 'button not clickable');
         });
     });
 
@@ -326,9 +334,6 @@ describe('calendar test suite', function() {
         click(calendar + rightArrowBtn);
 
         expect(getText(calendar + monthBtn)).toEqual(startMonth);
-        click(calendar + rightArrowBtn);
-
-        expect(getText(calendar + monthBtn)).not.toEqual(startMonth);
     }
 
     function checkChangeDateByCalendarOverview(calendar: string, selector: string, itemIndex: number = 0): void {
@@ -338,18 +343,15 @@ describe('calendar test suite', function() {
         click(calendar + selector);
         const calendarItemsClass = getAttributeByName(calendar + calendarItem, classAttribute, itemIndex);
 
-        if (!calendarItemsClass.includes(currentDayClass)) {
-            click(calendar + calendarItem, itemIndex);
-        }
-        if (calendarItemsClass.includes(currentDayClass)) {
-            click(calendar + calendarItem, itemIndex + 1);
-        }
+        itemIndex = (calendarItemsClass.includes(currentDayClass) ? itemIndex + 1 : itemIndex);
+        click(calendar + calendarItem, itemIndex);
 
         expect(getText(calendar + selector)).not.toEqual(startDate);
     }
 
     function checkChangeYearByYearRange(calendar: string): void {
         const startYear = getText(calendar + yearBtn);
+        let index = 0;
 
         scrollIntoView(calendar + yearBtn);
         click(calendar + yearBtn);
@@ -357,12 +359,8 @@ describe('calendar test suite', function() {
         click(calendar + calendarItem);
         const calendarItemsClass = getAttributeByName(calendar + calendarItem, classAttribute);
 
-        if (!calendarItemsClass.includes(currentDayClass)) {
-            click(calendar + calendarItem);
-        }
-        if (calendarItemsClass.includes(currentDayClass)) {
-            click(calendar + calendarItem, 1);
-        }
+        index = (calendarItemsClass.includes(currentDayClass) ? index + 1 : index);
+        click(calendar + calendarItem, index);
 
         expect(getText(calendar + yearBtn)).not.toEqual(startYear);
     }
@@ -371,27 +369,22 @@ describe('calendar test suite', function() {
         const startDay = getText(calendar + selectedDays, index);
 
         scrollIntoView(calendar + selector, index);
-
-        if (getAttributeByName(calendar + selector, disabledAttribute, index) === 'true') {
-            click(calendar + selector, index + 2);
-            expect(getAttributeByName(calendar + selector, classAttribute, index + 2)).toContain(activeClass);
+        while (getAttributeByName(calendar + selector, disabledAttribute, index) === 'true' ||
+        getAttributeByName(calendar + selector, classAttribute, index) === otherMonth) {
+            index++;
         }
-        if (getAttributeByName(calendar + selector, disabledAttribute, index) === 'false') {
-            click(calendar + selector, index);
-            expect(getAttributeByName(calendar + selector, classAttribute, index)).toContain(activeClass);
-        }
+        click(calendar + selector, index);
 
+        expect(getAttributeByName(calendar + selector, classAttribute, index)).toContain(activeClass);
         expect(getElementArrayLength(calendar + selectedDays)).toBe(1);
-        expect(getText(calendar + selectedDays, index)).not.toEqual(startDay);
+        expect(getText(calendar + selectedDays, 0)).not.toEqual(startDay);
     }
 
     function checkRangeSelection(calendar: string): void {
         const startDay = getText(calendar + selectedDays);
         const endDay = getText(calendar + selectedDays, 1);
 
-        scrollIntoView(calendar);
-        click(calendar + calendarItem, 3);
-        click(calendar + calendarItem, 23);
+        setCalendarRange(calendar, 2, 23);
 
         expect(getText(calendar + selectedDays)).not.toEqual(startDay);
         expect(getText(calendar + selectedDays, 1)).not.toEqual(endDay);
