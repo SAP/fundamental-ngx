@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { Property } from '../../models/schema.model';
 
@@ -11,7 +11,7 @@ export class SchemaGroupComponent implements OnInit {
     @Input() schemaGroup: FormGroup;
     @Input() properties: Property;
 
-    forms: Array<{
+    controls: Array<{
         key: string;
         control: AbstractControl;
         type: string;
@@ -20,9 +20,10 @@ export class SchemaGroupComponent implements OnInit {
 
     ngOnInit(): void {
         const controls = this.schemaGroup.controls;
+        
         for (const key in controls) {
             if (controls.hasOwnProperty(key)) {
-                this.forms.push({
+                this.controls.push({
                     key: key,
                     control: controls[key],
                     type: this.properties[key].type,
@@ -32,7 +33,8 @@ export class SchemaGroupComponent implements OnInit {
         }
     }
 
-    private _isFormControl(form: FormControl | FormGroup): boolean {
+    /** @hidden */
+    _isFormControl(form: FormControl | FormGroup): boolean {
         return form instanceof FormControl;
     }
 }
