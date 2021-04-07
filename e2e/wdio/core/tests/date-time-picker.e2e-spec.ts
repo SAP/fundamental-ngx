@@ -64,8 +64,8 @@ describe('Datetime picker suite', function() {
             const inputsLength = getElementArrayLength(datePickerInput);
             expect(buttonsLength).toEqual(inputsLength);
             for (let i = 1; i < buttonsLength; i++) {
-                expect(isElementDisplayed(datePickerButton, i)).toBe(true);
-                expect(isElementDisplayed(datePickerInput, i)).toBe(true);
+                expect(isElementDisplayed(datePickerButton, i)).toBe(true, 'date picker button is not displayed when it should be');
+                expect(isElementDisplayed(datePickerInput, i)).toBe(true, 'date picker input is not displayed when it should be');
             }
         });
 
@@ -75,18 +75,18 @@ describe('Datetime picker suite', function() {
                 sendKeys(['Escape']);
                 scrollIntoView(activeDateTimePickerButton, i);
                 click(activeDateTimePickerButton, i);
-                expect(isElementDisplayed(calendarExpanded)).toBe(true);
+                expect(isElementDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
             }
         });
 
         it('verify from the day view on the calendar, clicking or tapping a year', () => {
             sendKeys(['Escape']);
             click(activeDateTimePickerButton, 1);
-            expect(waitForElDisplayed(calendarExpanded)).toBe(true);
+            expect(waitForElDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
             scrollIntoView(topPage);
             scrollIntoView(selectYearButton);
             click(selectYearButton);
-            expect(waitForElDisplayed(calendarYearsSection)).toBe(true);
+            expect(waitForElDisplayed(calendarYearsSection)).toBe(true, 'calendar years section is not displayed when it should be');
             click(dateTimePickerPage.yearInCalendarByValue(year2030));
             expect(getText(selectYearButton)).toBe(year2030.toString());
         });
@@ -97,7 +97,7 @@ describe('Datetime picker suite', function() {
                 sendKeys(['Escape']);
                 scrollIntoView(activeDateTimePickerButton, i);
                 click(activeDateTimePickerButton, i);
-                expect(isElementDisplayed(calendarExpanded)).toBe(true);
+                expect(isElementDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
                 expect(getText(activeDay)).toBe(new Date().getDate().toString());
             }
         });
@@ -150,8 +150,8 @@ describe('Datetime picker suite', function() {
         it('verify disabled date time picker', () => {
             const disabledButtonsArr = elementArray(disabledDateTimePickerButton);
             for (let i = 0; i < disabledButtonsArr.length; i++) {
-                expect(isElementClickable(disabledDateTimePickerButton, i)).toBe(false);
-                expect(isElementClickable(disabledDateTimePickerInput, i)).toBe(false);
+                expect(isElementClickable(disabledDateTimePickerButton, i)).toBe(false, 'Date time picker button is not disabled when it should be');
+                expect(isElementClickable(disabledDateTimePickerInput, i)).toBe(false, 'Date time input is not disabled when it should be');
             }
         });
 
@@ -327,21 +327,21 @@ describe('Datetime picker suite', function() {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element hover state mismatch`);
+            .toBeLessThan(5, `${elementName} element with index ${index} hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element focus state mismatch`);
+            .toBeLessThan(5, `${elementName} element with index ${index} focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with index ${index} active state mismatch`);
     }
 
     function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {

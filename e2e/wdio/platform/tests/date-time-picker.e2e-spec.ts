@@ -115,7 +115,7 @@ describe('Datetime picker suite', function() {
             .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
-    fit('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
+    it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
         click(activeDateTimePickerButton);
         click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
         selectHoursAndMinutes();
