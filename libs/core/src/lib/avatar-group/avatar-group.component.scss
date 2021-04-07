@@ -773,8 +773,8 @@
     fd-popover-control:focus,
     .fd-popover__control:focus {
         outline-offset: 0.0625rem;
-        outline-width: 0.0625rem;
-        outline-color: #000;
-        outline-style: dotted;
+        outline-width: var(--sapContent_FocusWidth);
+        outline-color: var(--sapContent_FocusColor);
+        outline-style: var(--sapContent_FocusStyle);
     }
 }
