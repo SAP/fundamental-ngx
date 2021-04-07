@@ -9,16 +9,16 @@ import {
 } from '../../driver/wdio';
 
 import {
-    paragraph,
-    paragraphExtends,
-    authorLink,
-    checkBox,
-    buttonActionSettings,
-    buttonMenu,
-    optionsMenu,
-    buttonOverflow,
-    optionsOverflow,
-    cancelOption,
+    paragraphTag,
+    paragraphExtendsTag,
+    authorLinkTag,
+    checkBoxTag,
+    buttonActionSettingsTag,
+    buttonMenuTag,
+    optionsMenuTag,
+    buttonOverflowTag,
+    optionsOverflowTag,
+    cancelOptionTag,
 
 } from '../fixtures/testData/feed-list-item.tags';
 
@@ -47,6 +47,14 @@ describe('Feed list item test suite:', function() {
 
     fdescribe('Check visual regression', function() {
 
+        it('should check author links states', () => {
+            const linksLength = getElementArrayLength(links);
+            for (let i = 0; i < linksLength; i++) {
+                scrollIntoView(links, i);
+                checkElementStates(links, authorLinkTag + i + '-', link, i );
+            }
+        });
+
         it('should check basic visual regression', () => {
             feedListItemPage.saveExampleBaselineScreenshot();
             expect(feedListItemPage.compareWithBaseline()).toBeLessThan(1);
@@ -56,31 +64,23 @@ describe('Feed list item test suite:', function() {
             const paragraphsLength = getElementArrayLength(paragraphs);
             for (let i = 0; i < paragraphsLength; i++) {
                     scrollIntoView(paragraphs, i);
-                    checkHoverState(paragraphs, paragraph + i + '-', text, i);
-            }
-        });
-
-        it('should check author links states', () => {
-            const linksLength = getElementArrayLength(links);
-            for (let i = 0; i < linksLength; i++) {
-                scrollIntoView(links, i);
-                checkElementStates(links, authorLink + i + '-', link, i );
+                checkElementHoverState(paragraphs, paragraphTag + i + '-hover-state-', text, i);
             }
         });
 
         it('should check checkbox states', () => {
             scrollIntoView(checkbox);
-            checkElementWithoutFocusState(checkbox, checkBox, box);
+            checkElementHoverActiveState(checkbox, checkBoxTag, box);
         });
 
         it('should check action settings button states', () => {
             scrollIntoView(actionSettingsButton);
-            checkElementWithoutFocusState(actionSettingsButton, buttonActionSettings, button);
+            checkElementHoverActiveState(actionSettingsButton, buttonActionSettingsTag, button);
         });
 
         it('should check menu button states', () => {
             scrollIntoView(menuButton);
-            checkElementStates(menuButton, buttonMenu, button);
+            checkElementStates(menuButton, buttonMenuTag, button);
         });
 
         it('should check menu options hover state', () => {
@@ -89,13 +89,13 @@ describe('Feed list item test suite:', function() {
             const menuOptionLength = getElementArrayLength(menuOption);
             for (let i = 0; i < menuOptionLength; i++) {
                 scrollIntoView(menuOption, i);
-                checkElementWithoutFocusState(menuOption, optionsMenu + i + '-', option, i);
+                checkElementHoverActiveState(menuOption, optionsMenuTag + i + '-', option, i);
             }
         });
 
         it('should check overflow button hover state', () => {
             scrollIntoView(overflowButton);
-            checkElementWithoutFocusState(overflowButton, buttonOverflow, button);
+            checkElementHoverActiveState(overflowButton, buttonOverflowTag, button);
         });
 
         it('should check overflow option states', () => {
@@ -103,84 +103,76 @@ describe('Feed list item test suite:', function() {
             click(overflowButton);
             const overflowOptionLength = getElementArrayLength(overflowOption);
             for (let i = 0; i < overflowOptionLength; i++) {
-                checkElementStates(overflowOption, optionsOverflow + i + '-', option, i);
+                checkElementStates(overflowOption, optionsOverflowTag + i + '-', option, i);
             }
         });
 
         it('should check option cancel states', () => {
             scrollIntoView(overflowButton);
             click(overflowButton);
-            checkElementWithoutFocusState(optionCancel, cancelOption, option);
+            checkElementHoverActiveState(optionCancel, cancelOptionTag, option);
         });
 
         it('should check extends paragraph 1st after clicking more hover state', () => {
             scrollIntoView(paragraphs, 0);
             click(linkMore, 0);
-            checkHoverState(paragraphs, paragraphExtends + '0-', text, 0);
+            checkElementHoverState(paragraphs, paragraphExtendsTag + '0-hover-state-', text, 0);
         });
 
         it('should check extends paragraph 2nd after clicking more hover state', () => {
             scrollIntoView(paragraphs, 1);
             click(linkMore, 1);
-            checkHoverState(paragraphs, paragraphExtends + '1-', text, 1);
+            checkElementHoverState(paragraphs, paragraphExtendsTag + '1-hover-state', text, 1);
         });
 
         it('should check extends paragraph 3d after clicking more hover state', () => {
             scrollIntoView(paragraphs, 2);
             click(linkMore, 2);
-            checkHoverState(paragraphs, paragraphExtends + '2-', text, 2);
+            checkElementHoverState(paragraphs, paragraphExtendsTag + '2-hover-state', text, 2);
         });
 
         it('should check extends paragraph with formatted text after clicking more hover state', () => {
             scrollIntoView(paragraphs, 3);
             click(checkbox);
             click(linkMore, 3);
-            checkHoverState(paragraphs, paragraphExtends + '3-', text, 3);
+            checkElementHoverState(paragraphs, paragraphExtendsTag + '3-hover-state-', text, 3);
         });
 
         it('should check extends paragraph with long text after clicking more hover state', () => {
             scrollIntoView(paragraphs, 4);
             click(linkMore, 3);
             scrollIntoView(paragraphs, 4);
-            checkHoverState(paragraphs, paragraphExtends + '4-', text, 4);
+            checkElementHoverState(paragraphs, paragraphExtendsTag + '4-hover-state-', text, 4);
         });
 
-        fit('should check last extends paragraph after clicking more hover state', () => {
-            scrollIntoView(paragraphs, 19);
+        it('should check last extends paragraph after clicking more hover state', () => {
+            scrollIntoView(linkMore, 4);
             click(linkMore, 4);
-            checkHoverState(paragraphs, paragraphExtends + '5-', text, 19);
+            scrollIntoView(paragraphs, 19);
+            checkElementHoverState(paragraphs, paragraphExtendsTag + '5-hover-state-', text, 19);
         });
 
     });
-
-    function checkHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform() + 'hover-state-',
-            feedListItemPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform() + 'hover-state-',
-            feedListItemPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
-    }
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedListItemPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedListItemPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
+            .toBeLessThan(5, `${elementName} element item ${index} hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedListItemPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedListItemPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element focus state mismatch`);
+            .toBeLessThan(5, `${elementName} element item ${index} focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedListItemPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedListItemPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} element item ${index} active state mismatch`);
     }
 
     function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
@@ -189,7 +181,7 @@ describe('Feed list item test suite:', function() {
         checkElementActiveState(selector, tag + 'active-state-', elementName, index);
     }
 
-    function checkElementWithoutFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
+    function checkElementHoverActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         checkElementHoverState(selector, tag + 'hover-state-', elementName, index);
         checkElementActiveState(selector, tag + 'active-state-', elementName, index);
     }
