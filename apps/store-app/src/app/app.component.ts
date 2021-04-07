@@ -18,7 +18,7 @@ export class AppComponent {
         const builder = esBuilderFactory.create(Requisition);
         this.requisitionStore = builder.create();
 
-        const queryAll = this.requisitionStore.queryBuilder
+        /* const queryAll = this.requisitionStore.queryBuilder
             .where(and(eq('title', 'Last Req'), gt('totalAmount', 50)))
             .build();
 
@@ -29,8 +29,20 @@ export class AppComponent {
             (error) => {
                 console.log(error);
             }
-        );
-        
-        //this.requisition = this.requisitionStore.get('requisition_id');
+        ); */
+
+        this.requisition = this.requisitionStore.get('REQ_0100');
+
+        this.requisition.subscribe({
+            next: (data) => {
+                console.log('Got requisition data:', data);
+            },
+            error: (error) => {
+                console.log(error);
+            },
+            complete: () => {
+                console.log('requisition subscription was completed');
+            }
+        });
     }
 }

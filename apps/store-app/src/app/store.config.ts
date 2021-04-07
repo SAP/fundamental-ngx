@@ -1,4 +1,4 @@
-import { Entity, RESTResource, FundamentalStoreConfig, BaseEntity, ChainingPolicy } from '@fundamental-ngx/store';
+import { Entity, RESTResource, FundamentalStoreConfig, BaseEntity } from '@fundamental-ngx/store';
 
 interface EntityComposite {
     getTypes();
@@ -20,6 +20,47 @@ export interface EntityTypes {
 }
 
 @RESTResource({
+    path: 'company'
+})
+@Entity<Company>({
+    domain: 'Requisitioning',
+    name: 'Company'
+})
+class Company extends BaseEntity {
+    id: string;
+    name: string;
+    address: {
+        city: string;
+        street: string;
+        zip: string;
+    };
+}
+@RESTResource({
+    path: 'user'
+})
+@Entity<User>({
+    domain: 'Requisitioning',
+    name: 'User',
+    chainingPolicy: {
+        fields: {
+            company: {
+                strategy: 'block',
+                type: Company,
+                key: 'companyId'
+            }
+        }
+    }
+})
+class User extends BaseEntity {
+    id: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    companyId: string;
+    company: Company;
+}
+
+@RESTResource({
     path: '/requisitions/:reqId/lineItems'
 })
 @Entity<LineItem>({
@@ -36,7 +77,7 @@ class LineItem extends BaseEntity {
 // URI with endpoints for different actions
 @RESTResource({
     path: {
-        default: 'requisitioning',
+        default: 'requisition',
         add: '/cart',
         getAll: '/requisitions',
         update: ['PATCH', '/requisition']
@@ -47,9 +88,10 @@ class LineItem extends BaseEntity {
     name: 'Requisition',
     chainingPolicy: {
         fields: {
-            lineItems: {
+            owner: {
                 strategy: 'non-block',
-                type: Array(LineItem)
+                type: User,
+                key: 'ownerId'
             }
         }
     }
@@ -58,12 +100,14 @@ export class Requisition extends BaseEntity {
     id: string;
     title: string;
     totalAmount: number;
+    owner: User;
+    ownerId: string;
     lineItems: LineItem[];
 }
 
 // Set the default URL root for all entities registered
 export const storeConfig: FundamentalStoreConfig = {
-    root: 'http://www.example.com/v0/',
-    entities: { Requisition: Requisition, LineItem: LineItem },
+    root: 'http://localhost:3000/',
+    entities: { Requisition: Requisition, LineItem: LineItem, User: User, Company: Company },
     enableDevtools: true
 };

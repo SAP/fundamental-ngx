@@ -1,0 +1,191 @@
+{
+    "requisition": [
+        {
+            "id": "REQ_0100",
+            "name": "Braeburn Apple",
+            "category": "Fruit",
+            "price": 0.45,
+            "uom": "kg",
+            "supplier": "Northstar Produce",
+            "ownerId": "USER_0100"
+        }
+    ],
+    "user": [
+        {
+            "id": "USER_0100",
+            "firstName": "Kelly",
+            "lastName": "Wooden",
+            "role": "Manager",
+            "companyId": "COMPANY_0100"
+        }
+    ],
+    "company": [
+        {
+            "id": "COMPANY_0100",
+            "name": "SAP",
+            "address": {
+                "city": "Brno",
+                "street": "Zderadova 456/5",
+                "zip": "60200"
+            }
+        }
+    ],
+    "lineItem": [
+        {
+            "id": "ITEM_0100",
+            "name": "Braeburn Apple",
+            "category": "Fruit",
+            "price": 0.45,
+            "uom": "kg",
+            "supplier": "Northstar Produce"
+        },
+        {
+            "id": "ITEM_0110",
+            "name": "Pippen Apple",
+            "category": "Fruit",
+            "price": 0.35,
+            "uom": "kg",
+            "supplier": "Northstar Produce"
+        },
+        {
+            "id": "ITEM_0120",
+            "name": "Fuji Apple",
+            "category": "Fruit",
+            "price": 0.39,
+            "uom": "kg",
+            "supplier": "Green Valley Produce"
+        },
+        {
+            "id": "ITEM_0121",
+            "name": "Fuji Apple",
+            "category": "Fruit",
+            "price": 0.42,
+            "uom": "kg",
+            "supplier": "Northstar Produce"
+        },
+        {
+            "id": "ITEM_0200",
+            "name": "Blue Java Banana",
+            "category": "Fruit",
+            "price": 0.35,
+            "uom": "kg",
+            "supplier": "Tropic Island"
+        },
+        {
+            "id": "ITEM_0220",
+            "name": "Cavendish Banana",
+            "category": "Fruit",
+            "price": 0.25,
+            "weight": 90,
+            "uom": "kg",
+            "supplier": "Tropic Island"
+        },
+        {
+            "id": "ITEM_0221",
+            "name": "Cavendish Banana",
+            "category": "Fruit",
+            "price": 0.23,
+            "uom": "kg",
+            "supplier": "Blue Star"
+        },
+        {
+            "id": "ITEM_0300",
+            "name": "Nantes Carrot",
+            "category": "Vegetable",
+            "price": 0.1,
+            "uom": "kg",
+            "supplier": "Earthroot Farms"
+        },
+        {
+            "id": "ITEM_0310",
+            "name": "Yaya Carrot",
+            "category": "Vegetable",
+            "price": 0.15,
+            "uom": "kg",
+            "supplier": "Earthroot Farms"
+        },
+        {
+            "id": "ITEM_0320",
+            "name": "Touchon Carrot",
+            "category": "Vegetable",
+            "price": 0.21,
+            "uom": "kg",
+            "supplier": "Green Valley Produce"
+        },
+        {
+            "id": "ITEM_0400",
+            "name": "Gouda Cheese",
+            "category": "Dairy",
+            "price": 4.97,
+            "uom": "kg",
+            "supplier": "Sunflower Dairy"
+        },
+        {
+            "id": "ITEM_0410",
+            "name": "Swiss Cheese",
+            "category": "Dairy",
+            "price": 3.64,
+            "uom": "kg",
+            "supplier": "Two Cows Farm"
+        },
+        {
+            "id": "ITEM_0411",
+            "name": "Swiss Cheese",
+            "category": "Dairy",
+            "price": 3.02,
+            "uom": "kg",
+            "supplier": "Sunflower Dairy"
+        },
+        {
+            "id": "ITEM_0420",
+            "name": "Provolone Cheese",
+            "category": "Dairy",
+            "price": 4.05,
+            "uom": "kg",
+            "supplier": "Two Cows Farm"
+        },
+        {
+            "id": "ITEM_0430",
+            "name": "Cheddar Cheese",
+            "category": "Dairy",
+            "price": 2.35,
+            "uom": "kg",
+            "supplier": "Blue Star"
+        },
+        {
+            "id": "ITEM_0434",
+            "name": "White Cheddar Cheese",
+            "category": "Dairy",
+            "price": 3.05,
+            "uom": "kg",
+            "supplier": "Two Cows Farm"
+        },
+        {
+            "id": "ITEM_0500",
+            "name": "All Purpose Flour",
+            "category": "Baking Goods",
+            "price": 1.25,
+            "weight": 1200,
+            "uom": "bag",
+            "supplier": "Blue Star"
+        },
+        {
+            "id": "ITEM_0501",
+            "name": "Organic All Purpose Flour",
+            "category": "Baking Goods",
+            "price": 2.25,
+            "weight": 1500,
+            "uom": "bag",
+            "supplier": "Greystone Mills"
+        },
+        {
+            "id": "ITEM_0510",
+            "name": "Organic Whole Wheat Flour",
+            "category": "Baking Goods",
+            "price": 2.75,
+            "weight": 1500,
+            "uom": "bag",
+            "supplier": "Greystone Mills"
+        }
+    ]
+}

@@ -4,6 +4,8 @@ import { BaseEntity, EntityType } from '../../../domain/public_api';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
+import { EntityServices } from '@ngrx/data';
+import { EntityMetaOptionsService } from '../utils/entity-options.service';
 
 /**
  * EntityCollectionsService Base implementation.
@@ -43,6 +45,6 @@ export class DefaultEntityCollectionsService extends EntityCollectionsService {
      * @param entity {class} Entity class to create service for
      */
     protected createEntityCollectionService<T extends BaseEntity>(entity: EntityType<T>): EntityCollectionService<T> {
-        return this.entityCollectionServiceFactory.create<T>(entity);
+        return this.entityCollectionServiceFactory.create<T>(entity, this);
     }
 }

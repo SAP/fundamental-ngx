@@ -15,8 +15,7 @@ import { EntityCollectionsService } from './entity-collections-service';
 export class EntityCollectionServiceFactory {
     constructor(
         protected readonly entityServices: EntityServices,
-        protected readonly entityMetaOptionsService: EntityMetaOptionsService,
-        protected readonly entityCollectionsService: EntityCollectionsService
+        protected readonly entityMetaOptionsService: EntityMetaOptionsService
     ) {}
 
     /**
@@ -24,12 +23,16 @@ export class EntityCollectionServiceFactory {
      * @param entityType
      * @returns EntityCollectionService<T>
      */
-    create<T extends BaseEntity>(entityType: EntityType<T>): EntityCollectionService<T> {
+    create<T extends BaseEntity>(
+        entityType: EntityType<T>,
+        // Can't use it as dependency in ctr due to DI circular error 
+        entityCollectionsService: EntityCollectionsService
+    ): EntityCollectionService<T> {
         return new DefaultEntityCollectionService(
             entityType,
             this.entityServices,
             this.entityMetaOptionsService,
-            this.entityCollectionsService
+            entityCollectionsService
         );
     }
 }

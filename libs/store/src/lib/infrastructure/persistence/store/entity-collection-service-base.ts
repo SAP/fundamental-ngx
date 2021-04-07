@@ -1,15 +1,15 @@
 import { BehaviorSubject, merge, Observable, Subject, ReplaySubject, zip } from 'rxjs';
 import { EntityCollection, EntityCollectionService as NgrxEntityCollectionService, EntityServices } from '@ngrx/data';
 import { Store } from '@ngrx/store';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { QuerySnapshotModel } from '../query/query';
 import { BaseEntity } from './entity-server/interfaces';
-import { EntityMetaOptions, EntityType, IdentityKey, Type } from '../../../domain/public_api';
+import { EntityMetaOptions, EntityType, IdentityKey } from '../../../domain/public_api';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
-import { ChainingPolicy, ChainingPolicyFieldOptions, ChainingStrategy } from '../../../domain/chaining-policy';
-import { catchError, map, skip, switchMap, take, takeUntil, takeWhile, tap } from 'rxjs/operators';
+import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chaining-policy';
 
 /**
  * Default EntityCollectionService implementation.
@@ -128,7 +128,6 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
                     const innerRequests = this.createChainingRequests(blockedChainingEntries, entity);
                     // Load all sub resources and extend the entity with retrieved sub entities
                     return zip(...innerRequests).pipe(
-                        take(1),
                         map(
                             (extensions) =>
                                 extensions.reduce((extended, extension) => ({ ...extended, ...extension }), entity) as T
@@ -153,7 +152,7 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
 
                     const innerRequests = this.createChainingRequests(nonBlockedChainingEntries, entity);
 
-                    merge(...innerRequests.map((request) => request.pipe(take(1))))
+                    merge(...innerRequests)
                         .pipe(takeUntil(subRequestCompletedSubject))
                         .subscribe({
                             next: (keyRequestResultMap) => {
@@ -165,8 +164,11 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
                             error: (error) => {
                                 // How should we react on it?
                                 // entitySubject.error(error)
+                                console.error(error);
                             },
-                            complete: () => entitySubject.complete()
+                            complete: () => {
+                                entitySubject.complete();
+                            }
                         });
 
                     // Listen to complete event in order to unsubscribe from "merge" stream above
