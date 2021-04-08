@@ -20,6 +20,7 @@ export {
     EntityCacheStorageService,
     EntityCacheStorageServiceFactory,
     EntityCacheStorageServiceBase,
+    EntityCollectionServiceFactory
 } from './lib/infrastructure/persistence/store';
 export {
     QueryParams,

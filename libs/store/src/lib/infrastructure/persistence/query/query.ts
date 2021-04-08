@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { BaseEntity, ChainingStrategyFieldsMap } from '../../../domain/public_api';
 
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';
@@ -8,7 +9,7 @@ export interface OrderBy<TModel> {
     order?: 'ASCENDING' | 'DESCENDING';
 }
 
-export class QuerySnapshotModel<T> {
+export class QuerySnapshotModel<T extends {}> {
     keyword: string;
     predicate: Predicate<T>;
     skip: number;
@@ -17,11 +18,12 @@ export class QuerySnapshotModel<T> {
     includeCount: boolean;
     select: Array<keyof T>;
     expand: Array<keyof T>;
+    chainingStrategy?: ChainingStrategyFieldsMap<T>;
 }
 
-export type QuerySnapshot<T> = Readonly<QuerySnapshotModel<T>>;
+export type QuerySnapshot<T extends {}> = Readonly<QuerySnapshotModel<T>>;
 
-export const isQuerySnapshot = <K>(data: any): data is QuerySnapshot<K> => {
+export const isQuerySnapshot = <K extends BaseEntity>(data: any): data is QuerySnapshot<K> => {
     return data instanceof QuerySnapshotModel;
 };
 
@@ -56,7 +58,10 @@ export class Query<TModel> {
     /** @hidden - stores current expand properties */
     protected _expand: Array<keyof TModel>;
 
-    constructor(private service: QueryService<TModel>) {}
+    constructor(
+        protected readonly service: QueryService<TModel>,
+        protected readonly chainingStrategy?: ChainingStrategyFieldsMap<TModel>
+    ) {}
 
     /**
      * Replace current filter settings.
@@ -200,6 +205,7 @@ export class Query<TModel> {
         snapshot.includeCount = this._includeCount;
         snapshot.select = this._select;
         snapshot.expand = this._expand;
+        snapshot.chainingStrategy = this.chainingStrategy;
 
         return Object.freeze(snapshot);
     }

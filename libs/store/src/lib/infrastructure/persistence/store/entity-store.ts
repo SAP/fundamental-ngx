@@ -1,11 +1,15 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EntityCollectionService } from '@ngrx/data';
 
-import { CachePolicy, FetchPolicy, IdentityKey, BaseEntity } from '../../../domain/public_api';
-import { QuerySnapshot } from '../query/query';
-import { QueryService } from '../query/query.service';
+import {
+    CachePolicy,
+    FetchPolicy,
+    IdentityKey,
+    BaseEntity,
+    ChainingStrategyFieldsMap
+} from '../../../domain/public_api';
 import { QueryBuilder } from '../query/query-builder';
+import { EntityCollectionService } from './entity-collection-service';
 
 //#region Interfaces
 
@@ -39,9 +43,10 @@ export interface EntityStore<T> {
 
 //#region Implementation
 
-export interface EntityStoreOptions {
+export interface EntityStoreOptions<T extends BaseEntity> {
     cachePolicy: CachePolicy;
     fetchPolicy: FetchPolicy;
+    chainingStrategy: ChainingStrategyFieldsMap<T>;
 }
 
 /**
@@ -55,12 +60,9 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
     constructor(
         protected readonly _entityService: EntityCollectionService<T>,
         protected readonly _queryBuilder: QueryBuilder<T>,
-        // How can we use these cache options from here?
-        // Looks like it;s better keep it on @Entity layer
-        // So it can be easily accessible from any place
-        protected readonly _options?: EntityStoreOptions
+        protected readonly _options?: EntityStoreOptions<T>
     ) {
-        // TODO: do something with options
+        // TODO: do something with options?
     }
 
     get(id: IdentityKey): Observable<T> {
@@ -76,26 +78,6 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
 
     delete(entity: T): Observable<T> {
         return this._entityService.delete(entity).pipe(map(() => entity));
-    }
-}
-
-export class DefaultQueryService<TModel> extends QueryService<TModel> {
-    constructor(private service: EntityCollectionService<TModel>) {
-        super();
-    }
-
-    getByKey(id: string): Observable<TModel> {
-        return this.service.getByKey(id);
-    }
-
-    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
-        // Pass query payload instead of QueryParams
-        // TODO: Should we override EntityCollectionService interface for that? 
-        return this.service.getWithQuery(query as any);
-    }
-
-    count(): Observable<number> {
-        return this.service.count$;
     }
 }
 

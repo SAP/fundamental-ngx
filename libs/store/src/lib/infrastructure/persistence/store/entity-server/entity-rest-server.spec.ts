@@ -19,6 +19,8 @@ import {
 import { BaseEntity } from './interfaces';
 import { DefaultQueryAdapter, QueryAdapter, QueryAdapterService } from '../../query/query-adapter';
 import { QuerySnapshotModel } from '../../query/query';
+import { EntityType } from 'libs/store/src/lib/domain/decorators';
+import { ChainingPolicy } from 'libs/store/src/lib/domain/public_api';
 
 class Hero extends BaseEntity {
     id!: number;
@@ -34,8 +36,12 @@ class MockPluralizer extends Pluralizer {
 }
 
 class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
-    getEntityMetadata = () => null;
-    getEntityResourceMetadata = () => null;
+    getEntityResourceMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityResourceMetaOptions {
+        throw new Error('Method not implemented.');
+    }
+    getEntityMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityMetaOptions<T> {
+        throw new Error('Method not implemented.');
+    }
 }
 
 class QueryAdapterServiceMock implements QueryAdapterService {
@@ -72,7 +78,7 @@ describe('EntityRestServerServiceFactory', () => {
             }
         );
         spyOn(entityMetaOptionsService, 'getEntityMetadata').and.callFake(
-            (entityName: any): EntityMetaOptions => {
+            <T extends BaseEntity>(entityName: any): EntityMetaOptions<T> => {
                 return { name: 'Hero' };
             }
         );
@@ -125,7 +131,7 @@ describe('EntityRestServerService', () => {
     let service: EntityRestServerService<Hero>;
     let entityMetaOptionsService: EntityMetaOptionsService;
     let heroResourceMetaOptions: EntityResourceMetaOptions;
-    let heroEntityMetaOptions: EntityMetaOptions;
+    let heroEntityMetaOptions: EntityMetaOptions<Hero>;
     let queryAdapterService: QueryAdapterService;
     let queryAdapter: QueryAdapter<Hero>;
     const defaultHeroUrl = 'api/hero/';
@@ -159,8 +165,8 @@ describe('EntityRestServerService', () => {
             }
         );
         spyOn(entityMetaOptionsService, 'getEntityMetadata').and.callFake(
-            (entityName: any): EntityMetaOptions => {
-                return heroEntityMetaOptions;
+            <T extends BaseEntity>(entityName: any): EntityMetaOptions<T> => {
+                return heroEntityMetaOptions as any;
             }
         );
 

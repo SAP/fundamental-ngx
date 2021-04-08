@@ -1,4 +1,4 @@
-import { Entity, RESTResource, FundamentalStoreConfig } from '@fundamental-ngx/store';
+import { Entity, RESTResource, FundamentalStoreConfig, BaseEntity } from '@fundamental-ngx/store';
 
 interface EntityComposite {
     getTypes();
@@ -6,12 +6,6 @@ interface EntityComposite {
 
 interface Field<T> {
     [key: string]: T;
-}
-
-export class BaseEntity {
-    identity: number;
-    created: number;
-    updated: number;
 }
 
 export class BaseValue {
@@ -26,15 +20,56 @@ export interface EntityTypes {
 }
 
 @RESTResource({
+    path: 'company'
+})
+@Entity<Company>({
+    domain: 'Requisitioning',
+    name: 'Company'
+})
+class Company extends BaseEntity {
+    id: string;
+    name: string;
+    address: {
+        city: string;
+        street: string;
+        zip: string;
+    };
+}
+@RESTResource({
+    path: 'user'
+})
+@Entity<User>({
+    domain: 'Requisitioning',
+    name: 'User',
+    chainingPolicy: {
+        fields: {
+            company: {
+                strategy: 'non-block',
+                type: Company,
+                key: 'companyId'
+            }
+        }
+    }
+})
+class User extends BaseEntity {
+    id: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    companyId: string;
+    company: Company;
+}
+
+@RESTResource({
     path: '/requisitions/:reqId/lineItems'
 })
-@Entity({
+@Entity<LineItem>({
     domain: 'Requisitioning',
     name: 'LineItem',
     primaryKey: 'lineItemId', // if not provided 'id' is assumed to be primaryKey
     aggregateOf: 'Requisition'
 })
-class LineItem {
+class LineItem extends BaseEntity {
     lineItemId: string;
     reqId: string;
 }
@@ -42,25 +77,37 @@ class LineItem {
 // URI with endpoints for different actions
 @RESTResource({
     path: {
-        default: 'requisitioning',
+        default: 'requisition',
         add: '/cart',
         getAll: '/requisitions',
         update: ['PATCH', '/requisition']
     }
 })
-@Entity({
+@Entity<Requisition>({
     domain: 'Requisitioning',
-    name: 'Requisition'
+    name: 'Requisition',
+    chainingPolicy: {
+        fields: {
+            owner: {
+                strategy: 'non-block',
+                type: User,
+                key: 'ownerId'
+            }
+        }
+    }
 })
 export class Requisition extends BaseEntity {
     id: string;
     title: string;
     totalAmount: number;
+    owner: User;
+    ownerId: string;
+    lineItems: LineItem[];
 }
 
 // Set the default URL root for all entities registered
 export const storeConfig: FundamentalStoreConfig = {
-    root: 'http://www.example.com/v0/',
-    entities: { Requisition: Requisition, LineItem: LineItem },
+    root: 'http://localhost:3000/',
+    entities: { Requisition: Requisition, LineItem: LineItem, User: User, Company: Company },
     enableDevtools: true
 };

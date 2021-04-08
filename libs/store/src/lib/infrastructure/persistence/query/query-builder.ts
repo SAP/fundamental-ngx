@@ -1,20 +1,32 @@
 import { Observable } from 'rxjs';
+
+import { ChainingStrategyFieldsMap } from '../../../domain/public_api';
 import { Query } from './query';
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';
 
-export class QueryBuilder<TModel> {
+export class QueryBuilder<TModel extends {}> {
     /**
      * @hidden - predicate which defines filter criteria.
      */
-    _predicate: Predicate<TModel>;
+    protected _predicate: Predicate<TModel>;
 
     /**
      * @hidden - keyword for search.
      */
-    _keyword: string;
+    protected _keyword: string;
 
-    constructor(private service: QueryService<TModel>) {}
+    /**
+     * @hidden - request chaining strategy
+     */
+    protected chainingStrategyMap: ChainingStrategyFieldsMap<TModel> | null = null;
+
+    /**
+     * @param service Query service to delegate request to
+     *
+     * @hidden
+     */
+    constructor(private readonly service: QueryService<TModel>) {}
 
     byId(id: string): Observable<TModel> {
         return this.service.getByKey(id);
@@ -39,10 +51,19 @@ export class QueryBuilder<TModel> {
     }
 
     /**
+     * Apply Chaining Strategy on Query level.
+     * @param chainingStrategyMap Chaining strategy fields map. The map consists of Entity fields that refer to the sub Entities
+     */
+    withChainingStrategy(chainingStrategyMap: ChainingStrategyFieldsMap<TModel>): QueryBuilder<TModel> {
+        this.chainingStrategyMap = chainingStrategyMap;
+        return this;
+    }
+
+    /**
      * Create new Query object
      */
     build(): Query<TModel> {
-        const query = new Query<TModel>(this.service);
+        const query = new Query<TModel>(this.service, this.chainingStrategyMap);
         query.where(this._predicate).keyword(this._keyword);
         return query;
     }

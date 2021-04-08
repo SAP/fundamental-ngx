@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
-import { EntityCollectionServiceFactory } from '@ngrx/data';
+import { Observable } from 'rxjs';
 
-import { FetchPolicy, CachePolicy, Type, BaseEntity } from '../../../domain/public_api';
-import { DefaultEntityStore, DefaultQueryService, EntityStore } from './entity-store';
-import { EntityMetaOptionsService } from '../utils/entity-options.service';
+import {
+    FetchPolicy,
+    CachePolicy,
+    EntityType,
+    BaseEntity,
+    ChainingStrategyFieldsMap
+} from '../../../domain/public_api';
+import { DefaultEntityStore, EntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
+import { QueryService } from '../query/query.service';
+import { QuerySnapshot } from '../query/query';
+import { EntityCollectionService } from './entity-collection-service';
+import { EntityCollectionsService } from './entity-collections-service';
 
 //#region Interfaces
 
 /**
  * Entity Store Builder interface
  */
-export interface EntityStoreBuilder<T> {
+export interface EntityStoreBuilder<T extends BaseEntity> {
     /**
      * Apply Cache Policy
      * @param policy CachePolicy settings
@@ -23,6 +32,11 @@ export interface EntityStoreBuilder<T> {
      */
     useFetchPolicy(policy: FetchPolicy): this;
     /**
+     * Apply Chaining Strategy on Entity Store level
+     * @param chainingStrategyMap Chaining strategy fields map
+     */
+    withChainingStrategy(chainingStrategyMap: ChainingStrategyFieldsMap<T>): this;
+    /**
      * Create new store
      */
     create(): EntityStore<T>;
@@ -32,7 +46,7 @@ export interface EntityStoreBuilder<T> {
  * Entity Store Builder Factory interface
  */
 export abstract class EntityStoreBuilderFactory {
-    abstract create<T extends BaseEntity>(entity: Type<T>): EntityStoreBuilder<T>;
+    abstract create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T>;
 }
 
 //#endregion
@@ -43,13 +57,13 @@ export abstract class EntityStoreBuilderFactory {
  * Entity Store Builder default implementation
  */
 export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntityStoreBuilder<T> {
-    private cachePolicy: CachePolicy | null;
-    private fetchPolicy: FetchPolicy | null;
+    protected cachePolicy: CachePolicy | null = null;
+    protected fetchPolicy: FetchPolicy | null = null;
+    protected chainingStrategyMap: ChainingStrategyFieldsMap<T> | null = null;
 
     constructor(
-        protected readonly entity: Type<T>,
-        protected readonly entityCollectionServiceFactory: EntityCollectionServiceFactory,
-        protected readonly entityMetaOptionsService: EntityMetaOptionsService
+        protected readonly entity: EntityType<T>,
+        protected readonly entityCollectionsService: EntityCollectionsService
     ) {
         this.reset();
     }
@@ -57,6 +71,7 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
     reset(): void {
         this.cachePolicy = null;
         this.fetchPolicy = null;
+        this.chainingStrategyMap = null;
     }
 
     useCachePolicy(policy: CachePolicy): this {
@@ -69,14 +84,19 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
         return this;
     }
 
+    withChainingStrategy(chainingStrategyMap: ChainingStrategyFieldsMap<T>): this {
+        this.chainingStrategyMap = chainingStrategyMap;
+        return this;
+    }
+
     create(): EntityStore<T> {
-        const { name } = this.entityMetaOptionsService.getEntityMetadata(this.entity);
-        const entityCollectionService = this.entityCollectionServiceFactory.create<T>(name);
+        const entityCollectionService = this.entityCollectionsService.getEntityCollectionService<T>(this.entity);
         const queryBuilder = new QueryBuilder(new DefaultQueryService(entityCollectionService));
 
         const result = new DefaultEntityStore<T>(entityCollectionService, queryBuilder, {
             cachePolicy: this.cachePolicy,
-            fetchPolicy: this.fetchPolicy
+            fetchPolicy: this.fetchPolicy,
+            chainingStrategy: this.chainingStrategyMap
         });
 
         this.reset();
@@ -90,17 +110,28 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
  */
 @Injectable()
 export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFactory {
-    constructor(
-        private entityCollectionServiceFactory: EntityCollectionServiceFactory,
-        private entityMetaOptionsService: EntityMetaOptionsService
-    ) {}
+    constructor(protected readonly entityCollectionsService: EntityCollectionsService) {}
 
-    create<T extends BaseEntity>(entity: Type<T>): EntityStoreBuilder<T> {
-        return new DefaultEntityStoreBuilder(
-            entity,
-            this.entityCollectionServiceFactory,
-            this.entityMetaOptionsService
-        );
+    create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T> {
+        return new DefaultEntityStoreBuilder(entity, this.entityCollectionsService);
+    }
+}
+
+export class DefaultQueryService<TModel> extends QueryService<TModel> {
+    constructor(private service: EntityCollectionService<TModel>) {
+        super();
+    }
+
+    getByKey(id: string): Observable<TModel> {
+        return this.service.getByKey(id);
+    }
+
+    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
+        return this.service.getWithQuery(query as any);
+    }
+
+    count(): Observable<number> {
+        return this.service.count$;
     }
 }
 

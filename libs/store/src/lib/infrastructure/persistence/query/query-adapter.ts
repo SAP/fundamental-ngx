@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Type } from '../../../domain/public_api';
+import { BaseEntity, EntityType } from '../../../domain/public_api';
 import {
     Predicate,
     EqPredicate,
@@ -232,7 +232,7 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
  */
 @Injectable()
 export class QueryAdapterFactory {
-    create<T>(entityTypeOrEntityName: Type<T> | string): QueryAdapter<T> {
+    create<T extends BaseEntity>(entityTypeOrEntityName: EntityType<T> | string): QueryAdapter<T> {
         return new DefaultQueryAdapter();
     }
 }

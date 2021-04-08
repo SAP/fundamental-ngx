@@ -80,7 +80,8 @@
     "nx": "nx",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test",
-    "build-local-store": "npm run build store"
+    "build-local-store": "npm run build store",
+    "store-app-server": "npx json-server --watch ./apps/store-app/src/server/db.json --delay 500"
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -115,6 +116,7 @@
     "highlight.js": "10.4.1",
     "intl": "1.2.5",
     "jasminewd2": "2.2.0",
+    "json-server": "0.16.3",
     "karma-viewport": "1.0.7",
     "moment": "2.29.1",
     "ngx-markdown": "10.1.1",

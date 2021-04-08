@@ -1,8 +1,8 @@
 import { of } from 'rxjs';
-import { EntityCollectionService } from '@ngrx/data';
 
 import { DefaultEntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
+import { EntityCollectionService } from './entity-collection-service';
 
 class User {
     constructor(public id: string | string, public name: string, public age: number) {}

@@ -1,5 +1,3 @@
-import { EntityCollectionServiceFactory } from '@ngrx/data';
-
 import {
     EntityMetaOptionsService,
     EntityResourceMetaOptions,
@@ -7,41 +5,53 @@ import {
 } from '../utils/entity-options.service';
 import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
+import { BaseEntity } from './entity-server/interfaces';
+import { EntityType } from '../../../domain/decorators';
+import { DefaultEntityCollectionService } from './entity-collection-service-base';
+import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
+import { EntityCollectionsService } from './entity-collections-service';
+import { EntityCollectionService } from './entity-collection-service';
 
-class User {
-    constructor(public id: string | string, public name: string, public age: number) {}
+class ChildEntity extends BaseEntity {
+    name: 'child entity';
+}
+class User extends BaseEntity {
+    id: string;
+    name: string;
+    age: number;
+    child: ChildEntity;
 }
 
 class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
-    getEntityMetadata(): EntityMetaOptions {
-        return null;
+    getEntityResourceMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityResourceMetaOptions {
+        throw new Error('Method not implemented.');
     }
-
-    getEntityResourceMetadata(): EntityResourceMetaOptions {
-        return null;
+    getEntityMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityMetaOptions<T> {
+        throw new Error('Method not implemented.');
     }
 }
 
-class EntityCollectionServiceFactoryMock implements EntityCollectionServiceFactory {
-    entityCollectionServiceElementsFactory = null;
-
-    create() {
-        return null;
+class EntityCollectionsServiceMock implements EntityCollectionsService {
+    getEntityCollectionService<T extends BaseEntity>(entityType: EntityType<T>): EntityCollectionService<T> {
+        throw new Error('Method not implemented.');
+    }
+    registerEntityCollectionService<T extends BaseEntity>(entityType: EntityType<T>, entityCollectionService: EntityCollectionService<T>): void {
+        throw new Error('Method not implemented.');
     }
 }
 
 describe('Default DefaultEntityStoreBuilderFactory', () => {
     let entityStoreBuilderFactory: DefaultEntityStoreBuilderFactory;
-    let entityServiceFactory: EntityCollectionServiceFactory;
+    let entityCollectionsService: EntityCollectionsService;
     let entityMetaOptionsService: EntityMetaOptionsService;
 
     beforeEach(() => {
-        entityServiceFactory = new EntityCollectionServiceFactoryMock();
+        entityCollectionsService = new EntityCollectionsServiceMock();
         entityMetaOptionsService = new EntityMetaOptionsServiceMock();
-        entityStoreBuilderFactory = new DefaultEntityStoreBuilderFactory(
-            entityServiceFactory,
-            entityMetaOptionsService
-        );
+        spyOn(entityMetaOptionsService, 'getEntityMetadata').and.returnValue({
+            name: 'User'
+        });
+        entityStoreBuilderFactory = new DefaultEntityStoreBuilderFactory(entityCollectionsService);
     });
 
     it('should be created', () => {
@@ -57,17 +67,13 @@ describe('Default DefaultEntityStoreBuilderFactory', () => {
 
 describe('Default EntityStoreBuilder', () => {
     let builder: DefaultEntityStoreBuilder<User>;
-    let entityServiceFactory: EntityCollectionServiceFactory;
+    let entityCollectionsService: EntityCollectionsService;
     let entityMetaOptionsService: EntityMetaOptionsService;
 
     beforeEach(() => {
-        entityServiceFactory = new EntityCollectionServiceFactoryMock();
+        entityCollectionsService = new EntityCollectionsServiceMock();
         entityMetaOptionsService = new EntityMetaOptionsServiceMock();
-        builder = new DefaultEntityStoreBuilder(
-            User,
-            entityServiceFactory,
-            entityMetaOptionsService
-        );
+        builder = new DefaultEntityStoreBuilder(User, entityCollectionsService);
     });
 
     it('should be created', () => {
@@ -75,7 +81,7 @@ describe('Default EntityStoreBuilder', () => {
     });
 
     it('should create new store', () => {
-        spyOn(entityServiceFactory, 'create');
+        spyOn(entityCollectionsService, 'getEntityCollectionService');
         spyOn(entityMetaOptionsService, 'getEntityMetadata').and.returnValue({ name: 'User' });
         spyOn(builder, 'reset');
 
@@ -83,7 +89,7 @@ describe('Default EntityStoreBuilder', () => {
 
         expect(store instanceof DefaultEntityStore).toBeTruthy();
 
-        expect(entityServiceFactory.create).toHaveBeenCalledOnceWith('User');
+        expect(entityCollectionsService.getEntityCollectionService).toHaveBeenCalledOnceWith(User);
 
         expect(builder.reset).toHaveBeenCalled();
     });
@@ -96,6 +102,12 @@ describe('Default EntityStoreBuilder', () => {
 
     it('should has "useFetchPolicy" method defined', () => {
         const returnedValue = builder.useFetchPolicy({ strategy: null });
+        // return builder instance
+        expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
+    });
+
+    it('should has "withChainingStrategy" method defined', () => {
+        const returnedValue = builder.withChainingStrategy({ child: 'non-block' });
         // return builder instance
         expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
     });

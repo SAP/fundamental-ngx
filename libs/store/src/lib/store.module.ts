@@ -26,6 +26,9 @@ import {
     QueryAdapterService
 } from './infrastructure/persistence/query/query-adapter';
 import { ENTITY_MODEL_MAP, FundamentalStoreConfig } from './infrastructure/configuration';
+import { EntityCollectionServiceFactory } from './infrastructure/persistence/store/entity-collection-service-factory';
+import { EntityCollectionsService } from './infrastructure/persistence/store/entity-collections-service';
+import { DefaultEntityCollectionsService } from './infrastructure/persistence/store/entity-collections-service-base';
 
 function mapFundamentalConfigToNgrxConfig(conf: FundamentalStoreConfig): EntityDataModuleConfig {
     const entityMetadata: EntityMetadataMap = {};
@@ -77,13 +80,19 @@ export class FundamentalStoreModule {
             { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
 
             { provide: ENTITY_MODEL_MAP, useValue: conf.entities },
+            
             { provide: EntityMetaOptionsService, useClass: DefaultEntityMetaOptionsService },
             { provide: EntityStoreBuilderFactory, useClass: DefaultEntityStoreBuilderFactory },
 
             QueryAdapterFactory,
             { provide: QueryAdapterService, useClass: DefaultQueryAdapterService },
+            
             EntityCacheStorageServiceFactory,
             EntityRestServerServiceFactory,
+            
+            EntityCollectionServiceFactory,
+            { provide: EntityCollectionsService, useClass: DefaultEntityCollectionsService },
+            
             { provide: DefaultDataServiceFactory, useClass: DefaultEntityServerServiceFactory },
             { provide: HttpUrlGenerator, useClass: DefaultHttpUrlGenerator }
         ];
