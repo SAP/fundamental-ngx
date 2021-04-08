@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { BaseEntity } from './entity';
 import { EntityMetaOptions } from './entity-meta-options';
 import { EntityResourceMetaOptions } from './rest-resource';
@@ -8,38 +6,37 @@ import { Type } from './utility';
 export const ENTITY_KEY = Symbol('ENTITY');
 export const REST_RESOURCE_KEY = Symbol('REST_Resource');
 
-const entitiesSet = new Set();
+const ENTITY_META_MAP = new Map<Type<any>, EntityMetaOptions<any>>();
+const RESOURCE_MAP = new Map<Type<any>, EntityResourceMetaOptions>();
 
 export type EntityType<T extends BaseEntity> = Type<T>;
 
 export function Entity<T extends BaseEntity>(config: EntityMetaOptions<T>) {
     // TODO: Add entity name uniqueness validation
     return (target: EntityType<T>) => {
-        if (!entitiesSet.has(target)) {
-            entitiesSet.add(target);
-        }
-        Reflect.defineMetadata(ENTITY_KEY, config, target);
+        ENTITY_META_MAP.set(target, config);
     };
 }
 
 export function RESTResource<T extends BaseEntity>(config: EntityResourceMetaOptions) {
     return (target: EntityType<T>) => {
-        if (!entitiesSet.has(target)) {
-            entitiesSet.add(target);
-        }
-        Reflect.defineMetadata(REST_RESOURCE_KEY, config, target);
+        RESOURCE_MAP.set(target, config);
     };
 }
 
 export function getEntityMetadata<T extends BaseEntity>(target: EntityType<T>): EntityMetaOptions<T> | undefined {
-    return Reflect.getOwnMetadata(ENTITY_KEY, target);
+    return ENTITY_META_MAP.get(target);
 }
 
-export function getResourceMetadata<T extends BaseEntity>(target: EntityType<T>): EntityResourceMetaOptions | undefined {
-    return Reflect.getOwnMetadata(REST_RESOURCE_KEY, target);
+export function getResourceMetadata<T extends BaseEntity>(
+    target: EntityType<T>
+): EntityResourceMetaOptions | undefined {
+    return RESOURCE_MAP.get(target);
 }
 
-export function getEntityMetadataByEntityName<T extends BaseEntity = BaseEntity>(entityName: string): EntityMetaOptions<T> | undefined {
+export function getEntityMetadataByEntityName<T extends BaseEntity = BaseEntity>(
+    entityName: string
+): EntityMetaOptions<T> | undefined {
     const entity: EntityType<any> = getEntityByName(entityName);
     if (entity) {
         return getEntityMetadata(entity);
@@ -56,8 +53,7 @@ export function getEntityResourceMetadataByEntityName(entityName: string): Entit
 }
 
 const getEntityByName = (entityName: string) => {
-    for (const target of Array.from(entitiesSet)) {
-        const options = getEntityMetadata(target as EntityType<any>);
+    for (const [target, options] of Array.from(ENTITY_META_MAP)) {
         if (options.name === entityName) {
             return target as EntityType<any>;
         }

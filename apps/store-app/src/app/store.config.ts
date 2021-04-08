@@ -44,7 +44,7 @@ class Company extends BaseEntity {
     chainingPolicy: {
         fields: {
             company: {
-                strategy: 'block',
+                strategy: 'non-block',
                 type: Company,
                 key: 'companyId'
             }

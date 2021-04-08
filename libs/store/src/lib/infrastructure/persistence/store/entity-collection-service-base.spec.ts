@@ -323,7 +323,8 @@ describe('EntityCollectionService', () => {
                             next: (result) => {
                                 results.push(result);
                             },
-                            error: () => {
+                            error: (error) => {
+                                expect(error).toBe('Get Owner Error!');
                                 done();
                             }
                         });

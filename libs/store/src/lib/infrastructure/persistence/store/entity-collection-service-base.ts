@@ -164,7 +164,6 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
                             error: (error) => {
                                 // How should we react on it?
                                 // entitySubject.error(error)
-                                console.error(error);
                             },
                             complete: () => {
                                 entitySubject.complete();
