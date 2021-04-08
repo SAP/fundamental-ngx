@@ -21,16 +21,3 @@ export const isAbsoluteUrl = (url: string): boolean => {
     // checks http(s):// only
     return /^https?:\/\//i.test(url);
 }
-
-/**
- * Recursive DOM tree traversal function
- */
-export const walkDomTree = (elements: HTMLElement[], fn: Function) => {
-    elements.forEach((element) => {
-        fn.call(null, element);
-
-        if (element.childNodes.length) {
-            walkDomTree(Array.from(element.childNodes) as HTMLElement[], fn)
-        }
-    });
-};

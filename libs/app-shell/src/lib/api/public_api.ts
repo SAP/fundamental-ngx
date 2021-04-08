@@ -12,5 +12,4 @@ export * from './theming/theme-manager.service';
 export * from './error/error-notifier';
 export * from './error/default-error-handler.service';
 export * from './error/error-formatter';
-export * from './urls/url-dom-overrider.service';
 export * from './urls/url-overrider.pipe';

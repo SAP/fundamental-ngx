@@ -27,8 +27,9 @@ import {
 } from '../../api/plugins/lookup/plugin-descriptor.model';
 import { LookupService } from '../../api/plugins/lookup/lookup.service';
 import { PluginManagerService } from '../../api/plugins/plugin-manager.service';
-import { UrlDomOverriderService } from '../../api/urls/url-dom-overrider.service';
 import { getBaseUrl } from '../../api/urls/url-utils';
+import { REMOTE_BASE_URL } from '../../tokens';
+import { overrideElementUrls } from '../../api/urls/url-dom-utils';
 
 @Component({
     selector: 'fds-plugin-launcher',
@@ -88,8 +89,7 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         private readonly sanitizer: DomSanitizer,
         private readonly compiler: Compiler,
         private readonly pluginManagerService: PluginManagerService,
-        private readonly lookupService: LookupService,
-        private readonly urlDomOverriderService: UrlDomOverriderService) {
+        private readonly lookupService: LookupService) {
     }
 
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
@@ -258,7 +258,7 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
     private overrideElementUrls() {
         this.ngZone.runOutsideAngular(() =>
             window.setTimeout(() => {
-                this.urlDomOverriderService.override(this._elementRef.nativeElement, this.baseUrl);
+                overrideElementUrls(this._elementRef.nativeElement, this.baseUrl);
             })
         );
     }
@@ -271,7 +271,7 @@ export class PluginLauncherComponent implements OnChanges, AfterViewChecked {
         this._ngComponentInjector = Injector.create({
             providers: [
                 {
-                    provide: 'REMOTE_BASE_URL',
+                    provide: REMOTE_BASE_URL,
                     deps: [],
                     useValue: this.baseUrl
                 },
