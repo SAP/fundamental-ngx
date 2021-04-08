@@ -4,9 +4,9 @@ import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
 
-const SAP_ICONS_PREFIX_CLASS = 'sap-icon';
-const TNT_PREFIX_CLASS = 'sap-icon-TNT';
-const BusinessSuiteInAppSymbol_PREFIX_CLASS = 'sap-icon-businessSuiteInAppSymbols';
+const SAP_ICONS_PREFIX = 'sap-icon';
+const TNT_PREFIX = 'TNT';
+const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
 
 /**
  * The component that represents an icon.
@@ -63,13 +63,12 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     buildComponentCssClass(): string[] {
         return [
             this.class,
-            this.glyph ? SAP_ICONS_PREFIX_CLASS : '',
             this.glyph && this.font === 'SAP-icons' ? 
-            `${SAP_ICONS_PREFIX_CLASS}--${this.glyph}` : '',
+            `${SAP_ICONS_PREFIX}--${this.glyph}` : '',
             this.glyph && this.font === 'SAP-icons-TNT' ? 
-            `${TNT_PREFIX_CLASS}--${this.glyph}` : '',
+            `${SAP_ICONS_PREFIX}-${TNT_PREFIX}--${this.glyph}` : '',
             this.glyph && this.font === 'BusinessSuiteInAppSymbols' ?  
-            `${BusinessSuiteInAppSymbol_PREFIX_CLASS}--${this.glyph}` : '',
+            `${SAP_ICONS_PREFIX}-${BusinessSuiteInAppSymbol_PREFIX}--${this.glyph}` : '',
         ];
     }
 
