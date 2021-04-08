@@ -40,8 +40,12 @@ describe('EntityCollectionService', () => {
         ngrxHeroCollectionService = jasmine.createSpyObj<NgrxEntityCollectionService<Hero>>(
             'EntityCollectionService',
             ['add', 'delete', 'getAll', 'getByKey', 'getWithQuery', 'update', 'upsert'],
-            ['collection$', 'entities$', 'count$']
+            ['collection$', 'entities$', 'count$', 'loading$', 'loaded$', 'errors$']
         );
+
+        Object.defineProperty(ngrxHeroCollectionService, 'errors$', {
+            value: of(null)
+        });
 
         entityServices = jasmine.createSpyObj<EntityServices>('EntityServices', ['getEntityCollectionService']);
         entityServices.getEntityCollectionService.and.returnValue(ngrxHeroCollectionService);
