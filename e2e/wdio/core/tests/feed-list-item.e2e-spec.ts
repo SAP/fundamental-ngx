@@ -3,7 +3,7 @@ import {
     addIsActiveClass,
     checkElementScreenshot, click, getAlertText,
     getElementArrayLength, getImageTagBrowserPlatform,
-    mouseHoverElement, pause,
+    mouseHoverElement,
     refreshPage, saveElementScreenshot,
     scrollIntoView, waitForPresent
 } from '../../driver/wdio';
@@ -18,7 +18,7 @@ import {
     optionsMenuTag,
     buttonOverflowTag,
     optionsOverflowTag,
-    cancelOptionTag,
+    cancelOptionTag
 
 } from '../fixtures/testData/feed-list-item.tags';
 
@@ -27,8 +27,10 @@ import { box, button, link, option, text, alertText } from '../fixtures/appData/
 describe('Feed list item test suite:', function() {
 
     const feedListItemPage = new FeedListItemPo();
-    const { paragraphs, checkbox, linkMore, links, actionSettingsButton, menuButton, menuOption, overflowButton,
-        overflowOption, optionCancel} = feedListItemPage;
+    const {
+        paragraphs, checkbox, linkMore, links, actionSettingsButton, menuButton, menuOption, overflowButton,
+        overflowOption, optionCancel
+    } = feedListItemPage;
 
     beforeAll(() => {
         feedListItemPage.open();
@@ -39,19 +41,19 @@ describe('Feed list item test suite:', function() {
         waitForPresent(paragraphs);
     }, 1);
 
-        it('verify alert text', () => {
-            scrollIntoView(actionSettingsButton);
-            click(actionSettingsButton);
-            expect(alertText).toContain(getAlertText());
-        });
+    it('verify alert text', () => {
+        scrollIntoView(actionSettingsButton);
+        click(actionSettingsButton);
+        expect(alertText).toContain(getAlertText());
+    });
 
-    fdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
 
         it('should check author links states', () => {
             const linksLength = getElementArrayLength(links);
             for (let i = 0; i < linksLength; i++) {
                 scrollIntoView(links, i);
-                checkElementStates(links, authorLinkTag + i + '-', link, i );
+                checkElementStates(links, authorLinkTag + i + '-', link, i);
             }
         });
 
@@ -63,7 +65,7 @@ describe('Feed list item test suite:', function() {
         it('should check all paragraphs visual regression', () => {
             const paragraphsLength = getElementArrayLength(paragraphs);
             for (let i = 0; i < paragraphsLength; i++) {
-                    scrollIntoView(paragraphs, i);
+                scrollIntoView(paragraphs, i);
                 checkElementHoverState(paragraphs, paragraphTag + i + '-hover-state-', text, i);
             }
         });
@@ -151,7 +153,6 @@ describe('Feed list item test suite:', function() {
             scrollIntoView(paragraphs, 19);
             checkElementHoverState(paragraphs, paragraphExtendsTag + '5-hover-state-', text, 19);
         });
-
     });
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
