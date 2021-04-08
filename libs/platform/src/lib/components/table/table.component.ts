@@ -408,7 +408,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return this.isTreeTable 
             && !this._sortRulesMap.size
             && !this._groupRulesMap.size
-            && !this._filterRulesMap.size;
+            && !this._filterRulesMap.size
+            && !this._freezableColumns.length;
     }
 
     /** @hidden */
@@ -673,6 +674,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                     removed.push(row);
                 }
             });
+        } else {
+            if (rowToToggle.type === 'tree') {
+                const rowChildren = this._findRowChildren(rowToToggle);
+
+                rowChildren.forEach(child => {
+                    child.checked = checked;
+
+                    checked ? added.push(child) : removed.push(child);
+                });
+            }
         }
 
         checked ? added.push(rowToToggle) : removed.push(rowToToggle);
@@ -1430,7 +1441,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter(({ type }) => type === 'item');
+        return this._tableRows.filter(({ type }) => type === 'item' || type === 'tree');
     }
 
     /** @hidden */

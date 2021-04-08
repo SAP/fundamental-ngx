@@ -37,7 +37,7 @@
 
                     @include fd-rtl() {
                         padding-left: 0.5rem;
-                        padding-right: $initial-padding $expand-padding;
+                        padding-right: $initial-padding + $expand-padding;
                     }
                 /** As we're started from 0 third level has index 2 */
                 } @else if $i == 2  {
@@ -99,6 +99,31 @@
         }
     }
 
+    .fd-table__row {
+        &.fd-dnd-on-drag {
+            &.fd-dnd-placeholder {
+                padding-left: 2.8rem;
+
+                @include fd-rtl() {
+                    padding-left: 0.5rem;
+                }
+            }
+
+            &:not(.fd-dnd-placeholder) {
+                .fdp-table__cell--selection {
+                    top: 0;
+                    transform: translate(-100%, 0);
+                }
+            }
+
+            @include fd-rtl() {
+                .fdp-table__cell--selection {
+                    transform: translate(100%, 0);
+                }
+            }
+        }
+    }
+
     .fd-table__cell {
         box-sizing: border-box;
 
@@ -153,6 +178,18 @@
         .fdp-table__cell--expand {
             min-width: 2rem;
             max-width: 2rem;
+        }
+
+        .fd-table__row {
+            &.fd-dnd-on-drag {
+                &.fd-dnd-placeholder {
+                    padding-left: 2rem;
+    
+                    @include fd-rtl() {
+                        padding-left: 0.5rem;
+                    }
+                }
+            }
         }
 
         .fd-table__cell {

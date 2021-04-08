@@ -956,8 +956,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
     @Component({
         template: `
             <fdp-table
-                [dataSource]="source"
                 contentDensity="compact"
+                selectionMode="multiple"
+                [dataSource]="source"
                 [isTreeTable]="true"
                 [relationKey]="relationKey"
             >
@@ -980,13 +981,17 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableComponent: TableComponent<SourceItem>;
 
         let tableBodyRows: DebugElement[] = [];
+        let tableBodySelectedRows: DebugElement[] = [];
         let tableBodyTreeRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
+        let tableRowSelectorCellsArray: DebugElement[] = [];
 
         const calculateTableElementsMetaData = () => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
+            tableBodySelectedRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row[aria-selected="true"]'));
             tableBodyTreeRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fdp-table__row--tree'));
             tableRowTogglerCellsArray = tableBodyTreeRows.map((row) => row.query(By.css('.fdp-table__cell--tree')));
+            tableRowSelectorCellsArray = tableBodyTreeRows.map((row) => row.query(By.css('.fdp-table__cell--selection input')));
         };
 
         beforeEach(
@@ -1095,6 +1100,38 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 expect(tableBodyRows.length).toEqual(treeItemParentsCount);
             });
+        });
+
+        describe('Selecting', () => {
+            let firstRowToggler: DebugElement;
+            let firstRowSelector: DebugElement;
+
+            beforeEach(() => {
+                calculateTableElementsMetaData();
+
+                firstRowToggler = tableRowTogglerCellsArray[0];
+                firstRowSelector = tableRowSelectorCellsArray[0];
+            });
+
+            it('should select multiple rows', () => {
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyRows.length).toEqual(
+                    treeItemParentsCount + treeItemsChildrenPerParentCount
+                );
+
+                firstRowSelector.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodySelectedRows.length).toEqual(1 + treeItemsChildrenPerParentCount);
+            })
         });
 
         describe('Drag & Drop', () => {
