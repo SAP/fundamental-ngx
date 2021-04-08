@@ -32,7 +32,8 @@ describe('Grid-list test suite', function() {
         errorStateItem, lockedStateItemButton, lockedStateItemText, gridListsArray, gridListsTitle,
         multiSelectModeSelectedItems, errorStatusIndicator, warningStatusIndicator, neutralStatusIndicator,
         singleSelectItemsSelected, successStatusIndicator, dragAndDropItems, gridListButtons,
-        gridListItem, gridListLink, gridListToolbar, gridListRadioButton, gridListCheckbox
+        gridListItem, gridListLink, gridListToolbar, gridListRadioButton, gridListCheckbox, gridListItemUnread,
+        gridListItemError, gridListItemStatus, gridListLinkStatus
     } = gridListPage;
 
     beforeAll(() => {
@@ -152,22 +153,6 @@ describe('Grid-list test suite', function() {
             }
         });
 
-        it('verify item states', () => {
-            const itemLength = getElementArrayLength(gridListItem);
-            for (let i = 0; i < itemLength; i++) {
-                scrollIntoView(gridListItem, i);
-                checkElementStates(gridListItem, itemTag + i + '-', item, i);
-            }
-        });
-
-        it('verify link states', () => {
-            const linkLength = getElementArrayLength(gridListLink);
-            for (let i = 0; i < linkLength; i++) {
-                scrollIntoView(gridListLink, i);
-                checkElementStates(gridListLink, linkTag + i + '-', link, i);
-            }
-        });
-
         it('verify toolbar states', () => {
             scrollIntoView(gridListToolbar);
             checkElementStates(gridListToolbar, toolbarTag, toolbar);
@@ -188,27 +173,203 @@ describe('Grid-list test suite', function() {
                 checkElementStates(gridListCheckbox, checkboxTag + i + '-', checkbox, i);
             }
         });
+
+        describe('Check none mode example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem);
+                checkElementStates(gridListItem, itemTag + '4-', item);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink);
+                checkElementStates(gridListLink, linkTag + '4-', link);
+            });
+        });
+
+        describe('Check single select left mode example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 13);
+                checkElementStates(gridListItem, itemTag + '5-', item, 13);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 6);
+                checkElementStates(gridListLink, linkTag + '5-', link, 6);
+            });
+        });
+
+        describe('Check single select right mode example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 20);
+                checkElementStates(gridListItem, itemTag + '6-', item, 20);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 13);
+                checkElementStates(gridListLink, linkTag + '6-', link, 13);
+            });
+        });
+
+        describe('Check multi select mode example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 27);
+                checkElementStates(gridListItem, itemTag + '7-', item, 27);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 20);
+                checkElementStates(gridListLink, linkTag + '7-', link, 20);
+            });
+        });
+
+        describe('Check delete mode example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 34);
+                checkElementStates(gridListItem, itemTag + '8-', item, 34);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 27);
+                checkElementStates(gridListLink, linkTag + '8-', link, 27);
+            });
+        });
+
+        describe('Check group company A example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 41);
+                checkElementStates(gridListItem, itemTag + '9-', item, 41);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 34);
+                checkElementStates(gridListLink, linkTag + '9-', link, 34);
+            });
+        });
+
+        describe('Check group company B example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 45);
+                checkElementStates(gridListItem, itemTag + '10-', item, 45);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 38);
+                checkElementStates(gridListLink, linkTag + '10-', link, 38);
+            });
+        });
+
+        describe('Check states State: Unread example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItemUnread);
+                checkElementStates(gridListItemUnread, itemTag + '11-', item);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 41);
+                checkElementStates(gridListLink, linkTag + '11-', link, 41);
+            });
+        });
+
+        describe('Check states State: Error example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItemError);
+                checkElementStates(gridListItemError, itemTag + '12-', item);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 42);
+                checkElementStates(gridListLink, linkTag + '12-', link, 42);
+            });
+        });
+
+        describe('Check status examples', function() {
+            it('verify item states', () => {
+                const itemStatusLength = getElementArrayLength(gridListItemStatus);
+                for (let i = 0; i < itemStatusLength; i++) {
+                    scrollIntoView(gridListItemStatus, i);
+                    checkElementStates(gridListItemStatus, itemTag + i + '-', item, i);
+                }
+            });
+
+            it('verify link states', () => {
+                const linkStatusLength = getElementArrayLength(gridListLinkStatus);
+                for (let i = 0; i < linkStatusLength; i++) {
+                    scrollIntoView(gridListLinkStatus, i);
+                    checkElementStates(gridListLinkStatus, linkTag + i + '-', link, i);
+                }
+            });
+        });
+
+        describe('Check more button example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 48);
+                checkElementStates(gridListItem, itemTag + '13-', item, 48);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 52);
+                checkElementStates(gridListLink, linkTag + '13-', link, 52);
+            });
+        });
+
+        describe('Check footer example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 53);
+                checkElementStates(gridListItem, itemTag + '14-', item, 53);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 57);
+                checkElementStates(gridListLink, linkTag + '14-', link, 57);
+            });
+        });
+
+        describe('Check drag and drop example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 58);
+                checkElementStates(gridListItem, itemTag + '15-', item, 58);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 62);
+                checkElementStates(gridListLink, linkTag + '15-', link, 62);
+            });
+        });
+
+        describe('Check layout example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItem, 66);
+                checkElementStates(gridListItem, itemTag + '16-', item, 66);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 70);
+                checkElementStates(gridListLink, linkTag + '16-', link, 70);
+            });
+        });
+
+
     });
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), gridListPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), gridListPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element hover state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with index ${index} hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), gridListPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), gridListPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element focus state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with index ${index} focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), gridListPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), gridListPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with index ${index} active state mismatch`);
     }
 
     function checkElementHoverActiveStates(selector: string, tag: string, elementName: string, index: number = 0): void {
