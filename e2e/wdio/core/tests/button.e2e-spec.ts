@@ -38,7 +38,7 @@ describe('Button test suite:', function() {
             const typeButtonsLength = getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
                 scrollIntoView(typeButtons, i);
-                expect(isElementClickable(typeButtons, i)).toBe(true);
+                expect(isElementClickable(typeButtons, i)).toBe(true, `type button with index ${i} not clickable`);
             }
         });
 
@@ -46,7 +46,7 @@ describe('Button test suite:', function() {
             const menuButtonsLength = getElementArrayLength(menuButtons);
             for (let i = 0; i < menuButtonsLength; i++) {
                 scrollIntoView(menuButtons, i);
-                expect(isElementClickable(menuButtons, i)).toBe(true);
+                expect(isElementClickable(menuButtons, i)).toBe(true, `menu button with index ${i} not clickable`);
             }
         });
 
@@ -54,7 +54,7 @@ describe('Button test suite:', function() {
             const sizeButtonsLength = getElementArrayLength(sizeButtons);
             for (let i = 0; i < sizeButtonsLength; i++) {
                 scrollIntoView(sizeButtons, i);
-                expect(isElementClickable(sizeButtons, i)).toBe(true);
+                expect(isElementClickable(sizeButtons, i)).toBe(true, `size button with index ${i} not clickable`);
             }
         });
 
@@ -62,18 +62,18 @@ describe('Button test suite:', function() {
             const iconButtonsLength = getElementArrayLength(iconButtons);
             for (let i = 0; i < iconButtonsLength; i++) {
                 scrollIntoView(iconButtons, i);
-                expect(isElementClickable(iconButtons, i)).toBe(true);
+                expect(isElementClickable(iconButtons, i)).toBe(true, `icon button with index ${i} not clickable`);
             }
         });
 
         it('verify state buttons', () => {
             scrollIntoView(stateButton);
-            expect(isElementClickable(stateButton)).toBe(true);
+            expect(isElementClickable(stateButton)).toBe(true, `state button with index not clickable`);
         });
 
         it('verify playground button is clickable', () => {
             scrollIntoView(playgroundButton);
-            expect(isElementClickable(playgroundButton)).toBe(true);
+            expect(isElementClickable(playgroundButton)).toBe(true, `playground button with index not clickable`);
         });
     });
 
@@ -151,7 +151,7 @@ describe('Button test suite:', function() {
         });
     });
 
-    describe('Check visual regression basic', function() {
+    fdescribe('Check visual regression basic', function() {
 
         it('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();
@@ -208,21 +208,21 @@ describe('Button test suite:', function() {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element hover state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with ${index} hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element focus state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with ${index} focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} element item with ${index} active state mismatch`);
     }
 
     function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
