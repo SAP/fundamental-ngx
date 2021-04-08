@@ -14,12 +14,25 @@ import { QuerySnapshot } from '../query/query';
 export interface EntityCollectionService<T> {
     /** Entity service name  */
     readonly name: string;
+    
     /** Observable of the collection as a whole */
-    readonly collection$: Observable<EntityCollection> | Store<EntityCollection>;
+    readonly collection$: Observable<EntityCollection>;
+    
     /** Observable of count of entities in the cached collection. */
-    readonly count$: Observable<number> | Store<number>;
+    readonly count$: Observable<number>;
+    
     /** Observable of all entities in the cached collection. */
-    readonly entities$: Observable<T[]> | Store<T[]>;
+    readonly entities$: Observable<T[]>;
+
+    /** Observable of error related to this entity type. */
+    readonly errors$: Observable<Error>;
+
+    /** Observable true when the collection has been loaded */
+    readonly loaded$: Observable<boolean>;
+
+    /** Observable true when a multi-entity query command is in progress. */
+    readonly loading$: Observable<boolean>;
+
     /**
      * Create Entity on remote server
      * @param entity Entity to create

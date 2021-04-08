@@ -19,7 +19,7 @@ import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chai
  * That is a wrapper for NgRx EntityCollectionService
  * it delegates all heavy work to ngrx-data.
  *
- * Also this service is responsible to perform request chaining
+ * This service is responsible to perform request chaining
  *
  * Also this service is responsible to chain requests for sub resources
  *
@@ -27,20 +27,27 @@ import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chai
 export class DefaultEntityCollectionService<T extends BaseEntity> implements EntityCollectionService<T> {
     readonly name: string;
 
-    get collection$(): Observable<EntityCollection<T>> | Store<EntityCollection<T>> {
-        return this.entityCollectionService.collection$;
-    }
+    readonly collection$: Observable<EntityCollection<T>> | Store<EntityCollection<T>>;
 
-    get count$(): Observable<number> | Store<number> {
-        return this.entityCollectionService.count$;
-    }
+    readonly count$: Observable<number>;
 
-    get entities$(): Observable<T[]> | Store<T[]> {
-        return this.entityCollectionService.entities$;
-    }
+    readonly entities$: Observable<T[]>;
 
+    readonly errors$: Observable<Error>;
+
+    readonly loading$: Observable<boolean>;
+
+    readonly loaded$: Observable<boolean>;
+
+    /**
+     * @hidden
+     * ngrx entity collection service
+     */
     protected readonly entityCollectionService: NgrxEntityCollectionService<T>;
-
+    /**
+     * @hidden
+     * Meta options associated with Entity
+     */
     protected readonly entityMetaOptions: EntityMetaOptions<T>;
 
     constructor(
@@ -53,6 +60,13 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
         const { name } = this.entityMetaOptions;
         this.name = `${name} DefaultEntityCollectionService`;
         this.entityCollectionService = entityServices.getEntityCollectionService(name);
+
+        this.collection$ = this.entityCollectionService.collection$;
+        this.count$ = this.entityCollectionService.count$;
+        this.entities$ = this.entityCollectionService.entities$;
+        this.errors$ = this.entityCollectionService.errors$.pipe(map((action) => action.payload.error));
+        this.loading$ = this.entityCollectionService.loading$;
+        this.loaded$ = this.entityCollectionService.loaded$;
     }
 
     add(entity: T): Observable<T> {
