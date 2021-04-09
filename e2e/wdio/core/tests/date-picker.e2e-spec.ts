@@ -314,7 +314,7 @@ describe('Date picker suite', function() {
         // skipped for now due to the issue with selected date for disabled components
         xit('should check examples visual regression', () => {
             datePickerPage.saveExampleBaselineScreenshot();
-            expect(datePickerPage.compareWithBaseline()).toBeLessThan(1);
+            expect(datePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         it('should check active input visual regression', () => {
@@ -360,21 +360,21 @@ describe('Date picker suite', function() {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
+            .toBeLessThan(5, `${elementName} element hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element focus state mismatch`);
+            .toBeLessThan(5, `${elementName} element focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), datePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} element item ${index} active state mismatch`);
     }
 
     function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
