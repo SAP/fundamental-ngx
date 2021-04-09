@@ -59,7 +59,7 @@ describe('Feed list item test suite:', function() {
 
         it('should check basic visual regression', () => {
             feedListItemPage.saveExampleBaselineScreenshot();
-            expect(feedListItemPage.compareWithBaseline()).toBeLessThan(1);
+            expect(feedListItemPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         it('should check all paragraphs visual regression', () => {
@@ -116,9 +116,9 @@ describe('Feed list item test suite:', function() {
         });
 
         it('should check extends paragraph 1st after clicking more hover state', () => {
-            scrollIntoView(paragraphs, 0);
-            click(linkMore, 0);
-            checkElementHoverState(paragraphs, paragraphExtendsTag + '0-hover-state-', text, 0);
+            scrollIntoView(paragraphs);
+            click(linkMore);
+            checkElementHoverState(paragraphs, paragraphExtendsTag + '0-hover-state-', text);
         });
 
         it('should check extends paragraph 2nd after clicking more hover state', () => {
