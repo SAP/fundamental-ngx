@@ -33,7 +33,7 @@ describe('Grid-list test suite', function() {
         multiSelectModeSelectedItems, errorStatusIndicator, warningStatusIndicator, neutralStatusIndicator,
         singleSelectItemsSelected, successStatusIndicator, dragAndDropItems, gridListButtons,
         gridListItem, gridListLink, gridListToolbar, gridListRadioButton, gridListCheckbox, gridListItemUnread,
-        gridListItemError, gridListItemStatus, gridListLinkStatus
+        gridListItemError, gridListItemStatus, gridListLinkStatus, gridListItemLocked, gridListItemDraft
     } = gridListPage;
 
     beforeAll(() => {
@@ -348,7 +348,41 @@ describe('Grid-list test suite', function() {
             });
         });
 
+        describe('Check single select mode example', function() {
+            it('verify item with button states', () => {
+                scrollIntoView(gridListItem, 6);
+                checkElementStates(gridListItem, itemTag + '17-', item, 6);
+            });
 
+            it('verify item without button states', () => {
+                scrollIntoView(gridListItem, 10);
+                checkElementStates(gridListItem, itemTag + '18-', item, 10);
+            });
+        });
+
+        describe('Check states State: Locked example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItemLocked);
+                checkElementStates(gridListItemLocked, itemTag + '19-', item);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 44);
+                checkElementStates(gridListLink, linkTag + '17-', link, 44);
+            });
+        });
+
+        describe('Check states State: Draft example', function() {
+            it('verify item states', () => {
+                scrollIntoView(gridListItemDraft);
+                checkElementStates(gridListItemDraft, itemTag + '20-', item);
+            });
+
+            it('verify link states', () => {
+                scrollIntoView(gridListLink, 46);
+                checkElementStates(gridListLink, linkTag + '18-', link, 46);
+            });
+        });
     });
 
     function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {

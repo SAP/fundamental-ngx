@@ -33,6 +33,8 @@ export class GridListPo extends CoreBaseComponentPo {
     gridListItem = 'fd-grid-list-item.ng-star-inserted div.fd-grid-list__item';
     gridListItemUnread = '.fd-grid-list__item--unread';
     gridListItemError = '.fd-grid-list__item--error';
+    gridListItemLocked = '.fd-grid-list__item--locked';
+    gridListItemDraft = '.fd-grid-list__item--draft';
     gridListItemStatus = 'div#fd-grid-list-8 fd-grid-list-item';
     gridListLinkStatus = 'div#fd-grid-list-8 a';
     gridListLink = 'a.fd-link';
