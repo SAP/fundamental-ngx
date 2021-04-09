@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.81...v0.29.0-rc.82) (2021-04-09)
+
+
+### Bug Fixes
+
+* (Core) mirror image multi-input value-help icon when dir="rtl" ([#5008](https://github.com/SAP/fundamental-ngx/issues/5008)) ([842d27a](https://github.com/SAP/fundamental-ngx/commit/842d27aecc8466b586de3b716deba6def702d6f9))
+
 ## [0.29.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.79...v0.29.0-rc.81) (2021-04-09)
 
 
