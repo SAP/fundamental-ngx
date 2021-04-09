@@ -2,11 +2,18 @@ import { of } from 'rxjs';
 
 import { DefaultEntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
-import { Type } from '../../../domain/public_api';
+import { IdentityKey, Type } from '../../../domain/public_api';
+import { BaseEntity } from '../domain/base-classes/base-entity';
 import { EntityCollectionService } from './entity-collection-service';
 
-class User {
-    constructor(public id: string | string, public name: string, public age: number) {}
+class User extends BaseEntity<{}>{
+    constructor(public id: IdentityKey, public name: string, public age: number) {
+        super({ id, name, age });
+    }
+
+    get identity(): IdentityKey {
+        return this.id;
+    }
 }
 
 class UserCollectionServiceMock implements Partial<EntityCollectionService<User>> {

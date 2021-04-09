@@ -12,8 +12,9 @@ import { QueryService } from '../query/query.service';
 import { QueryBuilder } from '../query/query-builder';
 import { QuerySnapshot } from '../query/query';
 import { instanceForType } from '../domain/state-handler';
-import { BaseEntity } from '../../../domain/entity';
+// import { BaseEntity } from '../../../domain/entity';
 import { EntityCollectionService } from './entity-collection-service';
+import { BaseEntity } from '../domain/base-classes/base-entity';
 
 //#region Interfaces
 
@@ -62,7 +63,7 @@ export interface EntityStoreOptions<T extends BaseEntity> {
 /**
  * Entity Store default implementation
  */
-export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> {
+export class DefaultEntityStore<T extends BaseEntity<{}>> implements EntityStore<T> {
     get queryBuilder(): QueryBuilder<T> {
         return this._queryBuilder;
     }
@@ -81,7 +82,7 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
     }
 
     save(entity: T): Observable<T> {
-        if (entity.id) {
+        if (entity.identity) {
             return this._entityService.update(entity);
         }
         return this._entityService.add(entity);

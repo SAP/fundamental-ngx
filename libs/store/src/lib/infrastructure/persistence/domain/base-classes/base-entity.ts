@@ -2,19 +2,18 @@ import { Composite } from './composite';
 import { IdentityKey } from '../../../../domain/entity';
 
 /**
- * BaseEntityDTO that extends passed Entity DTO
- * */
-export interface BaseEntityDTO {
-    id: IdentityKey;
-}
-
-/**
  * Base Entity follows the DDD definition of Entity
  */
-export abstract class BaseEntity<EntityProps extends BaseEntityDTO> extends Composite<EntityProps> {
-     constructor(dto: EntityProps) {
-         super(dto);
-     }
+export abstract class BaseEntity<EntityProps> extends Composite<EntityProps> {
+    constructor(dto: EntityProps) {
+        super(dto);
+    }
+
+    /**
+     * Getter and setter to specify unique entity identity
+     */
+    abstract get identity(): IdentityKey;
+    abstract set identity(value);
 
     /**
      * Check if Entity has proper instance
@@ -41,6 +40,6 @@ export abstract class BaseEntity<EntityProps extends BaseEntityDTO> extends Comp
             return false;
         }
 
-        return this.value.id === object.value.id;
+        return this.identity === object.identity;
     }
 }

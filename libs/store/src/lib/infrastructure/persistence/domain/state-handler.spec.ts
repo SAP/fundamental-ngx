@@ -1,8 +1,10 @@
 import { DefaultEntityStore } from '../store';
 import { EntityCollectionService } from '@ngrx/data';
 import { QueryBuilder } from '../query/query-builder';
-import { BaseEntity, BaseEntityDTO, BaseValue, RESTResource } from '@fundamental-ngx/store';
+import { BaseEntity, BaseValue, RESTResource } from '@fundamental-ngx/store';
 import { Type } from '../../../domain/public_api'
+
+type IdentityKey = string | number;
 
 interface MoneyDTO {
     amount: number;
@@ -15,7 +17,8 @@ interface Item {
     amount: Money;
 }
 
-interface ReqDTO extends BaseEntityDTO {
+interface ReqDTO {
+    uniqueName: IdentityKey;
     title: string;
     amount: number;
     lineItems: Array<LineItem>;
@@ -40,22 +43,30 @@ export class LineItem extends BaseValue<Item> {
     }
 }
 
-interface ReqDTO extends BaseEntityDTO {
-    id: number;
+interface ReqDTO {
+    uniqueName: IdentityKey;
     title: string;
     amount: number;
     lineItems: Array<LineItem>;
 }
 
 class Requisition extends BaseEntity<ReqDTO> {
-    id: number;
+    uniqueName: IdentityKey;
     title: string;
     amount: number;
     lineItems: Array<LineItem>;
+
+    get identity(): IdentityKey {
+        return this.value.uniqueName;
+    }
+
+    set identity(value) {
+        this.value.uniqueName = value;
+    }
 }
 
 const fromState = {
-    id: 1,
+    uniqueName: 'ReqName',
     title: 'Req 1',
     amount: 10,
     lineItems: [
@@ -83,11 +94,11 @@ describe('should create proxy', () => {
     it('should be changed', () => {
         const firstValue = 'Req 1';
         const changedValue = 'Change title';
-        expect(entityInstance.title).toEqual(firstValue);
+        expect(entityInstance.value.title).toEqual(firstValue);
 
-        entityInstance.title = changedValue;
+        entityInstance.value.title = changedValue;
 
-        expect(entityInstance.title).toEqual(changedValue);
+        expect(entityInstance.value.title).toEqual(changedValue);
     });
 
     it('can create new instance Value Object', () => {
@@ -128,4 +139,8 @@ describe('should create proxy', () => {
     it('can treat dto', () => {
         expect(entityInstance.value).toEqual(fromState);
     });
+
+    it('cat treat entity indenity', () => {
+        expect(entityInstance.identity).toEqual(fromState.uniqueName);
+    })
 })

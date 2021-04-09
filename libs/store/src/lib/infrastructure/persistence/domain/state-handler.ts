@@ -12,7 +12,7 @@ export function instanceForType<T>(Type: Type<T>, fromState = {}) {
  */
 class StateHandler<TModel> {
     constructor(
-        /** Global entity state equals entity dto */
+        /** Plain entity dto object */
         private state: TModel
     ) {
     }
@@ -23,24 +23,25 @@ class StateHandler<TModel> {
             return new Proxy(this.state[prop], this);
         }
 
-        return target[prop] || this.state[prop];
+        return Reflect.get(target as any, prop);
     }
 
-    set(target: TModel, key: PropertyKey, value: unknown): boolean {
+    set(target: TModel, key: PropertyKey, value: any): boolean {
+        if (Array.isArray(value)) {
+            // assign array with several elements
+            return Reflect.set(target['value'] as any, key, value);
+        }
         if (value instanceof BaseValue) {
             const isEqual = Array.isArray(target) && target.some(elem => value.equals(elem)
                 || value.equals(target[key]));
 
             if (!isEqual) {
-                // target[key] = value;
-                // return true;
                 return Reflect.set(target as any, key, value);
             }
         } else {
-            return Reflect.set(this.state as any, key, value);
+            return Reflect.set(target as any, key, value);
         }
 
         return false;
     }
 }
-

@@ -1,9 +1,9 @@
-import { Entity, RESTResource } from '@fundamental-ngx/store';
-import { BaseEntityDTO } from '@fundamental-ngx/store';
+import { Entity, IdentityKey, RESTResource } from '@fundamental-ngx/store';
 import { BaseEntity } from '@fundamental-ngx/store';
 import { LineItem } from './line-items.value-object';
 
-export interface ReqDTO extends BaseEntityDTO {
+export interface ReqDTO {
+    id: number;
     title: string;
     totalAmount: number;
     lineItems: Array<LineItem>;
@@ -20,7 +20,12 @@ export interface ReqDTO extends BaseEntityDTO {
     name: 'Requisition',
 })
 export class Requisition extends BaseEntity<ReqDTO> {
+    id: number;
     title: string;
     totalAmount: number;
     lineItems: Array<LineItem>;
+
+    get identity(): IdentityKey {
+        return this.value.id;
+    }
 }
