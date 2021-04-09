@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.79...v0.29.0-rc.81) (2021-04-09)
+
+
+### Bug Fixes
+
+* (Core) multi input tab index bug ([#5012](https://github.com/SAP/fundamental-ngx/issues/5012)) ([36696c9](https://github.com/SAP/fundamental-ngx/commit/36696c91393ded2d02665df1a30ad17740e17295))
+
 ## [0.29.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.79...v0.29.0-rc.80) (2021-04-07)
 
 ## [0.29.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.78...v0.29.0-rc.79) (2021-04-05)
