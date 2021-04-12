@@ -5,7 +5,6 @@ import {
     CardModule,
     ButtonModule,
     BusyIndicatorModule,
-    CarouselModule,
     ObjectStatusModule,
     ToolbarModule,
     ListModule,
@@ -55,7 +54,6 @@ const routes: Routes = [
         CardModule,
         ButtonModule,
         BusyIndicatorModule,
-        CarouselModule,
         ObjectStatusModule,
         ToolbarModule,
         ListModule,
@@ -82,7 +80,7 @@ const routes: Routes = [
         CardCalendarExampleComponent,
         CardQuickViewExampleComponent,
         CardListExampleComponent,
-        CardLinkListExampleComponent,
+        CardLinkListExampleComponent
     ]
 })
 export class CardDocsModule {}
