@@ -5,7 +5,6 @@ import {
     CardModule,
     ButtonModule,
     BusyIndicatorModule,
-    CarouselModule,
     ObjectStatusModule,
     ToolbarModule,
     ListModule,
@@ -13,8 +12,7 @@ import {
     CalendarModule,
     FdDatetimeModule,
     QuickViewModule,
-    InfoLabelModule,
-    SelectModule
+    InfoLabelModule
 } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -55,11 +53,9 @@ const routes: Routes = [
         CardModule,
         ButtonModule,
         BusyIndicatorModule,
-        CarouselModule,
         ObjectStatusModule,
         ToolbarModule,
         ListModule,
-        SelectModule,
         TableModule,
         CalendarModule,
         FdDatetimeModule,
@@ -82,7 +78,7 @@ const routes: Routes = [
         CardCalendarExampleComponent,
         CardQuickViewExampleComponent,
         CardListExampleComponent,
-        CardLinkListExampleComponent,
+        CardLinkListExampleComponent
     ]
 })
 export class CardDocsModule {}
