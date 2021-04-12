@@ -674,16 +674,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                     removed.push(row);
                 }
             });
-        } else {
-            if (rowToToggle.type === 'tree') {
-                const rowChildren = this._findRowChildren(rowToToggle);
-
-                rowChildren.forEach(child => {
-                    child.checked = checked;
-
-                    checked ? added.push(child) : removed.push(child);
-                });
-            }
         }
 
         checked ? added.push(rowToToggle) : removed.push(rowToToggle);
