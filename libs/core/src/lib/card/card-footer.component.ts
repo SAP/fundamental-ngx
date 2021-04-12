@@ -24,7 +24,7 @@ export class CardFooterComponent implements OnInit, CssClassBuilder {
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardFooter, CLASS_NAME.cardFooterRight, CLASS_NAME.cardFooterBorder];
+        return [CLASS_NAME.cardFooter];
     }
 
     /** @hidden */

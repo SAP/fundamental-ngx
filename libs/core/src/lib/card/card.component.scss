@@ -1,4 +1,46 @@
 @import '~fundamental-styles/dist/numeric-content';
 @import '~fundamental-styles/dist/card';
 @import '~fundamental-styles/dist/badge';
-@import '~fundamental-styles/dist/bar';
+
+/* Defined locally as fundamental-styles does not provide it */
+
+.fd-card__loader {
+    min-height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fd-card__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    border-top: 0.0625rem solid #ccc;
+    border-top: 0.0625rem solid var(--sapTile_SeparatorColor, #ccc);
+}
+
+.fd-card {
+    /* Should be removed once https://github.com/SAP/fundamental-styles/issues/1729 is resolved */
+    .fd-card__analytics-content,
+    .fd-numeric-content__kpi {
+        @at-root {
+            [dir='rtl'] & {
+                direction: ltr;
+                text-align: right;
+            }
+        }
+    }
+}
+
+.fd-card__numeric-content.fd-numeric-content {
+    width: auto;
+    flex-shrink: 0;
+}
+
+.fd-numeric-content__scale-container {
+    flex: auto;
+}
+
+.fd-numeric-content__kpi {
+    font-size: 2.25rem !important;
+}

@@ -4,14 +4,14 @@
     align-items: center;
     width: 100%;
 
-    .docs-example-fd-bar-row {
+    .bar-row {
         flex: 1 1 0;
         height: 0.6rem;
         display: flex;
         background-color: #d5dadc;
     }
 
-    .docs-example-fd-value {
+    .value {
         min-width: 20%;
         white-space: nowrap;
         text-align: right;
@@ -19,17 +19,6 @@
         @at-root {
             [dir='rtl'] & {
                 text-align: left;
-            }
-        }
-    }
-
-    .docs-example-fd-change-value {
-        padding-left: 10%;
-
-        @at-root {
-            [dir='rtl'] & {
-                padding-left: inherit;
-                padding-right: 10%;
             }
         }
     }
