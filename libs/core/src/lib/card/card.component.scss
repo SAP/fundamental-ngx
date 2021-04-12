@@ -2,30 +2,3 @@
 @import '~fundamental-styles/dist/card';
 @import '~fundamental-styles/dist/badge';
 @import '~fundamental-styles/dist/bar';
-
-/* All styles will be removed once https://github.com/SAP/fundamental-styles/pull/2236 is merged */
-/* Defined locally as fundamental-styles does not provide it */
-
-.fd-card__loader {
-    min-height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.fd-card {
-    /* Should be removed once https://github.com/SAP/fundamental-styles/issues/1729 is resolved */
-    .fd-card__analytics-content,
-    .fd-numeric-content__kpi {
-        @at-root {
-            [dir='rtl'] & {
-                direction: ltr;
-                text-align: right;
-            }
-        }
-    }
-}
-
-.fd-card--table {
-    border: hidden;
-}
