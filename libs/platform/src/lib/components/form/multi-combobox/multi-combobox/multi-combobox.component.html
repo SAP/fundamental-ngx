@@ -1,0 +1,282 @@
+<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+
+<ng-template #desktopTemplate>
+    <div class="fdp-multi-combobox" cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
+        <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
+    </div>
+
+    <!-- Option panel using Material CDK overlay system -->
+    <ng-template
+        cdk-connected-overlay
+        [cdkConnectedOverlayOrigin]="selectTrigger"
+        [cdkConnectedOverlayOpen]="isOpen"
+        (overlayOutsideClick)="close()"
+        [cdkConnectedOverlayMinWidth]="minWidth"
+    >
+        <div
+            class="fdp-multi-combobox__list-container fd-popover__popper fd-popover__body--no-arrow"
+            [style.width.%]="!autoResize && 100"
+        >
+            <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
+        </div>
+    </ng-template>
+</ng-template>
+
+<ng-template #mobileTemplate>
+    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
+</ng-template>
+
+<ng-template #controlTemplate>
+    <fd-input-group
+        [id]="id + '-input-group-container'"
+        class="fdp-multi-combobox-input-group-custom"
+        [state]="status === 'error' ? 'error' : state"
+        [buttonFocusable]="false"
+        [button]="!readonly"
+        [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
+        [compact]="isCompact"
+        [isControl]="true"
+        [disabled]="disabled || readonly"
+        [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
+        [attr.aria-disabled]="disabled || readonly"
+        [attr.aria-readonly]="readonly"
+        [glyphAriaLabel]="ariaLabel"
+        (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
+        (click)="mobile && !isOpen && onPrimaryButtonClick(false)"
+        (keydown)="navigateByTokens($event)"
+    >
+        <fd-tokenizer
+            *ngIf="_selected"
+            [compact]="isCompact"
+            [tokenizerFocusable]="false"
+            class="fdp-multi-combobox-tokenizer-custom"
+            [class]="isCompact ? 'fdp-multi-combobox-tokenizer-custom--compact' : ''"
+            (moreClickedEvent)="moreClicked()"
+        >
+            <fd-token [compact]="isCompact"
+                      [readOnly]="disabled"
+                      (onCloseClick)="removeToken(token, $event)"
+                      *ngFor="let token of _selected">
+                {{ token.label }}
+            </fd-token>
+
+            <input
+                #searchInputElement
+                fdp-auto-complete
+                [options]="_suggestions"
+                [inputText]="inputText"
+                [mobile]="mobile"
+                type="text"
+                role="combobox"
+                autocomplete="off"
+                [attr.aria-label]="ariaLabel"
+                [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
+                [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
+                [attr.aria-haspopup]="autoComplete && !mobile"
+                fd-form-control
+                fd-input-group-input
+                tabindex="0"
+                [id]="id"
+                [name]="name"
+                [compact]="isCompact"
+                (keydown)="onInputKeydownHandler($event)"
+                (keyup)="onInputKeyupHandler()"
+                [disabled]="disabled"
+                [(ngModel)]="inputText"
+                (ngModelChange)="searchTermChanged()"
+                [placeholder]="placeholder"
+                (focus)="onTouched()"
+                (blur)="!mobile && onBlur($event)"
+                [attr.aria-expanded]="isOpen"
+                [readonly]="readonly"
+                [attr.aria-readonly]="readonly"
+            />
+        </fd-tokenizer>
+    </fd-input-group>
+</ng-template>
+
+<ng-template #mobileControlTemplate>
+    <fd-input-group
+        [id]="id + '-input-group-container'"
+        class="fdp-multi-combobox-input-group-custom"
+        [state]="status === 'error' ? 'error' : state"
+        [buttonFocusable]="false"
+        [compact]="isCompact"
+        [isControl]="true"
+        [disabled]="disabled || readonly"
+        [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
+        [attr.aria-disabled]="disabled || readonly"
+        [attr.aria-readonly]="readonly"
+        [glyphAriaLabel]="ariaLabel"
+    >
+        <input
+            fdp-auto-complete
+            [options]="_suggestions"
+            [inputText]="inputText"
+            [mobile]="mobile"
+            type="text"
+            role="combobox"
+            autocomplete="off"
+            [attr.aria-label]="ariaLabel"
+            [attr.aria-labelledby]="ariaLabelledBy"
+            [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
+            [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
+            [attr.aria-haspopup]="autoComplete && !mobile"
+            fd-form-control
+            fd-input-group-input
+            tabindex="0"
+            [id]="id"
+            [name]="name"
+            [compact]="isCompact"
+            (keydown)="onInputKeydownHandler($event)"
+            (keyup)="onInputKeyupHandler()"
+            [disabled]="disabled"
+            [(ngModel)]="inputText"
+            (ngModelChange)="searchTermChanged()"
+            [placeholder]="placeholder"
+            (focus)="onTouched()"
+            (blur)="!mobile && onBlur($event)"
+            [attr.aria-expanded]="isOpen"
+            [readonly]="readonly"
+            [attr.aria-readonly]="readonly"
+        />
+    </fd-input-group>
+</ng-template>
+
+<ng-template #listTemplate>
+    <ul
+        fd-list
+        (focusEscapeList)="handleListFocusEscape($event)"
+        [dropdownMode]="true"
+        class="fdp-multi-combobox__list fd-list--multi-input"
+        [id]="id + '-result'"
+        role="listbox"
+        [compact]="isCompact"
+        [style.maxHeight]="!mobile && maxHeight"
+        [style.minWidth]="!mobile && minWidth + 'px'"
+        [style.maxWidth]="autoResize && maxWidth + 'px'"
+        [attr.aria-labelledby]="id + '-search'"
+        aria-multiselectable="true"
+    >
+        <fd-form-message
+            *ngIf="isSearchInvalid"
+            type="error"
+            [embedded]="true"
+            i18n="multi-combobox search error message|The error message for this multi-combobox @@platformI18nMultiComboboxSearchErrorMessage">
+            Invalid entry
+        </fd-form-message>
+        <ng-content></ng-content>
+        <ng-container *ngIf="isGroup">
+            <ng-container *ngFor="let group of _suggestions">
+                <ng-container *ngIf="!groupItemTemplate">
+                    <label fd-list-group-header role="group">
+                        <span fd-list-title>{{ group.label }}</span>
+                    </label>
+                </ng-container>
+
+                <ng-container *ngIf="groupItemTemplate">
+                    <ng-container
+                        [ngTemplateOutlet]="groupItemTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
+                    ></ng-container>
+                </ng-container>
+
+                <li
+                    *ngFor="let optionItem of group.children; let i = index"
+                    fd-list-item
+                    role="option"
+                    tabindex="0"
+                    (click)="!mobile && close()"
+                    (keyDown)="onItemKeyDownHandler($event, optionItem)"
+                    [selected]="optionItem.selected"
+                >
+                    <fd-checkbox
+                        [compact]="isCompact"
+                        (ngModelChange)="toggleSelection(optionItem)"
+                        [ngModel]="optionItem.selected">
+                    </fd-checkbox>
+                    <ng-container
+                        [ngTemplateOutlet]="listItem"
+                        [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
+                    ></ng-container>
+                </li>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="!isGroup">
+            <li
+                *ngFor="let optionItem of _suggestions; let i = index"
+                fd-list-item
+                role="option"
+                tabindex="0"
+                (click)="!mobile && close()"
+                (keyDown)="onItemKeyDownHandler($event, optionItem)"
+                [selected]="optionItem.selected"
+            >
+                <fd-checkbox
+                    [compact]="isCompact"
+                    (ngModelChange)="toggleSelection(optionItem)"
+                    [ngModel]="optionItem.selected">
+                </fd-checkbox>
+                <ng-container
+                    [ngTemplateOutlet]="listItem"
+                    [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
+                ></ng-container>
+            </li>
+        </ng-container>
+    </ul>
+</ng-template>
+
+<ng-template let-optionItem="optionItem" let-index="index" #listItem>
+    <ng-container
+        *ngIf="optionItem.selected && !!selectedItemTemplate"
+        [ngTemplateOutlet]="selectedItemTemplate"
+        [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
+    ></ng-container>
+
+    <ng-container *ngIf="!(optionItem.selected && selectedItemTemplate)">
+        <ng-container
+            [ngTemplateOutlet]="optionItemSource"
+            [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
+        ></ng-container>
+
+        <ng-container
+            [ngTemplateOutlet]="secondaryTextSource"
+            [ngTemplateOutletContext]="{ optionItem: optionItem }"
+        ></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
+    <ng-container *ngIf="!optionItemTemplate">
+        <span fd-list-title [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight: inputText"></span>
+    </ng-container>
+
+    <ng-container *ngIf="optionItemTemplate">
+        <ng-container
+            [ngTemplateOutlet]="optionItemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
+        ></ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template let-optionItem="optionItem" #secondaryTextSource>
+    <ng-container *ngIf="showSecondaryText">
+        <ng-container *ngIf="!secondaryItemTemplate">
+            <span
+                [style.text-align]="secondaryTextAlignment"
+                fd-list-secondary
+                [attr.title]="optionItem.secondaryText"
+                [innerHTML]="optionItem.secondaryText | highlight: inputText"
+            ></span>
+        </ng-container>
+
+        <ng-container *ngIf="secondaryItemTemplate">
+            <ng-container
+                [ngTemplateOutlet]="secondaryItemTemplate"
+                [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
+            ></ng-container>
+        </ng-container>
+    </ng-container>
+</ng-template>

@@ -20,6 +20,6 @@ import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.modul
         PlatformAutoCompleteModule
     ],
     providers: [DynamicComponentService],
-    exports: [ComboboxComponent, TemplateModule]
+    exports: [ComboboxComponent, TemplateModule, HighlightPipe]
 })
 export class PlatformComboboxModule {}

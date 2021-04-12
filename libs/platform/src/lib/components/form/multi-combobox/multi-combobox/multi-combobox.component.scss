@@ -1,0 +1,47 @@
+@import '~@angular/cdk/overlay-prebuilt';
+@import '~fundamental-styles/dist/popover';
+
+.fdp-multi-combobox-tokenizer-custom {
+    width: calc(100% - 2.25rem);
+    &--compact {
+        width: calc(100% - 2rem);
+    }
+}
+
+.fdp-multi-combobox {
+    &__list-container {
+        &.fd-popover__popper {
+            position: absolute !important;
+            overflow: hidden;
+
+            .fd-list--dropdown {
+                max-width: 100%;
+            }
+        }
+    }
+
+    &__list {
+        overflow: auto;
+        .fd-list__item {
+            padding-right: 0.5rem !important;
+
+            .fd-checkbox__label {
+                margin-right: 0;
+            }
+
+            span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &.fd-list__group-header {
+                padding: 0 1rem;
+            }
+
+            .fd-list__title,
+            .fd-list__secondary {
+                max-width: inherit;
+            }
+        }
+    }
+}

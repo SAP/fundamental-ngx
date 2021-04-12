@@ -1,0 +1,16 @@
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="columns" label="Two Columns">
+        <fdp-multi-combobox
+            name="columns"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            secondaryKey="type"
+            showSecondaryText="true"
+            secondaryTextAlignment="right"
+            (selectionChange)="onSelect($event)"
+            [selectedItems]="selectedItems"
+        ></fdp-multi-combobox>
+        <p>Selected Item: {{ selectedItems | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>

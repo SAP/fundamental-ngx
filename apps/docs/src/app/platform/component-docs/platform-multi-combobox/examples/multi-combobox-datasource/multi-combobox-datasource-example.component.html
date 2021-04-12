@@ -1,0 +1,51 @@
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="array-of-strings" label="Array of Strings">
+        <fdp-multi-combobox
+            name="array-of-strings"
+            placeholder="Type some text..."
+            [dataSource]="dataSourceStrings"
+            [selectedItems]="selectedItems1"
+            (selectionChange)="onSelect1($event)"
+        ></fdp-multi-combobox>
+        <p>Selected Item: {{ selectedItems1 }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="array-of-objects" label="Array of Objects">
+        <fdp-multi-combobox
+            name="array-of-objects"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            lookupKey="name"
+            [selectedItems]="selectedItems2"
+            (selectionChange)="onSelect2($event)"
+        ></fdp-multi-combobox>
+        <p>Selected Item: {{ selectedItems2 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="observable" label="Observable">
+        <fdp-multi-combobox
+            name="observable"
+            placeholder="Type some text..."
+            [dataSource]="dataSourceOf"
+            displayKey="name"
+            lookupKey="name"
+            (selectionChange)="onSelect3($event)"
+            [selectedItems]="selectedItems3"
+        ></fdp-multi-combobox>
+        <p>Selected Item: {{ selectedItems3 | json }}</p>
+    </fdp-form-field>
+
+    <fdp-form-field id="ds" label="Data Source">
+        <fdp-multi-combobox
+            name="ds"
+            placeholder="Type some text..."
+            [dataSource]="ds"
+            displayKey="name"
+            lookupKey="name"
+            (selectionChange)="onSelect4($event)"
+            [selectedItems]="selectedItems4"
+        ></fdp-multi-combobox>
+        <p>Selected Item: {{ selectedItems4 | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>
