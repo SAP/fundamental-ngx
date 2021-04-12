@@ -47,36 +47,3 @@
         </ul>
     </fd-card-content>
 </fd-card>
-
-<br />
-<br />
-
-<h2>Variant with Select control</h2>
-<fd-card>
-    <fd-card-header>
-        <h2 fd-card-title>Spend Year-to-Date</h2>
-        <h3 fd-card-subtitle>Percentage change compared to last year</h3>
-        <span fd-card-counter>4 of 7</span>
-    </fd-card-header>
-    <fd-card-content>
-        <ul fd-list>
-            <li fd-list-item>
-                <fd-select placeholder="Select an option" [compact]="true" [(value)]="selectedValue"
-                    (valueChange)="onValueChange($event)">
-                    <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
-                </fd-select>
-            </li>
-        </ul>
-        <ul class="fd-list fd-list--byline" tabindex="0">
-            <ng-container *ngFor="let data of showData">
-                <li fd-list-item>
-                    <div fd-list-content>
-                        <div fd-list-title>{{data?.title}}</div>
-                        <fd-card-bar [value]="data?.value" [displayChange]="true" [change]="data?.change"
-                            [color]="data?.color"></fd-card-bar>
-                    </div>
-                </li>
-            </ng-container>
-        </ul>
-    </fd-card-content>
-</fd-card>

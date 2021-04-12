@@ -19,9 +19,7 @@ export const CLASS_NAME = {
     cardCounter: 'fd-card__counter',
     cardBadge: 'fd-card__badge',
     cardContent: 'fd-card__content',
-    cardFooter: 'fd-bar',
-    cardFooterRight: 'fd-bar__right',
-    cardFooterBorder: 'fd-bar--footer',
+    cardFooter: 'fd-card__footer',
     cardLoader: 'fd-card__loader'
 } as const;
 
