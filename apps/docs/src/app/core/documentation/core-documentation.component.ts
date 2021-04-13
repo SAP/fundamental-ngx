@@ -10,7 +10,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
     constructor() {
         super();
 
-        this.guides = [
+        this.layouts = [
             { url: 'core/home', name: 'Home' },
             { url: 'core/new-component', name: 'New Component' }
         ];
@@ -111,6 +111,10 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];
 
+        this.adapters = [
+            { url: 'core/moment-datetime-adapter', name: 'Moment DateTime Adapter' },
+        ]
+
         this.sections = [
             {
                 header: 'Guides',
@@ -127,6 +131,10 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             {
                 header: 'Utilities',
                 content: this.utilities
+            },
+            {
+                header: 'Adapters',
+                content: this.adapters
             }
         ];
     }

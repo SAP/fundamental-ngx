@@ -264,16 +264,6 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return this._createFdDateFromDateInstance(date);
     }
 
-    getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
-        const firstOfMonth = new Date(year, month - 1, 1);
-        const lastOfMonth = new Date(year, month, 0);
-
-        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
-        const used = dayOffset + lastOfMonth.getDate();
-
-        return Math.ceil(used / 7);
-    }
-
     clone(date: FdDate): FdDate {
         return new FdDate(date.year, date.month, date.day, date.hour, date.minute, date.second);
     }
