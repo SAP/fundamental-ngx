@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.86...v0.29.0-rc.87) (2021-04-13)
+
+
+### Features
+
+* (Platform) search field improved to support aria label attribute ([#5064](https://github.com/SAP/fundamental-ngx/issues/5064)) ([15bc68c](https://github.com/SAP/fundamental-ngx/commit/15bc68c0b8cd93ea0ffd89d7b72c57ff2f99df0a))
+
 ## [0.29.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.85...v0.29.0-rc.86) (2021-04-11)
 
 ## [0.29.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.84...v0.29.0-rc.85) (2021-04-11)
