@@ -1,5 +1,5 @@
 /**
- * Datetime Adapter is an abstract class that should be implemented by each adopter.
+ * Datetime Adapter is an abstract class that should be implemented by each adapter.
  * It's used to encapsulate a date/time manipulations as result
  * others places that uses it remain date type agnostic.
  *
@@ -116,6 +116,7 @@ export abstract class DatetimeAdapter<D> {
      * @returns The week number (min 1, max 53).
      */
     abstract getWeekNumber(date: D): number;
+
     /**
      * Gets a list of names for the months.
      * @param style The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').
@@ -255,15 +256,6 @@ export abstract class DatetimeAdapter<D> {
     abstract addCalendarDays(date: D, days: number): D;
 
     /**
-     * Get Amount of weeks in current month/year
-     * @param year The year of the date
-     * @param month The month of the date
-     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
-     * @returns Number of weeks in the given month
-     */
-    abstract getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number;
-
-    /**
      * Clones the given date.
      * @param date The date to clone
      * @returns A new date equal to the given date.
@@ -338,6 +330,23 @@ export abstract class DatetimeAdapter<D> {
      * @returns If time format includes seconds info.
      */
     abstract isTimeFormatIncludesSeconds(displayFormat: unknown): boolean;
+
+    /**
+     * Get Amount of weeks in given month/year
+     * @param year The year of the date
+     * @param month The month of the date
+     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
+     * @returns Number of weeks in the given month
+     */
+    getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
+        const firstOfMonth = new Date(year, month - 1, 1);
+        const lastOfMonth = new Date(year, month, 0);
+
+        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
+        const used = dayOffset + lastOfMonth.getDate();
+
+        return Math.ceil(used / 7);
+    }
 
     /**
      * Compares two dates.
