@@ -105,11 +105,11 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
             },
             {
-              path: 'facets',
-              loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
+                path: 'facets',
+                loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
             },
             {
-              path: 'feed-list-item',
+                path: 'feed-list-item',
                 loadChildren: () =>
                     import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
             },
@@ -443,7 +443,14 @@ export const ROUTES: Routes = [
             {
                 path: 'slider',
                 loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
-            }
+            },
+            {
+                path: 'moment-datetime-adapter',
+                loadChildren: () =>
+                    import('./component-docs/moment-datetime-adapter/moment-datetime-adapter-docs.module').then(
+                        (m) => m.MomentDatetimeAdapterDocsModule
+                    )
+            },
         ]
     }
 ];

@@ -1,4 +1,4 @@
-import { Injector, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 // services
@@ -9,7 +9,6 @@ import { ToolbarDocsComponent } from './core-helpers/toolbar/toolbar.component';
 import { SearchPipe } from './core-helpers/pipes/search.pipe';
 import {
     ButtonModule,
-    ContentDensityService,
     InputGroupModule,
     MenuModule,
     ShellbarModule,
