@@ -581,8 +581,10 @@
         <ng-template #filesAndFoldersMovedTo i18n="@@platformUploadCollection.Message.Move.FoldersAndFiles">
             {{ count.folder }} folders and {{ count.file}} files have been moved to
         </ng-template>
-        
-        {{ payload.to ? payload.to.name : 'All files' }}.
+
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 
     <ng-container
@@ -598,7 +600,9 @@
             {{ count.folder }} folders have been moved to
         </ng-template>
         
-        {{ payload.to ? payload.to.name : 'All files' }}.
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 
     <ng-container
@@ -614,7 +618,9 @@
             {{ count.file }} files have been moved to
         </ng-template>
         
-        {{ payload.to ? payload.to.name : 'All files' }}.
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 
     <ng-container *ngIf="payload.items.length === 1">
@@ -628,7 +634,9 @@
             {{ payload.items[0].name }} have been moved to
         </ng-template>
 
-        {{ payload.to ? payload.to.name : 'All files' }}.
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 </ng-template>
 
@@ -669,4 +677,8 @@
     <ng-container i18n="@@platformUploadCollection.Message.FilenameLength.OneItem" *ngIf="payload.items.length === 1">
         The name "{{ payload.items[0].name }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
     </ng-container>
+</ng-template>
+
+<ng-template #allFiles i18n="platformUploadCollection.Message.AllFiles">
+    All files
 </ng-template>
