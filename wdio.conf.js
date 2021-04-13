@@ -348,7 +348,6 @@ exports.config = {
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
     },
-
 //     const processedConfig = await browser.getProcessedConfig();
 //
 // // Resize the screens if it is a VM
