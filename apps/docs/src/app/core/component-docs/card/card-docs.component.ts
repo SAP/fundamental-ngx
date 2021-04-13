@@ -31,12 +31,6 @@ import * as cardListHtml from '!raw-loader!./examples/list-card/card-list-exampl
 import * as cardLinkListTs from '!raw-loader!./examples/link-list-card/card-link-list-example.component.ts';
 import * as cardLinkListHtml from '!raw-loader!./examples/link-list-card/card-link-list-example.component.html';
 
-import * as cardLinkListCarouselTs from '!raw-loader!./examples/link-list-card/card-link-list-carousel-example.component.ts';
-import * as cardLinkListCarouselHtml from '!raw-loader!./examples/link-list-card/card-link-list-carousel-example.component.html';
-
-import * as cardQuickLinkListTs from '!raw-loader!./examples/link-list-card/card-quick-link-list-example.component.ts';
-import * as cardQuickLinkListHtml from '!raw-loader!./examples/link-list-card/card-quick-link-list-example.component.html';
-
 @Component({
     templateUrl: './card-docs.component.html'
 })
