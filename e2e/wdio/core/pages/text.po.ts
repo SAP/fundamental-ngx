@@ -6,7 +6,7 @@ export class TextPo extends CoreBaseComponentPo {
     root = '#page-content';
     contentPage = '#page-content';
     linksExpandable = 'a.fd-link';
-    textParagraph = '.fd-text__lineclamp'
+    textParagraph = '.fd-text__lineclamp';
 
     open(): void {
         super.open(this.url);

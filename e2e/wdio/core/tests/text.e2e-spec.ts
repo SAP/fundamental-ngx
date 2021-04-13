@@ -1,15 +1,12 @@
 import { TextPo } from '../pages/text.po';
 import {
-    addIsActiveClass,
     checkElementScreenshot,
     click,
-    getElementArrayLength, getImageTagBrowserPlatform,
-    getText, mouseHoverElement,
+    getImageTagBrowserPlatform,
+    getText,
     refreshPage,
     saveElementScreenshot, scrollIntoView
 } from '../../driver/wdio';
-import { paragraphTag, linkMoreTag, linkLessTag } from '../fixtures/testData/text.tags';
-import { link, paragraph } from '../fixtures/appData/text-contents';
 
 describe('Text component test', function() {
     const textPage = new TextPo();
@@ -28,82 +25,56 @@ describe('Text component test', function() {
             expect(getText(linksExpandable)).toContain('MORE');
             click(linksExpandable);
             expect(getText(linksExpandable)).toContain('LESS');
+
             expect(getText(linksExpandable, 1)).toContain('LESS');
             click(linksExpandable, 1);
             expect(getText(linksExpandable, 1)).toContain('MORE');
+
             expect(getText(linksExpandable, 2)).toContain('MORE LABEL');
             click(linksExpandable, 2);
             expect(getText(linksExpandable, 2)).toContain('LESS LABEL');
         });
 
         describe('Check orientation', function() {
+
             it('should check RTL and LTR orientation', () => {
                 textPage.checkRtlSwitch();
             });
         });
 
         describe('Should check visual regression', function() {
+
             it('should check visual regression for all examples', () => {
                 textPage.saveExampleBaselineScreenshot();
-                expect(textPage.compareWithBaseline()).toBeLessThan(1);
+                expect(textPage.compareWithBaseline()).toBeLessThan(5);
             });
 
-            it('verify paragraph hover state when you click "MORE" link', () => {
+            it('verify paragraph example after click "MORE" link', () => {
+                const paragraphTag = 'paragraph-0-';
                 scrollIntoView(textParagraph, 10);
                 click(linksExpandable);
-                checkElementHoverState(textParagraph, paragraphTag + '0-hover-state-', paragraph, 10);
+                saveElementScreenshot(textParagraph, paragraphTag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), 10);
+                expect(checkElementScreenshot(textParagraph, 'paragraph-0-' + getImageTagBrowserPlatform(),
+                    textPage.getScreenshotFolder(), 10)).toBeLessThan(5, `element item hover state mismatch`);
             });
 
-            it('verify paragraph hover state when you click "LESS" link', () => {
+            it('verify paragraph example after you click "LESS" link', () => {
+                const paragraphTag = 'paragraph-1-';
                 scrollIntoView(textParagraph, 11);
                 click(linksExpandable, 1);
-                checkElementHoverState(textParagraph, paragraphTag + '1-hover-state-', paragraph, 11);
+                saveElementScreenshot(textParagraph, paragraphTag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), 11);
+                expect(checkElementScreenshot(textParagraph, 'paragraph-1-' + getImageTagBrowserPlatform(),
+                    textPage.getScreenshotFolder(), 11)).toBeLessThan(5, `element item hover state mismatch`);
             });
 
-            it('verify paragraph hover state when you click "MORE LABEL" link', () => {
+            it('verify paragraph example after click "MORE LABEL" link', () => {
+                const paragraphTag = 'paragraph-2-';
                 scrollIntoView(textParagraph, 12);
                 click(linksExpandable, 2);
-                checkElementHoverState(textParagraph, paragraphTag + '2-hover-state-', paragraph, 12);
-            });
-
-            it('verify links More/Less states', () => {
-                const linksLength = getElementArrayLength(linksExpandable);
-                for (let i = 0; i < linksLength; i++) {
-                    scrollIntoView(linksExpandable, i);
-                    checkElementStates(linksExpandable, linkMoreTag + i + '-', link, i);
-                }
-                for (let i = 0; i < linksLength; i++) {
-                    scrollIntoView(linksExpandable, i);
-                    checkElementStates(linksExpandable, linkLessTag + i + '-', link, i);
-                }
+                saveElementScreenshot(textParagraph, paragraphTag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), 12);
+                expect(checkElementScreenshot(textParagraph, 'paragraph-2-' + getImageTagBrowserPlatform(),
+                    textPage.getScreenshotFolder(), 12)).toBeLessThan(5, `element item hover state mismatch`);
             });
         });
     });
-
-    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item ${index} hover state mismatch`);
-    }
-
-    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        click(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item ${index} focus state mismatch`);
-    }
-
-    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        addIsActiveClass(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), textPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item ${index} active state mismatch`);
-    }
-
-    function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
-        checkElementHoverState(selector, tag + 'hover-state-', elementName, index);
-        checkElementActiveState(selector, tag + 'active-state-', elementName, index);
-        checkElementFocusState(selector, tag + 'focus-state-', elementName, index);
-    }
 });
