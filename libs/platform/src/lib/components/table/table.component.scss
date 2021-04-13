@@ -156,6 +156,11 @@
     .fd-table__row,
     .fd-table__cell {
         height: 2.75rem;
+        cursor: default;
+
+        &[tabindex="-1"] {
+            outline: none;
+        }
     }
 
     &.fd-table--condensed  {
