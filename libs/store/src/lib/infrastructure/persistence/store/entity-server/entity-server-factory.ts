@@ -27,7 +27,7 @@ export class DefaultEntityServerServiceFactory implements EntityServerServiceFac
      * Create EntityServerService for the given entity type
      * @param entityName {string} Name of the entity type for this data service
      */
-    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
+    create<T extends BaseEntity<T>>(entityName: string): EntityServerService<T> {
         const server = this.entityServerServiceFactory.create<T>(entityName);
 
         const { cache } = this.entityMetaOptionsService.getEntityResourceMetadata(entityName);

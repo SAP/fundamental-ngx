@@ -22,12 +22,12 @@ export abstract class EntityMetaOptionsService {
      * Get Entity Resource Options
      * @param entity Entity name or Entity class
      */
-    abstract getEntityResourceMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityResourceMetaOptions;
+    abstract getEntityResourceMetadata<T>(entity: string | EntityType<T>): EntityResourceMetaOptions;
     /**
      * Get Entity Meta Options
      * @param entity Entity name or Entity class
      */
-    abstract getEntityMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityMetaOptions<T>;
+    abstract getEntityMetadata<T>(entity: string | EntityType<T>): EntityMetaOptions<T>;
 }
 
 /**
@@ -35,7 +35,7 @@ export abstract class EntityMetaOptionsService {
  */
 @Injectable()
 export class DefaultEntityMetaOptionsService implements EntityMetaOptionsService {
-    getEntityResourceMetadata<T extends BaseEntity>(entityOrName: string | EntityType<T>): EntityResourceMetaOptions {
+    getEntityResourceMetadata<T>(entityOrName: string | EntityType<T>): EntityResourceMetaOptions {
         const options =
             typeof entityOrName === 'string'
                 ? getEntityResourceMetadataByEntityName(entityOrName)
@@ -48,7 +48,7 @@ export class DefaultEntityMetaOptionsService implements EntityMetaOptionsService
         return options;
     }
 
-    getEntityMetadata<T extends BaseEntity>(entityOrName: string | EntityType<T>): EntityMetaOptions<T> {
+    getEntityMetadata<T>(entityOrName: string | EntityType<T>): EntityMetaOptions<T> {
         const options: EntityMetaOptions<T>  =
             typeof entityOrName === 'string'
                 ? getEntityMetadataByEntityName<T>(entityOrName)

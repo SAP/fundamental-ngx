@@ -19,7 +19,7 @@ export interface ReqDTO {
     domain: 'Requisitioning',
     name: 'Requisition',
 })
-export class Requisition extends BaseEntity<ReqDTO> {
+export class Requisition extends BaseEntity<ReqDTO>{
     id: number;
     title: string;
     totalAmount: number;

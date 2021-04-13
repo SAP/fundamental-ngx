@@ -17,7 +17,7 @@ import { QuerySnapshot } from '../../query/query-adapter';
  * It is a wrapper layer for entity server implementation (decorator pattern).
  *
  */
-export class EntityCacheServerService<T extends BaseEntity> implements EntityServerService<T> {
+export class EntityCacheServerService<T extends BaseEntity<{}>> implements EntityServerService<T> {
     /**
      * Service implementation name
      */
@@ -97,11 +97,11 @@ export class EntityCacheServerService<T extends BaseEntity> implements EntitySer
     protected async addEntityToCache(entity: T): Promise<T> {
         let entities = await this.storageService.getAll();
         // Should we generate entity id here?
-        if (!entity.id) {
-            entity.id = uuidV4();
+        if (!entity.identity) {
+            entity.identity = uuidV4();
         }
 
-        entities = entities.filter(({ id }) => id !== entity.id);
+        entities = entities.filter(e => e.identity !== entity.identity);
 
         entities.push(entity);
 
@@ -112,7 +112,7 @@ export class EntityCacheServerService<T extends BaseEntity> implements EntitySer
 
     protected async deleteEntityFromCache(id: IdentityKey): Promise<T> {
         let entities = await this.storageService.getAll();
-        const entityToDelete = entities.find((_entity) => _entity.id === id);
+        const entityToDelete = entities.find((_entity) => _entity.identity === id);
         if (entityToDelete) {
             entities = entities.filter((_entity) => _entity !== entityToDelete);
             await this.storageService.setAll(entities);
@@ -122,15 +122,15 @@ export class EntityCacheServerService<T extends BaseEntity> implements EntitySer
 
     protected async getEntityByIdFromCache(id: IdentityKey): Promise<T | null> {
         const entities = await this.storageService.getAll();
-        const entity = entities.find((_entity) => _entity.id === id);
+        const entity = entities.find((_entity) => _entity.identity === id);
         return entity || null;
     }
 
     protected async updateEntityInCache(updated: T): Promise<T> {
         let entities = await this.storageService.getAll();
-        const entity = entities.find((_entity) => _entity.id === updated.id);
+        const entity = entities.find((_entity) => _entity.identity === updated.identity);
         if (entity) {
-            entities = entities.map((_entity) => (_entity.id === updated.id ? updated : _entity));
+            entities = entities.map((_entity) => (_entity.identity === updated.identity ? updated : _entity));
             await this.storageService.setAll(entities);
         }
         return entity;

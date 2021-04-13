@@ -1,4 +1,4 @@
-import { BaseEntity } from './entity';
+// import { BaseEntity } from './entity';
 import { EntityMetaOptions } from './entity-meta-options';
 import { EntityResourceMetaOptions } from './rest-resource';
 import { Type } from './utility';
@@ -9,32 +9,32 @@ export const REST_RESOURCE_KEY = Symbol('REST_Resource');
 const ENTITY_META_MAP = new Map<Type<any>, EntityMetaOptions<any>>();
 const RESOURCE_MAP = new Map<Type<any>, EntityResourceMetaOptions>();
 
-export type EntityType<T extends BaseEntity> = Type<T>;
+export type EntityType<T> = Type<T>;
 
-export function Entity<T extends BaseEntity>(config: EntityMetaOptions<T>) {
+export function Entity<T>(config: EntityMetaOptions<T>) {
     // TODO: Add entity name uniqueness validation
     return (target: EntityType<T>) => {
         ENTITY_META_MAP.set(target, config);
     };
 }
 
-export function RESTResource<T extends BaseEntity>(config: EntityResourceMetaOptions) {
+export function RESTResource<T>(config: EntityResourceMetaOptions) {
     return (target: EntityType<T>) => {
         RESOURCE_MAP.set(target, config);
     };
 }
 
-export function getEntityMetadata<T extends BaseEntity>(target: EntityType<T>): EntityMetaOptions<T> | undefined {
+export function getEntityMetadata<T>(target: EntityType<T>): EntityMetaOptions<T> | undefined {
     return ENTITY_META_MAP.get(target);
 }
 
-export function getResourceMetadata<T extends BaseEntity>(
+export function getResourceMetadata<T>(
     target: EntityType<T>
 ): EntityResourceMetaOptions | undefined {
     return RESOURCE_MAP.get(target);
 }
 
-export function getEntityMetadataByEntityName<T extends BaseEntity = BaseEntity>(
+export function getEntityMetadataByEntityName<T>(
     entityName: string
 ): EntityMetaOptions<T> | undefined {
     const entity: EntityType<any> = getEntityByName(entityName);

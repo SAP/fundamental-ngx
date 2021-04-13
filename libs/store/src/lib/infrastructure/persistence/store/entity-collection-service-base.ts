@@ -24,7 +24,7 @@ import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chai
  * Also this service is responsible to chain requests for sub resources
  *
  */
-export class DefaultEntityCollectionService<T extends BaseEntity> implements EntityCollectionService<T> {
+export class DefaultEntityCollectionService<T> implements EntityCollectionService<T> {
     readonly name: string;
 
     readonly collection$: Observable<EntityCollection<T>> | Store<EntityCollection<T>>;
@@ -210,7 +210,7 @@ export class DefaultEntityCollectionService<T extends BaseEntity> implements Ent
     }
 
     /** @hidden */
-    private getSubEntityPrimaryKey<K extends BaseEntity>(
+    private getSubEntityPrimaryKey<K extends BaseEntity<K>>(
         { key: keyOrFunction }: ChainingPolicyFieldOptions<T, K>,
         entity: T
     ): IdentityKey {

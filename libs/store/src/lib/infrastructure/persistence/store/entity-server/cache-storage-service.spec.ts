@@ -1,10 +1,20 @@
-import { BaseEntity, EntityCacheStorageService } from './interfaces';
+import { BaseEntity, EntityCacheStorageService, IdentityKey } from './interfaces';
 import { EntityCacheStorageServiceBase } from './cache-storage';
 
-class Hero extends BaseEntity {
+interface HeroDTO {
+    id: number;
+    name: string;
+    version?: number;
+}
+
+class Hero extends BaseEntity<HeroDTO> {
     id!: number;
     name!: string;
     version?: number;
+
+    get identity(): IdentityKey {
+        return this.value.id;
+    }
 }
 
 class StorageMock implements Storage {
@@ -29,7 +39,7 @@ class StorageMock implements Storage {
 }
 
 describe('EntityCacheStorageServiceBase', () => {
-    let service: EntityCacheStorageService<Hero>;
+    let service: EntityCacheStorageService<HeroDTO>;
     let storage: Storage;
     const storageKey = 'hero-storage-key';
 
@@ -69,7 +79,7 @@ describe('EntityCacheStorageServiceBase', () => {
     describe('#setAll', () => {
         it('should store new list', async () => {
             spyOn(storage, 'setItem');
-            const listToStore: Hero[] = [{ id: 123, name: 'new item' }];
+            const listToStore: HeroDTO[] = [{ id: 123, name: 'new item' }];
             const result = await service.setAll(listToStore);
             expect(result).toEqual(listToStore);
             expect(storage.setItem).toHaveBeenCalledOnceWith(storageKey, JSON.stringify(listToStore));

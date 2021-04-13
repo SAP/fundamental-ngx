@@ -1,7 +1,7 @@
-import { BaseEntity } from './entity';
+// import { BaseEntity } from './entity';
 import { ChainingPolicy } from './chaining-policy';
 
-export interface EntityMetaOptions<Entity extends BaseEntity = BaseEntity> {
+export interface EntityMetaOptions<Entity> {
     // Entity Name. It must be unique
     name: string;
     // Entity Primary Key

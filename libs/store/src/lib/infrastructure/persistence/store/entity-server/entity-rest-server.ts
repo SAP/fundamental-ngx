@@ -31,7 +31,7 @@ export interface RequestData {
  * This should be provided instead of ngrx DefaultDataService.
  *
  */
-export class EntityRestServerService<T extends BaseEntity> implements EntityServerService<T> {
+export class EntityRestServerService<T> implements EntityServerService<T> {
     protected _name: string;
     protected delete404OK: boolean;
     protected entityName: string;
@@ -40,7 +40,7 @@ export class EntityRestServerService<T extends BaseEntity> implements EntityServ
     protected timeout = 0;
     protected root: string;
     protected queryAdapter: QueryAdapter<T>;
-    protected entityMetaOptions: EntityMetaOptions;
+    protected entityMetaOptions: EntityMetaOptions<T>;
     protected entityResourceMetaOptions: EntityResourceMetaOptions | undefined;
     protected entityResourcePathOptions: EntityPath | undefined;
 
@@ -265,7 +265,7 @@ export class EntityRestServerServiceFactory {
      * Create REST EntityServerService for the given entity type
      * @param entityName {string} Name of the entity
      */
-    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
+    create<T>(entityName: string): EntityServerService<T> {
         return new EntityRestServerService<T>(
             entityName,
             this.http,

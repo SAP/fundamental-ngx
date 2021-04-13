@@ -1,8 +1,9 @@
 import { DefaultEntityStore } from '../store';
-import { EntityCollectionService } from '@ngrx/data';
+// import { EntityCollectionService } from '@ngrx/data';
 import { QueryBuilder } from '../query/query-builder';
 import { BaseEntity, BaseValue, RESTResource } from '@fundamental-ngx/store';
 import { Type } from '../../../domain/public_api'
+import { EntityCollectionService } from '../store';
 
 type IdentityKey = string | number;
 

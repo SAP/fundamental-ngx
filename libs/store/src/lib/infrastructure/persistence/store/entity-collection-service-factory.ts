@@ -23,9 +23,9 @@ export class EntityCollectionServiceFactory {
      * @param entityType
      * @returns EntityCollectionService<T>
      */
-    create<T extends BaseEntity>(
+    create<T>(
         entityType: EntityType<T>,
-        // Can't use it as dependency in ctr due to DI circular error 
+        // Can't use it as dependency in ctr due to DI circular error
         entityCollectionsService: EntityCollectionsService
     ): EntityCollectionService<T> {
         return new DefaultEntityCollectionService(

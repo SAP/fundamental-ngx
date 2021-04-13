@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { BaseEntity, ChainingStrategyFieldsMap } from '../../../domain/public_api';
+import { ChainingStrategyFieldsMap } from '../../../domain/public_api';
 
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';
@@ -23,7 +23,7 @@ export class QuerySnapshotModel<T extends {}> {
 
 export type QuerySnapshot<T extends {}> = Readonly<QuerySnapshotModel<T>>;
 
-export const isQuerySnapshot = <K extends BaseEntity>(data: any): data is QuerySnapshot<K> => {
+export const isQuerySnapshot = <K>(data: any): data is QuerySnapshot<K> => {
     return data instanceof QuerySnapshotModel;
 };
 

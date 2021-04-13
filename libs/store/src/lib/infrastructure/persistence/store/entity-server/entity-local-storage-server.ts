@@ -25,13 +25,13 @@ import {
  * The Base Entity Local Sever
  *
  */
-export abstract class EntityLocalServerBaseService<T extends BaseEntity> implements EntityServerService<T> {
+export abstract class EntityLocalServerBaseService<T extends BaseEntity<T>> implements EntityServerService<T> {
     protected _name: string;
     protected delete404OK: boolean;
     protected getDelay = 0;
     protected saveDelay = 0;
     protected timeout = 0;
-    protected entityMetaOptions: EntityMetaOptions;
+    protected entityMetaOptions: EntityMetaOptions<T>;
 
     /**
      * Service implementation name
@@ -130,7 +130,7 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
 
     protected async getEntityById(id: IdentityKey): Promise<T | null> {
         const entities = await this.storageService.getAll();
-        const entity = entities.find((_entity) => _entity.id === id);
+        const entity = entities.find((_entity) => _entity.identity === id);
         return entity || null;
     }
 
@@ -177,13 +177,13 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
 
     protected async updateEntity(update: Update<T>): Promise<T> {
         let entities = await this.storageService.getAll();
-        let entity = entities.find((_entity) => _entity.id === update.id);
+        let entity = entities.find((_entity) => _entity.identity === update.id);
         if (entity) {
             entity = {
                 ...entity,
                 ...update.changes
             };
-            entities = entities.map((_entity) => (_entity.id === update.id ? entity : _entity));
+            entities = entities.map((_entity) => (_entity.identity === update.id ? entity : _entity));
             await this.storageService.setAll(entities);
         }
         return entity;
@@ -191,7 +191,7 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
 
     protected async deleteEntity(id: IdentityKey): Promise<T> {
         let entities = await this.storageService.getAll();
-        const entityToDelete = entities.find((_entity) => _entity.id === id);
+        const entityToDelete = entities.find((_entity) => _entity.identity === id);
         if (entityToDelete) {
             entities = entities.filter((_entity) => _entity !== entityToDelete);
             await this.storageService.setAll(entities);
@@ -202,8 +202,8 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
     protected async addEntity(entity: T): Promise<T> {
         const entities = await this.storageService.getAll();
         // Should we generate entity id here?
-        if (!entity.id) {
-            entity.id = uuidV4();
+        if (!entity.identity) {
+            entity.identity = uuidV4();
         }
 
         entities.push(entity);
@@ -237,7 +237,7 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
  *
  * Persist entity collection in memory (mimic API responses)
  */
-export class EntityLocalStorageServerService<T extends BaseEntity> extends EntityLocalServerBaseService<T> {
+export class EntityLocalStorageServerService<T extends BaseEntity<T>> extends EntityLocalServerBaseService<T> {
     get name(): string {
         return `${this.entityName} EntityLocalStorageServerService`;
     }
@@ -259,7 +259,7 @@ export class EntityLocalStorageServerServiceFactory implements EntityServerServi
      * Create EntityServerService for the given entity type
      * @param entityName {string} Name of the entity type for this data service
      */
-    create<T extends BaseEntity>(entityName: string): EntityServerService<T> {
+    create<T extends BaseEntity<T>>(entityName: string): EntityServerService<T> {
         return new EntityLocalStorageServerService<T>(
             entityName,
             new EntityCacheStorageServiceBase(this.getEntityStorageKey(entityName), localStorage),

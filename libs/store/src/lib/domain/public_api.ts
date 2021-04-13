@@ -1,4 +1,4 @@
-export { IdentityKey, BaseEntity } from './entity';
+export { IdentityKey } from './entity';
 export { EntityMetaOptions } from './entity-meta-options';
 export { EntityComplexPath, EntityResourceMetaOptions, EntityPath, HttpMethod, EntityOperation } from './rest-resource';
 export { FetchPolicy, FetchPolicyStrategy } from './fetch-policy';

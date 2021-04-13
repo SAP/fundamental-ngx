@@ -14,7 +14,7 @@ import { QuerySnapshot } from '../query/query';
 import { instanceForType } from '../domain/state-handler';
 // import { BaseEntity } from '../../../domain/entity';
 import { EntityCollectionService } from './entity-collection-service';
-import { BaseEntity } from '../domain/base-classes/base-entity';
+// import { BaseEntity } from '../domain/base-classes/base-entity';
 
 //#region Interfaces
 
@@ -54,7 +54,7 @@ export interface EntityStore<T> {
 
 //#region Implementation
 
-export interface EntityStoreOptions<T extends BaseEntity> {
+export interface EntityStoreOptions<T> {
     cachePolicy: CachePolicy;
     fetchPolicy: FetchPolicy;
     chainingStrategy: ChainingStrategyFieldsMap<T>;
@@ -63,7 +63,7 @@ export interface EntityStoreOptions<T extends BaseEntity> {
 /**
  * Entity Store default implementation
  */
-export class DefaultEntityStore<T extends BaseEntity<{}>> implements EntityStore<T> {
+export class DefaultEntityStore<T> implements EntityStore<T> {
     get queryBuilder(): QueryBuilder<T> {
         return this._queryBuilder;
     }
@@ -81,8 +81,8 @@ export class DefaultEntityStore<T extends BaseEntity<{}>> implements EntityStore
         return this._entityService.getByKey(id);
     }
 
-    save(entity: T): Observable<T> {
-        if (entity.identity) {
+    save(entity: any): Observable<T> {
+        if (entity && entity.identity) {
             return this._entityService.update(entity);
         }
         return this._entityService.add(entity);
@@ -94,32 +94,6 @@ export class DefaultEntityStore<T extends BaseEntity<{}>> implements EntityStore
 
     createEntityInstance(fromState?: T): T {
         return instanceForType(this._entity, fromState);
-    }
-}
-
-export class DefaultQueryService<TModel> extends QueryService<TModel> {
-    constructor(
-        private entity: Type<TModel>,
-        private service: EntityCollectionService<TModel>) {
-        super();
-    }
-
-    getByKey(id: string): Observable<TModel> {
-        return this.service.getByKey(id).pipe(
-            map((data) => instanceForType(this.entity, data))
-        );
-    }
-
-    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
-        // Pass query payload instead of QueryParams
-        // TODO: Should we override EntityCollectionService interface for that?
-        return this.service.getWithQuery(query as any).pipe(
-            map((data) => instanceForType(this.entity, data))
-        );
-    }
-
-    count(): Observable<number> {
-        return this.service.count$;
     }
 }
 
