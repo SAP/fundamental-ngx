@@ -7,7 +7,7 @@
                 (isOpenChange)="isOpenChanged($event)"
                 placement="bottom"
                 additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class">
-        <fd-popover-control tabindex="0" (keyup.enter)="toggleOverflow()">
+        <fd-popover-control tabindex="0" (keyup)="handleKeyupOnPopoverControl($event)">
             <div *ngFor="let person of people" fd-avatar-group-item>
                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                            [label]="person.firstName + ' ' + person.lastName"

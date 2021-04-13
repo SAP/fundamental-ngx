@@ -1,6 +1,7 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { Size } from '@fundamental-ngx/core/utils';
+import { KeyUtil, Size } from '@fundamental-ngx/core/utils';
 
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
@@ -18,13 +19,21 @@ export class AvatarGroupGroupTypeExampleComponent {
     people = this.avatarGroupDataExampleService.generate();
     personDetails: any = null;
     overflowPopoverStage: 'main' | 'detail' = 'main';
-    isOpen = false;  
+    isOpen = false;
 
     get isDetailStage(): boolean {
         return this.overflowPopoverStage === 'detail';
     }
 
     constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}
+
+    handleKeyupOnPopoverControl(event: KeyboardEvent): void {
+        if (!KeyUtil.isKeyCode(event, ENTER) && !KeyUtil.isKeyCode(event, SPACE)) {
+            return;
+        }
+
+        this.toggleOverflow();
+    }
 
     toggleOverflow(): void {
         this.isOpen = !this.isOpen;
