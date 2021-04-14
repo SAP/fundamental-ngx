@@ -23,7 +23,6 @@ import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coerci
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
-
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
 import { Column, LabelLayout, HintPlacement } from '../../form-options';
@@ -127,6 +126,13 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     disabled = false;
 
+    /**
+     * Form Group Container to bind the Form-Field to.
+     * This will override default value injected by constructor
+     */
+    @Input()
+    formGroupContainer: FormGroupContainer;
+
     @Output()
     onChange: EventEmitter<string> = new EventEmitter<string>();
 
@@ -155,12 +161,18 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        private _elementRef: ElementRef,
-        @Optional() readonly formGroupContainer: FormGroupContainer,
-        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup) {
+        @Optional() formGroupContainer: FormGroupContainer,
+        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup
+    ) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
-
+        // formGroupContainer can be injected only if current form-field is located
+        // insight formGroupContainer content.
+        // If this is not the case the formGroupContainer
+        // will be undefined (known angular issue),
+        // in such case formGroupContainer can be pointed explicitly using
+        // component input annotation
+        this.formGroupContainer = formGroupContainer;
     }
 
     /** @hidden */

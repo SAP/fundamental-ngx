@@ -2,8 +2,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { FormGroupComponent } from '@fundamental-ngx/platform';
 
+import { ContentDensityService } from '../../../../../core/src';
+import { FormGroupComponent } from './form-group/form-group.component';
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
 import { PlatformInputModule } from './input/fdp-input.module';
 import { FormFieldComponent } from './form-group/form-field/form-field.component';
@@ -93,12 +94,14 @@ describe('Simple Form', () => {
     let fixture: ComponentFixture<SimpleFormTestComponent>;
     let host: SimpleFormTestComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-            declarations: [SimpleFormTestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+                declarations: [SimpleFormTestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SimpleFormTestComponent);
@@ -117,7 +120,8 @@ describe('Simple Form', () => {
 
     it('should highlight the required fields', () => {
         const labels: ElementRef<HTMLElement>[] = fixture.debugElement.queryAll(By.css('label'));
-        const getFormLabelElement = (label: ElementRef<HTMLElement>) => fixture.debugElement.query(By.css('span')).nativeElement;
+        const getFormLabelElement = (label: ElementRef<HTMLElement>) =>
+            fixture.debugElement.query(By.css('span')).nativeElement;
         expect(labels.length).toBe(3);
         expect(getFormLabelElement(labels[0]).classList.contains('fd-form-label--required')).toBeTruthy();
         expect(getFormLabelElement(labels[1]).classList.contains('fd-form-label--required')).toBeTruthy();
@@ -229,12 +233,14 @@ describe('Nested Form Groups', () => {
     let fixture: ComponentFixture<NestedFormGroupsTestComponent>;
     let host: NestedFormGroupsTestComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
-            declarations: [NestedFormGroupsTestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+                declarations: [NestedFormGroupsTestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NestedFormGroupsTestComponent);
@@ -282,5 +288,89 @@ describe('Nested Form Groups', () => {
                 state: 'AK'
             }
         });
+    });
+});
+
+describe('fdp-form-field out of fdp-form-group', () => {
+    @Component({
+        template: `
+            <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+                <fdp-form-group
+                    #fdpUserFormGroup
+                    [object]="user"
+                    [formGroup]="userFormGroup"
+                    [hintPlacement]="'right'"
+                    [i18Strings]="i18n"
+                >
+                    <ng-container
+                        *ngTemplateOutlet="formFieldTemplateRef; context: { fdpFormGroup: fdpUserFormGroup }"
+                    ></ng-container>
+
+                    <ng-template #i18n let-errors>
+                        <span *ngIf="errors && errors.required" class="error">This field is required.</span>
+                    </ng-template>
+                </fdp-form-group>
+            </form>
+            <ng-template #formFieldTemplateRef let-fdpFormGroup="fdpFormGroup">
+                <fdp-form-field
+                    #formFieldFirstName
+                    id="firstName"
+                    label="First Name"
+                    required="true"
+                    [formGroupContainer]="fdpFormGroup"
+                >
+                    <fdp-input name="firstName" [formControl]="formFieldFirstName.formControl"></fdp-input>
+                </fdp-form-field>
+            </ng-template>
+        `
+    })
+    class HostFormComponent {
+        @ViewChild('fdpUserFormGroup') fdpFormGroupUser: FormGroupComponent;
+        @ViewChild('formFieldFirstName') fdpFormFieldFirstName: FormFieldComponent;
+
+        public userFormGroup: FormGroup = new FormGroup({});
+
+        public user = {
+            firstName: 'Tom'
+        };
+
+        public result: any = null;
+
+        onSubmit(): void {
+            this.result = this.userFormGroup.value;
+        }
+    }
+
+    let fixture: ComponentFixture<HostFormComponent>;
+    let host: HostFormComponent;
+
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+                declarations: [HostFormComponent],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HostFormComponent);
+        host = fixture.componentInstance;
+
+        fixture.detectChanges();
+    });
+
+    it('should be created', () => {
+        expect(host).toBeDefined();
+    });
+
+    it('should link formField to given formGroup through [formGroupContainer] input', () => {
+        const fdpFormGroup: FormGroupComponent = host.fdpFormGroupUser;
+        const fdpFormField: FormFieldComponent = host.fdpFormFieldFirstName;
+
+        expect(fdpFormGroup).toBeDefined();
+        expect(fdpFormField).toBeDefined();
+        expect(fdpFormField.formGroupContainer).toBe(fdpFormGroup);
     });
 });
