@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { CachePolicyStrategy } from '../../../../domain/cache-policy';
 import { EntityMetaOptionsService } from '../../utils/entity-options.service';
 import { QueryAdapterService } from '../../query/query-adapter';
-import { BaseEntity, EntityServerService, EntityServerServiceFactory } from './interfaces';
+import { BaseEntity, EntityServerService, EntityServerServiceFactory, IdentityKey } from './interfaces';
 import { EntityRestServerServiceFactory } from './entity-rest-server';
 import { EntityCacheStorageServiceFactory } from './cache-storage';
 import { EntityCacheServerService } from './entity-cache-server';
+import { Entity } from '../../../../domain/entity';
 
 /**
  * Entity Server Service Factory
@@ -27,7 +28,7 @@ export class DefaultEntityServerServiceFactory implements EntityServerServiceFac
      * Create EntityServerService for the given entity type
      * @param entityName {string} Name of the entity type for this data service
      */
-    create<T extends BaseEntity<T>>(entityName: string): EntityServerService<T> {
+    create<T extends Entity>(entityName: string): EntityServerService<T> {
         const server = this.entityServerServiceFactory.create<T>(entityName);
 
         const { cache } = this.entityMetaOptionsService.getEntityResourceMetadata(entityName);

@@ -6,55 +6,32 @@ import { EntityMetaOptions, EntityMetaOptionsService } from '../utils/entity-opt
 import { EntityCollectionService } from './entity-collection-service';
 import { DefaultEntityCollectionService } from './entity-collection-service-base';
 import { EntityCollectionsService } from './entity-collections-service';
-import { BaseEntity, IdentityKey } from './entity-server/interfaces';
-import { EntityType } from '@fundamental-ngx/store';
+import { Entity } from '../../../domain/entity';
 
 describe('EntityCollectionService', () => {
     let service: DefaultEntityCollectionService<Hero>;
     let entityServices: jasmine.SpyObj<EntityServices>;
     let entityMetaOptionsService: jasmine.SpyObj<EntityMetaOptionsService>;
-    let ngrxHeroCollectionService: jasmine.SpyObj<NgrxEntityCollectionService<HeroDTO>>;
+    let ngrxHeroCollectionService: jasmine.SpyObj<NgrxEntityCollectionService<Hero>>;
     let entityCollectionsService: jasmine.SpyObj<EntityCollectionsService>;
     let entityMetaOptions: EntityMetaOptions<Hero>;
 
-    interface HeroDTO {
-        id: string;
-        name: string;
-        advantages: Advantage[];
-        owner: User;
-        ownerId: string;
-    }
-
-    class Advantage extends BaseEntity<any> {
+    class Advantage extends Entity {
         constructor(public id: string, public title: string) {
-            super({ id, title });
-        }
-
-        get identity(): IdentityKey {
-            return this.value.id;
+            super();
         }
     }
 
-    class User extends BaseEntity<any> {
-        constructor(public id: string, public name: string) {
-            super({ id, name });
-        }
-
-        get identity(): IdentityKey {
-            return this.value.id;
-        }
+    class User extends Entity {
+        constructor(public id: string, public name: string) { super() }
     }
 
-    class Hero extends BaseEntity<HeroDTO> {
+    class Hero extends Entity {
         id: string;
         name: string;
         advantages: Advantage[];
         owner: User;
         ownerId: string;
-
-        get identity(): IdentityKey {
-            return this.value.id;
-        }
     }
 
     beforeEach(() => {
@@ -112,7 +89,7 @@ describe('EntityCollectionService', () => {
 
     describe('#add()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero({} as HeroDTO);
+            const entity = new Hero();
             service.add(entity);
             expect(ngrxHeroCollectionService.add).toHaveBeenCalledWith(entity);
         });
@@ -120,7 +97,7 @@ describe('EntityCollectionService', () => {
 
     describe('#delete()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero({} as HeroDTO);
+            const entity = new Hero();
             service.delete(entity);
             expect(ngrxHeroCollectionService.delete).toHaveBeenCalledWith(entity as any);
         });
@@ -128,7 +105,7 @@ describe('EntityCollectionService', () => {
 
     describe('#update()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero({} as HeroDTO);
+            const entity = new Hero();
             service.update(entity);
             expect(ngrxHeroCollectionService.update).toHaveBeenCalledWith(entity);
         });
@@ -136,7 +113,7 @@ describe('EntityCollectionService', () => {
 
     describe('#upsert()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero({} as HeroDTO);
+            const entity = new Hero();
             service.upsert(entity);
             expect(ngrxHeroCollectionService.upsert).toHaveBeenCalledWith(entity);
         });
@@ -176,14 +153,13 @@ describe('EntityCollectionService', () => {
         describe('requests chaining', () => {
             describe('"strategy" option', () => {
                 let hero: Hero;
-                let heroDTO: HeroDTO;
                 let owner: User;
                 let userCollectionService: jasmine.SpyObj<EntityCollectionService<User>>;
                 let heroSubject: Subject<Hero>;
                 let ownerSubject: Subject<User>;
 
                 beforeEach(() => {
-                    heroDTO = {
+                    hero = {
                         id: '123',
                         name: 'Hero',
                         advantages: [],
@@ -243,7 +219,7 @@ describe('EntityCollectionService', () => {
                             }
                         };
 
-                        const results: HeroDTO[] = [];
+                        const results: Hero[] = [];
 
                         service.getByKey('123').subscribe((result) => {
                             results.push(result);
@@ -308,7 +284,7 @@ describe('EntityCollectionService', () => {
                             }
                         };
 
-                        const results: HeroDTO[] = [];
+                        const results: Hero[] = [];
 
                         service.getByKey('123').subscribe((result) => {
                             results.push(result);
@@ -365,7 +341,7 @@ describe('EntityCollectionService', () => {
             describe('"type" option', () => {
                 describe('for collection', () => {
                     it('should make sub call to retrieve sub entity as collection', () => {
-                        const hero: HeroDTO = {
+                        const hero: Hero = {
                             id: '123',
                             name: 'Hero',
                             advantages: [],
@@ -414,12 +390,11 @@ describe('EntityCollectionService', () => {
 
                 describe('for single entity', () => {
                     let hero: Hero;
-                    let heroDTO: HeroDTO;
                     let owner: User;
                     let userCollectionService: jasmine.SpyObj<EntityCollectionService<User>>;
 
                     beforeEach(() => {
-                        heroDTO = {
+                        hero = {
                             id: '123',
                             name: 'Hero',
                             advantages: [],
@@ -473,12 +448,11 @@ describe('EntityCollectionService', () => {
 
             describe('"key" option', () => {
                 let hero: Hero;
-                let heroDTO: HeroDTO;
                 let owner: User;
                 let userCollectionService: jasmine.SpyObj<EntityCollectionService<User>>;
 
                 beforeEach(() => {
-                    heroDTO = {
+                    hero = {
                         id: '123',
                         name: 'Hero',
                         advantages: [],

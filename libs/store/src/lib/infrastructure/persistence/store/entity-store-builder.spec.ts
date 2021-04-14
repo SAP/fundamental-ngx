@@ -11,23 +11,16 @@ import { DefaultEntityCollectionService } from './entity-collection-service-base
 import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionService } from './entity-collection-service';
+import { Entity } from '../../../domain/entity';
 
-class ChildEntity extends BaseEntity<any> {
+class ChildEntity extends Entity {
     name: 'child entity';
-
-    get identity(): IdentityKey {
-        return this.value.name;
-    }
 }
-class User extends BaseEntity<any> {
+class User extends Entity {
     id: string;
     name: string;
     age: number;
     child: ChildEntity;
-
-    get identity(): IdentityKey {
-        return this.value.name;
-    }
 }
 
 class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
@@ -114,9 +107,9 @@ describe('Default EntityStoreBuilder', () => {
         expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
     });
 
-    xit('should has "withChainingStrategy" method defined', () => {
-        // const returnedValue = builder.withChainingStrategy({ child: 'non-block' });
-        // // return builder instance
-        // expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
+    it('should has "withChainingStrategy" method defined', () => {
+        const returnedValue = builder.withChainingStrategy({ child: 'non-block' });
+        // return builder instance
+        expect(returnedValue instanceof DefaultEntityStoreBuilder).toBeTruthy();
     });
 });

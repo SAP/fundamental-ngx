@@ -7,7 +7,6 @@ import {
     getEntityResourceMetadataByEntityName,
     EntityType
 } from '../../../domain/decorators';
-import { BaseEntity } from '../../../domain/entity';
 import { EntityMetaOptions } from '../../../domain/entity-meta-options';
 import { EntityResourceMetaOptions } from '../../../domain/rest-resource';
 

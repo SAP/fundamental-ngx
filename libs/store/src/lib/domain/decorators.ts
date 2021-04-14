@@ -1,4 +1,3 @@
-// import { BaseEntity } from './entity';
 import { EntityMetaOptions } from './entity-meta-options';
 import { EntityResourceMetaOptions } from './rest-resource';
 import { Type } from './utility';

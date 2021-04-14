@@ -45,8 +45,5 @@ export class AppComponent {
                 console.log('requisition subscription was completed');
             }
         });
-
-        const req = this.requisitionStore.createEntityInstance({ title: '123'} as Requisition);
-        console.log(req.identity);
     }
 }

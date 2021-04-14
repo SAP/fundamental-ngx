@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { QuerySnapshotModel } from '../query/query';
-import { BaseEntity } from './entity-server/interfaces';
 import { EntityMetaOptions, EntityType, IdentityKey } from '../../../domain/public_api';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
 import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chaining-policy';
+import { Entity } from '../../../domain/entity';
 
 /**
  * Default EntityCollectionService implementation.
@@ -210,7 +210,7 @@ export class DefaultEntityCollectionService<T> implements EntityCollectionServic
     }
 
     /** @hidden */
-    private getSubEntityPrimaryKey<K extends BaseEntity<K>>(
+    private getSubEntityPrimaryKey<K extends Entity>(
         { key: keyOrFunction }: ChainingPolicyFieldOptions<T, K>,
         entity: T
     ): IdentityKey {
