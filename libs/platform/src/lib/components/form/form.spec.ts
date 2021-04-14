@@ -3,7 +3,6 @@ import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 
-import { ContentDensityService } from '../../../../../core/src';
 import { FormGroupComponent } from './form-group/form-group.component';
 import { FdpFormGroupModule } from './form-group/fdp-form.module';
 import { PlatformInputModule } from './input/fdp-input.module';
@@ -349,7 +348,6 @@ describe('fdp-form-field out of fdp-form-group', () => {
             TestBed.configureTestingModule({
                 imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
                 declarations: [HostFormComponent],
-                providers: [ContentDensityService]
             }).compileComponents();
         })
     );
