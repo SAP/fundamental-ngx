@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.90...v0.29.0-rc.91) (2021-04-14)
+
+
+### Bug Fixes
+
+* (Platform) Add ability to use fdp-form-field out of fdp-form-group-content ([#5127](https://github.com/SAP/fundamental-ngx/issues/5127)) ([3b384ce](https://github.com/SAP/fundamental-ngx/commit/3b384ce28064314b72932321a208750f534d8474))
+
 ## [0.29.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.89...v0.29.0-rc.90) (2021-04-14)
 
 ## [0.29.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.88...v0.29.0-rc.89) (2021-04-13)
