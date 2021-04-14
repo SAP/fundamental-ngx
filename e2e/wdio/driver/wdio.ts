@@ -387,3 +387,14 @@ function checkSelectorExists (selector: string, index: number = 0): void {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }
 }
+
+export function applyState(state: 'hover' | 'active' | 'focus', selector: string, index: number = 0): void {
+    switch (state) {
+        case 'hover':
+            return mouseHoverElement(selector, index);
+        case 'active':
+            return addIsActiveClass(selector, index);
+        case 'focus':
+            return focusElement(selector, index);
+    }
+}

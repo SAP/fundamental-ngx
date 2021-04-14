@@ -1,41 +1,36 @@
 <div [formGroup]="schemaGroup">
-    <ng-container *ngFor="let control of forms; let i = index">
+    <ng-container *ngFor="let control of controls; let i = index">
         <ng-container *ngIf="_isFormControl(control.control); else formGroup">
             <ng-container [ngSwitch]="control.type">
                 <ng-container *ngSwitchCase="'string'">
                     <ng-container *ngIf="control.enum; else noEnum">
                         <div fd-form-item class="form-group">
-                            <label fd-form-label>{{ control.key }}</label>
-                            <select fd-form-control class="form-control" [formControl]="control.control">
+                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
+                            <select fd-form-control class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control">
                                 <option *ngFor="let value of control.enum" [value]="value">{{ value }}</option>
                             </select>
                         </div>
                     </ng-container>
                     <ng-template #noEnum>
                         <div fd-form-item class="form-group">
-                            <label fd-form-label>{{ control.key }}</label>
-                            <input fd-form-control type="text" class="form-control" [formControl]="control.control" />
+                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
+                            <input fd-form-control type="text" class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control" />
                         </div>
                     </ng-template>
-                </ng-container>
-                <ng-container *ngSwitchCase="'string[]'">
-                    <div fd-form-item class="form-group">
-                        <label fd-form-label>Row data</label>
-                    </div>
                 </ng-container>
                 <ng-container *ngSwitchCase="'integer'">
                     <ng-container *ngIf="control.enum; else noEnum">
                         <div fd-form-item class="form-group">
-                            <label fd-form-label>{{ control.key }}</label>
-                            <select class="form-control" [formControl]="control.control">
+                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
+                            <select class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control">
                                 <option *ngFor="let value of control.enum" [value]="value">{{ value }}</option>
                             </select>
                         </div>
                     </ng-container>
                     <ng-template #noEnum>
                         <div fd-form-item class="form-group">
-                            <label fd-form-label>{{ control.key }}</label>
-                            <input fd-form-control type="number" class="form-control" [formControl]="control.control" />
+                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
+                            <input fd-form-control type="number" class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control" />
                         </div>
                     </ng-template>
                 </ng-container>
@@ -62,11 +57,13 @@
             </ng-container>
         </ng-container>
         <ng-template #formGroup>
-            <div class="schema--sub-header">{{ control.key }}</div>
-            <schema-group
-                [schemaGroup]="control.control"
-                [properties]="properties[control.key].properties"
-            ></schema-group>
+            <fieldset fd-fieldset class="schema--inner-group">
+                <legend fd-form-legend class="schema--sub-header">{{ control.key }}</legend>
+                <schema-group
+                    [schemaGroup]="control.control"
+                    [properties]="properties[control.key].properties"
+                ></schema-group>
+            </fieldset>
         </ng-template>
     </ng-container>
 </div>
