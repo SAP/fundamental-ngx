@@ -257,8 +257,8 @@
                 <tbody
                     fd-table-body
                     fd-dnd-list
-                    [class.fd-table__body--no-horizontal-borders]="noBodyBorders"
-                    [class.fd-table__body--no-vertical-borders]="noBodyBorders"
+                    [noBorderX]="noBodyBorders"
+                    [noBorderY]="noBodyBorders"
                     [tabIndex]="pageScrolling ? 0 : -1"
                     [items]="_tableRows"
                     [draggable]="_rowsDraggable"
