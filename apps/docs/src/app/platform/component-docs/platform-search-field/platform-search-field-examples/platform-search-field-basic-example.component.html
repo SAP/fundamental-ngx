@@ -10,8 +10,13 @@
     </div>
 </div>
 <h4>Compact</h4>
-<fdp-search-field [placeholder]="'Search'" [suggestions]="suggestions" [contentDensity]="'compact'"
-    (searchSubmit)="onCompactSearchSubmit($event)" (inputChange)="onCompactInputChange($event)"></fdp-search-field>
+<fdp-search-field
+    [placeholder]="'Search'"
+    [suggestions]="suggestions"
+    [contentDensity]="'compact'"
+    ariaLabel="Search something"
+    (searchSubmit)="onCompactSearchSubmit($event)"
+    (inputChange)="onCompactInputChange($event)"></fdp-search-field>
 
 <div class="result-block">
     <div class="result-field">

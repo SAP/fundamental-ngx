@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.88...v0.29.0-rc.89) (2021-04-13)
+
+## [0.29.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.87...v0.29.0-rc.88) (2021-04-13)
+
+## [0.29.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.86...v0.29.0-rc.87) (2021-04-13)
+
+
+### Features
+
+* (Platform) search field improved to support aria label attribute ([#5064](https://github.com/SAP/fundamental-ngx/issues/5064)) ([15bc68c](https://github.com/SAP/fundamental-ngx/commit/15bc68c0b8cd93ea0ffd89d7b72c57ff2f99df0a))
+
+## [0.29.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.85...v0.29.0-rc.86) (2021-04-11)
+
+## [0.29.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.84...v0.29.0-rc.85) (2021-04-11)
+
+## [0.29.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.83...v0.29.0-rc.84) (2021-04-11)
+
+## [0.29.0-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.82...v0.29.0-rc.83) (2021-04-11)
+
+## [0.29.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.81...v0.29.0-rc.82) (2021-04-09)
+
+
+### Bug Fixes
+
+* (Core) mirror image multi-input value-help icon when dir="rtl" ([#5008](https://github.com/SAP/fundamental-ngx/issues/5008)) ([842d27a](https://github.com/SAP/fundamental-ngx/commit/842d27aecc8466b586de3b716deba6def702d6f9))
+
+## [0.29.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.79...v0.29.0-rc.81) (2021-04-09)
+
+
+### Bug Fixes
+
+* (Core) multi input tab index bug ([#5012](https://github.com/SAP/fundamental-ngx/issues/5012)) ([36696c9](https://github.com/SAP/fundamental-ngx/commit/36696c91393ded2d02665df1a30ad17740e17295))
+
+## [0.29.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.79...v0.29.0-rc.80) (2021-04-07)
+
 ## [0.29.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.78...v0.29.0-rc.79) (2021-04-05)
 
 ## [0.29.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.77...v0.29.0-rc.78) (2021-04-05)
