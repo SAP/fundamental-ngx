@@ -112,7 +112,7 @@ describe('Action sheet test suite', function() {
             }
         });
 
-        it('should check action sheet item focus state', () => {
+        xit('should check action sheet item focus state', () => {
             const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
 
             for (let i = 0; actionSheetCount > i; i++) {
@@ -151,7 +151,7 @@ describe('Action sheet test suite', function() {
             }
         });
 
-        it('should check action sheet item active state', () => {
+        xit('should check action sheet item active state', () => {
             const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
 
             for (let i = 0; actionSheetCount > i; i++) {

@@ -35,7 +35,7 @@ describe('Date picker suite', function() {
         }
     });
 
-    it('Verify on click on the date picker button', () => {
+    it('Verify calendar is expanded on click on the date picker button', () => {
         const activeButtons = elementArray(activeButtonDatePicker);
         for (let i = 1; i < activeButtons.length; i++) {
             sendKeys(['Escape']);
