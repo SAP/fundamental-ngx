@@ -19,3 +19,7 @@
 		align-self: flex-start;
 	}
 }
+
+.fd-list.fd-list--byline.fd-list--no-border .fd-list__link .fd-list__thumbnail .fd-avatar {
+	vertical-align: top;
+}
