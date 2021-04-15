@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import * as datePickerMomentAdaptorSrcTs from '!raw-loader!./examples/date-picker-moment-adaptor-example.component.ts';
-import * as momentAdaptorOptionsSrcTs from '!raw-loader!./examples/moment-adaptor-options-example.component.ts';
-import * as momentDatetimeFormatsSrcTs from '!raw-loader!./examples/moment-adaptor-options-example.component.ts';
+import * as datePickerMomentAdapterSrcTs from '!raw-loader!./examples/date-picker-moment-adapter-example.component.ts';
+import * as momentAdapterOptionsSrcTs from '!raw-loader!./examples/moment-adapter-options-example.component.ts';
+import * as momentDatetimeFormatsSrcTs from '!raw-loader!./examples/moment-adapter-options-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -11,21 +11,21 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './moment-datetime-adapter-docs.component.html'
 })
 export class MomentDatetimeAdapterDocsComponent {
-    datePickerMomentAdaptor: ExampleFile[] = [
+    datePickerMomentAdapter: ExampleFile[] = [
         {
             language: 'typescript',
-            component: 'DatePickerMomentAdaptorExampleComponent',
-            code: datePickerMomentAdaptorSrcTs,
-            fileName: 'date-picker-moment-adaptor-example'
+            component: 'DatePickerMomentAdapterExampleComponent',
+            code: datePickerMomentAdapterSrcTs,
+            fileName: 'date-picker-moment-adapter-example'
         }
     ];
 
-    momentAdaptorOptions: ExampleFile[] = [
+    momentAdapterOptions: ExampleFile[] = [
         {
             language: 'typescript',
-            component: 'MomentAdaptorOptionsExampleComponent',
-            code: momentAdaptorOptionsSrcTs,
-            fileName: 'moment-adaptor-options-example'
+            component: 'MomentAdapterOptionsExampleComponent',
+            code: momentAdapterOptionsSrcTs,
+            fileName: 'moment-adapter-options-example'
         }
     ];
 

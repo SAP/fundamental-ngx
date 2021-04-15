@@ -14,8 +14,8 @@ import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { MomentDatetimeAdapterHeaderComponent } from './moment-datetime-adapter-header/moment-datetime-adapter-header.component';
 import { MomentDatetimeAdapterDocsComponent } from './moment-datetime-adapter-docs.component';
-import { DatePickerMomentAdaptorExampleComponent } from './examples/date-picker-moment-adaptor-example.component';
-import { MomentAdaptorOptionsExampleComponent } from './examples/moment-adaptor-options-example.component';
+import { DatePickerMomentAdapterExampleComponent } from './examples/date-picker-moment-adapter-example.component';
+import { MomentAdapterOptionsExampleComponent } from './examples/moment-adapter-options-example.component';
 import { MomentDatetimeFormatsExampleComponent } from './examples/moment-datetime-formats-example.component';
 
 const routes: Routes = [
@@ -44,8 +44,8 @@ const routes: Routes = [
     declarations: [
         MomentDatetimeAdapterDocsComponent,
         MomentDatetimeAdapterHeaderComponent,
-        DatePickerMomentAdaptorExampleComponent,
-        MomentAdaptorOptionsExampleComponent,
+        DatePickerMomentAdapterExampleComponent,
+        MomentAdapterOptionsExampleComponent,
         MomentDatetimeFormatsExampleComponent
     ],
 })
