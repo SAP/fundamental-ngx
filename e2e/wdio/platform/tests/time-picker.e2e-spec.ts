@@ -110,7 +110,7 @@ describe('Time picker suite', function() {
         }
     });
 
-    //skipped due to infinity cycle on saucelabs
+    // skipped due to infinity cycle on saucelabs
     xit('Verify user is able to set time', () => {
         const activeButtonsLength = getElementArrayLength(activeTimePickerButton);
         for (let i = 0; i < activeButtonsLength; i++) {
@@ -169,7 +169,7 @@ describe('Time picker suite', function() {
 
         it('should check examples visual regression', () => {
             timePickerPage.saveExampleBaselineScreenshot();
-            expect(timePickerPage.compareWithBaseline()).toBeLessThan(3);
+            expect(timePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         it('should check time picker visual regression', () => {
@@ -288,7 +288,7 @@ describe('Time picker suite', function() {
             scrollIntoView(invalidTimePickerInput);
             saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-basic-time-picker', timePickerPage.getScreenshotFolder());
             expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-basic-time-picker', timePickerPage.getScreenshotFolder()))
-                .toBeLessThan(3);
+                .toBeLessThan(5);
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/4853
@@ -299,7 +299,7 @@ describe('Time picker suite', function() {
             scrollIntoView(invalidTimePickerInput);
             saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', timePickerPage.getScreenshotFolder());
             expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', timePickerPage.getScreenshotFolder()))
-                .toBeLessThan(3);
+                .toBeLessThan(5);
         });
 
         it('should check not valid input field state for time picker with template form', () => {
@@ -309,7 +309,7 @@ describe('Time picker suite', function() {
             scrollIntoView(invalidTimePickerInput);
             saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', timePickerPage.getScreenshotFolder());
             expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', timePickerPage.getScreenshotFolder()))
-                .toBeLessThan(3);
+                .toBeLessThan(5);
         });
 
         it('should check disabled time picker hover state', () => {
@@ -344,21 +344,21 @@ describe('Time picker suite', function() {
         mouseHoverElement(selector, index);
         saveElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} hover state mismatch`);
+            .toBeLessThan(5, `${elementName} hover state mismatch`);
     }
 
     function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
         click(selector, index);
         saveElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} focus state mismatch`);
+            .toBeLessThan(5, `${elementName} focus state mismatch`);
     }
 
     function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
         addIsActiveClass(selector, index);
         saveElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index);
         expect(checkElementScreenshot(selector, tag, timePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} item ${index} active state mismatch`);
+            .toBeLessThan(5, `${elementName} item ${index} active state mismatch`);
     }
 
     function selectHoursAndMinutes(hour: number = 1, minute: number = 1, day_time: string = ' PM '): void {
