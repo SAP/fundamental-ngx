@@ -5,23 +5,20 @@ import {
     CachePolicy,
     FetchPolicy,
     IdentityKey,
-    ChainingStrategyFieldsMap
+    ChainingStrategyFieldsMap,
 } from '../../../domain/public_api';
 import { Type } from '../../../domain/public_api';
-import { QueryService } from '../query/query.service';
 import { QueryBuilder } from '../query/query-builder';
-import { QuerySnapshot } from '../query/query';
 import { instanceForType } from '../domain/state-handler';
-// import { BaseEntity } from '../../../domain/entity';
 import { EntityCollectionService } from './entity-collection-service';
-// import { BaseEntity } from '../domain/base-classes/base-entity';
+import { BaseEntity } from '../domain/base-classes/base-entity';
 
 //#region Interfaces
 
 /**
  * Entity Store interface
  */
-export interface EntityStore<T> {
+export interface EntityStore<T extends BaseEntity> {
     /**
      * Query builder reference.
      * Use it to create a query to underlying entity collection
@@ -63,7 +60,7 @@ export interface EntityStoreOptions<T> {
 /**
  * Entity Store default implementation
  */
-export class DefaultEntityStore<T> implements EntityStore<T> {
+export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> {
     get queryBuilder(): QueryBuilder<T> {
         return this._queryBuilder;
     }
@@ -81,7 +78,7 @@ export class DefaultEntityStore<T> implements EntityStore<T> {
         return this._entityService.getByKey(id);
     }
 
-    save(entity: any): Observable<T> {
+    save(entity: T): Observable<T> {
         if (entity && entity.identity) {
             return this._entityService.update(entity);
         }

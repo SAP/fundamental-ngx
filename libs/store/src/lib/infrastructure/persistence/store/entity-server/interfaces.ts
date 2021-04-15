@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Entity, IdentityKey } from '../../../../domain/entity';
+import { IdentityKey } from '../../../../domain/entity';
 import { BaseEntity } from '../../domain/base-classes/base-entity';
 import { QueryParams, QuerySnapshot } from '../../query/query-adapter';
 import { Update } from '@ngrx/entity';
@@ -45,7 +45,7 @@ export interface EntityCacheStorageService<TModel> {
  * Entity Server Factory
  */
 export abstract class EntityServerServiceFactory {
-    abstract create<T extends Entity>(entityName: string): EntityServerService<T>;
+    abstract create<T extends BaseEntity>(entityName: string): EntityServerService<T>;
 }
 
 export interface PaginatedEntitiesResponse<T> {

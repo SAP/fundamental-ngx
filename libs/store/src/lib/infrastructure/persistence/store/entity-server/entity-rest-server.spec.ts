@@ -46,6 +46,10 @@ class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
     getEntityMetadata<T>(entity: string | EntityType<T>): EntityMetaOptions<T> {
         throw new Error('Method not implemented.');
     }
+
+    getEntityTypeByName(entityName: string) {
+        throw new Error('Method not implemented.');
+    }
 }
 
 class QueryAdapterServiceMock implements QueryAdapterService {

@@ -6,15 +6,26 @@ import {
     EntityServerService,
     EntityCacheStorageService,
     PaginatedEntitiesResponse,
+    BaseEntity, IdentityKey
 } from './interfaces';
 import { QueryParams } from '../../query/query-adapter';
 import { QuerySnapshotModel } from '../../query/query';
-import { Entity } from '../../../../domain/entity';
+import { EntityMetaOptionsService } from '../../utils';
 
-class Hero extends Entity {
+interface HeroDTO {
     id: number;
     name: string;
     version: number;
+}
+
+class Hero extends BaseEntity<HeroDTO> {
+    id: number;
+    name: string;
+    version: number;
+
+    get identity(): IdentityKey {
+        return this.value.id;
+    }
 }
 
 class CacheStorageServiceMock implements EntityCacheStorageService<Hero> {
@@ -58,14 +69,21 @@ class PrimaryServerMock implements EntityServerService<Hero> {
 }
 
 describe('EntityCacheServerService', () => {
-    let service: EntityCacheServerService<Hero>;
-    let cacheStorageService: EntityCacheStorageService<Hero>;
-    let primaryServer: EntityServerService<Hero>;
+    let service: EntityCacheServerService<HeroDTO>;
+    let cacheStorageService: EntityCacheStorageService<HeroDTO>;
+    let primaryServer: EntityServerService<HeroDTO>;
+    let entityMetaOptionsService: jasmine.SpyObj<EntityMetaOptionsService>;
+
+
+    entityMetaOptionsService = jasmine.createSpyObj<EntityMetaOptionsService>('EntityMetaOptionsService', [
+        'getEntityTypeByName'
+    ]);
+    entityMetaOptionsService.getEntityTypeByName.and.returnValue(Hero);
 
     beforeEach(() => {
         cacheStorageService = new CacheStorageServiceMock();
         primaryServer = new PrimaryServerMock();
-        service = new EntityCacheServerService('Hero', primaryServer, cacheStorageService);
+        service = new EntityCacheServerService('Hero', primaryServer, cacheStorageService, entityMetaOptionsService);
     });
 
     it('should be created', () => {
@@ -73,13 +91,13 @@ describe('EntityCacheServerService', () => {
     });
 
     describe('#getAll', () => {
-        let heroes: Hero[];
+        let heroes: HeroDTO[];
 
         beforeEach(() => {
             heroes = [
                 { id: 1, name: 'BA', version: 1 },
                 { id: 2, name: 'BB', version: 1 }
-            ] as Hero[];
+            ] as HeroDTO[];
         });
 
         it('should try to get data from cache initially', (done) => {
@@ -122,8 +140,8 @@ describe('EntityCacheServerService', () => {
 
     describe('#add', () => {
         it('should delegate request to the primary server', (done) => {
-            const newHeroModel: Hero = { id: null, name: 'New Hero', version: 2 };
-            const newHeroResponse: Hero = { id: 2, name: 'New Hero', version: 3 };
+            const newHeroModel = { id: null, name: 'New Hero', version: 2 };
+            const newHeroResponse = { id: 2, name: 'New Hero', version: 3 };
 
             spyOn(primaryServer, 'add').and.returnValue(of(newHeroResponse));
             spyOn(cacheStorageService, 'getAll').and.resolveTo([]);
@@ -137,8 +155,8 @@ describe('EntityCacheServerService', () => {
         });
 
         it('should cache primary server result', (done) => {
-            const newHeroModel: Hero = { id: null, name: 'New Hero', version: 2 } as Hero;
-            const newHeroResponse: Hero = { id: 2, name: 'New Hero', version: 3 } as Hero;
+            const newHeroModel = { id: null, name: 'New Hero', version: 2 };
+            const newHeroResponse = { id: 2, name: 'New Hero', version: 3 };
 
             spyOn(primaryServer, 'add').and.returnValue(of(newHeroResponse));
             spyOn(cacheStorageService, 'getAll').and.resolveTo([]);
@@ -152,13 +170,13 @@ describe('EntityCacheServerService', () => {
     });
 
     describe('#delete', () => {
-        let cachedHeroes: Hero[];
+        let cachedHeroes: HeroDTO[];
 
         beforeEach(() => {
             cachedHeroes = [
                 { id: 1, name: 'BA', version: 1 },
                 { id: 2, name: 'BB', version: 1 }
-            ] as Hero[];
+            ] as HeroDTO[];
 
             spyOn(cacheStorageService, 'getAll').and.resolveTo(cachedHeroes);
             spyOn(cacheStorageService, 'setAll').and.callFake((data) => Promise.resolve(data));
@@ -182,13 +200,13 @@ describe('EntityCacheServerService', () => {
     });
 
     describe('#update', () => {
-        let cachedHeroes: Hero[];
+        let cachedHeroes: HeroDTO[];
 
         beforeEach(() => {
             cachedHeroes = [
                 { id: 1, name: 'BA', version: 1 },
                 { id: 2, name: 'BB', version: 1 }
-            ] as Hero[];
+            ] as HeroDTO[];
 
             spyOn(cacheStorageService, 'getAll').and.resolveTo(cachedHeroes);
             spyOn(cacheStorageService, 'setAll').and.callFake((data) => Promise.resolve(data));

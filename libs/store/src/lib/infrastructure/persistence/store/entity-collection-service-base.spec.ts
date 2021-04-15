@@ -6,7 +6,7 @@ import { EntityMetaOptions, EntityMetaOptionsService } from '../utils/entity-opt
 import { EntityCollectionService } from './entity-collection-service';
 import { DefaultEntityCollectionService } from './entity-collection-service-base';
 import { EntityCollectionsService } from './entity-collections-service';
-import { Entity } from '../../../domain/entity';
+import { BaseEntity, IdentityKey } from '@fundamental-ngx/store';
 
 describe('EntityCollectionService', () => {
     let service: DefaultEntityCollectionService<Hero>;
@@ -16,22 +16,44 @@ describe('EntityCollectionService', () => {
     let entityCollectionsService: jasmine.SpyObj<EntityCollectionsService>;
     let entityMetaOptions: EntityMetaOptions<Hero>;
 
-    class Advantage extends Entity {
+    class Advantage extends BaseEntity {
         constructor(public id: string, public title: string) {
-            super();
+            super({ id, title });
+        }
+
+        get identity(): IdentityKey {
+            return this.id;
         }
     }
 
-    class User extends Entity {
-        constructor(public id: string, public name: string) { super() }
+    class User extends BaseEntity {
+        constructor(public id: string, public name: string) {
+            super({ id, name })
+        }
+
+        get identity(): IdentityKey {
+            return this.id;
+        }
     }
 
-    class Hero extends Entity {
+    interface HeroDTO {
         id: string;
         name: string;
         advantages: Advantage[];
         owner: User;
         ownerId: string;
+    }
+
+    class Hero extends BaseEntity<HeroDTO> {
+        id: string;
+        name: string;
+        advantages: Advantage[];
+        owner: User;
+        ownerId: string;
+
+        get identity(): IdentityKey {
+            return this.value.id;
+        }
     }
 
     beforeEach(() => {
@@ -89,7 +111,7 @@ describe('EntityCollectionService', () => {
 
     describe('#add()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero();
+            const entity = new Hero({} as HeroDTO);
             service.add(entity);
             expect(ngrxHeroCollectionService.add).toHaveBeenCalledWith(entity);
         });
@@ -97,7 +119,7 @@ describe('EntityCollectionService', () => {
 
     describe('#delete()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero();
+            const entity = new Hero({} as HeroDTO);
             service.delete(entity);
             expect(ngrxHeroCollectionService.delete).toHaveBeenCalledWith(entity as any);
         });
@@ -105,7 +127,7 @@ describe('EntityCollectionService', () => {
 
     describe('#update()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero();
+            const entity = new Hero({} as HeroDTO);
             service.update(entity);
             expect(ngrxHeroCollectionService.update).toHaveBeenCalledWith(entity);
         });
@@ -113,7 +135,7 @@ describe('EntityCollectionService', () => {
 
     describe('#upsert()', () => {
         it('should delegate request to the ngrx service', () => {
-            const entity = new Hero();
+            const entity = new Hero({} as HeroDTO);
             service.upsert(entity);
             expect(ngrxHeroCollectionService.upsert).toHaveBeenCalledWith(entity);
         });
@@ -165,7 +187,7 @@ describe('EntityCollectionService', () => {
                         advantages: [],
                         owner: null,
                         ownerId: '456'
-                    };
+                    } as Hero;
                     owner = new User('456', 'Lord');
                     heroSubject = new Subject<Hero>();
 
@@ -219,7 +241,7 @@ describe('EntityCollectionService', () => {
                             }
                         };
 
-                        const results: Hero[] = [];
+                        const results: HeroDTO[] = [];
 
                         service.getByKey('123').subscribe((result) => {
                             results.push(result);
@@ -284,7 +306,7 @@ describe('EntityCollectionService', () => {
                             }
                         };
 
-                        const results: Hero[] = [];
+                        const results: HeroDTO[] = [];
 
                         service.getByKey('123').subscribe((result) => {
                             results.push(result);
@@ -347,7 +369,7 @@ describe('EntityCollectionService', () => {
                             advantages: [],
                             owner: null,
                             ownerId: '456'
-                        };
+                        } as Hero;
                         const advantages: Advantage[] = [new Advantage('1', 'smart'), new Advantage('1', 'quick')];
 
                         const advantageCollectionService = jasmine.createSpyObj<EntityCollectionService<Advantage>>(
@@ -400,7 +422,7 @@ describe('EntityCollectionService', () => {
                             advantages: [],
                             owner: null,
                             ownerId: '456'
-                        };
+                        } as Hero;
                         owner = new User('456', 'Lord');
 
                         userCollectionService = jasmine.createSpyObj<EntityCollectionService<User>>(
@@ -458,7 +480,7 @@ describe('EntityCollectionService', () => {
                         advantages: [],
                         owner: null,
                         ownerId: '456'
-                    };
+                    } as Hero;
                     owner = new User('456', 'Lord');
 
                     userCollectionService = jasmine.createSpyObj<EntityCollectionService<User>>(

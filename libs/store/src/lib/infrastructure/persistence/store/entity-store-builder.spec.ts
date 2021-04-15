@@ -7,20 +7,25 @@ import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './e
 import { DefaultEntityStore } from './entity-store';
 import { BaseEntity, IdentityKey } from './entity-server/interfaces';
 import { EntityType } from '../../../domain/decorators';
-import { DefaultEntityCollectionService } from './entity-collection-service-base';
-import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionService } from './entity-collection-service';
-import { Entity } from '../../../domain/entity';
 
-class ChildEntity extends Entity {
+class ChildEntity extends BaseEntity {
     name: 'child entity';
+
+    get identity(): IdentityKey {
+        return this.name;
+    }
 }
-class User extends Entity {
+class User extends BaseEntity {
     id: string;
     name: string;
     age: number;
     child: ChildEntity;
+
+    get identity(): IdentityKey {
+        return this.id;
+    }
 }
 
 class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
@@ -28,6 +33,10 @@ class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
         throw new Error('Method not implemented.');
     }
     getEntityMetadata<T>(entity: string | EntityType<T>): EntityMetaOptions<T> {
+        throw new Error('Method not implemented.');
+    }
+
+    getEntityTypeByName(entityName: string) {
         throw new Error('Method not implemented.');
     }
 }

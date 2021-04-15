@@ -4,7 +4,7 @@ import { IdentityKey } from '../../../../domain/entity';
 /**
  * Base Entity follows the DDD definition of Entity
  */
-export abstract class BaseEntity<EntityProps> extends Composite<EntityProps> {
+export abstract class BaseEntity<EntityProps = {}> extends Composite<EntityProps> {
     constructor(dto: EntityProps) {
         super(dto);
     }

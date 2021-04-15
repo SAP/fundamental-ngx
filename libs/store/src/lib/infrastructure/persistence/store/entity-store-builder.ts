@@ -20,7 +20,7 @@ import { EntityCollectionsService } from './entity-collections-service';
 /**
  * Entity Store Builder interface
  */
-export interface EntityStoreBuilder<T> {
+export interface EntityStoreBuilder<T extends BaseEntity> {
     /**
      * Apply Cache Policy
      * @param policy CachePolicy settings
@@ -47,7 +47,7 @@ export interface EntityStoreBuilder<T> {
  */
 export abstract class EntityStoreBuilderFactory {
     // abstract create<T extends BaseEntity<T>>(entity: EntityType<T>): EntityStoreBuilder<T>;
-    abstract create<T>(entity: EntityType<T>): EntityStoreBuilder<T>;
+    abstract create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T>;
 }
 
 //#endregion
@@ -57,7 +57,7 @@ export abstract class EntityStoreBuilderFactory {
 /**
  * Entity Store Builder default implementation
  */
-export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
+export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntityStoreBuilder<T> {
     protected cachePolicy: CachePolicy | null = null;
     protected fetchPolicy: FetchPolicy | null = null;
     protected chainingStrategyMap: ChainingStrategyFieldsMap<T> | null = null;
@@ -116,7 +116,7 @@ export class DefaultEntityStoreBuilder<T> implements EntityStoreBuilder<T> {
 export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFactory {
     constructor(protected readonly entityCollectionsService: EntityCollectionsService) {}
 
-    create<T>(entity: EntityType<T>): EntityStoreBuilder<T> {
+    create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T> {
         return new DefaultEntityStoreBuilder(entity, this.entityCollectionsService);
     }
 }

@@ -1,11 +1,10 @@
 import {
-    Entity,
     IdentityKey
 } from './entity';
 import { AllowedFields, Type, IfTargetIncludeConditionType } from './utility';
 import { BaseEntity } from '../infrastructure/persistence';
 
-type EntityType = Entity | Array<Entity>;
+type EntityType = BaseEntity | Array<BaseEntity>;
 
 export type ChainingStrategy =
     | 'non-block' // call immediately and non-block (default)

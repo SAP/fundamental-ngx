@@ -1,6 +1,7 @@
 import { EntityMetaOptions } from './entity-meta-options';
 import { EntityResourceMetaOptions } from './rest-resource';
 import { Type } from './utility';
+import { BaseEntity } from '../infrastructure/persistence';
 
 export const ENTITY_KEY = Symbol('ENTITY');
 export const REST_RESOURCE_KEY = Symbol('REST_Resource');
@@ -9,6 +10,10 @@ const ENTITY_META_MAP = new Map<Type<any>, EntityMetaOptions<any>>();
 const RESOURCE_MAP = new Map<Type<any>, EntityResourceMetaOptions>();
 
 export type EntityType<T> = Type<T>;
+
+export interface EntityClass<T> extends BaseEntity<T> {
+    new (...arg: any[]): EntityClass<T>;
+}
 
 export function Entity<T>(config: EntityMetaOptions<T>) {
     // TODO: Add entity name uniqueness validation
@@ -51,7 +56,7 @@ export function getEntityResourceMetadataByEntityName(entityName: string): Entit
     return undefined;
 }
 
-const getEntityByName = (entityName: string) => {
+export const getEntityByName = (entityName: string) => {
     for (const [target, options] of Array.from(ENTITY_META_MAP)) {
         if (options.name === entityName) {
             return target as EntityType<any>;

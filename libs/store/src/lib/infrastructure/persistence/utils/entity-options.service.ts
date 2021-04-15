@@ -5,10 +5,12 @@ import {
     getResourceMetadata,
     getEntityMetadataByEntityName,
     getEntityResourceMetadataByEntityName,
+    getEntityByName,
     EntityType
 } from '../../../domain/decorators';
 import { EntityMetaOptions } from '../../../domain/entity-meta-options';
 import { EntityResourceMetaOptions } from '../../../domain/rest-resource';
+import { EntityClass } from '../store/entity-server/entity-cache-server';
 
 export { EntityMetaOptions };
 export { EntityResourceMetaOptions };
@@ -27,13 +29,15 @@ export abstract class EntityMetaOptionsService {
      * @param entity Entity name or Entity class
      */
     abstract getEntityMetadata<T>(entity: string | EntityType<T>): EntityMetaOptions<T>;
+
+    abstract getEntityTypeByName(entityName: string);
 }
 
 /**
  * Default implementation of EntityMetaOptionsService
  */
 @Injectable()
-export class DefaultEntityMetaOptionsService implements EntityMetaOptionsService {
+export class DefaultEntityMetaOptionsService<T> implements EntityMetaOptionsService {
     getEntityResourceMetadata<T>(entityOrName: string | EntityType<T>): EntityResourceMetaOptions {
         const options =
             typeof entityOrName === 'string'
@@ -58,5 +62,9 @@ export class DefaultEntityMetaOptionsService implements EntityMetaOptionsService
         }
 
         return options;
+    }
+
+    getEntityTypeByName(entityName: string) {
+        return getEntityByName(entityName);
     }
 }

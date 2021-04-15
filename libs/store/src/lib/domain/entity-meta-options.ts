@@ -1,4 +1,3 @@
-// import { BaseEntity } from './entity';
 import { ChainingPolicy } from './chaining-policy';
 
 export interface EntityMetaOptions<Entity> {
