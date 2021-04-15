@@ -8,13 +8,13 @@ import 'moment/locale/bg';
 import 'moment/locale/ar';
 
 @Component({
-    selector: 'fd-date-picker-moment-adaptor-example',
-    templateUrl: './date-picker-moment-adaptor-example.component.html',
+    selector: 'fd-date-picker-moment-adapter-example',
+    templateUrl: './date-picker-moment-adapter-example.component.html',
     providers: [
         { provide: LOCALE_ID, useValue: 'fr' }
     ]
 })
-export class DatePickerMomentAdaptorExampleComponent {
+export class DatePickerMomentAdapterExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<Moment>;
 
     actualLocale = 'fr';
