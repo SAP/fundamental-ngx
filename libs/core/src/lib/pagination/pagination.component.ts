@@ -9,7 +9,7 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    TemplateRef
+    TemplateRef, OnDestroy
 } from '@angular/core';
 import {
     ENTER,
@@ -21,6 +21,7 @@ import { KeyUtil } from '../utils/functions';
 import { PaginationService } from './pagination.service';
 import { RtlService } from '../utils/services/rtl.service';
 import { Pagination } from './pagination.model';
+import { Subscription } from 'rxjs';
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -58,7 +59,7 @@ interface CurrentShowing {
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: true
 })
-export class PaginationComponent implements OnChanges, OnInit {
+export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** Represents the total number of items. */
     @Input()
     totalItems: number;
@@ -164,9 +165,12 @@ export class PaginationComponent implements OnChanges, OnInit {
     private _currentPage = 1;
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     constructor (
         private readonly paginationService: PaginationService,
-        @Optional() private readonly rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService
     ) {}
 
     /** @hidden */
@@ -198,12 +202,17 @@ export class PaginationComponent implements OnChanges, OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.rtlService) {
-            this.rtlService.rtl.subscribe((value) => {
+        if (this._rtlService) {
+            this._subscriptions.add(this._rtlService.rtl.subscribe((value) => {
                 this.rtl = value;
                 this._refreshPages();
-            });
+            }));
         }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /**

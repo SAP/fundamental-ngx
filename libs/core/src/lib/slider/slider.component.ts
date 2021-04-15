@@ -713,9 +713,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        this._isRtl = this._rtlService?.rtl.getValue();
+        if (!this._rtlService) {
+            return;
+        }
 
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
+        this._isRtl = this._rtlService.rtl.getValue();
+
+        this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;
             this._cdr.markForCheck();
         });

@@ -145,7 +145,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         readonly _listConfig: ListConfig,
         /** @hidden */
-        private _rtlService: RtlService,
+        @Optional() private _rtlService: RtlService,
         /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
         /** @hidden */
@@ -167,7 +167,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        this._rtlService.rtl
+        this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
             .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
 

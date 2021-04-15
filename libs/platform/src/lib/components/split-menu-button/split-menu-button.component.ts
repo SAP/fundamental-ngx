@@ -96,10 +96,12 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         this.secondaryId = 'secondary-' + this.id;
         // if no title provided.
         this.title = this.title || this.buttonLabel;
-        this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
-            this._cd.detectChanges();
-        });
+        if (this._rtl) {
+            this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
+                this.dir = isRtl ? 'rtl' : 'ltr';
+                this._cd.detectChanges();
+            });
+        }
     }
 
     /** @hidden */
