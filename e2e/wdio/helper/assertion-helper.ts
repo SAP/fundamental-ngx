@@ -1,6 +1,6 @@
 import {
-    addIsActiveClass,
-    checkElementScreenshot, click,
+    applyState,
+    checkElementScreenshot,
     clickNextElement,
     elementDisplayed,
     getAttributeByName,
@@ -9,7 +9,8 @@ import {
     getElementArrayLength,
     getText,
     getTextArr,
-    isElementClickable, mouseHoverElement, saveElementScreenshot,
+    isElementClickable,
+    saveElementScreenshot,
     scrollIntoView
 } from '../driver/wdio';
 
@@ -102,23 +103,23 @@ export function checkTextValueContain(str: string, subStr: string): void {
     expect(str).toContain(subStr);
 }
 
-export function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-    mouseHoverElement(selector, index);
-    saveElementScreenshot(selector, tag);
-    expect(checkElementScreenshot(selector, tag, {}, index))
-        .toBeLessThan(2, `${elementName} element hover state mismatch`);
+export function checkElementHoverState(selector: string, tag: string, elementName: string, pageObject, index: number = 0): void {
+    applyState('hover', selector, index);
+    saveElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index);
+    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index))
+        .toBeLessThan(5, `${elementName} ${index} element hover state mismatch`);
 }
 
-export function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
-    click(selector, index);
-    saveElementScreenshot(selector, tag, {}, index);
-    expect(checkElementScreenshot(selector, tag, {}, index))
-        .toBeLessThan(2, `${elementName} element focus state mismatch`);
+export function checkElementFocusState(selector: string, tag: string, elementName: string, pageObject, index: number = 0): void {
+    applyState('focus', selector, index);
+    saveElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index);
+    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index))
+        .toBeLessThan(5, `${elementName} ${index} element focus state mismatch`);
 }
 
-export function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
-    addIsActiveClass(selector, index);
-    saveElementScreenshot(selector, tag, {}, index);
-    expect(checkElementScreenshot(selector, tag, {}, index))
-        .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
+export function checkElementActiveState(selector: string, tag: string, elementName: string, pageObject, index: number = 0): void {
+    applyState('active', selector, index);
+    saveElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index);
+    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index))
+        .toBeLessThan(5, `${elementName} ${index} element active state mismatch`);
 }
