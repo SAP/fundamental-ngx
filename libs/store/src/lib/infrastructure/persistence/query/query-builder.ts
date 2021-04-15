@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs';
 
-import { ChainingStrategyFieldsMap } from '../../../domain/public_api';
+import { BaseEntity, ChainingStrategyFieldsMap } from '../../../domain/public_api';
 import { Query } from './query';
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';
 
-export class QueryBuilder<TModel extends {}> {
+export class QueryBuilder<TModel> {
     /**
      * @hidden - predicate which defines filter criteria.
      */

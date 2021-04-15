@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 
 import { and, EntityStore, EntityStoreBuilderFactory, eq, gt } from '@fundamental-ngx/store';
 
-// import { Requisition } from './store.config';
 import { Requisition } from './entities';
 
 @Component({

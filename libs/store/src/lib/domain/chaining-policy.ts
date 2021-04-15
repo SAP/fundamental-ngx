@@ -1,10 +1,6 @@
-import {
-    IdentityKey
-} from './entity';
+import { IdentityKey } from './entity';
 import { AllowedFields, Type, IfTargetIncludeConditionType } from './utility';
 import { BaseEntity } from '../infrastructure/persistence';
-
-type EntityType = BaseEntity | Array<BaseEntity>;
 
 export type ChainingStrategy =
     | 'non-block' // call immediately and non-block (default)
@@ -13,29 +9,29 @@ export type ChainingStrategy =
 
 export type ChainingStrategyFieldsMap<Entity extends {}> = IfTargetIncludeConditionType<
     Entity,
-    EntityType,
+    BaseEntity | Array<BaseEntity>,
     ChainingStrategyMap<Entity>,
     never
->;
+    >;
 
 export type ChainingStrategyMap<Entity extends {}> = {
-    [EntityField in AllowedFields<Entity, EntityType>]: ChainingStrategy;
+    [EntityField in AllowedFields<Entity, BaseEntity | Array<BaseEntity>>]: ChainingStrategy;
 };
 
 // tslint:disable-next-line: interface-over-type-literal
 export type ChainingPolicy<Entity extends {}> = {
-    fields: IfTargetIncludeConditionType<Entity, EntityType, ChainingPolicyFieldsOption<Entity>, never>;
+    fields: IfTargetIncludeConditionType<Entity, BaseEntity | BaseEntity[], ChainingPolicyFieldsOption<Entity>, never>;
 };
 
 type ChainingPolicyFieldsOption<Entity extends {}> = {
-    [EntityField in AllowedFields<Entity, EntityType>]?: ChainingPolicyFieldOptions<
+    [EntityField in AllowedFields<Entity, BaseEntity | Array<BaseEntity>>]?: ChainingPolicyFieldOptions<
         Entity,
         Entity[EntityField]
-    >;
+        >;
 };
 
 // tslint:disable-next-line: interface-over-type-literal
-export type ChainingPolicyFieldOptions<ParentEntity extends {}, ChildEntity extends EntityType> = {
+export type ChainingPolicyFieldOptions<ParentEntity extends {}, ChildEntity extends BaseEntity | Array<BaseEntity>> = {
     type: ChildEntity extends any[] ? Array<Type<ChildEntity[number]>> : Type<ChildEntity>;
     strategy: ChainingStrategy;
     key?: ChainingPolicyPrimaryKey<ParentEntity>;

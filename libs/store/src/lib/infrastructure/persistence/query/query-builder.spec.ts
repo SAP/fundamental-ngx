@@ -8,25 +8,25 @@ import { QueryService } from './query.service';
 import { eq } from './grammar/query-expressions';
 import { Predicate } from './grammar/predicate';
 
-class Supplier extends BaseEntity<any> {
+class Supplier extends BaseEntity {
     id: IdentityKey;
     name: string;
 
     get identity(): IdentityKey {
-        return this.value.id;
+        return this.id;
     }
 }
 
-class Distributor extends BaseEntity<any> {
+class Distributor extends BaseEntity {
     id: IdentityKey;
     name: string;
 
     get identity(): IdentityKey {
-        return this.value.id;
+        return this.id;
     }
 }
 
-class Fruit extends BaseEntity<any> {
+class Fruit extends BaseEntity {
     id: IdentityKey;
     name: string;
     variety: string;
@@ -36,7 +36,7 @@ class Fruit extends BaseEntity<any> {
     distributor: Distributor;
 
     get identity(): IdentityKey {
-        return this.value.id;
+        return this.id;
     }
 }
 
@@ -67,17 +67,17 @@ describe('Store: Query Builder', () => {
         expect(query).toBeInstanceOf(Query);
     });
 
-    // xit('should have ability to set chaining strategy for new query', () => {
-    //     const query = qb.withChainingStrategy({
-    //         distributor: 'non-block',
-    //         supplier: 'suppress'
-    //     }).build();
-    //
-    //     expect(query.createSnapshot().chainingStrategy).toEqual({
-    //         distributor: 'non-block',
-    //         supplier: 'suppress'
-    //     });
-    // });
+    it('should have ability to set chaining strategy for new query', () => {
+        const query = qb.withChainingStrategy({
+            distributor: 'non-block',
+            supplier: 'suppress'
+        }).build();
+
+        expect(query.createSnapshot().chainingStrategy).toEqual({
+            distributor: 'non-block',
+            supplier: 'suppress'
+        });
+    });
 
     it('should have ability to set keyword for new query', () => {
         const query = qb.keyword('keyword').build();
