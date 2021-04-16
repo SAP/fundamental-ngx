@@ -185,18 +185,25 @@ export const API_FILES = {
         'MessageBoxFooterButtonComponent'
     ],
     notification: [
+        'NotificationTitleDirective',
+        'NotificationIndicatorDirective',
+        'NotificationParagraphDirective',
+        'NotificationFooterContentDirective',
+        'NotificationSeparatorDirective',
+        'NotificationLimitTitleDirective',
+        'NotificationLimitDescriptionDirective',
+
+
+        'NotificationActionsComponent',
+        'NotificationContentComponent',
+        'NotificationLimitComponent',
+        'NotificationGroupHeaderComponent',
+
+
         'NotificationComponent',
         'NotificationHeaderComponent',
         'NotificationBodyComponent',
         'NotificationFooterComponent',
-        'NotificationServiceDirective',
-        'NotificationActionsDirective',
-        'NotificationAvatarDirective',
-        'NotificationContentDirective',
-        'NotificationDescriptionDirective',
-        'NotificationMetadataDirective',
-        'NotificationTextDirective',
-        'NotificationTitleDirective',
         'DefaultNotificationComponent',
         'NotificationContainer',
         'NotificationConfig',

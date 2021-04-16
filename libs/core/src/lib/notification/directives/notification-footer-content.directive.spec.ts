@@ -1,16 +1,15 @@
-import { NotificationActionsDirective } from './notification-actions.directive';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
-import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
-    template: ` <li #directiveElement fd-notification-actions>Notification Test</li> `
+    template: `<span #directiveElement fd-notification-footer-content>Notification Footer Content Test</span>`
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
-describe('NotificationActionsDirective', () => {
+describe('NotificationFooterContentDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -32,6 +31,6 @@ describe('NotificationActionsDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-notification__actions');
+        expect(component.ref.nativeElement.className).toBe('fd-notification__footer-content');
     });
 });
