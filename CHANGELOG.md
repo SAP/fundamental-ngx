@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.99...v0.29.0-rc.100) (2021-04-16)
+
+
+### Features
+
+* (Core) add 2 new types of icons ([#5137](https://github.com/SAP/fundamental-ngx/issues/5137)) ([b157b30](https://github.com/SAP/fundamental-ngx/commit/b157b30b894e676782b4a587eb89ea839037fdfe))
+
 ## [0.29.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.98...v0.29.0-rc.99) (2021-04-16)
 
 ## [0.29.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.97...v0.29.0-rc.98) (2021-04-16)
