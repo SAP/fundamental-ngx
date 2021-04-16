@@ -1,0 +1,67 @@
+import { CoreBaseComponentPo } from './core-base-component.po';
+import { waitForElDisplayed } from '../../driver/wdio';
+
+export class DateTimePicker extends CoreBaseComponentPo {
+    url = '/datetime-picker';
+    root = '#page-content';
+    topPage = 'h1.header';
+    datePickerInput = 'fd-datetime-picker input';
+    datePickerButton = 'fd-datetime-picker button';
+    activeDateTimePickerButton = '//button[contains(@class, \' fd-input-group__button\') and not (contains(@class, \'is-disabled\'))]';
+    activeDateTimePickerInput = '//component-example//fd-input-group[not (contains(@ng-reflect-disabled, \'true\'))]//input';
+    calendarExpanded = '.fd-datetime__container';
+    buttonChange = 'button[ng-reflect-label="Change"]';
+    disabledDateTimePickerButton = '.is-disabled button';
+    disabledDateTimePickerInput = '.is-disabled input';
+    activeDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
+    calendarYearsSection = '.fd-calendar__content--years';
+    selectYearButton = '.fd-calendar__action:nth-child(3) .fd-button';
+    selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';
+    buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
+    okButton = 'button[fdtype="emphasized"]';
+    cancelButton = 'button[ng-reflect-label="Cancel"]';
+    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]';
+    buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
+    buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
+    selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
+    selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
+    navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
+    navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
+    timeItem = 'span.fd-time__item';
+    period = '//span[contains(text(), " PM ")]/parent::li';
+    optionButton = 'div.fd-select__control';
+    countryOption = 'ul.fd-select-options';
+
+    filterCalendarValue = (name: string): string => {
+        return `[id*="${name}"]`;
+    };
+
+    getOptionByName = (name: string): string => {
+        return `fd-option[ng-reflect-value="${name}"]`;
+    };
+
+    dayInCalendarButtonByValue = (index: string): string => {
+        return `//span[contains(.,"${index}")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+    };
+
+    yearInCalendarByValue = (year: number): string => {
+        return `[aria-label="${year}"]`;
+    };
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'datetime-picker'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'datetime-picker'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
+
+    open(): void {
+        super.open(this.url);
+        waitForElDisplayed(this.root);
+    }
+}
