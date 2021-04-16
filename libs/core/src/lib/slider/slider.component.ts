@@ -21,7 +21,7 @@ import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keyc
 import { Platform } from '@angular/cdk/platform';
 import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
 
-import { fromEvent, Subject, Subscription } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { applyCssClass, ContentDensityService, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
@@ -716,8 +716,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         if (!this._rtlService) {
             return;
         }
-
-        this._isRtl = this._rtlService.rtl.getValue();
 
         this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;

@@ -16,12 +16,12 @@ import {
     SPACE
 } from '@angular/cdk/keycodes';
 import { coerceNumberProperty, coerceArray } from '@angular/cdk/coercion';
+import { Subscription } from 'rxjs';
 
 import { KeyUtil } from '../utils/functions';
 import { PaginationService } from './pagination.service';
 import { RtlService } from '../utils/services/rtl.service';
 import { Pagination } from './pagination.model';
-import { Subscription } from 'rxjs';
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
