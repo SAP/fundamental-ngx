@@ -5,7 +5,7 @@ import {
 } from '../utils/entity-options.service';
 import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
-import { BaseEntity, IdentityKey } from './entity-server/interfaces';
+import { BaseEntity, EntityBaseType, IdentityKey } from './entity-server/interfaces';
 import { EntityType } from '../../../domain/decorators';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionService } from './entity-collection-service';
@@ -36,7 +36,7 @@ class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
         throw new Error('Method not implemented.');
     }
 
-    getEntityTypeByName(entityName: string) {
+    getEntityTypeByName(entityName: string): EntityBaseType {
         throw new Error('Method not implemented.');
     }
 }

@@ -10,7 +10,7 @@ import {
 } from '../../../domain/decorators';
 import { EntityMetaOptions } from '../../../domain/entity-meta-options';
 import { EntityResourceMetaOptions } from '../../../domain/rest-resource';
-import { EntityClass } from '../store/entity-server/entity-cache-server';
+import { EntityBaseType } from '../store/entity-server/interfaces';
 
 export { EntityMetaOptions };
 export { EntityResourceMetaOptions };
@@ -30,7 +30,7 @@ export abstract class EntityMetaOptionsService {
      */
     abstract getEntityMetadata<T>(entity: string | EntityType<T>): EntityMetaOptions<T>;
 
-    abstract getEntityTypeByName(entityName: string);
+    abstract getEntityTypeByName(entityName: string): EntityBaseType;
 }
 
 /**
@@ -64,7 +64,13 @@ export class DefaultEntityMetaOptionsService<T> implements EntityMetaOptionsServ
         return options;
     }
 
-    getEntityTypeByName(entityName: string) {
-        return getEntityByName(entityName);
+    getEntityTypeByName(entityName: string): EntityBaseType {
+        const options = getEntityByName(entityName);
+
+        if (!options) {
+            throw Error(`Could not find entity for a given entity name: ${entityName}`)
+        }
+
+        return options;
     }
 }

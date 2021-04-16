@@ -4,18 +4,15 @@ import { Update } from '@ngrx/entity';
 import { v4 as uuidV4 } from 'uuid';
 
 import {
-    BaseEntity,
+    EntityBaseType,
     EntityCacheStorageService,
+    EntityClass,
     EntityServerService,
     IdentityKey,
     PaginatedEntitiesResponse
 } from './interfaces';
 import { QuerySnapshot } from '../../query/query-adapter';
 import { EntityMetaOptionsService } from '../../utils';
-
-export interface EntityClass<T> extends BaseEntity<T> {
-    new (...arg: any[]): EntityClass<T>;
-}
 
 /**
  * Entity Cache Server.
@@ -27,7 +24,7 @@ export class EntityCacheServerService<T> implements EntityServerService<T> {
      * Service implementation name
      */
     name = `${this.entityName} EntityCacheServer`;
-    protected entityClass: EntityClass<T>;
+    protected entityClass: EntityBaseType;
 
     constructor(
         protected entityName: string,

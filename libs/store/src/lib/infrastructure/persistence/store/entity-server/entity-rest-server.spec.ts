@@ -16,19 +16,18 @@ import {
     EntityResourceMetaOptions,
     EntityMetaOptions
 } from '../../utils/entity-options.service';
-import { BaseEntity, IdentityKey } from './interfaces';
+import { BaseEntity, EntityBaseType, IdentityKey } from './interfaces';
 import { DefaultQueryAdapter, QueryAdapter, QueryAdapterService } from '../../query/query-adapter';
 import { QuerySnapshotModel } from '../../query/query';
 import { EntityType } from 'libs/store/src/lib/domain/decorators';
-import { ChainingPolicy } from 'libs/store/src/lib/domain/public_api';
 
-class Hero extends BaseEntity<any> {
+class Hero extends BaseEntity {
     id!: number;
     name!: string;
     version?: number;
 
     get identity(): IdentityKey {
-        return this.value.id;
+        return this.id;
     }
 }
 
@@ -47,7 +46,7 @@ class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
         throw new Error('Method not implemented.');
     }
 
-    getEntityTypeByName(entityName: string) {
+    getEntityTypeByName(entityName: string): EntityBaseType {
         throw new Error('Method not implemented.');
     }
 }
