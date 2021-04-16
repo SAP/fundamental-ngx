@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
+import { DATA_PROVIDERS, MultiInputSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-multi-input-example',
@@ -61,4 +61,9 @@ export class PlatformMultiInputExampleComponent {
         { firstName: 'Wisconsin', lastName: 'Madison' },
         { firstName: 'Wyoming', lastName: 'Cheyenne' }
     ];
+    selectedItem2 = null;
+
+    showValues(item: MultiInputSelectionChangeEvent): void {
+        this.selectedItem2 = item.payload;
+    }
 }

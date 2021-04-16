@@ -194,6 +194,9 @@ For an existing Angular CLI application,
     When data is provided like this (probably coming from a db or backend server), it is left to the application to provide for the translated
     text. Providing i18n markers as shown in the previous example will not work as this is a limitation of Angular's i18n for now.
 
+    Note: Due to SAP's needs was disabled support of select & plural i18n features (issue [#5098](https://github.com/SAP/fundamental-ngx/issues/5098)).
+    Details how to provide such functionality see in [Wiki](https://github.com/SAP/fundamental-ngx/wiki/Internationalization-Supporting-in-@fundamental-ngx-platform).
+    
 ## Tests
 
 Fundamental Library for Angular makes use of Jasmine and Karma for its unit tests.

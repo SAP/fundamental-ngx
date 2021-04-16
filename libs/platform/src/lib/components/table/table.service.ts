@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
 import { SearchInput } from './interfaces/search-field.interface';
@@ -10,6 +10,7 @@ import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange, Colu
 @Injectable()
 export class TableService {
     private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
+    private _markForCheck$: Subject<void> = new Subject<void>();
 
     readonly tableState$: Observable<TableState> = this._tableStateSubject$.asObservable();
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
@@ -22,6 +23,11 @@ export class TableService {
     readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
     readonly pageChange: EventEmitter<PageChange> = new EventEmitter<PageChange>();
 
+    /** Listen for changes in table subcomponents (mostly table column) */
+    get markForCheck$(): Subject<void> {
+        return this._markForCheck$;
+    }
+
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
         return this._tableStateSubject$.getValue();
@@ -30,6 +36,11 @@ export class TableService {
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
         this._tableStateSubject$.next(state);
+    }
+
+    /** Notify about changes in table subcomponents (mostly table column) */
+    markForCheck(): void {
+        this._markForCheck$.next();
     }
 
     /** Search */

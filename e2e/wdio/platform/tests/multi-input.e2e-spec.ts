@@ -145,7 +145,7 @@ describe('Multi input test suite', function() {
             const dropdownOption = getText(dropdownOptionText, j);
             expect(dropdownOption).toContain(optionsArr[0].substring(0, 3));
         }
-        multiInputPage.expandDropdown(activeDropdownButtons, 4);
+        multiInputPage.expandDropdown(activeDropdownButtons, 5);
         setValue(mobileInput, optionsArr[4].substring(0, 3));
         filteredOptions = getElementArrayLength(dropdownOptions);
         for (let j = 0; j < filteredOptions; j++) {

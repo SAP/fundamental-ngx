@@ -134,21 +134,78 @@
 <ng-template #conditionStrategyOption let-type="type" let-strategy="strategy">
     <ng-container *ngIf="strategyLabels[strategy.key]; else defaultOption">{{ strategyLabels[strategy.key] }}</ng-container>
     <ng-template #defaultOption>
-        <ng-container i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label">
-            {strategy.key, select,
-                contains {contains}
-                equalTo {equal to}
-                between {between}
-                startsWith {starts with}
-                endsWith {ends with}
-                lessThan {less than}
-                lessThanEqual {less than or equal to}
-                greaterThan {greater than}
-                greaterThanEqual {greater than or equal to}
-                empty {empty}
-                not_equalTo {not equal to}
-                not_empty {not empty}
-            }
+        <ng-container [ngSwitch]="strategy.key">
+            <ng-container
+                *ngSwitchCase="'contains'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Contains">
+                contains
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'equalTo'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EqualTo">
+                equal to
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'between'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Between">
+                between
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'startsWith'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.StartsWith">
+                starts with
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'endsWith'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EndsWith">
+                ends with
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'lessThan'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.LessThan">
+                less than
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'lessThanEqual'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.LessThanEqual">
+                less than equal
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'greaterThan'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThan'">
+                greater than
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'greaterThanEqual'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThanEqual">
+                greater than equal
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'empty'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Empty">
+                empty
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'not_equalTo'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEqualTo">
+                not equal to
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'not_empty'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEmpty">
+                not empty
+            </ng-container>
         </ng-container>
     </ng-template>
 </ng-template>

@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.96...v0.29.0-rc.97) (2021-04-16)
+
+
+### Bug Fixes
+
+* (Platform) fix compact bug in multi input component ([#4764](https://github.com/SAP/fundamental-ngx/issues/4764)) ([daaf51b](https://github.com/SAP/fundamental-ngx/commit/daaf51be5ff45d6e1c47294944ac5f2f01835c9c))
+
+## [0.29.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.95...v0.29.0-rc.96) (2021-04-16)
+
+
+### Features
+
+* (Platform) Table Phase 4 ([#4777](https://github.com/SAP/fundamental-ngx/issues/4777)) ([c4d2b02](https://github.com/SAP/fundamental-ngx/commit/c4d2b021be49d09ac98c0937353d1dfae4f08ed0))
+
+
+### Bug Fixes
+
+* (Platform) table platform component selected row hover styles improvement ([#5117](https://github.com/SAP/fundamental-ngx/issues/5117)) ([7169caa](https://github.com/SAP/fundamental-ngx/commit/7169caad6730abcfe5571a92b0ce37f41dab3e93))
+
+## [0.29.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.94...v0.29.0-rc.95) (2021-04-15)
+
 ## [0.29.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.93...v0.29.0-rc.94) (2021-04-15)
 
 ## [0.29.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.91...v0.29.0-rc.93) (2021-04-15)
