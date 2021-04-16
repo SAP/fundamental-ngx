@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.96...v0.29.0-rc.97) (2021-04-16)
+
+
+### Bug Fixes
+
+* (Platform) fix compact bug in multi input component ([#4764](https://github.com/SAP/fundamental-ngx/issues/4764)) ([daaf51b](https://github.com/SAP/fundamental-ngx/commit/daaf51be5ff45d6e1c47294944ac5f2f01835c9c))
+
 ## [0.29.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.95...v0.29.0-rc.96) (2021-04-16)
 
 
