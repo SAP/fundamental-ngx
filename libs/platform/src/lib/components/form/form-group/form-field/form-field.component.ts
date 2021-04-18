@@ -28,9 +28,15 @@ import { FormField } from '../../form-field';
 import { Column, LabelLayout, HintPlacement } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
+import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 
 export const formFieldProvider: Provider = {
     provide: FormField,
+    useExisting: forwardRef(() => FormFieldComponent)
+};
+
+export const formGroupChildProvider: Provider = {
+    provide: FORM_GROUP_CHILD_FIELD_TOKEN,
     useExisting: forwardRef(() => FormFieldComponent)
 };
 
@@ -46,7 +52,7 @@ export const formFieldProvider: Provider = {
     templateUrl: 'form-field.component.html',
     styleUrls: ['./form-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [formFieldProvider]
+    providers: [formFieldProvider, formGroupChildProvider]
 })
 export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit {
     @Input()
