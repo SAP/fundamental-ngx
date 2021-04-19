@@ -140,7 +140,7 @@ describe('should create proxy', () => {
         expect(entityInstance.value).toEqual(fromState);
     });
 
-    it('cat treat entity indenity', () => {
+    it('cat treat entity identity', () => {
         expect(entityInstance.identity).toEqual(fromState.uniqueName);
     })
 })

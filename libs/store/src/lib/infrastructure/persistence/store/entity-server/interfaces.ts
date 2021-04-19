@@ -53,8 +53,4 @@ export interface PaginatedEntitiesResponse<T> {
     count: number;
 }
 
-export interface EntityClass<T> extends BaseEntity<T> {
-    new (...arg: any[]): EntityClass<T>;
-}
-
 export type EntityBaseType = { new (...arg: any[]) } & { prototype: BaseEntity };

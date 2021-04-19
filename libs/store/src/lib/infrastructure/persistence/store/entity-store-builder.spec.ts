@@ -10,14 +10,15 @@ import { EntityType } from '../../../domain/decorators';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionService } from './entity-collection-service';
 
-class ChildEntity extends BaseEntity {
+class ChildEntity extends BaseEntity<{ name: string }> {
     name: 'child entity';
 
     get identity(): IdentityKey {
-        return this.name;
+        return this.value.name;
     }
 }
-class User extends BaseEntity {
+
+class User extends BaseEntity<{}> {
     id: string;
     name: string;
     age: number;

@@ -51,6 +51,7 @@ describe('Default Entity Store', () => {
     let queryBuilder: QueryBuilder<User>;
 
     beforeEach(() => {
+        entity = User;
         collectionService = new UserCollectionServiceMock() as EntityCollectionService<User>;
         queryBuilder = new QueryBuilderMock(null);
         store = new DefaultEntityStore(entity, collectionService, queryBuilder);
@@ -107,5 +108,10 @@ describe('Default Entity Store', () => {
 
     it('should has queryBuilder reference', () => {
         expect(store.queryBuilder instanceof QueryBuilder).toBeTrue();
+    });
+
+    it('should create a new instance by `createEntityInstance`', () => {
+        const userInstance = store.createEntityInstance();
+        expect(userInstance instanceof User).toBeTrue();
     });
 });

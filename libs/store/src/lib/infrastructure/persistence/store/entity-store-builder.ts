@@ -46,7 +46,6 @@ export interface EntityStoreBuilder<T extends BaseEntity> {
  * Entity Store Builder Factory interface
  */
 export abstract class EntityStoreBuilderFactory {
-    // abstract create<T extends BaseEntity<T>>(entity: EntityType<T>): EntityStoreBuilder<T>;
     abstract create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T>;
 }
 

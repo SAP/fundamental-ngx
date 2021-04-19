@@ -4,9 +4,9 @@ import { Update } from '@ngrx/entity';
 import { v4 as uuidV4 } from 'uuid';
 
 import {
+    BaseEntity,
     EntityBaseType,
     EntityCacheStorageService,
-    EntityClass,
     EntityServerService,
     IdentityKey,
     PaginatedEntitiesResponse
@@ -24,7 +24,7 @@ export class EntityCacheServerService<T> implements EntityServerService<T> {
      * Service implementation name
      */
     name = `${this.entityName} EntityCacheServer`;
-    protected entityClass: EntityBaseType;
+    protected entityType: EntityBaseType;
 
     constructor(
         protected entityName: string,
@@ -32,7 +32,7 @@ export class EntityCacheServerService<T> implements EntityServerService<T> {
         protected storageService: EntityCacheStorageService<T>,
         protected entityMetaOptionsService: EntityMetaOptionsService
     ) {
-        this.entityClass = this.entityMetaOptionsService.getEntityTypeByName(entityName);
+        this.entityType = this.entityMetaOptionsService.getEntityTypeByName(entityName);
     }
 
     add(entity: T): Observable<T> {
@@ -100,8 +100,8 @@ export class EntityCacheServerService<T> implements EntityServerService<T> {
         return this.server.upsert(entity);
     }
 
-    protected async addEntityToCache(data: T): Promise<T> {
-        const entity = new this.entityClass(data);
+    protected async addEntityToCache<T>(data: T): Promise<T> {
+        const entity = new this.entityType(data);
         let entities = await this.getAllWrappedEntities();
         // Should we generate entity id here?
         // if (!entity.identity) {
@@ -135,7 +135,7 @@ export class EntityCacheServerService<T> implements EntityServerService<T> {
 
     protected async updateEntityInCache<T>(updated: T): Promise<T> {
         let entities = await this.getAllWrappedEntities();
-        const _updated = new this.entityClass(updated);
+        const _updated = new this.entityType(updated);
         const entity = entities.find((_entity) => _entity.equals(_updated));
         if (entity) {
             entities = entities.map((_entity) => (_entity.equals(_updated) ? _updated : _entity));
@@ -144,9 +144,9 @@ export class EntityCacheServerService<T> implements EntityServerService<T> {
         return entity.value;
     }
 
-    protected async getAllWrappedEntities(): Promise<EntityClass<any>[]> {
+    protected async getAllWrappedEntities<T extends BaseEntity<any>>(): Promise<T[]> {
         const entities = await this.storageService.getAll();
 
-        return entities.map(entity => new this.entityClass(entity));
+        return entities.map(entity => new this.entityType(entity));
     }
 }

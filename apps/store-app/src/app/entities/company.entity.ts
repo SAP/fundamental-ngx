@@ -1,5 +1,16 @@
 import { BaseEntity, Entity, IdentityKey, RESTResource } from '@fundamental-ngx/store';
 
+interface CompanyDTO {
+    id: string;
+    name: string;
+    // should be VO?
+    address: {
+        city: string;
+        street: string;
+        zip: string;
+    };
+}
+
 @RESTResource({
     path: 'company'
 })
@@ -7,15 +18,7 @@ import { BaseEntity, Entity, IdentityKey, RESTResource } from '@fundamental-ngx/
     domain: 'Requisitioning',
     name: 'Company'
 })
-export class Company extends BaseEntity<any> {
-    id: string;
-    name: string;
-    address: {
-        city: string;
-        street: string;
-        zip: string;
-    };
-
+export class Company extends BaseEntity<CompanyDTO> {
     get identity(): IdentityKey {
         return this.value.id;
     }
