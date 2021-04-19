@@ -11,10 +11,6 @@ const RESOURCE_MAP = new Map<Type<any>, EntityResourceMetaOptions>();
 
 export type EntityType<T> = Type<T>;
 
-export interface EntityClass<T> extends BaseEntity<T> {
-    new (...arg: any[]): EntityClass<T>;
-}
-
 export function Entity<T>(config: EntityMetaOptions<T>) {
     // TODO: Add entity name uniqueness validation
     return (target: EntityType<T>) => {
