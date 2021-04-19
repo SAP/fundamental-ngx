@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.103...v0.29.0-rc.104) (2021-04-19)
+
+
+### Bug Fixes
+
+* (Core|Platform) fix optional rtl service ([#5138](https://github.com/SAP/fundamental-ngx/issues/5138)) ([37a78ec](https://github.com/SAP/fundamental-ngx/commit/37a78ecb66f97d5490dca2dd205862af6b3ef104))
+
 ## [0.29.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.102...v0.29.0-rc.103) (2021-04-18)
 
 ## [0.29.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.101...v0.29.0-rc.102) (2021-04-18)
