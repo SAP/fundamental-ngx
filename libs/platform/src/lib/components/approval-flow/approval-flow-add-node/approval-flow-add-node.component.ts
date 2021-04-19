@@ -14,9 +14,9 @@ import {
     ApprovalFlowAddNodeViewService,
     VIEW_MODES
 } from '../services/approval-flow-add-node-view.service';
-import { displayUserFn, filterByName, trackByFn } from '../helpers';
+import { displayTeamFn, displayUserFn, filterByName, trackByFn } from '../helpers';
 
-interface AddNodeDialogRefData {
+export interface AddNodeDialogRefData {
     isEdit?: boolean;
     showNodeTypeSelect?: boolean;
     node?: ApprovalNode;
@@ -27,12 +27,16 @@ interface AddNodeDialogRefData {
     rtl: boolean;
 }
 
-const SERIAL = 'Serial';
-const PARALLEL = 'Parallel';
+export enum APPROVAL_FLOW_NODE_TYPES {
+    SERIAL = 'SERIAL',
+    PARALLEL = 'PARALLEL'
+}
 
-const SINGLE_USER = 'A user';
-const ANYONE = 'Anyone on the team';
-const EVERYONE = 'Everyone on the team';
+export enum APPROVAL_FLOW_APPROVER_TYPES {
+    SINGLE_USER = 'SINGLE_USER',
+    ANYONE = 'ANYONE',
+    EVERYONE = 'EVERYONE'
+}
 
 @Component({
     selector: 'fdp-approval-flow-add-node',
@@ -42,16 +46,22 @@ const EVERYONE = 'Everyone on the team';
 })
 export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
-    _nodeType = SERIAL;
+    _nodeType = APPROVAL_FLOW_NODE_TYPES.SERIAL;
 
     /** @hidden */
-    _nodeTypes = [PARALLEL, SERIAL];
+    _nodeTypes = APPROVAL_FLOW_NODE_TYPES;
 
     /** @hidden */
-    _approverType = SINGLE_USER;
+    _nodeTypesArray = Object.keys(APPROVAL_FLOW_NODE_TYPES);
 
     /** @hidden */
-    _approverTypes = [SINGLE_USER, ANYONE, EVERYONE];
+    _approverType = APPROVAL_FLOW_APPROVER_TYPES.SINGLE_USER;
+
+    /** @hidden */
+    _approverTypes = APPROVAL_FLOW_APPROVER_TYPES;
+
+    /** @hidden */
+    _approverTypesArray = Object.keys(APPROVAL_FLOW_APPROVER_TYPES);
 
     /** @hidden */
     _dueDate = FdDate.getNow();
@@ -75,6 +85,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _selectedTeam: ApprovalTeam;
 
     /** @hidden */
+    _selectedTeamArray: ApprovalTeam[] = [];
+
+    /** @hidden */
     _selectedTeamMembers: ApprovalUser[] = [];
 
     /** @hidden */
@@ -93,13 +106,19 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _displayUserFn = displayUserFn;
 
     /** @hidden */
+    _displayTeamFn = displayTeamFn;
+
+    /** @hidden */
     _trackByFn = trackByFn;
 
     /** @hidden */
     private viewChangeSub: Subscription;
 
-    constructor(public dialogRef: DialogRef, public viewService: ApprovalFlowAddNodeViewService, private _cdr: ChangeDetectorRef) {
-    }
+    constructor(
+        public dialogRef: DialogRef,
+        public viewService: ApprovalFlowAddNodeViewService,
+        private _cdr: ChangeDetectorRef
+    ) { }
 
     /** @hidden */
     get _data(): AddNodeDialogRefData {
@@ -108,16 +127,14 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     get _isSingleUserMode(): boolean {
-        return this._approverType === SINGLE_USER;
+        return this._approverType === this._approverTypes.SINGLE_USER;
     }
 
     /** @hidden */
     get _isMainSubmitButtonDisabled(): boolean {
-        if (this._isSingleUserMode) {
-            return !this._selectedApprovers.length || !this._dueDate;
-        }
+        const approvers = this._isSingleUserMode ? this._selectedApprovers : this._selectedTeamArray;
 
-        return !this._selectedTeam;
+        return !approvers.length || !this._dueDate;
     }
 
     /** @hidden */
@@ -134,14 +151,20 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
                 this._approvers = approvers;
                 this._setFilteredApprovers(approvers);
             });
+
         if (this._data.isEdit) {
             this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
             this._selectedApprovers = [...this._data.node.approvers];
+
             if (this._data.node.approvalTeamId) {
                 this.viewService.selectTeam(this._data.teams.find(t => t.id === this._data.node.approvalTeamId));
                 this._selectedTeam = this.viewService.team;
-                this._approverType = this._data.node.isEveryoneApprovalNeeded ? EVERYONE : ANYONE;
+                this._selectedTeamArray = [this.viewService.team];
+                this._approverType = this._data.node.isEveryoneApprovalNeeded
+                    ? this._approverTypes.EVERYONE
+                    : this._approverTypes.ANYONE;
             }
+
             this._cdr.detectChanges();
         }
 
@@ -153,17 +176,23 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         switch (this._data.nodeTarget) {
             case 'before':
             case 'after':
-                this._nodeType = SERIAL;
+                this._nodeType = this._nodeTypes.SERIAL;
                 break;
             case 'parallel':
-                this._nodeType = PARALLEL;
+                this._nodeType = this._nodeTypes.PARALLEL;
                 break;
         }
     }
 
     /** @hidden */
+    ngOnDestroy(): void {
+        this.viewChangeSub.unsubscribe();
+    }
+
+    /** @hidden */
     _goToSelectMode(): void {
         this._selectMode = true;
+
         this.viewService.setCurrentView(this._isSingleUserMode ? VIEW_MODES.SELECT_USER : VIEW_MODES.SELECT_TEAM);
         this._cdr.detectChanges();
     }
@@ -173,19 +202,30 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         if (this._selectedApprovers.length && !this._data.node.approvers.length) {
             this._selectedApprovers = [];
         }
+
         if (!this._data.isEdit && !this._data.node.approvalTeamId) {
             this.viewService.resetTeam();
         }
+
         this._selectMode = false;
         this.viewService.resetView();
         this._cdr.detectChanges();
     }
 
     /** @hidden */
+    _setSelectedApprovers(approvers: ApprovalUser[]): void {
+        this._selectedApprovers = approvers;
+
+        this._confirmSelectedApprovers();
+    }
+
+    /** @hidden */
     _confirmSelectedApprovers(): void {
         this._data.node.approvers = this._selectedApprovers;
+
         delete this._data.node.approvalTeamId;
         delete this._data.node.isEveryoneApprovalNeeded;
+
         this._exitSelectMode();
     }
 
@@ -197,24 +237,32 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _confirmSelectedTeam(): void {
         this._selectedTeam = this.viewService.team;
+        this._selectedTeamArray = [this.viewService.team];
+        
         this._data.node.approvalTeamId = this.viewService.team.id;
-        this._data.node.isEveryoneApprovalNeeded = this._approverType === EVERYONE;
+        this._data.node.description = this.viewService.team.name;
+        this._data.node.isEveryoneApprovalNeeded = this._approverType === APPROVAL_FLOW_APPROVER_TYPES.EVERYONE;
+        
         this._exitSelectMode();
     }
 
     /** @hidden */
     _seeUserDetails(user: ApprovalUser): void {
         this.viewService.setCurrentView(VIEW_MODES.USER_DETAILS);
+
         this._userToShowDetails = user;
         this._userToShowDetailsData$ = this._data.approvalFlowDataSource.fetchUser(user.id);
+
         this._cdr.detectChanges();
     }
 
     /** @hidden */
     _exitUserDetailsMode(): void {
         this.viewService.setCurrentView(this.viewService.team ? VIEW_MODES.VIEW_TEAM_MEMBERS : VIEW_MODES.SELECT_USER);
+
         this._userToShowDetails = undefined;
         this._userToShowDetailsData$ = undefined;
+
         this._setFilteredApprovers(this._approvers);
         this._cdr.detectChanges();
     }
@@ -223,7 +271,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _viewTeamMembers(team: ApprovalTeam): void {
         this.viewService.selectTeam(team);
         this.viewService.setCurrentView(VIEW_MODES.VIEW_TEAM_MEMBERS);
+
         this._selectedTeamMembers = this._approvers.filter(user => team.members.includes(user.id));
+        
         this._setFilteredTeamMembers(this._selectedTeamMembers);
         this._cdr.detectChanges();
     }
@@ -233,7 +283,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         this.viewService.setCurrentView(VIEW_MODES.SELECT_TEAM);
         this.viewService.resetTeam();
         this._setFilteredTeams(this._data.teams || []);
+
         this._selectedTeamMembers = [];
+
         this._cdr.detectChanges();
     }
 
@@ -242,7 +294,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         if (!this._isSingleUserMode && this._selectedTeam) {
             this._data.node.approvers = this._selectedTeam.members.map(memberId => this._approvers.find(a => a.id === memberId));
         }
+
         this._data.node.dueDate = this._dueDate.toDate();
+
         this.dialogRef.close({ node: this._data.node, nodeType: this._nodeType });
     }
 
@@ -290,10 +344,5 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _isDateNull(): boolean {
         return !this._dueDate;
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.viewChangeSub.unsubscribe();
     }
 }

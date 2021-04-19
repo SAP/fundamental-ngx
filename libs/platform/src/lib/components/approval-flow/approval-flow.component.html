@@ -56,8 +56,18 @@
     </div>
 </div>
 
-<div class="approval-flow__container">
-    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel" [attr.dir]="_dir" [class.approval-flow__carousel-controls--edit-mode]="_isEditMode" >
+<div
+    class="approval-flow__container"
+    [attr.dir]="_dir"
+    [class.approval-flow__container--extra-padding-start]="_isCarousel && _carouselStep > 0"
+    [class.approval-flow__container--extra-padding-end]="_isCarousel && (_maxCarouselStep - _carouselStep) > 0"
+>
+    <div
+        class="approval-flow__carousel-controls"
+        *ngIf="_isCarousel"
+        [attr.dir]="_dir"
+        [class.approval-flow__carousel-controls--edit-mode]="_isEditMode"
+    >
         <button class="approval-flow__control--prev-slide" *ngIf="_carouselStep > 0" (click)="previousSlide()"
             aria-label="Go to previous slide" i18n-aria-label="@@platformApprovalPrevButton">
             <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
@@ -70,22 +80,24 @@
         </button>
     </div>
     <div class="approval-flow__graph-container" #graphContainerEl>
-        <div class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
-             [attr.dir]="_dir"
-             [class.approval-flow__graph--edit-mode]="_isEditMode"
+        <div
+            class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
+            [attr.dir]="_dir"
+            [class.approval-flow__graph--edit-mode]="_isEditMode"
         >
-            <div class="approval-flow__column"
-                 *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
-                 [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial && _graph[columnIndex - 1]?.nodes.length === 1"
-                 [class.approval-flow__column--vertical-line-after]="(column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
-                 [class.approval-flow__column--vertical-line-before-solid]="_graph[columnIndex - 1]?.allNodesApproved"
-                 [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
+            <div
+                class="approval-flow__column"
+                *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
+                [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial && _graph[columnIndex - 1]?.nodes.length === 1"
+                [class.approval-flow__column--vertical-line-after]="(column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
+                [class.approval-flow__column--vertical-line-before-solid]="_graph[columnIndex - 1]?.allNodesApproved"
+                [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
             >
                 <ng-container
                     *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
                     <fdp-approval-flow-node
                         cdkDrag
-                        [cdkDragDisabled]="!_isEditMode || node.status !== 'not started' || (_metaMap[node.id].isLast && _metaMap[node.id].parallelEnd)"
+                        [cdkDragDisabled]="!_isEditMode || node.blank || node.status !== 'not started' || (_metaMap[node.id].isLast && _metaMap[node.id].parallelEnd)"
                         [attr.dir]="_dir"
                         [attr.tabindex]="node.blank ? -1 : 0"
                         [node]="node"

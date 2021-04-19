@@ -18,15 +18,34 @@ import { ApprovalFlowExampleDataSource } from './approval-flow-example-data-sour
         >
         </fdp-approval-flow>
         <ng-template #userDetailsTemplate let-data="data">
-            <div style="margin-bottom: 4px;"><b>Contact info</b></div>
+            <h4 style="margin-bottom: 1rem;">Contact info</h4>
 
-            <div>Mobile <br> <a href="javascript:void(0)">{{ data?.phone }}</a></div>
-            <div>E-mail <br> <a href="javascript:void(0)">{{ data?.email }}</a></div>
+            <p style="display: flex; flex-direction: column;">
+                <span>Mobile</span>
+                <a href="javascript:void(0)">{{ data?.phone }}</a>
+            </p>
 
-            <div style="margin-top: 1rem;margin-bottom: 4px;"><b>Company</b></div>
+            <p style="display: flex; flex-direction: column;">
+                <span>Phone</span>
+                <a href="javascript:void(0)">{{ data?.phone }}</a>
+            </p>
 
-            <div>Name <br> Company A</div>
-            <div>Address <br> 481 West Street, Anytown OH, 83749, USA</div>
+            <p style="display: flex; flex-direction: column;">
+                <span>E-mail</span>
+                <a href="javascript:void(0)">{{ data?.email }}</a>
+            </p>
+
+            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Company</h4>
+
+            <p style="display: flex; flex-direction: column;">
+                <span>Name</span>
+                <a href="javascript:void(0)">Company A{{ data?.email }}</a>
+            </p>
+
+            <p style="display: flex; flex-direction: column;">
+                <span>Address</span>
+                <a href="javascript:void(0)">481 West Street, Anytown OH, 83749, USA</a>
+            </p>
         </ng-template>
 
         <p>

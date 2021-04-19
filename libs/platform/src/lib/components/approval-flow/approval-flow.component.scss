@@ -57,7 +57,27 @@ $carousel-controls-height--edit-mode: 126px;
 
 .#{$block}__container {
     position: relative;
-    padding: 0 2rem;
+    padding: 0 1rem;
+
+    &[dir='ltr'] {
+        &.#{$block}__container--extra-padding-start {
+            padding-left: 2rem;
+        }
+
+        &.#{$block}__container--extra-padding-end {
+            padding-right: 2rem;
+        }
+    }
+
+    &[dir='rtl'] {
+        &.#{$block}__container--extra-padding-start {
+            padding-right: 2rem;
+        }
+
+        &.#{$block}__container--extra-padding-end {
+            padding-left: 2rem;
+        }
+    }
 }
 
 .#{$block}__graph-container {
@@ -190,9 +210,6 @@ $carousel-controls-height--edit-mode: 126px;
 
             &:first-child {
                 margin-right: 2rem;
-            }
-
-            &:not(:first-child) {
             }
 
             &.#{$block}__column--vertical-line-before {

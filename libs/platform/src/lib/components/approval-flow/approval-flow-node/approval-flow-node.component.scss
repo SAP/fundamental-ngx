@@ -243,18 +243,8 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     justify-content: space-between;
     align-items: center;
     height: 2rem;
-    padding: 0 1rem;
+    padding: 0 .5rem 0 0.3rem;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .15);
-
-    .#{$block}__menu-button {
-        position: absolute;
-        right: .5rem;
-    }
-
-    fd-checkbox {
-        position: absolute !important;
-        left: .3rem;
-    }
 }
 
 .#{$block}__avatar {
