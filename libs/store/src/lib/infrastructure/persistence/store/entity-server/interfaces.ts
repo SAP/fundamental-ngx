@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
+import { Update } from '@ngrx/entity';
 
 import { IdentityKey } from '../../../../domain/entity';
 import { BaseEntity } from '../../domain/base-classes/base-entity';
 import { QueryParams, QuerySnapshot } from '../../query/query-adapter';
-import { Update } from '@ngrx/entity';
 
 export { BaseEntity, IdentityKey };
 
@@ -53,4 +53,4 @@ export interface PaginatedEntitiesResponse<T> {
     count: number;
 }
 
-export type EntityBaseType = { new (...arg: any[]) } & { prototype: BaseEntity };
+export type EntityBaseType = { new (...arg: any[]): BaseEntity<any> };

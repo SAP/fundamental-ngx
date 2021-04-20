@@ -44,7 +44,7 @@ export interface EntityStore<T extends BaseEntity> {
      * Create new entity instance wrapped Proxy
      * @param fromState initial state
      */
-    createEntityInstance(fromState?: T): T;
+    createEntityInstance<K>(fromState?: K): T;
 }
 
 //#endregion
@@ -89,7 +89,7 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
         return this._entityService.delete(entity).pipe(map(() => entity));
     }
 
-    createEntityInstance(fromState?: T): T {
+    createEntityInstance<K>(fromState?: K): T {
         return instanceForType(this._entity, fromState);
     }
 }

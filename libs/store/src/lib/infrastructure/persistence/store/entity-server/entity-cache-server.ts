@@ -144,7 +144,7 @@ export class EntityCacheServerService<T> implements EntityServerService<T> {
         return entity.value;
     }
 
-    protected async getAllWrappedEntities<T extends BaseEntity<any>>(): Promise<T[]> {
+    protected async getAllWrappedEntities<T extends BaseEntity>(): Promise<BaseEntity<any>[]> {
         const entities = await this.storageService.getAll();
 
         return entities.map(entity => new this.entityType(entity));
