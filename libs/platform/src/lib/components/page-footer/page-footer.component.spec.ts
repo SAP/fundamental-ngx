@@ -57,12 +57,12 @@ describe('FooterComponent', () => {
     });
 
     it('should create footer logo component', () => {
-        const ele = footerEleRef.nativeElement.querySelector('.fdp-footer__logo');
+        const ele = footerEleRef.nativeElement.querySelector('.fd-page-footer__logo');
         expect(ele).toBeTruthy();
     });
 
     it('should create footer icons component', () => {
-        const ele = footerEleRef.nativeElement.querySelector('.fdp-footer__main');
+        const ele = footerEleRef.nativeElement.querySelector('.fd-page-footer__container');
         expect(ele).toBeTruthy();
     });
 });
