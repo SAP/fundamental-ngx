@@ -12,10 +12,7 @@ export class NotificationOpenTemplateExampleComponent {
     constructor(private notificationService: NotificationService) {}
 
     open(notificationComponent): void {
-        const notificationRef = this.notificationService.open(notificationComponent, {
-            size: 's',
-            type: 'warning'
-        });
+        const notificationRef = this.notificationService.open(notificationComponent);
 
         notificationRef.afterClosed.subscribe(
             (result) => {

@@ -18,15 +18,12 @@ export class NotificationComponentAsContentExampleComponent {
         const notificationService = this.notificationService.open(NotificationContentComponent, {
             data: {
                 title: 'Notification Title',
-                description: 'Notification Description',
-                metadata: 'Other Data',
-                moreInfo: 'More Info',
-                approve: 'Approve',
-                cancel: 'Cancel',
-                type: 'success'
+                paragraph: 'Notification Description',
+                firstFooterContent: 'SAP Analytics Cloud',
+                secondFooterContent: 'Just Now',
+                open: 'Open'
             },
-            size: 'm',
-            type: 'success'
+            width: '500px'
         });
 
         notificationService.afterClosed.subscribe(

@@ -1,17 +1,9 @@
 /**
  * Configuration for opening a notification with the NotificationService.
  */
-import { NotificationSize, NotificationType } from '../notification/notification.component';
-
 export class NotificationConfig {
     /** Id for the notification component. If omitted, a unique one is generated. */
     id?: string;
-
-    /** size of notification: 's' | 'm' */
-    size?: NotificationSize;
-
-    /** Type of notification: 'success' | 'warning' | 'information' | 'error' */
-    type?: NotificationType;
 
     /** Aria label for the notification component element. */
     ariaLabel?: string = null;
@@ -27,4 +19,7 @@ export class NotificationConfig {
 
     /** Data to pass along to the content through the NotificationRef. */
     data?: any;
+
+    /** Custom width of the notification. */
+    width?: string;
 }

@@ -7,7 +7,6 @@ import { NotificationBodyComponent } from './notification-body/notification-body
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { NotificationContainer } from './notification-utils/notification-container';
 import { NotificationService } from './notification-service/notification.service';
-import { DefaultNotificationComponent } from './notification-utils/default-notification/default-notification.component';
 import { ButtonModule } from '../button/button.module';
 
 // Directives
@@ -33,7 +32,6 @@ import { NotificationGroupHeaderComponent } from './notification-group-header/no
         NotificationFooterComponent,
         NotificationBodyComponent,
         NotificationContainer,
-        DefaultNotificationComponent,
 
 
         NotificationActionsComponent,
@@ -56,7 +54,6 @@ import { NotificationGroupHeaderComponent } from './notification-group-header/no
         NotificationFooterComponent,
         NotificationBodyComponent,
         NotificationContainer,
-        DefaultNotificationComponent,
 
 
         NotificationActionsComponent,
@@ -76,8 +73,7 @@ import { NotificationGroupHeaderComponent } from './notification-group-header/no
     providers: [DynamicComponentService, NotificationService],
     entryComponents: [
         NotificationContainer,
-        NotificationComponent,
-        DefaultNotificationComponent
+        NotificationComponent
     ]
 })
 export class NotificationModule {}

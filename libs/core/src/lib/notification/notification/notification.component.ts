@@ -8,22 +8,25 @@ import {
     ElementRef,
     EmbeddedViewRef,
     HostListener,
+    HostBinding,
     Input,
     Optional,
+    OnInit,
+    OnDestroy,
     TemplateRef,
     Type,
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { NotificationDefault } from '../notification-utils/notification-default';
-import { DefaultNotificationComponent } from '../notification-utils/default-notification/default-notification.component';
 import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
 import { NotificationConfig } from '../notification-utils/notification-config';
-
-export type NotificationType = 'success' | 'warning' | 'information' | 'error';
-export type NotificationSize = 's' | 'm';
+import { KeyUtil } from '../../utils/functions/key-util';
+import { ESCAPE } from '@angular/cdk/keycodes';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-notification',
@@ -38,33 +41,26 @@ export type NotificationSize = 's' | 'm';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationComponent extends AbstractFdNgxClass implements AfterViewInit {
-    /** Size of notification, defined by user, s or m */
-    @Input()
-    size: string;
-
-    /** Type of Notification 'success' | 'warning' | 'information' | 'error' */
-    @Input()
-    type: NotificationType;
-
+export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
+    @HostBinding('style.width')
+    @Input() width:  string;
+
     id: string;
 
-    escKeyCloseable = true;
+    escKeyCloseable = false;
 
-    focusTrapped = true;
+    closeOnNavigation = true;
 
     ariaLabelledBy: string = null;
-
-    defaultNotificationConfiguration: NotificationDefault;
 
     ariaLabel: string = null;
 
     ariaDescribedBy: string = null;
 
-    childContent: TemplateRef<any> | Type<any> | NotificationDefault = undefined;
+    childContent: TemplateRef<any> | Type<any> = undefined;
 
     backdropClickCloseable = true;
 
@@ -74,11 +70,15 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
 
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     // @ts-ignore
     constructor(
         private elRef: ElementRef,
         private componentFactoryResolver: ComponentFactoryResolver,
         private cdRef: ChangeDetectorRef,
+        private _router: Router,
         @Optional() private notificationConfig: NotificationConfig,
         @Optional() private notificationRef: NotificationRef
     ) {
@@ -86,41 +86,58 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
         this._setNotificationConfig(notificationConfig);
     }
 
+    /** @hidden */
+    ngOnInit(): void {
+        this._listenAndCloseOnNavigation();
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         if (this.childContent) {
             if (this.childContent instanceof Type) {
-                this.loadFromComponent(this.childContent);
-            } else if (this.childContent instanceof TemplateRef) {
-                this.loadFromTemplate(this.childContent);
-            } else {
-                this.createFromDefaultConfiguration(this.childContent);
+                this._loadFromComponent(this.childContent);
+            } 
+            
+            if (this.childContent instanceof TemplateRef) {
+                this._loadFromTemplate(this.childContent);
             }
         }
         this.cdRef.detectChanges();
     }
 
-    @HostListener('keyup', ['$event'])
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden Listen and close notification on Escape key */
+    @HostListener('window:keyup', ['$event'])
     closeNotificationEsc(event: KeyboardEvent): void {
-        if (this.escKeyCloseable && event.key === 'Escape') {
+        if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this.notificationRef) {
             this.notificationRef.dismiss('escape');
         }
     }
 
-    private createFromDefaultConfiguration(conf: NotificationDefault): void {
-        this.containerRef.clear();
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DefaultNotificationComponent);
-        this.componentRef = this.containerRef.createComponent(componentFactory);
-        this.componentRef.instance.defaultConfigurationNotification = conf;
-        this.componentRef.instance.type = this.type;
+     /** @hidden Listen on NavigationStart event and dismiss the dialog */
+     private _listenAndCloseOnNavigation(): void {
+        if (this._router && this.notificationRef) {
+            this._subscriptions.add(
+                this._router.events.pipe(
+                    filter(event => event instanceof NavigationStart && this.closeOnNavigation)
+                ).subscribe(event => this.notificationRef.dismiss())
+            );
+        }
     }
 
-    private loadFromComponent(content: Type<any>): void {
+    /** @hidden */
+    private _loadFromComponent(content: Type<any>): void {
         this.containerRef.clear();
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(content);
         this.componentRef = this.containerRef.createComponent(componentFactory);
     }
 
-    private loadFromTemplate(content: TemplateRef<any>): void {
+    /** @hidden */
+    private _loadFromTemplate(content: TemplateRef<any>): void {
         this.containerRef.clear();
         const context = {
             $implicit: this.notificationRef
@@ -128,18 +145,13 @@ export class NotificationComponent extends AbstractFdNgxClass implements AfterVi
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
     }
 
+    /** @hidden */
     _setProperties(): void {
         this._addClassToElement('fd-notification');
         this._addClassToElement('fd-notification-custom-block');
-        if (this.type) {
-            this._addClassToElement('fd-notification--' + this.type);
-        }
-
-        if (this.size) {
-            this._addClassToElement('fd-notification--' + this.size);
-        }
     }
 
+    /** @hidden */
     private _setNotificationConfig(notificationConfig: NotificationConfig): void {
         Object.keys(notificationConfig || {})
             .filter((key) => key !== 'data' && key !== 'container')

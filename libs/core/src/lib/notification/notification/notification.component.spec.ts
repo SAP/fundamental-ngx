@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationComponent } from './notification.component';
 import { NotificationService } from '../notification-service/notification.service';
 import { ButtonModule } from '../../button/button.module';
-import { NotificationDefault } from '../notification-utils/notification-default';
 import { NotificationModule } from '../notification.module';
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
@@ -47,15 +46,6 @@ describe('NotificationComponent', () => {
         component = fixture.componentInstance;
         fixture.detectChanges();
         notificationService = TestBed.get(NotificationService);
-    });
-
-    it('should generate From Object', () => {
-        spyOn<any>(component, 'createFromDefaultConfiguration').and.callThrough();
-        component.childContent = new NotificationDefault();
-        component.ngAfterViewInit();
-        fixture.detectChanges();
-        expect(component['componentRef']).toBeTruthy();
-        expect((component as any).createFromDefaultConfiguration).toHaveBeenCalled();
     });
 
     it('should generate component', () => {
