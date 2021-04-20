@@ -64,10 +64,10 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
-        @Inject(MULTICOMBOBOX_COMPONENT) comboboxComponent: MultiComboboxInterface,
+        @Inject(MULTICOMBOBOX_COMPONENT) multiComboboxComponent: MultiComboboxInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
-        super(elementRef, dialogService, comboboxComponent, MobileModeControl.MULTI_COMBOBOX, mobileModes);
+        super(elementRef, dialogService, multiComboboxComponent, MobileModeControl.MULTI_COMBOBOX, mobileModes);
     }
 
     /** @hidden */

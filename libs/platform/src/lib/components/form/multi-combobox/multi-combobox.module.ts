@@ -15,12 +15,12 @@ import {
 } from '@fundamental-ngx/core';
 import { MultiComboboxComponent } from './multi-combobox/multi-combobox.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
-import { PlatformComboboxModule } from '../combobox';
 import { PlatformListModule } from '../../list/list.module';
 import { StandardListItemModule } from '../../list/standard-list-item/standard-list-item.module';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 @NgModule({
-    declarations: [MultiComboboxComponent],
+    declarations: [MultiComboboxComponent, HighlightPipe],
     imports: [
         CommonModule,
         FormsModule,
@@ -33,8 +33,7 @@ import { StandardListItemModule } from '../../list/standard-list-item/standard-l
         OverlayModule,
         PlatformListModule,
         StandardListItemModule,
-        PlatformAutoCompleteModule,
-        PlatformComboboxModule
+        PlatformAutoCompleteModule
     ],
     providers: [DynamicComponentService],
     exports: [MultiComboboxComponent, TemplateModule]

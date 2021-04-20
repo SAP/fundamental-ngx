@@ -37,7 +37,7 @@ import { OptionItem, SelectableOptionItem } from '../../../../domain';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { FormField } from '../../form-field';
-import { ComboboxConfig } from '../../combobox/combobox.config';
+import { MultiComboboxConfig } from '../multi-combobox.config';
 
 @Component({
     selector: 'fdp-multi-combobox',
@@ -77,7 +77,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     private _direction: Direction = 'ltr';
 
     /** @hidden */
-    private _timeout: NodeJS.Timeout;
+    private _timeout: any; // NodeJS.Timeout
 
     constructor(
         readonly cd: ChangeDetectorRef,
@@ -87,17 +87,17 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
-        readonly _comboboxConfig: ComboboxConfig,
+        readonly _multiComboboxConfig: MultiComboboxConfig,
         @Optional() private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(cd, elementRef, ngControl, ngForm, dialogConfig, _comboboxConfig, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiComboboxConfig, formField, formControl);
     }
 
     /** @hidden */
     ngOnInit(): void {
-        const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
+        const providers = this.providers?.size === 0 ? this._multiComboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
             this.dataSource = new ListDataSource(providers.get(this.entityClass));
