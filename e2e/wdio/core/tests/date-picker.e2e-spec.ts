@@ -245,8 +245,8 @@ describe('Date picker suite', function() {
             click(activeButtonDatePicker, i);
         }
     });
-
-    it('verify selected date is showing in blue background', () => {
+// Discussed with Deno
+    xit('verify selected date is showing in blue background', () => {
         click(activeButtonDatePicker);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
