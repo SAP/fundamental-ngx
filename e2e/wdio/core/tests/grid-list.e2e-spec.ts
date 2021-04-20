@@ -145,7 +145,7 @@ describe('Grid-list test suite', function() {
             expect(gridListPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('verify buttons states', () => {
+        xit('verify buttons states', () => {
             const buttonsLength = getElementArrayLength(gridListButtons);
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(gridListButtons, i);
@@ -153,12 +153,12 @@ describe('Grid-list test suite', function() {
             }
         });
 
-        it('verify toolbar states', () => {
+        xit('verify toolbar states', () => {
             scrollIntoView(gridListToolbar);
             checkElementStates(gridListToolbar, toolbarTag, toolbar);
         });
 
-        it('verify radio button states', () => {
+        xit('verify radio button states', () => {
             const radioButtonLength = getElementArrayLength(gridListRadioButton);
             for (let i = 0; i < radioButtonLength; i++) {
                 scrollIntoView(gridListRadioButton, i);
@@ -166,7 +166,7 @@ describe('Grid-list test suite', function() {
             }
         });
 
-        it('verify checkbox states', () => {
+        xit('verify checkbox states', () => {
             const checkboxLength = getElementArrayLength(gridListCheckbox);
             for (let i = 0; i < checkboxLength; i++) {
                 scrollIntoView(gridListCheckbox, i);
@@ -174,7 +174,7 @@ describe('Grid-list test suite', function() {
             }
         });
 
-        describe('Check none mode example', function() {
+        xdescribe('Check none mode example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem);
                 checkElementStates(gridListItem, itemTag + '4-', item);
@@ -186,7 +186,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check single select left mode example', function() {
+        xdescribe('Check single select left mode example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 13);
                 checkElementStates(gridListItem, itemTag + '5-', item, 13);
@@ -198,7 +198,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check single select right mode example', function() {
+        xdescribe('Check single select right mode example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 20);
                 checkElementStates(gridListItem, itemTag + '6-', item, 20);
@@ -210,7 +210,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check multi select mode example', function() {
+        xdescribe('Check multi select mode example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 27);
                 checkElementStates(gridListItem, itemTag + '7-', item, 27);
@@ -222,7 +222,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check delete mode example', function() {
+        xdescribe('Check delete mode example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 34);
                 checkElementStates(gridListItem, itemTag + '8-', item, 34);
@@ -234,7 +234,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check group company A example', function() {
+        xdescribe('Check group company A example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 41);
                 checkElementStates(gridListItem, itemTag + '9-', item, 41);
@@ -246,7 +246,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check group company B example', function() {
+        xdescribe('Check group company B example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 45);
                 checkElementStates(gridListItem, itemTag + '10-', item, 45);
@@ -258,7 +258,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check states State: Unread example', function() {
+        xdescribe('Check states State: Unread example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItemUnread);
                 checkElementStates(gridListItemUnread, itemTag + '11-', item);
@@ -270,7 +270,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check states State: Error example', function() {
+        xdescribe('Check states State: Error example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItemError);
                 checkElementStates(gridListItemError, itemTag + '12-', item);
@@ -282,7 +282,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check status examples', function() {
+        xdescribe('Check status examples', function() {
             it('verify item states', () => {
                 const itemStatusLength = getElementArrayLength(gridListItemStatus);
                 for (let i = 0; i < itemStatusLength; i++) {
@@ -300,7 +300,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check more button example', function() {
+        xdescribe('Check more button example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 48);
                 checkElementStates(gridListItem, itemTag + '13-', item, 48);
@@ -312,7 +312,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check footer example', function() {
+        xdescribe('Check footer example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 53);
                 checkElementStates(gridListItem, itemTag + '14-', item, 53);
@@ -324,7 +324,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check drag and drop example', function() {
+        xdescribe('Check drag and drop example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 58);
                 checkElementStates(gridListItem, itemTag + '15-', item, 58);
@@ -336,7 +336,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check layout example', function() {
+        xdescribe('Check layout example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItem, 66);
                 checkElementStates(gridListItem, itemTag + '16-', item, 66);
@@ -348,7 +348,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check single select mode example', function() {
+        xdescribe('Check single select mode example', function() {
             it('verify item with button states', () => {
                 scrollIntoView(gridListItem, 6);
                 checkElementStates(gridListItem, itemTag + '17-', item, 6);
@@ -360,7 +360,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check states State: Locked example', function() {
+        xdescribe('Check states State: Locked example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItemLocked);
                 checkElementStates(gridListItemLocked, itemTag + '19-', item);
@@ -372,7 +372,7 @@ describe('Grid-list test suite', function() {
             });
         });
 
-        describe('Check states State: Draft example', function() {
+        xdescribe('Check states State: Draft example', function() {
             it('verify item states', () => {
                 scrollIntoView(gridListItemDraft);
                 checkElementStates(gridListItemDraft, itemTag + '20-', item);
