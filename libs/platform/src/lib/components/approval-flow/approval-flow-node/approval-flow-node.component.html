@@ -49,8 +49,14 @@
                 </ng-template>
             </div>
 
-            <div class="approval-flow-node__description">
-                {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
+            <div class="approval-flow-node__description" >
+                <ng-container *ngIf="!node.variousTeams; else variousTeams">
+                    {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
+                </ng-container>
+
+                <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams">
+                    Various teams
+                </ng-template>
             </div>
 
             <fdp-object-status

@@ -13,6 +13,7 @@ import {
     DialogModule,
     FormModule,
     IconModule,
+    IllustratedMessageModule,
     MenuModule,
     MessageStripModule,
     MessageToastModule,
@@ -73,7 +74,8 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
         DatePickerModule,
         FormModule,
         DragDropModule,
-        RadioModule
+        RadioModule,
+        IllustratedMessageModule
     ],
     exports: [
         ApprovalFlowComponent

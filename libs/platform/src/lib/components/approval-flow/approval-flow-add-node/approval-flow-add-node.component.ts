@@ -21,11 +21,17 @@ export interface AddNodeDialogRefData {
     showNodeTypeSelect?: boolean;
     node?: ApprovalNode;
     teams?: ApprovalTeam[];
-    nodeTarget?: string;
+    nodeTarget?: ApprovalFlowNodeTarget;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
     rtl: boolean;
 }
+
+export type ApprovalFlowNodeTarget = 
+    'empty' |
+    'before' |
+    'after' |
+    'parallel';
 
 export enum APPROVAL_FLOW_NODE_TYPES {
     SERIAL = 'SERIAL',
@@ -174,6 +180,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         });
 
         switch (this._data.nodeTarget) {
+            case 'empty':
             case 'before':
             case 'after':
                 this._nodeType = this._nodeTypes.SERIAL;
@@ -222,6 +229,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _confirmSelectedApprovers(): void {
         this._data.node.approvers = this._selectedApprovers;
+        this._data.node.variousTeams = this._isUsersFromVariousTeams(this._data.node.approvers);
 
         delete this._data.node.approvalTeamId;
         delete this._data.node.isEveryoneApprovalNeeded;
@@ -239,6 +247,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         this._selectedTeam = this.viewService.team;
         this._selectedTeamArray = [this.viewService.team];
         
+        this._data.node.variousTeams = false;
         this._data.node.approvalTeamId = this.viewService.team.id;
         this._data.node.description = this.viewService.team.name;
         this._data.node.isEveryoneApprovalNeeded = this._approverType === APPROVAL_FLOW_APPROVER_TYPES.EVERYONE;
@@ -303,6 +312,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _onSearchStringChange(searchString = ''): void {
         this._searchString = searchString;
+        
         if (!searchString) {
             this._setFilteredApprovers(this._approvers);
             this._setFilteredTeams(this._data.teams || []);
@@ -344,5 +354,24 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _isDateNull(): boolean {
         return !this._dueDate;
+    }
+
+    /** @hidden */
+    private _isUsersFromVariousTeams(users: ApprovalUser[]): boolean {
+        if (!this._data.teams?.length) {
+            return false;
+        }
+
+        const teams: string[] = users.reduce((_teams, user) => {
+            const userTeam = this._data.teams.find(team => team.members.includes(user.id));
+
+            if (userTeam && !_teams.includes(userTeam.id)) {
+                _teams.push(userTeam.id);
+            }
+
+            return _teams;
+        }, [])
+
+        return teams.length > 1;
     }
 }

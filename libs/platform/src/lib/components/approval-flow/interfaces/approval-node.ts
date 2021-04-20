@@ -11,6 +11,7 @@ export interface ApprovalNode {
     dueDate?: Date;
     createDate?: Date;
     approvalTeamId?: string;
+    variousTeams?: boolean;
     isEveryoneApprovalNeeded?: boolean;
 }
 

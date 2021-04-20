@@ -24,7 +24,7 @@ import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundam
 
 import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-details/approval-flow-approver-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
-import { ApprovalFlowAddNodeComponent, APPROVAL_FLOW_NODE_TYPES } from './approval-flow-add-node/approval-flow-add-node.component';
+import { ApprovalFlowAddNodeComponent, ApprovalFlowNodeTarget, APPROVAL_FLOW_NODE_TYPES } from './approval-flow-add-node/approval-flow-add-node.component';
 import { displayUserFn, isNodeApproved, trackByFn } from './helpers';
 import {
     ApprovalDataSource,
@@ -169,6 +169,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _trackByFn = trackByFn;
+
+    /** @hidden */
+    _emptyApprovalFlowSpotConfig = {
+        spot: { url: 'assets/images/sapIllus-Spot-NoData.svg', id: 'sapIllus-Spot-NoData' }
+    }
 
     private _editModeInitSub: Subscription;
     private subscriptions = new Subscription();
@@ -410,12 +415,23 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden Open add node dialog */
-    _addNode(source: ApprovalGraphNode, type: 'before' | 'after' | 'parallel' | 'blank'): void {
-        const _source = source.blank ? this._getPreviousNotBlankNode(source) : source;
+    _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget | 'blank'): void {
+        if (!source && type !== 'empty') {
+            return;
+        }
+
+        let showNodeTypeSelect = false;
+        let _source: ApprovalGraphNode;
+
+        if (type !== 'empty') {
+            _source = source.blank ? this._getPreviousNotBlankNode(source) : source;
+            showNodeTypeSelect = this._metaMap[source.id].canAddParallel;
+        }
+
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
                 nodeTarget: type,
-                showNodeTypeSelect: this._metaMap[source.id].canAddParallel,
+                showNodeTypeSelect: showNodeTypeSelect,
                 teams: this._teams,
                 node: Object.assign({}, getBlankNode(), { blank: false }),
                 ...this._defaultDialogOptions
@@ -424,6 +440,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         
         dialog.afterClosed.subscribe((data: { node: ApprovalNode, nodeType: APPROVAL_FLOW_NODE_TYPES }) => {
             if (!data) {
+                if (type === 'empty') {
+                    this._exitEditMode();
+                }
+
                 return;
             }
 
@@ -441,26 +461,29 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
             node.id = `tempId${(Math.random() * 1000).toFixed()}`;
             node.description = node.description || node.approvers[0].description;
-            node.targets = _source.targets;
+            
+            if (type !== 'empty') {
+                node.targets = _source.targets;
 
-            if (nodeType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
-                if (type === 'before') {
-                    node.targets = [_source.id];
-                    const parent = this._metaMap[_source.id].parent;
-                    parent.targets = [node.id];
-                    this._replaceTargetsInSourceNodes(_source.id, [node.id]);
-                    this._updateNode(parent);
-                } else {
-                    _source.targets = [node.id];
-                    this._updateNode(_source);
+                if (nodeType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
+                    if (type === 'before') {
+                        node.targets = [_source.id];
+                        const parent = this._metaMap[_source.id].parent;
+                        parent.targets = [node.id];
+                        this._replaceTargetsInSourceNodes(_source.id, [node.id]);
+                        this._updateNode(parent);
+                    } else {
+                        _source.targets = [node.id];
+                        this._updateNode(_source);
+                    }
                 }
-            }
 
-            if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
-                const parent = this._metaMap[_source.id].parent;
-                if (parent) {
-                    parent.targets.push(node.id);
-                    this._updateNode(parent);
+                if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
+                    const parent = this._metaMap[_source.id].parent;
+                    if (parent) {
+                        parent.targets.push(node.id);
+                        this._updateNode(parent);
+                    }
                 }
             }
 
@@ -471,8 +494,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    _addNodeFromToolbar(type: 'before' | 'after' | 'parallel'): void {
-        const node = this._nodeComponents.filter(n => n._isSelected)[0].node;
+    _addNodeFromToolbar(type: ApprovalFlowNodeTarget): void {
+        const node = this._nodeComponents.length ? this._nodeComponents.filter(n => n._isSelected)[0]?.node : null;
+
+        if (type === 'empty') {
+            this._enterEditMode();
+        }
+
         this._addNode(node, type);
     }
 
@@ -820,6 +848,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Check if need to add carousel controls */
     private _checkCarouselStatus(): void {
+        if (!this._graphEl) {
+            return;
+        }
+
         this._isCarousel = this._graphEl.nativeElement.scrollWidth > this._graphEl.nativeElement.clientWidth;
         this._maxCarouselStep = Math.ceil(this._scrollDiff / this._carouselStepSize);
         this._cdr.detectChanges();
