@@ -1,6 +1,7 @@
 <fdp-form-group [noLabelLayout]="false">
     <fdp-form-field id="array-of-strings" label="Array of Strings">
         <fdp-multi-combobox
+            [autoResize]="true"
             name="array-of-strings"
             placeholder="Type some text..."
             [dataSource]="dataSourceStrings"
@@ -12,6 +13,7 @@
 
     <fdp-form-field id="array-of-objects" label="Array of Objects">
         <fdp-multi-combobox
+            [autoResize]="true"
             name="array-of-objects"
             placeholder="Type some text..."
             [dataSource]="dataSource"
@@ -25,6 +27,7 @@
 
     <fdp-form-field id="observable" label="Observable">
         <fdp-multi-combobox
+            [autoResize]="true"
             name="observable"
             placeholder="Type some text..."
             [dataSource]="dataSourceOf"
@@ -38,6 +41,7 @@
 
     <fdp-form-field id="ds" label="Data Source">
         <fdp-multi-combobox
+            [autoResize]="true"
             name="ds"
             placeholder="Type some text..."
             [dataSource]="ds"

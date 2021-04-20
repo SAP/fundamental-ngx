@@ -12,7 +12,7 @@ export class MultiComboboxColumnsExampleComponent {
     dataSource = [
         { name: 'Apple', type: 'Fruits' },
         { name: 'Banana', type: 'Fruits' },
-        { name: 'Biiiiiiiiiiiiiiiiiiiiiiggggggggggggggggggggggggg Banananananananananananananananananananananananananananananananananananananana', type: 'Fruits' },
+        { name: 'Florida Evergreen Blueberry', type: 'Fruits' },
         { name: 'Pineapple', type: 'Fruits' },
         { name: 'Strawberry', type: 'Fruits' },
         { name: 'Broccoli', type: 'Vegetables' },

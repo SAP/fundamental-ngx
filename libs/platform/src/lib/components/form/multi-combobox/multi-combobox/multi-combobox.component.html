@@ -81,7 +81,7 @@
                 [name]="name"
                 [compact]="isCompact"
                 (keydown)="onInputKeydownHandler($event)"
-                (keyup)="onInputKeyupHandler()"
+                (keyup)="validateOnKeyup($event)"
                 [disabled]="disabled"
                 [(ngModel)]="inputText"
                 (ngModelChange)="searchTermChanged()"
@@ -94,6 +94,9 @@
             />
         </fd-tokenizer>
     </fd-input-group>
+    <ng-conteiner *ngIf="!isOpen">
+        <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
+    </ng-conteiner>
 </ng-template>
 
 <ng-template #mobileControlTemplate>
@@ -130,7 +133,7 @@
             [name]="name"
             [compact]="isCompact"
             (keydown)="onInputKeydownHandler($event)"
-            (keyup)="onInputKeyupHandler()"
+            (keyup)="validateOnKeyup($event)"
             [disabled]="disabled"
             [(ngModel)]="inputText"
             (ngModelChange)="searchTermChanged()"
@@ -159,13 +162,7 @@
         [attr.aria-labelledby]="id + '-search'"
         aria-multiselectable="true"
     >
-        <fd-form-message
-            *ngIf="isSearchInvalid"
-            type="error"
-            [embedded]="true"
-            i18n="multi-combobox search error message|The error message for this multi-combobox @@platformI18nMultiComboboxSearchErrorMessage">
-            Invalid entry
-        </fd-form-message>
+        <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
@@ -279,4 +276,14 @@
             ></ng-container>
         </ng-container>
     </ng-container>
+</ng-template>
+
+<ng-template #errorMessageTemplate>
+    <fd-form-message
+        *ngIf="isSearchInvalid"
+        type="error"
+        [embedded]="isOpen"
+        i18n="multi-combobox search error message|The error message for this multi-combobox @@platformI18nMultiComboboxSearchErrorMessage">
+        Invalid entry
+    </fd-form-message>
 </ng-template>

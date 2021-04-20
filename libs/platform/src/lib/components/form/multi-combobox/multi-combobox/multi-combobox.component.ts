@@ -7,7 +7,6 @@ import {
     Host,
     Inject,
     Injector,
-    Input,
     OnInit,
     Optional,
     Self,
@@ -20,7 +19,8 @@ import { NgControl, NgForm } from '@angular/forms';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { A, DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Direction } from '@angular/cdk/bidi';
-import { takeUntil } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { delay, takeUntil } from 'rxjs/operators';
 
 import {
     closestElement,
@@ -48,14 +48,6 @@ import { ComboboxConfig } from '../../combobox/combobox.config';
     providers: [{ provide: FormFieldControl, useExisting: MultiComboboxComponent, multi: true }]
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {
-    @Input()
-    get disabled(): boolean {
-        return this._disabled;
-    }
-    set disabled(value) {
-        this._disabled = value;
-    }
-
     /** @hidden */
     @ViewChild('controlTemplate')
     controlTemplate: TemplateRef<any>;
@@ -84,6 +76,9 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     private _direction: Direction = 'ltr';
 
+    /** @hidden */
+    private _timeout: NodeJS.Timeout;
+
     constructor(
         readonly cd: ChangeDetectorRef,
         readonly elementRef: ElementRef,
@@ -93,7 +88,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
-        private _rtlService: RtlService,
+        @Optional() private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -113,15 +108,14 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        this._rtlService.rtl
+        this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
             .subscribe(isRtl => (this._direction = isRtl ? 'rtl' : 'ltr'));
 
-        if (this._connectedOverlay) {
-            this._connectedOverlay.attach
-                .pipe(takeUntil(this._destroyed))
-                .subscribe(() => this._connectedOverlay.overlayRef.setDirection(this._direction));
-        }
+
+        this._connectedOverlay?.attach
+            .pipe(takeUntil(this._destroyed))
+            .subscribe(() => this._connectedOverlay.overlayRef.setDirection(this._direction));
 
         if (this.mobile) {
             this._setUpMobileMode();
@@ -151,7 +145,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         item.selected = !item.selected;
 
-        this._propagateChange()
+        this._propagateChange();
     }
 
     /** @hidden */
@@ -177,7 +171,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     /** @hidden */
     navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
-            this.listComponent.items.first.focus();
+            this.listComponent.items?.first?.focus();
         }
         if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
             this.tokenizer.focusTokenElement(this.tokenizer.tokenList.length - 1);
@@ -190,11 +184,20 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             event.preventDefault();
         }
 
-        const idx = this._getTokenIndexByLabelOrValue(token);
-        this._selected.splice(idx, 1);
-        token.selected = false;
+        // NOTE: needs to prevent ExpressionChangedAfterItHasBeenCheckedError
+        of(true)
+            .pipe(takeUntil(this._destroyed), delay(1))
+            .subscribe(() => {
+                const idx = this._getTokenIndexByLabelOrValue(token);
+                this._selected.splice(idx, 1);
+                token.selected = false;
 
-        this._propagateChange(true);
+                this._propagateChange(true);
+
+                if (!this._selected.length) {
+                    this._focusToSearchField();
+                }
+            });
     }
 
     /** @hidden */
@@ -205,7 +208,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         this.showList(true);
         this.selectedShown$.next(true);
-        this._cd.markForCheck();
+        this.cd.markForCheck();
     }
 
     /** @hidden */
@@ -216,7 +219,39 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             if (isList) {
                 return;
             }
+            this.showList(false);
             this.inputText = '';
+        }
+    }
+
+    /** @hidden */
+    validateOnKeyup(event: KeyboardEvent): void {
+        const isPrintableKey = event.key?.length === 1;
+        if (!event.shiftKey && !isPrintableKey) {
+            return;
+        }
+
+        if (this.inputText && this.isListEmpty) {
+            this.inputText = this.inputText.slice(0, -1);
+
+            this.isSearchInvalid = true;
+            this.state = 'error';
+            this.inputText ? this.showList(true) : this.showList(false);
+
+            this.searchTermChanged('');
+
+            if (this._timeout) {
+                clearTimeout(this._timeout);
+            }
+            const threeSeconds = 3000;
+            this._timeout = setTimeout(() => {
+                this.isSearchInvalid = false;
+                this.state = 'default';
+                this.cd.markForCheck();
+            }, threeSeconds);
+        } else {
+            this.isSearchInvalid = false;
+            this.state = 'default';
         }
     }
 
@@ -224,30 +259,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
      * Method to set input text as item label.
      */
     setInputTextFromOptionItem(item: OptionItem): void {
-        if (this.mobile) {
-            this.inputText = item.label;
-            this.cd.detectChanges();
+        this.inputText = item.label;
 
+        if (this.mobile) {
             return;
         }
 
-        this.inputText = item.label;
         this.showList(false);
-    }
-
-    /** @hidden */
-    onInputKeyupHandler(): void {
-        if (this.inputText && (!this._suggestions || !this._suggestions.length)) {
-            this.inputText = this.inputText.slice(0, -1);
-
-            this.isSearchInvalid = true;
-            this.state = 'error';
-
-            this.searchTermChanged();
-        } else {
-            this.isSearchInvalid = false;
-            this.state = 'default';
-        }
     }
 
     /** @hidden */
@@ -311,7 +329,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
                 this._flatSuggestions[idx].selected = true;
             }
         }
-
 
         this.cd.detectChanges();
     }

@@ -42,6 +42,12 @@
             .fd-list__secondary {
                 max-width: inherit;
             }
+            .fd-list__title {
+                max-width: 50%;
+            }
+            .fd-list__secondary {
+                min-width: 3.25rem;
+            }
         }
     }
 }

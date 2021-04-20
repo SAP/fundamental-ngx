@@ -31,7 +31,7 @@ import {
 } from '@angular/cdk/keycodes';
 
 import { BehaviorSubject, fromEvent, isObservable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 
 import {
     DialogConfig,
@@ -169,7 +169,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     listComponent: ListComponent;
 
     /** @hidden */
-    @ViewChild('searchInputElement', { read: ElementRef })
+    @ViewChild('searchInputElement')
     searchInputElement: FormControlComponent;
 
     /** @hidden */
@@ -273,6 +273,9 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     isSearchInvalid = false;
 
     /** @hidden */
+    isListEmpty = true;
+
+    /** @hidden */
     protected _dataSource: FdpListDataSource<any>;
 
     /** @hidden */
@@ -283,8 +286,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     private _dsSubscription?: Subscription;
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
-    /** Keys, that won't trigger the popover's open state, when dispatched on search input. */
+    /** @hidden
+     * Keys, that won't trigger the popover's open state, when dispatched on search input. */
     private readonly _nonOpeningKeys: number[] = [
+        BACKSPACE,
         ESCAPE,
         ENTER,
         CONTROL,
@@ -315,7 +320,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     };
 
     constructor(
-        readonly cd: ChangeDetectorRef,
+        protected readonly _cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
@@ -324,7 +329,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(_cd, ngControl, ngForm, formField, formControl);
     }
 
     /** @hidden */
@@ -393,6 +398,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     close(): void {
         this.selectedShown$.next(false);
         this.inputText = '';
+        this._focusToSearchField();
 
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
@@ -411,7 +417,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             this.searchTermChanged('');
         }
 
-        this.cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /** @hidden */
@@ -424,7 +430,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         map.set('limit', 12);
         this.ds.match(map);
 
-        this.cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /**
@@ -477,7 +483,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
             const acceptedKeys =
-                !KeyUtil.isKeyCode(event, BACKSPACE) &&
                 !KeyUtil.isKeyType(event, 'alphabetical') &&
                 !KeyUtil.isKeyType(event, 'numeric');
             if (this.isEmptyValue && acceptedKeys) {
@@ -498,6 +503,11 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         return <ListDataSource<any>>this.dataSource;
     }
 
+    /** @hidden */
+    protected _focusToSearchField(): void {
+        this.searchInputElement?.elementRef().nativeElement.focus();
+    }
+
     /** @hidden
      * Method that picks other value moved from current one by offset, called only when Multi Combobox is closed */
     private _chooseOtherItem(offset: number): void {
@@ -508,18 +518,14 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
         const activeValue: SelectableOptionItem = this._getSelectItemByInputValue(this.inputText);
         const index: number = this._flatSuggestions.findIndex(value => value === activeValue);
-        let item: SelectableOptionItem;
-        if (!this.inputText && offset === -1) {
-            item = this._flatSuggestions[this._flatSuggestions.length - 1];
-        } else {
-            item = this._flatSuggestions[index + offset];
-        }
+        const position = !this.inputText && offset === -1 ? this._flatSuggestions.length - 1 : index + offset;
+        const item: SelectableOptionItem = this._flatSuggestions[position];
 
         if (item) {
             this.setInputTextFromOptionItem(item);
         }
 
-        const selectedIndex = this._selected.findIndex(value => value.label === item.label);
+        const selectedIndex = this._selected.findIndex(value => value.label === item?.label);
         if (selectedIndex !== -1) {
             this._chooseOtherItem(offset);
         }
@@ -567,14 +573,18 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
          */
         this._dsSubscription = initDataSource
             .open()
-            .pipe(takeUntil(this._destroyed))
+            .pipe(
+                takeUntil(this._destroyed),
+                tap(data => this.isListEmpty = !data?.length),
+                filter(data => !!data.length)
+            )
             .subscribe(data => {
                 this._suggestions = this._convertToOptionItems(data);
                 this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
 
                 this.stateChanges.next('initDataSource.open().');
 
-                this.cd.markForCheck();
+                this._cd.markForCheck();
             });
 
         initDataSource.dataProvider.setLookupKey(this.lookupKey);
@@ -631,7 +641,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
         this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
         this.minWidth = rect.width - 2;
-        this._cd.detectChanges();
+        this._cd.markForCheck();
     }
 
     /**

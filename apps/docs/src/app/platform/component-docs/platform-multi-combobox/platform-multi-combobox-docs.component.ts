@@ -10,8 +10,8 @@ import * as multiComboboxFormsHtml from '!raw-loader!./examples/multi-combobox-f
 import * as multiComboboxFormsTs from '!raw-loader!./examples/multi-combobox-forms/multi-combobox-forms-example.component';
 import * as multiComboboxGroupHtml from '!raw-loader!./examples/multi-combobox-group/multi-combobox-group-example.component.html';
 import * as multiComboboxGroupTs from '!raw-loader!./examples/multi-combobox-group/multi-combobox-group-example.component';
-import * as multiComboboxColumnsHtml from '!raw-loader!./examples/multi-combobox-group/multi-combobox-group-example.component.html';
-import * as multiComboboxColumnsTs from '!raw-loader!./examples/multi-combobox-group/multi-combobox-group-example.component';
+import * as multiComboboxColumnsHtml from '!raw-loader!./examples/multi-combobox-columns/multi-combobox-columns-example.component.html';
+import * as multiComboboxColumnsTs from '!raw-loader!./examples/multi-combobox-columns/multi-combobox-columns-example.component';
 
 @Component({
     selector: 'platform-multi-combobox-docs',
