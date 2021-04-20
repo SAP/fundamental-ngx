@@ -57,6 +57,7 @@
                 [compact]="contentDensity === 'compact'"
                 class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                 fdp-auto-complete
+                (onComplete)="_onAutoComplete($event)"
                 [inputText]="inputText"
                 [options]="_suggestions"
                 fd-input-group-input
