@@ -75,7 +75,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
-        private _rtlService: RtlService,
+        @Optional() private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -95,7 +95,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        this._rtlService.rtl
+        this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
             .subscribe(isRtl => this._direction = isRtl ? 'rtl' : 'ltr');
 

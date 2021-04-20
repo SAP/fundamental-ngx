@@ -13,7 +13,7 @@
         [hasTitle]="!!title"
         [size]="_getCozyCompactSize(size)"
     >
-        <label fd-toolbar-label>{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
+        <label fd-toolbar-label [id]="tableToolbarTitleId">{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
 
         <fd-toolbar-spacer></fd-toolbar-spacer>
 
@@ -23,6 +23,7 @@
             placeholder="Search"
             [contentDensity]="_getCozyCompactSize(size)"
             [suggestions]="searchSuggestions"
+            [ariaLabelledBy]="tableToolbarTitleId"
             (searchSubmit)="submitSearch($event)"
         ></fdp-search-field>
 

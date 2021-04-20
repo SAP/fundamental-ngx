@@ -17,6 +17,8 @@ import { Table } from '../../table';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarWithTemplate, TABLE_TOOLBAR } from './table-toolbar';
 
+let tableToolbarTitleUniqueId = 0;
+
 /**
  * The component that represents a table toolbar.
  * 
@@ -58,6 +60,9 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     /** @hidden */
     @ViewChild(TemplateRef)
     contentTemplateRef: TemplateRef<any>;
+
+    /** @hidden */
+    tableToolbarTitleId: string = 'fd-table-tolbar-title-' + tableToolbarTitleUniqueId++;
 
     /** @hidden */
     constructor(private readonly _cd: ChangeDetectorRef, private readonly _table: Table) {}

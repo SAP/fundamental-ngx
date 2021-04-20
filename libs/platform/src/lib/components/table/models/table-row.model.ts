@@ -5,7 +5,7 @@
 export class TableRow<T = any> {
     constructor(
         // Row semantic type
-        public type: 'item' | 'group',
+        public type: 'item' | 'group' | 'tree',
         // Indicates if row is selected
         public checked: boolean,
         // Index of a "value" in data source list

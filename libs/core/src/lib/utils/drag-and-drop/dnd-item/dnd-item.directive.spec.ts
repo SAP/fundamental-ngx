@@ -54,7 +54,7 @@ describe('DndItemDirective', () => {
     it('should react to drag release', () => {
         spyOn(directive.released, 'emit');
         (directive as any)._placeholderElement = document.createElement('div');
-        directive.element.nativeElement.appendChild((directive as any)._placeholderElement);
+        directive.elementRef.nativeElement.appendChild((directive as any)._placeholderElement);
         directive.onCdkDragReleased();
         expect((directive as any)._placeholderElement).toBeFalsy();
         expect(directive.released.emit).toHaveBeenCalled();

@@ -19,10 +19,42 @@
         scrollbar-width: none;
     }
 
-    @mixin fd-table-nested-cell-padding($padding: 0, $levels: 0) {
+    @mixin fd-table-nested-cell-padding($levels: 0, $content-density-cozy: false, $include-expand: false) {
+        $initial-padding: 1.5rem;
+        $level-padding: 0.5rem;
+        /* Padding on third level is unique and different for compact  condensed and cozy */
+        $level-three-padding: if($content-density-cozy, 0.5rem, 0.75rem);
+        $expand-padding: if(
+            $include-expand,
+            if($content-density-cozy, 2.75rem, 2rem),
+            0
+        );
+
         @for $i from 1 through $levels {
             &[data-nesting-level='#{$i}'] {
-                padding-left: #{$i * $padding};
+                @if $i == 1 {
+                    padding-left: $initial-padding + $expand-padding;
+
+                    @include fd-rtl() {
+                        padding-left: 0.5rem;
+                        padding-right: $initial-padding + $expand-padding;
+                    }
+                /** As we're started from 0 third level has index 2 */
+                } @else if $i == 2  {
+                    padding-left: $initial-padding + $level-three-padding + $expand-padding;
+
+                    @include fd-rtl() {
+                        padding-left: 0.5rem;
+                        padding-right: $initial-padding + $level-three-padding + $expand-padding;
+                    }
+                } @else {
+                    padding-left: $initial-padding + (($i - 2) * $level-padding) + $level-three-padding + $expand-padding;
+
+                    @include fd-rtl() {
+                        padding-left: 0.5rem;
+                        padding-right: $initial-padding + (($i - 2) * $level-padding) + $level-three-padding + $expand-padding;
+                    }
+                }
             }
         }
     }
@@ -56,6 +88,42 @@
         border: none !important;
     }
 
+    .fd-table__row,
+    .fd-table__cell {
+        height: 2.75rem;
+
+        .fdp-table__cell--selection {
+            min-width: 2.8rem;
+            max-width: 2.8rem;
+            padding: 0 !important;
+        }
+    }
+
+    .fd-table__row {
+        &.fd-dnd-on-drag {
+            &.fd-dnd-placeholder {
+                padding-left: 2.8rem;
+
+                @include fd-rtl() {
+                    padding-left: 0.5rem;
+                }
+            }
+
+            &:not(.fd-dnd-placeholder) {
+                .fdp-table__cell--selection {
+                    top: 0;
+                    transform: translate(-100%, 0);
+                }
+            }
+
+            @include fd-rtl() {
+                .fdp-table__cell--selection {
+                    transform: translate(100%, 0);
+                }
+            }
+        }
+    }
+
     .fd-table__cell {
         box-sizing: border-box;
 
@@ -65,30 +133,121 @@
 
         max-width: 200px;
         min-width: 200px;
-    }
 
-    .fdp-table__cell--selection {
-        min-width: 2.8rem;
-        max-width: 2.8rem;
+        @include fd-table-nested-cell-padding(20, true);
 
-        padding: 0 !important;
+        &.fdp-table__cell--tree-no-expand {
+            @include fd-table-nested-cell-padding(20, true, true);
+        }
+
+        .fdp-table__cell--expand {
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #0854A0;
+            color: var(--sapContent_IconColor, #0854A0);
+            min-width: 2.75rem;
+            max-width: 2.75rem;
+        }
     }
 
     .fd-table__row,
     .fd-table__cell {
         height: 2.75rem;
+        cursor: default;
+
+        &[tabindex="-1"] {
+            outline: none;
+        }
     }
 
-    &.fd-table--compact,
-    &.fd-table--condensed {
+    &.fd-table--condensed  {
+        .fd-table__row,
+        .fd-table__cell {
+            height: 1.563rem;
+        }
+    }
+
+    &.fd-table--compact {
         .fd-table__row,
         .fd-table__cell {
             height: 2rem;
         }
+    }
 
-        .fdp-table__cell--selection {
+    &.fd-table--condensed,
+    &.fd-table--compact {
+        .fdp-table__cell--selection,
+        .fdp-table__cell--expand {
             min-width: 2rem;
             max-width: 2rem;
+        }
+
+        .fd-table__row {
+            &.fd-dnd-on-drag {
+                &.fd-dnd-placeholder {
+                    padding-left: 2rem;
+    
+                    @include fd-rtl() {
+                        padding-left: 0.5rem;
+                    }
+                }
+            }
+        }
+
+        .fd-table__cell {
+            @include fd-table-nested-cell-padding(20);
+        
+            &.fdp-table__cell--tree-no-expand {
+                @include fd-table-nested-cell-padding(20, false, true);
+            }
+        }
+    }
+
+    &.fdp-table--tree {
+        .fd-table__body {
+            .fd-table__cell {
+                &[data-nesting-level='0'] {
+                    padding-left: 0;
+    
+                    @include fd-rtl() {
+                        padding-left: 0.5rem;
+                        padding-right: 0.5;
+                    }
+                }
+    
+                &:hover {
+                    cursor: grab;
+                }
+        
+                &:active {
+                    cursor: grabbing;
+                }
+            }
+        }
+        
+        .fd-replace-indicator {
+            top: auto;
+        }
+        
+        .fd-table__row {
+            .fd-replace-indicator {
+                height: 2.75rem;
+            }
+        }
+
+        &.fd-table--compact {
+            .fd-replace-indicator {
+                height: 2rem;
+            }
+        }
+
+        &.fd-table--condensed {
+            .fd-replace-indicator {
+                height: 1.563rem;
+            }
         }
     }
 
@@ -203,36 +362,12 @@
         .fd-table__cell {
             width: 100%;
             min-width: 100%;
-            z-index: 1;
-            background-color: #f2f2f2;
-            background-color: var(--sapList_HeaderBackground, #f2f2f2);
             padding-left: 0;
             padding-right: 0;
             border-right: none;
-
-            fd-icon {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 0.75rem;
-                color: #0854a0;
-                color: var(--sapButton_TextColor, #0854a0);
-                width: 32px;
-            }
+            background-color: #f2f2f2;
+            background-color: var(--sapList_HeaderBackground, #f2f2f2);
         }
-    }
-
-    .fd-table__cell,
-    .fdp-table__row--group .fd-table__cell {
-        @mixin fd-table-nested-cell-padding($padding: 0, $levels: 0) {
-            @for $i from 1 through $levels {
-                &[data-nesting-level='#{$i}'] {
-                    padding-left: #{$i * $padding};
-                }
-            }
-        }
-
-        @include fd-table-nested-cell-padding(1.5rem, 20);
     }
 
     .fdp-table__empty-table {

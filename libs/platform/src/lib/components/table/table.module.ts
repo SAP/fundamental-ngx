@@ -18,7 +18,8 @@ import {
     LayoutGridModule,
     PanelModule,
     DatePickerModule,
-    BusyIndicatorModule
+    BusyIndicatorModule,
+    DragAndDropModule
 } from '@fundamental-ngx/core';
 
 import { PlatformInputModule } from '../form/input/fdp-input.module';
@@ -83,7 +84,8 @@ import { FdpCellSelectableDirective } from './directives/table-cell-selectable.d
         LayoutGridModule,
         PanelModule,
         DatePickerModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        DragAndDropModule
     ],
     declarations: [
         TableComponent,

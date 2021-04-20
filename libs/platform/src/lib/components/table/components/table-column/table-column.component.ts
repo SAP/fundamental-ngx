@@ -1,11 +1,16 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
+    forwardRef,
+    Host,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
+    SimpleChanges,
+    SkipSelf,
     TemplateRef
 } from '@angular/core';
 
@@ -19,6 +24,7 @@ import { FdpCellDef } from '../../directives/table-cell.directive';
 import { FdpHeaderCellDef } from '../../directives/table-header.directive';
 
 import { TableColumn } from './table-column';
+import { TableService } from '../../table.service';
 
 enum ColumnAlignEnum {
     Start = 'left',
@@ -52,7 +58,7 @@ enum ColumnAlignEnum {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: TableColumn, useExisting: TableColumnComponent }]
 })
-export class TableColumnComponent extends TableColumn implements OnInit, OnDestroy {
+export class TableColumnComponent extends TableColumn implements OnInit, OnChanges, OnDestroy {
     /** Column unique identifier. */
     @Input()
     name: string;
@@ -136,7 +142,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
     private _destroyed = new Subject<void>();
 
     /** @hidden */
-    constructor(private readonly _rtlService: RtlService, private readonly _cd: ChangeDetectorRef) {
+    constructor(
+        private readonly _rtlService: RtlService,
+        @Optional() @SkipSelf() @Host() private readonly _tableService: TableService
+    ) {
         super();
     }
 
@@ -145,6 +154,19 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
         this._validateNameOption();
 
         this._listenToAlign();
+    }
+
+    /** Table won't know about column properties update so notify about it manually
+     * @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this._tableService
+            && (changes.sortable?.currentValue !== changes.sortable?.previousValue
+            || changes.filterable?.currentValue !== changes.filterable?.previousValue
+            || changes.groupable?.currentValue !== changes.groupable?.previousValue
+            || changes.freezable?.currentValue !== changes.freezable?.previousValue)
+        ) {
+            this._tableService.markForCheck();
+        }
     }
 
     /** @hidden */
@@ -184,7 +206,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnDestr
             )
             .subscribe((align) => {
                 this._align = align;
-                this._cd.markForCheck();
+
+                if (this._tableService) {
+                    this._tableService.markForCheck();
+                }
             });
     }
 }
