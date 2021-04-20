@@ -4,7 +4,7 @@ import { DialogService, WizardStepStatus } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-wizard-branching-example',
     templateUrl: './wizard-branching-example.component.html',
-    styleUrls: ['./wizard-example.component.scss'],
+    styleUrls: ['./wizard-branching-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-wizard-example'

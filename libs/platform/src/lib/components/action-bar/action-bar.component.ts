@@ -4,9 +4,9 @@ import {
     Output,
     EventEmitter,
     ChangeDetectorRef,
-    OnInit
+    OnInit, Optional
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/core';
 import { map } from 'rxjs/operators';
 import { BaseComponent } from '../base';
@@ -48,15 +48,13 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
 
     navigationArrow$: Observable<string>;
 
-    constructor(private _rtlService: RtlService, _cd: ChangeDetectorRef) {
+    constructor(@Optional() private _rtlService: RtlService, _cd: ChangeDetectorRef) {
         super(_cd);
     }
 
     ngOnInit(): void {
-
-        this.navigationArrow$ = this._rtlService.rtl.pipe(
-            map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
-        );
+        this.navigationArrow$ = this._rtlService
+            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow')))
+            : of('navigation-left-arrow');
     }
-
 }

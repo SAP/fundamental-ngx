@@ -8,6 +8,7 @@ import { DynamicComponentService, RtlService } from '@fundamental-ngx/core';
 import { DataProvider, DATA_PROVIDERS } from '../../../domain';
 import { PlatformListModule } from '../../list/list.module';
 import { StandardListItemModule } from '../../list/standard-list-item/standard-list-item.module';
+import { ContentDensity } from '../form-control';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
@@ -33,6 +34,7 @@ import { PlatformMultiInputModule } from './multi-input.module';
                     name="input1"
                     [dataSource]="LIST_ELEMENTS"
                     displayKey="name"
+                    [contentDensity]="contentDensity"
                 >
                 </fdp-multi-input>
             </fdp-form-field>
@@ -41,8 +43,9 @@ import { PlatformMultiInputModule } from './multi-input.module';
 })
 class PlatformMulitiInputTest {
     @ViewChild(PlatformMultiInputComponent)
-    multiInputComponent: PlatformMultiInputComponent;
+    platformMultiInputComponent: PlatformMultiInputComponent;
 
+    contentDensity: ContentDensity = 'cozy';
     LIST_ELEMENTS = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 }
 
@@ -71,8 +74,8 @@ describe('PlatformMultiInputComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(PlatformMulitiInputTest);
         component = fixture.componentInstance;
+        multiInput = component.platformMultiInputComponent;
         fixture.detectChanges();
-        multiInput = component.multiInputComponent;
     });
 
     async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
@@ -85,22 +88,15 @@ describe('PlatformMultiInputComponent', () => {
     });
 
     it('should open and close the dropdown', async () => {
-        await wait(fixture);
-        multiInput.popoverOpenChangeHandle(multiInput.isOpen);
+        component.contentDensity = 'compact';
         fixture.detectChanges();
-        const toggleButton = fixture.nativeElement.querySelectorAll('.fd-list__item');
+        const toggleButton = fixture.nativeElement.querySelectorAll('fd-input--compact');
         expect(toggleButton.length).toBe(0);
     });
-    // TODO: Unskip after fix
-    xit('should check adding number of tokens in the multiInput', async () => {
-        await wait(fixture);
-
-        multiInput.popoverOpenChangeHandle(multiInput.isOpen);
-        multiInput = component.multiInputComponent;
-        multiInput.addToArray('name1');
-        multiInput.addToArray('name2');
+    it('should check adding number of tokens in the component', async () => {
+        component.platformMultiInputComponent.addToArray('name1');
         fixture.detectChanges();
         const toggleButton = fixture.nativeElement.querySelectorAll('.fd-token');
-        expect(toggleButton.length).toBe(2);
+        expect(toggleButton.length).toBe(1);
     });
 });

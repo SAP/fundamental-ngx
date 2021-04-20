@@ -38,10 +38,16 @@
                 fd-button
                 [compact]="true"
                 fdType="transparent"
-                i18n="@@platformTableP13ColumnsDialogShowAllOrSelected"
                 (click)="_toggleShowAll()"
             >
-                {_showAllItemsSubject | async, select, true {Show Selected} other {Show All}}
+                <ng-container
+                    *ngIf="(_showAllItemsSubject | async) === true; else showAll"
+                    i18n="@@platformTableP13ColumnsDialogsShowSelected">
+                    Show Selected
+                </ng-container>
+                <ng-template #showAll i18n="@@platformTableP13ColumnsDialogShowAll">
+                    Show all
+                </ng-template>
             </button>
 
             <!-- Active Button Movement -->

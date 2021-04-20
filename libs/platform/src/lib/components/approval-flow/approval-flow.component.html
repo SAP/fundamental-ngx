@@ -121,15 +121,15 @@
 </div>
 
 <ng-template let-messageToast #reminderTemplate>
-    <ng-container i18n="@@platformApprovalFlowReminderMessage">
-        Reminder has been sent to
-        {
-            messageToast.data.targets.length,
-            plural,
-            =1 {{{messageToast.data.targets[0].name}}}
-            other {{{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}}
-            }
+    <ng-container
+        *ngIf="messageToast.data.targets.length === 1; else multipleRecievers"
+        i18n="@@platformApprovalFlowReminderMessage">
+        Reminder has been sent to {{messageToast.data.targets[0].name}}
     </ng-container>
+    
+    <ng-template #multipleRecievers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
+        Reminder has been sent to {{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}
+    </ng-template>
 </ng-template>
 
 <ng-template #approverAddSuccess>

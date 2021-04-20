@@ -222,7 +222,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         if (!this._rtlService) {
             this.dir = 'ltr';
         }
-        this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
+        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this.dir = isRtl ? 'rtl' : 'ltr';
             this._changeDetector.detectChanges();
         });

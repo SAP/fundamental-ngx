@@ -50,13 +50,13 @@
             <div
                 class="approval-flow-node__name"
                 [class.approval-flow-node__name--members-count]="node.approvers.length > 1"
-                i18n="@@platformApprovalFlowNodeMembers">
-                {
-                    node.approvers.length,
-                    plural,
-                    =1 {{{node.approvers[0].name}}}
-                    other {{{node.approvers.length}} members}
-                }
+            >
+                <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
+                    {{node.approvers[0].name}}
+                </ng-container>
+                <ng-template #multipleApprovers i18n="@@platformApprovalFlowNodeMembers">
+                    {{node.approvers.length}} members
+                </ng-template>
             </div>
             <div class="approval-flow-node__description">
                 {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
@@ -66,25 +66,20 @@
                 inverted="true">
                 <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">{{ node.status }}</ng-container>
                 <ng-container *ngIf="checkDueDate && _showDueDateWarning">
-                    <ng-container *ngIf="_dueIn === dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueToday">Due today</ng-container>
-                    <ng-container *ngIf="_dueIn < dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueInXDays">
-                        Due in
-                        {{ dueDateThreshold - _dueIn }}
-                        {
-                            dueDateThreshold - _dueIn,
-                            plural,
-                            =1 {day}
-                            other {days}
-                        }
+                    <ng-container
+                        *ngIf="_dueIn === dueDateThreshold"
+                        i18n="@@platformApprovalFlowNodeStatusDueToday">
+                        Due today
                     </ng-container>
-                    <ng-container *ngIf="_dueIn > dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
-                        {{ _dueIn - dueDateThreshold }}
-                        {
-                            _dueIn - dueDateThreshold,
-                            plural,
-                            =1 {day}
-                            other {days}
-                        } overdue
+                    <ng-container
+                        *ngIf="_dueIn < dueDateThreshold"
+                        i18n="@@platformApprovalFlowNodeStatusDueInXDays">
+                        Due in {{ dueDateThreshold - _dueIn }} days
+                    </ng-container>
+                    <ng-container
+                        *ngIf="_dueIn > dueDateThreshold"
+                        i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
+                        {{ _dueIn - dueDateThreshold }} days overdue
                     </ng-container>
                 </ng-container>
             </fdp-object-status>
