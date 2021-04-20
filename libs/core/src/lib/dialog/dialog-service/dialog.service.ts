@@ -5,6 +5,7 @@ import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-c
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
+import { RtlService } from '../../utils/public_api';
 
 export type DialogContentType = TemplateRef<any> | Type<any> | DialogDefaultContent;
 
@@ -15,7 +16,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
     /** @hidden */
     constructor(
         @Inject(DynamicComponentService) dynamicComponentService: DynamicComponentService,
-        @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig
+        @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig,
+        @Optional() private _rtlService: RtlService
     ) {
         super(dynamicComponentService)
     }
@@ -43,7 +45,10 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
             content,
             DialogContainerComponent,
             dialogConfig,
-            { injector: injector }
+            { 
+                injector: injector,
+                services: [this._rtlService] 
+            }
         );
 
         this._dialogs.push(component);
