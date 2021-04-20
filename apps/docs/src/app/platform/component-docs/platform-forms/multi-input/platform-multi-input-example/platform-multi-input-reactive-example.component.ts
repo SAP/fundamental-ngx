@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 
 @Component({
@@ -10,69 +10,74 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 })
 export class PlatformMultiInputReactiveExampleComponent {
     _datasource = [
-        { firstName: 'Alabama', lastName: 'Montgomery' },
-        { firstName: 'Alaska', lastName: 'Juneau' },
-        { firstName: 'Arizona', lastName: 'Phoenix' },
-        { firstName: 'Arkansas', lastName: 'Little Rock' },
-        { firstName: 'California', lastName: 'Sacramento' },
-        { firstName: 'Colorado', lastName: 'Denver' },
-        { firstName: 'Connecticut', lastName: 'Hartford' },
-        { firstName: 'Kentucky', lastName: 'Frankfort' },
-        { firstName: 'Delaware', lastName: 'Dover' },
-        { firstName: 'Florida', lastName: 'Tallahassee' },
-        { firstName: 'Georgia', lastName: 'Atlanta' },
-        { firstName: 'Hawaii', lastName: 'Honolulu' },
-        { firstName: 'Idaho', lastName: 'Boise' },
-        { firstName: 'Illinois', lastName: 'Springfield' },
-        { firstName: 'Indiana', lastName: 'Indianapolis' },
-        { firstName: 'Iowa', lastName: 'Des Moines' },
-        { firstName: 'Kansas', lastName: 'Topeka' },
-        { firstName: 'Kentucky', lastName: 'Frankfort' },
-        { firstName: 'Louisiana', lastName: 'Baton Rouge' },
-        { firstName: 'Maine', lastName: 'Augusta' },
-        { firstName: 'Maryland', lastName: 'Annapolis' },
-        { firstName: 'Massachusetts', lastName: 'Boston' },
-        { firstName: 'Michigan', lastName: 'Lansing' },
-        { firstName: 'Minnesota', lastName: 'St. Paul' },
-        { firstName: 'Mississippi', lastName: 'Jackson' },
-        { firstName: 'Missouri', lastName: 'Jefferson City' },
-        { firstName: 'Montana', lastName: 'Helena' },
-        { firstName: 'Nebraska', lastName: 'Lincoln' },
-        { firstName: 'Nevada', lastName: 'Carson City' },
-        { firstName: 'New Hampshire', lastName: 'Concord' },
-        { firstName: 'New Jersey', lastName: 'Trenton' },
-        { firstName: 'New Mexico', lastName: 'Santa Fe' },
-        { firstName: 'New York', lastName: 'Albany' },
-        { firstName: 'North Carolina', lastName: 'Raleigh' },
-        { firstName: 'North Dakota', lastName: 'Bismarck' },
-        { firstName: 'Ohio', lastName: 'Columbus' },
-        { firstName: 'Oklahoma', lastName: 'Oklahoma City' },
-        { firstName: 'Oregon', lastName: 'Salem' },
-        { firstName: 'Pennsylvania', lastName: 'Harrisburg' },
-        { firstName: 'Rhode Island', lastName: 'Providence' },
-        { firstName: 'South Carolina', lastName: 'Columbia' },
-        { firstName: 'South Dakota', lastName: 'Pierre' },
-        { firstName: 'Tennessee', lastName: 'Nashville' },
-        { firstName: 'Texas', lastName: 'Austin' },
-        { firstName: 'Utah', lastName: 'Salt Lake City' },
-        { firstName: 'Vermont', lastName: 'Montpelier' },
-        { firstName: 'Virginia', lastName: 'Richmond' },
-        { firstName: 'Washington', lastName: 'Olympia' },
-        { firstName: 'West Virginia', lastName: 'Charleston' },
-        { firstName: 'Wisconsin', lastName: 'Madison' },
-        { firstName: 'Wyoming', lastName: 'Cheyenne' }
+        { country: 'Alabama', city: 'Montgomery' },
+        { country: 'Alaska', city: 'Juneau' },
+        { country: 'Arizona', city: 'Phoenix' },
+        { country: 'Arkansas', city: 'Little Rock' },
+        { country: 'California', city: 'Sacramento' },
+        { country: 'Colorado', city: 'Denver' },
+        { country: 'Connecticut', city: 'Hartford' },
+        { country: 'Kentucky', city: 'Frankfort' },
+        { country: 'Delaware', city: 'Dover' },
+        { country: 'Florida', city: 'Tallahassee' },
+        { country: 'Georgia', city: 'Atlanta' },
+        { country: 'Hawaii', city: 'Honolulu' },
+        { country: 'Idaho', city: 'Boise' },
+        { country: 'Illinois', city: 'Springfield' },
+        { country: 'Indiana', city: 'Indianapolis' },
+        { country: 'Iowa', city: 'Des Moines' },
+        { country: 'Kansas', city: 'Topeka' },
+        { country: 'Kentucky', city: 'Frankfort' },
+        { country: 'Louisiana', city: 'Baton Rouge' },
+        { country: 'Maine', city: 'Augusta' },
+        { country: 'Maryland', city: 'Annapolis' },
+        { country: 'Massachusetts', city: 'Boston' },
+        { country: 'Michigan', city: 'Lansing' },
+        { country: 'Minnesota', city: 'St. Paul' },
+        { country: 'Mississippi', city: 'Jackson' },
+        { country: 'Missouri', city: 'Jefferson City' },
+        { country: 'Montana', city: 'Helena' },
+        { country: 'Nebraska', city: 'Lincoln' },
+        { country: 'Nevada', city: 'Carson City' },
+        { country: 'New Hampshire', city: 'Concord' },
+        { country: 'New Jersey', city: 'Trenton' },
+        { country: 'New Mexico', city: 'Santa Fe' },
+        { country: 'New York', city: 'Albany' },
+        { country: 'North Carolina', city: 'Raleigh' },
+        { country: 'North Dakota', city: 'Bismarck' },
+        { country: 'Ohio', city: 'Columbus' },
+        { country: 'Oklahoma', city: 'Oklahoma City' },
+        { country: 'Oregon', city: 'Salem' },
+        { country: 'Pennsylvania', city: 'Harrisburg' },
+        { country: 'Rhode Island', city: 'Providence' },
+        { country: 'South Carolina', city: 'Columbia' },
+        { country: 'South Dakota', city: 'Pierre' },
+        { country: 'Tennessee', city: 'Nashville' },
+        { country: 'Texas', city: 'Austin' },
+        { country: 'Utah', city: 'Salt Lake City' },
+        { country: 'Vermont', city: 'Montpelier' },
+        { country: 'Virginia', city: 'Richmond' },
+        { country: 'Washington', city: 'Olympia' },
+        { country: 'West Virginia', city: 'Charleston' },
+        { country: 'Wisconsin', city: 'Madison' },
+        { country: 'Wyoming', city: 'Cheyenne' }
     ];
 
-    customForm = new FormGroup({});
+    customForm = new FormGroup({
+        item: new FormControl([])
+    });
     submitted = false;
-    reactiveForm = new FormControl();
+
+    get itemField(): AbstractControl {
+        return this.customForm.controls['item'];
+    }
 
     hasError(): boolean {
-        return this.hasValue() && this.reactiveForm.touched;
+        return this.hasValue() && this.itemField.touched;
     }
 
     hasValue(): boolean {
-        return !!this.reactiveForm.value?.length;
+        return this.itemField.value.length > 0;
     }
 
     onSubmit(): void {
