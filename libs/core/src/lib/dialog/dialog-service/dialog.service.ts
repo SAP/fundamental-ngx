@@ -5,8 +5,7 @@ import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-c
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
-import { RtlService } from '../../utils/public_api';
-import { R } from '@angular/cdk/keycodes';
+import { RtlService } from '../../utils/services/rtl.service';
 
 export type DialogContentType = TemplateRef<any> | Type<any> | DialogDefaultContent;
 

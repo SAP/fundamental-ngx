@@ -25,7 +25,7 @@ import { DialogRef } from './utils/dialog-ref.class';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 import { DialogBase } from './base/dialog-base.class';
-import { RtlService } from '../utils/public_api';
+import { RtlService } from '../utils/services/rtl.service';
 
 /**
  * Dialog component.
@@ -113,9 +113,6 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     private _onHidden: Subscription;
 
     /** @hidden */
-    private _subscription = new Subscription();
-
-    /** @hidden */
     constructor(
         @Optional() public dialogConfig: DialogConfig,
         @Optional() private _dialogRef: DialogRef,
@@ -146,7 +143,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
 
         
         if (this._rtlService) {
-            this._subscription.add(
+            this._subscriptions.add(
                 this._rtlService.rtl.subscribe((rtl) => {
                     this._renderer.setAttribute(this._elementRef.nativeElement, 'dir', rtl ? 'rtl' : 'ltr');
                 })

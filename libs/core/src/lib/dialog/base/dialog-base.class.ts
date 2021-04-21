@@ -32,7 +32,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     protected _focusTrap: FocusTrap;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    protected _subscriptions = new Subscription();
 
     /** @hidden */
     abstract get _ref(): DialogRefBase<any>;
