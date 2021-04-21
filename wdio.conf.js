@@ -395,7 +395,6 @@ exports.config = {
             AllureReporter.addAttachment('page.html', html, 'text/html');
         }
     },
-
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
