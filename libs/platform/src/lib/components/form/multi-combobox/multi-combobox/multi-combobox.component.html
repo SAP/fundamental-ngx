@@ -63,6 +63,7 @@
             <input
                 #searchInputElement
                 fdp-auto-complete
+                (onComplete)="onCompleteTerm($event)"
                 [options]="_suggestions"
                 [inputText]="inputText"
                 [mobile]="mobile"
@@ -94,9 +95,9 @@
             />
         </fd-tokenizer>
     </fd-input-group>
-    <ng-conteiner *ngIf="!isOpen">
+    <ng-container *ngIf="!isOpen">
         <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
-    </ng-conteiner>
+    </ng-container>
 </ng-template>
 
 <ng-template #mobileControlTemplate>
@@ -115,6 +116,7 @@
     >
         <input
             fdp-auto-complete
+            (onComplete)="onCompleteTerm($event)"
             [options]="_suggestions"
             [inputText]="inputText"
             [mobile]="mobile"

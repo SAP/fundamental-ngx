@@ -38,6 +38,7 @@ import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-com
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { FormField } from '../../form-field';
 import { MultiComboboxConfig } from '../multi-combobox.config';
+import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 
 @Component({
     selector: 'fdp-multi-combobox',
@@ -149,8 +150,16 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    toggleSelectionByInputText(): void {
-        const item = this._getSelectItemByInputValue(this.inputText);
+    onCompleteTerm(event: AutoCompleteEvent): void {
+        if (event.forceClose) {
+            this.toggleSelectionByInputText(event.term);
+            this.close();
+        }
+    }
+
+    /** @hidden */
+    toggleSelectionByInputText(text = this.inputText): void {
+        const item = this._getSelectItemByInputValue(text);
         if (item) {
             this.toggleSelection(item);
             this.inputText = '';
@@ -172,9 +181,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
             this.listComponent.items?.first?.focus();
-        }
-        if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            this.tokenizer.focusTokenElement(this.tokenizer.tokenList.length - 1);
         }
     }
 
