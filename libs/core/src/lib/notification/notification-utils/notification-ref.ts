@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
  * For a template, it is declared as part of the implicit context, see examples.
  */
 export class NotificationRef {
+    /** @hidden */
     protected readonly _afterClosed = new Subject<any>();
 
     /**

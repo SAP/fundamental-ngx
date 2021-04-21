@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NotificationService } from '@fundamental-ngx/core';
-import { NotificationContentComponent } from './notification-content.component';
+import { NotificationExampleContentComponent } from './notification-content.component';
 
 @Component({
     selector: 'fd-notification-component-as-content-example',
@@ -15,7 +15,7 @@ export class NotificationComponentAsContentExampleComponent {
     constructor(private notificationService: NotificationService) {}
 
     open(): void {
-        const notificationService = this.notificationService.open(NotificationContentComponent, {
+        const notificationService = this.notificationService.open(NotificationExampleContentComponent, {
             data: {
                 title: 'Notification Title',
                 paragraph: 'Notification Description',

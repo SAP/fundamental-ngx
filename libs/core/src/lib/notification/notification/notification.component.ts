@@ -30,7 +30,10 @@ import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-notification',
-    templateUrl: './notification.component.html',
+    template: `
+    <ng-content></ng-content>
+    <ng-container #vc></ng-container>
+    `,
     styleUrls: ['./notification.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -42,32 +45,39 @@ import { filter } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
+    /** @hidden */
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
 
+    /** User defined width for the notification */
     @HostBinding('style.width')
     @Input() width:  string;
 
+    /** Whether the notificatioon is in mobile mode */
+    @Input() mobile: boolean;
+
+    /** ID of the notification */
     id: string;
 
+    /** Whether the notification is dismissed with the ESC key */
     escKeyCloseable = false;
 
+    /** Whether the notification should close with router change */
     closeOnNavigation = true;
 
+    /** aria-labelledby attribute for the notification component element. */
     ariaLabelledBy: string = null;
 
+    /** aria-label attribute for the notification component element. */
     ariaLabel: string = null;
 
+    /** aria-describedby attribute for the notification component element. */
     ariaDescribedBy: string = null;
 
+    /** Reference to the child content */
     childContent: TemplateRef<any> | Type<any> = undefined;
 
-    backdropClickCloseable = true;
-
-    hasBackdrop = true;
-
-    notificationPanelClass = '';
-
+    /** Reference to the component or the embedded view */
     public componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
@@ -89,6 +99,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
+        this._setProperties();
     }
 
     /** @hidden */
@@ -112,14 +123,14 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden Listen and close notification on Escape key */
     @HostListener('window:keyup', ['$event'])
-    closeNotificationEsc(event: KeyboardEvent): void {
+    _closeNotificationEsc(event: KeyboardEvent): void {
         if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this.notificationRef) {
             this.notificationRef.dismiss('escape');
         }
     }
 
-     /** @hidden Listen on NavigationStart event and dismiss the dialog */
-     private _listenAndCloseOnNavigation(): void {
+    /** @hidden Listen on NavigationStart event and dismiss the dialog */
+    private _listenAndCloseOnNavigation(): void {
         if (this._router && this.notificationRef) {
             this._subscriptions.add(
                 this._router.events.pipe(
@@ -149,6 +160,9 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     _setProperties(): void {
         this._addClassToElement('fd-notification');
         this._addClassToElement('fd-notification-custom-block');
+        if (this.mobile) {
+            this._addClassToElement('fd-notification--mobile');
+        }
     }
 
     /** @hidden */

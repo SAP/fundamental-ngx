@@ -1,3 +1,4 @@
+<h4>Notification with avatar, success indicator and unread title</h4>
 <fd-notification>
     <fd-notification-body>
         <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
@@ -8,48 +9,41 @@
                     Your leave request has been accepted
                 </h2>
             </fd-notification-header>
-
             <p fd-notification-paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-
             <fd-notification-footer>
-                <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                <span fd-notification-footer-content>SAP Analytics Cloud</span>
                 <span fd-notification-separator></span>
-                <span fd-notification-footer-content>7 minutes ago</span>
+                <span fd-notification-footer-content>Just Now</span>
             </fd-notification-footer>
         </fd-notification-content>
-
-
         <fd-notification-actions>
             <button fd-button label="Open" [compact]="true"></button>
             <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
         </fd-notification-actions>
     </fd-notification-body>
 </fd-notification>
-<br>
+
+<h4>Notification with error indicator and no avatar</h4>
 <fd-notification>
     <fd-notification-body>
         <fd-notification-content>
             <fd-notification-header>
-                <div fd-notification-indicator type="success"></div>
+                <div fd-notification-indicator type="error"></div>
                 <h2 fd-notification-title>
                     Your leave request has been accepted
                 </h2>
             </fd-notification-header>
-
             <p fd-notification-paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-
             <fd-notification-footer>
                 <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
                 <span fd-notification-separator></span>
                 <span fd-notification-footer-content>7 minutes ago</span>
             </fd-notification-footer>
         </fd-notification-content>
-
-
         <fd-notification-actions>
             <button fd-button label="Open" [compact]="true"></button>
             <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
@@ -57,8 +51,7 @@
     </fd-notification-body>
 </fd-notification>
 
-<br>
-
+<h4>Notification with message strip, unread title and custom width</h4>
 <fd-notification width="30rem">
     <fd-message-strip type="warning">
         A dismissible warning message strip.
@@ -67,27 +60,66 @@
         <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
         <fd-notification-content>
             <fd-notification-header>
-                <div fd-notification-indicator type="success"></div>
                 <h2 fd-notification-title [unread]="true">
                     Your leave request has been accepted
                 </h2>
             </fd-notification-header>
-
             <p fd-notification-paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-
             <fd-notification-footer>
                 <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
                 <span fd-notification-separator></span>
                 <span fd-notification-footer-content>7 minutes ago</span>
             </fd-notification-footer>
         </fd-notification-content>
-
-
         <fd-notification-actions>
             <button fd-button label="Open" [compact]="true"></button>
             <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
         </fd-notification-actions>
     </fd-notification-body>
 </fd-notification>
+
+<h4>Notification in mobile mode</h4>
+<div style="max-width: 400px;">
+    <fd-notification [mobile]="true">
+        <fd-notification-body>
+            <fd-notification-content>
+                <fd-notification-header>
+                    <div fd-notification-indicator type="information"></div>
+                    <h2 fd-notification-title [unread]="true">
+                        Your leave request has been accepted
+                    </h2>
+                </fd-notification-header>
+                <p fd-notification-paragraph>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <fd-notification-footer>
+                    <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                    <span fd-notification-separator></span>
+                    <span fd-notification-footer-content>7 minutes ago</span>
+                </fd-notification-footer>
+            </fd-notification-content>
+            <fd-notification-actions>
+                <button
+                    fd-button 
+                    fdType="transparent" 
+                    glyph="overflow" 
+                    [fdMenuTrigger]="menu">
+                </button>
+                <fd-menu #menu placement="bottom-end">
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-interactive>
+                            <span fd-menu-title>Accept</span>
+                        </a>
+                    </li>
+                    <li fd-menu-item>
+                        <a href="#" fd-menu-interactive>
+                            <span fd-menu-title>Reject</span>
+                        </a>
+                    </li>
+                </fd-menu>   
+            </fd-notification-actions>
+        </fd-notification-body>
+    </fd-notification>
+</div>

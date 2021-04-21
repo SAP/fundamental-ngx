@@ -11,8 +11,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 flex-direction: column;
                 z-index: 5000;
                 align-items: flex-end;
-                top: 1rem;
-                right: 1rem;
+                top: 4.75rem;
+                right: 2rem;
             }
         `
     ],

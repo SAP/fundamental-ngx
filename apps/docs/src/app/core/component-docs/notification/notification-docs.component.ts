@@ -7,6 +7,8 @@ import * as optionsH from '!raw-loader!./examples/notification-options/notificat
 import * as templateTs from '!raw-loader!./examples/template-as-content/notification-open-template-example.component.ts';
 import * as templateH from '!raw-loader!./examples/template-as-content/notification-open-template-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import * as groupTs from '!raw-loader!./examples/notification-group/notification-group-example.component.ts';
+import * as groupH from '!raw-loader!./examples/notification-group/notification-group-example.component.html';
 
 @Component({
     selector: 'app-notification',
@@ -27,12 +29,10 @@ export class NotificationDocsComponent {
             code: contentTs,
             name: 'Content',
             fileName: 'notification-content',
-            component: 'NotificationContentComponent',
+            component: 'NotificationExampleContentComponent',
             entryComponent: true
         }
     ];
-
-    
 
     options: ExampleFile[] = [
         {
@@ -59,6 +59,20 @@ export class NotificationDocsComponent {
             language: 'html',
             code: templateH,
             fileName: 'notification-open-template-example'
+        }
+    ];
+
+    group: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: groupTs,
+            fileName: 'notification-group-example',
+            component: 'NotificationGroupExampleComponent'
+        },
+        {
+            language: 'html',
+            code: groupH,
+            fileName: 'notification-group-example'
         }
     ];
 }

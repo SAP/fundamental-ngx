@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NotificationRef } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fd-notification-content2',
+    selector: 'fd-notification-example-content',
     template: `
     <fd-message-strip type="success" [dismissible]="false">
         A warning message strip.
@@ -44,6 +44,6 @@ import { NotificationRef } from '@fundamental-ngx/core';
     </fd-notification-body>
     `
 })
-export class NotificationContentComponent {
+export class NotificationExampleContentComponent {
     constructor(public notificationRef: NotificationRef) {}
 }

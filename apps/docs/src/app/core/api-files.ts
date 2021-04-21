@@ -192,14 +192,12 @@ export const API_FILES = {
         'NotificationSeparatorDirective',
         'NotificationLimitTitleDirective',
         'NotificationLimitDescriptionDirective',
-
-
         'NotificationActionsComponent',
         'NotificationContentComponent',
         'NotificationLimitComponent',
         'NotificationGroupHeaderComponent',
-
-
+        'NotificationGroupComponent',
+        'NotificationGroupListComponent',
         'NotificationComponent',
         'NotificationHeaderComponent',
         'NotificationBodyComponent',

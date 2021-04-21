@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     Input,
     ViewEncapsulation,
     OnChanges,
@@ -10,19 +11,22 @@ import {
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 @Component({
-    selector: 'fd-notification-body',
+    selector: 'fd-notification-group',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationBodyComponent implements OnChanges, OnInit, CssClassBuilder {
+export class NotificationGroupComponent  implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
     @Input()
     class: string;
 
-    /** Whether the Notification has message strip */
-    @Input() 
-    hasMessage = false;
+    /** Whether the Notification Group is in mobile mode */
+    @Input() mobile = false;
+
+    /** User defined width for the notification */
+    @HostBinding('style.width')
+    @Input() width:  string;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
@@ -38,8 +42,8 @@ export class NotificationBodyComponent implements OnChanges, OnInit, CssClassBui
      */
     buildComponentCssClass(): string[] {
         return [
-            'fd-notification__body',
-            this.hasMessage ? 'fd-notification__body--message' : '',
+            'fd-notification fd-notification--group fd-notification-custom-block',
+            this.mobile ? 'fd-notification--mobile' : '',
             this.class
         ];
     }

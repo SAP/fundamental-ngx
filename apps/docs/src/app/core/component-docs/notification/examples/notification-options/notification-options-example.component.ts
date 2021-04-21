@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
     templateUrl: './notification-options-example.component.html'
 })
 export class NotificationOptionsExampleComponent {
+    expanded = true;
 }
