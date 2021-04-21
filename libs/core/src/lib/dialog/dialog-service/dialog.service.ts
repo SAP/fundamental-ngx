@@ -6,6 +6,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { RtlService } from '../../utils/public_api';
+import { R } from '@angular/cdk/keycodes';
 
 export type DialogContentType = TemplateRef<any> | Type<any> | DialogDefaultContent;
 
@@ -36,7 +37,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         const injector = Injector.create({
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
-                { provide: DialogRef, useValue: dialogRef }
+                { provide: DialogRef, useValue: dialogRef },
+                { provide: RtlService, useValue: this._rtlService }
             ]
         });
 
@@ -47,7 +49,6 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
             dialogConfig,
             { 
                 injector: injector,
-                services: [this._rtlService] 
             }
         );
 
