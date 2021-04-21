@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { A, DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Direction } from '@angular/cdk/bidi';
 import { of } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
@@ -275,29 +275,27 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    onItemKeyDownHandler(event: KeyboardEvent, item: SelectableOptionItem): void {
-        // unselect all
-        if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
+    onItemKeyDownHandler(event: KeyboardEvent, item: SelectableOptionItem, index = 0): void {
+        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this._focusToSearchField();
+            this.close();
+        } else if (event.shiftKey && KeyUtil.isKeyCode(event, TAB)) {
+            event.preventDefault();
+            this.listComponent?.setItemActive(index - 1);
+        } else if (KeyUtil.isKeyCode(event, TAB)) {
+            event.preventDefault();
+            this.listComponent?.setItemActive(index + 1);
+        } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
+            // unselect all
             event.preventDefault();
             this.handleSelectAllItems(false);
-            return;
-        }
-
-        // select all
-        if ((event.ctrlKey || event.metaKey) && KeyUtil.isKeyCode(event, A)) {
+        } else if ((event.ctrlKey || event.metaKey) && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this.handleSelectAllItems(true);
+        } else if (!KeyUtil.isKeyCode(event, ENTER) && !KeyUtil.isKeyCode(event, SPACE)) {
             return;
-        }
-
-        if (!KeyUtil.isKeyCode(event, ENTER) && !KeyUtil.isKeyCode(event, SPACE)) {
-            return;
-        }
-
-        if (KeyUtil.isKeyCode(event, ENTER) && !this.mobile) {
+        } else if (KeyUtil.isKeyCode(event, ENTER) && !this.mobile) {
             this.close();
-
-            return;
         }
     }
 

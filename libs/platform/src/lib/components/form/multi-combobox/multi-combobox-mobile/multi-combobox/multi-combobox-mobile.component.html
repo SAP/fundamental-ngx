@@ -13,7 +13,25 @@
                         <ng-container *ngTemplateOutlet="childContent?.controlTemplate"></ng-container>
                     </fd-bar-element>
                     <fd-bar-element class="custom-multi-combobox-select-all-bar-element">
-                        <button fd-button glyph="multiselect-all" [fdType]="(selectedShown$ | async) ? 'emphasized' : 'transparent'" (click)="showSelected()"></button>
+                        <button *ngIf="(selectedShown$ | async)"
+                                fd-button
+                                glyph="multiselect-all"
+                                fdType="emphasized"
+                                title="Show all items"
+                                i18n-title="@@platformMultiCombobox.Mobile.ShowAllItemsButton"
+                                aria-label="Show all items"
+                                i18n-aria-label="@@platformMultiCombobox.Mobile.ShowAllItemsButton"
+                                (click)="showSelected()"></button>
+
+                        <button *ngIf="!(selectedShown$ | async)"
+                                fd-button
+                                glyph="multiselect-all"
+                                fdType="transparent"
+                                title="Show selected items"
+                                i18n-title="@@platformMultiCombobox.Mobile.ShowSelectedItemsButton"
+                                aria-label="Show selected items"
+                                i18n-aria-label="@@platformMultiCombobox.Mobile.ShowSelectedItemsButton"
+                                (click)="showSelected()"></button>
                     </fd-bar-element>
                 </div>
             </ng-template>

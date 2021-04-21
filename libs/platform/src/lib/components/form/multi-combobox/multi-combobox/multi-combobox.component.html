@@ -169,7 +169,7 @@
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
                 <ng-container *ngIf="!groupItemTemplate">
-                    <label fd-list-group-header role="group">
+                    <label fd-list-item fd-list-group-header role="group">
                         <span fd-list-title>{{ group.label }}</span>
                     </label>
                 </ng-container>
@@ -187,7 +187,7 @@
                     role="option"
                     tabindex="0"
                     (click)="!mobile && close()"
-                    (keyDown)="onItemKeyDownHandler($event, optionItem)"
+                    (keyDown)="onItemKeyDownHandler($event, optionItem, i)"
                     [selected]="optionItem.selected"
                 >
                     <fd-checkbox
@@ -210,7 +210,7 @@
                 role="option"
                 tabindex="0"
                 (click)="!mobile && close()"
-                (keyDown)="onItemKeyDownHandler($event, optionItem)"
+                (keyDown)="onItemKeyDownHandler($event, optionItem, i)"
                 [selected]="optionItem.selected"
             >
                 <fd-checkbox

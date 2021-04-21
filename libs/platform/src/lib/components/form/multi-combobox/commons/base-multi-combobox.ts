@@ -494,7 +494,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** Method passed to list component */
     handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
-            this.searchInputElement.elementRef().nativeElement.focus();
+            this.searchInputElement?.elementRef().nativeElement.focus();
         }
     }
 
