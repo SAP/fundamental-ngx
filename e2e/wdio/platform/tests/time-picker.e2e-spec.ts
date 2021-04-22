@@ -161,7 +161,7 @@ describe('Time picker suite', function() {
         timePickerPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         beforeEach(() => {
             refreshPage();
             waitForPresent(timePickerInput);

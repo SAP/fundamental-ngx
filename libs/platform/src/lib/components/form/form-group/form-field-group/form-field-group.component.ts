@@ -4,17 +4,22 @@ import {
     ContentChildren,
     forwardRef,
     Input,
-    OnInit,
     Provider,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+
 import { FormField } from '../../form-field';
-import { FormGroupContainer} from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
+import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 
 export const formFieldGroupProvider: Provider = {
     provide: FormFieldGroup,
+    useExisting: forwardRef(() => FormFieldGroupComponent)
+};
+
+export const formGroupChildProvider: Provider = {
+    provide: FORM_GROUP_CHILD_FIELD_TOKEN,
     useExisting: forwardRef(() => FormFieldGroupComponent)
 };
 
@@ -24,28 +29,14 @@ export const formFieldGroupProvider: Provider = {
     styleUrls: ['./form-field-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [formFieldGroupProvider]
+    providers: [formFieldGroupProvider, formGroupChildProvider]
 })
-export class FormFieldGroupComponent implements FormFieldGroup, OnInit {
+export class FormFieldGroupComponent implements FormFieldGroup {
     /** Group header title*/
     @Input()
     label: string;
 
     /** Get form fields wrapped into form field group */
-    @ContentChildren(FormField) fields: QueryList<FormField>;
-
-    constructor(
-        private readonly formGroupContainer: FormGroupContainer
-    ) {
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this._addFormFieldGroup();
-    }
-
-    /** @hidden */
-    private _addFormFieldGroup(): void {
-        this.formGroupContainer.addFormFieldGroup(this);
-    }
- }
+    @ContentChildren(FormField)
+    fields: QueryList<FormField>;
+}
