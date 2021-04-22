@@ -5,6 +5,7 @@ import {
     Component, 
     ContentChild,
     forwardRef,
+    Input,
     OnDestroy,
     ViewEncapsulation 
 } from '@angular/core';
