@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ChainingStrategyFieldsMap } from '../../../domain/public_api';
+import { ChainingStrategyFieldsMap } from '../../../domain/chaining-policy';
 
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';

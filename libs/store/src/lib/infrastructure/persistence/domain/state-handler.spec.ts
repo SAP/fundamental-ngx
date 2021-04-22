@@ -1,7 +1,8 @@
 import { DefaultEntityStore } from '../store';
 import { QueryBuilder } from '../query/query-builder';
-import { BaseEntity, BaseValue, RESTResource } from '@fundamental-ngx/store';
-import { Type } from '../../../domain/public_api'
+import { BaseEntity, BaseValue } from '../domain/base-classes';
+import { RESTResource } from '../../../domain/decorators';
+import { Type } from '../../../domain/utility';
 import { EntityCollectionService } from '../store';
 
 type IdentityKey = string | number;

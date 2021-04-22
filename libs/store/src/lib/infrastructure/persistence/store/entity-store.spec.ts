@@ -2,7 +2,8 @@ import { of } from 'rxjs';
 
 import { DefaultEntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
-import { IdentityKey, Type } from '../../../domain/public_api';
+import { Type } from '../../../domain/utility'
+import { IdentityKey } from '../../../domain/entity';
 import { BaseEntity } from '../domain/base-classes/base-entity';
 import { EntityCollectionService } from './entity-collection-service';
 

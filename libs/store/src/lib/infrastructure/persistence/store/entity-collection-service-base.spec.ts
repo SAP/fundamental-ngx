@@ -6,7 +6,8 @@ import { EntityMetaOptions, EntityMetaOptionsService } from '../utils/entity-opt
 import { EntityCollectionService } from './entity-collection-service';
 import { DefaultEntityCollectionService } from './entity-collection-service-base';
 import { EntityCollectionsService } from './entity-collections-service';
-import { BaseEntity, IdentityKey } from '@fundamental-ngx/store';
+import { BaseEntity } from '../domain/base-classes/base-entity';
+import { IdentityKey } from '../../../domain/entity';
 
 describe('EntityCollectionService', () => {
     let service: DefaultEntityCollectionService<Hero>;

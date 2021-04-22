@@ -1,6 +1,5 @@
-import 'reflect-metadata';
 import { BaseValue } from '../../persistence/domain/base-classes/base-value';
-import { Type } from '../../../domain/public_api';
+import { Type } from '../../../domain/utility';
 
 export function instanceForType<T>(Type: Type<T>, fromState = {}) {
     const newState = new Type(fromState);
