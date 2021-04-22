@@ -317,7 +317,7 @@ describe('Date picker suite', function() {
             expect(datePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check active input visual regression', () => {
+        xit('should check active input visual regression', () => {
             const activeDatePickerLength = getElementArrayLength(activeDatePicker);
             for (let i = 0; i < activeDatePickerLength; i++) {
                 scrollIntoView(activeDatePicker, i);
@@ -326,7 +326,7 @@ describe('Date picker suite', function() {
             }
         });
 
-        it('should check active button visual regression', () => {
+        xit('should check active button visual regression', () => {
             const activeButtonDatePickerLength = getElementArrayLength(buttonDatePicker);
             for (let i = 0; i < activeButtonDatePickerLength - 1; i++) {
                 sendKeys(['Escape']);
@@ -339,18 +339,18 @@ describe('Date picker suite', function() {
         });
 
 
-        it('should check french button visual regression', () => {
+        xit('should check french button visual regression', () => {
             scrollIntoView(buttonFrench);
             checkElementStates(buttonFrench, frenchButton, button);
         });
 
 
-        it('should check german button visual regression', () => {
+        xit('should check german button visual regression', () => {
             scrollIntoView(buttonGerman);
             checkElementStates(buttonGerman, germanButton, button);
         });
 
-        it('should check bulgarian button visual regression', () => {
+        xit('should check bulgarian button visual regression', () => {
             scrollIntoView(buttonBulgarian);
             checkElementStates(buttonBulgarian, bulgarianButton, button);
         });
