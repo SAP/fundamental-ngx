@@ -13,8 +13,8 @@ import { TableDataProvider, TableDataSource } from './domain';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableService } from './table.service';
 import { PlatformButtonModule } from '../button/public_api';
-import { TableRowSelectionChangeEvent } from './models';
-import {TableScrollerDirective, TableScrollableDirective} from './directives';
+import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
+import { TableScrollerDirective, TableScrollableDirective} from './directives';
 
 interface SourceItem {
     id: string;
@@ -922,6 +922,284 @@ describe('TableComponent internal', () => {
             
             expect(tableBodyRows.length).toBe(200);
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(4);
+        });
+    });
+})();
+
+interface SourceTreeItem {
+    name: string,
+    children: SourceTreeItem[] | SourceItem[]
+}
+
+const treeItemParentsCount = 10;
+const treeItemsChildrenPerParentCount = 1;
+const totalTreeItems = treeItemParentsCount + (treeItemParentsCount * treeItemsChildrenPerParentCount);
+
+const generateTreeItems = (length = 50): SourceTreeItem[] =>
+    Array.from(Array(length)).map(
+        (_, index): SourceTreeItem => ({
+            name: `${index}`,
+            children: generateItems(treeItemsChildrenPerParentCount)
+        })
+    );
+
+class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
+    items = generateTreeItems(treeItemParentsCount);
+    totalItems = totalTreeItems;
+
+    fetch(state: TableState): Observable<SourceTreeItem[]> {
+        return of(this.items);
+    }
+}
+
+(function (): void {
+    @Component({
+        template: `
+            <fdp-table
+                contentDensity="compact"
+                selectionMode="multiple"
+                [dataSource]="source"
+                [isTreeTable]="true"
+                [relationKey]="relationKey"
+            >
+                <fdp-column name="name" key="name" label="Name"></fdp-column>
+                <fdp-column name="description" key="description" label="Description"></fdp-column>
+                <fdp-column name="status" key="status" label="Status"></fdp-column>
+            </fdp-table>
+        `
+    })
+    class TableHostComponent {
+        @ViewChild(TableComponent) table: TableComponent;
+
+        source = new TableDataSource(new TreeTableDataProviderMock());
+        relationKey = 'children';
+    }
+
+    describe('TableComponent Tree View', async () => {
+        let hostComponent: TableHostComponent;
+        let fixture: ComponentFixture<TableHostComponent>;
+        let tableComponent: TableComponent<SourceItem>;
+
+        let tableBodyRows: DebugElement[] = [];
+        let tableBodyTreeRows: DebugElement[] = [];
+        let tableRowTogglerCellsArray: DebugElement[] = [];
+
+        const calculateTableElementsMetaData = () => {
+            tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
+            tableBodyTreeRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fdp-table__row--tree'));
+            tableRowTogglerCellsArray = tableBodyTreeRows.map((row) => row.query(By.css('.fdp-table__cell--tree')));
+        };
+
+        beforeEach(
+            waitForAsync(() => {
+                TestBed.configureTestingModule({
+                    imports: [PlatformTableModule],
+                    declarations: [TableHostComponent],
+                    providers: [RtlService]
+                }).compileComponents();
+            })
+        );
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(TableHostComponent);
+            hostComponent = fixture.componentInstance;
+            spyOn(hostComponent.source, 'fetch').and.callThrough();
+
+            fixture.detectChanges();
+
+            tableComponent = hostComponent.table;
+        });
+
+        beforeEach(() => {
+            calculateTableElementsMetaData();
+        });
+
+        it('should generate rows for provided items', () => {
+            expect(tableComponent._tableRows.length).toEqual(totalTreeItems);
+
+            expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+        });
+
+        describe('Collapsing/Expanding', () => {
+            let firstRowToggler: DebugElement;
+            let secondRowToggler: DebugElement;
+
+            beforeEach(() => {
+                calculateTableElementsMetaData();
+
+                firstRowToggler = tableRowTogglerCellsArray[0];
+                secondRowToggler = tableRowTogglerCellsArray[1];
+            });
+
+            it('should emit event when parent item collapsed/expanded', () => {
+                const emitSpy = spyOn(tableComponent.rowToggleOpenState, 'emit').and.callThrough();
+    
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+    
+                const event1 = new TableRowToggleOpenStateEvent<SourceItem>(
+                    0,
+                    tableComponent._tableRowsVisible[0].value,
+                    true
+                );
+
+                expect(emitSpy).toHaveBeenCalledWith(event1);
+
+                secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+                
+                const secondRowIndex = 1 + treeItemsChildrenPerParentCount;
+                const event2 = new TableRowToggleOpenStateEvent<SourceItem>(
+                    secondRowIndex,
+                    tableComponent._tableRowsVisible[secondRowIndex].value,
+                    true
+                );
+
+                expect(emitSpy).toHaveBeenCalledTimes(2);
+                expect(emitSpy.calls.argsFor(1)).toEqual([event2]);
+            });
+
+            it('should react to toggling/collapsing with changing rows count', () => {
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyRows.length).toEqual(
+                    treeItemParentsCount + treeItemsChildrenPerParentCount
+                );
+                
+                secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyRows.length).toEqual(
+                    treeItemParentsCount + treeItemsChildrenPerParentCount * 2
+                );
+
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyRows.length).toEqual(
+                    treeItemParentsCount + treeItemsChildrenPerParentCount
+                );
+                
+                secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount);
+            });
+        });
+
+        describe('Drag & Drop', () => {
+            let firstRowToggler: DebugElement;
+
+            beforeEach(() => {
+                calculateTableElementsMetaData();
+
+                firstRowToggler = tableRowTogglerCellsArray[0];
+            });
+
+            it('should rearrange table rows on drop', () => {
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+                
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 0,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyRows.length).toEqual(
+                    treeItemParentsCount + treeItemsChildrenPerParentCount * 1
+                );
+            });
+
+            it('should emit event after rearranging rows', () => {
+                const emitSpy = spyOn(tableComponent.rowsRearrange, 'emit').and.callThrough();
+
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+                
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 0,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();
+
+                expect(emitSpy).toHaveBeenCalled();
+            });
+
+            it('should update dragged rows attributes', () => {
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 0,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();   
+                
+                calculateTableElementsMetaData();
+
+                expect(tableComponent._tableRows[0].expanded).toBeTrue();
+                expect(tableComponent._tableRows[2].level).toEqual(1);
+                expect(tableComponent._tableRows[3].level).toEqual(2);
+            });
+
+            it('should prevent from dropping row inside itself', () => {
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyRows.length).toEqual(
+                    treeItemParentsCount + treeItemsChildrenPerParentCount * 1
+                );
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 1,
+                    draggedItemIndex: 0
+                });
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableComponent._tableRowsVisible[0].level).toEqual(0);
+            });
+
+            it('should change type for row with 0 children to "item"', () => {
+                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+
+                firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
+
+                fixture.detectChanges();
+
+                tableComponent._dragDropItemDrop({
+                    items: [],
+                    replacedItemIndex: 2,
+                    draggedItemIndex: 1
+                });
+
+                fixture.detectChanges();
+
+                calculateTableElementsMetaData();
+
+                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount - 1);
+            });
         });
     });
 })();

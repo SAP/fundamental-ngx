@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 
-import { TokenModule, PipeModule, InputGroupModule, FormModule } from '@fundamental-ngx/core';
+import { PipeModule, InputGroupModule, FormModule, TokenModule } from '@fundamental-ngx/core';
 
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformListModule } from '../../list/list.module';
