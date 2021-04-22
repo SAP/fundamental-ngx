@@ -1,8 +1,26 @@
 import { InfoLabelPO } from '../pages/info-label.po';
-import { semanticColorsArr, ariaLabelAttribute, ariaLabelExample, ariaLabelledByAttribute, ariaSuccessLabel, backgroundColor,
-cssAlignmentAttribute, decimalLabel, defaultLabelText, iconInfoLabelText, infoLabelText, labelContentAlignment, labelIconAttribute,
-labelIconAttributeValue, largeNumberLabel, numberLabel, safariAriaLabelExample, safariAriaSuccessLabel, safariDefaultLabelText,
-safariIconInfoLabelText, safariInfoLabelText, safariLargeNumberLabel} from '../fixtures/appData/info-label-page-contents';
+import {
+    ariaLabelAttribute,
+    ariaLabelExample,
+    ariaLabelledByAttribute,
+    ariaSuccessLabel,
+    backgroundColor,
+    cssAlignmentAttribute,
+    decimalLabel,
+    defaultLabelText,
+    infoLabelText,
+    labelContentAlignment,
+    labelIconAttribute,
+    labelIconAttributeValue,
+    largeNumberLabel,
+    numberLabel,
+    safariAriaLabelExample,
+    safariAriaSuccessLabel,
+    safariIconInfoLabelText,
+    safariInfoLabelText,
+    safariLargeNumberLabel,
+    semanticColorsArr
+} from '../fixtures/appData/info-label-page-contents';
 import {
     browserIsSafari,
     elementArray,

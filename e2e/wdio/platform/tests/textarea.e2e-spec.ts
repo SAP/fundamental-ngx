@@ -1,7 +1,19 @@
 import { TextareaPo } from '../pages/textarea.po';
-import {readonly_text_area_label, basic_text_area_label, basic_text_area_placeholder, basic_text_area_popover, compact_text_area_label,
-disabled_text_area_label, no_platforms_form_text_area_label} from '../fixtures/appData/textarea-page-content';
-import {multiple_lines_text, fifty_character_string, forty_nine_character_string, multiple_lines_text_8_lines} from '../fixtures/testData/textarea';
+import {
+    basic_text_area_label,
+    basic_text_area_placeholder,
+    basic_text_area_popover,
+    compact_text_area_label,
+    disabled_text_area_label,
+    no_platforms_form_text_area_label,
+    readonly_text_area_label
+} from '../fixtures/appData/textarea-page-content';
+import {
+    fifty_character_string,
+    forty_nine_character_string,
+    multiple_lines_text,
+    multiple_lines_text_8_lines
+} from '../fixtures/testData/textarea';
 import {
     addValue,
     browserIsIEorSafari,

@@ -4,8 +4,10 @@ import {
     click,
     getCSSPropertyByName,
     getElementArrayLength,
-    getText, refreshPage,
-    scrollIntoView, waitForPresent
+    getText,
+    refreshPage,
+    scrollIntoView,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     backgroundColorAttribute,
@@ -45,7 +47,7 @@ describe('object status test suite', function() {
     describe('default object status example', function() {
         it('should check default status', () => {
             expect(getText(defaultExamples + text)).toBe(defaultStatusText);
-            expect(getCSSPropertyByName(defaultExamples + text, colorAttr).value).toContain(semanticColors[4])
+            expect(getCSSPropertyByName(defaultExamples + text, colorAttr).value).toContain(semanticColors[4]);
         });
     });
 
@@ -81,13 +83,13 @@ describe('object status test suite', function() {
 
     describe('clickable object status example', function() {
         it('should check statuses are clickable', () => {
-           const statusCount = getElementArrayLength(clickableExamples + status);
+            const statusCount = getElementArrayLength(clickableExamples + status);
 
-           for (let i = 0; statusCount > i; i++) {
-               scrollIntoView(clickableExamples + status, i);
-               click(clickableExamples + status, i);
-               acceptAlert();
-           }
+            for (let i = 0; statusCount > i; i++) {
+                scrollIntoView(clickableExamples + status, i);
+                click(clickableExamples + status, i);
+                acceptAlert();
+            }
         });
     });
 
@@ -119,7 +121,7 @@ describe('object status test suite', function() {
     describe('Orientation check', function() {
         it('should check RTL/LTR', () => {
             objectStatusPage.checkRtlSwitch();
-        })
+        });
     });
 
     describe('Visual regression', function() {
