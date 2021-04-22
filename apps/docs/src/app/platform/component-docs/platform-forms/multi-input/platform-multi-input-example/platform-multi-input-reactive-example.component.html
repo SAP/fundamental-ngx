@@ -14,9 +14,9 @@
                 id="fdp-id-reactive"
                 name="input1"
                 [dataSource]="_datasource"
-                displayKey="country"
+                displayKey="state"
                 selectionMode="Multi"
-                [status]="!hasError() ? 'error' : 'success'"
+                [status]="hasError() ? 'error' : 'success'"
             >
             </fdp-multi-input>
             <p>Form Selected Item: {{ itemField.value | json }}</p>

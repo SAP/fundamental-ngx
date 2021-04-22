@@ -10,57 +10,57 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
 })
 export class PlatformMultiInputReactiveExampleComponent {
     _datasource = [
-        { country: 'Alabama', city: 'Montgomery' },
-        { country: 'Alaska', city: 'Juneau' },
-        { country: 'Arizona', city: 'Phoenix' },
-        { country: 'Arkansas', city: 'Little Rock' },
-        { country: 'California', city: 'Sacramento' },
-        { country: 'Colorado', city: 'Denver' },
-        { country: 'Connecticut', city: 'Hartford' },
-        { country: 'Kentucky', city: 'Frankfort' },
-        { country: 'Delaware', city: 'Dover' },
-        { country: 'Florida', city: 'Tallahassee' },
-        { country: 'Georgia', city: 'Atlanta' },
-        { country: 'Hawaii', city: 'Honolulu' },
-        { country: 'Idaho', city: 'Boise' },
-        { country: 'Illinois', city: 'Springfield' },
-        { country: 'Indiana', city: 'Indianapolis' },
-        { country: 'Iowa', city: 'Des Moines' },
-        { country: 'Kansas', city: 'Topeka' },
-        { country: 'Kentucky', city: 'Frankfort' },
-        { country: 'Louisiana', city: 'Baton Rouge' },
-        { country: 'Maine', city: 'Augusta' },
-        { country: 'Maryland', city: 'Annapolis' },
-        { country: 'Massachusetts', city: 'Boston' },
-        { country: 'Michigan', city: 'Lansing' },
-        { country: 'Minnesota', city: 'St. Paul' },
-        { country: 'Mississippi', city: 'Jackson' },
-        { country: 'Missouri', city: 'Jefferson City' },
-        { country: 'Montana', city: 'Helena' },
-        { country: 'Nebraska', city: 'Lincoln' },
-        { country: 'Nevada', city: 'Carson City' },
-        { country: 'New Hampshire', city: 'Concord' },
-        { country: 'New Jersey', city: 'Trenton' },
-        { country: 'New Mexico', city: 'Santa Fe' },
-        { country: 'New York', city: 'Albany' },
-        { country: 'North Carolina', city: 'Raleigh' },
-        { country: 'North Dakota', city: 'Bismarck' },
-        { country: 'Ohio', city: 'Columbus' },
-        { country: 'Oklahoma', city: 'Oklahoma City' },
-        { country: 'Oregon', city: 'Salem' },
-        { country: 'Pennsylvania', city: 'Harrisburg' },
-        { country: 'Rhode Island', city: 'Providence' },
-        { country: 'South Carolina', city: 'Columbia' },
-        { country: 'South Dakota', city: 'Pierre' },
-        { country: 'Tennessee', city: 'Nashville' },
-        { country: 'Texas', city: 'Austin' },
-        { country: 'Utah', city: 'Salt Lake City' },
-        { country: 'Vermont', city: 'Montpelier' },
-        { country: 'Virginia', city: 'Richmond' },
-        { country: 'Washington', city: 'Olympia' },
-        { country: 'West Virginia', city: 'Charleston' },
-        { country: 'Wisconsin', city: 'Madison' },
-        { country: 'Wyoming', city: 'Cheyenne' }
+        { state: 'Alabama', city: 'Montgomery' },
+        { state: 'Alaska', city: 'Juneau' },
+        { state: 'Arizona', city: 'Phoenix' },
+        { state: 'Arkansas', city: 'Little Rock' },
+        { state: 'California', city: 'Sacramento' },
+        { state: 'Colorado', city: 'Denver' },
+        { state: 'Connecticut', city: 'Hartford' },
+        { state: 'Kentucky', city: 'Frankfort' },
+        { state: 'Delaware', city: 'Dover' },
+        { state: 'Florida', city: 'Tallahassee' },
+        { state: 'Georgia', city: 'Atlanta' },
+        { state: 'Hawaii', city: 'Honolulu' },
+        { state: 'Idaho', city: 'Boise' },
+        { state: 'Illinois', city: 'Springfield' },
+        { state: 'Indiana', city: 'Indianapolis' },
+        { state: 'Iowa', city: 'Des Moines' },
+        { state: 'Kansas', city: 'Topeka' },
+        { state: 'Kentucky', city: 'Frankfort' },
+        { state: 'Louisiana', city: 'Baton Rouge' },
+        { state: 'Maine', city: 'Augusta' },
+        { state: 'Maryland', city: 'Annapolis' },
+        { state: 'Massachusetts', city: 'Boston' },
+        { state: 'Michigan', city: 'Lansing' },
+        { state: 'Minnesota', city: 'St. Paul' },
+        { state: 'Mississippi', city: 'Jackson' },
+        { state: 'Missouri', city: 'Jefferson City' },
+        { state: 'Montana', city: 'Helena' },
+        { state: 'Nebraska', city: 'Lincoln' },
+        { state: 'Nevada', city: 'Carson City' },
+        { state: 'New Hampshire', city: 'Concord' },
+        { state: 'New Jersey', city: 'Trenton' },
+        { state: 'New Mexico', city: 'Santa Fe' },
+        { state: 'New York', city: 'Albany' },
+        { state: 'North Carolina', city: 'Raleigh' },
+        { state: 'North Dakota', city: 'Bismarck' },
+        { state: 'Ohio', city: 'Columbus' },
+        { state: 'Oklahoma', city: 'Oklahoma City' },
+        { state: 'Oregon', city: 'Salem' },
+        { state: 'Pennsylvania', city: 'Harrisburg' },
+        { state: 'Rhode Island', city: 'Providence' },
+        { state: 'South Carolina', city: 'Columbia' },
+        { state: 'South Dakota', city: 'Pierre' },
+        { state: 'Tennessee', city: 'Nashville' },
+        { state: 'Texas', city: 'Austin' },
+        { state: 'Utah', city: 'Salt Lake City' },
+        { state: 'Vermont', city: 'Montpelier' },
+        { state: 'Virginia', city: 'Richmond' },
+        { state: 'Washington', city: 'Olympia' },
+        { state: 'West Virginia', city: 'Charleston' },
+        { state: 'Wisconsin', city: 'Madison' },
+        { state: 'Wyoming', city: 'Cheyenne' }
     ];
 
     customForm = new FormGroup({
@@ -73,7 +73,7 @@ export class PlatformMultiInputReactiveExampleComponent {
     }
 
     hasError(): boolean {
-        return this.hasValue() && this.itemField.touched;
+        return !this.hasValue();
     }
 
     hasValue(): boolean {
@@ -81,9 +81,10 @@ export class PlatformMultiInputReactiveExampleComponent {
     }
 
     onSubmit(): void {
-        if (!this.hasError()) {
+        if (this.hasError()) {
             return;
         }
+
         alert('form file Uploaded successfully');
     }
 }
