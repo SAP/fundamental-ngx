@@ -232,7 +232,7 @@ export class DefaultQueryAdapter<T> extends QueryAdapter<T> {
  */
 @Injectable()
 export class QueryAdapterFactory {
-    create<T extends BaseEntity>(entityTypeOrEntityName: EntityType<T> | string): QueryAdapter<T> {
+    create<T>(entityTypeOrEntityName: EntityType<T> | string): QueryAdapter<T> {
         return new DefaultQueryAdapter();
     }
 }

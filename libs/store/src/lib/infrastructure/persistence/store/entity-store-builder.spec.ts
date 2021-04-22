@@ -5,37 +5,48 @@ import {
 } from '../utils/entity-options.service';
 import { DefaultEntityStoreBuilder, DefaultEntityStoreBuilderFactory } from './entity-store-builder';
 import { DefaultEntityStore } from './entity-store';
-import { BaseEntity } from './entity-server/interfaces';
+import { BaseEntity, EntityBaseType, IdentityKey } from './entity-server/interfaces';
 import { EntityType } from '../../../domain/decorators';
-import { DefaultEntityCollectionService } from './entity-collection-service-base';
-import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionService } from './entity-collection-service';
 
-class ChildEntity extends BaseEntity {
+class ChildEntity extends BaseEntity<{ name: string }> {
     name: 'child entity';
+
+    get identity(): IdentityKey {
+        return this.value.name;
+    }
 }
-class User extends BaseEntity {
+
+class User extends BaseEntity<{}> {
     id: string;
     name: string;
     age: number;
     child: ChildEntity;
+
+    get identity(): IdentityKey {
+        return this.id;
+    }
 }
 
 class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
-    getEntityResourceMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityResourceMetaOptions {
+    getEntityResourceMetadata<T>(entity: string | EntityType<T>): EntityResourceMetaOptions {
         throw new Error('Method not implemented.');
     }
-    getEntityMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityMetaOptions<T> {
+    getEntityMetadata<T>(entity: string | EntityType<T>): EntityMetaOptions<T> {
+        throw new Error('Method not implemented.');
+    }
+
+    getEntityTypeByName(entityName: string): EntityBaseType {
         throw new Error('Method not implemented.');
     }
 }
 
 class EntityCollectionsServiceMock implements EntityCollectionsService {
-    getEntityCollectionService<T extends BaseEntity>(entityType: EntityType<T>): EntityCollectionService<T> {
+    getEntityCollectionService<T>(entityType: EntityType<T>): EntityCollectionService<T> {
         throw new Error('Method not implemented.');
     }
-    registerEntityCollectionService<T extends BaseEntity>(entityType: EntityType<T>, entityCollectionService: EntityCollectionService<T>): void {
+    registerEntityCollectionService<T>(entityType: EntityType<T>, entityCollectionService: EntityCollectionService<T>): void {
         throw new Error('Method not implemented.');
     }
 }

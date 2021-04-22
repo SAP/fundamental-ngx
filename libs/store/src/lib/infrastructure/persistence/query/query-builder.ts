@@ -5,7 +5,7 @@ import { Query } from './query';
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';
 
-export class QueryBuilder<TModel extends {}> {
+export class QueryBuilder<TModel> {
     /**
      * @hidden - predicate which defines filter criteria.
      */
@@ -26,7 +26,8 @@ export class QueryBuilder<TModel extends {}> {
      *
      * @hidden
      */
-    constructor(private readonly service: QueryService<TModel>) {}
+    constructor(
+        private readonly service: QueryService<TModel>) {}
 
     byId(id: string): Observable<TModel> {
         return this.service.getByKey(id);

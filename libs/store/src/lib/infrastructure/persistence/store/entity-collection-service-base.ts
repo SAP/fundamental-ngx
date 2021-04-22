@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { QuerySnapshotModel } from '../query/query';
-import { BaseEntity } from './entity-server/interfaces';
-import { EntityMetaOptions, EntityType, IdentityKey } from '../../../domain/public_api';
+import { BaseEntity, EntityMetaOptions, EntityType, IdentityKey } from '../../../domain/public_api';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
@@ -24,7 +23,7 @@ import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chai
  * Also this service is responsible to chain requests for sub resources
  *
  */
-export class DefaultEntityCollectionService<T extends BaseEntity> implements EntityCollectionService<T> {
+export class DefaultEntityCollectionService<T> implements EntityCollectionService<T> {
     readonly name: string;
 
     readonly collection$: Observable<EntityCollection<T>> | Store<EntityCollection<T>>;

@@ -1,15 +1,16 @@
 import { Observable } from 'rxjs';
-
-import { BaseEntity, IdentityKey } from '../../../../domain/entity';
-import { QueryParams, QuerySnapshot } from '../../query/query-adapter';
 import { Update } from '@ngrx/entity';
+
+import { IdentityKey } from '../../../../domain/entity';
+import { BaseEntity } from '../../domain/base-classes/base-entity';
+import { QueryParams, QuerySnapshot } from '../../query/query-adapter';
 
 export { BaseEntity, IdentityKey };
 
 /**
  * Extended EntityCollectionDataService from '@ngrx/data';
  */
-export interface EntityServerService<T extends BaseEntity> {
+export interface EntityServerService<T> {
     readonly name: string;
     add(entity: T): Observable<T>;
     delete(id: number | string): Observable<number | string>;
@@ -25,7 +26,7 @@ export interface EntityServerService<T extends BaseEntity> {
  *
  * Used to retrieve / update entity collection
  */
-export interface EntityCacheStorageService<TModel extends BaseEntity> {
+export interface EntityCacheStorageService<TModel> {
     /**
      * Get all available items
      */
@@ -51,3 +52,5 @@ export interface PaginatedEntitiesResponse<T> {
     value: T[];
     count: number;
 }
+
+export type EntityBaseType = { new (...arg: any[]): BaseEntity<any> };

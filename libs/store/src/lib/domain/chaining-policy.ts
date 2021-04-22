@@ -1,5 +1,6 @@
-import { BaseEntity, IdentityKey } from './entity';
+import { IdentityKey } from './entity';
 import { AllowedFields, Type, IfTargetIncludeConditionType } from './utility';
+import { BaseEntity } from '../infrastructure/persistence';
 
 export type ChainingStrategy =
     | 'non-block' // call immediately and non-block (default)
@@ -11,7 +12,7 @@ export type ChainingStrategyFieldsMap<Entity extends {}> = IfTargetIncludeCondit
     BaseEntity | Array<BaseEntity>,
     ChainingStrategyMap<Entity>,
     never
->;
+    >;
 
 export type ChainingStrategyMap<Entity extends {}> = {
     [EntityField in AllowedFields<Entity, BaseEntity | Array<BaseEntity>>]: ChainingStrategy;
@@ -26,7 +27,7 @@ type ChainingPolicyFieldsOption<Entity extends {}> = {
     [EntityField in AllowedFields<Entity, BaseEntity | Array<BaseEntity>>]?: ChainingPolicyFieldOptions<
         Entity,
         Entity[EntityField]
-    >;
+        >;
 };
 
 // tslint:disable-next-line: interface-over-type-literal

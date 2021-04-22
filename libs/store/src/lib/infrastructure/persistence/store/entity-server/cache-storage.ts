@@ -6,7 +6,7 @@ import { BaseEntity, EntityCacheStorageService } from './interfaces';
  * Entity Cache Storage Service
  * Default implementation
  */
-export class EntityCacheStorageServiceBase<TModel extends BaseEntity> implements EntityCacheStorageService<TModel> {
+export class EntityCacheStorageServiceBase<TModel> implements EntityCacheStorageService<TModel> {
     private key: string;
 
     constructor(entityKey: string, private storage: Storage) {
@@ -60,7 +60,7 @@ export class EntityCacheStorageServiceFactory {
      * @param storage Optional storage type (sessionStorage or localStorage)
      * @returns EntityCacheStorageService
      */
-    create<T extends BaseEntity>(storageKey: string, storage?: Storage): EntityCacheStorageService<T> {
+    create<T>(storageKey: string, storage?: Storage): EntityCacheStorageService<T> {
         return new EntityCacheStorageServiceBase<T>(storageKey, storage || sessionStorage);
     }
 }

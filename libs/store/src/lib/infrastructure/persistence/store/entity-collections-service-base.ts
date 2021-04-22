@@ -22,7 +22,7 @@ export class DefaultEntityCollectionsService extends EntityCollectionsService {
         super();
     }
 
-    getEntityCollectionService<T extends BaseEntity>(entityType: EntityType<T>): EntityCollectionService<T> {
+    getEntityCollectionService<T>(entityType: EntityType<T>): EntityCollectionService<T> {
         let service = this.servicesMap.get(entityType);
         if (service) {
             return service;
@@ -33,7 +33,7 @@ export class DefaultEntityCollectionsService extends EntityCollectionsService {
         return service;
     }
 
-    registerEntityCollectionService<T extends BaseEntity>(
+    registerEntityCollectionService<T>(
         entityType: EntityType<T>,
         entityCollectionService: EntityCollectionService<T>
     ): void {
@@ -44,7 +44,7 @@ export class DefaultEntityCollectionsService extends EntityCollectionsService {
      * Create a new instance of an EntityCollectionService.
      * @param entity {class} Entity class to create service for
      */
-    protected createEntityCollectionService<T extends BaseEntity>(entity: EntityType<T>): EntityCollectionService<T> {
+    protected createEntityCollectionService<T>(entity: EntityType<T>): EntityCollectionService<T> {
         return this.entityCollectionServiceFactory.create<T>(entity, this);
     }
 }

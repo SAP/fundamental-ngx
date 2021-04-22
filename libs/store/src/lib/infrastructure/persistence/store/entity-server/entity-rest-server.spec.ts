@@ -16,16 +16,19 @@ import {
     EntityResourceMetaOptions,
     EntityMetaOptions
 } from '../../utils/entity-options.service';
-import { BaseEntity } from './interfaces';
+import { BaseEntity, EntityBaseType, IdentityKey } from './interfaces';
 import { DefaultQueryAdapter, QueryAdapter, QueryAdapterService } from '../../query/query-adapter';
 import { QuerySnapshotModel } from '../../query/query';
 import { EntityType } from 'libs/store/src/lib/domain/decorators';
-import { ChainingPolicy } from 'libs/store/src/lib/domain/public_api';
 
 class Hero extends BaseEntity {
     id!: number;
     name!: string;
     version?: number;
+
+    get identity(): IdentityKey {
+        return this.id;
+    }
 }
 
 class MockPluralizer extends Pluralizer {
@@ -36,10 +39,14 @@ class MockPluralizer extends Pluralizer {
 }
 
 class EmptyEntityMetaOptionsService implements EntityMetaOptionsService {
-    getEntityResourceMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityResourceMetaOptions {
+    getEntityResourceMetadata<T>(entity: string | EntityType<T>): EntityResourceMetaOptions {
         throw new Error('Method not implemented.');
     }
-    getEntityMetadata<T extends BaseEntity>(entity: string | EntityType<T>): EntityMetaOptions<T> {
+    getEntityMetadata<T>(entity: string | EntityType<T>): EntityMetaOptions<T> {
+        throw new Error('Method not implemented.');
+    }
+
+    getEntityTypeByName(entityName: string): EntityBaseType {
         throw new Error('Method not implemented.');
     }
 }
@@ -78,7 +85,7 @@ describe('EntityRestServerServiceFactory', () => {
             }
         );
         spyOn(entityMetaOptionsService, 'getEntityMetadata').and.callFake(
-            <T extends BaseEntity>(entityName: any): EntityMetaOptions<T> => {
+            <T>(entityName: any): EntityMetaOptions<T> => {
                 return { name: 'Hero' };
             }
         );
@@ -165,7 +172,7 @@ describe('EntityRestServerService', () => {
             }
         );
         spyOn(entityMetaOptionsService, 'getEntityMetadata').and.callFake(
-            <T extends BaseEntity>(entityName: any): EntityMetaOptions<T> => {
+            <T>(entityName: any): EntityMetaOptions<T> => {
                 return heroEntityMetaOptions as any;
             }
         );
@@ -317,7 +324,7 @@ describe('EntityRestServerService', () => {
         const heroUrlId1 = defaultHeroUrl + '1';
 
         it('should return expected hero when id is found', () => {
-            expectedHero = { id: 1, name: 'A' };
+            expectedHero = { id: 1, name: 'A' } as Hero;
 
             service.getById(1).subscribe((hero) => expect(hero).toEqual(expectedHero), fail);
 
@@ -464,7 +471,7 @@ describe('EntityRestServerService', () => {
         let expectedHero: Hero;
 
         it('should return expected hero with id', () => {
-            expectedHero = { id: 42, name: 'A' };
+            expectedHero = new Hero({ id: 42, name: 'A' });
             const heroData: Hero = { id: undefined, name: 'A' } as any;
 
             service.add(heroData).subscribe((hero) => expect(hero).toEqual(expectedHero), fail);
@@ -481,7 +488,7 @@ describe('EntityRestServerService', () => {
         it('should use method and url from ResourceMetaOptions', () => {
             (<EntityOperationComplexPath>heroResourceMetaOptions.path).add = ['PUT', 'add-hero'];
 
-            expectedHero = { id: 27, name: 'A' };
+            expectedHero = new Hero({ id: 27, name: 'A' });
             const heroData: Hero = { id: undefined, name: 'A' } as any;
 
             service.add(heroData).subscribe((hero) => expect(hero).toEqual(expectedHero), fail);
@@ -580,7 +587,7 @@ describe('EntityRestServerService', () => {
             };
 
             // The server makes the update AND updates the version concurrency property.
-            const expectedHero: Hero = { id: 1, name: 'B', version: 2 };
+            const expectedHero: Hero = new Hero({ id: 1, name: 'B', version: 2 });
 
             service.update(updateArg).subscribe((updated) => expect(updated).toEqual(expectedHero), fail);
 
@@ -603,7 +610,7 @@ describe('EntityRestServerService', () => {
             };
 
             // The server makes the update AND updates the version concurrency property.
-            const expectedHero: Hero = { id: 1, name: 'B', version: 2 };
+            const expectedHero: Hero = { id: 1, name: 'B', version: 2 } as Hero;
 
             service.update(updateArg).subscribe((updated) => expect(updated).toEqual(expectedHero), fail);
 
@@ -643,7 +650,7 @@ describe('EntityRestServerService', () => {
         let expectedHero: Hero;
 
         it('should return expected hero with id', () => {
-            expectedHero = { id: 42, name: 'A' };
+            expectedHero = new Hero({ id: 42, name: 'A' });
             const heroData: Hero = { id: undefined, name: 'A' } as any;
 
             service.upsert(heroData).subscribe((hero) => expect(hero).toEqual(expectedHero), fail);
@@ -660,7 +667,7 @@ describe('EntityRestServerService', () => {
         it('should use method and url from ResourceMetaOptions', () => {
             (<EntityOperationComplexPath>heroResourceMetaOptions.path).upsert = ['PUT', 'upsert-hero'];
 
-            expectedHero = { id: 27, name: 'A' };
+            expectedHero = new Hero({ id: 27, name: 'A' });
             const heroData: Hero = { id: undefined, name: 'A' } as any;
 
             service.upsert(heroData).subscribe((hero) => expect(hero).toEqual(expectedHero), fail);

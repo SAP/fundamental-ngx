@@ -13,12 +13,12 @@ import { EntityMetaOptions, EntityMetaOptionsService } from '../../utils/entity-
 import { RequestData } from './entity-rest-server';
 import { EntityCacheStorageServiceBase } from './cache-storage';
 import {
-    BaseEntity,
     EntityServerService,
     EntityServerServiceFactory,
     EntityCacheStorageService,
     IdentityKey,
-    PaginatedEntitiesResponse
+    PaginatedEntitiesResponse,
+    BaseEntity
 } from './interfaces';
 
 /**
@@ -31,7 +31,7 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
     protected getDelay = 0;
     protected saveDelay = 0;
     protected timeout = 0;
-    protected entityMetaOptions: EntityMetaOptions;
+    protected entityMetaOptions: EntityMetaOptions<T>;
 
     /**
      * Service implementation name
@@ -130,7 +130,7 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
 
     protected async getEntityById(id: IdentityKey): Promise<T | null> {
         const entities = await this.storageService.getAll();
-        const entity = entities.find((_entity) => _entity.id === id);
+        const entity = entities.find((_entity) => _entity.identity === id);
         return entity || null;
     }
 
@@ -177,13 +177,13 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
 
     protected async updateEntity(update: Update<T>): Promise<T> {
         let entities = await this.storageService.getAll();
-        let entity = entities.find((_entity) => _entity.id === update.id);
+        let entity = entities.find((_entity) => _entity.identity === update.id);
         if (entity) {
             entity = {
                 ...entity,
                 ...update.changes
             };
-            entities = entities.map((_entity) => (_entity.id === update.id ? entity : _entity));
+            entities = entities.map((_entity) => (_entity.identity === update.id ? entity : _entity));
             await this.storageService.setAll(entities);
         }
         return entity;
@@ -191,7 +191,7 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
 
     protected async deleteEntity(id: IdentityKey): Promise<T> {
         let entities = await this.storageService.getAll();
-        const entityToDelete = entities.find((_entity) => _entity.id === id);
+        const entityToDelete = entities.find((_entity) => _entity.identity === id);
         if (entityToDelete) {
             entities = entities.filter((_entity) => _entity !== entityToDelete);
             await this.storageService.setAll(entities);
@@ -202,9 +202,9 @@ export abstract class EntityLocalServerBaseService<T extends BaseEntity> impleme
     protected async addEntity(entity: T): Promise<T> {
         const entities = await this.storageService.getAll();
         // Should we generate entity id here?
-        if (!entity.id) {
-            entity.id = uuidV4();
-        }
+        // if (!entity.id) {
+        //     entity.id = uuidV4();
+        // }
 
         entities.push(entity);
 

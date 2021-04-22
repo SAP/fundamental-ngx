@@ -2,10 +2,19 @@ import { of } from 'rxjs';
 
 import { DefaultEntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
+import { Type } from '../../../domain/utility'
+import { IdentityKey } from '../../../domain/entity';
+import { BaseEntity } from '../domain/base-classes/base-entity';
 import { EntityCollectionService } from './entity-collection-service';
 
-class User {
-    constructor(public id: string | string, public name: string, public age: number) {}
+class User extends BaseEntity<{}>{
+    constructor(public id: IdentityKey, public name: string, public age: number) {
+        super({ id, name, age });
+    }
+
+    get identity(): IdentityKey {
+        return this.id;
+    }
 }
 
 class UserCollectionServiceMock implements Partial<EntityCollectionService<User>> {
@@ -37,14 +46,16 @@ class UserCollectionServiceMock implements Partial<EntityCollectionService<User>
 class QueryBuilderMock extends QueryBuilder<User> {}
 
 describe('Default Entity Store', () => {
+    let entity: Type<User>;
     let store: DefaultEntityStore<User>;
     let collectionService: EntityCollectionService<User>;
     let queryBuilder: QueryBuilder<User>;
 
     beforeEach(() => {
+        entity = User;
         collectionService = new UserCollectionServiceMock() as EntityCollectionService<User>;
         queryBuilder = new QueryBuilderMock(null);
-        store = new DefaultEntityStore(collectionService, queryBuilder);
+        store = new DefaultEntityStore(entity, collectionService, queryBuilder);
     });
 
     it('should be created', () => {
@@ -58,7 +69,7 @@ describe('Default Entity Store', () => {
         spyOn(collectionService, 'getByKey').and.callFake(() => of(result));
 
         // check returned result
-        store.get(id).subscribe((data) => expect(data).toBe(result));
+        store.get(id).subscribe((data) => expect(data.value).toEqual(result.value));
 
         expect(collectionService.getByKey).toHaveBeenCalledOnceWith(id);
     });
@@ -98,5 +109,10 @@ describe('Default Entity Store', () => {
 
     it('should has queryBuilder reference', () => {
         expect(store.queryBuilder instanceof QueryBuilder).toBeTrue();
+    });
+
+    it('should create a new instance by `createEntityInstance`', () => {
+        const userInstance = store.createEntityInstance();
+        expect(userInstance instanceof User).toBeTrue();
     });
 });

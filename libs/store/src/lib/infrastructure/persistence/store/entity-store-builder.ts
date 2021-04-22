@@ -6,7 +6,7 @@ import {
     CachePolicy,
     EntityType,
     BaseEntity,
-    ChainingStrategyFieldsMap
+    ChainingStrategyFieldsMap, Type
 } from '../../../domain/public_api';
 import { DefaultEntityStore, EntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
@@ -14,6 +14,8 @@ import { QueryService } from '../query/query.service';
 import { QuerySnapshot } from '../query/query';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
+import { instanceForType } from '../domain/state-handler';
+import { map } from 'rxjs/operators';
 
 //#region Interfaces
 
@@ -91,9 +93,13 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
 
     create(): EntityStore<T> {
         const entityCollectionService = this.entityCollectionsService.getEntityCollectionService<T>(this.entity);
-        const queryBuilder = new QueryBuilder(new DefaultQueryService(entityCollectionService));
+        const queryBuilder = new QueryBuilder(
+            new DefaultQueryService(this.entity, entityCollectionService));
 
-        const result = new DefaultEntityStore<T>(entityCollectionService, queryBuilder, {
+        const result = new DefaultEntityStore<T>(
+            this.entity,
+            entityCollectionService,
+            queryBuilder, {
             cachePolicy: this.cachePolicy,
             fetchPolicy: this.fetchPolicy,
             chainingStrategy: this.chainingStrategyMap
@@ -118,16 +124,22 @@ export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFacto
 }
 
 export class DefaultQueryService<TModel> extends QueryService<TModel> {
-    constructor(private service: EntityCollectionService<TModel>) {
+    constructor(
+        private entity: Type<TModel>,
+        private service: EntityCollectionService<TModel>) {
         super();
     }
 
     getByKey(id: string): Observable<TModel> {
-        return this.service.getByKey(id);
+        return this.service.getByKey(id).pipe(
+            map((dto: TModel) => instanceForType(this.entity, dto))
+        );
     }
 
     getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
-        return this.service.getWithQuery(query as any);
+        return this.service.getWithQuery(query as any).pipe(
+            map(dto => instanceForType(this.entity, dto))
+        );
     }
 
     count(): Observable<number> {
