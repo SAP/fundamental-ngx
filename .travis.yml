@@ -2,11 +2,12 @@ language: node_js
 sudo: required
 node_js: 12.18.4
 cache: npm
-dist: trusty
 addons:
   chrome: stable
   hosts:
     - sap.dev
+services:
+  - xvfb
 git:
   depth: false
 script:
@@ -95,6 +96,8 @@ jobs:
         - JOB_URL=$TRAVIS_JOB_WEB_UR
         - SAUCE_USERNAME=$SAUCE_USERNAME
         - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+      before_script:
+            - export CHROME_BIN=/usr/bin/google-chrome
       script: npm run test:platform
     - stage: "Test"
       name: Sauce Labs - unit tests core
