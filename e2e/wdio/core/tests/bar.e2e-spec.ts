@@ -79,7 +79,7 @@ describe('Bar test suite:', function() {
         }
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
 
         //skipped due to issue with example selector for this component
         xit('should check examples visual regression', () => {
