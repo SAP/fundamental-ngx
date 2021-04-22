@@ -1,4 +1,4 @@
-import { click, scrollIntoView, sendKeys, waitForElDisplayed } from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 import { CoreBaseComponentPo } from './core-base-component.po';
 
 export class MultiInputPo extends CoreBaseComponentPo {
@@ -12,7 +12,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     expandedDropdown = '.fd-list';
     multiInputOptions = 'fd-multi-input[inputid="multiInput"] .fd-token__text span';
     buttonShowAll = 'a.fd-link';
-    hiddenAddonButtonInputOptions =  'fd-multi-input[inputid="noAddonMultiInput1"] .fd-token__text span';
+    hiddenAddonButtonInputOptions = 'fd-multi-input[inputid="noAddonMultiInput1"] .fd-token__text span';
     compactMultiInputOptions = 'div#rtl-ex1 .fd-token__text span';
     approveButton = '.fd-button--emphasized';
     multiSelectButton = 'button[ng-reflect-glyph="multiselect-all"]';
@@ -21,7 +21,6 @@ export class MultiInputPo extends CoreBaseComponentPo {
     searchTermOptions = 'div#background-ex4 .fd-token__text span';
     customFilterOptions = 'div#background-ex5 .fd-token__text span';
     asyncExampleOptions = 'div#rtl-ex6 .fd-token__text span';
-    reactiveFormOptions = 'div#background-ex7 .fd-token__text span';
     tokenOptions = 'div#background-ex8 .fd-token__text span';
     templateOptions = 'div#background-ex9 .fd-token__text span';
 
@@ -30,23 +29,6 @@ export class MultiInputPo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.title);
     };
-
-    dropDownOption = (name: string) => {
-        return `[ng-reflect-title="${name}"] li`;
-    };
-
-    expandDropdown(dropDownSelector: string, index: number = 0): void {
-        sendKeys(['Escape']);
-        scrollIntoView(dropDownSelector, index);
-        click(dropDownSelector, index);
-        waitForElDisplayed(this.expandedDropdown);
-    }
-
-    selectOption(option: string): void {
-        waitForElDisplayed(this.dropDownOption(option));
-        scrollIntoView(this.dropDownOption(option));
-        click(this.dropDownOption(option));
-    }
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

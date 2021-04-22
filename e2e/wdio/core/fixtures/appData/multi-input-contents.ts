@@ -1,4 +1,4 @@
-export const fruitsArr = [
+export const testOptionsArray1 = [
     'Apple',
     'Banana',
     'Pineapple',
@@ -8,20 +8,20 @@ export const fruitsArr = [
     'Blueberry',
     'Orange'
 ];
-export const fruitsArr2 = [
+export const testOptionsArray2 = [
     'Kiwi',
     'Apple',
     'Banana',
     'Pineapple',
     'Tomato'
 ];
-export const fruitsArr3 = [
+export const testOptionsArray3 = [
     'Kiwi',
     'Strawberry',
     'Blueberry',
     'Orange'
 ];
-export const fruitsArrCaps = [
+export const testOptionsArray4 = [
     'APPLE',
     'BANANA',
     'PINEAPPLE',
@@ -31,13 +31,13 @@ export const fruitsArrCaps = [
     'BLUEBERRY',
     'ORANGE'
 ];
-export const fruitsArr4 = [
+export const testOptionsArray5 = [
     'Apple',
     'Banana',
     'Pineapple',
     'Tomato'
 ];
-export const Arr = [
+export const testOptionsArray6 = [
     'Photo Voltaic',
     'Competitor',
     'Chalkboard',
