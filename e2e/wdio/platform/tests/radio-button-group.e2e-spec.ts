@@ -442,6 +442,4 @@ describe('Radio button group  Test Suite', function() {
             radioButtonGroupPage.checkRtlSwitch();
         });
     });
-
-
 });

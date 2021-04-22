@@ -122,7 +122,7 @@ describe('Button test suite:', function() {
             }
         });
 
-        it('verify menu checkbox visual regression', () => {
+        xit('verify menu checkbox visual regression', () => {
             scrollIntoView(checkboxMenu);
             click(checkboxMenu);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('true');
@@ -136,7 +136,7 @@ describe('Button test suite:', function() {
                 .toBeLessThan(5, `Playground button mismatch`);
         });
 
-        it('verify compact checkbox visual regression', () => {
+        xit('verify compact checkbox visual regression', () => {
             scrollIntoView(checkboxCompact);
             click(checkboxCompact);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('true');
@@ -151,14 +151,14 @@ describe('Button test suite:', function() {
         });
     });
 
-    fdescribe('Check visual regression basic', function() {
+    describe('Check visual regression basic', function() {
 
         it('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();
             expect(buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check buttons type states', () => {
+        xit('should check buttons type states', () => {
             const typeButtonsLength = getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
                 scrollIntoView(typeButtons, i);
@@ -166,12 +166,12 @@ describe('Button test suite:', function() {
             }
         });
 
-        it('should check state button states', () => {
+        xit('should check state button states', () => {
             scrollIntoView(stateButton);
             checkElementStates(stateButton, buttonStateTag, button);
         });
 
-        it('verify disable state buttons hover state', () => {
+        xit('verify disable state buttons hover state', () => {
             const disableStateButtonsLength = getElementArrayLength(disableStateButtons);
             for (let i = 0; i < disableStateButtonsLength; i++) {
                 scrollIntoView(disableStateButtons, i);
@@ -179,7 +179,7 @@ describe('Button test suite:', function() {
             }
         });
 
-        it('should check buttons with icons states', () => {
+        xit('should check buttons with icons states', () => {
             const iconButtonsLength = getElementArrayLength(iconButtons);
             for (let i = 0; i < iconButtonsLength; i++) {
                 scrollIntoView(iconButtons, i);
@@ -187,7 +187,7 @@ describe('Button test suite:', function() {
             }
         });
 
-        it('should check size buttons states', () => {
+        xit('should check size buttons states', () => {
             const sizeButtonsLength = getElementArrayLength(sizeButtons);
             for (let i = 0; i < sizeButtonsLength; i++) {
                 scrollIntoView(sizeButtons, i);
@@ -195,7 +195,7 @@ describe('Button test suite:', function() {
             }
         });
 
-        it('should check menu buttons states', () => {
+        xit('should check menu buttons states', () => {
             const menuButtonsLength = getElementArrayLength(menuButtons);
             for (let i = 0; i < menuButtonsLength; i++) {
                 scrollIntoView(menuButtons, i);
