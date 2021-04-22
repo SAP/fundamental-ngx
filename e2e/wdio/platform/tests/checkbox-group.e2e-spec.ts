@@ -1,15 +1,34 @@
 import { CheckboxGroupPO } from '../pages/checkbox-group.po';
 import { checkIfDisabled, checkLabels, checkMarkingCheckbox } from '../../helper/assertion-helper';
-import {seasonsArr, countriesArr, errorBorderStyle, errorTooltipMessage, europeanCountriesArr, seasonsOutputLabel, fourFruitsArr,
-    hobbiesArr, itemsArr, markingsStyle, phonesArr, programmingLanguagesArr, reptilesArr,
-    sportsArr, threeFruitsArr} from '../fixtures/appData/checkbox-group-page-content';
-import {checkboxHoverState, checkboxFocusStyle} from '../fixtures/appData/checkbox-page-contents';
+import {
+    countriesArr,
+    errorBorderStyle,
+    errorTooltipMessage,
+    europeanCountriesArr,
+    fourFruitsArr,
+    hobbiesArr,
+    itemsArr,
+    markingsStyle,
+    phonesArr,
+    programmingLanguagesArr,
+    reptilesArr,
+    seasonsArr,
+    seasonsOutputLabel,
+    sportsArr,
+    threeFruitsArr
+} from '../fixtures/appData/checkbox-group-page-content';
+import { checkboxFocusStyle, checkboxHoverState } from '../fixtures/appData/checkbox-page-contents';
 import {
     click,
     clickNextElement,
-    executeScriptBeforeTagAttr, focusElement, getAttributeByName, getCSSPropertyByName,
-    getElementArrayLength, getText, mouseHoverElement,
-    refreshPage, scrollIntoView,
+    executeScriptBeforeTagAttr,
+    focusElement,
+    getCSSPropertyByName,
+    getElementArrayLength,
+    getText,
+    mouseHoverElement,
+    refreshPage,
+    scrollIntoView
 } from '../../driver/wdio';
 
 xdescribe('Checkbox group test suite', () => {

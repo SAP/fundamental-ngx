@@ -41,7 +41,6 @@ describe('Bar test suite:', function() {
         }
     });
 
-
     it('Verify bar contains 3 header sections', () => {
         const leftBarSectionLength = getElementArrayLength(leftSections);
         const checkRightSections = getElementArrayLength(rightSections);
@@ -81,7 +80,7 @@ describe('Bar test suite:', function() {
 
     xdescribe('Check visual regression', function() {
 
-        //skipped due to issue with example selector for this component
+        // skipped due to issue with example selector for this component
         xit('should check examples visual regression', () => {
             barPage.saveExampleBaselineScreenshot();
             expect(barPage.compareWithBaseline()).toBeLessThan(1);
