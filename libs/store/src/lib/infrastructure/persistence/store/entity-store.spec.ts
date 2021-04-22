@@ -69,7 +69,7 @@ describe('Default Entity Store', () => {
         spyOn(collectionService, 'getByKey').and.callFake(() => of(result));
 
         // check returned result
-        store.get(id).subscribe((data) => expect(data).toBe(result));
+        store.get(id).subscribe((data) => expect(data.value).toEqual(result.value));
 
         expect(collectionService.getByKey).toHaveBeenCalledOnceWith(id);
     });

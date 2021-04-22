@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { BaseEntity, ChainingStrategyFieldsMap } from '../../../domain/public_api';
+import { ChainingStrategyFieldsMap } from '../../../domain/public_api';
 import { Query } from './query';
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';
@@ -26,7 +26,8 @@ export class QueryBuilder<TModel> {
      *
      * @hidden
      */
-    constructor(private readonly service: QueryService<TModel>) {}
+    constructor(
+        private readonly service: QueryService<TModel>) {}
 
     byId(id: string): Observable<TModel> {
         return this.service.getByKey(id);

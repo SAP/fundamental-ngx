@@ -75,7 +75,9 @@ export class DefaultEntityStore<T extends BaseEntity> implements EntityStore<T> 
     }
 
     get(id: IdentityKey): Observable<T> {
-        return this._entityService.getByKey(id);
+        return this._entityService.getByKey(id).pipe(
+            map(dto => this.createEntityInstance(dto))
+        );
     }
 
     save(entity: T): Observable<T> {
