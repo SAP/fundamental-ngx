@@ -81,134 +81,52 @@
 </div>
 
 <ng-template #successNotifications>
-    <fd-notification-body [hasMessage]="true">
-        <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
+    <fd-notification-body *ngFor="let notification of notifications">
+        <fd-avatar [circle]="true" size="xs" [glyph]="notification.avatar"></fd-avatar>
         <fd-notification-content>
             <fd-notification-header>
-                <div fd-notification-indicator type="success"></div>
-                <h2 fd-notification-title [unread]="true">
-                    Your leave request has been accepted
+                <div fd-notification-indicator [type]="notification.indicator"></div>
+                <h2 fd-notification-title [unread]="notification.unread">
+                    {{notification.title}}
                 </h2>
             </fd-notification-header>
             <p fd-notification-paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {{notification.paragraph}}
             </p>
             <fd-notification-footer>
-                <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                <span fd-notification-footer-content>{{notification.footerContent1}}</span>
                 <span fd-notification-separator></span>
-                <span fd-notification-footer-content>7 minutes ago</span>
+                <span fd-notification-footer-content>{{notification.footerContent2}}</span>
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button label="Accept" [compact]="true"></button>
-            <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
-        </fd-notification-actions>
-    </fd-notification-body>
-
-    <fd-notification-body>
-        <fd-avatar [circle]="true" size="xs" image="http://picsum.photos/id/1018/400"></fd-avatar>
-        <fd-notification-content>
-            <fd-notification-header>
-                <div fd-notification-indicator type="success"></div>
-                <h2 fd-notification-title [unread]="true">
-                    Your leave request has been accepted
-                </h2>
-            </fd-notification-header>
-            <p fd-notification-paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <fd-notification-footer>
-                <span fd-notification-footer-content>SAP Analytics Cloud</span>
-                <span fd-notification-separator></span>
-                <span fd-notification-footer-content>2 minutes ago</span>
-            </fd-notification-footer>
-        </fd-notification-content>
-        <fd-notification-actions>
-            <button fd-button label="Open" [compact]="true"></button>
+            <button fd-button [label]="notification.actionButton" [compact]="true"></button>
             <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
         </fd-notification-actions>
     </fd-notification-body>
 </ng-template>
 
 <ng-template #warningNotifications>
-    <fd-notification-body [hasMessage]="true">
-        <fd-avatar [circle]="true" size="xs" glyph="batch-payments"></fd-avatar>
+    <fd-notification-body *ngFor="let notification of notificationsWarning">
+        <fd-avatar [circle]="true" size="xs" [glyph]="notification.avatar"></fd-avatar>
         <fd-notification-content>
             <fd-notification-header>
-                <div fd-notification-indicator type="warning"></div>
-                <h2 fd-notification-title [unread]="true">
-                    Your leave request has been accepted
+                <div fd-notification-indicator [type]="notification.indicator"></div>
+                <h2 fd-notification-title [unread]="notification.unread">
+                    {{notification.title}}
                 </h2>
             </fd-notification-header>
             <p fd-notification-paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {{notification.paragraph}}
             </p>
             <fd-notification-footer>
-                <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                <span fd-notification-footer-content>{{notification.footerContent1}}</span>
                 <span fd-notification-separator></span>
-                <span fd-notification-footer-content>7 minutes ago</span>
+                <span fd-notification-footer-content>{{notification.footerContent2}}</span>
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <fd-popover placement="bottom-end">
-                <fd-popover-control>
-                    <button
-                        fd-button 
-                        [compact]="true"
-                        fdType="transparent" 
-                        glyph="overflow">
-                    </button>
-                </fd-popover-control>
-                <fd-popover-body>
-                    <ul fd-list>
-                        <li fd-list-item [action]="true">
-                            <button fd-list-title>
-                                <span fd-list-title-text>
-                                    Accept
-                                </span>
-                            </button>
-                        </li>
-                        <li fd-list-item [action]="true">
-                            <button fd-list-title>
-                                <span fd-list-title-text>
-                                    Decline
-                                </span>
-                            </button>
-                        </li>
-                        <li fd-list-item [action]="true">
-                            <button fd-list-title>
-                                <span fd-list-title-text>
-                                    Forward
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                </fd-popover-body>
-            </fd-popover>
-            <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
-        </fd-notification-actions>
-    </fd-notification-body>
-
-    <fd-notification-body>
-        <fd-avatar [circle]="true" size="xs" image="http://picsum.photos/id/1018/400"></fd-avatar>
-        <fd-notification-content>
-            <fd-notification-header>
-                <div fd-notification-indicator type="warning"></div>
-                <h2 fd-notification-title [unread]="true">
-                    Your leave request has been accepted
-                </h2>
-            </fd-notification-header>
-            <p fd-notification-paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <fd-notification-footer>
-                <span fd-notification-footer-content>SAP Analytics Cloud</span>
-                <span fd-notification-separator></span>
-                <span fd-notification-footer-content>2 minutes ago</span>
-            </fd-notification-footer>
-        </fd-notification-content>
-        <fd-notification-actions>
-            <button fd-button label="Open" [compact]="true"></button>
+            <button fd-button [label]="notification.actionButton" [compact]="true"></button>
             <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
         </fd-notification-actions>
     </fd-notification-body>

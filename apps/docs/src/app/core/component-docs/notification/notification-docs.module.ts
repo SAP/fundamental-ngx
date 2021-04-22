@@ -9,8 +9,21 @@ import { NotificationExampleContentComponent } from './examples/component-as-con
 import { NotificationOptionsExampleComponent } from './examples/notification-options/notification-options-example.component';
 import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
 import { NotificationGroupExampleComponent } from './examples/notification-group/notification-group-example.component';
-import { AvatarModule, NotificationModule, NotificationService, MessageStripModule, TabsModule, ButtonModule, PopoverModule, MenuModule, ListModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { 
+    AvatarModule, 
+    NotificationModule, 
+    NotificationService, 
+    MessageStripModule, 
+    TabsModule, 
+    ButtonModule, 
+    PopoverModule, 
+    MenuModule, 
+    ListModule, 
+    ActionSheetModule, 
+    MessageToastModule 
+} from '@fundamental-ngx/core';
+
 
 
 const routes: Routes = [
@@ -35,7 +48,9 @@ const routes: Routes = [
         ButtonModule, 
         PopoverModule, 
         MenuModule, 
-        ListModule 
+        ListModule,
+        ActionSheetModule,
+        MessageToastModule
     ],
     exports: [RouterModule],
     declarations: [

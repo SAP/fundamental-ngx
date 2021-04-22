@@ -58,6 +58,14 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @Input()
     mobile = false;
 
+    /** The position of the popover body. Set to 'bottom' by default. **/
+    @Input()
+    placement = 'bottom';
+
+    /** Whether the popover body has an arrow. Set to false by default. **/
+    @Input()
+    noArrow = false;
+
     /** Whenever links should be visible **/
     @Input()
     isOpen = false;

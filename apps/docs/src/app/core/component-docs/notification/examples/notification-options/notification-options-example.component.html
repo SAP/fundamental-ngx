@@ -39,7 +39,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <fd-notification-footer>
-                <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                <span fd-notification-footer-content>Author name</span>
                 <span fd-notification-separator></span>
                 <span fd-notification-footer-content>7 minutes ago</span>
             </fd-notification-footer>
@@ -68,13 +68,22 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <fd-notification-footer>
-                <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                <span fd-notification-footer-content>SAP Ariba</span>
                 <span fd-notification-separator></span>
                 <span fd-notification-footer-content>7 minutes ago</span>
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button fd-button label="Open" [compact]="true"></button>
+            <fd-action-sheet  [compact]="true" [noArrow]="true" placement="bottom-end">
+                <fd-action-sheet-control>
+                    <button fd-button fdType="transparent" glyph="overflow" [compact]="true"></button>
+                </fd-action-sheet-control>
+                <fd-action-sheet-body>
+                    <li fd-action-sheet-item [compact]="true" label="Approve" glyph="accept" (click)="actionPicked('Approve')"></li>
+                    <li fd-action-sheet-item [compact]="true" label="Reject" glyph="decline" (click)="actionPicked('Reject')"></li>
+                    <li fd-action-sheet-item [compact]="true" label="Forward" glyph="arrow-right" (click)="actionPicked('Forward')"></li>
+                </fd-action-sheet-body>
+            </fd-action-sheet>
             <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
         </fd-notification-actions>
     </fd-notification-body>
@@ -95,30 +104,23 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
                 <fd-notification-footer>
-                    <span fd-notification-footer-content>Long author name - SAP Analytics Cloud incididunt ut labore</span>
+                    <span fd-notification-footer-content>Author name</span>
                     <span fd-notification-separator></span>
-                    <span fd-notification-footer-content>7 minutes ago</span>
+                    <span fd-notification-footer-content>Timestamp</span>
                 </fd-notification-footer>
             </fd-notification-content>
             <fd-notification-actions>
-                <button
-                    fd-button 
-                    fdType="transparent" 
-                    glyph="overflow" 
-                    [fdMenuTrigger]="menu">
-                </button>
-                <fd-menu #menu placement="bottom-end">
-                    <li fd-menu-item>
-                        <a href="#" fd-menu-interactive>
-                            <span fd-menu-title>Accept</span>
-                        </a>
-                    </li>
-                    <li fd-menu-item>
-                        <a href="#" fd-menu-interactive>
-                            <span fd-menu-title>Reject</span>
-                        </a>
-                    </li>
-                </fd-menu>   
+                <fd-action-sheet [mobile]="true">
+                    <fd-action-sheet-control>
+                        <button fd-button fdType="transparent" glyph="overflow"></button>
+                    </fd-action-sheet-control>
+                    <fd-action-sheet-body>
+                        <li fd-action-sheet-item label="Approve" glyph="accept" (click)="actionPicked('Approve')" [isCloseButton]="true"></li>
+                        <li fd-action-sheet-item label="Reject" glyph="decline" (click)="actionPicked('Reject')" [isCloseButton]="true"></li>
+                        <li fd-action-sheet-item label="Forward" glyph="arrow-right" (click)="actionPicked('Forward')" [isCloseButton]="true"></li>
+                        <li fd-action-sheet-item label="Cancel" [negative]="true" [isCloseButton]="true"></li>
+                    </fd-action-sheet-body>
+                </fd-action-sheet>
             </fd-notification-actions>
         </fd-notification-body>
     </fd-notification>

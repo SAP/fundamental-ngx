@@ -13,7 +13,7 @@ export class NotificationOpenTemplateExampleComponent {
 
     open(notificationComponent): void {
         const notificationRef = this.notificationService.open(notificationComponent);
-
+        setTimeout(() => notificationRef.dismiss('dismissed'), 4000);
         notificationRef.afterClosed.subscribe(
             (result) => {
                 this.closeReason = 'Notification closed with result: ' + result;
