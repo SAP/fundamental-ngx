@@ -7,7 +7,8 @@
  *
  */
 
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { DateLocale } from './datetime-formats';
 
 export abstract class DatetimeAdapter<D> {
     /** current locale */
@@ -18,6 +19,12 @@ export abstract class DatetimeAdapter<D> {
 
     /** locale changes stream */
     readonly localeChanges: Observable<void> = this._localeChanges.asObservable();
+
+    /** @hidden */
+    protected _currentLocaleData: BehaviorSubject<DateLocale> = new BehaviorSubject(null);
+
+    /** locale data stream */
+    protected $currentLocaleData: Observable<DateLocale> = this._currentLocaleData.asObservable();
 
     /**
      * Sets the locale used for all dates.
