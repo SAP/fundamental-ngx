@@ -69,7 +69,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     };
 
     getMonth(date: Moment): number {
-        return this.clone(date).month();
+        return this.clone(date).month() + 1;
     };
 
     getDate(date: Moment): number {
@@ -206,7 +206,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     };
 
     createDate(year: number, month: number, date: number): Moment {
-        if (month < 0 || month > 11) {
+        if (month < 0 || month > 12) {
             throw Error(`Invalid month index "${ month }". Month index has to be between 0 and 11.`);
         }
 
@@ -214,7 +214,11 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
             throw Error(`Invalid date "${ date }". Date has to be greater than 0.`);
         }
 
-        const result = this._createMomentDate({ year: year, month: month, date: date }).locale(this.locale);
+        const result = this._createMomentDate({
+            year: year,
+            month: month !== 0 ? month - 1 : month,
+            date: date
+        }).locale(this.locale);
 
         if (!result.isValid()) {
             throw Error(`Invalid date "${ date }" for month with index "${ month }".`);
