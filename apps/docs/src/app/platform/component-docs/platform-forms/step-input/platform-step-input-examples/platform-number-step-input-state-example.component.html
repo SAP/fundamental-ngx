@@ -1,0 +1,13 @@
+<div class="step-input-example-container">
+    <div class="step-input-example" *ngFor="let state of states">
+        <label fd-form-label [for]="'number-step-' + state">
+            Number Step Input State: <code>{{ state }}</code>
+        </label>
+        <fdp-number-step-input
+            [id]="'number-step-' + state"
+            [name]="'number-step-' + state"
+            [state]="state"
+            contentDensity="compact"
+        ></fdp-number-step-input>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
@@ -44,7 +44,7 @@ describe('ObjectListItemComponent', () => {
     let component: ObjectListItemComponentTest;
     let fixture: ComponentFixture<ObjectListItemComponentTest>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
             declarations: [ObjectListItemComponentTest, ObjectListItemComponent, ListComponent, ObjectListItemRowComponent]
@@ -208,7 +208,7 @@ const LIST_ELEMENTS: Product[] = [
         introductionText: 'First product with discount',
         currency: 'Euro',
         amount: '87.50',
-        image: 'http://lorempixel.com/400/400/nature',
+        image: 'https://picsum.photos/400/400',
         gylp1: 'add-favorite',
         gylp2: 'flag',
         attribute2: '',
@@ -229,7 +229,7 @@ const LIST_ELEMENTS: Product[] = [
         introductionText: 'First product with discount',
         currency: 'Euro',
         amount: '237.50',
-        image: 'http://lorempixel.com/400/400/nature',
+        image: 'https://picsum.photos/400/400',
         gylp1: 'request',
         gylp2: 'flag',
         attribute1: '155 x 240 x 160 cm',
@@ -250,7 +250,7 @@ const LIST_ELEMENTS: Product[] = [
         introductionText: 'No discount',
         currency: 'Euro',
         amount: '117.50',
-        image: 'http://lorempixel.com/400/400/nature',
+        image: 'https://picsum.photos/400/400',
         gylp1: 'add-favorite',
         gylp2: 'user-edit',
         attribute1: 'Fixed rate',
@@ -271,7 +271,7 @@ const LIST_ELEMENTS: Product[] = [
         introductionText: '',
         currency: 'Euro',
         amount: '734.50',
-        image: 'http://lorempixel.com/400/400/nature',
+        image: 'https://picsum.photos/400/400',
         gylp1: '',
         gylp2: 'private',
         attribute1: '12g',
@@ -316,8 +316,8 @@ export class ListDataProvider extends DataProvider<Product> {
     }
     fetch(params: Map<string, string>): Observable<Product[]> {
         let data = LIST_ELEMENTS;
-        if (!!params.get(name)) {
-            const keyword = params.get(name).toLowerCase();
+        if (!!params.get('name')) {
+            const keyword = params.get('name').toLowerCase();
             data = data.filter((item) => item.title.toLowerCase().indexOf(keyword) > -1);
         }
         return of(data);
@@ -357,7 +357,7 @@ describe('Object  List Item Component with DataSource', () => {
     let component: ObjectListItemDataSourceTestComponent;
     let fixture: ComponentFixture<ObjectListItemDataSourceTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
             declarations: [ObjectListItemDataSourceTestComponent, ObjectListItemComponent, ListComponent, ObjectListItemRowComponent]
@@ -406,7 +406,7 @@ describe('Object  List Item Component with DataSource', () => {
         const listItems = fixture.debugElement.queryAll(By.css('fdp-object-list-item'));
         fixture.detectChanges();
         listItems.forEach((listElem) => {
-            expect(listElem.nativeElement.getAttribute('ng-reflect-image')).toContain('http://lorempixel.com/400/400/');
+            expect(listElem.nativeElement.getAttribute('ng-reflect-image')).toContain('https://picsum.photos/400/400');
         });
     });
 

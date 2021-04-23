@@ -43,10 +43,19 @@ testem.log
 report.*.json
 
 # e2e
-/e2e/*.js
 /e2e/*.map
+allure-report
+allure-results
+unit-tests-allure-report
+libs/core/reports
+.tmp
+e2e/tmp
+axe-reports
 
 # System Files
 .DS_Store
 Thumbs.db
 .firebase
+
+# SauceLabs
+sauce_connect.log

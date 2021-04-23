@@ -1,4 +1,4 @@
-<fd-docs-section-title [id]="'simpleMultiInput'" [componentName]="'multi-input'">
+<fd-docs-section-title id="simpleMultiInput" componentName="multi-input">
     Simple Multi Input
 </fd-docs-section-title>
 <description>
@@ -13,7 +13,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'compactMultiInput'" [componentName]="'multi-input'">
+<fd-docs-section-title id="compactMultiInput" componentName="multi-input">
     Compact Multi Input
 </fd-docs-section-title>
 <description>
@@ -27,7 +27,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'mobileMultiInput'" [componentName]="'multi-input'">
+<fd-docs-section-title id="mobileMultiInput" componentName="multi-input">
     Mobile Mode Multi Input
 </fd-docs-section-title>
 <description>
@@ -35,13 +35,16 @@
     <ul>
         <li>import <code>MultiInputMobileModule</code></li>
         <li>Set <code>[mobile]</code> property to true</li>
-        <li>Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+        <li>
+            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
             look of the control
         </li>
     </ul>
 
-    Multi Input Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
-    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more information.
+    Multi Input Mobile Mode can be configured <strong>globally</strong> by providing
+    <code>MOBILE_MODE_CONFIG</code> token. Check
+    <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
 </description>
 <component-example>
     <fd-multi-input-mobile-example></fd-multi-input-mobile-example>
@@ -50,7 +53,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'displayObjectProperty'" [componentName]="'multi-input'">
+<fd-docs-section-title id="displayObjectProperty" componentName="multi-input">
     Display Object Property
 </fd-docs-section-title>
 <description>
@@ -65,12 +68,24 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'customFilter'" [componentName]="'multi-input'">
-    Custom Filter
-</fd-docs-section-title>
+<fd-docs-section-title id="includes" componentName="multi-input"> Return results including search term </fd-docs-section-title>
+<description>
+    By default, the multi-input will only return results where the result starts with the search term. By setting
+    <code>[includes]="true"</code>, the multi-input will return results where the result includes the search term at
+    any place in the string.
+</description>
+<component-example>
+    <fd-multi-input-includes-example></fd-multi-input-includes-example>
+</component-example>
+<code-example [exampleFiles]="includes"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="customFilter" componentName="multi-input"> Custom Filter </fd-docs-section-title>
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
-    accepts an array and a search term, and then returns the desired filtered array.
+    accepts an array and a search term, and then returns the desired filtered array. In this example, we are requiring
+    that the search term is case-sensitive.
 </description>
 <component-example>
     <fd-multi-input-filter-example></fd-multi-input-filter-example>
@@ -79,7 +94,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'observableAsyncExample'" [componentName]="'multi-input'">
+<fd-docs-section-title id="observableAsyncExample" componentName="multi-input">
     Observable Async Example
 </fd-docs-section-title>
 <description>
@@ -93,7 +108,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'reactiveForm'" [componentName]="'multi-input'">
+<fd-docs-section-title id="reactiveForm" componentName="multi-input">
     Multi Input in Reactive Form
 </fd-docs-section-title>
 <description>The multi-input component may also be used within an angular reactive form.</description>
@@ -104,16 +119,26 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'newTokens'" [componentName]="'multi-input'">
-    Adding New Tokens
-</fd-docs-section-title>
+<fd-docs-section-title id="newTokens" componentName="multi-input"> Adding New Tokens </fd-docs-section-title>
 <description>
     Set <code>[allowNewTokens]</code> to "true" to allow the creation of new tokens in the multi-input. Note that if you
     are populating the multi-input with objects and using a custom <code>displayFn</code>, you will also need to
     implement your own <code>newTokenParseFn</code> so your multi-input knows how to format a new object. This function
-    is not required if your collection is simply an array of strings.
+    is not required if your collection is simply an array of strings. To customise validation function, you can pass
+    <code>[newTokenValidateFn]</code>, which by default doesn't allow empty strings.
 </description>
 <component-example>
     <fd-multi-input-new-tokens-example></fd-multi-input-new-tokens-example>
 </component-example>
 <code-example [exampleFiles]="newTokens"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="customItem" componentName="multi-input"> Custom Item Template </fd-docs-section-title>
+<description>
+    The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code> to the component. The <code>itemTemplate</code> should align with the contents of an fd-list-item directive.
+</description>
+<component-example>
+    <fd-multi-input-custom-item-example></fd-multi-input-custom-item-example>
+</component-example>
+<code-example [exampleFiles]="customItem"></code-example>

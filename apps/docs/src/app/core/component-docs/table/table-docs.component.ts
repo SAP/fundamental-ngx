@@ -28,6 +28,7 @@ import * as tableCdkScss from '!raw-loader!./examples/table-cdk-example.componen
 import * as tablePopInHTs from '!raw-loader!./examples/table-popin-example/table-popin-example.component.ts';
 import * as tablePopInHtml from '!raw-loader!./examples/table-popin-example/table-popin-example.component.html';
 import * as tableCustomHtml from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.html';
+import * as tableFocusableHtml from '!raw-loader!./examples/table-focusable-example/table-focusable-example.component.html';
 import * as tableCustomTs from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.ts';
 import * as tableDialogCustom from '!raw-loader!./examples/table-custom-columns-example/table-custom-dialog.component.ts';
 import * as tableFilterPipe from '!raw-loader!../../../documentation/core-helpers/pipes/filter.pipe.ts';
@@ -258,6 +259,14 @@ export class TableDocsComponent {
             component: 'TableCdkExampleComponent',
             code: tableCdkTs,
             fileName: 'table-cdk-example'
+        }
+    ];
+
+    tableFocusable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableFocusableHtml,
+            fileName: 'table-focusable-example'
         }
     ];
 

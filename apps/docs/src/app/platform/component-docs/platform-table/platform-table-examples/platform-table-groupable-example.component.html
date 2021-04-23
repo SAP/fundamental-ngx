@@ -1,4 +1,5 @@
 <fdp-table
+    #table
     [dataSource]="source"
     (rowSelectionChange)="logSelectionChange($event)"
     (groupChange)="logGroupChange($event)"
@@ -8,7 +9,7 @@
 >
 
     <fdp-table-toolbar
-        title="Order Line Items"
+        title="Order Items"
         [hideItemCount]="false"
     >
     </fdp-table-toolbar>
@@ -46,3 +47,6 @@
     >
     </fdp-column>
 </fdp-table>
+
+<!-- View Settings Dialog-->
+<fdp-table-view-settings-dialog [table]="table"></fdp-table-view-settings-dialog>

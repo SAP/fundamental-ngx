@@ -1,0 +1,28 @@
+<form #upload="ngForm" (ngSubmit)="onSubmit()">
+    <fdp-form-group [formGroup]="customForm">
+        <fdp-form-field
+            #ffmi1
+            label="Default Multi Input Field"
+            id="input-simple"
+            name="reactiveFormInput"
+            rank="1"
+            placeholder="Field placeholder text"
+            [required]="true"
+        >
+            <fdp-multi-input
+                [formControl]="reactiveForm"
+                placeholder="Field placeholder text"
+                type="text"
+                id="fdp-id-reactive"
+                name="input1"
+                [dataSource]="_datasource"
+                displayKey="firstName"
+                selectionMode="Multi"
+                [status]="!hasError() ? 'error' : 'success'"
+            >
+            </fdp-multi-input>
+            <p>Form Selected Item: {{ ffmi1.formControl.value | json }}</p>
+        </fdp-form-field>
+    </fdp-form-group>
+    <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem" label="Submit"></fdp-button>
+</form>

@@ -21,5 +21,21 @@
 
 	.fd-shellbar__group {
 		flex-basis: auto;
-	}
+    }
+    
+    &--side-nav {
+        &.fd-shellbar--s,
+        &.fd-shellbar--m,
+        &.fd-shellbar--l,
+        &.fd-shellbar--xl {
+            padding: 0 0.5rem 0 0;
+
+            @at-root {
+                [dir="rtl"] &,
+                &[dir="rtl"] {
+                    padding: 0 0 0 0.5rem;
+                }
+            }   
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DndListDirective, ElementChord } from './dnd-list.directive';
 import { Component, ViewChild } from '@angular/core';
 import { DndItemDirective } from '../dnd-item/dnd-item.directive';
@@ -26,7 +26,7 @@ describe('DndListDirective', () => {
     let directive: DndListDirective<string>;
     let elementCoordinates: ElementChord[];
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [DragDropModule],
             declarations: [DndListDirective, TestDndListComponent, DndItemDirective]
@@ -39,10 +39,10 @@ describe('DndListDirective', () => {
         directive = component.directive;
         component.list = ['item1', 'item2', 'item3', 'item4'];
         elementCoordinates = [
-            { x: 145, y: 145, position: 'before' },
-            { x: 200, y: 200, position: 'before' },
-            { x: 250, y: 250, position: 'before' },
-            { x: 300, y: 300, position: 'before' }
+            { x: 145, y: 145, position: 'before', height: 30, width: 30 },
+            { x: 200, y: 200, position: 'before', height: 30, width: 30 },
+            { x: 250, y: 250, position: 'before', height: 30, width: 30 },
+            { x: 300, y: 300, position: 'before', height: 30, width: 30 }
         ];
         fixture.detectChanges();
     });
@@ -81,9 +81,9 @@ describe('DndListDirective', () => {
 
         directive.onMove(pointerPosition, 3);
 
-        expect((directive as any)._closestItemIndex).toBe(2);
+        expect((directive as any)._closestItemIndex).toBe(1);
         expect((directive as any)._closestItemPosition).toBe('before');
-        expect((directive as any)._createLine).toHaveBeenCalledWith(2, 'before');
+        expect((directive as any)._createLine).toHaveBeenCalledWith(1, 'before');
     });
 
     it('should handle dragend', () => {
@@ -105,19 +105,19 @@ describe('DndListDirective', () => {
     it('should handle stickToPosition', () => {
         spyOn(directive as any, '_createLine');
 
-        const pointerPosition = { x: 230, y: 230 };
+        const pointerPosition = { x: 231, y: 231 };
         (directive as any)._closestItemIndex = 1000;
         (directive as any)._closestItemPosition = 'after';
 
-        /** This is element tht should be ignored */
-        elementCoordinates.push({ x: 235, y: 230, stickToPosition: true, position: 'after' });
+        /** This is element that should be ignored */
+        elementCoordinates.push({ x: 235, y: 230, stickToPosition: true, position: 'after', height: 10, width: 10 });
 
         (directive as any)._elementsCoordinates = elementCoordinates;
 
         directive.onMove(pointerPosition, 3);
 
-        expect((directive as any)._closestItemIndex).toBe(2);
-        expect((directive as any)._closestItemPosition).toBe('before');
-        expect((directive as any)._createLine).toHaveBeenCalledWith(2, 'before');
+        expect((directive as any)._closestItemIndex).toBe(1000);
+        expect((directive as any)._closestItemPosition).toBe('after');
+        expect((directive as any)._createLine).not.toHaveBeenCalledWith(1000, 'before');
     });
 });

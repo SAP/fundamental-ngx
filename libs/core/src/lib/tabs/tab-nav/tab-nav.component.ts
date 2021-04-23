@@ -9,14 +9,15 @@ import {
     QueryList,
     ViewEncapsulation,
     OnChanges,
-    OnInit
+    OnInit,
+    Optional
 } from '@angular/core';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
-import { merge, Subject } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { applyCssClass, ContentDensityService, CssClassBuilder } from '../../utils/public_api';
 import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -46,7 +47,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** Whether user wants to use tab component in compact mode */
     @Input()
-    compact: boolean;
+    compact?: boolean;
 
     /** @hidden */
     @ContentChildren(TabLinkDirective)
@@ -56,6 +57,9 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     @ContentChildren(TabItemDirective)
     items: QueryList<TabItemDirective>;
 
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -63,7 +67,11 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _tabsService: TabsService, private _elementRef: ElementRef) {}
+    constructor(
+        private _tabsService: TabsService,
+        private _elementRef: ElementRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -79,11 +87,18 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.buildComponentCssClass();
+            }))
+        }
         this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
@@ -132,10 +147,12 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
 
     /** @hidden */
     private _listenOnTabSelect(): void {
-        this._tabsService.tabSelected.pipe(
-            takeUntil(this._onDestroy$),
-            filter(index => !this.tabLinks[index].disabled)
-        ).subscribe(index => this.selectTab(index));
+        this._tabsService.tabSelected
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter((index) => !this.tabLinks[index].disabled)
+            )
+            .subscribe((index) => this.selectTab(index));
     }
 
     /**
@@ -162,7 +179,7 @@ export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnD
                 this._tabsService.tabHeaderKeyHandler(
                     index,
                     event,
-                    this.tabLinks.map(link => link.elementRef.nativeElement)
+                    this.tabLinks.map((link) => link.elementRef.nativeElement)
                 )
             );
         });

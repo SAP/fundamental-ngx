@@ -1,0 +1,110 @@
+<fd-dialog class="fdp-table-p13-grouping-dialog">
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h4
+                        fd-title
+                        [headerSize]="4"
+                        i18n="@@platformTableP13GroupDialogHeader"
+                    >Group</h4>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fdp-table-reset-button></fdp-table-reset-button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+
+        <div
+            class="group-row"
+            *ngFor="let rule of rules; let i = index"
+        >
+            <fd-select
+                class="group-row__select"
+                [value]="rule.columnKey"
+                (valueChange)="_onRuleColumnKeyChange(rule, $event)"
+                [compact]="true"
+                placeholder="(none)"
+                i18n-placeholder="@@platformTableP13GroupDialogNoneSelectedColumn|Table column select placeholder"
+            >
+                <fd-option
+                    *ngFor="let column of columns"
+                    [value]="column.key"
+                >
+                    {{column.label}}
+                </fd-option>
+            </fd-select>
+
+            <fd-checkbox
+                class="group-row__checkbox"
+                [ngModel]="rule.showAsColumn"
+                (ngModelChange)="_onRuleShowAsColumnChange(rule, $event)"
+                [compact]="true"
+                label="Show Field as Column"
+                i18n-label="@@platformTableP13GroupDialogShowFieldAsColumn"
+            ></fd-checkbox>
+
+            <div class="group-row__actions">
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="sys-cancel"
+                    [compact]="true"
+                    i18n-aria-label="platformTableP13GroupDialogRemoveGroup|Remove line aria-label attribute"
+                    aria-label="Remove"
+                    i18n-title="@@platformTableP13GroupDialogRemoveGroup|Remove line title attribute"
+                    title="Remove"
+                    (click)="_removeRule(rule)"
+                ></button>
+
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="add"
+                    [compact]="true"
+                    i18n-aria-label="@@platformTableP13GroupDialogAddNewGroup|Add new line aria-label attribute"
+                    aria-label="Add new"
+                    i18n-title="@@platformTableP13GroupDialogAddNewGroup|Add new line title attribute"
+                    title="Add new"
+                    (click)="_addNew(i)"
+                ></button>
+            </div>
+
+        </div>
+
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                i18n-label="@@platformTableP13GroupDialogConfirmationBtn"
+                label="OK"
+                [compact]="true"
+                (click)="confirm()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                fd-initial-focus
+                i18n-label="@@platformTableP13GroupDialogCancelBtn"
+                label="Cancel"
+                [compact]="true"
+                (click)="cancel()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

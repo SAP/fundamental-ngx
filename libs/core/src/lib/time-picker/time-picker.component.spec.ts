@@ -8,6 +8,7 @@ import { TimeModule } from '../time/time.module';
 import { ButtonModule } from '../button/button.module';
 
 import { TimePickerComponent } from './time-picker.component';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent<FdDate>;
@@ -17,7 +18,8 @@ describe('TimePickerComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule, PopoverModule, InputGroupModule, ButtonModule, FdDatetimeModule, TimeModule],
-                declarations: [TimePickerComponent]
+                declarations: [TimePickerComponent],
+                providers: [ContentDensityService]
             }).compileComponents();
         })
     );
@@ -30,6 +32,11 @@ describe('TimePickerComponent', () => {
 
     it('should create with default values', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should use displayFormat and set to true _displayHours, _displayMinutes, _meridian', () => {
@@ -126,5 +133,19 @@ describe('TimePickerComponent', () => {
         spyOn(component, 'onChange');
         component.timeFromTimeComponentChanged(time);
         expect(component.onChange).toHaveBeenCalledWith(time);
+    });
+
+    it('should hide message on open', () => {
+        const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
+        component.handleIsOpenChange(true);
+        expect(hideSpy).toHaveBeenCalled();
+    })
+
+    it('should show message on close', () => {
+        component.isOpen = true;
+
+        const showSpy = spyOn((<any>component)._popoverFormMessage, 'show');
+        component.handleIsOpenChange(false);
+        expect(showSpy).toHaveBeenCalled();
     });
 });

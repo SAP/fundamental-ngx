@@ -4,15 +4,6 @@
     display: block;
 }
 
-.fd-switch__wrapper {
-    [class*=sap-icon] {
-        line-height: 2rem;
-        &.fd-switch__icon--off {
-            color: var(--sapNegativeElementColor, #b00);
-        }
-
-        &.fd-switch__icon--on {
-            color: var(--sapPositiveElementColor, #107e3e);
-        }
-    }
+.fd-switch__invisible-text {
+    display: none !important;
 }

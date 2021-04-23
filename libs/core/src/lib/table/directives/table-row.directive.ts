@@ -5,7 +5,8 @@ import {
     Directive,
     HostBinding,
     Input,
-    OnDestroy, OnInit,
+    OnDestroy,
+    OnInit,
     QueryList
 } from '@angular/core';
 import { TableCellDirective } from './table-cell.directive';
@@ -37,6 +38,11 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @HostBinding('class.fd-table__row--hoverable')
     @Input()
     hoverable = false;
+
+    /** Whether or not the table row is focusable */
+    @HostBinding('class.fd-table__row--focusable')
+    @Input()
+    focusable = false;
 
     /** Whether or not the table row is main row, it's concerned only on pop in mode */
     @HostBinding('class.fd-table__row--main')

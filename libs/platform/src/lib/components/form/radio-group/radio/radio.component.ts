@@ -62,7 +62,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** click event to emit */
     @Output()
-    readonly click: EventEmitter<RadioButtonComponent> = new EventEmitter();
+    readonly checked: EventEmitter<RadioButtonComponent> = new EventEmitter();
 
     /** Access radio button child elemen passed as content of radio button group*/
     @ViewChild(CoreRadioButtonComponent, { static: false })
@@ -108,21 +108,17 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         super.ngAfterViewInit();
     }
 
-    /** @hidden change formcontrol value, emits the event*/
-    public onClick(event: KeyboardEvent | MouseEvent): void {
-        event.stopPropagation();
-        if (!this.disabled) {
-            if (super.getValue() !== undefined) {
-                this.valueChange(this.value);
-                this.click.emit(this);
-            }
-        }
-    }
-
     /** @hidden */
     public valueChange(value: any): void {
+        if (this.disabled) {
+            return;
+        }
+
         this.currentValue = value;
         this.isChecked = this.currentValue === this.getValue();
+        if (this.isChecked) {
+            this.checked.emit(this);
+        }
         this.tabIndex = this.isChecked ? 0 : -1;
         this._cd.detectChanges();
         this.onChange(value);

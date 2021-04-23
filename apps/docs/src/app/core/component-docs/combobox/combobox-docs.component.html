@@ -1,6 +1,4 @@
-<fd-docs-section-title id="combobox-standard" componentName="combobox">
-    Standard Combobox
-</fd-docs-section-title>
+<fd-docs-section-title id="combobox-standard" componentName="combobox"> Standard Combobox </fd-docs-section-title>
 <description>The standard version of the component that most people will likely use regularly.</description>
 <component-example>
     <fd-combobox-example></fd-combobox-example>
@@ -9,15 +7,21 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="combobox-customFilter" componentName="combobox">
-    Custom Filter
-</fd-docs-section-title>
+<fd-docs-section-title id="combobox-standard" componentName="combobox">Combobox as Search Field</fd-docs-section-title>
+<description>Set the <code>isSearch</code> property to true to use Combobox as a Search Field. The input-group addon is changed to 'search' and additional Clear button will appear when the user enters a value in the input field. The Clear button can be hidden by setting the <code>showClearButton</code> to false. By default it's set to true.</description>
+<component-example>
+    <fd-combobox-search-field-example></fd-combobox-search-field-example>
+</component-example>
+<code-example [exampleFiles]="comboboxSearchFieldExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="combobox-customFilter" componentName="combobox"> Custom Filter </fd-docs-section-title>
 <description>
     The input supports custom filters through the <code>filterFn</code> input function. Simply pass a function which
     accepts an array and a search term, handle filtering logic within this function, and then return the desired
-    filtered array. In this example, we are only populating the list with results where the search term matches the
-    beginning of the result, as opposed to the usual behavior where the list will be populated if the search term
-    appears anywhere in the string.
+    filtered array. In this example, the list will only display if the search term case matches the result (the combobox
+    will still auto-select a match regardless of case, however).
 </description>
 <component-example>
     <fd-combobox-dynamic-example></fd-combobox-dynamic-example>
@@ -41,21 +45,21 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="combobox-mobile" componentName="combobox">
-    Combobox Mobile Mode
-</fd-docs-section-title>
+<fd-docs-section-title id="combobox-mobile" componentName="combobox"> Combobox Mobile Mode </fd-docs-section-title>
 <description>
     To use Combobox in mobile mode:
     <ul>
         <li>import <code>ComboboxMobileModule</code></li>
         <li>Set <code>[mobile]</code> property to true</li>
-        <li>Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+        <li>
+            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
             look of the control
         </li>
     </ul>
 
     Combobox Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
-    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more information.
+    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
 </description>
 <component-example>
     <fd-combobox-mobile-example></fd-combobox-mobile-example>
@@ -78,9 +82,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="open-control" componentName="combobox">
-    Open State Control
-</fd-docs-section-title>
+<fd-docs-section-title id="open-control" componentName="combobox"> Open State Control </fd-docs-section-title>
 <description>
     By subscribing to event <code>(openChange)</code> it is possible to detect the changes of open state in combobox.
 </description>
@@ -112,9 +114,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="combobox-customItem" componentName="combobox">
-    Custom Item Template
-</fd-docs-section-title>
+<fd-docs-section-title id="combobox-customItem" componentName="combobox"> Custom Item Template </fd-docs-section-title>
 <description>
     The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code> to
     the component. The <code>itemTemplate</code> should align with the contents of an
@@ -140,9 +140,7 @@
 </component-example>
 <code-example [exampleFiles]="comboboxColumnsExample"></code-example>
 
-<fd-docs-section-title id="combobox-group" componentName="combobox">
-    Combobox with Groups
-</fd-docs-section-title>
+<fd-docs-section-title id="combobox-group" componentName="combobox"> Combobox with Groups </fd-docs-section-title>
 <description>
     Grouping data within a set of values can be achieved by passing a function to the <code>[groupFn]</code> input. This
     function should accept an object of key/value pairs as the parameter. Each key will be a group name and the
@@ -167,12 +165,22 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="combobox-reactiveForm" componentName="combobox">
-    Reactive Form
+<fd-docs-section-title id="combobox-includes" componentName="combobox">
+    Return results including search term
 </fd-docs-section-title>
 <description>
-    The Combobox component may also be used within Angular Reactive Forms.
-</description>
+    By default, the combobox will only return results where the result starts with the search term. By setting
+    <code>[includes]="true"</code>, the combobox will return results where the result includes the search term at
+    any place in the string.</description>
+<component-example>
+    <fd-combobox-includes-example></fd-combobox-includes-example>
+</component-example>
+<code-example [exampleFiles]="comboboxIncludesExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="combobox-reactiveForm" componentName="combobox"> Reactive Form </fd-docs-section-title>
+<description> The Combobox component may also be used within Angular Reactive Forms. </description>
 <description>
     Use the <code>[communicateByObject]</code> boolean input if you are using custom objects for the
     <code>dropdownValues</code>
@@ -186,12 +194,8 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="combobox-disabled" componentName="combobox">
-    Disabled Combobox
-</fd-docs-section-title>
-<description>
-    This example shows how to use a a disabled combobox in a reactive form.
-</description>
+<fd-docs-section-title id="combobox-disabled" componentName="combobox"> Disabled Combobox </fd-docs-section-title>
+<description> This example shows how to use a a disabled combobox in a reactive form. </description>
 <component-example>
     <fd-combobox-disabled-example></fd-combobox-disabled-example>
 </component-example>

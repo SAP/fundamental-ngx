@@ -1,12 +1,20 @@
-import { Component, EventEmitter, Inject, Output, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import { ShellbarMenuItem, MenuKeyboardService, MenuComponent, ThemesService } from '@fundamental-ngx/core';
+import {
+    ContentDensity,
+    ContentDensityService,
+    MenuComponent,
+    MenuKeyboardService,
+    ShellbarMenuItem,
+    ShellbarSizes,
+    ThemesService
+} from '@fundamental-ngx/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -26,6 +34,8 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
     customCssUrl: SafeResourceUrl;
 
     library: string;
+
+    size: ShellbarSizes = 'm';
 
     version = {
         id: environment.version,
@@ -58,6 +68,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _routerService: Router,
         private _themesService: ThemesService,
         private _docsThemeService: DocsThemeService,
+        private _contentDensityService: ContentDensityService,
         @Inject('CURRENT_LIB') private _currentLib: Libraries,
     ) {
         this.library = _routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
@@ -72,6 +83,9 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.versions = [
+            {id: '0.27.0', url: 'https://602a61e08b3cf200074fa0b5--fundamental-ngx.netlify.app/'},
+            {id: '0.26.0', url: 'https://600860290fee570007d7f660--fundamental-ngx.netlify.app/'},
+            {id: '0.25.1', url: 'https://5fdb2c4892110a00080b0895--fundamental-ngx.netlify.app/'},
             {id: '0.24.1', url: 'https://5fbd1c1239f44a000736c439--fundamental-ngx.netlify.app/'},
             {id: '0.23.0', url: 'https://5f96ff4047c5f300070eb8a1--fundamental-ngx.netlify.app/'},
             {id: '0.22.0', url: 'https://5f776fb812cfa300086de86a--fundamental-ngx.netlify.app/'},
@@ -93,6 +107,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         if (!(this.cssUrl && this.customCssUrl)) {
             this.selectTheme(this.themes[0].id);
         }
+
+        fromEvent(window, 'resize')
+            .pipe(startWith(1), debounceTime(60), takeUntil(this._onDestroy$))
+            .subscribe(() => this.size = this._getShellbarSize());
     }
 
     ngOnDestroy(): void {
@@ -107,5 +125,14 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     selectVersion(version: any): void {
         window.open(version.url, '_blank');
+    }
+
+    selectDensity(density: ContentDensity): void {
+        this._contentDensityService.contentDensity.next(density);
+    }
+
+    private _getShellbarSize(): ShellbarSizes {
+        const width = window.innerWidth;
+        return width < 599 ? 's' : 'm';
     }
 }

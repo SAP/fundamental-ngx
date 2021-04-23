@@ -13,7 +13,6 @@
     "node": ">= 10"
   },
   "peerDependencies": {
-    "@angular/cdk": "CDK_VER_PLACEHOLDER",
     "@angular/common": "ANGULAR_VER_PLACEHOLDER",
     "@angular/core": "ANGULAR_VER_PLACEHOLDER",
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
@@ -22,10 +21,10 @@
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
+    "@angular/cdk": "CDK_VER_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
-    "popper.js": "POPPER_VER_PLACEHOLDER",
     "hammerjs": "HAMMERJS_VER_PLACEHOLDER"
   }
 }

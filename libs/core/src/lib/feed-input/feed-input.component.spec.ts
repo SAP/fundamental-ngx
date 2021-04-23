@@ -74,7 +74,7 @@ describe('FeedInputComponent', () => {
         textareaEl.triggerEventHandler('keyup', { target: { value: 'Feed message' } });
         fixture.detectChanges();
 
-        expect((<any>buttonDirective)._elementRef.nativeElement.disabled).toBeFalse();
+        expect((<any>buttonDirective)._elementRef.nativeElement.getAttribute('aria-disabled')).toBe('false');
     });
 
     it('should button enable when textarea have not a value', () => {
@@ -82,7 +82,7 @@ describe('FeedInputComponent', () => {
         textareaEl.triggerEventHandler('keyup', { target: { value: '' } });
         fixture.detectChanges();
 
-        expect((<any>buttonDirective)._elementRef.nativeElement.disabled).toBeTrue();
+        expect((<any>buttonDirective)._elementRef.nativeElement.getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should emit value properly', () => {
@@ -94,14 +94,13 @@ describe('FeedInputComponent', () => {
         expect(textareaDirective.valueChange.emit).toHaveBeenCalledWith(event.target.value)
     });
 
-    it('should textarea grow by default with normal line height', () => {
-        textareaEl.nativeElement.style.lineHeight = 'normal';
-        textareaEl.nativeElement.style.fontSize = '14px';
+    it('should textarea grow by default', () => {
+        const defaultHeight = textareaEl.nativeElement.style.height;
         textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4 \n';
         textareaDirective.resize();
         fixture.detectChanges();
 
-        expect(textareaEl.nativeElement.style.height).toEqual('92px');
+        expect(parseInt(textareaEl.nativeElement.style.height, 10)).toBeGreaterThan(defaultHeight);
     });
 
     it('should set textarea max height', () => {
@@ -110,7 +109,7 @@ describe('FeedInputComponent', () => {
         fixture.detectChanges();
 
         textareaDirective.ngOnInit();
-        expect(textareaEl.nativeElement.style.maxHeight).toEqual('190px');
+        expect(parseInt(textareaEl.nativeElement.style.maxHeight, 10)).toEqual(190);
     });
 
     it('should set textarea max height with normal line height', () => {
@@ -120,6 +119,6 @@ describe('FeedInputComponent', () => {
         fixture.detectChanges();
 
         textareaDirective.ngOnInit();
-        expect(textareaEl.nativeElement.style.maxHeight).toEqual('154px');
+        expect(parseInt(textareaEl.nativeElement.style.maxHeight, 10)).toEqual(154);
     });
 });

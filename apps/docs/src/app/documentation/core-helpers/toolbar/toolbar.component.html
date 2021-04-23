@@ -1,10 +1,11 @@
-<fd-shellbar>
+<fd-shellbar [size]="size" class="fd-docs--toolbar">
     <button fd-shellbar-side-nav
             fd-button
             aria-expanded="false"
             fdType="transparent"
             glyph="menu2"
             aria-label="Switch Navigation"
+            [compact]="false"
             (click)="this.btnClicked.emit()"></button>
     <fd-shellbar-logo>
         <a aria-label="Home"
@@ -25,9 +26,39 @@
 
     <fd-shellbar-actions [closePopoverOnSelect]>
         <button fd-button
+                class="fd-shellbar__button--menu fd-docs--theme-menu"
+                fdType="transparent"
+                [compact]="false"
+                [fdMenu]="true"
+                [fdMenuTrigger]="densityMenu">
+            Content Density
+        </button>
+
+        <fd-menu #densityMenu
+                 [fillControlMode]="null"
+                 placement="bottom-end">
+            <li fd-menu-item>
+                <div fd-menu-interactive (click)="selectDensity('cozy')">
+                    <span fd-menu-title>Cozy</span>
+                </div>
+            </li>
+            <li fd-menu-item>
+                <div fd-menu-interactive (click)="selectDensity('condensed')">
+                    <span fd-menu-title>Condensed</span>
+                </div>
+            </li>
+            <li fd-menu-item>
+                <div fd-menu-interactive (click)="selectDensity('compact')">
+                    <span fd-menu-title>Compact</span>
+                </div>
+            </li>
+        </fd-menu>
+
+        <button fd-button
                 glyph="palette"
                 class="fd-shellbar__button--menu fd-docs--theme-menu"
                 fdType="transparent"
+                [compact]="false"
                 [fdMenu]="true"
                 [fdMenuTrigger]="themesMenu">
         </button>
@@ -42,7 +73,7 @@
             </li>
         </fd-menu>
 
-        <button fd-button fdType="transparent" [fdMenu]="true" [fdMenuTrigger]="versionsMenu"
+        <button fd-button fdType="transparent" [fdMenu]="true" [fdMenuTrigger]="versionsMenu" [compact]="false"
                 class="fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu">
             v {{ version.id }}
         </button>

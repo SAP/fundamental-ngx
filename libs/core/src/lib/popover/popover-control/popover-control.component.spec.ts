@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PopoverControlComponent } from './popover-control.component';
 
@@ -6,7 +6,7 @@ describe('PopoverControlComponent', () => {
     let component: PopoverControlComponent;
     let fixture: ComponentFixture<PopoverControlComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [PopoverControlComponent]
         }).compileComponents();

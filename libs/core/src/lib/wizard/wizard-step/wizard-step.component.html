@@ -12,14 +12,16 @@
         <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
             <div #wizardLabel>
                 <span class="fd-wizard__label" (click)="wizardLabelClicked($event)">{{ label }}</span>
-                <span *ngIf="optionalText" class="fd-wizard__optional-text" (click)="wizardLabelClicked($event)">{{ optionalText }}</span>
+                <span *ngIf="optionalText" class="fd-wizard__optional-text" (click)="wizardLabelClicked($event)">
+                    {{ optionalText }}
+                </span>
             </div>
         </div>
     </a>
     <span
-        *ngIf="!finalStep || (status === 'current' && branching)"
+        *ngIf="!_finalStep || (status === 'current' && branching)"
         class="fd-wizard__connector"
-        [class.fd-wizard__connector--active]="status === 'completed'"
+        [class.fd-wizard__connector--active]="completed"
         [class.fd-wizard__connector--branching]="branching"
     >
     </span>

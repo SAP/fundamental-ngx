@@ -56,7 +56,6 @@ export class TableCustomColumnsExampleComponent {
             draggable: true,
             resizable: true,
             verticalPadding: false,
-            backdropClickCloseable: false,
             data: {
                 columns: this.originalDisplayedColumns
             }

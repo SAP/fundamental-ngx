@@ -12,6 +12,7 @@ import { TableResponsiveExampleComponent } from './examples/table-responsive-exa
 import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
 import { TableCustomColumnsExampleComponent } from './examples/table-custom-columns-example/table-custom-columns-example.component';
 import {
+    BusyIndicatorModule,
     CheckboxModule,
     DialogModule,
     FormModule,
@@ -34,6 +35,7 @@ import { TableCustomDialogComponent } from './examples/table-custom-columns-exam
 import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
+import { TableFocusableExampleComponent } from './examples/table-focusable-example/table-focusable-example.component';
 
 const routes: Routes = [
     {
@@ -62,7 +64,8 @@ const routes: Routes = [
         ObjectStatusModule,
         SharedDocumentationPageModule,
         RouterModule.forChild(routes),
-        SharedDocumentationModule
+        SharedDocumentationModule,
+        BusyIndicatorModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -81,7 +84,8 @@ const routes: Routes = [
         TablePaginationExampleComponent,
         TableToolbarExampleComponent,
         TableCustomColumnsExampleComponent,
-        TableCustomDialogComponent
+        TableCustomDialogComponent,
+        TableFocusableExampleComponent
     ],
     entryComponents: [
         TableCustomDialogComponent

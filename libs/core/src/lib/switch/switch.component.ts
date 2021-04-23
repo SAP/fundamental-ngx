@@ -6,11 +6,16 @@ import {
     EventEmitter,
     forwardRef,
     Input,
+    OnDestroy,
+    OnInit,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ContentDensityService } from '../utils/public_api';
 
 let switchUniqueId = 0;
 
@@ -36,14 +41,18 @@ let switchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SwitchComponent implements ControlValueAccessor {
+export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
     @ViewChild('switchInput')
     inputElement: ElementRef<HTMLInputElement>;
 
-    /** If the switch should have text in it or not. */
+    /** Optional text for the active state of the switch. */
     @Input()
-    optionalText = false;
+    activeText = '';
+
+    /** Optional text for the inactive state of the switch. */
+    @Input()
+    inactiveText = '';
 
     /** Whether the switch is disabled. */
     @Input()
@@ -67,7 +76,7 @@ export class SwitchComponent implements ControlValueAccessor {
 
     /** Whether the switch is compact */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** aria-label attribute of the inner input element. */
     @Input()
@@ -77,6 +86,14 @@ export class SwitchComponent implements ControlValueAccessor {
     @Input()
     ariaLabelledby: string = null;
 
+    /** Semantic Label Accept set for Accessibility */
+    @Input()
+    semanticAcceptLabel = 'Accept';
+
+    /** Semantic Label Decline set for Accessibility */
+    @Input()
+    semanticDeclineLabel = 'Decline';
+
     /**
      * Event fired when the state of the switch changes.
      * *$event* can be used to retrieve the new state of the switch.
@@ -85,21 +102,49 @@ export class SwitchComponent implements ControlValueAccessor {
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
-    onChange: any = () => {};
+    private _subscriptions = new Subscription();
 
     /** @hidden */
-    onTouched: any = () => {};
+    onChange: Function = () => {};
 
-    constructor(private changeDetectorRef: ChangeDetectorRef) {}
+    /** @hidden */
+    onTouched: Function = () => {};
+
+    constructor(
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectorRef.markForCheck();
+                })
+            );
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /** Set focus on the input element. */
-    public focus(): void {
+    focus(): void {
         this.inputElement.nativeElement.focus();
     }
 
     /** Get the id of the inner input element of the switch. */
     get innerInputId(): string {
         return `${this.id}-input`;
+    }
+
+    /** Get the id of the semantic label element of the switch. */
+    get _semanticLabelId(): string {
+        return `${this.id}-semantic-label`;
     }
 
     /** Get the isChecked property of the switch. */
@@ -121,7 +166,7 @@ export class SwitchComponent implements ControlValueAccessor {
      */
     writeValue(value: any): void {
         this.checked = value;
-        this.changeDetectorRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 
     /**
@@ -136,7 +181,7 @@ export class SwitchComponent implements ControlValueAccessor {
      * @hidden
      * @param fn User defined function that handles the *onTouch* event of the switch.
      */
-    registerOnTouched(fn): void {
+    registerOnTouched(fn: Function): void {
         this.onTouched = fn;
     }
 
@@ -146,6 +191,6 @@ export class SwitchComponent implements ControlValueAccessor {
      */
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
-        this.changeDetectorRef.detectChanges();
+        this._changeDetectorRef.detectChanges();
     }
 }

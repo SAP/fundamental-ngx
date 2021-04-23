@@ -35,6 +35,12 @@ export class ScrollSpyDirective {
     public targetOffset = 0;
 
     /**
+     * Whether to disable scroll spy
+     */
+    @Input()
+    public scrollSpyDisabled = false;
+
+    /**
      * Event fired on the scroll element when a new item becomes activated by the scrollspy .
      * The returned value is the HTMLElement itself.
      */
@@ -50,6 +56,10 @@ export class ScrollSpyDirective {
     /** @hidden */
     @HostListener('scroll', ['$event'])
     onScroll(event: any): void {
+        if (this.scrollSpyDisabled) {
+            return;
+        }
+
         let spiedTag: HTMLElement;
         const children = this.elRef.nativeElement.children;
         const targetScrollTop = event.target.scrollTop;

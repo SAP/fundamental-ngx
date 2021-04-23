@@ -2,13 +2,14 @@ import { Rule, SchematicContext, Tree, chain, SchematicsException } from '@angul
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getPackageVersionFromPackageJson, hasPackage } from '../utils/package-utils';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
-import { addImportToRootModule, getProjectFromWorkspace, hasModuleImport } from '../utils/ng-module-utils';
-import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
-import { getWorkspace } from '@schematics/angular/utility/config';
+import { hasModuleImport } from '../utils/ng-module-utils';
 import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-import { cdkVersion } from './versions';
 import { defaultFontStyle } from './styles';
+import {
+    addModuleImportToModule,
+    findModuleFromOptions
+} from '@angular/cdk/schematics';
 
 const browserAnimationsModuleName = 'BrowserAnimationsModule';
 const noopAnimationsModuleName = 'NoopAnimationsModule';
@@ -17,10 +18,10 @@ const fdStylesIconPath = 'node_modules/fundamental-styles/dist/icon.css';
 export function ngAdd(options: any): Rule {
     return chain([
         addDependencies(),
+        endInstallTask(),
         addAnimations(options),
         addStylePathToConfig(options),
-        addFontsToStyles(options),
-        endInstallTask()
+        addFontsToStyles(options)
     ]);
 }
 
@@ -54,10 +55,6 @@ function addDependencies(): Rule {
             });
         }
 
-        if (!hasPackage(tree, '@angular/cdk')) {
-            dependencies.push({ type: NodeDependencyType.Default, version: `${cdkVersion}`, name: '@angular/cdk' });
-        }
-
         dependencies.forEach((dependency) => {
             addPackageJsonDependency(tree, dependency);
             console.log(`✅️ Added ${dependency.name} to ${dependency.type}.`);
@@ -68,12 +65,12 @@ function addDependencies(): Rule {
 }
 
 // Configures browser animations.
-function addAnimations(options: any): Rule {
-    return (tree: Tree) => {
-        const workspace = getWorkspace(tree);
-        const modulePath = getAppModulePath(tree, getProjectFromWorkspace(workspace, options.project).architect.build.options.main);
+function addAnimations(options: any): any {
+    return async (tree: Tree) => {
+        const modulePath = (await findModuleFromOptions(tree, options));
 
         if (options.animations) {
+
             if (hasModuleImport(tree, modulePath, noopAnimationsModuleName)) {
                 return console.warn(
                     `Could not set up "${browserAnimationsModuleName}" ` +
@@ -81,17 +78,20 @@ function addAnimations(options: any): Rule {
                         `set up browser animations.`
                 );
             }
-            addImportToRootModule(
+            addModuleImportToModule(
                 tree,
+                modulePath,
                 browserAnimationsModuleName,
-                '@angular/platform-browser/animations',
-                modulePath
+                '@angular/platform-browser/animations'
             );
+
             console.log(`✅️ Added ${browserAnimationsModuleName} to root module.`);
         } else if (!hasModuleImport(tree, modulePath, browserAnimationsModuleName)) {
-            addImportToRootModule(tree, noopAnimationsModuleName, '@angular/platform-browser/animations', modulePath);
+            addModuleImportToModule(tree, modulePath, noopAnimationsModuleName, '@angular/platform-browser/animations');
+
             console.log(`✅️ Added ${noopAnimationsModuleName} to root module.`);
         }
+
         return tree;
     };
 }

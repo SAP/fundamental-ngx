@@ -71,7 +71,8 @@ export class PlatformPanelDocsComponent {
         {
             language: 'typescript',
             code: panelConfigTsExample,
-            fileName: 'platform-panel-config-example'
+            fileName: 'platform-panel-config-example',
+            component: 'PlatformPanelConfigExampleComponent'
         }
     ];
 }

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DndItemDirective } from './dnd-item.directive';
 import { Component, ViewChild } from '@angular/core';
@@ -25,7 +25,7 @@ describe('DndItemDirective', () => {
     let directive: DndItemDirective;
     let fixture: ComponentFixture<TestDndContainerComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [DragDropModule],
             declarations: [TestDndContainerComponent, DndItemDirective]
@@ -54,7 +54,7 @@ describe('DndItemDirective', () => {
     it('should react to drag release', () => {
         spyOn(directive.released, 'emit');
         (directive as any)._placeholderElement = document.createElement('div');
-        directive.element.nativeElement.appendChild((directive as any)._placeholderElement);
+        directive.elementRef.nativeElement.appendChild((directive as any)._placeholderElement);
         directive.onCdkDragReleased();
         expect((directive as any)._placeholderElement).toBeFalsy();
         expect(directive.released.emit).toHaveBeenCalled();

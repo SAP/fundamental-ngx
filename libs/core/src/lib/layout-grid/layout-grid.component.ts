@@ -34,6 +34,14 @@ export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     @Input()
     noGap: boolean;
 
+    /** Whether the grid should have a horizontal gap. */
+    @Input()
+    noHorizontalGap: boolean;
+
+    /** Whether the grid should have a vertical gap. */
+    @Input()
+    noVerticalGap: boolean;
+
     /** @hidden */
     private _class = '';
 
@@ -58,6 +66,12 @@ export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [CSS_CLASS_NAME.layoutGrid, this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '', this._class];
+        return [
+            CSS_CLASS_NAME.layoutGrid,
+            this.noVerticalGap ? CSS_CLASS_NAME.layoutGridNoVerticalGap : '',
+            this.noHorizontalGap ? CSS_CLASS_NAME.layoutGridNoHorizontalGap : '',
+            this.noGap ? CSS_CLASS_NAME.layoutGridNoGap : '',
+            this._class
+        ];
     }
 }

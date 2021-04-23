@@ -1,16 +1,17 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { MenuComponent } from './menu.component';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MenuModule } from './menu.module';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     selector: 'fd-menu-test',
     template: `
-        <fd-menu>
-            <li fd-menu-item>
+        <fd-menu #menu>
+            <li fd-menu-item tabindex="0">
                 <a href="#" fd-menu-interactive>
                     <span fd-menu-title>Option 1</span>
                 </a>
@@ -26,6 +27,8 @@ import { MenuService } from './services/menu.service';
                 </a>
             </li>
         </fd-menu>
+
+        <button #trigger [fdMenuTrigger]="menu"></button>
     `
 })
 export class TestMenuComponent {
@@ -36,6 +39,8 @@ export class TestMenuComponent {
     @ViewChildren(MenuItemComponent)
     menuItems: QueryList<MenuItemComponent>;
 
+    @ViewChildren('trigger', { read: ElementRef })
+    trigger: ElementRef;
 }
 
 describe('MenuComponent', () => {
@@ -44,10 +49,11 @@ describe('MenuComponent', () => {
     let menuItems: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [MenuModule],
-            declarations: [TestMenuComponent]
+            declarations: [TestMenuComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -62,6 +68,11 @@ describe('MenuComponent', () => {
     it('should properly initialize menu', () => {
         expect(menu).toBeTruthy();
         expect(menuService.menuMap).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        menu.ngOnInit();
+        expect(menu.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should open/close popover', fakeAsync(() => {
@@ -85,80 +96,48 @@ describe('MenuComponent', () => {
         expect(openEmitterSpy).toHaveBeenCalledWith(false);
     }));
 
+    it('should select mobile view', fakeAsync(() => {
+        const mobileViewSpy = spyOn<any>(menu, '_setupMobileMode');
+        menu.setMobileMode = true;
+        (<any>menu)._setupView();
+
+        fixture.detectChanges();
+
+        expect(mobileViewSpy).toHaveBeenCalled();
+    }));
+
+    it('should select desktop view', () => {
+        const keyboardSupportSpy = spyOn<any>(menu, '_manageKeyboardSupport');
+        (<any>menu)._setupView();
+
+        menu.open();
+
+        fixture.detectChanges();
+
+        expect(keyboardSupportSpy).toHaveBeenCalled();
+    });
+
     it('should focus first element on open', fakeAsync(() => {
         menu.open();
         fixture.detectChanges();
-
         tick();
 
-        expect(menuService.focusedNode.item).toBe(menuItems.first);
-        expect(menuService.focusedNode.item.menuInteractive.elementRef.nativeElement).toBe(document.activeElement);
+        expect(menu.menuItems.first.elementRef.nativeElement).toBe(document.activeElement);
     }));
 
-    it('should select proper view depending on menu mode', fakeAsync(() => {
-        const desktopViewSpy = spyOn<any>(menu, '_loadView');
-        const mobileViewSpy = spyOn<any>(menu, '_setupMobileMode');
-        const destroyMobileSpy = spyOn<any>(menu, '_destroyMobileComponent');
-        const keyboardSupportSpy = spyOn<any>(menu, '_manageKeyboardSupport');
-
+    it('should open after clicking on trigger on mobiles', () => {
         menu.setMobileMode = true;
-        menu.open();
-        fixture.detectChanges();
+        (<any>menu)._listenOnTriggerRefClicks();
 
-        tick();
-
-        expect(mobileViewSpy).toHaveBeenCalled();
-        expect(keyboardSupportSpy).toHaveBeenCalledWith(false);
-
-        menu.setMobileMode = false;
-        fixture.detectChanges();
-
-        tick();
-
-        menu.open();
-        fixture.detectChanges();
-
-        tick();
-
-        expect(desktopViewSpy).toHaveBeenCalled();
-        expect(destroyMobileSpy).toHaveBeenCalled();
-        expect(keyboardSupportSpy).toHaveBeenCalledWith(true);
-    }));
-
-    it('should close on Esc key', fakeAsync(() => {
-        const closeSpy = spyOn(menu, 'close');
-        menu.closeOnEscapeKey = true;
-
-        menu.open();
-        fixture.detectChanges();
-
-        tick();
-
-        menu.elementRef.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
-        fixture.detectChanges();
-
-        expect(closeSpy).toHaveBeenCalled();
-    }));
-
-    it('should subscribe to triggers', fakeAsync(() => {
-        menu.triggers = ['click', 'mouseover', 'mouseenter'];
-        menu.trigger = menu.elementRef;
+        expect(menu.isOpen).toBeFalse();
 
         fixture.detectChanges();
-        tick();
-
-        expect(menu['_eventRef'].length).toBe(menu.triggers.length);
-    }));
-
-    it('should subscribe to triggers', fakeAsync(() => {
-        menu.triggers = ['click', 'mouseover', 'mouseenter'];
-        menu.trigger = menu.elementRef;
+        menu.trigger.nativeElement.dispatchEvent(new MouseEvent('click'));
 
         fixture.detectChanges();
-        tick();
 
-        expect(menu['_eventRef'].length).toBe(menu.triggers.length);
-    }));
+        expect(menu.isOpen).toBeTrue();
+    });
 
     it('should destroy all references', () => {
         const destroyEventsSpy = spyOn<any>(menu, '_destroyEventListeners');

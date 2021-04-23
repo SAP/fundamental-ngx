@@ -35,7 +35,7 @@ export interface UploadCollectionFile {
     file?: File;
 }
 
-export interface ItemsPerPage {
+export interface ItemPerPage {
     label: number;
     default: boolean;
 }
@@ -62,11 +62,14 @@ export interface MessageItemsCount {
 }
 
 export enum MessageType {
-    CREATE = 'create',
-    REMOVE = 'remove',
-    MOVE = 'move',
-    UPDATE_VERSION = 'update version',
-    FILE_RENAME = 'file renamed'
+    CREATE,
+    REMOVE,
+    MOVE,
+    UPDATE_VERSION,
+    FILE_RENAME,
+    TYPE_MISMATCH,
+    FILE_NAME_LENGTH,
+    FILE_SIZE
 }
 
 export interface MessageOptions {

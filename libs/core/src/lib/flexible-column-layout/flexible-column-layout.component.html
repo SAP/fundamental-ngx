@@ -5,9 +5,10 @@
 >
     <!-- Start/Left/First Column -->
     <div 
-        *ngIf="_columnLayout.start !== 0"
         class="fd-flexible-column-layout__column"
-        [style.width.%]="_columnLayout.start">
+        [style.width.%]="_columnLayout.start"
+        [style.visibility]="_columnLayout.start === 0 ? 'hidden' : 'visible'"
+        [attr.aria-hidden]="_columnLayout.start === 0">
         <ng-container *ngTemplateOutlet="startColumn"></ng-container>
     </div>
     <!-- Left Separator -->
@@ -23,9 +24,10 @@
     </div>
     <!-- Middle/Second Column -->
     <div 
-        *ngIf="_columnLayout.mid !== 0"
         class="fd-flexible-column-layout__column"
-        [style.width.%]="_columnLayout.mid">
+        [style.width.%]="_columnLayout.mid"
+        [style.visibility]="_columnLayout.mid === 0 ? 'hidden' : 'visible'"
+        [attr.aria-hidden]="_columnLayout.mid === 0">
         <ng-container *ngTemplateOutlet="midColumn"></ng-container>
     </div>
     <!-- Right Separator -->
@@ -41,9 +43,10 @@
     </div>
     <!-- End/Right/Third Column -->
     <div 
-        *ngIf="_columnLayout.end !== 0"
         class="fd-flexible-column-layout__column"
-        [style.width.%]="_columnLayout.end">
+        [style.width.%]="_columnLayout.end"
+        [style.visibility]="_columnLayout.end === 0 ? 'hidden' : 'visible'"
+        [attr.aria-hidden]="_columnLayout.end === 0">
         <ng-container *ngTemplateOutlet="endColumn"></ng-container>
     </div>
 </div>

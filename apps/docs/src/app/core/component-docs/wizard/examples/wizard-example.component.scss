@@ -1,0 +1,71 @@
+.fd-wizard-example {
+
+    .fd-message-strip {
+        margin-bottom: 12px !important;
+    }
+
+    .fd-dialog__header .fd-bar, .fd-bar--header {
+        box-shadow: none;
+    }
+
+    .fd-title--h3 {
+        margin-bottom: 12px !important;
+    }
+
+    .fd-title--h2 {
+        padding: 16px 0 8px 16px;
+    }
+
+    .fd-wizard__content {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .fd-wizard__progress-bar {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .fd-bar--floating-footer {
+        margin: 8px;
+    }
+
+    /* All calsses below are for the fullscreen functionality */
+    .docs-wizard-example-overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        background-color: rgb(255, 255, 255);
+        overflow-x: hidden;
+    }
+
+    .docs-wizard-example-overlay-content {
+        position: relative;
+        width: 100%;
+    }
+
+    .docs-wizard-example-button {
+        display: flex;
+        justify-content: flex-end;
+        padding: 3px 1rem;
+        background: #394a5d;
+    }
+
+    .docs-wizard-example-section {
+        height: 100vh;
+
+        h2 {
+            font-size: 30px;
+            text-align: center;
+        }
+
+        div {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+    }
+}

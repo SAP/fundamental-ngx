@@ -8,6 +8,7 @@ import { WizardExampleComponent } from './examples/wizard-example.component';
 import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
 import {
     BarModule,
+    LayoutGridModule,
     DialogModule,
     FormGroupModule,
     FormModule,
@@ -19,6 +20,8 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { WizardCustomizableExampleComponent } from './examples/wizard-customizable-example.component';
 import { WizardMobileExampleComponent } from './examples/wizard-mobile-example.component';
 import { WizardBranchingExampleComponent } from './examples/wizard-branching-example.component';
+import { WizardDialogExampleComponent } from './examples/wizard-dialog-example.component';
+import { WizardNgForExampleComponent } from './examples/wizard-ngfor-example.component';
 
 const routes: Routes = [
     {
@@ -42,6 +45,7 @@ const routes: Routes = [
         FormGroupModule,
         FormModule,
         TitleModule,
+        LayoutGridModule,
         DialogModule
     ],
     exports: [RouterModule],
@@ -51,7 +55,9 @@ const routes: Routes = [
         WizardExampleComponent,
         WizardCustomizableExampleComponent,
         WizardMobileExampleComponent,
-        WizardBranchingExampleComponent
+        WizardBranchingExampleComponent,
+        WizardDialogExampleComponent,
+        WizardNgForExampleComponent
     ]
 })
 export class WizardDocsModule {}

@@ -1,39 +1,41 @@
-import { CollectionDateFilterStrategy, CollectionNumberFilterStrategy, CollectionStringFilterStrategy } from '../enums';
+import {
+    FilterStrategy,
+    FilterDateStrategy,
+    FilterNumberStrategy,
+    FilterStringStrategy,
+    FilterBooleanStrategy,
+    FilterDefaultStrategy
+} from '../enums';
 
-export interface CollectionStringFilter {
+interface BaseCollectionFilter<T> {
     field: string;
-    value: string;
-    value2?: string;
-    strategy: CollectionStringFilterStrategy;
+    value: T;
+    value2?: T;
+    exclude?: boolean;
+    strategy?: FilterStrategy;
+}
+export interface CollectionStringFilter extends BaseCollectionFilter<string> {
+    strategy: FilterStringStrategy;
 }
 
-export interface CollectionNumberFilter {
-    field: string;
-    value: number;
-    value2?: number;
-    strategy: CollectionNumberFilterStrategy;
+export interface CollectionNumberFilter extends BaseCollectionFilter<number> {
+    strategy: FilterNumberStrategy;
 }
 
-export interface CollectionDateFilter {
-    field: string;
-    value: Date;
-    value2?: Date;
-    strategy: CollectionDateFilterStrategy;
+export interface CollectionDateFilter<D = any> extends BaseCollectionFilter<D> {
+    strategy: FilterDateStrategy;
 }
 
-export interface CollectionBooleanFilter {
-    field: string;
-    value: boolean;
+export interface CollectionBooleanFilter extends BaseCollectionFilter<boolean> {
+    strategy: FilterBooleanStrategy;
 }
 
-export interface CollectionSelectFilter {
-    field: string;
-    value: any[];
+export interface CollectionSelectFilter extends BaseCollectionFilter<any[]> {
+    strategy: FilterDefaultStrategy;
 }
 
-export interface CollectionCustomFilter {
-    field: string;
-    value: { [key: string]: any };
+export interface CollectionCustomFilter extends BaseCollectionFilter<{ [key: string]: any }> {
+    strategy: FilterDefaultStrategy;
 }
 
 export type CollectionFilter =

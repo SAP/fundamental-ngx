@@ -1,5 +1,16 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    HostBinding,
+    Input, OnDestroy,
+    OnInit, Optional,
+    ViewEncapsulation
+} from '@angular/core';
 import { TableService } from './table.service';
+import { Subscription } from 'rxjs';
+import { ContentDensityService } from '../utils/services/content-density.service';
 
 /**
  * The component that represents a table.
@@ -18,7 +29,7 @@ import { TableService } from './table.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ TableService ]
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-table')
     fdTableClass = true;
@@ -36,25 +47,51 @@ export class TableComponent implements AfterViewInit {
     /** Whether or not to display the table in compact mode */
     @HostBinding('class.fd-table--compact')
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Whether or not to display the table in condensed mode */
     @HostBinding('class.fd-table--condensed')
     @Input()
-    condensed = false;
+    condensed?: boolean;
 
     /** Whether or not to display the table in pop in mode, it also require change of markup */
     @HostBinding('class.fd-table--pop-in')
     @Input()
     popIn = false;
 
+    /** Whether or not to display the table in responsive mode. */
+    @HostBinding('class.fd-table--responsive')
+    @Input()
+    responsive = false;
+
     /** List of keys that identifies single columns */
     @Input()
     keys: string[];
 
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     constructor (
-        private _tableService: TableService
+        private _tableService: TableService,
+        private _cdr: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.compact === undefined && this.condensed === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density === 'compact';
+                this.condensed = density === 'condensed';
+                this._cdr.detectChanges();
+            }));
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {

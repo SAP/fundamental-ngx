@@ -1,0 +1,151 @@
+<fd-dialog class="fdp-table-p13-filtering-dialog">
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h4
+                        fd-title
+                        [headerSize]="4"
+                        i18n="@@platformTableP13FilterDialogHeader"
+                    >Filter By</h4>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fdp-table-reset-button></fdp-table-reset-button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <!-- Include Rules -->
+        <fd-panel
+            [compact]="true"
+            [expanded]="_includePanelExpanded"
+        >
+            <div
+                fd-panel-title
+                i18n="@@platformTableP13FilterDialogIncludePanelTitle"
+            >
+                Include <ng-container *ngIf="_validIncludeRulesCount > 0">({{ _validIncludeRulesCount }})</ng-container>
+            </div>
+            <div fd-panel-content>
+                <fd-layout-grid *ngFor="let rule of _includeRules; let i = index">
+                    <fdp-table-filter-rule
+                        fdLayoutGridCol="10"
+                        [rule]="rule"
+                        (ruleChange)="_onModelChange()"
+                        (ruleStateChange)="_onRuleStateChange()"
+                    ></fdp-table-filter-rule>
+                    <!-- Actions buttons -->
+                    <div fdLayoutGridCol="2">
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            glyph="sys-cancel"
+                            [compact]="true"
+                            i18n-aria-label="platformTableP13FilterDialogRemoveFilter|Button aria-label attribute"
+                            aria-label="Remove Filter"
+                            i18n-title="platformTableP13FilterDialogRemoveFilter|Button title attribute"
+                            title="Remove Filter"
+                            (click)="_removeRule(rule, _includeRules)"
+                        ></button>
+
+                        <button
+                            *ngIf="_includeRules.length - 1 == i"
+                            fd-button
+                            fdType="transparent"
+                            glyph="add"
+                            [compact]="true"
+                            i18n-aria-label="platformTableP13FilterDialogAddFilter|Button arial-label attribute"
+                            aria-label="Add Filter"
+                            i18n-title="platformTableP13FilterDialogAddFilter|Button title attribute"
+                            title="Add Filter"
+                            (click)="_addNewRule(_includeRules)"
+                        ></button>
+                    </div>
+                </fd-layout-grid>
+            </div>
+        </fd-panel>
+        <!-- Exclude Rules -->
+        <fd-panel
+            [compact]="true"
+            [expanded]="_excludePanelExpanded"
+        >
+            <div
+                fd-panel-title
+                i18n="@@platformTableP13FilterDialogExcludePanelTitle"
+            >
+                Exclude <ng-container *ngIf="_validExcludeRulesCount > 0">({{ _validExcludeRulesCount }})</ng-container>
+            </div>
+            <div fd-panel-content>
+                <fd-layout-grid *ngFor="let rule of _excludeRules; let i = index">
+                    <fdp-table-filter-rule
+                        fdLayoutGridCol="10"
+                        [rule]="rule"
+                        (ruleChange)="_onModelChange()"
+                        (ruleStateChange)="_onRuleStateChange()"
+                    ></fdp-table-filter-rule>
+                    <!-- Actions buttons -->
+                    <div fdLayoutGridCol="2">
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            glyph="sys-cancel"
+                            [compact]="true"
+                            i18n-aria-label="platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute"
+                            aria-label="Remove Filter"
+                            i18n-title="platformTableP13FilterDialogRemoveFilterFromExclude|Button title attribute"
+                            title="Remove Filter"
+                            (click)="_removeRule(rule, _excludeRules)"
+                        ></button>
+
+                        <button
+                            *ngIf="_excludeRules.length - 1 == i"
+                            fd-button
+                            fdType="transparent"
+                            glyph="add"
+                            [compact]="true"
+                            i18n-aria-label="platformTableP13FilterDialogAddFilterToExclude|Button aria-label attribute"
+                            aria-label="Add Filter"
+                            i18n-title="platformTableP13FilterDialogAddFilterToExclude|Button title attribute"
+                            title="Add Filter"
+                            (click)="_addNewRule(_excludeRules)"
+                        ></button>
+                    </div>
+                </fd-layout-grid>
+            </div>
+        </fd-panel>
+
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                i18n-label="@@platformTableP13FilterDialogConfirmationBtn"
+                label="OK"
+                [compact]="true"
+                (click)="confirm()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                fd-initial-focus
+                i18n-label="@@platformTableP13FilterDialogCancelBtn"
+                label="Cancel"
+                [compact]="true"
+                (click)="cancel()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

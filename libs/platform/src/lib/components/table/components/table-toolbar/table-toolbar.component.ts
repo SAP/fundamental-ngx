@@ -13,16 +13,19 @@ import { SearchInput, SuggestionItem } from '../../interfaces/search-field.inter
 import { ContentDensity as CompactCozyContentDensity } from '../../../form/form-control';
 
 import { ContentDensity } from '../../enums';
-import { TableComponent } from '../../table.component';
-import { TableToolbarActionsComponent } from '../table-toolbar-actions/table-toolbar-actions.component';
+import { Table } from '../../table';
+import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarWithTemplate, TABLE_TOOLBAR } from './table-toolbar';
+
+let tableToolbarTitleUniqueId = 0;
 
 /**
  * The component that represents a table toolbar.
+ * 
  * ```html
  * <fdp-table-toolbar
- *  title="Order Line Items"
- *  [hideItemCount]="false">
+ *   title="Order Line Items"
+ *   [hideItemCount]="false">
  * </fdp-table-toolbar>
  * ```
  * */
@@ -59,7 +62,10 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef, private readonly _table: TableComponent) {}
+    tableToolbarTitleId: string = 'fd-table-tolbar-title-' + tableToolbarTitleUniqueId++;
+
+    /** @hidden */
+    constructor(private readonly _cd: ChangeDetectorRef, private readonly _table: Table) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -73,22 +79,22 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
 
     /** @hidden */
     openSorting(): void {
-        this._table.openSortingDialog();
+        this._table.openTableSortSettings.emit();
     }
 
     /** @hidden */
     openFiltering(): void {
-        this._table.openFilteringDialog();
+        this._table.openTableFilterSettings.emit();
     }
 
     /** @hidden */
     openGrouping(): void {
-        this._table.openGroupingDialog();
+        this._table.openTableGroupSettings.emit();
     }
 
     /** @hidden */
     openColumns(): void {
-        // TODO
+        this._table.openTableColumnSettings.emit();
     }
 
     /** @hidden */

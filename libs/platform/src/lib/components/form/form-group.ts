@@ -3,6 +3,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { FormField } from './form-field';
 import { LabelLayout, HintPlacement } from './form-options';
+import { FormFieldGroup } from './form-field-group';
 
 /**
  * FormGroup base class.

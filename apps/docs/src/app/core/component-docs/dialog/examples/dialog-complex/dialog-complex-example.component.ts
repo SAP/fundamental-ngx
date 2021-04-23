@@ -45,8 +45,7 @@ export class DialogComplexExampleComponent {
             height: '370px',
             draggable: true,
             resizable: true,
-            verticalPadding: false,
-            backdropClickCloseable: false
+            verticalPadding: false
         });
         this.dialogRef.loading(true);
         setTimeout(() => this.dialogRef.loading(false), 2000);

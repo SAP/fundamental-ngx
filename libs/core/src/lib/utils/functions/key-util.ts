@@ -3,7 +3,9 @@ import {
     A,
     ALT,
     BACKSPACE,
+    C,
     CONTROL,
+    DASH,
     DELETE,
     DOWN_ARROW,
     END,
@@ -11,13 +13,15 @@ import {
     ESCAPE,
     HOME,
     LEFT_ARROW,
-    META, PAGE_DOWN,
+    META, NUMPAD_MINUS, PAGE_DOWN,
     PAGE_UP,
     RIGHT_ARROW,
     SHIFT,
     SPACE,
     TAB,
-    UP_ARROW
+    UP_ARROW,
+    V,
+    X
 } from '@angular/cdk/keycodes';
 
 /** Map of keyCodes and their corresponding "key" values */
@@ -39,8 +43,13 @@ const keyMap: Map<number, string[]> = new Map([
     [SHIFT, ['Shift']],
     [BACKSPACE, ['Backspace']],
     [A, ['KeyA']],
+    [C, ['KeyC']],
+    [V, ['KeyV']],
+    [X, ['KeyX']],
     [PAGE_UP, ['PageUp']],
-    [PAGE_DOWN, ['PageDown']]
+    [PAGE_DOWN, ['PageDown']],
+    [DASH, ['-']],
+    [NUMPAD_MINUS, ['-']]
 ]);
 
 export class KeyUtil {

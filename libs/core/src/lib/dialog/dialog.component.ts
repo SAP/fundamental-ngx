@@ -4,7 +4,6 @@ import {
     Component,
     ContentChild,
     ElementRef,
-    Inject,
     Input,
     OnChanges,
     OnDestroy,

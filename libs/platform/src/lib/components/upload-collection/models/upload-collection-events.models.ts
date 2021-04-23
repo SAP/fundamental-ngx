@@ -47,6 +47,10 @@ export interface MoveToEvent {
     from?: UploadCollectionFolder;
     to?: UploadCollectionFolder;
     items: UploadCollectionItem[];
+    newFolder?: {
+        parentFolderId: string | number | null;
+        folderName: string;
+    };
 }
 
 export interface FilenameLengthExceedEventPayload {
@@ -80,4 +84,7 @@ export type EventPayload =
     | DeleteEvent
     | FileRenamedEvent
     | DownloadEvent
-    | MoveToEvent;
+    | MoveToEvent
+    | FileSizeExceedEventPayload
+    | TypeMismatchEventPayload
+    | FilenameLengthExceedEventPayload;

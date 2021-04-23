@@ -26,7 +26,8 @@ import {
     RIGHT_ARROW,
     SHIFT,
     TAB,
-    UP_ARROW
+    UP_ARROW,
+    BACKSPACE
 } from '@angular/cdk/keycodes';
 
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
@@ -38,7 +39,9 @@ import {
     KeyUtil,
     ListComponent,
     MobileModeConfig,
-    TemplateDirective
+    TemplateDirective,
+    FormStates,
+    closestElement
 } from '@fundamental-ngx/core';
 import {
     ArrayComboBoxDataSource,
@@ -54,7 +57,7 @@ import { isFunction, isJsObject, isString } from '../../../../utils/lang';
 import { CollectionBaseInput } from '../../collection-base.input';
 import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
-import { ContentDensity, FormFieldControl } from '../../form-control';
+import { ContentDensity, FormFieldControl, Status } from '../../form-control';
 import { FormField } from '../../form-field';
 
 export type TextAlignment = 'left' | 'right';
@@ -72,6 +75,19 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
+
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be 'success', 'error', 'warning', 'default', 'information'.
+     */
+    @Input()
+    // state: Status = 'default';
+    get state(): Status {
+        return this._state;
+    }
+    set state(state: Status) {
+        this._state = state;
+    }
 
     /** Datasource for suggestion list */
     @Input()
@@ -205,7 +221,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** Get the input text of the input. */
     get inputText(): string {
-        return this._inputTextValue;
+        return this._inputTextValue || '';
     }
 
     /** Set the input text of the input. */
@@ -256,8 +272,15 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     private _element: HTMLElement = this.elementRef.nativeElement;
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly _nonOpeningKeys: number[] = [
-        ESCAPE, ENTER, CONTROL, TAB, SHIFT,
-        UP_ARROW, RIGHT_ARROW, DOWN_ARROW, LEFT_ARROW
+        ESCAPE,
+        ENTER,
+        CONTROL,
+        TAB,
+        SHIFT,
+        UP_ARROW,
+        RIGHT_ARROW,
+        DOWN_ARROW,
+        LEFT_ARROW
     ];
 
     /** @hidden */
@@ -331,6 +354,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * */
     abstract setAsSelected(item: OptionItem[]): void;
 
+    /** Is empty search field */
+    get isEmptyValue(): boolean {
+        return this.inputText.trim().length === 0;
+    }
+
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
         if (!value) {
@@ -345,20 +373,18 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden
      * Close list
      * */
-    close(event: MouseEvent = null, forceClose: boolean = false): void {
-        if (event) {
-            const target = event.target as HTMLInputElement;
-            if (target && target.id === this.id) {
-                return;
-            }
+    close(event: MouseEvent): void {
+        const target = event.target as HTMLInputElement;
+        if (target && target.id === this.id) {
+            return;
         }
 
-        if (this.isOpen && (forceClose || this.canClose)) {
-            this.isOpen = false;
-            this.openChange.next(this.isOpen);
-            this.cd.markForCheck();
-            this.onTouched();
+        if (!!closestElement(`#${this.id}-input-group-container`, event.target)) {
+            event.preventDefault();
+            event.stopPropagation();
         }
+
+        this.showList(false);
     }
 
     /** @hidden */
@@ -412,8 +438,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
         this.showList(!isOpen);
 
-        if (!this.mobile) {
-            this.searchInputElement.nativeElement.focus();
+        if (this.isOpen) {	
+            this.listComponent.setItemActive(0);	
         }
     }
 
@@ -448,6 +474,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             this.showList(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
+            const acceptedKeys =
+                !KeyUtil.isKeyCode(event, BACKSPACE) &&
+                !KeyUtil.isKeyType(event, 'alphabetical') &&
+                !KeyUtil.isKeyType(event, 'numeric');
+            if (this.isEmptyValue && acceptedKeys) {
+                this.listComponent?.setItemActive(0);
+            }
         }
     }
 
@@ -460,7 +493,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
-        return (<ComboBoxDataSource<any>>this.dataSource);
+        return <ComboBoxDataSource<any>>this.dataSource;
     }
 
     /** @hidden
@@ -557,10 +590,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     private _initWindowResize(): void {
         this._getOptionsListWidth();
 
-        if (!this.autoResize) {
-            return;
-        }
-
         fromEvent(window, 'resize')
             .pipe(takeUntil(this._destroyed))
             .subscribe(() => this._getOptionsListWidth());
@@ -569,11 +598,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     private _getOptionsListWidth(): void {
         const body = document.body;
-        const rect = (this._element.querySelector('fd-input-group') as HTMLElement)
-            .getBoundingClientRect();
+        const rect = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
-        this.maxWidth = (window.innerWidth - scrollBarWidth) - rect.left;
+        this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
         this.minWidth = rect.width - 2;
+        this._cd.detectChanges();
     }
 
     /**

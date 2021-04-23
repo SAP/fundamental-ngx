@@ -1,7 +1,6 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
+import { virtualFs, workspaces } from '@angular-devkit/core';
 import * as ts from 'typescript';
-import { WorkspaceProject, WorkspaceSchema, ProjectType } from '@schematics/angular/utility/workspace-models';
-import { getWorkspace } from '@schematics/angular/utility/config';
 
 // Gets the ts source file from a path
 export function getSourceFile(host: Tree, path: string): ts.SourceFile {
@@ -41,26 +40,71 @@ export function hasPackage(tree: Tree, name: string): boolean | null {
 }
 
 // Returns the source path for the application
-export function getSourceTreePath(host: Tree, options: any): any {
-    const project: WorkspaceProject<ProjectType> = getWorkspaceProject(host, options);
-
-    return <any>project.sourceRoot;
+export async function getSourceTreePath(host: Tree, options: any): Promise<string> {
+    const project = await getWorkspaceProject(host, options);
+    const sourceRoot = project.sourceRoot ? project.sourceRoot : '';
+    return sourceRoot;
 }
 
 // Returns the dist path for the application
-export function getDistPath(host: Tree, options: any): any {
-    const project: WorkspaceProject<ProjectType> = getWorkspaceProject(host, options);
+export async function getDistPath(host: Tree, options: any): Promise<string> {
+    const project = await getWorkspaceProject(host, options);
+    const value = project.targets;
+    // tslint:disable-next-line:no-non-null-assertion
+    const optionsRecord = value.get('build')!.options;
+    // tslint:disable-next-line: no-non-null-assertion
+    const outputDistPath = optionsRecord!['outputPath'];
+    // tslint:disable-next-line: no-non-null-assertion
+    const outputPath = outputDistPath!.toString();
+    return outputPath;
+}
 
-    return (<any>project.architect).build.options.outputPath;
+// factory function to create a workspaces.WorkspaceHost from a Tree
+export function createHost(tree: Tree): workspaces.WorkspaceHost {
+    return {
+        readFile: async function (path: string): Promise<string> {
+            const data = tree.read(path);
+            if (!data) {
+                throw new SchematicsException('File not found.');
+            }
+            return virtualFs.fileBufferToString(data);
+        },
+        writeFile: async function (path: string, data: string): Promise<void> {
+            return tree.overwrite(path, data);
+        },
+        isDirectory: async function (path: string): Promise<boolean> {
+            return !tree.exists(path) && tree.getDir(path).subfiles.length > 0;
+        },
+        isFile: async function (path: string): Promise<boolean> {
+            return tree.exists(path);
+        }
+    };
 }
 
 // Returns the workspace project for the application
-export function getWorkspaceProject(host: Tree, options: any): any {
-    const workspace: WorkspaceSchema = getWorkspace(host);
-    const projectName = options.project || workspace.defaultProject;
+export async function getWorkspaceProject(host: Tree, options: any): Promise<workspaces.ProjectDefinition> {
+    const workspaceHost = createHost(host);
+    const { workspace } = await workspaces.readWorkspace('/', workspaceHost);
 
-    if (!projectName) {
-        throw Error(`Cant Find project by name ${projectName}`);
+    if (!options.project) {
+        options.project = workspace.extensions.defaultProject;
     }
-    return workspace.projects[projectName];
+
+    const project = workspace.projects.get(options.project);
+    if (!project) {
+        throw new SchematicsException(`Invalid project name: ${options.project}`);
+    }
+    return project;
+}
+
+// Returns the default project for the application
+export async function getDefaultProject(host: Tree, options: any): Promise<any> {
+    const workspaceHost = createHost(host);
+    const { workspace } = await workspaces.readWorkspace('/', workspaceHost);
+
+    if (!options.project) {
+        options.project = workspace.extensions.defaultProject;
+    }
+
+    return options.project;
 }

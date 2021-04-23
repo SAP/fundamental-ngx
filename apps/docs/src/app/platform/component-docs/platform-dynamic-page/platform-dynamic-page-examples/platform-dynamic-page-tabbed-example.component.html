@@ -1,5 +1,5 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
-<div cdkScrollable class="overlay" #overlay>
+<div class="overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <div class="overlay-content">
             <fdp-dynamic-page background="list">
@@ -228,6 +228,13 @@
                     debitis. Similique vel ipsam debitis fuga sequi eveniet perspiciatis?
                     <br />
                     <br />
+                    <button
+                        fd-button
+                        (click)="switchTab('tab_1')"
+                        title="Switch to tab 1"
+                        label="Switch to Tab 1"
+                    ></button>
+                    <br />
                     <br />
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat veniam libero nostrum explicabo
                     sed odit? Recusandae praesentium voluptatum cum omnis, placeat beatae quasi eum odio doloribus
@@ -253,24 +260,8 @@
                     <!-- page footer content goes here -->
                     <div fd-bar barDesign="floating-footer">
                         <div fd-bar-right>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fdType="emphasized"
-                                    [compact]="true"
-                                    label="Save"
-                                    (click)="closePage($event)"
-                                ></button>
-                            </fd-bar-element>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fdType="transparent"
-                                    [compact]="true"
-                                    label="Cancel"
-                                    (click)="closePage($event)"
-                                ></button>
-                            </fd-bar-element>
+                            <fd-button-bar label="Save" fdType="emphasized" (click)="closePage($event)"></fd-button-bar>
+                            <fd-button-bar label="Cancel" (click)="closePage($event)"></fd-button-bar>
                         </div>
                     </div>
                 </fdp-dynamic-page-footer>

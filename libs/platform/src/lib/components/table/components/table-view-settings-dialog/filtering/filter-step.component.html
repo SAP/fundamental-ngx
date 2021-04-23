@@ -1,0 +1,46 @@
+<ng-template #titleTemplate>
+    <button
+        fd-button
+        compact="true"
+        fdType="transparent"
+        glyph="navigation-left-arrow"
+        (click)="back.emit()"
+    ></button>
+    <h4
+        fd-title
+        [headerSize]="4"
+        i18n="@@platformTableFilterDialogFilterByLabel"
+    >Filter by: {{ filter.label }}</h4>
+</ng-template>
+
+<ng-template #bodyTemplate>
+    <ng-container [ngSwitch]="filter.type">
+        <ng-container *ngSwitchCase="FILTER_TYPE.SINGLE">
+            <fdp-filter-single-select
+                [options]="filter.values"
+                [filterBy]="_filterBy"
+                (valueChange)="_onFilterValueChange($event)"
+            ></fdp-filter-single-select>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="FILTER_TYPE.MULTI">
+            <fdp-filter-multi-select
+                [options]="filter.values"
+                [filterBy]="_filterBy"
+                (valueChange)="_onFilterValueChange($event)"
+            ></fdp-filter-multi-select>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="FILTER_TYPE.CUSTOM">
+            <fdp-filter-custom
+                [filter]="filter"
+                [filterBy]="_filterBy"
+                (valueChange)="_onFilterValueChange($event)"
+            ></fdp-filter-custom>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="FILTER_TYPE.CATEGORY">
+            Categories list is not implemented
+        </ng-container>
+    </ng-container>
+</ng-template>

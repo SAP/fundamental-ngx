@@ -14,7 +14,7 @@ import {
     OnChanges,
     SimpleChanges
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
@@ -26,6 +26,7 @@ import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent } from './time-column/time-column.component';
 import { KeyUtil } from '../utils/functions';
+import { ContentDensityService } from '../utils/public_api';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -97,7 +98,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @Input Defines if time component should be used in compact mode */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** @Input Defines if time component should be used in tablet mode */
     @Input()
@@ -168,11 +169,15 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _timeI18nLabels: TimeI18n,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {
         if (!_dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -190,6 +195,13 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         });
 
         this._setUpViewGrid();
+
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._changeDetectorRef.markForCheck();
+            }))
+        }
     }
 
     /** @hidden
@@ -203,6 +215,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }

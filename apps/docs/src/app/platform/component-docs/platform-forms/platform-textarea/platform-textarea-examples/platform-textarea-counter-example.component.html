@@ -1,12 +1,11 @@
 <main class="fd-page">
     <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group #fg2 [multiLayout]="true" [formGroup]="form">
+        <fdp-form-group #fg2 [formGroup]="form">
             <fdp-form-field
                 #ff2
                 id="detailedDescription"
                 label="Detailed description"
                 placeholder="Start entering detailed description"
-                zone="zLeft"
                 rank="10"
                 [required]="true"
                 [validators]="textareaValidator"
@@ -27,7 +26,6 @@
                 id="noCounterMessageInteraction"
                 label="When showExceededText is false and value is set"
                 placeholder="Start entering. Counter message will not be shown, but if an initial value is set whose length > maxLength, excess text is removed on Backpress"
-                zone="zLeft"
                 rank="10"
                 [required]="true"
                 [validators]="textareaNoCounterMessageValidator"
@@ -42,7 +40,7 @@
                 </fdp-textarea>
             </fdp-form-field>
 
-            <fdp-form-field id="submit-button" rank="20" zone="zLeft">
+            <fdp-form-field id="submit-button" rank="20">
                 <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>
             </fdp-form-field>
 

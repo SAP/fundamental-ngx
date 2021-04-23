@@ -120,7 +120,7 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent.isOpen = false;
         datepicker.fdDatePickerComponent.openCalendar();
         expect(datepicker.fdDatePickerComponent.isOpen).toBeTruthy();
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toBeTruthy();
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toBeTruthy();
     });
 
     it('should not open the calendar if the component is disabled', async () => {
@@ -138,9 +138,9 @@ describe('TestDatePickerComponent', () => {
 
         const datepicker = host.datepicker.toArray()[0];
         datepicker.fdDatePickerComponent.isOpen = true;
-        datepicker.fdDatePickerComponent.isInvalidDateInput = true;
+        datepicker.fdDatePickerComponent._isInvalidDateInput = true;
         datepicker.fdDatePickerComponent.closeCalendar();
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toBeTruthy();
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toBeTruthy();
         expect(datepicker.fdDatePickerComponent.isOpen).not.toBeTruthy();
     });
 
@@ -149,14 +149,14 @@ describe('TestDatePickerComponent', () => {
         spyOn(host.datepicker.toArray()[0], 'onChange');
 
         const datepicker = host.datepicker.toArray()[0];
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toEqual('1/2/1990');
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toEqual('1/2/1990');
 
         spyOn(datepicker.selectedDateChange, 'emit');
         const date = FdDate.getToday();
         const dateStr = (<any>datepicker.fdDatePickerComponent)._formatDate(date);
-        datepicker.fdDatePickerComponent.inputFieldDate = '';
+        datepicker.fdDatePickerComponent._inputFieldDate = '';
         datepicker.fdDatePickerComponent.handleSingleDateChange(date);
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toEqual(dateStr);
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toEqual(dateStr);
         expect(datepicker.onChange).toHaveBeenCalledWith(date);
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
@@ -174,12 +174,12 @@ describe('TestDatePickerComponent', () => {
         dateLast.month = 12;
         const dateStrStart = (<any>datepicker.fdDatePickerComponent)._formatDate(dateStart);
         const dateStrLast = (<any>datepicker.fdDatePickerComponent)._formatDate(dateLast);
-        datepicker.fdDatePickerComponent.inputFieldDate = '';
+        datepicker.fdDatePickerComponent._inputFieldDate = '';
 
         datepicker.fdDatePickerComponent.handleRangeDateChange({ start: dateStart, end: dateLast });
         await wait(fixture);
 
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toBe(
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toBe(
             dateStrStart + datepicker.fdDatePickerComponent.rangeDelimiter + dateStrLast
         );
 
@@ -200,7 +200,7 @@ describe('TestDatePickerComponent', () => {
         fixture.detectChanges();
 
         expect(datepicker.fdDatePickerComponent.selectedDate).toEqual(date);
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toBe(dateStr);
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toBe(dateStr);
     });
 
     it('Should handle null write value for single mode', async () => {
@@ -211,7 +211,7 @@ describe('TestDatePickerComponent', () => {
 
         // prevous input date
         expect(datepicker.fdDatePickerComponent.selectedDate).toEqual(new FdDate(1990, 1, 2));
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toBe('1/2/1990');
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toBe('1/2/1990');
     });
 
     it('Should handle correct write value for range mode', async () => {
@@ -230,7 +230,7 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
         fixture.detectChanges();
         expect(datepicker.fdDatePickerComponent.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toBe(
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toBe(
             dateStrStart + datepicker.fdDatePickerComponent.rangeDelimiter + dateStrEnd
         );
     });
@@ -253,7 +253,7 @@ describe('TestDatePickerComponent', () => {
             end: new FdDate(2020, 5, 24)
         });
         await wait(fixture);
-        expect(datepicker.fdDatePickerComponent.inputFieldDate).toBe('5/10/2020 - 5/24/2020');
+        expect(datepicker.fdDatePickerComponent._inputFieldDate).toBe('5/10/2020 - 5/24/2020');
     });
 
     it('Should register invalid string date and not call event for single mode', () => {
@@ -263,7 +263,7 @@ describe('TestDatePickerComponent', () => {
         fdDatePickerComponent.type = 'single';
         fdDatePickerComponent.dateStringUpdate('hello');
         const date: FdDate = adapter.parse('hello');
-        expect(fdDatePickerComponent.isInvalidDateInput).toBe(true);
+        expect(fdDatePickerComponent._isInvalidDateInput).toBe(true);
         expect(fdDatePickerComponent.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(fdDatePickerComponent.isModelValid()).toBe(false);
     });
@@ -277,7 +277,7 @@ describe('TestDatePickerComponent', () => {
         fdDatePickerComponent.dateStringUpdate('start - end');
         const start: FdDate = adapter.parse('start');
         const end: FdDate = adapter.parse('end');
-        expect(fdDatePickerComponent.isInvalidDateInput).toBe(true);
+        expect(fdDatePickerComponent._isInvalidDateInput).toBe(true);
         expect(fdDatePickerComponent.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: start, end: end });
         expect(fdDatePickerComponent.isModelValid()).toBe(false);
     });
@@ -299,7 +299,7 @@ describe('TestDatePickerComponent', () => {
 
         await wait(fixture);
         fixture.detectChanges();
-        expect(datepicker.fdDatePickerComponent.isInvalidDateInput).toBe(false);
+        expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
 
@@ -317,9 +317,9 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
         fixture.detectChanges();
 
-        expect(datepicker.fdDatePickerComponent.isInvalidDateInput).toBe(false);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.month).toBe(date.month);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.year).toBe(date.year);
+        expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.month).toBe(date.month);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.year).toBe(date.year);
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(datepicker.onChange).toHaveBeenCalledWith(date);
     });
@@ -338,9 +338,9 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent.dateStringUpdate(
             strDate1 + datepicker.fdDatePickerComponent.rangeDelimiter + strDate2
         );
-        expect(datepicker.fdDatePickerComponent.isInvalidDateInput).toBe(false);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
+        expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.month).toBe(date1.month);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.year).toBe(date1.year);
         expect(datepicker.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
         expect(datepicker.onChange).toHaveBeenCalledWith({ start: date1, end: date2 });
     });
@@ -359,9 +359,9 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent.dateStringUpdate(
             strDate1 + datepicker.fdDatePickerComponent.rangeDelimiter + strDate2
         );
-        expect(datepicker.fdDatePickerComponent.isInvalidDateInput).toBe(false);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.month).toBe(date2.month);
-        expect(datepicker.fdDatePickerComponent.calendarComponent.currentlyDisplayed.year).toBe(date2.year);
+        expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.month).toBe(date2.month);
+        expect(datepicker.fdDatePickerComponent._calendarComponent.currentlyDisplayed.year).toBe(date2.year);
         expect(datepicker.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
         expect(datepicker.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });

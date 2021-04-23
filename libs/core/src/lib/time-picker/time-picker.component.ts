@@ -1,7 +1,9 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
@@ -17,9 +19,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Placement } from 'popper.js';
+import { Placement } from '../popover/popover-position/popover-position';
 
 import { DATE_TIME_FORMATS, DateTimeFormats } from '../datetime/datetime-formats';
 import { DatetimeAdapter } from '../datetime/datetime-adapter';
@@ -27,6 +29,9 @@ import { createMissingDateImplementationError } from './errors';
 
 import { TimeComponent } from '../time/time.component';
 import { FormStates } from '../form/form-control/form-states';
+import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
+import { PopoverService } from '../popover/popover-service/popover.service';
+import { ContentDensityService } from '../utils/public_api';
 
 @Component({
     selector: 'fd-time-picker',
@@ -45,22 +50,28 @@ import { FormStates } from '../form/form-control/form-states';
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => TimePickerComponent),
             multi: true
-        }
+        },
+        PopoverFormMessageService,
+        PopoverService
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnChanges, OnDestroy, Validator {
+export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator {
     /**
      * @Input date time object representation
      */
     @Input()
     time: D;
 
+    /** Id attribute for input element inside TimePicker component */
+    @Input()
+    inputId: string;
+
     /** @Input Uses compact time picker. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** @Input Disables the component. */
     @Input()
@@ -116,6 +127,34 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
     @Input()
     tablet = false;
 
+    /** Text displayed in message */
+    @Input()
+    set message(message: string) {
+        this._message = message;
+        this._popoverFormMessage.message = message;
+    }
+    /** @hidden */
+    _message: string = null;
+
+    /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
+    @Input()
+    set messageType(messageType: FormStates) {
+        this._messageType = messageType;
+        this._popoverFormMessage.messageType = messageType;
+    }
+    /** @hidden */
+    _messageType: FormStates = null;
+
+    /** The trigger events that will open/close the message box.
+     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    @Input()
+    set messageTriggers(triggers: string[]) {
+        this._messageTriggers = triggers;
+        this._popoverFormMessage.triggers = triggers;
+    }
+    /** @hidden */
+    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
+
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
@@ -125,10 +164,19 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
 
     /**
      *  The state of the form control - applies css classes.
+     *  Also this is applied to message.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
-    state: FormStates;
+    set state(state: FormStates) {
+        this._state = state;
+        this._popoverFormMessage.messageType = state;
+    }
+
+    get state(): FormStates {
+        return this._state;
+    }
+    private _state: FormStates = null;
 
     /**
      * Whether AddOn Button should be focusable, set to true by default
@@ -170,6 +218,10 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
     @ViewChild(TimeComponent)
     child: TimeComponent<D>;
 
+    /** @hidden */
+    @ViewChild('inputGroupComponent', { read: ElementRef  })
+    _inputGroupElement: ElementRef;
+
     /** @hidden Whether the input time is valid(success). Internal use. */
     isInvalidTimeInput = false;
 
@@ -195,6 +247,9 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
     onChange: (_: D) => void = () => {};
     /** @hidden */
     onTouched: Function = () => {};
@@ -209,7 +264,9 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
         private _changeDetectorRef: ChangeDetectorRef,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
+        private _popoverFormMessage: PopoverFormMessageService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {
         if (!this._dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -226,6 +283,13 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
         });
 
         this._calculateTimeOptions();
+
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this._changeDetectorRef.markForCheck();
+            }))
+        }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -240,8 +304,14 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._InitialiseVariablesInMessageService();
     }
 
     /**
@@ -301,6 +371,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
     handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
         this.isOpenChange.emit(this.isOpen);
+        this._changeMessageVisibility();
     }
 
     /** @hidden */
@@ -404,6 +475,15 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
     }
 
     /** @hidden */
+    _changeMessageVisibility(): void {
+        if (this.isOpen) {
+            this._popoverFormMessage.hide();
+        } else {
+            this._popoverFormMessage.show();
+        }
+    }
+
+    /** @hidden */
     private _calculateTimeOptions(): void {
         const format = this.getDisplayFormat();
 
@@ -426,5 +506,13 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, OnC
         // default hours option based on format option
         this._displayHours =
             this.displayHours != null ? this.displayHours : this._dateTimeAdapter.isTimeFormatIncludesHours(format);
+    }
+
+    /** @hidden */
+    private _InitialiseVariablesInMessageService(): void {
+        this._popoverFormMessage.init(this._inputGroupElement);
+        this._popoverFormMessage.message = this._message;
+        this._popoverFormMessage.triggers = this._messageTriggers;
+        this._popoverFormMessage.messageType = this._state;
     }
 }

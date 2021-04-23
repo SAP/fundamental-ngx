@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-ri-custom-icon-example',
-    templateUrl: './ri-custom-icon-example.component.html',
-    styleUrls: ['./rating-indicator-style.component.scss']
+    selector: 'fd-ri-custom-icon-example',
+    templateUrl: './ri-custom-icon-example.component.html'
 })
 export class RatingIndicatorCustomIconExampleComponent {
     config = {

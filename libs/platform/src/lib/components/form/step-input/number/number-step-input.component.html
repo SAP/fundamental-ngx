@@ -5,7 +5,7 @@
     [class.is-disabled]="disabled"
     [class.fd-step-input--compact]="isCompact"
     [class.fd-step-input--without-buttons]="showLabels"
-    [class.is-error]="isErrorState"
+    [ngClass]="status ? 'is-' + status : ''"
 >
     <button
         class="fd-step-input__button"
@@ -33,11 +33,14 @@
         [readonly]="!editable"
         [attr.placeholder]="placeholder || ''"
         [attr.aria-label]="ariaLabel"
-        [attr.aria-labelledby]="ariaLabelledby"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.aria-describedby]="description ? id + '__description' : ''"
         [style.textAlign]="_align"
         fdpStepInputControl
         type="text"
         inputmode="numeric"
+        fd-only-digits
+        [decimal]="true"
     />
     <button
         class="fd-step-input__button"
@@ -56,6 +59,6 @@
         {{ showLabels ? incrementLabel : '' }}
     </button>
 </div>
-<span *ngIf="description" class="fd-form-label fd-form-label--unit-description">
+<span *ngIf="description" [id]="id + '__description'" class="fd-form-label fd-form-label--unit-description">
     {{ description }}
 </span>

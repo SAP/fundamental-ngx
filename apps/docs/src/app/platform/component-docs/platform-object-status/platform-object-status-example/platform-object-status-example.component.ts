@@ -29,20 +29,6 @@ export class PlatformObjectStatusGenericExampleComponent {}
 export class PlatformObjectStatusTextIconExampleComponent {}
 
 @Component({
-    selector: 'fdp-object-status-clickable-and-icon-example',
-    templateUrl: './platform-object-status-clickable-and-icon-example.component.html',
-    styleUrls: ['./platform-object-status-example.component.scss']
-})
-export class PlatformObjectStatusClickableAndIconExampleComponent {
-    showAlert(index: number): void {
-        alert('you clicked the clickable ObjectStatus' + index);
-    }
-    showObjectStatus(): void {
-        alert('you clicked the clickable ObjectStatus');
-    }
-}
-
-@Component({
     selector: 'fdp-object-status-inverted-example',
     templateUrl: './platform-object-status-inverted-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss']
@@ -55,14 +41,3 @@ export class PlatformObjectStatusInvertedTextExampleComponent {}
     styleUrls: ['./platform-object-status-example.component.scss']
 })
 export class PlatformObjectStatusInvertedGenericTextExampleComponent {}
-
-@Component({
-    selector: 'fdp-object-status-object-status-large-example',
-    templateUrl: './platform-object-status-large-example.component.html',
-    styleUrls: ['./platform-object-status-example.component.scss']
-})
-export class PlatformObjectStatusLargeExampleComponent {
-    showAlert(): void {
-        alert('clicked alert large');
-    }
-}

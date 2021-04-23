@@ -1,17 +1,17 @@
 <h3>Binary Checkbox in Template Driven Form</h3>
-<fdp-form-group [multiLayout]="true" [noLabelLayout]="false">
-    <fdp-form-field [id]="'yellow'" [label]="'Yellow'" [noLabelLayout]="true" zone="zLeft" rank="4" [editable]="true">
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="yellow" label="Yellow" [noLabelLayout]="true" rank="4" [editable]="true">
         <fdp-checkbox [name]="'yellow-cb'" [isBinary]="true" (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)" (change)="changeFunction($event)"
             [(ngModel)]="yellow"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'white'" zone="zLeft" rank="4" [label]="'White'">
-        <fdp-checkbox [name]="'white-cb'" [isBinary]="true" title="White" [(ngModel)]="white"></fdp-checkbox>
+    <fdp-form-field id="white" rank="4" label="White">
+        <fdp-checkbox name="white-cb" [isBinary]="true" title="White" [(ngModel)]="white"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field [id]="'violet'" [label]="'Violet'" zone="zLeft" rank="4">
-        <fdp-checkbox [name]="'violet-cb'" [isBinary]="true" title="Violet" [(ngModel)]="violet"></fdp-checkbox>
+    <fdp-form-field id="violet" label="Violet" rank="4">
+        <fdp-checkbox name="violet-cb" [isBinary]="true" title="Violet" [(ngModel)]="violet"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
 <div style="padding-left: 2rem;">
@@ -23,21 +23,21 @@
 <br />
 
 <h3>Binary Checkbox in Reactive/Model Driven Form</h3>
-<fdp-form-group [multiLayout]="true" [formGroup]="customForm" [object]="data">
-    <fdp-form-field #red [id]="'red'" [label]="'Red'" zone="zLeft" rank="4">
-        <fdp-checkbox [name]="'red-cb'" [isBinary]="true" title="Red" (checkedChange)="checkedChangeFunction($event)"
+<fdp-form-group [formGroup]="customForm" [object]="data">
+    <fdp-form-field #red id="red" label="Red" rank="4">
+        <fdp-checkbox name="red-cb" [isBinary]="true" title="Red" (checkedChange)="checkedChangeFunction($event)"
             (indeterminateChange)="indeterminateChangeFunction($event)" (change)="changeFunction($event)"
-            [contentDensity]="'compact'" [formControl]="red.formControl">
+            contentDensity="compact" [formControl]="red.formControl">
         </fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #blue [id]="'blue'" [label]="'Blue'" zone="zLeft" rank="4">
-        <fdp-checkbox [name]="'blue-cb'" [isBinary]="true" title="Blue" [contentDensity]="'compact'"
+    <fdp-form-field #blue id="blue" label="Blue" rank="4">
+        <fdp-checkbox name="blue-cb" [isBinary]="true" title="Blue" contentDensity="compact"
             [formControl]="blue.formControl"></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #green [id]="'green'" [label]="'Green'" zone="zLeft" rank="4">
-        <fdp-checkbox [name]="'green-cb'" [isBinary]="true" title="Green" [contentDensity]="'compact'"
+    <fdp-form-field #green id="green" label="Green" rank="4">
+        <fdp-checkbox name="green-cb" [isBinary]="true" title="Green" contentDensity="compact"
             [formControl]="green.formControl"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>
@@ -45,10 +45,10 @@
 <div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>
 
 <h3>Disabled Checkbox</h3>
-<fdp-form-group [multiLayout]="true">
-    <fdp-form-field #disabled [id]="'disabled'" [label]="'Red'" zone="zLeft" rank="1">
-        <fdp-checkbox [name]="'disabled-cb'" [isBinary]="true" title="Red"
+<fdp-form-group>
+    <fdp-form-field #disabled id="disabled" label="Red" rank="1">
+        <fdp-checkbox name="disabled-cb" [isBinary]="true" title="Red"
             (checkedChange)="checkedChangeFunction($event)" (indeterminateChange)="indeterminateChangeFunction($event)"
-            (change)="changeFunction($event)" [contentDensity]="'compact'" [disabled]="true"></fdp-checkbox>
+            (change)="changeFunction($event)" contentDensity="compact" disabled="true"></fdp-checkbox>
     </fdp-form-field>
 </fdp-form-group>

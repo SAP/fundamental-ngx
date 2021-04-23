@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DialogComponent } from './dialog.component';
 import { DialogService } from './dialog-service/dialog.service';
 import { DialogModule } from './dialog.module';
@@ -47,7 +47,7 @@ describe('DialogComponent', () => {
     const mockRouter = { events: routerEventsSubject.asObservable() };
     let router: Router;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [TestModule, RouterModule, RouterTestingModule],
             providers: [
@@ -105,7 +105,9 @@ describe('DialogComponent', () => {
     });
 
     it('should close after backdrop clicked', () => {
-        setup();
+        const customDialogConfig = { ...new DialogConfig(), backdropClickCloseable: true };
+
+        setup([{ token: DialogConfig, provider: { useValue: customDialogConfig } }]);
 
         const dismissSpy = spyOn(dialogRef, 'dismiss');
         fixture.detectChanges();

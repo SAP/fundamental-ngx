@@ -3,12 +3,10 @@
     [formGroup]="datetimePickerForm"
     [object]="formData"
     (onSubmit)="onSubmit()"
-    [multiLayout]="true"
 >
     <fdp-form-field
         #ffl1
         id="simple"
-        zone="zLeft"
         rank="1"
         required="true"
         [validators]="requiredDateValidator"
@@ -24,7 +22,6 @@
     <fdp-form-field
         #ffl3
         id="withAllowNull"
-        zone="zLeft"
         rank="3"
         label="With allowNull not enabled to disallow input from taking null value:"
     >
@@ -40,7 +37,6 @@
     <fdp-form-field
         #ffl6
         id="storedDate"
-        zone="zLeft"
         rank="7"
         required="true"
         label="Passing datetime through form object:"
@@ -56,7 +52,6 @@
     <fdp-form-field
         id="submitBtn"
         rank="8"
-        zone="zLeft"
     >
         <button
             fd-button

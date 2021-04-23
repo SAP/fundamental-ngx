@@ -49,7 +49,7 @@ export class PlatformThumbnailDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'PlatformThumbnailHorizontalExampleComponent',
+            component: 'PlatformThumbnailVideoMediaExampleComponent',
             code: videoThumbnailTs,
             fileName: 'platform-thumbnail-video-media-example'
         }

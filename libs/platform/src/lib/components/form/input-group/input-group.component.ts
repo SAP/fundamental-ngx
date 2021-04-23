@@ -63,7 +63,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         this._setAddonsOptions();
     }
     get contentDensity(): ContentDensity {
-        return this._contentDensity;
+        return this._contentDensity || this._inputGroupConfig.contentDensity;
     }
 
     /** Input value */
@@ -100,9 +100,6 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         const status = this.status;
         return status ? `is-${status}` : null;
     }
-
-    /** @hidden */
-    private _contentDensity: ContentDensity = this._inputGroupConfig.contentDensity;
 
     /** @hidden */
     constructor(

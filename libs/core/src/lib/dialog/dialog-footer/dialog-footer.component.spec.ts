@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DialogFooterComponent } from './dialog-footer.component';
+import { DialogFooterComponent, DialogButtonClass } from './dialog-footer.component';
 import { Component, Type, ViewChild } from '@angular/core';
 import { BarModule } from '../../bar/bar.module';
 import { TemplateModule } from '../../utils/directives/template/template.module';
@@ -11,7 +11,7 @@ import { DialogConfig } from '../utils/dialog-config.class';
         <fd-dialog-footer>
             <ng-template fdTemplate="footer">
                 <div fd-bar-middle>
-                    <button fd-dialog-decisive-button>Custom button</button>
+                    <button>Custom button</button>
                 </div>
             </ng-template>
         </fd-dialog-footer>
@@ -24,7 +24,7 @@ class CustomFooterTestComponent {
 @Component({
     template: `
         <fd-dialog-footer>
-            <button fd-dialog-decisive-button>Default button</button>
+            <fd-button-bar label="Default button">Default button</fd-button-bar>
         </fd-dialog-footer>
     `
 })
@@ -33,9 +33,13 @@ class DefaultFooterTestComponent {
 }
 
 describe('DialogFooterComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DialogFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
+            declarations: [
+                DialogFooterComponent,
+                CustomFooterTestComponent,
+                DefaultFooterTestComponent
+            ],
             imports: [BarModule, TemplateModule],
             providers: [DialogConfig]
         });
@@ -83,6 +87,21 @@ describe('DialogFooterComponent', () => {
         const button = fixture.nativeElement.querySelector('button');
 
         expect(button.textContent).toContain('Default button');
+    });
+
+    it('should add class to buttons in default template', async () => {
+        const { fixture } = setup<DefaultFooterTestComponent>(DefaultFooterTestComponent);
+        await wait(fixture);
+
+        const dialogComponent = fixture.componentInstance.dialogFooterRef;
+
+        dialogComponent.ngAfterViewInit();
+
+        fixture.detectChanges();
+
+        const buttonClassNames = dialogComponent.buttons.first._buttonComponent.class;
+
+        expect(buttonClassNames.includes(DialogButtonClass)).toBeTruthy();
     });
 
     it('should use custom template', async () => {

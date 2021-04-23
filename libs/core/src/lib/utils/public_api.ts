@@ -1,6 +1,7 @@
 export * from './directives/template/template.directive';
 export * from './directives/template/template.module';
 export * from './directives/only-digits/only-digits.directive';
+export * from './directives/only-digits/only-digits.module';
 export * from './directives/resize/resize.directive';
 export * from './directives/resize/resize-handle.directive';
 export * from './directives/resize/resize.module';
@@ -39,6 +40,9 @@ export * from './dynamic-component/dynamic-component-injector';
 export * from './dynamic-component/dynamic-component.service';
 
 export * from './datatypes/hash.datatype';
+export * from './datatypes/size.datatype';
+export * from './datatypes/color-accent.datatype';
+export * from './services/content-density.service';
 export * from './services/rtl.service';
 export * from './services/themes.service';
 export * from './services/carousel.service';

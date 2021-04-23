@@ -1,7 +1,7 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { MenuMobileComponent } from './menu-mobile.component';
-import { Component, Inject, InjectionToken, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, InjectionToken, ViewChild } from '@angular/core';
 import { MenuComponent } from '../menu.component';
 import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
 import { MenuItemComponent, SubmenuComponent } from '../menu-item/menu-item.component';
@@ -13,6 +13,7 @@ import { MenuTitleDirective } from '../directives/menu-title.directive';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { getMobileModeViewElements, whenStable } from '../../utils/tests';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ButtonModule } from '../../button/button.module';
 
 const MOBILE_CONFIG_TEST_TOKEN = new InjectionToken<MobileModeConfig>('For test purposes');
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
@@ -40,7 +41,10 @@ class TesNestedMenuItemComponent {
 
     menuItemTitle = 'Test item title';
 
-    constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) {}
+    constructor(
+        public elementRef: ElementRef,
+        @Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig
+    ) {}
 }
 
 describe('MenuMobileComponent', () => {
@@ -48,7 +52,7 @@ describe('MenuMobileComponent', () => {
     let menuMobile: MenuMobileComponent;
     let fixture: ComponentFixture<TesNestedMenuItemComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TesNestedMenuItemComponent,
@@ -59,7 +63,7 @@ describe('MenuMobileComponent', () => {
                 SubmenuComponent,
                 MenuComponent
             ],
-            imports: [CommonModule, PopoverModule, MenuMobileModule, NoopAnimationsModule, RouterTestingModule],
+            imports: [CommonModule, PopoverModule, MenuMobileModule, NoopAnimationsModule, RouterTestingModule, ButtonModule],
         })
             .compileComponents();
     }));
