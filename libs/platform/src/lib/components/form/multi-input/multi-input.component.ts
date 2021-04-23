@@ -321,6 +321,13 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         }
     }
 
+    /** @hidden */
+    _onKeydownEnter(event: KeyboardEvent): void {
+        if (this.inputText) {
+            event.preventDefault();
+        }
+    }
+
     /** @hidden
      * if not selected update model
      */

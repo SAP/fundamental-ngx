@@ -58,6 +58,7 @@
                 class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                 fdp-auto-complete
                 (onComplete)="_onAutoComplete($event)"
+                (keydown.enter)="_onKeydownEnter($event)"
                 [inputText]="inputText"
                 [options]="_suggestions"
                 fd-input-group-input
