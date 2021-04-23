@@ -29,7 +29,9 @@
           "lint",
           "test",
           "e2e"
-        ]
+        ],
+        "accessToken": "NzQ0YWY1ZmQtNTNlNi00N2ZkLTkwYjItM2I2OTA1NjI2MzA2fHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false
       }
     }
   },
