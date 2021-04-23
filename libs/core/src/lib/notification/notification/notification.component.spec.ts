@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
     template: `
@@ -36,7 +37,7 @@ describe('NotificationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule],
+            imports: [TestModule, RouterTestingModule],
             providers: [DynamicComponentService, NotificationService]
         }).compileComponents();
     }));
@@ -49,20 +50,20 @@ describe('NotificationComponent', () => {
     });
 
     it('should generate component', () => {
-        spyOn<any>(component, 'loadFromComponent').and.callThrough();
+        spyOn<any>(component, '_loadFromComponent').and.callThrough();
         component.childContent = TemplateTestComponent;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
-        expect((component as any).loadFromComponent).toHaveBeenCalled();
+        expect((component as any)._loadFromComponent).toHaveBeenCalled();
     });
 
     it('should generate template', () => {
-        spyOn<any>(component, 'loadFromTemplate').and.callThrough();
+        spyOn<any>(component, '_loadFromTemplate').and.callThrough();
         component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
-        expect((component as any).loadFromTemplate).toHaveBeenCalled();
+        expect((component as any)._loadFromTemplate).toHaveBeenCalled();
     });
 });
