@@ -184,8 +184,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         private _messageToastService: MessageToastService,
         private _cdr: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService
-    ) {
-    }
+    ) { }
 
     /** @hidden */
     get _isRTL(): boolean {
@@ -205,7 +204,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             })
         );
         this.subscriptions.add(
-            this._rtlService.rtl.subscribe(isRtl => {
+            this._rtlService?.rtl.subscribe(isRtl => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this._cdr.detectChanges();
             })
@@ -236,6 +235,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const checked = this._nodeComponents.filter(n => n._isSelected);
         const checkedNodesCount = checked.length;
         const canAdd = checkedNodesCount === 1 && !isNodeApproved(checked[0].node);
+
         this._canAddBefore = canAdd && this._metaMap[node.id].canAddNodeBefore;
         this._canAddAfter = canAdd && this._metaMap[node.id].canAddNodeAfter;
         this._canAddParallel = canAdd && this._metaMap[node.id].canAddParallel;
@@ -267,12 +267,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     nextSlide(stepSize = 1): void {
         this._checkCarouselStatus();
+
         if (Math.abs(this._carouselScrollX) === this._scrollDiff) {
             return;
         }
 
         const newOffset = this._carouselScrollX - this._carouselStepSize * stepSize;
         const newCarouselStep = this._carouselStep + stepSize;
+
         this._carouselScrollX = (Math.abs(newOffset) > this._scrollDiff) ? -this._scrollDiff : newOffset;
         this._carouselStep = newCarouselStep <= this._maxCarouselStep ? newCarouselStep : this._maxCarouselStep;
         this._cdr.detectChanges();
@@ -280,15 +282,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     previousSlide(stepSize = 1): void {
         this._checkCarouselStatus();
+
         if (this._carouselStep === 0) {
             return;
         }
+
         if (this._carouselStep === 1) {
             this._carouselScrollX = 0;
         } else {
             this._carouselScrollX += this._carouselStepSize * stepSize;
             this._carouselScrollX = this._carouselScrollX <= 0 ? this._carouselScrollX : 0;
         }
+
         const newCarouselStep = this._carouselStep - stepSize;
         this._carouselStep = newCarouselStep > 0 ? newCarouselStep : 0;
         this._cdr.detectChanges();
@@ -603,90 +608,41 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         const graph: ApprovalFlowGraph = [];
-        const rootNodes = findRootNodes(nodes);
 
-        if (!rootNodes.length) {
+        let nodesExtended;
+        nodesExtended = setOnlyOneRootNode(nodes);
+        nodesExtended = setOnlyOneFinalNode(nodes);
+
+        const rootNode = findRootNodes(nodesExtended)[0];
+        const finalNode = findFinalNodes(nodesExtended)[0];
+
+        if (!rootNode || !finalNode) {
             return graph;
         }
 
-        graph[0] = { nodes: rootNodes };
-        let index = 1;
-        let foundLastStep = false;
-        const metaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
+        const nodesWithBlank =  [...nodes];
+        const paths = getAllPaths(rootNode, finalNode, nodesExtended);
+        const pathsWithEmptyNodes = fillWithEmptyNodes(paths);
+        const pathsWithSpaces = replaceDuplicatesInPaths(pathsWithEmptyNodes);
+        const pathsWithoutTemporaryNodes = removeTemporaryNodes(pathsWithSpaces);
+        const columns = transformPathsIntoColumns(pathsWithoutTemporaryNodes);
+        const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
+        const metaMap = getIntialMetadata(nodes);
+        this._nodeParentsMap = getNodeParentsMap(nodes);
 
-        // meta 1st run, detect parallel nodes
-        nodes.forEach(n => {
-            const parents = findParentNodes(n, nodes);
-            metaMap[n.id] = {
-                parent: parents[0],
-                isRoot: !parents.length,
-                isLast: !n.targets.length,
-                parallelStart: n.targets.length > 1,
-                parallelEnd: parents.length > 1,
-                isParallel:
-                    (parents.length === 1 && parents[0].targets.length > 1) ||
-                    rootNodes.length > 1 && rootNodes.includes(n)
+        columnsWithoutEndSpaces.forEach((column, index) => {
+            const blankNodes = column.filter(node => node.blank);
+            nodesWithBlank.push(...blankNodes);
+
+            graph[index] = {
+                nodes: column,
+                index: index, 
+                isPartial: blankNodes.length > 0,
+                allNodesApproved: column.every(node => isNodeApproved(node))
             };
         });
 
-        nodes.forEach(n => {
-            const meta = metaMap[n.id];
-            if (meta.parallelStart || (rootNodes.length > 1 && rootNodes.includes(n))) {
-                const nextParallelNodes = this._findNextParallelNodes(n);
-                nextParallelNodes.forEach(pn => metaMap[pn.id].isParallel = true);
-            }
-        });
-
-        // build graph column structure
-        let _nodes = [...nodes];
-        do {
-            const columnNodes: ApprovalGraphNode[] = [];
-            const previousColumnNodes = graph[index - 1].nodes;
-
-            previousColumnNodes.forEach(node => {
-                const _columnNodes = findDependentNodes(node, _nodes);
-                _nodes = _nodes.filter(n => !_columnNodes.includes(n));
-                _columnNodes.forEach(columnNode => this._nodeParentsMap[columnNode.id] = node);
-                columnNodes.push(..._columnNodes);
-            });
-
-            foundLastStep = columnNodes.length === 0;
-            if (foundLastStep) {
-                break;
-            }
-
-            const parallelNodes = columnNodes.filter(node => metaMap[node.id].isParallel);
-            if (previousColumnNodes.length > 1 && parallelNodes.length > 0) {
-                const parallelColumn: ApprovalGraphNode[] = [...previousColumnNodes];
-                parallelColumn.forEach((node, i) => {
-                    if (node.blank) {
-                        parallelColumn[i] = getBlankNode();
-                        return;
-                    }
-                    const target = columnNodes.find(n => isNodeTargetsIncludeId(node, n.id));
-                    if (target && !metaMap[target.id].isParallel) {
-                        if (_nodes.indexOf(target) === -1) {
-                            _nodes.push(target);
-                        }
-                        parallelColumn[i] = getBlankNode();
-                    } else {
-                        parallelColumn[i] = target;
-                    }
-                });
-                graph[index] = { nodes: parallelColumn, isPartial: true };
-            } else {
-                graph[index] = { nodes: columnNodes };
-            }
-
-            index++;
-        } while (!foundLastStep);
-
-        graph.forEach(col => col.allNodesApproved = col.nodes.every(isNodeApproved));
-
-        const blank = graph.map(c => c.nodes).reduce((a, b) => a.concat(b)).filter(n => n.blank);
-        const allNodes = nodes.concat(blank);
-
-        this._buildGraphMetadata(allNodes, graph, metaMap);
+        this._buildGraphMetadata(nodesWithBlank, graph, metaMap);
 
         return graph;
     }
@@ -700,6 +656,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         // save node and column indexes, set links to closest nodes
         nodes.forEach(n => {
             const columnIndex = graph.findIndex(c => c.nodes.includes(n));
+
             if (columnIndex === -1) {
                 // used to catch errors in graph rendering
                 // will be removed after implementing nested parallel approvals in Phase 3
@@ -708,6 +665,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
 
             const nodeIndex = graph[columnIndex].nodes.findIndex(_n => _n === n);
+
             metaMap[n.id] = {
                 ...metaMap[n.id],
                 columnIndex: columnIndex,
@@ -807,6 +765,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Update node object in local approval process data structure */
     private _updateNode(node: ApprovalNode): void {
         const nodeIndex = this._approvalProcess.nodes.findIndex(n => n.id === node.id);
+        
         if (nodeIndex > -1) {
             this._approvalProcess.nodes[nodeIndex] = node;
         }
@@ -881,22 +840,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Find descendant tree of parallel nodes */
     private _findNextParallelNodes(node: ApprovalNode): ApprovalNode[] {
         const parallelNodes = [];
+
         node.targets.forEach(targetId => {
             const targetNode = this._getNode(targetId);
             const parents = findParentNodes(targetNode, this._approvalProcess.nodes);
-            if (parents.length > 1) {
-                return [];
-            }
-            parallelNodes.push(targetNode);
-            if (targetNode.targets.length) {
-                targetNode.targets.forEach(_targetId => {
-                    const _targetNode = this._getNode(_targetId);
-                    const _parents = findParentNodes(_targetNode, this._approvalProcess.nodes);
-                    if (_parents.length === 1) {
-                        parallelNodes.push(_targetNode);
-                        parallelNodes.push(...this._findNextParallelNodes(_targetNode));
-                    }
-                });
+            
+            if (parents.length === 1) {
+                parallelNodes.push(targetNode);
+                parallelNodes.push(...this._findNextParallelNodes(targetNode));
             }
         });
 
@@ -967,12 +918,12 @@ function findRootNodes(nodes: ApprovalNode[]): ApprovalNode[] {
     return nodes.filter(node => nodes.every(n => !isNodeTargetsIncludeId(n, node.id)));
 }
 
-function findParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
-    return nodes.filter(_node => isNodeTargetsIncludeId(_node, node.id));
+function findFinalNodes(nodes: ApprovalNode[]): ApprovalNode[] {
+    return nodes.filter(node => !node.targets.length); 
 }
 
-function findDependentNodes(root: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
-    return nodes.filter(node => isNodeTargetsIncludeId(root, node.id));
+function findParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
+    return nodes.filter(_node => isNodeTargetsIncludeId(_node, node.id));
 }
 
 function getBlankNode(): ApprovalGraphNode {
@@ -984,6 +935,10 @@ function getBlankNode(): ApprovalGraphNode {
         status: 'not started',
         blank: true
     };
+}
+
+function getSpaceNode(): ApprovalGraphNode {
+    return Object.assign({}, getBlankNode(), { id: `spaceId${(Math.random() * 1000).toFixed()}` });
 }
 
 function isNodeTargetsIncludeId(node: ApprovalNode, id: string): boolean {
@@ -1000,4 +955,214 @@ function cloneApprovalProcess(approvalProcess: ApprovalProcess): ApprovalProcess
             return node;
         })
     };
+}
+
+function setOnlyOneRootNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
+    const rootNodes = findRootNodes(nodes);
+
+    if (rootNodes.length === 1) {
+        return nodes;
+    }
+
+    const newRootNode = Object.assign({}, getBlankNode(), { targets: rootNodes.map(node => node.id), temporary: true });
+
+    return [newRootNode, ...nodes];
+}
+
+function setOnlyOneFinalNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
+    const finalNodes = findFinalNodes(nodes);
+
+    if (finalNodes.length === 1) {
+        return nodes;
+    }
+
+    const newFinalNode = Object.assign({}, getBlankNode(), { targets: finalNodes.map(node => node.id), temporary: true });
+
+    return [newFinalNode, ...nodes];
+}
+
+function removeTemporaryNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    const processedPaths: ApprovalGraphNode[][] = [];
+
+    paths.forEach(path => {
+        const processedPath = path.filter(node => !node.temporary);
+
+        processedPaths.push(processedPath);
+    });
+
+    return processedPaths;
+}
+
+function getAllPaths(rootNode: ApprovalGraphNode, finalNode: ApprovalGraphNode, nodes: ApprovalGraphNode[]): ApprovalGraphNode[][] {
+    const paths: ApprovalGraphNode[][] = [];
+    const queue: ApprovalGraphNode[][] = [];
+
+    queue.push([rootNode]);
+
+    while (queue.length) {
+        const path = queue.pop();
+        const lastNodeInPath = path[path.length - 1];
+        
+        if (lastNodeInPath === finalNode) {
+            paths.push(path);
+        } else {
+            lastNodeInPath.targets.forEach(targetId => {
+            const targetNode = nodes.find(node => node.id === targetId);
+            const newPath = [...path, targetNode];
+            
+            queue.push(newPath);
+        });
+        }
+    }
+
+    return paths;
+}
+
+function fillWithEmptyNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    const processedPaths = [];
+
+    const pathLengths = paths.map(path => path.length);
+    const longestPathLength = Math.max(...pathLengths);
+    
+    paths.forEach(path => {
+        if (path.length === longestPathLength) {
+            processedPaths.push(path);
+            return;
+        }
+
+        path.forEach((node, index) => {
+            const nodeIndexes = paths.map(_path => _path.indexOf(node));
+            const mostFarPathNodeIndex = Math.max(...nodeIndexes);
+            
+            if (index < mostFarPathNodeIndex) {
+                const parent = path[index - 1];
+                const blankNodes = getBlankNodesSequential(node.id, mostFarPathNodeIndex - index);
+
+                parent.targets = [ blankNodes[0].id ];
+                
+                path.splice(index, 0, ...blankNodes);
+                processedPaths.push(path);
+            }
+        });
+    });
+
+    return processedPaths;
+}
+
+function getBlankNodesSequential(targetNodeId: string, count: number): ApprovalGraphNode[] {
+    const blankNodes: ApprovalGraphNode[] = [];
+
+    let blankNode = Object.assign({}, getBlankNode(), { targets: [targetNodeId] })
+    let blankNodeId = blankNode.id;
+
+    blankNodes.unshift(blankNode);
+
+    for (let i = count; i < 0; i--) {
+        blankNode = Object.assign({}, getBlankNode(), { targets: [ blankNodeId ] })
+        blankNodeId = blankNode.id;
+
+        blankNodes.unshift(blankNode);
+    }
+
+    return blankNodes;
+}
+
+function replaceDuplicatesInPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    const processedPaths = [];
+
+    paths.forEach((path, index) => {
+        const currentPath = [...path];
+
+        currentPath.forEach(node => {
+            const pathsWithNode = paths
+                .filter((_path, _index) => {
+                    return _index !== index
+                        && _path.indexOf(node) > -1;
+                });
+
+            pathsWithNode.forEach(_path => {
+                const nodeIndex = _path.indexOf(node);
+
+                _path.splice(nodeIndex, 1, getSpaceNode());
+            });
+        });
+
+        processedPaths.push(currentPath);
+    });
+
+    return processedPaths;
+}
+
+function transformPathsIntoColumns(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    const columns: ApprovalGraphNode[][] = [];
+    let column: ApprovalGraphNode[] = [];
+
+    /* All paths have the same length */
+    for (let i = 0; i < paths[0].length; i++) {
+        column = [];
+
+        for (let v = 0; v < paths.length; v++) {
+            column.push(paths[v][i]);
+        }
+
+        columns.push(column);
+    }
+
+    return columns;
+}
+
+function trimEndSpacesInColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    const processedColumns: ApprovalNode[][] = [];
+
+    columns.forEach(column => {
+        let lastNotSpaceNodeIndex;
+
+        for (let i = column.length - 1; i >= 0; i--) {
+            if (!column[i].id.startsWith('spaceId')) {
+                lastNotSpaceNodeIndex = i;
+                break;
+            }
+        }
+
+        if (lastNotSpaceNodeIndex < column.length) {
+            processedColumns.push(column.slice(0, lastNotSpaceNodeIndex + 1))
+        } else {
+            processedColumns.push(column);
+        }
+    });
+
+    return processedColumns;
+}
+
+function getIntialMetadata(nodes: ApprovalGraphNode[]): { [key: string]: ApprovalGraphNodeMetadata } {
+    const metaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
+    const rootNodes = findRootNodes(nodes);
+
+    nodes.forEach(n => {
+        const parents = findParentNodes(n, nodes);
+
+        metaMap[n.id] = {
+            parent: parents[0],
+            isRoot: !parents.length,
+            isLast: !n.targets.length,
+            parallelStart: n.targets.length > 1,
+            parallelEnd: parents.length > 1,
+            isParallel: (parents.length === 1 && parents[0].targets.length > 1)
+                    || rootNodes.length > 1 && rootNodes.includes(n)
+        };
+    });
+
+    return metaMap;
+}
+
+function getNodeParentsMap(nodes: ApprovalGraphNode[]): { [key: string]: ApprovalGraphNode } {
+    const metaMap: { [key: string]: ApprovalGraphNode } = {};
+
+    nodes.forEach(node => {
+        const parents = findParentNodes(node, nodes);
+
+        metaMap[node.id] = parents[0];
+    })
+
+    return metaMap;
 }

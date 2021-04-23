@@ -15,7 +15,7 @@ export interface ApprovalNode {
     isEveryoneApprovalNeeded?: boolean;
 }
 
-export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any };
+export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any, temporary?: boolean };
 
 export interface ApprovalGraphNodeMetadata {
     parent: ApprovalGraphNode;
