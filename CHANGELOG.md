@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.111...v0.29.0-rc.112) (2021-04-23)
+
+
+### Bug Fixes
+
+* (Platform) Multi Input add the ability to add an item with Enter ([#5179](https://github.com/SAP/fundamental-ngx/issues/5179)) ([7347f6c](https://github.com/SAP/fundamental-ngx/commit/7347f6cbca8098cbb64e01a76add9092e907cadd))
+
 ## [0.29.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.110...v0.29.0-rc.111) (2021-04-23)
 
 ## [0.29.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.109...v0.29.0-rc.110) (2021-04-22)
