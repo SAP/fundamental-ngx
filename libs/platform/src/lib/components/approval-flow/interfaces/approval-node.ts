@@ -18,7 +18,7 @@ export interface ApprovalNode {
 export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any, temporary?: boolean };
 
 export interface ApprovalGraphNodeMetadata {
-    parent: ApprovalGraphNode;
+    parents: ApprovalGraphNode[];
     isRoot: boolean;
     isLast: boolean;
     parallelStart: boolean;

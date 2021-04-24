@@ -41,9 +41,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** Approval flow graph node */
     @Input() node: ApprovalGraphNode;
 
-    /** A reference to a parent node */
-    @Input() parent: ApprovalNode;
-
     /** Node metadata */
     @Input() meta: ApprovalGraphNodeMetadata;
 
@@ -64,9 +61,10 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @Input() dueDateThreshold = 7;
 
     /** Whether node is blank */
-    @Input()
     @HostBinding('class.approval-flow-node--blank')
-    blank: boolean;
+    get blank(): boolean {
+        return this.node?.blank;
+    }
 
     /** Whether the node is in edit mode */
     @Input()
@@ -74,14 +72,16 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     isEdit: boolean;
 
     /** Whether node element has connection line before the node element */
-    @Input()
     @HostBinding('class.approval-flow-node--line-before')
-    renderLineBefore = false;
+    get renderLineBefore(): boolean {
+        return !this.node?.blank;
+    }
 
     /** Whether node element has connection line after the node element */
-    @Input()
     @HostBinding('class.approval-flow-node--line-after')
-    renderLineAfter = true;
+    get renderLineAfter(): boolean {
+        return !this.node?.blank;
+    }
 
     /** @hidden */
     @HostBinding('class.approval-flow-node--approved')
@@ -92,11 +92,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     @HostBinding('class.approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
-        if (!this.parent) {
+        if (!this.meta?.parents?.length) {
             return true;
         }
 
-        return this.parent && isNodeApproved(this.parent);
+        return this.meta.parents.every(node => isNodeApproved(node));
     }
 
     /** @hidden */

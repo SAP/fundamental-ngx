@@ -129,9 +129,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _maxCarouselStep = 0;
 
     /** @hidden */
-    _nodeParentsMap: { [key: string]: ApprovalGraphNode } = {};
-
-    /** @hidden */
     _metaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
 
     /**  @hidden */
@@ -473,22 +470,17 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 if (nodeType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
                     if (type === 'before') {
                         node.targets = [_source.id];
-                        const parent = this._metaMap[_source.id].parent;
-                        parent.targets = [node.id];
+
                         this._replaceTargetsInSourceNodes(_source.id, [node.id]);
-                        this._updateNode(parent);
                     } else {
                         _source.targets = [node.id];
-                        this._updateNode(_source);
                     }
                 }
 
                 if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
-                    const parent = this._metaMap[_source.id].parent;
-                    if (parent) {
-                        parent.targets.push(node.id);
-                        this._updateNode(parent);
-                    }
+                    const parents = this._metaMap[_source.id].parents;
+
+                    parents.forEach(parentNode => parentNode.targets.push(node.id));
                 }
             }
 
@@ -522,6 +514,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         dialog.afterClosed.subscribe((data: { node: ApprovalNode }) => {
             const updatedNode = data?.node;
+
             if (!updatedNode) {
                 return;
             }
@@ -628,7 +621,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const columns = transformPathsIntoColumns(pathsWithoutTemporaryNodes);
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
         const metaMap = getIntialMetadata(nodes);
-        this._nodeParentsMap = getNodeParentsMap(nodes);
 
         columnsWithoutEndSpaces.forEach((column, index) => {
             const blankNodes = column.filter(node => node.blank);
@@ -683,26 +675,16 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         // calculate values for add/delete node flags
         nodes.forEach(n => {
-            const meta = metaMap[n.id];
-            const nextHNode = meta.nextHNode;
-            const parent = meta.parent;
-            const parentMeta = parent && metaMap[parent.id];
+            const nodeMeta = metaMap[n.id];
+            const nextHNode = nodeMeta.nextHNode;
             const isNotApproved = !isNodeApproved(n);
-            const allParentsApproved = findParentNodes(n, nodes).every(_n => isNodeApproved(_n));
+            const allParentsApproved = nodeMeta.parents?.every(_n => isNodeApproved(_n));
 
-            meta.canAddNodeAfter = isNotApproved && !nextHNode?.blank;
-            meta.canAddNodeBefore =
-                n.status === 'not started' &&
-                (
-                    (meta.isParallel && Boolean(parent) && !isNodeApproved(parent) && parentMeta?.parallelStart) ||
-                    (!meta.isParallel && meta.parallelEnd && !allParentsApproved)
-                );
-            meta.canAddParallel =
-                isNotApproved &&
-                !meta.isLast && !meta.parallelEnd && !meta.parallelStart &&
-                (!meta.isParallel || (meta.isParallel && (parentMeta?.parallelStart || !parent && meta.isRoot)));
-            meta.isLastInParallel = meta.isParallel && graph[meta.columnIndex + 1]?.nodes.length === 1;
-            meta.canDelete = !(meta.isLast && meta.parallelEnd);
+            nodeMeta.canAddNodeAfter = isNotApproved && !nextHNode?.blank;
+            nodeMeta.canAddNodeBefore = n.status === 'not started' && !allParentsApproved;
+            nodeMeta.canAddParallel = isNotApproved;
+            nodeMeta.isLastInParallel = nodeMeta.isParallel && graph[nodeMeta.columnIndex + 1]?.nodes.length === 1;
+            nodeMeta.canDelete = !(nodeMeta.isLast && nodeMeta.parallelEnd);
         });
         
         this._metaMap = metaMap;
@@ -711,7 +693,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Build Approval Flow graph and render it */
     private _buildView(approvalProcess: ApprovalProcess): void {
         this._approvalProcess = approvalProcess;
-        this._nodeParentsMap = {};
         this._metaMap = {};
         this._graph = this._buildNodeTree(approvalProcess.nodes);
 
@@ -1142,7 +1123,7 @@ function getIntialMetadata(nodes: ApprovalGraphNode[]): { [key: string]: Approva
         const parents = findParentNodes(n, nodes);
 
         metaMap[n.id] = {
-            parent: parents[0],
+            parents: parents,
             isRoot: !parents.length,
             isLast: !n.targets.length,
             parallelStart: n.targets.length > 1,
@@ -1151,18 +1132,6 @@ function getIntialMetadata(nodes: ApprovalGraphNode[]): { [key: string]: Approva
                     || rootNodes.length > 1 && rootNodes.includes(n)
         };
     });
-
-    return metaMap;
-}
-
-function getNodeParentsMap(nodes: ApprovalGraphNode[]): { [key: string]: ApprovalGraphNode } {
-    const metaMap: { [key: string]: ApprovalGraphNode } = {};
-
-    nodes.forEach(node => {
-        const parents = findParentNodes(node, nodes);
-
-        metaMap[node.id] = parents[0];
-    })
 
     return metaMap;
 }
