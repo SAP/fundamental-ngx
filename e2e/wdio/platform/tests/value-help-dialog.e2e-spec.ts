@@ -2,18 +2,25 @@ import { ValueHelpDialogPo } from '../pages/value-help-dialog.po';
 import {
     browserIsFirefox,
     clearValue,
-    click, doesItExist, getAttributeByName,
+    click,
+    doesItExist,
+    getAttributeByName,
     getElementArrayLength,
     getText,
-    refreshPage, scrollIntoView,
+    refreshPage,
+    scrollIntoView,
     sendKeys,
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import {
-    conditionsValues, inputIDs, customLabels, basicSearchId, mobileAttr
+    basicSearchId,
+    conditionsValues,
+    customLabels,
+    inputIDs,
+    mobileAttr
 } from '../fixtures/appData/value-help-dialog-contents';
-import { valueZero, valueOne, searchValues } from '../fixtures/testData/value-help-dialog';
+import { searchValues, valueOne, valueZero } from '../fixtures/testData/value-help-dialog';
 
 describe('Value help dialog test suite', function() {
     const valueHelpDialogPage = new ValueHelpDialogPo();
