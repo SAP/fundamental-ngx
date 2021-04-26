@@ -53,6 +53,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** Whether node element has carousel end marker. Should be set to 'true' for the last node */
     @Input() renderCarouselEndMarker = false;
 
+    /** Whether add button should be rendered after node. Should be set to 'true' for the last nodes in parallel/last node */
+    @Input() renderAddButtonAfter = false;
+
     /** Whether to display due date warning in status */
     @Input() checkDueDate = false;
 
@@ -152,6 +155,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @Output() onDelete = new EventEmitter<void>();
 
     @ViewChild(MenuComponent) menu: MenuComponent;
+
     @ViewChildren(ApprovalFlowDropZoneDirective) dropZones: QueryList<ApprovalFlowDropZoneDirective>;
 
     /** @hidden */

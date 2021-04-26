@@ -116,6 +116,7 @@
                             [checkDueDate]="checkDueDate"
                             [dueDateThreshold]="dueDateThreshold"
                             [renderArrow]="columnIndex > 0"
+                            [renderAddButtonAfter]="_metaMap[node.id].renderAddButtonAfter"
                             [renderCarouselStartMarker]="_metaMap[node.id].isRoot"
                             [renderCarouselEndMarker]="_metaMap[node.id].isLast"
                             (onNodeClick)="_onNodeClick(node)"

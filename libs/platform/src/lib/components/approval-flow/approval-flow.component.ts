@@ -239,7 +239,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canDelete = checked.every(c => c.meta.canDelete);
     }
 
-    /** @hidden Watcher's avatar click handler*/
+    /** @hidden Watcher's avatar click handler */
     _onWatcherClick(watcher: ApprovalUser): void {
         this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
@@ -427,7 +427,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         if (type !== 'empty') {
             _source = source.blank ? this._getPreviousNotBlankNode(source) : source;
-            showNodeTypeSelect = this._metaMap[source.id].canAddParallel;
+            showNodeTypeSelect = type === 'before' && this._metaMap[source.id].canAddParallel;
         }
 
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
@@ -573,6 +573,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         if (placement === 'after' && nodeMeta.prevHNode?.id === targetNode.id) {
             return;
         }
+
         if (placement === 'blank' && targetNode.id === nodeToDrop.id) {
             return;
         }
@@ -600,9 +601,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
-        let nodesWithTemporary;
-        nodesWithTemporary = setOnlyOneRootNode(nodes);
-        nodesWithTemporary = setOnlyOneFinalNode(nodes);
+        let nodesWithTemporary: ApprovalGraphNode[] = [];
+        nodesWithTemporary = addTemporaryRootNode(nodes);
+        nodesWithTemporary = addTemporaryFinalNode(nodesWithTemporary);
 
         const rootNode = findRootNodes(nodesWithTemporary)[0];
         const finalNode = findFinalNodes(nodesWithTemporary)[0];
@@ -645,17 +646,29 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             };
         });
 
-        /** Calculate values for add/delete node flags */
+        /** Calculate values of the node flags */
         nodes.forEach(node => {
             const nodeMetadata = metadata[node.id];
+
             const isNodeNotApproved = !isNodeApproved(node);
             const allNodeParentsApproved = nodeMetadata.parents?.every(_node => isNodeApproved(_node));
+            const isTargetNodeParallelEnd = metadata[node.targets[0]]?.parallelEnd;
 
-            nodeMetadata.isLastInParallel = node.targets.some(targetNodeId => metadata[targetNodeId].parallelEnd);
-            nodeMetadata.canAddNodeBefore = node.status === 'not started' && !allNodeParentsApproved;
+            nodeMetadata.isLastInParallel = isTargetNodeParallelEnd;
+
+            nodeMetadata.canAddNodeBefore = 
+                node.status === 'not started'
+                && !allNodeParentsApproved;
+                
             nodeMetadata.canAddNodeAfter = isNodeNotApproved;
+            
+            nodeMetadata.renderAddButtonAfter = 
+                nodeMetadata.canAddNodeAfter
+                && (isTargetNodeParallelEnd || nodeMetadata.isLast);
+                
             nodeMetadata.canAddParallel = isNodeNotApproved;
-            nodeMetadata.canDelete = !(nodeMetadata.isLast && nodeMetadata.parallelEnd);
+            
+            nodeMetadata.canDelete = true;
         });
 
         return metadata;
@@ -727,21 +740,22 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Delete node object in local approval process data structure */
     private _deleteNode(nodeToDelete: ApprovalNode): void {
-        const _nodes = [...this._approvalProcess.nodes];
-        const meta = this._metaMap[nodeToDelete.id];
-        const prevNodeInParallel = this._metaMap[meta.prevHNode?.id]?.isParallel;
-        const nextNodeBlank = meta.nextHNode?.blank;
+        const nodes = [...this._approvalProcess.nodes];
+        const nodeToDeleteMetadata = this._metaMap[nodeToDelete.id];
+
+        const prevNodeInParallel = this._metaMap[nodeToDeleteMetadata.prevHNode?.id]?.isParallel;
+        const nextNodeBlank = nodeToDeleteMetadata.nextHNode?.blank;
         const isLastNodeInParallel =
-            (meta.isLastInParallel && !prevNodeInParallel) ||
-            (!meta.isLastInParallel && !prevNodeInParallel && nextNodeBlank);
+            (nodeToDeleteMetadata.isLastInParallel && !prevNodeInParallel) ||
+            (!nodeToDeleteMetadata.isLastInParallel && !prevNodeInParallel && nextNodeBlank);
 
         this._replaceTargetsInSourceNodes(
             nodeToDelete.id,
             isLastNodeInParallel ? [] : nodeToDelete.targets
         );
 
-        _nodes.splice(_nodes.findIndex(n => n.id === nodeToDelete.id), 1);
-        this._approvalProcess.nodes = _nodes;
+        nodes.splice(nodes.findIndex(n => n.id === nodeToDelete.id), 1);
+        this._approvalProcess.nodes = nodes;
     }
 
     /** @hidden Replace all occurrences of "idToReplace" in all nodes' "targets" with ones in "replaceWith" array */
@@ -791,23 +805,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         return prev.blank ? this._getPreviousNotBlankNode(prev) : prev;
     }
 
-    /** @hidden Find descendant tree of parallel nodes */
-    private _findNextParallelNodes(node: ApprovalNode): ApprovalNode[] {
-        const parallelNodes = [];
-
-        node.targets.forEach(targetId => {
-            const targetNode = this._getNode(targetId);
-            const parents = findParentNodes(targetNode, this._approvalProcess.nodes);
-            
-            if (parents.length === 1) {
-                parallelNodes.push(targetNode);
-                parallelNodes.push(...this._findNextParallelNodes(targetNode));
-            }
-        });
-
-        return parallelNodes;
-    }
-
     /** @hidden */
     private _getNode(id: string): ApprovalNode {
         return this._approvalProcess.nodes.find(_n => _n.id === id);
@@ -835,6 +832,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const _column = this._graph[_ci];
         const _nextColumn = this._graph[_ci + 1];
         const _nextNode = _column.nodes[_ni + indexDiff] || _nextColumn?.nodes[_ni + 1];
+        
         if (_nextNode && _nextNode.blank) {
             return this._getNextVerticalNode(_ni, _ci + indexDiff, direction, stepSize + 1);
         }
@@ -918,7 +916,7 @@ function cloneApprovalProcess(approvalProcess: ApprovalProcess): ApprovalProcess
     };
 }
 
-function setOnlyOneRootNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
+function addTemporaryRootNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
     const rootNodes = findRootNodes(nodes);
 
     if (rootNodes.length === 1) {
@@ -930,7 +928,7 @@ function setOnlyOneRootNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
     return [newRootNode, ...nodes];
 }
 
-function setOnlyOneFinalNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
+function addTemporaryFinalNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
     const finalNodes = findFinalNodes(nodes);
 
     if (finalNodes.length === 1) {
@@ -939,7 +937,7 @@ function setOnlyOneFinalNode(nodes: ApprovalGraphNode[]): ApprovalGraphNode[] {
 
     const newFinalNode = Object.assign({}, getBlankNode(), { targets: finalNodes.map(node => node.id), temporary: true });
 
-    return [newFinalNode, ...nodes];
+    return [...nodes, newFinalNode];
 }
 
 function removeTemporaryNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {

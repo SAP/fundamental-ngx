@@ -96,7 +96,7 @@
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeAfter)">
+<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeAfter && renderAddButtonAfter)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 
