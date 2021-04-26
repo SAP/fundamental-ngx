@@ -32,7 +32,7 @@ jobs:
 
       # end: npm ci && build
       - run: |
-          npx ng build --runner cloud --dev --with-deps
+          npx ng build --runner cloud --configuration dev --with-deps
           npm run build-pack-library
 
   unit_tests:
@@ -60,11 +60,11 @@ jobs:
             dist
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm ci && npm run build --prod
+      - name: npm ci && npm run build --dev
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           npm ci
-          npx ng build --runner cloud --dev --with-deps
+          npx ng build --runner cloud --configuration dev --with-deps
       # end: npm ci && build
 
       - run: npx ng test ${{ matrix.node }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
@@ -87,11 +87,11 @@ jobs:
             dist
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm ci && npm run build --prod
+      - name: npm ci && npm run build --dev
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           npm ci
-          npx ng build --runner cloud --dev --with-deps
+          npx ng build --runner cloud --configuration dev --with-deps
       # end: npm ci && build
       - run: npm run lint -- --runner cloud
 
@@ -113,11 +113,11 @@ jobs:
             dist
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm ci && npm run build --prod
+      - name: npm ci && npm run build --dev
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           npm ci
-          npx ng build --runner cloud --dev --with-deps
+          npx ng build --runner cloud --configuration dev --with-deps
       # end: npm ci && build
 
 #      - run: npm run scully
@@ -160,11 +160,11 @@ jobs:
             dist
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm ci && npm run build --prod
+      - name: npm ci && npm run build --dev
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           npm ci
-          npx ng build --runner cloud --dev --with-deps
+          npx ng build --runner cloud --configuration dev --with-deps
 
       - name: smoke e2e on firebase
         if: ${{ needs.firebase_preview.outputs.output_url }}
