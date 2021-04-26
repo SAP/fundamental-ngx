@@ -1,11 +1,13 @@
 {
   "projects": {
-     "default": "allure-results"
+    "default": "valorkin-fundamental-ngx"
   },
   "targets": {
-    "module-federation": {
+    "valorkin-fundamental-ngx": {
       "hosting": {
-        "valorkin-fundamental-ngx": ["valorkin-fundamental-ngx"]
+        "docs": [
+          "valorkin-fundamental-ngx"
+        ]
       }
     }
   }
