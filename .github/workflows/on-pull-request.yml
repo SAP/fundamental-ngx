@@ -33,6 +33,7 @@ jobs:
       # end: npm ci && build
       - run: |
           npx ng build --runner cloud --prod --with-deps
+          npm run build-pack-library
 
   unit_tests:
     runs-on: ubuntu-latest
@@ -167,7 +168,7 @@ jobs:
 
       - name: smoke e2e on firebase
         if: ${{ needs.firebase_preview.outputs.output_url }}
-        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }} -u ${{ secrets.SAUCELABS_USERNAME }} -k ${{ secrets.SAUCELABS_ACCESS_KEY }}
+        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}
 
 #      - name: smoke e2e local
 #        if: ${{ !needs.firebase_preview.outputs.output_url }}
