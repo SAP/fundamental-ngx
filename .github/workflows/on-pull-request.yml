@@ -55,7 +55,7 @@ jobs:
           npx ng build --runner cloud --prod --with-deps
       # end: npm ci && build
 
-      - run: npm test --  --runner cloud --codeCoverage
+      - run: npm test --  --runner cloud
 #      - run: npx codecov ./coverage/
 #        continue-on-error: true
 
