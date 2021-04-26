@@ -134,7 +134,7 @@ jobs:
           FIREBASE_CLI_PREVIEWS: hostingchannels
 
   e2e_smoke:
-    name: wdi run
+    name: wdio run
     runs-on: ubuntu-latest
     needs: [build_and_cache, firebase_preview]
 
