@@ -6,8 +6,8 @@ env:
   NX_RUN_GROUP: ${{ github.run_id }}
   NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
   MOZ_HEALESS: 1
-  SAUCE_USERNAME_PR: valorkinpr
-  SAUCE_ACCESS_KEY_PR: e0a97bd3-4b74-4408-89bf-cce1b44a8bf1
+  SAUCE_USERNAME: valorkinpr
+  SAUCE_ACCESS_KEY: e0a97bd3-4b74-4408-89bf-cce1b44a8bf1
   TRAVIS_BUILD_ID: ${{ github.run_id }}
   TRAVIS_PULL_REQUEST_BRANCH: ${{ github.head_ref }}
 
@@ -136,7 +136,7 @@ jobs:
       fail-fast: false
       matrix:
         # run 3 copies of the current job in parallel
-        node: [platformA, platformB, core]
+        node: ["suite platformA", "suite platformB", "spec core"]
     steps:
       - uses: actions/checkout@v2.3.4
 
@@ -162,7 +162,7 @@ jobs:
       # these containers will load balance all found tests among themselves
       - name: smoke e2e on firebase
         if: ${{ needs.firebase_preview.outputs.output_url }}
-        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --suite ${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}
+        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}
 #        run: npx nx run ngx-bootstrap-docs-e2e:e2e -c firebase --runner cloud --record --group smoke --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/ngx-bootstrap/ -- --parallel
 #
 #      - name: smoke e2e local
