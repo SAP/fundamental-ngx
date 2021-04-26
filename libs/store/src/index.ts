@@ -27,10 +27,16 @@ export {
     QueryAdapter,
     DefaultQueryAdapter,
     QueryAdapterService,
-    DefaultQueryAdapterService
+    DefaultQueryAdapterService,
+    QueryAdapterFactory
 } from './lib/infrastructure/persistence/query/query-adapter';
-export { Query } from './lib/infrastructure/persistence/query/query';
+export {
+    Query,
+    QuerySnapshot,
+    OrderBy
+} from './lib/infrastructure/persistence/query/query';
 export * from './lib/infrastructure/persistence/query/grammar/query-expressions';
+export * from './lib/infrastructure/persistence/query/grammar/predicate';
 export {
     FundamentalRootStoreModule,
     FundamentalStoreModule,

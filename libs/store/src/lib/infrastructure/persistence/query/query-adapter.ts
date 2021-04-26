@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseEntity, EntityType } from '../../../domain/public_api';
+import { EntityType } from '../../../domain/public_api';
 import {
     Predicate,
     EqPredicate,
