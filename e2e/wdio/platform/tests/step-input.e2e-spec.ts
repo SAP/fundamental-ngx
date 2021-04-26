@@ -1,11 +1,15 @@
 import {
     clearValue,
     click,
-    getElementArrayLength, getText,
+    getElementArrayLength,
+    getText,
     getValue,
     refreshPage,
-    scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed, waitForPresent
+    scrollIntoView,
+    sendKeys,
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { StepInputPo } from '../pages/step-input.po';
 import {

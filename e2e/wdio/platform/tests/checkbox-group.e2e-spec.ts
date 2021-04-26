@@ -1,15 +1,34 @@
 import { CheckboxGroupPO } from '../pages/checkbox-group.po';
 import { checkIfDisabled, checkLabels, checkMarkingCheckbox } from '../../helper/assertion-helper';
-import {seasonsArr, countriesArr, errorBorderStyle, errorTooltipMessage, europeanCountriesArr, seasonsOutputLabel, fourFruitsArr,
-    hobbiesArr, itemsArr, markingsStyle, phonesArr, programmingLanguagesArr, reptilesArr,
-    sportsArr, threeFruitsArr} from '../fixtures/appData/checkbox-group-page-content';
-import {checkboxHoverState, checkboxFocusStyle} from '../fixtures/appData/checkbox-page-contents';
+import {
+    countriesArr,
+    errorBorderStyle,
+    errorTooltipMessage,
+    europeanCountriesArr,
+    fourFruitsArr,
+    hobbiesArr,
+    itemsArr,
+    markingsStyle,
+    phonesArr,
+    programmingLanguagesArr,
+    reptilesArr,
+    seasonsArr,
+    seasonsOutputLabel,
+    sportsArr,
+    threeFruitsArr
+} from '../fixtures/appData/checkbox-group-page-content';
+import { checkboxFocusStyle, checkboxHoverState } from '../fixtures/appData/checkbox-page-contents';
 import {
     click,
     clickNextElement,
-    executeScriptBeforeTagAttr, focusElement, getAttributeByName, getCSSPropertyByName,
-    getElementArrayLength, getText, mouseHoverElement,
-    refreshPage, scrollIntoView,
+    executeScriptBeforeTagAttr,
+    focusElement,
+    getCSSPropertyByName,
+    getElementArrayLength,
+    getText,
+    mouseHoverElement,
+    refreshPage,
+    scrollIntoView
 } from '../../driver/wdio';
 
 xdescribe('Checkbox group test suite', () => {
@@ -59,22 +78,22 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check reactive inline checkboxes', () => {
             checkLabels(stringValueCheckboxLabelArr, seasonsArr, 0, 4);
-            checkFocusState(stringValueCheckboxesArr, 0);
-            checkHoverState(stringValueCheckboxesArr, 0);
+            // checkFocusState(stringValueCheckboxesArr, 0);
+            // checkHoverState(stringValueCheckboxesArr, 0);
             checkMarkingCheckbox(stringValueCheckboxesArr, 0, 4);
         });
 
         it('should check reactive pre-selection based on value passed checkboxes', () => {
             checkLabels(stringValueCheckboxLabelArr, phonesArr, 4, 8);
-            checkFocusState(stringValueCheckboxesArr, 4);
-            checkHoverState(stringValueCheckboxesArr, 4);
+            // checkFocusState(stringValueCheckboxesArr, 4);
+            // checkHoverState(stringValueCheckboxesArr, 4);
             checkMarkingCheckbox(stringValueCheckboxesArr, 4, 8);
         });
 
         it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
             checkLabels(stringValueCheckboxLabelArr, sportsArr, 8, 12);
-            checkFocusState(stringValueCheckboxesArr, 8);
-            checkHoverState(stringValueCheckboxesArr, 8);
+            // checkFocusState(stringValueCheckboxesArr, 8);
+            // checkHoverState(stringValueCheckboxesArr, 8);
             checkMarkingCheckbox(stringValueCheckboxesArr, 8, 12);
         });
 
@@ -87,15 +106,15 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check template inline checkboxes', () => {
             checkLabels(stringValueCheckboxLabelArr, seasonsArr, 16, 20);
-            checkFocusState(stringValueCheckboxesArr, 16);
-            checkHoverState(stringValueCheckboxesArr, 16);
+            // checkFocusState(stringValueCheckboxesArr, 16);
+            // checkHoverState(stringValueCheckboxesArr, 16);
             checkMarkingCheckbox(stringValueCheckboxesArr, 16, 20);
         });
 
         it('should check template pre-selection based on value passed checkboxes', () => {
             checkLabels(stringValueCheckboxLabelArr, sportsArr, 20, 24);
-            checkFocusState(stringValueCheckboxesArr, 20);
-            checkHoverState(stringValueCheckboxesArr, 20);
+            // checkFocusState(stringValueCheckboxesArr, 20);
+            // checkHoverState(stringValueCheckboxesArr, 20);
             checkMarkingCheckbox(stringValueCheckboxesArr, 20, 24);
         });
 
@@ -120,8 +139,8 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check reactive inline checkboxes2', () => {
             checkLabels(objectValueCheckboxLabelArr, programmingLanguagesArr, 0, 4);
-            checkFocusState(objectValueCheckboxesArr, 0);
-            checkHoverState(objectValueCheckboxesArr, 0);
+            // checkFocusState(objectValueCheckboxesArr, 0);
+            // checkHoverState(objectValueCheckboxesArr, 0);
             checkMarkingCheckbox(objectValueCheckboxesArr, 0, 4);
             checkIfDisabled(objectValueCheckboxesArr, 'aria-disabled', 'true', 1);
             checkIfDisabled(objectValueCheckboxesArr, 'aria-disabled', 'true', 3);
@@ -129,22 +148,22 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check reactive pre-selection based on value passed checkboxes', () => {
             checkLabels(objectValueCheckboxLabelArr, countriesArr, 4, 7);
-            checkFocusState(objectValueCheckboxesArr, 4);
-            checkHoverState(objectValueCheckboxesArr, 4);
+            // checkFocusState(objectValueCheckboxesArr, 4);
+            // checkHoverState(objectValueCheckboxesArr, 4);
             checkMarkingCheckbox(objectValueCheckboxesArr, 4, 7);
         });
 
         it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
             checkLabels(objectValueCheckboxLabelArr, countriesArr, 7, 10);
-            checkFocusState(objectValueCheckboxesArr, 7);
-            checkHoverState(objectValueCheckboxesArr, 7);
+            // checkFocusState(objectValueCheckboxesArr, 7);
+            // checkHoverState(objectValueCheckboxesArr, 7);
             checkMarkingCheckbox(objectValueCheckboxesArr, 7, 10);
         });
 
         it('should check reactive lookup key and display key usages checkboxes', () => {
             checkLabels(objectValueCheckboxLabelArr, itemsArr, 10, 13);
-            checkFocusState(objectValueCheckboxesArr, 10);
-            checkHoverState(objectValueCheckboxesArr, 10);
+            // checkFocusState(objectValueCheckboxesArr, 10);
+            // checkHoverState(objectValueCheckboxesArr, 10);
             checkMarkingCheckbox(objectValueCheckboxesArr, 10, 13);
         });
 
@@ -157,8 +176,8 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check template inline checkboxes', () => {
             checkLabels(objectValueCheckboxLabelArr, programmingLanguagesArr, 16, 20);
-            checkFocusState(objectValueCheckboxesArr, 16);
-            checkHoverState(objectValueCheckboxesArr, 16);
+            // checkFocusState(objectValueCheckboxesArr, 16);
+            // checkHoverState(objectValueCheckboxesArr, 16);
             checkMarkingCheckbox(objectValueCheckboxesArr, 16, 20);
             checkIfDisabled(objectValueCheckboxesArr, 'aria-disabled', 'true', 17);
             checkIfDisabled(objectValueCheckboxesArr, 'aria-disabled', 'true', 19);
@@ -169,15 +188,15 @@ xdescribe('Checkbox group test suite', () => {
             const checkboxLabels = (objectValueCheckboxLabelArr).slice(20, 23);
 
             checkLabels(checkboxLabels, countriesArr, 20, 23);
-            checkFocusState(preselectionCheckboxes[0]);
-            checkHoverState(preselectionCheckboxes[0]);
+            // checkFocusState(preselectionCheckboxes[0]);
+            // checkHoverState(preselectionCheckboxes[0]);
             checkMarkingCheckbox(preselectionCheckboxes);
         });
 
         it('should check template lookup key and display key usages checkboxes', () => {
             checkLabels(objectValueCheckboxLabelArr, itemsArr, 23, 26);
-            checkFocusState(objectValueCheckboxesArr, 23);
-            checkHoverState(objectValueCheckboxesArr, 23);
+            // checkFocusState(objectValueCheckboxesArr, 23);
+            // checkHoverState(objectValueCheckboxesArr, 23);
             checkMarkingCheckbox(objectValueCheckboxesArr, 23, 26);
         });
 
@@ -202,8 +221,8 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check reactive checkboxes', () => {
             checkLabels(projectedValueCheckboxLabelArr, fourFruitsArr, 0, 4);
-            checkFocusState(projectedValueCheckboxesArr, 1);
-            checkHoverState(projectedValueCheckboxesArr, 1);
+            // checkFocusState(projectedValueCheckboxesArr, 1);
+            // checkHoverState(projectedValueCheckboxesArr, 1);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 0, 4);
             checkIfDisabled(projectedValueCheckboxesArr, 'aria-disabled', 'true', 0);
             checkIfDisabled(projectedValueCheckboxesArr, 'aria-disabled', 'true', 2);
@@ -211,16 +230,16 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check reactive pre-selection based on value passed checkboxes', () => {
             checkLabels(projectedValueCheckboxLabelArr, hobbiesArr, 4, 8);
-            checkFocusState(projectedValueCheckboxesArr, 4);
-            checkHoverState(projectedValueCheckboxesArr, 4);
+            // checkFocusState(projectedValueCheckboxesArr, 4);
+            // checkHoverState(projectedValueCheckboxesArr, 4);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 4, 8);
 
         });
 
         it('should check reactive pre-selection based on value passed from formGroup checkboxes', () => {
             checkLabels(projectedValueCheckboxLabelArr, europeanCountriesArr, 8, 12);
-            checkFocusState(projectedValueCheckboxesArr, 8);
-            checkHoverState(projectedValueCheckboxesArr, 8);
+            // checkFocusState(projectedValueCheckboxesArr, 8);
+            // checkHoverState(projectedValueCheckboxesArr, 8);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 8, 12);
         });
 
@@ -243,8 +262,8 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check template pre-selection based on value passed checkboxes', () => {
             checkLabels(projectedValueCheckboxLabelArr, reptilesArr, 20, 24);
-            checkFocusState(projectedValueCheckboxesArr, 20);
-            checkHoverState(projectedValueCheckboxesArr, 20);
+            // checkFocusState(projectedValueCheckboxesArr, 20);
+            // checkHoverState(projectedValueCheckboxesArr, 20);
             checkMarkingCheckbox(projectedValueCheckboxesArr, 20, 24);
         });
 
@@ -281,8 +300,8 @@ xdescribe('Checkbox group test suite', () => {
             expect(getText(errorTooltip)).toEqual(errorTooltipMessage);
 
             checkLabels(formValidationCheckboxLabelArr, threeFruitsArr, 0, 3);
-            checkFocusState(formValidationCheckboxesArr, 0);
-            checkHoverState(formValidationCheckboxesArr, 0);
+            // checkFocusState(formValidationCheckboxesArr, 0);
+            // checkHoverState(formValidationCheckboxesArr, 0);
             checkMarkingCheckbox(formValidationCheckboxesArr, 0, 3);
         });
 
@@ -301,8 +320,8 @@ xdescribe('Checkbox group test suite', () => {
             expect(getText(errorTooltip)).toEqual(errorTooltipMessage);
 
             checkLabels(formValidationCheckboxLabelArr, threeFruitsArr, 3, 6);
-            checkFocusState(formValidationCheckboxesArr, 4);
-            checkHoverState(formValidationCheckboxesArr, 3);
+            // checkFocusState(formValidationCheckboxesArr, 4);
+            // checkHoverState(formValidationCheckboxesArr, 3);
             checkMarkingCheckbox(formValidationCheckboxesArr, 3, 6);
         });
 
@@ -321,8 +340,8 @@ xdescribe('Checkbox group test suite', () => {
             expect(getText(errorTooltip)).toEqual(errorTooltipMessage);
 
             checkLabels(formValidationCheckboxLabelArr, threeFruitsArr, 6, 10);
-            checkFocusState(formValidationCheckboxLabelArr, 6);
-            checkHoverState(formValidationCheckboxLabelArr, 6);
+            // checkFocusState(formValidationCheckboxLabelArr, 6);
+            // checkHoverState(formValidationCheckboxLabelArr, 6);
             checkMarkingCheckbox(formValidationCheckboxesArr, 6, 10);
             checkIfDisabled(formValidationCheckboxesArr, 'aria-disabled', 'true', 7);
             checkIfDisabled(formValidationCheckboxesArr, 'aria-disabled', 'true', 9);

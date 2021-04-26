@@ -20,12 +20,13 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
     ]
 })
 export class PlatformTimePickerTemplateExampleComponent {
-    time24h: FdDate = new FdDate().setTime(18, 0, 0)
-    time12h: FdDate = new FdDate().setTime(18, 0, 0)
-    timeWithoutSeconds: FdDate = new FdDate().setTime(12, 0, 0)
-    timeCompact: FdDate = new FdDate().setTime(12, 0, 0)
-    timeAllowNull: FdDate = new FdDate().setTime(12, 0, 0)
-    timeDisabled: FdDate = new FdDate().setTime(12, 0, 0)
+    time24h: FdDate = new FdDate().setTime(18, 0, 0);
+    time12h: FdDate = new FdDate().setTime(18, 0, 0);
+    timeWithoutSeconds: FdDate = new FdDate().setTime(12, 0, 0);
+    timeCompact: FdDate = new FdDate().setTime(12, 0, 0);
+    timeAllowNull: FdDate = new FdDate().setTime(12, 0, 0);
+    timeDisabled: FdDate = new FdDate().setTime(12, 0, 0);
+    displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false };
 
     setNull(): void {
         this.timeAllowNull = null;

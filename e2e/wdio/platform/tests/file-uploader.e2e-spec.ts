@@ -5,8 +5,9 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getText,
-    refreshPage, sendKeys,
-    uploadFile, waitForPresent
+    refreshPage,
+    uploadFile,
+    waitForPresent
 } from '../../driver/wdio';
 import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';

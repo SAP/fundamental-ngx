@@ -19,8 +19,13 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
-import {inputWithFormLabel, inputWithFormPlaceholder, standardInputLabels, standardInputPlaceholders} from '../fixtures/appData/input-group-page-contents';
-import {string_value, email_value, numeric_value} from '../fixtures/testData/input-group';
+import {
+    inputWithFormLabel,
+    inputWithFormPlaceholder,
+    standardInputLabels,
+    standardInputPlaceholders
+} from '../fixtures/appData/input-group-page-contents';
+import { email_value, numeric_value, string_value } from '../fixtures/testData/input-group';
 
 describe('Input Group should', function() {
     const inputGroupPage = new InputGroupPo();
@@ -30,7 +35,7 @@ describe('Input Group should', function() {
         buttonInputLeftAndRightTextAddon, buttonInputSubmitButton, iconInput, iconInputEmailIcon, compactGroupInput,
         compactGroupButtonAddon, compactGroupLeftTextAddon, disabledInput, disabledInputButton, withFormInput,
         withFormInputTextAddon, withFormInputButtonAddon, withFormInputLabel, withFormInputQuestionMark,
-        withFormInputAsterixMark, withFormInputErrorTooltip, withFormInputInfoTooltip
+        withFormInputAsterixMark, withFormInputInfoTooltip
     } = inputGroupPage;
 
     beforeAll(() => {

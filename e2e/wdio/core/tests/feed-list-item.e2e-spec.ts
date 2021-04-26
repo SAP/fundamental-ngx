@@ -62,7 +62,7 @@ describe('Feed list item test suite:', function() {
             expect(feedListItemPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check all paragraphs visual regression', () => {
+        xit('should check all paragraphs visual regression', () => {
             const paragraphsLength = getElementArrayLength(paragraphs);
             for (let i = 0; i < paragraphsLength; i++) {
                 scrollIntoView(paragraphs, i);
@@ -70,22 +70,22 @@ describe('Feed list item test suite:', function() {
             }
         });
 
-        it('should check checkbox states', () => {
+        xit('should check checkbox states', () => {
             scrollIntoView(checkbox);
             checkElementHoverActiveState(checkbox, checkBoxTag, box);
         });
 
-        it('should check action settings button states', () => {
+        xit('should check action settings button states', () => {
             scrollIntoView(actionSettingsButton);
             checkElementHoverActiveState(actionSettingsButton, buttonActionSettingsTag, button);
         });
 
-        it('should check menu button states', () => {
+        xit('should check menu button states', () => {
             scrollIntoView(menuButton);
             checkElementStates(menuButton, buttonMenuTag, button);
         });
 
-        it('should check menu options hover state', () => {
+        xit('should check menu options hover state', () => {
             scrollIntoView(menuButton);
             click(menuButton);
             const menuOptionLength = getElementArrayLength(menuOption);
@@ -95,12 +95,12 @@ describe('Feed list item test suite:', function() {
             }
         });
 
-        it('should check overflow button hover state', () => {
+        xit('should check overflow button hover state', () => {
             scrollIntoView(overflowButton);
             checkElementHoverActiveState(overflowButton, buttonOverflowTag, button);
         });
 
-        it('should check overflow option states', () => {
+        xit('should check overflow option states', () => {
             scrollIntoView(overflowButton);
             click(overflowButton);
             const overflowOptionLength = getElementArrayLength(overflowOption);
@@ -109,45 +109,45 @@ describe('Feed list item test suite:', function() {
             }
         });
 
-        it('should check option cancel states', () => {
+        xit('should check option cancel states', () => {
             scrollIntoView(overflowButton);
             click(overflowButton);
             checkElementHoverActiveState(optionCancel, cancelOptionTag, option);
         });
 
-        it('should check extends paragraph 1st after clicking more hover state', () => {
+        xit('should check extends paragraph 1st after clicking more hover state', () => {
             scrollIntoView(paragraphs);
             click(linkMore);
             checkElementHoverState(paragraphs, paragraphExtendsTag + '0-hover-state-', text);
         });
 
-        it('should check extends paragraph 2nd after clicking more hover state', () => {
+        xit('should check extends paragraph 2nd after clicking more hover state', () => {
             scrollIntoView(paragraphs, 1);
             click(linkMore, 1);
             checkElementHoverState(paragraphs, paragraphExtendsTag + '1-hover-state', text, 1);
         });
 
-        it('should check extends paragraph 3d after clicking more hover state', () => {
+        xit('should check extends paragraph 3d after clicking more hover state', () => {
             scrollIntoView(paragraphs, 2);
             click(linkMore, 2);
             checkElementHoverState(paragraphs, paragraphExtendsTag + '2-hover-state', text, 2);
         });
 
-        it('should check extends paragraph with formatted text after clicking more hover state', () => {
+        xit('should check extends paragraph with formatted text after clicking more hover state', () => {
             scrollIntoView(paragraphs, 3);
             click(checkbox);
             click(linkMore, 3);
             checkElementHoverState(paragraphs, paragraphExtendsTag + '3-hover-state-', text, 3);
         });
 
-        it('should check extends paragraph with long text after clicking more hover state', () => {
+        xit('should check extends paragraph with long text after clicking more hover state', () => {
             scrollIntoView(paragraphs, 4);
             click(linkMore, 3);
             scrollIntoView(paragraphs, 4);
             checkElementHoverState(paragraphs, paragraphExtendsTag + '4-hover-state-', text, 4);
         });
 
-        it('should check last extends paragraph after clicking more hover state', () => {
+        xit('should check last extends paragraph after clicking more hover state', () => {
             scrollIntoView(linkMore, 4);
             click(linkMore, 4);
             scrollIntoView(paragraphs, 19);
