@@ -44,7 +44,7 @@ describe('FeedInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        expect(textareaEl.nativeElement.getAttribute('aria-disabled')).toEqual('true');
+        expect(textareaEl.nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('true');
         expect(buttonEl.nativeElement.getAttribute('ng-reflect-aria-disabled')).toEqual('true');
     });
 
