@@ -30,8 +30,8 @@
     <fd-input-group
         class="fd-multi-input-input-group-custom"
         [button]="!readonly"
-		[buttonFocusable]="false"
-		[isControl]="true"
+        [buttonFocusable]="false"
+        [isControl]="true"
         [glyph]="'value-help'"
         [state]="status"
         [disabled]="disabled"
@@ -43,13 +43,13 @@
         <fd-tokenizer
             *ngIf="selected"
             [compact]="contentDensity === 'compact'"
-			[tokenizerFocusable]="false"
+            [tokenizerFocusable]="false"
             class="fd-multi-input-tokenizer-custom"
             [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
         >
             <fd-token [readOnly]="disabled" (onCloseClick)="removeToken(token)" *ngFor="let token of selected">{{
-                token.label
+                displayValue(token)
             }}</fd-token>
             <input
                 #searchInputElement

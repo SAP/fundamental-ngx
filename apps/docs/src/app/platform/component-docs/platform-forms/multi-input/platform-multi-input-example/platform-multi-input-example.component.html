@@ -15,8 +15,9 @@
             name="input1"
             [dataSource]="_datasource"
             (selectionChange)="showValues($event)"
-            displayKey="state"
-			[autofocus]="true"
+            displayKey="firstName"
+            [autofocus]="true"
+            [selected]="selected"
         >
         </fdp-multi-input>
     </fdp-form-field>
