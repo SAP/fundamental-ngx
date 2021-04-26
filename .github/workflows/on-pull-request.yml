@@ -171,6 +171,7 @@ jobs:
 
       - name: smoke e2e local
         if: ${{ !needs.firebase_preview.outputs.output_url }}
+#        todo: add serve from local dist folder
         run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-local.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}
 
 
