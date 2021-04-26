@@ -9,7 +9,7 @@ env:
   SAUCE_USERNAME_PR: valorkinpr
   SAUCE_ACCESS_KEY_PR: e0a97bd3-4b74-4408-89bf-cce1b44a8bf1
   TRAVIS_BUILD_ID: ${{ github.run_id }}
-  TRAVIS_PULL_REQUEST_BRANCH: ${{ github.base_ref }}
+  TRAVIS_PULL_REQUEST_BRANCH: ${{ github.head_ref }}
 
 jobs:
   build_and_cache:
@@ -118,6 +118,7 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
           projectId: valorkin-fundamental-ngx
+          target: valorkin-fundamental-ngx
           expires: 30d
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
