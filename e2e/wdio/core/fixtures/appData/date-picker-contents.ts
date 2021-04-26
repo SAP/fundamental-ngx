@@ -25,7 +25,6 @@ export const reactiveFormDisableDate = `${currentMonth}/${new Date().getDate().t
 export const reactiveFormDisableRoDDate = `${currentMonth}/${new Date().getDate().toString()}/2021 - ${currentMonth}/${new Date().getDate().toString()}/2021`;
 export const date = `${currentMonth}/1/2021`;
 export const text = 'test';
-export const highlightedColor = ['rgb(8,84,160)', 'rgba(8,84,160,1)'];
 export const year2021 = 2021;
 export const button = 'button';
 export const input = 'input';

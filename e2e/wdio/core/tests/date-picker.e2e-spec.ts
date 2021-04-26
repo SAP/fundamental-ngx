@@ -4,7 +4,6 @@ import {
     clearValue,
     click,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getImageTagBrowserPlatform,
     getText,
@@ -45,7 +44,6 @@ import {
     reactiveFormDisableRoDDate,
     positionIndex,
     date,
-    highlightedColor,
     button,
     input,
     currentYear,
@@ -244,15 +242,6 @@ describe('Date picker suite', function() {
             waitForElDisplayed(filterCalendarValue('aggregated-year'));
             click(activeButtonDatePicker, i);
         }
-    });
-// Discussed with Deno
-    xit('verify selected date is showing in blue background', () => {
-        click(activeButtonDatePicker);
-        click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
-        click(activeButtonDatePicker);
-        expect(highlightedColor)
-            .toContain(getCSSPropertyByName(dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
     it('verify selecting a year range navigates back to the year view', () => {
