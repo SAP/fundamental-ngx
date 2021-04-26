@@ -6,7 +6,7 @@ const { constants } = require('karma');
 
 module.exports = () => {
     return {
-        basePath: '',
+        basePath: __dirname,
         frameworks: ['parallel', 'jasmine', '@angular-devkit/build-angular', 'viewport'],
         plugins: [
             require('karma-parallel'),
@@ -20,8 +20,8 @@ module.exports = () => {
         client: {
             clearContext: false // leave Jasmine Spec Runner output visible in browser
         },
-        covereReporter: {
-            dir:  '../../coverage',
+        coverageReporter: {
+            dir:  'coverage',
             type: 'html'
         },
         reporters: ['progress', 'coverage'],

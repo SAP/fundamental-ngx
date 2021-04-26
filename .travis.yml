@@ -90,12 +90,6 @@ jobs:
     - stage: "Test"
       name: Sauce Labs - unit tests platform
       if: type = pull_request
-      env:
-        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-        - BUILD_ID=$TRAVIS_BUILD_ID
-        - JOB_URL=$TRAVIS_JOB_WEB_UR
-        - SAUCE_USERNAME=$SAUCE_USERNAME
-        - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       before_script:
             - export CHROME_BIN=/usr/bin/google-chrome
       script: npm run test:platform
