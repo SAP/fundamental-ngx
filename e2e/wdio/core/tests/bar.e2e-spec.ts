@@ -41,7 +41,6 @@ describe('Bar test suite:', function() {
         }
     });
 
-
     it('Verify bar contains 3 header sections', () => {
         const leftBarSectionLength = getElementArrayLength(leftSections);
         const checkRightSections = getElementArrayLength(rightSections);
@@ -79,15 +78,15 @@ describe('Bar test suite:', function() {
         }
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
 
-        //skipped due to issue with example selector for this component
+        // skipped due to issue with example selector for this component
         xit('should check examples visual regression', () => {
             barPage.saveExampleBaselineScreenshot();
             expect(barPage.compareWithBaseline()).toBeLessThan(1);
         });
 
-        it('Check arrow button focus state', () => {
+        xit('Check arrow button focus state', () => {
             const buttonsLength = getElementArrayLength(arrowButtons);
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(arrowButtons, i);
@@ -95,7 +94,7 @@ describe('Bar test suite:', function() {
             }
         });
 
-        it('Check Save and Cancel buttons focus state', () => {
+        xit('Check Save and Cancel buttons focus state', () => {
             const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
             for (let i = 0; i < saveCancelButtonsLength; i++) {
                 scrollIntoView(saveCancelButtons, i);
@@ -103,7 +102,7 @@ describe('Bar test suite:', function() {
             }
         });
 
-        it('Check arrow button active state', () => {
+        xit('Check arrow button active state', () => {
             const buttonsLength = getElementArrayLength(arrowButtons);
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(arrowButtons, i);
@@ -111,7 +110,7 @@ describe('Bar test suite:', function() {
             }
         });
 
-        it('Check Save and Cancel buttons active state', () => {
+        xit('Check Save and Cancel buttons active state', () => {
             const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
             for (let i = 0; i < saveCancelButtonsLength; i++) {
                 scrollIntoView(saveCancelButtons, i);
@@ -119,7 +118,7 @@ describe('Bar test suite:', function() {
             }
         });
 
-        it('Check arrow button hover state', () => {
+        xit('Check arrow button hover state', () => {
             const buttonsLength = getElementArrayLength(arrowButtons);
             for (let i = 0; i < buttonsLength; i++) {
                 scrollIntoView(arrowButtons, i);
@@ -127,7 +126,7 @@ describe('Bar test suite:', function() {
             }
         });
 
-        it('Check Save and Cancel buttons hover state', () => {
+        xit('Check Save and Cancel buttons hover state', () => {
             const saveCancelButtonsLength = getElementArrayLength(saveCancelButtons);
             for (let i = 0; i < saveCancelButtonsLength; i++) {
                 scrollIntoView(saveCancelButtons, i);

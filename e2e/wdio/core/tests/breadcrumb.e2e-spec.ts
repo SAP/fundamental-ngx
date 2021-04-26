@@ -1,17 +1,22 @@
 import { BreadcrumbPo } from '../pages/breadcrumb.po';
 import {
     addIsActiveClass,
-    checkElementScreenshot, click,
+    checkElementScreenshot,
     getElementArrayLength,
-    isElementClickable, mouseHoverElement,
-    refreshPage, saveElementScreenshot,
-    scrollIntoView, waitForElDisplayed, waitForPresent
+    isElementClickable,
+    mouseHoverElement,
+    refreshPage,
+    saveElementScreenshot,
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 import {
     disabledLinksState,
     linksActiveState,
-    linksExample, linksHoverState
+    linksExample,
+    linksHoverState
 } from '../fixtures/testData/breadcrumb.tags';
 import { breadcrumbDisabledLinks, breadcrumbLinks } from '../fixtures/appData/breadcrumb-contents';
 
@@ -53,7 +58,7 @@ describe('Breadcrumb test suite:', function() {
             expect(breadcrumbPage.compareWithBaseline()).toBeLessThan(1);
         });
 
-        it('should check hover state for links', () => {
+        xit('should check hover state for links', () => {
             const linksLength = getElementArrayLength(links);
             for (let i = 0; i < linksLength; i++) {
                 scrollIntoView(links, i);
@@ -61,7 +66,7 @@ describe('Breadcrumb test suite:', function() {
             }
         });
 
-        it('should check hover state for disabled links', () => {
+        xit('should check hover state for disabled links', () => {
             const disabledLinksLength = getElementArrayLength(disabledLinks);
             for (let i = 0; i < disabledLinksLength; i++) {
                 scrollIntoView(disabledLinks, i);
@@ -69,7 +74,7 @@ describe('Breadcrumb test suite:', function() {
             }
         });
 
-        it('should check active state for links', () => {
+        xit('should check active state for links', () => {
             const linksLength = getElementArrayLength(links);
             for (let i = 0; i < linksLength; i++) {
                 scrollIntoView(links, i);

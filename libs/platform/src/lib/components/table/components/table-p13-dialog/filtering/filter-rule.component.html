@@ -33,24 +33,91 @@
                     *ngFor="let strategy of rule.strategies"
                     [value]="strategy"
                 >
-                    <span i18n="@@platformTableP13FilterStrategyLabel">
-                        { strategy, select,
-                        between {between}
-                        contains {contains}
-                        beginsWith {begins with}
-                        endsWith {ends with}
-                        equalTo {equal to}
-                        greaterThan {greater than}
-                        greaterThanOrEqualTo {greater than or equal to}
-                        lessThan {less than}
-                        lessThanOrEqualTo {less than or equal to}
-                        after {after}
-                        onOrAfter {on or after}
-                        before {before}
-                        beforeOrOn {before or on}
-                        other {Not defined}
-                        }
-                    </span>
+                    <ng-container [ngSwitch]="strategy">
+                        <span 
+                            *ngSwitchCase="'between'" 
+                            i18n="@@platformTableP13FilterStrategyLabelBetween">
+                            between
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'contains'" 
+                            i18n="@@platformTableP13FilterStrategyLabelContains">
+                            contains
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'beginsWith'" 
+                            i18n="@@platformTableP13FilterStrategyLabelBeginsWith">
+                            begins with
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'endsWith'" 
+                            i18n="@@platformTableP13FilterStrategyLabelEndsWith">
+                            ends with
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'equalTo'" 
+                            i18n="@@platformTableP13FilterStrategyLabelEqualTo">
+                            equal to
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'greaterThan'" 
+                            i18n="@@platformTableP13FilterStrategyLabelGreaterThan">
+                            greater than
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'greaterThanOrEqualTo'" 
+                            i18n="@@platformTableP13FilterStrategyLabelGreaterThanOrEqualTo">
+                            greater than or equal to
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'lessThan'" 
+                            i18n="@@platformTableP13FilterStrategyLabelLessThan">
+                            less than
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'lessThanOrEqualTo'" 
+                            i18n="@@platformTableP13FilterStrategyLabelLessThanOrEqualTo">
+                            less than or equal to
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'after'" 
+                            i18n="@@platformTableP13FilterStrategyLabelAfter">
+                            after
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'onOrAfter'" 
+                            i18n="@@platformTableP13FilterStrategyLabelOnOrAfter">
+                            on or after
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'before'" 
+                            i18n="@@platformTableP13FilterStrategyLabelBefore">
+                            before
+                        </span>
+
+                        <span 
+                            *ngSwitchCase="'beforeOrOn'" 
+                            i18n="@@platformTableP13FilterStrategyLabelBeforeOrOn">
+                            before or on
+                        </span>
+
+                        <span
+                            *ngSwitchCaseDefault 
+                            i18n="@@platformTableP13FilterStrategyLabelNotDefined">
+                            Not Defined
+                        </span>
+                    </ng-container>
                 </fd-option>
             </fd-select>
         </div>

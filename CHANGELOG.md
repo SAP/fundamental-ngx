@@ -2,6 +2,116 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.3...v0.29.1-rc.4) (2021-04-26)
+
+
+### Features
+
+* (Platform) introduce new component Page footer ([#4936](https://github.com/SAP/fundamental-ngx/issues/4936)) ([0726e74](https://github.com/SAP/fundamental-ngx/commit/0726e747c3fcc52ce5a8aea54a39e3f6039c67af))
+
+### [0.29.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.2...v0.29.1-rc.3) (2021-04-26)
+
+### [0.29.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.1...v0.29.1-rc.2) (2021-04-25)
+
+### [0.29.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.0...v0.29.1-rc.1) (2021-04-25)
+
+### [0.29.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.113...v0.29.1-rc.0) (2021-04-23)
+
+## [0.29.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.0...v0.29.0) (2021-04-22)
+
+## [0.29.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.112...v0.29.0-rc.113) (2021-04-23)
+
+## [0.29.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.111...v0.29.0-rc.112) (2021-04-23)
+
+
+### Bug Fixes
+
+* (Platform) Multi Input add the ability to add an item with Enter ([#5179](https://github.com/SAP/fundamental-ngx/issues/5179)) ([7347f6c](https://github.com/SAP/fundamental-ngx/commit/7347f6cbca8098cbb64e01a76add9092e907cadd))
+
+## [0.29.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.110...v0.29.0-rc.111) (2021-04-23)
+
+## [0.29.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.109...v0.29.0-rc.110) (2021-04-22)
+
+## [0.29.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.108...v0.29.0-rc.109) (2021-04-22)
+
+## [0.29.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.107...v0.29.0-rc.108) (2021-04-22)
+
+## [0.29.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.106...v0.29.0-rc.107) (2021-04-21)
+
+## [0.29.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.105...v0.29.0-rc.106) (2021-04-20)
+
+## [0.29.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.104...v0.29.0-rc.105) (2021-04-19)
+
+## [0.29.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.103...v0.29.0-rc.104) (2021-04-19)
+
+
+### Bug Fixes
+
+* (Core|Platform) fix optional rtl service ([#5138](https://github.com/SAP/fundamental-ngx/issues/5138)) ([37a78ec](https://github.com/SAP/fundamental-ngx/commit/37a78ecb66f97d5490dca2dd205862af6b3ef104))
+
+## [0.29.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.102...v0.29.0-rc.103) (2021-04-18)
+
+## [0.29.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.101...v0.29.0-rc.102) (2021-04-18)
+
+## [0.29.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.100...v0.29.0-rc.101) (2021-04-18)
+
+## [0.29.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.99...v0.29.0-rc.100) (2021-04-16)
+
+
+### Features
+
+* (Core) add 2 new types of icons ([#5137](https://github.com/SAP/fundamental-ngx/issues/5137)) ([b157b30](https://github.com/SAP/fundamental-ngx/commit/b157b30b894e676782b4a587eb89ea839037fdfe))
+
+## [0.29.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.98...v0.29.0-rc.99) (2021-04-16)
+
+## [0.29.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.97...v0.29.0-rc.98) (2021-04-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* due to the needs of SAP projects was removed support of select and plurals of i18n
+It followed with changes in i18n markers in the next components:
+
+* ApprovalFlow Platform Component
+* Form Platform Component
+* Table Platform Component
+* UploadCollection Platform Component
+* ValueHelpDialog Platform Component
+
+If you're using internationalization with any of these components -
+you need to re-extract translations (`ng extract-i18n`) and update corresponding strings.
+
+* docs: (Platform) readme update with info about i18n
+
+* fix: (Platform) upload collection components improve translations
+
+### Bug Fixes
+
+* (Platform) i18n remove select, plurals ([#5109](https://github.com/SAP/fundamental-ngx/issues/5109)) ([035f96a](https://github.com/SAP/fundamental-ngx/commit/035f96ac74c371d7a12ac8c86c2fc656c59a0442))
+
+## [0.29.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.96...v0.29.0-rc.97) (2021-04-16)
+
+
+### Bug Fixes
+
+* (Platform) fix compact bug in multi input component ([#4764](https://github.com/SAP/fundamental-ngx/issues/4764)) ([daaf51b](https://github.com/SAP/fundamental-ngx/commit/daaf51be5ff45d6e1c47294944ac5f2f01835c9c))
+
+## [0.29.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.95...v0.29.0-rc.96) (2021-04-16)
+
+
+### Features
+
+* (Platform) Table Phase 4 ([#4777](https://github.com/SAP/fundamental-ngx/issues/4777)) ([c4d2b02](https://github.com/SAP/fundamental-ngx/commit/c4d2b021be49d09ac98c0937353d1dfae4f08ed0))
+
+
+### Bug Fixes
+
+* (Platform) table platform component selected row hover styles improvement ([#5117](https://github.com/SAP/fundamental-ngx/issues/5117)) ([7169caa](https://github.com/SAP/fundamental-ngx/commit/7169caad6730abcfe5571a92b0ce37f41dab3e93))
+
+## [0.29.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.94...v0.29.0-rc.95) (2021-04-15)
+
+## [0.29.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.93...v0.29.0-rc.94) (2021-04-15)
+
 ## [0.29.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.91...v0.29.0-rc.93) (2021-04-15)
 
 

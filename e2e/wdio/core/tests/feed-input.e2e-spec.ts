@@ -155,17 +155,17 @@ describe('Verify Feed Input component', function() {
             expect(feedInputPage.compareWithBaseline()).toBeLessThan(1);
         });
 
-        it('should check disable input text area hover state', () => {
+        xit('should check disable input text area hover state', () => {
             scrollIntoView(disableInputTextArea);
             checkDisableElementHoverState(disableInputTextArea, inputTextAreaDisable, textArea);
         });
 
-        it('should check disable input button hover state', () => {
+        xit('should check disable input button hover state', () => {
             scrollIntoView(disableInputButton);
             checkDisableElementHoverState(disableInputButton, inputButtonDisable, button);
         });
 
-        it('should check active input text areas states', () => {
+        xit('should check active input text areas states', () => {
             const activeInputTextAreasLength = getElementArrayLength(activeInputTextAreas);
             for (let i = 0; i < activeInputTextAreasLength; i++) {
                 if (i === 3) {
@@ -176,7 +176,7 @@ describe('Verify Feed Input component', function() {
             }
         });
 
-        it('should check active input buttons states', () => {
+        xit('should check active input buttons states', () => {
             const inputButtonsLength = getElementArrayLength(feedInputButton);
             for (let i = 0; i < inputButtonsLength; i++) {
                 if (i === 3) {

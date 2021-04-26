@@ -1,6 +1,15 @@
-<div class="approval-flow-user-list__selected-count" i18n="@@platformApprovalFlowSelectedUsers"
-     *ngIf="_selectedItems.length">{{ _selectedItems.length }}
-    {_selectedItems.length, plural, =1 {item} other {items}} selected
+<div
+    class="approval-flow-user-list__selected-count" 
+    *ngIf="_selectedItems.length">
+    {{ _selectedItems.length }}
+    <ng-container
+        *ngIf="_selectedItems.length === 1; else multipleItems"
+        i18n="@@platformApprovalFlowSelectedUser">
+        item selected
+    </ng-container>
+    <ng-template #multipleItems i18n="@@platformApprovalFlowSelectedUsers">
+        items selected
+    </ng-template>
 </div>
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
