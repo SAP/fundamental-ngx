@@ -600,101 +600,74 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
-        const graph: ApprovalFlowGraph = [];
+        let nodesWithTemporary;
+        nodesWithTemporary = setOnlyOneRootNode(nodes);
+        nodesWithTemporary = setOnlyOneFinalNode(nodes);
 
-        let nodesExtended;
-        nodesExtended = setOnlyOneRootNode(nodes);
-        nodesExtended = setOnlyOneFinalNode(nodes);
-
-        const rootNode = findRootNodes(nodesExtended)[0];
-        const finalNode = findFinalNodes(nodesExtended)[0];
+        const rootNode = findRootNodes(nodesWithTemporary)[0];
+        const finalNode = findFinalNodes(nodesWithTemporary)[0];
 
         if (!rootNode || !finalNode) {
-            return graph;
+            return [];
         }
 
-        const nodesWithBlank =  [...nodes];
-        const paths = getAllPaths(rootNode, finalNode, nodesExtended);
-        const pathsWithEmptyNodes = fillWithEmptyNodes(paths);
-        const pathsWithSpaces = replaceDuplicatesInPaths(pathsWithEmptyNodes);
+        const paths = getAllGraphPaths(rootNode, finalNode, nodesWithTemporary);
+        const pathsWithBlankNodes = fillPathsWithBlankNodes(paths);
+        const pathsWithSpaces = replaceDuplicatesWithSpacesInPaths(pathsWithBlankNodes);
         const pathsWithoutTemporaryNodes = removeTemporaryNodes(pathsWithSpaces);
         const columns = transformPathsIntoColumns(pathsWithoutTemporaryNodes);
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
-        const metaMap = getIntialMetadata(nodes);
 
-        columnsWithoutEndSpaces.forEach((column, index) => {
-            const blankNodes = column.filter(node => node.blank);
-            nodesWithBlank.push(...blankNodes);
-
-            graph[index] = {
-                nodes: column,
-                index: index, 
-                isPartial: blankNodes.length > 0,
-                allNodesApproved: column.every(node => isNodeApproved(node))
-            };
-        });
-
-        this._buildGraphMetadata(nodesWithBlank, graph, metaMap);
-
-        return graph;
+        return transformColumnsIntoGraph(columnsWithoutEndSpaces);
     }
 
     /** @hidden Build Approval Flow graph metadata */
-    private _buildGraphMetadata(
-        nodes: ApprovalGraphNode[],
-        graph: ApprovalFlowGraph,
-        metaMap: { [key: string]: ApprovalGraphNodeMetadata }
-    ): void {
-        // save node and column indexes, set links to closest nodes
-        nodes.forEach(n => {
-            const columnIndex = graph.findIndex(c => c.nodes.includes(n));
+    private _buildGraphMetadata(graph: ApprovalFlowGraph): { [key: string]: ApprovalGraphNodeMetadata } {
+        const nodes: ApprovalGraphNode[] = graph.reduce((acc, column) => acc.concat(column.nodes), []);
+        const metadata: { [key: string]: ApprovalGraphNodeMetadata } = {};
 
-            if (columnIndex === -1) {
-                // used to catch errors in graph rendering
-                // will be removed after implementing nested parallel approvals in Phase 3
-                console.warn('ERROR: node not found in graph', n);
-                return;
-            }
+        nodes.forEach(node => {
+            const columnIndex = graph.findIndex(c => c.nodes.includes(node));
+            const nodeIndex = graph[columnIndex].nodes.findIndex(_node => _node === node);
+            const parents = findParentNodes(node, nodes);
 
-            const nodeIndex = graph[columnIndex].nodes.findIndex(_n => _n === n);
-
-            metaMap[n.id] = {
-                ...metaMap[n.id],
+            metadata[node.id] = {
+                parents: parents,
+                isRoot: !parents.length,
+                isLast: !node.targets.length,
+                parallelStart: node.targets.length > 1,
+                parallelEnd: parents.length > 1,
+                isParallel: false,
                 columnIndex: columnIndex,
                 nodeIndex: nodeIndex,
-                prevVNode: graph[columnIndex].nodes[nodeIndex - 1],
-                nextVNode: graph[columnIndex].nodes[nodeIndex + 1],
                 prevHNode: graph[columnIndex - 1]?.nodes[nodeIndex],
                 nextHNode: graph[columnIndex + 1]?.nodes[nodeIndex]
             };
-
-            if (n.blank) {
-                metaMap[n.id].isParallel = true;
-            }
         });
 
-        // calculate values for add/delete node flags
-        nodes.forEach(n => {
-            const nodeMeta = metaMap[n.id];
-            const nextHNode = nodeMeta.nextHNode;
-            const isNotApproved = !isNodeApproved(n);
-            const allParentsApproved = nodeMeta.parents?.every(_n => isNodeApproved(_n));
+        /** Calculate values for add/delete node flags */
+        nodes.forEach(node => {
+            const nodeMetadata = metadata[node.id];
+            const isNodeNotApproved = !isNodeApproved(node);
+            const allNodeParentsApproved = nodeMetadata.parents?.every(_node => isNodeApproved(_node));
 
-            nodeMeta.canAddNodeAfter = isNotApproved && !nextHNode?.blank;
-            nodeMeta.canAddNodeBefore = n.status === 'not started' && !allParentsApproved;
-            nodeMeta.canAddParallel = isNotApproved;
-            nodeMeta.isLastInParallel = nodeMeta.isParallel && graph[nodeMeta.columnIndex + 1]?.nodes.length === 1;
-            nodeMeta.canDelete = !(nodeMeta.isLast && nodeMeta.parallelEnd);
+            nodeMetadata.isLastInParallel = node.targets.some(targetNodeId => metadata[targetNodeId].parallelEnd);
+            nodeMetadata.canAddNodeBefore = node.status === 'not started' && !allNodeParentsApproved;
+            nodeMetadata.canAddNodeAfter = isNodeNotApproved;
+            nodeMetadata.canAddParallel = isNodeNotApproved;
+            nodeMetadata.canDelete = !(nodeMetadata.isLast && nodeMetadata.parallelEnd);
         });
-        
-        this._metaMap = metaMap;
+
+        return metadata;
     }
 
     /** @hidden Build Approval Flow graph and render it */
     private _buildView(approvalProcess: ApprovalProcess): void {
         this._approvalProcess = approvalProcess;
         this._metaMap = {};
-        this._graph = this._buildNodeTree(approvalProcess.nodes);
+
+        this._graph = this._buildNodeTree(this._approvalProcess.nodes);
+        this._metaMap = this._buildGraphMetadata(this._graph);
 
         this._resetCheckedNodes();
         this._cdr.detectChanges();
@@ -919,7 +892,14 @@ function getBlankNode(): ApprovalGraphNode {
 }
 
 function getSpaceNode(): ApprovalGraphNode {
-    return Object.assign({}, getBlankNode(), { id: `spaceId${(Math.random() * 1000).toFixed()}` });
+    return {
+        id: `spaceId${(Math.random() * 1000).toFixed()}`,
+        name: '',
+        targets: [],
+        approvers: [],
+        status: 'not started',
+        space: true
+    };
 }
 
 function isNodeTargetsIncludeId(node: ApprovalNode, id: string): boolean {
@@ -974,7 +954,7 @@ function removeTemporaryNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[]
     return processedPaths;
 }
 
-function getAllPaths(rootNode: ApprovalGraphNode, finalNode: ApprovalGraphNode, nodes: ApprovalGraphNode[]): ApprovalGraphNode[][] {
+function getAllGraphPaths(rootNode: ApprovalGraphNode, finalNode: ApprovalGraphNode, nodes: ApprovalGraphNode[]): ApprovalGraphNode[][] {
     const paths: ApprovalGraphNode[][] = [];
     const queue: ApprovalGraphNode[][] = [];
 
@@ -999,7 +979,7 @@ function getAllPaths(rootNode: ApprovalGraphNode, finalNode: ApprovalGraphNode, 
     return paths;
 }
 
-function fillWithEmptyNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     const processedPaths = [];
 
     const pathLengths = paths.map(path => path.length);
@@ -1048,7 +1028,7 @@ function getBlankNodesSequential(targetNodeId: string, count: number): ApprovalG
     return blankNodes;
 }
 
-function replaceDuplicatesInPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+function replaceDuplicatesWithSpacesInPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     const processedPaths = [];
 
     paths.forEach((path, index) => {
@@ -1078,7 +1058,6 @@ function transformPathsIntoColumns(paths: ApprovalGraphNode[][]): ApprovalGraphN
     const columns: ApprovalGraphNode[][] = [];
     let column: ApprovalGraphNode[] = [];
 
-    /* All paths have the same length */
     for (let i = 0; i < paths[0].length; i++) {
         column = [];
 
@@ -1099,7 +1078,7 @@ function trimEndSpacesInColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNo
         let lastNotSpaceNodeIndex;
 
         for (let i = column.length - 1; i >= 0; i--) {
-            if (!column[i].id.startsWith('spaceId')) {
+            if (!column[i].space) {
                 lastNotSpaceNodeIndex = i;
                 break;
             }
@@ -1115,23 +1094,19 @@ function trimEndSpacesInColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNo
     return processedColumns;
 }
 
-function getIntialMetadata(nodes: ApprovalGraphNode[]): { [key: string]: ApprovalGraphNodeMetadata } {
-    const metaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
-    const rootNodes = findRootNodes(nodes);
+function transformColumnsIntoGraph(columns: ApprovalGraphNode[][]): ApprovalFlowGraph {
+    const graph: ApprovalFlowGraph = [];
 
-    nodes.forEach(n => {
-        const parents = findParentNodes(n, nodes);
+    columns.forEach((column, index) => {
+        const blankNodes = column.filter(node => node.blank);
 
-        metaMap[n.id] = {
-            parents: parents,
-            isRoot: !parents.length,
-            isLast: !n.targets.length,
-            parallelStart: n.targets.length > 1,
-            parallelEnd: parents.length > 1,
-            isParallel: (parents.length === 1 && parents[0].targets.length > 1)
-                    || rootNodes.length > 1 && rootNodes.includes(n)
+        graph[index] = {
+            nodes: column,
+            index: index, 
+            isPartial: blankNodes.length > 0,
+            allNodesApproved: column.every(node => isNodeApproved(node))
         };
     });
 
-    return metaMap;
+    return graph;
 }

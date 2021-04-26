@@ -15,7 +15,7 @@ export interface ApprovalNode {
     isEveryoneApprovalNeeded?: boolean;
 }
 
-export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any, temporary?: boolean };
+export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; meta?: any, temporary?: boolean };
 
 export interface ApprovalGraphNodeMetadata {
     parents: ApprovalGraphNode[];
@@ -27,8 +27,6 @@ export interface ApprovalGraphNodeMetadata {
     isLastInParallel?: boolean;
     columnIndex?: number;
     nodeIndex?: number;
-    prevVNode?: ApprovalGraphNode;
-    nextVNode?: ApprovalGraphNode;
     prevHNode?: ApprovalGraphNode;
     nextHNode?: ApprovalGraphNode;
     canAddNodeBefore?: boolean;
