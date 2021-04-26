@@ -16,7 +16,7 @@
       ]
     },
     {
-      "target": "docs",
+      "target": "valorkin-fundamental-ngx",
       "public": "./dist/apps/docs",
       "ignore": [
         "firebase.json",

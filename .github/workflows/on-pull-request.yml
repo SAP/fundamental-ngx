@@ -115,7 +115,7 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
-          projectId: docs
+          projectId: valorkin-fundamental-ngx
           expires: 30d
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels

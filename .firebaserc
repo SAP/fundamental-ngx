@@ -5,7 +5,7 @@
   "targets": {
     "valorkin-fundamental-ngx": {
       "hosting": {
-        "docs": [
+        "valorkin-fundamental-ngx": [
           "valorkin-fundamental-ngx"
         ]
       }
