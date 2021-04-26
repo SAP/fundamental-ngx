@@ -17,9 +17,9 @@ import {
 describe('Notification test suite', function() {
     const notificationPage = new NotificationPo();
     const {
-        notificationButton, buttonMoreInfo, notificationBlock, buttonClose, buttonApprove, buttonCancel, notificationTitle,
+        notificationButton, moreInfoButton, notificationBlock, closeButton, approveButton, cancelButton, notificationTitle,
         notificationDescription, notificationMetadata, notificationAvatar, notificationIndicator, notificationSpan,
-        indicatorSuccess, indicatorWarning
+        successIndicator, warningIndicator
     } = notificationPage;
 
     beforeAll(() => {
@@ -48,7 +48,7 @@ describe('Notification test suite', function() {
                 expect(isElementDisplayed(notificationBlock, i)).toBe(true, `block with index ${i} not displayed`);
                 expect(isElementDisplayed(notificationAvatar, i)).toBe(true, `avatar with index ${i} not displayed`);
                 expect(isElementDisplayed(notificationIndicator, i)).toBe(true, `indicator with index ${i} not displayed`);
-                expect(isElementClickable(buttonMoreInfo, i)).toBe(true, `button more with index ${i} not clickable`);
+                expect(isElementClickable(moreInfoButton, i)).toBe(true, `more info button with index ${i} not clickable`);
                 expect(getText(notificationTitle, i)).toBe(titleText);
                 expect(getText(notificationDescription, i)).toBe(descriptionText);
                 expect(getText(notificationMetadata, i)).toBe(metaDataText);
@@ -62,8 +62,8 @@ describe('Notification test suite', function() {
             const blockLength = getElementArrayLength(notificationBlock);
             expect(blockLength).toEqual(defaultBlockLength);
             for (let i = 0; i < blockLength; i++) {
-                scrollIntoView(buttonClose);
-                click(buttonClose);
+                scrollIntoView(closeButton);
+                click(closeButton);
                 const newBlockLength = getElementArrayLength(notificationBlock);
                 expect(newBlockLength).toEqual(defaultBlockLength - i - 1);
             }
@@ -76,8 +76,8 @@ describe('Notification test suite', function() {
             const blockLength = getElementArrayLength(notificationBlock);
             expect(blockLength).toEqual(defaultBlockLength);
             for (let i = 0; i < blockLength; i++) {
-                scrollIntoView(buttonApprove);
-                click(buttonApprove);
+                scrollIntoView(approveButton);
+                click(approveButton);
                 const newBlockLength = getElementArrayLength(notificationBlock);
                 expect(newBlockLength).toEqual(defaultBlockLength - i - 1);
             }
@@ -90,8 +90,8 @@ describe('Notification test suite', function() {
             const blockLength = getElementArrayLength(notificationBlock);
             expect(blockLength).toEqual(defaultBlockLength);
             for (let i = 0; i < blockLength; i++) {
-                scrollIntoView(buttonCancel);
-                click(buttonCancel);
+                scrollIntoView(cancelButton);
+                click(cancelButton);
                 const newBlockLength = getElementArrayLength(notificationBlock);
                 expect(newBlockLength).toEqual(defaultBlockLength - i - 1);
             }
@@ -106,7 +106,7 @@ describe('Notification test suite', function() {
             scrollIntoView(notificationBlock);
             expect(isElementDisplayed(notificationBlock)).toBe(true, `block with index not displayed`);
             expect(isElementDisplayed(notificationAvatar)).toBe(true, `avatar with index not displayed`);
-            expect(isElementClickable(buttonMoreInfo)).toBe(true, `button more with index not clickable`);
+            expect(isElementClickable(moreInfoButton)).toBe(true, `more info button with index not clickable`);
             expect(getText(notificationTitle)).toBe(notificationText);
             expect(getText(notificationDescription)).toBe(descriptionText);
             expect(getText(notificationMetadata)).toBe(metaDataText2);
@@ -115,21 +115,21 @@ describe('Notification test suite', function() {
         it('verify approve button', () => {
             scrollIntoView(notificationButton, 1);
             click(notificationButton, 1);
-            click(buttonApprove);
+            click(approveButton);
             expect(getText(notificationSpan)).toBe(templateAsContentApproveText);
         });
 
         it('verify reject button', () => {
             scrollIntoView(notificationButton, 1);
             click(notificationButton, 1);
-            click(buttonCancel);
+            click(cancelButton);
             expect(getText(notificationSpan)).toBe(templateAsContentRejectText);
         });
 
         it('verify close button', () => {
             scrollIntoView(notificationButton, 1);
             click(notificationButton, 1);
-            click(buttonClose);
+            click(closeButton);
             expect(getText(notificationSpan)).toBe(templateAsContentCloseText);
         });
     });
@@ -141,9 +141,9 @@ describe('Notification test suite', function() {
             click(notificationButton, 2);
             scrollIntoView(notificationBlock);
             expect(isElementDisplayed(notificationBlock)).toBe(true, `block with index not displayed`);
-            expect(isElementDisplayed(indicatorSuccess)).toBe(true, `indicator with index not displayed`);
+            expect(isElementDisplayed(successIndicator)).toBe(true, `indicator with index not displayed`);
             expect(isElementDisplayed(notificationAvatar)).toBe(true, `avatar with index not displayed`);
-            expect(isElementClickable(buttonMoreInfo)).toBe(true, `button more with index not clickable`);
+            expect(isElementClickable(moreInfoButton)).toBe(true, `more info button with index not clickable`);
             expect(getText(notificationTitle)).toBe(titleText);
             expect(getText(notificationDescription)).toBe(descriptionText);
             expect(getText(notificationMetadata)).toBe(metaDataText);
@@ -152,21 +152,21 @@ describe('Notification test suite', function() {
         it('verify approve button', () => {
             scrollIntoView(notificationButton, 2);
             click(notificationButton, 2);
-            click(buttonApprove);
+            click(approveButton);
             expect(getText(notificationSpan, 1)).toBe(componentAsContentApproveText);
         });
 
         it('verify cancel button', () => {
             scrollIntoView(notificationButton, 2);
             click(notificationButton, 2);
-            click(buttonCancel);
+            click(cancelButton);
             expect(getText(notificationSpan, 1)).toBe(componentAsContentCancelText);
         });
 
         it('verify close button', () => {
             scrollIntoView(notificationButton, 2);
             click(notificationButton, 2);
-            click(buttonClose);
+            click(closeButton);
             expect(getText(notificationSpan, 1)).toBe(componentAsContentCloseText);
         });
     });
@@ -178,9 +178,9 @@ describe('Notification test suite', function() {
             click(notificationButton, 3);
             scrollIntoView(notificationBlock);
             expect(isElementDisplayed(notificationBlock)).toBe(true, `block with index not displayed`);
-            expect(isElementDisplayed(indicatorWarning)).toBe(true, `indicator with index not displayed`);
+            expect(isElementDisplayed(warningIndicator)).toBe(true, `indicator with index not displayed`);
             expect(isElementDisplayed(notificationAvatar)).toBe(true, `avatar with index not displayed`);
-            expect(isElementClickable(buttonMoreInfo)).toBe(true, `button more with index not clickable`);
+            expect(isElementClickable(moreInfoButton)).toBe(true, `more info button with index not clickable`);
             expect(getText(notificationTitle)).toBe(notificationGroupText);
             expect(getText(notificationDescription)).toBe(thisNotificationGroupText);
             expect(getText(notificationMetadata)).toBe(notificationGroupText);
@@ -189,21 +189,21 @@ describe('Notification test suite', function() {
         it('verify approve button', () => {
             scrollIntoView(notificationButton, 3);
             click(notificationButton, 3);
-            click(buttonApprove);
+            click(approveButton);
             expect(getText(notificationSpan, 2)).toBe(notificationGroupApproveText);
         });
 
         it('verify cancel button', () => {
             scrollIntoView(notificationButton, 3);
             click(notificationButton, 3);
-            click(buttonCancel);
+            click(cancelButton);
             expect(getText(notificationSpan, 2)).toBe(notificationGroupCancelText);
         });
 
         it('verify close button', () => {
             scrollIntoView(notificationButton, 3);
             click(notificationButton, 3);
-            click(buttonClose);
+            click(closeButton);
             expect(getText(notificationSpan, 2)).toBe(notificationCloseText);
         });
     });
@@ -215,9 +215,9 @@ describe('Notification test suite', function() {
             click(notificationButton, 4);
             scrollIntoView(notificationBlock);
             expect(isElementDisplayed(notificationBlock)).toBe(true, `block with index not displayed`);
-            expect(isElementDisplayed(indicatorSuccess)).toBe(true, `indicator with index not displayed`);
+            expect(isElementDisplayed(successIndicator)).toBe(true, `indicator with index not displayed`);
             expect(isElementDisplayed(notificationAvatar)).toBe(true, `avatar with index not displayed`);
-            expect(isElementClickable(buttonMoreInfo)).toBe(true, `button more with index not clickable`);
+            expect(isElementClickable(moreInfoButton)).toBe(true, `more info button with index not clickable`);
             expect(getText(notificationTitle)).toBe(titleText);
             expect(getText(notificationDescription)).toBe(descriptionText);
             expect(getText(notificationMetadata)).toBe(metaDataText);
@@ -226,21 +226,21 @@ describe('Notification test suite', function() {
         it('verify approve button', () => {
             scrollIntoView(notificationButton, 4);
             click(notificationButton, 4);
-            click(buttonApprove);
+            click(approveButton);
             expect(getText(notificationSpan, 3)).toBe(objectApproveText);
         });
 
         it('verify cancel button', () => {
             scrollIntoView(notificationButton, 4);
             click(notificationButton, 4);
-            click(buttonCancel);
+            click(cancelButton);
             expect(getText(notificationSpan, 3)).toBe(objectCancelText);
         });
 
         it('verify close button', () => {
             scrollIntoView(notificationButton, 4);
             click(notificationButton, 4);
-            click(buttonClose);
+            click(closeButton);
             expect(getText(notificationSpan, 3)).toBe(objectCloseText);
         });
     });

@@ -7,17 +7,17 @@ export class NotificationPo extends CoreBaseComponentPo {
 
     notificationButton = '.fd-doc-component button.fd-button--standard';
     notificationBlock = 'fd-notification.fd-notification-custom-block';
-    buttonClose = 'button.fd-notification__close';
-    buttonMoreInfo = 'fd-notification-footer button.fd-button--transparent';
-    buttonApprove = '.fd-button--positive';
-    buttonCancel = '.fd-notification__actions button.fd-button--negative';
+    closeButton = 'button.fd-notification__close';
+    moreInfoButton = 'fd-notification-footer button.fd-button--transparent';
+    approveButton = '.fd-button--positive';
+    cancelButton = '.fd-notification__actions button.fd-button--negative';
     notificationTitle = 'h3.fd-notification__title';
     notificationDescription = 'div.fd-notification__description';
     notificationMetadata = 'div.fd-notification__metadata';
     notificationAvatar = '.fd-avatar.fd-avatar--s';
     notificationIndicator = 'div.fd-notification__indicator--information';
-    indicatorSuccess = 'div.fd-notification__indicator--success';
-    indicatorWarning = 'div.fd-notification__indicator--warning';
+    successIndicator = 'div.fd-notification__indicator--success';
+    warningIndicator = 'div.fd-notification__indicator--warning';
     notificationSpan = 'button~span';
 
 
