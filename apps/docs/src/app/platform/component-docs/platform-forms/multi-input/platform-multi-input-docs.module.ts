@@ -28,6 +28,7 @@ import { PlatformMultiInputDisabledExampleComponent } from './platform-multi-inp
 import { SharedDocumentationModule } from '../../../../documentation/shared-documentation.module';
 import { MULTI_INPUT_MOBILE_CONFIG } from '../../../../documentation/utilities/consts/mobile-mode-configuration-tokens';
 import { PlatformMultiInputReactiveExampleComponent } from './platform-multi-input-example/platform-multi-input-reactive-example.component';
+import { PlatformMultiInputCompactExampleComponent } from './platform-multi-input-example/platform-multi-input-compact-example.component';
 
 const routes: Routes = [
     {
@@ -51,7 +52,8 @@ const routes: Routes = [
         PlatformMultiInputDeclineExampleComponent,
         PlatformMultiInputDisabledExampleComponent,
         PlatformMultiInputMobileExampleComponent,
-        PlatformMultiInputReactiveExampleComponent
+        PlatformMultiInputReactiveExampleComponent,
+        PlatformMultiInputCompactExampleComponent
     ],
     imports: [
         CommonModule,

@@ -1,10 +1,6 @@
-import {
-    getText,
-    waitForElDisplayed,
-    click, scrollIntoView, waitForClickable, refreshPage
-} from '../../driver/wdio';
+import { click, getText, refreshPage, scrollIntoView, waitForClickable, waitForElDisplayed } from '../../driver/wdio';
 import { QuickViewPo } from '../pages/quick-view.po';
-import { mobile, phone, email, address, companyName, popoverHeaderValue } from '../fixtures/appData/quick-view-content';
+import { address, companyName, email, mobile, phone, popoverHeaderValue } from '../fixtures/appData/quick-view-content';
 
 const quickViewPage: QuickViewPo = new QuickViewPo();
 const {

@@ -22,6 +22,7 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
 })
 export class PlatformTimePickerReactiveExampleComponent {
     requiredTimeValidator: ValidatorFn[] = [Validators.required];
+    displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false };
 
     timePickerForm: FormGroup = new FormGroup({
         disableExample: new FormControl({ value: '', disabled: true }),

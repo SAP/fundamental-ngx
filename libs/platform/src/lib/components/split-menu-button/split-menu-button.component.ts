@@ -87,7 +87,7 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     /** Defined max width of Split menu button */
     splitButtonMaxWidth = '12rem';
 
-    constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtl: RtlService) {
+    constructor(protected _cd: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {
         super(_cd);
     }
 
@@ -96,10 +96,12 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
         this.secondaryId = 'secondary-' + this.id;
         // if no title provided.
         this.title = this.title || this.buttonLabel;
-        this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
-            this._cd.detectChanges();
-        });
+        if (this._rtlService) {
+            this._rtlChangeSubscription = this._rtlService.rtl.subscribe((isRtl: boolean) => {
+                this.dir = isRtl ? 'rtl' : 'ltr';
+                this._cd.detectChanges();
+            });
+        }
     }
 
     /** @hidden */

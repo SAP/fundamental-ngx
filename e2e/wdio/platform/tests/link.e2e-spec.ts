@@ -1,7 +1,8 @@
 import { LinkPo } from '../pages/link.po';
 import {
     defaultLink_alt_text,
-    googleLink, linkFocusState,
+    googleLink,
+    linkFocusState,
     standardLinksAltTextArray,
     truncatedLink_alt_text
 } from '../fixtures/appData/link-page-contents';
@@ -9,11 +10,13 @@ import {
     browserIsIEorSafari,
     click,
     getAttributeByName,
-    getCSSPropertyByName, getCurrentUrl,
+    getCSSPropertyByName,
+    getCurrentUrl,
     getElementArrayLength,
     isElementClickable,
     mouseHoverElement,
-    scrollIntoView, waitForElDisplayed
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 describe('Link component test suite', function() {

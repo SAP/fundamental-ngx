@@ -1,6 +1,20 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
-import {compactAttr, tooltipAttr, textColorAttr, iconAttr, alignmentCenter, btnColorArr, cozyAndCompactBtnTextArr,
-icon, disabledState, selectedItem, textAlignmentAttr, truncatedBtnNoIconTooltipText, truncatedBtnText, truncatedBtnTooltipText} from '../fixtures/appData/menu-button-contents';
+import {
+    alignmentCenter,
+    btnColorArr,
+    compactAttr,
+    cozyAndCompactBtnTextArr,
+    disabledState,
+    icon,
+    iconAttr,
+    selectedItem,
+    textAlignmentAttr,
+    textColorAttr,
+    tooltipAttr,
+    truncatedBtnNoIconTooltipText,
+    truncatedBtnText,
+    truncatedBtnTooltipText
+} from '../fixtures/appData/menu-button-contents';
 import {
     browserIsIE,
     browserIsIEorSafari,
@@ -12,8 +26,8 @@ import {
     getText,
     isElementDisplayed,
     refreshPage,
-    waitForPresent,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Menu button test suite', function() {

@@ -1,11 +1,15 @@
 import {
     clearValue,
     click,
-    getElementArrayLength, getText,
+    getElementArrayLength,
+    getText,
     getValue,
     refreshPage,
-    scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed, waitForPresent
+    scrollIntoView,
+    sendKeys,
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { StepInputPo } from '../pages/step-input.po';
 import {
@@ -173,7 +177,7 @@ describe('Step input test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             stepInputPage.saveExampleBaselineScreenshot();
-            expect(stepInputPage.compareWithBaseline()).toBeLessThan(3);
+            expect(stepInputPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
