@@ -435,7 +435,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** @hidden */
     private listenToLocaleChange(): void {
-        this.localeChanges.pipe(tap(() => {
+        this.localeChanges.subscribe(() => {
             this._currentLocaleData.next({
                 firstDayOfWeek: this.getFirstDayOfWeek(),
                 longMonths: this.getMonthNames('long'),
@@ -445,7 +445,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
                 longDaysOfWeek: this.getDayOfWeekNames('long'),
                 narrowDaysOfWeek: this.getDayOfWeekNames('narrow')
             });
-        }))
+        })
     }
 
 }

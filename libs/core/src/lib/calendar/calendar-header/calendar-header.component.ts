@@ -208,7 +208,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
         this.selectMonthLabel$ = this._dateTimeAdapter.getMonthNames$('long').pipe(
             takeUntil(this._onDestroy$),
-            map((monthList) => monthList[this.currentlyDisplayed.month - 1])
+            map((monthList) => monthList ? monthList[this.currentlyDisplayed.month - 1] : '')
         );
 
         this._calculateSelectYearLabel();
