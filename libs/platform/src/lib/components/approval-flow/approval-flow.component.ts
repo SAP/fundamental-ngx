@@ -147,9 +147,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _canAddParallel = false;
 
     /**  @hidden */
-    _canDelete = false;
-
-    /**  @hidden */
     _teams: ApprovalTeam[] = [];
 
     /**  @hidden */
@@ -186,6 +183,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     get _isRTL(): boolean {
         return this._dir === 'rtl';
+    }
+
+    /** @hidden */
+    get _selectedNodes(): ApprovalGraphNode[] {
+        return this._nodeComponents
+            .filter(nodeComponent => nodeComponent._isSelected)
+            .map(nodeComponent => nodeComponent.node);
     }
 
     /** @hidden */
@@ -236,7 +240,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canAddBefore = canAdd && this._metaMap[node.id].canAddNodeBefore;
         this._canAddAfter = canAdd && this._metaMap[node.id].canAddNodeAfter;
         this._canAddParallel = canAdd && this._metaMap[node.id].canAddParallel;
-        this._canDelete = checked.every(c => c.meta.canDelete);
     }
 
     /** @hidden Watcher's avatar click handler */
@@ -537,10 +540,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     _deleteCheckedNodes(): void {
         this._cacheCurrentApprovalProcess();
-        this._nodeComponents.filter(c => c._isSelected).forEach(({ node }) => {
-            this._deleteNode(node);
-            this._buildView(this._approvalProcess);
-        });
+
+        this._nodeComponents
+            .filter(c => c._isSelected)
+            .forEach(({ node }) => {
+                this._deleteNode(node);
+                this._buildView(this._approvalProcess);
+            });
+
         this._showMessage('nodesRemove');
     }
 
@@ -615,7 +622,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const paths = getAllGraphPaths(rootNode, finalNode, nodesWithTemporary);
         const pathsWithBlankNodes = fillPathsWithBlankNodes(paths);
         const pathsWithSpaces = replaceDuplicatesWithSpacesInPaths(pathsWithBlankNodes);
-        const pathsWithoutTemporaryNodes = removeTemporaryNodes(pathsWithSpaces);
+        const notEmptyPaths = removeEmptyPaths(pathsWithSpaces);
+        const pathsWithoutTemporaryNodes = removeTemporaryNodes(notEmptyPaths);
         const columns = transformPathsIntoColumns(pathsWithoutTemporaryNodes);
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
 
@@ -667,8 +675,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 && (isTargetNodeParallelEnd || nodeMetadata.isLast);
                 
             nodeMetadata.canAddParallel = isNodeNotApproved;
-            
-            nodeMetadata.canDelete = true;
         });
 
         return metadata;
@@ -743,18 +749,22 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const nodes = [...this._approvalProcess.nodes];
         const nodeToDeleteMetadata = this._metaMap[nodeToDelete.id];
 
-        const prevNodeInParallel = this._metaMap[nodeToDeleteMetadata.prevHNode?.id]?.isParallel;
-        const nextNodeBlank = nodeToDeleteMetadata.nextHNode?.blank;
-        const isLastNodeInParallel =
-            (nodeToDeleteMetadata.isLastInParallel && !prevNodeInParallel) ||
-            (!nodeToDeleteMetadata.isLastInParallel && !prevNodeInParallel && nextNodeBlank);
+        let targets = nodeToDelete.targets;
+        if (nodeToDeleteMetadata.parallelEnd) {
+            const nodeToDeleteColumn = this._graph
+                .find(column => column.nodes.find(node => node === nodeToDelete));
+            const nodeToDeleteParents = this._graph[nodeToDeleteColumn.index - 1].nodes
+                .filter(node => node.targets.includes(nodeToDelete.id));
+            const areNodeToDeleteParentsHaveMultipleTargets = nodeToDeleteParents
+                .every(nodeToDeleteParent => nodeToDeleteParent.targets.length > 1);
 
-        this._replaceTargetsInSourceNodes(
-            nodeToDelete.id,
-            isLastNodeInParallel ? [] : nodeToDelete.targets
-        );
+            if (areNodeToDeleteParentsHaveMultipleTargets) {
+                targets = nodeToDeleteParents[0].targets.filter(targetId => targetId !== nodeToDelete.id);
+            }
+        }
 
-        nodes.splice(nodes.findIndex(n => n.id === nodeToDelete.id), 1);
+        this._replaceTargetsInSourceNodes(nodeToDelete.id, targets);
+        nodes.splice(nodes.findIndex(node => node.id === nodeToDelete.id), 1);
         this._approvalProcess.nodes = nodes;
     }
 
@@ -796,7 +806,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canAddAfter = false;
         this._canAddBefore = false;
         this._canAddParallel = false;
-        this._canDelete = false;
     }
 
     /** @hidden */
@@ -978,7 +987,7 @@ function getAllGraphPaths(rootNode: ApprovalGraphNode, finalNode: ApprovalGraphN
 }
 
 function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
-    const processedPaths = [];
+    const processedPaths: ApprovalGraphNode[][] = [];
 
     const pathLengths = paths.map(path => path.length);
     const longestPathLength = Math.max(...pathLengths);
@@ -1027,7 +1036,7 @@ function getBlankNodesSequential(targetNodeId: string, count: number): ApprovalG
 }
 
 function replaceDuplicatesWithSpacesInPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
-    const processedPaths = [];
+    const processedPaths: ApprovalGraphNode[][] = [];
 
     paths.forEach((path, index) => {
         const currentPath = [...path];
@@ -1047,6 +1056,21 @@ function replaceDuplicatesWithSpacesInPaths(paths: ApprovalGraphNode[][]): Appro
         });
 
         processedPaths.push(currentPath);
+    });
+
+    return processedPaths;
+}
+
+function removeEmptyPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    const processedPaths: ApprovalGraphNode[][] = [];
+
+    paths.forEach((path, index) => {
+        const currentPath = [...path];
+        const isPathEmpty = path.every(node => node.space);
+
+        if (!isPathEmpty) {
+            processedPaths.push(currentPath);
+        }
     });
 
     return processedPaths;

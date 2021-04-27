@@ -21,7 +21,7 @@
     <h3 class="approval-flow__title">{{ title }}</h3>
 
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
-        <button *ngIf="!_isEditMode && !_graph.length" fd-button label="Add a step" [compact]="true" (click)="_addNodeFromToolbar('empty')"></button>
+        <button *ngIf="!_graph.length" fd-button label="Add a step" [compact]="true" (click)="_addNodeFromToolbar('empty')"></button>
         
         <button *ngIf="!_isEditMode && _graph.length" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
 
@@ -32,7 +32,7 @@
             
             <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_addNodeFromToolbar('parallel')"></button>
 
-            <button *ngIf="_canDelete" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
+            <button *ngIf="_selectedNodes.length" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
         </ng-container>
     </div>
 </fd-toolbar>
@@ -107,9 +107,9 @@
                         *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
                         <fdp-approval-flow-node
                             cdkDrag
-                            [cdkDragDisabled]="!_isEditMode || node.blank || node.status !== 'not started' || (_metaMap[node.id].isLast && _metaMap[node.id].parallelEnd)"
+                            [cdkDragDisabled]="!_isEditMode || node.blank || node.space || node.status !== 'not started' || (_metaMap[node.id].isLast && _metaMap[node.id].parallelEnd)"
                             [attr.dir]="_dir"
-                            [attr.tabindex]="node.blank ? -1 : 0"
+                            [attr.tabindex]="node.blank || node.space ? -1 : 0"
                             [node]="node"
                             [meta]="_metaMap[node.id]"
                             [isEdit]="_isEditMode"

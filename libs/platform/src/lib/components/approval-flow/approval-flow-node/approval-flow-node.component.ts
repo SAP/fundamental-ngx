@@ -69,6 +69,12 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
         return this.node?.blank;
     }
 
+     /** Whether node is spacer */
+    @HostBinding('class.approval-flow-node--space')
+    get space(): boolean {
+        return this.node?.space;
+    }
+
     /** Whether the node is in edit mode */
     @Input()
     @HostBinding('class.approval-flow-node--edit-mode')

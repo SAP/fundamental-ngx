@@ -1,4 +1,4 @@
-<ng-container *ngIf="!blank">
+<ng-container *ngIf="!blank && !space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
 
     <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
@@ -140,7 +140,7 @@
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEditApprover">Edit approver</div>
     </li>
 
-    <li *ngIf="meta.canDelete" fd-menu-item (click)="menu.close(); onDelete.emit()">
+    <li fd-menu-item (click)="menu.close(); onDelete.emit()">
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeRemoveNode">Remove</div>
     </li>
 </fd-menu>
