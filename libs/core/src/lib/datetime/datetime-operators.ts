@@ -4,6 +4,11 @@ import { DateLocale, MonthLocaleType } from './datetime-formats';
 
 export function monthLocale(type: MonthLocaleType = 'long'): OperatorFunction<DateLocale, string[]> {
     return map((dateLocale: DateLocale) => {
+
+        if (!dateLocale) {
+            return null
+        }
+
         switch (type) {
             case 'narrow':
                 return dateLocale.narrowMonths;
@@ -18,6 +23,11 @@ export function monthLocale(type: MonthLocaleType = 'long'): OperatorFunction<Da
 
 export function daysOfWeekLocale(type: MonthLocaleType = 'long'): OperatorFunction<DateLocale, string[]> {
     return map((dateLocale: DateLocale) => {
+        
+        if (!dateLocale) {
+            return null
+        }
+        
         switch (type) {
             case 'narrow':
                 return dateLocale.narrowDaysOfWeek;
