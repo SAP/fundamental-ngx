@@ -17,10 +17,11 @@ import 'moment/locale/ar';
 export class DatePickerMomentAdapterExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<Moment>;
 
-    actualLocale = 'fr';
+    actualLocale: string;
     date: Moment = moment();
 
     constructor(private datetimeAdapter: DatetimeAdapter<Moment>) {
+        this.setLocale('fr');
     }
 
     setLocale(locale: string): void {

@@ -1,9 +1,12 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { LETTERS_UNICODE_RANGE } from '../utils/consts/unicode-letters.regex';
 
 import { DatetimeAdapter } from './datetime-adapter';
+import { daysOfWeekLocale, monthLocale } from './datetime-operators';
 import { FdDate } from './fd-date';
 import { range, toIso8601 } from './fd-date.utils';
 
@@ -25,7 +28,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();
-
+        this.listenToLocaleChange();
         super.setLocale(localeId);
 
         this._fixYearsRangeIssue = platform.TRIDENT || platform.EDGE;
@@ -80,6 +83,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
+    getMonthNames$(style: 'long' | 'short' | 'narrow'): Observable<string[]> {
+        return this.currentLocaleData$.pipe(monthLocale(style));
+    }
+
     getDateNames(): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { day: 'numeric', timeZone: 'utc' });
         return range(31, (i) =>
@@ -92,6 +99,10 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return range(7, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
         );
+    }
+
+    getDayOfWeekNames$(style: 'long' | 'short' | 'narrow'): Observable<string[]> {
+        return this.currentLocaleData$.pipe(daysOfWeekLocale(style));
     }
 
     getYearName(date: FdDate): string {
@@ -421,4 +432,20 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         const dateTimeString = `${dateStr} ${timeStr}`;
         return new Date(Date.parse(dateTimeString));
     }
+
+    /** @hidden */
+    private listenToLocaleChange(): void {
+        this.localeChanges.pipe(tap(() => {
+            this._currentLocaleData.next({
+                firstDayOfWeek: this.getFirstDayOfWeek(),
+                longMonths: this.getMonthNames('long'),
+                narrowMonths: this.getMonthNames('narrow'),
+                shortMonths: this.getMonthNames('short'),
+                shortDaysOfWeek: this.getDayOfWeekNames('short'),
+                longDaysOfWeek: this.getDayOfWeekNames('long'),
+                narrowDaysOfWeek: this.getDayOfWeekNames('narrow')
+            });
+        }))
+    }
+
 }

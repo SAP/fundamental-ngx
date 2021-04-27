@@ -27,7 +27,7 @@
                     type="button"
                     [compact]="compact"
                     fdType="transparent"
-                    [label]="selectMonthLabel"
+                    [label]="selectMonthLabel$ | async"
                     [attr.aria-label]="selectMonthAriaLabel"
                     (click)="processViewChange('month', $event)"
                 >
