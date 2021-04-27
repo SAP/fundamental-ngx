@@ -64,7 +64,6 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
      */
     changeLayout(newValue: string): void {
         this.localLayout = newValue;
-        this.recalculateDynamicPageContainerPositions();
     }
 
     /**
@@ -94,16 +93,5 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
 
     onLayoutChanged(layout: FlexibleColumnLayout): void {
         console.log('layout is ' + layout);
-        this.recalculateDynamicPageContainerPositions();
-    }
-
-    /**
-     * since transition animation takes some time to fully show content,
-     * set timer here to reset the positions
-     */
-    recalculateDynamicPageContainerPositions(): void {
-        setTimeout(() => {
-            this.dynamicPageComponent?.setContainerPositions();
-        }, 700);
     }
 }

@@ -12,18 +12,20 @@ import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.c
 import { DynamicPageTitleComponent } from './dynamic-page-title.component';
 
 @Component({
-    template: ` <fdp-dynamic-page-title [title]="title" [subtitle]="subtitle" [size]="size" [background]="background">
-        <fd-breadcrumb>
-            <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
-            </fd-breadcrumb-item>
-            <fd-breadcrumb-item>
-                <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
-            </fd-breadcrumb-item>
-        </fd-breadcrumb>
+    template: `
+        <fdp-dynamic-page-title [title]="title" [subtitle]="subtitle" [size]="size" [background]="background">
+            <fd-breadcrumb>
+                <fd-breadcrumb-item>
+                    <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
+                </fd-breadcrumb-item>
+            </fd-breadcrumb>
 
-        <fdp-dynamic-page-key-info> </fdp-dynamic-page-key-info>
-    </fdp-dynamic-page-title>`
+            <fdp-dynamic-page-key-info> </fdp-dynamic-page-key-info>
+        </fdp-dynamic-page-title>
+    `
 })
 class TestComponent {
     title = 'Some title ';
@@ -42,13 +44,15 @@ describe('DynamicPageTitleComponent', () => {
     let pageTitleKeyInfoComponent: DynamicPageKeyInfoComponent;
     let component: TestComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
-            declarations: [TestComponent],
-            providers: [DynamicPageService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformDynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
+                declarations: [TestComponent],
+                providers: [DynamicPageService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
