@@ -168,9 +168,9 @@ jobs:
           npx ng build --runner cloud --with-deps
 
       - name: smoke e2e on firebase
-        if: ${{ needs.firebase_preview.outputs.output_url }}
-        with:
+        env:
           CAP_SLUG: ${{ matrix.browser }}
+        if: ${{ needs.firebase_preview.outputs.output_url }}
         run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
 
 #      - name: smoke e2e local
