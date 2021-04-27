@@ -147,7 +147,7 @@ jobs:
       matrix:
         # run 3 copies of the current job in parallel
         node: ["suite platformA", "suite platformB", "spec core"]
-        browser: [win-msedge, mac-msedge, win-firefox, mac-firefox, win-chrome, mac-chrome]
+        browser: [msedge, firefox, chrome]
     steps:
       - uses: actions/checkout@v2.3.4
 

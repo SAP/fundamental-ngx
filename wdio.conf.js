@@ -16,7 +16,7 @@ const allCapabilities = [
     //     }
     // },
     {
-        slug: 'win-msedge',
+        slug: 'msedge',
         browserName: 'MicrosoftEdge',
         platformName: 'Windows 10',
         browserVersion: 'latest',
@@ -27,7 +27,7 @@ const allCapabilities = [
         }
     },
     {
-        slug: 'mac-msedge',
+        slug: 'msedge',
         browserName: 'MicrosoftEdge',
         platformName: 'macOS 10.15',
         browserVersion: 'latest',
@@ -38,7 +38,7 @@ const allCapabilities = [
         }
     },
     {
-        slug: 'win-firefox',
+        slug: 'firefox',
         browserName: 'firefox',
         platformName: 'Windows 10',
         browserVersion: 'latest',
@@ -49,7 +49,7 @@ const allCapabilities = [
         }
     },
     {
-        slug: 'mac-firefox',
+        slug: 'firefox',
         browserName: 'firefox',
         platformName: 'macOS 10.15',
         browserVersion: 'latest',
@@ -60,7 +60,7 @@ const allCapabilities = [
         }
     },
     {
-        slug: 'win-chrome',
+        slug: 'chrome',
         browserName: 'chrome',
         platformName: 'Windows 10',
         browserVersion: 'latest',
@@ -71,7 +71,7 @@ const allCapabilities = [
         }
     },
     {
-        slug: 'mac-chrome',
+        slug: 'chrome',
         browserName: 'chrome',
         platformName: 'macOS 10.15',
         browserVersion: 'latest',
@@ -185,7 +185,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 20,
+    maxInstances: 3,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
