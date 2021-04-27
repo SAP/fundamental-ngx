@@ -33,4 +33,6 @@ export interface DateLocale {
     narrowDaysOfWeek: string[]
 }
 
+export type MonthLocaleType = 'long' | 'short' | 'narrow';
+
 export const DATE_TIME_FORMATS = new InjectionToken<DateTimeFormats>('date-formats');
