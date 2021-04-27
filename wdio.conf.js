@@ -92,9 +92,13 @@ const allCapabilities = [
     //     }
     // }
 ]
-const capabilities = process.env.CAP_SLUG
+const capabilities = (process.env.CAP_SLUG
     ? allCapabilities.filter( item => item.slug === process.env.CAP_SLUG)
-    : allCapabilities;
+    : allCapabilities)
+    .map(item => {
+        delete item.slug;
+        return item;
+    });
 
 exports.config = {
     //
