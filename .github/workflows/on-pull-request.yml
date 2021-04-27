@@ -147,6 +147,7 @@ jobs:
       matrix:
         # run 3 copies of the current job in parallel
         node: ["suite platformA", "suite platformB", "spec core"]
+        browser: [win-msedge, mac-msedge, win-firefox, mac-firefox, win-chrome, mac-chrome]
     steps:
       - uses: actions/checkout@v2.3.4
 
@@ -168,6 +169,8 @@ jobs:
 
       - name: smoke e2e on firebase
         if: ${{ needs.firebase_preview.outputs.output_url }}
+        with:
+          CAP_SLUG: ${{ matrix.browser }}
         run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
 
 #      - name: smoke e2e local

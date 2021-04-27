@@ -3,6 +3,99 @@ module.exports = require('./wdio.conf.ts');*/
 const { join } = require('path');
 require('ts-node').register({ transpileOnly: true });
 AllureReporter = require('@wdio/allure-reporter').default;
+
+const allCapabilities = [
+    // {
+    //     browserName: 'internet explorer',
+    //     browserVersion: 'latest',
+    //     platformName: 'Windows 10',
+    //     'sauce:options': {
+    //         screenResolution: '1920x1080',
+    //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+    //         requireWindowFocus: true,
+    //     }
+    // },
+    {
+        slug: 'win-msedge',
+        browserName: 'MicrosoftEdge',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1080',
+            name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'mac-msedge',
+        browserName: 'MicrosoftEdge',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1440',
+            name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'win-firefox',
+        browserName: 'firefox',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            screenResolution: '1920x1080',
+        }
+    },
+    {
+        slug: 'mac-firefox',
+        browserName: 'firefox',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1440',
+            name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'win-chrome',
+        browserName: 'chrome',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1080',
+            name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'mac-chrome',
+        browserName: 'chrome',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            screenResolution: '1920x1440',
+        }
+    },
+
+     // {
+    //     browserName: 'safari',
+    //     browserVersion: '13.1',
+    //     platformName: 'macOS 10.15',
+    //     'sauce:options': {
+    //         screenResolution: '1920x1440',
+    //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
+    //     }
+    // }
+]
+const capabilities = process.env.CAP_SLUG
+    ? allCapabilities.filter( item => item.slug === process.env.CAP_SLUG)
+    : allCapabilities;
+
 exports.config = {
     //
     // ====================
@@ -94,87 +187,7 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [
-        // {
-        //     browserName: 'internet explorer',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     'sauce:options': {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //         requireWindowFocus: true,
-        //     }
-        // },
-        {
-            browserName: 'MicrosoftEdge',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'firefox',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1080',
-            }
-        },
-        {
-            browserName: 'chrome',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'chrome',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1440',
-            }
-        },
-        {
-            browserName: 'firefox',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'MicrosoftEdge',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        // {
-        //     browserName: 'safari',
-        //     browserVersion: '13.1',
-        //     platformName: 'macOS 10.15',
-        //     'sauce:options': {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
-        //     }
-        // }
-    ],
+    capabilities,
     //
     // ===================
     // Test Configurations
