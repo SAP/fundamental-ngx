@@ -42,7 +42,7 @@ describe('Formatted text component', function() {
             expect(getAttributeByName(convertedLinks, 'style', 1)).toBe(custom_style_2_FF);
             return;
         }
-        expect(getAttributeByName(convertedLinks, 'href', 1)).toBe(getBaseURL() + google_link_href);
+        expect(getAttributeByName(convertedLinks, 'href', 1)).toContain(google_link_href);
         expect(getAttributeByName(convertedLinks, 'style', 1)).toBe(custom_style_2);
     });
 
