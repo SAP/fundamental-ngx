@@ -225,6 +225,8 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
         const actionsContainer = this._actionsContainer?.nativeElement;
         const globalActionsToolbar = this._globalActionsToolbarEl;
         const layoutActionsToolbar = this._layoutActionsToolbarEl;
+        const globalActionsContainerEl = this._globalActionsContainer?.nativeElement;
+        const layoutActionsContainerEl = this._layoutActionsContainer?.nativeElement;
 
         switch (sizeType) {
             case 'small':
@@ -238,13 +240,12 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
             case 'medium':
                 if (actionsContainer) {
                     this._addClassNameToCustomElement(actionsContainer, CLASS_NAME.dynamicPageActionsContainerMedium);
-                    const globalActionsEl = this._globalActionsContainer.nativeElement;
-                    if (globalActionsEl) {
-                        globalActionsEl.style.order = '2';
+                    if (globalActionsContainerEl) {
+                        globalActionsContainerEl.style.order = '2';
                     }
-                    const layoutActionsEl = this._layoutActionsContainer.nativeElement;
-                    if (layoutActionsEl) {
-                        layoutActionsEl.style.order = '1';
+                    
+                    if (layoutActionsContainerEl) {
+                        layoutActionsContainerEl.style.order = '1';
                     }
                 }
                 if (globalActionsToolbar) {

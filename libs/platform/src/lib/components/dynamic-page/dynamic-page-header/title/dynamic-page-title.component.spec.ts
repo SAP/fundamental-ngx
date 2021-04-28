@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BreadcrumbModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
@@ -9,6 +9,7 @@ import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
+import { DynamicPageTitleHostComponent } from './dynamic-page-title-host.component';
 import { DynamicPageTitleComponent } from './dynamic-page-title.component';
 
 @Component({
@@ -23,11 +24,37 @@ import { DynamicPageTitleComponent } from './dynamic-page-title.component';
                 </fd-breadcrumb-item>
             </fd-breadcrumb>
 
-            <fdp-dynamic-page-key-info> </fdp-dynamic-page-key-info>
+            <fdp-dynamic-page-key-info>Key info content</fdp-dynamic-page-key-info>
+
+            <fdp-dynamic-page-global-actions>
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        fdType="positive"
+                        (click)="$event.stopPropagation()"
+                    >
+                        Accept
+                    </button>
+                </fd-toolbar>
+            </fdp-dynamic-page-global-actions>
+            <fdp-dynamic-page-layout-actions>
+                <!-- layout actions -->
+                <fd-toolbar fdType="transparent" [clearBorder]="true">
+                    <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
+                        <i class="sap-icon--resize"></i>
+                    </button>
+                </fd-toolbar>
+            </fdp-dynamic-page-layout-actions>
         </fdp-dynamic-page-title>
+
+        <div #outlet>
+            <ng-container *ngTemplateOutlet="dynamicPageTitleComponent?.contentTemplateRef"></ng-container>
+        </div>
     `
 })
-class TestComponent {
+class TestComponent implements AfterViewInit {
     title = 'Some title ';
     subtitle: string;
     size = 'medium';
@@ -36,13 +63,22 @@ class TestComponent {
     @ViewChild(DynamicPageKeyInfoComponent) dynamicPageKeyInfoComponent: DynamicPageKeyInfoComponent;
     @ViewChild(DynamicPageGlobalActionsComponent) dynamicPageGlobalActionsComponent: DynamicPageGlobalActionsComponent;
     @ViewChild(DynamicPageLayoutActionsComponent) dynamicPageLayoutActionsComponent: DynamicPageLayoutActionsComponent;
+
+    @ViewChild('outlet')
+    outlet: ElementRef<HTMLElement>;
+
+    constructor(private cd: ChangeDetectorRef) {}
+
+    ngAfterViewInit(): void {
+        this.cd.detectChanges();
+    }
 }
 
 describe('DynamicPageTitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let pageTitleComponent: DynamicPageTitleComponent;
-    let pageTitleKeyInfoComponent: DynamicPageKeyInfoComponent;
     let component: TestComponent;
+    let titleHostComponentDebugElement: DebugElement;
 
     beforeEach(
         waitForAsync(() => {
@@ -61,20 +97,20 @@ describe('DynamicPageTitleComponent', () => {
         pageTitleComponent = component.dynamicPageTitleComponent;
     });
 
+    beforeEach(() => {
+        titleHostComponentDebugElement = fixture.debugElement.query(By.directive(DynamicPageTitleHostComponent));
+    });
+
     it('should create', () => {
         expect(fixture).toBeTruthy();
     });
 
-    it('should add correct classes to host', async () => {
-        fixture.detectChanges();
-        expect(
-            pageTitleComponent.elementRef().nativeElement.classList.contains(CLASS_NAME.dynamicPageTitleArea)
-        ).toBeTruthy();
+    it('should add correct classes to host', () => {
+        expect(titleHostComponentDebugElement.classes[CLASS_NAME.dynamicPageTitleArea]).toBeTruthy();
     });
 
     it('should add tabindex to host', async () => {
-        fixture.detectChanges();
-        expect(pageTitleComponent.elementRef().nativeElement.getAttribute('tabindex')).toEqual('0');
+        expect(titleHostComponentDebugElement.attributes['tabindex']).toEqual('0');
     });
 
     describe('title text', () => {
@@ -87,11 +123,12 @@ describe('DynamicPageTitleComponent', () => {
         it('should render it in view', () => {
             component.title = 'Sample';
             fixture.detectChanges();
-            const titleElement: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__title'))
+            const titleElement: HTMLElement = titleHostComponentDebugElement.query(By.css('.fd-dynamic-page__title'))
                 .nativeElement;
             expect(titleElement?.innerText).toBe('Sample');
         });
     });
+
     describe('subtitle text', () => {
         it('should bind to title', () => {
             component.subtitle = 'Some subtitle';
@@ -102,14 +139,15 @@ describe('DynamicPageTitleComponent', () => {
         it('should render it in view', () => {
             component.subtitle = 'Some subtitle';
             fixture.detectChanges();
-            const titleElement: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__subtitle'))
+            const titleElement: HTMLElement = titleHostComponentDebugElement.query(By.css('.fd-dynamic-page__subtitle'))
                 .nativeElement;
             expect(titleElement?.innerText).toBe('Some subtitle');
         });
     });
+
     describe('page title area', () => {
         it('should set size', async () => {
-            const titleElement = fixture.debugElement.query(By.css('.fd-dynamic-page__title-area'));
+            const titleElement = titleHostComponentDebugElement;
             expect(titleElement.nativeElement.classList.contains('fd-dynamic-page__title-area--md')).toBeTruthy();
             component.size = 'large';
             fixture.detectChanges();
@@ -119,7 +157,7 @@ describe('DynamicPageTitleComponent', () => {
             expect(titleElement.nativeElement.classList.contains('fd-dynamic-page__title-area--sm')).toBeTruthy();
         });
         it('should set background styles', async () => {
-            const titleElement = fixture.debugElement.query(By.css('.fd-dynamic-page__title-area'));
+            const titleElement = titleHostComponentDebugElement;
             component.background = 'transparent';
             fixture.detectChanges();
             expect(
@@ -133,13 +171,36 @@ describe('DynamicPageTitleComponent', () => {
         });
     });
 
-    it('should set key info class', async () => {
-        pageTitleKeyInfoComponent = component.dynamicPageKeyInfoComponent;
-        fixture.detectChanges();
-        expect(
-            fixture.debugElement
-                .query(By.directive(DynamicPageKeyInfoComponent))
-                .nativeElement.classList.contains(CLASS_NAME.dynamicPageKeyInfo)
-        ).toBeTruthy();
+    describe('Key Info Area', () => {
+        it('should assign class name', async () => {
+            const keyInfoEl = titleHostComponentDebugElement.query(By.css(`.${CLASS_NAME.dynamicPageKeyInfo}`));
+            expect(keyInfoEl).toBeDefined();
+        });
+        it('should render key info content', async () => {
+            const keyInfoEl = titleHostComponentDebugElement.query(By.css(`.${CLASS_NAME.dynamicPageKeyInfo}`));
+            expect(keyInfoEl?.nativeElement.innerText).toEqual('Key info content');
+        });
+    });
+
+    describe('Toolbar Area', () => {
+        it('should add correct classes to toolbar', async () => {
+            fixture.detectChanges();
+
+            const toolbarContainer = titleHostComponentDebugElement.query(
+                By.css('.' + CLASS_NAME.dynamicPageActionsContainer)
+            );
+            expect(toolbarContainer).toBeTruthy();
+            expect(toolbarContainer.classes[CLASS_NAME.dynamicPageActionsContainerMedium]).toBeTruthy();
+
+            const globalActionsContainer = titleHostComponentDebugElement.query(
+                By.css('.' + CLASS_NAME.dynamicPageGlobalActions)
+            );
+            expect(globalActionsContainer.classes[CLASS_NAME.dynamicPageGlobalActionsToolbarMedium]).toBeTruthy();
+
+            const layoutActionsContainer = titleHostComponentDebugElement.query(
+                By.css('.' + CLASS_NAME.dynamicPageLayoutActions)
+            );
+            expect(layoutActionsContainer.classes[CLASS_NAME.dynamicPageLayoutActionsToolbarMedium]).toBeTruthy();
+        });
     });
 });
