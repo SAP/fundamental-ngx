@@ -3,6 +3,7 @@ import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
 import { NotificationService } from '../notification-service/notification.service';
 import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationModule } from '../notification.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
     template: `
@@ -16,7 +17,7 @@ class TemplateTestComponent {
 }
 
 @NgModule({
-    imports: [NotificationModule],
+    imports: [NotificationModule, RouterTestingModule],
     providers: [NotificationService],
     declarations: [TemplateTestComponent],
     entryComponents: [TemplateTestComponent]
