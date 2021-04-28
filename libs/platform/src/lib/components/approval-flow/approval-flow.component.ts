@@ -613,11 +613,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         const paths = getAllGraphPaths(rootNodes, nodes);
-        const pathsWithBlankNodes = fillPathsWithBlankNodes(paths);
+        const [pathsWithBlankNodes, blankNodes] = fillPathsWithBlankNodes(paths);
         const pathsWithSpaces = replaceDuplicatesWithSpacesInPaths(pathsWithBlankNodes);
         const notEmptyPaths = removeEmptyPaths(pathsWithSpaces);
         const columns = transformPathsIntoColumns(notEmptyPaths);
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
+
+        this._approvalProcess.nodes.push(...blankNodes);
 
         return transformColumnsIntoGraph(columnsWithoutEndSpaces);
     }
@@ -924,8 +926,11 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
     return paths;
 }
 
-function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+function fillPathsWithBlankNodes(
+    paths: ApprovalGraphNode[][]
+): [ApprovalGraphNode[][], ApprovalGraphNode[]] {
     const processedPaths: ApprovalGraphNode[][] = [];
+    const blankNodes: ApprovalGraphNode[] = [];
 
     const pathLengths = paths.map(path => path.length);
     const longestPathLength = Math.max(...pathLengths);
@@ -936,38 +941,42 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
             return;
         }
 
-        path.forEach((node, index) => {
+        path.forEach((node, nodeIndex) => {
             const nodeIndexes = paths.map(_path => _path.indexOf(node));
             const mostFarPathNodeIndex = Math.max(...nodeIndexes);
-            let blankNodes: ApprovalGraphNode[] = [];
+            let emptyNodes: ApprovalGraphNode[] = [];
 
-            blankNodes = getBlankNodesAfterFromProcessedPaths(node, processedPaths);
+            emptyNodes = getBlankNodesAfterFromProcessedPaths(node, processedPaths);
             
-            if (blankNodes.length) {
-                path.splice(index, 0, ...blankNodes);
+            if (emptyNodes.length) {
+                path.splice(nodeIndex, 0, ...emptyNodes);
                 processedPaths.push(path);
                 return;
             }
 
-            if (index < mostFarPathNodeIndex) {
-                blankNodes = getEmptyNodes(mostFarPathNodeIndex - index);
+            if (nodeIndex < mostFarPathNodeIndex) {
+                emptyNodes = getEmptyNodes(mostFarPathNodeIndex - nodeIndex);
 
-                path.splice(index, 0, ...blankNodes);
+                emptyNodes[emptyNodes.length - 1].targets = [node.id];
+                path[nodeIndex - 1].targets = [emptyNodes[0].id];
+                blankNodes.push(...emptyNodes);
+
+                path.splice(nodeIndex, 0, ...emptyNodes);
                 processedPaths.push(path);
                 return;
             }
 
-            if (index === mostFarPathNodeIndex && index === path.length - 1) {
-                blankNodes = getEmptyNodes(longestPathLength - path.length, 'space');
+            if (nodeIndex === mostFarPathNodeIndex && nodeIndex === path.length - 1) {
+                emptyNodes = getEmptyNodes(longestPathLength - path.length, 'space');
 
-                path.splice(index + 1, 0, ...blankNodes);
+                path.splice(nodeIndex + 1, 0, ...emptyNodes);
                 processedPaths.push(path);
                 return;
             }
         });
     });
 
-    return processedPaths;
+    return [processedPaths, blankNodes];
 }
 
 function getBlankNodesAfterFromProcessedPaths(
@@ -1012,11 +1021,11 @@ function getEmptyNodes(
     let node: ApprovalGraphNode;
     let nodeId: string;
 
-    for (let i = 0; i < count; i++) {
-        node = Object.assign({}, nodeFn(), { targets: [ nodeId ] })
+    for (let i = count; i > 0; i--) {
+        node = Object.assign({}, nodeFn(), { targets: [ nodeType === 'blank' && nodeId ] })
         nodeId = node.id;
 
-        nodes.push(node);
+        nodes.unshift(node);
     }
 
     return nodes;
