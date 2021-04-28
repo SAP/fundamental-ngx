@@ -1,11 +1,8 @@
 import { CalendarPo } from '../pages/calendar.po';
 import {
-    browserIsFirefox,
     click,
     doesItExist,
-    executeScriptAfterTagAttr,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     isElementClickable,
@@ -17,22 +14,13 @@ import {
 } from '../../driver/wdio';
 import {
     activeClass,
-    borderAttribute,
-    borderAttributeFF,
     classAttribute,
     compactAttribute,
-    currentDayBorderColor,
-    currentDayBorderColorFF,
     currentDayClass,
     customYearLabel,
     customYearRangeLabel,
     disabledAttribute,
     landscapeAttribute,
-    markedBox,
-    markedMondayColor,
-    markedPastDaysColor,
-    markedWeekColor,
-    markedWeekendColor,
     mondayStartDate,
     portraitAttribute,
     otherMonth
@@ -59,7 +47,7 @@ describe('calendar test suite', function() {
 
     describe('standard calendar example', function() {
         it('should check calendar selections', () => {
-            checkCurrentDayHighlighted(standardCalendar + currentDay);
+            checkCurrentDayHighlighted(standardCalendar);
             checkSingleSelection(standardCalendar, calendarItem);
             checkChangeMonthByNavArrows(standardCalendar);
             checkChangeDateByCalendarOverview(standardCalendar, monthBtn);
@@ -87,7 +75,7 @@ describe('calendar test suite', function() {
             click(mobileExamples + button);
             waitForElDisplayed(mobileCalendar);
 
-            checkCurrentDayHighlighted(mobileCalendar + currentDay);
+            checkCurrentDayHighlighted(mobileCalendar);
             checkSingleSelection(mobileCalendar, calendarItem);
             checkChangeMonthByNavArrows(mobileCalendar);
             checkChangeDateByCalendarOverview(mobileCalendar, monthBtn);
@@ -109,7 +97,7 @@ describe('calendar test suite', function() {
             click(mobileExamples + button, 1);
             waitForElDisplayed(mobileCalendar);
 
-            checkCurrentDayHighlighted(mobileCalendar + currentDay);
+            checkCurrentDayHighlighted(mobileCalendar);
             checkSingleSelection(mobileCalendar, calendarItem);
             checkChangeMonthByNavArrows(mobileCalendar);
             checkChangeDateByCalendarOverview(mobileCalendar, monthBtn);
@@ -143,7 +131,7 @@ describe('calendar test suite', function() {
 
     describe('calendar options example', function() {
         it('should check calendar selections', () => {
-            checkCurrentDayHighlighted(calendarWithOptions + currentDay);
+            checkCurrentDayHighlighted(calendarWithOptions);
             checkSingleSelection(calendarWithOptions, calendarItem);
             checkChangeMonthByNavArrows(calendarWithOptions);
             checkChangeDateByCalendarOverview(calendarWithOptions, monthBtn);
@@ -197,30 +185,34 @@ describe('calendar test suite', function() {
     describe('calendar with special days example', function() {
         it('should check ability to mark weekends', () => {
             click(specialDaysCalendar + calendarOptions);
-            expect(executeScriptAfterTagAttr(specialDaysCalendar + markedWeekendDays, markedBox))
-                .toContain(markedWeekendColor);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
+            click(specialDaysCalendar + calendarOptions);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
         });
 
         it('should check ability to mark next week', () => {
             click(specialDaysCalendar + calendarOptions, 1);
-            expect(executeScriptAfterTagAttr(specialDaysCalendar + markedDays, markedBox))
-                .toContain(markedWeekColor);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
+            click(specialDaysCalendar + calendarOptions, 1);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
         });
 
         it('should check ability to mark all Mondays', () => {
             click(specialDaysCalendar + calendarOptions, 2);
-            expect(executeScriptAfterTagAttr(specialDaysCalendar + markedMondays, markedBox))
-                .toContain(markedMondayColor);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
+            click(specialDaysCalendar + calendarOptions, 2);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
         });
 
         it('should check ability to mark past days', () => {
             click(specialDaysCalendar + calendarOptions, 3);
-            expect(executeScriptAfterTagAttr(specialDaysCalendar + markedDays, markedBox))
-                .toContain(markedPastDaysColor);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(true);
+            click(specialDaysCalendar + calendarOptions, 3);
+            expect(doesItExist(specialDaysCalendar + markedDays)).toBe(false);
         });
 
         it('should check calendar selections', () => {
-            checkCurrentDayHighlighted(specialDaysCalendar + currentDay);
+            checkCurrentDayHighlighted(specialDaysCalendar);
             checkSingleSelection(specialDaysCalendar, calendarItem);
             checkChangeMonthByNavArrows(specialDaysCalendar);
             checkChangeDateByCalendarOverview(specialDaysCalendar, monthBtn);
@@ -239,7 +231,7 @@ describe('calendar test suite', function() {
         });
 
         it('should check calendar selections', () => {
-            checkCurrentDayHighlighted(gridCalendar + currentDay);
+            checkCurrentDayHighlighted(gridCalendar);
             checkSingleSelection(gridCalendar, calendarItem);
             checkChangeMonthByNavArrows(gridCalendar);
             checkChangeDateByCalendarOverview(gridCalendar, monthBtn);
@@ -261,7 +253,7 @@ describe('calendar test suite', function() {
 
     describe('programmatic date change example', function() {
         it('should check calendar selections', () => {
-            checkCurrentDayHighlighted(programmaticCalendar + currentDay);
+            checkCurrentDayHighlighted(programmaticCalendar);
             checkSingleSelection(programmaticCalendar, calendarItem);
             checkChangeMonthByNavArrows(programmaticCalendar);
             checkChangeDateByCalendarOverview(programmaticCalendar, monthBtn);
@@ -366,8 +358,6 @@ describe('calendar test suite', function() {
     }
 
     function checkSingleSelection(calendar: string, selector: string, index: number = 0): void {
-        const startDay = getText(calendar + selectedDays, index);
-
         scrollIntoView(calendar + selector, index);
         while (getAttributeByName(calendar + selector, disabledAttribute, index) === 'true' ||
         getAttributeByName(calendar + selector, classAttribute, index) === otherMonth) {
@@ -377,7 +367,6 @@ describe('calendar test suite', function() {
 
         expect(getAttributeByName(calendar + selector, classAttribute, index)).toContain(activeClass);
         expect(getElementArrayLength(calendar + selectedDays)).toBe(1);
-        expect(getText(calendar + selectedDays, 0)).not.toEqual(startDay);
     }
 
     function checkRangeSelection(calendar: string): void {
@@ -389,17 +378,10 @@ describe('calendar test suite', function() {
         expect(getText(calendar + selectedDays)).not.toEqual(startDay);
         expect(getText(calendar + selectedDays, 1)).not.toEqual(endDay);
     }
+
+    function checkCurrentDayHighlighted(calendar: string): void {
+        scrollIntoView(calendar);
+        expect(doesItExist(calendar + currentDay)).toBe(true);
+        expect(getElementArrayLength(calendar + currentDay)).toBe(1);
+    }
 });
-
-function checkCurrentDayHighlighted(selector: string): void {
-    scrollIntoView(selector);
-    expect(getCSSPropertyByName(selector, browserBorder()).value).toContain(browserBorderColor());
-}
-
-function browserBorder(): string {
-    return (browserIsFirefox() ? borderAttributeFF : borderAttribute);
-}
-
-function browserBorderColor(): string {
-    return (browserIsFirefox() ? currentDayBorderColorFF : currentDayBorderColor);
-}
