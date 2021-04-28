@@ -3,9 +3,8 @@ import {
     click,
     dragAndDrop,
     elementArray,
-    getAttributeByName,
     getCSSPropertyByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementClass,
     getText,
     refreshPage,
     scrollIntoView,
@@ -16,7 +15,6 @@ import {
 import {
     backGroundColor,
     bold,
-    classAttribute,
     color,
     errorColor,
     fontWeight,
@@ -118,7 +116,7 @@ describe('Grid-list test suite', function() {
         for (let i = 0; i < itemsLength; i++) {
             scrollIntoView(singleSelectItems, i);
             click(singleSelectItems, i);
-            expect(getAttributeByName(singleSelectItems, classAttribute, i)).toContain(isSelected);
+            expect(getElementClass(singleSelectItems, i)).toContain(isSelected);
             expect(getElementArrayLength(singleSelectItemsSelected)).toEqual(1);
         }
     });

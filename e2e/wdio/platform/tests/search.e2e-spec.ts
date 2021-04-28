@@ -2,7 +2,7 @@ import {
     browserIsIE,
     click,
     getAttributeByNameArr,
-    getElementArrayLength,
+    getElementArrayLength, getElementPlaceholder,
     getElementSize,
     getText,
     getTextArr,
@@ -55,7 +55,7 @@ describe('Search field', function() {
 
     it('should have placeholder text', () => {
         const arrLength = getElementArrayLength(searchFields);
-        const actualPlaceholders = getAttributeByNameArr(searchFields, 'placeholder');
+        const actualPlaceholders = getElementPlaceholder(searchFields);
         for (let i = 0; arrLength > i; i++) {
             waitForElDisplayed(searchFields, i);
             expect(actualPlaceholders[i]).toBe(search_placeholder);

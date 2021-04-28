@@ -4,7 +4,7 @@ import {
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
     getAttributeByName,
-    getAttributeByNameArr,
+    getAttributeByNameArr, getElementPlaceholder,
     getElementSize,
     getText,
     getTextArr,
@@ -54,10 +54,8 @@ describe('Input Group should', function() {
     });
 
     it('have correct placeholder text', () => {
-        expect(getAttributeByNameArr(standartInputArr, 'placeholder'))
-            .toEqual(standardInputPlaceholders);
-        expect(getAttributeByName(withFormInput, 'placeholder'))
-            .toEqual(inputWithFormPlaceholder);
+        expect(getElementPlaceholder(standartInputArr)).toEqual(standardInputPlaceholders);
+        expect(getElementPlaceholder(withFormInput)).toEqual(inputWithFormPlaceholder);
     });
 
     it('have left text addon and accept values', () => {

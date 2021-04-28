@@ -9,5 +9,4 @@ export const color = 'color';
 export const textLocked = 'Locked';
 export const fontWeight = 'font-weight';
 export const bold = 700;
-export const classAttribute = 'class';
 export const isSelected = 'is-selected';

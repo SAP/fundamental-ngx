@@ -6,7 +6,7 @@ import {
     getAttributeByName,
     getAttributeByNameArr,
     getCSSPropertyByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementClass, getElementPlaceholder,
     getElementSize,
     isEnabled,
     refreshPage,
@@ -38,7 +38,7 @@ describe('Verify Feed Input component', function() {
     }, 1);
 
     it('should have correct placeholder assigned', () => {
-        expect(getAttributeByNameArr(feedInputTextArea, 'placeholder')).toEqual(placeholders_array);
+        expect(getElementPlaceholder(feedInputTextArea)).toEqual(placeholders_array);
     });
 
     it('should have example with avatar image assigned', () => {
@@ -46,24 +46,24 @@ describe('Verify Feed Input component', function() {
         waitForPresent(feedInputAvatar);
         expect(getAttributeByName(feedInput, 'avatarsrc')).not.toBe('');
         expect(getAttributeByName(feedInput, 'avatarsrc')).not.toBeNull();
-        expect(getAttributeByName(feedInputAvatar, 'class')).not.toContain(default_avatar_class);
+        expect(getElementClass(feedInputAvatar)).not.toContain(default_avatar_class);
 
         waitForPresent(feedInput, 3);
         waitForPresent(feedInputAvatar, 2);
         expect(getAttributeByName(feedInput, 'avatarsrc', 3)).not.toBe('');
         expect(getAttributeByName(feedInput, 'avatarsrc', 3)).not.toBeNull();
-        expect(getAttributeByName(feedInputAvatar, 'class', 2)).not.toContain(default_avatar_class);
+        expect(getElementClass(feedInputAvatar, 2)).not.toContain(default_avatar_class);
 
         waitForPresent(feedInput, 4);
         waitForPresent(feedInputAvatar, 3);
         expect(getAttributeByName(feedInput, 'avatarsrc', 4)).not.toBe('');
         expect(getAttributeByName(feedInput, 'avatarsrc', 4)).not.toBeNull();
-        expect(getAttributeByName(feedInputAvatar, 'class', 3)).not.toContain(default_avatar_class);
+        expect(getElementClass(feedInputAvatar, 3)).not.toContain(default_avatar_class);
     });
 
     it('should have example with default avatar assigned', () => {
         expect(['', null]).toContain(getAttributeByName(feedInput, 'avatarsrc', 1));
-        expect(getAttributeByName(feedInputAvatar, 'class', 1)).toContain(default_avatar_class);
+        expect(getElementClass(feedInputAvatar, 1)).toContain(default_avatar_class);
     });
 
     it('should have example with no avatar', () => {

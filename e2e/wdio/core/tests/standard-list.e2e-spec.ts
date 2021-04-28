@@ -7,7 +7,6 @@ import {
     doesItExist,
     executeScriptBeforeTagAttr,
     focusElement,
-    getAttributeByName,
     getElementArrayLength,
     getElementLocation,
     getImageTagBrowserPlatform,
@@ -19,7 +18,7 @@ import {
     sendKeys,
     waitForElDisplayed,
     waitForNotDisplayed,
-    applyState
+    applyState, getElementClass
 } from '../../driver/wdio';
 import { checkElementActiveState, checkElementFocusState, checkElementHoverState } from '../../helper/assertion-helper';
 
@@ -396,7 +395,7 @@ describe('Standard List test suite', function() {
             const tag = `${listExample}-listItem-${i}-selected-state-${getImageTagBrowserPlatform()}-`;
 
             click(exampleSelector + listItems, i);
-            expect(getAttributeByName(exampleSelector + listItems, 'class', i))
+            expect(getElementClass(exampleSelector + listItems, i))
                 .toContain('is-selected');
             saveElementScreenshot(exampleSelector + listItems, tag, standardListPage.getScreenshotFolder(), i);
             expect(checkElementScreenshot(exampleSelector + listItems, tag, standardListPage.getScreenshotFolder(), i))
