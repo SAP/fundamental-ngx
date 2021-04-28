@@ -49,6 +49,7 @@ import { StandardListItemModule } from './components/list/standard-list-item/sta
 import { PlatformListModule } from './components/list/list.module';
 import { PlatformSliderModule } from './components/slider/slider.module';
 import { PlatformConfig } from './platform.config';
+import { PlatformPageFooterModule } from './components/page-footer/page-footer.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -101,7 +102,8 @@ import { PlatformConfig } from './platform.config';
         ObjectListItemModule,
         PlatformListModule,
         StandardListItemModule,
-        PlatformSliderModule
+        PlatformSliderModule,
+        PlatformPageFooterModule
     ]
 })
 export class FundamentalNgxPlatformModule {
