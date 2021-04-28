@@ -38,12 +38,6 @@ jobs:
         - sudo apt-get install jq
         - npm install firebase-tools -g
       script: npm run e2e:platformA:ci
-#      after_success:
-#        - npm run e2e-generate-report
-#        - ./deploy-to-preview-channel-platform-a.sh
-#      after_failure:
-#        - npm run e2e-generate-report
-#        - ./deploy-to-preview-channel-platform-a.sh
     - stage: "Test"
       name: Sauce Labs - e2e tests - platformB
       if: type = pull_request
@@ -59,12 +53,6 @@ jobs:
         - sudo apt-get install jq
         - npm install firebase-tools -g
       script: npm run e2e:platformB:ci
-#      after_success:
-#        - npm run e2e-generate-report
-#        - ./deploy-to-preview-channel-platform-b.sh
-#      after_failure:
-#        - npm run e2e-generate-report
-#        - ./deploy-to-preview-channel-platform-b.sh
     - stage: "Test"
       name: Sauce Labs - e2e tests (core)
       if: type = pull_request
@@ -80,12 +68,6 @@ jobs:
         - sudo apt-get install jq
         - npm install firebase-tools -g
       script: npm run e2e:core:ci
-#      after_success:
-#        - npm run e2e-generate-report
-#        - ./deploy-to-preview-channel-core.sh
-#      after_failure:
-#        - npm run e2e-generate-report
-#        - ./deploy-to-preview-channel-core.sh
     - stage: "Test"
       name: Sauce Labs - unit tests platform
       if: type = pull_request

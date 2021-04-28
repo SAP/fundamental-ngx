@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.3...v0.29.1-rc.4) (2021-04-26)
+
+
+### Features
+
+* (Platform) introduce new component Page footer ([#4936](https://github.com/SAP/fundamental-ngx/issues/4936)) ([0726e74](https://github.com/SAP/fundamental-ngx/commit/0726e747c3fcc52ce5a8aea54a39e3f6039c67af))
+
+### [0.29.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.2...v0.29.1-rc.3) (2021-04-26)
+
+### [0.29.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.1...v0.29.1-rc.2) (2021-04-25)
+
+### [0.29.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.0...v0.29.1-rc.1) (2021-04-25)
+
+### [0.29.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.113...v0.29.1-rc.0) (2021-04-23)
+
+## [0.29.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.0...v0.29.0) (2021-04-22)
+
+## [0.29.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.112...v0.29.0-rc.113) (2021-04-23)
+
+## [0.29.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.111...v0.29.0-rc.112) (2021-04-23)
+
+
+### Bug Fixes
+
+* (Platform) Multi Input add the ability to add an item with Enter ([#5179](https://github.com/SAP/fundamental-ngx/issues/5179)) ([7347f6c](https://github.com/SAP/fundamental-ngx/commit/7347f6cbca8098cbb64e01a76add9092e907cadd))
+
+## [0.29.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.110...v0.29.0-rc.111) (2021-04-23)
+
+## [0.29.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.109...v0.29.0-rc.110) (2021-04-22)
+
+## [0.29.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.108...v0.29.0-rc.109) (2021-04-22)
+
+## [0.29.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.107...v0.29.0-rc.108) (2021-04-22)
+
 ## [0.29.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.106...v0.29.0-rc.107) (2021-04-21)
 
 ## [0.29.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.105...v0.29.0-rc.106) (2021-04-20)
