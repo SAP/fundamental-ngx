@@ -1,14 +1,11 @@
 import { DialogPo } from '../pages/dialog.po';
 import {
-    addIsActiveClass,
     browserIsFirefox,
     checkElementScreenshot,
     click,
     clickAndDragElement,
     clickWithOption,
     doesItExist,
-    executeScriptBeforeTagAttr,
-    focusElement,
     getAttributeByName,
     getCSSPropertyByName,
     getElementArrayLength,
@@ -17,7 +14,6 @@ import {
     getImageTagBrowserPlatform,
     getText,
     isElementDisplayed,
-    mouseHoverElement,
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
@@ -27,8 +23,6 @@ import {
 } from '../../driver/wdio';
 import {
     approvedStatus,
-    backgroundColor,
-    blackBackground,
     bottomRightPosition,
     canceledStatus,
     classAttribute,
@@ -90,8 +84,7 @@ describe('dialog test suite', function() {
 
             checkDialogDismissals(objectDialog, button, closeBtn, dismissedStatus);
             checkDialogDismissals(objectDialog, button, acceptBtn, approvedStatus);
-            // skipped due to issue: https://github.com/SAP/fundamental-ngx/issues/4967
-            // checkDialogDismissals(objectDialog, button, cancelBtn, canceledStatus);
+            checkDialogDismissals(objectDialog, button, cancelBtn, canceledStatus);
             checkCloseDialogWithEscapeKey(objectDialog, button);
         });
     });
@@ -300,15 +293,6 @@ describe('dialog test suite', function() {
             refreshPage();
             waitForElDisplayed(dialogPage.title);
         }, 1);
-
-        it('should check dialog hasBackdrop option', () => {
-            openDialog(playgroundDialog);
-
-            expect(executeScriptBeforeTagAttr(dialog, backgroundColor)).toContain(blackBackground);
-
-            closeDialog();
-            // todo: find way to check pseudo element not present
-        });
 
         it('should check dialog backdropClickCloseable option', () => {
             openDialog(playgroundDialog);
@@ -528,104 +512,27 @@ describe('dialog test suite', function() {
                 }
                 click(dialog + button);
             }
-        }, 1);
-
-        it('should check example button hover states', () => {
-            const dialogCount = getElementArrayLength(dialogExamples + button);
-
-            for (let i = 0; i < dialogCount; i++) {
-                scrollIntoView(dialogExamples + button, i);
-                mouseHoverElement(dialogExamples + button, i);
-                saveElementScreenshot(dialogExamples + button, `dialog-${i}-example-hover-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i);
-                expect(checkElementScreenshot(dialogExamples + button, `dialog-${i}-example-hover-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i))
-                    .toBeLessThan(5, `dialog ${i} hover state screenshot doesn't match baseline`);
-            }
-        }, 1);
-
-        it('should check example button focus states', () => {
-            const dialogCount = getElementArrayLength(dialogExamples + button);
-
-            for (let i = 0; i < dialogCount; i++) {
-                scrollIntoView(dialogExamples + button, i);
-                focusElement(dialogExamples + button, i);
-                saveElementScreenshot(dialogExamples + button, `dialog-${i}-example-focus-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i);
-                expect(checkElementScreenshot(dialogExamples + button, `dialog-${i}-example-focus-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i))
-                    .toBeLessThan(5, `dialog ${i} focus state screenshot doesn't match baseline`);
-            }
-        }, 1);
-
-        it('should check example button active states', () => {
-            const dialogCount = getElementArrayLength(dialogExamples + button);
-
-            for (let i = 0; i < dialogCount; i++) {
-                scrollIntoView(dialogExamples + button, i);
-                addIsActiveClass(dialogExamples + button, i);
-                saveElementScreenshot(dialogExamples + button, `dialog-${i}-example-active-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i);
-                expect(checkElementScreenshot(dialogExamples + button, `dialog-${i}-example-active-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), i))
-                    .toBeLessThan(5, `dialog ${i} active state screenshot doesn't match baseline`);
-            }
-        }, 1);
-
-        it('should check dialog button hover states', () => {
-            checkButtonState('hover', mouseHoverElement);
-        }, 1);
-
-        it('should check dialog button focus states', () => {
-            checkButtonState('focus', focusElement);
-        }, 1);
-
-        it('should check dialog button active states', () => {
-            checkButtonState('active', addIsActiveClass);
-        }, 1);
+        });
 
         it('should check custom backdrop example', () => {
             openDialog(customDialog);
 
             saveElementScreenshot(dialog, `dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
             expect(checkElementScreenshot(dialog, `dialog-dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                .toBeLessThan(10, `dialog with custom backdrop screenshot doesn't match baseline`);
+                .toBeLessThan(25, `dialog with custom backdrop screenshot doesn't match baseline`);
 
             closeDialog();
         });
 
-        function checkButtonState(stateCheck: string, applyStateFunction: any): void {
-            const dialogCount = getElementArrayLength(dialogExamples + button);
+        it('should check playground dialog hasBackdrop option', () => {
+            openDialog(playgroundDialog);
 
-            for (let i = 0; i < dialogCount; i++) {
-                if (i === 3 || i === 4 || i === 5) {
-                    // skip: sometimes dialog auto closes before screenshot taken
-                    continue;
-                }
+            saveElementScreenshot(dialog, `dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
+            expect(checkElementScreenshot(dialog, `dialog-dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
+                .toBeLessThan(25, `dialog with hasBackdrop screenshot doesn't match baseline`);
 
-                click(dialogExamples + button, i);
-                waitForElDisplayed(dialog);
-                const dialogButtonCount = getElementArrayLength(dialog + button);
-
-                for (let j = 0; j < dialogButtonCount; j++) {
-                    applyStateFunction(dialog + button, j);
-                    saveElementScreenshot(dialog + button, `dialog-${i}-button-${j}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), j);
-                    expect(checkElementScreenshot(dialog + button, `dialog-${i}-button-${j}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), j))
-                        .toBeLessThan(5, `dialog ${i} button ${j} ${stateCheck} state screenshot doesn't match baseline`);
-                }
-                if (i === complexExample) {
-                    click(dialog + button, 2);
-                    continue;
-                }
-                if (i === stackedExample) {
-                    click(dialog + button, 1);
-                    const btnCount = 4;
-
-                    for (let k = 2; k < btnCount; k++) {
-                        applyStateFunction(dialog + button, k);
-                        saveElementScreenshot(dialog + button, `dialog-${i}-button-${k}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), k);
-                        expect(checkElementScreenshot(dialog + button, `dialog-${i}-button-${k}-${stateCheck}-state-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), k))
-                            .toBeLessThan(5, `dialog ${i} button ${k} ${stateCheck} state screenshot doesn't match baseline`);
-                    }
-                    click(dialog + button, 3);
-                }
-                closeDialog();
-            }
-        }
+            closeDialog();
+        });
     });
 
     function checkDialogDismissals(exampleSelector: string, dialogSelector: string, dialogButtonIndex: number = 0, expectation: string, selectorIndex: number = 0): void {
