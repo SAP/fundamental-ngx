@@ -6,7 +6,7 @@ import {
     elementDisplayed,
     doesItExist,
     getElementArrayLength,
-    waitForElDisplayed,
+    waitForElDisplayed, saveElementScreenshot
 } from '../../driver/wdio';
 
 describe('Illustrated-message test suite', function() {
@@ -31,6 +31,7 @@ describe('Illustrated-message test suite', function() {
         });
 
         it('should check visual regression dialog popup illustrated message', () => {
+            saveElementScreenshot(dialogPopup, 'dialogPopup', illustratedMessagePage.getScreenshotFolder());
             expect(checkElementScreenshot(dialogPopup, 'dialogPopup', illustratedMessagePage.getScreenshotFolder()))
                 .toBeLessThan(5, 'the dialogPopup didnt match the baseline screenshot');
         });
