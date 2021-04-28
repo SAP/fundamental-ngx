@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 
 import { FormFieldControl } from './form-control';
-import { LabelLayout, Column, FormZone, HintPlacement } from './form-options';
+import { LabelLayout, Column, HintPlacement } from './form-options';
 
 /**
  * FormField base class.

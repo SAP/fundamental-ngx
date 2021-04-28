@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-
-import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-import * as iconTsCode from '!raw-loader!./examples/icon-example.component.ts';
-import * as iconScssCode from '!raw-loader!./examples/icon-example.component.scss';
+import * as iconSrc from '!raw-loader!./examples/icon-example.component.html';
+import * as iconTNTSrc from '!raw-loader!./examples/icon-tnt-example.component.html';
+import * as iconBusinessSuiteInAppSymbolsSrc from '!raw-loader!./examples/icon-businessSuiteInAppSymbols-example.component.html';
 
 @Component({
     selector: 'app-icon',
@@ -11,23 +10,30 @@ import * as iconScssCode from '!raw-loader!./examples/icon-example.component.scs
 })
 export class IconDocsComponent {
 
-    data: any = {
-        properties: {
-            glyphs: 'accelerated'
-        },
-        modifier: {
-            block: 'default'
-        }
-    };
-
     iconExample: ExampleFile[] = [
         {
             language: 'html',
             code: iconSrc,
             fileName: 'icon-example',
-            typescriptFileCode: iconTsCode,
-            component: 'IconExampleComponent',
-            scssFileCode: iconScssCode
+            component: 'IconExampleComponent'
+        }
+    ];
+
+    iconTNTExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: iconTNTSrc,
+            fileName: 'icon-example',
+            component: 'IconTNTExampleComponent'
+        }
+    ];
+
+    iconBusinessSuiteInAppSymbolsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: iconBusinessSuiteInAppSymbolsSrc,
+            fileName: 'icon-example',
+            component: 'IconBusinessSuiteInAppSymbolsExampleComponent'
         }
     ];
 }

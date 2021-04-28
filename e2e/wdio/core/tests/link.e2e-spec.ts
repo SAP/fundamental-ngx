@@ -41,12 +41,12 @@ describe('Link test suite', function() {
     });
 
     describe('visual regression', function() {
-        it('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(2);
         });
 
-        it('check link hover state', () => {
+        xit('check link hover state', () => {
             const linkCount = getElementArrayLength(links);
 
             for (let i = 0; i < linkCount; i++) {
@@ -54,7 +54,7 @@ describe('Link test suite', function() {
             }
         });
 
-        it('should check link focus state', () => {
+        xit('should check link focus state', () => {
             const linkCount = getElementArrayLength(links);
 
             for (let i = 0; i < linkCount; i++) {
@@ -62,7 +62,7 @@ describe('Link test suite', function() {
             }
         });
 
-        it('should check link active state', () => {
+        xit('should check link active state', () => {
             const linkCount = getElementArrayLength(links);
 
             for (let i = 0; i < linkCount; i++) {

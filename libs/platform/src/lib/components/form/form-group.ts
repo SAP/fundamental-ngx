@@ -41,10 +41,6 @@ export abstract class FormGroupContainer {
      */
     addFormField: (formField: FormField) => void;
     /**
-     * Attach underlying form field group
-     */
-    addFormFieldGroup: (formFieldGroup: FormFieldGroup) => void;
-    /**
      * Detach underlying form field
      */
     removeFormField: (formField: FormField) => void;

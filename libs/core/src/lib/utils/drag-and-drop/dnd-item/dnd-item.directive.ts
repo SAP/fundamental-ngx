@@ -76,12 +76,12 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     private _replaceIndicator: HTMLElement;
 
     /** @hidden */
-    constructor(public element: ElementRef, private _dragDrop: DragDrop) {}
+    constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
 
     /** @hidden */
     getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord {
         /** Takes distance from the beginning of window page */
-        const rect = <DOMRect>this.element.nativeElement.getBoundingClientRect();
+        const rect = <DOMRect>this.elementRef.nativeElement.getBoundingClientRect();
 
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
@@ -114,7 +114,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     onCdkDragReleased(): void {
         /** Remove class which is added, when element is dragged */
-        this.element.nativeElement.classList.remove(this.classWhenElementDragged);
+        this.elementRef.nativeElement.classList.remove(this.classWhenElementDragged);
         this.released.emit();
 
         /** Resets the position of element. */
@@ -127,9 +127,9 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     onCdkDragStart(): void {
         /** Adds class */
-        this.element.nativeElement.classList.add(this.classWhenElementDragged);
+        this.elementRef.nativeElement.classList.add(this.classWhenElementDragged);
         if (!this._placeholderElement) {
-            this.createPlaceHolder();
+            this.createPlaceholder();
         }
         this.started.emit();
     }
@@ -153,7 +153,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    removeReplacement(): void {
+    removeReplaceIndicator(): void {
         if (this._replaceIndicator && this._replaceIndicator.parentNode) {
             // IE11 workaround
             this._replaceIndicator.parentNode.removeChild(this._replaceIndicator);
@@ -166,9 +166,9 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         this._replaceIndicator = document.createElement('DIV');
         this._replaceIndicator.classList.add('fd-replace-indicator');
 
-        let container = this.element.nativeElement;
+        let container = this.elementRef.nativeElement;
         if (this.containerSelector) {
-            const newContainer = this.element.nativeElement.querySelector(this.containerSelector);
+            const newContainer = this.elementRef.nativeElement.querySelector(this.containerSelector);
             if (newContainer) {
                 container = newContainer;
             }
@@ -196,9 +196,9 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         }
 
         /** Putting element to the container */
-        let container = this.element.nativeElement;
+        let container = this.elementRef.nativeElement;
         if (this.containerSelector) {
-            const newContainer = this.element.nativeElement.querySelector(this.containerSelector);
+            const newContainer = this.elementRef.nativeElement.querySelector(this.containerSelector);
             if (newContainer) {
                 container = newContainer;
             }
@@ -215,9 +215,9 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    private createPlaceHolder(): void {
+    private createPlaceholder(): void {
         /** Cloning container element */
-        this._placeholderElement = this.element.nativeElement.cloneNode(true);
+        this._placeholderElement = this.elementRef.nativeElement.cloneNode(true);
 
         this._placeholderElement.classList.add('fd-dnd-placeholder');
         this._setPlaceholderStyles();
@@ -225,12 +225,12 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         /** Including element to the container
          *  IE11 equivalent to `this.element.nativeElement.after(clone);`
          */
-        this._placeAfter(this.element.nativeElement, this._placeholderElement);
+        this._placeAfter(this.elementRef.nativeElement, this._placeholderElement);
     }
 
     /** @hidden */
     private _setPlaceholderStyles(): void {
-        const offset = this._getOffsetToParent(this.element.nativeElement);
+        const offset = this._getOffsetToParent(this.elementRef.nativeElement);
 
         this._placeholderElement.style.top = offset.y + 'px';
         this._placeholderElement.style.left = offset.x + 'px';
@@ -238,8 +238,8 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         this._placeholderElement.style.zIndex = '0';
         this._placeholderElement.style.opacity = '0.3';
 
-        this._placeholderElement.style.width = this.element.nativeElement.offsetWidth + 'px';
-        this._placeholderElement.style.height = this.element.nativeElement.offsetHeight + 'px';
+        this._placeholderElement.style.width = this.elementRef.nativeElement.offsetWidth + 'px';
+        this._placeholderElement.style.height = this.elementRef.nativeElement.offsetHeight + 'px';
     }
 
     /** @hidden */
@@ -258,7 +258,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _setCDKDrag(): void {
-        this._dragRef = this._dragDrop.createDrag(this.element);
+        this._dragRef = this._dragDrop.createDrag(this.elementRef);
         this._dragRef.disabled = !this._draggable;
         this._subscriptions.add(
             this._dragRef.moved.subscribe(event => this.onCdkMove(event.pointerPosition))

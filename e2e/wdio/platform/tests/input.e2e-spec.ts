@@ -24,8 +24,14 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import {favoriteColor, errorBorderColor, errorText, labelsArray, placeholdersArray} from '../fixtures/appData/input-page-contents';
-import {autocompleteOption, text, longLine, number, special_characters} from '../fixtures/testData/input';
+import {
+    errorBorderColor,
+    errorText,
+    favoriteColor,
+    labelsArray,
+    placeholdersArray
+} from '../fixtures/appData/input-page-contents';
+import { autocompleteOption, longLine, number, special_characters, text } from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
 
 describe('Input should ', function() {

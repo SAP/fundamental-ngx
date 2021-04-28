@@ -25,7 +25,7 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core';
+import { FdDropEvent, RtlService } from '@fundamental-ngx/core';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
@@ -46,7 +46,9 @@ import {
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
     TableSortChangeEvent,
-    TableRow
+    TableRow,
+    TableRowToggleOpenStateEvent,
+    TableRowsRearrangeEvent
 } from './models';
 import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
@@ -117,7 +119,8 @@ let tableUniqueId = 0;
         '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
         '[class.fd-table--condensed]': 'contentDensity === CONTENT_DENSITY.CONDENSED',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
-        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
+        '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
+        '[class.fdp-table--tree]': '_rowsDraggable'
     }
 })
 export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges, OnInit {
@@ -221,11 +224,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     initialGroupBy: CollectionGroup[];
 
+    /** Whether tree mode is enabled. */
+    @Input()
+    isTreeTable: boolean;
+
+    /** Accessor to a children nodes of tree. */
+    @Input()
+    relationKey: string;
+
     /** Event fired when table selection has changed. */
     @Output()
-    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
-        TableRowSelectionChangeEvent<T>
-    >();
+    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
 
     /** Event fired when table sort order has changed. */
     @Output()
@@ -246,6 +255,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Event fired when there is a change in the frozen column. */
     @Output()
     readonly columnFreeze: EventEmitter<TableColumnFreezeEvent> = new EventEmitter<TableColumnFreezeEvent>();
+
+    /** Event fired when group/tree row collapsed/expanded. */
+    @Output()
+    readonly rowToggleOpenState = new EventEmitter<TableRowToggleOpenStateEvent<T>>();
+
+    /*
+     * Event fired when tree rows rearranged through drag & drop
+     * Consider that rows rearranged with their children rows
+     */
+    @Output()
+    readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -384,6 +404,27 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    get _rowsDraggable(): boolean {
+        return this.isTreeTable 
+            && !this._sortRulesMap.size
+            && !this._groupRulesMap.size
+            && !this._filterRulesMap.size
+            && !this._freezableColumns.length;
+    }
+
+    /** @hidden */
+    get _toolbarContext(): any {
+        return {
+            counter: this._totalItems,
+            size: this.contentDensity,
+            sortable: this._isShownSortSettingsInToolbar,
+            filterable: this._isShownFilterSettingsInToolbar,
+            groupable: this._isShownGroupSettingsInToolbar,
+            columns: this._isShownColumnSettingsInToolbar
+        };
+    }
+
+    /** @hidden */
     _scrollBarWidth = 0;
 
     /** @hidden */
@@ -403,6 +444,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _viewInitiated = false;
+
+    /** @hidden */
+    private _dragDropInProgress = false;
 
     /** @hidden */
     constructor(
@@ -456,6 +500,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._listenToTableRowsPipe();
 
         this._listenToPageScrolling();
+
+        this._listenToColumnPropertiesChange();
 
         this._cd.detectChanges();
     }
@@ -642,8 +688,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Select / Unselect all selectable rows
      */
     _toggleAllSelectableRows(selectAll: boolean): void {
-        const removed = [];
-        const added = [];
+        const removed: TableRow<T>[] = [];
+        const added: TableRow<T>[] = [];
 
         this._getSelectableRows().forEach((row) => {
             if (row.checked === selectAll) {
@@ -674,6 +720,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             removed: removed.map(({ value }) => value),
             index: added.concat(removed).map(({ index }) => index)
         });
+    }
+
+    /**
+     * @hidden
+     * Create table rows rearrange event
+     */
+    _emitRowsRearrangeEvent(row: TableRow, previousIndex: number, newIndex: number): void {
+        const rows = this._tableRows.map(({ value }) => value);
+
+        this.rowsRearrange.emit(
+            new TableRowsRearrangeEvent(row.value, previousIndex, newIndex, rows)
+        );
     }
 
     /**
@@ -734,13 +792,143 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Expand/Collapse group row
      */
     _toggleGroupRow(groupRow: TableRow): void {
+        if (this._dragDropInProgress) {
+            return;
+        }
+
         this._toggleExpandableTableRow(groupRow);
+
+        const groupRowIndex = this._tableRows.indexOf(groupRow);
+        this.rowToggleOpenState.emit(
+            new TableRowToggleOpenStateEvent(groupRowIndex, groupRow.value, groupRow.expanded)
+        );
+    }
+
+    /**
+     * @hidden
+     * Select / Unselect all children rows
+     */
+    _toggleAllChildrenRows(treeRow: TableRow): void {
+        const removed = [];
+        const added = [];
+
+        this._findRowChildren(treeRow).forEach((row) => {
+            if (row.checked === treeRow.checked) {
+                return;
+            }
+            row.checked = treeRow.checked;
+            treeRow.checked ? added.push(row) : removed.push(row);
+        });
+
+        this._emitRowSelectionChangeEvent(added, removed);
+
+        this._calculateCheckedAll();
+    }
+
+    /** @hidden */
+    _isTreeRowFirstCell(cellIndex: number, row: TableRow): boolean {
+        return cellIndex === 0 && row.type === 'tree';
+    }
+
+    /** @hidden */
+    _dragDropStart(): void {
+        this._dragDropInProgress = true;
+    }
+
+    /** @hidden */
+    _dragDropItemDrop(event: FdDropEvent<TableRow>): void {
+        /** After timeout to make click event handled first */
+        this._ngZone.runOutsideAngular(() => {
+            setTimeout(() => this._dragDropInProgress = false);
+        });
+
+        if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
+            const dragRow = this._tableRows.find(row => row === this._tableRowsVisible[event.draggedItemIndex]);
+            const dropRow = this._tableRows.find(row => row === this._tableRowsVisible[event.replacedItemIndex]);
+
+            if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
+                return;
+            }
+
+            this._dragDropUpdateDragParentRowAttributes(dragRow);
+            this._dragDropRearrangeTreeRows(dragRow, dropRow);
+            this._dragDropUpdateDropRowAttributes(dragRow, dropRow);
+
+            if (!dropRow.expanded) {
+                this._toggleExpandableTableRow(dropRow);
+            } else {
+                this._onTableRowsChanged();
+            }
+
+            this._cd.markForCheck();
+            this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
+        }
+    }
+
+    /** @hidden */
+    private _isDroppedInsideItself(dropRow: TableRow, dragRow: TableRow): boolean {
+        const dropRowParents = this._getRowParents(dropRow);
+        return !!dropRowParents.find(row => row === dragRow);
+    }
+
+    /** @hidden */
+    private _dragDropUpdateDragParentRowAttributes(dragRow: TableRow): void {
+        const parentRow = dragRow.parent;
+
+        if (!parentRow) {
+            return;
+        }
+
+        const parentRowChildren = this._findRowChildren(parentRow);
+        const dragRowChildren = this._findRowChildren(dragRow);
+
+        if (parentRowChildren.length - (dragRowChildren.length + 1) === 0) {
+            parentRow.type = 'item';
+        }
+    }
+
+    /** @hidden */
+    private _dragDropUpdateDropRowAttributes(dragRow: TableRow, dropRow: TableRow): void {
+        dragRow.parent = dropRow;
+        dragRow.level = dropRow.level + 1;
+
+        if (dropRow.type !== 'tree') {
+            dropRow.type = 'tree';
+        }
+
+        const children = this._findRowChildren(dragRow);
+        children.forEach(row => {
+            const updatedRowLevel = this._getRowParents(row).length;
+            row.level = updatedRowLevel;
+        });
+    }
+
+    /** @hidden */
+    private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow): void {
+        const allRows = this._tableRows;
+
+        const dragRowIndex = allRows.findIndex(row => row === dragRow);
+        const dragRowChildren = this._findRowChildren(dragRow);
+
+        const rowsToMove = allRows.splice(dragRowIndex, dragRowChildren.length + 1); 
+
+        const dropRowIndex = allRows.findIndex(row => row === dropRow);
+        const dropRowChildren = this._findRowChildren(dropRow);
+
+        const rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
+        const rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
+            
+        this._tableRows = [
+            ...rowsBefore,
+            ...rowsToMove,
+            ...rowsAfter
+        ];
     }
 
     /** @hidden */
     private _setInitialState(): void {
         const prevState = this.getTableState();
-        const columns = this.columns.toArray();
+        const columns = this.getTableColumns();
         const page = prevState.page;
         const visibleColumns =
             this.initialVisibleColumns ||
@@ -770,9 +958,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                     switchMap((source: T[]) => of(this._createTableRowsByDataSourceItems(source))),
                     // Insert items to show groups
                     switchMap((rows: TableRow[]) =>
-                        this._groupRulesMapSubject.pipe(
-                            map((groupRules) => this._groupTableRows(rows, groupRules.values()))
-                        )
+                        this.isTreeTable
+                            ? of(rows)
+                            : this._groupRulesMapSubject.pipe(
+                                map((groupRules) => this._groupTableRows(rows, groupRules.values()))
+                            )
                     )
                 )
                 .subscribe((rows) => {
@@ -841,6 +1031,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _listenToRtlChanges(): void {
+        if (!this._rtlService) {
+            return;
+        }
+
         this._subscriptions.add(
             this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe((rtl) => {
                 this._rtl = rtl;
@@ -851,7 +1045,37 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _createTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
+        if (this.isTreeTable) {
+            return this._createTreeTableRowsByDataSourceItems(source);
+        }
+
         return source.map((item: T, index: number) => new TableRow('item', false, index, item));
+    }
+
+    /** @hidden */
+    private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
+        const rows: TableRow<T>[] = [];
+        source.forEach((item: T, index: number) => {
+            const hasChildren = item.hasOwnProperty(this.relationKey)
+                && Array.isArray(item[this.relationKey])
+                && item[this.relationKey].length;
+            const row = new TableRow(hasChildren ? 'tree' : 'item', false, index, item);
+
+            row.expanded = false;
+            rows.push(row);
+
+            if (hasChildren) {
+                const children = this._createTreeTableRowsByDataSourceItems(item[this.relationKey]);
+                children.forEach(c => {
+                    c.parent = c.parent || row;
+                    c.level = c.parent.level + 1;
+                    c.hidden = true;
+                });
+                rows.push(...children);
+            }
+        });
+
+        return rows;
     }
 
     /** @hidden */
@@ -1143,6 +1367,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             // if parent is collapsed we want to hide all nested items
             if (!expanded) {
                 row.hidden = true;
+                row.expanded = false;
             }
             // if parent is expanded we want show only items which direct parents are expanded as well
             if (expanded) {
@@ -1210,7 +1435,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter(({ type }) => type === 'item');
+        return this._tableRows.filter(({ type }) => type === 'item' || type === 'tree');
     }
 
     /** @hidden */
@@ -1317,6 +1542,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                         this.setCurrentPage(currentPage + 1);
                     });
                 })
+        );
+    }
+
+    /** @hidden */
+    private _listenToColumnPropertiesChange(): void {
+        this._subscriptions.add(
+            this._tableService.markForCheck$
+                .subscribe(() => this._cd.markForCheck())
         );
     }
 }

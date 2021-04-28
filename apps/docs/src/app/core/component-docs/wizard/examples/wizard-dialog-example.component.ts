@@ -4,7 +4,7 @@ import { DialogService, WizardStepStatus } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-wizard-dialog-example',
     templateUrl: './wizard-dialog-example.component.html',
-    styleUrls: ['./wizard-example.component.scss'],
+    styleUrls: ['./wizard-dialog-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class WizardDialogExampleComponent {

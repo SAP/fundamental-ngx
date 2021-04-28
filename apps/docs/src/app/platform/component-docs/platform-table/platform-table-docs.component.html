@@ -194,6 +194,39 @@
 
 <separator></separator>
 
+<div style="display: none">
+    <fd-docs-section-title
+        id="tree-table"
+        componentName="table"
+    >
+        Tree Table
+    </fd-docs-section-title>
+    <description>
+        This example shows tree table usage.
+        To setup tree table use next properties:
+
+        <ul>
+            <li>
+                <code>[isTreeTable]</code> Whether tree mode enabled or no.
+            </li>
+            <li>
+                <code>[relationKey]</code> Name of the field in the object which contains children nodes.
+            </li>
+        </ul>
+
+        <h3>Drag & Drop</h3>
+
+        Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows.
+        Please consider that Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>, <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+    </description>
+    <component-example>
+        <fdp-platform-table-tree-example></fdp-platform-table-tree-example>
+    </component-example>
+    <code-example [exampleFiles]="treeTableFiles"></code-example>
+
+    <separator></separator>
+</div>
+
 <fd-docs-section-title
     id="table-P13"
     componentName="table"
