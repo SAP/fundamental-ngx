@@ -49,7 +49,7 @@
             (moreClickedEvent)="moreClicked()"
         >
             <fd-token [readOnly]="disabled" (onCloseClick)="removeToken(token)" *ngFor="let token of selected">{{
-                displayValue(token)
+                token.label
             }}</fd-token>
             <input
                 #searchInputElement
