@@ -1,16 +1,32 @@
 import { GridListPo } from '../pages/grid-list.po';
 import {
-    click, dragAndDrop, elementArray,
+    click,
+    dragAndDrop,
+    elementArray,
     getAttributeByName,
     getCSSPropertyByName,
-    getElementArrayLength, getText,
+    getElementArrayLength,
+    getText,
     refreshPage,
-    scrollIntoView, waitForClickable, waitForElDisplayed
+    scrollIntoView,
+    waitForClickable,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 import {
-    text, productTitle, textLocked, warningColor, successColor, neutralColor, errorColor, color, backGroundColor,
-    fontWeight, bold, classAttribute, isSelected
+    backGroundColor,
+    bold,
+    classAttribute,
+    color,
+    errorColor,
+    fontWeight,
+    isSelected,
+    neutralColor,
+    productTitle,
+    successColor,
+    text,
+    textLocked,
+    warningColor
 } from '../fixtures/appData/grid-list-content';
 
 describe('Grid-list test suite', function() {

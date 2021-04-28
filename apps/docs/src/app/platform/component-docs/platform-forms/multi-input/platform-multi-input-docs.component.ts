@@ -14,6 +14,8 @@ import * as platformMultiInputMobileExample from '!raw-loader!./platform-multi-i
 import * as platformMultiInputMobileExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-mobile-example.component.ts';
 import * as platformMultiInputReactiveExample from '!raw-loader!./platform-multi-input-example/platform-multi-input-reactive-example.component.html';
 import * as platformMultiInputReactiveExampleTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-reactive-example.component.ts';
+import * as PlatformMultiInputCompactExampleComponent from '!raw-loader!./platform-multi-input-example/platform-multi-input-compact-example.component.html';
+import * as PlatformMultiInputCompactExampleComponentTs from '!raw-loader!./platform-multi-input-example/platform-multi-input-compact-example.component.ts';
 
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
@@ -35,7 +37,19 @@ export class PlatformMultiInputDocsComponent {
             component: 'PlatformMultiInputExampleComponent'
         }
     ];
-
+    multiInputCompact: ExampleFile[] = [
+        {
+            language: 'html',
+            code: PlatformMultiInputCompactExampleComponent,
+            fileName: 'platform-multi-input-compact-example'
+        },
+        {
+            language: 'typescript',
+            code: PlatformMultiInputCompactExampleComponentTs,
+            fileName: 'platform-multi-input-compact-example',
+            component: 'PlatformMultiInputCompactExampleComponent'
+        }
+    ];
     multiInputGrouped: ExampleFile[] = [
         {
             language: 'html',

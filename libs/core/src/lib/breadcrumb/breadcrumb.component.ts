@@ -84,7 +84,7 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
 
     constructor(
         public elementRef: ElementRef,
-        @Optional() private rtlService: RtlService,
+        @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService,
         private _cdRef: ChangeDetectorRef
     ) {}
@@ -96,8 +96,9 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.rtlService) {
-            this.rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'));
+        if (this._rtlService) {
+            this._subscriptions.add(this._rtlService.rtl
+                .subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start')));
         }
         if (this.compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {

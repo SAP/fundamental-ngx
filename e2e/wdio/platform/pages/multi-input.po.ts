@@ -8,7 +8,7 @@ export class MultiInputPo extends BaseComponentPo {
     activeDropdownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]';
     allDropdownButtons = 'button[ng-reflect-glyph="value-help"]';
     disabledDropdownButtons = '[ng-reflect-disabled="true"] button[ng-reflect-glyph="value-help"]';
-    activeInputs = '.fd-multi-input-field [ng-reflect-disabled="false"] input';
+    activeInputs = '.fd-multi-input [ng-reflect-disabled="false"] input';
     mobileInput = 'div[role="dialog"] input';
     disabledInputs = '.fdp-multi-input [ng-reflect-disabled="true"] input';
     filledInput = '[ng-reflect-disabled="false"] .fd-tokenizer__inner';
@@ -19,7 +19,7 @@ export class MultiInputPo extends BaseComponentPo {
     dropdownOptions = 'ul[role=list] [role="listitem"] li ';
     selectedToken = 'span[role=\'button\']';
     dropdownOptionText = this.dropdownOptions + 'span';
-    dropdownOptionTextValueHelp = this.dropdownOptions + 'div[class="fd-list__title ng-star-inserted"]';
+    dropdownOptionTextValueHelp = '[role="option"]';
 
     crossButton = (option: string) => {
         return `//span[text() = '${option}']/following-sibling::span`;

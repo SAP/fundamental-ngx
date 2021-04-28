@@ -37,14 +37,13 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
         this._subscription.unsubscribe();
     }
 
-    /** @hidden **/
-    private _shouldTriggerAction(): boolean {
+    shouldTriggerAction(): boolean {
         const element = this._element.nativeElement;
         const offset: number = element.scrollTop + element.offsetHeight;
         if (this.scrollOffset) {
             return offset > (element.scrollHeight - this.scrollOffset);
         } else {
-            return (offset / element.scrollHeight) > this.scrollPercent / 100
+            return (offset / element.scrollHeight) > this.scrollPercent / 100;
         }
     }
 
@@ -54,7 +53,7 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
             fromEvent(this._element.nativeElement, 'scroll')
                 .pipe(
                     debounceTime(50),
-                    filter(() => this._shouldTriggerAction())
+                    filter(() => this.shouldTriggerAction())
                 )
                 .subscribe(() => this.onScrollAction.emit())
         );

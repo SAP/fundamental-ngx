@@ -20,6 +20,7 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
 })
 export class PlatformTimePickerBasicExampleComponent {
     allowNullTimeObject: FdDate = new FdDate().setTime(12, 0, 0);
+    displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false };
 
     setNull(): void {
         this.allowNullTimeObject = null;

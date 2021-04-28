@@ -7,3 +7,5 @@ export * from './search-change-event.model';
 export * from './columns-change-event.model';
 export * from './page-change-event.model';
 export * from './table-row.model';
+export * from './table-row-toggle-open-state-event.model';
+export * from './table-rows-rearrange-event.model';

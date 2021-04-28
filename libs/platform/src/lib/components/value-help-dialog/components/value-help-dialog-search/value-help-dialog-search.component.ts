@@ -12,13 +12,21 @@ export class VhdSearchComponent {
 
   /** Text value displayed in title for open state for advanced search. Only mobile state */
   @Input()
-  advancedSearchLabel = 'Advanced Search';
+  advancedSearchLabel = 'Filters';
 
   /** Text value displayed in toggle button control */
   @Input()
-  showAdvancedSearchLabel = 'Show advanced search';
+  showAdvancedSearchLabel = 'Show filters';
 
   /** Text value displayed in toggle button control */
   @Input()
-  hideAdvancedSearchLabel = 'Hide advanced search';
+  hideAdvancedSearchLabel = 'Hide filters';
+
+  /** Text value displayed in toggle button control */
+  @Input()
+  showAllAdvancedSearchLabel = 'Show all filters';
+
+  /** Text value displayed in toggle button control */
+  @Input()
+  hideAllAdvancedSearchLabel = 'Hide all filters';
 }

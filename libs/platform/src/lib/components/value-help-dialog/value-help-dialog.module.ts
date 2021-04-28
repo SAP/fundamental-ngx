@@ -17,11 +17,11 @@ import {
   ListModule,
   LinkModule,
   BarModule,
-  PaginationModule,
   SelectModule,
   PanelModule,
   InputGroupModule,
-  PopoverModule
+  PopoverModule,
+  InfiniteScrollModule
 } from '@fundamental-ngx/core';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
@@ -60,11 +60,11 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
     ListModule,
     BarModule,
     LinkModule,
-    PaginationModule,
     SelectModule,
     PanelModule,
     InputGroupModule,
-    PopoverModule
+    PopoverModule,
+    InfiniteScrollModule
   ],
   exports: [
     PlatformValueHelpDialogComponent,

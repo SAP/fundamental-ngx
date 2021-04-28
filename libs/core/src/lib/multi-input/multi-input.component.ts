@@ -24,6 +24,7 @@ import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { FormStates } from '../form/form-control/form-states';
 import {
     applyCssClass,
+    RtlService,
     ContentDensityService,
     CssClassBuilder,
     DynamicComponentService,
@@ -257,6 +258,9 @@ export class MultiInputComponent implements
     /** @hidden */
     displayedValues: any[] = [];
 
+    /**  @hidden */
+    _dir: string;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
@@ -273,6 +277,7 @@ export class MultiInputComponent implements
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService,
+        @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService
     ) { }
 
@@ -288,6 +293,12 @@ export class MultiInputComponent implements
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
+        }
+        if (this._rtlService) {
+            this._subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this.buildComponentCssClass();
+            }));
         }
     }
 
@@ -321,6 +332,13 @@ export class MultiInputComponent implements
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
+        // TODO: this icon flip may be addressed in styles in the future
+        if (this.glyph === 'value-help' && this._dir === 'rtl') {
+            const icon = this.elementRef().nativeElement.querySelector('.sap-icon--value-help');
+            if (icon) {
+                icon.style.transform = 'scaleX(-1)';
+            }
+        }
         return [
             'fd-multi-input',
             'fd-multi-input-custom',
