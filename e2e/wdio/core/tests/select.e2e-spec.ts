@@ -1,6 +1,6 @@
 import { SelectPo } from '../pages/select.po';
 import {
-    addIsActiveClass,
+    addIsActiveClass, browserIsFirefox,
     checkElementScreenshot,
     click,
     focusElement,
@@ -58,7 +58,10 @@ describe('Select component:', function() {
     }, 2);
 
     describe('Select modes', function() {
-        xit('should be able to select the option for default select', () => {
+        it('should be able to select the option for default select', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(selectModesExample + displayedText);
             click(selectModesExample + buttons);
             waitForElDisplayed(option, 4);
@@ -77,7 +80,10 @@ describe('Select component:', function() {
             }
         });
 
-        xit('should be able to select the option for compact select', () => {
+        it('should be able to select the option for compact select', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(selectModesExample + displayedText, 1);
             click(selectModesExample + buttons, 1);
             waitForElDisplayed(option, 4);
@@ -103,7 +109,10 @@ describe('Select component:', function() {
     });
 
     describe('Semantic state', function() {
-        xit('should be able to select the option Success state', () => {
+        it('should be able to select the option Success state', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(selectSemanticStatesExample + displayedText);
             click(selectSemanticStatesExample + buttons);
             waitForElDisplayed(option, 4);
@@ -122,7 +131,10 @@ describe('Select component:', function() {
             }
         });
 
-        xit('should be able to select the option Warning state', () => {
+        it('should be able to select the option Warning state', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(selectSemanticStatesExample + displayedText, 1);
             click(selectSemanticStatesExample + buttons, 1);
             waitForElDisplayed(option, 4);
@@ -141,7 +153,10 @@ describe('Select component:', function() {
             }
         });
 
-        xit('should be able to select the option Error state', () => {
+        it('should be able to select the option Error state', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(selectSemanticStatesExample + displayedText, 2);
             click(selectSemanticStatesExample + buttons, 2);
             waitForElDisplayed(option, 4);
@@ -160,7 +175,10 @@ describe('Select component:', function() {
             }
         });
 
-        xit('should be able to select the option Information state', () => {
+        it('should be able to select the option Information state', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(selectSemanticStatesExample + displayedText, 3);
             click(selectSemanticStatesExample + buttons, 3);
             waitForElDisplayed(option, 4);
@@ -181,7 +199,10 @@ describe('Select component:', function() {
     });
 
     describe('Custom Control Content', function() {
-        xit('should be able to select the option', () => {
+        it('should be able to select the option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(customControlExample + displayedText);
             click(customControlExample + buttons);
             waitForElDisplayed(option, 4);
@@ -202,7 +223,10 @@ describe('Select component:', function() {
     });
 
     describe('Extended Options', function() {
-        xit('should be able to select the option', () => {
+        it('should be able to select the option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(extendedOptionsExample + displayedText);
             click(extendedOptionsExample + buttons);
             waitForElDisplayed(option, 4);
@@ -223,7 +247,10 @@ describe('Select component:', function() {
     });
 
     describe('Mobile Mode', function() {
-        xit('should be able to select the option', () => {
+        it('should be able to select the option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(mobileModeExample + displayedText);
             click(mobileModeExample + buttons);
             waitForElDisplayed(option);
@@ -244,7 +271,10 @@ describe('Select component:', function() {
     });
 
     describe('Max Height', function() {
-        xit('should be able to select the option', () => {
+        it('should be able to select the option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(maxHeightExample + displayedText);
             click(maxHeightExample + buttons);
             waitForElDisplayed(option, 4);
@@ -265,7 +295,10 @@ describe('Select component:', function() {
     });
 
     describe('Adding and Removing Options', function() {
-        xit('should be able to select the option', () => {
+        it('should be able to select the option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(addRemoveOptionExample + displayedText);
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
@@ -274,7 +307,10 @@ describe('Select component:', function() {
             expect(textBefore).not.toEqual(textAfter);
         });
 
-        xit('should be able to add option', () => {
+        it('should be able to add option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
             const optionsCountBefore = getElementArrayLength(option);
@@ -287,7 +323,10 @@ describe('Select component:', function() {
             expect(optionsCountBefore).toEqual(optionsCountAfterAdding - 1);
         });
 
-        xit('should be able to add remove option', () => {
+        it('should be able to add remove option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             click(addRemoveOptionExample + buttons, 2);
             waitForElDisplayed(option, 4);
             const optionsCountBefore = getElementArrayLength(option);
@@ -312,7 +351,10 @@ describe('Select component:', function() {
     });
 
     describe('Programmatic Control', function() {
-        xit('should be able to select the option', () => {
+        it('should be able to select the option', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(programmaticControlExample + displayedText);
             click(programmaticControlExample + buttons, 3);
             waitForElDisplayed(option, 4);
@@ -321,7 +363,10 @@ describe('Select component:', function() {
             expect(textBefore).not.toEqual(textAfter);
         });
 
-        xit('should be able to control select by buttons', () => {
+        it('should be able to control select by buttons', () => {
+            if (browserIsFirefox()) {
+                return;
+            }
             const textBefore = getText(programmaticControlExample + displayedText);
             click(programmaticControlExample + buttons);
             const textAfter = getText(programmaticControlExample + displayedText);
