@@ -4,6 +4,8 @@
 $block: fd-text;
 
 .#{$block} {
+    white-space: normal;
+
     &__lineclamp {
         display: block;
     }

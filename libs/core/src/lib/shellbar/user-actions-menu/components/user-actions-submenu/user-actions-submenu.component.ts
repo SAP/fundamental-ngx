@@ -66,6 +66,7 @@ export class UserActionsSubmenuComponent implements AfterContentInit, OnDestroy 
         );
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }

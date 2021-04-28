@@ -9,7 +9,7 @@ export class ShellbarUserActionsMenuExample {
     user: ShellbarUser = {
         fullName: 'John Doe',
         colorAccent: 11,
-        role: 'User Experience Designe'
+        role: 'User Experience Designer'
     };
 
     userMenuListItems = [
@@ -18,17 +18,17 @@ export class ShellbarUserActionsMenuExample {
         { text: 'Sign Out', glyph: 'log', callback: this._signOutCallback }
     ];
 
-    clickUserAction($event: MouseEvent): void {
-        console.log('Click on: ', $event);
+    selectedUserActionItem(event: MouseEvent | KeyboardEvent): void {
+        console.log('Click on item', event);
     }
 
-    private _settingsCallback($event: MouseEvent): void {
-        console.log($event);
+    private _settingsCallback(event: MouseEvent | KeyboardEvent): void {
+        console.log('Selected item: ', event);
         alert('Settings Clicked');
     }
 
-    private _signOutCallback($event: MouseEvent): void {
-        console.log($event);
+    private _signOutCallback(event: MouseEvent | KeyboardEvent): void {
+        console.log('Selected item: ', event);
         alert('Sign Out Clicked');
     }
 }

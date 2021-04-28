@@ -24,11 +24,14 @@
                 ></button>
             </fd-user-actions-menu-header>
 
-            <ul fd-list [noBorder]="true" navigationIndicator="true">
+            <ul fd-list [noBorder]="true" navigationIndicator="true" tabindex="-1">
                 <li fd-list-item fd-user-actions-menu-item>
                     <a fd-list-link>
                         <i fd-list-icon glyph="border"></i>
-                        <span fd-list-title>
+                        <span
+                            fd-list-title
+                            title="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+                        >
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry
                         </span>
                     </a>
@@ -36,26 +39,31 @@
                 <li fd-list-item fd-user-actions-menu-item>
                     <a fd-list-link [routerLink]="['/']">
                         <i fd-list-icon glyph="chain-link"></i>
-                        <span fd-list-title> Router link </span>
+                        <span fd-list-title title="Router link"> Router link </span>
                     </a>
                 </li>
-                <li fd-list-item fd-user-actions-menu-item>
-                    <a fd-list-link (click)="clickUserAction($event)">
+                <li fd-list-item fd-user-actions-menu-item (onSelect)="selectedUserActionItem($event)">
+                    <a fd-list-link>
                         <i fd-list-icon glyph="example"></i>
-                        <span fd-list-title> Example click </span>
+                        <span fd-list-title title="Example click"> Example click </span>
                     </a>
                 </li>
                 <li fd-list-item fd-user-actions-menu-item [dialogContent]="aboutTemplate">
                     <a fd-list-link>
                         <i fd-list-icon glyph="hint"></i>
-                        <span fd-list-title> About </span>
+                        <span fd-list-title title="About"> About </span>
                     </a>
                 </li>
 
-                <li fd-list-item fd-user-actions-menu-item *ngFor="let item of userMenuListItems">
-                    <a fd-list-link (click)="item.callback && item.callback()">
+                <li
+                    fd-list-item
+                    fd-user-actions-menu-item
+                    *ngFor="let item of userMenuListItems"
+                    (onSelect)="item.callback && item.callback($event)"
+                >
+                    <a fd-list-link>
                         <i fd-list-icon [glyph]="item.glyph"></i>
-                        <span fd-list-title [innerText]="item.text"></span>
+                        <span fd-list-title [attr.title]="item.text" [innerText]="item.text"></span>
                     </a>
                 </li>
             </ul>

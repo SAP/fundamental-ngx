@@ -6,11 +6,13 @@ import {
     Host,
     Input,
     OnDestroy,
+    OnInit,
     Optional,
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { RtlService } from '../../../../utils/services/rtl.service';
 import { ShellbarUser } from '../../../model/shellbar-user';
 import { UserActionsMenuService } from '../../services/user-actions-menu.service';
 import { UserActionsMenuComponent } from '../user-actions-menu/user-actions-menu.component';
@@ -22,7 +24,7 @@ import { UserActionsSubmenuComponent } from '../user-actions-submenu/user-action
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserActionsMenuHeaderComponent implements AfterContentInit, OnDestroy {
+export class UserActionsMenuHeaderComponent implements OnInit, AfterContentInit, OnDestroy {
     /** Whether header component has removed borders */
     @Input()
     showMainHeader = true;
@@ -46,6 +48,9 @@ export class UserActionsMenuHeaderComponent implements AfterContentInit, OnDestr
     _compact = false;
 
     /** @hidden */
+    _isRtl = false;
+
+    /** @hidden */
     private _menuService: UserActionsMenuService;
 
     /** @hidden */
@@ -55,15 +60,22 @@ export class UserActionsMenuHeaderComponent implements AfterContentInit, OnDestr
     constructor(
         /** @hidden */
         private readonly _cd: ChangeDetectorRef,
+        @Optional() private readonly _rtlService: RtlService,
         /** @hidden */
-        @Optional() @Host() private readonly _manuComponent: UserActionsMenuComponent,
+        @Optional() @Host() private readonly _menuComponent: UserActionsMenuComponent,
         /** @hidden */
-        @Optional() @Host() private readonly _submanuComponent: UserActionsSubmenuComponent
+        @Optional() @Host() private readonly _submenuComponent: UserActionsSubmenuComponent
     ) {}
+
+    ngOnInit(): void {
+        if (this._rtlService) {
+            this.subscription.add(this._rtlService.rtl.subscribe((isRtl: boolean) => this._isRtl = isRtl));
+        }
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        const { _menuService } = this._submanuComponent || this._manuComponent;
+        const { _menuService } = this._submenuComponent || this._menuComponent;
         this._menuService = _menuService;
 
         this.subscription.add(

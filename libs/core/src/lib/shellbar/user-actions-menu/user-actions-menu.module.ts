@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PopoverModule } from '../../popover/public_api';
-import { TitleModule } from '../../title/public_api';
-import { AvatarModule } from '../../avatar/public_api';
-import { DialogModule } from '../../dialog/public_api';
-import { ButtonModule } from '../../button/public_api';
-import { BarModule } from '../../bar/public_api';
+import { PopoverModule } from '../../popover/popover.module';
+import { TitleModule } from '../../title/title.module';
+import { AvatarModule } from '../../avatar/avatar.module';
+import { DialogModule } from '../../dialog/dialog.module';
+import { ButtonModule } from '../../button/button.module';
+import { BarModule } from '../../bar/bar.module';
 
 import { UserActionsMenuComponent } from './components/user-actions-menu/user-actions-menu.component';
 import { UserActionsMenuHeaderComponent } from './components/user-actions-menu-header/user-actions-menu-header.component';

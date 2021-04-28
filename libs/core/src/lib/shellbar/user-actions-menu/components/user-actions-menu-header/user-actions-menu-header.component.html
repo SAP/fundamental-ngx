@@ -7,7 +7,7 @@
                         fd-button
                         [compact]="_compact"
                         fdType="transparent"
-                        glyph="slim-arrow-left"
+                        [glyph]="_isRtl ? 'slim-arrow-right' : 'slim-arrow-left'"
                         i18n-aria-label="@@coreUserActionsMenu.Header.BackButton.AriaLabel"
                         aria-label="Back button"
                         i18n-title="@@coreUserActionsMenu.Header.BackButton.Title"
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div fd-bar barDesign="subheader" [cozy]="!_compact" style="height: auto;">
+        <div fd-bar barDesign="subheader" [cozy]="!_compact" style="height: auto">
             <ng-container [ngTemplateOutlet]="content"></ng-container>
         </div>
     </div>
@@ -50,7 +50,9 @@
         </div>
     </ng-container>
 
-    <ng-container [ngTemplateOutlet]="content"></ng-container>
+    <div class="fd-user-menu__subheader">
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
+    </div>
 </ng-template>
 
 <ng-template #content>

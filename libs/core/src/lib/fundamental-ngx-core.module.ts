@@ -89,7 +89,7 @@ import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
 import { StatusIndicatorModule } from './status-indicator/status-indicator.module';
 import { GridListModule } from './grid-list/grid-list.module';
 import { FacetModule } from './facets/facet.module';
-import { UserActionsMenuModule } from './shellbar/public_api';
+import { UserActionsMenuModule } from './shellbar/user-actions-menu/user-actions-menu.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],

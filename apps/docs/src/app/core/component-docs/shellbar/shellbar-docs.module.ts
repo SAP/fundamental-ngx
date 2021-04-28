@@ -23,7 +23,8 @@ import {
     ShellbarModule,
     SideNavigationModule,
     TileModule,
-    ListModule
+    ListModule,
+    TextModule
 } from '@fundamental-ngx/core';
 import { ShellbarUserActionsMenuWithoutHeaderExample } from './examples/shellbar-user-actions-menu-without-header-example.component';
 import { ShellbarUserActionsMenuHeaderWithAddonsExample } from './examples/shellbar-user-actions-menu-header-with-addons-example.component';
@@ -53,7 +54,8 @@ const routes: Routes = [
         DialogModule,
         RouterModule,
         AvatarModule,
-        ListModule
+        ListModule,
+        TextModule
     ],
     exports: [RouterModule],
     declarations: [

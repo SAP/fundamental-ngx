@@ -4,11 +4,14 @@
     </fd-shellbar-logo>
     <fd-shellbar-actions>
         <fd-user-actions-menu [user]="user" [compact]="true">
-            <ul fd-list [noBorder]="true" [compact]="true" navigationIndicator="true">
+            <ul fd-list [noBorder]="true" [compact]="true" navigationIndicator="true" tabindex="-1">
                 <li fd-list-item fd-user-actions-menu-item>
                     <a fd-list-link>
                         <i fd-list-icon glyph="border"></i>
-                        <span fd-list-title>
+                        <span
+                            fd-list-title
+                            title="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+                        >
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry
                         </span>
                     </a>
@@ -16,26 +19,31 @@
                 <li fd-list-item fd-user-actions-menu-item>
                     <a fd-list-link [routerLink]="['/']">
                         <i fd-list-icon glyph="chain-link"></i>
-                        <span fd-list-title> Router link </span>
+                        <span fd-list-title title="Router link"> Router link </span>
                     </a>
                 </li>
-                <li fd-list-item fd-user-actions-menu-item [submenu]="subMenuLevel2">
-                    <a fd-list-link navigationIndicator="true" (click)="clickUserAction($event)">
+                <li fd-list-item fd-user-actions-menu-item [submenu]="subMenuLevel2" (onSelect)="selectedUserActionItem($event)">
+                    <a fd-list-link navigationIndicator="true">
                         <i fd-list-icon glyph="example"></i>
-                        <span fd-list-title> Example click </span>
+                        <span fd-list-title title="Example click"> Example click </span>
                     </a>
                 </li>
                 <li fd-list-item fd-user-actions-menu-item [dialogContent]="aboutTemplate">
                     <a fd-list-link>
                         <i fd-list-icon glyph="hint"></i>
-                        <span fd-list-title> About </span>
+                        <span fd-list-title title="About"> About </span>
                     </a>
                 </li>
 
-                <li fd-list-item fd-user-actions-menu-item *ngFor="let item of userMenuListItems">
-                    <a fd-list-link (click)="item.callback && item.callback()">
+                <li
+                    fd-list-item
+                    fd-user-actions-menu-item
+                    *ngFor="let item of userMenuListItems"
+                    (onSelect)="item.callback && item.callback($event)"
+                >
+                    <a fd-list-link>
                         <i fd-list-icon [glyph]="item.glyph"></i>
-                        <span fd-list-title> {{ item.text }} </span>
+                        <span fd-list-title [attr.title]="item.text"> {{ item.text }} </span>
                     </a>
                 </li>
             </ul>
@@ -62,23 +70,25 @@
 </ng-template>
 
 <fd-user-actions-submenu #subMenuLevel2 title="SubMenu level 2">
-    <ul fd-list [noBorder]="true" [compact]="true" navigationIndicator="true">
+    <ul fd-list [noBorder]="true" [compact]="true" navigationIndicator="true" tabindex="-1">
         <li fd-list-item fd-user-actions-menu-item>
             <a fd-list-link>
                 <i fd-list-icon glyph="border"></i>
-                <span fd-list-title> Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                <span fd-list-title title="Lorem Ipsum is simply dummy text of the printing and typesetting industry">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry
+                </span>
             </a>
         </li>
         <li fd-list-item fd-user-actions-menu-item>
             <a fd-list-link [routerLink]="['/']">
                 <i fd-list-icon glyph="chain-link"></i>
-                <span fd-list-title> Router link </span>
+                <span fd-list-title title="Router link"> Router link </span>
             </a>
         </li>
-        <li fd-list-item fd-user-actions-menu-item [submenu]="subMenuLevel3">
-            <a fd-list-link navigationIndicator="true" (click)="clickUserAction($event)">
+        <li fd-list-item fd-user-actions-menu-item [submenu]="subMenuLevel3" (onSelect)="selectedUserActionItem($event)">
+            <a fd-list-link navigationIndicator="true">
                 <i fd-list-icon glyph="example"></i>
-                <span fd-list-title> Submenu </span>
+                <span fd-list-title title="Submenu"> Submenu </span>
             </a>
         </li>
     </ul>
@@ -91,11 +101,11 @@
 <fd-user-actions-submenu #subMenuLevel3 title="SubMenu level 3">
     <fd-user-actions-menu-header> Description </fd-user-actions-menu-header>
 
-    <ul fd-list [noBorder]="true" [compact]="true">
+    <ul fd-list [noBorder]="true" [compact]="true" tabindex="-1">
         <li fd-list-item fd-user-actions-menu-item [dialogContent]="aboutTemplate">
             <a fd-list-link>
                 <i fd-list-icon glyph="hint"></i>
-                <span fd-list-title> About </span>
+                <span fd-list-title title="About"> About </span>
             </a>
         </li>
     </ul>

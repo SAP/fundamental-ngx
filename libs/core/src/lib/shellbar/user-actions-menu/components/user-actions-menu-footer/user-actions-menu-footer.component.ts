@@ -34,14 +34,14 @@ export class UserActionsMenuFooterComponent implements AfterContentInit, OnDestr
         /** @hidden */
         private readonly _cd: ChangeDetectorRef,
         /** @hidden */
-        @Optional() @Host() private readonly _manuComponent: UserActionsMenuComponent,
+        @Optional() @Host() private readonly _menuComponent: UserActionsMenuComponent,
         /** @hidden */
-        @Optional() @Host() private readonly _submanuComponent: UserActionsSubmenuComponent
+        @Optional() @Host() private readonly _submenuComponent: UserActionsSubmenuComponent
     ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
-        const { _menuService } = this._submanuComponent || this._manuComponent;
+        const { _menuService } = this._submenuComponent || this._menuComponent;
         this.subscription.add(_menuService?.isCompact$.subscribe(compact => {
             this._compact = compact;
             this._cd.markForCheck();

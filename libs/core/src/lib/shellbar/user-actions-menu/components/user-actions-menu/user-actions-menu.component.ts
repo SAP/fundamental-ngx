@@ -15,7 +15,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { PopoverComponent, Placement } from '../../../../popover/public_api';
+import { PopoverComponent } from '../../../../popover/popover.component';
+import { Placement } from '../../../../popover/popover-position/popover-position';
 import { ShellbarUser } from '../../../model/shellbar-user';
 import { UserActionsMenuService } from '../../services/user-actions-menu.service';
 import { UserActionsSubmenuComponent } from '../user-actions-submenu/user-actions-submenu.component';
