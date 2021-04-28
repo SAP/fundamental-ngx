@@ -1,4 +1,4 @@
-//TODO evaluate whether this should be in fd-styles
+//Cutomization based on the width of the input used
 
 .fd-multi-input-tokenizer-custom {
     width: calc(100% - 2.25rem);
@@ -6,96 +6,14 @@
         width: calc(100% - 2rem);
     }
 }
-
-.fd-multi-input-input-group-custom {
-    max-width: 100%;
-}
-
-.fd-multi-input-custom {
-    display: block;
-}
-
-.fd-multi-input-item {
-    cursor: pointer;
-    padding: 0;
-}
-
-.fd-multi-input-popover-size {
-    overflow: auto;
-    display: block;
-}
-
-.fd-multi-input-popover-custom.fd-popover-custom {
-	max-width: 100%;
-	display: block;
-
-    .fd-tokenizer {
-        height: 100%;
-    }
-}
-
-.fd-multi-input-menu-overflow {
-    max-width: 37.5rem;
-    overflow: auto;
-
-    // TODO: Remove after adjusting in styles
-    &:not(.fd-list--compact) {
-        .fd-list__item {
-            height: 2.5rem;
-
-            .fd-checkbox__label {
-                padding-top: 0.5625rem;
-                padding-bottom: 0.5625rem;
-            }
-        }
-    }
-}
-
-.fd-input {
-    &.fd-multi-input-tokenizer-input {
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-left: 0;
-        background-color: transparent;
-		min-width: 150px !important;
-    }
-}
-
-.fd-multi-input-show-all {
-    float: right;
-    background-color: transparent;
-    .fd-link:active {
-        color: inherit;
-    }
-}
-
-.fd-multi-input-checkbox {
-    width: 100%;
-    cursor: pointer;
-
-    .fd-checkbox__label {
-        color: inherit;
-    }
-}
-
-.fd-list--multi-input {
-    max-width: 100%;
-}
+// code to adjust to the parent width
 
 .fdp-multi-input {
     &__list-container {
         &.fd-popover__popper {
-            width: 100% !important;
-            position: absolute !important;
+            width: 100% ;
             overflow: hidden;
-
-            .fd-list--dropdown {
-                max-width: 100%;
-            }
+			position: relative;
         }
-    }
-
-    &__list {
-        overflow: auto;
     }
 }
