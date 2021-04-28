@@ -1,6 +1,7 @@
 $block: approval-flow-node;
 $node-height: 94px;
 $node-height--edit-mode: 126px;
+$node-width: 278px;
 $carousel-marker-height: 11px;
 $carousel-marker-top: $node-height / 2 - $carousel-marker-height / 2;
 $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-height / 2;
@@ -10,7 +11,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     display: block;
     position: relative;
     margin-bottom: 1rem;
-    width: 278px;
+    width: $node-width;
     height: $node-height;
 
     &:not(.#{$block}--space) {
@@ -76,8 +77,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
                 width: 2.2rem;
             }
         }
-    
-    
+
         &.#{$block}--selected {
             background: #E5F0FA;
             background: var(--sapList_SelectionBackgroundColor, #E5F0FA);
@@ -98,14 +98,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     
             .#{$block}__arrow {
                 display: none;
-            }
-        }
-    
-        &.#{$block}--in-parallel {
-            .#{$block}__add--before {
-                & + .#{$block}__drop-zone {
-                    left: -1.8rem;
-                }
             }
         }
     

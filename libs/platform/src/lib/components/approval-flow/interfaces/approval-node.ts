@@ -23,7 +23,6 @@ export interface ApprovalGraphNodeMetadata {
     isLast: boolean;
     parallelStart: boolean;
     parallelEnd: boolean;
-    isParallel: boolean;
     isLastInParallel?: boolean;
     columnIndex?: number;
     nodeIndex?: number;

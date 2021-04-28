@@ -638,7 +638,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 isLast: !node.targets.length,
                 parallelStart: node.targets.length > 1,
                 parallelEnd: parents.length > 1,
-                isParallel: false,
                 columnIndex: columnIndex,
                 nodeIndex: nodeIndex,
                 prevHNode: graph[columnIndex - 1]?.nodes[nodeIndex],
@@ -654,19 +653,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             const allNodeParentsApproved = nodeMetadata.parents?.every(_node => isNodeApproved(_node));
             const isTargetNodeParallelEnd = metadata[node.targets[0]]?.parallelEnd;
 
-            nodeMetadata.isLastInParallel = isTargetNodeParallelEnd;
-
-            nodeMetadata.canAddNodeBefore = 
-                node.status === 'not started'
-                && !allNodeParentsApproved;
-                
+            nodeMetadata.canAddNodeBefore = node.status === 'not started' && !allNodeParentsApproved;
             nodeMetadata.canAddNodeAfter = isNodeNotApproved;
-            
-            nodeMetadata.renderAddButtonAfter = 
-                nodeMetadata.canAddNodeAfter
-                && (isTargetNodeParallelEnd || nodeMetadata.isLast);
-                
             nodeMetadata.canAddParallel = isNodeNotApproved;
+            nodeMetadata.renderAddButtonAfter = nodeMetadata.canAddNodeAfter && (isTargetNodeParallelEnd || nodeMetadata.isLast);
+            nodeMetadata.isLastInParallel = isTargetNodeParallelEnd;
         });
 
         return metadata;

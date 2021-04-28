@@ -1,9 +1,9 @@
 <ng-container *ngIf="!blank && !space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
 
-    <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
+    <div *ngIf="meta?.isRoot" class="approval-flow-node__carousel-start-marker"></div>
 
-    <div *ngIf="renderCarouselEndMarker" class="approval-flow-node__carousel-end-marker"></div>
+    <div *ngIf="meta?.isLast" class="approval-flow-node__carousel-end-marker"></div>
 
     <div *ngIf="isEdit" class="approval-flow-node__edit-controls">
         <fd-checkbox
@@ -92,11 +92,11 @@
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'blank' }"></ng-container>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeBefore)">
+<ng-container *ngIf="isEdit && (!blank && !space && meta?.canAddNodeBefore)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeAfter && renderAddButtonAfter)">
+<ng-container *ngIf="isEdit && (!blank && !space && meta?.canAddNodeAfter && meta?.renderAddButtonAfter)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 
@@ -124,15 +124,15 @@
 </ng-template>
 
 <fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
-    <li *ngIf="meta.canAddNodeBefore" fd-menu-item (click)="menu.close(); onAdd.emit('before')">
+    <li *ngIf="meta?.canAddNodeBefore" fd-menu-item (click)="menu.close(); onAdd.emit('before')">
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversBefore">Add approvers before</div>
     </li>
 
-    <li *ngIf="meta.canAddNodeAfter" fd-menu-item (click)="menu.close(); onAdd.emit('after')">
+    <li *ngIf="meta?.canAddNodeAfter" fd-menu-item (click)="menu.close(); onAdd.emit('after')">
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversAfter">Add approvers after</div>
     </li>
 
-    <li *ngIf="meta.canAddParallel" fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
+    <li *ngIf="meta?.canAddParallel" fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversParallel">Add parallel approvers</div>
     </li>
 
