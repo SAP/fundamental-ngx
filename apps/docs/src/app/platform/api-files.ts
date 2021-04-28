@@ -89,5 +89,6 @@ export const API_FILES = {
     fileUploader: ['PlatformFileUploaderComponent'],
     uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
     approvalFlow: ['ApprovalFlowComponent', 'ApprovalFlowNodeComponent'],
-    slider: ['SliderComponent']
+    slider: ['SliderComponent'],
+    footer: ['FooterComponent']
 };

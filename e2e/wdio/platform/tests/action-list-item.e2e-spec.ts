@@ -44,10 +44,9 @@ describe('Action List Item Test Suite:', function() {
     });
 
     describe('Check visual regression', function() {
-        // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
-        xit('should check examples visual regression', () => {
+        it('should check examples visual regression', () => {
             actionListPage.saveExampleBaselineScreenshot();
-            expect(actionListPage.compareWithBaseline()).toBeLessThan(3);
+            expect(actionListPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
