@@ -111,15 +111,21 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--blank-top')
-    get _isBlankTopNode(): boolean {
-        return Boolean(this.blank && this.meta?.nextHNode);
-    }
-
-    /** @hidden */
     @HostBinding('class.approval-flow-node--parallel-start')
     get _isParallelStart(): boolean {
         return Boolean(this.meta?.parallelStart);
+    }
+
+    /** @hidden */
+    @HostBinding('class.approval-flow-node--parallel-end')
+    get _isParallelEnd(): boolean {
+        return Boolean(this.meta?.parallelEnd);
+    }
+
+    /** @hidden */
+    @HostBinding('class.approval-flow-node--first-in-parallel')
+    get _isFirstInParallel(): boolean {
+        return Boolean(this.meta?.isFirstInParallel);
     }
 
     /** @hidden */

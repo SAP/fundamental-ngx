@@ -112,6 +112,7 @@
 <ng-template #addNodeButton let-placement="placement">
     <button
         class="approval-flow-node__add"
+        *ngIf="node.status !== 'approved'"
         [class.approval-flow-node__add--blank]="blank"
         [class.approval-flow-node__add--before]="!blank && placement === 'before'"
         [class.approval-flow-node__add--after]="!blank && placement === 'after'"

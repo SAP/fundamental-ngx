@@ -552,6 +552,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _onNodeDragMoved(node: ApprovalGraphNode): void {
         const draggedNodeDimensions = this._nodeComponents
             .find(comp => comp.node === node)._nativeElement.getBoundingClientRect();
+            
         this._nodeComponents
             .filter(n => n.node !== node && Boolean(n.dropZones.length))
             .forEach(n => {
@@ -657,11 +658,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             column.nodes.forEach((node, nodeIndex) => {
                 const nodeMetadata = metadata[node.id];
 
-                const isTargetNodeParallelEnd = metadata[node.targets[0]]?.parallelEnd;
+                const isTargetParallelEnd = metadata[node.targets[0]]?.parallelEnd;
+                nodeMetadata.isLastInParallel = isTargetParallelEnd;
+
+                const isParentParallelStart = metadata[nodeMetadata.parents[0]?.id]?.parallelStart;
+                nodeMetadata.isFirstInParallel = isParentParallelStart;
+
                 nodeMetadata.renderAddButtonAfter = 
                     nodeMetadata.canAddNodeAfter 
-                    && (isTargetNodeParallelEnd || nodeMetadata.isLast);
-                nodeMetadata.isLastInParallel = isTargetNodeParallelEnd;
+                    && (isTargetParallelEnd || nodeMetadata.isLast);
 
                 const nextNotEmptyVNode = getNextNotEmptyNode(nodeIndex, column.nodes);
                 const nextNotEmptyVNodeMetadata = metadata[nextNotEmptyVNode?.id];
@@ -670,7 +675,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 const prevVNodeMetadata = metadata[prevVNode?.id];
                 const nextVNode = column.nodes[nodeIndex + 1];
 
-                const isNextVNodeHasSameTarget = nextNotEmptyVNode?.targets[0] === node.targets[0];
+                const isNextVNodeHasSameTarget = node.targets.length && nextNotEmptyVNode?.targets[0] === node.targets[0];
                 const renderVerticalLineAfter = 
                     isNextVNodeHasSameTarget
                     || ((nextVNode?.blank || nextVNode?.space) && prevVNodeMetadata?.renderVerticalLineAfter);
