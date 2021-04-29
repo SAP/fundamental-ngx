@@ -101,7 +101,7 @@
     "@angular/localize": "^11.2.12",
     "@angular/platform-browser": "~11.2.10",
     "@angular/platform-browser-dynamic": "~11.2.10",
-    "@angular/router": "~11.2.10",
+    "@angular/router": "~11.2.12",
     "@nrwl/angular": "~11.1.5",
     "@sap-theming/theming-base-content": "~11.1.28",
     "@stackblitz/sdk": "1.5.2",
