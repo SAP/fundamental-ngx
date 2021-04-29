@@ -67,6 +67,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /**
      * user provided offset in px
+     * @deprecated
      */
     @Input()
     offset = 0;
@@ -111,11 +112,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     }
 
     /**
-     * tracks whether the header was toggled or not
-     */
-    isHeaderCollapsed = false;
-
-    /**
      * @hidden
      * whether tabbed content is present in this page
      */
@@ -131,7 +127,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * @hidden
      * On Scroll Content Subject
      */
-    _onScrollContentSubject: Subject<Event> = new Subject();
+    private _onScrollContentSubject: Subject<Event> = new Subject();
 
     /**
      * @hidden

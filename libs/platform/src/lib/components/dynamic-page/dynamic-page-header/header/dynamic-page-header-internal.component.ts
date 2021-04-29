@@ -17,7 +17,6 @@ import {
 import { Subscription } from 'rxjs';
 
 import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
-import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
 
@@ -207,7 +206,6 @@ export class DynamicPageHeaderInternalComponent implements OnInit, AfterViewInit
         private _cd: ChangeDetectorRef,
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
-        protected _dynamicPageConfig: DynamicPageConfig,
         private _dynamicPageService: DynamicPageService
     ) {}
 
