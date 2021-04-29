@@ -21,7 +21,7 @@
     .fd-dynamic-page__content,
     .fd-dynamic-page__tabs--overflow {
         display: block;
-        flex: 1 1 auto;
+        flex: 1;
     }
     
     .fd-dynamic-page__tabs--overflow {
@@ -36,7 +36,7 @@
         }
 
         .fd-tabs__content {
-            flex: 1 1 auto;
+            flex: 1;
 
             display: flex;
         }
