@@ -54,7 +54,8 @@ describe('Input Group should', function() {
     });
 
     it('have correct placeholder text', () => {
-        expect(getElementPlaceholder(standartInputArr)).toEqual(standardInputPlaceholders);
+        expect(getAttributeByNameArr(standartInputArr, 'placeholder'))
+            .toEqual(standardInputPlaceholders);
         expect(getElementPlaceholder(withFormInput)).toEqual(inputWithFormPlaceholder);
     });
 
@@ -176,7 +177,7 @@ describe('Input Group should', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
-            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(3);
+            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

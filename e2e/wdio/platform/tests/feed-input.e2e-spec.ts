@@ -38,7 +38,7 @@ describe('Verify Feed Input component', function() {
     }, 1);
 
     it('should have correct placeholder assigned', () => {
-        expect(getElementPlaceholder(feedInputTextArea)).toEqual(placeholders_array);
+        expect(getAttributeByNameArr(feedInputTextArea, 'placeholder')).toEqual(placeholders_array);
     });
 
     it('should have example with avatar image assigned', () => {

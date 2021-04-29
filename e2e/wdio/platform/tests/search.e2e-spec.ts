@@ -55,7 +55,7 @@ describe('Search field', function() {
 
     it('should have placeholder text', () => {
         const arrLength = getElementArrayLength(searchFields);
-        const actualPlaceholders = getElementPlaceholder(searchFields);
+        const actualPlaceholders = getAttributeByNameArr(searchFields, 'placeholder');
         for (let i = 0; arrLength > i; i++) {
             waitForElDisplayed(searchFields, i);
             expect(actualPlaceholders[i]).toBe(search_placeholder);

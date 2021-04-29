@@ -126,7 +126,8 @@ describe('Input should ', function() {
     });
 
     it('have placeholder', () => {
-        expect(getElementPlaceholder(inputsArray, 1)).toEqual(placeholdersArray);
+        expect(getAttributeByNameArr(inputsArray, 'placeholder', 1))
+            .toEqual(placeholdersArray);
     });
 
     it('should have error border color', () => {
