@@ -629,37 +629,59 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const nodes: ApprovalGraphNode[] = graph.reduce((acc, column) => acc.concat(column.nodes), []);
         const metadata: { [key: string]: ApprovalGraphNodeMetadata } = {};
 
-        nodes.forEach(node => {
-            const columnIndex = graph.findIndex(c => c.nodes.includes(node));
-            const nodeIndex = graph[columnIndex].nodes.findIndex(_node => _node === node);
-            const parents = findParentNodes(node, nodes);
-
-            metadata[node.id] = {
-                parents: parents,
-                isRoot: !parents.length,
-                isLast: !node.targets.length,
-                parallelStart: node.targets.length > 1,
-                parallelEnd: parents.length > 1,
-                columnIndex: columnIndex,
-                nodeIndex: nodeIndex,
-                prevHNode: graph[columnIndex - 1]?.nodes[nodeIndex],
-                nextHNode: graph[columnIndex + 1]?.nodes[nodeIndex]
-            };
+        graph.forEach((column, columnIndex) => {
+            column.nodes.forEach((node, nodeIndex) => {
+                const parents = findParentNodes(node, nodes);
+                const isNodeNotApproved = !isNodeApproved(node);
+                const allNodeParentsApproved = parents.every(_node => isNodeApproved(_node));
+    
+                metadata[node.id] = {
+                    parents: parents,
+                    isRoot: !parents.length,
+                    isLast: !node.targets.length,
+                    parallelStart: node.targets.length > 1,
+                    parallelEnd: parents.length > 1,
+                    columnIndex: columnIndex,
+                    nodeIndex: nodeIndex,
+                    prevHNode: graph[columnIndex - 1]?.nodes[nodeIndex],
+                    nextHNode: graph[columnIndex + 1]?.nodes[nodeIndex],
+                    canAddNodeBefore: node.status === 'not started' && !allNodeParentsApproved,
+                    canAddNodeAfter: isNodeNotApproved,
+                    canAddParallel: isNodeNotApproved,
+                };
+            });
         });
 
-        /** Calculate values of the node flags */
-        nodes.forEach(node => {
-            const nodeMetadata = metadata[node.id];
+        /* Some flags can be calculated only at the 2nd run, if all nodes already have metadata */
+        graph.forEach((column, columnIndex) => {
+            column.nodes.forEach((node, nodeIndex) => {
+                const nodeMetadata = metadata[node.id];
 
-            const isNodeNotApproved = !isNodeApproved(node);
-            const allNodeParentsApproved = nodeMetadata.parents?.every(_node => isNodeApproved(_node));
-            const isTargetNodeParallelEnd = metadata[node.targets[0]]?.parallelEnd;
+                const isTargetNodeParallelEnd = metadata[node.targets[0]]?.parallelEnd;
+                nodeMetadata.renderAddButtonAfter = 
+                    nodeMetadata.canAddNodeAfter 
+                    && (isTargetNodeParallelEnd || nodeMetadata.isLast);
+                nodeMetadata.isLastInParallel = isTargetNodeParallelEnd;
 
-            nodeMetadata.canAddNodeBefore = node.status === 'not started' && !allNodeParentsApproved;
-            nodeMetadata.canAddNodeAfter = isNodeNotApproved;
-            nodeMetadata.canAddParallel = isNodeNotApproved;
-            nodeMetadata.renderAddButtonAfter = nodeMetadata.canAddNodeAfter && (isTargetNodeParallelEnd || nodeMetadata.isLast);
-            nodeMetadata.isLastInParallel = isTargetNodeParallelEnd;
+                const nextNotEmptyVNode = getNextNotEmptyNode(nodeIndex, column.nodes);
+                const nextNotEmptyVNodeMetadata = metadata[nextNotEmptyVNode?.id];
+
+                const prevVNode = column.nodes[nodeIndex - 1];
+                const prevVNodeMetadata = metadata[prevVNode?.id];
+                const nextVNode = column.nodes[nodeIndex + 1];
+
+                const isNextVNodeHasSameTarget = nextNotEmptyVNode?.targets[0] === node.targets[0];
+                const renderVerticalLineAfter = 
+                    isNextVNodeHasSameTarget
+                    || ((nextVNode?.blank || nextVNode?.space) && prevVNodeMetadata?.renderVerticalLineAfter);
+                nodeMetadata.renderVerticalLineAfter = Boolean(renderVerticalLineAfter);
+
+                const isNextVNodeHasSameParent = nextNotEmptyVNodeMetadata?.parents[0]?.id === nodeMetadata.parents[0]?.id;
+                const renderVerticalLineBefore = 
+                    isNextVNodeHasSameParent 
+                    || ((node?.blank || node?.space) && prevVNodeMetadata?.renderVerticalLineBefore);
+                nodeMetadata.renderVerticalLineBefore = Boolean(renderVerticalLineBefore);
+            });
         });
 
         return metadata;
@@ -883,6 +905,12 @@ function getSpaceNode(): ApprovalGraphNode {
     };
 }
 
+function getNextNotEmptyNode(nodeIndex: number, nodes: ApprovalGraphNode[]): ApprovalGraphNode {
+    const nextNode = nodes[nodeIndex + 1];
+
+    return nextNode?.blank || nextNode?.space ? getNextNotEmptyNode(nodeIndex + 1, nodes) : nextNode;
+}
+
 function isNodeTargetsIncludeId(node: ApprovalNode, id: string): boolean {
     return node.targets.includes(id);
 }
@@ -955,7 +983,7 @@ function fillPathsWithBlankNodes(
             }
 
             if (nodeIndex < mostFarPathNodeIndex) {
-                emptyNodes = getEmptyNodes(mostFarPathNodeIndex - nodeIndex);
+                emptyNodes = getEmptyNodes(mostFarPathNodeIndex - nodeIndex, path[nodeIndex - 1].status);
 
                 emptyNodes[emptyNodes.length - 1].targets = [node.id];
                 path[nodeIndex - 1].targets = [emptyNodes[0].id];
@@ -967,7 +995,7 @@ function fillPathsWithBlankNodes(
             }
 
             if (nodeIndex === mostFarPathNodeIndex && nodeIndex === path.length - 1) {
-                emptyNodes = getEmptyNodes(longestPathLength - path.length, 'space');
+                emptyNodes = getEmptyNodes(longestPathLength - path.length, 'not started', 'space');
 
                 path.splice(nodeIndex + 1, 0, ...emptyNodes);
                 processedPaths.push(path);
@@ -1013,7 +1041,8 @@ function getBlankNodesAfterFromProcessedPaths(
 
 function getEmptyNodes(
     count: number,
-    nodeType: 'blank' | 'space' = 'blank'
+    status: ApprovalStatus = 'not started',
+    nodeType: 'blank' | 'space' = 'blank',
 ): ApprovalGraphNode[] {
     const nodes: ApprovalGraphNode[] = [];
     const nodeFn = nodeType === 'blank' ? getBlankNode : getSpaceNode;
@@ -1022,7 +1051,7 @@ function getEmptyNodes(
     let nodeId: string;
 
     for (let i = count; i > 0; i--) {
-        node = Object.assign({}, nodeFn(), { targets: [ nodeType === 'blank' && nodeId ] })
+        node = Object.assign({}, nodeFn(), { targets: [ nodeType === 'blank' && nodeId ], status: status })
         nodeId = node.id;
 
         nodes.unshift(node);

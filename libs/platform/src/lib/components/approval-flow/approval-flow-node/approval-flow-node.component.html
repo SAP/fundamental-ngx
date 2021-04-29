@@ -1,3 +1,12 @@
+<div
+    *ngIf="meta?.renderVerticalLineBefore"
+    class="approval-flow-node__vertical-line-before"
+    [class.approval-flow-node__vertical-line-before-solid]="_areAllParentsApproved"></div>
+<div
+    *ngIf="meta?.renderVerticalLineAfter"
+    class="approval-flow-node__vertical-line-after"
+    [class.approval-flow-node__vertical-line-after-solid]="_areAllNodesInColumnApproved"></div>
+
 <ng-container *ngIf="!blank && !space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
 

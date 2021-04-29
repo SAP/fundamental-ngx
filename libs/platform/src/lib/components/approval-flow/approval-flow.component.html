@@ -98,10 +98,6 @@
                 <div
                     class="approval-flow__column"
                     *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
-                    [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial && _graph[columnIndex - 1]?.nodes.length === 1"
-                    [class.approval-flow__column--vertical-line-after]="(column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
-                    [class.approval-flow__column--vertical-line-before-solid]="_graph[columnIndex - 1]?.allNodesApproved"
-                    [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
                 >
                     <ng-container
                         *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
@@ -116,6 +112,7 @@
                             [checkDueDate]="checkDueDate"
                             [dueDateThreshold]="dueDateThreshold"
                             [renderArrow]="columnIndex > 0"
+                            [allNodesInColumnApproved]="column.allNodesApproved"
                             (onNodeClick)="_onNodeClick(node)"
                             (onNodeCheck)="_onNodeCheck(node)"
                             (onAdd)="_addNode(node, $event)"

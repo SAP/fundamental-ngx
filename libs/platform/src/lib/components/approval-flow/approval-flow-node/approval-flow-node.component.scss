@@ -14,209 +14,270 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     width: $node-width;
     height: $node-height;
 
-    &:not(.#{$block}--space) {
-        background: #fff;
-        background: var(--sapBaseColor, #fff);
-        border-radius: 4px;
-        box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
-        cursor: pointer;
+    &.#{$block}--edit-mode {
+        height: $node-height--edit-mode;
 
-        &.#{$block}--blank {
-            background: transparent;
-            box-shadow: none;
-            pointer-events: none;
-            cursor: default;
-    
+        .#{$block}__vertical-line-before:before,
+        .#{$block}__vertical-line-after:after {
+            top: calc(#{$node-height--edit-mode} / 2);
+            height: calc(#{$node-height--edit-mode} + 1rem);
+        }
+    }
+
+    .#{$block}__vertical-line-before:before,
+    .#{$block}__vertical-line-after:after {
+        content: '';
+        position: absolute;
+        top: calc(#{$node-height} / 2);
+        height: calc(#{$node-height} + 1rem);
+    }
+
+    .#{$block}__vertical-line-before {
+        &:before {
+            border-right: 2px dashed #89919A;
+            border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+            left: -2.2rem;
+        }
+
+        &-solid:before {
+            border-right: 1px solid #89919A;
+            border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
+        }
+    }
+
+    .#{$block}__vertical-line-after {
+        &:after {
+            border-right: 2px dashed #89919A;
+            border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+            right: -2rem;
+        }
+
+        &-solid:after {
+            border-right: 1px solid #89919A;
+            border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
+        }
+    }
+
+    &[dir='rtl'] {
+        &.#{$block}__vertical-line-before {
             &:before {
-                content: '';
-                width: calc(100% + 3.7rem);
-                height: 0;
-                display: block;
-                position: absolute;
-                left: -4rem;
-                border-top: 2px dashed #89919A;
-                border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-                top: calc(50% - 1px);
+                left: auto;
+                right: -2rem;
             }
         }
-    
-        &.#{$block}--line-before:before, &.#{$block}--line-after:after {
+
+        &.#{$block}__vertical-line-after {
+            &:after {
+                right: auto;
+                left: -2.2rem;
+            }
+        }
+    }
+}
+
+:host:not(.#{$block}--space) {
+    background: #fff;
+    background: var(--sapBaseColor, #fff);
+    border-radius: 4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
+    cursor: pointer;
+
+    &.#{$block}--blank {
+        background: transparent;
+        box-shadow: none;
+        pointer-events: none;
+        cursor: default;
+
+        &:before {
             content: '';
-            width: 1.9rem;
+            width: calc(100% + 3.7rem);
             height: 0;
             display: block;
             position: absolute;
+            left: -4rem;
             border-top: 2px dashed #89919A;
             border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            pointer-events: none;
+            top: calc(50% - 1px);
         }
-    
+    }
+
+    &.#{$block}--line-before:before, &.#{$block}--line-after:after {
+        content: '';
+        width: 1.9rem;
+        height: 0;
+        display: block;
+        position: absolute;
+        border-top: 2px dashed #89919A;
+        border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        pointer-events: none;
+    }
+
+    &.#{$block}--line-before:before {
+        left: -2rem;
+    }
+
+    &.#{$block}--line-after:after {
+        right: -1.9rem;
+    }
+
+    &.#{$block}--approved {
+        &.#{$block}--line-after:after,
+        &.#{$block}--blank:before {
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+    }
+
+    &.#{$block}--parent-approved {
         &.#{$block}--line-before:before {
-            left: -2rem;
+            border-top-style: solid;
+            border-top-width: 1px;
+            left: -2.2rem;
+            width: 2.2rem;
         }
-    
-        &.#{$block}--line-after:after {
-            right: -1.9rem;
+    }
+
+    &.#{$block}--selected {
+        background: #E5F0FA;
+        background: var(--sapList_SelectionBackgroundColor, #E5F0FA);
+        box-shadow: 0 0 0 2px #0854A0;
+        box-shadow: 0 0 0 2px var(--sapContent_DragAndDropActiveColor, #0854A0);
+    }
+
+    &.#{$block}--edit-mode {
+        height: $node-height--edit-mode;
+
+        &.#{$block}--blank {
+            pointer-events: auto;
         }
-    
-        &.#{$block}--approved {
-            &.#{$block}--line-after:after {
-                border-top-style: solid;
-                border-top-width: 1px;
-            }
+
+        .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
+            top: $carousel-marker-top--edit-mode;
         }
-    
-        &.#{$block}--parent-approved {
-            &.#{$block}--line-before:before {
-                border-top-style: solid;
-                border-top-width: 1px;
-                left: -2.2rem;
-                width: 2.2rem;
+
+        .#{$block}__arrow {
+            display: none;
+        }
+    }
+
+    &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
+        .#{$block}__add--after {
+            right: -1.5rem;
+
+            & + .#{$block}__drop-zone {
+                right: -1.8rem;
             }
         }
 
-        &.#{$block}--selected {
-            background: #E5F0FA;
-            background: var(--sapList_SelectionBackgroundColor, #E5F0FA);
-            box-shadow: 0 0 0 2px #0854A0;
-            box-shadow: 0 0 0 2px var(--sapContent_DragAndDropActiveColor, #0854A0);
+        &.#{$block}--blank:not(.#{$block}--blank-top):before {
+            width: calc(100% + 5.7rem);
         }
-    
-        &.#{$block}--edit-mode {
-            height: $node-height--edit-mode;
-    
-            &.#{$block}--blank {
-                pointer-events: auto;
-            }
-    
-            .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
-                top: $carousel-marker-top--edit-mode;
-            }
-    
-            .#{$block}__arrow {
-                display: none;
-            }
+
+        &.#{$block}--blank.#{$block}--blank-top:before {
+            width: calc(100% + 7.7rem);
         }
-    
-        &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
-            .#{$block}__add--after {
-                right: -1.5rem;
-    
-                & + .#{$block}__drop-zone {
-                    right: -1.8rem;
-                }
-            }
-    
-            &.#{$block}--blank:not(.#{$block}--blank-top):before {
-                width: calc(100% + 5.7rem);
-            }
-    
-            &.#{$block}--blank.#{$block}--blank-top:before {
-                width: calc(100% + 7.7rem);
-            }
+    }
+
+
+    &[dir='rtl'] {
+        .#{$block}__avatar {
+            margin-right: 0;
+            margin-left: .5rem;
         }
-    
-    
-        &[dir='rtl'] {
-            .#{$block}__avatar {
-                margin-right: 0;
-                margin-left: .5rem;
-            }
-    
-            .#{$block}__arrow {
-                left: auto;
-                right: -8px;
-                border-width: 4px 8px 4px 0;
-                border-color: transparent #89919A transparent transparent;
-                border-color: transparent var(--sapField_ReadOnly_BorderColor, #89919A) transparent transparent;
-            }
-    
-            .#{$block}__carousel-start-marker {
-                left: auto;
-                right: -2rem;
-            }
-    
-            .#{$block}__carousel-end-marker {
-                right: auto;
-                left: -2rem;
-            }
-    
+
+        .#{$block}__arrow {
+            left: auto;
+            right: -8px;
+            border-width: 4px 8px 4px 0;
+            border-color: transparent #89919A transparent transparent;
+            border-color: transparent var(--sapField_ReadOnly_BorderColor, #89919A) transparent transparent;
+        }
+
+        .#{$block}__carousel-start-marker {
+            left: auto;
+            right: -2rem;
+        }
+
+        .#{$block}__carousel-end-marker {
+            right: auto;
+            left: -2rem;
+        }
+
+        &.#{$block}--line-before:before {
+            left: auto;
+            right: -2rem;
+        }
+
+        &.#{$block}--line-after:after {
+            right: auto;
+            left: -2rem;
+            width: 2rem;
+        }
+
+        &.#{$block}--parent-approved {
             &.#{$block}--line-before:before {
-                left: auto;
-                right: -2rem;
-            }
-    
-            &.#{$block}--line-after:after {
-                right: auto;
-                left: -2rem;
                 width: 2rem;
             }
-    
-            &.#{$block}--parent-approved {
-                &.#{$block}--line-before:before {
-                    width: 2rem;
-                }
-            }
-    
-            .#{$block}__name.#{$block}__name--members-count {
-                direction: ltr;
-                text-align: right;
-            }
-    
-            .#{$block}__edit-controls {
-                .#{$block}__menu-button {
-                    left: .5rem;
-                    right: auto;
-                }
-    
-                fd-checkbox {
-                    right: .3rem;
-                    left: auto;
-                }
-            }
-    
-            .#{$block}__add--before {
-                right: -1.5rem;
-                left: auto;
-    
-                & + .#{$block}__drop-zone {
-                    right: -1.8rem;
-                }
-            }
-    
-            .#{$block}__add--after {
-                left: -2.5rem;
+        }
+
+        .#{$block}__name.#{$block}__name--members-count {
+            direction: ltr;
+            text-align: right;
+        }
+
+        .#{$block}__edit-controls {
+            .#{$block}__menu-button {
+                left: .5rem;
                 right: auto;
-    
+            }
+
+            fd-checkbox {
+                right: .3rem;
+                left: auto;
+            }
+        }
+
+        .#{$block}__add--before {
+            right: -1.5rem;
+            left: auto;
+
+            & + .#{$block}__drop-zone {
+                right: -1.8rem;
+            }
+        }
+
+        .#{$block}__add--after {
+            left: -2.5rem;
+            right: auto;
+
+            & + .#{$block}__drop-zone {
+                left: -2.8rem;
+                right: auto;
+            }
+        }
+
+        &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
+            .#{$block}__add--after {
+                left: -1.5rem;
+
                 & + .#{$block}__drop-zone {
-                    left: -2.8rem;
-                    right: auto;
+                    left: -1.8rem;
                 }
             }
-    
-            &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
-                .#{$block}__add--after {
-                    left: -1.5rem;
-    
-                    & + .#{$block}__drop-zone {
-                        left: -1.8rem;
-                    }
-                }
-    
-                &.#{$block}--blank:not(.#{$block}--blank-top):before {
-                    width: calc(100% + 5.7rem);
-                    left: -2rem;
-                }
-    
-            }
-    
-            &.#{$block}--blank.#{$block}--blank-top:before {
+
+            &.#{$block}--blank:not(.#{$block}--blank-top):before {
                 width: calc(100% + 5.7rem);
                 left: -2rem;
             }
+
+        }
+
+        &.#{$block}--blank.#{$block}--blank-top:before {
+            width: calc(100% + 5.7rem);
+            left: -2rem;
         }
     }
 

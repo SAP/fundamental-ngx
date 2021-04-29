@@ -16,7 +16,7 @@ import {
 import { MenuComponent, ObjectStatus } from '@fundamental-ngx/core';
 
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
-import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalNode, ApprovalStatus } from '../interfaces';
+import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
 import { isNodeApproved } from '../helpers';
 
 const NODE_STATUS_CLASS_MAP = {
@@ -53,6 +53,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** Number of days before due date when status changes to `warning` with text 'Due in X days'.
      *  Not used if 'checkDueDate' equals false */
     @Input() dueDateThreshold = 7;
+
+    /** Whether nodes in column in which current node placed are approved
+     *  Used to render appropriate vertical line after (dashed/solid)
+     */
+    @Input() allNodesInColumnApproved = false;
 
     /** Whether node is blank */
     @HostBinding('class.approval-flow-node--blank')
@@ -176,6 +181,16 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     get _isAnyDropZoneActive(): boolean {
         return this._activeDropZones.length > 0;
+    }
+
+    /** @hidden */
+    get _areAllParentsApproved(): boolean {
+        return this.meta.parents.every(parentNode => isNodeApproved(parentNode));
+    }
+
+    /** @hidden */
+    get _areAllNodesInColumnApproved(): boolean {
+        return this._areAllParentsApproved && this.allNodesInColumnApproved;
     }
 
     /** @hidden */
