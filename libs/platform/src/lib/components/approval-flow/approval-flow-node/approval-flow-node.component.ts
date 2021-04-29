@@ -200,6 +200,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
+    get _isRenderAddButtonAfter(): boolean {
+        return this.meta?.isLastInParallel || this.meta?.isLast;
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         this._checkNodeStatus();
     }

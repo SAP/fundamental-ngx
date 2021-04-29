@@ -638,8 +638,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     
                 metadata[node.id] = {
                     parents: parents,
-                    isRoot: !parents.length,
-                    isLast: !node.targets.length,
+                    isRoot: !parents.length && !node.blank && !node.space,
+                    isLast: !node.targets.length && !node.blank && !node.space,
                     parallelStart: node.targets.length > 1,
                     parallelEnd: parents.length > 1,
                     columnIndex: columnIndex,
@@ -663,10 +663,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
                 const isParentParallelStart = metadata[nodeMetadata.parents[0]?.id]?.parallelStart;
                 nodeMetadata.isFirstInParallel = isParentParallelStart;
-
-                nodeMetadata.renderAddButtonAfter = 
-                    nodeMetadata.canAddNodeAfter 
-                    && (isTargetParallelEnd || nodeMetadata.isLast);
 
                 const nextNotEmptyVNode = getNextNotEmptyNode(nodeIndex, column.nodes);
                 const nextNotEmptyVNodeMetadata = metadata[nextNotEmptyVNode?.id];

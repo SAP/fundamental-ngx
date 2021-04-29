@@ -31,7 +31,6 @@ export interface ApprovalGraphNodeMetadata {
     nextHNode?: ApprovalGraphNode;
     canAddNodeBefore?: boolean;
     canAddNodeAfter?: boolean;
-    renderAddButtonAfter?: boolean;
     canAddParallel?: boolean;
     renderVerticalLineBefore?: boolean;
     renderVerticalLineAfter?: boolean;

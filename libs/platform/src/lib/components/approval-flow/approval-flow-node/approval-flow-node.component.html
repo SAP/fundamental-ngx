@@ -1,9 +1,9 @@
 <div
-    *ngIf="meta?.renderVerticalLineBefore"
+    *ngIf="!meta?.isRoot && meta?.renderVerticalLineBefore"
     class="approval-flow-node__vertical-line-before"
     [class.approval-flow-node__vertical-line-before-solid]="_areAllParentsApproved"></div>
 <div
-    *ngIf="meta?.renderVerticalLineAfter"
+    *ngIf="!meta?.isLast && meta?.renderVerticalLineAfter"
     class="approval-flow-node__vertical-line-after"
     [class.approval-flow-node__vertical-line-after-solid]="_areAllNodesInColumnApproved"></div>
 
@@ -105,7 +105,7 @@
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!blank && !space && meta?.canAddNodeAfter && meta?.renderAddButtonAfter)">
+<ng-container *ngIf="isEdit && (!blank && !space && meta?.canAddNodeAfter && _isRenderAddButtonAfter)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 
