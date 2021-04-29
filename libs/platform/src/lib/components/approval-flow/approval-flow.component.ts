@@ -614,15 +614,17 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         const paths = getAllGraphPaths(rootNodes, nodes);
-        const [pathsWithBlankNodes, blankNodes] = fillPathsWithBlankNodes(paths);
+        const pathsWithBlankNodes = fillPathsWithBlankNodes(paths);
         const pathsWithSpaces = replaceDuplicatesWithSpacesInPaths(pathsWithBlankNodes);
         const notEmptyPaths = removeEmptyPaths(pathsWithSpaces);
         const columns = transformPathsIntoColumns(notEmptyPaths);
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
+        const onlyNotEmptyColumns = this._removeEmptyColumns(columnsWithoutEndSpaces);
 
-        this._approvalProcess.nodes.push(...blankNodes);
+        const allNodes = onlyNotEmptyColumns.reduce((acc, column) => acc.push(...column) && acc, []);
+        this._approvalProcess.nodes = allNodes;
 
-        return transformColumnsIntoGraph(columnsWithoutEndSpaces);
+        return transformColumnsIntoGraph(onlyNotEmptyColumns);
     }
 
     /** @hidden Build Approval Flow graph metadata */
@@ -870,6 +872,25 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         return this._selectedWatchers.length !== this._approvalProcess.watchers.length ||
             this._selectedWatchers.some(watcher => !this._approvalProcess.watchers.find(_watcher => _watcher === watcher));
     }
+
+    /** @hidden */
+    private _removeEmptyColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+        const processedColumns: ApprovalNode[][] = [];
+    
+        columns.forEach(column => {
+            const areAllNodesEmpty = column.every(node => node.blank || node.space);
+    
+            if (areAllNodesEmpty) {
+                column
+                    .filter(node => node.blank)
+                    .forEach(node => this._replaceTargetsInSourceNodes(node.id, node.targets))
+            } else {
+                processedColumns.push(column);
+            }
+        });
+    
+        return processedColumns;
+    }
 }
 
 function findRootNodes(nodes: ApprovalNode[]): ApprovalNode[] {
@@ -955,12 +976,8 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
     return paths;
 }
 
-function fillPathsWithBlankNodes(
-    paths: ApprovalGraphNode[][]
-): [ApprovalGraphNode[][], ApprovalGraphNode[]] {
+function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     const processedPaths: ApprovalGraphNode[][] = [];
-    const blankNodes: ApprovalGraphNode[] = [];
-
     const pathLengths = paths.map(path => path.length);
     const longestPathLength = Math.max(...pathLengths);
     
@@ -988,7 +1005,6 @@ function fillPathsWithBlankNodes(
 
                 emptyNodes[emptyNodes.length - 1].targets = [node.id];
                 path[nodeIndex - 1].targets = [emptyNodes[0].id];
-                blankNodes.push(...emptyNodes);
 
                 path.splice(nodeIndex, 0, ...emptyNodes);
                 processedPaths.push(path);
@@ -1005,7 +1021,7 @@ function fillPathsWithBlankNodes(
         });
     });
 
-    return [processedPaths, blankNodes];
+    return processedPaths;
 }
 
 function getBlankNodesAfterFromProcessedPaths(
