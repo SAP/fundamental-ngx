@@ -56,7 +56,7 @@ describe('Alert test suite', function() {
         })
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
         xit('should check example blocks visual regression', () => {
             alertPage.saveExampleBaselineScreenshot();

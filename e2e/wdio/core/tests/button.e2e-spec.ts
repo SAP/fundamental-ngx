@@ -151,7 +151,7 @@ describe('Button test suite:', function() {
         });
     });
 
-    describe('Check visual regression basic', function() {
+    xdescribe('Check visual regression basic', function() {
 
         it('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();

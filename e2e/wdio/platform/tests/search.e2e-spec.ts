@@ -153,7 +153,7 @@ describe('Search field', function() {
         searchPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             searchPage.saveExampleBaselineScreenshot();
             expect(searchPage.compareWithBaseline()).toBeLessThan(5);

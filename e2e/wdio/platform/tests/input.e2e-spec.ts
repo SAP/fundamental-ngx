@@ -183,7 +183,7 @@ describe('Input should ', function() {
         inputPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputPage.saveExampleBaselineScreenshot();
             expect(inputPage.compareWithBaseline()).toBeLessThan(3);

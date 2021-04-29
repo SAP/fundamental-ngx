@@ -174,7 +174,7 @@ describe('Step input test suite', function() {
         stepInputPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             stepInputPage.saveExampleBaselineScreenshot();
             expect(stepInputPage.compareWithBaseline()).toBeLessThan(5);

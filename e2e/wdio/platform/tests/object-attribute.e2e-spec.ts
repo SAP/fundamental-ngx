@@ -35,7 +35,7 @@ describe('object attribute test suite', function() {
         objectAttributePage.checkRtlSwitch();
     });
 
-    it('check visual regression', () => {
+    xit('check visual regression', () => {
         refreshPage();
         waitForElDisplayed(standaloneTextObject);
         objectAttributePage.saveExampleBaselineScreenshot();

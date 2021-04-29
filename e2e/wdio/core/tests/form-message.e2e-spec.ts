@@ -78,7 +78,7 @@ describe('Form Message test suite:', function() {
         expect(getText(messageInformation)).toBe(eventMessageTextArea);
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
             formMessagePage.saveExampleBaselineScreenshot();
