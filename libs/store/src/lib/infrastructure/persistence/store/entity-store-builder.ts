@@ -138,7 +138,9 @@ export class DefaultQueryService<TModel> extends QueryService<TModel> {
 
     getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
         return this.service.getWithQuery(query as any).pipe(
-            map(dto => instanceForType(this.entity, dto))
+            map((data: TModel[]) => {
+                return data.map(dto => instanceForType(this.entity, dto));
+            })
         );
     }
 
