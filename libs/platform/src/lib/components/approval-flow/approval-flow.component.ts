@@ -315,22 +315,22 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const { nodeIndex, columnIndex } = this._metaMap[node.id];
         const isTab = KeyUtil.isKeyCode(event, TAB);
         const isShift = event.shiftKey;
+        const isTabMoveForwardPossible = !isShift && !lastNode && !lastColumn;
+        const isTabMmoveBackwardPossible = isShift && !firstNode && !firstColumn;
 
-        if (
-            isTab &&
-            ((isShift && firstNode && firstColumn) || (!isShift && lastColumn && lastNode))
-        ) {
+        if (isTab && !isTabMoveForwardPossible && !isTabMmoveBackwardPossible) {
             return;
         }
 
         if (isTab) {
-            const nodesSequence = this._graph.reduce((result: ApprovalGraphNode[], col: ApprovalGraphColumn) => {
-                return result.concat(col.nodes);
-            }, []).filter(n => !n.blank);
+            const nodesSequence = this._graph
+                .reduce((result, col) => result.concat(col.nodes), [])
+                .filter(n => !n.blank && !n.space)
             const currentNodeIndex = nodesSequence.findIndex(n => n === node);
             const diff = isShift ? -1 : 1;
             const nextNode = nodesSequence[currentNodeIndex + diff];
-            if (currentNodeIndex > -1 && nextNode) {
+
+            if (nextNode) {
                 event.preventDefault();
                 this._focusNode(nextNode, 1);
                 return;
@@ -608,7 +608,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const onlyNotEmptyColumns = this._removeEmptyColumns(columnsWithoutEndSpaces);
 
         const allNodes = onlyNotEmptyColumns
-            .reduce((acc, column) => acc.push(...column) && acc, [])
+            .reduce((acc, column) => acc.concat(column), [])
             .filter(node => !node.space);
         this._approvalProcess.nodes = allNodes;
 
@@ -708,6 +708,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _focusNode(node: ApprovalGraphNode, step: number): void {
         const nodeToFocus = this._nodeComponents.find(comp => comp.node === node);
+
         if (!nodeToFocus) {
             return;
         }
@@ -799,33 +800,47 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    private _getNextHorizontalNode = (_ni: number, _ci: number, direction: 'left' | 'right', stepSize: number = 1) => {
+    private _getNextHorizontalNode = (
+        nodeIndex: number,
+        columnIndex: number,
+        direction: 'left' | 'right',
+        stepSize = 1
+    ) => {
         const indexDiff = (direction === 'right' ? 1 : -1);
-        const _column = this._graph[_ci + indexDiff];
-        if (!_column) {
+        const nextColumn = this._graph[columnIndex + indexDiff];
+        const nextNode = nextColumn.nodes[nodeIndex];
+
+        if (!nextNode) {
             return { nextNode: undefined, stepSize: stepSize };
         }
 
-        const _nextNode = _column.nodes[_ni] || _column.nodes[0];
-        if (_nextNode.blank) {
-            return this._getNextHorizontalNode(_ni, _ci + indexDiff, direction, stepSize + 1);
+        if (nextNode.blank || nextNode.space) {
+            return this._getNextHorizontalNode(nodeIndex, columnIndex + indexDiff, direction, stepSize + 1);
         }
 
-        return { nextNode: _nextNode, stepSize: stepSize };
+        return { nextNode: nextNode, stepSize: stepSize };
     };
 
     /** @hidden */
-    private _getNextVerticalNode = (_ni: number, _ci: number, direction: 'up' | 'down', stepSize: number = 1) => {
+    private _getNextVerticalNode = (
+        nodeIndex: number,
+        columnIndex: number,
+        direction: 'up' | 'down',
+        stepSize = 1
+    ) => {
         const indexDiff = (direction === 'down' ? 1 : -1);
-        const _column = this._graph[_ci];
-        const _nextColumn = this._graph[_ci + 1];
-        const _nextNode = _column.nodes[_ni + indexDiff] || _nextColumn?.nodes[_ni + 1];
+        const currColumn = this._graph[columnIndex];
+        const nextNode = currColumn.nodes[nodeIndex + indexDiff];
+
+        if (!nextNode) {
+            return { nextNode: undefined, stepSize: stepSize };
+        }
         
-        if (_nextNode && _nextNode.blank) {
-            return this._getNextVerticalNode(_ni, _ci + indexDiff, direction, stepSize + 1);
+        if (nextNode.blank || nextNode.space) {
+            return this._getNextVerticalNode(nodeIndex + indexDiff, columnIndex, direction, stepSize + 1);
         }
 
-        return { nextNode: _nextNode, stepSize: stepSize };
+        return { nextNode: nextNode, stepSize: stepSize };
     };
 
     /** @hidden */
