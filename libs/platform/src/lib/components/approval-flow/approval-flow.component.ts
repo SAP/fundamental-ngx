@@ -613,7 +613,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
 
         /* Some flags can be calculated only at the 2nd run, if all nodes already have metadata */
-        graph.forEach((column, columnIndex) => {
+        graph.forEach(column => {
             column.nodes.forEach((node, nodeIndex) => {
                 const nodeMetadata = metadata[node.id];
 
@@ -623,24 +623,40 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 const isParentParallelStart = metadata[nodeMetadata.parents[0]?.id]?.parallelStart;
                 nodeMetadata.isFirstInParallel = isParentParallelStart;
 
-                const nextNotEmptyVNode = getNextNotEmptyNode(nodeIndex, column.nodes);
-                const nextNotEmptyVNodeMetadata = metadata[nextNotEmptyVNode?.id];
+                const graphNextColumn = graph[column.index + 1];
+                const graphPrevColumn = graph[column.index - 1];
 
-                const prevVNode = column.nodes[nodeIndex - 1];
-                const prevVNodeMetadata = metadata[prevVNode?.id];
-                const nextVNode = column.nodes[nodeIndex + 1];
+                const prevHNode = graphPrevColumn?.nodes[nodeIndex];
+                const prevHNodeMetadata = metadata[prevHNode?.id];
+                const nextHNode = graphNextColumn?.nodes[nodeIndex]
+                const nextHNodeMetadata = metadata[nextHNode?.id];
+                
+                const prevNode = graphPrevColumn?.nodes[nodeIndex - 1];
+                const nextNode = graphNextColumn?.nodes[nodeIndex - 1];
 
-                const isNextVNodeHasSameTarget = node.targets.length && nextNotEmptyVNode?.targets[0] === node.targets[0];
-                const renderVerticalLineAfter = 
-                    isNextVNodeHasSameTarget
-                    || ((nextVNode?.blank || nextVNode?.space) && prevVNodeMetadata?.renderVerticalLineAfter);
-                nodeMetadata.renderVerticalLineAfter = Boolean(renderVerticalLineAfter);
+                nodeMetadata.renderVerticalLineBefore = 
+                    graphPrevColumn
+                    && nodeIndex > 0
+                    && (
+                        !prevHNode
+                        || prevHNode.space
+                        || (
+                            prevHNodeMetadata?.parallelStart
+                            && nextNode?.targets.includes(node.id)
+                            )
+                    );
 
-                const isNextVNodeHasSameParent = nextNotEmptyVNodeMetadata?.parents[0]?.id === nodeMetadata.parents[0]?.id;
-                const renderVerticalLineBefore = 
-                    isNextVNodeHasSameParent 
-                    || ((node?.blank || node?.space) && prevVNodeMetadata?.renderVerticalLineBefore);
-                nodeMetadata.renderVerticalLineBefore = Boolean(renderVerticalLineBefore);
+                nodeMetadata.renderVerticalLineAfter = 
+                    graphNextColumn
+                    && nodeIndex > 0
+                    && (
+                        !nextHNode
+                        || nextHNode.space
+                        || (
+                            nextHNodeMetadata?.parallelEnd
+                            && node.targets.includes(prevNode?.id)
+                        )
+                    );
             });
         });
 

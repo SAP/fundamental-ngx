@@ -22,7 +22,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         .#{$block}__vertical-line-before:before,
         .#{$block}__vertical-line-after:after {
-            top: calc(#{$node-height--edit-mode} / 2);
+            top: calc(-1 * (#{$node-height--edit-mode} / 2 + #{$node-margin-bottom}));
             height: calc(#{$node-height--edit-mode} + #{$node-margin-bottom});
         }
     }
@@ -31,7 +31,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     .#{$block}__vertical-line-after:after {
         content: '';
         position: absolute;
-        top: calc(#{$node-height} / 2);
+        top: calc(-1 * (#{$node-height} / 2 + #{$node-margin-bottom}));
         height: calc(#{$node-height} + #{$node-margin-bottom});
     }
 
