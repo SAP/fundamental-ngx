@@ -137,7 +137,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
-    ) {}
+    ) { }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -181,11 +181,8 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** @hidden */
     private _listenToCalendarLabelsChanges(): void {
 
-        this._dateTimeAdapter.getMonthNames$('long').pipe(
-            takeUntil(this._onDestroy$),
-        ).subscribe(() => {
-            this._calculateSelectYearLabel();
-            this._calculateSelectAggregatedYearLabel();
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._calculateLabels();
         });
 
         this._calendarI18nLabels.labelsChange.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
@@ -213,6 +210,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
         this._calculateSelectYearLabel();
         this._calculateSelectAggregatedYearLabel();
+        this._changeDetRef.markForCheck();
     }
 
     /** @hidden */
