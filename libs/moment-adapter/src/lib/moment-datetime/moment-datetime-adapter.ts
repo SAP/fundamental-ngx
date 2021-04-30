@@ -43,8 +43,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     }
 
     setLocale(locale: string): void {
-        super.setLocale(locale);
-
         this._momentLocaleData = moment.localeData(locale);
         this._localeData = {
             firstDayOfWeek: this._momentLocaleData.firstDayOfWeek(),
@@ -57,6 +55,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         };
 
         this._currentLocaleData.next(this._localeData);
+        super.setLocale(locale);
     }
 
     getYear(date: Moment): number {
