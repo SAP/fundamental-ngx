@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.13...v0.29.1-rc.14) (2021-04-30)
+
+### [0.29.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.12...v0.29.1-rc.13) (2021-04-30)
+
+### [0.29.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.11...v0.29.1-rc.12) (2021-04-30)
+
+### [0.29.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.10...v0.29.1-rc.11) (2021-04-29)
+
+### [0.29.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.9...v0.29.1-rc.10) (2021-04-29)
+
+### [0.29.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.8...v0.29.1-rc.9) (2021-04-29)
+
+### [0.29.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.7...v0.29.1-rc.8) (2021-04-29)
+
+### [0.29.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.6...v0.29.1-rc.7) (2021-04-29)
+
+### [0.29.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.5...v0.29.1-rc.6) (2021-04-29)
+
 ### [0.29.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.4...v0.29.1-rc.5) (2021-04-28)
 
 ### [0.29.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.3...v0.29.1-rc.4) (2021-04-26)
