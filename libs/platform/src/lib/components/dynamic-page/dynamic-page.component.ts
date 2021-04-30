@@ -127,7 +127,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * @hidden
      * On Scroll Content Subject
      */
-    private _onScrollContentSubject: Subject<Event> = new Subject();
+    _onScrollContentSubject: Subject<Event> = new Subject();
 
     /**
      * @hidden
