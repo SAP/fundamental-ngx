@@ -621,7 +621,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
         const onlyNotEmptyColumns = this._removeEmptyColumns(columnsWithoutEndSpaces);
 
-        const allNodes = onlyNotEmptyColumns.reduce((acc, column) => acc.push(...column) && acc, []);
+        const allNodes = onlyNotEmptyColumns
+            .reduce((acc, column) => acc.push(...column) && acc, [])
+            .filter(node => !node.space);
         this._approvalProcess.nodes = allNodes;
 
         return transformColumnsIntoGraph(onlyNotEmptyColumns);
@@ -988,17 +990,19 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
         }
 
         path.forEach((node, nodeIndex) => {
-            const nodeIndexes = paths.map(_path => _path.indexOf(node));
-            const mostFarPathNodeIndex = Math.max(...nodeIndexes);
-            let emptyNodes: ApprovalGraphNode[] = [];
-
-            emptyNodes = getBlankNodesAfterFromProcessedPaths(node, processedPaths);
+            let emptyNodes = getBlankNodesAfterFromProcessedPaths(node, processedPaths);
             
             if (emptyNodes.length) {
-                path.splice(nodeIndex, 0, ...emptyNodes);
-                processedPaths.push(path);
+                processedPaths.push([
+                    ...path.slice(0, nodeIndex),
+                    ...emptyNodes,
+                    ...path.slice(nodeIndex)
+                ]);
                 return;
             }
+
+            const nodeIndexes = paths.map(_path => _path.indexOf(node));
+            const mostFarPathNodeIndex = Math.max(...nodeIndexes);
 
             if (nodeIndex < mostFarPathNodeIndex) {
                 emptyNodes = getEmptyNodes(mostFarPathNodeIndex - nodeIndex, path[nodeIndex - 1].status);
@@ -1006,16 +1010,21 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
                 emptyNodes[emptyNodes.length - 1].targets = [node.id];
                 path[nodeIndex - 1].targets = [emptyNodes[0].id];
 
-                path.splice(nodeIndex, 0, ...emptyNodes);
-                processedPaths.push(path);
+                processedPaths.push([
+                    ...path.slice(0, nodeIndex),
+                    ...emptyNodes,
+                    ...path.slice(nodeIndex)
+                ]);
                 return;
             }
 
             if (nodeIndex === mostFarPathNodeIndex && nodeIndex === path.length - 1) {
                 emptyNodes = getEmptyNodes(longestPathLength - path.length, 'not started', 'space');
 
-                path.splice(nodeIndex + 1, 0, ...emptyNodes);
-                processedPaths.push(path);
+                processedPaths.push([
+                    ...path.slice(0, nodeIndex + 1),
+                    ...emptyNodes
+                ]);
                 return;
             }
         });

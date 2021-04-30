@@ -188,6 +188,26 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         }
     }
 
+    &.#{$block}--next-blank {
+        .#{$block}__add--after {
+            right: calc(-4rem - #{$node-width} / 2);
+
+            & + .#{$block}__drop-zone {
+                left: calc(100% + 4rem);
+            }
+        }
+    }
+
+    &.cdk-drag-dragging {
+        &:before,
+        &:after,
+        .#{$block}__add,
+        .#{$block}__carousel-start-marker,
+        .#{$block}__carousel-end-marker {
+            visibility: hidden;
+        }
+    }
+
     &[dir='rtl'] {
         .#{$block}__avatar {
             margin-right: 0;
@@ -286,15 +306,15 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
                 }
             }
         }
-    }
 
-    &.cdk-drag-dragging {
-        &:before,
-        &:after,
-        .#{$block}__add,
-        .#{$block}__carousel-start-marker,
-        .#{$block}__carousel-end-marker {
-            visibility: hidden;
+        &.#{$block}--next-blank {
+            .#{$block}__add--after {
+                left: calc(-4rem - #{$node-width} / 2);
+    
+                & + .#{$block}__drop-zone {
+                    right: calc(100% + 4rem);
+                }
+            }
         }
     }
 }
@@ -429,7 +449,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
     &.#{$block}__drop-zone--blank {
         width: 100%;
-        left: 0;
         top: 0;
     }
 

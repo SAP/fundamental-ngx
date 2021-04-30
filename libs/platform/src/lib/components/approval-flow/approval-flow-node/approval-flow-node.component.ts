@@ -76,6 +76,11 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @HostBinding('class.approval-flow-node--edit-mode')
     isEdit: boolean;
 
+    /** Whether the node after is blank */
+    @Input()
+    @HostBinding('class.approval-flow-node--next-blank')
+    isNextNodeBlank: boolean;
+
     /** Whether node element has connection line before the node element */
     @HostBinding('class.approval-flow-node--line-before')
     get renderLineBefore(): boolean {
@@ -201,7 +206,8 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     /** @hidden */
     get _isRenderAddButtonAfter(): boolean {
-        return this.meta?.isLastInParallel || this.meta?.isLast;
+        return this.meta?.canAddNodeAfter
+            && (this.meta?.isLastInParallel || this.meta?.isLast || this.isNextNodeBlank);
     }
 
     /** @hidden */

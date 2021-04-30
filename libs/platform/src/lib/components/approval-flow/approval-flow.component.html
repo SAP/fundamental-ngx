@@ -109,6 +109,7 @@
                             [node]="node"
                             [meta]="_metaMap[node.id]"
                             [isEdit]="_isEditMode"
+                            [isNextNodeBlank]="!node.blank && _graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                             [checkDueDate]="checkDueDate"
                             [dueDateThreshold]="dueDateThreshold"
                             [renderArrow]="columnIndex > 0"

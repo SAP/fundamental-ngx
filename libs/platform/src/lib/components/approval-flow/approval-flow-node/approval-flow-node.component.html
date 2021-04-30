@@ -97,15 +97,11 @@
     </div>
 </ng-container>
 
-<ng-container *ngIf="isEdit && blank">
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'blank' }"></ng-container>
-</ng-container>
-
 <ng-container *ngIf="isEdit && (!blank && !space && meta?.canAddNodeBefore)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!blank && !space && meta?.canAddNodeAfter && _isRenderAddButtonAfter)">
+<ng-container *ngIf="isEdit && (!blank && !space && _isRenderAddButtonAfter)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 
@@ -128,8 +124,8 @@
         [placement]="placement"
         class="approval-flow-node__drop-zone"
         [class.approval-flow-node__drop-zone--active]="dropZone.active"
-        [class.approval-flow-node__drop-zone--blank]="blank"
-        [class.approval-flow-node__drop-zone--partial]="!blank"
+        [class.approval-flow-node__drop-zone--blank]="isNextNodeBlank"
+        [class.approval-flow-node__drop-zone--partial]="!blank && !isNextNodeBlank"
     ></div>
 </ng-template>
 
