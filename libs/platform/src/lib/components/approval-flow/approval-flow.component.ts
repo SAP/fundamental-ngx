@@ -420,12 +420,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden Open add node dialog */
-    _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget | 'blank'): void {
+    _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
         let showNodeTypeSelect = false;
-        let sourceNode: ApprovalGraphNode;
 
         if (type !== 'empty') {
-            sourceNode = source.blank ? this._getPreviousNotBlankNode(source) : source;
             showNodeTypeSelect = type === 'before';
         }
 
@@ -466,19 +464,19 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             addedNode.description = addedNode.description || addedNode.approvers[0].description;
             
             if (type !== 'empty') {
-                addedNode.targets = sourceNode.targets;
+                addedNode.targets = source.targets;
 
                 if (nodeType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
                     if (type === 'before') {
-                        addedNode.targets = [sourceNode.id];
-                        this._replaceTargetsInSourceNodes(sourceNode.id, [addedNode.id]);
+                        addedNode.targets = [source.id];
+                        this._replaceTargetsInSourceNodes(source.id, [addedNode.id]);
                     } else {
-                        sourceNode.targets = [addedNode.id];
+                        source.targets = [addedNode.id];
                     }
                 }
 
                 if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
-                    const parents = this._metaMap[sourceNode.id].parents;
+                    const parents = this._metaMap[source.id].parents;
                     parents.forEach(parentNode => parentNode.targets.push(addedNode.id));
                 }
             }
@@ -555,9 +553,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             
         this._nodeComponents
             .filter(n => n.node !== node && Boolean(n.dropZones.length))
-            .forEach(n => {
-                n._checkIfNodeDraggedInDropZone(draggedNodeDimensions);
-            });
+            .forEach(n => n._checkIfNodeDraggedInDropZone(draggedNodeDimensions));
     }
 
     /** @hidden Node drop handler */
@@ -571,28 +567,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         const placement = dropTarget._activeDropZones[0].placement;
+
         this._nodeComponents.forEach(n => n._deactivateDropZones());
-        const nodeMeta = this._metaMap[nodeToDrop.id];
-        const targetNode = dropTarget.node.blank ? this._getPreviousNotBlankNode(dropTarget.node) : dropTarget.node;
-
-        if (placement === 'after' && nodeMeta.prevHNode?.id === targetNode.id) {
-            return;
-        }
-
-        if (placement === 'blank' && targetNode.id === nodeToDrop.id) {
-            return;
-        }
-
         this._deleteNode(nodeToDrop);
 
-        if (placement === 'blank' || placement === 'after') {
-            nodeToDrop.targets = [...targetNode.targets];
-            targetNode.targets = [nodeToDrop.id];
+        if (placement === 'after') {
+            nodeToDrop.targets = [...dropTarget.node.targets];
+            dropTarget.node.targets = [nodeToDrop.id];
         }
 
         if (placement === 'before') {
-            this._replaceTargetsInSourceNodes(targetNode.id, [nodeToDrop.id]);
-            nodeToDrop.targets = [targetNode.id];
+            this._replaceTargetsInSourceNodes(dropTarget.node.id, [nodeToDrop.id]);
+            nodeToDrop.targets = [dropTarget.node.id];
         }
 
         this._approvalProcess.nodes.push(nodeToDrop);
@@ -648,8 +634,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     parallelEnd: parents.length > 1,
                     columnIndex: columnIndex,
                     nodeIndex: nodeIndex,
-                    prevHNode: graph[columnIndex - 1]?.nodes[nodeIndex],
-                    nextHNode: graph[columnIndex + 1]?.nodes[nodeIndex],
                     canAddNodeBefore: node.status === 'not started' && !allNodeParentsApproved,
                     canAddNodeAfter: isNodeNotApproved,
                     canAddParallel: isNodeNotApproved,
@@ -812,12 +796,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canAddAfter = false;
         this._canAddBefore = false;
         this._canAddParallel = false;
-    }
-
-    /** @hidden */
-    private _getPreviousNotBlankNode(source: ApprovalNode): ApprovalNode {
-        const prev = this._metaMap[source.id].prevHNode;
-        return prev.blank ? this._getPreviousNotBlankNode(prev) : prev;
     }
 
     /** @hidden */
@@ -993,11 +971,7 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
             let emptyNodes = getBlankNodesAfterFromProcessedPaths(node, processedPaths);
             
             if (emptyNodes.length) {
-                processedPaths.push([
-                    ...path.slice(0, nodeIndex),
-                    ...emptyNodes,
-                    ...path.slice(nodeIndex)
-                ]);
+                path.splice(nodeIndex, 0, ...emptyNodes);
                 return;
             }
 
@@ -1010,24 +984,19 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
                 emptyNodes[emptyNodes.length - 1].targets = [node.id];
                 path[nodeIndex - 1].targets = [emptyNodes[0].id];
 
-                processedPaths.push([
-                    ...path.slice(0, nodeIndex),
-                    ...emptyNodes,
-                    ...path.slice(nodeIndex)
-                ]);
+                path.splice(nodeIndex, 0, ...emptyNodes);
                 return;
             }
 
             if (nodeIndex === mostFarPathNodeIndex && nodeIndex === path.length - 1) {
                 emptyNodes = getEmptyNodes(longestPathLength - path.length, 'not started', 'space');
 
-                processedPaths.push([
-                    ...path.slice(0, nodeIndex + 1),
-                    ...emptyNodes
-                ]);
+                path.splice(nodeIndex + 1, 0, ...emptyNodes);
                 return;
             }
         });
+
+        processedPaths.push(path);
     });
 
     return processedPaths;

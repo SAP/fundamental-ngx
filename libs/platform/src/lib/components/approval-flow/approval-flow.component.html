@@ -103,7 +103,7 @@
                         *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
                         <fdp-approval-flow-node
                             cdkDrag
-                            [cdkDragDisabled]="!_isEditMode || node.blank || node.space || node.status !== 'not started' || (_metaMap[node.id].isLast && _metaMap[node.id].parallelEnd)"
+                            [cdkDragDisabled]="!_isEditMode || node.blank || node.space || node.status !== 'not started'"
                             [attr.dir]="_dir"
                             [attr.tabindex]="node.blank || node.space ? -1 : 0"
                             [node]="node"

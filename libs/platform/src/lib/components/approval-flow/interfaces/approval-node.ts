@@ -27,8 +27,6 @@ export interface ApprovalGraphNodeMetadata {
     isFirstInParallel?: boolean;
     columnIndex?: number;
     nodeIndex?: number;
-    prevHNode?: ApprovalGraphNode;
-    nextHNode?: ApprovalGraphNode;
     canAddNodeBefore?: boolean;
     canAddNodeAfter?: boolean;
     canAddParallel?: boolean;
