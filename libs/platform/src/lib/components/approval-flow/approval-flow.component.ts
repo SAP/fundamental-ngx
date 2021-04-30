@@ -18,7 +18,7 @@ import {
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 
-import { forkJoin, fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, take } from 'rxjs/operators';
 import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundamental-ngx/core';
 
@@ -33,7 +33,6 @@ import {
     ApprovalNode,
     ApprovalProcess,
     ApprovalStatus,
-    ApprovalTeam,
     ApprovalUser
 } from './interfaces';
 
@@ -145,9 +144,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /**  @hidden */
     _canAddParallel = false;
-
-    /**  @hidden */
-    _teams: ApprovalTeam[] = [];
 
     /**  @hidden */
     _usersForWatchersList: ApprovalUser[] = [];
@@ -363,13 +359,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Fetch all necessary data and enter edit mode */
     _enterEditMode(): void {
-        this._editModeInitSub = forkJoin([
-            this.dataSource.fetchWatchers().pipe(take(1)),
-            this.dataSource.fetchTeams().pipe(take(1))
-        ])
-            .subscribe(([users, teams]) => {
-                this._usersForWatchersList = users;
-                this._teams = teams;
+        this._editModeInitSub = this.dataSource.fetchWatchers().pipe(take(1))
+            .subscribe(watchers => {
+                this._usersForWatchersList = watchers;
                 this._selectedWatchers = [...this._approvalProcess.watchers];
                 this._isEditMode = true;
                 this._initialApprovalProcess = cloneApprovalProcess(this._approvalProcess);
@@ -421,17 +413,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Open add node dialog */
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
-        let showNodeTypeSelect = false;
-
-        if (type !== 'empty') {
-            showNodeTypeSelect = type === 'before';
-        }
+        const showNodeTypeSelect = type !== 'empty' && type === 'before';
 
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
                 nodeTarget: type,
                 showNodeTypeSelect: showNodeTypeSelect,
-                teams: this._teams,
                 node: Object.assign({}, getBlankNode(), { blank: false }),
                 ...this._defaultDialogOptions
             }
@@ -439,11 +426,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         
         dialog.afterClosed.subscribe((data: { node: ApprovalNode, nodeType: APPROVAL_FLOW_NODE_TYPES }) => {
             if (!data) {
-                // TODO: Remove side effect
-                if (type === 'empty') {
-                    this._exitEditMode();
-                }
-
                 return;
             }
 
@@ -454,14 +436,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
             this._cacheCurrentApprovalProcess();
 
-            if (addedNode.approvalTeamId) {
-                const team = this._teams.find(t => t.id === addedNode.approvalTeamId);
-                
-                addedNode.description = team.name;
-            }
-
             addedNode.id = `tempId${(Math.random() * 1000).toFixed()}`;
-            addedNode.description = addedNode.description || addedNode.approvers[0].description;
             
             if (type !== 'empty') {
                 addedNode.targets = source.targets;
@@ -479,6 +454,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     const parents = this._metaMap[source.id].parents;
                     parents.forEach(parentNode => parentNode.targets.push(addedNode.id));
                 }
+            } else {
+                this._enterEditMode();
             }
 
             this._showMessage(addedNode.approvalTeamId ? 'teamAddSuccess' : 'approverAddSuccess');
@@ -491,11 +468,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _addNodeFromToolbar(type: ApprovalFlowNodeTarget): void {
         const node = this._nodeComponents.length ? this._nodeComponents.filter(n => n._isSelected)[0]?.node : null;
 
-        if (type === 'empty') {
-            // TODO: Remove side effect
-            this._enterEditMode();
-        }
-
         this._addNode(node, type);
     }
 
@@ -505,7 +477,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             data: {
                 isEdit: true,
                 node: Object.assign({}, node),
-                teams: this._teams,
                 ...this._defaultDialogOptions
             }
         });

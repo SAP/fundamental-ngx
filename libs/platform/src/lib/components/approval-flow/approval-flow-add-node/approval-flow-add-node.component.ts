@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 
 import { DialogRef, FdDate } from '@fundamental-ngx/core';
-import { Observable, Subscription } from 'rxjs';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import {
@@ -20,7 +20,6 @@ export interface AddNodeDialogRefData {
     isEdit?: boolean;
     showNodeTypeSelect?: boolean;
     node?: ApprovalNode;
-    teams?: ApprovalTeam[];
     nodeTarget?: ApprovalFlowNodeTarget;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
@@ -79,6 +78,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _approvers: ApprovalUser[] = [];
 
     /** @hidden */
+    _teams: ApprovalTeam[] = [];
+
+    /** @hidden */
     _filteredApprovers: ApprovalUser[] = [];
 
     /** @hidden */
@@ -118,7 +120,10 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _trackByFn = trackByFn;
 
     /** @hidden */
-    private viewChangeSub: Subscription;
+    private _viewChangeSub: Subscription;
+
+    /** @hidden */
+    private _dataSourceSub: Subscription;
 
     constructor(
         public dialogRef: DialogRef,
@@ -150,31 +155,36 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._setFilteredTeams(this._data.teams || []);
-        this._data.approvalFlowDataSource.fetchApprovers()
-            .pipe(take(1))
-            .subscribe(approvers => {
+        this._dataSourceSub = forkJoin([
+            this._data.approvalFlowDataSource.fetchTeams().pipe(take(1)),
+            this._data.approvalFlowDataSource.fetchApprovers().pipe(take(1))
+        ])
+            .subscribe(([teams, approvers]) => {
+                this._teams = teams;
+                this._setFilteredTeams(teams || []);
+
                 this._approvers = approvers;
-                this._setFilteredApprovers(approvers);
+                this._setFilteredApprovers(approvers || []);
+
+                if (this._data.isEdit) {
+                    this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
+                    this._selectedApprovers = [...this._data.node.approvers];
+        
+                    if (this._data.node.approvalTeamId) {
+                        this.viewService.selectTeam(this._teams.find(t => t.id === this._data.node.approvalTeamId));
+
+                        this._selectedTeam = this.viewService.team;
+                        this._selectedTeamArray = [this.viewService.team];
+                        this._approverType = this._data.node.isEveryoneApprovalNeeded
+                            ? this._approverTypes.EVERYONE
+                            : this._approverTypes.ANYONE;
+                    }
+        
+                    this._cdr.detectChanges();
+                }
             });
 
-        if (this._data.isEdit) {
-            this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
-            this._selectedApprovers = [...this._data.node.approvers];
-
-            if (this._data.node.approvalTeamId) {
-                this.viewService.selectTeam(this._data.teams.find(t => t.id === this._data.node.approvalTeamId));
-                this._selectedTeam = this.viewService.team;
-                this._selectedTeamArray = [this.viewService.team];
-                this._approverType = this._data.node.isEveryoneApprovalNeeded
-                    ? this._approverTypes.EVERYONE
-                    : this._approverTypes.ANYONE;
-            }
-
-            this._cdr.detectChanges();
-        }
-
-        this.viewChangeSub = this.viewService.onViewChange.subscribe(() => {
+        this._viewChangeSub = this.viewService.onViewChange.subscribe(() => {
             this._onSearchStringChange('');
             this._cdr.detectChanges();
         });
@@ -193,7 +203,8 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.viewChangeSub.unsubscribe();
+        this._viewChangeSub.unsubscribe();
+        this._dataSourceSub.unsubscribe();
     }
 
     /** @hidden */
@@ -230,6 +241,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _confirmSelectedApprovers(): void {
         this._data.node.approvers = this._selectedApprovers;
         this._data.node.variousTeams = this._isUsersFromVariousTeams(this._data.node.approvers);
+        this._data.node.description = this._data.node.variousTeams ? '' : this._selectedApprovers[0]?.description;
 
         delete this._data.node.approvalTeamId;
         delete this._data.node.isEveryoneApprovalNeeded;
@@ -291,7 +303,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _exitTeamMembersMode(): void {
         this.viewService.setCurrentView(VIEW_MODES.SELECT_TEAM);
         this.viewService.resetTeam();
-        this._setFilteredTeams(this._data.teams || []);
+        this._setFilteredTeams(this._teams || []);
 
         this._selectedTeamMembers = [];
 
@@ -315,7 +327,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         
         if (!searchString) {
             this._setFilteredApprovers(this._approvers);
-            this._setFilteredTeams(this._data.teams || []);
+            this._setFilteredTeams(this._teams || []);
             this._setFilteredTeamMembers(this._selectedTeamMembers);
             return;
         }
@@ -325,7 +337,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         }
 
         if (this.viewService.isSelectTeamMode) {
-            this._setFilteredTeams(this._data.teams.filter(team => filterByName(team, searchString)));
+            this._setFilteredTeams(this._teams.filter(team => filterByName(team, searchString)));
         }
 
         if (this.viewService.isTeamMembersMode) {
@@ -358,12 +370,12 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     private _isUsersFromVariousTeams(users: ApprovalUser[]): boolean {
-        if (!this._data.teams?.length) {
+        if (!this._teams?.length) {
             return false;
         }
 
         const teams: string[] = users.reduce((_teams, user) => {
-            const userTeam = this._data.teams.find(team => team.members.includes(user.id));
+            const userTeam = this._teams.find(team => team.members.includes(user.id));
 
             if (userTeam && !_teams.includes(userTeam.id)) {
                 _teams.push(userTeam.id);
