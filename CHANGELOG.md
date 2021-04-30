@@ -2,6 +2,73 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.13...v0.29.1-rc.14) (2021-04-30)
+
+### [0.29.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.12...v0.29.1-rc.13) (2021-04-30)
+
+### [0.29.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.11...v0.29.1-rc.12) (2021-04-30)
+
+### [0.29.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.10...v0.29.1-rc.11) (2021-04-29)
+
+### [0.29.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.9...v0.29.1-rc.10) (2021-04-29)
+
+### [0.29.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.8...v0.29.1-rc.9) (2021-04-29)
+
+### [0.29.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.7...v0.29.1-rc.8) (2021-04-29)
+
+### [0.29.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.6...v0.29.1-rc.7) (2021-04-29)
+
+### [0.29.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.5...v0.29.1-rc.6) (2021-04-29)
+
+### [0.29.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.4...v0.29.1-rc.5) (2021-04-28)
+
+### [0.29.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.3...v0.29.1-rc.4) (2021-04-26)
+
+
+### Features
+
+* (Platform) introduce new component Page footer ([#4936](https://github.com/SAP/fundamental-ngx/issues/4936)) ([0726e74](https://github.com/SAP/fundamental-ngx/commit/0726e747c3fcc52ce5a8aea54a39e3f6039c67af))
+
+### [0.29.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.2...v0.29.1-rc.3) (2021-04-26)
+
+### [0.29.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.1...v0.29.1-rc.2) (2021-04-25)
+
+### [0.29.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.0...v0.29.1-rc.1) (2021-04-25)
+
+### [0.29.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.113...v0.29.1-rc.0) (2021-04-23)
+
+## [0.29.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.0...v0.29.0) (2021-04-22)
+
+## [0.29.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.112...v0.29.0-rc.113) (2021-04-23)
+
+## [0.29.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.111...v0.29.0-rc.112) (2021-04-23)
+
+
+### Bug Fixes
+
+* (Platform) Multi Input add the ability to add an item with Enter ([#5179](https://github.com/SAP/fundamental-ngx/issues/5179)) ([7347f6c](https://github.com/SAP/fundamental-ngx/commit/7347f6cbca8098cbb64e01a76add9092e907cadd))
+
+## [0.29.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.110...v0.29.0-rc.111) (2021-04-23)
+
+## [0.29.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.109...v0.29.0-rc.110) (2021-04-22)
+
+## [0.29.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.108...v0.29.0-rc.109) (2021-04-22)
+
+## [0.29.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.107...v0.29.0-rc.108) (2021-04-22)
+
+## [0.29.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.106...v0.29.0-rc.107) (2021-04-21)
+
+## [0.29.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.105...v0.29.0-rc.106) (2021-04-20)
+
+## [0.29.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.104...v0.29.0-rc.105) (2021-04-19)
+
+## [0.29.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.103...v0.29.0-rc.104) (2021-04-19)
+
+
+### Bug Fixes
+
+* (Core|Platform) fix optional rtl service ([#5138](https://github.com/SAP/fundamental-ngx/issues/5138)) ([37a78ec](https://github.com/SAP/fundamental-ngx/commit/37a78ecb66f97d5490dca2dd205862af6b3ef104))
+
 ## [0.29.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.102...v0.29.0-rc.103) (2021-04-18)
 
 ## [0.29.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.29.0-rc.101...v0.29.0-rc.102) (2021-04-18)

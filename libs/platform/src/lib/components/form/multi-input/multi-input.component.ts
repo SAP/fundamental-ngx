@@ -36,6 +36,7 @@ import { InputType } from '../input/input.component';
 import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
+import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
 
 @Component({
     selector: 'fdp-multi-input',
@@ -145,7 +146,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         readonly _listConfig: ListConfig,
         /** @hidden */
-        private _rtlService: RtlService,
+        @Optional() private _rtlService: RtlService,
         /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
         /** @hidden */
@@ -167,7 +168,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        this._rtlService.rtl
+        this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
             .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
 
@@ -306,6 +307,25 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
                 : selectedItem
             : selectedItem;
         this.inputText = this.displayValue(this.selected);
+    }
+
+    /** @hidden */
+    _onAutoComplete(event: AutoCompleteEvent): void {
+        if (!event.forceClose) {
+            return;
+        }
+
+        const [item] = this.isGroup ? this._suggestions[0]?.children || [] : this._suggestions;
+        if (item && item.label === event.term) {
+            this.addToArray(item);
+        }
+    }
+
+    /** @hidden */
+    _onKeydownEnter(event: KeyboardEvent): void {
+        if (this.inputText) {
+            event.preventDefault();
+        }
     }
 
     /** @hidden

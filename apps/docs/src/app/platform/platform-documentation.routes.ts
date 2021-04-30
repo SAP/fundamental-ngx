@@ -43,8 +43,9 @@ export const ROUTES: Routes = [
             {
                 path: 'date-picker',
                 loadChildren: () =>
-                    import('./component-docs/platform-forms/platform-date-picker/platform-date-picker-docs.module').then(
-                        (m) => m.PlatformDatePickerDocsModule)
+                    import(
+                        './component-docs/platform-forms/platform-date-picker/platform-date-picker-docs.module'
+                    ).then((m) => m.PlatformDatePickerDocsModule)
             },
             {
                 path: 'datetime-picker',
@@ -61,11 +62,18 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'page-footer',
+                loadChildren: () =>
+                    import('./component-docs/platform-page-footer/platform-page-footer.module').then(
+                        (m) => m.PlatformDocPageFooterModule
+                    )
+            },
+            {
                 path: 'form-container',
                 loadChildren: () =>
-                    import('./component-docs/platform-forms/platform-form-container/platform-form-container-docs.module').then(
-                        (m) => m.PlatformFormContainerDocsModule
-                    )
+                    import(
+                        './component-docs/platform-forms/platform-form-container/platform-form-container-docs.module'
+                    ).then((m) => m.PlatformFormContainerDocsModule)
             },
             {
                 path: 'link',
@@ -220,8 +228,9 @@ export const ROUTES: Routes = [
             {
                 path: 'time-picker',
                 loadChildren: () =>
-                    import('./component-docs/platform-forms/platform-time-picker/platform-time-picker-docs.module').then((m) =>
-                        m.PlatformTimePickerDocsModule)
+                    import(
+                        './component-docs/platform-forms/platform-time-picker/platform-time-picker-docs.module'
+                    ).then((m) => m.PlatformTimePickerDocsModule)
             },
             {
                 path: 'action-list-item',
@@ -240,14 +249,16 @@ export const ROUTES: Routes = [
             {
                 path: 'object-list-item',
                 loadChildren: () =>
-                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then((m) =>
-                        m.PlatformObjectListItemDocsModule)
+                    import('./component-docs/platform-object-list-item/platform-object-list-item-docs.module').then(
+                        (m) => m.PlatformObjectListItemDocsModule
+                    )
             },
             {
                 path: 'value-help-dialog',
                 loadChildren: () =>
-                    import('./component-docs/platform-vhd/platform-vhd-docs.module').then((m) =>
-                        m.PlatformVhdDocsModule)
+                    import('./component-docs/platform-vhd/platform-vhd-docs.module').then(
+                        (m) => m.PlatformVhdDocsModule
+                    )
             },
             {
                 path: 'multi-input',
@@ -280,14 +291,16 @@ export const ROUTES: Routes = [
             {
                 path: 'approval-flow',
                 loadChildren: () =>
-                    import('./component-docs/platform-approval-flow/platform-approval-flow-docs.module').then((m) =>
-                        m.PlatformApprovalFlowDocsModule)
+                    import('./component-docs/platform-approval-flow/platform-approval-flow-docs.module').then(
+                        (m) => m.PlatformApprovalFlowDocsModule
+                    )
             },
             {
                 path: 'slider',
                 loadChildren: () =>
-                    import('./component-docs/platform-slider/slider-docs.module').then((m) =>
-                        m.PlatformSliderDocsModule)
+                    import('./component-docs/platform-slider/slider-docs.module').then(
+                        (m) => m.PlatformSliderDocsModule
+                    )
             }
         ]
     }

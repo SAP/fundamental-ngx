@@ -197,10 +197,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._initialApprovalProcess = cloneApprovalProcess(approvalProcess);
             this._buildView(approvalProcess);
         }));
-        this.subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
-            this._dir = isRtl ? 'rtl' : 'ltr';
-            this._cdr.detectChanges();
-        }));
+        if (this._rtlService) {
+            this.subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this._cdr.detectChanges();
+            }));
+        }
 
         this._listenOnResize();
     }

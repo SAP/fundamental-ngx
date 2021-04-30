@@ -23,6 +23,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    ContentChildren,
     EventEmitter,
     forwardRef,
     Input,
@@ -31,6 +32,7 @@ import {
     Optional,
     Output,
     Provider,
+    QueryList,
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
@@ -44,6 +46,7 @@ import { FormGroupContainer } from '../form-group';
 import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroup } from '../form-field-group';
 import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
+import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -204,12 +207,34 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     @Input()
     columnLayout: string;
 
-    @ContentChild('i18n', { static: true })
-    i18Template: TemplateRef<any>;
-
+    /**
+     * onSubmit event
+     */
     @Output()
     onSubmit: EventEmitter<any> = new EventEmitter<any>();
 
+    /** @hidden */
+    @ContentChild('i18n', { static: true })
+    i18Template: TemplateRef<any>;
+
+    /**
+     * @hidden
+     *
+     * Keep track of added form fields children in correct order.
+     * 
+     * We are forced to use "ContentChildren" so FormField children can be used
+     * with optional rendering (ngIf) safely.
+     *
+     * Form fields within the formGroup is driven by multi-zone layout support. We need to be
+     * able to add number of FormFields, and based on given configuration (zone, rank) render them
+     * under correct zone  (top, bottom, left, right).
+     *
+     * We want to make sure that we don't include content and then try to somehow position it as it
+     * would lead to the UI where user can see elementing moving as you try to position it.
+     *
+     */
+    @ContentChildren(FORM_GROUP_CHILD_FIELD_TOKEN as any)
+    protected formGroupChildren: QueryList<FormField | FormFieldGroup>;
 
     /** User specific */
     xlColumnsNumber: number;
@@ -221,18 +246,6 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     /** Packed fields which should be rendered */
     formRows: { [key: number]: FieldColumn | FieldGroup } = {};
-
-    /**
-     *  Keep track of added form fields children.
-     *
-     *  Form fields within the formGroup is driven by multi-zone layout support. We need to be
-     *  able to add number of FormFields, and based on given configuration (zone, rank) render them
-     *  under correct zone  (top, bottom, left, right).
-     *
-     *  We want to make sure that we don't include content and then try to somehow position it as it
-     *  would lead to the UI where user can see elementing moving as you try to position it.
-     */
-    protected formChildren: Array<FormField | FormFieldGroup> = [];
 
     private _useForm = false;
     private _hintPlacement: HintPlacement = 'right';
@@ -255,6 +268,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this._setUserLayout();
         this._updateFieldByColumn();
         this._updateFormFieldsProperties();
+        this._listenToFormGroupChildren();
 
         this._cd.markForCheck();
     }
@@ -269,17 +283,14 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     addFormField(formField: FormField): void {
-        this.formChildren.push(formField);
-        this.updateFormFieldProperties(formField);
-    }
-
-    addFormFieldGroup(formFieldGroup: FormFieldGroup): void {
-        this.formChildren.push(formFieldGroup);
+        // It's needed to set default FormField properties
+        // on early stage otherwise validation errors 
+        // will be thrown on FormField level (e.g. i18string are not defined)
+        this._updateFormFieldProperties(formField);
     }
 
     removeFormField(formField: FormField): void {
-        this.formChildren = this.formChildren.filter((ff) => ff !== formField);
-        this.removeFormControl(formField.id);
+        // React somehow on FormField detaching
     }
 
     addFormControl(name: string, control: AbstractControl): void {
@@ -294,7 +305,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.formGroup.removeControl(name);
     }
 
-    trackByFn(index: number): number  {
+    trackByFn(index: number): number {
         return index;
     }
 
@@ -306,6 +317,14 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         return row.value instanceof FieldGroup ? row.value.fields : row.value;
     }
 
+    /** @hidden */
+    private _listenToFormGroupChildren(): void {
+        this.formGroupChildren.changes.subscribe(() => {
+            this._updateFieldByColumn();
+            this._cd.markForCheck();
+        });
+    }
+
     /**
      * @hidden
      * Assign a fields or field group to specified columns with rank.
@@ -313,11 +332,12 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * Otherwise the fields set 1 column.
      */
     private _updateFieldByColumn(): void {
+        const formChildren = this.formGroupChildren.toArray();
         const rows: { [key: number]: FieldColumn | FieldGroup } = {};
         let rowNumber = 0;
         let columns: FieldColumn = {};
 
-        for (const child of this.formChildren) {
+        for (const child of formChildren) {
             if (isFieldChild(child)) {
                 const field = getField(child);
                 const columnNumber = this._validateFieldColumn(child.column);
@@ -336,8 +356,8 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
                     rowNumber++;
                 }
 
-                const groupFields = child.fields.map(field => getField(field));
-                groupFields.forEach(groupField => {
+                const groupFields = child.fields.map((field) => getField(field));
+                groupFields.forEach((groupField) => {
                     const columnNumber = this._validateFieldColumn(groupField.column);
 
                     if (!fieldGroupColumns[columnNumber]) {
@@ -372,14 +392,16 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     /** @hidden */
-    private _updateFormFieldsProperties(): void {
-        this.formChildren.forEach((formField: FormField | FormFieldGroup) => {
-           if (isFieldChild(formField)) {
-               this.updateFormFieldProperties(formField);
-           }
+    private _updateFormFieldsProperties(
+        formChildren: (FormFieldGroup | FormField)[] = this.formGroupChildren.toArray()
+    ): void {
+        formChildren.forEach((formField: FormField | FormFieldGroup) => {
+            if (isFieldChild(formField)) {
+                this._updateFormFieldProperties(formField);
+            }
 
             if (isFieldGroupChild(formField)) {
-                formField.fields.forEach(field => this.updateFormFieldProperties(field));
+                formField.fields.forEach((field) => this._updateFormFieldProperties(field));
             }
         });
     }
@@ -389,7 +411,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * field we are using here a setter method to initialize the
      *
      */
-    private updateFormFieldProperties(formField: FormField): void {
+    private _updateFormFieldProperties(formField: FormField): void {
         formField.hintPlacement = this._hintPlacement;
         formField.i18Strings = formField.i18Strings ? formField.i18Strings : this.i18Strings;
         formField.editable = this.editable;

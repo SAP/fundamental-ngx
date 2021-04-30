@@ -1031,6 +1031,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _listenToRtlChanges(): void {
+        if (!this._rtlService) {
+            return;
+        }
+
         this._subscriptions.add(
             this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe((rtl) => {
                 this._rtl = rtl;

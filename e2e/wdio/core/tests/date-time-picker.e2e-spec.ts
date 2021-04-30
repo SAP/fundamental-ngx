@@ -244,7 +244,7 @@ describe('Datetime picker suite', function() {
                 .toEqual(date2);
         });
 
-        //skipped due to https://github.com/SAP/fundamental-ngx/issues/5088
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/5088
         xit('verify date time picker i18n example', () => {
             scrollIntoView(activeDateTimePickerButton, 6);
             for (let i = 0; i < i18n.length; i++) {
@@ -272,7 +272,7 @@ describe('Datetime picker suite', function() {
             expect(dateTimePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check input fields states', () => {
+        xit('should check input fields states', () => {
             const inputsLength = getElementArrayLength(activeDateTimePickerInput);
             for (let i = 0; i < inputsLength; i++) {
                 scrollIntoView(activeDateTimePickerInput, i);
@@ -282,7 +282,7 @@ describe('Datetime picker suite', function() {
             }
         });
 
-        it('should check date picker button states', () => {
+        xit('should check date picker button states', () => {
             const buttonsLength = getElementArrayLength(activeDateTimePickerButton);
             for (let i = 1; i < buttonsLength; i++) {
 
@@ -293,17 +293,17 @@ describe('Datetime picker suite', function() {
             }
         });
 
-        it('should check change button states', () => {
+        xit('should check change button states', () => {
             scrollIntoView(buttonChange);
             checkElementStates(buttonChange, changeButtonTag, button);
         });
 
-        it('should check option button states', () => {
+        xit('should check option button states', () => {
             scrollIntoView(optionButton);
             checkElementStates(optionButton, buttonOptionTag, button);
         });
 
-        it('should check country option states', () => {
+        xit('should check country option states', () => {
             scrollIntoView(optionButton);
             click(optionButton);
             saveElementScreenshot(countryOption, optionCountryTag, dateTimePickerPage.getScreenshotFolder());

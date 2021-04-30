@@ -4,7 +4,7 @@ import { WizardStepStatus } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-wizard-ngfor-example',
     templateUrl: './wizard-ngfor-example.component.html',
-    styleUrls: ['./wizard-example.component.scss'],
+    styleUrls: ['./wizard-ngfor-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-wizard-example'

@@ -235,7 +235,7 @@ describe('Standard List test suite', function() {
             expect(getElementArrayLength(compactSingleSelectList + selectedItems)).toEqual(1);
         });
 
-        it('check checkbox and radio button hover states', () => {
+        xit('check checkbox and radio button hover states', () => {
             const checkboxCount = getElementArrayLength(selectionList + checkbox);
             const radioBtnCount = getElementArrayLength(selectionList + radioBtn);
 
@@ -260,7 +260,7 @@ describe('Standard List test suite', function() {
             }
         });
 
-        it('check checkbox and radio button focus states', () => {
+        xit('check checkbox and radio button focus states', () => {
             const checkboxCount = getElementArrayLength(selectionList + checkbox);
             const radioBtnCount = getElementArrayLength(selectionList + radioBtn);
 
