@@ -11,6 +11,7 @@ import { AvatarComponent } from './avatar.component';
                     [circle]="circle"
                     [transparent]="transparent"
                     [placeholder]="placeholder"
+                    [contain]="contain"
                     [tile]="tile"
                     [colorAccent]="colorAccent"
                     [zoomGlyph]="zoomGlyph"
