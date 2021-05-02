@@ -150,7 +150,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
             this.transparent ? 'fd-avatar--transparent' : '',
-            this.contain ? 'fb-avatar--background-contain' : '',
+            this.contain ? 'fd-avatar--background-contain' : '',
             this.placeholder ? 'fd-avatar--placeholder' : '',
             this.tile ? 'fd-avatar--tile' : '',
             this.class

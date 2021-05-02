@@ -96,7 +96,7 @@ describe('AvatarComponent', () => {
     it('Should Use background size contain option', () => {
         component.contain = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fb-avatar--background-contain')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-avatar--background-contain')).toBeTruthy();
     });
 
     it('Should Add Placeholder Background', () => {
