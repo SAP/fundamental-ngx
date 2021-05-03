@@ -5,7 +5,8 @@
 		<div class="lead">
 			<p>The component that represents an icon.</p>
 		</div>
-		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-icon</span> [<span class="hljs-attr">glyph</span>]=<span class="hljs-string">&quot;cart-approval&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-icon</span>&gt;</span></code></pre>
+		<pre><code class="language-html"><span style="color: #800000">&lt;fd-icon</span><span style="color: #000000"> </span><span style="color: #FF0000">font</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;SAP-icons-TNT&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">glyph</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;exceptions&quot;</span><span style="color: #800000">&gt;&lt;/fd-icon&gt;</span>
+</code></pre>
 	</div>
 </section>
 <section class="tsd-panel tsd-hierarchy">
@@ -34,12 +35,29 @@
 		<aside class="tsd-sources">
 			<p>Implementation of <span>CssClassBuilder</span>.<span>class</span></p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/icon/icon.component.ts#L43">libs/core/src/lib/icon/icon.component.ts:43</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/icon/icon.component.ts#L43">libs/core/src/lib/icon/icon.component.ts:43</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>user&#39;s custom classes</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="font" class="tsd-anchor"></a>
+		<h3>font</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">font<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IconFont</span><span class="tsd-signature-symbol"> = &#x27;SAP-icons&#x27;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/icon/icon.component.ts#L39">libs/core/src/lib/icon/icon.component.ts:39</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The icon font
+				Options include: &#39;SAP-icons&#39;, &#39;BusinessSuiteInAppSymbols&#39; and &#39;SAP-icons-TNT&#39;</p>
 			</div>
 		</div>
 	</section>
@@ -50,7 +68,7 @@
 		<div class="tsd-signature tsd-kind-icon">glyph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/icon/icon.component.ts#L39">libs/core/src/lib/icon/icon.component.ts:39</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/icon/icon.component.ts#L33">libs/core/src/lib/icon/icon.component.ts:33</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -58,27 +76,6 @@
 				<p>The icon name to display. See the icon page for the list of icons
 				here: <a href="https://sap.github.io/fundamental-ngx/icon">https://sap.github.io/fundamental-ngx/icon</a></p>
 			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="size" class="tsd-anchor"></a>
-		<h3>size</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/icon/icon.component.ts#L51">libs/core/src/lib/icon/icon.component.ts:51</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>Icon size is deprecated. The size can be set by font-size. It will be removed after version 0.23
-						The size of the icon
-						The predefined values for the input size are <em>xs</em>, <em>s</em>, <em>l</em>, and <em>xl</em>.
-					<em>size</em> can accept any other string, for example <em>xxs</em>, which will be translated into class <em>sap-icon--xxs</em>.</p>
-				</dd>
-			</dl>
 		</div>
 	</section>
 </section>
@@ -96,7 +93,7 @@
 				<aside class="tsd-sources">
 					<p>Implementation of <span>CssClassBuilder</span>.<span>buildComponentCssClass</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/icon/icon.component.ts#L71">libs/core/src/lib/icon/icon.component.ts:71</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/icon/icon.component.ts#L63">libs/core/src/lib/icon/icon.component.ts:63</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -115,7 +112,7 @@
 				<aside class="tsd-sources">
 					<p>Implementation of <span>CssClassBuilder</span>.<span>elementRef</span></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/icon/icon.component.ts#L78">libs/core/src/lib/icon/icon.component.ts:78</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/icon/icon.component.ts#L75">libs/core/src/lib/icon/icon.component.ts:75</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>

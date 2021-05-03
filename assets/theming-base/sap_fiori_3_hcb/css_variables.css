@@ -2,10 +2,10 @@
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
 * Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.24.20201118150206", "Source": "11.1.24", "Engine": "1.51.0"}}
+* data:{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.28.20210316104033", "Source": "11.1.28", "Engine": "1.51.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.24.20201118150206", "Source": "11.1.24", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_hcb.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","HighContrast","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.28.20210316104033", "Source": "11.1.28", "Engine": "1.51.0"}}');}
 :root {
   --sapBrandColor: #7a5100;
   --sapHighlightColor: #7a5100;
@@ -130,7 +130,7 @@
   --sapContent_Shadow1: 0 0 1rem 0 rgba(255,255,255,0.5), 0 0 0 0.125rem #ffffff;
   --sapContent_Shadow2: 0 0.25rem 2rem 0 rgba(255,255,255,0.6), 0 0 0 0.125rem #ffffff;
   --sapContent_Shadow3: 0 0.625rem 4rem 0 rgba(255,255,255,0.8), 0 0 0 0.125rem #ffffff;
-  --sapContent_TextShadow: none;
+  --sapContent_TextShadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
   --sapContent_HeaderShadow: inset 0 -0.125rem #ffffff;
   --sapContent_SearchHighlightColor: #7a5100;
   --sapContent_HelpColor: #03b803;
@@ -171,6 +171,7 @@
   --sapShell_InteractiveTextColor: #ffffff;
   --sapShell_InteractiveBorderColor: #ffffff;
   --sapShell_GroupTitleTextColor: #ffffff;
+  --sapShell_GroupTitleTextShadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
   --sapShell_Hover_Background: #7a5100;
   --sapShell_Active_Background: #7a5100;
   --sapShell_Active_TextColor: #fff;
@@ -186,6 +187,11 @@
   --sapShell_Navigation_Active_Background: #7a5100;
   --sapShell_Navigation_Active_TextColor: #fff;
   --sapShell_Shadow: 0 0.125rem 0 0 #ffffff;
+  --sapShell_NegativeColor: #ff5e5e;
+  --sapShell_CriticalColor: #ffab1d;
+  --sapShell_PositiveColor: #99cc99;
+  --sapShell_InformativeColor: #ffffff;
+  --sapShell_NeutralColor: #ffffff;
   --sapButton_BorderWidth: .0625rem;
   --sapButton_BorderCornerRadius: .375rem;
   --sapButton_Background: #000000;
@@ -479,6 +485,12 @@
   --sapFontUrl_SAP-icons_ttf: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons.ttf');
   --sapFontUrl_SAP-icons_woff: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons.woff');
   --sapFontUrl_SAP-icons_woff2: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons.woff2');
+  --sapFontUrl_SAP-icons-TNT_ttf: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons-TNT.ttf');
+  --sapFontUrl_SAP-icons-TNT_woff: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons-TNT.woff');
+  --sapFontUrl_SAP-icons-TNT_woff2: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons-TNT.woff2');
+  --sapFontUrl_SAP-icons-Business-Suite_ttf: url('../../../Base/baseLib/sap_fiori_3/fonts/BusinessSuiteInAppSymbols.ttf');
+  --sapFontUrl_SAP-icons-Business-Suite_woff: url('../../../Base/baseLib/sap_fiori_3/fonts/BusinessSuiteInAppSymbols.woff');
+  --sapFontUrl_SAP-icons-Business-Suite_woff2: url('../../../Base/baseLib/sap_fiori_3/fonts/BusinessSuiteInAppSymbols.woff2');
   --sapFontUrl_72_Regular_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Regular.woff2');
   --sapFontUrl_72_Regular_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Regular.woff');
   --sapFontUrl_72_Bold_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Bold.woff2');

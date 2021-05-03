@@ -21,8 +21,8 @@
 		<li>  <a href="#5">5. Known Issues</a></li>
 		<li>  <a href="#6">6. Support</a></li>
 		<li>  <a href="#7">7. Contributing</a></li>
-		<li>  <a href="#8">8. License</a></li>
-		<li>  <a href="#9">9. Similar Projects</a></li>
+		<li>  <a href="https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt">8. License</a></li>
+		<li>  <a href="#8">9. Similar Projects</a></li>
 	</ul>
 	<a href="#1-description" id="1-description" style="color: inherit; text-decoration: none;">
 		<h2><a name="1"></a>1. Description</h2>
@@ -66,31 +66,39 @@
 		</li>
 		<li><p><strong>Import the modules you want to use.</strong></p>
 			<p> To add the entire library, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { FundamentalNgxCoreModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/core&#x27;</span>;
+			<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">FundamentalNgxCoreModule</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fundamental-ngx/core&#039;</span><span style="color: #000000">;</span>
 
-@NgModule({
-    ...
-    <span class="hljs-attr">imports</span>: [FundamentalNgxCoreModule],
-})
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> </span>{ }</code></pre>
+<span style="color: #000000">@</span><span style="color: #795E26">NgModule</span><span style="color: #000000">({</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">    </span><span style="color: #001080">imports</span><span style="color: #000000">: [</span><span style="color: #001080">FundamentalNgxCoreModule</span><span style="color: #000000">],</span>
+<span style="color: #000000">})</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">DemoModule</span><span style="color: #000000"> { }</span>
+</code></pre>
 			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
 			<p> For example, to use Switchs, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/core’&#x27;</span>;</code></pre>
+			<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">CheckboxModule</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fundamental-ngx/core’&#039;</span><span style="color: #000000">;</span>
+</code></pre>
 			<p> For models prior to 0.10 use <code>fundamental-ngx</code></p>
-			<pre><code><span class="hljs-keyword">import</span> { CheckboxModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@fundamental-ngx/core&#x27;</span>;
+			<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">CheckboxModule</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fundamental-ngx/core&#039;</span><span style="color: #000000">;</span>
 
-@NgModule({
-    ...
-    imports: [CheckboxModule],
-})
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoModule</span> { }</span></code></pre>
+<span style="color: #000000">@</span><span style="color: #795E26">NgModule</span><span style="color: #000000">({</span>
+<span style="color: #000000">    ...</span>
+<span style="color: #000000">    </span><span style="color: #001080">imports</span><span style="color: #000000">: [</span><span style="color: #001080">CheckboxModule</span><span style="color: #000000">],</span>
+<span style="color: #000000">})</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">DemoModule</span><span style="color: #000000"> { }</span>
+</code></pre>
 		</li>
 		<li><p><strong>Provide the RtlService.</strong>
 				In your main application module, add <code>RtlService</code> to the list of providers. This service is needed to ensure proper right-to-left functionality for
 			users with their browser set to an RTL language.</p>
 		</li>
+		<li><p><strong>Provide the ContentDensityService.</strong>
+				In your main application module, you will also need to add <code>ContentDensityService</code> to the list of providers if you wish to manage the content density of
+			you application from a single point.</p>
+		</li>
 		<li><p><strong>Add the component to your HTML.</strong></p>
-			<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-checkbox</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;Fundamental Ngx Checkbox&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">fd-checkbox</span>&gt;</span></code></pre>
+			<pre><code class="language-html"><span style="color: #800000">&lt;fd-checkbox</span><span style="color: #000000"> </span><span style="color: #FF0000">label</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;Fundamental Ngx Checkbox&quot;</span><span style="color: #800000">&gt;&lt;/fd-checkbox&gt;</span>
+</code></pre>
 		</li>
 	</ol>
 	<a href="#5-known-issues" id="5-known-issues" style="color: inherit; text-decoration: none;">

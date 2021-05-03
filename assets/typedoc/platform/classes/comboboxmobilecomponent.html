@@ -26,20 +26,20 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Combobox<wbr>Mobile<wbr>Component<span class="tsd-signature-symbol">(</span>elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span>, dialogService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogService</span>, comboboxComponent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComboboxInterface</span>, mobileModes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MobileModeConfigToken</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComboboxMobileComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Combobox<wbr>Mobile<wbr>Component<span class="tsd-signature-symbol">(</span>elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, dialogService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DialogService</span>, comboboxComponent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComboboxInterface</span>, mobileModes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MobileModeConfigToken</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ComboboxMobileComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<p>Overrides MobileModeBase.__constructor</p>
+					<p>Overrides MobileModeBase&lt;ComboboxInterface&gt;.constructor</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts#L47">libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts:47</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts#L47">libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts:47</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
 				<ul class="tsd-parameters">
 					<li>
-						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span></h5>
+						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 					<li>
 						<h5>dialogService: <span class="tsd-signature-type">DialogService</span></h5>
@@ -64,7 +64,7 @@
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">_component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComboboxInterface</span></div>
 		<aside class="tsd-sources">
-			<p>Inherited from <span>ComboboxMobileComponent</span>.<span>_component</span></p>
+			<p>Inherited from MobileModeBase._component</p>
 			<ul>
 			</ul>
 		</aside>
@@ -75,7 +75,7 @@
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">_dialog<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DialogService</span></div>
 		<aside class="tsd-sources">
-			<p>Inherited from <span>ComboboxMobileComponent</span>.<span>_dialogService</span></p>
+			<p>Inherited from MobileModeBase._dialogService</p>
 			<ul>
 			</ul>
 		</aside>
@@ -84,9 +84,9 @@
 		<a name="_elementref" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _element<wbr>Ref</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span></div>
+		<div class="tsd-signature tsd-kind-icon">_element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
-			<p>Inherited from <span>ComboboxMobileComponent</span>.<span>_elementRef</span></p>
+			<p>Inherited from MobileModeBase._elementRef</p>
 			<ul>
 			</ul>
 		</aside>
@@ -97,7 +97,7 @@
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MobileModeControl</span></div>
 		<aside class="tsd-sources">
-			<p>Inherited from <span>ComboboxMobileComponent</span>.<span>target</span></p>
+			<p>Inherited from MobileModeBase.target</p>
 			<ul>
 			</ul>
 		</aside>
@@ -105,6 +105,30 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+		<a name="_toggledialog" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _toggle<wbr>Dialog</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+			<li class="tsd-signature tsd-kind-icon">_toggle<wbr>Dialog<span class="tsd-signature-symbol">(</span>open<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts#L79">libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts:79</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>open: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="ngoninit" class="tsd-anchor"></a>
 		<h3>ng<wbr>OnInit</h3>
@@ -115,8 +139,9 @@
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Implementation of OnInit.ngOnInit</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts#L58">libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts:58</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts#L58">libs/platform/src/lib/components/form/combobox/combobox-mobile/combobox/combobox-mobile.component.ts:58</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

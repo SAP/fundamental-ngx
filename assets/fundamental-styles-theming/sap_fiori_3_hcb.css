@@ -38,6 +38,8 @@
   --fdAvatar-Transparent_BackgroundColor: var(--sapBackgroundColor);
   --fdAvatar_Border: 0.0625rem solid var(--sapGroup_ContentBorderColor);
   --fdAvatar_Accent_Color: var(--sapBackgroundColor);
+  /* Avatar Group */
+  --fdAvatarGroup_MoreButton_Border: 0.125rem;
   /* Tabs */
   --fdTabs_Selected_Color: var(--sapIndicationColor_5);
   --fdTabs_Selected_Icon_Color: var(--sapBaseColor);
@@ -63,21 +65,32 @@
   --fdTime_Text_Shadow: 0 0 0.125rem #000;
   /* Select */
   --fdSelect_Text_Shadow: 0 0 0.125rem #000;
+  --fdSelect_Button_Interractive_SideBorder: solid 0.0625rem var(--sapField_BorderColor);
   /* Popover */
   --fdPopover_Text_Shadow: 0 0 0.125rem #000;
   /* Product Switch */
   --fdProductSwitch_Text_Shadow: 0 0 0.125rem #000;
+  --fdProductSwitch_Shadow: var(--sapContent_Shadow0);
+  --fdProductSwitch_Border: 0.125rem solid var(--sapList_SelectionBorderColor);
   /* Menu */
   --fdMenu_Text_Shadow: 0 0 0.125rem #000;
   /* List */
   --fdListBase_Text_Shadow: 0 0 0.125rem #000;
+  --fdListButtonSpacing: 0.25rem;
   /* Button */
   --fdButton_Text_Shadow: 0 0 0.125rem #000;
   --fdButton_Emphasized_Border_Width: 0.125rem;
   /* Input Group */
   --fdInputGroup_Text_Shadow: 0 0 0.125rem #000;
+  --fdInputGroup_ControlButton_SideBorder: solid 0.0625rem var(--sapList_SelectionBorderColor);
   /* Input */
   --fdInput_Text_Shadow: 0 0 0.125rem #000;
+  --fdInput_State_Text_Style: italic;
+  --fdInput_State_Font_Weight: bold;
+  --fdInput_State_Border_Type: dashed;
+  /* Form Message */
+  --fdMessage_Box_Shadow: none;
+  --fdMessage_Border: calc(2 * var(--sapField_BorderWidth)) solid var(--sapField_BorderColor);
   /* Calendar */
   --fdCalendar_Text_Shadow: 0 0 0.125rem #000;
   --fdCalendar_Active_Item_Border: solid 0.0625rem var(--sapList_SelectionBorderColor, #fff);
@@ -94,13 +107,56 @@
   --fdCarousel_Dot_Margin: 0 0.25rem;
   --fdCarousel_Dot_Border: 1px solid var(--sapContent_ForegroundBorderColor);
   /** Flexible Column Layout */
-  --fdFlexibleColumnLayoutToggleImageColor: var(--sapObjectHeader_BorderColor);
-  --fdFlexibleColumnLayoutBorder: solid 0.0625rem var(--sapGroup_ContentBorderColor);
-  --fdFlexibleColumnBackgroundSolid: var(--sapBackgroundColor);
-  --fdFlexibleColumnBackgroundTranslucent: var(--sapBackgroundColor);
-  --fdFlexibleColumnBackgroundTransparent: var(--sapBackgroundColor);
+  --fdFlexibleColumnLayout_Toggle_Image_Color: var(--sapObjectHeader_BorderColor);
+  --fdFlexibleColumnLayout_Border: solid 0.0625rem var(--sapGroup_ContentBorderColor);
+  --fdFlexibleColumnLayout_Background_Solid: var(--sapBackgroundColor);
+  --fdFlexibleColumnLayout_Background_Translucent: var(--sapBackgroundColor);
+  --fdFlexibleColumnLayout_Background_Transparent: var(--sapBackgroundColor);
   /** Dialog */
-  --fdDialogBackgroundOpacity: 0.8;
+  --fdDialog_Background_Opacity: 0.8;
   /* Grid List */
   --fdGrid_List_Item_Hover_Border_Color: var(--sapTile_Interactive_BorderColor);
+  /* Message Strip */
+  --fdMessageStrip_Border_Width: 0.125rem;
+  /* Page */
+  --fdPage_List_Background: var(--sapBackgroundColor);
+  --fdPage_Transparent_Background: var(--sapBackgroundColor);
+  /* Switch */
+  --fdSwitch_Handle_Border_Width: 0.125rem;
+  --fdSwitch_On_Hover_Slider_Background: var(--sapButton_Background);
+  --fdSwitch_Semantic_Success_Border_Color: var(--sapButton_Hover_BorderColor);
+  --fdSwitch_Semantic_Success_Background_Color: var(--sapButton_Background);
+  --fdSwitch_Semantic_Error_Background_Color: var(--sapButton_Selected_Hover_Background);
+  --fdSwitch_Semantic_Success_Handle_Hover_Background_Color: var(--sapButton_Selected_Hover_Background);
+  --fdSwitch_Semantic_Error_Color: var(--sapButton_Hover_BorderColor);
+  /* Action List Item */
+  --fdList_Item_Action_Border: none;
+  --fdList_Item_Action_Height: 3rem;
+  --fdList_Item_Action_Button_Size: 2.5rem;
+  --fdList_Item_Action_Button_Size_Compact: 1.625rem;
+  --fdList_Item_Action_Button_Spacing: 0.25rem;
+  --fdList_Item_Action_Button_Border: var(--sapList_BorderWidth) solid var(--sapList_BorderColor);
+  --fdList_Item_Action_Button_Border_Radius: 0.375rem;
+  /* Table */
+  --fdTable_Hover_Down_Color: var(--sapContent_ContrastTextColor);
+  /* Link */
+  --fdLink_Text_Decoration_Opposite: none;
+  --fdLink_Text_Decoration: underline;
+  /* Message Box */
+  --fdMessage_Box_Error_Box_Shadow: inset 0 -0.125rem var(--sapErrorBorderColor);
+  --fdMessage_Box_Success_Box_Shadow: inset 0 -0.125rem var(--sapSuccessBorderColor);
+  --fdMessage_Box_Warning_Box_Shadow: inset 0 -0.125rem var(--sapWarningBorderColor);
+  --fdMessage_Box_Information_Box_Shadow: inset 0 -0.125rem var(--sapInformationBorderColor);
+  /* Feed Input */
+  --fdFeed_Input_Placeholder_Font_Style: normal;
+  /* Generic Tile */
+  --fdSlide_Tile_Background_Color: var(--sapTile_Background);
+  --fdSlide_Tile_Background_Opacity: 1;
+  --fdSlide_Tile_Indicator_Dot_Size: 0.25rem;
+  --fdSlide_Tile_Indicator_Ative_Dot_Size: 0.25rem;
+  --fdSlide_Tile_Indicator_Dot_Spacing: 0.188rem;
+  --fdSlide_Tile_Indicator_Dot_Color: var(--sapTile_Background);
+  --fdSlide_Tile_Indicator_Active_Dot_Color: var(--sapContent_NonInteractiveIconColor);
+  --fdSlide_Tile_Indicator_Dot_Border: solid 0.0625rem var(--sapContent_NonInteractiveIconColor);
+  --fdSlide_Tile_Indicator_Active_Dot_Border: solid 0.0625rem var(--sapContent_NonInteractiveIconColor);
 }

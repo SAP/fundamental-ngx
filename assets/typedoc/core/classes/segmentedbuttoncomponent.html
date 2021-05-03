@@ -5,11 +5,12 @@
 		<div class="lead">
 			<p>Container for grouped buttons.</p>
 		</div>
-		<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">fd-segmented-button</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">&quot;value&quot;</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;first&quot;</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;second&quot;</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">fd-button</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;third&quot;</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">fd-segmented-button</span>&gt;</span></code></pre>
+		<pre><code class="language-html"><span style="color: #800000">&lt;fd-segmented-button</span><span style="color: #000000"> </span><span style="color: #FF0000">[(ngModel)]</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;value&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">fd-button</span><span style="color: #000000"> </span><span style="color: #FF0000">value</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;first&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Button</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">fd-button</span><span style="color: #000000"> </span><span style="color: #FF0000">value</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;second&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Button</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">fd-button</span><span style="color: #000000"> </span><span style="color: #FF0000">value</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;third&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Button</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #800000">&lt;/fd-segmented-button&gt;</span>
+</code></pre>
 	</div>
 </section>
 <section class="tsd-panel tsd-hierarchy">
@@ -36,7 +37,7 @@
 		<div class="tsd-signature tsd-kind-icon">toggle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/segmented-button/segmented-button.component.ts#L54">libs/core/src/lib/segmented-button/segmented-button.component.ts:54</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/segmented-button/segmented-button.component.ts#L54">libs/core/src/lib/segmented-button/segmented-button.component.ts:54</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -59,7 +60,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/core/src/lib/segmented-button/segmented-button.component.ts#L84">libs/core/src/lib/segmented-button/segmented-button.component.ts:84</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/segmented-button/segmented-button.component.ts#L84">libs/core/src/lib/segmented-button/segmented-button.component.ts:84</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -71,6 +72,61 @@
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SegmentedButtonComponent</span></h4>
 			</li>
 		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_currentvalue" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _current<wbr>Value</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_current<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/segmented-button/segmented-button.component.ts#L69">libs/core/src/lib/segmented-button/segmented-button.component.ts:69</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Value of segmented button can have 2 types:</p>
+				<ul>
+					<li>string, when there is no toggle mode and only 1 value can be chosen.</li>
+					<li>array of strings, when there is toggle mode and more than 1 value can be chosen.</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_ondestroy_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> _on<wbr>Destroy$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_on<wbr>Destroy$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/segmented-button/segmented-button.component.ts#L75">libs/core/src/lib/segmented-button/segmented-button.component.ts:75</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_onrefresh_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> _on<wbr>Refresh$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_on<wbr>Refresh$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/core/src/lib/segmented-button/segmented-button.component.ts#L78">libs/core/src/lib/segmented-button/segmented-button.component.ts:78</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)</p>
+			</div>
+		</div>
 	</section>
 </section>
 </div>

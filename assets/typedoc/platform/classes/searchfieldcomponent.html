@@ -29,7 +29,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.ariaDescribedBy</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L26">libs/platform/src/lib/components/base.ts:26</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L30">libs/platform/src/lib/components/base.ts:30</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -38,20 +38,21 @@
 			</div>
 		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 		<a name="arialabel" class="tsd-anchor"></a>
 		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = null</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
-			<p>Inherited from BaseComponent.ariaLabel</p>
+			<p>Overrides BaseComponent.ariaLabel</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L18">libs/platform/src/lib/components/base.ts:18</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L156">libs/platform/src/lib/components/search-field/search-field.component.ts:156</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Sets the <code>aria-label</code> attribute to the element.</p>
+				<p>ARIA label to specify what the search field is
+				Not shown in the UI, only visible by the screen-readers.</p>
 			</div>
 		</div>
 	</section>
@@ -63,7 +64,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.ariaLabelledBy</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L22">libs/platform/src/lib/components/base.ts:22</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L26">libs/platform/src/lib/components/base.ts:26</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -73,35 +74,35 @@
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="arialabelledby-1" class="tsd-anchor"></a>
+		<h3>aria<wbr>Labelledby</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelledby<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L162">libs/platform/src/lib/components/search-field/search-field.component.ts:162</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Id of elements (separated by space) for setting aria-labelledby for search input
+				Not shown in the UI, only visible by the screen-readers.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="categorylabel" class="tsd-anchor"></a>
 		<h3>category<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">category<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;Category&quot;</span></div>
+		<div class="tsd-signature tsd-kind-icon">category<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Category&#x27;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L140">libs/platform/src/lib/components/search-field/search-field.component.ts:140</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L140">libs/platform/src/lib/components/search-field/search-field.component.ts:140</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Set label for category dropdown button.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="contentdensity" class="tsd-anchor"></a>
-		<h3>content<wbr>Density</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">content<wbr>Density<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensity</span><span class="tsd-signature-symbol"> = &quot;cozy&quot;</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from BaseComponent.contentDensity</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L38">libs/platform/src/lib/components/base.ts:38</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>content Density of element. cozy | compact</p>
 			</div>
 		</div>
 	</section>
@@ -112,7 +113,7 @@
 		<div class="tsd-signature tsd-kind-icon">hide<wbr>Category<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L145">libs/platform/src/lib/components/search-field/search-field.component.ts:145</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L145">libs/platform/src/lib/components/search-field/search-field.component.ts:145</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -125,11 +126,11 @@
 		<a name="id" class="tsd-anchor"></a>
 		<h3>id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = this.defaultId</span></div>
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.id</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L30">libs/platform/src/lib/components/base.ts:30</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L34">libs/platform/src/lib/components/base.ts:34</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -145,7 +146,7 @@
 		<div class="tsd-signature tsd-kind-icon">input<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L122">libs/platform/src/lib/components/search-field/search-field.component.ts:122</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L122">libs/platform/src/lib/components/search-field/search-field.component.ts:122</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -161,7 +162,7 @@
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L150">libs/platform/src/lib/components/search-field/search-field.component.ts:150</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L150">libs/platform/src/lib/components/search-field/search-field.component.ts:150</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -178,7 +179,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.name</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L34">libs/platform/src/lib/components/base.ts:34</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L38">libs/platform/src/lib/components/base.ts:38</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -194,7 +195,7 @@
 		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L76">libs/platform/src/lib/components/search-field/search-field.component.ts:76</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L76">libs/platform/src/lib/components/search-field/search-field.component.ts:76</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -211,7 +212,7 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.width</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L42">libs/platform/src/lib/components/base.ts:42</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L60">libs/platform/src/lib/components/base.ts:60</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -232,7 +233,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L128">libs/platform/src/lib/components/search-field/search-field.component.ts:128</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L128">libs/platform/src/lib/components/search-field/search-field.component.ts:128</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -245,7 +246,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L131">libs/platform/src/lib/components/search-field/search-field.component.ts:131</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L131">libs/platform/src/lib/components/search-field/search-field.component.ts:131</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -264,6 +265,49 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="contentdensity" class="tsd-anchor"></a>
+		<h3>content<wbr>Density</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> contentDensity<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensity</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> contentDensity<span class="tsd-signature-symbol">(</span>contentDensity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ContentDensity</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L45">libs/platform/src/lib/components/base.ts:45</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>content Density of element. cozy | compact</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ContentDensity</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L42">libs/platform/src/lib/components/base.ts:42</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>content Density of element. cozy | compact</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>contentDensity: <span class="tsd-signature-type">ContentDensity</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 		<a name="datasource" class="tsd-anchor"></a>
 		<h3>data<wbr>Source</h3>
 		<!-- {log decorators} -->
@@ -275,7 +319,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L109">libs/platform/src/lib/components/search-field/search-field.component.ts:109</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L109">libs/platform/src/lib/components/search-field/search-field.component.ts:109</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -288,7 +332,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L112">libs/platform/src/lib/components/search-field/search-field.component.ts:112</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L112">libs/platform/src/lib/components/search-field/search-field.component.ts:112</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -306,20 +350,19 @@
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 		<a name="disabled" class="tsd-anchor"></a>
 		<h3>disabled</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
 			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> disabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> disabled<span class="tsd-signature-symbol">(</span>disabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<p>Inherited from BaseComponent.disabled</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L46">libs/platform/src/lib/components/base.ts:46</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L64">libs/platform/src/lib/components/base.ts:64</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -331,9 +374,8 @@
 			</li>
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<p>Inherited from BaseComponent.disabled</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L50">libs/platform/src/lib/components/base.ts:50</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L68">libs/platform/src/lib/components/base.ts:68</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -363,7 +405,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L82">libs/platform/src/lib/components/search-field/search-field.component.ts:82</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L82">libs/platform/src/lib/components/search-field/search-field.component.ts:82</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -376,7 +418,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L85">libs/platform/src/lib/components/search-field/search-field.component.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L85">libs/platform/src/lib/components/search-field/search-field.component.ts:85</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -401,10 +443,10 @@
 		<a name="cancelsearch" class="tsd-anchor"></a>
 		<h3>cancel<wbr>Search</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">cancel<wbr>Search<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter()</span></div>
+		<div class="tsd-signature tsd-kind-icon">cancel<wbr>Search<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L165">libs/platform/src/lib/components/search-field/search-field.component.ts:165</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L177">libs/platform/src/lib/components/search-field/search-field.component.ts:177</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -417,10 +459,10 @@
 		<a name="inputchange" class="tsd-anchor"></a>
 		<h3>input<wbr>Change</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">input<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SearchInput</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter()</span></div>
+		<div class="tsd-signature tsd-kind-icon">input<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SearchInput</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L155">libs/platform/src/lib/components/search-field/search-field.component.ts:155</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L167">libs/platform/src/lib/components/search-field/search-field.component.ts:167</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -433,10 +475,10 @@
 		<a name="searchsubmit" class="tsd-anchor"></a>
 		<h3>search<wbr>Submit</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">search<wbr>Submit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SearchInput</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new EventEmitter()</span></div>
+		<div class="tsd-signature tsd-kind-icon">search<wbr>Submit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SearchInput</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L160">libs/platform/src/lib/components/search-field/search-field.component.ts:160</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L172">libs/platform/src/lib/components/search-field/search-field.component.ts:172</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -453,14 +495,14 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Search<wbr>Field<wbr>Component<span class="tsd-signature-symbol">(</span>_overlay<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Overlay</span>, _viewContainerRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ViewContainerRef</span>, _cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _rtl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RtlService</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchFieldComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Search<wbr>Field<wbr>Component<span class="tsd-signature-symbol">(</span>_overlay<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Overlay</span>, _viewContainerRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ViewContainerRef</span>, _cd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span>, _rtl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RtlService</span>, elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SearchFieldComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
-					<p>Overrides BaseComponent.__constructor</p>
+					<p>Overrides BaseComponent.constructor</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L222">libs/platform/src/lib/components/search-field/search-field.component.ts:222</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L234">libs/platform/src/lib/components/search-field/search-field.component.ts:234</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -478,7 +520,7 @@
 						<h5>_rtl: <span class="tsd-signature-type">RtlService</span></h5>
 					</li>
 					<li>
-						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span></h5>
+						<h5>elementRef: <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SearchFieldComponent</span></h4>
@@ -488,15 +530,57 @@
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_categories" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _categories</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_categories<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ValueLabelItem</span><span class="tsd-signature-symbol">[]</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L135">libs/platform/src/lib/components/search-field/search-field.component.ts:135</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 		<a name="_cd" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _cd</h3>
 		<!-- {log decorators} -->
 		<div class="tsd-signature tsd-kind-icon">_cd<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ChangeDetectorRef</span></div>
 		<aside class="tsd-sources">
-			<p>Overrides BaseComponent._cd</p>
+			<p>Inherited from BaseComponent._cd</p>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+		<a name="_contentdensityservice" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _content<wbr>Density<wbr>Service</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_content<wbr>Density<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ContentDensityService</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from BaseComponent._contentDensityService</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L227">libs/platform/src/lib/components/search-field/search-field.component.ts:227</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L50">libs/platform/src/lib/components/base.ts:50</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_datasource" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _data<wbr>Source</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_data<wbr>Source<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SearchFieldDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L117">libs/platform/src/lib/components/search-field/search-field.component.ts:117</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_datasourcesubscription" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _data<wbr>Source<wbr>Subscription</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_data<wbr>Source<wbr>Subscription<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L226">libs/platform/src/lib/components/search-field/search-field.component.ts:226</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -508,7 +592,95 @@
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent._disabled</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L14">libs/platform/src/lib/components/base.ts:14</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L18">libs/platform/src/lib/components/base.ts:18</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_isfocused" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _is<wbr>Focused</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_is<wbr>Focused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L222">libs/platform/src/lib/components/search-field/search-field.component.ts:222</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_ondestroy_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> _on<wbr>Destroy$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_on<wbr>Destroy$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L227">libs/platform/src/lib/components/search-field/search-field.component.ts:227</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_outsideclicksubscription" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _outside<wbr>Click<wbr>Subscription</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_outside<wbr>Click<wbr>Subscription<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L225">libs/platform/src/lib/components/search-field/search-field.component.ts:225</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_rtlchangesubscription" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _rtl<wbr>Change<wbr>Subscription</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_rtl<wbr>Change<wbr>Subscription<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L224">libs/platform/src/lib/components/search-field/search-field.component.ts:224</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_suggestionoverlayref" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _suggestion<wbr>Overlay<wbr>Ref</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_suggestion<wbr>Overlay<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">OverlayRef</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L219">libs/platform/src/lib/components/search-field/search-field.component.ts:219</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_suggestionportal" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _suggestion<wbr>Portal</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_suggestion<wbr>Portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplatePortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L220">libs/platform/src/lib/components/search-field/search-field.component.ts:220</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_suggestionkeymanager" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _suggestionkey<wbr>Manager</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_suggestionkey<wbr>Manager<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FocusKeyManager</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SearchFieldSuggestionDirective</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L221">libs/platform/src/lib/components/search-field/search-field.component.ts:221</a></li>
+			</ul>
+		</aside>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+		<a name="_suggestions" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _suggestions</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">_suggestions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SuggestionItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SuggestionItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L103">libs/platform/src/lib/components/search-field/search-field.component.ts:103</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -519,7 +691,7 @@
 		<div class="tsd-signature tsd-kind-icon">category<wbr>Dropdown<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PopoverComponent</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L217">libs/platform/src/lib/components/search-field/search-field.component.ts:217</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L229">libs/platform/src/lib/components/search-field/search-field.component.ts:229</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -527,11 +699,11 @@
 		<a name="defaultid" class="tsd-anchor"></a>
 		<h3><span class="tsd-flag ts-flagProtected">Protected</span> default<wbr>Id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">default<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;fdp-id-${randomId++}&#x60;</span></div>
+		<div class="tsd-signature tsd-kind-icon">default<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<p>Inherited from BaseComponent.defaultId</p>
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/base.ts#L13">libs/platform/src/lib/components/base.ts:13</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/base.ts#L17">libs/platform/src/lib/components/base.ts:17</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -539,10 +711,10 @@
 		<a name="dir" class="tsd-anchor"></a>
 		<h3>dir</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;ltr&quot;</span></div>
+		<div class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;ltr&#x27;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L205">libs/platform/src/lib/components/search-field/search-field.component.ts:205</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L217">libs/platform/src/lib/components/search-field/search-field.component.ts:217</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -553,7 +725,7 @@
 		<div class="tsd-signature tsd-kind-icon">input<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L219">libs/platform/src/lib/components/search-field/search-field.component.ts:219</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L231">libs/platform/src/lib/components/search-field/search-field.component.ts:231</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -564,7 +736,7 @@
 		<div class="tsd-signature tsd-kind-icon">input<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L218">libs/platform/src/lib/components/search-field/search-field.component.ts:218</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L230">libs/platform/src/lib/components/search-field/search-field.component.ts:230</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -572,10 +744,10 @@
 		<a name="inputid" class="tsd-anchor"></a>
 		<h3>input<wbr>Id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">input<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
+		<div class="tsd-signature tsd-kind-icon">input<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L202">libs/platform/src/lib/components/search-field/search-field.component.ts:202</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L214">libs/platform/src/lib/components/search-field/search-field.component.ts:214</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -583,10 +755,10 @@
 		<a name="menuid" class="tsd-anchor"></a>
 		<h3>menu<wbr>Id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">menu<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
+		<div class="tsd-signature tsd-kind-icon">menu<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L204">libs/platform/src/lib/components/search-field/search-field.component.ts:204</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L216">libs/platform/src/lib/components/search-field/search-field.component.ts:216</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -594,10 +766,10 @@
 		<a name="submitid" class="tsd-anchor"></a>
 		<h3>submit<wbr>Id</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">submit<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
+		<div class="tsd-signature tsd-kind-icon">submit<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L203">libs/platform/src/lib/components/search-field/search-field.component.ts:203</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L215">libs/platform/src/lib/components/search-field/search-field.component.ts:215</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -608,7 +780,7 @@
 		<div class="tsd-signature tsd-kind-icon">suggestion<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SearchFieldSuggestionDirective</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L222">libs/platform/src/lib/components/search-field/search-field.component.ts:222</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L234">libs/platform/src/lib/components/search-field/search-field.component.ts:234</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -619,7 +791,7 @@
 		<div class="tsd-signature tsd-kind-icon">suggestion<wbr>Menu<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L221">libs/platform/src/lib/components/search-field/search-field.component.ts:221</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L233">libs/platform/src/lib/components/search-field/search-field.component.ts:233</a></li>
 			</ul>
 		</aside>
 	</section>
@@ -637,7 +809,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L408">libs/platform/src/lib/components/search-field/search-field.component.ts:408</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L420">libs/platform/src/lib/components/search-field/search-field.component.ts:420</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">OverlayConfig</span></h4>
@@ -655,7 +827,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L437">libs/platform/src/lib/components/search-field/search-field.component.ts:437</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L449">libs/platform/src/lib/components/search-field/search-field.component.ts:449</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -679,7 +851,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L398">libs/platform/src/lib/components/search-field/search-field.component.ts:398</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L410">libs/platform/src/lib/components/search-field/search-field.component.ts:410</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -697,43 +869,47 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L389">libs/platform/src/lib/components/search-field/search-field.component.ts:389</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L401">libs/platform/src/lib/components/search-field/search-field.component.ts:401</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 		<a name="ngondestroy" class="tsd-anchor"></a>
 		<h3>ng<wbr>OnDestroy</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnDestroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Implementation of OnDestroy.ngOnDestroy</p>
+					<p>Overrides BaseComponent.ngOnDestroy</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L248">libs/platform/src/lib/components/search-field/search-field.component.ts:248</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L260">libs/platform/src/lib/components/search-field/search-field.component.ts:260</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 			</li>
 		</ul>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 		<a name="ngoninit" class="tsd-anchor"></a>
 		<h3>ng<wbr>OnInit</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 			<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<p>Implementation of OnInit.ngOnInit</p>
+					<p>Overrides BaseComponent.ngOnInit</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L234">libs/platform/src/lib/components/search-field/search-field.component.ts:234</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L246">libs/platform/src/lib/components/search-field/search-field.component.ts:246</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -751,7 +927,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L335">libs/platform/src/lib/components/search-field/search-field.component.ts:335</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L347">libs/platform/src/lib/components/search-field/search-field.component.ts:347</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -769,7 +945,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L259">libs/platform/src/lib/components/search-field/search-field.component.ts:259</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L271">libs/platform/src/lib/components/search-field/search-field.component.ts:271</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -793,7 +969,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/210608f1a/libs/platform/src/lib/components/search-field/search-field.component.ts#L354">libs/platform/src/lib/components/search-field/search-field.component.ts:354</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f942eb4e/libs/platform/src/lib/components/search-field/search-field.component.ts#L366">libs/platform/src/lib/components/search-field/search-field.component.ts:366</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
