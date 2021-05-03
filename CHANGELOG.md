@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.19...v0.29.1-rc.20) (2021-05-03)
+
+
+### Bug Fixes
+
+* (Core) add fix for Dynamic Page header hover state when subheader is not collapsible ([#5260](https://github.com/SAP/fundamental-ngx/issues/5260)) ([c42d76a](https://github.com/SAP/fundamental-ngx/commit/c42d76adb09020a8ec185b7eaabe1284d2f3fc04))
+
 ### [0.29.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.18...v0.29.1-rc.19) (2021-05-03)
 
 
