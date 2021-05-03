@@ -47,7 +47,7 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy  {
     /** @hidden */
     _subscription = new Subscription();
 
-    /** Whether the expand button is incompact mode */
+    /** Whether the expand button is in compact mode */
     @Input()
     expandCompact = true;
 
