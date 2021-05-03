@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.18...v0.29.1-rc.19) (2021-05-03)
+
+
+### Bug Fixes
+
+* (Core) remove card-footer component ([#5158](https://github.com/SAP/fundamental-ngx/issues/5158)) ([7a1c221](https://github.com/SAP/fundamental-ngx/commit/7a1c2210ad9acfe988b7b422ec2e16723dffa92b))
+
 ### [0.29.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.17...v0.29.1-rc.18) (2021-05-02)
 
 ### [0.29.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.16...v0.29.1-rc.17) (2021-05-02)
