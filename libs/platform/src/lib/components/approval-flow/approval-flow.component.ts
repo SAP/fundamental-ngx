@@ -128,7 +128,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _maxCarouselStep = 0;
 
     /** @hidden */
-    _metaMap: { [key: string]: ApprovalGraphNodeMetadata } = {};
+    _graphMetadata: { [key: string]: ApprovalGraphNodeMetadata } = {};
 
     /**  @hidden */
     _dir: string;
@@ -236,9 +236,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const checkedNodesCount = checked.length;
         const canAdd = checkedNodesCount === 1 && !isNodeApproved(checked[0].node);
 
-        this._canAddBefore = canAdd && this._metaMap[node.id].canAddNodeBefore;
-        this._canAddAfter = canAdd && this._metaMap[node.id].canAddNodeAfter;
-        this._canAddParallel = canAdd && this._metaMap[node.id].canAddParallel;
+        this._canAddBefore = canAdd && this._graphMetadata[node.id].canAddNodeBefore;
+        this._canAddAfter = canAdd && this._graphMetadata[node.id].canAddNodeAfter;
+        this._canAddParallel = canAdd && this._graphMetadata[node.id].canAddParallel;
     }
 
     /** @hidden Watcher's avatar click handler */
@@ -311,7 +311,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return;
         }
 
-        const { nodeIndex, columnIndex } = this._metaMap[node.id];
+        const { nodeIndex, columnIndex } = this._graphMetadata[node.id];
         const isTab = KeyUtil.isKeyCode(event, TAB);
         const isShift = event.shiftKey;
         const isTabMoveForwardPossible = !isShift && !lastNode && !lastColumn;
@@ -454,7 +454,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 }
 
                 if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
-                    const parents = this._metaMap[source.id].parents;
+                    const parents = this._graphMetadata[source.id].parents;
                     parents.forEach(parentNode => parentNode.targets.push(addedNode.id));
                 }
             } else {
@@ -573,6 +573,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return [];
         }
 
+        /* Algorithm in short:
+         * 1. Find all possible paths, longest path length = number of columns in graph
+         * 2. Make all paths the same length (by filling with blank nodes), so the every node will be only in one column
+         * 3. Remove duplicates in paths, so the every node is appeared only once in all paths
+         * 4. Remove empty paths
+         * 5. Transform paths into the columns
+         * 6. Trim end space nodes in columns
+         * 7. Remove columns which contain only blank nodes
+        */
         const paths = getAllGraphPaths(rootNodes, nodes);
         const pathsWithBlankNodes = fillPathsWithBlankNodes(paths);
         const pathsWithSpaces = replaceDuplicatesWithSpacesInPaths(pathsWithBlankNodes);
@@ -605,7 +614,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 metadata[node.id] = {
                     parents: parents,
                     isRoot: !parents.length && !node.blank && !node.space,
-                    isLast: !node.targets.length && !node.blank && !node.space,
+                    isFinal: !node.targets.length && !node.blank && !node.space,
                     parallelStart: node.targets.length > 1,
                     parallelEnd: parents.length > 1,
                     columnIndex: columnIndex,
@@ -673,10 +682,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Build Approval Flow graph and render it */
     private _buildView(approvalProcess: ApprovalProcess): void {
         this._approvalProcess = approvalProcess;
-        this._metaMap = {};
+        this._graphMetadata = {};
 
         this._graph = this._buildNodeTree(this._approvalProcess.nodes);
-        this._metaMap = this._buildGraphMetadata(this._graph);
+        this._graphMetadata = this._buildGraphMetadata(this._graph);
 
         this._resetCheckedNodes();
         this._cdr.detectChanges();
@@ -710,9 +719,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const nodeRect = nodeToFocus._nativeElement.getBoundingClientRect();
         const graphContainerRect = this._graphContainerEl.nativeElement.getBoundingClientRect();
         const graphVisibilityThreshold = graphContainerRect.width;
-        const nodeOffsetFromContainerEdge = this._isRTL ?
-            (graphContainerRect.right - nodeRect.right) :
-            (nodeRect.left - graphContainerRect.left);
+        const nodeOffsetFromContainerEdge = this._isRTL 
+            ? (graphContainerRect.right - nodeRect.right) 
+            : (nodeRect.left - graphContainerRect.left);
 
         nodeToFocus._focus();
 
@@ -738,10 +747,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Delete node object in local approval process data structure */
     private _deleteNode(nodeToDelete: ApprovalNode): void {
         const nodes = [...this._approvalProcess.nodes];
-        const metadata = this._metaMap[nodeToDelete.id];
+        const metadata = this._graphMetadata[nodeToDelete.id];
 
-        const isParentParallelStart = this._metaMap[metadata.parents[0]?.id]?.parallelStart;
-        const isTargetParallelEnd = this._metaMap[nodeToDelete.targets[0]]?.parallelEnd;
+        const isParentParallelStart = this._graphMetadata[metadata.parents[0]?.id]?.parallelStart;
+        const isTargetParallelEnd = this._graphMetadata[nodeToDelete.targets[0]]?.parallelEnd;
 
         let targets: string[] = [];
         if (!isParentParallelStart || !isTargetParallelEnd) {
@@ -916,12 +925,6 @@ function getSpaceNode(): ApprovalGraphNode {
     };
 }
 
-function getNextNotEmptyNode(nodeIndex: number, nodes: ApprovalGraphNode[]): ApprovalGraphNode {
-    const nextNode = nodes[nodeIndex + 1];
-
-    return nextNode?.blank || nextNode?.space ? getNextNotEmptyNode(nodeIndex + 1, nodes) : nextNode;
-}
-
 function isNodeTargetsIncludeId(node: ApprovalNode, id: string): boolean {
     return node.targets.includes(id);
 }
@@ -1091,7 +1094,7 @@ function replaceDuplicatesWithSpacesInPaths(paths: ApprovalGraphNode[][]): Appro
 function removeEmptyPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     const processedPaths: ApprovalGraphNode[][] = [];
 
-    paths.forEach((path, index) => {
+    paths.forEach((path) => {
         const currentPath = [...path];
         const isPathEmpty = path.every(node => node.space);
 

@@ -107,7 +107,7 @@
                             [attr.dir]="_dir"
                             [attr.tabindex]="node.blank || node.space ? -1 : 0"
                             [node]="node"
-                            [meta]="_metaMap[node.id]"
+                            [meta]="_graphMetadata[node.id]"
                             [isEdit]="_isEditMode"
                             [isNextNodeBlank]="!node.blank && _graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
                             [checkDueDate]="checkDueDate"

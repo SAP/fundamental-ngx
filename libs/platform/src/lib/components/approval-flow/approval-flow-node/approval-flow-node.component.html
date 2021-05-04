@@ -3,7 +3,7 @@
     class="approval-flow-node__vertical-line-before"
     [class.approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
 <div
-    *ngIf="!meta?.isLast && meta?.renderVerticalLineAfter"
+    *ngIf="!meta?.isFinal && meta?.renderVerticalLineAfter"
     class="approval-flow-node__vertical-line-after"
     [class.approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
 
@@ -12,7 +12,7 @@
 
     <div *ngIf="meta?.isRoot" class="approval-flow-node__carousel-start-marker"></div>
 
-    <div *ngIf="meta?.isLast" class="approval-flow-node__carousel-end-marker"></div>
+    <div *ngIf="meta?.isFinal" class="approval-flow-node__carousel-end-marker"></div>
 
     <div *ngIf="isEdit" class="approval-flow-node__edit-controls">
         <fd-checkbox

@@ -1,8 +1,8 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ApprovalNode, PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
 
 import { ApprovalFlowNodeComponent } from './approval-flow-node.component';
-import { ApprovalNode, PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
-import { ChangeDetectorRef } from '@angular/core';
 
 const node: ApprovalNode = {
     id: 'ID1',
@@ -50,56 +50,83 @@ describe('ApprovalFlowNodeComponent', () => {
     });
 
     it('should add blank class', () => {
-        component.blank = true;
+        component.node.blank = true;
+
         fixture.detectChanges();
+        detectChangesOnPush();
+
         expect(fixture.nativeElement).toHaveClass('approval-flow-node--blank');
     });
 
-    it('should add line-before class', () => {
-        component.renderLineBefore = true;
-        fixture.detectChanges();
-        expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-before');
-    });
+    it('should toggle line-before & line-after classes', () => {
+        component.node.blank = false;
 
-    it('should add line-after class', () => {
-        component.renderLineAfter = true;
-        fixture.detectChanges();
-        expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-after');
-    });
-
-    it('should render arrow when arrow option set to true',   () => {
-        component.renderArrow = true;
         fixture.detectChanges();
         detectChangesOnPush();
+
+        expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-before');
+        expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-after');
+
+        component.node.blank = true;
+
+        fixture.detectChanges();
+        detectChangesOnPush();
+
+        expect(fixture.nativeElement).not.toHaveClass('approval-flow-node--line-before');
+        expect(fixture.nativeElement).not.toHaveClass('approval-flow-node--line-after');
+
+        component.node.blank = false;
+    });
+
+    it('should render arrow when arrow option set to true', () => {
+        component.renderArrow = true;
+
+        fixture.detectChanges();
+        detectChangesOnPush();
+
         expect(fixture.nativeElement.querySelector('.approval-flow-node__arrow')).toBeTruthy();
     });
 
     it('should have approved class when node is approved', () => {
         component.node.status = 'approved';
-        component.ngOnInit();
+
         fixture.detectChanges();
+        detectChangesOnPush();
+
         expect(fixture.nativeElement).toHaveClass('approval-flow-node--approved');
     });
 
-    // TODO: Unskip after fix
-    xit('should add parent-approved class if parent node is approved', () => {
-        component.parent = Object.assign({ status: 'approved' }, node);
-        component.ngOnInit();
+    it('should add parent-approved class if parent node is approved', () => {
+        component.meta = {
+            parents: [ Object.assign({ status: 'approved' }, node) ],
+            isRoot: false,
+            isFinal: false,
+            parallelStart: false,
+            parallelEnd: false
+        };
+
         fixture.detectChanges();
+        detectChangesOnPush();
+
         expect(fixture.nativeElement).toHaveClass('approval-flow-node--parent-approved');
     });
 
     it('should have positive object status when node is approved', () => {
         component.node.status = 'approved';
-        component.ngOnInit();
+
         fixture.detectChanges();
+        detectChangesOnPush();
+
         expect(component._objectStatus).toEqual('positive');
     });
 
     it('should have negative object status when node is rejected', () => {
         component.node.status = 'rejected';
+
         component.ngOnInit();
         fixture.detectChanges();
+        detectChangesOnPush();
+
         expect(component._objectStatus).toEqual('negative');
     });
 });

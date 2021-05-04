@@ -1,5 +1,5 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Component, QueryList, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
 
@@ -253,7 +253,7 @@ class TestPlatformApprovalFlowComponent {
     dataSource = new TestApprovalFlowDataSource();
 }
 
-describe('ApprovalFlowComponent', () => {
+fdescribe('ApprovalFlowComponent', () => {
     let fixture: ComponentFixture<TestPlatformApprovalFlowComponent>;
     let component: ApprovalFlowComponent;
     let host: TestPlatformApprovalFlowComponent;
@@ -275,6 +275,22 @@ describe('ApprovalFlowComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should properly set node flags (nodes metadada)', () => {
+        const simpleGraphRootNode = simpleGraph.nodes[0];
+        const simpleGraphFinalNode = simpleGraph.nodes[2];
+
+        expect(component._graphMetadata[simpleGraphRootNode.id].isRoot).toBeTruthy();
+        expect(component._graphMetadata[simpleGraphFinalNode.id].isFinal).toBeTruthy();
+
+        expect(component._graphMetadata[simpleGraphRootNode.id].canAddNodeBefore).toBeFalsy();
+        expect(component._graphMetadata[simpleGraphRootNode.id].canAddNodeAfter).toBeFalsy();
+        expect(component._graphMetadata[simpleGraphRootNode.id].canAddParallel).toBeFalsy();
+
+        expect(component._graphMetadata[simpleGraphFinalNode.id].canAddNodeBefore).toBeTruthy();
+        expect(component._graphMetadata[simpleGraphFinalNode.id].canAddNodeAfter).toBeTruthy();
+        expect(component._graphMetadata[simpleGraphFinalNode.id].canAddParallel).toBeTruthy();
     });
 
     it('should render approval flow title', () => {
@@ -311,10 +327,11 @@ describe('ApprovalFlowComponent', () => {
         expect(component._onWatcherClick).toHaveBeenCalled();
     });
 
-    it('should render nodes', () => {
+    it('should render graph', () => {
         const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
 
         expect(nodesContainer).toBeTruthy();
+        expect(nodesContainer.querySelectorAll('.approval-flow__column').length).toEqual(simpleGraph.nodes.length);
         expect(nodesContainer.querySelectorAll('fdp-approval-flow-node').length).toEqual(simpleGraph.nodes.length);
     });
 
@@ -375,15 +392,11 @@ describe('ApprovalFlowComponent', () => {
         expect(prevCount > component._carouselStep).toBeTruthy();
     });
 
-    it('should start adding node to the empty graph and cancel', () => {
-        const componentEnterEditModeSpy = spyOn(component, '_enterEditMode');
-        const componentExitEditModeSpy = spyOn(component, '_exitEditMode');
+    it('should open adding node dialog for the empty graph', () => {
         const dialogSpy = spyOn(fixture.componentRef.injector.get(DialogService), 'open')
             .and.returnValue({ afterClosed: of(null) } as any);
 
         component._addNodeFromToolbar('empty');
-
-        expect(componentEnterEditModeSpy).toHaveBeenCalled();
 
         expect(dialogSpy).toHaveBeenCalled();
 
@@ -391,7 +404,5 @@ describe('ApprovalFlowComponent', () => {
 
         expect(diagogSpyArgs.nodeTarget).toEqual('empty');
         expect(diagogSpyArgs.showNodeTypeSelect).toEqual(false);
-
-        expect(componentExitEditModeSpy).toHaveBeenCalled();
     });
 });
