@@ -423,6 +423,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 nodeTarget: type,
                 showNodeTypeSelect: showNodeTypeSelect,
                 node: Object.assign({}, getBlankNode(), { blank: false }),
+                checkDueDate: this.checkDueDate,
                 ...this._defaultDialogOptions
             }
         });
@@ -480,6 +481,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             data: {
                 isEdit: true,
                 node: Object.assign({}, node),
+                checkDueDate: this.checkDueDate,
                 ...this._defaultDialogOptions
             }
         });

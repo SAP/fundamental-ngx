@@ -110,13 +110,15 @@
                     ></fd-multi-input>
                 </div>
             </div>
-            <div fd-form-item>
+
+            <div *ngIf="_checkDueDate" fd-form-item>
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogDueDate">Due date</label>
+
                 <fd-date-picker
                     type="single"
                     compact="true"
                     [attr.dir]="_data.rtl ? 'rtl' : 'ltr'"
-                    [state]="_isDateNull() ? 'error' : ''"
+                    [state]="!this._dueDate ? 'error' : ''"
                     [(ngModel)]="_dueDate">
                 </fd-date-picker>
             </div>

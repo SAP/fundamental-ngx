@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-
 import { DialogRef, FdDate } from '@fundamental-ngx/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -23,6 +22,7 @@ export interface AddNodeDialogRefData {
     nodeTarget?: ApprovalFlowNodeTarget;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
+    checkDueDate: boolean;
     rtl: boolean;
 }
 
@@ -111,6 +111,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _searchString = '';
 
     /** @hidden */
+    _checkDueDate = false;
+
+    /** @hidden */
     _displayUserFn = displayUserFn;
 
     /** @hidden */
@@ -145,7 +148,8 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     get _isMainSubmitButtonDisabled(): boolean {
         const approvers = this._isSingleUserMode ? this._selectedApprovers : this._selectedTeamArray;
 
-        return !approvers.length || !this._dueDate;
+        return !approvers.length
+            || (this._checkDueDate && !this._dueDate);
     }
 
     /** @hidden */
@@ -167,8 +171,12 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
                 this._setFilteredApprovers(approvers || []);
 
                 if (this._data.isEdit) {
-                    this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
                     this._selectedApprovers = [...this._data.node.approvers];
+                    this._checkDueDate = this._data.checkDueDate;
+
+                    if (this._checkDueDate && this._data.node.dueDate) {
+                        this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
+                    }
         
                     if (this._data.node.approvalTeamId) {
                         this.viewService.selectTeam(this._teams.find(t => t.id === this._data.node.approvalTeamId));
@@ -316,7 +324,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
             this._data.node.approvers = this._selectedTeam.members.map(memberId => this._approvers.find(a => a.id === memberId));
         }
 
-        this._data.node.dueDate = this._dueDate.toDate();
+        if (this._checkDueDate) {
+            this._data.node.dueDate = this._dueDate.toDate();
+        }
 
         this.dialogRef.close({ node: this._data.node, nodeType: this._nodeType });
     }
@@ -361,11 +371,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _setFilteredTeamMembers(users: ApprovalUser[]): void {
         this._filteredTeamMembers = [...users];
         this._cdr.detectChanges();
-    }
-
-    /** @hidden */
-    _isDateNull(): boolean {
-        return !this._dueDate;
     }
 
     /** @hidden */

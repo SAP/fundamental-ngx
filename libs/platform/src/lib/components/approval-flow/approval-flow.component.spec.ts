@@ -253,7 +253,7 @@ class TestPlatformApprovalFlowComponent {
     dataSource = new TestApprovalFlowDataSource();
 }
 
-fdescribe('ApprovalFlowComponent', () => {
+describe('ApprovalFlowComponent', () => {
     let fixture: ComponentFixture<TestPlatformApprovalFlowComponent>;
     let component: ApprovalFlowComponent;
     let host: TestPlatformApprovalFlowComponent;

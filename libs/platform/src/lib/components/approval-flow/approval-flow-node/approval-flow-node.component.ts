@@ -266,13 +266,16 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
             return;
         }
 
-        if (this.checkDueDate) {
+        if (this.checkDueDate && this.node.dueDate) {
             const dueThreshold = Number(new Date(this.node.dueDate)) - (this.dueDateThreshold * DAY_IN_MILISECONDS);
             const nowAndDueDiff = Date.now() - dueThreshold;
+
             this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILISECONDS);
             this._showDueDateWarning = !isNodeApproved(this.node) && dueThreshold < Date.now();
             this._objectStatus = this._showDueDateWarning ? 'critical' : getNodeStatusClass(this.node.status);
+
             this.cd.detectChanges();
+            
             return;
         }
 
