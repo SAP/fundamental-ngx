@@ -4,10 +4,10 @@ import { NotificationRef } from '@fundamental-ngx/core';
 @Component({
     selector: 'fd-notification-example-content',
     template: `
-    <fd-message-strip type="success" [dismissible]="false">
+    <fd-message-strip type="success" [dismissible]="false" marginBottom="1rem">
         A warning message strip.
     </fd-message-strip>
-    <fd-notification-body [hasMessage]="true">
+    <fd-notification-body>
         <fd-notification-content>
             <fd-notification-header>
                 <h2 fd-notification-title [unread]="true">

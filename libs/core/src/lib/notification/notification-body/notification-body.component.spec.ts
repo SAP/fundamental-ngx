@@ -38,10 +38,4 @@ describe('NotificationBodyComponent', () => {
     it('should assign class', () => {
         expect(component.notificationBodyRef.nativeElement.className).toContain('fd-notification__body');
     });
-
-    it('should assign additional classes', () => {
-        component.hasMessage = true;
-        fixture.detectChanges();
-        expect(component.notificationBodyRef.nativeElement.classList).toContain('fd-notification__body--message');
-    });
 });

@@ -1,13 +1,9 @@
 import { 
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
-    Input,
-    ViewEncapsulation,
-    OnChanges,
-    OnInit
+    HostBinding,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-notification-body',
@@ -15,42 +11,8 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationBodyComponent implements OnChanges, OnInit, CssClassBuilder {
-    /** User's custom classes */
-    @Input()
-    class: string;
-
-    /** Whether the Notification has message strip */
-    @Input() 
-    hasMessage = false;
-
-    /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    @applyCssClass
-    /** CssClassBuilder interface implementation
-     * function is responsible for order which css classes are applied
-     */
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-notification__body',
-            this.hasMessage ? 'fd-notification__body--message' : '',
-            this.class
-        ];
-    }
-
-    /** @hidden */
-    elementRef(): ElementRef<any> {
-        return this._elementRef;
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
+export class NotificationBodyComponent {
+     /** @hidden */
+     @HostBinding('class.fd-notification__body')
+     fdNotificationBodyClass = true;
 }
