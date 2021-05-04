@@ -79,7 +79,7 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
 
     /** Emits checked change event */
     @Output()
-    readonly checkedChange: EventEmitter<String[]> = new EventEmitter<String[]>();
+    readonly checkedChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
     /** @hidden used for two way binding, when used outside form */
     private _checked: string[];
