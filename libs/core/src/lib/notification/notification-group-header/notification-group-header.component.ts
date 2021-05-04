@@ -12,7 +12,7 @@ import {
     ViewEncapsulation 
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RtlService } from '../../utils/public_api';
+import { RtlService, ContentDensityService } from '../../utils/public_api';
 @Component({
     selector: 'fd-notification-group-header',
     template: `
@@ -45,11 +45,11 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy  {
     _rtl = false;
 
     /** @hidden */
-    _subscription = new Subscription();
+    _subscriptions = new Subscription();
 
     /** Whether the expand button is in compact mode */
     @Input()
-    expandCompact = true;
+    expandCompact: boolean;
 
     /** aria-label of the expand button */
     @Input()
@@ -69,17 +69,24 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy  {
 
     constructor(
         private _cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.expandCompact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.expandCompact = density !== 'cozy';
+                this._cdRef.markForCheck();
+            }))
+        }
         this._listenRtl();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._subscription.unsubscribe();
+        this._subscriptions.unsubscribe();
     }
 
     /** Method that toggles the Notification list content */
@@ -100,7 +107,7 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy  {
     /** @hidden */
     private _listenRtl(): void {
         if (this._rtlService) {
-            this._subscription.add(
+            this._subscriptions.add(
                 this._rtlService.rtl.subscribe(rtl => {
                     this._rtl = rtl;
                     this._cdRef.markForCheck();

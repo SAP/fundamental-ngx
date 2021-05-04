@@ -17,6 +17,7 @@ export class NotificationService {
 
     /**
      * Opens a notification component with a content of type TemplateRef or Component Type
+     * @param content Content of the notification component.
      * @param notificationConfig Configuration of the notification component.
      */
     public open(

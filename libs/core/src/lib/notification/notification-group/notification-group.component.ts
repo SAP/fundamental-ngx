@@ -49,7 +49,7 @@ export class NotificationGroupComponent  implements OnChanges, OnInit, CssClassB
     }
 
     /** @hidden */
-    elementRef(): ElementRef<any> {
+    elementRef(): ElementRef {
         return this._elementRef;
     }
 
