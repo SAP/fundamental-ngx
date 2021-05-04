@@ -405,4 +405,50 @@ describe('ApprovalFlowComponent', () => {
         expect(diagogSpyArgs.nodeTarget).toEqual('empty');
         expect(diagogSpyArgs.showNodeTypeSelect).toEqual(false);
     });
+
+    it('should calculate toolbar buttons state', () => {
+        const rootNode = simpleGraph.nodes[0];
+        const finalNode = simpleGraph.nodes[2];
+
+        component._onNodeCheck(rootNode);
+
+        expect(component._canAddBefore).toBeFalsy();
+        expect(component._canAddAfter).toBeFalsy();
+        expect(component._canAddParallel).toBeFalsy();
+
+        component._onNodeCheck(rootNode);
+        component._onNodeCheck(finalNode);
+
+        expect(component._canAddBefore).toBeFalsy();
+        expect(component._canAddAfter).toBeFalsy();
+        expect(component._canAddParallel).toBeFalsy();
+    });
+
+    it('should enter edit mode', () => {
+        const watchers = [];
+        const watchersSpy = spyOn(component.dataSource, 'fetchWatchers')
+            .and.returnValue(of(watchers));
+
+        component._enterEditMode();
+
+        expect(watchersSpy).toHaveBeenCalled();
+        expect(component._usersForWatchersList).toEqual(watchers);
+        expect(component._isEditMode).toBeTruthy();
+    });
+
+    it('should save edit mode changes', () => {
+        const approvalSpy = spyOn(component.dataSource, 'updateApprovals')
+            .and.callThrough();
+
+        component._saveEditModeChanges();
+
+        expect(approvalSpy).toHaveBeenCalled();
+        expect(component._isEditMode).toBeFalsy();
+    }); 
+
+    it('should exit edit mode', () => {
+        component._exitEditMode();
+
+        expect(component._isEditMode).toBeFalsy();
+    });
 });
