@@ -613,6 +613,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     canAddNodeBefore: node.status === 'not started' && !allNodeParentsApproved,
                     canAddNodeAfter: isNodeNotApproved,
                     canAddParallel: isNodeNotApproved,
+                    isVerticalLineBeforeSolid: node.space && this._graph[columnIndex - 1]?.allNodesApproved,
+                    isVerticalLineAfterSolid: node.space && this._graph[columnIndex].allNodesApproved
                 };
             });
         });

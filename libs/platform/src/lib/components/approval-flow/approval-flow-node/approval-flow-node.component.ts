@@ -196,13 +196,21 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
-    get _areAllParentsApproved(): boolean {
+    get _isVerticalLineBeforeSolid(): boolean {
+        if (!this.meta?.parents.length) {
+            return this.meta?.isVerticalLineBeforeSolid;
+        }
+
         return this.meta.parents.every(parentNode => isNodeApproved(parentNode));
     }
 
     /** @hidden */
-    get _areAllNodesInColumnApproved(): boolean {
-        return this._areAllParentsApproved && this.allNodesInColumnApproved;
+    get _isVerticalLineAfterSolid(): boolean {
+        if (!this.node?.targets.length) {
+            return this.meta?.isVerticalLineAfterSolid;
+        }
+
+        return this._isVerticalLineBeforeSolid && this.allNodesInColumnApproved;
     }
 
     /** @hidden */

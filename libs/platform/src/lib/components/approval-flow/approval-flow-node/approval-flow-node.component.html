@@ -1,11 +1,11 @@
 <div
     *ngIf="!meta?.isRoot && meta?.renderVerticalLineBefore"
     class="approval-flow-node__vertical-line-before"
-    [class.approval-flow-node__vertical-line-before-solid]="_areAllParentsApproved"></div>
+    [class.approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
 <div
     *ngIf="!meta?.isLast && meta?.renderVerticalLineAfter"
     class="approval-flow-node__vertical-line-after"
-    [class.approval-flow-node__vertical-line-after-solid]="_areAllNodesInColumnApproved"></div>
+    [class.approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
 
 <ng-container *ngIf="!blank && !space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>

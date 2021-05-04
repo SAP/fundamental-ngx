@@ -203,7 +203,9 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &:after,
         .#{$block}__add,
         .#{$block}__carousel-start-marker,
-        .#{$block}__carousel-end-marker {
+        .#{$block}__carousel-end-marker,
+        .#{$block}__vertical-line-before,
+        .#{$block}__vertical-line-after {
             visibility: hidden;
         }
     }

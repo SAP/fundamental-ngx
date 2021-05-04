@@ -32,4 +32,6 @@ export interface ApprovalGraphNodeMetadata {
     canAddParallel?: boolean;
     renderVerticalLineBefore?: boolean;
     renderVerticalLineAfter?: boolean;
+    isVerticalLineBeforeSolid?: boolean;
+    isVerticalLineAfterSolid?: boolean;
 }
