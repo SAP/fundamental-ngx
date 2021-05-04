@@ -4,6 +4,7 @@ import * as BusyIndicatorHtml from '!raw-loader!./examples/busy-indicator-basic-
 import * as BusyIndicatorSizeHtml from '!raw-loader!./examples/busy-indicator-size-example.component.html';
 import * as BusyIndicatorWrapperTs from '!raw-loader!./examples/busy-indicator-wrapper-example.component.ts';
 import * as BusyIndicatorWrapperHtml from '!raw-loader!./examples/busy-indicator-wrapper-example.component.html';
+import * as BusyIndicatorLabelHtml from '!raw-loader!./examples/busy-indicator-label-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -36,6 +37,13 @@ export class BusyIndicatorDocsComponent {
             code: BusyIndicatorWrapperTs,
             fileName: 'busy-indicator-wrapper-example',
             component: 'BusyIndicatorWrapperExampleComponent'
+        }
+    ];
+    busyIndicatorLabelExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: BusyIndicatorLabelHtml,
+            fileName: 'busy-indicator-label-example'
         }
     ];
 }

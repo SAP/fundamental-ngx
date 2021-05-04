@@ -14,6 +14,7 @@
         <div class="fd-busy-indicator--circle-0"></div>
         <div class="fd-busy-indicator--circle-1"></div>
         <div class="fd-busy-indicator--circle-2"></div>
+		<span *ngIf="labelText" class="fd-form-label fd-busy-indicator__text">{{labelText}}</span>
     </div>
 
     <div class="fd-busy-indicator__overlay"
