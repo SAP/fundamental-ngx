@@ -379,14 +379,17 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
     selectGraph(selectedGraph: string = 'complex'): void {
         this.selectedGraph = selectedGraph as GraphTypes;
         const graph = { ...graphs[this.selectedGraph] };
+
         graph.nodes = graph.nodes.map(n => {
             const nodeCopy = { ...n };
+
             if (this.defaultStatus) {
                 nodeCopy.status = this.defaultStatus;
             }
 
             return nodeCopy;
         });
+
         this.state.next(graph);
     }
 

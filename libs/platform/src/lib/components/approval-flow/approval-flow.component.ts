@@ -200,6 +200,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 this._buildView(approvalProcess);
             })
         );
+        
         this.subscriptions.add(
             this._rtlService?.rtl.subscribe(isRtl => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
@@ -219,11 +220,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 ...this._defaultDialogOptions
             }
         });
+
         dialog.afterClosed.subscribe((reminderTargets) => {
             if (Array.isArray(reminderTargets)) {
                 this._sendReminders(reminderTargets, node);
             }
         });
+
         this.nodeClick.emit(node);
     }
 
@@ -595,7 +598,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             column.nodes.forEach((node, nodeIndex) => {
                 const parents = findParentNodes(node, nodes);
                 const isNodeNotApproved = !isNodeApproved(node);
-                const allNodeParentsApproved = parents.every(_node => isNodeApproved(_node));
+                const allNodeParentsApproved = parents.length
+                    ? parents.every(_node => isNodeApproved(_node))
+                    : false;
     
                 metadata[node.id] = {
                     parents: parents,

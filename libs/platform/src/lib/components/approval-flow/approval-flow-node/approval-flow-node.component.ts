@@ -103,7 +103,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @HostBinding('class.approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
         if (!this.meta?.parents?.length) {
-            return true;
+            return this.node && isNodeApproved(this.node);
         }
 
         return this.meta.parents.every(node => isNodeApproved(node));
@@ -181,7 +181,8 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     /** @hidden */
     get _isEditActionsAvailable(): boolean {
-        return this.node.status === 'approved' || this.node.status === 'rejected';
+        return this.node.status === 'approved'
+            || this.node.status === 'rejected';
     }
 
     /** @hidden */
@@ -206,8 +207,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     /** @hidden */
     get _isRenderAddButtonAfter(): boolean {
-        return this.meta?.canAddNodeAfter
-            && (this.meta?.isLastInParallel || this.meta?.isLast || this.isNextNodeBlank);
+        return this.meta?.canAddNodeAfter;
     }
 
     /** @hidden */
