@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.0...v0.29.2-rc.1) (2021-05-04)
+
+
+### Bug Fixes
+
+* import form label styling and update facet examples ([#5283](https://github.com/SAP/fundamental-ngx/issues/5283)) ([5ca8bad](https://github.com/SAP/fundamental-ngx/commit/5ca8bad5c870f2709788168a06fcade60ca76978))
+
 ### [0.29.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.1...v0.29.2-rc.0) (2021-05-04)
 
 ### [0.29.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.19...v0.29.1) (2021-05-03)
