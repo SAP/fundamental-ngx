@@ -8,18 +8,10 @@
         "nx.json": "*"
     },
     "projects": {
-        "docs": {
-            "tags": ["fd"]
-        },
-        "docs-e2e": {
-            "tags": [],
-            "implicitDependencies": ["docs"]
-        },
-        "core": {
-            "tags": ["fd"]
-        },
-        "platform": {
-            "tags": ["fdp"]
-        }
+        "docs": { "tags": ["fd"] },
+        "docs-e2e": { "tags": [], "implicitDependencies": ["docs"] },
+        "core": { "tags": ["fd"] },
+        "platform": { "tags": ["fdp"] },
+        "momentadapter": { "tags": ["fdm"] }
     }
 }

@@ -1,8 +1,7 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
-import { DatetimeAdapter, DateLocale } from '@fundamental-ngx/core';
-import { daysOfWeekLocale, monthLocale } from '../datetime/datetime-operators';
+import { DatetimeAdapter, DateLocale, daysOfWeekLocale, monthLocale } from '@fundamental-ngx/core';
 import { Observable } from 'rxjs';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {

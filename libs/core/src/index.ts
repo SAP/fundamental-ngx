@@ -77,4 +77,4 @@ export * from './lib/slider/public_api';
 export * from './lib/illustrated-message/public_api';
 export * from './lib/text/public_api';
 export * from './lib/status-indicator/public_api';
-export * from './lib/moment-datetime/public_api';
+export * from './lib/datetime/datetime-operators';
