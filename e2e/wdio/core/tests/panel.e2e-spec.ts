@@ -6,7 +6,7 @@ import {
 
 describe('Panel test suite', function() {
     const panelPage = new PanelPo();
-    const { toggleButton, panelExpandableButton, panelParagraphs, expandablePanel, compactPanelButton, panelTitle } = panelPage;
+    const { toggleButton, panelExpandableButton, panelParagraphs, expandableButton, compactPanelButton, panelTitle } = panelPage;
 
     beforeAll(() => {
         panelPage.open();
@@ -24,7 +24,7 @@ describe('Panel test suite', function() {
     it('should check Expandable Panel example', () => {
         scrollIntoView(toggleButton);
         click(toggleButton);
-        expect(getAttributeByName(expandablePanel, 'ng-reflect-expanded')).toBe('false');
+        expect(getAttributeByName(expandableButton, 'aria-expanded')).toBe('false');
 
         click(panelExpandableButton);
         expect(isElementDisplayed(panelParagraphs)).toBe(true, `paragraph not displayed`);
