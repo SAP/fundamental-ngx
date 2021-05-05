@@ -210,11 +210,11 @@ describe('Nested Form Groups', () => {
                     <fdp-form-field #lastName id="lastName" label="Last Name">
                         <fdp-input name="lastName" [formControl]="lastName.formControl"></fdp-input>
                     </fdp-form-field>
-                    <fdp-from-field-group>
+                    <fdp-form-field-group>
                         <fdp-form-field #favoriteColor id="favoriteColor" label="Favorite Color">
                             <fdp-input name="favoriteColor" [formControl]="favoriteColor.formControl"></fdp-input>
                         </fdp-form-field>
-                    </fdp-from-field-group>
+                    </fdp-form-field-group>
                     <!-- Nested Group -->
                     <fdp-form-group #addressGroup [formGroup]="userFormGroup.get('address')" [object]="user.address">
                         <fdp-form-field #state id="state" label="State">
@@ -223,11 +223,11 @@ describe('Nested Form Groups', () => {
                         <fdp-form-field #city id="city" label="City">
                             <fdp-input name="city" [formControl]="city.formControl"></fdp-input>
                         </fdp-form-field>
-                        <fdp-from-field-group>
+                        <fdp-form-field-group>
                             <fdp-form-field #street id="street" label="Street">
                                 <fdp-input name="street" [formControl]="street.formControl"></fdp-input>
                             </fdp-form-field>
-                        </fdp-from-field-group>
+                        </fdp-form-field-group>
                     </fdp-form-group>
                 </fdp-form-group>
                 <button type="submit" #submitButton>Submit</button>
