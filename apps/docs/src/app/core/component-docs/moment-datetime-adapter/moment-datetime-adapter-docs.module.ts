@@ -5,9 +5,9 @@ import {
     DatetimePickerModule,
     FormModule,
     InputGroupModule,
-    MomentDatetimeModule,
     SegmentedButtonModule
 } from '@fundamental-ngx/core';
+import { MomentDatetimeModule } from '@fundamental-ngx/momentadapter'
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';

@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "types": ["jasmine"]
+    },
+    "include": ["**/*.ts"],
+    "paths": {
+        "@fundamental-ngx/core": ["../../dist/libs/core"]
+    }
+}
