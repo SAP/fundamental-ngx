@@ -108,14 +108,10 @@ describe('ApprovalFlowAddNodeComponent', () => {
     });
 
     it('should confirm selected team', () => {
-        const approvalTeam: ApprovalTeam = {
-            id: 'id1',
-            name: 'name1',
-            description: '',
-            members: []
-        };
-
+        let approvalTeam: ApprovalTeam;
         const viewServiceSpy = spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView').and.callThrough();
+        
+        approvalFlowDataSource.fetchTeams().subscribe(teams => approvalTeam = teams[0]);
 
         component._data.isEdit = true;
 

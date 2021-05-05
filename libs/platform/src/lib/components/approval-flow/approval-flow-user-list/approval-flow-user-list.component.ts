@@ -45,11 +45,15 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         if (this.selectedUsers.length) {
             const selectedApproversNames = this.selectedUsers.map(approver => approver.name);
-            this._selectedItems = this.listItems.filter(item => selectedApproversNames.includes(item.avatarTitle));
+
+            this._selectedItems = this.listItems
+                .filter(item => selectedApproversNames.includes(item.avatarTitle));
+
             this._selectedItems.forEach(item => {
                 item._selected = true;
                 this.list._selectItem(item);
             });
+
             this._cdr.detectChanges();
         }
     }
@@ -57,6 +61,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
     /** @hidden */
     _onSelect(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
+        
         this.onSelectionChange.emit(this._getUsersFromSelectedItems(event.selectedItems));
     }
 
