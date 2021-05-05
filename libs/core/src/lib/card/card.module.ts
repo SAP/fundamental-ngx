@@ -12,7 +12,6 @@ import { CardSubtitleDirective } from './card-subtitle.directive';
 import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
 import { CardCounterDirective } from './card-counter.directive';
 import { CardContentComponent } from './card-content.component';
-import { CardFooterComponent } from './card-footer.component';
 import { CardLoaderComponent } from './card-loader.component';
 
 import { CardKpiHeaderComponent } from './kpi/card-kpi-header.component';
@@ -27,7 +26,6 @@ const components = [
     CardComponent,
     CardHeaderComponent,
     CardContentComponent,
-    CardFooterComponent,
     CardTitleDirective,
     CardSubtitleDirective,
     CardSecondSubtitleDirective,

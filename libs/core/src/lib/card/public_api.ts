@@ -6,7 +6,6 @@ export { CardTitleDirective } from './card-title.directive';
 export { CardSubtitleDirective } from './card-subtitle.directive';
 export { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
 export { CardContentComponent } from './card-content.component';
-export { CardFooterComponent } from './card-footer.component';
 export { CardLoaderComponent } from './card-loader.component';
 
 export { CardKpiHeaderComponent } from './kpi/card-kpi-header.component';

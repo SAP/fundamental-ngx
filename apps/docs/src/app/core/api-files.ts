@@ -38,7 +38,6 @@ export const API_FILES = {
         'CardSubtitleDirective',
         'CardSecondSubtitleDirective',
         'CardContentComponent',
-        'CardFooterComponent',
         'CardLoaderComponent',
         'CardKpiHeaderComponent',
         'CardKpiValueDirective',
