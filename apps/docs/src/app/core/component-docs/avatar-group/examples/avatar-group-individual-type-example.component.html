@@ -128,15 +128,17 @@
                                  class="fd-avatar-group__overflow-item--custom-class">
 
                                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                                           fd-avatar-group-focusable-avatar
                                            [circle]="true"
                                            size="s"
                                            [label]="person.firstName + ' ' + person.lastName"
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
 
                                 <fd-avatar *ngIf="person.imageUrl"
+                                           fd-avatar-group-focusable-avatar
                                            [ariaLabel]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
@@ -144,9 +146,10 @@
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
 
                                 <fd-avatar *ngIf="person.glyph"
+                                           fd-avatar-group-focusable-avatar
                                            [ariaLabel]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
@@ -154,7 +157,7 @@
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
                                 <div class="fd-avatar-group__overflow-item__text">
                                     <h5 fd-title [headerSize]="5">{{ person.firstName }} {{ person.lastName }}</h5>
                                     <div>{{ person.position }}</div>

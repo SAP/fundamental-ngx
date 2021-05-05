@@ -7,7 +7,7 @@
                 (isOpenChange)="isOpenChanged($event)"
                 placement="bottom"
                 additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class">
-        <fd-popover-control tabindex="0" (keyup)="handleKeyupOnPopoverControl($event)">
+        <fd-popover-control class="fd-avatar-group__popover-control" tabindex="0" (keyup)="handleKeyupOnPopoverControl($event)">
             <div *ngFor="let person of people" fd-avatar-group-item>
                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                            [label]="person.firstName + ' ' + person.lastName"
@@ -62,16 +62,18 @@
                 <div fd-avatar-group-overflow-body>
                     <ng-container *ngIf="overflowPopoverStage === 'main'">
                         <ng-container *ngFor="let person of people; let idx = index;">
-                            <div fd-avatar-group-overflow-item (click)="openOverflowDetails(idx)">
+                            <div fd-avatar-group-overflow-item>
                                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                                           fd-avatar-group-focusable-avatar
                                            [circle]="true"
                                            size="s"
                                            [label]="person.firstName + ' ' + person.lastName"
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
                                 <fd-avatar *ngIf="person.imageUrl"
+                                           fd-avatar-group-focusable-avatar
                                            [ariaLabel]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
@@ -79,8 +81,9 @@
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
                                 <fd-avatar *ngIf="person.glyph"
+                                           fd-avatar-group-focusable-avatar
                                            [ariaLabel]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
@@ -88,7 +91,7 @@
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
                             </div>
                         </ng-container>
                     </ng-container>

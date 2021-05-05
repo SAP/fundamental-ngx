@@ -21,15 +21,7 @@
         margin: 0.25rem 0;
 
         fd-avatar {
-            cursor: pointer;
             margin-right: .5rem;
-
-            &:focus {
-                outline-offset: 0.0625rem;
-                outline-width: 0.0625rem;
-                outline-color: #000;
-                outline-style: dotted;
-            }
         }
     }
 

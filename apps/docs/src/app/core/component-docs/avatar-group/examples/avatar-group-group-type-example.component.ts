@@ -28,7 +28,7 @@ export class AvatarGroupGroupTypeExampleComponent {
     constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}
 
     handleKeyupOnPopoverControl(event: KeyboardEvent): void {
-        if (!KeyUtil.isKeyCode(event, ENTER) && !KeyUtil.isKeyCode(event, SPACE)) {
+        if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             return;
         }
 
