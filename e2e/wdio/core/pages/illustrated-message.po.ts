@@ -1,0 +1,31 @@
+import { CoreBaseComponentPo } from './core-base-component.po';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+
+export class IllustratedMessagePo extends CoreBaseComponentPo {
+    url = '/illustrated-message';
+    root = '#page-content';
+
+    sceneAndSpotButtons = 'fd-illustrated-message-actions button';
+    buttonDialog = '#background-ex1 .fd-button';
+    dialogPopup = '[role="dialog"]';
+    closePopupSignButton = '.fd-dialog__header .fd-button';
+    closePopupButton = '.fd-dialog__footer [label="Close"]>button';
+
+    open(): void {
+        super.open(this.url);
+        waitForElDisplayed(this.root);
+        waitForPresent(this.title);
+    }
+
+    getScreenshotFolder(): object {
+        return super.getScreenshotFolder(this.url);
+    }
+
+    saveExampleBaselineScreenshot(specName: string = 'illustrated-message'): void {
+        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
+    }
+
+    compareWithBaseline(specName: string = 'illustrated-message'): any {
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
+    }
+}
