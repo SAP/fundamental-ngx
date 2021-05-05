@@ -7,13 +7,16 @@ import {
     HostBinding,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
+    Optional,
     Output,
     QueryList,
     ViewChild,
     ViewChildren
 } from '@angular/core';
-import { MenuComponent, ObjectStatus } from '@fundamental-ngx/core';
+import { MenuComponent, ObjectStatus, RtlService } from '@fundamental-ngx/core';
+import { Subscription } from 'rxjs';
 
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
@@ -37,7 +40,7 @@ const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
         class: 'fdp-approval-flow-node'
     }
 })
-export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
+export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** Approval flow graph node */
     @Input() node: ApprovalGraphNode;
 
@@ -59,18 +62,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
      */
     @Input() allNodesInColumnApproved = false;
 
-    /** Whether node is blank */
-    @HostBinding('class.approval-flow-node--blank')
-    get blank(): boolean {
-        return this.node?.blank;
-    }
-
-     /** Whether node is spacer */
-    @HostBinding('class.approval-flow-node--space')
-    get space(): boolean {
-        return this.node?.space;
-    }
-
     /** Whether the node is in edit mode */
     @Input()
     @HostBinding('class.approval-flow-node--edit-mode')
@@ -81,15 +72,39 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     @HostBinding('class.approval-flow-node--next-blank')
     isNextNodeBlank: boolean;
 
-    /** Whether node element has connection line before the node element */
+    /** @hidden */
+    @HostBinding('class.approval-flow-node--blank')
+    get _blank(): boolean {
+        return this.node?.blank;
+    }
+
+    /** @hidden */
+    @HostBinding('class.approval-flow-node--space')
+    get _space(): boolean {
+        return this.node?.space;
+    }
+
+    /** @hidden */
+    @HostBinding('class.approval-flow-node--root')
+    get _isRoot(): boolean {
+        return this.meta?.isRoot
+    }
+
+    /** @hidden */
+    @HostBinding('class.approval-flow-node--final')
+    get _isFinal(): boolean {
+        return this.meta?.isFinal;
+    }
+
+    /** @hidden */
     @HostBinding('class.approval-flow-node--line-before')
-    get renderLineBefore(): boolean {
+    get _renderLineBefore(): boolean {
         return !this.node?.blank;
     }
 
-    /** Whether node element has connection line after the node element */
+    /** @hidden */
     @HostBinding('class.approval-flow-node--line-after')
-    get renderLineAfter(): boolean {
+    get _renderLineAfter(): boolean {
         return !this.node?.blank;
     }
 
@@ -140,6 +155,10 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     }
 
     /** @hidden */
+    @HostBinding('attr.dir')
+    _dir: string;
+
+    /** @hidden */
     _isSelected = false;
 
     /** @hidden */
@@ -165,9 +184,14 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
 
     @ViewChildren(ApprovalFlowDropZoneDirective) dropZones: QueryList<ApprovalFlowDropZoneDirective>;
 
+    private _subscriptions = new Subscription();
+
     /** @hidden */
-    constructor(private elRef: ElementRef, private cd: ChangeDetectorRef) {
-    }
+    constructor(
+        private elRef: ElementRef,
+        private _cdr: ChangeDetectorRef,
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     get _nativeElement(): HTMLElement {
@@ -221,11 +245,22 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     ngOnInit(): void {
         this._checkNodeStatus();
+
+        this._subscriptions.add(
+            this._rtlService?.rtl.subscribe(isRtl => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this._cdr.detectChanges();
+            })
+        );
     }
 
     /** @hidden */
     ngOnChanges(): void {
         this._checkNodeStatus();
+    }
+
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */
@@ -251,13 +286,13 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
     /** @hidden */
     _deactivateDropZones(): void {
         this.dropZones.forEach(dropZone => dropZone.active = false);
-        this.cd.detectChanges();
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
     _checkIfNodeDraggedInDropZone(nodeRect: DOMRect): void {
         this.dropZones.forEach(dropZone => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
-        this.cd.detectChanges();
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -274,13 +309,13 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges {
             this._showDueDateWarning = !isNodeApproved(this.node) && dueThreshold < Date.now();
             this._objectStatus = this._showDueDateWarning ? 'critical' : getNodeStatusClass(this.node.status);
 
-            this.cd.detectChanges();
+            this._cdr.detectChanges();
             
             return;
         }
 
         this._objectStatus = getNodeStatusClass(this.node.status);
-        this.cd.detectChanges();
+        this._cdr.detectChanges();
     }
 
 }

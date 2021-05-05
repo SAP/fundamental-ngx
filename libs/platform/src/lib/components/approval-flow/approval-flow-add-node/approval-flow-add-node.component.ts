@@ -187,17 +187,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
                             ? this._approverTypes.EVERYONE
                             : this._approverTypes.ANYONE;
                     }
-
-                    switch (this._data.nodeTarget) {
-                        case 'empty':
-                        case 'before':
-                        case 'after':
-                            this._nodeType = this._nodeTypes.SERIAL;
-                            break;
-                        case 'parallel':
-                            this._nodeType = this._nodeTypes.PARALLEL;
-                            break;
-                    }
         
                     this._cdr.detectChanges();
                 }
@@ -207,6 +196,17 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
             this._onSearchStringChange('');
             this._cdr.detectChanges();
         });
+
+        switch (this._data.nodeTarget) {
+            case 'empty':
+            case 'before':
+            case 'after':
+                this._nodeType = this._nodeTypes.SERIAL;
+                break;
+            case 'parallel':
+                this._nodeType = this._nodeTypes.PARALLEL;
+                break;
+        }
     }
 
     /** @hidden */

@@ -166,7 +166,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     private _editModeInitSub: Subscription;
-    private subscriptions = new Subscription();
+    private _subscriptions = new Subscription();
 
     /** @hidden */
     constructor(
@@ -194,14 +194,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return;
         }
 
-        this.subscriptions.add(
+        this._subscriptions.add(
             this.dataSource.fetch().subscribe(approvalProcess => {
                 this._initialApprovalProcess = cloneApprovalProcess(approvalProcess);
                 this._buildView(approvalProcess);
             })
         );
         
-        this.subscriptions.add(
+        this._subscriptions.add(
             this._rtlService?.rtl.subscribe(isRtl => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this._cdr.detectChanges();
@@ -563,7 +563,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
@@ -700,7 +700,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Listen window resize and distribute cards on column change */
     private _listenOnResize(): void {
-        this.subscriptions.add(
+        this._subscriptions.add(
             fromEvent(window, 'resize')
                 .pipe(debounceTime(60))
                 .subscribe(() => {

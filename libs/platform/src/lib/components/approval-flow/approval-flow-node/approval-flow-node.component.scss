@@ -39,7 +39,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &:before {
             border-right: 2px dashed #89919A;
             border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-            left: -2rem;
+            left: calc(-2rem - 1px);
         }
 
         &-solid:before {
@@ -52,7 +52,7 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &:after {
             border-right: 2px dashed #89919A;
             border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-            right: -2rem;
+            right: calc(-2rem - 1px);
         }
 
         &-solid:after {
@@ -62,17 +62,17 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &[dir='rtl'] {
-        &.#{$block}__vertical-line-before {
+        .#{$block}__vertical-line-before {
             &:before {
                 left: auto;
-                right: -2rem;
+                right: calc(-2rem - 1px);
             }
         }
 
-        &.#{$block}__vertical-line-after {
+        .#{$block}__vertical-line-after {
             &:after {
                 right: auto;
-                left: -2rem;
+                left: calc(-2rem - 1px);
             }
         }
     }
@@ -167,7 +167,8 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}--last-in-parallel,
-    &.#{$block}--parallel-start {
+    &.#{$block}--parallel-start,
+    &.#{$block}--final {
         .#{$block}__add--after {
             right: -1.5rem;
 
@@ -178,7 +179,8 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}--first-in-parallel,
-    &.#{$block}--parallel-end {
+    &.#{$block}--parallel-end,
+    &.#{$block}--root {
         .#{$block}__add--before {
             left: -1.5rem;
 
@@ -288,7 +290,8 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         }
 
         &.#{$block}--last-in-parallel,
-        &.#{$block}--parallel-start {
+        &.#{$block}--parallel-start,
+        &.#{$block}--final {
             .#{$block}__add--after {
                 left: -1.5rem;
 
@@ -299,7 +302,8 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         }
 
         &.#{$block}--first-in-parallel,
-        &.#{$block}--parallel-end {
+        &.#{$block}--parallel-end,
+        &.#{$block}--root {
             .#{$block}__add--before {
                 right: -1.5rem;
 

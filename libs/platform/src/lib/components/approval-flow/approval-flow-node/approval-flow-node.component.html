@@ -1,18 +1,18 @@
 <div
-    *ngIf="!meta?.isRoot && meta?.renderVerticalLineBefore"
+    *ngIf="!_isRoot && meta?.renderVerticalLineBefore"
     class="approval-flow-node__vertical-line-before"
     [class.approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
 <div
-    *ngIf="!meta?.isFinal && meta?.renderVerticalLineAfter"
+    *ngIf="!_isFinal && meta?.renderVerticalLineAfter"
     class="approval-flow-node__vertical-line-after"
     [class.approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
 
-<ng-container *ngIf="!blank && !space">
+<ng-container *ngIf="!_blank && !_space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
 
-    <div *ngIf="meta?.isRoot" class="approval-flow-node__carousel-start-marker"></div>
+    <div *ngIf="_isRoot" class="approval-flow-node__carousel-start-marker"></div>
 
-    <div *ngIf="meta?.isFinal" class="approval-flow-node__carousel-end-marker"></div>
+    <div *ngIf="_isFinal" class="approval-flow-node__carousel-end-marker"></div>
 
     <div *ngIf="isEdit" class="approval-flow-node__edit-controls">
         <fd-checkbox
@@ -97,11 +97,11 @@
     </div>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!blank && !space && meta?.canAddNodeBefore)">
+<ng-container *ngIf="isEdit && (!_blank && !_space && meta?.canAddNodeBefore)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!blank && !space && _isRenderAddButtonAfter)">
+<ng-container *ngIf="isEdit && (!_blank && !_space && _isRenderAddButtonAfter)">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 
@@ -109,9 +109,9 @@
     <button
         class="approval-flow-node__add"
         *ngIf="node.status !== 'approved'"
-        [class.approval-flow-node__add--blank]="blank"
-        [class.approval-flow-node__add--before]="!blank && placement === 'before'"
-        [class.approval-flow-node__add--after]="!blank && placement === 'after'"
+        [class.approval-flow-node__add--blank]="_blank"
+        [class.approval-flow-node__add--before]="!_blank && placement === 'before'"
+        [class.approval-flow-node__add--after]="!_blank && placement === 'after'"
         [style.visibility]="dropZone.active ? 'hidden' : ''"
         (click)="onAdd.emit(placement)"
     >
@@ -125,7 +125,7 @@
         class="approval-flow-node__drop-zone"
         [class.approval-flow-node__drop-zone--active]="dropZone.active"
         [class.approval-flow-node__drop-zone--blank]="isNextNodeBlank"
-        [class.approval-flow-node__drop-zone--partial]="!blank && !isNextNodeBlank"
+        [class.approval-flow-node__drop-zone--partial]="!_blank && !isNextNodeBlank"
     ></div>
 </ng-template>
 
