@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.29.1-rc.14",
+  "version": "0.29.2-rc.1",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -92,12 +92,12 @@
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
   },
   "dependencies": {
-    "@angular/animations": "~11.2.10",
+    "@angular/animations": "~11.2.12",
     "@angular/cdk": "~11.2.9",
-    "@angular/common": "~11.2.10",
+    "@angular/common": "~11.2.12",
     "@angular/compiler": "~11.2.10",
     "@angular/core": "~11.2.10",
-    "@angular/forms": "~11.2.10",
+    "@angular/forms": "~11.2.12",
     "@angular/localize": "^11.2.12",
     "@angular/platform-browser": "~11.2.10",
     "@angular/platform-browser-dynamic": "~11.2.10",
@@ -144,7 +144,7 @@
     "@types/jasmine": "3.6.6",
     "@types/jasminewd2": "2.0.8",
     "@wdio/allure-reporter": "7.0.0",
-    "@wdio/cli": "6.9.1",
+    "@wdio/cli": "6.12.0",
     "@wdio/jasmine-framework": "6.8.0",
     "@wdio/local-runner": "6.9.1",
     "@wdio/sauce-service": "7.0.0",
