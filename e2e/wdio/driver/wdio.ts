@@ -398,3 +398,8 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
             return focusElement(selector, index);
     }
 }
+
+export function getPreviousElementText(selector: string, index: number = 0): string {
+    checkSelectorExists(selector, index);
+    return $$(selector)[index].previousElement().getText();
+}
