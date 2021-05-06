@@ -16,7 +16,7 @@ import {
 import { createKeyboardEvent } from '../../testing/event-objects';
 import { AddNodeDialogRefData, APPROVAL_FLOW_NODE_TYPES } from './approval-flow-add-node/approval-flow-add-node.component';
 
-const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
+const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 const users: ApprovalUser[] = [
     {
         id: 'uid38141',
@@ -205,7 +205,7 @@ function getUser(id: string): ApprovalUser {
 }
 
 function daysFromNow(days: number): Date {
-    return new Date(Date.now() + DAY_IN_MILISECONDS * days);
+    return new Date(Date.now() + DAY_IN_MILLISECONDS * days);
 }
 
 export class TestApprovalFlowDataSource implements ApprovalDataSource {
@@ -277,7 +277,7 @@ describe('ApprovalFlowComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should properly set node flags (nodes metadada)', () => {
+    it('should properly set node flags (nodes metadata)', () => {
         const simpleGraphRootNode = component._graph[0].nodes[0];
         const graphLastColumn = component._graph.length - 1;
         const simpleGraphFinalNode = component._graph[graphLastColumn].nodes[0];
@@ -340,7 +340,7 @@ describe('ApprovalFlowComponent', () => {
         spyOn(component, '_onNodeClick').and.callThrough();
 
         component._nodeComponents.first.onNodeClick.emit();
-        
+
         expect(component._onNodeClick).toHaveBeenCalled();
     });
 
@@ -358,7 +358,7 @@ describe('ApprovalFlowComponent', () => {
         const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
 
         expect(nodesContainer).toBeTruthy();
-        
+
         const nodes = nodesContainer.querySelectorAll('fdp-approval-flow-node');
         const firstNode = nodes[0];
 
@@ -445,7 +445,7 @@ describe('ApprovalFlowComponent', () => {
 
         expect(approvalSpy).toHaveBeenCalled();
         expect(component._isEditMode).toBeFalsy();
-    }); 
+    });
 
     it('should exit edit mode', () => {
         component._exitEditMode();
@@ -457,7 +457,7 @@ describe('ApprovalFlowComponent', () => {
         const dialogSpy = spyOn(TestBed.inject(DialogService), 'open')
             .and.returnValue({
                 afterClosed: of({
-                    node: simpleGraph.nodes[0],
+                    node: Object.assign({}, simpleGraph.nodes[0], { status: 'not started' }),
                     nodeType: APPROVAL_FLOW_NODE_TYPES.SERIAL
                 })
             } as any);

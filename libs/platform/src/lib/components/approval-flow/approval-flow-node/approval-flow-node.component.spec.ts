@@ -90,8 +90,7 @@ describe('ApprovalFlowNodeComponent', () => {
     it('should have approved class when node is approved', () => {
         component.node.status = 'approved';
 
-        fixture.detectChanges();
-        detectChangesOnPush();
+        component.ngOnChanges();
 
         expect(fixture.nativeElement).toHaveClass('approval-flow-node--approved');
     });
@@ -114,8 +113,7 @@ describe('ApprovalFlowNodeComponent', () => {
     it('should have positive object status when node is approved', () => {
         component.node.status = 'approved';
 
-        fixture.detectChanges();
-        detectChangesOnPush();
+        component.ngOnChanges();
 
         expect(component._objectStatus).toEqual('positive');
     });

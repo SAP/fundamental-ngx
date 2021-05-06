@@ -8,7 +8,7 @@ import {
 } from '@fundamental-ngx/platform';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
-const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
+const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 
 const users: ApprovalUser[] = [
     {
@@ -355,7 +355,7 @@ function getUser(id: string): ApprovalUser {
 }
 
 function daysFromNow(days: number): Date {
-    return new Date(Date.now() + DAY_IN_MILISECONDS * days);
+    return new Date(Date.now() + DAY_IN_MILLISECONDS * days);
 }
 
 type GraphTypes = 'simple' | 'medium' | 'complex';

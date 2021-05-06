@@ -29,7 +29,7 @@ const NODE_STATUS_CLASS_MAP = {
     'not started': ''
 };
 
-const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
+const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 
 @Component({
     selector: 'fdp-approval-flow-node',
@@ -302,15 +302,15 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         if (this.checkDueDate && this.node.dueDate) {
-            const dueThreshold = Number(new Date(this.node.dueDate)) - (this.dueDateThreshold * DAY_IN_MILISECONDS);
+            const dueThreshold = Number(new Date(this.node.dueDate)) - (this.dueDateThreshold * DAY_IN_MILLISECONDS);
             const nowAndDueDiff = Date.now() - dueThreshold;
 
-            this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILISECONDS);
+            this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILLISECONDS);
             this._showDueDateWarning = !isNodeApproved(this.node) && dueThreshold < Date.now();
             this._objectStatus = this._showDueDateWarning ? 'critical' : getNodeStatusClass(this.node.status);
 
             this._cdr.detectChanges();
-            
+
             return;
         }
 

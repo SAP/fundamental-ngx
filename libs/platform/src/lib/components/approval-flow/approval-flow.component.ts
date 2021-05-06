@@ -24,7 +24,11 @@ import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundam
 
 import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-details/approval-flow-approver-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
-import { ApprovalFlowAddNodeComponent, ApprovalFlowNodeTarget, APPROVAL_FLOW_NODE_TYPES } from './approval-flow-add-node/approval-flow-add-node.component';
+import {
+    APPROVAL_FLOW_NODE_TYPES,
+    ApprovalFlowAddNodeComponent,
+    ApprovalFlowNodeTarget
+} from './approval-flow-add-node/approval-flow-add-node.component';
 import { displayUserFn, isNodeApproved, trackByFn } from './helpers';
 import {
     ApprovalDataSource,
@@ -200,7 +204,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 this._buildView(approvalProcess);
             })
         );
-        
+
         this._subscriptions.add(
             this._rtlService?.rtl.subscribe(isRtl => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
@@ -427,7 +431,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 ...this._defaultDialogOptions
             }
         });
-        
+
         dialog.afterClosed.subscribe((data: { node: ApprovalNode, nodeType: APPROVAL_FLOW_NODE_TYPES }) => {
             if (!data) {
                 return;
@@ -441,7 +445,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._cacheCurrentApprovalProcess();
 
             addedNode.id = `tempId${(Math.random() * 1000).toFixed()}`;
-            
+
             if (type !== 'empty') {
                 addedNode.targets = source.targets;
 
@@ -526,7 +530,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _onNodeDragMoved(node: ApprovalGraphNode): void {
         const draggedNodeDimensions = this._nodeComponents
             .find(comp => comp.node === node)._nativeElement.getBoundingClientRect();
-            
+
         this._nodeComponents
             .filter(n => n.node !== node && Boolean(n.dropZones.length))
             .forEach(n => n._checkIfNodeDraggedInDropZone(draggedNodeDimensions));
@@ -592,10 +596,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
         const onlyNotEmptyColumns = this._removeEmptyColumns(columnsWithoutEndSpaces);
 
-        const allNodes = onlyNotEmptyColumns
+        this._approvalProcess.nodes = onlyNotEmptyColumns
             .reduce((acc, column) => acc.concat(column), [])
             .filter(node => !node.space);
-        this._approvalProcess.nodes = allNodes;
 
         return transformColumnsIntoGraph(onlyNotEmptyColumns);
     }
@@ -612,7 +615,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 const allNodeParentsApproved = parents.length
                     ? parents.every(_node => isNodeApproved(_node))
                     : false;
-    
+
                 metadata[node.id] = {
                     parents: parents,
                     isRoot: !parents.length && !node.blank && !node.space,
@@ -635,11 +638,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             column.nodes.forEach((node, nodeIndex) => {
                 const nodeMetadata = metadata[node.id];
 
-                const isTargetParallelEnd = metadata[node.targets[0]]?.parallelEnd;
-                nodeMetadata.isLastInParallel = isTargetParallelEnd;
-
-                const isParentParallelStart = metadata[nodeMetadata.parents[0]?.id]?.parallelStart;
-                nodeMetadata.isFirstInParallel = isParentParallelStart;
+                nodeMetadata.isLastInParallel = metadata[node.targets[0]]?.parallelEnd;
+                nodeMetadata.isFirstInParallel = metadata[nodeMetadata.parents[0]?.id]?.parallelStart;
 
                 const graphNextColumn = graph[column.index + 1];
                 const graphPrevColumn = graph[column.index - 1];
@@ -648,11 +648,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 const prevHNodeMetadata = metadata[prevHNode?.id];
                 const nextHNode = graphNextColumn?.nodes[nodeIndex]
                 const nextHNodeMetadata = metadata[nextHNode?.id];
-                
+
                 const prevNode = graphPrevColumn?.nodes[nodeIndex - 1];
                 const nextNode = graphNextColumn?.nodes[nodeIndex - 1];
 
-                nodeMetadata.renderVerticalLineBefore = 
+                nodeMetadata.renderVerticalLineBefore =
                     graphPrevColumn
                     && nodeIndex > 0
                     && (
@@ -664,7 +664,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                             )
                     );
 
-                nodeMetadata.renderVerticalLineAfter = 
+                nodeMetadata.renderVerticalLineAfter =
                     graphNextColumn
                     && nodeIndex > 0
                     && (
@@ -721,8 +721,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const nodeRect = nodeToFocus._nativeElement.getBoundingClientRect();
         const graphContainerRect = this._graphContainerEl.nativeElement.getBoundingClientRect();
         const graphVisibilityThreshold = graphContainerRect.width;
-        const nodeOffsetFromContainerEdge = this._isRTL 
-            ? (graphContainerRect.right - nodeRect.right) 
+        const nodeOffsetFromContainerEdge = this._isRTL
+            ? (graphContainerRect.right - nodeRect.right)
             : (nodeRect.left - graphContainerRect.left);
 
         nodeToFocus._focus();
@@ -740,7 +740,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Update node object in local approval process data structure */
     private _updateNode(node: ApprovalNode): void {
         const nodeIndex = this._approvalProcess.nodes.findIndex(n => n.id === node.id);
-        
+
         if (nodeIndex > -1) {
             this._approvalProcess.nodes[nodeIndex] = node;
         }
@@ -840,7 +840,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         if (!nextNode) {
             return { nextNode: undefined, stepSize: stepSize };
         }
-        
+
         if (nextNode.blank || nextNode.space) {
             return this._getNextVerticalNode(nodeIndex + indexDiff, columnIndex, direction, stepSize + 1);
         }
@@ -876,10 +876,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _removeEmptyColumns(columns: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
         const processedColumns: ApprovalNode[][] = [];
-    
+
         columns.forEach(column => {
             const areAllNodesEmpty = column.every(node => node.blank || node.space);
-    
+
             if (areAllNodesEmpty) {
                 column
                     .filter(node => node.blank)
@@ -888,7 +888,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 processedColumns.push(column);
             }
         });
-    
+
         return processedColumns;
     }
 }
@@ -898,7 +898,7 @@ function findRootNodes(nodes: ApprovalNode[]): ApprovalNode[] {
 }
 
 function findFinalNodes(nodes: ApprovalNode[]): ApprovalNode[] {
-    return nodes.filter(node => !node.targets.length); 
+    return nodes.filter(node => !node.targets.length);
 }
 
 function findParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
@@ -953,14 +953,14 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
         while (queue.length) {
             const path = queue.pop();
             const lastNodeInPath = path[path.length - 1];
-            
+
             if (!lastNodeInPath.targets.length) {
                 paths.push(path);
             } else {
                 lastNodeInPath.targets.forEach(targetId => {
                     const targetNode = nodes.find(node => node.id === targetId);
                     const newPath = [...path, targetNode];
-                    
+
                     queue.push(newPath);
                 });
             }
@@ -974,7 +974,7 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
     const processedPaths: ApprovalGraphNode[][] = [];
     const pathLengths = paths.map(path => path.length);
     const longestPathLength = Math.max(...pathLengths);
-    
+
     paths.forEach(path => {
         if (path.length === longestPathLength) {
             processedPaths.push(path);
@@ -983,7 +983,7 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
 
         path.forEach((node, nodeIndex) => {
             let emptyNodes = getBlankNodesAfterFromProcessedPaths(node, processedPaths);
-            
+
             if (emptyNodes.length) {
                 path.splice(nodeIndex, 0, ...emptyNodes);
                 return;
@@ -1024,11 +1024,7 @@ function getBlankNodesAfterFromProcessedPaths(
 
     const pathWithNextBlankNode = processedPaths.find(path => {
         const nodeIndex = path.indexOf(node);
-        if (nodeIndex > -1 && path[nodeIndex + 1]?.blank) {
-            return true;
-        }
-
-        return false;
+        return !!(nodeIndex > -1 && path[nodeIndex + 1]?.blank);
     });
 
     if (pathWithNextBlankNode) {
@@ -1156,7 +1152,7 @@ function transformColumnsIntoGraph(columns: ApprovalGraphNode[][]): ApprovalFlow
 
         graph[index] = {
             nodes: column,
-            index: index, 
+            index: index,
             isPartial: blankNodes.length > 0,
             allNodesApproved: column.every(node => isNodeApproved(node))
         };
