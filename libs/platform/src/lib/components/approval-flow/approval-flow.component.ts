@@ -134,31 +134,31 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     _graphMetadata: { [key: string]: ApprovalGraphNodeMetadata } = {};
 
-    /**  @hidden */
+    /** @hidden */
     _dir: string;
 
-    /**  @hidden */
+    /** @hidden */
     _isEditMode = false;
 
-    /**  @hidden */
+    /** @hidden */
     _canAddBefore = false;
 
-    /**  @hidden */
+    /** @hidden */
     _canAddAfter = false;
 
-    /**  @hidden */
+    /** @hidden */
     _canAddParallel = false;
 
-    /**  @hidden */
+    /** @hidden */
     _usersForWatchersList: ApprovalUser[] = [];
 
-    /**  @hidden */
+    /** @hidden */
     _selectedWatchers: ApprovalUser[] = [];
 
-    /**  @hidden */
+    /** @hidden */
     _messages: { type: ApprovalFlowMessageType }[] = [];
 
-    /**  @hidden */
+    /** @hidden */
     _displayUserFn = displayUserFn;
 
     /** @hidden */
@@ -169,10 +169,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         spot: { url: 'assets/images/sapIllus-Spot-NoData.svg', id: 'sapIllus-Spot-NoData' }
     }
 
+    /** @hidden */
     private _editModeInitSub: Subscription;
-    private _subscriptions = new Subscription();
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
     constructor(
         private _dialogService: DialogService,
         private _messageToastService: MessageToastService,
@@ -213,6 +215,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         );
 
         this._listenOnResize();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden Node click handler */
@@ -268,6 +275,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
     }
 
+    /** Scroll to the next horizontal slide */
     nextSlide(stepSize = 1): void {
         this._checkCarouselStatus();
 
@@ -283,6 +291,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._cdr.detectChanges();
     }
 
+    /** Scroll to the previous horizontal slide */
     previousSlide(stepSize = 1): void {
         this._checkCarouselStatus();
 
@@ -302,7 +311,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._cdr.detectChanges();
     }
 
-    /** @hidden Handle node keydown and focus other node based on which key is pressed*/
+    /** @hidden Handle node keydown and focus other node based on which key is pressed */
     _onNodeKeyDown(
         event: KeyboardEvent,
         node: ApprovalGraphNode,
@@ -532,7 +541,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             .find(comp => comp.node === node)._nativeElement.getBoundingClientRect();
 
         this._nodeComponents
-            .filter(n => n.node !== node && Boolean(n.dropZones.length))
+            .filter(n => n.node !== node && Boolean(n._dropZones.length))
             .forEach(n => n._checkIfNodeDraggedInDropZone(draggedNodeDimensions));
     }
 
@@ -563,11 +572,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         this._approvalProcess.nodes.push(nodeToDrop);
         this._buildView(this._approvalProcess);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */

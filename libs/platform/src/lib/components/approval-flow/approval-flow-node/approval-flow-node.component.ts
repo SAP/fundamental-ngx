@@ -170,32 +170,39 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     _dueIn = 0;
 
+    /** Event emitted on node click */
     @Output() onNodeClick = new EventEmitter<void>();
 
+    /** Event emitted on node checked */
     @Output() onNodeCheck = new EventEmitter<boolean>();
 
+    /** Event emitted on add node button clicked, value is the placement for the new node */
     @Output() onAdd = new EventEmitter<string>();
 
+    /** Event emitted on edit node button clicked */
     @Output() onEdit = new EventEmitter<void>();
 
+    /** Event emitted on delete node button clicked */
     @Output() onDelete = new EventEmitter<void>();
 
-    @ViewChild(MenuComponent) menu: MenuComponent;
-
-    @ViewChildren(ApprovalFlowDropZoneDirective) dropZones: QueryList<ApprovalFlowDropZoneDirective>;
-
-    private _subscriptions = new Subscription();
+    /** @hidden */
+    @ViewChild(MenuComponent) _menu: MenuComponent;
 
     /** @hidden */
+    @ViewChildren(ApprovalFlowDropZoneDirective) _dropZones: QueryList<ApprovalFlowDropZoneDirective>;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     constructor(
-        private elRef: ElementRef,
+        private _elRef: ElementRef,
         private _cdr: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService
     ) {}
 
     /** @hidden */
     get _nativeElement(): HTMLElement {
-        return this.elRef.nativeElement;
+        return this._elRef.nativeElement;
     }
 
     /** @hidden */
@@ -211,7 +218,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     get _activeDropZones(): ApprovalFlowDropZoneDirective[] {
-        return this.dropZones.filter(z => z.active);
+        return this._dropZones.filter(z => z.active);
     }
 
     /** @hidden */
@@ -259,6 +266,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         this._checkNodeStatus();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
@@ -275,7 +283,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     _onMenuOpen(): void {
-        this.menu.refreshPosition();
+        this._menu.refreshPosition();
     }
 
     /** @hidden */
@@ -285,13 +293,13 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     _deactivateDropZones(): void {
-        this.dropZones.forEach(dropZone => dropZone.active = false);
+        this._dropZones.forEach(dropZone => dropZone.active = false);
         this._cdr.detectChanges();
     }
 
     /** @hidden */
     _checkIfNodeDraggedInDropZone(nodeRect: DOMRect): void {
-        this.dropZones.forEach(dropZone => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
+        this._dropZones.forEach(dropZone => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
         this._cdr.detectChanges();
     }
 
@@ -317,7 +325,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         this._objectStatus = getNodeStatusClass(this.node.status);
         this._cdr.detectChanges();
     }
-
 }
 
 function getNodeStatusClass(status: ApprovalStatus): ObjectStatus {
