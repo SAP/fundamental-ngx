@@ -52,9 +52,9 @@ $form-label-inline-help-placement-space: 1.25rem;
 }
 
 .fd-form-label__help {
-	position: absolute;
+	position: relative;
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(-14%);
 	align-items: center;
 	display: flex;
 
