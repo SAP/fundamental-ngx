@@ -68,3 +68,4 @@ updates:
   - dependency-name: karma-typescript-angular2-transform
     versions:
     - 5.4.0
+  open-pull-requests-limit: 10
