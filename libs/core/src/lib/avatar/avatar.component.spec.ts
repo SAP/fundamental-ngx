@@ -14,6 +14,7 @@ import { AvatarComponent } from './avatar.component';
                     [contain]="contain"
                     [tile]="tile"
                     [colorAccent]="colorAccent"
+                    [random]="random"
                     [zoomGlyph]="zoomGlyph"
                     [border]="border"
                     [label]="label">
@@ -28,6 +29,7 @@ class TestComponent {
     contain = false;
     tile = false;
     colorAccent: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = null;
+    random = false;
     zoomGlyph: string = null;
     border = false;
     label: string = null;
@@ -124,6 +126,14 @@ describe('AvatarComponent', () => {
         component.colorAccent = 10;
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar--accent-color-10')).toBeTruthy();
+    });
+
+    it('Should Add Random Accent Color', () => {
+        component.colorAccent = null;
+        component.random = true;
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('[class*="fd-avatar--accent-color-"]')).toBeTruthy();
     });
 
     it('Should Add Border', () => {
