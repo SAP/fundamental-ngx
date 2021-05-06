@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.3...v0.29.2-rc.4) (2021-05-06)
+
+
+### Bug Fixes
+
+* (Platform) Render fdp-form-field with wrapper ([#5282](https://github.com/SAP/fundamental-ngx/issues/5282)) ([2c9db2c](https://github.com/SAP/fundamental-ngx/commit/2c9db2c43822d2fb04fd2ab7ee12accf4e0485e3))
+
 ### [0.29.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.2...v0.29.2-rc.3) (2021-05-05)
 
 ### [0.29.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.1...v0.29.2-rc.2) (2021-05-05)
