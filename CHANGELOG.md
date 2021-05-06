@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.4...v0.29.2-rc.5) (2021-05-06)
+
+
+### Features
+
+* add random accent color option for avatar ([#5220](https://github.com/SAP/fundamental-ngx/issues/5220)) ([53f8290](https://github.com/SAP/fundamental-ngx/commit/53f829070a3ae4ca6abccb6c610073ea2e822f0b))
+
 ### [0.29.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.3...v0.29.2-rc.4) (2021-05-06)
 
 
