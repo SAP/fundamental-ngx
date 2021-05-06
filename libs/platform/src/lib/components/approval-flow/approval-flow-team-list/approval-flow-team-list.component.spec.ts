@@ -34,7 +34,7 @@ describe('ApprovalFlowTeamListComponent', () => {
             members: []
         };
 
-        const teamSpy = spyOn(component, 'onTeamClick').and.callThrough();
+        const teamSpy = spyOn(component.onTeamClick, 'emit').and.callThrough();
 
         component._showTeamDetails(approvalTeam);
 

@@ -14,7 +14,7 @@ import {
     ApprovalUser, ApprovalTeam
 } from '@fundamental-ngx/platform';
 import { createKeyboardEvent } from '../../testing/event-objects';
-import { AddNodeDialogRefData } from './approval-flow-add-node/approval-flow-add-node.component';
+import { AddNodeDialogRefData, APPROVAL_FLOW_NODE_TYPES } from './approval-flow-add-node/approval-flow-add-node.component';
 
 const DAY_IN_MILISECONDS = 1000 * 60 * 60 * 24;
 const users: ApprovalUser[] = [
@@ -278,8 +278,9 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should properly set node flags (nodes metadada)', () => {
-        const simpleGraphRootNode = simpleGraph.nodes[0];
-        const simpleGraphFinalNode = simpleGraph.nodes[2];
+        const simpleGraphRootNode = component._graph[0].nodes[0];
+        const graphLastColumn = component._graph.length - 1;
+        const simpleGraphFinalNode = component._graph[graphLastColumn].nodes[0];
 
         expect(component._graphMetadata[simpleGraphRootNode.id].isRoot).toBeTruthy();
         expect(component._graphMetadata[simpleGraphFinalNode.id].isFinal).toBeTruthy();
@@ -450,5 +451,30 @@ describe('ApprovalFlowComponent', () => {
         component._exitEditMode();
 
         expect(component._isEditMode).toBeFalsy();
+    });
+
+    it('should add node to the graph', () => {
+        const dialogSpy = spyOn(TestBed.inject(DialogService), 'open')
+            .and.returnValue({
+                afterClosed: of({
+                    node: simpleGraph.nodes[0],
+                    nodeType: APPROVAL_FLOW_NODE_TYPES.SERIAL
+                })
+            } as any);
+
+        const lastNodeComponent = component._nodeComponents.last
+        const sourceNode = lastNodeComponent.node;
+
+        lastNodeComponent._isSelected = true;
+
+        component._addNodeFromToolbar('after');
+
+        expect(dialogSpy).toHaveBeenCalled();
+
+        const addedNodeIndex = component._approvalProcess.nodes.length - 1;
+        const addedNodeId = component._approvalProcess.nodes[addedNodeIndex].id;
+
+        expect(addedNodeId.startsWith('tempId')).toBeTruthy();
+        expect(sourceNode.targets[0]).toEqual(addedNodeId);
     });
 });

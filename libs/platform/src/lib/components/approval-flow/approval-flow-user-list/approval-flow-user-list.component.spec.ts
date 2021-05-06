@@ -59,7 +59,7 @@ describe('ApprovalFlowTeamListComponent', () => {
             index: 0
         };
 
-        const userSelectionSpy = spyOn(component, 'onSelectionChange').and.callThrough();
+        const userSelectionSpy = spyOn(component.onSelectionChange, 'emit').and.callThrough();
 
         component._onSelect(selectionEvent);
 
