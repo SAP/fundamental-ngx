@@ -75,3 +75,9 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
+
+<h3>Checkbox group outside form</h3>
+<fdp-checkbox-group [list]="dishes" name="fav-dishes" [isInline]="true" ariaLabel="My favorite dishes"
+    [(checked)]="selectedDishes"></fdp-checkbox-group>
+
+<span style="margin-left: 2rem;">Selected dishes: {{ selectedDishes }}</span>
