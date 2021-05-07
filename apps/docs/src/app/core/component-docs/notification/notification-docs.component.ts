@@ -2,15 +2,13 @@ import { Component } from '@angular/core';
 
 import * as componentAsContentTs from '!raw-loader!./examples/component-as-content/notification-component-as-content-example.component.ts';
 import * as contentTs from '!raw-loader!./examples/component-as-content/notification-content.component.ts';
-import * as groupTs from '!raw-loader!./examples/group-notification/notification-group-template-example.component.ts';
-import * as groupH from '!raw-loader!./examples/group-notification/notification-group-template-example.component.html';
-import * as optionsContentTs from '!raw-loader!./examples/notification-options/notification-options-content.component.ts';
 import * as optionsTs from '!raw-loader!./examples/notification-options/notification-options-example.component.ts';
 import * as optionsH from '!raw-loader!./examples/notification-options/notification-options-example.component.html';
 import * as templateTs from '!raw-loader!./examples/template-as-content/notification-open-template-example.component.ts';
 import * as templateH from '!raw-loader!./examples/template-as-content/notification-open-template-example.component.html';
-import * as objectTs from '!raw-loader!./examples/notification-as-object.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import * as groupTs from '!raw-loader!./examples/notification-group/notification-group-example.component.ts';
+import * as groupH from '!raw-loader!./examples/notification-group/notification-group-example.component.html';
 
 @Component({
     selector: 'app-notification',
@@ -31,22 +29,8 @@ export class NotificationDocsComponent {
             code: contentTs,
             name: 'Content',
             fileName: 'notification-content',
-            component: 'NotificationContentComponent',
+            component: 'NotificationExampleContentComponent',
             entryComponent: true
-        }
-    ];
-
-    groups: ExampleFile[] = [
-        {
-            language: 'typescript',
-            code: groupTs,
-            component: 'NotificationGroupTemplateExampleComponent',
-            fileName: 'notification-group-template-example'
-        },
-        {
-            language: 'html',
-            code: groupH,
-            fileName: 'notification-group-template-example'
         }
     ];
 
@@ -56,13 +40,6 @@ export class NotificationDocsComponent {
             code: optionsTs,
             fileName: 'notification-options-example',
             component: 'NotificationOptionsExampleComponent'
-        },
-        {
-            language: 'typescript',
-            code: optionsContentTs,
-            fileName: 'notification-options-content',
-            component: 'NotificationOptionsContentComponent',
-            entryComponent: true
         },
         {
             language: 'html',
@@ -85,12 +62,17 @@ export class NotificationDocsComponent {
         }
     ];
 
-    object: ExampleFile[] = [
+    group: ExampleFile[] = [
         {
             language: 'typescript',
-            code: objectTs,
-            component: 'NotificationAsObjectExampleComponent',
-            fileName: 'notification-component-as-object-example'
+            code: groupTs,
+            fileName: 'notification-group-example',
+            component: 'NotificationGroupExampleComponent'
+        },
+        {
+            language: 'html',
+            code: groupH,
+            fileName: 'notification-group-example'
         }
     ];
 }

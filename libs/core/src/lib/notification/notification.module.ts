@@ -1,63 +1,73 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NotificationGroupComponent } from './notification-group/notification-group.component';
-import { NotificationComponent } from './notification/notification.component';
-import { NotificationTitleDirective } from './directives/notification-title.directive';
-import { NotificationContentDirective } from './directives/notification-content.directive';
-import { NotificationHeaderComponent } from './notification-header/notification-header.component';
-import { NotificationFooterComponent } from './notification-footer/notification-footer.component';
-import { NotificationAvatarDirective } from './directives/notification-avatar.directive';
-import { NotificationDescriptionDirective } from './directives/notification-description.directive';
-import { NotificationMetadataDirective } from './directives/notification-metadata.directive';
-import { NotificationBodyComponent } from './notification-body/notification-body.component';
+import { ButtonModule } from '../button/button.module';
 import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
 import { NotificationContainer } from './notification-utils/notification-container';
-import { NotificationTextDirective } from './directives/notification-text.directive';
-import { NotificationActionsDirective } from './directives/notification-actions.directive';
 import { NotificationService } from './notification-service/notification.service';
-import { DefaultNotificationComponent } from './notification-utils/default-notification/default-notification.component';
-import { ButtonModule } from '../button/button.module';
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationHeaderComponent } from './notification-header/notification-header.component';
+import { NotificationFooterComponent } from './notification-footer/notification-footer.component';
+import { NotificationBodyComponent } from './notification-body/notification-body.component';
+import { NotificationActionsComponent } from './notification-actions/notification-actions.component';
+import { NotificationContentComponent } from './notification-content/notification-content.component';
+import { NotificationLimitComponent } from './notification-limit/notification-limit.component';
+import { NotificationGroupHeaderComponent } from './notification-group-header/notification-group-header.component';
+import { NotificationGroupComponent } from './notification-group/notification-group.component';
+import { NotificationGroupListComponent } from './notification-group-list/notification-group-list.component';
+import { NotificationTitleDirective } from './directives/notification-title.directive';
+import { NotificationIndicatorDirective } from './directives/notification-indicator.directive';
+import { NotificationParagraphDirective } from './directives/notification-paragraph.directive';
+import { NotificationFooterContentDirective } from './directives/notification-footer-content.directive';
+import { NotificationSeparatorDirective } from './directives/notification-separator.directive';
+import { NotificationLimitTitleDirective } from './directives/notification-limit-title.directive';
+import { NotificationLimitDescriptionDirective } from './directives/notification-limit-description.directive';
 
 @NgModule({
     imports: [CommonModule, ButtonModule],
     declarations: [
-        NotificationGroupComponent,
         NotificationComponent,
-        NotificationTitleDirective,
-        NotificationContentDirective,
         NotificationHeaderComponent,
         NotificationFooterComponent,
-        NotificationAvatarDirective,
-        NotificationDescriptionDirective,
-        NotificationMetadataDirective,
         NotificationBodyComponent,
         NotificationContainer,
-        NotificationTextDirective,
-        NotificationActionsDirective,
-        DefaultNotificationComponent
+        NotificationActionsComponent,
+        NotificationContentComponent,
+        NotificationLimitComponent,
+        NotificationGroupHeaderComponent,
+        NotificationGroupComponent,
+        NotificationGroupListComponent,
+        NotificationTitleDirective,
+        NotificationIndicatorDirective,
+        NotificationParagraphDirective,
+        NotificationFooterContentDirective,
+        NotificationSeparatorDirective,
+        NotificationLimitTitleDirective,
+        NotificationLimitDescriptionDirective
     ],
     exports: [
-        NotificationGroupComponent,
         NotificationComponent,
-        NotificationTitleDirective,
-        NotificationContentDirective,
         NotificationHeaderComponent,
         NotificationFooterComponent,
-        NotificationAvatarDirective,
-        NotificationDescriptionDirective,
-        NotificationMetadataDirective,
         NotificationBodyComponent,
         NotificationContainer,
-        NotificationTextDirective,
-        NotificationActionsDirective,
-        DefaultNotificationComponent
+        NotificationActionsComponent,
+        NotificationContentComponent,
+        NotificationLimitComponent,
+        NotificationGroupHeaderComponent,
+        NotificationGroupComponent,
+        NotificationGroupListComponent,
+        NotificationTitleDirective,
+        NotificationIndicatorDirective,
+        NotificationParagraphDirective,
+        NotificationFooterContentDirective,
+        NotificationSeparatorDirective,
+        NotificationLimitTitleDirective,
+        NotificationLimitDescriptionDirective
     ],
     providers: [DynamicComponentService, NotificationService],
     entryComponents: [
         NotificationContainer,
-        NotificationComponent,
-        NotificationGroupComponent,
-        DefaultNotificationComponent
+        NotificationComponent
     ]
 })
 export class NotificationModule {}
