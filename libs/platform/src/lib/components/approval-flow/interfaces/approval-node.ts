@@ -35,3 +35,11 @@ export interface ApprovalGraphNodeMetadata {
     isVerticalLineBeforeSolid?: boolean;
     isVerticalLineAfterSolid?: boolean;
 }
+
+export interface ApprovalNodeActionsMenuConfig {
+    hideAddApproversBefore?: boolean;
+    hideAddApproversAfter?: boolean;
+    hideAddApproversParallel?: boolean;
+    hideEdit?: boolean;
+    hideRemove?: boolean;
+}

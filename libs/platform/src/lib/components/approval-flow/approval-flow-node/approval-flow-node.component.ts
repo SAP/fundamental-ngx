@@ -19,7 +19,7 @@ import { MenuComponent, ObjectStatus, RtlService } from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
 
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
-import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
+import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalNodeActionsMenuConfig, ApprovalStatus } from '../interfaces';
 import { isNodeApproved } from '../helpers';
 
 const NODE_STATUS_CLASS_MAP = {
@@ -61,6 +61,14 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
      *  Used to render appropriate vertical line after (dashed/solid)
      */
     @Input() allNodesInColumnApproved = false;
+
+    /** Whether to hide overflow button & menu on the node */
+    @Input() hideNodeActionsMenu = false;
+
+    /** Config to set up items shown in node actions menu.
+     *  All actions will be shown if not provided.
+     */
+    @Input() nodeActionsMenuConfig: ApprovalNodeActionsMenuConfig;
 
     /** Whether the node is in edit mode */
     @Input()

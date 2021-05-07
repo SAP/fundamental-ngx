@@ -23,6 +23,7 @@
         ></fd-checkbox>
 
         <button
+            *ngIf="!hideNodeActionsMenu"
             class="approval-flow-node__menu-button"
             fd-button
             fdType="transparent"
@@ -130,23 +131,43 @@
 </ng-template>
 
 <fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
-    <li *ngIf="meta?.canAddNodeBefore" fd-menu-item (click)="menu.close(); onAdd.emit('before')">
+    <li 
+        *ngIf="meta?.canAddNodeBefore && !nodeActionsMenuConfig?.hideAddApproversBefore" 
+        fd-menu-item
+        (click)="menu.close(); onAdd.emit('before')"
+    >
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversBefore">Add approvers before</div>
     </li>
 
-    <li *ngIf="meta?.canAddNodeAfter" fd-menu-item (click)="menu.close(); onAdd.emit('after')">
+    <li
+        *ngIf="meta?.canAddNodeAfter && !nodeActionsMenuConfig?.hideAddApproversAfter"
+        fd-menu-item
+        (click)="menu.close(); onAdd.emit('after')"
+    >
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversAfter">Add approvers after</div>
     </li>
 
-    <li *ngIf="meta?.canAddParallel" fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
+    <li
+        *ngIf="meta?.canAddParallel && !nodeActionsMenuConfig?.hideAddApproversParallel"
+        fd-menu-item
+        (click)="menu.close(); onAdd.emit('parallel')"
+    >
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversParallel">Add parallel approvers</div>
     </li>
 
-    <li fd-menu-item (click)="menu.close(); onEdit.emit()" *ngIf="_isNotStarted">
+    <li
+        *ngIf="_isNotStarted && !nodeActionsMenuConfig?.hideEdit"
+        fd-menu-item
+        (click)="menu.close(); onEdit.emit()"
+    >
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEditApprover">Edit approver</div>
     </li>
 
-    <li fd-menu-item (click)="menu.close(); onDelete.emit()">
+    <li
+        *ngIf="!nodeActionsMenuConfig?.hideRemove"
+        fd-menu-item
+        (click)="menu.close(); onDelete.emit()"
+    >
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeRemoveNode">Remove</div>
     </li>
 </fd-menu>

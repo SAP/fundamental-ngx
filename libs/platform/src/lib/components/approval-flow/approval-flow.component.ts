@@ -35,6 +35,7 @@ import {
     ApprovalGraphNode,
     ApprovalGraphNodeMetadata,
     ApprovalNode,
+    ApprovalNodeActionsMenuConfig,
     ApprovalProcess,
     ApprovalStatus,
     ApprovalUser
@@ -91,6 +92,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** Text label for watchers list */
     @Input() watchersLabel = 'Watchers';
+
+    /** Whether to hide overflow button & menu on the node */
+    @Input() hideNodeActionsMenu = false;
+
+    /** Config to set up items shown in node actions menu.
+     *  All actions will be shown if not provided.
+     */
+    @Input() nodeActionsMenuConfig: ApprovalNodeActionsMenuConfig;
 
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();

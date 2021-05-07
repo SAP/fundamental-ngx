@@ -114,6 +114,8 @@
                             [dueDateThreshold]="dueDateThreshold"
                             [renderArrow]="columnIndex > 0"
                             [allNodesInColumnApproved]="column.allNodesApproved"
+                            [hideNodeActionsMenu]="hideNodeActionsMenu"
+                            [nodeActionsMenuConfig]="nodeActionsMenuConfig"
                             (onNodeClick)="_onNodeClick(node)"
                             (onNodeCheck)="_onNodeCheck(node)"
                             (onAdd)="_addNode(node, $event)"
