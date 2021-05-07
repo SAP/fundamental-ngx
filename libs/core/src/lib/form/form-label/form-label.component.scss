@@ -1,6 +1,6 @@
 @import '~fundamental-styles/dist/form-label';
 
-$form-label-inline-help-placement-space: 1.25rem;
+$form-label-inline-help-placement-space: 0rem;
 
 @mixin rtl() {
 	@at-root {
@@ -54,7 +54,7 @@ $form-label-inline-help-placement-space: 1.25rem;
 .fd-form-label__help {
 	position: relative;
 	top: 50%;
-	transform: translateY(-14%);
+	transform: translateY(3%);
 	align-items: center;
 	display: flex;
 
