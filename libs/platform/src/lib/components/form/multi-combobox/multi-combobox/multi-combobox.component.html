@@ -1,30 +1,26 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+<div class="fdp-multi-combobox">
+    <ng-container [ngTemplateOutlet]="controlTemplate" *ngIf="mobile"></ng-container>
 
-<ng-template #desktopTemplate>
-    <div class="fdp-multi-combobox" cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
-        <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
-    </div>
-
-    <!-- Option panel using Material CDK overlay system -->
-    <ng-template
-        cdk-connected-overlay
-        [cdkConnectedOverlayOrigin]="selectTrigger"
-        [cdkConnectedOverlayOpen]="isOpen"
-        (overlayOutsideClick)="close()"
-        [cdkConnectedOverlayMinWidth]="minWidth"
+    <fd-popover
+        *ngIf="!mobile"
+        additionalBodyClass="fd-popover-custom-list fdp-multi-combobox__list-container"
+        (isOpenChange)="popoverOpenChangeHandle($event)"
+        [isOpen]="isOpen"
+        [triggers]="[]"
+        [disabled]="disabled"
+        [fillControlMode]="fillControlMode"
     >
-        <div
-            class="fdp-multi-combobox__list-container fd-popover__popper fd-popover__body--no-arrow"
-            [style.width.%]="!autoResize && 100"
-        >
-            <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
-        </div>
-    </ng-template>
-</ng-template>
-
-<ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
-</ng-template>
+        <fd-popover-control>
+            <ng-container>
+                <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+            </ng-container>
+        </fd-popover-control>
+        <fd-popover-body [style.width.%]="!autoResize && 100">
+            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+            <ng-content></ng-content>
+        </fd-popover-body>
+    </fd-popover>
+</div>
 
 <ng-template #controlTemplate>
     <fd-input-group
@@ -41,7 +37,7 @@
         [attr.aria-disabled]="disabled || readonly"
         [attr.aria-readonly]="readonly"
         [glyphAriaLabel]="ariaLabel"
-        (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
+        (addOnButtonClicked)="!mobile && onPrimaryButtonClick(isOpen)"
         (click)="mobile && !isOpen && onPrimaryButtonClick(false)"
         (keydown)="navigateByTokens($event)"
     >

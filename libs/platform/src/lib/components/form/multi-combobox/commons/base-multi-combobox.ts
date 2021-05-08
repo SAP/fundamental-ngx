@@ -40,6 +40,7 @@ import {
     KeyUtil,
     ListComponent,
     MobileModeConfig,
+    PopoverFillMode,
     TemplateDirective
 } from '@fundamental-ngx/core';
 import {
@@ -155,6 +156,15 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     get value(): any {
         return super.getValue();
     }
+
+    /**
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
+     * * `equal` will apply a width to the body equivalent to the width of the control.
+     * * 'fit-content' will apply width needed to properly display items inside, independent of control.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
 
     /** Event emitted when item is selected. */
     @Output()
@@ -383,8 +393,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden */
-    popoverOpenChangeHandle(): void {
-        this.isOpen ? this.close() : this.open();
+    popoverOpenChangeHandle(isOpen): void {
+        this.isOpen = isOpen;
     }
 
     /** Opens the select popover body. */

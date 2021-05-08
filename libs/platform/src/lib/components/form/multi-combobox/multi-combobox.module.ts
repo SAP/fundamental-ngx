@@ -10,6 +10,7 @@ import {
     FormModule,
     InputGroupModule,
     ListModule,
+    PopoverModule,
     TemplateModule,
     TokenModule
 } from '@fundamental-ngx/core';
@@ -31,6 +32,7 @@ import { HighlightPipe } from './pipes/highlight.pipe';
         ButtonModule,
         FormModule,
         OverlayModule,
+        PopoverModule,
         PlatformListModule,
         StandardListItemModule,
         PlatformAutoCompleteModule
