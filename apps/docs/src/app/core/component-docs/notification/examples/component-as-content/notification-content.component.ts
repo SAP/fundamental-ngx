@@ -2,46 +2,48 @@ import { Component } from '@angular/core';
 import { NotificationRef } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fd-notification-content',
+    selector: 'fd-notification-example-content',
     template: `
-        <fd-notification-header
-            (closeButtonClick)="notificationRef.dismiss('Close Icon Click')"
-            [type]="notificationRef.data.type"
-        >
-            <h3 fd-notification-title>{{ notificationRef.data.title }}</h3>
-        </fd-notification-header>
-        <fd-notification-body>
-            <div fd-notification-content>
-                <div fd-notification-avatar>
-                    <fd-avatar size="s" label="John Doe">JD</fd-avatar>
-                </div>
-                <div fd-notification-text>
-                    <div fd-notification-description>
-                        {{ notificationRef.data.description }}
-                    </div>
-                    <div fd-notification-metadata>
-                        {{ notificationRef.data.metadata }}
-                    </div>
-                </div>
-            </div>
+    <fd-message-strip type="success" [dismissible]="false" marginBottom="1rem">
+        A warning message strip.
+    </fd-message-strip>
+    <fd-notification-body>
+        <fd-notification-content>
+            <fd-notification-header>
+                <h2 fd-notification-title [unread]="true">
+                    {{ notificationRef.data.title }}
+                </h2>
+            </fd-notification-header>
+            <p fd-notification-paragraph>
+                {{ notificationRef.data.paragraph }}
+            </p>
             <fd-notification-footer>
-                <button fd-button [fdType]="'transparent'" [label]="notificationRef.data.moreInfo"></button>
-                <div fd-notification-actions>
-                    <button fd-button
-                            [fdType]="'positive'"
-                            [label]="notificationRef.data.approve"
-                            (click)="notificationRef.close('Approve Button Click')">
-                    </button>
-                    <button fd-button
-                            [fdType]="'negative'"
-                            [label]="notificationRef.data.cancel"
-                            (click)="notificationRef.dismiss('Cancel Button Click')">
-                    </button>
-                </div>
+                <span fd-notification-footer-content>
+                    {{ notificationRef.data.firstFooterContent }}
+                </span>
+                <span fd-notification-separator></span>
+                <span fd-notification-footer-content>
+                    {{ notificationRef.data.secondFooterContent }}
+                </span>
             </fd-notification-footer>
-        </fd-notification-body>
+        </fd-notification-content>
+        <fd-notification-actions>
+            <button 
+                fd-button 
+                [label]="notificationRef.data.open" 
+                [compact]="true" 
+                (click)="notificationRef.close('Open Button Clicked')"></button>
+            <button 
+                fd-button 
+                fdType="transparent" 
+                glyph="decline" 
+                title="close" 
+                [compact]="true" 
+                (click)="notificationRef.close('Close Button Click')"></button>
+        </fd-notification-actions>
+    </fd-notification-body>
     `
 })
-export class NotificationContentComponent {
+export class NotificationExampleContentComponent {
     constructor(public notificationRef: NotificationRef) {}
 }
