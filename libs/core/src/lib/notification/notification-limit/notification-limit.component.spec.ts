@@ -1,22 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { NotificationHeaderComponent } from './notification-header.component';
+import { NotificationLimitComponent } from './notification-limit.component';
 import { whenStable } from '../../utils/tests';
-import { ButtonModule } from '../../button/button.module';
 
-describe('NotificationHeaderComponent', () => {
-    let component: NotificationHeaderComponent;
-    let fixture: ComponentFixture<NotificationHeaderComponent>;
+describe('NotificationLimitComponent', () => {
+    let component: NotificationLimitComponent;
+    let fixture: ComponentFixture<NotificationLimitComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [NotificationHeaderComponent]
+            declarations: [NotificationLimitComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(NotificationHeaderComponent);
+        fixture = TestBed.createComponent(NotificationLimitComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -28,6 +25,6 @@ describe('NotificationHeaderComponent', () => {
     it('should apply proper css classes', async () => {
         await whenStable(fixture);
 
-        expect(fixture.nativeElement).toHaveClass('fd-notification__header');
+        expect(fixture.nativeElement).toHaveClass('fd-notification__limit');
     });
 });
