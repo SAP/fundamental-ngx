@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 
 @Component({
     selector: 'fd-notification-footer',
-    templateUrl: './notification-footer.component.html',
-    styleUrls: ['./notification-footer.component.scss'],
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
