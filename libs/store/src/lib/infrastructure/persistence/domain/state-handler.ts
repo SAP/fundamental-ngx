@@ -12,7 +12,7 @@ export function instanceForType<T, K>(Type: Type<T>, fromState: K): T {
  *  Proxy wrapper for Entity/Value Object
  */
 class StateHandler<T extends object, K extends {}> implements ProxyHandler<T> {
-    get(target: T, propertyKey: string | symbol, receiver?: any): any {
+    get(target: T, propertyKey: string, receiver?: any): any {
         // Composite.value takes precedence
         if (target instanceof Composite) {
             const value = target.value;
@@ -31,7 +31,7 @@ class StateHandler<T extends object, K extends {}> implements ProxyHandler<T> {
         return Reflect.get(target, propertyKey, receiver);
     }
 
-    set(target: T, propertyKey: string | symbol, value: any, receiver: any): boolean {
+    set(target: T, propertyKey: string, value: any, receiver: any): boolean {
         let originalTarget: T = target;
         let isTargetComposite = false;
 
@@ -40,7 +40,7 @@ class StateHandler<T extends object, K extends {}> implements ProxyHandler<T> {
             // Composite.value takes precedence
             // replace target object with target.value
             // so assignment will actually be done on composite.value itself
-            target = target.value;
+            target = target.value as T;
         }
         // If value is VO then check if new value differs from the current
         if (value instanceof BaseValue) {

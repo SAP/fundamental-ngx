@@ -24,10 +24,6 @@ interface ReqDTO {
 class Money extends BaseValue<MoneyDTO> implements MoneyDTO {
     amount: number;
     currency: string;
-
-    constructor(dto: MoneyDTO) {
-        super(dto);
-    }
 }
 
 @RESTResource({
@@ -37,10 +33,6 @@ class Money extends BaseValue<MoneyDTO> implements MoneyDTO {
 export class LineItem extends BaseValue<Item> {
     amount: Money;
     title: string;
-
-    constructor(dto?) {
-        super(dto);
-    }
 }
 
 interface ReqDTO {
@@ -78,7 +70,7 @@ describe('Proxy State Handler', () => {
         title: 'Req 1',
         amount: 10,
         total: new Money({ amount: 100, currency: '$' }),
-        lineItems: [new LineItem({ title: 'Line1' })]
+        lineItems: [new LineItem({ title: 'Line1', price: null, amount: null })]
     });
 
     beforeEach(() => {
@@ -153,17 +145,17 @@ describe('Proxy State Handler', () => {
 
         it('should be able to assign array with several items', () => {
             entityInstance.lineItems = [
-                new LineItem({ title: 'Line1' }),
-                new LineItem({ title: 'Line2' }),
-                new LineItem({ title: 'Line3' })
+                new LineItem({ title: 'Line1', amount: null, price: null }),
+                new LineItem({ title: 'Line2', amount: null, price: null }),
+                new LineItem({ title: 'Line3', amount: null, price: null })
             ];
-            entityInstance.lineItems.push(new LineItem({ title: 'Line4' }));
+            entityInstance.lineItems.push(new LineItem({ title: 'Line4', amount: null, price: null }));
 
             expect(entityInstance.lineItems).toEqual([
-                new LineItem({ title: 'Line1' }),
-                new LineItem({ title: 'Line2' }),
-                new LineItem({ title: 'Line3' }),
-                new LineItem({ title: 'Line4' })
+                new LineItem({ title: 'Line1', amount: null, price: null }),
+                new LineItem({ title: 'Line2', amount: null, price: null }),
+                new LineItem({ title: 'Line3', amount: null, price: null }),
+                new LineItem({ title: 'Line4', amount: null, price: null })
             ]);
         });
 
@@ -174,9 +166,9 @@ describe('Proxy State Handler', () => {
                 entityInstance.total = new Money({ amount: 10, currency: '$' });
             }).toThrow();
             // the same for array of vo
-            entityInstance.lineItems = [new LineItem({ title: 'Line1' })];
+            entityInstance.lineItems = [new LineItem({ title: 'Line1', price: null, amount: null })];
             expect(() => {
-                entityInstance.lineItems[1] = new LineItem({ title: 'Line1' });
+                entityInstance.lineItems[1] = new LineItem({ title: 'Line1', price: null, amount: null });
             }).toThrow();
         });
     });

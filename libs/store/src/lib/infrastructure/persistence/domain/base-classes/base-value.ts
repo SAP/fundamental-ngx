@@ -2,7 +2,7 @@ import { deepFreeze } from '../../utils/deep-freeze';
 import { Composite } from './composite';
 
 export abstract class BaseValue<T> extends Composite<T>{
-    protected constructor(dto: T) {
+    constructor(dto: T) {
         super(deepFreeze(dto));
     }
 
