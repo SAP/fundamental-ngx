@@ -13,14 +13,10 @@ import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chai
 /**
  * Default EntityCollectionService implementation.
  *
- * The main idea of this service
- *
  * That is a wrapper for NgRx EntityCollectionService
- * it delegates all heavy work to ngrx-data.
+ * it delegates all heavy work to ngrx-data entity collection service.
  *
- * This service is responsible to perform request chaining
- *
- * Also this service is responsible to chain requests for sub resources
+ * This service is responsible to perform request chaining.
  *
  */
 export class DefaultEntityCollectionService<T> implements EntityCollectionService<T> {
@@ -127,8 +123,8 @@ export class DefaultEntityCollectionService<T> implements EntityCollectionServic
          * 2. non-block
          *
          * entitySource is a stream retrieved from ngRxEntityCollectionService
-         * this stream is not alive, that means it gets completed once entity is retrieved
-         * from remote server.
+         * this stream is not alive, that means it gets completed once entity is gotten
+         * from remote server and updated in the store.
          * Since so we can safely append new pipe logic to get sub resources
          * without side effects
          *

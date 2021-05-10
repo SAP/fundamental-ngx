@@ -1,7 +1,6 @@
 import { EntityMetaOptions } from './entity-meta-options';
 import { EntityResourceMetaOptions } from './rest-resource';
 import { Type } from './utility';
-import { BaseEntity } from '../infrastructure/persistence';
 
 export const ENTITY_KEY = Symbol('ENTITY');
 export const REST_RESOURCE_KEY = Symbol('REST_Resource');
