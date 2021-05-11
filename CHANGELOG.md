@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.1...v0.30.1-rc.2) (2021-05-11)
+
+
+### Bug Fixes
+
+* (Platform) dynamic page component modularity ([#5216](https://github.com/SAP/fundamental-ngx/issues/5216)) ([351e264](https://github.com/SAP/fundamental-ngx/commit/351e264d45e2353e536339f0b235772d3248ddc1))
+
 ### [0.30.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.0...v0.30.1-rc.1) (2021-05-11)
 
 ### [0.30.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.30.0...v0.30.1-rc.0) (2021-05-10)
