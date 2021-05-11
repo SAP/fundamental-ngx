@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { MatchingStrategy, MultiComboboxConfig } from '../multi-combobox.config';
 
-// TODO: refactor it with HighlightPipe from Combobox and SearchHighlightPipe
+// TODO: refactor it with HighlightPipe from Combobox and SearchHighlightPipe (https://github.com/SAP/fundamental-ngx/issues/5333)
 // - fundamental-ngx/libs/platform/src/lib/components/form/combobox/pipes/highlight.pipe.ts
 // - fundamental-ngx/libs/core/src/lib/utils/pipes/search-highlight.pipe.ts
 

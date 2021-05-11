@@ -9,10 +9,9 @@
             </button>
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>
-                    <fd-bar-element class="custom-multi-combobox-mobile-control-element">
+                    <fd-bar-element [fullWidth]="true">
                         <ng-container *ngTemplateOutlet="childContent?.controlTemplate"></ng-container>
-                    </fd-bar-element>
-                    <fd-bar-element class="custom-multi-combobox-select-all-bar-element">
+
                         <button *ngIf="(selectedShown$ | async)"
                                 fd-button
                                 glyph="multiselect-all"
@@ -21,6 +20,7 @@
                                 i18n-title="@@platformMultiCombobox.Mobile.ShowAllItemsButton"
                                 aria-label="Show all items"
                                 i18n-aria-label="@@platformMultiCombobox.Mobile.ShowAllItemsButton"
+                                class="fd-margin-begin--tiny"
                                 (click)="showSelected()"></button>
 
                         <button *ngIf="!(selectedShown$ | async)"
@@ -31,6 +31,7 @@
                                 i18n-title="@@platformMultiCombobox.Mobile.ShowSelectedItemsButton"
                                 aria-label="Show selected items"
                                 i18n-aria-label="@@platformMultiCombobox.Mobile.ShowSelectedItemsButton"
+                                class="fd-margin-begin--tiny"
                                 (click)="showSelected()"></button>
                     </fd-bar-element>
                 </div>

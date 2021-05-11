@@ -7,8 +7,7 @@ import {
     OnInit,
     Optional,
     TemplateRef,
-    ViewChild,
-    ViewEncapsulation
+    ViewChild
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 
@@ -26,20 +25,7 @@ import { SelectableOptionItem } from '../../../../../domain';
 @Component({
     selector: 'fdp-multi-combobox-mobile',
     templateUrl: './multi-combobox-mobile.component.html',
-    styles: [`
-        /* TODO: Remove it after fundamental-styles fix release */
-        .custom-multi-combobox-select-all-bar-element {
-            min-width: 2.25rem;
-        }
-        .custom-multi-combobox-mobile-control-element {
-            width: calc(100% - 2.25rem);
-        }
-        .custom-multi-combobox-mobile-control-element .fdp-multi-combobox-input-group-custom {
-            width: 100%;
-        }
-    `],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit, OnDestroy {
     /** @hidden */
