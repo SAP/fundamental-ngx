@@ -21,7 +21,7 @@
 }
 
 .docs-fcl-example-section {
-    height: 100vh;
+    height: calc(100vh - 3.7rem);
     position: relative;
 
     h2 {

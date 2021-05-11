@@ -97,14 +97,17 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     /** @hidden */
     ngOnInit(): void {
         if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl
-                .subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start')));
+            this._subscriptions.add(
+                this._rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'))
+            );
         }
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._cdRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -116,6 +119,9 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
+        if (!this.elementRef.nativeElement.parentElement) {
+            return;
+        }
         this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
         if (this.containerElement) {
             this.containerBoundary = this.containerElement.getBoundingClientRect().width;
