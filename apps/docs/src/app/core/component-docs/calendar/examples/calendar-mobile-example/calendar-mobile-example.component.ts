@@ -1,9 +1,19 @@
 import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { DialogConfig, DialogService, FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS, DialogConfig, DialogService, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-mobile-example',
     templateUrl: './calendar-mobile-example.component.html',
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ],
     encapsulation: ViewEncapsulation.None
 })
 export class CalendarMobileExampleComponent {

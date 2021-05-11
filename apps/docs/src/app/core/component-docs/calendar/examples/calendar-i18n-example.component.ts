@@ -1,5 +1,5 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
-import { DatetimeAdapter, FdDatetimeAdapter, CalendarI18nLabels, FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDatetimeAdapter, CalendarI18nLabels, FdDate, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
 // i18n aria labels service provider
 @Injectable()
@@ -32,6 +32,10 @@ export class CalendarI18nChineseLabels extends CalendarI18nLabels {
         {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
         },
         {
             provide: CalendarI18nLabels,

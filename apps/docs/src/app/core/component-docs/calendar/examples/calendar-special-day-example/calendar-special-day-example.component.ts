@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, FdDate, SpecialDayRule } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS, SpecialDayRule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-special-day-example',
-    templateUrl: './calendar-special-day-example.component.html'
+    templateUrl: './calendar-special-day-example.component.html',
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class CalendarSpecialDayExampleComponent {
     specialDays: SpecialDayRule<FdDate>[] = [];
