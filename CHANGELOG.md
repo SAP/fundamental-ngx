@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.8...v0.29.2-rc.9) (2021-05-07)
+
+
+### Bug Fixes
+
+* (Platform) make formcontrol non mandatory  in checkbox group for non form cases ([#5259](https://github.com/SAP/fundamental-ngx/issues/5259)) ([a0a4fac](https://github.com/SAP/fundamental-ngx/commit/a0a4facb645a23f4f6b93016c18f7ced096e84a8))
+
+### [0.29.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.7...v0.29.2-rc.8) (2021-05-07)
+
+### [0.29.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.6...v0.29.2-rc.7) (2021-05-06)
+
+### [0.29.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.5...v0.29.2-rc.6) (2021-05-06)
+
+### [0.29.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.4...v0.29.2-rc.5) (2021-05-06)
+
+
+### Features
+
+* add random accent color option for avatar ([#5220](https://github.com/SAP/fundamental-ngx/issues/5220)) ([53f8290](https://github.com/SAP/fundamental-ngx/commit/53f829070a3ae4ca6abccb6c610073ea2e822f0b))
+
+### [0.29.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.3...v0.29.2-rc.4) (2021-05-06)
+
+
+### Bug Fixes
+
+* (Platform) Render fdp-form-field with wrapper ([#5282](https://github.com/SAP/fundamental-ngx/issues/5282)) ([2c9db2c](https://github.com/SAP/fundamental-ngx/commit/2c9db2c43822d2fb04fd2ab7ee12accf4e0485e3))
+
 ### [0.29.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.2...v0.29.2-rc.3) (2021-05-05)
 
 ### [0.29.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.1...v0.29.2-rc.2) (2021-05-05)

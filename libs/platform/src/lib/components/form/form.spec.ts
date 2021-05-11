@@ -210,19 +210,24 @@ describe('Nested Form Groups', () => {
                     <fdp-form-field #lastName id="lastName" label="Last Name">
                         <fdp-input name="lastName" [formControl]="lastName.formControl"></fdp-input>
                     </fdp-form-field>
-                    <fdp-form-field #favoriteColor id="favoriteColor" label="Favorite Color">
-                        <fdp-input name="favoriteColor" [formControl]="favoriteColor.formControl"></fdp-input>
-                    </fdp-form-field>
+                    <fdp-form-field-group>
+                        <fdp-form-field #favoriteColor id="favoriteColor" label="Favorite Color">
+                            <fdp-input name="favoriteColor" [formControl]="favoriteColor.formControl"></fdp-input>
+                        </fdp-form-field>
+                    </fdp-form-field-group>
+                    <!-- Nested Group -->
                     <fdp-form-group #addressGroup [formGroup]="userFormGroup.get('address')" [object]="user.address">
-                        <fdp-form-field #street id="street" label="Street">
-                            <fdp-input name="street" [formControl]="street.formControl"></fdp-input>
+                        <fdp-form-field #state id="state" label="State">
+                            <fdp-input name="state" [formControl]="state.formControl"></fdp-input>
                         </fdp-form-field>
                         <fdp-form-field #city id="city" label="City">
                             <fdp-input name="city" [formControl]="city.formControl"></fdp-input>
                         </fdp-form-field>
-                        <fdp-form-field #state id="state" label="State">
-                            <fdp-input name="state" [formControl]="state.formControl"></fdp-input>
-                        </fdp-form-field>
+                        <fdp-form-field-group>
+                            <fdp-form-field #street id="street" label="Street">
+                                <fdp-input name="street" [formControl]="street.formControl"></fdp-input>
+                            </fdp-form-field>
+                        </fdp-form-field-group>
                     </fdp-form-group>
                 </fdp-form-group>
                 <button type="submit" #submitButton>Submit</button>
@@ -230,12 +235,14 @@ describe('Nested Form Groups', () => {
         `
     })
     class NestedFormGroupsTestComponent {
-        @ViewChild('userForm') userForm: FormGroupComponent;
+        @ViewChild('userForm') userGroup: FormGroupComponent;
+
         @ViewChild('firstName') firstName: FormFieldComponent;
         @ViewChild('lastName') lastName: FormFieldComponent;
         @ViewChild('favoriteColor') favoriteColor: FormFieldComponent;
 
         @ViewChild('addressGroup') addressGroup: FormGroupComponent;
+
         @ViewChild('street') street: FormFieldComponent;
         @ViewChild('city') city: FormFieldComponent;
         @ViewChild('state') state: FormFieldComponent;
@@ -296,15 +303,32 @@ describe('Nested Form Groups', () => {
         expect(addressGroup.contains('state')).toBeTruthy();
     });
 
-    it('should render nested form group controls as well', () => {
-        const street = fixture.debugElement.query(By.css('#street'));
-        expect(street.nativeElement).toBeTruthy();
+    it('should render nested form group controls in right order', () => {
+        const nestedGroupDebugElement = fixture.debugElement.query(By.css('fdp-form-group fdp-form-group'));
+        const nestedGroupElement: HTMLElement = nestedGroupDebugElement.nativeElement;
 
-        const city = fixture.debugElement.query(By.css('#city'));
-        expect(city.nativeElement).toBeTruthy();
+        // Check labels
+        const allLabels = fixture.debugElement.queryAll(By.css('.fd-form-label'));
+        expect(allLabels.length).toBe(6);
 
-        const state = fixture.debugElement.query(By.css('#state'));
-        expect(state.nativeElement).toBeTruthy();
+        const nestedGroupLabels = nestedGroupDebugElement.queryAll(By.css('.fd-form-label'));
+        expect(nestedGroupLabels.length).toBe(3);
+        expect(nestedGroupLabels[0].nativeElement.textContent).toEqual('State');
+        expect(nestedGroupLabels[1].nativeElement.textContent).toEqual('City');
+        expect(nestedGroupLabels[2].nativeElement.textContent).toEqual('Street');
+
+        // Check inputs
+        const streetInputs = fixture.debugElement.queryAll(By.css('input#street'));
+        expect(streetInputs.length).toBe(1);
+        expect(nestedGroupElement.contains(streetInputs[0].nativeElement)).toBeTruthy();
+
+        const cityInputs = fixture.debugElement.queryAll(By.css('input#city'));
+        expect(cityInputs.length).toBe(1);
+        expect(nestedGroupElement.contains(cityInputs[0].nativeElement)).toBeTruthy();
+
+        const stateInputs = fixture.debugElement.queryAll(By.css('input#state'));
+        expect(stateInputs.length).toBe(1);
+        expect(nestedGroupElement.contains(stateInputs[0].nativeElement)).toBeTruthy();
     });
 
     it('should emit "onSubmit" event on submit button click', () => {
@@ -405,5 +429,69 @@ describe('fdp-form-field out of fdp-form-group', () => {
         expect(fdpFormGroup).toBeDefined();
         expect(fdpFormField).toBeDefined();
         expect(fdpFormField.formGroupContainer).toBe(fdpFormGroup);
+    });
+});
+
+describe('FdpFormField with Wrapper', () => {
+    @Component({
+        selector: 'fdp-wrapper',
+        template: ''
+    })
+    class WrapperComponent {}
+
+    @Component({
+        template: `
+            <fdp-form-group #fg>
+                <ng-container *ngTemplateOutlet="fields; context: { $implicit: fg }"> </ng-container>
+
+                <ng-template #fields let-fg>
+                    <fdp-wrapper>
+                        <fdp-form-field
+                            #ff
+                            [formGroupContainer]="fg"
+                            label="Default Input Field"
+                            id="input1"
+                            name="input1"
+                        >
+                            <fdp-input name="input1" [formControl]="ff.formControl"></fdp-input>
+                        </fdp-form-field>
+                    </fdp-wrapper>
+                </ng-template>
+            </fdp-form-group>
+        `
+    })
+    class HostFormComponent {}
+
+    let fixture: ComponentFixture<HostFormComponent>;
+    let host: HostFormComponent;
+
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformInputModule],
+                declarations: [WrapperComponent, HostFormComponent]
+            }).compileComponents();
+        })
+    );
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HostFormComponent);
+        host = fixture.componentInstance;
+
+        fixture.detectChanges();
+    });
+
+    it('should be created', () => {
+        expect(host).toBeDefined();
+    });
+
+    it('should render form control when formField is wrapped in', () => {
+        // Label
+        const label = fixture.debugElement.query(By.css('.fd-form-label'));
+        expect(label.nativeElement.textContent).toEqual('Default Input Field');
+
+        // Input
+        const input = fixture.debugElement.query(By.css('input#input1'));
+        expect(input).toBeTruthy();
     });
 });
