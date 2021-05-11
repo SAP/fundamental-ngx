@@ -585,10 +585,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
+        if (!nodes.length) {
+            return [];
+        }
+
         const rootNodes = findRootNodes(nodes);
         const finalNodes = findFinalNodes(nodes);
 
         if (!rootNodes.length || !finalNodes.length) {
+            console.warn('Err: Not possible to build graph because root or final nodes aren\'t present!');
             return [];
         }
 
@@ -602,6 +607,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
          * 7. Remove columns which contain only blank nodes
         */
         const paths = getAllGraphPaths(rootNodes, nodes);
+
+        if (!paths.length) {
+            console.warn('Err: Not possible to build graph!')
+            return [];
+        }
+
         const pathsWithBlankNodes = fillPathsWithBlankNodes(paths);
         const pathsWithSpaces = replaceDuplicatesWithSpacesInPaths(pathsWithBlankNodes);
         const notEmptyPaths = removeEmptyPaths(pathsWithSpaces);
@@ -966,6 +977,10 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
         while (queue.length) {
             const path = queue.pop();
             const lastNodeInPath = path[path.length - 1];
+
+            if (!lastNodeInPath) {
+                return [];
+            }
 
             if (!lastNodeInPath.targets.length) {
                 paths.push(path);
