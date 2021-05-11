@@ -370,7 +370,7 @@ describe('Popover test suite', function() {
             }
         });
 
-        it('should check', () => {
+        it('should check that popover can move around the button', () => {
             scrollIntoView(cdkButton);
             click(cdkButton);
             // Origin X
