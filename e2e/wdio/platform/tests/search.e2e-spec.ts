@@ -2,7 +2,7 @@ import {
     browserIsIE,
     click,
     getAttributeByNameArr,
-    getElementArrayLength,
+    getElementArrayLength, getElementPlaceholder,
     getElementSize,
     getText,
     getTextArr,
