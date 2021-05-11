@@ -4,30 +4,33 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    OnInit,
     Output,
-    Renderer2,
     TemplateRef,
-    ViewChild,
-    ViewEncapsulation
+    ViewChild
 } from '@angular/core';
 import { TabPanelComponent } from '@fundamental-ngx/core';
 
-import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../constants';
-import { addClassNameToElement } from '../utils';
+import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../constants';
 
 /** Dynamic Page tab change event */
 export class DynamicPageTabChangeEvent {
     constructor(public source: DynamicPageContentComponent, public payload: TabPanelComponent) {}
 }
+
+/**
+ * Dynamic Page Content Component.
+ *
+ */
 @Component({
     selector: 'fdp-dynamic-page-content',
-    templateUrl: './dynamic-page-content.component.html',
-    styleUrls: ['./dynamic-page-content.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    template: `
+        <ng-template #contentTemplateRef>
+            <ng-content></ng-content>
+        </ng-template>
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicPageContentComponent implements OnInit {
+export class DynamicPageContentComponent {
     /**
      * label for the tab. If label is provided, tab navigation will be internally set up.
      */
@@ -45,125 +48,39 @@ export class DynamicPageContentComponent implements OnInit {
      * Default is `solid`.
      */
     @Input()
-    set background(backgroundType: DynamicPageBackgroundType) {
-        if (backgroundType) {
-            this._background = backgroundType;
-            this._setBackgroundStyles(backgroundType);
-        }
-    }
-
-    get background(): DynamicPageBackgroundType {
-        return this._background;
-    }
+    background: DynamicPageBackgroundType;
 
     /**
      * sets size which in turn adds corresponding padding for the size type.
      * size can be `small`, `medium`, `large`, or `extra-large`.
      */
     @Input()
-    set size(sizeType: DynamicPageResponsiveSize) {
-        if (sizeType) {
-            this._size = sizeType;
-            this._setSize(sizeType);
-        }
-    }
+    size: DynamicPageResponsiveSize;
 
-    get size(): DynamicPageResponsiveSize {
-        return this._size;
-    }
-
+    /**
+     * Tab Change event
+     */
     @Output()
     tabChange: EventEmitter<DynamicPageTabChangeEvent> = new EventEmitter<DynamicPageTabChangeEvent>();
 
     /**
-     * the underlying content template
-     */
-    @ViewChild(TemplateRef) contentTemplate: TemplateRef<any>;
-
-    /**
      * @hidden
-     * tracking the background value
+     * The component view is wrapped in ng-template so
+     * component's consumer have to use this templateRef to render it
+     * in its view.
+     *
+     * The template reference to the component view.
      */
-    private _background: DynamicPageBackgroundType;
-
-    /**
-     * @hidden
-     * tracks the size for responsive padding
-     */
-    private _size: DynamicPageResponsiveSize;
+    @ViewChild('contentTemplateRef')
+    contentTemplateRef: TemplateRef<any>;
 
     /** @hidden */
-    constructor(public _elementRef: ElementRef<HTMLElement>, public _renderer: Renderer2) {}
-
-    /**@hidden */
-    ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.dynamicPageContent);
-        if (this.background) {
-            this._setBackgroundStyles(this.background);
-        }
-        if (this.size) {
-            this._setSize(this.size);
-        }
-    }
+    constructor(protected _elementRef: ElementRef<HTMLElement>) {}
 
     /**
      * get reference to this element
      */
     getElementRef(): ElementRef<HTMLElement> {
         return this._elementRef;
-    }
-
-    /**
-     * @hidden
-     * sets the style classes for background property
-     * @param background
-     */
-    private _setBackgroundStyles(background: DynamicPageBackgroundType): void {
-        switch (background) {
-            case 'transparent':
-                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentTransparentBg);
-                break;
-            case 'list':
-                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentListBg);
-                break;
-            case 'solid':
-            default:
-                this._removeClassNameToHostElement(CLASS_NAME.dynamicPageContentTransparentBg);
-                this._removeClassNameToHostElement(CLASS_NAME.dynamicPageContentListBg);
-                break;
-        }
-    }
-
-    /**
-     * @hidden
-     * sets the padding classes
-     * @param sizeType
-     */
-    private _setSize(sizeType: DynamicPageResponsiveSize): void {
-        switch (sizeType) {
-            case 'small':
-                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaSmall);
-                break;
-            case 'medium':
-                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaMedium);
-                break;
-            case 'large':
-                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaLarge);
-                break;
-            case 'extra-large':
-            default:
-                this._addClassNameToHostElement(CLASS_NAME.dynamicPageContentAreaExtraLarge);
-                break;
-        }
-    }
-
-    /**@hidden */
-    private _removeClassNameToHostElement(className: string): void {
-        this._renderer.removeClass(this._elementRef.nativeElement, className);
-    }
-
-    /**@hidden */
-    private _addClassNameToHostElement(className: string): void {
-        addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }
 }
