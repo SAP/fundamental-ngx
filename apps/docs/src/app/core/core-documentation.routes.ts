@@ -253,6 +253,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'message-page',
+                loadChildren: () =>
+                    import('./component-docs/message-page/message-page-docs.module').then(
+                        (m) => m.MessagePageDocsModule
+                    )
+            },
+            {
                 path: 'message-toast',
                 loadChildren: () =>
                     import('./component-docs/message-toast/message-toast-docs.module').then(
