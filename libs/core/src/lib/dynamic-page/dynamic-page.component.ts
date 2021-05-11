@@ -139,7 +139,8 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
             this._listenToLayoutChange();
         }
 
-        setTimeout(() => this._setContainerPositions())
+        setTimeout(() => this._setContainerPositions());
+        this._cd.detectChanges();
     }
 
     /**@hidden */

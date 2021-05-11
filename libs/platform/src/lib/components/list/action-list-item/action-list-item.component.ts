@@ -1,6 +1,6 @@
 import {
     Component, ChangeDetectorRef, ElementRef,
-    ChangeDetectionStrategy, forwardRef, Input, Output, EventEmitter, ViewChild
+    ChangeDetectionStrategy, forwardRef, Input, Output, EventEmitter, ViewChild, Optional
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
@@ -37,7 +37,7 @@ export class ActionListItemComponent extends BaseListItem {
 
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-        protected _listConfig: ListConfig, protected _router: Router) {
+        protected _listConfig: ListConfig, @Optional() protected _router: Router) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
     /**
