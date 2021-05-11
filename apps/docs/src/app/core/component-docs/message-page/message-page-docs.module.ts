@@ -5,10 +5,13 @@ import { API_FILES } from '../../api-files';
 
 import { MessagePageDocsComponent } from './message-page-docs.component';
 import { MessagePageHeaderComponent } from './message-page-header/message-page-header.component';
-import { MessagePageFilterExampleComponent } from './examples/message-page-filter-example.component';
-import { MessagePageSearchExampleComponent } from './examples/message-page-search-example.component';
-import { MessagePageNoItemsExampleComponent } from './examples/message-page-no-items-example.component';
-import { MessagePageErrorExampleComponent } from './examples/message-page-error-example.component';
+import { MessagePageFilterExampleComponent } from './examples/message-page-examples.component';
+import { MessagePageSearchExampleComponent } from './examples/message-page-examples.component';
+import { MessagePageNoItemsExampleComponent } from './examples/message-page-examples.component';
+import { MessagePageErrorExampleComponent } from './examples/message-page-examples.component';
+import { MessagePageActionsExampleComponent } from './examples/message-page-examples.component';
+import { MessagePageCustomIconExampleComponent } from './examples/message-page-examples.component';
+import { MessagePageNoIconExampleComponent } from './examples/message-page-examples.component';
 
 import { MessagePageModule, LinkModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -35,7 +38,10 @@ const routes: Routes = [
         MessagePageFilterExampleComponent,
         MessagePageSearchExampleComponent,
         MessagePageNoItemsExampleComponent,
-        MessagePageErrorExampleComponent
+        MessagePageErrorExampleComponent,
+        MessagePageActionsExampleComponent,
+        MessagePageCustomIconExampleComponent,
+        MessagePageNoIconExampleComponent
     ]
 })
 export class MessagePageDocsModule {}

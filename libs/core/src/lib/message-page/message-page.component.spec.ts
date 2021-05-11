@@ -1,19 +1,42 @@
 import { MessagePageComponent } from './message-page.component';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 @Component({
-    selector: 'fd-test-tabs',
-    template: ` <a fd-link>Test Link</a> `
+    selector: 'fd-message-page-test',
+    template: `
+    <fd-message-page [type]="type" [glyph]="glyph" [hasIcon]="hasIcon">
+        <fd-message-page-title>{{titleText}}</fd-message-page-title>
+        <fd-message-page-subtitle>
+           {{subtitleText}}
+        </fd-message-page-subtitle>
+        <fd-message-page-actions>
+            {{actionsText}}
+        </fd-message-page-actions>
+        <fd-message-page-more>
+            {{moreText}}
+        </fd-message-page-more>
+    </fd-message-page>
+    `
 })
 class TestMessagePageComponent {
-    @ViewChild(MessagePageComponent, { static: true })
+    @ViewChild(MessagePageComponent)
     messagePageComponent: MessagePageComponent;
+
+    type = 'error';
+    glyph: string;
+    hasIcon = true;
+    titleText = 'No matching items found.';
+    subtitleText = ' Check the filter settings.';
+    actionsText = 'Actions';
+    moreText = 'Show Details';
 }
 
 describe('MessagePageComponent', () => {
     let component: MessagePageComponent;
     let fixture: ComponentFixture<TestMessagePageComponent>;
+    let host: TestMessagePageComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -23,32 +46,49 @@ describe('MessagePageComponent', () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMessagePageComponent);
-        component = fixture.componentInstance.messagePageComponent;
+        host = fixture.componentInstance;
         fixture.detectChanges();
+        component = host.messagePageComponent;
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Add emphasized class', () => {
-        component.emphasized = true;
-        component.buildComponentCssClass();
-        fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-link--emphasized')).toBe(true);
+    it('should add proper class to the host', () => {
+        const messagePageDebugEl = fixture.debugElement.query(By.directive(MessagePageComponent));
+        expect(messagePageDebugEl.classes['fd-message-page']).toBeTrue();
     });
 
-    it('Should Add inverted class', () => {
-        component.inverted = true;
-        component.buildComponentCssClass();
-        fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('fd-link--inverted')).toBe(true);
+    it('should render title', () => {
+        const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
+        expect(messagePageEl.textContent.includes(host.titleText)).toBeTruthy();
     });
 
-    it('Should Add disabled class', () => {
-        component.disabled = true;
-        component.buildComponentCssClass();
-        fixture.detectChanges();
-        expect(component.elementRef().nativeElement.classList.contains('is-disabled')).toBe(true);
+    it('should render subtitle', () => {
+        const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
+        expect(messagePageEl.textContent.includes(host.subtitleText)).toBeTruthy();
+    });
+
+    it('should render actions', () => {
+        const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
+        expect(messagePageEl.textContent.includes(host.actionsText)).toBeTruthy();
+    });
+
+    it('should render more', () => {
+        const messagePageEl: HTMLElement = fixture.debugElement.query(By.directive(MessagePageComponent)).nativeElement;
+        expect(messagePageEl.textContent.includes(host.moreText)).toBeTruthy();
+    });
+
+    it('should has type binding', () => {
+        expect(component.type).toBe(host.type);
+    });
+
+    it('should has glyph binding', () => {
+        expect(component.glyph).toBe('document');
+    });
+
+    it('should has hasIcon binding', () => {
+        expect(component.hasIcon).toBe(host.hasIcon);
     });
 });
