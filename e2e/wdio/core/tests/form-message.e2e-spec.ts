@@ -2,7 +2,7 @@ import { FormMessagePo } from '../pages/form-message.po';
 import {
     addIsActiveClass,
     checkElementScreenshot,
-    click, getAttributeByName, getElementArrayLength, getImageTagBrowserPlatform, getText,
+    click, getAttributeByName, getElementArrayLength, getElementPlaceholder, getImageTagBrowserPlatform, getText,
     getValue,
     isElementClickable, mouseHoverElement,
     refreshPage, saveElementScreenshot,
@@ -44,7 +44,7 @@ describe('Form Message test suite:', function() {
 
     it('should check message with input has placeholder', () => {
         scrollIntoView(messageWithInput);
-        expect(getAttributeByName(messageWithInput, 'placeholder')).toBe(placeholderText);
+        expect(getElementPlaceholder(messageWithInput)).toBe(placeholderText);
     });
 
     it('should check message with input field', () => {

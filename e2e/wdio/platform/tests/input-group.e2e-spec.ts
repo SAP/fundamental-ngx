@@ -4,7 +4,7 @@ import {
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
     getAttributeByName,
-    getAttributeByNameArr,
+    getAttributeByNameArr, getElementPlaceholder,
     getElementSize,
     getText,
     getTextArr,
@@ -56,8 +56,7 @@ describe('Input Group should', function() {
     it('have correct placeholder text', () => {
         expect(getAttributeByNameArr(standartInputArr, 'placeholder'))
             .toEqual(standardInputPlaceholders);
-        expect(getAttributeByName(withFormInput, 'placeholder'))
-            .toEqual(inputWithFormPlaceholder);
+        expect(getElementPlaceholder(withFormInput)).toEqual(inputWithFormPlaceholder);
     });
 
     it('have left text addon and accept values', () => {
@@ -178,7 +177,7 @@ describe('Input Group should', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
-            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(3);
+            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
