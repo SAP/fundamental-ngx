@@ -30,7 +30,7 @@ import {
     RtlService,
     TokenizerComponent
 } from '@fundamental-ngx/core';
-import { DATA_PROVIDERS, DataProvider, ListDataSource } from '../../../../domain/data-source';
+import { DATA_PROVIDERS, DataProvider, MultiComboBoxDataSource } from '../../../../domain/data-source';
 import { FormFieldControl } from '../../form-control';
 import { BaseMultiCombobox, MultiComboboxSelectionChangeEvent } from '../commons/base-multi-combobox';
 import { OptionItem, SelectableOptionItem } from '../../../../domain';
@@ -101,7 +101,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         const providers = this.providers?.size === 0 ? this._multiComboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
-            this.dataSource = new ListDataSource(providers.get(this.entityClass));
+            this.dataSource = new MultiComboBoxDataSource(providers.get(this.entityClass));
         }
     }
 

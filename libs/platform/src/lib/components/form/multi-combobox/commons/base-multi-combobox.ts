@@ -30,7 +30,7 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 
-import { BehaviorSubject, fromEvent, isObservable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 
 import {
@@ -44,13 +44,13 @@ import {
     TemplateDirective
 } from '@fundamental-ngx/core';
 import {
-    ArrayListDataSource,
+    ArrayMultiComboBoxDataSource,
     isDataSource,
     isOptionItem,
     isSelectableOptionItem,
-    ListDataSource,
     MatchingBy,
-    ObservableListDataSource,
+    MultiComboBoxDataSource,
+    ObservableMultiComboBoxDataSource,
     SelectableOptionItem
 } from '../../../../domain';
 
@@ -60,9 +60,10 @@ import { MultiComboboxComponent } from '../multi-combobox/multi-combobox.compone
 import { MatchingStrategy } from '../../combobox/combobox.config';
 import { ContentDensity, FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
-import { FdpListDataSource } from '../../../list/list.component';
 import { ListConfig } from '../../../list/list.config';
 import { TextAlignment } from '../../combobox';
+
+export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
 export class MultiComboboxSelectionChangeEvent {
     constructor(
@@ -83,12 +84,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** Datasource for suggestion list. */
     @Input()
-    set dataSource(value: FdpListDataSource<any>) {
+    set dataSource(value: FdpMultiComboboxDataSource<any>) {
         if (value) {
             this._initializeDataSource(value);
         }
     }
-    get dataSource(): FdpListDataSource<any> {
+    get dataSource(): FdpMultiComboboxDataSource<any> {
         return this._dataSource;
     }
 
@@ -286,7 +287,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     isListEmpty = true;
 
     /** @hidden */
-    protected _dataSource: FdpListDataSource<any>;
+    protected _dataSource: FdpMultiComboboxDataSource<any>;
 
     /** @hidden */
     private _inputTextValue: string;
@@ -354,7 +355,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         super.ngOnDestroy();
 
         if (isDataSource(this.dataSource)) {
-            (this.dataSource as ListDataSource<any>).close();
+            (this.dataSource as MultiComboBoxDataSource<any>).close();
         }
 
         if (this._dsSubscription) {
@@ -509,8 +510,8 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden */
-    protected get ds(): ListDataSource<any> {
-        return <ListDataSource<any>>this.dataSource;
+    protected get ds(): MultiComboBoxDataSource<any> {
+        return <MultiComboBoxDataSource<any>>this.dataSource;
     }
 
     /** @hidden */
@@ -553,12 +554,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden */
-    private _initializeDataSource(ds: FdpListDataSource<any>): void {
+    private _initializeDataSource(ds: FdpMultiComboboxDataSource<any>): void {
         this._suggestions = [];
         this._flatSuggestions = [];
 
         if (isDataSource(this.dataSource)) {
-            (this.dataSource as ListDataSource<any>).close();
+            (this.dataSource as MultiComboBoxDataSource<any>).close();
 
             if (this._dsSubscription) {
                 this._dsSubscription.unsubscribe();
@@ -570,7 +571,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden */
-    private _openDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
+    private _openDataStream(ds: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> {
         const initDataSource = this._toDataStream(ds);
 
         if (initDataSource === undefined) {
@@ -619,13 +620,13 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpListDataSource<any>): ListDataSource<any> | undefined {
+    private _toDataStream(ds: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> | undefined {
         if (isDataSource(ds)) {
-            return ds as ListDataSource<any>;
+            return ds as MultiComboBoxDataSource<any>;
         } else if (Array.isArray(ds)) {
-            return new ArrayListDataSource<any>(ds);
+            return new ArrayMultiComboBoxDataSource<any>(ds);
         } else if (isObservable(ds)) {
-            return new ObservableListDataSource<any>(ds);
+            return new ObservableMultiComboBoxDataSource<any>(ds);
         }
 
         return undefined;
