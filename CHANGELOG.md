@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.30.0...v0.30.1-rc.0) (2021-05-10)
+
+## [0.30.0](https://github.com/SAP/fundamental-ngx/compare/v0.30.0-rc.0...v0.30.0) (2021-05-10)
+
+## [0.30.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.15...v0.30.0-rc.0) (2021-05-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* Changes in markup
+Removed fd-notification-avatar directive
+The directive fd-notification-actions is now a component
+Removed fd-notification-text directive
+Removed fd-notification-description directive
+Removed fd-notification-metadata directive
+Removed the Notifications From Object option together with the NotificationDefault.
+Notifications Group is no longer a banner displayed in the right corner but displayed inside a popover triggered by clicking the bell icon in the shell bar at the top right of the screen.
+
+### Bug Fixes
+
+* (Core) refactor Notifications to follow the latest design specs ([#5186](https://github.com/SAP/fundamental-ngx/issues/5186)) ([5d2bf88](https://github.com/SAP/fundamental-ngx/commit/5d2bf889c03c258e3f4097e953025ff19584b2f4))
+
+### [0.29.2-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.14...v0.29.2-rc.15) (2021-05-10)
+
+### [0.29.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.13...v0.29.2-rc.14) (2021-05-10)
+
+### [0.29.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.12...v0.29.2-rc.13) (2021-05-10)
+
+### [0.29.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.11...v0.29.2-rc.12) (2021-05-09)
+
+### [0.29.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.10...v0.29.2-rc.11) (2021-05-09)
+
+### [0.29.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.9...v0.29.2-rc.10) (2021-05-07)
+
 ### [0.29.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.29.2-rc.8...v0.29.2-rc.9) (2021-05-07)
 
 

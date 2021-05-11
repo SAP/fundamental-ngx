@@ -3,13 +3,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: ` <span #directiveElement fd-notification-metadata>Notification Test</span> `
+    template: `<span #directiveElement fd-notification-separator></span> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
-describe('NotificationMetaDataDirective', () => {
+describe('NotificationSeparatorDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -31,6 +31,6 @@ describe('NotificationMetaDataDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-notification__metadata');
+        expect(component.ref.nativeElement.className).toBe('fd-notification__separator');
     });
 });

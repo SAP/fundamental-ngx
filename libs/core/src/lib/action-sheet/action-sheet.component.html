@@ -1,9 +1,9 @@
 <fd-popover
         *ngIf="!mobile"
-        placement="bottom"
+        [placement]="placement"
         [(isOpen)]="isOpen"
         (isOpenChange)="isOpenChangeHandle($event)"
-        [noArrow]="false"
+        [noArrow]="noArrow"
         [focusTrapped]="true"
         [triggers]="[]"
         [focusAutoCapture]="true">

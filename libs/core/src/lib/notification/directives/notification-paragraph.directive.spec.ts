@@ -1,16 +1,15 @@
-import { NotificationContentDirective } from './notification-content.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: ` <span #directiveElement fd-notification-content>Notification Test</span> `
+    template: `<p #directiveElement fd-notification-paragraph>Notification Paragraph Test</p> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
     ref: ElementRef;
 }
-describe('NotificationContentDirective', () => {
+describe('NotificationParagraphDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
@@ -32,6 +31,6 @@ describe('NotificationContentDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-notification__content');
+        expect(component.ref.nativeElement.className).toBe('fd-notification__paragraph');
     });
 });

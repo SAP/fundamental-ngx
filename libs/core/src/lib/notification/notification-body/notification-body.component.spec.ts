@@ -1,24 +1,41 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NotificationModule } from '../notification.module';
 
-import { NotificationBodyComponent } from './notification-body.component';
+@Component({
+    template: `
+        <fd-notification-body #notificationBodyRef [hasMessage]="hasMessage"></fd-notification-body>
+    `
+})
+class TestComponent {
+    @ViewChild('notificationBodyRef', { read: ElementRef })
+    notificationBodyRef: ElementRef;
+
+    hasMessage = false;
+}
 
 describe('NotificationBodyComponent', () => {
-    let component: NotificationBodyComponent;
-    let fixture: ComponentFixture<NotificationBodyComponent>;
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [NotificationBodyComponent]
+            declarations: [TestComponent],
+            imports: [NotificationModule]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(NotificationBodyComponent);
-        component = fixture.componentInstance;
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.debugElement.componentInstance;
         fixture.detectChanges();
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should assign class', () => {
+        expect(component.notificationBodyRef.nativeElement.className).toContain('fd-notification__body');
     });
 });
