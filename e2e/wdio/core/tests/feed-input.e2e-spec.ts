@@ -6,8 +6,8 @@ import {
     elementDisplayed,
     getAttributeByName,
     getCSSPropertyByName,
-    getElementArrayLength,
-    getElementSize, getImageTagBrowserPlatform,
+    getElementArrayLength, getElementPlaceholder,
+    getElementSize, getElementTitle, getImageTagBrowserPlatform,
     isEnabled, mouseHoverElement,
     refreshPage, saveElementScreenshot,
     scrollIntoView,
@@ -49,7 +49,7 @@ describe('Verify Feed Input component', function() {
     it('should have correct placeholder assigned', () => {
         const feedInputLength = getElementArrayLength(feedInputTextArea);
         for (let i = 0; i < feedInputLength; i++) {
-            expect(getAttributeByName(feedInputTextArea, 'placeholder', i)).toEqual(default_placeholder);
+            expect(getElementPlaceholder(feedInputTextArea, i)).toEqual(default_placeholder);
         }
     });
 
@@ -140,7 +140,7 @@ describe('Verify Feed Input component', function() {
     it('should avatar and Send button has correct tooltip', () => {
         const inputButtonLength = getElementArrayLength(feedInputButton);
         for (let i = 0; i < inputButtonLength; i++) {
-            expect(getAttributeByName(feedInputButton, 'title', i)).toEqual(send_button_tooltip);
+            expect(getElementTitle(feedInputButton, i)).toEqual(send_button_tooltip);
         }
     });
 

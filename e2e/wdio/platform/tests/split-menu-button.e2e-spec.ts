@@ -11,7 +11,6 @@ import {
     standardBtnText,
     standardBtnText2,
     textColorAttr,
-    tooltipAttr,
     typesBtnColorArr,
     typesBtnHvrColorArr,
     typesBtnTextArr
@@ -22,7 +21,7 @@ import {
     elementArray,
     getAttributeByName,
     getCSSPropertyByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementTitle,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
@@ -212,8 +211,7 @@ describe('Split menu button test suite', () => {
         const menuBtnArr = elementArray(mainBtnArr);
 
         for (let i = 0; i < menuBtnArr.length; i++) {
-            expect(getAttributeByName(mainBtnArr, tooltipAttr, i))
-                .not.toEqual(null);
+            expect(getElementTitle(mainBtnArr, i)).not.toEqual(null);
         }
     });
 

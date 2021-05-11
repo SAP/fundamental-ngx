@@ -9,7 +9,7 @@ import {
     getAttributeByName,
     getAttributeByNameArr,
     getCSSPropertyByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementPlaceholder,
     getElementSize,
     getText,
     getTextArr,
