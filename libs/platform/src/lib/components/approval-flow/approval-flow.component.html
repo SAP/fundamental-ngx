@@ -22,14 +22,14 @@
 
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
         <button *ngIf="!_graph.length" fd-button label="Add a step" [compact]="true" (click)="_addNodeFromToolbar('empty')"></button>
-        
+
         <button *ngIf="!_isEditMode && _graph.length" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
 
         <ng-container *ngIf="_isEditMode">
             <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="_addNodeFromToolbar('before')"></button>
 
             <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="_addNodeFromToolbar('after')"></button>
-            
+
             <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_addNodeFromToolbar('parallel')"></button>
 
             <button *ngIf="_selectedNodes.length" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
@@ -114,8 +114,6 @@
                             [dueDateThreshold]="dueDateThreshold"
                             [renderArrow]="columnIndex > 0"
                             [allNodesInColumnApproved]="column.allNodesApproved"
-                            [hideNodeActionsMenu]="hideNodeActionsMenu"
-                            [nodeActionsMenuConfig]="nodeActionsMenuConfig"
                             (onNodeClick)="_onNodeClick(node)"
                             (onNodeCheck)="_onNodeCheck(node)"
                             (onAdd)="_addNode(node, $event)"
@@ -144,7 +142,7 @@
         i18n="@@platformApprovalFlowReminderMessage">
         Reminder has been sent to {{messageToast.data.targets[0].name}}
     </ng-container>
-    
+
     <ng-template #multipleRecievers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
         Reminder has been sent to {{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}
     </ng-template>

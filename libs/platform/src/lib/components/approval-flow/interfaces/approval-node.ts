@@ -13,6 +13,8 @@ export interface ApprovalNode {
     approvalTeamId?: string;
     variousTeams?: boolean;
     isEveryoneApprovalNeeded?: boolean;
+    disableActions?: boolean;
+    actionsConfig?: ApprovalNodeActionsConfig;
 }
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; meta?: any };
@@ -30,16 +32,17 @@ export interface ApprovalGraphNodeMetadata {
     canAddNodeBefore?: boolean;
     canAddNodeAfter?: boolean;
     canAddParallel?: boolean;
+    renderAddNodeAfterButton?: boolean;
     renderVerticalLineBefore?: boolean;
     renderVerticalLineAfter?: boolean;
     isVerticalLineBeforeSolid?: boolean;
     isVerticalLineAfterSolid?: boolean;
 }
 
-export interface ApprovalNodeActionsMenuConfig {
-    hideAddApproversBefore?: boolean;
-    hideAddApproversAfter?: boolean;
-    hideAddApproversParallel?: boolean;
-    hideEdit?: boolean;
-    hideRemove?: boolean;
+export interface ApprovalNodeActionsConfig {
+    disableAddBefore?: boolean;
+    disableAddAfter?: boolean;
+    disableAddParallel?: boolean;
+    disableEdit?: boolean;
+    disableRemove?: boolean;
 }

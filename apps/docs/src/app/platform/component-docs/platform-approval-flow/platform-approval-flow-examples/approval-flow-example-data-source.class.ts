@@ -156,6 +156,11 @@ const teams: ApprovalTeam[] = [
     }
 ];
 
+const emptyGraph: ApprovalProcess = {
+    watchers: [getUser('uid66161')],
+    nodes: []
+};
+
 const simpleGraph: ApprovalProcess = {
     watchers: [getUser('uid66161')],
     nodes: [
@@ -345,6 +350,7 @@ const complexGraph: ApprovalProcess = {
 };
 
 const graphs = {
+    empty: emptyGraph,
     simple: simpleGraph,
     medium: mediumGraph,
     complex: complexGraph
@@ -358,7 +364,7 @@ function daysFromNow(days: number): Date {
     return new Date(Date.now() + DAY_IN_MILLISECONDS * days);
 }
 
-type GraphTypes = 'simple' | 'medium' | 'complex';
+type GraphTypes = 'empty' | 'simple' | 'medium' | 'complex';
 
 export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
     selectedGraph: GraphTypes;

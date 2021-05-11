@@ -35,7 +35,6 @@ import {
     ApprovalGraphNode,
     ApprovalGraphNodeMetadata,
     ApprovalNode,
-    ApprovalNodeActionsMenuConfig,
     ApprovalProcess,
     ApprovalStatus,
     ApprovalUser
@@ -92,14 +91,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** Text label for watchers list */
     @Input() watchersLabel = 'Watchers';
-
-    /** Whether to hide overflow button & menu on the node */
-    @Input() hideNodeActionsMenu = false;
-
-    /** Config to set up items shown in node actions menu.
-     *  All actions will be shown if not provided.
-     */
-    @Input() nodeActionsMenuConfig: ApprovalNodeActionsMenuConfig;
 
     /** Event emitted on approval flow node click. */
     @Output() nodeClick = new EventEmitter<ApprovalNode>();
@@ -337,9 +328,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const isTab = KeyUtil.isKeyCode(event, TAB);
         const isShift = event.shiftKey;
         const isTabMoveForwardPossible = !isShift && !lastNode && !lastColumn;
-        const isTabMmoveBackwardPossible = isShift && !firstNode && !firstColumn;
+        const isTabMoveBackwardPossible = isShift && !firstNode && !firstColumn;
 
-        if (isTab && !isTabMoveForwardPossible && !isTabMmoveBackwardPossible) {
+        if (isTab && !isTabMoveForwardPossible && !isTabMoveBackwardPossible) {
             return;
         }
 
@@ -438,7 +429,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Open add node dialog */
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
-        const showNodeTypeSelect = type !== 'empty' && type === 'before';
+        const showNodeTypeSelect =
+            type !== 'empty'
+            && type === 'before'
+            && !source.actionsConfig?.disableAddParallel
+            && !source.actionsConfig?.disableAddBefore;
 
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
@@ -675,6 +670,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
                 const prevNode = graphPrevColumn?.nodes[nodeIndex - 1];
                 const nextNode = graphNextColumn?.nodes[nodeIndex - 1];
+
+                nodeMetadata.renderAddNodeAfterButton =
+                    nodeMetadata.canAddNodeAfter
+                    && (
+                        nodeMetadata.isFinal
+                        || nodeMetadata.parallelStart
+                        || nodeMetadata.isLastInParallel
+                        || nextHNode?.blank
+                    );
 
                 nodeMetadata.renderVerticalLineBefore =
                     graphPrevColumn

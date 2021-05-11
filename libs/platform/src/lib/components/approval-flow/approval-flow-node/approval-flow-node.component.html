@@ -23,7 +23,7 @@
         ></fd-checkbox>
 
         <button
-            *ngIf="!hideNodeActionsMenu"
+            *ngIf="!this.node?.disableActions"
             class="approval-flow-node__menu-button"
             fd-button
             fdType="transparent"
@@ -33,7 +33,7 @@
             [disabled]="_isEditActionsAvailable"
         ></button>
     </div>
-    
+
     <div class="approval-flow-node__inner" (click)="_onClick()">
         <div class="approval-flow-node__avatar">
             <ng-container *ngIf="node.approvers.length === 1">
@@ -98,11 +98,11 @@
     </div>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!_blank && !_space && meta?.canAddNodeBefore)">
+<ng-container *ngIf="_showAddButton && meta?.canAddNodeBefore && !node?.actionsConfig?.disableAddBefore">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
 
-<ng-container *ngIf="isEdit && (!_blank && !_space && _isRenderAddButtonAfter)">
+<ng-container *ngIf="_showAddButton && meta?.canAddNodeAfter && meta?.renderAddNodeAfterButton && !node?.actionsConfig?.disableAddAfter">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 
@@ -131,8 +131,8 @@
 </ng-template>
 
 <fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
-    <li 
-        *ngIf="meta?.canAddNodeBefore && !nodeActionsMenuConfig?.hideAddApproversBefore" 
+    <li
+        *ngIf="meta?.canAddNodeBefore && !this.node?.actionsConfig?.disableAddBefore"
         fd-menu-item
         (click)="menu.close(); onAdd.emit('before')"
     >
@@ -140,7 +140,7 @@
     </li>
 
     <li
-        *ngIf="meta?.canAddNodeAfter && !nodeActionsMenuConfig?.hideAddApproversAfter"
+        *ngIf="meta?.canAddNodeAfter && !this.node?.actionsConfig?.disableAddAfter"
         fd-menu-item
         (click)="menu.close(); onAdd.emit('after')"
     >
@@ -148,7 +148,7 @@
     </li>
 
     <li
-        *ngIf="meta?.canAddParallel && !nodeActionsMenuConfig?.hideAddApproversParallel"
+        *ngIf="meta?.canAddParallel && !this.node?.actionsConfig?.disableAddParallel"
         fd-menu-item
         (click)="menu.close(); onAdd.emit('parallel')"
     >
@@ -156,7 +156,7 @@
     </li>
 
     <li
-        *ngIf="_isNotStarted && !nodeActionsMenuConfig?.hideEdit"
+        *ngIf="_isNotStarted && !this.node?.actionsConfig?.disableEdit"
         fd-menu-item
         (click)="menu.close(); onEdit.emit()"
     >
@@ -164,7 +164,7 @@
     </li>
 
     <li
-        *ngIf="!nodeActionsMenuConfig?.hideRemove"
+        *ngIf="!this.node?.actionsConfig?.disableRemove"
         fd-menu-item
         (click)="menu.close(); onDelete.emit()"
     >

@@ -19,8 +19,9 @@ import { MenuComponent, ObjectStatus, RtlService } from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
 
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
-import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalNodeActionsMenuConfig, ApprovalStatus } from '../interfaces';
+import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
 import { isNodeApproved } from '../helpers';
+import { ApprovalFlowNodeTarget } from '../approval-flow-add-node/approval-flow-add-node.component';
 
 const NODE_STATUS_CLASS_MAP = {
     'approved': 'positive',
@@ -61,14 +62,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
      *  Used to render appropriate vertical line after (dashed/solid)
      */
     @Input() allNodesInColumnApproved = false;
-
-    /** Whether to hide overflow button & menu on the node */
-    @Input() hideNodeActionsMenu = false;
-
-    /** Config to set up items shown in node actions menu.
-     *  All actions will be shown if not provided.
-     */
-    @Input() nodeActionsMenuConfig: ApprovalNodeActionsMenuConfig;
 
     /** Whether the node is in edit mode */
     @Input()
@@ -185,7 +178,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @Output() onNodeCheck = new EventEmitter<boolean>();
 
     /** Event emitted on add node button clicked, value is the placement for the new node */
-    @Output() onAdd = new EventEmitter<string>();
+    @Output() onAdd = new EventEmitter<ApprovalFlowNodeTarget>();
 
     /** Event emitted on edit node button clicked */
     @Output() onEdit = new EventEmitter<void>();
@@ -253,8 +246,8 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    get _isRenderAddButtonAfter(): boolean {
-        return this.meta?.canAddNodeAfter;
+    get _showAddButton(): boolean {
+        return this.isEdit && !this._blank && !this._space && !this.node?.disableActions;
     }
 
     /** @hidden */
