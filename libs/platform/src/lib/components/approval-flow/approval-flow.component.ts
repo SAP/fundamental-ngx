@@ -166,7 +166,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _emptyApprovalFlowSpotConfig = {
-        spot: { url: 'assets/images/sapIllus-Spot-NoData.svg', id: 'sapIllus-Spot-NoData' }
+        spot: { url: '', id: 'sapIllus-Spot-NoData' }
     }
 
     /** @hidden */
