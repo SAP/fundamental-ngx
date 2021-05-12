@@ -2,18 +2,23 @@ import { of } from 'rxjs';
 
 import { DefaultEntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
-import { Type } from '../../../domain/utility'
+import { Type } from '../../../domain/utility';
 import { IdentityKey } from '../../../domain/entity';
 import { BaseEntity } from '../domain/base-classes/base-entity';
 import { EntityCollectionService } from './entity-collection-service';
 
-class User extends BaseEntity<{}>{
-    constructor(public id: IdentityKey, public name: string, public age: number) {
-        super({ id, name, age });
+class UserDTO {
+    id: IdentityKey;
+    name: string;
+    age: number;
+}
+class User extends BaseEntity<UserDTO> {
+    constructor(dto: UserDTO) {
+        super(dto);
     }
 
     get identity(): IdentityKey {
-        return this.id;
+        return this.value.id;
     }
 }
 
@@ -39,7 +44,7 @@ class UserCollectionServiceMock implements Partial<EntityCollectionService<User>
     }
 
     delete(entityOrId: User | string | number) {
-        return entityOrId instanceof User ? of(entityOrId.id) : of(entityOrId);
+        return entityOrId instanceof User ? of(entityOrId.identity) : of(entityOrId);
     }
 }
 
@@ -63,19 +68,22 @@ describe('Default Entity Store', () => {
     });
 
     it('should delegate getBy to entityService.getByKey() method', () => {
-        const id = '27';
-        const result = new User(id, 'John', 35);
+        const dto: UserDTO = { id: '27', name: 'John', age: 35 };
+        const result: User = new User(dto);
 
-        spyOn(collectionService, 'getByKey').and.callFake(() => of(result));
+        spyOn(collectionService, 'getByKey').and.callFake(() => of(dto as any));
 
         // check returned result
-        store.get(id).subscribe((data) => expect(data.value).toEqual(result.value));
+        store.get('27').subscribe((data) => {
+            expect(data.value).toEqual(result.value);
+        });
 
-        expect(collectionService.getByKey).toHaveBeenCalledOnceWith(id);
+        expect(collectionService.getByKey).toHaveBeenCalledOnceWith('27');
     });
 
     it('should delegate save to entityService.update() method if entity id exists', () => {
-        const user = new User('1', 'John', 35);
+        const dto: UserDTO = { id: '27', name: 'John', age: 35 };
+        const user: User = new User(dto);
 
         // check returned result
         spyOn(collectionService, 'update').and.callFake(() => of(user));
@@ -86,21 +94,23 @@ describe('Default Entity Store', () => {
     });
 
     it("should delegate save to entityService.add() method if entity id doesn't exist", () => {
-        const user = new User(undefined, 'John', 35);
+        const dto: UserDTO = { id: undefined, name: 'John', age: 35 };
+        const user = new User(dto);
 
         // check returned result
         spyOn(collectionService, 'add').and.callFake(() => of(user));
 
-        store.save(user).subscribe((data) => expect(data).toBe(user));
+        store.save(user).subscribe((data) => expect(data).toEqual(user));
 
         expect(collectionService.add).toHaveBeenCalledOnceWith(user);
     });
 
     it('should delegate delete to entityService.delete()', () => {
-        const user = new User('1', 'John', 35);
+        const dto: UserDTO = { id: '27', name: 'John', age: 35 };
+        const user = new User(dto);
 
         // check returned result
-        spyOn(collectionService, 'delete').and.callFake(() => of(user.id));
+        spyOn(collectionService, 'delete').and.callFake(() => of(user.identity));
 
         store.delete(user).subscribe((data) => expect(data).toBe(user));
 

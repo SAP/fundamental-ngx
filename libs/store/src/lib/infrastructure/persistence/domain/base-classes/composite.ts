@@ -1,8 +1,12 @@
+/**
+ * Base class for BaseEntity and BaseValue
+ *
+ */
 export abstract class Composite<T> {
     value: T;
     hasErrors: boolean;
 
-    protected constructor(dto: T) {
+    constructor(dto: T) {
         this.value = dto;
     }
 }

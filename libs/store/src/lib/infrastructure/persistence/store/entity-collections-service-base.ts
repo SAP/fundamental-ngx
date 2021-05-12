@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { BaseEntity, EntityType } from '../../../domain/public_api';
+import { EntityType } from '../../../domain/public_api';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
-import { EntityServices } from '@ngrx/data';
-import { EntityMetaOptionsService } from '../utils/entity-options.service';
 
 /**
  * EntityCollectionsService Base implementation.
