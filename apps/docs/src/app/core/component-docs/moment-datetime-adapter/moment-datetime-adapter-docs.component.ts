@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import * as datePickerMomentAdapterSrcTs from '!raw-loader!./examples/date-picker-moment-adapter-example.component.ts';
 import * as momentAdapterOptionsSrcTs from '!raw-loader!./examples/moment-adapter-options-example.component.ts';
-import * as momentDatetimeFormatsSrcTs from '!raw-loader!./examples/moment-adapter-options-example.component.ts';
+import * as momentDatetimeFormatsSrcTs from '!raw-loader!./examples/moment-datetime-formats-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -38,3 +38,4 @@ export class MomentDatetimeAdapterDocsComponent {
         }
     ];
 }
+

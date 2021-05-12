@@ -22,7 +22,7 @@
         "paths": {
             "@fundamental-ngx/core": ["dist/libs/core", "libs/core/src/index.ts"],
             "@fundamental-ngx/platform": ["libs/platform/src/index.ts"],
-            "@fundamental-ngx/momentadapter": ["libs/moment-adapter/src/index.ts"]
+            "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"]
         },
         "skipLibCheck": true
     },

@@ -129,26 +129,6 @@ describe('MomentDatetimeAdapter', () => {
         ]);
     });
     
-    it('should update stream with month names in a different locale', async () => {
-        adapter.setLocale('ja-JP');
-        adapter.getMonthNames$('long').subscribe(monthNames => {
-            expect(monthNames).toEqual([
-                '1月',
-                '2月',
-                '3月',
-                '4月',
-                '5月',
-                '6月',
-                '7月',
-                '8月',
-                '9月',
-                '10月',
-                '11月',
-                '12月'
-            ]);
-        });
-    });
-
     it('should get date names', () => {
         expect(adapter.getDateNames()).toEqual([
             '1',
@@ -224,21 +204,6 @@ describe('MomentDatetimeAdapter', () => {
             '金曜日',
             '土曜日'
         ]);
-    });
-
-    it('should update stream with day of week names in a different locale', async () => {
-        adapter.setLocale('ja-JP');
-        adapter.getDayOfWeekNames$('long').subscribe((dayNames) => {
-            expect(dayNames).toEqual([
-                '日曜日',
-                '月曜日',
-                '火曜日',
-                '水曜日',
-                '木曜日',
-                '金曜日',
-                '土曜日'
-            ]);
-        });
     });
 
     it('should get year name', () => {

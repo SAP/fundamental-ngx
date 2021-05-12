@@ -7,7 +7,7 @@ import {
     InputGroupModule,
     SegmentedButtonModule
 } from '@fundamental-ngx/core';
-import { MomentDatetimeModule } from '@fundamental-ngx/momentadapter'
+import { MomentDatetimeModule } from '@fundamental-ngx/moment-adapter'
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';

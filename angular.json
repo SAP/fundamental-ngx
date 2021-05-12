@@ -322,7 +322,7 @@
         }
       }
     },
-    "momentadapter": {
+    "moment-adapter": {
       "root": "libs/moment-adapter",
       "sourceRoot": "libs/moment-adapter/src",
       "projectType": "library",

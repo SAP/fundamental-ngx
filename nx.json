@@ -12,6 +12,6 @@
         "docs-e2e": { "tags": [], "implicitDependencies": ["docs"] },
         "core": { "tags": ["fd"] },
         "platform": { "tags": ["fdp"] },
-        "momentadapter": { "tags": ["fdm"] }
+        "moment-adapter": { "tags": ["fdm"] }
     }
 }

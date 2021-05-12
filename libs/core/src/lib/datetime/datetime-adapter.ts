@@ -7,8 +7,7 @@
  *
  */
 
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { DateLocale } from './datetime-formats';
+import { Observable, Subject } from 'rxjs';
 
 export abstract class DatetimeAdapter<D> {
     /** current locale */
@@ -19,12 +18,6 @@ export abstract class DatetimeAdapter<D> {
 
     /** locale changes stream */
     readonly localeChanges: Observable<void> = this._localeChanges.asObservable();
-
-    /** @hidden */
-    protected _currentLocaleData: BehaviorSubject<DateLocale> = new BehaviorSubject(null);
-
-    /** locale data stream */
-    protected currentLocaleData$: Observable<DateLocale> = this._currentLocaleData.asObservable();
 
     /**
      * Sets the locale used for all dates.
@@ -132,13 +125,6 @@ export abstract class DatetimeAdapter<D> {
     abstract getMonthNames(style: 'long' | 'short' | 'narrow'): string[];
 
     /**
-     * Gets a stream with list of names for the months.
-     * @param style The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').
-     * @returns An ordered list of all month names, starting with January.
-     */
-    abstract getMonthNames$(style: 'long' | 'short' | 'narrow'): Observable<string[]>;
-
-    /**
      * Gets a list of names for the dates of the month.
      * @returns An ordered list of all date of the month names, starting with '1'.
      */
@@ -151,12 +137,6 @@ export abstract class DatetimeAdapter<D> {
      */
     abstract getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[];
    
-    /**
-     * Gets a list of names for the days of the week.
-     * @param style The naming style (e.g. long = 'Sunday', short = 'Sun', narrow = 'S').
-     * @returns An ordered list of all weekday names, starting with Sunday.
-     */
-     abstract getDayOfWeekNames$(style: 'long' | 'short' | 'narrow'): Observable<string[]>;
     /**
      * Gets the name for the year of the given date.
      * @param date The date to get the year name from.

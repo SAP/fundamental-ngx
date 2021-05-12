@@ -78,4 +78,3 @@ export * from './lib/illustrated-message/public_api';
 export * from './lib/text/public_api';
 export * from './lib/status-indicator/public_api';
 export * from './lib/message-page/public_api';
-export * from './lib/datetime/datetime-operators';

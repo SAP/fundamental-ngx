@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DatetimeAdapter } from '@fundamental-ngx/core';
-import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundamental-ngx/momentadapter';
+import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 
 @Component({
     selector: 'fd-moment-adapter-options-example',

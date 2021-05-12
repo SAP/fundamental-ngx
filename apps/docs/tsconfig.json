@@ -11,7 +11,7 @@
             "@fundamental-ngx/platform": [
                 "libs/platform/src/index.ts"
             ],
-            "@fundamental-ngx/momentadapter": [
+            "@fundamental-ngx/moment-adapter": [
                 "libs/moment-adapter/src/index.ts"
             ]
         }

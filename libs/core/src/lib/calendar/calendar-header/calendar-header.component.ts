@@ -11,8 +11,8 @@ import {
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { map, takeUntil, tap } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { FdCalendarView } from '../calendar.component';
@@ -20,7 +20,6 @@ import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
 import { DatetimeAdapter } from '../../datetime/datetime-adapter';
-import { monthLocale, monthNameByIndex } from '../../datetime/datetime-operators';
 
 /**
  * Internal use only.
@@ -98,7 +97,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     selectAggregatedYearAriaLabel: string;
 
     /** Button label to open month selection view. */
-    selectMonthLabel$: Observable<string>;
+    selectMonthLabel: string;
 
     /** Button label to open year selection view. */
     selectYearLabel: string;
@@ -129,6 +128,9 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** Month names */
+    private _monthNames: string[] = [];
+
     /** Get information about amount of years displayed at once on year view  */
     private _amountOfYearsPerPeriod = 1;
 
@@ -137,7 +139,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -156,12 +158,15 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     ngOnInit(): void {
         this._calendarService.leftArrowId = this.id + '-left-arrow';
 
+        this._calculateMonthNames();
+
         this._calculateLabels();
 
         this._calculateAriaLabels();
 
-        this._listenToCalendarLabelsChanges();
+        this._listenToLocaleChanges();
 
+        this._listenToCalendarLabelsChanges();
     }
 
     processViewChange(type: FdCalendarView, event?: MouseEvent): void {
@@ -179,12 +184,16 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /** @hidden */
-    private _listenToCalendarLabelsChanges(): void {
-
+    private _listenToLocaleChanges(): void {
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._calculateMonthNames();
             this._calculateLabels();
+            this._changeDetRef.markForCheck();
         });
+    }
 
+    /** @hidden */
+    private _listenToCalendarLabelsChanges(): void {
         this._calendarI18nLabels.labelsChange.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._calculateAriaLabels();
             this._changeDetRef.markForCheck();
@@ -202,15 +211,9 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
     /** @hidden */
     private _calculateLabels(): void {
-
-        this.selectMonthLabel$ = this._dateTimeAdapter.getMonthNames$('long').pipe(
-            takeUntil(this._onDestroy$),
-            map((monthList) => monthList ? monthList[this.currentlyDisplayed.month - 1] : '')
-        );
-
+        this._calculateSelectMonthLabel();
         this._calculateSelectYearLabel();
         this._calculateSelectAggregatedYearLabel();
-        this._changeDetRef.markForCheck();
     }
 
     /** @hidden */
@@ -246,6 +249,11 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /** @hidden */
+    private _calculateSelectMonthLabel(): void {
+        this.selectMonthLabel = this._monthNames[this.currentlyDisplayed.month - 1];
+    }
+
+    /** @hidden */
     private _calculateSelectYearLabel(): void {
         this.selectYearLabel = this._getYearName(this.currentlyDisplayed.year);
     }
@@ -255,6 +263,10 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         this.selectAggregatedYearLabel = `${this._getYearName(this.currentlyDisplayed.year)}-${this._getYearName(
             this.currentlyDisplayed.year + this._amountOfYearsPerPeriod
         )}`;
+    }
+
+    private _calculateMonthNames(): void {
+        this._monthNames = this._dateTimeAdapter.getMonthNames('long');
     }
 
     /** @hidden */

@@ -1,7 +1,7 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
-import { DatetimeAdapter, DateLocale, daysOfWeekLocale, monthLocale } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DateLocale } from '@fundamental-ngx/core';
 import { Observable } from 'rxjs';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
@@ -54,7 +54,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
             narrowDaysOfWeek: this._momentLocaleData.weekdaysMin()
         };
 
-        this._currentLocaleData.next(this._localeData);
         super.setLocale(locale);
     }
 
@@ -114,11 +113,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         }
     };
 
-    
-    getMonthNames$(style: 'long' | 'short' | 'narrow'): Observable<string[]> {
-        return this.currentLocaleData$.pipe(monthLocale(style));
-    }
-
     getDateNames(): string[] {
         return range(31, (i) => this.createDate(2017, 0, i + 1).format('D'));
     };
@@ -134,10 +128,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
                 return this._localeData.longDaysOfWeek;
         }
     };
-
-    getDayOfWeekNames$(style: 'long' | 'short' | 'narrow'): Observable<string[]> {
-        return this.currentLocaleData$.pipe(daysOfWeekLocale(style));
-    }
 
     getYearName(date: Moment): string {
         return this.clone(date).format('YYYY');
