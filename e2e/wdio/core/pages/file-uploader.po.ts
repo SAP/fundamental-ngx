@@ -8,7 +8,7 @@ export class FileUploaderPo extends CoreBaseComponentPo {
     fileUploaderInput = 'fd-file-uploader input[type="text"]';
     browseButton = 'fd-file-uploader button';
     fileUploaderInputFile = 'fd-file-uploader input[type="file"]';
-    fileSelectedText = '[class="fd-doc-component"] span[class="green"]'
+    fileSelectedText = '[class="fd-doc-component"] span[class="green"]';
 
     open(): void {
         super.open(this.url);

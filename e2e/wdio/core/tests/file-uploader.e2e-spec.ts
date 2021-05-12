@@ -33,7 +33,7 @@ describe('File uploader component test', function() {
         const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
             scrollIntoView(browseButton, i);
-            expect(isElementClickable(browseButton, i)).toBe(true, `browse button with index ${i} not clickable`)
+            expect(isElementClickable(browseButton, i)).toBe(true, `browse button with index ${i} not clickable`);
         }
     });
 
