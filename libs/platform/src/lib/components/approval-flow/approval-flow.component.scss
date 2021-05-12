@@ -206,6 +206,12 @@ $carousel-controls-height--edit-mode: 126px;
     }
 }
 
+.#{$block}__graph-error .fd-message-strip__text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 fd-toolbar {
     display: block;
     margin-bottom: .5rem;

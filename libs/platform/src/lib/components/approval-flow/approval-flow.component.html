@@ -63,6 +63,26 @@
     </div>
 </div>
 
+<fd-message-strip
+    *ngIf='_buildGraphFail'
+    type="error"
+    [dismissible]="false"
+    class="approval-flow__graph-error"
+>
+    <span i18n="@@platformApprovalBuildGraphFailCheckData">
+        There was an error when trying to build graph. Check the initial data.
+    </span>
+
+    <a
+        href="#"
+        *ngIf="_previousApprovalProcess"
+        (click)="$event.preventDefault();_undoLastAction()"
+        i18n="@@platformApprovalBuildGraphFailRestoreMessage"
+    >
+        Restore previous state
+    </a>
+</fd-message-strip>
+
 <ng-container *ngIf="_graph.length; else emptyApprovalFlowGraph">
     <div
         class="approval-flow__container"
@@ -180,7 +200,7 @@
 </ng-template>
 
 <ng-template #emptyApprovalFlowGraph>
-    <figure fd-illustrated-message type="spot" [svgConfig]="_emptyApprovalFlowSpotConfig">
+    <figure *ngIf="!_buildGraphFail" fd-illustrated-message type="spot" [svgConfig]="_emptyApprovalFlowSpotConfig">
         <figcaption fd-illustrated-message-figcaption>
             <h3 fd-illustrated-message-title i18n="@@platformApprovalFlowEmptyTitle">
                 Start adding approvers and watchers

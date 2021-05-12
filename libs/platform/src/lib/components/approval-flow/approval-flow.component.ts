@@ -170,6 +170,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
+    _buildGraphFail = false;
+
+    /** @hidden */
     private _editModeInitSub: Subscription;
 
     /** @hidden */
@@ -413,6 +416,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Restore previously saved approval process state */
     _undoLastAction(): void {
         this._approvalProcess = cloneApprovalProcess(this._previousApprovalProcess);
+        this._previousApprovalProcess = null;
 
         this._buildView(this._approvalProcess);
     }
@@ -551,6 +555,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Node drop handler */
     _onNodeDrop(nodeToDrop: ApprovalGraphNode, drag: CdkDrag): void {
+        this._cacheCurrentApprovalProcess();
         drag.reset();
 
         const dropTarget = this._nodeComponents.find(n => n._isAnyDropZoneActive);
@@ -580,6 +585,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
+        this._buildGraphFail = false;
+
         if (!nodes.length) {
             return [];
         }
@@ -589,6 +596,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         if (!rootNodes.length || !finalNodes.length) {
             console.warn('Err: Not possible to build graph because root or final nodes aren\'t present!');
+            this._buildGraphFail = true;
             return [];
         }
 
@@ -605,6 +613,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         if (!paths.length) {
             console.warn('Err: Not possible to build graph!')
+            this._buildGraphFail = true;
             return [];
         }
 
