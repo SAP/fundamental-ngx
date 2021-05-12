@@ -1,13 +1,18 @@
 <fd-avatar-group #avatarGroup_GroupType type="group" [size]="size">
-    <fd-popover [(isOpen)]="isOpen"
-                [noArrow]="false"
+    <fd-popover [noArrow]="false"
                 [focusTrapped]="true"
                 [focusAutoCapture]="true"
+                [triggers]="[]"
+                [closeOnOutsideClick]="true"
                 [closeOnEscapeKey]="true"
                 (isOpenChange)="isOpenChanged($event)"
                 placement="bottom"
-                additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class">
-        <fd-popover-control class="fd-avatar-group__popover-control" tabindex="0" (keyup)="handleKeyupOnPopoverControl($event)">
+                additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class"
+                #overflowPopover>
+        <fd-popover-control class="fd-avatar-group__popover-control"
+                            tabindex="0"
+                            (click)="handleControlClick($event, overflowPopover)"
+                            (keydown)="handleControlKeydown($event, overflowPopover)">
             <div *ngFor="let person of people" fd-avatar-group-item>
                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                            [label]="person.firstName + ' ' + person.lastName"

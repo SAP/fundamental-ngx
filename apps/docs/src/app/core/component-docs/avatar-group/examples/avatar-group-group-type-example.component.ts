@@ -1,8 +1,8 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { KeyUtil, Size } from '@fundamental-ngx/core/utils';
+import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
+import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
+import { KeyUtil, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
 @Component({
@@ -19,25 +19,12 @@ export class AvatarGroupGroupTypeExampleComponent {
     people = this.avatarGroupDataExampleService.generate();
     personDetails: any = null;
     overflowPopoverStage: 'main' | 'detail' = 'main';
-    isOpen = false;
 
     get isDetailStage(): boolean {
         return this.overflowPopoverStage === 'detail';
     }
 
     constructor(private readonly avatarGroupDataExampleService: AvatarGroupDataExampleService) {}
-
-    handleKeyupOnPopoverControl(event: KeyboardEvent): void {
-        if (!KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
-            return;
-        }
-
-        this.toggleOverflow();
-    }
-
-    toggleOverflow(): void {
-        this.isOpen = !this.isOpen;
-    }
 
     isOpenChanged(isOpened: boolean): void {
         if (isOpened) {
@@ -57,5 +44,23 @@ export class AvatarGroupGroupTypeExampleComponent {
         this.overflowPopoverStage = 'main';
 
         setTimeout(() => this.popoverBodyComponent?._focusFirstTabbableElement(), 0);
+    }
+
+    handleControlClick(event: MouseEvent, popover: PopoverComponent): void {
+        popover.open();
+    }
+
+    handleControlKeydown(event: KeyboardEvent, popover: PopoverComponent): void {
+        if (!KeyUtil.isKeyCode(event, [ESCAPE, TAB, SPACE, ENTER])) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [ESCAPE, TAB])) {
+            popover.close();
+        }
+
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            popover.open();
+        }
     }
 }

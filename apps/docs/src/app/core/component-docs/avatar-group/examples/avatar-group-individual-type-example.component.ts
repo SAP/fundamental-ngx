@@ -1,8 +1,8 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { Size } from '@fundamental-ngx/core/utils';
+import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
+import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
+import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
 @Component({
@@ -43,5 +43,29 @@ export class AvatarGroupIndividualTypeExampleComponent {
         this.overflowPopoverStage = 'main';
 
         setTimeout(() => this.popoverBodyComponent?._focusFirstTabbableElement(), 0);
+    }
+
+    handleControlClick(event: MouseEvent, popover: PopoverComponent): void {
+        popover.open();
+    }
+
+    handleControlKeydown(event: KeyboardEvent, popover: PopoverComponent): void {
+        if (!KeyUtil.isKeyCode(event, [ESCAPE, TAB, SPACE, ENTER])) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [ESCAPE, TAB])) {
+            popover.close();
+        }
+
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            popover.open();
+        }
+    }
+
+    handleOverflowPopoverOpen(isOpen: boolean): void {
+        if (isOpen) {
+            this.openOverflowMain();
+        }
     }
 }

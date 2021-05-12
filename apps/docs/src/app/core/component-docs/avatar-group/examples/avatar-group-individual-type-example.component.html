@@ -4,9 +4,17 @@
                  class="fd-avatar-group--custom-class">
     <!-- AVATARS -->
     <ng-container *ngFor="let person of people" >
-        <fd-popover [noArrow]="false" placement="bottom" [triggers]="['focusin', 'focusout']">
+        <fd-popover [noArrow]="false"
+                    placement="bottom"
+                    [triggers]="[]"
+                    [closeOnOutsideClick]="true"
+                    [closeOnEscapeKey]="true"
+                    #individualPopover>
             <fd-popover-control>
-                <div fd-avatar-group-item tabindex="0">
+                <div fd-avatar-group-item
+                     tabindex="0"
+                     (click)="handleControlClick($event, individualPopover)"
+                     (keydown)="handleControlKeydown($event, individualPopover)">
                     <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                                [circle]="true"
                                [border]="true"
@@ -87,14 +95,18 @@
                 [noArrow]="false"
                 [focusTrapped]="true"
                 [focusAutoCapture]="true"
+                [triggers]="[]"
+                [closeOnOutsideClick]="true"
                 [closeOnEscapeKey]="true"
-                placement="bottom">
+                placement="bottom"
+                (isOpenChange)="handleOverflowPopoverOpen($event)"
+                #overflowPopover>
         <fd-popover-control>
             <button fd-button
                     fd-avatar-group-overflow-button
                     [size]="size"
-                    (click)="openOverflowMain()">
-
+                    (click)="handleControlClick($event, overflowPopover)"
+                    (keydown)="handleControlKeydown($event, overflowPopover)">
                 <bdi fd-avatar-group-overflow-button-text>
                     +{{ avatarGroup_IndividualType.overflowItemsCount }}
                 </bdi>
