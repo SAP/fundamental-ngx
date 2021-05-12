@@ -265,7 +265,7 @@ describe('Datetime picker suite', function() {
             dateTimePickerPage.checkRtlSwitch();
         });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
             dateTimePickerPage.saveExampleBaselineScreenshot();

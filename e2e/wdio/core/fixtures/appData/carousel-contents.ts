@@ -1,6 +1,5 @@
 export const imgSource = 'src';
 export const verticalAttr = 'ng-reflect-vertical';
-export const classAttr = 'class';
 export const active = 'active';
 export const visibilityCount = 'ng-reflect-visible-slides-count';
 export const numberedPages = '1 of 9';

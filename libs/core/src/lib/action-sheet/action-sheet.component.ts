@@ -28,10 +28,11 @@ import {
     KeyboardSupportService
 } from '../utils/services/keyboard-support/keyboard-support.service';
 import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-item/action-sheet-item.component';
-import { map, startWith, takeUntil } from 'rxjs/operators';
-import { Subject, merge, Observable, Subscription } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
+import { Subject, merge, Subscription } from 'rxjs';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import { ContentDensityService } from '../utils/public_api';
+import { Placement } from '../popover/popover-position/popover-position';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -57,6 +58,14 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** Whether should be displayed in mobile mode **/
     @Input()
     mobile = false;
+
+    /** The position of the popover body. Set to 'bottom' by default. **/
+    @Input()
+    placement: Placement = 'bottom';
+
+    /** Whether the popover body has an arrow. Set to false by default. **/
+    @Input()
+    noArrow = false;
 
     /** Whenever links should be visible **/
     @Input()
