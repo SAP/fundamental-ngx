@@ -559,7 +559,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         drag.reset();
 
         const dropTarget = this._nodeComponents.find(n => n._isAnyDropZoneActive);
-
         if (!dropTarget) {
             return;
         }
@@ -570,7 +569,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._deleteNode(nodeToDrop);
 
         if (placement === 'after') {
-            nodeToDrop.targets = [...dropTarget.node.targets];
+            const nextNode = this._graph
+                .reduce((acc, column) => acc.concat(column.nodes), [])
+                .find(node => node.id === dropTarget.node.targets[0]);
+
+            if (nextNode?.blank) {
+                nodeToDrop.targets = [...nextNode.targets];
+
+                this._deleteNode(nextNode);
+            } else {
+                nodeToDrop.targets = [...dropTarget.node.targets];
+            }
+
             dropTarget.node.targets = [nodeToDrop.id];
         }
 
@@ -610,6 +620,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
          * 7. Remove columns which contain only blank nodes
         */
         const paths = getAllGraphPaths(rootNodes, nodes);
+
+        paths.forEach(path => {
+            console.log(path.map(node => node.id));
+        })
 
         if (!paths.length) {
             console.warn('Err: Not possible to build graph!')
@@ -785,7 +799,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Delete node object in local approval process data structure */
     private _deleteNode(nodeToDelete: ApprovalNode): void {
-        const nodes = [...this._approvalProcess.nodes];
         const metadata = this._graphMetadata[nodeToDelete.id];
 
         const isParentParallelStart = this._graphMetadata[metadata.parents[0]?.id]?.parallelStart;
@@ -797,8 +810,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         this._replaceTargetsInSourceNodes(nodeToDelete.id, targets);
-        nodes.splice(nodes.findIndex(node => node.id === nodeToDelete.id), 1);
-        this._approvalProcess.nodes = nodes;
+        this._approvalProcess.nodes.splice(
+            this._approvalProcess.nodes.findIndex(node => node.id === nodeToDelete.id),
+            1
+        );
     }
 
     /** @hidden Replace all occurrences of "idToReplace" in all nodes' "targets" with ones in "replaceWith" array */
@@ -984,8 +999,8 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
     const paths: ApprovalGraphNode[][] = [];
     const queue: ApprovalGraphNode[][] = [];
 
-    rootNodes.forEach(rootNode => {
-        queue.push([rootNode]);
+    for (let i = 0; i < rootNodes.length; i++) {
+        queue.push([rootNodes[i]]);
 
         while (queue.length) {
             const path = queue.pop();
@@ -1007,7 +1022,7 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
                 });
             }
         }
-    });
+    }
 
     return paths;
 }
