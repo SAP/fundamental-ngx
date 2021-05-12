@@ -6,10 +6,11 @@ export class AvatarGroupPo extends CoreBaseComponentPo {
     root = '#page-content';
 
     firstExampleAvatar = '#background-ex0 fd-avatar';
-    // usedDetailsPopup = '.fd-quick-view__content';
     usedDetailsPopup = '.fd-form-item';
     usedGroupDetailsPopup = '.fd-avatar-group__overflow-body';
     secondExampleAvatar = '#background-ex1 .fd-avatar-group__item';
+    popoverUserAvatar = 'fd-popover-body .fd-avatar';
+    individualCard = 'fd-popover-body fd-quick-view';
 
     open(): void {
         super.open(this.url);
