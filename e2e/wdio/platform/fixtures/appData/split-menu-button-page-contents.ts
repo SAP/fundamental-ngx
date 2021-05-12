@@ -41,6 +41,5 @@ export const typesBtnHvrColorArr = [
     '235,245,254',
     '8,92,175'
 ];
-export const tooltipAttr = 'title';
 export const outputLabel = 'Selected Item: ';
 

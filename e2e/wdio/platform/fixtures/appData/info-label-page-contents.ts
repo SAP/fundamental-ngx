@@ -8,7 +8,6 @@ export const numberLabel = '6';
 export const largeNumberLabel = '42K';
 export const safariLargeNumberLabel = '42k';
 export const decimalLabel = '14.7';
-export const ariaLabelAttribute = 'aria-label';
 export const ariaLabelledByAttribute = 'aria-labelledby';
 export const ariaLabelExample = 'ARIA LABEL';
 export const safariAriaLabelExample = 'Aria Label';

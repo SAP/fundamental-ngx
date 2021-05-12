@@ -1,14 +1,60 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { 
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    ViewEncapsulation,
+    OnChanges,
+    OnInit
+} from '@angular/core';
+import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-notification-group',
-    templateUrl: './notification-group.component.html',
-    styleUrls: ['./notification-group.component.scss'],
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationGroupComponent {
+export class NotificationGroupComponent  implements OnChanges, OnInit, CssClassBuilder {
+    /** User's custom classes */
+    @Input()
+    class: string;
+
+    /** Whether the Notification Group is in mobile mode */
+    @Input() mobile = false;
+
+    /** User defined width for the notification */
+    @HostBinding('style.width')
+    @Input() width:  string;
+
     /** @hidden */
-    @HostBinding('class.fd-notification--group')
-    fdNotificationGroupClass = true;
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-notification fd-notification--group fd-notification-custom-block',
+            this.mobile ? 'fd-notification--mobile' : '',
+            this.class
+        ];
+    }
+
+    /** @hidden */
+    elementRef(): ElementRef {
+        return this._elementRef;
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
 }
