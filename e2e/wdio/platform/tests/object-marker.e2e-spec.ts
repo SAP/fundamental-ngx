@@ -1,19 +1,17 @@
 import { ObjectMarkerPo } from '../pages/object-marker.po';
 import {
     getAttributeByName,
-    getCSSPropertyByName,
-    getElementArrayLength,
+    getCSSPropertyByName, getElementAriaLabel,
+    getElementArrayLength, getElementTitle,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
 import {
-    ariaLabelAttribute,
     iconStatusesList,
     textDecorationAttribute,
     textDecorationValues,
-    titleAttribute
 } from '../fixtures/appData/object-marker-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
@@ -37,8 +35,8 @@ describe('Object marker test suite', function() {
     it('Verify technical statuses', () => {
         const objectMarkerIconCount = getElementArrayLength(iconOnlyMarkers);
         for (let i = 0; i < objectMarkerIconCount; i++) {
-            expect(getAttributeByName(iconOnlyMarkers, titleAttribute, i)).toBe(iconStatusesList[i][0]);
-            expect(getAttributeByName(iconOnlyMarkers, ariaLabelAttribute, i)).toBe(iconStatusesList[i][1]);
+            expect(getElementTitle(iconOnlyMarkers, i)).toBe(iconStatusesList[i][0]);
+            expect(getElementAriaLabel(iconOnlyMarkers, i)).toBe(iconStatusesList[i][1]);
         }
     });
 

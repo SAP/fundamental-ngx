@@ -3,12 +3,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationComponent } from './notification.component';
 import { NotificationService } from '../notification-service/notification.service';
 import { ButtonModule } from '../../button/button.module';
-import { NotificationDefault } from '../notification-utils/notification-default';
 import { NotificationModule } from '../notification.module';
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, TemplateRef, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
     template: `
@@ -37,7 +37,7 @@ describe('NotificationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TestModule],
+            imports: [TestModule, RouterTestingModule],
             providers: [DynamicComponentService, NotificationService]
         }).compileComponents();
     }));
@@ -49,30 +49,21 @@ describe('NotificationComponent', () => {
         notificationService = TestBed.get(NotificationService);
     });
 
-    it('should generate From Object', () => {
-        spyOn<any>(component, 'createFromDefaultConfiguration').and.callThrough();
-        component.childContent = new NotificationDefault();
-        component.ngAfterViewInit();
-        fixture.detectChanges();
-        expect(component['componentRef']).toBeTruthy();
-        expect((component as any).createFromDefaultConfiguration).toHaveBeenCalled();
-    });
-
     it('should generate component', () => {
-        spyOn<any>(component, 'loadFromComponent').and.callThrough();
+        spyOn<any>(component, '_loadFromComponent').and.callThrough();
         component.childContent = TemplateTestComponent;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
-        expect((component as any).loadFromComponent).toHaveBeenCalled();
+        expect((component as any)._loadFromComponent).toHaveBeenCalled();
     });
 
     it('should generate template', () => {
-        spyOn<any>(component, 'loadFromTemplate').and.callThrough();
+        spyOn<any>(component, '_loadFromTemplate').and.callThrough();
         component.childContent = TestBed.createComponent(TemplateTestComponent).componentInstance.templateRef;
         component.ngAfterViewInit();
         fixture.detectChanges();
         expect(component['componentRef']).toBeTruthy();
-        expect((component as any).loadFromTemplate).toHaveBeenCalled();
+        expect((component as any)._loadFromTemplate).toHaveBeenCalled();
     });
 });

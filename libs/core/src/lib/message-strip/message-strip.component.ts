@@ -25,6 +25,7 @@ let messageStripUniqueId = 0;
         '[attr.aria-label]': 'ariaLabel',
         '[style.width]': 'width',
         '[style.min-width]': 'minWidth',
+        '[style.margin-bottom]': 'marginBottom',
         role: 'alert',
         '[attr.id]': 'id'
     },
@@ -76,6 +77,10 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** Minimum width of the message-strip. */
     @Input()
     minWidth: string;
+
+    /** Margin bottom of the message-strip. */
+    @Input()
+    marginBottom: string;
 
     /** Event fired when the message-strip is dismissed. */
     @Output()

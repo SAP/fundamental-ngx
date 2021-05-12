@@ -1,68 +1,28 @@
-import { Component, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { NotificationService } from '@fundamental-ngx/core';
-import { NotificationOptionsContentComponent } from './notification-options-content.component';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { ActionSheetComponent, MessageToastService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-notification-options-example',
     templateUrl: './notification-options-example.component.html',
-    styleUrls: ['./notification-options-example.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [NotificationService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationOptionsExampleComponent {
-    @ViewChild('vc', { read: ViewContainerRef })
-    ref: ViewContainerRef;
+    @ViewChild(ActionSheetComponent)
+    actionSheetComponent: ActionSheetComponent;
 
-    data = {
-        title: 'Notification Title',
-        description: 'Notification Description',
-        metadata: 'Other Data',
-        moreInfo: 'More Info',
-        approve: 'Approve',
-        cancel: 'Cancel'
-    };
+    expanded = true;
 
-    constructor(private notificationService: NotificationService) {}
+    constructor(private _messageToastService: MessageToastService, ) {}
 
-    openNotifications(): void {
-        this.ref.clear();
+    actionPicked(action: string): void {
+        this.openMessageToast(action);
+        this.actionSheetComponent.close();
+    }
 
-        this.notificationService.open(NotificationOptionsContentComponent, {
-            size: 's',
-            type: 'success',
-            data: this.data,
-            container: this.ref.element.nativeElement
-        });
-
-        this.notificationService.open(NotificationOptionsContentComponent, {
-            size: 'm',
-            type: 'success',
-            data: this.data,
-            container: this.ref.element.nativeElement
-        });
-
-        this.notificationService.open(NotificationOptionsContentComponent, {
-            type: 'success',
-            data: this.data,
-            container: this.ref.element.nativeElement
-        });
-
-        this.notificationService.open(NotificationOptionsContentComponent, {
-            type: 'warning',
-            data: this.data,
-            container: this.ref.element.nativeElement
-        });
-
-        this.notificationService.open(NotificationOptionsContentComponent, {
-            type: 'error',
-            data: this.data,
-            container: this.ref.element.nativeElement
-        });
-
-        this.notificationService.open(NotificationOptionsContentComponent, {
-            type: 'information',
-            data: this.data,
-            container: this.ref.element.nativeElement
+    openMessageToast(action: string): void {
+        const content = `${action} action performed`;
+        this._messageToastService.open(content, {
+            duration: 2000
         });
     }
 }
