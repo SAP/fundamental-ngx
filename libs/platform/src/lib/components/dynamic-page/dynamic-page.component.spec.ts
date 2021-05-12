@@ -16,33 +16,35 @@ import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 
 @Component({
-    template: `<fdp-dynamic-page [size]="size" [background]="background">
-        <fdp-dynamic-page-title>
-            <fdp-dynamic-page-global-actions>
-                <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <button
-                        fd-toolbar-item
-                        fd-button
-                        [compact]="true"
-                        fdType="positive"
-                        (click)="$event.stopPropagation()"
-                    >
-                        Accept
-                    </button>
-                </fd-toolbar>
-            </fdp-dynamic-page-global-actions>
-            <fdp-dynamic-page-layout-actions>
-                <!-- layout actions -->
-                <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
-                        <i class="sap-icon--resize"></i>
-                    </button>
-                </fd-toolbar>
-            </fdp-dynamic-page-layout-actions>
-        </fdp-dynamic-page-title>
-        <fdp-dynamic-page-header></fdp-dynamic-page-header>
-        <fdp-dynamic-page-content>DynamicPage Content Text</fdp-dynamic-page-content>
-    </fdp-dynamic-page>`
+    template: `
+        <fdp-dynamic-page [size]="size" [background]="background">
+            <fdp-dynamic-page-title>
+                <fdp-dynamic-page-global-actions>
+                    <fd-toolbar fdType="transparent" [clearBorder]="true">
+                        <button
+                            fd-toolbar-item
+                            fd-button
+                            [compact]="true"
+                            fdType="positive"
+                            (click)="$event.stopPropagation()"
+                        >
+                            Accept
+                        </button>
+                    </fd-toolbar>
+                </fdp-dynamic-page-global-actions>
+                <fdp-dynamic-page-layout-actions>
+                    <!-- layout actions -->
+                    <fd-toolbar fdType="transparent" [clearBorder]="true">
+                        <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
+                            <i class="sap-icon--resize"></i>
+                        </button>
+                    </fd-toolbar>
+                </fdp-dynamic-page-layout-actions>
+            </fdp-dynamic-page-title>
+            <fdp-dynamic-page-header></fdp-dynamic-page-header>
+            <fdp-dynamic-page-content>DynamicPage Content Text</fdp-dynamic-page-content>
+        </fdp-dynamic-page>
+    `
 })
 class TestComponent {
     size = 'medium';
@@ -56,17 +58,19 @@ describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let dynamicPageComponent: DynamicPageComponent;
-    let dynamicPageTitleComponent: DynamicPageTitleComponent;
-    let dynamicPageContentComponent: DynamicPageContentComponent;
+    let dynamicPageServiceSpy: jasmine.SpyObj<DynamicPageService>;
 
-    beforeEach(waitForAsync(() => {
-        const scrollableSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
-            declarations: [TestComponent],
-            providers: [{ provide: DynamicPageService, useValue: scrollableSpy }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            dynamicPageServiceSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
+
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
+                declarations: [TestComponent],
+                providers: [{ provide: DynamicPageService, useValue: dynamicPageServiceSpy }]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -85,77 +89,37 @@ describe('DynamicPageComponent default values', () => {
         expect(headerElement).toBeTruthy();
     });
 
-    it('should add correct classes to title', async () => {
-        dynamicPageTitleComponent = component.dynamicPageTitleComponent;
-        fixture.detectChanges();
-        expect(
-            dynamicPageTitleComponent.elementRef().nativeElement.classList.contains(CLASS_NAME.dynamicPageTitleArea)
-        ).toBeTruthy();
-    });
-    it('should add correct classes to header', async () => {
-        fixture.detectChanges();
-        const headerElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'));
-        expect(headerElement).toBeTruthy();
-    });
-
-    it('should add correct classes to toolbar', async () => {
-        fixture.detectChanges();
-        const toolbarContainer = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPageActionsContainer));
-        expect(toolbarContainer).toBeTruthy();
-        expect(
-            toolbarContainer.nativeElement.classList.contains(CLASS_NAME.dynamicPageActionsContainerMedium)
-        ).toBeTruthy();
-
-        const globalActionsContainer: HTMLElement = fixture.debugElement.query(
-            By.css('.' + CLASS_NAME.dynamicPageGlobalActions)
-        ).nativeElement;
-        expect(
-            globalActionsContainer.classList.contains(CLASS_NAME.dynamicPageGlobalActionsToolbarMedium)
-        ).toBeTruthy();
-
-        const layoutActionsContainer = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPageLayoutActions))
-            .nativeElement;
-        expect(
-            layoutActionsContainer.classList.contains(CLASS_NAME.dynamicPageLayoutActionsToolbarMedium)
-        ).toBeTruthy();
+    describe('children options inheritance', () => {
+        it('should inherit size', async () => {
+            fixture.detectChanges();
+            expect(component.dynamicPageTitleComponent.size).toBe('medium');
+            component.dynamicPage.size = 'large';
+            component.dynamicPage.ngAfterContentInit();
+            fixture.detectChanges();
+            expect(component.dynamicPageTitleComponent.size).toBe('large');
+            component.dynamicPage.size = 'small';
+            component.dynamicPage.ngAfterContentInit();
+            fixture.detectChanges();
+            expect(component.dynamicPageTitleComponent.size).toBe('small');
+        });
+        it('should inherit background styles', async () => {
+            fixture.detectChanges();
+            expect(component.dynamicPageTitleComponent.background).toBe('');
+            component.dynamicPage.background = 'solid';
+            component.dynamicPage.ngAfterContentInit();
+            fixture.detectChanges();
+            expect(component.dynamicPageTitleComponent.background).toBe('solid');
+            component.dynamicPage.background = 'transparent';
+            component.dynamicPage.ngAfterContentInit();
+            fixture.detectChanges();
+            expect(component.dynamicPageTitleComponent.background).toBe('transparent');
+            component.dynamicPage.background = 'list';
+            component.dynamicPage.ngAfterContentInit();
+            fixture.detectChanges();
+            expect(component.dynamicPageTitleComponent.background).toBe('list');
+        });
     });
 
-    it('should add correct classes to content', async () => {
-        dynamicPageContentComponent = component.dynamicPageContentComponent;
-        fixture.detectChanges();
-        expect(
-            dynamicPageContentComponent.getElementRef().nativeElement.classList.contains(CLASS_NAME.dynamicPageContent)
-        ).toBeTruthy();
-    });
-
-    it('should set size to children', async () => {
-        fixture.detectChanges();
-        expect(component.dynamicPageTitleComponent.size).toBe('medium');
-        component.dynamicPage.size = 'large';
-        component.dynamicPage.ngAfterContentInit();
-        fixture.detectChanges();
-        expect(component.dynamicPageTitleComponent.size).toBe('large');
-        component.dynamicPage.size = 'small';
-        component.dynamicPage.ngAfterContentInit();
-        fixture.detectChanges();
-        expect(component.dynamicPageTitleComponent.size).toBe('small');
-    });
-    it('should set background styles', async () => {
-        fixture.detectChanges();
-        expect(component.dynamicPageTitleComponent.background).toBe(undefined);
-        component.dynamicPage.background = 'solid';
-        component.dynamicPage.ngAfterContentInit();
-        fixture.detectChanges();
-        expect(component.dynamicPageTitleComponent.background).toBe('solid');
-        component.dynamicPage.background = 'transparent';
-        component.dynamicPage.ngAfterContentInit();
-        fixture.detectChanges();
-        expect(component.dynamicPageTitleComponent.background).toBe('transparent');
-        component.dynamicPage.background = 'list';
-        component.dynamicPage.ngAfterContentInit();
-        fixture.detectChanges();
-        expect(component.dynamicPageTitleComponent.background).toBe('list');
-    });
     // TODO: Unskip after fix
     xit('should render content in view', () => {
         fixture.detectChanges();
@@ -165,7 +129,6 @@ describe('DynamicPageComponent default values', () => {
     });
 
     it('should collapse header on click of title', async () => {
-        dynamicPageTitleComponent = component.dynamicPageTitleComponent;
         dynamicPageComponent.toggleCollapse();
         component.dynamicPage.ngAfterViewInit();
         fixture.detectChanges();
@@ -177,27 +140,34 @@ describe('DynamicPageComponent default values', () => {
     it('should collapse header on scroll', fakeAsync(() => {
         component.dynamicPage.ngAfterViewInit();
         const throttleTime = 100;
-        component.dynamicPageContentComponent.getElementRef().nativeElement.dispatchEvent(new Event('scroll'));
-        spyOn(component.dynamicPageHeaderComponent, 'collapseHeader');
+        const contentEl = fixture.debugElement.query(By.css('fdp-dynamic-page-content-host'));
+
+        spyOn(component.dynamicPageHeaderComponent.collapseChange, 'emit');
+
+        contentEl.nativeElement.dispatchEvent(new Event('scroll'));
+
         fixture.detectChanges();
         tick(throttleTime);
+
         fixture.whenStable().then(() => {
-            expect(component.dynamicPageHeaderComponent.collapseHeader).toHaveBeenCalled();
+            expect(component.dynamicPageHeaderComponent.collapseChange.emit).toHaveBeenCalled();
         });
     }));
 });
 
 @Component({
-    template: `<fdp-dynamic-page [size]="size" [background]="background">
-        <fdp-dynamic-page-title></fdp-dynamic-page-title>
-        <fdp-dynamic-page-header></fdp-dynamic-page-header>
-        <fdp-dynamic-page-content id="tab1" [tabLabel]="tabLabel1"
-            >DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content
-        >
-        <fdp-dynamic-page-content id="tab2" [tabLabel]="tabLabel2"
-            >DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content
-        >
-    </fdp-dynamic-page>`
+    template: `
+        <fdp-dynamic-page [size]="size" [background]="background">
+            <fdp-dynamic-page-title></fdp-dynamic-page-title>
+            <fdp-dynamic-page-header></fdp-dynamic-page-header>
+            <fdp-dynamic-page-content id="tab1" [tabLabel]="tabLabel1"
+                >DynamicPage Content Tabbed 1 Text</fdp-dynamic-page-content
+            >
+            <fdp-dynamic-page-content id="tab2" [tabLabel]="tabLabel2"
+                >DynamicPage Content Tabbed 2 Text</fdp-dynamic-page-content
+            >
+        </fdp-dynamic-page>
+    `
 })
 class TestTabbedComponent {
     size = 'medium';
@@ -211,13 +181,15 @@ describe('DynamicPageComponent tabbed values', () => {
     let fixture: ComponentFixture<TestTabbedComponent>;
     let dynamicPageComponent: DynamicPageComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-            declarations: [TestTabbedComponent],
-            providers: [{ provide: DynamicPageService }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
+                declarations: [TestTabbedComponent],
+                providers: [{ provide: DynamicPageService }]
+            }).compileComponents();
+        })
+    );
     beforeEach(() => {
         fixture = TestBed.createComponent(TestTabbedComponent);
         component = fixture.componentInstance;
@@ -251,11 +223,13 @@ describe('DynamicPageComponent tabbed values', () => {
 });
 
 @Component({
-    template: `<fdp-dynamic-page [size]="size" [background]="background">
-        <fdp-dynamic-page-title></fdp-dynamic-page-title>
-        <fdp-dynamic-page-header [collapsible]="false" [pinnable]="false"></fdp-dynamic-page-header>
-        <fdp-dynamic-page-content>DynamicPage Content</fdp-dynamic-page-content>
-    </fdp-dynamic-page>`
+    template: `
+        <fdp-dynamic-page [size]="size" [background]="background">
+            <fdp-dynamic-page-title></fdp-dynamic-page-title>
+            <fdp-dynamic-page-header [collapsible]="false" [pinnable]="false"></fdp-dynamic-page-header>
+            <fdp-dynamic-page-content>DynamicPage Content</fdp-dynamic-page-content>
+        </fdp-dynamic-page>
+    `
 })
 class TestNonCollapsibleComponent {
     size = 'medium';
@@ -267,13 +241,15 @@ describe('DynamicPageComponent with collapsible set to false', () => {
     let fixture: ComponentFixture<TestNonCollapsibleComponent>;
     let dynamicPage: DynamicPageComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
-            declarations: [TestNonCollapsibleComponent],
-            providers: [{ provide: DynamicPageService }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformDynamicPageModule, TabsModule],
+                declarations: [TestNonCollapsibleComponent],
+                providers: [{ provide: DynamicPageService }]
+            }).compileComponents();
+        })
+    );
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNonCollapsibleComponent);
         component = fixture.componentInstance;
@@ -298,6 +274,113 @@ describe('DynamicPageComponent with collapsible set to false', () => {
 
         const contentEl: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'))
             .nativeElement;
-        expect(contentEl.getAttribute('aria-hidden')).toBe('false');
+        expect(contentEl.getAttribute('aria-hidden')).not.toBe('true');
+    });
+});
+
+@Component({
+    template: `
+        <fdp-dynamic-page [size]="size" [background]="background">
+            <!-- Wrapper -->
+            <ng-container>
+                <fdp-dynamic-page-title>
+                    <fdp-dynamic-page-global-actions>
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-toolbar-item
+                                fd-button
+                                [compact]="true"
+                                fdType="positive"
+                                (click)="$event.stopPropagation()"
+                                id="global-action-button"
+                            >
+                                Accept
+                            </button>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-global-actions>
+                    <fdp-dynamic-page-layout-actions>
+                        <!-- layout actions -->
+                        <fd-toolbar fdType="transparent" [clearBorder]="true">
+                            <button
+                                fd-button
+                                fdType="transparent"
+                                aria-label="Resize"
+                                (click)="closePage($event)"
+                                id="layout-action-button"
+                            >
+                                <i class="sap-icon--resize"></i>
+                            </button>
+                        </fd-toolbar>
+                    </fdp-dynamic-page-layout-actions>
+                </fdp-dynamic-page-title>
+            </ng-container>
+            <!-- Wrapper -->
+            <ng-container>
+                <fdp-dynamic-page-header>
+                    <div id="test-header">Header</div>
+                </fdp-dynamic-page-header>
+            </ng-container>
+            <!-- Wrapper -->
+            <ng-container>
+                <fdp-dynamic-page-content>
+                    <div id="test-content">DynamicPage Content Text</div>
+                </fdp-dynamic-page-content>
+            </ng-container>
+
+            <!-- Wrapper -->
+            <ng-container>
+                <fdp-dynamic-page-footer>
+                    <div id="test-footer">DynamicPage Footer</div>
+                </fdp-dynamic-page-footer>
+            </ng-container>
+        </fdp-dynamic-page>
+    `
+})
+class HostTestComponent {
+    size = 'medium';
+    background = 'solid';
+    @ViewChild(DynamicPageComponent) dynamicPage: DynamicPageComponent;
+}
+describe('DynamicPageComponent Content Projection', () => {
+    let component: HostTestComponent;
+    let fixture: ComponentFixture<HostTestComponent>;
+    let dynamicPageComponent: DynamicPageComponent;
+
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
+                declarations: [HostTestComponent],
+                providers: [DynamicPageService]
+            }).compileComponents();
+        })
+    );
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HostTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        dynamicPageComponent = component.dynamicPage;
+    });
+
+    it('should create', () => {
+        expect(fixture).toBeTruthy();
+    });
+
+    it('should project title with toolbars content', () => {
+        expect(fixture.debugElement.query(By.css('#global-action-button'))).toBeTruthy();
+        expect(fixture.debugElement.query(By.css('#layout-action-button'))).toBeTruthy();
+    });
+
+    it('should project header content', () => {
+        expect(fixture.debugElement.query(By.css('#test-header'))).toBeTruthy();
+    });
+
+    it('should project main content', () => {
+        expect(fixture.debugElement.query(By.css('#test-content'))).toBeTruthy();
+    });
+
+    it('should project footer content', () => {
+        expect(fixture.debugElement.query(By.css('#test-footer'))).toBeTruthy();
     });
 });

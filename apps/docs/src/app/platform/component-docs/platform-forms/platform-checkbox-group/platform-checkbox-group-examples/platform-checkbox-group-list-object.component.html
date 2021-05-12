@@ -96,3 +96,17 @@
         </fdp-checkbox-group>
     </fdp-form-field>
 </fdp-form-group>
+
+<h3>Checkbox group outside form</h3>
+<fdp-checkbox-group [list]="languages" name="languages" [isInline]="true" ariaLabel="My known languages"
+    [(checked)]="selectedDishes">
+</fdp-checkbox-group>
+
+<span style="margin-left: 2rem;">Selected dishes: {{ selectedDishes }}</span>
+
+<h3>Checkbox group outside form using displayKey and lookupKey:</h3>
+<fdp-checkbox-group [list]="invoiceItems" name="invoices" lookupKey="item" displayKey="itemType"
+    ariaLabel="Purchased Items" [(checked)]="selectedInvoices">
+</fdp-checkbox-group>
+
+<span style="margin-left: 2rem;">Selected invoices: {{ selectedInvoices }}</span>

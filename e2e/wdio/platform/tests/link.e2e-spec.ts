@@ -11,8 +11,8 @@ import {
     click,
     getAttributeByName,
     getCSSPropertyByName,
-    getCurrentUrl,
-    getElementArrayLength,
+    getCurrentUrl, getElementAriaLabel,
+    getElementArrayLength, getElementClass, getElementTitle,
     isElementClickable,
     mouseHoverElement,
     scrollIntoView,
@@ -30,7 +30,7 @@ describe('Link component test suite', function() {
     }, 1);
 
     it('should check icon link', () => {
-        const iconLinkAltText = getAttributeByName(iconLink, 'aria-label');
+        const iconLinkAltText = getElementAriaLabel(iconLink);
 
         mouseHoverElement(iconLink);
         checkLinkData(iconLink);
@@ -46,7 +46,7 @@ describe('Link component test suite', function() {
         for (let i = 0; arrL > i; i++) {
             // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement index 9
             if (i !== 9) {
-                expect(getAttributeByName(standardLinks, 'aria-label', i)).toBe(standardLinksAltTextArray[i]);
+                expect(getElementAriaLabel(standardLinks, i)).toBe(standardLinksAltTextArray[i]);
                 checkLinkData(standardLinks, i);
                 expect(isElementClickable(standardLinks, i)).toBe(true);
             }
@@ -54,12 +54,12 @@ describe('Link component test suite', function() {
     });
 
     it('should check emphasized link', () => {
-        const emphasizedLinkAltText = getAttributeByName(emphasizedLink, 'aria-label');
+        const emphasizedLinkAltText = getElementAriaLabel((emphasizedLink));
 
         scrollIntoView(emphasizedLink);
         mouseHoverElement(emphasizedLink);
 
-        expect(getAttributeByName(emphasizedLink, 'class')).toContain('emphasized');
+        expect(getElementClass(emphasizedLink)).toContain('emphasized');
         checkLinkData(emphasizedLink);
         checkLinkHover(emphasizedLink);
         expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
@@ -67,30 +67,30 @@ describe('Link component test suite', function() {
     });
 
     it('should check disabled link', () => {
-        const disabledLinkAltText = getAttributeByName(disabledLink, 'aria-label');
+        const disabledLinkAltText = getElementAriaLabel(disabledLink);
 
-        expect(getAttributeByName(disabledLink, 'class')).toContain('disabled');
+        expect(getElementClass(disabledLink)).toContain('disabled');
         checkDisabledLinkData(disabledLink);
         expect(disabledLinkAltText).toEqual(defaultLink_alt_text);
         expect(isElementClickable(disabledLink)).toBe(false);
     });
 
     it('should check disabled emphasized link', () => {
-        const disabledEmphasizedLinkAltText = getAttributeByName(emphasizedDisabledLink, 'aria-label');
+        const disabledEmphasizedLinkAltText = getElementAriaLabel(emphasizedDisabledLink);
 
-        expect(getAttributeByName(emphasizedDisabledLink, 'class'))
-            .toContain('disabled', 'emphasized');
+        expect(getElementClass(emphasizedDisabledLink)).toContain('disabled');
+        expect(getElementClass(emphasizedDisabledLink)).toContain( 'emphasized');
         checkDisabledLinkData(emphasizedDisabledLink);
         expect(disabledEmphasizedLinkAltText).toEqual(defaultLink_alt_text);
         expect(isElementClickable(emphasizedDisabledLink)).toBe(false);
     });
 
     it('should check inverted link', () => {
-        const invertedLinkAltText = getAttributeByName(invertedLink, 'aria-label');
+        const invertedLinkAltText = getElementAriaLabel(invertedLink);
 
         scrollIntoView(invertedLink);
         mouseHoverElement(invertedLink);
-        expect(getAttributeByName(invertedLink, 'class')).toContain('inverted');
+        expect(getElementClass(invertedLink)).toContain('inverted');
         checkLinkData(invertedLink);
         checkLinkHover(invertedLink);
         expect(invertedLinkAltText).toBe(defaultLink_alt_text);
@@ -98,11 +98,11 @@ describe('Link component test suite', function() {
     });
 
     it('should check truncated link', () => {
-        const truncatedLinkAltText = getAttributeByName(truncatedLink, 'aria-label');
+        const truncatedLinkAltText = getElementAriaLabel(truncatedLink);
 
         scrollIntoView(truncatedLink);
         mouseHoverElement(truncatedLink);
-        expect(getAttributeByName(truncatedLink, 'class')).toContain('truncate');
+        expect(getElementClass(truncatedLink)).toContain('truncate');
         checkLinkData(truncatedLink);
         checkLinkHover(truncatedLink);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
@@ -132,8 +132,8 @@ describe('Link component test suite', function() {
 
 function checkLinkData(element, index: number = 0): void {
     expect(getAttributeByName(element, 'type', index)).toBe('text');
-    expect([null, '']).not.toContain(getAttributeByName(element, 'aria-label', index));
-    expect([null, '']).not.toContain(getAttributeByName(element, 'title', index));
+    expect([null, '']).not.toContain(getElementAriaLabel(element, index));
+    expect([null, '']).not.toContain(getElementTitle(element, index));
     expect([null, '']).not.toContain(getAttributeByName(element, 'href', index));
 }
 
@@ -154,7 +154,7 @@ function checkLinkTarget(element, site: string, newPageElement): void {
 }
 
 function checkDisabledLinkData(element, index: number = 0): void {
-    expect([null, '']).not.toContain(getAttributeByName(element, 'aria-label', index));
-    expect([null, '']).not.toContain(getAttributeByName(element, 'title', index));
+    expect([null, '']).not.toContain(getElementAriaLabel(element, index));
+    expect([null, '']).not.toContain(getElementTitle(element, index));
     expect(getAttributeByName(element, 'type', index)).toBe('text');
 }

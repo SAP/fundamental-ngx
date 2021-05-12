@@ -1,7 +1,7 @@
 import {
     ElementRef, Input, ChangeDetectorRef, EventEmitter,
     Output, HostListener, ViewChild, AfterViewChecked,
-    OnInit, Directive, TemplateRef, HostBinding
+    OnInit, Directive, TemplateRef, HostBinding, Optional
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENTER, SPACE, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
@@ -246,7 +246,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     constructor(protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef,
         protected _listConfig: ListConfig,
-        private router: Router) {
+        @Optional() private router: Router) {
         super(_changeDetectorRef);
 
     }
@@ -273,11 +273,11 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         if (currentitem.parentNode) {
         currentitem.parentNode.removeAttribute('title');
         currentitem.parentNode.removeAttribute('aria-label');
-        if (this.selectRow || 
-            this.selectionMode === 'multi' || 
+        if (this.selectRow ||
+            this.selectionMode === 'multi' ||
             this.selectionMode === 'single') {
         currentitem.parentNode.setAttribute('aria-selected', this._selected ? this._selected : false);
-        }      
+        }
     }
         }
     }

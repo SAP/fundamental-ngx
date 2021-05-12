@@ -47,6 +47,7 @@ import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroup } from '../form-field-group';
 import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
+import { filter, map, startWith } from 'rxjs/operators';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -221,7 +222,9 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * @hidden
      *
      * Keep track of added form fields children in correct order.
-     * 
+     *
+     * Since "descendants: true" includes fields of nested form group as well.
+     *
      * We are forced to use "ContentChildren" so FormField children can be used
      * with optional rendering (ngIf) safely.
      *
@@ -233,8 +236,20 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * would lead to the UI where user can see elementing moving as you try to position it.
      *
      */
-    @ContentChildren(FORM_GROUP_CHILD_FIELD_TOKEN as any)
+    @ContentChildren(FORM_GROUP_CHILD_FIELD_TOKEN as any, { descendants: true })
     protected formGroupChildren: QueryList<FormField | FormFieldGroup>;
+
+    /**
+     * @hidden
+     *
+     * List of direct FdpFormGroup's children.
+     *
+     * Since "formGroupChildren" uses "{ descendants: true }" option that means
+     * "formGroupChildren" will keep track of nested FdpFormGroup fields as well.
+     * This list relies on the injection mechanism so nested FdpFormGroup's fields/fieldGroups
+     * will be omitted
+     */
+    private _formGroupDirectChildren: Array<FormField | FormFieldGroup> = [];
 
     /** User specific */
     xlColumnsNumber: number;
@@ -284,13 +299,23 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     addFormField(formField: FormField): void {
         // It's needed to set default FormField properties
-        // on early stage otherwise validation errors 
+        // on early stage otherwise validation errors
         // will be thrown on FormField level (e.g. i18string are not defined)
         this._updateFormFieldProperties(formField);
+        // keep track of directly registered children
+        this._addDirectFormGroupChild(formField);
     }
 
     removeFormField(formField: FormField): void {
-        // React somehow on FormField detaching
+        this._removeDirectFormGroupChild(formField);
+    }
+
+    addFormFieldGroup(formFieldGroup: FormFieldGroup): void {
+        this._addDirectFormGroupChild(formFieldGroup);
+    }
+
+    removeFormFieldGroup(formFieldGroup: FormFieldGroup): void {
+        this._removeDirectFormGroupChild(formFieldGroup);
     }
 
     addFormControl(name: string, control: AbstractControl): void {
@@ -332,7 +357,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      * Otherwise the fields set 1 column.
      */
     private _updateFieldByColumn(): void {
-        const formChildren = this.formGroupChildren.toArray();
+        const formChildren = this._getFormGroupChildren();
         const rows: { [key: number]: FieldColumn | FieldGroup } = {};
         let rowNumber = 0;
         let columns: FieldColumn = {};
@@ -392,10 +417,8 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     /** @hidden */
-    private _updateFormFieldsProperties(
-        formChildren: (FormFieldGroup | FormField)[] = this.formGroupChildren.toArray()
-    ): void {
-        formChildren.forEach((formField: FormField | FormFieldGroup) => {
+    private _updateFormFieldsProperties(): void {
+        this._getFormGroupChildren().forEach((formField: FormField | FormFieldGroup) => {
             if (isFieldChild(formField)) {
                 this._updateFormFieldProperties(formField);
             }
@@ -454,5 +477,29 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this.xlColumnsNumber = parseInt(xl.slice(2, xl.length), 10);
         this.lgColumnsNumber = parseInt(lg.slice(1, lg.length), 10);
         this.mdColumnsNumber = parseInt(md.slice(1, md.length), 10);
+    }
+
+    /** @hidden */
+    private _addDirectFormGroupChild(child: FormField | FormFieldGroup): void {
+        if (this._formGroupDirectChildren.indexOf(child) > -1) {
+            return;
+        }
+        this._formGroupDirectChildren.push(child);
+    }
+
+    /** @hidden */
+    private _removeDirectFormGroupChild(child: FormField | FormFieldGroup): void {
+        this._formGroupDirectChildren = this._formGroupDirectChildren.filter((_child) => _child !== child);
+    }
+
+    /**
+     * @hidden
+     * Get direct form group children in the original order
+     */
+    private _getFormGroupChildren(): (FormField | FormFieldGroup)[] {
+        if (!this.formGroupChildren) {
+            return [];
+        }
+        return this.formGroupChildren.toArray().filter((child) => this._formGroupDirectChildren.includes(child));
     }
 }
