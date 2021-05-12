@@ -29,7 +29,7 @@ describe('File uploader component test', function() {
         }
     });
 
-    it('Verify browser button', () => {
+    it('verify browser button', () => {
         const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
             scrollIntoView(browseButton, i);
@@ -38,7 +38,7 @@ describe('File uploader component test', function() {
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('Verify file upload', () => {
+    xit('verify file upload', () => {
         const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderInputFile, imagePath, i);
@@ -48,7 +48,7 @@ describe('File uploader component test', function() {
     });
 
     // skipped due to issue with file uploader - browser is stuck after uploading file
-    xit('Verify file uploaded message', () => {
+    xit('verify file uploaded message', () => {
         const arrLength = getElementArrayLength(browseButton);
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderInputFile, imagePath, i);
