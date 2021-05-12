@@ -3,21 +3,25 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { By } from '@angular/platform-browser';
-import { PlatformDynamicPageModule } from '../../dynamic-page.module';
-import { DynamicPageHeaderComponent } from './dynamic-page-header.component';
+import { DynamicPageHeaderInternalComponent } from './dynamic-page-header-internal.component';
+import { DynamicPageConfig } from '../../dynamic-page.config';
 
 @Component({
-    template: `<fdp-dynamic-page-header
-        [collapsible]="collapsible"
-        [pinnable]="pinnable"
-        [collapsed]="collapsed"
-        [expandLabel]="expandLabel"
-        [collapseLabel]="collapseLabel"
-        [pinAriaLabel]="pinAriaLabel"
-        [unpinAriaLabel]="unpinAriaLabel"
-        [size]="size"
-        [background]="background"
-    ></fdp-dynamic-page-header>`
+    template: `
+        <fdp-dynamic-page-header-internal
+            [collapsible]="collapsible"
+            [pinnable]="pinnable"
+            [collapsed]="collapsed"
+            [expandLabel]="expandLabel"
+            [collapseLabel]="collapseLabel"
+            [pinAriaLabel]="pinAriaLabel"
+            [unpinAriaLabel]="unpinAriaLabel"
+            [size]="size"
+            [background]="background"
+        >
+            <div class="projected-content">Header</div>
+        </fdp-dynamic-page-header-internal>
+    `
 })
 class TestComponent {
     collapsible = true;
@@ -30,28 +34,31 @@ class TestComponent {
     size = 'medium';
     background = '';
 
-    @ViewChild(DynamicPageHeaderComponent) dynamicPageTitleComponent: DynamicPageHeaderComponent;
+    @ViewChild(DynamicPageHeaderInternalComponent) dynamicPageHeaderComponent: DynamicPageHeaderInternalComponent;
 }
 
-describe('DynamicPageHeaderComponent', () => {
+describe('DynamicPageHeaderInternalComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
-    let pageHeaderComponent: DynamicPageHeaderComponent;
+    let pageHeaderComponent: DynamicPageHeaderInternalComponent;
     let component: TestComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformDynamicPageModule],
-            declarations: [TestComponent],
-            providers: [DynamicPageService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule],
+                declarations: [TestComponent, DynamicPageHeaderInternalComponent],
+                providers: [DynamicPageService, DynamicPageConfig]
+            }).compileComponents();
+        })
+    );
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
-        pageHeaderComponent = component.dynamicPageTitleComponent;
+        await wait(fixture);
+        pageHeaderComponent = component.dynamicPageHeaderComponent;
     });
+
     async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
         componentFixture.detectChanges();
         await componentFixture.whenStable();
@@ -92,6 +99,7 @@ describe('DynamicPageHeaderComponent', () => {
             expect(collapseBtn.getAttribute('aria-label')).toBe(component.collapseLabel);
         });
     });
+
     describe('collapse actions', async () => {
         it('should be able to collapse the header', async () => {
             component.collapsed = true;
@@ -110,6 +118,7 @@ describe('DynamicPageHeaderComponent', () => {
             expect(collapseBtn.getAttribute('aria-label')).toBe(component.collapseLabel);
         });
     });
+
     describe('pin actions', async () => {
         it('should be able to pin the header', async () => {
             component.pinnable = true;
@@ -122,6 +131,7 @@ describe('DynamicPageHeaderComponent', () => {
             expect(contentEl.length).toBe(1);
         });
     });
+
     describe('page header area', () => {
         it('should set size', async () => {
             const headerElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'));
