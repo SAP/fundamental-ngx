@@ -28,6 +28,7 @@ export class PlatformDynamicPageExampleComponent {
         this.overlay.nativeElement.style.width = '100%';
         document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
     }
+    
     closePage(event: Event): void {
         event.stopPropagation();
         this.fullscreen = false;

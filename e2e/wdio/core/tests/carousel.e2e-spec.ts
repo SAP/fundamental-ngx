@@ -6,12 +6,11 @@ import {
     getText,
     mouseHoverElement,
     scrollIntoView, waitForElDisplayed,
-    clickAndDragElement
+    clickAndDragElement, getElementClass
 } from '../../driver/wdio';
 import {
     imgSource,
     verticalAttr,
-    classAttr,
     active,
     visibilityCount,
     numberedPages,
@@ -58,12 +57,12 @@ describe('Carousel test suite', function() {
         });
 
         it('should check page indicator dots', () => {
-            expect(getAttributeByName(pageIndicators, classAttr, 1)).toContain(active);
-            expect(getAttributeByName(pageIndicators, classAttr, 2)).not.toContain(active);
+            expect(getElementClass(pageIndicators, 1)).toContain(active);
+            expect(getElementClass(pageIndicators, 2)).not.toContain(active);
             click(navBtns, 1);
-            expect(getAttributeByName(pageIndicators, classAttr)).not.toContain(active);
-            expect(getAttributeByName(pageIndicators, classAttr, 2)).toContain(active);
-            expect(getAttributeByName(pageIndicators, classAttr, 3)).not.toContain(active);
+            expect(getElementClass(pageIndicators)).not.toContain(active);
+            expect(getElementClass(pageIndicators, 2)).toContain(active);
+            expect(getElementClass(pageIndicators, 3)).not.toContain(active);
         });
     });
 
