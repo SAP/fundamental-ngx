@@ -170,7 +170,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    _buildGraphFail = false;
+    _isErrorState = false;
 
     /** @hidden */
     private _editModeInitSub: Subscription;
@@ -422,13 +422,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    _showMessage(type: ApprovalFlowMessageType): void {
-        this._messages = [{ type: type }];
-    }
-
-    /** @hidden */
     _dismissMessage(index: number): void {
         this._messages.splice(index, 1);
+
+        this._isErrorState = !!this._messages.filter(message => message.type === 'error').length;
     }
 
     /** @hidden Open add node dialog */
@@ -593,10 +590,17 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._buildView(this._approvalProcess);
     }
 
+    /** @hidden */
+    private _showMessage(type: ApprovalFlowMessageType): void {
+        if (type === 'error') {
+            this._isErrorState = true;
+        }
+
+        this._messages = [{ type: type }];
+    }
+
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
-        this._buildGraphFail = false;
-
         if (!nodes.length) {
             return [];
         }
@@ -606,7 +610,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         if (!rootNodes.length || !finalNodes.length) {
             console.warn('Err: Not possible to build graph because root or final nodes aren\'t present!');
-            this._buildGraphFail = true;
+            this._showMessage('error');
             return [];
         }
 
@@ -621,13 +625,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         */
         const paths = getAllGraphPaths(rootNodes, nodes);
 
-        paths.forEach(path => {
-            console.log(path.map(node => node.id));
-        })
-
         if (!paths.length) {
             console.warn('Err: Not possible to build graph!')
-            this._buildGraphFail = true;
+            this._showMessage('error');
             return [];
         }
 

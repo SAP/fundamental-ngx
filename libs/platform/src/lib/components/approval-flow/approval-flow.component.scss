@@ -1,215 +1,219 @@
 $block: approval-flow;
+
 $column-line-top-offset: 48px;
 $column-line-top-offset--edit-mode: 64px;
+
 $carousel-controls-height: 94px;
 $carousel-controls-height--edit-mode: 126px;
 
-.#{$block}__title {
-    font-size: 1.125rem;
-    font-weight: 400;
-}
+.#{$block} {
+    &__title {
+        font-size: 1.125rem;
+        font-weight: 400;
+    }
 
-.#{$block}__messages {
-    margin-bottom: 1rem;
-
-    fd-message-strip:not(:last-child) {
+    &__messages {
         margin-bottom: 1rem;
-    }
-}
 
-.#{$block}__watchers {
-    margin-bottom: .5rem;
-    padding-left: 1rem;
-
-    &-title {
-        font-size: .875em;
-        color: #6A6D70;
-        color: var(--sapContent_LabelColor, #6A6D70);
-        margin: 1rem 0 .5rem 0;
+        fd-message-strip:not(:last-child) {
+            margin-bottom: 1rem;
+        }
     }
 
-    fd-avatar {
-        margin-right: .5rem;
-        cursor: pointer;
-    }
+    &__watchers {
+        margin-bottom: .5rem;
+        padding-left: 1rem;
 
-    fd-avatar:focus {
-        outline-offset: 0.0625rem;
-        outline-width: 0.0625rem;
-        outline-style: dotted;
-        outline-color: var(--sapContent_FocusColor, #0854A0);
-    }
-
-    &[dir='rtl'] {
-        padding-right: 1rem;
+        &-title {
+            font-size: .875em;
+            color: #6A6D70;
+            color: var(--sapContent_LabelColor, #6A6D70);
+            margin: 1rem 0 .5rem 0;
+        }
 
         fd-avatar {
-            margin-left: .5rem;
-            margin-right: 0;
-        }
-    }
-
-    .#{$block}__watchers-input-container {
-        width: 278px;
-    }
-}
-
-.#{$block}__container {
-    position: relative;
-    padding: 0 1rem;
-
-    &[dir='ltr'] {
-        &.#{$block}__container--extra-padding-start {
-            padding-left: 2rem;
+            margin-right: .5rem;
+            cursor: pointer;
         }
 
-        &.#{$block}__container--extra-padding-end {
-            padding-right: 2rem;
-        }
-    }
-
-    &[dir='rtl'] {
-        &.#{$block}__container--extra-padding-start {
-            padding-right: 2rem;
-        }
-
-        &.#{$block}__container--extra-padding-end {
-            padding-left: 2rem;
-        }
-    }
-}
-
-.#{$block}__graph-container {
-    position: relative;
-    overflow: hidden;
-    padding-left: 2rem;
-    padding-top: .5rem;
-    padding-bottom: 3.5rem;
-}
-
-.#{$block}__carousel-controls {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: $carousel-controls-height;
-    padding-top: .5rem;
-    left: 0;
-
-    button {
-        position: absolute;
-        border: none;
-        background: transparent;
-        color: #6A6D70;
-        color: var(--sapContent_LabelColor, #6A6D70);
-        display: flex;
-        justify-content: space-between;
-        width: 20px;
-        align-items: center;
-        cursor: pointer;
-
-        &:focus {
+        fd-avatar:focus {
             outline-offset: 0.0625rem;
             outline-width: 0.0625rem;
             outline-style: dotted;
             outline-color: var(--sapContent_FocusColor, #0854A0);
         }
 
-        fd-icon {
-            font-size: .875rem;
-            color: #0854A0;
-            color: var(--sapButton_IconColor, #0854A0);
-            position: relative;
-            top: 1px;
+        &[dir='rtl'] {
+            padding-right: 1rem;
+
+            fd-avatar {
+                margin-left: .5rem;
+                margin-right: 0;
+            }
+        }
+
+        .#{$block}__watchers-input-container {
+            width: 278px;
         }
     }
 
-    &.#{$block}__carousel-controls--edit-mode {
-        height: $carousel-controls-height--edit-mode;
-    }
-
-    &[dir='rtl'] {
-        .#{$block}__control--next-slide {
-            right: auto;
-            left: 0;
-        }
-
-        .#{$block}__control--prev-slide {
-            left: auto;
-            right: 0;
-        }
-    }
-}
-
-.#{$block}__control {
-    &--next-slide {
-        right: 0;
-    }
-
-    &--prev-slide {
-        left: 0;
-    }
-}
-
-.#{$block}__graph {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    left: 0;
-    transition: left .3s;
-
-    .#{$block}__column {
-        margin-right: 4rem;
+    &__container {
         position: relative;
-    }
+        padding: 0 1rem;
 
-    &[dir='rtl'] {
-        .#{$block}__column {
-            margin-right: 4rem;
+        &[dir='ltr'] {
+            &.#{$block}__container--extra-padding-start {
+                padding-left: 2rem;
+            }
 
-            &:first-child {
-                margin-right: 2rem;
+            &.#{$block}__container--extra-padding-end {
+                padding-right: 2rem;
+            }
+        }
+
+        &[dir='rtl'] {
+            &.#{$block}__container--extra-padding-start {
+                padding-right: 2rem;
+            }
+
+            &.#{$block}__container--extra-padding-end {
+                padding-left: 2rem;
             }
         }
     }
 
-    fdp-approval-flow-node + fdp-approval-flow-node:not(:last-child) {
-        margin-bottom: 1rem;
+    &__graph-container {
+        position: relative;
+        overflow: hidden;
+        padding-left: 2rem;
+        padding-top: .5rem;
+        padding-bottom: 3.5rem;
     }
 
-    fdp-approval-flow-node:focus {
-        outline-offset: 0.0625rem;
-        outline-width: 0.0625rem;
-        outline-style: dotted;
-        outline-color: var(--sapContent_FocusColor, #0854A0);
-    }
-}
+    &__carousel-controls {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: $carousel-controls-height;
+        padding-top: .5rem;
+        left: 0;
 
-.#{$block}__edit-mode-footer {
-    display: flex;
-    justify-content: flex-end;
-    background-color: #fff;
-    background: var(--sapBaseColor, #fff);
-    padding: .5rem;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
+        button {
+            position: absolute;
+            border: none;
+            background: transparent;
+            color: #6A6D70;
+            color: var(--sapContent_LabelColor, #6A6D70);
+            display: flex;
+            justify-content: space-between;
+            width: 20px;
+            align-items: center;
+            cursor: pointer;
 
-    .fd-button--emphasized {
-        margin-right: .5rem;
-    }
+            &:focus {
+                outline-offset: 0.0625rem;
+                outline-width: 0.0625rem;
+                outline-style: dotted;
+                outline-color: var(--sapContent_FocusColor, #0854A0);
+            }
 
-    &[dir='rtl'] {
-        .fd-button--emphasized {
-            margin-left: .5rem;
-            margin-right: auto;
+            fd-icon {
+                font-size: .875rem;
+                color: #0854A0;
+                color: var(--sapButton_IconColor, #0854A0);
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        &.#{$block}__carousel-controls--edit-mode {
+            height: $carousel-controls-height--edit-mode;
+        }
+
+        &[dir='rtl'] {
+            .#{$block}__control--next-slide {
+                right: auto;
+                left: 0;
+            }
+
+            .#{$block}__control--prev-slide {
+                left: auto;
+                right: 0;
+            }
         }
     }
-}
 
-.#{$block}__graph-error .fd-message-strip__text {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    &__control {
+        &--next-slide {
+            right: 0;
+        }
+
+        &--prev-slide {
+            left: 0;
+        }
+    }
+
+    &__graph {
+        display: flex;
+        align-items: flex-start;
+        position: relative;
+        left: 0;
+        transition: left .3s;
+
+        .#{$block}__column {
+            margin-right: 4rem;
+            position: relative;
+        }
+
+        &[dir='rtl'] {
+            .#{$block}__column {
+                margin-right: 4rem;
+
+                &:first-child {
+                    margin-right: 2rem;
+                }
+            }
+        }
+
+        fdp-approval-flow-node + fdp-approval-flow-node:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+
+        fdp-approval-flow-node:focus {
+            outline-offset: 0.0625rem;
+            outline-width: 0.0625rem;
+            outline-style: dotted;
+            outline-color: var(--sapContent_FocusColor, #0854A0);
+        }
+    }
+
+    &__edit-mode-footer {
+        display: flex;
+        justify-content: flex-end;
+        background-color: #fff;
+        background: var(--sapBaseColor, #fff);
+        padding: .5rem;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+
+        .fd-button--emphasized {
+            margin-right: .5rem;
+        }
+
+        &[dir='rtl'] {
+            .fd-button--emphasized {
+                margin-left: .5rem;
+                margin-right: auto;
+            }
+        }
+    }
+
+    &__graph-error .fd-message-strip__text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 fd-toolbar {
