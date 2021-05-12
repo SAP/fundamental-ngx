@@ -338,9 +338,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         if (isTab) {
-            const nodesSequence = this._graph
-                .reduce((result, col) => result.concat(col.nodes), [])
-                .filter(n => !n.blank && !n.space)
+            const nodesSequence = getGraphNodes(this._graph).filter(n => !n.blank && !n.space)
             const currentNodeIndex = nodesSequence.findIndex(n => n === node);
             const diff = isShift ? -1 : 1;
             const nextNode = nodesSequence[currentNodeIndex + diff];
@@ -469,10 +467,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                         this._replaceTargetsInSourceNodes(source.id, [addedNode.id]);
                     } else {
                         source.targets = [addedNode.id];
-                    }
-                }
 
-                if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
+                        if (type === 'after') {
+                            this._setOnlyOneFinalNode(source, addedNode);
+                        }
+                    }
+                } else {
                     const parents = this._graphMetadata[source.id].parents;
                     parents.forEach(parentNode => parentNode.targets.push(addedNode.id));
                 }
@@ -566,9 +566,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._deleteNode(nodeToDrop);
 
         if (placement === 'after') {
-            const nextNode = this._graph
-                .reduce((acc, column) => acc.concat(column.nodes), [])
-                .find(node => node.id === dropTarget.node.targets[0]);
+            const nextNode = getGraphNodes(this._graph).find(node => node.id === dropTarget.node.targets[0]);
 
             if (nextNode?.blank) {
                 nodeToDrop.targets = [...nextNode.targets];
@@ -637,17 +635,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const columns = transformPathsIntoColumns(notEmptyPaths);
         const columnsWithoutEndSpaces = trimEndSpacesInColumns(columns);
         const onlyNotEmptyColumns = this._removeEmptyColumns(columnsWithoutEndSpaces);
-
-        this._approvalProcess.nodes = onlyNotEmptyColumns
-            .reduce((acc, column) => acc.concat(column), [])
-            .filter(node => !node.space);
-
         return transformColumnsIntoGraph(onlyNotEmptyColumns);
     }
 
     /** @hidden Build Approval Flow graph metadata */
     private _buildGraphMetadata(graph: ApprovalFlowGraph): { [key: string]: ApprovalGraphNodeMetadata } {
-        const nodes: ApprovalGraphNode[] = graph.reduce((acc, column) => acc.concat(column.nodes), []);
+        const nodes = this._approvalProcess.nodes;
         const metadata: { [key: string]: ApprovalGraphNodeMetadata } = {};
 
         graph.forEach((column, columnIndex) => {
@@ -738,6 +731,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._graphMetadata = {};
 
         this._graph = this._buildNodeTree(this._approvalProcess.nodes);
+        this._approvalProcess.nodes = getGraphNodes(this._graph).filter(node => !node.space);
         this._graphMetadata = this._buildGraphMetadata(this._graph);
 
         this._resetCheckedNodes();
@@ -943,6 +937,22 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         return processedColumns;
     }
+
+    /** @hidden
+     *  Check if source node was final node, there exist multiple final nodes and set only one
+     */
+    private _setOnlyOneFinalNode(sourceNode: ApprovalNode, newFinalNode: ApprovalNode): void {
+        const isFinalNode = this._graphMetadata[sourceNode.id].isFinal;
+
+        if (isFinalNode) {
+            const finalNodes = this._approvalProcess.nodes
+                .filter(node => this._graphMetadata[node.id].isFinal);
+
+            if (finalNodes.length > 1) {
+                finalNodes.forEach(node => node.targets = [newFinalNode.id]);
+            }
+        }
+    }
 }
 
 function findRootNodes(nodes: ApprovalNode[]): ApprovalNode[] {
@@ -977,6 +987,10 @@ function getSpaceNode(): ApprovalGraphNode {
         status: 'not started',
         space: true
     };
+}
+
+function getGraphNodes(graph: ApprovalGraphColumn[]): ApprovalGraphNode[] {
+    return graph.reduce((acc, column) => acc.concat(column.nodes), []);
 }
 
 function isNodeTargetsIncludeId(node: ApprovalNode, id: string): boolean {

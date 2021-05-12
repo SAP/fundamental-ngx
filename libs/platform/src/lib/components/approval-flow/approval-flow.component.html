@@ -27,8 +27,8 @@
     </fd-message-strip>
 </div>
 
-<fd-toolbar [hasTitle]="true" [attr.dir]="_dir">
-    <h3 class="approval-flow__title">{{ title }}</h3>
+<fd-toolbar class="approval-flow__toolbar" [hasTitle]="true" [attr.dir]="_dir">
+    <h3 class="approval-flow__toolbar-title">{{ title }}</h3>
 
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
         <button *ngIf="!_graph.length" fd-button label="Add a step" [compact]="true" (click)="_addNodeFromToolbar('empty')"></button>
@@ -49,6 +49,7 @@
 
 <div class="approval-flow__watchers" [attr.dir]="_dir" *ngIf="_approvalProcess?.watchers.length || _isEditMode">
     <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
+
     <ng-container *ngIf="!_isEditMode">
         <fd-avatar
             *ngFor="let watcher of _approvalProcess?.watchers; trackBy: _trackByFn"
@@ -60,6 +61,7 @@
             (keyup.enter)="$event.stopPropagation(); _onWatcherClick(watcher)"
             (click)="_onWatcherClick(watcher)"></fd-avatar>
     </ng-container>
+
     <div class="approval-flow__watchers-input-container" *ngIf="_isEditMode">
         <fd-multi-input
             [compact]="true"
@@ -150,12 +152,12 @@
 
 <ng-template let-messageToast #reminderTemplate>
     <ng-container
-        *ngIf="messageToast.data.targets.length === 1; else multipleRecievers"
+        *ngIf="messageToast.data.targets.length === 1; else multipleReceivers"
         i18n="@@platformApprovalFlowReminderMessage">
         Reminder has been sent to {{messageToast.data.targets[0].name}}
     </ng-container>
 
-    <ng-template #multipleRecievers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
+    <ng-template #multipleReceivers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
         Reminder has been sent to {{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}
     </ng-template>
 </ng-template>
