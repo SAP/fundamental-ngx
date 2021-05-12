@@ -49,6 +49,10 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
         ApprovalFlowDropZoneDirective,
         ApprovalFlowTeamListComponent
     ],
+    entryComponents: [
+        ApprovalFlowAddNodeComponent,
+        ApprovalFlowApproverDetailsComponent
+    ],
     providers: [
         ApprovalFlowAddNodeViewService
     ],

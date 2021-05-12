@@ -592,7 +592,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return [];
         }
 
-        /* Algorithm in short:
+        /** Algorithm in short:
          * 1. Find all possible paths, longest path length = number of columns in graph
          * 2. Make all paths the same length (by filling with blank nodes), so the every node will be only in one column
          * 3. Remove duplicates in paths, so the every node is appeared only once in all paths
@@ -982,6 +982,7 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
             const path = queue.pop();
             const lastNodeInPath = path[path.length - 1];
 
+            /** Indicates about an error or specific case */
             if (!lastNodeInPath) {
                 return [];
             }
