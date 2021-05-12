@@ -13,6 +13,7 @@
        tabindex="0"
        class="fd-text__link--more"
        *ngIf="_expandable && _hasMore"
+       (keydown.enter)="toggleTextView()"
        (click)="toggleTextView()"
        [innerText]="isCollapsed ? moreLabel : lessLabel"></a>
 </p>
