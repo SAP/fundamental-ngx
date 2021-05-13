@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.5...v0.30.1-rc.6) (2021-05-13)
+
+
+### Bug Fixes
+
+* (Core/Platform) Fix the File uploader accessibilty bug reading he file name after selecting the file and reading button browse button value and remove readonly attribute. ([#5328](https://github.com/SAP/fundamental-ngx/issues/5328)) ([f7a7c21](https://github.com/SAP/fundamental-ngx/commit/f7a7c21d5c2cd2709337ecfa09470b535b71c331))
+
 ### [0.30.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.4...v0.30.1-rc.5) (2021-05-13)
 
 
