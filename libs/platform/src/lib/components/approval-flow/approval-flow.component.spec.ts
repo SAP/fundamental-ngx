@@ -253,7 +253,7 @@ class TestPlatformApprovalFlowComponent {
     dataSource = new TestApprovalFlowDataSource();
 }
 
-describe('ApprovalFlowComponent', () => {
+fdescribe('ApprovalFlowComponent', () => {
     let fixture: ComponentFixture<TestPlatformApprovalFlowComponent>;
     let component: ApprovalFlowComponent;
     let host: TestPlatformApprovalFlowComponent;
@@ -295,7 +295,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should render approval flow title', () => {
-        const titleEl = fixture.nativeElement.querySelector('.approval-flow__title');
+        const titleEl = fixture.nativeElement.querySelector('.approval-flow__toolbar-title');
 
         expect(titleEl).toBeTruthy();
         expect(titleEl.textContent).toEqual(TEST_APPROVAL_FLOW_TITLE);
