@@ -16,19 +16,23 @@
             <div *ngFor="let person of people" fd-avatar-group-item>
                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                            [label]="person.firstName + ' ' + person.lastName"
+                           [title]="person.firstName + ' ' + person.lastName"
+                           role="img"
                            [circle]="true"
                            [border]="true"
                            [size]="size"></fd-avatar>
 
                 <fd-avatar *ngIf="person.imageUrl"
-                           [ariaLabel]="person.firstName + ' ' + person.lastName"
+                           role="img"
+                           [title]="person.firstName + ' ' + person.lastName"
                            [circle]="true"
                            [border]="true"
                            [size]="size"
                            [image]="person.imageUrl"></fd-avatar>
 
                 <fd-avatar *ngIf="person.glyph"
-                           [ariaLabel]="person.firstName + ' ' + person.lastName"
+                           role="img"
+                           [title]="person.firstName + ' ' + person.lastName"
                            [circle]="true"
                            [border]="true"
                            [size]="size"
@@ -73,13 +77,16 @@
                                            [circle]="true"
                                            size="s"
                                            [label]="person.firstName + ' ' + person.lastName"
+                                           [title]="person.firstName + ' ' + person.lastName"
+                                           role="img"
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
                                 ></fd-avatar>
                                 <fd-avatar *ngIf="person.imageUrl"
                                            fd-avatar-group-focusable-avatar
-                                           [ariaLabel]="person.firstName + ' ' + person.lastName"
+                                           role="img"
+                                           [title]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
                                            [image]="person.imageUrl"
@@ -89,7 +96,8 @@
                                 ></fd-avatar>
                                 <fd-avatar *ngIf="person.glyph"
                                            fd-avatar-group-focusable-avatar
-                                           [ariaLabel]="person.firstName + ' ' + person.lastName"
+                                           role="img"
+                                           [title]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
                                            [glyph]="person.glyph"
@@ -104,14 +112,23 @@
                     <ng-container *ngIf="overflowPopoverStage === 'detail'">
                         <fd-quick-view [id]="personDetails.id">
                             <fd-quick-view-subheader>
-                                <fd-avatar *ngIf="!personDetails.imageUrl && !personDetails.glyph" [circle]="true"
+                                <fd-avatar *ngIf="!personDetails.imageUrl && !personDetails.glyph"
+                                           [circle]="true"
                                            size="s"
-                                           [label]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
-                                <fd-avatar *ngIf="personDetails.imageUrl" [circle]="true" size="s"
-                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [label]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           role="img"
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
+                                <fd-avatar *ngIf="personDetails.imageUrl"
+                                           [circle]="true"
+                                           size="s"
+                                           role="img"
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
                                            [image]="personDetails.imageUrl"></fd-avatar>
-                                <fd-avatar *ngIf="personDetails.glyph" [circle]="true" size="s"
-                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName"
+                                <fd-avatar *ngIf="personDetails.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           role="img"
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
                                            [glyph]="personDetails.glyph"></fd-avatar>
                                 <fd-quick-view-subheader-title>{{ personDetails.firstName }} {{ personDetails.lastName }}</fd-quick-view-subheader-title>
                                 <fd-quick-view-subheader-subtitle>{{ personDetails.position }}</fd-quick-view-subheader-subtitle>
