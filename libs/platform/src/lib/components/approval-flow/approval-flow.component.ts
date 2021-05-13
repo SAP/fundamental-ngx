@@ -173,13 +173,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _isErrorState = false;
 
     /** @hidden */
+    _multipleRootNodes = false;
+
+    /** @hidden */
     private _editModeInitSub: Subscription;
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _multipleRootNodes = false;
 
     constructor(
         private _dialogService: DialogService,
