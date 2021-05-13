@@ -4,6 +4,7 @@ import {
     ContentChildren,
     Directive,
     HostBinding,
+    HostListener,
     Input,
     OnDestroy,
     OnInit,
@@ -12,6 +13,8 @@ import {
 import { TableCellDirective } from './table-cell.directive';
 import { TableService } from '../table.service';
 import { Subscription } from 'rxjs';
+import { KeyUtil } from '../../utils/functions';
+import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 
 export const HIDDEN_CLASS_NAME = 'fd-table-hidden';
 
@@ -54,8 +57,20 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @Input()
     secondary = false;
 
+    /** Whether or not the table row is disabled */
+    @HostBinding('class.fd-table__row--disabled')
+    @Input()
+    isDisabled = false;
+
     /** @hidden */
     propagateKeysSubscription: Subscription;
+
+    /** When the row is disabled, prevent interaction via enter and space keys */
+    @HostListener('keydown', ['$event']) handleKeyDown(event: KeyboardEvent): void {
+        if (this.isDisabled && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            event.preventDefault();
+        }
+    }
 
     constructor(
         private _changeDetRef: ChangeDetectorRef,

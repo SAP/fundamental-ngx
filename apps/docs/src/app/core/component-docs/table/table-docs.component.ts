@@ -34,6 +34,9 @@ import * as tableDialogCustom from '!raw-loader!./examples/table-custom-columns-
 import * as tableFilterPipe from '!raw-loader!../../../documentation/core-helpers/pipes/filter.pipe.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
+import * as tableDisableRowHtml from '!raw-loader!./examples/table-disable-row-example.component.html';
+import * as tableDisableRowTs from '!raw-loader!./examples/table-disable-row-example.component.ts';
+
 @Component({
     selector: 'app-table',
     templateUrl: './table-docs.component.html',
@@ -114,6 +117,20 @@ export class TableDocsComponent {
             component: 'TablePopinExampleComponent',
             code: tablePopInHTs,
             fileName: 'table-popin-example'
+        }
+    ];
+
+    tableDisableRowExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableDisableRowHtml,
+            fileName: 'table-disable-row-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableDisableRowExampleComponent',
+            code: tableDisableRowTs,
+            fileName: 'table-disable-row-example'
         }
     ];
 

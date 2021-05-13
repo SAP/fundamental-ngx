@@ -36,6 +36,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { TableFocusableExampleComponent } from './examples/table-focusable-example/table-focusable-example.component';
+import { TableDisableRowExampleComponent } from './examples/table-disable-row-example.component';
 
 const routes: Routes = [
     {
@@ -85,7 +86,8 @@ const routes: Routes = [
         TableToolbarExampleComponent,
         TableCustomColumnsExampleComponent,
         TableCustomDialogComponent,
-        TableFocusableExampleComponent
+        TableFocusableExampleComponent,
+        TableDisableRowExampleComponent
     ],
     entryComponents: [
         TableCustomDialogComponent

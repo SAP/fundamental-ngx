@@ -23,3 +23,8 @@
 		white-space: nowrap;
 	}
 }
+
+.fd-table__row--disabled {
+	pointer-events: none;
+	opacity: var(--sapContent_DisabledOpacity);
+}
