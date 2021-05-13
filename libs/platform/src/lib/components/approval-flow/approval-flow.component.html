@@ -31,7 +31,7 @@
     <h3 class="approval-flow__toolbar-title">{{ title }}</h3>
 
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
-        <button *ngIf="!_graph.length" fd-button label="Add a step" [compact]="true" (click)="_addNodeFromToolbar('empty')"></button>
+        <button *ngIf="!_graph.length && !_isErrorState" fd-button label="Add a step" [compact]="true" (click)="_addNodeFromToolbar('empty')"></button>
 
         <button *ngIf="!_isEditMode && _graph.length" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
 
@@ -102,7 +102,12 @@
                 </button>
             </div>
 
-            <div class="approval-flow__graph-container" #graphContainerEl>
+            <div
+                class="approval-flow__graph-container"
+                [attr.dir]="_dir"
+                [class.approval-flow__graph-container--multiple-root-nodes]="_multipleRootNodes"
+                #graphContainerEl
+            >
                 <div
                     class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
                     [attr.dir]="_dir"

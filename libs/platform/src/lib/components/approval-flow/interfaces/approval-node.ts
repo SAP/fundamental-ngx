@@ -37,6 +37,8 @@ export interface ApprovalGraphNodeMetadata {
     renderVerticalLineAfter?: boolean;
     isVerticalLineBeforeSolid?: boolean;
     isVerticalLineAfterSolid?: boolean;
+    firstOfMultipleRootNodes?: boolean;
+    rootNodesApproved?: boolean;
 }
 
 export interface ApprovalNodeActionsConfig {

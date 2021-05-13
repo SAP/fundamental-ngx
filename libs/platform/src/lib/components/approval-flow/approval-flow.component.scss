@@ -83,6 +83,17 @@ $carousel-controls-height--edit-mode: 126px;
         padding-left: 2rem;
         padding-top: .5rem;
         padding-bottom: 3.5rem;
+
+        &--multiple-root-nodes {
+            padding-left: 4rem;
+        }
+
+        &[dir='rtl'] {
+            &.#{$block}__graph-container--multiple-root-nodes {
+                padding-left: 1rem;
+                padding-right: 2rem;
+            }
+        }
     }
 
     &__carousel-controls {

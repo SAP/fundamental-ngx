@@ -200,6 +200,17 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         }
     }
 
+    &.#{$block}--first-root {
+        &.#{$block}--line-before:before {
+            width: 4rem;
+            left: -4rem;
+        }
+
+        .#{$block}__carousel-start-marker {
+            left: -4rem;
+        }
+    }
+
     &.cdk-drag-dragging {
         &:before,
         &:after,
@@ -316,10 +327,22 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &.#{$block}--next-blank {
             .#{$block}__add--after {
                 left: calc(-4rem - #{$node-width} / 2);
-    
+
                 & + .#{$block}__drop-zone {
                     right: calc(100% + 4rem);
                 }
+            }
+        }
+
+        &.#{$block}--first-root {
+            &.#{$block}--line-before:before {
+                left: auto;
+                right: -4rem;
+            }
+
+            .#{$block}__carousel-start-marker {
+                left: auto;
+                right: -4rem;
             }
         }
     }

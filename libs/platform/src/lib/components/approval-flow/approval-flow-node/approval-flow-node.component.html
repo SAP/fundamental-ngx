@@ -1,5 +1,5 @@
 <div
-    *ngIf="!_isRoot && meta?.renderVerticalLineBefore"
+    *ngIf="meta?.renderVerticalLineBefore"
     class="approval-flow-node__vertical-line-before"
     [class.approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
 <div
@@ -10,7 +10,9 @@
 <ng-container *ngIf="!_blank && !_space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
 
-    <div *ngIf="_isRoot" class="approval-flow-node__carousel-start-marker"></div>
+    <div
+        *ngIf="_isRoot && meta?.nodeIndex === 0"
+        class="approval-flow-node__carousel-start-marker"></div>
 
     <div *ngIf="_isFinal" class="approval-flow-node__carousel-end-marker"></div>
 

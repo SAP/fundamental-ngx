@@ -178,6 +178,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
+    private _multipleRootNodes = false;
+
     constructor(
         private _dialogService: DialogService,
         private _messageToastService: MessageToastService,
@@ -640,7 +643,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Build Approval Flow graph metadata */
     private _buildGraphMetadata(graph: ApprovalFlowGraph): { [key: string]: ApprovalGraphNodeMetadata } {
-        const nodes = this._approvalProcess.nodes;
+        const nodes = getGraphNodes(graph);
         const metadata: { [key: string]: ApprovalGraphNodeMetadata } = {};
 
         graph.forEach((column, columnIndex) => {
@@ -663,7 +666,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     canAddNodeAfter: isNodeNotApproved,
                     canAddParallel: isNodeNotApproved,
                     isVerticalLineBeforeSolid: node.space && this._graph[columnIndex - 1]?.allNodesApproved,
-                    isVerticalLineAfterSolid: node.space && this._graph[columnIndex].allNodesApproved
+                    isVerticalLineAfterSolid: node.space && this._graph[columnIndex].allNodesApproved,
+                    firstOfMultipleRootNodes: columnIndex === 0 && column.nodes.length > 1 && nodeIndex === 0,
+                    rootNodesApproved: columnIndex === 0 && this._graph[columnIndex].allNodesApproved
                 };
             });
         });
@@ -697,8 +702,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     );
 
                 nodeMetadata.renderVerticalLineBefore =
-                    graphPrevColumn
-                    && nodeIndex > 0
+                    nodeIndex > 0
                     && (
                         !prevHNode
                         || prevHNode.space
@@ -731,8 +735,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._graphMetadata = {};
 
         this._graph = this._buildNodeTree(this._approvalProcess.nodes);
-        this._approvalProcess.nodes = getGraphNodes(this._graph).filter(node => !node.space);
         this._graphMetadata = this._buildGraphMetadata(this._graph);
+
+        const nodes = getGraphNodes(this._graph);
+        this._approvalProcess.nodes = nodes.filter(node => !node.space);
+        this._multipleRootNodes = nodes.filter(node => this._graphMetadata[node.id].isRoot).length > 1;
 
         this._resetCheckedNodes();
         this._cdr.detectChanges();

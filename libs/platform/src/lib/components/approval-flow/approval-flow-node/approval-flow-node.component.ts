@@ -38,7 +38,8 @@ const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
     styleUrls: ['./approval-flow-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fdp-approval-flow-node'
+        class: 'fdp-approval-flow-node',
+        '[class.approval-flow-node--first-root]': 'meta?.firstOfMultipleRootNodes'
     }
 })
 export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
@@ -119,7 +120,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('class.approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
         if (!this.meta?.parents?.length) {
-            return this.node && isNodeApproved(this.node);
+            return this.meta?.rootNodesApproved;
         }
 
         return this.meta.parents.every(node => isNodeApproved(node));
