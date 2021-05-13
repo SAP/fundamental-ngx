@@ -5,6 +5,7 @@ import {
     DateTimeFormats,
     DATE_TIME_FORMATS,
     FdDate,
+    FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core';
 
@@ -39,6 +40,10 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         <div>Selected Last Date: {{ selectedRange?.end?.toDateString() }}</div>
     `,
     providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
         {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_FD_DATETIME_FORMATS
